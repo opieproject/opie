@@ -1,155 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Button</name>
-    <message>
-        <source>Calendar Button</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Contacts Button</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Menu Button</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Mail Button</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Home Button</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Record Button</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Lower+Up</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Lower+Down</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Lower+Right</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Lower+Left</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Upper+Up</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Upper+Down</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Upper+Right</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Upper+Left</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>OColorDialog</name>
-    <message>
-        <source>Hue:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Val:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Red:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>OColorPopupMenu</name>
-    <message>
-        <source>More</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>OFileSelector</name>
-    <message>
-        <source>Name:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>OFileViewFileListView</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Mime Type</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>OFontMenu</name>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
@@ -365,236 +215,6 @@ and </source>
     </message>
 </context>
 <context>
-    <name>ORecurranceBase</name>
-    <message>
-        <source>Repeating Event </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Day</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Week</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Month</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Year</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Every:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>End On:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>No End Date</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Var1</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Var 2</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>WeekVar</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>ORecurranceWidget</name>
-    <message>
-        <source>No End Date</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>days</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>day</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>weeks</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>week</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>months</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>month</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>years</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>year</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> and </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>,
-and </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>, and </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>No Repeat</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>day(s)</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>week(s)</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Repeat By</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Day</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>month(s)</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>year(s)</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>on </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>OTimePickerDialogBase</name>
-    <message>
-        <source>Time:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Pick Time:</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
     <name>Opie::OPimMainWindow</name>
     <message>
         <source>Item</source>
@@ -666,36 +286,6 @@ and </source>
     </message>
 </context>
 <context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-</context>
-<context>
     <name>QObject</name>
     <message>
         <source>Description:</source>
@@ -722,10 +312,6 @@ and </source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Office: </source>
         <translation>FOO</translation>
     </message>
@@ -748,10 +334,6 @@ and </source>
     <message>
         <source>Business Pager: </source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -846,10 +428,6 @@ and </source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>The %1 %1 of every</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Every </source>
         <translation>FOO</translation>
     </message>
@@ -882,18 +460,6 @@ and </source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Documents</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Very high</source>
         <translation>FOO</translation>
     </message>
@@ -924,14 +490,6 @@ and </source>
     <message>
         <source>This is a multiple day event</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>

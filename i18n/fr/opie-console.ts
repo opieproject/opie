@@ -792,10 +792,6 @@ de DTR (0=non)</translation>
         <translation>Echec</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">La numérotation du numéro a échouée.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Annulation...</translation>
     </message>
@@ -856,22 +852,6 @@ de DTR (0=non)</translation>
     <message>
         <source>Color scheme</source>
         <translation>Combinaison de couleurs</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Taille de police</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">petite</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">moyenne</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">large</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

@@ -46,10 +46,6 @@
         <translation>Možnosti</translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Rozlišovat velikost</translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation>Použít hvězdičkovou konvenci</translation>
     </message>
@@ -79,18 +75,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">zobrazit hotové úkoly</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">zobrazit minulé události</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">hledat ve schůzkách</translation>
-    </message>
     <message>
         <source>show</source>
         <translation>zobrazit</translation>
@@ -122,10 +106,6 @@
     <message>
         <source>open with </source>
         <translation>otevřít pomocí</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">hledat obsah</translation>
     </message>
     <message>
         <source>searching %1</source>

@@ -28,52 +28,12 @@
         <translation>Contactos</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Contacto</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Nuevo</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editar</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Borrar</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Buscar</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Escribir Correo a</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Emitir Entrada</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Mis Datos Personales</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Ver</translation>
-    </message>
-    <message>
         <source>Can not edit data, currently syncing</source>
         <translation>No puedo editar datos, estoy sincronizando</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
         <translation>Editar Mis Datos Personales</translation>
-    </message>
-    <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Editar Dirección</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -100,44 +60,8 @@ inténtelo de nuevo.
         <translation>Todos</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">En blanco</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">Importar vCard</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Cerrar busqueda</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Guardar datos</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Configurar</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Lista</translation>
-    </message>
-    <message>
-        <source>Cards</source>
-        <translation type="obsolete">Tarjetas</translation>
-    </message>
-    <message>
         <source>Not Found</source>
         <translation>No Encontrado</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Tarjeta</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Iniciar búsqueda</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -177,10 +101,6 @@ no termina en &quot;.vcf&quot;.
     <message>
         <source>&amp;All Yes</source>
         <translation>Sí a &amp;todo</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">Exportar vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -1392,173 +1312,6 @@ suministra gratis!</translation>
     <message>
         <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Tfno. trabajo</translation>
-    </message>
-    <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Fax trabajo</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Móvil trabajo</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Correo-e</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">Correos-e</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Teléfono casa</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Fax casa</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Móvil personal</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Oficina</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Profesión</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Ayudante</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Superior</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Cónyuge</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Género</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">Cumpleaños</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">Aniversario</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Apodo</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Hijos</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Título</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Nombre</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">1º apellido</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">2º apellido</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Sufijo</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Archivar como</translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="obsolete">Cargo</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Departamento</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Compañía</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Calle trabajo</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Ciudad trabajo</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Provincia trabajo</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Cód.postal trabajo</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">País trabajo</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Busca trabajo</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Web trabajo</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Calle casa</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Ciudad casa</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Provincia casa</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Cód.postal casa</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">País casa</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Web personal</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notas</translation>
     </message>
 </context>
 </TS>

@@ -89,44 +89,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">利用樣板建立新事項</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">新增待辦事項</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">編輯待辦事項</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">檢視待辦事項</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">刪除...</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">刪除全部....</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation type="unfinished">刪除已完成事項</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">複製事項</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">傳送資料</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">搜尋</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -145,18 +109,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Data</source>
-        <translation type="obsolete">資料管理</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">分類目錄</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">設定選項</translation>
-    </message>
-    <message>
         <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -169,14 +121,6 @@ The list displays the following information:
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">全部目錄</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">未分類的</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -194,10 +138,6 @@ Quit Anyway?</source>
     <message>
         <source>Todo</source>
         <translation type="unfinished">待辦事項</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">正在同步資料中，無法進行編輯</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -226,10 +166,6 @@ Quit Anyway?</source>
     <message>
         <source>Deadline</source>
         <translation type="unfinished">到期日</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">樣板管理</translation>
     </message>
     <message>
         <source>Template Editor</source>

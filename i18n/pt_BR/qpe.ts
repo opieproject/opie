@@ -403,18 +403,6 @@ immediately.</source>
 <context>
     <name>SyncDialog</name>
     <message>
-        <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Contatos&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Cancelar</translation>
-    </message>
-    <message>
-        <source>Syncing</source>
-        <translation type="obsolete">Sincronizando</translation>
-    </message>
-    <message>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>

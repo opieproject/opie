@@ -22,18 +22,6 @@
         <translation>Gem</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Tving stilændring for alle programmer.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Fravælg stilændring for disse programmer ( &lt;b&gt;*&lt;/b&gt; kan bruges som wildcard):</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">Binær(e) fil(er)</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Fane stil:</translation>
     </message>
@@ -82,22 +70,6 @@
         <translation>Advanceret</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Genstart</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="obsolete">Vil du genstarte %1 nu?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nej</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Gem skema</translation>
     </message>
@@ -116,10 +88,6 @@
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>Kan ikke slette nuværende skema.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;ny&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -168,34 +136,6 @@ Klik her for at vælge et tilgængeligt skema.</translation>
     <message>
         <source>Click here to name and save the current color scheme.</source>
         <translation>Klik her for at navngive og gemme det nuværende farveskema.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Klik her for at lade alle programmer bruge de globale udseende indstillinger.</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Hvis nogle programmer ikke vises korrekt med de globale udseende indstillinger kan visse features slås fra for det pågældende program.
-
-Dette område lader dig vælge et program og hvilke indstillinger to vil slå fra.</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Klik her for at tilføje et program til listen ovenover.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Klik her for at slette det nuværende valgte program.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Klik her for at flytte det nuværende valgte program opad i listen.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Klik her for at flytte det nuværende valgte program nedad i listen.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:

@@ -22,16 +22,6 @@
         <translation>Главен</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">ВНИМАНИЕ:
-Промената на параметрите на оваа
-страна може да предизвикагрешки 
-во функционирањето на системот!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>Уреди го fstab</translation>
     </message>
@@ -52,26 +42,10 @@ to stop functioning properly!!</source>
         <translation>Напредни</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">Формат?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>Да се Форматира
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-со</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">податочен систем?!?
-Ќе ги изгубите сите податоци!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -128,18 +102,8 @@ has been successfully formatted.</source>
 Беше успешно форматиран.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Се обидувам да закачам.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>Прикачувањето на картичката беше неуспешно!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-беше успешно прикачена.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -148,10 +112,6 @@ has been successfully mounted.</source>
     <message>
         <source>Internal</source>
         <translation>Внатрешна</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Тип на медиум:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

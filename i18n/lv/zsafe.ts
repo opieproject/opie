@@ -216,36 +216,6 @@ rāda sarakstu ar direktorijiem un failiem</translation>
         <translation>ZSeifs</translation>
     </message>
     <message>
-        <source>Can&apos;t create directory
-.../Documents/application
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Nevaru izveidot direktoriju
-../Documents/Application
-
-ZSeifs beidz darbu.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create directory
-%1
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Nevaru izveidot direktoriju
-%1
-
-ZSeifs beidz darbu.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create directory
-...//Documents/application/zsafe
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Nevaru izveidot direktoriju
-../Documents/Application/zsafe
-
-ZSeifs beidz darbu.</translation>
-    </message>
-    <message>
         <source>&amp;New document</source>
         <translation>&amp;Jauns dokuments</translation>
     </message>
@@ -386,20 +356,12 @@ ZSeifs beidz darbu.</translation>
         <translation>N&amp;edzēst</translation>
     </message>
     <message>
-        <source>Edit Entry</source>
-        <translation type="obsolete">Labot Ierakstu</translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation>Lietotājs</translation>
     </message>
     <message>
         <source>Password</source>
         <translation>Parole</translation>
-    </message>
-    <message>
-        <source>New Entry</source>
-        <translation type="obsolete">Jauns Ieraksts</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -564,10 +526,6 @@ paroli</translation>
         <translation>Savācu Ikonas...</translation>
     </message>
     <message>
-        <source>Create new ZSafe document</source>
-        <translation type="obsolete">Veidoju jaunu ZSefa dokumentu</translation>
-    </message>
-    <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
@@ -578,30 +536,6 @@ paroli divas reizes.</translation>
     <message>
         <source>Open ZSafe document</source>
         <translation>Atvērt ZSefa dokumentu</translation>
-    </message>
-    <message>
-        <source>Save ZSafe document as..</source>
-        <translation type="obsolete">Saglabāt ZSeifa dokumentu kā..</translation>
-    </message>
-    <message>
-        <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="obsolete">Zaurus Paroļu Menedžeris&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="obsolete">Zseifs versija 2.1.2-jv01b&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="obsolete">autors Carsten Schneider&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="obsolete">Tulkojis: Gints Polis&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="obsolete">ZSafe versija 2.1.2&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>

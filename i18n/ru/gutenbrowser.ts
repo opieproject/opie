@@ -32,10 +32,6 @@
 <context>
     <name>Gutenbrowser</name>
     <message>
-        <source>Gutenbrowser Output</source>
-        <translation type="obsolete">Вывод Гутенбраузера</translation>
-    </message>
-    <message>
         <source>Running wget</source>
         <translation>Запускаю wget</translation>
     </message>
@@ -244,10 +240,6 @@ http://www.trolltech.com
         <translation>Библиотечный индекс - используется главный индекс проекта.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Error opening local library index:&lt;/P&gt; </source>
-        <translation type="obsolete">&lt;p&gt;Не могу открыть локальный библиотечный индекс:&lt;/p&gt; </translation>
-    </message>
-    <message>
         <source>Library Search</source>
         <translation>Поиск по библиотеке</translation>
     </message>
@@ -293,7 +285,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options</source>
@@ -320,6 +312,10 @@ http://www.trolltech.com
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
         <translation>&lt;p&gt;Ошибка открытия файла индекса библиотеки. Пожалуйста скачайте новый.&lt;/P&gt; </translation>
+    </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

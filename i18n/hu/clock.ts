@@ -40,18 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Szundít</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Óra</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Stopper</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Indulj</translation>
     </message>
@@ -60,32 +48,8 @@
         <translation>Alaphelyzet</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Ébresztés beállítása</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Állj</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">DU</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Ébresztés bekapcsolva</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Ébresztés kikapcsolva</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Dátum és idő beállítása.</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Óra: az ébresztést elmulasztotta.</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -237,47 +201,6 @@ one day to be selected.</source>
     <message>
         <source>Play File</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Ébresztés beállítása</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Óra</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Perc</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">DE</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">DU</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Szundítási késleltetés
-(perc)</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">mp3 ébresztés</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Mind</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Hang</translation>
     </message>
 </context>
 </TS>

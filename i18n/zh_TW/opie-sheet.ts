@@ -204,28 +204,8 @@
         <translation>另存新檔(&amp;A)</translation>
     </message>
     <message>
-        <source>Quit</source>
-        <translation type="obsolete">離開</translation>
-    </message>
-    <message>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">離開(&amp;Q)</translation>
-    </message>
-    <message>
-        <source>General Help</source>
-        <translation type="obsolete">一般說明</translation>
-    </message>
-    <message>
-        <source>&amp;General</source>
-        <translation type="obsolete">一般(&amp;G)</translation>
-    </message>
-    <message>
         <source>About Opie Sheet</source>
         <translation>關於 Opie 試算表</translation>
-    </message>
-    <message>
-        <source>&amp;About</source>
-        <translation type="obsolete">關於(&amp;A)</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -500,10 +480,6 @@
         <translation>資料(&amp;D)</translation>
     </message>
     <message>
-        <source>&amp;Help</source>
-        <translation type="obsolete">說明(&amp;H)</translation>
-    </message>
-    <message>
         <source>&amp;Row</source>
         <translation>列(&amp;R)</translation>
     </message>
@@ -520,176 +496,8 @@
         <translation>函數(&amp;F)</translation>
     </message>
     <message>
-        <source>&amp;Standard</source>
-        <translation type="obsolete">標準(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Summation</source>
-        <translation type="obsolete">總和</translation>
-    </message>
-    <message>
-        <source>&amp;Summation</source>
-        <translation type="obsolete">總和(&amp;S)</translation>
-    </message>
-    <message>
-        <source>Absolute Value</source>
-        <translation type="obsolete">絕對值</translation>
-    </message>
-    <message>
-        <source>&amp;Absolute</source>
-        <translation type="obsolete">絕對(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Sine</source>
-        <translation type="obsolete">正弦</translation>
-    </message>
-    <message>
-        <source>Si&amp;ne</source>
-        <translation type="obsolete">正弦(&amp;N)</translation>
-    </message>
-    <message>
-        <source>Arc Sine</source>
-        <translation type="obsolete">反正弦</translation>
-    </message>
-    <message>
-        <source>A&amp;rc Sine</source>
-        <translation type="obsolete">反正弦(&amp;R)</translation>
-    </message>
-    <message>
-        <source>Cosine</source>
-        <translation type="obsolete">餘弦</translation>
-    </message>
-    <message>
-        <source>&amp;Cosine</source>
-        <translation type="obsolete">餘弦(&amp;C)</translation>
-    </message>
-    <message>
-        <source>ArcCosine</source>
-        <translation type="obsolete">反餘弦</translation>
-    </message>
-    <message>
-        <source>Arc Cos&amp;ine</source>
-        <translation type="obsolete">反餘弦(&amp;I)</translation>
-    </message>
-    <message>
-        <source>Tangent</source>
-        <translation type="obsolete">正切</translation>
-    </message>
-    <message>
-        <source>&amp;Tangent</source>
-        <translation type="obsolete">正切(&amp;T)</translation>
-    </message>
-    <message>
-        <source>Arc Tangent</source>
-        <translation type="obsolete">反正切</translation>
-    </message>
-    <message>
-        <source>Arc Tan&amp;gent</source>
-        <translation type="obsolete">反正切(&amp;G)</translation>
-    </message>
-    <message>
-        <source>Arc Tangent of Coordinates</source>
-        <translation type="obsolete">座標的反正切</translation>
-    </message>
-    <message>
-        <source>C&amp;oor. Arc Tangent</source>
-        <translation type="obsolete">座標反正切(&amp;O)</translation>
-    </message>
-    <message>
-        <source>Exponential</source>
-        <translation type="obsolete">指數</translation>
-    </message>
-    <message>
-        <source>&amp;Exponential</source>
-        <translation type="obsolete">指數(&amp;E)</translation>
-    </message>
-    <message>
-        <source>Logarithm</source>
-        <translation type="obsolete">對數</translation>
-    </message>
-    <message>
-        <source>&amp;Logarithm</source>
-        <translation type="obsolete">對數(&amp;L)</translation>
-    </message>
-    <message>
-        <source>Power</source>
-        <translation type="obsolete">乘冪</translation>
-    </message>
-    <message>
-        <source>&amp;Power</source>
-        <translation type="obsolete">乘冪(&amp;P)</translation>
-    </message>
-    <message>
-        <source>&amp;Mathematical</source>
-        <translation type="obsolete">數學的(&amp;M)</translation>
-    </message>
-    <message>
-        <source>Average</source>
-        <translation type="obsolete">平均數</translation>
-    </message>
-    <message>
-        <source>&amp;Average</source>
-        <translation type="obsolete">平均數(&amp;A)</translation>
-    </message>
-    <message>
-        <source>Maximum</source>
-        <translation type="obsolete">最大值</translation>
-    </message>
-    <message>
-        <source>Ma&amp;ximum</source>
-        <translation type="obsolete">最大值(&amp;X)</translation>
-    </message>
-    <message>
-        <source>Minimum</source>
-        <translation type="obsolete">最小值</translation>
-    </message>
-    <message>
-        <source>&amp;Minimum</source>
-        <translation type="obsolete">最小值(&amp;M)</translation>
-    </message>
-    <message>
-        <source>Count</source>
-        <translation type="obsolete">計數</translation>
-    </message>
-    <message>
-        <source>&amp;Count</source>
-        <translation type="obsolete">計數(&amp;C)</translation>
-    </message>
-    <message>
-        <source>&amp;Statistical</source>
-        <translation type="obsolete">統計(&amp;S)</translation>
-    </message>
-    <message>
         <source>Functions</source>
         <translation>函數</translation>
-    </message>
-    <message>
-        <source>Help file not found!</source>
-        <translation type="obsolete">找不到說明檔!</translation>
-    </message>
-    <message>
-        <source>Opie Sheet
-Spreadsheet Software for Opie
-QWDC Beta Winner (as Sheet/Qt)
-
-Developed by: Serdar Ozler
-Release 1.0.1
-Release Date: July 04, 2002
-
-This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
-
-http://qtopia.sitebest.com</source>
-        <translation type="obsolete">Opie 試算表
-Opie 的試算表軟體
-QWDC Beta Winner (以 Sheet/Qt)
-
-開發者: Serdar Ozler
-釋出版本 1.0.1
-釋出日期: 七月 04, 2002
-
-這個產品是依 GPL 授權. 它可以自由地散佈. 如果您想要取得最新的版本和原始碼, 請參觀下列網站.
-
-http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>
@@ -1151,10 +959,6 @@ http://qtopia.sitebest.com</source>
     <message>
         <source>Error</source>
         <translation>錯誤</translation>
-    </message>
-    <message>
-        <source>Syntax error!</source>
-        <translation type="obsolete">語法錯誤!</translation>
     </message>
     <message>
         <source>Search key not found!</source>

@@ -89,56 +89,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Új sablonból</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Új feladat</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Bökjön ide új feladat létrehozásához.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Feladat szerkesztése</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Bökjön ide az aktuális feladat módosításához.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Feladat megnézése</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Töröl...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Bökjön ide az aktuális feladat eltávolításához.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Mindent töröl...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation type="unfinished">Elvégzettek törlése</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Átsugárzás</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Bökjön ide az aktuális felada másik eszköznek küldéséhez.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Keresés</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -155,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation type="unfinished">Mutasd a gyors feladatcsíkot</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Adat</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategória</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Beállítások</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -187,10 +127,6 @@ A lista az alábbi információkat tartalmazza:
 2. Fontosság - grafikus megjelenítése a feladat fontosságának. Duplán bökjön ide a módosításhoz.
 3. Leírás - a feladat leírása. Bökjön ide a feladat kiválasztásához.
 4. Határidő - megmutatja mikorra kell készlegyen a feladattal. Ez az oszlop mutatható vagy elrejthető a Beállítások-&gt;&apos;Mutasd a feladatok határidejét&apos; kiválasztásával a fenti menüből.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Minden kategória</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -215,20 +151,12 @@ Mégis kilép?</translation>
         <translation type="unfinished">Teendők</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Az adat nem szerkeszthető, szinkronizáció folyamatban</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation type="unfinished">minden feladat?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation type="unfinished">minden elvégzett feladat?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Iktatatlan</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -239,10 +167,6 @@ Mégis kilép?</translation>
         <translation type="unfinished">Új feladatok</translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Dupláz</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation type="unfinished">T.</translation>
     </message>
@@ -251,16 +175,8 @@ Mégis kilép?</translation>
         <translation type="unfinished">Fontosság</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Leírás</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation type="unfinished">Határidő</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Sablonok beállítása</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -506,10 +422,6 @@ Lehetővé teszi, hogy gyorsan felvegyen új feladatokat a listába. Ez a terül
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
         <translation>Bökjön ide, ha a feladat rendszeresen esedékes. Ha kiválasztja, a rendszerességet beállíthatja a Rendszeresség fülön.</translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">Jegyzetek:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

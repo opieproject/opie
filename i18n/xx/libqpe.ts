@@ -193,10 +193,6 @@ editing categories.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -447,14 +443,6 @@ Free some memory and try again.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>FOO</translation>
     </message>
@@ -477,11 +465,6 @@ Free some memory and try again.</source>
     <message>
         <source>AM</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>All</source>
@@ -780,26 +763,6 @@ Free some memory and try again.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>FOO</translation>
     </message>
@@ -859,10 +822,6 @@ Free some memory and try again.</source>
     <message>
         <source>Dec</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>D</source>

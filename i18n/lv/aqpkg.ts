@@ -205,38 +205,6 @@
         <translation>Nevaru iestartēt ipkg procesu</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">Nevaru atvērt :</translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">Veidoju direktoriju</translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Saistīts %1 ar %2</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Neizdevās saite %1 uz %2</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">Izņemts %1</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">Neizdevās izņemt %1</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Izņemts</translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">Neizdevās izņemt</translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation>Nevaru startēt ipkg-link procesu</translation>
     </message>

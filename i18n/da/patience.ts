@@ -26,14 +26,6 @@
         <translation>&amp;Spil</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">S&amp;kifte kort-bagside</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Grib kort</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Indstillinger</translation>
     </message>
@@ -50,24 +42,8 @@
         <translation>Spil</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Skift kort-bagside</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Grib kort</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Vend ét kort</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Indstillinger</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Vend tre kort</translation>
     </message>
     <message>
         <source>&amp;Change card backs</source>

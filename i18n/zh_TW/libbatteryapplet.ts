@@ -2,16 +2,8 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">關閉</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>充電中</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Percentage battery remaining</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -48,10 +40,6 @@
     <message>
         <source>External power disconnected</source>
         <translation>外部電源切斷</translation>
-    </message>
-    <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Battery time remaining</translation>
     </message>
     <message>
         <source>Failure</source>

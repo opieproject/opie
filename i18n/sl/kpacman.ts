@@ -95,16 +95,6 @@ Rad bi se zahvalil svoji punci Elke Krueers za
         <translation>&amp;Pomoč</translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation type="obsolete">Napaka pri nastavitvah</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation type="obsolete">Nobena shema ni definirana
-ali pa ni nobena izbrana.</translation>
-    </message>
-    <message>
         <source>KPacman</source>
         <translation type="unfinished"></translation>
     </message>

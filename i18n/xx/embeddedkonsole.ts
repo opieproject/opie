@@ -5,26 +5,6 @@
         <source>Command Selection</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -48,18 +28,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Command List</source>
         <translation>FOO</translation>
     </message>
@@ -72,14 +40,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>FOO</translation>
     </message>
@@ -90,18 +50,6 @@
     <message>
         <source>White on Black</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -136,16 +84,8 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>New</source>
@@ -178,10 +118,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>None</source>

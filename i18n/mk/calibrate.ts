@@ -7,9 +7,5 @@ accurately to calibrate your screen.</source>
         <translation>Притисни на кртовите цврсто и 
 прецизно за да се калибрира екранот.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Добредојдовте во Opie</translation>
-    </message>
 </context>
 </TS>

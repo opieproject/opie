@@ -38,14 +38,6 @@
         <translation>Удалить</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Перекл. на местную</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Перекл. на удаленную</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Размер</translation>
     </message>
@@ -76,10 +68,6 @@
     <message>
         <source>Could not rename</source>
         <translation>Не могу переименовать</translation>
-    </message>
-    <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Каталог не существует</translation>
     </message>
     <message>
         <source>Copy As</source>
@@ -146,23 +134,6 @@
         <translation>Копировать эту же директ.</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Не могу скопировать
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">в</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Не могу переместить
-</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Добавить в Документы</translation>
     </message>
@@ -175,54 +146,12 @@
         <translation>Выбрать все</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Действительно удалить
-%1 файлы?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Удалить каталог?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Действительно скопировать
-%1 файлы?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Файл существует!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-существует. Перезаписать?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">уже существует.
-Вы действительно хотите удалить?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 существует. Перезаписать?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Не могу скопировать %1 в %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-Копирайт 2002-2003
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-лицензирован на условиях GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -237,30 +166,8 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
         <translation>Ошибка</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Не могу убрать каталог
-из закладок.
-Он не заложен!
-
-</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Поиск файла</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Действительно удалить %1
-и все содержимые ?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Действительно удалить
-%1?</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -285,16 +192,6 @@ and all it&apos;s contents ?</source>
     <message>
         <source>Switch to View 2</source>
         <translation>Перекл. на Вид 2</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Не могу скопировать 
-%1 
-в 
-%2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>

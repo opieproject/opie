@@ -28,74 +28,6 @@
         <translation>Kontakti</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Vizītkarte</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Skats</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Saraksts</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Karte</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Jauns</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Labot</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Dzēst</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Meklēt</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Sākt Meklēšanu</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Aizvērt Meklēšanu</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Rakstīt E-pastu Uz</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Nosūtīt Ierakstu</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">Importēt vKarti</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">Eksportēt vKarti</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Informācija par Mani</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Saglabāt visus Datus</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Konfigurācija</translation>
-    </message>
-    <message>
         <source>You have to select a contact !</source>
         <translation>Jums jāatzīmē kontaktinformācija !</translation>
     </message>
@@ -142,10 +74,6 @@ Vai tiešām vēlaties to atvērt?</translation>
         <translation>Nevaru labot datus, patreiz sinhronizēju</translation>
     </message>
     <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Labot Adresi</translation>
-    </message>
-    <message>
         <source>Edit My Personal Details</source>
         <translation>Labot Manu Personīgo Info</translation>
     </message>
@@ -178,16 +106,8 @@ Vai pārtraukt?</translation>
         <translation>Nevaru atrast kontakinformāciju šai maskai!</translation>
     </message>
     <message>
-        <source>Cards</source>
-        <translation type="obsolete">Kartes</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Visas</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Neierakstīts</translation>
     </message>
     <message>
         <source>Edit Contact</source>

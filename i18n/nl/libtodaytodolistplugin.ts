@@ -37,23 +37,4 @@
         <translation>Breek af na X tekens</translation>
     </message>
 </context>
-<context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation type="obsolete">weergegeven taken</translation>
-    </message>
-    <message>
-        <source>Set the maximum number of task that should be shown</source>
-        <translation type="obsolete">Stel het maximum aantal te tonen taken in</translation>
-    </message>
-    <message>
-        <source>Clip line after X chars</source>
-        <translation type="obsolete">Breek af na X tekens</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Na hoeveel tekens moet de info over de taak worden afgebroken</translation>
-    </message>
-</context>
 </TS>

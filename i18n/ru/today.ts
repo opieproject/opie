@@ -10,10 +10,6 @@
         <translation>Пожалуйста, заполните бизнес-карту</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Нет плагинов</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Нет активированных плагинов</translation>
     </message>

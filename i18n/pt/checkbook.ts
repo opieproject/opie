@@ -38,30 +38,6 @@
         <translation>Escolha o tipo de despesa aqui.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Poupanças</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Cheques</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">CD</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Mercado Monetário</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Fundos Mútuos</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Outro</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Banco:</translation>
     </message>
@@ -100,14 +76,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Introduza informação adicional para esta lista de despesas.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Saldo Actual: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Aqui poderá ver o saldo actual desta lista de despesas.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -180,10 +148,6 @@ Para ordenar por um campo específico, clique no nome da coluna.</translation>
     <message>
         <source>Click here to draw the selected chart.</source>
         <translation>Clique aqui para desenhar o gráfico seleccionado.</translation>
-    </message>
-    <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Saldo actual: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
@@ -655,62 +619,6 @@ O valor deverá ser sempre positivo.</translation>
         <translation>Introduza informação adicional para esta transação aqui.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Automóvel</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Contas</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">CDs</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Roupa</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Informática</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">DVDs</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Electrónica</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Entretenimento</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Comida</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Combustível</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Vários</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Filmes</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Rendas</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Viagens</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation>Taxa de Débito</translation>
     </message>
@@ -727,28 +635,12 @@ O valor deverá ser sempre positivo.</translation>
         <translation>Cartão de Crédito</translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="obsolete">Vencimento</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Despesas Familiares</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Créditos Diversos</translation>
-    </message>
-    <message>
         <source>Automatic Payment</source>
         <translation>Pagamento Automático</translation>
     </message>
     <message>
         <source>Cash</source>
         <translation>Dinheiro</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="obsolete">Electrónico</translation>
     </message>
 </context>
 </TS>

@@ -25,6 +25,10 @@
         <source>Save status of fullscreen/autorotate</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default display brightness:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImageView</name>
@@ -54,6 +58,14 @@
     </message>
     <message>
         <source>Toggle thumbnail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -206,6 +218,18 @@
         <source>Dont show seperate windows</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Display brightness...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -260,6 +284,10 @@
     </message>
     <message>
         <source>Confirm Deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display brightness:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

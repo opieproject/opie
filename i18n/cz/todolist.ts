@@ -70,10 +70,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie Todolist</translation>
-    </message>
-    <message>
         <source>Enter Task</source>
         <translation>Zadat úkol</translation>
     </message>
@@ -93,60 +89,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Nový ze šablony</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nový úkol</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Klikněte sem pro vytvoření nového úkolu.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Upravit úkol</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Klikněte sem pro změnu aktuálního úkolu.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Zobrazit úkol</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Smazat...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Klikněte sem pro odstranění aktuálního úkolu.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Smazat vše...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Smazání dokončeno</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Duplikovat</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Odeslat</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Klikněte sem pro odeslání aktuálního úkolu jinému zařízení.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Hledat</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -163,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Zobrazit lištu zkratek</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategorie</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Možnosti</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -195,14 +127,6 @@ Seznam zobrazuje následující informace:
 2. Priorita - grafické znázornění priority úkolu. Změnu provedete dvojklikem.
 3. Popis - Popis úkolu. Klikněte sem pro výběr úkolu.
 4. Konečný termín - zobrazuje čas dokončení úkolu. Tento sloupec můžete zobrazit nebo skrýt výběrem Možnosti -&gt;&apos;Zobrazit konečné termíny&apos; z menu nahoře.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Všechny kategorie</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Nezařazené</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -265,10 +189,6 @@ Přesto skončit?</translation>
     <message>
         <source>Deadline</source>
         <translation>Konečný termín</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Konfigurovat šablony</translation>
     </message>
     <message>
         <source>Template Editor</source>

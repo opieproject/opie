@@ -10,24 +10,12 @@
         <translation>Подесете го максималниот бр. на линии кои ќе се покажуваат за секоја годишнина/роденден</translation>
     </message>
     <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Скрати линија по Х карактери:</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">После колку карактери информацијата за настанот би требало да биде скратена</translation>
-    </message>
-    <message>
         <source>Days look ahead: </source>
         <translation>Денови за гледање напред:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
         <translation>Колку денови напред во месецот треба да се изврши пребарување</translation>
-    </message>
-    <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">За да се активираат промените: Рестартирај ја апликацијата!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

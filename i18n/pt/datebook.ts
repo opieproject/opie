@@ -342,6 +342,14 @@ Sair na mesma?</translation>
         <source>Category:</source>
         <translation>Categoria:</translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -414,41 +422,6 @@ Sair na mesma?</translation>
     <message>
         <source>p</source>
         <translation>p</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">Se</translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">Te</translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">Qu</translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">Qu</translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">Se</translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">Sá</translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">Do</translation>
     </message>
 </context>
 <context>
@@ -579,10 +552,6 @@ Sair na mesma?</translation>
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">Hora Início</translation>
     </message>
 </context>
 <context>

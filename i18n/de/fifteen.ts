@@ -60,10 +60,6 @@
         <translation>Verwirbeln</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Lösen</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Spiel</translation>
     </message>

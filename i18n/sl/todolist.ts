@@ -89,36 +89,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New Task</source>
-        <translation type="obsolete">Novo opravilo</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Uredi opravilo</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Poglej opravila</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Izbriši...</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Izbriši vse...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Prežarči</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Najdi</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -137,18 +109,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Data</source>
-        <translation type="obsolete">Podatki</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategorija</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Izbire</translation>
-    </message>
-    <message>
         <source>QuickEdit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -161,10 +121,6 @@ The list displays the following information:
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Vse kategorije</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -189,20 +145,12 @@ Izhod?</translation>
         <translation type="unfinished">Opravki</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Ne morem urediti podatkov, trenutno sinhroniziram</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Neizpolnjeno</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -213,20 +161,12 @@ Izhod?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Podvoji</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation type="unfinished">K.</translation>
     </message>
     <message>
         <source>Priority</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description</source>
-        <translation type="obsolete">Opis</translation>
     </message>
     <message>
         <source>Deadline</source>

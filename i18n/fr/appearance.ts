@@ -23,19 +23,6 @@
         <translation>Enregister</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Forcer style pour toutes les applications.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Désactiver style pour les applications :
-(&lt;b&gt;*&lt;/b&gt; peut être utilisé comme joker):</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">Applications</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Type onglets : </translation>
     </message>
@@ -84,22 +71,6 @@
         <translation>Avancé</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Redémarrer</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="obsolete">Voulez-vous redémarrer %1 maintenant ?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Oui</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Non</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Enregister le thème</translation>
     </message>
@@ -118,10 +89,6 @@
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>Impossible de supprimer le thème courant.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;nouveau&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -170,34 +137,6 @@ Cliquez ici pour sélectionner un thème.</translation>
     <message>
         <source>Click here to name and save the current color scheme.</source>
         <translation>Cliquez ici pour définir un nom et sauvegarder le thème de couleur actuel.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Cliquez ici pour permettre à toutes les applications d&apos;utiliser les préférences globales d&apos;apparence.</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Si des applications ne s&apos;affichent pas correctement suite aux choix d&apos;apparence globale, vous pouvez désactiver certaines des fonctionnalités pour celle-ci.
-
-Cette partie vous permet de sélectionner une application et de lui attribuer des préférences personnalisées.</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Cliquez ici pour ajouter une application à la liste ci-dessous.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Cliquez ici pour effacer l&apos;application sélectionnée.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Cliquez ici pour remonter l&apos;application sélectionnée dans la liste.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Cliquez ici pour descendre l&apos;application sélectionnée dans la liste.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:

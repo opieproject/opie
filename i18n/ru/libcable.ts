@@ -156,10 +156,6 @@
 <context>
     <name>CableNetNode</name>
     <message>
-        <source>Cable Connection</source>
-        <translation type="obsolete">Кабельное соединение</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Sets up a wired serial or parallel.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Устанавливает последовательную или параллельную связь по кабелю.&lt;/p&gt;</translation>
     </message>

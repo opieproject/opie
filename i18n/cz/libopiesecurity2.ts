@@ -2,10 +2,6 @@
 <context>
     <name>Opie::Security::MultiauthMainWindow</name>
     <message>
-        <source>Welcome to Opie Multi-authentication Framework</source>
-        <translation type="obsolete">Vítejte v systému Multi-autentizace Opie</translation>
-    </message>
-    <message>
         <source>Launching authentication plugins...</source>
         <translation>Spouštím autentizační pluginy...</translation>
     </message>
@@ -14,20 +10,8 @@
         <translation>Pokračovat...</translation>
     </message>
     <message>
-        <source>Note: the &apos;exit&apos; button should be removed for real protection, through Security config dialog</source>
-        <translation type="obsolete">Poznámka: pro opravdovou ochranu by mělo být tlačítko &apos;exit&apos; odstraněno v okně bezpečnostního nastavení</translation>
-    </message>
-    <message>
         <source>Congratulations! Your authentication has been successful.</source>
         <translation>Gratuluji! Vaše ověření proběhlo úspěšně.</translation>
-    </message>
-    <message>
-        <source>You have not succeeded enough authentication steps!</source>
-        <translation type="obsolete">Nemáte dostatek úspěšných autentizačních kroků!</translation>
-    </message>
-    <message>
-        <source>Note: if &apos;allow to bypass&apos; was uncheck in Security config, you would have to go back through all the steps now.</source>
-        <translation type="obsolete">Poznámka: Jestliže nemáte zaškrtnutý  &apos;Povolit obejití&apos; v konfiguraci bezpečnosti, měli byste jít zpět skrz všechny kroky.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>

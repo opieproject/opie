@@ -58,10 +58,6 @@
         <translation>Izvēlaties modeli ar kuru salīdzināt rezultātus.</translation>
     </message>
     <message>
-        <source>Compare To:</source>
-        <translation type="obsolete">Salīdzināt Ar:</translation>
-    </message>
-    <message>
         <source>error</source>
         <translation>kļūda</translation>
     </message>

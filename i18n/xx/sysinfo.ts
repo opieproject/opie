@@ -131,16 +131,6 @@
 <context>
     <name>MemoryInfo</name>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Used (%1 kB)</source>
         <translation>FOO</translation>
     </message>
@@ -190,10 +180,6 @@ Memory is categorized as follows:
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -216,17 +202,8 @@ Click and hold on a module to see additional information about the module, or to
         <translation>FOO</translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Used by</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -288,15 +265,6 @@ Click and hold on a process to see additional information about the process, or 
     <message>
         <source>This area shows detailed information about this process.</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Really want to send %1
@@ -364,14 +332,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

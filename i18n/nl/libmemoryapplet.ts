@@ -123,10 +123,6 @@ Gegeugen wordt geklassificeerd als volgt:
         <translation>Verwijder</translation>
     </message>
     <message>
-        <source>2 Mb,4 Mb,6 Mb,8 Mb</source>
-        <translation type="obsolete">2 Mb, 4 Mb, 6 Mb, 8 Mb</translation>
-    </message>
-    <message>
         <source>Failed to detach swapfile.</source>
         <translation>Fout bij ontkoppelen swapfile.</translation>
     </message>

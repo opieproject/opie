@@ -69,18 +69,6 @@
         <translation>Voorspel</translation>
     </message>
     <message>
-        <source>You asked for a delay of </source>
-        <translation type="obsolete">U vroeg om een vertraging van</translation>
-    </message>
-    <message>
-        <source> minutes, but only </source>
-        <translation type="obsolete">minuten, maar slechts</translation>
-    </message>
-    <message>
-        <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="obsolete">minuten zijn verstreken sinds laatste controle.&lt;br&gt;Doorgaan?</translation>
-    </message>
-    <message>
         <source>Continue?</source>
         <translation>Doorgaan?</translation>
     </message>
@@ -111,10 +99,6 @@ ntpdate</translation>
  server: </source>
         <translation>Fout tijdens ophalen tijd van
 server:</translation>
-    </message>
-    <message>
-        <source> seconds</source>
-        <translation type="obsolete">seconden</translation>
     </message>
     <message>
         <source>Could not connect to server </source>

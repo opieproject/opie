@@ -89,16 +89,8 @@
         <translation>Meklēt pēc nosaukuma</translation>
     </message>
     <message>
-        <source>Find by Alcohol</source>
-        <translation type="obsolete">Meklēt pēc Alkohola</translation>
-    </message>
-    <message>
         <source>Edit</source>
         <translation>Labot</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">labot</translation>
     </message>
     <message>
         <source>New</source>
@@ -135,10 +127,6 @@
     <message>
         <source>Drink Name</source>
         <translation>Dzēriena Nosaukums</translation>
-    </message>
-    <message>
-        <source>Alcohol</source>
-        <translation type="obsolete">Alkohols</translation>
     </message>
     <message>
         <source>Search</source>

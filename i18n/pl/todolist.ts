@@ -85,64 +85,12 @@
         <source>loud</source>
         <translation>głośny</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie ZróbTo</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Nowe z szablonu</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nowe zadanie</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Kliknij tu żeby stworzyć nowe zadanie.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Edytuj Zadanie</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Kliknij tu żeby zmodyfikować aktualne zadanie.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Zobacz zadanie</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Usuń...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Kliknij tu żeby usunąć aktualne zadanie.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Usuń wszystkie...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Usuń ukończone</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Emituj</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Kliknij tu żeby wysłać aktualne zadanie do innego urządzenia.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Szukaj</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -159,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Pokaż szybki pasek zadań</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dane</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategoria</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opcje</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -191,10 +127,6 @@ Na liście umieszczone są nastepujące informacje:
 2. Priorytet - graficzna reprezentacja priorytetu zadania. Kilknij tu podwójnie by go zmodyfikować.
 3. Opis - opis zadania. Kliknij tu aby wybrać zadanie.
 4. Termin końcowy - pokazuje kiedy zadanie ma być ukończone. Ta kolumna może być pokazana lub ukryta przez wybranie Opcje-&gt;&apos;Pokaż terminy końcowe&apos; z powyższego menu.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Wszystkie kategorie</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -227,20 +159,12 @@ Wyjść mimo to?</translation>
         <translation>wszystkie ukończone zadania?</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Nieprzypisane</translation>
-    </message>
-    <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
         <translation>&lt;P&gt;Liczba nowych zadań: %1.&lt;p&gt; Czy chcesz dodać je do swojej listy ZrobTo?</translation>
     </message>
     <message>
         <source>New Tasks</source>
         <translation>Nowe zadania</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Duplikuj</translation>
     </message>
     <message>
         <source>C.</source>
@@ -251,16 +175,8 @@ Wyjść mimo to?</translation>
         <translation>Priorytet</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Opis</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Termin końcowy</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Konfiguruj szablony</translation>
     </message>
     <message>
         <source>Priority:</source>

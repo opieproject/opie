@@ -48,9 +48,5 @@
         <source>Prisoners: black %1, white %2</source>
         <translation>Плененных: черных %1, белых %2</translation>
     </message>
-    <message>
-        <source>Go</source>
-        <translation type="obsolete">Го</translation>
-    </message>
 </context>
 </TS>

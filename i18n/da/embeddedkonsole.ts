@@ -28,18 +28,6 @@
         <translation>Terminal</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Mikro</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Lille fast</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Medium fast</translation>
-    </message>
-    <message>
         <source>Command List</source>
         <translation>Kommando liste</translation>
     </message>
@@ -52,14 +40,6 @@
         <translation>Skjul kommando liste</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Faner i bunden</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Faner i toppen</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Grøn på sort</translation>
     </message>
@@ -70,18 +50,6 @@
     <message>
         <source>White on Black</source>
         <translation>Hvidt på sort</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Sort på transparent</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Sort på rød</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Rød på sort</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -120,14 +88,6 @@
         <translation>Farver</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="obsolete">Skrift</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Tilvalg</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Ny</translation>
     </message>
@@ -158,10 +118,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Hurtig redigering</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Rediger</translation>
     </message>
     <message>
         <source>None</source>

@@ -74,10 +74,6 @@ accurately to calibrate your screen.</source>
         <translation>Clicken Sie das Fadenkreuz genau 
 mittig um das Display zu kalibrieren.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Willkommen zu Opie</translation>
-    </message>
 </context>
 <context>
     <name>DesktopPowerAlerter</name>
@@ -111,10 +107,6 @@ mittig um das Display zu kalibrieren.</translation>
     <message>
         <source>Please wait...</source>
         <translation>Bitte warten...</translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
-        <translation type="obsolete">ErstBenutzungsHintergrund</translation>
     </message>
     <message>
         <source>Finish</source>
@@ -297,23 +289,6 @@ mittig um das Display zu kalibrieren.</translation>
 (%1)&lt;/p&gt;&lt;p&gt;Möchten Sie es anpassen?&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Battery level is critical!
-Keep power off until power restored!</source>
-        <translation type="obsolete">Der Batteriestatus ist kritisch!
-Schließen Sie das Gerät schnellst 
-möglich an die Stromversorgung an!</translation>
-    </message>
-    <message>
-        <source>Battery is running very low. </source>
-        <translation type="obsolete">Batterie nahezu erschöpft.</translation>
-    </message>
-    <message>
-        <source>The Back-up battery is very low.
-Please charge the back-up battery.</source>
-        <translation type="obsolete">Die Ersatzbatterie ist schwach.
-Bitte laden Sie sie auf.</translation>
-    </message>
-    <message>
         <source>business card</source>
         <translation>Visitenkarte</translation>
     </message>
@@ -398,12 +373,6 @@ Bitte laden Sie sie auf</translation>
         <translation>Herunterfahren</translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="obsolete">&lt;p&gt;
-Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Tests des Opie-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
     </message>
@@ -417,10 +386,6 @@ Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Te
     <message>
         <source>Sync Connection</source>
         <translation>Synchronisationsverbindung</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="obsolete">&lt;p&gt;Ein nicht authorisiertes System fordert eine Verbindung zu diesem Gerät an.&lt;p&gt;Wenn Sie eine Version von Qtopia Desktop verwenden die älter ist als 1.5.1 sollten Sie ein Upgrade in Betracht ziehen.</translation>
     </message>
     <message>
         <source>Deny</source>

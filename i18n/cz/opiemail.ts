@@ -79,10 +79,6 @@
         <translation>Odesílám zprávu</translation>
     </message>
     <message>
-        <source>No Receiver spezified</source>
-        <translation type="obsolete">Nebyl specifikován příjemce</translation>
-    </message>
-    <message>
         <source>Store message</source>
         <translation>Uložit zprávu</translation>
     </message>
@@ -337,6 +333,58 @@
         <source>Date</source>
         <translation>Datum</translation>
     </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished">Server</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set on/offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh folder list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new folder</source>
+        <translation type="unfinished">Vytvořit novou složku</translation>
+    </message>
+    <message>
+        <source>(Un-)Subscribe groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh headerlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New subfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move/Copie all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read current mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
@@ -362,14 +410,6 @@
     <message>
         <source>Groupfilter:</source>
         <translation>Filtr skupin:</translation>
-    </message>
-    <message>
-        <source>Enter a filter string here.
-Then hit &quot;get newsgroup list&quot; again and only groups starting 
-with that filter will be listet.</source>
-        <translation type="obsolete">Sem zadejte filtrovací řetězec.
-Potom klikněte na &quot;stáhnout seznam skupin&quot; znovu a zobrazí se vám 
-pouze skupiny začínající filtrem.</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
@@ -676,16 +716,13 @@ skupiny začínající tímto filtrem.</translation>
         <source>Play Sound when new mails arrive</source>
         <translation>Zahrát zvuk při příchodu nové zprávy</translation>
     </message>
-</context>
-<context>
-    <name>StatusWidgetUI</name>
     <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
+        <source>Click opens mail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation>TextLabel1</translation>
+        <source>Click activate server/folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -746,13 +783,17 @@ skupiny začínající tímto filtrem.</translation>
         <source>E-Mail by %1</source>
         <translation>E-Mail podle %1</translation>
     </message>
+    <message>
+        <source>Reading attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not read content of attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
-    <message>
-        <source>E-Mail by %1</source>
-        <translation type="obsolete">E-Mail podle %1</translation>
-    </message>
     <message>
         <source>Mail</source>
         <translation>Zpráva</translation>
@@ -792,6 +833,10 @@ skupiny začínající tímto filtrem.</translation>
     <message>
         <source>E-Mail view</source>
         <translation>E-Mail zobrazení</translation>
+    </message>
+    <message>
+        <source>Show image preview inline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -15,16 +15,8 @@
         <translation>Estado da Bateria</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Fechar</translation>
-    </message>
-    <message>
         <source>External power disconnected</source>
         <translation>Energia externa desconectada</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Porcentagem de bateria restante</translation>
     </message>
     <message>
         <source>Power on-line</source>
@@ -33,10 +25,6 @@
     <message>
         <source>On backup power</source>
         <translation>Usando energia de reserva</translation>
-    </message>
-    <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Tempo restante de bateria</translation>
     </message>
     <message>
         <source>Critical</source>
@@ -55,10 +43,6 @@
         <translation>Carregando</translation>
     </message>
     <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Situação da bateria</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Falha</translation>
     </message>
@@ -71,24 +55,12 @@
         <translation>Carregando ambos dispositivos</translation>
     </message>
     <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Porcentagem de bateria restante:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Tempo restante de bateria:</translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Nenhuma jaqueta com bateria inserida</translation>
     </message>
     <message>
         <source>no data</source>
         <translation>sem dados</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">Ipaq  </translation>
     </message>
     <message>
         <source>Jacket  </source>

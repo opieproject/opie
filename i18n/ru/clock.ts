@@ -40,18 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Вздремнуть</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Часы</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Секундомер</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Старт</translation>
     </message>
@@ -60,36 +48,8 @@
         <translation>Сброс</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Уст. сигнал</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Стоп</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Сигнал включен</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Сигнал выключен</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Уст. время и дату.</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Часы: Сигнал пропущен.</translation>
-    </message>
-    <message>
-        <source>Alarm set: %1</source>
-        <translation type="obsolete">Сигнал уст.: %1</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -242,47 +202,6 @@ one day to be selected.</source>
     <message>
         <source>Play File</source>
         <translation>Воспроизвести файл</translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Уст. сигнал</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Час</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Минута</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Задержка дремоты :)
-(минут)</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">mp3 сигнал</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Все</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Аудио</translation>
     </message>
 </context>
 </TS>

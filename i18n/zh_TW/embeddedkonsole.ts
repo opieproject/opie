@@ -28,26 +28,6 @@
         <translation>終端機</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">微型</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">小型固定式</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">中型固定式</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">字型</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">選項</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>新增</translation>
     </message>
@@ -84,10 +64,6 @@
         <translation>隱藏指令清單</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">索引標籤在底部</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>黑底綠字</translation>
     </message>
@@ -98,18 +74,6 @@
     <message>
         <source>White on Black</source>
         <translation>黑底白字</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">黑字, 透明背景</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">紅底黑字</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">黑底紅字</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -146,10 +110,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>快速編輯</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">編輯</translation>
     </message>
     <message>
         <source>None</source>
@@ -190,10 +150,6 @@
     <message>
         <source>Use Beep</source>
         <translation>使用嗶聲</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">索引標籤在頂端</translation>
     </message>
     <message>
         <source>Konsole</source>

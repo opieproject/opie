@@ -192,22 +192,6 @@
 <context>
     <name>PPPIPEdit</name>
     <message>
-        <source>IPAddress needed</source>
-        <translation type="obsolete">Nepieciešama IPAdrese</translation>
-    </message>
-    <message>
-        <source>IPAddress not valid</source>
-        <translation type="obsolete">IPAdrese nav pareiza</translation>
-    </message>
-    <message>
-        <source>Subnet mask needed</source>
-        <translation type="obsolete">Nepieciešama Subnet maska</translation>
-    </message>
-    <message>
-        <source>Subnet mask not valid</source>
-        <translation type="obsolete">Nav pareiza Subnet maska</translation>
-    </message>
-    <message>
         <source>Gateway address needed</source>
         <translation>Nepieciešama Vārtejas adrese</translation>
     </message>
@@ -233,10 +217,6 @@
     <message>
         <source>Fixed</source>
         <translation>Fiksēts</translation>
-    </message>
-    <message>
-        <source>Subnetmask</source>
-        <translation type="obsolete">Tīkla maska</translation>
     </message>
     <message>
         <source>Address</source>
@@ -269,10 +249,6 @@
 </context>
 <context>
     <name>PPPNetNode</name>
-    <message>
-        <source>PPP Connection</source>
-        <translation type="obsolete">PPP Konekcija</translation>
-    </message>
     <message>
         <source>&lt;p&gt;Sets up IP using PPP.&lt;/p&gt;&lt;p&gt;Use this for dialup devices or serial setups&lt;/p&gt;</source>
         <translation>&lt;p&gt;Uzstāda IP lietojot PPP.&lt;/p&gt;&lt;p&gt;Lietojiet šo iezvanpieejas vai seriāliem uzstādījumiem&lt;/p&gt;</translation>

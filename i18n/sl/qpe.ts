@@ -402,18 +402,6 @@ immediately.</source>
 <context>
     <name>SyncDialog</name>
     <message>
-        <source>Syncing</source>
-        <translation type="obsolete">Sinhroniziram</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Kontakti&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">&amp;Prekliči</translation>
-    </message>
-    <message>
         <source>Abort</source>
         <translation type="unfinished"></translation>
     </message>

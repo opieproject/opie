@@ -7,10 +7,6 @@
         <translation>En charge</translation>
     </message>
     <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Pourcentage de batterie chargé </translation>
-    </message>
-    <message>
         <source>Battery status: </source>
         <translation>Niveau batterie : </translation>
     </message>
@@ -47,18 +43,6 @@
         <translation>Adaptateur secteur déconnecté</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Durée de batterie restante </translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Fermer</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Niveau de la batterie</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Echec</translation>
     </message>
@@ -71,24 +55,12 @@
         <translation>Chargement des deux dispositifs</translation>
     </message>
     <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Pourcentage de batterie chargé : </translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Temps restant de la batterie : </translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Aucune module avec batterie</translation>
     </message>
     <message>
         <source>no data</source>
         <translation>Aucune donné</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">iPaq </translation>
     </message>
     <message>
         <source>Jacket  </source>

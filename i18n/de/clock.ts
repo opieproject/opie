@@ -40,18 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Schlummern</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Uhr</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Stoppuhr</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Start</translation>
     </message>
@@ -60,36 +48,8 @@
         <translation>Zurücksetzen</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Alarm einstellen</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stopp</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Alarm ist An</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Alarm ist Aus</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Datum und Uhrzeit setzten.</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Uhr: Ein Alarm wurde verpasst.</translation>
-    </message>
-    <message>
-        <source>Alarm set: %1</source>
-        <translation type="obsolete">Alarmzeit gesetzt: %1</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -242,47 +202,6 @@ einen ausgewählten Tag.</translation>
     <message>
         <source>Play File</source>
         <translation>Datei abspielen</translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Alarmzeit einstellen</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Stunde</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minute</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Schlummerdauer
-(Minuten)</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">MP3-Alarm</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Alle</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Audio</translation>
     </message>
 </context>
 </TS>

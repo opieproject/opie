@@ -87,10 +87,6 @@
         <translation>Voegt de inhoud van de Launcher tabbladen toe aan het O-Menu.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
-        <translation type="obsolete">Laat programma&apos;s in sub-popups zien</translation>
-    </message>
-    <message>
         <source>Show Applications in Subpopups</source>
         <translation type="unfinished"></translation>
     </message>
@@ -108,21 +104,6 @@
     <message>
         <source>Sample 3</source>
         <translation>Voorbeeld 3</translation>
-    </message>
-</context>
-<context>
-    <name>SampleView</name>
-    <message>
-        <source>Sample 1</source>
-        <translation type="obsolete">Voorbeeld 1</translation>
-    </message>
-    <message>
-        <source>Sample 2</source>
-        <translation type="obsolete">Voorbeeld 2</translation>
-    </message>
-    <message>
-        <source>Sample 3</source>
-        <translation type="obsolete">Voorbeeld 3</translation>
     </message>
 </context>
 <context>
@@ -231,10 +212,6 @@
         <translation>Gebruik groot &apos;bezig&apos; icoon</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Gebruik knipperend &apos;bezig&apos; icoon</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Selecteer het Launcher tabblad dat je wilt wijzigen of verwijderen.</translation>
     </message>
@@ -253,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Activeer dit als je een groot &apos;bezig&apos; icoon in het midden van het scherm wilt ipv een in de taakbalk.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Activeer dit als je een knipperend &apos;bezig&apos; icoon wilt bij het starten van programma&apos;s in de Launcher.</translation>
     </message>
     <message>
         <source>All Tabs</source>

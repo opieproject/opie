@@ -194,10 +194,6 @@ as categorias.</translation>
         <translation>Texto não encontrado.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Chegou ao fim, a voltar ao início</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -455,14 +451,6 @@ do alarme.
 
 Liberte algum espaço e tente
 novamente.</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>Y</source>
@@ -789,26 +777,6 @@ novamente.</translation>
         <translation>Dom</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Clique para fechar esta janela, perdendo as alterações.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Clique para fechar esta janela.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Clique para fechar esta janela e aplicar as alterações.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Clique para tornar esta janela movível.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Clique para maximizar esta janela para o todo o ecrâ disponível.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Qt&gt;Não existe manual de instruções para esta aplicação, no entanto existe ajuda contextual.&lt;p&gt;Para usar a ajuda contextual:&lt;p&gt;&lt;ol&gt;&lt;li&gt;clique e espere no botão de ajuda.&lt;li&gt;quando a barra do título mostrar &lt;b&gt;O que é isto...&lt;/b&gt;, clique num controlo.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -869,22 +837,6 @@ novamente.</translation>
     <message>
         <source>Dec</source>
         <translation>Dez</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Erro</translation>
-    </message>
-    <message>
-        <source>Could not find the application </source>
-        <translation type="obsolete">Não foi possível encontrar a aplicação</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="obsolete">Ok</translation>
-    </message>
-    <message>
-        <source>Could not start the application </source>
-        <translation type="obsolete">Não foi possível iniciar a aplicação</translation>
     </message>
     <message>
         <source>D</source>

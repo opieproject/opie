@@ -107,10 +107,6 @@ accurately to calibrate your screen.</source>
         <translation>Aguarde um momento...</translation>
     </message>
     <message>
-        <source>FirstUseBackground</source>
-        <translation type="obsolete">Ecrâ de Fundo no Primeiro Uso</translation>
-    </message>
-    <message>
         <source>Finish</source>
         <translation>Finalizar</translation>
     </message>
@@ -291,22 +287,6 @@ accurately to calibrate your screen.</source>
 (%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Battery level is critical!
-Keep power off until power restored!</source>
-        <translation type="obsolete">O nível de energia está muito baixo.
-Desligue o dispositivo ou ligue-o à corrente!</translation>
-    </message>
-    <message>
-        <source>Battery is running very low. </source>
-        <translation type="obsolete">O nível de energia da bateria está muito baixo.</translation>
-    </message>
-    <message>
-        <source>The Back-up battery is very low.
-Please charge the back-up battery.</source>
-        <translation type="obsolete">O nível de energia da bateria extra está baixo.
-Deve carregá-la.</translation>
-    </message>
-    <message>
         <source>business card</source>
         <translation>Cartão de Visita</translation>
     </message>
@@ -387,12 +367,6 @@ Termine esta aplicação imediatamente.</translation>
         <translation>Reiniciar Opie</translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="obsolete">&lt;p&gt;
-Estas operações estão disponíveis principalmente para desenvolvimento e testes do sistema Opie. Num ambiente normal, estes conceitos são desnecessários.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
@@ -406,10 +380,6 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
     <message>
         <source>Sync Connection</source>
         <translation>Ligação de Sincronização</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="obsolete">&lt;p&gt;Um sistema sem autorização está a requisitar acesso a este dispositivo.&lt;p&gt;Se estiver a usar uma versão do Ambiente Qtopia mais antigo que a 1.5.1, deverá actualizá-lo.</translation>
     </message>
     <message>
         <source>Deny</source>

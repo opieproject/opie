@@ -212,10 +212,6 @@
         <translation>Activar indicador grande ao iniciar uma aplicação</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Activar indicador a piscar ao iniciar uma aplicação</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Seleccione a pasta de aplicações que quer editar ou apagar.</translation>
     </message>
@@ -234,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Active esta opção se quiser um indicador grande no meio do ecrâ em vez de um na barra principal.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Active esta opção se quiser um indicador a piscar ao iniciar aplicações.</translation>
     </message>
     <message>
         <source>All Tabs</source>

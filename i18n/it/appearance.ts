@@ -71,46 +71,6 @@ Premi qui per selezionare uno schema disponibile.</translation>
         <translation>Premi qui per nominare e salvare lo schema dei colori corrente.</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Forza lo stile per tutte le applicazioni.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Premi qui per permettere a tutte le applicazioni di poter utilizzare le impostazioni globali.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Disabilita lo stile per queste applicazioni (&lt;b&gt;*&lt;/b&gt; può essere utilizzato come una wildcard):</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Se alcune applicazioni non vengono visualizzate correttamente con le impostazioni globali, si possono disabilitare alcune impostazioni per quell&apos;applicazione.
-
-Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazioni si vuole disabilitare.</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">File Binari</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Premi qui per aggiungere un&apos;applicazione nella lista superiore.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Premi qui per eliminare l&apos;applicazione selezionata.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Premi qui per spostare sù nella lista l&apos;applicazione selezionata.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Premi qui per spostare giù nella lista l&apos;applicazione selezionata.</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Stile tab:</translation>
     </message>
@@ -193,22 +153,6 @@ Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazion
         <translation>Avanzato</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Riavvia</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="obsolete">Vuoi riavviare %1 ora?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sì</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">No</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Salva Schema</translation>
     </message>
@@ -227,10 +171,6 @@ Quest&apos;area permette di selezionare un&apos;applicazione e quali impostazion
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>Impossibile cancellare schema corrente.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;nuovo&gt;</translation>
     </message>
     <message>
         <source>Show Scrollbars on the left</source>

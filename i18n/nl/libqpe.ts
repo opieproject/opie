@@ -194,10 +194,6 @@ vwijzigt al categorieen.</translation>
         <translation>Tekenreeks niet gevonden.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Einde bereikt, begin bovenaan</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation>Einde bereikt, begin bij %1
@@ -459,14 +455,6 @@ Maak ruimte vrij, en probeer het
 nogmaals.</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>J</translation>
     </message>
@@ -517,12 +505,6 @@ nogmaals.</translation>
     <message>
         <source>Sun</source>
         <translation>Zo</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Weet u zeker dat u %1
-wilt verwijderen?</translation>
     </message>
     <message>
         <source>All</source>
@@ -793,26 +775,6 @@ wilt verwijderen?</translation>
         <translation>Groepen</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Klik om dit venster te sluiten zonder op te slaan.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Klik om dit venster te sluiten.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Klik om dit venster beweegbaar te maken.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Klik om te maximaliseren.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Qt&gt;Uitgebreide help voor dit pakket is niet beschikbaar, maar er is wel contextgevoelige hulp.&lt;p&gt;Om de contextgevoelige help te gebruiken:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Druk de help knop enige tijd in.&lt;li&gt;Als op de titelbalk &lt;b&gt;Wat is dit...&lt;/b&gt; staat, druk dan op een functie.&lt;/ol&gt;&lt;/Qt&gt; </translation>
     </message>
@@ -875,10 +837,6 @@ wilt verwijderen?</translation>
         <translation>dec</translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="obsolete">Fout</translation>
-    </message>
-    <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
         <translation>D
@@ -905,17 +863,6 @@ Kort voor Maand</translation>
     </message>
 </context>
 <context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="obsolete">&lt;Qt&gt;Uitgebreide help voor dit pakket is niet beschikbaar, maar er is wel contextgevoelige hulp.&lt;p&gt;Om de contextgevoelige help te gebruiken:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Druk de help knop enige tijd in.&lt;li&gt;Als op de titelbalk &lt;b&gt;Wat is dit...&lt;/b&gt; staat, druk dan op een functie.&lt;/ol&gt;&lt;/Qt&gt; </translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation type="obsolete">Wat is dit...</translation>
-    </message>
-</context>
-<context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
@@ -928,10 +875,6 @@ Kort voor Maand</translation>
     <message>
         <source>Click to close this window and apply changes.</source>
         <translation>Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Klik om dit venster beweegbaar te maken.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>

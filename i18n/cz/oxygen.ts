@@ -73,20 +73,8 @@
         <translation>Poloměr atomu</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Energie ionizace</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Hustota</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Bod varu</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Teplota tání</translation>
     </message>
     <message>
         <source>Ionization Energy</source>

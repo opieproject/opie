@@ -26,10 +26,6 @@
 <context>
     <name>GoWidget</name>
     <message>
-        <source>Go</source>
-        <translation type="obsolete">Vai</translation>
-    </message>
-    <message>
         <source>A draw.</source>
         <translation>Um empate</translation>
     </message>

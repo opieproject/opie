@@ -3,10 +3,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Sauvegarde/Restauration... en cours...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Sauvegarde/Restauration</translation>
     </message>
@@ -37,10 +33,6 @@
         <translation>Sauvegarde/Restauration.. Echec !!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Sauvegarde Effectuée.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Veuillez sélectionner un élément
 à restaurer.</translation>
@@ -53,10 +45,6 @@
         <source>Unable to open File: %1</source>
         <translation>Impossible d&apos;ouvrir fichier :
 %1</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Restauration effectuée.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -110,10 +98,6 @@
         <translation>Applications</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Enregistrer sous</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Sauvegarder</translation>
     </message>
@@ -132,10 +116,6 @@
     <message>
         <source>&amp;Restore</source>
         <translation>&amp;Restaurer</translation>
-    </message>
-    <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Rafraichir la liste des fichiers</translation>
     </message>
     <message>
         <source>Locations</source>

@@ -28,26 +28,6 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Микро</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Мелкий Fixed</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Средний Fixed</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Шрифт</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Опции</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Новый</translation>
     </message>
@@ -84,10 +64,6 @@
         <translation>Скрыть список команд</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Вкладки снизу</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Зеленый на черном</translation>
     </message>
@@ -98,18 +74,6 @@
     <message>
         <source>White on Black</source>
         <translation>Белый на черном</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Черный на прозрачном</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Черный на красном</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Красный на черном</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -146,10 +110,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Быстрая правка</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Изменить</translation>
     </message>
     <message>
         <source>None</source>
@@ -190,10 +150,6 @@
     <message>
         <source>Use Beep</source>
         <translation>Использовать сигнал</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Вкладки сверху</translation>
     </message>
     <message>
         <source>Konsole</source>

@@ -58,16 +58,8 @@
         <translation>Выберите модель для сравнения результатов.</translation>
     </message>
     <message>
-        <source>Compare To:</source>
-        <translation type="obsolete">Сравнить с:</translation>
-    </message>
-    <message>
         <source>error</source>
         <translation>ошибка</translation>
-    </message>
-    <message>
-        <source>Compare:</source>
-        <translation type="obsolete">Сравнить:</translation>
     </message>
 </context>
 <context>
@@ -159,22 +151,6 @@
         <translation>Всего памяти: %1 kB</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Эта вкладка показывает как память(т.е. RAM) распределена на вашем устройстве.
-Память разделена на следующие категории:
-
-1. Занято - память используемая Opie и открытыми приложениями.
-2. Буфера - временное хранение для увеличения производительности.
-3. Кэш - информация которая была недавно использована, но еще не освобождена.
-4. Свободная - память не используемая Opie или открытыми приложениями.</translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -238,10 +214,6 @@ Click and hold on a module to see additional information about the module, or to
         <translation>Используется</translation>
     </message>
     <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">Вы действительно хотите выполнить %1 для этого модуля?</translation>
-    </message>
-    <message>
         <source>You really want to execute
 %1 for this module?</source>
         <translation>Вы действительно хотите выполнить
@@ -303,10 +275,6 @@ Click and hold on a process to see additional information about the process, or 
     <message>
         <source>This area shows detailed information about this process.</source>
         <translation>Детальная информация о данном процессе.</translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">Вы действительно хотите послать %1 этому процессу?</translation>
     </message>
     <message>
         <source>Really want to send %1
@@ -375,14 +343,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Версия:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Модель:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Изготовитель:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

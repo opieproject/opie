@@ -106,10 +106,6 @@ Pres: </source>
         <translation>MPH</translation>
     </message>
     <message>
-        <source> hPa</source>
-        <translation type="obsolete">hPa</translation>
-    </message>
-    <message>
         <source> Hg</source>
         <translation>Hg</translation>
     </message>

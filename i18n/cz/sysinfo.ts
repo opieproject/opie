@@ -61,10 +61,6 @@
         <source>error</source>
         <translation>chyba</translation>
     </message>
-    <message>
-        <source>Compare:</source>
-        <translation type="obsolete">Porovnat:</translation>
-    </message>
 </context>
 <context>
     <name>FileSysInfo</name>

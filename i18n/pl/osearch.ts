@@ -14,10 +14,6 @@
         <translation>Szukaj wszędzie</translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Wielkość liter znacząca</translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation>Używaj znaków specjalnych</translation>
     </message>
@@ -100,18 +96,6 @@
         <translation>otwórz przy pomocy</translation>
     </message>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">pokazuj ukończone zadania</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">pokazuj przeszłe wydarzenia</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">szukaj w datach</translation>
-    </message>
-    <message>
         <source>File: </source>
         <translation>Plik:</translation>
     </message>
@@ -122,10 +106,6 @@
     <message>
         <source>Mimetype: </source>
         <translation>Typ MIME:</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">przeszukuj zawartość</translation>
     </message>
     <message>
         <source>searching %1</source>

@@ -25,6 +25,10 @@
         <source>Save status of fullscreen/autorotate</source>
         <translation>Uložit stav celé obrazovky/autorotace</translation>
     </message>
+    <message>
+        <source>Default display brightness:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImageView</name>
@@ -56,6 +60,14 @@
         <source>Toggle thumbnail</source>
         <translation>Přepnout zmenšeninu</translation>
     </message>
+    <message>
+        <source>Increase brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PIconView</name>
@@ -84,10 +96,6 @@
         <translation>Smazat obrázek</translation>
     </message>
     <message>
-        <source>the Image %1</source>
-        <translation type="obsolete">Obrázek %1</translation>
-    </message>
-    <message>
         <source>Image</source>
         <translation>Obrázek</translation>
     </message>
@@ -102,10 +110,6 @@
 </context>
 <context>
     <name>PMainWindow</name>
-    <message>
-        <source>Phunk View - Config</source>
-        <translation type="obsolete">Konfigurace - Phunk View</translation>
-    </message>
     <message>
         <source>Browser Keyboard Actions</source>
         <translation>Projít akce klávesnice</translation>
@@ -214,6 +218,18 @@
         <source>Dont show seperate windows</source>
         <translation>Neukazovat rozdělená okna</translation>
     </message>
+    <message>
+        <source>Display brightness...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -223,16 +239,8 @@
         <translation>%1 - O View</translation>
     </message>
     <message>
-        <source>Opie Eye Caramba</source>
-        <translation type="obsolete">Opie Eye Caramba</translation>
-    </message>
-    <message>
         <source>Show all files</source>
         <translation>Zobrazit všechny soubory</translation>
-    </message>
-    <message>
-        <source>DirView</source>
-        <translation type="obsolete">Adresáře</translation>
     </message>
     <message>
         <source>Opie Eye</source>
@@ -277,6 +285,10 @@
     <message>
         <source>Confirm Deletion</source>
         <translation>Potvrzení smazání</translation>
+    </message>
+    <message>
+        <source>Display brightness:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

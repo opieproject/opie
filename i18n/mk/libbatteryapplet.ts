@@ -2,14 +2,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Состојба на батерија</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Затвори</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Грешка</translation>
     </message>
@@ -24,10 +16,6 @@
     <message>
         <source>Charging</source>
         <translation>Полнење</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Проценти на остнато напојување</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -64,18 +52,6 @@
     <message>
         <source>External power disconnected</source>
         <translation>Иклучено надворешно напојување</translation>
-    </message>
-    <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Останато време</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Проценти на остнато напојување:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Останато време:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>

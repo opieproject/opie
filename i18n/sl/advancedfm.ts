@@ -70,10 +70,6 @@
         <translation>Ne morem preimenovati</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Ta imenik ne obstaja</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>Prekopiraj kot</translation>
     </message>
@@ -146,23 +142,6 @@
         <translation>Kopiraj isti imenik</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Ne morem kopirati</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">v
-</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Ne morem prenesti
-</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Dodaj med dokumente</translation>
     </message>
@@ -175,54 +154,12 @@
         <translation>Izberi vse</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Ali zares izbrišem
-%1 datotek?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Izbrišem imenik?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Res skopiram
-%1 datotek?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Datoteka obstaja!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-obstaja. Ali prepišem?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">že obstaja.
-Ali jo res želite izbrisati?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 obstaja. Ali prepišem?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Ne morem skopirati %1 v %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-pravice pridržane 2002-2003
-LJ.Potter&lt;llornkcor@handhelds.org&gt;
-in je licencirano pod GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>

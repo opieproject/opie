@@ -208,38 +208,6 @@
         <translation>ipkg konnte nicht gestartet werden</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">Öffnen fehlgeschlagen: </translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">Erstellung Verzeichnis </translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Verlinkung von %1 mit %2</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Verlinkung von %1 mit %2 fehlgeschlage</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">%1 gelöscht</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">Löschen %1 fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Gelöscht </translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">Löschen fehlgeschlagen </translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation>Konnte ipkg-link nicht starten</translation>
     </message>
@@ -517,10 +485,6 @@ löschen oder neu installieren ?</translation>
         <translation>Neuinstallation</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">R</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Möchten Sie %1
@@ -529,10 +493,6 @@ löschen oder aktualisieren ?</translation>
     <message>
         <source>Remove or Upgrade</source>
         <translation>Löschen oder Aktualisieren</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

@@ -207,38 +207,6 @@
         <translation>Не могу запустить процесс ipkg</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">Не могу открыть :</translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">Создаю каталог</translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Привязал %1 к %2</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Не смог привязать %1 к %2</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">Убрал %1</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">Не смог убрать %1</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Убран</translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">Не смог убрать</translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation>Не могу запустить ipkg-link</translation>
     </message>

@@ -14,10 +14,6 @@
 <context>
     <name>UserConfig</name>
     <message>
-        <source>OPIE User Manager</source>
-        <translation type="obsolete">Gestion des Utilisateurs OPIE </translation>
-    </message>
-    <message>
         <source>Opie User Manager</source>
         <translation>Gestionnaire d&apos;utilisateurs Opie</translation>
     </message>

@@ -105,10 +105,6 @@ Pres: </source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source> hPa</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source> Hg</source>
         <translation>FOO</translation>
     </message>

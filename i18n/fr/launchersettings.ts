@@ -88,10 +88,6 @@
         <translation>Permet d&apos;afficher le contenu des onglets du bureau dans le menu O.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
-        <translation type="obsolete">Show Applications in subpopups (**)</translation>
-    </message>
-    <message>
         <source>Show Applications in Subpopups</source>
         <translation type="unfinished"></translation>
     </message>
@@ -109,21 +105,6 @@
     <message>
         <source>Sample 3</source>
         <translation>Exemple 3</translation>
-    </message>
-</context>
-<context>
-    <name>SampleView</name>
-    <message>
-        <source>Sample 1</source>
-        <translation type="obsolete">Exemple 1</translation>
-    </message>
-    <message>
-        <source>Sample 2</source>
-        <translation type="obsolete">Exemple 2</translation>
-    </message>
-    <message>
-        <source>Sample 3</source>
-        <translation type="obsolete">Exemple 3</translation>
     </message>
 </context>
 <context>
@@ -232,10 +213,6 @@
         <translation>Afficher le sablier élargi</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Afficher le sablier clignotant</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Sélectionnez l&apos;onglet que vous voulez Editer ou Effacer.</translation>
     </message>
@@ -254,10 +231,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Activez ceci si vous voulez afficher un gros sablier au milieu de l&apos;écran au lieu de celui qui apparait dans la barre des tâches.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Activez ceci si vous voulez afficher un sablier clignotant quand vous démarrez une application.</translation>
     </message>
     <message>
         <source>All Tabs</source>

@@ -1,159 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Button</name>
-    <message>
-        <source>Calendar Button</source>
-        <translation type="obsolete">Кнопка &quot;Календарь&quot;</translation>
-    </message>
-    <message>
-        <source>Contacts Button</source>
-        <translation type="obsolete">Кнопка &quot;Контакты&quot;</translation>
-    </message>
-    <message>
-        <source>Menu Button</source>
-        <translation type="obsolete">Кнопка меню</translation>
-    </message>
-    <message>
-        <source>Mail Button</source>
-        <translation type="obsolete">Кнопка &quot;Почта&quot;</translation>
-    </message>
-    <message>
-        <source>Home Button</source>
-        <translation type="obsolete">Кнопка &quot;Домой&quot;</translation>
-    </message>
-    <message>
-        <source>Record Button</source>
-        <translation type="obsolete">Кнопка записи</translation>
-    </message>
-    <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Повернуть дисплей</translation>
-    </message>
-    <message>
-        <source>Lower+Up</source>
-        <translation type="obsolete">Нижний+вверх</translation>
-    </message>
-    <message>
-        <source>Lower+Down</source>
-        <translation type="obsolete">Нижний+вниз</translation>
-    </message>
-    <message>
-        <source>Lower+Right</source>
-        <translation type="obsolete">Нижний+направо</translation>
-    </message>
-    <message>
-        <source>Lower+Left</source>
-        <translation type="obsolete">Нижний+налево</translation>
-    </message>
-    <message>
-        <source>Upper+Up</source>
-        <translation type="obsolete">Верхний+вверх</translation>
-    </message>
-    <message>
-        <source>Upper+Down</source>
-        <translation type="obsolete">Верхний+вниз</translation>
-    </message>
-    <message>
-        <source>Upper+Right</source>
-        <translation type="obsolete">Верхний+направо</translation>
-    </message>
-    <message>
-        <source>Upper+Left</source>
-        <translation type="obsolete">Верхний+налево</translation>
-    </message>
-    <message>
-        <source>OK Button</source>
-        <translation type="obsolete">Кнопка  ОК</translation>
-    </message>
-    <message>
-        <source>End Button</source>
-        <translation type="obsolete">Кнопка &quot;End&quot;</translation>
-    </message>
-</context>
-<context>
-    <name>OColorDialog</name>
-    <message>
-        <source>Hue:</source>
-        <translation type="obsolete">Тон:</translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="obsolete">Насыщ.:</translation>
-    </message>
-    <message>
-        <source>Red:</source>
-        <translation type="obsolete">Красный:</translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="obsolete">Зеленый:</translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="obsolete">Синий:</translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="obsolete">Альфа канал:</translation>
-    </message>
-    <message>
-        <source>Select color</source>
-        <translation type="obsolete">Выбрать цвет</translation>
-    </message>
-</context>
-<context>
-    <name>OColorPopupMenu</name>
-    <message>
-        <source>More</source>
-        <translation type="obsolete">Далее</translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="obsolete">Далее...</translation>
-    </message>
-</context>
-<context>
-    <name>OFileSelector</name>
-    <message>
-        <source>Name:</source>
-        <translation type="obsolete">Имя:</translation>
-    </message>
-</context>
-<context>
-    <name>OFileViewFileListView</name>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Имя</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Дата</translation>
-    </message>
-    <message>
-        <source>Mime Type</source>
-        <translation type="obsolete">Тип Mime</translation>
-    </message>
-</context>
-<context>
-    <name>OFontMenu</name>
-    <message>
-        <source>Large</source>
-        <translation type="obsolete">Большой</translation>
-    </message>
-    <message>
-        <source>Medium</source>
-        <translation type="obsolete">Средний</translation>
-    </message>
-    <message>
-        <source>Small</source>
-        <translation type="obsolete">Маленький</translation>
-    </message>
-</context>
-<context>
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>
@@ -370,225 +216,6 @@ and </source>
     </message>
 </context>
 <context>
-    <name>ORecurranceBase</name>
-    <message>
-        <source>Repeating Event </source>
-        <translation type="obsolete">Повторяющееся</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Нет</translation>
-    </message>
-    <message>
-        <source>Day</source>
-        <translation type="obsolete">День</translation>
-    </message>
-    <message>
-        <source>Week</source>
-        <translation type="obsolete">Неделя</translation>
-    </message>
-    <message>
-        <source>Month</source>
-        <translation type="obsolete">Месяц</translation>
-    </message>
-    <message>
-        <source>Year</source>
-        <translation type="obsolete">Год</translation>
-    </message>
-    <message>
-        <source>Every:</source>
-        <translation type="obsolete">Каждый(е):</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation type="obsolete">Периодичность</translation>
-    </message>
-    <message>
-        <source>End On:</source>
-        <translation type="obsolete">Завершить:</translation>
-    </message>
-    <message>
-        <source>No End Date</source>
-        <translation type="obsolete">Нет даты</translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation type="obsolete">Повторять по</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation type="obsolete">Пнд</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="obsolete">Втр</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="obsolete">Срд</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="obsolete">Чтв</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="obsolete">Птн</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="obsolete">Суб</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="obsolete">Вск</translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="obsolete">Каждый(е)</translation>
-    </message>
-</context>
-<context>
-    <name>ORecurranceWidget</name>
-    <message>
-        <source>No End Date</source>
-        <translation type="obsolete">Нет даты</translation>
-    </message>
-    <message>
-        <source>days</source>
-        <translation type="obsolete">дней</translation>
-    </message>
-    <message>
-        <source>day</source>
-        <translation type="obsolete">день</translation>
-    </message>
-    <message>
-        <source>weeks</source>
-        <translation type="obsolete">недели</translation>
-    </message>
-    <message>
-        <source>week</source>
-        <translation type="obsolete">неделя</translation>
-    </message>
-    <message>
-        <source>months</source>
-        <translation type="obsolete">месяцев</translation>
-    </message>
-    <message>
-        <source>month</source>
-        <translation type="obsolete">Месяц</translation>
-    </message>
-    <message>
-        <source>years</source>
-        <translation type="obsolete">лет</translation>
-    </message>
-    <message>
-        <source>year</source>
-        <translation type="obsolete">год</translation>
-    </message>
-    <message>
-        <source> and </source>
-        <translation type="obsolete">и</translation>
-    </message>
-    <message>
-        <source>,
-and </source>
-        <translation type="obsolete">,
-и</translation>
-    </message>
-    <message>
-        <source>, and </source>
-        <translation type="obsolete">, и</translation>
-    </message>
-    <message>
-        <source>No Repeat</source>
-        <translation type="obsolete">Нет повтора</translation>
-    </message>
-    <message>
-        <source>day(s)</source>
-        <translation type="obsolete">день(дней)</translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation type="obsolete">Повторять по</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation type="obsolete">Пнд</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="obsolete">Втр</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="obsolete">Срд</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="obsolete">Чтв</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="obsolete">Птн</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="obsolete">Суб</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="obsolete">Вск</translation>
-    </message>
-    <message>
-        <source>week(s)</source>
-        <translation type="obsolete">неделя(и)</translation>
-    </message>
-    <message>
-        <source>Repeat By</source>
-        <translation type="obsolete">Повтор</translation>
-    </message>
-    <message>
-        <source>Day</source>
-        <translation type="obsolete">День</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Дата</translation>
-    </message>
-    <message>
-        <source>month(s)</source>
-        <translation type="obsolete">месяц(ев)</translation>
-    </message>
-    <message>
-        <source>year(s)</source>
-        <translation type="obsolete">год(а)</translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="obsolete">Каждый(е)</translation>
-    </message>
-    <message>
-        <source>on </source>
-        <translation type="obsolete">по</translation>
-    </message>
-</context>
-<context>
-    <name>OTimePickerDialogBase</name>
-    <message>
-        <source>Time:</source>
-        <translation type="obsolete">Время:</translation>
-    </message>
-    <message>
-        <source>:</source>
-        <translation type="obsolete">:</translation>
-    </message>
-    <message>
-        <source>Pick Time:</source>
-        <translation type="obsolete">Выбрать время:</translation>
-    </message>
-</context>
-<context>
     <name>Opie::OPimMainWindow</name>
     <message>
         <source>Item</source>
@@ -599,20 +226,8 @@ and </source>
         <translation>Все</translation>
     </message>
     <message>
-        <source>Click here to view all items.</source>
-        <translation type="obsolete">Нажмите, чтобы увидеть все записи.</translation>
-    </message>
-    <message>
-        <source>Click here to view items belonging to %1.</source>
-        <translation type="obsolete">Нажмите, чтобы увидеть все записи, принадлежащие %1.</translation>
-    </message>
-    <message>
         <source>Unfiled</source>
         <translation>Без категории</translation>
-    </message>
-    <message>
-        <source>Click here to view all unfiled items.</source>
-        <translation type="obsolete">Нажмите, чтобы увидеть все несохраненные записи.</translation>
     </message>
     <message>
         <source>View</source>
@@ -659,14 +274,6 @@ and </source>
         <translation>Нажмите, чтобы передать выбранную запись.</translation>
     </message>
     <message>
-        <source>Find</source>
-        <translation type="obsolete">Найти</translation>
-    </message>
-    <message>
-        <source>Click here to search for an item.</source>
-        <translation type="obsolete">Нажмите для поиска записи.</translation>
-    </message>
-    <message>
         <source>Configure</source>
         <translation>Настроить</translation>
     </message>
@@ -675,54 +282,8 @@ and </source>
         <translation>Нажмите, чтобы задать настройки для этого приложения.</translation>
     </message>
     <message>
-        <source>Filter</source>
-        <translation type="obsolete">Фильтр</translation>
-    </message>
-    <message>
-        <source>Click here to filter the items displayed.</source>
-        <translation type="obsolete">Нажмите, чтобы отфильтровать отображаемые записи.</translation>
-    </message>
-    <message>
-        <source>Filter Settings</source>
-        <translation type="obsolete">Настройки фильтра</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current filter settings.</source>
-        <translation type="obsolete">Нажмите, чтобы изменить настройки текущего фильтра.</translation>
-    </message>
-    <message>
         <source>Click here to filter items by category.</source>
         <translation>Щелкните, чтобы отфильтровать записи по категории.</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">ФайлДиалог</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Открыть</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Сохранить</translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Стиль</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">А ещё хорошо уметь всем на зависть чётко и складно писать буквы и цифры!</translation>
     </message>
 </context>
 <context>
@@ -896,18 +457,6 @@ and </source>
         <translation>Воскресение</translation>
     </message>
     <message>
-        <source>Documents</source>
-        <translation type="obsolete">Документы</translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation type="obsolete">Файлы</translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation type="obsolete">Все файлы</translation>
-    </message>
-    <message>
         <source>Very high</source>
         <translation>Очень высокий</translation>
     </message>
@@ -938,14 +487,6 @@ and </source>
     <message>
         <source>This is a multiple day event</source>
         <translation>Это событие на несколько дней</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;br&gt;&lt;br&gt;&lt;b&gt;Раб. адрес:&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;br&gt;&lt;br&gt;&lt;b&gt;Дом. адрес:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>The %1 %2 of every</source>

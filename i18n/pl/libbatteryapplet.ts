@@ -6,10 +6,6 @@
         <translation>Ładowanie</translation>
     </message>
     <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Pozostały procent energii</translation>
-    </message>
-    <message>
         <source>Battery status: </source>
         <translation>Stan baterii:</translation>
     </message>
@@ -46,18 +42,6 @@
         <translation>Zewnętrzne zasilanie odłączone</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Pozostały czas działania baterii</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Zamknij</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Stan baterii</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Porażka</translation>
     </message>
@@ -70,24 +54,12 @@
         <translation>Ładowanie obu urządzeń</translation>
     </message>
     <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Pozostały procent energii:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Pozostały czas działania baterii:</translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Wkład z baterią nie jest włożony</translation>
     </message>
     <message>
         <source>no data</source>
         <translation>brak danych</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">Ipaq</translation>
     </message>
     <message>
         <source>Jacket  </source>

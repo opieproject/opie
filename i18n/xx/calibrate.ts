@@ -6,9 +6,5 @@
 accurately to calibrate your screen.</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
 </context>
 </TS>

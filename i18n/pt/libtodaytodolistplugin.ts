@@ -37,23 +37,4 @@
         <translation>Cortar linha aos X caracteres</translation>
     </message>
 </context>
-<context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation type="obsolete">tarefas a mostrar</translation>
-    </message>
-    <message>
-        <source>Set the maximum number of task that should be shown</source>
-        <translation type="obsolete">Número máximo de tarefas a mostrar</translation>
-    </message>
-    <message>
-        <source>Clip line after X chars</source>
-        <translation type="obsolete">Cortar linha aos X caracteres</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Cortar dados da tarefa ao fim de quantos caracteres</translation>
-    </message>
-</context>
 </TS>

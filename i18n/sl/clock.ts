@@ -40,18 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Dremež</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Ura</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Štoparica</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Start</translation>
     </message>
@@ -60,32 +48,8 @@
         <translation>Ponastavi</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Nastavi alarm</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stop</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Alarm je vključen</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Alarm je izključen</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Nastavi datum in uro.</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Ura: Zamudili ste alarm.</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -237,47 +201,6 @@ one day to be selected.</source>
     <message>
         <source>Play File</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Nastavi alarm</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Ura</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minuta</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Zakasnitev dremeža
-(minut)</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">mp3 alarm</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Vse</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Audio</translation>
     </message>
 </context>
 </TS>

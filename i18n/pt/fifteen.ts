@@ -60,10 +60,6 @@
         <translation>Aleatório</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Resolver</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Jogo</translation>
     </message>

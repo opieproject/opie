@@ -37,30 +37,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>44100</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>22050</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>16000</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>11025</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>8000</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Limit Size</source>
         <translation>FOO</translation>
     </message>
@@ -75,14 +51,6 @@
     <message>
         <source>Bit Depth</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>16</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>In</source>
@@ -111,23 +79,6 @@ or a card isn&apos;t being recognized</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>FOO</translation>
     </message>
@@ -138,10 +89,6 @@ the selected file?</source>
     <message>
         <source>Opierec</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Note</source>
@@ -177,32 +124,12 @@ the selected file?</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Wave Compression (smaller files)</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>auto Mute</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>mute</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Auto Mute</source>

@@ -155,12 +155,6 @@
         <translation>Scegli font</translation>
     </message>
     <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="obsolete">Vuoi veramente&lt;BR&gt; &lt;B&gt;cancellare&lt;/B&gt; il file corrente
-dal disco?&lt;BR&gt;Questo è &lt;B&gt;irreversibile!!&lt;/B&gt;</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Sì</translation>
     </message>

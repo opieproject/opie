@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Резервное копирование... в процессе...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Архивация и восстановление</translation>
     </message>
@@ -35,10 +31,6 @@
         <translation>Архивация и восстановление.. Сбой !!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Сохранили успешно.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Выберите что-нибудь для восстановления.</translation>
     </message>
@@ -49,10 +41,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>Не могу открыть файл: %1</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Восстановили успешно.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -106,10 +94,6 @@
         <translation>Приложения</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Записать на</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Сохранить</translation>
     </message>
@@ -130,10 +114,6 @@
         <translation>&amp;Восстановить</translation>
     </message>
     <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Обновить список</translation>
-    </message>
-    <message>
         <source>Locations</source>
         <translation>Местоположения</translation>
     </message>
@@ -146,28 +126,8 @@
         <translation>Удалить</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Сохранить</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Destination</source>
         <translation>Место назначения</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Тип</translation>
-    </message>
-    <message>
-        <source>User Data (Configuration + PIM)</source>
-        <translation type="obsolete">Данные пользователя (конфигурация + PIM)</translation>
-    </message>
-    <message>
-        <source>Full Backup (Root File System)</source>
-        <translation type="obsolete">Полный архив (корневая файловая система)</translation>
     </message>
 </context>
 <context>

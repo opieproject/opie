@@ -14,14 +14,6 @@
         <translation>&amp;Igra</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Zamenjaj zadnjo stran kart</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">Z&amp;askoči na položaj</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Nastavitve</translation>
     </message>
@@ -38,24 +30,8 @@
         <translation>Igraj</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Zamenjaj zadnje strani kart</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Zaskoči na položaj</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Obrni eno karto</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Nastavitve</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Obrni tri karte</translation>
     </message>
     <message>
         <source>Chicane</source>

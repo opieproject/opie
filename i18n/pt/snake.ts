@@ -22,10 +22,6 @@ de forma a comer o rato. Tem de
 evitar bater nas paredes ou na cauda.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Prima uma tecla para começar</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>Pontuação: %1</translation>
     </message>
@@ -34,10 +30,6 @@ evitar bater nas paredes ou na cauda.</translation>
  Your Score: %1</source>
         <translation>FIM DE JOGO!
 Pontuação: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Prima uma tecla para começar um novo jogo.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

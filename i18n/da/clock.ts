@@ -40,22 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Udsæt</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Ur</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Stopur</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Start</translation>
     </message>
@@ -64,32 +48,8 @@
         <translation>Nulstil</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Indstil alarmen</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Indstil dato og tid.</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Alarmen er tændt</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Alarmen er slukket</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stop</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Ur: Alarmen blev overhørt.</translation>
-    </message>
-    <message>
-        <source>Alarm set: %1</source>
-        <translation type="obsolete">Alarmen er indstillet: %1</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -241,47 +201,6 @@ one day to be selected.</source>
     <message>
         <source>Play File</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Indstil Alarmen</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Time</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minut</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">MP3 Alarm</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Udsættelse
-(minutter)</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Alle</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Lyd</translation>
     </message>
 </context>
 </TS>

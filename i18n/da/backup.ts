@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Sikkerhedskopiering... arbejder...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Sikkerhedskopiering</translation>
     </message>
@@ -33,10 +29,6 @@
     <message>
         <source>Backup and Restore.. Failed !!</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Backup gennemført.</translation>
     </message>
     <message>
         <source>Please select something to restore.</source>
@@ -102,10 +94,6 @@
         <translation>Programmer</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Gem som</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Kopiering</translation>
     </message>
@@ -124,10 +112,6 @@
     <message>
         <source>&amp;Restore</source>
         <translation>&amp;Gendan</translation>
-    </message>
-    <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Opdater fil-listen</translation>
     </message>
     <message>
         <source>Locations</source>

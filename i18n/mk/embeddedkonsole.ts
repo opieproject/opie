@@ -5,26 +5,6 @@
         <source>Command Selection</source>
         <translation>Избор на команди</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="obsolete">нов</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">уреди</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="obsolete">избриши</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="obsolete">нагоре</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="obsolete">надоле</translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -48,18 +28,6 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Микро</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Мал ограничен</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Среден ограничен</translation>
-    </message>
-    <message>
         <source>Command List</source>
         <translation>Листа на Команди</translation>
     </message>
@@ -72,14 +40,6 @@
         <translation>Скриј листа на команди</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Јазичиња доле</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Јазичиња горе</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Зелено на Црно</translation>
     </message>
@@ -90,18 +50,6 @@
     <message>
         <source>White on Black</source>
         <translation>Бело на Црно</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Црно на Прозирно</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Црно на Црвено</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Црвено на Црно</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -136,16 +84,8 @@
         <translation>Сопствено</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="obsolete">Фонт</translation>
-    </message>
-    <message>
         <source>Colors</source>
         <translation>Бои</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Опции</translation>
     </message>
     <message>
         <source>New</source>
@@ -178,10 +118,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Брзо Уредување</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Уреди</translation>
     </message>
     <message>
         <source>None</source>

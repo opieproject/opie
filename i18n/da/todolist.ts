@@ -85,64 +85,12 @@
         <source>loud</source>
         <translation>høj</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie Opgaveliste</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Ny fra skabelon</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Ny opgave</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Klik her for at oprette en ny opgave.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Rediger opgave</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Klik her for at redigere den valgte opgave.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Vis opgave</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Slet...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Klik her for at fjerne den valgte opgave.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Slet alle...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Slet afsluttede</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Send</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Klik her for at sende den valgte opgave til en anden enhed.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Find</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -159,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Vis genvejspanel</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategori</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Valgmuligheder</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -191,10 +127,6 @@ Listen viser følgende information:
 2. Prioritet - En grafisk repræsentation af opgavens prioritet. Dobbel-klik her for at ændre.
 3. Beskrivelse - Beskrivelse af opgaven. Klik her for at vælge opgaven.
 4. Deadline - Viser hvornår opgaven skal være afsluttet. Denne kolonne kan blive vist eller skjules ved at vælge Valgmuligheder-&gt;&apos;Vis opgave deadlines&apos; fra menuen ovenover.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Alle kategorier</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -219,20 +151,12 @@ Afslut alligevel?</translation>
         <translation>Opgaveliste</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Kan ikke redigere data da en synkronisering er igang</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation>Alle opgaver?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation>Alle afsluttede opgaver?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Ikke-arkiverede</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -243,10 +167,6 @@ Afslut alligevel?</translation>
         <translation>Nye opgaver</translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Duplikere</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation>A.</translation>
     </message>
@@ -255,16 +175,8 @@ Afslut alligevel?</translation>
         <translation>Prioritet</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Beskrivelse</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Deadline</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Konfigurer skabeloner</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -510,10 +422,6 @@ Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette områ
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
         <translation>Klik her hvis opgaven forekommer på et regelmæssigt basis. Hvis valgt, kan hyppigheden vælges på Gentagelse-fanen.</translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">Noter:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

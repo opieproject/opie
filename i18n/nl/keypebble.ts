@@ -29,10 +29,6 @@ de verbiding verbroken.</translation>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Wacht op server initialisatie...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>Wacht op bureaubladnaam...</translation>
     </message>

@@ -11,10 +11,6 @@
         <translation>Vous avez explosé !</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Démineur</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Débutant</translation>
     </message>

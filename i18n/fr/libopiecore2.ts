@@ -58,10 +58,6 @@
         <translation>Maj + Gauche</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Rotation écran</translation>
-    </message>
-    <message>
         <source>Action Button</source>
         <translation>Bouton Action</translation>
     </message>

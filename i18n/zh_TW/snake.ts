@@ -21,10 +21,6 @@ crash into the walls, edges or its tail.</source>
 不能碰到牆.蛋或是他的尾巴</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">按任意鍵以開始</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>     分數 :    %1   </translation>
     </message>
@@ -33,10 +29,6 @@ crash into the walls, edges or its tail.</source>
  Your Score: %1</source>
         <translation>GAME OVER!
  你的得分: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">按任意鍵以開始新遊戲</translation>
     </message>
     <message>
         <source>Press any key to start</source>

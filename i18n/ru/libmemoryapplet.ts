@@ -123,10 +123,6 @@ Memory is categorized as follows:
         <translation>Убрать</translation>
     </message>
     <message>
-        <source>2 Mb,4 Mb,6 Mb,8 Mb</source>
-        <translation type="obsolete">2, 4, 6, 8 Мбайт</translation>
-    </message>
-    <message>
         <source>Failed to detach swapfile.</source>
         <translation>Не смог отключить файл подкачки.</translation>
     </message>

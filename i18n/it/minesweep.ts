@@ -10,10 +10,6 @@
         <translation>Sei esploso!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Campo Minato</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Principiante</translation>
     </message>

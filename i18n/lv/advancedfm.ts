@@ -14,20 +14,6 @@
         <translation>Piezīme</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Šāda direktorija neeksistē</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Uzlabotais FailuMenedžeris
-visas tiesības rezervētas 2002-2003 g.
-L.J.Potters&lt;llornkcor@handhelds.org&gt;
-un ir licezēts ar GPL</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Rādīt Slēptos Failus</translation>
     </message>
@@ -108,12 +94,6 @@ un ir licezēts ar GPL</translation>
         <translation>UzlabotaisFm</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Nevaru izņemt tekošo direktoriju no grāmatzīmēm.  Tas nav iezīmēts!</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Fails</translation>
     </message>
@@ -166,12 +146,6 @@ It is not bookmarked!</source>
         <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Vai tiešām dzēst
-%1 failus?</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Jā</translation>
     </message>
@@ -184,50 +158,8 @@ It is not bookmarked!</source>
         <translation>Dzēst Direktoriju?</translation>
     </message>
     <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Vai tiešām dzēst %1 un visu tā saturu ?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Tiešām dzēst
-%1?</translation>
-    </message>
-    <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Tiešām kopēt
-%1 failus?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Fails Eksistē!</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 eksistē. Tiešām pārrakstīt?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Nevaru kopēt %1 uz %2</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-eksistē. Tiešām pārrakstīt?</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Nevaru nokopēt</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">uz
-</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -236,27 +168,6 @@ eksistē. Tiešām pārrakstīt?</translation>
     <message>
         <source> As</source>
         <translation>Kā</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">jau eksistē
-Vai tiešām vēlaties to dzēst?</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Nevaru pārvietot</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Nevaru nokopēt
-%1
-uz
-%2</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>

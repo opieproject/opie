@@ -6,10 +6,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>FOO</translation>
     </message>
@@ -122,11 +118,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>FOO</translation>
     </message>
@@ -143,28 +134,8 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -173,11 +144,6 @@ exists. Ok to overwrite?</source>
     <message>
         <source> As</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
@@ -196,26 +162,6 @@ exists. Ok to overwrite?</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>FOO</translation>
     </message>
@@ -228,24 +174,8 @@ and is licensed by the GPL</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>

@@ -207,38 +207,6 @@
         <translation>Não foi possível executar o ipkg</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">Não foi possível abrir: </translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">A criar a directoria</translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Ligado %1 a %2</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Falhou a ligação de %1 a %2</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">%1 apagado</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">Falhou a remoção de %1</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Apagado</translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">Falhou a remoção</translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation type="unfinished"></translation>
     </message>

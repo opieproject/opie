@@ -22,10 +22,6 @@ kače, da poje miš. Ne smete se
 zabiti v steno, robove ali svoj rep.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Pritisnite karkoli za začetek</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>    Točke:    %1</translation>
     </message>
@@ -34,10 +30,6 @@ zabiti v steno, robove ali svoj rep.</translation>
  Your Score: %1</source>
         <translation>KONEC IGRE!
 Vaše točke: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Pritisnite karkoli za začetek nove igre.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

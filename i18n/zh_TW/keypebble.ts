@@ -29,10 +29,6 @@ connection.</source>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">等候伺服器初始化...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>等候桌面名稱...</translation>
     </message>

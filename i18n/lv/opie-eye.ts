@@ -25,6 +25,10 @@
         <source>Save status of fullscreen/autorotate</source>
         <translation>Saglabāt pilnekrāna/autorotēšanas statusu</translation>
     </message>
+    <message>
+        <source>Default display brightness:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImageView</name>
@@ -56,6 +60,14 @@
         <source>Toggle thumbnail</source>
         <translation>Slēgt ikonskatu</translation>
     </message>
+    <message>
+        <source>Increase brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PIconView</name>
@@ -84,10 +96,6 @@
         <translation>Dzēst Attēlu</translation>
     </message>
     <message>
-        <source>the Image %1</source>
-        <translation type="obsolete">Attēls %1</translation>
-    </message>
-    <message>
         <source>Image</source>
         <translation>Attēls</translation>
     </message>
@@ -102,10 +110,6 @@
 </context>
 <context>
     <name>PMainWindow</name>
-    <message>
-        <source>Phunk View - Config</source>
-        <translation type="obsolete">Phunk Skats - Konfigurēšana</translation>
-    </message>
     <message>
         <source>Browser Keyboard Actions</source>
         <translation>Pārlūka Klaviatūras Darbības</translation>
@@ -214,6 +218,18 @@
         <source>Dont show seperate windows</source>
         <translation>Nerādīt atsevišķos logos</translation>
     </message>
+    <message>
+        <source>Display brightness...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -223,16 +239,8 @@
         <translation>%1 - O Skats</translation>
     </message>
     <message>
-        <source>Opie Eye Caramba</source>
-        <translation type="obsolete">Opie Acs Caramba</translation>
-    </message>
-    <message>
         <source>Show all files</source>
         <translation>Rādīt visus failus</translation>
-    </message>
-    <message>
-        <source>DirView</source>
-        <translation type="obsolete">KataloguSkats</translation>
     </message>
     <message>
         <source>Opie Eye</source>
@@ -277,6 +285,10 @@
     <message>
         <source>Confirm Deletion</source>
         <translation>Apstiprināt Dzēšanu</translation>
+    </message>
+    <message>
+        <source>Display brightness:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

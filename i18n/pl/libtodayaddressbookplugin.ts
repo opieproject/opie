@@ -10,14 +10,6 @@
         <translation>Ustaw maksymalną liczbę linii, jaka ma być wyświetlana dla urodzin/rocznic</translation>
     </message>
     <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Ogranicz linię do X znaków:</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Po ilu znakach powinna być obcięta informacja o zadaniu</translation>
-    </message>
-    <message>
         <source>Days look ahead: </source>
         <translation>Ile dni naprzód:</translation>
     </message>
@@ -58,10 +50,6 @@ jeśli bliżej niż</translation>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
         <translation>Ten kolor będzie użyty jeśli urodziny/rocznica są bliższe niż podana liczba dni!</translation>
-    </message>
-    <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">By uaktywnić ustawienia: Uruchom ponownie aplikację!</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>

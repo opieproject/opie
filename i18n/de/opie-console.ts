@@ -798,10 +798,6 @@ Der Unicode Wert der Taste</translation>
         <translation>Fehlschlag</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Nummer wählen fehlgeschlagen.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Breche ab...</translation>
     </message>
@@ -862,22 +858,6 @@ Der Unicode Wert der Taste</translation>
     <message>
         <source>Color scheme</source>
         <translation>Farbschema</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Schriftgröße</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">klein</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">mittel</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">groß</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

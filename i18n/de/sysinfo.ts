@@ -153,21 +153,6 @@ Mit den Auswahlboxen kann man die gewünschten Tests einstellen.</translation>
         <translation>Gesamter Speicher: %1 kB</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Diese Seite zeigt wieviel Speicher (z.B. RAM) auf dem Gerät momentan belegt ist.
-Speicher wird wie folgt unterteilt:
-1. Belegt - Speicher, der von Opie und laufenden Anwendungen belegt wird.
-2. Puffer - Temporärer Speicher um die Performanz zu steigern
-3. Gecached - Information die seit kurzem nicht mehr benutzt wird, aber noch nicht freigegeben wurde.
-4. Frei - Speicher, der nicht durch Opie oder Anwendungen belegt wird. </translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -202,10 +187,6 @@ Speicher wird wie folgt unterteilt:
         <translation>Benutzung#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Benutzt von</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -230,17 +211,8 @@ Click and hold on a module to see additional information about the module, or to
         <translation>Dieser Bereich zeigt detaillierte Informationen der Module.</translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Möchten Sie den Befehl wirklich ausführen </translation>
-    </message>
-    <message>
         <source>Used by</source>
         <translation>Benutzt von</translation>
-    </message>
-    <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">Sie wollen wirklich %1 für dieses Modul ausführen?</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -305,15 +277,6 @@ Klicken Sie und halten Sie den Stylus um weitere Prozessinformationen angezeigt 
     <message>
         <source>This area shows detailed information about this process.</source>
         <translation>Dieser Bereich zeigt detaillierte Informationen über den gewählten Prozess an.</translation>
-    </message>
-    <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Wollen Sie das Signal wirklich senden </translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">Sie wollen wirklich %1 an diesen Prozess schicken?</translation>
     </message>
     <message>
         <source>Really want to send %1
@@ -382,14 +345,6 @@ Prozess senden?</translation>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Version: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Modell: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Hersteller:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

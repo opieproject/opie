@@ -22,10 +22,6 @@ slang de muizen te laten opeten. U moet
 de muren, randen en de staart ontwijken.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Druk een toets om te starten</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>Score: %1</translation>
     </message>
@@ -34,10 +30,6 @@ de muren, randen en de staart ontwijken.</translation>
  Your Score: %1</source>
         <translation>GAME OVER!
 Uw score: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Druk een toets om opnieuw te starten.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

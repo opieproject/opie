@@ -342,6 +342,14 @@ Mégis kilép?</translation>
         <source>Category:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -544,10 +552,6 @@ Mégis kilép?</translation>
     <message>
         <source>Note...</source>
         <translation>Jegyzet...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">Kezdő időpont</translation>
     </message>
 </context>
 <context>

@@ -14,10 +14,6 @@
         <translation>Klišķiniet šeit lai palaistu saistīto aplikāciju</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Nav atrasti spraudņi</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Nav aktviēti spraudņi</translation>
     </message>

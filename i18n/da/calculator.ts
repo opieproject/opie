@@ -2,10 +2,6 @@
 <context>
     <name>Calculator</name>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="obsolete">Eksperimental Lommeregner</translation>
-    </message>
-    <message>
         <source>M+</source>
         <translation>M+</translation>
     </message>
@@ -131,10 +127,6 @@
     <message>
         <source>Standard</source>
         <translation>Standard</translation>
-    </message>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">Lommeregner</translation>
     </message>
 </context>
 <context>

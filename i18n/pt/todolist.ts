@@ -85,64 +85,12 @@
         <source>loud</source>
         <translation>alto</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Lista de Tarefas do Opie</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Novo a partir de exemplo</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nova Tarefa</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Clique aqui para criar uma nova tarefa.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Editar Tarefa</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Clique aqui para modificar uma tarefa.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Ver Tarefa</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Apagar...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Clique aqui para remover a tarefa actual.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Apagar Todas...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Remoção completa</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Irradiar</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Clique aqui para irradiar a tarefa actual para outro dispositivo.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Procurar</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -159,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Mostrar barra de tarefas rápidas</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dados</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Categoria</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -191,10 +127,6 @@ Esta lista mostra a seguinte informação:
 2. Prioridade - uma representação gráfica da prioridade da tarefa. Faça duplo clique para a modificar.
 3. Descrição - descrição da tarefa. Clique aqui para a seleccionar.
 4. Data Limite - mostra a data limite para a execução da tarefa. Esta coluna pode ser visível ou não a partir do menu &quot;Opções-&gt;Mostrar data limite das tarefas&quot;.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Todas as Categorias</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -219,20 +151,12 @@ Sair na mesma?</translation>
         <translation>Tarefa</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Não pode editar enquanto sincroniza</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation>todas as tarefas?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation>todas as tarefas completadas?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Vazio</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -243,10 +167,6 @@ Sair na mesma?</translation>
         <translation>Novas Tarefas</translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Duplicar</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation>C.</translation>
     </message>
@@ -255,16 +175,8 @@ Sair na mesma?</translation>
         <translation>Prioridade</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Descrição</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Data Limite</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Configurar Exemplos</translation>
     </message>
     <message>
         <source>Priority:</source>

@@ -58,10 +58,6 @@
         <translation>Kies een model om de resultaten mee te vergelijken.</translation>
     </message>
     <message>
-        <source>Compare To:</source>
-        <translation type="obsolete">Vergelijk met:</translation>
-    </message>
-    <message>
         <source>error</source>
         <translation>fout</translation>
     </message>
@@ -135,22 +131,6 @@
 <context>
     <name>MemoryInfo</name>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Deze pagina geeft weer hoeveel geheugen (dwz RAM) in gebruik is op uw hanheld.
-Gehugen wordt als volgt onderverdeeld:
-
-1. Gebruikt - Geheugen dat in gebruik is door Opie en lopende programma&apos;s.
-2. Buffers - Tijdelijke opslag tbv verbetering snelheid.
-3. Cache - Recent gebruikte informatie, die nog niet vrijgegeven is.
-4. Vrij - Geheugen dat momenteel niet in gebruik is door Opie of lopende programma&apos;s.</translation>
-    </message>
-    <message>
         <source>Used (%1 kB)</source>
         <translation>Gebruikt (%1 kB)</translation>
     </message>
@@ -206,10 +186,6 @@ Gehugen wordt als volgt onderverdeeld:
         <translation>Gebruik#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Gebruikt door</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -234,18 +210,8 @@ Druk een tijd op een module om meer informatie over de module te zien, of hem te
         <translation>Dit vlak geeft gedetailleerde informatie over deze module weer.</translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Wilt u dit echt uitvoeren
-</translation>
-    </message>
-    <message>
         <source>Used by</source>
         <translation>Gebruikt door</translation>
-    </message>
-    <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">Wilt u %1 echt gebruiken op dit onderdeel?</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -310,16 +276,6 @@ Druk een tijd op een module om meer informatie over de module te zien, of een si
     <message>
         <source>This area shows detailed information about this process.</source>
         <translation>Dit vlak laat gedetailleerde info over dit proces zien.</translation>
-    </message>
-    <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Wilt u dit echt zenden
-</translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">Wilt u %1 echt naar dit onderdeel sturen?</translation>
     </message>
     <message>
         <source>Really want to send %1
@@ -388,14 +344,6 @@ dit proces gestuurd worden?</translation>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Versie:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Model:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Fabrikant:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

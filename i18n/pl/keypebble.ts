@@ -29,10 +29,6 @@ polaczenie.</translation>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Oczekiwanie na inicjalizacje serwera...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>Oczekiwanie na nazwe pulpitu...</translation>
     </message>

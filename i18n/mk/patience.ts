@@ -26,14 +26,6 @@
         <translation>&amp;Игра</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Смени Карти</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Залепи за позиција</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Подесувања</translation>
     </message>
@@ -50,24 +42,8 @@
         <translation>Играј</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Смени Карти</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Залепи за позиција</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">сврти една карта</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Подесувања</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Сврти три карти</translation>
     </message>
     <message>
         <source>&amp;Change card backs</source>

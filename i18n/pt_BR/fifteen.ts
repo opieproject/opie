@@ -61,10 +61,6 @@
         <translation>Jogo</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Resolver</translation>
-    </message>
-    <message>
         <source>Randomize</source>
         <translation>Sortear</translation>
     </message>

@@ -22,10 +22,6 @@ wezem tak by zjadal myszy. Nie mozesz
 wpadac na sciany, krawedzie i swoj ogon.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Wcisnij dowolny klawisz do uruchomienia</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>     Wynik :    %1   </translation>
     </message>
@@ -34,10 +30,6 @@ wpadac na sciany, krawedzie i swoj ogon.</translation>
  Your Score: %1</source>
         <translation>KONIEC GRY!
  Twoj wynik: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Wcisnij dowolny klawisz a rozpoczniesz gre.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

@@ -46,30 +46,6 @@
         <translation>Geeft hier het type kasboek in.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Spaargeld</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Cheques</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">Belastingen</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Geldmarkt</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Aandelen</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Anders</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Bank:</translation>
     </message>
@@ -108,14 +84,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Voer hier verdere info voor dit kasboek in.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Huidig saldo: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Dt veld geeft het huidige saldo van dit kasboek weer.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -192,10 +160,6 @@ Klik op de kolomnaam om te sorteren op een bepaald veld. </translation>
     <message>
         <source>Click here to draw the selected chart.</source>
         <translation>Klik hier om de geselecteerde grafiek te tekenen.</translation>
-    </message>
-    <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Huidig saldo %1%2</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -654,62 +618,6 @@ Dit bedrag moet altijd positief zijn.</translation>
         <translation>Voer hier extra informatie over de transactie in.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Auto</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Vaste lasten</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">CD&apos;s</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Kleding</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Computer</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">DVD&apos;s</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Electronica</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Amusement</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Eten/Drinken</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Benzine</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Overig</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Films</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Huur</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Reizen</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation>Rente op leningen</translation>
     </message>
@@ -726,28 +634,12 @@ Dit bedrag moet altijd positief zijn.</translation>
         <translation>Credit Card</translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="obsolete">Werk</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Familie</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Diverse inkomsten</translation>
-    </message>
-    <message>
         <source>Automatic Payment</source>
         <translation>Autom. Betalingen</translation>
     </message>
     <message>
         <source>Cash</source>
         <translation>Contant</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="obsolete">Electronisch</translation>
     </message>
 </context>
 </TS>

@@ -28,74 +28,6 @@
         <translation>Kontakty</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Kontakt</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Zobrazit</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Seznam</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Karta</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Nový</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Upravit</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Smazat</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Hledat</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Spustit hledání</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Zavřít hledání</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Napsat Mail pro</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Odeslat položku</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">Importovat vCard</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">Exportovat vCard</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Moje osobní detaily</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Uložit všechna data</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Konfigurace</translation>
-    </message>
-    <message>
         <source>You have to select a contact !</source>
         <translation>Musíte vybrat kontakt!</translation>
     </message>
@@ -142,10 +74,6 @@ Opravdu ho chcete otevřít?</translation>
         <translation>Nelze upravit data, běží synchronizace</translation>
     </message>
     <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Upravit adresu</translation>
-    </message>
-    <message>
         <source>Edit My Personal Details</source>
         <translation>Upravit moje osobní detaily</translation>
     </message>
@@ -178,16 +106,8 @@ Chcete přesto skončit?</translation>
         <translation>Nelze nalézt kontakt pro tento vyhledávací vzor!</translation>
     </message>
     <message>
-        <source>Cards</source>
-        <translation type="obsolete">Karty</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Vše</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Nevyplněné</translation>
     </message>
     <message>
         <source>Edit Contact</source>

@@ -37,30 +37,6 @@
         <translation>Echantillonage</translation>
     </message>
     <message>
-        <source>44100</source>
-        <translation type="obsolete">44100</translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation type="obsolete">32000</translation>
-    </message>
-    <message>
-        <source>22050</source>
-        <translation type="obsolete">22050</translation>
-    </message>
-    <message>
-        <source>16000</source>
-        <translation type="obsolete">16000</translation>
-    </message>
-    <message>
-        <source>11025</source>
-        <translation type="obsolete">11025</translation>
-    </message>
-    <message>
-        <source>8000</source>
-        <translation type="obsolete">8000</translation>
-    </message>
-    <message>
         <source>Limit Size</source>
         <translation>Limite de taille</translation>
     </message>
@@ -75,14 +51,6 @@
     <message>
         <source>Bit Depth</source>
         <translation>Profond. bit</translation>
-    </message>
-    <message>
-        <source>16</source>
-        <translation type="obsolete">16</translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation type="obsolete">8</translation>
     </message>
     <message>
         <source>In</source>
@@ -113,24 +81,6 @@ de place sur le disque ou
 votre carte n&apos;est pas reconnue</translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">seconds</translation>
-    </message>
-    <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">Confirmez vous &lt;font size=+2&gt;&lt;B&gt;la suppression&lt;/B&gt;&lt;/font&gt;
-des fichiers sélectionnés ?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Oui</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Non</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Erreur</translation>
     </message>
@@ -141,10 +91,6 @@ des fichiers sélectionnés ?</translation>
     <message>
         <source>Opierec</source>
         <translation>Opierec</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">Veuillez sélectionner un fichier à jouer</translation>
     </message>
     <message>
         <source>Note</source>
@@ -181,40 +127,16 @@ des fichiers sélectionnés ?</translation>
         <translation>OK</translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="obsolete">Rec</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Emplacement</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Date</translation>
-    </message>
-    <message>
         <source>Wave Compression (smaller files)</source>
         <translation>Compression (fichiers plus petits)</translation>
-    </message>
-    <message>
-        <source>auto Mute</source>
-        <translation type="obsolete">Silence auto </translation>
     </message>
     <message>
         <source>mute</source>
         <translation>Silence</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="obsolete">Stopper</translation>
-    </message>
-    <message>
         <source>Auto Mute</source>
         <translation>Silence auto</translation>
-    </message>
-    <message>
-        <source>Stereo Channels</source>
-        <translation type="obsolete">Canaux stéréo</translation>
     </message>
     <message>
         <source>Del</source>

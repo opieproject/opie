@@ -480,10 +480,6 @@ Oie/Qtopia е вклучена
         <translation>Повторно Инсталирај</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">Р</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Дали сакаш да се отстрани или надгради
@@ -492,10 +488,6 @@ Oie/Qtopia е вклучена
     <message>
         <source>Remove or Upgrade</source>
         <translation>Одстрани или Надгради</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">У</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

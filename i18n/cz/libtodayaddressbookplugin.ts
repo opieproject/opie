@@ -2,10 +2,6 @@
 <context>
     <name>AddressBookPluginConfig</name>
     <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Pro aktivaci nastavení restartujte aplikaci!</translation>
-    </message>
-    <message>
         <source>Enable/Disable Views</source>
         <translation>Zapnout/Vypnout Zobrazení</translation>
     </message>
@@ -32,14 +28,6 @@
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
         <translation>Nastaví maximální počet řádek, které budou zobrazeny u jednotlivých výročí/narozenin</translation>
-    </message>
-    <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Ukončí řádek po X znacích:</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Po kolika znacích bude informace o události ukončena</translation>
     </message>
     <message>
         <source>Days look ahead: </source>

@@ -26,14 +26,6 @@
         <translation>&amp;Spiel</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Kartenrücken wechseln</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Zur Position springen</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Einstellungen</translation>
     </message>
@@ -50,24 +42,8 @@
         <translation>Spiel</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Kartenrücken wechseln</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Zur Position springen</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Eine Karte drehen</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Einstellungen</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Drei Karten drehen</translation>
     </message>
     <message>
         <source>&amp;Change card backs</source>

@@ -194,10 +194,6 @@ edytuje kategorie.</translation>
         <translation>Tekst nie został znaleziony.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Osiągnąłem koniec, zaczynam od początku</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation>Osiągnięto koniec, zaczynam od %1</translation>
@@ -452,14 +448,6 @@ Free some memory and try again.</source>
 Zwolnij więcej pamięci i spróbuj ponownie.</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>R</translation>
     </message>
@@ -482,12 +470,6 @@ Zwolnij więcej pamięci i spróbuj ponownie.</translation>
     <message>
         <source>AM</source>
         <translation>AM</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Jestes pewnien ze chces zusunac
- %1?</translation>
     </message>
     <message>
         <source>All</source>
@@ -790,26 +772,6 @@ Zwolnij więcej pamięci i spróbuj ponownie.</translation>
         <translation>Nie</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Kliknij aby zamknąć to okno porzucając zmiany.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Kliknij aby zamknąć to okno.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Kliknij aby zamknąć to okno akceptując zmiany.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Kliknij aby zmienić okno w przesuwane.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Kliknij aby rozszerzyć okno na całą dostępną przestrzeń.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Ot&gt;Wyczerpująca pomoc dla tej aplikcji jest niedostępna, ale jest pomoc kontekstowa.&lt;p&gt;Aby jej użyć:&lt;p&gt;&lt;ol&gt;&lt;li&gt;kliknij i przytrzymaj przycisk pomocy.&lt;li&gt;gdy tytuł okna zmieni się na &lt;b&gt;Co to jest...&lt;/b&gt;, kliknij na dowolny element.&lt;/ol&gt;&lt;/Ot&gt;</translation>
     </message>
@@ -870,10 +832,6 @@ Zwolnij więcej pamięci i spróbuj ponownie.</translation>
     <message>
         <source>Dec</source>
         <translation>Gru</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Blad</translation>
     </message>
     <message>
         <source>D</source>

@@ -192,22 +192,6 @@
 <context>
     <name>PPPIPEdit</name>
     <message>
-        <source>IPAddress needed</source>
-        <translation type="obsolete">IP adresa je vyžadována</translation>
-    </message>
-    <message>
-        <source>IPAddress not valid</source>
-        <translation type="obsolete">IP adresa je neplatná</translation>
-    </message>
-    <message>
-        <source>Subnet mask needed</source>
-        <translation type="obsolete">Síťová maska je vyžadována</translation>
-    </message>
-    <message>
-        <source>Subnet mask not valid</source>
-        <translation type="obsolete">Síťová maska je neplatná</translation>
-    </message>
-    <message>
         <source>Gateway address needed</source>
         <translation>Adresa brány je vyžadována</translation>
     </message>
@@ -233,10 +217,6 @@
     <message>
         <source>Fixed</source>
         <translation>Pevná</translation>
-    </message>
-    <message>
-        <source>Subnetmask</source>
-        <translation type="obsolete">Síťová maska</translation>
     </message>
     <message>
         <source>Address</source>
@@ -269,10 +249,6 @@
 </context>
 <context>
     <name>PPPNetNode</name>
-    <message>
-        <source>PPP Connection</source>
-        <translation type="obsolete">PPP připojení</translation>
-    </message>
     <message>
         <source>&lt;p&gt;Sets up IP using PPP.&lt;/p&gt;&lt;p&gt;Use this for dialup devices or serial setups&lt;/p&gt;</source>
         <translation>&lt;p&gt;Nastaví IP s použitím PPP.&lt;/p&gt;&lt;p&gt;Použijte pro vytáčené, nebo sériové připojení&lt;/p&gt;</translation>

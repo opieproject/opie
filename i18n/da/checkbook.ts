@@ -46,30 +46,6 @@
         <translation>Vælg checkhæfte-typen her.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Opsparinger</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Regninger</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">CD</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Pengemarkedet</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Fælleskapital</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Andet</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Bank:</translation>
     </message>
@@ -108,14 +84,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Skriv yderligere informationer for checkhæftet her.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Nuværende saldo: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Her vises checkhæftets nuværende saldo.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -192,10 +160,6 @@ For at sortere efter en kolonne, klik på kolonnens navn.</translation>
     <message>
         <source>Click here to draw the selected chart.</source>
         <translation>Klik her for at tegne det valgte diagram.</translation>
-    </message>
-    <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Nuværende saldo: %1%2</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -655,62 +619,6 @@ Beløbet skal altid være positivt.</translation>
         <translation>Skriv evt. ekstra informationer om transaktionen her.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Bil</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Regninger</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">CD&apos;er</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Tøj</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Computer</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">DVD&apos;er</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Electronics</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Underholdning</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Mad</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Benzin</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Diverse</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Film</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Leje</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Rejser</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation type="unfinished"></translation>
     </message>
@@ -727,28 +635,12 @@ Beløbet skal altid være positivt.</translation>
         <translation>Kreditkort</translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="obsolete">Arbejde</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Familiemedlem</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Diverse kredit</translation>
-    </message>
-    <message>
         <source>Automatic Payment</source>
         <translation>Automatisk betaling</translation>
     </message>
     <message>
         <source>Cash</source>
         <translation>Kontant</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="obsolete">Elektronik</translation>
     </message>
 </context>
 </TS>

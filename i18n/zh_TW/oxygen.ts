@@ -49,20 +49,8 @@
         <translation>原子半徑</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">游離能</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>密度</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">沸點</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">熔點</translation>
     </message>
     <message>
         <source>%1 u</source>

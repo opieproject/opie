@@ -22,10 +22,6 @@
         <translation>Спросить</translation>
     </message>
     <message>
-        <source>Disabled</source>
-        <translation type="obsolete">Запрещен</translation>
-    </message>
-    <message>
         <source>Trigger VPN</source>
         <translation>Включить VPN</translation>
     </message>
@@ -108,14 +104,6 @@
     <message>
         <source>Bytes</source>
         <translation>Байтов</translation>
-    </message>
-    <message>
-        <source>Transmitting</source>
-        <translation type="obsolete">Исходящий</translation>
-    </message>
-    <message>
-        <source>Others</source>
-        <translation type="obsolete">Прочие</translation>
     </message>
     <message>
         <source>Collisions</source>

@@ -17,10 +17,6 @@
 <context>
     <name>MindBreakerBoard</name>
     <message>
-        <source>Answer%1</source>
-        <translation type="obsolete">Odpowiedz%1</translation>
-    </message>
-    <message>
         <source>Reset Statistics</source>
         <translation>Kasuj statystyki</translation>
     </message>

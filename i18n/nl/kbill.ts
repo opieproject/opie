@@ -34,10 +34,6 @@
         <translation>Pauzeer spel</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
-        <translation type="obsolete">&lt;b&gt;Het Verhaal&lt;/b&gt;&lt;p&gt;Het lot van de wereld ligt alweer in jouw handen! Een gemene computerspecialist, die bekend staat onder de schuilnaam &apos;Bill&apos;, heeft het ultieme computervirus gecreerd. Een zo geavanceerd virus dat het in staat is een gewone computer te veranderen in een nutteloos fossiel! &apos;Bill&apos; heeft zichzelf gekloond tot miljarden micro-Bill&apos;s. Hun enige doel is het infecteren met dit gruwelijke virus, dat vermomd is als een populair besturingssysteem. Als systeembeheerder en ongediertebestrijder is het jouw taak te voorkomen dat Bill hierin slaagt.</translation>
-    </message>
-    <message>
         <source>The story of KBill</source>
         <translation>Het verhaal van kBill</translation>
     </message>

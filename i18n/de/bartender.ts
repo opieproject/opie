@@ -89,16 +89,8 @@
         <translation>Suche nach Getränkenamen</translation>
     </message>
     <message>
-        <source>Find by Alcohol</source>
-        <translation type="obsolete">Suche nach Alkohol</translation>
-    </message>
-    <message>
         <source>Edit</source>
         <translation>Bearbeiten</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">bearbeiten</translation>
     </message>
     <message>
         <source>New</source>
@@ -134,10 +126,6 @@
     <message>
         <source>Drink Name</source>
         <translation>Getränkenamen</translation>
-    </message>
-    <message>
-        <source>Alcohol</source>
-        <translation type="obsolete">Alkohol</translation>
     </message>
     <message>
         <source>Search</source>

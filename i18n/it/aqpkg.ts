@@ -208,38 +208,6 @@
         <translation>Impossibile avviare processo ipkg</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">Impossibile aprire :</translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">Creazione directory </translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Creato link da %1 a %2</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Creazione link da %1 a %2 fallita</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">Eliminato %1</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">Impossibile eliminare %1</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Eliminato </translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">Impossibile eliminare </translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation type="unfinished"></translation>
     </message>
@@ -519,10 +487,6 @@ Sei sicuro?
         <translation>Rinstalla</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">R</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Vuoi eliminare o fare l&apos;upgrade di
@@ -531,10 +495,6 @@ Sei sicuro?
     <message>
         <source>Remove or Upgrade</source>
         <translation>Elimina o Upgrade</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

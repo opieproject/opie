@@ -106,10 +106,6 @@ Pres: </source>
         <translation>М/ч</translation>
     </message>
     <message>
-        <source> hPa</source>
-        <translation type="obsolete">хПа</translation>
-    </message>
-    <message>
         <source> Hg</source>
         <translation>Hg</translation>
     </message>

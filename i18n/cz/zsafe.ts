@@ -216,36 +216,6 @@ zobrazí seznam adresářů a souborů</translation>
         <translation>ZSafe</translation>
     </message>
     <message>
-        <source>Can&apos;t create directory
-.../Documents/application
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Nelze vytvořit adresář
-.../Documents/application
-
-ZSafe se nyní ukončí.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create directory
-%1
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Nelze vytvořit adresář
-%1
-
-ZSafe se nyní ukončí.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create directory
-...//Documents/application/zsafe
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Nelze vytvořit adresář
-.../Documents/application/zsafe
-
-ZSafe se nyní ukončí.</translation>
-    </message>
-    <message>
         <source>&amp;New document</source>
         <translation>&amp;Nový dokument</translation>
     </message>
@@ -386,20 +356,12 @@ ZSafe se nyní ukončí.</translation>
         <translation>N&amp;emazat</translation>
     </message>
     <message>
-        <source>Edit Entry</source>
-        <translation type="obsolete">Upravit položku</translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation>Uživatelské jméno</translation>
     </message>
     <message>
         <source>Password</source>
         <translation>Heslo</translation>
-    </message>
-    <message>
-        <source>New Entry</source>
-        <translation type="obsolete">Nová položka</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -564,10 +526,6 @@ heslem</translation>
         <translation>Shromažďování ikon...</translation>
     </message>
     <message>
-        <source>Create new ZSafe document</source>
-        <translation type="obsolete">Vytvořit nový ZSafe dokument</translation>
-    </message>
-    <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
@@ -578,30 +536,6 @@ nově vytvořenému dokumentu.</translation>
     <message>
         <source>Open ZSafe document</source>
         <translation>Otevřít ZSafe dokument</translation>
-    </message>
-    <message>
-        <source>Save ZSafe document as..</source>
-        <translation type="obsolete">Uložit ZSafe dokument jako..</translation>
-    </message>
-    <message>
-        <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="obsolete">Zaurus Správce hesel&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="obsolete">ZSafe verze 2.1.2-jv01b&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="obsolete">napsal Carsten Schneider&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="obsolete">Přeložil Robert Ernst&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="obsolete">ZSafe verze 2.1.2&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>

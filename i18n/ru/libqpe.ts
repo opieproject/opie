@@ -194,10 +194,6 @@ editing categories.</source>
         <translation>Строка не найдена.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Конец достигнут, продолжаю с начала</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation>Конец достигнут, начинаю с %1</translation>
@@ -450,14 +446,6 @@ before entering data</source>
 Free some memory and try again.</source>
         <translation>Не могу установить будильник.
 Пожалуйста освободите место и попробуйте снова.</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">Д</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">М</translation>
     </message>
     <message>
         <source>Y</source>
@@ -782,26 +770,6 @@ Free some memory and try again.</source>
     <message>
         <source>Sun</source>
         <translation>Вск</translation>
-    </message>
-    <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Нажмите чтобы закрыть это окно, не сохраняя.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Нажмите чтобы закрыть это окно.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Нажмите чтобы закрыть это окно и сохранить изменения.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Нажмите чтобы сделать это окно перемещаемым.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Нажмите чтобы это окно заняло все доступное место на экране.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>

@@ -107,21 +107,6 @@
     </message>
 </context>
 <context>
-    <name>SampleView</name>
-    <message>
-        <source>Sample 1</source>
-        <translation type="obsolete">Primer 1</translation>
-    </message>
-    <message>
-        <source>Sample 2</source>
-        <translation type="obsolete">Primer 1</translation>
-    </message>
-    <message>
-        <source>Sample 3</source>
-        <translation type="obsolete">Primer 1</translation>
-    </message>
-</context>
-<context>
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
@@ -227,10 +212,6 @@
         <translation>Vklopi velik kazalnik zasedenosti</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Vklopi utripajoč kazalnik zasedenosti</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Izberi zaganjalnikov zavihek, ki ga želite urediti ali izbrisati.</translation>
     </message>
@@ -249,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Vklopite to, če želite, da je velik kazalnik zasedenosti v sredini zaslona namesto v opravilni vrstici.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Vklopite to, če želite, da je utripajoč kazalnik zasedenosti za zaganjanje programov v zaganjalniku.</translation>
     </message>
     <message>
         <source>All Tabs</source>

@@ -22,16 +22,6 @@
         <translation>Glavni</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">OPOZORILO:
-Spreminjanje parametrov na tej
-strani lahko povzroči, da vaš
-sistem ne bo pravilno deloval!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>Uredi fstab</translation>
     </message>
@@ -52,26 +42,10 @@ sistem ne bo pravilno deloval!!</translation>
         <translation>Napredno</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">Format?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>Zares formatiram
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-z</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">datotečnim sistemom?!?
-Zgubili boste vse podatke!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -129,18 +103,8 @@ has been successfully formatted.</source>
 je bila uspešno formatirana.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Poizkušam priklopiti.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>Priklop kartice ni uspel!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-je bila uspešno priklopljena.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -149,10 +113,6 @@ je bila uspešno priklopljena.</translation>
     <message>
         <source>Internal</source>
         <translation>Notranje</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Tip skladišča:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

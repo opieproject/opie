@@ -26,10 +26,6 @@
 <context>
     <name>VPNNetNode</name>
     <message>
-        <source>VPN Connection</source>
-        <translation type="obsolete">VPN Verbindung</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Configure private IP connection.&lt;/p&gt;&lt;p&gt;Defines Secure tunnels over non secure IP sessions&lt;/p&gt;</source>
         <translation>&lt;p&gt;VPN konfigurieren.&lt;/p&gt;&lt;p&gt;Definiert Secure Tunnels über eine unsichere Verbindung&lt;/p&gt;</translation>
     </message>

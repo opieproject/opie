@@ -22,18 +22,6 @@
         <translation>Zapisz</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Wymuszaj styl dla wszystkich aplikacji.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Wyłącz styl dla aplikacji (można używać znaku specjalnego &lt;b&gt;*&lt;/b&gt;):</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">Plik(i) binarny(e)</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Styl zakładek:</translation>
     </message>
@@ -82,22 +70,6 @@
         <translation>Zaawansowane</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Restart</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="obsolete">Czy chcesz teraz zrestartowac %1?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Tak</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nie</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Zapisz szablon</translation>
     </message>
@@ -116,10 +88,6 @@
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>Nie można usunąć aktualnego szablonu.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;nowy&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -168,34 +136,6 @@ Kliknij tu aby wybrać dostępny schemat.</translation>
     <message>
         <source>Click here to name and save the current color scheme.</source>
         <translation>Kliknij tu aby nazwać i zapisać aktualny szablon barw.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Kliknij tu aby zezwolić wszystkim aplikacjom na używanie globalnych ustawień wyglądu.</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Jeśli niektóre aplikacje nie wyświetlają się prawidłowo z globalnymi ustawieniami wyglądu, pewne funkcje mogą być dla nich  wyłączone.
-
-Ten obszar pozwala ci na wybór aplikacji i opcji, ktore chcesz wyłączyć.</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Kliknij tu aby dodać aplikację do powyższej listy.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Kliknij tu aby usunąć aktualnie wybraną aplikację.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Kliknij to aby przesunąć wybraną aplikację w górę listy.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Kliknij to aby przesunąć wybraną aplikację w dół listy.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:

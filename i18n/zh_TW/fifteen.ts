@@ -60,10 +60,6 @@
         <translation>隨機</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">解決</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>遊戲</translation>
     </message>

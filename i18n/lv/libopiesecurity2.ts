@@ -2,10 +2,6 @@
 <context>
     <name>Opie::Security::MultiauthMainWindow</name>
     <message>
-        <source>Welcome to Opie Multi-authentication Framework</source>
-        <translation type="obsolete">Laipni lūgti Opie Multi-autentifikācijas sadaļā</translation>
-    </message>
-    <message>
         <source>Launching authentication plugins...</source>
         <translation>Palaižam autentifikācijas spraudņus...</translation>
     </message>
@@ -14,20 +10,8 @@
         <translation>Aiziet...</translation>
     </message>
     <message>
-        <source>Note: the &apos;exit&apos; button should be removed for real protection, through Security config dialog</source>
-        <translation type="obsolete">Piezīme: patiesai aizsardzībai poga &apos;iziet&apos; ir jāizņem</translation>
-    </message>
-    <message>
         <source>Congratulations! Your authentication has been successful.</source>
         <translation>Apsveicam! Jūsu autentifikācija izdevās.</translation>
-    </message>
-    <message>
-        <source>You have not succeeded enough authentication steps!</source>
-        <translation type="obsolete">Jums neizdevās iziet visus autentifikācijas soļus!</translation>
-    </message>
-    <message>
-        <source>Note: if &apos;allow to bypass&apos; was uncheck in Security config, you would have to go back through all the steps now.</source>
-        <translation type="obsolete">Piezīme: ja noņemtu ķeksi no &apos;atļaut apiešanu&apos; drošības konfigurēšanas logā, jums būtu jāatkārto visi soļi.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>

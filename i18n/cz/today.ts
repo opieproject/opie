@@ -14,10 +14,6 @@
         <translation>Klikněte pro spuštění přidružené aplikace</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Nejsou žádné pluginy</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Nejsou aktivovány žádné pluginy</translation>
     </message>

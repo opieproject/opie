@@ -15,65 +15,6 @@
     </message>
 </context>
 <context>
-    <name>DatebookPluginConfig</name>
-    <message>
-        <source>Show location</source>
-        <translation type="obsolete">Mostrar localização</translation>
-    </message>
-    <message>
-        <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="obsolete">Active isto se quiser ver a localização de cada marcação</translation>
-    </message>
-    <message>
-        <source>Show notes</source>
-        <translation type="obsolete">Mostrar notas</translation>
-    </message>
-    <message>
-        <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="obsolete">Active isto se quiser ver a nota associada a cada marcação</translation>
-    </message>
-    <message>
-        <source>Show only later
- appointments</source>
-        <translation type="obsolete">Mostrar apenas as
-próximas marcações</translation>
-    </message>
-    <message>
-        <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="obsolete">Active isto se quiser ver apenas as próximas marcações</translation>
-    </message>
-    <message>
-        <source>How many 
-appointment
-should be 
-shown?</source>
-        <translation type="obsolete">Mostrar 
-quantas
-marcações?
-</translation>
-    </message>
-    <message>
-        <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="obsolete">Qual o máximo de marcações a mostrar em ordem temporal</translation>
-    </message>
-    <message>
-        <source>How many more days</source>
-        <translation type="obsolete">Quantos dias mais</translation>
-    </message>
-    <message>
-        <source>How many more days should be in the range</source>
-        <translation type="obsolete">Quantos dias mais deverão estar disponíveis</translation>
-    </message>
-    <message>
-        <source> day(s)</source>
-        <translation type="obsolete">dia(s)</translation>
-    </message>
-    <message>
-        <source>only today</source>
-        <translation type="obsolete">apenas hoje</translation>
-    </message>
-</context>
-<context>
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>

@@ -7,36 +7,12 @@
         <translation>Opie Suche</translation>
     </message>
     <message>
-        <source>adressbook</source>
-        <translation type="obsolete">Adressbuch</translation>
-    </message>
-    <message>
-        <source>todo</source>
-        <translation type="obsolete">Aufgaben</translation>
-    </message>
-    <message>
-        <source>datebook</source>
-        <translation type="obsolete">Terminplaner</translation>
-    </message>
-    <message>
-        <source>applications</source>
-        <translation type="obsolete">Programme</translation>
-    </message>
-    <message>
-        <source>documents</source>
-        <translation type="obsolete">Dokumente</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Suchen</translation>
     </message>
     <message>
         <source>Search all</source>
         <translation>Überall suchen</translation>
-    </message>
-    <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Groß-/Kleinschreibung beachten</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -117,18 +93,6 @@
         <translation>Öffnen mit</translation>
     </message>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">Zeige auch erledigte Aufgaben</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">Zeige auch vergangene Termine</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">Suche in Zeitfeldern</translation>
-    </message>
-    <message>
         <source>File: </source>
         <translation>Datei:</translation>
     </message>
@@ -139,10 +103,6 @@
     <message>
         <source>Mimetype: </source>
         <translation>Dateityp:</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">Suchinhalt</translation>
     </message>
     <message>
         <source>searching %1</source>

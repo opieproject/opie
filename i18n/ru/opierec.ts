@@ -81,24 +81,6 @@ or a card isn&apos;t being recognized</source>
 карта не распознана</translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">секунд</translation>
-    </message>
-    <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">Вы действительно хотите &lt;font size=+2&gt;&lt;B&gt;УДАЛИТЬ&lt;/B&gt;&lt;/font&gt;
-выбранный файл?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Да</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Нет</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Ошибка</translation>
     </message>
@@ -109,10 +91,6 @@ the selected file?</source>
     <message>
         <source>Opierec</source>
         <translation>Opierec</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">Пожалуйста выберите файл для проигрывания</translation>
     </message>
     <message>
         <source>Note</source>
@@ -149,18 +127,6 @@ the selected file?</source>
         <translation>Да</translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="obsolete">Запись</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Место</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Дата</translation>
-    </message>
-    <message>
         <source>Wave Compression (smaller files)</source>
         <translation>Сжатие (меньше размер файлов)</translation>
     </message>
@@ -169,16 +135,8 @@ the selected file?</source>
         <translation>заглушить</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="obsolete">Стоп</translation>
-    </message>
-    <message>
         <source>Auto Mute</source>
         <translation>Авто-заглушка</translation>
-    </message>
-    <message>
-        <source>Stereo Channels</source>
-        <translation type="obsolete">Стерео каналы</translation>
     </message>
     <message>
         <source>Del</source>

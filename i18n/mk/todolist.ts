@@ -6,10 +6,6 @@
         <translation>Ок</translation>
     </message>
     <message>
-        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="obsolete">&lt;h1&gt;Аларм на %0 &lt;h1&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished">&lt;h1&gt;Аларм на %1 &lt;h1&gt;&lt;br&gt;</translation>
     </message>
@@ -93,60 +89,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Нова од поставка</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Нова задала</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Кликни овде за да се зададе нова задача.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Уреди Задача</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Кликни овде за да се измени задачата.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Види Задача</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Избриши...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Кликни овде за да ја отстраниш моменталната задача.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Избриш се...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Избриши завршени</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Дуплирај</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Пренеси</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Кликни овде за да ја пренесеш оваа задача на нов уред.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Најди</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -163,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Покажи палета</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Податоци</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Категорија</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Опции</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -197,14 +129,6 @@ The list displays the following information:
 4. Краен рок - крајниот рок на задачата.</translation>
     </message>
     <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Сите категории</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Незапишано</translation>
-    </message>
-    <message>
         <source>Out of space</source>
         <translation>Нема простор</translation>
     </message>
@@ -225,10 +149,6 @@ Quit Anyway?</source>
     <message>
         <source>Todo</source>
         <translation>Роковник</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Неможе да се уредуваат податоци, во моментот се врши синхронизација,</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -255,16 +175,8 @@ Quit Anyway?</source>
         <translation>Приоритет</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Опис</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Краен рок</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Подеси поставки</translation>
     </message>
     <message>
         <source>Template Editor</source>
@@ -500,10 +412,6 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
         <translation>Кликни овде ако задачата се повтрува. </translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">ЗабелеШки:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

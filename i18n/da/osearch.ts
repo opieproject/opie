@@ -14,10 +14,6 @@
         <translation>Søg i alle</translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Versalfølsom</translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation>Brug jokertegn</translation>
     </message>
@@ -100,18 +96,6 @@
         <translation>åbn med</translation>
     </message>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">vis udførte opgaver</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">vis hændelser i fortiden</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">søg i datoer</translation>
-    </message>
-    <message>
         <source>File: </source>
         <translation>Fil:</translation>
     </message>
@@ -122,10 +106,6 @@
     <message>
         <source>Mimetype: </source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">søg indhold</translation>
     </message>
     <message>
         <source>searching %1</source>

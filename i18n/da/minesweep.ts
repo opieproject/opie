@@ -10,10 +10,6 @@
         <translation>Du eksploderede!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Minestryger</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Begynder</translation>
     </message>

@@ -151,22 +151,6 @@
         <translation>Total: %1 kB</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Esta página mostra quanta memória (i.e. RAM) está alocada no seu dispositivo.
-A memória está categorizada da seguinte forma:
-
-1. Usada - memória usada pelo Opie e pelas aplicações a correr.
-2. Buffers - memória temporária usada para melhorar a performance.
-3. Cached - memória temporária para manter a ultima informação usada 
-4. Free - memória não usada.</translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -222,10 +206,6 @@ Clique e espere num módulo para ver informação adicional, ou para o remover d
     <message>
         <source>Used by</source>
         <translation>Usado por</translation>
-    </message>
-    <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">Deseja mesmo executar %1 para este módulo?</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -289,10 +269,6 @@ Clique e espere num processo para ver informação adicional, ou para lhe enviar
     <message>
         <source>This area shows detailed information about this process.</source>
         <translation>Esta àrea mostra a informação detalhada deste processo.</translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">Deseja mesmo enviar %1 para este processo?</translation>
     </message>
     <message>
         <source>Really want to send %1
@@ -360,14 +336,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Versão:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Modelo:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Marca:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

@@ -333,6 +333,58 @@
         <source>Date</source>
         <translation>Fecha</translation>
     </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished">Servidor</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set on/offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh folder list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Un-)Subscribe groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh headerlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New subfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move/Copie all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read current mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
@@ -361,7 +413,7 @@
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obtener lista de grupos desde el servidor</translation>
     </message>
     <message>
         <source>Retrieve the list of groups from server</source>
@@ -452,7 +504,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar Correo</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
@@ -472,11 +524,11 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al crear un nuevo Directorio</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;center&gt;Error al crear&lt;br&gt;un nuevo directorio - saliendo.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Define a smtp account first</source>
@@ -499,23 +551,23 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cuenta</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nombre de la Cuenta</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Servidor</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Puerto</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usar SSL:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec imapd</source>
@@ -523,11 +575,11 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usuario</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contraseña</translation>
     </message>
     <message>
         <source>ask before downloading large mails</source>
@@ -550,7 +602,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cuenta</translation>
     </message>
     <message>
         <source>Use Login</source>
@@ -558,7 +610,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nombre de la Cuenta</translation>
     </message>
     <message>
         <source>Name of the SMTP Server</source>
@@ -566,15 +618,15 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Contraseña</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Puerto</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Servidor</translation>
     </message>
     <message>
         <source>Port of the SMTP Server</source>
@@ -582,15 +634,15 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usuario</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Usar SSL:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ssh $SERVER exec</translation>
     </message>
 </context>
 <context>
@@ -662,15 +714,12 @@ with that filter will be listed.</source>
         <source>Play Sound when new mails arrive</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>StatusWidgetUI</name>
     <message>
-        <source>Form1</source>
+        <source>Click opens mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
+        <source>Click activate server/folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -686,11 +735,11 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">De</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Para</translation>
     </message>
     <message>
         <source>Cc</source>
@@ -698,11 +747,11 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fecha</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
@@ -710,7 +759,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ok</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
@@ -718,7 +767,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar Correo</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
@@ -732,12 +781,20 @@ with that filter will be listed.</source>
         <source>E-Mail by %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reading attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not read content of attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Correo</translation>
     </message>
     <message>
         <source>Reply</source>
@@ -757,7 +814,7 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Borrar Correo</translation>
     </message>
     <message>
         <source>Description</source>
@@ -769,10 +826,14 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tamaño</translation>
     </message>
     <message>
         <source>E-Mail view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show image preview inline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

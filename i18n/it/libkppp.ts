@@ -3,26 +3,14 @@
 <context>
     <name>AccountWidget</name>
     <message>
-        <source>&amp;Edit...</source>
-        <translation type="obsolete">&amp;Modifica...</translation>
-    </message>
-    <message>
         <source>Allows you to modify the selected account</source>
         <translation>Permette di modificare l&apos;account selezionato</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation type="obsolete">&amp;Nuovo...</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
         <translation>Crea una nuova connessione dialup
 verso Internet</translation>
-    </message>
-    <message>
-        <source>Co&amp;py</source>
-        <translation type="obsolete">Co&amp;pia</translation>
     </message>
     <message>
         <source>Makes a copy of the selected account. All
@@ -34,20 +22,12 @@ impostazioni dell&apos;account selezionato saranno copiate
 nel nuovo account, che potrai modificare liberamente</translation>
     </message>
     <message>
-        <source>De&amp;lete</source>
-        <translation type="obsolete">Cance&amp;lla</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
         <translation>&lt;p&gt;Cancella l&apos;account selezionato
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Usa con cautela!&lt;/b&gt;&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>Maximum number of accounts reached.</source>
-        <translation type="obsolete">Raggiunto numero massimo di account.</translation>
     </message>
     <message>
         <source>No account selected.</source>
@@ -118,22 +98,6 @@ l&apos;account &quot;%1&quot;?</translation>
     <message>
         <source>You must enter a unique account name</source>
         <translation>Devi inserire un nome account univoco</translation>
-    </message>
-    <message>
-        <source>Byte</source>
-        <translation type="obsolete">Byte</translation>
-    </message>
-    <message>
-        <source>KB</source>
-        <translation type="obsolete">KB</translation>
-    </message>
-    <message>
-        <source>MB</source>
-        <translation type="obsolete">MB</translation>
-    </message>
-    <message>
-        <source>GB</source>
-        <translation type="obsolete">GB</translation>
     </message>
 </context>
 <context>
@@ -362,33 +326,6 @@ questa opzione, ma può tornare utile in certe circostanze.</translation>
 <context>
     <name>DevicesWidget</name>
     <message>
-        <source>Allows you to modify the selected account</source>
-        <translation type="obsolete">Permette di modificare l&apos;account selezionato</translation>
-    </message>
-    <message>
-        <source>Create a new dialup connection
-to the Internet</source>
-        <translation type="obsolete">Crea una nuova connessione dialup
-verso Internet</translation>
-    </message>
-    <message>
-        <source>Makes a copy of the selected account. All
-settings of the selected account are copied
-to a new account, that you can modify to fit your
-needs</source>
-        <translation type="obsolete">Crea una copia dell&apos;account selezionato. Tutte le
-impostazioni dell&apos;account selezionato saranno copiate
-nel nuovo account, che potrai modificare liberamente</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Deletes the selected account
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Cancella l&apos;account selezionato
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Usa con cautela!&lt;/b&gt;&lt;/font&gt;</translation>
-    </message>
-    <message>
         <source>No devices selected.</source>
         <translation>Nessun dispositivo selezionato.</translation>
     </message>
@@ -417,10 +354,6 @@ dispositivo &quot;%1&quot;?</translation>
     <message>
         <source>&amp;Modem</source>
         <translation>&amp;Modem</translation>
-    </message>
-    <message>
-        <source>You must enter a unique account name</source>
-        <translation type="obsolete">Devi inserire un nome account univoco</translation>
     </message>
     <message>
         <source>Allows you to modify the selected device</source>
@@ -1011,14 +944,6 @@ essere utile per configurare il modem</translation>
         <translation>&amp;Account</translation>
     </message>
     <message>
-        <source>&amp;Device</source>
-        <translation type="obsolete">&amp;Dispositivo</translation>
-    </message>
-    <message>
-        <source>&amp;Modem</source>
-        <translation type="obsolete">&amp;Modem</translation>
-    </message>
-    <message>
         <source>&amp;Devices</source>
         <translation>&amp;Dispositivi</translation>
     </message>
@@ -1492,13 +1417,6 @@ Chiedi all&apos;amministratore di sistema di creare il file (può essere vuoto) 
     <message>
         <source>You must specify a telephone number!</source>
         <translation>Devi inserire un numero telefonico!</translation>
-    </message>
-</context>
-<context>
-    <name>QObject::ModemWidget</name>
-    <message>
-        <source>Modem timeout:</source>
-        <translation type="obsolete">Timeout Modem:</translation>
     </message>
 </context>
 <context>

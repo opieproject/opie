@@ -7,10 +7,6 @@ accurately to calibrate your screen.</source>
         <translation>Pulse las cruces firmemente y con
 precisión para calibrar la pantalla.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Bienvenido a Opie</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -50,10 +46,6 @@ precisión para calibrar la pantalla.</translation>
         <translation>Salir</translation>
     </message>
     <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;%1 %2&lt;/center&gt;</translation>
-    </message>
-    <message>
         <source>Wrong password</source>
         <translation>Contraseña incorrecta</translation>
     </message>
@@ -62,22 +54,8 @@ precisión para calibrar la pantalla.</translation>
         <translation>La contraseña es incorrecta.</translation>
     </message>
     <message>
-        <source>OPIE was terminated
-by an uncaught signal
-(%1)
-</source>
-        <translation type="obsolete">Opie ha terminado por
-una señal no capturada
-(%1)
-</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Fallo</translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="obsolete">No pude iniciar Opie.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>

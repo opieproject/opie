@@ -10,26 +10,6 @@
         <translation>Детали за моменталниот резултат</translation>
     </message>
     <message>
-        <source>applications</source>
-        <translation type="obsolete">апликации</translation>
-    </message>
-    <message>
-        <source>documents</source>
-        <translation type="obsolete">документи</translation>
-    </message>
-    <message>
-        <source>todo</source>
-        <translation type="obsolete">задолжениа</translation>
-    </message>
-    <message>
-        <source>datebook</source>
-        <translation type="obsolete">роковник</translation>
-    </message>
-    <message>
-        <source>adressbook</source>
-        <translation type="obsolete">адресар</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Пребарувај</translation>
     </message>
@@ -44,10 +24,6 @@
     <message>
         <source>Options</source>
         <translation>Опции</translation>
-    </message>
-    <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Внимавај на големи и мали букви</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -100,18 +76,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">прикажи завршени задачи</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">прикажи изминати настани</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">барај во датуми</translation>
-    </message>
-    <message>
         <source>show</source>
         <translation>прикажи</translation>
     </message>
@@ -142,10 +106,6 @@
     <message>
         <source>open with </source>
         <translation>отвори со</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">пребарај содржина</translation>
     </message>
     <message>
         <source>searching %1</source>

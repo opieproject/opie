@@ -10,10 +10,6 @@
         <translation>Eksplodirali ste!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Minolovec</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Začetnik</translation>
     </message>

@@ -194,10 +194,6 @@ editing categories.</source>
         <translation>Стригот не е пронајден.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Стигнав до крајк, повторно почнувам од почеток</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -424,26 +420,6 @@ editing categories.</source>
         <translation>Нов Документ</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Кликни за да го затвориш овој прозорец, занемарувајќи ги промените.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Кликни за да го затвориш овој прозорец.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Кликни за да го затвориш овој прозорец, памтејќи ги промените.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Кликни за да можеш да го поместуваш прозорецов.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Кликни за проорецот да ја покрие целата површина на екранот.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Ot&gt;Нема детална  помош за оваа апликација&lt;p&gt;</translation>
     </message>
@@ -482,14 +458,6 @@ before entering data</source>
 Free some memory and try again.</source>
         <translation>Неможе да се намести алармот.
 Ослободете меморија и обидете се повторно.</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">Д</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">М</translation>
     </message>
     <message>
         <source>Y</source>
@@ -542,12 +510,6 @@ Free some memory and try again.</source>
     <message>
         <source>Sun</source>
         <translation>Нед</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Дали сакате да го избришете 
-%1?</translation>
     </message>
     <message>
         <source>All</source>
@@ -869,10 +831,6 @@ Free some memory and try again.</source>
     <message>
         <source>Dec</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Грешка</translation>
     </message>
     <message>
         <source>D</source>

@@ -141,7 +141,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Kļūda</translation>
     </message>
     <message>
         <source>Inconsistency error!</source>
@@ -389,7 +389,7 @@
     </message>
     <message>
         <source>&amp;Sort</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Šķirot</translation>
     </message>
     <message>
         <source>Find &amp;&amp; Replace</source>
@@ -397,7 +397,7 @@
     </message>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Meklēt &amp;&amp; Aizvietot</translation>
     </message>
     <message>
         <source>Equal To</source>
@@ -935,7 +935,7 @@ http://qtopia.sitebest.com</source>
     </message>
     <message>
         <source>&amp;Type</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&amp;Tips</translation>
     </message>
     <message>
         <source>Shift cells &amp;down</source>

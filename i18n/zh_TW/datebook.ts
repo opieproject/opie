@@ -340,6 +340,14 @@ Quit anyway?</translation>
         <source>Category:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -542,10 +550,6 @@ Quit anyway?</translation>
     <message>
         <source>Note...</source>
         <translation>備忘錄...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">開始時間</translation>
     </message>
 </context>
 <context>

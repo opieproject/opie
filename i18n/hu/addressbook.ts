@@ -28,52 +28,12 @@
         <translation>Kapcsolatok</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Kapcsolat</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Új</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Szerkeszt</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Töröl</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Keres</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Levelet küld</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Bejegyzést átsugároz</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Személyes adataim</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Nézet</translation>
-    </message>
-    <message>
         <source>Can not edit data, currently syncing</source>
         <translation>Az adat nem szerkeszthető, szinkronizálás folyamatban</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
         <translation>Személyes adataim szerkesztése</translation>
-    </message>
-    <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Cím szerkesztése</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -100,44 +60,8 @@ Mégis kilép?</translation>
         <translation>Mind</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Iktatatlan</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">vCard importálása</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Keresés bezárása</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Minden adat mentése</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Beállítás</translation>
-    </message>
-    <message>
         <source>Not Found</source>
         <translation>Nem található</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Lista</translation>
-    </message>
-    <message>
-        <source>Cards</source>
-        <translation type="obsolete">Névjegyek</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Névjegy</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Keresés indítása</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -176,10 +100,6 @@ Tényleg meg akarja nyitni?</translation>
     <message>
         <source>&amp;All Yes</source>
         <translation>&amp;Mind igen</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">vCard exportálása</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>

@@ -388,18 +388,6 @@ Klikněte nalevo do okna pro výběr balíčku.</translation>
         <translation>Klikněte sem pro odinstalování označených balíčků.</translation>
     </message>
     <message>
-        <source>Building server list:
-%1</source>
-        <translation type="obsolete">Vytvářím serverový seznam:
-%1</translation>
-    </message>
-    <message>
-        <source>Building package list for:
-%1</source>
-        <translation type="obsolete">Vytvářím seznam balíčků pro:
-%1</translation>
-    </message>
-    <message>
         <source>Refreshing server package lists</source>
         <translation>Obnovuji seznamy serverových balíčků</translation>
     </message>

@@ -195,10 +195,6 @@ modificando le categorie.</translation>
         <translation>Stringa Non Trovata.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Raggiunta la fine, inizio da capo</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -453,14 +449,6 @@ Liberare dello spazio di memoria e
 riprovare.</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">G</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>A</translation>
     </message>
@@ -483,12 +471,6 @@ riprovare.</translation>
     <message>
         <source>AM</source>
         <translation>AM</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Sei sicuro di voler cancellare
-%1?</translation>
     </message>
     <message>
         <source>All</source>
@@ -791,26 +773,6 @@ riprovare.</translation>
         <translation>Dom</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Premi per chiudere questa finestra, abbandonando le modifiche effettuate.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Premi per chiudere questa finestra.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Premi per chiudere questa finestra e salvare le modifiche effettuate.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Premi per spostare la finestra.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Premi per ingrandire al massimo questa finestra.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Qt&gt;La guida completa non è disponibile per questa applicazione, è comunque presente la guida base.&lt;p&gt;Per usare la guida:&lt;p&gt;&lt;ol&gt;&lt;li&gt;tieni premuto il tasto di aiuto.&lt;li&gt;quando apparirà &lt;b&gt;Cos&apos;è...&lt;/b&gt;, premi un qualunque tasto.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -871,10 +833,6 @@ riprovare.</translation>
     <message>
         <source>Dec</source>
         <translation>Dic</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Errore</translation>
     </message>
     <message>
         <source>D</source>

@@ -14,20 +14,6 @@
         <translation>Poznámka</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Takový adresář neexistuje</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Na Advanced FileManager
-má práva 2002-2003
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and je licencován pod GPL</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Zobrazovat skryté soubory</translation>
     </message>
@@ -108,14 +94,6 @@ and je licencován pod GPL</translation>
         <translation>AdvancedFm</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Nelze odstranit aktuální adresář 
-ze záložek. 
-Není v záložkách!</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Soubor</translation>
     </message>
@@ -168,12 +146,6 @@ Není v záložkách!</translation>
         <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Opravdu smazat
-%1 soubory?</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ano</translation>
     </message>
@@ -186,50 +158,8 @@ Není v záložkách!</translation>
         <translation>Smazat adresář?</translation>
     </message>
     <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Opravdu smazat %1
-a celý jeho obsah ?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Opravdu smazat 
-%1?</translation>
-    </message>
-    <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Opravdu zkopírovat
-%1 soubory?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Soubor existuje!</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 existuje. Ok pro přepsání?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Nelze zkopírovat %1 do %2</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-existuje. Ok pro přepsání?</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Nelze zkopírovat</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">do</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -238,27 +168,6 @@ existuje. Ok pro přepsání?</translation>
     <message>
         <source> As</source>
         <translation> Jako</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete"> už existuje.
-Opravdu ho chcete smazat?</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Nelze přesunout</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Nelze zkopírovat 
-%1 
-do 
-%2</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>

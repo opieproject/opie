@@ -23,16 +23,6 @@
         <translation>Option principales</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">ATTENTION:
-Changer des paramètres sur cette
-page peut rendre votre système
-instable!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>Modifier /etc/fstab</translation>
     </message>
@@ -53,26 +43,10 @@ instable!!</translation>
         <translation>Options avancées</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">Format?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>Vraiment formater
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-avec</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">système de fichier?!?
-Vous allez perdre toutes vos données!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -129,18 +103,8 @@ has been successfully formatted.</source>
 a été formaté correctement.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Tentative de montage.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>Echec du montage de la carte !</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-a réussi a être monté. </translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -149,10 +113,6 @@ a réussi a être monté. </translation>
     <message>
         <source>Internal</source>
         <translation>Interne</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Type de Support : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

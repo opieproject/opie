@@ -19,10 +19,6 @@
         <translation>Lade...</translation>
     </message>
     <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Verbleibende Energie in Prozent: </translation>
-    </message>
-    <message>
         <source>Battery status: </source>
         <translation>Batteriestatus: </translation>
     </message>
@@ -59,36 +55,12 @@
         <translation>Vom Netz getrennt</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Verbleibende Batteriezeit</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Verbleibende Energie in Prozent:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Verbleibende Batteriezeit:</translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Keine Zusatzbatterie angeschlossen</translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Schließen</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Batteriestatus</translation>
-    </message>
-    <message>
         <source>no data</source>
         <translation>keine Daten</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">iPAQ</translation>
     </message>
     <message>
         <source>Jacket  </source>

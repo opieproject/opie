@@ -151,22 +151,6 @@
         <translation>Memoria total: %1 kB</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Está página muestra cuanta memoria (p.e. RAM) está siendo asignada.
-La memoria se cataloga como sigue:
-
-1. Usada - memoria usada por Opie y cualquier aplicación en ejecución.
-2. Buffers - almacenamiento temporal usada para mejorar el rendimiento.
-3. Cached - información usada recientemente, pero aún no liberada.
-4. Libre - memoria actualmente no usada por ninguna aplicación.</translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -202,10 +186,6 @@ La memoria se cataloga como sigue:
         <translation>Uso#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Usado por</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -226,22 +206,12 @@ Mantenga pulsado un módulo para ver información adicional sobre el módulo, o 
         <translation>Pulse aquí para enviar el comando selecciondo al módulo seleccionado arriba.</translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Seguro que quiere ejecutar
-</translation>
-    </message>
-    <message>
         <source>This area shows detailed information about this module.</source>
         <translation>Esta área muestra información detallada sobre este módulo.</translation>
     </message>
     <message>
         <source>Used by</source>
         <translation>Usado por</translation>
-    </message>
-    <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">¿Seguro que quiere ejecutar %1 para este módulo?</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -306,16 +276,6 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
     <message>
         <source>This area shows detailed information about this process.</source>
         <translation>Esta área muestra información detallada sobre este proceso.</translation>
-    </message>
-    <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Seguro que quiere enviar
-</translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">¿Seguro que quiere enviar %1 a este proceso?</translation>
     </message>
     <message>
         <source>Really want to send %1
@@ -384,14 +344,6 @@ a este proceso?</translation>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Versión: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Modelo: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Proveedor: </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

@@ -10,24 +10,12 @@
         <translation>Altera o número máximo de linhas a mostrar para cada aniversário ou nascimento</translation>
     </message>
     <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Cortar a linha ao fim de X caracteres:</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Cortar a linha ao fim de quantos caractéres</translation>
-    </message>
-    <message>
         <source>Days look ahead: </source>
         <translation>Dias no futuro:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
         <translation>Quantos dias no futuro deverão ser procurados</translation>
-    </message>
-    <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Para activar as alterações reinicie a aplicação!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

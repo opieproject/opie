@@ -199,10 +199,6 @@ de cette liste</translation>
         <translation>La chaîne n&apos;a pas été trouvée.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Fin atteinte, reprise au début</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation>Fin atteinte, redémarrage au %1</translation>
@@ -459,14 +455,6 @@ Free some memory and try again.</source>
 Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">J</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>A</translation>
     </message>
@@ -489,12 +477,6 @@ Libérez de la mémoire et réessayez.</translation>
     <message>
         <source>AM</source>
         <translation>AM</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Etes-vous sûr de vouloir effacer
-%1?</translation>
     </message>
     <message>
         <source>All</source>
@@ -845,26 +827,6 @@ Libérez de la mémoire et réessayez.</translation>
         <translation>Déc</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Cliquez pour fermer cette fenêtre et abandonner les modifications.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Cliquez pour fermer cette fenêtre.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Cliquez pour fermer cette fenêtre et appliquer les modifications.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Cliquez pour rendre cette fenêtre déplaçable.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Cliquez pour que cette fenêtre remplisse l&apos;écran.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Qt&gt;L&apos;aide globale n&apos;est pas disponible pour cette application, cependant, il existe une aide contectuelle.&lt;p&gt;Pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez et maintenez la pression sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel élément.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -877,22 +839,6 @@ Libérez de la mémoire et réessayez.</translation>
  %1?&lt;/qt&gt;</source>
         <translation>&lt;qt&gt;Voulez-vous vraiment supprimer
 %1 ?&lt;/qt&gt;</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Erreur</translation>
-    </message>
-    <message>
-        <source>Could not find the application </source>
-        <translation type="obsolete">L&apos;application n&apos;a pas été trouvée</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="obsolete">Ok</translation>
-    </message>
-    <message>
-        <source>Could not start the application </source>
-        <translation type="obsolete">L&apos;application n&apos;a pas été lancée</translation>
     </message>
     <message>
         <source>D</source>
@@ -917,17 +863,6 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
 </context>
 <context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="obsolete">&lt;Qt&gt;L&apos;aide globale n&apos;est pas disponible pour cette application, cependant, il existe une aide contectuelle.&lt;p&gt;Pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez et maintenez la pression sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel élément.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation type="obsolete">Qu&apos;est ce que...</translation>
-    </message>
-</context>
-<context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
@@ -940,10 +875,6 @@ Libérez de la mémoire et réessayez.</translation>
     <message>
         <source>Click to close this window and apply changes.</source>
         <translation>Cliquez pour fermer cette fenêtre et appliquer les changements.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Clqiuez pour rendre cette fenêtre déplaçable.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>

@@ -95,16 +95,6 @@ ses 10 années d&apos;amitié.</translation>
         <translation>&amp;Aide</translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation type="obsolete">Erreur de configuration</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation type="obsolete">Aucun thème n&apos;est défini,
-ou aucun thème n&apos;est sélectionné.</translation>
-    </message>
-    <message>
         <source>KPacman</source>
         <translation>KPacman</translation>
     </message>

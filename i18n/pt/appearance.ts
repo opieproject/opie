@@ -22,18 +22,6 @@
         <translation>Gravar</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Forçar o estilo nas aplicações todas.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Desactivar estilo para as seguintes aplicações (pode usar &lt;b&gt;*&lt;/b&gt; para escolher várias):</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">Ficheiro(s) Binário(s)</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Estilo da Pasta:</translation>
     </message>
@@ -82,22 +70,6 @@
         <translation>Avançadas</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Reiniciar</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="obsolete">Deseja reiniciar %1 agora?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Gravar Esquema</translation>
     </message>
@@ -116,10 +88,6 @@
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>O esquema actual não pode ser apagado.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;novo&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -168,34 +136,6 @@ Clique aqui para escolher um esquema.</translation>
     <message>
         <source>Click here to name and save the current color scheme.</source>
         <translation>Clique aqui para dar um nome e gravar o esquema de cores actual.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Clique aqui para permitir que todas as aplicações usem as configurações globais de aparência.</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Se for necessário, é possível desactivar determinados detalhes por cada aplicação, por exemplo se uma aplicação não ficar bem com os parametros globais.
-
-Nesta área poderá selecionar a aplicação e a configuração que deseja desactivar.</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Clique aqui para adicionar um aplicação à lista acima.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Clique aqui para apagar uma aplicação selecionada.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Clique aqui para mover a aplicação selecionada para cima.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Clique aqui para mover a aplicação selecionada para baixo.</translation>
     </message>
     <message>
         <source>Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:

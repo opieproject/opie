@@ -37,30 +37,6 @@
         <translation>Sample ratio</translation>
     </message>
     <message>
-        <source>44100</source>
-        <translation type="obsolete">44100</translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation type="obsolete">32000</translation>
-    </message>
-    <message>
-        <source>22050</source>
-        <translation type="obsolete">22050</translation>
-    </message>
-    <message>
-        <source>16000</source>
-        <translation type="obsolete">16000</translation>
-    </message>
-    <message>
-        <source>11025</source>
-        <translation type="obsolete">11025</translation>
-    </message>
-    <message>
-        <source>8000</source>
-        <translation type="obsolete">8000</translation>
-    </message>
-    <message>
         <source>Limit Size</source>
         <translation>Limiteer grootte</translation>
     </message>
@@ -75,14 +51,6 @@
     <message>
         <source>Bit Depth</source>
         <translation>Aantal bits</translation>
-    </message>
-    <message>
-        <source>16</source>
-        <translation type="obsolete">16</translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation type="obsolete">8</translation>
     </message>
     <message>
         <source>In</source>
@@ -113,24 +81,6 @@ opslagruimte of een
 kaart wordt niet herkend</translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">seconden</translation>
-    </message>
-    <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">Wil je het geselecteerde bestand
-echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nee</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Fout</translation>
     </message>
@@ -141,10 +91,6 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
     <message>
         <source>Opierec</source>
         <translation>Opieopname</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">Kies een bestand om af te spelen</translation>
     </message>
     <message>
         <source>Note</source>
@@ -180,40 +126,16 @@ echt &lt;font size=+2&gt;&lt;B&gt;VERWIJDEREN&lt;/B&gt;&lt;/font&gt;?</translati
         <translation>OK</translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="obsolete">Opname</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Plaats</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Datum</translation>
-    </message>
-    <message>
         <source>Wave Compression (smaller files)</source>
         <translation>Golfvormcompressie (kleinere bestanden)</translation>
-    </message>
-    <message>
-        <source>auto Mute</source>
-        <translation type="obsolete">auto Stil</translation>
     </message>
     <message>
         <source>mute</source>
         <translation>Stil</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="obsolete">Stop</translation>
-    </message>
-    <message>
         <source>Auto Mute</source>
         <translation>Auto Stil</translation>
-    </message>
-    <message>
-        <source>Stereo Channels</source>
-        <translation type="obsolete">Stereokanalen</translation>
     </message>
     <message>
         <source>Del</source>

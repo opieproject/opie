@@ -61,10 +61,6 @@
         <translation>Mélanger</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Résoudre</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Jeu</translation>
     </message>

@@ -46,10 +46,6 @@
         <translation>Parametri</translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Reģistrjūtīgs</translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation>Lietot noklusējumus</translation>
     </message>
@@ -79,18 +75,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">rādīt pabeigtos uzdevumus</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">rādīt pagājušos notikumus</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">meklēt datumos</translation>
-    </message>
     <message>
         <source>show</source>
         <translation>rādīt</translation>
@@ -122,10 +106,6 @@
     <message>
         <source>open with </source>
         <translation>atvērt ar</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">meklēšanas konteksts</translation>
     </message>
     <message>
         <source>searching %1</source>

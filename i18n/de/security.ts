@@ -72,36 +72,8 @@ Login einzustellen.</translation>
         <translation>Achtung</translation>
     </message>
     <message>
-        <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation type="obsolete">&lt;p&gt;Alle manuell erstellten Werte gehen verloren.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>192.168.129.0/24</source>
-        <translation type="obsolete">192.168.129.0/24</translation>
-    </message>
-    <message>
-        <source>192.168.1.0/24</source>
-        <translation type="obsolete">192.168.1.0/24</translation>
-    </message>
-    <message>
-        <source>192.168.0.0/16</source>
-        <translation type="obsolete">192.168.0.0/16</translation>
-    </message>
-    <message>
-        <source>172.16.0.0/12</source>
-        <translation type="obsolete">172.16.0.0/12</translation>
-    </message>
-    <message>
-        <source>10.0.0.0/8</source>
-        <translation type="obsolete">10.0.0.0/8</translation>
-    </message>
-    <message>
-        <source>1.0.0.0/8</source>
-        <translation type="obsolete">1.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
@@ -114,10 +86,6 @@ Login einzustellen.</translation>
     <message>
         <source>Important notice</source>
         <translation>Wichtiger Hinweis</translation>
-    </message>
-    <message>
-        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation type="obsolete">Es muss mindestens ein &lt;em&gt;opie-mutliauth-*&lt;/em Paket installiert sein um den PDA schützen zu können.</translation>
     </message>
     <message>
         <source>Locking</source>
@@ -159,24 +127,12 @@ Login einzustellen.</translation>
         <translation>Nötige Erfolge</translation>
     </message>
     <message>
-        <source>Debug options</source>
-        <translation type="obsolete">Debug Optionen</translation>
-    </message>
-    <message>
         <source>Don&apos;t protect this config screen</source>
         <translation>Diesen Dialog nicht schützen</translation>
     </message>
     <message>
         <source>Show explanatory screens</source>
         <translation>Beschreibungen anzeigen</translation>
-    </message>
-    <message>
-        <source>Allow to bypass authentication</source>
-        <translation type="obsolete">Umgehen der Anmeldung erlauben</translation>
-    </message>
-    <message>
-        <source>Note: the third option implies the second one</source>
-        <translation type="obsolete">Hinweis: Die dritte Option erfordert die zweite Option</translation>
     </message>
     <message>
         <source>Options</source>
@@ -209,148 +165,6 @@ Login einzustellen.</translation>
     <message>
         <source>OK</source>
         <translation></translation>
-    </message>
-</context>
-<context>
-    <name>Security</name>
-    <message>
-        <source>Set passcode</source>
-        <translation type="obsolete">Passwort einstellen</translation>
-    </message>
-    <message>
-        <source>Change passcode</source>
-        <translation type="obsolete">Passwort ändern</translation>
-    </message>
-    <message>
-        <source>Enter passcode</source>
-        <translation type="obsolete">Passwort eingeben</translation>
-    </message>
-    <message>
-        <source>Passcode incorrect</source>
-        <translation type="obsolete">Passwort falsch</translation>
-    </message>
-    <message>
-        <source>The passcode entered is incorrect.
-Access denied</source>
-        <translation type="obsolete">Das eingegebene Passwort ist falsch. Zugriff verwehrt</translation>
-    </message>
-    <message>
-        <source>Any</source>
-        <translation type="obsolete">Alle</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Keine</translation>
-    </message>
-    <message>
-        <source>Enter new passcode</source>
-        <translation type="obsolete">Neues Passwort eingeben</translation>
-    </message>
-    <message>
-        <source>Re-enter new passcode</source>
-        <translation type="obsolete">Passwort erneut eingeben</translation>
-    </message>
-    <message>
-        <source>192.168.129.0/24</source>
-        <translation type="obsolete">192.168.129.0/24</translation>
-    </message>
-    <message>
-        <source>192.168.1.0/24</source>
-        <translation type="obsolete">192.168.1.0/24</translation>
-    </message>
-    <message>
-        <source>192.168.0.0/16</source>
-        <translation type="obsolete">192.168.0.0/16</translation>
-    </message>
-    <message>
-        <source>172.16.0.0/12</source>
-        <translation type="obsolete">172.16.0.0/12</translation>
-    </message>
-    <message>
-        <source>10.0.0.0/8</source>
-        <translation type="obsolete">10.0.0.0/8</translation>
-    </message>
-    <message>
-        <source>1.0.0.0/8</source>
-        <translation type="obsolete">1.0.0.0/8</translation>
-    </message>
-</context>
-<context>
-    <name>SecurityBase</name>
-    <message>
-        <source>Security Settings</source>
-        <translation type="obsolete">Sicherheitseinstellungen</translation>
-    </message>
-    <message>
-        <source>Change passcode</source>
-        <translation type="obsolete">Passwort ändern</translation>
-    </message>
-    <message>
-        <source>Clear passcode</source>
-        <translation type="obsolete">Passwort löschen</translation>
-    </message>
-    <message>
-        <source>Require pass code at power-on</source>
-        <translation type="obsolete">Passwort muss beim Starten 
-eingegeben werden</translation>
-    </message>
-    <message>
-        <source>Sync</source>
-        <translation type="obsolete">Synchroniseren</translation>
-    </message>
-    <message>
-        <source>Accept sync from network:</source>
-        <translation type="obsolete">Synchronisierung gestatten aus dem Netzwerk:</translation>
-    </message>
-    <message>
-        <source>192.168.0.0/16</source>
-        <translation type="obsolete">192.168.0.0/16</translation>
-    </message>
-    <message>
-        <source>172.16.0.0/12</source>
-        <translation type="obsolete">172.16.0.0/12</translation>
-    </message>
-    <message>
-        <source>10.0.0.0/8</source>
-        <translation type="obsolete">10.0.0.0/8</translation>
-    </message>
-    <message>
-        <source>Any</source>
-        <translation type="obsolete">Alle</translation>
-    </message>
-    <message>
-        <source>None</source>
-        <translation type="obsolete">Keine</translation>
-    </message>
-    <message>
-        <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation type="obsolete">&lt;P&gt;Das Passwort bietet einen minimalen Schutz, 
-sollte jemand unerwünscht Zugriff auf dieses 
-Gerät erhalten.</translation>
-    </message>
-    <message>
-        <source>192.168.129.0/24 (default)</source>
-        <translation type="obsolete">192.168.129.0/24 (Standard)</translation>
-    </message>
-    <message>
-        <source>192.168.1.0/24</source>
-        <translation type="obsolete">192.168.1.0/24</translation>
-    </message>
-    <message>
-        <source>1.0.0.0/8</source>
-        <translation type="obsolete">1.0.0.0/8</translation>
-    </message>
-    <message>
-        <source>Passcode</source>
-        <translation type="obsolete">Passwort</translation>
-    </message>
-    <message>
-        <source>Login</source>
-        <translation type="obsolete">Login</translation>
-    </message>
-    <message>
-        <source>Login Automatically</source>
-        <translation type="obsolete">Automatisch einloggen</translation>
     </message>
 </context>
 <context>
@@ -432,10 +246,8 @@ geänderten Daten gehen dabei verloren!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>IntelliSync akzeptiert jedes Passwort aber die Verbindung muss immer bestätigt werden.
-Opie1.0 ist kompatibel it QtopiaDesktop, MultiSync und KitchenSync
-QTopia1.7 verwendet eine eigene Datenübertragung und funktioniert nicht mit älteren Programmen.</translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

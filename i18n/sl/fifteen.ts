@@ -60,10 +60,6 @@
         <translation>Zmešaj</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Reši</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Igra</translation>
     </message>

@@ -337,6 +337,14 @@ Quit anyway?</source>
         <source>Category:</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -409,41 +417,6 @@ Quit anyway?</source>
     <message>
         <source>p</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>
@@ -574,10 +547,6 @@ Quit anyway?</source>
     <message>
         <source>Note...</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>

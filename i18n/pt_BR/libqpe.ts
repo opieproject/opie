@@ -195,10 +195,6 @@ editando as categorias.</translation>
         <translation>Seqüência não encontrada.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Fim atingido, reiniciando a partir do início</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -437,12 +433,6 @@ editando as categorias.</translation>
         <translation>mês</translation>
     </message>
     <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Tem certeza que deseja apagar
- %1 ?</translation>
-    </message>
-    <message>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
@@ -473,14 +463,6 @@ para este programa.
 
 Por favor, libere algum espaço e
 tente novamente.</translation>
-    </message>
-    <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
     </message>
     <message>
         <source>PM</source>
@@ -791,26 +773,6 @@ tente novamente.</translation>
         <translation>Dom</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Clique para fechar esta janela descartando as mudanças.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Clique para fechar esta janela.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Clique para fechar esta janela e salvar as mudanças.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Clique para tornar esta janela móvel.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Marque para que esta janela ocupe toda a área da tela.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Qt&gt;Ajuda completa não está disponível para esta aplicação, porém existe ajuda sensível ao contexto.&lt;p&gt;Para usar a ajuda sensível ao contexto:&lt;p&gt;&lt;ol&gt;&lt;li&gt;clique e segure no botão de ajuda.&lt;li&gt;quando a barra de título mostrar &lt;b&gt;O que é isto...&lt;/b&gt;, clique em qualquer controle.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -871,22 +833,6 @@ tente novamente.</translation>
     <message>
         <source>Dec</source>
         <translation>Dez</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Erro</translation>
-    </message>
-    <message>
-        <source>Could not find the application </source>
-        <translation type="obsolete">Impossível localizar a aplicação</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <source>Could not start the application </source>
-        <translation type="obsolete">Impossível iniciar a aplicação</translation>
     </message>
     <message>
         <source>D</source>

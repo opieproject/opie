@@ -70,10 +70,6 @@
         <translation>Nem lehetett átnevezni</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Ez a könyvtár nem létezik</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>Másolás, mint</translation>
     </message>
@@ -138,22 +134,6 @@
         <translation>Másolás ugyanebbe a könyvtárba</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Nem lehetett másolni
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">cél</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Nem lehetett áthelyezni</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Dokumentumokhoz adás</translation>
     </message>
@@ -166,54 +146,12 @@
         <translation>Mind kijelölése</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Valóban töröl
-%1 fájlt?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Törli a könyvtárat?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Valóban másol
-%1 fájlt?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>A fájl létezik!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-létezik. Felülírható?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">már létezik. Valóban törölni akarja?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 létezik. Felülírja?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">%1 nem másolható a %2 helyre</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">A Fejlett Fájlmenedzser
-szerzői joggal védett 2002-2003
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-a programot a GPL licensz védi
-fordítás: Bácsi László &lt;lackac@math.bme.hu&gt;</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -228,28 +166,8 @@ fordítás: Bácsi László &lt;lackac@math.bme.hu&gt;</translation>
         <translation>Hiba</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Az aktuális könyvtárt nem lehet törölni
-a könyvjelzők közül.
-Nincs ilyen könyvjelző!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Fájl keresés</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Valóban törli %1-t
-minden tartalmával együtt?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Valóban törli
-%1-t?</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -278,16 +196,6 @@ minden tartalmával együtt?</translation>
     <message>
         <source>Not Yet Implemented</source>
         <translation>Még nincs implementálva</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">%1
-nem másolható a
-%2
-helyre</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>

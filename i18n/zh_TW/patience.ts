@@ -14,14 +14,6 @@
         <translation>&amp;遊戲</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;改變花色</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;自動定位</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;設定</translation>
     </message>
@@ -38,24 +30,8 @@
         <translation>遊戲</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">改變花色</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">自動定位</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">翻一張牌</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>設定</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">翻三張牌</translation>
     </message>
     <message>
         <source>Chicane</source>

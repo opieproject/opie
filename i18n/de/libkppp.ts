@@ -3,26 +3,14 @@
 <context>
     <name>AccountWidget</name>
     <message>
-        <source>&amp;Edit...</source>
-        <translation type="obsolete">&amp;Editieren...</translation>
-    </message>
-    <message>
         <source>Allows you to modify the selected account</source>
         <translation>Ermöglicht die Modifikation des Zugangs</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation type="obsolete">&amp;Neu...</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
         <translation>Erstellung einer neuen Wählverbindung
 ins Internet</translation>
-    </message>
-    <message>
-        <source>Co&amp;py</source>
-        <translation type="obsolete">Ko&amp;pieren</translation>
     </message>
     <message>
         <source>Makes a copy of the selected account. All
@@ -34,19 +22,11 @@ Einstellungen des selektierten Zugangs werden in einen
 neuen Zugang kopiert, der modifiziert werden kann</translation>
     </message>
     <message>
-        <source>De&amp;lete</source>
-        <translation type="obsolete">L&amp;öschen</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
         <translation>&lt;p&gt;Löscht den gewählten Zugang
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>Maximum number of accounts reached.</source>
-        <translation type="obsolete">Maximale Anzahl Zugänge erreicht.</translation>
     </message>
     <message>
         <source>No account selected.</source>
@@ -117,22 +97,6 @@ zu wollen ?</translation>
     <message>
         <source>You must enter a unique account name</source>
         <translation>Sie müssen einen eindeutigen Zugangsnamen angeben</translation>
-    </message>
-    <message>
-        <source>Byte</source>
-        <translation type="obsolete">Byte</translation>
-    </message>
-    <message>
-        <source>KB</source>
-        <translation type="obsolete">KB</translation>
-    </message>
-    <message>
-        <source>MB</source>
-        <translation type="obsolete">MB</translation>
-    </message>
-    <message>
-        <source>GB</source>
-        <translation type="obsolete">GB</translation>
     </message>
 </context>
 <context>
@@ -367,32 +331,6 @@ sinnvoll sein.</translation>
 <context>
     <name>DevicesWidget</name>
     <message>
-        <source>Allows you to modify the selected account</source>
-        <translation type="obsolete">Ermöglicht die Modifikation des Zugangs</translation>
-    </message>
-    <message>
-        <source>Create a new dialup connection
-to the Internet</source>
-        <translation type="obsolete">Erstellung einer neuen Wählverbindung
-ins Internet</translation>
-    </message>
-    <message>
-        <source>Makes a copy of the selected account. All
-settings of the selected account are copied
-to a new account, that you can modify to fit your
-needs</source>
-        <translation type="obsolete">Erstellt eine Kopie des gewählten Zugangs. Alle
-Einstellungen des selektierten Zugangs werden in einen
-neuen Zugang kopiert, der modifiziert werden kann</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Deletes the selected account
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Löscht den gewählten Zugang
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
-    </message>
-    <message>
         <source>No devices selected.</source>
         <translation>Kein Gerät ausgewählt.</translation>
     </message>
@@ -423,10 +361,6 @@ the device &quot;%1&quot;?</source>
         <translation>&amp;Modem</translation>
     </message>
     <message>
-        <source>You must enter a unique account name</source>
-        <translation type="obsolete">Sie müssen einen eindeutigen Zugangsnamen angeben</translation>
-    </message>
-    <message>
         <source>Allows you to modify the selected device</source>
         <translation>Ermöglicht die Modifikation des Geräts</translation>
     </message>
@@ -454,6 +388,10 @@ neues Gerät kopiert, das modifiziert werden kann</translation>
     <message>
         <source>You must enter a unique device name</source>
         <translation>Sie müssen einen eindeutigen Gerätnamen angeben</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
     </message>
 </context>
 <context>

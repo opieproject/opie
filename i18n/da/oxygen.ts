@@ -61,20 +61,8 @@
         <translation>Atomradius</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Ioniseringsenergi</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Densitet</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Kogepunkt</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Smeltepunkt</translation>
     </message>
     <message>
         <source>%1 pm</source>

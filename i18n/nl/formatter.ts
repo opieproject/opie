@@ -22,17 +22,6 @@
         <translation>Startpunt</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">WAARSCHUWING:
-Het veranderen van opties op
-deze pagina kan ervoor zorgen
-dat uw system niet meer goed
-functioneert!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>Wijzig fstab</translation>
     </message>
@@ -53,26 +42,10 @@ functioneert!!</translation>
         <translation>Geavanceerd</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">Formatteren?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>Echt Formatteren
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-met</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">bestandssysteem?!?
-Alle data zal verloren gaan!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -129,18 +102,8 @@ has been successfully formatted.</source>
 is succcesvol geformatteerd.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Probeer te mounten.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>Kaart mount mislukt!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-is sucsesvol gemount.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -149,10 +112,6 @@ is sucsesvol gemount.</translation>
     <message>
         <source>Internal</source>
         <translation>Intern</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Opslagsoort :</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

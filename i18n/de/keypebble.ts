@@ -28,10 +28,6 @@ Verbindung beendet.</translation>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Warten auf den Server ...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>Warten auf den Desktopnamen...</translation>
     </message>

@@ -10,10 +10,6 @@
         <translation>Wypełnij wizytowkę</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Nie znaleziono żadnych wtyczek</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Brak aktywnych wtyczek</translation>
     </message>

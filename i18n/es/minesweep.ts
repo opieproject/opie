@@ -10,10 +10,6 @@
         <translation>¡Explotaste!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Busca Minas</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Principiante</translation>
     </message>

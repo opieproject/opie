@@ -2,10 +2,6 @@
 <context>
     <name>Calculator</name>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="obsolete">Eksperimentālais Kalkulators</translation>
-    </message>
-    <message>
         <source>M+</source>
         <translation>M+</translation>
     </message>

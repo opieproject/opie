@@ -22,10 +22,6 @@
         <translation>Jautāt</translation>
     </message>
     <message>
-        <source>Disabled</source>
-        <translation type="obsolete">Aizliegts</translation>
-    </message>
-    <message>
         <source>Trigger VPN</source>
         <translation>VPN trigeris</translation>
     </message>
@@ -108,14 +104,6 @@
     <message>
         <source>Bytes</source>
         <translation>Baiti</translation>
-    </message>
-    <message>
-        <source>Transmitting</source>
-        <translation type="obsolete">Pāraide</translation>
-    </message>
-    <message>
-        <source>Others</source>
-        <translation type="obsolete">Citi</translation>
     </message>
     <message>
         <source>Collisions</source>

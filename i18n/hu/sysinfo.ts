@@ -151,22 +151,6 @@
         <translation>Teljes memória: %1 kB</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Ez a lap megmutatja, a memória (azaz RAM) hogyan van felosztva az ön kéziszámítógépében.
-A memória az alábbiak szerint van kategoruzálva:
-
-1. Felhasznált - az Opie és más futó alkalmazások által felhasznált memória.
-2. Átmeneti tár - ideiglenes tároló a teljesítmény növeléséhez.
-3. Gyorsítótár - nemrég használt, de még fel nem szabadított információk.
-4. Szabad - az Opie vagy más futó alkalmazás által fel nem használt memória.</translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -196,10 +180,6 @@ Memory is categorized as follows:
         <translation>Használat#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Használja</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -222,12 +202,6 @@ Bökjön a modul nevére és tartsa, hogy további információkat kapjon a modu
     <message>
         <source>This area shows detailed information about this module.</source>
         <translation>Ez a terület részletes információkat mutat erről a modulról.</translation>
-    </message>
-    <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Tényleg futtatni akarja
-</translation>
     </message>
     <message>
         <source>Used by</source>
@@ -297,12 +271,6 @@ Bökjön a processzre és tartsa, hogy további információkat kapjon a process
         <translation>Ez a terület részletes információkat mutat erről a processzről.</translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Biztosan küldeni akar
-</translation>
-    </message>
-    <message>
         <source>Really want to send %1
 to this process?</source>
         <translation type="unfinished"></translation>
@@ -369,14 +337,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Verzió:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Modell:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Gyártó:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

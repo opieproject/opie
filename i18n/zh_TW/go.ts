@@ -48,9 +48,5 @@
         <source>Prisoners: black %1, white %2</source>
         <translation>Prisoner: 黑 %1, 白 %2</translation>
     </message>
-    <message>
-        <source>Go</source>
-        <translation type="obsolete">圍棋</translation>
-    </message>
 </context>
 </TS>

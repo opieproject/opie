@@ -49,20 +49,8 @@
         <translation>Radio atómico</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Energía ionización</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Densidad</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Punto ebullición</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Punto fusión</translation>
     </message>
     <message>
         <source>%1 u</source>

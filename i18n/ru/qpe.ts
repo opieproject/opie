@@ -73,10 +73,6 @@ accurately to calibrate your screen.</source>
         <translation>Нажмите на цели твердо и аккуратно
 чтобы откалибровать ваш экран.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Добро пожаловать в Opie</translation>
-    </message>
 </context>
 <context>
     <name>DesktopPowerAlerter</name>
@@ -110,10 +106,6 @@ accurately to calibrate your screen.</source>
     <message>
         <source>Please wait...</source>
         <translation>Подождите...</translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
-        <translation type="obsolete">ФонПервогоИспользования</translation>
     </message>
     <message>
         <source>Finish</source>
@@ -296,23 +288,6 @@ accurately to calibrate your screen.</source>
 (%1)&lt;/p&gt;&lt;p&gt;Скорректировать время?&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Battery level is critical!
-Keep power off until power restored!</source>
-        <translation type="obsolete">Аккумулятор сел совсем!
-Выключите питание до тех пор,
-пока заряд не восстановится!</translation>
-    </message>
-    <message>
-        <source>Battery is running very low. </source>
-        <translation type="obsolete">Аккумулятор разряжен.</translation>
-    </message>
-    <message>
-        <source>The Back-up battery is very low.
-Please charge the back-up battery.</source>
-        <translation type="obsolete">Запасной аккумулятор разряжен.
-Зарядите запасной аккумулятор.</translation>
-    </message>
-    <message>
         <source>business card</source>
         <translation>Бизнес-карта</translation>
     </message>
@@ -393,12 +368,6 @@ immediately.</source>
         <translation>Выключить</translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="obsolete">&lt;p&gt;
-Функции завершения сеанса предназначены для разработки и тестирования Opie. При нормальной работе эти функции не нужны.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Отменить</translation>
     </message>
@@ -412,10 +381,6 @@ These termination options are provided primarily for use while developing and te
     <message>
         <source>Sync Connection</source>
         <translation>Запрос на синхронизацию</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="obsolete">&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите его.</translation>
     </message>
     <message>
         <source>Deny</source>

@@ -28,48 +28,12 @@
         <translation>聯絡人</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">聯絡人</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">新增</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">編輯</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">刪除</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">搜尋</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">寫電郵給</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">傳送項目</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">個人資料</translation>
-    </message>
-    <message>
         <source>Can not edit data, currently syncing</source>
         <translation></translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
         <translation>編輯個人資料</translation>
-    </message>
-    <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">編輯地址</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -95,44 +59,8 @@ Quit anyway?</source>
         <translation>全部</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">未歸檔</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">輸入 cVard</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">關閉搜尋</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">儲存所有資料</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">設定</translation>
-    </message>
-    <message>
         <source>Not Found</source>
         <translation>未找到</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">列出</translation>
-    </message>
-    <message>
-        <source>Cards</source>
-        <translation type="obsolete">名片</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">名片</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">開始搜尋</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -1376,173 +1304,6 @@ is provided free !</source>
     <message>
         <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">公司電話號碼</translation>
-    </message>
-    <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">公司傳真號碼</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">公司手機號碼</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">預設電郵地址</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">電子郵件</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">住家電話號碼</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">住家傳真號碼</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">私人手機號碼</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">公司</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">職業</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">助理</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">經理</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">配偶</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">性別</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">生日</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">週年紀念日</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">綽號</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">子女</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">名稱</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">名</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">中名</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">姓</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Suffix</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">歸檔為</translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="obsolete">職稱</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">部門</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">公司</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">公司所在街道名稱</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">公司所在城市名稱</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">公司所在州名</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">公司郵遞區號</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">公司所在國家名稱</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">公司呼叫器號碼</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">公司網頁</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">住家所在街道名稱</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">住家所在城市名稱</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">住家所在州名</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">住家郵遞區號</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">住家所在國家名稱</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">個人網頁</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">備註</translation>
     </message>
 </context>
 </TS>

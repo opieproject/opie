@@ -48,9 +48,5 @@
         <source>Prisoners: black %1, white %2</source>
         <translation>Zajatci: černí %1, bílí %2</translation>
     </message>
-    <message>
-        <source>Go</source>
-        <translation type="obsolete">Go</translation>
-    </message>
 </context>
 </TS>

@@ -106,10 +106,6 @@
         <translation>Enregistrer liste</translation>
     </message>
     <message>
-        <source>Open File or URL</source>
-        <translation type="obsolete">Ouvrir un fichier ou une URL</translation>
-    </message>
-    <message>
         <source>Rescan for Audio Files</source>
         <translation>Rechercher les fichiers audio</translation>
     </message>
@@ -164,16 +160,8 @@ la liste ?</translation>
         <translation>Non</translation>
     </message>
     <message>
-        <source>Open file or URL</source>
-        <translation type="obsolete">Ouvrir un fichier ou une URL</translation>
-    </message>
-    <message>
         <source>OpiePlayer: </source>
         <translation>OpiePlayer :</translation>
-    </message>
-    <message>
-        <source>Save m3u Playlist </source>
-        <translation type="obsolete">Enregistrer liste m3u</translation>
     </message>
     <message>
         <source>Loading of Skin started</source>
@@ -266,26 +254,6 @@ la liste ?</translation>
     <message>
         <source>Failure</source>
         <translation>Erreur</translation>
-    </message>
-    <message>
-        <source>No input plugin found for this media type</source>
-        <translation type="obsolete">Pas de plugin trouvé pour ce type de média</translation>
-    </message>
-    <message>
-        <source>No demux plugin found for this media type</source>
-        <translation type="obsolete">Pas de plugin &quot;demux&quot; trouvé pour ce type de média</translation>
-    </message>
-    <message>
-        <source>Demuxing failed for this media type</source>
-        <translation type="obsolete">problème de &quot;demuxing&quot; pour ce type de média</translation>
-    </message>
-    <message>
-        <source>Malformed MRL</source>
-        <translation type="obsolete">MRL mal formée</translation>
-    </message>
-    <message>
-        <source>Some other error</source>
-        <translation type="obsolete">D&apos;autres erreurs</translation>
     </message>
     <message>
         <source>Error on file &apos;%1&apos; with reason: </source>

@@ -156,12 +156,6 @@
         <translation>Font wählen</translation>
     </message>
     <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="obsolete">Möchten Sie wirklich die aktuelle Datei &lt;b&gt;löschen&lt;/b&gt; ?
-&lt;BR&gt;Dies kann nicht mehr rückgängig gemacht werden &lt;BR&gt;</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>

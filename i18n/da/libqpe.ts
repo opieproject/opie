@@ -195,10 +195,6 @@ redigere kategorierne.</translation>
         <translation>Strengen blev ikke fundet.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Slutningen er nået. Starter fra begyndelsen</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -479,12 +475,6 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>AM</source>
         <translation></translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Er du sikker på du vil slette
-%1?</translation>
     </message>
     <message>
         <source>All</source>
@@ -783,26 +773,6 @@ Frigør noget hukommelse og prøv igen.</translation>
         <translation>Søn</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Klik for at lukke dette vindue uden at gemme ændringer.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Klik for at lukke dette vindue.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Klik for at lukke dette vindue og anvende ændringer.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Klik for at gøre dette vindue flytbart.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Klik for at få dette vindue til at bruge hele skærmen.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation>&lt;Qt&gt;Der findes ikke nogen omfattende hjælp til dette program, men der er stadig kontekstfølsom hjælp.&lt;p&gt;Sådan bruger du kontekstfølsom hjælp:&lt;p&gt;&lt;ol&gt;&lt;li&gt;klik og hold hjælpeknappen&lt;li&gt;når vindues titlen viser &lt;b&gt;Hvad er det...&lt;/b&gt;, så klik på det du vil have hjælp med.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -863,10 +833,6 @@ Frigør noget hukommelse og prøv igen.</translation>
     <message>
         <source>Dec</source>
         <translation>Dec</translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Fejl</translation>
     </message>
     <message>
         <source>D</source>

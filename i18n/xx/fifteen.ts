@@ -60,10 +60,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>FOO</translation>
     </message>

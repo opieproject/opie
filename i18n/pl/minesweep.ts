@@ -10,10 +10,6 @@
         <translation>Ekspodowales!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Saper</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Poczatkujacy</translation>
     </message>

@@ -50,20 +50,8 @@
         <translation>Atomradius</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Ionsationsenergie</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Dichte</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Siedepunkt</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Schmelzpunkt</translation>
     </message>
     <message>
         <source>%1 u</source>

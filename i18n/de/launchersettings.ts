@@ -88,10 +88,6 @@
         <translation>Fügt die Inhalte der Launcher-Reiter als Menüs in das O-Menü ein.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
-        <translation type="obsolete">Anzeige von Anwendungen in Unterfenstern</translation>
-    </message>
-    <message>
         <source>Show Applications in Subpopups</source>
         <translation>Anwendungen in Untermenüs anzeigen</translation>
     </message>
@@ -217,10 +213,6 @@
         <translation>Großen &quot;Busy Indicator&quot; aktivieren</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Blinkenden &quot;Busy-Indicator&quot; aktivieren</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Wählen Sie den Reiter den Sie bearbeiten oder Löschen möchten.</translation>
     </message>
@@ -239,10 +231,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Aktivieren Sie dieses wenn Sie eine große Tätigkeitsanzeige in Bildschirmmitte möchten anstatt der in der Taskbar.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Aktivieren Sie dieses wenn Sie eine große Tätigkeitsanzeige in der Taskbar möchten.</translation>
     </message>
     <message>
         <source>All Tabs</source>

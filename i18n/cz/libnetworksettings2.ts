@@ -41,14 +41,6 @@
         <translation>&lt;p&gt;Zařízení, která rozumí jednotlivým znakům&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Nodes that provide working IP connections&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Uzly, které poskytují funkční IP připojení&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Fully configured connection profile&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Plně nastaven profil připojení&lt;/p&gt;</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
         <translation>&lt;p&gt;Uzly, které poskytují funkční IP připojení&lt;/p&gt;</translation>
     </message>
@@ -88,16 +80,8 @@
         <translation>Zablokovaný</translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="obsolete">Vypnutý</translation>
-    </message>
-    <message>
         <source>Available</source>
         <translation>Dostupný</translation>
-    </message>
-    <message>
-        <source>IsUp</source>
-        <translation type="obsolete">Nahozen</translation>
     </message>
     <message>
         <source>Inactive</source>

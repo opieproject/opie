@@ -89,16 +89,8 @@
         <translation>Hledat dle názvu nápoje</translation>
     </message>
     <message>
-        <source>Find by Alcohol</source>
-        <translation type="obsolete">Hledat dle alkoholu</translation>
-    </message>
-    <message>
         <source>Edit</source>
         <translation>Upravit</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">upravit</translation>
     </message>
     <message>
         <source>New</source>
@@ -133,10 +125,6 @@
     <message>
         <source>Drink Name</source>
         <translation>Název nápoje</translation>
-    </message>
-    <message>
-        <source>Alcohol</source>
-        <translation type="obsolete">Alkohol</translation>
     </message>
     <message>
         <source>Search</source>

@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Kopiraj in restavriraj... delam...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Kopiraj in restavriraj</translation>
     </message>
@@ -96,10 +92,6 @@
     <message>
         <source>Applications</source>
         <translation>Programi</translation>
-    </message>
-    <message>
-        <source>Save To</source>
-        <translation type="obsolete">Shrani na</translation>
     </message>
     <message>
         <source>&amp;Backup</source>

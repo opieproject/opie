@@ -97,20 +97,6 @@ ieraksta vietas
 vai arī karte nav atpazīta</translation>
     </message>
     <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">Vai tiešām vēlaties &lt;font size=+2&gt;&lt;B&gt;DZĒST&lt;/B&gt;&lt;/font&gt;
-izvēlēto failu?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Jā</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nē</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Kļūda</translation>
     </message>
@@ -121,10 +107,6 @@ izvēlēto failu?</translation>
     <message>
         <source>Opierec</source>
         <translation>Opieieraksts</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">Lūdzu izvēlaties failu  spēlēšanai</translation>
     </message>
     <message>
         <source>Note</source>

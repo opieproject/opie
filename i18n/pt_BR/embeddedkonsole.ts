@@ -41,16 +41,8 @@
         <translation>Abaixo</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="obsolete">Fonte</translation>
-    </message>
-    <message>
         <source>Enter</source>
         <translation>Entra</translation>
-    </message>
-    <message>
-        <source>Micro</source>
-        <translation type="obsolete">Micro</translation>
     </message>
     <message>
         <source>Paste</source>
@@ -61,20 +53,8 @@
         <translation>Espaço</translation>
     </message>
     <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Fixa Média</translation>
-    </message>
-    <message>
         <source>Terminal</source>
         <translation>Terminal</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Fixa Pequena</translation>
     </message>
     <message>
         <source>Show command list</source>

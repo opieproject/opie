@@ -1,39 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">FailuDialogs</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Atvērt</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Saglabāt</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="obsolete">Izvēlēties Katalogu</translation>
-    </message>
-</context>
-<context>
-    <name>OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Stils</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Izmērs</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Glāžšķūņu utt</translation>
-    </message>
-</context>
-<context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>OTimePickerDialogBase</source>

@@ -46,30 +46,6 @@
         <translation>Избети тип на сметка овде.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Штедна</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Тековна</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">Кредитна</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Пазар на пари</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Заеднички фонд</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Останато</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Банка:</translation>
     </message>
@@ -108,14 +84,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Внеси додатни информации за сметката.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Моментална состојба: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Овде е прикажана моменталната состојба на оваа сметка.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -192,10 +160,6 @@ To sort entries by a specific field, click on the column name.</source>
     <message>
         <source>Click here to draw the selected chart.</source>
         <translation>Кликни овде за да се нацрта избраниот графикон.</translation>
-    </message>
-    <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Моментална состојба: %1 %2</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -655,62 +619,6 @@ The value entered should always be positive.</source>
         <translation>Внеси додатни информации за трансакцијата.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Автомобил</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Сметки</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">ЦД-а</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Облека</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Компјутер</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">DVD-а</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Електроника</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Забава</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Храна</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Гориво</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Општо</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Филмпви</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Кирија</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Патувања</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation>Камата на долг</translation>
     </message>
@@ -725,18 +633,6 @@ The value entered should always be positive.</source>
     <message>
         <source>Credit Card</source>
         <translation>Кредитна Картичка</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">Работа</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Член на фамилија</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Општо Кредит</translation>
     </message>
     <message>
         <source>Automatic Payment</source>

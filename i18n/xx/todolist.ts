@@ -6,10 +6,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>FOO</translation>
     </message>
@@ -89,64 +85,12 @@
         <source>loud</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -165,18 +109,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Data</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>QuickEdit</source>
         <translation>FOO</translation>
     </message>
@@ -189,10 +121,6 @@ The list displays the following information:
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -212,20 +140,12 @@ Quit Anyway?</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation>FOO</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -236,10 +156,6 @@ Quit Anyway?</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation>FOO</translation>
     </message>
@@ -248,16 +164,8 @@ Quit Anyway?</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -483,10 +391,6 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

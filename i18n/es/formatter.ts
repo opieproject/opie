@@ -22,16 +22,6 @@
         <translation>Principal</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">Atención:
-¡¡Cambiar los parámetros de esta página
-puede causar que susistema deje de
-funcionar correctamente!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>Editar fstab</translation>
     </message>
@@ -52,26 +42,10 @@ funcionar correctamente!!</translation>
         <translation>Avanzado</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">¿¡¿Formatear?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>¿¡¿Confirma el formateo
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-con </translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete"> sistema de ficheros?!?
-¡¡Perderá todos sus datos!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -128,18 +102,8 @@ has been successfully formatted.</source>
 ha sido formateado con éxito.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Intentando montar.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>¡Fallo al montar tarjeta!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-ha sido montado con éxito.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -148,10 +112,6 @@ ha sido montado con éxito.</translation>
     <message>
         <source>Internal</source>
         <translation>Interno</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Tipo almacenamiento : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

@@ -14,14 +14,6 @@
         <translation>&amp;Gra</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Zmien Rewers Kart</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Skocz do pozycji&gt;</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Ustawienia</translation>
     </message>
@@ -38,24 +30,8 @@
         <translation>Graj</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Zmien Rewers Kart</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Skocz do pozycji</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Obroc jedna karte</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Ustawienia</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Obroc trzy karty</translation>
     </message>
     <message>
         <source>Chicane</source>

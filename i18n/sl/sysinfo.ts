@@ -180,10 +180,6 @@ Memory is categorized as follows:
         <translation>Uporabi#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Uporablja ga</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>

@@ -40,18 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Iemigt</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Pulkstenis</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Hronometrs</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Starts</translation>
     </message>
@@ -60,32 +48,8 @@
         <translation>Pārstatīt</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Uzstādīt Modinātāju</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Uzstādīt datumu un laiku.</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Modinātājs ieslēgts</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Modinātājs Izslēgts</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Stop</translation>
-    </message>
-    <message>
-        <source>Alarm set: %1</source>
-        <translation type="obsolete">Modinātājs uzstādīts: %1</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Pulkstenis: Modinātājs palaists garām.</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -238,39 +202,6 @@ izvēlēties vismaz vienu dienu.</translation>
     <message>
         <source>Play File</source>
         <translation>Atskaņot Failu</translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Uzstādīt Modinātāju</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Stunda</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minūte</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">mp3 modinātājs</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Iemidzināt Uz
-(minūtēm)</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Viss</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Audio</translation>
     </message>
 </context>
 </TS>

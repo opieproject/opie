@@ -79,10 +79,6 @@
         <translation>Nosūta pastu</translation>
     </message>
     <message>
-        <source>No Receiver spezified</source>
-        <translation type="obsolete">Nav norādīts saņēmējs</translation>
-    </message>
-    <message>
         <source>Store message</source>
         <translation>Saglabāt ziņu</translation>
     </message>
@@ -251,10 +247,6 @@
         <translation>Lietotājs</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Lietot SSL</translation>
-    </message>
-    <message>
         <source>Password</source>
         <translation>Parole</translation>
     </message>
@@ -341,6 +333,58 @@
         <source>Date</source>
         <translation>Datums</translation>
     </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished">Serveris</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set on/offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh folder list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new folder</source>
+        <translation type="unfinished">Veidot jaunu folderi</translation>
+    </message>
+    <message>
+        <source>(Un-)Subscribe groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh headerlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New subfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move/Copie all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read current mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
@@ -366,14 +410,6 @@
     <message>
         <source>Groupfilter:</source>
         <translation>Kopufiltrs:</translation>
-    </message>
-    <message>
-        <source>Enter a filter string here.
-Then hit &quot;get newsgroup list&quot; again and only groups starting 
-with that filter will be listet.</source>
-        <translation type="obsolete">Šeit ievadiet atlases kritēriju.
-Tad vēlreiz nospiediet &quot;saņemt intreškopu sarakstu&quot; un tiks parādītas
-tika kopas ar šo filtru.</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
@@ -571,10 +607,6 @@ tikai grupas kas sākās ar šo rindu.</translation>
         <translation>Pieslēgums</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Lietot SSL</translation>
-    </message>
-    <message>
         <source>Use Login</source>
         <translation>Lietot Pieslēgšanos</translation>
     </message>
@@ -684,16 +716,13 @@ tikai grupas kas sākās ar šo rindu.</translation>
         <source>Play Sound when new mails arrive</source>
         <translation>Atskaņot Melodiju kad pienāk jauns pasts</translation>
     </message>
-</context>
-<context>
-    <name>StatusWidgetUI</name>
     <message>
-        <source>Form1</source>
-        <translation>Forma1</translation>
+        <source>Click opens mail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation>TekstaLabelis1</translation>
+        <source>Click activate server/folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -754,13 +783,17 @@ tikai grupas kas sākās ar šo rindu.</translation>
         <source>E-Mail by %1</source>
         <translation>E-Pasts no %1</translation>
     </message>
+    <message>
+        <source>Reading attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not read content of attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
-    <message>
-        <source>E-Mail by %1</source>
-        <translation type="obsolete">E-Pasts no %1</translation>
-    </message>
     <message>
         <source>Mail</source>
         <translation>Pasts</translation>
@@ -800,6 +833,10 @@ tikai grupas kas sākās ar šo rindu.</translation>
     <message>
         <source>E-Mail view</source>
         <translation>E-Pasta skats</translation>
+    </message>
+    <message>
+        <source>Show image preview inline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

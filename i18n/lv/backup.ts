@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Kopēšana un Atjaunošana... strādāju...</translation>
-    </message>
-    <message>
         <source>Error from System:
 </source>
         <translation>Sistēmas kļūda:
@@ -95,10 +91,6 @@
         <translation>Kopēšana</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Saglabāt Uz</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Kopēšana</translation>
     </message>
@@ -123,10 +115,6 @@
         <translation>Izvēlaties Avotu</translation>
     </message>
     <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Atjaunot Failusarakstu</translation>
-    </message>
-    <message>
         <source>Locations</source>
         <translation>Atrašanās vietas</translation>
     </message>
@@ -139,28 +127,8 @@
         <translation>Izņemt</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Saglabāt</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Destination</source>
         <translation>Adresāts</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tips</translation>
-    </message>
-    <message>
-        <source>User Data (Configuration + PIM)</source>
-        <translation type="obsolete">Lieotāja Dati (Konfigurācija + PIM)</translation>
-    </message>
-    <message>
-        <source>Full Backup (Root File System)</source>
-        <translation type="obsolete">Pilna Saglabāšana (Root Failu Sistēma)</translation>
     </message>
 </context>
 <context>

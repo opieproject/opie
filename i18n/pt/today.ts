@@ -14,20 +14,12 @@
         <translation>Deve preencher o cartão de visita</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Não foram encontrados extras</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Não existe nenhum extra activado</translation>
     </message>
     <message>
         <source>Click here to launch the associated app</source>
         <translation>Clique aqui para lançar a aplicação associada</translation>
-    </message>
-    <message>
-        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation type="obsolete">&lt;b&gt;Propriedade de %1&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Today Error</source>
@@ -72,52 +64,8 @@
         <translation>activar/ordenar</translation>
     </message>
     <message>
-        <source>autostart on 
-resume?
- (Opie only)</source>
-        <translation type="obsolete">iniciar automaticamente
-quando ligar?
-(apenas Opie)</translation>
-    </message>
-    <message>
-        <source>minutes inactive</source>
-        <translation type="obsolete">minutos inactivo</translation>
-    </message>
-    <message>
         <source>Misc</source>
         <translation>Vários</translation>
-    </message>
-    <message>
-        <source>Check this if today should be autostarted on resume.</source>
-        <translation type="obsolete">Active aqui se quiser que o &quot;hoje&quot; seja iniciado ao ligar o dispositivo.</translation>
-    </message>
-    <message>
-        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="obsolete">Qual o intervalo de inactividade, em minutos, para que, ao ligar, o&quot;hoje&quot; seja iniciado </translation>
-    </message>
-    <message>
-        <source>Icon size</source>
-        <translation type="obsolete">Tamanho do icone</translation>
-    </message>
-    <message>
-        <source>Set the icon size in pixel</source>
-        <translation type="obsolete">Altere o tamanho do icone, em pixeis</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="obsolete">Reler</translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
-        <translation type="obsolete">Qual o intervalo de actualização</translation>
-    </message>
-    <message>
-        <source> sec</source>
-        <translation type="obsolete">seg</translation>
-    </message>
-    <message>
-        <source>never</source>
-        <translation type="obsolete">nunca</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
@@ -126,10 +74,6 @@ quando ligar?
     <message>
         <source>Today Config</source>
         <translation>Configuração do &quot;Hoje&quot;</translation>
-    </message>
-    <message>
-        <source>Tiny Banner</source>
-        <translation type="obsolete">Barra Pequena</translation>
     </message>
 </context>
 <context>

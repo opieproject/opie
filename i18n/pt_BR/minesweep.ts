@@ -7,10 +7,6 @@
         <translation>Jogo</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Caça Minas</translation>
-    </message>
-    <message>
         <source>Expert</source>
         <translation>Expert</translation>
     </message>

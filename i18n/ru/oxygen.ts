@@ -49,20 +49,8 @@
         <translation>Радиус атома</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Энергия ионизации</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Плотность</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Точка кипения</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Точка плавления</translation>
     </message>
     <message>
         <source>%1 u</source>

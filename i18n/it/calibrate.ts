@@ -8,9 +8,5 @@ accurately to calibrate your screen.</source>
         <translation>Tocca le crocette accuratamente e
 con decisione per calibrare lo schermo.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Benvenuto in Opie</translation>
-    </message>
 </context>
 </TS>

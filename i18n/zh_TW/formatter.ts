@@ -22,16 +22,6 @@
         <translation>主要</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">警告:
-改變這一頁的參數
-可能造成您的系統
-停止正常功能!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>編輯 fstab</translation>
     </message>
@@ -52,25 +42,9 @@ to stop functioning properly!!</source>
         <translation>進階</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">格式化?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>確定要格式化</translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-為 </translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete"> 檔案系統?!?
-您將會失去所有的資料!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -127,18 +101,8 @@ has been successfully formatted.</source>
 已經成功地格式化.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">正在嘗試掛載.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>掛載記憶卡失敗!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-已經成功地掛載.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -147,10 +111,6 @@ has been successfully mounted.</source>
     <message>
         <source>Internal</source>
         <translation>內部的</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">儲存類型 : </translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

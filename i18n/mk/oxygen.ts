@@ -73,20 +73,8 @@
         <translation>Радиус на атом</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Енергија на јонизација</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Густина</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Точка на ротација</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Точка на сретнување</translation>
     </message>
     <message>
         <source>Ionization Energy</source>

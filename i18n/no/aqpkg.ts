@@ -480,10 +480,6 @@ er IKKE anbefalt!</translation>
         <translation>Reinstallere</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">R</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Ønsker du å slette eller oppgradere
@@ -492,10 +488,6 @@ er IKKE anbefalt!</translation>
     <message>
         <source>Remove or Upgrade</source>
         <translation>Slette eller oppgradere</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

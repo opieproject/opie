@@ -10,24 +10,12 @@
         <translation>Stel het maximumaantal lijnen in dat getoond moet worden per verjaardag/jaardag</translation>
     </message>
     <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Knip lijn na X tekens:</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Na hoeveel tekens de info over de taak afgebroken moet worden</translation>
-    </message>
-    <message>
         <source>Days look ahead: </source>
         <translation>Dagen vooruitzien:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
         <translation>Hoeveel dagen er vooruit gezocht moet worden</translation>
-    </message>
-    <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Herstart programma om instellingen te activeren!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

@@ -10,14 +10,6 @@
         <translation>Установить максимальное число линий используемых для каждого юбилея/дня рождения</translation>
     </message>
     <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Обрезать после X символов:</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">После скольки символов данные будут обрезаны</translation>
-    </message>
-    <message>
         <source>Days look ahead: </source>
         <translation>Дней вперед:</translation>
     </message>
@@ -58,10 +50,6 @@ Color if below </source>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
         <translation>&quot;Срочный&quot; цвет будет использован если дни рождения/юбилеи ближе чем заданное число дней !</translation>
-    </message>
-    <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Чтобы применить установки: Перезапустите приложение!</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>

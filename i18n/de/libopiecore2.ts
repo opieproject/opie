@@ -59,10 +59,6 @@
         <translation>Hoch+Links</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Bildschirm rotieren</translation>
-    </message>
-    <message>
         <source>Action Button</source>
         <translation>Actionbutton</translation>
     </message>

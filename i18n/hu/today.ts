@@ -14,10 +14,6 @@
         <translation>Kérem töltse ki a névjegyét</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Nem találtam kiegészítőt</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Nincs aktivált kiegészítő</translation>
     </message>
@@ -68,52 +64,8 @@
         <translation>aktív/sorrend</translation>
     </message>
     <message>
-        <source>autostart on 
-resume?
- (Opie only)</source>
-        <translation type="obsolete">Ébresztéskor
-automatikusan induljon?
-(Csak Opie esetén)</translation>
-    </message>
-    <message>
-        <source>minutes inactive</source>
-        <translation type="obsolete">perc iniaktivitás</translation>
-    </message>
-    <message>
         <source>Misc</source>
         <translation>Vegyes</translation>
-    </message>
-    <message>
-        <source>Check this if today should be autostarted on resume.</source>
-        <translation type="obsolete">Ikszelje be ha a Ma bekapcsoláskor el kell induljon.</translation>
-    </message>
-    <message>
-        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="obsolete">Hány percig kell a PDA-nak felfüggesztve lennie mielőtt az automatikus indítás létrejön bekapcsoláskor</translation>
-    </message>
-    <message>
-        <source>Icon size</source>
-        <translation type="obsolete">Ikon méret</translation>
-    </message>
-    <message>
-        <source>Set the icon size in pixel</source>
-        <translation type="obsolete">Az ikon méretét állítja be pixelben</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="obsolete">Frissítés</translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
-        <translation type="obsolete">Milyen gyakran frissítse a Ma önmagát</translation>
-    </message>
-    <message>
-        <source> sec</source>
-        <translation type="obsolete">másodperc</translation>
-    </message>
-    <message>
-        <source>never</source>
-        <translation type="obsolete">soha</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>

@@ -6,36 +6,12 @@
         <translation>OZoek</translation>
     </message>
     <message>
-        <source>adressbook</source>
-        <translation type="obsolete">adresboek</translation>
-    </message>
-    <message>
-        <source>todo</source>
-        <translation type="obsolete">tedoen</translation>
-    </message>
-    <message>
-        <source>datebook</source>
-        <translation type="obsolete">agenda</translation>
-    </message>
-    <message>
-        <source>applications</source>
-        <translation type="obsolete">programma&apos;s</translation>
-    </message>
-    <message>
-        <source>documents</source>
-        <translation type="obsolete">documenten</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Zoek</translation>
     </message>
     <message>
         <source>Search all</source>
         <translation>Zoek alles</translation>
-    </message>
-    <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -120,18 +96,6 @@
         <translation>open met</translation>
     </message>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">laat afgemaakte taken zien</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">laat vroegere gebeurtenissen zien</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">zoek in data</translation>
-    </message>
-    <message>
         <source>File: </source>
         <translation>Bestand:</translation>
     </message>
@@ -142,10 +106,6 @@
     <message>
         <source>Mimetype: </source>
         <translation>MIMEtype:</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">zoek inhoud</translation>
     </message>
     <message>
         <source>searching %1</source>

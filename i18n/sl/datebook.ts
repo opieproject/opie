@@ -343,6 +343,14 @@ Izhod?</translation>
         <source>Category:</source>
         <translation>Kategorija:</translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -412,41 +420,6 @@ Izhod?</translation>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">P</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">T</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">S</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">Č</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">P</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">S</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">N</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>p</translation>
@@ -580,10 +553,6 @@ Izhod?</translation>
     <message>
         <source>Note...</source>
         <translation>Opombe...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">Začetni čas</translation>
     </message>
 </context>
 <context>

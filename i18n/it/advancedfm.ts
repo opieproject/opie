@@ -7,10 +7,6 @@
         <translation>Note</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">La directory non esiste</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Mostra File Nascosti</translation>
     </message>
@@ -99,14 +95,6 @@
         <translation>Esegui Comando con Output</translation>
     </message>
     <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Cambia su Locale</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Cambia su Remoto</translation>
-    </message>
-    <message>
         <source>Size</source>
         <translation>Dimensione</translation>
     </message>
@@ -135,30 +123,12 @@
         <translation>Impossibile rinominare</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Impossibile copiare
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">to
-</translation>
-    </message>
-    <message>
         <source>Copy </source>
         <translation>Copia </translation>
     </message>
     <message>
         <source> As</source>
         <translation> Come</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Impossibile spostare
-</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
@@ -177,16 +147,6 @@
         <translation>Ok</translation>
     </message>
     <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-copyright 2002-2003 di
-L.J.Potter &lt;llornkcor@handhelds.org&gt;
-sotto licenza GPL</translation>
-    </message>
-    <message>
         <source>Change Directory</source>
         <translation>Cambia Directory</translation>
     </message>
@@ -203,72 +163,20 @@ sotto licenza GPL</translation>
         <translation>Elimina Directory Corrente dai Bookmarks</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Vuoi realmente cancellare
-%1 file?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Cancella Directory?</translation>
-    </message>
-    <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Copiare realmente
-%1 file?</translation>
     </message>
     <message>
         <source>File Exists!</source>
         <translation>File Esistente!</translation>
     </message>
     <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 esiste. Ok per sovrascrivere?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Impossibile copiare %1 su %2</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-esiste. Ok per sovrascrivere?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete"> già esiste.
-Vuoi veramente eliminarlo?</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Errore</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Impossibile rimuovere la directory corrente
-dai bookmark.
-Non è inserita nei bookmark!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Cerca File</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Vuoi veramente eliminare %1
-e tutto il suo contenuto ?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Vuoi veramente eliminare
-%1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>

@@ -28,70 +28,6 @@
         <translation>Kontakter</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Kontakt</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Liste</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Kort</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Ny</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Rediger</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Slet</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Find</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Start søgning</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Luk find</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Skriv mail til</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Send kontakt</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">Importer vCard</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Mine personlige detaljer</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Gem alle data</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Indstilling</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Vis</translation>
-    </message>
-    <message>
         <source>Right file type ?</source>
         <translation>Korrekt fil-type?</translation>
     </message>
@@ -129,10 +65,6 @@
         <translation>Kan ikke redigere data da en synkronisering er igang</translation>
     </message>
     <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Rediger adresse</translation>
-    </message>
-    <message>
         <source>Edit My Personal Details</source>
         <translation>Rediger mine personlige detaljer</translation>
     </message>
@@ -166,20 +98,8 @@ Afslut alligevel?</translation>
 dette søge mønster!</translation>
     </message>
     <message>
-        <source>Cards</source>
-        <translation type="obsolete">Kort</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Alle</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Ikke-arkiverede</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">Eksporter vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -1391,173 +1311,6 @@ Opie-Mail fås gratis!</translation>
     <message>
         <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Arbejdstelefon</translation>
-    </message>
-    <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Arbejdsfax</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Arbejdsmobil</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Standard email</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">Emails</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Hjemmetelefon</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Hjemmefax</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Hjemmemobil</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Kontor</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Profession</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Assistent</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Bestyrer</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Ægtefælle</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Køn</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">Fødselsdag</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">Årsdag</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Øgenavn</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Børn</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Navn titel</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Fornavn</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Mellemnavn</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Efternavn</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Suffiks</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Gem som</translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="obsolete">Job titel</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Afdeling</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Firma</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Arbejds adresse</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Arbejds by</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Arbejds stat</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Arbejds postnummer</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Arbejds land</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Arbejds personsøger</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Arbejds hjemmeside</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Hjemmeadresse</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Hjemmeby</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Hjemmestat</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Hjemmepostnummer</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Hjemmeland</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Hjemme website</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Noter</translation>
     </message>
 </context>
 </TS>

@@ -7,10 +7,6 @@ accurately to calibrate your screen.</source>
         <translation>Dotykaj krzyzykow mocno i dokladnie
 aby skalibrowac ekran.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Witamy w Opie</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -48,10 +44,6 @@ aby skalibrowac ekran.</translation>
     <message>
         <source>Quit</source>
         <translation>Wyjdz</translation>
-    </message>
-    <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;%1 %2&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>

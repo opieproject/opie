@@ -6,20 +6,6 @@
         <translation>Merk</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Den katalogen eksisterer ikke</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-er opphavsrettslig beskyttet 2002-2003
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-og er GPL lisensiert</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Vis skjulte filer</translation>
     </message>
@@ -140,12 +126,6 @@ og er GPL lisensiert</translation>
         <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Sikker på at du vil slette
-filene %1 ?</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -158,37 +138,8 @@ filene %1 ?</translation>
         <translation>Slette katalog?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Sikker på at du vil kopiere
-filene %1?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Filen eksisterer!</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 eksisterer. Ok for å overskrive?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Kunne ikke kopiere %1 til %2</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">Eksisterer. Ok for å overskrive?</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Kunne ikke kopiere</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">til</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -197,18 +148,6 @@ exists. Ok to overwrite?</source>
     <message>
         <source> As</source>
         <translation type="unfinished">Som</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">Eksisterer allerede.
-Er du sikker på at du vil slette?</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Kunne ikke flyttes
-</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>

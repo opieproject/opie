@@ -28,28 +28,12 @@
         <translation>Terminal</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Micro</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Pequena</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Média</translation>
-    </message>
-    <message>
         <source>Show command list</source>
         <translation>Mostrar Lista</translation>
     </message>
     <message>
         <source>Hide command list</source>
         <translation>Esconder Lista</translation>
-    </message>
-    <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Pastas em Baixo</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -62,18 +46,6 @@
     <message>
         <source>White on Black</source>
         <translation>Branco em Preto</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Preto em Transparente</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Preto em Vermelho</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Vermelho em Preto</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -108,14 +80,6 @@
         <translation>Cores</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="obsolete">Fontes</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opções</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Novo</translation>
     </message>
@@ -146,10 +110,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Edição Rápida</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editar</translation>
     </message>
     <message>
         <source>None</source>
@@ -190,10 +150,6 @@
     <message>
         <source>Use Beep</source>
         <translation>Usar Som</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Tabs em Cima</translation>
     </message>
     <message>
         <source>Konsole</source>

@@ -71,10 +71,6 @@
         <translation>Impossible de renommer</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Ce répertoire n&apos;existe pas</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>Copier sous</translation>
     </message>
@@ -147,22 +143,6 @@
         <translation>Copier dans ce même répertoire</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Impossible de copier
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">vers</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Impossible de déplacer</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Ajouter dans Documents</translation>
     </message>
@@ -175,56 +155,12 @@
         <translation>Tout sélectioner</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Confirmer la suppression
-du fichier %1 ?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Supprimer le répertoire ?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Confirmer la copie
-du fichier %1 ?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Le fichier existe !</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-exite déjà. Confirmer l&apos;écrasement ?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">Existe déjà.
-Voulez-vous vraiment l&apos;effacer ?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 existe déjà.
-Confirmer son écrasement ?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Impossible de copier
-%1 vers %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Gestionnaire de fichier Explorateur
-Copyright 2002-2003
-L.J.Potter &lt;llornkcor@handhelds.org&gt;
-Sous licence GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -239,29 +175,8 @@ Sous licence GPL</translation>
         <translation>Erreur</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Impossible d&apos;effacer le répertoire
-courant des favoris.
-Il ne fait pas partie des favoris !</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Recherche fichier</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Voulez-vous réellement
-supprimer %1
-et tout son contenu ?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Confirmer suppression de
-%1 ?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
@@ -282,16 +197,6 @@ et tout son contenu ?</translation>
     <message>
         <source>Not Yet Implemented</source>
         <translation>Pas encore implémenté</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Impossible de copier
-%1
-vers
-%2</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>

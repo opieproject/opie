@@ -10,10 +10,6 @@
         <translation>Експлозија!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Лов на мини</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Почетник</translation>
     </message>

@@ -6,20 +6,6 @@
         <translation>Забелешка</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Директориумот не постои</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Менаџер на Датотеки 
-copyright 2002-2003 од 
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
- и лиценциран под GPL лиценца</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Прикажи сокриени датотеки</translation>
     </message>
@@ -100,14 +86,6 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
         <translation>Напреден Фајл Менаџер</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Неможе да се пренесе 
-тековниот директориум од листата на линкови
-Директорумот не е во листата на линкови!</translation>
-    </message>
-    <message>
         <source>File</source>
         <translation>Датотека</translation>
     </message>
@@ -126,15 +104,6 @@ It is not bookmarked!</source>
     <message>
         <source>Select All</source>
         <translation>Избери се</translation>
-    </message>
-    <message>
-        <source>Switch to Local</source>
-        <translation type="obsolete">Префрлисе на локална листа</translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="obsolete">Префрли се на Далечинска листа
-</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -161,12 +130,6 @@ It is not bookmarked!</source>
         <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Да избришам
-%1 датотеки?</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
@@ -179,51 +142,8 @@ It is not bookmarked!</source>
         <translation>Избриши директориум?</translation>
     </message>
     <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Избриши %1
-и неговата содржина?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Избриши 
-%1?</translation>
-    </message>
-    <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Копирај 
-%1 датотеки?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Датотеката постои!</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 посоти. Да ја препишам?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Неможе да се копира %1 во %2</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-посоти. Да ја препишам?</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Неможе да се копиа
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">во</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -232,16 +152,6 @@ exists. Ok to overwrite?</source>
     <message>
         <source> As</source>
         <translation type="unfinished">Како</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">веќе постои.Да ја избришам?</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Не може да се премести</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>

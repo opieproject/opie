@@ -85,64 +85,12 @@
         <source>loud</source>
         <translation>sonora</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Tareas Opie</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Nuevo desde plantilla</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nueva tarea</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Pulse aquí para crear una nueva tarea.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Editar Tarea</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Pulse aquí para modificar la tarea actual.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Ver tarea</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Eliminar...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Pulse aquí para borrar la tarea actual.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Borrar todo...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Borrado completado</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Emitir</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Pulse aquí para enviar la tarea actual a otro dispositivo.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Buscar</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -159,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Mostrar barra de tareas rápida</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Datos</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Categoría</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opciones</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -191,10 +127,6 @@ La lista muestra la siguiente información:
 2. Prioridad - una representación gráfica de la prioridad de una tarea. Haga un click doble aquí para modificarla.
 3. Descripción - descripción de la tarea. Pulse aquí para seleccionar la tarea.
 4. Fecha límite - muestra cuando vence una tarea. Esta columna puede mostrarse o esconderse en las opciones del menú.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Todas</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -219,20 +151,12 @@ e inténtelo de nuevo.
         <translation>Tareas</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">No puedo editar datos, estoy sincronizando</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation>¿todas las tareas?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation>¿todas las tareas completadas?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">En blanco</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -243,10 +167,6 @@ e inténtelo de nuevo.
         <translation>Nuevas tareas</translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Duplicar</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation>C.</translation>
     </message>
@@ -255,16 +175,8 @@ e inténtelo de nuevo.
         <translation>Prioridad</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Descripción</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Fecha lí­mite</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Configurar Platillas</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -510,10 +422,6 @@ Le permite añadir rápidamente una nueva tarea a la lista. Esta área puede mos
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
         <translation>Pulse aquí si la tarea ocurre regularmente. Si lo selecciona, la frecuencia puede fijarse en la etiqueta Repetición.</translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">Notas:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

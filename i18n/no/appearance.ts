@@ -70,46 +70,6 @@ Klikk her for å velge et tilgjengelig fargesystem.</translation>
         <translation>Klikk her å gi det nåværende fargesystemet et navn og lagre den.</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Påfør stilen på alle applikasjoner.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Klikk her for å tillate alle applikasjoner å bruke globale visningsinnstillinger.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Slå av stil for disse applikasjoner (&lt;b&gt;*&lt;/b&gt; kan bli brukt som wildcard):</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Om noen applikasjoner ikke vises korrekt med globale visningsinnstillinger, kan visse funksjoner skues av for disse applikasjonene.
-
-Dette området tillater deg å velge en applikasjon og hvilke innstillinger du vil slå av.</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">Binær fil(er)</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Klikk her for å legge til en applikasjon på listen ovenfor.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Klikk her for å slette den nåværende valgte applikasjon.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Klikk her for å flytte den nåværende valgte applikasjon opp på listen.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Klikk her for å flytte den nåværende valgte applikasjon ned på listen.</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Fane stil:</translation>
     </message>
@@ -192,22 +152,6 @@ Dette området tillater deg å velge en applikasjon og hvilke innstillinger du v
         <translation>Avansert</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Omstart</translation>
-    </message>
-    <message>
-        <source>Do you want to restart %1 now?</source>
-        <translation type="obsolete">Vil du starte om %1 nå?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Ja</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nei</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation>Lagre system</translation>
     </message>
@@ -226,10 +170,6 @@ Dette området tillater deg å velge en applikasjon og hvilke innstillinger du v
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>Kan ikke slette nåværende system.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;ny&gt;</translation>
     </message>
     <message>
         <source>Show Scrollbars on the left</source>

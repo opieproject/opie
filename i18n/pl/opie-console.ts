@@ -791,10 +791,6 @@
         <translation>Porazka</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Wybieranie numeru nie powiodlo sie.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Anulowanie...</translation>
     </message>
@@ -855,22 +851,6 @@
     <message>
         <source>Color scheme</source>
         <translation>Schemat kolorow</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Rozmiar czcionki</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">mala</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">srednia</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">wielka</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

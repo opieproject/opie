@@ -10,10 +10,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>FOO</translation>
     </message>

@@ -70,46 +70,6 @@ Klikněte sem pro výběr požadovaného schéma.</translation>
         <translation>Klikněte sem pro název a uložení aktuálního schéma.</translation>
     </message>
     <message>
-        <source>Force styling for all applications.</source>
-        <translation type="obsolete">Vynutit stylování pro všechny aplikace.</translation>
-    </message>
-    <message>
-        <source>Click here to allow all applications to use global appearance settings.</source>
-        <translation type="obsolete">Klikněte sem pro umožnení všem aplikacím používat globální nastavení vzhledu.</translation>
-    </message>
-    <message>
-        <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="obsolete">Vypnout styl pro tylo aplikace ( &lt;b&gt;*&lt;/b&gt; může být použito jako wildcard):</translation>
-    </message>
-    <message>
-        <source>If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.
-
-This area allows you to select an application and which settings you wish to disable.</source>
-        <translation type="obsolete">Jestliže se některé aplikace nezobrazují korektně s globálním nastavením vzhledu, můžou se určité vlastnosti vypnout pro tuto aplikaci. 
-
-Tato oblast vám umožní vybrat aplikaci a nastavení, která si přejete vypnout.</translation>
-    </message>
-    <message>
-        <source>Binary file(s)</source>
-        <translation type="obsolete">Binární soubor(y)</translation>
-    </message>
-    <message>
-        <source>Click here to add an application to the list above.</source>
-        <translation type="obsolete">Klikněte pro přidání aplikace do seznamu nahoře.</translation>
-    </message>
-    <message>
-        <source>Click here to delete the currently selected application.</source>
-        <translation type="obsolete">Klikněte pro vymazání aktuálně vybrané aplikace.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application up in the list.</source>
-        <translation type="obsolete">Klikněte pro přesunutí aktuálně vybrané aplikace nahoru v seznamu.</translation>
-    </message>
-    <message>
-        <source>Click here to move the currently selected application down in the list.</source>
-        <translation type="obsolete">Klikněte pro přesunutí aktuálně vybrané aplikace dolů v seznamu.</translation>
-    </message>
-    <message>
         <source>Tab style:</source>
         <translation>Styl záložek:</translation>
     </message>
@@ -210,10 +170,6 @@ Tato oblast vám umožní vybrat aplikaci a nastavení, která si přejete vypno
     <message>
         <source>Unable to delete current scheme.</source>
         <translation>Nelze smazat aktuální schéma.</translation>
-    </message>
-    <message>
-        <source>&lt;new&gt;</source>
-        <translation type="obsolete">&lt;nový&gt;</translation>
     </message>
     <message>
         <source>Show Scrollbars on the left</source>

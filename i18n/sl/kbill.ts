@@ -34,10 +34,6 @@
         <translation>Ustavi igro</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
-        <translation type="obsolete">&lt;b&gt;Zgodba&lt;/b&gt;&lt;p&gt;Spet je usoda sveta v vaših rokah! Zloben heker znan samo kot &apos;Bill&apos;, je ustvaril virus. Virus je tako mogočen, da lahko spremeni računalnik v pečico. (oooh!) &apos;Bill&apos; se je kloniral v biljone mikro-Billov. Njihov namen je, da virus zakrijejo v popularen operacijski sistem. Kot sistemski administrator in uničevalec je vaša naloga, da Billu preprečite njegovo nalogo.</translation>
-    </message>
-    <message>
         <source>The story of KBill</source>
         <translation>Zgodba o KBill</translation>
     </message>

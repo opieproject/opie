@@ -17,18 +17,6 @@
 <context>
     <name>MindBreakerBoard</name>
     <message>
-        <source>Go%1p%2</source>
-        <translation type="obsolete">Ir%1p%2</translation>
-    </message>
-    <message>
-        <source>CurrentGo%1</source>
-        <translation type="obsolete">ActualIr%1</translation>
-    </message>
-    <message>
-        <source>Answer%1</source>
-        <translation type="obsolete">Respuesta%1</translation>
-    </message>
-    <message>
         <source>Reset Statistics</source>
         <translation>Reiniciar estadísticas</translation>
     </message>

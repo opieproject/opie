@@ -14,10 +14,6 @@
         <translation>Por favor, rellene su información personal</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">No encontré módulos</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Ningún módulo activado</translation>
     </message>
@@ -68,52 +64,8 @@
         <translation>activa/orden</translation>
     </message>
     <message>
-        <source>minutes inactive</source>
-        <translation type="obsolete">minutos inactivo</translation>
-    </message>
-    <message>
         <source>Misc</source>
         <translation>Varios</translation>
-    </message>
-    <message>
-        <source>Check this if today should be autostarted on resume.</source>
-        <translation type="obsolete">Marque aquí si HOY debe ser autoarrancado al arrancar.</translation>
-    </message>
-    <message>
-        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="obsolete">Cuantos minutos ha estado suspendidad la PDA antes que se active la opción de autoarranque</translation>
-    </message>
-    <message>
-        <source>Icon size</source>
-        <translation type="obsolete">Tamaño del icono</translation>
-    </message>
-    <message>
-        <source>Set the icon size in pixel</source>
-        <translation type="obsolete">Fijar el tamaño del icono en pixel</translation>
-    </message>
-    <message>
-        <source>autostart on 
-resume?
- (Opie only)</source>
-        <translation type="obsolete">¿Arrancar
-al encender?
-(sólo Opie)</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="obsolete">Actualizar</translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
-        <translation type="obsolete">Con qué frecuencia debe Hoy actualizarse</translation>
-    </message>
-    <message>
-        <source> sec</source>
-        <translation type="obsolete"> seg</translation>
-    </message>
-    <message>
-        <source>never</source>
-        <translation type="obsolete">nunca</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>

@@ -28,52 +28,12 @@
         <translation>Contacten</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Contact</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Nieuw</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Wijzig</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Verwijder</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Vind</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Schrijf mail aan</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Stuur via IR</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Mijn persoonlijke gegevens</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Bekijk</translation>
-    </message>
-    <message>
         <source>Can not edit data, currently syncing</source>
         <translation>Kan niet wijzigen tijdens synchronisatie</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
         <translation>Wijzig persoonlijke gegevens</translation>
-    </message>
-    <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Wijzig adres</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
@@ -99,44 +59,8 @@ Toch stoppen?</translation>
         <translation>Alle</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Ongeklassificeerd</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">Importeer vCard</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Sluit Vind</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Sla alles op</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Configureer</translation>
-    </message>
-    <message>
         <source>Not Found</source>
         <translation>Niet gevonden</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Lijst</translation>
-    </message>
-    <message>
-        <source>Cards</source>
-        <translation type="obsolete">Kaartjes</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Kaart</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Start zoeken</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -149,12 +73,6 @@ Toch stoppen?</translation>
     <message>
         <source>&amp;No</source>
         <translation>&amp;Nee</translation>
-    </message>
-    <message>
-        <source>Unable to find a contact for this 
- search pattern!</source>
-        <translation type="obsolete">Kan niets vinden dat voldoet
- aan de zoekterm!</translation>
     </message>
     <message>
         <source>The selected file 
@@ -177,10 +95,6 @@ toevoegen voor %1?</translation>
     <message>
         <source>&amp;All Yes</source>
         <translation>&amp; Ja op alles</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">Exporteer vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -1397,173 +1311,6 @@ geleverd!</translation>
     <message>
         <source>Show quick search bar</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Telefoon werk</translation>
-    </message>
-    <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Fax werk</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Mobiel werk</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Standaard email</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">Emails</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Telefoon prive</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Fax prive</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Mobiel prive</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Kantoor</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Beroep</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Assistent</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Manager</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Echtgeno(o)t(e)</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Geslacht</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">Verjaardag</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">Jaardag</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Bijnaam</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Kinderen</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Titel</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Voornaam</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Tussenvoegsel</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Achternaam</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Achtervoegsel</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Sla op als</translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="obsolete">Functie</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Afdeling</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Bedrijf</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Bedrijf adres</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Bedrijf woonplaats</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Bedrijf provincie</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Bedrijf Postcode</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Bedrijf land</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Bedijf pieper</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Bedrijf website</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Prive adres</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Prive woonplaats</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Prive provincie</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Prive postcode</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Prive land</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Prive website</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Notities</translation>
     </message>
 </context>
 </TS>

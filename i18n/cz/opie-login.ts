@@ -7,10 +7,6 @@ accurately to calibrate your screen.</source>
         <translation>Pro kalibraci obrazovky ukazujte
 přesně na kříže.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Vítá vás Opie</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -48,10 +44,6 @@ přesně na kříže.</translation>
     <message>
         <source>Quit</source>
         <translation>Konec</translation>
-    </message>
-    <message>
-        <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;Vítá vás OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Wrong password</source>

@@ -23,10 +23,6 @@ serpente a mangiare il topolino. Non bisogna
 scontrarsi con i muri, gli angoli o la propria coda.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Premi un Tasto per Iniziare</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>     Punti :    %1   </translation>
     </message>
@@ -35,10 +31,6 @@ scontrarsi con i muri, gli angoli o la propria coda.</translation>
  Your Score: %1</source>
         <translation>FINE PARTITA!
  Punti: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Premi un Tasto per Iniziare una Nuova Partita.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

@@ -6,10 +6,6 @@
         <translation>Ok</translation>
     </message>
     <message>
-        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="obsolete">&lt;h1&gt;Alarm om %0&lt;/h1&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
@@ -89,68 +85,12 @@
         <source>loud</source>
         <translation>luid</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie TeDoen lijst</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Nieuw van voorbeeld</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nieuwe taak</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Klik hier om een nieuwe taak te maken.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Wijzig taak</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Klik hier om de huidige taak te wijzigen.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Bekijk taak</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Verwijder...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Klik hier om de huidige taak te verwijderen.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Verwijder alle...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Verwijder gedaan</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Dupliceer</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">IrDa Versturen</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Klik hier om de huidige taak naar een ander apparaat te sturen.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Vind</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -167,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Laat snelle taakbalk zien</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategorie</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opties</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -201,14 +129,6 @@ De lijst geeft de volgende info door:
 4. Streefdatum - Laat streefdatum voor taak zien. Deze kolom kan worden verborgen/weergegeven door Opties-&gt;&apos;Laat taak streefdata zien&apos; uit het menu hierboven te kiezen.</translation>
     </message>
     <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Alle kategorieen</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Onbenoemd</translation>
-    </message>
-    <message>
         <source>Out of space</source>
         <translation>Plaatsgebrek</translation>
     </message>
@@ -229,10 +149,6 @@ Toch stoppen?</translation>
     <message>
         <source>Todo</source>
         <translation>Te Doen</translation>
-    </message>
-    <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Kan data niet wijzigen tijdens synchronisatie</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -259,16 +175,8 @@ Toch stoppen?</translation>
         <translation>Prioriteit</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Omschrijving</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Einddatum</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Stel voorbeelden in</translation>
     </message>
     <message>
         <source>Template Editor</source>
@@ -514,10 +422,6 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
         <translation>Klik hier als deze taak vaker voorkomt. Indien geselecteerd, kan frequentie ingesteld worden op de terugkerings tab.</translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">Notities:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

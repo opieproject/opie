@@ -70,10 +70,6 @@
         <translation>Não foi possível mudar o nome</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">A directoria não existe</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>Copiar Como</translation>
     </message>
@@ -138,24 +134,6 @@
         <translation>Copiar para a mesma Directoria</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Não foi possivel copiar
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">para
-</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Não foi possível mover
-</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Adicionar aos Documentos</translation>
     </message>
@@ -168,54 +146,12 @@
         <translation>Selecionar Tudo</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Apagar mesmo
-os ficheiros %1?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Apagar Directoria?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Copiar mesmo
-os ficheiros %1?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>O ficheiro existe!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-existe. Sobrepor?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">já existe.
-Quer mesmo apagá-lo?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 existe. Sobrepor?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Não foi possível copiar %1 para %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Gestor de Ficheiros Avançado
-é copyright 2002-2003
-L.J.Potter &lt;llornkcor@handhelds.org&gt;
-e licenciado sob a licença GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -230,29 +166,8 @@ e licenciado sob a licença GPL</translation>
         <translation>Erro</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Não é possível apagar a directoria
-dos atalhos.
-Não existe na lista!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Procurar Ficheiro</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Apagar mesmo
-os ficheiros %1
-e os seus conteúdos?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Apagar mesmo
-%1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
@@ -281,16 +196,6 @@ e os seus conteúdos?</translation>
     <message>
         <source>Not Yet Implemented</source>
         <translation>Ainda Não Implementado</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Não foi possível copiar
-%1
-para
-%2</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>

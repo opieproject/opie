@@ -6,36 +6,12 @@
         <translation>Buscador O</translation>
     </message>
     <message>
-        <source>adressbook</source>
-        <translation type="obsolete">contactos</translation>
-    </message>
-    <message>
-        <source>todo</source>
-        <translation type="obsolete">tareas</translation>
-    </message>
-    <message>
-        <source>datebook</source>
-        <translation type="obsolete">calendario</translation>
-    </message>
-    <message>
-        <source>applications</source>
-        <translation type="obsolete">aplicaciones</translation>
-    </message>
-    <message>
-        <source>documents</source>
-        <translation type="obsolete">documentos</translation>
-    </message>
-    <message>
         <source>Search</source>
         <translation>Buscar</translation>
     </message>
     <message>
         <source>Search all</source>
         <translation>Buscar todo</translation>
-    </message>
-    <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Sensible may/min</translation>
     </message>
     <message>
         <source>Use wildcards</source>
@@ -120,18 +96,6 @@
         <translation>abrir con</translation>
     </message>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">mostrar tareas completadas</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">mostrar sucesos pasados</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">buscar en fechas</translation>
-    </message>
-    <message>
         <source>File: </source>
         <translation>Fichero: </translation>
     </message>
@@ -142,10 +106,6 @@
     <message>
         <source>Mimetype: </source>
         <translation>Tipo MIME: </translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">buscar contenido</translation>
     </message>
     <message>
         <source>searching %1</source>

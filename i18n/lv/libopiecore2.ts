@@ -58,10 +58,6 @@
         <translation>Augstāk+Pa kreisi</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Rotēt Displeju</translation>
-    </message>
-    <message>
         <source>Action Button</source>
         <translation>Darbības Poga</translation>
     </message>

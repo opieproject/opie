@@ -23,10 +23,6 @@ le serpent. Le but est de manger le plus de souris
 sans rentrer dans les murs ni se modre la queue.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Appuyez sur n&apos;importe quelle touche pour commencer</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>    Score :    %1</translation>
     </message>
@@ -35,10 +31,6 @@ sans rentrer dans les murs ni se modre la queue.</translation>
  Your Score: %1</source>
         <translation>GAME OVER !
 Votre score : %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Pressez n&apos;importe quelle touche pour recommencer.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

@@ -70,10 +70,6 @@
         <translation>無法重新命名</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">該目錄不存在</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>複製為</translation>
     </message>
@@ -146,21 +142,6 @@
         <translation>複製相同的目錄</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">無法複製</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">至</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">無法移動</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>新增至文件</translation>
     </message>
@@ -173,45 +154,12 @@
         <translation>選擇全部</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">確定要刪除
-%1 個檔案?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>刪除目錄?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">確定要複製
-%1 個檔案?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>檔案已存在!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete"> 已存在. 要覆蓋嗎?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete"> 已經存在.
-您確定要刪除它?</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">進階型檔案管理程式
- 版權 2002-2003 
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-,授權為 GPL</translation>
     </message>
     <message>
         <source>File Search</source>

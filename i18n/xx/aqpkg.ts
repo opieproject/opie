@@ -202,38 +202,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation type="unfinished"></translation>
     </message>
@@ -498,10 +466,6 @@ Are you sure?
         <translation>FOO</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>FOO</translation>
@@ -509,10 +473,6 @@ Are you sure?
     <message>
         <source>Remove or Upgrade</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

@@ -10,10 +10,6 @@
         <translation>你爆了!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">採地雷</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>初學</translation>
     </message>

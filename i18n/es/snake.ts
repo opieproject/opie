@@ -22,10 +22,6 @@ hacia los ratones. No debe chocar
 contra muros, orillas o su cola.</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Pulse una tecla para empezar</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>   Puntuación:  %1   </translation>
     </message>
@@ -34,10 +30,6 @@ contra muros, orillas o su cola.</translation>
  Your Score: %1</source>
         <translation>¡JUEGO TERMINADO!
 Puntuación: %1</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Pulse una tecla para empezar de nuevo.</translation>
     </message>
     <message>
         <source>Press any key to start</source>

@@ -71,10 +71,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Attività Opie</translation>
-    </message>
-    <message>
         <source>Enter Task</source>
         <translation>Inserisci Attività</translation>
     </message>
@@ -94,60 +90,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Nuova da modello</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Nuova Attività</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Premi qui per creare una nuova attività.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Modifica Attività</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Premi qui per modificare l&apos;attività corrente.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Visualizza Attività</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Elimina...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Premi qui per eliminare l&apos;attività corrente.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Elimina tutti...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Eliminazione completata</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Copia</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Trasmetti</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Premi qui per inviare l&apos;attività in corso ad un altro dispositivo.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Trova</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -164,18 +108,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Mostra quick task bar</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dati</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Categoria</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opzioni</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -196,14 +128,6 @@ Vengono elencate le seguenti informazioni:
 2. Priorità - una rappresentazione grafica della priorità dell&apos;attività.  Premi qui due volte per modificarla.
 3. Descrizione - descrizione dell&apos;attività.  Premi qui per selezionare l&apos;attività.
 4. Scadenza - mostra la scadenza dell&apos;attività.  Questa colonna può essere visualizzata o nascosta tramite Opzioni-&gt;&apos;Mostra scadenze attività&apos; dal menù in alto.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Tutte le Categorie</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Vuota</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -250,16 +174,8 @@ Uscire comunque?</translation>
         <translation>Priorità</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Descrizione</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Scadenza</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Modifica Modelli</translation>
     </message>
     <message>
         <source>Template Editor</source>

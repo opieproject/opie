@@ -194,10 +194,6 @@ már szerkeszti a kategóriákat.</translation>
         <translation>Szöveg nem található.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Végére értem, kezdem előről</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -451,14 +447,6 @@ Free some memory and try again.</source>
 Szabadítson fel némi memóriát és próbálja újra.</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">N</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">H</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>É</translation>
     </message>
@@ -509,12 +497,6 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     <message>
         <source>Sun</source>
         <translation>Va</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Biztosan törli
-%1-t?</translation>
     </message>
     <message>
         <source>All</source>
@@ -789,26 +771,6 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
         <translation>Új dokumentum</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Bökjön ide jelen ablak bezárásához és a változások elvetéséhez.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Bökjön ide jelen ablak bezárásához.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Bökjön ide jelen ablak bezárásához és a változások elmentéséhez.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Bökjön ide, hogy mozgathatóvá tegye ezt az ablakot.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Bökjön ide, hogy ez az ablak használjon minden elérhető képernyőterületet.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation type="unfinished">&lt;Qt&gt;Ehhez az alkalmazáshoz nincs átfogó súgó, azonban összefüggés-érzékeny van.&lt;p&gt;Az összefüggés-érzékeny súgó használatához:&lt;p&gt;&lt;ol&gt;&lt;li&gt;bökjün a súgó gombra és tartsa.&lt;li&gt;amikor a &lt;b&gt;Mi ez...&lt;/b&gt; cím megjelenik, bökjön bármely vezérlőre.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -868,10 +830,6 @@ Szabadítson fel némi memóriát és próbálja újra.</translation>
     <message>
         <source>Dec</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
-        <translation type="obsolete">Hiba</translation>
     </message>
     <message>
         <source>D</source>

@@ -343,6 +343,14 @@ longa que o intervalo entre repetições.</translation>
         <source>Category:</source>
         <translation>Categoria:</translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -541,10 +549,6 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>Note...</source>
         <translation>Nota...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">Horário Inicial</translation>
     </message>
     <message>
         <source>Start time</source>

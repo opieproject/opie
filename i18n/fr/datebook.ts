@@ -345,6 +345,14 @@ dans : </translation>
         <source>Category:</source>
         <translation>Catégorie : </translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -414,41 +422,6 @@ dans : </translation>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>M</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">L</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
-        <source>W</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
-        <source>T</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">J</translation>
-    </message>
-    <message>
-        <source>F</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">V</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">S</translation>
-    </message>
-    <message>
-        <source>S</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">D</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>p</translation>
@@ -588,11 +561,6 @@ horaire
     <message>
         <source>Note...</source>
         <translation>Note...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">Heure de
-début</translation>
     </message>
 </context>
 <context>

@@ -2,16 +2,8 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>Заряжается</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Остался процент заряда</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -50,14 +42,6 @@
         <translation>Внешний источник отключен</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Осталось времени на заряде</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Статус аккумулятора</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Неудача</translation>
     </message>
@@ -70,24 +54,12 @@
         <translation>Заряжаются оба устройства</translation>
     </message>
     <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Остался процент заряда:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Осталось времени на заряде:</translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Нету вставленного аккумулятора</translation>
     </message>
     <message>
         <source>no data</source>
         <translation>нет данных</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">Ipaq  </translation>
     </message>
     <message>
         <source>Jacket  </source>

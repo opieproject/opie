@@ -70,10 +70,6 @@
         <translation>Não pude renomear</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Este diretório não existe</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>Copiar Como</translation>
     </message>
@@ -138,24 +134,6 @@
         <translation>Copiar no Mesmo Dir</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Não pude copiar
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">para
-</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Não pude mover
-</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Adicionar à Documentos</translation>
     </message>
@@ -168,54 +146,12 @@
         <translation>Selecioanr Tudo</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Realmente remover
-%1 arquivos?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Remover Diretório?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Copiar realmente
-%1 arquivos?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Arquivo Existe!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-existe. Sobrescreve ?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">já existe.
-Você realmente deseja remover?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 existe. Sobrescreve ?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Impossível copiar %1 para %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Gereciador de Arquivo Avançado
-é copyright 2002-2003 por
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-e é licenciado sob a GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -230,28 +166,8 @@ e é licenciado sob a GPL</translation>
         <translation>Erro</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Impossível remover diretório atual
-dos marcadores.
-Ele não está nos marcadores!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Busca Arquivo</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Remove mesmo %1
-e todo seu conteúdo?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Remove mesmo
-%1?</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -280,16 +196,6 @@ e todo seu conteúdo?</translation>
     <message>
         <source>Not Yet Implemented</source>
         <translation>Não Implementado</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Impossível copiar 
-%1 
-para 
-%2</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>

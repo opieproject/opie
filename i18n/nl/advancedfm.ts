@@ -6,20 +6,6 @@
         <translation>Notitie</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Deze map bestaat niet</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-copyright 2002-2003
-L.J.Potter &lt;llorncor@handhelds.org&gt;
-en valt onder de GPL</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Vertoon verborgen bestanden</translation>
     </message>
@@ -140,12 +126,6 @@ en valt onder de GPL</translation>
         <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">%1 bestanden
-echt verwijderen?</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -158,38 +138,8 @@ echt verwijderen?</translation>
         <translation>Verwijder map?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">%1 bestanden
-echt kopiëren?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Bestand bestaat al!</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 Bestaat al, Overschrijven?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Kon %1 niet naar %2 kopiëren</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">bestaat. Overschrijven?</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Kan niet kopiëren
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">naar</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -198,18 +148,6 @@ exists. Ok to overwrite?</source>
     <message>
         <source> As</source>
         <translation>Als</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">bestaat al.
-Wilt u het echt verwijderen?</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Kan niet verplaatsen
-</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
@@ -244,28 +182,8 @@ Wilt u het echt verwijderen?</translation>
         <translation>kB vrij</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Kan huidige map niet verwijderen
-van favorietenlijst.
-Er is geen favoriet van!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Bestand zoeken</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">%1 en alle inhoud
-echt verwijderen?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">%1
-echt verwijderen?</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
@@ -278,15 +196,6 @@ echt verwijderen?</translation>
     <message>
         <source>Not Yet Implemented</source>
         <translation>Nog niet in gebruik</translation>
-    </message>
-    <message>
-        <source>Could not copy 
-%1 
-to 
-%2</source>
-        <translation type="obsolete">Kon niet van
-%1 naar
-%2 kopieren</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>

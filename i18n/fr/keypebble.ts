@@ -30,10 +30,6 @@ connection.</translation>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Attente de l&apos;initialisation du serveur...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>En attente du nom de poste...</translation>
     </message>

@@ -7,10 +7,6 @@ accurately to calibrate your screen.</source>
         <translation>確實而精準地點一下十字準線, 
 以便校正您的螢幕.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">歡迎使用 Opie</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -50,10 +46,6 @@ accurately to calibrate your screen.</source>
         <translation>離開</translation>
     </message>
     <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;%1 %2&lt;/center&gt;</translation>
-    </message>
-    <message>
         <source>Wrong password</source>
         <translation>錯誤的密碼</translation>
     </message>
@@ -62,21 +54,8 @@ accurately to calibrate your screen.</source>
         <translation>輸入的密碼不正確.</translation>
     </message>
     <message>
-        <source>OPIE was terminated
-by an uncaught signal
-(%1)
-</source>
-        <translation type="obsolete">OPIE 被沒有抓到的信號
-(%1) 
-中止了</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>失敗</translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="obsolete">無法啟動 OPIE.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>

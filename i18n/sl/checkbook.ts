@@ -38,30 +38,6 @@
         <translation>Izberite tip čekovne knjižice.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Prihranki</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Preverjam</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">CD</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Denarni trg</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Skupni fond</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Drugo</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Banka:</translation>
     </message>
@@ -100,14 +76,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Vpišite dodatne informacije za to čekovno knjižico.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Trenutno stanje: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Ta prostor prikazuje trenutno stanje v čekovni knjižici.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -180,10 +148,6 @@ Da uredite vnose po določenem polju, kliknite na ime stolpca.</translation>
     <message>
         <source>Click here to draw the selected chart.</source>
         <translation>Kliknite tu, da narišem izbran graf.</translation>
-    </message>
-    <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Trenutno stanje: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
@@ -655,62 +619,6 @@ Vnesena vrednost mora biti pozitivna.</translation>
         <translation>Vnesite dodatne informacije za transakcijo.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Avto</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Računi</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">CDji</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Oblačila</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Računalnik</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">DVDji</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Elektronika</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Zabava</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Hrana</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Bencin</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Različno</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Filmi</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Najem</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Potovanje</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation>Dolg</translation>
     </message>
@@ -725,18 +633,6 @@ Vnesena vrednost mora biti pozitivna.</translation>
     <message>
         <source>Credit Card</source>
         <translation>Kreditna kartica</translation>
-    </message>
-    <message>
-        <source>Work</source>
-        <translation type="obsolete">Delo</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Član družine</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Različni krediti</translation>
     </message>
     <message>
         <source>Automatic Payment</source>

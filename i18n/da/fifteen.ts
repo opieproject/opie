@@ -60,10 +60,6 @@
         <translation>Bland</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Løs</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Spil</translation>
     </message>

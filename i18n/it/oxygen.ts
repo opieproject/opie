@@ -50,20 +50,8 @@
         <translation>Raggio atomico</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Energ. ionizzazione</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Densità</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Punto ebollizione</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Punto fusione</translation>
     </message>
     <message>
         <source>%1 u</source>

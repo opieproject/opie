@@ -17,18 +17,6 @@
 <context>
     <name>MindBreakerBoard</name>
     <message>
-        <source>Go%1p%2</source>
-        <translation type="obsolete">Оди %1п%2</translation>
-    </message>
-    <message>
-        <source>CurrentGo%1</source>
-        <translation type="obsolete">Моментален Пат %1</translation>
-    </message>
-    <message>
-        <source>Answer%1</source>
-        <translation type="obsolete">Одговор %1</translation>
-    </message>
-    <message>
         <source>Reset Statistics</source>
         <translation>Ресетирај статистики</translation>
     </message>

@@ -59,10 +59,6 @@
         <translation>Sélectionnez un modèle d&apos;appareil pour réaliser les comparaisons.</translation>
     </message>
     <message>
-        <source>Compare To:</source>
-        <translation type="obsolete">Comparer avec : </translation>
-    </message>
-    <message>
         <source>error</source>
         <translation>Erreur</translation>
     </message>
@@ -158,22 +154,6 @@ le système (%)</translation>
         <translation>Mémoire Totale : %1 Ko</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Cette page montre l&apos;utilisation de la mémoire par votre PDA.
-La mémoire est divisée en catégories comme suit :
-
-1. Utilisée - Mémoire utilisée par Opie et toutes autres applications en cours d&apos;exécution.
-2. Buffers - Mémoire temporaire utilisée pour accroître les performances
-3. Cache - Espace utilisé récemment et non encore libéré.
-4. Libre - Mémoire disponible non encore utilisée par Opie ou par les applications en cours.</translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -209,10 +189,6 @@ Cette quantité mémoire est découpée en plusieurs catégories :
         <translation>Utilisé#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Utilisé par</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -237,19 +213,8 @@ Cliquez et maintenez appuyer pour voir les informations à propos du module ou p
         <translation>Cette zone décrit en détail les informations au sujet de ce module.</translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Voulez-vous vraiment exécuter
-
-</translation>
-    </message>
-    <message>
         <source>Used by</source>
         <translation>Utilisé par</translation>
-    </message>
-    <message>
-        <source>You really want to execute %1 for this module?</source>
-        <translation type="obsolete">Vous désirez vraiment exécuter %1 pour ce module ?</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -316,95 +281,10 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
         <translation>Cette zone montre des informations détaillés à propos de ce processus.</translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Voulez-vous vraiment envoyer
-</translation>
-    </message>
-    <message>
-        <source>You really want to send %1 to this process?</source>
-        <translation type="obsolete">Vous désirez vraiment envoyer %1 à ce processus ?</translation>
-    </message>
-    <message>
         <source>Really want to send %1
 to this process?</source>
         <translation>Voulez-vous vraiment envoyer %1
 à ce processus ?</translation>
-    </message>
-</context>
-<context>
-    <name>StorageInfo</name>
-    <message>
-        <source>CF Card: </source>
-        <translation type="obsolete">Carte CF:</translation>
-    </message>
-    <message>
-        <source>Hard Disk </source>
-        <translation type="obsolete">Disque Dur</translation>
-    </message>
-    <message>
-        <source>SD Card </source>
-        <translation type="obsolete">Carte SD</translation>
-    </message>
-    <message>
-        <source>Hard Disk /dev/hd </source>
-        <translation type="obsolete">Disque /dev/hd</translation>
-    </message>
-    <message>
-        <source>SCSI Hard Disk /dev/sd </source>
-        <translation type="obsolete">Disque SCSI /dev/sd</translation>
-    </message>
-    <message>
-        <source>Int. Storage </source>
-        <translation type="obsolete">Stockage int</translation>
-    </message>
-    <message>
-        <source>CF</source>
-        <translation type="obsolete">CF</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="obsolete">Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation type="obsolete">Ha</translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="obsolete">Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation type="obsolete">SD</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="obsolete">Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation type="obsolete">SC</translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="obsolete">In</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="obsolete">Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
-    </message>
-    <message>
-        <source>RAM disk</source>
-        <translation type="obsolete">Disque RAM</translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation type="obsolete">RA</translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="obsolete">Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
     </message>
 </context>
 <context>
@@ -467,14 +347,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Version : </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Modèle : </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Fabricant : </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

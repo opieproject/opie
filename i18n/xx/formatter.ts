@@ -22,13 +22,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>FOO</translation>
     </message>
@@ -49,23 +42,9 @@ to stop functioning properly!!</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -119,17 +98,8 @@ has been successfully formatted.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -138,10 +108,6 @@ has been successfully mounted.</source>
     <message>
         <source>Internal</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

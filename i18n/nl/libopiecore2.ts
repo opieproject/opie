@@ -58,10 +58,6 @@
         <translation>Hoger+Links</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Geef rotatie weer</translation>
-    </message>
-    <message>
         <source>Action Button</source>
         <translation>Aktie toets</translation>
     </message>

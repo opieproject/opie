@@ -93,16 +93,6 @@ voor de laatste 10 jaar van haar vriendschap.</translation>
         <translation>&amp;Help</translation>
     </message>
     <message>
-        <source>Configuration Error</source>
-        <translation type="obsolete">Canfiguratiefout</translation>
-    </message>
-    <message>
-        <source>There are no schemes defined,
-or no scheme is selected.</source>
-        <translation type="obsolete">Er zijn geen schema&apos;s gedefinieerd,
-of er is geen schema geselecteerd.</translation>
-    </message>
-    <message>
         <source>KPacman</source>
         <translation>KPacman</translation>
     </message>

@@ -29,10 +29,6 @@ se desconectó.</translation>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Esperando inicialización servidor...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>Esperando nombre escritorio...</translation>
     </message>

@@ -7,9 +7,5 @@ accurately to calibrate your screen.</source>
         <translation>Clique na cruz com firmeza e precisão
 para calibrar o seu ecrâ.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Bem-Vindo ao Opie</translation>
-    </message>
 </context>
 </TS>

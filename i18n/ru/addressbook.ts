@@ -28,70 +28,6 @@
         <translation>Контакты</translation>
     </message>
     <message>
-        <source>Contact</source>
-        <translation type="obsolete">Контакт</translation>
-    </message>
-    <message>
-        <source>List</source>
-        <translation type="obsolete">Список</translation>
-    </message>
-    <message>
-        <source>Card</source>
-        <translation type="obsolete">Карта</translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="obsolete">Новый</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Редактировать</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Удалить</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Поиск</translation>
-    </message>
-    <message>
-        <source>Start Search</source>
-        <translation type="obsolete">Начать поиск</translation>
-    </message>
-    <message>
-        <source>Close Find</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-    <message>
-        <source>Write Mail To</source>
-        <translation type="obsolete">Написать письмо</translation>
-    </message>
-    <message>
-        <source>Beam Entry</source>
-        <translation type="obsolete">Отправить</translation>
-    </message>
-    <message>
-        <source>Import vCard</source>
-        <translation type="obsolete">Импорт vCard</translation>
-    </message>
-    <message>
-        <source>My Personal Details</source>
-        <translation type="obsolete">Сведения обо мне</translation>
-    </message>
-    <message>
-        <source>Save all Data</source>
-        <translation type="obsolete">Записать все</translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="obsolete">Конфигурация</translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Просмотр</translation>
-    </message>
-    <message>
         <source>Right file type ?</source>
         <translation>Тип файла правильный?</translation>
     </message>
@@ -130,10 +66,6 @@
         <translation>Не могу редактировать, синхронизируюсь</translation>
     </message>
     <message>
-        <source>Edit Address</source>
-        <translation type="obsolete">Редактировать адрес</translation>
-    </message>
-    <message>
         <source>Edit My Personal Details</source>
         <translation>Редактировать сведения обо мне</translation>
     </message>
@@ -165,20 +97,8 @@ Quit anyway?</source>
         <translation>Не могу найти контакт для заданных условий поиска!</translation>
     </message>
     <message>
-        <source>Cards</source>
-        <translation type="obsolete">Карточки</translation>
-    </message>
-    <message>
         <source>All</source>
         <translation>Все</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Без категории</translation>
-    </message>
-    <message>
-        <source>Export vCard</source>
-        <translation type="obsolete">Экспорт vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -1389,173 +1309,6 @@ Opie-Mail - свободная программа!</translation>
     <message>
         <source>Show quick search bar</source>
         <translation>Показать панель поиска</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Раб. тел.</translation>
-    </message>
-    <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Раб. факс</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Раб. моб.</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">E-mail по умолчанию</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">E-Mail</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Дом. тел.</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Дом. факс</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Дом. моб.</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Офис</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Профессия</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Помощник</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Управляющий</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Супруг(а)</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Пол</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">День рожд.</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">Годовщина</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Прозвище</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Дети</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Name Title</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Имя</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Отчество</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Фамилия</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Суффикс</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Файл</translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="obsolete">Должность</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Отдел</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Компания</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Раб. улица</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Раб. город</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Раб. область</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Раб. индекс</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Страна(раб.)</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Раб. пейджер</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Раб. WEB-страница</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Дом. ул.</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Дом. город</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Дом.обл.</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Дом.индекс</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Страна(дом)</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Дом.WEB</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Заметки</translation>
     </message>
 </context>
 </TS>

@@ -60,10 +60,6 @@
         <translation>Перемешать</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Решение</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Игра</translation>
     </message>

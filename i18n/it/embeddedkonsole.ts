@@ -6,26 +6,6 @@
         <source>Command Selection</source>
         <translation>Sezione Comandi</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="obsolete">nuovo</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">modifica</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="obsolete">elimina</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="obsolete">sù</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="obsolete">giù</translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -49,18 +29,6 @@
         <translation>Terminale</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Micro</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Piccolo</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Medio</translation>
-    </message>
-    <message>
         <source>Command List</source>
         <translation>Lista Comandi</translation>
     </message>
@@ -73,10 +41,6 @@
         <translation>Nascondi lista comandi</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Tab in Fondo</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Verde su Nero</translation>
     </message>
@@ -87,18 +51,6 @@
     <message>
         <source>White on Black</source>
         <translation>Bianco su Nero</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Nero su Trasparente</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Nero su Rosso</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Rosso su Nero</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -137,14 +89,6 @@
         <translation>Colori</translation>
     </message>
     <message>
-        <source>Font</source>
-        <translation type="obsolete">Font</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opzioni</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nuovo</translation>
     </message>
@@ -177,10 +121,6 @@
         <translation>Modifica veloce</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation type="obsolete">Modifica</translation>
-    </message>
-    <message>
         <source>None</source>
         <translation>Disattiva</translation>
     </message>
@@ -211,10 +151,6 @@
     <message>
         <source>Use Beep</source>
         <translation>Usa Beep</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Tabs Sopra</translation>
     </message>
     <message>
         <source>Konsole</source>

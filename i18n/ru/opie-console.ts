@@ -791,10 +791,6 @@
         <translation>Неудача</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Не удалось набрать номер.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Отменяю...</translation>
     </message>
@@ -855,22 +851,6 @@
     <message>
         <source>Color scheme</source>
         <translation>Цветовая схема</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Размер шрифта</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">мелкий</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">средний</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">крупный</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

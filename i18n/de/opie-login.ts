@@ -9,10 +9,6 @@ accurately to calibrate your screen.</source>
 und präzise um Ihr Display zu 
 kalibrieren.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Willkommen zu OPIE</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -52,10 +48,6 @@ kalibrieren.</translation>
         <translation>Beenden</translation>
     </message>
     <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;%1 %2&lt;/center&gt;</translation>
-    </message>
-    <message>
         <source>Wrong password</source>
         <translation>Falsches Passwort</translation>
     </message>
@@ -64,22 +56,8 @@ kalibrieren.</translation>
         <translation>Das eingegebene Passwort ist nicht richtig.</translation>
     </message>
     <message>
-        <source>OPIE was terminated
-by an uncaught signal
-(%1)
-</source>
-        <translation type="obsolete">OPIE wurde durch
-ein nicht abgefangenes
-Signal beendet: %1
-</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="obsolete">OPIE konnte nicht gestartet werden.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>
@@ -97,10 +75,6 @@ Signal beendet: %1</translation>
     <message>
         <source>Could not start Opie.</source>
         <translation>Opie konnte nicht gestartet werden.</translation>
-    </message>
-    <message>
-        <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;Willkommen zu OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</translation>
     </message>
 </context>
 <context>

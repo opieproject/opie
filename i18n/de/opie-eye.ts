@@ -60,6 +60,14 @@
         <source>Toggle thumbnail</source>
         <translation>Schalte Vorschau um</translation>
     </message>
+    <message>
+        <source>Increase brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PIconView</name>
@@ -213,6 +221,14 @@
     <message>
         <source>Display brightness...</source>
         <translation>Anzeigehelligkeit...</translation>
+    </message>
+    <message>
+        <source>Increase brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness by 5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

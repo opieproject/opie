@@ -75,10 +75,6 @@
         <translation>Geben Sie Ihre Nachricht hier ein, um an der Kanaldiskussion teizunehmen</translation>
     </message>
     <message>
-        <source>CTCP</source>
-        <translation type="obsolete">CTCP</translation>
-    </message>
-    <message>
         <source>Query</source>
         <translation>Abfrage</translation>
     </message>
@@ -164,10 +160,6 @@
         <translation>PRIVMSG von unbekanntem Typ erhalten</translation>
     </message>
     <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="obsolete">Spitznamen Änderung einer unbekannten Person</translation>
-    </message>
-    <message>
         <source>Unknown person quit - desynchronized?</source>
         <translation>Unbekannte Person gegangen - unsynchronisiert?</translation>
     </message>
@@ -182,10 +174,6 @@
     <message>
         <source>Received a CTCP PING from </source>
         <translation>CTCP PING erhalten von </translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="obsolete">CTCP VERSION erhalten von </translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -282,14 +270,6 @@
     <message>
         <source>Channel message with unknown channel %1</source>
         <translation>Kanalnachricht mit unbekanntem Kanal %1</translation>
-    </message>
-    <message>
-        <source>You are now known as %1</source>
-        <translation type="obsolete">Du bis nun als %1 bekannt</translation>
-    </message>
-    <message>
-        <source>%1 is now known as %2</source>
-        <translation type="obsolete">%1 ist nun bekannt als %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
@@ -500,16 +480,8 @@ Name: %4</translation>
         <translation>Hostname benötigt</translation>
     </message>
     <message>
-        <source>Port required</source>
-        <translation type="obsolete">Port benötigt</translation>
-    </message>
-    <message>
         <source>Nickname required</source>
         <translation>Spitzname benötigt</translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="obsolete">Echter Name benötigt</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
@@ -561,10 +533,6 @@ enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
 </context>
 <context>
     <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
-        <translation type="obsolete">Verbindung mit</translation>
-    </message>
     <message>
         <source>Server messages</source>
         <translation>Server Nachrichten</translation>

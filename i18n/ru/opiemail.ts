@@ -79,10 +79,6 @@
         <translation>Отправляю почту</translation>
     </message>
     <message>
-        <source>No Receiver spezified</source>
-        <translation type="obsolete">Не задан адресат</translation>
-    </message>
-    <message>
         <source>Store message</source>
         <translation>Сохранить сообщение</translation>
     </message>
@@ -251,10 +247,6 @@
         <translation>Пользователь</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Исп. SSL</translation>
-    </message>
-    <message>
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
@@ -341,6 +333,58 @@
         <source>Date</source>
         <translation>Дата</translation>
     </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished">Сервер</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set on/offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh folder list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new folder</source>
+        <translation type="unfinished">Создать новую папку</translation>
+    </message>
+    <message>
+        <source>(Un-)Subscribe groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh headerlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New subfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move/Copie all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read current mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
@@ -366,14 +410,6 @@
     <message>
         <source>Groupfilter:</source>
         <translation>Фильтр групп:</translation>
-    </message>
-    <message>
-        <source>Enter a filter string here.
-Then hit &quot;get newsgroup list&quot; again and only groups starting 
-with that filter will be listet.</source>
-        <translation type="obsolete">Введите строку фильтра.
-Потом нажмите &quot;получить список групп новостей&quot; снова и только группы,
-начинающиеся с этой строки, будут показаны.</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
@@ -571,10 +607,6 @@ with that filter will be listed.</source>
         <translation>Учетная запись</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Исп. SSL</translation>
-    </message>
-    <message>
         <source>Use Login</source>
         <translation>Исп. регистрацию</translation>
     </message>
@@ -684,16 +716,13 @@ with that filter will be listed.</source>
         <source>Play Sound when new mails arrive</source>
         <translation>Проигрывать звук когда есть новая почта</translation>
     </message>
-</context>
-<context>
-    <name>StatusWidgetUI</name>
     <message>
-        <source>Form1</source>
-        <translation>Форма1</translation>
+        <source>Click opens mail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation>ТекстМетка1</translation>
+        <source>Click activate server/folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -754,13 +783,17 @@ with that filter will be listed.</source>
         <source>E-Mail by %1</source>
         <translation>E-Mail от %1</translation>
     </message>
+    <message>
+        <source>Reading attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not read content of attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
-    <message>
-        <source>E-Mail by %1</source>
-        <translation type="obsolete">E-Mail от %1</translation>
-    </message>
     <message>
         <source>Mail</source>
         <translation>Почта</translation>
@@ -800,6 +833,10 @@ with that filter will be listed.</source>
     <message>
         <source>E-Mail view</source>
         <translation>Вид e-mail</translation>
+    </message>
+    <message>
+        <source>Show image preview inline</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

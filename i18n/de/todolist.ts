@@ -7,10 +7,6 @@
         <translation>Ok</translation>
     </message>
     <message>
-        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="obsolete">&lt;h1&gt;Alarm um %0&gt;&lt;/h1&gt;&lt;br&gt;</translation>
-    </message>
-    <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation>&lt;h1&gt;Alarm um %1&gt;&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
@@ -90,64 +86,12 @@
         <source>loud</source>
         <translation>laut</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie Aufgaben</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Neu von Vorlage</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Neue Aufgabe</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Hier klicken, um eine neue Aufgabe zu erzeugen.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Aufgabe editieren</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Hier klicken, um die aktuelle Aufgabe zu ändern.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Aufgabe ansehen</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Löschen...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Hier klicken, um die aktuelle Aufgabe zu löschen.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Alles löschen...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Erledigte Aufgaben löschen</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Senden</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Hier klicken, um die aktuelle Aufgabe an ein anderes Gerät zu senden.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Suchen</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -164,18 +108,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Schnelleingabe anzeigen</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Datei</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategorie</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Optionen</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -196,10 +128,6 @@ Die Liste zeigt folgende Informationen:
 2. Priorität- Eine graphische Repräsentation der Aufgabenpriorität. Hier Doppelklicken, um sie zu ändern.
 3. Beschreibung- Die Aufgabenbeschreibung. Hier Klicken, um die Aufgabe auszuwählen.
 4. Fälligkeit- Zeigt wann die Aufgabe fällig ist. Diese Anzeige kann wahlweise ein- und ausgeschaltet werden, indem man im Menü Optionen-&gt;&quot;Fälligkeitsdatum anzeigen&quot; wählt.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Alle Kategorien</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -223,21 +151,12 @@ Trotzdem beenden?</translation>
         <translation>Aufgaben</translation>
     </message>
     <message>
-        <source>Can not edit data, currently syncing</source>
-        <translation type="obsolete">Die Daten können nicht editiert werden.
-Es wird gerade synchronisiert</translation>
-    </message>
-    <message>
         <source>all tasks?</source>
         <translation>alle Aufgaben?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
         <translation>alle erledigten Aufgaben?</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">nicht eingeteilt</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -248,10 +167,6 @@ Es wird gerade synchronisiert</translation>
         <translation>Neue Aufgaben</translation>
     </message>
     <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Duplizieren</translation>
-    </message>
-    <message>
         <source>C.</source>
         <translation>E.</translation>
     </message>
@@ -260,16 +175,8 @@ Es wird gerade synchronisiert</translation>
         <translation>Priorität</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Beschreibung</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>fällig bis</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Vorlagen konfigurieren</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -522,10 +429,6 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     <message>
         <source>Summary:</source>
         <translation>Zusammenfassung:</translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="obsolete">Notizen:</translation>
     </message>
 </context>
 <context>

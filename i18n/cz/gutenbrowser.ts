@@ -32,10 +32,6 @@
 <context>
     <name>Gutenbrowser</name>
     <message>
-        <source>Gutenbrowser Output</source>
-        <translation type="obsolete">Gutenbrowser výstup</translation>
-    </message>
-    <message>
         <source>Running wget</source>
         <translation>Spouštím wget</translation>
     </message>
@@ -239,10 +235,6 @@ http://www.trolltech.com
         <translation>Index knihovny - požívá hlavní pg index.</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Error opening local library index:&lt;/P&gt; </source>
-        <translation type="obsolete">&lt;p&gt;Chyba otevření lokálního indexu knihovny:&lt;/P&gt; </translation>
-    </message>
-    <message>
         <source>Library Search</source>
         <translation>Hledání hnihovny</translation>
     </message>
@@ -288,7 +280,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source></source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Options</source>
@@ -315,6 +307,10 @@ http://www.trolltech.com
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
         <translation>&lt;p&gt;Chyba otevření index souboru knihovny. Prosím stáhněte nový.&lt;/P&gt; </translation>
+    </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

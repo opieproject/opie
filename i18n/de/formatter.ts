@@ -22,16 +22,6 @@
         <translation>Haupt</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">WARNUNG
-Das Ändern von Parametern
-hier kann zu Funktionsstörungen
-des Systems führen.</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>fstab bearbeiten</translation>
     </message>
@@ -52,24 +42,10 @@ des Systems führen.</translation>
         <translation>Erweitert</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">Formatieren ?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>Wirklich formatieren
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">mit</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">Dateisystem ?!? Sie verlieren alle Daten !!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -126,18 +102,8 @@ has been successfully formatted.</source>
 wurde erfolgreich formatiert.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Versuche zu mounten.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>Kartenmount fehlgeschlagen!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-wurde erfolgreich gemountet.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -146,10 +112,6 @@ wurde erfolgreich gemountet.</translation>
     <message>
         <source>Internal</source>
         <translation>Intern</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Medientyp:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

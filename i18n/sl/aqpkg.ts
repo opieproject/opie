@@ -485,10 +485,6 @@ Ste prepričani?
         <translation>Ponovno naloži</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">P</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Želite odstraniti ali nadgraditi
@@ -497,10 +493,6 @@ Ste prepričani?
     <message>
         <source>Remove or Upgrade</source>
         <translation>Odstrani ali nadgradi</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">N</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

@@ -27,14 +27,6 @@
         <translation>&amp;Partita</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Cambia Retro delle Carte</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Metti In Posizione</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Settaggi</translation>
     </message>
@@ -51,24 +43,8 @@
         <translation>Gioca</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Cambia Retro delle Carte</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Metti In Posizione</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Gira Una Carta</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Settaggi</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Gira Tre Carte</translation>
     </message>
     <message>
         <source>&amp;Change card backs</source>

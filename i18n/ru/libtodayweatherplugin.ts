@@ -106,10 +106,6 @@ Pres: </source>
         <translation>миль/час</translation>
     </message>
     <message>
-        <source> hPa</source>
-        <translation type="obsolete">кПа</translation>
-    </message>
-    <message>
         <source> Hg</source>
         <translation>ртути</translation>
     </message>

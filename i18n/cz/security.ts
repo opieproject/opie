@@ -75,40 +75,8 @@ Můžete vybrat pouze nakonfigurované uživatele.</translation>
         <translation>Upozornění</translation>
     </message>
     <message>
-        <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation type="obsolete">&lt;p&gt;Všechny uživatelovy síťové rozsahy budou ztraceny.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Storno</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="obsolete">Ok</translation>
-    </message>
-    <message>
-        <source>192.168.129.0/24</source>
-        <translation type="obsolete">192.168.129.0/24</translation>
-    </message>
-    <message>
-        <source>192.168.1.0/24</source>
-        <translation type="obsolete">192.168.1.0/24</translation>
-    </message>
-    <message>
-        <source>192.168.0.0/16</source>
-        <translation type="obsolete">192.168.0.0/16</translation>
-    </message>
-    <message>
-        <source>172.16.0.0/12</source>
-        <translation type="obsolete">172.16.0.0/12</translation>
-    </message>
-    <message>
-        <source>10.0.0.0/8</source>
-        <translation type="obsolete">10.0.0.0/8</translation>
-    </message>
-    <message>
-        <source>1.0.0.0/8</source>
-        <translation type="obsolete">1.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
@@ -121,10 +89,6 @@ Můžete vybrat pouze nakonfigurované uživatele.</translation>
     <message>
         <source>Important notice</source>
         <translation>Důležitá poznámka</translation>
-    </message>
-    <message>
-        <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-multiauth-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation type="obsolete">Pro ochranu vašeho PDA jedním, nebo více pluginy (např. jednoduché ověření PINem), musíte nainstalovat alespoň jeden &lt;em&gt;opie-multiauth-*&lt;/em&gt; balíček! Až to uděláte, budete zde schopni nakonfigurovat ochranu vašeho PDA.</translation>
     </message>
     <message>
         <source>Locking</source>
@@ -166,24 +130,12 @@ Můžete vybrat pouze nakonfigurované uživatele.</translation>
         <translation>Pažadavek proběhl</translation>
     </message>
     <message>
-        <source>Debug options</source>
-        <translation type="obsolete">Ladící možnosti</translation>
-    </message>
-    <message>
         <source>Don&apos;t protect this config screen</source>
         <translation>Nechránit toto konfigurační okno</translation>
     </message>
     <message>
         <source>Show explanatory screens</source>
         <translation>Zobrazovat obrazovky s vysvětlením</translation>
-    </message>
-    <message>
-        <source>Allow to bypass authentication</source>
-        <translation type="obsolete">Umožnit překlenout ověřování</translation>
-    </message>
-    <message>
-        <source>Note: the third option implies the second one</source>
-        <translation type="obsolete">Poznámka: Třetí možnost obsahuje druhou</translation>
     </message>
     <message>
         <source>Options</source>
@@ -304,26 +256,11 @@ Uvědomte si ale, že všechny zadané rozsahy budou ztraceny!</translation>
     </message>
     <message>
         <source>Alter the Sync Protocol to tweak for the different devices.
-    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
-    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
-    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-</source>
-        <translation type="obsolete">Vyzkoušejte synchronizační protokoly pro různá zařízení.
-    IntelliSync vypne ověření heslem, ale budete dotázáni na akceptování spojení.
-    Opie1.0 bude kompatibilní s QtopiaDesktop, MultiSync a KitchenSync.
-    Qtopia1.7 změní způsob, jak jsou data posílána klientovi a nebude pracovat se staršími klienty.</translation>
-    </message>
-    <message>
-        <source>Alter the Sync Protocol to tweak for the different devices.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>Vyzkoušejte synchronizační protokoly pro různá zařízení.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync vypne ověření heslem, ale budete dotázáni na akceptování spojení.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 bude kompatibilní s QtopiaDesktop, MultiSync a KitchenSync.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 změní způsob, jak jsou data posílána klientovi a nebude pracovat se staršími klienty.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

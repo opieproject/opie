@@ -6,10 +6,6 @@
         <translation>Note</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Mappen eksisterer ikke</translation>
-    </message>
-    <message>
         <source>Show Hidden Files</source>
         <translation>Vis skjulte filer</translation>
     </message>
@@ -122,12 +118,6 @@
         <translation>2</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Vil du slette
-%1 filer?</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
@@ -144,32 +134,8 @@
         <translation>Kunne ikke omdøbe</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Vil du kopiere
-%1 filer?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Filen eksisterer!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-eksisterer. Overskriv?</translation>
-    </message>
-    <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Kunne ikke kopiere
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">til
-</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -178,12 +144,6 @@ eksisterer. Overskriv?</translation>
     <message>
         <source> As</source>
         <translation>Som</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Kunne ikke flytte
-</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
@@ -202,30 +162,6 @@ eksisterer. Overskriv?</translation>
         <translation>Ok</translation>
     </message>
     <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete"> eksisterer allerede.
-Vil du slette den?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 eksisterer. Overskriv?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Kunne ikke kopiere %1 til %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Advanced FileManager
-er copyright 2002-2003 af
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-og er licenseret som GPL</translation>
-    </message>
-    <message>
         <source>Bookmark Directory</source>
         <translation>Bogmærk mappe</translation>
     </message>
@@ -238,28 +174,8 @@ og er licenseret som GPL</translation>
         <translation>Fejl</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Kan ikke fjerne den aktuelle mappe
-fra bogmærker.
-Den er ikke bogmærket!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Filsøgning</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Vil du slette %1
-og alt hvad der er i den?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Vil du slette
-%1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>

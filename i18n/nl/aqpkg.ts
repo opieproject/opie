@@ -206,38 +206,6 @@
         <translation>Kan ipkg proces niet starten</translation>
     </message>
     <message>
-        <source>Could not open :</source>
-        <translation type="obsolete">Kan niet openen:</translation>
-    </message>
-    <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">Maak map aan</translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Link gemaakt van %1 naar %2</translation>
-    </message>
-    <message>
-        <source>Failed to link %1 to %2</source>
-        <translation type="obsolete">Link van %1 naar %2 mislukt</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">Verwijderd %1</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">%1 verwijderen mislukt</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Verwijderd</translation>
-    </message>
-    <message>
-        <source>Failed to remove </source>
-        <translation type="obsolete">Verwijderen mislukt</translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation type="unfinished"></translation>
     </message>
@@ -517,10 +485,6 @@ pakket %1?</translation>
         <translation>Herinstalleer</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">R</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Wilt u verwijdering of vernieuwing van
@@ -529,10 +493,6 @@ pakket %1?</translation>
     <message>
         <source>Remove or Upgrade</source>
         <translation>Verwijdering of Vernieuwing</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

@@ -10,10 +10,6 @@
         <translation>Explodiu!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Minas</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Nível 1</translation>
     </message>

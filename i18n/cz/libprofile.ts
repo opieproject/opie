@@ -22,10 +22,6 @@
         <translation>Na dotaz</translation>
     </message>
     <message>
-        <source>Disabled</source>
-        <translation type="obsolete">Vypnuto</translation>
-    </message>
-    <message>
         <source>Trigger VPN</source>
         <translation>Spustit VPN</translation>
     </message>
@@ -108,14 +104,6 @@
     <message>
         <source>Bytes</source>
         <translation>Bajtů</translation>
-    </message>
-    <message>
-        <source>Transmitting</source>
-        <translation type="obsolete">Odesílání</translation>
-    </message>
-    <message>
-        <source>Others</source>
-        <translation type="obsolete">Ostatní</translation>
     </message>
     <message>
         <source>Collisions</source>

@@ -73,10 +73,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>CTCP</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Query</source>
         <translation>FOO</translation>
     </message>
@@ -134,24 +130,8 @@
 <context>
     <name>IRCMessageParser</name>
     <message>
-        <source>Received unhandled numeric command : </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Received unhandled ctcp command : </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Received unhandled literal command : </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Nonexistant channel join - desynchronized?</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source> joined channel </source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -160,14 +140,6 @@
     <message>
         <source>You already joined the channel - desynchronized?</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>You left channel </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> left channel </source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -182,28 +154,8 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Channel message with unknown channel </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Received PRIVMSG of unknown type</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>You are now known as </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> is now known as </source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source> has quit </source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -220,10 +172,6 @@
     <message>
         <source>Received a CTCP PING from </source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -320,14 +268,6 @@
     <message>
         <source>Channel message with unknown channel %1</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>You are now known as %1</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>%1 is now known as %2</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
@@ -537,16 +477,8 @@ Real name: %4</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Port required</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Nickname required</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
@@ -596,10 +528,6 @@ comma separated list of channel
 </context>
 <context>
     <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
     <message>
         <source>Server messages</source>
         <translation>FOO</translation>

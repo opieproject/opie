@@ -154,12 +154,6 @@
         <translation type="unfinished">選擇字型</translation>
     </message>
     <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="obsolete">Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</translation>
-    </message>
-    <message>
         <source>Yes</source>
         <translation type="unfinished">是的</translation>
     </message>

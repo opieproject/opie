@@ -119,20 +119,12 @@
         <translation>tan</translation>
     </message>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="obsolete">Calculadora Experimental</translation>
-    </message>
-    <message>
         <source>Calculator</source>
         <translation type="unfinished">Calculadora</translation>
     </message>
 </context>
 <context>
     <name>CalculatorImpl</name>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">Calculadora</translation>
-    </message>
     <message>
         <source>Standard</source>
         <translation>Padrão</translation>

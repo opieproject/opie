@@ -38,10 +38,6 @@ a conexão.</translation>
         <translation>Conectado a %1</translation>
     </message>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Eperando a inicialização do servidor...</translation>
-    </message>
-    <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
         <translation>Erro de Protocolo: Uma codificação desconhecida foi usada pelo servidor %1</translation>
     </message>

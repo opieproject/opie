@@ -69,20 +69,8 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Weight</source>

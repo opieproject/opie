@@ -74,10 +74,6 @@
         <translation>Введите здесь свое сообщение, чтобы поучаствовать в беседе</translation>
     </message>
     <message>
-        <source>CTCP</source>
-        <translation type="obsolete">CTCP</translation>
-    </message>
-    <message>
         <source>Query</source>
         <translation>Query</translation>
     </message>
@@ -163,10 +159,6 @@
         <translation>Принято PRIVMSG неизвестного типа</translation>
     </message>
     <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="obsolete">Смена клички неизвестного человека</translation>
-    </message>
-    <message>
         <source>Unknown person quit - desynchronized?</source>
         <translation>Выход неизвестного человека - не синхронизирован?</translation>
     </message>
@@ -181,10 +173,6 @@
     <message>
         <source>Received a CTCP PING from </source>
         <translation>Принят CTCP PING от</translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="obsolete">Принят CTCP VERSION от</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -283,14 +271,6 @@
         <translation>Сообщение канала с неизвестного канала %1</translation>
     </message>
     <message>
-        <source>You are now known as %1</source>
-        <translation type="obsolete">Вы теперб известны как %1</translation>
-    </message>
-    <message>
-        <source>%1 is now known as %2</source>
-        <translation type="obsolete">%1 теперь известен как %2</translation>
-    </message>
-    <message>
         <source>%1 has quit (%2)</source>
         <translation>%1 вышел (%2)</translation>
     </message>
@@ -387,10 +367,6 @@ Real name: %4</source>
     <message>
         <source>Received a CTCP VERSION request from </source>
         <translation>Получил запрос CTCP VERSION от</translation>
-    </message>
-    <message>
-        <source>Malformed DCC request from </source>
-        <translation type="obsolete">Неверный DCC запрос от</translation>
     </message>
     <message>
         <source>Received a CTCP PING reply from %1: %2 seconds</source>
@@ -503,16 +479,8 @@ Real name: %4</source>
         <translation>Необходимо имя хоста</translation>
     </message>
     <message>
-        <source>Port required</source>
-        <translation type="obsolete">Необходим порт</translation>
-    </message>
-    <message>
         <source>Nickname required</source>
         <translation>Необходима кличка</translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="obsolete">Необходимо настоящее имя</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
@@ -564,10 +532,6 @@ comma separated list of channel
 </context>
 <context>
     <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
-        <translation type="obsolete">Соединение с</translation>
-    </message>
     <message>
         <source>Server messages</source>
         <translation>Сообщения сервера</translation>

@@ -6,10 +6,6 @@
 accurately to calibrate your screen.</source>
         <translation>FOO</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -49,10 +45,6 @@ accurately to calibrate your screen.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Wrong password</source>
         <translation>FOO</translation>
     </message>
@@ -61,19 +53,8 @@ accurately to calibrate your screen.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>OPIE was terminated
-by an uncaught signal
-(%1)
-</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>

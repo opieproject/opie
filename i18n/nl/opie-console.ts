@@ -791,10 +791,6 @@
         <translation>Mislukking</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Bellen van nummer mislukt.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Afbreken...</translation>
     </message>
@@ -855,22 +851,6 @@
     <message>
         <source>Color scheme</source>
         <translation>Kleurschema</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Lettertypegrootte</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">klein</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">middel</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">groot</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

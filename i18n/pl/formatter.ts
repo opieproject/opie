@@ -22,16 +22,6 @@
         <translation>Glowny</translation>
     </message>
     <message>
-        <source>CAUTION:
-Changing parameters on this 
-page may cause your system 
-to stop functioning properly!!</source>
-        <translation type="obsolete">UWAGA:
-Zmiana parametrow na tej
-stronie moze zaklocic prawidlowe
-dzialanie twojego systemu!!</translation>
-    </message>
-    <message>
         <source>Edit fstab</source>
         <translation>Edytuj fstab</translation>
     </message>
@@ -52,26 +42,10 @@ dzialanie twojego systemu!!</translation>
         <translation>Zaawansowane</translation>
     </message>
     <message>
-        <source>Format?!?</source>
-        <translation type="obsolete">Formatowac?!?</translation>
-    </message>
-    <message>
         <source>Really format
 </source>
         <translation>Na pewno formatowac
 </translation>
-    </message>
-    <message>
-        <source>
-with </source>
-        <translation type="obsolete">
-na</translation>
-    </message>
-    <message>
-        <source> filesystem?!?
-You will loose all data!!</source>
-        <translation type="obsolete">system plikow?!?
-Stracisz wszystkie dane!!</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -127,18 +101,8 @@ has been successfully formatted.</source>
 zostal zformatowany.</translation>
     </message>
     <message>
-        <source>Trying to mount.</source>
-        <translation type="obsolete">Probuje zamontowac.</translation>
-    </message>
-    <message>
         <source>Card mount failed!</source>
         <translation>Zamontowanie karty nie powiodlo sie!</translation>
-    </message>
-    <message>
-        <source>
-has been successfully mounted.</source>
-        <translation type="obsolete">
-zostal zamontowany.</translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
@@ -147,10 +111,6 @@ zostal zamontowany.</translation>
     <message>
         <source>Internal</source>
         <translation>Wewnetrzny</translation>
-    </message>
-    <message>
-        <source>Storage Type : </source>
-        <translation type="obsolete">Typ pamieci:</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)

@@ -73,10 +73,6 @@ accurately to calibrate your screen.</source>
         <translation>Dokładnie i silnie dotknij krzyżyk
 aby skalibrować ekran.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Witaj w Opie</translation>
-    </message>
 </context>
 <context>
     <name>DesktopPowerAlerter</name>
@@ -114,10 +110,6 @@ aby skalibrować ekran.</translation>
     <message>
         <source>Finish</source>
         <translation>Kończ</translation>
-    </message>
-    <message>
-        <source>FirstUseBackground</source>
-        <translation type="obsolete">PierwszeTło</translation>
     </message>
 </context>
 <context>
@@ -296,22 +288,6 @@ aby skalibrować ekran.</translation>
 (%1)&lt;/p&gt;&lt;p&gt;Czy chcesz poprawić zegar?&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>Battery level is critical!
-Keep power off until power restored!</source>
-        <translation type="obsolete">Poziom energii jest krytyczny!
-Wylacz urzadzenie az do naladowania baterii!</translation>
-    </message>
-    <message>
-        <source>Battery is running very low. </source>
-        <translation type="obsolete">Poziom energii bardzo niski.</translation>
-    </message>
-    <message>
-        <source>The Back-up battery is very low.
-Please charge the back-up battery.</source>
-        <translation type="obsolete">Bateria zapasowa sie rozladowuje.
-Doladuj baterie zapasowa.</translation>
-    </message>
-    <message>
         <source>business card</source>
         <translation>wizytowka</translation>
     </message>
@@ -393,12 +369,6 @@ tą aplikację.</translation>
         <translation>Zamknij system</translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="obsolete">&lt;p&gt;
-Te opcje zamykające zostały pierwotnie dodane do użytku deweloperów i dla testów Opie. W normalnym środowisku ich używanie nie jest konieczne.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Anuluj</translation>
     </message>
@@ -412,10 +382,6 @@ Te opcje zamykające zostały pierwotnie dodane do użytku deweloperów i dla te
     <message>
         <source>Sync Connection</source>
         <translation>Połączenie synchronizacyjne</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="obsolete">&lt;p&gt;Nieautoryzowany system zada dostepu do tego urzadzenia.&lt;p&gt;Jesli uzywasz Qtopia Desktop w wersji wczesniejszej niz 1.5.1, zaktualizuj ja.</translation>
     </message>
     <message>
         <source>Deny</source>

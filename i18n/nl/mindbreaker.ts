@@ -17,18 +17,6 @@
 <context>
     <name>MindBreakerBoard</name>
     <message>
-        <source>Go%1p%2</source>
-        <translation type="obsolete">Beurt%1p%2</translation>
-    </message>
-    <message>
-        <source>CurrentGo%1</source>
-        <translation type="obsolete">HuidigeBeurt%1</translation>
-    </message>
-    <message>
-        <source>Answer%1</source>
-        <translation type="obsolete">Antwoord%1</translation>
-    </message>
-    <message>
         <source>Reset Statistics</source>
         <translation>Schoon Statistieken</translation>
     </message>

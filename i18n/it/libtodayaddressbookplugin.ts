@@ -11,24 +11,12 @@
         <translation>Inserisci il numero massimo di righe che dovranno essere visualizzate per ogni anniversario/compleanno</translation>
     </message>
     <message>
-        <source>Clip line after X chars: </source>
-        <translation type="obsolete">Unisci riga dopo X caratteri: </translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Dopo quanti caratteri le informazioni sull&apos;impegno non devono essere visualizzate</translation>
-    </message>
-    <message>
         <source>Days look ahead: </source>
         <translation>Giorni da guardare avanti: </translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
         <translation>Per quanti giorni in avanti dobbiamo cercare</translation>
-    </message>
-    <message>
-        <source>To activate settings: Restart application !</source>
-        <translation type="obsolete">Per attivare le impostazioni: Riavvia l&apos;applicazione !</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>

@@ -2,16 +2,8 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Fechar</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>A carregar</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Percentagem de bateria restante</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -50,14 +42,6 @@
         <translation>Energia externa desligada</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Tempo de bateria restante</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Estado da bateria</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Falha</translation>
     </message>
@@ -70,24 +54,12 @@
         <translation>A carregar as duas baterias</translation>
     </message>
     <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Percentagem de bateria restante:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Tempo de bateria restante:</translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Adaptador externo sem bateria</translation>
     </message>
     <message>
         <source>no data</source>
         <translation>sem dados</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">Ipaq</translation>
     </message>
     <message>
         <source>Jacket  </source>

@@ -139,18 +139,6 @@ Click here to select an available scheme.</source>
         <translation type="unfinished">Haladó</translation>
     </message>
     <message>
-        <source>Restart</source>
-        <translation type="obsolete">Újraindít</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Igen</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Nem</translation>
-    </message>
-    <message>
         <source>Save Scheme</source>
         <translation type="unfinished"></translation>
     </message>

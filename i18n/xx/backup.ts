@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>FOO</translation>
     </message>
@@ -35,10 +31,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>FOO</translation>
     </message>
@@ -49,10 +41,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -106,10 +94,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>FOO</translation>
     </message>
@@ -128,10 +112,6 @@
     <message>
         <source>&amp;Restore</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Locations</source>

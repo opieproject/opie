@@ -1,39 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
-        <translation type="obsolete">Okno souboru</translation>
-    </message>
-    <message>
-        <source>Open</source>
-        <translation type="obsolete">Otevřít</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Uložit</translation>
-    </message>
-    <message>
-        <source>Select Directory</source>
-        <translation type="obsolete">Vyberte adresář</translation>
-    </message>
-</context>
-<context>
-    <name>OFontSelector</name>
-    <message>
-        <source>Style</source>
-        <translation type="obsolete">Styl</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete">Velikost</translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete">Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
-    </message>
-</context>
-<context>
     <name>OTimePickerDialogBase</name>
     <message>
         <source>OTimePickerDialogBase</source>

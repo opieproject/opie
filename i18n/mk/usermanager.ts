@@ -13,10 +13,6 @@
 <context>
     <name>UserConfig</name>
     <message>
-        <source>OPIE User Manager</source>
-        <translation type="obsolete">OPIE менаџер на корисници</translation>
-    </message>
-    <message>
         <source>Opie User Manager</source>
         <translation type="unfinished"></translation>
     </message>

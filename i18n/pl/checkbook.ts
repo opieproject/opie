@@ -38,30 +38,6 @@
         <translation>Wybierz typ rachunku.</translation>
     </message>
     <message>
-        <source>Savings</source>
-        <translation type="obsolete">Oszczednosci</translation>
-    </message>
-    <message>
-        <source>Checking</source>
-        <translation type="obsolete">Czeki</translation>
-    </message>
-    <message>
-        <source>CD</source>
-        <translation type="obsolete">CD</translation>
-    </message>
-    <message>
-        <source>Money market</source>
-        <translation type="obsolete">Rynek finansowy</translation>
-    </message>
-    <message>
-        <source>Mutual fund</source>
-        <translation type="obsolete">Wspolny fundusz</translation>
-    </message>
-    <message>
-        <source>Other</source>
-        <translation type="obsolete">Inne</translation>
-    </message>
-    <message>
         <source>Bank:</source>
         <translation>Bank:</translation>
     </message>
@@ -100,14 +76,6 @@
     <message>
         <source>Enter any additional information for this checkbook here.</source>
         <translation>Wpisz tu dodatkowe informacje o tym rachunku.</translation>
-    </message>
-    <message>
-        <source>Current balance: %10.00</source>
-        <translation type="obsolete">Aktualny bilans: %10.00</translation>
-    </message>
-    <message>
-        <source>This area shows the current balance in this checkbook.</source>
-        <translation type="obsolete">Ten obszar pokazuje aktualny bilans tego rachunku.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
@@ -180,10 +148,6 @@ By przesortować wpisy wg pewnego pola, kliknij na nazwę kolumny.</translation>
     <message>
         <source>Click here to draw the selected chart.</source>
         <translation>Kliknij tu aby rysować wybrany wykres.</translation>
-    </message>
-    <message>
-        <source>Current balance: %1%2</source>
-        <translation type="obsolete">Aktualny bilans: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
@@ -655,62 +619,6 @@ Wpisana wartość powinna być liczbą dodatnią.</translation>
         <translation>Wpisz tu wszelkie dodatkowe informacje o transakcji.</translation>
     </message>
     <message>
-        <source>Automobile</source>
-        <translation type="obsolete">Samochod</translation>
-    </message>
-    <message>
-        <source>Bills</source>
-        <translation type="obsolete">Rachunki</translation>
-    </message>
-    <message>
-        <source>CDs</source>
-        <translation type="obsolete">Plyty CD</translation>
-    </message>
-    <message>
-        <source>Clothing</source>
-        <translation type="obsolete">Ubrania</translation>
-    </message>
-    <message>
-        <source>Computer</source>
-        <translation type="obsolete">Komputer</translation>
-    </message>
-    <message>
-        <source>DVDs</source>
-        <translation type="obsolete">Plyty DVD</translation>
-    </message>
-    <message>
-        <source>Eletronics</source>
-        <translation type="obsolete">Elektronika</translation>
-    </message>
-    <message>
-        <source>Entertainment</source>
-        <translation type="obsolete">Rozrywka</translation>
-    </message>
-    <message>
-        <source>Food</source>
-        <translation type="obsolete">Jedzenie</translation>
-    </message>
-    <message>
-        <source>Gasoline</source>
-        <translation type="obsolete">Bezyna</translation>
-    </message>
-    <message>
-        <source>Misc</source>
-        <translation type="obsolete">Rozne</translation>
-    </message>
-    <message>
-        <source>Movies</source>
-        <translation type="obsolete">Filmy</translation>
-    </message>
-    <message>
-        <source>Rent</source>
-        <translation type="obsolete">Czynsz</translation>
-    </message>
-    <message>
-        <source>Travel</source>
-        <translation type="obsolete">Podroz</translation>
-    </message>
-    <message>
         <source>Debit Charge</source>
         <translation>Karta płatnicza</translation>
     </message>
@@ -727,28 +635,12 @@ Wpisana wartość powinna być liczbą dodatnią.</translation>
         <translation>Karta kredytowa</translation>
     </message>
     <message>
-        <source>Work</source>
-        <translation type="obsolete">Praca</translation>
-    </message>
-    <message>
-        <source>Family Member</source>
-        <translation type="obsolete">Czlonek rodziny</translation>
-    </message>
-    <message>
-        <source>Misc. Credit</source>
-        <translation type="obsolete">Rozne</translation>
-    </message>
-    <message>
         <source>Automatic Payment</source>
         <translation>Płatność automatyczna</translation>
     </message>
     <message>
         <source>Cash</source>
         <translation>Gotówka</translation>
-    </message>
-    <message>
-        <source>Electronics</source>
-        <translation type="obsolete">Elektronika</translation>
     </message>
 </context>
 </TS>

@@ -58,10 +58,6 @@
         <translation>Выше+влево</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Повернуть дисплей</translation>
-    </message>
-    <message>
         <source>Action Button</source>
         <translation>Кнопка действия</translation>
     </message>

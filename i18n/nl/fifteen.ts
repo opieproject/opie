@@ -60,10 +60,6 @@
         <translation>Hussel</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Los op</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Spel</translation>
     </message>

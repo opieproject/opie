@@ -3,16 +3,8 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Chiudi</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>In carica</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Percentuale batteria rimasta</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -51,14 +43,6 @@
         <translation>Alimentazione esterna disinserita</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Tempo batteria rimasto</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Stato Batteria</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Errore</translation>
     </message>
@@ -69,14 +53,6 @@
     <message>
         <source>Charging both devices</source>
         <translation>In carica entrambi gli apparecchi</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Percentuale batteria rimasta:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Tempo batteria rimasto:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>

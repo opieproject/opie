@@ -22,10 +22,6 @@
         <translation>Nabíjení</translation>
     </message>
     <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Stav baterie</translation>
-    </message>
-    <message>
         <source>Battery status: </source>
         <translation>Stav baterie:</translation>
     </message>
@@ -60,22 +56,6 @@
     <message>
         <source>External power disconnected</source>
         <translation>Externí zdroj odpojen</translation>
-    </message>
-    <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Do vybití zbývá</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">Ipaq</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Stav baterie v procentech:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Do vybití zbývá:</translation>
     </message>
     <message>
         <source>Jacket  </source>

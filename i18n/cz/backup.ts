@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Backup and Restore... pracuje...</translation>
-    </message>
-    <message>
         <source>Error from System:
 </source>
         <translation>Chyba od systému:</translation>
@@ -94,10 +90,6 @@
         <translation>Zálohovat</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Uložit jako</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Zálohovat</translation>
     </message>
@@ -134,28 +126,8 @@
         <translation>Odstranit</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Uložit</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Destination</source>
         <translation>Cíl</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Typ</translation>
-    </message>
-    <message>
-        <source>User Data (Configuration + PIM)</source>
-        <translation type="obsolete">Uživatelská data (Konfigurace + PIM)</translation>
-    </message>
-    <message>
-        <source>Full Backup (Root File System)</source>
-        <translation type="obsolete">Kompletní záloha (Systém souborů root)</translation>
     </message>
 </context>
 <context>

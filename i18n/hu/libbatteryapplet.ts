@@ -2,16 +2,8 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Bezár</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>Töltés</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Elem hátrelévő élettartama</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -50,14 +42,6 @@
         <translation>Külső áramellátás megszűnt</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Elem élettartamából hátra van</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Elem állapota</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Hiba</translation>
     </message>
@@ -68,14 +52,6 @@
     <message>
         <source>Charging both devices</source>
         <translation>Mindkét eszközt töltöm</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Elem hátrelévő élettartama:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Elem élettartamából hátra van:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>

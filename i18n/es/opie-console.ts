@@ -791,10 +791,6 @@
         <translation>Fallo</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Falló la marcación del número.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Cancelando...</translation>
     </message>
@@ -855,22 +851,6 @@
     <message>
         <source>Color scheme</source>
         <translation>Esquema de color</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Tamaño letra</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">pequeña</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">mediana</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">grande</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

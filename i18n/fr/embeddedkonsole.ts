@@ -29,26 +29,6 @@
         <translation>Konsole</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Petite</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Moyenne</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Grande</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Police</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Options</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
@@ -85,10 +65,6 @@
         <translation>Cacher liste</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Onglets en dessous</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Vert sur noir</translation>
     </message>
@@ -99,18 +75,6 @@
     <message>
         <source>White on Black</source>
         <translation>Blanc sur noir</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Noir sur transparent</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Noir sur rouge</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Rouge sur noir</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -147,10 +111,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Liste éditable</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Modifier liste</translation>
     </message>
     <message>
         <source>None</source>
@@ -191,10 +151,6 @@
     <message>
         <source>Use Beep</source>
         <translation>Avertissement sonore</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Onglets au dessus</translation>
     </message>
     <message>
         <source>Konsole</source>

@@ -151,22 +151,6 @@
         <translation>總記憶體： %1 kB</translation>
     </message>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">本頁顯示裝置些記憶體分配情形
-記憶體使用分類如下：
-
-1. 已使用 - 由Opie及執行的程式所佔用
-2. 緩衝區 - 用來提升系統效能的暫存區
-3. 快取區 - 最近使用過但尚未清除的資訊
-4. 剩餘 - 未被Opie或任何執行程式佔用的記憶體</translation>
-    </message>
-    <message>
         <source>This page shows how memory (i.e. RAM) is being allocated on your device.
 Memory is categorized as follows:
 
@@ -196,10 +180,6 @@ Memory is categorized as follows:
         <translation>Use#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">使用者</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -222,11 +202,6 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>This area shows detailed information about this module.</source>
         <translation>本區顯示模組的詳細資訊</translation>
-    </message>
-    <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">您確定要執行？</translation>
     </message>
     <message>
         <source>Used by</source>
@@ -296,11 +271,6 @@ Click and hold on a process to see additional information about the process, or 
         <translation>本區顯示選取程序的詳細資料</translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">您確定要送出？</translation>
-    </message>
-    <message>
         <source>Really want to send %1
 to this process?</source>
         <translation type="unfinished"></translation>
@@ -366,14 +336,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;版本: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;型號: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;提供者: </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

@@ -194,10 +194,6 @@ ureja kategorije.</translation>
         <translation>Niz ni najden.</translation>
     </message>
     <message>
-        <source>End reached, starting at beginning</source>
-        <translation type="obsolete">Prišel na konec, začenjam na začetku</translation>
-    </message>
-    <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
         <translation type="unfinished"></translation>
@@ -452,14 +448,6 @@ Free some memory and try again.</source>
 Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
-        <source>D</source>
-        <translation type="obsolete">D</translation>
-    </message>
-    <message>
-        <source>M</source>
-        <translation type="obsolete">M</translation>
-    </message>
-    <message>
         <source>Y</source>
         <translation>L</translation>
     </message>
@@ -482,12 +470,6 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     <message>
         <source>AM</source>
         <translation>AM</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
- %1?</source>
-        <translation type="obsolete">Ste prepričani, da želite izbrisati
-%1?</translation>
     </message>
     <message>
         <source>All</source>
@@ -790,26 +772,6 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
         <translation>Ned</translation>
     </message>
     <message>
-        <source>Click to close this window, discarding changes.</source>
-        <translation type="obsolete">Kliknite tu, da zaprete to okno in zanemarite spremembe.</translation>
-    </message>
-    <message>
-        <source>Click to close this window.</source>
-        <translation type="obsolete">Kliknite tu, da zaprete to okno.</translation>
-    </message>
-    <message>
-        <source>Click to close this window and apply changes.</source>
-        <translation type="obsolete">Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Kliknite tu, da naredite to okno premično.</translation>
-    </message>
-    <message>
-        <source>Click to make this window use all available screen area.</source>
-        <translation type="obsolete">Kliknite tu, da to okno uporablja ves prostor, ki je na voljo.</translation>
-    </message>
-    <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
         <translation type="unfinished">&lt;Qt&gt;Pomoč ni na voljo za ta program, ima pa majhno pomol.&lt;p&gt;Da bi to uporabili:&lt;p&gt;&lt;ol&gt;&lt;li&gt;kliknite in zadržite gumb za pomoč.&lt;li&gt;kose prikaže naslovna vrstica &lt;b&gt;Kaj je to...&lt;/b&gt;, kliknite na katerokoli od kontrol.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
@@ -871,10 +833,6 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Error</source>
-        <translation type="obsolete">Napaka</translation>
-    </message>
-    <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
         <translation type="unfinished">D</translation>
@@ -897,17 +855,6 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
 </context>
 <context>
-    <name>QPEDecoration</name>
-    <message>
-        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="obsolete">&lt;Qt&gt;Pomoč ni na voljo za ta program, ima pa majhno pomol.&lt;p&gt;Da bi to uporabili:&lt;p&gt;&lt;ol&gt;&lt;li&gt;kliknite in zadržite gumb za pomoč.&lt;li&gt;kose prikaže naslovna vrstica &lt;b&gt;Kaj je to...&lt;/b&gt;, kliknite na katerokoli od kontrol.&lt;/ol&gt;&lt;/Qt&gt;</translation>
-    </message>
-    <message>
-        <source>What&apos;s this...</source>
-        <translation type="obsolete">Kaj je to...</translation>
-    </message>
-</context>
-<context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
@@ -920,10 +867,6 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     <message>
         <source>Click to close this window and apply changes.</source>
         <translation type="unfinished">Kliknite tu, da zaprete to okno in uveljavite spremembe.</translation>
-    </message>
-    <message>
-        <source>Click to make this window moveable.</source>
-        <translation type="obsolete">Kliknite tu, da naredite to okno premično.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>

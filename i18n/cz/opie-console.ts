@@ -791,10 +791,6 @@
         <translation>Selhání</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Vytočení čísla selhalo.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Stornování...</translation>
     </message>
@@ -855,22 +851,6 @@
     <message>
         <source>Color scheme</source>
         <translation>Barevné schéma</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Velikost písma</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">malé</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">střední</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">velké</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

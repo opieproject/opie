@@ -18,10 +18,6 @@
         <translation>Кликни овде за да се стартува асоцираната апликација</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Нема додатоци</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Нема активни додатоци</translation>
     </message>
@@ -74,54 +70,6 @@
     <message>
         <source>active/order</source>
         <translation>активно/редослед</translation>
-    </message>
-    <message>
-        <source>autostart on 
-resume?
- (Opie only)</source>
-        <translation type="obsolete">автоматско стартување на 
-продолжување?
-(само за Opie)</translation>
-    </message>
-    <message>
-        <source>Check this if today should be autostarted on resume.</source>
-        <translation type="obsolete">Избери ако „Денес“ треба автомтски да се стартува.</translation>
-    </message>
-    <message>
-        <source>Tiny Banner</source>
-        <translation type="obsolete">Мал банер</translation>
-    </message>
-    <message>
-        <source>minutes inactive</source>
-        <translation type="obsolete">минути неактивност</translation>
-    </message>
-    <message>
-        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="obsolete">Колку минути терминалот беше суспендиран пред модулот за авотстарт продолжил</translation>
-    </message>
-    <message>
-        <source>Icon size</source>
-        <translation type="obsolete">големина на икона</translation>
-    </message>
-    <message>
-        <source>Set the icon size in pixel</source>
-        <translation type="obsolete">Намести големина на икони</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="obsolete">Освежување</translation>
-    </message>
-    <message>
-        <source>How often should Today refresh itself</source>
-        <translation type="obsolete">Колку често треба „Денес“ да се освежува</translation>
-    </message>
-    <message>
-        <source> sec</source>
-        <translation type="obsolete">сек</translation>
-    </message>
-    <message>
-        <source>never</source>
-        <translation type="obsolete">никогаш</translation>
     </message>
     <message>
         <source>Misc</source>

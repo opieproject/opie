@@ -89,16 +89,8 @@
         <translation>Искать по имени напитка</translation>
     </message>
     <message>
-        <source>Find by Alcohol</source>
-        <translation type="obsolete">Искать по уровню алкоголя</translation>
-    </message>
-    <message>
         <source>Edit</source>
         <translation>Правка</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">правка</translation>
     </message>
     <message>
         <source>New</source>
@@ -135,10 +127,6 @@
     <message>
         <source>Drink Name</source>
         <translation>Имя напитка</translation>
-    </message>
-    <message>
-        <source>Alcohol</source>
-        <translation type="obsolete">Уровень алкоголя</translation>
     </message>
     <message>
         <source>Search</source>

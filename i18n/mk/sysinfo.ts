@@ -131,22 +131,6 @@
 <context>
     <name>MemoryInfo</name>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Оваа страна покажува како меморијата се алоцира на овој уред,
-Меморијата се каратеризира според:
-
-1. Искористена - меморија која ја искоритуваат апликациите
-2. Бафери - привремени локации кои се користат за подобрување на перформансите
-3. Кеширани - информации кои биле скоро користени
-4. Слободна - меморија која не се користи.</translation>
-    </message>
-    <message>
         <source>Used (%1 kB)</source>
         <translation>Искористени (%1) кВ</translation>
     </message>
@@ -196,10 +180,6 @@ Memory is categorized as follows:
         <translation>Искоритено#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Искористено од</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -222,11 +202,6 @@ Click and hold on a module to see additional information about the module, or to
     <message>
         <source>This area shows detailed information about this module.</source>
         <translation>Овој дел прикажува детални информации за модулот.</translation>
-    </message>
-    <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Да се изврши</translation>
     </message>
     <message>
         <source>Used by</source>
@@ -296,11 +271,6 @@ Click and hold on a process to see additional information about the process, or 
         <translation>Овде се прикажани деталн информации за процесот.</translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Да испрати</translation>
-    </message>
-    <message>
         <source>Really want to send %1
 to this process?</source>
         <translation type="unfinished"></translation>
@@ -366,14 +336,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt; Верзија:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Модел:</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt; Производител:</translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

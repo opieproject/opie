@@ -37,23 +37,4 @@
         <translation>Klip linien efter X tegn</translation>
     </message>
 </context>
-<context>
-    <name>TodolistPluginConfig</name>
-    <message>
-        <source>tasks shown </source>
-        <translation type="obsolete">opgaver vist </translation>
-    </message>
-    <message>
-        <source>Set the maximum number of task that should be shown</source>
-        <translation type="obsolete">Indstil maksimum antal opgaver der skal vises</translation>
-    </message>
-    <message>
-        <source>Clip line after X chars</source>
-        <translation type="obsolete">Klip linien efter X tegn</translation>
-    </message>
-    <message>
-        <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="obsolete">Hvor mange tegns information omkring opgaven skal der vises</translation>
-    </message>
-</context>
 </TS>

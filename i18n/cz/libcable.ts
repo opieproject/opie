@@ -156,10 +156,6 @@
 <context>
     <name>CableNetNode</name>
     <message>
-        <source>Cable Connection</source>
-        <translation type="obsolete">Připojení kabelu</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Sets up a wired serial or parallel.&lt;/p&gt;</source>
         <translation>&lt;p&gt;Vytvoří sériové, nebo paralelní propojení.&lt;/p&gt;</translation>
     </message>

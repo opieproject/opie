@@ -212,10 +212,6 @@
         <translation>Habilitar indicador de ocupado grande</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Habilitar indicador de ocupado parpadeante</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Seleccione la pestaña del lanzador que quiere editar o borrar.</translation>
     </message>
@@ -234,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Active esto si quiere un gran indicador de ocupado en el medio de la pantalla en vez de el de la barra de tareas.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Active esto si quiere un indicador de ocupado parpadeante al iniciar aplicaciones en el Lanzador.</translation>
     </message>
     <message>
         <source>All Tabs</source>

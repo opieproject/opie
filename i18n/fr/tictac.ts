@@ -1,13 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>QObject</name>
-    <message>
-        <source>TicTac</source>
-        <translation type="obsolete">TicTac</translation>
-    </message>
-</context>
-<context>
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>

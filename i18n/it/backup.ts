@@ -3,10 +3,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Backup e Restore... in corso...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Backup e Restore</translation>
     </message>
@@ -37,10 +33,6 @@
         <translation>Backup e Restore... Fallito !!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Backup Eseguito.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Seleziona qualcosa da restorare.</translation>
     </message>
@@ -51,10 +43,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>Impossibile aprire File: %1</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Restore Eseguito.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -108,10 +96,6 @@
         <translation>Applicazioni</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Salva Su</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Backup</translation>
     </message>
@@ -130,10 +114,6 @@
     <message>
         <source>&amp;Restore</source>
         <translation>&amp;Restore</translation>
-    </message>
-    <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Aggiorna Lista File</translation>
     </message>
     <message>
         <source>Locations</source>

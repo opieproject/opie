@@ -29,10 +29,6 @@ povezavo.</translation>
 <context>
     <name>KRFBDecoder</name>
     <message>
-        <source>Waiting for server initialisation...</source>
-        <translation type="obsolete">Čakam na zagon strežnika...</translation>
-    </message>
-    <message>
         <source>Waiting for desktop name...</source>
         <translation>Čakam na ime omizja...</translation>
     </message>

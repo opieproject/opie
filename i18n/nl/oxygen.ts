@@ -73,20 +73,8 @@
         <translation>Atoomradius</translation>
     </message>
     <message>
-        <source>Ionizationenergie</source>
-        <translation type="obsolete">Ionisatieenergie</translation>
-    </message>
-    <message>
         <source>Density</source>
         <translation>Dichtheid</translation>
-    </message>
-    <message>
-        <source>Boilingpoint</source>
-        <translation type="obsolete">Kookpunt</translation>
-    </message>
-    <message>
-        <source>Meltingpoint</source>
-        <translation type="obsolete">Smeltpunt</translation>
     </message>
     <message>
         <source>Ionization Energy</source>

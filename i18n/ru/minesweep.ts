@@ -10,10 +10,6 @@
         <translation>Вы подорвались!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Сапер</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Начинающий</translation>
     </message>

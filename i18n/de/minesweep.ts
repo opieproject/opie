@@ -11,10 +11,6 @@
         <translation>Explodiert!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Minenjagd</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Anfänger</translation>
     </message>

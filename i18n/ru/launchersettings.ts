@@ -87,10 +87,6 @@
         <translation>Добавляет содержимое вкладки Запуска в О-Меню.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
-        <translation type="obsolete">Показывать приложения в суб-окнах</translation>
-    </message>
-    <message>
         <source>Show Applications in Subpopups</source>
         <translation>Показывать приложения в под-окнах</translation>
     </message>
@@ -216,10 +212,6 @@
         <translation>Большой индикатор занятости</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Мигающий индикатор занятости</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Выберите вкладку для редактирования или удаления.</translation>
     </message>
@@ -238,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Нажмите, если хотите видеть большой индикатор занятости в центре экрана вместо панели задач.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Нажмите, если хотите видеть мигающий индикатор занятости.</translation>
     </message>
     <message>
         <source>All Tabs</source>

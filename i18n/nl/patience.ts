@@ -26,14 +26,6 @@
         <translation>&amp;Spel</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Verander achterkant kaarten</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Klem naar positie</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Instellingen</translation>
     </message>
@@ -50,24 +42,8 @@
         <translation>Speel</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Verander achterkant kaarten</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Klem naar positie</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Draai een kaart</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Instellingen</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Draai drie kaarten</translation>
     </message>
     <message>
         <source>&amp;Change card backs</source>

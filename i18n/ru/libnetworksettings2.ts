@@ -41,14 +41,6 @@
         <translation>&lt;p&gt;Устройства, которые могут обрабатывать отдельные байты&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Nodes that provide working IP connections&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Ноды, которые обеспечивают рабочие IP соединения&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Fully configured connection profile&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Полностью настроенный профиль соединения&lt;/p&gt;</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
         <translation>&lt;p&gt;Ноды, которые обеспечивают рабочее IP соединение&lt;/p&gt;</translation>
     </message>
@@ -88,16 +80,8 @@
         <translation>Запрещен</translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="obsolete">Отключен</translation>
-    </message>
-    <message>
         <source>Available</source>
         <translation>Доступен</translation>
-    </message>
-    <message>
-        <source>IsUp</source>
-        <translation type="obsolete">Включен</translation>
     </message>
     <message>
         <source>Inactive</source>

@@ -87,10 +87,6 @@
         <translation>Dodaje zawartość zakładek Launcher&apos;a jako menu w O-menu.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
-        <translation type="obsolete">Pokazuj aplikacje w podokienkach</translation>
-    </message>
-    <message>
         <source>Show Applications in Subpopups</source>
         <translation type="unfinished"></translation>
     </message>
@@ -216,10 +212,6 @@
         <translation>Włącz duży wskaźnik zajętości</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Wlacz migajacy wskaznik zajetosci</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Wybierz zakładkę, którą chcesz edytować lub usunąć.</translation>
     </message>
@@ -238,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Wybierz to, jeśli chcesz wyświetlać duży wskaźnik zajętości na środku ekranu zamiast tego w pasku zadań.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Wybierz to, jasli chcesz aby ikonki uruchamianych aplikacji migaly przy starcie.</translation>
     </message>
     <message>
         <source>All Tabs</source>

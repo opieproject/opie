@@ -74,10 +74,6 @@
         <translation>Sem pište zprávu pro přispění do diskuse na kanálu</translation>
     </message>
     <message>
-        <source>CTCP</source>
-        <translation type="obsolete">CTCP</translation>
-    </message>
-    <message>
         <source>Query</source>
         <translation>Query</translation>
     </message>
@@ -191,18 +187,6 @@
         <translation>Přijata PRIVMSG neznámého typu</translation>
     </message>
     <message>
-        <source>You are now known as %1</source>
-        <translation type="obsolete">Přejmenoval jste se na %1</translation>
-    </message>
-    <message>
-        <source>%1 is now known as %2</source>
-        <translation type="obsolete">%1 se přejmenoval na %2</translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="obsolete">Změna přezdívky neznámé osoby</translation>
-    </message>
-    <message>
         <source>%1 has quit (%2)</source>
         <translation>%1 odešel (%2)</translation>
     </message>
@@ -221,10 +205,6 @@
     <message>
         <source>Received a CTCP PING from </source>
         <translation>Přijatý CTCP PING od</translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="obsolete">Přijato CTCP VERSION od</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -389,10 +369,6 @@ Skutečné jméno: %4</translation>
         <translation>Přijata CTCP VERSION žádost od</translation>
     </message>
     <message>
-        <source>Malformed DCC request from </source>
-        <translation type="obsolete">Zdeformovaná DCC žádost od</translation>
-    </message>
-    <message>
         <source>Received a CTCP PING reply from %1: %2 seconds</source>
         <translation>Přijata odpověď na CTCP PING od %1: %2 sekund</translation>
     </message>
@@ -503,16 +479,8 @@ Skutečné jméno: %4</translation>
         <translation>Název hostitele je vyžadován</translation>
     </message>
     <message>
-        <source>Port required</source>
-        <translation type="obsolete">Port je vyžadován</translation>
-    </message>
-    <message>
         <source>Nickname required</source>
         <translation>Přezdívka se vyžaduje</translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="obsolete">Skutečné jméno se vyžaduje</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
@@ -564,10 +532,6 @@ a nezačínající na &apos;#&apos; nebo &apos;+&apos;</translation>
 </context>
 <context>
     <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
-        <translation type="obsolete">Připojení k</translation>
-    </message>
     <message>
         <source>Server messages</source>
         <translation>Zprávy serveru</translation>

@@ -2,26 +2,14 @@
 <context>
     <name>AccountWidget</name>
     <message>
-        <source>&amp;Edit...</source>
-        <translation type="obsolete">&amp;Wijzig...</translation>
-    </message>
-    <message>
         <source>Allows you to modify the selected account</source>
         <translation>Geselecteerde verbinding wijzigen</translation>
-    </message>
-    <message>
-        <source>&amp;New...</source>
-        <translation type="obsolete">&amp;Nieuw...</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
         <translation>Maak een nieuwe inbelverbinding
 naar internet</translation>
-    </message>
-    <message>
-        <source>Co&amp;py</source>
-        <translation type="obsolete">Ko&amp;pieer</translation>
     </message>
     <message>
         <source>Makes a copy of the selected account. All
@@ -35,20 +23,12 @@ naar wens aan te passen zijn.
 </translation>
     </message>
     <message>
-        <source>De&amp;lete</source>
-        <translation type="obsolete">&amp;Verwijder</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
         <translation>&lt;p&gt;Verwijdert de geselecteerde
 verbinding
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Pas op!&lt;/b&gt;&lt;/font&gt;</translation>
-    </message>
-    <message>
-        <source>Maximum number of accounts reached.</source>
-        <translation type="obsolete">Maximumaantal verbindingen bereikt.</translation>
     </message>
     <message>
         <source>No account selected.</source>
@@ -119,22 +99,6 @@ verbinding &quot;%1&quot; wilt verwijderen?</translation>
     <message>
         <source>You must enter a unique account name</source>
         <translation>Unieke verbindingsnaam invoeren</translation>
-    </message>
-    <message>
-        <source>Byte</source>
-        <translation type="obsolete">Byte</translation>
-    </message>
-    <message>
-        <source>KB</source>
-        <translation type="obsolete">KB</translation>
-    </message>
-    <message>
-        <source>MB</source>
-        <translation type="obsolete">MB</translation>
-    </message>
-    <message>
-        <source>GB</source>
-        <translation type="obsolete">GB</translation>
     </message>
 </context>
 <context>
@@ -364,35 +328,6 @@ maar hij kan handig zijn.</translation>
 <context>
     <name>DevicesWidget</name>
     <message>
-        <source>Allows you to modify the selected account</source>
-        <translation type="obsolete">Geselecteerde verbinding wijzigen</translation>
-    </message>
-    <message>
-        <source>Create a new dialup connection
-to the Internet</source>
-        <translation type="obsolete">Maak een nieuwe inbelverbinding
-naar internet</translation>
-    </message>
-    <message>
-        <source>Makes a copy of the selected account. All
-settings of the selected account are copied
-to a new account, that you can modify to fit your
-needs</source>
-        <translation type="obsolete">Maakt een kopie van de geselecteerde verbinding.
-Alle instellingen van de verbinding worden
-gekopieerd naar een nieuwe verbinding, die
-naar wens aan te passen zijn.
-</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Deletes the selected account
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Verwijdert de geselecteerde
-verbinding
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Pas op!&lt;/b&gt;&lt;/font&gt;</translation>
-    </message>
-    <message>
         <source>No devices selected.</source>
         <translation>Geen apparaat geselecteerd.</translation>
     </message>
@@ -421,10 +356,6 @@ verwijderen: &quot;%1&quot;?</translation>
     <message>
         <source>&amp;Modem</source>
         <translation>&amp;Modem</translation>
-    </message>
-    <message>
-        <source>You must enter a unique account name</source>
-        <translation type="obsolete">Unieke verbindingsnaam invoeren</translation>
     </message>
     <message>
         <source>Allows you to modify the selected device</source>
@@ -1013,14 +944,6 @@ het modem</translation>
         <translation>&amp;Verbindingen</translation>
     </message>
     <message>
-        <source>&amp;Device</source>
-        <translation type="obsolete">&amp;Apparaat</translation>
-    </message>
-    <message>
-        <source>&amp;Modem</source>
-        <translation type="obsolete">&amp;Modem</translation>
-    </message>
-    <message>
         <source>&amp;Devices</source>
         <translation>&amp;Apparaten</translation>
     </message>
@@ -1494,13 +1417,6 @@ Vraag de systeembeheerder om dit bestand aan te maken (kan leeg zijn) met de jui
     <message>
         <source>You must specify a telephone number!</source>
         <translation>Er moet een telefoonnummer ingevuld worden!</translation>
-    </message>
-</context>
-<context>
-    <name>QObject::ModemWidget</name>
-    <message>
-        <source>Modem timeout:</source>
-        <translation type="obsolete">Modem timeout:</translation>
     </message>
 </context>
 <context>

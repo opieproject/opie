@@ -37,30 +37,6 @@
         <translation></translation>
     </message>
     <message>
-        <source>44100</source>
-        <translation type="obsolete">44100</translation>
-    </message>
-    <message>
-        <source>32000</source>
-        <translation type="obsolete">32000</translation>
-    </message>
-    <message>
-        <source>22050</source>
-        <translation type="obsolete">22050</translation>
-    </message>
-    <message>
-        <source>16000</source>
-        <translation type="obsolete">16000</translation>
-    </message>
-    <message>
-        <source>11025</source>
-        <translation type="obsolete">11025</translation>
-    </message>
-    <message>
-        <source>8000</source>
-        <translation type="obsolete">8000</translation>
-    </message>
-    <message>
         <source>Limit Size</source>
         <translation>Limitar Tamanho</translation>
     </message>
@@ -75,14 +51,6 @@
     <message>
         <source>Bit Depth</source>
         <translation>Qualidade</translation>
-    </message>
-    <message>
-        <source>16</source>
-        <translation type="obsolete">16bits</translation>
-    </message>
-    <message>
-        <source>8</source>
-        <translation type="obsolete">8bits</translation>
     </message>
     <message>
         <source>In</source>
@@ -112,23 +80,6 @@ or a card isn&apos;t being recognized</source>
 espaço livre</translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">segundos</translation>
-    </message>
-    <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">Tem a certeza que quer apagar o ficheiro seleccionado?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Sim</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Não</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Erro</translation>
     </message>
@@ -139,10 +90,6 @@ the selected file?</source>
     <message>
         <source>Opierec</source>
         <translation>Gravador Opie</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">Escolha o ficheiro a tocar</translation>
     </message>
     <message>
         <source>Note</source>
@@ -179,32 +126,12 @@ the selected file?</source>
         <translation>Ok</translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="obsolete">Gravar</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Localização</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Data</translation>
-    </message>
-    <message>
         <source>Wave Compression (smaller files)</source>
         <translation>Compressão (ficheiros mais pequenos)</translation>
     </message>
     <message>
-        <source>auto Mute</source>
-        <translation type="obsolete">Silêncio Automático</translation>
-    </message>
-    <message>
         <source>mute</source>
         <translation>Silêncio</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="obsolete">Parar</translation>
     </message>
     <message>
         <source>Auto Mute</source>

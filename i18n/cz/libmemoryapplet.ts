@@ -123,10 +123,6 @@ Paměť je kategorizována následovně:
         <translation>Odstranit</translation>
     </message>
     <message>
-        <source>2 Mb,4 Mb,6 Mb,8 Mb</source>
-        <translation type="obsolete">2 MB,4 MB,6 MB,8 MB</translation>
-    </message>
-    <message>
         <source>Failed to detach swapfile.</source>
         <translation>Selhalo odpojení swap souboru.</translation>
     </message>

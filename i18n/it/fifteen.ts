@@ -61,10 +61,6 @@
         <translation>Randomizza</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Risolvi</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Partita</translation>
     </message>

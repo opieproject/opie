@@ -11,10 +11,6 @@
         <translation>COBRA !</translation>
     </message>
     <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">Pressione Qualquer Tecla Para Começar um Novo Jogo</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>     Pontos :    %1   </translation>
     </message>
@@ -35,10 +31,6 @@ bater nas paredes, cantos ou na própria cauda.</translation>
     <message>
         <source>New Game</source>
         <translation>Novo Jogo</translation>
-    </message>
-    <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">Pressione Qualquer Tecla Para Começar</translation>
     </message>
     <message>
         <source>Press any key to start</source>

@@ -131,22 +131,6 @@
 <context>
     <name>MemoryInfo</name>
     <message>
-        <source>This page shows how memory (i.e. RAM) is being allocated on your handheld device.
-Memory is categorized as follows:
-
-1. Used - memory used to by Opie and any running applications.
-2. Buffers - temporary storage used to improve performance
-3. Cached - information that has recently been used, but has not been freed yet.
-4. Free - memory not currently used by Opie or any running applications.</source>
-        <translation type="obsolete">Denne side viser hvor meget hukommelse (f.eks. RAM) der bliver allokeret på din håndholdte enhed.
-Hukommelse er kategoriseret som følgende:
-
-1. Brugt - hukommelse brugt af Opie og alle igangværende programmer.
-2. Buffer - midlertidigt lager brugt til at øge ydelsen.
-3. Cache - information der fornyelig har været brugt men ikke er blevet frigjort endnu.
-4. Fri - hukommelsen der iøjeblikket ikke er i brug af Opie eller andre igangværende programmer.</translation>
-    </message>
-    <message>
         <source>Used (%1 kB)</source>
         <translation>Brugt (%1 kB)</translation>
     </message>
@@ -196,10 +180,6 @@ Memory is categorized as follows:
         <translation>Brug#</translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="obsolete">Brugt af</translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -222,12 +202,6 @@ Klik og hold på et modul for at se yderligere information om modulet eller for 
     <message>
         <source>This area shows detailed information about this module.</source>
         <translation>Dette område viser detaljeret information om dette modul.</translation>
-    </message>
-    <message>
-        <source>You really want to execute
-</source>
-        <translation type="obsolete">Vil du virkelig køre
-</translation>
     </message>
     <message>
         <source>Used by</source>
@@ -297,12 +271,6 @@ Klik og hold på en proces for at se yderligere information om processen eller f
         <translation>Dette område viser detaljeret information omkring denne proces.</translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
-        <translation type="obsolete">Vil du sende
-</translation>
-    </message>
-    <message>
         <source>Really want to send %1
 to this process?</source>
         <translation type="unfinished"></translation>
@@ -368,14 +336,6 @@ to this process?</source>
     <message>
         <source>&lt;p&gt;Version: </source>
         <translation>&lt;p&gt;Version: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Model: </source>
-        <translation type="obsolete">&lt;p&gt;Model: </translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Vendor: </source>
-        <translation type="obsolete">&lt;p&gt;Producent: </translation>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>

@@ -333,6 +333,58 @@
         <source>Date</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set on/offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh folder list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Un-)Subscribe groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh headerlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New subfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move/Copie all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read current mail</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
@@ -662,15 +714,12 @@ with that filter will be listed.</source>
         <source>Play Sound when new mails arrive</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>StatusWidgetUI</name>
     <message>
-        <source>Form1</source>
+        <source>Click opens mail</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
+        <source>Click activate server/folder</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -732,6 +781,14 @@ with that filter will be listed.</source>
         <source>E-Mail by %1</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Reading attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not read content of attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
@@ -773,6 +830,10 @@ with that filter will be listed.</source>
     </message>
     <message>
         <source>E-Mail view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show image preview inline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -42,18 +42,6 @@
         <translation>Zunanje napajanje odklopljeno</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Čas baterije do konca</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Zapri</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Status baterije</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Napaka</translation>
     </message>
@@ -64,14 +52,6 @@
     <message>
         <source>Charging both devices</source>
         <translation>Polnim obe napravi</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Delež ostanka baterije:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Preostali čas baterije:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>

@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Copiar y restaurar... trabajando...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Copiar y Restaurar</translation>
     </message>
@@ -36,10 +32,6 @@
         <translation>Copia y restauración.. ¡¡Falló!!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Copia exitosa.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Por favor, seleccione algo a restaurar.</translation>
     </message>
@@ -50,10 +42,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>Incapaz de abrir fichero: %1</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Restauración exitosa.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -107,10 +95,6 @@
         <translation>Aplicaciones</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Guardar en</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Copia de seguridad</translation>
     </message>
@@ -131,10 +115,6 @@
         <translation>&amp;Restaurar</translation>
     </message>
     <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Actualizar lista ficheros</translation>
-    </message>
-    <message>
         <source>Locations</source>
         <translation>Sitios</translation>
     </message>
@@ -147,28 +127,8 @@
         <translation>Eliminar</translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="obsolete">Guardar</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
-    </message>
-    <message>
         <source>Destination</source>
         <translation>Destino</translation>
-    </message>
-    <message>
-        <source>Type</source>
-        <translation type="obsolete">Tipo</translation>
-    </message>
-    <message>
-        <source>User Data (Configuration + PIM)</source>
-        <translation type="obsolete">Datos de Usuario (Configuración + PIM)</translation>
-    </message>
-    <message>
-        <source>Full Backup (Root File System)</source>
-        <translation type="obsolete">Copia Completa (Sistema de Ficheros Raíz)</translation>
     </message>
 </context>
 <context>

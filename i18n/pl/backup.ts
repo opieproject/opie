@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Archiwizacja i odzyskiwanie... pracuje...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Archiwizacja i odzyskiwanie</translation>
     </message>
@@ -36,10 +32,6 @@
         <translation>Archiwizacja i odzyskiwanie... Porażka!!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Tworzenie kopii udalo sie.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Wybierz coś do odzyskania.</translation>
     </message>
@@ -50,10 +42,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>Nie można otworzyć pliku: %1</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Odzyskiwanie udalo sie.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -107,10 +95,6 @@
         <translation>Aplikacje</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Zapisz do</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Archiwizuj</translation>
     </message>
@@ -129,10 +113,6 @@
     <message>
         <source>&amp;Restore</source>
         <translation>&amp;Odzyskuj</translation>
-    </message>
-    <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Aktualizuj listę plików</translation>
     </message>
     <message>
         <source>Locations</source>

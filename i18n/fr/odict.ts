@@ -11,14 +11,6 @@
         <translation>Méthode de recherche</translation>
     </message>
     <message>
-        <source>General Settings</source>
-        <translation type="obsolete">Config. Générale</translation>
-    </message>
-    <message>
-        <source>Searchmethods</source>
-        <translation type="obsolete">Méthodes de recherche</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
@@ -46,52 +38,12 @@
         <translation>&amp;Ok</translation>
     </message>
     <message>
-        <source>Config</source>
-        <translation type="obsolete">Config</translation>
-    </message>
-    <message>
         <source>Searchmethods</source>
         <translation>Méthodes de recherche</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
         <translation>Respecter la C&amp;asse</translation>
-    </message>
-    <message>
-        <source>Only &amp;complete Words</source>
-        <translation type="obsolete">Les Mots c&amp;omplets seulement</translation>
-    </message>
-    <message>
-        <source>Allow &amp;reg. expressions</source>
-        <translation type="obsolete">Inclure les expressions en&amp;registrées</translation>
-    </message>
-    <message>
-        <source>0 Errors</source>
-        <translation type="obsolete">0 Erreur</translation>
-    </message>
-    <message>
-        <source>1 Errors</source>
-        <translation type="obsolete">1 Erreur</translation>
-    </message>
-    <message>
-        <source>2 Errors</source>
-        <translation type="obsolete">2 Erreurs</translation>
-    </message>
-    <message>
-        <source>3 Errors</source>
-        <translation type="obsolete">3 Erreurs</translation>
-    </message>
-    <message>
-        <source>4 Errors</source>
-        <translation type="obsolete">4 Erreurs</translation>
-    </message>
-    <message>
-        <source>Until Hit</source>
-        <translation type="obsolete">Jusqu&apos;au bout</translation>
-    </message>
-    <message>
-        <source>&amp;Error tolerance</source>
-        <translation type="obsolete">Tolérance d&apos;&amp;Erreur</translation>
     </message>
     <message>
         <source>Settings</source>

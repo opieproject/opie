@@ -60,10 +60,6 @@
         <translation>Растури</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Реши</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Игра</translation>
     </message>

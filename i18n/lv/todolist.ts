@@ -70,10 +70,6 @@
 <context>
     <name>QObject</name>
     <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie Uzdevumi</translation>
-    </message>
-    <message>
         <source>Enter Task</source>
         <translation>Ievadiet Darbu</translation>
     </message>
@@ -93,60 +89,8 @@
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Jauns no sagataves</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Jauns Uzdevums</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Klikšķiniet šeit lai izveidotu jaunu uzdevumu.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Labot Uzdevumu</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Klikšķiniet šeit lai labotu tekošo uzdevumu.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Skatīt Uzdevumu</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Dzēst...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Klikšķiniet šeit lai dzēstu tekošo uzdevumu.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Dzēst visu...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Dzēšana pabeigta</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Pavairot</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Bīmot</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Klikšķiniet šeit lai nosūtītu uzdevumu uz citu iekārtu.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Meklēt</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -163,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Rādīt ātro uzdevumu joslu</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Dati</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Kategorija</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Opcijas</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -195,14 +127,6 @@ Saraksts attēlo sekojošu informāciju:
 2. Prioritāte - prioritātes grafiskais atainojums.  Dubultklikšķis šeit, lai labotu.
 3. Apraksts - uzdevuma apraksts.  Klikškiniet šeit lai izvēlētos uzdevumu.
 4. Termiņš - tiek rādīts tikai tad ja darbam ir līdz termiņš.  Šo kolonnu var rādīt/paslēpt izvēloties Opcijas-&gt;&apos;Rādīt uzdevumu termiņus&apos; no izvēlnes zemāk.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Visas Kategorijas</translation>
-    </message>
-    <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Neaizpildīts</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -265,10 +189,6 @@ Vai Begit?</translation>
     <message>
         <source>Deadline</source>
         <translation>Termiņš</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Konfigurēt Sagataves</translation>
     </message>
     <message>
         <source>Template Editor</source>

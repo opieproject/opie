@@ -70,10 +70,6 @@
         <translation>Nie mozna zmienic nazwy</translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
-        <translation type="obsolete">Folder nie istnieje</translation>
-    </message>
-    <message>
         <source>Copy As</source>
         <translation>Kopiuj jako</translation>
     </message>
@@ -146,22 +142,6 @@
         <translation>Kopiuj ten sam folder</translation>
     </message>
     <message>
-        <source>Could not copy
-</source>
-        <translation type="obsolete">Nie mozna skopiowac
-</translation>
-    </message>
-    <message>
-        <source>to
-</source>
-        <translation type="obsolete">do</translation>
-    </message>
-    <message>
-        <source>Could not move
-</source>
-        <translation type="obsolete">Nie mozna przeniesc</translation>
-    </message>
-    <message>
         <source>Add To Documents</source>
         <translation>Dodaj do Dokumentow</translation>
     </message>
@@ -174,54 +154,12 @@
         <translation>Zaznacz wszystko</translation>
     </message>
     <message>
-        <source>Really delete
-%1 files?</source>
-        <translation type="obsolete">Czy na pewno usunac 
-%1 plikow?</translation>
-    </message>
-    <message>
         <source>Delete Directory?</source>
         <translation>Usunac folder?</translation>
     </message>
     <message>
-        <source>Really copy
-%1 files?</source>
-        <translation type="obsolete">Czy na pewno skopiowac
-%1 plikow?</translation>
-    </message>
-    <message>
         <source>File Exists!</source>
         <translation>Plik istnieje!</translation>
-    </message>
-    <message>
-        <source>
-exists. Ok to overwrite?</source>
-        <translation type="obsolete">
-istnieje. Czy nadpisac?</translation>
-    </message>
-    <message>
-        <source> already exists.
-Do you really want to delete it?</source>
-        <translation type="obsolete">juz istnieje.
-Czy na pewno chcesz go usunac?</translation>
-    </message>
-    <message>
-        <source>%1 exists. Ok to overwrite?</source>
-        <translation type="obsolete">%1 istnieje. Czy nadpisac?</translation>
-    </message>
-    <message>
-        <source>Could not copy %1 to %2</source>
-        <translation type="obsolete">Nie mozna skopiowac %1 do %2</translation>
-    </message>
-    <message>
-        <source>Advanced FileManager
-is copyright 2002-2003 by
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-and is licensed by the GPL</source>
-        <translation type="obsolete">Zaawansowany Menedzer Plikow
-prawa autorskie 2002-2003
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
-na licencji GPL</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
@@ -236,28 +174,8 @@ na licencji GPL</translation>
         <translation>Blad</translation>
     </message>
     <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="obsolete">Nie mozna usunac aktualnego folderu
-z zakladek.
-Nie ma go w zakladkach!</translation>
-    </message>
-    <message>
         <source>File Search</source>
         <translation>Szukaj pliku</translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="obsolete">Czy na pewno usunac %1
-wraz z zawartoscia?</translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="obsolete">Czy na pewno usunac
-%1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>

@@ -30,10 +30,6 @@
         <translation>Brskalnik pomoči</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation type="obsolete">BrskalnikPomoči</translation>
-    </message>
-    <message>
         <source>Go</source>
         <translation type="unfinished"></translation>
     </message>

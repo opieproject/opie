@@ -25,6 +25,10 @@
         <source>Save status of fullscreen/autorotate</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Default display brightness:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ImageView</name>
@@ -56,6 +60,14 @@
         <source>Toggle thumbnail</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Increase brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PIconView</name>
@@ -84,10 +96,6 @@
         <translation>Verwijder afbeelding</translation>
     </message>
     <message>
-        <source>the Image %1</source>
-        <translation type="obsolete">de afbeelding %1</translation>
-    </message>
-    <message>
         <source>Image</source>
         <translation>Afbeelding</translation>
     </message>
@@ -102,10 +110,6 @@
 </context>
 <context>
     <name>PMainWindow</name>
-    <message>
-        <source>Phunk View - Config</source>
-        <translation type="obsolete">Priegel-aanzicht - Instell</translation>
-    </message>
     <message>
         <source>Browser Keyboard Actions</source>
         <translation>Browser toetsenbord-akties</translation>
@@ -214,6 +218,18 @@
         <source>Dont show seperate windows</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Display brightness...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Increase brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Decrease brightness by 5</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -223,16 +239,8 @@
         <translation>%1 - O aanzicht</translation>
     </message>
     <message>
-        <source>Opie Eye Caramba</source>
-        <translation type="obsolete">Opie Eye Caramba</translation>
-    </message>
-    <message>
         <source>Show all files</source>
         <translation>Laat alle bestanden zien</translation>
-    </message>
-    <message>
-        <source>DirView</source>
-        <translation type="obsolete">Mapaanzicht</translation>
     </message>
     <message>
         <source>Opie Eye</source>
@@ -276,6 +284,10 @@
     </message>
     <message>
         <source>Confirm Deletion</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Display brightness:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

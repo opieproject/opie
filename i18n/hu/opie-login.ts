@@ -8,10 +8,6 @@ accurately to calibrate your screen.</source>
 meg pontosan és határozottan a
 kereszteket a képernyőn.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Üdvözli Önt az Opie</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -51,10 +47,6 @@ kereszteket a képernyőn.</translation>
         <translation>Kilép</translation>
     </message>
     <message>
-        <source>&lt;center&gt;%1 %2&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;%2 %1&lt;/center&gt;</translation>
-    </message>
-    <message>
         <source>Wrong password</source>
         <translation>Hibás jelszó</translation>
     </message>
@@ -63,21 +55,8 @@ kereszteket a képernyőn.</translation>
         <translation>A megadott jelszó helytelen.</translation>
     </message>
     <message>
-        <source>OPIE was terminated
-by an uncaught signal
-(%1)
-</source>
-        <translation type="obsolete">Az OPIE egy kezeletlen
-jelzés (%1)
-miatt megállt</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Hiba</translation>
-    </message>
-    <message>
-        <source>Could not start OPIE.</source>
-        <translation type="obsolete">Nem sikerült az OPIE-t elindítani.</translation>
     </message>
     <message>
         <source>Could not switch to new user identity</source>

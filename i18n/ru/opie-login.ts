@@ -7,10 +7,6 @@ accurately to calibrate your screen.</source>
         <translation>Нажмите на цели твердо и аккуратно
 чтобы откалибровать ваш экран.</translation>
     </message>
-    <message>
-        <source>Welcome to Opie</source>
-        <translation type="obsolete">Добро пожаловать в Opie</translation>
-    </message>
 </context>
 <context>
     <name>LoginWindow</name>
@@ -78,10 +74,6 @@ by an uncaught signal
     <message>
         <source>Could not start Opie.</source>
         <translation>Не смог запустить Opie.</translation>
-    </message>
-    <message>
-        <source>&lt;center&gt;Welcome to OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</source>
-        <translation type="obsolete">&lt;center&gt;Добро пожаловать в OPIE %1&lt;/center&gt;&lt;center&gt;&amp; %2 %3&lt;/center&gt;</translation>
     </message>
 </context>
 <context>

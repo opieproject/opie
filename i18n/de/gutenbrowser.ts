@@ -311,6 +311,14 @@ http://www.trolltech.com
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
         <translation>&lt;p&gt;Fehler beim Öffnen der Bibliothek Index. Bitte laden Sie ein neues herunter &lt;/P&gt;</translation>
     </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>   </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NetworkDialog</name>

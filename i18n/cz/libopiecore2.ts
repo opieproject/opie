@@ -58,10 +58,6 @@
         <translation>Horní+Vlevo</translation>
     </message>
     <message>
-        <source>Display Rotate</source>
-        <translation type="obsolete">Rotace displeje</translation>
-    </message>
-    <message>
         <source>Action Button</source>
         <translation>Akční tlačítko</translation>
     </message>

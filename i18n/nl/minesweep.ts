@@ -10,10 +10,6 @@
         <translation>Je bent ontploft!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Mijnenveger</translation>
-    </message>
-    <message>
         <source>Beginner</source>
         <translation>Beginner</translation>
     </message>

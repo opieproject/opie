@@ -123,10 +123,6 @@ Speicher wird wie folgt eingeteilt:
         <translation>Entfernen</translation>
     </message>
     <message>
-        <source>2 Mb,4 Mb,6 Mb,8 Mb</source>
-        <translation type="obsolete">2 Mb,4 Mb,6 Mb,8 Mb</translation>
-    </message>
-    <message>
         <source>Failed to detach swapfile.</source>
         <translation>Auslagerungsdatei konnte nicht erkannt werden.</translation>
     </message>

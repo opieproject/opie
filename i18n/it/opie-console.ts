@@ -792,10 +792,6 @@
         <translation>Fallita</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">Composizione del numero fallita.</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>Cancellazione...</translation>
     </message>
@@ -856,22 +852,6 @@
     <message>
         <source>Color scheme</source>
         <translation>Schema colore</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">Dimensione Font</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">piccolo</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">medio</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">grande</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

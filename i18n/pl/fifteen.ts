@@ -60,10 +60,6 @@
         <translation>Losuj</translation>
     </message>
     <message>
-        <source>Solve</source>
-        <translation type="obsolete">Poukladaj</translation>
-    </message>
-    <message>
         <source>Game</source>
         <translation>Gra</translation>
     </message>

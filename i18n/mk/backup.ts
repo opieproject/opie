@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Бекап и Обновување...работи...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Бекап и Обновување</translation>
     </message>
@@ -96,10 +92,6 @@
     <message>
         <source>Applications</source>
         <translation>Апликации</translation>
-    </message>
-    <message>
-        <source>Save To</source>
-        <translation type="obsolete">Сними во</translation>
     </message>
     <message>
         <source>&amp;Backup</source>

@@ -75,16 +75,8 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
         <translation>Uzmanību</translation>
     </message>
     <message>
-        <source>&lt;p&gt;All user-defined net ranges will be lost.</source>
-        <translation type="obsolete">&lt;p&gt;Visi lieotāju-definēti diapazoni pazudīs.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Atlikt</translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="obsolete">Labi</translation>
     </message>
     <message>
         <source>Any</source>
@@ -138,24 +130,12 @@ Jūs varat izvēlēties konfigurētu lietotāju.</translation>
         <translation>Nepieciešamās izdošanās</translation>
     </message>
     <message>
-        <source>Debug options</source>
-        <translation type="obsolete">Atblusošanas opcijas</translation>
-    </message>
-    <message>
         <source>Don&apos;t protect this config screen</source>
         <translation>Neaizsargāt šo konfigurācijas ekrānu</translation>
     </message>
     <message>
         <source>Show explanatory screens</source>
         <translation>Rādīt skaidrojošās formas</translation>
-    </message>
-    <message>
-        <source>Allow to bypass authentication</source>
-        <translation type="obsolete">Atļaut izlaist autentifikāciju</translation>
-    </message>
-    <message>
-        <source>Note: the third option implies the second one</source>
-        <translation type="obsolete">Piezīme: trešā opcija ietekmē otro</translation>
     </message>
     <message>
         <source>Options</source>

@@ -28,26 +28,6 @@
         <translation>Terminal</translation>
     </message>
     <message>
-        <source>Micro</source>
-        <translation type="obsolete">Mikro</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">Majne fiksne</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">Srednje fiksne</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Pisava</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Možnosti</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Novo</translation>
     </message>
@@ -84,10 +64,6 @@
         <translation>Skrij seznam ukazov</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Jezički na dnu</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Zelena na črni</translation>
     </message>
@@ -98,18 +74,6 @@
     <message>
         <source>White on Black</source>
         <translation>Bela na črni</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Črna na prozorni</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Črna na rdeči</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Rdeča na črni</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -146,10 +110,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Hitro uredi</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Uredi</translation>
     </message>
     <message>
         <source>None</source>
@@ -190,10 +150,6 @@
     <message>
         <source>Use Beep</source>
         <translation>Uporabi piskanje</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Zavihki zgoraj</translation>
     </message>
     <message>
         <source>Konsole</source>

@@ -18,18 +18,6 @@
 <context>
     <name>MindBreakerBoard</name>
     <message>
-        <source>Go%1p%2</source>
-        <translation type="obsolete">Tour %1p%2</translation>
-    </message>
-    <message>
-        <source>CurrentGo%1</source>
-        <translation type="obsolete">Tour courant %1</translation>
-    </message>
-    <message>
-        <source>Answer%1</source>
-        <translation type="obsolete">Réponse %1</translation>
-    </message>
-    <message>
         <source>Reset Statistics</source>
         <translation>Re-initialiser les statistique</translation>
     </message>

@@ -21,10 +21,6 @@
         <translation>Přehrát</translation>
     </message>
     <message>
-        <source>Rec</source>
-        <translation type="obsolete">Nahrát</translation>
-    </message>
-    <message>
         <source>Delete</source>
         <translation>Smazat</translation>
     </message>
@@ -35,14 +31,6 @@
     <message>
         <source>Time</source>
         <translation>Čas</translation>
-    </message>
-    <message>
-        <source>Location</source>
-        <translation type="obsolete">Lokalita</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Files</source>
@@ -77,10 +65,6 @@
         <translation>Ztlumit automaticky</translation>
     </message>
     <message>
-        <source>Stereo Channels</source>
-        <translation type="obsolete">Stereo kanály</translation>
-    </message>
-    <message>
         <source>In</source>
         <translation>Vstup</translation>
     </message>
@@ -101,10 +85,6 @@
         <translation>Hlasitost</translation>
     </message>
     <message>
-        <source>Stop</source>
-        <translation type="obsolete">Stop</translation>
-    </message>
-    <message>
         <source>Low Disk Space</source>
         <translation>Nedostatek místa</translation>
     </message>
@@ -117,24 +97,6 @@ na nahrávku, nebo
 nelze rozpoznat kartu</translation>
     </message>
     <message>
-        <source> seconds</source>
-        <translation type="obsolete">sekund</translation>
-    </message>
-    <message>
-        <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
-the selected file?</source>
-        <translation type="obsolete">Opravdu chcete &lt;font size=+2&gt;&lt;B&gt;SMAZAT&lt;/B&gt;&lt;/font&gt;
-vybraný soubor?</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete">Ano</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete">Ne</translation>
-    </message>
-    <message>
         <source>Error</source>
         <translation>Chyba</translation>
     </message>
@@ -145,10 +107,6 @@ vybraný soubor?</translation>
     <message>
         <source>Opierec</source>
         <translation>Opierec</translation>
-    </message>
-    <message>
-        <source>Please select file to  play</source>
-        <translation type="obsolete">Vyberte soubor pro přehrání</translation>
     </message>
     <message>
         <source>Note</source>

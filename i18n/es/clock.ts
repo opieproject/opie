@@ -40,18 +40,6 @@
 <context>
     <name>Clock</name>
     <message>
-        <source>Snooze</source>
-        <translation type="obsolete">Cabezadita</translation>
-    </message>
-    <message>
-        <source>Clock</source>
-        <translation type="obsolete">Reloj</translation>
-    </message>
-    <message>
-        <source>Stopwatch</source>
-        <translation type="obsolete">Crono</translation>
-    </message>
-    <message>
         <source>Start</source>
         <translation>Empezar</translation>
     </message>
@@ -60,36 +48,8 @@
         <translation>Borrar</translation>
     </message>
     <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Fijar alarma</translation>
-    </message>
-    <message>
         <source>Stop</source>
         <translation>Parar</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Alarm Is On</source>
-        <translation type="obsolete">Alarma activada</translation>
-    </message>
-    <message>
-        <source>Alarm Is Off</source>
-        <translation type="obsolete">Alarma desactivada</translation>
-    </message>
-    <message>
-        <source>Set date and time.</source>
-        <translation type="obsolete">Fijar fecha y hora.</translation>
-    </message>
-    <message>
-        <source>Clock: Alarm was missed.</source>
-        <translation type="obsolete">Reloj: alarma perdida.</translation>
-    </message>
-    <message>
-        <source>Alarm set: %1</source>
-        <translation type="obsolete">Alarma ajustada: %1</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -241,47 +201,6 @@ one day to be selected.</source>
     <message>
         <source>Play File</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Set_Alarm</name>
-    <message>
-        <source>Set Alarm</source>
-        <translation type="obsolete">Fijar Alarma</translation>
-    </message>
-    <message>
-        <source>Hour</source>
-        <translation type="obsolete">Hora</translation>
-    </message>
-    <message>
-        <source>Minute</source>
-        <translation type="obsolete">Minuto</translation>
-    </message>
-    <message>
-        <source>AM</source>
-        <translation type="obsolete">AM</translation>
-    </message>
-    <message>
-        <source>PM</source>
-        <translation type="obsolete">PM</translation>
-    </message>
-    <message>
-        <source>Snooze Delay
-(minutes)</source>
-        <translation type="obsolete">Cabezadita
-(minutos)</translation>
-    </message>
-    <message>
-        <source>mp3 alarm</source>
-        <translation type="obsolete">alarma mp3</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Todo</translation>
-    </message>
-    <message>
-        <source>Audio</source>
-        <translation type="obsolete">Audio</translation>
     </message>
 </context>
 </TS>

@@ -2,10 +2,6 @@
 <context>
     <name>Calculator</name>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="obsolete">Экспериментальный калькулятор</translation>
-    </message>
-    <message>
         <source>M+</source>
         <translation>M+</translation>
     </message>
@@ -128,10 +124,6 @@
 </context>
 <context>
     <name>CalculatorImpl</name>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">Калькулятор</translation>
-    </message>
     <message>
         <source>Standard</source>
         <translation>Стандартный</translation>

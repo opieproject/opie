@@ -373,12 +373,6 @@ tuto aplikaci.</translation>
         <translation>Vypnout</translation>
     </message>
     <message>
-        <source>&lt;p&gt;
-These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="obsolete">&lt;p&gt;
-Tyto možnosti vypnutí jsou poskytovány primárně pro použití během vývoje a testování systému Opie. V normálním prostředí nejsou tyto způsoby potřeba.</translation>
-    </message>
-    <message>
         <source>Cancel</source>
         <translation>Storno</translation>
     </message>

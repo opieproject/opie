@@ -2,10 +2,6 @@
 <context>
     <name>Calculator</name>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="obsolete">實驗用計算機</translation>
-    </message>
-    <message>
         <source>M+</source>
         <translation>M+</translation>
     </message>
@@ -128,10 +124,6 @@
 </context>
 <context>
     <name>CalculatorImpl</name>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">計算機</translation>
-    </message>
     <message>
         <source>Standard</source>
         <translation>標準</translation>

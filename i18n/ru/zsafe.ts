@@ -1,266 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>@default</name>
-    <message>
-        <source>ZSafe</source>
-        <translation type="obsolete">ZСейф</translation>
-    </message>
-    <message>
-        <source>Do you want to delete?</source>
-        <translation type="obsolete">Вы хотите удалить?</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Удалить</translation>
-    </message>
-    <message>
-        <source>D&amp;on&apos;t Delete</source>
-        <translation type="obsolete">&amp;Не удалять</translation>
-    </message>
-    <message>
-        <source>Edit Entry</source>
-        <translation type="obsolete">Правка записи</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Имя</translation>
-    </message>
-    <message>
-        <source>Username</source>
-        <translation type="obsolete">Имя пользователя</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="obsolete">Пароль</translation>
-    </message>
-    <message>
-        <source>Comment</source>
-        <translation type="obsolete">Примечания</translation>
-    </message>
-    <message>
-        <source>Field 4</source>
-        <translation type="obsolete">Поле 4</translation>
-    </message>
-    <message>
-        <source>Field 5</source>
-        <translation type="obsolete">Поле 5</translation>
-    </message>
-    <message>
-        <source>New Entry</source>
-        <translation type="obsolete">Новая запись</translation>
-    </message>
-    <message>
-        <source>Entry name must be different
-from the category name.</source>
-        <translation type="obsolete">Имя записи должно отличаться
-от имени категории.</translation>
-    </message>
-    <message>
-        <source>Search</source>
-        <translation type="obsolete">Поиск</translation>
-    </message>
-    <message>
-        <source>Entry not found</source>
-        <translation type="obsolete">Запись не найдена</translation>
-    </message>
-    <message>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;Да</translation>
-    </message>
-    <message>
-        <source>Field 2</source>
-        <translation type="obsolete">Поле 2</translation>
-    </message>
-    <message>
-        <source>Field 3</source>
-        <translation type="obsolete">Поле 3</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="obsolete">Все</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="obsolete">Текст</translation>
-    </message>
-    <message>
-        <source>Remove text file</source>
-        <translation type="obsolete">Убрать текстовый файл</translation>
-    </message>
-    <message>
-        <source>Could not remove text file.</source>
-        <translation type="obsolete">Не смог убрать текстовый файл.</translation>
-    </message>
-    <message>
-        <source>No document defined.
-You have to create a new document</source>
-        <translation type="obsolete">Документы не заданы.
-Вы должны создать новый документ</translation>
-    </message>
-    <message>
-        <source>Export text file</source>
-        <translation type="obsolete">Экспорт в текст файл</translation>
-    </message>
-    <message>
-        <source>Import text file</source>
-        <translation type="obsolete">Импорт из текст файла</translation>
-    </message>
-    <message>
-        <source>Could not export to text file.</source>
-        <translation type="obsolete">Не смог экспортировать в текст файл.</translation>
-    </message>
-    <message>
-        <source>Could not import text file.</source>
-        <translation type="obsolete">Не смог импортировать из текст файла.</translation>
-    </message>
-    <message>
-        <source>Enter Password</source>
-        <translation type="obsolete">Введите пароль</translation>
-    </message>
-    <message>
-        <source>Wrong password.
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Неверный пароль.
-
-ZСейф будет закрыт.</translation>
-    </message>
-    <message>
-        <source>Wrong password.
-Enter again?</source>
-        <translation type="obsolete">Неверный пароль.
-Попробовать снова?</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation type="obsolete">&amp;Да</translation>
-    </message>
-    <message>
-        <source>&amp;No.</source>
-        <translation type="obsolete">&amp;Нет.</translation>
-    </message>
-    <message>
-        <source>Empty document or
-wrong password.
-Continue?</source>
-        <translation type="obsolete">Пустой документ или
-неверный пароль.
-Продолжить?</translation>
-    </message>
-    <message>
-        <source>&amp;No</source>
-        <translation type="obsolete">&amp;нет</translation>
-    </message>
-    <message>
-        <source>&amp;Yes.</source>
-        <translation type="obsolete">&amp;Да.</translation>
-    </message>
-    <message>
-        <source>Password is empty.
-Please enter again.</source>
-        <translation type="obsolete">Пароль пуст.
-Пожалуйста введите снова.</translation>
-    </message>
-    <message>
-        <source>Reenter Password</source>
-        <translation type="obsolete">Введите пароль снова</translation>
-    </message>
-    <message>
-        <source>Passwords must be identical.
-Please enter again.</source>
-        <translation type="obsolete">Пароли должны быть одинаковыми.
-Пожалуйста введите снова.</translation>
-    </message>
-    <message>
-        <source>Do you want to save </source>
-        <translation type="obsolete">Вы хотите сохранить</translation>
-    </message>
-    <message>
-        <source>
-before continuing?</source>
-        <translation type="obsolete">
-прежде чем продолжать?</translation>
-    </message>
-    <message>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Сохранить</translation>
-    </message>
-    <message>
-        <source>&amp;Don&apos;t Save</source>
-        <translation type="obsolete">&amp;Не сохранять</translation>
-    </message>
-    <message>
-        <source>Password file saved.</source>
-        <translation type="obsolete">Файл паролей сохранен.</translation>
-    </message>
-    <message>
-        <source>Do you want to save
-before exiting?</source>
-        <translation type="obsolete">Вы хотите сохранить
-перед выходом?</translation>
-    </message>
-    <message>
-        <source>S&amp;ave with
-new
-password</source>
-        <translation type="obsolete">С&amp;охранить
-с новым
-паролем</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Категория</translation>
-    </message>
-    <message>
-        <source>Wait dialog</source>
-        <translation type="obsolete">Диалог ожидания</translation>
-    </message>
-    <message>
-        <source>Gathering icons...</source>
-        <translation type="obsolete">Собираю пиктограммы...</translation>
-    </message>
-    <message>
-        <source>Create new ZSafe document</source>
-        <translation type="obsolete">Создать новый документ ZСейф</translation>
-    </message>
-    <message>
-        <source>Now you have to enter
-a password twice for your
-newly created document.</source>
-        <translation type="obsolete">Теперь вы должны дважды
-ввести пароль для только
-что созданного документа.</translation>
-    </message>
-    <message>
-        <source>Open ZSafe document</source>
-        <translation type="obsolete">Открыть документ ZСейф</translation>
-    </message>
-    <message>
-        <source>Save ZSafe document as..</source>
-        <translation type="obsolete">Сохранить документ ZСейф как..</translation>
-    </message>
-    <message>
-        <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="obsolete">Zaurus Менеджер Паролей&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="obsolete">ZСейф версии 2.1.2-jv01b&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="obsolete">написан Carsten Schneider&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="obsolete">Перевод Robert Ernst&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="obsolete">ZСейф версии 2.1.2&lt;br&gt;</translation>
-    </message>
-</context>
-<context>
     <name>CategoryDialog</name>
     <message>
         <source>Category</source>
@@ -478,16 +217,6 @@ shows the list of dirs and files</source>
         <translation>ZСейф</translation>
     </message>
     <message>
-        <source>Can&apos;t create directory
-%1
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Не могу создать каталог
-%1
-
-ZСейф будет закрыт.</translation>
-    </message>
-    <message>
         <source>&amp;Save document</source>
         <translation>&amp;Сохранить документ</translation>
     </message>
@@ -600,26 +329,6 @@ ZСейф будет закрыт.</translation>
         <translation>&amp;Сохранить документ как ..</translation>
     </message>
     <message>
-        <source>Can&apos;t create directory
-.../Documents/application
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Не могу создать каталог
-...//Documents/application
-
-ZСейф будет закрыт.</translation>
-    </message>
-    <message>
-        <source>Can&apos;t create directory
-...//Documents/application/zsafe
-
-ZSafe will now exit.</source>
-        <translation type="obsolete">Не могу создать каталог
-...//Documents/application/zsafe
-
-ZСейф будет закрыт.</translation>
-    </message>
-    <message>
         <source>New entry</source>
         <translation>Добавить запись</translation>
     </message>
@@ -648,20 +357,12 @@ ZСейф будет закрыт.</translation>
         <translation>&amp;Не удалять</translation>
     </message>
     <message>
-        <source>Edit Entry</source>
-        <translation type="obsolete">Правка записи</translation>
-    </message>
-    <message>
         <source>Username</source>
         <translation>Имя пользователя</translation>
     </message>
     <message>
         <source>Password</source>
         <translation>Пароль</translation>
-    </message>
-    <message>
-        <source>New Entry</source>
-        <translation type="obsolete">Создать запись</translation>
     </message>
     <message>
         <source>Entry name must be different
@@ -826,10 +527,6 @@ password</source>
         <translation>Собираю пиктограммы...</translation>
     </message>
     <message>
-        <source>Create new ZSafe document</source>
-        <translation type="obsolete">Создать новый документ ZСейф</translation>
-    </message>
-    <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
@@ -840,30 +537,6 @@ newly created document.</source>
     <message>
         <source>Open ZSafe document</source>
         <translation>Открыть документ ZСейф</translation>
-    </message>
-    <message>
-        <source>Save ZSafe document as..</source>
-        <translation type="obsolete">Сохранить документ ZСейф как..</translation>
-    </message>
-    <message>
-        <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="obsolete">Zaurus Менеджер Паролей&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="obsolete">ZСейф версии 2.1.2-jv01b&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="obsolete">написан Carsten Schneider&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="obsolete">Перевод Robert Ernst&lt;br&gt;</translation>
-    </message>
-    <message>
-        <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="obsolete">ZСейф версии 2.1.2&lt;br&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Can&apos;t create directory %1&lt;/P&gt;&lt;P&gt;ZSafe will now exit.&lt;/P&gt;</source>

@@ -3,10 +3,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Sichern und Wiederherstellen... arbeitet ...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Sichern und Wiederherstellen</translation>
     </message>
@@ -37,10 +33,6 @@
         <translation>Sichern und Wiederherstellen... Fehlgeschlagen!!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Sichern erfolgreich.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Bitte wählen Sie etwas zum wiederherstellen.</translation>
     </message>
@@ -51,10 +43,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>Folgende Datei konnte nicht geöffnet werden: %1</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Wiederherstellung erfolgreich.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -108,10 +96,6 @@
         <translation>Anwendungen</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Speichern nach</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Sichern</translation>
     </message>
@@ -132,10 +116,6 @@
         <translation>&amp;Wiederherstellen</translation>
     </message>
     <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Erneuere Dateiliste</translation>
-    </message>
-    <message>
         <source>Locations</source>
         <translation>Quellen</translation>
     </message>
@@ -146,14 +126,6 @@
     <message>
         <source>Remove</source>
         <translation>Entfernen</translation>
-    </message>
-    <message>
-        <source>Save</source>
-        <translation type="obsolete">Speichern</translation>
-    </message>
-    <message>
-        <source>...</source>
-        <translation type="obsolete">...</translation>
     </message>
     <message>
         <source>Destination</source>

@@ -212,10 +212,6 @@
         <translation>Вклучи голем индикатор за зафатеност</translation>
     </message>
     <message>
-        <source>Enable blinking busy indicator</source>
-        <translation type="obsolete">Вклучи трепкачки индикатор за зафатеност</translation>
-    </message>
-    <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
         <translation>Избери го јазичето што треба да се уредува или брише.</translation>
     </message>
@@ -234,10 +230,6 @@
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
         <translation>Активирај го ова ако сакаш да видиш голем индикатор за зафатеност на средината на екранот наместо тој во панелот.</translation>
-    </message>
-    <message>
-        <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="obsolete">Активирај го ова ако сакаш трепкачки индикатор на зафатеност за време на вчитвуањето на апликациите во главното мени.</translation>
     </message>
     <message>
         <source>All Tabs</source>

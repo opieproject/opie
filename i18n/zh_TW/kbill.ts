@@ -34,10 +34,6 @@
         <translation>暫停遊戲</translation>
     </message>
     <message>
-        <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
-        <translation type="obsolete">&lt;b&gt;故事&lt;/b&gt;這個世界的命運又再度掌握在你的手裡! 有一個邪惡的電腦駭客, 只知道他的代號是 &apos;Bill&apos;, 已經製造了一種終極的電腦病毒. 這個病毒的威力十分強大, 甚至可以把一般的電腦變成一臺烤麵包機. (噢!) &apos;Bill&apos; 已經把自己複製成多得數不清的微型比爾. 他們唯一的目的就是要散佈這個凶惡的病毒, 而它已經被巧妙地偽裝成一個非常熱門的作業系統. 身為系統管理者與病毒剋星, 你的工作是阻止比爾完成他的野心.</translation>
-    </message>
-    <message>
         <source>The story of KBill</source>
         <translation>K比爾的故事</translation>
     </message>

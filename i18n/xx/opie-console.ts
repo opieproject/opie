@@ -791,10 +791,6 @@
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Dialing the number failed.</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>Cancelling...</source>
         <translation>FOO</translation>
     </message>
@@ -855,22 +851,6 @@
     <message>
         <source>Color scheme</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Font size</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>small</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>medium</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
-        <source>large</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Line-break conversions</source>

@@ -15,14 +15,6 @@
         <translation>&amp;Jeu</translation>
     </message>
     <message>
-        <source>&amp;Change Card Backs</source>
-        <translation type="obsolete">&amp;Changer le Dos des Cartes</translation>
-    </message>
-    <message>
-        <source>&amp;Snap To Position</source>
-        <translation type="obsolete">&amp;Aider Positionnement</translation>
-    </message>
-    <message>
         <source>&amp;Settings</source>
         <translation>&amp;Options</translation>
     </message>
@@ -39,24 +31,8 @@
         <translation>Jouer</translation>
     </message>
     <message>
-        <source>Change Card Backs</source>
-        <translation type="obsolete">Changer le Dos des Cartes</translation>
-    </message>
-    <message>
-        <source>Snap To Position</source>
-        <translation type="obsolete">Aider Positionnement</translation>
-    </message>
-    <message>
-        <source>Turn One Card</source>
-        <translation type="obsolete">Retourner Une Carte</translation>
-    </message>
-    <message>
         <source>Settings</source>
         <translation>Options</translation>
-    </message>
-    <message>
-        <source>Turn Three Cards</source>
-        <translation type="obsolete">Retourner Trois Cartes</translation>
     </message>
     <message>
         <source>Chicane</source>

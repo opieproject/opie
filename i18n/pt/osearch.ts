@@ -14,10 +14,6 @@
         <translation>Procurar Tudo</translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Sensível a letras grandes/pequenas</translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation>Usas expressões</translation>
     </message>
@@ -100,18 +96,6 @@
         <translation>abrir com</translation>
     </message>
     <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">mostrar tarefas completas</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">mostrar eventos do passado</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">procurar nas datas</translation>
-    </message>
-    <message>
         <source>File: </source>
         <translation>Ficheiro:</translation>
     </message>
@@ -122,10 +106,6 @@
     <message>
         <source>Mimetype: </source>
         <translation>Tipo de Conteúdo:</translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">procurar conteúdo</translation>
     </message>
     <message>
         <source>searching %1</source>

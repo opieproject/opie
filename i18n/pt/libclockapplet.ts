@@ -2,16 +2,6 @@
 <context>
     <name>LauncherClock</name>
     <message>
-        <source>Information</source>
-        <translation type="obsolete">Informação</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
-(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;A data do sistema não parece válida.
-(%1)&lt;/p&gt;&lt;p&gt;Deseja corrigi-la?&lt;/p&gt;</translation>
-    </message>
-    <message>
         <source>Set time...</source>
         <translation type="unfinished"></translation>
     </message>

@@ -2,10 +2,6 @@
 <context>
     <name>Calculator</name>
     <message>
-        <source>Experimental Calculator</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>M+</source>
         <translation>FOO</translation>
     </message>
@@ -131,10 +127,6 @@
     <message>
         <source>Standard</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Calculator</source>
-        <translation type="obsolete">FOO</translation>
     </message>
 </context>
 <context>

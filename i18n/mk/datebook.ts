@@ -343,6 +343,14 @@ Quit anyway?</source>
         <source>Category:</source>
         <translation>Категорија:</translation>
     </message>
+    <message>
+        <source>Plugins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pluginlist</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -412,48 +420,6 @@ Quit anyway?</source>
 </context>
 <context>
     <name>DateBookWeekView</name>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="obsolete">Пон.
-Понеделник</translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="obsolete">Втор.
-Вторник</translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="obsolete">Сред,
-Среда</translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="obsolete">Чет.
-Четврток</translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="obsolete">Пет.
-Петок</translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="obsolete">Саб.
-Сабота</translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="obsolete">Нед.
-Недела</translation>
-    </message>
     <message>
         <source>p</source>
         <translation>п</translation>
@@ -587,10 +553,6 @@ Quit anyway?</source>
     <message>
         <source>Note...</source>
         <translation>Забелешка...</translation>
-    </message>
-    <message>
-        <source>Start Time</source>
-        <translation type="obsolete">Време на почеток</translation>
     </message>
 </context>
 <context>

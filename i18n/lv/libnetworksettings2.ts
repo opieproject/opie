@@ -41,14 +41,6 @@
         <translation>&lt;p&gt;Iekārtas kas var apstrādāt baitus&lt;/p&gt;</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Nodes that provide working IP connections&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Tīkla vietas kas strādā ar IP savienojumiem&lt;/p&gt;</translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Fully configured connection profile&lt;/p&gt;</source>
-        <translation type="obsolete">&lt;p&gt;Pilnībā konfigurēts savienojuma profils&lt;/p&gt;</translation>
-    </message>
-    <message>
         <source>&lt;p&gt;Nodes that provide working IP connection&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -88,16 +80,8 @@
         <translation>Aizliegts</translation>
     </message>
     <message>
-        <source>Off</source>
-        <translation type="obsolete">Izslēgts</translation>
-    </message>
-    <message>
         <source>Available</source>
         <translation>Pieejams</translation>
-    </message>
-    <message>
-        <source>IsUp</source>
-        <translation type="obsolete">IrAugšā</translation>
     </message>
     <message>
         <source>Inactive</source>

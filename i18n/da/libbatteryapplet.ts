@@ -2,16 +2,8 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="obsolete">Luk</translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation>Oplader</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Procent batteri tilbage</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -50,14 +42,6 @@
         <translation>Ekstern strøm afbrudt</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Batteri tid tilbage</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Batteristatus</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Fejl</translation>
     </message>
@@ -68,14 +52,6 @@
     <message>
         <source>Charging both devices</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Procent strøm tilbage:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Tid tilbage på batteriet:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>

@@ -11,10 +11,6 @@
         <translation>Por favor preencha seu cartão de visita</translation>
     </message>
     <message>
-        <source>No plugins found</source>
-        <translation type="obsolete">Nenhum Plugin encontrado</translation>
-    </message>
-    <message>
         <source>No plugins activated</source>
         <translation>Nenhum plugin ativado</translation>
     </message>

@@ -47,10 +47,6 @@
         <translation>Options</translation>
     </message>
     <message>
-        <source>Case sensitiv</source>
-        <translation type="obsolete">Sensible à la casse</translation>
-    </message>
-    <message>
         <source>Use wildcards</source>
         <translation>Utiliser les jokers</translation>
     </message>
@@ -80,18 +76,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>show completed tasks</source>
-        <translation type="obsolete">montrer les tâches terminées</translation>
-    </message>
-    <message>
-        <source>show past events</source>
-        <translation type="obsolete">montrer événements passés</translation>
-    </message>
-    <message>
-        <source>search in dates</source>
-        <translation type="obsolete">rechercher dates</translation>
-    </message>
     <message>
         <source>show</source>
         <translation>montrer</translation>
@@ -123,10 +107,6 @@
     <message>
         <source>open with </source>
         <translation>ouvrir avec </translation>
-    </message>
-    <message>
-        <source>search content</source>
-        <translation type="obsolete">rechercher contenu</translation>
     </message>
     <message>
         <source>searching %1</source>

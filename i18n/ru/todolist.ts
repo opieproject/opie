@@ -85,64 +85,12 @@
         <source>loud</source>
         <translation>громкий</translation>
     </message>
-    <message>
-        <source>Opie Todolist</source>
-        <translation type="obsolete">Opie Дела</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>New from template</source>
-        <translation type="obsolete">Новая по образцу</translation>
-    </message>
-    <message>
-        <source>New Task</source>
-        <translation type="obsolete">Новая задача</translation>
-    </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="obsolete">Нажмите здесь чтобы создать новую задачу.</translation>
-    </message>
-    <message>
-        <source>Edit Task</source>
-        <translation type="obsolete">Изменить задачу</translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="obsolete">Нажмите здесь чтобы изменить эту задачу.</translation>
-    </message>
-    <message>
-        <source>View Task</source>
-        <translation type="obsolete">Просмотреть задачу</translation>
-    </message>
-    <message>
-        <source>Delete...</source>
-        <translation type="obsolete">Удалить...</translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="obsolete">Нажмите здесь чтобы убрать эту задачу.</translation>
-    </message>
-    <message>
-        <source>Delete all...</source>
-        <translation type="obsolete">Удалить все...</translation>
-    </message>
-    <message>
         <source>Delete completed</source>
         <translation>Удалить завершенные</translation>
-    </message>
-    <message>
-        <source>Beam</source>
-        <translation type="obsolete">Отправить</translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="obsolete">Нажмите здесь чтобы отправить эту задачу на другое устройство.</translation>
-    </message>
-    <message>
-        <source>Find</source>
-        <translation type="obsolete">Найти</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
@@ -159,18 +107,6 @@
     <message>
         <source>Show quick task bar</source>
         <translation>Показать панель быстрого доступа</translation>
-    </message>
-    <message>
-        <source>Data</source>
-        <translation type="obsolete">Данные</translation>
-    </message>
-    <message>
-        <source>Category</source>
-        <translation type="obsolete">Категория</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Опции</translation>
     </message>
     <message>
         <source>QuickEdit</source>
@@ -191,10 +127,6 @@ The list displays the following information:
 2. Приоритет - графическое отображение приоритета задания. Нажмите дважды чтобы изменить.
 3. Описание - описание задачи. Нажмите чтобы выбрать это задание.
 4. Предельный срок - показывает когда нужно закончить задание. Эта колонка может быть показана или скрыта через меню Опции-&gt;&apos;Показать предельные сроки&apos;.</translation>
-    </message>
-    <message>
-        <source>All Categories</source>
-        <translation type="obsolete">Все категории</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -227,20 +159,12 @@ Quit Anyway?</source>
         <translation>все завершенные задачи?</translation>
     </message>
     <message>
-        <source>Unfiled</source>
-        <translation type="obsolete">Без категории</translation>
-    </message>
-    <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
         <translation>&lt;P&gt;%1 новые задачи принято .&lt;p&gt;Вы хотите добавить их в ваши Дела?</translation>
     </message>
     <message>
         <source>New Tasks</source>
         <translation>Новые задачи</translation>
-    </message>
-    <message>
-        <source>Duplicate</source>
-        <translation type="obsolete">Сдублировать</translation>
     </message>
     <message>
         <source>C.</source>
@@ -251,16 +175,8 @@ Quit Anyway?</source>
         <translation>Приоритет</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="obsolete">Описание</translation>
-    </message>
-    <message>
         <source>Deadline</source>
         <translation>Предельный срок</translation>
-    </message>
-    <message>
-        <source>Configure Templates</source>
-        <translation type="obsolete">Настроить образцы</translation>
     </message>
     <message>
         <source>Priority:</source>

@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">備份與還原...執行中...</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>備份與還原</translation>
     </message>
@@ -96,10 +92,6 @@
     <message>
         <source>Applications</source>
         <translation>應用程式</translation>
-    </message>
-    <message>
-        <source>Save To</source>
-        <translation type="obsolete">儲存至</translation>
     </message>
     <message>
         <source>&amp;Backup</source>

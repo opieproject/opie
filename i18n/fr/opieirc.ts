@@ -73,10 +73,6 @@
         <translation>Entrez votre message ici pour participer au canal de discution</translation>
     </message>
     <message>
-        <source>CTCP</source>
-        <translation type="obsolete">CTCP</translation>
-    </message>
-    <message>
         <source>Query</source>
         <translation>Requête</translation>
     </message>
@@ -134,24 +130,8 @@
 <context>
     <name>IRCMessageParser</name>
     <message>
-        <source>Received unhandled numeric command : </source>
-        <translation type="obsolete">Commande numérique reçu non supporté : </translation>
-    </message>
-    <message>
-        <source>Received unhandled ctcp command : </source>
-        <translation type="obsolete">Commande ctcp reçu non supporté : </translation>
-    </message>
-    <message>
-        <source>Received unhandled literal command : </source>
-        <translation type="obsolete">Commande littérale reçu non supporté : </translation>
-    </message>
-    <message>
         <source>Nonexistant channel join - desynchronized?</source>
         <translation>Accès à un canal non-existant - Désynchronisé ?</translation>
-    </message>
-    <message>
-        <source> joined channel </source>
-        <translation type="obsolete">canal joint</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -160,14 +140,6 @@
     <message>
         <source>You already joined the channel - desynchronized?</source>
         <translation>Vous êtes déjà inscrit sur ce canal - Désynchronisé ?</translation>
-    </message>
-    <message>
-        <source>You left channel </source>
-        <translation type="obsolete">Vous avez quitté le canal</translation>
-    </message>
-    <message>
-        <source> left channel </source>
-        <translation type="obsolete">canal quitté</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -182,28 +154,8 @@
         <translation>Canal message avec expéditeur inconnu</translation>
     </message>
     <message>
-        <source>Channel message with unknown channel </source>
-        <translation type="obsolete">Canal message avec canal inconnu</translation>
-    </message>
-    <message>
         <source>Received PRIVMSG of unknown type</source>
         <translation>Message PRIVMSG reçu de type inconnu</translation>
-    </message>
-    <message>
-        <source>You are now known as </source>
-        <translation type="obsolete">Vous êtes actuellement référencé comme</translation>
-    </message>
-    <message>
-        <source> is now known as </source>
-        <translation type="obsolete">est référencé comme</translation>
-    </message>
-    <message>
-        <source>Nickname change of an unknown person</source>
-        <translation type="obsolete">Surnom d&apos;une personne inconnu changé </translation>
-    </message>
-    <message>
-        <source> has quit </source>
-        <translation type="obsolete">a quitté</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -220,10 +172,6 @@
     <message>
         <source>Received a CTCP PING from </source>
         <translation>Reçu CTCP PING de</translation>
-    </message>
-    <message>
-        <source>Received a CTCP VERSION from </source>
-        <translation type="obsolete">Reçu CTPC VERSION de</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
@@ -320,14 +268,6 @@
     <message>
         <source>Channel message with unknown channel %1</source>
         <translation>Message avec numéro de Canal  %1 inconnu</translation>
-    </message>
-    <message>
-        <source>You are now known as %1</source>
-        <translation type="obsolete">Vous êtes enregistrés en tant que %1</translation>
-    </message>
-    <message>
-        <source>%1 is now known as %2</source>
-        <translation type="obsolete">%1 est maintenant %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
@@ -537,16 +477,8 @@ Real name: %4</source>
         <translation>Nom d&apos;hote nécessaire</translation>
     </message>
     <message>
-        <source>Port required</source>
-        <translation type="obsolete">Port nécessaire</translation>
-    </message>
-    <message>
         <source>Nickname required</source>
         <translation>Surnom nécessaire</translation>
-    </message>
-    <message>
-        <source>Realname required</source>
-        <translation type="obsolete">Nom réel nécessaire</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
@@ -598,10 +530,6 @@ par des virgules et commancent par &apos;#&apos; or &apos;+&apos;</translation>
 </context>
 <context>
     <name>IRCServerTab</name>
-    <message>
-        <source>Connection to</source>
-        <translation type="obsolete">Connexion à</translation>
-    </message>
     <message>
         <source>Server messages</source>
         <translation>Messages serveur</translation>

@@ -2,10 +2,6 @@
 <context>
     <name>BackupAndRestore</name>
     <message>
-        <source>Backup and Restore... working...</source>
-        <translation type="obsolete">Backup en herstel, voortgang....</translation>
-    </message>
-    <message>
         <source>Backup and Restore</source>
         <translation>Backup en herstel</translation>
     </message>
@@ -36,10 +32,6 @@
         <translation>Backup en Herstel is mislukt!</translation>
     </message>
     <message>
-        <source>Backup Successfull.</source>
-        <translation type="obsolete">Backup succesvol.</translation>
-    </message>
-    <message>
         <source>Please select something to restore.</source>
         <translation>Selecteer iets om te herstellen.</translation>
     </message>
@@ -50,10 +42,6 @@
     <message>
         <source>Unable to open File: %1</source>
         <translation>Kan bestand %1 niet openen</translation>
-    </message>
-    <message>
-        <source>Restore Successfull.</source>
-        <translation type="obsolete">Herstel sucsesvol.</translation>
     </message>
     <message>
         <source>Backup Successful.</source>
@@ -107,10 +95,6 @@
         <translation>Programma&apos;s</translation>
     </message>
     <message>
-        <source>Save To</source>
-        <translation type="obsolete">Opslaan in</translation>
-    </message>
-    <message>
         <source>&amp;Backup</source>
         <translation>&amp;Backup</translation>
     </message>
@@ -129,10 +113,6 @@
     <message>
         <source>&amp;Restore</source>
         <translation>He&amp;rstel</translation>
-    </message>
-    <message>
-        <source>Update Filelist</source>
-        <translation type="obsolete">Bestandenlijst vernieuwen</translation>
     </message>
     <message>
         <source>Locations</source>

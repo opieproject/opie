@@ -204,26 +204,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Creating directory </source>
-        <translation type="obsolete">Opretter mappe</translation>
-    </message>
-    <message>
-        <source>Linked %1 to %2</source>
-        <translation type="obsolete">Link fra %1 til %1 oprettet</translation>
-    </message>
-    <message>
-        <source>Removed %1</source>
-        <translation type="obsolete">%1 fjernet</translation>
-    </message>
-    <message>
-        <source>Failed to remove %1</source>
-        <translation type="obsolete">Kunne ikke fjerne %1</translation>
-    </message>
-    <message>
-        <source>Removed </source>
-        <translation type="obsolete">Fjernet</translation>
-    </message>
-    <message>
         <source>Couldn&apos;t start ipkg-link process</source>
         <translation type="unfinished"></translation>
     </message>
@@ -503,10 +483,6 @@ Er du sikker?
         <translation>Geninstallér</translation>
     </message>
     <message>
-        <source>R</source>
-        <translation type="obsolete">R</translation>
-    </message>
-    <message>
         <source>Do you wish to remove or upgrade
 %1?</source>
         <translation>Vil du fjerne eller opgradere
@@ -515,10 +491,6 @@ Er du sikker?
     <message>
         <source>Remove or Upgrade</source>
         <translation>Fjern eller opgradér</translation>
-    </message>
-    <message>
-        <source>U</source>
-        <translation type="obsolete">U</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>

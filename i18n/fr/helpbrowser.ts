@@ -31,10 +31,6 @@
         <translation>Aide en ligne</translation>
     </message>
     <message>
-        <source>HelpBrowser</source>
-        <translation type="obsolete">Aide HTML</translation>
-    </message>
-    <message>
         <source>Go</source>
         <translation>Go</translation>
     </message>

@@ -20,10 +20,6 @@ crash into the walls, edges or its tail.</source>
         <translation>FOO</translation>
     </message>
     <message>
-        <source>Press Any Key To Start</source>
-        <translation type="obsolete">FOO</translation>
-    </message>
-    <message>
         <source>     Score :    %1   </source>
         <translation>FOO</translation>
     </message>
@@ -31,10 +27,6 @@ crash into the walls, edges or its tail.</source>
         <source>GAME OVER!
  Your Score: %1</source>
         <translation>FOO</translation>
-    </message>
-    <message>
-        <source>Press Any Key to Begin a New Game.</source>
-        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Press any key to start</source>

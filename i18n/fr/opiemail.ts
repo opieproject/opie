@@ -1,20 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>@default</name>
-    <message>
-        <source>Reply</source>
-        <translation type="obsolete">Répondre</translation>
-    </message>
-    <message>
-        <source>Reply All</source>
-        <translation type="obsolete">Répondre à Tous</translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="obsolete">Supprimer</translation>
-    </message>
-</context>
-<context>
     <name>AccountView</name>
     <message>
         <source>Error creating new Folder</source>
@@ -182,45 +167,6 @@
     </message>
 </context>
 <context>
-    <name>Composer</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete">Formulaire1</translation>
-    </message>
-    <message>
-        <source>CC</source>
-        <translation type="obsolete">CC</translation>
-    </message>
-    <message>
-        <source>Subject</source>
-        <translation type="obsolete">Objet</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="obsolete">Annuler</translation>
-    </message>
-    <message>
-        <source>Reset</source>
-        <translation type="obsolete">Réinitialiser</translation>
-    </message>
-    <message>
-        <source>Queue</source>
-        <translation type="obsolete">File d&apos;Attente</translation>
-    </message>
-    <message>
-        <source>Send</source>
-        <translation type="obsolete">Envoyer</translation>
-    </message>
-    <message>
-        <source>From:</source>
-        <translation type="obsolete">De:</translation>
-    </message>
-    <message>
-        <source>To:</source>
-        <translation type="obsolete">A:</translation>
-    </message>
-</context>
-<context>
     <name>EditAccounts</name>
     <message>
         <source>Account</source>
@@ -301,10 +247,6 @@
         <translation>Utilisateur</translation>
     </message>
     <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Utiliser SSL</translation>
-    </message>
-    <message>
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
@@ -335,33 +277,6 @@
     <message>
         <source>Use secure sockets:</source>
         <translation type="unfinished">Utiliser sockets sécurisées :</translation>
-    </message>
-</context>
-<context>
-    <name>MailviewerApp</name>
-    <message>
-        <source>View</source>
-        <translation type="obsolete">Affichage</translation>
-    </message>
-    <message>
-        <source>Compose</source>
-        <translation type="obsolete">Composer</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="obsolete">Configurations</translation>
-    </message>
-    <message>
-        <source>Mail</source>
-        <translation type="obsolete">Message</translation>
-    </message>
-    <message>
-        <source>Mailboxes</source>
-        <translation type="obsolete">Boîtes aux Lettres</translation>
-    </message>
-    <message>
-        <source>Configure OpieMail</source>
-        <translation type="obsolete">Configurer OpieMail</translation>
     </message>
 </context>
 <context>
@@ -417,6 +332,58 @@
     <message>
         <source>Date</source>
         <translation>Date</translation>
+    </message>
+    <message>
+        <source>Server</source>
+        <translation type="unfinished">Serveur</translation>
+    </message>
+    <message>
+        <source>Folder</source>
+        <translation type="unfinished">Répertoire</translation>
+    </message>
+    <message>
+        <source>Disconnect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set on/offline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh folder list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new folder</source>
+        <translation type="unfinished">Créer répertoire</translation>
+    </message>
+    <message>
+        <source>(Un-)Subscribe groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh headerlist</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New subfolder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move/Copie all mails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read current mail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -577,230 +544,6 @@ with that filter will be listed.</source>
     </message>
 </context>
 <context>
-    <name>OpieMailConfig</name>
-    <message>
-        <source>OpieMail Config</source>
-        <translation type="obsolete">Config OpieMail</translation>
-    </message>
-    <message>
-        <source>Folders</source>
-        <translation type="obsolete">Répertoires</translation>
-    </message>
-    <message>
-        <source>&amp;Add</source>
-        <translation type="obsolete">&amp;Ajouter</translation>
-    </message>
-    <message>
-        <source>&amp;Modify</source>
-        <translation type="obsolete">&amp;Modifier</translation>
-    </message>
-    <message>
-        <source>&amp;Delete</source>
-        <translation type="obsolete">&amp;Supprimer</translation>
-    </message>
-    <message>
-        <source>Folder name</source>
-        <translation type="obsolete">Nom répertoire</translation>
-    </message>
-    <message>
-        <source>Identity</source>
-        <translation type="obsolete">Indentité</translation>
-    </message>
-    <message>
-        <source>Transport</source>
-        <translation type="obsolete">Transport</translation>
-    </message>
-    <message>
-        <source>Input</source>
-        <translation type="obsolete">Entrée</translation>
-    </message>
-    <message>
-        <source>Name</source>
-        <translation type="obsolete">Nom</translation>
-    </message>
-    <message>
-        <source>Folder</source>
-        <translation type="obsolete">Répertoire</translation>
-    </message>
-    <message>
-        <source>User</source>
-        <translation type="obsolete">Utilisateur</translation>
-    </message>
-    <message>
-        <source>Server</source>
-        <translation type="obsolete">Serveur</translation>
-    </message>
-    <message>
-        <source>Protocol</source>
-        <translation type="obsolete">Protocole</translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation type="obsolete">Sortie</translation>
-    </message>
-</context>
-<context>
-    <name>OpieMailConfigImpl</name>
-    <message>
-        <source>Delete mailbox</source>
-        <translation type="obsolete">Supprimer boîte aux lettres</translation>
-    </message>
-    <message>
-        <source>Delete the mailbox?
-All mails will be deleted.</source>
-        <translation type="obsolete">Supprimer la boîte aux lettres ?
-Tous les messages seront détruits.</translation>
-    </message>
-</context>
-<context>
-    <name>OpieMailFolder</name>
-    <message>
-        <source>OpieMail Folder Config</source>
-        <translation type="obsolete">Config Répertoire OpieMail</translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation type="obsolete">Description :</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="obsolete">Nom :</translation>
-    </message>
-</context>
-<context>
-    <name>OpieMailIdenty</name>
-    <message>
-        <source>OpieMail Identity - Config</source>
-        <translation type="obsolete">Config - Identité OpieMail</translation>
-    </message>
-    <message>
-        <source>Signature:</source>
-        <translation type="obsolete">Signature :</translation>
-    </message>
-    <message>
-        <source>Identity:</source>
-        <translation type="obsolete">Identité :</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="obsolete">Nom :</translation>
-    </message>
-    <message>
-        <source>Organization:</source>
-        <translation type="obsolete">Organisation :</translation>
-    </message>
-    <message>
-        <source>EMail:</source>
-        <translation type="obsolete">E-Mail :</translation>
-    </message>
-    <message>
-        <source>Reply To</source>
-        <translation type="obsolete">Répondre à</translation>
-    </message>
-    <message>
-        <source>Use for sending</source>
-        <translation type="obsolete">Utiliser pour répondre</translation>
-    </message>
-</context>
-<context>
-    <name>OpieMailInputConfig</name>
-    <message>
-        <source>OpieMailInput</source>
-        <translation type="obsolete">Entrée OpieMail</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="obsolete">Nom :</translation>
-    </message>
-    <message>
-        <source>Server:</source>
-        <translation type="obsolete">Serveur :</translation>
-    </message>
-    <message>
-        <source>Protocol</source>
-        <translation type="obsolete">Protocole</translation>
-    </message>
-    <message>
-        <source>Destination Folder</source>
-        <translation type="obsolete">Répertoire de Destination</translation>
-    </message>
-    <message>
-        <source>Username:</source>
-        <translation type="obsolete">Nom Utilisateur :</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="obsolete">Mot de Passe</translation>
-    </message>
-    <message>
-        <source>Port</source>
-        <translation type="obsolete">Port</translation>
-    </message>
-    <message>
-        <source>110</source>
-        <translation type="obsolete">110</translation>
-    </message>
-    <message>
-        <source>Enable intervall checking.</source>
-        <translation type="obsolete">Vérification par intervalle.</translation>
-    </message>
-    <message>
-        <source>Check every:</source>
-        <translation type="obsolete">Vérifier chaque :</translation>
-    </message>
-    <message>
-        <source> minutes</source>
-        <translation type="obsolete">minutes</translation>
-    </message>
-    <message>
-        <source>&amp;Delete mail from server when deleted local.</source>
-        <translation type="obsolete">&amp;Détruire sur le serveur les messages supprimés en local.</translation>
-    </message>
-    <message>
-        <source>&amp;Keep Mail on Server</source>
-        <translation type="obsolete">&amp;Conserver les Messages sur le Serveur</translation>
-    </message>
-</context>
-<context>
-    <name>OpieMailOutputConfig</name>
-    <message>
-        <source>OpieMailOutPut</source>
-        <translation type="obsolete">Sortie OpieMail</translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="obsolete">Nom :</translation>
-    </message>
-    <message>
-        <source>Protocol</source>
-        <translation type="obsolete">Protocole</translation>
-    </message>
-    <message>
-        <source>Server:</source>
-        <translation type="obsolete">Serveur :</translation>
-    </message>
-    <message>
-        <source>Username:</source>
-        <translation type="obsolete">Nom Utilisateur :</translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="obsolete">Mot de Passe</translation>
-    </message>
-    <message>
-        <source>Server requires authentication</source>
-        <translation type="obsolete">Le serveur requière une authentification</translation>
-    </message>
-    <message>
-        <source>Port</source>
-        <translation type="obsolete">Port</translation>
-    </message>
-    <message>
-        <source>25</source>
-        <translation type="obsolete">25</translation>
-    </message>
-</context>
-<context>
     <name>POP3configUI</name>
     <message>
         <source>Configure POP3</source>
@@ -852,37 +595,6 @@ Tous les messages seront détruits.</translation>
     </message>
 </context>
 <context>
-    <name>QMailView</name>
-    <message>
-        <source>Subject</source>
-        <translation type="obsolete">Objet</translation>
-    </message>
-    <message>
-        <source>To</source>
-        <translation type="obsolete">A</translation>
-    </message>
-    <message>
-        <source>Sender</source>
-        <translation type="obsolete">Expéditeur</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="obsolete">Date</translation>
-    </message>
-    <message>
-        <source>(Re)edit</source>
-        <translation type="obsolete">(Re)éditer</translation>
-    </message>
-    <message>
-        <source>Copy To</source>
-        <translation type="obsolete">Copier Dans</translation>
-    </message>
-    <message>
-        <source>Move To</source>
-        <translation type="obsolete">Déplacer Vers</translation>
-    </message>
-</context>
-<context>
     <name>SMTPconfigUI</name>
     <message>
         <source>Configure SMTP</source>
@@ -891,10 +603,6 @@ Tous les messages seront détruits.</translation>
     <message>
         <source>Account</source>
         <translation>Compte</translation>
-    </message>
-    <message>
-        <source>Use SSL</source>
-        <translation type="obsolete">Utiliser SSL</translation>
     </message>
     <message>
         <source>Use Login</source>
@@ -1008,23 +716,13 @@ de nouveaux messages</translation>
         <translation>Signal sonore lors de l&apos;arrivé
 d&apos;un nouveau message</translation>
     </message>
-</context>
-<context>
-    <name>SplitterWidgetBase</name>
     <message>
-        <source>Form1</source>
-        <translation type="obsolete">Formulaire1</translation>
-    </message>
-</context>
-<context>
-    <name>StatusWidgetUI</name>
-    <message>
-        <source>Form1</source>
-        <translation>Form1</translation>
+        <source>Click opens mail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
-        <translation>TextLabel1</translation>
+        <source>Click activate server/folder</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1085,13 +783,17 @@ d&apos;un nouveau message</translation>
         <source>E-Mail by %1</source>
         <translation type="unfinished">E-mail par %1</translation>
     </message>
+    <message>
+        <source>Reading attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not read content of attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ViewMailBase</name>
-    <message>
-        <source>E-Mail by %1</source>
-        <translation type="obsolete">E-mail par %1</translation>
-    </message>
     <message>
         <source>Mail</source>
         <translation>Message</translation>
@@ -1130,6 +832,10 @@ d&apos;un nouveau message</translation>
     </message>
     <message>
         <source>E-Mail view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show image preview inline</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

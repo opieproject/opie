@@ -6,26 +6,6 @@
         <source>Command Selection</source>
         <translation>Befehlsauswahl</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="obsolete">Neu</translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="obsolete">Bearbeiten</translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="obsolete">Löschen</translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="obsolete">Hoch</translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="obsolete">Runter</translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -47,26 +27,6 @@
     <message>
         <source>Terminal</source>
         <translation>Konsole</translation>
-    </message>
-    <message>
-        <source>Micro</source>
-        <translation type="obsolete">winzig</translation>
-    </message>
-    <message>
-        <source>Small Fixed</source>
-        <translation type="obsolete">klein, feste Breite</translation>
-    </message>
-    <message>
-        <source>Medium Fixed</source>
-        <translation type="obsolete">mittel, feste Breite</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete">Schriftart</translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="obsolete">Optionen</translation>
     </message>
     <message>
         <source>New</source>
@@ -105,10 +65,6 @@
         <translation>Befehlsliste verbergen</translation>
     </message>
     <message>
-        <source>Tabs on Bottom</source>
-        <translation type="obsolete">Tabs unten</translation>
-    </message>
-    <message>
         <source>Green on Black</source>
         <translation>Grün auf Schwarz</translation>
     </message>
@@ -119,18 +75,6 @@
     <message>
         <source>White on Black</source>
         <translation>Weiß auf Schwarz</translation>
-    </message>
-    <message>
-        <source>Black on Transparent</source>
-        <translation type="obsolete">Schwarz auf Transparent</translation>
-    </message>
-    <message>
-        <source>Black on Red</source>
-        <translation type="obsolete">Schwarz auf Rot</translation>
-    </message>
-    <message>
-        <source>Red on Black</source>
-        <translation type="obsolete">Rot auf Schwarz</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -167,10 +111,6 @@
     <message>
         <source>Quick Edit</source>
         <translation>Schnelles Editieren</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="obsolete">Editieren</translation>
     </message>
     <message>
         <source>None</source>
@@ -211,10 +151,6 @@
     <message>
         <source>Use Beep</source>
         <translation>Töne benutzen</translation>
-    </message>
-    <message>
-        <source>Tabs on Top</source>
-        <translation type="obsolete">Tabs unten</translation>
     </message>
     <message>
         <source>Konsole</source>

@@ -2,14 +2,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Battery status</source>
-        <translation type="obsolete">Batterijstatus</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Sluit</translation>
-    </message>
-    <message>
         <source>Failure</source>
         <translation>Mislukt</translation>
     </message>
@@ -24,10 +16,6 @@
     <message>
         <source>Charging</source>
         <translation>Opladen</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining</source>
-        <translation type="obsolete">Beschikbare batterijlading</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -66,28 +54,12 @@
         <translation>Externe stroom niet aangesloten</translation>
     </message>
     <message>
-        <source>Battery time remaining</source>
-        <translation type="obsolete">Overblijvende batterijtijd</translation>
-    </message>
-    <message>
-        <source>Percentage battery remaining: </source>
-        <translation type="obsolete">Percentage batterij resterend:</translation>
-    </message>
-    <message>
-        <source>Battery time remaining: </source>
-        <translation type="obsolete">Overblijvende batterijtijd:</translation>
-    </message>
-    <message>
         <source>No jacket with battery inserted</source>
         <translation>Geen externe batterij aangesloten</translation>
     </message>
     <message>
         <source>no data</source>
         <translation>geen gegevens</translation>
-    </message>
-    <message>
-        <source>Ipaq  </source>
-        <translation type="obsolete">Ipaq</translation>
     </message>
     <message>
         <source>Jacket  </source>
