@@ -1,4 +1,4 @@
-/* $Id */
+/* $Id: extract.hh,v 1.2 2002-11-27 21:21:42 mjm Exp $ */
 /*
  * Copyright (c) 1992, 1993, 1994, 1995, 1996
  *	The Regents of the University of California.  All rights reserved.

@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.4 2002-11-23 21:42:41 mjm Exp $
+ * $Id: daemon.cc,v 1.5 2002-11-27 21:21:42 mjm Exp $
  */
 
 #include "config.hh"
@@ -12,9 +12,7 @@
 /* Main function of wellenreiterd */
 int main(int argc, char **argv)
 {
-  int sock, maxfd;
-  struct sockaddr_in *cliaddr;
-  socklen_t len=sizeof(struct sockaddr);
+  int sock, maxfd, retval;
   char buffer[128];
   pcap_t *handletopcap;             /* The handle to the libpcap */
   char errbuf[PCAP_ERRBUF_SIZE]; /* The errorbuffer of libpacap */
@@ -25,12 +23,14 @@ int main(int argc, char **argv)
 
   fprintf(stderr, "wellenreiterd %s\n\n", VERSION);
 
+#if 0
   /* will be replaced soon, just for max because max is lazy :-) */
   if(card_into_monitormode (SNIFFER_DEVICE, CARD_TYPE_NG) < 0)
   {
     fprintf(stderr, "Cannot set card into mon mode, aborting\n");
     exit(-1);
   }
+#endif
 
   /* opening the pcap for sniffing */
   handletopcap = pcap_open_live(SNIFFER_DEVICE, BUFSIZ, 1, 1000, errbuf);
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
   {
     wl_logerr("Cannot setup socket");
     exit(-1);
-  }
+  } 
   wl_loginfo("Set up socket '%d' for GUI communication", sock);
 
   FD_ZERO(&rset);
@@ -54,8 +54,9 @@ int main(int argc, char **argv)
   {
 
     FD_SET(sock, &rset);
-    FD_SET(pcap_fileno(handletopcap), &rset);
-    maxfd=sock + pcap_fileno(handletopcap) + 1;
+    //    FD_SET(pcap_fileno(handletopcap), &rset);
+    //    maxfd=sock + pcap_fileno(handletopcap) + 1;
+    maxfd=sock + 1;
     if(select(maxfd, &rset, NULL, NULL, NULL) < 0)
     {
       wl_logerr("Error calling select: %s", strerror(errno));
@@ -65,19 +66,36 @@ int main(int argc, char **argv)
     /* Got data on local socket from GUI */
     if(FD_ISSET(sock, &rset))
     {
-      memset(buffer, 0, sizeof(buffer));
-      if(recvfrom(sock, buffer, sizeof(buffer)-1, 0, (struct sockaddr *)cliaddr, &len) < 0)
+
+      if((retval=recvcomm(&sock, buffer, sizeof(buffer))) < 0)
       {
-	 wl_logerr("Cannot read from socket: %s", strerror(errno));
-	 break;
+	wl_logerr("Error trying to read: %s", strerror(errno));
+	break;
       }
-      wl_loginfo("Received command from '%s': %s", inet_ntoa(cliaddr->sin_addr), buffer); 
+      else
+      {
+	switch(retval)
+	{
+	  case 98:
+	  {
+	   wl_loginfo("Received STARTSNIFF command");
+	   break;
+	  };
+	  case 99:
+	  {
+	      wl_loginfo("Received STOPSNIFF command");
+	      break;
+	  };
+	  default:
+	  {
+	      wl_logerr("Received unknown command: %d", retval);
+	      break;
+	  };
+	}
+      } 
+    } /* FD_ISSET */
 
-      /* will be passed to analyze function */
-      fprintf(stderr, "Received command: %s\n", buffer);
-
-    }
-
+#if 0
     /* Pcap stuff */
     if(FD_ISSET(pcap_fileno(handletopcap), &rset))
     {
@@ -87,8 +105,8 @@ int main(int argc, char **argv)
 
       /* process the packet */
       process_packets(NULL,&header,*&packet);
-
     }
+#endif
   }
   close(sock);
   exit(0);
