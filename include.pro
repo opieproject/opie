@@ -8,7 +8,7 @@ prefix = /opt/QtPalmtop
 
 contains( CONFIG, quick-app-lib ) {
     TEMPLATE = lib
-    DESTDIR  = $(OPIEDIR)/plugins/applications
+    DESTDIR  = $(OPIEDIR)/plugins/application
     DEFINES += OPIE_APP_INTERFACE
 }
 contains ( CONFIG, quick-app-bin ) {

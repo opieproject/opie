@@ -36,7 +36,7 @@ namespace Opie {
             if ( name.find( "lib" ) == 0 )
                 name = name.mid( 3 );
         }
-        QString path = QPEApplication::qpeDir() + "/plugins/applications/lib"+name+".so";
+        QString path = QPEApplication::qpeDir() + "/plugins/application/lib"+name+".so";
 
         QLibrary *lib = new QLibrary( path );
         if ( lib->queryInterface( uuid, iface ) == QS_OK && iface ) {
