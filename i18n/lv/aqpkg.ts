@@ -238,17 +238,17 @@
     </message>
     <message>
         <source>Couldn&apos;t start ipkg-link process</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevaru startēt ipkg-link procesu</translation>
     </message>
     <message>
         <source>Symbolic linking failed!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolu sasaiste neizdevās!</translation>
     </message>
     <message>
         <source>Symbolic linking succeeded.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Simbolu sasaiste izdevās.</translation>
     </message>
 </context>
 <context>

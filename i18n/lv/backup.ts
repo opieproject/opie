@@ -57,11 +57,11 @@
     </message>
     <message>
         <source>Backing up...</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabājam...</translation>
     </message>
     <message>
         <source>Restore Backup...</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunojam Saglabāto...</translation>
     </message>
 </context>
 <context>
@@ -108,39 +108,39 @@
     </message>
     <message>
         <source>Locations</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrašanās vietas</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievienot</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Izņemt</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresāts</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tips</translation>
     </message>
     <message>
         <source>User Data (Configuration + PIM)</source>
-        <translation type="unfinished"></translation>
+        <translation>Lieotāja Dati (Konfigurācija + PIM)</translation>
     </message>
     <message>
         <source>Full Backup (Root File System)</source>
-        <translation type="unfinished"></translation>
+        <translation>Pilna Saglabāšana (Root Failu Sistēma)</translation>
     </message>
 </context>
 <context>

@@ -152,20 +152,20 @@
     </message>
     <message>
         <source>Find by Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt pēc Sastāvdaļas</translation>
     </message>
     <message>
         <source>Edit Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Dzērienu</translation>
     </message>
     <message>
         <source>Failed to write to drink database!
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Neizdevās ierakstīt dzērienu datubāzi!</translation>
     </message>
     <message>
         <source>Ingredient</source>
-        <translation type="unfinished"></translation>
+        <translation>Sastāvs</translation>
     </message>
 </context>
 <context>
