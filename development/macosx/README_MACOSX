@@ -24,7 +24,24 @@ A lot of applications and plugins which are not platform specific.
 
 What will follow soon:
 
-libopie2 
+libopie2 (libopiecore and libopiedb works already !)
+
+ToDO:
+-----
+There are some functions in the sourcecode which are not yet ported to Mac. If the 
+MacOS environment should be used for real productive work, the following functions 
+must be implemented correctly:
+
+libopie/pim/otimezone.cpp: 
+Accessing of "setenv(...)" on Mac caused bus-errors. 
+Workaround/Fix: Unknown
+Current-State: setenv() was just commented out. Thus the related functions may behave wrong! 
+
+library/filemanager.cpp:
+The sendfile() function is not available in MacOSX. Therefore a workaround must be implemented.
+Workaround/Fix: Unknown. The function is available in the header files, but disabled by a 
+"#ifdef SENDFILE" .. and not implemented int the c-library.
+If it will be supported, it should activate itself automatically by the "#ifdef"..
 
 
 How to compile Opie for MacOS-X:
