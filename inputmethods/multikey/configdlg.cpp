@@ -305,7 +305,7 @@ void ConfigDlg::keyColorClicked() {
     config.writeEntry("keycolor", color, QChar(','));
     config.write();
     
-    keycolor_button->setBackgroundColor(newcolor);
+    keycolor_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
 void ConfigDlg::keyColorPressedClicked() {
@@ -324,7 +324,7 @@ void ConfigDlg::keyColorPressedClicked() {
     config.writeEntry("keycolor_pressed", color, QChar(','));
     config.write();
     
-    keycolor_pressed_button->setBackgroundColor(newcolor);
+    keycolor_pressed_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
 void ConfigDlg::keyColorLinesClicked() {
@@ -343,7 +343,7 @@ void ConfigDlg::keyColorLinesClicked() {
     config.writeEntry("keycolor_lines", color, QChar(','));
     config.write();
     
-    keycolor_lines_button->setBackgroundColor(newcolor);
+    keycolor_lines_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
 void ConfigDlg::textColorClicked() {
@@ -362,6 +362,6 @@ void ConfigDlg::textColorClicked() {
     config.writeEntry("textcolor", color, QChar(','));
     config.write();
     
-    textcolor_button->setBackgroundColor(newcolor);
+    textcolor_button->setPalette(QPalette(newcolor));
     emit reloadKeyboard();
 }
