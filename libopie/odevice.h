@@ -21,97 +21,118 @@
 #define _LIBOPIE_ODEVICE_H_
 
 #include <qstring.h>
-
+#include <qnamespace.h>
 
 class ODeviceData;
 
+namespace Opie {
+
 enum OModel {
-	OMODEL_Unknown,
+	Model_Unknown,
 
-	OMODEL_iPAQ_H31xx,
-	OMODEL_iPAQ_H36xx,
-	OMODEL_iPAQ_H37xx,
-	OMODEL_iPAQ_H38xx,
+	Model_iPAQ_H31xx,
+	Model_iPAQ_H36xx,
+	Model_iPAQ_H37xx,
+	Model_iPAQ_H38xx,
 
-	OMODEL_Zaurus_SL5000
+	Model_Zaurus_SL5000
 };
 
 enum OVendor {	
-	OVENDOR_Unknown,
+	Vendor_Unknown,
 
-	OVENDOR_HP,
-	OVENDOR_Sharp
+	Vendor_HP,
+	Vendor_Sharp
 };	
 
 enum OSystem {
-	OSYSTEM_Unknown,
+	System_Unknown,
 
-	OSYSTEM_Familiar,
-	OSYSTEM_Zaurus,
-	OSYSTEM_OpenZaurus
+	System_Familiar,
+	System_Zaurus,
+	System_OpenZaurus
 };
 
 enum OLedState {
-	OLED_Off,
-	OLED_On,
-	OLED_BlinkSlow,
-	OLED_BlinkFast
+	Led_Off,
+	Led_On,
+	Led_BlinkSlow,
+	Led_BlinkFast
+};
+
+enum OLed {
+	Led_Mail,
+	Led_Power,
+	Led_BlueTooth
+};
+
+enum OHardKey {
+	HardKey_Datebook  = Qt::Key_F9,
+	HardKey_Contacts  = Qt::Key_F10,
+	HardKey_Menu      = Qt::Key_F11,
+	HardKey_Home      = Qt::Key_F12,
+	HardKey_Mail      = Qt::Key_F14,
+	HardKey_Record    = Qt::Key_F24,
+	HardKey_Suspend   = Qt::Key_F34,
+	HardKey_Backlight = Qt::Key_F35,
 };
 
 
 class ODevice
 {
+private:
+	ODevice ( const ODevice & );
+
+protected:
+	ODevice ( );
+	virtual void init ( );
+	
+	ODeviceData *d;
+
 public:
+	virtual ~ODevice ( );
+
 	static ODevice *inst ( );
 
-// system	
-	enum PowerButtonHandler {
-		KERNEL,
-		OPIE
-	};
 
-	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
+
+// information
+
+	QString modelString ( ) const; 
+	OModel model ( ) const;
+	
+	QString vendorString ( ) const;
+	OVendor vendor ( ) const;
+
+	QString systemString ( ) const;
+	OSystem system ( ) const;
+
+	QString systemVersionString ( ) const;
+
+// system	
+
+	virtual bool setSoftSuspend ( bool on );
 	virtual bool suspend ( );
 
 	virtual bool setDisplayStatus ( bool on );
 	virtual bool setDisplayBrightness ( int brightness );
 	virtual int displayBrightnessResolution ( ) const;
 	
-// information
-
-	QString modelString ( ); 
-	OModel model ( );
-	
-	QString vendorString ( );
-	OVendor vendor ( );
-
-	QString systemString ( );
-	OSystem system ( );
-
-	QString systemVersionString ( );
-
 // input / output
 
 	virtual void alarmSound ( );
 	virtual void keySound ( );
 	virtual void touchSound ( );
 
-	virtual uint hasLeds ( ) const;
-	virtual OLedState led ( uint which ) const;
-	virtual bool setLed ( uint which, OLedState st );
+	virtual QValueList <OLed> ledList ( ) const;
+	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
+	virtual OLedState ledState ( OLed led ) const;
+	virtual bool setLedState ( OLed led, OLedState st );
 
-	virtual ~ODevice ( );
-
-protected:
-	ODevice ( );
-	virtual void init ( );
-
-	ODeviceData *d;
-
-private:
-	ODevice ( const ODevice & );
+	//virtual QValueList <int> keyList ( ) const;
 };
 
-#endif
+}
 
+#endif
 

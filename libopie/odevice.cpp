@@ -36,6 +36,9 @@
 
 #include "odevice.h"
 
+#include <qwindowsystem_qws.h>
+
+
 // _IO and friends are only defined in kernel headers ...
 
 #define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
@@ -45,9 +48,12 @@
 #define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
 #define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
 
+using namespace Opie;
 
 class ODeviceData {
 public:
+	bool m_qwsserver;
+
 	QString m_vendorstr;
 	OVendor m_vendor;
 	
@@ -58,33 +64,43 @@ public:
 	OSystem m_system;
 	
 	QString m_sysverstr;
-	
-	OLedState m_leds [4]; // just for convenience ...
 };
 
-class ODeviceIPAQ : public ODevice {
+
+class iPAQ : public QObject, public ODevice, public QWSServer::KeyboardFilter {
 protected: 
 	virtual void init ( );
 	
 public:
-	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
+	virtual bool setSoftSuspend ( bool soft );
 
 	virtual bool setDisplayBrightness ( int b );
 	virtual int displayBrightnessResolution ( ) const;
 
 	virtual void alarmSound ( );
-
-	virtual uint hasLeds ( ) const;
-	virtual OLedState led ( uint which ) const;
-	virtual bool setLed ( uint which, OLedState st );	
+	
+    virtual QValueList <OLed> ledList ( ) const;
+	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
+	virtual OLedState ledState ( OLed led ) const;
+	virtual bool setLedState ( OLed led, OLedState st );
+	
+	//virtual QValueList <int> keyList ( ) const;
+	
+protected:
+	virtual bool filter ( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
+	virtual void timerEvent ( QTimerEvent *te );
+	
+	int m_power_timer;
+	
+	OLedState m_leds [2];
 };
 
-class ODeviceZaurus : public ODevice {
+class Zaurus : public ODevice {
 protected:
 	virtual void init ( );
 
 public:	
-	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
+	virtual bool setSoftSuspend ( bool soft );
 
 	virtual bool setDisplayBrightness ( int b );
 	virtual int displayBrightnessResolution ( ) const;
@@ -93,13 +109,21 @@ public:
 	virtual void keySound ( );
 	virtual void touchSound ( );	
 
-	virtual uint hasLeds ( ) const;
-	virtual OLedState led ( uint which ) const;
-	virtual bool setLed ( uint which, OLedState st );	
+    virtual QValueList <OLed> ledList ( ) const;
+	virtual QValueList <OLedState> ledStateList ( OLed led ) const;
+	virtual OLedState ledState ( OLed led ) const;
+	virtual bool setLedState ( OLed led, OLedState st );
+	
+	//virtual QValueList <int> keyList ( ) const;
 	
 protected:
 	virtual void buzzer ( int snd );
+	
+	OLedState m_leds [1];
 };
+
+
+
 
 
 
@@ -110,9 +134,9 @@ ODevice *ODevice::inst ( )
 	
 	if ( !dev ) {
 		if ( QFile::exists ( "/proc/hal/model" ))
-			dev = new ODeviceIPAQ ( );
+			dev = new iPAQ ( );
 		else if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
-			dev = new ODeviceZaurus ( );
+			dev = new Zaurus ( );
 		else
 			dev = new ODevice ( );
 			
@@ -133,12 +157,14 @@ ODevice::ODevice ( )
 {
 	d = new ODeviceData;
 
+	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
+
 	d-> m_modelstr = "Unknown";
-	d-> m_model = OMODEL_Unknown;
+	d-> m_model = Model_Unknown;
 	d-> m_vendorstr = "Unkown";
-	d-> m_vendor = OVENDOR_Unknown;
+	d-> m_vendor = Vendor_Unknown;
 	d-> m_systemstr = "Unkown";
-	d-> m_system = OSYSTEM_Unknown;
+	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
 }
 
@@ -151,7 +177,7 @@ ODevice::~ODevice ( )
 	delete d;
 }
 
-bool ODevice::setPowerButtonHandler ( ODevice::PowerButtonHandler )
+bool ODevice::setSoftSuspend ( bool /*soft*/ )
 {
 	return false;
 }
@@ -163,7 +189,10 @@ bool ODevice::setPowerButtonHandler ( ODevice::PowerButtonHandler )
 
 bool ODevice::suspend ( )
 {
-	if ( d-> m_model == OMODEL_Unknown ) // better don't suspend in qvfb / on unkown devices
+	if ( !d-> m_qwsserver ) // only qwsserver is allowed to suspend
+		return false;
+
+	if ( d-> m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
 		return false;
 
 	int fd;
@@ -173,26 +202,26 @@ bool ODevice::suspend ( )
 	    (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {	
 		struct timeval tvs, tvn;
 
-		::signal ( SIGTSTP, SIG_IGN );	// we don't want to be stopped
+//		::signal ( SIGTSTP, SIG_IGN );	// we don't want to be stopped
 		::gettimeofday ( &tvs, 0 );
 	
 		::sync ( ); // flush fs caches
 	
 		res = ( ::ioctl ( fd, APM_IOC_SUSPEND, 0 ) == 0 ); // tell the kernel to "start" suspending
+		::close ( fd );
 
 		if ( res ) {	
-			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in our process group
+//			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in our process group
 
 			do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
 				::usleep ( 200 * 1000 );
 				::gettimeofday ( &tvn, 0 );				
 			} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
 			
-			::kill ( -::getpid ( ), SIGCONT ); // continue everything in our process group
+//			::kill ( -::getpid ( ), SIGCONT ); // continue everything in our process group
 		}	
 		
-		::close ( fd );		
-		::signal ( SIGTSTP, SIG_DFL );
+//		::signal ( SIGTSTP, SIG_DFL );
 	}
 	
 	return res;
@@ -211,7 +240,7 @@ bool ODevice::suspend ( )
 
 bool ODevice::setDisplayStatus ( bool on )
 {
-	if ( d-> m_model == OMODEL_Unknown )
+	if ( d-> m_model == Model_Unknown )
 		return false;
 
 	bool res = false;
@@ -234,37 +263,37 @@ int ODevice::displayBrightnessResolution ( ) const
 	return 16;
 }
 
-QString ODevice::vendorString ( )
+QString ODevice::vendorString ( ) const
 {
 	return d-> m_vendorstr;
 }
 
-OVendor ODevice::vendor ( )
+OVendor ODevice::vendor ( ) const
 {
 	return d-> m_vendor;
 }
 
-QString ODevice::modelString ( )
+QString ODevice::modelString ( ) const
 {
 	return d-> m_modelstr;
 }
 
-OModel ODevice::model ( )
+OModel ODevice::model ( ) const
 {
 	return d-> m_model;
 }
 
-QString ODevice::systemString ( )
+QString ODevice::systemString ( ) const
 {
 	return d-> m_systemstr;
 }
 
-OSystem ODevice::system ( )
+OSystem ODevice::system ( ) const
 {
 	return d-> m_system;
 }
 
-QString ODevice::systemVersionString ( )
+QString ODevice::systemVersionString ( ) const
 {
 	return d-> m_sysverstr;
 }
@@ -306,21 +335,33 @@ void ODevice::touchSound ( )
 #endif
 }
 
-uint ODevice::hasLeds ( ) const
+
+QValueList <OLed> ODevice::ledList ( ) const
 {
-	return 0;
+	return QValueList <OLed> ( );
 }
 
-OLedState ODevice::led ( uint /*which*/ ) const
+QValueList <OLedState> ODevice::ledStateList ( OLed /*which*/ ) const
 {
-	return OLED_Off;
+	return QValueList <OLedState> ( );
 }
 
-bool ODevice::setLed ( uint /*which*/, OLedState /*st*/ )
+OLedState ODevice::ledState ( OLed /*which*/ ) const
+{
+	return Led_Off;
+}
+
+bool ODevice::setLedState ( OLed /*which*/, OLedState /*st*/ )
 {
 	return false;
 }
 
+
+
+//QValueList <int> ODevice::keyList ( ) const
+//{
+//	return QValueList <int> ( );
+//}
 
 
 
@@ -330,10 +371,10 @@ bool ODevice::setLed ( uint /*which*/, OLedState /*st*/ )
  *
  **************************************************/
 
-void ODeviceIPAQ::init ( )
+void iPAQ::init ( )
 {
 	d-> m_vendorstr = "HP";
-	d-> m_vendor = OVENDOR_HP;
+	d-> m_vendor = Vendor_HP;
 
 	QFile f ( "/proc/hal/model" );
 
@@ -343,15 +384,15 @@ void ODeviceIPAQ::init ( )
 		d-> m_modelstr = "H" + ts. readLine ( );
 
 		if ( d-> m_modelstr == "H3100" )
-			d-> m_model = OMODEL_iPAQ_H31xx;
+			d-> m_model = Model_iPAQ_H31xx;
 		else if ( d-> m_modelstr == "H3600" )
-			d-> m_model = OMODEL_iPAQ_H36xx;
+			d-> m_model = Model_iPAQ_H36xx;
 		else if ( d-> m_modelstr == "H3700" )
-			d-> m_model = OMODEL_iPAQ_H37xx;
+			d-> m_model = Model_iPAQ_H37xx;
 		else if ( d-> m_modelstr == "H3800" )
-			d-> m_model = OMODEL_iPAQ_H38xx;
+			d-> m_model = Model_iPAQ_H38xx;
 		else
-			d-> m_model = OMODEL_Unknown;
+			d-> m_model = Model_Unknown;
 
 		f. close ( );
 	}
@@ -359,7 +400,7 @@ void ODeviceIPAQ::init ( )
 	f. setName ( "/etc/familiar-version" );
 	if ( f. open ( IO_ReadOnly )) { 
 		d-> m_systemstr = "Familiar";
-		d-> m_system = OSYSTEM_Familiar;
+		d-> m_system = System_Familiar;
 		
 		QTextStream ts ( &f );
 		d-> m_sysverstr = ts. readLine ( ). mid ( 10 );
@@ -367,7 +408,12 @@ void ODeviceIPAQ::init ( )
 		f. close ( );
 	}
 
-	d-> m_leds [0] = OLED_Off;
+	m_leds [0] = m_leds [1] = Led_Off;
+	
+	m_power_timer = 0;
+	
+	if ( d-> m_qwsserver )
+		QWSServer::setKeyboardFilter ( this );	
 }
 
 //#include <linux/h3600_ts.h>  // including kernel headers is evil ...
@@ -389,7 +435,143 @@ typedef struct {
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
 
-void ODeviceIPAQ::alarmSound ( )
+
+QValueList <OLed> iPAQ::ledList ( ) const
+{
+	QValueList <OLed> vl;
+	vl << Led_Power;
+
+	if ( d-> m_model == Model_iPAQ_H38xx )
+		vl << Led_BlueTooth;
+	return vl;
+}
+
+QValueList <OLedState> iPAQ::ledStateList ( OLed l ) const
+{
+	QValueList <OLedState> vl;
+
+	if ( l == Led_Power )
+		vl << Led_Off << Led_On << Led_BlinkSlow << Led_BlinkFast;
+	else if ( l == Led_BlueTooth && d-> m_model == Model_iPAQ_H38xx )
+		vl << Led_Off; // << Led_On << ???
+		
+	return vl;
+}
+
+OLedState iPAQ::ledState ( OLed l ) const
+{	
+	switch ( l ) {
+		case Led_Power:
+			return m_leds [0];
+		case Led_BlueTooth:
+			return m_leds [1];
+		default:
+			return Led_Off;
+	}
+}
+
+bool iPAQ::setLedState ( OLed l, OLedState st ) 
+{
+	static int fd = ::open ( "/dev/touchscreen/0", O_RDWR | O_NONBLOCK );
+
+	if ( l == Led_Power ) {
+		if ( fd >= 0 ) {
+			LED_IN leds;
+			::memset ( &leds, 0, sizeof( leds ));
+			leds. TotalTime  = 0;
+			leds. OnTime     = 0;
+			leds. OffTime    = 1;
+			leds. OffOnBlink = 2;
+
+			switch ( st ) {
+				case Led_Off      : leds. OffOnBlink = 0; break;
+				case Led_On       : leds. OffOnBlink = 1; break;
+				case Led_BlinkSlow: leds. OnTime = 10; leds. OffTime = 10; break;
+				case Led_BlinkFast: leds. OnTime =  5; leds. OffTime =  5; break;
+			}
+
+			if ( ::ioctl ( fd, LED_ON, &leds ) >= 0 ) {
+				m_leds [0] = st;
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
+//QValueList <int> iPAQ::keyList ( ) const
+//{
+//	QValueList <int> vl;
+//	vl << HardKey_Datebook << HardKey_Contacts << ( model ( ) == Model_iPAQ_H38xx ? HardKey_Mail : HardKey_Menu ) << HardKey_Home << HardKey_Record << HardKey_Suspend << HardKey_Backlight;
+//	return vl;
+//}
+
+bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
+{
+	int newkeycode = keycode;
+
+	
+	// simple susbstitutions
+	switch ( d-> m_model ) {
+		case Model_iPAQ_H38xx:
+			// H38xx has no "Q" key anymore - this is now the Mail key
+			if ( keycode == HardKey_Menu )
+				newkeycode = HardKey_Mail;
+			//nobreak
+						
+		case Model_iPAQ_H31xx: 
+			// Rotate cursor keys 180°
+			switch ( keycode ) {
+				case Key_Left : newkeycode = Key_Right; break;
+				case Key_Right: newkeycode = Key_Left; break;
+				case Key_Up   : newkeycode = Key_Down; break;
+				case Key_Down : newkeycode = Key_Up; break;
+			}
+			break;
+
+		case Model_iPAQ_H36xx: 
+		case Model_iPAQ_H37xx: 
+			// map Power Button short/long press to F34/F35
+			if ( keycode == Key_SysReq ) {
+				if ( isPress ) {
+					if ( m_power_timer )
+						killTimer ( m_power_timer );
+					m_power_timer = startTimer ( 500 );
+				}
+				else if ( m_power_timer ) {
+					killTimer ( m_power_timer );
+					m_power_timer = 0;
+					QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, true, false );
+					QWSServer::sendKeyEvent ( -1, HardKey_Suspend, 0, false, false );
+				}
+				newkeycode = Key_unknown;			
+			}
+			break;
+		
+		default: 
+			break;
+	}				
+
+	if ( newkeycode != keycode ) {
+		if ( newkeycode != Key_unknown )
+			QWSServer::sendKeyEvent ( -1, newkeycode, modifiers, isPress, autoRepeat );
+		return true;
+	}
+	else
+		return false;
+}
+
+void iPAQ::timerEvent ( QTimerEvent * )
+{
+	killTimer ( m_power_timer );
+	m_power_timer = 0;
+	QWSServer::sendKeyEvent ( -1, HardKey_Backlight, 0, true, false );
+	QWSServer::sendKeyEvent ( -1, HardKey_Backlight, 0, false, false );
+}
+
+
+void iPAQ::alarmSound ( )
 {
 #if defined( QT_QWS_IPAQ ) // IPAQ
 #ifndef QT_NO_SOUND
@@ -432,55 +614,14 @@ void ODeviceIPAQ::alarmSound ( )
 #endif
 }
 
-uint ODeviceIPAQ::hasLeds ( ) const
-{
-	return 1;
-}
 
-OLedState ODeviceIPAQ::led ( uint which ) const
-{
-	if ( which == 0 )
-		return d-> m_leds [0];
-	else
-		return OLED_Off;
-}
-
-bool ODeviceIPAQ::setLed ( uint which, OLedState st )
-{
-	static int fd = ::open ( "/dev/touchscreen/0", O_RDWR|O_NONBLOCK );
-
-	if ( which == 0 ) {
-		if ( fd >= 0 ) {
-			LED_IN leds;
-			::memset ( &leds, 0, sizeof( leds ));
-			leds. TotalTime  = 0;
-			leds. OnTime     = 0;
-			leds. OffTime    = 1;
-			leds. OffOnBlink = 2;
-
-			switch ( st ) {
-				case OLED_Off      : leds. OffOnBlink = 0; break;
-				case OLED_On       : leds. OffOnBlink = 1; break;
-				case OLED_BlinkSlow: leds. OnTime = 10; leds. OffTime = 10; break;
-				case OLED_BlinkFast: leds. OnTime =  5; leds. OffTime =  5; break;
-			}
-
-			if ( ::ioctl ( fd, LED_ON, &leds ) >= 0 ) {
-				d-> m_leds [0] = st;
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-bool ODeviceIPAQ::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
+bool iPAQ::setSoftSuspend ( bool soft )
 {
 	bool res = false;
 	int fd;
 	
 	if (( fd = ::open ( "/proc/sys/ts/suspend_button_mode", O_WRONLY )) >= 0 ) {
-		if ( ::write ( fd, p == KERNEL ? "0" : "1", 1 ) == 1 )
+		if ( ::write ( fd, soft ? "1" : "0", 1 ) == 1 )
 			res = true;
 		else
 			::perror ( "write to /proc/sys/ts/suspend_button_mode" );
@@ -494,7 +635,7 @@ bool ODeviceIPAQ::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
 }
 
 
-bool ODeviceIPAQ::setDisplayBrightness ( int bright )
+bool iPAQ::setDisplayBrightness ( int bright )
 {
 	bool res = false;
 	int fd;
@@ -521,7 +662,7 @@ bool ODeviceIPAQ::setDisplayBrightness ( int bright )
 	return res;
 }
 
-int ODeviceIPAQ::displayBrightnessResolution ( ) const
+int iPAQ::displayBrightnessResolution ( ) const
 {
 	return 255; // really 128, but logarithmic control is smoother this way
 }
@@ -535,18 +676,18 @@ int ODeviceIPAQ::displayBrightnessResolution ( ) const
 
 
 
-void ODeviceZaurus::init ( )
+void Zaurus::init ( )
 {
 	d-> m_modelstr = "Zaurus SL5000";
-	d-> m_model = OMODEL_Zaurus_SL5000;
+	d-> m_model = Model_Zaurus_SL5000;
 	d-> m_vendorstr = "Sharp";
-	d-> m_vendor = OVENDOR_Sharp;
+	d-> m_vendor = Vendor_Sharp;
 
 	QFile f ( "/proc/filesystems" );
 
 	if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
 		d-> m_systemstr = "OpenZaurus";
-		d-> m_system = OSYSTEM_OpenZaurus;
+		d-> m_system = System_OpenZaurus;
 
 		f. close ( );
 
@@ -559,11 +700,11 @@ void ODeviceZaurus::init ( )
 	}
 	else {
 		d-> m_systemstr = "Zaurus";
-		d-> m_system = OSYSTEM_Zaurus;
+		d-> m_system = System_Zaurus;
 	}
 
 
-	d-> m_leds [0] = OLED_Off;
+	m_leds [0] = Led_Off;
 }
 
 #include <unistd.h>
@@ -633,7 +774,7 @@ typedef struct sharp_led_status {
 #define FL_IOCTL_STEP_CONTRAST    100
 
 
-void ODeviceZaurus::buzzer ( int sound )
+void Zaurus::buzzer ( int sound )
 {
 	static int fd = ::open ( "/dev/sharp_buz", O_RDWR|O_NONBLOCK );
   
@@ -642,54 +783,66 @@ void ODeviceZaurus::buzzer ( int sound )
 }
 
 
-void ODeviceZaurus::alarmSound ( ) 
+void Zaurus::alarmSound ( ) 
 {
 	buzzer ( SHARP_BUZ_SCHEDULE_ALARM );
 }
 
-void ODeviceZaurus::touchSound ( ) 
+void Zaurus::touchSound ( ) 
 {
 	buzzer ( SHARP_BUZ_TOUCHSOUND );
 }
 
-void ODeviceZaurus::keySound ( ) 
+void Zaurus::keySound ( ) 
 {
 	buzzer ( SHARP_BUZ_KEYSOUND );
 }
 
 
-uint ODeviceZaurus::hasLeds ( ) const
+QValueList <OLed> Zaurus::ledList ( ) const
 {
-	return 1;
+	QValueList <OLed> vl;
+	vl << Led_Mail;
+	return vl;
 }
 
-OLedState ODeviceZaurus::led ( uint which ) const
+QValueList <OLedState> Zaurus::ledStateList ( OLed l ) const
 {
-	if ( which == 0 )
-		return d-> m_leds [0];
+	QValueList <OLedState> vl;
+	
+	if ( l == Led_Mail )
+		vl << Led_Off << Led_On << Led_BlinkSlow;
+	return vl;
+}
+
+OLedState Zaurus::ledState ( OLed which ) const
+{
+	if ( which == Led_Mail )
+		return m_leds [0];
 	else	
-		return OLED_Off;
+		return Led_Off;
 }
 
-bool ODeviceZaurus::setLed ( uint which, OLedState st )
+bool Zaurus::setLedState ( OLed which, OLedState st )
 {
 	static int fd = ::open ( "/dev/sharp_led", O_RDWR|O_NONBLOCK ); 
 
-	if ( which == 0 ) {
+	if ( which == Led_Mail ) {
 		if ( fd >= 0 ) {
 			struct sharp_led_status leds;
 			::memset ( &leds, 0, sizeof( leds ));
 			leds. which = SHARP_LED_MAIL_EXISTS;
+			bool ok = true;
 			
 			switch ( st ) {
-				case OLED_Off      : leds. status = LED_MAIL_NO_UNREAD_MAIL; break;
-				case OLED_On       : leds. status = LED_MAIL_NEWMAIL_EXISTS; break;
-				case OLED_BlinkSlow: 
-				case OLED_BlinkFast: leds. status = LED_MAIL_UNREAD_MAIL_EX; break;
+				case Led_Off      : leds. status = LED_MAIL_NO_UNREAD_MAIL; break;
+				case Led_On       : leds. status = LED_MAIL_NEWMAIL_EXISTS; break;
+				case Led_BlinkSlow: leds. status = LED_MAIL_UNREAD_MAIL_EX; break;
+				default            : ok = false;
 			}
 		
-			if ( ::ioctl ( fd, SHARP_LED_SETSTATUS, &leds ) >= 0 ) {
-				d-> m_leds [0] = st;
+			if ( ok && ( ::ioctl ( fd, SHARP_LED_SETSTATUS, &leds ) >= 0 )) {
+				m_leds [0] = st;
 				return true;
 			}
 		}		
@@ -697,7 +850,7 @@ bool ODeviceZaurus::setLed ( uint which, OLedState st )
 	return false;
 }
 
-bool ODeviceZaurus::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
+bool Zaurus::setSoftSuspend ( bool soft )
 {
 	bool res = false;
 	int fd;
@@ -708,12 +861,12 @@ bool ODeviceZaurus::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
 		int sources = ::ioctl ( fd, APM_IOCGEVTSRC, 0 ); // get current event sources
 
 		if ( sources >= 0 ) {
-			if ( p == KERNEL )
-				sources |= APM_EVT_POWER_BUTTON;
-			else 
+			if ( soft )
 				sources &= ~APM_EVT_POWER_BUTTON;
+			else
+				sources |= APM_EVT_POWER_BUTTON;
 
-			if ( ::ioctl ( fd, APM_IOCSEVTSRC, sources & ~APM_EVT_POWER_BUTTON ) >= 0 ) // set new event sources
+			if ( ::ioctl ( fd, APM_IOCSEVTSRC, sources ) >= 0 ) // set new event sources
 				res = true;
 			else
 				perror ( "APM_IOCGEVTSRC" );
@@ -730,7 +883,7 @@ bool ODeviceZaurus::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
 }
 
 
-bool ODeviceZaurus::setDisplayBrightness ( int bright )
+bool Zaurus::setDisplayBrightness ( int bright )
 {
 	bool res = false;
 	int fd;
@@ -751,7 +904,15 @@ bool ODeviceZaurus::setDisplayBrightness ( int bright )
 }
 
 
-int ODeviceZaurus::displayBrightnessResolution ( ) const 
+int Zaurus::displayBrightnessResolution ( ) const 
 {
 	return 4;
 }
+
+//QValueList <int> Zaurus::keyList ( ) const
+//{
+//	QValueList <int> vl;
+//	vl << HardKey_Datebook << HardKey_Contacts << HardKey_Mail << HardKey_Menu << HardKey_Home << HardKey_Suspend << HardKey_Backlight;
+//	return vl;
+//}
+
