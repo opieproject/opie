@@ -19,7 +19,6 @@ copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
 #include <qdialog.h>
 #include <qfile.h>
 #include <qdir.h>
-#include <qregexp.h>
 #include <qstringlist.h>
 #include <qlabel.h>
 #include <qstring.h>
@@ -29,8 +28,8 @@ copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
 
 #include <qvariant.h>
 #include <qdialog.h>
-class QLineEdit;
 
+class QLineEdit;
 class QVBoxLayout;
 class QHBoxLayout;
 class QGridLayout;
@@ -113,6 +112,12 @@ public:
     InputDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0 );
     ~InputDialog();
     QString inputText;
+    QLineEdit* LineEdit1;
+    void setTextEdit(const QString &);
+};
+
+#endif // FILEBROWSER_H
+  QString inputText;
     QLineEdit* LineEdit1;
     void setTextEdit(const QString &);
 };
