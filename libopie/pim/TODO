@@ -1,0 +1,34 @@
+-Add XML Index ( dropped )
+-Add ReadOnly Resources  ( to be discussed )
+-Add Sorted/Random Access mode for faster access to the base ( to be discussed )
+
+Yeah Stefan you're right I need to stop the fragmentation but these are just ideas
+we not to talk about.
+
+New Ideas Widgets:
+    OCategoryPopup:
+	Like the function Menu in Xemacs. If there are too many
+	Categories sort them into sub popups. A-B,B-G,H-K....
+	Integrate SUbcategories
+	
+	
+New Ideas on Infrastructure:
+    -finally switch to sqlite
+    -rework Category Sub Categories
+    -X-Ref!!!!!
+    -signalling ( Peer to Peer/ Backend to Backend communication of changes on a file basis )
+    -Signal the User about updates. Use QSignal and make it generic push from backend
+	to the access.
+    -flocking, mmapping
+    -Generic Tablewidget, getting QString for a record and attribute ( generic ) like QProperty
+    -chooser widgets
+    -hierachies
+    -multiple backends
+    -public private sort public and private on backends. default backend for each if multiple
+    backends loaded. Move from backend to backend.. ( backend mover app? )
+    -importer/exporter
+    -check if cache also drops
+    -port to BigSize Api
+    
+    ORedoManager ORedoItem both are templates to allow undoing and redoing to a level...
+    
