@@ -10,12 +10,12 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/unikeyboard \
 	inputmethods/jumpx \
 	inputmethods/dvorak \
-	taskbar/batteryapplet \
-	taskbar/volumeapplet \
-	taskbar/clockapplet \
-	taskbar/netmonapplet \
-	taskbar/screenshotapplet \
-	taskbar/vmemo \
+	launcher/batteryapplet \
+	launcher/volumeapplet \
+	launcher/clockapplet \
+	launcher/netmonapplet \
+	launcher/screenshotapplet \
+	launcher/vmemo \
 	netsetup/dialup \
 	netsetup/lan \
 	opiemail/ifaces/pop3 opiemail/ifaces/smtp \

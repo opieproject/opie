@@ -65,7 +65,7 @@
 
 #ifdef SINGLE_APP
 #define APP(a,b,c,d) FACTORY(b)
-#include "../taskbar/apps.h"
+#include "../launcher/apps.h"
 #undef APP
 #endif // SINGLE_APP
 
@@ -73,7 +73,7 @@ static Global::Command builtins[] = {
 
 #ifdef SINGLE_APP
 #define APP(a,b,c,d) { a, new##b, c },
-#include "../taskbar/apps.h"
+#include "../launcher/apps.h"
 #undef APP
 #endif
 

@@ -19,7 +19,7 @@
  * AUTHOR: Christian Rahn
  * EMAIL: cdr@lisa.de
  *
- * $Id: qdmdialogimpl.cpp,v 1.1 2002-01-25 22:14:57 kergoth Exp $
+ * $Id: qdmdialogimpl.cpp,v 1.2 2002-03-28 23:34:43 kergoth Exp $
  */
 
 #include "qdm_config.h"
@@ -68,7 +68,7 @@ extern "C" {
 
 
 #include "qdmdialogimpl.h"
-#include "../taskbar/inputmethods.h"
+#include "../launcher/inputmethods.h"
 
 
 //----------------------------------------------------------------------------

@@ -32,7 +32,7 @@ INSTALLATION:
 Per default this little add-on is not enabled. You have to do so
 yourself for now, by setting a compile option variable called
 QT_QWS_LOGIN . Furthermore there have to be made some changes in
-taskbar/taskbar.pro :
+launcher/taskbar.pro :
 
 At the section HEADERS insert a line:
 		  ../login/qdmdialogimpl.h \
