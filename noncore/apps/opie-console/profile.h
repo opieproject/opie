@@ -28,6 +28,7 @@ public:
              int terminal);
     Profile( const Profile& );
     Profile &operator=( const Profile& );
+    bool operator==( const Profile& prof );
 
     ~Profile();
     QString name()const;
