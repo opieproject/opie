@@ -2,9 +2,9 @@ TEMPLATE        = lib
 CONFIG          += qte warn_on release
 HEADERS   = ofontmenu.h \
     ocolorbutton.h \
-    ofiledialog.h ofileselector.h tododb.h \
-    ocheckitem.h todoevent.h todoresource.h \
-    todovcalresource.h xmltree.h \
+    ofiledialog.h ofileselector.h \
+    ocheckitem.h  \
+    xmltree.h \
     colordialog.h colorpopupmenu.h \
     oclickablelabel.h oprocctrl.h \
     oprocess.h odevice.h odevicebutton.h \
@@ -41,39 +41,39 @@ HEADERS   = ofontmenu.h \
 #    pim/otodoaccesssql.h \
 
 SOURCES   = ofontmenu.cc  \
-        ocolorbutton.cpp \
-        sharp_compat.cpp \
-      xmltree.cc \
-      ofiledialog.cc ofileselector.cc \
-            ocheckitem.cpp tododb.cpp todoevent.cpp \
-      todovcalresource.cpp  colordialog.cpp \
-      colorpopupmenu.cpp oclickablelabel.cpp \
-      oprocctrl.cpp oprocess.cpp \
-      odevice.cpp odevicebutton.cpp otimepicker.cpp \
-       otabwidget.cpp otabbar.cpp \
-             ofontselector.cpp \
-             pim/otodo.cpp \
-             pim/opimrecord.cpp \
-       pim/otodoaccess.cpp \
-       pim/otodoaccessbackend.cpp \
-             pim/otodoaccessxml.cpp \
-             pim/ocontact.cpp \
-             pim/ocontactaccess.cpp \
-             pim/ocontactaccessbackend_vcard.cpp \
-             pim/ocontactaccessbackend_xml.cpp \
-       pim/otodoaccessvcal.cpp \
-       pim/orecur.cpp \
-       pim/opimstate.cpp \
-       pim/opimxrefpartner.cpp \
-       pim/opimxref.cpp \
-       pim/opimxrefmanager.cpp \
-       pim/opimmaintainer.cpp \
-       pim/opimnotify.cpp \
-       pim/opimnotifymanager.cpp \
-       pim/opimmainwindow.cpp \
-       pim/opimresolver.cpp \
-       orecurrancewidget.cpp \
-       oticker.cpp
+            ocolorbutton.cpp \
+            sharp_compat.cpp \
+            xmltree.cc \
+            ofiledialog.cc ofileselector.cc \
+            ocheckitem.cpp \
+            colordialog.cpp \
+            colorpopupmenu.cpp oclickablelabel.cpp \
+            oprocctrl.cpp oprocess.cpp \
+            odevice.cpp odevicebutton.cpp otimepicker.cpp \
+            otabwidget.cpp otabbar.cpp \
+            ofontselector.cpp \
+            pim/otodo.cpp \
+            pim/opimrecord.cpp \
+            pim/otodoaccess.cpp \
+            pim/otodoaccessbackend.cpp \
+            pim/otodoaccessxml.cpp \
+            pim/ocontact.cpp \
+            pim/ocontactaccess.cpp \
+            pim/ocontactaccessbackend_vcard.cpp \
+            pim/ocontactaccessbackend_xml.cpp \
+            pim/otodoaccessvcal.cpp \
+            pim/orecur.cpp \
+            pim/opimstate.cpp \
+            pim/opimxrefpartner.cpp \
+            pim/opimxref.cpp \
+            pim/opimxrefmanager.cpp \
+            pim/opimmaintainer.cpp \
+            pim/opimnotify.cpp \
+            pim/opimnotifymanager.cpp \
+            pim/opimmainwindow.cpp \
+            pim/opimresolver.cpp \
+            orecurrancewidget.cpp \
+            oticker.cpp
 #             pim/otodoaccesssql.cpp \
 
 TARGET    = opie
