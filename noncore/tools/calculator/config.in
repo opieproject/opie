@@ -1,4 +1,4 @@
   config CALCULATOR
-    boolean "calculator"
+    boolean "opie-calculator (A multi-function calculator with units conversion)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

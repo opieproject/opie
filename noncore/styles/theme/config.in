@@ -1,4 +1,4 @@
   config THEME
-    boolean "theme"
+    boolean "opie-theme (theme support including opie-theme-luna)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
