@@ -244,6 +244,9 @@ void Server :: buildLocalPackages( Server *local )
 {
     Package *curr;
     QListIterator<Package> it( packageList );
+    
+    QList<Package> *locallist = &local->getPackageList();
+    
     for ( ; it.current(); ++it )
     {
         curr = it.current();
@@ -260,7 +263,6 @@ void Server :: buildLocalPackages( Server *local )
             if ( p )
             {
                 // Replace local version
-                QList<Package> *locallist = &local->getPackageList();
                 int pos = locallist->at();
                 locallist->remove( p );
                 locallist->insert( pos, curr );
