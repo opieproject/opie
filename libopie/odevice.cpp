@@ -306,7 +306,8 @@ bool ODeviceIPAQ::suspend ( )
 	int fd;
 	bool res = false;
 	
-	if (( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) {	
+	if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
+	    (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {	
 		struct timeval tvs, tvn;
 
 		::signal ( SIGTSTP, tstp_sighandler );		
@@ -328,6 +329,7 @@ bool ODeviceIPAQ::suspend ( )
 		
 		::signal ( SIGTSTP, SIG_DFL );
 	}
+	
 	return res;
 }
 

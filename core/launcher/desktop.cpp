@@ -604,6 +604,8 @@ static void darkScreen()
 
 void Desktop::togglePower()
 {
+	extern void qpe_setBacklight ( int ); // We need to toggle the LCD fast - no time to send a QCop
+
 	static bool excllock = false;
 	
 	if ( excllock )
@@ -614,18 +616,20 @@ void Desktop::togglePower()
 	bool wasloggedin = loggedin;
 	loggedin=0;
 	suspendTime = QDateTime::currentDateTime();
-	darkScreen();
+
+	qpe_setBacklight ( 0 ); // force LCD off
+
 	if ( wasloggedin )
     	blankScreen();
 
 	ODevice::inst ( )-> suspend ( );
 
-	QWSServer::screenSaverActivate( FALSE );
+	QWSServer::screenSaverActivate ( false );
+
+	qpe_setBacklight ( -3 ); // force LCD on
 
 	{
 		QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
-		QCopEnvelope e("QPE/System", "setBacklight(int)");
-		e << -3; // Force on
 	}
 
 	if ( wasloggedin )
