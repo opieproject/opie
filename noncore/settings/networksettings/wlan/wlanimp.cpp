@@ -13,7 +13,7 @@
 #include <qtabwidget.h>
 #include <qcombobox.h>
 
-#ifdef QTE_VERSION 
+#ifdef QWS 
  #include <opie/oprocess.h>
 #else
  #define OProcess KProcess

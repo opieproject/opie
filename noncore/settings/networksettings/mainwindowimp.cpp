@@ -14,12 +14,12 @@
 
 #include <qmessagebox.h>
 
-#ifdef QTE_VERSION 
+#ifdef QWS 
  #include <qpe/config.h>
  #include <qpe/qlibrary.h>
  #include <qpe/resource.h>
  #include <qpe/qpeapplication.h>
- #define QLibrary
+// #define QLibrary Library
 #else
  #include <klibloader.h>
  #define QLibrary KLibrary
@@ -59,8 +59,8 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));  
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
-#ifdef QTE_VERSION 
-  loadModules(QPEApplication::kdeDir() + "/plugins/networksettings");
+#ifdef QWS 
+  loadModules(QPEApplication::qpeDir() + "/plugins/networksettings");
 #else
   loader = KLibLoader::self();
   loadModules(QString("/usr/")+KStandardDirs::kde_default("lib"));
@@ -130,7 +130,7 @@ MainWindowImp::~MainWindowImp(){
       delete iIt.key();
   }
   
-#ifdef QTE_VERSION
+#ifdef QWS
   // Delete Modules and Libraries
   QMap<Module*, QLibrary*>::Iterator it;
   for( it = libraries.begin(); it != libraries.end(); ++it ){
@@ -246,7 +246,7 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
 #ifdef DEBUG
   qDebug("MainWindowImp::loadPlugin: %s", pluginFileName.latin1());
 #endif
-#ifdef QTE_VERSION 
+#ifdef QWS 
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
@@ -382,7 +382,7 @@ void MainWindowImp::configureClicked(){
     }
   }
   
-  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WShowModal | Qt::WDestructiveClose | Qt::WType_Dialog);
+  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
   QString currentProfileText = currentProfileLabel->text();
   if(currentProfileText.upper() == "ALL");
     currentProfileText = "";
@@ -418,7 +418,7 @@ void MainWindowImp::informationClicked(){
       return;
     }
   } 
-  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WShowModal | Qt::WDestructiveClose | Qt::WType_Dialog);
+  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
   information->showMaximized();
 }
 
@@ -450,7 +450,7 @@ void MainWindowImp::updateInterface(Interface *i){
     item = items[i];
  
   // Update the icons and information 
-#ifdef QTE_VERSION
+#ifdef QWS
   item->setPixmap(0, (Resource::loadPixmap(i->getStatus() ? "up": "down")));
 #else
   item->setPixmap(0, (SmallIcon(i->getStatus() ? "up": "down")));
@@ -472,7 +472,7 @@ void MainWindowImp::updateInterface(Interface *i){
   if(i->getModuleOwner() != NULL)
     typeName = i->getModuleOwner()->getPixmapName(i);
   
-#ifdef QTE_VERSION
+#ifdef QWS
   item->setPixmap(1, (Resource::loadPixmap(QString("networksettings/") + typeName)));
 #else
   item->setPixmap(1, (SmallIcon(typeName)));

@@ -6,7 +6,7 @@
 #include <qgroupbox.h>
 #include <qmessagebox.h>
 
-#ifdef QTE_VERSION 
+#ifdef QWS 
 #else
  #define showMaximized show
 #endif

@@ -9,7 +9,7 @@ class Module;
 class Interface;
 class QLibrary;
 class KProcess;
-#ifdef QTE_VERSION 
+#ifdef QWS 
 class QLibrary;
 #else
 class KLibrary;
@@ -58,7 +58,7 @@ private:
 
   bool advancedUserMode;
   QString scheme;
-#ifndef QTE_VERSION
+#ifndef QWS
   KLibLoader *loader;
 #endif
 };
