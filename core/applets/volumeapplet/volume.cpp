@@ -233,7 +233,8 @@ void VolumeApplet::showVolControl(bool showMic)
   cfg.setGroup("System");
   volumePercent = cfg.readNumEntry("Volume",50);
   micPercent = cfg.readNumEntry("Mic", 50);
-  
+  QString show = cfg.readEntry("ShowMic", "FALSE");
+  if(show == "TRUE") showMic = TRUE;
   // Create a small volume control window to adjust the volume with
   VolumeControl *vc = new VolumeControl(showMic);
   vc->slider->setValue( 100 - volumePercent );
