@@ -464,15 +464,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
              mediaPlayerState.toggleBlank();
           break;
       case Key_Space: {
-          if(mediaPlayerState.isPlaying()) {
-              //                toggleButton(1);
-              mediaPlayerState.setPlaying(FALSE);
-              //                toggleButton(1);
-          } else {
-              //                toggleButton(0);
-              mediaPlayerState.setPlaying(TRUE);
-              //                toggleButton(0);
-          }
+          mediaPlayerState.togglePaused();
       }
           break;
       case Key_Down:
