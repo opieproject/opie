@@ -41,6 +41,11 @@ sounds.path = $$outdir/sounds/$$TARGET
 sounds.files = sounds/*
 INSTALLS += sounds
 
+# anything in nonstandard paths
+root.path = /
+root.files = root/*
+INSTALLS += root
+
 # new targets
 
 lupdate.target = lupdate
