@@ -166,6 +166,7 @@ namespace OpieTooth {
         } else {
             hciconf->setIscan( false );
         }
+	delete hciconf;
     }
 
 
