@@ -1,0 +1,18 @@
+-Test the memcpy version for rotated screen
+-Make error handling non-modal, sum up the errors
+ and continue playing. Inform the user that an error
+ has happened via the Global::statusMessage.
+ This requires hacking on the MediaPlayerState
+
+-Sometimes it seems when Skins is not yet initialized there 
+ is some sort of race with MediaPlayerState.
+ If the user asks to play MediaPlayerState::setPlaying(true) and
+ then somewhere setPlaying(false) is triggered
+
+-Sometimes after an Error we're trapped in a loop of errors on
+ 'good' files
+
+
+
+
+
