@@ -16,7 +16,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -36,9 +36,10 @@
 #include <qpopupmenu.h>
 #include <qscrollview.h>
 #include <qtoolbutton.h>
+#include <qwhatsthis.h>
 
-EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent,  const char* name, bool modal, WFlags fl )
-	: QDialog ( parent, name, modal, fl )
+EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent,  const char* name, bool modal, WFlags )
+	: QDialog ( parent, name, modal, WStyle_ContextHelp )
 {
 	setCaption ( tr( "Edit scheme" ) );
 	QGridLayout *layout = new QGridLayout ( this, 0, 0, 4, 4 );
@@ -51,9 +52,11 @@ EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget
     {
         QLabel *l = new QLabel ( labels [i], this );
         layout-> addWidget ( l, i, 0 );
+		QWhatsThis::add( l, tr( "Click here to select a color for: " ).arg( labels [i] ) );
 
         m_buttons [i] = new OColorButton ( this, colors [i] );
         layout-> addWidget ( m_buttons [i], i, 1 );
+		QWhatsThis::add( m_buttons [i], tr( "Click here to select a color for: " ).arg( labels [i] ) );
     }
 }
 

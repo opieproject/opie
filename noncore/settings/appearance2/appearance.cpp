@@ -1,7 +1,7 @@
 /*
                              This file is part of the OPIE Project
                              Copyright (c)  2002 Trolltech AS <info@trolltech.com>
-               =.            Copyright (c)  2002 Dan Williams <williamsdr@acm.org>               
+               =.            Copyright (c)  2002 Dan Williams <williamsdr@acm.org>
              .=l.            Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
            .>+-=
  _;:,     .>    :=|.         This file is free software; you can
@@ -17,7 +17,7 @@
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
 ..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:       
+++=   -.     .`     .:
  :     =  ...= . :.=-        You should have received a copy of the GNU
  -.   .:....=;==+<;          General Public License along with this file;
   -_. . .   )=.  =           see the file COPYING. If not, write to the
@@ -47,11 +47,13 @@
 #include <qlistview.h>
 #include <qheader.h>
 #include <qvbox.h>
+#include <qwhatsthis.h>
 
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/qpemessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpestyle.h>
 #include <qpe/lightstyle.h>
@@ -115,13 +117,15 @@ QWidget *Appearance::createStyleTab ( QWidget *parent, Config &cfg )
 
     m_style_list = new QListBox( tab, "m_style_list" );
     vertLayout->addWidget( m_style_list );
+	QWhatsThis::add( m_style_list, tr( "Styles control the way items such as buttons and scroll bars appear in all applications.\n\nClick here to select an available style." ) );
 
     m_style_settings = new QPushButton ( tr( "Settings..." ), tab );
     connect ( m_style_settings, SIGNAL( clicked ( )), this, SLOT( styleSettingsClicked ( )));
     vertLayout-> addWidget ( m_style_settings );
+	QWhatsThis::add( m_style_settings, tr( "Click here to configure the currently selected style.\n\nNote:  This option is not available for all styles." ) );
 
     QString s = cfg. readEntry ( "Style", "Light" );
-    
+
 
 #if QT_VERSION >= 300
     m_style_list->insertStringList(QStyleFactory::styles());
@@ -131,17 +135,21 @@ QWidget *Appearance::createStyleTab ( QWidget *parent, Config &cfg )
     m_style_list-> insertItem ( new StyleListItem ( "QPE", new QPEStyle ( )));
 #endif
 	{
-		QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/";
+		QString path = QPEApplication::qpeDir ( );
+		path.append( "/plugins/styles/" );
 		QStringList sl = QDir ( path, "lib*.so" ). entryList ( );
 
 		for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
-			QLibrary *lib = new QLibrary ( path + "/" + *it );
+			QString libstr = path;
+			libstr.append( "/" );
+			libstr.append( *it );
+			QLibrary *lib = new QLibrary ( libstr );
 			StyleInterface *iface;
 
 			if (( lib-> queryInterface ( IID_Style, (QUnknownInterface **) &iface ) == QS_OK ) && iface ) {
 				StyleListItem *slit = new StyleListItem ( lib, iface );
 				m_style_list-> insertItem ( slit );
-				
+
 				if ( slit-> key ( ) == s )
 					m_style_list-> setCurrentItem ( slit );
 			}
@@ -165,23 +173,28 @@ QWidget *Appearance::createDecoTab ( QWidget *parent, Config &cfg )
 
     m_deco_list = new QListBox( tab, "m_deco_list" );
     vertLayout->addWidget( m_deco_list );
+	QWhatsThis::add( m_deco_list, tr( "Window decorations control the way the application title bar and its buttons appear.\n\nClick here to select an available decoration." ) );
 
     QString s = cfg. readEntry ( "Decoration" );
 
     m_deco_list-> insertItem ( new DecoListItem ( "QPE" ));
 
 	{
-		QString path = QPEApplication::qpeDir() + "/plugins/decorations/";
+		QString path = QPEApplication::qpeDir();
+		path.append( "/plugins/decorations/" );
 		QStringList sl = QDir ( path, "lib*.so" ). entryList ( );
 
 		for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
-			QLibrary *lib = new QLibrary ( path + "/" + *it );
+			QString libstr = path;
+			libstr.append( "/" );
+			libstr.append( *it );
+			QLibrary *lib = new QLibrary ( libstr );
 			WindowDecorationInterface *iface;
 
 			if ( lib-> queryInterface ( IID_WindowDecoration, (QUnknownInterface **) &iface ) == QS_OK ) {
-				DecoListItem *dlit = new DecoListItem ( lib, iface );				
+				DecoListItem *dlit = new DecoListItem ( lib, iface );
 				m_deco_list-> insertItem ( dlit );
-				
+
 				if ( dlit-> key ( ) == s )
 					m_deco_list-> setCurrentItem ( dlit );
 			}
@@ -206,13 +219,14 @@ QWidget *Appearance::createFontTab ( QWidget *parent, Config &cfg )
     QString styleStr = cfg. readEntry ( "FontStyle", "Regular" );
     int size = cfg. readNumEntry ( "FontSize", 10 );
 
-    m_fontselect = new OFontSelector ( false, parent, "FontTab" );    
+    m_fontselect = new OFontSelector ( false, parent, "FontTab" );
     m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
-    
+	QWhatsThis::add( m_fontselect, tr( "Select the desired name, style and size of the default font applications will use." ) );
+
     connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
              this, SLOT( fontClicked ( const QFont & )));
 
-    return m_fontselect; 
+    return m_fontselect;
 }
 
 QWidget *Appearance::createColorTab ( QWidget *parent, Config &cfg )
@@ -224,36 +238,43 @@ QWidget *Appearance::createColorTab ( QWidget *parent, Config &cfg )
     m_color_list = new QListBox ( tab );
     gridLayout->addMultiCellWidget ( m_color_list, 0, 3, 0, 0 );
     connect( m_color_list, SIGNAL( highlighted( int ) ), this, SLOT( colorClicked( int ) ) );
+	QWhatsThis::add( m_color_list, tr( "Color schemes are a collection of colors which are used for various parts of the display.\n\nClick here to select an available scheme." ) );
 
 	m_color_list-> insertItem ( new ColorListItem ( tr( "Current scheme" ), cfg ));
 
-	QString path = QPEApplication::qpeDir ( ) + "/etc/colors/";
+	QString path = QPEApplication::qpeDir ( );
+	path.append( "/etc/colors/" );
     QStringList sl = QDir ( path ). entryList ( "*.scheme" );
-	
+
 	for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
 		QString name = (*it). left ((*it). find ( ".scheme" ));
-		Config config ( path + *it, Config::File );
+		QString pathstr = path;
+		pathstr.append( *it );
+		Config config ( pathstr, Config::File );
 		config. setGroup ( "Colors" );
-		
+
 		m_color_list-> insertItem ( new ColorListItem ( name, config ));
 	}
-	
+
     m_color_list-> setCurrentItem ( 0 );
 
     QPushButton* tempButton = new QPushButton( tab, "editSchemeButton" );
     tempButton->setText( tr( "Edit..." ) );
     connect( tempButton, SIGNAL( clicked() ), this, SLOT( editSchemeClicked() ) );
     gridLayout->addWidget( tempButton, 0, 1 );
+	QWhatsThis::add( tempButton, tr( "Click here to change the colors in the current color scheme." ) );
 
     tempButton = new QPushButton( tab, "deleteSchemeButton" );
     tempButton->setText( tr( "Delete" ) );
     connect( tempButton, SIGNAL( clicked() ), this, SLOT( deleteSchemeClicked() ) );
     gridLayout->addWidget( tempButton, 1, 1 );
+	QWhatsThis::add( tempButton, tr( "Click here to delete the color scheme selected in the list to the left." ) );
 
     tempButton = new QPushButton( tab, "saveSchemeButton" );
     tempButton->setText( tr( "Save" ) );
     connect( tempButton, SIGNAL( clicked() ), this, SLOT( saveSchemeClicked() ) );
     gridLayout->addWidget( tempButton, 2, 1 );
+	QWhatsThis::add( tempButton, tr( "Click here to name and save the current color scheme." ) );
 
     return tab;
 }
@@ -267,12 +288,14 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
 	m_force = new QCheckBox ( tr( "Force styling for all applications." ), tab );
 	m_force-> setChecked ( cfg. readBoolEntry ( "ForceStyle" ));
-	lay-> addMultiCellWidget ( m_force, 0, 0, 0, 1 );       
+	lay-> addMultiCellWidget ( m_force, 0, 0, 0, 1 );
+	QWhatsThis::add( m_force, tr( "Click here to allow all applications to use global appearance settings." ) );
 
 	QLabel *l = new QLabel ( tab );
 	l-> setText ( QString ( "<p>%1</p>" ). arg ( tr( "Disable styling for these applications ( <b>*</b> can be used as a wildcard):" )));
 	lay-> addMultiCellWidget ( l, 1, 1, 0, 1 );
-	
+	QWhatsThis::add( l, tr( "If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.\n\nThis area allows you to select an application and which settings you wish to disable." ) );
+
 	m_except = new QListView ( tab );
 	m_except-> addColumn ( Resource::loadIconSet ( "appearance/style.png" ), "", 24 );
 	m_except-> addColumn ( Resource::loadIconSet ( "appearance/font.png" ), "", 24 );
@@ -285,36 +308,41 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	m_except-> setMinimumHeight ( 30 );
 	m_except-> header ( )-> setClickEnabled ( false );
 	m_except-> header ( )-> setResizeEnabled ( false );
-	m_except-> header ( )-> setMovingEnabled ( false );	
+	m_except-> header ( )-> setMovingEnabled ( false );
 	m_except-> setSorting ( -1 );
 	lay-> addMultiCellWidget ( m_except, 2, 6, 0, 0 );
-	
+	QWhatsThis::add( m_except, tr( "If some applications do not display correctly with the global appearance settings, certain features can be turned off for that application.\n\nThis area allows you to select an application and which settings you wish to disable." ) );
+
 	connect ( m_except, SIGNAL( clicked ( QListViewItem *, const QPoint &, int )), this, SLOT( clickedExcept ( QListViewItem *, const QPoint &, int )));
-	
+
 	QToolButton *tb = new QToolButton ( tab );
 	tb-> setIconSet ( Resource::loadIconSet ( "appearance/add" ));
 	tb-> setFocusPolicy ( QWidget::StrongFocus );
-	lay-> addWidget ( tb, 2, 1 ); 
+	lay-> addWidget ( tb, 2, 1 );
 	connect ( tb, SIGNAL( clicked ( )), this, SLOT( addExcept ( )));
+	QWhatsThis::add( tb, tr( "Click here to add an application to the list above." ) );
 
 	tb = new QToolButton ( tab );
 	tb-> setIconSet ( Resource::loadIconSet ( "editdelete" ));
 	tb-> setFocusPolicy ( QWidget::StrongFocus );
-	lay-> addWidget ( tb, 3, 1 ); 
+	lay-> addWidget ( tb, 3, 1 );
 	connect ( tb, SIGNAL( clicked ( )), this, SLOT( delExcept ( )));
-	
+	QWhatsThis::add( tb, tr( "Click here to delete the currently selected application." ) );
+
 	tb = new QToolButton ( tab );
 	tb-> setIconSet ( Resource::loadIconSet ( "up" ));
 	tb-> setFocusPolicy ( QWidget::StrongFocus );
-	lay-> addWidget ( tb, 4, 1 ); 
+	lay-> addWidget ( tb, 4, 1 );
 	connect ( tb, SIGNAL( clicked ( )), this, SLOT( upExcept ( )));
-	
+	QWhatsThis::add( tb, tr( "Click here to move the currently selected application up in the list." ) );
+
 	tb = new QToolButton ( tab );
 	tb-> setIconSet ( Resource::loadIconSet ( "down" ));
 	tb-> setFocusPolicy ( QWidget::StrongFocus );
-	lay-> addWidget ( tb, 5, 1 ); 
+	lay-> addWidget ( tb, 5, 1 );
 	connect ( tb, SIGNAL( clicked ( )), this, SLOT( downExcept ( )));
-	
+	QWhatsThis::add( tb, tr( "Click here to move the currently selected application down in the list." ) );
+
 	lay-> setRowStretch ( 6, 10 );
 	lay-> setColStretch ( 0, 10 );
 
@@ -322,18 +350,18 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 	QListViewItem *lvit = 0;
 	for ( QStringList::Iterator it = sl. begin ( ); it != sl. end ( ); ++it ) {
 		int fl = ( *it ). left ( 1 ). toInt ( 0, 32 );
-	
+
 		lvit = new ExceptListItem ( m_except, lvit, ( *it ). mid ( 1 ), fl & 0x01, fl & 0x02, fl & 0x04 );
 	}
 
 
-	vertLayout-> addSpacing ( 3 );	
+	vertLayout-> addSpacing ( 3 );
 	QFrame *f = new QFrame ( tab );
 	f-> setFrameStyle ( QFrame::HLine | QFrame::Sunken );
-	vertLayout-> addWidget ( f ); 
-	vertLayout-> addSpacing ( 3 );   
-        
-        
+	vertLayout-> addWidget ( f );
+	vertLayout-> addSpacing ( 3 );
+
+
     QGridLayout* gridLayout = new QGridLayout ( vertLayout, 0, 0, 3, 0 );
 
 	int style = cfg. readNumEntry ( "TabStyle", 2 ) - 1;
@@ -341,6 +369,8 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
     QLabel* label = new QLabel( tr( "Tab style:" ), tab );
     gridLayout-> addWidget ( label, 0, 0 );
+	QWhatsThis::add( label, tr( "Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:\n\n1. Tabs - normal tabs with text labels only\n2. Tabs w/icons - tabs with icons for each tab, text label only appears on current tab\n3. Drop down list - a vertical listing of tabs\n4. Drop down list w/icons - a vertical listing of tabs with icons" ) );
+
     QButtonGroup* btngrp = new QButtonGroup( tab, "buttongroup" );
     btngrp-> hide ( );
     btngrp-> setExclusive ( true );
@@ -352,14 +382,17 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
     m_tabstyle_list-> insertItem ( tr( "Drop down list w/icons" ));
     m_tabstyle_list-> setCurrentItem ( style );
     gridLayout-> addMultiCellWidget ( m_tabstyle_list, 0, 0, 1, 2 );
+	QWhatsThis::add( m_tabstyle_list, tr( "Click here to select a desired style for tabbed dialogs (such as this application). The styles available are:\n\n1. Tabs - normal tabs with text labels only\n2. Tabs w/icons - tabs with icons for each tab, text label only appears on current tab\n3. Drop down list - a vertical listing of tabs\n4. Drop down list w/icons - a vertical listing of tabs with icons" ) );
 
     m_tabstyle_top = new QRadioButton( tr( "Top" ), tab, "tabpostop" );
     btngrp-> insert ( m_tabstyle_top );
     gridLayout-> addWidget( m_tabstyle_top, 1, 1 );
-    
+	QWhatsThis::add( m_tabstyle_top, tr( "Click here so that tabs appear at the top of the window." ) );
+
     m_tabstyle_bottom = new QRadioButton( tr( "Bottom" ), tab, "tabposbottom" );
     btngrp-> insert ( m_tabstyle_bottom );
     gridLayout-> addWidget( m_tabstyle_bottom, 1, 2 );
+	QWhatsThis::add( m_tabstyle_bottom, tr( "Click here so that tabs appear at the bottom of the window." ) );
 
     m_tabstyle_top-> setChecked ( tabtop );
     m_tabstyle_bottom-> setChecked ( !tabtop );
@@ -372,7 +405,7 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
 
 Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
-    : QDialog ( parent, name, true )
+    : QDialog ( parent, name, true, WStyle_ContextHelp )
 {
     setCaption( tr( "Appearance" ) );
 
@@ -383,22 +416,23 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
 
 	m_sample = new SampleWindow ( this );
 	m_sample-> setDecoration ( new DefaultWindowDecoration ( ));
-	
+	QWhatsThis::add( m_sample, tr( "This is a preview window.  Look here to see your new appearance as options are changed." ) );
+
     OTabWidget* tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
 	QWidget *styletab;
-	
+
  	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance/style.png", tr( "Style" ));
     tw-> addTab ( createFontTab ( tw, config ), "appearance/font.png", tr( "Font" ));
     tw-> addTab ( createColorTab ( tw, config ), "appearance/color.png", tr( "Colors" ) );
     tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco.png", tr( "Windows" ) );
 	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "appearance/advanced.png", tr( "Advanced" ) );
 
-	top-> addWidget ( tw, 10 );	
+	top-> addWidget ( tw, 10 );
 	top-> addWidget ( m_sample, 1 );
 
     tw-> setCurrentTab ( styletab );
 	connect ( tw, SIGNAL( currentChanged ( QWidget * )), this, SLOT( tabChanged ( QWidget * )));
-        
+
     m_style_changed = m_font_changed = m_color_changed = m_deco_changed = false;
 }
 
@@ -424,17 +458,17 @@ void Appearance::accept ( )
     Config config ( "qpe" );
     config. setGroup ( "Appearance" );
 
-    if ( m_style_changed ) { 
+    if ( m_style_changed ) {
 	    StyleListItem *item = (StyleListItem *) m_style_list-> item ( m_style_list-> currentItem ( ));
 	    if ( item )
             config.writeEntry( "Style", item-> key ( ));
 	}
-	
-    if ( m_deco_changed ) { 
+
+    if ( m_deco_changed ) {
 	    DecoListItem *item = (DecoListItem *) m_deco_list-> item ( m_deco_list-> currentItem ( ));
 	    if ( item )
             config.writeEntry( "Decoration", item-> key ( ));
-	}	
+	}
 
 	if (( newtabstyle != m_original_tabstyle ) || ( newtabpos != m_original_tabpos )) {
 		config. writeEntry ( "TabStyle", newtabstyle + 1 );
@@ -451,8 +485,8 @@ void Appearance::accept ( )
     if ( m_color_changed )
     {
     	ColorListItem *item = (ColorListItem *) m_color_list-> item ( m_color_list-> currentItem ( ));
- 
- 		if ( item )   
+
+ 		if ( item )
 			item-> save ( config );
     }
 
@@ -460,23 +494,26 @@ void Appearance::accept ( )
 	m_except-> setFocus ( ); // if the focus was on the embedded line-edit, we have to move it away first, so the contents are updated
 
 	QStringList sl;
+	QString exceptstr;
 	for ( ExceptListItem *it = (ExceptListItem *) m_except-> firstChild ( ); it; it = (ExceptListItem *) it-> nextSibling ( )) {
 		int fl = 0;
 		fl |= ( it-> noStyle ( ) ? 0x01 : 0 );
 		fl |= ( it-> noFont ( ) ? 0x02 : 0 );
 		fl |= ( it-> noDeco ( ) ? 0x04 : 0 );
-		sl << ( QString::number ( fl, 32 ) + it-> pattern ( ));
+		exceptstr = QString::number ( fl, 32 );
+		exceptstr.append( it-> pattern ( ));
+		sl << exceptstr;
 	}
 	config. writeEntry ( "NoStyle", sl, ';' );
 	config. writeEntry ( "ForceStyle", m_force-> isChecked ( ));
-	
+
 	config. write ( ); // need to flush the config info first
 	Global::applyStyle ( );
 
 	if ( QMessageBox::warning ( this, tr( "Restart" ), tr( "Do you want to restart %1 now?" ). arg ( ODevice::inst ( )-> system ( ) == System_Zaurus ? "Qtopia" : "Opie" ),  tr( "Yes" ), tr( "No" ), 0, 0, 1 ) == 0 ) {
 		QCopEnvelope e( "QPE/System", "restart()" );
 	}
-	
+
 	QDialog::accept ( );
 }
 
@@ -491,10 +528,10 @@ void Appearance::styleClicked ( int index )
 {
     StyleListItem *sli = (StyleListItem *) m_style_list-> item ( index );
 	m_style_settings-> setEnabled ( sli ? sli-> hasSettings ( ) : false );
-	
+
 	if ( m_sample && sli && sli-> style ( ))
 		m_sample-> setStyle2 ( sli-> style ( ));
-		
+
 	m_style_changed |= ( index != m_original_style );
 }
 
@@ -610,7 +647,11 @@ void Appearance::saveSchemeClicked()
 
     if ( d-> exec ( ) == QDialog::Accepted ) {
         QString schemename = ed-> text ( );
-        QFile file ( QPEApplication::qpeDir() + "/etc/colors/" + schemename + ".scheme" );
+		QString filestr = QPEApplication::qpeDir();
+		filestr.append( "/etc/colors/" );
+		filestr.append( schemename );
+		filestr.append( ".scheme" );
+        QFile file ( filestr );
         if ( !file. exists ( ))
         { 
         	QPalette p = item-> palette ( );
@@ -641,9 +682,13 @@ void Appearance::deleteSchemeClicked()
 
     if ( m_color_list-> currentItem ( ) > 0 )
     {
-        if ( QMessageBox::warning ( this, tr( "Delete scheme" ), tr( "Do you really want to delete\n" ) + item-> text ( ) + "?",
-                tr( "Yes" ), tr( "No" ), 0, 0, 1 ) == 0 ) {
-			QFile::remove ( QPEApplication::qpeDir ( ) + "/etc/colors/" + item-> text ( ) + ".scheme" );
+		if ( QPEMessageBox::confirmDelete ( this, tr( "Delete scheme" ), item-> text ( ) ) )
+		{
+			QString filestr = QPEApplication::qpeDir ( );
+			filestr.append( "/etc/colors/" );
+			filestr.append( item-> text ( ) );
+			filestr.append( ".scheme" );
+			QFile::remove ( filestr );
 			delete item;
         }
     }
