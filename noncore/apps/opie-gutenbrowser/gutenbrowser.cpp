@@ -141,13 +141,13 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
 				}
 		}
 
-			//    QString gutenIndex= local_library + "GUTINDEX.ALL";
-		QString gutenIndex = QPEApplication::qpeDir()+ "etc/gutenbrowser/GUTINDEX.ALL";
+		QString gutenIndex = local_library + "/GUTINDEX.ALL";
 		qDebug("gutenindex "+gutenIndex );
+    
 		if( QFile( gutenIndex).exists() ) {
 				indexLib.setName( gutenIndex);
 		} else {
-				QString localLibIndexFile = QPEApplication::qpeDir()+ "etc/gutenbrowser/PGWHOLE.TXT";
+				QString localLibIndexFile = local_library + "/PGWHOLE.TXT";
 					//        QString localLibIndexFile= local_library + "PGWHOLE.TXT";
 				newindexLib.setName( localLibIndexFile);
 		}
@@ -197,28 +197,28 @@ void Gutenbrowser::InfoBarClick() {
   /*
 		download http with wget or preferred browser */
 void Gutenbrowser::goGetit( const QString &url, bool showMsg) {
-			//    int eexit=0;
 		QString cmd;
-			//    config.read();
 		qApp->processEvents();
-		QString filename = QPEApplication::qpeDir();
-		if(filename.right(1)!="/")
-				filename+="/etc/gutenbrowser/";
-		else
-				filename+="etc/gutenbrowser/";
-		odebug << "filename "+filename << oendl;
-			//    QString filename = QDir::homeDirPath()+"/Applications/gutenbrowser/";
 
-		filename += url.right( url.length() - url.findRev("/",-1,TRUE) -1);
+		QString filename = local_library + "/GUTINDEX.ALL";
+//    QString filename = old_index;
 
-		Config config("Gutenbrowser");
-		config.setGroup( "Browser" );
-		QString brow = config.readEntry("Preferred", "Opera");
-		odebug << "Preferred browser is "+brow << oendl;
+//		filename += url.right( url.length() - url.findRev("/",-1,TRUE) -1);
+
+		Config cfg("Gutenbrowser");
+		cfg.setGroup("FTPsite");
+		ftp_host=cfg.readEntry("SiteName", "sailor.gutenberg.org");
+		ftp_base_dir= cfg.readEntry("base",  "/pub/gutenberg");
+   
+// 		Config config("Gutenbrowser");
+// 		config.setGroup( "Browser" );
+//		QString brow = config.readEntry("Preferred", "Opera");
+//		//odebug << "Preferred browser is "+brow << oendl;
 		if(!showMsg) { //if we just get the gutenindex.all
+//         QString cmd="wget -O " + gutenindex1 + " http://sailor.gutenberg.org/GUTINDEX.ALL 2>&1";
 				cmd="wget -O " + filename +" " + url+" 2>&1" ;
 				chdir(local_library);
-				odebug << "Issuing the system command: " << cmd << "" << oendl;
+//				//odebug << "Issuing the system command: " << cmd << "" << oendl;
 
 				Output *outDlg;
 
@@ -274,7 +274,7 @@ void Gutenbrowser::goGetit( const QString &url, bool showMsg) {
 				}
 
 				chdir(local_library);
-				odebug << "Issuing the sys command: " << cmd << "" << oendl;
+//				//odebug << "Issuing the sys command: " << cmd << "" << oendl;
 				system(cmd);
 		}
 }

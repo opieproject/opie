@@ -106,6 +106,8 @@ public slots:
     bool setTitle();
     void saveConfig();
     bool download_Etext();
+		bool download_newEtext();
+		
     void onButtonSearch();
     bool onButtonDownload();
 
@@ -120,6 +122,11 @@ protected:
  QHBoxLayout *hbox,*hbox1,*hbox2;
  QVBoxLayout *vbox;
 // void search_slot();
+private:
+ void addItems();
+ void clearItems();
+ void cleanStrings();
+ bool getEtext(const QStringList &);
 
 };
 

@@ -167,46 +167,45 @@ bool NetworkDialog::downloadFile( QString networkUrl )
 //              FtpQuit(conn);
 //              return false;
 //      }
-			odebug << "Requesting directory list." << oendl;
-			TextLabel3->setText("Getting directory list.");
-			qApp->processEvents();
-			if (!FtpDir( "./.guten_temp", dir.latin1(), conn) ) {
-				msg.sprintf("Unable to list the directory\n"+dir+"\n%s",FtpLastResponse(conn));
-				QMessageBox::message("Note",msg);
-				successDownload=false;
-				FtpQuit(conn);
-				return false;
-			}
-			QFile tmp("./.guten_temp");
-			QString s, File_Name;
+			QString File_Name;
 
-			if (tmp.open(IO_ReadOnly)) {
-				QTextStream t( &tmp );   // use a text stream
-				odebug << "Finding partial filename "+s_partialFileName << oendl;
-				while ( !t.eof()) {
-					s = t.readLine();
-
-					if (s.contains(s_partialFileName, FALSE)) {
-						QString str = s.right( (s.length()) - (s.find(s_partialFileName, FALSE)) );
-
-						if (str.contains(".txt")) {
-							File_Name = str;
-							odebug << "Found file_name "+ File_Name << oendl;
-							break;
-						}
-//                      if (str.contains(".zip")) {
-//                          File_Name = str;
-//                          odebug << "Found file_name "+ File_Name << oendl;
-//                          break;
-//                      }
-
+			if( s_partialFileName.right(4) != ".txt") {
+					TextLabel3->setText("Getting directory list.");
+					qApp->processEvents();
+					if (!FtpDir( "./.guten_temp", dir.latin1(), conn) ) {
+							msg.sprintf("Unable to list the directory\n"+dir+"\n%s",FtpLastResponse(conn));
+							QMessageBox::message("Note",msg);
+							successDownload = false;
+							FtpQuit(conn);
+							return false;
 					}
-				}  //end of while loop
-				tmp.close();
+					QFile tmp("./.guten_temp");
+					if (tmp.open(IO_ReadOnly)) {
+							QTextStream t( &tmp );   // use a text stream
+								//odebug << "Finding partial filename "+s_partialFileName << oendl;
+							QString s;
+
+							while ( !t.eof()) {
+									s = t.readLine();
+
+									if (s.contains(s_partialFileName, FALSE)) {
+											QString str = s.right( (s.length()) - (s.find(s_partialFileName, FALSE)) );
+
+											if (str.contains(".txt")) {
+													File_Name = str;
+														//odebug << "Found file_name "+ File_Name << oendl;
+													break;
+											}
+									}
+							}  //end of while loop
+							tmp.close();
 //        tmp.remove(); ///TODO this is for release version Zaurus
+					}
+			} else {
+					File_Name =  s_partialFileName;
+					qDebug("new dir " + File_Name);
 			}
-			else
-				odebug << "Error opening temp file." << oendl;
+			
 
 			Config cfg("Gutenbrowser");
 			cfg.setGroup("General");
