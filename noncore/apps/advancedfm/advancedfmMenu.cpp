@@ -533,12 +533,13 @@ void AdvancedFm::copyAs() {
   qApp->processEvents();
 
   QStringList curFileList = getPath();
-  QString curFile;
+  QString curFile, item;
   InputDialog *fileDlg;
   if (TabWidget->getCurrentTab() == 0) {
     qDebug("tab 1");
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
       QString destFile;
+      item=(*it);
       curFile = currentDir.canonicalPath()+"/"+(*it);
       fileDlg = new InputDialog( this,tr("Copy "+curFile+" As"), TRUE, 0);
 
@@ -577,6 +578,7 @@ void AdvancedFm::copyAs() {
   } else {
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
+      item=(*it);
       curFile = currentRemoteDir.canonicalPath()+"/"+(*it);
       fileDlg = new InputDialog( this,tr("Copy "+curFile+" As"), TRUE, 0);
 
