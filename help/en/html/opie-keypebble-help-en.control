@@ -4,7 +4,7 @@ Section: opie/onlinedoc
 Maintainer: treke <treke@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-keypeble
+Depends: opie-keypebble
 License: GPL
 Description: Opie VNC Viewer help files (english)
  
