@@ -4,13 +4,16 @@
 
 #include "otodoaccesssql.h"
 #include "otodoaccess.h"
-
+#include "obackendfactory.h"
 
 OTodoAccess::OTodoAccess( OTodoAccessBackend* end )
     : QObject(), OPimAccessTemplate<OTodo>( end ),  m_todoBackEnd( end )
 {
     if (end == 0l )
         m_todoBackEnd = new OTodoAccessBackendSQL( QString::null);
+
+    //    if (end == 0l )
+    //      m_todoBackEnd = OBackendFactory<OTodoAccessBackend>::Default ("todo", QString::null);
 
     setBackEnd( m_todoBackEnd );
 }
