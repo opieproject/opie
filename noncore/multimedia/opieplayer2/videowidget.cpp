@@ -381,8 +381,12 @@ void VideoWidget::makeVisible() {
         setBackgroundPixmap( *pixBg );
         if ( mediaPlayerState->streaming() ) {
             slider->hide();
+            disconnect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+            disconnect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         } else {
             slider->show();
+            connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+            connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         }
         videoFrame->setGeometry( QRect( 0, 30, 240, 170  ) );
         qApp->processEvents();
