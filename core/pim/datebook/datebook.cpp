@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25 2003-05-05 21:44:39 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.25.2.1 2003-05-12 13:52:30 tille Exp $
 **
 **********************************************************************/
 
@@ -187,6 +187,9 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	channel = new QCopChannel( "QPE/Datebook", this );
 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
 	qDebug("olle\n");
+	channel = new QCopChannel( "QPE/Application/datebook", this );
+	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
+	qDebug("olle\n");
 #endif
 #endif
 
@@ -228,6 +231,14 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
 	stream >> uid;
 	Event e=db->eventByUID(uid);
 	editEvent(e);
+    }
+    else if (msg == "viewDefault(QDate)"){
+        QDate day;
+        stream >> day;
+        qDebug("DATEBOOK: got view Day %s",day.toString().latin1());
+        viewDefault(day);
+        showMaximized();
+        qApp->exec();
     }
 }
 
@@ -478,6 +489,7 @@ void DateBook::editEvent( const Event &e )
 		if (!error.isNull()) {
 			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0) continue;
 	}
+
 	db->editEvent(e, newEv);
 	emit newEvent();
 	break;
