@@ -153,7 +153,7 @@ void MainWindow::initUI() {
     m_isFullscreen = false;
 
     m_fullscreen = new QAction( tr("Full screen"), Resource::loadPixmap( "fullscreen" )
-                           , QString::null, 0, this, 0, true );
+                           , QString::null, 0, this, 0 );
     m_fullscreen->addTo( m_console );
     connect( m_fullscreen, SIGNAL( activated() ),
              this,  SLOT( slotFullscreen() ) );
