@@ -22,7 +22,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopietooth -lopiecore2
+LIBS            += -lqpe -lopietooth -lopiecore2 -lopieui2
 INTERFACES      = bluetoothbase.ui  devicedialog.ui rfcommassigndialogbase.ui rfcommdialogitembase.ui
 
 TARGET 		= bluetooth-manager

@@ -6,6 +6,8 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <opie2/oprocess.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 using namespace OpieTooth;
 

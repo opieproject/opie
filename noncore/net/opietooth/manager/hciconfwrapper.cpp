@@ -4,6 +4,9 @@
 #include <qtextstream.h>
 #include <qregexp.h>
 
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
 namespace OpieTooth {
 
 

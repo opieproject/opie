@@ -1,4 +1,6 @@
 #include <qpe/qcopenvelope_qws.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include <qtimer.h>
 

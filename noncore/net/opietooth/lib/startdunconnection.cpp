@@ -1,3 +1,4 @@
+#include <opie2/odebug.h>
 
 #include "startdunconnection.h"
 

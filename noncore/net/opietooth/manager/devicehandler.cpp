@@ -3,6 +3,8 @@
 
 #include <qdir.h>
 #include <qpe/config.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include "devicehandler.h"
 

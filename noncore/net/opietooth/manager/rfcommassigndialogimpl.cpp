@@ -6,6 +6,8 @@
 /* OPIE */
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qlayout.h>

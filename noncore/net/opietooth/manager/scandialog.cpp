@@ -31,6 +31,9 @@
 #include <manager.h>
 #include <device.h>
 
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
 
 namespace OpieTooth {
 

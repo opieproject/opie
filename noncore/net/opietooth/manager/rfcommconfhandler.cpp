@@ -1,5 +1,7 @@
 
 #include <qtextstream.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include "rfcommconfhandler.h"
 

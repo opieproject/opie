@@ -35,6 +35,7 @@
 #include <qpe/resource.h>
 
 #include <opie2/odevice.h>
+#include <opie2/odebug.h>
 
 #include <qpoint.h>
 #include <qpainter.h>

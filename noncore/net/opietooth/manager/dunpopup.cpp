@@ -1,6 +1,8 @@
 #include <qpe/qcopenvelope_qws.h>
 
 #include <qtimer.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include "dunpopup.h"
 

@@ -26,6 +26,8 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qframe.h>
