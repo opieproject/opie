@@ -6,7 +6,7 @@ SOURCES		= calcdisplay.cpp  \
                 main.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe
 INTERFACES	= 
 TARGET          = euroconv
 
