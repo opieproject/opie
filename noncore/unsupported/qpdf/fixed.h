@@ -180,7 +180,7 @@ template <unsigned int SH> inline fixed<SH> sqrt ( const fixed<SH> &f )
 	return fixed<SH> ( a1, true );
 }
 
-template <unsigned int SH> inline ostream &operator << ( ostream &o, const fixed<SH> &f )
+template <unsigned int SH> inline std::ostream &operator << ( std::ostream &o, const fixed<SH> &f )
 {
 	o << double( f );
 	return o;
