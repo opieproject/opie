@@ -1,0 +1,4 @@
+2004-??-??	The Opie Team <opie@handhelds.org>
+	* Implemented some important modifications to allow to use OPimRecords as it is, without
+	  have to cast them. This makes it possible to write applications which handling pim
+	  data in a generic manner (see opimconvertion tool) (eilers)
