@@ -692,7 +692,7 @@ int iPAQ::readLightSensor ( )
 	if (( fd = ::open ( "/proc/hal/light_sensor", O_RDONLY )) >= 0 ) {
 		char buffer [8];
 	
-		if ( ::read ( fd, buffer, 5 ) == 5 )
+		if ( ::read ( fd, buffer, 5 ) == 5 ) {
 			char *endptr;
 		
 			buffer [4] = 0;
