@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>419</width>
+            <width>415</width>
             <height>532</height>
         </rect>
     </property>
@@ -306,6 +306,10 @@
                                 <property stdset="1">
                                     <name>pageStep</name>
                                     <number>16</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>tracking</name>
+                                    <bool>true</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>orientation</name>
@@ -723,6 +727,10 @@
                                     <cstring>brightness_ac_3</cstring>
                                 </property>
                                 <property stdset="1">
+                                    <name>minValue</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
                                     <name>maxValue</name>
                                     <number>255</number>
                                 </property>
@@ -733,6 +741,14 @@
                                 <property stdset="1">
                                     <name>pageStep</name>
                                     <number>16</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>value</name>
+                                    <number>255</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>tracking</name>
+                                    <bool>true</bool>
                                 </property>
                                 <property stdset="1">
                                     <name>orientation</name>
@@ -1205,6 +1221,10 @@ warning at</string>
                                         <property stdset="1">
                                             <name>maxValue</name>
                                             <number>127</number>
+                                        </property>
+                                        <property stdset="1">
+                                            <name>tracking</name>
+                                            <bool>false</bool>
                                         </property>
                                         <property stdset="1">
                                             <name>orientation</name>

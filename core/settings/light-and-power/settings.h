@@ -42,6 +42,7 @@ protected:
 
 private slots:
     void applyBrightness();
+    void applyBrightnessAC();
     void slotSliderTicks( int steps );
 
 private:
