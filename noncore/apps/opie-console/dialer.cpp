@@ -89,6 +89,7 @@ void Dialer::setHangupOnly()
 {
 	state = state_cancel;
 	usercancel = 1;
+        send("+++ATH\r");
 }
 
 void Dialer::slotCancel()
@@ -98,7 +99,9 @@ void Dialer::slotCancel()
 		usercancel = 1;
 		reset();
 	}
-	else accept();
+	else {
+            accept();
+        }
 }
 
 void Dialer::reset()
@@ -140,9 +143,9 @@ void Dialer::trydial(const QString& number)
 	if(cleanshutdown)
 	{
             qWarning("HangupString " + m_profile.readEntry("HangupString"));
-		send(m_profile.readEntry("HangupString"));
-		//send("+++ATH");
-		send("");
+            //send(m_profile.readEntry("HangupString"));
+		send("+++ATH\r");
+		//send("");
 	}
 
 	if(state != state_cancel)
@@ -187,7 +190,7 @@ void Dialer::trydial(const QString& number)
 		send(QString("ATDT %1\r").arg(number));
 //		send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
 		QString response5 = receive();
-		if(!response5.contains("\n" + m_profile.readEntry("DefaultConnect")))
+		if(!response5.contains("CONNECT") )
 		{
 			if(response5.contains("BUSY"))
 				switchState(state_dialing);
@@ -201,9 +204,11 @@ void Dialer::trydial(const QString& number)
 		}
 	}
 
+
 	if(state != state_cancel)
 	{
-		switchState(state_online);
+            state = state_online;
+            slotCancel();
 	}
 }
 
@@ -246,14 +251,17 @@ QString Dialer::receive()
 			for(int i = 0; i < ret; i++)
 				buffer[i] = buffer[i] & 0x7F;
 			buffer[ret] = 0;
-			//qWarning("Got: '%s'", buffer);
+			qWarning("Got: %s", buffer);
 			buf.append(QString(buffer));
 			if(buf.contains("OK") || buf.contains("ERROR") || buf.contains("CONNECT") || (buf.contains("BUSY")))
 			{
 				//qWarning("Receiving: '%s'", buf.latin1());
 				cleanshutdown = 1;
 				return buf;
-			}
+			}else if (buf.contains("NO CARRIER") || buf.contains("NO DIALTONE")  ) {
+                            cleanshutdown = 1;
+                            return QString::null;
+                        }
 		}
 		else if(ret < 0)
 		{

@@ -3,6 +3,8 @@
 #include <termios.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdio.h>
+
 #include "io_serial.h"
 
 IOSerial::IOSerial(const Profile &config) : IOLayer(config) {
@@ -164,6 +166,11 @@ void IOSerial::dataArrived() {
         close();
     if (len < 0)
         return;
+    qWarning("got from layer");
+    for (int i = 0; i < len; i++ ) {
+        printf("%c", array[i] );
+    }
+    printf("\n");
     array.resize( len );
     emit received(array);
 }

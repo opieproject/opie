@@ -16,11 +16,13 @@ IOModem::~IOModem() {
 
 void IOModem::close() {
 	// Hangup, discarding result
-	int fd = rawIO();
-	Dialer d(m_profile, fd);
+//	int fd = rawIO();
+        internDetach();
+	Dialer d(m_profile, m_fd);
 	d.setHangupOnly();
-	d.exec();
-	closeRawIO(fd);
+	//d.exec();
+        internAttach();
+//	closeRawIO(fd);
 
     IOSerial::close();
 }
