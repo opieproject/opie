@@ -2,6 +2,7 @@
 
 #include <qapplication.h>
 
+#include <qlayout.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qvariant.h>
