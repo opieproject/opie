@@ -4,7 +4,7 @@ Todo for Opie-Eye
     On small screens one could toggle this Widget into the View but on BigScreen it would
     be a full widget OToggleSplitter
 
-2.) Write a Image Image Widget which uses the cache to get the thumb and the slave to get
+2.) Write a Image Info Widget which uses the cache to get the thumb and the slave to get
     the info and display it. Make use of OKeyConfigManager to manager keys for up and down
     and left and right to switch between views and go from one image to the next. it would
     emit signals (alwin)
