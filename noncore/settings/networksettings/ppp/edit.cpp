@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.2 2003-05-24 16:12:02 tille Exp $
+ * $Id: edit.cpp,v 1.3 2003-05-24 17:03:27 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -71,7 +71,7 @@ DialWidget::DialWidget( QWidget *parent, bool isnewaccount, const char *name )
   QHBoxLayout *lpn = new QHBoxLayout(5);
   tl->addLayout(lpn, 1, 1);
   numbers = new QListBox(this);
-  numbers->setMinimumSize(120, 70);
+//  numbers->setMinimumSize(120, 70);
   lpn->addWidget(numbers);
   QVBoxLayout *lpn1 = new QVBoxLayout;
   lpn->addLayout(lpn1);
@@ -826,38 +826,36 @@ void GatewayWidget::hitGatewaySelect( int i ) {
 ScriptWidget::ScriptWidget( QWidget *parent, bool isnewaccount, const char *name )
   : QWidget(parent, name)
 {
-    QVBoxLayout *tl = new QVBoxLayout(this, 0 );//, KDialog::spacingHint());
+
+  QVBoxLayout *tl = new QVBoxLayout(this, 0 );
   se = new ScriptEdit(this);
   connect(se, SIGNAL(returnPressed()), SLOT(addButton()));
   tl->addWidget(se);
 
   // insert equal-sized buttons
-  QButtonGroup *bbox = new QButtonGroup(this);
-  add = new QPushButton( bbox, i18n("Add") );
-  bbox->insert(add);
+  QHBoxLayout *hl = new QHBoxLayout( this );
+  tl->addLayout( hl );
+  add = new QPushButton( i18n("Add"), this );
+  hl->addWidget( add );
   connect(add, SIGNAL(clicked()), SLOT(addButton()));
-//  bbox->addStretch(1);
-  insert = new QPushButton( bbox, i18n("Insert") );
-  bbox->insert(insert);
+  insert = new QPushButton( i18n("Insert"), this );
+  hl->addWidget( insert );
   connect(insert, SIGNAL(clicked()), SLOT(insertButton()));
-//  bbox->addStretch(1);
-  remove = new QPushButton( bbox, i18n("Remove") );
-  bbox->insert(remove);
+  remove = new QPushButton( i18n("Remove"), this );
+  hl->addWidget( remove );
   connect(remove, SIGNAL(clicked()), SLOT(removeButton()));
-  bbox->layout();
-  tl->addWidget(bbox);
 
   QHBoxLayout *l12 = new QHBoxLayout(0);
   tl->addLayout(l12);
   stl = new QListBox(this);
-  stl->setVScrollBarMode( QScrollView::AlwaysOff );
+//  stl->setVScrollBarMode( QScrollView::AlwaysOff );
   connect(stl, SIGNAL(highlighted(int)), SLOT(stlhighlighted(int)));
-  stl->setMinimumSize(QSize(70, 140));
+//  stl->setMinimumSize(QSize(70, 140));
 
   sl = new QListBox(this);
-  sl->setVScrollBarMode( QScrollView::AlwaysOff );
+//  sl->setVScrollBarMode( QScrollView::AlwaysOff );
   connect(sl, SIGNAL(highlighted(int)), SLOT(slhighlighted(int)));
-  sl->setMinimumSize(QSize(150, 140));
+//  sl->setMinimumSize(QSize(150, 140));
 
   slb = new QScrollBar(this);
 //  slb->setFixedWidth(slb->sizeHint().width());
@@ -1154,19 +1152,25 @@ void ScriptWidget::removeButton() {
 //
 /////////////////////////////////////////////////////////////////////////////
 PhoneNumberDialog::PhoneNumberDialog(QWidget *parent)
-    : QDialog(parent,"PhoneNumberDialog",true) {
+    : QDialog(parent,"PhoneNumberDialog",true)
+{
     setCaption( i18n("Add Phone Number") );
-//  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
 
-  QHBox *hbox = new QHBox(this);
+
+  QVBoxLayout *layout = new QVBoxLayout( this );
+  layout->setSpacing( 3 );
+  layout->setMargin( 3 );
+
+//    QHBox *hbox = new QHBox(this);
 //  setMainWidget(hbox);
 
-  hbox->setSpacing( 2 );//KDialog::spacingHint());
+//  hbox->setSpacing( 2 );//KDialog::spacingHint());
 
-  new QLabel(i18n("Enter a phone number:"), hbox);
+  QLabel *label = new QLabel(this, tr("Enter a phone number:"));
+  layout->addWidget( label );
 
-  le = new QLineEdit(hbox);
-//  le->setMinimumWidth(125);
+  le = new QLineEdit(this, "lineEdit");
+  layout->addWidget( le );
 
   connect(le, SIGNAL(textChanged(const QString &)),
 	  this, SLOT(textChanged(const QString &)));
@@ -1174,7 +1178,7 @@ PhoneNumberDialog::PhoneNumberDialog(QWidget *parent)
   le->setFocus();
   textChanged("");
 
-//  enableButtonSeparator(true);
+
 }
 
 

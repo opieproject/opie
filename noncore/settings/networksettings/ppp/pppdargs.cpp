@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdargs.cpp,v 1.2 2003-05-24 16:12:04 tille Exp $
+ * $Id: pppdargs.cpp,v 1.3 2003-05-24 17:03:27 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -81,19 +81,19 @@ PPPdArguments::PPPdArguments(QWidget *parent, const char *name)
 
   l->addSpacing(5);
 
-  QButtonGroup *bbox = new QButtonGroup(this);
-//  bbox->addStretch(1);
-  closebtn = new QPushButton( bbox, i18n("OK"));
-  bbox->insert(closebtn);
-  connect(closebtn, SIGNAL(clicked()), SLOT(closebutton()));
-  QPushButton *cancel = new QPushButton( bbox, i18n("Cancel"));
-  bbox->insert(cancel);
-  connect(cancel, SIGNAL(clicked()),
-	  this, SLOT(reject()));
-  bbox->layout();
-  l->addWidget(bbox);
+//   QButtonGroup *bbox = new QButtonGroup(this);
+// //  bbox->addStretch(1);
+//   closebtn = new QPushButton( bbox, i18n("OK"));
+//   bbox->insert(closebtn);
+//   connect(closebtn, SIGNAL(clicked()), SLOT(closebutton()));
+//   QPushButton *cancel = new QPushButton( bbox, i18n("Cancel"));
+//   bbox->insert(cancel);
+//   connect(cancel, SIGNAL(clicked()),
+// 	  this, SLOT(reject()));
+//   bbox->layout();
+//   l->addWidget(bbox);
 
-  setFixedSize(sizeHint());
+//   setFixedSize(sizeHint());
 
   //load info from gpppdata
   init();
