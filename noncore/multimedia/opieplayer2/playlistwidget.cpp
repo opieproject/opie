@@ -497,7 +497,7 @@ void PlayListWidget::playIt( QListViewItem *it) {
 
 void PlayListWidget::addToSelection( QListViewItem *it) {
     d->setDocumentUsed = FALSE;
-    qDebug("addToSelection2");
+
     if(it) {
         switch ( whichList()) {
           case 1: {
@@ -723,30 +723,21 @@ void PlayListWidget::openFile() {
                 m3uFile=filename;
             }
 
-            qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+ m3uFile);
-            m3uList = new Om3u( cfg.readEntry("CurrentPlaylist",""), IO_Append | IO_ReadWrite );
-            m3uList->add( filename);
-            m3uList->write();
-            m3uList->close();
-            if(m3uList) delete m3uList;
+//            qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"+ m3uFile);
             lnk.setName( filename ); //sets name
             lnk.setFile( filename ); //sets file name
             lnk.setIcon("opieplayer2/musicfile");
             d->selectedFiles->addToSelection(  lnk );
+            writeCurrentM3u();
         }
         else if( filename.right( 3) == "m3u" ) {
             readm3u( filename );
 
         } else if( filename.right(3) == "pls" ) {
             readPls( filename );
-        }
-        else {
-            m3uList = new Om3u( cfg.readEntry("CurrentPlaylist",""), IO_Append | IO_ReadWrite );
-            m3uList->add( filename);
-            m3uList->write();
-            m3uList->close();
-            if(m3uList) delete m3uList;
+        } else {
             d->selectedFiles->addToSelection(  DocLnk(filename) );
+            writeCurrentM3u();
         }
     }
             
@@ -849,7 +840,7 @@ void PlayListWidget::readPls( const QString &filename ) {
 /*
  writes current playlist to current m3u file */
 void PlayListWidget::writeCurrentM3u() {
-  qDebug("writting to current m3u");
+  qDebug("writing to current m3u");
   Config cfg( "OpiePlayer" );
   cfg.setGroup("PlayList");
   QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
@@ -862,7 +853,7 @@ void PlayListWidget::writeCurrentM3u() {
     m3uList->add( d->selectedFiles->current()->file());
   }
   while ( d->selectedFiles->next() );
-  //    qDebug( list );
+//    qDebug( list );
   m3uList->write();
   m3uList->close();
 
@@ -880,7 +871,7 @@ void PlayListWidget::writem3u() {
 
     if( fileDlg->result() == 1 ) {
         name = fileDlg->text();
-        qDebug( filename );
+//        qDebug( filename );
 
         if( name.left( 1) != "/" ) {
             filename = QPEApplication::documentDir() + "/" + name;
