@@ -31,20 +31,22 @@
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qfont.h>
+#include <qmultilineedit.h>
 
 #include <qpe/fontdatabase.h>
 
 #include "ofontselector.h"
 
 class OFontSelectorPrivate {
-public:
-	QListBox *   m_font_family_list;
-	QComboBox *  m_font_style_list;
-	QComboBox *  m_font_size_list;
+public: 
+	QListBox *      m_font_family_list;
+	QComboBox *     m_font_style_list;
+	QComboBox *     m_font_size_list;
+	QMultiLineEdit *m_preview;
 
-	bool         m_pointbug;
+	bool            m_pointbug;
 
-	FontDatabase m_fdb;
+	FontDatabase    m_fdb;
 };
 
 
@@ -101,7 +103,7 @@ static int qt_version ( )
 }
 
 
-OFontSelector::OFontSelector ( QWidget *parent, const char *name, WFlags fl ) : QWidget ( parent, name, fl )
+OFontSelector::OFontSelector ( bool withpreview, QWidget *parent, const char *name, WFlags fl ) : QWidget ( parent, name, fl )
 {
 	d = new OFontSelectorPrivate ( );
 
@@ -128,6 +130,19 @@ OFontSelector::OFontSelector ( QWidget *parent, const char *name, WFlags fl ) : 
 	gridLayout->addWidget( d-> m_font_size_list, 3, 1 );
 
 	d-> m_pointbug = ( qt_version ( ) <= 233 );
+
+	if ( withpreview ) {
+		d-> m_preview = new QMultiLineEdit ( this, "Preview" );
+		d-> m_preview-> setAlignment ( AlignCenter );
+		d-> m_preview-> setWordWrap ( QMultiLineEdit::WidgetWidth );
+		d-> m_preview-> setMargin ( 3 ); 
+		d-> m_preview-> setText ( tr( "The Quick Brown Fox Jumps Over The Lazy Dog" ));
+		gridLayout-> addRowSpacing ( 5, 4 );
+		gridLayout-> addMultiCellWidget ( d-> m_preview, 6, 6, 0, 1 );
+		gridLayout-> setRowStretch ( 6, 5 );
+	}
+	else
+		d-> m_preview = 0;
 
 	loadFonts ( d-> m_font_family_list );
 }
@@ -304,7 +319,12 @@ void OFontSelector::fontSizeClicked ( int /*index*/ )
 
 void OFontSelector::changeFont ( )
 {
-	emit fontSelected ( selectedFont ( ));
+	QFont f = selectedFont ( );
+
+	if ( d-> m_preview )
+		d-> m_preview-> setFont ( f );
+
+	emit fontSelected ( f );
 }
 
 
@@ -324,4 +344,19 @@ QFont OFontSelector::selectedFont ( )
 	}
 	else
 		return QFont ( );
+}
+
+
+void OFontSelector::resizeEvent ( QResizeEvent *re )
+{
+	if ( d-> m_preview ) {
+		d-> m_preview-> setMinimumHeight ( 1 );
+		d-> m_preview-> setMaximumHeight ( 32767 );
+	}
+
+	QWidget::resizeEvent ( re );
+	
+	if ( d-> m_preview )
+		d-> m_preview-> setFixedHeight ( d-> m_preview-> height ( ));
+		
 }

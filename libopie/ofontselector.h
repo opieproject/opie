@@ -40,7 +40,7 @@ class OFontSelector : public QWidget
     Q_OBJECT
 
 public:
-    OFontSelector ( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    OFontSelector ( bool withpreview, QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     virtual ~OFontSelector ( );
 
 	bool selectedFont ( QString &family, QString &style, int &size );
@@ -63,6 +63,9 @@ protected slots:
     virtual void fontFamilyClicked ( int );
     virtual void fontStyleClicked ( int );
     virtual void fontSizeClicked ( int );
+
+protected:
+	virtual void resizeEvent ( QResizeEvent *re );
 
 private:
 	void loadFonts ( QListBox * );
