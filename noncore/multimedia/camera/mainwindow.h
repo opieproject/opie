@@ -64,7 +64,7 @@ class CameraMainWindow: public QMainWindow
 
   protected slots:
     #ifndef QT_NO_DEBUG
-    void doSomething();     // solely for debugging purposes
+    //void doSomething();     // solely for debugging purposes
     #endif
 
   private:
