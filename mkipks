@@ -8,6 +8,9 @@ mkdir -p etc/rc2.d
 rm -f etc/rc2.d/S98qpe
 ln -s ../init.d/qpe etc/rc2.d/S98qpe
 
+rm -f ipaq/etc/rc2.d/S96opieatd
+ln -s ../init.d/opieatd ipaq/etc/rc2.d/S96opieatd
+
 VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\..*\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
 VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION ".*\.\([0-9]*\)\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
 VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION ".*\..*\.\([0-9]*\).*/\1/p' <$OPIEDIR/include/qpe/version.h)
@@ -192,7 +195,7 @@ do
 	    echo "Depends: $depends" >>$CTRLDIR/control
 	    echo "Provides: $provides" >>$CTRLDIR/control
 	    echo "Conflicts: $conflicts" >>$CTRLDIR/control
-	    egrep -v "^(Files|Version|Depends):" >>$CTRLDIR/control $i
+	    egrep -v "^(Files|Version|Depends|Provides|Conflicts):" >>$CTRLDIR/control $i
 	    echo "$DEB_VERSION" >$TDIR/debian-binary
 	    base=${i%.control}
 	    scripts="preinst postinst prerm postrm"

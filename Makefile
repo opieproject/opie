@@ -45,7 +45,7 @@ APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     noncore/tictac noncore/opieftp noncore/drawpad noncore/kcheckers noncore/appskey noncore/qpdf \
     noncore/kpacman noncore/advancedfm noncore/kbill noncore/remote noncore/opie-sh
 
-NONTMAKEAPPS := noncore/nethack
+NONTMAKEAPPS := ipaq/opiealarm noncore/nethack
 
 DOCS = docs/src/opie-policy
 single: mpegplayer/libmpeg3
