@@ -43,20 +43,20 @@ static bool isCF(const QString& m)
     if (!f) f = fopen("/var/state/pcmcia/stab", "r");
     if (!f) f = fopen("/var/lib/pcmcia/stab", "r");
     if ( f ) {
-	char line[1024];
-	char devtype[80];
-	char devname[80];
-	while ( fgets( line, 1024, f ) ) {
-	    // 0       ide     ide-cs  0       hda     3       0
-	    if ( sscanf(line,"%*d %s %*s %*s %s", devtype, devname )==2 )
-	    {
-		if ( QString(devtype) == "ide" && m.find(devname)>0 ) {
-		    fclose(f);
-		    return TRUE;
-		}
-	    }
-	}
-	fclose(f);
+  char line[1024];
+  char devtype[80];
+  char devname[80];
+  while ( fgets( line, 1024, f ) ) {
+      // 0       ide     ide-cs  0       hda     3       0
+      if ( sscanf(line,"%*d %s %*s %*s %s", devtype, devname )==2 )
+      {
+    if ( QString(devtype) == "ide" && m.find(devname)>0 ) {
+        fclose(f);
+        return TRUE;
+    }
+      }
+  }
+  fclose(f);
     }
     return FALSE;
 }
@@ -67,15 +67,15 @@ StorageInfo::StorageInfo( QObject *parent )
     mFileSystems.setAutoDelete( TRUE );
     channel = new QCopChannel( "QPE/Card", this );
     connect( channel, SIGNAL(received(const QCString &, const QByteArray &)),
-	     this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
+       this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
     update();
 }
 
 const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
 {
     for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i) {
-	if ( filename.startsWith( (*i)->path() ) )
-	     return (*i);
+  if ( filename.startsWith( (*i)->path() ) )
+       return (*i);
     }
     return 0;
 }
@@ -84,7 +84,7 @@ const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
 void StorageInfo::cardMessage( const QCString& msg, const QByteArray& )
 {
     if ( msg == "mtabChanged()" )
-	update();
+  update();
 }
 // cause of the lack of a d pointer we need
 // to store informations in a config file :(
@@ -101,66 +101,69 @@ void StorageInfo::update()
     bool rebuild = FALSE;
     int n=0;
     if ( mntfp ) {
-	while ( (me = getmntent( mntfp )) != 0 ) {
-	    QString fs = me->mnt_fsname;
-	    if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
-		    || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd" )
-	    {
-		n++;
-		curdisks.append(fs);
-		curopts.append( me->mnt_opts );
-		//qDebug("-->fs %s opts %s", fs.latin1(), me->mnt_opts );
-		curfs.append( me->mnt_dir );
-		bool found = FALSE;
-		for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i) {
-		    if ( (*i)->disk() == fs ) {
-			found = TRUE;
-			break;
-		    }
-		}
-		if ( !found )
-		    rebuild = TRUE;
-	    }
-	}
-	endmntent( mntfp );
+  while ( (me = getmntent( mntfp )) != 0 ) {
+      QString fs = me->mnt_fsname;
+      if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
+        || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
+        ||  fs.left(8)=="/dev/ram")
+      {
+    n++;
+    curdisks.append(fs);
+    curopts.append( me->mnt_opts );
+    //qDebug("-->fs %s opts %s", fs.latin1(), me->mnt_opts );
+    curfs.append( me->mnt_dir );
+    bool found = FALSE;
+    for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i) {
+        if ( (*i)->disk() == fs ) {
+      found = TRUE;
+      break;
+        }
+    }
+    if ( !found )
+        rebuild = TRUE;
+      }
+  }
+  endmntent( mntfp );
     }
     if ( rebuild || n != (int)mFileSystems.count() ) {
-	mFileSystems.clear();
-	QStringList::ConstIterator it=curdisks.begin();
-	QStringList::ConstIterator fsit=curfs.begin();
-	QStringList::ConstIterator optsIt=curopts.begin();
-	for (; it!=curdisks.end(); ++it, ++fsit, ++optsIt) {
-	    QString opts = *optsIt;
-	
-	    QString disk = *it;	
-	    QString humanname;
-	    bool removable = FALSE;
-	    if ( isCF(disk) ) {
-		humanname = tr("CF Card");
-		removable = TRUE;
-	    } else if ( disk == "/dev/hda1" ) {
-		humanname = tr("Hard Disk");
-	    } else if ( disk.left(9) == "/dev/mmcd" ) {
-		humanname = tr("SD Card");
-		removable = TRUE;
-	    } else if ( disk.left(7) == "/dev/hd" )
-		humanname = tr("Hard Disk") + " " + humanname.mid(7);
-	    else if ( disk.left(7) == "/dev/sd" )
-		humanname = tr("SCSI Hard Disk") + " " + humanname.mid(7);
-	    else if ( disk == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
-		humanname = tr("Internal Storage");
-	    else if ( disk.left(14) == "/dev/mtdblock/" )
-		humanname = tr("Internal Storage") + " " + humanname.mid(14);
-	    else if ( disk.left(13) == "/dev/mtdblock" )
-		humanname = tr("Internal Storage") + " " + humanname.mid(13);
-	    FileSystem *fs = new FileSystem( disk, *fsit, humanname, removable, opts );
-	    mFileSystems.append( fs );
-	}
-	emit disksChanged();
+  mFileSystems.clear();
+  QStringList::ConstIterator it=curdisks.begin();
+  QStringList::ConstIterator fsit=curfs.begin();
+  QStringList::ConstIterator optsIt=curopts.begin();
+  for (; it!=curdisks.end(); ++it, ++fsit, ++optsIt) {
+      QString opts = *optsIt;
+  
+      QString disk = *it; 
+      QString humanname;
+      bool removable = FALSE;
+      if ( isCF(disk) ) {
+    humanname = tr("CF Card");
+    removable = TRUE;
+      } else if ( disk == "/dev/hda1" ) {
+    humanname = tr("Hard Disk");
+      } else if ( disk.left(9) == "/dev/mmcd" ) {
+    humanname = tr("SD Card");
+    removable = TRUE;
+      } else if ( disk.left(7) == "/dev/hd" )
+    humanname = tr("Hard Disk") + " " + humanname.mid(7);
+      else if ( disk.left(7) == "/dev/sd" )
+    humanname = tr("SCSI Hard Disk") + " " + humanname.mid(7);
+      else if ( disk == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
+    humanname = tr("Internal Storage");
+      else if ( disk.left(14) == "/dev/mtdblock/" )
+    humanname = tr("Internal Storage") + " " + humanname.mid(14);
+      else if ( disk.left(13) == "/dev/mtdblock" )
+    humanname = tr("Internal Storage") + " " + humanname.mid(13);
+      else if ( disk.left(10) == "/dev/ramfs" )
+    humanname = tr("Internal Storage") + " " + humanname.mid(10);
+      FileSystem *fs = new FileSystem( disk, *fsit, humanname, removable, opts );
+      mFileSystems.append( fs );
+  }
+  emit disksChanged();
     } else {
-	// just update them
-	for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
-	    i.current()->update();
+  // just update them
+  for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i)
+      i.current()->update();
     }
 #endif
 }
@@ -178,13 +181,13 @@ void FileSystem::update()
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
     struct statfs fs;
     if ( !statfs( fspath.latin1(), &fs ) ) {
-	blkSize = fs.f_bsize;
-	totalBlks = fs.f_blocks;
-	availBlks = fs.f_bavail;
+  blkSize = fs.f_bsize;
+  totalBlks = fs.f_blocks;
+  availBlks = fs.f_bavail;
     } else {
-	blkSize = 0;
-	totalBlks = 0;
-	availBlks = 0;
+  blkSize = 0;
+  totalBlks = 0;
+  availBlks = 0;
     }
 #endif
 }
