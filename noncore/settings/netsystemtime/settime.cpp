@@ -268,6 +268,8 @@ void  SetDateTime::setTime(QDateTime dt)
   // to allow the alarm server to get a better grip on itself
   // (example re-trigger alarms for when we travel back in time)
   DateBookDB db;
+  QCopEnvelope timeApplet( "QPE/TaskBar", "reloadApplets()" );
+  timeApplet << "";
   // Restore screensaver
   QCopEnvelope enableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
   enableScreenSaver << -1 << -1 << -1;
