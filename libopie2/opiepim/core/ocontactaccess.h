@@ -13,11 +13,15 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.5 2002-11-13 14:14:51 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.6 2003-01-02 14:27:12 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.5  2002-11-13 14:14:51  eilers
+ * Revision 1.6  2003-01-02 14:27:12  eilers
+ * Improved query by example: Search by date is possible.. First step
+ * for a today plugin for birthdays..
+ *
+ * Revision 1.5  2002/11/13 14:14:51  eilers
  * Added sorted for Contacts..
  *
  * Revision 1.4  2002/11/01 15:10:42  eilers
@@ -88,7 +92,11 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 		IgnoreCase = 0x0002,
 		RegExp     = 0x0004,
 		ExactMatch = 0x0008,
-		MatchOne   = 0x0010  // Only one Entry must match
+		MatchOne   = 0x0010, // Only one Entry must match
+		DateDiff   = 0x0020, // Find all entries from today until given date
+		DateYear   = 0x0040, // The year matches
+		DateMonth  = 0x0080, // The month matches
+		DateDay    = 0x0100, // The day matches
 	};
 
 	

@@ -13,11 +13,15 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.9 2002-12-08 12:48:57 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.10 2003-01-02 14:27:12 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.9  2002-12-08 12:48:57  eilers
+ * Revision 1.10  2003-01-02 14:27:12  eilers
+ * Improved query by example: Search by date is possible.. First step
+ * for a today plugin for birthdays..
+ *
+ * Revision 1.9  2002/12/08 12:48:57  eilers
  * Moved journal-enum from ocontact into i the xml-backend..
  *
  * Revision 1.8  2002/11/14 17:04:24  eilers
@@ -60,6 +64,7 @@
 #include <qregexp.h>
 #include <qarray.h>
 #include <qmap.h>
+#include <qdatetime.h> 
 
 #include <qpe/global.h>
 
@@ -225,38 +230,89 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			/* Search all fields and compare them with query object. Store them into list
 			 * if all fields matches.
 			 */
+			QDate* queryDate = 0l;
+			QDate* checkDate = 0l;
 			bool allcorrect = true;
-			for ( int i = 0; i < Qtopia::rid; i++ ) {
-				/* Just compare fields which are not empty in the query object */
-				if ( !query.field(i).isEmpty() ){
-					switch ( settings & ~OContactAccess::IgnoreCase ){
-					case OContactAccess::RegExp:{
-						QRegExp expr ( query.field(i),
-							       !(settings & OContactAccess::IgnoreCase),
-							       false );
-						if ( expr.find ( (*it).field(i), 0 ) == -1 )
-							allcorrect = false;
+			for ( int i = 0; i < Qtopia::Groups; i++ ) {
+				// Birthday and anniversary are special nonstring fields and should
+				// be handled especially
+				switch ( i ){
+				case Qtopia::Birthday:
+					queryDate = new QDate( query.birthday() );
+					checkDate = new QDate( (*it).birthday() );
+				case Qtopia::Anniversary:
+					if ( queryDate == 0l ){
+						queryDate = new QDate( query.anniversary() );
+						checkDate = new QDate( (*it).anniversary() );
 					}
-						break;
-					case OContactAccess::WildCards:{
-						QRegExp expr ( query.field(i),
-							       !(settings & OContactAccess::IgnoreCase),
-							       true );
-						if ( expr.find ( (*it).field(i), 0 ) == -1 )
-							allcorrect = false;
-					}
-						break;
-					case OContactAccess::ExactMatch:{
-						if (settings & OContactAccess::IgnoreCase){
-							if ( query.field(i).upper() !=
-							     (*it).field(i).upper() )
+					
+					if ( queryDate->isValid() ){
+						if ( settings & OContactAccess::DateYear ){
+							if ( queryDate->year() != checkDate->year() )
 								allcorrect = false;
-						}else{
-							if ( query.field(i) != (*it).field(i) )
+						} 
+						if ( settings & OContactAccess::DateMonth ){
+							if ( queryDate->month() != checkDate->month() )
 								allcorrect = false;
+						} 
+						if ( settings & OContactAccess::DateDay ){
+							if ( queryDate->day() != checkDate->day() )
+								allcorrect = false;
+						} 
+						if ( settings & OContactAccess::DateDiff ) {
+							QDate current = QDate::currentDate();
+							if ( current.daysTo( *queryDate ) > 0 ){
+								if ( !( ( *checkDate >= current ) && 
+									( *checkDate <= *queryDate ) ) )
+									allcorrect = false;
+							}
 						}
 					}
-						break;
+
+					delete queryDate;
+					queryDate = 0l;
+					delete checkDate;
+					checkDate = 0l;
+					break;
+				default:
+					/* Just compare fields which are not empty in the query object */
+					if ( !query.field(i).isEmpty() ){
+						switch ( settings & ~( OContactAccess::IgnoreCase
+								       | OContactAccess::DateDiff
+								       | OContactAccess::DateYear
+								       | OContactAccess::DateMonth
+								       | OContactAccess::DateDay
+								       | OContactAccess::MatchOne 
+								      ) ){
+
+						case OContactAccess::RegExp:{
+							QRegExp expr ( query.field(i),
+								       !(settings & OContactAccess::IgnoreCase),
+								       false );
+							if ( expr.find ( (*it).field(i), 0 ) == -1 )
+								allcorrect = false;
+						}
+							break;
+						case OContactAccess::WildCards:{
+							QRegExp expr ( query.field(i),
+								       !(settings & OContactAccess::IgnoreCase),
+								       true );
+							if ( expr.find ( (*it).field(i), 0 ) == -1 )
+								allcorrect = false;
+						}
+							break;
+						case OContactAccess::ExactMatch:{
+							if (settings & OContactAccess::IgnoreCase){
+								if ( query.field(i).upper() !=
+								     (*it).field(i).upper() )
+									allcorrect = false;
+							}else{
+								if ( query.field(i) != (*it).field(i) )
+									allcorrect = false;
+							}
+						}
+							break;
+						}
 					}
 				}
 			}
@@ -291,18 +347,33 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 	const uint querySettings()
 		{
 			return ( OContactAccess::WildCards
-				 & OContactAccess::IgnoreCase
-				 & OContactAccess::RegExp
-				 & OContactAccess::ExactMatch );
+				 | OContactAccess::IgnoreCase
+				 | OContactAccess::RegExp
+				 | OContactAccess::ExactMatch 
+				 | OContactAccess::DateDiff
+				 | OContactAccess::DateYear
+				 | OContactAccess::DateMonth
+				 | OContactAccess::DateDay
+				);
 		}
 	
 	bool hasQuerySettings (uint querySettings) const
 		{
-			/* OContactAccess::IgnoreCase may be added with one
-			 * of the other settings, but never used alone.
-			 * The other settings are just valid alone...
+			/* OContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay 
+			 * may be added with any of the other settings. IgnoreCase should never used alone.
+			 * Wildcards, RegExp, ExactMatch should never used at the same time...
 			 */
-			switch ( querySettings & ~OContactAccess::IgnoreCase ){
+
+			if ( querySettings == OContactAccess::IgnoreCase ) 
+				return false;
+
+			switch ( querySettings & ~( OContactAccess::IgnoreCase
+						    | OContactAccess::DateDiff
+						    | OContactAccess::DateYear
+						    | OContactAccess::DateMonth
+						    | OContactAccess::DateDay
+						  ) 
+			       ){
 			case OContactAccess::RegExp:
 				return ( true );
 			case OContactAccess::WildCards:
