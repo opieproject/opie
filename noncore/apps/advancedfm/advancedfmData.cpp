@@ -29,84 +29,82 @@
 
 using namespace Opie::Ui;
 void AdvancedFm::init() {
-#if defined(QT_QWS_OPIE)
-    qDebug("<<<<<<<<<<<<<<<<<<<<<<<< OPIE!!!");
-#endif
-    setCaption( tr( "AdvancedFm" ) );
+	 b = false;
+	 setCaption( tr( "AdvancedFm" ) );
 
-    QVBoxLayout *layout = new QVBoxLayout( this );
-    layout->setSpacing( 2);
-    layout->setMargin( 0); // squeeze
+	 QVBoxLayout *layout = new QVBoxLayout( this );
+	 layout->setSpacing( 2);
+	 layout->setMargin( 0); // squeeze
 
- QMenuBar *menuBar = new QMenuBar(this);
- menuBar->setMargin( 0 ); // squeeze
-  fileMenu = new QPopupMenu( this );
-  viewMenu  = new QPopupMenu( this );
+	 QMenuBar *menuBar = new QMenuBar(this);
+	 menuBar->setMargin( 0 ); // squeeze
+	 fileMenu = new QPopupMenu( this );
+	 viewMenu  = new QPopupMenu( this );
 //  customDirMenu  = new QPopupMenu( this );
 
-  layout->addWidget( menuBar );
+	 layout->addWidget( menuBar );
 
-  menuBar->insertItem( tr( "File" ), fileMenu);
-  menuBar->insertItem( tr( "View" ), viewMenu);
+	 menuBar->insertItem( tr( "File" ), fileMenu);
+	 menuBar->insertItem( tr( "View" ), viewMenu);
 
-  cdUpButton = new QToolButton( 0,"cdUpButton");
-  cdUpButton->setPixmap(Resource::loadPixmap("up"));
-  cdUpButton->setAutoRaise( true );
-  menuBar->insertItem( cdUpButton );
+	 cdUpButton = new QToolButton( 0,"cdUpButton");
+	 cdUpButton->setPixmap(Resource::loadPixmap("up"));
+	 cdUpButton->setAutoRaise( true );
+	 menuBar->insertItem( cdUpButton );
 
 
 
-  qpeDirButton= new QToolButton( 0,"QPEButton");
-  qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
-  qpeDirButton->setAutoRaise( true );
-  menuBar->insertItem( qpeDirButton );
+	 qpeDirButton= new QToolButton( 0,"QPEButton");
+	 qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
+	 qpeDirButton->setAutoRaise( true );
+	 menuBar->insertItem( qpeDirButton );
 
-  cfButton = new QToolButton( 0, "CFButton");
-  cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
-  cfButton->setAutoRaise( true );
-  menuBar->insertItem( cfButton );
+	 cfButton = new QToolButton( 0, "CFButton");
+	 cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
+	 cfButton->setAutoRaise( true );
+	 menuBar->insertItem( cfButton );
 
-  sdButton = new QToolButton( 0, "SDButton");
-  sdButton->setPixmap(Resource::loadPixmap("advancedfm/sdcard"));
-  sdButton->setAutoRaise( true );
-  menuBar->insertItem( sdButton );
+	 sdButton = new QToolButton( 0, "SDButton");
+	 sdButton->setPixmap(Resource::loadPixmap("advancedfm/sdcard"));
+	 sdButton->setAutoRaise( true );
+	 menuBar->insertItem( sdButton );
 
-  docButton = new QToolButton( 0,"docsButton");
-  docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
-  docButton->setAutoRaise( true );
-  menuBar->insertItem( docButton );
+	 docButton = new QToolButton( 0,"docsButton");
+	 docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
+	 docButton->setAutoRaise( true );
+	 menuBar->insertItem( docButton );
 
-  homeButton = new QToolButton( 0, "homeButton");
-  homeButton->setPixmap(Resource::loadPixmap("home"));
-  homeButton->setAutoRaise( true );
-  menuBar->insertItem( homeButton );
+	 homeButton = new QToolButton( 0, "homeButton");
+	 homeButton->setPixmap(Resource::loadPixmap("home"));
+	 homeButton->setAutoRaise( true );
+	 menuBar->insertItem( homeButton );
 
-  fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
-  fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
-  fileMenu->insertSeparator();
-  fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
-  fileMenu->insertSeparator();
-  fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
-  fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
-  fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
-  fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
-  fileMenu->insertSeparator();
-  fileMenu->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
-  fileMenu->insertItem( tr( "Select All" ), this, SLOT( selectAll() ));
-  fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
-  fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
-  fileMenu->setCheckable(TRUE);
+	 fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showMenuHidden() ));
+	 fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
+	 fileMenu->insertSeparator();
+	 fileMenu->insertItem( tr( "File Search" ), this, SLOT( openSearch() ));
+	 fileMenu->insertSeparator();
+	 fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
+	 fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
+	 fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
+	 fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
+	 fileMenu->insertSeparator();
+	 fileMenu->insertItem( tr( "Make Symlink" ), this, SLOT( mkSym() ));
+	 fileMenu->insertItem( tr( "Select All" ), this, SLOT( selectAll() ));
+	 fileMenu->insertItem( tr( "Add To Documents" ), this, SLOT( addToDocs() ));
+	 fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
+	 fileMenu->setCheckable(TRUE);
 
-  viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
-  viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
+	 viewMenu->insertItem( tr( "Switch to View 1" ), this, SLOT( switchToLocalTab()));
+	 viewMenu->insertItem( tr( "Switch to View 2" ), this, SLOT( switchToRemoteTab()));
 //     viewMenu->insertSeparator();
 //     viewMenu->insertItem( tr( "About" ), this, SLOT( doAbout() ));
-  viewMenu->setCheckable(true);
-  viewMenu->setItemChecked( viewMenu->idAt(0), true);
-  viewMenu->setItemChecked( viewMenu->idAt(1), false);
+	 viewMenu->setCheckable(true);
+	 viewMenu->setItemChecked( viewMenu->idAt(0), true);
+	 viewMenu->setItemChecked( viewMenu->idAt(1), false);
 
-  s_addBookmark = tr("Bookmark Directory");
-  s_removeBookmark = tr("Remove Current Directory from Bookmarks");
+	 s_addBookmark = tr("Bookmark Directory");
+	 s_removeBookmark = tr("Remove Current Directory from Bookmarks");
 
 //    menuButton->insertItem("");
 
@@ -114,132 +112,131 @@ void AdvancedFm::init() {
 //     customDirMenu->insertItem(tr("Remove This Directory"));
 //     customDirMenu->insertSeparator();
 
-  QHBoxLayout *CBHB = new QHBoxLayout(); // parent layout will be set later
-  CBHB->setMargin( 0 );
-  CBHB->setSpacing( 1 );
+	 QHBoxLayout *CBHB = new QHBoxLayout(); // parent layout will be set later
+	 CBHB->setMargin( 0 );
+	 CBHB->setSpacing( 1 );
 
-  menuButton = new MenuButton( this );
+	 menuButton = new MenuButton( this );
 
-  menuButton->setUseLabel(false);
-  menuButton->setMaximumWidth( 20 );
-  menuButton->insertItem( s_addBookmark);
-  menuButton->insertItem( s_removeBookmark);
-  menuButton->insertSeparator();
-  menuButton->setFocusPolicy(NoFocus);
-  CBHB->addWidget( menuButton );
+	 menuButton->setUseLabel(false);
+	 menuButton->setMaximumWidth( 20 );
+	 menuButton->insertItem( s_addBookmark);
+	 menuButton->insertItem( s_removeBookmark);
+	 menuButton->insertSeparator();
+	 menuButton->setFocusPolicy(NoFocus);
+	 CBHB->addWidget( menuButton );
 
-  customDirsToMenu();
+	 customDirsToMenu();
 
-  currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
-  currentPathCombo->setEditable(TRUE);
-  currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
-  currentPathCombo->setFocusPolicy(NoFocus);
-  CBHB->addWidget( currentPathCombo );
+	 currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
+	 currentPathCombo->setEditable(TRUE);
+	 currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
+	 currentPathCombo->setFocusPolicy(NoFocus);
+	 CBHB->addWidget( currentPathCombo );
 
-  layout->addLayout( CBHB );
+	 layout->addLayout( CBHB );
 
-  TabWidget = new OSplitter( Horizontal, this, "TabWidget" );
+	 TabWidget = new OSplitter( Horizontal, this, "TabWidget" );
 //  TabWidget = new QTabWidget( this, "TabWidget" );
-  layout->addWidget( TabWidget, 4 );
+	 layout->addWidget( TabWidget, 4 );
 
-  tab = new QWidget( TabWidget, "tab" );
-  tabLayout = new QGridLayout( tab );
-  tabLayout->setSpacing( 2);
-  tabLayout->setMargin( 2);
+	 tab = new QWidget( TabWidget, "tab" );
+	 tabLayout = new QGridLayout( tab );
+	 tabLayout->setSpacing( 2);
+	 tabLayout->setMargin( 2);
 
-  Local_View = new QListView( tab, "Local_View" );
-  Local_View->addColumn( tr("File"),130);
-  Local_View->addColumn( tr("Size"),-1);
-  Local_View->setColumnAlignment(1,QListView::AlignRight);
-  Local_View->addColumn( tr("Date"),-1);
-  Local_View->setColumnAlignment(2,QListView::AlignRight);
-  Local_View->setAllColumnsShowFocus(TRUE);
-  Local_View->setMultiSelection( TRUE );
-  Local_View->setSelectionMode(QListView::Extended);
-  Local_View->setFocusPolicy(StrongFocus);
-  Local_View->installEventFilter( this );
+	 Local_View = new QListView( tab, "Local_View" );
+	 Local_View->addColumn( tr("File"),130);
+	 Local_View->addColumn( tr("Size"),-1);
+	 Local_View->setColumnAlignment(1,QListView::AlignRight);
+	 Local_View->addColumn( tr("Date"),-1);
+	 Local_View->setColumnAlignment(2,QListView::AlignRight);
+	 Local_View->setAllColumnsShowFocus(TRUE);
+	 Local_View->setMultiSelection( TRUE );
+	 Local_View->setSelectionMode(QListView::Extended);
+	 Local_View->setFocusPolicy(StrongFocus);
+	 Local_View->installEventFilter( this );
 
-  QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
+	 QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
-  tabLayout->addWidget( Local_View, 0, 0 );
+	 tabLayout->addWidget( Local_View, 0, 0 );
 
-  TabWidget->addWidget( tab,"advancedfm/smFileBrowser.png", tr("1"));
+	 TabWidget->addWidget( tab,"advancedfm/smFileBrowser.png", tr("1"));
 //  TabWidget->insertTab( tab, tr("1"));
 
-  tab_2 = new QWidget( TabWidget, "tab_2" );
-  tabLayout_2 = new QGridLayout( tab_2 );
-  tabLayout_2->setSpacing( 2);
-  tabLayout_2->setMargin( 2);
+	 tab_2 = new QWidget( TabWidget, "tab_2" );
+	 tabLayout_2 = new QGridLayout( tab_2 );
+	 tabLayout_2->setSpacing( 2);
+	 tabLayout_2->setMargin( 2);
 
-  Remote_View = new QListView( tab_2, "Remote_View" );
-  Remote_View->addColumn( tr("File"),130);
-  Remote_View->addColumn( tr("Size"),-1);
-  Remote_View->setColumnAlignment(1,QListView::AlignRight);
-  Remote_View->addColumn( tr("Date"),-1);
-  Remote_View->setColumnAlignment(2,QListView::AlignRight);
-  Remote_View->setAllColumnsShowFocus(TRUE);
-  Remote_View->setMultiSelection( TRUE );
-  Remote_View->setSelectionMode(QListView::Extended);
-  Remote_View->setFocusPolicy(StrongFocus);
-  Remote_View->installEventFilter( this );
+	 Remote_View = new QListView( tab_2, "Remote_View" );
+	 Remote_View->addColumn( tr("File"),130);
+	 Remote_View->addColumn( tr("Size"),-1);
+	 Remote_View->setColumnAlignment(1,QListView::AlignRight);
+	 Remote_View->addColumn( tr("Date"),-1);
+	 Remote_View->setColumnAlignment(2,QListView::AlignRight);
+	 Remote_View->setAllColumnsShowFocus(TRUE);
+	 Remote_View->setMultiSelection( TRUE );
+	 Remote_View->setSelectionMode(QListView::Extended);
+	 Remote_View->setFocusPolicy(StrongFocus);
+	 Remote_View->installEventFilter( this );
 
-  QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
+	 QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
-  tabLayout_2->addWidget( Remote_View, 0, 0 );
+	 tabLayout_2->addWidget( Remote_View, 0, 0 );
 
-  TabWidget->addWidget( tab_2, "advancedfm/smFileBrowser.png",tr( "2"));
-  TabWidget->setSizeChange( 370 );
+	 TabWidget->addWidget( tab_2, "advancedfm/smFileBrowser.png",tr( "2"));
+	 TabWidget->setSizeChange( 370 );
 //  TabWidget->insertTab( tab_2, tr( "2"));
 
-  /*     tab_3 = new QWidget( TabWidget, "tab_3" );
-         tabLayout_3 = new QGridLayout( tab_3 );
-         tabLayout_3->setSpacing( 2);
-         tabLayout_3->setMargin( 2);
+	 /*     tab_3 = new QWidget( TabWidget, "tab_3" );
+					tabLayout_3 = new QGridLayout( tab_3 );
+					tabLayout_3->setSpacing( 2);
+					tabLayout_3->setMargin( 2);
 
 
-         //     OFileDialog fileDialog;
-         // fileDialog;
-         //    fileSelector = new FileSelector( "*",tab_3, "fileselector" , FALSE, FALSE); //buggy
-         //     fileDialog = new OFileDialog("bangalow", tab_3, 4, 2, "Bungalow");
-         //      OFileSelector fileDialog = new OFileSelector( tab_3, 4, 2,"/");
+					//     OFileDialog fileDialog;
+					// fileDialog;
+					//    fileSelector = new FileSelector( "*",tab_3, "fileselector" , FALSE, FALSE); //buggy
+					//     fileDialog = new OFileDialog("bangalow", tab_3, 4, 2, "Bungalow");
+					//      OFileSelector fileDialog = new OFileSelector( tab_3, 4, 2,"/");
 
-         QListView *fileTree;
-         fileTree = new QListView( tab_3, "tree" );
-
-
-         tabLayout_3->addMultiCellWidget( fileTree, 0, 0, 0, 3 );
-
-         TabWidget->insertTab( tab_3, tr( "Remote" ) );
-  */
-
-  ///////////////
-
-    if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
-          zaurusDevice=TRUE;
-    else
-          zaurusDevice=FALSE;
+					QListView *fileTree;
+					fileTree = new QListView( tab_3, "tree" );
 
 
-  if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
-     qDebug("not have sd");
-     sdButton->hide();
-  }
-  if( !StorageInfo::hasCf() ) {
-     qDebug("not have cf");
-     cfButton->hide();
-  }
-  currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-  currentDir.setPath( QDir::currentDirPath());
+					tabLayout_3->addMultiCellWidget( fileTree, 0, 0, 0, 3 );
 
-  currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
-  currentRemoteDir.setPath( QDir::currentDirPath());
+					TabWidget->insertTab( tab_3, tr( "Remote" ) );
+	 */
 
-  //  b = TRUE;
+	 ///////////////
 
-  filterStr="*";
-  b=FALSE;
-  showMenuHidden();
-  TabWidget->setCurrentWidget(0);
+	 if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
+			zaurusDevice=TRUE;
+	 else
+			zaurusDevice=FALSE;
+
+
+	 if( !StorageInfo::hasSd() || !StorageInfo::hasMmc()) {
+			qDebug("not have sd");
+			sdButton->hide();
+	 }
+	 if( !StorageInfo::hasCf() ) {
+			qDebug("not have cf");
+			cfButton->hide();
+	 }
+	 currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+	 currentDir.setPath( QDir::currentDirPath());
+
+	 currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
+	 currentRemoteDir.setPath( QDir::currentDirPath());
+
+	 //  b = TRUE;
+
+	 filterStr="*";
+	 showMenuHidden();
+	 TabWidget->setCurrentWidget(0);
 
 }
 
