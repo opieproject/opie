@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qfileinfo.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qfileinfo.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QFileInfo class
 **
@@ -635,6 +635,8 @@ QDateTime QFileInfo::lastRead() const
     This function returns the same as filePath(), unless isRelative()
     is TRUE.
 
+    If the QFileInfo is empty it returns QDir::currentDirPath().
+
     This function can be time consuming under Unix (in the order of
     milliseconds).
 
@@ -644,7 +646,7 @@ QString QFileInfo::absFilePath() const
 {
     QString tmp;
     if ( QDir::isRelativePath(fn)
-#if defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
+#if defined(Q_OS_WIN32)
 	 && fn[1] != ':'
 #endif
 	 ) {

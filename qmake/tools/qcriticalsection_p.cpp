@@ -1,9 +1,7 @@
 /****************************************************************************
-** $Id: qcriticalsection_p.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qcriticalsection_p.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QCriticalSection class
-**
-** Created : 
 **
 ** Copyright (C) 2001 Trolltech AS.  All rights reserved.
 **

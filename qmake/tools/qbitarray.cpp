@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qbitarray.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qbitarray.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QBitArray class
 **
@@ -197,7 +197,8 @@ void QBitArray::pad0()
 
 /*!
     Resizes the bit array to \a size bits and returns TRUE if the bit
-    array could be resized; otherwise returns FALSE.
+    array could be resized; otherwise returns FALSE. The array becomes
+    a null array if \a size == 0.
 
     If the array is expanded, the new bits are set to 0.
 

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qstrlist.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qstrlist.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QStrList, QStrIList and QStrListIterator classes
 **
@@ -45,10 +45,12 @@
 #endif // QT_H
 
 
+#ifndef QT_QWINEXPORT
 #if defined(Q_TEMPLATEDLL)
 Q_TEMPLATE_EXTERN template class Q_EXPORT QPtrList<char>;
 Q_TEMPLATE_EXTERN template class Q_EXPORT QPtrListIterator<char>;
 #endif
+#endif /* QT_QWINEXPORT */
 
 #if defined(Q_QDOC)
 class QStrListIterator : public QPtrListIterator<char>

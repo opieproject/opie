@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qgdict.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qgdict.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QGDict and QGDictIterator classes
 **
@@ -204,7 +204,10 @@ QGDict::QGDict( uint len, KeyType kt, bool caseSensitive, bool copyKeys )
 
 void QGDict::init( uint len, KeyType kt, bool caseSensitive, bool copyKeys )
 {
-    vec = new QBaseBucket *[vlen = len];		// allocate hash table
+    vlen = len;
+    if ( vlen == 0 )
+	vlen = 17;
+    vec = new QBaseBucket *[vlen];
     Q_CHECK_PTR( vec );
     memset( (char*)vec, 0, vlen*sizeof(QBaseBucket*) );
     numItems  = 0;

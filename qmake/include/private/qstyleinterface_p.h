@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qstyleinterface_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qstyleinterface_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** ...
 **
@@ -33,8 +33,20 @@
 **
 **********************************************************************/
 
-#ifndef QSTYLEINTERFACE_H
-#define QSTYLEINTERFACE_H
+#ifndef QSTYLEINTERFACE_P_H
+#define QSTYLEINTERFACE_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  This header file may
+// change from version to version without notice, or even be
+// removed.
+//
+// We mean it.
+//
+//
 
 #ifndef QT_H
 #include <private/qcom_p.h>
@@ -58,4 +70,4 @@ struct Q_EXPORT QStyleFactoryInterface : public QFeatureListInterface
 #endif //QT_NO_COMPONENT
 #endif //QT_NO_STYLE
 
-#endif //QSTYLEINTERFACE_H
+#endif //QSTYLEINTERFACE_P_H

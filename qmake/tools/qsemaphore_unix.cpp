@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qsemaphore_unix.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qsemaphore_unix.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** QSemaphore class for Unix
 **
@@ -183,18 +183,17 @@ int QSemaphore::operator+=(int n)
 
     d->mutex.lock();
 
+    if ( n < 0 || n > d->max ) {
+#ifdef QT_CHECK_RANGE
+	qWarning( "QSemaphore::operator+=: paramter %d out of range", n );
+#endif // QT_CHECK_RANGE
+	n = n < 0 ? 0 : d->max;
+    }
+
     while (d->value + n > d->max)
 	d->cond.wait(&(d->mutex));
 
     d->value += n;
-
-#ifdef QT_CHECK_RANGE
-    if (d->value > d->max) {
-	qWarning("QSemaphore::operator+=: attempt to allocate more resources than available");
-	d->value = d->max;
-    }
-#endif
-
     ret = d->value;
 
     d->mutex.unlock();
@@ -212,15 +211,14 @@ int QSemaphore::operator-=(int n)
 
     d->mutex.lock();
 
-    d->value -= n;
-
+    if ( n < 0 || n > d->value ) {
 #ifdef QT_CHECK_RANGE
-    if (d->value < 0) {
-	qWarning("QSemaphore::operator-=: attempt to deallocate more resources than taken");
-	d->value = 0;
+	qWarning( "QSemaphore::operator-=: paramter %d out of range", n );
+#endif // QT_CHECK_RANGE
+	n = n < 0 ? 0 : d->value;
     }
-#endif
 
+    d->value -= n;
     ret = d->value;
 
     d->cond.wakeOne();

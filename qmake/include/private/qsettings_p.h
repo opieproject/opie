@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qsettings_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qsettings_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QSettings related classes
 **
@@ -94,7 +94,7 @@ public:
     bool modified :1;
     bool globalScope :1;
 
-#if defined(Q_WS_WIN) || defined(Q_OS_MAC)
+#if !defined(QWS) && (defined(Q_WS_WIN) || defined(Q_OS_MAC))
     // system dependent implementations to use the 
     // system specific setting database (ie. registry on Windows)
 

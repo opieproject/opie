@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextcodecinterface_p.h,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qtextcodecinterface_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QTextCodecFactoryInterface interface
 **
@@ -36,7 +36,6 @@
 #ifndef QTEXTCODECINTERFACE_P_H
 #define QTEXTCODECINTERFACE_P_H
 
-
 //
 //  W A R N I N G
 //  -------------
@@ -49,7 +48,6 @@
 // We mean it.
 //
 //
-
 
 #ifndef QT_H
 #include <private/qcom_p.h>

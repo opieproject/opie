@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qdatastream.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qdatastream.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QDataStream class
 **
@@ -750,8 +750,16 @@ QDataStream &QDataStream::readRawBytes( char *s, uint len )
     CHECK_STREAM_PRECOND
     if ( printable ) {				// printable data
 	register Q_INT8 *p = (Q_INT8*)s;
-	while ( len-- )
-	    *this >> *p++;
+	if ( version() < 4 ) {
+	    while ( len-- ) {
+		Q_INT32 tmp;
+		*this >> tmp;
+		*p++ = tmp;
+	    }
+	} else {
+	    while ( len-- )
+		*this >> *p++;
+	}
     } else {					// read data char array
 	dev->readBlock( s, len );
     }
@@ -1012,9 +1020,15 @@ QDataStream &QDataStream::writeRawBytes( const char *s, uint len )
 {
     CHECK_STREAM_PRECOND
     if ( printable ) {				// write printable
-	register Q_INT8 *p = (Q_INT8*)s;
-	while ( len-- )
-	    *this << *p++;
+	if ( version() < 4 ) {
+	    register char *p = (char *)s;
+	    while ( len-- )
+		*this << *p++;
+	} else {
+	    register Q_INT8 *p = (Q_INT8*)s;
+	    while ( len-- )
+		*this << *p++;
+	}
     } else {					// write data char array
 	dev->writeBlock( s, len );
     }

@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: msvc_dsp.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: msvc_dsp.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
 ** Created : 970521
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the network module of the Qt GUI Toolkit.
 **
@@ -34,8 +34,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef __DSPMAKE_H__
-#define __DSPMAKE_H__
+#ifndef __MSVC_DSP_H__
+#define __MSVC_DSP_H__
 
 #include "winmakefile.h"
 #include <qvaluestack.h>
@@ -43,14 +43,14 @@
 class DspMakefileGenerator : public Win32MakefileGenerator
 {
     QString currentGroup;
-    int beginGroupForFile(QString file, QTextStream &, const QString filter="");
-    int endGroups(QTextStream &);
+    void beginGroupForFile(QString file, QTextStream &, const QString& filter="");
+    void endGroups(QTextStream &);
 
     bool init_flag;
     bool writeDspParts(QTextStream &);
 
     bool writeMakefile(QTextStream &);
-    QString findTemplate(QString file);
+    QString findTemplate(const QString &file);
     void init();
 
 public:
@@ -70,4 +70,4 @@ inline DspMakefileGenerator::~DspMakefileGenerator()
 inline bool DspMakefileGenerator::findLibraries()
 { return Win32MakefileGenerator::findLibraries("MSVCDSP_LIBS"); }
 
-#endif /* __DSPMAKE_H__ */
+#endif /* __MSVC_DSP_H__ */

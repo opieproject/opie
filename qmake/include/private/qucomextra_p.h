@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qucomextra_p.h,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qucomextra_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of extra QUcom classes
 **
@@ -35,8 +35,20 @@
 **
 **********************************************************************/
 
-#ifndef QUCOMEXTRA_H
-#define QUCOMEXTRA_H
+#ifndef QUCOMEXTRA_P_H
+#define QUCOMEXTRA_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  This header file may
+// change from version to version without notice, or even be
+// removed.
+//
+// We mean it.
+//
+//
 
 #ifndef QT_H
 #include <private/qucom_p.h>
@@ -89,5 +101,5 @@ struct Q_EXPORT QUType_varptr : public QUType
 extern Q_EXPORT QUType_varptr static_QUType_varptr;
 
 
-#endif // QUCOMEXTRA_H
+#endif // QUCOMEXTRA_P_H
 

@@ -1,12 +1,12 @@
 /**********************************************************************
-** $Id: qpsprinter_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qpsprinter_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of internal QPSPrinter class.
 ** QPSPrinter implements PostScript (tm) output via QPrinter.
 **
 ** Created : 940927
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the kernel module of the Qt GUI Toolkit.
 **
@@ -61,7 +61,7 @@
 
 #ifndef QT_NO_PRINTER
 
-struct QPSPrinterPrivate;
+class QPSPrinterPrivate;
 
 class Q_EXPORT QPSPrinter : public QPaintDevice
 {

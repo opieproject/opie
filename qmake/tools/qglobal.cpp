@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qglobal.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qglobal.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Global functions
 **
@@ -149,7 +149,28 @@ bool qSysInfo( int *wordSize, bool *bigEndian )
     return TRUE;
 }
 
-#if defined(Q_OS_WIN32) || defined(Q_OS_CYGWIN)
+#if !defined(QWS) && defined(Q_OS_MAC)
+
+#include "qt_mac.h"
+
+int qMacVersion()
+{
+    static int macver = Qt::MV_Unknown;
+    static bool first = TRUE;
+    if(first) {
+	first = FALSE;
+	long gestalt_version;
+	if(Gestalt(gestaltSystemVersion, &gestalt_version) == noErr) {
+	    if(gestalt_version >= 0x1020 && gestalt_version < 0x1030)
+		macver = Qt::MV_10_DOT_2;
+	    else if(gestalt_version >= 0x1010 && gestalt_version < 0x1020)
+		macver = Qt::MV_10_DOT_1;
+	}
+    }
+    return macver;
+}
+Qt::MacintoshVersion qt_macver = (Qt::MacintoshVersion)qMacVersion();
+#elif defined(Q_OS_WIN32) || defined(Q_OS_CYGWIN)
 bool qt_winunicode;
 
 #include "qt_windows.h"
@@ -321,7 +342,19 @@ static const int QT_BUFFER_LENGTH = 8196;	// internal buffer length
 
 
 #ifdef Q_OS_MAC
-const unsigned char * p_str(const char * c, int len=-1)
+QString cfstring2qstring(CFStringRef str)
+{
+    CFIndex length = CFStringGetLength(str); 
+    if(const UniChar *chars = CFStringGetCharactersPtr(str)) 
+	return QString((QChar *)chars, length);
+    UniChar *buffer = (UniChar*)malloc(length * sizeof(UniChar)); 
+    CFStringGetCharacters(str, CFRangeMake(0, length), buffer); 
+    QString ret((QChar *)buffer, length);
+    free(buffer); 
+    return ret;
+}
+
+unsigned char * p_str(const char * c, int len=-1)
 {
     const int maxlen = 255;
     if(len == -1)
@@ -337,7 +370,7 @@ const unsigned char * p_str(const char * c, int len=-1)
     return ret;
 }
 
-const unsigned char * p_str(const QString &s)
+unsigned char * p_str(const QString &s)
 {
     return p_str(s, s.length());
 }
@@ -641,8 +674,8 @@ void qSystemWarning( const char* msg, int code )
 
     \relates QApplication
 
-    If \a p is null, a fatal messages says that the program ran out of
-    memory and exits. If \e p is not null, nothing happens.
+    If \a p is 0, a fatal messages says that the program ran out of
+    memory and exits. If \e p is not 0, nothing happens.
 
     This is really a macro defined in \c qglobal.h.
 
@@ -652,7 +685,7 @@ void qSystemWarning( const char* msg, int code )
 
 	Q_CHECK_PTR( a = new int[80] );  // WRONG!
 
-	a = new int[80];                 // Right
+	a = new (nothrow) int[80];       // Right
 	Q_CHECK_PTR( a );
     \endcode
 

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qmap.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qmap.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QMap class
 **
@@ -880,4 +880,8 @@ Q_INLINE_TEMPLATES QDataStream& operator<<( QDataStream& s, const QMap<Key,T>& m
 }
 #endif
 
+#ifdef QT_QWINEXPORT
+#define Q_DEFINED_QMAP
+#include "qwinexport.h"
+#endif /* QT_QWINEXPORT */
 #endif // QMAP_H

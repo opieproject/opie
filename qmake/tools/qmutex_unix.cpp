@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qmutex_unix.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qmutex_unix.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** QMutex class for Unix
 **
@@ -43,8 +43,9 @@ typedef pthread_mutex_t     Q_MUTEX_T;
 
 // POSIX threads mutex types
 #if ((defined(PTHREAD_MUTEX_RECURSIVE) && defined(PTHREAD_MUTEX_DEFAULT)) || \
-     defined(Q_OS_FREEBSD)) && !defined(Q_OS_UNIXWARE) && !defined(Q_OS_SOLARIS)
-    // POSIX 1003.1c-1995 - We love this OS
+     defined(Q_OS_FREEBSD)) && !defined(Q_OS_UNIXWARE) && !defined(Q_OS_SOLARIS) && \
+    !defined(Q_OS_MAC)
+// POSIX 1003.1c-1995 - We love this OS
 #  define Q_MUTEX_SET_TYPE(a, b) pthread_mutexattr_settype((a), (b))
 #  if defined(QT_CHECK_RANGE)
 #    define Q_NORMAL_MUTEX_TYPE PTHREAD_MUTEX_ERRORCHECK
@@ -661,7 +662,8 @@ bool QMutex::tryLock()
     \fn QMutexLocker::QMutexLocker( QMutex *mutex )
 
     Constructs a QMutexLocker and locks \a mutex. The mutex will be
-    unlocked when the QMutexLocker is destroyed.
+    unlocked when the QMutexLocker is destroyed. If \a mutex is zero,
+    QMutexLocker does nothing.
 
     \sa QMutex::lock()
 */

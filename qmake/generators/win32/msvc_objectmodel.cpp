@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: msvc_objectmodel.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: msvc_objectmodel.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -254,27 +254,27 @@ const char* _WholeProgramOptimization		= "\n\t\t\t\tWholeProgramOptimization=\""
 // Property name and value as Pairs ---------------------------------
 struct TPair {
     TPair( const char* n, const triState v ) : name(n), value(v) {};
-    const char* name; 
-    const triState value; 
+    const char* name;
+    const triState value;
 };
-struct EPair { 
+struct EPair {
     EPair( const char* n, const int v ) : name(n), value(v) {};
-    const char* name; 
+    const char* name;
     const int value;
 };
-struct LPair { 
+struct LPair {
     LPair( const char* n, const long v ) : name(n), value(v) {};
-    const char* name; 
-    const long value; 
+    const char* name;
+    const long value;
 };
-struct SPair { 
+struct SPair {
     SPair( const char* n, const QString& v ) : name(n), value(v) {};
-    const char* name; 
-    const QString& value; 
+    const char* name;
+    const QString& value;
 };
-struct XPair { 
+struct XPair {
     XPair( const char* n, const QStringList& v, const char* s = "," ) : name(n), value(v), sep(s) {};
-    const char* name; 
+    const char* name;
     const QStringList& value;
     const char* sep;
 };
@@ -383,7 +383,7 @@ QTextStream &operator<<( QTextStream &strm, const VCCLCompilerTool &tool )
     strm << _begTool3;
     strm << _VCCLCompilerToolName;
     strm << XPair( _AdditionalIncludeDirectories, tool.AdditionalIncludeDirectories );
-    strm << XPair( _AdditionalOptions, tool.AdditionalOptions );
+    strm << XPair( _AdditionalOptions, tool.AdditionalOptions, " " );
     strm << XPair( _AdditionalUsingDirectories, tool.AdditionalUsingDirectories );
     strm << SPair( _AssemblerListingLocation, tool.AssemblerListingLocation );
     if ( tool.AssemblerOutput != asmListingNone )	    strm << EPair( _AssemblerOutput, tool.AssemblerOutput );
@@ -442,7 +442,7 @@ QTextStream &operator<<( QTextStream &strm, const VCCLCompilerTool &tool )
 	strm << EPair( _UsePrecompiledHeader, tool.UsePrecompiledHeader );
     strm << TPair( _WarnAsError, tool.WarnAsError );
     strm << EPair( _WarningLevel, tool.WarningLevel );
-    strm << TPair( _WholeProgramOptimization, tool.WholeProgramOptimization ); 
+    strm << TPair( _WholeProgramOptimization, tool.WholeProgramOptimization );
     strm << "/>";
 return strm;
 }
@@ -450,26 +450,30 @@ return strm;
 bool VCCLCompilerTool::parseOption( const char* option )
 {
     // skip index 0 ('/' or '-')
-    char first  = option[1]; 
+    char first  = option[1];
     char second = option[2];
     char third  = option[3];
     char fourth = option[4];
+    bool found = TRUE;
 
     switch ( first ) {
     case '?':
     case 'h':
 	qWarning( "Generator: Option '/?', '/help': MSVC.NET projects do not support outputting help info" );
-	return FALSE;
+	found = FALSE;
+	break;
     case '@':
 	qWarning( "Generator: Option '/@': MSVC.NET projects do not support the use of a response file" );
-	return FALSE;
+	found = FALSE;
+	break;
     case 'l':
 	qWarning( "Generator: Option '/link': qmake generator does not support passing link options through the compiler tool" );
-	return FALSE;
-
+	found = FALSE;
+	break;
     case 'A':
-	if ( second != 'I' )
-	    return FALSE;
+	if ( second != 'I' ) {
+	    found = FALSE; break;
+	}
 	AdditionalUsingDirectories += option+2;
 	break;
     case 'C':
@@ -487,7 +491,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		AdditionalOptions += option;
 		break;
 	    }
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	GeneratePreprocessedFile = preprocessYes;
 	break;
@@ -544,7 +548,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		ExpandAttributedSource = _True;
 		break;
 	    default:
-		return FALSE;
+		found = FALSE; break;
 	    }
 	}
 	break;
@@ -553,7 +557,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	case '3':
 	case '4':
 	    qWarning( "Option '/G3' and '/G4' were phased out in Visual C++ 5.0" );
-	    return FALSE;
+	    found = FALSE; break;
         case '5':
 	    OptimizeForProcessor = procOptimizePentium;
 	    break;
@@ -619,7 +623,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    CallingConvention = callConventionStdCall;
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'H':
@@ -633,7 +637,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    AdditionalOptions += option;
 	    break;
 	}
-	return FALSE;
+	found = FALSE; break;
     case 'M':
 	if ( second == 'D' ) {
 	    RuntimeLibrary = rtMultiThreadedDLL;
@@ -651,7 +655,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		RuntimeLibrary = rtMultiThreadedDebug;
 	    break;
 	}
-	return FALSE;
+	found = FALSE; break;
     case 'O':
 	switch ( second ) {
 	case '1':
@@ -671,7 +675,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    else if ( third == '2' )
 		InlineFunctionExpansion = expandAnySuitable;
 	    else
-		return FALSE;
+		found = FALSE;
 	    break;
 	case 'd':
 	    Optimization = optimizeDisabled;
@@ -705,7 +709,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		OmitFramePointers = _False;
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'P':
@@ -716,7 +720,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    AdditionalOptions += option;
 	    break;
 	}
-	return FALSE;
+	found = FALSE; break;
     case 'R':
 	if ( second == 'T' && third == 'C' ) {
 	    if ( fourth == '1' )
@@ -728,7 +732,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    else if ( fourth == 'u' )
 		BasicRuntimeChecks = runtimeCheckUninitVariables;
 	    else
-		return FALSE;
+		found = FALSE; break;
 	}
 	break;
     case 'T':
@@ -738,7 +742,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    CompileAs = compileAsCPlusPlus;
 	} else {
 	    qWarning( "Generator: Options '/Tp<filename>' and '/Tc<filename>' are not supported by qmake" );
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'U':
@@ -778,7 +782,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    }
 	    // Fallthrough
 	default:
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'X':
@@ -807,7 +811,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    PrecompiledHeaderFile = option+3;
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'Z':
@@ -840,9 +844,9 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		else if ( fourth == 'w' )
 		    TreatWChar_tAsBuiltInType = _True;
 		else
-		    return FALSE;
+		    found = FALSE;
 	    } else {
-		return FALSE;
+		found = FALSE; break;
 	    }
 	    break;
 	case 'g':
@@ -869,11 +873,11 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		StructMemberAlignment = alignEightBytes;
 		break;
 	    default:
-		return FALSE;
+		found = FALSE; break;
 	    }
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'c':
@@ -887,12 +891,13 @@ bool VCCLCompilerTool::parseOption( const char* option )
 		CompileAsManaged = managedAssembly;
 	    }
 	} else {
-	    return FALSE;
+	    found = FALSE; break;
 	}
 	break;
     case 'd':
-	if ( second != 'r' )
-	    return FALSE;
+	if ( second != 'r' ) {
+	    found = FALSE; break;
+	}
         CompileAsManaged = managedAssembly;
 	break;
     case 'n':
@@ -904,13 +909,13 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    SuppressStartupBanner = _True;
 	    break;
 	}
-	return FALSE;
+	found = FALSE; break;
     case 's':
 	if ( second == 'h' && third == 'o' && fourth == 'w' ) {
 	    ShowIncludes = _True;
 	    break;
 	}
-	return FALSE;
+	found = FALSE; break;
     case 'u':
 	UndefineAllPreprocessorDefinitions = _True;
 	break;
@@ -919,7 +924,7 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	    AdditionalOptions += option;
 	    break;
 	}
-	return FALSE;
+	found = FALSE; break;
     case 'w':
 	switch ( second ) {
 	case '\0':
@@ -933,8 +938,10 @@ bool VCCLCompilerTool::parseOption( const char* option )
 	}
 	break;
     default:
-	return FALSE;
+	found = FALSE; break;
     }
+    if( !found )
+	warn_msg( WarnLogic, "Could not parse Compiler option: %s", option );
     return TRUE;
 }
 
@@ -980,7 +987,7 @@ QTextStream &operator<<( QTextStream &strm, const VCLinkerTool &tool )
     strm << _VCLinkerToolName;
     strm << XPair( _AdditionalDependencies4, tool.AdditionalDependencies, " " );
     strm << XPair( _AdditionalLibraryDirectories, tool.AdditionalLibraryDirectories );
-    strm << XPair( _AdditionalOptions, tool.AdditionalOptions );
+    strm << XPair( _AdditionalOptions, tool.AdditionalOptions, " " );
     strm << XPair( _AddModuleNamesToAssembly, tool.AddModuleNamesToAssembly );
     strm << SPair( _BaseAddress, tool.BaseAddress );
     strm << XPair( _DelayLoadDLLs, tool.DelayLoadDLLs );
@@ -1046,8 +1053,8 @@ static uint elfHash( const char* name )
 
     if ( name ) {
 	k = (const uchar *) name;
-	while ( (*k) && 
-		(*k)!= ':' && 
+	while ( (*k) &&
+		(*k)!= ':' &&
 		(*k)!=',' &&
 		(*k)!=' ' ) {
 	    h = ( h << 4 ) + *k++;
@@ -1060,45 +1067,49 @@ static uint elfHash( const char* name )
 	h = 1;
     return h;
 }
+
+//#define USE_DISPLAY_HASH
+#ifdef USE_DISPLAY_HASH
 static void displayHash( const char* str )
 {
     printf( "case 0x%07x: // %s\n    break;\n", elfHash(str), str );
 }
+#endif
 
 bool VCLinkerTool::parseOption( const char* option )
 {
-#if 0
+#ifdef USE_DISPLAY_HASH
     // Main options
-    displayHash( "/ALIGN" ); displayHash( "/ALLOWBIND" ); displayHash( "/ASSEMBLYMODULE" ); 
-    displayHash( "/ASSEMBLYRESOURCE" ); displayHash( "/BASE" ); displayHash( "/DEBUG" ); 
-    displayHash( "/DEF" ); displayHash( "/DEFAULTLIB" ); displayHash( "/DELAY" ); 
-    displayHash( "/DELAYLOAD" ); displayHash( "/DLL" ); displayHash( "/DRIVER" ); 
-    displayHash( "/ENTRY" ); displayHash( "/EXETYPE" ); displayHash( "/EXPORT" ); 
-    displayHash( "/FIXED" ); displayHash( "/FORCE" ); displayHash( "/HEAP" ); 
-    displayHash( "/IDLOUT" ); displayHash( "/IGNOREIDL" ); displayHash( "/IMPLIB" ); 
-    displayHash( "/INCLUDE" ); displayHash( "/INCREMENTAL" ); displayHash( "/LARGEADDRESSAWARE" ); 
-    displayHash( "/LIBPATH" ); displayHash( "/LTCG" ); displayHash( "/MACHINE" ); 
-    displayHash( "/MAP" ); displayHash( "/MAPINFO" ); displayHash( "/MERGE" ); 
-    displayHash( "/MIDL" ); displayHash( "/NOASSEMBLY" ); displayHash( "/NODEFAULTLIB" ); 
-    displayHash( "/NOENTRY" ); displayHash( "/NOLOGO" ); displayHash( "/OPT" ); 
-    displayHash( "/ORDER" ); displayHash( "/OUT" ); displayHash( "/PDB" ); 
-    displayHash( "/PDBSTRIPPED" ); displayHash( "/RELEASE" ); displayHash( "/SECTION" ); 
-    displayHash( "/STACK" ); displayHash( "/STUB" ); displayHash( "/SUBSYSTEM" ); 
-    displayHash( "/SWAPRUN" ); displayHash( "/TLBID" ); displayHash( "/TLBOUT" ); 
-    displayHash( "/TSAWARE" ); displayHash( "/VERBOSE" ); displayHash( "/VERSION" ); 
+    displayHash( "/ALIGN" ); displayHash( "/ALLOWBIND" ); displayHash( "/ASSEMBLYMODULE" );
+    displayHash( "/ASSEMBLYRESOURCE" ); displayHash( "/BASE" ); displayHash( "/DEBUG" );
+    displayHash( "/DEF" ); displayHash( "/DEFAULTLIB" ); displayHash( "/DELAY" );
+    displayHash( "/DELAYLOAD" ); displayHash( "/DLL" ); displayHash( "/DRIVER" );
+    displayHash( "/ENTRY" ); displayHash( "/EXETYPE" ); displayHash( "/EXPORT" );
+    displayHash( "/FIXED" ); displayHash( "/FORCE" ); displayHash( "/HEAP" );
+    displayHash( "/IDLOUT" ); displayHash( "/IGNOREIDL" ); displayHash( "/IMPLIB" );
+    displayHash( "/INCLUDE" ); displayHash( "/INCREMENTAL" ); displayHash( "/LARGEADDRESSAWARE" );
+    displayHash( "/LIBPATH" ); displayHash( "/LTCG" ); displayHash( "/MACHINE" );
+    displayHash( "/MAP" ); displayHash( "/MAPINFO" ); displayHash( "/MERGE" );
+    displayHash( "/MIDL" ); displayHash( "/NOASSEMBLY" ); displayHash( "/NODEFAULTLIB" );
+    displayHash( "/NOENTRY" ); displayHash( "/NOLOGO" ); displayHash( "/OPT" );
+    displayHash( "/ORDER" ); displayHash( "/OUT" ); displayHash( "/PDB" );
+    displayHash( "/PDBSTRIPPED" ); displayHash( "/RELEASE" ); displayHash( "/SECTION" );
+    displayHash( "/STACK" ); displayHash( "/STUB" ); displayHash( "/SUBSYSTEM" );
+    displayHash( "/SWAPRUN" ); displayHash( "/TLBID" ); displayHash( "/TLBOUT" );
+    displayHash( "/TSAWARE" ); displayHash( "/VERBOSE" ); displayHash( "/VERSION" );
     displayHash( "/VXD" ); displayHash( "/WS " );
 #endif
-#if 0
+#ifdef USE_DISPLAY_HASH
     // Sub options
     displayHash( "UNLOAD" ); displayHash( "NOBIND" ); displayHash( "no" ); displayHash( "NOSTATUS" ); displayHash( "STATUS" );
-    displayHash( "AM33" ); displayHash( "ARM" ); displayHash( "CEE" ); displayHash( "IA64" ); displayHash( "X86" ); displayHash( "M32R" ); 
-    displayHash( "MIPS" ); displayHash( "MIPS16" ); displayHash( "MIPSFPU" ); displayHash( "MIPSFPU16" ); displayHash( "MIPSR41XX" ); displayHash( "PPC" ); 
-    displayHash( "SH3" ); displayHash( "SH4" ); displayHash( "SH5" ); displayHash( "THUMB" ); displayHash( "TRICORE" ); displayHash( "EXPORTS" ); 
-    displayHash( "LINES" ); displayHash( "REF" ); displayHash( "NOREF" ); displayHash( "ICF" ); displayHash( "WIN98" ); displayHash( "NOWIN98" ); 
-    displayHash( "CONSOLE" ); displayHash( "EFI_APPLICATION" ); displayHash( "EFI_BOOT_SERVICE_DRIVER" ); displayHash( "EFI_ROM" ); displayHash( "EFI_RUNTIME_DRIVER" ); displayHash( "NATIVE" ); 
-    displayHash( "POSIX" ); displayHash( "WINDOWS" ); displayHash( "WINDOWSCE" ); displayHash( "NET" ); displayHash( "CD" ); displayHash( "NO" ); 
+    displayHash( "AM33" ); displayHash( "ARM" ); displayHash( "CEE" ); displayHash( "IA64" ); displayHash( "X86" ); displayHash( "M32R" );
+    displayHash( "MIPS" ); displayHash( "MIPS16" ); displayHash( "MIPSFPU" ); displayHash( "MIPSFPU16" ); displayHash( "MIPSR41XX" ); displayHash( "PPC" );
+    displayHash( "SH3" ); displayHash( "SH4" ); displayHash( "SH5" ); displayHash( "THUMB" ); displayHash( "TRICORE" ); displayHash( "EXPORTS" );
+    displayHash( "LINES" ); displayHash( "REF" ); displayHash( "NOREF" ); displayHash( "ICF" ); displayHash( "WIN98" ); displayHash( "NOWIN98" );
+    displayHash( "CONSOLE" ); displayHash( "EFI_APPLICATION" ); displayHash( "EFI_BOOT_SERVICE_DRIVER" ); displayHash( "EFI_ROM" ); displayHash( "EFI_RUNTIME_DRIVER" ); displayHash( "NATIVE" );
+    displayHash( "POSIX" ); displayHash( "WINDOWS" ); displayHash( "WINDOWSCE" ); displayHash( "NET" ); displayHash( "CD" ); displayHash( "NO" );
 #endif
-
+    bool found = TRUE;
     switch ( elfHash(option) ) {
     case 0x3360dbe: // /ALIGN[:number]
     case 0x1485c34: // /ALLOWBIND[:NO]
@@ -1141,7 +1152,7 @@ bool VCLinkerTool::parseOption( const char* option )
 	DelayLoadDLLs += option+11;
 	break;
     // case 0x003390c: // /DLL
-    // This option is not used for vcproj files 
+    // This option is not used for vcproj files
     //	break;
     case 0x33a3979: // /ENTRY:function
 	EntryPointSymbol = option+7;
@@ -1192,7 +1203,7 @@ bool VCLinkerTool::parseOption( const char* option )
 	break;
     case 0x157cf65: // /MACHINE:{AM33|ARM|CEE|IA64|X86|M32R|MIPS|MIPS16|MIPSFPU|MIPSFPU16|MIPSR41XX|PPC|SH3|SH4|SH5|THUMB|TRICORE}
 	switch ( elfHash(option+9) ) {
-	    // Very limited documentation on all options but X86, 
+	    // Very limited documentation on all options but X86,
 	    // so we put the others in AdditionalOptions...
 	case 0x0046063: // AM33
 	case 0x000466d: // ARM
@@ -1216,7 +1227,7 @@ bool VCLinkerTool::parseOption( const char* option )
 	    TargetMachine = machineX86;
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE;
 	}
 	break;
     case 0x0034160: // /MAP[:filename]
@@ -1275,7 +1286,7 @@ bool VCLinkerTool::parseOption( const char* option )
 		OptimizeForWindows98 = optWin98No;
 		break;
 	    default:
-		return FALSE;
+		found = FALSE;
 	    }
 	}
 	break;
@@ -1324,7 +1335,7 @@ bool VCLinkerTool::parseOption( const char* option )
 		AdditionalOptions += option;
 		break;
 	    default:
-		return FALSE;
+		found = FALSE;
 	    }
 	}
 	break;
@@ -1334,7 +1345,7 @@ bool VCLinkerTool::parseOption( const char* option )
 	else if ( *(option+9) == 'C' )
 	    SwapRunFromCD = _True;
 	else
-	    return FALSE;
+	    found = FALSE;
 	break;
     case 0x34906d4: // /TLBID:id
 	TypeLibraryResourceID = QString( option+7 ).toLong();
@@ -1360,9 +1371,11 @@ bool VCLinkerTool::parseOption( const char* option )
 	Version = option+9;
 	break;
     default:
-	return FALSE;
+	found = FALSE;
     }
-    return TRUE;
+    if( !found )
+	warn_msg( WarnLogic, "Could not parse Linker options: %s", option );
+    return found;
 }
 
 // VCMIDLTool -------------------------------------------------------
@@ -1392,7 +1405,7 @@ QTextStream &operator<<( QTextStream &strm, const VCMIDLTool &tool )
     strm << _begTool3;
     strm << _VCMIDLToolName;
     strm << XPair( _AdditionalIncludeDirectories, tool.AdditionalIncludeDirectories );
-    strm << XPair( _AdditionalOptions, tool.AdditionalOptions );
+    strm << XPair( _AdditionalOptions, tool.AdditionalOptions, " " );
     strm << XPair( _CPreprocessOptions, tool.CPreprocessOptions );
     strm << EPair( _DefaultCharType, tool.DefaultCharType );
     strm << SPair( _DLLDataFileName, tool.DLLDataFileName );
@@ -1427,7 +1440,7 @@ QTextStream &operator<<( QTextStream &strm, const VCMIDLTool &tool )
 
 bool VCMIDLTool::parseOption( const char* option )
 {
-#if 0
+#ifdef USE_DISPLAY_HASH
     displayHash( "/D name[=def]" ); displayHash( "/I directory-list" ); displayHash( "/Oi" );
     displayHash( "/Oic" ); displayHash( "/Oicf" ); displayHash( "/Oif" ); displayHash( "/Os" );
     displayHash( "/U name" ); displayHash( "/WX" ); displayHash( "/W{0|1|2|3|4}" );
@@ -1435,7 +1448,7 @@ bool VCMIDLTool::parseOption( const char* option )
     displayHash( "/align {N}" ); displayHash( "/app_config" ); displayHash( "/c_ext" );
     displayHash( "/char ascii7" ); displayHash( "/char signed" ); displayHash( "/char unsigned" );
     displayHash( "/client none" ); displayHash( "/client stub" ); displayHash( "/confirm" );
-    displayHash( "/cpp_cmd cmd_line" ); displayHash( "/cpp_opt options" ); 
+    displayHash( "/cpp_cmd cmd_line" ); displayHash( "/cpp_opt options" );
     displayHash( "/cstub filename" ); displayHash( "/dlldata filename" ); displayHash( "/env win32" );
     displayHash( "/env win64" ); displayHash( "/error all" ); displayHash( "/error allocation" );
     displayHash( "/error bounds_check" ); displayHash( "/error enum" ); displayHash( "/error none" );
@@ -1445,7 +1458,7 @@ bool VCMIDLTool::parseOption( const char* option )
     displayHash( "/msc_ver <nnnn>" ); displayHash( "/newtlb" ); displayHash( "/no_cpp" );
     displayHash( "/no_def_idir" ); displayHash( "/no_default_epv" ); displayHash( "/no_format_opt" );
     displayHash( "/no_warn" ); displayHash( "/nocpp" ); displayHash( "/nologo" ); displayHash( "/notlb" );
-    displayHash( "/o filename" ); displayHash( "/oldnames" ); displayHash( "/oldtlb" ); 
+    displayHash( "/o filename" ); displayHash( "/oldnames" ); displayHash( "/oldtlb" );
     displayHash( "/osf" ); displayHash( "/out directory" ); displayHash( "/pack {N}" );
     displayHash( "/prefix all" ); displayHash( "/prefix client" ); displayHash( "/prefix server" );
     displayHash( "/prefix switch" ); displayHash( "/protocol all" ); displayHash( "/protocol dce" );
@@ -1455,6 +1468,7 @@ bool VCMIDLTool::parseOption( const char* option )
     displayHash( "/target {system}" ); displayHash( "/tlb filename" ); displayHash( "/use_epv" );
     displayHash( "/win32" ); displayHash( "/win64" );
 #endif
+    bool found = TRUE;
     int offset = 0;
     switch( elfHash(option) ) {
     case 0x0000334: // /D name[=def]
@@ -1490,7 +1504,7 @@ bool VCMIDLTool::parseOption( const char* option )
 	    StructMemberAlignment = midlAlignEightBytes;
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE;
 	}
 	break;
     case 0x0359e82: // /char {ascii7|signed|unsigned}
@@ -1505,7 +1519,7 @@ bool VCMIDLTool::parseOption( const char* option )
 	    DefaultCharType = midlCharUnsigned;
 	    break;
 	default:
-	    return FALSE;
+	    found = FALSE;
 	}
 	break;
     case 0xa766524: // /cpp_opt options
@@ -1536,13 +1550,13 @@ bool VCMIDLTool::parseOption( const char* option )
 	    EnableErrorChecks = midlDisableAll;
 	    break;
 	case 'r':
-	    break;
 	    ErrorCheckRefPointers = _True;
-	case 's':
 	    break;
+	case 's':
 	    ErrorCheckStubData = _True;
+	    break;
 	default:
-	    return FALSE;
+	    found = FALSE;
 	}
 	break;
     case 0x5eb7af2: // /header filename
@@ -1647,11 +1661,13 @@ bool VCMIDLTool::parseOption( const char* option )
 		WarningLevel = midlWarningLevel_4;
 		break;
 	    default:
-		return FALSE;
+		found = FALSE;
 	    }
 	}
 	break;
     }
+    if( !found )
+	warn_msg( WarnLogic, "Could not parse MIDL option: %s", option );
     return TRUE;
 }
 
@@ -1668,7 +1684,7 @@ QTextStream &operator<<( QTextStream &strm, const VCLibrarianTool &tool )
     strm << SPair( _ToolName, QString( "VCLibrarianTool" ) );
     strm << XPair( _AdditionalDependencies4, tool.AdditionalDependencies );
     strm << XPair( _AdditionalLibraryDirectories, tool.AdditionalLibraryDirectories );
-    strm << XPair( _AdditionalOptions, tool.AdditionalOptions );
+    strm << XPair( _AdditionalOptions, tool.AdditionalOptions, " " );
     strm << XPair( _ExportNamedFunctions, tool.ExportNamedFunctions );
     strm << XPair( _ForceSymbolReferences, tool.ForceSymbolReferences );
     strm << TPair( _IgnoreAllDefaultLibraries, tool.IgnoreAllDefaultLibraries );
@@ -1714,7 +1730,7 @@ QTextStream &operator<<( QTextStream &strm, const VCResourceCompilerTool &tool )
     strm << _VCResourceCompilerToolName;
     strm << SPair( _ToolPath, tool.ToolPath );
     strm << XPair( _AdditionalIncludeDirectories, tool.AdditionalIncludeDirectories );
-    strm << XPair( _AdditionalOptions, tool.AdditionalOptions );
+    strm << XPair( _AdditionalOptions, tool.AdditionalOptions, " " );
     if ( tool.Culture != rcUseDefault )			    strm << EPair( _Culture, tool.Culture );
     strm << XPair( _FullIncludePath, tool.FullIncludePath );
     strm << TPair( _IgnoreStandardIncludePath, tool.IgnoreStandardIncludePath );
@@ -1851,12 +1867,33 @@ void VCFilter::generateUIC( QTextStream &strm, const QString& str ) const
     QString mocApp = Project->var( "QMAKE_MOC" );
     QString fname = str.section( '\\', -1 );
     QString mocDir = Project->var( "MOC_DIR" );
-    int dot = fname.findRev( '.' );
-    if( dot != -1 ) 
-	fname.truncate( dot );
+    QString uiDir = Project->var( "UI_DIR" );
+    QString uiHeaders;
+    QString uiSources;
 
-    int slash = str.findRev( '\\' );  
-    QString pname = ( slash != -1 ) ? str.left( slash+1 ) : QString(".\\");
+    // Determining the paths for the output files.
+    int slash = str.findRev( '\\' );
+    QString pname = ( slash != -1 ) ? str.left( slash+1 ) : QString( ".\\" );
+    if( !uiDir.isEmpty() ) {
+	uiHeaders = uiDir;
+	uiSources = uiDir;
+    } else {
+	uiHeaders = Project->var( "UI_HEADERS_DIR" );
+	uiSources = Project->var( "UI_SOURCES_DIR" );
+	if( uiHeaders.isEmpty() )
+	    uiHeaders = pname;
+	if( uiSources.isEmpty() )
+	    uiSources = pname;
+    }
+    if( !uiHeaders.endsWith( "\\" ) )
+	uiHeaders += "\\";
+    if( !uiSources.endsWith( "\\" ) )
+	uiSources += "\\";
+
+    // Determine the file name.
+    int dot = fname.findRev( '.' );
+    if( dot != -1 )
+	fname.truncate( dot );
 
     strm << _begFileConfiguration;
     strm << _Name5;
@@ -1867,13 +1904,13 @@ void VCFilter::generateUIC( QTextStream &strm, const QString& str ) const
     strm << _Description6;
     strm << "Uic'ing " << str << "...\"";
     strm << _CommandLine6;
-    strm << uicApp << " " << str << " -o " << pname << fname << ".h &amp;&amp; ";				// Create .h from .ui file
-    strm << uicApp << " " << str << " -i " << fname << ".h -o " << pname << fname << ".cpp &amp;&amp; ";	// Create .cpp from .ui file
-    strm << mocApp << " " << pname << fname << ".h -o " << mocDir << "moc_" << fname << ".cpp\"";
+    strm << uicApp << " " << str << " -o " << uiHeaders << fname << ".h &amp;&amp; ";				// Create .h from .ui file
+    strm << uicApp << " " << str << " -i " << fname << ".h -o " << uiSources << fname << ".cpp &amp;&amp; ";	// Create .cpp from .ui file
+    strm << mocApp << " " << uiHeaders << fname << ".h -o " << mocDir << "moc_" << fname << ".cpp\"";
     strm << _AdditionalDependencies6;
     strm << mocApp << ";" << uicApp << "\"";
     strm << _Outputs6;
-    strm << pname << fname << ".h;" << pname << fname << ".cpp;" << mocDir << "moc_" << fname << ".cpp\"";
+    strm << uiHeaders << fname << ".h;" << uiSources << fname << ".cpp;" << mocDir << "moc_" << fname << ".cpp\"";
     strm << "/>";
     strm << _endFileConfiguration;
 }
@@ -1906,9 +1943,9 @@ QTextStream &operator<<( QTextStream &strm, const VCFilter &tool )
 // VCProject --------------------------------------------------------
 VCProject::VCProject()
 {
-    QUuid uniqueId;
 #if defined(Q_WS_WIN32)
     GUID guid;
+    QUuid uniqueId;
     HRESULT h = CoCreateGuid( &guid );
     if ( h == S_OK )
 	uniqueId = QUuid( guid );

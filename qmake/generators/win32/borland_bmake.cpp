@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: borland_bmake.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: borland_bmake.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -132,6 +132,8 @@ BorlandMakefileGenerator::writeBorlandParts(QTextStream &t)
     t << "DEL_FILE   =       " << var("QMAKE_DEL_FILE") << endl;
     t << "DEL_DIR    =       " << var("QMAKE_DEL_DIR") << endl;
     t << "MOVE  =       " << var("QMAKE_MOVE") << endl;
+    t << "CHK_DIR_EXISTS =	" << var("QMAKE_CHK_DIR_EXISTS") << endl;
+    t << "MKDIR		=	" << var("QMAKE_MKDIR") << endl;
     t << endl;
 
     t << "####### Files" << endl << endl;
@@ -150,15 +152,19 @@ BorlandMakefileGenerator::writeBorlandParts(QTextStream &t)
     t << endl;
 
     t << "####### Implicit rules" << endl << endl;
-    t << ".SUFFIXES: .cpp .cxx .cc .c" << endl << endl;
-    t << ".cpp.obj:\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
-    t << ".cxx.obj:\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
-    t << ".cc.obj:\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
-    t << ".c.obj:\n\t" << var("QMAKE_RUN_CC_IMP") << endl << endl;
+    t << ".SUFFIXES: .c";
+    QStringList::Iterator cppit;
+    for(cppit = Option::cpp_ext.begin(); cppit != Option::cpp_ext.end(); ++cppit)
+	t << " " << (*cppit);
+    t << endl << endl;
+    for(cppit = Option::cpp_ext.begin(); cppit != Option::cpp_ext.end(); ++cppit)
+	t << (*cppit) << Option::obj_ext << ":\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
+    t << ".c" << Option::obj_ext << ":\n\t" << var("QMAKE_RUN_CC_IMP") << endl << endl;
 
     t << "####### Build rules" << endl << endl;
     t << "all: " << varGlue("ALL_DEPS",""," "," ") << " $(TARGET)" << endl << endl;
-    t << "$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) " << var("TARGETDEPS");
+    t << "$(TARGET): " << var("PRE_TARGETDEPS") << " $(UICDECLS) $(OBJECTS) $(OBJMOC) " 
+      << var("POST_TARGETDEPS");
     if(!project->variables()["QMAKE_APP_OR_DLL"].isEmpty()) {
 	t << "\n\t" << "$(LINK) @&&|" << "\n\t"
 	  << "$(LFLAGS) $(OBJECTS) $(OBJMOC),$(TARGET),,$(LIBS),$(DEF_FILE),$(RES_FILE)";
@@ -169,6 +175,10 @@ BorlandMakefileGenerator::writeBorlandParts(QTextStream &t)
 	  << project->variables()["OBJMOC"].join(" \\\n+");
     }
     t << endl << "|" << endl;
+
+    if ( !project->variables()["QMAKE_POST_LINK"].isEmpty() )
+	t << "\t" <<var("QMAKE_POST_LINK") << endl;
+
     if(project->isActiveConfig("dll") && !project->variables()["DLLDESTDIR"].isEmpty()) {
 	QStringList dlldirs = project->variables()["DLLDESTDIR"];
 	for ( QStringList::Iterator dlldir = dlldirs.begin(); dlldir != dlldirs.end(); ++dlldir ) {
@@ -213,15 +223,12 @@ BorlandMakefileGenerator::writeBorlandParts(QTextStream &t)
       << varGlue("OBJMOC" ,"\n\t-del ","\n\t-del ","")
       << varGlue("UICDECLS" ,"\n\t-del ","\n\t-del ","")
       << varGlue("UICIMPLS" ,"\n\t-del ","\n\t-del ","")
-      << "\n\t-del $(TARGET)"
       << varGlue("QMAKE_CLEAN","\n\t-del ","\n\t-del ","")
       << varGlue("CLEAN_FILES","\n\t-del ","\n\t-del ","");
     if ( project->isActiveConfig("activeqt")) {
 	t << ("\n\t-del tmp\\" + targetfilename + ".*");
 	t << "\n\t-del tmp\\dump.*";
     }
-    if(project->isActiveConfig("dll") && !project->variables()["DLLDESTDIR"].isEmpty()) 
-	t << "\n\t-del " << var("DLLDESTDIR") << "\\" << project->variables()[ "TARGET" ].first() << project->variables()[ "TARGET_EXT" ].first();
     if(!project->isEmpty("IMAGES"))
 	t << varGlue("QMAKE_IMAGE_COLLECTION", "\n\t-del ", "\n\t-del ", "");
 
@@ -244,6 +251,10 @@ BorlandMakefileGenerator::writeBorlandParts(QTextStream &t)
     }
 
     t << endl << endl;
+
+    t << "distclean: clean"
+      << "\n\t-del $(TARGET)"
+      << endl << endl;
 }
 
 void
@@ -364,7 +375,7 @@ BorlandMakefileGenerator::init()
 	    if ( !project->variables()["QMAKE_QT_DLL"].isEmpty() ) {
 		int hver = findHighestVersion(project->first("QMAKE_LIBDIR_QT"), "qt");
 		if ( hver == -1 )
-		    hver = findHighestVersion(project->first("QMAKE_LIBDIR_QT"), "qt-mt");
+		    hver = findHighestVersion(project->first("QMAKE_LIBDIR_QT"), "qtmt");
 		if(hver != -1) {
 		    QString ver;
 		    ver.sprintf("qt%s" QTDLL_POSTFIX "%d.lib", (project->isActiveConfig("thread") ? "mt" : ""), hver);
@@ -426,6 +437,28 @@ BorlandMakefileGenerator::init()
 	project->variables()["QMAKE_LFLAGS"] += project->variables()["QMAKE_LFLAGS_CONSOLE_ANY"];
 	project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_CONSOLE"];
     }
+    if ( project->isActiveConfig("stl") ) {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_STL_ON"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_STL_ON"];
+    } else {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_STL_OFF"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_STL_OFF"];
+    }
+    if ( project->isActiveConfig("exceptions") ) {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_EXCEPTIONS_ON"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_EXCEPTIONS_ON"];
+    } else {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_EXCEPTIONS_OFF"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_EXCEPTIONS_OFF"];
+    }
+    if ( project->isActiveConfig("rtti") ) {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_RTTI_ON"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_RTTI_ON"];
+    } else {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_RTTI_OFF"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_RTTI_OFF"];
+    }
+
     if ( project->isActiveConfig("thread") ) {
         project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_RTMT"];
     } else {
@@ -452,7 +485,7 @@ BorlandMakefileGenerator::init()
 	}
 	project->variables()["RES_FILE"] = project->variables()["RC_FILE"];
 	project->variables()["RES_FILE"].first().replace(".rc",".res");
-	project->variables()["TARGETDEPS"] += project->variables()["RES_FILE"];
+	project->variables()["POST_TARGETDEPS"] += project->variables()["RES_FILE"];
     }
     MakefileGenerator::init();
     if ( !project->variables()["VERSION"].isEmpty()) {
@@ -474,4 +507,3 @@ BorlandMakefileGenerator::init()
 		project->first("DESTDIR") + project->first("TARGET") + tdsPostfix );
     }
 }
-

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qinputcontext_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qinputcontext_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of ???
 **
@@ -87,7 +87,7 @@ public:
     void setXFontSet(const QFont &);
 
     void *ic;
-    QString text, lastcompose;
+    QString text;
     QWidget *focusWidget;
     bool composing;
     QFont font;
@@ -115,6 +115,9 @@ private:
     static bool startComposition();
     static bool endComposition( QWidget *fw = 0 );
     static bool composition( LPARAM lparam );
+
+    static void accept( QWidget *fw = 0 );
+    static void enable( bool );
 #endif
 };
 

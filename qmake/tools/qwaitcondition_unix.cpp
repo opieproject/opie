@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qwaitcondition_unix.cpp,v 1.1 2002-11-01 00:10:45 kergoth Exp $
+** $Id: qwaitcondition_unix.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** QWaitCondition class for Unix
 **
@@ -124,7 +124,7 @@ struct QWaitConditionPrivate {
 	getchar();
 	mymutex.lock();
 	// Sleep until there are no busy worker threads
-	while( count > 0 ) {
+	while( mycount > 0 ) {
 	    mymutex.unlock();
 	    sleep( 1 );
 	    mymutex.lock();
@@ -224,7 +224,9 @@ void QWaitCondition::wakeAll()
 */
 bool QWaitCondition::wait(unsigned long time)
 {
-    pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_t mutex;
+    pthread_mutex_init( &mutex, 0 );
+    pthread_mutex_lock( &mutex );
 
     int ret;
     if (time != ULONG_MAX) {
@@ -232,7 +234,7 @@ bool QWaitCondition::wait(unsigned long time)
 	gettimeofday(&tv, 0);
 
 	timespec ti;
-	ti.tv_nsec = (tv.tv_usec * 1000) + (time % 1000) * 1000;
+	ti.tv_nsec = ( tv.tv_usec + ( time % 1000 ) * 1000 ) * 1000;
 	ti.tv_sec = tv.tv_sec + (time / 1000) + ( ti.tv_nsec / 1000000000 );
 	ti.tv_nsec %= 1000000000;
 
@@ -244,6 +246,9 @@ bool QWaitCondition::wait(unsigned long time)
     if (ret && ret != ETIMEDOUT)
 	qWarning("Wait condition wait failure: %s",strerror(ret));
 #endif
+
+    pthread_mutex_unlock( &mutex );
+    pthread_mutex_destroy( &mutex );
 
     return (ret == 0);
 }
@@ -291,7 +296,7 @@ bool QWaitCondition::wait(QMutex *mutex, unsigned long time)
 	gettimeofday(&tv, 0);
 
 	timespec ti;
-	ti.tv_nsec = (tv.tv_usec * 1000) + (time % 1000) * 1000;
+	ti.tv_nsec = ( tv.tv_usec + ( time % 1000 ) * 1000 ) * 1000;
 	ti.tv_sec = tv.tv_sec + (time / 1000) + ( ti.tv_nsec / 1000000000 );
 	ti.tv_nsec %= 1000000000;
 

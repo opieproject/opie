@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: option.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: option.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -82,7 +82,7 @@ Option::TARG_MODE Option::target_mode = Option::TARG_UNIX_MODE;
 
 //QMAKE_GENERATE_PROJECT stuff
 bool Option::projfile::do_pwd = TRUE;
-bool Option::projfile::do_recursive = FALSE;
+bool Option::projfile::do_recursive = TRUE;
 QStringList Option::projfile::project_dirs;
 
 //QMAKE_GENERATE_MAKEFILE stuff
@@ -97,6 +97,17 @@ QString Option::mkfile::cachefile;
 QStringList Option::mkfile::project_files;
 QString Option::mkfile::qmakespec_commandline;
 
+static Option::QMAKE_MODE default_mode(QString progname)
+{
+    int s = progname.findRev(Option::dir_sep);
+    if(s != -1)
+	progname = progname.right(progname.length() - (s + 1));
+    if(progname == "qmakegen")
+	return Option::QMAKE_GENERATE_PROJECT;
+    return Option::QMAKE_GENERATE_MAKEFILE;
+}
+
+QString project_builtin_regx();
 bool usage(const char *a0)
 {
     fprintf(stdout, "Usage: %s [mode] [options] [files]\n"
@@ -107,11 +118,11 @@ bool usage(const char *a0)
 	    "mode for qmake, but you may use this to test qmake on an existing project\n"
 	    "\n"
 	    "Mode:\n"
-	    "\t-project       Put qmake into project file generation mode\n"
+	    "\t-project       Put qmake into project file generation mode%s\n"
 	    "\t               In this mode qmake interprets files as files to\n"
 	    "\t               be built,\n"
-	    "\t               defaults to *.cpp; *.l; *.y; *.ui\n"
-	    "\t-makefile      Put qmake into makefile generation mode (default)\n"
+	    "\t               defaults to %s\n"
+	    "\t-makefile      Put qmake into makefile generation mode%s\n"
 	    "\t               In this mode qmake interprets files as project files to\n"
 	    "\t               be processed, if skipped qmake will try to find a project\n"
 	    "\t               file in your current working directory\n"
@@ -136,33 +147,25 @@ bool usage(const char *a0)
 	    "\t-help          This help\n"
 	    "\t-v             Version information\n"
 	    "\t-after         All variable assignments after this will be\n"
-	    "\t               parsed after [files]        [makefile mode only]\n"
+	    "\t               parsed after [files]\n"
 	    "\t-cache file    Use file as cache           [makefile mode only]\n"
 	    "\t-spec spec     Use spec as QMAKESPEC       [makefile mode only]\n"
 	    "\t-nocache       Don't use a cache file      [makefile mode only]\n"
 	    "\t-nodepend      Don't generate dependencies [makefile mode only]\n"
 	    "\t-nomoc         Don't generate moc targets  [makefile mode only]\n"
 	    "\t-nopwd         Don't look for files in pwd [ project mode only]\n"
-	    "\t-r             Recursive search            [ project mode only]\n"
-	    ,a0);
+	    "\t-norecursive   Don't do a recursive search [ project mode only]\n"
+	    ,a0, 
+	    default_mode(a0) == Option::QMAKE_GENERATE_PROJECT  ? " (default)" : "", project_builtin_regx().latin1(),
+	    default_mode(a0) == Option::QMAKE_GENERATE_MAKEFILE ? " (default)" : "");
     return FALSE;
 }
-static Option::QMAKE_MODE default_mode(QString progname)
-{
-    int s = progname.findRev(Option::dir_sep);
-    if(s != -1)
-	progname = progname.right(progname.length() - (s + 1));
-    if(progname == "qmakegen")
-	return Option::QMAKE_GENERATE_PROJECT;
-    return Option::QMAKE_GENERATE_MAKEFILE;
-}
-
 
 bool
-Option::parseCommandLine(int argc, char **argv)
+Option::internalParseCommandLine(int argc, char **argv, int skip)
 {
     bool before = TRUE;
-    for(int x = 1; x < argc; x++) {
+    for(int x = skip; x < argc; x++) {
 	if(*argv[x] == '-' && strlen(argv[x]) > 1) { /* options */
 	    QString opt = argv[x] + 1;
 
@@ -179,7 +182,6 @@ Option::parseCommandLine(int argc, char **argv)
 		    Option::qmake_mode = Option::QMAKE_GENERATE_MAKEFILE;
 		} else {
 		    specified = FALSE;
-		    Option::qmake_mode = default_mode(argv[0]);
 		}
 		if(specified)
 		    continue;
@@ -204,11 +206,11 @@ Option::parseCommandLine(int argc, char **argv)
 	    } else if(opt == "d") {
 		Option::debug_level++;
 	    } else if(opt == "version" || opt == "v" || opt == "-version") {
-		fprintf(stderr, "Qmake version: %s\n", qmake_version());
+		fprintf(stderr, "Qmake version: %s (Qt %s)\n", qmake_version(), QT_VERSION_STR);
 		fprintf(stderr, "Qmake is free software from Trolltech AS.\n");
 		return FALSE;
 	    } else if(opt == "h" || opt == "help") {
-		return usage(argv[0]);
+		return FALSE;
 	    } else if(opt == "Wall") {
 		Option::warn_level |= WarnAll;
 	    } else if(opt == "Wparser") {
@@ -244,16 +246,15 @@ Option::parseCommandLine(int argc, char **argv)
 			Option::projfile::do_pwd = FALSE;
 		    } else if(opt == "r") {
 			Option::projfile::do_recursive = TRUE;
+		    } else if(opt == "norecursive") {
+			Option::projfile::do_recursive = FALSE;
 		    } else {
 			fprintf(stderr, "***Unknown option -%s\n", opt.latin1());
-			return usage(argv[0]);
+			return FALSE;
 		    }
 		}
 	    }
 	} else {
-	    if(x == 1)
-		Option::qmake_mode = default_mode(argv[0]);
-
 	    QString arg = argv[x];
 	    if(arg.find('=') != -1) {
 		if(before)
@@ -272,27 +273,13 @@ Option::parseCommandLine(int argc, char **argv)
 	    }
 	}
     }
-    if(Option::qmake_mode == Option::QMAKE_GENERATE_NOTHING)
-	Option::qmake_mode = default_mode(argv[0]);
+    return TRUE;
+}
 
-    //last chance for defaults
-    if(Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE ||
-	Option::qmake_mode == Option::QMAKE_GENERATE_PRL) {
-	if(Option::mkfile::qmakespec.isNull() || Option::mkfile::qmakespec.isEmpty())
-	    Option::mkfile::qmakespec = getenv("QMAKESPEC");
 
-	//try REALLY hard to do it for them, lazy..
-	if(Option::mkfile::project_files.isEmpty()) {
-	    QString proj = QDir::currentDirPath();
-	    proj = proj.right(proj.length() - (proj.findRev('/') + 1)) + ".pro";
-	    if(QFile::exists(proj))
-		Option::mkfile::project_files.append(proj);
-	    else
-		return usage(argv[0]);
-	}
-    }
-
-    //defaults for globals
+bool
+Option::parseCommandLine(int argc, char **argv)
+{
     Option::moc_mod = "moc_";
     Option::lex_mod = "_lex";
     Option::yacc_mod = "_yacc";
@@ -304,6 +291,74 @@ Option::parseCommandLine(int argc, char **argv)
     Option::cpp_ext << ".cpp" << ".cc" << ".cxx" << ".C";
     Option::lex_ext = ".l";
     Option::yacc_ext = ".y";
+
+    if(Option::qmake_mode == Option::QMAKE_GENERATE_NOTHING)
+	Option::qmake_mode = default_mode(argv[0]);
+    if(const char *envflags = getenv("QMAKEFLAGS")) {
+	int env_argc = 0, env_size = 0, currlen=0;
+	char quote = 0, **env_argv = NULL;
+	for(int i = 0; envflags[i]; i++) {
+	    if(!quote && (envflags[i] == '\'' || envflags[i] == '"')) {
+		quote = envflags[i];
+	    } else if(envflags[i] == quote) {
+		quote = 0;
+	    } else if(!quote && envflags[i] == ' ') {
+		if(currlen && env_argv && env_argv[env_argc]) {
+		    env_argv[env_argc][currlen] = '\0';
+		    currlen = 0;
+		    env_argc++;
+		}
+	    } else {
+		if(!env_argv || env_argc > env_size) {
+		    env_argv = (char **)realloc(env_argv, sizeof(char *)*(env_size+=10));
+		    for(int i2 = env_argc; i2 < env_size; i2++)
+			env_argv[i2] = NULL;
+		}
+		if(!env_argv[env_argc]) {
+		    currlen = 0;
+		    env_argv[env_argc] = (char*)malloc(255);
+		}
+		if(currlen < 255) 
+		    env_argv[env_argc][currlen++] = envflags[i];
+	    }
+	}
+	if(env_argv[env_argc]) {
+	    env_argv[env_argc][currlen] = '\0';
+	    currlen = 0;
+	    env_argc++;
+	}
+	internalParseCommandLine(env_argc, env_argv);
+	for(int i2 = 0; i2 < env_size; i2++) {
+	    if(env_argv[i2])
+		free(env_argv[i2]);
+	}
+	free(env_argv);
+    }
+    if(!internalParseCommandLine(argc, argv, 1))
+	return usage(argv[0]);
+
+    //last chance for defaults
+    if(Option::qmake_mode == Option::QMAKE_GENERATE_MAKEFILE ||
+	Option::qmake_mode == Option::QMAKE_GENERATE_PRL) {
+	if(Option::mkfile::qmakespec.isNull() || Option::mkfile::qmakespec.isEmpty())
+	    Option::mkfile::qmakespec = getenv("QMAKESPEC");
+
+	//try REALLY hard to do it for them, lazy..
+	if(Option::mkfile::project_files.isEmpty()) {
+	    QString pwd = QDir::currentDirPath(), 
+		   proj = pwd + "/" + pwd.right(pwd.length() - (pwd.findRev('/') + 1)) + ".pro";
+	    if(QFile::exists(proj)) {
+		Option::mkfile::project_files.append(proj);
+	    } else { //last try..
+		QDir d(pwd, "*.pro");
+		if(d.count() != 1)
+		    return usage(argv[0]);
+		Option::mkfile::project_files.append(pwd + "/" + d[0]);
+	    }
+	}
+    }
+
+    //defaults for globals
     if(Option::target_mode == Option::TARG_WIN_MODE) {
 	Option::dir_sep = "\\";
 	Option::obj_ext =  ".obj";
@@ -386,13 +441,13 @@ Option::fixPathToTargetOS(const QString& in, bool fix_env, bool canonical)
     if(canonical)
 	tmp = fixPath(tmp);
     QString rep;
-    if(Option::target_mode == TARG_MAC9_MODE)
-	rep = "[/\\\\]";
-    else if(Option::target_mode == TARG_WIN_MODE)
-	rep = "[/]";
-    else
-	rep = "[\\\\]";
-    return tmp.replace(QRegExp(rep), Option::dir_sep);
+    if(Option::target_mode == TARG_MAC9_MODE) 
+	tmp = tmp.replace('/', Option::dir_sep).replace('\\', Option::dir_sep);
+    else if(Option::target_mode == TARG_WIN_MODE) 
+	tmp = tmp.replace('/', Option::dir_sep);
+    else 
+	tmp = tmp.replace('\\', Option::dir_sep);
+    return tmp;
 }
 
 QString

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qbuffer.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qbuffer.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QBuffer class
 **
@@ -196,8 +196,8 @@ bool QBuffer::open( int m  )
     }
     setMode( m );
     if ( m & IO_Truncate ) {                    // truncate buffer
-        a.resize( 0 );
-        a_len = 0;
+        a.resize( 1 );
+        a_len = 1;
     }
     if ( m & IO_Append ) {                      // append to end of buffer
         ioIndex = a.size();

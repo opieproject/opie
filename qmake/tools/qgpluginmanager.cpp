@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qgpluginmanager.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qgpluginmanager.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QGPluginManager class
 **
-** Copyright (C) 2000-2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -475,7 +475,7 @@ bool QGPluginManager::addLibrary( QLibrary* lib )
 	else if ( cpiFace )
 	    fl << cpiFace->name();
 
-	for ( QStringList::Iterator f = fl.begin(); f != fl.end(); f++ ) {
+	for ( QStringList::Iterator f = fl.begin(); f != fl.end(); ++f ) {
 	    QLibrary *old = plugDict[*f];
 	    if ( !old ) {
 		useful = TRUE;

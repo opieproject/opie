@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qeffects_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qeffects_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QEffects functions
 **
-** Created : 2000.06.21
+** Created : 000621
 **
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **

@@ -1,9 +1,7 @@
 /****************************************************************************
-** $Id: qptrlist.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qptrlist.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QPtrList template/macro class
-**
-** Created :
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -157,4 +155,8 @@ public:
 #define QListIterator QPtrListIterator
 #endif
 
+#ifdef QT_QWINEXPORT
+#define Q_DEFINED_QPTRLIST
+#include "qwinexport.h"
+#endif /* QT_QWINEXPORT */
 #endif // QPTRLIST_H

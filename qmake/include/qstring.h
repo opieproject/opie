@@ -1,12 +1,11 @@
 /****************************************************************************
-** $Id: qstring.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qstring.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
-** Definition of the QString class, and related Unicode
-** functions.
+** Definition of the QString class, and related Unicode functions.
 **
 ** Created : 920609
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -42,6 +41,13 @@
 #ifndef QT_H
 #include "qcstring.h"
 #endif // QT_H
+
+#ifndef QT_NO_STL
+#include <string>
+#if defined(Q_WRONG_SB_CTYPE_MACROS) && defined(_SB_CTYPE_MACROS)
+#undef _SB_CTYPE_MACROS
+#endif
+#endif
 
 
 /*****************************************************************************
@@ -336,9 +342,9 @@ inline bool operator>( QChar c1, QChar c2 ) { return !(c2>=c1); }
 // internal
 struct Q_EXPORT QStringData : public QShared {
     QStringData() :
-        QShared(), unicode(0), ascii(0), len(0), simpletext(1), maxl(0), dirty(0) { ref(); }
+        QShared(), unicode(0), ascii(0), len(0), issimpletext(TRUE), maxl(0), islatin1(FALSE) { ref(); }
     QStringData(QChar *u, uint l, uint m) :
-        QShared(), unicode(u), ascii(0), len(l), simpletext(1), maxl(m), dirty(1) { }
+        QShared(), unicode(u), ascii(0), len(l), issimpletext(FALSE), maxl(m), islatin1(FALSE) { }
     ~QStringData() { if ( unicode ) delete[] ((char*)unicode);
                      if ( ascii ) delete[] ascii; }
 
@@ -350,20 +356,20 @@ struct Q_EXPORT QStringData : public QShared {
 	    delete [] ascii;
 	    ascii = 0;
 	}
-	dirty = 1;
+	issimpletext = FALSE;
     }
 #ifdef Q_OS_MAC9
     uint len;
 #else
     uint len : 30;
 #endif
-    uint simpletext : 1;
+    uint issimpletext : 1;
 #ifdef Q_OS_MAC9
     uint maxl;
 #else
     uint maxl : 30;
 #endif
-    uint dirty : 1;
+    uint islatin1 : 1;
 
 private:
 #if defined(Q_DISABLE_COPY)
@@ -384,11 +390,15 @@ public:
 #ifndef QT_NO_CAST_ASCII
     QString( const char *str );                 // deep copy
 #endif
+#ifndef QT_NO_STL
+    QString( const std::string& );                   // deep copy
+#endif
     ~QString();
 
     QString    &operator=( const QString & );   // impl-shared copy
-#ifndef QT_NO_CAST_ASCII
     QString    &operator=( const char * );      // deep copy
+#ifndef QT_NO_STL
+    QString    &operator=( const std::string& );     // deep copy
 #endif
     QString    &operator=( const QCString& );   // deep copy
     QString    &operator=( QChar c );
@@ -494,12 +504,18 @@ public:
     QString    &append( const QByteArray & );
     QString    &append( const char * );
 #endif
+#ifndef QT_NO_STL
+    QString    &append( const std::string& );
+#endif
     QString    &prepend( char );
     QString    &prepend( QChar );
     QString    &prepend( const QString & );
 #ifndef QT_NO_CAST_ASCII
     QString    &prepend( const QByteArray & );
     QString    &prepend( const char * );
+#endif
+#ifndef QT_NO_STL
+    QString    &prepend( const std::string& );
 #endif
     QString    &remove( uint index, uint len );
     QString    &remove( QChar c );
@@ -556,6 +572,9 @@ public:
     QString    &operator+=( const QByteArray &str );
     QString    &operator+=( const char *str );
 #endif
+#ifndef QT_NO_STL
+    QString    &operator+=( const std::string& );
+#endif
     QString    &operator+=( QChar c );
     QString    &operator+=( char c );
 
@@ -576,7 +595,8 @@ public:
         }
 
     const QChar* unicode() const { return d->unicode; }
-    const char* ascii() const { return latin1(); }
+    const char* ascii() const;
+    static QString fromAscii(const char*, int len=-1);
     const char* latin1() const;
     static QString fromLatin1(const char*, int len=-1);
     QCString utf8() const;
@@ -585,13 +605,18 @@ public:
     static QString fromLocal8Bit(const char*, int len=-1);
     bool operator!() const;
 #ifndef QT_NO_ASCII_CAST
-    operator const char *() const { return latin1(); }
+    operator const char *() const { return ascii(); }
 #endif
+#ifndef QT_NO_STL
+    operator std::string() const { return ascii() ? ascii() : ""; }
+#endif
+
     static QString fromUcs2( const unsigned short *ucs2 );
     const unsigned short *ucs2() const;
 
     QString &setUnicode( const QChar* unicode, uint len );
     QString &setUnicodeCodes( const ushort* unicode_as_ushorts, uint len );
+    QString &setAscii( const char*, int len=-1 );
     QString &setLatin1( const char*, int len=-1 );
 
     int compare( const QString& s ) const;
@@ -609,7 +634,7 @@ public:
     void compose();
 
 #ifndef QT_NO_COMPAT
-    const char* data() const { return latin1(); }
+    const char* data() const { return ascii(); }
 #endif
 
     bool startsWith( const QString& ) const;
@@ -617,7 +642,7 @@ public:
 
     void setLength( uint newLength );
 
-    bool simpleText() const { if ( d->dirty ) checkSimpleText(); return (bool)d->simpletext; }
+    bool simpleText() const { if ( !d->issimpletext ) checkSimpleText(); return (bool)d->issimpletext; }
     bool isRightToLeft() const;
 
 
@@ -631,9 +656,9 @@ private:
 
     void checkSimpleText() const;
 
-    static QChar* asciiToUnicode( const char*, uint * len, uint maxlen=(uint)-1 );
-    static QChar* asciiToUnicode( const QByteArray&, uint * len );
-    static char* unicodeToAscii( const QChar*, uint len );
+    static QChar* latin1ToUnicode( const char*, uint * len, uint maxlen=(uint)-1 );
+    static QChar* latin1ToUnicode( const QByteArray&, uint * len );
+    static char* unicodeToLatin1( const QChar*, uint len );
 
     QStringData *d;
     static QStringData* shared_null;
@@ -794,7 +819,17 @@ inline QString &QString::prepend( char c )
 
 #ifndef QT_NO_CAST_ASCII
 inline QString &QString::prepend( const QByteArray & s )
-{ return insert(0,s.data()); }
+{ return insert(0,QString(s)); }
+#endif
+
+#ifndef QT_NO_STL
+inline QString &QString::prepend( const std::string& s )
+{ return insert(0, s); }
+#endif
+
+#ifndef QT_NO_CAST_ASCII
+inline QString &QString::operator+=( const QByteArray &s )
+{ return operator+=(QString(s)); }
 #endif
 
 inline QString &QString::append( const QString & s )
@@ -802,7 +837,7 @@ inline QString &QString::append( const QString & s )
 
 #ifndef QT_NO_CAST_ASCII
 inline QString &QString::append( const QByteArray &s )
-{ return operator+=(s.data()); }
+{ return operator+=(s); }
 
 inline QString &QString::append( const char * s )
 { return operator+=(s); }
@@ -814,9 +849,11 @@ inline QString &QString::append( QChar c )
 inline QString &QString::append( char c )
 { return operator+=(c); }
 
-#ifndef QT_NO_CAST_ASCII
-inline QString &QString::operator+=( const QByteArray &s )
-{ return operator+=(s.data()); }
+#ifndef QT_NO_STL
+inline QString &QString::operator+=( const std::string& s )
+{ return operator+=(s.c_str()); }
+inline QString &QString::append( const std::string& s )
+{ return operator+=(s); }
 #endif
 
 inline QString &QString::setNum( short n, int base )
@@ -854,10 +891,10 @@ inline int QString::findRev( char c, int index, bool cs) const
 
 #ifndef QT_NO_CAST_ASCII
 inline int QString::find( const char* str, int index ) const
-{ return find(QString::fromLatin1(str), index); }
+{ return find(QString::fromAscii(str), index); }
 
 inline int QString::findRev( const char* str, int index ) const
-{ return findRev(QString::fromLatin1(str), index); }
+{ return findRev(QString::fromAscii(str), index); }
 #endif
 
 
@@ -897,13 +934,13 @@ Q_EXPORT inline const QString operator+( const QString &s1, const QString &s2 )
 Q_EXPORT inline const QString operator+( const QString &s1, const char *s2 )
 {
     QString tmp( s1 );
-    tmp += QString::fromLatin1(s2);
+    tmp += QString::fromAscii(s2);
     return tmp;
 }
 
 Q_EXPORT inline const QString operator+( const char *s1, const QString &s2 )
 {
-    QString tmp = QString::fromLatin1( s1 );
+    QString tmp = QString::fromAscii( s1 );
     tmp += s2;
     return tmp;
 }
@@ -947,4 +984,8 @@ extern Q_EXPORT QCString qt_winQString2MB( const QString& s, int len=-1 );
 extern Q_EXPORT QString qt_winMB2QString( const char* mb, int len=-1 );
 #endif
 
+#ifdef QT_QWINEXPORT
+#define Q_DEFINED_QSTRING
+#include "qwinexport.h"
+#endif /* QT_QWINEXPORT */
 #endif // QSTRING_H

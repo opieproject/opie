@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: msvc_nmake.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: msvc_nmake.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
 ** Created : 970521
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the network module of the Qt GUI Toolkit.
 **
@@ -38,6 +38,7 @@
 #include "msvc_nmake.h"
 #include "option.h"
 #include <qregexp.h>
+#include <qdict.h>
 #include <qdir.h>
 #include <stdlib.h>
 #include <time.h>
@@ -135,6 +136,8 @@ NmakeMakefileGenerator::writeNmakeParts(QTextStream &t)
     t << "DEL_FILE	=       " << var("QMAKE_DEL_FILE") << endl;
     t << "DEL_DIR	=       " << var("QMAKE_DEL_DIR") << endl;
     t << "MOVE		=       " << var("QMAKE_MOVE") << endl;
+    t << "CHK_DIR_EXISTS =	" << var("QMAKE_CHK_DIR_EXISTS") << endl;
+    t << "MKDIR		=	" << var("QMAKE_MKDIR") << endl;
     t << endl;
 
     t << "####### Files" << endl << endl;
@@ -156,15 +159,56 @@ NmakeMakefileGenerator::writeNmakeParts(QTextStream &t)
     t << endl;
 
     t << "####### Implicit rules" << endl << endl;
-    t << ".SUFFIXES: .cpp .cxx .cc .c" << endl << endl;
-    t << ".cpp.obj:\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
-    t << ".cxx.obj:\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
-    t << ".cc.obj:\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
-    t << ".c.obj:\n\t" << var("QMAKE_RUN_CC_IMP") << endl << endl;
+    t << ".SUFFIXES: .c";
+    QStringList::Iterator cppit;
+    for(cppit = Option::cpp_ext.begin(); cppit != Option::cpp_ext.end(); ++cppit)
+	t << " " << (*cppit);
+    t << endl << endl;
+    if(!project->isActiveConfig("no_batch")) {
+	// Batchmode doesn't use the non implicit rules QMAKE_RUN_CXX & QMAKE_RUN_CC
+	project->variables().remove("QMAKE_RUN_CXX");
+	project->variables().remove("QMAKE_RUN_CC");
+
+	QDict<void> source_directories;
+	source_directories.insert(".", (void*)1);
+	if(!project->isEmpty("MOC_DIR"))
+	    source_directories.insert(project->first("MOC_DIR"), (void*)1);
+	if(!project->isEmpty("UI_SOURCES_DIR"))
+	    source_directories.insert(project->first("UI_SOURCES_DIR"), (void*)1);
+	else if(!project->isEmpty("UI_DIR"))
+	    source_directories.insert(project->first("UI_DIR"), (void*)1);
+	QString srcs[] = { QString("SOURCES"), QString("UICIMPLS"), QString("SRCMOC"), QString::null };
+	for(int x = 0; !srcs[x].isNull(); x++) {
+	    QStringList &l = project->variables()[srcs[x]];
+	    for(QStringList::Iterator sit = l.begin(); sit != l.end(); ++sit) {
+		QString sep = "\\";
+		if((*sit).find(sep) == -1)
+		    sep = "/";
+		QString dir = (*sit).section(sep, 0, -2);
+		if(!dir.isEmpty() && !source_directories[dir])
+		    source_directories.insert(dir, (void*)1);
+	    }
+	}
+
+	for(QDictIterator<void> it(source_directories); it.current(); ++it) {
+	    if(it.currentKey().isEmpty())
+		continue;
+	    for(cppit = Option::cpp_ext.begin(); cppit != Option::cpp_ext.end(); ++cppit)
+		t << "{" << it.currentKey() << "}" << (*cppit) << "{" << var("OBJECTS_DIR") << "}" << Option::obj_ext << "::\n\t"
+		  << var("QMAKE_RUN_CXX_IMP_BATCH").replace( QRegExp( "\\$@" ), var("OBJECTS_DIR") ) << endl << "\t$<" << endl << "<<" << endl << endl;
+	    t << "{" << it.currentKey() << "}" << ".c{" << var("OBJECTS_DIR") << "}" << Option::obj_ext << "::\n\t"
+	      << var("QMAKE_RUN_CC_IMP_BATCH").replace( QRegExp( "\\$@" ), var("OBJECTS_DIR") ) << endl << "\t$<" << endl << "<<" << endl << endl;
+	}
+    } else {
+	for(cppit = Option::cpp_ext.begin(); cppit != Option::cpp_ext.end(); ++cppit)
+	    t << (*cppit) << Option::obj_ext << ":\n\t" << var("QMAKE_RUN_CXX_IMP") << endl << endl;
+	t << ".c" << Option::obj_ext << ":\n\t" << var("QMAKE_RUN_CC_IMP") << endl << endl;
+    }
 
     t << "####### Build rules" << endl << endl;
     t << "all: " << varGlue("ALL_DEPS",""," "," ") << "$(TARGET)" << endl << endl;
-    t << "$(TARGET): $(UICDECLS) $(OBJECTS) $(OBJMOC) " << var("TARGETDEPS");
+    t << "$(TARGET): " << var("PRE_TARGETDEPS") << " $(UICDECLS) $(OBJECTS) $(OBJMOC) " 
+      << var("POST_TARGETDEPS");
     if(!project->variables()["QMAKE_APP_OR_DLL"].isEmpty()) {
 	t << "\n\t" << "$(LINK) $(LFLAGS) /OUT:$(TARGET) @<< " << "\n\t  "
 	  << "$(OBJECTS) $(OBJMOC) $(LIBS)";
@@ -173,6 +217,8 @@ NmakeMakefileGenerator::writeNmakeParts(QTextStream &t)
 	  << "$(OBJECTS) $(OBJMOC)";
     }
     t << endl << "<<" << endl;
+    if ( !project->variables()["QMAKE_POST_LINK"].isEmpty() )
+	t << "\t" << var( "QMAKE_POST_LINK" ) << endl;
     if(project->isActiveConfig("dll") && !project->variables()["DLLDESTDIR"].isEmpty()) {
 	QStringList dlldirs = project->variables()["DLLDESTDIR"];
 	for ( QStringList::Iterator dlldir = dlldirs.begin(); dlldir != dlldirs.end(); ++dlldir ) {
@@ -220,6 +266,7 @@ NmakeMakefileGenerator::writeNmakeParts(QTextStream &t)
       << varGlue("UICIMPLS" ,"\n\t-del ","\n\t-del ","")
       << varGlue("QMAKE_CLEAN","\n\t-del ","\n\t-del ","")
       << varGlue("CLEAN_FILES","\n\t-del ","\n\t-del ","");
+    
     if ( project->isActiveConfig("activeqt")) {
 	t << ("\n\t-del tmp\\" + targetfilename + ".*");
 	t << "\n\t-del tmp\\dump.*";
@@ -246,6 +293,10 @@ NmakeMakefileGenerator::writeNmakeParts(QTextStream &t)
     }
 
     t << endl << endl;
+
+    t << "distclean: clean"
+      << "\n\t-del $(TARGET)"
+      << endl << endl;
 }
 
 
@@ -431,6 +482,28 @@ NmakeMakefileGenerator::init()
 	project->variables()["QMAKE_LFLAGS"] += project->variables()["QMAKE_LFLAGS_CONSOLE_ANY"];
 	project->variables()["QMAKE_LIBS"] += project->variables()["QMAKE_LIBS_CONSOLE"];
     }
+    if ( project->isActiveConfig("stl") ) {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_STL_ON"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_STL_ON"];
+    } else {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_STL_OFF"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_STL_OFF"];
+    }
+    if ( project->isActiveConfig("exceptions") ) {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_EXCEPTIONS_ON"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_EXCEPTIONS_ON"];
+    } else {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_EXCEPTIONS_OFF"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_EXCEPTIONS_OFF"];
+    }
+    if ( project->isActiveConfig("rtti") ) {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_RTTI_ON"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_RTTI_ON"];
+    } else {
+	project->variables()["QMAKE_CFLAGS"] += project->variables()["QMAKE_CFLAGS_RTTI_OFF"];
+	project->variables()["QMAKE_CXXFLAGS"] += project->variables()["QMAKE_CXXFLAGS_RTTI_OFF"];
+    }
+
 
     if ( project->isActiveConfig("moc") )
 	setMocAware(TRUE);
@@ -465,7 +538,7 @@ NmakeMakefileGenerator::init()
 	}
 	project->variables()["RES_FILE"] = project->variables()["RC_FILE"];
 	project->variables()["RES_FILE"].first().replace(".rc",".res");
-	project->variables()["TARGETDEPS"] += project->variables()["RES_FILE"];
+	project->variables()["POST_TARGETDEPS"] += project->variables()["RES_FILE"];
     }
     if ( !project->variables()["RES_FILE"].isEmpty())
 	project->variables()["QMAKE_LIBS"] += project->variables()["RES_FILE"];
@@ -476,13 +549,14 @@ NmakeMakefileGenerator::init()
 	project->variables()["VER_MAJ"].append(l[0]);
 	project->variables()["VER_MIN"].append(l[1]);
     }
+
+    QString version = QStringList::split('.', project->first("VERSION")).join("");
     if(project->isActiveConfig("dll")) {
-	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + ".lib");
-	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + ".exp");
+	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + version + ".exp");
     }
     if(project->isActiveConfig("debug")) {
-	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + ".pdb");
-	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + ".ilk");
+	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + version + ".pdb");
+	project->variables()["QMAKE_CLEAN"].append(project->first("DESTDIR") + project->first("TARGET") + version + ".ilk");
 	project->variables()["QMAKE_CLEAN"].append("vc*.pdb");
     }
 }

@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qdatetime.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qdatetime.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of date and time classes
 **
 ** Created : 940124
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -35,7 +35,6 @@
 **
 **********************************************************************/
 
-// Get the system specific includes and defines
 #include "qplatformdefs.h"
 
 #include "qdatetime.h"
@@ -895,6 +894,12 @@ QDate QDate::addYears( int nyears ) const
     int y, m, d;
     julianToGregorian( jd, y, m, d );
     y += nyears;
+
+    QDate tmp(y,m,1);
+    
+    if( d > tmp.daysInMonth() )
+	d = tmp.daysInMonth();
+
     QDate date(y, m, d);
     return date;
 }
@@ -990,13 +995,25 @@ QDate QDate::currentDate( Qt::TimeSpec ts )
 	GetSystemTime( &t );
     d.jd = gregorianToJulian( t.wYear, t.wMonth, t.wDay );
 #else
+    // posix compliant system
     time_t ltime;
     time( &ltime );
     tm *t;
+
+#  if defined(QT_THREAD_SUPPORT) && defined(_POSIX_THREAD_SAFE_FUNCTIONS)
+    // use the reentrant versions of localtime() and gmtime() where available
+    tm res;
+    if ( ts == Qt::LocalTime )
+	t = localtime_r( &ltime, &res );
+    else
+	t = gmtime_r( &ltime, &res );
+#  else
     if ( ts == Qt::LocalTime )
 	t = localtime( &ltime );
-    else		
+    else
 	t = gmtime( &ltime );
+#  endif // QT_THREAD_SUPPORT && _POSIX_THREAD_SAFE_FUNCTIONS
+
     d.jd = gregorianToJulian( t->tm_year + 1900, t->tm_mon + 1, t->tm_mday );
 #endif
     return d;
@@ -1555,7 +1572,7 @@ int QTime::msecsTo( const QTime &t ) const
 
 
 
-/*!  
+/*!
     \overload
 
     Returns the current time as reported by the system clock.
@@ -1653,22 +1670,33 @@ bool QTime::currentTime( QTime *ct, Qt::TimeSpec ts )
     ct->ds = (uint)( MSECS_PER_HOUR*t.wHour + MSECS_PER_MIN*t.wMinute +
 		     1000*t.wSecond + t.wMilliseconds );
 #elif defined(Q_OS_UNIX)
+    // posix compliant system
     struct timeval tv;
     gettimeofday( &tv, 0 );
     time_t ltime = tv.tv_sec;
     tm *t;
-    if ( ts == Qt::LocalTime ) {
+
+#  if defined(QT_THREAD_SUPPORT) && defined(_POSIX_THREAD_SAFE_FUNCTIONS)
+    // use the reentrant versions of localtime() and gmtime() where available
+    tm res;
+    if ( ts == Qt::LocalTime )
+	t = localtime_r( &ltime, &res );
+    else
+	t = gmtime_r( &ltime, &res );
+#  else
+    if ( ts == Qt::LocalTime )
 	t = localtime( &ltime );
-    } else {
+    else
 	t = gmtime( &ltime );
-    }
+#  endif // QT_THREAD_SUPPORT && _POSIX_THREAD_SAFE_FUNCTIONS
+
     ct->ds = (uint)( MSECS_PER_HOUR * t->tm_hour + MSECS_PER_MIN * t->tm_min +
 		     1000 * t->tm_sec + tv.tv_usec / 1000 );
 #else
     time_t ltime; // no millisecond resolution
     ::time( &ltime );
     tm *t;
-    if ( ts == Qt::LocalTime ) 
+    if ( ts == Qt::LocalTime )
 	localtime( &ltime );
     else
 	gmtime( &ltime );
@@ -1706,9 +1734,9 @@ bool QTime::isValid( int h, int m, int s, int ms )
 
     \code
     QTime t;
-    t.start();                     // start clock
-    ... // some lengthy task
-    qDebug( "%d\n", t.elapsed() ); // prints the number of msecs elapsed
+    t.start();
+    some_lengthy_task();
+    qDebug( "Time elapsed: %d ms", t.elapsed() );
     \endcode
 
     \sa restart(), elapsed(), currentTime()
@@ -1960,6 +1988,22 @@ void QDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
 {
     time_t tmp = (time_t) secsSince1Jan1970UTC;
     tm *brokenDown = 0;
+
+#if defined(Q_OS_UNIX) && defined(QT_THREAD_SUPPORT) && defined(_POSIX_THREAD_SAFE_FUNCTIONS)
+    // posix compliant system
+    // use the reentrant versions of localtime() and gmtime() where available
+    tm res;
+    if ( ts == Qt::LocalTime )
+	brokenDown = localtime_r( &tmp, &res );
+    if ( !brokenDown ) {
+	brokenDown = gmtime_r( &tmp, &res );
+	if ( !brokenDown ) {
+	    d.jd = QDate::gregorianToJulian( 1970, 1, 1 );
+	    t.ds = 0;
+	    return;
+	}
+    }
+#else
     if ( ts == Qt::LocalTime )
 	brokenDown = localtime( &tmp );
     if ( !brokenDown ) {
@@ -1970,6 +2014,8 @@ void QDateTime::setTime_t( uint secsSince1Jan1970UTC, Qt::TimeSpec ts )
 	    return;
 	}
     }
+#endif
+
     d.jd = QDate::gregorianToJulian( brokenDown->tm_year + 1900,
 				     brokenDown->tm_mon + 1,
 				     brokenDown->tm_mday );
@@ -2300,7 +2346,7 @@ bool QDateTime::operator>=( const QDateTime &dt ) const
 
 /*!
     \overload
-    
+
     Returns the current datetime, as reported by the system clock.
 
     \sa QDate::currentDate(), QTime::currentTime()

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: msvc_objectmodel.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: msvc_objectmodel.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -40,16 +40,16 @@
 #include <qstringlist.h>
 
 /*
-    This Object model is of course VERY simplyfied, 
+    This Object model is of course VERY simplyfied,
     and does not actually follow the original MSVC
     object model. However, it fulfilles the basic
     needs for qmake
 */
 
 /*
-    If a triState value is 'unset' then the 
+    If a triState value is 'unset' then the
     corresponding property is not in the output,
-    forcing the tool to utilize default values. 
+    forcing the tool to utilize default values.
     False/True values will be in the output...
 */
 enum customBuildCheck {
@@ -83,7 +83,7 @@ enum basicRuntimeCheckOption {
 };
 enum browseInfoOption {
     brInfoNone,
-    brAllInfo, 
+    brAllInfo,
     brNoLocalSymbols
 };
 enum callingConventionOption {
@@ -118,13 +118,13 @@ enum debugOption {
     debugOldStyleInfo,
     debugLineInfoOnly,
     debugEnabled,
-    debugEditAndContinue 
+    debugEditAndContinue
 };
 enum eAppProtectionOption {
     eAppProtectUnchanged,
     eAppProtectLow,
     eAppProtectMedium,
-    eAppProtectHigh 
+    eAppProtectHigh
 };
 enum enumResourceLangID {
     rcUseDefault		= 0,
@@ -231,7 +231,7 @@ enum enumSccEvent {
 enum favorSizeOrSpeedOption {
     favorNone,
     favorSpeed,
-    favorSize 
+    favorSize
 };
 enum genProxyLanguage {
     genProxyNative,
@@ -245,12 +245,12 @@ enum inlineExpansionOption {
 enum linkIncrementalType {
     linkIncrementalDefault,
     linkIncrementalNo,
-    linkIncrementalYes 
+    linkIncrementalYes
 };
 enum linkProgressOption {
     linkProgressNotSet,
     linkProgressAll,
-    linkProgressLibs 
+    linkProgressLibs
 };
 enum machineTypeOption {
     machineNotSet,
@@ -264,7 +264,7 @@ enum midlCharOption {
 enum midlErrorCheckOption {
     midlEnableCustom,
     midlDisableAll,
-    midlEnableAll 
+    midlEnableAll
 };
 enum midlStructMemberAlignOption {
     midlAlignNotSet,
@@ -284,7 +284,7 @@ enum midlWarningLevelOption {
     midlWarningLevel_1,
     midlWarningLevel_2,
     midlWarningLevel_3,
-    midlWarningLevel_4 
+    midlWarningLevel_4
 };
 enum optFoldingType {
     optFoldingDefault,
@@ -296,7 +296,7 @@ enum optimizeOption {
     optimizeMinSpace,
     optimizeMaxSpeed,
     optimizeFull,
-    optimizeCustom 
+    optimizeCustom
 };
 enum optRefType {
     optReferencesDefault,
@@ -312,22 +312,22 @@ enum pchOption {
     pchNone,
     pchCreateUsingSpecific,
     pchGenerateAuto,
-    pchUseUsingSpecific 
+    pchUseUsingSpecific
 };
 enum preprocessOption {
     preprocessNo,
     preprocessYes,
-    preprocessNoLineNumbers 
+    preprocessNoLineNumbers
 };
 enum ProcessorOptimizeOption {
     procOptimizeBlended,
     procOptimizePentium,
-    procOptimizePentiumProAndAbove 
+    procOptimizePentiumProAndAbove
 };
 enum RemoteDebuggerType {
     DbgLocal,
     DbgRemote,
-    DbgRemoteTCPIP 
+    DbgRemoteTCPIP
 };
 enum runtimeLibraryOption {
     rtMultiThreaded,
@@ -335,7 +335,7 @@ enum runtimeLibraryOption {
     rtMultiThreadedDLL,
     rtMultiThreadedDebugDLL,
     rtSingleThreaded,
-    rtSingleThreadedDebug 
+    rtSingleThreadedDebug
 };
 enum structMemberAlignOption {
     alignNotSet,
@@ -343,7 +343,7 @@ enum structMemberAlignOption {
     alignTwoBytes,
     alignFourBytes,
     alignEightBytes,
-    alignSixteenBytes 
+    alignSixteenBytes
 };
 enum subSystemOption {
     subSystemNotSet,
@@ -366,17 +366,17 @@ enum TypeOfDebugger {
     DbgNativeOnly,
     DbgManagedOnly,
     DbgMixed,
-    DbgAuto 
+    DbgAuto
 };
 enum useOfATL {
     useATLNotSet,
     useATLStatic,
-    useATLDynamic 
+    useATLDynamic
 };
 enum useOfMfc {
     useMfcStdWin,
     useMfcStatic,
-    useMfcDynamic 
+    useMfcDynamic
 };
 enum warningLevelOption {
     warningLevel_0,
@@ -390,14 +390,12 @@ class VCToolBase {
 protected:
     // Functions
     VCToolBase(){};
-    ~VCToolBase(){};
+    virtual ~VCToolBase(){}
     virtual bool parseOption( const char* option ) = 0;
 public:
-    bool parseOptions( QStringList& options ) {
-	bool result = TRUE;
-	for ( QStringList::ConstIterator it=options.begin(); (it!=options.end()) && result; it++ )
-	    result = parseOption( (*it).latin1() );
-	return result;
+    void parseOptions( QStringList& options ) {
+	for ( QStringList::ConstIterator it=options.begin(); (it!=options.end()); it++ )
+	    parseOption( (*it).latin1() );
     }
 };
 
@@ -409,9 +407,9 @@ class VCCLCompilerTool : public VCToolBase
 public:
     // Functions
     VCCLCompilerTool();
-    ~VCCLCompilerTool(){};
-    virtual bool parseOption( const char* option );
-    
+    virtual ~VCCLCompilerTool(){}
+    bool parseOption( const char* option );
+
     // Variables
     QStringList		    AdditionalIncludeDirectories;
     QStringList		    AdditionalOptions;
@@ -480,8 +478,8 @@ class VCLinkerTool : public VCToolBase
 public:
     // Functions
     VCLinkerTool();
-    ~VCLinkerTool(){};
-    virtual bool parseOption( const char* option );
+    virtual ~VCLinkerTool(){}
+    bool parseOption( const char* option );
 
     // Variables
     QStringList		    AdditionalDependencies;
@@ -545,8 +543,8 @@ class VCMIDLTool : public VCToolBase
 public:
     // Functions
     VCMIDLTool();
-    ~VCMIDLTool(){};
-    virtual bool parseOption( const char* option );
+    virtual ~VCMIDLTool(){}
+    bool parseOption( const char* option );
 
     // Variables
     QStringList		    AdditionalIncludeDirectories;
@@ -587,8 +585,8 @@ class VCLibrarianTool : public VCToolBase
 public:
     // Functions
     VCLibrarianTool();
-    ~VCLibrarianTool(){};
-    virtual bool parseOption( const char* option ){ return FALSE; };
+    virtual ~VCLibrarianTool(){}
+    bool parseOption( const char* ){ return FALSE; };
 
     // Variables
     QStringList		    AdditionalDependencies;
@@ -608,8 +606,8 @@ class VCCustomBuildTool : public VCToolBase
 public:
     // Functions
     VCCustomBuildTool();
-    ~VCCustomBuildTool(){};
-    virtual bool parseOption( const char* option ){ return FALSE; };
+    virtual ~VCCustomBuildTool(){}
+    bool parseOption( const char* ){ return FALSE; };
 
     // Variables
     QStringList		    AdditionalDependencies;
@@ -625,8 +623,8 @@ class VCResourceCompilerTool : public VCToolBase
 public:
     // Functions
     VCResourceCompilerTool();
-    ~VCResourceCompilerTool(){};
-    virtual bool parseOption( const char* option ){ return FALSE; };
+    virtual ~VCResourceCompilerTool(){}
+    bool parseOption( const char* ){ return FALSE; };
 
     // Variables
     QStringList		    AdditionalIncludeDirectories;
@@ -645,8 +643,8 @@ class VCEventTool : public VCToolBase
 protected:
     // Functions
     VCEventTool() : ExcludedFromBuild( unset ){};
-    ~VCEventTool(){};
-    virtual bool parseOption( const char* option ){ return FALSE; };
+    virtual ~VCEventTool(){}
+    bool parseOption( const char* ){ return FALSE; };
 
 public:
     // Variables
@@ -657,25 +655,25 @@ public:
     QString		    ToolPath;
 };
 
-class VCPostBuildEventTool : public VCEventTool 
+class VCPostBuildEventTool : public VCEventTool
 {
 public:
     VCPostBuildEventTool();
-    ~VCPostBuildEventTool(){};
+    ~VCPostBuildEventTool(){}
 };
 
-class VCPreBuildEventTool : public VCEventTool 
+class VCPreBuildEventTool : public VCEventTool
 {
 public:
     VCPreBuildEventTool();
-    ~VCPreBuildEventTool(){};
+    ~VCPreBuildEventTool(){}
 };
 
-class VCPreLinkEventTool : public VCEventTool 
+class VCPreLinkEventTool : public VCEventTool
 {
 public:
     VCPreLinkEventTool();
-    ~VCPreLinkEventTool(){};
+    ~VCPreLinkEventTool(){}
 };
 
 class VCConfiguration
@@ -683,7 +681,7 @@ class VCConfiguration
 public:
     // Functions
     VCConfiguration();
-    ~VCConfiguration(){};
+    ~VCConfiguration(){}
 
     // Variables
     triState		ATLMinimizesCRunTimeLibraryUsage;
@@ -720,7 +718,7 @@ class VCFilter
 public:
     // Functions
     VCFilter();
-    ~VCFilter(){};
+    ~VCFilter(){}
     void generateMOC( QTextStream &strm, QString str ) const;
     void generateUIC( QTextStream &strm, const QString& str ) const;
 
@@ -739,7 +737,7 @@ class VCProject
 public:
     // Functions
     VCProject();
-    ~VCProject(){};
+    ~VCProject(){}
 
     // Variables
     QString		Name;

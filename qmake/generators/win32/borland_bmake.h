@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: borland_bmake.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: borland_bmake.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
 ** Created : 970521
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the network module of the Qt GUI Toolkit.
 **
@@ -34,8 +34,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef __BORLANDMAKE_H__
-#define __BORLANDMAKE_H__
+#ifndef __BORLAND_BMAKE_H__
+#define __BORLAND_BMAKE_H__
 
 #include "winmakefile.h"
 
@@ -55,5 +55,4 @@ public:
 inline BorlandMakefileGenerator::~BorlandMakefileGenerator()
 { }
 
-
-#endif /* __BORLANDMAKE_H__ */
+#endif /* __BORLAND_BMAKE_H__ */

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: quuid.cpp,v 1.1 2002-11-01 00:10:45 kergoth Exp $
+** $Id: quuid.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QUuid class
 **

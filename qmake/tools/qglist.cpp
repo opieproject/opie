@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qglist.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qglist.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QGList and QGListIterator classes
 **
@@ -329,12 +329,8 @@ QLNode *QGList::locate( uint index )
     int	 distance = index - curIndex;		// node distance to cur node
     bool forward;				// direction to traverse
 
-    if ( index >= numNodes ) {
-#if defined(QT_CHECK_RANGE)
-	qWarning( "QGList::locate: Index %d out of range", index );
-#endif
+    if ( index >= numNodes )
 	return 0;
-    }
 
     if ( distance < 0 )
 	distance = -distance;

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qglobal.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qglobal.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Global type declarations and definitions
 **
@@ -38,11 +38,11 @@
 #ifndef QGLOBAL_H
 #define QGLOBAL_H
 
-#define QT_VERSION_STR   "3.1.0-b2"
+#define QT_VERSION_STR   "3.1.2"
 /*
    QT_VERSION is (major << 16) + (minor << 8) + patch.
  */
-#define QT_VERSION 0x030100
+#define QT_VERSION 0x030102
 
 /*
    The operating system, must be one of: (Q_OS_x)
@@ -141,12 +141,12 @@
 #  define Q_OS_QNX
 #elif defined(_SEQUENT_)
 #  define Q_OS_DYNIX
-#elif defined(_SCO_DS)      /* SCO OpenServer 5 */
+#elif defined(_SCO_DS)                   /* SCO OpenServer 5 + GCC */
 #  define Q_OS_SCO
-#elif defined(__UNIXWARE__) /* UnixWare 7 + GCC, Open UNIX 8 + GCC */
+#elif defined(__USLC__)                  /* all SCO platforms + UDK or OUDK */
 #  define Q_OS_UNIXWARE
 #  define Q_OS_UNIXWARE7
-#elif defined(__USLC__)     /* UnixWare 7 + UDK, Open UNIX 8 + OUDK */
+#elif defined(__svr4__) && defined(i386) /* Open UNIX 8 + GCC */
 #  define Q_OS_UNIXWARE
 #  define Q_OS_UNIXWARE7
 #else
@@ -225,7 +225,9 @@
 /* Visual C++.Net issues for _MSC_VER >= 1300 */
 #  if _MSC_VER >= 1300
 #    define Q_CC_MSVC_NET
-#    define Q_TYPENAME
+#    if _MSC_VER < 1310
+#      define Q_TYPENAME
+#    endif
 #  endif
 #  define Q_NO_USING_KEYWORD /* ### check "using" status */
 
@@ -270,6 +272,10 @@
 /* GCC 2.95 knows "using" but does not support it correctly */
 #  if __GNUC__ == 2 && __GNUC_MINOR__ <= 95
 #    define Q_NO_USING_KEYWORD
+#  endif
+/* GCC 3.1 and GCC 3.2 wrongly define _SB_CTYPE_MACROS on HP-UX */
+#  if defined(Q_OS_HPUX) && __GNUC__ == 3 && __GNUC_MINOR__ >= 1
+#    define Q_WRONG_SB_CTYPE_MACROS
 #  endif
 #  if (defined(__arm__) || defined(__ARMEL__)) && !defined(QT_MOC_CPP)
 #    define Q_PACKED __attribute__ ((packed))
@@ -390,6 +396,10 @@
 /* The UnixWare 7 UDK compiler is based on EDG and does define __EDG__ */
 #  elif defined(__USLC__) && defined(__SCO_VERSION__)
 #    define Q_CC_USLC
+/* The latest UDK 7.1.1b does not need this, but previous versions do */
+#    if !defined(__SCO_VERSION__) || (__SCO_VERSION__ < 302200010)
+#      define Q_INLINE_TEMPLATES inline
+#    endif
 #    define Q_NO_USING_KEYWORD /* ### check "using" status */
 
 /* Never tested! */
@@ -397,9 +407,8 @@
 #    define Q_CC_OC
 #    define Q_NO_USING_KEYWORD
 
-/* CDS++ is not documented to define __EDG__ or __EDG in the Reliant
-   documentation but we suppose it does, in any case it does follow
-   conventions like _BOOL */
+/* CDS++ defines __EDG__ although this is not documented in the Reliant
+   documentation. It also follows conventions like _BOOL and this documented */
 #  elif defined(sinix)
 #    define Q_CC_CDS
 #    define Q_NO_USING_KEYWORD
@@ -415,6 +424,8 @@
 #      define Q_TYPENAME
 #      define Q_BROKEN_TEMPLATE_SPECIALIZATION
 #      define Q_STRICT_INLINING_RULES
+#      define Q_NO_EXPLICIT_KEYWORD
+#      define Q_INLINE_TEMPLATES inline
 #    elif defined(_COMPILER_VERSION) && (_COMPILER_VERSION < 730) /* 7.2 */
 #      define Q_TYPENAME
 #      define Q_BROKEN_TEMPLATE_SPECIALIZATION
@@ -423,11 +434,13 @@
 #  endif
 
 /* The older UnixWare 2.X compiler? */
-#elif defined(__USLC__) && !defined(__SCO_VERSION__)
+#elif defined(__USLC__)
 #  define Q_CC_USLC
+#  define Q_TYPENAME
 #  define Q_NO_BOOL_TYPE
 #  define Q_NO_EXPLICIT_KEYWORD
 #  define Q_NO_USING_KEYWORD
+#  define Q_INLINE_TEMPLATES inline
 
 /* Never tested! */
 #elif defined(__HIGHC__)
@@ -453,6 +466,16 @@
 #    define Q_NO_EXPLICIT_KEYWORD
 #    define Q_NO_USING_KEYWORD
 #  endif
+
+/* CDS++ does not seem to define __EDG__ or __EDG according to Reliant
+   documentation but nevertheless uses EDG conventions like _BOOL */
+#elif defined(sinix)
+#  define Q_CC_EDG
+#  define Q_CC_CDS
+#  if !defined(_BOOL)
+#    define Q_NO_BOOL_TYPE
+#  endif
+#  define Q_BROKEN_TEMPLATE_SPECIALIZATION
 
 #elif defined(Q_OS_HPUX)
 /* __HP_aCC was not defined in first aCC releases */
@@ -506,6 +529,7 @@
 #elif defined(Q_OS_UNIX)
 #  if defined(QWS)
 #    define Q_WS_QWS
+#    define QT_NO_QWS_IM
 #  elif defined(Q_OS_MACX)
 #    define Q_WS_MACX
 #  else
@@ -745,6 +769,10 @@ class QDataStream;
 #  endif
 #endif
 
+#if !defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#  define QT_NO_COP
+#endif
+
 #ifndef QT_H
 #include <qfeatures.h>
 #endif // QT_H
@@ -752,6 +780,7 @@ class QDataStream;
 
 //
 // Create Qt DLL if QT_DLL is defined (Windows only)
+// or QT_SHARED is defined (Kylix only)
 //
 
 #if defined(Q_OS_WIN32) || defined(Q_OS_WIN64)
@@ -770,13 +799,24 @@ class QDataStream;
 #    define Q_EXPORT  __declspec(dllimport)
 #    define Q_TEMPLATEDLL
 #    ifndef Q_TEMPLATE_EXTERN
-#      if defined(Q_CC_MSVC)
-#        define Q_TEMPLATE_EXTERN /*extern*/ //### too many warnings, even though disabled
+#      if defined(Q_CC_MSVC_NET)
+#        define Q_TEMPLATE_EXTERN extern
 #      else
 #        define Q_TEMPLATE_EXTERN
 #      endif
 #    endif
-#    undef  Q_DISABLE_COPY  /* avoid unresolved externals */
+#    undef  Q_DISABLE_COPY	/* avoid unresolved externals */
+#  endif
+#elif defined(Q_OS_LINUX) && defined(Q_CC_BOR)
+#  if defined(QT_SHARED)	/* create a Qt shared library */
+#    define Q_EXPORT  __declspec(dllexport)
+#    define Q_TEMPLATEDLL
+#    define Q_TEMPLATE_EXTERN
+#    undef  Q_DISABLE_COPY	/* avoid unresolved externals */
+#  else
+#    define Q_TEMPLATEDLL
+#    define Q_TEMPLATE_EXTERN
+#    undef  Q_DISABLE_COPY 	/* avoid unresolved externals */
 #  endif
 #else
 #  undef QT_MAKEDLL		/* ignore these for other platforms */
@@ -803,7 +843,9 @@ extern Q_EXPORT bool qt_winunicode;
 
 Q_EXPORT const char *qVersion();
 Q_EXPORT bool qSysInfo( int *wordSize, bool *bigEndian );
-#if defined(Q_WS_WIN)
+#if defined(Q_OS_MAC)
+int qMacVersion();
+#elif defined(Q_WS_WIN)
 Q_EXPORT int qWinVersion();
 #if defined(UNICODE)
 #define QT_WA( uni, ansi ) if ( qt_winunicode ) { uni } else { ansi }
@@ -969,6 +1011,22 @@ Q_EXPORT const char *qInstallPathData();
 
 #endif // __cplusplus
 
+// compilers which follow outdated template instantiation rules
+// require a class to have a comparison operator to exist when
+// a QValueList of this type is instantiated. It's not actually
+// used in the list, though. Hence the dummy implementation.
+// Just in case other code relies on it we better trigger a warning
+// mandating a real implementation.
+#ifdef Q_FULL_TEMPLATE_INSTANTIATION
+#  define Q_DUMMY_COMPARISON_OPERATOR(C) \
+    bool operator==( const C& ) const { \
+        qWarning( #C"::operator==( const "#C"& ) got called." ); \
+        return FALSE; \
+    }
+#else
+#  define Q_DUMMY_COMPARISON_OPERATOR(C)
+#endif
+
 #endif // QGLOBAL_H
 
 //
@@ -992,6 +1050,7 @@ Q_EXPORT const char *qInstallPathData();
 #    pragma warning(disable: 4660) // template-class specialization 'identifier' is already instantiated
 #    pragma warning(disable: 4355) // 'this' : used in base member initializer list
 #    pragma warning(disable: 4231) // nonstandard extension used : 'extern' before template explicit instantiation
+#    pragma warning(disable: 4710) // function not inlined
 #  elif defined(Q_CC_BOR)
 #    pragma option -w-inl
 #    pragma option -w-aus

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: option.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: option.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -43,7 +43,7 @@
 #include <qfile.h>
 
 #define QMAKE_VERSION_MAJOR 1
-#define QMAKE_VERSION_MINOR 4
+#define QMAKE_VERSION_MINOR 5
 #define QMAKE_VERSION_PATCH 0
 const char *qmake_version();
 
@@ -116,6 +116,9 @@ struct Option
 	static QStringList project_files;
 	static QString qmakespec_commandline;
     };
+
+private:
+    static bool internalParseCommandLine(int, char **, int=0);
 };
 
 

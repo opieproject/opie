@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: msvc_vcproj.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: msvc_vcproj.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of VcprojGenerator class.
 **
 ** Created : 970521
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the network module of the Qt GUI Toolkit.
 **
@@ -34,8 +34,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef __VCPROJMAKE_H__
-#define __VCPROJMAKE_H__
+#ifndef __MSVC_VCPROJ_H__
+#define __MSVC_VCPROJ_H__
 
 #include "winmakefile.h"
 #include "msvc_objectmodel.h"
@@ -46,6 +46,7 @@ enum target {
     StaticLib
 };
 
+struct QUuid;
 class VcprojGenerator : public Win32MakefileGenerator
 {
     bool init_flag;
@@ -68,6 +69,7 @@ protected:
     virtual void processPrlVariable(const QString &, const QStringList &);
     virtual bool findLibraries();
     virtual void outputVariables();
+    QString fixFilename(QString ofile) const;
     
     void initOld();
     void initProject();
@@ -89,27 +91,11 @@ protected:
     void initLexYaccFiles();
     void initResourceFiles();
 
-    /*
-    void writeGuid( QTextStream &t );
-    void writeAdditionalOptions( QTextStream &t );
-    void writeHeaders( QTextStream &t );
-    void writeSources( QTextStream &t );
-    void writeMocs( QTextStream &t );
-    void writeLexs( QTextStream &t );
-    void writeYaccs( QTextStream &t );
-    void writePictures( QTextStream &t );
-    void writeImages( QTextStream &t );
-    void writeIDLs( QTextStream &t );
-
-    void writeForms( QTextStream &t );
-    void writeFormsSourceHeaders( QString &variable, QTextStream &t );
-    void writeTranslations( QTextStream &t );
-    void writeStrippedTranslations( QTextStream &t );
-    */
-
     VCProject vcProject;
     target projectTarget;
 
+private:
+    QUuid increaseUUID(const QUuid &id);
     friend class VCFilter;
 };
 
@@ -126,4 +112,4 @@ inline bool VcprojGenerator::findLibraries()
     return Win32MakefileGenerator::findLibraries("MSVCVCPROJ_LIBS");
 }
 
-#endif /* __VCPROJMAKE_H__ */
+#endif /* __MSVC_VCPROJ_H__ */

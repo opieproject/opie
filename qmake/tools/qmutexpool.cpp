@@ -1,27 +1,46 @@
+/****************************************************************************
+** $Id: qmutexpool.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
+**
+** ...
+**
+** Copyright (C) 2002 Trolltech AS.  All rights reserved.
+**
+** This file is part of the tools module of the Qt GUI Toolkit.
+**
+** This file may be distributed under the terms of the Q Public License
+** as defined by Trolltech AS of Norway and appearing in the file
+** LICENSE.QPL included in the packaging of this file.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+**   information about Qt Commercial License Agreements.
+** See http://www.trolltech.com/qpl/ for QPL licensing information.
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
+**
+** Contact info@trolltech.com if any conditions of this licensing are
+** not clear to you.
+**
+**********************************************************************/
+
 #include "qmutexpool_p.h"
 
 #ifdef QT_THREAD_SUPPORT
 
 #include <qthread.h>
-#include <stdio.h>
 
 QMutexPool *qt_global_mutexpool = 0;
 
-// this is an internal class used only for inititalizing the global mutexpool
-class QGlobalMutexPoolInitializer
-{
-public:
-    inline QGlobalMutexPoolInitializer()
-    {
-	/*
-	  Purify will report a leak here. However, this mutex pool must be alive
-	  until *everything* in Qt has been destructed. Unfortunately there is
-	  no way to guarantee this, so we never destroy this mutex pool.
-	*/
-	qt_global_mutexpool = new QMutexPool( TRUE );
-    }
-};
-QGlobalMutexPoolInitializer qt_global_mutexpool_initializer;
 
 /*!
     \class QMutexPool qmutexpool_p.h
@@ -85,9 +104,12 @@ QGlobalMutexPoolInitializer qt_global_mutexpool_initializer;
     QMutexPool is destructed.
 */
 QMutexPool::QMutexPool( bool recursive, int size )
-    : mutex( FALSE ), mutexes( size ), recurs( recursive )
+    : mutex( FALSE ), count( size ), recurs( recursive )
 {
-    mutexes.fill( 0 );
+    mutexes = new QMutex*[count];
+    for ( int index = 0; index < count; ++index ) {
+	mutexes[index] = 0;
+    }
 }
 
 /*!
@@ -97,11 +119,12 @@ QMutexPool::QMutexPool( bool recursive, int size )
 QMutexPool::~QMutexPool()
 {
     QMutexLocker locker( &mutex );
-    QMutex **d = mutexes.data();
-    for ( int index = 0; (uint) index < mutexes.size(); index++ ) {
-	delete d[index];
-	d[index] = 0;
+    for ( int index = 0; index < count; ++index ) {
+	delete mutexes[index];
+	mutexes[index] = 0;
     }
+    delete [] mutexes;
+    mutexes = 0;
 }
 
 /*!
@@ -110,21 +133,20 @@ QMutexPool::~QMutexPool()
 */
 QMutex *QMutexPool::get( void *address )
 {
-    QMutex **d = mutexes.data();
-    int index = (int)( (ulong) address % mutexes.size() );
+    int index = (int) ( (unsigned long) address % count );
 
-    if ( ! d[index] ) {
+    if ( ! mutexes[index] ) {
 	// mutex not created, create one
 
 	QMutexLocker locker( &mutex );
 	// we need to check once again that the mutex hasn't been created, since
 	// 2 threads could be trying to create a mutex as the same index...
-	if ( ! d[index] ) {
-	    d[index] = new QMutex( recurs );
+	if ( ! mutexes[index] ) {
+	    mutexes[index] = new QMutex( recurs );
 	}
     }
 
-    return d[index];
+    return mutexes[index];
 }
 
 #endif

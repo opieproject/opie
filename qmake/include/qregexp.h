@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qregexp.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qregexp.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QRegExp class
 **
@@ -80,7 +80,7 @@ public:
 	       bool indexIsStart = TRUE ) const;
 #endif
 
-#if defined(qdoc)
+#if defined(Q_QDOC)
     int search( const QString& str, int offset = 0,
 		CaretMode caretMode = CaretAtZero ) const;
     int searchRev( const QString& str, int offset = -1,

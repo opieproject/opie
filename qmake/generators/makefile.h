@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: makefile.h,v 1.1 2002-11-01 00:31:15 kergoth Exp $
+** $Id: makefile.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
 ** Created : 970521
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the network module of the Qt GUI Toolkit.
 **
@@ -47,7 +47,7 @@ class MakefileGenerator
     bool init_opath_already, init_already, moc_aware, no_io;
     QStringList createObjectList(const QString &var);
     QString build_args();
-    QMap<QString, QString> depHeuristics, depKeyMap;
+    QMap<QString, QString> depHeuristics, depKeyMap, fileFixed;
     QMap<QString, QString> mocablesToMOC, mocablesFromMOC;
     QMap<QString, QStringList> depends;
 
@@ -68,16 +68,16 @@ protected:
 
     class MakefileDependDir {
     public:
-	MakefileDependDir(QString r, QString l) : real_dir(r), local_dir(l) { }
+	MakefileDependDir(const QString &r, const QString &l) : real_dir(r), local_dir(l) { }
 	QString real_dir, local_dir;
     };
-    bool generateDependencies(QPtrList<MakefileDependDir> &dirs, QString x, bool recurse);
+    bool generateDependencies(QPtrList<MakefileDependDir> &dirs, const QString &x, bool recurse);
 
     QString buildArgs();
 
     QString specdir();
     QString cleanFilePath(const QString &file) const;
-    bool generateMocList(QString fn);
+    bool generateMocList(const QString &fn);
 
     QString findMocSource(const QString &moc_file) const;
     QString findMocDestination(const QString &src_file) const;

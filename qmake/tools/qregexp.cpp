@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qregexp.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qregexp.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QRegExp class
 **
@@ -263,15 +263,15 @@
     \row \i <b>. (dot)</b>
 	 \i This matches any character (including newline).
     \row \i <b>\\d</b>
-	 \i This matches a digit (see QChar::isDigit()).
+	 \i This matches a digit (QChar::isDigit()).
     \row \i <b>\\D</b>
 	 \i This matches a non-digit.
     \row \i <b>\\s</b>
-	 \i This matches a whitespace (see QChar::isSpace()).
+	 \i This matches a whitespace (QChar::isSpace()).
     \row \i <b>\\S</b>
 	 \i This matches a non-whitespace.
     \row \i <b>\\w</b>
-	 \i This matches a word character (see QChar::isLetterOrNumber()).
+	 \i This matches a word character (QChar::isLetterOrNumber() or '_').
     \row \i <b>\\W</b>
 	 \i This matches a non-word character.
     \row \i <b>\\n</b>
@@ -547,7 +547,14 @@
     To substitute a pattern use QString::replace().
 
     Perl's extended \c{/x} syntax is not supported, nor are
-    regexp comments (?#comment) or directives, e.g. (?i).
+    directives, e.g. (?i), or regexp comments, e.g. (?#comment). On
+    the other hand, C++'s rules for literal strings can be used to
+    achieve the same:
+    \code
+    QRegExp mark( "\\b" // word boundary
+		  "[Mm]ark" // the word we want to match
+		);
+    \endcode
 
     Both zero-width positive and zero-width negative lookahead
     assertions (?=pattern) and (?!pattern) are supported with the same
@@ -677,11 +684,11 @@
     To imitate the matching of a shell we can use wildcard mode.
 
     \code
-    QRegExp rx( "*.html" );     // invalid regexp: * doesn't quantify anything
-    rx.setWildcard( TRUE );     // now it's a valid wildcard regexp
-    rx.search( "index.html" );  // returns 0 (matched at position 0)
-    rx.search( "default.htm" ); // returns -1 (no match)
-    rx.search( "readme.txt" );  // returns -1 (no match)
+    QRegExp rx( "*.html" );         // invalid regexp: * doesn't quantify anything
+    rx.setWildcard( TRUE );         // now it's a valid wildcard regexp
+    rx.exactMatch( "index.html" );  // returns TRUE
+    rx.exactMatch( "default.htm" ); // returns FALSE
+    rx.exactMatch( "readme.txt" );  // returns FALSE
     \endcode
 
     Wildcard matching can be convenient because of its simplicity, but
@@ -714,6 +721,11 @@ const int EmptyCapture = INT_MAX;
 const int InftyLen = INT_MAX;
 const int InftyRep = 1025;
 const int EOS = -1;
+
+static bool isWord( QChar ch )
+{
+    return ch.isLetterOrNumber() || ch == QChar( '_' );
+}
 
 /*
   Merges two QMemArrays of ints and puts the result into the first one.
@@ -1680,9 +1692,9 @@ bool QRegExpEngine::testAnchor( int i, int a, const int *capBegin )
 	bool before = FALSE;
 	bool after = FALSE;
 	if ( mmPos + i != 0 )
-	    before = mmIn[mmPos + i - 1].isLetterOrNumber();
+	    before = isWord( mmIn[mmPos + i - 1] );
 	if ( mmPos + i != mmLen )
-	    after = mmIn[mmPos + i].isLetterOrNumber();
+	    after = isWord( mmIn[mmPos + i] );
 	if ( (a & Anchor_Word) != 0 && (before == after) )
 	    return FALSE;
 	if ( (a & Anchor_NonWord) != 0 && (before != after) )
@@ -2632,7 +2644,14 @@ int QRegExpEngine::getEscape()
 	return Tok_CharClass;
     case 'W':
 	// see QChar::isLetterOrNumber()
-	yyCharClass->addCategories( 0x7ff07f8f );
+	yyCharClass->addCategories( 0x7fe07f8f );
+	yyCharClass->addRange( 0x203f, 0x2040 );
+	yyCharClass->addSingleton( 0x2040 );
+	yyCharClass->addSingleton( 0x30fb );
+	yyCharClass->addRange( 0xfe33, 0xfe34 );
+	yyCharClass->addRange( 0xfe4d, 0xfe4f );
+	yyCharClass->addSingleton( 0xff3f );
+	yyCharClass->addSingleton( 0xff65 );
 	return Tok_CharClass;
 #endif
 #ifndef QT_NO_REGEXP_ESCAPE
@@ -2652,6 +2671,7 @@ int QRegExpEngine::getEscape()
     case 'w':
 	// see QChar::isLetterOrNumber()
 	yyCharClass->addCategories( 0x000f8070 );
+	yyCharClass->addSingleton( 0x005f ); // '_'
 	return Tok_CharClass;
 #endif
 #ifndef QT_NO_REGEXP_ESCAPE
@@ -3183,7 +3203,8 @@ static QRegExpEngine *newEngine( const QString& pattern, bool caseSensitive )
 #ifndef QT_NO_REGEXP_OPTIM
     if ( engineCache != 0 ) {
 #ifdef QT_THREAD_SUPPORT
-	QMutexLocker locker( qt_global_mutexpool->get( &engineCache ) );
+	QMutexLocker locker( qt_global_mutexpool ?
+			     qt_global_mutexpool->get( &engineCache ) : 0 );
 #endif
 	QRegExpEngine *eng = engineCache->take( pattern );
 	if ( eng == 0 || eng->caseSensitive() != caseSensitive ) {
@@ -3199,11 +3220,12 @@ static QRegExpEngine *newEngine( const QString& pattern, bool caseSensitive )
 
 static void derefEngine( QRegExpEngine *eng, const QString& pattern )
 {
+#ifdef QT_THREAD_SUPPORT
+    QMutexLocker locker( qt_global_mutexpool ?
+			 qt_global_mutexpool->get( &engineCache ) : 0 );
+#endif
     if ( eng != 0 && eng->deref() ) {
 #ifndef QT_NO_REGEXP_OPTIM
-#ifdef QT_THREAD_SUPPORT
-	QMutexLocker locker( qt_global_mutexpool->get( &engineCache ) );
-#endif
 	if ( engineCache == 0 ) {
 	    engineCache = new QCache<QRegExpEngine>;
 	    engineCache->setAutoDelete( TRUE );
@@ -3565,13 +3587,6 @@ int QRegExp::match( const QString& str, int index, int *len,
 }
 #endif // QT_NO_COMPAT
 
-/*!
-    \overload
-
-    This convenience function searches with a \c CaretMode of \c
-    CaretAtZero which is the most common usage.
-*/
-
 int QRegExp::search( const QString& str, int offset ) const
 {
     return search( str, offset, CaretAtZero );
@@ -3624,13 +3639,6 @@ int QRegExp::search( const QString& str, int offset, CaretMode caretMode ) const
     return priv->captured[0];
 }
 
-
-/*!
-    \overload
-
-    This convenience function searches with a \c CaretMode of \c
-    CaretAtZero which is the most common usage.
-*/
 
 int QRegExp::searchRev( const QString& str, int offset ) const
 {
@@ -3694,7 +3702,7 @@ int QRegExp::matchedLength() const
 }
 
 #ifndef QT_NO_REGEXP_CAPTURE
-/*! 
+/*!
   Returns the number of captures contained in the regular expression.
  */
 int QRegExp::numCaptures() const

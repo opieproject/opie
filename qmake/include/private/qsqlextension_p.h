@@ -51,21 +51,41 @@
 
 #ifndef QT_H
 #include "qmap.h"
+#include "qvaluevector.h"
 #include "qstring.h"
 #include "qvariant.h"
+#include "qsql.h"
 #endif // QT_H
 
 #ifndef QT_NO_SQL
 
 #if !defined( QT_MODULE_SQL ) || defined( QT_LICENSE_PROFESSIONAL )
 #define QM_EXPORT_SQL
+#define QM_TEMPLATE_EXTERN_SQL
 #else
 #define QM_EXPORT_SQL Q_EXPORT
+#define QM_TEMPLATE_EXTERN_SQL Q_TEMPLATE_EXTERN
 #endif
 
+struct Param {
+    Param( const QVariant& v = QVariant(), QSql::ParameterType t = QSql::In ): value( v ), typ( t ) {}
+    QVariant value;
+    QSql::ParameterType typ;
+    Q_DUMMY_COMPARISON_OPERATOR(Param)
+};
+
+struct Holder {
+    Holder( const QString& hldr = QString::null, int pos = -1 ): holderName( hldr ), holderPos( pos ) {}
+    bool operator==( const Holder& h ) const { return h.holderPos == holderPos && h.holderName == holderName; }
+    bool operator!=( const Holder& h ) const { return h.holderPos != holderPos || h.holderName != holderName; }
+    QString holderName;
+    int	    holderPos;
+};
+
 #if defined(Q_TEMPLATEDLL)
-Q_TEMPLATE_EXTERN template class QM_EXPORT_SQL QMap<QString,QVariant>;
-Q_TEMPLATE_EXTERN template class QM_EXPORT_SQL QMap<int,QString>;
+QM_TEMPLATE_EXTERN_SQL template class QM_EXPORT_SQL QMap<QString,Param>;
+QM_TEMPLATE_EXTERN_SQL template class QM_EXPORT_SQL QMap<int,QString>;
+QM_TEMPLATE_EXTERN_SQL template class QM_EXPORT_SQL QValueVector<Holder>;
 #endif
 
 class QM_EXPORT_SQL QSqlExtension {
@@ -74,9 +94,11 @@ public:
     virtual ~QSqlExtension();
     virtual bool prepare( const QString& query );
     virtual bool exec();
-    virtual void bindValue( const QString& holder, const QVariant& value );
-    virtual void bindValue( int pos, const QVariant& value );
-    virtual void addBindValue( const QVariant& value );
+    virtual void bindValue( const QString& holder, const QVariant& value, QSql::ParameterType = QSql::In );
+    virtual void bindValue( int pos, const QVariant& value, QSql::ParameterType = QSql::In );
+    virtual void addBindValue( const QVariant& value, QSql::ParameterType = QSql::In );
+    virtual QVariant parameterValue( const QString& holder );
+    virtual QVariant parameterValue( int pos );
     void clearValues();
     void clearIndex();
 
@@ -86,7 +108,13 @@ public:
     int bindCount;
 
     QMap<int, QString> index;
-    QMap<QString, QVariant> values;
+    typedef QMap<QString, Param> ValueMap;
+    ValueMap values;
+
+    // convenience container for QSqlQuery
+    // to map holders <-> positions
+    typedef QValueVector<Holder> HolderVector;
+    HolderVector holders;
 };
 
 class QM_EXPORT_SQL QSqlDriverExtension
@@ -96,6 +124,5 @@ public:
     virtual ~QSqlDriverExtension();
     virtual bool isOpen() const = 0;
 };
-
 #endif
 #endif

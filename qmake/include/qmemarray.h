@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qmemarray.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qmemarray.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QMemArray template/macro class
 **
@@ -43,7 +43,7 @@
 #endif // QT_H
 
 
-template<class type> 
+template<class type>
 class QMemArray : public QGArray
 {
 public:
@@ -68,6 +68,7 @@ public:
     bool  isEmpty() const	{ return QGArray::size() == 0; }
     bool  isNull()  const	{ return QGArray::data() == 0; }
     bool  resize( uint size )	{ return QGArray::resize(size*sizeof(type)); }
+    bool  resize( uint size, Optimization optim ) { return QGArray::resize(size*sizeof(type), optim); }
     bool  truncate( uint pos )	{ return QGArray::resize(pos*sizeof(type)); }
     bool  fill( const type &d, int size = -1 )
 	{ return QGArray::fill((char*)&d,size,sizeof(type) ); }
@@ -108,15 +109,21 @@ public:
     ConstIterator end() const { return data() + size(); }
 };
 
+#ifndef QT_QWINEXPORT
 #if defined(Q_TEMPLATEDLL)
 // MOC_SKIP_BEGIN
 Q_TEMPLATE_EXTERN template class Q_EXPORT QMemArray<int>;
 Q_TEMPLATE_EXTERN template class Q_EXPORT QMemArray<bool>;
 // MOC_SKIP_END
 #endif
+#endif /* QT_QWINEXPORT */
 
 #ifndef QT_NO_COMPAT
 #define QArray QMemArray
 #endif
 
+#ifdef QT_QWINEXPORT
+#define Q_DEFINED_QMEMARRAY
+#include <qwinexport.h>
+#endif /* QT_QWINEXPORT */
 #endif // QARRAY_H

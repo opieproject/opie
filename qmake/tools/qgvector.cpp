@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qgvector.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qgvector.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QGVector class
 **
@@ -34,6 +34,12 @@
 ** not clear to you.
 **
 **********************************************************************/
+
+#include "qglobal.h"
+#if defined(Q_CC_BOR)
+// needed for qsort() because of a std namespace problem on Borland
+#include "qplatformdefs.h"
+#endif
 
 #define	 QGVECTOR_CPP
 #include "qgvector.h"
@@ -393,7 +399,8 @@ void QGVector::sort()				// sort vector
     }
 
 #ifdef QT_THREAD_SUPPORT
-    QMutexLocker locker( qt_global_mutexpool->get( &sort_vec ) );
+    QMutexLocker locker( qt_global_mutexpool ?
+			 qt_global_mutexpool->get( &sort_vec ) : 0 );
 #endif // QT_THREAD_SUPPORT
 
     sort_vec = (QGVector*)this;

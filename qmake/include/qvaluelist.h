@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qvaluelist.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qvaluelist.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QValueList class
 **
@@ -662,4 +662,8 @@ Q_INLINE_TEMPLATES QDataStream& operator<<( QDataStream& s, const QValueList<T>&
     return s;
 }
 #endif // QT_NO_DATASTREAM
+#ifdef QT_QWINEXPORT
+#define Q_DEFINED_QVALUELIST
+#include "qwinexport.h"
+#endif /* QT_QWINEXPORT */
 #endif // QVALUELIST_H

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qfileinfo_unix.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qfileinfo_unix.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QFileInfo class
 **
@@ -214,9 +214,9 @@ uint QFileInfo::groupId() const
     \code
 	QFileInfo fi( "/tmp/archive.tar.gz" );
 	if ( fi.permission( QFileInfo::WriteUser | QFileInfo::ReadGroup ) )
-	    qWarning( "I can change the file; my group can read the file.");
+	    qWarning( "I can change the file; my group can read the file" );
 	if ( fi.permission( QFileInfo::WriteGroup | QFileInfo::WriteOther ) )
-	    qWarning( "The group or others can change the file!" );
+	    qWarning( "The group or others can change the file" );
     \endcode
 
     \sa isReadable(), isWritable(), isExecutable()

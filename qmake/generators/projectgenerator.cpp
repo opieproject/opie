@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: projectgenerator.cpp,v 1.1 2002-11-01 00:31:15 kergoth Exp $
+** $Id: projectgenerator.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -42,6 +42,22 @@
 #include <qfileinfo.h>
 #include <qregexp.h>
 
+QString project_builtin_regx() //calculate the builtin regular expression..
+{ 
+    QString ret;
+    QStringList builtin_exts(".c");
+    builtin_exts << Option::ui_ext << Option::yacc_ext << Option::lex_ext << ".ts";
+    builtin_exts += Option::h_ext + Option::cpp_ext;
+    for(QStringList::Iterator ext_it = builtin_exts.begin(); 
+	ext_it != builtin_exts.end(); ++ext_it) {
+	if(!ret.isEmpty())
+	    ret += "; ";
+	ret += QString("*") + (*ext_it);
+    }
+    return ret;
+}
+
+
 
 ProjectGenerator::ProjectGenerator(QMakeProject *p) : MakefileGenerator(p), init_flag(FALSE)
 {
@@ -67,21 +83,13 @@ ProjectGenerator::init()
 
     //the scary stuff
     if(project->first("TEMPLATE_ASSIGN") != "subdirs") {
-	QString builtin_regex;
-	{ //calculate the builtin regular expression..
-	    QStringList builtin_exts(".c");
-	    builtin_exts << Option::ui_ext << Option::yacc_ext << Option::lex_ext;
-	    builtin_exts += Option::h_ext + Option::cpp_ext;
-	    for(QStringList::Iterator ext_it = builtin_exts.begin(); 
-		ext_it != builtin_exts.end(); ++ext_it) {
-		if(!builtin_regex.isEmpty())
-		    builtin_regex += "; ";
-		builtin_regex += QString("*") + (*ext_it);
-	    }
-	}
+	QString builtin_regex = project_builtin_regx();
 	QStringList dirs = Option::projfile::project_dirs;
-	if(Option::projfile::do_pwd)
+	if(Option::projfile::do_pwd) {
+	    if(!v["INCLUDEPATH"].contains("."))
+		v["INCLUDEPATH"] += ".";
 	    dirs.prepend(QDir::currentDirPath());
+	}
 
 	for(QStringList::Iterator pd = dirs.begin(); pd != dirs.end(); pd++) {
 	    QString dir, regex;
@@ -140,9 +148,8 @@ ProjectGenerator::init()
 	    }
 	    if(add_depend && !dir.isEmpty() && !v["DEPENDPATH"].contains(dir)) {
 		QFileInfo fi(dir);
-		if(fi.absFilePath() != QDir::currentDirPath()) {
+		if(fi.absFilePath() != QDir::currentDirPath()) 
 		    v["DEPENDPATH"] += fileFixify(dir);
-		}
 	    }
 	}
     }
@@ -241,12 +248,19 @@ ProjectGenerator::init()
 		QStringList &tmp = findDependencies((*val_it));
 		if(!tmp.isEmpty()) {
 		    for(QStringList::Iterator dep_it = tmp.begin(); dep_it != tmp.end(); ++dep_it) {
-			QString file_no_path = (*dep_it).right(
-			    (*dep_it).length() - ((*dep_it).findRev(Option::dir_sep)+1));
+			QString file_dir = (*dep_it).section(Option::dir_sep, 0, -2),
+			    file_no_path = (*dep_it).section(Option::dir_sep, -1);
+			if(!file_dir.isEmpty()) {
+			    for(MakefileDependDir *mdd = deplist.first(); mdd; mdd = deplist.next()) {
+				if(mdd->local_dir == file_dir && !v["INCLUDEPATH"].contains(mdd->real_dir))
+				    v["INCLUDEPATH"] += mdd->real_dir;
+			    }
+			}
 			if(no_qt_files && file_no_path.find(QRegExp("^q[a-z_0-9].h$")) != -1)
 			    no_qt_files = FALSE;
 			QString h_ext;
-			for(QStringList::Iterator hit = Option::h_ext.begin(); hit != Option::h_ext.end(); ++hit) {
+			for(QStringList::Iterator hit = Option::h_ext.begin(); 
+			    hit != Option::h_ext.end(); ++hit) {
 			    if((*dep_it).endsWith((*hit))) {
 				h_ext = (*hit);
 				break;
@@ -260,11 +274,13 @@ ProjectGenerator::init()
 			    }
 			    for(QStringList::Iterator cppit = Option::cpp_ext.begin();
 				cppit != Option::cpp_ext.end(); ++cppit) {
-				QString src((*dep_it).left((*dep_it).length() - h_ext.length()) + (*cppit));
+				QString src((*dep_it).left((*dep_it).length() - h_ext.length()) + 
+					    (*cppit));
 				if(QFile::exists(src)) {
 				    bool exists = FALSE;
 				    QStringList &srcl = v["SOURCES"];
-				    for(QStringList::Iterator src_it = srcl.begin(); src_it != srcl.end(); ++src_it) {
+				    for(QStringList::Iterator src_it = srcl.begin(); 
+					src_it != srcl.end(); ++src_it) {
 					if((*src_it).lower() == src.lower()) {
 					    exists = TRUE;
 					    break;
@@ -337,14 +353,16 @@ ProjectGenerator::writeMakefile(QTextStream &t)
 	t << getWritableVar("TARGET")
 	  << getWritableVar("CONFIG", FALSE)
 	  << getWritableVar("CONFIG_REMOVE", FALSE)
-	  << getWritableVar("DEPENDPATH") << endl;
+	  << getWritableVar("DEPENDPATH")
+	  << getWritableVar("INCLUDEPATH") << endl;
 
 	t << "# Input" << "\n";
 	t << getWritableVar("HEADERS") 
 	  << getWritableVar("INTERFACES") 
 	  << getWritableVar("LEXSOURCES") 
 	  << getWritableVar("YACCSOURCES") 
-	  << getWritableVar("SOURCES");
+	  << getWritableVar("SOURCES")
+	  << getWritableVar("TRANSLATIONS");
     }
     for(it = Option::after_user_vars.begin(); it != Option::after_user_vars.end(); ++it)
 	t << (*it) << endl;
@@ -403,6 +421,8 @@ ProjectGenerator::addFile(QString file)
 	    where = "LEXSOURCES";
 	else if(file.endsWith(Option::yacc_ext))
 	    where = "YACCSOURCES";
+	else if(file.endsWith(".ts"))
+	    where = "TRANSLATIONS";
     }
 
     QString newfile = fileFixify(file);

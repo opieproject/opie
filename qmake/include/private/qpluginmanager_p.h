@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qpluginmanager_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qpluginmanager_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QPluginManager class
 **
-** Created : 2000-01-01
+** Created : 000101
 **
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
@@ -35,12 +35,8 @@
 **
 **********************************************************************/
 
-#ifndef QPLUGINMANAGER_H
-#define QPLUGINMANAGER_H
-
-#ifndef QT_H
-#include "qgpluginmanager_p.h"
-#endif // QT_H
+#ifndef QPLUGINMANAGER_P_H
+#define QPLUGINMANAGER_P_H
 
 //
 //  W A R N I N G
@@ -53,6 +49,10 @@
 // We mean it.
 //
 //
+
+#ifndef QT_H
+#include "qgpluginmanager_p.h"
+#endif // QT_H
 
 #ifndef QT_NO_COMPONENT
 
@@ -70,4 +70,4 @@ public:
 
 #endif //QT_NO_COMPONENT
 
-#endif //QPLUGINMANAGER_H
+#endif //QPLUGINMANAGER_P_H

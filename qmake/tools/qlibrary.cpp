@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qlibrary.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qlibrary.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QLibrary class
 **
-** Created : 2000-01-01
+** Created : 000101
 **
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -71,7 +71,7 @@ QLibraryPrivate::QLibraryPrivate( QLibrary *lib )
     \brief The QLibrary class provides a wrapper for handling shared libraries.
 
     \mainclass
-    \group plugins
+    \ingroup plugins
 
     An instance of a QLibrary object can handle a single shared
     library and provide access to the functionality in the library in
@@ -326,14 +326,15 @@ QString QLibrary::library() const
     if ( filename.find( ".dylib" ) == -1 )
 	filename += ".dylib";
 #else
-    if ( filename.find( ".so" ) == -1 ) {
+    QString filter = ".so";
+    if ( filename.find(filter) == -1 ) {
 	const int x = filename.findRev( "/" );
 	if ( x != -1 ) {
 	    QString path = filename.left( x + 1 );
 	    QString file = filename.right( filename.length() - x - 1 );
-	    filename = QString( "%1lib%2.so" ).arg( path ).arg( file );
+	    filename = QString( "%1lib%2.%3" ).arg( path ).arg( file ).arg( filter );
 	} else {
-	    filename = QString( "lib%1.so" ).arg( filename );
+	    filename = QString( "lib%1.%2" ).arg( filename ).arg( filter );
 	}
     }
 #endif

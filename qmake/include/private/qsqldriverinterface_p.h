@@ -1,10 +1,11 @@
 /****************************************************************************
+** $Id: qsqldriverinterface_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QSqlDriverInterface class
 **
 ** Created : 2000-11-03
 **
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the sql module of the Qt GUI Toolkit.
 **
@@ -37,6 +38,18 @@
 #ifndef QSQLDRIVERINTERFACE_H
 #define QSQLDRIVERINTERFACE_H
 
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  This header file may
+// change from version to version without notice, or even be
+// removed.
+//
+// We mean it.
+//
+//
+
 #ifndef QT_H
 #include <private/qcom_p.h>
 #endif // QT_H
@@ -66,4 +79,4 @@ struct QM_EXPORT_SQL QSqlDriverFactoryInterface : public QFeatureListInterface
 #endif //QT_NO_COMPONENT
 #endif // QT_NO_SQL
 
-#endif // QSQLDRIVERINTERFACE_H
+#endif // QSQLDRIVERINTERFACE_P_H

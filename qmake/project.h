@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: project.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: project.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
 ** Created : 970521
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the network module of the Qt GUI Toolkit.
 **
@@ -34,8 +34,8 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifndef __QMAKE_H__
-#define __QMAKE_H__
+#ifndef __PROJECT_H__
+#define __PROJECT_H__
 
 #include <qstringlist.h>
 #include <qstring.h>
@@ -48,16 +48,16 @@ class QMakeProject
 
     QString pfile, cfile;
     QMap<QString, QStringList> vars, base_vars, cache;
-    bool parse(QString text, QMap<QString, QStringList> &place);
-    bool doProjectTest(QString func, const QString &params, QMap<QString, QStringList> &place);
-    bool doProjectTest(QString func, QStringList args, QMap<QString, QStringList> &place);
+    bool parse(const QString &text, QMap<QString, QStringList> &place);
+    bool doProjectTest(const QString &func, const QString &params, QMap<QString, QStringList> &place);
+    bool doProjectTest(const QString &func, QStringList args, QMap<QString, QStringList> &place);
     bool doProjectCheckReqs(const QStringList &deps, QMap<QString, QStringList> &place);
     QString doVariableReplace(QString &str, const QMap<QString, QStringList> &place);
 
 public:
     QMakeProject();
 
-    bool read(QString project, QString pwd);
+    bool read(const QString &project, const QString &pwd, bool just_project=FALSE);
     QString projectFile();
     QString configFile();
 
@@ -65,11 +65,11 @@ public:
     QStringList &values(const QString &v);
     QString first(const QString &v);
     QMap<QString, QStringList> &variables();
-    bool isActiveConfig(const QString &x);
+    bool isActiveConfig(const QString &x, bool regex=FALSE);
 
 protected:
     friend class MakefileGenerator;
-    bool read(QString file, QMap<QString, QStringList> &place);
+    bool read(const QString &file, QMap<QString, QStringList> &place);
 
 };
 
@@ -111,4 +111,4 @@ inline QString QMakeProject::first(const QString &v)
 inline QMap<QString, QStringList> &QMakeProject::variables()
 { return vars; }
 
-#endif /* __QMAKE_H__ */
+#endif /* __PROJECT_H__ */

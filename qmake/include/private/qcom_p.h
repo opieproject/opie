@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcom_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qcom_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** ...
 **
@@ -33,8 +33,8 @@
 **
 **********************************************************************/
 
-#ifndef QCOM_H
-#define QCOM_H
+#ifndef QCOM_P_H
+#define QCOM_P_H
 
 //
 //  W A R N I N G
@@ -334,4 +334,4 @@ public:		   \
 
 #endif //QT_NO_COMPONENT
 
-#endif //QCOM_H
+#endif //QCOM_P_H

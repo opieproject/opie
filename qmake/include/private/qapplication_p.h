@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qapplication_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qapplication_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of some Qt private functions.
 **
@@ -73,6 +73,8 @@ extern QClipboard *qt_clipboard;
 
 #if defined (Q_OS_WIN32) || defined (Q_OS_CYGWIN)
 extern Qt::WindowsVersion qt_winver;
+#elif defined (Q_OS_MAC)
+extern Qt::MacintoshVersion qt_macver;
 #endif
 
 #if defined (Q_WS_X11)
@@ -81,7 +83,6 @@ extern int qt_ncols_option;
 
 
 extern void qt_dispatchEnterLeave( QWidget*, QWidget* );
-
-
+extern bool qt_tryModalHelper( QWidget *, QWidget ** = 0 );
 
 #endif

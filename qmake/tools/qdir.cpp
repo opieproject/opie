@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qdir.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qdir.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QDir class
 **
 ** Created : 950427
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -43,13 +43,18 @@
 #include "qfileinfo.h"
 #include "qregexp.h"
 #include "qstringlist.h"
-#include <stdlib.h>
-#include <ctype.h>
+#include <limits.h>
 
+#if defined(Q_FS_FAT) && !defined(Q_OS_UNIX)
+const bool CaseSensitiveFS = FALSE;
+#else
+const bool CaseSensitiveFS = TRUE;
+#endif
 
 
 /*!
     \class QDir
+    \reentrant
     \brief The QDir class provides access to directory structures and their contents in a platform-independent way.
 
     \ingroup io
@@ -230,6 +235,14 @@ QDir::QDir( const QDir &d )
     sortS = d.sortS;
 }
 
+/*!
+    Refreshes the directory information.
+*/
+void QDir::refresh() const
+{
+    QDir* that = (QDir*) this;
+    that->dirty = TRUE;
+}
 
 void QDir::init()
 {
@@ -382,10 +395,36 @@ QString QDir::absFilePath( const QString &fileName,
 	return fileName;
 
     QString tmp = absPath();
-    if ( tmp.isEmpty() || (tmp[(int)tmp.length()-1] != '/' && !!fileName &&
-			   fileName[0] != '/') )
-	tmp += '/';
-    tmp += fileName;
+#ifdef Q_OS_WIN32
+    if ( fileName[0].isLetter() && fileName[1] == ':' ) {
+	int drv = fileName.upper()[0].latin1() - 'A' + 1;
+	if ( _getdrive() != drv ) {
+	    if ( qt_winunicode ) {
+		TCHAR buf[PATH_MAX];
+		::_tgetdcwd( drv, buf, PATH_MAX );
+		tmp.setUnicodeCodes( (ushort*)buf, ::_tcslen(buf) );
+	    } else {
+		char buf[PATH_MAX];
+		::_getdcwd( drv, buf, PATH_MAX );
+		tmp = buf;
+	    }
+	    if ( !tmp.endsWith("\\") )
+		tmp += "\\";
+	    tmp += fileName.right( fileName.length() - 2 );
+	    int x;
+	    for ( x = 0; x < (int) tmp.length(); x++ ) {
+		if ( tmp[x] == '\\' )
+		    tmp[x] = '/';
+	    }
+	}
+    } else
+#endif
+    {
+	if ( tmp.isEmpty() || (tmp[(int)tmp.length()-1] != '/' && !!fileName &&
+			       fileName[0] != '/') )
+	    tmp += '/';
+	tmp += fileName;
+    }
     return tmp;
 }
 
@@ -934,7 +973,8 @@ QDir &QDir::operator=( const QString &path )
     // The current directory is "/usr/local"
     QDir d1( "/usr/local/bin" );
     QDir d2( "bin" );
-    if ( d1 != d2 ) qDebug( "They differ\n" ); // This is printed
+    if ( d1 != d2 )
+	qDebug( "They differ" );
     \endcode
 */
 
@@ -949,7 +989,8 @@ QDir &QDir::operator=( const QString &path )
     QDir d1( "/usr/local/bin" );
     QDir d2( "bin" );
     d2.convertToAbs();
-    if ( d1 == d2 ) qDebug( "They're the same\n" ); // This is printed
+    if ( d1 == d2 )
+	qDebug( "They're the same" );
     \endcode
 */
 
@@ -1087,10 +1128,11 @@ QDir QDir::root()
     \sa home()
 */
 
-QStringList qt_makeFilterList( const QString &filter )
+QValueList<QRegExp> qt_makeFilterList( const QString &filter )
 {
+    QValueList<QRegExp> regExps;
     if ( filter.isEmpty() )
-	return QStringList();
+	return regExps;
 
     QChar sep( ';' );
     int i = filter.find( sep, 0 );
@@ -1099,14 +1141,25 @@ QStringList qt_makeFilterList( const QString &filter )
 
     QStringList list = QStringList::split( sep, filter );
     QStringList::Iterator it = list.begin();
-    QStringList list2;
-
-    for ( ; it != list.end(); ++it ) {
-	QString s = *it;
-	list2 << s.stripWhiteSpace();
+    while ( it != list.end() ) {
+	regExps << QRegExp( (*it).stripWhiteSpace(), CaseSensitiveFS, TRUE );
+	++it;
     }
-    return list2;
+    return regExps;
 }
+
+bool qt_matchFilterList( const QValueList<QRegExp>& filters,
+			 const QString &fileName )
+{
+    QValueList<QRegExp>::ConstIterator rit = filters.begin();
+    while ( rit != filters.end() ) {
+	if ( (*rit).exactMatch(fileName) )
+	    return TRUE;
+	++rit;
+    }
+    return FALSE;
+}
+
 
 /*!
     \overload
@@ -1123,11 +1176,7 @@ bool QDir::match( const QStringList &filters, const QString &fileName )
 {
     QStringList::ConstIterator sit = filters.begin();
     while ( sit != filters.end() ) {
-#if defined(Q_FS_FAT) && !defined(Q_OS_UNIX)
-	QRegExp rx( *sit, FALSE, TRUE ); // The FAT FS is not case sensitive..
-#else
-	QRegExp rx( *sit, TRUE, TRUE );  // ..while others are.
-#endif
+	QRegExp rx( *sit, CaseSensitiveFS, TRUE );
 	if ( rx.exactMatch(fileName) )
 	    return TRUE;
 	++sit;
@@ -1147,8 +1196,7 @@ bool QDir::match( const QStringList &filters, const QString &fileName )
 
 bool QDir::match( const QString &filter, const QString &fileName )
 {
-    QStringList lst = qt_makeFilterList( filter );
-    return match( lst, fileName );
+    return qt_matchFilterList( qt_makeFilterList(filter), fileName );
 }
 
 

@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qlibrary_unix.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qlibrary_unix.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QLibraryPrivate class
 **
-** Created : 2000-01-01
+** Created : 000101
 **
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
@@ -53,7 +53,24 @@
   It's not too hard to guess what the functions do.
 */
 
-#if defined(QT_HPUX_LD) // for HP-UX < 11.x and 32 bit
+#if defined(Q_OS_MAC)
+
+bool QLibraryPrivate::loadLibrary()
+{
+    return FALSE;
+}
+
+bool QLibraryPrivate::freeLibrary()
+{
+    return FALSE;
+}
+
+void* QLibraryPrivate::resolveSymbol( const char* )
+{
+    return 0;
+}
+
+#elif defined(QT_HPUX_LD) // for HP-UX < 11.x and 32 bit
 
 bool QLibraryPrivate::loadLibrary()
 {

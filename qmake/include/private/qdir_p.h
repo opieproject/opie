@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qdir_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qdir_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of some private QDir functions.
 **
-** Created : 2000.11.06
+** Created : 001106
 **
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
@@ -38,7 +38,6 @@
 #ifndef QDIR_P_H
 #define QDIR_P_H
 
-
 //
 //  W A R N I N G
 //  -------------
@@ -53,10 +52,12 @@
 //
 
 #ifndef QT_H
+#include "qregexp.h"
+#include "qvaluelist.h"
 #endif // QT_H
 
-extern QStringList qt_makeFilterList( const QString & );
-
+extern QValueList<QRegExp> qt_makeFilterList( const QString & );
+extern bool qt_matchFilterList( const QValueList<QRegExp> &, const QString & );
 
 extern int qt_cmp_si_sortSpec;
 

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: unixmake.h,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: unixmake.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -55,6 +55,7 @@ protected:
     virtual void processPrlVariable(const QString &, const QStringList &);
     virtual void processPrlFiles();
 
+    virtual bool findLibraries();
     virtual void init();
 
     void writeMakeParts(QTextStream &);

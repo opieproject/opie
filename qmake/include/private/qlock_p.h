@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qmousedriverinterface_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
+** $Id: qlock_p.h,v 1.1 2003-07-10 02:40:11 llornkcor Exp $
 **
-** Definition of Qt/Embedded Mouse Driver Interface
+** Definition of QLock class. This manages interprocess locking
 **
-** Created : 20020220
+** Created : 20000406
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the kernel module of the Qt GUI Toolkit.
 **
@@ -30,8 +30,8 @@
 **
 **********************************************************************/
 
-#ifndef QMOUSEDRIVERINTERFACE_P_H
-#define QMOUSEDRIVERINTERFACE_P_H
+#ifndef QLOCK_P_H
+#define QLOCK_P_H
 
 //
 //  W A R N I N G
@@ -46,23 +46,48 @@
 //
 
 #ifndef QT_H
-#include <private/qcom_p.h>
+#include <qstring.h>
 #endif // QT_H
 
-#ifndef QT_NO_COMPONENT
+class QLockData;
 
-// {4367CF5A-F7CE-407B-8BB6-DF19AEDA2EBB}
-#ifndef IID_QMouseDriver
-#define IID_QMouseDriver QUuid( 0x4367cf5a, 0xf7ce, 0x407b, 0x8b, 0xb6, 0xdf, 0x19, 0xae, 0xda, 0x2e, 0xbb)
-#endif
-
-class QWSMouseHandler;
-
-struct Q_EXPORT QMouseDriverInterface : public QFeatureListInterface
+class QLock
 {
-    virtual QWSMouseHandler* create( const QString& driver, const QString &device ) = 0;
+public:
+    QLock( const QString &filename, char id, bool create = FALSE );
+    ~QLock();
+
+    enum Type { Read, Write };
+
+    bool isValid() const;
+    void lock( Type type );
+    void unlock();
+    bool locked() const;
+
+private:
+    Type type;
+    QLockData *data;
 };
 
-#endif // QT_NO_COMPONENT
 
-#endif // QMOUSEDRIVERINTERFACE_P_H
+// Nice class for ensuring the lock is released.
+// Just create one on the stack and the lock is automatically released
+// when QLockHolder is destructed.
+class QLockHolder
+{
+public:
+    QLockHolder( QLock *l, QLock::Type type ) : qlock(l) {
+	qlock->lock( type );
+    }
+    ~QLockHolder() { if ( locked() ) qlock->unlock(); }
+
+    void lock( QLock::Type type ) { qlock->lock( type ); }
+    void unlock() { qlock->unlock(); }
+    bool locked() const { return qlock->locked(); }
+
+private:
+    QLock *qlock;
+};
+
+#endif
+

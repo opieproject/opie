@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qdir.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qdir.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of QDir class
 **
@@ -178,6 +178,7 @@ public:
     static bool match( const QString &filter, const QString &fileName );
     static QString cleanDirPath( const QString &dirPath );
     static bool isRelativePath( const QString &path );
+    void refresh() const;
 
 private:
 #ifdef Q_OS_MAC
@@ -188,7 +189,7 @@ private:
     virtual bool readDirEntries( const QString &nameFilter,
 				 int FilterSpec, int SortSpec  );
 
-    static void slashify ( QString &);
+    static void slashify( QString & );
 
     QString	dPath;
     QStringList   *fList;

@@ -8,13 +8,13 @@ CXX		= g++
 
 #qmake code
 OBJS=project.o main.o makefile.o unixmake2.o unixmake.o borland_bmake.o \
-     msvc_nmake.o msvc_dsp.o msvc_vcproj.o option.o winmakefile.o \
+     mingw_make.o msvc_nmake.o msvc_dsp.o msvc_vcproj.o option.o winmakefile.o \
      projectgenerator.o metrowerks_xml.o  pbuilder_pbx.o msvc_objectmodel.o
 
 #qt code
 QOBJS=qstring.o qtextstream.o qiodevice.o qglobal.o qgdict.o qcstring.o \
       qdatastream.o qgarray.o qbuffer.o qglist.o qptrcollection.o qfile.o \
-      qfile_unix.o qregexp.o qgvector.o qgcache.o qbitarray.o qdir.o \
+      qfile_unix.o qregexp.o qgvector.o qgcache.o qbitarray.o qdir.o quuid.o \
       qfileinfo_unix.o qdir_unix.o qfileinfo.o qdatetime.o qstringlist.o qmap.o \
       qconfig.o
 
@@ -98,6 +98,9 @@ qbitarray.o: $(OPIEDIR)/qmake/tools/qbitarray.cpp
 qdir.o: $(OPIEDIR)/qmake/tools/qdir.cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qdir.cpp
 
+quuid.o: $(OPIEDIR)/qmake/tools/quuid.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/quuid.cpp
+
 qfileinfo_unix.o: $(OPIEDIR)/qmake/tools/qfileinfo_unix.cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) $(OPIEDIR)/qmake/tools/qfileinfo_unix.cpp
 
@@ -142,6 +145,9 @@ unixmake2.o: generators/unix/unixmake2.cpp
 
 borland_bmake.o: generators/win32/borland_bmake.cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) generators/win32/borland_bmake.cpp
+
+mingw_make.o: generators/win32/mingw_make.cpp
+	$(CXX) -c -o $@ $(CXXFLAGS) generators/win32/mingw_make.cpp
 
 msvc_objectmodel.o: generators/win32/msvc_objectmodel.cpp
 	$(CXX) -c -o $@ $(CXXFLAGS) generators/win32/msvc_objectmodel.cpp

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcomlibrary.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qcomlibrary.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QComLibrary class
 **
@@ -63,6 +63,10 @@ QComLibrary::~QComLibrary()
 {
     if ( autoUnload() )
 	unload();
+    if ( libiface )
+	libiface->release();
+    if ( entry )
+	entry->release();
 }
 
 bool QComLibrary::unload()
@@ -391,29 +395,27 @@ void QComLibrary::createInstanceInternal()
     bool query_done = FALSE;
     bool warn_mismatch = TRUE;
 
-    if ( ! query_done ) {
-
 #ifdef QT_THREAD_SUPPORT
-	QMutexLocker locker( qt_global_mutexpool->get( &cache ) );
+    QMutexLocker locker( qt_global_mutexpool ?
+			 qt_global_mutexpool->get( &cache ) : 0 );
 #endif // QT_THREAD_SUPPORT
 
-	if ( ! cache ) {
-	    cache = new QSettings;
-	    cache->insertSearchPath( QSettings::Windows, "/Trolltech" );
-	    cleanup_cache.set( &cache );
-	}
+    if ( ! cache ) {
+	cache = new QSettings;
+	cache->insertSearchPath( QSettings::Windows, "/Trolltech" );
+	cleanup_cache.set( &cache );
+    }
 
-	reg = cache->readListEntry( regkey );
-	if ( reg.count() == 4 ) {
-	    // check timestamp
-	    if ( lastModified == reg[3] ) {
-		qt_version = reg[0].toUInt(0, 16);
-		flags = reg[1].toUInt(0, 16);
-		key = reg[2].latin1();
+    reg = cache->readListEntry( regkey );
+    if ( reg.count() == 4 ) {
+	// check timestamp
+	if ( lastModified == reg[3] ) {
+	    qt_version = reg[0].toUInt(0, 16);
+	    flags = reg[1].toUInt(0, 16);
+	    key = reg[2].latin1();
 
-		query_done = TRUE;
-		warn_mismatch = FALSE;
-	    }
+	    query_done = TRUE;
+	    warn_mismatch = FALSE;
 	}
     }
 
@@ -461,11 +463,6 @@ void QComLibrary::createInstanceInternal()
 	    << lastModified;
 
     if ( queried != reg ) {
-
-#ifdef QT_THREAD_SUPPORT
-	QMutexLocker locker( qt_global_mutexpool->get( &cache ) );
-#endif // QT_THREAD_SUPPORT
-
 	cache->writeEntry( regkey, queried );
 	// delete the cache, which forces the settings to be written
 	delete cache;

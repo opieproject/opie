@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qsvgdevice_p.h,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qsvgdevice_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of the QSvgDevice class
 **
-** Created : 20001024
+** Created : 001024
 **
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
@@ -35,8 +35,8 @@
 **
 *****************************************************************************/
 
-#ifndef QSVGDEVICE_H
-#define QSVGDEVICE_H
+#ifndef QSVGDEVICE_P_H
+#define QSVGDEVICE_P_H
 
 //
 //  W A R N I N G
@@ -131,4 +131,4 @@ inline QRect QSvgDevice::boundingRect() const
 
 #endif // QT_NO_SVG
 
-#endif // QSVGDEVICE_H
+#endif // QSVGDEVICE_P_H

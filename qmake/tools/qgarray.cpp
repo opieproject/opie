@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qgarray.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qgarray.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QGArray class
 **
@@ -35,9 +35,13 @@
 **
 **********************************************************************/
 
-#include "qglobal.h"			// needed to define Q_WS_WIN
-#ifdef Q_WS_WIN
-#include "qt_windows.h"			// needed for bsearch on some platforms
+#include "qglobal.h"
+#if defined(Q_CC_BOR)
+    // needed for qsort() because of a std namespace problem on Borland
+#   include "qplatformdefs.h"
+#elif defined(Q_WS_WIN)
+    // needed for bsearch on some platforms
+#   include "qt_windows.h"
 #endif
 
 #define	 QGARRAY_CPP
@@ -49,7 +53,13 @@
 #  include <private/qmutexpool_p.h>
 #endif // QT_THREAD_SUPPORT
 
-#define USE_MALLOC				// comment to use new/delete
+/*
+  If USE_MALLOC isn't defined, we use new[] and delete[] to allocate
+  memory. The documentation for QMemArray<T>::assign() explicitly
+  mentions that the array is freed using free(), so don't mess around
+  with USE_MALLOC unless you know what you're doing.
+*/
+#define USE_MALLOC
 
 #undef NEW
 #undef DELETE
@@ -135,7 +145,11 @@ QGArray::QGArray( int size )
 	return;
     shd->data = NEW(char,size);
     Q_CHECK_PTR( shd->data );
-    shd->len = size;
+    shd->len =
+#ifdef QT_QGARRAY_SPEED_OPTIM
+	shd->maxl =
+#endif
+	size;
 }
 
 /*!
@@ -212,34 +226,69 @@ bool QGArray::isEqual( const QGArray &a ) const
 
 
 /*!
-  Resizes the array to \a newsize bytes.
+  Resizes the array to \a newsize bytes. \a optim is either
+  MemOptim (the default) or SpeedOptim.
 */
-
-bool QGArray::resize( uint newsize )
+bool QGArray::resize( uint newsize, Optimization optim )
 {
-    if ( newsize == shd->len )			// nothing to do
+#ifndef QT_QGARRAY_SPEED_OPTIM
+    Q_UNUSED(optim);
+#endif
+
+    if ( newsize == shd->len
+#ifdef QT_QGARRAY_SPEED_OPTIM
+	 && newsize == shd->maxl
+#endif
+	) // nothing to do
 	return TRUE;
     if ( newsize == 0 ) {			// remove array
 	duplicate( 0, 0 );
 	return TRUE;
     }
+
+    uint newmaxl = newsize;
+#ifdef QT_QGARRAY_SPEED_OPTIM
+    if ( optim == SpeedOptim ) {
+	if ( newsize <= shd->maxl &&
+	     ( newsize * 4 > shd->maxl || shd->maxl <= 4 ) ) {
+	    shd->len = newsize;
+	    return TRUE;
+	}
+	newmaxl = 4;
+	while ( newmaxl < newsize )
+	    newmaxl *= 2;
+	// try to spare some memory
+	if ( newmaxl >= 1024 * 1024 && newsize <= newmaxl - (newmaxl >> 2) )
+	    newmaxl -= newmaxl >> 2;
+    }
+    shd->maxl = newmaxl;
+#endif
+
     if ( shd->data ) {				// existing data
 #if defined(DONT_USE_REALLOC)
 	char *newdata = NEW(char,newsize);	// manual realloc
-	memcpy( newdata, shd->data, QMIN(shd->len,newsize) );
+	memcpy( newdata, shd->data, QMIN(shd->len,newmaxl) );
 	DELETE(shd->data);
 	shd->data = newdata;
 #else
-	shd->data = (char *)realloc( shd->data, newsize );
+	shd->data = (char *)realloc( shd->data, newmaxl );
 #endif
     } else {
-	shd->data = NEW(char,newsize);
+	shd->data = NEW(char,newmaxl);
     }
     if ( !shd->data )				// no memory
 	return FALSE;
     shd->len = newsize;
     return TRUE;
 }
+
+/*!\overload
+*/
+bool QGArray::resize( uint newsize )
+{
+    return resize( newsize, MemOptim );
+}
+
 
 /*!
   Fills the array with the repeated occurrences of \a d, which is
@@ -319,7 +368,11 @@ QGArray &QGArray::assign( const char *d, uint len )
 	    DELETE(shd->data);
     }
     shd->data = (char *)d;
-    shd->len = len;
+    shd->len =
+#ifdef QT_QGARRAY_SPEED_OPTIM
+	shd->maxl =
+#endif
+	len;
     return *this;
 }
 
@@ -364,7 +417,11 @@ QGArray &QGArray::duplicate( const QGArray &a )
     } else {
 	shd->data = 0;
     }
-    shd->len = a.shd->len;
+    shd->len =
+#ifdef QT_QGARRAY_SPEED_OPTIM
+	shd->maxl =
+#endif
+	a.shd->len;
     if ( oldptr )
 	DELETE(oldptr);
     return *this;
@@ -402,7 +459,11 @@ QGArray &QGArray::duplicate( const char *d, uint len )
 	    DELETE(shd->data);
     }
     shd->data = data;
-    shd->len  = len;
+    shd->len =
+#ifdef QT_QGARRAY_SPEED_OPTIM
+	shd->maxl =
+#endif
+	len;
     return *this;
 }
 
@@ -659,7 +720,8 @@ void QGArray::sort( uint sz )
 	return;
 
 #ifdef QT_THREAD_SUPPORT
-    QMutexLocker locker( qt_global_mutexpool->get( &cmp_item_size ) );
+    QMutexLocker locker( qt_global_mutexpool ?
+			 qt_global_mutexpool->get( &cmp_item_size ) : 0 );
 #endif // QT_THREAD_SUPPORT
 
     cmp_item_size = sz;
@@ -677,7 +739,8 @@ int QGArray::bsearch( const char *d, uint sz ) const
 	return -1;
 
 #ifdef QT_THREAD_SUPPORT
-    QMutexLocker locker( qt_global_mutexpool->get( &cmp_item_size ) );
+    QMutexLocker locker( qt_global_mutexpool ?
+			 qt_global_mutexpool->get( &cmp_item_size ) : 0 );
 #endif // QT_THREAD_SUPPORT
 
     cmp_item_size = sz;

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcomlibrary_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qcomlibrary_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QComLibrary class
 **
@@ -33,8 +33,8 @@
 **
 **********************************************************************/
 
-#ifndef QUCOMLIBRARY_H
-#define QUCOMLIBRARY_H
+#ifndef QCOMLIBRARY_P_H
+#define QCOMLIBRARY_P_H
 
 //
 //  W A R N I N G
@@ -76,4 +76,4 @@ private:
 
 #endif //QT_NO_COMPONENT
 
-#endif // QUCOMLIBRARY_H
+#endif

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: winmakefile.cpp,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: winmakefile.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -101,7 +101,7 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 	t << "MAKEFILE=	" << var("MAKEFILE") << endl;
     t << "QMAKE =	" << (project->isEmpty("QMAKE_QMAKE") ? QString("qmake") : var("QMAKE_QMAKE")) << endl;
     t << "SUBTARGETS	= ";
-    for( it.toFirst(); it.current(); ++it) 
+    for( it.toFirst(); it.current(); ++it)
 	t << " \\\n\t\t" << it.current()->target;
     t << endl << endl;
     t << "all: qmake_all $(SUBTARGETS)" << endl << endl;
@@ -116,11 +116,10 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 	t << mkfile << ":";
 	if(project->variables()["QMAKE_NOFORCE"].isEmpty())
 	    t << " FORCE";
-	if(have_dir) 
+	if(have_dir)
 	    t << "\n\t" << "cd " << (*it)->directory;
 	t << "\n\t" << "$(QMAKE) " << (*it)->profile << " " << buildArgs();
-	if((*it)->makefile != "$(MAKEFILE)")
-	    t << " -o " << (*it)->makefile;
+	t << " -o " << (*it)->makefile;
 	if(have_dir) {
 	    int subLevels = it.current()->directory.contains(Option::dir_sep) + 1;
 	    t << "\n\t" << "@cd ..";
@@ -133,11 +132,10 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 	t << (*it)->target << ": " << mkfile;
 	if(project->variables()["QMAKE_NOFORCE"].isEmpty())
 	    t << " FORCE";
-	if(have_dir) 
+	if(have_dir)
 	    t << "\n\t" << "cd " << (*it)->directory;
 	t << "\n\t" << "$(MAKE)";
-	if((*it)->makefile != "$(MAKEFILE)")
-	    t << " -f " << (*it)->makefile;
+        t << " -f " << (*it)->makefile;
 	if(have_dir) {
 	    int subLevels = it.current()->directory.contains(Option::dir_sep) + 1;
 	    t << "\n\t" << "@cd ..";
@@ -155,14 +153,16 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
     if ( !subdirs.isEmpty() ) {
 	for( it.toFirst(); it.current(); ++it) {
 	    QString subdir = (*it)->directory;
+	    QString profile = (*it)->profile;
 	    int subLevels = subdir.contains(Option::dir_sep) + 1;
 	    t << "\n\t"
 	      << "cd " << subdir << "\n\t";
 	    int lastSlash = subdir.findRev(Option::dir_sep);
 	    if(lastSlash != -1)
 		subdir = subdir.mid( lastSlash + 1 );
-	    t << "$(QMAKE) " << subdir << ".pro"
-	      << (!project->isEmpty("MAKEFILE") ? QString(" -o ") + var("MAKEFILE") : QString(""))
+	    t << "$(QMAKE) "
+	      << ( !profile.isEmpty() ? profile : subdir + ".pro" )
+	      << " -o " << (*it)->makefile
 	      << " " << buildArgs() << "\n\t"
 	      << "@cd ..";
 	    for(int i = 1; i < subLevels; i++ )
@@ -186,13 +186,11 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 		bool have_dir = !(*it)->directory.isEmpty();
 		if(have_dir)
 		    t << "\n\t" << "cd " << (*it)->directory;
-		QString in_file;
-		if((*it)->makefile != "$(MAKEFILE)")
-		    in_file = " -f " + (*it)->makefile;
+		QString in_file = " -f " + (*it)->makefile;
 		t << "\n\t" << "$(MAKE) " << in_file << " " << targs[x];
 		if(have_dir) {
 		    t << "\n\t" << "@cd ..";
-		    for(int i = 1; i < subLevels; i++ ) 
+		    for(int i = 1; i < subLevels; i++ )
 			t << Option::dir_sep << "..";
 		}
 	    }
@@ -210,26 +208,30 @@ Win32MakefileGenerator::writeSubDirs(QTextStream &t)
 
 
 int
-Win32MakefileGenerator::findHighestVersion(const QString &d, const
-					   QString &stem)
+Win32MakefileGenerator::findHighestVersion(const QString &d, const QString &stem)
 {
-    if(!QFile::exists(Option::fixPathToLocalOS(d)))
+    QString bd = Option::fixPathToLocalOS(d, TRUE);
+    if(!QFile::exists(bd))
 	return -1;
-    if(!project->variables()["QMAKE_" + stem.upper() +
-	"_VERSION_OVERRIDE"].isEmpty())
-	return project->variables()["QMAKE_" + stem.upper() +
-	"_VERSION_OVERRIDE"].first().toInt();
-    QString bd = d;
-    fixEnvVariables(bd);
+    if(!project->variables()["QMAKE_" + stem.upper() + "_VERSION_OVERRIDE"].isEmpty())
+	return project->variables()["QMAKE_" + stem.upper() + "_VERSION_OVERRIDE"].first().toInt();
+
     QDir dir(bd);
     int biggest=-1;
     QStringList entries = dir.entryList();
-    QRegExp regx( "(" + stem + "([0-9]*)).lib", FALSE );
-    for(QStringList::Iterator it = entries.begin(); it != entries.end();
-    ++it) {
+    QString dllStem = stem + QTDLL_POSTFIX;
+    QRegExp regx( "(" + dllStem + "([0-9]*)).lib", FALSE );
+    for(QStringList::Iterator it = entries.begin(); it != entries.end(); ++it) {
 	if(regx.exactMatch((*it)))
-	    biggest = QMAX(biggest, (regx.cap(1) == stem ||
-	    regx.cap(2).isEmpty()) ? -1 : regx.cap(2).toInt());
+	    biggest = QMAX(biggest, (regx.cap(1) == dllStem ||
+				     regx.cap(2).isEmpty()) ? -1 : regx.cap(2).toInt());
+    }
+    if(dir.exists(dllStem + Option::prl_ext)) {
+	QMakeProject proj;
+	if(proj.read(bd + dllStem + Option::prl_ext, QDir::currentDirPath(), TRUE)) {
+	    if(!proj.isEmpty("QMAKE_PRL_VERSION"))
+		biggest = QMAX(biggest, proj.first("QMAKE_PRL_VERSION").replace(".", "").toInt());
+	}
     }
     return biggest;
 }
@@ -241,60 +243,98 @@ Win32MakefileGenerator::findLibraries(const QString &where)
 
     QStringList &l = project->variables()[where];
     QPtrList<MakefileDependDir> dirs;
+    {
+	QStringList &libpaths = project->variables()["QMAKE_LIBDIR"];
+	for(QStringList::Iterator libpathit = libpaths.begin(); libpathit != libpaths.end(); ++libpathit) {
+	    QString r = (*libpathit), l = r;
+	    fixEnvVariables(l);
+	    dirs.append(new MakefileDependDir(r.replace("\"",""), l.replace("\"","")));
+	}
+    }
     dirs.setAutoDelete(TRUE);
     for(QStringList::Iterator it = l.begin(); it != l.end(); ) {
-	QString opt = (*it);
-        bool remove = FALSE;
-        if(opt.startsWith("-L") || opt.startsWith("/L")) {
-            QString r = opt.right(opt.length() - 2), l = Option::fixPathToLocalOS(r);
+	QChar quote;
+	bool modified_opt = FALSE, remove = FALSE;
+	QString opt = (*it).stripWhiteSpace();
+	if((opt[0] == '\'' || opt[0] == '"') && opt[(int)opt.length()-1] == opt[0]) {
+	    quote = opt[0];
+	    opt = opt.mid(1, opt.length()-2);
+	}
+	if(opt.startsWith("/LIBPATH:")) {
+            QString r = opt.mid(9), l = Option::fixPathToLocalOS(r);
             dirs.append(new MakefileDependDir(r.replace("\"",""),
                                               l.replace("\"","")));
-            remove = TRUE;
+        } else if(opt.startsWith("-L") || opt.startsWith("/L")) {
+            QString r = opt.mid(2), l = Option::fixPathToLocalOS(r);
+            dirs.append(new MakefileDependDir(r.replace("\"",""),
+                                              l.replace("\"","")));
+            remove = TRUE; //we eat this switch
         } else if(opt.startsWith("-l") || opt.startsWith("/l")) {
             QString lib = opt.right(opt.length() - 2), out;
             if(!lib.isEmpty()) {
                 for(MakefileDependDir *mdd = dirs.first(); mdd; mdd = dirs.next() ) {
+		    QString extension;
                     int ver = findHighestVersion(mdd->local_dir, lib);
 		    if(ver > 0)
-			lib += QString::number(ver);
-		    lib += ".lib";
-		    if(QFile::exists(mdd->local_dir + Option::dir_sep + lib)) {
-			out = mdd->real_dir + Option::dir_sep + lib;
+			extension += QString::number(ver);
+		    extension += ".lib";
+		    if(QFile::exists(mdd->local_dir + Option::dir_sep + lib + Option::prl_ext) ||
+		       QFile::exists(mdd->local_dir + Option::dir_sep + lib + extension)) {
+			out = mdd->real_dir + Option::dir_sep + lib + extension;
 			break;
 		    }
                 }
             }
-            if(out.isEmpty())
-                remove = TRUE;
-            else
+            if(out.isEmpty()) {
+                remove = TRUE; //just eat it since we cannot find one..
+            } else {
+		modified_opt = TRUE;
                 (*it) = out;
+	    }
         } else if(!QFile::exists(Option::fixPathToLocalOS(opt))) {
-	    QString dir, file = opt;
+	    QPtrList<MakefileDependDir> lib_dirs;
+	    QString file = opt;
             int slsh = file.findRev(Option::dir_sep);
             if(slsh != -1) {
-                dir = file.left(slsh+1);
+                QString r = file.left(slsh+1), l = r;
+		fixEnvVariables(l);
+		lib_dirs.append(new MakefileDependDir(r.replace("\"",""), l.replace("\"","")));
                 file = file.right(file.length() - slsh - 1);
-            }
-	    if ( !(project->variables()["QMAKE_QT_DLL"].isEmpty() && (file == "qt.lib" || file == "qt-mt.lib")) ) {
-		if(file.endsWith(".lib")) {
-		    file = file.left(file.length() - 4);
-		    if(!file.at(file.length()-1).isNumber()) {
-			int ver = findHighestVersion(dir, file);
+            } else {
+		lib_dirs = dirs;
+	    }
+	    if(file.endsWith(".lib")) {
+		file = file.left(file.length() - 4);
+		if(!file.at(file.length()-1).isNumber()) {
+		    for(MakefileDependDir *mdd = lib_dirs.first(); mdd; mdd = lib_dirs.next() ) {
+			QString lib_tmpl(file + "%1" + ".lib");
+			int ver = findHighestVersion(mdd->local_dir, file);
 			if(ver != -1) {
-			    file = QString(dir + file + "%1" + ".lib");
 			    if(ver)
-				(*it) = file.arg(ver);
+				lib_tmpl = lib_tmpl.arg(ver);
 			    else
-				(*it) = file.arg("");
+				lib_tmpl = lib_tmpl.arg("");
+			    if(slsh != -1) {
+				QString dir = mdd->real_dir;
+				if(!dir.endsWith(Option::dir_sep))
+				    dir += Option::dir_sep;
+				lib_tmpl.prepend(dir);
+			    }
+			    modified_opt = TRUE;
+			    (*it) = lib_tmpl;
+			    break;
 			}
 		    }
 		}
 	    }
         }
-        if(remove)
+        if(remove) {
             it = l.remove(it);
-        else
+        } else {
+	    if(!quote.isNull() && modified_opt)
+		(*it) = quote + (*it) + quote;
             ++it;
+	}
     }
     return TRUE;
 }
@@ -323,8 +363,8 @@ Win32MakefileGenerator::processPrlFiles()
 	QStringList &l = project->variables()[where];
 	for(QStringList::Iterator it = l.begin(); it != l.end(); ++it) {
 	    QString opt = (*it);
-	    if(opt.left(1) == "/") {
-		if(opt.left(9) == "/LIBPATH:") {
+	    if(opt.startsWith("/")) {
+		if(opt.startsWith("/LIBPATH:")) {
 		    QString r = opt.mid(9), l = r;
 		    fixEnvVariables(l);
 		    libdirs.append(new MakefileDependDir(r.replace("\"",""),

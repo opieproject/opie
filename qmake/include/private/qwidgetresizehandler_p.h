@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qwidgetresizehandler_p.h,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qwidgetresizehandler_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of the QWidgetResizeHandler class
 **
 ** Created : 001010
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the workspace module of the Qt GUI Toolkit.
 **
@@ -35,8 +35,20 @@
 **
 **********************************************************************/
 
-#ifndef QWIDGETRESIZEHANDLER_H
-#define QWIDGETRESIZEHANDLER_H
+#ifndef QWIDGETRESIZEHANDLER_P_H
+#define QWIDGETRESIZEHANDLER_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  This header file may
+// change from version to version without notice, or even be
+// removed.
+//
+// We mean it.
+//
+//
 
 #ifndef QT_H
 #include "qobject.h"

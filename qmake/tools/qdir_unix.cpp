@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qdir_unix.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qdir_unix.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QDir class
 **
 ** Created : 950628
 **
-** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -51,6 +51,7 @@
 
 #include <stdlib.h>
 #include <limits.h>
+#include <errno.h>
 
 
 void QDir::slashify( QString& )
@@ -70,17 +71,16 @@ QString QDir::homeDirPath()
 QString QDir::canonicalPath() const
 {
     QString r;
-
     char cur[PATH_MAX+1];
-    if ( ::getcwd( cur, PATH_MAX ) )
-	if ( ::chdir(QFile::encodeName(dPath)) >= 0 ) {
-	    char tmp[PATH_MAX+1];
-	    if ( ::getcwd( tmp, PATH_MAX ) )
-		r = QFile::decodeName(tmp);
-	    ::chdir( cur );
-	}
+    if ( ::getcwd( cur, PATH_MAX ) ) {
+	char tmp[PATH_MAX+1];
+	if( ::realpath( QFile::encodeName( dPath ), tmp ) )
+	    r = QFile::decodeName( tmp );
+	slashify( r );
 
-    slashify( r );
+    	// always make sure we go back to the current dir
+	::chdir( cur );
+    }
     return r;
 }
 
@@ -90,12 +90,13 @@ bool QDir::mkdir( const QString &dirName, bool acceptAbsPath ) const
     QString name = dirName;
     if (dirName[dirName.length() - 1] == "/")
 	name = dirName.left( dirName.length() - 1 );
-    return ::mkdir( QFile::encodeName(filePath(name,acceptAbsPath)), 0777 )
-	== 0;
+    int status =
+	::mkdir( QFile::encodeName(filePath(name,acceptAbsPath)), 0777 );
 #else
-    return ::mkdir( QFile::encodeName(filePath(dirName,acceptAbsPath)), 0777 )
-	== 0;
+    int status =
+	::mkdir( QFile::encodeName(filePath(dirName,acceptAbsPath)), 0777 );
 #endif
+    return status == 0;
 }
 
 bool QDir::rmdir( const QString &dirName, bool acceptAbsPath ) const
@@ -186,7 +187,7 @@ bool QDir::readDirEntries( const QString &nameFilter,
 	fiList->clear();
     }
 
-    QStringList filters = qt_makeFilterList( nameFilter );
+    QValueList<QRegExp> filters = qt_makeFilterList( nameFilter );
 
     bool doDirs	    = (filterSpec & Dirs)	!= 0;
     bool doFiles    = (filterSpec & Files)	!= 0;
@@ -197,11 +198,6 @@ bool QDir::readDirEntries( const QString &nameFilter,
     bool doHidden   = (filterSpec & Hidden)	!= 0;
     bool doSystem   = (filterSpec & System)     != 0;
 
-#if defined(Q_OS_OS2EMX)
-    //QRegExp   wc( nameFilter, FALSE, TRUE );	// wild card, case insensitive
-#else
-    //QRegExp   wc( nameFilter, TRUE, TRUE );	// wild card, case sensitive
-#endif
     QFileInfo fi;
     DIR	     *dir;
     dirent   *file;
@@ -210,10 +206,19 @@ bool QDir::readDirEntries( const QString &nameFilter,
     if ( !dir )
 	return FALSE; // cannot read the directory
 
-    while ( (file = readdir(dir)) ) {
+#if defined(QT_THREAD_SUPPORT) && defined(_POSIX_THREAD_SAFE_FUNCTIONS) && !defined(Q_OS_CYGWIN)
+    union {
+	struct dirent mt_file;
+	char b[sizeof(struct dirent) + MAXNAMLEN + 1];
+    } u;
+    while ( readdir_r(dir, &u.mt_file, &file ) == 0 && file )
+#else
+    while ( (file = readdir(dir)) )
+#endif // QT_THREAD_SUPPORT && _POSIX_THREAD_SAFE_FUNCTIONS
+    {
 	QString fn = QFile::decodeName(file->d_name);
 	fi.setFile( *this, fn );
-	if ( !match( filters, fn ) && !(allDirs && fi.isDir()) )
+	if ( !qt_matchFilterList(filters, fn) && !(allDirs && fi.isDir()) )
 	     continue;
 	if  ( (doDirs && fi.isDir()) || (doFiles && fi.isFile()) ||
 	      (doSystem && (!fi.isFile() && !fi.isDir())) ) {
@@ -276,7 +281,8 @@ const QFileInfoList * QDir::drives()
     if ( !knownMemoryLeak ) {
 
 #ifdef QT_THREAD_SUPPORT
-	QMutexLocker locker( qt_global_mutexpool->get( &knownMemoryLeak ) );
+	QMutexLocker locker( qt_global_mutexpool ?
+			     qt_global_mutexpool->get( &knownMemoryLeak ) : 0 );
 #endif // QT_THREAD_SUPPORT
 
 	if ( !knownMemoryLeak ) {

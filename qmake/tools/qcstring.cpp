@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcstring.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qcstring.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of extended char array operations, and QByteArray and
 ** QCString classes
@@ -139,6 +139,17 @@ char *qstrncpy( char *dst, const char *src, uint len )
 	dst[len-1] = '\0';
     return dst;
 }
+
+/*!
+    \fn uint qstrlen( const char *str );
+
+    \relates QCString
+
+    A safe strlen function.
+
+    Returns the number of characters that precede the terminating '\0'.
+    or 0 if \a str is 0.
+*/
 
 /*!
     \fn int qstrcmp( const char *str1, const char *str2 );
@@ -299,7 +310,8 @@ Q_UINT16 qChecksum( const char *data, uint len )
     if ( !crc_tbl_init ) {			// create lookup table
 
 #ifdef QT_THREAD_SUPPORT
-	QMutexLocker locker( qt_global_mutexpool->get( &crc_tbl_init ) );
+	QMutexLocker locker( qt_global_mutexpool ?
+			     qt_global_mutexpool->get( &crc_tbl_init ) : 0 );
 #endif // QT_THREAD_SUPPORT
 
 	if ( !crc_tbl_init ) {
@@ -319,18 +331,24 @@ Q_UINT16 qChecksum( const char *data, uint len )
     return ~crc & 0xffff;
 }
 
-/*! \fn QByteArray qCompress( const QByteArray& data)
-  \relates QByteArray
-  \overload
+/*!
+    \fn QByteArray qCompress( const QByteArray& data )
+
+    \relates QByteArray
+
+    Compresses the array \a data and returns the compressed byte
+    array.
+
+    \sa qUncompress()
 */
 
 /*!
-  \relates QByteArray
+    \relates QByteArray
 
-  Compresses the array \a data which is \a nbytes long and returns the
-  compressed byte array.
+    \overload
 
-  \sa qUncompress()
+    Compresses the array \a data which is \a nbytes long and returns the
+    compressed byte array.
 */
 
 #ifndef QT_NO_COMPRESS
@@ -379,20 +397,32 @@ QByteArray qCompress( const uchar* data, int nbytes )
 }
 #endif
 
-/*! \fn QByteArray qUncompress( const QByteArray& data )
-  \relates QByteArray
-  \overload
+/*!
+    \fn QByteArray qUncompress( const QByteArray& data )
+
+    \relates QByteArray
+
+    Uncompresses the array \a data and returns the uncompressed byte
+    array.
+
+    Returns an empty QByteArray if the input data was corrupt.
+    \omit
+    ADD THE FOLLOWING FOR Qt 4.0
+    This function will uncompress data compressed with qCompress()
+    from this and any earlier Qt version, back to Qt 3.1 when this
+    feature was added.
+    \endomit
+
+    \sa qCompress()
 */
 
 /*!
-  \relates QByteArray
+    \relates QByteArray
 
-  Uncompresses the array \a data which is \a nbytes long and returns
-  the uncompressed byte array.
+    \overload
 
-  Returns an empty QByteArray if the input data was corrupt.
-
-  \sa qCompress()
+    Uncompresses the array \a data which is \a nbytes long and returns
+    the uncompressed byte array.
 */
 
 #ifndef QT_NO_COMPRESS
@@ -936,13 +966,17 @@ int QCString::find( char c, int index, bool cs ) const
 
 int QCString::find( const char *str, int index, bool cs ) const
 {
+    return find( str, index, cs, length() );
+}
+
+int QCString::find( const char *str, int index, bool cs, uint l ) const
+{
     if ( (uint)index >= size() )
 	return -1;
     if ( !str )
 	return -1;
     if ( !*str )
 	return index;
-    const uint l = length();
     const uint sl = qstrlen( str );
     if ( sl + index > l )
 	return -1;
@@ -1152,8 +1186,9 @@ int QCString::contains( const char *str, bool cs ) const
 {
     int count = 0;
     int i = -1;
+    uint l = length();
     // use find for the faster hashing algorithm
-    while ( ( i = find ( str, i+1, cs ) ) != -1 )
+    while ( ( i = find ( str, i+1, cs, l ) ) != -1 )
 	count++;
     return count;
 }
@@ -1173,7 +1208,6 @@ int QCString::contains( const char *str, bool cs ) const
 
     \sa right(), mid()
 */
-
 QCString QCString::left( uint len ) const
 {
     if ( isEmpty() ) {
@@ -1497,14 +1531,16 @@ QCString &QCString::insert( uint index, const char *s )
     int nlen = olen + len;
     if ( index >= olen ) {			// insert after end of string
 	detach();
-	if ( QByteArray::resize(nlen+index-olen+1) ) {
+	if ( QByteArray::resize(nlen+index-olen+1, QByteArray::SpeedOptim ) ) {
 	    memset( data()+olen, ' ', index-olen );
 	    memcpy( data()+index, s, len+1 );
 	}
-    } else if ( QByteArray::resize(nlen+1) ) {	// normal insert
+    } else {
 	detach();
-	memmove( data()+index+len, data()+index, olen-index+1 );
-	memcpy( data()+index, s, len );
+	if ( QByteArray::resize(nlen+1, QByteArray::SpeedOptim ) ) {	// normal insert
+	    memmove( data()+index+len, data()+index, olen-index+1 );
+	    memcpy( data()+index, s, len );
+	}
     }
     return *this;
 }
@@ -1569,7 +1605,7 @@ QCString &QCString::remove( uint index, uint len )
     } else if ( len != 0 ) {
 	detach();
 	memmove( data()+index, data()+index+len, olen-index-len+1 );
-	QByteArray::resize(olen-len+1);
+	QByteArray::resize(olen-len+1, QByteArray::SpeedOptim );
     }
     return *this;
 }
@@ -1631,6 +1667,7 @@ QCString &QCString::replace( char c, const char *after )
     // s == "English is English"
     \endcode
 */
+
 QCString &QCString::replace( const char *before, const char *after )
 {
     if ( before == after || isNull() )
@@ -1646,7 +1683,7 @@ QCString &QCString::replace( const char *before, const char *after )
 
     if ( bl == al ) {
 	if ( bl ) {
-	    while( (index = find( before, index ) ) != -1 ) {
+	    while( (index = find( before, index, TRUE, len ) ) != -1 ) {
 		memcpy( d+index, after, al );
 		index += bl;
 	    }
@@ -1655,7 +1692,7 @@ QCString &QCString::replace( const char *before, const char *after )
 	uint to = 0;
 	uint movestart = 0;
 	uint num = 0;
-	while( (index = find( before, index ) ) != -1 ) {
+	while( (index = find( before, index, TRUE, len ) ) != -1 ) {
 	    if ( num ) {
 		int msize = index - movestart;
 		if ( msize > 0 ) {
@@ -1686,7 +1723,7 @@ QCString &QCString::replace( const char *before, const char *after )
 	    uint indices[4096];
 	    uint pos = 0;
 	    while( pos < 4095 ) {
-		index = find(before, index);
+		index = find(before, index, TRUE, len);
 		if ( index == -1 )
 		    break;
 		indices[pos++] = index;
@@ -1763,7 +1800,7 @@ QCString &QCString::replace( char c1, char c2 )
 
 int QCString::find( const QRegExp& rx, int index ) const
 {
-    QString d = QString::fromLatin1( data() );
+    QString d = QString::fromAscii( data() );
     return d.find( rx, index );
 }
 
@@ -1783,7 +1820,7 @@ int QCString::find( const QRegExp& rx, int index ) const
 
 int QCString::findRev( const QRegExp& rx, int index ) const
 {
-    QString d = QString::fromLatin1( data() );
+    QString d = QString::fromAscii( data() );
     return d.findRev( rx, index );
 }
 
@@ -1808,7 +1845,7 @@ int QCString::findRev( const QRegExp& rx, int index ) const
 
 int QCString::contains( const QRegExp &rx ) const
 {
-    QString d = QString::fromLatin1( data() );
+    QString d = QString::fromAscii( data() );
     return d.contains( rx );
 }
 
@@ -1838,8 +1875,8 @@ int QCString::contains( const QRegExp &rx ) const
 
 QCString &QCString::replace( const QRegExp &rx, const char *str )
 {
-    QString d = QString::fromLatin1( data() );
-    QString r = QString::fromLatin1( str );
+    QString d = QString::fromAscii( data() );
+    QString r = QString::fromAscii( str );
     d.replace( rx, r );
     setStr( d.ascii() );
     return *this;
@@ -2199,7 +2236,7 @@ QCString& QCString::operator+=( const char *str )
     detach();
     uint len1 = length();
     uint len2 = qstrlen(str);
-    if ( !QByteArray::resize( len1 + len2 + 1 ) )
+    if ( !QByteArray::resize( len1 + len2 + 1, QByteArray::SpeedOptim ) )
 	return *this;				// no memory
     memcpy( data() + len1, str, len2 + 1 );
     return *this;
@@ -2215,7 +2252,7 @@ QCString &QCString::operator+=( char c )
 {
     detach();
     uint len = length();
-    if ( !QByteArray::resize( len + 2 ) )
+    if ( !QByteArray::resize( len + 2, QByteArray::SpeedOptim  ) )
 	return *this;				// no memory
     *(data() + len) = c;
     *(data() + len+1) = '\0';

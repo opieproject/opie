@@ -74,7 +74,7 @@
 // 32-bit color
 //#define QT_NO_QWS_DEPTH_32
 
-// 4-bit greyscale
+// 4-bit grayscale
 //#define QT_NO_QWS_DEPTH_4
 
 // 8-bit color

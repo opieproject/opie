@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qrichtext_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of internal rich text classes
 **
@@ -156,6 +156,8 @@ private:
 	//abort();
 	return *this;
     }
+    QTextStringChar( const QTextStringChar & ) {
+    }
     friend class QComplexText;
     friend class QTextParagraph;
 };
@@ -174,8 +176,8 @@ public:
     QTextString( const QTextString &s );
     virtual ~QTextString();
 
-    static QString toString( const QMemArray<QTextStringChar> &data );
-    QString toString() const;
+    static QString toString( const QMemArray<QTextStringChar> &data, bool fixspaces = TRUE );
+    QString toString( bool fixspaces = TRUE ) const;
 
     QTextStringChar &at( int i ) const;
 #if defined(Q_STRICT_INLINING_RULES)
@@ -286,8 +288,8 @@ public:
     void gotoEnd();
     void gotoPageUp( int visibleHeight );
     void gotoPageDown( int visibleHeight );
-    void gotoNextWord();
-    void gotoPreviousWord();
+    void gotoNextWord( bool onlySpace = FALSE );
+    void gotoPreviousWord( bool onlySpace = FALSE );
     void gotoWordLeft();
     void gotoWordRight();
 
@@ -326,7 +328,7 @@ private:
 
     void push();
     void pop();
-    void processNesting( Operation op );
+    bool processNesting( Operation op );
     void invalidateNested();
     void gotoIntoNested( const QPoint &globalPos );
 
@@ -703,6 +705,7 @@ struct Q_EXPORT QTextDocumentSelection
 {
     QTextCursor startCursor, endCursor;
     bool swapped;
+    Q_DUMMY_COMPARISON_OPERATOR(QTextDocumentSelection)
 };
 
 #if defined(Q_TEMPLATEDLL)
@@ -839,6 +842,9 @@ public:
 
     void doLayout( QPainter *p, int w );
     void draw( QPainter *p, const QRect& rect, const QColorGroup &cg, const QBrush *paper = 0 );
+    void eraseParagraphEmptyArea( QTextParagraph *parag, QPainter *p, const QColorGroup &cg );
+    bool useDoubleBuffer( QTextParagraph *parag, QPainter *p );
+
     void drawParagraph( QPainter *p, QTextParagraph *parag, int cx, int cy, int cw, int ch,
 		    QPixmap *&doubleBuffer, const QColorGroup &cg,
 		    bool drawCursor, QTextCursor *cursor, bool resetChanged = TRUE );
@@ -1067,6 +1073,7 @@ private:
 struct Q_EXPORT QTextParagraphSelection
 {
     int start, end;
+    Q_DUMMY_COMPARISON_OPERATOR(QTextParagraphSelection)
 };
 
 struct Q_EXPORT QTextLineStart
@@ -1136,23 +1143,15 @@ public:
     virtual void join( QTextParagraphData * );
 };
 
-class Q_EXPORT QTextParagraphPseudoDocument
-{
-public:
-    QTextParagraphPseudoDocument();
-    ~QTextParagraphPseudoDocument();
-    QRect docRect;
-    QTextFormatter *pFormatter;
-    QTextCommandHistory *commandHistory;
-    int minw;
-    int wused;
-};
+class QTextParagraphPseudoDocument;
 
-//nase
+class QSyntaxHighlighter;
+
 class Q_EXPORT QTextParagraph
 {
     friend class QTextDocument;
     friend class QTextCursor;
+    friend class QSyntaxHighlighter;
 
 public:
     QTextParagraph( QTextDocument *d, QTextParagraph *pr = 0, QTextParagraph *nx = 0, bool updateIds = TRUE );
@@ -1176,7 +1175,13 @@ public:
 //     void setFormat( QTextFormat *fm );
 //     QTextFormat *paragFormat() const;
 
+#if defined(Q_STRICT_INLINING_RULES)
+    // This is for the IRIX MIPSpro o32 ABI - it fails, claiming the
+    // implementation to be a redefinition.
+    inline QTextDocument *document() const;
+#else
     QTextDocument *document() const;
+#endif
     QTextParagraphPseudoDocument *pseudoDocument() const;
 
     QRect rect() const;
@@ -1596,7 +1601,6 @@ public:
     virtual QTextFormat *createFormat( const QFont &f, const QColor &c ) { return new QTextFormat( f, c, this ); }
 
     void updateDefaultFormat( const QFont &font, const QColor &c, QStyleSheet *sheet );
-    QDict<QTextFormat> dict() const { return cKey; }
 
     QPaintDevice *paintDevice() const { return paintdevice; }
     void setPaintDevice( QPaintDevice * );
@@ -1614,6 +1618,19 @@ private:
     int cflags;
 
     QPaintDevice *paintdevice;
+};
+
+class Q_EXPORT QTextParagraphPseudoDocument
+{
+public:
+    QTextParagraphPseudoDocument();
+    ~QTextParagraphPseudoDocument();
+    QRect docRect;
+    QTextFormatter *pFormatter;
+    QTextCommandHistory *commandHistory;
+    int minw;
+    int wused;
+    QTextFormatCollection collection;
 };
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1826,6 +1843,12 @@ inline void QTextDocument::setFlow( QTextFlow *f )
 inline void QTextDocument::takeFlow()
 {
     flow_ = 0;
+}
+
+inline bool QTextDocument::useDoubleBuffer( QTextParagraph *parag, QPainter *p )
+{
+    return ( !parag->document()->parent() || parag->document()->nextDoubleBuffered ) &&
+	( !p || !p->device() || p->device()->devType() != QInternal::Printer );
 }
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

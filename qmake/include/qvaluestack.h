@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qvaluestack.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qvaluestack.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QValueStack class
 **
 ** Created : 990925
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -54,7 +54,7 @@ public:
     {
 	T elem( this->last() );
 	if ( !this->isEmpty() )
-	    remove( this->fromLast() );
+	    this->remove( this->fromLast() );
 	return elem;
     }
     T& top() { return this->last(); }

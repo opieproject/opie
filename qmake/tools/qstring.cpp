@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: qstring.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qstring.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of the QString class and related Unicode functions
 **
 ** Created : 920722
 **
-** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -47,16 +47,20 @@
 #ifndef QT_NO_TEXTCODEC
 #include "qtextcodec.h"
 #endif
-#include <ctype.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #if defined(Q_WS_WIN)
 #include "qt_windows.h"
 #endif
 #if !defined( QT_NO_COMPONENT ) && !defined( QT_LITE_COMPONENT )
 #include "qcleanuphandler.h"
+#endif
+
+#ifdef QT_NO_UNICODETABLES
+# include <ctype.h>
 #endif
 
 
@@ -11787,6 +11791,7 @@ static inline QChar::Direction direction( const QChar &c )
     if(!rowp) return QChar::DirL;
     return (QChar::Direction) ( *(rowp+c.cell()) & 0x1f );
 #else
+    Q_UNUSED(c);
     return QChar::DirL;
 #endif
 }
@@ -11799,6 +11804,7 @@ static inline bool mirrored( const QChar &c )
 	return FALSE;
     return *(rowp+c.cell())>128;
 #else
+    Q_UNUSED(c);
     return FALSE;
 #endif
 }
@@ -11900,7 +11906,7 @@ static uint computeNewMax( uint len )
     uint newMax = 4;
     while ( newMax < len )
 	newMax *= 2;
-    // try to spare some memory
+    // try to save some memory
     if ( newMax >= 1024 * 1024 && len <= newMax - (newMax >> 2) )
 	newMax -= newMax >> 2;
     return newMax;
@@ -12891,7 +12897,7 @@ void QString::compose()
     delete[].
 */
 
-QChar* QString::asciiToUnicode( const QByteArray& ba, uint* len )
+QChar* QString::latin1ToUnicode( const QByteArray& ba, uint* len )
 {
     if ( ba.isNull() ) {
 	*len = 0;
@@ -12910,7 +12916,7 @@ QChar* QString::asciiToUnicode( const QByteArray& ba, uint* len )
     return result;
 }
 
-static QChar* internalAsciiToUnicode( const QByteArray& ba, uint* len )
+static QChar* internalLatin1ToUnicode( const QByteArray& ba, uint* len )
 {
     if ( ba.isNull() ) {
 	*len = 0;
@@ -12940,7 +12946,7 @@ static QChar* internalAsciiToUnicode( const QByteArray& ba, uint* len )
     delete[].
 */
 
-QChar* QString::asciiToUnicode( const char *str, uint* len, uint maxlen )
+QChar* QString::latin1ToUnicode( const char *str, uint* len, uint maxlen )
 {
     QChar* result = 0;
     uint l = 0;
@@ -12950,7 +12956,7 @@ QChar* QString::asciiToUnicode( const char *str, uint* len, uint maxlen )
 		l++;
 	} else {
 	    // Faster?
-	    l = qstrlen(str);
+	    l = strlen( str );
 	}
 	QChar *uc = new QChar[ l ]; // Can't use macro since function is public
 	result = uc;
@@ -12963,7 +12969,7 @@ QChar* QString::asciiToUnicode( const char *str, uint* len, uint maxlen )
     return result;
 }
 
-static QChar* internalAsciiToUnicode( const char *str, uint* len,
+static QChar* internalLatin1ToUnicode( const char *str, uint* len,
 				      uint maxlen = (uint)-1 )
 {
     QChar* result = 0;
@@ -12974,7 +12980,7 @@ static QChar* internalAsciiToUnicode( const char *str, uint* len,
 		l++;
 	} else {
 	    // Faster?
-	    l = qstrlen(str);
+	    l = strlen( str );
 	}
 	QChar *uc = QT_ALLOC_QCHAR_VEC( l );
 	result = uc;
@@ -12994,7 +13000,7 @@ static QChar* internalAsciiToUnicode( const char *str, uint* len,
     The caller is responsible for deleting the resultant string with
     delete[].
 */
-char* QString::unicodeToAscii(const QChar *uc, uint l)
+char* QString::unicodeToLatin1(const QChar *uc, uint l)
 {
     if (!uc) {
 	return 0;
@@ -13157,35 +13163,6 @@ QStringData* QString::makeSharedNull()
     return QString::shared_null;
 }
 
-// Uncomment this to get some useful statistics.
-// #define Q2HELPER(x) x
-
-#ifdef Q2HELPER
-static int stat_construct_charstar=0;
-static int stat_construct_charstar_size=0;
-static int stat_construct_null=0;
-static int stat_construct_int=0;
-static int stat_construct_int_size=0;
-static int stat_construct_ba=0;
-static int stat_get_ascii=0;
-static int stat_get_ascii_size=0;
-static int stat_copy_on_write=0;
-static int stat_copy_on_write_size=0;
-static int stat_fast_copy=0;
-Q_EXPORT void qt_qstring_stats()
-{
-	qDebug("construct_charstar = %d (%d chars)", stat_construct_charstar, stat_construct_charstar_size);
-	qDebug("construct_null = %d", stat_construct_null);
-	qDebug("construct_int = %d (%d chars)", stat_construct_int, stat_construct_int_size);
-	qDebug("construct_ba = %d", stat_construct_ba);
-	qDebug("get_ascii = %d (%d chars)", stat_get_ascii, stat_get_ascii_size);
-	qDebug("copy_on_write = %d (%d chars)", stat_copy_on_write, stat_copy_on_write_size);
-	qDebug("fast_copy = %d", stat_fast_copy);
-}
-#else
-#define Q2HELPER(x)
-#endif
-
 /*!
     \fn QString::QString()
 
@@ -13211,7 +13188,6 @@ QString::QString( QChar ch )
 QString::QString( const QString &s ) :
     d(s.d)
 {
-    Q2HELPER(stat_fast_copy++)
     d->ref();
 }
 
@@ -13230,13 +13206,10 @@ QString::QString( const QString &s ) :
 QString::QString( int size, bool /*dummy*/ )
 {
     if ( size ) {
-	Q2HELPER(stat_construct_int++)
 	int l = size;
-	Q2HELPER(stat_construct_int_size+=l)
 	QChar* uc = QT_ALLOC_QCHAR_VEC( l );
 	d = new QStringData( uc, 0, l );
     } else {
-	Q2HELPER(stat_construct_null++)
 	d = shared_null ? shared_null : (shared_null=new QStringData);
 	d->ref();
     }
@@ -13249,9 +13222,15 @@ QString::QString( int size, bool /*dummy*/ )
 
 QString::QString( const QByteArray& ba )
 {
-    Q2HELPER(stat_construct_ba++)
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() ) {
+	d = 0;
+	*this = fromAscii( ba.data(), ba.size() );
+	return;
+    }
+#endif
     uint l;
-    QChar *uc = internalAsciiToUnicode(ba,&l);
+    QChar *uc = internalLatin1ToUnicode(ba,&l);
     d = new QStringData(uc,l,l);
 }
 
@@ -13302,12 +13281,39 @@ QString::QString( const QChar* unicode, uint length )
 
 QString::QString( const char *str )
 {
-    Q2HELPER(stat_construct_charstar++)
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() ) {
+	d = 0;
+	*this = fromAscii( str );
+	return;
+    }
+#endif
     uint l;
-    QChar *uc = internalAsciiToUnicode(str,&l);
-    Q2HELPER(stat_construct_charstar_size+=l)
+    QChar *uc = internalLatin1ToUnicode(str,&l);
     d = new QStringData(uc,l,l);
 }
+
+#ifndef QT_NO_STL
+/*!
+    Constructs a string that is a deep copy of \a str.
+
+    This is the same as fromAscii(\a str).
+*/
+
+QString::QString( const std::string &str )
+{
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() ) {
+	d = 0;
+	*this = fromAscii( str.c_str() );
+	return;
+    }
+#endif
+    uint l;
+    QChar *uc = internalLatin1ToUnicode(str.c_str(),&l);
+    d = new QStringData(uc,l,l);
+}
+#endif
 
 /*!
     \fn QString::~QString()
@@ -13333,10 +13339,10 @@ void QString::real_detach()
 
 void QString::deref()
 {
-    if ( d->deref() ) {
+    if ( d && d->deref() ) {
 	if ( d != shared_null )
 	    delete d;
-	d = 0; // helps debugging
+	d = 0;
     }
 }
 
@@ -13349,6 +13355,15 @@ void QStringData::deleteSelf()
     \fn QString& QString::operator=( QChar c )
 
     Sets the string to contain just the single character \a c.
+*/
+
+/*!
+    \fn QString& QString::operator=( const std::string& s )
+
+    \overload
+
+    Makes a deep copy of \a s and returns a reference to the deep
+    copy.
 */
 
 /*!
@@ -13368,7 +13383,6 @@ void QStringData::deleteSelf()
 */
 QString &QString::operator=( const QString &s )
 {
-    Q2HELPER(stat_fast_copy++)
     s.d->ref();
     deref();
     d = s.d;
@@ -13383,7 +13397,7 @@ QString &QString::operator=( const QString &s )
 */
 QString &QString::operator=( const QCString& cs )
 {
-    return setLatin1(cs);
+    return setAscii(cs);
 }
 
 
@@ -13399,7 +13413,7 @@ QString &QString::operator=( const QCString& cs )
 */
 QString &QString::operator=( const char *str )
 {
-    return setLatin1(str);
+    return setAscii(str);
 }
 
 
@@ -13471,8 +13485,7 @@ void QString::truncate( uint newLen )
     string, and sets the length of the string to \a newLen. Any new
     space allocated contains arbitrary data.
 
-    If \a newLen is 0, then the string becomes empty, unless the
-    string is null, in which case it remains null.
+    If \a newLen is 0, then the string becomes empty (non-null).
 
     If it is not possible to allocate enough memory, the string
     remains unchanged.
@@ -13486,12 +13499,12 @@ void QString::truncate( uint newLen )
     we're fairly sure that size is big enough:
     \code
 	QString result;
-	int resultLength = 0;
-	result.setLength( newLen ) // allocate some space
+	int len = 0;
+	result.setLength( maxLen );     // allocate some space
 	while ( ... ) {
-	    result[resultLength++] = ... // fill (part of) the space with data
+	    result[len++] = ...         // fill part of the space
 	}
-	result.truncate[resultLength]; // and get rid of the undefined junk
+	result.truncate( len );         // and get rid of the rest
     \endcode
 
     If \a newLen is an underestimate, the worst that will happen is
@@ -13505,8 +13518,6 @@ void QString::setLength( uint newLen )
     if ( d->count != 1 || newLen > d->maxl ||
 	 ( newLen * 4 < d->maxl && d->maxl > 4 ) ) {
 	// detach, grow or shrink
-	Q2HELPER(stat_copy_on_write++)
-	Q2HELPER(stat_copy_on_write_size+=d->len)
 	uint newMax = computeNewMax( newLen );
 	QChar* nd = QT_ALLOC_QCHAR_VEC( newMax );
 	if ( nd ) {
@@ -13530,21 +13541,20 @@ void QString::setLength( uint newLen )
     \a a is padded to. A positive value will produce right-aligned
     text, whereas a negative value will produce left-aligned text.
 
+    The following example shows how we could create a 'status' string
+    when processing a list of files:
     \code
-	QString firstName( "Joe" );
-	QString lastName( "Bloggs" );
-	QString fullName;
-	fullName = QString( "First name is '%1', last name is '%2'" )
-		    .arg( firstName )
-		    .arg( lastName );
-
-	// fullName == First name is 'Joe', last name is 'Bloggs'
+    QString status = QString( "Processing file %1 of %2: %3" )
+			.arg( i )         // current file's number
+			.arg( total )     // number of files to process
+			.arg( fileName ); // current file's name
     \endcode
 
-    Note that using arg() to construct sentences as we've done in the
-    example above does not usually translate well into other languages
-    because sentence structure and word order often differ between
-    languages.
+    It is generally fine to use filenames and numbers as we have done
+    in the example above. But note that using arg() to construct
+    natural language sentences does not usually translate well into
+    other languages because sentence structure and word order often
+    differ between languages.
 
     If there is no place marker (\c %1 or \c %2, etc.), a warning
     message (qWarning()) is output and the text is appended at the
@@ -13774,7 +13784,7 @@ QString &QString::sprintf( const char* cformat, ... )
 	*this = fromLatin1( "" );
 	return *this;
     }
-    QString format = fromLatin1( cformat );
+    QString format = fromAscii( cformat );
 
     QRegExp escape( "%#?0?-? ?\\+?'?[0-9*]*\\.?[0-9*]*h?l?L?q?Z?" );
     QString result;
@@ -13913,7 +13923,7 @@ QString &QString::sprintf( const char* cformat, ... )
 		    }
 		}
 	    }
-	    replacement = fromLatin1( out );
+	    replacement = fromAscii( out );
 	}
 	result += replacement;
     }
@@ -14124,8 +14134,10 @@ int QString::find( const QString& str, int index, bool cs ) const
     if ( !sl )
 	return index;
 
+#ifndef MACOSX_101
     if ( sl == 1 )
 	return find( *str.unicode(), index, cs );
+#endif
 
     // we use the Boyer-Moore algorithm in cases where the overhead
     // for the hash table should pay off, otherwise we use a simple
@@ -14221,6 +14233,9 @@ int QString::find( const QString& str, int index, bool cs ) const
 
 int QString::findRev( QChar c, int index, bool cs ) const
 {
+#ifdef MACOSX_101
+    return findRev( QString( c ), index, cs );
+#else
     const uint l = length();
     if ( index < 0 )
 	index += l;
@@ -14237,6 +14252,7 @@ int QString::findRev( QChar c, int index, bool cs ) const
 	    uc--;
     }
     return uc - end;
+#endif
 }
 
 /*!
@@ -14273,8 +14289,10 @@ int QString::findRev( const QString& str, int index, bool cs ) const
     if ( index > delta )
 	index = delta;
 
+#ifndef MACOSX_101
     if ( sl == 1 )
 	return findRev( *str.unicode(), index, cs );
+#endif
 
     const QChar* needle = str.unicode();
     const QChar* haystack = unicode() + index;
@@ -14979,19 +14997,24 @@ QString QString::rightJustify( uint width, QChar fill, bool truncate ) const
 
 QString QString::lower() const
 {
-    QString s(*this);
-    int l=length();
-    if ( l ) {
-	s.real_detach(); // could do this only when we find a change
-	register QChar *p=s.d->unicode;
-	if ( p ) {
-	    while ( l-- ) {
+    int l = length();
+    register QChar *p = d->unicode;
+    while ( l ) {
+	if ( *p != ::lower(*p) ) {
+	    QString s( *this );
+	    s.real_detach();
+	    p = s.d->unicode + ( p - d->unicode );
+	    while ( l ) {
 		*p = ::lower( *p );
+		l--;
 		p++;
 	    }
+	    return s;
 	}
+	l--;
+	p++;
     }
-    return s;
+    return *this;
 }
 
 /*!
@@ -15007,19 +15030,24 @@ QString QString::lower() const
 
 QString QString::upper() const
 {
-    QString s(*this);
-    int l=length();
-    if ( l ) {
-	s.real_detach(); // could do this only when we find a change
-	register QChar *p=s.d->unicode;
-	if ( p ) {
-	    while ( l-- ) {
+    int l = length();
+    register QChar *p = d->unicode;
+    while ( l ) {
+	if ( *p != ::upper(*p) ) {
+	    QString s( *this );
+	    s.real_detach();
+	    p = s.d->unicode + ( p - d->unicode );
+	    while ( l ) {
 		*p = ::upper( *p );
+		l--;
 		p++;
 	    }
+	    return s;
 	}
+	l--;
+	p++;
     }
-    return s;
+    return *this;
 }
 
 
@@ -15137,8 +15165,8 @@ QString &QString::insert( uint index, const QString &s )
 /*!
     \overload
 
-    Inserts the character in \a s into the string at position \a index
-    \a len number of times and returns a reference to the string.
+    Inserts the first \a len characters in \a s into the string at
+    position \a index and returns a reference to the string.
 */
 
 QString &QString::insert( uint index, const QChar* s, uint len )
@@ -15242,6 +15270,16 @@ QString &QString::insert( uint index, QChar c ) // insert char
 */
 
 /*! \fn QString& QString::prepend( const QByteArray &s )
+  \overload
+
+  Inserts \a s at the beginning of the string and returns a reference to the string.
+
+  Equivalent to insert(0, \a s).
+
+  \sa insert()
+ */
+
+/*! \fn QString& QString::prepend( const std::string &s )
   \overload
 
   Inserts \a s at the beginning of the string and returns a reference to the string.
@@ -15848,9 +15886,9 @@ static bool ok_in_base( QChar c, int base )
 long QString::toLong( bool *ok, int base ) const
 {
     const QChar *p = unicode();
-    long val = 0;
+    ulong val = 0;
     int l = length();
-    const long max_mult = INT_MAX / base;
+    const ulong max_mult = LONG_MAX / base;
     bool is_ok = FALSE;
     int neg = 0;
     if ( !p )
@@ -15883,21 +15921,19 @@ long QString::toLong( bool *ok, int base ) const
 		dv = *p - 'A' + 10;
 	}
 	if ( val > max_mult ||
-	    (val == max_mult && dv > (INT_MAX % base) + neg) )
+	    (val == max_mult && dv > (LONG_MAX % base) + neg) )
 	    goto bye;
 	val = base * val + dv;
 	p++;
     }
-    if ( neg )
-	val = -val;
     while ( l && p->isSpace() )                 // skip trailing space
-	l--,p++;
+	l--, p++;
     if ( !l )
 	is_ok = TRUE;
 bye:
     if ( ok )
 	*ok = is_ok;
-    return is_ok ? val : 0;
+    return is_ok ? ( neg ? -( (long) val ) : (long) val ) : 0L;
 }
 
 /*!
@@ -15915,7 +15951,7 @@ ulong QString::toULong( bool *ok, int base ) const
     const QChar *p = unicode();
     ulong val = 0;
     int l = length();
-    const ulong max_mult = UINT_MAX / base;
+    const ulong max_mult = ULONG_MAX / base;
     bool is_ok = FALSE;
     if ( !p )
 	goto bye;
@@ -15940,7 +15976,7 @@ ulong QString::toULong( bool *ok, int base ) const
 	    else
 		dv = *p - 'A' + 10;
 	}
-	if ( val > max_mult || (val == max_mult && dv > UINT_MAX % base) )
+	if ( val > max_mult || (val == max_mult && dv > ULONG_MAX % base) )
 	    goto bye;
 	val = base * val + dv;
 	p++;
@@ -15967,7 +16003,7 @@ bye:
 short QString::toShort( bool *ok, int base ) const
 {
     long v = toLong( ok, base );
-    if ( ok && *ok && (v < -32768 || v > 32767) ) {
+    if ( ok && *ok && (v < SHRT_MIN || v > SHRT_MAX) ) {
 	*ok = FALSE;
 	v = 0;
     }
@@ -15986,7 +16022,7 @@ short QString::toShort( bool *ok, int base ) const
 ushort QString::toUShort( bool *ok, int base ) const
 {
     ulong v = toULong( ok, base );
-    if ( ok && *ok && (v > 65535) ) {
+    if ( ok && *ok && (v > USHRT_MAX) ) {
 	*ok = FALSE;
 	v = 0;
     }
@@ -16013,7 +16049,12 @@ ushort QString::toUShort( bool *ok, int base ) const
 
 int QString::toInt( bool *ok, int base ) const
 {
-    return (int)toLong( ok, base );
+    long v = toLong( ok, base );
+    if ( ok && *ok && (v < INT_MIN || v > INT_MAX) ) {
+	*ok = FALSE;
+	v = 0;
+    }
+    return (int)v;
 }
 
 /*!
@@ -16028,7 +16069,12 @@ int QString::toInt( bool *ok, int base ) const
 
 uint QString::toUInt( bool *ok, int base ) const
 {
-    return (uint)toULong( ok, base );
+    ulong v = toULong( ok, base );
+    if ( ok && *ok && (v > UINT_MAX) ) {
+	*ok = FALSE;
+	v = 0;
+    }
+    return (uint)v;
 }
 
 /*!
@@ -16052,7 +16098,7 @@ double QString::toDouble( bool *ok ) const
     const char *a = latin1();
     double val = strtod( a ? a : "", &end );
     if ( ok )
-	*ok = ( a && *a && (end == 0 || (end - a) == (int)length()) );
+	*ok = ( a && *a && (end == 0 || *end == '\0') );
     return val;
 }
 
@@ -16098,11 +16144,11 @@ QString &QString::setNum( long n, int base )
     bool neg;
     if ( n < 0 ) {
 	neg = TRUE;
-	if ( n == INT_MIN ) {
+	if ( n == LONG_MIN ) {
 	    // Cannot always negate this special case
 	    QString s1, s2;
-	    s1.setNum(n/base);
-	    s2.setNum((-(n+base))%base);
+	    s1.setNum(n/base, base );
+	    s2.setNum((-(n+base))%base, base );
 	    *this = s1 + s2;
 	    return *this;
 	}
@@ -16461,6 +16507,15 @@ void QString::setExpand( uint index, QChar c )
   Equivalent to operator+=().
  */
 
+/*! \fn QString& QString::append( const std::string &str )
+  \overload
+
+  Appends \a str to the string and returns a reference to the result.
+
+  Equivalent to operator+=().
+ */
+
+
 /*! \fn QString& QString::append( const char *str )
   \overload
 
@@ -16490,9 +16545,15 @@ QString& QString::operator+=( const QString &str )
 
   Appends \a str to the string and returns a reference to the string.
 */
+#ifndef QT_NO_CAST_ASCII
 QString& QString::operator+=( const char *str )
 {
     if ( str ) {
+#ifndef QT_NO_TEXTCODEC
+	if ( QTextCodec::codecForCStrings() )
+	    return operator+=( fromAscii( str ) );
+#endif
+
 	uint len1 = length();
 	uint len2 = strlen( str );
 	if ( len2 ) {
@@ -16508,6 +16569,7 @@ QString& QString::operator+=( const char *str )
     }
     return *this;
 }
+#endif
 
 /*! \overload
 
@@ -16529,6 +16591,10 @@ QString &QString::operator+=( QChar c )
 
 QString &QString::operator+=( char c )
 {
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() )
+	return operator+=( fromAscii( &c, 1 ) );
+#endif
     setLength(length()+1);
     d->unicode[length()-1] = c;
     return *this;
@@ -16541,18 +16607,25 @@ QString &QString::operator+=( char c )
   Appends \a str to the string and returns a reference to the string.
 */
 
+/*!
+  \fn QString &QString::operator+=( const std::string &str )
+  \overload
+
+  Appends \a str to the string and returns a reference to the string.
+*/
+
 
 
 /*!
     \fn char QChar::latin1() const
 
-    Returns a latin-1 copy of this character, if this character is in
-    the latin-1 character set. If not, this function returns 0.
+    Returns the Latin-1 value of this character, or 0 if it
+    cannot be represented in Latin-1.
 */
 
 
 /*!
-    Returns a Latin-1 representation of the string. Note that the
+    Returns a Latin-1 representation of the string. The
     returned value is undefined if the string contains non-Latin-1
     characters. If you want to convert strings into formats other than
     Unicode, see the QTextCodec classes.
@@ -16563,31 +16636,49 @@ QString &QString::operator+=( char c )
     The result remains valid so long as one unmodified copy of the
     source string exists.
 
-    \sa utf8(), local8Bit()
+    \sa fromLatin1(), ascii(), utf8(), local8Bit()
 */
 const char* QString::latin1() const
 {
-    if ( !d->ascii ) {
-	Q2HELPER(stat_get_ascii++)
-	Q2HELPER(stat_get_ascii_size+=d->len)
-	d->ascii = unicodeToAscii( d->unicode, d->len );
+    if ( !d->ascii  || !d->islatin1 ) {
+	d->ascii = unicodeToLatin1( d->unicode, d->len );
+	d->islatin1 = TRUE;
     }
     return d->ascii;
 }
 
 /*!
-  \fn const char* QString::ascii() const
-  \obsolete
+    Returns an 8-bit ASCII representation of the string.
 
-  This function simply calls latin1() and returns the result.
+    If a codec has been set using QTextCodec::codecForCStrings(),
+    it is used to convert Unicode to 8-bit char. Otherwise, this function
+    does the same as latin1().
+
+    \sa fromAscii(), latin1(), utf8(), local8Bit()
 */
+const char* QString::ascii() const
+{
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() ) {
+	if ( !d->ascii || d->islatin1 ) {
+	    QCString s = QTextCodec::codecForCStrings()->fromUnicode( *this );
+	    s.detach();
+	    d->ascii = s.data();
+	    d->islatin1 = FALSE;
+	    s.resetRawData( s.data(), s.size() ); // we have stolen the data
+	}
+	return d->ascii;
+    }
+#endif // QT_NO_TEXTCODEC
+    return latin1();
+}
 
 /*!
-    Returns the string encoded in UTF8 format.
+    Returns the string encoded in UTF-8 format.
 
     See QTextCodec for more diverse coding/decoding of Unicode strings.
 
-    \sa QString::fromUtf8(), local8Bit(), latin1()
+    \sa fromUtf8(), ascii(), latin1(), local8Bit()
 */
 QCString QString::utf8() const
 {
@@ -16633,7 +16724,8 @@ QString QString::fromUtf8( const char* utf8, int len )
     if ( !utf8 )
 	return QString::null;
 
-    if ( len < 0 ) len = qstrlen( utf8 );
+    if ( len < 0 )
+	len = strlen( utf8 );
     QString result;
     result.setLength( len ); // worst case
     QChar *qch = (QChar *)result.unicode();
@@ -16674,20 +16766,50 @@ QString QString::fromUtf8( const char* utf8, int len )
 
 /*!
     Returns the Unicode string decoded from the first \a len
+    characters of \a ascii, ignoring the rest of \a ascii. If \a len
+    is -1 then the length of \a ascii is used. If \a len is bigger
+    than the length of \a ascii then it will use the length of \a
+    ascii.
+
+    If a codec has been set using QTextCodec::codecForCStrings(),
+    it is used to convert Unicode to 8-bit char. Otherwise, this function
+    does the same as fromLatin1().
+
+    This is the same as the QString(const char*) constructor, but you
+    can make that constructor invisible if you compile with the define
+    \c QT_NO_CAST_ASCII, in which case you can explicitly create a
+    QString from 8-bit ASCII text using this function.
+
+    \code
+	QString str = QString::fromAscii( "123456789", 5 );
+	// str == "12345"
+    \endcode
+ */
+QString QString::fromAscii( const char* ascii, int len )
+{
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() ) {
+	if ( !ascii )
+	    return QString::null;
+	if ( len < 0 )
+	    len = strlen( ascii );
+	if ( len == 0 || *ascii == '\0' )
+	    return QString::fromLatin1( "" );
+	return QTextCodec::codecForCStrings()->toUnicode( ascii, len );
+    }
+#endif
+    return fromLatin1( ascii, len );
+}
+
+
+/*!
+    Returns the Unicode string decoded from the first \a len
     characters of \a chars, ignoring the rest of \a chars. If \a len
     is -1 then the length of \a chars is used. If \a len is bigger
     than the length of \a chars then it will use the length of \a
     chars.
 
-    This is the same as the QString(const char*) constructor, but you
-    can make that constructor invisible if you compile with the define
-    \c QT_NO_CAST_ASCII, in which case you can explicitly create a
-    QString from Latin-1 text using this function.
-
-    \code
-	QString str = QString::fromLatin1( "123456789", 5 );
-	// str == "12345"
-    \endcode
+    \sa fromAscii()
 */
 QString QString::fromLatin1( const char* chars, int len )
 {
@@ -16695,7 +16817,7 @@ QString QString::fromLatin1( const char* chars, int len )
     QChar *uc;
     if ( len < 0 )
 	 len = -1;
-    uc = internalAsciiToUnicode( chars, &l, len );
+    uc = internalLatin1ToUnicode( chars, &l, len );
     return QString( new QStringData(uc, l, l), TRUE );
 }
 
@@ -16709,15 +16831,14 @@ QString QString::fromLatin1( const char* chars, int len )
 /*!
     Returns the string encoded in a locale-specific format. On X11,
     this is the QTextCodec::codecForLocale(). On Windows, it is a
-    system-defined encoding. On Mac OS X, this always uses utf8 as the
-    encoding.
+    system-defined encoding. On Mac OS X, this always uses UTF-8 as
+    the encoding.
 
     See QTextCodec for more diverse coding/decoding of Unicode
     strings.
 
-    \sa QString::fromLocal8Bit(), latin1(), utf8()
+    \sa fromLocal8Bit(), ascii(), latin1(), utf8()
 */
-
 
 QCString QString::local8Bit() const
 {
@@ -16740,7 +16861,7 @@ QCString QString::local8Bit() const
     return qt_winQString2MB( *this );
 #endif
 #ifdef Q_WS_QWS
-    return utf8(); // ##### if there is ANY 8 bit format supported?
+    return utf8(); // ### if there is any 8 bit format supported?
 #endif
 #endif
 }
@@ -16771,7 +16892,8 @@ QString QString::fromLocal8Bit( const char* local8Bit, int len )
 	return QString::null;
 #ifdef Q_WS_X11
     QTextCodec* codec = QTextCodec::codecForLocale();
-    if ( len < 0 ) len = qstrlen(local8Bit);
+    if ( len < 0 )
+	len = strlen( local8Bit );
     return codec
 	    ? codec->toUnicode( local8Bit, len )
 	    : fromLatin1( local8Bit, len );
@@ -16804,6 +16926,12 @@ QString QString::fromLocal8Bit( const char* local8Bit, int len )
     that you catch the programming error described in operator!().
 */
 
+/*!
+    \fn QString::operator std::string() const
+
+    Returns ascii().
+*/
+
 
 /*!
     Returns the QString as a zero terminated array of unsigned shorts
@@ -16819,8 +16947,6 @@ const unsigned short *QString::ucs2() const
     unsigned int len = d->len;
     if ( d->maxl < len + 1 ) {
 	// detach, grow or shrink
-	Q2HELPER(stat_copy_on_write++)
-	Q2HELPER(stat_copy_on_write_size += len)
 	uint newMax = computeNewMax( len + 1 );
 	QChar* nd = QT_ALLOC_QCHAR_VEC( newMax );
 	if ( nd ) {
@@ -16983,8 +17109,6 @@ QString& QString::setUnicode( const QChar *unicode, uint len )
     } else if ( d->count != 1 || len > d->maxl ||
 		( len * 4 < d->maxl && d->maxl > 4 ) ) {
 	// detach, grown or shrink
-	Q2HELPER(stat_copy_on_write++)
-	Q2HELPER(stat_copy_on_write_size+=d->len)
 	uint newMax = computeNewMax( len );
 	QChar* nd = QT_ALLOC_QCHAR_VEC( newMax );
 	if ( unicode )
@@ -17018,6 +17142,28 @@ QString& QString::setUnicodeCodes( const ushort* unicode_as_ushorts, uint len )
 
 
 /*!
+    Sets this string to \a str, interpreted as a classic 8-bit ASCII C
+    string. If \a len is -1 (the default), then it is set to
+    strlen(str).
+
+    If \a str is 0 a null string is created. If \a str is "", an empty
+    string is created.
+
+    \sa isNull(), isEmpty()
+*/
+
+QString &QString::setAscii( const char *str, int len )
+{
+#ifndef QT_NO_TEXTCODEC
+    if ( QTextCodec::codecForCStrings() ) {
+	*this = QString::fromAscii( str, len );
+	return *this;
+    }
+#endif // QT_NO_TEXTCODEC
+    return setLatin1( str, len );
+}
+
+/*!
     Sets this string to \a str, interpreted as a classic Latin1 C
     string. If \a len is -1 (the default), then it is set to
     strlen(str).
@@ -17033,7 +17179,7 @@ QString &QString::setLatin1( const char *str, int len )
     if ( str == 0 )
 	return setUnicode(0,0);
     if ( len < 0 )
-	len = qstrlen(str);
+	len = strlen( str );
     if ( len == 0 ) {                           // won't make a null string
 	*this = QString::fromLatin1( "" );
     } else {
@@ -17051,16 +17197,16 @@ void QString::checkSimpleText() const
 {
     QChar *p = d->unicode;
     QChar *end = p + d->len;
-    d->simpletext = 1;
     while( p < end ) {
 	ushort uc = p->unicode();
 	// sort out regions of complex text formatting
 	if ( uc > 0x058f && ( uc < 0x1100 || uc > 0xfb0f ) ) {
-	    d->simpletext = 0;
+	    d->issimpletext = FALSE;
 	    return;
 	}
 	p++;
     }
+    d->issimpletext = TRUE;
 }
 
 /*! \fn bool QString::simpleText() const

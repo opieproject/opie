@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qkbddriverinterface_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qkbddriverinterface_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of Qt/Embedded Keyboard Driver Interface
 **
@@ -30,8 +30,20 @@
 **
 **********************************************************************/
 
-#ifndef QKBDDRIVERINTERFACE_H
-#define QKBDDRIVERINTERFACE_H
+#ifndef QKBDDRIVERINTERFACE_P_H
+#define QKBDDRIVERINTERFACE_P_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt API.  This header file may
+// change from version to version without notice, or even be
+// removed.
+//
+// We mean it.
+//
+//
 
 #ifndef QT_H
 #include <private/qcom_p.h>
@@ -53,4 +65,4 @@ struct Q_EXPORT QKbdDriverInterface : public QFeatureListInterface
 
 #endif // QT_NO_COMPONENT
 
-#endif // QKBDDRIVERINTERFACE_H
+#endif // QKBDDRIVERINTERFACE_P_H

@@ -1,16 +1,31 @@
- /**********************************************************************
-** Copyright (C) 2000-2001 Trolltech AS.  All rights reserved.
+/****************************************************************************
+** $Id: qwidgetinterface_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
-** This file is part of Qt Designer.
+** ...
+**
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+**
+** This file is part of the widgets module of the Qt GUI Toolkit.
+**
+** This file may be distributed under the terms of the Q Public License
+** as defined by Trolltech AS of Norway and appearing in the file
+** LICENSE.QPL included in the packaging of this file.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
 ** Foundation and appearing in the file LICENSE.GPL included in the
 ** packaging of this file.
 **
+** Licensees holding valid Qt Enterprise Edition or Qt Professional Edition
+** licenses may use this file in accordance with the Qt Commercial License
+** Agreement provided with the Software.
+**
 ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
 ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
 **
+** See http://www.trolltech.com/pricing.html or email sales@trolltech.com for
+**   information about Qt Commercial License Agreements.
+** See http://www.trolltech.com/qpl/ for QPL licensing information.
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
 ** Contact info@trolltech.com if any conditions of this licensing are
@@ -18,16 +33,8 @@
 **
 **********************************************************************/
 
-#ifndef QWIDGETINTERFACE_H
-#define QWIDGETINTERFACE_H
-
-
-#ifndef QT_H
-#include <private/qcom_p.h>
-#include <qiconset.h>
-#endif // QT_H
-
-#ifndef QT_NO_WIDGETPLUGIN
+#ifndef QWIDGETINTERFACE_P_H
+#define QWIDGETINTERFACE_P_H
 
 //
 //  W A R N I N G
@@ -40,6 +47,13 @@
 // We mean it.
 //
 //
+
+#ifndef QT_H
+#include <private/qcom_p.h>
+#include <qiconset.h>
+#endif // QT_H
+
+#ifndef QT_NO_WIDGETPLUGIN
 
 class QWidget;
 
@@ -92,7 +106,7 @@ public:
     virtual bool isContainer( const QString &widget ) const = 0;
 };
 
-#if CONTAINER_CUSTOM_WIDGETS
+#ifdef QT_CONTAINER_CUSTOM_WIDGETS
 // {15976628-e3c3-47f4-b525-d124a3caf30e}
 #ifndef IID_QWidgetContainer
 #define IID_QWidgetContainer QUuid( 0x15976628, 0xe3c3, 0x47f4, 0xb5, 0x25, 0xd1, 0x24, 0xa3, 0xca, 0xf3, 0x0e )
@@ -101,11 +115,26 @@ public:
 struct QWidgetContainerInterfacePrivate : public QUnknownInterface
 {
 public:
-    virtual QWidget *containerOfWidget( QWidget *widget ) const = 0;
-    virtual QWidgetList containersOf( QWidget *widget ) const = 0;
-    virtual bool isPassiveInteractor( QWidget *widget ) const = 0;
+    virtual QWidget *containerOfWidget( const QString &f, QWidget *container ) const = 0;
+    virtual bool isPassiveInteractor( const QString &f, QWidget *container ) const = 0;
+
+    virtual bool supportsPages( const QString &f ) const = 0;
+
+    virtual QWidget *addPage( const QString &f, QWidget *container,
+			      const QString &name, int index ) const = 0;
+    virtual void insertPage( const QString &f, QWidget *container,
+			     const QString &name, int index, QWidget *page ) const = 0;
+    virtual void removePage( const QString &f, QWidget *container, int index ) const = 0;
+    virtual void movePage( const QString &f, QWidget *container, int fromIndex, int toIndex ) const = 0;
+    virtual int count( const QString &key, QWidget *container ) const = 0;
+    virtual int currentIndex( const QString &key, QWidget *container ) const = 0;
+    virtual QString pageLabel( const QString &key, QWidget *container, int index ) const = 0;
+    virtual QWidget *page( const QString &key, QWidget *container, int index ) const = 0;
+    virtual void renamePage( const QString &key, QWidget *container,
+			     int index, const QString &newName ) const = 0;
+    virtual QWidgetList pages( const QString &f, QWidget *container ) const = 0;
 };
 #endif
 
 #endif // QT_NO_WIDGETPLUGIN
-#endif // QWIDGETINTERFACE_H
+#endif // QWIDGETINTERFACE_P_H

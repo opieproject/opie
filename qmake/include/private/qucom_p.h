@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qucom_p.h,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qucom_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of the QUcom interfaces
 **
@@ -35,13 +35,8 @@
 **
 **********************************************************************/
 
-#ifndef QUCOM_H
-#define QUCOM_H
-
-#ifndef QT_H
-#include <qstring.h>
-#include "quuid.h"
-#endif // QT_H
+#ifndef QUCOM_P_H
+#define QUCOM_P_H
 
 //
 //  W A R N I N G
@@ -54,6 +49,11 @@
 // We mean it.
 //
 //
+
+#ifndef QT_H
+#include <qstring.h>
+#include "quuid.h"
+#endif // QT_H
 
 #ifdef check
 #undef check
@@ -129,34 +129,34 @@ public: // scary MSVC bug makes this necessary
     union
     {
 	bool b;
-	
+
 	char c;
 	short s;
 	int i;
 	long l;
-	
+
 	unsigned char uc;
 	unsigned short us;
 	unsigned int ui;
 	unsigned long ul;
-	
+
 	float f;
 	double d;
-	
+
 	char byte[16];
-	
+
 	struct {
 	   char* data;
 	   unsigned long size;
 	} bytearray;
-	
+
 	void* ptr;
-	
+
 	struct {
 	    void *ptr;
 	    bool owner;
 	} voidstar;
-	
+
 	struct {
 	    char *ptr;
 	    bool owner;
@@ -166,15 +166,15 @@ public: // scary MSVC bug makes this necessary
 	    char *ptr;
 	    bool owner;
 	} utf8;
-	
+
 	struct {
 	    char *ptr;
 	    bool owner;
 	} local8bit;
-	
+
 	QUnknownInterface* iface;
 	QDispatchInterface* idisp;
-	
+
     } payload;
 
 };
@@ -263,7 +263,7 @@ struct Q_EXPORT QUEnumItem 				// - a name/value pair
 };
 
 struct Q_EXPORT QUEnum
-{			
+{
     const char *name;			// - enumerator name
     unsigned int count;			// - number of values
     const QUEnumItem *items;		// - the name/value pairs
@@ -396,24 +396,6 @@ struct Q_EXPORT QUType_int : public QUType
 };
 extern Q_EXPORT QUType_int static_QUType_int;
 
-// {5938712A-C496-11D5-8CB2-00C0F03BC0F3}
-extern Q_EXPORT const QUuid TID_QUType_uint;
-struct Q_EXPORT QUType_uint : public QUType
-{
-    const QUuid *uuid() const;
-    const char *desc() const;
-
-    void set( QUObject *, uint );
-    uint &get( QUObject *o ) { return o->payload.ui; }
-    bool canConvertFrom( QUObject *, QUType * );
-    bool canConvertTo( QUObject *, QUType * );
-    bool convertFrom( QUObject *, QUType * );
-    bool convertTo( QUObject *, QUType * );
-    void clear( QUObject * ) {}
-    int serializeTo( QUObject *, QUBuffer * );
-    int serializeFrom( QUObject *, QUBuffer * );
-};
-extern Q_EXPORT QUType_uint static_QUType_uint;
 
 // {2D0974E5-0BA6-4ec2-8837-C198972CB48C}
 extern Q_EXPORT const QUuid TID_QUType_double;
@@ -434,24 +416,6 @@ struct Q_EXPORT QUType_double : public QUType
 };
 extern Q_EXPORT QUType_double static_QUType_double;
 
-// {544C5175-6993-4486-B04D-CEC4D21BF4B9 }
-extern Q_EXPORT const QUuid TID_QUType_float;
-struct Q_EXPORT QUType_float : public QUType
-{
-    const QUuid *uuid() const;
-    const char *desc() const;
-
-    void set( QUObject *, float );
-    float &get( QUObject *o ) { return o->payload.f; }
-    bool canConvertFrom( QUObject *, QUType * );
-    bool canConvertTo( QUObject *, QUType * );
-    bool convertFrom( QUObject *, QUType * );
-    bool convertTo( QUObject *, QUType * );
-    void clear( QUObject * ) {}
-    int serializeTo( QUObject *, QUBuffer * );
-    int serializeFrom( QUObject *, QUBuffer * );
-};
-extern Q_EXPORT QUType_float static_QUType_float;
 
 // {EFCDD1D4-77A3-4b8e-8D46-DC14B8D393E9}
 extern Q_EXPORT const QUuid TID_QUType_charstar;
@@ -496,4 +460,4 @@ struct Q_EXPORT QUType_QString : public QUType
 extern Q_EXPORT QUType_QString static_QUType_QString;
 
 
-#endif // QUCOM_H
+#endif // QUCOM_P_H

@@ -1,11 +1,11 @@
 /****************************************************************************
-** $Id: quuid.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: quuid.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QUuid class
 **
-** Created: 010523
+** Created : 010523
 **
-** Copyright (C) 1992-2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 1992-2003 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the tools module of the Qt GUI Toolkit.
 **
@@ -53,7 +53,7 @@ typedef struct _GUID
     ushort  Data2;
     ushort  Data3;
     uchar   Data4[ 8 ];
-} GUID;
+} GUID, *REFGUID, *LPGUID;
 #endif
 #endif
 

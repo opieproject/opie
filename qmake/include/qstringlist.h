@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qstringlist.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qstringlist.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QStringList class
 **

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcriticalsection_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qcriticalsection_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QCriticalSection class
 **
@@ -33,8 +33,8 @@
 **
 **********************************************************************/
 
-#ifndef QCRITICALSECTION_H
-#define QCRITICALSECTION_H
+#ifndef QCRITICALSECTION_P_H
+#define QCRITICALSECTION_P_H
 
 #ifndef QT_H
 #endif // QT_H

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextcodec.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qtextcodec.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QTextCodec class
 **
@@ -75,6 +75,11 @@ public:
     static QTextCodec* codecForLocale();
     static void setCodecForLocale(QTextCodec *c);
 
+    static QTextCodec* codecForTr();
+    static void setCodecForTr(QTextCodec *c);
+    static QTextCodec* codecForCStrings();
+    static void setCodecForCStrings(QTextCodec *c);
+
     static void deleteAllCodecs();
 
     static const char* locale();
@@ -88,7 +93,7 @@ public:
 
     virtual QString toUnicode(const char* chars, int len) const;
     virtual QCString fromUnicode(const QString& uc, int& lenInOut) const;
-    
+
     QCString fromUnicode(const QString& uc) const;
     QString toUnicode(const QByteArray&, int len) const;
     QString toUnicode(const QByteArray&) const;
@@ -108,7 +113,16 @@ protected:
     QTextCodec();
     static int simpleHeuristicNameMatch(const char* name, const char* hint);
 
+private:
+    static QTextCodec *cftr;
+    static QTextCodec *cfcs;
     friend class QFont;
 };
+
+inline QTextCodec* QTextCodec::codecForTr() { return cftr; }
+inline void QTextCodec::setCodecForTr(QTextCodec *c) { cftr = c; }
+inline QTextCodec* QTextCodec::codecForCStrings() { return cfcs; }
+inline void QTextCodec::setCodecForCStrings(QTextCodec *c) { cfcs = c; }
+
 #endif // QT_NO_TEXTCODEC
 #endif // QTEXTCODEC_H

@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qlibrary_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qlibrary_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of an internal QLibrary class
 **
-** Created : 2000-01-01
+** Created : 000101
 **
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
@@ -55,9 +55,6 @@
 #ifndef QT_NO_LIBRARY
 
 #ifndef QT_H
-#if defined(Q_CC_GNU)
-#warning "avoid including header file \"qwindowdefs.h\" in directory 'tools'"
-#endif
 #include "qwindowdefs.h"
 #endif // QT_H
 

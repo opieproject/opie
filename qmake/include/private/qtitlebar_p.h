@@ -1,9 +1,9 @@
 /****************************************************************************
-** $Id: qtitlebar_p.h,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qtitlebar_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of some Qt private functions.
 **
-** Created : 2000-01-01
+** Created : 000101
 **
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **

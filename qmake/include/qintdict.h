@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qintdict.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qintdict.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of QIntDict template class
 **
@@ -111,4 +111,8 @@ public:
     type *operator+=(uint j)  { return (type *)QGDictIterator::operator+=(j);}
 };
 
+#ifdef QT_QWINEXPORT
+#define Q_DEFINED_QINTDICT
+#include "qwinexport.h"
+#endif /* QT_QWINEXPORT */
 #endif // QINTDICT_H

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: main.cpp,v 1.1 2002-11-01 00:10:42 kergoth Exp $
+** $Id: main.cpp,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of ________ class.
 **
@@ -60,8 +60,13 @@ int main(int argc, char **argv)
     QDir sunworkshop42workaround = QDir::current();
     QString oldpwd = sunworkshop42workaround.currentDirPath();
     Option::output_dir = oldpwd; //for now this is the output dir
-    if(Option::output_dir.right(1) != QString(QChar(QDir::separator())))
-	Option::output_dir += QDir::separator();
+#ifdef Q_WS_WIN
+    if ( !(Option::output_dir.length() == 3 && Option::output_dir[0].isLetter() && Option::output_dir.endsWith(":/") ) )
+#endif
+    {
+	if(Option::output_dir.right(1) != QString(QChar(QDir::separator())))
+	    Option::output_dir += QDir::separator();
+    }
     QMakeProject proj;
     int exit_val = 0;
     QStringList files;

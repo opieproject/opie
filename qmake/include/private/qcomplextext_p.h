@@ -1,11 +1,9 @@
 /****************************************************************************
-** $Id: qcomplextext_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qcomplextext_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Internal header file.
 **
-** Created : 
-**
-** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2001-2002 Trolltech AS.  All rights reserved.
 **
 ** This file is part of the kernel module of the Qt GUI Toolkit.
 **
@@ -35,8 +33,8 @@
 **
 **********************************************************************/
 
-#ifndef QCOMPLEXTEXT_H
-#define QCOMPLEXTEXT_H
+#ifndef QCOMPLEXTEXT_P_H
+#define QCOMPLEXTEXT_P_H
 
 //
 //  W A R N I N G

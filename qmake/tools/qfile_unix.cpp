@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qfile_unix.cpp,v 1.1 2002-11-01 00:10:44 kergoth Exp $
+** $Id: qfile_unix.cpp,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Implementation of QFile class
 **
@@ -435,11 +435,14 @@ bool QFile::open( int m, int f )
 QIODevice::Offset QFile::size() const
 {
     struct stat st;
+    int ret = 0;
     if ( isOpen() ) {
-	::fstat( fh ? fileno(fh) : fd, &st );
+	ret = ::fstat( fh ? fileno(fh) : fd, &st );
     } else {
-	::stat( QFile::encodeName(fn), &st );
+	ret = ::stat( QFile::encodeName(fn), &st );
     }
+    if ( ret == -1 )
+	return 0;
 #if defined(QT_LARGEFILE_SUPPORT) && !defined(QT_ABI_64BITOFFSET)
     return (uint)st.st_size > UINT_MAX ? UINT_MAX : (QIODevice::Offset)st.st_size;
 #else
@@ -538,7 +541,7 @@ Q_LONG QFile::readBlock( char *p, Q_ULONG len )
 	// need to add these to the returned string.
 	uint l = ungetchBuffer.length();
 	while( nread < l ) {
-	    *p = ungetchBuffer[ l - nread - 1 ];
+	    *p = ungetchBuffer.at( l - nread - 1 );
 	    p++;
 	    nread++;
 	}
@@ -629,7 +632,9 @@ Q_LONG QFile::writeBlock( const char *p, Q_ULONG len )
   Returns the file handle of the file.
 
   This is a small positive integer, suitable for use with C library
-  functions such as fdopen() and fcntl(), as well as with QSocketNotifier.
+  functions such as fdopen() and fcntl(). On systems that use file 
+  descriptors for sockets (ie. Unix systems, but not Windows) the handle
+  can be used with QSocketNotifier as well.
 
   If the file is not open or there is an error, handle() returns -1.
 

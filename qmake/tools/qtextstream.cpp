@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextstream.cpp,v 1.1 2002-11-01 00:10:45 kergoth Exp $
+** $Id: qtextstream.cpp,v 1.2 2003-07-10 02:40:12 llornkcor Exp $
 **
 ** Implementation of QTextStream class
 **
@@ -1089,7 +1089,7 @@ QTextStream &QTextStream::writeBlock( const QChar* p, uint len )
     } else
 #endif
     if ( latin1 ) {
-	char *str = QString::unicodeToAscii( p, len );
+	char *str = QString::unicodeToLatin1( p, len );
 	dev->writeBlock( str, len );
 	delete [] str;
     } else if ( internalOrder ) {

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qfontdata_p.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qfontdata_p.h,v 1.2 2003-07-10 02:40:11 llornkcor Exp $
 **
 ** Definition of internal QFontData struct
 **
@@ -162,6 +162,7 @@ public:
     HFONT	hfont;
     uint	stockFont:1;
     uint	paintDevice:1;
+    uint        useTextOutA:1;
     union {
 	TEXTMETRICW	w;
 	TEXTMETRICA	a;
@@ -413,7 +414,7 @@ public:
 
 #if defined( Q_WS_MAC )
     void macSetFont(QPaintDevice *);
-    void drawText(int x, int y, QString s, int len, QPaintDevice *dev, const QRegion *rgn);
+    void drawText(int x, int y, const QString &s, int from, int len, QPaintDevice *dev, const QRegion *rgn, int dir);
     void computeLineWidth();
     void load();
     QFontStruct *fin;

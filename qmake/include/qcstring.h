@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcstring.h,v 1.1 2002-11-01 00:10:43 kergoth Exp $
+** $Id: qcstring.h,v 1.2 2003-07-10 02:40:10 llornkcor Exp $
 **
 ** Definition of the extended char array operations,
 ** and QByteArray and QCString classes
@@ -101,9 +101,11 @@ Q_EXPORT Q_UINT16 qChecksum( const char *s, uint len );
   QByteArray class
  *****************************************************************************/
 
+#ifndef QT_QWINEXPORT
 #if defined(Q_TEMPLATEDLL)
 Q_TEMPLATE_EXTERN template class Q_EXPORT QMemArray<char>;
 #endif
+#endif /* QT_QWINEXPORT */
 
 #if defined(Q_QDOC)
 /*
@@ -232,6 +234,8 @@ public:
 		operator const char *() const;
     QCString    &operator+=( const char *str );
     QCString    &operator+=( char c );
+private:
+    int	find( const char *str, int index, bool cs, uint l ) const;
 };
 
 
@@ -388,4 +392,7 @@ Q_EXPORT inline const QCString operator+( char c1, const QCString &s2 )
     return tmp;
 }
 
+#ifdef QT_QWINEXPORT
+#include <qwinexport.h>
+#endif /* QT_QWINEXPORT */
 #endif // QCSTRING_H
