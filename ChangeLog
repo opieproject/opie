@@ -3,6 +3,7 @@
 2004-25-04	The Opie Team <opie@handhelds.org>
 
 	* Released as Version 1.1.3 (devel)
+	* Added a new Gutenberg Project reader app - opie-gutenbrowser (ljp)
 	* Added a real system graffiti character set (brad)
 	* Added Generic Keyconfig Widget (zecke)
 	* Improved Screenshotapplet and Drawpad integration. You can now open a screenshot in drawpad and take notes (zecke)
