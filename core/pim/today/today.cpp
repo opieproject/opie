@@ -79,7 +79,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
     sv->setFrameShape( QFrame::NoFrame );
 
     layout->addWidget( sv );
-    layout->setStretchFactor( sv,9 );
+    layout->setStretchFactor( sv,4 );
 
     loadPlugins();
     showMaximized();
@@ -165,6 +165,8 @@ void Today::init() {
     }
 
     big_box = new QVBox( sv->viewport() );
+    big_box->setSpacing( 0 );
+    big_box->setSpacing( 0 );
     sv->addChild( big_box );
 }
 
@@ -286,6 +288,7 @@ void Today::loadPlugins() {
             }
         }
     }
+    new QWidget( big_box );
     draw();
 }
 
@@ -322,6 +325,7 @@ void Today::draw() {
         noPluginsActive->setText( tr( "No plugins activated" ) );
         layout->addWidget( noPluginsActive );
     }
+    repaint();
 }
 
 
@@ -413,6 +417,7 @@ void Today::refresh() {
             qDebug( "refresh" );
         }
     }
+    repaint();
 }
 
 void Today::startApplication() {
