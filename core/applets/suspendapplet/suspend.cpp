@@ -1,6 +1,7 @@
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
+#include <qapplication.h>
 #include <qiconset.h>
 #include <qpopupmenu.h>
 
@@ -29,6 +30,16 @@ QString SuspendApplet::name ( ) const
 QString SuspendApplet::text ( ) const
 {
 	return tr( "Suspend" );
+}
+
+QString SuspendApplet::tr( const char* s ) const
+{
+    return qApp->translate( "SuspendApplet", s, 0 );
+}
+
+QString SuspendApplet::tr( const char* s, const char* p ) const
+{
+    return qApp->translate( "SuspendApplet", s, p );
 }
 
 QIconSet SuspendApplet::icon ( ) const

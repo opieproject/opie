@@ -32,12 +32,14 @@ public:
     Q_REFCOUNT
 
     virtual int position() const;
-    
+
     virtual QString name ( ) const;
     virtual QIconSet icon ( ) const;
     virtual QString text ( ) const;
+    virtual QString tr( const char* ) const;
+    virtual QString tr( const char*, const char* ) const;
     virtual QPopupMenu *popup ( QWidget *parent ) const;
-    
+
     virtual void activated ( );
 
 private:

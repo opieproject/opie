@@ -1,6 +1,7 @@
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 
+#include <qapplication.h>
 #include <qiconset.h>
 #include <qpopupmenu.h>
 
@@ -29,6 +30,16 @@ QString HomeApplet::name ( ) const
 QString HomeApplet::text ( ) const
 {
 	return tr( "Desktop" );
+}
+
+QString HomeApplet::tr( const char* s ) const
+{
+    return qApp->translate( "HomeApplet", s, 0 );
+}
+
+QString HomeApplet::tr( const char* s, const char* p ) const
+{
+    return qApp->translate( "HomeApplet", s, p );
 }
 
 QIconSet HomeApplet::icon ( ) const
