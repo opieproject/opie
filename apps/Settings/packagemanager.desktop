@@ -6,3 +6,5 @@ MimeTypeIcons=packagemanager/ipkg
 Type=Application
 Name=Package Manager
 Comment=Opie package management client
+Name=Pakotņu Menedžeris
+Comment=Opie pakotņu menedžeris
