@@ -5,6 +5,7 @@
 
 	Fixed Bugs
 	----------
+	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
 
 	Internal
 	--------
