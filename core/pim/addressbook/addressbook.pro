@@ -6,7 +6,8 @@ HEADERS	= addressbook.h \
 		  ablabel.h \
 		  abtable.h \
 		  addresssettings.h \
-		  picker.h
+		  picker.h \
+                  ofloatbar.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
 		  contacteditor.cpp \

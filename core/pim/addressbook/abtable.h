@@ -100,7 +100,7 @@ public:
 
 public slots:
     void slotDoFind( const QString &str, bool caseSensitive, bool backwards,
-                     int category );
+                     QString category = QString::null );
 signals:
     void empty( bool );
     void details();

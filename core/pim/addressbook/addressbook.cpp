@@ -68,10 +68,6 @@
 
 #include "picker.h"
 
-// Remove this for OPIE releae 1.0 !
-#define __DEBUG_RELEASE
-
-
 static QString addressbookPersonalVCardName()
 {
 	QString filename = Global::applicationFileName("addressbook",
@@ -140,20 +136,31 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 		 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
 #endif
 #endif
-	
-	
-	
-	
-	
-#ifndef MAKE_FOR_SHARP_ROM
 	a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ),
 			 QString::null, 0, this, 0 );
 	actionFind = a;
-	connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
+	connect( a, SIGNAL(activated()), this, SLOT( slotFindOpen()) );
 	a->addTo( edit );
 	a->addTo( listTools );
-#endif
-	
+
+	// Much better search widget, taken from QTReader.. (se)
+	searchBar = new OFloatBar( "Search", this, QMainWindow::Top, TRUE );
+	searchBar->setHorizontalStretchable( TRUE );
+	searchBar->hide();
+	searchEdit = new QLineEdit( searchBar, "searchEdit" );
+//      QFont f("unifont", 16 /*, QFont::Bold*/);
+//      searchEdit->setFont( f );
+	searchBar->setStretchableWidget( searchEdit );
+	connect( searchEdit, SIGNAL( returnPressed( ) ),
+		 this, SLOT( slotFind( ) ) );
+
+	a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ), QString::null, 0, this, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotFindNext() ) );
+	a->addTo( searchBar );
+
+	a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+	connect( a, SIGNAL( activated() ), this, SLOT( slotFindClose() ) );
+	a->addTo( searchBar );
 	
 	a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "qtmail/reply" ),
 			 QString::null, 0, this, 0 );
@@ -198,7 +205,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	// Remove this function for public Release ! This is only
 	// for debug purposes ..
 	a = new QAction( tr( "Save all Data"), QString::null, 0, 0 );
-	connect( a, SIGNAL( activated() ), this, SLOT( save() ) );
+	connect( a, SIGNAL( activated() ), this , SLOT( slotSave() ) );
 	a->addTo( edit );
 #endif
 	
@@ -753,6 +760,13 @@ bool AddressbookWindow::save()
 	return TRUE;
 }
 
+#ifdef __DEBUG_RELEASE
+void AddressbookWindow::slotSave()
+{
+	save();
+}
+#endif
+
 void AddressbookWindow::slotSettings()
 {
 	AddressSettings frmSettings( this );
@@ -877,24 +891,37 @@ AbLabel *AddressbookWindow::abView()
 	return mView;
 }
 
+void AddressbookWindow::slotFindOpen()
+{
+	searchBar->show();
+}
+void AddressbookWindow::slotFindClose()
+{
+	searchBar->hide();
+}
+void AddressbookWindow::slotFindNext()
+{
+}
+
 void AddressbookWindow::slotFind()
 {
-#ifndef MAKE_FOR_SHARP_ROM
 	if ( centralWidget() == abView() )
 		showList();
 	
-	FindDialog frmFind( "Contacts", this );
-	QObject::connect( &frmFind, SIGNAL(signalFindClicked(const QString &, bool, bool, int)), abList, SLOT(slotDoFind( const QString&,bool,bool,int)));
-	QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
-	QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
+// 	FindDialog frmFind( "Contacts", this );
+// 	QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
+// 	QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
+// 	frmFind.exec();
+
+	// QStringList categories = abList->categories();
+	// abList->setShowCategory( book, cat );
+	abList->slotDoFind( searchEdit->text(), false, false);
 	
-	frmFind.exec();
 	
 	if ( abList->numSelections() )
 		abList->clearSelection();
 	
 	abList->clearFindRow();
-#endif
 }
 
 void AddressbookWindow::slotSetCategory( int c )

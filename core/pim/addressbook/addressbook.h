@@ -20,9 +20,14 @@
 #ifndef Addressbook_H
 #define Addressbook_H
 
+// Remove this for OPIE releae 1.0 !
+#define __DEBUG_RELEASE
+
 #include <qmainwindow.h>
 #include <qvaluelist.h>
 #include <qstringlist.h>
+#include <qlineedit.h>
+#include "ofloatbar.h"
 
 class ContactEditor;
 class AbLabel;
@@ -57,6 +62,9 @@ public slots:
 	void reload();
 	void appMessage(const QCString &, const QByteArray &);
 	void setDocument( const QString & );
+#ifdef __DEBUG_RELEASE
+	void slotSave();
+#endif
 
 private slots:
 	void importvCard();
@@ -71,11 +79,15 @@ private slots:
 	void writeMail();
 	void slotBeam();
 	void beamDone( Ir * );
-	void slotFind();
 	void slotSetCategory( int );
 	void slotSetLetter( char );
 	void slotUpdateToolbar();
 	void slotSetFont(int);
+
+	void slotFindOpen();
+	void slotFindClose();
+	void slotFind();
+	void slotFindNext();
 
 private:
 	void initFields();  // inititialize our fields...
@@ -93,6 +105,9 @@ private:
 	LetterPicker *pLabel;
 	AbTable *abList;
 	QWidget *listContainer;
+
+	OFloatBar* searchBar;
+	QLineEdit* searchEdit;
 
 	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
 

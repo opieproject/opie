@@ -635,8 +635,16 @@ void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
 // }
 
 void AbTable::slotDoFind( const QString &findString, bool caseSensitive,
-                          bool backwards, int category )
+                          bool backwards, QString cat /* int category */ )
 {
+	int category = 0;
+	if ( cat.isEmpty() )
+		category = -2; // mCat.id("Contacts", "All");
+	else
+		category = mCat.id("Contacts", cat );
+
+	qWarning ("Found in Category %d", category);
+
 	if ( currFindRow < -1 )
 		currFindRow = currentRow() - 1;
 	clearSelection( TRUE );
