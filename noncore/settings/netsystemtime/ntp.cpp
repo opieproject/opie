@@ -176,12 +176,13 @@ void  Ntp::ntpFinished(OProcess *p)
   qDebug("p->exitStatus() %i",p->exitStatus());
   if (p->exitStatus()!=0 || !p->normalExit())
     {      
-      QMessageBox::critical(this, tr("ntp error"),
+      if ( isVisible() ) {
+	QMessageBox::critical(this, tr("ntp error"),
 			    tr("Error while getting time form\n server")+ 
 			    getNtpServer()+"\n"+
 			    _ntpOutput );
-      //      TabWidgetMain->setCurrentPage( 1 );
-      TabWidgetMain->showPage( tabManualSetTime );
+	TabWidgetMain->showPage( tabManualSetTime );
+      }
       
       return;
     }
