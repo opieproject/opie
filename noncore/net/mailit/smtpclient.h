@@ -47,12 +47,13 @@ public:
   void addMail(const QString &from, const QString &subject, const QStringList &to, const QString &body);
 
 signals:
-  void errorOccurred(int);
+  void errorOccurred(int, const QString & LR );
   void updateStatus(const QString &);
   void mailSent();
   
 public slots:
   void errorHandling(int);
+  void errorHandlingWithMsg(int, const QString & LastResponse );
 
 protected slots:
   void connectionEstablished();

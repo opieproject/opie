@@ -63,7 +63,7 @@ void PopClient::newConnection(const QString &target, int port)
   receiving = TRUE;
   //selected = FALSE;
     
-  emit updateStatus("DNS lookup");
+  emit updateStatus(tr("DNS lookup"));
 }
 
 void PopClient::setAccount(const QString &popUser, const QString &popPasswd)
@@ -103,8 +103,12 @@ void PopClient::connectionEstablished()
 
 void PopClient::errorHandling(int status)
 {
+  errorHandlingWithMsg( status, QString::null );
+}
+void PopClient::errorHandlingWithMsg(int status, const QString & Msg )
+{
   emit updateStatus(tr("Error Occured"));
-  emit errorOccurred(status);
+  emit errorOccurred(status, Msg);
   socket->close();
   receiving = FALSE;
 }
@@ -167,7 +171,7 @@ void PopClient::incomingData()
           if (response[0] == '+') {
             *stream << "STAT" << "\r\n";
             status = Mcnt;      
-          } else errorHandling(ErrLoginFailed);
+          } else errorHandlingWithMsg(ErrLoginFailed, response);
             break;
           }
     //get count of messages, eg "+OK 4 900.." -> int 4
@@ -195,7 +199,7 @@ void PopClient::incomingData()
                 } else newMessages = 0; 
         }
 
-            } else errorHandling(ErrUnknownResponse);
+            } else errorHandlingWithMsg(ErrUnknownResponse, response);
           }
     //Read message number x, count upwards to messageCount
     case List:  {
@@ -234,7 +238,7 @@ void PopClient::incomingData()
               status = Retr;
             } else {
               //qWarning(response);
-              errorHandling(ErrUnknownResponse);
+              errorHandlingWithMsg(ErrUnknownResponse, response);
             }
           }
         } 
@@ -259,7 +263,7 @@ void PopClient::incomingData()
               if (!socket->canReadLine()) //sync. problems
                 break;
               response = socket->readLine();
-            } else errorHandling(ErrUnknownResponse);
+            } else errorHandlingWithMsg(ErrUnknownResponse, response);
           }
         }
     //add all incoming lines to body.  When size is reached, send

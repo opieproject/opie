@@ -73,7 +73,12 @@ void SmtpClient::connectionEstablished()
 
 void SmtpClient::errorHandling(int status)
 {
-  emit errorOccurred(status);
+  errorHandlingWithMsg( status, QString::null );
+}
+
+void SmtpClient::errorHandlingWithMsg(int status, const QString & EMsg )
+{
+  emit errorOccurred(status, EMsg );
   socket->close();
   mailList.clear();
   sending = FALSE;
@@ -87,31 +92,32 @@ void SmtpClient::incomingData()
     return;
   
   response = socket->readLine();
-
   switch(status) {
     case Init:  {
           if (response[0] == '2') {
             status = From;
             mailPtr = mailList.first();
             *stream << "HELO there\r\n";
-          } else errorHandling(ErrUnknownResponse);
+          } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
         } 
     case From:  {
           if (response[0] == '2') {
-            *stream << "MAIL FROM: " << mailPtr->from << "\r\n";
+             qDebug(mailPtr->from);
+            *stream << "MAIL FROM: <" << mailPtr->from << ">\r\n";
             status = Recv;
-          } else errorHandling(ErrUnknownResponse);
+          } else errorHandlingWithMsg(ErrUnknownResponse, response );
           break;
         } 
     case Recv:  {
-          if (response[0] == '2') {
+       if (response[0] == '2') {
             it = mailPtr->to.begin();
-            if (it == NULL)
-              errorHandling(ErrUnknownResponse);
-            *stream << "RCPT TO: " << *it << ">\r\n";
+            if (it == NULL) {
+              errorHandlingWithMsg(ErrUnknownResponse,response);
+            }
+            *stream << "RCPT TO: <" << *it << ">\r\n";
             status = MRcv;
-          } else errorHandling(ErrUnknownResponse);
+          } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
         } 
     case MRcv:  {
@@ -123,14 +129,15 @@ void SmtpClient::incomingData()
             } else  {
               status = Data;
             }
-          } else errorHandling(ErrUnknownResponse);
+          } else errorHandlingWithMsg(ErrUnknownResponse,response);
         } 
     case Data:  {
           if (response[0] == '2') {
             *stream << "DATA\r\n";
             status = Body;
             emit updateStatus(tr("Sending: ") + mailPtr->subject);
-          } else errorHandling(ErrUnknownResponse);
+            
+          } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
         } 
     case Body:  {
@@ -142,7 +149,7 @@ void SmtpClient::incomingData()
             } else {
               status = Quit;
             }
-          } else errorHandling(ErrUnknownResponse);
+          } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
         } 
     case Quit:  {
@@ -156,7 +163,7 @@ void SmtpClient::incomingData()
             mailList.clear();
             sending = FALSE;
             socket->close();
-          } else errorHandling(ErrUnknownResponse);
+          } else errorHandlingWithMsg(ErrUnknownResponse,response);
           break;
         }
   }
