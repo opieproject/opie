@@ -15,7 +15,7 @@
 
 #include "omanufacturerdb.h"
 
-// Qt
+/* QT */
 #include <qstring.h>
 #include <qfile.h>
 #include <qtextstream.h>
@@ -81,12 +81,16 @@ OManufacturerDB::OManufacturerDB()
             {
                 s.skipWhiteSpace();
                 extManu = s.readLine();
+                #ifdef DEBUG
                 qDebug( "OManufacturerDB: read '%s' as extended manufacturer string", (const char*) extManu );
+                #endif
                 manufacturersExt.insert( addr, extManu );
             }
             else
                 s.readLine();
+            #ifdef DEBUG
             qDebug( "ManufacturerDB: read tuple %s, %s", (const char*) addr, (const char*) manu );
+            #endif
             manufacturers.insert( addr, manu );
 
         }

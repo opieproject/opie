@@ -64,7 +64,7 @@ class OApplication: public QPEApplication
      * saves you the trouble of having to pass the pointer explicitly
      * to every function that may require it.
      */
-    static const OApplication* oApplication() { return _instance; };
+    static OApplication* oApplication() { return _instance; };
     /**
      * Returns the application name as given during creation.
      *

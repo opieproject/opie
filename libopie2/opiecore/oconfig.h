@@ -33,6 +33,7 @@
 #define OCONFIG_H
 
 //FIXME: Implement for X11 or reuse libqpe/Config there also?
+//FIXME: Or rather use QSettings also for libqpe?
 
 #include <qpe/config.h>
 
@@ -47,102 +48,71 @@ class QFont;
 class OConfig : public Config
 {
   public:
-
-  /**
-    * Constructs a OConfig object.
-    *
-    * @param name A file to parse.
-    */
+    /**
+     * Constructs a OConfig object with a @a name.
+     */
     OConfig( const QString &name, Domain domain = User );
-
-  /**
-    * Destructs the OConfig object.
-    *
-    * Writes back any dirty configuration entries, and destroys
-    * dynamically created objects.
-    */
+    /**
+     * Destructs the OConfig object.
+     *
+     * Writes back any dirty configuration entries, and destroys
+     * dynamically created objects.
+     */
     virtual ~OConfig();
-
-   /**
-    * Returns the name of the group in which we are
-    * searching for keys and from which we are retrieving entries.
-    *
-    * @return The current group.
-    */
+    /**
+     * @returns the name of the current group.
+     * The current group is used for searching keys and accessing entries.
+     */
     const QString& group() { return git.key(); };
-
-   /**
-    * Reads a @ref QColor entry.
-    *
-    * Read the value of an entry specified by @p pKey in the current group
-    * and interpret it as a color.
-    *
-    * @param pKey The key to search for.
-    * @param pDefault A default value (null QColor by default) returned if the
-    * key was not found or if the value cannot be interpreted.
-    * @return The value for this key.
-    */
+    /**
+     * @returns a @ref QColor entry or a @a default value if the key is not found.
+     */
     QColor readColorEntry( const QString& key, const QColor* pDefault ) const;
-
-   /**
-    * Reads a @ref QFont value.
-    *
-    * Read the value of an entry specified by @p pKey in the current group
-    * and interpret it as a font object.
-    *
-    * @param pKey The key to search for.
-    * @param pDefault A default value (null QFont by default) returned if the
-    * key was not found or if the read value cannot be interpreted.
-    * @return The value for this key.
-    */
+    /**
+     * @returns a @ref QFont value or a @a default value if the key is not found.
+     */
     QFont readFontEntry( const QString& key, const QFont* pDefault ) const;
-
 };
 
 /**
-  * Helper class to facilitate working with @ref OConfig / @ref OSimpleConfig
-  * groups.
-  *
-  * Careful programmers always set the group of a
-  * @ref OConfig object to the group they want to read from
-  * and set it back to the old one of afterwards. This is usually
-  * written as:
-  * <pre>
-  *
-  * QString oldgroup config()->group();
-  * config()->setGroup( "TheGroupThatIWant" );
-  * ...
-  * config()->writeEntry( "Blah", "Blubb" );
-  *
-  * config()->setGroup( oldgroup );
-  * </pre>
-  *
-  * In order to facilitate this task, you can use
-  * OConfigGroupSaver. Simply construct such an object ON THE STACK
-  * when you want to switch to a new group. Then, when the object goes
-  * out of scope, the group will automatically be restored. If you
-  * want to use several different groups within a function or method,
-  * you can still use OConfigGroupSaver: Simply enclose all work with
-  * one group (including the creation of the OConfigGroupSaver object)
-  * in one block.
-  *
-  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
-  * @version $Id: oconfig.h,v 1.1 2003-03-28 15:11:52 mickeyl Exp $
-  * @see OConfig
-  * @short Helper class for easier use of OConfig groups
-  */
+ * @brief Helper class for easier use of OConfig groups.
+ *
+ * Careful programmers always set the group of a
+ * @ref OConfig object to the group they want to read from
+ * and set it back to the old one of afterwards. This is usually
+ * written as:
+ * <pre>
+ *
+ * QString oldgroup config()->group();
+ * config()->setGroup( "TheGroupThatIWant" );
+ * ...
+ * config()->writeEntry( "Blah", "Blubb" );
+ *
+ * config()->setGroup( oldgroup );
+ * </pre>
+ *
+ * In order to facilitate this task, you can use
+ * OConfigGroupSaver. Simply construct such an object ON THE STACK
+ * when you want to switch to a new group. Then, when the object goes
+ * out of scope, the group will automatically be restored. If you
+ * want to use several different groups within a function or method,
+ * you can still use OConfigGroupSaver: Simply enclose all work with
+ * one group (including the creation of the OConfigGroupSaver object)
+ * in one block.
+ *
+ * @author Matthias Kalle Dalheimer <Kalle@kde.org>
+ * @version $Id: oconfig.h,v 1.2 2003-05-10 14:46:02 mickeyl Exp $
+ * @see OConfig
+ */
 
 class OConfigGroupSaver
 {
   public:
-   /**
-    * Constructor. You pass a pointer to the OConfigBase-derived
-    * object you want to work with and a string indicating the _new_
-    * group.
-    * @param config The OConfig-derived object this
-    *               OConfigGroupSaver works on.
-    * @param group  The new group that the config object should switch to.
-    */
+    /**
+     * Constructor.
+     * Create the object giving a @config object and a @a group to become
+     * the current group.
+     */
     OConfigGroupSaver( OConfig* config, QString group ) :_config(config), _oldgroup(config->group() )
         { _config->setGroup( group ); }
 
@@ -151,7 +121,10 @@ class OConfigGroupSaver
 
     OConfigGroupSaver( OConfig* config, const QCString &group ) : _config(config), _oldgroup(config->group())
         { _config->setGroup( group ); }
-
+    /**
+     * Destructor.
+     * Restores the last current group.
+     */
     ~OConfigGroupSaver() { _config->setGroup( _oldgroup ); }
 
     OConfig* config() { return _config; };
