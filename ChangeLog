@@ -5,6 +5,7 @@
 	* Added four themes courtesy Robert Griebl (http://www.softforge.de/zstyle)
 	* Added Conversion tool for pim-data (eilers)
 	* Modifcation of the PIM API for providing generic use of OPimRecords. (eilers)
+	* Fixed Datebook dependency on libopiedb2 (Bug #1348) (chicken)
 
 2004-25-04	The Opie Team <opie@handhelds.org>
 
