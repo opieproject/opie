@@ -115,7 +115,7 @@ void MailApplet::slotCheck() {
 
         Config cfg( "mail" );
         cfg.setGroup( "Status" );
-        cfg.writeEntry( "NewMails", m_newMails );
+        cfg.writeEntry( "newMails", m_newMails );
         QCopEnvelope env( "QPE/Pim", "newMails(int)" );
         env <<  m_newMails;
         repaint( true );

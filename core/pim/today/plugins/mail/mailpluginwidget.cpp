@@ -73,7 +73,7 @@ void MailPluginWidget::readConfig() {
     Config cfg2( "mail" );
     cfg2.setGroup( "Status" );
 
-    m_newMails = cfg2.readNumEntry( "newmails", 0 );
+    m_newMails = cfg2.readNumEntry( "newMails", 0 );
     m_outgoing = cfg2.readNumEntry( "outgoing", 0 );
 }
 
