@@ -92,6 +92,7 @@ CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
 CONFIG_OPIETOOTH-MANAGER	noncore/net/opietooth/manager	manager.pro
+CONFIG_MAILIT		noncore/net/mailit		mailit.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
 CONFIG_MINDBREAKER	noncore/games/mindbreaker	mindbreaker.pro
@@ -115,6 +116,7 @@ CONFIG_OPIEFTP	noncore/net/opieftp	opieftp.pro
 CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
+CONFIG_OPIEREC		noncore/multimedia/opierec	opierec.pro
 CONFIG_OXYGEN	noncore/apps/oxygen	oxygen.pro
 CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
