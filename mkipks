@@ -241,6 +241,8 @@ do
 		        echo Warning. You are not root. Please become root or use fakeroot.
 		        ROOTWARNED=1
 		    fi
+		else
+		    chown -R root.root $TDIR/*
 		fi
 		( cd $DATADIR && tar -czf $TDIR/data.tar.gz * )
 		( cd $CTRLDIR && tar -czf $TDIR/control.tar.gz * )
