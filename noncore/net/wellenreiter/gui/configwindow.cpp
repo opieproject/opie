@@ -401,7 +401,13 @@ void WellenreiterConfigWindow::load()
     adaptiveHopping->setChecked( c->readBoolEntry( "adaptive", true ) );
 
     c->setGroup( "Capture" );
+    writeCaptureFile->setChecked( c->readBoolEntry( "writeCaptureFile", true ) );
+    captureFileName->setEnabled( writeCaptureFile->isChecked() );
+    getCaptureFileName->setEnabled( writeCaptureFile->isChecked() );
     captureFileName->setText( c->readEntry( "filename", "/tmp/capture" ) );
+    hexViewBufferUnlimited->setChecked( c->readBoolEntry( "hexViewBufferUnlimited", true ) );
+    hexViewBufferLimited->setChecked( !c->readBoolEntry( "hexViewBufferUnlimited", true ) );
+    hexViewBufferSize->setValue( c->readNumEntry( "hexViewBufferSize", 2000 ) );
 
     c->setGroup( "UI" );
     lookupVendor->setChecked( c->readBoolEntry( "lookupVendor", true ) );
@@ -451,7 +457,10 @@ void WellenreiterConfigWindow::save()
     c->writeEntry( "adaptive", adaptiveHopping->isChecked() );
 
     c->setGroup( "Capture" );
+    c->writeEntry( "writeCaptureFile", writeCaptureFile->isChecked() );
     c->writeEntry( "filename", captureFileName->text() );
+    c->writeEntry( "hexViewBufferUnlimited", hexViewBufferUnlimited->isChecked() );
+    c->writeEntry( "hexViewBufferSize", hexViewBufferSize->value() );
 
     c->setGroup( "UI" );
     c->writeEntry( "lookupVendor", lookupVendor->isChecked() );
