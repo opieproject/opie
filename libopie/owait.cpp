@@ -20,6 +20,7 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
+#include <qpe/qpeapplication.h>
 #include <qpainter.h>
 
 #include "owait.h"
@@ -49,7 +50,7 @@ OWait::OWait(QWidget *parent, const char* msg, bool dispIcon )
 }
 
 void OWait::timerEvent( QTimerEvent * )  {
-    frame = (++frame) % 3;
+    frame = (++frame) % 4;
     repaint();
 }
 
@@ -59,8 +60,10 @@ void OWait::paintEvent( QPaintEvent * )  {
 }
 
 void OWait::show()  {
+
+    move( ( ( qApp->desktop()->width() ) / 2 ) - 24, ( ( qApp->desktop()->height() ) / 2 ) - 24 );
     startTimer( 300 );
-   m_waitTimer->start( m_timerLength * 1000, true );
+    m_waitTimer->start( m_timerLength * 1000, true );
     QDialog::show();
 }
 
