@@ -215,7 +215,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QWidget *aTab;
     aTab = new QWidget( tabWidget, "aTab" );
     audioView = new QListView( aTab, "Audioview" );
-    audioView->setMinimumSize(233,260);
+    audioView->setMinimumSize(233,250);
     audioView->addColumn( tr("Title"),140);
     audioView->addColumn(tr("Size"), -1);
     audioView->addColumn(tr("Media"),-1);
@@ -233,7 +233,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QWidget *vTab;
     vTab = new QWidget( tabWidget, "vTab" );
     videoView = new QListView( vTab, "Videoview" );
-    videoView->setMinimumSize(233,260);
+    videoView->setMinimumSize(233,250);
 
     videoView->addColumn(tr("Title"),140);
     videoView->addColumn(tr("Size"),-1);
