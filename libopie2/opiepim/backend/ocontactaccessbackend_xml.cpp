@@ -13,11 +13,15 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.2 2003-03-21 10:33:09 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.3 2003-03-21 12:26:28 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.2  2003-03-21 10:33:09  eilers
+ * Revision 1.3  2003-03-21 12:26:28  eilers
+ * Fixing small bug: If we search a birthday from today to today, it returned
+ * every contact ..
+ *
+ * Revision 1.2  2003/03/21 10:33:09  eilers
  * Merged speed optimized xml backend for contacts to main.
  * Added QDateTime to querybyexample. For instance, it is now possible to get
  * all Birthdays/Anniversaries between two dates. This should be used
@@ -325,7 +329,7 @@ QArray<int> OContactAccessBackend_XML::queryByExample ( const OContact &query, i
 								 checkDate->toString().latin1(),
 								 current.toString().latin1(), 
 								 queryDate->toString().latin1() );
-							if ( current.daysTo( *queryDate ) > 0 ){
+							if ( current.daysTo( *queryDate ) >= 0 ){
 								if ( !( ( *checkDate >= current ) && 
 									( *checkDate <= *queryDate ) ) ){
 									allcorrect = false;
