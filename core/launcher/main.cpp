@@ -31,6 +31,7 @@
 
 #include <opie/odevice.h>
 
+#include <qmessagebox.h>
 #include <qfile.h>
 #include <qimage.h>
 #include <qwindowsystem_qws.h>
@@ -116,6 +117,18 @@ int initApplication( int argc, char ** argv )
 #endif
 
     d->show();
+
+	if ( QDate::currentDate ( ). year ( ) < 2000 ) {
+		if ( QMessageBox::information ( 0, DesktopApplication::tr( "Information" ), DesktopApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+			QCString app;
+			if ( QFile::exists ( QPEApplication::qpeDir ( ) + "/bin/netsystemtime" ))
+				app = "netsystemtime";
+			else 
+				app = "systemtime";
+			QCopEnvelope e ( "QPE/Application/" + app, "setDocument(QString)" );
+			e << QString ( );		                              
+		}
+	}
 
     int rv =  a.exec();
 
