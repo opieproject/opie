@@ -86,8 +86,16 @@ public:
    * Check to see if the interface i is owned by this module.
    * See if you can handle it. And if you can claim ownership
    * by returning true.
+   * For physical devices you will be asked if you want to own the
+   * device. But you can also create new \sa Interface Implementations.
+   *
+   * If you want to own the Interface add it to your internal interface
+   * list
+   *
    * @param Interface* interface to check against
    * @return bool true if i is owned by this module, false otherwise.
+   *
+   * @see getInterfaces
    */
   virtual bool isOwner(Interface *){ return false; };
 
@@ -116,6 +124,10 @@ public:
   /**
    * Get all active (up or down) interfaces managed by this
    * module.
+   * At the end of initialisation you will be asked to return your interfaces
+   * Return all of your interfaces even  the ones you claimed by isOnwer.
+   * Here you can also return your 'virtual' Interface Objects
+   *
    * @return QList<Interface> A list of interfaces that exsist that havn't
    * been called by isOwner()
    */

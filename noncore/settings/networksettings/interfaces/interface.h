@@ -6,6 +6,13 @@
 
 class Module;
 
+/**
+ * A Interface represents a physical device. You can
+ * inherit it and create also virtual devices. Like saved
+ * ppp dial ups or vpn. Interface is used for representing
+ * your interface to the User and its actions.
+ *
+ */
 class Interface : public QObject{
   Q_OBJECT
 
