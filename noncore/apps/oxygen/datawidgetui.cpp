@@ -24,6 +24,7 @@
 #include <qlayout.h>
 #include <qhbox.h>
 #include <qlabel.h>
+#include <qpe/qpeapplication.h>
 
 dataWidgetUI::dataWidgetUI() : QWidget()
 {
