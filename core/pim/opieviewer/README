@@ -1,0 +1,16 @@
+OpieViewer
+
+OpieViewer is the first try to get an overview
+of all pim data and relate them. 
+
+Category 
+  |
+  |
+  |- Type - Description
+      |
+      |- Type Description
+      
+      
+The performance is not interesting for the begining.
+When using a database a find( int id ) will be fast
+enough     

@@ -1,0 +1,20 @@
+-Implement Datebook
+
+-Extend MainListViewItem to store a list
+ of relations
+
+-Implement the Relations
+  hold click 'Show Related'
+  A QDialog with a ListView comes up
+  and all relations are shown
+  Example:
+     Todo
+       |
+       |- Address 1
+       |- Address 2
+       
+-Implement Edit, Show, Add
+
+-What is with non global categories?       
+
+-Implement Search and 'jumping'  to the ListViewItem
