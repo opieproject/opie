@@ -43,6 +43,9 @@ static const char *devices[] = {
   "/dev/usb/ttyACM1",
   "/dev/usb/ttyACM2",
   "/dev/usb/ttyACM3",
+  "/dev/ircomm0",
+  "/dev/rfcomm0",
+  "/dev/rfcomm1",
 #elif defined(__svr4__)
   "/dev/cua/a",
   "/dev/cua/b",
