@@ -339,7 +339,7 @@ QString Interfaces::getInterfaceOption(const QString &option, bool &error){
  * @return QString the options value. QString::null if error == true
  */
 bool Interfaces::setInterfaceOption(const QString &option, const QString &value){
-    qDebug("iface %s option %s", (*currentIface).latin1(), option.latin1());
+    qDebug("iface >%s< option >%s< value >%s<", (*currentIface).latin1(), option.latin1(),value.latin1());
   return setOption(currentIface, option, value);
 }
 
@@ -501,30 +501,46 @@ bool Interfaces::setOption(const QStringList::Iterator &start, const QString &op
     return false;
   qDebug("setting option");
   bool found = false;
+  bool replaced = false;
+  QStringList::Iterator insertAt = NULL;
   for ( QStringList::Iterator it = start; it != interfaces.end(); ++it ) {
+      qDebug(" Interfaces::setOption got line >%s<",(*it).latin1());
       // FIXME: was  not completly stupid just wrong sice all options got inserted bevore the iface line
       // but since it works with an empty interfaces file I (tille) will not do anything more
-   //  if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
+      if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO)) ){
+          if (found) break;
+//  && it != start){
 //       if(!found && value != ""){
 //         // Got to the end of the stanza without finding it, so append it.
 //           qDebug(" Got to the end of the stanza without finding it, so append it.");
 //         interfaces.insert(--it, QString("\t%1 %2").arg(option).arg(value));
 //       }
-//       found = true;
-//       break;
-//     }
+         qDebug("found 1");
+//         interfaces.insert(++it, QString("\t%1 %2").arg(option).arg(value));
+       found = true;
+       insertAt = it;
+
+     }
     if((*it).contains(option) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
+        qDebug("found 2");
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
       found = true;
+      replaced = true;
         (*it) = QString("\t%1 %2").arg(option).arg(value);
     }
   }
   if(!found){
+      qDebug("! found insert anyway");
     QStringList::Iterator p = start;
     interfaces.insert(++p, QString("\t%1 %2").arg(option).arg(value));
     found = true;
+  }
+
+  if(found && !replaced){
+      qDebug("found iface but not the option so insert it here...");
+      interfaces.insert(++insertAt, QString("\t%1 %2").arg(option).arg(value));
   }
   return found;
 }

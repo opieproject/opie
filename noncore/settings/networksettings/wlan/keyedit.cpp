@@ -4,6 +4,7 @@
 KeyEdit::KeyEdit(QWidget* parent, const char* name) :
 	QLineEdit(parent, name)
 {
+    setEchoMode(Password);
 }
 
 KeyEdit::~KeyEdit()

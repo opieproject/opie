@@ -203,7 +203,7 @@ void WLANImp::accept() {
   writeOpts();
 
   // Close out the dialog
-  QDialog::accept();
+// FIXME:  QDialog::accept();
 }
 
 void WLANImp::writeOpts() {
@@ -239,13 +239,16 @@ void WLANImp::writeOpts() {
     if (! keyLineEdit0->text().isNull()) {
       keyList += keyLineEdit0->text();
       keyList += "[1]";
-    } else if (! keyLineEdit1->text().isNull()) {
+    } //else
+    if (! keyLineEdit1->text().isNull()) {
       keyList += keyLineEdit1->text();
       keyList += "[2]";
-    } else if (! keyLineEdit2->text().isNull()) {
+    } //else
+    if (! keyLineEdit2->text().isNull()) {
       keyList += keyLineEdit2->text();
       keyList += "[3]";
-    } else if (! keyLineEdit3->text().isNull()) {
+    } //else
+    if (! keyLineEdit3->text().isNull()) {
       keyList += keyLineEdit3->text();
       keyList += "[4]";
     }
