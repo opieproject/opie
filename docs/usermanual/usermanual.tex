@@ -1,23 +1,24 @@
 \documentclass[12pt,letterpaper,oneside, openany]{book} \usepackage[latin1] {inputenc}
-\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb}  \usepackage[pdftex]{hyperref}
+\usepackage{amsmath} \usepackage{amsfonts} \usepackage{amssymb}
+\usepackage[pdflatex]{hyperref}
+\hypersetup{bookmarks=true, bookmarksopen=false,pdftitle={Opie User Manual},pdfauthor={The Opie Team}}
 \title{Opie User Manual}
 \author{The Opie Team}
-\hypersetup{bookmarks=true, bookmarksopen=false,pdftitle={Opie User Manual},pdfauthor={The Opie Team}}
 \begin{document}
 \maketitle
 \tableofcontents
 \part{Getting Started}
 \chapter{What is Opie?}
-Opie is a GUI (Graphical User Interface) for the Linux operating system (and might work on other OSes as well).  It was originally designed for handheld computers (such as the Compaq/HP iPaq and the Sharp Zaurus), but which could probably function well in other environments requiring a light GUI, such as an old laptop, or an internet kiosk.  It is bassed upon QT/Embedded from Trolltech, which is in turn a graphical environment designed for embedded applications, based upon the QT toolkit.
+Opie is a GUI (Graphical User Interface) for the Linux operating system (and might work on other OSes as well).  It was originally designed for handheld computers (such as the Compaq/HP iPAQ and the Sharp Zaurus), but which could probably function well in other environments requiring a light GUI, such as an old laptop, or an internet kiosk.  It is bassed upon QT/Embedded from Trolltech, which is in turn a graphical environment designed for embedded applications, based upon the QT toolkit.
 
 Opie has been designed for devices with small screens, and a touchscreen input device (ie, only one mouse click, and no constant mouse position), as well as designed to fit in a relatively small amount of storage space (about 5 megabytes for the base libraries and the launcher).
 \chapter{Installation}
-\section{iPaq}
-To install opie on an ipaq, you will need a fresh familiar installation (ie, install familiar, and stop before you do ipkg install task-complete or ipkg install task-x), go to http://familiar.handhelds.org to get the latest version, and to get installation instructions.
+\section{iPAQ}
+To install opie on an iPAQ, you will need a fresh familiar installation (ie, install familiar, and stop before you do ipkg install task-complete or ipkg install task-x), go to http://familiar.handhelds.org to get the latest version, and to get installation instructions.
 
 Note: If you had qpe/qtopia installed previously, \emph{completely} remove it, and remove the src line for it from your /etc/ipkg.conf file before attempting to install opie.
 
-Once you have familiar installed, set up a network connection between your ipaq and the ouside world (ppp, usbnet, or some network/modem card), and then run this command:
+Once you have familiar installed, set up a network connection between your iPAQ and the ouside world (ppp, usbnet, or some network/modem card), and then run this command:
 \begin{verbatim}
      echo src opie "http://131.152.105.154/feeds/ipaq/unstable/" \
           >> /etc/ipkg.conf
@@ -26,7 +27,7 @@ then, run:
 \begin{verbatim}
      ipkg update && ipkg install task-opie
 \end{verbatim}
-If you have a 3100 or 3800 series iPaq:
+If you have a 3100 or 3800 series iPAQ:
 \begin{verbatim}
      ipkg install qt-embedded-rotation
 \end{verbatim}
@@ -111,7 +112,6 @@ To find a specific person, click the find icon (green magnifying glass), or go t
 To view only the contacts in a certain category, go to the View menu, and check the categories you want to view. 
 
 The list of letters on the bottom of the window lets you look at only the contacts whos names begin with that letter. These work much like entering text on a mobile phone. For example, to view all the contacts whos name starts with ``B'', press the ``ABC'' group twice (since ``B'' is the second letter in that group). To go back to displaying all of the letters, click it two more times (pressing it four times brings you back to all the letters, so you pressed it 2 times to get to ``B'' and 2 more times to get back to all letters. 2+2=4). 
-
 
 \section{Personal Details}
 
@@ -254,7 +254,7 @@ EmbeddedKonsole is Opie's terminal emulator.  From here you can do pretty much a
 
 \section{What is a shell}
 
-A shell is a program that accepts input from a user, and runs commands.  Each ``command'' in the shell is actually a separate program (unless you are using a shell like BusyBox, which makes some of the more common commands part of its own program in order to save space).  Shells can actually be very powerful, and many of them allow you to write something called ``shell scripts'' which are just a sequence of commands, sometimes with some flow control statements.  For the most part, the average user does not need to know about any of this, though.  If you are running Opie on your iPaq, it is advisable to install the bash shell (ipkg install bash) because it offers things like tab completion, use of the backspace key, and a command history, as well as offering a more advanced scripting languauge than most other shells.
+A shell is a program that accepts input from a user, and runs commands.  Each ``command'' in the shell is actually a separate program (unless you are using a shell like BusyBox, which makes some of the more common commands part of its own program in order to save space).  Shells can actually be very powerful, and many of them allow you to write something called ``shell scripts'' which are just a sequence of commands, sometimes with some flow control statements.  For the most part, the average user does not need to know about any of this, though.  If you are running Opie on the Familiar distribution, it is advisable to install the bash shell (ipkg install bash) because it offers things like tab completion, use of the backspace key, and a command history, as well as offering a more advanced scripting languauge than most other shells.
 
 \section{Running Programs}
 
