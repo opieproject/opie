@@ -15,6 +15,7 @@
 #include <qlistview.h>
 #include <qtabwidget.h>
 #include <qpushbutton.h>
+#include <qcheckbox.h>
 
 #include <qpe/resource.h>
 
@@ -32,6 +33,8 @@ private:
 	QLineEdit *passwordLineEdit;
 	QComboBox *shellComboBox;
 	QComboBox *groupComboBox;
+	QLabel *skelLabel;
+	QCheckBox *skelCheckBox;
 	QListView *groupsListView;
 	
 	QStringList groupMembers;

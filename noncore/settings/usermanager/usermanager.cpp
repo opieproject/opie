@@ -54,6 +54,7 @@ UserConfig::UserConfig(QWidget* parent, const char* name, WFlags fl) : QMainWind
 	setupTabAccounts();
 	setupTabAllUsers();
 	setupTabAllGroups();
+	userPopupMenu.insertItem("Copy",0);
 	
 	getUsers(); // Fill out the iconview & listview with all users.
 	getGroups(); // Fill out the group listview with all groups.
@@ -76,6 +77,8 @@ void UserConfig::setupTabAccounts() {
 	usersIconView->addColumn("Username");
 	usersIconView->setAllColumnsShowFocus(true);
 	layout->addWidget(usersIconView);
+	
+	connect(usersIconView,SIGNAL(returnPressed(QListViewItem *)),this,SLOT(showUserMenu(QListViewItem *)));
 	
 	myTabWidget->addTab(tabpage,"Users");
 }
@@ -243,4 +246,9 @@ void UserConfig::delGroup() {
 	} else  {
 		QMessageBox::information(this,"No selection","No group has been selected.");
 	}
+}
+
+void UserConfig::showUserMenu(QListViewItem *item) {
+//	userPopupMenu.exec(item->mapToGlobal(QPoint(0,0)));
+	qWarning("Pressed!");
 }

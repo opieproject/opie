@@ -34,14 +34,13 @@ UserDialog::UserDialog(QWidget* parent, const char* name, bool modal, WFlags fl)
 	setupTab1();
 	setupTab2();
 
+	accounts->groupStringList.sort();
 	// And also fill the listview & the combobox with all available groups.
 	for( QStringList::Iterator it = accounts->groupStringList.begin(); it!=accounts->groupStringList.end(); ++it) {
 		accounts->splitGroupEntry(*it);
-		//new QListViewItem(groupsListView,accounts->gr_name);
 		new QCheckListItem(groupsListView,accounts->gr_name,QCheckListItem::CheckBox);
 		groupComboBox->insertItem(accounts->gr_name);
 	}
-	
 	showMaximized();
 }
 
@@ -105,7 +104,15 @@ void UserDialog::setupTab1() {
 	groupLabel->setText("Primary group: ");
 	groupComboBox=new QComboBox(tabpage,"PrimaryGroup");
 
-		// Widget layout
+	// Copy /etc/skel
+	QLabel *skelLabel=new QLabel(tabpage,"skel");
+	skelLabel->setText("Copy /etc/skel: ");
+	skelCheckBox=new QCheckBox(tabpage);
+	skelCheckBox->setChecked(true);
+	skelLabel->setDisabled(true);
+	skelCheckBox->setDisabled(true);
+	
+	// Widget layout
 	QHBoxLayout *hlayout=new QHBoxLayout(-1,"hlayout");
 	layout->addWidget(picturePushButton);
 	layout->addSpacing(5);
@@ -124,6 +131,8 @@ void UserDialog::setupTab1() {
 		vlayout1->addWidget(shellLabel);
 		vlayout1->addSpacing(5);
 		vlayout1->addWidget(groupLabel);
+		vlayout1->addSpacing(5);
+		vlayout1->addWidget(skelLabel);
 		// Second column, data
 		vlayout2->addWidget(loginLineEdit);
 		vlayout2->addSpacing(5);
@@ -136,6 +145,8 @@ void UserDialog::setupTab1() {
 		vlayout2->addWidget(shellComboBox);
 		vlayout2->addSpacing(5);
 		vlayout2->addWidget(groupComboBox);
+		vlayout2->addSpacing(5);
+		vlayout2->addWidget(skelCheckBox);
 	hlayout->addLayout(vlayout1);
 	hlayout->addLayout(vlayout2);
 	
@@ -248,10 +259,13 @@ bool UserDialog::delUser(const char *username) {
  *
  */
 bool UserDialog::editUser(const char *username) {
+	int invalid_group=0;
 	UserDialog *edituserDialog=new UserDialog();	// Create Dialog
 	edituserDialog->setCaption(tr("Edit User"));
 	accounts->findUser(username);	// Locate user in database and fill variables in 'accounts' object.
-	accounts->findGroup(accounts->pw_gid);	// Locate the user's primary group, and fill group variables in 'accounts' object.
+	if(!(accounts->findGroup(accounts->pw_gid))) {	// Locate the user's primary group, and fill group variables in 'accounts' object.
+		invalid_group=1;
+	}
 	// Fill widgets with userinfo.
 	edituserDialog->loginLineEdit->setText(accounts->pw_name);
 	edituserDialog->uidLineEdit->setText(QString::number(accounts->pw_uid));
@@ -267,7 +281,12 @@ bool UserDialog::editUser(const char *username) {
 	for(int i=0;i<edituserDialog->groupComboBox->count();++i) {
 		if(accounts->gr_name==edituserDialog->groupComboBox->text(i)) {
 			edituserDialog->groupComboBox->setCurrentItem(i);
+			break;
 		}
+	}
+	if(invalid_group) {
+		edituserDialog->groupComboBox->insertItem("<Undefined group>",0);
+		edituserDialog->groupComboBox->setCurrentItem(0);
 	}
 	// Select the groups in the listview, to which the user belongs.
 	QCheckListItem *temp;
@@ -292,8 +311,9 @@ bool UserDialog::editUser(const char *username) {
 	
 	// Set all variables in accounts object, that will be used when calling 'updateUser()'
 	accounts->pw_uid=edituserDialog->uidLineEdit->text().toInt();
-	accounts->findGroup(edituserDialog->groupComboBox->currentText());	// Fill all group variables in 'accounts' object.
-	accounts->pw_gid=accounts->gr_gid;
+	if(accounts->findGroup(edituserDialog->groupComboBox->currentText())) {	// Fill all group variables in 'accounts' object.
+		accounts->pw_gid=accounts->gr_gid;	// Only do this if the group is a valid group (ie. "<Undefined group>"), otherwise keep the old group.
+	}
 	accounts->pw_gecos=edituserDialog->gecosLineEdit->text();
 	accounts->pw_shell=edituserDialog->shellComboBox->currentText();
 	// Update userinfo, using the information stored in the user variables stored in the accounts object.

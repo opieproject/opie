@@ -13,12 +13,10 @@
 #include <qmainwindow.h>
 #include <qtabwidget.h>
 #include <qlistview.h>
-//#include <qiconview.h>
-
-#include <qpe/qpemenubar.h>
 #include <qpopupmenu.h>                       
-#include <qpe/qpetoolbar.h>
 #include <qtoolbutton.h>
+
+#include <qpe/qpetoolbar.h>
 
 #include "userdialog.h"
 #include "groupdialog.h"
@@ -43,6 +41,8 @@ private:
 	QListView *usersIconView;
 	QListView *usersListView;
 	QListView *groupsListView;
+	QPopupMenu userPopupMenu;
+	QPopupMenu groupPopupMenu;
 	int availableUID;
 	int availableGID;
 	void setupTabAccounts();
@@ -60,6 +60,7 @@ private slots:
 	void addGroup();
 	void editGroup();
 	void delGroup();
+	void showUserMenu(QListViewItem *item);
 };
 
 #endif // USERCONFIG_H
