@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>White wins.</source>
-        <translation>Les Blancs l&apos;emportent.</translation>
+        <translation>Les blancs l&apos;emportent.</translation>
     </message>
     <message>
         <source>Black wins.</source>
-        <translation>Les Noires l&apos;emportent.</translation>
+        <translation>Les noires l&apos;emportent.</translation>
     </message>
     <message>
         <source>A draw.</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation>Prisonniers : Noir %1, Blanc %2</translation>
+        <translation>Prisonniers : noir %1, blanc %2</translation>
     </message>
     <message>
         <source>Go</source>

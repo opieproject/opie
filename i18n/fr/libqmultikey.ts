@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Current Language</source>
-        <translation>Langage Courant</translation>
+        <translation>Langage courant</translation>
     </message>
     <message>
         <source>Add</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation>Répétition des Touches</translation>
+        <translation>Répétition des touches</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -40,19 +40,19 @@
     </message>
     <message>
         <source>Key Color</source>
-        <translation>Couleur Touche</translation>
+        <translation>Couleur touche</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation>Couleur Touche Pressée</translation>
+        <translation>Couleur touche pressée</translation>
     </message>
     <message>
         <source>Line Color</source>
-        <translation>Couleur Ligne</translation>
+        <translation>Couleur ligne</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation>Couleur Texte</translation>
+        <translation>Couleur texte</translation>
     </message>
     <message>
         <source>Move Up</source>

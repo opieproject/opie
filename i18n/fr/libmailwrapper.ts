@@ -190,7 +190,7 @@
     </message>
     <message>
         <source>Bad command sequence</source>
-        <translation>Mauvaise suite de commande</translation>
+        <translation>Mauvaise suite de commandes</translation>
     </message>
     <message>
         <source>User not local</source>

@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>show past events</source>
-        <translation>montrer évènements passés</translation>
+        <translation>montrer événements passés</translation>
     </message>
     <message>
         <source>search in dates</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Mimetype: </source>
-        <translation>Type MIME : </translation>
+        <translation>Type mime : </translation>
     </message>
     <message>
         <source>open with </source>

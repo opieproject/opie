@@ -38,7 +38,7 @@
     <name>MainWindow</name>
     <message>
         <source>Package Manager</source>
-        <translation>Gestionnaire de Package</translation>
+        <translation>Gestionnaire de paquets</translation>
     </message>
     <message>
         <source>feeds</source>
@@ -46,7 +46,7 @@
     </message>
     <message>
         <source>Package</source>
-        <translation>Package</translation>
+        <translation>Paquets</translation>
     </message>
     <message>
         <source>View</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Setups</source>
-        <translation>Paramétrages</translation>
+        <translation>Paramètrages</translation>
     </message>
     <message>
         <source>Servers</source>
@@ -106,11 +106,11 @@
     </message>
     <message>
         <source>Clear Search</source>
-        <translation>Initialiser Recherche</translation>
+        <translation>Initialiser recherche</translation>
     </message>
     <message>
         <source>Do Search</source>
-        <translation>Lancer la Recherche</translation>
+        <translation>Lancer la recherche</translation>
     </message>
     <message>
         <source>Search</source>
@@ -126,11 +126,11 @@
     </message>
     <message>
         <source>Close Destinations</source>
-        <translation>Fermer les Destinations</translation>
+        <translation>Fermer les destinations</translation>
     </message>
     <message>
         <source>Package Actions</source>
-        <translation>Package Actions</translation>
+        <translation>Actions sur paquets</translation>
     </message>
     <message>
         <source>Install</source>
@@ -142,7 +142,7 @@
     </message>
     <message>
         <source>Package Status</source>
-        <translation>Status du Package</translation>
+        <translation>Status du paquet</translation>
     </message>
     <message>
         <source>New version, installed</source>
@@ -189,7 +189,7 @@
     <name>PackageListView</name>
     <message>
         <source>Package</source>
-        <translation>Package</translation>
+        <translation>Paquets</translation>
     </message>
 </context>
 <context>
@@ -203,7 +203,7 @@
     <name>PackageManagerSettingsBase</name>
     <message>
         <source>Package Servers</source>
-        <translation>Serveurs de Package</translation>
+        <translation>Serveurs de paquets</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -280,7 +280,7 @@ Terminé.</translation>
     </message>
     <message>
         <source>Error while removing </source>
-        <translation>Erreur en cours de suppression</translation>
+        <translation>Erreur lors de la suppression</translation>
     </message>
     <message>
         <source>Installing</source>
@@ -288,7 +288,7 @@ Terminé.</translation>
     </message>
     <message>
         <source>Error while installing</source>
-        <translation>Erreur en cours d&apos;installation</translation>
+        <translation>Erreur lors de l&apos;installation</translation>
     </message>
 </context>
 <context>

@@ -72,23 +72,23 @@
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation>Règles &amp;Anglaises</translation>
+        <translation>Règles &amp;anglaises</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation>Règles &amp;Russes</translation>
+        <translation>Règles &amp;russes</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
-        <translation>Echiquier &amp;Vert</translation>
+        <translation>Echiquier &amp;vert</translation>
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation>Echiquier en &amp;Marbre</translation>
+        <translation>Echiquier en &amp;marbre</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation>Echiquier en &amp;Bois</translation>
+        <translation>Echiquier en &amp;bois</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
@@ -124,7 +124,7 @@
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation>Règles du Jeu</translation>
+        <translation>Règles du jeu</translation>
     </message>
 </context>
 </TS>

@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Back&amp;ground</source>
-        <translation>A&amp;rrière Plan</translation>
+        <translation>A&amp;rrière plan</translation>
     </message>
     <message>
         <source>&amp;Font</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation>Bordures par &amp;Défaut</translation>
+        <translation>Bordures par &amp;défaut</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation>Arrière Plan par &amp;Défaut</translation>
+        <translation>Arrière plan par &amp;défaut</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation>Police par &amp;Défaut</translation>
+        <translation>Police par &amp;défaut</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
@@ -67,15 +67,15 @@
     </message>
     <message>
         <source>&amp;Word Wrap</source>
-        <translation>&amp;Renvoie des Mots</translation>
+        <translation>&amp;Renvoie des mots</translation>
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation>&amp;Alignement par Défaut</translation>
+        <translation>&amp;Alignement par défaut</translation>
     </message>
     <message>
         <source>Format Cells</source>
-        <translation>Format Cellules</translation>
+        <translation>Format cellules</translation>
     </message>
     <message>
         <source>Opie Sheet</source>
@@ -86,7 +86,7 @@
     <name>FindDialog</name>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation>&amp;Trouver et Remplacer</translation>
+        <translation>&amp;Trouver &amp;&amp; remplacer</translation>
     </message>
     <message>
         <source>&amp;Options</source>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Find &amp; Replace</source>
-        <translation>Trouver &amp; Remplacer</translation>
+        <translation>Trouver &amp; remplacer</translation>
     </message>
 </context>
 <context>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>Save File</source>
-        <translation>Enregistrer Fichier</translation>
+        <translation>Enregistrer fichier</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
@@ -169,7 +169,7 @@
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation>Nom &amp;Fichier : </translation>
+        <translation>Nom &amp;fichier : </translation>
     </message>
     <message>
         <source>UnnamedFile</source>
@@ -177,7 +177,7 @@
     </message>
     <message>
         <source>New File</source>
-        <translation>Nouveau Fichier</translation>
+        <translation>Nouveau fichier</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -185,7 +185,7 @@
     </message>
     <message>
         <source>Open File</source>
-        <translation>Ouvrir Fichier</translation>
+        <translation>Ouvrir fichier</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -197,11 +197,11 @@
     </message>
     <message>
         <source>Save File As</source>
-        <translation>Enregistrer Fichier Sous</translation>
+        <translation>Enregistrer fichier sous</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation>Enregistrer &amp;Sous</translation>
+        <translation>Enregistrer &amp;sous</translation>
     </message>
     <message>
         <source>Accept</source>
@@ -221,15 +221,15 @@
     </message>
     <message>
         <source>Cell Selector</source>
-        <translation>Sélecteur de Cellule</translation>
+        <translation>Sélecteur de cellule</translation>
     </message>
     <message>
         <source>Cell &amp;Selector</source>
-        <translation>&amp;Sélecteur de Cellule</translation>
+        <translation>&amp;Sélecteur de cellule</translation>
     </message>
     <message>
         <source>Cut Cells</source>
-        <translation>Couper Cellules</translation>
+        <translation>Couper cellules</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
@@ -237,7 +237,7 @@
     </message>
     <message>
         <source>Copy Cells</source>
-        <translation>Copier Cellules</translation>
+        <translation>Copier cellules</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -245,7 +245,7 @@
     </message>
     <message>
         <source>Paste Cells</source>
-        <translation>Coller Cellules</translation>
+        <translation>Coller cellules</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
@@ -253,15 +253,15 @@
     </message>
     <message>
         <source>Paste Contents</source>
-        <translation>Coller Contenu</translation>
+        <translation>Coller contenu</translation>
     </message>
     <message>
         <source>Paste Cont&amp;ents</source>
-        <translation>Coller Cont&amp;enu</translation>
+        <translation>Coller cont&amp;enu</translation>
     </message>
     <message>
         <source>Clear Cells</source>
-        <translation>Effacer Cellules</translation>
+        <translation>Effacer cellules</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
@@ -269,7 +269,7 @@
     </message>
     <message>
         <source>Insert Cells</source>
-        <translation>Insérer Cellules</translation>
+        <translation>Insérer cellules</translation>
     </message>
     <message>
         <source>C&amp;ells</source>
@@ -277,7 +277,7 @@
     </message>
     <message>
         <source>Insert Rows</source>
-        <translation>Insérer Lignes</translation>
+        <translation>Insérer lignes</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
@@ -285,7 +285,7 @@
     </message>
     <message>
         <source>Insert Columns</source>
-        <translation>Insérer Colonnes</translation>
+        <translation>Insérer colonnes</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
@@ -293,7 +293,7 @@
     </message>
     <message>
         <source>Add Sheets</source>
-        <translation>Ajouter Feuilles</translation>
+        <translation>Ajouter feuilles</translation>
     </message>
     <message>
         <source>&amp;Sheets</source>
@@ -309,7 +309,7 @@
     </message>
     <message>
         <source>Row Height</source>
-        <translation>Hauteur Lignes</translation>
+        <translation>Hauteur lignes</translation>
     </message>
     <message>
         <source>H&amp;eight</source>
@@ -317,7 +317,7 @@
     </message>
     <message>
         <source>Adjust Row</source>
-        <translation>Ajuster Ligne</translation>
+        <translation>Ajuster ligne</translation>
     </message>
     <message>
         <source>&amp;Adjust</source>
@@ -325,7 +325,7 @@
     </message>
     <message>
         <source>Show Row</source>
-        <translation>Montrer Ligne</translation>
+        <translation>Montrer ligne</translation>
     </message>
     <message>
         <source>&amp;Show</source>
@@ -333,7 +333,7 @@
     </message>
     <message>
         <source>Hide Row</source>
-        <translation>Cacher Ligne</translation>
+        <translation>Cacher ligne</translation>
     </message>
     <message>
         <source>&amp;Hide</source>
@@ -341,7 +341,7 @@
     </message>
     <message>
         <source>Column Width</source>
-        <translation>Hauteur Colonne</translation>
+        <translation>Hauteur colonne</translation>
     </message>
     <message>
         <source>&amp;Width</source>
@@ -349,19 +349,19 @@
     </message>
     <message>
         <source>Adjust Column</source>
-        <translation>Ajuster Colonne</translation>
+        <translation>Ajuster colonne</translation>
     </message>
     <message>
         <source>Show Column</source>
-        <translation>Montrer Colonne</translation>
+        <translation>Montrer colonne</translation>
     </message>
     <message>
         <source>Hide Column</source>
-        <translation>Cacher Colonne</translation>
+        <translation>Cacher colonne</translation>
     </message>
     <message>
         <source>Rename Sheet</source>
-        <translation>Renommer Feuille</translation>
+        <translation>Renommer feuille</translation>
     </message>
     <message>
         <source>&amp;Rename</source>
@@ -369,7 +369,7 @@
     </message>
     <message>
         <source>Remove Sheet</source>
-        <translation>Supprimer Feuille</translation>
+        <translation>Supprimer feuille</translation>
     </message>
     <message>
         <source>R&amp;emove</source>
@@ -377,7 +377,7 @@
     </message>
     <message>
         <source>Sort Data</source>
-        <translation>Trier Données</translation>
+        <translation>Trier données</translation>
     </message>
     <message>
         <source>&amp;Sort</source>
@@ -385,19 +385,19 @@
     </message>
     <message>
         <source>Find &amp;&amp; Replace</source>
-        <translation>Trouver et Remplacer</translation>
+        <translation>Trouver &amp;&amp; remplacer</translation>
     </message>
     <message>
         <source>&amp;Find &amp;&amp; Replace</source>
-        <translation>&amp;Trouver et Remplacer</translation>
+        <translation>&amp;Trouver &amp;&amp; remplacer</translation>
     </message>
     <message>
         <source>Equal To</source>
-        <translation>Eguale à</translation>
+        <translation>Egal à</translation>
     </message>
     <message>
         <source>&amp;Equal To</source>
-        <translation>&amp;Eguale à</translation>
+        <translation>&amp;Egal à</translation>
     </message>
     <message>
         <source>Addition</source>
@@ -433,19 +433,19 @@
     </message>
     <message>
         <source>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</source>
-        <translation>Ouvrir Parenthèse</translation>
+        <translation>Ouvrir parenthèse</translation>
     </message>
     <message>
         <source>&amp;Open Paranthesis</source>
-        <translation>&amp;Ouvrir Parenthèse</translation>
+        <translation>&amp;Ouvrir parenthèse</translation>
     </message>
     <message>
         <source>Close Paranthesis</source>
-        <translation>Fermer Parenthèse</translation>
+        <translation>Fermer parenthèse</translation>
     </message>
     <message>
         <source>&amp;Close Paranthesis</source>
-        <translation>&amp;Fermer Paranthèse</translation>
+        <translation>&amp;Fermer paranthèse</translation>
     </message>
     <message>
         <source>Comma</source>
@@ -652,7 +652,7 @@ This product is licensed under GPL. It is freely distributable. If you want to g
 
 http://qtopia.sitebest.com</source>
         <translation>Opie Sheet
-Logiciel Tableur pour Opie
+Logiciel de type Tableur pour Opie
 Gagnant beta de QWDC (comme tableur/Qt)
 
 Developpé par : Serdar Ozler
@@ -665,7 +665,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>
-        <translation>&amp;Nombre de Lignes : </translation>
+        <translation>&amp;Nombre de lignes : </translation>
     </message>
     <message>
         <source>&amp;Number of columns:</source>
@@ -689,7 +689,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation>&amp;Nom de Feuille : </translation>
+        <translation>&amp;Nom de feuille : </translation>
     </message>
     <message>
         <source>There is only one sheet!</source>
@@ -713,11 +713,11 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>Entire ro&amp;w</source>
-        <translation>Toute la &amp;Ligne</translation>
+        <translation>Toute la &amp;ligne</translation>
     </message>
     <message>
         <source>Entire &amp;column</source>
-        <translation>Toute la &amp;Colonne</translation>
+        <translation>Toute la &amp;colonne</translation>
     </message>
     <message>
         <source>Import Excel file</source>

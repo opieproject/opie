@@ -28,15 +28,15 @@
     </message>
     <message>
         <source>Connect</source>
-        <translation>Se Connecter</translation>
+        <translation>Se connecter</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation>Se Déconnecter</translation>
+        <translation>Se déconnecter</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Voir Fichiers Cachés</translation>
+        <translation>Voir fichiers cachés</translation>
     </message>
     <message>
         <source>Upload</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Créer Répertoire</translation>
+        <translation>Créer répertoire</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -60,15 +60,15 @@
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Onglet Connexion Locale</translation>
+        <translation>Onglet connexion locale</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Onglet Connexion Distante</translation>
+        <translation>Onglet connexion distante</translation>
     </message>
     <message>
         <source>Switch to Config</source>
-        <translation>Onglet Configuration</translation>
+        <translation>Onglet configuration</translation>
     </message>
     <message>
         <source>File</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Username</source>
-        <translation>Nom Utilisateur</translation>
+        <translation>Nom utilisateur</translation>
     </message>
     <message>
         <source>Password</source>
@@ -121,7 +121,7 @@ du serveur distant</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Note</source>
@@ -179,12 +179,12 @@ du serveur distant</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Changer de Répertoire</translation>
+        <translation>Changer de répertoire</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Voulez-vous réellement effacer
+        <translation>Voulez-vous réellement supprimer
 </translation>
     </message>
     <message>
@@ -243,7 +243,7 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation>Nouveau Nom de Serveur</translation>
+        <translation>Nouveau nom de serveur</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>

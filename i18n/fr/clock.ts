@@ -4,7 +4,7 @@
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation>Sommeiller</translation>
+        <translation>En sommeil</translation>
     </message>
     <message>
         <source>Clock</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Paramétrer date et heure.</translation>
+        <translation>Paramètrer date et heure.</translation>
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>

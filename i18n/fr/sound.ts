@@ -4,11 +4,11 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation>Montrer l&apos;icone</translation>
+        <translation>Montrer l&apos;icône</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation>Cacher l&apos;icone</translation>
+        <translation>Cacher l&apos;icône</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Stereo</source>
-        <translation>Stereo</translation>
+        <translation>Stéreo</translation>
     </message>
     <message>
         <source>16 bit</source>
@@ -52,7 +52,7 @@ Visuelles</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation>Icône de la barre de tâche</translation>
+        <translation>Icône de la barre des tâches</translation>
     </message>
     <message>
         <source>Key_Space</source>

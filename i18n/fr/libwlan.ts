@@ -3,7 +3,7 @@
     <name>WLAN</name>
     <message>
         <source>Wireless Configuration</source>
-        <translation>Conf. Communication Sans Fil</translation>
+        <translation>Conf. liaison sans Fil</translation>
     </message>
     <message>
         <source>General</source>
@@ -23,11 +23,11 @@
     </message>
     <message>
         <source>Specify &amp;Access Point</source>
-        <translation>Spécifier Point d&apos;&amp;Accès</translation>
+        <translation>Spécifier point d&apos;&amp;accès</translation>
     </message>
     <message>
         <source>Specify &amp;Channel</source>
-        <translation>Spécifier &amp;Canal</translation>
+        <translation>Spécifier &amp;canal</translation>
     </message>
     <message>
         <source>any</source>
@@ -55,11 +55,11 @@
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation>&amp;Activer le Cryptage</translation>
+        <translation>&amp;Activer le cryptage</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation>Configurer &amp;Clef</translation>
+        <translation>Configurer &amp;clé</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
@@ -87,7 +87,7 @@
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation>&amp;Regeter</translation>
+        <translation>&amp;Rejeter</translation>
     </message>
     <message>
         <source>SSID</source>
@@ -99,14 +99,14 @@
     </message>
     <message>
         <source>Chn</source>
-        <translation>Cannal</translation>
+        <translation>Canal</translation>
     </message>
 </context>
 <context>
     <name>WlanInfo</name>
     <message>
         <source>Interface Information</source>
-        <translation>Information Interface</translation>
+        <translation>Information interface</translation>
     </message>
     <message>
         <source>802.11b</source>

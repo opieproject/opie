@@ -4,7 +4,7 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation>Nom Complet</translation>
+        <translation>Nom complet</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -43,15 +43,15 @@
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Ecrire un email à</translation>
+        <translation>Ecrire un e-mail à</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Transmettre Entrée</translation>
+        <translation>Transmettre entrée</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Informations Personnelles</translation>
+        <translation>Informations personnelles</translation>
     </message>
     <message>
         <source>View</source>
@@ -64,15 +64,15 @@ synchronisation en cours</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Editer Informations Personnelles</translation>
+        <translation>Editer informations personnelles</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editer Contact</translation>
+        <translation>Editer contact</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation>Contacts - Informations Personnelles</translation>
+        <translation>Contacts - Informations personnelles</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -88,7 +88,7 @@ Quit anyway?</source>
 Libérez de la mémoire&lt;br&gt;
 et réessayez&lt;br&gt;
 &lt;br&gt;
-Quitter ?</translation>
+Quitter tout de même ?</translation>
     </message>
     <message>
         <source>All</source>
@@ -104,11 +104,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Fermer Recherche</translation>
+        <translation>Fermer recherche</translation>
     </message>
     <message>
         <source>Save all Data</source>
-        <translation>Sauver Toutes les Données</translation>
+        <translation>Enregistrer toutes les données</translation>
     </message>
     <message>
         <source>Config</source>
@@ -116,7 +116,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Not Found</source>
-        <translation>Non Trouvé</translation>
+        <translation>Non trouvé</translation>
     </message>
     <message>
         <source>List</source>
@@ -132,11 +132,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Démarrer Recherche</translation>
+        <translation>Démarrer recherche</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation>Type fichier valide ?</translation>
+        <translation>Type du fichier valide ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -162,7 +162,7 @@ Voulez-vous vraiment l&apos;ouvrir ?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation>Ajouter Contact ?</translation>
+        <translation>Ajouter contact ?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
@@ -173,7 +173,7 @@ ajouter un contact pour&lt;br&gt;
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation>Oui pour &amp;Tous</translation>
+        <translation>Oui pour &amp;tous</translation>
     </message>
     <message>
         <source>Export vCard</source>
@@ -198,19 +198,19 @@ un nom de fichier !</translation>
     <name>ConfigDlg_Base</name>
     <message>
         <source>Query Style</source>
-        <translation>Type de Requête</translation>
+        <translation>Type de requête</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation>Utiliser les Expressions Régulières</translation>
+        <translation>Utiliser les expressions régulières</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation>Utiliser des Jokers (*, ?)</translation>
+        <translation>Utiliser des jokers (*, ?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Sensible à la Casse</translation>
+        <translation>Sensible à la casse</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -239,7 +239,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation>Préférences Recherche</translation>
+        <translation>Préférences recherche</translation>
     </message>
     <message>
         <source>Font</source>
@@ -319,15 +319,15 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Use OPIE mail if installed</source>
-        <translation>Utiliser Opie-mail si installé</translation>
+        <translation>Utiliser Opie-Mail si installé</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation>Déplacer champ sélectionné d&apos;une ligne vers le haut</translation>
+        <translation>Déplace le champ sélectionné d&apos;une ligne vers le haut</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation>Déplacer champ sélectionné d&apos;une ligne vers le bas</translation>
+        <translation>Déplace le champ sélectionné d&apos;une ligne vers le bas</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
@@ -335,11 +335,11 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation>Ajoute champ sélectionné dans la liste juste au-dessus</translation>
+        <translation>Ajoute le champ sélectionné dans la liste juste au-dessus</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation>Supprime le champ sélectionné dans la liste juste au-dessus</translation>
+        <translation>Supprime le champ sélectionné de la liste du dessus</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
@@ -410,7 +410,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Nom Entier...</translation>
+        <translation>Nom entier...</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -490,7 +490,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Edit Name</source>
-        <translation>Editer Nom</translation>
+        <translation>Editer nom</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1314,7 +1314,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Palestinian Sovereign Areas</source>
-        <translation>Zone de Souveraineté Palestinienne</translation>
+        <translation>Zone de souveraineté Palestinienne</translation>
     </message>
     <message>
         <source>Pitcairn Islands</source>
@@ -1326,11 +1326,11 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Sélectionnez le pour saisir nom, prénom et second prénom</translation>
+        <translation>Cliquez ce bouton pour saisir nom, prénom et second prénom</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation>Entrez le nom complet directement ! Si le nom est composé de plusieurs mots (par exemple &quot;De Gaulle&quot;) , saisissez &lt;Nom&gt;,&lt;Prénom&gt; comme ceci : &quot;De Gaulle, Général&quot;</translation>
+        <translation>Entrez le nom complet directement ! Si le nom est composé de plusieurs mots (par exemple &quot;De Gaulle&quot;), saisissez &lt;Nom&gt;,&lt;Prénom&gt; comme ceci : &quot;De Gaulle, Général&quot;</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
@@ -1346,7 +1346,7 @@ founi gratuitement !</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation>Sélectionnez le pour choisir le champ à modifier</translation>
+        <translation>Cliquez dessus pour sélectionnez les attributs à modifier</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>

@@ -4,16 +4,16 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Sauvegarde Restauration... en cours...</translation>
+        <translation>Sauvegarde/Restauration... en cours...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation>Sauvegarde Restauration</translation>
+        <translation>Sauvegarde/Restauration</translation>
     </message>
     <message>
         <source>Error from System:
 </source>
-        <translation>Erreur du Système :
+        <translation>Erreur système :
 </translation>
     </message>
     <message>
@@ -22,11 +22,11 @@
     </message>
     <message>
         <source>Backup Failed!</source>
-        <translation>Echec Sauvegarde !</translation>
+        <translation>Echec sauvegarde !</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Details</source>
@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Backup and Restore.. Failed !!</source>
-        <translation>Sauvegarde Restauration.. Echec !!</translation>
+        <translation>Sauvegarde/Restauration.. Echec !!</translation>
     </message>
     <message>
         <source>Backup Successfull.</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Restore Failed.</source>
-        <translation>Echec de Restauration.</translation>
+        <translation>Echec de restauration.</translation>
     </message>
     <message>
         <source>Unable to open File: %1</source>
@@ -60,18 +60,18 @@
     </message>
     <message>
         <source>Backup Successful.</source>
-        <translation>Sauvegarde Effectuée avec Succès.</translation>
+        <translation>Sauvegarde effectuée avec succès.</translation>
     </message>
     <message>
         <source>Restore Successful.</source>
-        <translation>Restauration Effectuée avec Succès.</translation>
+        <translation>Restauration effectuée avec succès.</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation>Sauvegarde Restauration</translation>
+        <translation>Sauvegarde/Restauration</translation>
     </message>
     <message>
         <source>Backup</source>
@@ -114,11 +114,11 @@
     <name>ErrorDialog</name>
     <message>
         <source>Error Info</source>
-        <translation>Info Erreur</translation>
+        <translation>Info erreur</translation>
     </message>
     <message>
         <source>Error Message:</source>
-        <translation>Message d&apos;Erreur : </translation>
+        <translation>Message d&apos;erreur : </translation>
     </message>
     <message>
         <source>&amp;OK</source>

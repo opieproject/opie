@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Unnamed</source>
-        <translation>Sans Nom</translation>
+        <translation>Sans nom</translation>
     </message>
 </context>
 <context>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Sélectionner Tout</translation>
+        <translation>Sélectionner tout</translation>
     </message>
 </context>
 </TS>

@@ -4,7 +4,7 @@
     <name>AddNetworkSettingBase</name>
     <message>
         <source>Add Network Service</source>
-        <translation>Ajouter Service Réseau</translation>
+        <translation>Ajouter service réseau</translation>
     </message>
     <message>
         <source>&lt;P&gt;These are the network services available to be added.</source>

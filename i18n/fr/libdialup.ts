@@ -4,7 +4,7 @@
     <name>DialupBase</name>
     <message>
         <source>Dial-up </source>
-        <translation>Connection Modem</translation>
+        <translation>Connection modem</translation>
     </message>
     <message>
         <source>Account</source>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Phone:</source>
-        <translation>Numéro de téléphone :</translation>
+        <translation>Numéro de tél. :</translation>
     </message>
     <message>
         <source>Name:</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Speed:</source>
-        <translation>Vitesse de connection :</translation>
+        <translation>Vitesse de connexion :</translation>
     </message>
     <message>
         <source>4800</source>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>Connecting</source>
-        <translation>Connection</translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>Authenticating</source>
@@ -195,7 +195,7 @@
     </message>
     <message>
         <source>Connection failed</source>
-        <translation>Echec de la connection</translation>
+        <translation>Echec de la connexion</translation>
     </message>
     <message>
         <source>Authentication Failed</source>

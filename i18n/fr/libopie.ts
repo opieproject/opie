@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Mail Button</source>
-        <translation>Bouton E-Mail</translation>
+        <translation>Bouton E-mail</translation>
     </message>
     <message>
         <source>Home Button</source>
-        <translation>Bouton Home</translation>
+        <translation>Bouton Bureau</translation>
     </message>
     <message>
         <source>Record Button</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Display Rotate</source>
-        <translation>Rotation Ecran</translation>
+        <translation>Rotation écran</translation>
     </message>
     <message>
         <source>Lower+Up</source>
@@ -103,11 +103,11 @@
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Canal Apha : </translation>
+        <translation>Canal alpha : </translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Sélectionner Couleur</translation>
+        <translation>Sélectionner couleur</translation>
     </message>
 </context>
 <context>
@@ -125,7 +125,7 @@
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>Sélection Fichier</translation>
+        <translation>Sélection fichier</translation>
     </message>
     <message>
         <source>Open</source>
@@ -159,7 +159,7 @@
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Type Mime</translation>
+        <translation>Type mime</translation>
     </message>
 </context>
 <context>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>The Quick Brown Fox Jumps Over The Lazy Dog</translation>
+        <translation>Le renard brun saute au dessus du chien paresseux</translation>
     </message>
 </context>
 <context>
@@ -287,7 +287,7 @@
     <name>ORecurranceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation>A l&apos;Infini</translation>
+        <translation>A l&apos;infini</translation>
     </message>
     <message>
         <source>days</source>
@@ -341,7 +341,7 @@ et </translation>
     </message>
     <message>
         <source>No Repeat</source>
-        <translation>Pas de Répétition</translation>
+        <translation>Pas de répétition</translation>
     </message>
     <message>
         <source>day(s)</source>
@@ -385,7 +385,7 @@ et </translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation>Type Répétition</translation>
+        <translation>Type répétition</translation>
     </message>
     <message>
         <source>Day</source>
@@ -420,7 +420,7 @@ et </translation>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation>Choisir Heure : </translation>
+        <translation>Choisir heure : </translation>
     </message>
     <message>
         <source>OTimePickerDialogBase</source>
@@ -439,7 +439,7 @@ et </translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation>Tous les Fichiers</translation>
+        <translation>Tous fichiers</translation>
     </message>
     <message>
         <source>Notes:</source>
@@ -467,7 +467,7 @@ et </translation>
     </message>
     <message>
         <source>Very low</source>
-        <translation>Très Faible</translation>
+        <translation>Très faible</translation>
     </message>
     <message>
         <source>Progress:</source>
@@ -483,7 +483,7 @@ et </translation>
     </message>
     <message>
         <source>Default Email: </source>
-        <translation>E-Mail par Défaut : </translation>
+        <translation>E-mail par défaut : </translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
@@ -567,7 +567,7 @@ et </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Date de Naissance : </translation>
+        <translation>Date de naissance : </translation>
     </message>
     <message>
         <source>Anniversary: </source>
@@ -669,7 +669,7 @@ plusieurs jours</translation>
     </message>
     <message>
         <source>User Id</source>
-        <translation>Id Utilisateur</translation>
+        <translation>Id utilisateur</translation>
     </message>
     <message>
         <source>Categories</source>

@@ -65,7 +65,7 @@ différent de celui de la catégorie.</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Field 2</source>

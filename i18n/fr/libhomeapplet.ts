@@ -4,7 +4,7 @@
     <name>HomeApplet</name>
     <message>
         <source>Home shortcut</source>
-        <translation>Applet Home</translation>
+        <translation>Applet Bureau</translation>
     </message>
     <message>
         <source>Desktop</source>

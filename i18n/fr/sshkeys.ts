@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Add Keys:</source>
-        <translation>Ajouter des clés:</translation>
+        <translation>Ajouter les clés : </translation>
     </message>
     <message>
         <source>Refresh</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Key Name</source>
-        <translation>Nom de la clé</translation>
+        <translation>Nom de clé</translation>
     </message>
     <message>
         <source>Size</source>

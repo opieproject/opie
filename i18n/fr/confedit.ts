@@ -61,7 +61,7 @@
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation>Editeur Fichier Conf</translation>
+        <translation>Editeur fichier conf</translation>
     </message>
     <message>
         <source>Save</source>

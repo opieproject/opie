@@ -20,31 +20,31 @@
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation>&amp;Largeur:</translation>
+        <translation>&amp;Largeur : </translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation>&amp;Couleur:</translation>
+        <translation>&amp;Couleur : </translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation>Bordures par &amp;Défaut</translation>
+        <translation>Bordures par &amp;défaut</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation>&amp;Style:</translation>
+        <translation>&amp;Style : </translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation>Fond par &amp;Défaut</translation>
+        <translation>Fond par &amp;défaut</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation>&amp;Police:</translation>
+        <translation>&amp;Police : </translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation>&amp;Taille:</translation>
+        <translation>&amp;Taille : </translation>
     </message>
     <message>
         <source>&amp;Bold</source>
@@ -56,15 +56,15 @@
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation>Police par &amp;Défaut</translation>
+        <translation>Police par &amp;défaut</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation>&amp;Vertical:</translation>
+        <translation>&amp;Vertical : </translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation>&amp;Horizontal:</translation>
+        <translation>&amp;Horizontal : </translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation>Alignement par &amp;Défaut</translation>
+        <translation>Alignement par &amp;défaut</translation>
     </message>
     <message>
         <source>Format Cells</source>
@@ -95,11 +95,11 @@
     </message>
     <message>
         <source>&amp;Search for:</source>
-        <translation>&amp;Recherche pour:</translation>
+        <translation>&amp;Recherche : </translation>
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation>&amp;Remplacer par:</translation>
+        <translation>&amp;Remplacer par : </translation>
     </message>
     <message>
         <source>&amp;Type</source>
@@ -146,11 +146,11 @@
     </message>
     <message>
         <source>Inconsistency error!</source>
-        <translation>Erreur d&apos;incohérence !</translation>
+        <translation>Erreur d&apos;inconsistance !</translation>
     </message>
     <message>
         <source>File cannot be saved!</source>
-        <translation>Impossible de sauver le fichier !</translation>
+        <translation>Impossible d&apos;enregistrer le fichier !</translation>
     </message>
     <message>
         <source>File cannot be opened!</source>
@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>Save File</source>
-        <translation>Sauver Fichier</translation>
+        <translation>Enregistrer fichier</translation>
     </message>
     <message>
         <source>Do you want to save the current file?</source>
@@ -171,7 +171,7 @@
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation>Nom de &amp;Fichier:</translation>
+        <translation>Nom de &amp;fichier:</translation>
     </message>
     <message>
         <source>UnnamedFile</source>
@@ -179,7 +179,7 @@
     </message>
     <message>
         <source>New File</source>
-        <translation>Nouveau Fichier</translation>
+        <translation>Nouveau fichier</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>Open File</source>
-        <translation>Ouvrir Fichier</translation>
+        <translation>Ouvrir fichier</translation>
     </message>
     <message>
         <source>&amp;Open</source>
@@ -199,11 +199,11 @@
     </message>
     <message>
         <source>Save File As</source>
-        <translation>Enregister Fichier Sous</translation>
+        <translation>Enregister fichier sous</translation>
     </message>
     <message>
         <source>Save &amp;As</source>
-        <translation>Enregistrer &amp;Sous</translation>
+        <translation>Enregistrer &amp;sous</translation>
     </message>
     <message>
         <source>About Opie Sheet</source>
@@ -235,7 +235,7 @@
     </message>
     <message>
         <source>Cut Cells</source>
-        <translation>Couper Cellules</translation>
+        <translation>Couper cellules</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
@@ -243,7 +243,7 @@
     </message>
     <message>
         <source>Copy Cells</source>
-        <translation>Copier Cellules</translation>
+        <translation>Copier cellules</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -251,7 +251,7 @@
     </message>
     <message>
         <source>Paste Cells</source>
-        <translation>Coller Cellules</translation>
+        <translation>Coller cellules</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
@@ -259,15 +259,15 @@
     </message>
     <message>
         <source>Paste Contents</source>
-        <translation>Coller Contenu</translation>
+        <translation>Coller contenu</translation>
     </message>
     <message>
         <source>Paste Cont&amp;ents</source>
-        <translation>Coller Cont&amp;enu</translation>
+        <translation>Coller cont&amp;enu</translation>
     </message>
     <message>
         <source>Clear Cells</source>
-        <translation>Vider les Cellules</translation>
+        <translation>Vider les cellules</translation>
     </message>
     <message>
         <source>C&amp;lear</source>
@@ -275,7 +275,7 @@
     </message>
     <message>
         <source>Insert Cells</source>
-        <translation>Insérer des Cellules</translation>
+        <translation>Insérer des cellules</translation>
     </message>
     <message>
         <source>C&amp;ells</source>
@@ -283,7 +283,7 @@
     </message>
     <message>
         <source>Insert Rows</source>
-        <translation>Insérer des Lignes</translation>
+        <translation>Insérer des lignes</translation>
     </message>
     <message>
         <source>&amp;Rows</source>
@@ -291,7 +291,7 @@
     </message>
     <message>
         <source>Insert Columns</source>
-        <translation>Insérér des Colonnes</translation>
+        <translation>Insérér des colonnes</translation>
     </message>
     <message>
         <source>&amp;Columns</source>
@@ -315,7 +315,7 @@
     </message>
     <message>
         <source>Row Height</source>
-        <translation>Hauteur de Ligne</translation>
+        <translation>Hauteur de ligne</translation>
     </message>
     <message>
         <source>H&amp;eight</source>
@@ -323,7 +323,7 @@
     </message>
     <message>
         <source>Adjust Row</source>
-        <translation>Ajuster la Ligne</translation>
+        <translation>Ajuster la ligne</translation>
     </message>
     <message>
         <source>&amp;Adjust</source>
@@ -443,7 +443,7 @@
     </message>
     <message>
         <source>&amp;Open Paranthesis</source>
-        <translation>&amp;Ouvrir Parenthèse</translation>
+        <translation>&amp;Ouvrir parenthèse</translation>
     </message>
     <message>
         <source>Close Paranthesis</source>
@@ -527,11 +527,11 @@
     </message>
     <message>
         <source>Arc Sine</source>
-        <translation>ArcSinus</translation>
+        <translation>Arc sinus</translation>
     </message>
     <message>
         <source>A&amp;rc Sine</source>
-        <translation>A&amp;rc Sinus</translation>
+        <translation>A&amp;rc sinus</translation>
     </message>
     <message>
         <source>Cosine</source>
@@ -543,11 +543,11 @@
     </message>
     <message>
         <source>ArcCosine</source>
-        <translation>Arc Cosinus</translation>
+        <translation>Arc cosinus</translation>
     </message>
     <message>
         <source>Arc Cos&amp;ine</source>
-        <translation>Arc C&amp;osinus</translation>
+        <translation>Arc c&amp;osinus</translation>
     </message>
     <message>
         <source>Tangent</source>
@@ -667,7 +667,7 @@
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation>Nom de la &amp;Feuille :</translation>
+        <translation>Nom de la &amp;feuille :</translation>
     </message>
     <message>
         <source>There is only one sheet!</source>
@@ -710,7 +710,7 @@ This product is licensed under GPL. It is freely distributable. If you want to g
 
 http://qtopia.sitebest.com</source>
         <translation>Tableur Opie
-Programme de tableur pour Opie
+Programme de type tableur pour Opie
 QWDC Beta Winner (as Sheet/Qt)
 
 Développé par: Serdar Ozler

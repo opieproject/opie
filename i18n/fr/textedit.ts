@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Save As</source>
-        <translation>Enregistrer Sous</translation>
+        <translation>Enregistrer sous</translation>
     </message>
     <message>
         <source>Cut</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Text Editor</source>
-        <translation>Editeur Texte</translation>
+        <translation>Editeur texte</translation>
     </message>
     <message>
         <source>Font</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Linked Document</source>
-        <translation>Raccourci de Document</translation>
+        <translation>Lien document</translation>
     </message>
     <message>
         <source>All</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Prompt on Exit</source>
-        <translation>Demandé avant de Quitter</translation>
+        <translation>Demandé avant de quitter</translation>
     </message>
     <message>
         <source>Always open linked file</source>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Permissions du Fichier</translation>
+        <translation>Permissions du fichier</translation>
     </message>
     <message>
         <source>Search Bar Open</source>
-        <translation>Barre de Recherche Ouverte</translation>
+        <translation>Barre de recherche ouverte</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -144,7 +144,7 @@
     </message>
     <message>
         <source>Unnamed</source>
-        <translation>Sans Nom</translation>
+        <translation>Sans nom</translation>
     </message>
     <message>
         <source>Permissions</source>
@@ -170,11 +170,11 @@ du disque ?&lt;br&gt; C&apos;est &lt;b&gt;irréversible !!&lt;/b&gt;</translatio
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit est sous copyrigth&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
+        <translation>L&apos;éditeur de texte est sous copyrigth&lt;br&gt;2000 Trolltech AS, et &lt;BR&gt;2002 par &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt; et est sous license GPL</translation>
     </message>
     <message>
         <source>Textedit</source>
-        <translation>TextEdit</translation>
+        <translation>Editeur Texte</translation>
     </message>
     <message>
         <source>Textedit detected
@@ -186,7 +186,7 @@ Continuer et sauvegarder ?</translation>
     </message>
     <message>
         <source>Don&apos;t Save</source>
-        <translation>Ne pas Sauvegarder</translation>
+        <translation>Ne pas sauvegarder</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -198,7 +198,7 @@ Continuer et sauvegarder ?</translation>
     </message>
     <message>
         <source>%1 - Text Editor</source>
-        <translation>%1 - Text Editor</translation>
+        <translation>%1 - Editeur Texte</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
@@ -210,11 +210,11 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Fixer les Permissions du Fichier</translation>
+        <translation>Fixer les permissions du Fichier</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation>Fixer les Permissions du fichier pour : </translation>
+        <translation>Fixer les permissions du fichier pour : </translation>
     </message>
     <message>
         <source>owner</source>
@@ -270,7 +270,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation>Permissions du Fichier</translation>
+        <translation>Permissions du fichier</translation>
     </message>
 </context>
 </TS>

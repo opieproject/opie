@@ -67,11 +67,11 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>L&apos;application n&apos;a pas été capable
-de sauvegarder vos modifications.
+        <translation>L&apos;application n&apos;a pas pu
+sauvegarder vos modifications.
 Libérez de l&apos;espace et réessayez.
 
-Quitter quand même ?</translation>
+Quitter tout de même ?</translation>
     </message>
     <message>
         <source>(Unknown)</source>

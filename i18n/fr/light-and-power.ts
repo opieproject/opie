@@ -37,15 +37,15 @@
     </message>
     <message>
         <source>Light and Power Settings</source>
-        <translation>Paramètres Ecran et Batterie</translation>
+        <translation>Paramètres écran et batterie</translation>
     </message>
     <message>
         <source>on Battery</source>
-        <translation>Sur Batterie</translation>
+        <translation>Sur batterie</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation>Réglages Généraux</translation>
+        <translation>Réglages généraux</translation>
     </message>
     <message>
         <source> sec</source>
@@ -95,7 +95,7 @@ de lumière</translation>
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation>Message Batterie faible</translation>
+        <translation>Message batterie faible</translation>
     </message>
     <message>
         <source> %</source>
@@ -115,11 +115,11 @@ de lumière</translation>
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation>Message Batterie très faible</translation>
+        <translation>Message batterie très faible</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation>Message Batterie critique</translation>
+        <translation>Message batterie critique</translation>
     </message>
     <message>
         <source>CPU Frequency</source>
@@ -127,7 +127,7 @@ de lumière</translation>
     </message>
     <message>
         <source>set a fix value for contrast</source>
-        <translation>défini une valeur fix pour le contrast</translation>
+        <translation>défini une valeur fixe pour le contraste</translation>
     </message>
     <message>
         <source>On closing the hinge</source>
@@ -150,7 +150,7 @@ de lumière</translation>
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation>Calibrage du Capteur</translation>
+        <translation>Calibrage du capteur</translation>
     </message>
     <message>
         <source>Full</source>

@@ -159,7 +159,7 @@
     </message>
     <message>
         <source>Add to Documents</source>
-        <translation>Ajouter à &quot;Mes documents&quot;</translation>
+        <translation>Ajouter à Documents</translation>
     </message>
     <message>
         <source>Run</source>

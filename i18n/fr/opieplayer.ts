@@ -93,15 +93,15 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation>Opérations de Lecture</translation>
+        <translation>Opérations de lecture</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation>Ajouter à la Liste</translation>
+        <translation>Ajouter à la liste</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation>Supprimer de la Liste</translation>
+        <translation>Supprimer de la liste</translation>
     </message>
     <message>
         <source>Play</source>
@@ -121,7 +121,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation>Vider la Liste</translation>
+        <translation>Vider la liste</translation>
     </message>
     <message>
         <source>Add all audio files</source>
@@ -137,7 +137,7 @@ Fermeture du lecteur en cours.</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation>Sauvegarder Liste</translation>
+        <translation>Sauvegarder liste</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -247,7 +247,7 @@ cette liste?</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation>Lire la Sélection</translation>
+        <translation>Lire la sélection</translation>
     </message>
     <message>
         <source>Open file or URL</source>
@@ -255,11 +255,11 @@ cette liste?</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation>Sauver Liste m3u</translation>
+        <translation>Enregistrer liste m3u</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation>Skins</translation>
+        <translation>Revêtement</translation>
     </message>
     <message>
         <source>Path</source>

@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Afficher Fichiers Cachés</translation>
+        <translation>Afficher fichiers cachés</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Nouveau Dossier</translation>
+        <translation>Nouveau dossier</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -28,11 +28,11 @@
     </message>
     <message>
         <source>Run Command</source>
-        <translation>Exécuter Commande</translation>
+        <translation>Exécuter commande</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation>Exécuter Commande et Afficher</translation>
+        <translation>Exécuter commande avec sortie écran</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -88,11 +88,11 @@
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation>Sortie Explorateur</translation>
+        <translation>Sortie écran</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>Emission Explorateur</translation>
+        <translation>Transmission</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Change Directory</source>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>File Info</source>
-        <translation>Info Fichier</translation>
+        <translation>Info fichier</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation>Définir Permissions</translation>
+        <translation>Définir permissions</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation>Emission Fichier</translation>
+        <translation>Transmission fichier</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -172,7 +172,7 @@
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation>Ajouter aux Documents</translation>
+        <translation>Ajouter dans Documents</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -180,7 +180,7 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Tout Sélectioner</translation>
+        <translation>Tout sélectioner</translation>
     </message>
     <message>
         <source>Really delete
@@ -190,7 +190,7 @@ du fichier %1 ?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation>Supprimer Répertoire ?</translation>
+        <translation>Supprimer le répertoire ?</translation>
     </message>
     <message>
         <source>Really delete
@@ -206,7 +206,7 @@ du fichier %1 ?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation>Le Fichier Existe !</translation>
+        <translation>Le fichier existe !</translation>
     </message>
     <message>
         <source>
@@ -218,7 +218,7 @@ exite déjà. Confirmer l&apos;écrasement ?</translation>
         <source> already exists.
 Do you really want to delete it?</source>
         <translation>Existe déjà.
-Voulez-vous vraiment l&apos;effacer?</translation>
+Voulez-vous vraiment l&apos;effacer ?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
@@ -237,7 +237,7 @@ L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
         <translation>Gestionnaire de fichier Explorateur
 Copyright 2002-2003
-L.J.Potter&lt;llornkcor@handhelds.org&gt;
+L.J.Potter &lt;llornkcor@handhelds.org&gt;
 Sous licence GPL</translation>
     </message>
     <message>
@@ -250,11 +250,11 @@ Ce n&apos;en est pas un!!</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation>Répertoire des Favoris</translation>
+        <translation>Répertoire des favoris</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation>Effacer le Répertoire Courant des Favoris</translation>
+        <translation>Effacer le répertoire courant des favoris</translation>
     </message>
     <message>
         <source>Error</source>
@@ -266,11 +266,11 @@ from bookmarks.
 It is not bookmarked!</source>
         <translation>Impossible d&apos;effacer le répertoire
 courant des favoris.
-Ce n&apos;est pas un favoris !</translation>
+Il ne fait pas partie des favoris !</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation>Recherche Fichier</translation>
+        <translation>Recherche fichier</translation>
     </message>
     <message>
         <source>Really delete %1
@@ -295,15 +295,15 @@ et tout son contenu ?</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation>Ouvrir Liste 1</translation>
+        <translation>Ouvrir liste 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation>Ouvrir Liste 2</translation>
+        <translation>Ouvrir liste 2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation>Pas Encore Implémenté</translation>
+        <translation>Pas encore implémenté</translation>
     </message>
     <message>
         <source>Could not copy 
@@ -324,7 +324,7 @@ vers
     </message>
     <message>
         <source>Output</source>
-        <translation>Sortie</translation>
+        <translation>Sortie écran</translation>
     </message>
     <message>
         <source>Process could not start</source>
@@ -349,7 +349,7 @@ Terminé
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Définir Permissions</translation>
+        <translation>Définir permissions</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
@@ -397,11 +397,11 @@ Terminé
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation>Erreur - aucun group</translation>
+        <translation>Erreur - aucun groupe</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation>Erreur lors du changement de group</translation>
+        <translation>Erreur lors du changement de groupe</translation>
     </message>
     <message>
         <source>Error setting mode</source>
@@ -409,7 +409,7 @@ Terminé
     </message>
     <message>
         <source>filePermissions</source>
-        <translation>Permissions Fichier</translation>
+        <translation>Permissions fichier</translation>
     </message>
 </context>
 </TS>

@@ -15,23 +15,23 @@
     </message>
     <message>
         <source>&lt;b&gt;Eliminate&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Elimine&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Eliminer&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Expose&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Expose&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Exposer&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Protect&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Protege&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Proteger&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Safe&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Sécurise&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Sécuriser&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Empty&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Vide&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Vider&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Default Values</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Help</source>
-        <translation>Aide en Ligne</translation>
+        <translation>Aide en ligne</translation>
     </message>
     <message>
         <source>Bring the pieces out of the endzone</source>
-        <translation>Sort les pièces de la endzone</translation>
+        <translation>Sort les pièces de la zone mort</translation>
     </message>
     <message>
         <source>Eliminate an opponents piece</source>
@@ -143,7 +143,7 @@ next to a field for help</source>
     </message>
     <message>
         <source>Load Theme</source>
-        <translation>Charger Thème</translation>
+        <translation>Charger thème</translation>
     </message>
     <message>
         <source>&lt;b&gt;no move&lt;/b&gt;</source>

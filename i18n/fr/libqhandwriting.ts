@@ -4,7 +4,7 @@
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation>Reconnaissance d&apos;Ecriture - Aide</translation>
+        <translation>Reconnaissance d&apos;écriture - Aide</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
@@ -84,7 +84,7 @@
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation>Raccourci</translation>
+        <translation>Applet</translation>
     </message>
 </context>
 <context>
@@ -154,7 +154,7 @@ and try again.
 
 Quit anyway?</source>
         <translation>Enregistrement des informations
-Impossible.
+impossible.
 Libérer de la mémoire et réessayer.
 
 Quitter ?</translation>

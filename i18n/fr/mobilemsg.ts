@@ -11,7 +11,7 @@
     <name>MobileMsgBase</name>
     <message>
         <source>Mobile Messaging</source>
-        <translation>Message du Mobile</translation>
+        <translation>Message mobile</translation>
     </message>
     <message>
         <source>Number:</source>

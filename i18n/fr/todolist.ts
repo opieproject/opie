@@ -4,7 +4,7 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
@@ -39,18 +39,18 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation>Editeur de Tâches</translation>
+        <translation>Editeur de tâches</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Enter Task</source>
-        <translation>Entrer une Tâche</translation>
+        <translation>Entrer une tâche</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Editer la Tâche</translation>
+        <translation>Editer la tâche</translation>
     </message>
     <message>
         <source>Opie Todolist</source>
@@ -69,11 +69,11 @@
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation>Nouvelle à Partir d&apos;un Modèle</translation>
+        <translation>Nouvelle à partir d&apos;un modèle</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nouvelle Tâche</translation>
+        <translation>Nouvelle tâche</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Editer la Tâche</translation>
+        <translation>Editer la tâche</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>View Task</source>
-        <translation>Voir la Tâche</translation>
+        <translation>Voir la tâche</translation>
     </message>
     <message>
         <source>Delete...</source>
@@ -101,11 +101,11 @@
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Supprimer Tout...</translation>
+        <translation>Supprimer tout...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation>Supprimer Tâches Terminées</translation>
+        <translation>Supprimer tâches terminées</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation>Edition Rapide</translation>
+        <translation>Edition rapide</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -168,7 +168,7 @@ La liste affiche les informations suivantes:
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Toutes les Catégories</translation>
+        <translation>Toutes les catégories</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -206,7 +206,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Non classé</translation>
+        <translation>Non classée</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
@@ -214,7 +214,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation>Nouvelles Tâches</translation>
+        <translation>Nouvelles tâches</translation>
     </message>
     <message>
         <source>Duplicate</source>
@@ -238,7 +238,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation>Configurer les Modèles</translation>
+        <translation>Configurer les modèles</translation>
     </message>
     <message>
         <source>Priority:</source>
@@ -254,7 +254,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>Template Editor</source>
-        <translation>Editeur de Modèle</translation>
+        <translation>Editeur de modèle</translation>
     </message>
     <message>
         <source>Add</source>
@@ -274,7 +274,7 @@ Voulez-vous quitter ?</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation>Nouveau Modèle %1</translation>
+        <translation>Nouveau modèle %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -357,7 +357,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     <name>TableView</name>
     <message>
         <source>Table View</source>
-        <translation>Vue en Tableau</translation>
+        <translation>Vue Tableau</translation>
     </message>
     <message>
         <source>None</source>
@@ -411,7 +411,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Work on </source>
-        <translation>En Cours</translation>
+        <translation>En cours</translation>
     </message>
     <message>
         <source>Buy </source>
@@ -427,7 +427,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Update </source>
-        <translation>Mettre à Jour</translation>
+        <translation>Mettre à jour</translation>
     </message>
     <message>
         <source>Create </source>
@@ -451,7 +451,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Very High</source>
-        <translation>Très Haute</translation>
+        <translation>Très haute</translation>
     </message>
     <message>
         <source>High</source>
@@ -467,7 +467,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Very Low</source>
-        <translation>Très Basse</translation>
+        <translation>Très basse</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -479,7 +479,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Recurring task</source>
-        <translation>Tâche Récurrente</translation>
+        <translation>Tâche récurrente</translation>
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
@@ -495,7 +495,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Todo List</source>
-        <translation>Liste des Tâches</translation>
+        <translation>Liste des tâches</translation>
     </message>
     <message>
         <source>Summary:</source>
@@ -526,7 +526,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Not started</source>
-        <translation>Non Démarré</translation>
+        <translation>Non démarré</translation>
     </message>
     <message>
         <source>Progress:</source>
@@ -590,7 +590,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation>Mode Maintenance : </translation>
+        <translation>Mode maintenance : </translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
@@ -626,7 +626,7 @@ Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. C
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation>Cliquez ici pour selectionner le mainteneur de la tâche.</translation>
+        <translation>Cliquez ici pour sélectionner le mainteneur de la tâche.</translation>
     </message>
 </context>
 <context>

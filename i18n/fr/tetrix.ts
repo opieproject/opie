@@ -15,7 +15,7 @@
     <name>OHighscoreDialog</name>
     <message>
         <source>Highscores</source>
-        <translation>Highscores</translation>
+        <translation>Table des scores</translation>
     </message>
     <message>
         <source>#</source>

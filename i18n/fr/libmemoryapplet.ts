@@ -144,7 +144,7 @@ La mémoire (i.e RAM) est divisée en catégories comme suit :
     </message>
     <message>
         <source>Swapfile created.</source>
-        <translation>Fichier d&apos;échange crée.</translation>
+        <translation>Fichier d&apos;échange créé.</translation>
     </message>
     <message>
         <source>Failed to remove swapfile.</source>

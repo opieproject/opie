@@ -11,10 +11,10 @@
 (Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
 on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
 slow and annyoing...)</source>
-        <translation>&lt;b&gt;Voulez-vous avoir un onglet Documents?&lt;/b&gt;&lt;p&gt;
-(Sachez que cet onglet recherche &lt;i&gt;tous&lt;/i&gt; les documents
-sur &lt;i&gt;tous&lt;/i&gt; les supports externes, ce qui peut
-être vraiment très long...)</translation>
+        <translation>&lt;b&gt;Voulez-vous avoir l&apos;onglet Documents?&lt;/b&gt;&lt;p&gt;
+Le système recherche &lt;i&gt;tous&lt;/i&gt; les documents sur
+&lt;i&gt;tous&lt;/i&gt; les supports externes, de façon à remplir
+Documents (ce qui peut être vraiment très long...)</translation>
     </message>
     <message>
         <source>Enable the DocTab</source>

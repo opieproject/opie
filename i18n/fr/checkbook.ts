@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation>Entrez ici le nom du livre de comptes .</translation>
+        <translation>Entrez ici le nom du livre de comptes.</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -428,7 +428,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation>Nom du Livre de Comptes</translation>
+        <translation>Nom du livre de comptes</translation>
     </message>
     <message>
         <source>Balance</source>
@@ -436,11 +436,11 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Enter password</source>
-        <translation>Entrer un mot de passe</translation>
+        <translation>Entrer mot de passe</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation>Veuillez entrer un mot de passe : </translation>
+        <translation>Entrez votre un mot de passe : </translation>
     </message>
 </context>
 <context>
@@ -559,7 +559,7 @@ Vous pouvez aussi cliquer sur &quot;Supprimer&quot; à partir du menu de &quot;L
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation>Crédit Divers</translation>
+        <translation>Crédit divers</translation>
     </message>
 </context>
 <context>

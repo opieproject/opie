@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
+        <translation>Ce graphe représente la quantité de mémoire actuellement utilisée sur cette carte mémoire Compact Flash.</translation>
     </message>
     <message>
         <source>Ha</source>
@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
+        <translation>Ce graphe représente la quantité de mémoire actuellement utilisée sur ce disque dur.</translation>
     </message>
     <message>
         <source>SD</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
+        <translation>Ce graphe représente la quantité de mémoire actuellement utilisée sur cette carte mémoire Secure Digital.</translation>
     </message>
     <message>
         <source>SC</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
+        <translation>Ce graphe représente la quantité de mémoire actuellement utilisée dans la mémoire centrale (i.e. mémoire Flash).</translation>
     </message>
     <message>
         <source>RA</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
+        <translation>Ce graphe représente la quantité de mémoire actuellement utilisée sur le dique RAM.</translation>
     </message>
 </context>
 <context>
@@ -222,7 +222,7 @@ Cliquez et maintenez appuyer pour voir les informations à propos du module ou p
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation>Voici la liste de tous les processus en cours sur cet assistant personnel
+        <translation>Affiche la liste de tous les processus en cours sur cet assistant personnel
 
 Cliquez et maintenez appuyer pour voir les informations à propos du processus ou pour lui envoyer un signal.</translation>
     </message>
@@ -397,7 +397,7 @@ to this process?</source>
     </message>
     <message>
         <source>This page shows the current versions of Opie, the Linux kernel and distribution running on this handheld device.</source>
-        <translation>Cette page montre la version courante de Opie, du noyau Linux, et de la distribution installés sur cet appareil de poche.</translation>
+        <translation>Cette page affiche la version courante de Opie, du noyau Linux et de la distribution installés sur cet appareil de poche.</translation>
     </message>
     <message>
         <source>&lt;br&gt;Model: </source>

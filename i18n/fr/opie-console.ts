@@ -106,7 +106,7 @@ de DTR (0=non)</translation>
     <name>ConfigDialog</name>
     <message>
         <source>Edit Connection Profile</source>
-        <translation>Editer Profil Connexion</translation>
+        <translation>Editer profil connexion</translation>
     </message>
     <message>
         <source>New Connection</source>
@@ -121,7 +121,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Profile Name</source>
-        <translation>Nom Profil</translation>
+        <translation>Nom profil</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -144,7 +144,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Environment Variables</source>
-        <translation>Variables Environnement</translation>
+        <translation>Variables d&apos;environnement</translation>
     </message>
     <message>
         <source>Name</source>
@@ -190,7 +190,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation>Emulateur de Terminal : </translation>
+        <translation>Emulateur de terminal : </translation>
     </message>
     <message>
         <source>IO Layer:</source>
@@ -263,7 +263,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Edit Key</source>
-        <translation>Editer Touche</translation>
+        <translation>Editer touche</translation>
     </message>
 </context>
 <context>
@@ -322,7 +322,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Stop Bits</source>
-        <translation>Bits de Stop</translation>
+        <translation>Bits de stop</translation>
     </message>
     <message>
         <source>1</source>
@@ -383,15 +383,15 @@ de DTR (0=non)</translation>
     <name>MainWindow</name>
     <message>
         <source>Configure Profiles</source>
-        <translation>Configurer Profils</translation>
+        <translation>Configurer profils</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation>Nouvelle Connexion</translation>
+        <translation>Nouvelle connexion</translation>
     </message>
     <message>
         <source>Save Connection</source>
-        <translation>Enregistrer Connexion</translation>
+        <translation>Enregistrer connexion</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -403,7 +403,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>QuickLaunch</source>
-        <translation>Lancement Rapide</translation>
+        <translation>Lancement rapide</translation>
     </message>
     <message>
         <source>The shell button launches the &quot;default&quot; profile. If there is none default values are taken</source>
@@ -419,39 +419,39 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Full screen</source>
-        <translation>Plein Ecran</translation>
+        <translation>Plein écran</translation>
     </message>
     <message>
         <source>Save history</source>
-        <translation>Enregistrer Historique</translation>
+        <translation>Enregistrer historique</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation>Terminer Session</translation>
+        <translation>Terminer session</translation>
     </message>
     <message>
         <source>Close Window</source>
-        <translation>Fermer Fenêtre</translation>
+        <translation>Fermer fenêtre</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation>Lancer Script</translation>
+        <translation>Lancer script</translation>
     </message>
     <message>
         <source>Record Script</source>
-        <translation>Début Enregistrement Script</translation>
+        <translation>Début enregistrement script</translation>
     </message>
     <message>
         <source>Save Script</source>
-        <translation>Enregistrer Script</translation>
+        <translation>Enregistrer script</translation>
     </message>
     <message>
         <source>Open Keyboard...</source>
-        <translation>Ouvrir Clavier...</translation>
+        <translation>Ouvrir clavier...</translation>
     </message>
     <message>
         <source>New from Profile</source>
-        <translation>Ouvrir Profil</translation>
+        <translation>Ouvrir profil</translation>
     </message>
     <message>
         <source>Connection</source>
@@ -475,7 +475,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>&lt;qt&gt;There is no Connection.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Aucune Connexion disponible.&lt;/qt&gt;</translation>
+        <translation>&lt;qt&gt;Aucune connexion disponible.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>History</source>
@@ -483,11 +483,11 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>New Profile</source>
-        <translation>Nouveau Profil</translation>
+        <translation>Nouveau profil</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Enregister Profil</translation>
+        <translation>Enregister profil</translation>
     </message>
 </context>
 <context>
@@ -532,11 +532,11 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Local Console</source>
-        <translation>Console Locale</translation>
+        <translation>Console locale</translation>
     </message>
     <message>
         <source>New Profile</source>
-        <translation>Nouveau Profil</translation>
+        <translation>Nouveau profil</translation>
     </message>
 </context>
 <context>
@@ -579,7 +579,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Transfer protocol</source>
-        <translation>Protocole de Transfère</translation>
+        <translation>Protocole de transfère</translation>
     </message>
     <message>
         <source>Progress</source>
@@ -691,7 +691,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Special Keys</source>
-        <translation>Touches Spéciales</translation>
+        <translation>Touches spéciales</translation>
     </message>
     <message>
         <source>Invalid profile</source>
@@ -723,7 +723,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Local Console</source>
-        <translation>Console Locale</translation>
+        <translation>Console locale</translation>
     </message>
     <message>
         <source>Default Terminal</source>
@@ -731,11 +731,11 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Default Keyboard</source>
-        <translation>Clavier par Défaut</translation>
+        <translation>Clavier par défaut</translation>
     </message>
     <message>
         <source>SynchronizedFile</source>
-        <translation>Fichier Synchronisé</translation>
+        <translation>Fichier synchronisé</translation>
     </message>
     <message>
         <source>Dialing number: %1</source>
@@ -767,7 +767,7 @@ de DTR (0=non)</translation>
     </message>
     <message>
         <source>Turning off dialtone</source>
-        <translation>Inactivation du son de numérotation</translation>
+        <translation>Désactivation du son de numérotation</translation>
     </message>
     <message>
         <source>Dial number</source>
@@ -797,11 +797,11 @@ de DTR (0=non)</translation>
     <name>TerminalWidget</name>
     <message>
         <source>Terminal Type</source>
-        <translation>Type de Terminal</translation>
+        <translation>Type de terminal</translation>
     </message>
     <message>
         <source>Color scheme</source>
-        <translation>Combinaison couleurs</translation>
+        <translation>Combinaison de couleurs</translation>
     </message>
     <message>
         <source>Font size</source>

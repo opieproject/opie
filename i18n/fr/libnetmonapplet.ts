@@ -19,7 +19,7 @@
     <name>NetPassword</name>
     <message>
         <source>Network Password</source>
-        <translation>Mot de Passe Réseau</translation>
+        <translation>Mot de passe réseau</translation>
     </message>
     <message>
         <source>Cancel</source>

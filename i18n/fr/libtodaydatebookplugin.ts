@@ -136,7 +136,7 @@ d&apos;évènements
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation>Aucun évènement prévu</translation>
+        <translation>Aucun événement prévu</translation>
     </message>
     <message>
         <source>No appointments today</source>

@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>KeyList::addKey() Cannot make default value for type %1, Key not added.</source>
-        <translation>KeyList::addKey() Impossible de définir une valeur par défaut pour le type %1. Clé pas ajoutée.</translation>
+        <translation>KeyList::addKey() Impossible de définir une valeur par défaut pour le type %1. Clé non ajoutée.</translation>
     </message>
     <message>
         <source>DataElem::setField(%1, %2) No valid type found</source>
@@ -25,15 +25,15 @@
     <name>TVKeyEdit_gen</name>
     <message>
         <source>TableViewer - Edit Keys</source>
-        <translation>TableViewer - Editeur de Clés</translation>
+        <translation>TableViewer - Editeur de clés</translation>
     </message>
     <message>
         <source>Key Name</source>
-        <translation>Nom Clé</translation>
+        <translation>Nom clé</translation>
     </message>
     <message>
         <source>Key Type</source>
-        <translation>Type Clé</translation>
+        <translation>Type de clé</translation>
     </message>
     <message>
         <source>New</source>
@@ -45,7 +45,7 @@
     </message>
     <message>
         <source>Clear All</source>
-        <translation>Supprimer Tout</translation>
+        <translation>Supprimer tout</translation>
     </message>
 </context>
 <context>

@@ -83,7 +83,7 @@ fichier.</translation>
     </message>
     <message>
         <source>Searching for IrDa Devices.</source>
-        <translation>Recherche des Dispositifs IrDa.</translation>
+        <translation>Recherche des dispositifs IrDa.</translation>
     </message>
     <message>
         <source>Bluetooth is not available</source>

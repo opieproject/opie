@@ -53,7 +53,7 @@
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation>Sélection Liste</translation>
+        <translation>Sélection liste</translation>
     </message>
 </context>
 <context>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation>Supprimer de la Liste</translation>
+        <translation>Supprimer de la liste</translation>
     </message>
     <message>
         <source>Play</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Randomize</source>
-        <translation>Mélangé</translation>
+        <translation>Aléatoire</translation>
     </message>
     <message>
         <source>Loop</source>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>Play Selected</source>
-        <translation>Lire la Sélection</translation>
+        <translation>Jouer la sélection</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation>Fichier Non Valide</translation>
+        <translation>Fichier non valide</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation>Supprimer la Liste ?</translation>
+        <translation>Supprimer la liste ?</translation>
     </message>
     <message>
         <source>You really want to delete
@@ -162,18 +162,18 @@ la liste ?</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>OpiePlayer:</translation>
+        <translation>OpiePlayer :</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation>Enregistrer Liste m3u</translation>
+        <translation>Enregistrer liste m3u</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidgetGui</name>
     <message>
         <source>Play Operations</source>
-        <translation>Opérations de Lecture</translation>
+        <translation>Opérations de lecture</translation>
     </message>
     <message>
         <source>File</source>
@@ -185,7 +185,7 @@ la liste ?</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation>Skins</translation>
+        <translation>Revêtement</translation>
     </message>
     <message>
         <source>Gamma (Video)</source>
@@ -231,7 +231,7 @@ la liste ?</translation>
     </message>
     <message>
         <source>Malformed MRL</source>
-        <translation>MRL mal-formée</translation>
+        <translation>MRL mal formée</translation>
     </message>
     <message>
         <source>Some other error</source>

@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Limit Size</source>
-        <translation>Limite de Taille</translation>
+        <translation>Limite de taille</translation>
     </message>
     <message>
         <source>Unlimited</source>
@@ -70,11 +70,11 @@
     </message>
     <message>
         <source>File Directory</source>
-        <translation>Répertoire Fichier</translation>
+        <translation>Répertoire fichier</translation>
     </message>
     <message>
         <source>Bit Depth</source>
-        <translation>Profond. Bit</translation>
+        <translation>Profond. bit</translation>
     </message>
     <message>
         <source>16</source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Low Disk Space</source>
-        <translation>Espace Disque Insuffisant</translation>
+        <translation>Espace disque insuffisant</translation>
     </message>
     <message>
         <source>You are running low of
@@ -162,7 +162,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Send with Ir</source>
-        <translation>Emettre par IrDa</translation>
+        <translation>Transmettre par Ir</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -170,7 +170,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation>Emission Ir</translation>
+        <translation>Transmission Ir</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -178,7 +178,7 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Rec</source>
@@ -210,11 +210,11 @@ des fichiers sélectionnés ?</translation>
     </message>
     <message>
         <source>Auto Mute</source>
-        <translation>Silence Auto</translation>
+        <translation>Silence auto</translation>
     </message>
     <message>
         <source>Stereo Channels</source>
-        <translation>Canaux Stéréo</translation>
+        <translation>Canaux stéréo</translation>
     </message>
 </context>
 </TS>

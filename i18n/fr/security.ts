@@ -95,7 +95,7 @@ Accès refusé</translation>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation>Paramètres de Sécurité</translation>
+        <translation>Paramètres de sécurité</translation>
     </message>
     <message>
         <source>Change passcode</source>
@@ -165,7 +165,7 @@ mot de passe</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation>Connexion Automatique</translation>
+        <translation>Connexion automatique</translation>
     </message>
     <message>
         <source>This button will let you change the security passcode.  
@@ -226,7 +226,7 @@ Si vous n&apos;êtes pas sur, sélectionnez &quot;Tous&quot;.</translation>
     </message>
     <message>
         <source>Delete Entry</source>
-        <translation>Supprimer Entrée</translation>
+        <translation>Supprimer entrée</translation>
     </message>
     <message>
         <source>Delete the selected net range from the list
@@ -239,7 +239,7 @@ the list to the state it has been when you initially booted your Zaurus.</source
     </message>
     <message>
         <source>Restore Defaults</source>
-        <translation>Paramètres par Défaut</translation>
+        <translation>Paramètres par défaut</translation>
     </message>
     <message>
         <source>This button will restore the list of net ranges

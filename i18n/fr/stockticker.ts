@@ -3,7 +3,7 @@
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation>&amp;Ouvrir Fichier</translation>
+        <translation>&amp;Ouvrir fichier</translation>
     </message>
     <message>
         <source>&amp;Close</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation>Ajouter au favoris</translation>
+        <translation>Ajouter aux favoris</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -58,7 +58,7 @@
     <name>InputDialog</name>
     <message>
         <source>Symbol Lookup</source>
-        <translation>Consulter Symbole</translation>
+        <translation>Rechercher symbole</translation>
     </message>
     <message>
         <source>Enter something to lookup / search.</source>

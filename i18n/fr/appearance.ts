@@ -37,7 +37,7 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation>Type Onglets : </translation>
+        <translation>Type onglets : </translation>
     </message>
     <message>
         <source>Tabs</source>
@@ -253,11 +253,11 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Normal Item</source>
-        <translation>Control Simple</translation>
+        <translation>Control simple</translation>
     </message>
     <message>
         <source>Disabled Item</source>
-        <translation>Control Désactivé</translation>
+        <translation>Control désactivé</translation>
     </message>
     <message>
         <source>Menu</source>
@@ -265,11 +265,11 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Normal Text</source>
-        <translation>Texte Simple</translation>
+        <translation>Texte simple</translation>
     </message>
     <message>
         <source>Highlighted Text</source>
-        <translation>Texte Surligné</translation>
+        <translation>Texte surligné</translation>
     </message>
     <message>
         <source>Button</source>
@@ -277,7 +277,7 @@ Cette partie vous permet de sélectionner une application et de lui attribuer de
     </message>
     <message>
         <source>Check Box</source>
-        <translation>Case à Cocher</translation>
+        <translation>Case à cocher</translation>
     </message>
     <message>
         <source>Sample window using the selected settings.</source>

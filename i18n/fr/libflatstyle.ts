@@ -4,7 +4,7 @@
     <message>
         <source>Flat</source>
         <comment>Name of the style Flat</comment>
-        <translation>Sans Relief</translation>
+        <translation>Sans relief</translation>
     </message>
 </context>
 </TS>

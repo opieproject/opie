@@ -44,11 +44,11 @@ the account &quot;%1&quot;?</source>
     </message>
     <message>
         <source>New Account</source>
-        <translation>Nouveau Compte</translation>
+        <translation>Nouveau compte</translation>
     </message>
     <message>
         <source>Edit Account: </source>
-        <translation>Editer Compte : </translation>
+        <translation>Editer compte : </translation>
     </message>
     <message>
         <source>Dial</source>
@@ -56,7 +56,7 @@ the account &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Edit Login Script</source>
-        <translation>Editer Script de Connexion</translation>
+        <translation>Editer script de connexion</translation>
     </message>
     <message>
         <source>Authentication</source>
@@ -72,7 +72,7 @@ the account &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Gateway Setup</source>
-        <translation>Config Passerelle</translation>
+        <translation>Config passerelle</translation>
     </message>
     <message>
         <source>Gateway</source>
@@ -88,7 +88,7 @@ the account &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Execute Programs</source>
-        <translation>Exécuter Programmes</translation>
+        <translation>Exécuter programmes</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -148,7 +148,7 @@ sécurisé qu&apos;il procure. Si vous ne connaissez par la méthode de connexio
     </message>
     <message>
         <source>Username: </source>
-        <translation>Nom Utilisateur : </translation>
+        <translation>Nom utilisateur : </translation>
     </message>
     <message>
         <source>Enter your username here...</source>
@@ -156,7 +156,7 @@ sécurisé qu&apos;il procure. Si vous ne connaissez par la méthode de connexio
     </message>
     <message>
         <source>Password: </source>
-        <translation>Mot de Passe : </translation>
+        <translation>Mot de passe : </translation>
     </message>
     <message>
         <source>Enter your password here</source>
@@ -164,7 +164,7 @@ sécurisé qu&apos;il procure. Si vous ne connaissez par la méthode de connexio
     </message>
     <message>
         <source>Store password</source>
-        <translation>Sauver mot de passe</translation>
+        <translation>Enregistrer mot de passe</translation>
     </message>
     <message>
         <source>&lt;p&gt;When this is turned on, your ISP password
@@ -340,11 +340,11 @@ dispositif &quot;%1&quot; ?</translation>
     </message>
     <message>
         <source>New Device</source>
-        <translation>Nouveau Dispositif</translation>
+        <translation>Nouveau dispositif</translation>
     </message>
     <message>
         <source>Edit Device: </source>
-        <translation>Editer Dispositif : </translation>
+        <translation>Editer dispositif : </translation>
     </message>
     <message>
         <source>&amp;Device</source>
@@ -389,7 +389,7 @@ nouveaux paramètres</translation>
     <name>DialWidget</name>
     <message>
         <source>Connection name:</source>
-        <translation>Nom de la Connexion : </translation>
+        <translation>Nom de la connexion : </translation>
     </message>
     <message>
         <source>Type in a unique name for this connection</source>
@@ -397,7 +397,7 @@ nouveaux paramètres</translation>
     </message>
     <message>
         <source>Phone number:</source>
-        <translation>Numéro de téléphone : </translation>
+        <translation>Numéro de tél. : </translation>
     </message>
     <message>
         <source>&amp;Add...</source>
@@ -426,7 +426,7 @@ de composer le numéro suivant et ainsi de suite</translation>
     </message>
     <message>
         <source>Customize pppd Arguments...</source>
-        <translation>Personnaliser Arguments pppd...</translation>
+        <translation>Personnaliser arguments pppd...</translation>
     </message>
 </context>
 <context>
@@ -809,7 +809,7 @@ La  valeur recommandée est de 30 secondes.</translation>
     <name>ModemWidget2</name>
     <message>
         <source>Busy wait:</source>
-        <translation>Attente Tonalité : </translation>
+        <translation>Attente tonalité : </translation>
     </message>
     <message>
         <source>&amp;Wait for dial tone before dialing</source>
@@ -919,7 +919,7 @@ de vous envoyer ces informations</translation>
     <name>PPPConfigWidget</name>
     <message>
         <source>Configure Modem</source>
-        <translation>Configurer Modem</translation>
+        <translation>Configurer modem</translation>
     </message>
     <message>
         <source>Modem failure</source>
@@ -942,7 +942,7 @@ de vous envoyer ces informations</translation>
     <name>PPPdArguments</name>
     <message>
         <source>Customize pppd Arguments</source>
-        <translation>Personnaliser Arguments pppd</translation>
+        <translation>Personnaliser arguments pppd</translation>
     </message>
     <message>
         <source>Argument:</source>
@@ -965,7 +965,7 @@ de vous envoyer ces informations</translation>
     <name>PhoneNumberDialog</name>
     <message>
         <source>Add Phone Number</source>
-        <translation>Ajouter Numéro Téléphone</translation>
+        <translation>Ajouter numéro téléphone</translation>
     </message>
     <message>
         <source>Enter a phone number:</source>
@@ -1092,99 +1092,99 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Edit Modem Commands</source>
-        <translation>Editer Commandes Modems</translation>
+        <translation>Editer commandes modems</translation>
     </message>
     <message>
         <source>Pre-init delay (sec/100):</source>
-        <translation>Pre-init delay (sec/100):</translation>
+        <translation>Délai pré-init (sec/100):</translation>
     </message>
     <message>
         <source>Initialization string %1:</source>
-        <translation>Initialization string %1:</translation>
+        <translation>Chaîne d&apos;initialisation %1:</translation>
     </message>
     <message>
         <source>Post-init delay (sec/100):</source>
-        <translation>Post-init delay (sec/100):</translation>
+        <translation>Délai post-init (sec/100):</translation>
     </message>
     <message>
         <source>Dialing speed (sec/100):</source>
-        <translation>Dialing speed (sec/100):</translation>
+        <translation>Vitesse de comm. (sec/100):</translation>
     </message>
     <message>
         <source>Init response:</source>
-        <translation>Init response:</translation>
+        <translation>Response init :</translation>
     </message>
     <message>
         <source>No dial tone detection:</source>
-        <translation>No dial tone detection:</translation>
+        <translation>Pas de porteuse :</translation>
     </message>
     <message>
         <source>Dial string:</source>
-        <translation>Dial string:</translation>
+        <translation>Chaîne de composition :</translation>
     </message>
     <message>
         <source>Connect response:</source>
-        <translation>Connect response:</translation>
+        <translation>Message de connexion :</translation>
     </message>
     <message>
         <source>Busy response:</source>
-        <translation>Busy response:</translation>
+        <translation>Message auccupé :</translation>
     </message>
     <message>
         <source>No carrier response:</source>
-        <translation>No carrier response:</translation>
+        <translation>Message pas de porteuse :</translation>
     </message>
     <message>
         <source>No dial tone response:</source>
-        <translation>No dial tone response:</translation>
+        <translation>Message pas de tonalité :</translation>
     </message>
     <message>
         <source>Hangup string:</source>
-        <translation>Hangup string:</translation>
+        <translation>Chaîne pour raccrocher :</translation>
     </message>
     <message>
         <source>Hangup response:</source>
-        <translation>Hangup response:</translation>
+        <translation>Message raccroché :</translation>
     </message>
     <message>
         <source>Answer string:</source>
-        <translation>Answer string:</translation>
+        <translation>Chaîne de réponse :</translation>
     </message>
     <message>
         <source>Ring response:</source>
-        <translation>Ring response:</translation>
+        <translation>Message de sonnerie :</translation>
     </message>
     <message>
         <source>Answer response:</source>
-        <translation>Answer response:</translation>
+        <translation>Message de réponse:</translation>
     </message>
     <message>
         <source>Escape string:</source>
-        <translation>Escape string:</translation>
+        <translation>Chaîne d&apos;échapement :</translation>
     </message>
     <message>
         <source>Escape response:</source>
-        <translation>Escape response:</translation>
+        <translation>Message d&apos;échappement :</translation>
     </message>
     <message>
         <source>Guard time (sec/50):</source>
-        <translation>Guard time (sec/50):</translation>
+        <translation>Temps d&apos;attente (sec/50):</translation>
     </message>
     <message>
         <source>Volume off/low/high:</source>
-        <translation>Volume off/low/high:</translation>
+        <translation>Volume désactivé/moyen/fort:</translation>
     </message>
     <message>
         <source>Connected at:</source>
-        <translation>Connected at:</translation>
+        <translation>Connecté à :</translation>
     </message>
     <message>
         <source>Time connected:</source>
-        <translation>Time connected:</translation>
+        <translation>Temps de connexion :</translation>
     </message>
     <message>
         <source>Volume:</source>
-        <translation>Volume:</translation>
+        <translation>Volume :</translation>
     </message>
     <message>
         <source>Session Bill:</source>
@@ -1196,7 +1196,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Disconnect</source>
-        <translation>Disconnect</translation>
+        <translation>Déconnecter</translation>
     </message>
     <message>
         <source>Byte</source>
@@ -1216,7 +1216,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Connecting to: </source>
-        <translation>Connection à : </translation>
+        <translation>Connexion à : </translation>
     </message>
     <message>
         <source>Online</source>
@@ -1232,7 +1232,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Connecting to: %1</source>
-        <translation>Connection à :  %1</translation>
+        <translation>Connexion à :  %1</translation>
     </message>
     <message>
         <source>Running pre-startup command...</source>
@@ -1248,7 +1248,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Setting speaker volume...</source>
-        <translation>Paramêtrage du volume modem...</translation>
+        <translation>Paramètrage du volume modem...</translation>
     </message>
     <message>
         <source>Turning off dial tone waiting...</source>
@@ -1260,19 +1260,19 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Line busy. Hanging up...</source>
-        <translation>La ligne et occupé. Attente...</translation>
+        <translation>La ligne est occupée. Attente...</translation>
     </message>
     <message>
         <source>Line busy. Waiting: %1 seconds</source>
-        <translation>La ligne et occupé. Attente : %1 secondes</translation>
+        <translation>La ligne est occupée. Attente : %1 secondes</translation>
     </message>
     <message>
         <source>No Dialtone</source>
-        <translation>Pas de Tonalité</translation>
+        <translation>Pas de tonalité</translation>
     </message>
     <message>
         <source>No Carrier</source>
-        <translation>Pas de Porteuse</translation>
+        <translation>Pas de porteuse</translation>
     </message>
     <message>
         <source>Scanning %1</source>
@@ -1324,7 +1324,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Loop Start %1</source>
-        <translation>Démarrage Boucle %1</translation>
+        <translation>Démarrage boucle %1</translation>
     </message>
     <message>
         <source>ERROR: Nested too deep, ignored.</source>
@@ -1336,7 +1336,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Loop End %1</source>
-        <translation>Fin Boucle %1</translation>
+        <translation>Fin boucle %1</translation>
     </message>
     <message>
         <source>LoopEnd without matching Start! Line: %1</source>
@@ -1348,7 +1348,7 @@ Demandez à votre administrateur réseau de créer ce fichier (il peut être vid
     </message>
     <message>
         <source>Scan Var: %1</source>
-        <translation>Scanne Var : %1</translation>
+        <translation>Scanne var : %1</translation>
     </message>
     <message>
         <source>Found: %1</source>

@@ -3,7 +3,7 @@
     <name>PIMSpreadsheetWindow</name>
     <message>
         <source>Spreadsheet</source>
-        <translation>Spreadsheet</translation>
+        <translation>Tableur</translation>
     </message>
     <message>
         <source>New</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Clear Cell</source>
-        <translation>Effacer Cellule</translation>
+        <translation>Effacer cellule</translation>
     </message>
     <message>
         <source>File</source>

@@ -4,7 +4,7 @@
     <name>QObject</name>
     <message>
         <source>Fortune plugin</source>
-        <translation>Plugin Fortune</translation>
+        <translation>Module Fortune</translation>
     </message>
 </context>
 </TS>

@@ -99,7 +99,7 @@
     </message>
     <message>
         <source>Parameter</source>
-        <translation>Paramêtre</translation>
+        <translation>Paramètre</translation>
     </message>
     <message>
         <source>Opie-Dictionary</source>
@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>&amp;Define one</source>
-        <translation>&amp;En Définir Un</translation>
+        <translation>&amp;En définir un</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Dictionary file</source>
-        <translation>Fichier Dictionnaire</translation>
+        <translation>Fichier dictionnaire</translation>
     </message>
     <message>
         <source>Browse</source>

@@ -4,7 +4,7 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Defaults</source>
@@ -246,7 +246,7 @@ ou est dans un format inconnu.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation>Erreur d&apos;Initialisation</translation>
+        <translation>Erreur d&apos;initialisation</translation>
     </message>
 </context>
 </TS>

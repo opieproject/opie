@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Reset the win ratio?</source>
-        <translation>Réinitialiser la moyenne?</translation>
+        <translation>Réinitialiser la moyenne ?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>

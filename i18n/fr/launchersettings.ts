@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation>&lt;b&gt;Note :&lt;/b&gt; Modifier ce paramêtre peut nécessiter le redémarrage d&apos;Opie pour qu&apos;il preinne effet.</translation>
+        <translation>&lt;b&gt;Note :&lt;/b&gt; Modifier ce paramètre peut nécessiter le redémarrage d&apos;Opie pour qu&apos;il preinne effet.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
@@ -46,7 +46,7 @@
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation>Paramètres du Bureau</translation>
+        <translation>Paramètres du bureau</translation>
     </message>
     <message>
         <source>Taskbar</source>
@@ -150,7 +150,7 @@
     </message>
     <message>
         <source>Use a custom font</source>
-        <translation>Personaliser la police</translation>
+        <translation>Personnaliser la police</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -265,7 +265,7 @@
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation>Activer l&apos;Indicateur d&apos;état &apos;occupé&apos;</translation>
+        <translation>Activer l&apos;indicateur d&apos;état &apos;occupé&apos;</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>

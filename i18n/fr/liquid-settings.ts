@@ -4,7 +4,7 @@
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Thème Liquide</translation>
+        <translation>Thème liquide</translation>
     </message>
     <message>
         <source>No translucency</source>

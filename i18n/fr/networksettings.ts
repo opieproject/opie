@@ -22,7 +22,7 @@
     <name>MainWindow</name>
     <message>
         <source>Network Settings</source>
-        <translation>Paramètres Réseau</translation>
+        <translation>Paramètres réseau</translation>
     </message>
     <message>
         <source>Connections</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>&amp;Set Current</source>
-        <translation>Par &amp;Défaut</translation>
+        <translation>Par &amp;défaut</translation>
     </message>
     <message>
         <source>Current Profile</source>
@@ -82,11 +82,11 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation>Nouveau Profil</translation>
+        <translation>Nouveau profil</translation>
     </message>
     <message>
         <source>A list of network settings to be choosen from</source>
-        <translation>Une liste de &apos;paramêtre de réseau&apos; sélectionnable</translation>
+        <translation>Une liste de paramêtre de réseau sélectionnable</translation>
     </message>
     <message>
         <source>Add a new interface to the list.</source>

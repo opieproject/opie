@@ -54,7 +54,7 @@
     <name>MediumMountSetting::MainWindow</name>
     <message>
         <source>Medium Mount Settings</source>
-        <translation>Options Montage Support</translation>
+        <translation>Options montage support</translation>
     </message>
     <message>
         <source>Global</source>
@@ -69,15 +69,15 @@
     </message>
     <message>
         <source>Enable medium checking</source>
-        <translation>Autoriser Vérification Support</translation>
+        <translation>Autoriser vérification support</translation>
     </message>
     <message>
         <source>Use global settings</source>
-        <translation>Utiliser les Options Globales</translation>
+        <translation>Utiliser les options globales</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation>Quels fichiers du media</translation>
+        <translation>Quels fichiers média</translation>
     </message>
     <message>
         <source>Audio</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Which media files</source>
-        <translation>Quels fichiers du média</translation>
+        <translation>Quels fichiers média</translation>
     </message>
     <message>
         <source>Audio</source>

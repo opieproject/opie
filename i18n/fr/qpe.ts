@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Time and Date</source>
-        <translation>Heure et Date</translation>
+        <translation>Heure et date</translation>
     </message>
     <message>
         <source>Personal Information</source>
-        <translation>Information Personnelle</translation>
+        <translation>Information personnelle</translation>
     </message>
     <message>
         <source>DocTab</source>
@@ -23,7 +23,7 @@
     <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation>Problème Application</translation>
+        <translation>Problème application</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
@@ -146,11 +146,11 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation>Status Batterie</translation>
+        <translation>Status batterie</translation>
     </message>
     <message>
         <source>Low Battery</source>
-        <translation>Batterie Faible</translation>
+        <translation>Batterie faible</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>FirstUseBackground</source>
-        <translation>Premier Arriere Plan</translation>
+        <translation>Premier arriere plan</translation>
     </message>
     <message>
         <source>Finish</source>
@@ -227,14 +227,14 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>View as text</source>
-        <translation>Aperçu en texte</translation>
+        <translation>Ouvrir avec l&apos;éditeur de texte</translation>
     </message>
 </context>
 <context>
     <name>LauncherTabWidget</name>
     <message>
         <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Recherche Documents...&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Recherche documents...&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Icon View</source>
@@ -246,7 +246,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
-        <translation>&lt;b&gt;L&apos;onglet Documents&lt;p&gt; a été désactivé.&lt;p&gt;Utilisez Paramètres-&gt;Lanceur-&gt;Onglet Document&lt;p&gt;pour le réactiver.&lt;/b&gt;&lt;/center&gt;</translation>
+        <translation>&lt;b&gt;L&apos;onglet Documents&lt;p&gt;a été désactivé.&lt;p&gt;Utilisez Paramètres-&gt;Lanceur-&gt;Onglet Document&lt;p&gt;pour le réactiver.&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -334,11 +334,11 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>SafeMode</name>
     <message>
         <source>Safe Mode</source>
-        <translation>Mode Sans Echec</translation>
+        <translation>Mode sans échec</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation>Gestionnaire Plugin...</translation>
+        <translation>Gestionnaire plugins...</translation>
     </message>
     <message>
         <source>Restart Qtopia</source>
@@ -383,7 +383,7 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>Safe Mode</source>
-        <translation>Mode Sans Echec</translation>
+        <translation>Mode sans échec</translation>
     </message>
     <message>
         <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
@@ -395,23 +395,23 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     </message>
     <message>
         <source>Plugin Manager...</source>
-        <translation>Gestionnaire Plugin...</translation>
+        <translation>Gestionnaire plugins...</translation>
     </message>
     <message>
         <source>Memory Status</source>
-        <translation>Status Mémoire</translation>
+        <translation>Status mémoire</translation>
     </message>
     <message>
         <source>Memory Low
 Please save data.</source>
-        <translation>Ressource Mémoire faible
+        <translation>Ressource mémoire faible
 Sauvegardez vos données.</translation>
     </message>
     <message>
         <source>Critical Memory Shortage
 Please end this application
 immediately.</source>
-        <translation>Ressource Mémoire Critique
+        <translation>Ressource mémoire critique!!!
 Vous devriez fermer cette
 application immédiatement.</translation>
     </message>
@@ -461,8 +461,7 @@ application immédiatement.</translation>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation>&lt;p&gt;
-Ces options sont destinés à être utilisées durant le développement et les tests du système Opie. Dans les conditions normales d&apos;utilisation, ces concepts ne sont pas nécessaires.</translation>
+        <translation>&lt;p&gt;Ces options sont destinés à être utilisées durant le développement et les tests du système Opie. Dans des conditions normales d&apos;utilisation, ces concepts ne sont pas nécessaires.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -477,7 +476,7 @@ Ces options sont destinés à être utilisées durant le développement et les t
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation>Sync Connexion</translation>
+        <translation>Connexion syncho</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
@@ -485,19 +484,19 @@ Ces options sont destinés à être utilisées durant le développement et les t
     </message>
     <message>
         <source>Deny</source>
-        <translation>Non authorisé</translation>
+        <translation>Refuser</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous venez juste de démarrer une Synchronisation pour la 1ere fois, c&apos;est normal.</translation>
+        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt; Si vous venez juste de démarrer une synchronisation pour la 1ère fois, c&apos;est normal.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation>Authorisé</translation>
+        <translation>Autoriser</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation>&lt;p&gt;Un systeme non authorisé demande l&apos;accès à ce périphérique.&lt;p&gt;Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus ancienne que la 1.5.1, vous devriez la mettre à jour ou changer les paramètres de sécurité pour utiliser IntelliSync.</translation>
+        <translation>&lt;p&gt;Un systeme non autorisé demande l&apos;accès à ce périphérique.&lt;p&gt;Si vous utiliser une version de &quot;Qtopia Desktop&quot; plus ancienne que la 1.5.1, vous devriez la mettre à jour ou changer les paramètres de sécurité pour utiliser IntelliSync.</translation>
     </message>
 </context>
 <context>
@@ -520,7 +519,7 @@ Ces options sont destinés à être utilisées durant le développement et les t
     </message>
     <message>
         <source>Syncing:</source>
-        <translation>Synchronisé : </translation>
+        <translation>Synchronise : </translation>
     </message>
 </context>
 </TS>

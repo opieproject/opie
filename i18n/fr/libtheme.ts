@@ -4,7 +4,7 @@
     <name>Styles</name>
     <message>
         <source>Themed style</source>
-        <translation>Style à Thème</translation>
+        <translation>Thème de style</translation>
     </message>
     <message>
         <source>KDE2 theme compatible style engine</source>
@@ -15,7 +15,7 @@
     <name>ThemeSettings</name>
     <message>
         <source>Theme Style</source>
-        <translation>Style Thème</translation>
+        <translation>Thème Style</translation>
     </message>
     <message>
         <source>Select the theme to be used</source>

@@ -4,19 +4,19 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation>Définir Touches / Applications</translation>
+        <translation>Définir les touches</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation>Carnet d&apos;Adresses</translation>
+        <translation>Contact</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Répertoire Personnel</translation>
+        <translation>Bureau</translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation>Menu Popup</translation>
+        <translation>Menu déroulant</translation>
     </message>
     <message>
         <source>Mail</source>

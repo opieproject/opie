@@ -4,7 +4,7 @@
     <name>Decoration</name>
     <message>
         <source>Flat</source>
-        <translation>Sans Relief</translation>
+        <translation>Sans relief</translation>
     </message>
 </context>
 </TS>

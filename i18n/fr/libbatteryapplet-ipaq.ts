@@ -4,7 +4,7 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status for Ipaq</source>
-        <translation>Niveau batterie de l&apos;iPaq</translation>
+        <translation>Niveau batterie de l&apos;appareil</translation>
     </message>
     <message>
         <source>Failure</source>

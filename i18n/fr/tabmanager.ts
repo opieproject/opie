@@ -37,7 +37,7 @@ qui contient encore des applications.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
@@ -72,7 +72,7 @@ qui contient encore des applications.</translation>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation>Gestion des Onglets</translation>
+        <translation>Gestion des onglets</translation>
     </message>
     <message>
         <source>Hierarchy</source>

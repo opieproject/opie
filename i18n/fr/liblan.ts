@@ -35,7 +35,7 @@ un nom différent.</translation>
     </message>
     <message>
         <source>Obtain TCP/IP Information Automatically</source>
-        <translation>Obtenir Automatiquement les Paramètres TCP/IP</translation>
+        <translation>Obtenir automatiquement les paramètres TCP/IP</translation>
     </message>
     <message>
         <source>TCP/IP</source>

@@ -4,7 +4,7 @@
     <name>CBarPrefs</name>
     <message>
         <source>Toolbar Settings</source>
-        <translation>Préférences Barre d&apos;Outil</translation>
+        <translation>Préférences barre d&apos;outil</translation>
     </message>
     <message>
         <source>File</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation>Défilement Auto</translation>
+        <translation>Défilement auto</translation>
     </message>
     <message>
         <source>Bookmark</source>
@@ -59,11 +59,11 @@
     </message>
     <message>
         <source>Zoom in</source>
-        <translation>Zoom Avant</translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation>Zoom Arrière</translation>
+        <translation>Zoom arrière</translation>
     </message>
     <message>
         <source>Back</source>
@@ -79,11 +79,11 @@
     </message>
     <message>
         <source>Page up</source>
-        <translation>Monter Page</translation>
+        <translation>Monter page</translation>
     </message>
     <message>
         <source>Page down</source>
-        <translation>Descendre Page</translation>
+        <translation>Descendre page</translation>
     </message>
     <message>
         <source>Line up</source>
@@ -103,35 +103,35 @@
     </message>
     <message>
         <source>Escape Button</source>
-        <translation>Bouton Echappement</translation>
+        <translation>Bouton échappement</translation>
     </message>
     <message>
         <source>Space Button</source>
-        <translation>Bouton Espace</translation>
+        <translation>Bouton espace</translation>
     </message>
     <message>
         <source>Return Button</source>
-        <translation>Bouton Retour Chariot</translation>
+        <translation>Bouton retour chariot</translation>
     </message>
     <message>
         <source>Left Arrow</source>
-        <translation>Flèche Gauche</translation>
+        <translation>Flèche gauche</translation>
     </message>
     <message>
         <source>Scroll Speed</source>
-        <translation>Vitesse Défilement</translation>
+        <translation>Vitesse défilement</translation>
     </message>
     <message>
         <source>Right Arrow</source>
-        <translation>Flèche Droite</translation>
+        <translation>Flèche droite</translation>
     </message>
     <message>
         <source>Down Arrow</source>
-        <translation>Flèche Bas</translation>
+        <translation>Flèche bas</translation>
     </message>
     <message>
         <source>Up Arrow</source>
-        <translation>Flèche Haut</translation>
+        <translation>Flèche haut</translation>
     </message>
 </context>
 <context>
@@ -146,11 +146,11 @@
     </message>
     <message>
         <source>Delete Bookmarks</source>
-        <translation>Supprimer Favoris</translation>
+        <translation>Supprimer les favoris</translation>
     </message>
     <message>
         <source>Delete Configuration</source>
-        <translation>Supprimer Configuration</translation>
+        <translation>Supprimer configuration</translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
         <source>Two/One
 Touch</source>
         <translation>Deux/Une
-Pression</translation>
+pression</translation>
     </message>
     <message>
         <source>Find</source>
@@ -197,13 +197,13 @@ Pression</translation>
     </message>
     <message>
         <source>Ideogram Width</source>
-        <translation>Largeur Ideograme</translation>
+        <translation>Largeur ideograme</translation>
     </message>
     <message>
         <source>Apply font
 to dialogs</source>
-        <translation>Appliquer fonte
-sur dialogues</translation>
+        <translation>Appliquer la police
+aux dialogues</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -225,13 +225,13 @@ sur dialogues</translation>
         <source>Two/One
 Touch</source>
         <translation>Deux/Une
-Pression</translation>
+pression</translation>
     </message>
     <message>
         <source>Swap Tap
 Actions</source>
-        <translation>Echange
-Actions</translation>
+        <translation>Permuter
+actions</translation>
     </message>
 </context>
 <context>
@@ -246,7 +246,7 @@ Actions</translation>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation>Espace Insécable</translation>
+        <translation>Espace insécable</translation>
     </message>
     <message>
         <source>Single Space</source>
@@ -270,7 +270,7 @@ Actions</translation>
     </message>
     <message>
         <source>Embolden</source>
-        <translation>Mettre en Gras</translation>
+        <translation>Mettre en gras</translation>
     </message>
     <message>
         <source>Full Justify</source>
@@ -287,13 +287,13 @@ Actions</translation>
         <source>Page
 Overlap</source>
         <translation>Recouvrement
-Page</translation>
+page</translation>
     </message>
     <message>
         <source>Graphics
 Zoom</source>
         <translation>Zoom sur
-Images</translation>
+images</translation>
     </message>
     <message>
         <source>Margin</source>
@@ -303,13 +303,13 @@ Images</translation>
         <source>Paragraph
 Leading</source>
         <translation>Entête de
-Paragraphe</translation>
+paragraphe</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
         <translation>Entête de
-Ligne</translation>
+ligne</translation>
     </message>
     <message>
         <source>Markup</source>
@@ -356,11 +356,11 @@ Ligne</translation>
     </message>
     <message>
         <source>Mark Block</source>
-        <translation>Marquer Bloc</translation>
+        <translation>Marquer bloc</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation>Copier Bloc</translation>
+        <translation>Copier bloc</translation>
     </message>
 </context>
 <context>
@@ -375,7 +375,7 @@ Ligne</translation>
     </message>
     <message>
         <source>Menu/tool bar</source>
-        <translation>Barre Menu/Outils</translation>
+        <translation>Barre menu/outils</translation>
     </message>
     <message>
         <source>Multiple bars</source>
@@ -410,7 +410,7 @@ Ligne</translation>
     <name>CMiscPrefs</name>
     <message>
         <source>Select Action</source>
-        <translation>Sélectionner Action</translation>
+        <translation>Sélectionner action</translation>
     </message>
     <message>
         <source>Annotation</source>
@@ -461,19 +461,19 @@ Ligne</translation>
     </message>
     <message>
         <source>Page Up</source>
-        <translation>Monter Page</translation>
+        <translation>Monter page</translation>
     </message>
     <message>
         <source>Page Down</source>
-        <translation>Descendre Page</translation>
+        <translation>Descendre page</translation>
     </message>
     <message>
         <source>Goto Start</source>
-        <translation>Aller au Début</translation>
+        <translation>Aller au début</translation>
     </message>
     <message>
         <source>Goto End</source>
-        <translation>Aller à la Fin</translation>
+        <translation>Aller à la fin</translation>
     </message>
     <message>
         <source>Jump</source>
@@ -539,15 +539,15 @@ page/ligne</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Zoom Avant</translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Zoom Arrière</translation>
+        <translation>Zoom arrière</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation>Choisir Police</translation>
+        <translation>Choisir police</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -731,11 +731,11 @@ page/ligne</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Zoom Avant</translation>
+        <translation>Zoom avant</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Zoom Arrière</translation>
+        <translation>Zoom arrière</translation>
     </message>
     <message>
         <source>Ideogram/Word</source>
@@ -775,7 +775,7 @@ page/ligne</translation>
     </message>
     <message>
         <source>Set Font</source>
-        <translation>Choisir Police</translation>
+        <translation>Choisir police</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -807,11 +807,11 @@ page/ligne</translation>
     </message>
     <message>
         <source>Start Block</source>
-        <translation>Début Bloc</translation>
+        <translation>Début bloc</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation>Copier Bloc</translation>
+        <translation>Copier bloc</translation>
     </message>
     <message>
         <source>File</source>
@@ -831,15 +831,15 @@ page/ligne</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Clore Recherche</translation>
+        <translation>Fermer recherche</translation>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation>EnregisterEnregister</translation>
+        <translation>Enregister</translation>
     </message>
     <message>
         <source>Close Edit</source>
-        <translation>Fermer Editer</translation>
+        <translation>Fermer éditer</translation>
     </message>
     <message>
         <source>View</source>
@@ -855,27 +855,27 @@ page/ligne</translation>
     </message>
     <message>
         <source>Save Config</source>
-        <translation>Enregister Config</translation>
+        <translation>Enregister config</translation>
     </message>
     <message>
         <source>Load Config</source>
-        <translation>Charger Config</translation>
+        <translation>Charger config</translation>
     </message>
     <message>
         <source>Delete Config</source>
-        <translation>Supprimer Config</translation>
+        <translation>Supprimer config</translation>
     </message>
     <message>
         <source>Toolbars</source>
-        <translation>Barre d&apos;Outils</translation>
+        <translation>Barre d&apos;outils</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation>Executer Script</translation>
+        <translation>Executer script</translation>
     </message>
     <message>
         <source>Export Links</source>
-        <translation>Exporter Liens</translation>
+        <translation>Exporter liens</translation>
     </message>
     <message>
         <source>Goto Start</source>
@@ -903,15 +903,15 @@ page/ligne</translation>
     </message>
     <message>
         <source>Set Target</source>
-        <translation>Fixer Cible</translation>
+        <translation>Cible</translation>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation>Pause Paras</translation>
+        <translation>Pause paras</translation>
     </message>
     <message>
         <source>Set Encoding</source>
-        <translation>Fixer Encodage</translation>
+        <translation>Encodage</translation>
     </message>
     <message>
         <source>Ideogram</source>

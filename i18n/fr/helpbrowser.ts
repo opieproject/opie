@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation>Ajouter favoris</translation>
+        <translation>Ajouter aux favoris</translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>

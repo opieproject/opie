@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>tasks shown</source>
-        <translation>taches affichées</translation>
+        <translation>tâches affichées</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>

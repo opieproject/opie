@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>A &amp;Propos</translation>
+        <translation>A &amp;propos</translation>
     </message>
     <message>
         <source>&amp;Help</source>

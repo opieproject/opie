@@ -22,7 +22,7 @@
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation>Editeur de Comptes</translation>
+        <translation>Editeur de comptes</translation>
     </message>
     <message>
         <source>Server</source>
@@ -46,11 +46,11 @@
     </message>
     <message>
         <source>&lt;b&gt;User:</source>
-        <translation>&lt;b&gt;Nom Utilisateur : </translation>
+        <translation>&lt;b&gt;Nom utilisateur : </translation>
     </message>
     <message>
         <source>&lt;b&gt;Pass:</source>
-        <translation>&lt;b&gt;Mot de Passe : </translation>
+        <translation>&lt;b&gt;Mot de passe : </translation>
     </message>
     <message>
         <source>Identity</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>&lt;b&gt;E-Mail:</source>
-        <translation>&lt;b&gt;E-Mail : </translation>
+        <translation>&lt;b&gt;E-mail : </translation>
     </message>
     <message>
         <source>&lt;b&gt;Org:</source>
@@ -82,7 +82,7 @@
     </message>
     <message>
         <source>Reply-To</source>
-        <translation>Adr. de Rép</translation>
+        <translation>Adr. de rép</translation>
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -136,7 +136,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -155,11 +155,11 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Set Description</source>
-        <translation>Fixer Description</translation>
+        <translation>Description</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Description</source>
@@ -175,7 +175,7 @@
     </message>
     <message>
         <source>Success</source>
-        <translation>Réussi avec succès</translation>
+        <translation>Succès</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
@@ -313,7 +313,7 @@
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Question</source>
@@ -416,7 +416,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Create folder</source>
-        <translation>Créer Dossier</translation>
+        <translation>Créer dossier</translation>
     </message>
     <message>
         <source>Rescan folder list</source>
@@ -432,7 +432,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Question</source>
@@ -452,7 +452,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Foldername</source>
-        <translation>Nom Dossier</translation>
+        <translation>Nom dossier</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
@@ -472,7 +472,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The IMAP connection was refused.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;La connection IMAP a été refusée.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;La connexion IMAP a été refusée.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The host was not found.&lt;/p&gt;</source>
@@ -496,11 +496,11 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Login successfull!</source>
-        <translation>Connection réussie !</translation>
+        <translation>Connexion réussie !</translation>
     </message>
     <message>
         <source>&lt;p&gt;Login failed. Go away.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Connection refusée. Allez voir ailleurs.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Connexion refusée. Allez voir ailleurs.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Renaming successfull!</source>
@@ -520,7 +520,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Folder created. Rescanning...</source>
-        <translation>Dossier créé. Réaffichage...</translation>
+        <translation>Dossier créé. Scanne...</translation>
     </message>
     <message>
         <source>&lt;p&gt;The folder could not be created. (Server said: %1)&lt;/p&gt;</source>
@@ -579,7 +579,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation>Supprimer Message</translation>
+        <translation>Supprimer message</translation>
     </message>
     <message>
         <source>Mailbox contained no mails.</source>
@@ -599,7 +599,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Stopped</source>
@@ -618,7 +618,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>MainWindowBase</name>
     <message>
         <source>E-Mail</source>
-        <translation>E-Mail</translation>
+        <translation>E-mail</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -775,7 +775,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a folder.&lt;/p&gt;</source>
@@ -810,7 +810,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>SearchDiagBase</name>
     <message>
         <source>Mail Search</source>
-        <translation>Recherche Message</translation>
+        <translation>Rechercher message</translation>
     </message>
     <message>
         <source>&lt;b&gt;Search&amp;nbsp;in:</source>
@@ -818,7 +818,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>&lt;b&gt;For:</source>
-        <translation>Texte : </translation>
+        <translation>&lt;b&gt;Texte : </translation>
     </message>
 </context>
 <context>
@@ -865,7 +865,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
@@ -880,7 +880,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation>E-Mail de %1</translation>
+        <translation>E-mail de %1</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -900,7 +900,7 @@ Visitez http://www.lisa.de/ pour plus d&apos;informations.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation>Supprimer Message</translation>
+        <translation>Supprimer message</translation>
     </message>
 </context>
 </TS>

@@ -38,18 +38,18 @@
     </message>
     <message>
         <source>New Category</source>
-        <translation>Nouvelle Catégorie</translation>
+        <translation>Nouvelle catégorie</translation>
     </message>
     <message>
         <source>New Category </source>
-        <translation>Nouvelle Catégorie</translation>
+        <translation>Nouvelle catégorie</translation>
     </message>
 </context>
 <context>
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation>Edition des Catégories</translation>
+        <translation>Edition des catégories</translation>
     </message>
     <message>
         <source>Categories</source>
@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation>Les Catégories vont ici</translation>
+        <translation>Les catégories vont ici</translation>
     </message>
     <message>
         <source>Add</source>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation>Cochez les catégories auxquelles ce document appartient.</translation>
+        <translation>Cochez les catégories auquelles ce document appartient.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
@@ -117,7 +117,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
-        <translation>Editer Catégories</translation>
+        <translation>Editer catégories</translation>
     </message>
     <message>
         <source>All</source>
@@ -189,7 +189,7 @@ de cette liste</translation>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation>Trouver</translation>
+        <translation>Rechercher</translation>
     </message>
 </context>
 <context>
@@ -207,11 +207,11 @@ de cette liste</translation>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation>Trouver</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation>Trouver : </translation>
+        <translation>Rechercher : </translation>
     </message>
     <message>
         <source>Category:</source>
@@ -270,7 +270,7 @@ de cette liste</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation>Disque Dur</translation>
+        <translation>Disque dur</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -338,7 +338,7 @@ de cette liste</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation>Emettre ce document vers un autre dispositif.</translation>
+        <translation>Transmettre ce document à un autre dispositif.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
@@ -349,7 +349,7 @@ de cette liste</translation>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation>Information Propriétaire</translation>
+        <translation>Information propriétaire</translation>
     </message>
 </context>
 <context>
@@ -609,7 +609,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Fichier Sous</translation>
+        <translation>Fichier sous</translation>
     </message>
     <message>
         <source>Job Title</source>
@@ -637,11 +637,11 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Email par Défaut</translation>
+        <translation>E-mail par Défaut</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Emails</translation>
+        <translation>E-mails</translation>
     </message>
     <message>
         <source>Home Phone</source>
@@ -733,7 +733,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Date de Naissance</translation>
+        <translation>Date de naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
@@ -757,7 +757,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation>Nouveau Document</translation>
+        <translation>Nouveau document</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -935,7 +935,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation>Disque Dur</translation>
+        <translation>Disque dur</translation>
     </message>
     <message>
         <source>SD Card</source>
@@ -943,15 +943,15 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation>Disque Dur SCSI</translation>
+        <translation>Disque dur SCSI</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation>Disque Interne</translation>
+        <translation>Disque interne</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation>Mémoire Interne</translation>
+        <translation>Mémoire interne</translation>
     </message>
     <message>
         <source>MMC Card</source>
@@ -983,7 +983,7 @@ installez &quot;Heure de Ville&quot; SVP.</translation>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation>Plus de Mémoire</translation>
+        <translation>Plus de mémoire</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.

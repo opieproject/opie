@@ -3,11 +3,11 @@
     <name>OpieTooth::BluezApplet</name>
     <message>
         <source>Disable Bluetooth</source>
-        <translation>Désactiver Bluetooth</translation>
+        <translation>Désactiver bluetooth</translation>
     </message>
     <message>
         <source>Enable Bluetooth</source>
-        <translation>Activer Bluetooth</translation>
+        <translation>Activer bluetooth</translation>
     </message>
     <message>
         <source>Launch manager</source>

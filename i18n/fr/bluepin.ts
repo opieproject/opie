@@ -27,11 +27,11 @@
     <name>QObject</name>
     <message>
         <source>Outgoing connection to </source>
-        <translation>Connection à </translation>
+        <translation>Connexion à </translation>
     </message>
     <message>
         <source>Incoming connection from </source>
-        <translation>Connection entrante de </translation>
+        <translation>Connexon entrante de </translation>
     </message>
 </context>
 </TS>

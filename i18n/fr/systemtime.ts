@@ -87,7 +87,7 @@
     <message>
         <source>Running:
 ntpdate </source>
-        <translation>Exécution:
+        <translation>Exécution de :
 ntpdate</translation>
     </message>
     <message>
@@ -122,7 +122,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation>Vous avez demandé un delai de %1 minutes, mais seulement %2 minutes se sont écoulés.&lt;br&gt;Continuer ?</translation>
+        <translation>Vous avez demandé un délai de %1 minutes, mais seulement %2 minutes se sont écoulées.&lt;br&gt;Continuer ?</translation>
     </message>
     <message>
         <source>%1 seconds</source>

@@ -24,11 +24,11 @@
     </message>
     <message>
         <source>Specify &amp;Access Point</source>
-        <translation>Spécifier le point d&apos;&amp;Accès</translation>
+        <translation>Spécifier le point d&apos;&amp;accès</translation>
     </message>
     <message>
         <source>Specify &amp;Channel</source>
-        <translation>Spcifier le &amp;Canal</translation>
+        <translation>Spécifier le &amp;canal</translation>
     </message>
     <message>
         <source>Auto</source>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation>&amp;Rejeté</translation>
+        <translation>&amp;Rejeter</translation>
     </message>
 </context>
 <context>

@@ -27,27 +27,27 @@
     <name>EditAccount</name>
     <message>
         <source>Edit Account</source>
-        <translation>Editer Compte</translation>
+        <translation>Editer compte</translation>
     </message>
     <message>
         <source>Create new Account</source>
-        <translation>Créer Nouveau Compte</translation>
+        <translation>Créer nouveau compte</translation>
     </message>
     <message>
         <source>Account name</source>
-        <translation>Nom du Compte</translation>
+        <translation>Nom du compte</translation>
     </message>
     <message>
         <source>Your name</source>
-        <translation>Votre Nom</translation>
+        <translation>Votre nom</translation>
     </message>
     <message>
         <source>Email</source>
-        <translation>Adresse Email</translation>
+        <translation>Adresse e-mail</translation>
     </message>
     <message>
         <source>POP username</source>
-        <translation>Nom Utilisateur
+        <translation>Nom utilisateur
 POP</translation>
     </message>
     <message>
@@ -70,7 +70,7 @@ POP</translation>
     <message>
         <source>Mail Size (k)</source>
         <translation>Taille
-Message (Ko)</translation>
+message (Ko)</translation>
     </message>
 </context>
 <context>
@@ -89,7 +89,7 @@ Message (Ko)</translation>
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation>Recevoir Messages</translation>
+        <translation>Recevoir messages</translation>
     </message>
     <message>
         <source>Edit account</source>
@@ -211,7 +211,7 @@ Vérifiez le nom d&apos;utilisateur et le mot de passe&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Mailit ! No account defined</source>
-        <translation>Aucun compte Défini</translation>
+        <translation>Aucun compte défini</translation>
     </message>
     <message>
         <source>Delete account:
@@ -280,7 +280,7 @@ Voulez-vous le faire maintenant ?</translation>
     </message>
     <message>
         <source>Read Mail</source>
-        <translation>Lire Message</translation>
+        <translation>Lire message</translation>
     </message>
 </context>
 <context>
@@ -475,7 +475,7 @@ Cliquez et garder la pression pour plus d&apos;options.</translation>
     </message>
     <message>
         <source>Connection established</source>
-        <translation>Connection établie</translation>
+        <translation>Connexion établie</translation>
     </message>
     <message>
         <source>Sending: </source>
@@ -649,7 +649,7 @@ adresses E-Mails valides</translation>
     </message>
     <message>
         <source>EMail</source>
-        <translation>E-Mail</translation>
+        <translation>E-mail</translation>
     </message>
 </context>
 </TS>

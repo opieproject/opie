@@ -54,18 +54,18 @@
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation>Sélection Liste</translation>
+        <translation>Sélection de liste</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur Opie</translation>
+        <translation>OpiePlayer</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation>Opérations de Lecture</translation>
+        <translation>Opérations de lecture</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation>Enregister Liste</translation>
+        <translation>Enregister liste</translation>
     </message>
     <message>
         <source>View</source>
@@ -149,7 +149,7 @@ lors du prochain démarrage.</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation>Fichier Non Valide</translation>
+        <translation>Fichier non valide</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
@@ -171,7 +171,7 @@ Continuer ?</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation>Supprimer la Liste ?</translation>
+        <translation>Supprimer la liste ?</translation>
     </message>
     <message>
         <source>You really want to delete
@@ -181,7 +181,7 @@ cette liste ?</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation>Jouer la Séléction</translation>
+        <translation>Jouer la séléction</translation>
     </message>
     <message>
         <source>Title</source>
@@ -209,11 +209,11 @@ cette liste ?</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation>Lecteur Opie :</translation>
+        <translation>OpiePlayer :</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation>Enregister Liste</translation>
+        <translation>Enregister liste</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -224,7 +224,7 @@ cette liste ?</translation>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation>Lecteur Opie</translation>
+        <translation>OpiePlayer</translation>
     </message>
 </context>
 </TS>

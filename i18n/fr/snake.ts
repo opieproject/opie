@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>New Game</source>
-        <translation>Nouveau Jeu</translation>
+        <translation>Nouveau jeu</translation>
     </message>
     <message>
         <source>SNAKE!</source>

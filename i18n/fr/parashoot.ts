@@ -21,7 +21,7 @@
         Accuracy: %3% </source>
         <translation>Fin de partie !
 Votre score : %1
-Parachutistes tués : %2
+Parachutistes éliminés : %2
 Précision : %3%</translation>
     </message>
 </context>

@@ -16,19 +16,19 @@
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation>Désactiver la Recherche</translation>
+        <translation>Désactiver la recherche</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation>Activer la Recherche</translation>
+        <translation>Activer la recherche</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation>Désactiver la Réception</translation>
+        <translation>Désactiver la réception</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation>Activer la Réception</translation>
+        <translation>Activer la réception</translation>
     </message>
     <message>
         <source>Found:</source>

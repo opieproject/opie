@@ -16,19 +16,19 @@
     </message>
     <message>
         <source>Molecular Weight</source>
-        <translation>Masse Molaire</translation>
+        <translation>Masse molaire</translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation>Formule Chimique</translation>
+        <translation>Formule chimique</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation>Masse Molaire (u):</translation>
+        <translation>Masse molaire (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>Composition Elementaire (%) : </translation>
+        <translation>Composition élémentaire (%) : </translation>
     </message>
 </context>
 <context>
@@ -549,7 +549,7 @@
     <name>PSEWidget</name>
     <message>
         <source>Periodic System</source>
-        <translation>Tableau Périodique</translation>
+        <translation>Tableau périodique</translation>
     </message>
 </context>
 <context>
@@ -565,7 +565,7 @@
     <name>dataWidgetUI</name>
     <message>
         <source>Chemical Data</source>
-        <translation>Données Chimiques</translation>
+        <translation>Données chimiques</translation>
     </message>
     <message>
         <source>Hydrogen</source>

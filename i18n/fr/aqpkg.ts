@@ -142,11 +142,11 @@
         <source>
 **** User Clicked ABORT ***</source>
         <translation>
-** Opération Annuler l&apos;Utilisateur **</translation>
+**  L&apos;utilisateur à annuler l&apos;opération **</translation>
     </message>
     <message>
         <source>**** Process Aborted ****</source>
-        <translation>** Processus Annulé **</translation>
+        <translation>** Processus annulé **</translation>
     </message>
     <message>
         <source>%1 Kb</source>
@@ -200,23 +200,23 @@
     </message>
     <message>
         <source>Force Depends</source>
-        <translation>Forcer les Dépendances</translation>
+        <translation>Forcer les dépendances</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation>Forcer la Réinstallation</translation>
+        <translation>Forcer la réinstallation</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation>Forcer la Suppression</translation>
+        <translation>Forcer la suppression</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation>Forcer la Ré-écriture</translation>
+        <translation>Forcer la ré-écriture</translation>
     </message>
     <message>
         <source>Information Level</source>
-        <translation>Niveau d&apos;Information</translation>
+        <translation>Niveau d&apos;information</translation>
     </message>
     <message>
         <source>Errors only</source>
@@ -249,11 +249,11 @@
     </message>
     <message>
         <source>Creating symbolic links for %1.</source>
-        <translation>Creation de liens symboliques pour %1.</translation>
+        <translation>Création de liens symboliques pour %1.</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1</source>
-        <translation>Creation de liens symboliques pour %1</translation>
+        <translation>Création de liens symboliques pour %1</translation>
     </message>
     <message>
         <source>Finished</source>
@@ -297,7 +297,7 @@
     </message>
     <message>
         <source>Failed to link %1 to %2</source>
-        <translation>Erreur lors du lien de %1 sur %2</translation>
+        <translation>Erreur de création du lien de %1 vers %2</translation>
     </message>
     <message>
         <source>Removed %1</source>
@@ -600,7 +600,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Installer Paquet Distant</translation>
+        <translation>Installer paquet distant</translation>
     </message>
     <message>
         <source>Enter package location</source>
@@ -626,7 +626,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Remove or ReInstall</source>
-        <translation>Enlever ou Réinstaller</translation>
+        <translation>Enlever ou réinstaller</translation>
     </message>
     <message>
         <source>ReInstall</source>
@@ -644,7 +644,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Remove or Upgrade</source>
-        <translation>Enlever ou Mettre à jour</translation>
+        <translation>Enlever ou mettre à jour</translation>
     </message>
     <message>
         <source>U</source>
@@ -652,7 +652,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Updating Launcher...</source>
-        <translation>Mise à jour du Bureau...</translation>
+        <translation>Mise à jour du bureau...</translation>
     </message>
 </context>
 <context>
@@ -675,19 +675,19 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Nom Fichier&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Nom fichier&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Version Installée&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Version installée&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation>&lt;p&gt;&lt;b&gt;Version Disponible&lt;/b&gt; - </translation>
+        <translation>&lt;p&gt;&lt;b&gt;Version disponible&lt;/b&gt; - </translation>
     </message>
     <message>
         <source>Package Information</source>
-        <translation>Information Paquet</translation>
+        <translation>Information paquet</translation>
     </message>
     <message>
         <source>Package information is unavailable</source>
@@ -899,7 +899,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation>Nom Utilisateur : </translation>
+        <translation>Nom utilisateur : </translation>
     </message>
     <message>
         <source>Password:</source>

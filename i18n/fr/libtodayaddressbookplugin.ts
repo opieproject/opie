@@ -4,7 +4,7 @@
     <name>AddressBookPluginConfig</name>
     <message>
         <source>Max Lines: </source>
-        <translation>Lignes Max:</translation>
+        <translation>Lignes max:</translation>
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation>Couleurs des Titres : </translation>
+        <translation>Couleurs des titres : </translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation>Couleur des Entrées : </translation>
+        <translation>Couleur des entrées : </translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
@@ -49,8 +49,8 @@
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation>Défini Couleur
-d&apos;Urgence</translation>
+        <translation>Défini couleur
+d&apos;urgence</translation>
     </message>
     <message>
         <source> days: </source>
@@ -59,11 +59,11 @@ jours</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>
-        <translation>Couleur utilisé si l&apos;évènement est proche !</translation>
+        <translation>Couleur utilisé si l&apos;événement est proche !</translation>
     </message>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
-        <translation>La Couleur d&apos;Urgence est utilisée si les dates sont plus proches que le nombre défini de jours !</translation>
+        <translation>La couleur d&apos;urgence est utilisée si les dates sont plus proches que le nombre défini de jours !</translation>
     </message>
     <message>
         <source>Enable/Disable Views</source>
@@ -71,11 +71,11 @@ jours</translation>
     </message>
     <message>
         <source>Show &amp;Birthdays</source>
-        <translation>Afficher &amp;Date de Naissance</translation>
+        <translation>Afficher &amp;date de naissance</translation>
     </message>
     <message>
         <source>Show &amp;Anniveraries</source>
-        <translation>Afficher &amp;Anniversaires</translation>
+        <translation>Afficher &amp;anniversaires</translation>
     </message>
     <message>
         <source>The next birthdays will just be shown, if enabled!</source>

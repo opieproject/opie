@@ -4,11 +4,11 @@
     <name>ButtonSettings</name>
     <message>
         <source>Button Settings</source>
-        <translation>Définition des Boutons</translation>
+        <translation>Définition des boutons</translation>
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation>&lt;center&gt;Pressez et gardez appuyé le bouton que vous désirez reconfigurer.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Pressez ou pressez et maintenez appuyé le bouton que vous désirez reconfigurer.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Beam VCard</source>
-        <translation>Emission vCard</translation>
+        <translation>Transmettre vCard</translation>
     </message>
     <message>
         <source>Send eMail</source>
-        <translation>Envoyer Courrier</translation>
+        <translation>Envoyer courrier</translation>
     </message>
     <message>
         <source>Toggle Menu</source>
@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Show Desktop</source>
-        <translation>Afficher Bureau</translation>
+        <translation>Afficher bureau</translation>
     </message>
     <message>
         <source>Toggle Recording</source>
-        <translation>Sélectionner Enregistrement</translation>
+        <translation>Sélectionner enregistrement</translation>
     </message>
     <message>
         <source>&lt;nobr&gt;Ignored&lt;/nobr&gt;</source>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>Held</source>
-        <translation>Gardé</translation>
+        <translation>Maintenu</translation>
     </message>
     <message>
         <source>Pressed</source>

@@ -118,14 +118,14 @@
     </message>
     <message>
         <source>Stop Slideshow</source>
-        <translation>Arrêter Diaporama</translation>
+        <translation>Arrêter diaporama</translation>
     </message>
 </context>
 <context>
     <name>InfoDialog</name>
     <message>
         <source>File Name</source>
-        <translation>Nom Fichier</translation>
+        <translation>Nom fichier</translation>
     </message>
     <message>
         <source>Format</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>File Size</source>
-        <translation>Taille Fichier</translation>
+        <translation>Taille fichier</translation>
     </message>
     <message>
         <source>Size</source>

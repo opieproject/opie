@@ -4,7 +4,7 @@
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation>Configuration Avancée</translation>
+        <translation>Configuration avancée</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
