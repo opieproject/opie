@@ -33,7 +33,8 @@ int main( int argc, char ** argv )
     int retval = 0;
 
 #ifdef QWS
-    if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+    if ( QWSServer::mouseHandler() &&
+         QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
 #endif
 	// Make sure calibration widget starts on top.
 	Calibrate cal;

@@ -107,7 +107,7 @@ int main ( int argc, char **argv )
 	::setpgid ( 0, 0 );
 	::setsid ( );
 
-	::signal ( SIGTERM, sigterm );	
+	::signal ( SIGTERM, sigterm );
 	::signal ( SIGINT, sigterm );
 
 	::openlog ( "opie-login", LOG_CONS, LOG_AUTHPRIV );
@@ -160,7 +160,7 @@ int main ( int argc, char **argv )
 			}
 			if ( killedbysig ) {  // qpe was killed by an uncaught signal
 				qApp = 0;
-				
+
 				::syslog ( LOG_ERR, "Opie was killed by a signal #%d", killedbysig );
 
 				QWSServer::setDesktopBackground ( QImage ( ));
@@ -187,11 +187,11 @@ int main ( int argc, char **argv )
 				Config cfg ( confFile, Config::File );
 				cfg. setGroup ( "General" );
 				QString user = cfg. readEntry ( "AutoLogin" );
-				
+
 				if ( !user. isEmpty ( ))
 					autolog = ::strdup ( user. latin1 ( ));
 			}
-		
+
 			if ( autolog && !userExited ) {
 
                 QWSServer::setDesktopBackground( QImage() );
@@ -199,7 +199,7 @@ int main ( int argc, char **argv )
                 ODevice::inst ( )-> setSoftSuspend ( false );
                 LoginApplication *app = new LoginApplication ( argc, argv, ppid );
                 LoginApplication::setLoginAs ( autolog );
-  
+
 
 				if ( LoginApplication::changeIdentity ( ))
 					::exit ( LoginApplication::login ( ));
@@ -340,7 +340,8 @@ int login_main ( int argc, char **argv, pid_t ppid )
 
 	ODevice::inst ( )-> setSoftSuspend ( true );
 
-	if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+	if ( QWSServer::mouseHandler() &&
+             QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
 		if ( !QFile::exists ( "/etc/pointercal" )) {
 			// Make sure calibration widget starts on top.
 			Calibrate *cal = new Calibrate;
