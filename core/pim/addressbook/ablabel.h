@@ -56,6 +56,8 @@ private:
     OContactAccess::List m_viewList;
     OContactAccess::List::Iterator m_itCurContact;
 
+    bool m_empty;
+
 };
 
 #endif // ABLABEL_H

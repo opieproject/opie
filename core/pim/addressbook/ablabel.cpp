@@ -26,7 +26,8 @@
 #include <qstylesheet.h>
 
 AbLabel::AbLabel( QWidget *parent, const char *name ): 
-	QTextView( parent, name )
+	QTextView( parent, name ),
+	m_empty( false )
 {
 }
 
@@ -38,10 +39,12 @@ void AbLabel::setContacts( const OContactAccess::List& viewList )
 {
 	m_viewList = viewList;
 	if (m_viewList.count() != 0){
+		m_empty = false;
 		m_itCurContact = m_viewList.begin();
 		sync();
 	}else{
 		// m_itCurContact.clear();
+		m_empty = true;
 		setText( "" );
 	}
 }
@@ -80,32 +83,34 @@ void AbLabel::sync()
 void AbLabel::keyPressEvent( QKeyEvent *e )
 {
 	// Commonly handled keys
-	switch( e->key() ) {
-	case Qt::Key_Left:
-		qWarning( "Left..");
-	case Qt::Key_Right:
-		qWarning( "Right..");
-	case Qt::Key_F33:
-		qWarning( "OK..");
-		emit signalOkPressed();
-		break;
-	case Qt::Key_Up:
-		qWarning( "UP..");
-		--m_itCurContact;
-		if ( *m_itCurContact != OContact() )
-			sync();
-		else
-			m_itCurContact = m_viewList.end();
-		
-		break;
-	case Qt::Key_Down:
-		qWarning( "DOWN..");
-		++m_itCurContact;
-		if ( *m_itCurContact != OContact() )
-			sync();
-		else
-			m_itCurContact = m_viewList.begin();
-		break;
+	if ( !m_empty ){
+		switch( e->key() ) {
+		case Qt::Key_Left:
+			qWarning( "Left..");
+		case Qt::Key_Right:
+			qWarning( "Right..");
+		case Qt::Key_F33:
+			qWarning( "OK..");
+			emit signalOkPressed();
+			break;
+		case Qt::Key_Up:
+			qWarning( "UP..");
+			--m_itCurContact;
+			if ( *m_itCurContact != OContact() )
+				sync();
+			else
+				m_itCurContact = m_viewList.end();
+			
+			break;
+		case Qt::Key_Down:
+			qWarning( "DOWN..");
+			++m_itCurContact;
+			if ( *m_itCurContact != OContact() )
+				sync();
+			else
+				m_itCurContact = m_viewList.begin();
+			break;
+		}
 	}
 
 }

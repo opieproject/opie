@@ -12,8 +12,6 @@ Feature requests:
 
 Known Bugs:
 -----------
-- If in Cardview and a category change removes all entries: 
-	There are already entries in Cardview after up/down
 - OK-Key does not switch from Detailview (ablable) to Listview
 
 Bugs but not in addressbook:
@@ -24,11 +22,15 @@ Bugs but not in addressbook:
 
 Urgent:
 --------
-Important:
 - Contact-Editor is temporarely reanabled. Wait for replacement.
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
 - Name order selected in "contacteditor" not used in list view.
+- Category is on the wrong position after changing to personal and back to normal
+
+
+Important:
+----------
 
 - After search (Started with Return): KeyFocus should be on Tabelle
 - Searchwidget closed: Selected user is jumping
@@ -36,19 +38,20 @@ Important:
 	zu lange..
 
 - IRDA Receive: Contact is added, but start of editor with new entry expected..
-
-- Overview window cleanup needed..
-- Reload if contacts were changed externally
 - "What's this" should be added (Deleyed after Feature Freeze)
 
 Less important:
 ---------------
+- Reload if contacts were changed externally
+- Overview window cleanup needed..
 - The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
 - Find a smart solution for activating/deactivating the "send email" event
 
 Should be Fixed (not absolute sure, need further validation):
 -------------------------------------------------------------
+
+- Unfiled shown just in Category "All" and "Unfiled". 
 
 Fixed:
 -------
@@ -80,3 +83,5 @@ Fixed:
 - Personal Details not working
 - If category changed, the letterpicker should be resetted
 - There should be some icons for List and Cardview
+- If in Cardview and a category change removes all entries: 
+	There are already entries in Cardview after up/down

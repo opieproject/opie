@@ -357,7 +357,8 @@ bool AbView::contactCompare( const OContact &cnt, int category )
 	qWarning ("Number of categories: %d", cats.count() );
 
 	returnMe = false;
-	if ( cats.count() == 0  )
+	if ( cats.count() == 0 && category == 0 )
+		// Contacts with no category will just shown on "All" and "Unfiled"
 		returnMe = true;
 	else {
 		int i;
