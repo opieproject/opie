@@ -31,6 +31,8 @@
 
 /* OPIE */
 #include <opie2/opimcontact.h>
+#include <opie2/odebug.h>
+
 #include <qpe/config.h>
 
 /* QT */
@@ -442,7 +444,7 @@ OPimContactFields::~OPimContactFields()
 void OPimContactFields::saveToRecord( OPimContact &cnt )
 {
 
-    qDebug( "ocontactfields saveToRecord: >%s<", fieldOrder.latin1() );
+    odebug << "ocontactfields saveToRecord: >" << fieldOrder << "<" << oendl;
 
     // Store fieldorder into this contact.
     cnt.setCustomField( CONTACT_FIELD_ORDER_NAME, fieldOrder );
@@ -454,15 +456,15 @@ void OPimContactFields::saveToRecord( OPimContact &cnt )
 
 void OPimContactFields::loadFromRecord( const OPimContact &cnt )
 {
-    qDebug( "ocontactfields loadFromRecord" );
-    qDebug( "loading >%s<", cnt.fullName().latin1() );
+    odebug << "ocontactfields loadFromRecord" << oendl;
+    odebug << "loading >" << cnt.fullName() << "<" << oendl;
 
     // Get fieldorder for this contact. If none is defined,
     // we will use the global one from the config file..
 
     fieldOrder = cnt.customField( CONTACT_FIELD_ORDER_NAME );
 
-    qDebug( "fieldOrder from contact>%s<", fieldOrder.latin1() );
+    odebug << "fieldOrder from contact>" << fieldOrder << "<" << oendl;
 
     if ( fieldOrder.isEmpty() )
     {
@@ -470,12 +472,12 @@ void OPimContactFields::loadFromRecord( const OPimContact &cnt )
     }
 
 
-    qDebug( "effective fieldOrder in loadFromRecord >%s<", fieldOrder.latin1() );
+    odebug << "effective fieldOrder in loadFromRecord >" << fieldOrder << "<" << oendl;
 }
 
 void OPimContactFields::setFieldOrder( int num, int index )
 {
-    qDebug( "qcontactfields setfieldorder pos %i -> %i", num, index );
+    odebug << "qcontactfields setfieldorder pos " << num << " -> " << index << "" << oendl;
 
     fieldOrder[ num ] = QString::number( index, 16 ) [ 0 ];
 
@@ -484,13 +486,13 @@ void OPimContactFields::setFieldOrder( int num, int index )
     globalFieldOrder = fieldOrder;
     changedFieldOrder = true;
 
-    qDebug( "fieldOrder >%s<", fieldOrder.latin1() );
+    odebug << "fieldOrder >" << fieldOrder << "<" << oendl;
 }
 
 int OPimContactFields::getFieldOrder( int num, int defIndex )
 {
-    qDebug( "ocontactfields getFieldOrder" );
-    qDebug( "fieldOrder >%s<", fieldOrder.latin1() );
+    odebug << "ocontactfields getFieldOrder" << oendl;
+    odebug << "fieldOrder >" << fieldOrder << "<" << oendl;
 
     // Get index of combo as char..
     QChar poschar = fieldOrder[ num ];
@@ -507,7 +509,7 @@ int OPimContactFields::getFieldOrder( int num, int defIndex )
     // num was not set or if anything else happened..
     if ( !ok ) ret = defIndex;
 
-    qDebug( "returning >%i<", ret );
+    odebug << "returning >" << ret << "<" << oendl;
 
     return ret;
 

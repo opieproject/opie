@@ -26,6 +26,23 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
+
+/* OPIE */
+#include <opie2/opimnotifymanager.h>
+#include <opie2/opimrecurrence.h>
+#include <opie2/opimtimezone.h>
+#include <opie2/odatebookaccessbackend_xml.h>
+#include <opie2/odebug.h>
+
+#include <qtopia/global.h>
+#include <qtopia/stringutil.h>
+#include <qtopia/timeconversion.h>
+
+/* QT */
+#include <qasciidict.h>
+#include <qfile.h>
+
+/* STD */
 #include <errno.h>
 #include <fcntl.h>
 
@@ -38,17 +55,6 @@
 
 #include <unistd.h>
 
-#include <qasciidict.h>
-#include <qfile.h>
-
-#include <qtopia/global.h>
-#include <qtopia/stringutil.h>
-#include <qtopia/timeconversion.h>
-
-#include <opie2/opimnotifymanager.h>
-#include <opie2/opimrecurrence.h>
-#include <opie2/opimtimezone.h>
-#include <opie2/odatebookaccessbackend_xml.h>
 
 using namespace Opie;
 
@@ -59,21 +65,21 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
     char needleChar;
     char haystackChar;
     if (!needle || !haystack || !hLen || !nLen)
-	return 0;
+    return 0;
 
     const char* hsearch = haystack;
 
     if ((needleChar = *needle++) != 0) {
-	nLen--; //(to make up for needle++)
-	do {
-	    do {
-		if ((haystackChar = *hsearch++) == 0)
-		    return (0);
-		if (hsearch >= haystack + hLen)
-		    return (0);
-	    } while (haystackChar != needleChar);
-	} while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
-	hsearch--;
+    nLen--; //(to make up for needle++)
+    do {
+        do {
+        if ((haystackChar = *hsearch++) == 0)
+            return (0);
+        if (hsearch >= haystack + hLen)
+            return (0);
+        } while (haystackChar != needleChar);
+    } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
+    hsearch--;
     }
     return ((char *)hsearch);
 }
@@ -96,18 +102,18 @@ namespace {
         FCategories,
         FUid,
         FType,
-	FAlarm,
-	FSound,
-	FRType,
-	FRWeekdays,
-	FRPosition,
-	FRFreq,
-	FRHasEndDate,
-	FREndDate,
-	FRStart,
-	FREnd,
-	FNote,
-	FCreated,      // Should't this be called FRCreated ?
+    FAlarm,
+    FSound,
+    FRType,
+    FRWeekdays,
+    FRPosition,
+    FRFreq,
+    FRHasEndDate,
+    FREndDate,
+    FRStart,
+    FREnd,
+    FNote,
+    FCreated,      // Should't this be called FRCreated ?
         FTimeZone,
         FRecParent,
         FRecChildren,
@@ -116,7 +122,7 @@ namespace {
 
     // FIXME: Use OPimEvent::toMap() here !! (eilers)
     inline void save( const OPimEvent& ev, QString& buf ) {
-        qWarning("Saving %d %s", ev.uid(), ev.description().latin1() );
+        owarn << "Saving " << ev.uid() << " " << ev.description() << "" << oendl;
         buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
         if (!ev.location().isEmpty() )
             buf += " location=\"" + Qtopia::escapeString(ev.location() ) + "\"";
@@ -125,7 +131,7 @@ namespace {
         buf += " uid=\"" + QString::number( ev.uid() ) + "\"";
 
         if (ev.isAllDay() )
-		buf += " type=\"AllDay\""; // is that all ?? (eilers)
+        buf += " type=\"AllDay\""; // is that all ?? (eilers)
 
         if (ev.hasNotifiers() ) {
             OPimAlarm alarm = ev.notifiers().alarms()[0]; // take only the first
@@ -419,46 +425,46 @@ bool ODateBookAccessBackend_XML::loadFile() {
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-		++i;
-	    if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-		break;
+        ++i;
+        if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
+        break;
 
 
-	    // we have another attribute, read it.
-	    int j = i;
-	    while ( j < len && dt[j] != '=' )
-		++j;
-	    QCString attr( dt+i, j-i+1);
+        // we have another attribute, read it.
+        int j = i;
+        while ( j < len && dt[j] != '=' )
+        ++j;
+        QCString attr( dt+i, j-i+1);
 
-	    i = ++j; // skip =
+        i = ++j; // skip =
 
-	    // find the start of quotes
-	    while ( i < len && dt[i] != '"' )
-		++i;
-	    j = ++i;
+        // find the start of quotes
+        while ( i < len && dt[i] != '"' )
+        ++i;
+        j = ++i;
 
-	    bool haveUtf = FALSE;
-	    bool haveEnt = FALSE;
-	    while ( j < len && dt[j] != '"' ) {
-		if ( ((unsigned char)dt[j]) > 0x7f )
-		    haveUtf = TRUE;
-		if ( dt[j] == '&' )
-		    haveEnt = TRUE;
-		++j;
-	    }
-	    if ( i == j ) {
-		// empty value
-		i = j + 1;
-		continue;
-	    }
+        bool haveUtf = FALSE;
+        bool haveEnt = FALSE;
+        while ( j < len && dt[j] != '"' ) {
+        if ( ((unsigned char)dt[j]) > 0x7f )
+            haveUtf = TRUE;
+        if ( dt[j] == '&' )
+            haveEnt = TRUE;
+        ++j;
+        }
+        if ( i == j ) {
+        // empty value
+        i = j + 1;
+        continue;
+        }
 
-	    QCString value( dt+i, j-i+1 );
-	    i = j + 1;
+        QCString value( dt+i, j-i+1 );
+        i = j + 1;
 
-	    QString str = (haveUtf ? QString::fromUtf8( value )
-		    : QString::fromLatin1( value ) );
-	    if ( haveEnt )
-		str = Qtopia::plainString( str );
+        QString str = (haveUtf ? QString::fromUtf8( value )
+            : QString::fromLatin1( value ) );
+        if ( haveEnt )
+        str = Qtopia::plainString( str );
 
             /*
              * add key + value
@@ -490,10 +496,10 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         ev.setTimeZone( "UTC"); // make sure it is really utc
     }else {
         /* to current date time */
-        // qWarning(" Start is %d", start );
+        // owarn << " Start is " << start << "" << oendl;
         OPimTimeZone zone( ev.timeZone().isEmpty() ? OPimTimeZone::current() : ev.timeZone() );
         QDateTime date = zone.toDateTime( start );
-        qWarning(" Start is %s", date.toString().latin1() );
+        owarn << " Start is " << date.toString() << "" << oendl;
         ev.setStartDateTime( zone.toDateTime( date, OPimTimeZone::current() ) );
 
         date = zone.toDateTime( end );
@@ -514,10 +520,10 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         ev.notifiers().add( al );
     }
     if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
-        qWarning("already contains assign uid");
+        owarn << "already contains assign uid" << oendl;
         ev.setUid( 1 );
     }
-    qWarning("addind %d %s", ev.uid(), ev.description().latin1() );
+    owarn << "addind " << ev.uid() << " " << ev.description() << "" << oendl;
     if ( ev.hasRecurrence() )
         m_rep.insert( ev.uid(), ev );
     else
@@ -525,7 +531,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
 
 }
 void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& value) {
-//    qWarning(" setting %s", value.latin1() );
+//    owarn << " setting " << value << "" << oendl;
     switch( id ) {
     case FDescription:
         e.setDescription( value );
@@ -610,7 +616,7 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
         QStringList list = QStringList::split(' ', value );
         for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
             QDate date( (*it).left(4).toInt(), (*it).mid(4, 2).toInt(), (*it).right(2).toInt() );
-            qWarning("adding exception %s", date.toString().latin1() );
+            owarn << "adding exception " << date.toString() << "" << oendl;
             recur()->exceptions().append( date );
         }
     }

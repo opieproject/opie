@@ -34,6 +34,8 @@
 /* OPIE */
 #include <opie2/opimresolver.h>
 #include <opie2/opimdateconversion.h>
+#include <opie2/odebug.h>
+
 #include <qpe/stringutil.h>
 #include <qpe/timestring.h>
 #include <qpe/config.h>
@@ -79,14 +81,14 @@ OPimContact::OPimContact( const QMap<int, QString> &fromMap ):OPimRecord(), mMap
 
     if ( uidStr.isEmpty() || ( uidStr.toInt() == 0 ) )
     {
-        qWarning( "Invalid UID found. Generate new one.." );
+        owarn << "Invalid UID found. Generate new one.." << oendl;
         setUid( uidGen().generate() );
     }
     else
         setUid( uidStr.toInt() );
 
     //     if ( !uidStr.isEmpty() )
-    // 	setUid( uidStr.toInt() );
+    //  setUid( uidStr.toInt() );
 }
 
 /*!
@@ -931,7 +933,7 @@ QStringList OPimContact::emailList() const
     QStringList r;
     if ( !emailStr.isEmpty() )
     {
-        qDebug( " emailstr " );
+        odebug << " emailstr " << oendl;
         QStringList l = QStringList::split( emailSeparator(), emailStr );
         for ( QStringList::ConstIterator it = l.begin();it != l.end();++it )
             r += ( *it ).simplifyWhiteSpace();
@@ -1136,7 +1138,7 @@ void OPimContact::setBirthday( const QDate &v )
 {
     if ( v.isNull() )
     {
-        qWarning( "Remove Birthday" );
+        owarn << "Remove Birthday" << oendl;
         replace( Qtopia::Birthday, QString::null );
         return ;
     }
@@ -1155,7 +1157,7 @@ void OPimContact::setAnniversary( const QDate &v )
 {
     if ( v.isNull() )
     {
-        qWarning( "Remove Anniversary" );
+        owarn << "Remove Anniversary" << oendl;
         replace( Qtopia::Anniversary, QString::null );
         return ;
     }
@@ -1196,7 +1198,7 @@ QDate OPimContact::anniversary() const
 
 void OPimContact::insertEmail( const QString &v )
 {
-    //qDebug("insertEmail %s", v.latin1());
+    //odebug << "insertEmail " << v << "" << oendl;
     QString e = v.simplifyWhiteSpace();
     QString def = defaultEmail();
 
@@ -1230,7 +1232,7 @@ void OPimContact::insertEmail( const QString &v )
         return ;
 
     // remove it
-    //qDebug(" removing email from list %s", e.latin1());
+    //odebug << " removing email from list " << e << "" << oendl;
     emails.remove( e );
     // reset the string
     emailsStr = emails.join( emailSeparator() ); // Sharp's brain dead separator
@@ -1239,7 +1241,7 @@ void OPimContact::insertEmail( const QString &v )
     // if default, then replace the default email with the first one
     if ( def == e )
     {
-        //qDebug("removeEmail is default; setting new default");
+        //odebug << "removeEmail is default; setting new default" << oendl;
         if ( !emails.count() )
             clearEmails();
         else // setDefaultEmail will remove e from the list
@@ -1259,7 +1261,7 @@ void OPimContact::setDefaultEmail( const QString &v )
 {
     QString e = v.simplifyWhiteSpace();
 
-    //qDebug("OPimContact::setDefaultEmail %s", e.latin1());
+    //odebug << "OPimContact::setDefaultEmail " << e << "" << oendl;
     replace( Qtopia::DefaultEmail, e );
 
     if ( !e.isEmpty() )

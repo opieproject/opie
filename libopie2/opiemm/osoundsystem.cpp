@@ -82,7 +82,7 @@ void OSoundSystem::synchronize()
     {
         s >> str;
         str.truncate( str.find( ':' ) );
-        qDebug( "OSoundSystem: found interface '%s'", (const char*) str );
+        odebug << "OSoundSystem: found interface '" <<  str << "'" << oendl; 
         OAudioInterface* iface;
         iface = new OAudioInterface( this, (const char*) str );
 
@@ -237,8 +237,8 @@ void OMixerInterface::init()
 /*    ChannelIterator it;
     for ( it = _channels.begin(); it != _channels.end(); ++it )
     {
-        qDebug( "Channel %s available (bit %d)", (const char*) it.key(), it.data() );
-        qDebug( " +--- Volume: %02d | %02d", volume( it.key() ) & 0xff, volume( it.key() ) >> 8 );
+        odebug << "Channel " <<  it.key() << " available (bit " << it.data() << ")" << oendl; 
+        odebug << " +--- Volume: " << volume( it.key() ) & 0xff << " | " << volume( it.key() ) >> 8 << "" << oendl; 
     }
 */
 }

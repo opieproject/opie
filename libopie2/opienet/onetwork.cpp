@@ -605,10 +605,13 @@ void OWirelessNetworkInterface::dumpInformation() const
 {
     odebug << "OWirelessNetworkInterface::() -------------- dumping information block ----------------" << oendl;
 
-    qDebug( " - driver's idea of maximum throughput is %d bps = %d byte/s = %d Kb/s = %f.2 Mb/s",
-            _range.throughput, _range.throughput / 8, _range.throughput / 8 / 1024, float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 );
-    qDebug( " - driver for '%s' (V%d) has been compiled against WE V%d",
-             name(), _range.we_version_source, _range.we_version_compiled );
+    odebug << " - driver's idea of maximum throughput is " << _range.throughput
+           << " bps = " << ( _range.throughput / 8 ) << " byte/s = " << ( _range.throughput / 8 / 1024 )
+           << " Kb/s = " << QString().sprintf("%f.2", float( _range.throughput ) / 8.0 / 1024.0 / 1024.0 )
+           << " Mb/s" << oendl;
+
+    odebug << " - driver for '" << name() << "' (V" << _range.we_version_source
+           << ") has been compiled against WE V" << _range.we_version_compiled << oendl;
 
     if ( _range.we_version_compiled != WIRELESS_EXT )
     {

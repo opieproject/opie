@@ -29,6 +29,9 @@
 
 #include "opimtimezone.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
 /* STD */
 #include <stdio.h>
 #include <stdlib.h>
@@ -149,7 +152,7 @@ QDateTime OPimTimeZone::toDateTime( time_t t )
 QDateTime OPimTimeZone::toDateTime( const QDateTime& dt, const OPimTimeZone& zone )
 {
     time_t utc = to_Time_t( dt, zone.m_name );
-    qWarning( "%d %s", utc, zone.m_name.latin1() );
+    owarn << "" << utc << " " << zone.m_name << "" << oendl;
     return utcTime( utc, m_name );
 }
 

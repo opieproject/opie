@@ -35,6 +35,8 @@
 #include <opie2/opimmaintainer.h>
 #include <opie2/opimnotifymanager.h>
 #include <opie2/opimresolver.h>
+#include <opie2/odebug.h>
+
 #include <qpe/palmtopuidgen.h>
 #include <qpe/palmtoprecord.h>
 #include <qpe/categories.h>
@@ -85,17 +87,17 @@ OPimTodo::OPimTodo( const OPimTodo &event )
         : OPimRecord( event ), data( event.data )
 {
     data->ref();
-    //    qWarning("ref up");
+    //    owarn << "ref up" << oendl;
 }
 
 
 OPimTodo::~OPimTodo()
 {
 
-    //    qWarning("~OPimTodo "  );
+    //    owarn << "~OPimTodo " << oendl;
     if ( data->deref() )
     {
-        //        qWarning("OPimTodo::dereffing");
+        //        owarn << "OPimTodo::dereffing" << oendl;
         delete data;
         data = 0l;
     }
@@ -110,7 +112,7 @@ OPimTodo::OPimTodo( bool completed, int priority,
               bool hasDate, QDate date, int uid )
         : OPimRecord( uid )
 {
-    //    qWarning("OPimTodoData " + summary);
+    //    owarn << "OPimTodoData " + summary << oendl;
     setCategories( category );
 
     data = new OPimTodoData;
@@ -133,7 +135,7 @@ OPimTodo::OPimTodo( bool completed, int priority,
               bool hasDate, QDate date, int uid )
         : OPimRecord( uid )
 {
-    //    qWarning("OPimTodoData" + summary);
+    //    owarn << "OPimTodoData" + summary << oendl;
     setCategories( idsFromString( category.join( ";" ) ) );
 
     data = new OPimTodoData;
@@ -306,7 +308,7 @@ void OPimTodo::setHasDueDate( bool hasDate )
 
 void OPimTodo::setDescription( const QString &desc )
 {
-    //    qWarning( "desc " + desc );
+    //    owarn << "desc " + desc << oendl;
     changeOrModify();
     data->desc = Qtopia::simplifyMultiLineSpace( desc );
 }
@@ -591,10 +593,10 @@ bool OPimTodo::operator==( const OPimTodo &toDoEvent ) const
 void OPimTodo::deref()
 {
 
-    //    qWarning("deref in ToDoEvent");
+    //    owarn << "deref in ToDoEvent" << oendl;
     if ( data->deref() )
     {
-        //        qWarning("deleting");
+        //        owarn << "deleting" << oendl;
         delete data;
         data = 0;
     }
@@ -606,7 +608,7 @@ OPimTodo &OPimTodo::operator=( const OPimTodo &item )
     if ( this == &item ) return * this;
 
     OPimRecord::operator=( item );
-    //qWarning("operator= ref ");
+    //owarn << "operator= ref " << oendl;
     item.data->ref();
     deref();
     data = item.data;
@@ -649,7 +651,7 @@ void OPimTodo::changeOrModify()
 {
     if ( data->count != 1 )
     {
-        qWarning( "changeOrModify" );
+        owarn << "changeOrModify" << oendl;
         data->deref();
         OPimTodoData* d2 = new OPimTodoData();
         copy( data, d2 );

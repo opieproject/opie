@@ -50,7 +50,7 @@ OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
     setBackEnd( m_todoBackEnd );
 }
 OPimTodoAccess::~OPimTodoAccess() {
-//    qWarning("~OPimTodoAccess");
+//    owarn << "~OPimTodoAccess" << oendl; 
 }
 void OPimTodoAccess::mergeWith( const QValueList<OPimTodo>& list ) {
     QValueList<OPimTodo>::ConstIterator it;

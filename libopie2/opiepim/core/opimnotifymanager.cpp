@@ -31,6 +31,7 @@
 
 /* OPIE */
 #include <opie2/opimdateconversion.h>
+#include <opie2/odebug.h>
 
 /* QT */
 #include <qstringlist.h>
@@ -163,7 +164,7 @@ void OPimNotifyManager::deregister( const OPimNotify& )
 
 bool OPimNotifyManager::isEmpty() const
 {
-    qWarning( "is Empty called on OPimNotifyManager %d %d", m_rem.count(), m_al.count() );
+    owarn << "is Empty called on OPimNotifyManager " << m_rem.count() << " " << m_al.count() << "" << oendl;
     if ( m_rem.isEmpty() && m_al.isEmpty() ) return true;
     else return false;
 }
@@ -191,7 +192,7 @@ QString OPimNotifyManager::alarmsToString() const
             }
         }
         // now write the list
-        qWarning( "als: %s", als.join( "____________" ).latin1() );
+        owarn << "als: " << als.join( "____________" ) << "" << oendl;
         str = als.join( ";" );
     }
 
@@ -225,7 +226,7 @@ void OPimNotifyManager::alarmsFromString( const QString& str )
     for ( QStringList::Iterator it = als.begin(); it != als.end(); ++it )
     {
         QStringList alarm = QStringList::split( ":", ( *it ), TRUE ); // allow empty
-        qWarning( "alarm: %s", alarm.join( "___" ).latin1() );
+        owarn << "alarm: " << alarm.join( "___" ) << "" << oendl;
         qWarning( "alarm[0]: %s %s", alarm[ 0 ].latin1(),
                   OPimDateConversion::dateTimeFromString( alarm[ 0 ] ).toString().latin1() );
         OPimAlarm al( alarm[ 2 ].toInt(), OPimDateConversion::dateTimeFromString( alarm[ 0 ] ),

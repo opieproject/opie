@@ -62,10 +62,10 @@ OStation::~OStation()
 void OStation::dump()
 {
     odebug << "------- OStation::dump() ------------" << oendl;
-    qDebug( "type: %s", (const char*) type );
-    qDebug( "mac:  %s", (const char*) macAddress.toString() );
-    qDebug( "ap:   %s", (const char*) apAddress.toString() );
-    qDebug( "ip:   %s", (const char*) ipAddress.toString() );
+    odebug << "type: " <<  type << "" << oendl; 
+    odebug << "mac:  " <<  macAddress.toString() << "" << oendl; 
+    odebug << "ap:   " <<  apAddress.toString() << "" << oendl; 
+    odebug << "ip:   " <<  ipAddress.toString() << "" << oendl; 
 }
 
 }

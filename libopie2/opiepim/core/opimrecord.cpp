@@ -121,7 +121,7 @@ bool OPimRecord::isEmpty() const
         }
     }
     str = str.remove( str.length()-1, 1); // strip the ;
-    //qWarning("IDS " + str );
+    //owarn << "IDS " + str << oendl; 
 
     return str;
     }*/

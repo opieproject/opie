@@ -31,57 +31,62 @@
  *
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#include <qarray.h>
-#include <qstringlist.h>
-
-#include <qpe/global.h>
-
+/* OPIE */
 #include <opie2/osqldriver.h>
 #include <opie2/osqlmanager.h>
 #include <opie2/osqlquery.h>
 
 #include <opie2/opimrecurrence.h>
 #include <opie2/odatebookaccessbackend_sql.h>
+#include <opie2/odebug.h>
+
+#include <qpe/global.h>
+
+/* QT */
+#include <qarray.h>
+#include <qstringlist.h>
+
+/* STD */
+#include <stdio.h>
+#include <stdlib.h>
+
 
 using namespace Opie::DB;
 
 namespace {
-	/**
-	 * a find query for custom elements
-	 */
-	class FindCustomQuery : public OSQLQuery {
-	public:
-		FindCustomQuery(int uid);
-		FindCustomQuery(const QArray<int>& );
-		~FindCustomQuery();
-		QString query()const;
-	private:
-		QString single()const;
-		QString multi()const;
-		QArray<int> m_uids;
-		int m_uid;
-	};
+    /**
+     * a find query for custom elements
+     */
+    class FindCustomQuery : public OSQLQuery {
+    public:
+        FindCustomQuery(int uid);
+        FindCustomQuery(const QArray<int>& );
+        ~FindCustomQuery();
+        QString query()const;
+    private:
+        QString single()const;
+        QString multi()const;
+        QArray<int> m_uids;
+        int m_uid;
+    };
 
-	FindCustomQuery::FindCustomQuery(int uid)
-		: OSQLQuery(), m_uid( uid ) {
-	}
-	FindCustomQuery::FindCustomQuery(const QArray<int>& ints)
-		: OSQLQuery(), m_uids( ints ){
-	}
-	FindCustomQuery::~FindCustomQuery() {
-	}
-	QString FindCustomQuery::query()const{
-//		if ( m_uids.count() == 0 )
-			return single();
-	}
-	QString FindCustomQuery::single()const{
-		QString qu = "select uid, type, value from custom_data where uid = ";
-		qu += QString::number(m_uid);
-		return qu;
-	}
+    FindCustomQuery::FindCustomQuery(int uid)
+        : OSQLQuery(), m_uid( uid ) {
+    }
+    FindCustomQuery::FindCustomQuery(const QArray<int>& ints)
+        : OSQLQuery(), m_uids( ints ){
+    }
+    FindCustomQuery::~FindCustomQuery() {
+    }
+    QString FindCustomQuery::query()const{
+//      if ( m_uids.count() == 0 )
+            return single();
+    }
+    QString FindCustomQuery::single()const{
+        QString qu = "select uid, type, value from custom_data where uid = ";
+        qu += QString::number(m_uid);
+        return qu;
+    }
 }
 
 
@@ -90,9 +95,9 @@ namespace Opie {
 
 ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,
                                                         const QString& fileName )
-	: ODateBookAccessBackend(), m_driver( NULL ) 
+    : ODateBookAccessBackend(), m_driver( NULL )
 {
-	m_fileName = fileName.isEmpty() ? Global::applicationFileName( "datebook", "datebook.db" ) : fileName;
+    m_fileName = fileName.isEmpty() ? Global::applicationFileName( "datebook", "datebook.db" ) : fileName;
 
     // Get the standart sql-driver from the OSQLManager..
     OSQLManager man;
@@ -105,297 +110,297 @@ ODateBookAccessBackend_SQL::ODateBookAccessBackend_SQL( const QString& ,
 }
 
 ODateBookAccessBackend_SQL::~ODateBookAccessBackend_SQL() {
-	if( m_driver )
-		delete m_driver;
+    if( m_driver )
+        delete m_driver;
 }
 
 void ODateBookAccessBackend_SQL::initFields()
 {
 
-	// This map contains the translation of the fieldtype id's to 
-	// the names of the table columns
-	m_fieldMap.insert( OPimEvent::FUid, "uid" );
-	m_fieldMap.insert( OPimEvent::FCategories, "Categories" );
-	m_fieldMap.insert( OPimEvent::FDescription, "Description" );
-	m_fieldMap.insert( OPimEvent::FLocation, "Location" );
-	m_fieldMap.insert( OPimEvent::FType, "Type" );
-	m_fieldMap.insert( OPimEvent::FAlarm, "Alarm" );
-	m_fieldMap.insert( OPimEvent::FSound, "Sound" );
-	m_fieldMap.insert( OPimEvent::FRType, "RType" );
-	m_fieldMap.insert( OPimEvent::FRWeekdays, "RWeekdays" );
-	m_fieldMap.insert( OPimEvent::FRPosition, "RPosition" );
-	m_fieldMap.insert( OPimEvent::FRFreq, "RFreq" );
-	m_fieldMap.insert( OPimEvent::FRHasEndDate, "RHasEndDate" );
-	m_fieldMap.insert( OPimEvent::FREndDate, "REndDate" );
-	m_fieldMap.insert( OPimEvent::FRCreated, "RCreated" );
-	m_fieldMap.insert( OPimEvent::FRExceptions, "RExceptions" );
-	m_fieldMap.insert( OPimEvent::FStart, "Start" );
-	m_fieldMap.insert( OPimEvent::FEnd, "End" );
-	m_fieldMap.insert( OPimEvent::FNote, "Note" );
-	m_fieldMap.insert( OPimEvent::FTimeZone, "TimeZone" );
-	m_fieldMap.insert( OPimEvent::FRecParent, "RecParent" );
-	m_fieldMap.insert( OPimEvent::FRecChildren, "Recchildren" );
+    // This map contains the translation of the fieldtype id's to
+    // the names of the table columns
+    m_fieldMap.insert( OPimEvent::FUid, "uid" );
+    m_fieldMap.insert( OPimEvent::FCategories, "Categories" );
+    m_fieldMap.insert( OPimEvent::FDescription, "Description" );
+    m_fieldMap.insert( OPimEvent::FLocation, "Location" );
+    m_fieldMap.insert( OPimEvent::FType, "Type" );
+    m_fieldMap.insert( OPimEvent::FAlarm, "Alarm" );
+    m_fieldMap.insert( OPimEvent::FSound, "Sound" );
+    m_fieldMap.insert( OPimEvent::FRType, "RType" );
+    m_fieldMap.insert( OPimEvent::FRWeekdays, "RWeekdays" );
+    m_fieldMap.insert( OPimEvent::FRPosition, "RPosition" );
+    m_fieldMap.insert( OPimEvent::FRFreq, "RFreq" );
+    m_fieldMap.insert( OPimEvent::FRHasEndDate, "RHasEndDate" );
+    m_fieldMap.insert( OPimEvent::FREndDate, "REndDate" );
+    m_fieldMap.insert( OPimEvent::FRCreated, "RCreated" );
+    m_fieldMap.insert( OPimEvent::FRExceptions, "RExceptions" );
+    m_fieldMap.insert( OPimEvent::FStart, "Start" );
+    m_fieldMap.insert( OPimEvent::FEnd, "End" );
+    m_fieldMap.insert( OPimEvent::FNote, "Note" );
+    m_fieldMap.insert( OPimEvent::FTimeZone, "TimeZone" );
+    m_fieldMap.insert( OPimEvent::FRecParent, "RecParent" );
+    m_fieldMap.insert( OPimEvent::FRecChildren, "Recchildren" );
 
-	// Create a map that maps the column name to the id
-	QMapConstIterator<int, QString> it;
-	for ( it = m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
-		m_reverseFieldMap.insert( it.data(), it.key() );
-	}
-	
+    // Create a map that maps the column name to the id
+    QMapConstIterator<int, QString> it;
+    for ( it = m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
+        m_reverseFieldMap.insert( it.data(), it.key() );
+    }
+
 }
 
-bool ODateBookAccessBackend_SQL::load() 
+bool ODateBookAccessBackend_SQL::load()
 {
-	if (!m_driver->open() )
-		return false;
+    if (!m_driver->open() )
+        return false;
 
-	// Don't expect that the database exists.
-	// It is save here to create the table, even if it
-	// do exist. ( Is that correct for all databases ?? )
-	QString	qu = "create table datebook( uid INTEGER PRIMARY KEY ";
-	
-	QMap<int, QString>::Iterator it;
-	for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
-		qu += QString( ",%1 VARCHAR(10)" ).arg( it.data() );
-	}
-	qu += " );";
-		
-	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
+    // Don't expect that the database exists.
+    // It is save here to create the table, even if it
+    // do exist. ( Is that correct for all databases ?? )
+    QString qu = "create table datebook( uid INTEGER PRIMARY KEY ";
 
-	qWarning( "command: %s", qu.latin1() );
+    QMap<int, QString>::Iterator it;
+    for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
+        qu += QString( ",%1 VARCHAR(10)" ).arg( it.data() );
+    }
+    qu += " );";
 
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success )
-		return false;
+    qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
 
-	update();
+    owarn << "command: " << qu << "" << oendl;
 
-	return true;
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+    if ( res.state() != OSQLResult::Success )
+        return false;
+
+    update();
+
+    return true;
 }
 
 void ODateBookAccessBackend_SQL::update()
 {
 
-	QString qu = "select uid from datebook";
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success ){
-		// m_uids.clear();
-		return;
-	}
-	
-	m_uids = extractUids( res );
-	
+    QString qu = "select uid from datebook";
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+    if ( res.state() != OSQLResult::Success ){
+        // m_uids.clear();
+        return;
+    }
+
+    m_uids = extractUids( res );
+
 }
 
-bool ODateBookAccessBackend_SQL::reload() 
+bool ODateBookAccessBackend_SQL::reload()
 {
-	return load();
+    return load();
 }
 
-bool ODateBookAccessBackend_SQL::save() 
+bool ODateBookAccessBackend_SQL::save()
 {
-	return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
+    return m_driver->close();  // Shouldn't m_driver->sync be better than close ? (eilers)
 }
 
-QArray<int> ODateBookAccessBackend_SQL::allRecords()const 
+QArray<int> ODateBookAccessBackend_SQL::allRecords()const
 {
-	return m_uids;
+    return m_uids;
 }
 
 QArray<int> ODateBookAccessBackend_SQL::queryByExample(const OPimEvent&, int,  const QDateTime& ) {
-	return QArray<int>();
+    return QArray<int>();
 }
 
-void ODateBookAccessBackend_SQL::clear() 
+void ODateBookAccessBackend_SQL::clear()
 {
-	QString qu = "drop table datebook;";
-	qu += "drop table custom_data;";
+    QString qu = "drop table datebook;";
+    qu += "drop table custom_data;";
 
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
 
-	reload();
+    reload();
 }
 
 
 OPimEvent ODateBookAccessBackend_SQL::find( int uid ) const{
-	qDebug( "ODateBookAccessBackend_SQL::find( %d )", uid ); 
+    odebug << "ODateBookAccessBackend_SQL::find( " << uid << " )" << oendl;
 
-	QString qu = "select *";
-	qu += "from datebook where uid = " + QString::number(uid);
+    QString qu = "select *";
+    qu += "from datebook where uid = " + QString::number(uid);
 
-	qDebug( "Query: %s", qu.latin1() );
+    odebug << "Query: " << qu << "" << oendl;
 
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
 
-	OSQLResultItem resItem = res.first();
+    OSQLResultItem resItem = res.first();
 
-	// Create Map for date event and insert UID
-	QMap<int,QString> dateEventMap;
-	dateEventMap.insert( OPimEvent::FUid, QString::number( uid ) );
+    // Create Map for date event and insert UID
+    QMap<int,QString> dateEventMap;
+    dateEventMap.insert( OPimEvent::FUid, QString::number( uid ) );
 
-	// Now insert the data out of the columns into the map.
-	QMapConstIterator<int, QString> it;
-	for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
-		dateEventMap.insert( m_reverseFieldMap[*it], resItem.data( *it ) );
-	}
+    // Now insert the data out of the columns into the map.
+    QMapConstIterator<int, QString> it;
+    for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
+        dateEventMap.insert( m_reverseFieldMap[*it], resItem.data( *it ) );
+    }
 
-	// Last step: Put map into date event, add custom map and return it
-	OPimEvent retDate( dateEventMap );
-	retDate.setExtraMap( requestCustom( uid ) );
+    // Last step: Put map into date event, add custom map and return it
+    OPimEvent retDate( dateEventMap );
+    retDate.setExtraMap( requestCustom( uid ) );
 
-	qDebug( "ODateBookAccessBackend_SQL::find( %d ) end", uid ); 
-	return retDate;
+    odebug << "ODateBookAccessBackend_SQL::find( " << uid << " ) end" << oendl;
+    return retDate;
 }
 
 // FIXME: Speed up update of uid's..
-bool ODateBookAccessBackend_SQL::add( const OPimEvent& ev ) 
+bool ODateBookAccessBackend_SQL::add( const OPimEvent& ev )
 {
-	QMap<int,QString> eventMap = ev.toMap();
+    QMap<int,QString> eventMap = ev.toMap();
 
-	QString qu = "insert into datebook VALUES( " + QString::number( ev.uid() );
-	QMap<int, QString>::Iterator it;
-	for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
-		if ( !eventMap[it.key()].isEmpty() )
-			qu += QString( ",\"%1\"" ).arg( eventMap[it.key()] );
-		else
-			qu += QString( ",\"\"" );
-	}
-	qu += " );";
+    QString qu = "insert into datebook VALUES( " + QString::number( ev.uid() );
+    QMap<int, QString>::Iterator it;
+    for ( it = ++m_fieldMap.begin(); it != m_fieldMap.end(); ++it ){
+        if ( !eventMap[it.key()].isEmpty() )
+            qu += QString( ",\"%1\"" ).arg( eventMap[it.key()] );
+        else
+            qu += QString( ",\"\"" );
+    }
+    qu += " );";
 
-	// Add custom entries
-	int id = 0;
-	QMap<QString, QString> customMap = ev.toExtraMap();
-	for( QMap<QString, QString>::Iterator it = customMap.begin(); 
-	     it != customMap.end(); ++it ){
-		qu  += "insert into custom_data VALUES(" 
-			+  QString::number( ev.uid() )
-			+ ","
-			+  QString::number( id++ ) 
-			+ ",'" 
-			+ it.key() //.latin1()
-			+ "',"
-			+ "0" // Priority for future enhancements
-			+ ",'" 
-			+ it.data() //.latin1()
-			+ "');";
-	}		
-	qWarning("add %s", qu.latin1() );
+    // Add custom entries
+    int id = 0;
+    QMap<QString, QString> customMap = ev.toExtraMap();
+    for( QMap<QString, QString>::Iterator it = customMap.begin();
+         it != customMap.end(); ++it ){
+        qu  += "insert into custom_data VALUES("
+            +  QString::number( ev.uid() )
+            + ","
+            +  QString::number( id++ )
+            + ",'"
+            + it.key() //.latin1()
+            + "',"
+            + "0" // Priority for future enhancements
+            + ",'"
+            + it.data() //.latin1()
+            + "');";
+    }
+    owarn << "add " << qu << "" << oendl;
 
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success ){
-		return false;
-	}
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+    if ( res.state() != OSQLResult::Success ){
+        return false;
+    }
 
-	// Update list of uid's 
-	update();
-	
-	return true;
+    // Update list of uid's
+    update();
+
+    return true;
 }
 
 // FIXME: Speed up update of uid's..
-bool ODateBookAccessBackend_SQL::remove( int uid ) 
+bool ODateBookAccessBackend_SQL::remove( int uid )
 {
-	QString qu = "DELETE from datebook where uid = " 
-		+ QString::number( uid ) + ";";
-	qu += "DELETE from custom_data where uid = " 
-		+ QString::number( uid ) + ";";
-	
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success ){
-		return false;
-	}
+    QString qu = "DELETE from datebook where uid = "
+        + QString::number( uid ) + ";";
+    qu += "DELETE from custom_data where uid = "
+        + QString::number( uid ) + ";";
 
-	// Update list of uid's
-	update();
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+    if ( res.state() != OSQLResult::Success ){
+        return false;
+    }
 
-	return true;
+    // Update list of uid's
+    update();
+
+    return true;
 }
 
-bool ODateBookAccessBackend_SQL::replace( const OPimEvent& ev ) 
+bool ODateBookAccessBackend_SQL::replace( const OPimEvent& ev )
 {
     remove( ev.uid() );
     return add( ev );
 }
 
-QArray<int> ODateBookAccessBackend_SQL::rawEvents()const 
+QArray<int> ODateBookAccessBackend_SQL::rawEvents()const
 {
     return allRecords();
 }
 
-QArray<int> ODateBookAccessBackend_SQL::rawRepeats()const 
+QArray<int> ODateBookAccessBackend_SQL::rawRepeats()const
 {
-	QString qu = "select uid from datebook where RType!=\"\" AND RType!=\"NoRepeat\"";
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success ){
-		QArray<int> nix;
-		return nix;
-	}
-	
-	return extractUids( res );
+    QString qu = "select uid from datebook where RType!=\"\" AND RType!=\"NoRepeat\"";
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+    if ( res.state() != OSQLResult::Success ){
+        QArray<int> nix;
+        return nix;
+    }
+
+    return extractUids( res );
 }
 
-QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const 
+QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const
 {
-	QString qu = "select uid from datebook where RType=\"\" or RType=\"NoRepeat\"";
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
-	if ( res.state() != OSQLResult::Success ){
-		QArray<int> nix;
-		return nix;
-	}
-	
-	return extractUids( res );
+    QString qu = "select uid from datebook where RType=\"\" or RType=\"NoRepeat\"";
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+    if ( res.state() != OSQLResult::Success ){
+        QArray<int> nix;
+        return nix;
+    }
+
+    return extractUids( res );
 }
 
-OPimEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats() 
+OPimEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()
 {
-	QArray<int> nonRepUids = nonRepeats();
-	OPimEvent::ValueList list;
+    QArray<int> nonRepUids = nonRepeats();
+    OPimEvent::ValueList list;
 
-	for (uint i = 0; i < nonRepUids.count(); ++i ){
-		list.append( find( nonRepUids[i] ) );
-	}
+    for (uint i = 0; i < nonRepUids.count(); ++i ){
+        list.append( find( nonRepUids[i] ) );
+    }
 
-	return list;
+    return list;
 
 }
-OPimEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats() 
+OPimEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats()
 {
-	QArray<int> rawRepUids = rawRepeats();
-	OPimEvent::ValueList list;
+    QArray<int> rawRepUids = rawRepeats();
+    OPimEvent::ValueList list;
 
-	for (uint i = 0; i < rawRepUids.count(); ++i ){
-		list.append( find( rawRepUids[i] ) );
-	}
+    for (uint i = 0; i < rawRepUids.count(); ++i ){
+        list.append( find( rawRepUids[i] ) );
+    }
 
-	return list;
+    return list;
 }
 
 
 QArray<int> ODateBookAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 {
 
-	QString qu = "SELECT uid FROM datebook WHERE (";
+    QString qu = "SELECT uid FROM datebook WHERE (";
 
-	// Do it make sense to search other fields, too ?
-	qu += " rlike(\""+ r.pattern() + "\", Location ) OR";
-	qu += " rlike(\""+ r.pattern() + "\", Note )";
-		
-	qu += " )";
+    // Do it make sense to search other fields, too ?
+    qu += " rlike(\""+ r.pattern() + "\", Location ) OR";
+    qu += " rlike(\""+ r.pattern() + "\", Note )";
 
-	qDebug( "query: %s", qu.latin1() );
+    qu += " )";
 
-	OSQLRawQuery raw( qu );
-	OSQLResult res = m_driver->query( &raw );
+    odebug << "query: " << qu << "" << oendl;
 
-	return extractUids( res );
+    OSQLRawQuery raw( qu );
+    OSQLResult res = m_driver->query( &raw );
+
+    return extractUids( res );
 
 
 
@@ -405,49 +410,49 @@ QArray<int> ODateBookAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 
 QArray<int> ODateBookAccessBackend_SQL::extractUids( OSQLResult& res ) const
 {
-	qWarning("extractUids");
-	QTime t;
-	t.start();
-	OSQLResultItem::ValueList list = res.results();
-	OSQLResultItem::ValueList::Iterator it;
-	QArray<int> ints(list.count() );
-	qWarning(" count = %d", list.count() );
+    owarn << "extractUids" << oendl;
+    QTime t;
+    t.start();
+    OSQLResultItem::ValueList list = res.results();
+    OSQLResultItem::ValueList::Iterator it;
+    QArray<int> ints(list.count() );
+    owarn << " count = " << list.count() << "" << oendl;
 
-	int i = 0;
-	for (it = list.begin(); it != list.end(); ++it ) {
-		ints[i] =  (*it).data("uid").toInt();
-		i++;
-	}
-	qWarning("extractUids ready: count2 = %d needs %d ms", i, t.elapsed() );
+    int i = 0;
+    for (it = list.begin(); it != list.end(); ++it ) {
+        ints[i] =  (*it).data("uid").toInt();
+        i++;
+    }
+    owarn << "extractUids ready: count2 = " << i << " needs " << t.elapsed() << " ms" << oendl;
 
-	return ints;
+    return ints;
 
 }
 
 QMap<QString, QString> ODateBookAccessBackend_SQL::requestCustom( int uid ) const
 {
-	QTime t;
-	t.start();
+    QTime t;
+    t.start();
 
-	QMap<QString, QString> customMap;
-	
-	FindCustomQuery query( uid );
-	OSQLResult res_custom = m_driver->query( &query );
+    QMap<QString, QString> customMap;
 
-	if ( res_custom.state() == OSQLResult::Failure ) {
-		qWarning("OSQLResult::Failure in find query !!");
-		QMap<QString, QString> empty;
-		return empty;
-	}
+    FindCustomQuery query( uid );
+    OSQLResult res_custom = m_driver->query( &query );
 
-	OSQLResultItem::ValueList list = res_custom.results();
-	OSQLResultItem::ValueList::Iterator it = list.begin();
-	for ( ; it != list.end(); ++it ) {
-		customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
-	}
+    if ( res_custom.state() == OSQLResult::Failure ) {
+        owarn << "OSQLResult::Failure in find query !!" << oendl;
+        QMap<QString, QString> empty;
+        return empty;
+    }
 
-	qDebug("RequestCustom needed: %d ms", t.elapsed() );
-	return customMap;
+    OSQLResultItem::ValueList list = res_custom.results();
+    OSQLResultItem::ValueList::Iterator it = list.begin();
+    for ( ; it != list.end(); ++it ) {
+        customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
+    }
+
+    odebug << "RequestCustom needed: " << t.elapsed() << " ms" << oendl;
+    return customMap;
 }
 
 

@@ -33,6 +33,8 @@
 #include <opie2/opimrecurrence.h>
 #include <opie2/opimresolver.h>
 #include <opie2/opimnotifymanager.h>
+#include <opie2/odebug.h>
+
 #include <qpe/categories.h>
 #include <qpe/stringutil.h>
 
@@ -555,11 +557,11 @@ QMap<int, QString> OPimEvent::toMap() const
     retMap.insert( OPimEvent::FDescription, Qtopia::escapeString( description() ) );
     retMap.insert( OPimEvent::FLocation, Qtopia::escapeString( location() ) );
     retMap.insert( OPimEvent::FType, isAllDay() ? "AllDay" : "" );
-    if ( notifiers().alarms().count() ){ 
-	    // Currently we just support one alarm.. (eilers)
-	    OPimAlarm alarm = notifiers().alarms() [ 0 ];
-	    retMap.insert( OPimEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
-	    retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
+    if ( notifiers().alarms().count() ){
+        // Currently we just support one alarm.. (eilers)
+        OPimAlarm alarm = notifiers().alarms() [ 0 ];
+        retMap.insert( OPimEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
+        retMap.insert( OPimEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
     }
 
     OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
@@ -641,10 +643,10 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
     else
     {
         /* to current date time */
-        // qWarning(" Start is %d", start );
+        // owarn << " Start is " << start << "" << oendl;
         OPimTimeZone zone( timeZone().isEmpty() ? OPimTimeZone::current() : timeZone() );
         QDateTime date = zone.toDateTime( start );
-        qWarning( " Start is %s", date.toString().latin1() );
+        owarn << " Start is " << date.toString() << "" << oendl;
         setStartDateTime( zone.toDateTime( date, OPimTimeZone::current() ) );
 
         date = zone.toDateTime( end );
@@ -658,14 +660,14 @@ void OPimEvent::fromMap( const QMap<int, QString>& map )
     int sound = ( ( map[ OPimEvent::FSound ] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
     if ( ( alarmTime != -1 ) )
     {
-	    QDateTime dt = startDateTime().addSecs( -1 * alarmTime * 60 );
-	    OPimAlarm al( sound , dt );
-	    notifiers().add( al );
+        QDateTime dt = startDateTime().addSecs( -1 * alarmTime * 60 );
+        OPimAlarm al( sound , dt );
+        notifiers().add( al );
     }
 
 
     if ( !map[ OPimEvent::FNote ].isEmpty() )
-	    setNote( map[ OPimEvent::FNote ] );
+        setNote( map[ OPimEvent::FNote ] );
 
     if ( !map[ OPimEvent::FRecParent ].isEmpty() )
         setParent( map[ OPimEvent::FRecParent ].toInt() );

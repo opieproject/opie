@@ -26,16 +26,23 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#include <qapplication.h>
-#include <qdatetime.h>
-#include <qcopchannel_qws.h>
+
+#include "opimmainwindow.h"
+
+/* OPIE */
+#include <opie2/opimresolver.h>
+#include <opie2/odebug.h>
 
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 
-#include <opie2/opimresolver.h>
-#include "opimmainwindow.h"
+/* QT */
+#include <qapplication.h>
+#include <qdatetime.h>
+#include <qcopchannel_qws.h>
+
+
 
 namespace Opie {
 OPimMainWindow::OPimMainWindow( const QString& service, QWidget* parent,
@@ -116,7 +123,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         QDateTime dt; int uid;
         stream >> dt;
         stream >> uid;
-        qWarning(" Date: %s Uid: %d", dt.toString().latin1(), uid );
+        owarn << " Date: " << dt.toString() << " Uid: " << uid << "" << oendl;
         QDateTime current = QDateTime::currentDateTime();
         if ( current.time().hour() != dt.time().hour() && current.time().minute() != dt.time().minute() )
             return;

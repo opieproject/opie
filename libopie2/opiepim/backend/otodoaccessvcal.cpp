@@ -27,11 +27,15 @@
                              Boston, MA 02111-1307, USA.
 */
 
-/* OPIE */
 #include "vobject_p.h"
-#include <qpe/timeconversion.h>
-#include <opie2/otodoaccessvcal.h>
 
+/* OPIE */
+#include <opie2/otodoaccessvcal.h>
+#include <opie2/odebug.h>
+
+#include <qpe/timeconversion.h>
+
+/* QT */
 //FIXME: Hack to allow direct access to FILE* fh. Rewrite this!
 #define protected public
 #include <qfile.h>
@@ -88,7 +92,7 @@ namespace {
         // categories
         if((ob = isAPropertyOf( obj, VCCategoriesProp )) != 0 ){
             name = vObjectStringZValue( ob );
-            qWarning("Categories:%s", name.data() );
+            owarn << "Categories:" << name.data() << "" << oendl;
         }
 
         event.setUid( 1 );
@@ -117,10 +121,10 @@ namespace {
 
 #if 0
 
-	// There seems a misrepresentation between summary in otodoevent
-	// and summary in vcard. 
-	// The same with description..
-	// Description is summary and vice versa.. Argh.. (eilers)
+    // There seems a misrepresentation between summary in otodoevent
+    // and summary in vcard.
+    // The same with description..
+    // Description is summary and vice versa.. Argh.. (eilers)
 
 
         addPropValue( task, VCDescriptionProp,
@@ -135,7 +139,7 @@ namespace {
 
         addPropValue( task, VCSummaryProp,
                       event.description().local8Bit() );
-#endif 
+#endif
   return task;
 };
 }

@@ -1,7 +1,13 @@
+
+#include "osqlbackendmanager.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qdir.h>
 #include <qmap.h>
 
-#include "osqlbackendmanager.h"
 
 /**
  * \todo FIXME CONFIG!!!
@@ -38,7 +44,7 @@ namespace {
         QString line;
         for (it =  list.begin(); it != list.end(); ++it ) {
             line = (*it).stripWhiteSpace();
-            qWarning("Anonymous::Config:" + line );
+            owarn << "Anonymous::Config:" + line << oendl;
             QStringList test = QStringList::split(' ', line );
             m_list.insert( test[0], test[2] );
         }
@@ -92,7 +98,7 @@ OSQLBackEnd::ValueList OSQLBackEndManager::scanDir( const QString& dirName ) {
  */
 OSQLBackEnd OSQLBackEndManager::file2backend( const QString& file ) {
     OSQLBackEnd end;
-    qWarning("fileName: " + file  );
+    owarn << "fileName: " + file << oendl;
     Config cfg( file );
     if (cfg.load() ) {
         end.setName( cfg.value( "Name") );

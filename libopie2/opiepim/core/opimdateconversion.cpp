@@ -28,6 +28,8 @@ _;:,     .>    :=|.         This program is free software; you can
 
 /* OPIE */
 #include <opie2/opimdateconversion.h>
+#include <opie2/odebug.h>
+
 #include <qpe/timeconversion.h>
 
 namespace Opie
@@ -46,7 +48,7 @@ QString OPimDateConversion::dateToString( const QDate &d )
     day = day.rightJustify( 2, '0' );
 
     QString str = year + month + day;
-    //qDebug( "\tPimContact dateToStr = %s", str.latin1() );
+    //odebug << "\tPimContact dateToStr = " << str << "" << oendl;
 
     return str;
 }
@@ -74,24 +76,24 @@ QDate OPimDateConversion::dateFromString( const QString& s )
     // but we isValid() again? -zecke
     if ( year < 1900 || year > 3000 )
     {
-        qWarning( "PimContact year is not in range" );
+        owarn << "PimContact year is not in range" << oendl;
         return date;
     }
     if ( month < 0 || month > 12 )
     {
-        qWarning( "PimContact month is not in range" );
+        owarn << "PimContact month is not in range" << oendl;
         return date;
     }
     if ( day < 0 || day > 31 )
     {
-        qWarning( "PimContact day is not in range" );
+        owarn << "PimContact day is not in range" << oendl;
         return date;
     }
 
     date.setYMD( year, month, day );
     if ( !date.isValid() )
     {
-        qWarning( "PimContact date is not valid" );
+        owarn << "PimContact date is not valid" << oendl;
         return date;
     }
 

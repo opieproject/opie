@@ -26,6 +26,25 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
+
+/* OPIE */
+#include <opie2/opimdateconversion.h>
+#include <opie2/opimstate.h>
+#include <opie2/opimtimezone.h>
+#include <opie2/opimnotifymanager.h>
+#include <opie2/opimrecurrence.h>
+#include <opie2/otodoaccessxml.h>
+#include <opie2/odebug.h>
+
+#include <qpe/global.h>
+#include <qpe/stringutil.h>
+#include <qpe/timeconversion.h>
+
+/* QT */
+#include <qfile.h>
+#include <qvector.h>
+
+/* STD */
 #include <errno.h>
 #include <fcntl.h>
 
@@ -35,20 +54,6 @@
 
 #include <unistd.h>
 
-
-#include <qfile.h>
-#include <qvector.h>
-
-#include <qpe/global.h>
-#include <qpe/stringutil.h>
-#include <qpe/timeconversion.h>
-
-#include <opie2/opimdateconversion.h>
-#include <opie2/opimstate.h>
-#include <opie2/opimtimezone.h>
-#include <opie2/opimnotifymanager.h>
-#include <opie2/opimrecurrence.h>
-#include <opie2/otodoaccessxml.h>
 
 using namespace Opie;
 
@@ -76,21 +81,21 @@ char *strstrlen(const char *haystack, int hLen, const char* needle, int nLen)
     char needleChar;
     char haystackChar;
     if (!needle || !haystack || !hLen || !nLen)
-	return 0;
+    return 0;
 
     const char* hsearch = haystack;
 
     if ((needleChar = *needle++) != 0) {
-	nLen--; //(to make up for needle++)
-	do {
-	    do {
-		if ((haystackChar = *hsearch++) == 0)
-		    return (0);
-		if (hsearch >= haystack + hLen)
-		    return (0);
-	    } while (haystackChar != needleChar);
-	} while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
-	hsearch--;
+    nLen--; //(to make up for needle++)
+    do {
+        do {
+        if ((haystackChar = *hsearch++) == 0)
+            return (0);
+        if (hsearch >= haystack + hLen)
+            return (0);
+        } while (haystackChar != needleChar);
+    } while (strncmp(hsearch, needle, QMIN(hLen - (hsearch - haystack), nLen)) != 0);
+    hsearch--;
     }
     return ((char *)hsearch);
 }
@@ -177,52 +182,52 @@ bool OPimTodoAccessXML::load() {
     while ( ( point = strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0l ) {
         i = point -dt;
         i+= strLen;
-        qWarning("Found a start at %d %d", i,  (point-dt) );
+        owarn << "Found a start at " << i << " " << (point-dt) << "" << oendl;
 
         OPimTodo ev;
         m_year = m_month = m_day = 0;
 
         while ( TRUE ) {
             while ( i < len && (dt[i] == ' ' || dt[i] == '\n' || dt[i] == '\r') )
-		++i;
-	    if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
-		break;
+        ++i;
+        if ( i >= len-2 || (dt[i] == '/' && dt[i+1] == '>') )
+        break;
 
-	    // we have another attribute, read it.
-	    int j = i;
-	    while ( j < len && dt[j] != '=' )
-		++j;
-	    QCString attr( dt+i, j-i+1);
+        // we have another attribute, read it.
+        int j = i;
+        while ( j < len && dt[j] != '=' )
+        ++j;
+        QCString attr( dt+i, j-i+1);
 
-	    i = ++j; // skip =
+        i = ++j; // skip =
 
-	    // find the start of quotes
-	    while ( i < len && dt[i] != '"' )
-		++i;
-	    j = ++i;
+        // find the start of quotes
+        while ( i < len && dt[i] != '"' )
+        ++i;
+        j = ++i;
 
-	    bool haveUtf = FALSE;
-	    bool haveEnt = FALSE;
-	    while ( j < len && dt[j] != '"' ) {
-		if ( ((unsigned char)dt[j]) > 0x7f )
-		    haveUtf = TRUE;
-		if ( dt[j] == '&' )
-		    haveEnt = TRUE;
-		++j;
-	    }
-	    if ( i == j ) {
-		// empty value
-		i = j + 1;
-		continue;
-	    }
+        bool haveUtf = FALSE;
+        bool haveEnt = FALSE;
+        while ( j < len && dt[j] != '"' ) {
+        if ( ((unsigned char)dt[j]) > 0x7f )
+            haveUtf = TRUE;
+        if ( dt[j] == '&' )
+            haveEnt = TRUE;
+        ++j;
+        }
+        if ( i == j ) {
+        // empty value
+        i = j + 1;
+        continue;
+        }
 
-	    QCString value( dt+i, j-i+1 );
-	    i = j + 1;
+        QCString value( dt+i, j-i+1 );
+        i = j + 1;
 
-	    QString str = (haveUtf ? QString::fromUtf8( value )
-		    : QString::fromLatin1( value ) );
-	    if ( haveEnt )
-		str = Qtopia::plainString( str );
+        QString str = (haveUtf ? QString::fromUtf8( value )
+            : QString::fromLatin1( value ) );
+        if ( haveEnt )
+        str = Qtopia::plainString( str );
 
             /*
              * add key + value
@@ -233,7 +238,7 @@ bool OPimTodoAccessXML::load() {
         /*
          * now add it
          */
-        qWarning("End at %d", i );
+        owarn << "End at " << i << "" << oendl;
         if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
             ev.setUid( 1 );
             m_changed = true;
@@ -256,7 +261,7 @@ bool OPimTodoAccessXML::load() {
 
     munmap(map_addr, attribut.st_size );
 
-    qWarning("counts %d records loaded!", m_events.count() );
+    owarn << "counts " << m_events.count() << " records loaded!" << oendl;
     return true;
 }
 bool OPimTodoAccessXML::reload() {
@@ -264,9 +269,9 @@ bool OPimTodoAccessXML::reload() {
     return load();
 }
 bool OPimTodoAccessXML::save() {
-//    qWarning("saving");
+//    owarn << "saving" << oendl;
     if (!m_opened || !m_changed ) {
-//        qWarning("not saving");
+//        owarn << "not saving" << oendl;
         return true;
     }
     QString strNewFile = m_file + ".new";
@@ -307,7 +312,7 @@ bool OPimTodoAccessXML::save() {
     f.close();
 
     if( ::rename( strNewFile.latin1(),  m_file.latin1() ) < 0 ) {
-//        qWarning("error renaming");
+//        owarn << "error renaming" << oendl;
         QFile::remove( strNewFile );
     }
 
@@ -345,7 +350,7 @@ void OPimTodoAccessXML::clear() {
     m_events.clear();
 }
 bool OPimTodoAccessXML::add( const OPimTodo& todo ) {
-//    qWarning("add");
+//    owarn << "add" << oendl;
     m_changed = true;
     m_events.insert( todo.uid(), todo );
 
@@ -404,13 +409,13 @@ QArray<int> OPimTodoAccessXML::overDue() {
 /* private */
 void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
                             const QCString& attr, const QString& val) {
-//    qWarning("parse to do from XMLElement" );
+//    owarn << "parse to do from XMLElement" << oendl;
 
     int *find=0;
 
     find = (*dict)[ attr.data() ];
     if (!find ) {
-//            qWarning("Unknown option" + it.key() );
+//            owarn << "Unknown option" + it.key() << oendl;
         ev.setCustomField( attr, val );
         return;
     }
@@ -463,8 +468,8 @@ void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
         QStringList als = QStringList::split(";", val );
         for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
             QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
-            qWarning("alarm: %s", alarm.join("___").latin1() );
-            qWarning("alarm[0]: %s %s", alarm[0].latin1(), OPimDateConversion::dateTimeFromString( alarm[0] ).toString().latin1() );
+            owarn << "alarm: " << alarm.join("___") << "" << oendl;
+            owarn << "alarm[0]: " << alarm[0] << " " << OPimDateConversion::dateTimeFromString( alarm[0] ).toString() << "" << oendl;
             OPimAlarm al( alarm[2].toInt(), OPimDateConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
             manager.add( al );
         }
@@ -537,15 +542,15 @@ void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
 namespace {
 QString customToXml(const QMap<QString, QString>& customMap )
 {
-    //qWarning(QString("writing custom %1").arg(customMap.count()));
+    //owarn << QString("writing custom %1").arg(customMap.count()) << oendl;
     QString buf(" ");
     for ( QMap<QString, QString>::ConstIterator cit = customMap.begin();
-	    cit != customMap.end(); ++cit) {
-// 	qWarning(".ITEM.");
-	buf += cit.key();
-	buf += "=\"";
-	buf += Qtopia::escapeString(cit.data());
-	buf += "\" ";
+        cit != customMap.end(); ++cit) {
+//  owarn << ".ITEM." << oendl;
+    buf += cit.key();
+    buf += "=\"";
+    buf += Qtopia::escapeString(cit.data());
+    buf += "\" ";
     }
     return buf;
 }
@@ -570,7 +575,7 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
         str += "DateMonth=\"" + QString::number( ev.dueDate().month() ) + "\" ";
         str += "DateDay=\"" + QString::number( ev.dueDate().day() ) + "\" ";
     }
-//    qWarning( "Uid %d",  ev.uid() );
+//    owarn << "Uid " << ev.uid() << "" << oendl;
     str += "Uid=\"" + QString::number( ev.uid() ) + "\" ";
 
 // append the extra options
@@ -617,7 +622,7 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
                 }
             }
             // now write the list
-            qWarning("als: %s", als.join("____________").latin1() );
+            owarn << "als: " << als.join("____________") << "" << oendl;
             str += "Alarms=\""+als.join(";") +"\" ";
         }
 
@@ -838,7 +843,7 @@ QArray<int> OPimTodoAccessXML::sorted( bool asc,  int sortOrder,
             }
         /* isOverdue but we should not show overdue - why?*/
 /*        if ( (*it).isOverdue() &&  !bOnly  ) {
-            qWarning("item is overdue but !bOnly");
+            owarn << "item is overdue but !bOnly" << oendl;
             continue;
         }
 */
@@ -891,19 +896,19 @@ QBitArray OPimTodoAccessXML::sup() {
 }
 QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
 {
-	QArray<int> m_currentQuery( m_events.count() );
-	uint arraycounter = 0;
+    QArray<int> m_currentQuery( m_events.count() );
+    uint arraycounter = 0;
 
         QMap<int, OPimTodo>::ConstIterator it;
         for (it = m_events.begin(); it != m_events.end(); ++it ) {
-		if ( it.data().match( r ) )
-			m_currentQuery[arraycounter++] = it.data().uid();
+        if ( it.data().match( r ) )
+            m_currentQuery[arraycounter++] = it.data().uid();
 
-	}
-	// Shrink to fit..
-	m_currentQuery.resize(arraycounter);
+    }
+    // Shrink to fit..
+    m_currentQuery.resize(arraycounter);
 
-	return m_currentQuery;
+    return m_currentQuery;
 }
 
 }
