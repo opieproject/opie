@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Hit Bill
+Exec=kbill
+Icon=kbill/kbill
+Type=Application
+Name=kbill
