@@ -16,6 +16,7 @@
 // Base class
 
 ProfileEditorPlugin::ProfileEditorPlugin(QWidget *parent, Profile *p)
+: QObject()
 {
 	m_parent = parent;
 	m_profile = p;
