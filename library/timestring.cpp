@@ -67,10 +67,10 @@ QString DateFormat::toNumberString() const
 	// switch on the relavent 3 bits.
 	switch((_shortOrder >> (i * 3)) & 0x0007) {
 	    case 0x0001:
-		buf += QObject::tr( "D" );
+		buf += QObject::tr( "D" , "Shortcut for Day");
 		break;
 	    case 0x0002:
-		buf += QObject::tr( "M" );
+		buf += QObject::tr( "M", "Shortcur for Month" );
 		break;
 	    case 0x0004:
 		buf += QObject::tr( "Y" );

@@ -367,3 +367,253 @@
  *  return QRegion(r) - rect;
  * \endcode
  */
+
+
+/**
+ * \class DateFormat
+ * \brief The format a Date and Time is composed
+ *
+ * Define how a Date and Time should be composed
+ *
+ * @see TimeString
+ */
+
+/**
+ * \enum DateFormat::Order
+ * The order of the Day,Month and Year
+ */
+/**
+ * \val DateFormat::Order::DayMonthYear
+ * First the Day, then the Month and the Year
+ */
+
+/**
+ * \val DateFormat::Order::MonthDayYear
+ * First the Month then Day and Year followed
+ */
+/**
+ * \val DateFormat::Order::YearMonthDay
+ * Year Month and then the Day
+ */
+
+/**
+ * \fn QString DateFormat::toNumberString()const
+ *  Return the Order of Days as string (M/D/Y) in example
+ *  this string can be shown to the user.
+ *  It will extract three bits at a time and compose
+ *  a string
+ */
+
+/**
+ * \fn QString DateFormat::toWordString()const
+ *  Return the DateFormat as written words
+ *
+ */
+
+/**
+ * \fn DateFormat::DateFormat(QChar s,Order or)
+ * A Constructor.
+ * @param s The seperator for the short representation. As used by toNumberString
+ * @param or The order used for short and long dates
+ */
+
+/**
+ * \fn DateFormat::DateFormat(QChar s,Order so,Order lo)
+ *
+ * A different Constructor with different long and short representation
+ * @param s The seperator
+ * @param so The short order representation
+ * @param lo The long order representation
+ */
+
+
+/**
+ * \fn DateFormat::DateFormat(const DateFormat&)
+ * Copy c'tor
+ *
+ */
+
+/**
+ * \enum DateFormat::Verbosity
+ * The verbosity as used by DateFormat::numberDate() and DateFormat::wordDate()
+ *
+ * \enum val shortNumber Express the Year as 04
+ * \enum val longNumber Express the Year as 2004
+ * \enum val showWeekDay Use week day names
+ * \enum val longWord Use long word. If not set the week day will be stripped to the first three characters
+ *
+ *
+ * @see DateFormat::numberDate
+ * @see DateFormat::wordDate
+ */
+
+/**
+ * \fn QString DateFormat::numberDate(const QDate& d,int v)const
+ *
+ *  Compose the QDate to a QString using the shortOrder() and
+ *  the verbosity. The verbosity is only used to see if the
+ *  year should be four positions or two positions wide.
+ *
+ *  @param d The QDate to be expressed as string
+ *  @param v Only DateFormat::Verbosity::shortNumber or
+ *           DateFormat::Verbosity::longNumber is used.
+ *           Use this to say if the year should be two or four
+ *           positions wide
+ *
+ * @see DateFormat::wordDate()
+ */
+
+/**
+ * \fn  QString DateFormat::wordDate(const QDate& d,int v )const
+ * Compose the QDate to a QString using the longOrder() options.
+ * The difference to numberDate() is the length of the resulting
+ * string. Weekday- and Monthnames are expressed as words as opposed to digits.
+ *
+ *
+ * @param d The Date to be used
+ * @param v The verbosity
+ */
+
+/**
+ * \fn void DateFormat::load(QDataStream&)
+ * load from the QDateStream. And set the values
+ * internally
+ */
+
+/**
+ * \fn void DateFormat::save(QDateStream&)const
+ * save this DateFormat into the QDataStream
+ */
+
+/**
+ *\fn QChar DateFormat::seperator()const
+ * The seperator used for the numberString()
+ */
+/**
+ * \fn DateFormat::Order DateFormat::shortOrder()const
+ * Return the DateFormat::Order for the shortOrder which will be used by numberString
+ */
+/**
+ * \fn DateFormat::Order DateFormat::longOrder()const
+ * Return the DateFormat::Order for the longOrder which will be used by the wordString
+ */
+
+/**
+ * \class TimeString
+ * \brief A frontend  to DateFormat
+ *
+ * A utility class to use DateFormat more easily
+ * @todo For ODP add QDateTime and QTime  operations honoring system settings
+ */
+
+/**
+ * \fn QString TimeString::shortDate(const QDate& d)
+ * Call the overloaded function with currentDateFormat()
+ *
+ * @param d The QDate to be transformed
+ * @see TimeString::shortDate(const QDate& d,DateFormat)
+ */
+/**
+ * \fn QString TimeString::dateString(const QDate& d);
+ * This function calls the overloaded function with currentDateFormat()
+ *
+ * @param d The QDate to be used
+ * @see TimeString::dateString(const QDate& d,DateFormat);
+ */
+/**
+ * \fn QString TimeString::longDateString(const QDate& d);
+ *
+ * This functions calls the olverloaded function with currentDateFormat()
+ *
+ * @param d The QDate to be used
+ * @see TimeString::longDateString(const QDate& d,DateFormat);
+ */
+/**
+ * \fn QString TimeString::dateString(const QDateTime&,bool,bool);
+ * @internal
+ */
+/**
+ * \fn QString TimeString::dateString(const QDateTime& t,bool)
+ * Do not use they do not honor system wide AMPM settings.
+ * Also
+ *
+ * @see numberDateString
+ * @see longNumberDateString
+ */
+/**
+ * \fn QString TimeString::numberDateString(const QDate& d, DateFormat f )
+ *  Return the date as String in number coding (DD/MM/YY) depending on the
+ *  date format
+ *
+ * @param d The QDate to be used
+ * @param f The DateFormat to be used
+ */
+/**
+ * \fn QString TimeString::numberDateString(const QDate& d)
+ * This is an overloaded function and uses the currentDateFormat()
+ * of the system
+ *
+ * @see currentDateFormat()
+ * @param d The QDate to be used
+ */
+/**
+ * \fn QString TimeString::longNumberDateString(const QDate& d, DateFormat f )
+ *  Return the date as String in number coding (DD/MM/YYYY) depending on the
+ *  date format. This uses the DateFormat::longNumber verbosity on the DateFormat::numberDate
+ *  method
+ *
+ * @param d The QDate to be used
+ * @param f The DateFormat to be used
+ */
+/**
+ * \fn QString TimeString::longNumberDateString(const QDate& d)
+ * This is an overloaded function and uses the currentDateFormat()
+ * of the system.
+ *
+ *
+ * @see currentDateFormat()
+ * @see longNumberDateString(const QDate&,DateFormat)
+ * @param d The QDate to be used
+ */
+
+
+/**
+ * \fn QString TimeString::shortDate(const QDate& d,DateFormat f)
+ * Calls DateFormat::wordDate with d
+ *
+ * Example: '20 Feb 04'
+ *
+ *
+ *
+ * @param d The QDate used
+ * @param f DateFormat which will be used for composing
+ * @todo Make naming consistent with the two other functions calling wordDate
+ */
+
+/**
+ * \fn QString TimeString::dateString(const QDate& d,DateFormat f )
+ * Calls and translates DateFormat::wordDate with d and
+ * DateFormat::longNumber|DateFormat::longWord
+ * This means we will translate the month name and have a 4 digit year (2004)
+ *
+ * Example: '20 Feb 2004'
+ *
+ * @param d The QDate.
+ * @param f The DateFormat which will be called
+ */
+
+/**
+ * \fn QSrring TimeString::longDateString(const QDate& d, DateFormat f )
+ * Calls and translates DateFormat::wordDate with DateFormat::showWeekDay|DateFormat::longNumber|DateFormat::longWord.
+ * This means you will have a string with the week day name, monthname and a four digit year.
+ *
+ * Example: 'Fr, 20 Feb 2004'
+ *
+ * @param d The QDate
+ *
+ */
+
+/**
+ * \fn DateFormat currentDateFormat()
+ * Return the System DateFormat
+ */

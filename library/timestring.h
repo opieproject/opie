@@ -102,21 +102,31 @@ public:
     //enum DateFormat { MonthDayYear, DayMonthYear, ISO8601,
 		      //YearMonthDay = ISO8601 };
 
-
+/**
+ * @name Convience functions which use currentDateFormat
+ */
+//@{
     static QString shortDate( const QDate &d )
     { return shortDate( d, currentDateFormat() ); }
     static QString dateString( const QDate &d )
     { return dateString( d, currentDateFormat() ); }
     static QString longDateString( const QDate &d )
     { return longDateString( d, currentDateFormat() ); }
+//@}
     static QString dateString( const QDateTime &dt, bool ampm, bool seconds )
     { return dateString( dt, ampm, seconds, currentDateFormat() ); }
 
+
+   /** @name Do not use as they don't honor system settings for AMPM
+    *
+    */
+    //@{
     static QString dateString( const QDateTime &t, bool ampm = false );
     static QString timeString( const QTime &t, bool ampm, bool seconds );
     static QString timeString( const QTime &t, bool ampm = false );
     static QString shortTime( bool ampm, bool seconds );
     static QString shortTime( bool ampm = false );
+    //@}
 
     static QString numberDateString( const QDate &d, DateFormat );
     static QString numberDateString( const QDate &d )
