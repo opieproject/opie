@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.9 2004-04-09 15:00:07 mickeyl Exp $
+ * $Id: general.cpp,v 1.10 2004-10-14 00:39:47 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -286,7 +286,6 @@ ModemWidget::~ModemWidget()
         {
             devs << edited;
         }
-        _pppdata->setModemDevice( edited );
     }
 
 
@@ -337,7 +336,6 @@ bool ModemWidget::save()
             !_pppdata->isUniqueDevname(modemname->text()))
         return false;
 
-    odebug << "ModemWidget::save saving modem1 data" << oendl; 
     _pppdata->setDevname( modemname->text() );
     _pppdata->setModemDevice( modemdevice->currentText() );
     _pppdata->setFlowcontrol(flowcontrol->currentText());
@@ -348,6 +346,34 @@ bool ModemWidget::save()
     return true;
 
 }
+
+void ModemWidget::slotBeforeModemQuery()
+{
+    m_oldModemDev     = _pppdata->modemDevice();
+    m_oldFlowControl  = _pppdata->flowcontrol();
+    m_oldSpeed        = _pppdata->speed();
+    m_oldModemLock    = _pppdata->modemLockFile();
+    m_oldModemTimeout = _pppdata->modemTimeout();
+
+
+    _pppdata->setModemDevice( modemdevice->currentText() );
+    _pppdata->setFlowcontrol(flowcontrol->currentText());
+    _pppdata->setFlowcontrol(flowcontrol->currentText());
+    _pppdata->setSpeed(baud_c->currentText());
+    _pppdata->setModemLockFile( modemlockfile->isChecked());
+    _pppdata->setModemTimeout( modemtimeout->value() );
+}
+
+
+void ModemWidget::slotAfterModemQuery()
+{
+    _pppdata->setModemDevice( m_oldModemDev );
+    _pppdata->setFlowcontrol( m_oldFlowControl );
+    _pppdata->setSpeed( m_oldSpeed );
+    _pppdata->setModemLockFile( m_oldModemLock );
+    _pppdata->setModemTimeout( m_oldModemTimeout );
+}
+
 
 ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
                             const char *name)
@@ -488,8 +514,12 @@ void ModemWidget2::modemcmdsbutton()
 
 void ModemWidget2::query_modem()
 {
+    emit sig_beforeQueryModem();
+
     ModemTransfer mt(_ifaceppp->modem(), this);
     mt.exec();
+
+    emit sig_afterQueryModem();
 }
 
 

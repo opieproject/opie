@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.4 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: general.h,v 1.5 2004-10-14 00:39:47 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -46,6 +46,14 @@ public:
 
   bool save();
 
+private slots:
+    /*
+     * temporarily commit configuration so queryModem
+     * will use 'current' settings
+     */
+    void slotBeforeModemQuery();
+    void slotAfterModemQuery();
+
 /* private slots: */
 /*   void 	setmodemdc(int); */
 /*   void  setmodemdc(const QString &); */
@@ -71,6 +79,11 @@ private:
   QSpinBox 	*modemtimeout;
   QCheckBox     *modemlockfile;
   PPPData *_pppdata;
+
+private:
+    QString m_oldModemDev, m_oldFlowControl, m_oldSpeed;
+    bool m_oldModemLock;
+    int m_oldModemTimeout;
 };
 
 
@@ -79,6 +92,10 @@ class ModemWidget2 : public QWidget {
 public:
   ModemWidget2( PPPData*, InterfacePPP*, QWidget *parent=0, const char *name=0 );
   bool save();
+
+signals:
+    void sig_beforeQueryModem();
+    void sig_afterQueryModem();
 
 private slots:
 /*   void  waitfordtchanged(bool); */

@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.6 2004-09-10 11:16:55 zecke Exp $
+ * $Id: devices.cpp,v 1.7 2004-10-14 00:39:47 zecke Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -195,6 +195,11 @@ int DevicesWidget::doTab(){
    modem2 = new ModemWidget2( _pppdata, _ifaceppp, tabWindow, "modem2" );
    tabWindow->addTab( modem2, tr("&Modem") );
 
+   connect(modem2, SIGNAL(sig_beforeQueryModem()),
+           modem1, SLOT(slotBeforeModemQuery()));
+   connect(modem2, SIGNAL(sig_afterQueryModem()),
+           modem1, SLOT(slotAfterModemQuery()));
+
     int result = 0;
     bool ok = false;
 
@@ -204,7 +209,7 @@ int DevicesWidget::doTab(){
 
         if(result == QDialog::Accepted) {
             if (!modem1->save()){
-                QMessageBox::critical(this, "error", tr( "You must enter a unique device name"));
+                QMessageBox::critical(this, tr("Error"), tr( "You must enter a unique device name"));
                 ok = false;
             }else{
                  modem2->save();
