@@ -131,12 +131,15 @@ void ClipboardApplet::mousePressEvent ( QMouseEvent *)
 {
 	if ( !menu ) {
 		menu = new QPopupMenu ( this );
-		menu-> insertItem ( tr( "Cut" ), 0 );
-		menu-> insertItem ( tr( "Copy" ), 1 );
-		menu-> insertItem ( tr( "Paste" ), 2 );
+		menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "cut" )), tr( "Cut" ), 0 );
+		menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "copy" )), tr( "Copy" ), 1 );
+		menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "paste" )), tr( "Paste" ), 2 );
 		connect ( menu, SIGNAL( activated ( int )), this, SLOT( action ( int )));
 	}
-	menu->popup(mapToGlobal(QPoint(0,0)));
+	QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
+	QSize s = menu-> sizeHint ( );
+	
+	menu-> popup ( QPoint ( p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), p. y ( ) - s. height ( )));
 }
 
 void ClipboardApplet::action(int id)
