@@ -159,16 +159,9 @@ public:
 
             case TabConfig::Image: {
                 odebug << "Loading image: " << val << "" << oendl;
-                QPixmap bg ( Resource::loadPixmap ( "wallpaper/" + val ));
-                if ( bg. isNull ( )) {
-                    QImageIO imgio;
-                    imgio. setFileName ( val );
-                    QSize ds = qApp-> desktop ( )-> size ( );
-                    QString param ( "Scale( %1, %2, ScaleMin )" ); // No tr
-                    imgio. setParameters ( param. arg ( ds. width ( )). arg ( ds. height ( )). latin1 ( ));
-                    imgio. read ( );
-                    bg = imgio. image ( );
-                }
+                QPixmap bg = Resource::loadPixmap ( val );
+                if ( bg. isNull () )
+                    bg = QPixmap( val );
                 setBackgroundPixmap ( bg );
                 break;
             }
@@ -299,19 +292,19 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
     lay-> addWidget ( tw, 10 );
     lay-> addWidget ( sample, 1 );
 
-    m_iconsize-> setButton ( tc. m_view );
-    iconSizeClicked ( tc. m_view );
-    //m_iconcolor-> setColor ( QColor ( m_tc. m_text_color ));
-    iconColorClicked ( m_iconcolor-> color ( ));
-    m_bgtype-> setButton ( tc. m_bg_type );
-    //m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
-    m_iconcolumns->setValue( tc. m_iconcolumns );
     m_bgimage = tc. m_bg_image;
-    bgTypeClicked ( tc. m_bg_type );
+    m_bgtype-> setButton ( tc. m_bg_type );
+    bgTypeClicked( tc.m_bg_type );
+
     m_fontuse-> setChecked ( tc. m_font_use );
     m_fontselect-> setSelectedFont ( QFont ( tc. m_font_family, tc. m_font_size, tc. m_font_weight, tc. m_font_italic ));
     m_fontselect-> setEnabled ( m_fontuse-> isChecked ( ));
     fontClicked ( m_fontselect-> selectedFont ( ));
+
+    m_iconsize-> setButton ( tc. m_view );
+    iconSizeClicked ( tc. m_view );
+    iconColorClicked ( m_iconcolor-> color ( ));
+    m_iconcolumns->setValue( tc. m_iconcolumns );
 
     QWhatsThis::add ( sample, tr( "This is a rough preview of what the currently selected Tab will look like." ));
 }
@@ -352,6 +345,7 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     m_bgtype = new QButtonGroup( tab, "buttongroup" );
     m_bgtype-> hide ( );
     m_bgtype-> setExclusive ( true );
+    connect ( m_bgtype, SIGNAL( clicked(int)), this, SLOT( bgTypeClicked(int)));
 
     QRadioButton *rb;
     rb = new QRadioButton( tr( "Ruled" ), tab, "ruled" );
@@ -391,8 +385,6 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     QPushButton *p = new QPushButton ( tr( "Default" ), tab );
     connect ( p, SIGNAL( clicked()), this, SLOT( bgDefaultClicked()));
     gridLayout-> addWidget ( p, 3, 1 );
-
-    connect ( m_bgtype, SIGNAL( clicked(int)), this, SLOT( bgTypeClicked(int)));
 
     vertLayout-> addStretch ( 10 );
 
@@ -461,24 +453,20 @@ void TabDialog::fontClicked ( const QFont &f )
 void TabDialog::bgTypeClicked ( int t )
 {
     QString s;
-
-    if ( m_bgtype-> id ( m_bgtype-> selected ( )) != t )
-        m_bgtype-> setButton ( t );
-
     m_solidcolor-> setEnabled ( t == TabConfig::SolidColor );
     m_imagebrowse-> setEnabled ( t == TabConfig::Image );
 
     if ( t == TabConfig::SolidColor )
         s = m_solidcolor-> color ( ). name ( );
     else if ( t == TabConfig::Image )
-        s = Resource::findPixmap ( m_bgimage );
+        s = m_bgimage;
 
     m_sample-> setBackgroundType ((TabConfig::BackgroundType) t, s );
 }
 
 void TabDialog::bgColorClicked ( const QColor & )
 {
-    bgTypeClicked ( TabConfig::SolidColor );
+    m_sample-> setBackgroundType ( TabConfig::SolidColor, m_solidcolor-> color ( ). name ( ) );
 }
 
 void TabDialog::iconColorClicked ( const QColor &col )
@@ -501,14 +489,16 @@ void TabDialog::bgImageClicked ( )
     if ( !file. isEmpty ( )) {
     	m_tc.m_last_directory = QFileInfo( file ).dirPath();
         m_bgimage = DocLnk ( file ). file ( );
-        bgTypeClicked ( TabConfig::Image );
+        m_sample-> setBackgroundType ( TabConfig::Image, m_bgimage );
     }
 }
 
 void TabDialog::bgDefaultClicked ( )
 {
+    m_bgtype-> setButton ( TabConfig::Image );
     m_bgimage = "launcher/opie-background";
-    bgTypeClicked ( TabConfig::Image );
+    bgTypeClicked( TabConfig::Image );
+    //m_sample-> setBackgroundType ( TabConfig::Image, m_bgimage );
 }
 
 void TabDialog::accept ( )
