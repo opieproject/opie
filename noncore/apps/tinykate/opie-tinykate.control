@@ -1,4 +1,4 @@
-Files: bin/tinykate apps/Applications/tinykate.desktop pics/tinykate $OPIEDIR/lib/libtinykate.so.1.0.0 $OPIEDIR/lib/libtinykate.so.1.0 $OPIEDIR/lib/libtinykate.so.1
+Files: bin/tinykate apps/Applications/tinykate.desktop pics/tinykate $OPIEDIR/lib/libtinykate.so.1.0.0 $OPIEDIR/lib/libtinykate.so.1.0 $OPIEDIR/lib/libtinykate.so.1 share/tinykate/*
 Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
