@@ -3,688 +3,688 @@
     <name>AccountView</name>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit novou složku</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Chyba během vytváření&lt;br&gt;nové složky - přerušení.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>V adresáři nejsou žádné položky.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vyberte alespoň jednu položku adresáře.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerUI</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Sběrač adres</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
 </context>
 <context>
     <name>ComposeMail</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Problém</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please create an SMTP account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prosím vytvořte nejdříve SMTP účet.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select a File.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prosím vyberte soubor.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>ComposeMailUI</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Napsat zprávu</translation>
     </message>
     <message>
         <source>send later</source>
-        <translation type="unfinished"></translation>
+        <translation>odeslat později</translation>
     </message>
     <message>
         <source>use:</source>
-        <translation type="unfinished"></translation>
+        <translation>použít:</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Předmět</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Od</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Komu</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpovědět</translation>
     </message>
     <message>
         <source>BCC</source>
-        <translation type="unfinished"></translation>
+        <translation>Slepá kopie</translation>
     </message>
     <message>
         <source>Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Podpis</translation>
     </message>
     <message>
         <source>CC</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie</translation>
     </message>
     <message>
         <source>Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Příloha</translation>
     </message>
     <message>
         <source>Delete File</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat soubor</translation>
     </message>
     <message>
         <source>Add File</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat soubor</translation>
     </message>
 </context>
 <context>
     <name>EditAccounts</name>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Otázka</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete the selected Account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu chcete smazat vybraný účet?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select an account.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prosím vyberte účet.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>EditAccountsUI</name>
     <message>
         <source>Configure Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat účty</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Název účtu</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>News</source>
-        <translation type="unfinished"></translation>
+        <translation>Novinky</translation>
     </message>
 </context>
 <context>
     <name>IMAPconfigUI</name>
     <message>
         <source>Configure IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat IMAP</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatel</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Používat SSL</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Název účtu</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet</translation>
     </message>
     <message>
         <source>Prefix</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefix</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Napsat novou zprávu</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat zprávy ve frontě</translation>
     </message>
     <message>
         <source>Show/Hide folders</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat/skrýt složky</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat zprávu</translation>
     </message>
     <message>
         <source>Edit settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit nastavení</translation>
     </message>
     <message>
         <source>Configure accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat účty</translation>
     </message>
     <message>
         <source>Mailbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Schránka</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation>Předmět</translation>
     </message>
     <message>
         <source>Sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Odesílatel</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
 </context>
 <context>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat NNTP</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Název účtu</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Používat SSL</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatel</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Používat přihlašování</translation>
     </message>
 </context>
 <context>
     <name>Newmdirdlgui</name>
     <message>
         <source>Enter directory name</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte název adresáře</translation>
     </message>
     <message>
         <source>Directory name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název adresáře:</translation>
     </message>
     <message>
         <source>Directory contains other subdirs</source>
-        <translation type="unfinished"></translation>
+        <translation>Adresář obsahuje podadresáře</translation>
     </message>
 </context>
 <context>
     <name>OpieMail</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
     <message>
         <source>Mail queue flushed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fronta vyprázdněna</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat zprávu</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu chcete smazat tuto zprávu? &lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Read this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Přečíst tuto zprávu</translation>
     </message>
     <message>
         <source>Delete this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat tuto zprávu</translation>
     </message>
     <message>
         <source>Copy/Move this mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopírovat/Přesunout zprávu</translation>
     </message>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze vytvořit nová složka</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;Chyba během vytváření&lt;br&gt;nové složky - přerušení.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>POP3configUI</name>
     <message>
         <source>Configure POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurace POP3</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Název účtu</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Použít zabezpečení:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec imapd</source>
-        <translation type="unfinished"></translation>
+        <translation>ssh $SERVER exec imapd</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatel</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo</translation>
     </message>
 </context>
 <context>
     <name>SMTPconfigUI</name>
     <message>
         <source>Configure SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat SMTP</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Používat SSL</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Používat přihlašování</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Název účtu</translation>
     </message>
     <message>
         <source>Name of the SMTP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Název SMTP serveru</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished"></translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Port of the SMTP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Port SMTP serveru</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatel</translation>
     </message>
 </context>
 <context>
     <name>SelectMailTypeUI</name>
     <message>
         <source>Select Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte typ</translation>
     </message>
     <message>
         <source>Select Account Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte typ účtu</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>IMAP</translation>
     </message>
     <message>
         <source>POP3</source>
-        <translation type="unfinished"></translation>
+        <translation>POP3</translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogUI</name>
     <message>
         <source>Settings Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Okno nastavení</translation>
     </message>
     <message>
         <source>View Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit zprávu</translation>
     </message>
     <message>
         <source>View mail as Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit jako Html</translation>
     </message>
     <message>
         <source>Compose Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Napsat zprávu</translation>
     </message>
     <message>
         <source>Send mails later ( enqueue in outbox )</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat zprávy později (zůstanou v outboxu)</translation>
     </message>
     <message>
         <source>Taskbar Applet</source>
-        <translation type="unfinished"></translation>
+        <translation>Applet na lištu</translation>
     </message>
     <message>
         <source>Disable Taskbar Applet</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnout applet na liště</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Check how often</source>
-        <translation type="unfinished"></translation>
+        <translation>Jak často zkoušet</translation>
     </message>
     <message>
         <source>Blink Led when new mails arrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Blikat LED při příchodu nové zprávy</translation>
     </message>
     <message>
         <source>Play Sound when new mails arrive</source>
-        <translation type="unfinished"></translation>
+        <translation>Zahrát zvuk při příchodu nové zprávy</translation>
     </message>
 </context>
 <context>
     <name>StatusWidgetUI</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>TextLabel1</translation>
     </message>
 </context>
 <context>
     <name>ViewMail</name>
     <message>
         <source>Show Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit Text</translation>
     </message>
     <message>
         <source>Save Attachment</source>
-        <translation type="unfinished"></translation>
+        <translation>Uložit přílohu</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Od</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Komu</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopie</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tělo zprávy ještě nebylo staženo, nemůžete zatím odpovídat.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Tělo zprávy ještě nebylo staženo, nemůžete zatím přesměrovávat.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat zprávu</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Opravdu chcete smazat tuto zprávu? &lt;br&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished"></translation>
+        <translation>E-Mail podle %1</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpráva</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpověď</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesměrování</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished"></translation>
+        <translation>Přílohy</translation>
     </message>
     <message>
         <source>Show Html</source>
-        <translation type="unfinished"></translation>
+        <translation>Ukázat Html</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat zprávu</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Název souboru</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
 </context>
 <context>
     <name>selectstoreui</name>
     <message>
         <source>Select target box</source>
-        <translation type="unfinished"></translation>
+        <translation>Okno výběru cíle</translation>
     </message>
     <message>
         <source>&lt;b&gt;Store mail(s) to&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Uložit zprávy do&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Folder:</source>
-        <translation type="unfinished"></translation>
+        <translation>Složka:</translation>
     </message>
     <message>
         <source>Account:</source>
-        <translation type="unfinished"></translation>
+        <translation>Účet:</translation>
     </message>
     <message>
         <source>Create new folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit novou složku</translation>
     </message>
     <message>
         <source>Prefix will prepend, no need to enter it!</source>
-        <translation type="unfinished"></translation>
+        <translation>Prefix se objeví sám, není třeba ho zadávat!</translation>
     </message>
     <message>
         <source>Move mail(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Přesunout zprávy</translation>
     </message>
 </context>
 </TS>
