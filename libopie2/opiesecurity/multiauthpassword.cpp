@@ -61,9 +61,9 @@ bool MultiauthPassword::needToAuthenticate(bool at_poweron)
 {
     Config cfg("Security");
     cfg.setGroup("Misc");
-    if ( !at_poweron && cfg.readBoolEntry("onStart", true) )
+    if ( !at_poweron && cfg.readBoolEntry("onStart", false) )
         return true;
-    else if ( at_poweron && cfg.readBoolEntry("onResume", true) )
+    else if ( at_poweron && cfg.readBoolEntry("onResume", false) )
         return true;
     else
         return false;
