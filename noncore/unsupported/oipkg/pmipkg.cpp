@@ -39,12 +39,13 @@ PmIpkg::~PmIpkg()
 
 //#define PROC
 #define SYSTEM
+#define QT_QPROCESS_DEBUG
 int PmIpkg::runIpkg(const QString& args, const QString& dest )
 {
   pvDebug(2,"PmIpkg::runIpkg "+args);
-
+  QDir::setCurrent("/tmp");
 #ifdef PROC
-  QStringList cmd = "ipkg ";
+  QString cmd;
 #endif
 #ifdef SYSTEM
   QString cmd = "/usr/bin/ipkg ";
@@ -72,7 +73,7 @@ int PmIpkg::runIpkg(const QString& args, const QString& dest )
   int r = 0;
 #ifdef PROC
 	QString o = "start";
-  Process *ipkg = new Process( cmd );
+  Process *ipkg = new Process(QStringList() << "ipkg" << cmd );
   out( "running:<br>\n"+ipkg->arguments().join(" ")+"<br>\n" );
   QString description;
   r = ipkg->exec("",o);
@@ -297,7 +298,7 @@ void PmIpkg::install()
   {
 	  if ( runIpkg("install " + to_install.at(i)->installName(), to_install.at(i)->dest() ) == 0 )
 		{    	
-    	runwindow->progress->setProgress( to_install.at(i)->size().toInt() );
+    	runwindow->progress->setProgress( to_install.at(i)->size().toInt() + runwindow->progress->progress());
       linkOpp = createLink;
 	    if ( to_install.at(i)->link() )
       {

@@ -6,9 +6,13 @@
 #include "debug.h"
 
 static QPixmap *pm_uninstalled=0;
+static QPixmap *pm_uninstalled_old=0;
 static QPixmap *pm_installed=0;
+static QPixmap *pm_installed_old=0;
 static QPixmap *pm_uninstall=0;
 static QPixmap *pm_install=0;
+static QPixmap *pm_uninstalled_old_installed_new=0;
+static QPixmap *pm_uninstalled_installed_old=0;
 
 PackageListItem::PackageListItem(QListView* lv, Package *pi, PackageManagerSettings *s)
   :	QCheckListItem(lv,pi->name(),CheckBox)
@@ -46,7 +50,11 @@ void PackageListItem::init( Package *pi, PackageManagerSettings *s)
   if (!pm_uninstalled)
   {
     pm_uninstalled = new QPixmap(Resource::loadPixmap("oipkg/uninstalled"));
+    pm_uninstalled_old = new QPixmap(Resource::loadPixmap("oipkg/uninstalledOld"));
+    pm_uninstalled_old_installed_new = new QPixmap(Resource::loadPixmap("oipkg/uninstalledOldinstalledNew"));
+    pm_uninstalled_installed_old = new QPixmap(Resource::loadPixmap("oipkg/uninstalledInstalledOld"));
     pm_installed = new QPixmap(Resource::loadPixmap("oipkg/installed"));
+    pm_installed_old = new QPixmap(Resource::loadPixmap("oipkg/installedOld"));
     pm_install = new QPixmap(Resource::loadPixmap("oipkg/install"));
     pm_uninstall = new QPixmap(Resource::loadPixmap("oipkg/uninstall"));
   }
@@ -93,12 +101,25 @@ void PackageListItem::paintFocus( QPainter *p, const QColorGroup & cg,
 QPixmap PackageListItem::statePixmap() const
 {
   bool installed = package->installed();
+  bool old = package->isOld();
+  bool versions = package->hasVersions();
+  bool verinstalled = package->otherInstalled();
   if ( !package->toProcess() ) {
     if ( !installed )
-      return *pm_uninstalled;
+    	if (old)
+     	{
+        if (verinstalled) return *pm_uninstalled_old_installed_new;
+     	 	else return *pm_uninstalled_old;
+      }
+     	else
+      {
+        if (verinstalled) return *pm_uninstalled_installed_old;
+     	 	else return *pm_uninstalled;
+      }
     else
-      return *pm_installed;
-  } else {
+    	if (old) return *pm_installed_old;
+     	else return *pm_installed;
+  } else { //toProcess() == true
     if ( !installed )
       return *pm_install;
     else

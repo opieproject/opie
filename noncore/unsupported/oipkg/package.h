@@ -23,9 +23,10 @@ class Package //: public QObject
   void    setValue( QString, QString );
   void    copyValues( Package* );
 
-  QString name() ;
-  QString installName() ;
+  QString name();
+  QString installName();
   bool    installed();
+  bool    otherInstalled();
 
   void    setDesc( QString );
   QString shortDesc();
@@ -46,11 +47,17 @@ class Package //: public QObject
   void setOn();
   bool link();
   void setLink(bool);
+  bool isOld();
+  bool hasVersions();
   void parseIpkgFile( QString );
   void instalFromFile(bool iff=true);
   void setName(QString);
   QDict<QString>* getFields();
   QString status();
+
+	QDict<Package>* getOtherVersions();
+	void setOtherVersions(QDict<Package>*);
+
 public slots:
   void toggleProcess();
 
@@ -59,6 +66,8 @@ private:
   QString _displayName;
   QString _name;
   QString _fileName;
+  bool    _old;
+  bool    _hasVersions;
   bool    _toProcess;
   bool    _link;
   QString _status;
@@ -70,6 +79,7 @@ private:
   QString _version;
   QString _dest;
   QDict<QString> _values;
+	QDict<Package> *_versions;
   bool _useFileName;
   void parsePackage( QStringList );
   void init(PackageManagerSettings *);

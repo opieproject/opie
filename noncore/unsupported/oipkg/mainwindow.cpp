@@ -49,11 +49,15 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   packageListServers.setSettings( settings );
   packageListSearch.setSettings( settings );
   packageListDocLnk.setSettings( settings );
+	pvDebug(9,"packageListServers.update");
   packageListServers.update();
+	pvDebug(9,"packageListDocLnk.update");
   packageListDocLnk.update();
+	pvDebug(9,"makeMenu");
   makeMenu();	
   makeChannel();
   //opie is hardcoded default ;)
+	pvDebug(9,"section->setCurrentItem");
   for (int i=0;i<section->count();i++)
   	if (section->text(i)=="opie")
    		section->setCurrentItem(i);
@@ -67,6 +71,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   connect( settings->createLinksButton, SIGNAL( clicked()),
   					 SLOT(createLinks()) );
 
+	pvDebug(9,"displayList");
   displayList();
 }
 
@@ -236,14 +241,12 @@ void MainWindow::makeMenu()
 
 MainWindow::~MainWindow()
 {
-	pvDebug(7,"MainWindow::~MainWindow ");	
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "gui" );
   cfg.writeEntry( "findBar", !findBar->isHidden() );
   cfg.writeEntry( "searchBar", !searchBar->isHidden() );
   cfg.writeEntry( "sectionBar", !sectionBar->isHidden() );
   cfg.writeEntry( "destBar", !destBar->isHidden() );
-	pvDebug(7,"MainWindow::~MainWindow ");	
 	
 }
 

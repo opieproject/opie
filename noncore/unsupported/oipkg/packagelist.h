@@ -28,6 +28,8 @@ public:
   void clear();
   void allPackages();
 
+  QDict<Package> *versions;
+
 public slots:
   void setSection(QString);
   void setSubSection(QString);

@@ -29,9 +29,11 @@ void Package::init( PackageManagerSettings *s )
   _name = "";
   _toProcess = false;
   _useFileName = false;
+  _old = false;
   _status = "";
   _dest = settings->getDestinationName();
   _link = settings->createLinks();
+  _versions=0;
 }
 
 Package::Package( QStringList pack, PackageManagerSettings *s  )
@@ -128,7 +130,34 @@ QString Package::installName()
 
 bool Package::installed()
 {
-  return _status.contains("installed");
+  if (_status.contains("installed")) return true;
+  else
+	if (_versions)
+  {
+	  QDictIterator<Package> other( *_versions );
+		while ( other.current() )
+    {
+    	 if (other.current()->status().contains("installed")
+      		 && other.current()->version() == version())
+         	return true;
+	     ++other;
+ 		}
+  }
+  return false;
+}
+
+bool Package::otherInstalled()
+{
+	if (_versions)
+  {
+	  QDictIterator<Package> other( *_versions );
+		while ( other.current() )
+    {
+    	 if (other.current()->installed()) return true;
+	     ++other;
+ 		}
+  }
+  return false;
 }
 
 void Package::setDesc( QString s )
@@ -369,4 +398,31 @@ QDict<QString>* Package::getFields()
 QString Package::status()
 {
 	return _status;
+}
+
+bool Package::isOld()
+{
+	if (!_versions) return false;
+	QDictIterator<Package> other( *_versions );
+	while ( other.current() ) {
+     if (other.current()->version() > version() ) return true;
+     ++other;
+ 	}
+  return false;
+}
+
+bool Package::hasVersions()
+{
+	if (!_versions) return false;
+ 	else return true;
+}
+
+QDict<Package>* Package::getOtherVersions()
+{
+	return _versions;
+}
+
+void Package::setOtherVersions(QDict<Package> *v)
+{
+	_versions=v;
 }

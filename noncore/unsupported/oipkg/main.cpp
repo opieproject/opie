@@ -10,7 +10,7 @@ int main( int argc, char ** argv )
 {
 
   debugLevel = 2;
-  if (argc > 0)
+  if (argc > 1)
   {
       debugLevel = QString ( argv[1] ).toInt();
     	qDebug("setting debug level to %i",debugLevel);

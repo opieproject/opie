@@ -7,10 +7,13 @@
 
 #include "debug.h"
 
+static QDict<Package>  *packageListAll;
+
 PackageList::PackageList()
   : packageIter( packageList )
 {
   empty=true;
+  if (!packageListAll) packageListAll = new QDict<Package>();
   sections << "All";
   subSections.insert("All", new QStringList() );
   QStringList *ss = subSections["All"];
@@ -34,21 +37,33 @@ PackageList::~PackageList()
 void PackageList::insertPackage( Package* pack )
 {
 	if (!pack) return;
-  Package* p = packageList.find( pack->name() );
+  Package* p = packageListAll->find( pack->name() );
   if ( p )
     {
-      if ( p->version() == pack->version() )
+      if ( (p->version() == pack->version())
+      		&& (p->dest() == pack->dest()) )
       {
 	      p->copyValues( pack );
   	    delete pack;
     	  pack = p;
       } else {
-       	p->setName( pack->name()+"["+p->version()+"]" );
+      	QDict<Package> *packver = p->getOtherVersions();
+//       	p->setName( pack->name()+"["+p->version()+"]" );
+				if (!packver)
+    		{
+    				packver = new QDict<Package>;    	
+		       	packver->insert( pack->name(), p );
+          	p->setOtherVersions( packver );
+        }
        	pack->setName( pack->name()+"["+pack->version()+"]" );
+       	pack->setOtherVersions( packver );
+       	packver->insert( pack->name(), pack );
+				packageListAll->insert( pack->name(), pack );
 				packageList.insert( pack->name(), pack );
       	origPackageList.insert( pack->name(), pack );
       }
     }else{
+      packageListAll->insert( pack->name(), pack );
       packageList.insert( pack->name(), pack );
       origPackageList.insert( pack->name(), pack );
     };
