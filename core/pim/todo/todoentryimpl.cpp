@@ -160,7 +160,8 @@ void NewTaskDialog::slotCopy()
 void NewTaskDialog::accept()
 {
     QString strText = txtTodo->text();
-    if ( strText.isEmpty() ) {
+    QString strSumm = lneSum->text();
+    if ( strSumm.isEmpty() && strText.isEmpty() ) {
        // hmm... just decline it then, the user obviously didn't care about it
        QDialog::reject();
        return;
