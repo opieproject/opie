@@ -1,0 +1,4 @@
+  config PHASE
+    boolean "Phase Style 0.4 port"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) 

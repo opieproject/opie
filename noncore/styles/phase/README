@@ -1,0 +1,47 @@
+Opie Phase is based on the style from David Johnson
+and was backported to Qt2 by Holger Hans Peter Freyther
+
+
+
+Original PHASE 0.4 README
+
+
+Phase, Version 0.x
+==================
+
+Phase is a look and feel for KDE. It is designed to be functional but not drab
+and aesthetic but not distracting. Artistic design draws upon the genius of
+earlier masters. This is particularly true for minimalistic designs. Therefore
+I cannot in good conscience claim this look to be truly original. But I have
+done my best.
+
+The Phase widget style is built as a KDE plugin, but is also useful for
+standalone Qt programs provided that the KDE libraries are installed. Please
+read the INSTALL file for installation instructions. You can activate the
+style through the KDE Control Center.
+
+Please note that Phase requires KDE 3.x and above. It will not build or run
+under earlier versions of KDE. Full functionality requires KDE 3.2 or greater.
+The Phase homepage is at <http://www.usermode.org/code.html>.
+
+=================
+
+Copyright (c) 2004 David Johnson <david@usermode.org>
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
