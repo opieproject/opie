@@ -1152,6 +1152,7 @@ void TEWidget::calcGeometry()
 
   int showhscrollbar = 1;
   int hwidth = 0;
+  int dcolumns;
 
   if(vcolumns == 0) showhscrollbar = 0;
   if(showhscrollbar == 1) hwidth = QApplication::style().scrollBarExtent().width();
@@ -1163,21 +1164,11 @@ void TEWidget::calcGeometry()
   else cornerButton()->move(contentsRect().width() - hwidth, contentsRect().height() - hwidth);
 
 
-  if(showhscrollbar == 1)
-  {
-    hscrollbar->resize(contentsRect().width() - hwidth, hwidth);
-    hscrollbar->setRange(0, 40);
-
-    QPoint p = contentsRect().bottomLeft();
-    hscrollbar->move(QPoint(p.x(), p.y() - hwidth));
-    hscrollbar->show();
-  }
-  else hscrollbar->hide();
-
   switch(scrollLoc)
   {
     case SCRNONE :
      columns = ( contentsRect().width() - 2 * rimX ) / font_w;
+	 dcolumns = columns;
 	 if(vcolumns) columns = vcolumns;
      blX = (contentsRect().width() - (columns*font_w) ) / 2;
      if(showhscrollbar)
@@ -1187,6 +1178,7 @@ void TEWidget::calcGeometry()
      break;
     case SCRLEFT :
      columns = ( contentsRect().width() - 2 * rimX - scrollbar->width()) / font_w;
+	 dcolumns = columns;
 	 if(vcolumns) columns = vcolumns;
      brX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      if(showhscrollbar)
@@ -1197,6 +1189,7 @@ void TEWidget::calcGeometry()
      break;
     case SCRRIGHT:
      columns = ( contentsRect().width()  - 2 * rimX - scrollbar->width()) / font_w;
+	 dcolumns = columns;
 	 if(vcolumns) columns = vcolumns;
      blX = (contentsRect().width() - (columns*font_w) - scrollbar->width() ) / 2;
      if(showhscrollbar)
@@ -1209,6 +1202,17 @@ void TEWidget::calcGeometry()
   //FIXME: support 'rounding' styles
   lines   = ( contentsRect().height() - 2 * rimY  ) / font_h;
   bY = (contentsRect().height() - (lines  *font_h)) / 2;
+
+  if(showhscrollbar == 1)
+  {
+    hscrollbar->resize(contentsRect().width() - hwidth, hwidth);
+    hscrollbar->setRange(0, vcolumns - dcolumns);
+
+    QPoint p = contentsRect().bottomLeft();
+    hscrollbar->move(QPoint(p.x(), p.y() - hwidth));
+    hscrollbar->show();
+  }
+  else hscrollbar->hide();
 
   if(showhscrollbar == 1)
   {
