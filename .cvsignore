@@ -11,3 +11,4 @@ include
 moc_*
 stamp-headers
 .config.cmd
+gen.pro
