@@ -31,6 +31,7 @@ public:
     virtual void deleteMail(const RecMail&mail)=0;
     virtual void answeredMail(const RecMail&mail)=0;
     virtual int deleteAllMail(const Folder*)=0;
+    virtual void deleteMails(const QString & FolderName,QList<RecMail> &target);
     virtual int deleteMbox(const Folder*)=0;
     virtual void storeMessage(const char*msg,size_t length, const QString&folder)=0;
 
@@ -46,11 +47,12 @@ public:
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
     /* mbox only! */
-    static AbstractMail* getWrapper(const QString&a);
+    static AbstractMail* getWrapper(const QString&a,const QString&name="Local Folders");
 
     static QString defaultLocalfolder();
     
     virtual const QString&getType()const=0;
+    virtual const QString&getName()const=0;
 
 protected:
     static encodedString*decode_String(const encodedString*text,const QString&enc);

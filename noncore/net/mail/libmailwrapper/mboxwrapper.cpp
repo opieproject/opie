@@ -8,8 +8,8 @@
 
 const QString MBOXwrapper::wrapperType="MBOX";
 
-MBOXwrapper::MBOXwrapper(const QString & mbox_dir)
-    : Genericwrapper(),MBOXPath(mbox_dir)
+MBOXwrapper::MBOXwrapper(const QString & mbox_dir,const QString&mbox_name)
+    : Genericwrapper(),MBOXPath(mbox_dir),MBOXName(mbox_name)
 {
     QDir dir(MBOXPath);
     if (!dir.exists()) {
@@ -329,4 +329,9 @@ void MBOXwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
 const QString&MBOXwrapper::getType()const
 {
     return wrapperType;
+}
+
+const QString&MBOXwrapper::getName()const
+{
+    return MBOXName;
 }

@@ -108,6 +108,7 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
 
 void POP3wrapper::login()
 {
+    if (account->getOffline()) return;
     /* we'll hold the line */
     if ( m_pop3 != NULL ) return;
 
@@ -248,4 +249,9 @@ encodedString* POP3wrapper::fetchRawBody(const RecMail&mail)
 const QString&POP3wrapper::getType()const
 {
     return account->getType();
+}
+
+const QString&POP3wrapper::getName()const
+{
+    return account->getAccountName();
 }

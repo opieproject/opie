@@ -45,6 +45,8 @@ public:
     
     virtual void logout();
     virtual const QString&getType()const;
+    virtual const QString&getName()const;
+
 protected:
     RecMail*parse_list_result(mailimap_msg_att*);
     void login();

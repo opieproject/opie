@@ -21,9 +21,9 @@ AbstractMail* AbstractMail::getWrapper(POP3account *a)
     return new POP3wrapper(a);
 }
 
-AbstractMail* AbstractMail::getWrapper(const QString&a)
+AbstractMail* AbstractMail::getWrapper(const QString&a,const QString&name)
 {
-    return new MBOXwrapper(a);
+    return new MBOXwrapper(a,name);
 }
 
 encodedString* AbstractMail::decode_String(const encodedString*text,const QString&enc)
@@ -98,4 +98,9 @@ QString AbstractMail::defaultLocalfolder()
     QString f = getenv( "HOME" );
     f += "/Applications/opiemail/localmail";
     return f;
+}
+
+/* temporary - will be removed when implemented in all classes */
+void AbstractMail::deleteMails(const QString &,QList<RecMail> &)
+{
 }

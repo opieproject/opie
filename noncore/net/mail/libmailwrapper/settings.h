@@ -30,6 +30,9 @@ public:
     
     void setSSL( bool b ) { ssl = b; }
     bool getSSL() { return ssl; }
+    
+    void setOffline(bool b) {offline = b;}
+    bool getOffline()const{return offline;}
 
     virtual QString getFileName() { return accountName; }
     virtual void read() { qDebug( "base reading..." ); }
@@ -38,7 +41,7 @@ public:
 protected:
     QString accountName, type, server, port, user, password;
     bool ssl;
-    
+    bool offline;
 };
 
 class IMAPaccount : public Account

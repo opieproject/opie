@@ -29,6 +29,7 @@ void IMAPwrapper::login()
     uint16_t port;
     int err = MAILIMAP_NO_ERROR;
 
+    if (account->getOffline()) return;
     /* we are connected this moment */
     /* TODO: setup a timer holding the line or if connection closed - delete the value */
     if (m_imap) {
@@ -1004,6 +1005,11 @@ void IMAPwrapper::storeMessage(const char*msg,size_t length, const QString&folde
 const QString&IMAPwrapper::getType()const
 {
     return account->getType();
+}
+
+const QString&IMAPwrapper::getName()const
+{
+    return account->getAccountName();
 }
 
 encodedString* IMAPwrapper::fetchRawBody(const RecMail&mail)

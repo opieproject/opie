@@ -168,6 +168,8 @@ void IMAPaccount::read()
     if (password.isNull()) password = "";
     prefix = conf->readEntry("MailPrefix","");
     if (prefix.isNull()) prefix = "";
+    offline = conf->readBoolEntry("Offline",false);
+    delete conf;
 }
 
 void IMAPaccount::save()
@@ -184,7 +186,9 @@ void IMAPaccount::save()
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
     conf->writeEntry( "MailPrefix",prefix);
+    conf->writeEntry( "Offline",offline);
     conf->write();
+    delete conf;
 }
 
 
@@ -238,6 +242,8 @@ void POP3account::read()
     ssl = conf->readBoolEntry( "SSL" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
+    offline = conf->readBoolEntry("Offline",false);
+    delete conf;
 }
 
 void POP3account::save()
@@ -253,7 +259,9 @@ void POP3account::save()
     conf->writeEntry( "SSL", ssl );
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
+    conf->writeEntry( "Offline",offline);
     conf->write();
+    delete conf;
 }
 
 
@@ -313,6 +321,7 @@ void SMTPaccount::read()
     login = conf->readBoolEntry( "Login" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
+    delete conf;
 }
 
 void SMTPaccount::save()
@@ -330,6 +339,7 @@ void SMTPaccount::save()
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
     conf->write();
+    delete conf;
 }
 
 
@@ -386,6 +396,7 @@ void NNTPaccount::read()
     login = conf->readBoolEntry( "Login" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
+    delete conf;
 }
 
 void NNTPaccount::save()
@@ -403,6 +414,7 @@ void NNTPaccount::save()
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
     conf->write();
+    delete conf;
 }
 
 

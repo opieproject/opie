@@ -10,7 +10,7 @@
 #include "settings.h"
 
 class Mail;
-class MBOXwrapper;
+class AbstractMail;
 class RecMail;
 class Attachment;
 struct mailimf_fields;
@@ -59,7 +59,7 @@ protected:
     void storeMail(mailmime*mail, const QString&box);
     Settings *settings;
     
-    int sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which);
+    int sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which);
 
     int m_queuedMail;
     static const char* USER_AGENT;

@@ -489,7 +489,7 @@ void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box)
 {
     if (!mail) return;
     QString localfolders = AbstractMail::defaultLocalfolder();
-    MBOXwrapper*wrap = new MBOXwrapper(localfolders);
+    AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
     wrap->storeMessage(mail,length,box);
     delete wrap;
 }
@@ -516,11 +516,9 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
         qDebug("Error fetching mime...");
         return;
     }
-    QString tmp = data;
-    tmp.replace(QRegExp("\r+",true,false),"");
     msg = 0;
     if (later) {
-        storeMail((char*)tmp.data(),tmp.length(),"Outgoing");
+        storeMail(data,size,"Outgoing");
         if (data) free( data );
         Config cfg( "mail" );
         cfg.setGroup( "Status" );
@@ -636,7 +634,7 @@ void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later )
     }
 }
 
-int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
+int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which)
 {
     size_t curTok = 0;
     mailimf_fields *fields = 0;
@@ -685,7 +683,7 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
     if (!smtp) return false;
 
     QString localfolders = AbstractMail::defaultLocalfolder();
-    MBOXwrapper*wrap = new MBOXwrapper(localfolders);
+    AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
     if (!wrap) {
         qDebug("memory error");
         return false;
