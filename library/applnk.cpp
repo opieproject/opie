@@ -89,7 +89,11 @@ public:
     {
 	Categories cat( 0 );
 	cat.load( categoryFileName() );
-	mCatList = cat.labels("Document View",mCat);
+	// we need to update the names for the mCat... to mCatList
+        mCatList.clear();
+        for (uint i = 0; i < mCat.count(); i++ )
+            mCatList << cat.label("Document View", mCat[i] );
+
     }
 
     void setCatArrayDirty()
@@ -406,6 +410,7 @@ AppLnk::AppLnk( const QString &file )
 
 AppLnk& AppLnk::operator=(const AppLnk &copy)
 {
+    if ( this == &copy ) return *this;
     if ( mId )
 	qWarning("Deleting AppLnk that is in an AppLnkSet");
     if ( d )
@@ -850,7 +855,7 @@ void AppLnk::storeLink() const
     if(!rotation().isEmpty())
 	config.writeEntry("Rotation",rotation());
     else
-	config.removeEntry("Rotation");    
+	config.removeEntry("Rotation");
     if ( !mComment.isNull() ) config.writeEntry("Comment",mComment);
     QString f = file();
     int i = 0;
