@@ -1,8 +1,7 @@
 #ifndef _IMAGE_VIEW_H
 #define _IMAGE_VIEW_H
 
-/* must be changed when it will moved to Opie::MM */
-#include "imagescrollview.h"
+#include <opie2/oimagescrollview.h>
 
 namespace Opie {
     namespace Core {

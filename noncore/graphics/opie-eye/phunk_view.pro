@@ -10,9 +10,8 @@ HEADERS = gui/iconview.h gui/filesystem.h gui/mainwindow.h \
 	  impl/dir/dir_lister.h impl/dir/dir_ifaceinfo.h \
 	  lib/slavemaster.h \
 	  iface/slaveiface.h \
-          gui/imageinfoui.h gui/imagescrollview.h \
+          gui/imageinfoui.h \
           gui/imageview.h \
-	  lib/oimagezoomer.h \
 	  gui/viewmodebutton.h
 	
 # A list header files
@@ -23,9 +22,8 @@ SOURCES = gui/iconview.cpp gui/filesystem.cpp gui/mainwindow.cpp \
 	  impl/dir/dir_dirview.cpp iface/dirlister.cpp \
 	  iface/dirview.cpp impl/dir/dir_lister.cpp \
 	  impl/dir/dir_ifaceinfo.cpp lib/slavemaster.cpp \
-          gui/imageinfoui.cpp gui/imagescrollview.cpp \
+          gui/imageinfoui.cpp \
           gui/imageview.cpp \
-	  lib/oimagezoomer.cpp \
 	  gui/viewmodebutton.cpp
 # A list of source files
 
@@ -37,6 +35,6 @@ DEPENDPATH  += $(OPIEDIR)/include
 
 
 
-LIBS += -lqpe -lopiecore2 -lopieui2
+LIBS += -lqpe -lopiecore2 -lopieui2 -lopiemm2
 
 include ( $(OPIEDIR)/include.pro )
