@@ -21,13 +21,9 @@
 #include "soundsettings.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
+
+OPIE_EXPORT_APP( OApplicationFactory<SoundSettings> )
 
 
-int main(int argc, char** argv)
-{
-    QPEApplication a(argc,argv);
-    SoundSettings dlg;
-    a.showMainWidget(&dlg);
-    return a.exec();
-}
 

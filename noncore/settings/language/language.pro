@@ -1,6 +1,4 @@
-TEMPLATE	= app
-CONFIG		+= qt warn_on release
-DESTDIR		= $(OPIEDIR)/bin
+CONFIG		+= qt warn_on release quick-app
 HEADERS		= settings.h
 SOURCES		= language.cpp main.cpp
 INTERFACES	= languagesettingsbase.ui

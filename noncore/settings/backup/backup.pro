@@ -1,6 +1,4 @@
-TEMPLATE	= app
-#CONFIG		= qt warn_on debug
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= backuprestore.h
 SOURCES		= main.cpp backuprestore.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
@@ -8,7 +6,6 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	= backuprestorebase.ui errordialog.ui
 TARGET		= backup
-DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/backup.ts \
 	 ../../../i18n/nl/backup.ts \
@@ -28,8 +25,6 @@ TRANSLATIONS = ../../../i18n/de/backup.ts \
 	../../../i18n/zh_TW/backup.ts \
 	../../../i18n/it/backup.ts \
 	../../../i18n/da/backup.ts
-
-
 
 
 include ( $(OPIEDIR)/include.pro )

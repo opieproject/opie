@@ -37,8 +37,8 @@
 const QString tempFileName = "/tmp/backup.err";
 
 
-BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
-        : BackupAndRestoreBase(parent, name){
+BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags fl)
+        : BackupAndRestoreBase(parent, name,  fl){
   this->showMaximized();
   backupList->header()->hide();
   restoreList->header()->hide();
@@ -47,11 +47,11 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
   connect(restoreButton, SIGNAL(clicked()),
           this, SLOT(restore()));
   connect(backupList, SIGNAL(clicked( QListViewItem * )),
-          this, SLOT(selectItem(QListViewItem*))); 
+          this, SLOT(selectItem(QListViewItem*)));
   connect(restoreSource, SIGNAL(activated( int  )),
-          this, SLOT(sourceDirChanged(int))); 
+          this, SLOT(sourceDirChanged(int)));
   connect(updateList, SIGNAL(clicked()),
-          this, SLOT( fileListUpdate())); 
+          this, SLOT( fileListUpdate()));
 
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
@@ -62,13 +62,13 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
   documents= new QListViewItem(backupList, "Documents", "",
                                QDir::homeDirPath() + "/Documents/");
   selectItem(documents);
-  
+
   scanForApplicationSettings();
-  
+
   Config config("BackupAndRestore");
   config.setGroup("General");
   int totalLocations = config.readNumEntry("totalLocations",0);
-  
+
 //todo make less static here and use Storage class to get infos
   if(totalLocations == 0){
     backupLocations.insert("Documents", "/root/Documents");
@@ -86,8 +86,8 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
     storeToLocation->insertItem(it.key());
     restoreSource->insertItem(it.key());
   }
- 
-  // Read the list of items to ignore. 
+
+  // Read the list of items to ignore.
   QList<QString> dontBackupList;
   dontBackupList.setAutoDelete(true);
   config.setGroup("DontBackup");
@@ -98,7 +98,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
 
   QList<QListViewItem> list;
   getAllItems(backupList->firstChild(), list);
-  
+
   for(uint i = 0; i < list.count(); i++){
     QString text = list.at(i)->text(HEADER_NAME);
     for(uint i2 = 0;  i2 < dontBackupList.count(); i2++){
@@ -113,11 +113,11 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
 BackupAndRestore::~BackupAndRestore(){
   QList<QListViewItem> list;
   getAllItems(backupList->firstChild(), list);
-  
+
   Config config("BackupAndRestore");
   config.setGroup("DontBackup");
   config.clearGroup();
-  
+
   int count = 0;
   for(uint i = 0; i < list.count(); i++){
     if(list.at(i)->text(HEADER_BACKUP) == ""){
@@ -135,7 +135,7 @@ BackupAndRestore::~BackupAndRestore(){
 QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QListViewItem> &list){
   while(item){
     if(item->childCount() > 0)
-      getAllItems(item->firstChild(), list);    
+      getAllItems(item->firstChild(), list);
     list.append(item);
     item = item->nextSibling();
   }
@@ -179,27 +179,27 @@ void BackupAndRestore::scanForApplicationSettings(){
 
 /**
  * The "Backup" button has been pressed.  Get a list of all of the files that
- * should be backed up.  If there are no files, emit and error and exit.  
+ * should be backed up.  If there are no files, emit and error and exit.
  * Determine the file name to store the backup in.  Backup the file(s) using
  * tar and gzip  --best.  Report failure or success
- */ 
+ */
 void BackupAndRestore::backupPressed(){
   QString backupFiles;
   if(getBackupFiles(backupFiles, NULL) == 0){
     QMessageBox::critical(this, "Message",
                           "No items selected.",QString("Ok") );
-    return;   
+    return;
   }
 
   setCaption(tr("Backup and Restore... working..."));
   QString outputFile = backupLocations[storeToLocation->currentText()];
 
   QDateTime datetime = QDateTime::currentDateTime();
-  QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') + 
+  QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') +
 	  QString::number( datetime.date().day() ).rightJustify(2, '0');
 
   outputFile += "/" + dateString;
- 
+
   QString t = outputFile;
   int c = 1;
   while(QFile::exists(outputFile + EXTENSION)){
@@ -207,7 +207,7 @@ void BackupAndRestore::backupPressed(){
     c++;
   }
 
-  // We execute tar and compressing its output with gzip.. 
+  // We execute tar and compressing its output with gzip..
   // The error output will be written into a temp-file which could be provided
   // for debugging..
   qDebug( "Storing file: %s", outputFile.latin1() );
@@ -228,7 +228,7 @@ void BackupAndRestore::backupPressed(){
     perror("Error: ");
     QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
 
-     switch( QMessageBox::critical(this, tr( "Message" ), tr( "Backup Failed!" ) + "\n" 
+     switch( QMessageBox::critical(this, tr( "Message" ), tr( "Backup Failed!" ) + "\n"
 				   + errorMsg, QString( tr( "Ok" ) ), QString( tr( "Details" ) ) ) ){
 
      case 1:
@@ -242,7 +242,7 @@ void BackupAndRestore::backupPressed(){
 			     s += t.readLine();       // line of text excluding '\n'
 		     }
 		     errorFile.close();
- 
+
 		     pErrDialog->m_textarea->setText( s );
 	     }else{
 		     pErrDialog->m_textarea->setText( "Unable to open File: /tmp/backup.er" );
@@ -253,18 +253,18 @@ void BackupAndRestore::backupPressed(){
 	     break;
      }
      setCaption(tr("Backup and Restore.. Failed !!"));
-     return;   
+     return;
    }
    else{
      QMessageBox::information(this, tr( "Message" ), tr( "Backup Successfull." ), QString(tr( "Ok" ) ) );
-     
+
    }
    setCaption(tr("Backup and Restore"));
 }
 
 /***
  * Get a list of all of the files to backup.
- */ 
+ */
 int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent){
   QListViewItem * currentItem;
   QString currentHome;
@@ -274,7 +274,7 @@ int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent
     currentItem = parent->firstChild();
     currentHome = parent->text(BACKUP_LOCATION);
   }
-  
+
   uint count = 0;
   while( currentItem != 0 ){
     if(currentItem->text(HEADER_BACKUP) == "B" ){
@@ -317,7 +317,7 @@ void BackupAndRestore::rescanFolder(QString directory){
   QDir d(directory);
   if(!d.exists())
     return;
-  
+
   d.setFilter( QDir::Files | QDir::Hidden | QDir::Dirs);
   const QFileInfoList *list = d.entryInfoList();
   QFileInfoListIterator it( *list );
@@ -341,26 +341,26 @@ void BackupAndRestore::rescanFolder(QString directory){
 /**
  * Restore a backup file.
  * Report errors or success
- */ 
+ */
 void BackupAndRestore::restore(){
   QListViewItem *restoreItem = restoreList->currentItem();
   if(!restoreItem){
     QMessageBox::critical(this, tr( "Message" ),
                           tr( "Please select something to restore." ),QString( tr( "Ok") ) );
-    return;   
+    return;
   }
   setCaption(tr("Backup and Restore... working..."));
 
   QString restoreFile = backupLocations[restoreSource->currentText()];
-  
+
   restoreFile += "/" + restoreItem->text(0);
-  
+
   int r = system(QString("tar -C / -zxf %1 2> %3")
 		 .arg( restoreFile.latin1() )
 		 .arg( tempFileName.latin1() ) );
   if(r != 0){
     QString errorMsg= tr( "Error from System:\n" ) + (QString)strerror( errno );
-    switch( QMessageBox::critical(this, tr( "Message" ), tr( "Restore Failed." ) + "\n" 
+    switch( QMessageBox::critical(this, tr( "Message" ), tr( "Restore Failed." ) + "\n"
 				  + errorMsg, QString( tr( "Ok") ), QString( tr( "Details" ) ) ) ) {
     case 1:
 	    qWarning("Details pressed !");
@@ -373,7 +373,7 @@ void BackupAndRestore::restore(){
 			    s += t.readLine();       // line of text excluding '\n'
 		    }
 		    errorFile.close();
-		    
+
 		    pErrDialog->m_textarea->setText( s );
 	    }else{
 		    pErrDialog->m_textarea->setText( tr( "Unable to open File: %1" ).arg( "/tmp/backup.er" ) );
@@ -383,7 +383,7 @@ void BackupAndRestore::restore(){
 	    delete pErrDialog;
 
 	    setCaption(tr("Backup and Restore.. Failed !!"));
-	    return;   
+	    return;
 
 	    break;
 

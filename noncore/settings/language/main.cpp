@@ -21,16 +21,7 @@
 #include "settings.h"
 
 #include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
 
-int main(int argc, char** argv)
-{
-    QPEApplication a(argc,argv);
-
-    LanguageSettings dlg;
-
-    a.showMainWidget(&dlg);
-
-    return a.exec();
-}
-
+OPIE_EXPORT_APP( OApplicationFactory<LanguageSettings> )

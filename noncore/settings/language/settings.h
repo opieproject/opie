@@ -35,6 +35,8 @@ public:
     LanguageSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~LanguageSettings();
 
+    static QString appName() { return QString::fromLatin1("language"); }
+
 protected:
     void accept();
     void reject();

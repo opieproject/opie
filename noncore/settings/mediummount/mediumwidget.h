@@ -26,6 +26,7 @@ namespace MediumMountSetting {
   public:
     MediumMountWidget(const QString&, const QPixmap &, QWidget *parent, const char *name = 0 );
     ~MediumMountWidget();
+    
 
     void writeConfig();
     

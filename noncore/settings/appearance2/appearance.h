@@ -55,11 +55,12 @@ class Appearance : public QDialog
 public:
     Appearance( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Appearance();
+    static QString appName() { return QString::fromLatin1("appearance"); }
 
 protected:
 	virtual void accept ( );
 	virtual void done ( int r );
-
+	
 protected slots:
     void styleClicked ( int );
     void styleSettingsClicked ( );

@@ -1,14 +1,13 @@
-TEMPLATE  = app
-CONFIG    = qt warn_on release
-DESTDIR   = $(OPIEDIR)/bin
+CONFIG    = qt warn_on release quick-app
 HEADERS   = appearance.h editScheme.h sample.h
 SOURCES   = appearance.cpp editScheme.cpp main.cpp sample.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += ../$(OPIEDIR)/include
 LIBS            += -lqpe -lopie
-TARGET    = appearance
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
+
+TARGET 		= appearance
 
 TRANSLATIONS = ../../../i18n/de/appearance.ts \
 	 ../../../i18n/nl/appearance.ts \
@@ -27,7 +26,6 @@ TRANSLATIONS = ../../../i18n/de/appearance.ts \
 	 ../../../i18n/zh_CN/appearance.ts \
 	 ../../../i18n/zh_TW/appearance.ts \
 	 ../../../i18n/da/appearance.ts
-
 
 
 include ( $(OPIEDIR)/include.pro )

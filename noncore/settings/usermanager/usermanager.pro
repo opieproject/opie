@@ -1,13 +1,11 @@
-TEMPLATE	= app
 #CONFIG		= qt warn_on debug
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= usermanager.h userdialog.h groupdialog.h passwd.h
 SOURCES		= usermanager.cpp userdialog.cpp groupdialog.cpp passwd.cpp main.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie -lcrypt
 TARGET		= usermanager
-DESTDIR         = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/usermanager.ts \
 	 ../../../i18n/nl/usermanager.ts \
