@@ -30,7 +30,7 @@ public:
     ~CardMonitor();
     bool getStatusPcmcia( int showPopUp = FALSE );
     bool getStatusSd( int showPopUp = FALSE );
-
+    static int position();
 private slots:
     void cardMessage( const QCString &msg, const QByteArray & );
     void popupTimeout();

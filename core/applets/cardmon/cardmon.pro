@@ -1,12 +1,12 @@
 TEMPLATE	= lib
 CONFIG		+= qt plugin warn_on release
-HEADERS	=	cardmon.h cardmonimpl.h
-SOURCES	=	cardmon.cpp cardmonimpl.cpp
+HEADERS	=	cardmon.h
+SOURCES	=	cardmon.cpp
 TARGET		= cardmonapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include ../launcher
-LIBS            += -lqpe -lopie
+LIBS            += -lqpe -lopiecore2
 VERSION		= 1.0.0
 
 include ( $(OPIEDIR)/include.pro )
