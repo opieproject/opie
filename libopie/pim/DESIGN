@@ -1,0 +1,50 @@
+Hija to the DESIGN of our OPIE PIM stuff
+
+This design was firstly discussed in the train
+from Frankfurt to Hannover between me (zecke ) and eilers.
+
+We had a look at our pim implementation and the one from
+trolltech and we looked what was missing.
+
+GOALS:
+  - clean implementation
+  - share code
+  - ObjectOriented Design
+  - Scalable
+  - Integration into common solutions like STL and Qt
+  - Addition
+  - Ease of Use
+  
+GENERAL:
+  - use templates
+  - have a common base class for all Records OPimRecord
+  - use references instead of pointers
+  - make use of QShared internally memory consumption
+
+We've a 'public' and 'private' part in our lib
+OPimAccessTemplate is the public part. This will be used
+by 3rd party developers to access the PIMs.
+OPimAccessBackend is the backend. You could also call it 
+resource.
+
+Both things need to be implemented for different kind of records. 
+By using templates we can make sure we share code and the reason
+not to use simple inheretance is that we can specialise quite easy.
+
+For example we have OTodoAccess : public OPimAccessTemplate<OTodo>;
+the we would do
+OTodoAccess::List list = otodoAccess.all();
+OTodoAccess::List::Iterator it;
+for( it = list.begin(); it != list.end(); ++it );
+
+
+as you can see from here it just behaves like you expect from Qt or STL.
+
+The kewlest thing is that List and List::Iterator is free to use if you
+want to implement your own OPimAccessTemplate.
+You just have to sub class  it and voila you're done
+
+
+Hope you enjoy using OPIE PIM
+
+regards Holger 'zecke' Freyther
