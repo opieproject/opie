@@ -21,6 +21,7 @@ CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 #CONFIG_MANAGER	noncore/net/opietooth/manager	manager.pro
 #CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
 #CONFIG_NETSETUP	noncore/unsupported/netsetup	netsetup.pro
+#CONFIG_NETMONAPPLET	noncore/unsupported/netmonapplet	netmonapplet.pro
 #CONFIG_OFILESELECTOR	libopie/ofileselector	ofileselector.pro
 #CONFIG_OPIE-WRITE	noncore/apps/opie-write	opie-write.pro
 #CONFIG_OPIEMAIL	noncore/unsupported/opiemail	opiemail.pro
@@ -96,6 +97,7 @@ CONFIG_LIBQPE	library	library.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
+CONFIG_RUNAPPLET	core/applets/runapplet	runapplet.pro
 CONFIG_MAIL	noncore/mail	mail.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
@@ -103,7 +105,6 @@ CONFIG_MINDBREAKER	noncore/games/mindbreaker	mindbreaker.pro
 CONFIG_MINESWEEP	noncore/games/minesweep	minesweep.pro
 CONFIG_MODPLUG	core/multimedia/opieplayer/modplug	modplug.pro
 CONFIG_MULTIKEY	inputmethods/multikey	multikey.pro
-CONFIG_NETMONAPPLET	core/applets/netmonapplet	netmonapplet.pro
 CONFIG_NETSYSTEMTIME	noncore/settings/netsystemtime	netsystemtime.pro
 CONFIG_NETWORKSETUP	noncore/net/networksetup	networksetup.pro
 CONFIG_NOTESAPPLET	noncore/applets/notesapplet	notesapplet.pro
