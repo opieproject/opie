@@ -7,7 +7,7 @@ HEADERS         = btconnectionitem.h btdeviceitem.h \
 		  scandialog.h btlistitem.h \ 
 		  hciconfwrapper.h bticonloader.h \
 		  pppdialog.h obexdialog.h \
-		  devicehandler.h rfcpopup.h
+		  devicehandler.h rfcpopup.h obexpopup.h \
 		  
 SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \ 
 	          btserviceitem.cpp stdpopups.cpp \
@@ -16,7 +16,7 @@ SOURCES         = btconnectionitem.cpp btdeviceitem.cpp \
 		  btlistitem.cpp hciconfwrapper.cpp \ 
 		  bticonloader.cpp pppdialog.cpp \
 		  obexdialog.cpp devicehandler.cpp \
-		  rfcpopup.cpp
+		  rfcpopup.cpp obexpopup.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include

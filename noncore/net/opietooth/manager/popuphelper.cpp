@@ -31,5 +31,6 @@ QPopupMenu* PopupHelper::find( int id, const Services& ser, BTDeviceItem* item )
 void PopupHelper::init() {
     insert( 4355, newRfcComPopup );
     insert( 4353, newRfcComPopup );
-    insert( 3, newObexPushPopup );
+    insert( 4357, newObexPushPopup );
+    insert( 4358, newObexPushPopup );
 }

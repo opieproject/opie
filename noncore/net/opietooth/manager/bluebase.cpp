@@ -297,10 +297,11 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
 
         QPopupMenu *groups = new QPopupMenu();
 
-        menu->insertItem( tr("rescan sevices:"),  0);
-        menu->insertItem( tr("to group"), groups ,  1);
-        //      menu->insertItem( tr("bound device"), 2);
-        menu->insertItem( tr("delete"),  3);
+        menu->insertItem( ((BTDeviceItem*)item)->name(),0 );
+        menu->insertSeparator(1);
+        menu->insertItem( tr("rescan sevices"),  2);
+        menu->insertItem( tr("to group"), groups , 3);
+        menu->insertItem( tr("delete"),  4);
 
         ret = menu->exec( point  , 0);
 
@@ -344,6 +345,8 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         QMap<int, QString> list = service->services().classIdList();
         QMap<int, QString>::Iterator it = list.begin();
         QPopupMenu *popup =0l;
+        popup->insertItem( (service->services()).serviceName() );
+        popup->insertSeparator();
         if ( it != list.end() ) {
 	    qWarning("Searching id %d %s", it.key(), it.data().latin1() );
             popup = m_popHelper.find( it.key() /*1*/,

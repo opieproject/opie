@@ -1,5 +1,6 @@
 
 #include "rfcpopup.h"
+#include "obexpopup.h"
 
 #include "stdpopups.h"
 
@@ -10,6 +11,6 @@ extern "C" {
         //return 0l;
     }
     QPopupMenu* newObexPushPopup( const OpieTooth::Services&,  OpieTooth::BTDeviceItem* ) {
-        return 0l;
+        return  new OpieTooth::ObexPopup();
     }
 }

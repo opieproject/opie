@@ -18,7 +18,7 @@ namespace OpieTooth {
         Q_OBJECT
 
     public:
-        ObexDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0,  const QString& device = 0);
+        ObexDialog( QWidget* parent = 0, const char* name = 0, bool modal = TRUE, WFlags fl = 0,  const QString& device = 0);
         ~ObexDialog();
 
 
