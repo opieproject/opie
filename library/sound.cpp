@@ -155,7 +155,7 @@ Sound::Sound(const QString& name)
 #endif
 }
 
-/*! Destroys the sound *
+/*! Destroys the sound */
 Sound::~Sound()
 {
 #ifndef QT_NO_SOUND

@@ -268,6 +268,7 @@ bool StorageInfo::hasMmc()
   Gets emitted when a disk has been mounted or unmounted, such as when
   a CF c
 //---------------------------------------------------------------------------
+*/
 
 FileSystem::FileSystem( const QString &disk, const QString &path, const QString &name, bool rem, const QString &o )
     : fsdisk( disk ), fspath( path ), humanname( name ), blkSize(512), totalBlks(0), availBlks(0), removable( rem ), opts( o )
