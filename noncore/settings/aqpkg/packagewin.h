@@ -36,8 +36,8 @@ class Package;
 class PackageWindow :public  QWidget
 {
 	Q_OBJECT
-public:
 
+public:
 	PackageWindow( Package * = 0x0, const QString & = QString::null );
 	~PackageWindow();
 };

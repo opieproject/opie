@@ -32,15 +32,14 @@
 
 #include <qpe/resource.h>
 
-#include <qlabel.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
 #include <qstring.h>
+#include <qtextview.h>
 
 PackageWindow::PackageWindow( Package *package, const QString &server )
 	: QWidget( 0, 0, 0 )
 {
-	QVBoxLayout *layout = new QVBoxLayout( this, 4, 4 );
 	QString str;
 	if ( package )
 	{
@@ -101,12 +100,14 @@ PackageWindow::PackageWindow( Package *package, const QString &server )
 		setCaption( tr( "Package Information" ) );
 		str = tr( "Package information is unavailable" );
 	}
-	
-	QLabel *l = new QLabel( str, this );
-	l->setTextFormat( Qt::RichText );
-	l->setAlignment( Qt::AlignLeft | Qt::AlignVCenter | Qt::WordBreak );
+
+	QVBoxLayout *layout = new QVBoxLayout( this, 4, 4 );
+
+	QTextView *l = new QTextView( str, QString::null, this );
+	//l->setTextFormat( Qt::RichText );
+	//l->setAlignment( Qt::AlignLeft | Qt::AlignVCenter | Qt::WordBreak );
 	layout->addWidget( l );
-	
+
 	QPushButton *btn = new QPushButton( Resource::loadPixmap( "enter" ), tr( "Close" ), this );
 	layout->addWidget( btn );
 	connect( btn, SIGNAL( clicked() ), this, SLOT( close() ) );
@@ -116,4 +117,3 @@ PackageWindow::PackageWindow( Package *package, const QString &server )
 PackageWindow::~PackageWindow()
 {
 }
-
