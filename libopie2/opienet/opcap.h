@@ -130,13 +130,13 @@ class OPacket : public QObject
 
     int caplen() const;
     int len() const;
-    QString dump( int = 32 ) const;
+    QString dump( int = 32 ) const; //FIXME: remove that
 
-    void updateStats( QMap<QString,int>&, QObjectList* );
+    void updateStats( QMap<QString,int>&, QObjectList* ); //FIXME: Revise
 
-    QString dumpStructure() const;
+    QString dumpStructure() const; //FIXME: Revise
   private:
-    QString _dumpStructure( QObjectList* ) const;
+    QString _dumpStructure( QObjectList* ) const; //FIXME: Revise
 
   private:
     const packetheaderstruct _hdr;  // pcap packet header
@@ -147,7 +147,7 @@ class OPacket : public QObject
     Private *d;
 };
 
-QTextStream& operator<<( QTextStream& s, const OPacket& p );
+QTextStream& operator<<( QTextStream& s, const OPacket& p ); //FIXME: Revise
 
 /*======================================================================================
  * OEthernetPacket - DLT_EN10MB frame

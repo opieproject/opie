@@ -57,6 +57,8 @@ namespace Net  {
 OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* data, QObject* parent )
         :QObject( parent, "Generic" ), _hdr( header ), _data( data )
 {
+    //FIXME: Copy the data structure here, because it isn't persistent. Check that.
+    
     qDebug( "OPacket::OPacket(): (Len %d, CapLen %d)" /*, ctime((const time_t*) header.ts.tv_sec)*/, header.len, header.caplen );
 
     _end = (unsigned char*) data + header.len;
