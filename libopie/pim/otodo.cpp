@@ -283,7 +283,7 @@ QString OTodo::toRichText() const
   // description
   if( !description().isEmpty() ){
     text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
-    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) ;
+    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br>";
   }
 
   // priority
