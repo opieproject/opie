@@ -138,7 +138,7 @@ void DocumentList::pause()
 void DocumentList::resume()
 {
     if ( d->tid == 0 ) {
-	d->tid = startTimer( 0 );
+	d->tid = startTimer( 20 );
 	//qDebug("resumed %i", d->tid);
     }
 }
