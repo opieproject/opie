@@ -77,7 +77,7 @@ SYSCONF_LINK_TARGET_STATIC = lib$(TARGET).a
 SYSCONF_LINK_LIB_STATIC	= rm -f $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) ; \
 				 $(SYSCONF_AR) $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) $(OBJECTS) $(OBJMOC) 
 # Compiling application source
-SYSCONF_CXXFLAGS	= -pipe -DQT_QWS_IPAQ -DQWS -fno-exceptions -fno-rtti -Wall -W -march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O3 
+SYSCONF_CXXFLAGS	= -pipe -DQT_QWS_IPAQ -DQWS -fno-exceptions -fno-rtti -Wall -W -march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O2 
 SYSCONF_CFLAGS		= -pipe -Wall -W -march=armv4 -mtune=strongarm1100 -mapcs-32 -fexpensive-optimizations -fomit-frame-pointer -O3 
 
 # Default link type (static linking is still be used where required)
