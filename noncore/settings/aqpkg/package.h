@@ -55,6 +55,7 @@ public:
 	bool isPackageStoredLocally()	{ return packageStoredLocally; }
     bool isInstalledToRoot()     { return installedToRoot; }
     QString getInstalledVersion();
+    QString getInstalledPackageName();
     Destination *getInstalledTo()   { return installedTo; }
 
     QString toString();
@@ -68,7 +69,7 @@ private:
     QString status;
     QString description;
     QString filename;
-	bool packageStoredLocally;
+    bool packageStoredLocally;
     bool installedToRoot;
     bool installed;
     bool differentVersionAvailable;

@@ -23,14 +23,21 @@ Package::Package( QString &name )
     packageName = name;
     localPackage = 0;
     installed = false;
-	packageStoredLocally = false;
+    packageStoredLocally = false;
     installedToRoot = false;
+    installed = false;
+    installedTo = 0;
 }
 
 Package::Package( char *name )
 {
     packageName = name;
     localPackage = 0;
+    installed = false;
+    packageStoredLocally = false;
+    installedToRoot = false;
+    installed = false;
+    installedTo = 0;
 }
 
 Package::~Package()
@@ -101,6 +108,14 @@ QString Package :: getInstalledVersion()
         return localPackage->getVersion();
     else
         return getVersion();
+}
+
+QString Package :: getInstalledPackageName()
+{
+    if ( localPackage )
+        return localPackage->getPackageName();
+    else
+        return getPackageName();
 }
 
 bool Package :: isInstalled()

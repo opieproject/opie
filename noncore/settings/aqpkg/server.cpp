@@ -106,16 +106,16 @@ void Server :: readLocalIpks( Server *local )
 
 	for ( ; it.current() ; ++it )
 	{
-		// OK, we have a local IPK file, I think the standard naming conventions
-		// for these are packagename_version_arm.ipk
-		QString file = (*it)->file();
+        // OK, we have a local IPK file, I think the standard naming conventions
+        // for these are packagename_version_arm.ipk
+        QString file = (*it)->file();
 
         QString packageName = Utils::getPackageNameFromIpkFilename( file );
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
         packageList.push_back( Package( packageName ) );
-		packageList.back().setVersion( ver );
-		packageList.back().setFilename( file );
-		packageList.back().setPackageStoredLocally( true );
+        packageList.back().setVersion( ver );
+        packageList.back().setFilename( file );
+        packageList.back().setPackageStoredLocally( true );
         
 	}
 #else

@@ -484,11 +484,17 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
     {
         InstallData item;
         item.option = "D";
-        item.packageName = name;
+        item.packageName = p->getInstalledPackageName();
         if ( p->getInstalledTo() )
+        {
             item.destination = p->getInstalledTo();
+            cout << "dest - " << p->getInstalledTo()->getDestinationName() << endl;
+            cout << "dest - " << p->getInstalledTo()->getDestinationPath() << endl;
+        }
         else
+        {
             item.destination = p->getLocalPackage()->getInstalledTo();
+        }
 
         // Sticky option not implemented yet, but will eventually allow
         // the user to say something like 'remove all'
