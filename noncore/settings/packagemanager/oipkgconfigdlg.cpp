@@ -180,18 +180,22 @@ void OIpkgConfigDlg::initServerWidget()
     connect( m_serverList, SIGNAL(highlighted(int)), this, SLOT(slotServerSelected(int)) );
     layout->addMultiCellWidget( m_serverList, 0, 0, 0, 2 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPushButton *btn = new QPushButton( pic, tr( "New" ), container );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerNew()) );
     layout->addWidget( btn, 1, 0 );
 
-    m_serverEditBtn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), container );
+    pic.convertFromImage( Resource::loadImage( "edit" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_serverEditBtn = new QPushButton( pic, tr( "Edit" ), container );
     m_serverEditBtn->setEnabled( false );
     QWhatsThis::add( m_serverEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_serverEditBtn, SIGNAL(clicked()), this, SLOT(slotServerEdit()) );
     layout->addWidget( m_serverEditBtn, 1, 1 );
 
-    m_serverDeleteBtn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    pic.convertFromImage( Resource::loadImage( "trash" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_serverDeleteBtn = new QPushButton( pic, tr( "Delete" ), container );
     m_serverDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_serverDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
     connect( m_serverDeleteBtn, SIGNAL(clicked()), this, SLOT(slotServerDelete()) );
@@ -218,18 +222,22 @@ void OIpkgConfigDlg::initDestinationWidget()
     connect( m_destList, SIGNAL(highlighted(int)), this, SLOT(slotDestSelected(int)) );
     layout->addMultiCellWidget( m_destList, 0, 0, 0, 2 );
 
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "new" ), tr( "New" ), container );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPushButton *btn = new QPushButton( pic, tr( "New" ), container );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestNew()) );
     layout->addWidget( btn, 1, 0 );
 
-    m_destEditBtn = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Edit" ), container );
+    pic.convertFromImage( Resource::loadImage( "edit" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_destEditBtn = new QPushButton( pic, tr( "Edit" ), container );
     m_destEditBtn->setEnabled( false );
     QWhatsThis::add( m_destEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_destEditBtn, SIGNAL(clicked()), this, SLOT(slotDestEdit()) );
     layout->addWidget( m_destEditBtn, 1, 1 );
 
-    m_destDeleteBtn = new QPushButton( Resource::loadPixmap( "trash" ), tr( "Delete" ), container );
+    pic.convertFromImage( Resource::loadImage( "trash" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_destDeleteBtn = new QPushButton( pic, tr( "Delete" ), container );
     m_destDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_destDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
     connect( m_destDeleteBtn, SIGNAL(clicked()), this, SLOT(slotDestDelete()) );
@@ -341,7 +349,9 @@ void OIpkgConfigDlg::initOptionsWidget()
     m_optSourceLists = new QLineEdit( container );
     QWhatsThis::add( m_optSourceLists, tr( "Enter the directory where package source feed information is stored." ) );
     layout->addWidget( m_optSourceLists, 7, 0 );
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, container );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPushButton *btn = new QPushButton( pic, QString::null, container );
     btn->setMaximumWidth( btn->height() );
     QWhatsThis::add( btn, tr( "Tap here to select the directory where package source feed information is stored." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotOptSelectSourceListsPath()) );

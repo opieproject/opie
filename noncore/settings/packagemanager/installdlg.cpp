@@ -66,7 +66,7 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
         m_command[ m_numCommands ] = command1;
         m_packages[ m_numCommands ] = packages1;
         ++m_numCommands;
-        
+
         if ( command1 == OPackage::Install )
             m_installFound = true;
     }
@@ -75,7 +75,7 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
         m_command[ m_numCommands ] = command2;
         m_packages[ m_numCommands ] = packages2;
         ++m_numCommands;
-        
+
         if ( command2 == OPackage::Install )
             m_installFound = true;
     }
@@ -84,7 +84,7 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
         m_command[ m_numCommands ] = command3;
         m_packages[ m_numCommands ] = packages3;
         ++m_numCommands;
-        
+
         if ( command3 == OPackage::Install )
             m_installFound = true;
     }
@@ -129,11 +129,14 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
     groupBoxLayout->addWidget( m_output );
     layout->addMultiCellWidget( groupBox, 2, 2, 0, 1 );
 
-    m_btnStart = new QPushButton( Resource::loadPixmap( "packagemanager/apply" ), tr( "Start" ), this );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "packagemanager/apply" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_btnStart = new QPushButton( pic, tr( "Start" ), this );
     layout->addWidget( m_btnStart, 3, 0 );
     connect( m_btnStart, SIGNAL(clicked()), this, SLOT(slotBtnStart()) );
 
-    m_btnOptions = new QPushButton( Resource::loadPixmap( "SettingsIcon" ), tr( "Options" ), this );
+    pic.convertFromImage( Resource::loadImage( "SettingsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_btnOptions = new QPushButton( pic, tr( "Options" ), this );
     layout->addWidget( m_btnOptions, 3, 1 );
     connect( m_btnOptions, SIGNAL( clicked() ), this, SLOT(slotBtnOptions()) );
 
@@ -217,7 +220,9 @@ void InstallDlg::slotBtnStart()
 
         // Allow user to close dialog
         m_btnStart->setText( tr( "Close" ) );
-        m_btnStart->setIconSet( Resource::loadPixmap( "enter" ) );
+        QPixmap pic;
+        pic.convertFromImage( Resource::loadImage( "enter" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+        m_btnStart->setIconSet( pic );
         return;
     }
     else if ( btnText == tr( "Close" ) )
@@ -234,12 +239,14 @@ void InstallDlg::slotBtnStart()
         dest = m_destination->currentText();
         m_destination->setEnabled( false );
     }
-    
+
     m_btnOptions->setEnabled( false );
     if ( m_numCommands > 1 )
     {
         m_btnStart->setText( tr( "Abort" ) );
-        m_btnStart->setIconSet( Resource::loadPixmap( "close" ) );
+        QPixmap pic;
+        pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+        m_btnStart->setIconSet( pic );
     }
     else
     {
@@ -252,15 +259,18 @@ void InstallDlg::slotBtnStart()
         m_packman->executeCommand( m_command[ m_currCommand ], m_packages[ m_currCommand ], dest,
                                    this, SLOT(slotOutput(const QString &)), true );
     }
-    
+
     // All commands executed, allow user to close dialog
     m_btnStart->setEnabled( true );
     m_btnStart->setText( tr( "Close" ) );
-    m_btnStart->setIconSet( Resource::loadPixmap( "enter" ) );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "enter" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_btnStart->setIconSet( pic );
 
     m_btnOptions->setEnabled( true );
     m_btnOptions->setText( tr( "Save output" ) );
-    m_btnOptions->setIconSet( Resource::loadPixmap( "save" ) );
+    pic.convertFromImage( Resource::loadImage( "save" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    m_btnOptions->setIconSet( pic );
 }
 
 void InstallDlg::slotBtnOptions()
@@ -305,7 +315,7 @@ void InstallDlg::slotOutput( const QString &msg )
         lineStr.truncate( lineStr.length() - 1 );
     m_output->append( lineStr );
     m_output->setCursorPosition( m_output->numLines(), 0 );
-    
+
     // Update available space
     slotDisplayAvailSpace( QString::null );
 }
