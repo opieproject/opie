@@ -1015,11 +1015,13 @@ void Zaurus::init ( )
 	}
 
 	switch ( d-> m_model ) {
+		case Model_Zaurus_SLA300:
+			d-> m_rotation = Rot0;
+			break;
 		case Model_Zaurus_SLC700:
 			/* note for C700, we must check the display rotation
 			 * sensor to set an appropriate value
 			 */
-		case Model_Zaurus_SLA300:
 		case Model_Zaurus_SLB600:
 		case Model_Zaurus_SL5500:
 		case Model_Zaurus_SL5000:
