@@ -729,6 +729,7 @@ void PlayListWidget::btnPlay(bool b) { // this is fugly
       {
           addToSelection( audioView->selectedItem() );
           mediaPlayerState->setPlaying(b);
+          qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(1);
       }
@@ -737,6 +738,7 @@ void PlayListWidget::btnPlay(bool b) { // this is fugly
       {
           addToSelection( videoView->selectedItem() );
           mediaPlayerState->setPlaying(b);
+          qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(2);
       }
