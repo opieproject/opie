@@ -28,6 +28,7 @@
 
 #include <opie/tododb.h>
 #include <opie/todovcalresource.h>
+#include <opie/ofontmenu.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
@@ -185,7 +186,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     catMenu->setCheckable( true );
     populateCategories();
 
-    mb->insertItem( tr( "Task" ), edit );
+    mb->insertItem( tr( "Data" ), edit );
     mb->insertItem( tr( "View" ), catMenu );
 
     resize( 200, 300 );
@@ -357,6 +358,12 @@ void TodoWindow::setCategory( int c )
 void TodoWindow::populateCategories()
 {
     catMenu->clear();
+
+    QList<QWidget> list;
+    list.append(table );
+    OFontMenu *menu = new OFontMenu(this, "menu",list );
+    menu->forceSize( table->horizontalHeader(), 10 );
+    catMenu->insertItem(tr("Fonts"), menu );
 
     completedAction->addTo( catMenu );
     completedAction->setOn( table->showCompleted() );

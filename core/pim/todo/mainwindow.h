@@ -28,6 +28,7 @@ class TodoTable;
 class QAction;
 class QPopupMenu;
 class Ir;
+class OFontMenu;
 
 class TodoWindow : public QMainWindow
 {
@@ -77,3 +78,5 @@ private:
 };
 
 #endif
+
+
