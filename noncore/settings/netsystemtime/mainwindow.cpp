@@ -164,12 +164,6 @@ void MainWindow::runNTP()
 {
 	if ( !ntpDelayElapsed() && ntpInteractive )
 	{
-		QString msg = tr( "You asked for a delay of " );
-		msg.append( QString::number( ntpDelay ) );
-		msg.append( tr( " minutes, but only " ) );
-		msg.append( QString::number( _lookupDiff / 60 ) );
-		msg.append( tr(" minutes elapsed since last lookup.<br>Continue?") );
-
 		QString msg = tr( "You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.<br>Continue?" ).arg( QString::number( ntpDelay ) ).arg( QString::number( _lookupDiff / 60 ) );
 		
 		switch (
