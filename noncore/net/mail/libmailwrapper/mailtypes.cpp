@@ -68,7 +68,7 @@ const QStringList& RecMail::Bcc()const
 }
 
 RecPart::RecPart()
-    : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_lines(0)
+    : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_lines(0),m_size(0)
 {
     m_Parameters.clear();
     m_poslist.clear();
@@ -76,6 +76,16 @@ RecPart::RecPart()
 
 RecPart::~RecPart()
 {
+}
+
+void RecPart::setSize(unsigned int size)
+{
+    m_size = size;
+}
+    
+const unsigned int RecPart::Size()const
+{
+    return m_size;
 }
 
 void RecPart::setLines(unsigned int lines)

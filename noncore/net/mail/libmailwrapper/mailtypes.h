@@ -76,7 +76,7 @@ class RecPart
 {
 protected:
     QString m_type,m_subtype,m_identifier,m_encoding;
-    unsigned int m_lines;
+    unsigned int m_lines,m_size;
     part_plist_t m_Parameters;
     /* describes the position in the mail */
     QValueList<int> m_poslist;
@@ -95,6 +95,9 @@ public:
     void setEncoding(const QString&encoding);
     void setLines(unsigned int lines);
     const unsigned int Lines()const;
+    void setSize(unsigned int size);
+    const unsigned int Size()const;
+
     
     void setParameters(const part_plist_t&list);
     const part_plist_t&Parameters()const;

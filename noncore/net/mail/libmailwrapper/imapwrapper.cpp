@@ -686,6 +686,7 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
         }
     }
     target_part.setEncoding(encoding);
+    target_part.setSize(which->bd_size);
 }
 
 QString IMAPwrapper::fetchPart(const RecMail&mail,const RecPart&part)

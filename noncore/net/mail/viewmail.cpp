@@ -1,5 +1,6 @@
 #include <qtextbrowser.h>
 #include <qmessagebox.h>
+#include <qtextstream.h>
 #include <qaction.h>
 #include <qapplication.h>
 
@@ -7,27 +8,94 @@
 #include "composemail.h"
 #include "viewmail.h"
 
-AttachItem::AttachItem(QListView *parent, AttachItemStore &attachItemStore)
-	: QListViewItem(parent), _attachItemStore(attachItemStore)
+AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&file,const QString&desc,int num)
+	: QListViewItem(parent,after),_partNum(num)
 {
-	setText(0, _attachItemStore.mimeType());
-	setText(1, _attachItemStore.fileName());
-	setText(2, _attachItemStore.description());
-}
-
-AttachItem::AttachItem(QListViewItem *parent, AttachItemStore &attachItemStore)
-	: QListViewItem(parent), _attachItemStore(attachItemStore)
-{
-	setText(0, _attachItemStore.mimeType());
-	setText(1, _attachItemStore.fileName());
-	setText(2, _attachItemStore.description());
+	setText(0, mime);
+	setText(1, file);
+	setText(2, desc);
 }
 
 
 void ViewMail::setBody( RecBody body ) {
 
 m_mail[2] = body.Bodytext();
+attachbutton->setEnabled(body.Parts().count()>0);
+attachments->setEnabled(body.Parts().count()>0);
+if (body.Parts().count()==0) {
+    return;
+}
+AttachItem * curItem=0;
+QString type=body.Description().Type()+"/"+body.Description().Subtype();
+QString desc;
+double s = body.Description().Size();
+int w;
+w=0;
 
+while (s>1024) {
+    s/=1024;
+    ++w;
+    if (w>=2) break;
+}
+
+QString q="";
+switch(w) {
+case 1:
+    q="k";
+    break;
+case 2:
+    q="M";
+    break;
+default:
+    break;
+}
+
+{
+    /* I did not found a method to make a CONTENT reset on a QTextStream
+       so I use this construct that the stream will re-constructed in each 
+       loop. To let it work, the textstream is packed into a own area of
+       code is it will be destructed after finishing its small job.
+    */
+    QTextOStream o(&desc);
+    if (w>0) o.precision(2); else o.precision(0);
+    o.setf(QTextStream::fixed);
+    o << s << " " << q << "Byte";
+}
+
+curItem=new AttachItem(attachments,curItem,type,"Mailbody",desc,-1);
+QString filename = "";
+for (unsigned int i = 0; i < body.Parts().count();++i) {
+    type = body.Parts()[i].Type()+"/"+body.Parts()[i].Subtype();
+    part_plist_t::ConstIterator it = body.Parts()[i].Parameters().begin();
+    for (;it!=body.Parts()[i].Parameters().end();++it) {
+        if (it.key().lower()=="name") {
+            filename=it.data();
+        }
+    }
+    s = body.Parts()[i].Size();
+    w = 0;
+    while (s>1024) {
+        s/=1024;
+        ++w;
+        if (w>=2) break;
+    }
+    switch(w) {
+    case 1:
+        q="k";
+        break;
+    case 2:
+        q="M";
+        break;
+    default:
+        q="";
+        break;
+    }
+    QTextOStream o(&desc);
+    if (w>0) o.precision(2); else o.precision(0);
+    o.setf(QTextStream::fixed);
+    o << s << " " << q << "Byte";
+    curItem=new AttachItem(attachments,curItem,type,filename,desc,i);
+}
 }
 
 void ViewMail::setMail( RecMail mail ) {

@@ -8,34 +8,14 @@
 #include "viewmailbase.h"
 #include "mailtypes.h"
 
-class AttachItemStore 
-{
-public:
-	void setMimeType(QString mimeType) { _mimeType = mimeType; }
-	QString mimeType() { return _mimeType; }
-	void setFileName(QString fileName) { _fileName = fileName; }
-	QString fileName() { return _fileName; }
-	void setDescription(QString description) { _description = description; }
-	QString description() { return _description; }
-	void setPartNum(QString partNum) { _partNum = partNum; }
-	QString partNum() { return _partNum; }
-
-private:
-	QString _mimeType, _fileName, _description, _partNum;
-
-};
-
 class AttachItem : public QListViewItem
 {
 public:
-	AttachItem(QListView *parent, AttachItemStore &attachment);
-	AttachItem(QListViewItem *parent, AttachItemStore &attachment);
-
-	AttachItemStore attachItemStore() { return _attachItemStore; }
+    AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&file,const QString&desc,int num);
+    int Partnumber() { return _partNum; }
 
 private:
-	AttachItemStore _attachItemStore;
-
+    int _partNum;
 };
 
 class ViewMail : public ViewMailBase
