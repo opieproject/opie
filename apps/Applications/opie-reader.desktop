@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=An E-Text Reader
 Exec=uqtreader
-Icon=uqtreader
+Icon=opie-reader/uqtreader
 Type=Application
 Name=QT Reader (Unicode)
 CanFastLoad=1
