@@ -1,3 +1,10 @@
+0.2.7
+
+* check if todolist.xml was changed before parsing it
+* check only every 30 sec for changes.
+* some visual stuff
+* as usual many little improvements .-)
+
 0.2.6
 
 * added scrollbars to dates and todo

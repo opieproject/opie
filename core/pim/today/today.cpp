@@ -38,10 +38,12 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qpixmap.h>
+#include <qfileinfo.h>
 
 //#include <iostream.h>
 //#include <unistd.h>
 #include <stdlib.h>
+
 
 int MAX_LINES_TASK;
 int MAX_CHAR_CLIP;
@@ -89,8 +91,35 @@ void Today::draw() {
   getMail();
   getTodo(); 
   // how often refresh
-  QTimer::singleShot( 5*1000, this, SLOT(draw()) );
+  QTimer::singleShot( 30*1000, this, SLOT(draw()) );
 }
+
+
+/* 
+ * Check if the todolist.xml was modified (if there are new entries.
+ * Returns true if it was modified.
+ */
+bool Today::checkIfModified() {
+  
+  QDir dir;
+  QString homedir = dir.homeDirPath (); 
+  QString time;
+    
+  Config cfg("today");
+  cfg.setGroup("Files");
+  time = cfg.readEntry("todolisttimestamp", "");
+
+  QFileInfo file = (homedir +"/Applications/todolist/todolist.xml");
+  QDateTime fileTime  = file.lastModified();
+  if (time.compare(fileTime.toString()) == 0) {
+    return false;
+  } else {
+    cfg.writeEntry("todolisttimestamp", fileTime.toString() );
+    cfg.write(); 
+    return true;
+  }
+}
+
 
 void Today::init() {
   QDate date = QDate::currentDate();
@@ -340,6 +369,12 @@ void Today::getMail() {
  *
  */
 void Today::getTodo() {
+  
+  // if the todolist.xml file was not modified in between, do not parse it.
+  if (!checkIfModified()) {
+    return;
+  }
+
   QString output;
   QString tmpout;
   int count = 0;
