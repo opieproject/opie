@@ -31,6 +31,7 @@ Sheet::Sheet(int numRows, int numCols, QWidget *parent)
   defaultCellData.font=font();
   defaultCellData.borders=defaultBorders;
 
+  clicksLocked=FALSE;
   selectionNo=-1;
   setSelectionMode(QTable::Single);
 
