@@ -22,9 +22,9 @@
 
 void optionsDialog::initDialog()
 {
-    QWidget *d = QApplication::desktop();
-    int width = d->width();
-    int height = d->height();
+//    QWidget *d = QApplication::desktop();
+//    int width = d->width();
+//    int height = d->height();
 
     QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing(2);
@@ -44,7 +44,7 @@ void optionsDialog::initDialog()
     QLabel *downLabel= new QLabel(Widget2,"Label1");
     downLabel->setText("Download Directory:");
     downLabel->setMaximumHeight(30);
-    
+
     downloadDirEdit = new QLineEdit(Widget2,"downloadDir");
 
 //      ComboBoxStyle = new QComboBox( FALSE, Widget2, "ComboBoxStyle" );
@@ -89,7 +89,7 @@ void optionsDialog::initDialog()
 //////////////////////////////////////////////////////////
     tabWidget->insertTab( Widget3, tr( "FTP" ) );
     tab = new QWidget( tabWidget, "tab" );
-    
+
     TextLabel3_3 = new QLabel( tab, "TextLabel3_3" );
 
 //     TextLabel4 = new QLabel( tab, "TextLabel4" );
@@ -110,13 +110,13 @@ void optionsDialog::initDialog()
     QGridLayout *layout4 = new QGridLayout(tab );
     layout4->setSpacing(2);
     layout4->setMargin(2);
-    
+
     fontDlg = new FontDialog( tabWidget,"FontDialog");
 //    fontWidget= new QWidget( tabWidget, "fontWidget" );
     tabWidget->insertTab( fontDlg,"Font");
 //    fontDlg = new FontDialog( fontWidget,"FontDialog");
 //      fontDlg->show();
-    
+
     initConnections();
 
     ftp_DownloadButton->setText("New List");
