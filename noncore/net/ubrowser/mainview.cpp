@@ -19,7 +19,10 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name)
 {
+	setIcon( Resource::loadPixmap( "remote" ) );
 	setCaption("uBrowser");
+	
+	setToolBarsMovable( false );
 
 	QPEToolBar *toolbar = new QPEToolBar(this, "toolbar");
 	back = new QToolButton(Resource::loadPixmap("ubrowser/back"), 0, 0, 0, 0, toolbar, "back");

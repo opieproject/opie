@@ -1,0 +1,9 @@
+Files: bin/ubrowser apps/Applications/ubrowser.desktop pics/ubrowser/*.png
+Priority: optional
+Section: opie/applications
+Maintainer: Thomas Stephens <spiralman@softhome.net>
+Architecture: arm
+Version: 0.0-$SUB_VERSION
+Depends: opie-base
+License: GPL
+Description: a very small web browser
