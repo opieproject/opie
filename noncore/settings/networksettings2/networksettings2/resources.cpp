@@ -2,6 +2,7 @@
 #include <qpe/qlibrary.h>
 #include <qpe/qpeapplication.h>
 #include <qdir.h>
+#include <opie2/odebug.h>
 #include <qtopia/resource.h>
 
 #include "netnode.h"
@@ -132,9 +133,6 @@ bool TheNSResources::loadNetNode(
     QLibrary *lib = new QLibrary(pluginFileName);
     void * res = lib->resolve(resolveString);
     if( ! res ){
-#ifdef DEBUG
-      qDebug("loadNetNode: Warning: %s is not a plugin", pluginFileName.latin1());
-#endif
       delete lib;
       return 0;
     }
@@ -146,9 +144,6 @@ bool TheNSResources::loadNetNode(
 
     getNetNodeList( PNN );
     if( PNN.isEmpty() ) {
-#ifdef DEBUG
-      qDebug("loadNetNode: Couldn't get node list, but did load library!");
-#endif
       delete lib;
       return 0;
     }

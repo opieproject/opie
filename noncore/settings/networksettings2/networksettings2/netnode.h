@@ -3,6 +3,7 @@
 
 #include <qtextstream.h>
 #include <qlist.h>
+#include <qdict.h>
 #include <qpixmap.h>
 #include <qobject.h>
 #include <time.h>
@@ -357,5 +358,83 @@ private :
       bool    IsModified;
 
 };
+
+//
+// special node that is used to remember entries for plugins
+// that seem missing.  This way we never loose data
+//
+
+class FakeNetNode : public ANetNode {
+
+public:
+
+  FakeNetNode( ) { };
+  virtual ~FakeNetNode(){};
+
+  const QString pixmapName() 
+    { return QString(""); }
+  const QString nodeName() 
+    { return QString("Fake node" ); }
+  const QString nodeDescription()
+    { return QString("Fake node" ); }
+  ANetNodeInstance * createInstance( void );
+  const char * provides( void )
+    { return ""; }
+  virtual const char ** needs( void )
+    { return 0; }
+  virtual bool generateProperFilesFor( ANetNodeInstance * )
+    { return 0; }
+  virtual bool hasDataFor( const QString & )
+    { return 0; }
+  virtual bool generateDataForCommonFile( 
+      SystemFile & , long , ANetNodeInstance * )
+    {return 1; }
+
+private :
+
+};
+
+class FakeNetNodeInstance : public ANetNodeInstance {
+
+public:
+
+  FakeNetNodeInstance( ANetNode * NN ) : 
+        ANetNodeInstance( NN ), ValAttrPairs() { }
+  virtual ~FakeNetNodeInstance( void ) { }
+
+  virtual RuntimeInfo * runtime( void )
+    { return 0; }
+
+  // create edit widget under parent
+  virtual QWidget * edit( QWidget * )
+    { return 0; }
+  // is given data acceptable
+  virtual QString acceptable( void ) 
+    { return QString(""); }
+
+  // get data from GUI and store in node
+  virtual void commit( void ) {}
+
+  // get next node
+  ANetNodeInstance * nextNode()
+    { return 0; }
+  // return NetNode this is an instance of
+
+  // intialize am instance of a net node
+  void initialize( void ){}
+
+  // returns node specific data -> only useful for 'buddy'
+  virtual void * data( void ) 
+    { return 0; }
+
+protected :
+
+  virtual void setSpecificAttribute( QString & , QString & );
+  virtual void saveSpecificAttribute( QTextStream & );
+
+  QDict<QString>        ValAttrPairs;
+};
+
+extern FakeNetNode * FakeNode;
 
 #endif

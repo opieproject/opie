@@ -52,10 +52,15 @@ public :
     ANetNodeInstance * createNodeInstance( const QString & S )
       { ANetNodeInstance * NNI = 0;
         NetNode_t * NNT = AllNodeTypes[S];
-        if( NNT ) {
-          NNI = NNT->NetNode->createInstance();
-          NNI->initialize();
+        ANetNode * NN;
+        if( ! NNT ) {
+          NN = FakeNode = 
+            ( FakeNode ) ?  FakeNode : new FakeNetNode();
+        } else {
+          NN = NNT->NetNode;
         }
+        NNI = NN->createInstance();
+        NNI->initialize();
         return NNI;
       }
 

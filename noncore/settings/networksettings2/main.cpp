@@ -1,3 +1,5 @@
+#include "nsdata.h"
+#include "activateprofile.h"
 #include "networksettings.h"
 #include <qpe/qpeapplication.h>
 
@@ -9,9 +11,14 @@ OPIE_EXPORT_APP( OApplicationFactory<NetworkSettings> )
 
 #else
 
+// just standard GUI
 #define ACT_GUI         0
+// used by interfaces to request for allow of up/down
 #define ACT_REQUEST     1
+// regenerate config files
 #define ACT_REGEN       2
+// used by interfaces to request user prompt 
+#define ACT_PROMPT      3
 
 int main( int argc, char * argv[] ) {
         int rv = 0;
@@ -31,6 +38,9 @@ int main( int argc, char * argv[] ) {
           if( strcmp( argv[i], "--regen" ) == 0 ) {
             Action = ACT_REGEN;
             GuiType = QApplication::Tty;
+            rmv = 1;
+          } else if( strcmp( argv[i], "--prompt" ) == 0 ) {
+            Action = ACT_PROMPT;
             rmv = 1;
           }
           if( rmv ) {
@@ -62,28 +72,41 @@ int main( int argc, char * argv[] ) {
 #endif
 
         // init qt with app widget
-        if( GuiType != QApplication::Tty ) {
-          QWidget * W = 0;
-          W = new NetworkSettings(0);
-          TheApp->setMainWidget( W ); 
-          W->show();
-#ifdef _WS_QWS_
-          W->showMaximized();
-#else
-          W->resize( W->sizeHint() );
-#endif
-          rv = TheApp->exec();
-          delete W;
-        } else {
-          switch( Action ) {
-            case ACT_REQUEST :
-              NetworkSettings::canStart( argv[1] );
-              break;
-            case ACT_REGEN :
+
+        switch( Action ) {
+          case ACT_REQUEST :
+            { NetworkSettingsData NS;
+              NS.canStart( argv[1] );
+            }
+            break;
+          case ACT_REGEN :
+            { NetworkSettingsData NS;
               // regen returns 0 if OK
-              rv = (NetworkSettings::regenerate()) ? 1 : 0;
-              break;
-          }
+              rv = (NS.regenerate()) ? 1 : 0;
+            }
+            break;
+          case ACT_PROMPT :
+            { ActivateProfile AP(argv[1]);
+              if( AP.exec() == QDialog::Accepted ) {
+                printf( "%s-c%d-allowed", AP.selectedProfile() );
+              } else {
+                printf( "%s-cNN-disallowed" );
+              }
+            }
+            break;
+          case ACT_GUI :
+            { QWidget * W = new NetworkSettings(0);
+              TheApp->setMainWidget( W ); 
+              W->show();
+#ifdef _WS_QWS_
+              W->showMaximized();
+#else
+              W->resize( W->sizeHint() );
+#endif
+              rv = TheApp->exec();
+              delete W;
+            }
+            break;
         }
 
         return rv;

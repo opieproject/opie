@@ -276,3 +276,27 @@ InterfaceInfo * RuntimeInfo::assignedInterface( void ) {
 AsDevice * RuntimeInfo::device( void ) { 
     return netNode()->nextNode()->runtime()->device(); 
 }
+
+ANetNodeInstance * FakeNetNode::createInstance( void ) {
+    return new FakeNetNodeInstance( this );
+}
+
+void FakeNetNodeInstance::setSpecificAttribute( 
+      QString & A, QString & V ) {
+      ValAttrPairs.insert( A, new QString(V) );
+}
+
+void FakeNetNodeInstance::saveSpecificAttribute( QTextStream &TS ) {
+        for( QDictIterator<QString> it( ValAttrPairs ); 
+             it.current();
+             ++ it ) {
+            TS << it.currentKey().latin1() 
+               << "=" 
+               << quote( *(it.current())) 
+               << endl ;
+            ++it;
+        }
+}
+
+// collects all info that no plugin acceps
+FakeNetNode * FakeNode = 0; 

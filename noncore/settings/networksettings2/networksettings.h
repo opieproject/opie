@@ -1,3 +1,4 @@
+#include "nsdata.h"
 #include "networksettingsGUI.h"
 #include "resources.h"
 
@@ -5,33 +6,6 @@ class ANetNode;
 class ANetNodeInstance;
 class QTimer;
 class QIconViewItem;
-
-class NetworkSettingsData {
-
-public :
-
-      NetworkSettingsData( void );
-      ~NetworkSettingsData( void );
-
-      void loadSettings( void );
-      QString saveSettings( void );
-
-      QString generateSettings( bool Force = FALSE );
-
-      bool isModified( void ) 
-        { return IsModified; }
-      void setModified( bool m ) 
-        { IsModified = m; }
-
-      void forceGeneration( bool m ) 
-        { Force = m; }
-
-private :
-
-      bool IsModified;
-      bool Force;
-
-};
 
 class NetworkSettings : public NetworkSettingsGUI {
 
@@ -46,9 +20,6 @@ public :
 
       static QString appName( void ) 
         { return QString::fromLatin1("networksettings"); }
-
-      static void canStart( const char * Interface );
-      static bool regenerate( void );
 
       bool isModified( void ) 
         { return NSD.isModified(); }
@@ -67,6 +38,7 @@ public slots :
       void SLOT_Connect( void );
       void SLOT_GenerateConfig( void );
       void SLOT_RefreshStates( void );
+      void SLOT_QCopMessage( const QCString&,const QByteArray& );
 
 private :
 
