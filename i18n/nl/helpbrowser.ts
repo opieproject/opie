@@ -3,35 +3,35 @@
     <name>HelpBrowser</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Terug</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Vooruit</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Thuis</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak bookmark</translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder bookmark</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Bookmarks</translation>
     </message>
     <message>
         <source>Help Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Hulp bij Hulp</translation>
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>Helppagina's</translation>
     </message>
 </context>
 </TS>

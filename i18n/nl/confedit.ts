@@ -3,76 +3,76 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandsnaam:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Groep:</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sleutel:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Waarde</translation>
     </message>
 </context>
 <context>
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestanden</translation>
     </message>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet openen</translation>
     </message>
     <message>
         <source>The directory </source>
-        <translation type="unfinished"></translation>
+        <translation>De map</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>kan niet worden geopend</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet openen</translation>
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished"></translation>
+        <translation>Het bestand</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan niet worden geopend</translation>
     </message>
     <message>
         <source>no group</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen groep</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Conf bestandseditor</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Bewaren</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Herstellen</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen</translation>
     </message>
 </context>
 </TS>

@@ -3,19 +3,19 @@
     <name>BuzzWord</name>
     <message>
         <source>buZzword</source>
-        <translation type="unfinished"></translation>
+        <translation>buzZword</translation>
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nieuw spel</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Spel</translation>
     </message>
     <message>
         <source>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;&lt;b&gt;BINGO !&lt;/b&gt;&lt;/h1&gt;</translation>
     </message>
 </context>
 </TS>
