@@ -1,0 +1,8 @@
+  config PIMCONVERTER
+    boolean "opie- Pim Converter (converts pim data between different databases)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2PIM && LIBOPIE2DB
+
+    comment "The pim converter needs libqpe, libopie2core, libopie2pim and libopie2db"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2PIM && LIBOPIE2DB )
+    
