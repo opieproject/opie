@@ -320,12 +320,16 @@ void AdvancedFm::localListClicked(QListViewItem *selectedItem) {
           strItem=QDir::cleanDirPath(currentDir.canonicalPath()+"/"+strItem);
           currentDir.cd(strItem,FALSE);
           populateLocalView();
+    Local_View->ensureItemVisible(Local_View->firstChild());
+          
         } else {
           currentDir.cdUp();
           populateLocalView();
+    Local_View->ensureItemVisible(Local_View->firstChild());
         }
         if(QDir(strItem).exists()){
           currentDir.cd(strItem, TRUE);
+    Local_View->ensureItemVisible(Local_View->firstChild());
           populateLocalView();
         }
       } else {
@@ -339,7 +343,6 @@ void AdvancedFm::localListClicked(QListViewItem *selectedItem) {
       } //end not symlink
       chdir(strItem.latin1());
     }
-    Local_View->ensureItemVisible(Local_View->firstChild());
     
   }
 }
@@ -360,13 +363,16 @@ void AdvancedFm::remoteListClicked(QListViewItem *selectedItem) {
           strItem=QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem);
           currentRemoteDir.cd(strItem,FALSE);
           populateRemoteView();
+    Remote_View->ensureItemVisible(Remote_View->firstChild());
         } else {
           currentRemoteDir.cdUp();
           populateRemoteView();
+    Remote_View->ensureItemVisible(Remote_View->firstChild());
         }
         if(QDir(strItem).exists()){
           currentRemoteDir.cd(strItem, TRUE);
           populateRemoteView();
+    Remote_View->ensureItemVisible(Remote_View->firstChild());
         }
       } else {
         strItem=QDir::cleanDirPath( currentRemoteDir.canonicalPath()+"/"+strItem);
@@ -379,7 +385,6 @@ void AdvancedFm::remoteListClicked(QListViewItem *selectedItem) {
       } //end not symlink
       chdir(strItem.latin1());
     }
-    Remote_View->ensureItemVisible(Remote_View->firstChild());
   }
 }
 
@@ -780,7 +785,9 @@ void AdvancedFm::showFileMenu() {
     m->insertSeparator();
     m->insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
 
+#if defined(QT_QWS_OPIE)
     m->insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
+#endif    
     m->setCheckable(TRUE);
     if (!b)
         m->setItemChecked(m->idAt(0),TRUE);
