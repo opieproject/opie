@@ -29,6 +29,11 @@
 <!ENTITY write SYSTEM "write.sgm">
 <!ENTITY sysinfo SYSTEM "sysinfo.sgm">
 <!ENTITY tableviewer SYSTEM "tableviewer.sgm">
+<!ENTITY rotation SYSTEM "rotation.sgm">
+<!ENTITY appearance2 SYSTEM "appearance2.sgm">
+<!ENTITY language SYSTEM "language.sgm">
+<!ENTITY sshkeys SYSTEM "sshkeys.sgm">
+<!ENTITY appskey SYSTEM "appskey.sgm">
 
 <!--Now the real entities-->
 <!ENTITY opie "OPIE">
@@ -67,6 +72,11 @@
 &software;
 &lightpower;
 &calibrate;
+&rotation;
+&appearance2;
+&language;
+&sshkeys;
+&appskey;
 </part>
 <part><title>Applets</title>
 &irda;
