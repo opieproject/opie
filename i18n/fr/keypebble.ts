@@ -43,11 +43,11 @@ connection.</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
-        <translation>Erreur de protocole : Le message d&apos;Id %1 a été recu lors de l&apos;attente d&apos;un nouveau message.</translation>
+        <translation type="unfinished">Erreur de protocole : le message d&apos;Id %1 a été recu lors de l&apos;attente d&apos;un nouveau message.</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
-        <translation>Erreur de protocole : Un encodage inconnu a été utilisé par le serveur %1</translation>
+        <translation>Erreur de protocole : un encodage inconnu a été utilisé par le serveur %1</translation>
     </message>
 </context>
 <context>
@@ -58,7 +58,7 @@ connection.</translation>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
-        <translation>Erreur : Version de serveur non valide, %1</translation>
+        <translation>Erreur : version de serveur non valide, %1</translation>
     </message>
     <message>
         <source>Error: Unsupported server version, %1</source>
@@ -109,7 +109,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Stop Full Screen</source>
-        <translation>Cesser le mode &quot;plein écran&quot;</translation>
+        <translation>Quitter le mode &quot;plein écran&quot;</translation>
     </message>
     <message>
         <source>Connected to remote host</source>
@@ -125,11 +125,11 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation>Nouvelle Connexion</translation>
+        <translation>Nouvelle connexion</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation>Ouvrir Favoris</translation>
+        <translation>Ouvrir favori</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
@@ -141,11 +141,11 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation>Le Clique Suivant est un Double Clique</translation>
+        <translation>Le clic suivant est un double clic</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation>Le Clique Suivant est un Clique Droit</translation>
+        <translation>Le clic suivant est un clic droit</translation>
     </message>
 </context>
 <context>
@@ -171,19 +171,19 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation>Montrer Code</translation>
+        <translation>Montrer mot de passe</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation>Mot de Passe : </translation>
+        <translation>Mot de passe : </translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation>Nom du Favori : </translation>
+        <translation>Nom du favori : </translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation>Nom d&apos;Hôte : </translation>
+        <translation>Nom d&apos;hôte : </translation>
     </message>
     <message>
         <source>Display Number:</source>
@@ -227,7 +227,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation>Facteur d&apos;echelle</translation>
+        <translation>Facteur d&apos;échelle</translation>
     </message>
     <message>
         <source>Encodings</source>
@@ -247,7 +247,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation>Copie de Rectangle</translation>
+        <translation>Encodage Copie de rectangle</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
@@ -255,7 +255,7 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation>Camoufler le mot de passe</translation>
+        <translation>Cacher le mot de passe</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
@@ -283,11 +283,11 @@ sous ce compte, essayez plus tard.</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation>Modifier la taille de l&apos;écran distant pour l&apos;ajuster à celle du PDA (Lent)</translation>
+        <translation>Modifier la taille de l&apos;écran distant pour l&apos;ajuster à celle du PDA (lent)</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation>Activé la transmission de rectangles identiques comme référence aux données existantes</translation>
+        <translation>Activer la transmission de rectangles identiques comme référence aux données existantes</translation>
     </message>
 </context>
 </TS>

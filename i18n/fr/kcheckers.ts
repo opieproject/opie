@@ -4,7 +4,7 @@
     <name>KCheckers</name>
     <message>
         <source>What&apos;s This</source>
-        <translation>Qu&apos;est-ce que c&apos;est </translation>
+        <translation type="unfinished">Qu&apos;est-ce que c&apos;est ?</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
@@ -12,19 +12,19 @@
     </message>
     <message>
         <source>Go!</source>
-        <translation>Go !</translation>
+        <translation type="unfinished">Jouez !</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation>Félicitation ! Vous avez gagné !</translation>
+        <translation>Félicitations ! Vous avez gagné !</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation>Patientez s&apos;il vous plait...</translation>
+        <translation>Patientez s&apos;il vous plaît...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation>Vous avez perdu.</translation>
+        <translation type="unfinished">Vous avez perdu.</translation>
     </message>
     <message>
         <source>Incorrect course.</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation>&amp;Annuler Déplacement</translation>
+        <translation>&amp;Annuler déplacement</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation>&amp;Afficher Repères</translation>
+        <translation>&amp;Afficher repères</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
@@ -116,11 +116,11 @@
     </message>
     <message>
         <source> New Game </source>
-        <translation>Nouvelle Partie</translation>
+        <translation>Nouvelle partie</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation>Annuler Déplacement</translation>
+        <translation>Annuler déplacement</translation>
     </message>
     <message>
         <source> Rules of Play </source>

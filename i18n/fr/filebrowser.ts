@@ -4,11 +4,11 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation>Gestionnaire de Fichiers</translation>
+        <translation>Gestionnaire de fichiers</translation>
     </message>
     <message>
         <source>Dir</source>
-        <translation>Répetoire</translation>
+        <translation>Répertoire</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Symlinks</source>
-        <translation>Liens Symboliques</translation>
+        <translation>Liens symboliques</translation>
     </message>
     <message>
         <source>View</source>
@@ -83,7 +83,7 @@
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation>Gestionnaire de Fichiers</translation>
+        <translation>Gestionnaire de fichiers</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation>&quot;Coller&quot; n&apos;a pas fonctionné !</translation>
+        <translation type="unfinished">&quot;Coller&quot; a échoué !</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation>&quot;Couper&quot; n&apos;a pas fonctionné !</translation>
+        <translation type="unfinished">&quot;Couper&quot; a échoué !</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation>Le lance de l&apos;application a échoué !</translation>
+        <translation>L&apos;exécution de l&apos;application a échoué !</translation>
     </message>
     <message>
         <source>Add to Documents</source>
@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation>Changer les Droits</translation>
+        <translation>Changer les droits</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -206,7 +206,7 @@
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Définir les Droits</translation>
+        <translation>Définir les droits</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>

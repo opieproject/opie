@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Defaults</source>
-        <translation>Défauts</translation>
+        <translation>Réglages par défaut</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation>Changer Touches de Direction</translation>
+        <translation>Modifier touches de direction</translation>
     </message>
     <message>
         <source>Undefined key</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation>&amp;La Salle de Renom</translation>
+        <translation type="unfinished">&amp;Meilleurs scores</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation>&amp;Cacher Curseur Souris</translation>
+        <translation>&amp;Cacher curseur souris</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
@@ -76,19 +76,19 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation>@PACKAGE@ - @VERSION@
+        <translation type="unfinished">@PACKAGE@ - @VERSION@
 
 Joerg Thoennissen (joe@dsite.de)
 
 Un jeu pacman pour le bureau KDE 
 
-Le programme est basé sur les source de ksnake
+Le programme est basé sur les sources de ksnake
 de Michel Filippi (mfilippi@sade.rhein-main.de).
-Le design est grandement influancé par pacman
+Le design est grandement influencé par pacman
 (c) 1980 MIDWAY MFG.CO.
 
 J&apos;aimerais remercier ma copine Elke Krueers pour
-les 10 ans passé dans une ambiance amicale.</translation>
+ses 10 années d&apos;amitié.</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -102,7 +102,7 @@ les 10 ans passé dans une ambiance amicale.</translation>
         <source>There are no schemes defined,
 or no scheme is selected.</source>
         <translation type="obsolete">Aucun thème n&apos;est défini,
-ou auncun thème n&apos;est sélectionné.</translation>
+ou aucun thème n&apos;est sélectionné.</translation>
     </message>
     <message>
         <source>KPacman</source>
@@ -230,10 +230,6 @@ ou est dans un format inconnu.</translation>
     <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

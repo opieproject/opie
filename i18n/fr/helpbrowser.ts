@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation>Ajouter Favoris</translation>
+        <translation>Ajouter favoris</translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>
-        <translation>Effacer Favoris</translation>
+        <translation>Effacer des favoris</translation>
     </message>
     <message>
         <source>Bookmarks</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Help Browser</source>
-        <translation>Aide HTML</translation>
+        <translation>Aide en ligne</translation>
     </message>
     <message>
         <source>HelpBrowser</source>

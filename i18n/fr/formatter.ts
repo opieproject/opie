@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Storage Type</source>
-        <translation>Type de Support</translation>
+        <translation>Type de média</translation>
     </message>
     <message>
         <source>File Systems</source>
-        <translation>Système de Fichiers</translation>
+        <translation>Système de fichiers</translation>
     </message>
     <message>
         <source>Format</source>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Main</source>
-        <translation>Option Principales</translation>
+        <translation>Option principales</translation>
     </message>
     <message>
         <source>CAUTION:
@@ -34,7 +34,7 @@ instable!!</translation>
     </message>
     <message>
         <source>Edit fstab</source>
-        <translation>Editer /etc/fstab</translation>
+        <translation>Modifier /etc/fstab</translation>
     </message>
     <message>
         <source>Check Disk</source>
@@ -46,11 +46,11 @@ instable!!</translation>
     </message>
     <message>
         <source>Mount Point</source>
-        <translation>Point de Montage</translation>
+        <translation>Point de montage</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation>Options Avancées</translation>
+        <translation>Options avancées</translation>
     </message>
     <message>
         <source>Format?!?</source>
@@ -59,7 +59,7 @@ instable!!</translation>
     <message>
         <source>Really format
 </source>
-        <translation>Réellement formater
+        <translation>Vraiment formater
 </translation>
     </message>
     <message>
@@ -94,7 +94,7 @@ Type inconnu</translation>
     </message>
     <message>
         <source>Formatter Output</source>
-        <translation>Sortie Formateur</translation>
+        <translation>Sortie du formateur</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
@@ -112,7 +112,7 @@ Type inconnu</translation>
         <source>Could not umount.
 Device is busy!</source>
         <translation>Impossible de démonter.
-Périphérique occupée !</translation>
+Périphérique occupé !</translation>
     </message>
     <message>
         <source>Trying to format.</source>
@@ -134,7 +134,7 @@ a été formaté correctement.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
-        <translation>Echec du montage !</translation>
+        <translation>Echec du montage de la carte !</translation>
     </message>
     <message>
         <source>
@@ -144,8 +144,7 @@ a réussi a être monté. </translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation>Vous ne pouvez pas fermer
-la fenêtre &quot;sortie&quot;.</translation>
+        <translation type="unfinished">Vous pouvez maintenant fermer la fenêtre de sortie.</translation>
     </message>
     <message>
         <source>Internal</source>
@@ -176,11 +175,10 @@ la fenêtre &quot;sortie&quot;.</translation>
 Changing parameters on this
 page may cause your system
 to stop functioning properly!</source>
-        <translation>AVERTISSEMENT:
+        <translation type="unfinished">AVERTISSEMENT:
 Changer les paramètres de
-cette page peut causer un
-disfonctionnement de votre
-système !</translation>
+cette page peut rendre votre
+système instable !</translation>
     </message>
     <message>
         <source>Format?</source>
@@ -191,17 +189,17 @@ système !</translation>
 with %1 filesystem?
 You will loose all data!!</source>
         <translation>
-en %1 ?
+avec système de fichiers %1 ?
 Toutes vos données
 vont être effacées !!</translation>
     </message>
     <message>
         <source>Trying to umount %1.</source>
-        <translation>Démontage de %1.</translation>
+        <translation>Tentative de démontage de %1.</translation>
     </message>
     <message>
         <source>Trying to mount %1.</source>
-        <translation>Montage de %1.</translation>
+        <translation>Tentative de montage de %1.</translation>
     </message>
     <message>
         <source>%1
@@ -211,7 +209,7 @@ a été monté avec succès.</translation>
     </message>
     <message>
         <source>Storage Type: %1</source>
-        <translation>Type du média : %1</translation>
+        <translation>Type de média : %1</translation>
     </message>
     <message>
         <source>Type: %1
