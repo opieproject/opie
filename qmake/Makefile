@@ -23,7 +23,7 @@ CFLAGS=  \
 	-I. -Igenerators -Igenerators/unix -Igenerators/win32 -Igenerators/mac \
 	-I$(TOPDIR)/include -I$(TOPDIR)/include/qmake -I$(QMAKESPECSDIR)/default \
 	-I$(TOPDIR)/include/private \
-	-DQT_NO_TEXTCODEC -DQT_LITE_COMPONENT -DQT_NO_STL -DQT_NO_COMPRESS -I$(QMAKESPECDIR)/qws/linux-x86-g++
+	-DQT_NO_TEXTCODEC -DQT_LITE_COMPONENT -DQT_NO_STL -DQT_NO_COMPRESS -I$(QMAKESPECSDIR)/qws/linux-x86-g++
 CXXFLAGS= $(CFLAGS)
 LFLAGS=
 
