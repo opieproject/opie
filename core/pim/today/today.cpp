@@ -41,7 +41,7 @@ struct TodayPlugin {
     QLibrary *library;
     TodayPluginInterface *iface;
     TodayPluginObject *guiPart;
-    QHBox *guiBox;
+    QWidget *guiBox;
     QString name;
     bool active;
     int pos;
@@ -62,8 +62,6 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
               this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
 #endif
 #endif
-
-    // pluginLayout = 0l;
 
     setOwnerField();
     init();
@@ -165,11 +163,16 @@ void Today::loadPlugins() {
             }
             plugin.guiPart = plugin.iface->guiPart();
 
-            plugin.guiBox = new QHBox( this );
+            // package the whole thing into a qwidget so it can be shown and hidden
+            plugin.guiBox = new QWidget( this );
+            QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
+
             QPixmap plugPix;
             plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( 18, 18 ), 0 );
-            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
+            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox  );
             plugIcon->setPixmap( plugPix );
+
+            // a scrollview for each plugin
             QScrollView* sv = new QScrollView( plugin.guiBox );
             QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
             sv->setMinimumHeight( plugin.guiPart->minHeight() );
@@ -179,10 +182,11 @@ void Today::loadPlugins() {
             sv->setFrameShape( QFrame::NoFrame );
             sv->addChild( plugWidget );
 
-            //plugin.guiBox->addWidget( plugIcon, 0, AlignTop );
-            //plugin.guiBox->addWidget( sv, 0, AlignTop );
-            plugin.guiBox->setStretchFactor( plugIcon, 1 );
-            plugin.guiBox->setStretchFactor( sv, 9 );
+            // make sure the icon is on the top alligned
+            boxLayout->addWidget( plugIcon, 0, AlignTop );
+            boxLayout->addWidget( sv, 0, AlignTop );
+            boxLayout->setStretchFactor( plugIcon, 1 );
+            boxLayout->setStretchFactor( sv, 9 );
             layout->addWidget( plugin.guiBox );
 
             pluginList.append( plugin );
