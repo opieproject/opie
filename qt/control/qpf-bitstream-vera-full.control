@@ -1,6 +1,6 @@
 Package: qpf-bitstream-vera-full
 Files: $QTDIR/lib/fonts/vera_{80,100,120,140,160,180}_{50,50i,75,75i}*
-Version: 1.10-3
+Version: 1.10-4
 Priority: optional
 Section: base
 Depends: qte-fonts-common
