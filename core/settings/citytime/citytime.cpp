@@ -27,7 +27,7 @@
 #include <qpe/config.h>
 #include <qpe/timestring.h>
 #include <qpe/tzselect.h>
-#if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
 
