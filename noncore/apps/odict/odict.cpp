@@ -39,6 +39,8 @@
 
 ODict::ODict() : QMainWindow()
 {
+
+	activated_name = QString::null;
 	vbox = new QVBox( this );
 	setCaption( tr( "OPIE-Dictionary" ) );
 	setupMenus();
@@ -47,6 +49,7 @@ ODict::ODict() : QMainWindow()
 	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); query_label->show();
 	query_le = new QLineEdit( hbox );
 	query_co = new QComboBox( hbox );
+	connect( query_co , SIGNAL( activated(int) ), this, SLOT( slotMethodChanged(int) ) );
 	ok_button = new QPushButton( tr( "&Ok" ), hbox );
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
 	browser_top = new QTextBrowser( vbox );
@@ -92,7 +95,7 @@ void ODict::slotDisplayAbout()
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
-	DingWidget *ding = new DingWidget( vbox , querystring , browser_top, browser_bottom);
+	DingWidget *ding = new DingWidget( vbox , querystring , browser_top, browser_bottom, activated_name);
 }
 
 
@@ -134,6 +137,11 @@ void ODict::slotSetParameter( int count )
 			regexp = true;
 	}
  	else qWarning( "ERROR" );
+}
+
+void ODict::slotMethodChanged( int methodnumber )
+{
+	activated_name = query_co->currentText();
 }
 
 void ODict::setupMenus()

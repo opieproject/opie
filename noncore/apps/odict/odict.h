@@ -44,7 +44,7 @@ class ODict : public QMainWindow
 
 		QAction *setting_a, *setting_b;
 
-		//DingWidget *ding;
+		DingWidget *ding;
 		
 		void setupMenus();
 
@@ -53,6 +53,8 @@ class ODict : public QMainWindow
 		
 		void loadConfig();
 		void saveConfig();
+
+		QString activated_name;
 	
 	private slots:
 		void slotDisplayAbout();
@@ -60,4 +62,5 @@ class ODict : public QMainWindow
 		void slotSetErrorcount( int );
 		void slotSettings();
 		void slotSetParameter( int );
+		void slotMethodChanged( int );
 };

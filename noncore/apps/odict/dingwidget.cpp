@@ -30,9 +30,12 @@
 #include <qtextbrowser.h>
 #include <stdlib.h> // for getenv
 
-DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom) : QWidget(parent)
+DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom, QString activated_name) : QWidget(parent)
 {
+	methodname = activated_name;
 	queryword = word;
+	trenner = QString::null;
+	loadValues();
   	QString opie_dir = getenv("OPIEDIR");
 	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
 	QStringList lines;
@@ -50,10 +53,16 @@ DingWidget::DingWidget(QWidget *parent, QString word, QTextBrowser *browser_top,
 	lines = lines.grep( queryword );
 
 	QString top, bottom;
-
-	parseInfo( lines, top , bottom );
+	//parseInfo( lines, top , bottom );
 	browser_top->setText( top );
 	browser_bottom->setText( bottom );
+}
+
+void DingWidget::loadValues()
+{
+	Config cfg(  "odict" );
+	cfg.setGroup( "Method_"+methodname );
+	trenner = cfg.readEntry( "Seperator" );
 }
 
 void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
@@ -68,6 +77,7 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 	QString html_table_sep   = "</td><td>";
 	QString html_table_right = "</td></tr>";
 	QRegExp reg_div( "\\" );
+	//QRegExp reg_div( trenner );
 	QRegExp reg_word( queryword );
 	//QString substitute = "<font color=red>"+queryword+"</font>";
 	QString substitute = "<a href=''>"+queryword+"</a>";
