@@ -238,8 +238,8 @@ OIPPacket::OIPPacket( const unsigned char* end, const struct iphdr* data, QObjec
 {
     odebug << "OIPPacket::OIPPacket(): decoding IP header..." << oendl;
 
-    odebug << "FromAddress = " << fromIPAddress().toString();
-    odebug << "  toAddress = " << toIPAddress().toString();
+    odebug << "FromAddress = " << fromIPAddress().toString() << oendl;
+    odebug << "  toAddress = " << toIPAddress().toString() << oendl;
 
     switch ( protocol() )
     {
@@ -339,7 +339,7 @@ QString OARPPacket::type() const
         case 8: return "InREQUEST";
         case 9: return "InREPLY";
         case 10: return "NAK";
-        default: qWarning( "OARPPacket::type(): invalid ARP type!" ); return "<unknown>";
+        default: owarn << "OARPPacket::type(): invalid ARP type!" << oendl; return "<unknown>";
     }
 }
 
@@ -493,7 +493,7 @@ QString ODHCPPacket::type() const
         case 6: return "NAK";
         case 7: return "RELEASE";
         case 8: return "INFORM";
-        default: qWarning( "ODHCPPacket::type(): invalid DHCP type (%d) !", _dhcphdr->op ); return "<unknown>";
+        default: owarn << "ODHCPPacket::type(): invalid DHCP type " << _dhcphdr->op << oendl; return "<unknown>";
     }
 }
 
@@ -765,9 +765,7 @@ QString OWaveLanManagementPacket::managementType() const
         case ST_DISASSOC: return "Disassociation"; break;
         case ST_AUTH: return "Authentication"; break;
         case ST_DEAUTH: return "Deathentication"; break;
-        default:
-            qWarning( "OWaveLanManagementPacket::managementType(): unhandled subtype %d", FC_SUBTYPE( EXTRACT_LE_16BITS( &_header->fc ) ) );
-            return "Unknown";
+        default: owarn << "OWaveLanManagementPacket::managementType(): unhandled subtype " << FC_SUBTYPE( EXTRACT_LE_16BITS( &_header->fc ) ) << oendl; return "Unknown";
     }
 }
 
@@ -980,7 +978,7 @@ OWaveLanDataPacket::~OWaveLanDataPacket()
  *======================================================================================*/
 
 OLLCPacket::OLLCPacket( const unsigned char* end, const struct ieee_802_11_802_2_header* data, QObject* parent )
-                :QObject( parent, "802.11 LLC" ), _header( data )
+           :QObject( parent, "802.11 LLC" ), _header( data )
 {
     odebug << "OLLCPacket::OLLCPacket(): decoding frame..." << oendl;
 
@@ -1008,10 +1006,10 @@ OLLCPacket::~OLLCPacket()
  *======================================================================================*/
 
 OWaveLanControlPacket::OWaveLanControlPacket( const unsigned char* end, const struct ieee_802_11_control_header* data, OWaveLanPacket* parent )
-                :QObject( parent, "802.11 Control" ), _header( data )
+                      :QObject( parent, "802.11 Control" ), _header( data )
 {
     odebug << "OWaveLanControlPacket::OWaveLanDataControl(): decoding frame..." << oendl;
-    //TODO: Implement this
+    odebug << "Detected subtype is " << controlType() << oendl;
 }
 
 
@@ -1020,13 +1018,29 @@ OWaveLanControlPacket::~OWaveLanControlPacket()
 }
 
 
+QString OWaveLanControlPacket::controlType() const
+{
+    switch ( FC_SUBTYPE( EXTRACT_LE_16BITS( &_header->fc ) ) )
+    {
+        case CTRL_PS_POLL: return "PowerSavePoll"; break;
+        case CTRL_RTS: return "RequestToSend"; break;
+        case CTRL_CTS: return "ClearToSend"; break;
+        case CTRL_ACK: return "Acknowledge"; break;
+        case CTRL_CF_END: return "ContentionFreeEnd"; break;
+        case CTRL_END_ACK: return "AcknowledgeEnd"; break;
+        default:
+            owarn << "OWaveLanControlPacket::managementType(): unhandled subtype " << FC_SUBTYPE( EXTRACT_LE_16BITS( &_header->fc ) ) << oendl;
+            return "Unknown";
+    }
+}
+
+
 /*======================================================================================
  * OPacketCapturer
  *======================================================================================*/
 
 OPacketCapturer::OPacketCapturer( QObject* parent, const char* name )
-                 :QObject( parent, name ), _name( QString::null ), _open( false ),
-                 _pch( 0 ), _pcd( 0 ), _sn( 0 )
+                :QObject( parent, name ), _name( QString::null ), _open( false ), _pch( 0 ), _pcd( 0 ), _sn( 0 )
 {
 }
 
@@ -1109,7 +1123,7 @@ void OPacketCapturer::dump( OPacket* p )
 {
     if ( !_pcd )
     {
-        qWarning( "OPacketCapturer::dump() - cannot dump without open capture file!" );
+        owarn << "OPacketCapturer::dump() - cannot dump without open capture file!" << oendl;
         return;
     }
     pcap_dump( (u_char*) _pcd, &p->_hdr, p->_data );
@@ -1168,7 +1182,7 @@ OPacket* OPacketCapturer::next()
     }
     else
     {
-        qWarning( "OPacketCapturer::next() - no packet received!" );
+        owarn << "OPacketCapturer::next() - no packet received!" << oendl;
         return 0;
     }
 }

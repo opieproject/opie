@@ -397,6 +397,8 @@ class OWaveLanControlPacket : public QObject
     OWaveLanControlPacket( const unsigned char*, const struct ieee_802_11_control_header*, OWaveLanPacket* parent = 0 );
     virtual ~OWaveLanControlPacket();
 
+    QString controlType() const;
+
   private:
     const struct ieee_802_11_control_header* _header;
 };

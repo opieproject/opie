@@ -245,7 +245,7 @@ struct ieee_802_11_mgmt_header {
 
 
 struct ieee_802_11_data_header {
-	u_int16_t	frame_control;
+	u_int16_t	fc;
 	u_int16_t	duration;
 	u_int8_t	mac1[6];
 	u_int8_t	mac2[6];
@@ -257,7 +257,7 @@ struct ieee_802_11_data_header {
 };
 
 struct ieee_802_11_control_header {
-	u_int16_t	frame_control;
+	u_int16_t	fc;
 	u_int16_t	duration;
 	u_int8_t	mac1[6];
 	u_int8_t	mac2[6];
