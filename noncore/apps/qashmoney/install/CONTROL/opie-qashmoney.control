@@ -1,7 +1,7 @@
-Package: qashmoney
-Files: bin/qashmoney pics/qashmony/* pics/qashmony/flags/* apps/Applications/qashmoney.desktop
+Package: opie-qashmoney
+Files: bin/qashmoney pics/qashmoney/* pics/qashmoney/flags/* apps/Applications/qashmoney.desktop
 Priority: optional
-Version: 0.76
+Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
 Maintainer: Allen Forsythe allen@qashmoney.org
 Section: Applications

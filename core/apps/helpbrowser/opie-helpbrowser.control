@@ -1,5 +1,5 @@
 Package: opie-helpbrowser
-Files: plugins/application/libhelpbrowser.so* bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser
+Files: bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser
 Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
