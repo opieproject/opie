@@ -43,9 +43,8 @@ class MainWindow : public QMainWindow
 public:
   MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
   ~MainWindow();
-  void makeChannel();
 
-	QCopChannel *channel;
+  QCopChannel *channel;
 
 protected slots:
   void runIpkg();
@@ -76,6 +75,7 @@ public slots:
 
 private:
   void makeMenu();
+  void makeChannel();
   void setSections();
   void setSubSections();
   bool updateIcon;
