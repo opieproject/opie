@@ -3,11 +3,11 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Vloeibaare stijl</translation>
+        <translation>Stijl Vloeibaar</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen transparantie</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigen transparantie</translation>
     </message>
     <message>
         <source>Menu color</source>
@@ -39,15 +39,15 @@
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Opaciteit</translation>
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik geschaduwde menutekst</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak gereedschapsbalk vlak</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
