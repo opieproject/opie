@@ -18,7 +18,7 @@ HomeApplet::~HomeApplet ( )
 
 int HomeApplet::position ( ) const
 {
-    return 0;
+    return 4;
 }
 
 QString HomeApplet::name ( ) const
@@ -37,7 +37,7 @@ QIconSet HomeApplet::icon ( ) const
 	QImage img = Resource::loadImage ( "home" );
 	
 	if ( !img. isNull ( ))
-		pix. convertFromImage ( img. smoothScale ( 16, 16 ));
+		pix. convertFromImage ( img. smoothScale ( 14, 14 ));
 	return pix;
 }
 

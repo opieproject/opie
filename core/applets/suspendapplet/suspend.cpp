@@ -18,7 +18,7 @@ SuspendApplet::~SuspendApplet ( )
 
 int SuspendApplet::position ( ) const
 {
-    return 0;
+    return 2;
 }
 
 QString SuspendApplet::name ( ) const
@@ -34,10 +34,10 @@ QString SuspendApplet::text ( ) const
 QIconSet SuspendApplet::icon ( ) const
 {
 	QPixmap pix;
-	QImage img = Resource::loadImage ( "Shutdown" );
+	QImage img = Resource::loadImage ( "suspend" );
 	
 	if ( !img. isNull ( ))
-		pix. convertFromImage ( img. smoothScale ( 16, 16 ));
+		pix. convertFromImage ( img. smoothScale ( 14, 14 ));
 	return pix;
 }
 
