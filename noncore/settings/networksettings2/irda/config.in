@@ -1,0 +1,4 @@
+  config NS2IRDA
+    boolean "opie-networksettings2plugin-irda (set up IRDA)"
+    default "n" if NS2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NS2 && NS2CORE
