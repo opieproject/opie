@@ -1,4 +1,4 @@
   config MULTIKEY
     boolean "opie-multikey (OnScreen keyboard for multiple languages)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && PICKBOARD && LIBQTAUX2 && LIBOPIE2UI
+    depends ( LIBQPE || LIBQPE-X11 ) && PICKBOARD && LIBQTAUX && LIBOPIE2UI
