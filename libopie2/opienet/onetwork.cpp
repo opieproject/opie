@@ -95,12 +95,12 @@ void ONetwork::synchronize()
         ONetworkInterface* iface;
         if ( isWirelessInterface( str ) )
         {
-            iface = new OWirelessNetworkInterface( this, str );
+            iface = new OWirelessNetworkInterface( this, (const char*) str );
             qDebug( "ONetwork: interface '%s' has Wireless Extensions", (const char*) str );
         }
         else
         {
-            iface = new ONetworkInterface( this, str );
+            iface = new ONetworkInterface( this, (const char*) str );
         }
         _interfaces.insert( str, iface );
         s.readLine();
@@ -174,9 +174,9 @@ bool ONetworkInterface::ioctl( int call, struct ifreq& ifreq ) const
 {
     int result = ::ioctl( _sfd, call, &ifreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::ioctl(): Call %d - Status: Failed: %d (%s)", call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::ioctl (%s) call %d - Status: Failed: %d (%s)", name(), call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::ioctl(): Call %d - Status: Ok.", call );
+        qDebug( "ONetworkInterface::ioctl (%s) call %d - Status: Ok.", name(), call );
     return ( result != -1 );
 }
 
@@ -678,9 +678,9 @@ bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 {
     int result = ::ioctl( _sfd, call, &iwreq );
     if ( result == -1 )
-        qDebug( "ONetworkInterface::wioctl(): Call %d - Status: Failed: %d (%s)", call, result, strerror( errno ) );
+        qDebug( "ONetworkInterface::wioctl (%s) call %d - Status: Failed: %d (%s)", name(), call, result, strerror( errno ) );
     else
-        qDebug( "ONetworkInterface::wioctl(): Call %d - Status: Ok.", call );
+        qDebug( "ONetworkInterface::wioctl (%s) call %d - Status: Ok.", name(), call );
     return ( result != -1 );
 }
 
