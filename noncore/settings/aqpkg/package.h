@@ -25,6 +25,7 @@
   */
 
 #include <qstring.h>
+#include "destination.h"
 
 class Package
 {
@@ -41,6 +42,7 @@ public:
     void setFilename( QString &f );
 	void setPackageStoredLocally( bool local )	{ packageStoredLocally = local; }
     void setInstalledToRoot( bool root )        { installedToRoot = root; }
+    void setInstalledTo( Destination *d )       { installedTo = d; }
 
     Package *getLocalPackage()      { return localPackage; }
     QString getPackageName()        { return packageName; }
@@ -53,6 +55,7 @@ public:
 	bool isPackageStoredLocally()	{ return packageStoredLocally; }
     bool isInstalledToRoot()     { return installedToRoot; }
     QString getInstalledVersion();
+    Destination *getInstalledTo()   { return installedTo; }
 
     QString toString();
 
@@ -65,11 +68,12 @@ private:
     QString status;
     QString description;
     QString filename;
-    QString installedTo;
 	bool packageStoredLocally;
     bool installedToRoot;
     bool installed;
     bool differentVersionAvailable;
+
+    Destination *installedTo;
 };
 
 #endif
