@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook V4.1.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd" [
+<!ENTITY about SYSTEM "about/about.sgml">
+<!ENTITY core SYSTEM "core/core.sgml">
+<!ENTITY apps SYSTEM "apps/apps.sgml">
+<!ENTITY fdl SYSTEM "gfdl/fdl.sgml">
+]>
+<book>
+  <title>Opie Policy Manual</title>
+<bookinfo>
+  <author><firstname>Chris</firstname><surname>Larson</surname></author>
+  <copyright><year>2002</year><holder>Chris Larson</holder></copyright>
+  <legalnotice>
+  <title>Legal Notice</title>
+  <para>
+      Permission is granted to copy, distribute and/or modify this document
+      under the terms of the GNU Free Documentation License, Version 1.1
+      or any later version published by the Free Software Foundation;
+      with no Invariant Sections, with no Front-Cover Texts, and with no
+      Back-Cover Texts. A copy of the license is included in the section
+      entitled "GNU Free Documentation License".
+  </para>
+  </legalnotice>
+</bookinfo>
+&about
+&core
+&apps
+&fdl
+</book>

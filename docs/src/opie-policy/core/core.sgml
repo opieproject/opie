@@ -1,0 +1,30 @@
+<chapter id="core">
+  <title>Core Opie Policies</title>
+  <sect1 id="imagepolicy"><title>Image Policy</title>
+  <para>
+  This section outlines policies with regard to images in Opie.  Specifically, concerns regarding the structure of the pics/ subdirectory are addressed.
+  <itemizedlist><title>Primary Declarations</title>
+    <listitem>
+      <para>
+      All generally <emphasis>useful</emphasis> images are to be inlined.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+      All images which are used by more than one Opie core application are to be inlined.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+      All images specific to one core application are to be moved into a pics/ subdirectory of the application's directory, and are to be packaged with the application.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+      All other images are to be kept for compatibility reasons and are to be packaged in a opie-extrapics package.  The opie-pics package will no longer exist, and no images will reside in the root of pics/.
+      </para>
+    </listitem>
+  </itemizedlist>
+  </para>
+  </sect1>
+</chapter>
