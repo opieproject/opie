@@ -11,12 +11,13 @@
 class OProcess;
 namespace OpieTooth {
     /**
-     *  Device takes care of attaching serial 
+     *  Device takes care of attaching serial
      *  devices to the blueZ stack.
      *  After attaching it hciconfig ups it
      */
     class Device : public QObject {
-    Q_OBJECT
+
+        Q_OBJECT
 
     public:
 
@@ -26,8 +27,9 @@ namespace OpieTooth {
      *
      * @param &device QString the device name
      * @param &mode QString the mode
+     * @param &speed QString the speed of the device, can be left blank
      */
-    Device(const QString &device, const QString& mode);
+    Device(const QString &device, const QString& mode, const QString& speed);
 
         /**
          * unloads the device
@@ -77,6 +79,7 @@ namespace OpieTooth {
 	OProcess* m_process;
 	QString m_devId;
 	QString m_mode;
+        QString m_speed;
 	pid_t pid;
 	QCString m_output;
     };

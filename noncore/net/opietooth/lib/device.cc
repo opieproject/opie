@@ -23,28 +23,30 @@ namespace {
   }
 }
 
-Device::Device(const QString &device, const QString &mode )
-  : QObject(0, "device" ) {
+Device::Device(const QString &device, const QString &mode, const QString &speed )
+  : QObject(0, "device") {
+
   qWarning("OpieTooth::Device create" );
   m_hci = 0;
   m_process = 0;
   m_attached = false;
   m_device = device;
   m_mode = mode;
+  m_speed = speed;
   attach();
 }
 Device::~Device(){
   detach();
 }
 void Device::attach(){
-  qWarning("attaching %s %s", m_device.latin1(), m_mode.latin1() );
+  qWarning("attaching %s %s %s", m_device.latin1(), m_mode.latin1(), m_speed.latin1() );
   if(m_process == 0 ){
     m_output.resize(0);
     qWarning("new process to create" );
     m_process = new OProcess();
     *m_process << "hciattach";
     *m_process << "-p";
-    *m_process << m_device << m_mode;
+    *m_process << m_device << m_mode << m_speed;
     connect(m_process, SIGNAL( processExited(OProcess*) ),
 	    this, SLOT( slotExited(OProcess* ) ) );
     connect(m_process, SIGNAL( receivedStdout(OProcess*, char*, int) ),
@@ -134,7 +136,7 @@ void Device::slotStdOut(OProcess* proc, char* chars, int len)
   qWarning("std out" );
   if( len <1 ){
     qWarning( "len < 1 " );
-    return; 
+    return;
   }
   if(proc == m_process ){
     QCString string( chars, len+1 ); // \0 == +1
