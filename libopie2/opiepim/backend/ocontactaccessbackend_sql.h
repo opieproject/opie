@@ -70,23 +70,24 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 
 	bool wasChangedExternally();
 
-	QArray<int> allRecords() const;
+	UIDArray allRecords() const;
 
 	OPimContact find( int uid ) const;
-	OPimContact find( int uid, const QArray<int>& items, uint cur, Frontend::CacheDirection ) const; 
+	OPimContact find( int uid, const UIDArray& items, uint cur, Frontend::CacheDirection ) const; 
 
-	QArray<int> queryByExample ( const OPimContact &query, int settings, 
-				     const QDateTime& d );
+	UIDArray queryByExample ( const OPimContact &query, int settings, 
+				     const QDateTime& d ) const;
 
-	QArray<int> matchRegexp(  const QRegExp &r ) const;
+	UIDArray matchRegexp(  const QRegExp &r ) const;
 
-	const uint querySettings();
+	const uint querySettings() const;
 
 	bool hasQuerySettings (uint querySettings) const;
 
-	// Currently only asc implemented..
-	QArray<int> sorted( bool asc,  int , int ,  int );
-	bool add ( const OPimContact &newcontact );
+	UIDArray sorted( const UIDArray& ar, bool asc, int sortOrder,
+			 int filter, const QArray<int>& categories)const;	
+
+ 	bool add ( const OPimContact &newcontact );
 
 	bool replace ( const OPimContact &contact );
 
@@ -94,7 +95,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
 	bool reload();
 
  private:
-	QArray<int> extractUids( Opie::DB::OSQLResult& res ) const;
+	UIDArray extractUids( Opie::DB::OSQLResult& res ) const;
 	QMap<int, QString>  requestNonCustom( int uid ) const;
 	QMap<QString, QString>  requestCustom( int uid ) const;
 	QMap<int, QString> fillNonCustomMap( const Opie::DB::OSQLResultItem& resultItem ) const;
@@ -104,7 +105,7 @@ class OPimContactAccessBackend_SQL : public OPimContactAccessBackend {
  protected:
 	bool m_changed;
 	QString m_fileName;
-	QArray<int> m_uids;
+	UIDArray m_uids;
 
 	Opie::DB::OSQLDriver* m_driver;
 };

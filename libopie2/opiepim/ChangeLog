@@ -1,3 +1,7 @@
+2004-11-23  Stefan Eilers <stefan@eilers-online.net>
+	* Implement fast and full featured version of sorted() for addressbook
+	* Implement generic queryByExample for all Addressboook backends. It allows incremental search.
+	* Update of API Documentation
 2004-11-18  Holger Freyther  <freyther@handhelds.org>
 	* Every Access can give a set of Occurrences for a period or a datetime
 	* QueryByExample, Find, Sort can be generically accessed by OPimBase 

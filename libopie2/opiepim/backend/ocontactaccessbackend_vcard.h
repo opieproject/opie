@@ -58,10 +58,8 @@ class OPimContactAccessBackend_VCard : public OPimContactAccessBackend {
 	bool replace ( const OPimContact& contact );
 
 	OPimContact find ( int uid ) const;
-	QArray<int> allRecords() const;
+	UIDArray allRecords() const;
 
-	const uint querySettings();
-	bool hasQuerySettings (uint querySettings) const;
 	bool wasChangedExternally();
 
 private:

@@ -183,9 +183,9 @@ bool OPimContactAccessBackend_XML::wasChangedExternally()
     return (lastmod != m_readtime);
 }
 
-QArray<int> OPimContactAccessBackend_XML::allRecords() const
+UIDArray OPimContactAccessBackend_XML::allRecords() const
 {
-    QArray<int> uid_list( m_contactList.count() );
+    UIDArray uid_list( m_contactList.count() );
 
     uint counter = 0;
     QListIterator<OPimContact> it( m_contactList );
@@ -209,145 +209,10 @@ OPimContact OPimContactAccessBackend_XML::find ( int uid ) const
     return ( foundContact );
 }
 
-QArray<int> OPimContactAccessBackend_XML::queryByExample ( const OPimContact &query, int settings,
-                            const QDateTime& d )const
+
+UIDArray OPimContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
 {
-    QArray<int> m_currentQuery( m_contactList.count() );
-    QListIterator<OPimContact> it( m_contactList );
-    uint arraycounter = 0;
-
-    for( ; it.current(); ++it ){
-        /* Search all fields and compare them with query object. Store them into list
-         * if all fields matches.
-         */
-        QDate* queryDate = 0l;
-        QDate* checkDate = 0l;
-        bool allcorrect = true;
-        for ( int i = 0; i < Qtopia::Groups; i++ ) {
-            // Birthday and anniversary are special nonstring fields and should
-            // be handled specially
-            switch ( i ){
-            case Qtopia::Birthday:
-                queryDate = new QDate( query.birthday() );
-                checkDate = new QDate( (*it)->birthday() );
-                // fall through
-            case Qtopia::Anniversary:
-                if ( queryDate == 0l ){
-                    queryDate = new QDate( query.anniversary() );
-                    checkDate = new QDate( (*it)->anniversary() );
-                }
-
-                if ( queryDate->isValid() ){
-                    if(  checkDate->isValid() ){
-                        if ( settings & OPimContactAccess::DateYear ){
-                            if ( queryDate->year() != checkDate->year() )
-                                allcorrect = false;
-                        }
-                        if ( settings & OPimContactAccess::DateMonth ){
-                            if ( queryDate->month() != checkDate->month() )
-                                allcorrect = false;
-                        }
-                        if ( settings & OPimContactAccess::DateDay ){
-                            if ( queryDate->day() != checkDate->day() )
-                                allcorrect = false;
-                        }
-                        if ( settings & OPimContactAccess::DateDiff ) {
-                            QDate current;
-                            // If we get an additional date, we
-                            // will take this date instead of
-                            // the current one..
-                            if ( !d.date().isValid() )
-                                current = QDate::currentDate();
-                            else
-                                current = d.date();
-
-                            // We have to equalize the year, otherwise
-                            // the search will fail..
-                            checkDate->setYMD( current.year(),
-                                       checkDate->month(),
-                                       checkDate->day() );
-                            if ( *checkDate < current )
-                                checkDate->setYMD( current.year()+1,
-                                           checkDate->month(),
-                                           checkDate->day() );
-
-                            // Check whether the birthday/anniversary date is between
-                            // the current/given date and the maximum date
-                            // ( maximum time range ) !
-                            if ( current.daysTo( *queryDate ) >= 0 ){
-                                if ( !( ( *checkDate >= current ) &&
-                                    ( *checkDate <= *queryDate ) ) ){
-                                    allcorrect = false;
-                                }
-                            }
-                        }
-                    } else{
-                        // checkDate is invalid. Therefore this entry is always rejected
-                        allcorrect = false;
-                    }
-                }
-
-                delete queryDate;
-                queryDate = 0l;
-                delete checkDate;
-                checkDate = 0l;
-                break;
-            default:
-                /* Just compare fields which are not empty in the query object */
-                if ( !query.field(i).isEmpty() ){
-                    switch ( settings & ~( OPimContactAccess::IgnoreCase
-                                   | OPimContactAccess::DateDiff
-                                   | OPimContactAccess::DateYear
-                                   | OPimContactAccess::DateMonth
-                                   | OPimContactAccess::DateDay
-                                   | OPimContactAccess::MatchOne
-                                   ) ){
-
-                    case OPimContactAccess::RegExp:{
-                        QRegExp expr ( query.field(i),
-                                   !(settings & OPimContactAccess::IgnoreCase),
-                                   false );
-                        if ( expr.find ( (*it)->field(i), 0 ) == -1 )
-                            allcorrect = false;
-                    }
-                        break;
-                    case OPimContactAccess::WildCards:{
-                        QRegExp expr ( query.field(i),
-                                   !(settings & OPimContactAccess::IgnoreCase),
-                                   true );
-                        if ( expr.find ( (*it)->field(i), 0 ) == -1 )
-                            allcorrect = false;
-                    }
-                        break;
-                    case OPimContactAccess::ExactMatch:{
-                        if (settings & OPimContactAccess::IgnoreCase){
-                            if ( query.field(i).upper() !=
-                                 (*it)->field(i).upper() )
-                                allcorrect = false;
-                        }else{
-                            if ( query.field(i) != (*it)->field(i) )
-                                allcorrect = false;
-                        }
-                    }
-                        break;
-                    }
-                }
-            }
-        }
-        if ( allcorrect ){
-            m_currentQuery[arraycounter++] = (*it)->uid();
-        }
-    }
-
-    // Shrink to fit..
-    m_currentQuery.resize(arraycounter);
-
-    return m_currentQuery;
-}
-
-QArray<int> OPimContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
-{
-    QArray<int> m_currentQuery( m_contactList.count() );
+    UIDArray m_currentQuery( m_contactList.count() );
     QListIterator<OPimContact> it( m_contactList );
     uint arraycounter = 0;
 
@@ -363,73 +228,15 @@ QArray<int> OPimContactAccessBackend_XML::matchRegexp(  const QRegExp &r ) const
     return m_currentQuery;
 }
 
-const uint OPimContactAccessBackend_XML::querySettings()
-{
-    return ( OPimContactAccess::WildCards
-         | OPimContactAccess::IgnoreCase
-         | OPimContactAccess::RegExp
-         | OPimContactAccess::ExactMatch
-         | OPimContactAccess::DateDiff
-         | OPimContactAccess::DateYear
-         | OPimContactAccess::DateMonth
-         | OPimContactAccess::DateDay
-         );
-}
 
-bool OPimContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
-{
-    /* OPimContactAccess::IgnoreCase, DateDiff, DateYear, DateMonth, DateDay
-     * may be added with any of the other settings. IgnoreCase should never used alone.
-     * Wildcards, RegExp, ExactMatch should never used at the same time...
-     */
-
-    // Step 1: Check whether the given settings are supported by this backend
-    if ( ( querySettings & (
-                OPimContactAccess::IgnoreCase
-                | OPimContactAccess::WildCards
-                | OPimContactAccess::DateDiff
-                | OPimContactAccess::DateYear
-                | OPimContactAccess::DateMonth
-                | OPimContactAccess::DateDay
-                | OPimContactAccess::RegExp
-                | OPimContactAccess::ExactMatch
-                   ) ) != querySettings )
-        return false;
-
-    // Step 2: Check whether the given combinations are ok..
-
-    // IngoreCase alone is invalid
-    if ( querySettings == OPimContactAccess::IgnoreCase )
-        return false;
-
-    // WildCards, RegExp and ExactMatch should never used at the same time
-    switch ( querySettings & ~( OPimContactAccess::IgnoreCase
-                    | OPimContactAccess::DateDiff
-                    | OPimContactAccess::DateYear
-                    | OPimContactAccess::DateMonth
-                    | OPimContactAccess::DateDay
-                    )
-         ){
-    case OPimContactAccess::RegExp:
-        return ( true );
-    case OPimContactAccess::WildCards:
-        return ( true );
-    case OPimContactAccess::ExactMatch:
-        return ( true );
-    case 0: // one of the upper removed bits were set..
-        return ( true );
-    default:
-        return ( false );
-    }
-}
 
 #if 0
 // Currently only asc implemented..
-QArray<int> OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
+UIDArray OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 {
     QMap<QString, int> nameToUid;
     QStringList names;
-    QArray<int> m_currentQuery( m_contactList.count() );
+    UIDArray m_currentQuery( m_contactList.count() );
 
     // First fill map and StringList with all Names
     // Afterwards sort namelist and use map to fill array to return..

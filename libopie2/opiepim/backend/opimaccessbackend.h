@@ -66,13 +66,34 @@ public:
     virtual void clear() = 0;
     //@}
 
+    //@{
+    // FIXME: Uncommented some of the abstract functions below. This should be removed as they are implemented in 
+    // all typespecifc backenends (eilers) 
+    /**
+     *  Return all possible settings for queryByExample()
+     *  @return All settings provided by the current backend
+     *  (i.e.: query_WildCards & query_IgnoreCase)
+     *  See implementation in the specific backends for contacts, todo and dates.
+     */
+    virtual const uint querySettings() const { return 0; } /* FIXME: Make Abstrakt !! = 0; */ 
+
+    /**
+     * Check whether settings are correct for queryByExample()
+     * See implementation in the specific backends for OPimContactAccess, OPimTodoAccess and ODateBookAccess.
+     * @return <i>true</i> if the given settings are correct and possible.
+     */
+    virtual bool hasQuerySettings (uint querySettings) const { return false; } /* FIXME: Make Abstrakt !! = 0; */
+    //@}
+
 
     //@{
     virtual UIDArray allRecords()const = 0;
     virtual UIDArray matchRegexp(const QRegExp &r) const;
-    virtual UIDArray queryByExample( const T& t, int settings, const QDateTime& d = QDateTime() )const = 0;
-    virtual UIDArray queryByExample( const OPimRecord* rec, int, const QDateTime& d = QDateTime() )const;
-    virtual UIDArray sorted( const UIDArray&, bool asc, int sortOrder, int sortFilter,  const QArray<int>& cats )const;
+    virtual UIDArray queryByExample( const UIDArray&, const T& t, 
+				     int settings, const QDateTime& d = QDateTime() )const  { return UIDArray(); } /* FIXME: Make Abstrakt !! = 0; */
+    virtual UIDArray queryByExample( const T& t, int settings, const QDateTime& d = QDateTime() )const;
+    virtual UIDArray queryByExample( const OPimRecord* rec, int settings, const QDateTime& d = QDateTime() )const;
+    virtual UIDArray sorted( const UIDArray&, bool asc, int sortOrder, int sortFilter,  const QArray<int>& cats )const = 0;
     virtual UIDArray sorted( bool asc, int sortOrder, int sortFilter, const QArray<int>& cats )const;
     virtual OPimBackendOccurrence::List occurrences( const QDate& start, const QDate& end)const;
     virtual OPimBackendOccurrence::List occurrences( const QDateTime& dt )const;
@@ -150,6 +171,13 @@ UIDArray OPimAccessBackend<T>::matchRegexp( const QRegExp& reg )const {
 }
 
 template <class T>
+UIDArray OPimAccessBackend<T>::queryByExample( const T& rec, int settings,
+                                               const QDateTime& datetime )const {
+
+	return queryByExample( allRecords(), rec, settings, datetime );
+}
+
+template <class T>
 UIDArray OPimAccessBackend<T>::queryByExample( const OPimRecord* rec, int settings,
                                                const QDateTime& datetime )const {
     T* tmp_rec = T::safeCast( rec );
@@ -158,12 +186,6 @@ UIDArray OPimAccessBackend<T>::queryByExample( const OPimRecord* rec, int settin
         ar = queryByExample( *tmp_rec, settings, datetime );
 
     return ar;
-}
-
-template <class T>
-UIDArray OPimAccessBackend<T>::sorted( const UIDArray& ids, bool,
-                                       int, int, const QArray<int>& ) const {
-    return ids;
 }
 
 template <class T>

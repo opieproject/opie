@@ -90,15 +90,52 @@ public:
     virtual T find( UID uid )const;
     virtual T find( UID uid, const QArray<int>&,
 		    uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
-    virtual List sorted( const List&, bool ascending, int sortOrder,
-			 int sortFilter, int cat )const;
-    virtual List sorted( const List&, bool ascending, int sortOrder,
-			 int sortFilter, const QArray<UID>& cats )const;
-    virtual List sorted( bool ascending, int sortOrder, int sortFilter, int cat )const;
-    virtual List sorted( bool ascending, int sortOrder, int sortOrder,
-			 const QArray<UID>& cats )const;
     //@}
 
+    /** 
+     * Get sorted lists..
+     * @see OPimContactAccess, OPimTodoAccess and ODateBookAccess regarding more info for the following params:
+     * @param list of UID's received by allRecords() or others...
+     * @param sortOrder Setting the sort order defined by enum SortOrder
+     * @param ascending Sort in ascending order if true, otherwise descending
+     * @param sortFilter Setting the sort filter defined by enum SortFilter
+     * @param cat number of category.
+     */
+    virtual List sorted( const List& list, bool ascending, int sortOrder,
+			 int sortFilter, int cat )const;
+
+    /** 
+     * Get sorted lists..
+     * @see OPimContactAccess, OPimTodoAccess and ODateBookAccess regarding more info for the following params:
+     * @param list of UID's received by allRecords() or others...
+     * @param sortOrder Setting the sort order defined by enum SortOrder
+     * @param ascending Sort in ascending order if true, otherwise descending
+     * @param sortFilter Setting the sort filter defined by enum SortFilter
+     * @param cats List of categories.
+     */
+    virtual List sorted( const List& list, bool ascending, int sortOrder,
+			 int sortFilter, const QArray<UID>& cats )const;
+
+    /** 
+     * Get sorted lists..
+     * @see OPimContactAccess, OPimTodoAccess and ODateBookAccess regarding more info for the following params:
+     * @param ascending Sort in ascending order if true, otherwise descending
+     * @param sortOrder Setting the sort order defined by enum SortOrder
+     * @param sortFilter Setting the sort filter defined by enum SortFilter
+     * @param cat number of category.
+     */
+    virtual List sorted( bool ascending, int sortOrder, int sortFilter, int cat )const;
+
+    /** 
+     * Get sorted lists..
+     * @see OPimContactAccess, OPimTodoAccess and ODateBookAccess regarding more info for the following params:
+     * @param ascending Sort in ascending order if true, otherwise descending
+     * @param sortOrder Setting the sort order defined by enum SortOrder
+     * @param sortFilter Setting the sort filter defined by enum SortFilter
+     * @param cats List of categories.
+     */
+    virtual List sorted( bool ascending, int sortOrder, int sortFilter,
+			 const QArray<UID>& cats )const;
     /**
      * (Re)Implementation
      */
@@ -129,7 +166,6 @@ public:
     //@}
 
     void setReadAhead( uint count );
-    virtual T cacheFind( int uid )const;
     void cache( const T& )const;
     void setSaneCacheSize( int );
 
@@ -258,11 +294,6 @@ T OPimAccessTemplate<T>::find( UID uid ) const{
     return t;
 }
 
-template <class T>
-T OPimAccessTemplate<T>::cacheFind( int uid ) const
-{
-	return m_cache.find( uid );
-}
 
 /**
  * read ahead cache find method ;)

@@ -127,13 +127,13 @@ namespace {
     class FindQuery : public OSQLQuery {
     public:
         FindQuery(int uid);
-        FindQuery(const QArray<int>& );
+        FindQuery(const UIDArray& );
         ~FindQuery();
         QString query()const;
     private:
         QString single()const;
         QString multi()const;
-        QArray<int> m_uids;
+        UIDArray m_uids;
         int m_uid;
     };
 
@@ -143,13 +143,13 @@ namespace {
     class FindCustomQuery : public OSQLQuery {
     public:
         FindCustomQuery(int uid);
-        FindCustomQuery(const QArray<int>& );
+        FindCustomQuery(const UIDArray& );
         ~FindCustomQuery();
         QString query()const;
     private:
         QString single()const;
         QString multi()const;
-        QArray<int> m_uids;
+        UIDArray m_uids;
         int m_uid;
     };
 
@@ -294,7 +294,7 @@ namespace {
     FindQuery::FindQuery(int uid)
         : OSQLQuery(), m_uid( uid ) {
     }
-    FindQuery::FindQuery(const QArray<int>& ints)
+    FindQuery::FindQuery(const UIDArray& ints)
         : OSQLQuery(), m_uids( ints ){
     }
     FindQuery::~FindQuery() {
@@ -329,7 +329,7 @@ namespace {
     FindCustomQuery::FindCustomQuery(int uid)
         : OSQLQuery(), m_uid( uid ) {
     }
-    FindCustomQuery::FindCustomQuery(const QArray<int>& ints)
+    FindCustomQuery::FindCustomQuery(const UIDArray& ints)
         : OSQLQuery(), m_uids( ints ){
     }
     FindCustomQuery::~FindCustomQuery() {
@@ -422,7 +422,7 @@ bool OPimContactAccessBackend_SQL::wasChangedExternally()
     return false;
 }
 
-QArray<int> OPimContactAccessBackend_SQL::allRecords() const
+UIDArray OPimContactAccessBackend_SQL::allRecords() const
 {
 
     // FIXME: Think about cute handling of changed tables..
@@ -485,7 +485,7 @@ OPimContact OPimContactAccessBackend_SQL::find ( int uid ) const
     return retContact;
 }
 
-OPimContact OPimContactAccessBackend_SQL::find( int uid, const QArray<int>& queryUids, uint current, Frontend::CacheDirection direction ) const
+OPimContact OPimContactAccessBackend_SQL::find( int uid, const UIDArray& queryUids, uint current, Frontend::CacheDirection direction ) const
 {
     odebug << "OPimContactAccessBackend_SQL::find( ..multi.. )" << oendl;
     odebug << "searching for " << uid << "" << oendl;
@@ -528,7 +528,8 @@ OPimContact OPimContactAccessBackend_SQL::find( int uid, const QArray<int>& quer
 }
 
 
-QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, const QDateTime& qd )
+UIDArray OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &query, int settings, 
+							   const QDateTime& qd ) const
 {
     QString qu = "SELECT uid FROM addressbook WHERE";
     QString searchQuery ="";
@@ -639,16 +640,16 @@ QArray<int> OPimContactAccessBackend_SQL::queryByExample ( const OPimContact &qu
     OSQLRawQuery raw( qu );
     OSQLResult res = m_driver->query( &raw );
     if ( res.state() != OSQLResult::Success ){
-        QArray<int> empty;
+        UIDArray empty;
         return empty;
     }
 
-    QArray<int> list = extractUids( res );
+    UIDArray list = extractUids( res );
 
     return list;
 }
 
-QArray<int> OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
+UIDArray OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
 {
 #if 0
     QArray<int> nix(0);
@@ -679,7 +680,7 @@ QArray<int> OPimContactAccessBackend_SQL::matchRegexp( const QRegExp &r ) const
 #endif
 }
 
-const uint OPimContactAccessBackend_SQL::querySettings()
+const uint OPimContactAccessBackend_SQL::querySettings() const
 {
     return OPimContactAccess::IgnoreCase
         | OPimContactAccess::WildCards
@@ -738,27 +739,122 @@ bool OPimContactAccessBackend_SQL::hasQuerySettings (uint querySettings) const
 
 }
 
-QArray<int> OPimContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
+UIDArray OPimContactAccessBackend_SQL::sorted( const UIDArray& ar, bool asc, int sortOrder,
+                                  int filter, const QArray<int>& categories )const 
 {
     QTime t;
     t.start();
 
-    QString query = "SELECT uid FROM addressbook ";
-    query += "ORDER BY \"Last Name\" ";
+    QString query = "SELECT uid FROM addressbook";
+
+    query += " WHERE (";
+    for ( uint i = 0; i < ar.count(); i++ ) {
+	    query += " uid = " + QString::number( ar[i] ) + " OR";
+    }
+    query.remove( query.length()-2, 2 ); // Hmmmm..
+    query += ")";
+
+
+    if ( filter != OPimBase::FilterOff ){
+	    if ( filter & OPimContactAccess::DoNotShowWithCategory ){
+		    query += " AND ( \"Categories\" == '' )";
+	    } else if ( filter & OPimBase::FilterCategory ){
+		    query += " AND (";
+		    for ( uint i = 0; i < categories.count(); i++ ){
+			    query += "\"Categories\" LIKE";
+			    query += QString( " '%" ) + QString::number( categories[i] ) + "%' OR";
+		    }
+		    query.remove( query.length()-2, 2 ); // Hmmmm..
+		    query += ")";
+	    }
+
+	    if ( filter & OPimContactAccess::DoNotShowWithoutChildren ){
+		    query += " AND ( \"Children\" != '' )";
+	    }
+
+	    if ( filter & OPimContactAccess::DoNotShowWithoutAnniversary ){
+		    query += " AND ( \"Anniversary\" != '' )";
+	    }
+
+	    if ( filter & OPimContactAccess::DoNotShowWithoutBirthday ){
+		    query += " AND ( \"Birthday\" != '' )";
+	    }
+
+	    if ( filter & OPimContactAccess::DoNotShowWithoutHomeAddress ){
+		    // Expect that no Street means no Address, too! (eilers)
+		    query += " AND ( \"Home Street\" != '' )";
+	    }
+
+	    if ( filter & OPimContactAccess::DoNotShowWithoutBusinessAddress ){
+		    // Expect that no Street means no Address, too! (eilers)
+		    query += " AND ( \"Business Street\" != '' )";
+	    } 
+
+    }
+   
+    query += " ORDER BY";
+    
+    switch ( sortOrder ) {
+    case OPimContactAccess::SortSummary:
+	    query += " \"Notes\"";
+	    break;
+    case OPimContactAccess::SortByCategory:
+	    query += " \"Categories\"";
+	    break;
+    case OPimContactAccess::SortByDate:
+	    query += " \"\"";
+	    break;
+    case OPimContactAccess::SortTitle:
+	    query += " \"Name Title\"";
+	    break;
+    case OPimContactAccess::SortFirstName:
+	    query += " \"First Name\"";
+	    break;
+    case OPimContactAccess::SortMiddleName:
+	    query += " \"Middle Name\"";
+	    break;
+    case OPimContactAccess::SortLastName:
+	    query += " \"Last Name\"";
+	    break;
+   case OPimContactAccess::SortFileAsName:
+	    query += " \"File As\"";
+	    break;
+    case OPimContactAccess::SortSuffix:
+	    query += " \"Suffix\"";
+	    break;
+    case OPimContactAccess::SortEmail:
+	    query += " \"Default Email\"";
+	    break;
+    case OPimContactAccess::SortNickname:
+	    query += " \"Nickname\"";
+	    break;
+    case OPimContactAccess::SortAnniversary:
+	    query += " \"Anniversary\"";
+	    break;
+    case OPimContactAccess::SortBirthday:
+	    query += " \"Birthday\"";
+	    break;
+    case OPimContactAccess::SortGender:
+	    query += " \"Gender\"";
+	    break;
+    default:
+	   query += " \"Last Name\"";
+    }
 
     if ( !asc )
-        query += "DESC";
+        query += " DESC";
 
-    // odebug << "sorted query is: " << query << "" << oendl;
+
+    odebug << "sorted query is: " << query << "" << oendl;
 
     OSQLRawQuery raw( query );
     OSQLResult res = m_driver->query( &raw );
     if ( res.state() != OSQLResult::Success ){
-        QArray<int> empty;
+        UIDArray empty;
         return empty;
     }
 
-    QArray<int> list = extractUids( res );
+    UIDArray list = extractUids( res );
 
     odebug << "sorted needed " << t.elapsed() << " ms!" << oendl;
     return list;
@@ -786,14 +882,14 @@ void OPimContactAccessBackend_SQL::update()
     odebug << "Update ends " << t.elapsed() << " ms" << oendl;
 }
 
-QArray<int> OPimContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
+UIDArray OPimContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 {
     odebug << "extractUids" << oendl;
     QTime t;
     t.start();
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it;
-    QArray<int> ints(list.count() );
+    UIDArray ints(list.count() );
     odebug << " count = " << list.count() << "" << oendl;
 
     int i = 0;
@@ -837,13 +933,13 @@ QMap<int, QString>  OPimContactAccessBackend_SQL::requestNonCustom( int uid ) co
 }
 
 /* Returns contact requested by uid and fills cache with contacts requested by uids in the cachelist */
-OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, const QArray<int>& uidlist )const
+OPimContact OPimContactAccessBackend_SQL::requestContactsAndCache( int uid, const UIDArray& uidlist )const
 {
 	// We want to get all contacts with one query.
 	// We don't have to add the given uid to the uidlist, it is expected to be there already (see opimrecordlist.h).
 	// All contacts will be stored in the cache, afterwards the contact with the user id "uid" will be returned
 	// by using the cache..
-	QArray<int> cachelist = uidlist;
+	UIDArray cachelist = uidlist;
 	OPimContact retContact;
 
 	odebug << "Reqest and cache" << cachelist.size() << "elements !" << oendl;

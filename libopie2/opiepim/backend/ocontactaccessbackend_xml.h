@@ -58,16 +58,11 @@ class OPimContactAccessBackend_XML : public OPimContactAccessBackend {
 
 	bool wasChangedExternally();
 
-	QArray<int> allRecords() const;
+	UIDArray allRecords() const;
 
 	OPimContact find ( int uid ) const;
 
-	QArray<int> queryByExample ( const OPimContact &query, int settings, const QDateTime& d )const;
-	QArray<int> matchRegexp(  const QRegExp &r ) const;
-
-	const uint querySettings();
-
-	bool hasQuerySettings (uint querySettings) const;
+	UIDArray matchRegexp(  const QRegExp &r ) const;
 
 	bool add ( const OPimContact &newcontact );
 

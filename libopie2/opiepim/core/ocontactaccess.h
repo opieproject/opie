@@ -60,21 +60,38 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
     Q_OBJECT
 
  public:
+    /**
+     * Filter for sorted()
+     * @see SortFilterBase in OPimBase
+     */
     enum SortFilter {
-        DoNotShowNoneChildren      = FilterCustom<<1,
-        DoNotShowNoneAnniversary   = FilterCustom<<2,
-        DoNotShowNoneBirthday      = FilterCustom<<3,
-        DoNotShowNoHomeAddress     = FilterCustom<<4,
-        DoNotShowNoBusinessAddress = FilterCustom<<5
+	/** Don't return entries who don't have children */
+        DoNotShowWithoutChildren        = FilterCustom<<1,
+	/** Don't return entries who don't have an anniversary */
+        DoNotShowWithoutAnniversary     = FilterCustom<<2,
+ 	/** Don't return entries who don't have a birthday */
+	DoNotShowWithoutBirthday        = FilterCustom<<3,
+ 	/** Don't return entries who don't have a home address */
+	DoNotShowWithoutHomeAddress     = FilterCustom<<4,
+	/** Don't return entries who don't have a business address */
+        DoNotShowWithoutBusinessAddress = FilterCustom<<5,
+	/** Don't return entries which hava any category */
+	DoNotShowWithCategory = FilterCustom << 6
     };
 
+    /**
+     * Sort order for sorted()
+     * @see SortOrderBase in OPimBase
+     */
     enum SortOrder {
         SortTitle = SortCustom,
         SortFirstName,
         SortMiddleName,
+	SortLastName,
         SortSuffix,
         SortEmail,
         SortNickname,
+        SortFileAsName,
         SortAnniversary,
         SortBirthday,
         SortGender
@@ -99,14 +116,18 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
         ~OPimContactAccess ();
 
 
-	/** Return all possible settings.
+	/** 
+	 * Return all possible settings for queryByExample().
 	 *  @return All settings provided by the current backend
-	 * (i.e.: query_WildCards & query_IgnoreCase)
+	 * (i.e.: WildCards & IgnoreCase)
+	 * @see QuerySettings in OPimBase for details of the parameter
 	 */
 	const uint querySettings();
 
-	/** Check whether settings are correct.
+	/** 
+	 * Check whether settings are correct for queryByExample().
 	 * @return <i>true</i> if the given settings are correct and possible.
+	 * @see QuerySettings in OPimBase for details of the parameter
 	 */
 	bool hasQuerySettings ( int querySettings ) const;
 

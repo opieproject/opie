@@ -157,9 +157,9 @@ OPimContact OPimContactAccessBackend_VCard::find ( int uid ) const
     return m_map[uid];
 }
 
-QArray<int> OPimContactAccessBackend_VCard::allRecords() const
+UIDArray OPimContactAccessBackend_VCard::allRecords() const
 {
-    QArray<int> ar( m_map.count() );
+    UIDArray ar( m_map.count() );
     QMap<int, OPimContact>::ConstIterator it;
     int i = 0;
     for ( it = m_map.begin(); it != m_map.end(); ++it ) {
@@ -167,16 +167,6 @@ QArray<int> OPimContactAccessBackend_VCard::allRecords() const
         i++;
     }
     return ar;
-}
-
-const uint OPimContactAccessBackend_VCard::querySettings()
-{
-    return 0; // No search possible
-}
-
-bool OPimContactAccessBackend_VCard::hasQuerySettings (uint ) const
-{
-    return false; // No search possible, therefore all settings invalid ;)
 }
 
 bool OPimContactAccessBackend_VCard::wasChangedExternally()

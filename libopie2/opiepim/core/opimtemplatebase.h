@@ -80,6 +80,7 @@ struct OPimBase {
 
     //@{
     virtual QArray<UID> records()const = 0;
+    //@}
 
     /** Constants for query.
      * Use this constants to set the query parameters.
@@ -87,40 +88,58 @@ struct OPimBase {
      * @see queryByExample()
      */
     enum QuerySettings {
-        WildCards  = 0x0001, /** Use Wildcards */
-        IgnoreCase = 0x0002, /** Ignore the Case  */
-        RegExp     = 0x0004, /** Do a Regular Expression match */
-        ExactMatch = 0x0008, /** It needs to exactly match     */
-        MatchOne   = 0x0010, /** Only one Entry must match */
-        DateDiff   = 0x0020, /** Find all entries from today until given date */
-        DateYear   = 0x0040, /** The year matches */
-        DateMonth  = 0x0080, /** The month matches */
-        DateDay    = 0x0100, /** The day matches */
-        LastItem   = 0xffff  /** the last possible name */
+	/** Use Wildcards */
+        WildCards  = 0x0001,
+	/** Ignore the Case  */
+        IgnoreCase = 0x0002,
+	/** Do a Regular Expression match */
+        RegExp     = 0x0004, 
+	/** It needs to exactly match     */
+        ExactMatch = 0x0008, 
+	/** Only one Entry must match */
+        MatchOne   = 0x0010, 
+	/** Find all entries from today until given date */
+        DateDiff   = 0x0020, 
+	/** The year matches */
+        DateYear   = 0x0040, 
+	/** The month matches */
+        DateMonth  = 0x0080, 
+	/** The day matches */
+        DateDay    = 0x0100, 
+	/** The last possible name matches */
+        LastItem   = 0xffff  
     };
 
     /**
      * Common Attributes for the Sort Order
      */
     enum SortOrderBase {
-        SortSummary = 0,       /** Sort by a Summary of the records */
-        SortByCategory = 1,    /** Sort by Category */
-        SortByDate = 2,        /** Sort by Date */
-        SortCustom  = 10,      /** The First available sort number for the OPimAccessTemplates */
-        LastSortOrderBase = 0xffff /** make this enum 16bit large */
+	/** Sort by a Summary of the records */
+        SortSummary = 0,
+	/** Sort by Category */
+        SortByCategory = 1,
+	/** Sort by Date */
+        SortByDate = 2, 
+	/** The First available sort number for the OPimAccessTemplates */
+        SortCustom  = 10,
+	/** make this enum 16bit large */
+        LastSortOrderBase = 0xffff 
     };
 
     /**
-     * Sort with the help of the \sa sorted function
-     * a list of Items.
+     * Sort a list of Items with the help of the sorted() function.
      * The Item you provide in SortOrder will be used
      * for sorting.
      *
-     * @see sorted
+     * @see OPimAccessTemplate<>::sorted()
      */
     enum SortFilterBase {
+	    /** Do not filter anything. */
+	FilterOff = 0,
+	/** Use given Categories for filter */
         FilterCategory = 1,
-        FilterCustom = 1024,
+	/** The first available custom filter defined in the specialized frontends */
+        FilterCustom = 1024, 
         LastSortFilterBase = 0xffffffff
     };
 

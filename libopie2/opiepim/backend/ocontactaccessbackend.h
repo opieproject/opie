@@ -80,19 +80,22 @@ class OPimContactAccessBackend: public OPimAccessBackend<OPimContact> {
      *  @return All settings provided by the current backend
      * (i.e.: query_WildCards & query_IgnoreCase)
      */
-    virtual const uint querySettings() = 0;
+    virtual const uint querySettings() const;
 
     /**
      * Check whether settings are correct.
      * @return <i>true</i> if the given settings are correct and possible.
      */
-    virtual bool hasQuerySettings (uint querySettings) const = 0;
+    virtual bool hasQuerySettings (uint querySettings) const;
 
+    /** 
+     * Advanced search mechanism. 
+     */
+    UIDArray queryByExample( const UIDArray& uidlist, const OPimContact&, int settings, const QDateTime &d = QDateTime() ) const;
     /**
      * Slow and inefficent default implementation
      */
 //@{
-    UIDArray queryByExample( const OPimContact&, int settings, const QDateTime& d = QDateTime() )const;
     UIDArray sorted( const UIDArray&, bool asc, int, int, const QArray<int>& )const;
     OPimBackendOccurrence::List occurrences( const QDate&, const QDate& )const;
 //@}
