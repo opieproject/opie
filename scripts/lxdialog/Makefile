@@ -3,16 +3,22 @@ HOST_LOADLIBES   := -lncurses
 HOSTCC = gcc
 
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
-        HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
+HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
 ifeq (/usr/include/ncurses/curses.h, $(wildcard /usr/include/ncurses/curses.h))
-        HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
+HOST_EXTRACFLAGS += -I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 else
 ifeq (/usr/include/ncurses.h, $(wildcard /usr/include/ncurses.h))
-        HOST_EXTRACFLAGS += -DCURSES_LOC="<ncurses.h>"
+HOST_EXTRACFLAGS += -DCURSES_LOC="<ncurses.h>"
 else
-	HOST_EXTRACFLAGS += -DCURSES_LOC="<curses.h>"
+HOST_EXTRACFLAGS += -DCURSES_LOC="<curses.h>"
 endif
+endif
+endif
+
+ifeq ($(filter clean mrproper distclean,$(MAKECMDGOALS)),)
+ifeq ($(filter -DCURSES_LOC%,$(HOST_EXTRACFLAGS)),)
+$(error Unable to locate ncurses.h or curses.h)
 endif
 endif
 
