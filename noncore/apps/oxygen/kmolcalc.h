@@ -78,11 +78,6 @@ public:
   void undefineGroup(const QString& name);
 
   /**
-   * Save the element definitions file.
-   */
-  void writeElstable();
-
-  /**
    * Read the element definitions file and construct ELSTABLE.
    */
   void readElstable();

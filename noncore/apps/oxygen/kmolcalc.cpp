@@ -1,7 +1,7 @@
 /* 
  * kmolcalc.cpp
  *
- * Copyright (C) 2000 Tomislav Gountchev <tomi@idiom.com>
+ * Copyright (C) 2000,2001 Tomislav Gountchev <tomi@idiom.com>
  * Copyright (C) 2002 Carsten Niehaus <cniehaus@handhelds.org>
  */
 
@@ -36,28 +36,9 @@ void KMolCalc::readElstable() {
   if (elstable) delete elstable;
   elstable = new QDict<SubUnit> (197, TRUE);
   elstable->setAutoDelete(TRUE);
-  QStringList files = "/home/opie/opie/noncore/apps/oxigen/kmolweights";
-  mwfile = "/home/opie/opie/noncore/apps/oxigen/kmolweights";
+  mwfile = "/home/opie/opie/noncore/apps/oxygen/kmolweights";
   QFile f(mwfile);
-  QString* latest_f = &mwfile;
-  for (uint i=0; i<files.count(); i++) {
-  	if (QFileInfo(QFile(files[i])).lastModified() > QFileInfo(QFile(*latest_f)).lastModified()) {
-		latest_f = &files[i];
-    }
-  }
-  QFile lf(*latest_f);
   if (f.exists()) readMwfile(f);
-  if (!f.exists()) {
-  	readMwfile(lf);
-  	writeElstable();
-  } else if (QFileInfo(f).lastModified() < QFileInfo(lf).lastModified()) {
-    // announce
-    QMessageBox::information 
-      (0, "Warning:", "Found new global Mw file.\nLocal definitions will be updated.", QMessageBox::Ok);
-    readMwfile(lf);
-    writeElstable();
-  }
-  
 }
 
 
@@ -183,23 +164,6 @@ void KMolCalc::readMwfile(QFile& f) {
     line = fs.readLine();
     SubUnit* s = SubUnit::makeSubUnit(line);
 	elstable->replace(s->getName(), s);
-  }
-  f.close();
-}
-
-/**
- * Save the element definitions file.
- */
-void KMolCalc::writeElstable() {
-  QFile f(mwfile);
-  if (! f.open(IO_WriteOnly)) return; //ERROR
-  QTextStream fs (&f);
-  QString line;
-  QDictIterator<SubUnit> it(*elstable);
-  while (it.current()) {
-    it.current()->writeOut(line);
-    fs << line << endl;
-    ++it;
   }
   f.close();
 }

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>218</width>
-            <height>274</height>
+            <width>275</width>
+            <height>357</height>
         </rect>
     </property>
     <property stdset="1">
@@ -34,10 +34,10 @@
         <property stdset="1">
             <name>geometry</name>
             <rect>
-                <x>10</x>
+                <x>0</x>
                 <y>0</y>
-                <width>200</width>
-                <height>260</height>
+                <width>270</width>
+                <height>350</height>
             </rect>
         </property>
         <property>
@@ -65,10 +65,10 @@
                 <property stdset="1">
                     <name>geometry</name>
                     <rect>
-                        <x>2</x>
-                        <y>2</y>
-                        <width>180</width>
-                        <height>220</height>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>260</width>
+                        <height>320</height>
                     </rect>
                 </property>
                 <property stdset="1">
@@ -80,26 +80,6 @@
                     <enum>Raised</enum>
                 </property>
                 <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel1_4</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>1</x>
-                            <y>1</y>
-                            <width>298</width>
-                            <height>16</height>
-                        </rect>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Formula:</string>
-                    </property>
-                </widget>
-                <widget>
                     <class>QLayoutWidget</class>
                     <property stdset="1">
                         <name>name</name>
@@ -109,12 +89,12 @@
                         <name>geometry</name>
                         <rect>
                             <x>0</x>
-                            <y>50</y>
-                            <width>175</width>
-                            <height>30</height>
+                            <y>0</y>
+                            <width>260</width>
+                            <height>320</height>
                         </rect>
                     </property>
-                    <hbox>
+                    <vbox>
                         <property stdset="1">
                             <name>margin</name>
                             <number>0</number>
@@ -124,96 +104,103 @@
                             <number>6</number>
                         </property>
                         <widget>
-                            <class>QPushButton</class>
+                            <class>QLabel</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>calculate</cstring>
+                                <cstring>TextLabel1_4</cstring>
                             </property>
                             <property stdset="1">
                                 <name>text</name>
-                                <string>Calculate</string>
+                                <string>Formula:</string>
                             </property>
                         </widget>
                         <widget>
-                            <class>QPushButton</class>
+                            <class>QLineEdit</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>clear_fields</cstring>
+                                <cstring>formula</cstring>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLayoutWidget</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>Layout7</cstring>
+                            </property>
+                            <hbox>
+                                <property stdset="1">
+                                    <name>margin</name>
+                                    <number>0</number>
+                                </property>
+                                <property stdset="1">
+                                    <name>spacing</name>
+                                    <number>6</number>
+                                </property>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>calculate</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>Calculate</string>
+                                    </property>
+                                </widget>
+                                <widget>
+                                    <class>QPushButton</class>
+                                    <property stdset="1">
+                                        <name>name</name>
+                                        <cstring>clear_fields</cstring>
+                                    </property>
+                                    <property stdset="1">
+                                        <name>text</name>
+                                        <string>Clear</string>
+                                    </property>
+                                </widget>
+                            </hbox>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel2_4</cstring>
                             </property>
                             <property stdset="1">
                                 <name>text</name>
-                                <string>Clear</string>
+                                <string>Result:</string>
                             </property>
                         </widget>
-                    </hbox>
-                </widget>
-                <widget>
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>formula</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>0</x>
-                            <y>20</y>
-                            <width>170</width>
-                            <height>22</height>
-                        </rect>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QMultiLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>anal_display</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>0</x>
-                            <y>130</y>
-                            <width>170</width>
-                            <height>80</height>
-                        </rect>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>result</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>0</x>
-                            <y>100</y>
-                            <width>170</width>
-                            <height>22</height>
-                        </rect>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel2_4</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>1</x>
-                            <y>86</y>
-                            <width>298</width>
-                            <height>16</height>
-                        </rect>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Result:</string>
-                    </property>
+                        <widget>
+                            <class>QLineEdit</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>result</cstring>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QLabel</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>TextLabel1</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Elemental composition (%):</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QMultiLineEdit</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>anal_display</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>readOnly</name>
+                                <bool>true</bool>
+                            </property>
+                        </widget>
+                    </vbox>
                 </widget>
             </widget>
         </widget>
