@@ -12,6 +12,8 @@ public:
   WLANModule();
   ~WLANModule();
 
+
+  virtual const QString type() {return "wlan";};
   void setProfile(const QString &newProfile);
   bool isOwner(Interface *);
   QWidget *configure(Interface *i);
@@ -21,6 +23,7 @@ public:
   Interface *addNewInterface(const QString &name);
   bool remove(Interface* i);
   QString getPixmapName(Interface* i);
+  virtual void receive(const QCString&, const QByteArray&);
 
 private:
   QList<Interface> list;

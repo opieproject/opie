@@ -12,6 +12,7 @@ public:
   PPPModule();
   ~PPPModule();
 
+  virtual const QString type() {return "ppp";};
   virtual void setProfile(const QString &newProfile);
   virtual bool isOwner(Interface *);
   virtual QWidget *configure(Interface *i);
@@ -21,6 +22,7 @@ public:
   virtual Interface *addNewInterface(const QString &name);
   virtual bool remove(Interface* i);
   virtual QString getPixmapName(Interface* i);
+  virtual void receive(const QCString &msg, const QByteArray &arg) {};
 
 private:
   QList<Interface> list;

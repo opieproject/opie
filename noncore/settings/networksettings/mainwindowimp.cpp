@@ -11,6 +11,7 @@
 #include <qlistview.h>
 #include <qheader.h>
 #include <qlabel.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qtabwidget.h> // in order to disable the profiles tab
 
 #include <qmessagebox.h>
@@ -61,7 +62,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));
 
   //FIXME: disable profiles for the moment:
-  tabWidget->setTabEnabled( tab, false );
+//  tabWidget->setTabEnabled( tab, false );
 
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
@@ -119,6 +120,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
     }
     file.close();
   }
+  makeChannel();
 }
 
 /**
@@ -193,7 +195,8 @@ void MainWindowImp::getAllInterfaces(){
   }
 
   for (QStringList::Iterator it = ifaces.begin(); it != ifaces.end(); ++it) {
-    int flags = 0, family;
+    int flags = 0;
+//    int family;
     i = NULL;
 
     strcpy(ifr.ifr_name, (*it).latin1());
@@ -624,3 +627,40 @@ void MainWindowImp::changeProfile(){
   // TODO change the profile in the modules
 }
 
+
+void MainWindowImp::makeChannel()
+{
+ 	channel = new QCopChannel( "QPE/Application/networksettings", this );
+ 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+ 		this, SLOT(receive(const QCString&, const QByteArray&)) );
+}
+
+void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
+{
+    bool found = false;
+    qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
+
+    QString dest = msg.left(msg.find("("));
+    QCString param = msg.right(msg.length() - msg.find("(") - 1);
+    param = param.left( param.length() - 1 );
+    qDebug("dest >%s< param >"+param+"<",dest.latin1());
+
+//     if (param.contains("QString,QString,QString")) {
+//         QDataStream stream(arg,IO_ReadOnly);
+//         QString arg1, arg2, arg3;
+//         stream >> arg1 >> arg2 >> arg3 ;
+//         qDebug("args: >%s< >%s< >%s<",arg1.latin1(),arg2.latin1(),arg3.latin1());
+//     }
+
+     QMap<Module*, QLibrary*>::Iterator it;
+     for( it = libraries.begin(); it != libraries.end(); ++it ){
+         qDebug("plugin >%s<", it.key()->type().latin1() );
+         if(it.key()->type() == dest){
+             it.key()->receive( param, arg );
+             found = true;
+         }
+     }
+
+
+    if (!found) qDebug("Huh what do ya want");
+}

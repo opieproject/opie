@@ -9,6 +9,7 @@ class Module;
 class Interface;
 class QLibrary;
 class KProcess;
+class QCopChannel;
 #ifdef QWS 
 class QLibrary;
 #else
@@ -25,6 +26,8 @@ public:
   MainWindowImp(QWidget *parent=0, const char *name=0);
   ~MainWindowImp();
   
+  QCopChannel *channel;
+
 private slots:
   void getAllInterfaces();
 	
@@ -40,7 +43,10 @@ private slots:
   void updateInterface(Interface *i);
   void newProfileChanged(const QString& newText);
 
+  void receive (const QCString &, const QByteArray &);
+
 private:
+  void makeChannel();
   void loadModules(const QString &path);
   
   Module* loadPlugin(const QString &pluginFileName,

@@ -17,9 +17,16 @@ class Module : QObject{
 
 signals:
   void updateInterface(Interface *i);
+
 	
 public:
   Module(){};
+
+  /**
+   * The type of the plugin
+   * and the name of the dcop call
+   */
+  virtual const QString type() = 0;
 
   /**
    * The current profile has been changed and the module should do any
@@ -81,6 +88,11 @@ public:
    * @return bool true if successfull, false otherwise.
    */
   virtual bool remove(Interface* i) = 0;
+
+  /**
+   * get dcop calls 
+   */
+  virtual void receive(const QCString &msg, const QByteArray &arg) = 0;
 
 };
 
