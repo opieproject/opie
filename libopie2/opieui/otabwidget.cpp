@@ -46,6 +46,8 @@ using namespace Opie::Ui;
 OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPosition p )
         : QWidget( parent, name )
         , m_currTab( 0l )
+        , m_tabBarStyle( Global )
+        , m_tabBarPosition( Top )
         , m_usingTabs( true )
         , m_tabBar( 0l )
         , m_tabList( 0l )
