@@ -1,27 +1,27 @@
 /*
-                            This file is part of the OPIE Project
+                    This file is part of the OPIE Project
 
                =.            Copyright (c)  2004 Dan Williams <drw@handhelds.org>
-             .=l.
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -29,7 +29,10 @@
 
 #include "entrydlg.h"
 
+#include <opie2/ofiledialog.h>
+
 #include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -39,16 +42,26 @@
 EntryDlg::EntryDlg( const QString &label, QWidget* parent, const char* name, bool modal )
     : QDialog( parent, name, modal )
 {
-    QVBoxLayout *vbox = new QVBoxLayout( this, 6, 6 );
+    QGridLayout *layout = new QGridLayout( this, 3, 2, 2, 4 );
 
     QLabel *l = new QLabel( label, this );
     l->setAlignment( AlignLeft | AlignTop | WordBreak );
-    vbox->addWidget( l );
+    layout->addMultiCellWidget( l, 0, 0, 0, 1 );
 
     m_entry = new QLineEdit( this );
-    vbox->addWidget( m_entry );
+    layout->addWidget( m_entry, 1, 0 );
+    connect( m_entry, SIGNAL(returnPressed()), this, SLOT(slotTryAccept()) );
 
-    connect( m_entry, SIGNAL(returnPressed()), this, SLOT(tryAccept()) );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPushButton *btn = new QPushButton( pic, QString::null, this );
+    btn->setMaximumWidth( btn->height() );
+    connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectPath()) );
+    layout->addWidget( btn, 1, 1 );
+
+    layout->setRowStretch( 2, 10 );
+
+    resize( width(), l->height() + btn->height() + 8 );
 }
 
 void EntryDlg::setText( const QString &text )
@@ -78,8 +91,17 @@ QString EntryDlg::getText( const QString &caption, const QString &label, const Q
     delete dlg;
     return result;
 }
-void EntryDlg::tryAccept()
+void EntryDlg::slotTryAccept()
 {
     if ( !m_entry->text().isEmpty() )
         accept();
+}
+
+void EntryDlg::slotSelectPath()
+{
+    QString path = Opie::Ui::OFileDialog::getDirectory( 0, m_entry->text() );
+    if ( path.at( path.length() - 1 ) == '/' )
+        path.truncate( path.length() - 1 );
+    if ( !path.isNull() )
+        m_entry->setText( path );
 }

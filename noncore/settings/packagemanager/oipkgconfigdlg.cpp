@@ -183,12 +183,14 @@ void OIpkgConfigDlg::initServerWidget()
     QPixmap pic;
     pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     QPushButton *btn = new QPushButton( pic, tr( "New" ), container );
+    btn->setMinimumHeight( AppLnk::smallIconSize() );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotServerNew()) );
     layout->addWidget( btn, 1, 0 );
 
     pic.convertFromImage( Resource::loadImage( "edit" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_serverEditBtn = new QPushButton( pic, tr( "Edit" ), container );
+    m_serverEditBtn->setMinimumHeight( AppLnk::smallIconSize() );
     m_serverEditBtn->setEnabled( false );
     QWhatsThis::add( m_serverEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_serverEditBtn, SIGNAL(clicked()), this, SLOT(slotServerEdit()) );
@@ -196,6 +198,7 @@ void OIpkgConfigDlg::initServerWidget()
 
     pic.convertFromImage( Resource::loadImage( "trash" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_serverDeleteBtn = new QPushButton( pic, tr( "Delete" ), container );
+    m_serverDeleteBtn->setMinimumHeight( AppLnk::smallIconSize() );
     m_serverDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_serverDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
     connect( m_serverDeleteBtn, SIGNAL(clicked()), this, SLOT(slotServerDelete()) );
@@ -225,12 +228,14 @@ void OIpkgConfigDlg::initDestinationWidget()
     QPixmap pic;
     pic.convertFromImage( Resource::loadImage( "new" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     QPushButton *btn = new QPushButton( pic, tr( "New" ), container );
+    btn->setMinimumHeight( AppLnk::smallIconSize() );
     QWhatsThis::add( btn, tr( "Tap here to create a new entry.  Fill in the fields below and then tap on Update." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotDestNew()) );
     layout->addWidget( btn, 1, 0 );
 
     pic.convertFromImage( Resource::loadImage( "edit" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_destEditBtn = new QPushButton( pic, tr( "Edit" ), container );
+    m_destEditBtn->setMinimumHeight( AppLnk::smallIconSize() );
     m_destEditBtn->setEnabled( false );
     QWhatsThis::add( m_destEditBtn, tr( "Tap here to edit the entry selected above." ) );
     connect( m_destEditBtn, SIGNAL(clicked()), this, SLOT(slotDestEdit()) );
@@ -238,6 +243,7 @@ void OIpkgConfigDlg::initDestinationWidget()
 
     pic.convertFromImage( Resource::loadImage( "trash" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_destDeleteBtn = new QPushButton( pic, tr( "Delete" ), container );
+    m_destDeleteBtn->setMinimumHeight( AppLnk::smallIconSize() );
     m_destDeleteBtn->setEnabled( false );
     QWhatsThis::add( m_destDeleteBtn, tr( "Tap here to delete the entry selected above." ) );
     connect( m_destDeleteBtn, SIGNAL(clicked()), this, SLOT(slotDestDelete()) );
@@ -654,7 +660,9 @@ OIpkgDestDlg::OIpkgDestDlg( OConfItem *dest, QWidget *parent )
     m_location = new QLineEdit( this );
     QWhatsThis::add( m_location, tr( "Enter the absolute directory path of this entry here." ) );
     layout2->addWidget( m_location );
-    QPushButton *btn = new QPushButton( Resource::loadPixmap( "folder" ), QString::null, this );
+    QPixmap pic;
+    pic.convertFromImage( Resource::loadImage( "folder" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    QPushButton *btn = new QPushButton( pic, QString::null, this );
     btn->setMaximumWidth( btn->height() );
     QWhatsThis::add( btn, tr( "Tap here to select the desired location." ) );
     connect( btn, SIGNAL(clicked()), this, SLOT(slotSelectPath()) );

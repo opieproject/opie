@@ -132,11 +132,13 @@ InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &cap
     QPixmap pic;
     pic.convertFromImage( Resource::loadImage( "packagemanager/apply" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_btnStart = new QPushButton( pic, tr( "Start" ), this );
+    m_btnStart->setMinimumHeight( AppLnk::smallIconSize() );
     layout->addWidget( m_btnStart, 3, 0 );
     connect( m_btnStart, SIGNAL(clicked()), this, SLOT(slotBtnStart()) );
 
     pic.convertFromImage( Resource::loadImage( "SettingsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_btnOptions = new QPushButton( pic, tr( "Options" ), this );
+    m_btnOptions->setMinimumHeight( AppLnk::smallIconSize() );
     layout->addWidget( m_btnOptions, 3, 1 );
     connect( m_btnOptions, SIGNAL( clicked() ), this, SLOT(slotBtnOptions()) );
 
@@ -221,7 +223,7 @@ void InstallDlg::slotBtnStart()
         // Allow user to close dialog
         m_btnStart->setText( tr( "Close" ) );
         QPixmap pic;
-        pic.convertFromImage( Resource::loadImage( "enter" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+        pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
         m_btnStart->setIconSet( pic );
         return;
     }
@@ -245,7 +247,7 @@ void InstallDlg::slotBtnStart()
     {
         m_btnStart->setText( tr( "Abort" ) );
         QPixmap pic;
-        pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+        pic.convertFromImage( Resource::loadImage( "reset" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
         m_btnStart->setIconSet( pic );
     }
     else
@@ -264,7 +266,7 @@ void InstallDlg::slotBtnStart()
     m_btnStart->setEnabled( true );
     m_btnStart->setText( tr( "Close" ) );
     QPixmap pic;
-    pic.convertFromImage( Resource::loadImage( "enter" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+    pic.convertFromImage( Resource::loadImage( "close" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
     m_btnStart->setIconSet( pic );
 
     m_btnOptions->setEnabled( true );
