@@ -29,7 +29,11 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/contact.h>
+
+#ifndef MAKE_FOR_SHARP_ROM
 #include <qpe/finddialog.h>
+#endif
+
 #include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/ir.h>
@@ -129,12 +133,14 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     a->addTo( edit );
     a->addTo( listTools );
 
+#ifndef MAKE_FOR_SHARP_ROM
     a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ),
                      QString::null, 0, this, 0 );
     actionFind = a;
     connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
     a->addTo( edit );
     a->addTo( listTools );
+#endif
 
 
     a = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "qtmail/reply" ),
@@ -510,7 +516,9 @@ void AddressbookWindow::slotPersonalView()
 	setCaption( tr("Contacts") );
 	actionNew->setEnabled(TRUE);
 	actionTrash->setEnabled(TRUE);
+#ifndef MAKE_FOR_SHARP_ROM
 	actionFind->setEnabled(TRUE);
+#endif
 	slotUpdateToolbar(); // maybe some of the above could be moved there
 	showList();
 	return;
@@ -519,7 +527,9 @@ void AddressbookWindow::slotPersonalView()
     // XXX need to disable some QActions.
     actionNew->setEnabled(FALSE);
     actionTrash->setEnabled(FALSE);
+#ifndef MAKE_FOR_SHARP_ROM
     actionFind->setEnabled(FALSE);
+#endif
     actionMail->setEnabled(FALSE);
 
     setCaption( tr("Contacts - My Personal Details") );
@@ -776,16 +786,22 @@ AbLabel *AddressbookWindow::abView()
 
 void AddressbookWindow::slotFind()
 {
+#ifndef MAKE_FOR_SHARP_ROM
     if ( centralWidget() == abView() )
 	showList();
+    
     FindDialog frmFind( "Contacts", this );
     QObject::connect( &frmFind, SIGNAL(signalFindClicked(const QString &, bool, bool, int)), abList, SLOT(slotDoFind( const QString&,bool,bool,int)));
     QObject::connect( abList, SIGNAL(signalNotFound()), &frmFind, SLOT(slotNotFound()) );
     QObject::connect( abList, SIGNAL(signalWrapAround()), &frmFind, SLOT(slotWrapAround()) );
+    
     frmFind.exec();
+    
     if ( abList->numSelections() )
 	abList->clearSelection();
+
     abList->clearFindRow();
+#endif
 }
 
 void AddressbookWindow::slotSetCategory( int c )

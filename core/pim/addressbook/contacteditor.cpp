@@ -283,7 +283,7 @@ void ContactEditor::init() {
 	QWidget *container = new QWidget( svGeneral->viewport() );
 	svGeneral->addChild( container );
 
-	QGridLayout *gl = new QGridLayout( container, 1, 1, 2, 3 );
+	QGridLayout *gl = new QGridLayout( container, 1, 1, 2, 4 );
 	gl->setResizeMode( QLayout::FreeResize );
 
 	btnFullName = new QPushButton( tr( "Full Name..." ), container );
@@ -302,19 +302,19 @@ void ContactEditor::init() {
 	gl->addWidget( txtOrganization, 2, 1 );
 
 	cmbChooserField1 = new QComboBox( FALSE, container );
-	cmbChooserField1->setMaximumWidth( 100 );
+	cmbChooserField1->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField1, 3, 0 );
 	txtChooserField1 = new QLineEdit( container );
 	gl->addWidget( txtChooserField1, 3, 1 );
 
 	cmbChooserField2 = new QComboBox( FALSE, container );
-	cmbChooserField2->setMaximumWidth( 100 );
+	cmbChooserField2->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField2, 4, 0 );
 	txtChooserField2 = new QLineEdit( container );
 	gl->addWidget( txtChooserField2, 4, 1 );
 
 	cmbChooserField3 = new QComboBox( FALSE, container );
-	cmbChooserField3->setMaximumWidth( 100 );
+	cmbChooserField3->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField3, 5, 0 );
 	txtChooserField3 = new QLineEdit( container );
 	gl->addWidget( txtChooserField3, 5, 1 );
@@ -346,7 +346,7 @@ void ContactEditor::init() {
 	container = new QWidget( svAddress->viewport() );
 	svAddress->addChild( container );
 
-	gl = new QGridLayout( container, 5, 3, 2, 3 );
+	gl = new QGridLayout( container, 6, 3, 2, 4 );
 
 	cmbAddress = new QComboBox( FALSE, container );
 	cmbAddress->insertItem( tr( "Business" ) );
@@ -387,16 +387,226 @@ void ContactEditor::init() {
 	gl->addWidget( l, 5, 0 );
 	cmbCountry = new QComboBox( TRUE, container );
 	cmbCountry->insertItem( tr( "" ) );
-	cmbCountry->insertItem( tr( "United States" ) );
-	cmbCountry->insertItem( tr( "United Kingdom" ) );
-	cmbCountry->insertItem( tr( "Japan" ) );
-	cmbCountry->insertItem( tr( "France" ) );
-	cmbCountry->insertItem( tr( "Germany" ) );
-	cmbCountry->insertItem( tr( "Norway" ) );
-	cmbCountry->insertItem( tr( "Canada" ) );
-	
+	cmbCountry->insertItem( tr ( "United States" ) );
+	cmbCountry->insertItem( tr ( "United Kingdom" ) );
+	cmbCountry->insertItem( tr ( "Afganistan" ) );
+	cmbCountry->insertItem( tr ( "Albania" ) );
+	cmbCountry->insertItem( tr ( "Algeria" ) );
+	cmbCountry->insertItem( tr ( "American Samoa" ) );
+	cmbCountry->insertItem( tr ( "Andorra" ) );
+	cmbCountry->insertItem( tr ( "Angola" ) );
+	cmbCountry->insertItem( tr ( "Anguilla" ) );
+	cmbCountry->insertItem( tr ( "Antartica" ) );
+	cmbCountry->insertItem( tr ( "Argentina" ) );
+	cmbCountry->insertItem( tr ( "Armania" ) );
+	cmbCountry->insertItem( tr ( "Aruba" ) );
+	cmbCountry->insertItem( tr ( "Australia" ) );
+	cmbCountry->insertItem( tr ( "Austria" ) );
+	cmbCountry->insertItem( tr ( "Azerbaijan" ) );
+	cmbCountry->insertItem( tr ( "Bahamas" ) );
+	cmbCountry->insertItem( tr ( "Bahrain" ) );
+	cmbCountry->insertItem( tr ( "Bangladesh" ) );
+	cmbCountry->insertItem( tr ( "Barbados" ) );
+	cmbCountry->insertItem( tr ( "Belarus" ) );
+	cmbCountry->insertItem( tr ( "Belgium" ) );
+	cmbCountry->insertItem( tr ( "Belize" ) );
+	cmbCountry->insertItem( tr ( "Benin" ) );
+	cmbCountry->insertItem( tr ( "Bermuda" ) );
+	cmbCountry->insertItem( tr ( "Bhutan" ) );
+	cmbCountry->insertItem( tr ( "Boliva" ) );
+	cmbCountry->insertItem( tr ( "Botswana" ) );
+	cmbCountry->insertItem( tr ( "Bouvet Island" ) );
+	cmbCountry->insertItem( tr ( "Brazil" ) );
+	cmbCountry->insertItem( tr ( "Brunei Darussalam" ) );
+	cmbCountry->insertItem( tr ( "Bulgaria" ) );
+	cmbCountry->insertItem( tr ( "Burkina Faso" ) );
+	cmbCountry->insertItem( tr ( "Burundi" ) );
+	cmbCountry->insertItem( tr ( "Cambodia" ) );
+	cmbCountry->insertItem( tr ( "Camaroon" ) );
+	cmbCountry->insertItem( tr ( "Canada" ) );
+	cmbCountry->insertItem( tr ( "Cape Verde" ) );
+	cmbCountry->insertItem( tr ( "Cayman Islands" ) );
+	cmbCountry->insertItem( tr ( "Chad" ) );
+	cmbCountry->insertItem( tr ( "Chile" ) );
+	cmbCountry->insertItem( tr ( "China" ) );
+	cmbCountry->insertItem( tr ( "Christmas Island" ) );
+	cmbCountry->insertItem( tr ( "Colombia" ) );
+	cmbCountry->insertItem( tr ( "Comoros" ) );
+	cmbCountry->insertItem( tr ( "Congo" ) );
+	cmbCountry->insertItem( tr ( "Cook Island" ) );
+	cmbCountry->insertItem( tr ( "Costa Rica" ) );
+	cmbCountry->insertItem( tr ( "Cote d'Ivoire" ) );
+	cmbCountry->insertItem( tr ( "Croatia" ) );
+	cmbCountry->insertItem( tr ( "Cuba" ) );
+	cmbCountry->insertItem( tr ( "Cyprus" ) );
+	cmbCountry->insertItem( tr ( "Czech Republic" ) );
+	cmbCountry->insertItem( tr ( "Denmark" ) );
+	cmbCountry->insertItem( tr ( "Djibouti" ) );
+	cmbCountry->insertItem( tr ( "Dominica" ) );
+	cmbCountry->insertItem( tr ( "Dominican Republic" ) );
+	cmbCountry->insertItem( tr ( "East Timor" ) );
+	cmbCountry->insertItem( tr ( "Ecuador" ) );
+	cmbCountry->insertItem( tr ( "Egypt" ) );
+	cmbCountry->insertItem( tr ( "El Salvador" ) );
+	cmbCountry->insertItem( tr ( "Equatorial Guinea" ) );
+	cmbCountry->insertItem( tr ( "Eritrea" ) );
+	cmbCountry->insertItem( tr ( "Estonia" ) );
+	cmbCountry->insertItem( tr ( "Ethiopia" ) );
+	cmbCountry->insertItem( tr ( "Falkland Islands" ) );
+	cmbCountry->insertItem( tr ( "Faroe Islands" ) );
+	cmbCountry->insertItem( tr ( "Fiji" ) );
+	cmbCountry->insertItem( tr ( "Finland" ) );
+	cmbCountry->insertItem( tr ( "France" ) );
+	cmbCountry->insertItem( tr ( "French Guiana" ) );
+	cmbCountry->insertItem( tr ( "French Polynesia" ) );
+	cmbCountry->insertItem( tr ( "Gabon" ) );
+	cmbCountry->insertItem( tr ( "Gambia" ) );
+	cmbCountry->insertItem( tr ( "Georgia" ) );
+	cmbCountry->insertItem( tr ( "Germany" ) );
+	cmbCountry->insertItem( tr ( "Gahna" ) );
+	cmbCountry->insertItem( tr ( "Gibraltar" ) );
+	cmbCountry->insertItem( tr ( "Greece" ) );
+	cmbCountry->insertItem( tr ( "Greenland" ) );
+	cmbCountry->insertItem( tr ( "Grenada" ) );
+	cmbCountry->insertItem( tr ( "Guadelupe" ) );
+	cmbCountry->insertItem( tr ( "Guam" ) );
+	cmbCountry->insertItem( tr ( "Guatemala" ) );
+	cmbCountry->insertItem( tr ( "Guinea" ) );
+	cmbCountry->insertItem( tr ( "Guinea-bissau" ) );
+	cmbCountry->insertItem( tr ( "Guyana" ) );
+	cmbCountry->insertItem( tr ( "Haiti" ) );
+	cmbCountry->insertItem( tr ( "Holy See" ) );
+	cmbCountry->insertItem( tr ( "Honduras" ) );
+	cmbCountry->insertItem( tr ( "Hong Kong" ) );
+	cmbCountry->insertItem( tr ( "Hungary" ) );
+	cmbCountry->insertItem( tr ( "Iceland" ) );
+	cmbCountry->insertItem( tr ( "India" ) );
+	cmbCountry->insertItem( tr ( "Indonesia" ) );
+	cmbCountry->insertItem( tr ( "Ireland" ) );
+	cmbCountry->insertItem( tr ( "Israel" ) );
+	cmbCountry->insertItem( tr ( "Italy" ) );
+	cmbCountry->insertItem( tr ( "Jamacia" ) );
+	cmbCountry->insertItem( tr ( "Japan" ) );
+	cmbCountry->insertItem( tr ( "Jordan" ) );
+	cmbCountry->insertItem( tr ( "Kazakhstan" ) );
+	cmbCountry->insertItem( tr ( "Kenya" ) );
+	cmbCountry->insertItem( tr ( "Kribati" ) );
+	cmbCountry->insertItem( tr ( "Korea" ) );
+	cmbCountry->insertItem( tr ( "Kuait" ) );
+	cmbCountry->insertItem( tr ( "Kyrgyztan" ) );
+	cmbCountry->insertItem( tr ( "Laos" ) );
+	cmbCountry->insertItem( tr ( "Latvia" ) );
+	cmbCountry->insertItem( tr ( "Lebanon" ) );
+	cmbCountry->insertItem( tr ( "Lesotho" ) );
+	cmbCountry->insertItem( tr ( "Liberia" ) );
+	cmbCountry->insertItem( tr ( "Liechtenstein" ) );
+	cmbCountry->insertItem( tr ( "Lithuania" ) );
+	cmbCountry->insertItem( tr ( "Luxembourg" ) );
+	cmbCountry->insertItem( tr ( "Macau" ) );
+	cmbCountry->insertItem( tr ( "Macedonia" ) );
+	cmbCountry->insertItem( tr ( "Madagascar" ) );
+	cmbCountry->insertItem( tr ( "Malawi" ) );
+	cmbCountry->insertItem( tr ( "Malaysia" ) );
+	cmbCountry->insertItem( tr ( "Maldives" ) );
+	cmbCountry->insertItem( tr ( "Mali" ) );
+	cmbCountry->insertItem( tr ( "Malta" ) );
+	cmbCountry->insertItem( tr ( "Martinique" ) );
+	cmbCountry->insertItem( tr ( "Mauritania" ) );
+	cmbCountry->insertItem( tr ( "Mauritius" ) );
+	cmbCountry->insertItem( tr ( "Mayotte" ) );
+	cmbCountry->insertItem( tr ( "Mexico" ) );
+	cmbCountry->insertItem( tr ( "Micronesia" ) );
+	cmbCountry->insertItem( tr ( "Moldova" ) );
+	cmbCountry->insertItem( tr ( "Monaco" ) );
+	cmbCountry->insertItem( tr ( "Mongolia" ) );
+	cmbCountry->insertItem( tr ( "Montserrat" ) );
+	cmbCountry->insertItem( tr ( "Morocco" ) );
+	cmbCountry->insertItem( tr ( "Mozambique" ) );
+	cmbCountry->insertItem( tr ( "Myanmar" ) );
+	cmbCountry->insertItem( tr ( "Namibia" ) );
+	cmbCountry->insertItem( tr ( "Nauru" ) );
+	cmbCountry->insertItem( tr ( "Nepal" ) );
+	cmbCountry->insertItem( tr ( "Netherlands" ) );
+	cmbCountry->insertItem( tr ( "New Caledonia" ) );
+	cmbCountry->insertItem( tr ( "New Zealand" ) );
+	cmbCountry->insertItem( tr ( "Nicaragua" ) );
+	cmbCountry->insertItem( tr ( "Niger" ) );
+	cmbCountry->insertItem( tr ( "Nigeria" ) );
+	cmbCountry->insertItem( tr ( "Niue" ) );
+	cmbCountry->insertItem( tr ( "Norway" ) );
+	cmbCountry->insertItem( tr ( "Oman" ) );
+	cmbCountry->insertItem( tr ( "Pakistan" ) );
+	cmbCountry->insertItem( tr ( "Palau" ) );
+	cmbCountry->insertItem( tr ( "Palestinian Territory" ) );
+	cmbCountry->insertItem( tr ( "Panama" ) );
+	cmbCountry->insertItem( tr ( "Papua New Guinea" ) );
+	cmbCountry->insertItem( tr ( "Paraguay" ) );
+	cmbCountry->insertItem( tr ( "Peru" ) );
+	cmbCountry->insertItem( tr ( "Philippines" ) );
+	cmbCountry->insertItem( tr ( "Pitcairn" ) );
+	cmbCountry->insertItem( tr ( "Poland" ) );
+	cmbCountry->insertItem( tr ( "Portugal" ) );
+	cmbCountry->insertItem( tr ( "Puerto Rico" ) );
+	cmbCountry->insertItem( tr ( "Qatar" ) );
+	cmbCountry->insertItem( tr ( "Reunion" ) );
+	cmbCountry->insertItem( tr ( "Romania" ) );
+	cmbCountry->insertItem( tr ( "Russia" ) );
+	cmbCountry->insertItem( tr ( "Rwanda" ) );
+	cmbCountry->insertItem( tr ( "Saint Lucia" ) );
+	cmbCountry->insertItem( tr ( "Samoa" ) );
+	cmbCountry->insertItem( tr ( "San Marino" ) );
+	cmbCountry->insertItem( tr ( "Saudi Arabia" ) );
+	cmbCountry->insertItem( tr ( "Senegal" ) );
+	cmbCountry->insertItem( tr ( "Seychelles" ) );
+	cmbCountry->insertItem( tr ( "Sierra Leone" ) );
+	cmbCountry->insertItem( tr ( "Singapore" ) );
+	cmbCountry->insertItem( tr ( "Slovakia" ) );
+	cmbCountry->insertItem( tr ( "Slovenia" ) );
+	cmbCountry->insertItem( tr ( "Solomon Islands" ) );
+	cmbCountry->insertItem( tr ( "Somalia" ) );
+	cmbCountry->insertItem( tr ( "South Africa" ) );
+	cmbCountry->insertItem( tr ( "Spain" ) );
+	cmbCountry->insertItem( tr ( "Sri Lanka" ) );
+	cmbCountry->insertItem( tr ( "St. Helena" ) );
+	cmbCountry->insertItem( tr ( "Sudan" ) );
+	cmbCountry->insertItem( tr ( "Suriname" ) );
+	cmbCountry->insertItem( tr ( "Swaziland" ) );
+	cmbCountry->insertItem( tr ( "Sweden" ) );
+	cmbCountry->insertItem( tr ( "Switzerland" ) );
+	cmbCountry->insertItem( tr ( "Taiwan" ) );
+	cmbCountry->insertItem( tr ( "Tajikistan" ) );
+	cmbCountry->insertItem( tr ( "Tanzania" ) );
+	cmbCountry->insertItem( tr ( "Thailand" ) );
+	cmbCountry->insertItem( tr ( "Togo" ) );
+	cmbCountry->insertItem( tr ( "Tokelau" ) );
+	cmbCountry->insertItem( tr ( "Tonga" ) );
+	cmbCountry->insertItem( tr ( "Tunisia" ) );
+	cmbCountry->insertItem( tr ( "Turkey" ) );
+	cmbCountry->insertItem( tr ( "Turkmenistan" ) );
+	cmbCountry->insertItem( tr ( "Tuvalu" ) );
+	cmbCountry->insertItem( tr ( "Uganda" ) );
+	cmbCountry->insertItem( tr ( "Ukraine" ) );
+	cmbCountry->insertItem( tr ( "Uruguay" ) );
+	cmbCountry->insertItem( tr ( "Uzbekistan" ) );
+	cmbCountry->insertItem( tr ( "Vanuatu" ) );
+	cmbCountry->insertItem( tr ( "Venezuela" ) );
+	cmbCountry->insertItem( tr ( "Viet Nam" ) );
+	cmbCountry->insertItem( tr ( "Virgin Islands" ) );
+	cmbCountry->insertItem( tr ( "Western Sahara" ) );
+	cmbCountry->insertItem( tr ( "Yemen" ) );
+	cmbCountry->insertItem( tr ( "Yugoslavia" ) );
+	cmbCountry->insertItem( tr ( "Zambia" ) );
+	cmbCountry->insertItem( tr ( "Zimbabwe" ) );
+
+	cmbCountry->setMaximumWidth( 135 );
+
 	gl->addMultiCellWidget( cmbCountry, 5, 5, 1, 2 );
 
+	cmbChooserField4 = new QComboBox( FALSE, container );
+	cmbChooserField4->setMaximumWidth( 90 );
+	gl->addWidget( cmbChooserField4, 6, 0 );
+	txtChooserField4 = new QLineEdit( container );
+	gl->addMultiCellWidget( txtChooserField4, 6, 6, 1, 2 );
 	tabMain->insertTab( tabViewport, tr( "Address" ) );
 
 	tabViewport = new QWidget ( tabMain );
@@ -411,7 +621,7 @@ void ContactEditor::init() {
 	container = new QWidget( svDetails->viewport() );
 	svDetails->addChild( container );
 
-	gl = new QGridLayout( container, 1, 2, 2, 3 );
+	gl = new QGridLayout( container, 1, 2, 2, 4 );
 
 	QStringList::ConstIterator it = slDynamicEntries->begin();
 	for (i = 0; it != slDynamicEntries->end(); i++, ++it) {
@@ -467,6 +677,7 @@ void ContactEditor::init() {
 	cmbChooserField1->insertStringList( *slChooserNames );
 	cmbChooserField2->insertStringList( *slChooserNames );
 	cmbChooserField3->insertStringList( *slChooserNames );
+	cmbChooserField4->insertStringList( *slChooserNames );
 
 	cmbChooserField1->setCurrentItem( 0 );
 	cmbChooserField2->setCurrentItem( 1 );
@@ -479,6 +690,7 @@ void ContactEditor::init() {
 	connect( txtChooserField1, SIGNAL(textChanged(const QString &)), this, SLOT(slotChooser1Change(const QString &)) ); 
 	connect( txtChooserField2, SIGNAL(textChanged(const QString &)), this, SLOT(slotChooser2Change(const QString &)) ); 
 	connect( txtChooserField3, SIGNAL(textChanged(const QString &)), this, SLOT(slotChooser3Change(const QString &)) ); 
+	connect( txtChooserField4, SIGNAL(textChanged(const QString &)), this, SLOT(slotChooser4Change(const QString &)) ); 
 	connect( txtAddress, SIGNAL(textChanged(const QString &)), this, SLOT(slotAddressChange(const QString &)) ); 
 	//connect( txtAddress2, SIGNAL(textChanged(const QString &)), this, SLOT(slotAddress2Change(const QString &)) ); 
 	//connect( txtPOBox, SIGNAL(textChanged(const QString &)), this, SLOT(slotPOBoxChange(const QString &)) ); 
@@ -490,6 +702,7 @@ void ContactEditor::init() {
 	connect( cmbChooserField1, SIGNAL(activated(int)), this, SLOT(slotCmbChooser1Change(int)) );
 	connect( cmbChooserField2, SIGNAL(activated(int)), this, SLOT(slotCmbChooser2Change(int)) );
 	connect( cmbChooserField3, SIGNAL(activated(int)), this, SLOT(slotCmbChooser3Change(int)) );
+	connect( cmbChooserField4, SIGNAL(activated(int)), this, SLOT(slotCmbChooser4Change(int)) );
 	connect( cmbAddress, SIGNAL(activated(int)), this, SLOT(slotAddressTypeChange(int)) );
 	new QPEDialogListener(this);
 }
@@ -541,6 +754,14 @@ void ContactEditor::slotChooser2Change( const QString &textChanged ) {
 void ContactEditor::slotChooser3Change( const QString &textChanged ) {
 
 	int index = cmbChooserField3->currentItem();
+
+	(*slChooserValues)[index] = textChanged;
+
+}
+
+void ContactEditor::slotChooser4Change( const QString &textChanged ) {
+
+	int index = cmbChooserField4->currentItem();
 
 	(*slChooserValues)[index] = textChanged;
 
@@ -625,6 +846,12 @@ void ContactEditor::slotCmbChooser2Change( int index ) {
 void ContactEditor::slotCmbChooser3Change( int index ) {
 
 	txtChooserField3->setText( (*slChooserValues)[index] );
+
+}
+
+void ContactEditor::slotCmbChooser4Change( int index ) {
+
+	txtChooserField4->setText( (*slChooserValues)[index] );
 
 }
 

@@ -83,9 +83,11 @@ class ContactEditor : public QDialog {
 		void slotChooser1Change( const QString &textChanged );
 		void slotChooser2Change( const QString &textChanged );
 		void slotChooser3Change( const QString &textChanged );
+		void slotChooser4Change( const QString &textChanged );
 		void slotCmbChooser1Change( int index );
 		void slotCmbChooser2Change( int index );
 		void slotCmbChooser3Change( int index );
+		void slotCmbChooser4Change( int index );
 		void slotAddressTypeChange( int index );
 		void slotAddressChange( const QString &textChanged );
 		void slotAddress2Change( const QString &textChanged );
@@ -134,9 +136,11 @@ class ContactEditor : public QDialog {
 		QLineEdit *txtChooserField1;
 		QLineEdit *txtChooserField2;
 		QLineEdit *txtChooserField3;
+		QLineEdit *txtChooserField4;
 		QComboBox *cmbChooserField1;
 		QComboBox *cmbChooserField2;
 		QComboBox *cmbChooserField3;
+		QComboBox *cmbChooserField4;
 		QComboBox *cmbFileAs;
 		CategorySelect *cmbCat;
 		
