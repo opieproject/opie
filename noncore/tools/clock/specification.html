@@ -1,0 +1,145 @@
+<html>
+<title>
+Clock Specification
+</title>
+
+<body>
+
+<h1>Clock Specification</h1>
+
+
+<!--
+<h2>Specification goals</h2>
+This specification:
+<ol>
+<li> Describes all of the end-user stories and interactions.
+    (eg. the user can view a slide show of images from a digital camera).
+<li> Lists all features, derived from end-user stories,
+    in enough detail to allow the definition of
+    tests for all features.
+<li> Defines contraints and limitations on the application.
+    (eg. can view image sizes as large as 1MB).
+<li>Aides the developer on focusing on the most important aspects of
+    the application and ensuring all important elements are completed.
+</ol>
+-->
+
+<a name=description>
+</a>
+<!-- A one-line description of what this application is and does.
+    This description is then duplicated in the .desktop Comment and
+    the .control file description.
+
+    (eg. The image viewer allows viewing and very minor editing of image files.)
+-->
+The clock shows the time, a stopwatch and allows a daily alarm to be set.
+<!-- A one-paragraph description of what this application is and does.
+    This description is then duplicated in the .desktop Comment and
+    the .control file description.
+
+    (eg. The image viewer allows viewing and very minor editing
+    of image files. It assists format conversion, beaming logos
+    to phones, captioning, etc.)
+-->
+<p>
+The clock provides three functions: 1. Displays the current date and time.
+2. Provides a stopwatch. 3. Allows a daily alarm to be set and enabled/disabled.
+</p>
+
+<p>
+Status: BT
+</p>
+
+<a name=usecases>
+<h2>Use Cases</h2>
+</a>
+<!-- Describe real-world stories. Implicit in these use cases is
+	"these things are easy to do".
+    (eg.
+	Roving News Reporter
+
+	The journalist/cameraman takes photos with a digital camera,
+	loads them into the PDAs via CF card, adjusts the contrast,
+	blacks-out a license plate, adds a copyright caption, and
+	emails the image and short story to Reuters.
+    )
+
+    Note: TITLEs may be used as identifiers in bug reports.
+ -->
+<ul>
+<li><b>Viewing Date and Time</b>
+    <p>While the PDA is in its cradle, the office worker uses it as a
+       desktop clock.
+<li><b>Jogger</b>
+    <p>A jogger runs around a 400m track 6 times. He starts the stopwatch as
+	he starts, and presses a button each time he rounds the track. He can
+	observe the precise time taken for each lap.
+<li><b>Setting Daily Alarm</b>
+    <p>The traveller sets an alarm to wake him up at 5:30 each morning.
+    <p>(not yet implemented: The traveller never wants to be woken on Saturday,
+	Sunday, or Wednesday; the traveller can easily press a "Snooze" button
+	to get a little more rest, but the alarm will sound again; he never
+	misses getting woken)
+</ul>
+
+<a name=features>
+<h2>Features</h2>
+</a>
+<!-- features are brief
+
+    (eg. 
+	* Slide show: view multiple images in sequence
+	    * Configurable delay between images.
+	    * Hardware-button-controlled stepping between images.
+	* Big images: view larger-than-available-RAM images in some formats.
+	* Formats: view JPEG, PNG, GIF format images.
+	* Scribbling: draw black or white lines on images.
+	* Save: in JPEG, PNG formats.
+    )
+
+    Note: TITLEs may be used as identifiers in bug reports.
+-->
+
+<ul>
+<li>Clock: Display an analog clock, digital clock and the date in one view.
+<li>Stopwatch: Display an analog and digital stopwatch timer.
+    The digital timer has a resolution of 1/100 second.
+    <ul>
+    <li>Start/Stop: The [Select] hardware button must Start/Stop the stopwatch.
+    </ul>
+<li>Daily Alarm: Allows a daily alarm to be enabled/disabled and set.
+    <ul>
+    <li>Audible Alarm: When the alarm is activated an audible alarm must be
+	sounded.
+    <li>Visual Alarm: When the alarm is activated a dialog box must be shown
+	with the alarm details.
+    </ul>
+</ul>
+
+<a name=prerequisites>
+<h2>Prerequisites</h2>
+</a>
+<!--
+    Describes unresolved limitations that cannot
+    be shown within the features list.
+
+    Describes memory and other requirements quantitatively.
+
+    This is a short list, mainly intended as a "known bugs"
+    list for missing features.
+
+    (eg.
+	* Stylus: required for Scribbling.
+	* Memory: requires 250 bytes per event, plus content strings.
+    )
+
+    Note: TITLEs may be used as identifiers in bug reports.
+-->
+
+<ul>
+<li>Alarm Server: requires a working alarm server for daily alarm function.
+<li>Audible Alarm: requires speaker/buzzer.
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Qtopia test</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=iso-8859-1">
+  <meta content="Ed Baak" name="Author">
+</head>
+<body>
+<h1>Qtopia/Clock</h1>
+<h2>Test cases</h2>
+<br>
+<br>
+<h3>&nbsp;Basic Clock</h3>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="width: 100%; text-align: left;">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top; width: 20%;">Test Purpose<br>
+      </th>
+      <td style="vertical-align: top;">Verify that the basic clock
+functionality works as expected.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Test
+Description<br>
+      </th>
+      <td style="vertical-align: top;">
+      <ol>
+        <li>Start the clock. </li>
+        <li>Confirm that the Clock tab is displayed. </li>
+        <li>Check that the time displayed on the analog clock matches
+the device     system time. </li>
+        <li>Check that the time displayed on the digital clock matches
+the device     system time. </li>
+        <li>Check that the date displayed matches the device system
+date.</li>
+      </ol>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Expected
+TestResult<br>
+      </th>
+      <td style="vertical-align: top;">All the verification steps as
+described in the Test Description must be met.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Testnorm/Criteria<br>
+      </th>
+      <td style="vertical-align: top;">Exact Match<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Test
+Suitability<br>
+      </th>
+      <td style="vertical-align: top;">Manual test<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>&nbsp;Stopwatch</h3>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="width: 100%; text-align: left;">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top; width: 20%;">Test Purpose<br>
+      </th>
+      <td style="vertical-align: top;">Verify that the clock app can be
+used as a stopwatch.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Test
+Description<br>
+      </th>
+      <td style="vertical-align: top;">
+      <ol>
+        <li>Click on the Stopwatch tab. </li>
+        <li>Confirm that the stopwatch reads 00:00:00.00 and that the
+analog     hands indicate 00:00. </li>
+        <li>Press the Start button and confirm that the analog and
+digital     timers count up (resolution 1 sec). </li>
+        <li>Press the Stop button and confirm that the timers have
+stopped.  The     digital timer should show 1/100 sec resolution. </li>
+        <li>Press the Reset button and confirm that the stopwatch reads
+00:00:00.00     and that the analog hands indicate 00:00. </li>
+        <li>Press the Start button and wait 3 seconds.&nbsp;</li>
+        <li>Press the Lap/Split button and wait 3 seconds again.</li>
+        <li>Press Stop.</li>
+        <li>Verify that the lap counter reads 3.</li>
+        <li>Use the decrement button in front of the lap counter to
+select lap 1.</li>
+        <li>Verify that the Split value reads a value of approx 3
+seconds and the Lap value is the same.</li>
+        <li>Use the increment button in front of the lap counter to
+select lap 2.</li>
+        <li>Verify that the Split value reads a value of approx 6
+seconds (2 laps total) and the Lap value again is approx 3 seconds.</li>
+        <li>Use the increment button to select lap 3.</li>
+        <li>Verify that the Split value reads a value of approx 9
+seconds (3 laps total) and the Lap value is approx 3 seconds.</li>
+        <li>Verify that no other laps can be selected using the
+incr/decr buttons that 1, 2 or 3.</li>
+        <li>Tap the Reset button.</li>
+        <li>Verify that all values are reset to 0, the lap counter is
+reset to 1 and the incr/decr buttons are disabled.<br>
+        </li>
+      </ol>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Expected
+TestResult<br>
+      </th>
+      <td style="vertical-align: top;">All the verification steps as
+described in the Test Description must be met.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Testnorm/Criteria<br>
+      </th>
+      <td style="vertical-align: top;">Exact Match, but the actual
+values for the Lap and Split readouts depend on the timing of the
+tester.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Test
+Suitability<br>
+      </th>
+      <td style="vertical-align: top;">Manual test<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+<h3>&nbsp;Daily alarm</h3>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="width: 100%; text-align: left;">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top; width: 20%;">Test Purpose<br>
+      </th>
+      <td style="vertical-align: top;">Verify that a daily alarm can be
+set.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Test
+Description<br>
+      </th>
+      <td style="vertical-align: top;">
+      <ol>
+        <li>Click on the Alarms tab. </li>
+        <li>Set the alarm time 1-5 minutes in the future and check the
+Enabled box. </li>
+        <li>Confirm that when the alarm time is reached the alarm
+sounds and a message     box is displayed with the alarm details. </li>
+        <li>Set the alarm time 1-5 minutes in the future and uncheck
+the Enabled box. </li>
+        <li>Confirm that when the alarm time is reached no alarm is
+sounded. </li>
+        <li>Set the alarm time 1-5 minutes in the future, check
+Enabled, and close     the clock application. </li>
+        <li>Confirm that when the alarm time is reached the alarm
+sounds and a message     box is displayed with the alarm details.</li>
+      </ol>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Expected
+TestResult<br>
+      </th>
+      <td style="vertical-align: top;">All the verification steps as
+described in the Test Description must be met.<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Testnorm/Criteria<br>
+      </th>
+      <td style="vertical-align: top;">Exact Match<br>
+      </td>
+    </tr>
+    <tr>
+      <th style="vertical-align: top; width: 15%;" width="20%">Test
+Suitability<br>
+      </th>
+      <td style="vertical-align: top;">Manual test<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+</body>
+</html>
