@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,11 +21,11 @@
 #include "minesweep.h"
 #include "minefield.h"
 
-#include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
+#include <qtopia/qpeapplication.h>
+#include <qtopia/resource.h>
+#include <qtopia/config.h>
 
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qpushbutton.h>
@@ -198,6 +198,7 @@ void ResultIndicator::center()
 
     QPoint pp = w->mapToGlobal( QPoint(0,0) );
     QSize s = sizeHint()*3;
+    s.setWidth( QMIN(s.width(), w->width()) );
     pp = QPoint( pp.x() + w->width()/2 - s.width()/2,
 		pp.y() + w->height()/ 2 - s.height()/2 );
 
@@ -224,8 +225,11 @@ class MineFrame : public QFrame
 {
 public:
     MineFrame( QWidget *parent, const char *name = 0 )
-	:QFrame( parent, name ) {}
-    void setField( MineField *f ) { field = f; }
+	:QFrame( parent, name ), field(0) {}
+    void setField( MineField *f ) {
+	field = f;
+	setMinimumSize( field->sizeHint() );
+    }
 protected:
     void resizeEvent( QResizeEvent *e ) {
 	field->setAvailableRect( contentsRect());
@@ -240,10 +244,10 @@ private:
 MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
 : QMainWindow( parent, name, f )
 {
-    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
     srand(::time(0));
     setCaption( tr("Mine Hunt") );
-    setIcon( Resource::loadPixmap( "minesweep_icon" ) );
+    QPEApplication::setInputMethodHint(this, QPEApplication::AlwaysOff );
+    setIcon( Resource::loadPixmap( "minesweep/MineHunt" ) );
 
     QToolBar *toolBar = new QToolBar( this );
     toolBar->setHorizontalStretchable( TRUE );
@@ -253,7 +257,10 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     QPopupMenu *gameMenu = new QPopupMenu( this );
     gameMenu->insertItem( tr("Beginner"), this, SLOT( beginner() ) );
     gameMenu->insertItem( tr("Advanced"), this, SLOT( advanced() ) );
-    gameMenu->insertItem( tr("Expert"), this, SLOT( expert() ) );
+
+    if (qApp->desktop()->width() >= 240) {
+	gameMenu->insertItem( tr("Expert"), this, SLOT( expert() ) );
+    }
 
     menuBar->insertItem( tr("Game"), gameMenu );
 
@@ -299,12 +306,11 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     field->setFocus();
     setCentralWidget( mainframe );
 
-    connect( field, SIGNAL( gameOver( bool ) ), this, SLOT( gameOver( bool ) ) );
-    connect( field, SIGNAL( mineCount( int ) ), this, SLOT( setCounter( int ) ) );
+    connect( field, SIGNAL( gameOver(bool) ), this, SLOT( gameOver(bool) ) );
+    connect( field, SIGNAL( mineCount(int) ), this, SLOT( setCounter(int) ) );
     connect( field, SIGNAL( gameStarted()), this, SLOT( startPlaying() ) );
 
     timer = new QTimer( this );
-
     connect( timer, SIGNAL( timeout() ), this, SLOT( updateTime() ) );
 
     readConfig();

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -19,7 +19,8 @@
 **********************************************************************/
 #include "minefield.h"
 
-#include <qpe/config.h>
+#include <qtopia/config.h>
+#include <qtopia/qpeapplication.h>
 
 #include <qpainter.h>
 #include <qdrawutil.h>
@@ -69,7 +70,7 @@ static const char *pix_mine[]={
 
 
 static const int maxGrid = 28;
-static const int minGrid = 9;
+static const int minGrid = 12;
 
 
 
@@ -184,28 +185,36 @@ void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr )
 {
     int x = cr.x();
     int y = cr.y();
-    if ( !knownField ) {
+    if ( !knownField || knownField->width() != cr.width() ||
+	 knownField->height() != cr.height() ) {
+	delete knownField;
 	knownField = new QPixmap( cr.width(), cr.height() );
 	QPainter pp( knownField );
 	QBrush br( cg.button().dark(115) );
-	qDrawWinButton( &pp, cr, cg, TRUE, &br );
+	qDrawWinButton( &pp, QRect( 0, 0, cr.width(), cr.height() ), cg, TRUE, &br );
     }
 
     const int pmmarg=cr.width()/5;
 
-    if ( !unknownField ) {
+    if ( !unknownField || unknownField->width() != cr.width() ||
+         unknownField->height() != cr.height() ) {
+	delete unknownField;
 	unknownField = new QPixmap( cr.width(), cr.height() );
 	QPainter pp( unknownField );
 	QBrush br( cg.button() );
-	qDrawWinButton( &pp, cr, cg, FALSE, &br );
+	qDrawWinButton( &pp, QRect( 0, 0, cr.width(), cr.height() ), cg, FALSE, &br );
     }
 
-    if ( !flag_pix ) {
+    if ( !flag_pix || flag_pix->width() != cr.width()-pmmarg*2 ||
+	 flag_pix->height() != cr.height()-pmmarg*2 ) {
+	delete flag_pix;
 	flag_pix = new QPixmap( cr.width()-pmmarg*2, cr.height()-pmmarg*2 );
 	flag_pix->convertFromImage( QImage(pix_flag).smoothScale(cr.width()-pmmarg*2, cr.height()-pmmarg*2) );
     }
 
-    if ( !mine_pix ) {
+    if ( !mine_pix || mine_pix->width() != cr.width()-pmmarg*2 ||
+	 mine_pix->height() != cr.height()-pmmarg*2 ) {
+	delete mine_pix;
 	mine_pix = new QPixmap( cr.width()-pmmarg*2, cr.height()-pmmarg*2 );
 	mine_pix->convertFromImage( QImage(pix_mine).smoothScale(cr.width()-pmmarg*2, cr.height()-pmmarg*2) );
     }
@@ -283,10 +292,11 @@ void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr )
 MineField::MineField( QWidget* parent, const char* name )
 : QScrollView( parent, name )
 {
+    viewport()->setBackgroundMode( NoBackground );
     setState( GameOver );
 
     setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum ) );
-
+    
     setFocusPolicy( QWidget::NoFocus );
 
     holdTimer = new QTimer( this );
@@ -299,20 +309,16 @@ MineField::MineField( QWidget* parent, const char* name )
     mineguess=0;
     nonminecount=0;
     cellSize = -1;
-    mines = 0;
+
+    numRows = numCols = 0;
+    mines = NULL;
 }
 
 MineField::~MineField()
 {
-    int i;
-    if ( mines )
-    {
-        for ( i = 0; i < numCols*numRows; i++ )
-        {
-            delete mines[i];
-        }
-        delete[] mines;
-    }
+    for ( int i = 0; i < numCols*numRows; i++ )
+	delete mines[i];
+    delete[] mines;
 }
 
 void MineField::setState( State st )
@@ -327,14 +333,9 @@ void MineField::setup( int level )
     //viewport()->setUpdatesEnabled( FALSE );
 
     int i;
-    if ( mines )
-    {
-        for ( i = 0; i < numCols*numRows; i++ )
-        {
-            delete mines[i];
-        }
-        delete[] mines;
-    }
+    for ( i = 0; i < numCols*numRows; i++ )
+	delete mines[i];
+    delete[] mines;
 
     switch( lev ) {
     case 1:
@@ -343,9 +344,9 @@ void MineField::setup( int level )
 	minecount = 12;
 	break;
     case 2:
-	numRows = 16;
-	numCols = 16;
-	minecount = 45;
+	numRows = 13;
+	numCols = 13;
+	minecount = 33;
 	break;
     case 3:
 	numCols = 18;
@@ -353,11 +354,11 @@ void MineField::setup( int level )
 	minecount = 66 ;
 	break;
     }
-    mines = new Mine*[numRows*numCols];
+    mines = new Mine* [numRows*numCols];
     for ( i = 0; i < numCols*numRows; i++ )
 	mines[i] = new Mine( this );
 
-
+    
     nonminecount = numRows*numCols - minecount;
     mineguess = minecount;
     emit mineCount( mineguess );
@@ -371,13 +372,13 @@ void MineField::setup( int level )
     updateGeometry();
 }
 
-void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph )
+void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph ) 
 {
     int c1 = clipx / cellSize;
     int c2 = ( clipx + clipw - 1 ) / cellSize;
     int r1 = clipy / cellSize;
     int r2 = ( clipy + cliph - 1 ) / cellSize;
-
+    
     for ( int c = c1; c <= c2 ; c++ ) {
 	for ( int r = r1; r <= r2 ; r++ ) {
 	    int x = c * cellSize;
@@ -397,7 +398,11 @@ void MineField::setAvailableRect( const QRect &r )
 {
     availableRect = r;
     int newCellSize = findCellSize();
-    if ( newCellSize != cellSize ) {
+
+
+    if ( newCellSize == cellSize ) {
+	setCellSize( cellSize );
+    } else {
 	viewport()->setUpdatesEnabled( FALSE );
 	setCellSize( newCellSize );
 	viewport()->setUpdatesEnabled( TRUE );
@@ -407,10 +412,10 @@ void MineField::setAvailableRect( const QRect &r )
 
 int MineField::findCellSize()
 {
-    int w = availableRect.width() - 1;
-    int h = availableRect.height() - 1;
+    int w = availableRect.width() - 2;
+    int h = availableRect.height() - 2;
     int cellsize;
-
+    
     cellsize = QMIN( w/numCols, h/numRows );
     cellsize = QMIN( QMAX( cellsize, minGrid ), maxGrid );
     return cellsize;
@@ -419,21 +424,29 @@ int MineField::findCellSize()
 
 void MineField::setCellSize( int cellsize )
 {
-    cellSize = cellsize;
-
-    int w = availableRect.width();
-    int h = availableRect.height();
-
+    int b = 2;
+    
     int w2 = cellsize*numCols;
     int h2 = cellsize*numRows;
+    
+    int w = QMIN( availableRect.width(), w2+b );
+    int h = QMIN( availableRect.height(), h2+b );
 
-    resizeContents( w2, h2 );
+    //
+    // Don't rely on the change in cellsize to force a resize,
+    // as it's possible to have the same size cells when going
+    // from a large play area to a small one.
+    //
+    resizeContents(w2, h2);
 
-    int b = 5;
-
-    setGeometry( availableRect.x() + (w-w2)/2, availableRect.y() + (h-h2)/2,
-		 w2+b, h2+b );
-//		 QMIN(w,w2+b), QMIN(h,h2+b) );
+    if ( availableRect.height() < h2 &&
+	 availableRect.width() - w > style().scrollBarExtent().width() ) {
+	w += style().scrollBarExtent().width();
+    }
+    
+    setGeometry( availableRect.x() + (availableRect.width()-w)/2,
+	    availableRect.y() + (availableRect.height()-h)/2, w, h );
+    cellSize = cellsize;
 }
 
 
@@ -613,10 +626,14 @@ void MineField::updateMine( int row, int col )
 
     if ( flagAction != NoAction ) {
 	if ( m->state() == Mine::Flagged ) {
-	    --mineguess;
-	    emit mineCount( mineguess );
-	    if ( m->isMined() )
-		--minecount;
+	    if (mineguess > 0) {
+		--mineguess;
+		emit mineCount( mineguess );
+		if ( m->isMined() )
+		    --minecount;
+	    } else {
+		m->setState(Mine::Hidden);
+	    }
 	} else if ( wasFlagged ) {
 	    ++mineguess;
 	    emit mineCount( mineguess );
@@ -681,11 +698,12 @@ void MineField::readConfig(Config& cfg)
     ignoreClick = FALSE;
     currRow = currCol = 0;
     QString grid = cfg.readEntry("Grid");
+    int x;
     if ( !grid.isEmpty() ) {
 	int i=0;
 	minecount=0;
 	mineguess=0;
-	for ( int x = 0; x < numCols; x++ ) {
+	for ( x = 0; x < numCols; x++ ) {
 	    for ( int y = 0; y < numRows; y++ ) {
 		char code='A'+(x*17+y*101)%21; // Reduce the urge to cheat
 		int st = (char)(QChar)grid[i++]-code;
@@ -711,7 +729,7 @@ void MineField::readConfig(Config& cfg)
 		}
 	    }
 	}
-	for ( int x = 0; x < numCols; x++ ) {
+	for ( x = 0; x < numCols; x++ ) {
 	    for ( int y = 0; y < numRows; y++ ) {
 		Mine* m = mine( y, x );
 		if ( m->state() == Mine::Empty )
@@ -721,5 +739,13 @@ void MineField::readConfig(Config& cfg)
     }
     setState( Playing );
     emit mineCount( mineguess );
+}
+
+QSize MineField::sizeHint() const
+{
+    if ( qApp->desktop()->width() >= 240 )
+	return QSize(200,200);
+    else
+	return QSize(160, 160);
 }
 
