@@ -266,15 +266,15 @@
     </message>
     <message>
         <source>Rows</source>
-        <translation type="unfinished"></translation>
+        <translation>Filas</translation>
     </message>
     <message>
         <source>Columns</source>
-        <translation type="unfinished"></translation>
+        <translation>Columnas</translation>
     </message>
     <message>
         <source>Label</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiqueta</translation>
     </message>
     <message>
         <source>Q Keycode</source>
@@ -379,15 +379,15 @@
     </message>
     <message>
         <source>4800 baud</source>
-        <translation type="unfinished">4800 baudios</translation>
+        <translation>4800 baudios</translation>
     </message>
     <message>
         <source>2400 baud</source>
-        <translation type="unfinished">2400 baudios</translation>
+        <translation>2400 baudios</translation>
     </message>
     <message>
         <source>1200 baud</source>
-        <translation type="unfinished">1200 baudios</translation>
+        <translation>1200 baudios</translation>
     </message>
 </context>
 <context>
@@ -484,7 +484,7 @@
     </message>
     <message>
         <source>New from Profile</source>
-        <translation>Nuevo del perfil</translation>
+        <translation>Nueva del perfil</translation>
     </message>
     <message>
         <source>Connection</source>
@@ -524,15 +524,15 @@
     </message>
     <message>
         <source>Start log</source>
-        <translation type="unfinished"></translation>
+        <translation>Comenzar registro</translation>
     </message>
     <message>
         <source>Stop log</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminar registro</translation>
     </message>
     <message>
         <source>Log</source>
-        <translation type="unfinished"></translation>
+        <translation>Registro</translation>
     </message>
 </context>
 <context>
@@ -832,7 +832,7 @@
     </message>
     <message>
         <source>&lt;qt&gt;Dialing the number failed.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Error al marcar el número.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Fixing up Embedix</source>

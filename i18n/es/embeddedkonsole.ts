@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Konsole</source>
-        <translation type="unfinished"></translation>
+        <translation>Konsole</translation>
     </message>
     <message>
         <source>Bottom</source>
@@ -229,39 +229,39 @@
     </message>
     <message>
         <source>new session</source>
-        <translation type="unfinished"></translation>
+        <translation>nueva sesión</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuentes</translation>
     </message>
     <message>
         <source>Sessions</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesiones</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla Completa</translation>
     </message>
     <message>
         <source>Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar...</translation>
     </message>
     <message>
         <source>History...</source>
-        <translation type="unfinished"></translation>
+        <translation>Historia...</translation>
     </message>
     <message>
         <source>To exit fullscreen, tap here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Para salir del modo pantalla completa, pulse aquí.</translation>
     </message>
     <message>
         <source>History Lines:</source>

@@ -238,17 +238,19 @@
     </message>
     <message>
         <source>Couldn&apos;t start ipkg-link process</source>
-        <translation type="unfinished"></translation>
+        <translation>Error al iniciar el proceso ipkg-link</translation>
     </message>
     <message>
         <source>Symbolic linking failed!
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Error al crear enlace simbólico
+</translation>
     </message>
     <message>
         <source>Symbolic linking succeeded.
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enlace simbólico hecho con éxitoto
+</translation>
     </message>
 </context>
 <context>

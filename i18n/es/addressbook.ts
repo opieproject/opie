@@ -42,15 +42,15 @@
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Escribir correo a</translation>
+        <translation>Escribir Correo a</translation>
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Emitir entrada</translation>
+        <translation>Emitir Entrada</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Mis datos personales</translation>
+        <translation>Mis Datos Personales</translation>
     </message>
     <message>
         <source>View</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Editar mis datos personales</translation>
+        <translation>Editar Mis Datos Personales</translation>
     </message>
     <message>
         <source>Edit Address</source>
@@ -1345,7 +1345,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

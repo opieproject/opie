@@ -264,27 +264,27 @@ de %1?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished">Gestor de Ficheros Avanzado :: </translation>
+        <translation>Gestor de Ficheros Avanzado :: </translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"> kB libres</translation>
+        <translation> kB libres</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar a la Vista 1</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar a la Vista 2</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>No Implementado Aún</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 does not exist&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 no existe&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Advanced FileManager is copyright 2002-2003 by L.J.Potter&lt;llornkcor@handhelds.org&gt; and is licensed by the GPL&lt;/P&gt;</source>
@@ -292,59 +292,59 @@ de %1?</translation>
     </message>
     <message>
         <source>&lt;p&gt;Cannot remove current directory from bookmarks. It is not bookmarked!&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Imposible eliminar el directorio actual de los marcadores. ¡No está en los marcadores!&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>Actualizar</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;¿Está seguro de que desea borrar %1 archivos?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;¿Está seguro de que desea borrar %1 y todo su contenido?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;¿Está seguro de que desea borrar %1?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;¿Está seguro de que desea copiar %1 archivos?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 ya existe. ¿Desea sobrescribirlo?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Imposible copiar %1 a %2&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Copy %1 As</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar %1 Como</translation>
     </message>
     <message>
         <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 ya existe. ¿Desea sobrescribirlo?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Imposible copiar %1 a %2&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt; %1 ya existe. ¿Está seguro de que desea borrarlo?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Imposible mover %1&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Imposible copiar %1 a %2&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
