@@ -29,7 +29,10 @@ private slots:
     void removeMap();
 
     // all those required slots for the color push buttons
-    void keyColorButtonClicked();
+    void keyColorClicked();
+    void keyColorPressedClicked();
+    void keyColorLinesClicked();
+    void textColorClicked();
 
 private:
     QCheckBox *pick_button;
@@ -43,7 +46,10 @@ private:
     QStringList custom_maps; // maps you added with the 'add' button
 
     /* color buttons */
-    QPushButton *key_color_button;
+    QPushButton *keycolor_button;
+    QPushButton *keycolor_pressed_button;
+    QPushButton *keycolor_lines_button;
+    QPushButton *textcolor_button;
 
 };
 

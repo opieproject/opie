@@ -147,31 +147,47 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
 
     QLabel *label;
     QStringList color;
+    config.setGroup("colors");
 
     label = new QLabel(tr("Key Color"), color_box);
-    key_color_button = new QPushButton(color_box);
-    connect(key_color_button, SIGNAL(clicked()), SLOT(keyColorButtonClicked()));
-    key_color_button->setFlat((bool)1);
-
-    config.setGroup("colors");
+    keycolor_button = new QPushButton(color_box);
+    connect(keycolor_button, SIGNAL(clicked()), SLOT(keyColorClicked()));
+    keycolor_button->setFlat((bool)1);
     color = config.readListEntry("keycolor", QChar(','));
+    /*
+     * hopefully not required
+
     if (color.isEmpty()) {
         color = QStringList::split(",", "240,240,240");
         config.writeEntry("keycolor", color.join(","));
 
     }
-    key_color_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+    */
+    keycolor_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
 
 
     label = new QLabel(tr("Key Pressed Color"), color_box);
-    QPushButton *button = new QPushButton(color_box);
-    button->setFlat((bool)1);
+    keycolor_pressed_button = new QPushButton(color_box);
+    connect(keycolor_pressed_button, SIGNAL(clicked()), SLOT(keyColorPressedClicked()));
+    keycolor_pressed_button->setFlat((bool)1);
+    color = config.readListEntry("keycolor_pressed", QChar(','));
+    keycolor_pressed_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
     label = new QLabel(tr("Line Color"), color_box);
-    button = new QPushButton(color_box);
-    button->setFlat((bool)1);
+    keycolor_lines_button = new QPushButton(color_box);
+    connect(keycolor_lines_button, SIGNAL(clicked()), SLOT(keyColorLinesClicked()));
+    keycolor_lines_button->setFlat((bool)1);
+    color = config.readListEntry("keycolor_lines", QChar(','));
+    keycolor_lines_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
+
     label = new QLabel(tr("Text Color"), color_box);
-    button = new QPushButton(color_box);
-    button->setFlat((bool)1);
+    textcolor_button = new QPushButton(color_box);
+    connect(textcolor_button, SIGNAL(clicked()), SLOT(textColorClicked()));
+    textcolor_button->setFlat((bool)1);
+    color = config.readListEntry("textcolor", QChar(','));
+    textcolor_button->setBackgroundColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
 
     label = new QLabel("", color_box); // a spacer so the above buttons dont expand
     label->setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
@@ -196,6 +212,8 @@ void ConfigDlg::repeatTog() {
     emit repeatToggled(repeat_button->isChecked());
 }
 
+// ConfigDlg::setMap {{{1
+
 /* 
  * the index is kinda screwy, because in the config file, index 0 is just the
  * first element in the QStringList, but here it's the "Current Language"
@@ -203,7 +221,6 @@ void ConfigDlg::repeatTog() {
  *
  */
 
-// ConfigDlg::setMap {{{1
 void ConfigDlg::setMap(int index) {
 
     if (index == 0) {
@@ -259,8 +276,16 @@ void ConfigDlg::removeMap() {
     config.writeEntry("maps", custom_maps, QChar('|'));
 }
 
-// ConfigDlg::color {{{1
-void ConfigDlg::keyColorButtonClicked() {
+/* ConfigDlg::slots for the color buttons {{{1
+ *
+ * these four slots are almost the same, except for the names. i was thinking
+ * of making a map with pointers to the buttons and names of the configEntry
+ * so it could be one slot, but then there would be no way of telling which 
+ * of the buttons was clicked if they all connect to the same slot.
+ *
+ */
+
+void ConfigDlg::keyColorClicked() {
 
     Config config ("multikey");
     config.setGroup ("colors");
@@ -276,6 +301,63 @@ void ConfigDlg::keyColorButtonClicked() {
     config.writeEntry("keycolor", color, QChar(','));
     config.write();
     
-    key_color_button->setBackgroundColor(newcolor);
+    keycolor_button->setBackgroundColor(newcolor);
+    emit reloadKeyboard();
+}
+void ConfigDlg::keyColorPressedClicked() {
+
+    Config config ("multikey");
+    config.setGroup ("colors");
+
+    QStringList color = config.readListEntry("keycolor_pressed", QChar(','));
+
+    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
+    color[0].setNum(newcolor.red());
+    color[1].setNum(newcolor.green());
+    color[2].setNum(newcolor.blue());
+
+    config.writeEntry("keycolor_pressed", color, QChar(','));
+    config.write();
+    
+    keycolor_pressed_button->setBackgroundColor(newcolor);
+    emit reloadKeyboard();
+}
+void ConfigDlg::keyColorLinesClicked() {
+
+    Config config ("multikey");
+    config.setGroup ("colors");
+
+    QStringList color = config.readListEntry("keycolor_lines", QChar(','));
+
+    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
+    color[0].setNum(newcolor.red());
+    color[1].setNum(newcolor.green());
+    color[2].setNum(newcolor.blue());
+
+    config.writeEntry("keycolor_lines", color, QChar(','));
+    config.write();
+    
+    keycolor_lines_button->setBackgroundColor(newcolor);
+    emit reloadKeyboard();
+}
+void ConfigDlg::textColorClicked() {
+
+    Config config ("multikey");
+    config.setGroup ("colors");
+
+    QStringList color = config.readListEntry("textcolor", QChar(','));
+
+    QColor newcolor = OColorDialog::getColor(QColor(color[0].toInt(), color[1].toInt(), color[2].toInt()));
+
+    color[0].setNum(newcolor.red());
+    color[1].setNum(newcolor.green());
+    color[2].setNum(newcolor.blue());
+
+    config.writeEntry("textcolor", color, QChar(','));
+    config.write();
+    
+    textcolor_button->setBackgroundColor(newcolor);
     emit reloadKeyboard();
 }
