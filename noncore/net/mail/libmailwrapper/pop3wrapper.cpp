@@ -27,6 +27,7 @@ void POP3wrapper::listMessages( QList<RecMail> &target )
     carray *messages;
 
     login();
+    if (!m_pop3) return;
     mailpop3_list( m_pop3, &messages );
 
     for ( int i = carray_count( messages ); i > 0; i-- ) {
