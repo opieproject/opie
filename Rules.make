@@ -108,6 +108,7 @@ $(TOPDIR)/mkspecs/default :
 $(TOPDIR)/scripts/subst : FORCE
 	@( \
 		echo 's,\$$QPE_VERSION,$(QPE_VERSION),g'; \
+		echo 's,\$$OPIE_VERSION,$(OPIE_VERSION),g'; \
 		echo 's,\$$QTE_VERSION,$(QTE_VERSION),g'; \
 		echo 's,\$$QTE_REVISION,$(QTE_REVISION),g'; \
 		echo 's,\$$SUB_VERSION,$(SUB_VERSION),g'; \
