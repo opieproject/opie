@@ -70,7 +70,9 @@ ifeq ($(CONFIG_OPIE_NO_SOUND_PCM_READ_BITS),y)
 	echo DEFINES += OPIE_NO_SOUND_PCM_READ_BITS >> $@
 endif
 	echo DEFINES += OPIE_SOUND_FRAGMENT_SHIFT=$(CONFIG_OPIE_SOUND_FRAGMENT_SHIFT) >> $@
+ifeq ($(CONFIG_OPIE_WE_VERSION_OVERRIDE),y)
 	echo DEFINES += OPIE_WE_VERSION=$(CONFIG_OPIE_WE_VERSION) >> $@
+endif
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules
