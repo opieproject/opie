@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.19 2002-04-20 14:19:26 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.20 2002-04-24 23:47:05 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -254,9 +254,11 @@ void VMemo::mousePressEvent( QMouseEvent *me )
          No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
          mousePressEvent and mouseReleaseEvent with a NULL parameter.
       */
-       if (!systemZaurus && me != NULL)
-           return;
-
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+        if (!systemZaurus )
+            return;
+#endif
+    
      Config config( "Sound" );
      config.setGroup( "System" );
      useAlerts = config.readBoolEntry("Alert");
@@ -265,6 +267,7 @@ void VMemo::mousePressEvent( QMouseEvent *me )
 //  QMessageBox::message("VMemo","Really Record?");//) ==1)
 //             return;
 //     } else {
+        if (!systemZaurus )
     QSound::play(Resource::findSound("vmemob"));
 //     }
     qDebug("Start recording");
@@ -283,17 +286,16 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   QString fName;
   Config cfg( "Sound" );
   cfg.setGroup( "System" );
-  fileName = cfg.readEntry("RecLocation",QPEApplication::documentDir() );
+   fName = QPEApplication::documentDir() ;
+  fileName = cfg.readEntry("RecLocation", fName);
 
   int s;
   s=fileName.find(':');
   if(s)
-     fileName=fileName.right(fileName.length()-s-2)+"/";
-     
-//   if( !fileName.right(1).find('/') == -1)
-//           fileName+="/audio/";
-//       else
-//           fileName+="audio/";
+     fileName=fileName.right(fileName.length()-s-2);
+  qDebug("filename will be "+fileName);   
+   if( !fileName.right(1).find('/') == -1)
+           fileName+="/";
 
 //   if(systemZaurus) 
 //   fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
@@ -301,6 +303,7 @@ void VMemo::mousePressEvent( QMouseEvent *me )
 //   fileName=vmCfg.readEntry("Dir", "/mnt/ramfs/");
   
   fName = "vm_"+ dt.toString()+ ".wav";
+  
   fileName+=fName;
      qDebug("filename is "+fileName);
   // No spaces in the filename
@@ -363,7 +366,6 @@ int VMemo::openDSP()
   
     if(dsp == -1)  {
         perror("open(\"/dev/dsp\")");
-        
         errorMsg="open(\"/dev/dsp\")\n "+(QString)strerror(errno);
         return -1;
     }
@@ -514,7 +516,9 @@ void VMemo::record(void)
     if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
         perror("ioctl(\"SNDCTL_DSP_RESET\")");
     ::close(dsp);
+    fileName = fileName.left(fileName.length()-4);
     if(useAlerts) 
         QMessageBox::message("Vmemo"," Done recording\n"+ fileName);
+    qDebug("done recording "+fileName);
     QSound::play(Resource::findSound("vmemoe"));
 }
