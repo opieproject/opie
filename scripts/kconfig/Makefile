@@ -2,16 +2,16 @@ VERSION=1.2
 CC=gcc
 CXX=g++
 CFLAGS=-O2 -Wall -g -fPIC
-CXXFLAGS=$(CFLAGS) -I$(QTDIR)/include
+CXXFLAGS=$(CFLAGS) -I$(HOSTQTDIR)/include
 LDFLAGS=
-LXXFLAGS=$(LDFLAGS) -L$(QTDIR)/lib -Wl,-rpath,$(QTDIR)/lib
+LXXFLAGS=$(LDFLAGS) -L$(HOSTQTDIR)/lib -Wl,-rpath,$(HOSTQTDIR)/lib
 LEX=flex
 YACC=bison
 YFLAGS=-d -t -v
-ifndef QTDIR
-QTDIR=/usr/share/qt
+ifndef HOSTQTDIR
+HOSTQTDIR=/usr/share/qt
 endif
-MOC=$(wildcard $(QTDIR)/bin/moc)
+MOC=$(wildcard $(HOSTQTDIR)/bin/moc)
 
 parse_SRC=zconf.y
 conf_SRC=conf.c $(parse_SRC)
@@ -106,7 +106,7 @@ conf: $(conf_OBJ)
 ifeq ($(MOC),)
 qconf:
 	@echo Unable to find the QT installation. Please make sure that the
-	@echo QT development package is correctly installed and the QTDIR
+	@echo QT development package is correctly installed and the HOSTQTDIR
 	@echo environment variable is set to the correct location.
 	@false
 else
@@ -140,7 +140,7 @@ lex.%.c: %.l
 	$(LEX) $(LFLAGS) -P$* $<
 
 %.moc: %.h
-	$(QTDIR)/bin/moc -i $< -o $@
+	$(HOSTQTDIR)/bin/moc -i $< -o $@
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
