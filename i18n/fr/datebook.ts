@@ -94,7 +94,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer...</translation>
     </message>
 </context>
 <context>
@@ -218,7 +218,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Calendrier</translation>
+        <translation>Calendrier</translation>
     </message>
 </context>
 <context>
@@ -273,67 +273,67 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Vues</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vue par défaut:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Jour</translation>
+        <translation>Jour</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Semaine</translation>
+        <translation>Semaine</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>List des semaines</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Mois</translation>
+        <translation>Mois</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Aller à l&apos;heure courante</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Affichage de l&apos;heure</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Aucun</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Début</translation>
+        <translation>Début</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Début-Fin</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Par défaut</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emplacement:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Bureau</translation>
+        <translation>Bureau</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Maison</translation>
+        <translation>Maison</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Catégorie:</translation>
     </message>
 </context>
 <context>
@@ -347,7 +347,7 @@ Quitter ?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -361,7 +361,7 @@ Quitter ?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -378,43 +378,43 @@ Quitter ?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
+        <source>M</source>
+        <comment>Monday</comment>
+        <translation>L</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Tuesday</comment>
+        <translation>M</translation>
+    </message>
+    <message>
+        <source>W</source>
+        <comment>Wednesday</comment>
+        <translation>M</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Thursday</comment>
+        <translation>J</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <comment>Friday</comment>
+        <translation>V</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Saturday</comment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Sunday</comment>
+        <translation>D</translation>
+    </message>
+    <message>
         <source>p</source>
         <translation>p</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

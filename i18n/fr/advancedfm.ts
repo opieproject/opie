@@ -193,6 +193,12 @@ le fichier %1?</translation>
         <translation>Effacer le répertoire?</translation>
     </message>
     <message>
+        <source>Really delete
+</source>
+        <translation>Vraiment effacer
+</translation>
+    </message>
+    <message>
         <source>Really copy
 %1 files?</source>
         <translation>Vraiment copier
@@ -227,42 +233,30 @@ Voulez-vous vraiment l&apos;effacer?</translation>
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished">Advanced FileManager(new line)
+        <translation>Advanced FileManager(new line)
 is copyright 2002-2003 by(new line)
 L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
 and is licensed by the GPL</translation>
     </message>
     <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!!</source>
+        <translation>Impossible d&apos;effacer le répertoire courant
+des favoris.
+Ce n&apos;en est pas un!!</translation>
+    </message>
+    <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Favoris</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer le répertoire courant des Favoris</translation>
     </message>
     <message>
         <source>Error</source>
         <translation>Erreur</translation>
-    </message>
-    <message>
-        <source>Cannot remove current directory
-from bookmarks.
-It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Really delete %1
-and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Really delete
-%1?</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -77,6 +77,13 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
 </context>
 <context>
+    <name>DesktopPowerAlerter</name>
+    <message>
+        <source>Battery Status</source>
+        <translation>Etat de la batterie</translation>
+    </message>
+</context>
+<context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
@@ -96,11 +103,11 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche de documents</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Recherche de documents</translation>
     </message>
 </context>
 <context>
@@ -171,13 +178,6 @@ Rechargez la batterie de sauvegarde SVP.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Ne plus demander pour ce média</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Battery Status</source>
-        <translation type="unfinished">Etat de la batterie</translation>
     </message>
 </context>
 <context>

@@ -158,79 +158,79 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour ajouter une nouvelle feuille.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>CLiquer ici pour annuler la dernière action.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>CLiquer ici pour refaire la dernière action.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour voir la 1ère page.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour voir la  page précédente.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour voir la  page suivante.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour voir la dernière page.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner un des outils disponible pour dessiner des lignes.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner un des outils disponible pour dessiner des rectangles.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner un des outils disponible pour dessiner des ellipsess.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner l&apos;outil d&apos;écriture.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner l&apos;outil de remplissage.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner la gomme.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner la taille du stylo.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner la couleur du stylo.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour sélectionner la couleur de remplissage.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Page %1/%2</translation>
     </message>
 </context>
 <context>
@@ -419,23 +419,23 @@ la page sélectionnée ?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour ajouter une nouvelle feuille.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour déplacer la feuille courante vers le début de la liste.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquer ici pour déplacer la feuille courante vers la fin de la liste.</translation>
     </message>
 </context>
 </TS>

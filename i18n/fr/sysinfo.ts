@@ -1,53 +1,6 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>FileSysInfo</name>
-    <message>
-        <source>CF</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ha</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much storage is currently used on this hard drive.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SD</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>SC</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>In</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>RA</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>LoadInfo</name>
     <message>
         <source>Application CPU usage (%)</source>
@@ -124,11 +77,13 @@ La mémoire est divisée en catégories comme suit:
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voici la liste de tous les modules chargés sur cet assistant personnel.
+
+Cliquez et maintenez appuyer pour voir les informations à propos du module ou pour le décharger.</translation>
     </message>
     <message>
         <source>Select a command here and then click the Send button to the right to send the command to module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez une commande puis cliquez sur le boutton &quot;Envoyer&quot; pour envoyer la commande au module sélectionné.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -136,11 +91,11 @@ Click and hold on a module to see additional information about the module, or to
     </message>
     <message>
         <source>Click here to send the selected command to the module selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cliquez ici pour envoyer la commande sélectionné au module sélectionné.</translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette zone décrit en détail les informations au sujet de ce module.</translation>
     </message>
     <message>
         <source>You really want to execute
@@ -187,11 +142,13 @@ Click and hold on a module to see additional information about the module, or to
         <source>This is a list of all the processes on this handheld device.
 
 Click and hold on a process to see additional information about the process, or to send a signal to it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Voici la liste de tous les processus en cours sur cet assistant personnel
+
+Cliquez et maintenez appuyer pour voir les informations à propos du processus ou pour lui envoyer un signal.</translation>
     </message>
     <message>
         <source>Select a signal here and then click the Send button to the right to send to this process.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionnez un signal puis cliquez sur le boutton &quot;Envoyer&quot; pour envoyer le signal au processus sélectionné.</translation>
     </message>
     <message>
         <source>Send</source>
@@ -213,34 +170,109 @@ Click and hold on a process to see additional information about the process, or 
     </message>
 </context>
 <context>
+    <name>StorageInfo</name>
+    <message>
+        <source>CF Card: </source>
+        <translation>Carte CF:</translation>
+    </message>
+    <message>
+        <source>Hard Disk </source>
+        <translation>Disque Dur</translation>
+    </message>
+    <message>
+        <source>SD Card </source>
+        <translation>Carte SD</translation>
+    </message>
+    <message>
+        <source>Hard Disk /dev/hd </source>
+        <translation>Disque /dev/hd</translation>
+    </message>
+    <message>
+        <source>SCSI Hard Disk /dev/sd </source>
+        <translation>Disque SCSI /dev/sd</translation>
+    </message>
+    <message>
+        <source>Int. Storage </source>
+        <translation>Stockage int</translation>
+    </message>
+    <message>
+        <source>CF</source>
+        <translation>CF</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Compact Flash memory card.</source>
+        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée sur cette carte de mémoire CompactFlash.</translation>
+    </message>
+    <message>
+        <source>Ha</source>
+        <translation>Ha</translation>
+    </message>
+    <message>
+        <source>This graph represents how much storage is currently used on this hard drive.</source>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur ce disque.</translation>
+    </message>
+    <message>
+        <source>SD</source>
+        <translation>SD</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used on this Secure Digital memory card.</source>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur cette carte de mémoire Secure Digital.</translation>
+    </message>
+    <message>
+        <source>SC</source>
+        <translation>SC</translation>
+    </message>
+    <message>
+        <source>In</source>
+        <translation>In</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the built-in memory (i.e. Flash memory) on this handheld device.</source>
+        <translation>Ce graphe représente cobien de mémoire est actuellement  utilisée dans la mémoire centrale (ie  mémoire Flash).</translation>
+    </message>
+    <message>
+        <source>RAM disk</source>
+        <translation>Disque RAM</translation>
+    </message>
+    <message>
+        <source>RA</source>
+        <translation>RA</translation>
+    </message>
+    <message>
+        <source>This graph represents how much memory is currently used of the temporary RAM disk.</source>
+        <translation>Ce graphe représente combien de mémoire est actuellement  utilisée sur le dique RAM.</translation>
+    </message>
+</context>
+<context>
     <name>SystemInfo</name>
     <message>
         <source>System Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info système</translation>
     </message>
     <message>
         <source>Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memoire</translation>
     </message>
     <message>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Stockage</translation>
     </message>
     <message>
         <source>CPU</source>
-        <translation type="unfinished"></translation>
+        <translation>CPU</translation>
     </message>
     <message>
         <source>Process</source>
-        <translation type="unfinished"></translation>
+        <translation>Processus</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version</translation>
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Modules</translation>
     </message>
 </context>
 <context>
