@@ -953,6 +953,7 @@ void OContact::setChildren( const QString &str )
 */
 bool OContact::match( const QRegExp &r ) const
 {
+    setLastHitField( -1 );
     bool match;
     match = false;
     QMap<int, QString>::ConstIterator it;

@@ -11,6 +11,7 @@ Qtopia::UidGen OPimRecord::m_uidGen( Qtopia::UidGen::Qtopia );
 OPimRecord::OPimRecord( int uid )
     : Qtopia::Record() {
 
+    m_lastHit = -1;
     setUid( uid );
 }
 OPimRecord::~OPimRecord() {
@@ -24,6 +25,7 @@ OPimRecord::OPimRecord( const OPimRecord& rec )
 OPimRecord &OPimRecord::operator=( const OPimRecord& rec) {
     Qtopia::Record::operator=( rec );
     m_xrefman = rec.m_xrefman;
+    m_lastHit = rec.m_lastHit;
 
     return  *this;
 }
@@ -163,4 +165,10 @@ OPimXRefPartner OPimRecord::partner( QDataStream& stream ) {
     par.setField( i );
 
     return par;
+}
+void OPimRecord::setLastHitField( int lastHit )const {
+    m_lastHit = lastHit;
+}
+int OPimRecord::lastHitField()const{
+    return m_lastHit;
 }
