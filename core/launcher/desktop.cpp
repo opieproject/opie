@@ -136,8 +136,8 @@ void DesktopPowerAlerter::hideEvent( QHideEvent *e )
 
 
 
-DesktopApplication::DesktopApplication( int& argc, char **argv, Type t )
-    : QPEApplication( argc, argv, t )
+DesktopApplication::DesktopApplication( int& argc, char **argv, Type appType )
+    : QPEApplication( argc, argv, appType )
 {
 
     QTimer *t = new QTimer( this );

@@ -45,8 +45,8 @@
 
 const int block_size = 51200;
 
-TransferServer::TransferServer( Q_UINT16 port, QObject *parent = 0,
-        const char* name = 0)
+TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
+        const char* name )
     : QServerSocket( port, 1, parent, name )
 {
     if ( !ok() )
@@ -81,7 +81,7 @@ bool accessAuthorized(QHostAddress peeraddress)
     return ok;
 }
 
-ServerPI::ServerPI( int socket, QObject *parent = 0, const char* name = 0 )
+ServerPI::ServerPI( int socket, QObject *parent, const char* name )
     : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), waitsocket( 0 )
 {
     state = Connected;
@@ -852,7 +852,7 @@ void ServerPI::timerEvent( QTimerEvent * )
 }
 
 
-ServerDTP::ServerDTP( QObject *parent = 0, const char* name = 0)
+ServerDTP::ServerDTP( QObject *parent, const char* name )
   : QSocket( parent, name ), mode( Idle ), createTargzProc( 0 ),
 retrieveTargzProc( 0 ), gzipProc( 0 )
 {

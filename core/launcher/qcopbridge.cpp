@@ -33,7 +33,11 @@
 #include <qregexp.h>
 #include <qcopchannel_qws.h>
 
+// actually this is wrong, _XOPEN_SOURCE should get defined on the commandline
+// and it should have a proper value assigned. (Simon)
+#if !defined(_XOPEN_SOURCE)
 #define _XOPEN_SOURCE
+#endif
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -46,8 +50,8 @@
 
 const int block_size = 51200;
 
-QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent = 0,
-        const char* name = 0)
+QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
+        const char* name )
     : QServerSocket( port, 1, parent, name ),
       desktopChannel( 0 ),
       cardChannel( 0 )
@@ -169,7 +173,7 @@ void QCopBridge::timerEvent( QTimerEvent * )
 }
 
 
-QCopBridgePI::QCopBridgePI( int socket, QObject *parent = 0, const char* name = 0 )
+QCopBridgePI::QCopBridgePI( int socket, QObject *parent, const char* name )
     : QSocket( parent, name ) 
 {
     setSocket( socket );
