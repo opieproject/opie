@@ -42,6 +42,8 @@
 #include <mntent.h>
 #endif
 
+using namespace Opie;
+
 CardMonitor::CardMonitor( QWidget *parent ) : QWidget( parent ),
                                               pm( Resource::loadPixmap( "cardmon/pcmcia" ) ) {
 
@@ -128,7 +130,7 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 	    popUp( tr( "CF/PCMCIA card eject failed!" ) );
 	}
     } else if ( opt == 0 ) {
-        if ( ODevice::inst()->system() == OSYSTEM_Familiar ) {
+        if ( ODevice::inst()->system() == System_Familiar ) {
             cmd = "umount /dev/mmc/part1";
             err = system( ( const char *) cmd );
             if ( ( err != 0 ) ) {
