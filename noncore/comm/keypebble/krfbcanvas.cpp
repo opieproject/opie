@@ -36,7 +36,7 @@ KRFBCanvas::~KRFBCanvas()
 void KRFBCanvas::openConnection(KRFBServer server)
 {
 
-  
+
 		QCString host = server.hostname.latin1();
 		password=server.password;
 		connection_->connectTo( server);
@@ -46,12 +46,14 @@ void KRFBCanvas::openConnection(KRFBServer server)
 void KRFBCanvas::openURL( const QUrl &url )
 {
   if ( loggedIn_ ) {
-      owarn << "openURL invoked when logged in\n" << oendl; 
+      owarn << "openURL invoked when logged in\n" << oendl;
       return;
   }
 
   QCString host = url.host().latin1();
   int display = url.port();
+  Q_UNUSED( host )
+  Q_UNUSED( display )
 
 //  connection_->connectTo( host, display );
 }
@@ -78,7 +80,7 @@ void KRFBCanvas::bell()
 
 void KRFBCanvas::loggedIn()
 {
-  owarn << "Ok, we're logged in" << oendl; 
+  owarn << "Ok, we're logged in" << oendl;
 
   //
   // Get ready for action

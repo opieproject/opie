@@ -43,7 +43,7 @@ static char * menu_xpm[] = {
 
 const int StatusTextId = 0;
 
-KVNC::KVNC(  QWidget *parent, const char *name, WFlags f) : QMainWindow( 0, name ,WStyle_ContextHelp)
+KVNC::KVNC(  QWidget *parent, const char *name, WFlags ) : QMainWindow( parent, name ,WStyle_ContextHelp)
 {
     setCaption( tr("VNC Viewer") );
     fullscreen = false;

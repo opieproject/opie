@@ -49,7 +49,7 @@ int
 vncEncryptAndStorePasswd(char *passwd, char *fname)
 {
     FILE *fp;
-    int i;
+    uint i;
     unsigned char encryptedPasswd[8];
 
     if ((fp = fopen(fname,"w")) == NULL) return 1;
