@@ -38,7 +38,6 @@ public:
     unsigned long total;
     unsigned long used;
     unsigned long memfree;
-    unsigned long shared;
     unsigned long buffers;
     unsigned long cached;
     unsigned long realUsed;

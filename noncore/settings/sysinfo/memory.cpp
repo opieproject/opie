@@ -80,23 +80,56 @@ void MemoryInfo::updateData()
 
     if ( file.open( IO_ReadOnly ) )
     {
+        // local variables
+        QString line;
+        QString identifier;
+        QString value;
+        int position;
         QTextStream t( &file );
-        QString dummy = t.readLine();   // title
-        t >> dummy;
-        t >> total;
-        total /= 1000;
-        t >> used;
-        used /= 1000;
-        t >> memfree;
-        memfree /= 1000;
-        t >> shared;
-        shared /= 1000;
-        t >> buffers;
-        buffers /= 1000;
-        t >> cached;
-        cached /= 1000;
+
+        while ( !t.atEnd() )
+        {
+            // read a line
+            line = t.readLine();
+
+            // extract identifier and value from line
+            position = line.find( ":" );
+            identifier = line.left( position );
+            value = line.mid( position + 1, line.length() - position - 3 );
+            value = value.stripWhiteSpace();
+
+            // copy values in variables
+            if ( identifier == "MemTotal" )
+            {
+                total = value.toULong();
+            } else if ( identifier == "MemFree" )
+            {
+                memfree = value.toULong();
+            } else if ( identifier == "Buffers" )
+            {
+                buffers = value.toULong();
+            } else if ( identifier == "Cached" )
+            {
+                cached = value.toULong();
+            } else if ( identifier == "SwapCached" )
+            {
+            } else if ( identifier == "SwapTotal" )
+            {
+                swaptotal = value.toULong();
+            } else if ( identifier == "SwapFree" )
+            {
+                swapfree = value.toULong();
+            }
+        }
+
+        file.close();
+
+        // calculate values
+        used = total - memfree;
+        swapused = swaptotal - swapfree;
         realUsed = total - ( buffers + cached + memfree );
 
+        // visualize values
         totalMem->setText( tr( "Total Memory: %1 kB" ).arg( total ) );
         data->clear();
         data->addItem( tr("Used (%1 kB)").arg(realUsed), realUsed );
@@ -107,15 +140,6 @@ void MemoryInfo::updateData()
         graph->hide();
         graph->show();
         legend->update();
-
-        // swapfile
-        t >> dummy;
-        t >> swaptotal;
-        swaptotal /= 1000;
-        t >> swapused;
-        swapused /= 1000;
-        t >> swapfree;
-        swapfree /= 1000;
 
         if (swaptotal > 0)
         {
