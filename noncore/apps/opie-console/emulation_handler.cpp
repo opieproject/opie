@@ -43,7 +43,10 @@ EmulationHandler::~EmulationHandler() {
 void EmulationHandler::load( const Profile& prof) {
 
 //     m_teWid->setVTFont( font( prof.readNumEntry("Font")  )  );
-    m_teWid->setVTFont( QFont( prof.readEntry("Font"), prof.readNumEntry( "FontSize"  ), QFont::Normal  )  );
+    QFont font( prof.readEntry("Font"), prof.readNumEntry( "FontSize"  ), QFont::Normal  );
+    font.setFixedPitch( TRUE );
+    m_teWid->setVTFont( font );
+
     int num = prof.readNumEntry("Color");
     setColor( foreColor(num), backColor(num) );
     m_teWid->setBackgroundColor(backColor(num) );
