@@ -37,9 +37,7 @@
 #include <sys/stat.h>
 #include <stdlib.h> //getenv
 
-using Opie::OFileDialog;
-using Opie::OFileSelector;
-using Opie::OFontSelector;
+using namespace Opie::Ui;
 
 #if QT_VERSION < 300
 

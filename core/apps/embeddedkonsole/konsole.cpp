@@ -49,6 +49,7 @@
 #include "konsole.h"
 #include "commandeditdialog.h"
 
+using namespace Opie;
 class EKNumTabBar : public QTabBar
 {
 public:

@@ -30,7 +30,7 @@
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
 
-//#include <opie/ofileselector.h>
+//#include <opie2/ofileselector.h>
 
 #include <qmainwindow.h>
 #include <qmultilineedit.h>

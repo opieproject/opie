@@ -25,5 +25,6 @@
 
 
 /* --| main |------------------------------------------------------ */
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<Konsole> )
 
