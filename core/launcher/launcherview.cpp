@@ -111,6 +111,8 @@ private:
     iconstate_t m_EyeImageSet;
 };
 
+static bool s_IgnoreNextPix = false;
+
 LauncherItem::LauncherItem( QIconView *parent, AppLnk *applnk, bool bigIcon )
     : QIconViewItem( parent, applnk->name(),
            bigIcon ? applnk->bigPixmap() :applnk->pixmap() ),
@@ -141,7 +143,7 @@ LauncherItem::~LauncherItem()
 
 QPixmap*LauncherItem::pixmap()const
 {
-    if (m_EyeImage && m_EyeImageSet == BASE_ICON) {
+    if (m_EyeImage && m_EyeImageSet == BASE_ICON && s_IgnoreNextPix==false) {
         LauncherIconView* liv = (LauncherIconView*)iconView();
         liv->requestEyePix(this);
     }
@@ -294,7 +296,7 @@ LauncherIconView::LauncherIconView( QWidget* parent, const char* name )
     connect(&m_eyeTimer,SIGNAL(timeout()),this,SLOT(stopEyeTimer()));
     Config config( "Launcher" );
     config.setGroup( "GUI" );
-    setStaticBackgroundPicture( config.readBoolEntry( "StaticBackground", true ) );   
+    setStaticBackgroundPicture( config.readBoolEntry( "StaticBackground", true ) );
 }
 
 LauncherIconView::~LauncherIconView()
@@ -310,6 +312,20 @@ LauncherIconView::~LauncherIconView()
 #endif
 }
 
+void LauncherIconView::unsetPalette()
+{
+    s_IgnoreNextPix = true;
+    QIconView::unsetPalette();
+    s_IgnoreNextPix = false;
+}
+
+void LauncherIconView::setPalette(const QPalette & palette)
+{
+    s_IgnoreNextPix = true;
+    QIconView::setPalette(palette);
+    s_IgnoreNextPix = false;
+}
+
 void LauncherIconView::setStaticBackgroundPicture( bool enable )
 {
     staticBackground = enable;
@@ -322,8 +338,8 @@ void LauncherIconView::setStaticBackgroundPicture( bool enable )
     {
         setStaticBackground( false );
         verticalScrollBar()->setTracking( true );
-    }    
-}    
+    }
+}
 
 int LauncherIconView::compare(const AppLnk* a, const AppLnk* b)
 {
@@ -486,8 +502,8 @@ void LauncherIconView::checkCallback()
         m_EyeCallBack = new LauncherThumbReceiver();
         connect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&,int)),
             this,SLOT(setEyePixmap(const QPixmap&,const QString&,int)));
+        m_eyeTimer.changeInterval(600000);
     }
-    m_eyeTimer.changeInterval(600000);
 }
 
 void LauncherIconView::addCheckItem(AppLnk* app)
@@ -1208,8 +1224,10 @@ QDataStream &operator<<( QDataStream& s, const PixmapInfo& inf) {
 }
 
 LauncherThumbReceiver::LauncherThumbReceiver()
-    :QObject()
+    :QObject(),requestTimer(this)
 {
+
+    connect(&requestTimer,SIGNAL(timeout()),SLOT(sendRequest()));
     QCopChannel * chan = new QCopChannel( "QPE/opie-eye",this );
     connect(chan, SIGNAL(received(const QCString&,const QByteArray&)),
             this, SLOT(recieve(const QCString&,const QByteArray&)) );
@@ -1247,7 +1265,9 @@ void LauncherThumbReceiver::requestThumb(const QString&file,int width,int height
     rItem.width = width;
     rItem.height = height;
     m_inThumbNail.append(rItem);
-    QTimer::singleShot(2, this, SLOT(sendRequest()));
+    if (!requestTimer.isActive()) {
+        requestTimer.start(100,true);
+    }
 }
 
 void LauncherThumbReceiver::sendRequest()

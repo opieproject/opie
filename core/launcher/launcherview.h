@@ -153,6 +153,7 @@ signals:
     void sig_Thumbnail(const QPixmap&,const QString&,int);
 
 protected:
+    QTimer requestTimer;
     PixmapInfos m_inThumbNail;
 };
 
@@ -213,6 +214,9 @@ public:
     void requestEyePix(const LauncherItem*which);
 
     static QMap<QString,QPixmap>* sm_EyeCache;
+
+    virtual void setPalette(const QPalette & palette);
+    virtual void unsetPalette();
 
 protected:
     virtual void timerEvent( QTimerEvent *te );
