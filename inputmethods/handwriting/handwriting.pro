@@ -26,7 +26,7 @@ INTERFACES = qimpenprefbase.ui
 TARGET		= qhandwriting
 DESTDIR		= ../../plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH      += ../$(OPIEDIR)/include ../../taskbar
+DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
