@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.22 2004-07-14 07:17:17 llornkcor Exp $
+** $Id: zsafe.cpp,v 1.23 2004-07-14 08:38:10 llornkcor Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -803,8 +803,8 @@ void ZSafe::editPwd()
 #else
        dialog->showMaximized();
 #endif
-       int result = dialog->exec();
 #ifdef DESKTOP
+       int result = dialog->exec();
 //       result = QDialog::Accepted;
 #endif
        if (result == Accepted)
