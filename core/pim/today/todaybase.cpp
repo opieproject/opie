@@ -25,7 +25,10 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp ) {
 
   QPixmap logo = Resource::loadPixmap( "today/today_logo"); // logo
-  QPixmap opiezilla = Resource::loadPixmap("today/opiezilla" ); //the opiezilla
+  QImage  opiezillaimage = QImage( Resource::loadImage("logo/opielogo" ) );
+  opiezillaimage = opiezillaimage.smoothScale( 45, 45 );
+  QPixmap opiezilla; //the opiezilla
+  opiezilla.convertFromImage( opiezillaimage );
   QPixmap config = Resource::loadPixmap( "SettingsIcon" );  // config icon
 
   layout = 0L;
