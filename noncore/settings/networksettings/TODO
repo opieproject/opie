@@ -1,10 +1,6 @@
 Write a class that parses /proc and not ifconfig
+WLAN needs to be re-written to not use Config
+remove WLAN Config item
 
 [ ] Wlanmodule needs to check if an interface supports wireless
     extensions.
-[x] When you set options in wlanmodule, hit OK, it exits all of
-    networksetup, doesnt bring you back to the main screen.
-[x] Wlanmodule isnt writing out wireless.opts
-[ ] Need a means of bringing an interface up and down (calling
-    out ifup/ifdown) from the gui.
-    -Ben- Click information, then click up or down... :-D

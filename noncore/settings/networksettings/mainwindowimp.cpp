@@ -32,6 +32,7 @@
 #define TEMP_ALL "/tmp/ifconfig-a"
 #define TEMP_UP "/tmp/ifconfig"
 
+#define SCHEME "/var/lib/pcmcia/scheme"
 MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true), advancedUserMode(false){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
@@ -53,7 +54,22 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   profiles = QStringList::split(" ", cfg.readEntry("Profiles", "All"));
   for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
     profilesList->insertItem((*it));  
+  currentProfileLabel->setText(cfg.readEntry("CurrentProfile", "All"));
   advancedUserMode = cfg.readBoolEntry("AdvancedUserMode", false);
+
+  QFile file(SCHEME);
+  if ( file.open(IO_ReadOnly) ) {    // file opened successfully
+    QTextStream stream( &file );        // use a text stream
+    while ( !stream.eof() ) {        // until end of file...
+      QString line = stream.readLine();       // line of text excluding '\n'
+      if(line.contains("SCHEME")){
+        line = line.mid(7, line.length());
+	currentProfileLabel->setText(line);
+	break;
+      }
+    }
+    file.close();
+  }
 }
 
 /**
@@ -61,11 +77,10 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
  */
 MainWindowImp::~MainWindowImp(){
   // Save profiles.
-  if(profiles.count() > 1){
-    Config cfg("NetworkSetup");
-    cfg.setGroup("General");
-    cfg.writeEntry("Profiles", profiles.join(" "));
-  }
+  Config cfg("NetworkSetup");
+  cfg.setGroup("General");
+  cfg.writeEntry("Profiles", profiles.join(" "));
+  
   // Delete Modules and Libraries
   QMap<Module*, QLibrary*>::Iterator it;
   for( it = libraries.begin(); it != libraries.end(); ++it ){
@@ -205,15 +220,23 @@ void MainWindowImp::configureClicked(){
     QMessageBox::information(this, "Error","Please select an interface.", QMessageBox::Ok);
     return;
   } 
- 
+
+  QString currentProfile = currentProfileLabel->text();
+  if(profilesList->count() <= 1 || currentProfile == "All"){
+    currentProfile = "";
+  }
+  
   Interface *i = interfaceItems[item];
   if(i->getModuleOwner()){
+    i->getModuleOwner()->setProfile(currentProfileLabel->text());
     QTabWidget *tabWidget = NULL;
     QWidget *moduleConfigure = i->getModuleOwner()->configure(&tabWidget);
     if(moduleConfigure != NULL){
       if(tabWidget != NULL){
 	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, true);
-        tabWidget->insertTab(configure, "TCP/IP");
+        configure->setProfile(currentProfileLabel->text());
+	tabWidget->insertTab(configure, "TCP/IP");
+      
       }
       moduleConfigure->showMaximized();
       moduleConfigure->show();
@@ -222,6 +245,7 @@ void MainWindowImp::configureClicked(){
   }
   
   InterfaceSetupImp *configure = new InterfaceSetupImp(0, "InterfaceSetupImp", i, true);
+  configure->setProfile(currentProfileLabel->text());
   configure->showMaximized();
   configure->show();
 }
@@ -244,6 +268,12 @@ void MainWindowImp::informationClicked(){
     QMessageBox::information(this, "Error","No information about\na disconnected interface.", QMessageBox::Ok);
     return;
   }
+
+  QStringList list;
+  for(uint i = 0; i < profilesList->count(); i++){
+    list.append(profilesList->text(i));
+  }
+	  
   if(i->getModuleOwner()){
     QTabWidget *tabWidget = NULL;
     QWidget *moduleInformation = i->getModuleOwner()->information(&tabWidget);
@@ -320,7 +350,7 @@ void MainWindowImp::jobDone(KProcess *process){
         if(macAddress == -1)
           macAddress = line.length();
         if(hardwareName != -1)
-          i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)) + QString(" (%1)").arg(i->getInterfaceName()));
+          i->setHardwareName(line.mid(hardwareName+11, macAddress-(hardwareName+11)) );
       
         interfaceNames.insert(i->getInterfaceName(), i);
         updateInterface(i);
@@ -349,7 +379,7 @@ void MainWindowImp::jobDone(KProcess *process){
       if(!found){
         Interface *i = new Interface(this, *ni, false);
 	i->setAttached(false);
-	i->setHardwareName(QString("Disconnected (%1)").arg(*ni));
+	i->setHardwareName("Disconnected");
 	interfaceNames.insert(i->getInterfaceName(), i);
 	updateInterface(i);
       	connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
@@ -406,7 +436,8 @@ void MainWindowImp::updateInterface(Interface *i){
   
   item->setPixmap(1, (Resource::loadPixmap(typeName)));
   item->setText(2, i->getHardwareName());
-  item->setText(3, (i->getStatus()) ? i->getIp() : QString(""));
+  item->setText(3, QString("(%1)").arg(i->getInterfaceName()));
+  item->setText(4, (i->getStatus()) ? i->getIp() : QString(""));
 }
 
 void MainWindowImp::newProfileChanged(const QString& newText){
@@ -437,17 +468,27 @@ void MainWindowImp::addProfile(){
  */
 void MainWindowImp::removeProfile(){
   if(profilesList->count() <= 1){
-    QMessageBox::information(this, "Can't remove anything.","Need One Profile.", "Ok");
+    QMessageBox::information(this, "Can't remove.","At least one profile\nis needed.", "Ok");
     return;
   }
   QString profileToRemove = profilesList->currentText();
+  if(profileToRemove == "All"){
+    QMessageBox::information(this, "Can't remove.","Can't remove default.", "Ok");
+    return;
+  }
+  // Can't remove the curent profile
+  if(profileToRemove == currentProfileLabel->text()){
+    QMessageBox::information(this, "Can't remove.",QString("%1 is the current profile.").arg(profileToRemove), "Ok");
+    return;
+
+  }
+  
   if(QMessageBox::information(this, "Question",QString("Remove profile: %1").arg(profileToRemove), QMessageBox::Ok, QMessageBox::Cancel) == QMessageBox::Ok){
     profiles = QStringList::split(" ", profiles.join(" ").replace(QRegExp(profileToRemove), ""));
     profilesList->clear();
     for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
       profilesList->insertItem((*it));
   }
-
 }
 
 /**
@@ -455,7 +496,29 @@ void MainWindowImp::removeProfile(){
  * @param newProfile the new profile.
  */ 
 void MainWindowImp::changeProfile(){
-  currentProfileLabel->setText(profilesList->text(profilesList->currentItem()));
+  if(profilesList->currentItem() == -1){
+    QMessageBox::information(this, "Can't Change.","Please select a profile.", "Ok");
+    return;
+  }
+  QString newProfile = profilesList->text(profilesList->currentItem());
+  if(newProfile != currentProfileLabel->text()){
+    currentProfileLabel->setText(newProfile);
+    QFile file(SCHEME);
+    if ( file.open(IO_ReadWrite) ) {
+      QTextStream stream( &file );
+      stream << QString("SCHEME=%1").arg(newProfile);
+      file.close();
+    }
+    // restart all up devices?
+    if(QMessageBox::information(this, "Question","Restart all running interfaces?", QMessageBox::Ok, QMessageBox::No) == QMessageBox::Ok){
+      // Go through them one by one
+      QMap<Interface*, QListViewItem*>::Iterator it;
+      for( it = items.begin(); it != items.end(); ++it ){
+        if(it.key()->getStatus() == true)
+          it.key()->restart();
+      }
+    }
+  }
 }
 
 // mainwindowimp.cpp

@@ -32,7 +32,7 @@ QString WLANModule::getPixmapName(Interface* ){
  */ 
 bool WLANModule::isOwner(Interface *i){
   if(i->getInterfaceName() == "eth0" || i->getInterfaceName() == "wlan0"){
-    i->setHardwareName(QString("802.11b (%1)").arg(i->getInterfaceName()));
+    i->setHardwareName("802.11b");
     return true;
   }
   return false;

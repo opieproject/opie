@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>230</width>
+            <width>240</width>
             <height>289</height>
         </rect>
     </property>
@@ -61,7 +61,7 @@
                         <column>
                             <property>
                                 <name>text</name>
-                                <string>i</string>
+                                <string>s</string>
                             </property>
                             <property>
                                 <name>clickable</name>
@@ -90,6 +90,20 @@
                             <property>
                                 <name>text</name>
                                 <string>Name</string>
+                            </property>
+                            <property>
+                                <name>clickable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property>
+                                <name>resizeable</name>
+                                <bool>true</bool>
+                            </property>
+                        </column>
+                        <column>
+                            <property>
+                                <name>text</name>
+                                <string>in</string>
                             </property>
                             <property>
                                 <name>clickable</name>

@@ -43,7 +43,7 @@ public:
   bool removeAllInterfaceOptions();
   
   bool setMapping(QString interface);
-  void addMapping(QString interfaces);
+  void addMapping(QString options);
   bool setMap(QString map, QString value);
   QString getMap(QString map, bool &error);
   bool setScript(QString);

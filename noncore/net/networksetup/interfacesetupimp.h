@@ -14,13 +14,14 @@ public:
 
 protected slots:
   void accept();
-  void changeProfile(const QString &profile);
+
+public slots:
+  void setProfile(const QString &profile);
 
 private:
   bool saveSettings();
   Interfaces *interfaces;
   Interface *interface;
-  QString currentInterfaceName;
 
 };
 

@@ -18,7 +18,7 @@
     <property stdset="1">
         <name>maximumSize</name>
         <size>
-            <width>320</width>
+            <width>240</width>
             <height>32767</height>
         </size>
     </property>
@@ -189,7 +189,7 @@
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>GroupBox2</cstring>
+                <cstring>dhcpInformation</cstring>
             </property>
             <property stdset="1">
                 <name>title</name>

@@ -3,6 +3,7 @@
 
 #include <qpushbutton.h>
 #include <qlabel.h>
+#include <qgroupbox.h>
 #include <assert.h>
 
 /**
@@ -59,6 +60,8 @@ void InterfaceInformationImp::advanced(){
   a->dhcpServerLabel->setText(interface->getDhcpServerIp());
   a->leaseObtainedLabel->setText(interface->getLeaseObtained());
   a->leaseExpiresLabel->setText(interface->getLeaseExpires());
+  a->dhcpInformation->setEnabled(interface->isDhcp());
+	 
   a->showMaximized();
   a->show();
 }

@@ -22,7 +22,6 @@ InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interfac
   assert(i);
   interface = i;
   interfaces = new Interfaces();
-  changeProfile(profileCombo->currentText());
   bool error = false;
   if(interfaces->getInterfaceMethod(error) == INTERFACES_LOOPBACK){
     staticGroupBox->hide();
@@ -30,7 +29,6 @@ InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interfac
     leaseTime->hide();
     leaseHoursLabel->hide();
   }
-  connect(profileCombo, SIGNAL(highlighted(const QString &)), this, SLOT(changeProfile(const QString &)));
 }
 
 /**
@@ -90,35 +88,34 @@ bool InterfaceSetupImp::saveSettings(){
  * The Profile has changed.
  * @profile the new profile.
  */ 
-void InterfaceSetupImp::changeProfile(const QString &profile){
-  QString newInterfaceName;
-  if(profile.lower() == "all")
-    newInterfaceName = interface->getInterfaceName();
-  else
-    newInterfaceName = interface->getInterfaceName() + "_" + profile;
-  if(newInterfaceName == currentInterfaceName)
-    return;
-  else{
-    saveSettings();
-    currentInterfaceName = newInterfaceName;
-  }
-  bool error = interfaces->setInterface(currentInterfaceName);
+void InterfaceSetupImp::setProfile(const QString &profile){
+  QString newInterfaceName = interface->getInterfaceName() + profile;
   
   // See if we have to make a interface.
-  if(error){
-    qDebug("InterfaceSetupImp: Adding a new interface from profile change.");
-    interfaces->addInterface(currentInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
-    error = interfaces->setInterface(currentInterfaceName);
-    if(error){
+  if(!interfaces->setInterface(newInterfaceName)){
+    interfaces->addInterface(newInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
+    if(!interfaces->setInterface(newInterfaceName)){
       qDebug("InterfaceSetupImp: Added interface, but still can't set.");
       return;	      
     }
+    // Add making for this new interface if need too
+    if(profile != ""){
+      if(!interfaces->setMapping(interface->getInterfaceName())){
+        interfaces->addMapping(interface->getInterfaceName());
+        if(!interfaces->setMapping(interface->getInterfaceName())){
+	  qDebug("InterfaceSetupImp: Added Mapping, but still can't set.");
+          return;
+	}
+      }
+      interfaces->setScript("getprofile.sh");
+      interfaces->setMap("map", newInterfaceName);
+    }
   }
   
-  //qDebug( currentInterfaceName.latin1() );
   // We must have a valid interface to get this far so read some settings.
   
   // DHCP
+  bool error = false;
   if(interfaces->getInterfaceMethod(error) == INTERFACES_METHOD_DHCP)
     dhcpCheckBox->setChecked(true);
   else

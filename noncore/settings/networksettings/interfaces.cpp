@@ -345,9 +345,9 @@ bool Interfaces::setMapping(QString interface){
  * Adds a new Mapping to the interfaces file with interfaces.
  * @param interface the name(s) of the interfaces to set to this mapping
  */ 
-void Interfaces::addMapping(QString interfaces){
+void Interfaces::addMapping(QString option){
   interfaces.append("");
-  interfaces.append(QString(MAPPING " %1").arg(interfaces));
+  interfaces.append(QString(MAPPING " %1").arg(option));
 }
 
 /**
@@ -404,11 +404,12 @@ bool Interfaces::setStanza(QString stanza, QString option, QStringList::Iterator
       if(found == true){
         qDebug(QString("Interfaces: Found multiple stanza's for search: %1 %2").arg(stanza).arg(option).latin1());
       }
+      qDebug("Found");
       found = true;
       iterator = it;
     }
   }
-  return !found;
+  return found;
 }
 
 /**
@@ -428,9 +429,10 @@ bool Interfaces::setOption(QStringList::Iterator start, QString option, QString 
         // Got to the end of the stanza without finding it, so append it.
         interfaces.insert(--it, QString("\t%1 %2").arg(option).arg(value));
       }
+      found = true;
       break;
     }
-    if((*it).contains(option)){
+    if((*it).contains(option) && it != start){
       // Found it in stanza so replace it.
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
@@ -441,7 +443,12 @@ bool Interfaces::setOption(QStringList::Iterator start, QString option, QString 
         (*it) = QString("\t%1 %2").arg(option).arg(value);
     }
   }
-  return true;
+  if(!found){
+    QStringList::Iterator p = start;
+    interfaces.insert(++p, QString("\t%1 %2").arg(option).arg(value));
+    found = true;
+  }
+  return found;
 }
 
 /**

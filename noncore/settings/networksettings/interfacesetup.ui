@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>267</width>
+            <width>276</width>
             <height>280</height>
         </rect>
     </property>
@@ -38,68 +38,6 @@
                 <name>text</name>
                 <string>Automaticly bring up</string>
             </property>
-        </widget>
-        <widget>
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout8</cstring>
-            </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel1</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Profile</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>All</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>profileCombo</cstring>
-                    </property>
-                </widget>
-                <spacer>
-                    <property>
-                        <name>name</name>
-                        <cstring>Spacer20</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>orientation</name>
-                        <enum>Horizontal</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>sizeType</name>
-                        <enum>Expanding</enum>
-                    </property>
-                    <property>
-                        <name>sizeHint</name>
-                        <size>
-                            <width>20</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </spacer>
-            </hbox>
         </widget>
         <widget>
             <class>QLayoutWidget</class>
@@ -154,7 +92,7 @@
                     </property>
                     <property stdset="1">
                         <name>maxValue</name>
-                        <number>336</number>
+                        <number>87600</number>
                     </property>
                     <property stdset="1">
                         <name>minValue</name>
@@ -162,7 +100,7 @@
                     </property>
                     <property stdset="1">
                         <name>value</name>
-                        <number>24</number>
+                        <number>168</number>
                     </property>
                 </widget>
             </hbox>
@@ -198,13 +136,6 @@
                     <name>spacing</name>
                     <number>6</number>
                 </property>
-                <widget row="3"  column="1" >
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>firstDNSLineEdit</cstring>
-                    </property>
-                </widget>
                 <widget row="1"  column="0" >
                     <class>QLabel</class>
                     <property stdset="1">
@@ -248,13 +179,6 @@
                         <string>First DNS</string>
                     </property>
                 </widget>
-                <widget row="4"  column="1" >
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>secondDNSLineEdit</cstring>
-                    </property>
-                </widget>
                 <widget row="0"  column="0" >
                     <class>QLabel</class>
                     <property stdset="1">
@@ -286,6 +210,20 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Second DNS</string>
+                    </property>
+                </widget>
+                <widget row="3"  column="1" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>firstDNSLineEdit</cstring>
+                    </property>
+                </widget>
+                <widget row="4"  column="1" >
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>secondDNSLineEdit</cstring>
                     </property>
                 </widget>
             </grid>
@@ -335,7 +273,6 @@
 </connections>
 <tabstops>
     <tabstop>autoStart</tabstop>
-    <tabstop>profileCombo</tabstop>
     <tabstop>dhcpCheckBox</tabstop>
     <tabstop>leaseTime</tabstop>
     <tabstop>ipAddressEdit</tabstop>
