@@ -302,14 +302,32 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
 
         } else if (qkeycode == Qt::Key_Control) {
-            ctrl = keys->pressedPtr(row, col);
-            need_repaint = TRUE;
-            *ctrl = !keys->pressed(row, col);
+
+            if (ctrl) {
+
+                *ctrl = 0;
+                ctrl = 0;
+
+            } else {
+
+                ctrl = keys->pressedPtr(row, col);
+                need_repaint = TRUE;
+                *ctrl = !keys->pressed(row, col);
+
+            }
 
         } else if (qkeycode == Qt::Key_Alt) {
-            alt = keys->pressedPtr(row, col);
-            need_repaint = TRUE;
-            *alt = !keys->pressed(row, col);
+
+            if (alt) {
+                *alt = 0;
+                alt = 0;
+
+            } else {
+
+                alt = keys->pressedPtr(row, col);
+                need_repaint = TRUE;
+                *alt = !keys->pressed(row, col);
+            }
 
         } else if (qkeycode == Qt::Key_Shift) {
             need_repaint = TRUE;
