@@ -41,7 +41,7 @@ void PackageListRemote::update()
   cmd += "&query="+searchString;           	
   cmd += "\"";
 
-  pvDebug(2,"search :"+cmd);
+  pvDebug(4,"search :"+cmd);
   r = system(cmd.latin1());
   readFileEntries( redirect );
 }

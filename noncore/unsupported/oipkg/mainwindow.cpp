@@ -236,12 +236,14 @@ void MainWindow::makeMenu()
 
 MainWindow::~MainWindow()
 {
+	pvDebug(7,"MainWindow::~MainWindow ");	
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "gui" );
   cfg.writeEntry( "findBar", !findBar->isHidden() );
   cfg.writeEntry( "searchBar", !searchBar->isHidden() );
   cfg.writeEntry( "sectionBar", !sectionBar->isHidden() );
   cfg.writeEntry( "destBar", !destBar->isHidden() );
+	pvDebug(7,"MainWindow::~MainWindow ");	
 	
 }
 
@@ -250,7 +252,8 @@ void MainWindow::runIpkg()
   packageListServers.allPackages();
   ipkg->loadList( packageListSearch );
   ipkg->loadList( packageListDocLnk );
-  ipkg->commit( packageListServers );
+  ipkg->loadList( packageListServers );
+  ipkg->commit();
   // ##### If we looked in the list of files, we could send out accurate
   // ##### messages. But we don't bother yet, and just do an "all".
   QCopEnvelope e("QPE/System", "linkChanged(QString)");

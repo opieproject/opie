@@ -58,6 +58,7 @@ PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* na
   destinationurlDic.setAutoDelete(TRUE);
   readSettings();
 	activeLinkDestination->hide();
+  serverChanged = false;
 }
 
 PackageManagerSettings::~PackageManagerSettings()
@@ -119,7 +120,7 @@ void PackageManagerSettings::editServer(int i)
   serverurl->setText( *serverurlDic[i] );
 
   editedserver = i;
-
+  serverChanged = true;
   connect( servername, SIGNAL(textChanged(const QString&)), this, SLOT(serverNameChanged(const QString&)) );
   connect( serverurl, SIGNAL(textChanged(const QString&)), this, SLOT(serverUrlChanged(const QString&)) );
   changed = true;
@@ -134,8 +135,9 @@ void PackageManagerSettings::editDestination(int i)
   } else {
     destinationname->setEnabled(TRUE);
     destinationurl->setEnabled(TRUE);
-    createLinksButton->setEnabled(TRUE);
-    removeLinksButton->setEnabled(TRUE);
+ 	//since it does not work anyway
+//    createLinksButton->setEnabled(TRUE);
+//    removeLinksButton->setEnabled(TRUE);
   }
 
   destinationname->setText( destinations->text(i) );
@@ -184,9 +186,9 @@ void PackageManagerSettings::serverNameChanged(const QString& t)
   disconnect( servers, SIGNAL(highlighted(int)), this, SLOT(editServer(int)) );
   servers->changeItem( t, editedserver );
   activeServers->changeItem( t, editedserver );
-  changed = true;
   connect( servers, SIGNAL(highlighted(int)), this, SLOT(editServer(int)) );
   changed = true;
+  serverChanged = true;
 }
 
 void PackageManagerSettings::destNameChanged(const QString& t)
@@ -203,6 +205,7 @@ void PackageManagerSettings::serverUrlChanged(const QString& t)
 {
   serverurlDic.replace(editedserver, new QString(t));
   changed = true;
+  serverChanged = true;
 }
 
 void PackageManagerSettings::destUrlChanged(const QString& t)

@@ -55,6 +55,7 @@ private:
   int currentSetting;
   int installationSettingsCount;
   bool changed;
+  bool serverChanged;
 
   bool readIpkgConfig(const QString&);
   void writeIpkgConfig(const QString&);

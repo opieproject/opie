@@ -9,6 +9,7 @@
 #include "pksettings.h"
 #include "runwindow.h"
 #include "packagelist.h"
+#include "installdialog.h"
 #include "debug.h"
 
 #define createLink 0
@@ -24,7 +25,7 @@ public:
 
   int linkOpp;
   void loadList( PackageList );
-  void commit( PackageList );
+  void commit();
   void update();
   void showButtons(bool b=true);
   void show( bool buttons=true );
@@ -39,13 +40,11 @@ public slots:
   void removeLinks( const QString &dest );
 
 private:
-//	int sizecount;
   PackageManagerSettings* settings;
   RunWindow *runwindow;
-  QDialog *installDialog;
+  InstallDialog *installDialog;
   QList<Package> to_remove;
   QList<Package> to_install;
-//  bool runwindowopen;
   QString fileNameToInstall;
   QCheckBox *_force_reinstall;
   QCheckBox *_force_remove;
