@@ -23,6 +23,7 @@ private slots:
         void doTabChanged();
 	void doSMSStoreChanged();
 	void doSMSTypeChanged();
+	void doSelectedSMSChanged(QListViewItem *);
 
 private:
  static const speed_t baudrates[];

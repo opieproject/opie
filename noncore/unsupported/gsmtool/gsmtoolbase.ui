@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>309</width>
+            <width>371</width>
             <height>390</height>
         </rect>
     </property>
@@ -666,6 +666,10 @@
                                 <vsizetype>7</vsizetype>
                             </sizepolicy>
                         </property>
+                        <property stdset="1">
+                            <name>allColumnsShowFocus</name>
+                            <bool>true</bool>
+                        </property>
                     </widget>
                     <widget>
                         <class>QLayoutWidget</class>
@@ -739,7 +743,7 @@
                     <name>title</name>
                     <string>SMS</string>
                 </attribute>
-                <vbox>
+                <grid>
                     <property stdset="1">
                         <name>margin</name>
                         <number>11</number>
@@ -748,7 +752,7 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget>
+                    <widget row="0"  column="0" >
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
@@ -823,22 +827,8 @@
                             </widget>
                         </hbox>
                     </widget>
-                    <widget>
+                    <widget row="1"  column="0" >
                         <class>QListView</class>
-                        <column>
-                            <property>
-                                <name>text</name>
-                                <string>Date</string>
-                            </property>
-                            <property>
-                                <name>clickable</name>
-                                <bool>true</bool>
-                            </property>
-                            <property>
-                                <name>resizeable</name>
-                                <bool>true</bool>
-                            </property>
-                        </column>
                         <column>
                             <property>
                                 <name>text</name>
@@ -853,12 +843,34 @@
                                 <bool>true</bool>
                             </property>
                         </column>
+                        <column>
+                            <property>
+                                <name>text</name>
+                                <string>Date</string>
+                            </property>
+                            <property>
+                                <name>clickable</name>
+                                <bool>true</bool>
+                            </property>
+                            <property>
+                                <name>resizeable</name>
+                                <bool>true</bool>
+                            </property>
+                        </column>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>SMSList</cstring>
                         </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>allColumnsShowFocus</name>
+                            <bool>true</bool>
+                        </property>
                     </widget>
-                    <widget>
+                    <widget row="2"  column="0" >
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
@@ -911,14 +923,26 @@
                             </widget>
                         </hbox>
                     </widget>
-                    <widget>
-                        <class>QTextBrowser</class>
+                    <widget row="3"  column="0" >
+                        <class>QMultiLineEdit</class>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>SMSText</cstring>
                         </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>wordWrap</name>
+                            <enum>WidgetWidth</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>readOnly</name>
+                            <bool>true</bool>
+                        </property>
                     </widget>
-                </vbox>
+                </grid>
             </widget>
         </widget>
     </vbox>

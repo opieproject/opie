@@ -6,6 +6,8 @@
 #include <qtabwidget.h>
 #include <qlistview.h>
 #include <qtextbrowser.h>
+#include <qmultilineedit.h>
+
 #include <termios.h>
 
 #include <gsmlib/gsm_me_ta.h>
@@ -33,7 +35,7 @@ GSMTool::GSMTool( QWidget* parent,  const char* name, WFlags fl )
 	connect(TabWidget2, SIGNAL(currentChanged(QWidget *)), this, SLOT(doTabChanged()));
 	connect(SMSStoreList, SIGNAL(activated(int)), this, SLOT(doSMSStoreChanged()));
 	connect(SMSViewType, SIGNAL(activated(int)), this, SLOT(doSMSTypeChanged()));
-
+	connect(SMSList, SIGNAL(selectionChanged(QListViewItem *)), this, SLOT(doSelectedSMSChanged(QListViewItem *)));
 	timerid = -1; // Is this not possible normally? 
 }
 
@@ -139,7 +141,9 @@ void GSMTool::doSMSStoreChanged()
 {
 	const char *storename = SMSStoreList->currentText().ascii();
 	qDebug("Store Changed to '%s'", storename);
-	try {
+	if (!strcmp(storename, "None")) {
+		sms_store = NULL;
+	} else try {
 		sms_store = me->getSMSStore(storename);
 
 		qDebug("got store of size %d", sms_store->size());
@@ -147,6 +151,8 @@ void GSMTool::doSMSStoreChanged()
 		sms_store = NULL;
 		qDebug("get store failed");
 	}
+	
+	SMSList->setEnabled(!(sms_store == NULL));
 	doSMSTypeChanged();
 }
 
@@ -156,6 +162,8 @@ void GSMTool::doSMSTypeChanged()
 	qDebug("direction %s\n", direction?"outgoing":"incoming");
 
 	SMSList->clear();
+	doSelectedSMSChanged(NULL);
+
 	if (sms_store == NULL)
 		return;
 	for (int i = 0; i < sms_store->size(); i++) {
@@ -168,16 +176,45 @@ void GSMTool::doSMSTypeChanged()
 		SMSMessageRef message = sms_store()[i].message();
 		qDebug("Got message.");
 		
-#if 0 // WTF does this die? Did I mention that gsmlib needs rewriting in a sane language?
-		qDebug(message->toString().c_str());
+		//		qDebug(message->toString().c_str());
 		if (direction == message->messageType()) {
 			qDebug("yes\n");
-			new QListViewItem(SMSList, "xx", message->address()._number.c_str());
-		} else qDebug("no. dir %d, type %d\n", direction, message->messageType());
-#endif
+			char buf[3];
+			snprintf(buf, 3,  "%d", i);
+			new QListViewItem(SMSList, message->address()._number.c_str(), message->serviceCentreTimestamp().toString().c_str(), buf);
+		} 
 	}		
 }
 
+void GSMTool::doSelectedSMSChanged(QListViewItem *item)
+{
+	qDebug("message changed\n");
+
+	if (!item || sms_store == NULL) {
+		SMSText->setText("");
+		SMSText->setEnabled(FALSE);
+		SMSDeleteButton->setEnabled(FALSE);
+		SMSSendButton->setEnabled(FALSE);
+		return;
+	}
+	/* ARGH. This sucks. Surely there's an app-private pointer in the
+	   QListViewItem that I've failed to notice? 
+
+	SMSMessageRef message = *(SMSMessageRef*)item->private;   
+	*/
+	qDebug("item %p\n", item);
+
+	qDebug("text(2) is %s\n", item->text(2).ascii());
+	int index = atoi(item->text(2).ascii());
+	qDebug("index %d\n", index);
+	SMSMessageRef message = sms_store()[index].message();
+
+	SMSText->setText(message->userData().c_str());
+	SMSText->setEnabled(TRUE);
+	SMSDeleteButton->setEnabled(TRUE);
+	SMSSendButton->setEnabled(TRUE);
+
+}
 void GSMTool::doScanButton()
 {
 	qDebug("ScanButton");
