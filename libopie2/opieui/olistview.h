@@ -38,97 +38,84 @@
 
 class OListViewItem;
 
+/*======================================================================================
+ * OListView
+ *======================================================================================*/
+
 /**
+ * @brief A list/tree widget.
+ *
  * A @ref QListView variant featuring visual and functional enhancements
  * like an alternate background for odd rows, an autostretch mode
  * for the width of the widget ( >= Qt 3 only ) and persistence capabilities.
  *
  * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
- * @short OListView list/tree widget.
  */
- class OListView: public QListView
+class OListView: public QListView
 {
   public:
    /**
     * Constructor.
     *
-    * The parameters @p parent and @p name are handled by
+    * The parameters @a parent and @a name are handled by
     * @ref QListView, as usual.
     */
-    OListView ( QWidget *parent = 0, const char *name = 0 );
-
+    OListView( QWidget* parent = 0, const char* name = 0 );
    /**
     * Destructor.
     */
     virtual ~OListView();
-
    /**
     * Let the last column fit exactly all the available width.
     */
     void setFullWidth( bool fullWidth );
-
    /**
     * Returns whether the last column is set to fit the available width.
     */
     bool fullWidth() const;
-
    /**
     * Reimplemented for full width support
     */
     virtual int addColumn( const QString& label, int width = -1 );
-
    /**
     * Reimplemented for full width support
     */
     virtual int addColumn( const QIconSet& iconset, const QString& label, int width = -1 );
-
    /**
     * Reimplemented for full width support
     */
     virtual void removeColumn(int index);
-
    /**
-    * sets the alternate background background color.
+    * Set the alternate background background @a color.
+    * Set to an invalid color to disable alternate colors.
     * This only has an effect if the items are OListViewItems
-    *
-    * @param c the color to use for every other item. Set to an invalid
-    *        color to disable alternate colors.
     */
-    void setAlternateBackground( const QColor &c );
+    void setAlternateBackground( const QColor& color );
+   /**
+    * Sets the column separator @a pen.
+    */
+    void setColumnSeparator( const QPen& pen );
 
    /**
-    * sets the column separator pen.
-    *
-    * @param p the pen used to draw the column separator.
-    */
-    void setColumnSeparator( const QPen &p );
-
-   /**
-    * @return the alternate background color
+    * @returns the alternate background color
     */
     const QColor& alternateBackground() const;
-
    /**
     * @return the column separator pen
     */
     const QPen& columnSeparator() const;
-
    /**
-    * create a list view item as child of this object
-    * @return the new object
+    * Create a list view item as child of this object
+    * @returns the new object
     */
     virtual OListViewItem* childFactory();
-
 #ifndef QT_NO_DATASTREAM
    /**
-    * serialize this object to a @ref QDataStream
-    * @param s the stream used to serialize this object.
+    * Serialize this object to @ref QDataStream @a stream
     */
-    virtual void serializeTo( QDataStream& s ) const;
-
+    virtual void serializeTo( QDataStream& stream ) const;
    /**
-    * serialize this object from a @ref QDataStream
-    * @param s the stream used to serialize this object.
+    * Serialize this object from a @ref QDataStream @a stream
     */
     virtual void serializeFrom( QDataStream& s );
 #endif
@@ -141,22 +128,27 @@ class OListViewItem;
 
 #ifndef QT_NO_DATASTREAM
 /**
-  * \relates QListView
-  * Writes a listview to the stream and returns a reference to the stream.
+  * @relates OListView
+  * Writes @a listview to the @a stream and returns a reference to the stream.
   */
-QDataStream& operator<<( QDataStream& s, const OListView& lv );
+QDataStream& operator<<( QDataStream& stream, const OListView& listview );
 /**
-  * \relates QListView
-  * Reads a listview from the stream and returns a reference to the stream.
+  * @relates OListView
+  * Reads @a listview from the @a stream and returns a reference to the stream.
   */
-QDataStream& operator>>( QDataStream& s, OListView& lv );
+QDataStream& operator>>( QDataStream& stream, OListView& listview );
 #endif // QT_NO_DATASTREAM
 
-//****************************** OListViewItem ******************************************************************
+/*======================================================================================
+ * OListViewItem
+ *======================================================================================*/
 
 class OListViewItem: public QListViewItem
 {
   public:
+    /**
+     * Constructors.
+     */
     OListViewItem( QListView * parent );
     OListViewItem( QListViewItem * parent );
     OListViewItem( QListView * parent, QListViewItem * after );
@@ -185,20 +177,33 @@ class OListViewItem: public QListViewItem
         QString = QString::null, QString = QString::null,
         QString = QString::null, QString = QString::null,
         QString = QString::null, QString = QString::null );
-
+    /**
+     * Destructor.
+     */
     virtual ~OListViewItem();
-
+    /**
+     * @returns the background color of the list item.
+     */
     const QColor& backgroundColor();
+    /**
+     * @returns true, if the item is at an odd position and
+     * thus have to be painted with the alternate background color.
+     */
     bool isAlternate();
+    /**
+     * @note: Reimplemented for internal purposes - the API is not affected
+     *
+     */
     void paintCell( QPainter *p, const QColorGroup &cg, int column, int width, int alignment );
+    /**
+     * Perform object initialization.
+     */
     void init();
-
    /**
     * create a list view item as child of this object
-    * @return the new object
+    * @returns the new object
     */
     virtual OListViewItem* childFactory();
-
     #ifndef QT_NO_DATASTREAM
    /**
     * serialize this object to or from a @ref QDataStream
@@ -220,16 +225,86 @@ class OListViewItem: public QListViewItem
 
 #ifndef QT_NO_DATASTREAM
 /**
-  * \relates QListViewItem
-  * Writes a listview item and all subitems recursively to the stream
+  * @relates QListViewItem
+  * Writes listview @a item and all subitems recursively to @a stream
   * and returns a reference to the stream.
   */
-QDataStream& operator<<( QDataStream &s, const OListViewItem& lvi );
+QDataStream& operator<<( QDataStream& stream, const OListViewItem& item );
 /**
-  * \relates QListViewItem
-  * Reads a listview item from the stream and returns a reference to the stream.
+  * @relates QListViewItem
+  * Reads listview @a item from @a stream and returns a reference to the stream.
   */
-QDataStream& operator>>( QDataStream &s, OListViewItem& lvi );
+QDataStream& operator>>( QDataStream& stream, OListViewItem& item );
 #endif // QT_NO_DATASTREAM
+
+/*======================================================================================
+ * ONamedListView
+ *======================================================================================*/
+
+/**
+ * @brief An OListView variant with named columns.
+ *
+ * This class provides a higher-level interface to the columns in an OListView.
+ *
+ * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ */
+class ONamedListView: public OListView
+{
+  public:
+    /**
+     * Constructor.
+     *
+     * The parameters @a parent and @a name are handled by
+     * @ref OListView, as usual.
+     */
+    ONamedListView( QWidget* parent = 0, const char* name = 0 );
+    /**
+     * Destructor.
+     */
+    virtual ~ONamedListView();
+    /**
+     * Add a number of @a columns to the listview.
+     */
+    virtual void addColumns( const QStringList& columns );
+};
+
+/*======================================================================================
+ * ONamedListViewItem
+ *======================================================================================*/
+
+/**
+ * @brief An OListView variant with named columns.
+ *
+ * This class provides a higher-level interface to the columns in an OListViewItem.
+ *
+ * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ */
+class ONamedListViewItem: public OListViewItem
+{
+  public:
+    /**
+     * Constructor. Accepts the same parameters as a @ref OListViewItem,
+     * plus a @ref QStringList which holds an arbitrary number of @a texts.
+     */
+    ONamedListViewItem( QListView* parent, const QStringList& texts );
+    ONamedListViewItem( QListViewItem* parent, const QStringList& texts );
+    ONamedListViewItem( QListView* parent, QListViewItem* after, const QStringList& texts );
+    ONamedListViewItem( QListViewItem* parent, QListViewItem* after, const QStringList& texts );
+    /**
+     * Destructor.
+     */
+    virtual ~ONamedListViewItem();
+    /**
+     * Sets the text in column @a column to @a text.
+     * This method differs from @ref QListViewItem::setText() in that it
+     * accepts a string as column indicator instead of an int.
+     */
+    virtual void setText( const QString& column, const QString& text );
+    /**
+     * Sets a number of @a texts for this item.
+     */
+    virtual void setText( const QStringList& texts );
+};
+
 
 #endif // OLISTVIEW_H

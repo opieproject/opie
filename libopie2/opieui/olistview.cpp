@@ -218,11 +218,13 @@ OListViewItem::OListViewItem(QListView *parent)
     init();
 }
 
+
 OListViewItem::OListViewItem(QListViewItem *parent)
   : QListViewItem(parent)
 {
     init();
 }
+
 
 OListViewItem::OListViewItem(QListView *parent, QListViewItem *after)
   : QListViewItem(parent, after)
@@ -230,11 +232,13 @@ OListViewItem::OListViewItem(QListView *parent, QListViewItem *after)
     init();
 }
 
+
 OListViewItem::OListViewItem(QListViewItem *parent, QListViewItem *after)
   : QListViewItem(parent, after)
 {
     init();
 }
+
 
 OListViewItem::OListViewItem(QListView *parent,
     QString label1, QString label2, QString label3, QString label4,
@@ -244,6 +248,7 @@ OListViewItem::OListViewItem(QListView *parent,
     init();
 }
 
+
 OListViewItem::OListViewItem(QListViewItem *parent,
     QString label1, QString label2, QString label3, QString label4,
     QString label5, QString label6, QString label7, QString label8)
@@ -251,6 +256,7 @@ OListViewItem::OListViewItem(QListViewItem *parent,
 {
     init();
 }
+
 
 OListViewItem::OListViewItem(QListView *parent, QListViewItem *after,
     QString label1, QString label2, QString label3, QString label4,
@@ -260,6 +266,7 @@ OListViewItem::OListViewItem(QListView *parent, QListViewItem *after,
     init();
 }
 
+
 OListViewItem::OListViewItem(QListViewItem *parent, QListViewItem *after,
     QString label1, QString label2, QString label3, QString label4,
     QString label5, QString label6, QString label7, QString label8)
@@ -268,20 +275,24 @@ OListViewItem::OListViewItem(QListViewItem *parent, QListViewItem *after,
     init();
 }
 
+
 OListViewItem::~OListViewItem()
 {
 }
+
 
 void OListViewItem::init()
 {
     m_known = false;
 }
 
+
 const QColor &OListViewItem::backgroundColor()
 {
     return isAlternate() ? static_cast<OListView*>(listView())->alternateBackground() :
                            listView()->viewport()->colorGroup().base();
 }
+
 
 bool OListViewItem::isAlternate()
 {
@@ -326,6 +337,7 @@ bool OListViewItem::isAlternate()
     return m_odd;
 }
 
+
 void OListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
     QColorGroup _cg = cg;
@@ -348,10 +360,12 @@ void OListViewItem::paintCell(QPainter *p, const QColorGroup &cg, int column, in
     p->drawLine( width-1, 0, width-1, height() );
 }
 
+
 OListViewItem* OListViewItem::childFactory()
 {
     return new OListViewItem( this );
 }
+
 
 #ifndef QT_NO_DATASTREAM
 void OListViewItem::serializeTo( QDataStream& s ) const
@@ -385,6 +399,8 @@ void OListViewItem::serializeTo( QDataStream& s ) const
 
     qDebug( "OListviewItem stored." );
 }
+
+
 void OListViewItem::serializeFrom( QDataStream& s )
 {
     #warning Caution... the binary format is still under construction...
@@ -411,13 +427,106 @@ void OListViewItem::serializeFrom( QDataStream& s )
     qDebug( "OListViewItem loaded." );
 }
 
+
 QDataStream& operator<<( QDataStream& s, const OListViewItem& lvi )
 {
     lvi.serializeTo( s );
 }
+
 
 QDataStream& operator>>( QDataStream& s, OListViewItem& lvi )
 {
     lvi.serializeFrom( s );
 }
 #endif // QT_NO_DATASTREAM
+
+
+/*======================================================================================
+ * ONamedListView
+ *======================================================================================*/
+
+ONamedListView::ONamedListView( QWidget *parent, const char *name )
+               :OListView( parent, name )
+{
+}
+
+
+ONamedListView::~ONamedListView()
+{
+}
+
+
+void ONamedListView::addColumns( const QStringList& columns )
+{
+    for ( QStringList::ConstIterator it = columns.begin(); it != columns.end(); ++it )
+    {
+        qDebug( "adding column %s", (const char*) *it );
+        addColumn( *it );
+    }
+}
+
+
+/*======================================================================================
+ * ONamedListViewItem
+ *======================================================================================*/
+
+ONamedListViewItem::ONamedListViewItem( QListView* parent, const QStringList& texts )
+                   :OListViewItem( parent )
+{
+    setText( texts );
+}
+
+
+ONamedListViewItem::ONamedListViewItem( QListViewItem* parent, const QStringList& texts )
+                   :OListViewItem( parent )
+{
+    setText( texts );
+}
+
+
+ONamedListViewItem::ONamedListViewItem( QListView* parent, QListViewItem* after, const QStringList& texts )
+                   :OListViewItem( parent, after )
+{
+    setText( texts );
+}
+
+
+ONamedListViewItem::ONamedListViewItem( QListViewItem* parent, QListViewItem* after, const QStringList& texts )
+                   :OListViewItem( parent, after )
+{
+    setText( texts );
+}
+
+
+ONamedListViewItem::~ONamedListViewItem()
+{
+}
+
+
+void ONamedListViewItem::setText( const QStringList& texts )
+{
+    int col = 0;
+    for ( QStringList::ConstIterator it = texts.begin(); it != texts.end(); ++it )
+    {
+        qDebug( "setting column %d = text %s", col, (const char*) *it );
+        OListViewItem::setText( col++, *it );
+    }
+
+}
+
+
+void ONamedListViewItem::setText( const QString& column, const QString& text )
+{
+    //FIXME: If used excessively, this will slow down performance of updates
+    //FIXME: because of the linear search over all column texts.
+    //FIXME: I will optimize later by using a hash map.
+    for ( int i = 0; i < listView()->columns(); ++i )
+    {
+        if ( listView()->columnText( i ) == column )
+        {
+            OListViewItem::setText( i, text );
+            return;
+        }
+    }
+    qWarning( "ONamedListViewItem::setText(): Warning! Columntext '%s' not found.", (const char*) column );
+}

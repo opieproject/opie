@@ -1,0 +1,8 @@
+Makefile*
+moc*
+*moc
+*.o
+~*
+moc
+obj
+
