@@ -137,7 +137,7 @@ contains( CONFIG, no-override ){
 }
 
 contains( CONFIG, LIBQPE_WITHROHFEEDBACK ){
-    DEFINES += OPIE_ROHFEEDBACK
+    DEFINES += OPIE_WITHROHFEEDBACK
     SOURCES += backend/rohfeedback.cpp
     HEADERS += backend/rohfeedback.h
 }
