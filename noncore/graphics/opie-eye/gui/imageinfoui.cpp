@@ -156,7 +156,7 @@ imageinfo::~imageinfo()
 void imageinfo::slot_fullInfo(const QString&_path, const QString&_t)
 {
     if (_path == currentFile) {
-        qDebug(_t);
+        odebug << _t << oendl;
         QString t = _t;
         t.replace(QRegExp("\n"),"<br>");
         TextView1->setText(t);

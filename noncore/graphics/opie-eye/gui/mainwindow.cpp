@@ -42,7 +42,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("phunkview");
     m_cfg->setGroup("Zecke_view" );
-//    qDebug( "Process-wide OApplication object @ %0x", oApp );
+//    odebug << "Process-wide OApplication object @ " << oApp << oendl;
     /*
      * Initialize ToolBar and IconView
      * And Connect Them

@@ -136,7 +136,7 @@ void AudioWidget::sliderReleased() {
 }
 
 void AudioWidget::setPosition( long i ) {
-    //    odebug << "<<<<<<<<<<<<<<<<<<<<<<<<set position " << i << "" << oendl; 
+    //    odebug << "<<<<<<<<<<<<<<<<<<<<<<<<set position " << i << "" << oendl;
     updateSlider( i, mediaPlayerState.length() );
 }
 
@@ -190,7 +190,7 @@ void AudioWidget::loadSkin()
 void AudioWidget::setSeekable( bool isSeekable ) {
 
     if ( !isSeekable ) {
-        odebug << "<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>" << oendl; 
+        odebug << "<<<<<<<<<<<<<<file is STREAMING>>>>>>>>>>>>>>>>>>>" << oendl;
         if( !slider.isHidden()) {
             slider.hide();
         }
@@ -202,7 +202,7 @@ void AudioWidget::setSeekable( bool isSeekable ) {
         // this stops the slider from being moved, thus
         // does not stop stream when it reaches the end
         slider.show();
-        odebug << " CONNECT SET POSTION " << oendl; 
+        odebug << " CONNECT SET POSTION " << oendl;
         connect( &mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
         connect( &mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
         connect( &slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
@@ -220,7 +220,7 @@ static QString timeAsString( long length ) {
 void AudioWidget::updateSlider( long i, long max ) {
 
     time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
-//    qDebug( timeAsString( i ) + " / " + timeAsString( max ) ) ;
+//    odebug << timeAsString( i ) << " / " << timeAsString( max ) << oendl;
 
     if ( max == 0 ) {
         return;
@@ -274,7 +274,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
           break;
       case Key_F9: //activity
            hide();
-           //           odebug << "Audio F9" << oendl; 
+           //           odebug << "Audio F9" << oendl;
            e->accept();
           break;
       case Key_F10: //contacts
