@@ -96,7 +96,7 @@ void OImageScrollView::loadJpeg(bool interncall)
             } else {
                 hei = wid;
             }
-            param = QString( "Fast Shrink( 3 ) Scale( %1, %2, ScaleFree)" ).arg( wid ).arg( hei );
+            param = QString( "Fast Shrink( 3 ) Scale( %1, %2, ScaleMin)" ).arg( wid ).arg( hei );
             odebug << "Load jpeg scaled \"" << param << "\"" << oendl;
             iio.setParameters(param.latin1());
             setImageScaledLoaded(true);
@@ -125,6 +125,7 @@ void OImageScrollView::setImage( const QString& path ) {
     odebug << "load new image " << oendl;
     if (m_lastName == path) return;
     m_lastName = path;
+    _original_data = QImage();
     QString itype = QImage::imageFormat(m_lastName);
     odebug << "Image type = " << itype << oendl;
     if (itype == "JPEG") {
@@ -146,6 +147,7 @@ void OImageScrollView::setImage( const QString& path ) {
     _image_data = QImage();
     if (FirstResizeDone()) {
         generateImage();
+        if (isVisible()) viewport()->repaint(true);
     }
 }
 
@@ -350,7 +352,12 @@ void OImageScrollView::rotate_into_data(Rotation r)
 void OImageScrollView::generateImage()
 {
     Rotation r = Rotate0;
-    if (_original_data.isNull()) return;
+    _pdata = QPixmap();
+    if (_original_data.isNull()) {
+        emit imageSizeChanged( _image_data.size() );
+        if (_zoomer) _zoomer->setImage( _image_data );
+        return;
+    }
     {
         QCopEnvelope( "QPE/System", "busy()" );
     }
@@ -359,8 +366,9 @@ void OImageScrollView::generateImage()
         if (AutoRotate()) r = Rotate90;
     }
 
+
     odebug << " r = " << r << oendl;
-    if (AutoScale()) {
+    if (AutoScale() && (_original_data.width()>width() || _original_data.height() > height()) ) {
         if (!_image_data.size().isValid()||width()>_image_data.width()||height()>_image_data.height()) {
             odebug << "Rescaling data" << oendl;
             if (r==Rotate0) {
@@ -381,7 +389,6 @@ void OImageScrollView::generateImage()
         resizeContents(_image_data.width(),_image_data.height());
     }
     _pdata.convertFromImage(_image_data);
-
 
     /*
      * update the zoomer
@@ -475,27 +482,12 @@ void OImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clip
 /* using the real geometry points and not the translated points is wanted! */
 void OImageScrollView::viewportMouseMoveEvent(QMouseEvent* e)
 {
-    odebug << "Move X and Y " << e->x() << " " << e->y() << oendl;
     int mx, my;
     mx = e->x();
     my = e->y();
     if (_mouseStartPosX!=-1 && _mouseStartPosY!=-1) {
         int diffx = _mouseStartPosX-mx;
         int diffy = _mouseStartPosY-my;
-#if 0
-        QScrollBar*xbar = horizontalScrollBar();
-        QScrollBar*ybar = verticalScrollBar();
-        if (xbar->value()+diffx>xbar->maxValue()) {
-            diffx = xbar->maxValue()-xbar->value();
-        } else if (xbar->value()+diffx<0) {
-            diffx=0-xbar->value();
-        }
-        if (ybar->value()+diffy>ybar->maxValue()) {
-            diffy = ybar->maxValue()-ybar->value();
-        } else if (ybar->value()+diffy<0) {
-            diffy=0-ybar->value();
-        }
-#endif
         scrollBy(diffx,diffy);
     }
     _mouseStartPosX=mx;
