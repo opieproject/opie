@@ -1,9 +1,0 @@
-Files: bin/clock apps/Applications/clock.desktop
-Priority: optional
-Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Clock and stop-watch
- A simple clock and stop-watch for the Opie environment.
