@@ -26,11 +26,6 @@
 
 class QSocketNotifier;
 
-extern "C"
-{
-    void *_threadutil_start_thread( void* );
-}
-
 namespace ThreadUtil
 {
 
@@ -88,7 +83,6 @@ namespace ThreadUtil
 
     class Thread
     {
-        friend void *::_threadutil_start_thread( void* );
     public:
         struct Data;
 

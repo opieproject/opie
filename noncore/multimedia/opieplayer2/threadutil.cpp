@@ -133,6 +133,10 @@ struct Thread::Data
     bool isRunning;
 
     WaitCondition finishCondition;
+
+    Thread *thr;
+
+    void run() { thr->run(); }
 };
 
 extern "C"
@@ -149,14 +153,14 @@ static void terminate_thread( void *arg )
     data->finishCondition.wakeAll();
 }
 
-void *_threadutil_start_thread( void *arg )
+static void *start_thread( void *arg )
 {
-    Thread *thr = ( Thread* )arg;
+    Thread::Data *data = ( Thread::Data* )arg;
 
-    pthread_cleanup_push( terminate_thread, thr->d );
+    pthread_cleanup_push( terminate_thread, data );
 
-    thr->d->isRunning = true;
-    thr->run();
+    data->isRunning = true;
+    data->run();
 
     pthread_cleanup_pop( true );
 
@@ -169,6 +173,7 @@ void *_threadutil_start_thread( void *arg )
 Thread::Thread()
     : d( new Data )
 {
+    d->thr = this;
 }
 
 Thread::~Thread()
@@ -189,7 +194,7 @@ void Thread::start()
     pthread_attr_t attributes;
     pthread_attr_init( &attributes );
     pthread_attr_setscope( &attributes, PTHREAD_SCOPE_SYSTEM );
-    int err = pthread_create( &d->self, &attributes, _threadutil_start_thread, ( void* )this );
+    int err = pthread_create( &d->self, &attributes, start_thread, ( void* )d );
     if ( err != 0 ) {
         qDebug( "ThreadUtil::Thread::start() : can't create thread: %s", strerror( err ) );
         pthread_attr_destroy( &attributes );
