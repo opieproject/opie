@@ -151,12 +151,12 @@ void BackupAndRestore::selectItem(QListViewItem *currentItem){
 
 void BackupAndRestore::scanForApplicationSettings(){
   QDir d(applicationSettings->text(BACKUP_LOCATION));
-  d.setFilter( QDir::Files | QDir::NoSymLinks );
+  d.setFilter( QDir::Dirs | QDir::Files | QDir::NoSymLinks );
   const QFileInfoList *list = d.entryInfoList();
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
   while ( (fi=it.current()) ) {
-    //qDebug((d.path()+fi->fileName()).latin1());
+    // qDebug((d.path()+fi->fileName()).latin1());
     QListViewItem *newItem = new QListViewItem(applicationSettings, fi->fileName());
     selectItem(newItem);
     ++it;
