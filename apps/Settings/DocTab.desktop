@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=doctab
+Icon=DocumentTypeWord
+Type=Application
+Name=Language
+Comment=DocTab settings dialog
+Name[de]=DokumentenTab
+Comment[de]=DokumentenTab Einstellungen
+
