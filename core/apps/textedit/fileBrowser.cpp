@@ -12,6 +12,8 @@
 **
 ****************************************************************************/
 #include "fileBrowser.h"
+#include "inputDialog.h"
+
 #include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qpe/fileselector.h>
@@ -25,6 +27,11 @@
 #include <qmessagebox.h>
 #include <qlayout.h>
 #include <unistd.h>
+#include <qpopupmenu.h>
+#include <qlineedit.h>
+
+#include <unistd.h>
+#include <stdlib.h>
 
 static int u_id = 1;
 static int get_unique_id()
@@ -67,7 +74,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
 
     FileStack = new QWidgetStack( this );
 
-   ListView = new QListView( this, "ListView" );
+    ListView = new QListView( this, "ListView" );
     ListView->setMinimumSize( QSize( 100, 25 ) );
     ListView->addColumn( tr( "Name" ) );
     ListView->setColumnWidth(0,120);
@@ -81,7 +88,12 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     ListView->setColumnAlignment(2,QListView::AlignRight);
     ListView->setAllColumnsShowFocus( TRUE );
 
-    connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
+    QPEApplication::setStylusOperation( ListView->viewport(),QPEApplication::RightOnHold);
+    connect( ListView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
+             this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
+
+    connect( ListView, SIGNAL( clicked( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
+
     FileStack->addWidget( ListView, get_unique_id() );
 
     fileSelector = new FileSelector( "text/*", FileStack, "fileselector" , FALSE, FALSE); //buggy
@@ -271,4 +283,94 @@ void fileBrowser::docOpen( const DocLnk &doc )
 {
     fileList.append( doc.file().latin1() );
     accept();
+}
+
+void fileBrowser::ListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
+{
+    switch (mouse) {
+      case 1:
+          break;
+      case 2:
+          showListMenu(item);
+    break;
+    };
+}
+
+void fileBrowser::showListMenu(QListViewItem *item) {
+
+    QPopupMenu  m;// = new QPopupMenu( Local_View );
+    if( item->text(0).find("/",0,TRUE))
+    m.insertItem( tr( "Change Directory" ), this, SLOT( doCd() ));
+    else
+    m.insertItem( tr( "Make Directory" ), this, SLOT( makDir() ));
+    m.insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+    m.insertSeparator();
+    m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+    m.exec( QCursor::pos() );
+    
+}
+
+void fileBrowser::doCd() {
+    listClicked( ListView->currentItem());
+}
+
+void fileBrowser::makDir() {
+    InputDialog *fileDlg;
+    fileDlg = new InputDialog(this,"Make Directory",TRUE, 0);
+    fileDlg->exec();
+    if( fileDlg->result() == 1 ) {
+       QString  filename = fileDlg->LineEdit1->text();
+       currentDir.mkdir( currentDir.canonicalPath()+"/"+filename);
+    }
+    populateList();
+}
+
+void fileBrowser::localRename() {
+    QString curFile = ListView->currentItem()->text(0);
+    InputDialog *fileDlg;
+    fileDlg = new InputDialog(this,"Rename",TRUE, 0);
+    fileDlg->inputText = curFile;
+    fileDlg->exec();
+    if( fileDlg->result() == 1 ) {
+        QString oldname =  currentDir.canonicalPath() + "/" + curFile;
+        QString newName =  currentDir.canonicalPath() + "/" + fileDlg->LineEdit1->text();//+".playlist";
+        if( rename(oldname.latin1(), newName.latin1())== -1)
+            QMessageBox::message("Note","Could not rename");
+    }
+    populateList();
+}
+
+void fileBrowser::localDelete() {
+    QString f = ListView->currentItem()->text(0);
+    if(QDir(f).exists() ) {
+        switch ( QMessageBox::warning(this,"Delete","Do you really want to delete\n"+f+
+                                      " ?\nIt must be empty","Yes","No",0,0,1) ) {
+          case 0: {
+              f=currentDir.canonicalPath()+"/"+f;
+              QString cmd="rmdir "+f;
+              system( cmd.latin1());
+              populateList();
+          }
+              break;
+          case 1: 
+                // exit
+              break;
+        };
+        
+    } else {
+        switch ( QMessageBox::warning(this,"Delete","Do you really want to delete\n"+f
+                                      +" ?","Yes","No",0,0,1) ) {
+          case 0: {
+              f=currentDir.canonicalPath()+"/"+f;
+              QString cmd="rm "+f;
+              system( cmd.latin1());
+              populateList();
+          }
+              break;
+          case 1: 
+                // exit
+              break;
+        };
+    }
+
 }

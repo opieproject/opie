@@ -34,6 +34,7 @@ class QPushButton;
 class QComboBox;
 class QWidgetStack;
 class FileSelector;
+class QPoint;
 
 class fileBrowser : public QDialog
 {
@@ -62,7 +63,12 @@ public:
 public slots:
     void homeButtonPushed();
     void docButtonPushed();
-
+    void ListPressed( int, QListViewItem *, const QPoint&, int);
+    void showListMenu(QListViewItem*);
+    void doCd();
+    void makDir();
+    void localRename();
+    void localDelete();
 private:
 
 private slots:
