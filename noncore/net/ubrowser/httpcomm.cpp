@@ -39,12 +39,14 @@ void HttpComm::setUp(QString *newName)
 	name = newName;
 }
 
-void HttpComm::setStuff(QString newHost, QString newPortS, QString newFile, QTextDrag *newText)
+void HttpComm::setStuff(QString newHost, QString newPortS, QString newFile, QTextDrag *newText, QImageDrag *newImage, bool newIsImage)
 {
 	host = newHost;
 	portS = newPortS;
 	file = newFile;
 	text = newText;
+	isImage = newIsImage;
+	image = newImage;
 }
 
 void HttpComm::hostFound()
@@ -70,12 +72,15 @@ void HttpComm::connected()
 
 void HttpComm::incoming()
 {
-	int ba=socket->bytesAvailable(), i=0, j=0, semi=0;
+	int ba=socket->size(), i=0, j=0, semi=0;
 	char *tempString = new char [ba];
+	int br = socket->readBlock(tempString, ba);
+	socket->flush();
 	bool nextChunk=false;
 	bool done=false;
-	socket->readBlock(tempString, ba);
 	printf("HttpComm::incoming: ba: %d\n", ba);
+	printf("HttpComm::incoming: bytes read from socket: %d\n", br);
+//	printf("HttpComm::incoming: tempString length: %d\n");
 	QString sclength;
 	
 	if(headerRead == false)
@@ -132,6 +137,7 @@ void HttpComm::incoming()
 		}
 		else
 		{
+			int startclength=0;
 			QString tempQString = tempString;
 			//remove the http header, if one exists
 			if(j != 0)
@@ -188,7 +194,10 @@ void HttpComm::incoming()
 						printf("%s", newTQstring.latin1() );
 						printf("HttpComm::incoming: end new body piece 1.\n");
 						status=0;
-						tempQString = tempQString.remove(0, clength);
+						tempQString = tempQString.remove(0, newTQstring.length());
+						startclength = tempQString.find('\n');
+						printf("HttpComm::incoming: startclength: %d\n", startclength);
+						tempQString = tempQString.remove(0, startclength+1);
 						done=false;
 //						break;
 					}
@@ -197,11 +206,13 @@ void HttpComm::incoming()
 					{
 						if(tempQString.length() <= ba)
 						{
+							printf("HttpComm::incoming: not truncating tempQString\n");
 							body+=tempQString;
 							bRead+=tempQString.length();
 						}
 						else
 						{
+							printf("HttpComm::incoming: truncating tempQString\n");
 							tempQString.truncate(ba);
 							body+=tempQString;
 							bRead+=tempQString.length();
@@ -227,7 +238,10 @@ void HttpComm::incoming()
 						printf("%s", newTQstring.latin1() );
 						printf("HttpComm::incoming: end new body piece 3.\n");
 						status=0;
-						tempQString = tempQString.remove(0, clength);
+						tempQString = tempQString.remove(0, newTQstring.length());
+						startclength = tempQString.find('\n');
+						printf("HttpComm::incoming: startclength, tempQString length: %d %d\n", startclength, tempQString.length());
+						tempQString = tempQString.remove(0, startclength+1);
 						done=false;
 //						break;
 					}
@@ -236,11 +250,13 @@ void HttpComm::incoming()
 					{
 						if(tempQString.length() <= ba)
 						{
+							printf("HttpComm::incoming: not truncating tempQString\n");
 							body+=tempQString;
 							bRead+=tempQString.length();
 						}
 						else
 						{
+							printf("HttpComm::incoming: truncating tempQString\n");
 							tempQString.truncate(ba);
 							body+=tempQString;
 							bRead+=tempQString.length();
@@ -308,10 +324,19 @@ void HttpComm::processBody()
 	
 	QString end = file;
 	end.truncate(lastSlash+1);
-	QString context("http://"+host+':'+portS+end);
+	QString context = "http://"+host+':'+portS+end;
 	printf("HttpComm::processBody: context: %s\n", context.latin1() );
 
-	browser->setTextFormat(RichText);
-	browser->mimeSourceFactory()->setFilePath(context);
-	browser->setText(body, context);
+	if(!isImage)
+	{
+		browser->setTextFormat(RichText);
+		browser->mimeSourceFactory()->setFilePath(context);
+		browser->setText(body, context);
+	}
+	else
+	{
+		QImage tempImage(body.latin1());
+		image->setImage(tempImage);
+		browser->update();
+	}
 }

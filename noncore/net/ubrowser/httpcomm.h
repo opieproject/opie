@@ -20,6 +20,8 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include <qstringlist.h>
 #include <qdragobject.h>
 #include <qtextbrowser.h>
+#include <qcstring.h>
+#include <qimage.h>
 
 #include <stdio.h>
 
@@ -29,7 +31,7 @@ Q_OBJECT
 public:
 	HttpComm(QSocket *newSocket, QTextBrowser *newBrowser);
 	void setUp(QString *newName);
-	void setStuff(QString newHost, QString newPortS, QString newFile, QTextDrag *newText);
+	void setStuff(QString newHost, QString newPortS, QString newFile, QTextDrag *newText, QImageDrag *newImage, bool newIsImage);
 	void parseHeader();
 	void processBody();
 public slots:
@@ -49,9 +51,11 @@ private:
 	unsigned int length;
 	unsigned int bRead;
 	QTextDrag *text;
+	QImageDrag *image;
 	QTextBrowser *browser;
 	bool chunked;
 	bool lengthset;
 	unsigned int clength;
 	int status;
+	bool isImage;
 };

@@ -34,5 +34,6 @@ private:
 	QSocket *socket;
 	HttpComm *comm;
 	QTextDrag *text;
+	QImageDrag *image;
 	QTextBrowser *browser;
 };

@@ -22,6 +22,7 @@ HttpFactory::HttpFactory(QTextBrowser *newBrowser):QMimeSourceFactory()
 	text = new QTextDrag;
 	browser=newBrowser;
 	comm = new HttpComm(socket, browser);
+	image = new QImageDrag;
 }
 
 const QMimeSource * HttpFactory::data(const QString &abs_name) const
@@ -30,7 +31,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 
 	int port=80, addrEnd, portSep;
 	QString host, file, portS, name, tempString;
-	bool done=false;
+	bool done=false, isImage=false;
 	
 	comm->setUp((QString *)&abs_name);
 
@@ -46,7 +47,8 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	}
 	else
 	{
-		return 0;
+		name.prepend(browser->context());
+		name = name.remove(0, 7);
 	}
 
 	addrEnd = name.find('/');
@@ -77,14 +79,25 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	{
 		portS="80";
 	}
+	
+	if(file.find(".png", file.length()-4) != -1 || file.find(".gif", file.length()-4) != -1 || file.find(".jpg", file.length()-4) != -1)
+	{
+		isImage=true;
+	}
 
-	comm->setStuff(host, portS, file, text);
+	comm->setStuff(host, portS, file, text, image, isImage);
 
 	socket->connectToHost(host, port);
 	
-	text->setText("");
-
-	return text;
+	if(!image)
+	{
+		text->setText("");
+		return text;
+	}
+	else
+	{
+		return image;
+	}
 }
 
 const QMimeSource * HttpFactory::data(const QString &abs_or_rel_name, const QString & context) const
