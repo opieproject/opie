@@ -3,369 +3,387 @@
     <name>AdvancedFm</name>
     <message>
         <source>AdvancedFm</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejlett Fájlmenedzser</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájl</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Nézet</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Rejtett fájlok mutatása</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Könyvtár létrehozása</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Átnevezés</translation>
     </message>
     <message>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Parancs futtatása</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Parancs futtatása kimenettel</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Törlés</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Méret</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Dátum</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Igen</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Megjegyzés</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Nem lehetett átnevezni</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Ez a könyvtár nem létezik</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation type="unfinished"></translation>
+        <translation>Másolás, mint</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejlett Fájlmenedzser kimenet</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Fejlett Fájlmenedzser átsugárzás</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Elküldve.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Könyvtárváltás</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Futtatás</translation>
     </message>
     <message>
         <source>Open as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Megnyitás szövegként</translation>
     </message>
     <message>
         <source>Make Symlink</source>
-        <translation type="unfinished"></translation>
+        <translation>Szimbólikus link készítése</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Másolás</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Áthelyezés</translation>
     </message>
     <message>
         <source>File Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájl info</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Jogok beállítása</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulajdonságok</translation>
     </message>
     <message>
         <source>Beam File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájl átsugárzása</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Másolás ugyanebbe a könyvtárba</translation>
     </message>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nem lehetett másolni
+</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>cél</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Nem lehetett áthelyezni</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentumokhoz adás</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Műveletek</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Mind kijelölése</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Valóban töröl
+%1 fájlt?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Törli a könyvtárat?</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Valóban másol
+%1 fájlt?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>A fájl létezik!</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+létezik. Felülírható?</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>már létezik. Valóban törölni akarja?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 létezik. Felülírja?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 nem másolható a %2 helyre</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>A Fejlett Fájlmenedzser
+szerzői joggal védett 2002-2003
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+a programot a GPL licensz védi
+fordítás: Bácsi László &lt;lackac@math.bme.hu&gt;</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Könyvjelzők</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Az aktuális könyvtár eltávolítása a könyvjelzők közül</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba</translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Az aktuális könyvtárt nem lehet törölni
+a könyvjelzők közül.
+Nincs ilyen könyvjelző!</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájl keresés</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Valóban törli %1-t
+minden tartalmával együtt?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Valóban törli
+%1-t?</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished"></translation>
+        <translation>Másolás</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Mint</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fejlett Fm ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>kB szabad</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Váltás Nézet 1-re</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Váltás Nézet 2-re</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Még nincs implementálva</translation>
     </message>
     <message>
         <source>Could not copy 
 %1 
 to 
 %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+nem másolható a
+%2
+helyre</translation>
     </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Kimenet fájlba mentése (csak név)</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Kimenet</translation>
     </message>
     <message>
         <source>Process could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>A folyamat nem tudott elindulni</translation>
     </message>
     <message>
         <source>Error
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba
+</translation>
     </message>
     <message>
         <source>
 Finished
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Befejezve
+</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájl jogosultságok beállítása</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fájl jogosultságok beállítása a következőhöz:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>tulajdonos</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>csoport</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>mindenki</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Tulajdonos</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Csoport</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>olvasás</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>írás</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>futtatás</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Figyelem</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba- nincs ilyen felhasználó</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba- nincs ilyen csoport</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba a tulajdonlás vagy csoport beállításakor</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Hiba a jogok beállításakor</translation>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>fájlJogok</translation>
     </message>
 </context>
 </TS>

@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Az én személyes adataim</translation>
+        <translation>Személyes adataim</translation>
     </message>
     <message>
         <source>View</source>
@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Az én személyes adataim szerkesztése</translation>
+        <translation>Személyes adataim szerkesztése</translation>
     </message>
     <message>
         <source>Edit Address</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation>Kapcsolatok - Az én személyes adataim</translation>
+        <translation>Kapcsolatok - Személyes adataim</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -130,7 +130,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Kezdj keresni</translation>
+        <translation>Keresés indítása</translation>
     </message>
     <message>
         <source>Right file type ?</source>
@@ -146,8 +146,7 @@ Mégis kilép?</translation>
     </message>
     <message>
         <source>Unable to find a contact for this search pattern!</source>
-        <translation>Ehhez a keresési mintához
-nem találok kapcsolatot!</translation>
+        <translation>Ehhez a keresési mintához nem találok kapcsolatot!</translation>
     </message>
     <message>
         <source>The selected file 
@@ -159,7 +158,7 @@ Tényleg meg akarja nyitni?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation>Kapcsolat hozzáadása?</translation>
+        <translation>Adjam hozzá a kapcsolatot?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
@@ -173,15 +172,15 @@ Tényleg meg akarja nyitni?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>vCard exportálása</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
+        <translation>Ki kell választania egy kapcsolatot !</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
+        <translation>Meg kell adnia egy fájlnevet !</translation>
     </message>
 </context>
 <context>
@@ -234,7 +233,7 @@ ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation>Betűk</translation>
+        <translation>Betűkészlet</translation>
     </message>
     <message>
         <source>Small</source>
@@ -278,83 +277,83 @@ ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation type="unfinished"></translation>
+        <translation>Kattintson egy fülre a kiválasztásához</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation type="unfinished"></translation>
+        <translation>A keresési mód beállításai</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation type="unfinished"></translation>
+        <translation>A keresés szabályos kifejezések alapján történik, ha ez van kiválasztva</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>A keresés csak helyettesítő karakterek segítségével történik, ha ez van kiválasztva</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Ha be van jelölve, akkor a kis- és nagybetűk meg lesznek különböztetve</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>A lista- és kártyanézet betűmérete</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation type="unfinished"></translation>
+        <translation>Betűkészlet beállítások a lista- és kártyanézethez</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
-        <translation type="unfinished"></translation>
+        <translation>A Sharp levelező programjának használata, ha elérhető</translation>
     </message>
     <message>
         <source>Use OPIE mail if installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Az OPIE levelező programjának használata, ha telepítve van</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation type="unfinished"></translation>
+        <translation>A kiválasztott tulajdonság felfelé mozgatása</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation type="unfinished"></translation>
+        <translation>A kiválasztott tulajdonság lefelé mozgatása</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>Az összes elérhető tulajdonság listája</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>A lenti listában kiválasztott tulajdonság fenti listához adása</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
-        <translation type="unfinished"></translation>
+        <translation>A kiválasztott tulajdonság eltávolítása a fenti listából</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation type="unfinished"></translation>
+        <translation>A sorrend (fel -&gt; le) határozza meg, hogy a lista nézet második oszlopában milyen tulajdonság jelenjen meg. (Az első fog megjelenni azok közül, amik ki vannak töltve.)</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menü- és ikonsor</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Rögzített</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Rögzített menü- és ikonsorra váltás az alkalmazás újraindítása után !</translation>
     </message>
     <message>
         <source>Moveable</source>
-        <translation type="unfinished"></translation>
+        <translation>Mozgatható</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Mozgatható menü- és ikonsorra váltás az alkalmazás újraindítása után !</translation>
     </message>
 </context>
 <context>
@@ -393,7 +392,7 @@ ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>State</source>
-        <translation>Állam</translation>
+        <translation>Állam/Megye</translation>
     </message>
     <message>
         <source>Country</source>
@@ -1317,202 +1316,31 @@ ingyenesen elérhető !</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation type="unfinished"></translation>
+        <translation>Kérem adja meg a kereszt-, középső- és vezetéknevet</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>Közvetlenül a teljes név megadása ! Ha olyan vezetéknevet akar megadni, ami több szóból áll (pl. &quot;Tinódi Lantos&quot;), akkor a következőképp írja: &lt;vezetéknév&gt;, &lt;keresztnevek&gt; (pl. &quot;Tinódi Lantos, Sebestyén&quot;)</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation type="unfinished"></translation>
+        <translation>Munkahelyi beosztás</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
-        <translation type="unfinished"></translation>
+        <translation>Mint például &quot;ifj.&quot;</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation type="unfinished"></translation>
+        <translation>A kapcsolat munkahelye</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation type="unfinished"></translation>
+        <translation>Kattintson ide a megváltoztatni kívánt tulajdonság kiválasztásához</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Business Phone</source>
-        <translation type="obsolete">Üzleti telefon</translation>
-    </message>
-    <message>
-        <source>Business Fax</source>
-        <translation type="obsolete">Üzleti fax</translation>
-    </message>
-    <message>
-        <source>Business Mobile</source>
-        <translation type="obsolete">Üzleti mobil</translation>
-    </message>
-    <message>
-        <source>Default Email</source>
-        <translation type="obsolete">Alapértelmezett e-mail</translation>
-    </message>
-    <message>
-        <source>Emails</source>
-        <translation type="obsolete">E-mailek</translation>
-    </message>
-    <message>
-        <source>Home Phone</source>
-        <translation type="obsolete">Lakás telefon</translation>
-    </message>
-    <message>
-        <source>Home Fax</source>
-        <translation type="obsolete">Lakás fax</translation>
-    </message>
-    <message>
-        <source>Home Mobile</source>
-        <translation type="obsolete">Lakás mobil</translation>
-    </message>
-    <message>
-        <source>Office</source>
-        <translation type="obsolete">Iroda</translation>
-    </message>
-    <message>
-        <source>Profession</source>
-        <translation type="obsolete">Szakma</translation>
-    </message>
-    <message>
-        <source>Assistant</source>
-        <translation type="obsolete">Titkár</translation>
-    </message>
-    <message>
-        <source>Manager</source>
-        <translation type="obsolete">Manager</translation>
-    </message>
-    <message>
-        <source>Spouse</source>
-        <translation type="obsolete">Hitves</translation>
-    </message>
-    <message>
-        <source>Gender</source>
-        <translation type="obsolete">Nem</translation>
-    </message>
-    <message>
-        <source>Birthday</source>
-        <translation type="obsolete">Születésnap</translation>
-    </message>
-    <message>
-        <source>Anniversary</source>
-        <translation type="obsolete">Évforduló</translation>
-    </message>
-    <message>
-        <source>Nickname</source>
-        <translation type="obsolete">Becenév</translation>
-    </message>
-    <message>
-        <source>Children</source>
-        <translation type="obsolete">Gyerekek</translation>
-    </message>
-    <message>
-        <source>Name Title</source>
-        <translation type="obsolete">Megszólítás</translation>
-    </message>
-    <message>
-        <source>First Name</source>
-        <translation type="obsolete">Keresztnév</translation>
-    </message>
-    <message>
-        <source>Middle Name</source>
-        <translation type="obsolete">Középső név</translation>
-    </message>
-    <message>
-        <source>Last Name</source>
-        <translation type="obsolete">Vezetéknév</translation>
-    </message>
-    <message>
-        <source>Suffix</source>
-        <translation type="obsolete">Kiterjesztés</translation>
-    </message>
-    <message>
-        <source>File As</source>
-        <translation type="obsolete">Rögzít mint</translation>
-    </message>
-    <message>
-        <source>Job Title</source>
-        <translation type="obsolete">Beosztás</translation>
-    </message>
-    <message>
-        <source>Department</source>
-        <translation type="obsolete">Részleg</translation>
-    </message>
-    <message>
-        <source>Company</source>
-        <translation type="obsolete">Cég</translation>
-    </message>
-    <message>
-        <source>Business Street</source>
-        <translation type="obsolete">Üzleti cím</translation>
-    </message>
-    <message>
-        <source>Business City</source>
-        <translation type="obsolete">Üzleti város</translation>
-    </message>
-    <message>
-        <source>Business State</source>
-        <translation type="obsolete">Üzleti állam</translation>
-    </message>
-    <message>
-        <source>Business Zip</source>
-        <translation type="obsolete">Üzleti irányítószám</translation>
-    </message>
-    <message>
-        <source>Business Country</source>
-        <translation type="obsolete">Üzleti ország</translation>
-    </message>
-    <message>
-        <source>Business Pager</source>
-        <translation type="obsolete">Üzleti személyhívó</translation>
-    </message>
-    <message>
-        <source>Business WebPage</source>
-        <translation type="obsolete">Üzleti weblap</translation>
-    </message>
-    <message>
-        <source>Home Street</source>
-        <translation type="obsolete">Lakás utca</translation>
-    </message>
-    <message>
-        <source>Home City</source>
-        <translation type="obsolete">Lakás város</translation>
-    </message>
-    <message>
-        <source>Home State</source>
-        <translation type="obsolete">Lakás állam</translation>
-    </message>
-    <message>
-        <source>Home Zip</source>
-        <translation type="obsolete">Lakás irányítószám</translation>
-    </message>
-    <message>
-        <source>Home Country</source>
-        <translation type="obsolete">Lakás ország</translation>
-    </message>
-    <message>
-        <source>Home Web Page</source>
-        <translation type="obsolete">Lakás weblap</translation>
-    </message>
-    <message>
-        <source>Notes</source>
-        <translation type="obsolete">Jegyzetek</translation>
+        <translation>Kattintson ide a tárolási (és a lista nézetben megjelenített) forma kiválasztásához</translation>
     </message>
 </context>
 </TS>
