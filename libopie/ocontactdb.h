@@ -3,7 +3,6 @@
  * abtable-class of the addressbook.
  *
  * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- * Copyright (C) 2000 Trolltech AS.  All rights reserved.
  *
  * =====================================================================
  *	This program is free software; you can redistribute it and/or
@@ -14,11 +13,14 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.5 2002-07-06 16:06:52 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.6 2002-07-07 12:40:35 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.5  2002-07-06 16:06:52  eilers
+ * Revision 1.1.2.6  2002-07-07 12:40:35  zecke
+ * Why was this there in the first place?
+ *
+ * Revision 1.1.2.5  2002/07/06 16:06:52  eilers
  * Some bugfixes and cleanup of inconsistencies
  *
  * Revision 1.1.2.4  2002/07/05 13:03:30  zecke

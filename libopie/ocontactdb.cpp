@@ -2,7 +2,6 @@
  * Class to manage the Contacts.
  *
  * Copyright (c) 2002 by Stefan Eilers (Eilers.Stefan@epost.de)
- * Copyright (C) 2000 Trolltech AS.  All rights reserved.
  *
  * =====================================================================
  *	This program is free software; you can redistribute it and/or
@@ -15,11 +14,14 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.4 2002-07-06 16:06:03 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.5 2002-07-07 12:40:35 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.4  2002-07-06 16:06:03  eilers
+ * Revision 1.1.2.5  2002-07-07 12:40:35  zecke
+ * Why was this there in the first place?
+ *
+ * Revision 1.1.2.4  2002/07/06 16:06:03  eilers
  * Some bugfixes and cleanup of inconsistencies
  *
  * Revision 1.1.2.3  2002/07/05 13:03:30  zecke
