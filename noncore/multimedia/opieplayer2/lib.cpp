@@ -204,6 +204,6 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     int linestep = qt_screen->linestep();
 
     m_wid->setImage( frame, yoffset, xoffset, width, height, linestep, bytes, m_bytes_per_pixel );
-    m_wid->repaint();
+//    m_wid->repaint(false);
 
 }

@@ -51,6 +51,9 @@ public:
 protected:
     void paintEvent( QPaintEvent* p );
 private:
+	QRect m_lastframe;
+	QRect m_thisframe;
+
     int m_wid;
     int m_height;
     int m_yOff, m_xOff;

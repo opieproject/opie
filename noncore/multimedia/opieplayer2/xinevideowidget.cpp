@@ -46,7 +46,7 @@ XineVideoWidget::XineVideoWidget( int width,
                                   int height,
                                   QWidget* parent,
                                   const char* name )
-    : QWidget( parent, name )
+    : QWidget( parent, name, WRepaintNoErase | WResizeNoErase )
 {
     m_image = new QImage( width, height,  qt_screen->depth() );
     m_buff = 0;
@@ -61,32 +61,43 @@ XineVideoWidget::~XineVideoWidget() {
 }
 void XineVideoWidget::clear() {
     m_buff = 0;
-    repaint();
+    repaint(false);
 }
 void XineVideoWidget::paintEvent( QPaintEvent* e ) {
     qWarning("painting");
-    QPainter p(this );
-    p.setBrush( QBrush( Qt::black ) );
-    p.drawRect( rect() );
-    if (m_buff == 0 )
+    if (m_buff == 0 ) {
+	    QPainter p(this );
+	    p.fillRect( rect(), black );
         p.drawImage( 0, 0, *m_image );
-    else {
-        qWarning("paitnevent\n");
-
-        QDirectPainter dp( this );
-        uchar* dst =  dp.frameBuffer() + (m_yOff + dp.yOffset()  ) * linestep +
-                        (m_xOff + dp.xOffset() )  * m_bytes_per_pixel;
-        uchar* frame = m_buff;
-        for(int  y = 0; y < m_Height; y++ ) {
-            memcpy( dst, frame, m_bytes );
-            frame += m_bytes;
-            dst += linestep;
-        }
-        // QVFB hack by MArtin Jones
-//        QPainter dp2(this);
-        //      dp2.fillRect( rect(), QBrush( NoBrush ) );
+        qWarning ( "logo\n" );
     }
-//    QWidget::paintEvent( e );
+    else { 
+        qWarning("paitnevent\n");
+        {
+        	
+        	if (( m_thisframe & m_lastframe ) != m_lastframe ) {
+        		QPainter p ( this );
+				p. fillRect ( m_lastframe, black );				
+			}
+		}
+		{
+			QDirectPainter dp ( this );
+			
+			uchar* dst =  dp.frameBuffer() + (m_thisframe. y ( ) + dp.yOffset()  ) * linestep +
+				(m_thisframe. x ( ) + dp.xOffset() )  * m_bytes_per_pixel;
+			uchar* frame = m_buff;
+			for(int  y = 0; y < m_thisframe. height ( ); y++ ) {
+				memcpy( dst, frame, m_bytes );
+				frame += m_bytes;
+				dst += linestep;
+			}
+        }
+        {
+	 		// QVFB hack by MArtin Jones
+			QPainter p ( this );
+			p. fillRect ( m_thisframe, QBrush ( NoBrush ));		
+		}
+    }
 }
 int XineVideoWidget::height() const{
     return m_image->height();
@@ -101,30 +112,14 @@ void XineVideoWidget::setImage( QImage* image ) {
 void XineVideoWidget::setImage( uchar* image, int yoffsetXLine,
                                 int xoffsetXBytes,  int width,
                                 int height, int linestep,  int bytes, int bpp ) {
-/*    if (m_buff != 0 )
-        free(m_buff );
-*/
+                                
+	m_lastframe = m_thisframe;
+	m_thisframe. setRect ( xoffsetXBytes, yoffsetXLine, width, height );
+
     m_buff = image;
-    m_yOff = yoffsetXLine;
-    m_xOff = xoffsetXBytes;
-    m_Width = width;
-    m_Height = height;
     this->linestep = linestep;
     m_bytes = bytes;
     m_bytes_per_pixel = bpp;
-    ////
-    qWarning("width %d  %d", width, height );
-/*    QDirectPainter dp( this );
-    uchar* dst =  dp.frameBuffer() + (m_yOff + dp.yOffset()  ) * linestep +
-                  (m_xOff + dp.xOffset() )  * m_bytes_per_pixel;
-    uchar* frame = m_buff;
-    for(int  y = 0; y < m_Height; y++ ) {
-        memcpy( dst, frame, m_bytes );
-        frame += m_bytes;
-        dst += linestep;
-    }
-    // QVFB hack
-    QPainter dp2(this);
-    dp2.fillRect( rect(), QBrush( NoBrush ) );
-*/
+
+    repaint ( false );
 }

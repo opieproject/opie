@@ -72,7 +72,7 @@ struct opie_frame_s {
     int bytes_per_line;
     uint8_t *data;
 
-    int show_video;
+//    int show_video;
     null_driver_t *output;
 };
 
@@ -85,7 +85,7 @@ static uint32_t null_get_capabilities(vo_driver_t *self ){
 static void null_frame_copy (vo_frame_t *vo_img, uint8_t **src) {
   opie_frame_t  *frame = (opie_frame_t *) vo_img ;
   printf("frame copy\n");
-  if(!frame->show_video ){ printf("no video\n"); return; } // no video
+  if(!frame->output->m_show_video ){ printf("no video\n"); return; } // no video
 
   if (frame->format == IMGFMT_YV12) {
       frame->yuv2rgb->yuv2rgb_fun (frame->yuv2rgb, frame->rgb_dst,
@@ -94,7 +94,6 @@ static void null_frame_copy (vo_frame_t *vo_img, uint8_t **src) {
 
       frame->yuv2rgb->yuy22rgb_fun (frame->yuv2rgb, frame->rgb_dst,
 				    src[0]);
-      
   }	
   
   frame->rgb_dst += frame->stripe_inc; 
@@ -145,7 +144,7 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
     frame->name = "opie\0";
     frame->version = 1;
     frame->output = this;
-    frame->show_video = this->m_show_video;
+//    frame->show_video = this->m_show_video;
     /* initialize the frame*/
     frame->frame.driver = self;
     /*frame.frame.free = null_frame_free;*/
@@ -165,7 +164,7 @@ static vo_frame_t* null_alloc_frame( vo_driver_t* self ){
 // size specific
 static void null_compute_ideal_size (null_driver_t *this, opie_frame_t *frame) {
 
-    if (!this->m_is_scaling || !this->m_show_video) {
+    if (!this->m_is_scaling /*|| !this->m_show_video*/) {
         printf("Not scaling\n");
 	frame->ideal_width   = frame->width;
 	frame->ideal_height  = frame->height;
@@ -301,7 +300,7 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 	frame->format     = format;
 	frame->user_ratio = this->user_ratio;
 	this->gui_changed = 0;
-	frame->show_video = this->m_show_video;
+//	frame->show_video = this->m_show_video;
 
         
 	    null_compute_ideal_size (this, frame);
@@ -355,7 +354,7 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 	/* 
 	 * set up colorspace converter
 	 */
-	if(this->m_show_video ){
+	if(1 /*this->m_show_video*/ ){
 	    printf("showing video\n");	    	
 
 	switch (flags) {
@@ -414,7 +413,7 @@ static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){
     display_xine_frame_t display = this->frameDis;
 
     printf("display frame\n");
-    //    if( this->m_show_video ) { // return if not displaying	
+//       if( this->m_show_video ) { // return if not displaying	
 	printf("calling home aye\n" );
 	if( display != NULL ) {
 	(*display)(this->caller, frame->data,
@@ -422,7 +421,7 @@ static void null_display_frame( vo_driver_t* self, vo_frame_t *frame_gen ){
 		   frame->bytes_per_line );
 	printf("display done hope you enyoyed the frame");
 	}
-	//    }
+//    }
     
     frame->frame.displayed (&frame->frame);
 }
