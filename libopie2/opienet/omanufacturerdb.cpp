@@ -60,6 +60,7 @@ OManufacturerDB::OManufacturerDB()
         QTextStream s( &file );
         QString addr;
         QString manu;
+        QString extManu;
         while (!s.atEnd())
         {
             s >> addr;
@@ -70,13 +71,22 @@ OManufacturerDB::OManufacturerDB()
             else
             if ( addr[0] == '#' )
             {
-                s.readLine();
                 continue;
             }
             s.skipWhiteSpace();
             s >> manu;
-            s.readLine();
-            //qDebug( "ManufacturerDB: read pair %s, %s", (const char*) addr, (const char*) manu );
+            s.skipWhiteSpace();
+            s >> extManu;
+            if ( extManu[0] == '#' ) // we have an extended manufacturer
+            {
+                s.skipWhiteSpace();
+                extManu = s.readLine();
+                qDebug( "OManufacturerDB: read '%s' as extended manufacturer string", (const char*) extManu );
+                manufacturersExt.insert( addr, extManu );
+            }
+            else
+                s.readLine();
+            qDebug( "ManufacturerDB: read tuple %s, %s", (const char*) addr, (const char*) manu );
             manufacturers.insert( addr, manu );
 
         }
@@ -94,3 +104,11 @@ const QString& OManufacturerDB::lookup( const QString& macaddr ) const
 {
     return manufacturers[macaddr.upper().left(8)];
 }
+
+
+const QString& OManufacturerDB::lookupExt( const QString& macaddr ) const
+{
+    QMap<QString,QString>::ConstIterator it = manufacturersExt.find( macaddr.upper().left(8) );
+    return it == manufacturersExt.end() ? lookup( macaddr ) : *it;
+}
+

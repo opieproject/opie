@@ -41,7 +41,7 @@ class OConfig;
 class OApplication: public QPEApplication
 {
   Q_OBJECT
-  
+
   public:
     /**
      * Constructor. Parses command-line arguments and sets the window caption.

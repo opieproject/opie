@@ -31,6 +31,9 @@
 #include <opie2/oapplication.h>
 #include <opie2/oconfig.h>
 
+#include <signal.h>
+#include <stdio.h>
+
 OApplication* OApplication::_instance = 0;
 
 /**************************************************************************************************/
@@ -85,6 +88,15 @@ void OApplication::init()
     if ( !OApplication::_instance )
     {
         OApplication::_instance = this;
+
+        /* register SIGSEGV handler to give programs an option
+         * to exit gracefully, e.g. save or close devices or files.
+        struct sigaction sa;
+        sa.sa_handler = ( void (*)(int) ) &segv_handler;
+        sa.sa_flags = SA_SIGINFO | SA_RESTART;
+        sigemptyset(&sa.sa_mask);
+        sigaction(SIGSEGV, &sa, NULL);
+        */
     }
     else
     {

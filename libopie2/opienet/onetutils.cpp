@@ -119,14 +119,15 @@ QString OMacAddress::toString( bool substitute ) const
     if ( !substitute ) return manu+serial;
     // fallback - if no vendor is found, just use the number
     QString textmanu = OManufacturerDB::instance()->lookup( manu );
-    return textmanu.isNull() ? manu+serial : textmanu + serial;
+    return textmanu.isNull() ? manu+serial : textmanu+serial;
 }
 
 
 QString OMacAddress::manufacturer() const
 {
-    return OManufacturerDB::instance()->lookup( toString() );
+    return OManufacturerDB::instance()->lookupExt( toString() );
 }
+
 
 bool operator==( const OMacAddress &m1, const OMacAddress &m2 )
 {

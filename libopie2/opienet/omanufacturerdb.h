@@ -18,12 +18,27 @@
 
 #include <qmap.h>
 
+/**
+ * @brief A Ethernet card vendor database.
+ *
+ * This class encapsulates the lookup of Ethernet vendor given a
+ * certain Mac Address. Only the first three bytes define the vendor.
+ */
 class OManufacturerDB
 {
   public:
-    //FIXME make us consistent -zecke I use self(), sandman inst() you use instance() so we need to chose one!
+    /**
+     * @returns the one-and-only @ref OManufacturerDB instance.
+     */
     static OManufacturerDB* instance();
+    /**
+     * @returns the short manufacturer string given a @a macaddr.
+     */
     const QString& lookup( const QString& macaddr ) const;
+    /**
+     * @returns the enhanced manufacturer string given a @a macaddr.
+     */
+    const QString& lookupExt( const QString& macaddr ) const;
 
   protected:
     OManufacturerDB();
@@ -31,6 +46,7 @@ class OManufacturerDB
 
   private:
     QMap<QString, QString> manufacturers;
+    QMap<QString, QString> manufacturersExt;
     static OManufacturerDB* _instance;
 };
 

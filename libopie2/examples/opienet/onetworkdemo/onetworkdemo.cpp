@@ -1,4 +1,5 @@
 #include <opie2/onetwork.h>
+#include <opie2/omanufacturerdb.h>
 
 int main( int argc, char** argv )
 {
@@ -13,6 +14,9 @@ int main( int argc, char** argv )
         qDebug( "DEMO: ONetwork contains Interface '%s'", (const char*) it.current()->name() );
         qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString() );
         qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString(true) );
+        qDebug( "DEMO: MAC Manufacturer seems to be '%s'", (const char*) it.current()->macAddress().manufacturer() );
+        qDebug( "DEMO: Manufacturertest1 = '%s'", (const char*) OManufacturerDB::instance()->lookupExt( "08:00:87" ) );
+        qDebug( "DEMO: Manufacturertest2 = '%s'", (const char*) OManufacturerDB::instance()->lookupExt( "E2:0C:0F" ) );
         qDebug( "Demo: IPv4 Address is '%s'", (const char*) it.current()->ipV4Address() );
         if ( it.current()->isWireless() )
         {

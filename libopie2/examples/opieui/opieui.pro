@@ -1,3 +1,3 @@
-TEMPLATE        = subdirs
-SUBDIRS         = olistviewdemo oversatileviewdemo
+TEMPLATE = subdirs
+SUBDIRS = olistviewdemo
 
