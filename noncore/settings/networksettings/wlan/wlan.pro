@@ -1,7 +1,7 @@
 TEMPLATE        = lib
 CONFIG          += qt warn_on release
 #CONFIG		+= qt warn_on debug
-#DESTDIR         = $(OPIEDIR)/bin
+DESTDIR         = $(OPIEDIR)/plugins/.networksetup
 HEADERS		= wlanimp.h wlanmodule.h
 SOURCES		= wlanimp.cpp wlanmodule.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../
