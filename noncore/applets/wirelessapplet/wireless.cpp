@@ -36,6 +36,9 @@
 #include <math.h>
 #include <sys/types.h>
 #include <signal.h>
+#if defined (__GNUC__) && (__GNUC__ < 3)
+#define round qRound
+#endif
 
 //#define MDEBUG
 #undef MDEBUG
