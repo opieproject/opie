@@ -70,6 +70,7 @@ class QHBox;
 class OFileView;
 class OLister;
 class OFileSelectorMain;
+class OFileFactory;
 //
 
 /* the mimetypes one name and a list of mimetypes */
@@ -340,6 +341,7 @@ class OFileSelector : public QWidget {
   OFileView* currentView();
   OFileView* currentView()const;
   OLister* currentLister()const;
+  OFileFactory* factory();
   int filter();
   int sorting();
   QPixmap pixmap( const QString& );
@@ -372,6 +374,7 @@ class OFileSelector : public QWidget {
 
  private:
 
+    OFileFactory* m_fileFactory;
     OFileSelectorMain* m_mainView;
     OLister* m_lister;
     OFileView* m_fileView;
@@ -447,6 +450,7 @@ class OFileSelector : public QWidget {
     void initToolbar();
     void initLocations();
     void initializeView() {}; // FIXME
+    void initFactory();
     /**
      * Returns the current mimetype
      */

@@ -34,6 +34,7 @@
 #include "ofileselector.h"
 #include "olocallister.h"
 #include "olister.h"
+#include "odefaultfactories.h"
 
 QMap<QString,QPixmap> *OFileSelector::m_pixmaps = 0;
 
@@ -297,9 +298,7 @@ QString OFileSelector::selectedPath()const
   QString path;
   if( m_selector == Normal ){
     path = QPEApplication::documentDir();
-  } /*else if( m_selector == Extended || m_selector == ExtendedAll ){
-      ;
-      }*/
+  }  /* normal case to do */
   return path;
 }
 QStringList OFileSelector::selectedPaths() const
@@ -372,15 +371,8 @@ void OFileSelector::slotViewCheck(const QString &sel)
       initializeOldSelector();
       m_selector = Normal;
 
-  }else if( sel == tr("Files") ){
-    m_selector = Extended;
-
-    // FIXME call the factory
-    //reparse();
-  }else if( sel == tr("All Files") ){
-    m_selector = ExtendedAll;
-/* see above
-   reparse(); */
+  }else {
+;
   }
 }
 
@@ -474,6 +466,7 @@ void OFileSelector::locationComboChanged()
 }
 void OFileSelector::init()
 {
+  initFactory();
   m_lay = new QVBoxLayout( this );
   m_lay->setSpacing(0 );
 
@@ -653,10 +646,6 @@ void OFileSelector::initializeChooser()
     m_boxView->setSpacing( 8 );
     m_lay->addWidget(m_boxView, 0 );
 
-    m_viewCheck->insertItem( tr("Documents") );
-    m_viewCheck->insertItem( tr("Files") );
-    m_viewCheck->insertItem( tr("All Files") );
-    /* update to custom views */
 
     updateMimeCheck();
 
@@ -951,6 +940,17 @@ void OFileSelector::reparse()
   // reenable painting and updates
 }
 
+/*
+ * the factory
+ */
+void OFileSelector::initFactory() {
+    m_fileFactory = new OFileFactory();
+    m_fileFactory->addLister(tr("Files"), newLocalLister );
+    m_fileFactory->addView(tr("List View"), newFileListView );
+    /* the factory is just a dummy */
+    m_fileFactory->addView(tr("Documents"), newFileListView );
+}
+
 
 OFileView* OFileSelector::currentView() {
     return m_fileView;
@@ -1013,7 +1013,7 @@ void OFileSelector::initializeOldSelector() {
 				 m_mainView, "fileselector",
 				 FALSE, FALSE);
     m_select->setCategorySelectVisible( FALSE );
-    m_select->setTypeComboVisible( FALSE );				 
+    m_select->setTypeComboVisible( FALSE );
 
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
