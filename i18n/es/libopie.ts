@@ -148,19 +148,19 @@
     <name>OTimePickerDialogBase</name>
     <message>
         <source>TimePicker</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar Hora</translation>
     </message>
     <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation>:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tomar hora:</translation>
     </message>
 </context>
 <context>

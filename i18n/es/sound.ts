@@ -3,11 +3,11 @@
     <name>SoundSettings</name>
     <message>
         <source>Shows icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Mostrar icono</translation>
     </message>
     <message>
         <source>Hides icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocultar icono</translation>
     </message>
 </context>
 <context>
@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Restart Opie if needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiniciar Opie si es preciso</translation>
     </message>
 </context>
 </TS>

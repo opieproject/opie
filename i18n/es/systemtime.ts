@@ -3,7 +3,7 @@
     <name>SetDateTime</name>
     <message>
         <source>Set System Time</source>
-        <translation>Fijar hora del sistema</translation>
+        <translation>Fijar Hora del Sistema</translation>
     </message>
     <message>
         <source>Time Zone</source>

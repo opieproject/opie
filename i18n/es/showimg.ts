@@ -3,18 +3,18 @@
     <name>ControlsDialog</name>
     <message>
         <source>Brightness</source>
-        <translation type="unfinished"></translation>
+        <translation>Brillo</translation>
     </message>
 </context>
 <context>
     <name>ImageFileSelector</name>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo</translation>
     </message>
 </context>
 <context>
@@ -61,63 +61,63 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver miniaturas</translation>
     </message>
     <message>
         <source>Slideshow</source>
-        <translation type="unfinished"></translation>
+        <translation>Diapositivas</translation>
     </message>
     <message>
         <source>Preferences..</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferencias..</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayuda</translation>
     </message>
     <message>
         <source>Image Info ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Info imagen ...</translation>
     </message>
     <message>
         <source>Open ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ...</translation>
     </message>
     <message>
         <source>Rotate 270</source>
-        <translation type="unfinished">Rotar 270º</translation>
+        <translation>Rotar 270º</translation>
     </message>
     <message>
         <source>Brightness ...</source>
-        <translation type="unfinished"></translation>
+        <translation>Brillo ...</translation>
     </message>
     <message>
         <source>Black And White</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanco y negro</translation>
     </message>
     <message>
         <source>Scale to Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ajustar a la pantalla</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>%1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 colores</translation>
     </message>
     <message>
         <source>%1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 niveles alpha</translation>
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>canal alpha de 8 bits</translation>
     </message>
 </context>
 </TS>

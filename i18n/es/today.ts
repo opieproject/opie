@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay más citas para hoy</translation>
     </message>
 </context>
 <context>

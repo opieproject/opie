@@ -223,7 +223,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished">Disco duro</translation>
+        <translation>Disco duro</translation>
     </message>
 </context>
 <context>
@@ -724,7 +724,7 @@ Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Memoria interna</translation>
     </message>
 </context>
 <context>
@@ -737,7 +737,7 @@ Libere memoria e intételo de nuevo.</translation>
         <source>Unable to schedule alarm.
 Please free up space and try again</source>
         <translation>Incapaz de programar alarma.
-Libere memoria e intételo de nuevo</translation>
+Libere memoria e inténtelo de nuevo</translation>
     </message>
 </context>
 </TS>

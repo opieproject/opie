@@ -3,7 +3,7 @@
     <name>HandwritingHelp</name>
     <message>
         <source>Handwriting Help</source>
-        <translation>Ayuda escritura manual</translation>
+        <translation>Ayuda Escritura Manual</translation>
     </message>
     <message>
         <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Multi-stroke character timeout:</source>
-        <translation>Espera agotada al trazar caracter:</translation>
+        <translation>Espera en caracteres multitrazo:</translation>
     </message>
     <message>
         <source>ms</source>
@@ -83,11 +83,11 @@
     </message>
     <message>
         <source>Input areas displayed</source>
-        <translation>Áreas entrada mostradas</translation>
+        <translation>Áreas de entrada mostradas</translation>
     </message>
     <message>
         <source>Upper and lower case areas</source>
-        <translation>Áreas mayúsculas y minúsculas</translation>
+        <translation>Áreas de mayúsculas y minúsculas</translation>
     </message>
     <message>
         <source>Lower case (toggle Upper case)</source>
@@ -98,7 +98,7 @@
     <name>QIMPenSetup</name>
     <message>
         <source>Setup Handwriting Input</source>
-        <translation>Configurar escritura manual</translation>
+        <translation>Configurar Escritura Manual</translation>
     </message>
     <message>
         <source>Character Profile:</source>

@@ -97,39 +97,39 @@
     </message>
     <message>
         <source>Tab style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo etiquetas:</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Etiquetas con iconos</translation>
     </message>
     <message>
         <source>Drop down list</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista donde soltar</translation>
     </message>
     <message>
         <source>Drop down list w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista donde soltar con iconos</translation>
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Arriba</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Abajo</translation>
     </message>
     <message>
         <source>Enable advanced options in Opie apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Habilitar opciones avanzadas en Opie</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avanzada</translation>
     </message>
 </context>
 <context>

@@ -33,11 +33,11 @@ Acceso denegado</translation>
     </message>
     <message>
         <source>Enter new passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclee nuevo código</translation>
     </message>
     <message>
         <source>Re-enter new passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Reintroduzca nuevo código</translation>
     </message>
 </context>
 <context>

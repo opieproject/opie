@@ -241,11 +241,11 @@ Debaría estar vacío</translation>
     </message>
     <message>
         <source>New Server name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo nombre servidor</translation>
     </message>
     <message>
         <source>Sorry name already taken</source>
-        <translation type="unfinished"></translation>
+        <translation>Lo siento, nombre ya usado</translation>
     </message>
 </context>
 </TS>

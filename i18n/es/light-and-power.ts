@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Light and Power Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de Luz y Energía</translation>
     </message>
 </context>
 </TS>

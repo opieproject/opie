@@ -10,7 +10,7 @@
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation>Nueva tarea</translation>
+        <translation>Nueva Tarea</translation>
     </message>
     <message>
         <source>Category:</source>

@@ -180,28 +180,35 @@ Do you really want to delete it?</source>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>No pude copiar
+</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>a
+</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>No puede mover
+</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Advanced FileManager
+is copyright 2002 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL
+</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir a Documentos</translation>
     </message>
 </context>
 <context>

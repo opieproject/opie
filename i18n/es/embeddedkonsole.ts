@@ -188,7 +188,7 @@
     </message>
     <message>
         <source>Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista comandos</translation>
     </message>
 </context>
 <context>

@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Available (%1 kB)</source>
-        <translation>Disponible (%1 kB)</translation>
+        <translation>Libre (%1 kB)</translation>
     </message>
 </context>
 <context>

@@ -158,39 +158,40 @@
     </message>
     <message>
         <source>Insert Time and Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Insertar hora y fecha</translation>
     </message>
     <message>
         <source>Advanced features</source>
-        <translation type="unfinished"></translation>
+        <translation>Funciones avanzadas</translation>
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt; file.&lt;BR&gt;Open &lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished"></translation>
+        <translation>El Editor de Textos ha detectado que&lt;BR&gt;ha seleccionado un fichero &lt;B&gt;.desktop&lt;/B&gt;.&lt;BR&gt;¿Abro &lt;B&gt;.desktop&lt;/B&gt; o el fichero que &lt;B&gt;enlaza&lt;/B&gt;?</translation>
     </message>
     <message>
         <source>Text Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar Textos</translation>
     </message>
     <message>
         <source>Write Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al escribir</translation>
     </message>
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Realmente quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+del dico?&lt;BR&gt;¡Es &lt;B&gt;irreversible!&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Fijar permisos fichero</translation>
+        <translation>Fije los Permisos del Fichero</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
@@ -250,7 +251,7 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Permisos fichero</translation>
     </message>
 </context>
 </TS>

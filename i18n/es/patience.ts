@@ -3,7 +3,7 @@
     <name>CanvasCardWindow</name>
     <message>
         <source>Patience</source>
-        <translation>Solitario</translation>
+        <translation>Paciencia</translation>
     </message>
     <message>
         <source>Freecell</source>

@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>-force-overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>-force-overwrite</translation>
     </message>
 </context>
 <context>
