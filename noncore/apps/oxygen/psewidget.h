@@ -7,26 +7,23 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "dataTable.h"
-#include <qdialog.h>
+#ifndef _PSEWIDGET_H
+#define _PSEWIDGET_H
+
+#include <qwidget.h>
 
 class QTable;
 class QComboBox;
 class QLabel;
 
-class dataWidgetUI : public QDialog
+
+class PSEWidget : public QWidget
 {
 	Q_OBJECT
 	
     public:
-		dataWidgetUI();
+		PSEWidget();
 
-    private:
-        void createTableLayout();
-        OxydataTable *DataTable;
-        QComboBox *dataCombo;
-        QLabel *left, *middle, *right;
-
-    private slots:
-        void slotShowData(int);
 };
+
+#endif

@@ -1,4 +1,3 @@
-
 /***************************************************************************
  *                                                                         *
  * This program is free software; you can redistribute it and/or modify    *
@@ -7,26 +6,11 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "dataTable.h"
-#include <qdialog.h>
+#include "oxygen.h"
 
-class QTable;
-class QComboBox;
-class QLabel;
+#include <qpe/config.h>
+#include "psewidget.h"
 
-class dataWidgetUI : public QDialog
+PSEWidget::PSEWidget() : QWidget()
 {
-	Q_OBJECT
-	
-    public:
-		dataWidgetUI();
-
-    private:
-        void createTableLayout();
-        OxydataTable *DataTable;
-        QComboBox *dataCombo;
-        QLabel *left, *middle, *right;
-
-    private slots:
-        void slotShowData(int);
-};
+}

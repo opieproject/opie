@@ -13,6 +13,9 @@
 #include <qstring.h>
 #include <qcombobox.h>
 #include <qlayout.h>
+#include <qtable.h>
+#include <qhbox.h>
+#include <qlabel.h>
 
 dataWidgetUI::dataWidgetUI() : QDialog()
 {
@@ -21,10 +24,17 @@ dataWidgetUI::dataWidgetUI() : QDialog()
     QVBoxLayout *vbox = new QVBoxLayout( this );
     
     dataCombo = new QComboBox( this );
-    DataTable = new OxydataTable( 7,2, this );
+    DataTable = new OxydataTable( 8,2, this );
     DataTable->setShowGrid( false );
+    DataTable->setHScrollBarMode(QScrollView::AlwaysOff);
+
+    QHBox *hbox = new QHBox( this );
+    left = new QLabel( hbox );
+    middle = new QLabel( hbox );
+    right = new QLabel( hbox );
 
     vbox->addWidget( dataCombo );
+    vbox->addWidget( hbox );
     vbox->addWidget( DataTable );
     
     DataTable->show();
@@ -59,13 +69,24 @@ void dataWidgetUI::createTableLayout(){
     DataTable->setText( 4,0,"Atomic radius" );
     DataTable->setText( 5,0,"Ionizationenergie" );
     DataTable->setText( 6,0,"Density" );
-    DataTable->setText( 7,0,"Boilingpoint" );
+    DataTable->setText( 7,0, tr( "Boilingpoint" ) );
+    DataTable->setText( 8,0, tr( "Meltingpoint" ) );
 }
 
 
 void dataWidgetUI::slotShowData(int number){
     Config test( "/home/opie/Settings/oxygendata", Config::File );
     test.setGroup( QString::number( number+1 ));
+    
+    left->setText( test.readEntry( "Symbol" ) );
+    middle->setText( test.readEntry( "Name" ) );
+    right->setText( QString::number( number+1 ) );
+
+    QFont bf;
+    bf.setBold( true );
+    bf.setPointSize( bf.pointSize()+2 );
+    middle->setFont( bf );
+
     QString weight = test.readEntry( "Weight" );
     DataTable->setText( 0,1,weight ); 
     QString block = test.readEntry( "Block" );
@@ -82,4 +103,6 @@ void dataWidgetUI::slotShowData(int number){
     DataTable->setText( 6,1,dens ); 
     QString bp = test.readEntry( "BP" );
     DataTable->setText( 7,1,bp ); 
+    QString mp = test.readEntry( "MP" );
+    DataTable->setText( 7,1,mp ); 
 }

@@ -15,6 +15,7 @@
 #include "calcdlg.h"
 #include "calcdlgui.h"
 #include "datawidgetui.h"
+#include "psewidget.h"
 
 Oxygen::Oxygen()
   : QMainWindow()
@@ -48,9 +49,15 @@ void Oxygen::slotCalculations(){
 
 void Oxygen::slotData(){ 
     dataWidgetUI *DataWidgetUI = new dataWidgetUI();
+    DataWidgetUI->showMaximized();
     DataWidgetUI->show();
 };
 
 void Oxygen::slotSettings(){ };
-void Oxygen::slotPSE(){ };
+
+void Oxygen::slotPSE(){
+    PSEWidget *pse = new PSEWidget();
+    pse->showMaximized();
+    pse->show();
+};
 
