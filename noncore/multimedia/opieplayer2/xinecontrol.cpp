@@ -31,8 +31,8 @@ void XineControl::play( const QString& fileName ) {
     }
 
     // determine if slider is shown
-    mediaPlayerState->setIsStreaming( mdetect.isStreaming( fileName ) );
-
+    //    mediaPlayerState->setIsStreaming( mdetect.isStreaming( fileName ) );
+    mediaPlayerState->setIsStreaming( libXine->isSeekable() );
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
 
