@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HandwritingHelp</name>
     <message>
@@ -79,19 +79,27 @@
     <name>QIMPenPrefBase</name>
     <message>
         <source>Input areas displayed</source>
-        <translation type='obsolete'>Áreas de entrada exibidas</translation>
+        <translation type="unfinished">Áreas de entrada exibidas</translation>
     </message>
     <message>
         <source>Upper and lower case areas</source>
-        <translation type='obsolete'>Área p/ minúsculas e maiúsculas</translation>
+        <translation type="unfinished">Área p/ minúsculas e maiúsculas</translation>
     </message>
     <message>
         <source>Multi-stroke character timeout:</source>
-        <translation type='obsolete'>Tempo limite p/ caractere multi-linha</translation>
+        <translation type="unfinished">Tempo limite p/ caractere multi-linha</translation>
     </message>
     <message>
         <source>Lower case (toggle Upper case)</source>
-        <translation type='obsolete'>Minúsculas (ligar Maiúsculas)</translation>
+        <translation type="unfinished">Minúsculas (ligar Maiúsculas)</translation>
+    </message>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ms</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -129,7 +137,7 @@ Sair assim mesmo ?</translation>
     </message>
     <message>
         <source>%1 ms</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

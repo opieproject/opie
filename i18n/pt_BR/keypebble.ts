@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>KRFBConnection</name>
     <message>
@@ -155,51 +155,51 @@ nesta conta. Por favor tente mais tarde.</translation>
     <name>VncOptionsBase</name>
     <message>
         <source>CoRRE encoding</source>
-        <translation type='obsolete'>Codificação CoRRE</translation>
+        <translation type="unfinished">Codificação CoRRE</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type='obsolete'>RRE encoding</translation>
+        <translation type="unfinished">RRE encoding</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type='obsolete'>Conexão</translation>
+        <translation type="unfinished">Conexão</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type='obsolete'>Codificação copia de retângulo</translation>
+        <translation type="unfinished">Codificação copia de retângulo</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type='obsolete'>Requisitar sessão 8-bits</translation>
+        <translation type="unfinished">Requisitar sessão 8-bits</translation>
     </message>
     <message>
         <source>VNC Viewer Options</source>
-        <translation type='obsolete'>Opções do VNC Viewer</translation>
+        <translation type="unfinished">Opções do VNC Viewer</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type='obsolete'>Requisitar sessão compartilhada</translation>
+        <translation type="unfinished">Requisitar sessão compartilhada</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type='obsolete'>Milisegundos</translation>
+        <translation type="unfinished">Milisegundos</translation>
     </message>
     <message>
         <source>Data Encoding</source>
-        <translation type='obsolete'>Codificação dos dados</translation>
+        <translation type="unfinished">Codificação dos dados</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type='obsolete'>Verificar atualizações da tela a cada:</translation>
+        <translation type="unfinished">Verificar atualizações da tela a cada:</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type='obsolete'>Trazer para frente com campainha</translation>
+        <translation type="unfinished">Trazer para frente com campainha</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type='obsolete'>Codificação Hextile</translation>
+        <translation type="unfinished">Codificação Hextile</translation>
     </message>
 </context>
 </TS>

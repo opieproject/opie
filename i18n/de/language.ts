@@ -1,13 +1,13 @@
 <!DOCTYPE TS><TS>
-<context encoding="UTF-8">
+<context>
     <name>LanguageSettingsBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Language</source>
-        <translation>Sprache</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Select language</source>
-        <translation>Wählen Sie Ihre Sprache</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

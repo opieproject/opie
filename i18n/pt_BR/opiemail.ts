@@ -1,38 +1,57 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
+<context>
+    <name>@default</name>
+    <message>
+        <source>Reply</source>
+        <translation type="unfinished">Responder</translation>
+    </message>
+    <message>
+        <source>Reply All</source>
+        <translation type="unfinished">Responder a Todos</translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Apagar</translation>
+    </message>
+</context>
 <context>
     <name>Composer</name>
     <message>
         <source>CC</source>
-        <translation type='obsolete'>CC</translation>
+        <translation type="unfinished">CC</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type='obsolete'>Para:</translation>
+        <translation type="unfinished">Para:</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type='obsolete'>Enviar</translation>
+        <translation type="unfinished">Enviar</translation>
     </message>
     <message>
         <source>From:</source>
-        <translation type='obsolete'>De:</translation>
+        <translation type="unfinished">De:</translation>
     </message>
     <message>
         <source>Queue</source>
-        <translation type='obsolete'>Fila</translation>
+        <translation type="unfinished">Fila</translation>
     </message>
     <message>
         <source>Reset</source>
-        <translation type='obsolete'>Reiniciar</translation>
+        <translation type="unfinished">Reiniciar</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type='obsolete'>Cancelar</translation>
+        <translation type="unfinished">Cancelar</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type='obsolete'>Assunto</translation>
+        <translation type="unfinished">Assunto</translation>
+    </message>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -66,63 +85,63 @@
     <name>OpieMailConfig</name>
     <message>
         <source>&amp;Add</source>
-        <translation type='obsolete'>&amp;Adic.</translation>
+        <translation type="unfinished">&amp;Adic.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type='obsolete'>Nome</translation>
+        <translation type="unfinished">Nome</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type='obsolete'>Usuário</translation>
+        <translation type="unfinished">Usuário</translation>
     </message>
     <message>
         <source>Input</source>
-        <translation type='obsolete'>Entrada</translation>
+        <translation type="unfinished">Entrada</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation type='obsolete'>Pasta</translation>
+        <translation type="unfinished">Pasta</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type='obsolete'>Saida</translation>
+        <translation type="unfinished">Saida</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type='obsolete'>Servidor</translation>
+        <translation type="unfinished">Servidor</translation>
     </message>
     <message>
         <source>Transport</source>
-        <translation type='obsolete'>Transporte</translation>
+        <translation type="unfinished">Transporte</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type='obsolete'>Protocolo</translation>
+        <translation type="unfinished">Protocolo</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type='obsolete'>&amp;Remover</translation>
+        <translation type="unfinished">&amp;Remover</translation>
     </message>
     <message>
         <source>Identity</source>
-        <translation type='obsolete'>Identidade</translation>
+        <translation type="unfinished">Identidade</translation>
     </message>
     <message>
         <source>&amp;Modify</source>
-        <translation type='obsolete'>&amp;Modificar</translation>
+        <translation type="unfinished">&amp;Modificar</translation>
     </message>
     <message>
         <source>OpieMail Config</source>
-        <translation type='obsolete'>Configuração OpieMail</translation>
+        <translation type="unfinished">Configuração OpieMail</translation>
     </message>
     <message>
         <source>Folder name</source>
-        <translation type='obsolete'>Nome da Pasta</translation>
+        <translation type="unfinished">Nome da Pasta</translation>
     </message>
     <message>
         <source>Folders</source>
-        <translation type='obsolete'>Pastas</translation>
+        <translation type="unfinished">Pastas</translation>
     </message>
 </context>
 <context>
@@ -130,175 +149,175 @@
     <message>
         <source>Delete the mailbox?
 All mails will be deleted.</source>
-        <translation type='obsolete'>Apagar a caixa?
+        <translation type="unfinished">Apagar a caixa?
 Todas as mensagens serão removidas.</translation>
     </message>
     <message>
         <source>Delete mailbox</source>
-        <translation type='obsolete'>Apagar caixa</translation>
+        <translation type="unfinished">Apagar caixa</translation>
     </message>
 </context>
 <context>
     <name>OpieMailFolder</name>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>OpieMail Folder Config</source>
-        <translation type='obsolete'>Configuração de Pasta OpieMail</translation>
+        <translation type="unfinished">Configuração de Pasta OpieMail</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type='obsolete'>Descrição</translation>
+        <translation type="unfinished">Descrição</translation>
     </message>
 </context>
 <context>
     <name>OpieMailIdenty</name>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>Signature:</source>
-        <translation type='obsolete'>Assinatura</translation>
+        <translation type="unfinished">Assinatura</translation>
     </message>
     <message>
         <source>EMail:</source>
-        <translation type='obsolete'>E-Mail</translation>
+        <translation type="unfinished">E-Mail</translation>
     </message>
     <message>
         <source>Organization:</source>
-        <translation type='obsolete'>Organização:</translation>
+        <translation type="unfinished">Organização:</translation>
     </message>
     <message>
         <source>OpieMail Identity - Config</source>
-        <translation type='obsolete'>OpieMail - Configuração de Identidade</translation>
+        <translation type="unfinished">OpieMail - Configuração de Identidade</translation>
     </message>
     <message>
         <source>Identity:</source>
-        <translation type='obsolete'>Identidade</translation>
+        <translation type="unfinished">Identidade</translation>
     </message>
     <message>
         <source>Reply To</source>
-        <translation type='obsolete'>Responder Para</translation>
+        <translation type="unfinished">Responder Para</translation>
     </message>
     <message>
         <source>Use for sending</source>
-        <translation type='obsolete'>Use para enviar</translation>
+        <translation type="unfinished">Use para enviar</translation>
     </message>
 </context>
 <context>
     <name>OpieMailInputConfig</name>
     <message>
         <source>110</source>
-        <translation type='obsolete'>110</translation>
+        <translation type="unfinished">110</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type='obsolete'>Porta</translation>
+        <translation type="unfinished">Porta</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>Check every:</source>
-        <translation type='obsolete'>Vericar a cada:</translation>
+        <translation type="unfinished">Vericar a cada:</translation>
     </message>
     <message>
         <source>&amp;Keep Mail on Server</source>
-        <translation type='obsolete'>&amp;Manter Correio no Servidor</translation>
+        <translation type="unfinished">&amp;Manter Correio no Servidor</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type='obsolete'> minutos</translation>
+        <translation type="unfinished"> minutos</translation>
     </message>
     <message>
         <source>Destination Folder</source>
-        <translation type='obsolete'>Pasta de Destino</translation>
+        <translation type="unfinished">Pasta de Destino</translation>
     </message>
     <message>
         <source>Enable intervall checking.</source>
-        <translation type='obsolete'>Habilitar checagem periódica</translation>
+        <translation type="unfinished">Habilitar checagem periódica</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type='obsolete'>Senha</translation>
+        <translation type="unfinished">Senha</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type='obsolete'>Protocolo</translation>
+        <translation type="unfinished">Protocolo</translation>
     </message>
     <message>
         <source>Server:</source>
-        <translation type='obsolete'>Servidor:</translation>
+        <translation type="unfinished">Servidor:</translation>
     </message>
     <message>
         <source>OpieMailInput</source>
-        <translation type='obsolete'>OpieMailEntrada</translation>
+        <translation type="unfinished">OpieMailEntrada</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type='obsolete'>Nome de Usuário:</translation>
+        <translation type="unfinished">Nome de Usuário:</translation>
     </message>
     <message>
         <source>&amp;Delete mail from server when deleted local.</source>
-        <translation type='obsolete'>&amp;Remover correio do servidor quando for apagado localmente.</translation>
+        <translation type="unfinished">&amp;Remover correio do servidor quando for apagado localmente.</translation>
     </message>
 </context>
 <context>
     <name>OpieMailOutputConfig</name>
     <message>
         <source>25</source>
-        <translation type='obsolete'>25</translation>
+        <translation type="unfinished">25</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type='obsolete'>Porta</translation>
+        <translation type="unfinished">Porta</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>Server requires authentication</source>
-        <translation type='obsolete'>Servidor requer autenticação</translation>
+        <translation type="unfinished">Servidor requer autenticação</translation>
     </message>
     <message>
         <source>OpieMailOutPut</source>
-        <translation type='obsolete'>OpieMailSaida</translation>
+        <translation type="unfinished">OpieMailSaida</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type='obsolete'>Senha</translation>
+        <translation type="unfinished">Senha</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type='obsolete'>Protocolo</translation>
+        <translation type="unfinished">Protocolo</translation>
     </message>
     <message>
         <source>Server:</source>
-        <translation type='obsolete'>Servidor:</translation>
+        <translation type="unfinished">Servidor:</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type='obsolete'>Nome de Usuário:</translation>
+        <translation type="unfinished">Nome de Usuário:</translation>
     </message>
 </context>
 <context>
     <name>QMailCompose</name>
     <message>
         <source>Reply</source>
-        <translation type='obsolete'>Responder</translation>
+        <translation type="obsolete">Responder</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type='obsolete'>Apagar</translation>
+        <translation type="obsolete">Apagar</translation>
     </message>
     <message>
         <source>Reply All</source>
-        <translation type='obsolete'>Responder a Todos</translation>
+        <translation type="obsolete">Responder a Todos</translation>
     </message>
 </context>
 <context>
@@ -333,15 +352,22 @@ Todas as mensagens serão removidas.</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type='unfinished'>Responder</translation>
+        <translation type="obsolete">Responder</translation>
     </message>
     <message>
         <source>Reply All</source>
-        <translation type='unfinished'>Responder a Todos</translation>
+        <translation type="obsolete">Responder a Todos</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type='unfinished'>Apagar</translation>
+        <translation type="obsolete">Apagar</translation>
+    </message>
+</context>
+<context>
+    <name>SplitterWidgetBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

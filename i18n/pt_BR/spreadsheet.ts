@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>PIMSpreadsheetWindow</name>
     <message>
@@ -33,6 +33,13 @@
     <message>
         <source>Equation</source>
         <translation>Equação</translation>
+    </message>
+</context>
+<context>
+    <name>SpreadsheetWidget</name>
+    <message>
+        <source>SpreadsheetWidget</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

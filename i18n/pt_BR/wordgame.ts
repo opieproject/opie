@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Board</name>
     <message>
@@ -11,8 +11,8 @@
         <translation>Adicionar</translation>
     </message>
     <message>
-        <source>&lt;p&gt;The word "%1" is not in the dictionary.</source>
-        <translation>&lt;p&gt;A palavra "%1" não está no dicionário.</translation>
+        <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
+        <translation>&lt;p&gt;A palavra &quot;%1&quot; não está no dicionário.</translation>
     </message>
     <message>
         <source>Blanks: </source>
@@ -35,54 +35,58 @@
     <name>NewGameBase</name>
     <message>
         <source>Rules</source>
-        <translation type='obsolete'>Regras</translation>
+        <translation type="unfinished">Regras</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type='obsolete'>&amp;Iniciar</translation>
+        <translation type="unfinished">&amp;Iniciar</translation>
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type='obsolete'>AI3: Jogador IA inteligente</translation>
+        <translation type="unfinished">AI3: Jogador IA inteligente</translation>
     </message>
     <message>
         <source>Players</source>
-        <translation type='obsolete'>Jogadores</translation>
+        <translation type="unfinished">Jogadores</translation>
+    </message>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>RulesBase</name>
     <message>
         <source>&amp;OK</source>
-        <translation type='obsolete'>&amp;OK</translation>
+        <translation type="unfinished">&amp;OK</translation>
     </message>
     <message>
         <source>Board</source>
-        <translation type='obsolete'>Tabuleiro</translation>
+        <translation type="unfinished">Tabuleiro</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type='obsolete'>Tamanho:</translation>
+        <translation type="unfinished">Tamanho:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type='obsolete'>Apagar</translation>
+        <translation type="unfinished">Apagar</translation>
     </message>
     <message>
         <source>Game Rules</source>
-        <translation type='obsolete'>Regras do Jogo</translation>
+        <translation type="unfinished">Regras do Jogo</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type='obsolete'>&amp;Cancelar</translation>
+        <translation type="unfinished">&amp;Cancelar</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type='obsolete'>Editar...</translation>
+        <translation type="unfinished">Editar...</translation>
     </message>
 </context>
 <context>

@@ -3,93 +3,134 @@
     <name>Lan</name>
     <message>
         <source>LAN Setup</source>
-        <translation>LAN einrichten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>This name already
 exists. Please choose a
 different name.</source>
-        <translation>Dieser Name existiert
-bereits. Bitte wählen Sie
-einen anderen Namen.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>LanBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>LAN </source>
-        <translation>LAN</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Account</source>
-        <translation>Account</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Specify TCP/IP Information</source>
-        <translation>TCP/IP manuell konfigurieren</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Obtain TCP/IP Information Automatically</source>
-        <translation>Automatische TCP/IP-Konfiguration</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>TCP/IP</source>
-        <translation>TCP/IP</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>IP Address</source>
-        <translation>IP-Adresse</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Gateway</source>
-        <translation>Gateway</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Subnet Mask</source>
-        <translation>Subnet-Maske</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Broadcast</source>
-        <translation>Broadcast</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>DNS</source>
-        <translation>DNS</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>First DNS</source>
-        <translation>Erster Nameserver</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Second DNS</source>
-        <translation>Zweiter Nameserver</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Proxies</source>
-        <translation>Proxies</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>LanState</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Form2</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Service:</source>
-        <translation>Service:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>IP address:</source>
-        <translation>IP-Adresse</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>0.0.0.0</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProxiesPageBase</name>
+    <message>
+        <source>Proxy Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto configure proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FTP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No proxies for:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

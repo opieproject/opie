@@ -1,196 +1,235 @@
 <!DOCTYPE TS><TS>
-<context encoding="UTF-8">
+<context>
     <name>DialupBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Dial-up </source>
-        <translation>Modemverbindung</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Account</source>
-        <translation>Account</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Name:</source>
-        <translation>Name:</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Phone:</source>
-        <translation>Telefon:</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Password:</source>
-        <translation>Passwort:</translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Username:</source>
-        <translation>Benutzername:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Modem</source>
-        <translation>Modem</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>AT-dial:</source>
-        <translation>AT-Kommando:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>ATDT</source>
-        <translation>ATDT</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>ATDP</source>
-        <translation>ATDP</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Speed:</source>
-        <translation>Geschwindigkeit:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>4800</source>
-        <translation>4800</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>9600</source>
-        <translation>9600</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>19200</source>
-        <translation>19200</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>38400</source>
-        <translation>38400</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>57600</source>
-        <translation>57600</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>115200</source>
-        <translation>115200</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Wait time:</source>
-        <translation>Wartezeit:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>1</source>
-        <translation>1</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>sec</source>
-        <translation>Sek</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Flow control:</source>
-        <translation>Flusskontrolle:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Hardware flow control</source>
-        <translation>Hardware</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Network</source>
-        <translation>Netzwerk</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Auto-detect name servers</source>
-        <translation>Automatische Nameserver-Ermittlung</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Gateway</source>
-        <translation>Gateway</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Auto-detect routing</source>
-        <translation>Automatische Routing-Ermittlung</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>First DNS</source>
-        <translation>Erster Nameserver</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Second DNS</source>
-        <translation>Zweiter Nameserver</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Proxies</source>
-        <translation>Proxies</translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Demand Dialing</source>
-        <translation>Anforderungsdialog</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Manual connect and disconnect</source>
-        <translation>Manuelles Verbinden und Trennen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source> seconds</source>
-        <translation>Sekunden</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Idle timeout:</source>
-        <translation>Trennen nach:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Automatic connect and disconnect</source>
-        <translation>Automatisches Verbinden und Trennen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Manual connect, automatic disconnect</source>
-        <translation>Manuelles Verbinden, automatisch Trennen</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-detect name servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gateway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto-detect routing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxies</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PppMon</name>
     <message>
-        <source>Initializing</source>
-        <translation type="obsolete">Initialisierung</translation>
-    </message>
-    <message>
-        <source>Connecting</source>
-        <translation>Verbinden...</translation>
-    </message>
-    <message>
-        <source>Authenticating</source>
-        <translation>Authentifizierung</translation>
-    </message>
-    <message>
-        <source>No dialtone</source>
-        <translation>Kein Wählton</translation>
-    </message>
-    <message>
-        <source>No carrier</source>
-        <translation>Kein Carrier</translation>
-    </message>
-    <message>
-        <source>Number is busy</source>
-        <translation>Besetzt</translation>
-    </message>
-    <message>
-        <source>Timed out</source>
-        <translation>Timed out</translation>
-    </message>
-    <message>
-        <source>Connection failed</source>
-        <translation>Verbindung fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Authentication Failed</source>
-        <translation>Falsche Authentifizierung</translation>
-    </message>
-    <message>
-        <source>Connected</source>
-        <translation>Verbunden</translation>
-    </message>
-    <message>
         <source>Waiting for activity</source>
-        <translation>Warte auf Aktivität</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Initializing modem</source>
-        <translation>Modem wird Initialisiert</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connecting</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authenticating</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No dialtone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No carrier</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number is busy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Timed out</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Authentication Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProxiesPageBase</name>
+    <message>
+        <source>Proxy Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto configure proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>HTTP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FTP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No proxies for:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

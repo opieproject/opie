@@ -3,56 +3,87 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation>Passcode einstellen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation>Passcode ändern</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation>Passcode eingeben</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation>Passcode ungültig</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
 Access denied</source>
-        <translation>Der eingegebene Passcode ist ungültig.
-Zugang nicht gestattet</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>SecurityBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Security Settings</source>
-        <translation>Sicherheitseinstellungen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Change passcode</source>
-        <translation>Passcode ändern</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Clear passcode</source>
-        <translation>Passcode löschen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Require pass code at power-on</source>
-        <translation>Passcode beim Anschalten anfordern</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Allow incoming Telnet</source>
-        <translation>Erlaube eingehendes Telnet</translation>
+    <message>
+        <source>Sync</source>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Allow incoming SSH</source>
-        <translation>Erlaube eingehende SSH</translation>
+    <message>
+        <source>Accept sync from network:</source>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
+        <source>192.168.1.0/24 (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>192.168.0.0/16</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>172.16.0.0/12</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>10.0.0.0/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Any</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation>&lt;p&gt;Der Passcode bietet einen minimalen Schutz gegen unbefugte Benutzung des Gerätes.</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>LoadInfo</name>
     <message>
@@ -64,7 +64,7 @@
     <name>ProcessInfo</name>
     <message>
         <source>No</source>
-        <translation type='obsolete'>Não</translation>
+        <translation type="obsolete">Não</translation>
     </message>
     <message>
         <source>PID</source>
@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>Yes</source>
-        <translation type='obsolete'>Sim</translation>
+        <translation type="obsolete">Sim</translation>
     </message>
     <message>
         <source>Time</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Kill Process?</source>
-        <translation type='obsolete'>Matar processo?</translation>
+        <translation type="obsolete">Matar processo?</translation>
     </message>
 </context>
 <context>

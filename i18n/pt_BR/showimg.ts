@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ImageViewer</name>
     <message>
@@ -48,23 +48,23 @@
     </message>
     <message>
         <source>Open</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

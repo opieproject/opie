@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>SetDateTime</name>
     <message>
@@ -44,15 +44,15 @@
     </message>
     <message>
         <source>Applet format</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>hh:mm</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>D/M hh:mm</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

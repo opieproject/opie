@@ -3,19 +3,19 @@
     <name>CardMonitor</name>
     <message>
         <source>Eject card</source>
-        <translation>Karte auswerfen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>CardMonitor</source>
-        <translation>KartenMonitor</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Card eject failed!</source>
-        <translation>Auswerfen der Karte fehlgeschlagen!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Categories</name>
     <message>
@@ -49,27 +49,27 @@
     <name>CategoryEditBase</name>
     <message>
         <source>Add</source>
-        <translation type='obsolete'>Adicionar</translation>
+        <translation type="unfinished">Adicionar</translation>
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation type='obsolete'>Categorias Vão Aqui</translation>
+        <translation type="unfinished">Categorias Vão Aqui</translation>
     </message>
     <message>
         <source>Category Edit</source>
-        <translation type='obsolete'>Editar Categoria</translation>
+        <translation type="unfinished">Editar Categoria</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type='obsolete'>Global</translation>
+        <translation type="unfinished">Global</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type='obsolete'>Categorias</translation>
+        <translation type="unfinished">Categorias</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type='obsolete'>Aplicação</translation>
+        <translation type="unfinished">Aplicação</translation>
     </message>
 </context>
 <context>
@@ -145,31 +145,35 @@ editando as categorias.</translation>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type='obsolete'>Localizar</translation>
+        <translation type="unfinished">Localizar</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type='obsolete'>&amp;Localizar</translation>
+        <translation type="unfinished">&amp;Localizar</translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation type='obsolete'>Começar procura em:</translation>
+        <translation type="unfinished">Começar procura em:</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type='obsolete'>Procurar p/ trás</translation>
+        <translation type="unfinished">Procurar p/ trás</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type='obsolete'>Localizar:</translation>
+        <translation type="unfinished">Localizar:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type='obsolete'>Categoria:</translation>
+        <translation type="unfinished">Categoria:</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type='obsolete'>Sensível a caixa</translation>
+        <translation type="unfinished">Sensível a caixa</translation>
+    </message>
+    <message>
+        <source>Dec 02 01</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -219,43 +223,43 @@ editando as categorias.</translation>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Beam</source>
-        <translation type='obsolete'>Enviar</translation>
+        <translation type="unfinished">Enviar</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type='obsolete'>Copia</translation>
+        <translation type="unfinished">Copia</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type='obsolete'>Tipo:</translation>
+        <translation type="unfinished">Tipo:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type='obsolete'>Apagar</translation>
+        <translation type="unfinished">Apagar</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation type='obsolete'>Carregamento rápido (consome memória)</translation>
+        <translation type="unfinished">Carregamento rápido (consome memória)</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type='obsolete'>Comentário:</translation>
+        <translation type="unfinished">Comentário:</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type='obsolete'>Localização</translation>
+        <translation type="unfinished">Localização</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type='obsolete'>Detalhes</translation>
+        <translation type="unfinished">Detalhes</translation>
     </message>
     <message>
         <source>Del Icon</source>
-        <translation type='obsolete'>Rem. Ícone</translation>
+        <translation type="unfinished">Rem. Ícone</translation>
     </message>
 </context>
 <context>
@@ -269,18 +273,62 @@ editando as categorias.</translation>
     <name>PasswordBase</name>
     <message>
         <source>OK</source>
-        <translation type='obsolete'>OK</translation>
+        <translation type="unfinished">OK</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type='obsolete'>Entre a senha</translation>
+        <translation type="unfinished">Entre a senha</translation>
+    </message>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PasswordDialog</name>
     <message>
         <source>Owner Information</source>
-        <translation type='obsolete'>Informação sobre o Proprietário</translation>
+        <translation type="obsolete">Informação sobre o Proprietário</translation>
     </message>
 </context>
 <context>

@@ -2,28 +2,28 @@
 <context>
     <name>QTetrix</name>
     <message>
-        <source>Next</source>
-        <translation>Weiter</translation>
+        <source>Tetrix</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Level</source>
-        <translation>Level</translation>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Score</source>
-        <translation>Punkte</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation>Start</translation>
-    </message>
-    <message>
-        <source>Tetrix</source>
-        <translation>Tetrix</translation>
+        <source>Level</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Removed</source>
-        <translation>Entfernt</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

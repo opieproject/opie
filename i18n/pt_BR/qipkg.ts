@@ -1,22 +1,22 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>PackageDetails</name>
     <message>
         <source>Install</source>
-        <translation type='obsolete'>Instalar</translation>
+        <translation type="unfinished">Instalar</translation>
     </message>
     <message>
         <source>(pkgname)</source>
-        <translation type='obsolete'>(nomepcte)</translation>
+        <translation type="unfinished">(nomepcte)</translation>
     </message>
     <message>
         <source>Ignore</source>
-        <translation type='obsolete'>Ignorar</translation>
+        <translation type="unfinished">Ignorar</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type='obsolete'>Remover</translation>
+        <translation type="unfinished">Remover</translation>
     </message>
 </context>
 <context>
@@ -48,11 +48,11 @@ instalar o pacote
     <name>PackageManagerBase</name>
     <message>
         <source>Size</source>
-        <translation type='obsolete'>Tamanho</translation>
+        <translation type="unfinished">Tamanho</translation>
     </message>
     <message>
         <source>Do it!</source>
-        <translation type='obsolete'>Faça !</translation>
+        <translation type="unfinished">Faça !</translation>
     </message>
     <message>
         <source>Package</source>
@@ -60,57 +60,57 @@ instalar o pacote
     </message>
     <message>
         <source>Upgrade all</source>
-        <translation type='obsolete'>Atualizar tudo</translation>
+        <translation type="unfinished">Atualizar tudo</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type='obsolete'>Descrição</translation>
+        <translation type="unfinished">Descrição</translation>
     </message>
     <message>
         <source>Package Manager</source>
-        <translation type='obsolete'>Gerenciador de Pacotes</translation>
+        <translation type="unfinished">Gerenciador de Pacotes</translation>
     </message>
     <message>
         <source>Section:</source>
-        <translation type='obsolete'>Seção</translation>
+        <translation type="unfinished">Seção</translation>
     </message>
 </context>
 <context>
     <name>PackageManagerSettings</name>
     <message>
         <source>New</source>
-        <translation type='obsolete'>Novo</translation>
+        <translation type="unfinished">Novo</translation>
     </message>
     <message>
         <source>URL:</source>
-        <translation type='obsolete'>URL:</translation>
+        <translation type="unfinished">URL:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type='obsolete'>Nome:</translation>
+        <translation type="unfinished">Nome:</translation>
     </message>
     <message>
         <source>Package Servers</source>
-        <translation type='obsolete'>Servidores de Pacotes</translation>
+        <translation type="unfinished">Servidores de Pacotes</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type='obsolete'>Remover</translation>
+        <translation type="unfinished">Remover</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type='obsolete'>Servidores</translation>
+        <translation type="unfinished">Servidores</translation>
     </message>
 </context>
 <context>
     <name>Search</name>
     <message>
         <source>Find:</source>
-        <translation type='obsolete'>Localizar:</translation>
+        <translation type="unfinished">Localizar:</translation>
     </message>
     <message>
         <source>Search Packages</source>
-        <translation type='obsolete'>Procurar Pacotes</translation>
+        <translation type="unfinished">Procurar Pacotes</translation>
     </message>
 </context>
 </TS>

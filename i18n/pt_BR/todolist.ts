@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>NewTaskDialog</name>
     <message>
@@ -11,43 +11,47 @@
     <name>NewTaskDialogBase</name>
     <message>
         <source>D&amp;ue</source>
-        <translation type='obsolete'>&amp;Prazo</translation>
+        <translation type="unfinished">&amp;Prazo</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type='obsolete'>Prioridade:</translation>
+        <translation type="unfinished">Prioridade:</translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation type='obsolete'>2 - Alta</translation>
+        <translation type="unfinished">2 - Alta</translation>
     </message>
     <message>
         <source>&amp;Completed</source>
-        <translation type='obsolete'>&amp;Completada</translation>
+        <translation type="unfinished">&amp;Completada</translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation type='obsolete'>3 - Normal</translation>
+        <translation type="unfinished">3 - Normal</translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation type='obsolete'>4 - Baixa</translation>
+        <translation type="unfinished">4 - Baixa</translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation type='obsolete'>1 - Muito Alta</translation>
+        <translation type="unfinished">1 - Muito Alta</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type='obsolete'>Categoria:</translation>
+        <translation type="unfinished">Categoria:</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type='obsolete'>Nova Tarefa</translation>
+        <translation type="unfinished">Nova Tarefa</translation>
     </message>
     <message>
         <source>5 - Very Low</source>
-        <translation type='obsolete'>5 - Muito Baixa</translation>
+        <translation type="unfinished">5 - Muito Baixa</translation>
+    </message>
+    <message>
+        <source>1 Jan 2001</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -77,7 +81,7 @@
     <name>TodoWindow</name>
     <message>
         <source>All</source>
-        <translation>Todas</translation>
+        <translation type="obsolete">Todas</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -156,6 +160,10 @@ Sair assim mesmo ?</translation>
     <message>
         <source>Out of Space</source>
         <translation>Sem Espaço</translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -2,163 +2,242 @@
 <context>
     <name>FileBrowser</name>
     <message>
-        <source>/</source>
-        <translation>/</translation>
+        <source>File Manager</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cut</source>
-        <translation>Ausschneiden</translation>
+        <source>Dir</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Dir</source>
-        <translation>&amp;Verzeichnis</translation>
+        <source>Sort</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Copy</source>
-        <translation>Kopieren</translation>
+        <source>by Name </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Sort</source>
-        <translation>&amp;Sortieren</translation>
+        <source>by Size </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation>Schließen</translation>
+        <source>by Date </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Paste</source>
-        <translation>Einfügen</translation>
+        <source>by Type </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>by &amp;Date </source>
-        <translation>nach &amp;Datum</translation>
+        <source>Ascending</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>by &amp;Name </source>
-        <translation>nach &amp;Namen</translation>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>by &amp;Size </source>
-        <translation>nach &amp;Größe</translation>
+        <source>Symlinks</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>by &amp;Type </source>
-        <translation>nach Datei&amp;typ</translation>
+        <source>View</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Previous dir</source>
-        <translation>Letztes Verzeichnis</translation>
-    </message>
-    <message>
-        <source>New folder</source>
-        <translation>Neues Verzeichnis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation>Übergeordnetes Verzeichnis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File Browser</source>
-        <translation>Filebrowser</translation>
+        <source>New folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FileView</name>
     <message>
-        <source>&amp;No</source>
-        <translation>&amp;Nein</translation>
+        <source>File Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can&apos;t show /dev/ directory.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation>&amp;OK</translation>
-    </message>
-    <message>
-        <source>Cut</source>
-        <translation>Ausschneiden</translation>
-    </message>
-    <message>
-        <source>&amp;Cut</source>
-        <translation>Auss&amp;chneiden</translation>
-    </message>
-    <message>
-        <source>&amp;Run</source>
-        <translation>St&amp;arten</translation>
-    </message>
-    <message>
-        <source>&amp;Yes</source>
-        <translation>&amp;Ja</translation>
-    </message>
-    <message>
-        <source>&amp;Copy</source>
-        <translation>&amp;Kopieren</translation>
-    </message>
-    <message>
-        <source>Rename failed!</source>
-        <translation>Umbenennung gescheitert!</translation>
-    </message>
-    <message>
-        <source>Launch Application</source>
-        <translation>Starte Programm</translation>
-    </message>
-    <message>
-        <source>Dese&amp;lect all</source>
-        <translation>Auswahl &amp;rückgängig machen</translation>
-    </message>
-    <message>
-        <source>&amp;Paste</source>
-        <translation>&amp;Einfügen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rename file</source>
-        <translation>Datei umbenennen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;View as text</source>
-        <translation>Als &amp;Text anzeigen</translation>
-    </message>
-    <message>
-        <source>Launch failed!</source>
-        <translation>Programmstart gescheitert!</translation>
-    </message>
-    <message>
-        <source>R&amp;ename</source>
-        <translation>&amp;Umbenennen</translation>
-    </message>
-    <message>
-        <source>New folder</source>
-        <translation>Neues Verzeichnis</translation>
-    </message>
-    <message>
-        <source>Folder creation failed!</source>
-        <translation>Verzeichnis kann nicht angelegt werden!</translation>
+        <source>Rename failed!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation>Datei einfügen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Paste failed!</source>
-        <translation>Einfügen gescheitert!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Select all</source>
-        <translation>Alles &amp;markieren</translation>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut file</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Cut failed!</source>
-        <translation>Kein Ausschneiden möglich!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View as text</source>
-        <translation>Als Text anzeigen</translation>
-    </message>
-    <message>
-        <source>Unable to open file!</source>
-        <translation>Datei kann nicht geöffnet werden!</translation>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Are you sure?</source>
-        <translation>Sind Sie sicher?</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New folder</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Folder creation failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch Application</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add to Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cut</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Paste</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deselect all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>filePermissions</name>
+    <message>
+        <source>Set File Permissions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set file permissions for:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>others</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Owner</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>read</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>write</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>execute</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

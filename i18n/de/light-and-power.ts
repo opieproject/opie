@@ -1,49 +1,49 @@
 <!DOCTYPE TS><TS>
-<context encoding="UTF-8">
+<context>
     <name>LightSettingsBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Light Settings</source>
-        <translation>Helligkeit</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Adjust to environment</source>
-        <translation>An Umgebung anpassen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
         <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Power saving</source>
-        <translation>Energiesparmodus</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source> seconds</source>
-        <translation> Sekunden</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Light off after</source>
-        <translation>Licht aus nach</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Dim light after</source>
-        <translation>Dimmen nach</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Suspend after</source>
-        <translation>Ausschalten nach</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Bright</source>
-        <translation>Hell</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
-        <translation>&lt;blockquote&gt;Je heller die Hintergrundbeleuchtung, desto höher der Energieverbrauch.&lt;/blockquote&gt;</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Off</source>
-        <translation>Aus</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HelpBrowser</name>
     <message>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Home</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

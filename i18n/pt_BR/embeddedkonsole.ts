@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CommandEditDialog</name>
     <message>
@@ -11,22 +11,22 @@
     <name>CommandEditDialogBase</name>
     <message>
         <source>&lt;B&gt;Commands&lt;/B&gt;:</source>
-        <translation type='obsolete'>&lt;B&gt;Comandos&lt;/B&gt;</translation>
+        <translation type="unfinished">&lt;B&gt;Comandos&lt;/B&gt;</translation>
     </message>
     <message>
         <source>Commands</source>
-        <translation type='obsolete'>Comandos</translation>
+        <translation type="unfinished">Comandos</translation>
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation type='obsolete'>&lt;B&gt;Comandos Sugeridos&lt;/B&gt;:</translation>
+        <translation type="unfinished">&lt;B&gt;Comandos Sugeridos&lt;/B&gt;:</translation>
     </message>
 </context>
 <context>
     <name>Form1</name>
     <message>
         <source>Form1</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -95,11 +95,11 @@
     <name>editCommandBase</name>
     <message>
         <source>Enter command to add:</source>
-        <translation type='obsolete'>Entre comando a adicionar:</translation>
+        <translation type="unfinished">Entre comando a adicionar:</translation>
     </message>
     <message>
         <source>Add command</source>
-        <translation type='obsolete'>Adicionar comando</translation>
+        <translation type="unfinished">Adicionar comando</translation>
     </message>
 </context>
 </TS>

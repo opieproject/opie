@@ -1,17 +1,76 @@
 <!DOCTYPE TS><TS>
-<context encoding="UTF-8">
-    <name>AppearanceSettingsBase</name>
-    <message encoding="UTF-8">
+<context>
+    <name>AppearanceSettings</name>
+    <message>
         <source>Appearance</source>
-        <translation>Erscheinungsbild</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Style:</source>
-        <translation>Stil:</translation>
+    <message>
+        <source>Style</source>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Color Scheme:</source>
-        <translation>Farbschema:</translation>
+    <message>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>fileBrowser</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rename</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

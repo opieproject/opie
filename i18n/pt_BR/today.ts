@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Today</name>
     <message>
@@ -22,6 +22,10 @@
         <source>No active tasks</source>
         <translation>Nenhuma tarefa ativa</translation>
     </message>
+    <message>
+        <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodayBase</name>
@@ -31,14 +35,14 @@
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type='obsolete'>Nenhum compromisso hoje</translation>
+        <translation type="obsolete">Nenhum compromisso hoje</translation>
     </message>
 </context>
 <context>
     <name>todayconfig</name>
     <message>
         <source>All</source>
-        <translation type='obsolete'>Tudo</translation>
+        <translation type="obsolete">Tudo</translation>
     </message>
     <message>
         <source>How many

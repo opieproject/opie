@@ -1,130 +1,112 @@
 <!DOCTYPE TS><TS>
-<context encoding="UTF-8">
+<context>
     <name>PackageDetails</name>
-    <message encoding="UTF-8">
+    <message>
         <source>(pkgname)</source>
-        <translation>(paketname)</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Install</source>
-        <translation>Installieren</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Ignore</source>
-        <translation>Ignorieren</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>PackageManager</name>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Install Package</source>
-        <translation>Paket installieren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Are you sure you want to
 install package
 
 %1</source>
-        <translation>Sind Sie sicher, dass Sie das
-Paket %1
-installieren möchten?</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>PackageManagerBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Package Manager</source>
-        <translation>Paket-Manager</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Upgrade</source>
-        <translation>Upgrade</translation>
+    <message>
+        <source>Section:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do it!</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Package</source>
-        <translation>Paket</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Size</source>
-        <translation>Größe</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Section:</source>
-        <translation>Abschnitt:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>PackageManagerSettings</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Package Servers</source>
-        <translation>Paket-Server</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Servers</source>
-        <translation>Server</translation>
-    </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Name:</source>
-        <translation>Name:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>URL:</source>
-        <translation>URL:</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
-        <source>Proxies</source>
-        <translation type="obsolete">Proxies</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>Password:</source>
-        <translation type="obsolete">Passwort:</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>FTP:</source>
-        <translation type="obsolete">FTP:</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>HTTP:</source>
-        <translation type="obsolete">HTTP:</translation>
-    </message>
-    <message encoding="UTF-8">
-        <source>User:</source>
-        <translation type="obsolete">Benutzer:</translation>
+    <message>
+        <source>Servers</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>Search</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Search Packages</source>
-        <translation>Pakete durchsuchen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Find:</source>
-        <translation>Suchen:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

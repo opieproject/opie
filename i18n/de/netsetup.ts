@@ -1,77 +1,71 @@
 <!DOCTYPE TS><TS>
-<context encoding="UTF-8">
+<context>
     <name>AddNetworkSettingBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Add Network Service</source>
-        <translation>Netzwerkverbindung hinzufügen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>&lt;P&gt;These are the network services available to be added.</source>
-        <translation>&lt;p&gt;Diese Netzwerkverbindungen können hinzugefügt werden.</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Add</source>
-        <translation>Hinzufügen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Cancel</source>
-        <translation>Abbrechen</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>NetworkSettings</name>
     <message>
         <source>Error</source>
-        <translation>Fehler</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&lt;p&gt;Only one %1 can be added. Remove the current one, or change its Properties</source>
-        <translation>&lt;p&gt;Nur eine %1 kann hinzugefügt werden. Entfernen Sie die aktuelle oder ändern Sie ihre Eigenschaften.</translation>
-    </message>
-    <message>
-        <source>Are you sure you want to delete
-
-%1?</source>
-        <translation type="obsolete"></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Network</source>
-        <translation>Netzwerk</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
-<context encoding="UTF-8">
+<context>
     <name>NetworkSettingsBase</name>
-    <message encoding="UTF-8">
+    <message>
         <source>Network</source>
-        <translation>Netzwerk</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Current</source>
-        <translation>Aktuell</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>&lt;p&gt;This is the state of your running network services.</source>
-        <translation>&lt;p&gt;Dies ist der Status Ihrer aktiven Netzwerkverbindung.</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Services</source>
-        <translation>Verbindungen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Add...</source>
-        <translation>Hinzufügen...</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>&lt;P&gt;These are the network services you currently have available.</source>
-        <translation>&lt;p&gt;Diese Netzwerkverbindungen stehen zur Verfügung.</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Remove</source>
-        <translation>Entfernen</translation>
+        <translation type="unfinished"></translation>
     </message>
-    <message encoding="UTF-8">
+    <message>
         <source>Properties</source>
-        <translation>Eigenschaften</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

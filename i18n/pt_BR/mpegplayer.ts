@@ -1,5 +1,5 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AudioWidget</name>
     <message>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>OpiePlayer</source>
-        <translation type='obsolete'>OpiePlayer</translation>
+        <translation type="obsolete">OpiePlayer</translation>
     </message>
     <message>
         <source>, Length: </source>
@@ -170,11 +170,20 @@ Algumas entradas poderão estar ausentes na próxima vez que abrir a lista de re
     </message>
     <message>
         <source>Invalid File</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type='unfinished'></translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is all ready in your playlist.
+Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Selected</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
