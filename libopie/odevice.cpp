@@ -2039,7 +2039,7 @@ Transformation Zaurus::rotation ( ) const
 
 	return rot;
 }
-ODirection Zaurus::direction ( ) const 
+ODirection Zaurus::direction ( ) const
 {
 	ODirection dir;
 	int handle = 0;
@@ -2048,13 +2048,13 @@ ODirection Zaurus::direction ( ) const
 		case Model_Zaurus_SLC7x0:
 			handle = ::open("/dev/apm_bios", O_RDWR|O_NONBLOCK);
 			if (handle == -1) {
-				dir = Rot270;
+				dir = CW;
 			} else {
 				retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
 				::close (handle);
-				if (retval == 2 ) 
+				if (retval == 2 )
 					dir = CCW;
-				else 
+				else
 					dir = CW;
 			}
 			break;
