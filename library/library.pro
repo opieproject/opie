@@ -124,8 +124,7 @@ INCLUDEPATH += $(OPIEDIR)/include backend
 LIBS		+= -ldl -lcrypt -lm
 INTERFACES = passwordbase_p.ui categoryeditbase_p.ui findwidgetbase_p.ui lnkpropertiesbase_p.ui
 TARGET		= qpe
-DESTDIR		= $(QTDIR)/lib$(PROJMAK)
-# This is set by configure$(OPIEDIR).
+DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 VERSION		= 1.5.0.1
 
 TRANSLATIONS = ../i18n/de/libqpe.ts \
