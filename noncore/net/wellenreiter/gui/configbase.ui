@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>286</width>
-            <height>280</height>
+            <width>303</width>
+            <height>287</height>
         </rect>
     </property>
     <property stdset="1">
@@ -627,7 +627,7 @@
                     <name>title</name>
                     <string>UI</string>
                 </attribute>
-                <grid>
+                <vbox>
                     <property stdset="1">
                         <name>margin</name>
                         <number>11</number>
@@ -636,7 +636,61 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget row="3"  column="0" >
+                    <widget>
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>lookupVendor</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Lookup MAC vendor names</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>openTree</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Open Tree On New Station</string>
+                        </property>
+                    </widget>
+                    <widget>
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>disablePM</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Disable Power Management</string>
+                        </property>
+                    </widget>
+                    <spacer>
+                        <property>
+                            <name>name</name>
+                            <cstring>Spacer3</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Vertical</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <widget>
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
@@ -711,50 +765,7 @@
                             </widget>
                         </grid>
                     </widget>
-                    <spacer row="2"  column="0" >
-                        <property>
-                            <name>name</name>
-                            <cstring>Spacer3</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>orientation</name>
-                            <enum>Vertical</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>sizeType</name>
-                            <enum>Expanding</enum>
-                        </property>
-                        <property>
-                            <name>sizeHint</name>
-                            <size>
-                                <width>20</width>
-                                <height>20</height>
-                            </size>
-                        </property>
-                    </spacer>
-                    <widget row="0"  column="0" >
-                        <class>QCheckBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>lookupVendor</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Lookup MAC vendor names</string>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0" >
-                        <class>QCheckBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>openTree</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Open Tree On New Station</string>
-                        </property>
-                    </widget>
-                </grid>
+                </vbox>
             </widget>
             <widget>
                 <class>QWidget</class>

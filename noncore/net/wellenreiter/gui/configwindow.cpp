@@ -55,26 +55,29 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
         ++it;
     }
 
-    // try to guess device type
-    QFile m( "/proc/modules" );
-    if ( m.open( IO_ReadOnly ) )
+    if ( !load() ) // no configuration present
     {
-        int devicetype(0);
-        QString line;
-        QTextStream modules( &m );
-        while( !modules.atEnd() && !devicetype )
+        // try to guess device type
+        QFile m( "/proc/modules" );
+        if ( m.open( IO_ReadOnly ) )
         {
-            modules >> line;
-            if ( line.contains( "cisco" ) ) devicetype = DEVTYPE_CISCO;
-            else if ( line.contains( "hostap" ) ) devicetype = DEVTYPE_HOSTAP;
-            else if ( line.contains( "prism" ) ) devicetype = DEVTYPE_WLAN_NG;
-            else if ( line.contains( "orinoco" ) ) devicetype = DEVTYPE_ORINOCO;
-        }
-        if ( devicetype )
-        {
-            deviceType->setCurrentItem( devicetype );
-            _guess = devicetype;
-            qDebug( "Wellenreiter: guessed device type to be #%d", devicetype );
+            int devicetype(0);
+            QString line;
+            QTextStream modules( &m );
+            while( !modules.atEnd() && !devicetype )
+            {
+                modules >> line;
+                if ( line.contains( "cisco" ) ) devicetype = DEVTYPE_CISCO;
+                else if ( line.contains( "hostap" ) ) devicetype = DEVTYPE_HOSTAP;
+                else if ( line.contains( "prism" ) ) devicetype = DEVTYPE_WLAN_NG;
+                else if ( line.contains( "orinoco" ) ) devicetype = DEVTYPE_ORINOCO;
+            }
+            if ( devicetype )
+            {
+                deviceType->setCurrentItem( devicetype );
+                _guess = devicetype;
+                qDebug( "Wellenreiter: guessed device type to be #%d", devicetype );
+            }
         }
     }
 
@@ -93,6 +96,12 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     // make the checkbox 'channelAll' control all other channels
     connect( channelAll, SIGNAL( stateChanged(int) ), this, SLOT( channelAllClicked(int) ) );
 };
+
+
+WellenreiterConfigWindow::~WellenreiterConfigWindow()
+{
+    save();
+}
 
 
 int WellenreiterConfigWindow::driverType() const
@@ -207,4 +216,26 @@ int WellenreiterConfigWindow::gpsPort() const
 {
     bool ok;
     return useGPS() ? gpsdPort->value() : -1;
+}
+
+
+bool WellenreiterConfigWindow::load()
+{
+#ifdef Q_WS_X11
+    #warning Persistent Configuration not yet implemented for standalone X11 build
+    return false;
+#else
+    qDebug( "loading configuration settings..." );
+    return true;
+#endif
+}
+
+
+void WellenreiterConfigWindow::save()
+{
+#ifdef Q_WS_X11
+    #warning Persistent Configuration not yet implemented for standalone X11 build
+#else
+    qDebug( "saving configuration settings..." );
+#endif
 }
