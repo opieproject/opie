@@ -244,9 +244,8 @@ void VideoWidget::updateSlider( long i, long max ) {
 }
 
 void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
-
-        Button &button = buttons[ i ];
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
+        Button &button = *it;
         Command command = button.command;
 
         if ( event->state() == QMouseEvent::LeftButton ) {

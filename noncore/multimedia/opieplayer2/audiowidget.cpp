@@ -335,9 +335,8 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( unsigned int i = 0; i < buttons.size(); i++ ) {
-
-        Button &button = buttons[ i ];
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
+        Button &button = *it;
         Command command = button.command;
 
         if ( event->state() == QMouseEvent::LeftButton ) {
@@ -372,7 +371,6 @@ void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
                 if ( button.type != ToggleButton ) {
                     setToggleButton( button, FALSE );
                 }
-                qDebug("mouseEvent %d", i);
                 handleCommand( command, button.isDown );
             }
         }
