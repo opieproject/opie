@@ -331,8 +331,8 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     if (!m_imap) {
         return body;
     }
-    /* select mailbox READONLY for operations */
-    err = mailimap_examine( m_imap, (char*)mb);
+    
+    err = mailimap_select( m_imap, (char*)mb);
     if ( err != MAILIMAP_NO_ERROR ) {
         qDebug("error selecting mailbox: %s",m_imap->imap_response);
         return body;
@@ -459,8 +459,7 @@ QString IMAPwrapper::fetchPart(const RecMail&mail,const QValueList<int>&path,boo
     }
     if (!internal_call) {
         mb = mail.getMbox().latin1();
-        /* select mailbox READONLY for operations */
-        err = mailimap_examine( m_imap, (char*)mb);
+        err = mailimap_select( m_imap, (char*)mb);
         if ( err != MAILIMAP_NO_ERROR ) {
             qDebug("error selecting mailbox: %s",m_imap->imap_response);
             return body;
