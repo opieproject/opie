@@ -17,18 +17,18 @@ namespace OpieTooth {
      * in a OO way
      */
 
-    class Connection {
+    class ConnectionState {
     public:
         /**
          * typedef for a list of
          * Connections
          */
-        typedef QValueList<Connection> ValueList;
+        typedef QValueList<ConnectionState> ValueList;
 
         /**
          * Copy c'tor.
          */
-        Connection( const Connection& );
+        ConnectionState( const ConnectionState& );
 
         /**
          * Main c'tor
@@ -44,7 +44,7 @@ namespace OpieTooth {
          * < ACL 00:02:C7:09:2B:53 handle 1 state 1 lm MASTER
          *
          */
-        Connection( bool in,
+        ConnectionState( bool in,
                     const QString& conType,
                     const QString& mac,
                     int handle,
@@ -55,7 +55,7 @@ namespace OpieTooth {
          * C'tor for compability with QValueList
          * QValueList needs this c'tor.
          */
-        Connection();
+        ConnectionState();
 
         /**
          * Set if the connection is incoming or
@@ -131,11 +131,11 @@ namespace OpieTooth {
         /**
          * copy c'tor
          */
-        Connection &operator=( const Connection& );
+        ConnectionState &operator=( const ConnectionState& );
 
     private:
-        class ConnectionPrivate;
-        ConnectionPrivate *d;
+        class ConnectionStatePrivate;
+        ConnectionStatePrivate *d;
         bool m_direction : 1;
         QString m_contype;
         QString m_mac;

@@ -3,19 +3,19 @@
 
 using namespace OpieTooth;
 
-Connection::Connection() {
+ConnectionState::ConnectionState() {
     m_direction = Incoming;
     m_handle = -1;
     m_state = -1;
     m_linkMode = -1;
 };
 
-Connection::Connection( const Connection& con1 ) {
+ConnectionState::ConnectionState( const ConnectionState& con1 ) {
     (*this) = con1;
 }
 
 
-Connection::Connection( bool in,
+ConnectionState::ConnectionState( bool in,
                         const QString& conType,
                         const QString& mac,
                         int handle,
@@ -30,55 +30,55 @@ Connection::Connection( bool in,
 
 }
 
-void Connection::setDirection( bool incoming ) {
+void ConnectionState::setDirection( bool incoming ) {
     m_direction = incoming;
 }
 
-bool Connection::direction() const {
+bool ConnectionState::direction() const {
     return m_direction;
 }
 
-void Connection::setConnectionMode( const QString& conType ) {
+void ConnectionState::setConnectionMode( const QString& conType ) {
     m_contype = conType;
 }
 
-QString Connection::connectionMode() const {
+QString ConnectionState::connectionMode() const {
     return m_contype;
 }
 
-void Connection::setMac( const QString& mac ) {
+void ConnectionState::setMac( const QString& mac ) {
     m_mac = mac;
 }
 
-QString Connection::mac() const{
+QString ConnectionState::mac() const{
     return m_mac;
 }
 
-void Connection::setHandle( int handle ) {
+void ConnectionState::setHandle( int handle ) {
     m_handle = handle;
 }
 
-int Connection::handle() const{
+int ConnectionState::handle() const{
     return m_handle;
 }
 
-void Connection::setState( int state ) {
+void ConnectionState::setState( int state ) {
     m_state = state;
 }
 
-int Connection::state()const {
+int ConnectionState::state()const {
     return m_state;
 }
 
-void Connection::setLinkMode( int linkMode ) {
+void ConnectionState::setLinkMode( int linkMode ) {
     m_linkMode = linkMode;
 }
 
-int Connection::linkMode()const{
+int ConnectionState::linkMode()const{
     return m_linkMode;
 }
 
-Connection &Connection::operator=( const Connection& con1 ) {
+ConnectionState &ConnectionState::operator=( const ConnectionState& con1 ) {
     m_direction = con1.m_direction;
     m_contype = con1.m_contype;
     m_mac = con1.m_mac;

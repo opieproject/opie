@@ -254,14 +254,14 @@ void Manager::searchConnections() {
     *proc << "con";
 
     if (!proc->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        Connection::ValueList list;
+        ConnectionState::ValueList list;
         emit connections( list  );
         delete proc;
     }
 }
 void Manager::slotConnectionExited( OProcess* /*proc*/ ) {
     qWarning("exited");
-    Connection::ValueList list;
+    ConnectionState::ValueList list;
     list = parseConnections( m_hcitoolCon );
     emit connections(list );
 }
@@ -270,8 +270,8 @@ void Manager::slotConnectionOutput(OProcess* proc, char* cha, int len) {
     m_hcitoolCon.append( str );
     delete proc;
 }
-Connection::ValueList Manager::parseConnections( const QString& out ) {
-    Connection::ValueList list2;
+ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
+    ConnectionState::ValueList list2;
     QStringList list = QStringList::split('\n',  out );
     QStringList::Iterator it;
     for (it = list.begin(); it != list.end(); ++it ) {
@@ -286,7 +286,7 @@ Connection::ValueList Manager::parseConnections( const QString& out ) {
         qWarning("6: %s", value[6].latin1() );
         qWarning("7: %s", value[7].latin1() );
         qWarning("8: %s", value[8].latin1() );
-        Connection con;
+        ConnectionState con;
         con.setDirection( value[0] == QString::fromLatin1("<") ? Outgoing : Incoming );
         con.setConnectionMode( value[1] );
         con.setMac( value[2] );

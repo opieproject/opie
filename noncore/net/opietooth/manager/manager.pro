@@ -1,8 +1,8 @@
 TEMPLATE        = app
 CONFIG          = qt warn_on debug
 #CONFIG          = qt warn_on release
-HEADERS         = popuphelper.h bluebase.h scandialog.h btlistitem.h hciconfwrapper.h bticonloader.h
-SOURCES         = popuphelper.cpp main.cpp bluebase.cpp scandialog.cpp btlistitem.cpp hciconfwrapper.cpp bticonloader.cpp
+HEADERS         = btconnectionitem.h btdeviceitem.h btserviceitem.h stdpopups.h popuphelper.h bluebase.h scandialog.h btlistitem.h hciconfwrapper.h bticonloader.h
+SOURCES         = btconnectionitem.cpp btdeviceitem.cpp btserviceitem.h stdpopups.cpp popuphelper.cpp main.cpp bluebase.cpp scandialog.cpp btlistitem.cpp hciconfwrapper.cpp bticonloader.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include

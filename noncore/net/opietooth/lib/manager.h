@@ -137,7 +137,7 @@ namespace OpieTooth {
         void removedService( const QString& service, bool removed );
         void foundServices( const QString& device, Services::ValueList );
         void foundDevices( const QString& device, RemoteDevice::ValueList );
-        void connections( Connection::ValueList );
+        void connections( ConnectionState::ValueList );
 
 private slots:
         void slotProcessExited(OProcess* );
@@ -153,7 +153,7 @@ private slots:
     private:
         Services::ValueList parseSDPOutput( const QString& );
         RemoteDevice::ValueList parseHCIOutput( const QString& );
-        Connection::ValueList parseConnections( const QString& );
+        ConnectionState::ValueList parseConnections( const QString& );
         OProcess *m_hcitool;
         OProcess *m_sdp; // not only one
         QString m_device;

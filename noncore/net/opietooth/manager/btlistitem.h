@@ -6,27 +6,12 @@
 namespace OpieTooth {
 
     class BTListItem : public QListViewItem {
-
     public:
+        enum Types { Device =0, Service, Connection };
         BTListItem( QListView * parent  );
         BTListItem( QListViewItem * parent );
-
-        // name, and then mac and then servicetype
-        BTListItem( QListView * ,  const QString&, const QString&, const QString&  );
-        BTListItem( QListViewItem * parent , const QString&, const QString& , const QString& );
-        ~BTListItem();
-
-        void setMac( const QString& );
-        QString mac()const;
-        void setName( const QString& );
-        QString name()const;
-        void setType( const QString& );
-        QString type()const;
-    private:
-        QString m_name;
-        QString m_mac;
-        QString m_type;
-
+        virtual QString type() const = 0;
+        virtual int typeId() const = 0;
     };
 };
 
