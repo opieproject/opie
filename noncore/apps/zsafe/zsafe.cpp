@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.4 2003-08-06 20:15:19 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.5 2003-08-06 20:59:20 zcarsten Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -2810,6 +2810,8 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
       {
          icon = cat->getIconName();
       }
+      else
+         icon = conf->readEntry(APP_KEY+selectedItem->text(0));
    }
    else
    {
@@ -2875,6 +2877,8 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
    {
       icon = cat->getIconName();
    }
+   else
+      icon = conf->readEntry(APP_KEY+category);
 
 #ifdef DESKTOP
 	QDir d(iconPath);
