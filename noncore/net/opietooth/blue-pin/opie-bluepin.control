@@ -1,4 +1,4 @@
-Files: bin/bluepin apps/Settings/bluetooth-manager.desktop 
+Files: bin/bluepin
 Priority: optional
 Section: opie/applications
 Maintainer: Holger Freyther <zecke@handhelds.org>
