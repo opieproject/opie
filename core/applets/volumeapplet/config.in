@@ -1,4 +1,4 @@
   config VOLUMEAPPLET
     boolean "opie-volumeapplet (set volume for microphone and speaker)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

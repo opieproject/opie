@@ -1,4 +1,4 @@
   config OPIE-LOGIN
     boolean "opie-login (Initial Login app, ala xdm/kdm/gdm)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

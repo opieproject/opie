@@ -1,4 +1,4 @@
   config TODAY_DATEBOOK
     boolean "datebook"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 && LIBOPIECORE2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && LIBOPIE2CORE

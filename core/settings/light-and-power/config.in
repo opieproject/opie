@@ -1,4 +1,4 @@
   config LIGHT-AND-POWER
     boolean "opie-light-and-power (apm and energy saving settings)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

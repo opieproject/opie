@@ -1,4 +1,4 @@
   config CITYTIME
     boolean "opie-citytime (Time-zone / world clock settings)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

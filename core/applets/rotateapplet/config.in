@@ -1,4 +1,4 @@
   config ROTATEAPPLET
     boolean "Rotate"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
