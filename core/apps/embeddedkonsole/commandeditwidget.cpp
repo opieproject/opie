@@ -45,7 +45,6 @@ Form1::Form1( QWidget* parent,  const char* name, WFlags fl )
 {
     if ( !name )
     resize( 596, 480 ); 
-    setCaption( tr( "Form1" ) );
     Form1Layout = new QGridLayout( this ); 
     Form1Layout->setSpacing( 6 );
     Form1Layout->setMargin( 11 );
