@@ -1,0 +1,7 @@
+Packagename: qpe-opie-update
+Maintainer: Patrick S. Vogt <tille@handhelds.org>
+Section: opie/system
+Version: 0.9.1
+Description: Remove qtopia and install opie.  Dummy package that removes qtopia
+and installs opie, by removing everything and installing the same opie
+packages.

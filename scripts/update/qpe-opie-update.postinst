@@ -1,6 +1,6 @@
 #!/bin/ash 
 #
-#  script to remove and reinstall opie
+#  script to remove qtopiæ and install opie
 #
 # it's free so do not sell it
 # (c) patrick s. vogt <tille@handhelds.org>
@@ -8,11 +8,12 @@
 IPKG_REMOVE="ipkg remove"
 IPKG_INSTALL="ipkg install"
 
-echo "Upating opie"
-pack=`ipkg status | grep Package | grep -i opie | grep -v update | sed  "s/Package://"`
+echo "Upating Qtopia to Opie"
+pack=`ipkg status | grep Package | grep -i qpe |  sed  "s/Package://"`
+pack2=`ipkg status | grep Package | grep -i qpe | sed "s/Package://" | sed "s/qpe/opie/"`
 
-echo "Stopping Opie"
-/etc/init.d/opie stop || /etc/init.d/qpe stop
+echo "Stopping Qtopia"
+/etc/init.d/qpe stop
 
 echo "start" > /tmp/update.log
 
@@ -32,14 +33,14 @@ sync
 echo "Updating"
 `ipkg update`
 
-for p in  $pack; do
+for p in  $pack2; do
 echo "inst. $p" >> /tmp/update.log
 $IPKG_INSTALL $p
 done
 $IPKG_INSTALL opie-pics
 $IPKG_INSTALL opiealarm
 
-ipkg remove opie-update
+ipkg remove qpe-opie-update
 
 echo "Starting Opie"
 /etc/init.d/opie start ||  /etc/init.d/qpe start
