@@ -58,7 +58,11 @@ RfcCommPopup::~RfcCommPopup() {
 
 
 void RfcCommPopup::slotConnect() {
+
     qWarning("connect");
+
+
+
     PPPDialog pppDialog;
     pppDialog.showMaximized();
     pppDialog.exec();

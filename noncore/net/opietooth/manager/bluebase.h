@@ -70,6 +70,7 @@ namespace OpieTooth {
 
         QPixmap m_offPix;
         QPixmap m_onPix;
+        QPixmap m_findPix;
 
         BTIconLoader *m_iconLoader;
 

@@ -78,8 +78,9 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     QPEApplication::setStylusOperation( ListView4->viewport(), QPEApplication::RightOnHold);
 
     //Load all icons needed
-    m_offPix = Resource::loadPixmap( "editdelete" );
-    m_onPix = Resource::loadPixmap( "installed" );
+    m_offPix = Resource::loadPixmap( "opietooth/notconnected" );
+    m_onPix = Resource::loadPixmap( "opietooth/connected" );
+    m_findPix = Resource::loadPixmap( "opietooth/find" );
 
     QPalette pal = this->palette();
     QColor col = pal.color( QPalette::Active, QColorGroup::Background );
@@ -357,20 +358,13 @@ void BlueBase::startServiceActionHold( QListViewItem * item, const QPoint & poin
         }
 
         int test1 = popup->insertItem( tr("Test1:"),  0);
-        int con = popup->insertItem( tr("connect"), 1);
-        int del = popup->insertItem( tr("delete"),  2);
 
         ret = popup->exec( point );
         qWarning("returned from exec() ");
-        if ( ret == -1 )
+        if ( ret == -1 ) {
             ;
-        else if ( ret == test1 )
+        } else if ( ret == test1 ) {
             ;
-        else if ( ret == con )
-            ;
-        else if ( ret == del ) {
-            // take item first? -zecke
-            delete item;
         }
         delete popup;
     }
@@ -386,7 +380,7 @@ void BlueBase::addServicesToDevice( BTDeviceItem * item ) {
     qDebug("addServicesToDevice");
     // row of mac adress text(3)
     RemoteDevice device = item->remoteDevice();
-    m_deviceList.insert( item->mac() ,  item );
+    m_deviceList.insert( item->mac() , item );
     // and some time later I get a signal foundServices( const QString& device, Services::ValueList ); back
     m_localDevice->searchServices( device );
 }
