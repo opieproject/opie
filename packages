@@ -23,6 +23,7 @@ CONFIG_CLIPBOARDAPPLET	core/applets/clipboardapplet	clipboardapplet.pro
 CONFIG_CLOCK	noncore/tools/clock	clock.pro
 CONFIG_CLOCKAPPLET	core/applets/clockapplet	clockapplet.pro
 CONFIG_CONFEDIT	noncore/apps/confedit	confedit.pro
+CONFIG_DASHER	inputmethods/dasher	dasher.pro
 CONFIG_DATEBOOK	core/pim/datebook	datebook.pro
 CONFIG_DECO_FLAT	noncore/decorations/flat	flat.pro
 CONFIG_DECO_LIQUID	noncore/decorations/liquid	liquid.pro
@@ -166,3 +167,4 @@ CONFIG_WLAN	noncore/settings/networksettings/wlan	wlan.pro
 CONFIG_PPP	noncore/settings/networksettings/ppp	ppp.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
 CONFIG_QUICKLAUNCHER core/tools/quicklauncher quicklauncher.pro
+
