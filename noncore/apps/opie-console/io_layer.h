@@ -81,7 +81,7 @@ public slots:
     /**
      * closes and reloads the settings
      */
-    virtual void reload( const Config& ) = 0;
+    virtual void reload( const Profile& ) = 0;
 };
 
 #endif

@@ -6,18 +6,28 @@ MetaFactory::MetaFactory() {
 MetaFactory::~MetaFactory() {
 
 }
-void MetaFactory::addConfigWidgetFactory( const QString& str,
-                                          const QString& name,
-                                          configWidget wid) {
-    m_namemap.insert ( str, name );
-    m_confFact.insert( str, wid );
+void MetaFactory::addConnectionWidgetFactory( const QCString& name,
+                                              const QString& str,
+                                              configWidget wid) {
+    m_strings.insert( str, name );
+    m_conFact.insert( str, wid );
 }
-void MetaFactory::addIOLayerFactory( const QString& str,
+void MetaFactory::addTerminalWidgetFactory( const QCString& name,
+                                            const QString& str,
+                                            configWidget wid ) {
+    m_strings.insert( str, name );
+    m_termFact.insert( str, wid );
+}
+void MetaFactory::addIOLayerFactory( const QCString& name,
+                                     const QString& str,
                                      iolayer lay) {
+    m_strings.insert( str, name );
     m_layerFact.insert( str, lay );
 }
-void MetaFactory::addFileTransferLayer( const QString& str,
+void MetaFactory::addFileTransferLayer( const QCString& name,
+                                        const QString& str,
                                         filelayer lay) {
+    m_strings.insert(str, name );
     m_fileFact.insert( str, lay );
 }
 QStringList MetaFactory::ioLayers()const {
@@ -28,10 +38,18 @@ QStringList MetaFactory::ioLayers()const {
     }
     return list;
 }
-QStringList MetaFactory::configWidgets()const {
+QStringList MetaFactory::connectionWidgets()const {
     QStringList list;
     QMap<QString,  configWidget>::ConstIterator it;
-    for ( it = m_confFact.begin(); it != m_confFact.end(); ++it ) {
+    for ( it = m_conFact.begin(); it != m_conFact.end(); ++it ) {
+        list << it.key();
+    }
+    return list;
+}
+QStringList MetaFactory::terminalWidgets()const {
+    QStringList list;
+    QMap<QString,  configWidget>::ConstIterator it;
+    for ( it = m_termFact.begin(); it != m_termFact.end(); ++it ) {
         list << it.key();
     }
     return list;
@@ -60,17 +78,37 @@ IOLayer* MetaFactory::newIOLayer( const QString& str,const Profile& prof ) {
     return lay;
 }
 
-ProfileEditorPlugin *MetaFactory::newConfigPlugin ( const QString& str, QWidget *parent, Profile *prof) {
-    ProfileEditorPlugin *p = NULL;
-    configWidget c;
+ProfileDialogWidget *MetaFactory::newConnectionPlugin ( const QString& str, QWidget *parent) {
+    ProfileDialogWidget* wid = 0l;
 
-    c = m_confFact[str];
-    if(c) p = c(parent, prof);
-
-    return p;
+    QMap<QString, configWidget>::Iterator it;
+    it = m_conFact.find( str );
+    if ( it != m_conFact.end() ) {
+        wid = (*(it.data() ) )(str,parent);
+    }
+    return wid;
 }
+ProfileDialogWidget *MetaFactory::newTerminalPlugin( const QString& str, QWidget *parent) {
+    if (str.isEmpty() )
+        return 0l;
+    ProfileDialogWidget* wid = 0l;
+    qWarning("new terminalPlugin %s %l", str.latin1(), parent );
 
-QString MetaFactory::name( const QString& str ) {
-    return m_namemap[str];
+    QMap<QString, configWidget>::Iterator it;
+    it = m_termFact.find( str );
+    if ( it != m_conFact.end() ) {
+        wid = (*(it.data() ) )(str,parent);
+    }
+    return wid;
 }
-
+QCString MetaFactory::internal( const QString& str )const {
+    return m_strings[str];
+}
+QString MetaFactory::external( const QCString& str )const {
+    QMap<QString, QCString>::ConstIterator it;
+    for ( it = m_strings.begin(); it != m_strings.end(); ++it ) {
+        if ( it.data() == str )
+            return it.key();
+    }
+    return QString::null;
+}

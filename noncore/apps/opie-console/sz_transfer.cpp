@@ -3,7 +3,7 @@
 #include <qfile.h>
 #include <opie/oprocess.h>
 
-SzTransfer::SzTransfer(IOLayer *layer) : FileTransferLayer(layer)
+SzTransfer::SzTransfer(Type t, IOLayer *layer) : FileTransferLayer(layer), m_t(t)
 {
 }
 

@@ -13,8 +13,6 @@ HEADERS      = io_layer.h io_serial.h \
 	       configwidget.h \
 	       tabwidget.h \
 	       configdialog.h \
-               profileeditordialog.h \
-			   profileeditorplugins.h \
                emulation_layer.h \
                widget.h \
                vt102emulation.h \
@@ -23,11 +21,14 @@ HEADERS      = io_layer.h io_serial.h \
                screen.h \
 	       keytrans.h \
 	       widget_layer.h \
-		   transferdialog.h
+	       transferdialog.h \
+	       profiledialogwidget.h \
+	       profileeditordialog.h \
+	       default.h 
 
 SOURCES      = io_layer.cpp io_serial.cpp \
 	       file_layer.cpp sz_transfer.cpp \
-           main.cpp \
+               main.cpp \
 	       metafactory.cpp \
 	       session.cpp \
 	       mainwindow.cpp \
@@ -36,8 +37,6 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       profilemanager.cpp  \
 	       tabwidget.cpp \
 	       configdialog.cpp \
-	       profileeditordialog.cpp \
-		   profileeditorplugins.cpp \
 	       emulation_layer.cpp \
 	       widget.cpp \
 	       vt102emulation.cpp \
@@ -45,7 +44,10 @@ SOURCES      = io_layer.cpp io_serial.cpp \
 	       screen.cpp \
 	       keytrans.cpp \
 	       widget_layer.cpp \
-		   transferdialog.cpp
+	       transferdialog.cpp \
+	       profiledialogwidget.cpp \
+	       profileeditordialog.cpp \
+	       default.cpp
    
 INTERFACES   = configurebase.ui editbase.ui
 INCLUDEPATH += $(OPIEDIR)/include

@@ -26,7 +26,7 @@
 #include <qcolor.h>
 
 #ifndef BOOL
-typedef int BOOL;
+typedef bool BOOL;
 #endif
 
 #ifndef FALSE

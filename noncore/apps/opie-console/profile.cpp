@@ -4,14 +4,14 @@ Profile::Profile() {
 
 }
 Profile::Profile( const QString& name,
-                  const QString& iolayerName,
+                  const QCString& iolayerName,
+                  const QCString& termName,
                   int background,
                   int foreground,
                   int terminal )
-    : m_name( name ), m_ioLayer( iolayerName ), m_back( background ),
-      m_fore( foreground ), m_terminal( terminal )
-{
-}
+    : m_name( name ), m_ioLayer( iolayerName ), m_term( termName),
+      m_back( background ), m_fore( foreground ), m_terminal( terminal )
+{}
 Profile::Profile( const Profile& prof )
 {
     (*this) = prof;
@@ -28,6 +28,7 @@ Profile &Profile::operator=( const Profile& prof ) {
     m_fore = prof.m_fore;
     m_terminal = prof.m_terminal;
     m_conf = prof.m_conf;
+    m_term = prof.m_term;
 
     return *this;
 }
@@ -39,8 +40,11 @@ QMap<QString, QString> Profile::conf()const {
 QString Profile::name()const {
     return m_name;
 }
-QString Profile::ioLayerName()const {
+QCString Profile::ioLayerName()const {
     return m_ioLayer;
+}
+QCString Profile::terminalName( )const {
+    return m_term;
 }
 int Profile::foreground()const {
     return m_fore;
@@ -54,8 +58,11 @@ int Profile::terminal()const {
 void Profile::setName( const QString& str ) {
     m_name = str;
 }
-void Profile::setIOLayer( const QString& name ) {
+void Profile::setIOLayer( const QCString& name ) {
     m_ioLayer = name;
+}
+void Profile::setTerminalName( const QCString& str ) {
+    m_term = str;
 }
 void Profile::setBackground( int back ) {
     m_back = back;

@@ -9,16 +9,21 @@ class SzTransfer : public FileTransferLayer {
     Q_OBJECT
 
 public:
+    enum Type {
+      SZ=0,
+      SX,
+      SY
+    };
 
-    SzTransfer( IOLayer * );
+    SzTransfer( Type t, IOLayer * );
     ~SzTransfer();
 
 public slots:
     /**
      * send a file over the layer
      */
-    void sendFile( const QString& file ) = 0;
-    void sendFile( const QFile& ) = 0;
+    void sendFile( const QString& file ) ;
+    void sendFile( const QFile& );
 
 private slots:
     void SzRecievedStdout(OProcess *, char *, int);
@@ -27,6 +32,7 @@ private slots:
 
 private:
     OProcess *proc;
+    Type m_t;
 
 };
 

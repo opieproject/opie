@@ -28,7 +28,8 @@ void ProfileManager::load() {
         conf.setGroup( (*it) );
         Profile prof;
         prof.setName( conf.readEntry("name") );
-        prof.setIOLayer( conf.readEntry("iolayer") );
+        prof.setIOLayer( conf.readEntry("iolayer").utf8() );
+        prof.setTerminalName( conf.readEntry("term").utf8() );
         prof.setBackground( conf.readNumEntry("back") );
         prof.setForeground( conf.readNumEntry("fore") );
         prof.setTerminal( conf.readNumEntry("terminal") );
@@ -65,7 +66,8 @@ void ProfileManager::save(  ) {
     for (it = m_list.begin(); it != m_list.end(); ++it ) {
         conf.setGroup( (*it).name() );
         conf.writeEntry( "name", (*it).name() );
-        conf.writeEntry( "ioplayer", (*it).ioLayerName() );
+        conf.writeEntry( "ioplayer", QString::fromUtf8( (*it).ioLayerName() ) );
+        conf.writeEntry( "term", QString::fromUtf8( (*it).terminalName()  ) );
         conf.writeEntry( "back", (*it).background() );
         conf.writeEntry( "fore", (*it).foreground() );
         conf.writeEntry( "terminal", (*it).terminal() );

@@ -29,8 +29,9 @@ Profile ConfigListItem::profile()const {
 
 /* Dialog */
 
-ConfigDialog::ConfigDialog( const Profile::ValueList& lis, QWidget* parent )
-    : ConfigureBase( parent, 0, TRUE )
+ConfigDialog::ConfigDialog( const Profile::ValueList& lis, MetaFactory* fa,
+                            QWidget* parent )
+    : ConfigureBase( parent, 0, TRUE ), m_fact( fa )
 {
     //init();
     {
@@ -71,7 +72,7 @@ void ConfigDialog::slotEdit() {
 	// Load profile
 	p = ((ConfigListItem*)lstView->currentItem())->profile();
 
-	ProfileEditorDialog dlg(new MetaFactory(), p);
+	ProfileEditorDialog dlg(m_fact, p);
 
 	dlg.setCaption("Edit Connection Profile");
 	dlg.showMaximized();
@@ -90,7 +91,8 @@ void ConfigDialog::slotEdit() {
 
 
 void ConfigDialog::slotAdd() {
-	ProfileEditorDialog dlg(new MetaFactory());
+    qWarning("slotAdd");
+	ProfileEditorDialog dlg(m_fact);
 
 	dlg.setCaption("New Connection");
 	dlg.showMaximized();

@@ -22,7 +22,8 @@ public:
     enum Font { Micro = 0,  Small, Medium };
     Profile();
     Profile( const QString& name,
-             const QString& iolayerName,
+             const QCString& iolayerName,
+             const QCString& termName,
              int background,
              int foreground,
              int terminal);
@@ -32,7 +33,8 @@ public:
 
     ~Profile();
     QString name()const;
-    QString ioLayerName()const;
+    QCString ioLayerName()const;
+    QCString terminalName()const;
     int foreground()const;
     int background()const;
     int terminal()const;
@@ -51,7 +53,8 @@ public:
     bool readBoolEntry( const QString& key,  bool = FALSE )const;
 
     void setName( const QString& );
-    void setIOLayer( const QString& );
+    void setIOLayer( const QCString& );
+    void setTerminalName( const QCString& );
     void setBackground( int back );
     void setForeground( int fore );
     void setTerminal( int term );
@@ -59,7 +62,7 @@ public:
 private:
     QMap<QString, QString> m_conf;
     QString m_name;
-    QString m_ioLayer;
+    QCString m_ioLayer, m_term;
     int m_back;
     int m_fore;
     int m_terminal;

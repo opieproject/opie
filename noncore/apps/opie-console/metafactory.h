@@ -14,37 +14,71 @@
 #include "io_layer.h"
 #include "file_layer.h"
 #include "profile.h"
-#include "profileeditorplugins.h"
+#include "profiledialogwidget.h"
 
 class MetaFactory {
 public:
-    typedef ProfileEditorPlugin* (*configWidget)(QWidget* parent, Profile* prof);
+    typedef ProfileDialogWidget* (*configWidget)(const QString&, QWidget* parent);
     typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
 
     MetaFactory();
     ~MetaFactory();
 
-    void addConfigWidgetFactory( const QString&,
-                                 const QString&,
-                                 configWidget );
-    void addIOLayerFactory(const QString&,
-                           iolayer );
-    void addFileTransferLayer( const QString&,
+    /**
+     *  add a ProfileDialogWidget to the factory
+     * name is the name shown to the user
+     */
+    void addConnectionWidgetFactory( const QCString& internalName,
+                                     const QString& uiString,
+                                     configWidget );
+    void addTerminalWidgetFactory  ( const QCString& internalName,
+                                     const QString& name,
+                                     configWidget );
+
+    /**
+     *  adds an IOLayer factory
+     */
+    void addIOLayerFactory( const QCString&,
+                            const QString&,
+                            iolayer );
+
+    /**
+     * adds a FileTransfer Layer
+     */
+    void addFileTransferLayer( const QCString& name,
+                               const QString&,
                                filelayer );
+
+    /* translated UI Strings */
     QStringList ioLayers()const;
-    QStringList configWidgets()const;
+    QStringList connectionWidgets()const;
+    QStringList terminalWidgets()const;
     QStringList fileTransferLayers()const;
     IOLayer* newIOLayer( const QString&,const Profile& );
-    ProfileEditorPlugin *newConfigPlugin ( const QString&, QWidget*, Profile* );
+    ProfileDialogWidget *newConnectionPlugin ( const QString&, QWidget* );
+    ProfileDialogWidget* newTerminalPlugin( const QString&, QWidget* );
 
-    QString name( const QString& );
+    /*
+     * internal takes the maybe translated
+     * public QString and maps it to the internal
+     * not translatable QCString
+     */
+    QCString internal( const QString& )const;
+
+    /*
+     * external takes the internal name
+     * it returns a translated name
+     */
+    QString external( const QCString& )const;
+
 
 private:
-    QMap<QString, configWidget> m_confFact;
+    QMap<QString, QCString> m_strings;
+    QMap<QString, configWidget> m_conFact;
+    QMap<QString, configWidget> m_termFact;
     QMap<QString, iolayer> m_layerFact;
     QMap<QString, filelayer> m_fileFact;
-	QMap<QString, QString> m_namemap;
 };
 
 

@@ -1,16 +1,28 @@
+#include <qlayout.h>
+#include <qlineedit.h>
+#include <qlabel.h>
+#include <qmessagebox.h>
+#include <qstringlist.h>
+#include <qcombobox.h>
+
 
 #include <opie/otabwidget.h>
-#include "profileeditordialog.h"
-
-#include "qlayout.h"
-#include "qlineedit.h"
-#include "qlabel.h"
-#include "qmessagebox.h"
-#include "qstringlist.h"
-#include "qcombobox.h"
 
 #include "profileeditorplugins.h"
 #include "metafactory.h"
+#include "profileeditordialog.h"
+
+namespace {
+    void setCurrent( const QString& str, QComboBox* bo ) {
+        for (uint i = 0; i < bo->count(); i++ ) {
+            if ( bo->text(i) == str ) {
+                bo->setCurrentItem( i );
+            }
+        }
+    }
+
+
+}
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
                                           const Profile& prof )
@@ -27,7 +39,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
     : QDialog(0, 0, TRUE), m_fact( fact )
 {
 	// Default profile
-	m_prof = Profile(QString::null, "serial", Profile::Black, Profile::White, Profile::VT102);
+	m_prof = Profile("New Profile", "serial", "default", Profile::Black, Profile::White, Profile::VT102);
 
 	initUI();
 
@@ -42,119 +54,85 @@ Profile ProfileEditorDialog::profile() const
 
 void ProfileEditorDialog::initUI()
 {
+    m_con = m_term = 0l;
 
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
     OTabWidget *tabWidget = new OTabWidget( this );
     mainLayout->add(tabWidget);
 
-    QWidget *tabterm, *tabconn, *tabprof;
+    QWidget *tabprof;
 
-	tabprof = new QWidget(this);
-	tabterm = new QWidget(this);
-	tabconn = new QWidget(this);
+    /* base tabs */
+    tabprof   = new QWidget(this);
+    m_tabTerm = new QWidget(this);
+    m_tabCon  = new QWidget(this);
 
-	// for the time being: fake factory
+    /* base layout for tabs */
+    m_layCon  = new QHBoxLayout( m_tabCon , 2 );
+    m_layTerm = new QHBoxLayout( m_tabTerm, 2 );
 
-	m_fact->addConfigWidgetFactory("serial", QObject::tr("Serial cable"), factory_serial);
-	m_fact->addConfigWidgetFactory("irda", QObject::tr("IrDA port"), factory_irda);
-	m_fact->addConfigWidgetFactory("modem", QObject::tr("Serial via modem"), factory_modem);
+    // profile tab
 
-	// profile tab
+    QLabel *name = new QLabel(QObject::tr("Profile name"), tabprof);
+    m_name = new QLineEdit(tabprof);
+    QLabel *con = new QLabel(tr("Connection"), tabprof );
+    QLabel *term = new QLabel(tr("Terminal"), tabprof );
+    m_conCmb = new QComboBox( tabprof );
+    m_termCmb = new QComboBox( tabprof );
 
-	QLabel *name = new QLabel(QObject::tr("Profile name"), tabprof);
+    // layouting
+    QVBoxLayout *vbox3 = new QVBoxLayout(tabprof, 2);
+    vbox3->add(name);
+    vbox3->add(m_name);
+    vbox3->add(con );
+    vbox3->add(m_conCmb );
+    vbox3->add(term );
+    vbox3->add(m_termCmb );
+    vbox3->addStretch(1);
 
-	name_line = new QLineEdit(tabprof);
+    tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
+    tabWidget->addTab(m_tabCon, "", QObject::tr("Connection"));
+    tabWidget->addTab(m_tabTerm, "", QObject::tr("Terminal"));
+    tabWidget->setCurrentTab( tabprof );
 
-	// connection tab, fixed part
 
-	QLabel *device = new QLabel(QObject::tr("Device"), tabconn);
+    // fill the comboboxes
+    QStringList list = m_fact->connectionWidgets();
+    QStringList::Iterator it;
+    for (it =list.begin(); it != list.end(); ++it ) {
+        m_conCmb->insertItem( (*it) );
+    }
+    list = m_fact->terminalWidgets();
+    for (it =list.begin(); it != list.end(); ++it ) {
+        m_termCmb->insertItem( (*it) );
+    }
 
-	device_box = new QComboBox(tabconn);
+    // load profile values
+    m_name->setText(m_prof.name());
+    slotConActivated(  m_fact->external(m_prof.ioLayerName()  ) );
+    slotTermActivated( m_fact->external(m_prof.terminalName() ) );
+    setCurrent( m_fact->external(m_prof.ioLayerName() ), m_conCmb );
+    setCurrent( m_fact->external(m_prof.terminalName() ), m_termCmb );
 
-	QStringList w = m_fact->configWidgets();
-	for(QStringList::Iterator it = w.begin(); it != w.end(); it++)
-		device_box->insertItem(m_fact->name((*it)));
+    qWarning("Layer: %s %s", m_prof.ioLayerName().data(),
+             m_fact->external(m_prof.ioLayerName() ).latin1() );
+    qWarning("Term: %s %s", m_prof.terminalName().data(),
+             m_fact->external(m_prof.terminalName() ).latin1() );
 
-	// connection tab, factory part
-	plugin_base = new QWidget(tabconn);
-	plugin_layout = new QHBoxLayout(plugin_base, 0);
+    // signal and slots
+    connect(m_conCmb, SIGNAL(activated(const QString& ) ),
+            this, SLOT(slotConActivated(const QString&) ) );
+    connect(m_termCmb, SIGNAL(activated(const QString& ) ),
+            this, SLOT(slotTermActivated(const QString& ) ) );
 
-	plugin_plugin = m_fact->newConfigPlugin("serial", plugin_base, &m_prof);
-	plugin_layout->add(plugin_plugin->widget());
-
-	// connection tab, general part
-
-	QWidget *conn_widget = plugin_plugin->connection_widget();
-	conn_widget->reparent(tabconn, 0, QPoint(), true);
-
-	// terminal tab
-
-	QWidget *term_widget = plugin_plugin->terminal_widget();
-	term_widget->reparent(tabterm, 0, QPoint(), true);
-
-	// layouting
-
-	QVBoxLayout *vbox3 = new QVBoxLayout(tabprof, 2);
-	vbox3->add(name);
-	vbox3->add(name_line);
-	vbox3->addStretch(1);
-
-	QVBoxLayout *vbox = new QVBoxLayout(tabconn, 2);
-	vbox->add(device);
-	vbox->add(device_box);
-	vbox->add(plugin_base);
-	vbox->add(conn_widget);
-        vbox->setStretchFactor(device, 1);
-        vbox->setStretchFactor(device_box, 1);
-        vbox->setStretchFactor(plugin_base, 1);
-        vbox->setStretchFactor(conn_widget, 7);
-
-	QVBoxLayout *vbox2 = new QVBoxLayout(tabterm, 2);
-	vbox2->add(term_widget);
-
-	tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
-	tabWidget->addTab(tabconn, "", QObject::tr("Connection"));
-	tabWidget->addTab(tabterm, "", QObject::tr("Terminal"));
-        tabWidget->setCurrentTab( tabprof );
-
-	// load profile values
-	name_line->setText(m_prof.name());
-	for(int i = 0; i < device_box->count(); i++)
-	{
-		device_box->setCurrentItem(i);
-		if(prof_type() == m_prof.ioLayerName())
-		{
-			slotDevice(i);
-			break;
-		}
-	}
-
-	// signals
-         connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
 }
 
 ProfileEditorDialog::~ProfileEditorDialog() {
 
 }
-
-void ProfileEditorDialog::slotDevice(int id)
-{
-	delete plugin_plugin;
-
-	plugin_plugin = m_fact->newConfigPlugin(prof_type(), plugin_base, &m_prof);
-	plugin_layout->add(plugin_plugin->widget());
-
-	// Reload profile associated to device, including e.g. conn_device()
-	// m_prof = plugin_plugin->profile()
-	// or, keeping the profile name: m_prof->reload(plugin_plugin->profile())
-
-	//plugin_plugin->show();
-	plugin_plugin->widget()->show();
-}
-
 void ProfileEditorDialog::accept()
 {
-	if(prof_name().isEmpty())
+	if(profName().isEmpty())
 	{
 		QMessageBox::information(this,
 			QObject::tr("Invalid profile"),
@@ -162,28 +140,51 @@ void ProfileEditorDialog::accept()
 		return;
 	}
 	// Save profile and plugin profile
-	if(plugin_plugin) plugin_plugin->save();
+	//if(plugin_plugin) plugin_plugin->save();
 
 	// Save general values
-	m_prof.setName(prof_name());
-	m_prof.setIOLayer(prof_type());
+	m_prof.setName(profName());
+	m_prof.setIOLayer(      m_fact->internal(m_conCmb ->currentText()  ) );
+        m_prof.setTerminalName( m_fact->internal(m_termCmb->currentText()  ) );
+        qWarning("Term %s %s", m_fact->internal(m_termCmb->currentText() ).data(),
+                 m_termCmb->currentText().latin1() );
 
 	QDialog::accept();
 }
 
 
-QString ProfileEditorDialog::prof_name()
+QString ProfileEditorDialog::profName()const
 {
-	return name_line->text();
+	return m_name->text();
 }
 
-QString ProfileEditorDialog::prof_type()
+QCString ProfileEditorDialog::profType()const
 {
-	QStringList w = m_fact->configWidgets();
+    /*QStringList w = m_fact->configWidgets();
 	for(QStringList::Iterator it = w.begin(); it != w.end(); it++)
 		if(device_box->currentText() == m_fact->name((*it))) return (*it);
-
-	return QString::null;
+    */
+    return QCString();
 }
+/*
+ * we need to switch the widget
+ */
+void ProfileEditorDialog::slotConActivated( const QString& str ) {
+    delete m_con;
+    m_con = m_fact->newConnectionPlugin( str, m_tabCon );
 
+    if (m_con )
+        m_layCon->addWidget( m_con );
+}
+/*
+ * we need to switch the widget
+ */
+void ProfileEditorDialog::slotTermActivated( const QString& str ) {
+    delete m_term;
+    m_term = m_fact->newTerminalPlugin( str, 0l );
+    qWarning("past");
+
+    if (m_term)
+        m_layTerm->addWidget( m_term );
+}
 

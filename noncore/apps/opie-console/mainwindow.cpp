@@ -6,6 +6,7 @@
 #include <qtoolbar.h>
 
 #include "configdialog.h"
+#include "default.h"
 #include "metafactory.h"
 #include "profilemanager.h"
 #include "mainwindow.h"
@@ -13,6 +14,7 @@
 
 MainWindow::MainWindow() {
     m_factory = new MetaFactory();
+    Default def(m_factory);
     m_sessions.setAutoDelete( TRUE );
     m_curSession = 0;
     m_manager = new ProfileManager( m_factory );
@@ -156,7 +158,7 @@ void MainWindow::slotTerminate() {
 
 void MainWindow::slotConfigure() {
     qWarning("configure");
-    ConfigDialog conf( manager()->all() );
+    ConfigDialog conf( manager()->all(), factory() );
     conf.showMaximized();
 
     int ret = conf.exec();
