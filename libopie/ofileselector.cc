@@ -172,6 +172,7 @@ void OFileSelector::init()
     QString currMime;
     if( m_mimeCheck != 0 )
       currMime = m_mimeCheck->currentText();
+
     updateMimes();
     m_select = new FileSelector( currMime == "All" ? QString::null : currMime , m_stack, "fileselector", FALSE, FALSE );
     m_stack->addWidget(m_select, NORMAL );
@@ -337,12 +338,19 @@ void OFileSelector::updateLay()
 
   delItems();
   delete m_checkPerm;
+  m_checkPerm = 0;
   delete m_edit;
+  m_edit = 0;
   delete m_fnLabel;
+  m_fnLabel = 0;
   delete m_ok;
+  m_ok = 0;
   delete m_cancel;
+  m_cancel = 0;
   delete m_mimeCheck;
+  m_mimeCheck = 0;
   delete m_viewCheck;
+  m_viewCheck = 0;
   delete m_select; // test
   delete m_stack;
   //delete m_list;
