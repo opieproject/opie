@@ -25,6 +25,27 @@
 #include "qpedialog.h"
 #include <qpe/qpeapplication.h>
 
+
+/**
+ * \brief This is the only c'tor. 
+ * 
+ * The parent of this Listener is the Dialog you pass. This means once
+ * the dialog is deleted this listener will be deleted too.
+ * This Listener listens on QPEApplication::appMessage signal and implements
+ * accept() and reject().
+ *
+ * \code
+ *	QDialog *dialog = new YourDialog();
+	(void)new QPEDialogListener(dialog);
+	if( QPEApplication::execDialog(dialog) == QDialog::Accept ){
+	    // do some stuff
+	}
+	delete dialog;
+	
+ * \endcode
+ *
+ * @param di The dialog to handle
+ */
 QPEDialogListener::QPEDialogListener(QDialog *di ) : QObject(di)
 {
     dialog = di;
@@ -32,8 +53,15 @@ QPEDialogListener::QPEDialogListener(QDialog *di ) : QObject(di)
 	    this, SLOT(appMessage(const QCString&, const QByteArray&)) );
 }
 
+
+/**
+ * d'tor
+ */
 QPEDialogListener::~QPEDialogListener() {}
 
+/**
+ * \internal
+ */
 void QPEDialogListener::appMessage( const QCString &msg, const QByteArray & )
 {
     if (!dialog)

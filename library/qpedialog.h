@@ -24,6 +24,14 @@
 
 class QPEDialogListenerData;
 
+/**
+ * \brief Listen on QCOP messages to accept/reject a dialog.
+ *
+ * If you want your dialog to be acceptables/rejectable by QCOP
+ * You need to create a QPEDialogListener with your Dialog as Argument.
+ * 
+ * This feature is at least use with the first use support of Opie
+ */
 class QPEDialogListener : public QObject
 {
     Q_OBJECT
