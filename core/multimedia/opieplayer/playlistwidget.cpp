@@ -1056,7 +1056,9 @@ void PlayListWidget::openFile() {
         filename = fileDlg->LineEdit1->text();
 // http://205.188.234.129:8030
 // http://66.28.68.70:8000
-        qDebug("Selected filename is "+filename);
+      filename.replace(QRegExp("%20")," ");
+
+      qDebug("Selected filename is "+filename);
         if(filename.right(3) == "m3u")
             readm3u( filename);
         else if(filename.right(3) == "pls")
@@ -1206,6 +1208,7 @@ void PlayListWidget::readm3u(const QString &filename) {
                         qDebug("add "+name);
                          d->selectedFiles->addToSelection( lnk);
                     } else { // is url
+                        s.replace(QRegExp("%20")," ");
                          DocLnk lnk( s);
                          QString name = s.right( s.length() - 7);
 //                         name = name.right(name.length()-name.findRev("\\",-1,TRUE)-1);
@@ -1242,6 +1245,7 @@ void PlayListWidget::readPls(const QString &filename) {
              s=t.readLine();
              if(s.left(4) == "File") {
                  s=s.right(s.length() - 6);
+                 s.replace(QRegExp("%20")," ");
                  qDebug("adding "+s+" to playlist");
 // numberofentries=2
 // File1=http
