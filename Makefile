@@ -9,6 +9,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	inputmethods/handwriting \
 	inputmethods/unikeyboard \
 	inputmethods/jumpx \
+	inputmethods/kjumpx \
 	inputmethods/dvorak \
 	launcher/batteryapplet \
 	launcher/irdaapplet \
