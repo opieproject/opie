@@ -1,4 +1,9 @@
 January 8, 2004
+	- converted icons from xpm to png and moved them to $OPIEDIR/pics/opie-sheet
+	- modified mainwindow.cpp to load pixmaps with Resource::loadPixmap(resourcename) in contrast to the old QPixmap(nameofthe_xpm_included_in_the_opie-sheet_dir)
+	- changed pics/opie-sheet/sheetqt.png entry in control file to pics/opie-sheet/*.png
+
+January 8, 2004
 	- fixed issue : "-if someone enters directly text as parameter to a string function the text renders as uppercase due to the calculation engine that uppercases all the parsing sentence."
 	now the text is handled correctly.
 
