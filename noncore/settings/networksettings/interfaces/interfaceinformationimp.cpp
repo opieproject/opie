@@ -4,6 +4,8 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qgroupbox.h>
+#include <qmessagebox.h>
+
 #include <assert.h>
 
 /**
@@ -15,13 +17,13 @@ InterfaceInformationImp::InterfaceInformationImp(QWidget *parent, const char *na
   
   interface = i;
   connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+  connect(i, SIGNAL(updateMessage(const QString &)), this, SLOT(showMessage(const QString &)));
   updateInterface(interface);
   connect(startButton, SIGNAL(clicked()), interface, SLOT(start()));
   connect(stopButton, SIGNAL(clicked()), interface, SLOT(stop()));
   connect(restartButton, SIGNAL(clicked()), interface, SLOT(restart()));
   connect(refreshButton, SIGNAL(clicked()), interface, SLOT(refresh()));
   connect(advancedButton, SIGNAL(clicked()), this, SLOT(advanced()));
-  
 }
 
 /**
@@ -64,6 +66,15 @@ void InterfaceInformationImp::advanced(){
 	 
   a->showMaximized();
   a->show();
+}
+
+/**
+ * Messages from the interface if start/stop went as planned.
+ * Purly for user feedback.
+ * @param message the message to display.
+ */ 
+void InterfaceInformationImp::showMessage(const QString &message){
+  QMessageBox::information(this, "Message", message, QMessageBox::Ok);
 }
 
 // infoimp.cpp

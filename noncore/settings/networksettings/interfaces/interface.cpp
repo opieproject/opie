@@ -63,16 +63,21 @@ void Interface::setModuleOwner(Module *owner){
  */ 
 void Interface::start(){
   // check to see if we are already running.	
-  if(true == status)
+  if(true == status){
+    emit (updateMessage("Unable to start interface,\n already started"));
     return;
-
+  }
+  
   int ret = system(QString("%1 %2 up").arg(IFCONFIG).arg(this->name()).latin1());
   // See if it was successfull...
-  if(ret != 0)
+  if(ret != 0){
+    emit (updateMessage("Starting interface failed."));
     return;
-  
+  }
+
   status = true;
   refresh();
+  emit (updateMessage("Start successfull"));
 }
 
 /**
@@ -80,15 +85,20 @@ void Interface::start(){
  */
 void Interface::stop(){
   // check to see if we are already stopped.	
-  if(false == status)
+  if(false == status){
+    emit (updateMessage("Unable to stop interface,\n already stopped"));
     return;
+  }
 	  
   int ret = system(QString("%1 %2 down").arg(IFCONFIG).arg(this->name()).latin1());
-  if(ret != 0)
+  if(ret != 0){
+    emit (updateMessage("Stopping interface failed."));
     return;
+  }
 
-  status = true;
+  status = false;
   refresh();
+  emit (updateMessage("Stop successfull"));
 }
 
 /**

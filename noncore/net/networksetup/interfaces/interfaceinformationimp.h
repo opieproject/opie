@@ -15,6 +15,7 @@ public:
 private slots:
   void advanced();
   void updateInterface(Interface *i);
+  void showMessage(const QString &message);
 
 private:
   Interface *interface;

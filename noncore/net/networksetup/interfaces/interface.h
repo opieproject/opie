@@ -11,7 +11,8 @@ class Interface : public QObject{
 
 signals:
   void updateInterface(Interface *i);
-	
+  void updateMessage(const QString &message);
+  
 public:
   Interface(QObject * parent=0, const char * name= "unknown", bool status = false);
   virtual ~Interface(){};
