@@ -41,7 +41,7 @@
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0), 
-    meta(0), circumflex(0), diaeresis(0),
+    meta(0), circumflex(0), diaeresis(0), baccent(0), accent(0),
     useLargeKeys(TRUE), usePicks(0), useRepeat(0), 
     pressedKeyRow(-1), pressedKeyCol(-1),
     unicode(-1), qkeycode(0), modifiers(0), schar(0), mchar(0), echar(0),
@@ -190,6 +190,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                     c = keys->circumflex(keys->shift(c));
                 else if (diaeresis && keys->diaeresis(keys->shift(c)))
                     c = keys->diaeresis(keys->shift(c));
+			 else if (baccent && keys->baccent(keys->shift(c)))
+                    c = keys->baccent(keys->shift(c));
+                else if (accent && keys->accent(keys->shift(c)))
+                    c = keys->accent(keys->shift(c));
                 else if (meta && keys->meta(keys->shift(c)))
                     c = keys->meta(keys->shift(c));
                 else 
@@ -199,6 +203,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                 c = keys->meta(c);
             else if (circumflex && keys->circumflex(c)) 
                 c = keys->circumflex(c);
+		  else if (baccent && keys->baccent(c))
+                c = keys->baccent(c);
+		  else if (accent && keys->accent(c))
+                c = keys->accent(c);
             else if (diaeresis && (keys->diaeresis(c) || c == 0x2c6)) {
 
                 // the diaeresis key itself has to be in the diaeresisMap,
@@ -260,6 +268,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                         c = keys->circumflex(keys->shift(c));
                     else if (diaeresis && keys->diaeresis(keys->shift(c)))
                         c = keys->diaeresis(keys->shift(c));
+                    else if (baccent && keys->baccent(keys->shift(c)))
+                        c = keys->baccent(keys->shift(c));
+                    else if (accent && keys->accent(keys->shift(c)))
+                        c = keys->accent(keys->shift(c));
                     else if (meta && keys->meta(keys->shift(c)))
                         c = keys->meta(keys->shift(c));
                     else 
@@ -269,6 +281,10 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
                     c = keys->meta(c);
                 else if (circumflex && keys->circumflex(c))
                     c = keys->circumflex(c);
+                else if (baccent && keys->baccent(c))
+                    c = keys->baccent(c);
+                else if (accent && keys->accent(c))
+                    c = keys->accent(c);
                 else if (diaeresis && (keys->diaeresis(c) || c == 0x2c6)) {
 
                     if (c == 0x2c6)
@@ -345,6 +361,41 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             qkeycode = 0x2000; 
         }
     }
+
+    // Back accent character support
+
+    if (unicode == 0x60) {
+
+        unicode = 0;
+        if (shift || lock) {
+
+            // circumblex
+            qkeycode = 0x2000;
+        }
+        else {
+
+            // back accent
+            qkeycode = 0x2002;
+        }
+    }
+
+    // Accent character support
+
+    if (unicode == 0xb4) {
+
+        unicode = 0;
+        if (shift || lock) {
+
+            // diaeresis
+            qkeycode = 0x2001;
+        }
+        else {
+
+            // accent
+            qkeycode = 0x2003;
+        }
+    }
+
 
     if (unicode == 0) { // either Qt char, or nothing
 
@@ -472,6 +523,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             if (lock) { *lock = 0; lock = 0; }
             if (circumflex) { *circumflex = 0; circumflex = 0; }
             if (diaeresis) { *diaeresis = 0; diaeresis = 0; }
+	       if (baccent) { *baccent = 0; baccent = 0; }
+	       if (accent) { *accent = 0; accent = 0; }
 
             // dont need to emit this key... acts same as alt
             qkeycode = 0;
@@ -551,6 +604,50 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
 
 
             qkeycode = 0;
+
+        // Back accent
+        } else if (qkeycode == 0x2002) {
+            need_repaint = TRUE;
+
+            if (baccent) {
+
+                *baccent = 0;
+                baccent = 0;
+
+            } else {
+
+                baccent = keys->pressedPtr(row, col);
+                *baccent = true;
+            }
+
+
+            if (shift) { *shift = 0; shift = 0; }
+            if (meta) { *meta = 0; meta = 0; }
+		  if (accent) { *accent = 0; accent = 0; }
+
+            qkeycode = 0;
+        
+	   // Accent
+        } else if (qkeycode == 0x2003) {
+            need_repaint = TRUE;
+
+            if (accent) {
+
+                *accent = 0;
+                accent = 0;
+
+            } else {
+
+                accent = keys->pressedPtr(row, col);
+                *accent = true;
+            }
+
+
+            if (shift) { *shift = 0; shift = 0; }
+            if (meta) { *meta = 0; meta = 0; }
+		  if (baccent) { *baccent = 0; }
+
+            qkeycode = 0;
         }
 
     }
@@ -564,6 +661,10 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                 unicode = keys->circumflex(keys->shift(unicode));
             else if (diaeresis && keys->diaeresis(keys->shift(unicode)))
                 unicode = keys->diaeresis(keys->shift(unicode));
+	    else if (baccent && keys->baccent(keys->shift(unicode)))
+                unicode = keys->baccent(keys->shift(unicode));
+            else if (accent && keys->accent(keys->shift(unicode)))
+                unicode = keys->accent(keys->shift(unicode));
             else if (meta && keys->meta(keys->shift(unicode)))
                 unicode = keys->meta(keys->shift(unicode));
             else
@@ -578,6 +679,12 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
         else if (diaeresis && keys->diaeresis(unicode)) {
 
             unicode = keys->diaeresis(unicode);
+        }
+	   else if (baccent && keys->baccent(unicode)) {
+            unicode = keys->baccent(unicode);
+        }
+        else if (accent && keys->accent(unicode)) {
+            unicode = keys->accent(unicode);
         }
     }
 
@@ -733,6 +840,8 @@ void Keyboard::resetState()
     if (meta)  { *meta = 0;  meta = 0; }
     if (circumflex) { *circumflex = 0; circumflex = 0; }
     if (diaeresis)  { *diaeresis = 0; diaeresis = 0; }
+    if (baccent)  { *baccent = 0; baccent = 0; }
+    if (accent)  { *accent = 0; accent = 0; }
 
     schar = mchar = echar = 0;
     picks->resetState();
@@ -1340,6 +1449,31 @@ void Keys::setKeysFromFile(const char * filename) {
 
                 buf = t.readLine();
             }
+            // back accent
+            else if (buf.contains(QRegExp("^\\s*b\\s+[0-9a-fx]+\\s+[0-9a-fx]+\\s*$", FALSE, FALSE))) {
+
+                QTextStream tmp (buf, IO_ReadOnly);
+                ushort lower, shift;
+                QChar d;
+                tmp >> d >> lower >> shift;
+
+                baccentMap.insert(lower, shift);
+
+		qDebug ("Estoy añadiendo %i con %i", lower, shift);
+                buf = t.readLine();
+            }
+	    // accent
+            else if (buf.contains(QRegExp("^\\s*a\\s+[0-9a-fx]+\\s+[0-9a-fx]+\\s*$", FALSE, FALSE))) {
+
+                QTextStream tmp (buf, IO_ReadOnly);
+                ushort lower, shift;
+                QChar d;
+                tmp >> d >> lower >> shift;
+
+                accentMap.insert(lower, shift);
+
+                buf = t.readLine();
+            }
 
             // other variables like lang & title
             else if (buf.contains(QRegExp("^\\s*[a-zA-Z]+\\s*=\\s*[a-zA-Z0-9/]+\\s*$", FALSE, FALSE))) {
@@ -1486,6 +1620,18 @@ ushort Keys::circumflex(const ushort uni) {
 ushort Keys::diaeresis(const ushort uni) {
 
     if(diaeresisMap[uni]) return diaeresisMap[uni];
+    else return 0;
+}
+
+ushort Keys::baccent(const ushort uni) {
+
+    if(baccentMap[uni]) return baccentMap[uni];
+    else return 0;
+}
+
+ushort Keys::accent(const ushort uni) {
+
+    if(accentMap[uni]) return accentMap[uni];
     else return 0;
 }
 

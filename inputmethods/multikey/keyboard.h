@@ -66,6 +66,8 @@ public:
     ushort  meta(const ushort);
     ushort  circumflex(const ushort);
     ushort  diaeresis(const ushort);
+    ushort  baccent(const ushort);
+    ushort  accent(const ushort);
     QImage *pix(const int row, const int col);
     int     numKeys(const int row);
     void    setKeysFromFile(const char *filename);
@@ -92,6 +94,8 @@ private:
     QMap<ushort,ushort> metaMap;
     QMap<ushort,ushort> circumflexMap;
     QMap<ushort,ushort> diaeresisMap;
+    QMap<ushort,ushort> baccentMap;
+    QMap<ushort,ushort> accentMap;
 
 };
 
@@ -138,6 +142,8 @@ private:
     bool *meta;
     bool *circumflex;
     bool *diaeresis;
+    bool *baccent;
+    bool *accent;
 
     uint useLargeKeys:1;
     uint usePicks:1;
