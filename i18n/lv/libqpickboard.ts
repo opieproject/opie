@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēles dēlis</translation>
     </message>
 </context>
 </TS>
