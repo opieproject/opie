@@ -14,11 +14,14 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.9 2002-07-14 13:50:08 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.10 2002-07-18 13:37:53 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.9  2002-07-14 13:50:08  eilers
+ * Revision 1.1.2.10  2002-07-18 13:37:53  eilers
+ * Uniinitialized variable: fixed..
+ *
+ * Revision 1.1.2.9  2002/07/14 13:50:08  eilers
  * Interface change... REMEMBER: The search function is currently totally
  * untested !!
  *
@@ -216,7 +219,7 @@ namespace {
 				 * if all matches 
 				 */
 				bool allcorrect = true;
-				for ( int i; i < Qtopia::rid; i++ ) {
+				for ( int i = 0; i < Qtopia::rid; i++ ) {
 					/* Achtung abchecken:
 					 * Möglicherweise werden einige Felder im Contructor
 					 * von Contact nicht leer vorbelegt ! Das würde hier
