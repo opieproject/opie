@@ -31,7 +31,7 @@
 FILE *log; // debug only
 
 int resume ( int resuspend );
-int suspend ( void );
+int suspend ( int fix_rtc );
 int main ( int argc, char **argv );
 int fork_with_pidfile ( void );
 int kill_with_pidfile ( void );
@@ -73,8 +73,9 @@ void sig_handler ( int sig )
 
 void usage ( void )
 {
-	fprintf ( stderr, "Usage: opiealarm -r|-s [-a]\n\n" );
+	fprintf ( stderr, "Usage: opiealarm -s [-f] | -r [-a]\n\n" );
 	fprintf ( stderr, "\t-s\tSuspend mode: set RTC alarm\n" );
+	fprintf ( stderr, "\t-f    \tFix RTC, if RTC and system have more than 5sec difference (suspend mode)\n" );
 	fprintf ( stderr, "\t-r\tResume mode: kill running opiealarm\n" );
 	fprintf ( stderr, "\t-a <x>\tResuspend in <x> seconds (resume mode)\n\n" );
 	exit ( 1 );
@@ -143,9 +144,10 @@ int main ( int argc, char **argv )
 {
 	int mode = 0;
 	int ac_resusp = 0;
+	int fix_rtc = 0;
 	int opt;
 
-	while (( opt = getopt ( argc, argv, "a:rs" )) != EOF ) {
+	while (( opt = getopt ( argc, argv, "a:frs" )) != EOF ) {
 		switch ( opt ) {
 			case 's':
 				mode = 's';
@@ -161,6 +163,9 @@ int main ( int argc, char **argv )
 					fprintf ( stderr, "Warning: resuspend timeout must be >= 30 sec. -- now set to 120 sec\n" );
 				}
 				break;
+			case 'f':
+				fix_rtc = 1;
+				break;				
 			default:
 				usage ( );
 		}
@@ -181,20 +186,21 @@ int main ( int argc, char **argv )
 	switch ( mode ) {
 		case 'r': return resume ( ac_resusp );
 		case 's':
-		default : return suspend ( );
+		default : return suspend ( fix_rtc );
 	}
 	return 0;
 }		
 		
 
-int suspend ( void )
+int suspend ( int fix_rtc )
 {
 	FILE *fp;
 	char buf [64];
-	time_t t;
-	struct tm *tm;
+	time_t alrt, syst, rtct;
+	struct tm alr, sys, rtc;
 	int fd;
-
+	int rtc_sys_diff;
+	
 	
 	if ( !fork_with_pidfile ( ))
 		return 3;
@@ -212,24 +218,47 @@ int suspend ( void )
 
 	fclose ( fp );
 	
-	t = atoi ( buf );
+	alrt = atoi ( buf );
 	
-	if ( t == 0 )
+	if ( alrt == 0 )
 		error_msg_and_die ( 0, "/etc/resumeat contains an invalid time description" );
 	
 	/* subtract 5 sec from event time... */
-	t -= 5;
+	alrt -= 5;
 
 	if ( log )	
-		fprintf ( log, "Setting RTC alarm to %d\n", t );
+		fprintf ( log, "Setting RTC alarm to %d\n", alrt );
 	
-	tm = gmtime ( &t );
+	alr = *gmtime ( &alrt );
 
+	// get system time
+	time ( &syst );
+	sys = *localtime ( &syst );		
+		
 	// Write alarm time to RTC
 	if (( fd = open ( "/dev/misc/rtc", O_RDWR )) < 0 )
 		error_msg_and_die ( 1, "/dev/misc/rtc" );	
+		
+	// get RTC time
+	if ( ioctl ( fd, RTC_ALM_SET, &rtc ) < 0 )
+		error_msg_and_die ( 1, "ioctl RTC_RD_TIME" );		
+	rtct = mktime ( &rtc );
+
+	rtc_sys_diff = ( syst - rtct ) - sys. tm_gmtoff;
+	
+	if ( fix_rtc && (( rtc_sys_diff < -4 ) || ( rtc_sys_diff > 4 ))) {
+		struct tm set;
+		
+		set = *gmtime ( &syst );
+	
+		fprintf ( log, "Correcting RTC: %d seconds\n", rtc_sys_diff );
+
+	    if ( ioctl ( fd, RTC_SET_TIME, &set ) < 0 )
+	       error_msg_and_die ( 1, "ioctl RTC_SET_TIME" );
+	}
+
 	// set alarm time
-	if ( ioctl ( fd, RTC_ALM_SET, tm ) < 0 )
+	if ( ioctl ( fd, RTC_ALM_SET, &alr ) < 0 )
 		error_msg_and_die ( 1, "ioctl RTC_ALM_SET" );		
 	// enable alarm irq	
 	if ( ioctl ( fd, RTC_AIE_ON, 0 ) < 0 )
