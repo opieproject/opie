@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.11 2004-05-15 22:36:18 ar Exp $
+ * $Id: modem.cpp,v 1.12 2004-05-31 13:04:55 ar Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -56,7 +56,6 @@ using namespace Opie::Core;
 #include "auth.h"
 #include "modem.h"
 #include "pppdata.h"
-#define qError qDebug
 
 
 #define MY_ASSERT(x)  if (!(x)) { \

@@ -3,12 +3,16 @@
 
 #include "maildefines.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qobject.h>
 #include <qlist.h>
 
-class Account 
+class Account
 {
-    
+
 public:
     Account();
     virtual ~Account() {}
@@ -17,33 +21,33 @@ public:
     void setAccountName( QString name ) { accountName = name; }
     const QString&getAccountName()const{ return accountName; }
     MAILLIB::ATYPE getType()const{ return type; }
-    
+
     void setServer(const QString&str){ server = str; }
     const QString&getServer()const{ return server; }
-    
+
     void setPort(const QString&str) { port = str; }
     const QString&getPort()const{ return port; }
-    
+
     void setUser(const QString&str){ user = str; }
     const QString&getUser()const{ return user; }
-    
+
     void setPassword(const QString&str) { password = str; }
     const QString&getPassword()const { return password; }
-    
+
     void setSSL( bool b ) { ssl = b; }
     bool getSSL() { return ssl; }
-    
+
     void setConnectionType( int x ) { connectionType = x; }
     int ConnectionType() { return connectionType; }
-    
+
 
     void setOffline(bool b) {offline = b;}
     bool getOffline()const{return offline;}
 
     virtual QString getFileName() { return accountName; }
-    virtual void read() { qDebug( "base reading..." ); }
-    virtual void save() { qDebug( "base saving..." ); }
-    
+    virtual void read() { odebug << "base reading..." << oendl; }
+    virtual void save() { odebug << "base saving..." << oendl; }
+
 protected:
     QString accountName, server, port, user, password;
     bool ssl;
@@ -54,7 +58,7 @@ protected:
 
 class IMAPaccount : public Account
 {
-        
+
 public:
     IMAPaccount();
     IMAPaccount( QString filename );
@@ -75,7 +79,7 @@ private:
 
 class POP3account : public Account
 {
-        
+
 public:
     POP3account();
     POP3account( QString filename );
@@ -88,12 +92,12 @@ public:
 
 private:
     QString file;
-    
+
 };
 
 class SMTPaccount : public Account
 {
-    
+
 public:
     SMTPaccount();
     SMTPaccount( QString filename );
@@ -115,7 +119,7 @@ private:
 
 class NNTPaccount : public Account
 {
-        
+
 public:
     NNTPaccount();
     NNTPaccount( QString filename );
@@ -130,7 +134,7 @@ public:
     bool getLogin() { return login; }
 
     void setGroups( QStringList list )  { subscribedGroups = list; }
-    QStringList getGroups()  { return subscribedGroups; } 
+    QStringList getGroups()  { return subscribedGroups; }
 
 private:
     QString file;
@@ -155,7 +159,7 @@ public:
 private:
     void updateAccounts();
     QList<Account> accounts;
-        
+
 };
 
 #endif

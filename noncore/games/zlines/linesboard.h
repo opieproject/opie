@@ -27,14 +27,6 @@
 //#include "shotcounter.h"
 #include "ballpainter.h"
 
-#ifdef Q_WS_QWS
-#	define debug (void)
-#else
-#	define debug qDebug
-#endif
-#define fatal qFatal
-#define warning qWarning
-
 class LinesBoard : public Field
 {
   Q_OBJECT
@@ -48,7 +40,7 @@ public:
   int hHint();
 //  void doAfterBalls();
   void placeBalls(int nextBalls[BALLSDROP]);
-	void undo();
+    void undo();
 
 signals:
   void endTurn();
@@ -61,7 +53,7 @@ private:
   struct Waypoints {
         int x,y;
   } *way;
-	int nextBalls[BALLSDROP];
+    int nextBalls[BALLSDROP];
 
   int animmax;
 

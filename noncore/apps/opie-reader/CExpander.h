@@ -1,18 +1,25 @@
 #ifndef __CExpander_h
 #define __CExpander_h
 
-#ifndef _WINDOWS
-#include <unistd.h>
-#endif
-#include <stdio.h>
-#include <time.h>
-#include <qmessagebox.h>
 #include "useqpe.h"
 #include "config.h"
 #include "StyleConsts.h"
 #include "Markups.h"
 #include "names.h"
 #include "linktype.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qmessagebox.h>
+
+/* STD */
+#ifndef _WINDOWS
+#include <unistd.h>
+#endif
+#include <stdio.h>
+#include <time.h>
 
 class QImage;
 class Bkmk;
@@ -143,7 +150,7 @@ class CExpander
     {
         if (srclen != 0)
         {
-        qDebug("Don't know what to do with non-zero save data");
+        odebug << "Don't know what to do with non-zero save data" << oendl;
         }
     }
     void setwidth(int w) { m_scrWidth = w; }

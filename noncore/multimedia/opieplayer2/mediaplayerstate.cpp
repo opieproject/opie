@@ -38,7 +38,6 @@
 
 #include <assert.h>
 
-//#define MediaPlayerDebug(x) qDebug x
 #define MediaPlayerDebug(x)
 
 
