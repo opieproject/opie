@@ -324,9 +324,9 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     nAutoSave->addTo( advancedMenu);
 
 
-    font->insertSeparator();
+    //font->insertSeparator();
 
-    font->insertItem(tr("About"), this, SLOT( doAbout()) );
+    //font->insertItem(tr("About"), this, SLOT( doAbout()) );
 
     mb->insertItem( tr( "File" ), file );
     mb->insertItem( tr( "Edit" ), edit );
