@@ -476,6 +476,8 @@ QString OContact::toRichText() const
     if ( !(value = businessStreet()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
     state =  businessState();
+    if ( !(value = businessZip()).isEmpty() )
+	text += Qtopia::escapeString(value) + " ";
     if ( !(value = businessCity()).isEmpty() ) {
 	text += Qtopia::escapeString(value);
 	if ( state )
@@ -483,8 +485,7 @@ QString OContact::toRichText() const
 	text += "<br>";
     } else if ( !state.isEmpty() )
 	text += Qtopia::escapeString(state) + "<br>";
-    if ( !(value = businessZip()).isEmpty() )
-	text += Qtopia::escapeString(value) + "<br>";
+
     if ( !(value = businessCountry()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
@@ -537,6 +538,8 @@ QString OContact::toRichText() const
     if ( !(value = homeStreet()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
     state =  homeState();
+    if ( !(value = homeZip()).isEmpty() )
+	text += Qtopia::escapeString(value) + " ";
     if ( !(value = homeCity()).isEmpty() ) {
 	text += Qtopia::escapeString(value);
 	if ( !state.isEmpty() )
@@ -544,8 +547,6 @@ QString OContact::toRichText() const
 	text += "<br>";
     } else if (!state.isEmpty())
 	text += Qtopia::escapeString(state) + "<br>";
-    if ( !(value = homeZip()).isEmpty() )
-	text += Qtopia::escapeString(value) + "<br>";
     if ( !(value = homeCountry()).isEmpty() )
 	text += Qtopia::escapeString(value) + "<br>";
 
@@ -633,7 +634,7 @@ QString OContact::toRichText() const
     }
 
     // notes last
-    if ( (value = notes()) ) {
+    if ( !(value = notes()).isEmpty() ) {
 	    text += "<br><hr><b>" + QObject::tr( "Notes:") + "</b> ";
 	    QRegExp reg("\n");
 
