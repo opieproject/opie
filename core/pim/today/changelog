@@ -1,3 +1,8 @@
+0.3.2
+
+* Autostart is now more configurable. You can decide how long
+  the ipaq has to has been  suspended, before autostart is triggered.(Opie
+  only)
 * am/pm time optinal (autodetect)
 
 0.3.1
