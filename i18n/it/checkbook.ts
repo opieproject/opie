@@ -335,7 +335,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation>Movimento </translation>
+        <translation>Movimento per </translation>
     </message>
     <message>
         <source>Withdrawal</source>
