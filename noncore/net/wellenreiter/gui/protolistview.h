@@ -31,6 +31,9 @@ class ProtocolListView : public QScrollView
     ProtocolListView( QWidget* parent = 0, const char* name = 0, WFlags f = 0 );
     virtual ~ProtocolListView();
 
+    bool isProtocolChecked( const QString& name );
+    QString protocolAction( const QString& name ) const;
+
   protected:
     virtual void addProtocol( const QString& name );
 

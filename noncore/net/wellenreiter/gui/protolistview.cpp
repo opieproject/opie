@@ -90,6 +90,22 @@ void ProtocolListView::addProtocol( const QString& name )
         combo->insertItem( "KeySound" );
         combo->insertItem( "LedOn" );
         combo->insertItem( "LedOff" );
+        combo->insertItem( "LogMessage" );
+        combo->insertItem( "MessageBox" );
     }
 }
+
+
+bool ProtocolListView::isProtocolChecked( const QString& name )
+{
+    QCheckBox* box = (QCheckBox*) child( (const char*) name );
+    return ( box && box->isOn() );
+}
+
+
+QString ProtocolListView::protocolAction( const QString& name ) const
+{
+    //FIXME
+}
+
 

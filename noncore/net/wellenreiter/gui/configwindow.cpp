@@ -115,9 +115,31 @@ int WellenreiterConfigWindow::hoppingInterval() const
 }
 
 
-bool WellenreiterConfigWindow::usePrismHeader()
+bool WellenreiterConfigWindow::usePrismHeader() const
 {
     return prismHeader->isOn();
+}
+
+
+bool WellenreiterConfigWindow::isChannelChecked( int channel ) const
+{
+    switch ( channel )
+    {
+        case 1: return channel1->isOn();
+        case 2: return channel2->isOn();
+        case 3: return channel3->isOn();
+        case 4: return channel4->isOn();
+        case 5: return channel5->isOn();
+        case 6: return channel6->isOn();
+        case 7: return channel7->isOn();
+        case 8: return channel8->isOn();
+        case 9: return channel9->isOn();
+        case 10: return channel10->isOn();
+        case 11: return channel11->isOn();
+        case 12: return channel12->isOn();
+        case 13: return channel13->isOn();
+        case 14: return channel14->isOn();
+    }
 }
 
 

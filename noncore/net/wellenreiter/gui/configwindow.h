@@ -38,12 +38,13 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
   public:
     WellenreiterConfigWindow( QWidget * parent = 0, const char * name = "WellenreiterConfigWindow", WFlags f = 0 );
     int driverType() const;
-    int hoppingInterval() const;
     const QString soundOnNetwork() const { return "";/*netSound->currentText();*/ };
     const QString soundOnBeacon() const { return "";/*beaconSound->currentText();*/ };
     static WellenreiterConfigWindow* instance() { return _instance; };
 
-    bool usePrismHeader();
+    int hoppingInterval() const;
+    bool usePrismHeader() const;
+    bool isChannelChecked( int ) const;
 
   public slots:
     void changedDeviceType(int);
