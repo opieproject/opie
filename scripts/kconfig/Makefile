@@ -9,8 +9,28 @@ LEX=flex
 YACC=bison
 YFLAGS=-d -t -v
 ifndef HOSTQTDIR
+ifeq ($(shell if [ -e /usr/share/qt ]; then echo foundit; fi),foundit)
 HOSTQTDIR=/usr/share/qt
+else
+ifeq ($(shell if [ -e /usr/lib/qt ]; then echo foundit; fi),foundit)
+HOSTQTDIR=/usr/lib/qt
 endif
+endif
+endif
+
+ifndef QTLIB
+ifeq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt.so ]; then echo foundit; fi),foundit)
+QTLIB=-lqt
+else
+ifeq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt-mt.so ]; then echo foundit; fi),foundit)
+QTLIB=-lqt-mt
+else
+QTLIB=-lqt
+$(warning Unable to locate libqt.so!)
+endif
+endif
+endif
+
 MOC=$(wildcard $(HOSTQTDIR)/bin/moc)
 
 parse_SRC=zconf.y
@@ -111,7 +131,7 @@ qconf:
 	@false
 else
 qconf: $(qconf_OBJ) libkconfig.so
-	$(CXX) $(LXXFLAGS) $^ -lqt -o $@
+	$(CXX) $(LXXFLAGS) $^ $(QTLIB) -o $@
 endif
 
 lkcc: $(lkcc_OBJ)
