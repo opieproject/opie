@@ -1,9 +1,11 @@
 #ifndef __ACCOUNT_ITEM
 #define __ACCOUNT_ITEM
 
+#include <opie2/osmartpointer.h>
+
 #include <qlistview.h>
 #include <qlist.h>
-#include <opie2/osmartpointer.h>
+#include <qmap.h>
 
 class POP3wrapper;
 class RecMail;
@@ -31,16 +33,18 @@ public:
     virtual ~AccountViewItem();
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&)=0;
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&)=0;
-    virtual QPopupMenu * getContextMenu(){return 0;};
-    virtual void contextMenuSelected(int){}
+    virtual QPopupMenu * getContextMenu();
+    virtual bool contextMenuSelected(int){return false;}
     virtual AccountView*accountView();
     virtual bool matchName(const QString&name)const;
     virtual bool isDraftfolder();
     /* 1 - server
      * 2 - folder
-     * 3 - beides
+     * 3 - both
      */
     virtual int isServer()const=0;
+    virtual QMap<int,QString> serverMenu();
+    virtual QMap<int,QString> folderMenu();
 
 protected:
     AccountViewItem*findSubItem(const QString&path,AccountViewItem*start=0);
@@ -61,9 +65,9 @@ public:
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&target );
     virtual RECBODYP fetchBody( const Opie::Core::OSmartPointer<RecMail> &mail );
     AbstractMail *getWrapper();
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     virtual int isServer()const{return 1;}
+    virtual QMap<int,QString> serverMenu();
 
 protected:
     POP3account *account;
@@ -81,9 +85,9 @@ public:
     virtual ~POP3folderItem();
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&);
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     virtual int isServer()const{return 2;}
+    virtual QMap<int,QString> folderMenu();
 
 protected:
     void downloadMails();
@@ -100,9 +104,9 @@ public:
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&target );
     virtual RECBODYP fetchBody( const Opie::Core::OSmartPointer<RecMail> &mail );
     AbstractMail *getWrapper();
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     virtual int isServer()const{return 1;}
+    virtual QMap<int,QString> serverMenu();
 
 protected:
     NNTPaccount *account;
@@ -121,10 +125,9 @@ public:
     virtual ~NNTPfolderItem();
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&);
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     virtual int isServer()const{return 2;}
-
+    virtual QMap<int,QString> folderMenu();
 protected:
     void downloadMails();
     NNTPviewItem *nntp;
@@ -141,12 +144,12 @@ public:
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&);
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
     AbstractMail *getWrapper();
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     const QStringList&subFolders();
     virtual void refreshFolders(bool force=false);
     virtual int isServer()const{return 1;}
     bool offline();
+    virtual QMap<int,QString> serverMenu();
 
 protected:
     virtual void createNewFolder();
@@ -164,13 +167,13 @@ public:
     virtual ~IMAPfolderItem();
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&);
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     virtual const QString& Delemiter()const;
     virtual int isServer()const{return 2;}
+    virtual QMap<int,QString> folderMenu();
 protected:
     virtual void createNewFolder();
-    virtual void deleteFolder();
+    virtual bool deleteFolder();
     virtual void downloadMails();
     IMAPviewItem *imap;
 };
@@ -185,11 +188,12 @@ public:
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&target );
     virtual RECBODYP fetchBody( const Opie::Core::OSmartPointer<RecMail> &mail );
     AbstractMail *getWrapper();
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     QStringList subFolders();
     virtual void refresh(bool force=false);
     virtual int isServer()const{return 3;}
+    virtual QMap<int,QString> serverMenu();
+    virtual QMap<int,QString> folderMenu();
 
 protected:
     void downloadMails();
@@ -208,16 +212,16 @@ public:
     virtual ~MHfolderItem();
     virtual void refresh(QValueList<Opie::Core::OSmartPointer<RecMail> >&);
     virtual RECBODYP fetchBody(const Opie::Core::OSmartPointer<RecMail>&);
-    virtual QPopupMenu * getContextMenu();
-    virtual void contextMenuSelected(int);
+    virtual bool contextMenuSelected(int);
     virtual const Opie::Core::OSmartPointer<Folder>&getFolder()const;
     virtual bool isDraftfolder();
     virtual int isServer()const{return 2;}
+    virtual QMap<int,QString> folderMenu();
 
 protected:
     void downloadMails();
     virtual void createFolder();
-    virtual void deleteFolder();
+    virtual bool deleteFolder();
     void initName();
     MHviewItem *mbox;
 };

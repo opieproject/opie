@@ -41,24 +41,43 @@ AccountView::~AccountView()
 
 void AccountView::slotSelectionChanged(QListViewItem*item)
 {
-    odebug << "AccountView: Selection changed" << oendl;
     if (!item) {
         emit serverSelected(0);
         return;
     }
     AccountViewItem *view = static_cast<AccountViewItem *>(item);
-
     emit serverSelected(view->isServer());
+}
+
+QMap<int,QString> AccountView::currentServerMenu()const
+{
+    QMap<int,QString> smap;
+    AccountViewItem *view = static_cast<AccountViewItem *>(currentItem());
+    if (!view)return smap;
+    smap = view->serverMenu();
+    return smap;
+}
+
+QMap<int,QString> AccountView::currentFolderMenu()const
+{
+    QMap<int,QString> fmap;
+    AccountViewItem *view = static_cast<AccountViewItem *>(currentItem());
+    if (!view)return fmap;
+    fmap = view->folderMenu();
+    return fmap;
 }
 
 void AccountView::slotContextMenu(int id)
 {
     AccountViewItem *view = static_cast<AccountViewItem *>(currentItem());
     if (!view) return;
-    view->contextMenuSelected(id);
+    bool del = view->contextMenuSelected(id);
+    if (!del && view->isServer()!=2) {
+        emit refreshMenues(view->isServer());
+    }
 }
 
-void AccountView::slotRightButton(int button, QListViewItem * item,const QPoint&,int)
+void AccountView::slotRightButton(int, QListViewItem * item,const QPoint&,int)
 {
     m_rightPressed = true;
     if (!item) return;
@@ -71,7 +90,7 @@ void AccountView::slotRightButton(int button, QListViewItem * item,const QPoint&
     delete m;
 }
 
-void AccountView::slotLeftButton(int button, QListViewItem * item,const QPoint&,int)
+void AccountView::slotLeftButton(int, QListViewItem *,const QPoint&,int)
 {
     m_rightPressed = false;
 }

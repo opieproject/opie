@@ -108,6 +108,7 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags  )
     setup_signalblocking();
     settings = new Settings();
     folderView->populate( settings->getAccounts() );
+    connect(folderView,SIGNAL(refreshMenues(int)),this,SLOT(refreshMenu(int)));
 }
 
 OpieMail::~OpieMail()
@@ -385,4 +386,44 @@ void OpieMail::reEditMail()
     compose.reEditMail(((MailListViewItem*)mailView->currentItem() )->data());
     compose.slotAdjustColumns();
     QPEApplication::execDialog( &compose );
+}
+
+void OpieMail::refreshMenu(int m_isFolder)
+{
+    if (QApplication::desktop()->width()<330) {
+        mailMenu->setItemEnabled(m_ServerMenuId,m_isFolder&1);
+        mailMenu->setItemEnabled(m_FolderMenuId,m_isFolder&2);
+    } else {
+        menuBar->setItemEnabled(m_ServerMenuId,m_isFolder&1);
+        menuBar->setItemEnabled(m_FolderMenuId,m_isFolder&2);
+    }
+
+    QMap<int,QString>::ConstIterator it;
+    QMap<int,QString> server_entries=folderView->currentServerMenu();
+    QMap<int,QString> folder_entries=folderView->currentFolderMenu();
+
+    int id;
+    unsigned int i;
+    for (i=0; i<folderMenu->count();++i) {
+        id = folderMenu->idAt(i);
+        folderMenu->setItemEnabled(id,false);
+    }
+    for (it=folder_entries.begin();it!=folder_entries.end();++it) {
+        folderMenu->changeItem(it.key(),it.data());
+        folderMenu->setItemEnabled(it.key(),true);
+    }
+    for (i=0; i<serverMenu->count();++i) {
+        id = serverMenu->idAt(i);
+        serverMenu->setItemEnabled(id,false);
+    }
+    for (it=server_entries.begin();it!=server_entries.end();++it) {
+        serverMenu->changeItem(it.key(),it.data());
+        serverMenu->setItemEnabled(it.key(),true);
+    }
+}
+
+void OpieMail::serverSelected(int m_isFolder)
+{
+    mailView->clear();
+    refreshMenu(m_isFolder);
 }

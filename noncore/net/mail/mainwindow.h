@@ -1,17 +1,17 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "accountview.h"
+#include <libmailwrapper/mailtypes.h>
+
+#include <opie2/osmartpointer.h>
+
 #include <qmainwindow.h>
 #include <qlistview.h>
 #include <qaction.h>
-
 #include <qtoolbar.h>
 #include <qmenubar.h>
-
-#include "accountview.h"
-
-#include <libmailwrapper/mailtypes.h>
-#include <opie2/osmartpointer.h>
+#include <qmap.h>
 
 class RecMail;
 class QCopChannel;

@@ -3,9 +3,11 @@
 
 #include "mainwindow.h"
 #include <libmailwrapper/settings.h>
+#include <libmailwrapper/mailtypes.h>
 
 #include <opie2/osmartpointer.h>
-#include <libmailwrapper/mailtypes.h>
+
+#include <qmap.h>
 
 class OpieMail : public MainWindow
 {
@@ -21,7 +23,7 @@ public slots:
     virtual void slotComposeMail();
     virtual void appMessage(const QCString &msg, const QByteArray &data);
             void setDocument(const QString&);
-    
+
 protected slots:
     virtual void slotSendQueued();
     virtual void slotSearchMails();
@@ -35,6 +37,8 @@ protected slots:
     virtual void mailLeftClicked( int, QListViewItem *,const QPoint&,int  );
     virtual void slotMoveCopyMail();
     virtual void reEditMail();
+    virtual void serverSelected(int);
+    virtual void refreshMenu(int);
 
 protected:
     void setup_signalblocking();

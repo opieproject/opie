@@ -21,7 +21,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     setToolBarsMovable( false );
 
     toolBar = new QToolBar( this );
-
     menuBar = new QMenuBar( toolBar );
 
     mailMenu = new QPopupMenu( menuBar );
@@ -30,8 +29,17 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     settingsMenu = new QPopupMenu( menuBar );
     menuBar->insertItem( tr( "Settings" ), settingsMenu );
 
-    serverMenu = new QPopupMenu( menuBar );
-    m_ServerMenuId = menuBar->insertItem( tr( "Server" ), serverMenu );
+    if (QApplication::desktop()->width()<330) {
+        serverMenu = new QPopupMenu( mailMenu );
+        folderMenu = new QPopupMenu( mailMenu );
+        m_ServerMenuId = mailMenu->insertItem( tr( "Server" ), serverMenu );
+        m_FolderMenuId = mailMenu->insertItem( tr( "Folder" ), folderMenu );
+    } else {
+        serverMenu = new QPopupMenu( menuBar );
+        folderMenu = new QPopupMenu( menuBar );
+        m_FolderMenuId = menuBar->insertItem( tr( "Folder" ), folderMenu );
+        m_ServerMenuId = menuBar->insertItem( tr( "Server" ), serverMenu );
+    }
     serverMenu->insertItem(tr("Disconnect"),SERVER_MENU_DISCONNECT);
     serverMenu->insertItem(tr("Set on/offline"),SERVER_MENU_OFFLINE);
     serverMenu->insertSeparator();
@@ -40,14 +48,11 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     serverMenu->insertSeparator();
     serverMenu->insertItem(tr("(Un-)Subscribe groups"),SERVER_MENU_SUBSCRIBE);
 
-    folderMenu = new QPopupMenu( menuBar );
-    m_FolderMenuId = menuBar->insertItem( tr( "Folder" ), folderMenu );
     folderMenu->insertItem(tr("Refresh headerlist"),FOLDER_MENU_REFRESH_HEADER);
     folderMenu->insertItem(tr("Delete all mails"),FOLDER_MENU_DELETE_ALL_MAILS);
     folderMenu->insertItem(tr("New subfolder"),FOLDER_MENU_NEW_SUBFOLDER);
     folderMenu->insertItem(tr("Delete folder"),FOLDER_MENU_DELETE_FOLDER);
     folderMenu->insertItem(tr("Move/Copie all mails"),FOLDER_MENU_MOVE_MAILS);
-
     menuBar->setItemEnabled(m_ServerMenuId,false);
     menuBar->setItemEnabled(m_FolderMenuId,false);
 
@@ -173,11 +178,9 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::serverSelected(int m_isFolder)
+void MainWindow::serverSelected(int)
 {
-    mailView->clear();
-    menuBar->setItemEnabled(m_ServerMenuId,m_isFolder&1);
-    menuBar->setItemEnabled(m_FolderMenuId,m_isFolder&2);
+    odebug << "slotShowFolders not reached" << oendl;
 }
 
 void MainWindow::systemMessage( const QCString& msg, const QByteArray& data )

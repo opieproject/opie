@@ -1,10 +1,11 @@
 #ifndef ACCOUNTVIEW_H
 #define ACCOUNTVIEW_H
 
+#include <libmailwrapper/mailtypes.h>
+#include <opie2/osmartpointer.h>
 #include <qlistview.h>
 #include <qlist.h>
-#include <opie2/osmartpointer.h>
-#include <libmailwrapper/mailtypes.h>
+#include <qmap.h>
 
 class Selectstore;
 class Folder;
@@ -24,6 +25,8 @@ public:
     virtual RecBodyP fetchBody(const Opie::Core::OSmartPointer<RecMail>&aMail);
     virtual void downloadMails(const Opie::Core::OSmartPointer<Folder>&fromFolder,AbstractMail*fromWrapper);
     virtual bool currentisDraft();
+    QMap<int,QString> currentServerMenu()const;
+    QMap<int,QString> currentFolderMenu()const;
 
 public slots:
     virtual void refreshAll();
@@ -36,6 +39,7 @@ public slots:
 signals:
     void refreshMailview(const QValueList<RecMailP>& );
     void serverSelected(int);
+    void refreshMenues(int);
 
 protected:
     QListViewItem* m_currentItem;
