@@ -156,6 +156,12 @@ QString OFileViewInterface::startDirectory()const
     return selector()->m_startDir;
 }
 
+bool OFileViewInterface::allItem( const QString& item )const
+{
+    return selector()->m_allList.contains( item );
+}
+
+
 ODocumentFileView::ODocumentFileView( OFileSelector* selector )
                   :OFileViewInterface( selector )
 {
@@ -530,14 +536,6 @@ bool OFileViewFileListView::eventFilter (QObject *, QEvent *e)
     return false;
 }
 
-/**
- * @return true if the item show all files or directories
- */
-bool OFileViewFileListView::allItem( const QString& item )const
-{
-    return m_sel->allItem( item );
-}
-
 void OFileViewFileListView::connectSlots()
 {
     connect(m_view, SIGNAL(clicked(QListViewItem*) ),
@@ -825,7 +823,7 @@ QWidget* OFileViewFileSystem::widget( QWidget* parent )
 
 void OFileViewFileSystem::activate( const QString& str )
 {
-    m_all = m_view->allItem( str );
+    m_all = allItem( str );
 }
 
 
@@ -875,7 +873,7 @@ OFileSelector::OFileSelector( QWidget* parent, int mode, int sel,
     m_mode = mode;
     m_selector = sel;
 
-    m_allList = new QStringList();
+    m_allList = QStringList();
 
     initUI();
     m_lneEdit->setText( fileName );
@@ -1033,12 +1031,12 @@ void OFileSelector::initViews()
     {
         m_views.insert( QObject::tr("Directories"), in );
         m_views.insert( QObject::tr("All Directories"), in );
-        m_allList->append( QObject::tr("All Directories") );
+        m_allList.append( QObject::tr("All Directories") );
     } else {
         m_views.insert( QObject::tr("Documents"), new ODocumentFileView(this) );
         m_views.insert( QObject::tr("Files"), in );
         m_views.insert( QObject::tr("All Files"), in );
-        m_allList->append( QObject::tr("All Files") );
+        m_allList.append( QObject::tr("All Files") );
     }
 }
 
@@ -1156,14 +1154,6 @@ int OFileSelector::mode()const
 int OFileSelector::selector()const
 {
     return m_selector;
-}
-
-/**
- * @return true if the item show all files or directories
- */
-bool OFileSelector::allItem( const QString& item )const
-{
-    return ( m_allList->findIndex( item ) != -1 );
 }
 
 QStringList OFileSelector::currentMimeType()const

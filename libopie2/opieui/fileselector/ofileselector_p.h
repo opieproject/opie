@@ -75,6 +75,7 @@ public:
     virtual QWidget* widget( QWidget* parent) = 0;
     virtual void activate( const QString& );
     QString name()const;
+    bool allItem( const QString& )const;
 protected:
     OFileSelector* selector()const;
     void setName( const QString& );
@@ -152,7 +153,6 @@ public:
     void reread( bool all = false );
     int fileCount()const;
     QString currentDir()const;
-    bool allItem( const QString& )const;
 protected:
     bool eventFilter (QObject *o, QEvent *e);
 private slots:
