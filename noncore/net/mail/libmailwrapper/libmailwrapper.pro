@@ -1,5 +1,5 @@
 TEMPLATE        = lib
-CONFIG        += qt warn_on 
+CONFIG        += qt warn_on
 
 HEADERS         = mailwrapper.h \
                imapwrapper.h \
@@ -51,8 +51,8 @@ TARGET       = mailwrapper
 include ( $(OPIEDIR)/include.pro )
 
 !isEmpty( LIBETPAN_INC_DIR ) {
-	INCLUDEPATH += $$LIBETPAN_INC_DIR
+    INCLUDEPATH = $$LIBETPAN_INC_DIR $$INCLUDEPATH
 }
 !isEmpty( LIBETPAN_LIB_DIR ) {
-	LIBS += -L$$LIBETPAN_LIB_DIR
+    LIBS = -L$$LIBETPAN_LIB_DIR $$LIBS
 }

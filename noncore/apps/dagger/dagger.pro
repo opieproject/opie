@@ -22,3 +22,9 @@ LIBS        += -lopiecore2 -lopieui2 -lqpe -lsword
 
 include ( $(OPIEDIR)/include.pro )
 
+!isEmpty( LIBSWORD_INC_DIR ) {
+    INCLUDEPATH = $$LIBSWORD_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBSWORD_LIB_DIR ) {
+    LIBS = -L$$LIBSWORD_LIB_DIR $$LIBS
+}

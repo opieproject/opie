@@ -17,7 +17,7 @@ HEADERS         = defines.h \
                selectsmtp.h \
                nntpgroups.h \
                nntpgroupsdlg.h
-               
+
 SOURCES         = main.cpp \
                opiemail.cpp \
                mainwindow.cpp \
@@ -36,7 +36,7 @@ SOURCES         = main.cpp \
                selectsmtp.cpp \
                nntpgroups.cpp \
                nntpgroupsdlg.cpp
-               
+
 INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \
                imapconfigui.ui \
@@ -50,7 +50,7 @@ INTERFACES     = editaccountsui.ui \
                newmaildirui.ui \
                selectstoreui.ui \
                nntpgroupsui.ui
-	
+
 
 INCLUDEPATH += $(OPIEDIR)/include /usr/local/include
 
@@ -65,8 +65,8 @@ TARGET       = opiemail
 
 include ( $(OPIEDIR)/include.pro )
 !isEmpty( LIBETPAN_INC_DIR ) {
-	INCLUDEPATH += $$LIBETPAN_INC_DIR
+    INCLUDEPATH = $$LIBETPAN_INC_DIR $$INCLUDEPATH
 }
 !isEmpty( LIBETPAN_LIB_DIR ) {
-	LIBS += -Wl,-rpath-link,$$LIBETPAN_LIB_DIR
+    LIBS = -Wl,-rpath-link,$$LIBETPAN_LIB_DIR $$LIBS
 }
