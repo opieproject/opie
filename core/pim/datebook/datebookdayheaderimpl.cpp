@@ -48,6 +48,8 @@ DateBookDayHeader::DateBookDayHeader( bool useMonday,
 
     forward->setPixmap(  Resource::loadPixmap( "forward" ) );
     back->setPixmap(  Resource::loadPixmap( "back" ) );
+    forwardweek->setPixmap(  Resource::loadPixmap( "fastforward" ) );
+    backweek->setPixmap(  Resource::loadPixmap( "fastback" ) );
 
     setBackgroundMode( PaletteButton );
     grpDays->setBackgroundMode( PaletteButton );
@@ -128,6 +130,22 @@ void DateBookDayHeader::goBack()
 void DateBookDayHeader::goForward()
 {
     currDate = currDate.addDays( 1 );
+    setDate( currDate.year(), currDate.month(), currDate.day() );
+}
+/*
+ * public slot
+ */
+void DateBookDayHeader::goBackWeek()
+{
+    currDate = currDate.addDays( -7 );
+    setDate( currDate.year(), currDate.month(), currDate.day() );
+}
+/*
+ * public slot
+ */
+void DateBookDayHeader::goForwardWeek()
+{
+    currDate = currDate.addDays( 7 );
     setDate( currDate.year(), currDate.month(), currDate.day() );
 }
 

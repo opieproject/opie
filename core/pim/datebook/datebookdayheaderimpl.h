@@ -36,6 +36,8 @@ public:
 public slots:
     void goBack();
     void goForward();
+    void goBackWeek();
+    void goForwardWeek();
     void setDate( int, int, int );
     void setDay( int );
     void gotHide();
