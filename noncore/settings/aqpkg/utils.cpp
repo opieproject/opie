@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -27,9 +27,8 @@
 
 */
 
-#include <stdio.h>
 #include <sys/vfs.h>
- 
+
 #include "utils.h"
 #include "global.h"
 
@@ -49,7 +48,7 @@ QString Utils :: getPathfromIpkFilename( const QString &file )
     	path = file.left( p );
 
     return path;
-    
+
 }
 
 QString Utils :: getFilenameFromIpkFilename( const QString &file )
@@ -58,7 +57,7 @@ QString Utils :: getFilenameFromIpkFilename( const QString &file )
     QString name = file;
     if ( p != -1 )
     	name = name.mid( p + 1 );
-     
+
 
     return name;
 }

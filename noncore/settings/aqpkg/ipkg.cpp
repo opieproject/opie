@@ -27,20 +27,13 @@
 
 */
 
-#include <fstream>
-#include <iostream>
-#include <vector>
-using namespace std;
-
-#include <stdio.h>
-#include <unistd.h>
-
 #ifdef QWS
 #include <qpe/qpeapplication.h>
 #else
 #include <qapplication.h>
 #endif
 #include <qdir.h>
+#include <qfile.h>
 #include <qtextstream.h>
 
 #include <opie/oprocess.h>
@@ -203,9 +196,10 @@ void Ipkg :: removeStatusEntry()
     tempstr.append( package );
     emit outputText( tempstr );
 
-    ifstream in( statusFile );
-    ofstream out( outStatusFile );
-    if ( !in.is_open() )
+    QFile readFile( statusFile );
+    QFile writeFile( outStatusFile );
+
+    if ( !readFile.open( IO_ReadOnly ) )
     {
         tempstr = tr("Couldn't open status file - ");
         tempstr.append( statusFile );
@@ -213,7 +207,7 @@ void Ipkg :: removeStatusEntry()
         return;
     }
 
-    if ( !out.is_open() )
+    if ( !writeFile.open( IO_WriteOnly ) )
     {
         tempstr = tr("Couldn't create tempory status file - ");
         tempstr.append( outStatusFile );
@@ -221,66 +215,63 @@ void Ipkg :: removeStatusEntry()
         return;
     }
 
-    char line[1001];
+    int i = 0;
+
+    QTextStream readStream( &readFile );
+    QTextStream writeStream( &writeFile );
+    QString line;
+
     char k[21];
     char v[1001];
     QString key;
     QString value;
-    vector<QString> lines;
-    int i = 0;
-    do
+
+    while ( !readStream.atEnd() )
     {
-        in.getline( line, 1000 );
-        if ( in.eof() )
-            continue;
+        //read new line
+        line = readStream.readLine();
 
-        k[0] = '\0';
-        v[0] = '\0';
-
-        sscanf( line, "%[^:]: %[^\n]", k, v );
-        key = k;
-        value = v;
-        key = key.stripWhiteSpace();
-        value = value.stripWhiteSpace();
-        if ( key == "Package" && value == package )
+        if ( line.contains( ":", TRUE ) )
         {
-            // Ignore all lines up to next empty
-            do
-            {
-                in.getline( line, 1000 );
-                if ( in.eof() || QString( line ).stripWhiteSpace() == "" )
-                    continue;
-            } while ( !in.eof() && QString( line ).stripWhiteSpace() != "" );
+            //grep key and value from line
+            k[0] = '\0';
+            v[0] = '\0';
+            sscanf( line, "%[^:]: %[^\n]", k, v );
+            key = k;
+            value = v;
+            key = key.stripWhiteSpace();
+            value = value.stripWhiteSpace();
+        } else {
+            key = "";
+            value = "";
         }
 
-        lines.push_back( QString( line ) );
-        out << line << endl;
+        if ( key == "Package" && value == package )
+        {
+            //skip lines from the deleted package
+            while ( ( !readStream.atEnd() ) && ( line.stripWhiteSpace() != "" ) )
+            {
+                line = readStream.readLine();
+            }
+        } else {
 
-        // Improve UI responsiveness
-        i++;
-        if ( ( i % 50 ) == 0 )
-            qApp->processEvents();
-    } while ( !in.eof() );
+            //write other lines into the tempfile
+            writeStream << line << "\n";
 
-    // Write lines out
-    vector<QString>::iterator it;
-    for ( it = lines.begin() ; it != lines.end() ; ++it )
-    {
-        out << (const char *)(*it) << endl;
-
-        // Improve UI responsiveness
-        i++;
-        if ( ( i % 50 ) == 0 )
-            qApp->processEvents();
+            // Improve UI responsiveness
+            i++;
+            if ( ( i % 50 ) == 0 )
+                qApp->processEvents();
+        }
     }
 
-    in.close();
-    out.close();
+    readFile.close();
+    writeFile.close();
 
     // Remove old status file and put tmp stats file in its place
     remove( statusFile );
     rename( outStatusFile, statusFile );
-}
+ }
 
 int Ipkg :: executeIpkgCommand( QStringList &cmd, const QString /*option*/ )
 {
