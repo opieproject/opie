@@ -250,11 +250,11 @@ void DataManager :: writeOutIpkgConf()
             out << "#";
         out << "option ftp_proxy " << ftpProxy << endl;
     }
-    if ( proxyUsername == "" )
+    if ( proxyUsername == "" || (!httpProxyEnabled && !ftpProxyEnabled) )
         out << "#option proxy_username <username>" << endl;
     else
         out << "option proxy_username " << proxyUsername << endl;
-    if ( proxyPassword == "" )
+    if ( proxyPassword == "" || (!httpProxyEnabled && !ftpProxyEnabled) )
         out << "#option proxy_password <password>" << endl << endl;
     else
         out << "option proxy_password " << proxyPassword << endl<< endl;
