@@ -56,14 +56,14 @@ void Package::init( PackageManagerSettings *s )
 
 Package::Package( QStringList pack, PackageManagerSettings *s , QObject *parent, const char *name )
 	: QObject(parent,name)
-{	
+{
   init(s);
   parsePackage( pack );
 }
 
 Package::Package( QString n, PackageManagerSettings *s, QObject *parent, const char *name )
 	: QObject(parent,name)
-{	
+{
   init(s);
  	if ( !QFile::exists( n ) )
   {
@@ -118,7 +118,7 @@ void Package::setValue( QString n, QString t )
     _fileName = t;
 //  }else if ( n == "Size")
 // 	{
-//  	
+//
 //	}else if ( n == "MD5Sum")
 //	{
 
@@ -385,7 +385,7 @@ void Package::setDest( QString d )
 
 void Package::setOn()
 {
-	_toProcess = true;	
+	_toProcess = true;
 }
 
 bool Package::link()
@@ -401,8 +401,15 @@ void Package::setLink(bool b)
 
 void Package::parseIpkgFile( QString file)
 {
-	system("tar xzf "+file+" -C /tmp");
- 	system("tar xzf /tmp/control.tar.gz -C /tmp");
+// 20020830
+// a quick hack to make oipkg understand the new ipk format
+// neu:  ar pf PACKAGE control.tar.gz | tar xfOz - ./control > /tmp/control
+    if (! system("ar pf "+file+" control.tar.gz | tar xfOz - ./control > /tmp/control") )
+    {
+//#old tar ipk format
+        system("tar xzf "+file+" -C /tmp");
+        system("tar xzf /tmp/control.tar.gz -C /tmp");
+    }
   QFile f("/tmp/control");
   if ( f.open(IO_ReadOnly) )
   {
@@ -415,7 +422,7 @@ void Package::parseIpkgFile( QString file)
     f.close();
   	parsePackage( pack );
   }
-	
+
 }
 
 //QString Package::getPackageName()
@@ -436,7 +443,7 @@ void Package::setName(QString n)
 
 QDict<QString>* Package::getFields()
 {
-	return &_values;	
+	return &_values;
 }
 
 QString Package::status()
