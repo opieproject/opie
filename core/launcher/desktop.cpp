@@ -191,13 +191,13 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
     if ( !loggedin && ke->simpleData.keycode != Key_F34 )
       return TRUE;
     bool press = ke->simpleData.is_press;
-
+    bool autoRepeat = ke ->simpleData.is_auto_repeat;
     if (!keyRegisterList.isEmpty())
     {
       KeyRegisterList::Iterator it;
       for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
       {
-        if ((*it).getKeyCode() == ke->simpleData.keycode)
+        if ((*it).getKeyCode() == ke->simpleData.keycode && !autoRepeat)
         QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
       }
     }
