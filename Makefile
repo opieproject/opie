@@ -44,7 +44,8 @@ CORESETTINGS = core/settings/light-and-power core/settings/security \
 NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 	noncore/settings/appearance noncore/settings/sound \
 	noncore/settings/mediummount \
-	noncore/settings/tabmanager noncore/settings/appskey 
+	noncore/settings/tabmanager noncore/settings/appskey \
+	noncore/settings/netsystemtime
 
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
