@@ -14,7 +14,8 @@ The skins work off of an indexed mode black image mask to position where the but
 should be. The skin_up and skin_down images show how all the buttons 
 are to be drawn when pressed and released.
 
-**** All _mask_ files need to be indexed mode png images with an alpha background ****
+**** All _mask_ files need to be index mode (256) png images with an
+     transparent background ****
 
 You will need _all_ these files:
 
@@ -45,5 +46,4 @@ skinV_up.png            video button skin for when buttons are released (rgb)
 
 You can position the buttons anywhere using the button mask. The skin_up and skin_down images
 should correspond to the mask positions, otherwise they wont work.
-Video skins do not have much choice in button location.
 
