@@ -8,12 +8,12 @@ http://handhelds.org/~zecke/apidocs/index.html
 
 You will need qvfb, uic and
 (if you want to develop applications) designer
-compiled and linked against qt-x11.
-That means you must download and configure/make it.
+compiled and linked against Qt/X11.
+That means you must download and configure/make it:
 wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
 (Alternatively, you can get static binaries from http://www.vanille.de/tools)
 
-The recommended version of Qt embedded is qt-embedded-2.3.7
+The recommended version of Qt/Embedded is 2.3.7
 
 You can get it from:
 ftp://ftp.trolltech.com/qt/source/qt-embedded-2.3.7.tar.bz2
@@ -31,8 +31,8 @@ You need to adjust your runtime library search path,
 so that the Qt/Embedded and Opie libraries can be found:
 export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
-You have to apply the qte<version>-all.patch to the Qt/Embedded
-sources and copy the qconfig-qpe.h file to $QTDIR/src/tools:
+You have to apply the patches corresponding to your Qt/Embedded version
+and copy the qconfig-qpe.h file to $QTDIR/src/tools:
 cd $QTDIR; cat $OPIEDIR/qt/qt-<version>.patch/qte<version>-all.patch | patch -p1
 cp $OPIEDIR/qt/qconfig-qpe.h $QTDIR/src/tools
 
@@ -56,33 +56,43 @@ make clean
 make menuconfig
 
 Now you can move through the menu and select or deselect anything..
-Exit and save the configuration and enter "make" to create opie...
+Exit and save the configuration and enter "make" to build everything selected.
 
 Have fun!
 
-2. Used Libraries
+2. Required Libraries
 ================
 
-The following Libraries are used in Opie.
+The following Libraries are used by Opie parts.
 For a successful build you must install these librarys and headers.
-The versions are known-good versions. If you successfully try newer ones,
-commit a new README or send a mail to opie-devel@handhelds.org
 
-* libsdl 1.2
+* libsdl >= 1.2.0
   http://www.libsdl.org/download-1.2.php
 
-* libxine 1.0 rc6
+* libxine >= 1.0 RC6
   http://prdownloads.sourceforge.net/xine/
 
-* libpcap 0.7.2
+* libpcap >= 0.7.2
   http://www.tcpdump.org/release/
 
-* libetpan 0.33pre
-  http://prdownloads.sourceforge.net/libetpan/ + patch in noncore/net/mail/libetpanstuff
+* libetpan >= 0.34
+  http://prdownloads.sourceforge.net/libetpan/
 
-* libsqlite 2.8.6
+* libsqlite >= 3.0.0
   http://www.sqlite.org/download.html
 
 * libipk v109 (or greater)
   ftp://handhelds.org/linux/packages/ipkg
 
+3. Supported Devices
+====================
+
+Sharp Zaurus SL-5x00, SL-B500, SL-C7x0, SL-C8x0, SL-6000
+
+HP iPAQ 36xx, 37xx, 38xx, 39xx, 54xx, 55xx
+
+SIEMENS SIMpad CL4, SL4, SLC, T-SinusPAD
+
+MasterIA Beagle, Tradesquare.NL Tuxpad 1
+
+GMate Yopy 3x00
