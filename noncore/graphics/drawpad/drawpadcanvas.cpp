@@ -234,12 +234,6 @@ void DrawPadCanvas::save(QIODevice* ioDevice)
         imageIO.write();
         buffer.close();
 
-/*
-        ulong size = byteArray.size() * 2;
-        QByteArray byteArrayZipped(size);
-        ::compress((uchar*)byteArrayZipped.data(), &size, (uchar*)byteArray.data(), byteArray.size());
-*/
-
         textStream << "            <data length=\"" << byteArray.size() << "\" format=\"PNG\">";
 
         static const char hexchars[] = "0123456789abcdef";
