@@ -43,7 +43,7 @@ dataWidgetUI::dataWidgetUI() : QWidget()
     {
         dataCombo->insertItem( QString::number( i+1 )+" - "+*it );
     }
-
+	QStringList::ConstIterator it = names.begin();
     OxydataWidget *oxyDW = new OxydataWidget(this, "OxydataWidget_oxyDW", names);
     connect ( dataCombo, SIGNAL( activated(int) ), oxyDW, SLOT( setElement(int) ) );
     oxyDW->setElement( 0 );
@@ -55,6 +55,7 @@ dataWidgetUI::dataWidgetUI() : QWidget()
 
 void dataWidgetUI::loadNames()
 {
+	names.clear();
 	names.append( tr("Hydrogen") );
 	names.append( tr("Helium") );
 	names.append( tr("Lithium") );
