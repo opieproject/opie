@@ -82,9 +82,12 @@ SOURCES		= Aportis.cpp \
                   ztxt.cpp
 
 INTERFACES	= 
-DESTDIR		= ../bin
-#INCLUDEPATH	+= $(QPEDIR)/include
-#DEPENDPATH	+= $(QPEDIR)/include
-TARGET		= uqtreader
+DESTDIR		= $(OPIEDIR)/bin
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
+TARGET		= reader
 LIBS		+= -lqpe
+
+include ( $(OPIEDIR)/include.pro )
+
 
