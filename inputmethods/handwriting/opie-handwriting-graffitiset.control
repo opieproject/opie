@@ -3,7 +3,7 @@ Files: etc/qimpen/graffiti*
 Priority: optional
 Section: opie/inputmethods
 Maintainer: Jake Richardson <jake@asdfnews.org>
-Architecture: none
+Architecture: any
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Graffiti character set for the Handwriting inputmethod.
