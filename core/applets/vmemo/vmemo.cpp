@@ -11,7 +11,7 @@
 ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.28 2002-05-23 02:58:32 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.29 2002-05-26 23:41:26 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -205,10 +205,12 @@ VMemo::VMemo( QWidget *parent, const char *_name )
     struct utsname name; /* check for embedix kernel running on the zaurus*/
     if (uname(&name) != -1) {
         QString release=name.release;
-        Config vmCfg("VMemo");
+        Config vmCfg("Vmemo");
         vmCfg.setGroup("Defaults");
-        int toggleKey = vmCfg.readNumEntry("toggleKey", -1);
-  
+        int toggleKey = setToggleButton(vmCfg.readNumEntry("toggleKey", -1));
+
+        qDebug("toggleKey %d", toggleKey);  
+
         if(release.find("embedix",0,TRUE) !=-1)
             systemZaurus=TRUE;
         else 
@@ -269,9 +271,17 @@ bool VMemo::startRecording() {
 
     if ( recording)
         return FALSE;;    
-     Config config( "Vmemo" );
+
+    Config config( "Vmemo" );
      config.setGroup( "System" );
+
      useAlerts = config.readBoolEntry("Alert");
+     if(useAlerts) {
+
+         msgLabel = new QLabel( 0, "alertLabel" );
+         msgLabel->setText("<B><P><font size=+2>VMemo-Recording</font></B>");
+         msgLabel->show();
+     }
 
 //      if(useAlerts) 
 //  QMessageBox::message("VMemo","Really Record?");//) ==1)
@@ -283,7 +293,7 @@ bool VMemo::startRecording() {
     qDebug("Start recording");
     recording = TRUE;
     if (openDSP() == -1)  {
-        QMessageBox::critical(0, "VMemo", "Could not open dsp device.\n"+errorMsg, "Abort");
+        QMessageBox::critical(0, "vmemo", "Could not open dsp device.\n"+errorMsg, "Abort");
         recording = FALSE;
         return FALSE;
     }
@@ -319,7 +329,7 @@ bool VMemo::startRecording() {
   if(openWAV(fileName.latin1()) == -1)  {
     QString err("Could not open the output file\n");
     err += fileName;
-    QMessageBox::critical(0, "VMemo", err, "Abort");
+    QMessageBox::critical(0, "vmemo", err, "Abort");
     close(dsp);
     return FALSE;
   }
@@ -335,6 +345,7 @@ bool VMemo::startRecording() {
   l.setType("audio/x-wav");
   l.setCategories(cats);
   l.writeLink();
+
   
   record();
   return TRUE;
@@ -342,6 +353,8 @@ bool VMemo::startRecording() {
 
 void VMemo::stopRecording() {
   recording = FALSE;
+  if(useAlerts)
+      if( msgLabel) delete msgLabel;
 }
 
 int VMemo::openDSP()
@@ -429,30 +442,40 @@ int VMemo::openWAV(const char *filename)
 void VMemo::record(void)
 {
     int length=0, result, value;
-    qDebug("Recording");
+    QString msg;
+    msg.sprintf("Recording format %d", format);
+    qDebug(msg);
 
     if(systemZaurus) {
         signed short sound[512], monoBuffer[512];
         if(format==AFMT_S16_LE)  {
+
             while(recording)   {
+
                 result = read(dsp, sound, 512); // 8192
                 int j=0;
+
                 if(systemZaurus) {
                     for (int i = 0; i < result; i++) { //since Z is mono do normally
                         monoBuffer[i] = sound[i];
                     }
+
                     length+=write(wav, monoBuffer, result);
+
                 } else { //ipaq /stereo inputs
+
                     for (int i = 0; i < result; i+=2) {
                         monoBuffer[j] = (sound[i]+sound[i+1])/2;
                         j++;
                     }
+
                     length+=write(wav, monoBuffer, result/2);
                 }
+                qApp->processEvents();
 //                  printf("%d\r",length);
 //                  fflush(stdout);
             }
-        }  else { //AFMT_U8 
+        } else { //AFMT_U8 
 // 8bit unsigned
             unsigned short sound[512], monoBuffer[512];
             while(recording)   {
@@ -507,8 +530,43 @@ void VMemo::record(void)
         perror("ioctl(\"SNDCTL_DSP_RESET\")");
     ::close(dsp);
     fileName = fileName.left(fileName.length()-4);
-    if(useAlerts) 
-        QMessageBox::message("Vmemo"," Done recording\n"+ fileName);
+//     if(useAlerts) 
+//         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
     qDebug("done recording "+fileName);
     QSound::play(Resource::findSound("vmemoe"));
+}
+
+int VMemo::setToggleButton(int tog) {
+
+    for( int i=0; i < 10;i++) {
+        switch (tog) {
+          case 0:
+            return -1; 
+            break; 
+          case 1:
+            return 0; 
+            break; 
+          case 2:
+            return Key_Escape;
+            break; 
+          case 3:
+            return Key_Space;
+            break; 
+          case 4:
+            return Key_F12;
+            break; 
+          case 5:
+            return Key_F9;
+            break; 
+          case 6:
+            return Key_F10;
+            break; 
+          case 7:
+            return Key_F11;
+            break; 
+          case 8:
+            return Key_F13;
+            break; 
+        };
+    }
 }

@@ -11,17 +11,19 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.8 2002-05-19 17:00:41 llornkcor Exp $
+ * $Id: vmemo.h,v 1.9 2002-05-26 23:41:26 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
 #define __VMEMO_H__
+
 
 #include <qwidget.h>
 #include <qpixmap.h>
 #include <qpe/applnk.h>
 #include <qfile.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qlabel.h>
 
 class VMemo : public QWidget
 {
@@ -31,7 +33,7 @@ public:
   ~VMemo();
   QFile track;  
   QString fileName, errorMsg;
-
+  QLabel* msgLabel;
 public slots:
   void record();
   void mousePressEvent( QMouseEvent * );
@@ -42,7 +44,7 @@ public slots:
 private:
   bool useAlerts;
   void paintEvent( QPaintEvent* );
-
+  int setToggleButton(int);
   int openDSP();
   int openWAV(const char *filename);
   bool fromToggle;
