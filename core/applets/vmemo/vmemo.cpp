@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.46 2002-07-29 12:22:11 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.47 2002-07-29 12:30:16 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -366,7 +366,7 @@ bool VMemo::startRecording() {
   fileName.replace(QRegExp(" "),"_");
   fileName.replace(QRegExp(":"),".");
   fileName.replace(QRegExp(","),"");
-  fileName += ".wav";
+
   
   qDebug("filename is "+fileName);
 // open tmp file here
@@ -386,8 +386,12 @@ bool VMemo::startRecording() {
   if( record() ) {
 
   QString cmd;
+  if( fileName.find(".wav",0,TRUE) == -1)
+      fileName += ".wav";
+
   cmd.sprintf("mv %s "+fileName, pointer);
 // move tmp file to regular file here
+  
   system(cmd.latin1());
 
   QArray<int> cats(1);
@@ -483,6 +487,8 @@ int VMemo::openWAV(const char *filename) {
   }
 
   wav=track.handle();
+    Config vmCfg("Vmemo");
+    vmCfg.setGroup("Defaults");
   useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
   
   WaveHeader wh;
@@ -533,6 +539,8 @@ bool VMemo::record() {
     signed short sound[1024], monoBuffer[1024];
     char abuf[bufsize/2];
     short sbuf[bufsize];
+    Config vmCfg("Vmemo");
+    vmCfg.setGroup("Defaults");
     useADPCM = vmCfg.readBoolEntry("use_ADPCM", 0);
 
     while(recording)  {
@@ -595,7 +603,7 @@ bool VMemo::record() {
     perror("ioctl(\"SNDCTL_DSP_RESET\")");
 
   ::close(dsp);
-  fileName = fileName.left(fileName.length()-4);
+
   //     if(useAlerts) 
   //         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
   qDebug("done recording "+fileName);
