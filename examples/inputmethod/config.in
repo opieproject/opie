@@ -1,4 +1,4 @@
   config EXAMPLE_BOARD
-    boolean "Input Method"
+    boolean "Input Method Example"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && EXAMPLES
