@@ -216,22 +216,22 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">nicht eingeteilt</translation>
+        <translation>nicht eingeteilt</translation>
     </message>
 </context>
 <context>
     <name>ContactEditor</name>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax, geschäftlich</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax, privat</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Telefon, geschäftlich</translation>
     </message>
     <message>
         <source>Home Phone</source>
@@ -1315,7 +1315,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Internetseite, geschäftlich</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1323,7 +1323,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Handy, geschäftlich</translation>
     </message>
 </context>
 </TS>
