@@ -274,8 +274,8 @@ bool FileManager::copyFile( const QString & src, const QString & dest ) {
 
 #else
 	  err = sendfile(write_fd, read_fd, &offset, stat_buf.st_size);
-	  if( err != -1) {
-		  switch(err) {
+	  if( err == -1) {
+		  switch(errno) {
 		  case EBADF : msg = "The input file was not opened for reading or the output file was not opened for writing. ";
 		  case EINVAL: msg = "Descriptor is not valid or locked. ";
 		  case ENOMEM: msg = "Insufficient memory to read from in_fd.";
