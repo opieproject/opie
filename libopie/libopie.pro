@@ -1,7 +1,25 @@
 TEMPLATE        = lib
 CONFIG          += qte warn_on release
-HEADERS 	= ofontmenu.h ofileselector.h ofiledialog.h ofileview.h tododb.h todoevent.h todoresource.h todovcalresource.h xmltree.h  colordialog.h colorpopupmenu.h oclickablelabel.h oprocctrl.h oprocess.h odevice.h ocheckitem.h ocontactdb.h ocontactselector.h
-SOURCES		= ofontmenu.cc ofileselector.cc ofiledialog.cc xmltree.cc tododb.cpp todoevent.cpp todovcalresource.cpp  colordialog.cpp colorpopupmenu.cpp oclickablelabel.cpp oprocctrl.cpp oprocess.cpp odevice.cpp ocheckitem.cpp ocontactdb.cpp ocontactselector.cpp
+HEADERS 	= ofontmenu.h ofileselector.h \
+    ofiledialog.h ofileview.h \
+    tododb.h todoevent.h todoxmlresource.h \
+    todoresource.h todovcalresource.h \
+    xmltree.h  colordialog.h \
+    colorpopupmenu.h oclickablelabel.h \
+    oprocctrl.h oprocess.h \
+    odevice.h ocheckitem.h \
+    ocontactdb.h ocontactselector.h
+
+SOURCES		= ofontmenu.cc ofileselector.cc \
+    ofiledialog.cc xmltree.cc \
+    tododb.cpp todoevent.cpp \
+    todovcalresource.cpp  todoxmlresource.cpp \ 
+    colordialog.cpp colorpopupmenu.cpp \ 
+    oclickablelabel.cpp oprocctrl.cpp \ 
+    oprocess.cpp odevice.cpp \
+    ocheckitem.cpp ocontactdb.cpp \
+    ocontactselector.cpp
+     
 TARGET		= opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR         = $(QTDIR)/lib$(PROJMAK)

@@ -9,12 +9,29 @@
 #include <qstringlist.h>
 #include <qdatetime.h>
 
+#include <qpe/recordfields.h>
 
-class ToDoEvent {
+class ToDoEvent   {
+public:
+    enum RecordFields {
+        Uid = Qtopia::UID_ID,
+        Category = Qtopia::CATEGORY_ID,
+        HasDate,
+        Completed,
+        Description,
+        Summary,
+        Priority,
+        DateDay,
+        DateMonth,
+        DateYear,
+        Progress,
+        CrossReference
+
+    };
     friend class ToDoDB;
  public:
     // priorities from Very low to very high
-    enum Priority { VERYHIGH=1, HIGH, NORMAL, LOW, VERYLOW };
+    enum TaskPriority { VERYHIGH=1, HIGH, NORMAL, LOW, VERYLOW };
     /* Constructs a new ToDoEvent
        @param completed Is the TodoEvent completed
        @param priority What is the priority of this ToDoEvent
@@ -31,38 +48,40 @@ class ToDoEvent {
                const QString &description = QString::null,
                ushort progress = 0,
 	       bool hasDate = false, QDate date = QDate::currentDate(), int uid = -1 );
+
     /* Copy c'tor
 
     **/
     ToDoEvent(const ToDoEvent & );
 
-    /*
-       Is this event completed?
-    **/
+    /**
+     * Is this event completed?
+     */
     bool isCompleted() const;
 
-    /*
-       Does this Event have a deadline
-    **/
+    /**
+     * Does this Event have a deadline
+     */
     bool hasDate() const;
 
-    /*
-      What is the priority?
-    **/
+    /**
+     * What is the priority?
+     */
     int priority()const ;
 
     /**
      * progress as ushort 0, 20, 40, 60, 80 or 100%
      */
     ushort progress() const;
-    /*
-      All category numbers as QString in a List
-    **/
+
+    /**
+     * All category numbers as QString in a List
+     */
     QStringList allCategories()const;
 
-    /*
-      * Same as above but with QArray<int>
-      */
+    /**
+     * Same as above but with QArray<int>
+     */
     QArray<int> categories() const;
 
     /**
@@ -93,6 +112,7 @@ class ToDoEvent {
 
     QString extra(const  QString& )const;
 
+    QMap<QString, QString> extras()const { return m_extra; };
     /**
      * returns a list of apps which have related items
      */
@@ -171,6 +191,7 @@ class ToDoEvent {
     bool operator>=(const ToDoEvent &toDoEvent)const;
     bool operator==(const ToDoEvent &toDoEvent )const;
     ToDoEvent &operator=(const ToDoEvent &toDoEvent );
+
  private:
     class ToDoEventPrivate;
     ToDoEventPrivate *d;

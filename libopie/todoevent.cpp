@@ -224,7 +224,7 @@ QString ToDoEvent::richText() const
     text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) ;
   }
   text += "<br><br><br>";
-  
+
   text += "<b>" + QObject::tr( "Priority:") +" </b>"
     +  QString::number( priority() ) + " <br>";
   text += "<b>" + QObject::tr( "Progress:") + " </b>"
@@ -331,6 +331,8 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
     m_uid = item.m_uid;
     m_sum = item.m_sum;
     m_prog = item.m_prog;
+    m_extra = item.m_extra;
+    m_relations = item.m_relations;
     return *this;
 }
 
