@@ -13,12 +13,14 @@
 #include "abstractmail.h"
 #include "accountview.h"
 
-AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&file,const QString&desc,int num)
+AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
+    const QString&fsize,int num)
 	: QListViewItem(parent,after),_partNum(num)
 {
 	setText(0, mime);
-	setText(1, file);
-	setText(2, desc);
+	setText(1, desc);
+	setText(2, file);
+    setText(3, fsize);
 }
 
 void ViewMail::setBody( RecBody body ) {
@@ -32,7 +34,7 @@ if (body.Parts().count()==0) {
 }
 AttachItem * curItem=0;
 QString type=body.Description().Type()+"/"+body.Description().Subtype();
-QString desc;
+QString desc,fsize;
 double s = body.Description().Size();
 int w;
 w=0;
@@ -61,18 +63,19 @@ default:
        loop. To let it work, the textstream is packed into a own area of
        code is it will be destructed after finishing its small job.
     */
-    QTextOStream o(&desc);
+    QTextOStream o(&fsize);
     if (w>0) o.precision(2); else o.precision(0);
     o.setf(QTextStream::fixed);
     o << s << " " << q << "Byte";
 }
 
-curItem=new AttachItem(attachments,curItem,type,"Mailbody",desc,-1);
+curItem=new AttachItem(attachments,curItem,type,"Mailbody","",fsize,-1);
 QString filename = "";
 for (unsigned int i = 0; i < body.Parts().count();++i) {
     type = body.Parts()[i].Type()+"/"+body.Parts()[i].Subtype();
     part_plist_t::ConstIterator it = body.Parts()[i].Parameters().begin();
     for (;it!=body.Parts()[i].Parameters().end();++it) {
+        qDebug(it.key());
         if (it.key().lower()=="name") {
             filename=it.data();
         }
@@ -95,22 +98,27 @@ for (unsigned int i = 0; i < body.Parts().count();++i) {
         q="";
         break;
     }
-    QTextOStream o(&desc);
+    QTextOStream o(&fsize);
     if (w>0) o.precision(2); else o.precision(0);
     o.setf(QTextStream::fixed);
     o << s << " " << q << "Byte";
-    curItem=new AttachItem(attachments,curItem,type,filename,desc,i);
+    desc = body.Parts()[i].Description();
+    curItem=new AttachItem(attachments,curItem,type,desc,filename,fsize,i);
 }
 }
 
-void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int c ) {
+void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int ) {
     if (!item )
         return;
 
-  QPopupMenu *menu = new QPopupMenu();
+    if (  ( ( AttachItem* )item )->Partnumber() == -1 ) {
+        setText();
+        return;
+    }
+    QPopupMenu *menu = new QPopupMenu();
   int ret=0;
 
-  if ( item->text( 0 ).left( 4 ) == "text" )  {
+  if ( item->text( 0 ).left( 5 ) == "text/" )  {
      menu->insertItem( tr( "Show Text" ), 1 );
   }
   menu->insertItem( tr( "Save Attachment" ),  0 );
@@ -123,7 +131,7 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
              { MimeTypes types;
              types.insert( "all", "*" );
              QString str = OFileDialog::getSaveFileName( 1,
-                  "/", item->text( 1 )  , types, 0 );
+                  "/", item->text( 2 )  , types, 0 );
 
              if( !str.isEmpty() ) {
                qDebug( "first we will need a MIME wrapper" );

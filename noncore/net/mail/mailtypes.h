@@ -80,7 +80,7 @@ typedef QMap<QString,QString> part_plist_t;
 class RecPart
 {
 protected:
-    QString m_type,m_subtype,m_identifier,m_encoding;
+    QString m_type,m_subtype,m_identifier,m_encoding,m_description;
     unsigned int m_lines,m_size;
     part_plist_t m_Parameters;
     /* describes the position in the mail */
@@ -98,6 +98,8 @@ public:
     void setIdentifier(const QString&identifier);
     const QString&Encoding()const;
     void setEncoding(const QString&encoding);
+    const QString&Description()const;
+    void setDescription(const QString&desc);
     void setLines(unsigned int lines);
     const unsigned int Lines()const;
     void setSize(unsigned int size);

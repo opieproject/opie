@@ -85,7 +85,7 @@ const QStringList& RecMail::Bcc()const
 }
 
 RecPart::RecPart()
-    : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_lines(0),m_size(0)
+    : m_type(""),m_subtype(""),m_identifier(""),m_encoding(""),m_description(""),m_lines(0),m_size(0)
 {
     m_Parameters.clear();
     m_poslist.clear();
@@ -155,6 +155,16 @@ void RecPart::setEncoding(const QString&encoding)
     m_encoding = encoding;
 }
 
+const QString& RecPart::Description()const
+{
+    return m_description;
+}
+
+void RecPart::setDescription(const QString&desc)
+{
+    m_description = desc;
+}
+    
 void RecPart::setParameters(const part_plist_t&list)
 {
     m_Parameters = list;

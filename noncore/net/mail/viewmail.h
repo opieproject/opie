@@ -11,7 +11,8 @@
 class AttachItem : public QListViewItem
 {
 public:
-    AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&file,const QString&desc,int num);
+    AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
+        const QString&fsize,int num);
     int Partnumber() { return _partNum; }
 
 private:

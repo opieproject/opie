@@ -55,8 +55,9 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
 	attachments->setMaximumHeight(90);
 	attachments->setAllColumnsShowFocus(true);
 	attachments->addColumn("Mime Type", 60);
-	attachments->addColumn(tr("Filename"), 100);
-	attachments->addColumn(tr("Size"), 80);
+	attachments->addColumn(tr("Description"), 100);
+	attachments->addColumn(tr("Filename"), 80);
+    attachments->addColumn(tr("Size"), 80);
     attachments->setSorting(-1);
 	attachments->hide();
 

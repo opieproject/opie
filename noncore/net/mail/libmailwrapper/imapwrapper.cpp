@@ -696,6 +696,9 @@ void IMAPwrapper::fillBodyFields(RecPart&target_part,mailimap_body_fields*which)
             free(t);
         }
     }
+    if (which->bd_description) {
+        target_part.setDescription(QString(which->bd_description));
+    }
     target_part.setEncoding(encoding);
     target_part.setSize(which->bd_size);
 }
@@ -760,7 +763,7 @@ void IMAPwrapper::answeredMail(const RecMail&mail)
     }
     flist = mailimap_flag_list_new_empty();
     mailimap_flag_list_add(flist,mailimap_flag_new_answered());
-    store_flags = mailimap_store_att_flags_new_set_flags(flist);
+    store_flags = mailimap_store_att_flags_new_add_flags(flist);
     set = mailimap_set_new_single(mail.getNumber());
     err = mailimap_store(m_imap,set,store_flags);
     mailimap_set_free( set );

@@ -199,7 +199,9 @@ MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
 
 void MailListViewItem::showEntry()
 {
-    if ( mail_data.getFlags().testBit( FLAG_SEEN ) == true )  {
+    if ( mail_data.getFlags().testBit( FLAG_ANSWERED ) == true) {
+        setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgreplied") );
+    } else if ( mail_data.getFlags().testBit( FLAG_SEEN ) == true )  {
         setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
     } else  {
         setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgnew") );
