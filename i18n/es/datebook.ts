@@ -6,14 +6,6 @@
         <translation>Calendario</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Vista</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Configurar</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nuevo</translation>
     </message>
@@ -222,6 +214,10 @@ Libere espacio y vuelva a intentarlo.
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Calendario</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -317,6 +313,26 @@ Libere espacio y vuelva a intentarlo.
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Oficina</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Casa</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -328,20 +344,12 @@ Libere espacio y vuelva a intentarlo.
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">semana</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>A: </translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>S: </translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Ene-00. Ene</translation>
@@ -350,8 +358,8 @@ Libere espacio y vuelva a intentarlo.
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>S: %1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -363,10 +371,6 @@ Libere espacio y vuelva a intentarlo.
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Ene-00 Ene</translation>
     </message>
 </context>
 <context>

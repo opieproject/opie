@@ -6,14 +6,6 @@
         <translation>Koledar</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Pogled</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Nastavitve</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nov</translation>
     </message>
@@ -224,6 +216,10 @@ Izhod?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Koledar</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -319,6 +315,26 @@ Izhod?</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Pisarna</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Dom</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -330,20 +346,12 @@ Izhod?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">teden</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>L: </translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>T: </translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Jan-00. Jan</translation>
@@ -352,7 +360,7 @@ Izhod?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
+        <source>w</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -365,10 +373,6 @@ Izhod?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Jan-00 Jan</translation>
     </message>
 </context>
 <context>

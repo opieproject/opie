@@ -6,14 +6,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>New</source>
         <translation type="unfinished"></translation>
     </message>
@@ -218,6 +210,10 @@ Quit anyway?</source>
         <source>:00</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -313,6 +309,26 @@ Quit anyway?</source>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -324,20 +340,12 @@ Quit anyway?</source>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
+        <source>w</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation type="unfinished"></translation>
@@ -346,7 +354,7 @@ Quit anyway?</source>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
+        <source>w</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -358,10 +366,6 @@ Quit anyway?</source>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -7,14 +7,6 @@
         <translation>Calendrier</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Vue</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Options</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nouveau</translation>
     </message>
@@ -224,6 +216,10 @@ Quitter ?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Calendrier</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -319,6 +315,26 @@ Quitter ?</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Bureau</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Maison</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -330,20 +346,12 @@ Quitter ?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">semaine</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>An :</translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>Sem :</translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Jan-00. Jan</translation>
@@ -352,8 +360,8 @@ Quitter ?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>Sem:%1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -365,10 +373,6 @@ Quitter ?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Jan-00 Jan</translation>
     </message>
 </context>
 <context>

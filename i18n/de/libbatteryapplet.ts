@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation type="unfinished"></translation>
+        <translation>Batteriestatus</translation>
     </message>
 </context>
 </TS>

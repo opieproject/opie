@@ -6,14 +6,6 @@
         <translation>Agenda</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Vista</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Impostazioni</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nuovo</translation>
     </message>
@@ -223,6 +215,10 @@ Uscire comunque?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Agenda</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -318,6 +314,26 @@ Uscire comunque?</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Ufficio</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Abitazione</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -329,20 +345,12 @@ Uscire comunque?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">settimana</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>A: </translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>S: </translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Gen-00. Gen</translation>
@@ -351,8 +359,8 @@ Uscire comunque?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>W: %1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -364,10 +372,6 @@ Uscire comunque?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Gen-00 Gen</translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>DrawPad</name>
     <message>
@@ -157,79 +158,79 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um ein neues Blatt zu erzeugen.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das aktuelle Blatt zu löschen.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um  das aktuelle Blatt zu entfernen.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die letzte Aktion zu widerrufen.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die letzte Aktion erneut auszuführen.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um  die erste Seite zu sehen.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die vorherige Seite zu sehen.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die nächste Seite zu sehen.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die letzte Seite zu sehen.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um eines der verfügbaren Linienwerkzeuge zu wählen.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um eines der verfügbaren Rechteckwerkzeuge zu wählen.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um eines der verfügbaren Ellipsenwerkzeuge zu wählen.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das Textwerkzeug zu wählen.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das Füllwerkzeug zu wählen.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das Löschwerkzeug zu wählen.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die Dicke des Zeichenstifts zu setzen.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die Zeichenfarbe zu wählen..</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die Füllfarbe zu wählen..</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Schmierzettel - Seite %1/%2</translation>
     </message>
 </context>
 <context>
@@ -364,15 +365,15 @@ wirklich löschen?</translation>
     <name>QObject</name>
     <message>
         <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel: %1</translation>
     </message>
     <message>
         <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension: %1x%2</translation>
     </message>
     <message>
         <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum: %1</translation>
     </message>
 </context>
 <context>
@@ -418,23 +419,23 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um ein neues Blatt zu erzeugen.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das aktuelle Blatt zu löschen.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das aktuelle Blatt zu entfernen.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das aktuelle Blatt eine Position nach oben zu verschieben.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um das aktuelle Blatt eine Position nach unten zu verschieben.</translation>
     </message>
 </context>
 </TS>

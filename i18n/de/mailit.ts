@@ -185,7 +185,7 @@ Mail has NOT been sent</source>
     </message>
     <message>
         <source>Attachment error</source>
-        <translation>Attachementfehler</translation>
+        <translation>Attachmentfehler</translation>
     </message>
     <message>
         <source>OK

@@ -174,15 +174,15 @@ hinzufügen?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished"></translation>
+        <translation>vCard exportieren</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie müssen einen Eintrag auswählen !</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie müssen einen Dateinamen angeben !</translation>
     </message>
 </context>
 <context>
@@ -338,23 +338,25 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation type="unfinished"></translation>
+        <translation>Werkzeug-/Menuleiste</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixiert</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Schalter für fixierte Werkzeugleiste - 
+wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Beweglich</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Schalter für bewegliche Werkzeugleiste - 
+wird nach dem Neustart der Anwendung aktiv!</translation>
     </message>
 </context>
 <context>

@@ -19,10 +19,6 @@
         <translation>Localizar</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Ver</translation>
-    </message>
-    <message>
         <source>Week</source>
         <translation>Semana</translation>
     </message>
@@ -83,10 +79,6 @@ longa que o intervalo entre repetições.</translation>
     <message>
         <source>Can not edit data, currently syncing</source>
         <translation>Impossível editar dados durante sincronização</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Configurações</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -224,6 +216,10 @@ longa que o intervalo entre repetições.</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Calendário</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -319,6 +315,26 @@ longa que o intervalo entre repetições.</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -330,20 +346,12 @@ longa que o intervalo entre repetições.</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">semana</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>W: </source>
-        <translation type="unfinished">S: </translation>
-    </message>
-    <message>
-        <source>Y: </source>
-        <translation type="unfinished">A: </translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation type="unfinished"></translation>
@@ -352,7 +360,7 @@ longa que o intervalo entre repetições.</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
+        <source>w</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -364,10 +372,6 @@ longa que o intervalo entre repetições.</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -7,14 +7,6 @@
         <translation>Kalender</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Ansicht</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Einstellungen</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Neu</translation>
     </message>
@@ -102,7 +94,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editieren...</translation>
     </message>
 </context>
 <context>
@@ -224,6 +216,10 @@ Trozdem beenden?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation>Kalender</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -277,47 +273,67 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansichten</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Defaultansicht:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Tag</translation>
+        <translation>Tag</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Woche</translation>
+        <translation>Woche</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Wochenliste</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Monat</translation>
+        <translation>Monat</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprung zu &quot;jetzt&quot;</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitanzeige</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Nie</translation>
+        <translation>Nie</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Beginn</translation>
+        <translation>Beginn</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Beginn-Ende</translation>
+    </message>
+    <message>
+        <source>Defaults</source>
+        <translation>Voreinstellung</translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation>Ort:</translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation>Büro</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation>zu Hause</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation>Kategorie:</translation>
     </message>
 </context>
 <context>
@@ -330,20 +346,12 @@ Trozdem beenden?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">Woche</translation>
+        <source>w</source>
+        <translation>W</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>J:</translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>M:</translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00.Jan-00.Jan</translation>
@@ -352,8 +360,8 @@ Trozdem beenden?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>W: %1</translation>
+        <source>w</source>
+        <translation>W</translation>
     </message>
 </context>
 <context>
@@ -365,10 +373,6 @@ Trozdem beenden?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Jan-00 Jan</translation>
     </message>
 </context>
 <context>

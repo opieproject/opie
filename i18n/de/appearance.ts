@@ -224,7 +224,7 @@ Dieser Bereich erlaubt anwendungsspezifische Eigenschaften auszuschalten.</trans
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotationsrichtung: </translation>
     </message>
 </context>
 <context>

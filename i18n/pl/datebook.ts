@@ -6,14 +6,6 @@
         <translation>Kalendarz</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Widok</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Ustawienia</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nowy</translation>
     </message>
@@ -223,6 +215,10 @@ Wyjsc ?</translation>
         <source>:00</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalendarz</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -318,6 +314,26 @@ Wyjsc ?</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Biuro</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Dom</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -329,20 +345,12 @@ Wyjsc ?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">tydzien</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation type="unfinished"></translation>
@@ -351,7 +359,7 @@ Wyjsc ?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
+        <source>w</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -363,10 +371,6 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

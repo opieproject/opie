@@ -1,154 +1,155 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterte Information</translation>
     </message>
     <message>
         <source>eth0</source>
-        <translation type="unfinished"></translation>
+        <translation>eth0</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Addresse</translation>
     </message>
     <message>
         <source>Interface</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnetzmaske</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.0.0.0</translation>
     </message>
     <message>
         <source>DHCP Information</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP Information</translation>
     </message>
     <message>
         <source>DHCP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP Server</translation>
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>Lease Expires</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+        <translation>Lease Obtained</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC-Addresse</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation>00:00:00:00:00:00</translation>
     </message>
 </context>
 <context>
     <name>InterfaceInformation</name>
     <message>
         <source>Interface Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface-Information</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Refreshen</translation>
     </message>
     <message>
         <source>S&amp;top</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;top</translation>
     </message>
     <message>
         <source>R&amp;estart</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu&amp;estart</translation>
     </message>
     <message>
         <source>&amp;Start</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Start</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Addresse</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnetz-Maske</translation>
     </message>
     <message>
         <source>MAC Address</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC Addresse</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation>0.0.0.0</translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation>00:00:00:00:00:0</translation>
     </message>
     <message>
         <source>&amp;View Advanced Information</source>
-        <translation type="unfinished"></translation>
+        <translation>An&amp;zeige erweiterter Informationen</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetup</name>
     <message>
         <source>Interface Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Interface-Konfiguration</translation>
     </message>
     <message>
         <source>Automatically bring up</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch starten</translation>
     </message>
     <message>
         <source>DHCP</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP</translation>
     </message>
     <message>
         <source>Static Ip Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Statische IP-Adressen</translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnetz-Maske</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Erster DNS</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Addresse</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Gateway</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Zweiter DNS</translation>
     </message>
 </context>
 <context>
     <name>InterfaceSetupImp</name>
     <message>
         <source>Restarting interface</source>
-        <translation type="unfinished"></translation>
+        <translation> Interface-Neustart</translation>
     </message>
 </context>
 </TS>

@@ -6,14 +6,6 @@
         <translation>Kalender</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Vis</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Opsætning</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Ny</translation>
     </message>
@@ -224,6 +216,10 @@ Afslut alligevel?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalender</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -319,6 +315,26 @@ Afslut alligevel?</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Kontor</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Hjemme</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -330,20 +346,12 @@ Afslut alligevel?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">uge</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>Å: </translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>U: </translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Jan-00. Jan</translation>
@@ -352,8 +360,8 @@ Afslut alligevel?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>U: %1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -365,10 +373,6 @@ Afslut alligevel?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Jan-00 Jan</translation>
     </message>
 </context>
 <context>

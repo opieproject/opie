@@ -6,14 +6,6 @@
         <translation>Naptár</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Nézet</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Beállítások</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Új</translation>
     </message>
@@ -223,6 +215,10 @@ Mégis kilép?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Naptár</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -318,6 +314,26 @@ Mégis kilép?</translation>
         <source>Start-End</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Iroda</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Otthon</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -329,20 +345,12 @@ Mégis kilép?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation type="unfinished">hét</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>É:</translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>H:</translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>Jan 00.-Jan 00.</translation>
@@ -351,8 +359,8 @@ Mégis kilép?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>H: %1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -364,10 +372,6 @@ Mégis kilép?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>Jan 00-Jan 00</translation>
     </message>
 </context>
 <context>

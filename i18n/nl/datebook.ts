@@ -6,14 +6,6 @@
         <translation>Kalender</translation>
     </message>
     <message>
-        <source>View</source>
-        <translation>Aanzicht</translation>
-    </message>
-    <message>
-        <source>Settings</source>
-        <translation>Instellingen</translation>
-    </message>
-    <message>
         <source>New</source>
         <translation>Nieuw</translation>
     </message>
@@ -223,6 +215,10 @@ Toch afsluiten?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished">Kalender</translation>
+    </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
@@ -318,6 +314,26 @@ Toch afsluiten?</translation>
         <source>:00</source>
         <translation>:00</translation>
     </message>
+    <message>
+        <source>Defaults</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Office</source>
+        <translation type="unfinished">Kantoor</translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished">Thuis</translation>
+    </message>
+    <message>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookWeek</name>
@@ -329,20 +345,12 @@ Toch afsluiten?</translation>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
-        <source>week</source>
-        <translation>week</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
-    <message>
-        <source>Y: </source>
-        <translation>J:</translation>
-    </message>
-    <message>
-        <source>W: </source>
-        <translation>W:</translation>
-    </message>
     <message>
         <source>00. Jan-00. Jan</source>
         <translation>00. Jan-00. Jan</translation>
@@ -351,8 +359,8 @@ Toch afsluiten?</translation>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
-        <source>W: %1</source>
-        <translation>W: %1</translation>
+        <source>w</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -364,10 +372,6 @@ Toch afsluiten?</translation>
     <message>
         <source>2</source>
         <translation>2</translation>
-    </message>
-    <message>
-        <source>00 Jan-00 Jan</source>
-        <translation>00 Jan-00 Jan</translation>
     </message>
 </context>
 <context>
