@@ -298,8 +298,8 @@ void FormatterApp::doFormat() {
           outDlg->OutputEdit->append(tr("You can now close the output window."));
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 //          outDlg->close();
-//           if(outDlg)
-//           delete outDlg;
+//            if(outDlg)
+//            delete outDlg;
       }
           break;
     };
@@ -324,14 +324,12 @@ void FormatterApp::fillCombos() {
         if( name.find( tr("Internal"),0,TRUE) == -1) {
             storageComboBox->insertItem(name +" -> "+disk);
         }
-        deviceComboBox->insertItem(disk);
+//        deviceComboBox->insertItem(disk);
     }
-    parsetab();
+     parsetab("/etc/mtab");
+//    parsetab("/etc/fstab");
     fileSystemsCombo->insertStringList( fsList,-1);
-//     for(int i = 0; i < fileSystemsCombo->count(); i++) {
-//         if( fsType == fileSystemsCombo->text(i))
-//              fileSystemsCombo->setCurrentItem(i);
-//     }
+    deviceComboBox->insertStringList( deviceList,-1);
     storageComboSelected(0);
     deviceComboSelected(0); 
 }
@@ -407,12 +405,13 @@ void FormatterApp::editFstab() {
     e << (const QString &)"/etc/fstab";
 }
 
-void FormatterApp::parsetab() {
+void FormatterApp::parsetab(const QString &fileName) {
 
     fileSystemTypeList.clear();
     fsList.clear();
     struct mntent *me;
-    FILE *mntfp = setmntent( "/etc/mtab", "r" );
+//     if(fileName == "/etc/mtab") {
+    FILE *mntfp = setmntent( fileName.latin1(), "r" );
     if ( mntfp ) {
         while ( (me = getmntent( mntfp )) != 0 ) {
             QString deviceName = me->mnt_fsname;
@@ -420,34 +419,44 @@ void FormatterApp::parsetab() {
             if(deviceName != "none") {
                 if( fsList.contains(filesystemType) == 0
                     & filesystemType.find("proc",0,TRUE) == -1
-                    & filesystemType.find("cramfs",0,TRUE) == -1)
+                    & filesystemType.find("cramfs",0,TRUE) == -1
+                    & filesystemType.find("auto",0,TRUE) == -1)
                 fsList << filesystemType;
+                deviceList << deviceName;
+                qDebug(deviceName+"::"+filesystemType);
                 fileSystemTypeList << deviceName+"::"+filesystemType;
             }
         }
     }
     endmntent( mntfp );
-
+//  } else if(fileName == "/etc/fstab") {
 //    QFile f("/etc/fstab");
 //   if ( f.open(IO_ReadOnly) ) {
 //     QTextStream t (&f);
 //     QString s;
 //     while (! t.eof()) {
-//       s=t.readLine();
-//       s=s.simplifyWhiteSpace();
-//       if ( (!s.isEmpty() ) && (s.find(" ")!=0) ) {
-//           s=s.remove(0,s.find(BLANK)+1 ); // devicename
-//           s=s.remove(0,s.find(BLANK)+1 ); // mountpoint
-//           s=s.remove(0,s.find(BLANK)+1 ); // fs
-//       }
+//         s=t.readLine();
+//         s=s.simplifyWhiteSpace();
+//         if ( (!s.isEmpty() ) && (s.find(" ")!=0) ) {
+// // = me->mnt_fsname;
+//             QString filesystemType = me->mnt_type;
+//             QString deviceName = s.left(0,s.find(BLANK) ); 
+//             s=s.remove(0,s.find(BLANK)+1 ); // devicename
+          
+//             s=s.remove(0,s.find(BLANK)+1 ); // mountpoint
+//             QStringt mountPoint= s.left(0,s.find(BLANK) ); 
+//             s=s.remove(0,s.find(BLANK)+1 ); // fs
+//             QString filesystemType= s.left(0,s.find(BLANK) );           
+//         }
 //     }
-//   }
-//   f.close();
+//  }
+//  f.close();
+// }
 }
 
 QString FormatterApp::getFileSystemType(const QString &currentText) {
 
-    parsetab(); //why did TT forget filesystem type?
+    parsetab("/etc/mtab"); //why did TT forget filesystem type?
 
     for ( QStringList::Iterator it = fileSystemTypeList.begin(); it != fileSystemTypeList.end(); ++it ) {
         QString temp = (*it);
@@ -461,19 +470,91 @@ QString FormatterApp::getFileSystemType(const QString &currentText) {
 
 bool FormatterApp::doFsck() {
 
-    QString selectedDevice = deviceComboBox->currentText();
+  Output *outDlg;
+      QString selectedDevice;
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX) // lets test on something cheap
+    selectedDevice = deviceComboBox->currentText();
+#else
+//    currentText  = diskDevice  = "/dev/fd0";
+  QString  umountS = "umount -v /floppy 2>&1";
+  QString  remountS = "mount -v /floppy 2>&1";
+  selectedDevice ="/dev/fd0";
+  
+#endif
+
     QString fsType = getFileSystemType((const QString &)selectedDevice);
     QString cmd;
     qDebug( selectedDevice +" "+ fsType);
     if(fsType == "vfat") cmd = "dosfsck -vy ";
     if(fsType == "ext2") cmd = "e2fsck -cpvy ";
-    cmd += selectedDevice;
+    cmd += selectedDevice + " 2>&1";
 
+          outDlg = new Output(this, tr("Formatter Output"),FALSE);
+          outDlg->showMaximized();
+          outDlg->show();
+          qApp->processEvents();
+          FILE *fp;
+          char line[130];
+          outDlg->OutputEdit->append( tr("Trying to umount."));
+          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
-    return FALSE;
+          sleep(1);
+//          qDebug("Command is "+umountS);
+          fp = popen(  (const char *) umountS, "r");
+//          qDebug("%d", fp);
+          if ( !fp ) {
+              qDebug("Could not execute '" + umountS + "'!\n" +(QString)strerror(errno)); 
+              QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
+              pclose(fp);             
+              return false;
+          } else {
+//               outDlg->OutputEdit->append( currentText + tr("\nhas been successfully umounted."));
+//             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+              while ( fgets( line, sizeof line, fp)) {
+                  if( ((QString)line).find("busy",0,TRUE) != -1) {
+                      qDebug("Could not find '" + umountS); 
+                      QMessageBox::warning( this, tr("Formatter"), tr("Could not umount.\nDevice is busy!"), tr("&OK") );
+                      pclose(fp);             
+              return false;
+                  } else {
+                      QString lineStr = line;
+                      lineStr=lineStr.left(lineStr.length()-1);
+                      outDlg->OutputEdit->append(lineStr);
+                      outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+                  }
+              }
+          }
+          pclose(fp);             
+/////////////////////////////////////
+          fp = popen(  (const char *) cmd, "r"); 
+          while ( fgets( line, sizeof line, fp)) {
+              if( ((QString)line).find("No such device",0,TRUE) != -1) {
+                  qDebug("No such device '" + umountS); 
+                  QMessageBox::warning( this, tr("Formatter"), tr("No such device!"), tr("&OK") );
+                  pclose(fp);             
+//               outDlg->OutputEdit->append("No such device");
+//             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+              return false;
+              } else {
+                  QString lineStr = line;
+                  lineStr=lineStr.left(lineStr.length()-1);
+                  outDlg->OutputEdit->append(lineStr);
+                  outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+              }
+          }
+          outDlg->OutputEdit->append(tr("You can now close the output window."));
+          outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+//           outDlg->OutputEdit->append( currentText + tr("\nhas been successfully formatted."));
+//           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+          pclose(fp);             
+
+/////////////////////////////////////////    
+
+    return true;
 }
 
 bool FormatterApp::doFsckCheck() {
+
     return FALSE;
 }
 

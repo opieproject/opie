@@ -39,13 +39,13 @@ public:
     QComboBox *storageComboBox, *fileSystemsCombo, *deviceComboBox;
     QPushButton *formatPushButton, *editPushButton, *fsckButton;
     QLineEdit* mountPointLineEdit;
-    QStringList fileSystemTypeList, fsList;
+    QStringList fileSystemTypeList, fsList, deviceList;
 protected:
     QGridLayout *FormatterAppLayout, *tabLayout, *tabLayout_2;
     QString getFileSystemType(const QString &);
 
     void fillCombos();
-    void parsetab();
+    void parsetab(const QString &);
     bool doFdisk();
     int formatCheck(const QString &);
     int runCommand(const QString &);
