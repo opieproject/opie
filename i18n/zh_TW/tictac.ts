@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation>按&quot;開始!&quot;開始遊戲</translation>
+        <translation>按"開始!"開始遊戲</translation>
     </message>
     <message>
         <source>Make your move</source>

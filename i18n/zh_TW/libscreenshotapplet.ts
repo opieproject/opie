@@ -3,15 +3,15 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Snapshot</translation>
     </message>
     <message>
         <source>scap</source>
-        <translation type="unfinished"></translation>
+        <translation>scap</translation>
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>檔案名稱</translation>
     </message>
 </context>
 </TS>

@@ -3,27 +3,27 @@
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation type="unfinished"></translation>
+        <translation >進階設定</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
-        <translation type="unfinished"></translation>
+        <translation >在切換時更新DHCP</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation >頻率</translation>
     </message>
     <message>
         <source>MODE</source>
-        <translation type="unfinished"></translation>
+        <translation >模式</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation >ESSID</translation>
     </message>
     <message>
         <source>AccessPoint</source>
-        <translation type="unfinished"></translation>
+        <translation >AccessPoint</translation>
     </message>
 </context>
 </TS>

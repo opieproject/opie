@@ -3,47 +3,47 @@
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation >Liquid Style</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation >不要半透明</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>點選背景顏色</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>點選按鈕顏色</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation >半透明已被點選，背景顏色</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>半透明已被點選，按鈕顏色</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation >自定透明度</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>表單顏色</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation >文件顏色</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation >不透明</translation>
     </message>
     <message>
         <source>Use shadowed text</source>
-        <translation type="unfinished"></translation>
+        <translation >啟動文字陰影</translation>
     </message>
 </context>
 </TS>

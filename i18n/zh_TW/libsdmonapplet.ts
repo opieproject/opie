@@ -3,19 +3,19 @@
     <name>SdMonitor</name>
     <message>
         <source>Eject card</source>
-        <translation type="unfinished"></translation>
+        <translation >移出卡片</translation>
     </message>
     <message>
         <source>SdMonitor</source>
-        <translation type="unfinished"></translation>
+        <translation >SD 監視器</translation>
     </message>
     <message>
         <source>Card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation >移出失敗</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation >&amp;確定</translation>
     </message>
 </context>
 </TS>

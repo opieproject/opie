@@ -3,42 +3,42 @@
     <name>PIMSpreadsheetWindow</name>
     <message>
         <source>Spreadsheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Spreadsheet</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>新增</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟舊檔</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉</translation>
     </message>
     <message>
         <source>Equation</source>
-        <translation type="unfinished"></translation>
+        <translation>方程式</translation>
     </message>
     <message>
         <source>Clear Cell</source>
-        <translation type="unfinished"></translation>
+        <translation >刪除Cell</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯</translation>
     </message>
 </context>
 <context>
     <name>SpreadsheetWidget</name>
     <message>
         <source>SpreadsheetWidget</source>
-        <translation type="unfinished"></translation>
+        <translation>SpreadsheetWidget</translation>
     </message>
 </context>
 </TS>
