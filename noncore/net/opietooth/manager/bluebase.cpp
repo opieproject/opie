@@ -62,8 +62,8 @@ namespace OpieTooth {
                  this,  SLOT(startServiceActionHold( BTListItem *, const QPoint &, int) ) );
         connect( localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
                  this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
-        connect( localDevice, SIGNAL( available( const QString& device, bool connected ) ),
-                 this, SLOT( deviceActive( const QString& mac, bool connected  ) ) );
+        connect( localDevice, SIGNAL( available( const QString&, bool ) ),
+                 this, SLOT( deviceActive( const QString& , bool ) ) );
 
         //Load all icons needed
 
