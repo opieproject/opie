@@ -38,11 +38,13 @@ protected slots:
 	void slotReply();
 	void slotForward();
         void setText();
+        void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
 
 private:
 	bool _inLoop;
 	QString m_mailHtml;
 	bool m_gotBody;
+        RecBody m_body;
 
         // 0 from  1 subject  2 bodytext 3 date
         QMap <int,QString>  m_mail;

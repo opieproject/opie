@@ -165,8 +165,8 @@ void MainWindow::displayMail(QListViewItem*item)
     ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "opiemail/kmmsgunseen") );
 }
 
-MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * after )
-        :QListViewItem(parent,after),mail_data()
+MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * item )
+        :QListViewItem(parent,item),mail_data()
 {
 }
 
@@ -191,3 +191,5 @@ const RecMail& MailListViewItem::data()const
 {
     return mail_data;
 }
+
+

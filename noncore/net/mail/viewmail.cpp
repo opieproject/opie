@@ -2,7 +2,10 @@
 #include <qmessagebox.h>
 #include <qtextstream.h>
 #include <qaction.h>
+#include <qpopupmenu.h>
 #include <qapplication.h>
+
+#include <opie/ofiledialog.h>
 
 #include "settings.h"
 #include "composemail.h"
@@ -16,9 +19,9 @@ AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mi
 	setText(2, desc);
 }
 
-
 void ViewMail::setBody( RecBody body ) {
 
+m_body = body;
 m_mail[2] = body.Bodytext();
 attachbutton->setEnabled(body.Parts().count()>0);
 attachments->setEnabled(body.Parts().count()>0);
@@ -52,7 +55,7 @@ default:
 
 {
     /* I did not found a method to make a CONTENT reset on a QTextStream
-       so I use this construct that the stream will re-constructed in each 
+       so I use this construct that the stream will re-constructed in each
        loop. To let it work, the textstream is packed into a own area of
        code is it will be destructed after finishing its small job.
     */
@@ -98,6 +101,48 @@ for (unsigned int i = 0; i < body.Parts().count();++i) {
 }
 }
 
+void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int c ) {
+    if (!item )
+        return;
+
+  QPopupMenu *menu = new QPopupMenu();
+  int ret=0;
+
+  if ( item->text( 0 ).left( 4 ) == "text" )  {
+     menu->insertItem( tr( "Show Text" ), 1 );
+  }
+  menu->insertItem( tr( "Save Attachemt" ),  0 );
+  menu->insertSeparator(1);
+
+  ret = menu->exec( point, 0 );
+
+  switch(ret) {
+        case 0:
+             { MimeTypes types;
+             types.insert( "all", "*" );
+             QString str = OFileDialog::getSaveFileName( 1,
+                  "/", item->text( 1 )  , types, 0 );
+
+             if( !str.isEmpty() ) {
+               qDebug(  " first we will need a MIME wrapper" );
+             }
+             }
+        break ;
+
+        case 1:
+
+             qDebug(  QString( "Test selected" ).arg(  ( ( AttachItem* )item )->Partnumber() )  );
+             if (  ( ( AttachItem* )item )->Partnumber() == -1 ) {
+             setText();
+             } else  {
+             browser->setText( ( m_body.Parts()[( ( AttachItem* )item )->Partnumber() ] ).Identifier() );
+             }
+        break;
+ }
+ delete menu;
+}
+
+
 void ViewMail::setMail( RecMail mail ) {
 
 m_mail[0] = mail.getFrom();
@@ -123,6 +168,8 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 	connect(forward, SIGNAL(activated()), SLOT(slotForward()));
 
 	attachments->setEnabled(m_gotBody);
+        connect( attachments,  SIGNAL( clicked ( QListViewItem *, const QPoint & , int ) ), SLOT( slotItemClicked(  QListViewItem *,  const QPoint & , int ) ) );
+
 }
 
 void ViewMail::setText()
@@ -172,7 +219,9 @@ void ViewMail::hide()
 	if (_inLoop) {
 		_inLoop = false;
 		qApp->exit_loop();
-	}
+
+        }
+
 }
 
 void ViewMail::exec()
@@ -183,6 +232,7 @@ void ViewMail::exec()
 		_inLoop = true;
 		qApp->enter_loop();
 	}
+
 }
 
 QString ViewMail::deHtml(const QString &string)
