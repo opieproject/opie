@@ -206,7 +206,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
 		     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ),
 	     this, SLOT( slotFind() ) );
-    a->addTo( bar );
+//    a->addTo( bar );
     a->addTo( options );
     options->insertSeparator();
 
