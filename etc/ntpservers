@@ -1,5 +1,5 @@
 [servers]
-count = 7
+count = 11
 [0]
 name = time.fu-berlin.de
 [1]
@@ -14,3 +14,11 @@ name = ptbtime1.ptb.de
 name = bernina.ethz.ch
 [6]
 name = ntp.univ-lyon1.fr
+[7]
+name = time-a.timefreq.bldrdoc.gov
+[8]
+name = nist1.datum.com
+[9]
+name = time-a.nist.gov
+[10]
+name = time-b.timefreq.bldrdoc.gov
