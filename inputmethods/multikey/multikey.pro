@@ -11,7 +11,7 @@ SOURCES	=   keyboard.cpp \
 	    ../pickboard/pickboardpicks.cpp \
 	    keyboardimpl.cpp
 TARGET		= qmultikey
-DESTDIR		= ../../plugins/inputmethods
+DESTDIR		= $(OPIEDIR)/plugins/inputmethods
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
 LIBS            += -lqpe

@@ -289,7 +289,28 @@ void ConfigDlg::addMap() {
     QStringList maps = config.readListEntry("maps", QChar('|'));
     maps.append(map);
     custom_maps.append(map);
-    keymaps->insertItem(map);
+
+    QFile map_file (map);
+    if (map_file.open(IO_ReadOnly)) {
+
+        QString line; bool found = 0;
+
+        map_file.readLine(line, 1024);
+        while (!map_file.atEnd()) {
+
+            if (line.find(QRegExp("^title\\s*=\\s*")) != -1) {
+                
+                keymaps->insertItem(line.right(line.length() - line.find(QChar('=')) - 1).stripWhiteSpace());
+                found = 1;
+                break;
+            }
+            map_file.readLine(line, 1024);
+        }
+        if (!found) keymaps->insertItem(map);
+
+        map_file.close();
+    }
+
     keymaps->setSelected(keymaps->count() - 1, true);
 
 
