@@ -157,6 +157,9 @@ void AdvancedFm::doDelete() {
          case 1:
             return;
             break;
+				 default:
+					 return;
+					 break;
          };
       }
 
@@ -178,27 +181,32 @@ void AdvancedFm::doDelete() {
                                            tr("<p>Really delete %1 and all it's contents?</p>" ).arg( f ) ,
                                            tr("Yes"), tr("No"), 0, 0, 1) ) {
             case 0:
-            {
-               f=f.left(f.length()-1);
-               QString cmd="rm -rf "+f;
-               startProcess( (const QString)cmd.latin1() );
-                             populateView();
-            }
-            break;
+							{
+								f=f.left(f.length()-1);
+								QString cmd="rm -rf "+f;
+								startProcess( (const QString)cmd.latin1() );
+								populateView();
+							}
+							break;
             case 1:
-               // exit
-               break;
+							// exit
+							break;
+						default:
+							break;
             };
 
          } else {
             if(doMsg) {
-               switch ( QMessageBox::warning(this,tr("Delete"),
-                                             tr("<p>Really delete %1?</p>").arg( myFile ),
-                                             tr("Yes"), tr("No"), 0, 0, 1) ) {
-               case 1:
-                  return;
-                  break;
-               };
+							switch ( QMessageBox::warning(this,tr("Delete"),
+																						tr("<p>Really delete %1?</p>").arg( myFile ),
+																						tr("Yes"), tr("No"), 0, 0, 1) ) {
+							case 1:
+								return;
+								break;
+							default:
+                return;
+								break;
+							};
             }
 
             QString cmd="rm "+f;
@@ -284,12 +292,15 @@ void AdvancedFm::copy() {
 						switch ( QMessageBox::warning(this,tr("Copy"),msg
 																					,tr("Yes"),tr("No"),0,0,1) )
 							{
-								case 0:
-										doMsg=false;
-										break;
-								case 1:
-										return;
-										break;
+							case 0:
+								doMsg=false;
+								break;
+							case 1:
+								return;
+								break;
+							default:
+                return;
+								break;
 							};
 				}
 
@@ -308,13 +319,16 @@ void AdvancedFm::copy() {
 						QFile f(destFile);
 						if( f.exists()) {
 								if(doMsg) {
-										switch ( QMessageBox::warning(this,tr("File Exists!"),
-																									tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
-																									tr("Yes"),tr("No"),0,0,1)) {
-											case 1:
-													return;
-													break;
-										};
+									switch ( QMessageBox::warning(this,tr("File Exists!"),
+																								tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(item),
+																								tr("Yes"),tr("No"),0,0,1)) {
+									case 1:
+										return;
+										break;
+									default:
+										return;
+										break;
+									};
 								}
 								f.remove();
 						}
@@ -357,16 +371,19 @@ void AdvancedFm::copyAs() {
 
          QFile f( destFile);
          if( f.exists()) {
-            switch (QMessageBox::warning(this,tr("File Exists!"),
-                                         tr("<P> %1 already exists. Ok to overwrite?</p>").arg(item),
-                                         tr("Yes"),tr("No"),0,0,1) ) {
-            case 0:
-               f.remove();
-               break;
-            case 1:
-               return;
-               break;
-            };
+					 switch (QMessageBox::warning(this,tr("File Exists!"),
+																				tr("<P> %1 already exists. Ok to overwrite?</p>").arg(item),
+																				tr("Yes"),tr("No"),0,0,1) ) {
+					 case 0:
+						 f.remove();
+						 break;
+					 case 1:
+						 return;
+						 break;
+					 default:
+						 return;
+             break;
+					 };
          }
          if( !copyFile( curFile, destFile) ) {
             QMessageBox::message("AdvancedFm",tr("<p>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
@@ -409,17 +426,20 @@ void AdvancedFm::copySameDir() {
 
           QFile f(destFile);
           if( f.exists()) {
-              switch (QMessageBox::warning(this,tr("Delete"),
-                                           tr("<p> %1 already exists. Do you really want to delete it?</P>").arg(destFile),
-                                           tr("Yes"),tr("No"),0,0,1) ) {
-              case 0:
+						switch (QMessageBox::warning(this,tr("Delete"),
+																				 tr("<p> %1 already exists. Do you really want to delete it?</P>").arg(destFile),
+																				 tr("Yes"),tr("No"),0,0,1) ) {
+						case 0:
 
-                f.remove();
-                break;
-              case 1:
-                return;
-                break;
-              };
+							f.remove();
+							break;
+						case 1:
+							return;
+							break;
+						default:
+							return;
+							break;
+						};
             }
           if(!copyFile( curFile,destFile) )  {
               QMessageBox::message("AdvancedFm",tr("<P>Could not copy %1 to %2</P>").arg(curFile).arg(destFile));
@@ -467,13 +487,16 @@ void AdvancedFm::move() {
 						}
 						QFile f( destFile);
 						if( f.exists()) {
-								switch ( QMessageBox::warning(this,tr("File Exists!"),
-																							tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(destFile),
-																							tr("Yes"),tr("No"),0,0,1)) {
-									case 1:
-											return;
-											break;
-								};
+							switch ( QMessageBox::warning(this,tr("File Exists!"),
+																						tr("<p>%1 already  exists. Ok to overwrite?</P>").arg(destFile),
+																						tr("Yes"),tr("No"),0,0,1)) {
+							case 1:
+								return;
+								break;
+							default:
+								return;
+								break;
+							};
 								if( !copyFile( curFile, destFile) )  {
 										QMessageBox::message(tr("Note"),tr("<p>Could not move %1</p>").arg(curFile));
 										return;
