@@ -36,12 +36,12 @@ case $1 in
 
 	rm -f /etc/rc2.d/S99x # Can't have both running!
 
-	 case odule_id in 
+	 case `module_id` in 
         "3100" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
         "3600" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
         "3700" ) export QWS_DISPLAY=Transformed:Rot270:0 ;;
         "3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
-        *) echo "Unknown processor type -odule_id-!" ;;
+        *) echo "Unknown processor type -`module_id`-!" ;;
    	 esac
 	
 	$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
