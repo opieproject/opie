@@ -14,12 +14,12 @@ IrServer::IrServer( QObject *parent, const char *name )
   : QObject( parent, name )
 {
     lib = 0;
+    iface = 0;
     QString path = QPEApplication::qpeDir() + "/plugins/obex/";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
-	ObexInterface *iface = 0;
 	QLibrary *trylib = new QLibrary( path + *it );
 	qDebug("trying lib %s", (path + (*it)).latin1() );
 	if ( trylib->queryInterface( IID_ObexInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
@@ -46,5 +46,7 @@ IrServer::IrServer( QObject *parent, const char *name )
 
 IrServer::~IrServer()
 {
+    if ( iface )
+	iface->release();
     delete lib;
 }

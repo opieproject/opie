@@ -5,6 +5,7 @@
 
 class QCopChannel;
 class QLibrary;
+struct ObexInterface;
 
 class IrServer : public QObject
 {
@@ -15,6 +16,7 @@ public:
 
 private:
     QLibrary *lib;
+    ObexInterface *iface;
 };
 
 #endif
