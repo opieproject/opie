@@ -203,7 +203,7 @@ namespace XINE {
 	xine_event_queue_t *m_queue;
 
         void handleXineEvent( const xine_event_t* t );
-        void handleXineEvent( int type );
+	void handleXineEvent( int type, int data, const char* name );
         void drawFrame( uint8_t* frame, int width, int height, int bytes );
         // C -> C++ bridge for the event system
         static void xine_event_handler( void* user_data, const xine_event_t* t);

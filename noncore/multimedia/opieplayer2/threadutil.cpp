@@ -126,7 +126,7 @@ void WaitCondition::wakeAll()
 
 struct Thread::Data
 {
-    Data() : isRunning( false ) 
+    Data() : isRunning( false )
     {}
 
     pthread_t self;
@@ -188,7 +188,7 @@ void Thread::start()
     AutoLock lock( d->guard );
 
     if ( d->isRunning ) {
-        odebug << "ThreadUtil::Thread::start() called for running thread." << oendl; 
+        odebug << "ThreadUtil::Thread::start() called for running thread." << oendl;
         return;
     }
 
@@ -197,7 +197,7 @@ void Thread::start()
     pthread_attr_setscope( &attributes, PTHREAD_SCOPE_SYSTEM );
     int err = pthread_create( &d->self, &attributes, start_thread, ( void* )d );
     if ( err != 0 ) {
-        odebug << "ThreadUtil::Thread::start() : can't create thread: " << strerror( err ) << "" << oendl; 
+        odebug << "ThreadUtil::Thread::start() : can't create thread: " << strerror( err ) << "" << oendl;
         pthread_attr_destroy( &attributes );
         return;
     }
@@ -269,11 +269,10 @@ void OnewayNotifier::wakeUp()
     emit awake();
 }
 
-ChannelMessage::ChannelMessage( int type )
-    : m_type( type ), m_isCall( false ), m_replied( false ),
-      m_inEventHandler( false )
-{
-}
+ChannelMessage::ChannelMessage( int type, int data, const char* msg )
+    : m_type( type ), m_data( data ), m_msg( msg ),
+      m_isCall( false ), m_replied( false ), m_inEventHandler( false )
+{}
 
 ChannelMessage::~ChannelMessage()
 {
@@ -285,7 +284,7 @@ void ChannelMessage::reply()
 {
     if ( !m_isCall )
     {
-        odebug << "ChannelMessage::reply() - can't reply oneway message!" << oendl; 
+        odebug << "ChannelMessage::reply() - can't reply oneway message!" << oendl;
         return;
     }
 

@@ -37,7 +37,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-using namespace Opie::Core;
+#include <qpe/global.h>
 
 /* QT */
 #include <qtextstream.h>
@@ -326,19 +326,29 @@ void Lib::setWidget( XineVideoWidget *widget )
 void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
 {
     assert( sendType == ThreadUtil::Channel::OneWay );
-    handleXineEvent( msg->type() );
+    handleXineEvent( msg->type(), msg->data(), msg->msg() );
     delete msg;
 }
 
 void Lib::handleXineEvent( const xine_event_t* t ) {
-    send( new ThreadUtil::ChannelMessage( t->type ), OneWay );
+    int prog = -1; const char* name = 0;
+    if ( t->type == XINE_EVENT_PROGRESS ) {
+        xine_progress_data_t *pt = static_cast<xine_progress_data_t*>( t->data );
+        prog = pt->percent;
+        name = pt->description;
+    }
+
+    send( new ThreadUtil::ChannelMessage( t->type, prog, name ),  OneWay );
 }
 
-void Lib::handleXineEvent( int type ) {
+void Lib::handleXineEvent( int type, int data, const char* name ) {
     assert( m_initialized );
 
     if ( type == XINE_EVENT_UI_PLAYBACK_FINISHED ) {
         emit stopped();
+    }else if ( type == XINE_EVENT_PROGRESS ) {
+        QString str = name == 0 ? QString::null : QString::fromUtf8( name );
+        Global::statusMessage( tr( "Progress: %1 %2" ).arg( name, data ) );;
     }
 }
 

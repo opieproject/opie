@@ -133,10 +133,12 @@ namespace ThreadUtil
     {
         friend class Channel;
     public:
-        ChannelMessage( int type = -1 );
+	ChannelMessage( int type = -1, int data = -1, const char* msg = 0 );
         virtual ~ChannelMessage();
 
         int type() const { return m_type; }
+	int data() const { return m_data; }
+	const char* msg()const { return m_msg;  }
 
         void reply();
 
@@ -145,6 +147,8 @@ namespace ThreadUtil
         ChannelMessage &operator=( const ChannelMessage );
 
         int m_type;
+	int m_data;
+	const char *m_msg;
         bool m_isCall : 1;
         bool m_replied : 1;
         bool m_inEventHandler : 1;
