@@ -18,6 +18,7 @@
 #include "oconversion.h"
 #include "opimstate.h"
 #include "otimezone.h"
+#include "opimnotifymanager.h"
 #include "orecur.h"
 #include "otodoaccessxml.h"
 
@@ -426,6 +427,27 @@ void OTodoAccessXML::todo( QAsciiDict<int>* dict, OTodo& ev,
     case OTodo::State:
         ev.setState( val.toInt() );
         break;
+    case OTodo::Alarms:{
+        OPimNotifyManager &manager = ev.notifiers();
+        QStringList als = QStringList::split(";", val );
+        for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
+            QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
+            qWarning("alarm: %s", alarm.join("___").latin1() );
+            qWarning("alarm[0]: %s %s", alarm[0].latin1(), OConversion::dateTimeFromString( alarm[0] ).toString().latin1() );
+            OPimAlarm al( alarm[2].toInt(), OConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
+            manager.add( al );
+        }
+    }
+        break;
+    case OTodo::Reminders:{
+        OPimNotifyManager &manager = ev.notifiers();
+        QStringList rems = QStringList::split(";", val );
+        for (QStringList::Iterator it = rems.begin(); it != rems.end(); ++it ) {
+            OPimReminder rem( (*it).toInt() );
+            manager.add( rem );
+        }
+    }
+        break;
     case OTodo::CrossReference:
     {
         /*
@@ -521,6 +543,44 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += "CompletedDate=\""+ OConversion::dateToString( ev.completedDate() ) +"\" ";
     if ( ev.hasState() )
         str += "State=\""+QString::number( ev.state().state() )+"\" ";
+
+    /*
+     * save reminders and notifiers!
+     * DATE_TIME:DURATION:SOUND:NOT_USED_YET;OTHER_DATE_TIME:OTHER:DURATION:SOUND:....
+     */
+    if ( ev.hasNotifiers() ) {
+        OPimNotifyManager manager = ev.notifiers();
+        OPimNotifyManager::Alarms alarms = manager.alarms();
+        if (!alarms.isEmpty() ) {
+            QStringList als;
+            OPimNotifyManager::Alarms::Iterator it = alarms.begin();
+            for ( ; it != alarms.end(); ++it ) {
+                /* only if time is valid */
+                if ( (*it).dateTime().isValid() ) {
+                    als << OConversion::dateTimeToString( (*it).dateTime() )
+                        + ":" + QString::number( (*it).duration() )
+                        + ":" + QString::number( (*it).sound() )
+                        + ":";
+                }
+            }
+            // now write the list
+            qWarning("als: %s", als.join("____________").latin1() );
+            str += "Alarms=\""+als.join(";") +"\" ";
+        }
+
+        /*
+         * now the same for reminders but more easy. We just save the uid of the OEvent.
+         */
+        OPimNotifyManager::Reminders reminders = manager.reminders();
+        if (!reminders.isEmpty() ) {
+            OPimNotifyManager::Reminders::Iterator it = reminders.begin();
+            QStringList records;
+            for ( ; it != reminders.end(); ++it ) {
+                records << QString::number( (*it).recordUid() );
+            }
+            str += "Reminders=\""+ records.join(";") +"\" ";
+        }
+    }
 
 
     return str;
@@ -704,7 +764,6 @@ public:
 
 QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
                                     int sortFilter,  int cat ) {
-    qWarning("sorted! %d cat",  cat);
     OTodoXMLVector vector(m_events.count(), asc,sortOrder );
     QMap<int, OTodo>::Iterator it;
     int item = 0;
@@ -715,9 +774,12 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
 
         /* show category */
-        if ( bCat && cat != 0)
+        /* -1 == unfiled */
+        if ( bCat && cat == -1 ) {
+            if(!(*it).categories().isEmpty() )
+                continue;
+        }else if ( bCat && cat != 0)
             if (!(*it).categories().contains( cat ) ) {
-                qWarning("category mis match");
                 continue;
             }
         /* isOverdue but we should not show overdue - why?*/
@@ -727,12 +789,10 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
         }
 */
         if ( !(*it).isOverdue() && bOnly ) {
-            qWarning("item is not overdue but bOnly checked");
             continue;
         }
 
         if ((*it).isCompleted() && comp ) {
-            qWarning("completed continue!");
             continue;
         }
 
@@ -742,7 +802,6 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
         vector.insert(item, con );
         item++;
     }
-    qWarning("XXX %d Items added", item);
     vector.resize( item );
     /* sort it now */
     vector.sort();
