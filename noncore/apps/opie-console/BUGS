@@ -9,8 +9,6 @@ Send/receive: lrzsz behaves strange when trying to use
 - transfer dialog is still a top dialog instead on the widgetstack of of the
 connection its used on
 
-- keys and buttonbar merge
-
 - keys really working
  mc is working
  but F11 on bar seems to be the F10 key and so on

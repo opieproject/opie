@@ -2,6 +2,7 @@
 #define OPIE_FUNCTION_KEYBOARD_H
 
 #include <qpe/config.h>
+#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qframe.h>
 #include <qpainter.h>
@@ -16,13 +17,12 @@
 struct FKey {
 
     FKey(): qcode(0), unicode(0) {};
-    FKey(const QString &l, const QString &f, ushort q, ushort u): 
+    FKey(const QString &l, const QString &f, ushort q, ushort u):
             label(l), pixFile(f), qcode(q), unicode(u) {
-            
+
         if (!f.isEmpty()) {
 
-            pix = new QPixmap (QPEApplication::qpeDir() + "pics/console/keys/" + f);
-
+            pix = new QPixmap ( Resource::loadPixmap("console/keys/" + f ) );
         }
     };
 

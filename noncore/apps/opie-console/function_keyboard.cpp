@@ -50,9 +50,7 @@ FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
 
 }
 
-FunctionKeyboard::~FunctionKeyboard() {
-
-}
+FunctionKeyboard::~FunctionKeyboard() {}
 
 void FunctionKeyboard::changeRows(int r) {
 
@@ -189,11 +187,11 @@ QSize FunctionKeyboard::sizeHint() const {
 
 void FunctionKeyboard::loadDefaults() {
 
-    keys.insert( "r0c0", FKey ("Enter", "enter.png", Qt::Key_Enter, 0));
-    keys.insert( "r0c1", FKey ("Space", "space.png", Qt::Key_Space, Qt::Key_Space));
-    keys.insert( "r0c2", FKey ("Tab", "tab.png", Qt::Key_Tab, 0));
-    keys.insert( "r0c3", FKey ("Up", "up.png", Qt::Key_Up, 0));
-    keys.insert( "r0c4", FKey ("Down", "down.png", Qt::Key_Down, 0));
+    keys.insert( "r0c0", FKey ("Enter", "enter", Qt::Key_Enter, 0));
+    keys.insert( "r0c1", FKey ("Space", "space", Qt::Key_Space, Qt::Key_Space));
+    keys.insert( "r0c2", FKey ("Tab", "tab", Qt::Key_Tab, 0));
+    keys.insert( "r0c3", FKey ("Up", "up", Qt::Key_Up, 0));
+    keys.insert( "r0c4", FKey ("Down", "down", Qt::Key_Down, 0));
 
     keys.insert( "r0c7", FKey ("Ho", 0, 4112, 0));
     keys.insert( "r0c8", FKey ("End", 0, 4113, 0));
@@ -225,7 +223,7 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
 
 
     kb = new FunctionKeyboard(this);
-    connect (kb, SIGNAL(keyPressed(FKey, ushort, ushort, bool)), 
+    connect (kb, SIGNAL(keyPressed(FKey, ushort, ushort, bool)),
              this, SLOT(slotKeyPressed(FKey, ushort, ushort, bool)));
 
     QGroupBox *dimentions = new QGroupBox(2, Qt::Horizontal, tr("Dimentions"), this);
@@ -242,11 +240,11 @@ FunctionKeyboardConfig::FunctionKeyboardConfig(const QString& name, QWidget* par
     m_labels->setInsertionPolicy(QComboBox::AtCurrent);
     m_labels->insertItem("");
 
-    QStringList files = QDir(QPEApplication::qpeDir() + "pics/console/keys/", "*.png").entryList();
+    QStringList files = QDir( QPEApplication::qpeDir() + "pics/console/keys/", "*.png").entryList();
 
     for (uint i = 0; i < files.count(); i++) {
 
-        m_labels->insertItem(Resource::loadPixmap("console/keys/" + files[i]), files[i]);
+        m_labels->insertItem( Resource::loadPixmap("console/keys/" + files[i]), files[i]);
     }
     connect (m_labels, SIGNAL(activated(int)), this, SLOT(slotChangeIcon(int)));
     connect (m_labels, SIGNAL(textChanged(const QString &)), this, SLOT(slotChangeLabelText(const QString&)));
@@ -279,7 +277,7 @@ void FunctionKeyboardConfig::load (const Profile& prof) {
     m_colBox->setValue(prof.readNumEntry("keb_cols", 10));
 
     /* load all the keys to the keyboard */
-    for (int i = 0; i <= m_rowBox->value() -1; i++) 
+    for (int i = 0; i <= m_rowBox->value() -1; i++)
         for (int j = 0; j <= m_colBox->value() -1; j++) {
 
             QString h = "r" + QString::number(i) + "c" + QString::number(j);
@@ -293,7 +291,7 @@ void FunctionKeyboardConfig::load (const Profile& prof) {
                 // load pixmap if used
                 if (!l[1].isEmpty()) {
 
-                    kb->keys[h].pix = new QPixmap(QPEApplication::qpeDir() + "pics/console/keys/" + l[1]);
+                    kb->keys[h].pix = new QPixmap( Resource::loadPixmap( "console/keys/" + l[1] ) );
                 }
             }
         }
@@ -308,9 +306,9 @@ void FunctionKeyboardConfig::save (Profile& prof) {
     for ( it = kb->keys.begin(); it != kb->keys.end(); it++) {
 
         FKey k = it.data();
-        QString entry = k.label + "|"  
-                        + k.pixFile + "|" 
-                        + QString::number(k.qcode) + "|" 
+        QString entry = k.label + "|"
+                        + k.pixFile + "|"
+                        + QString::number(k.qcode) + "|"
                         + QString::number(k.unicode);
 
         prof.writeEntry("keb_" + it.key(), entry);
@@ -333,7 +331,7 @@ void FunctionKeyboardConfig::slotKeyPressed(FKey k, ushort r, ushort c, bool pre
 
     if (!pressed) return;
 
-    selectedHandle = "r" + QString::number(r) + 
+    selectedHandle = "r" + QString::number(r) +
                      "c" + QString::number(c);
     selectedRow = r;
     selectedCol = c;
@@ -360,7 +358,7 @@ void FunctionKeyboardConfig::slotChangeIcon(int index) {
         // is text
         m_labels->setEditable(true);
         // why tf does the text get erased unless i do this?
-        m_labels->changeItem(m_labels->text(0), 0); 
+        m_labels->changeItem(m_labels->text(0), 0);
 
         kb->keys[selectedHandle].pixFile = "";
         delete kb->keys[selectedHandle].pix;
@@ -370,7 +368,7 @@ void FunctionKeyboardConfig::slotChangeIcon(int index) {
         // is a pixmap
         m_labels->setEditable(false);
         kb->keys[selectedHandle].pixFile = m_labels->currentText();
-        kb->keys[selectedHandle].pix = new QPixmap(QPEApplication::qpeDir() + "pics/console/keys/" + m_labels->currentText());
+        kb->keys[selectedHandle].pix = new QPixmap(  Resource::loadPixmap( "console/keys/" + m_labels->currentText() ) );
     }
     kb->paintKey(selectedRow, selectedCol);
 }
