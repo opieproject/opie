@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation>Montrer les fichiers cachés</translation>
+        <translation>Montrer Fichiers Cachés</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Créer un répertoire</translation>
+        <translation>Nouveau Dossier</translation>
     </message>
     <message>
         <source>Rename</source>
@@ -28,23 +28,23 @@
     </message>
     <message>
         <source>Run Command</source>
-        <translation>Exécuter une commande</translation>
+        <translation>Exécuter Commande</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation>Exécuter une commande avec une sortie</translation>
+        <translation>Exécuter Commande et Afficher</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation>Basculer vers &quot;Local&quot;</translation>
+        <translation>Basculer sur &quot;Local&quot;</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation>Basculer vers &quot;Remote&quot;</translation>
+        <translation>Basculer sur &quot;Distant&quot;</translation>
     </message>
     <message>
         <source>Size</source>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation>Répertoire inexistant</translation>
+        <translation>Ce répertoire n&apos;existe pas</translation>
     </message>
     <message>
         <source>Copy As</source>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation>A traduire</translation>
+        <translation>Envoie AvancedFM</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -128,11 +128,11 @@
     </message>
     <message>
         <source>File Info</source>
-        <translation>Information sur le fichier</translation>
+        <translation>Propriétés Fichier</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation>Définir les droits</translation>
+        <translation>Définir les Droits</translation>
     </message>
     <message>
         <source>Properties</source>
@@ -140,7 +140,7 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation>A traduire</translation>
+        <translation>Envoyer fichier</translation>
     </message>
     <message>
         <source>Copy </source>
@@ -152,7 +152,7 @@
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation>Copier le même répertoire</translation>
+        <translation>Copier le même Répertoire</translation>
     </message>
     <message>
         <source>Could not copy
@@ -163,7 +163,7 @@
     <message>
         <source>to
 </source>
-        <translation>Vers</translation>
+        <translation>vers</translation>
     </message>
     <message>
         <source>Could not move
@@ -180,39 +180,39 @@
     </message>
     <message>
         <source>Select All</source>
-        <translation>Tout sélectioner</translation>
+        <translation>Tout Sélectioner</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation>Réellement effacer
-le fichier %1?</translation>
+        <translation>Confirmer la suppression
+du fichier %1 ?</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation>Effacer le répertoire?</translation>
+        <translation>Supprimer Répertoire ?</translation>
     </message>
     <message>
         <source>Really delete
 </source>
-        <translation>Vraiment effacer
+        <translation>Confirmer l&apos;effacement
 </translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation>Vraiment copier
-%1 files?</translation>
+        <translation>Confirmer la copie
+du fichier %1 ?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation>Le fichier exite!</translation>
+        <translation>Le Fichier Existe !</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
         <translation>
-exite déjà. D&apos;accord pour écraser?</translation>
+exite déjà. Confirmer l&apos;écrasement ?</translation>
     </message>
     <message>
         <source> already exists.
@@ -222,7 +222,7 @@ Voulez-vous vraiment l&apos;effacer?</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation>%1 existe déjà. D&apos;accord pour écraser?</translation>
+        <translation>%1 existe déjà. Confirmer son écrasement ?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
@@ -234,9 +234,9 @@ is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
         <translation>Advanced FileManager(new line)
-is copyright 2002-2003 by(new line)
+Copyright 2002-2003 de(new line)
 L.J.Potter&lt;llornkcor@handhelds.org&gt;(new line)
-and is licensed by the GPL</translation>
+Sous licence GPL</translation>
     </message>
     <message>
         <source>Cannot remove current directory
@@ -248,11 +248,11 @@ Ce n&apos;en est pas un!!</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation>Favoris</translation>
+        <translation>Répertoire des Favoris</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation>Effacer le répertoire courant des Favoris</translation>
+        <translation>Effacer le Répertoire Courant des Favoris</translation>
     </message>
     <message>
         <source>Error</source>

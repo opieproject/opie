@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Select groups to show</source>
-        <translation>Sélectionner les groupes à afficher</translation>
+        <translation>Sélectionner groupes à afficher</translation>
     </message>
 </context>
 <context>
@@ -78,27 +78,27 @@
     </message>
     <message>
         <source>Force Depends</source>
-        <translation>Forcer les dépendances</translation>
+        <translation>Forcer les Dépendances</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation>Forcer la réinstallation</translation>
+        <translation>Forcer la Réinstallation</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation>Forcer l&apos;effacement</translation>
+        <translation>Forcer la Suppression</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation>Forcer la ré-écriture</translation>
+        <translation>Forcer la Ré-écriture</translation>
     </message>
     <message>
         <source>Verbose WGet</source>
-        <translation>WGet info</translation>
+        <translation>WGet Verbeux</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
 </context>
 <context>
@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Type the text to search for here.</source>
-        <translation>Taper le texte à rechercher ici.</translation>
+        <translation>Tapez le texte à rechercher ici.</translation>
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
-        <translation>Cliquer ici pour cacher le clavier.</translation>
+        <translation>Cliquez ici pour cacher la Barre d&apos;Accès Rapide.</translation>
     </message>
     <message>
         <source>Update lists</source>
@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
-        <translation>Cliquer ici pour mettre les listes de packages à jour depuis les serveurs.</translation>
+        <translation>Cliquez ici pour mettre les listes de packages à jour depuis les serveurs.</translation>
     </message>
     <message>
         <source>Upgrade</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
-        <translation>Cliquer ici pour mettre à jour tous les packages installés si une nouvelle version est disponible.</translation>
+        <translation>Cliquez ici pour mettre à jour tous les packages installés si une nouvelle version est disponible.</translation>
     </message>
     <message>
         <source>Download</source>
@@ -141,11 +141,11 @@
     </message>
     <message>
         <source>Apply changes</source>
-        <translation>Appliquer les changements</translation>
+        <translation>Appliquer les modifications</translation>
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
-        <translation>Cliquer ici pour installer, enlever ou mettre à jour le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquez ici pour installer, enlever ou mettre à jour le(s) package(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Actions</source>
@@ -157,7 +157,7 @@
     </message>
     <message>
         <source>Click here to show packages available which have not been installed.</source>
-        <translation>Cliquer ici pour afficher les packages non installés disponibles.</translation>
+        <translation>Cliquez ici pour afficher les packages non installés disponibles.</translation>
     </message>
     <message>
         <source>Show installed packages</source>
@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device.</source>
-        <translation>Cliquer ici pour afficher les packages installés sur cet appareil.</translation>
+        <translation>Cliquez ici pour afficher les packages installés sur cet appareil.</translation>
     </message>
     <message>
         <source>Show updated packages</source>
@@ -173,15 +173,15 @@
     </message>
     <message>
         <source>Click here to show packages currently installed on this device which have a newer version available.</source>
-        <translation>Cliquer ici pour afficher les packages installés sur cet appareil et dont une version plus récente est disponible.</translation>
+        <translation>Cliquez ici pour afficher les packages installés sur cet appareil et dont une version plus récente est disponible.</translation>
     </message>
     <message>
         <source>Filter by category</source>
-        <translation>Fltrer par catégorie</translation>
+        <translation>Filtrer par catégorie</translation>
     </message>
     <message>
         <source>Click here to list packages belonging to one category.</source>
-        <translation>Cliquer ici pour afficher les packages appartenant à une catégorie.</translation>
+        <translation>Cliquez ici pour afficher les packages appartenant à une catégorie.</translation>
     </message>
     <message>
         <source>Set filter category</source>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>Click here to change package category to used filter.</source>
-        <translation>Cliquer ici pour changer la catégorie de packages à utiliser comme filtre.</translation>
+        <translation>Cliquez ici pour changer la catégorie de packages à utiliser comme filtre.</translation>
     </message>
     <message>
         <source>Find</source>
@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
-        <translation>Cliquer ici pour rechercher un texte dans les noms des packages.</translation>
+        <translation>Cliquez ici pour rechercher un texte dans les noms de packages.</translation>
     </message>
     <message>
         <source>Find next</source>
@@ -205,15 +205,15 @@
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
-        <translation>Cliquer ici pour trouver le package suivant contenant le texte recherché.</translation>
+        <translation>Cliquez ici pour trouver le package suivant contenant le texte recherché.</translation>
     </message>
     <message>
         <source>Quick Jump keypad</source>
-        <translation>Recheche par lettre</translation>
+        <translation>Clavier d&apos;Accès Rapide</translation>
     </message>
     <message>
         <source>Click here to display/hide keypad to allow quick movement through the package list.</source>
-        <translation>Cliquer ici pour afficher/caher le clavier permettant le déplacement rapide dans la liste des packages</translation>
+        <translation>Cliquez ici pour afficher/cacher le clavier permettant le déplacement rapide dans la liste des packages.</translation>
     </message>
     <message>
         <source>View</source>
@@ -225,7 +225,7 @@
     </message>
     <message>
         <source>Click here to configure this application.</source>
-        <translation>Cliquer ici pour configurer l&apos;application.</translation>
+        <translation>Cliquez ici pour configurer l&apos;application.</translation>
     </message>
     <message>
         <source>Help</source>
@@ -233,7 +233,7 @@
     </message>
     <message>
         <source>Click here for help.</source>
-        <translation>Cliquer ici pour afficher l&apos;aide.</translation>
+        <translation>Cliquez ici pour afficher l&apos;aide.</translation>
     </message>
     <message>
         <source>About</source>
@@ -241,7 +241,7 @@
     </message>
     <message>
         <source>Click here for software version information.</source>
-        <translation>Cliquer ici pour les informations sur la version du logiciel.</translation>
+        <translation>Cliquez ici pour les informations sur la version du logiciel.</translation>
     </message>
     <message>
         <source>Options</source>
@@ -249,15 +249,15 @@
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
-        <translation>Cliquer ici pour fermer la barre de recherche.</translation>
+        <translation>Cliquez ici pour fermer la barre de recherche.</translation>
     </message>
     <message>
         <source>Servers:</source>
-        <translation>Serveur :</translation>
+        <translation>Serveurs :</translation>
     </message>
     <message>
         <source>Click here to select a package feed.</source>
-        <translation>Cliquer ici pour sélectionner un serveur de packages.</translation>
+        <translation>Cliquez ici pour sélectionner un serveur de packages.</translation>
     </message>
     <message>
         <source>Packages</source>
@@ -289,7 +289,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
-        <translation>Cliquer ici pour désinstaller le(s) package(s) sélectionné(s).</translation>
+        <translation>Cliquez ici pour désinstaller le(s) package(s) sélectionné(s).</translation>
     </message>
     <message>
         <source>Building server list:
@@ -306,7 +306,7 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
-        <translation>Installé en - %1</translation>
+        <translation>Installé sur - %1</translation>
     </message>
     <message>
         <source>Description - %1</source>
@@ -326,15 +326,15 @@ Cochez la case en début de ligne pour sélectionner un package.</translation>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation>V. installée - %1</translation>
+        <translation>V. Installée - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation>V. dispo - %1</translation>
+        <translation>V. Disponible - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
-        <translation>Rafraîchit la liste des serveurs de packages</translation>
+        <translation>Rafraîchit la liste de packages des serveurs</translation>
     </message>
     <message>
         <source>WARNING: Upgrading while
@@ -377,7 +377,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Download to where</source>
-        <translation>Télécharger où</translation>
+        <translation>Télécharger dans</translation>
     </message>
     <message>
         <source>Enter path to download to</source>
@@ -385,11 +385,11 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Install Remote Package</source>
-        <translation>Installer les packages distants</translation>
+        <translation>Installer Package Distant</translation>
     </message>
     <message>
         <source>Enter package location</source>
-        <translation>Entrez la localisation du package</translation>
+        <translation>Entrez la chemin du package</translation>
     </message>
     <message>
         <source>Nothing to do</source>
@@ -401,7 +401,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Do you wish to remove or reinstall
@@ -488,7 +488,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passe :</translation>
+        <translation>Mot de Passe</translation>
     </message>
     <message>
         <source>Enabled</source>
@@ -516,7 +516,7 @@ Etes-vous sûr ?</translation>
     </message>
     <message>
         <source>Show Jump To Letters</source>
-        <translation>Afficher la navigation par lettres</translation>
+        <translation>Afficher la Navigation par Lettres</translation>
     </message>
 </context>
 </TS>

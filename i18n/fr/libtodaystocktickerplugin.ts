@@ -92,11 +92,11 @@ par des espaces.</translation>
     </message>
     <message>
         <source>Length of scrolling</source>
-        <translation>Longueur du défilement</translation>
+        <translation>Taille du défilement</translation>
     </message>
     <message>
         <source>Scroll Length</source>
-        <translation>Longueur de défilement</translation>
+        <translation>Taille de défilement</translation>
     </message>
 </context>
 </TS>

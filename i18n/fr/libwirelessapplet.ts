@@ -4,11 +4,11 @@
     <name>AdvancedConfigBase</name>
     <message>
         <source>Advanced Config</source>
-        <translation>Configuration avancée</translation>
+        <translation>Configuration Avancée</translation>
     </message>
     <message>
         <source>Renew DHCP on changing</source>
-        <translation>Renouveler DHCP après le changement</translation>
+        <translation>Renouveler DHCP après changement</translation>
     </message>
     <message>
         <source>Frequency</source>

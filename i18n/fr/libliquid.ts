@@ -11,7 +11,7 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation>Thème &quot;Liquid&quot;</translation>
+        <translation>Thème Liquide</translation>
     </message>
     <message>
         <source>No translucency</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation>Pointillé translucident, couleur de bouton</translation>
+        <translation>Pointillé translucide, couleur de bouton</translation>
     </message>
     <message>
         <source>Custom translucency</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Text color</source>
-        <translation>Couleur des textes</translation>
+        <translation>Couleur du texte</translation>
     </message>
     <message>
         <source>Opacity</source>

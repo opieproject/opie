@@ -353,7 +353,7 @@ de réponse</translation>
     </message>
     <message>
         <source>[Hidden]</source>
-        <translation>[Hidden]</translation>
+        <translation>[Caché]</translation>
     </message>
     <message>
         <source>New</source>

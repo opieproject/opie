@@ -4,7 +4,7 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation>Nom complet</translation>
+        <translation>Nom Complet</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation>Mes informations personnelles</translation>
+        <translation>Mes Informations Personnelles</translation>
     </message>
     <message>
         <source>View</source>
@@ -59,23 +59,23 @@
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Impossible d&apos;accéder aux données, synchronisation en cours</translation>
+        <translation>Edition non autorisée, synchronisation en cours</translation>
     </message>
     <message>
         <source>Edit My Personal Details</source>
-        <translation>Editer mes informations personnelles</translation>
+        <translation>Editer Mes Informations Personnelles</translation>
     </message>
     <message>
         <source>Edit Address</source>
-        <translation>Editer une adresse</translation>
+        <translation>Editer Adresse</translation>
     </message>
     <message>
         <source>Contacts - My Personal Details</source>
-        <translation>Contacts - Mes informations personnelles</translation>
+        <translation>Contacts - Mes Informations Personnelles</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Plus de mémoire disponible</translation>
+        <translation>Mémoire saturée</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -83,9 +83,9 @@ Free up some space
 and try again.
 
 Quit anyway?</source>
-        <translation>Impossible d&apos;enregistrer les informations
-Libérer de la mémoire
-et réessayer
+        <translation>Impossible de sauvegarder
+Libérez de la mémoire
+et réessayez
 
 Quitter ?</translation>
     </message>
@@ -99,11 +99,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importer une vCard</translation>
+        <translation>Importer vCard</translation>
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Fermer Rechercher</translation>
+        <translation>Fermer Recherche</translation>
     </message>
     <message>
         <source>Save all Data</source>
@@ -111,7 +111,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation>Configuration</translation>
+        <translation>Config</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -131,11 +131,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation>Démarrer la Recherche</translation>
+        <translation>Démarrer Recherche</translation>
     </message>
     <message>
         <source>Right file type ?</source>
-        <translation>Type de Fichier Valide ?</translation>
+        <translation>Type Fichier Valide ?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
@@ -148,8 +148,8 @@ Quitter ?</translation>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation>Impossible de trouver un contact
-pour cette expression!</translation>
+        <translation>Aucun contact ne correspond
+à cette expression !</translation>
     </message>
     <message>
         <source>The selected file 
@@ -157,25 +157,25 @@ pour cette expression!</translation>
  Do you really want to open it?</source>
         <translation>Le fichier selectionné
 ne se termine pas par &quot;.vcf&quot;.
-Voulez-vous vraimment l&apos;ouvrir?</translation>
+Voulez-vous vraiment l&apos;ouvrir ?</translation>
     </message>
     <message>
         <source>Add Contact?</source>
-        <translation>Ajouter un Contact ?</translation>
+        <translation>Ajouter Contact ?</translation>
     </message>
     <message>
         <source>Do you really want add contact for 
 %1?</source>
-        <translation>Voulez-vous vraimment ajouter une contact pour
+        <translation>Voulez-vous vraimment ajouter un contact pour
 %1 ?</translation>
     </message>
     <message>
         <source>&amp;All Yes</source>
-        <translation>Oui à &amp;Tous</translation>
+        <translation>Oui pour &amp;Tous</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Exporter une vCard</translation>
+        <translation>Exporter vCard</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
@@ -183,7 +183,7 @@ Voulez-vous vraimment l&apos;ouvrir?</translation>
     </message>
     <message>
         <source>You have to set a filename !</source>
-        <translation>Vous devez choisir un nom de fichier !</translation>
+        <translation>Vous devez rentrer un nom de fichier !</translation>
     </message>
 </context>
 <context>
@@ -202,7 +202,7 @@ Voulez-vous vraimment l&apos;ouvrir?</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation>Sensible à la casse</translation>
+        <translation>Sensible à la Casse</translation>
     </message>
     <message>
         <source>Mail</source>
@@ -221,10 +221,10 @@ Voulez-vous vraimment l&apos;ouvrir?</translation>
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation>Note: QT-Mail est fourni
-dans la ROM par défaut du
+        <translation>Note : QT-Mail est fourni
+dans la ROM par défaut de
 SHARP. Opie-Mail est founi
-gratuitement!</translation>
+gratuitement !</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -232,7 +232,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation>Définition de la Recherche</translation>
+        <translation>Config. Recherche</translation>
     </message>
     <message>
         <source>Font</source>
@@ -240,15 +240,15 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Petit</translation>
+        <translation>Petite</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation>Normal</translation>
+        <translation>Normale</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Grand</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Order</source>
@@ -256,7 +256,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation>Selectionner l&apos;Ordre des Contacts:</translation>
+        <translation>Ordre des Contacts :</translation>
     </message>
     <message>
         <source>Up</source>
@@ -272,7 +272,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Configuration</source>
@@ -280,31 +280,31 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Click on tab to select one</source>
-        <translation>Cliquez sur un onglet pour le sélectionner</translation>
+        <translation>Cliquez un onglet pour le sélectionner</translation>
     </message>
     <message>
         <source>Settings for the search query style</source>
-        <translation>Paramètres pour la Recherche</translation>
+        <translation>Paramètres du type de Recherche</translation>
     </message>
     <message>
         <source>Search widget expects regular expressions if selected</source>
-        <translation>Le champ de recherche utilisera des mots entiers</translation>
+        <translation>Si sélectionné, le champ Recherche attend une expression régulière</translation>
     </message>
     <message>
         <source>Search widget just expects simple wildcards</source>
-        <translation>Le champ de recherche pourra utiliser des jokers</translation>
+        <translation>Le champ Recherche utilise de simples jokers</translation>
     </message>
     <message>
         <source>If selected, search differs between upper and lower chars</source>
-        <translation>Fera la différence entre les majuscules et les minuscules</translation>
+        <translation>Si sélectionné, la recherche différencie majuscules et minuscules</translation>
     </message>
     <message>
         <source>Font size for list- and card view</source>
-        <translation>Taille des caractères pour la liste et les fiches</translation>
+        <translation>Taille des polices des vues liste et fiche</translation>
     </message>
     <message>
         <source>Fontsettings for list and card view</source>
-        <translation>Paramètres pour la police en mode liste et fiche</translation>
+        <translation>Paramètres des polices des vues liste et fiche</translation>
     </message>
     <message>
         <source>Use Sharp&apos;s mail application if available</source>
@@ -316,11 +316,11 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Move selected attribute one line up</source>
-        <translation>Déplacer le champ sélectionné d&apos;une ligne vers le haut</translation>
+        <translation>Déplacer champ sélectionné d&apos;une ligne vers le haut</translation>
     </message>
     <message>
         <source>Move selected attribute one line down</source>
-        <translation>Déplacer le champ sélectionné d&apos;une ligne vers le bas</translation>
+        <translation>Déplacer champ sélectionné d&apos;une ligne vers le bas</translation>
     </message>
     <message>
         <source>List of all available attributes</source>
@@ -328,7 +328,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Add selected attribute from list below to the upper list</source>
-        <translation>Ajoute le champ sélectionné dans la liste juste au-dessus</translation>
+        <translation>Ajoute champ sélectionné dans la liste juste au-dessus</translation>
     </message>
     <message>
         <source>Remove the selected attribute from the upper list</source>
@@ -336,11 +336,11 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Order (up -&gt; down) defines the primary contact shown in the second column of the list view</source>
-        <translation>L&apos;ordre définit le premier contact affiché dans la deuxième colonne en mode liste</translation>
+        <translation>L&apos;ordre (haut -&gt; bas) définit le premier contact affiché dans la deuxième colonne en mode liste</translation>
     </message>
     <message>
         <source>Tool-/Menubar</source>
-        <translation>Barre d&apos;outils/de menus</translation>
+        <translation>Outils/-Barre de Menus</translation>
     </message>
     <message>
         <source>Fixed</source>
@@ -348,7 +348,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Switch to fixed menu-/toolbars after restarting application !</source>
-        <translation>Utiliser un menu-/barre d&apos;outils fixe après redémarrage de l&apos;application !</translation>
+        <translation>Utiliser un menu/-barre d&apos;outils fixe après redémarrage de l&apos;application !</translation>
     </message>
     <message>
         <source>Moveable</source>
@@ -356,7 +356,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Switch to moveable menu-/toolbars after restarting application !</source>
-        <translation>Utiliser un menu-/barre d&apos;outils mobile après redémarrage de l&apos;application !</translation>
+        <translation>Utiliser un menu-/barre d&apos;outils déplaçable après redémarrage de l&apos;application !</translation>
     </message>
 </context>
 <context>
@@ -367,7 +367,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Second prénom</translation>
+        <translation>Second Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -379,7 +379,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Lister sous</translation>
+        <translation>Fichier Sous</translation>
     </message>
     <message>
         <source>Gender</source>
@@ -403,7 +403,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Nom entier</translation>
+        <translation>Nom Entier...</translation>
     </message>
     <message>
         <source>Organization</source>
@@ -467,11 +467,11 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Masculin</translation>
+        <translation>Homme</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Féminin</translation>
+        <translation>Femme</translation>
     </message>
     <message>
         <source>Details</source>
@@ -479,11 +479,11 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Entrer une note</translation>
+        <translation>Entrer Note</translation>
     </message>
     <message>
         <source>Edit Name</source>
-        <translation>Editer le nom</translation>
+        <translation>Editer Nom</translation>
     </message>
     <message>
         <source>Contacts</source>
@@ -1319,7 +1319,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Press to enter last- middle and firstname</source>
-        <translation>Appuyez pour saisir prénom, second prénom, nom</translation>
+        <translation>Sélectionnez le pour saisir nom, prénom et second prénom</translation>
     </message>
     <message>
         <source>Enter fullname directly ! If you have a lastname with multiple words ( for instance &quot;de la Guerra&quot;), please write &lt;lastname&gt;,&lt;firstnames&gt; like this: &quot;de la Guerra, Carlos Pedro&quot;</source>
@@ -1327,7 +1327,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>The jobtitle..</source>
-        <translation>La fonction dans l&apos;entreprise ..</translation>
+        <translation>Fonction dans l&apos;entreprise..</translation>
     </message>
     <message>
         <source>Something like &quot;jr.&quot;..</source>
@@ -1335,15 +1335,15 @@ gratuitement!</translation>
     </message>
     <message>
         <source>The working place of the contact</source>
-        <translation>La société ou l&apos;organisation d&apos;appartenance</translation>
+        <translation>La société ou organisation d&apos;appartenance</translation>
     </message>
     <message>
         <source>Press to select attribute to change</source>
-        <translation>Sélectionnez le champ à modifier</translation>
+        <translation>Sélectionnez le pour choisir le champ à modifier</translation>
     </message>
     <message>
         <source>Press to select how to store the name (and howto show it in the listview)</source>
-        <translation>Pour choisir comment enregistrer le nom complet (et comment l&apos;afficher en mode liste)</translation>
+        <translation>Permet de choisir le format du nom complet (et comment il s&apos;affiche en mode liste)</translation>
     </message>
 </context>
 <context>
@@ -1390,7 +1390,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Assistant</translation>
+        <translation>Assistant(e)</translation>
     </message>
     <message>
         <source>Manager</source>
@@ -1406,7 +1406,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Date de naissance</translation>
+        <translation>Date de Naissance</translation>
     </message>
     <message>
         <source>Anniversary</source>
@@ -1418,7 +1418,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Enfants</translation>
+        <translation>Enfant(s)</translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -1430,7 +1430,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Second prénom</translation>
+        <translation>Second Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -1506,7 +1506,7 @@ gratuitement!</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Page web (Domicile)</translation>
+        <translation>Page Web (Domicile)</translation>
     </message>
     <message>
         <source>Notes</source>

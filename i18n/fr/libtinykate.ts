@@ -4,7 +4,7 @@
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation>Plus de place</translation>
+        <translation>Plus de Mémoire</translation>
     </message>
     <message>
         <source>There was a problem creating

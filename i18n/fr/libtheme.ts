@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>KDE2 theme compatible style engine</source>
-        <translation>Moteur de style compatible avec les Thème KDE2</translation>
+        <translation>Moteur de style compatible avec les thème de KDE2</translation>
     </message>
 </context>
 <context>

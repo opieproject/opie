@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Delay</source>
-        <translation>délai</translation>
+        <translation>Délai</translation>
     </message>
     <message>
         <source>sec</source>
@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Scap</source>
-        <translation type="unfinished"></translation>
+        <translation>Scap</translation>
     </message>
     <message>
         <source>Success</source>

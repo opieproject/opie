@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>&amp;New game</source>
-        <translation>&amp;Nouvel partie</translation>
+        <translation>&amp;Nouvelle partie</translation>
     </message>
     <message>
         <source>&amp;Pause game</source>
@@ -44,35 +44,35 @@
     </message>
     <message>
         <source>Score: %1</source>
-        <translation>Score %1</translation>
+        <translation>Score : %1</translation>
     </message>
     <message>
         <source>Game paused.
 Press P to continue!</source>
         <translation>Jeu en Pause.
-Presser P pour continuer!</translation>
+Pressez P pour continuer !</translation>
     </message>
     <message>
         <source>Game Over!
 Score: %1</source>
-        <translation>Fin de partie!
-Score: %1</translation>
+        <translation>Fin de partie !
+Score : %1</translation>
     </message>
     <message>
         <source>Time: %1</source>
-        <translation>Temps: %1</translation>
+        <translation>Temps : %1</translation>
     </message>
     <message>
         <source>Lives: %1</source>
-        <translation>Vie: %1</translation>
+        <translation>Vie : %1</translation>
     </message>
     <message>
         <source>Filled: %1%</source>
-        <translation>Rempli: %1</translation>
+        <translation>Rempli : %1</translation>
     </message>
     <message>
         <source>Filled: 0%</source>
-        <translation>Rempli: 0%</translation>
+        <translation>Rempli : 0%</translation>
     </message>
     <message>
         <source>Successfully cleared more than 75%.
@@ -83,23 +83,23 @@ Score: %1</translation>
     <message>
         <source>%1 points: 15 points per life
 </source>
-        <translation>%1 points: 15 points par vie</translation>
+        <translation>%1 points : 15 points par vie</translation>
     </message>
     <message>
         <source>%1 points: Bonus
 </source>
-        <translation>%1 points: Bonus</translation>
+        <translation>%1 points : Bonus</translation>
     </message>
     <message>
         <source>%1 points: Total score
 </source>
-        <translation>%1 points: score total</translation>
+        <translation>%1 points : score total</translation>
     </message>
     <message>
         <source>On to level %1.
 You get %2 lives this time!</source>
         <translation>Niveau %1.
-Vous avez %2 vies cette fois!</translation>
+Vous avez %2 vies cette fois !</translation>
     </message>
 </context>
 </TS>

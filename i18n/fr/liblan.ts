@@ -11,7 +11,7 @@
 exists. Please choose a
 different name.</source>
         <translation>Ce nom d&apos;hôte
-existe déjà. Choisir 
+existe déjà. Choisissez
 un nom différent.</translation>
     </message>
 </context>
@@ -19,7 +19,7 @@ un nom différent.</translation>
     <name>LanBase</name>
     <message>
         <source>LAN </source>
-        <translation>Réseau local</translation>
+        <translation>Réseau local (LAN)</translation>
     </message>
     <message>
         <source>Account</source>
@@ -35,7 +35,7 @@ un nom différent.</translation>
     </message>
     <message>
         <source>Obtain TCP/IP Information Automatically</source>
-        <translation>Obtenir automatiquement les paramètres TCP/IP</translation>
+        <translation>Obtenir Automatiquement les Paramètres TCP/IP</translation>
     </message>
     <message>
         <source>TCP/IP</source>
@@ -55,30 +55,30 @@ un nom différent.</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation>Adresse de diffusion</translation>
+        <translation>Broadcast</translation>
     </message>
     <message>
         <source>DNS</source>
-        <translation>Serveur de nom</translation>
+        <translation>Serveur de nom (DNS)</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation>Premier DNS</translation>
+        <translation>DNS Primaire</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation>Second DNS</translation>
+        <translation>DNS Secondaire</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation>Serveurs relais (proxies)</translation>
+        <translation>Serveurs Relais (proxies)</translation>
     </message>
 </context>
 <context>
     <name>LanState</name>
     <message>
         <source>Form2</source>
-        <translation>Form2</translation>
+        <translation>Formulaire2</translation>
     </message>
     <message>
         <source>Service:</source>

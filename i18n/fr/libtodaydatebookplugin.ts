@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>note</source>
-        <translation>Notes</translation>
+        <translation>note</translation>
     </message>
 </context>
 <context>

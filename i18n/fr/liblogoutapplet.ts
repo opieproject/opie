@@ -4,17 +4,17 @@
     <name>LogoutApplet</name>
     <message>
         <source>Logout shortcut</source>
-        <translation>Raccouci &quot;logout&quot;</translation>
+        <translation>Raccouci Déconnexion</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation>Logout</translation>
+        <translation>Déconnexion</translation>
     </message>
     <message>
         <source>Do you really want to
 end this session ?</source>
         <translation>Voulez-vous réellement
-terminer cette session?</translation>
+terminer cette session ?</translation>
     </message>
 </context>
 </TS>

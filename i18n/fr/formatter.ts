@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Storage Type</source>
-        <translation>Type du média de stockage</translation>
+        <translation>Type de Support</translation>
     </message>
     <message>
         <source>File Systems</source>
-        <translation>Système de fichiers</translation>
+        <translation>Système de Fichiers</translation>
     </message>
     <message>
         <source>Format</source>
@@ -46,7 +46,7 @@ instable!!</translation>
     </message>
     <message>
         <source>Mount Point</source>
-        <translation>Point de montage</translation>
+        <translation>Point de Montage</translation>
     </message>
     <message>
         <source>Advanced</source>
@@ -85,8 +85,8 @@ Vous allez perdre toutes vos données!!</translation>
     <message>
         <source>Could not format.
 Unknown type</source>
-        <translation>Impossible de formater
-type inconnu</translation>
+        <translation>Impossible de formater.
+Type inconnu</translation>
     </message>
     <message>
         <source>Ok</source>
@@ -94,7 +94,7 @@ type inconnu</translation>
     </message>
     <message>
         <source>Formatter Output</source>
-        <translation>Formatter Output</translation>
+        <translation>Sortie Formateur</translation>
     </message>
     <message>
         <source>Trying to umount.</source>
@@ -102,17 +102,17 @@ type inconnu</translation>
     </message>
     <message>
         <source>umount failed!</source>
-        <translation>Echec du démontage!</translation>
+        <translation>Echec du démontage !</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Could not umount.
 Device is busy!</source>
-        <translation>Impossible de démonté
-Périphérique occupé!</translation>
+        <translation>Impossible de démonté.
+Périphérique occupé !</translation>
     </message>
     <message>
         <source>Trying to format.</source>
@@ -120,7 +120,7 @@ Périphérique occupé!</translation>
     </message>
     <message>
         <source>No such device!</source>
-        <translation>Aucun périphérique de ce type!</translation>
+        <translation>Aucun périphérique de ce type !</translation>
     </message>
     <message>
         <source>
@@ -134,41 +134,41 @@ a été formaté correctement.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
-        <translation>Echec du montage de la carte.!</translation>
+        <translation>Echec du montage !</translation>
     </message>
     <message>
         <source>
 has been successfully mounted.</source>
         <translation>
-a réussi a etre monté. </translation>
+a réussi a être monté. </translation>
     </message>
     <message>
         <source>You can now close the output window.</source>
-        <translation>Vous ne pouvez pas fermer la fenêtre &quot;output&quot;.</translation>
+        <translation>Vous ne pouvez pas fermer la fenêtre &quot;sortie&quot;.</translation>
     </message>
     <message>
         <source>Internal</source>
-        <translation>Internal</translation>
+        <translation>Interne</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Type de stockage:</translation>
+        <translation>Type de Support :</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
 </source>
-        <translation>Total: %1 ko ( %d mo)
+        <translation>Total : %1 ko ( %d mo)
 </translation>
     </message>
     <message>
         <source>Used: %1 kB ( %d mB)
 </source>
-        <translation>Utilisé: %1 ko ( %d Mo)
+        <translation>Utilisé : %1 ko ( %d Mo)
 </translation>
     </message>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
-        <translation>Disponible: %1 ko ( %d Mo)</translation>
+        <translation>Disponible : %1 ko ( %d Mo)</translation>
     </message>
 </context>
 </TS>

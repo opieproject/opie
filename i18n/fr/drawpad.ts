@@ -4,7 +4,7 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation>Supprimer tout</translation>
+        <translation>Supprimer Tout</translation>
     </message>
     <message>
         <source>Import</source>
@@ -48,83 +48,83 @@
     </message>
     <message>
         <source>First Page</source>
-        <translation>Premiere page</translation>
+        <translation>Premiere Page</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation>Page précédente</translation>
+        <translation>Page Précédente</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation>Page suivante</translation>
+        <translation>Page Suivante</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation>Dernière page</translation>
+        <translation>Dernière Page</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation>Dessiner un point</translation>
+        <translation>Dessiner Point</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation>Dessiner une ligne</translation>
+        <translation>Dessiner Ligne</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation>Dessiner un rectangle</translation>
+        <translation>Dessiner Rectangle</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Dessiner un rectangle plein</translation>
+        <translation>Dessiner Rectangle Plein</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation>Dessiner une ellipse</translation>
+        <translation>Dessiner Ellipse</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Desinner une ellipse pleine</translation>
+        <translation>Desinner Ellipse Pleine</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation>Remplir une région</translation>
+        <translation>Remplir Région</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation>Effacer un point</translation>
+        <translation>Effacer Point</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation>Largeur du pinceau</translation>
+        <translation>Largeur Pinceau</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur du pinceau</translation>
+        <translation>Couleur Pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Couleur de remplissage</translation>
+        <translation>Couleur Remplissage</translation>
     </message>
     <message>
         <source>Insert Text</source>
-        <translation>Insérer un texte</translation>
+        <translation>Insérer Texte</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation>Vue miniature</translation>
+        <translation>Vue Miniature</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation>Vue miniature...</translation>
+        <translation>Vue Miniature...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation>Informations sur la page</translation>
+        <translation>Informations Page</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation>Informations sur la page...</translation>
+        <translation>Informations Page...</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -158,75 +158,75 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation>Cliquer ici pour ajouter une nouvelle feuille.</translation>
+        <translation>Cliquez ici pour ajouter une nouvelle feuille.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation>Cliquer ici pour effacer la feuille courante.</translation>
+        <translation>Cliquez ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation>Cliquer ici pour effacer la feuille courante.</translation>
+        <translation>Cliquez ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to undo the last action.</source>
-        <translation>CLiquer ici pour annuler la dernière action.</translation>
+        <translation>CLiquez ici pour annuler la dernière action.</translation>
     </message>
     <message>
         <source>Click here to re-perform the last action.</source>
-        <translation>CLiquer ici pour refaire la dernière action.</translation>
+        <translation>CLiquez ici pour refaire la dernière action.</translation>
     </message>
     <message>
         <source>Click here to view the first page.</source>
-        <translation>Cliquer ici pour voir la 1ère page.</translation>
+        <translation>Cliquez ici pour voir la première page.</translation>
     </message>
     <message>
         <source>Click here to view the previous page.</source>
-        <translation>Cliquer ici pour voir la  page précédente.</translation>
+        <translation>Cliquez ici pour voir la page précédente.</translation>
     </message>
     <message>
         <source>Click here to view the next page.</source>
-        <translation>Cliquer ici pour voir la  page suivante.</translation>
+        <translation>Cliquez ici pour voir la  page suivante.</translation>
     </message>
     <message>
         <source>Click here to view the last page.</source>
-        <translation>Cliquer ici pour voir la dernière page.</translation>
+        <translation>Cliquez ici pour voir la dernière page.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw lines.</source>
-        <translation>Cliquer ici pour sélectionner un des outils disponible pour dessiner des lignes.</translation>
+        <translation>Cliquez ici pour sélectionner un outil pour dessiner des lignes.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation>Cliquer ici pour sélectionner un des outils disponible pour dessiner des rectangles.</translation>
+        <translation>Cliquez ici pour sélectionner un outil pour dessiner des rectangles.</translation>
     </message>
     <message>
         <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation>Cliquer ici pour sélectionner un des outils disponible pour dessiner des ellipsess.</translation>
+        <translation>Cliquez ici pour sélectionner un outils pour dessiner des ellipses.</translation>
     </message>
     <message>
         <source>Click here to select the text drawing tool.</source>
-        <translation>Cliquer ici pour sélectionner l&apos;outil d&apos;écriture.</translation>
+        <translation>Cliquez ici pour sélectionner l&apos;outil de texte.</translation>
     </message>
     <message>
         <source>Click here to select the fill tool.</source>
-        <translation>Cliquer ici pour sélectionner l&apos;outil de remplissage.</translation>
+        <translation>Cliquez ici pour sélectionner l&apos;outil de remplissage.</translation>
     </message>
     <message>
         <source>Click here to select the eraser tool.</source>
-        <translation>Cliquer ici pour sélectionner la gomme.</translation>
+        <translation>Cliquez ici pour sélectionner la gomme.</translation>
     </message>
     <message>
         <source>Click here to select the width of the drawing pen.</source>
-        <translation>Cliquer ici pour sélectionner la taille du stylo.</translation>
+        <translation>Cliquez ici pour sélectionner la taille du stylo.</translation>
     </message>
     <message>
         <source>Click here to select the color used when drawing.</source>
-        <translation>Cliquer ici pour sélectionner la couleur du stylo.</translation>
+        <translation>Cliquez ici pour sélectionner la couleur du stylo.</translation>
     </message>
     <message>
         <source>Click here to select the color used when filling in areas.</source>
-        <translation>Cliquer ici pour sélectionner la couleur de remplissage.</translation>
+        <translation>Cliquez ici pour sélectionner la couleur de remplissage.</translation>
     </message>
     <message>
         <source>DrawPad - Page %1/%2</source>
@@ -237,7 +237,7 @@ toutes les pages ?</translation>
     <name>ExportDialog</name>
     <message>
         <source>Page Selection</source>
-        <translation>Sélection des pages</translation>
+        <translation>Sélection Pages</translation>
     </message>
     <message>
         <source>All</source>
@@ -303,11 +303,11 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation>Couleur du pinceau</translation>
+        <translation>Couleur du Pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation>Couleur  de remplissage</translation>
+        <translation>Couleur de Remplissage</translation>
     </message>
     <message>
         <source>General</source>
@@ -380,7 +380,7 @@ toutes les pages ?</translation>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation>Insérer un texte</translation>
+        <translation>Insérer du texte</translation>
     </message>
 </context>
 <context>
@@ -391,7 +391,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation>Effacer la page</translation>
+        <translation>Effacer la Page</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -409,7 +409,7 @@ la page sélectionnée ?</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation>Supprimer la page</translation>
+        <translation>Supprimer Page</translation>
     </message>
     <message>
         <source>Do you want to delete
@@ -419,23 +419,23 @@ la page sélectionnée ?</translation>
     </message>
     <message>
         <source>Click here to add a new sheet.</source>
-        <translation>Cliquer ici pour ajouter une nouvelle feuille.</translation>
+        <translation>Cliquez ici pour ajouter une nouvelle feuille.</translation>
     </message>
     <message>
         <source>Click here to erase the current sheet.</source>
-        <translation>Cliquer ici pour effacer la feuille courante.</translation>
+        <translation>Cliquez ici pour effacer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to remove the current sheet.</source>
-        <translation>Cliquer ici pour effacer la feuille courante.</translation>
+        <translation>Cliquez ici pour supprimer la feuille courante.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet up one position in the list.</source>
-        <translation>Cliquer ici pour déplacer la feuille courante vers le début de la liste.</translation>
+        <translation>Cliquez ici pour déplacer la feuille courante vers le début de la liste.</translation>
     </message>
     <message>
         <source>Click here to move the current sheet down one position in the list.</source>
-        <translation>Cliquer ici pour déplacer la feuille courante vers la fin de la liste.</translation>
+        <translation>Cliquez ici pour déplacer la feuille courante à la fin de la liste.</translation>
     </message>
 </context>
 </TS>

@@ -8,18 +8,18 @@
     </message>
     <message>
         <source>Disconnect</source>
-        <translation>Déconnecté</translation>
+        <translation>Déconnecter</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation>Connecté</translation>
+        <translation>Connecter</translation>
     </message>
 </context>
 <context>
     <name>NetPassword</name>
     <message>
         <source>Network Password</source>
-        <translation>Mot de passe réseau</translation>
+        <translation>Mot de Passe Réseau</translation>
     </message>
     <message>
         <source>Cancel</source>

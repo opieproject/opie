@@ -4,23 +4,23 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation>Définir les touches du PDA</translation>
+        <translation>Définir Touches / Applications</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation>Carnet d&apos;adresses</translation>
+        <translation>Carnet d&apos;Adresses</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Répertoire personnel</translation>
+        <translation>Répertoire Personnel</translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation>Menu</translation>
+        <translation>Menu Popup</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation>Email</translation>
+        <translation>Courrier</translation>
     </message>
     <message>
         <source>Calendar</source>

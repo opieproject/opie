@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Select...</source>
-        <translation>Parcourir ...</translation>
+        <translation>Parcourir...</translation>
     </message>
     <message>
         <source>Default</source>
@@ -113,11 +113,11 @@
     </message>
     <message>
         <source>Small</source>
-        <translation>Petites</translation>
+        <translation>Petite</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Grandes</translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Color:</source>

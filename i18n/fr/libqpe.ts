@@ -38,18 +38,18 @@
     </message>
     <message>
         <source>New Category</source>
-        <translation>Nouvelle catégorie</translation>
+        <translation>Nouvelle Catégorie</translation>
     </message>
     <message>
         <source>New Category </source>
-        <translation>Nouvelle catégorie</translation>
+        <translation>Nouvelle Catégorie</translation>
     </message>
 </context>
 <context>
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation>Ediion des catégories</translation>
+        <translation>Ediion des Catégories</translation>
     </message>
     <message>
         <source>Categories</source>
@@ -61,7 +61,7 @@
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation>Catégories va là</translation>
+        <translation>Les Catégories vont ici</translation>
     </message>
     <message>
         <source>Add</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation>Presser pour effacer la catégorie surlignée.</translation>
+        <translation>Cliquez pour effacer la catégorie surlignée.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
@@ -117,7 +117,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
-        <translation>Ediion des catégories</translation>
+        <translation>Editer Catégories</translation>
     </message>
     <message>
         <source>All</source>
@@ -163,7 +163,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation>cliquez pour sélectionner un document de cette liste</translation>
+        <translation>Cliquez pour sélectionner un document de cette liste</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
@@ -171,7 +171,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation>&lt;br&gt;&lt;br&gt;Cliquez et restez appuyer pour accéder aux propriétés du document.</translation>
+        <translation>&lt;br&gt;&lt;br&gt;Cliquez et restez appuyé pour accéder aux propriétés du document.</translation>
     </message>
 </context>
 <context>
@@ -262,7 +262,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
-        <translation>Echec du déplacement du fichier.</translation>
+        <translation>Echec lors du déplacement de fichier.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -281,19 +281,19 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>Commentaire:</translation>
+        <translation>Commentaire :</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation>Type:</translation>
+        <translation>Type :</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nom:</translation>
+        <translation>Nom :</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation>Emplacement:</translation>
+        <translation>Emplacement :</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
@@ -301,7 +301,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -309,7 +309,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Transmettre</translation>
+        <translation>Emettre</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
@@ -325,7 +325,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation>Effacer ce document.</translation>
+        <translation>Supprimer ce document.</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
@@ -333,7 +333,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation>Transmettre ce document à un autre périphérique.</translation>
+        <translation>Emettre ce document vers un autre dispositif.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
@@ -344,7 +344,7 @@ est en train d&apos;éditer les catégories.</translation>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation>Information sur le propriétaire</translation>
+        <translation>Information du Propriétaire</translation>
     </message>
 </context>
 <context>
@@ -395,7 +395,7 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation>Entrez le mot de passe</translation>
+        <translation>Entrez mot de passe</translation>
     </message>
 </context>
 <context>
@@ -411,11 +411,11 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation>Il y a eu un problème en créant
-les informations de Configuration
-pour ce programme.
+        <translation>Un problème est survenu lors de la
+création des informations de
+configuration du programme.
 
-SVP, libérez de l&apos;espace et 
+Veuillez libérer de la mémoire et 
 ré-essayez.</translation>
     </message>
     <message>
@@ -423,13 +423,13 @@ ré-essayez.</translation>
 Please free up some space
 before entering data</source>
         <translation>Impossible de créer les fichiers de départ
-SVP libérez de l&apos;espace
-avant d&apos;entrer des données</translation>
+Veuillez libérer de la mémoire avant
+d&apos;entrer des données</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation>Impossible de programmer une alarme.
+        <translation>Programmation alarme impossible.
 Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
@@ -458,11 +458,11 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>pm</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>am</translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
@@ -504,15 +504,15 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Page web (perso):</translation>
+        <translation>Page Web (perso):</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Page web (bur):</translation>
+        <translation>Page Web (bur):</translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation>Bureau:</translation>
+        <translation>Bureau :</translation>
     </message>
     <message>
         <source>Business Phone: </source>
@@ -532,43 +532,43 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Profession:</translation>
+        <translation>Profession :</translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Assistant:</translation>
+        <translation>Assistant :</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Responsable:</translation>
+        <translation>Responsable :</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Masculin</translation>
+        <translation>Homme</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Féminin</translation>
+        <translation>Femme</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Genre:</translation>
+        <translation>Genre :</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Epouse:</translation>
+        <translation>Epouse :</translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Date de naissance:</translation>
+        <translation>Date de naissance :</translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation>Anniversaire:</translation>
+        <translation>Anniversaire :</translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation>Surnom:</translation>
+        <translation>Surnom :</translation>
     </message>
     <message>
         <source>Name Title</source>
@@ -580,7 +580,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>2nd prénom</translation>
+        <translation>Second Prénom</translation>
     </message>
     <message>
         <source>Last Name</source>
@@ -592,7 +592,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>File As</translation>
+        <translation>Fichier Sous</translation>
     </message>
     <message>
         <source>Job Title</source>
@@ -620,11 +620,11 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Courriel par défaut</translation>
+        <translation>Email par Défaut</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Courriels</translation>
+        <translation>Emails</translation>
     </message>
     <message>
         <source>Home Phone</source>
@@ -648,11 +648,11 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Etat (bur)</translation>
+        <translation>Région (bur)</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Zip code (bur)</translation>
+        <translation>Code Postal (bur)</translation>
     </message>
     <message>
         <source>Business Country</source>
@@ -664,7 +664,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Page web (bur)</translation>
+        <translation>Page Web (bur)</translation>
     </message>
     <message>
         <source>Office</source>
@@ -676,7 +676,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Assistant</translation>
+        <translation>Assistant(e)</translation>
     </message>
     <message>
         <source>Manager</source>
@@ -696,7 +696,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Zip code (dom)</translation>
+        <translation>Code Postal (dom)</translation>
     </message>
     <message>
         <source>Home Country</source>
@@ -704,7 +704,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Page web (dom)</translation>
+        <translation>Page Web (dom)</translation>
     </message>
     <message>
         <source>Spouse</source>
@@ -740,7 +740,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation>Nouveau document</translation>
+        <translation>Nouveau Document</translation>
     </message>
     <message>
         <source>Mon</source>
@@ -782,11 +782,11 @@ Libérez de la mémoire et réessayez.</translation>
     <name>QPEDecoration</name>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Aide globale n&apos;est pas disponible poyur cette application, cependant, il existe une aide contectuelle.&lt;p&gt; pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez and maintenez sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel control.&lt;/ol&gt;&lt;/Qt&gt;</translation>
+        <translation>&lt;Qt&gt;L&apos;aide globale n&apos;est pas disponible pour cette application, cependant, il existe une aide contectuelle.&lt;p&gt;Pour utiliser l&apos;aide contectuelle:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Cliquez et maintenez la pression sur le bouton d&apos;aide.&lt;li&gt;Lorsque la barre de titre affiche &lt;b&gt;qu&apos;est-ce-que c&apos;est...&lt;/b&gt;, cliquez sur n&apos;importe quel élément.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation>Qu&apos;est ce que c&apos;est...</translation>
+        <translation>Qu&apos;est ce que...</translation>
     </message>
 </context>
 <context>
@@ -832,11 +832,11 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation>Stockage Interne</translation>
+        <translation>Disque Interne</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation>Mémoire interne</translation>
+        <translation>Mémoire Interne</translation>
     </message>
     <message>
         <source>MMC Card</source>
@@ -867,12 +867,12 @@ installez &quot;citytime&quot; SVP.</translation>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation>Plus d&apos;espace</translation>
+        <translation>Plus de Mémoire</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Please free up space and try again</source>
-        <translation>Impossible de programmer une alarme.
+        <translation>Programmation alarme impossible.
 Libérez de la mémoire et réessayez</translation>
     </message>
 </context>
@@ -880,7 +880,7 @@ Libérez de la mémoire et réessayez</translation>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation>%1 fichers</translation>
+        <translation>%1 fichiers</translation>
     </message>
     <message>
         <source>%1 %2</source>

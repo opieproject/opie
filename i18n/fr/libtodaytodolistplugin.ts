@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation>Il y a &lt;b&gt; 1&lt;/b&gt; tâche active :&lt;br&gt;</translation>
+        <translation>Vous avez &lt;b&gt; 1&lt;/b&gt; tâche active :&lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation>Il y a &lt;b&gt; %1&lt;/b&gt; tâches actives : &lt;br&gt;</translation>
+        <translation>Vous avez &lt;b&gt; %1&lt;/b&gt; tâches actives : &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
@@ -23,12 +23,11 @@
     <name>TodolistPluginConfig</name>
     <message>
         <source>tasks shown </source>
-        <translation>Nombre de tâches
-à afficher</translation>
+        <translation>Tâches affichées</translation>
     </message>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation>Pour choisir le nombre maximum de tâches à afficher</translation>
+        <translation>Définit le nombre maximum de tâches à afficher</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
@@ -37,7 +36,7 @@ par ligne</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Pour choisir le nombre de caractères à afficher pour chaque tâche</translation>
+        <translation>Définit le nombre de caractères à afficher par ligne pour chaque tâche</translation>
     </message>
 </context>
 </TS>

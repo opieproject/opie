@@ -16,15 +16,15 @@
     </message>
     <message>
         <source>On Action...</source>
-        <translation>Si activé ...</translation>
+        <translation>Sur Action...</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation>Ouvrir un fichier</translation>
+        <translation>Ouvrir Fichier</translation>
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation>Défilement automatique</translation>
+        <translation>Défilement Auto</translation>
     </message>
     <message>
         <source>Mark</source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation>Faire défiler page/ligne</translation>
+        <translation>Défilement page/ligne</translation>
     </message>
     <message>
         <source>Set Overlap</source>
@@ -56,11 +56,11 @@
     </message>
     <message>
         <source>Use Cursor</source>
-        <translation>Utiliser le curseur</translation>
+        <translation>Utiliser Curseur</translation>
     </message>
     <message>
         <source>Set Dictionary</source>
-        <translation>Définir le dictionnaire</translation>
+        <translation>Dictionnaire</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
@@ -92,11 +92,11 @@
     </message>
     <message>
         <source>Find...</source>
-        <translation>Chercher ...</translation>
+        <translation>Rechercher...</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation>En continue</translation>
+        <translation>Permanent</translation>
     </message>
     <message>
         <source>Markup</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Aucune</translation>
+        <translation>Aucun</translation>
     </message>
     <message>
         <source>Text</source>
@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished">Trait d&apos;union</translation>
+        <translation>Trait d&apos;union</translation>
     </message>
     <message>
         <source>Single Space</source>
@@ -140,11 +140,11 @@
     </message>
     <message>
         <source>Unindent</source>
-        <translation type="unfinished">Dé-identé</translation>
+        <translation>Dé-identé</translation>
     </message>
     <message>
         <source>Re-paragraph</source>
-        <translation type="unfinished">Re-paragrapher</translation>
+        <translation>Re-paragrapher</translation>
     </message>
     <message>
         <source>Double Space</source>
@@ -152,31 +152,31 @@
     </message>
     <message>
         <source>Indent+</source>
-        <translation type="unfinished">Identation +</translation>
+        <translation>Identation +</translation>
     </message>
     <message>
         <source>Indent-</source>
-        <translation type="unfinished">Indentation -</translation>
+        <translation>Indentation -</translation>
     </message>
     <message>
         <source>Repalm</source>
-        <translation type="unfinished"></translation>
+        <translation>Repalm</translation>
     </message>
     <message>
         <source>Remap</source>
-        <translation type="unfinished"></translation>
+        <translation>Remapper</translation>
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished">Envahir</translation>
+        <translation>Envahir</translation>
     </message>
     <message>
         <source>Zoom In</source>
-        <translation>Agrandir</translation>
+        <translation>Zoom Avant</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation>Réduire</translation>
+        <translation>Zoom Arrière</translation>
     </message>
     <message>
         <source>Ideogram/Word</source>
@@ -216,7 +216,7 @@
     </message>
     <message>
         <source>Set Font</source>
-        <translation>Choisir la police</translation>
+        <translation>Choisir Police</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -248,11 +248,11 @@
     </message>
     <message>
         <source>Start Block</source>
-        <translation>Début bloc</translation>
+        <translation>Début Bloc</translation>
     </message>
     <message>
         <source>Copy Block</source>
-        <translation>Copier bloc</translation>
+        <translation>Copier Bloc</translation>
     </message>
     <message>
         <source>File</source>
@@ -272,15 +272,15 @@
     </message>
     <message>
         <source>Close Find</source>
-        <translation>Clore la recherche</translation>
+        <translation>Clore Recherche</translation>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Faire Reg</translation>
     </message>
     <message>
         <source>Close Edit</source>
-        <translation>Fermer l&apos;édition</translation>
+        <translation>Fermer Editer</translation>
     </message>
 </context>
 <context>

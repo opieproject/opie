@@ -4,19 +4,19 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation>Nom du fichier:</translation>
+        <translation>Nom Fichier :</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation>Groupe:</translation>
+        <translation>Groupe :</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation>Clé:</translation>
+        <translation>Clé :</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation>Valeur:</translation>
+        <translation>Valeur :</translation>
     </message>
 </context>
 <context>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Could not open</source>
-        <translation>Impossible à ouvrir</translation>
+        <translation>Ouverture impossible</translation>
     </message>
     <message>
         <source>The directory </source>
@@ -35,14 +35,14 @@
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation>ne peut être ouvert(e).</translation>
+        <translation>ne peut être ouvert.</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation>Impossible à ouvrir</translation>
+        <translation>Ouverture impossible</translation>
     </message>
     <message>
         <source>The file </source>
@@ -65,15 +65,15 @@
     </message>
     <message>
         <source>Save</source>
-        <translation>Sauvegarder</translation>
+        <translation>Sauver</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation>Revenir</translation>
+        <translation>Restaurer</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
 </context>
 </TS>

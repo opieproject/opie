@@ -4,7 +4,7 @@
     <name>InterfaceAdvanced</name>
     <message>
         <source>Advanced Interface Information</source>
-        <translation>Information Avancée sur l&apos;Interface</translation>
+        <translation>Informations Avancées sur l&apos;Interface</translation>
     </message>
     <message>
         <source>eth0</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation>Expiration du bail</translation>
+        <translation>Expiration du Bail</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
@@ -59,7 +59,7 @@
     <name>InterfaceInformation</name>
     <message>
         <source>Interface Information</source>
-        <translation>Information Interface</translation>
+        <translation>Informations Interface</translation>
     </message>
     <message>
         <source>&amp;Refresh</source>
@@ -149,7 +149,7 @@
     <name>InterfaceSetupImp</name>
     <message>
         <source>Restarting interface</source>
-        <translation>Redemarrage de l&apos;interface</translation>
+        <translation>Redémarrage de l&apos;interface</translation>
     </message>
 </context>
 </TS>

@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Language Settings</source>
-        <translation>Définition de la langue</translation>
+        <translation>Configurer la langue</translation>
     </message>
 </context>
 </TS>

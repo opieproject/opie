@@ -4,19 +4,19 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status for Ipaq</source>
-        <translation>Niveau de la batterie de l&apos;iPaq</translation>
+        <translation>Niveau batterie de l&apos;iPaq</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation>Défectueux</translation>
+        <translation>Echec</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>impossible d&apos;ouvrir le fichier</translation>
+        <translation>ouverture du fichier impossible</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation>Chargement des deux appareils</translation>
+        <translation>Chargement des deux dispositifs</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -24,11 +24,11 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Pourcentage restant de batterie</translation>
+        <translation>Pourcentage de batterie restant</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation>Niveau de la batterie :</translation>
+        <translation>Niveau batterie :</translation>
     </message>
     <message>
         <source>Good</source>
@@ -68,7 +68,7 @@
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pourcentage restant de batterie :</translation>
+        <translation>Pourcentage de batterie restant :</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation>Pas de jacquette avec batterie détectée</translation>
+        <translation>Pas de jaquette avec batterie détectée</translation>
     </message>
     <message>
         <source>Close</source>

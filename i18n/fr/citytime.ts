@@ -4,11 +4,11 @@
     <name>CityTime</name>
     <message>
         <source>Time Changing</source>
-        <translation>Changement d&apos;heure</translation>
+        <translation>Changement d&apos;Heure</translation>
     </message>
     <message>
         <source>There was a problem setting timezone %1</source>
-        <translation>Il a eu un problème dans la mise en place de la zone horaire %1</translation>
+        <translation>Un problème est survenu lors de la configuration de la zone horaire %1</translation>
     </message>
     <message>
         <source>Restore Time Zone</source>
@@ -16,14 +16,14 @@
     </message>
     <message>
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
-        <translation>Il y a eu un problème dans la mise en place de la zone horaire. Votre horloge est sûrement fausse maintenant ...</translation>
+        <translation>Un problème est survenu lors de la mise en place de la zone horaire. L&apos;heure est sûrement fausse maintenant...</translation>
     </message>
 </context>
 <context>
     <name>CityTimeBase</name>
     <message>
         <source>City Time</source>
-        <translation>Zone Horaire</translation>
+        <translation>Heure de Ville</translation>
     </message>
     <message>
         <source>Click on one of the set cities to replace it</source>
@@ -34,7 +34,7 @@
     <name>ZoneMap</name>
     <message>
         <source>CITY</source>
-        <translation>Ville</translation>
+        <translation>VILLE</translation>
     </message>
     <message>
         <source>Unable to Find Timezone Info</source>
@@ -58,7 +58,7 @@
     </message>
     <message>
         <source>Select a continent/country here, then select a city</source>
-        <translation>Sélectionnez un continent ou pays ici, puis sélectionner une ville</translation>
+        <translation>Sélectionnez un continent ou pays ici, puis sélectionnez une ville</translation>
     </message>
     <message>
         <source>City</source>

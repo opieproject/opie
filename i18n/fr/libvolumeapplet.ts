@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation>Clic des touches</translation>
+        <translation>Clique des Touches</translation>
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation>Stylet sur écran</translation>
+        <translation>Clique Ecran</translation>
     </message>
 </context>
 </TS>

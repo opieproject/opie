@@ -4,7 +4,7 @@
     <name>DialupBase</name>
     <message>
         <source>Dial-up </source>
-        <translation>Connection par modem</translation>
+        <translation>Connection Modem</translation>
     </message>
     <message>
         <source>Account</source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Auto-detect name servers</source>
-        <translation>Détection automatique des serveurs de nom</translation>
+        <translation>Détection automatique des serveurs de noms</translation>
     </message>
     <message>
         <source>Gateway</source>
@@ -144,11 +144,11 @@
     </message>
     <message>
         <source>Device:</source>
-        <translation>Périphérique:</translation>
+        <translation>Dispositifs :</translation>
     </message>
     <message>
         <source>IrDA</source>
-        <translation>irDA</translation>
+        <translation>IrDA</translation>
     </message>
     <message>
         <source>PCMCIA</source>
@@ -156,7 +156,7 @@
     </message>
     <message>
         <source>Serial</source>
-        <translation>Serial</translation>
+        <translation>Série</translation>
     </message>
 </context>
 <context>

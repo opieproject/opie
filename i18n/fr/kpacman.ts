@@ -43,11 +43,11 @@
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation>&amp;Cacher le curseur de la souris</translation>
+        <translation>&amp;Cacher Curseur Souris</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
-        <translation>&amp;Selectionner un thème graphique</translation>
+        <translation>&amp;Selectionner thème graphique</translation>
     </message>
     <message>
         <source>&amp;Pause in Background</source>
@@ -82,14 +82,13 @@ Joerg Thoennissen (joe@dsite.de)
 
 Un jeu pacman pour le bureau KDE 
 
-The program based on the source of ksnake
-by Michel Filippi (mfilippi@sade.rhein-main.de).
-The design was strongly influenced by the pacman
+Le programme est basé sur les source de ksnake
+de Michel Filippi (mfilippi@sade.rhein-main.de).
+Le design est grandement influancé par pacman
 (c) 1980 MIDWAY MFG.CO.
 
-I like to thank my girlfriend Elke Krueers for
-the last 10 years of her friendship.
-</translation>
+J&apos;aimerais remercier ma copine Elke Krueers pour
+les 10 ans passé dans une ambiance amicale.</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -102,7 +101,7 @@ the last 10 years of her friendship.
     <message>
         <source>There are no schemes defined,
 or no scheme is selected.</source>
-        <translation>Il n&apos;y a pas de thème défini
+        <translation>Aucun thème n&apos;est défini,
 ou auncun thème n&apos;est sélectionné.</translation>
     </message>
 </context>
@@ -183,11 +182,11 @@ ou est dans un format inconnu.</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation>Portage QTOPIA: CATALIN CLIMOV</translation>
+        <translation>PORTAGE QTOPIA: CATALIN CLIMOV</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation>Presser le curseur pour démarrer</translation>
+        <translation>CLIQUEZ POUR DEMARRER</translation>
     </message>
 </context>
 <context>
@@ -210,7 +209,7 @@ ou est dans un format inconnu.</translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation>VOUS AVEZ ATTEIND</translation>
+        <translation>VOUS AVEZ REUSSIT</translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
@@ -228,10 +227,6 @@ ou est dans un format inconnu.</translation>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@YY@/@MM@/@DD@</translation>
     </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>Status</name>
@@ -247,7 +242,7 @@ ou est dans un format inconnu.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation>Erreur d&apos;initialisation</translation>
+        <translation>Erreur d&apos;Initialisation</translation>
     </message>
 </context>
 </TS>

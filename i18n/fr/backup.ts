@@ -4,18 +4,18 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation>Sauvegarde et restauration... Travail en cours...</translation>
+        <translation>Sauvegarde et restauration... travail en cours...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation>Sauvegarde et restauration</translation>
+        <translation>Sauvegarde et Restauration</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation>Sauvegarde et restauration</translation>
+        <translation>Sauvegarde et Restauration</translation>
     </message>
     <message>
         <source>Backup</source>
@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation>&amp;Sauvegarde</translation>
+        <translation>&amp;Sauvegarder</translation>
     </message>
     <message>
         <source>Restore</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Select Source</source>
-        <translation>Selectionner une source</translation>
+        <translation>Sélectionner une source</translation>
     </message>
     <message>
         <source>Column 1</source>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation>&amp;Restauration</translation>
+        <translation>&amp;Restaurer</translation>
     </message>
 </context>
 </TS>

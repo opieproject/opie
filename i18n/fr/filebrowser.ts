@@ -4,7 +4,7 @@
     <name>FileBrowser</name>
     <message>
         <source>File Manager</source>
-        <translation>Gestionnaire de fichiers</translation>
+        <translation>Gestionnaire de Fichiers</translation>
     </message>
     <message>
         <source>Dir</source>
@@ -16,23 +16,23 @@
     </message>
     <message>
         <source>by Name </source>
-        <translation>par nom</translation>
+        <translation>par Nom</translation>
     </message>
     <message>
         <source>by Size </source>
-        <translation>par taille</translation>
+        <translation>par Taille</translation>
     </message>
     <message>
         <source>by Date </source>
-        <translation>par date</translation>
+        <translation>par Date</translation>
     </message>
     <message>
         <source>by Type </source>
-        <translation>par type</translation>
+        <translation>par Type</translation>
     </message>
     <message>
         <source>Ascending</source>
-        <translation>Montant</translation>
+        <translation>Croissant</translation>
     </message>
     <message>
         <source>Hidden</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Symlinks</source>
-        <translation>Lien symboliques</translation>
+        <translation>Lien Symboliques</translation>
     </message>
     <message>
         <source>View</source>
@@ -48,11 +48,11 @@
     </message>
     <message>
         <source>Previous dir</source>
-        <translation>Répertoire précédent</translation>
+        <translation>Répert. précédent</translation>
     </message>
     <message>
         <source>Parent dir</source>
-        <translation>Répertoire parent</translation>
+        <translation>Répert. parent</translation>
     </message>
     <message>
         <source>New folder</source>
@@ -83,7 +83,7 @@
     <name>FileView</name>
     <message>
         <source>File Manager</source>
-        <translation>Gestionnaire de fichiers</translation>
+        <translation>Gestionnaire de Fichiers</translation>
     </message>
     <message>
         <source>Can&apos;t show /dev/ directory.</source>
@@ -95,15 +95,15 @@
     </message>
     <message>
         <source>Rename file</source>
-        <translation>Renommer un fichier</translation>
+        <translation>Renommer fichier</translation>
     </message>
     <message>
         <source>Rename failed!</source>
-        <translation>&quot;Renommer&quot; n&apos;a pas fonctionné !</translation>
+        <translation>Le renommage a échoué !</translation>
     </message>
     <message>
         <source>Paste file</source>
-        <translation>Coller un fichier</translation>
+        <translation>Coller fichier</translation>
     </message>
     <message>
         <source>Paste failed!</source>
@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>Cut file</source>
-        <translation>Couper un fichier</translation>
+        <translation>Couper fichier</translation>
     </message>
     <message>
         <source>Cut failed!</source>
@@ -123,7 +123,7 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Effacer</translation>
+        <translation>Supprimer</translation>
     </message>
     <message>
         <source>Are you sure?</source>
@@ -139,7 +139,7 @@
     </message>
     <message>
         <source>Delete failed!</source>
-        <translation>&quot;Effacer&quot; n&apos;a pas fonctionné !</translation>
+        <translation>L&apos;effacement a échoué !</translation>
     </message>
     <message>
         <source>New folder</source>
@@ -147,7 +147,7 @@
     </message>
     <message>
         <source>Folder creation failed!</source>
-        <translation>La création du répertoire n&apos;a pas fonctionnée !</translation>
+        <translation>La création de répertoire a échoué !</translation>
     </message>
     <message>
         <source>Launch Application</source>
@@ -155,7 +155,7 @@
     </message>
     <message>
         <source>Launch failed!</source>
-        <translation>&quot;Lance l&apos;application&quot; n&apos;a pas fonctionné !</translation>
+        <translation>Le lance de l&apos;application a échoué !</translation>
     </message>
     <message>
         <source>Add to Documents</source>
@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>Change Permissions</source>
-        <translation>Changer les droits</translation>
+        <translation>Changer les Droits</translation>
     </message>
     <message>
         <source>Select all</source>
@@ -206,7 +206,7 @@
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation>Définir les droits</translation>
+        <translation>Définir les Droits</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>

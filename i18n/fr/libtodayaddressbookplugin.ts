@@ -16,23 +16,23 @@
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation>Après combien de caractères doit-être coupé l&apos;inforamtion sur la tâche</translation>
+        <translation>Après combien de caractères doit-être coupé l&apos;information sur la tâche</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation>Jours à chercher :</translation>
+        <translation>Jours en avant :</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
-        <translation>Nombre de jours pour lequel il faut rechercher des évènements</translation>
+        <translation>Combien de jours pour aller de l&apos;avant</translation>
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation>Pour activer les changement: Redémarrer l&apos;application!</translation>
+        <translation>Pour activer les changement: Redémarrez l&apos;application !</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation>Définition des couleurs des titres:</translation>
+        <translation>Couleurs des Titres :</translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
@@ -40,17 +40,17 @@
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation>Couleur des entrées :</translation>
+        <translation>Couleur des Entrées :</translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
-        <translation>Cette couleur sera utilisée pour afficher les dates de Naissances/Anniversaire!</translation>
+        <translation>Cette couleur sera utilisée pour afficher les dates de Naissances/Anniversaire !</translation>
     </message>
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation>Délai pour
-être &quot;Urgent&quot;</translation>
+        <translation>Défini Couleur
+d&apos;Urgence</translation>
     </message>
     <message>
         <source> days: </source>
@@ -59,18 +59,18 @@ jours</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>
-        <translation>Couleur à utiliser si l&apos;évènement est proche !</translation>
+        <translation>Couleur utilisé si l&apos;évènement est proche !</translation>
     </message>
     <message>
         <source>The urgent color will be used if the birthday/anniversary is closer than given days !</source>
-        <translation>La couleur &quot;Urgent&quot; sera utilisée si les dates sont plus proches que le nombre défini de jours !</translation>
+        <translation>La Couleur d&apos;Urgence est utilisée si les dates sont plus proches que le nombre défini de jours !</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>AddressBook plugin</source>
-        <translation>Module &quot;Répertoire&quot;</translation>
+        <translation>Module &quot;Répertoire d&apos;Adresse&quot;</translation>
     </message>
     <message>
         <source>Next birthdays in &lt;b&gt; %1 &lt;/b&gt; days:</source>
@@ -78,15 +78,15 @@ jours</translation>
     </message>
     <message>
         <source>No birthdays in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas de date(s) de naissance dans les &lt;b&gt; %1 &lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Next anniversaries in &lt;b&gt; %1 &lt;/b&gt; days:</source>
-        <translation>Prochain anniversaire dans &lt;b&gt; %1 &lt;/b&gt; jours :</translation>
+        <translation>Prochain anniversaire dans &lt;b&gt;%1&lt;/b&gt; jours :</translation>
     </message>
     <message>
         <source>No anniversaries in &lt;b&gt; %1 &lt;/b&gt; days!</source>
-        <translation>Pas d&apos;anniversaire(s) dans les &lt;b&gt; %1 &lt;/b&gt; prochains jours !</translation>
+        <translation>Pas d&apos;anniversaire dans les &lt;b&gt;%1&lt;/b&gt; prochains jours !</translation>
     </message>
     <message>
         <source>Database does not provide this search query ! Please upgrade libOpie !&lt;br&gt;</source>

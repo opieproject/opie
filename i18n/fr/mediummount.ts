@@ -8,18 +8,18 @@
     </message>
     <message>
         <source>Medium Mount Settings</source>
-        <translation>Options du montage de support de stockage</translation>
+        <translation>Options Montage de Support</translation>
     </message>
 </context>
 <context>
     <name>MediumGlobalWidget</name>
     <message>
         <source>Enable medium checking</source>
-        <translation>Autoriser la vérification du support</translation>
+        <translation>Autoriser Vérification Support</translation>
     </message>
     <message>
         <source>Use global settings</source>
-        <translation>Utiliser les options globales</translation>
+        <translation>Utiliser les Options Globales</translation>
     </message>
     <message>
         <source>Which media files</source>
@@ -78,7 +78,7 @@
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation>Limiter la recherche à:</translation>
+        <translation>Limiter la recherche à :</translation>
     </message>
     <message>
         <source>Add</source>

@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>Every:</source>
-        <translation>Tous les:</translation>
+        <translation>Tous les :</translation>
     </message>
     <message>
         <source>Frequency</source>
@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>End On:</source>
-        <translation>Fin:</translation>
+        <translation>Fin :</translation>
     </message>
     <message>
         <source>No End Date</source>
@@ -95,7 +95,7 @@
     <name>OTimePickerDialogBase</name>
     <message>
         <source>Time:</source>
-        <translation>Heure:</translation>
+        <translation>Heure :</translation>
     </message>
     <message>
         <source>:</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation>Pick Time:</translation>
+        <translation>Choisir l&apos;Heure :</translation>
     </message>
 </context>
 </TS>

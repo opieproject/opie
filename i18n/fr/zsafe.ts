@@ -38,18 +38,18 @@
     <name>InfoForm</name>
     <message>
         <source>Information:</source>
-        <translation>Information:</translation>
+        <translation>Information :</translation>
     </message>
 </context>
 <context>
     <name>NewDialog</name>
     <message>
         <source>New Entry</source>
-        <translation>Neuer Eintrag</translation>
+        <translation>Nouvelle entrée</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaire</translation>
     </message>
     <message>
         <source>Field 6</source>
@@ -61,15 +61,15 @@
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>Mot de Pass</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Benutzername</translation>
+        <translation>Nom Utilisateur</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nom</translation>
     </message>
 </context>
 <context>
@@ -97,27 +97,27 @@
         <source>ComboBox FileTypeFilter
 
 edit or select the filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le ComboBox FileTypeFilter ou sélectionnez le filtre</translation>
     </message>
     <message>
         <source>confirms the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>Confirmer la sélection et refermer le formulaire</translation>
     </message>
     <message>
         <source>OKButton</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OKButton</translation>
     </message>
     <message>
         <source>cancels the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler la sélection et fermer le formulaire</translation>
     </message>
     <message>
         <source>CancelButton</source>
-        <translation type="unfinished">Abbruch</translation>
+        <translation>CancelButton</translation>
     </message>
     <message>
         <source>shows the selected filename</source>
-        <translation type="unfinished"></translation>
+        <translation>affiche le nom du fichier sélectionné</translation>
     </message>
     <message>
         <source>Filename LineEdit
@@ -125,16 +125,16 @@ edit or select the filter</source>
 shows the selected file
 and allows the direct filename
 edit</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>size</source>
@@ -152,7 +152,7 @@ edit or select the directories name</source>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

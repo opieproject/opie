@@ -4,7 +4,7 @@
     <name>CommandEditDialog</name>
     <message>
         <source>Command Selection</source>
-        <translation>Sélection de la commande</translation>
+        <translation>Sélection Commande</translation>
     </message>
 </context>
 <context>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>&lt;B&gt;Suggested Commands&lt;/B&gt;:</source>
-        <translation>&lt;B&gt;Commandes suggérées&lt;/B&gt; :</translation>
+        <translation>&lt;B&gt;Commandes Suggérées&lt;/B&gt; :</translation>
     </message>
 </context>
 <context>
@@ -34,11 +34,11 @@
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation>Petite à chasse fixe</translation>
+        <translation>Petite Fixé</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation>Moyenne à chasse fixe</translation>
+        <translation>Moyenne Fixé</translation>
     </message>
     <message>
         <source>Font</source>
@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Enter</source>
-        <translation>Entrée</translation>
+        <translation>Entrer</translation>
     </message>
     <message>
         <source>Space</source>
@@ -78,67 +78,67 @@
     </message>
     <message>
         <source>Show command list</source>
-        <translation>Afficher la liste des commandes</translation>
+        <translation>Afficher liste commandes</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation>Cacher la liste des commandes</translation>
+        <translation>Cacher liste commandes</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Tabs en bas</translation>
+        <translation>Onglets en Bas</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation>Vert sur noir</translation>
+        <translation>Vert sur Noir</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation>Noir sur blanc</translation>
+        <translation>Noir sur Blanc</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation>Blanc sur noir</translation>
+        <translation>Blanc sur Noir</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Noir sur transparent</translation>
+        <translation>Noir sur Transparent</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation>Noir sur rouge</translation>
+        <translation>Noir sur Rouge</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation>Rouge sur noir</translation>
+        <translation>Rouge sur Noir</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation>Vert sur jaune</translation>
+        <translation>Vert sur Jaune</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation>Bleue sur magenta</translation>
+        <translation>Bleu sur Magenta</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation>Magenta sur bleue</translation>
+        <translation>Magenta sur Bleu</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation>Cyan sur blanc</translation>
+        <translation>Cyan sur Blanc</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation>Blanc sur cyan</translation>
+        <translation>Blanc sur Cyan</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation>Bleue sur noir</translation>
+        <translation>Bleu sur Noir</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation>Ambre sur noir</translation>
+        <translation>Ambre sur Noir</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -146,7 +146,7 @@
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation>Edition rapide</translation>
+        <translation>Edition Rapide</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -166,15 +166,15 @@
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation>Barre de défilement</translation>
+        <translation>Barre de Défilement</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation>Afficher la liste des commandes</translation>
+        <translation>Afficher Liste Commandes</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation>Cacher la liste des commandes</translation>
+        <translation>Cacher Liste Commandes</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -201,18 +201,18 @@
     <name>PlayListSelection</name>
     <message>
         <source>Command Selection</source>
-        <translation>Sélection de la commande</translation>
+        <translation>Sélection Commande</translation>
     </message>
 </context>
 <context>
     <name>editCommandBase</name>
     <message>
         <source>Add command</source>
-        <translation>Ajouter une commande</translation>
+        <translation>Ajouter Commande</translation>
     </message>
     <message>
         <source>Enter command to add:</source>
-        <translation>Entrer la commande à ajouter :</translation>
+        <translation>Entrer Commande à ajouter :</translation>
     </message>
 </context>
 </TS>

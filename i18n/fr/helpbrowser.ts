@@ -12,27 +12,27 @@
     </message>
     <message>
         <source>Home</source>
-        <translation>Origine</translation>
+        <translation>Début</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation>Ajouter un signet</translation>
+        <translation>Ajouter Signet</translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>
-        <translation>Effacer des signets</translation>
+        <translation>Effacer Signets</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation>Signets</translation>
+        <translation>Les Signets</translation>
     </message>
     <message>
         <source>Help Browser</source>
-        <translation>Navigateur d&apos;aide</translation>
+        <translation>Naviguer dans l&apos;Aide</translation>
     </message>
     <message>
         <source>HelpBrowser</source>
-        <translation>Navigateur d&apos;aide</translation>
+        <translation>Aide - Navigateur</translation>
     </message>
 </context>
 </TS>

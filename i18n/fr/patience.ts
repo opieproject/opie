@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Snap Sur Position</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -44,7 +44,7 @@
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Snap Sur Position</translation>
     </message>
     <message>
         <source>Turn One Card</source>
