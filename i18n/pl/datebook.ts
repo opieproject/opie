@@ -53,7 +53,7 @@ niz odstep pomiedzy jego powtorzeniami.</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Out of space</source>
@@ -100,23 +100,23 @@ Wyjsc ?</translation>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>T</translation>
     </message>
     <message>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>W</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>F</translation>
     </message>
     <message>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>S</translation>
     </message>
     <message>
         <source>Monday</source>
@@ -151,7 +151,7 @@ Wyjsc ?</translation>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished"></translation>
+        <translation>:00p</translation>
     </message>
 </context>
 <context>
@@ -186,7 +186,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Duplicate</source>
@@ -197,23 +197,23 @@ Wyjsc ?</translation>
     <name>DateBookSettings</name>
     <message>
         <source>:00 PM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 PM</translation>
     </message>
     <message>
         <source>:00 AM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
     <message>
         <source>Calendar</source>
@@ -236,7 +236,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
@@ -244,7 +244,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation type="unfinished">Reset alarmu</translation>
+        <translation>Ustawienie alarmu</translation>
     </message>
     <message>
         <source> minutes</source>
@@ -378,7 +378,7 @@ Wyjsc ?</translation>
     <name>DateBookWeekView</name>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>p</translation>
     </message>
     <message>
         <source>Mo</source>

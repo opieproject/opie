@@ -98,7 +98,7 @@ Zakonczyc?</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation>Importuj vCard</translation>
+        <translation>Importuj wizytowke (vCard)</translation>
     </message>
     <message>
         <source>Close Find</source>
@@ -173,7 +173,7 @@ Czy na pewno chcesz go otworzyc?</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation>Eksportuj vCard</translation>
+        <translation>Eksportuj wizytowke (vCard)</translation>
     </message>
     <message>
         <source>You have to select a contact !</source>
