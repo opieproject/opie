@@ -1,14 +1,32 @@
+
 #include <-ktr.h>
+
+include ( $(OPIEDIR)/gen.pro )
+
+
 # make install
 
 # base opie install path
 prefix = /opt/QtPalmtop
 
+
+contains( CONFIG, quick-app-lib ) {
+    TEMPLATE = lib
+    DESTDIR  = $(OPIEDIR)/plugins/application
+    DEFINES += OPIE_APP_INTERFACE
+}
+contains ( CONFIG, quick-app-bin ) {
+    TEMPLATE = app
+    DESTDIR  = $(OPIEDIR)/bin
+    DEFINES -= OPIE_APP_INTERFACE
+}
+
+
 contains( TEMPLATE, lib ) {
-	target.path = $$prefix/lib
+  target.path = $$prefix/lib
 }
 !contains( TEMPLATE, lib ) {
-	target.path = $$prefix/bin
+  target.path = $$prefix/bin
 }
 INSTALLS += target
 
@@ -79,4 +97,8 @@ QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease mess
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 QMAKE_LIBDIR += $(OPIEDIR)/lib
 
-include ( $(OPIEDIR)/gen.pro )
+MOC_DIR=.moc/$(PLATFORM)
+OBJECTS_DIR=.obj/$(PLATFORM)
+
+#was here now at thetop
+#include ( $(OPIEDIR)/gen.pro )
