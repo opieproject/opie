@@ -734,7 +734,7 @@ void Konsole::configMenuSelected(int iD)
     cfg.setGroup("Menubar");
     if( iD  == -4) {
         cfg.setGroup("Tabs");
-        QString tmp=cfg.readEntry("Position","Top");
+        QString tmp=cfg.readEntry("Position","Bottom");
 
         if(tmp=="Top") {
             tab->setTabPosition(QTabWidget::Bottom);
