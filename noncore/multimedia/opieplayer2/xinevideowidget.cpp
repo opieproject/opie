@@ -1,35 +1,39 @@
 
 /*
-                            This file is part of the Opie Project
+Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
 
-                             Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+Â  Â  Â  Â  Â  Â  Â                 Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+Â  Â  : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+Â : Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
 */
+
+#include "xinevideowidget.h"
+#include <opie2/odebug.h>
 
 #include <qimage.h>
 #include <qdirectpainter_qws.h>
@@ -39,7 +43,8 @@
 
 #include <qpe/resource.h>
 
-#include "xinevideowidget.h"
+#include <pthread.h>
+
 
 
 // 0 deg rot: copy a line from src to dst (use libc memcpy)
@@ -112,27 +117,41 @@ static inline void memcpy_step_rev ( void *_dst, void *_src, size_t len, size_t 
 
 
 XineVideoWidget::XineVideoWidget ( QWidget* parent, const char* name )
-	: QWidget ( parent, name, WRepaintNoErase | WResizeNoErase )
+    : QWidget ( parent, name, WRepaintNoErase | WResizeNoErase )
 {
-	setBackgroundMode ( NoBackground );
+    setBackgroundMode ( NoBackground );
 
-	m_logo              = 0;
-	m_buff              = 0;
-	m_bytes_per_line_fb = qt_screen-> linestep ( );
-	m_bytes_per_pixel   = ( qt_screen->depth() + 7 ) / 8;
-	m_rotation          = 0;
+    m_logo              = 0;
+    m_buff              = 0;
+    m_bytes_per_line_fb = qt_screen-> linestep ( );
+    m_bytes_per_pixel   = ( qt_screen->depth() + 7 ) / 8;
+    m_rotation          = 0;
+    m_lastsize = 0;
 }
 
 
 XineVideoWidget::~XineVideoWidget ( )
 {
-	delete m_logo;
+    ThreadUtil::AutoLock a(m_bufmutex);
+    if (m_buff) {
+        delete[]m_buff;
+        m_lastsize=0;
+        m_buff = 0;
+    }
+    if (m_logo) {
+        delete m_logo;
+    }
 }
 
 void XineVideoWidget::clear ( )
 {
-	m_buff = 0;
-	repaint ( false );
+    ThreadUtil::AutoLock a(m_bufmutex);
+    if (m_buff) {
+        delete[]m_buff;
+        m_lastsize=0;
+        m_buff = 0;
+    }
+    repaint ( false );
 }
 
 QSize XineVideoWidget::videoSize() const
@@ -152,145 +171,167 @@ QSize XineVideoWidget::videoSize() const
 
 void XineVideoWidget::paintEvent ( QPaintEvent * )
 {
-	if ( m_buff == 0 ) {
-		QPainter p ( this );
-		p. fillRect ( rect ( ), black );
-		if ( m_logo )
-			p. drawImage ( 0, 0, *m_logo );
-	}
-	else {
-		// Qt needs to be notified which areas were really updated .. strange
-		QArray <QRect> qt_bug_workaround_clip_rects;
+    ThreadUtil::AutoLock a(m_bufmutex);
+    QPainter p ( this );
+    p. fillRect ( rect (), black );
+    if (m_logo)
+        p. drawImage ( 0, 0, *m_logo );
+}
 
-		{
-			QDirectPainter dp ( this );
+void XineVideoWidget::paintEvent2 ( QPaintEvent * )
+{
+    ThreadUtil::AutoLock a(m_bufmutex);
+    if ( m_buff == 0 ) {
+        QPainter p ( this );
+        p. fillRect ( rect ( ), black );
+        if ( m_logo )
+            p. drawImage ( 0, 0, *m_logo );
+    }
+    else {
+        // Qt needs to be notified which areas were really updated .. strange
+        QArray <QRect> qt_bug_workaround_clip_rects;
 
-			int rot = dp. transformOrientation ( ) + m_rotation; // device rotation + custom rotation
+        {
+            QDirectPainter dp ( this );
 
-			uchar *fb = dp. frameBuffer ( );
-			uchar *frame = m_buff;
+            int rot = dp. transformOrientation ( ) + m_rotation; // device rotation + custom rotation
 
-			// where is the video frame in fb coordinates
-			QRect framerect = qt_screen-> mapToDevice ( QRect ( mapToGlobal ( m_thisframe. topLeft ( )), m_thisframe. size ( )), QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
+            uchar *fb = dp. frameBuffer ( );
+            uchar *frame = m_buff;
 
-			qt_bug_workaround_clip_rects. resize ( dp. numRects ( ));
+            // where is the video frame in fb coordinates
+            QRect framerect = qt_screen-> mapToDevice ( QRect ( mapToGlobal ( m_thisframe. topLeft ( )), m_thisframe. size ( )), QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
 
-			for ( int i = dp. numRects ( ) - 1; i >= 0; i-- ) {
-				const QRect &clip = dp. rect ( i );
+            qt_bug_workaround_clip_rects. resize ( dp. numRects ( ));
 
-				qt_bug_workaround_clip_rects [ i ] = qt_screen-> mapFromDevice ( clip, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
+            for ( int i = dp. numRects ( ) - 1; i >= 0; i-- ) {
+                const QRect &clip = dp. rect ( i );
 
-				uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb ); 	// clip x/y in the fb
-				uchar *src = frame;
+                qt_bug_workaround_clip_rects [ i ] = qt_screen-> mapFromDevice ( clip, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
 
-				// Adjust the start the source data based on the rotation (xine frame)
-				switch ( rot ) {
-					case  0: src += ((( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame )); break;
-					case  1: src += ((( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_pixel )); break;
-					case  2: src += ((( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame )); break;
-					case  3: src += ((( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame )); break;
-					default: break;
-				}
+                uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb );  // clip x/y in the fb
+                uchar *src = frame;
 
-				// all of the following widths/heights are fb relative (0deg rotation)
+                // Adjust the start the source data based on the rotation (xine frame)
+                switch ( rot ) {
+                    case  0: src += ((( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame )); break;
+                    case  1: src += ((( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_pixel )); break;
+                    case  2: src += ((( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame )); break;
+                    case  3: src += ((( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame )); break;
+                    default: break;
+                }
 
-				uint leftfill = 0;   // black border on the "left" side of the video frame
-				uint framefill = 0;  // "width" of the video frame
-				uint rightfill = 0;  // black border on the "right" side of the video frame
-				uint clipwidth = clip. width ( ) * m_bytes_per_pixel;  // "width" of the current clip rect
+                // all of the following widths/heights are fb relative (0deg rotation)
 
-				if ( clip. left ( ) < framerect. left ( ))
-					leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
-				if ( clip. right ( ) > framerect. right ( ))
-					rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
+                uint leftfill = 0;   // black border on the "left" side of the video frame
+                uint framefill = 0;  // "width" of the video frame
+                uint rightfill = 0;  // black border on the "right" side of the video frame
+                uint clipwidth = clip. width ( ) * m_bytes_per_pixel;  // "width" of the current clip rect
 
-				framefill = clipwidth - ( leftfill + rightfill );
+                if ( clip. left ( ) < framerect. left ( ))
+                    leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
+                if ( clip. right ( ) > framerect. right ( ))
+                    rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
 
-				for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
-					if (( y < framerect. top ( )) || ( y > framerect. bottom ( ))) {
-						// "above" or "below" the video -> black
-						memset ( dst, 0, clipwidth );
-					}
-					else {
-						if ( leftfill )
-							memset ( dst, 0, leftfill ); // "left" border -> black
+                framefill = clipwidth - ( leftfill + rightfill );
 
-						if ( framefill ) { // blit in the video frame
-							// see above for an explanation of the different memcpys
+                for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
+                    if (( y < framerect. top ( )) || ( y > framerect. bottom ( ))) {
+                        // "above" or "below" the video -> black
+                        memset ( dst, 0, clipwidth );
+                    }
+                    else {
+                        if ( leftfill )
+                            memset ( dst, 0, leftfill ); // "left" border -> black
 
-							switch ( rot ) {
-								case  0: memcpy ( dst + leftfill, src, framefill & ~1 ); break;
-								case  1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
-								case  2: memcpy_rev ( dst + leftfill, src, framefill ); break;
-								case  3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
-								default: break;
-							}
-						}
-						if ( rightfill )
-							memset ( dst + leftfill + framefill, 0, rightfill ); // "right" border -> black
-					}
+                        if ( framefill ) { // blit in the video frame
+                            // see above for an explanation of the different memcpys
 
-					dst += m_bytes_per_line_fb; // advance one line in the framebuffer
+                            switch ( rot ) {
+                                case  0: memcpy ( dst + leftfill, src, framefill & ~1 ); break;
+                                case  1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
+                                case  2: memcpy_rev ( dst + leftfill, src, framefill ); break;
+                                case  3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
+                                default: break;
+                            }
+                        }
+                        if ( rightfill )
+                            memset ( dst + leftfill + framefill, 0, rightfill ); // "right" border -> black
+                    }
 
-					// advance one "line" in the xine frame data
-					switch ( rot ) {
-						case  0: src += m_bytes_per_line_frame;	break;
-						case  1: src -= m_bytes_per_pixel;      break;
-						case  2: src -= m_bytes_per_line_frame; break;
-						case  3: src += m_bytes_per_pixel;      break;
-						default: break;
-					}
-				}
-			}
-		}
+                    dst += m_bytes_per_line_fb; // advance one line in the framebuffer
 
-		{
-			// QVFB hack by Martin Jones
-			// We need to "touch" all affected clip rects with a normal QPainter in addition to the QDirectPainter
+                    // advance one "line" in the xine frame data
+                    switch ( rot ) {
+                        case  0: src += m_bytes_per_line_frame; break;
+                        case  1: src -= m_bytes_per_pixel;      break;
+                        case  2: src -= m_bytes_per_line_frame; break;
+                        case  3: src += m_bytes_per_pixel;      break;
+                        default: break;
+                    }
+                }
+            }
+        }
 
-			QPainter p ( this );
+        {
+            // QVFB hack by Martin Jones
+            // We need to "touch" all affected clip rects with a normal QPainter in addition to the QDirectPainter
 
-			for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
-				p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [ i ]. topLeft ( )), qt_bug_workaround_clip_rects [ i ]. size ( )), QBrush ( NoBrush ));
-			}
-		}
-	}
+            QPainter p ( this );
+
+            for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
+                p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [ i ]. topLeft ( )), qt_bug_workaround_clip_rects [ i ]. size ( )), QBrush ( NoBrush ));
+            }
+        }
+    }
 }
 
 
 QImage *XineVideoWidget::logo ( ) const
 {
-	return m_logo;
+    return m_logo;
 }
 
 
 void XineVideoWidget::setLogo ( QImage* logo )
 {
-	delete m_logo;
-	m_logo = logo;
+    delete m_logo;
+    m_logo = logo;
 }
 
 void XineVideoWidget::setVideoFrame ( uchar* img, int w, int h, int bpl )
 {
-	bool rot90 = (( -m_rotation ) & 1 );
+    // mutex area for AutoLock
+    {
+        if (m_bufmutex.isLocked()) {
+            // no time to wait - drop frame
+            return;
+        }
+        ThreadUtil::AutoLock a(m_bufmutex);
+        bool rot90 = (( -m_rotation ) & 1 );
+        int l = h*m_bytes_per_pixel*w;
+        if (l>m_lastsize) {
+            if (m_buff) {
+                delete[]m_buff;
+            }
+            m_buff = new uchar[l];
+            m_lastsize=l;
+        }
 
-	if ( rot90 ) { // if the rotation is 90 or 270 we have to swap width / height
-		int d = w;
-		w = h;
-		h = d;
-	}
+        if ( rot90 ) { // if the rotation is 90 or 270 we have to swap width / height
+            int d = w;
+            w = h;
+            h = d;
+        }
 
-	m_lastframe = m_thisframe;
-	m_thisframe. setRect (( width ( ) - w ) / 2, ( height ( ) - h ) / 2, w , h );
+        m_lastframe = m_thisframe;
+        m_thisframe. setRect (( width ( ) - w ) / 2, ( height ( ) - h ) / 2, w , h );
 
-	m_buff                 = img;
-	m_bytes_per_line_frame = bpl;
+        memcpy(m_buff,img,m_lastsize);
+        m_bytes_per_line_frame = bpl;
+    } // Release Mutex
 
-	// only repaint the area that *really* needs to be repainted
-
-	repaint ((( m_thisframe & m_lastframe ) != m_lastframe ) ? m_lastframe : m_thisframe, false );
-	// ensure that we always have a valid frame!
-	m_buff = 0;
+    paintEvent2(0);
 }
 
 void XineVideoWidget::resizeEvent ( QResizeEvent * )
@@ -301,6 +342,6 @@ void XineVideoWidget::resizeEvent ( QResizeEvent * )
 
 void XineVideoWidget::mouseReleaseEvent ( QMouseEvent * /*me*/ )
 {
-	emit clicked();
+    emit clicked();
 }
 

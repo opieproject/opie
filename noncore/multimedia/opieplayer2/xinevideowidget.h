@@ -1,35 +1,36 @@
-/*
-                            This file is part of the Opie Project
 
-                             Copyright (c)  2002 Robert Griebl <sandman@handhelds.org>
+/*
+Â  Â  Â  Â  Â  Â  Â  Â              This file is part of the Opie Project
+
+Â  Â  Â  Â  Â  Â  Â                 Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
                              Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
               =.
             .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
+Â  Â  Â  Â  Â  Â .>+-=
+Â _;:, Â  Â  .> Â  Â :=|.         This program is free software; you can
+.> <`_, Â  > Â . Â  <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.-- Â  :           the terms of the GNU General Public
+.="- .-=="i, Â  Â  .._         License as published by the Free Software
+Â - . Â  .-<_> Â  Â  .<>         Foundation; either version 2 of the License,
+Â  Â  Â ._= =} Â  Â  Â  :          or (at your option) any later version.
+Â  Â  .%`+i> Â  Â  Â  _;_.
+Â  Â  .i_,=:_. Â  Â  Â -<s.       This program is distributed in the hope that
+Â  Â  Â + Â . Â -:. Â  Â  Â  =       it will be useful,  but WITHOUT ANY WARRANTY;
+Â  Â  : .. Â  Â .:, Â  Â  . . .    without even the implied warranty of
+Â  Â  =_ Â  Â  Â  Â + Â  Â  =;=|`    MERCHANTABILITY or FITNESS FOR A
+Â  _.=:. Â  Â  Â  : Â  Â :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.= Â  Â  Â  = Â  Â  Â  ;      Library General Public License for more
+++= Â  -. Â  Â  .` Â  Â  .:       details.
+Â : Â  Â  = Â ...= . :.=-
+Â -. Â  .:....=;==+<;          You should have received a copy of the GNU
+Â  -_. . . Â  )=. Â =           Library General Public License along with
+Â  Â  -- Â  Â  Â  Â :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
 */
-
 
 
 #include <qwidget.h>
@@ -41,7 +42,7 @@ class QImage;
 
 class XineVideoWidget : public QWidget {
     Q_OBJECT
-    
+
 public:
     XineVideoWidget ( QWidget* parent,  const char* name );
     ~XineVideoWidget ( );
@@ -53,8 +54,9 @@ public:
     QSize videoSize() const;
 
 protected:
-    void paintEvent( QPaintEvent *p );
-    void resizeEvent ( QResizeEvent *r );
+    void paintEvent2( QPaintEvent *p );
+    virtual void paintEvent(QPaintEvent*);
+    virtual void resizeEvent ( QResizeEvent *r );
 
     void mouseReleaseEvent ( QMouseEvent *e );
 
@@ -70,7 +72,9 @@ private:
     int     m_bytes_per_line_fb;
     int     m_bytes_per_line_frame;
     int     m_bytes_per_pixel;
+    int     m_lastsize;
     QImage *m_logo;
     mutable int     m_rotation;
+    ThreadUtil::Mutex m_bufmutex;
 };
 
