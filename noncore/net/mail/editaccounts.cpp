@@ -76,7 +76,7 @@ void EditAccounts::slotNewAccount( const QString &type )
     } else if ( type.compare( "POP3" ) == 0 ) {
         qDebug( "-> config POP3" );
         POP3account *account = new POP3account();
-        POP3config pop3( account, this, 0, true );
+        POP3config pop3( account, this, 0, true, WStyle_ContextHelp );
         pop3.showMaximized();
         if ( QDialog::Accepted == pop3.exec() ) {
             settings->addAccount( account );
@@ -88,7 +88,7 @@ void EditAccounts::slotNewAccount( const QString &type )
     } else if ( type.compare( "SMTP" ) == 0 ) {
         qDebug( "-> config SMTP" );
         SMTPaccount *account = new SMTPaccount();
-        SMTPconfig smtp( account, this, 0, true );
+        SMTPconfig smtp( account, this, 0, true, WStyle_ContextHelp );
         smtp.showMaximized();
         if ( QDialog::Accepted == smtp.exec() ) {
             settings->addAccount( account );
@@ -101,7 +101,7 @@ void EditAccounts::slotNewAccount( const QString &type )
     } else if ( type.compare( "NNTP" ) == 0 ) {
         qDebug( "-> config NNTP" );
         NNTPaccount *account = new NNTPaccount();
-        NNTPconfig nntp( account, this, 0, true );
+        NNTPconfig nntp( account, this, 0, true, WStyle_ContextHelp );
         nntp.showMaximized();
         if ( QDialog::Accepted == nntp.exec() ) {
             settings->addAccount( account );
@@ -117,28 +117,28 @@ void EditAccounts::slotEditAccount( Account *account )
 {
     if ( account->getType().compare( "IMAP" ) == 0 ) {
         IMAPaccount *imapAcc = static_cast<IMAPaccount *>(account);
-        IMAPconfig imap( imapAcc, this, 0, true );
+        IMAPconfig imap( imapAcc, this, 0, true, WStyle_ContextHelp );
         imap.showMaximized();
         if ( QDialog::Accepted == imap.exec() ) {
            slotFillLists();
         }
     } else if ( account->getType().compare( "POP3" ) == 0 ) {
         POP3account *pop3Acc = static_cast<POP3account *>(account);
-        POP3config pop3( pop3Acc, this, 0, true );
+        POP3config pop3( pop3Acc, this, 0, true, WStyle_ContextHelp );
         pop3.showMaximized();
         if ( QDialog::Accepted == pop3.exec() ) {
            slotFillLists();
         }
     } else if ( account->getType().compare( "SMTP" ) == 0 ) {
         SMTPaccount *smtpAcc = static_cast<SMTPaccount *>(account);
-        SMTPconfig smtp( smtpAcc, this, 0, true );
+        SMTPconfig smtp( smtpAcc, this, 0, true, WStyle_ContextHelp );
         smtp.showMaximized();
         if ( QDialog::Accepted == smtp.exec() ) {
            slotFillLists();
         }
     } else if ( account->getType().compare( "NNTP" ) == 0 ) {
         NNTPaccount *nntpAcc = static_cast<NNTPaccount *>(account);
-        NNTPconfig nntp( nntpAcc, this, 0, true );
+        NNTPconfig nntp( nntpAcc, this, 0, true, WStyle_ContextHelp );
         nntp.showMaximized();
         if ( QDialog::Accepted == nntp.exec() ) {
            slotFillLists();

@@ -14,7 +14,7 @@
 #include "selectstore.h"
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
-    : MainWindow( parent, name, flags )
+    : MainWindow( parent, name, WStyle_ContextHelp )
 {
     settings = new Settings();
 
@@ -42,7 +42,7 @@ void OpieMail::appMessage(const QCString &msg, const QByteArray &data)
 
 void OpieMail::slotwriteMail(const QString&name,const QString&email)
 {
-    ComposeMail compose( settings, this, 0 , true );
+    ComposeMail compose( settings, this, 0, true , WStyle_ContextHelp );
     if (!email.isEmpty()) {
         if (!name.isEmpty()) {
             compose.setTo("\"" + name + "\"" + " " + "<"+ email + ">");
@@ -91,7 +91,7 @@ void OpieMail::slotSearchMails()
 
 void OpieMail::slotEditSettings()
 {
-    SettingsDialog settingsDialog( this,  0, true );
+    SettingsDialog settingsDialog( this,  0, true,  WStyle_ContextHelp );
     settingsDialog.showMaximized();
     settingsDialog.exec();
 }
@@ -99,7 +99,7 @@ void OpieMail::slotEditSettings()
 void OpieMail::slotEditAccounts()
 {
     qDebug( "Edit Accounts" );
-    EditAccounts eaDialog( settings, this, 0, true );
+    EditAccounts eaDialog( settings, this, 0, true,  WStyle_ContextHelp );
     eaDialog.showMaximized();
     eaDialog.slotAdjustColumns();
     eaDialog.exec();
@@ -115,7 +115,7 @@ void OpieMail::displayMail()
     if (!item) return;
     RecMail mail = ((MailListViewItem*)item)->data();
     RecBody body = folderView->fetchBody(mail);
-    ViewMail readMail( this );
+    ViewMail readMail( this,"", Qt::WType_Modal | WStyle_ContextHelp  );
     readMail.setBody( body );
     readMail.setMail( mail );
     readMail.showMaximized();
@@ -124,7 +124,7 @@ void OpieMail::displayMail()
     if (  readMail.deleted ) {
          folderView->refreshCurrent();
     } else {
-        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "") );
+        ( (MailListViewItem*)item )->setPixmap( 0, Resource::loadPixmap( "" ) );
     }
 }
 

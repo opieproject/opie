@@ -31,7 +31,7 @@ class ViewMail : public ViewMailBase
 	Q_OBJECT
 
 public:
-	ViewMail(  QWidget *parent = 0, const char *name = 0, WFlags fl = Qt::WType_Modal);
+	ViewMail(  QWidget *parent = 0, const char *name = 0, WFlags fl = 0);
 	~ViewMail();
 
 	void hide();
