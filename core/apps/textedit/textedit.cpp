@@ -832,7 +832,9 @@ void TextEdit::updateCaption( const QString &name )
 void TextEdit::setDocument(const QString& fileref)
 {
     bFromDocView = TRUE;
-        openFile(DocLnk(fileref));
+    openFile(fileref);
+//  bFromDocView = TRUE;
+//         openFile(DocLnk(fileref));
 //    showEditTools();
 }
 
