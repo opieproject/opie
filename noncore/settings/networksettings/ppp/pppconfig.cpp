@@ -1,8 +1,3 @@
-
-#include <qlayout.h>
-#include <qmessagebox.h>
-#include <qtabwidget.h>
-
 #include "accounts.h"
 #include "devices.h"
 #include "general.h"
@@ -11,6 +6,15 @@
 #include "pppconfig.h"
 #include "pppdata.h"
 #include "runtests.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qlayout.h>
+#include <qmessagebox.h>
+#include <qtabwidget.h>
 
 PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
                                   const char *name,

@@ -1,15 +1,19 @@
-
-#include <qlayout.h>
-#include <qmessagebox.h>
-#include <qtoolbutton.h>
-#include <qwhatsthis.h>
-
 #include "auth.h"
 #include "authwidget.h"
 #include "edit.h"
 #include "pppdata.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
+/* QT */
+#include <qlayout.h>
+#include <qmessagebox.h>
+#include <qtoolbutton.h>
+#include <qwhatsthis.h>
+
+/* XPM */
 static const char* const image0_data[] = {
 "16 16 2 1",
 ". c None",

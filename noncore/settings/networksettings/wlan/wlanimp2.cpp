@@ -1,13 +1,22 @@
 #include "wlanimp2.h"
 #include "keyedit.h"
 #include "interfacesetupimp.h"
-
 #include "../interfaces/interface.h"
 
 #include <assert.h>
 #include <errno.h>
 #include <string.h>
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/oprocess.h>
+#include <opie2/onetwork.h>
+#include <opie2/opcap.h>
+#include <qpe/resource.h>
+using namespace Opie::Core;
+using namespace Opie::Net;
+
+/* QT */
 #include <qapplication.h>
 #include <qfile.h>
 #include <qdir.h>
@@ -26,15 +35,10 @@
 #include <qvbox.h>
 #include <qprogressbar.h>
 
-#ifdef QWS
- #include <qpe/resource.h>
- #include <opie2/oprocess.h>
- #include <opie2/onetwork.h>
- #include <opie2/opcap.h>
-#else
- #define OProcess KProcess
- #include <kprocess.h>
-#endif
+/* STD */
+#include <assert.h>
+#include <errno.h>
+#include <string.h>
 
 #define WIRELESS_OPTS "/etc/pcmcia/wireless.opts"
 #define PREUP "/etc/network/if-pre-up.d/wireless-tools"
@@ -42,8 +46,6 @@
 /**
  * Constructor, read in the wireless.opts file for parsing later.
  */
-using namespace Opie::Net;
-using namespace Opie::Core;
 WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : WLAN(parent, name, modal, fl), interface(i), currentProfile("*") {
   interfaces = new Interfaces();
   interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, interfaces);

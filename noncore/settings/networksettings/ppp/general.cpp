@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.8 2004-04-04 13:55:00 mickeyl Exp $
+ * $Id: general.cpp,v 1.9 2004-04-09 15:00:07 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -31,8 +31,10 @@
 #include "pppdata.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qcheckbox.h>

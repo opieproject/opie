@@ -24,17 +24,18 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-//#include <config.h>
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qlayout.h>
 #include <qregexp.h>
-
 #include <qapplication.h>
-//#include <kdebug.h>
-//#include <klocale.h>
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 
+/* STD */
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>

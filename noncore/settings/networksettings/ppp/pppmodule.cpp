@@ -7,8 +7,10 @@
 #include "interfaceppp.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
 /* QT */
 

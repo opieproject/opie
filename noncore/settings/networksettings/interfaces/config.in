@@ -1,4 +1,4 @@
   config INTERFACES
-    boolean
-    default "y" if NETWORKSETUP
+    boolean "Build interfaces for networksettings"
+    default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

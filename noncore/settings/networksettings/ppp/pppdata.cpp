@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.13 2004-04-04 13:55:01 mickeyl Exp $
+ * $Id: pppdata.cpp,v 1.14 2004-04-09 15:00:07 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -26,15 +26,17 @@
 
 #include "pppdata.h"
 #include "runtests.h"
-//#include "devices.h"
-//#include <klocale.h>
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/config.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qmessagebox.h>
 #include <qapplication.h>
-// #include <klocale.h>
-// #include <kconfig.h>
-// #include <kmessagebox.h>
-// #include <kapplication.h>
+
+/* STD */
 #include <assert.h>
 
 #define SEPARATOR -sseepp-

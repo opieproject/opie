@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.9 2004-04-04 13:55:01 mickeyl Exp $
+ * $Id: modem.cpp,v 1.10 2004-04-09 15:00:07 mickeyl Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -24,6 +24,11 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* STD */
 #include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.4 2004-04-04 13:55:00 mickeyl Exp $
+ * $Id: devices.cpp,v 1.5 2004-04-09 15:00:07 mickeyl Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -32,7 +32,9 @@
 #include "general.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qdir.h>

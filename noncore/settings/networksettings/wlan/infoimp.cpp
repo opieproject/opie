@@ -1,6 +1,11 @@
 #include "infoimp.h"
 #include "wextensions.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qtimer.h>
 #include <qprogressbar.h>
 #include <qlabel.h>

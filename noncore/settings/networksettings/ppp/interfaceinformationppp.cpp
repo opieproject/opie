@@ -1,12 +1,16 @@
 #include "interfaceinformationppp.h"
+#include "connect.h"
+#include "conwindow.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qmessagebox.h>
 #include <qabstractlayout.h>
-
-#include "connect.h"
-#include "conwindow.h"
 
 #ifdef QWS
 #else

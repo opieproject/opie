@@ -1,13 +1,17 @@
-
-#include <qmessagebox.h>
-#include <qlayout.h>
-#include <qlineedit.h>
-#include <qlabel.h>
-
 #include "auth.h"
 #include "interfaceppp.h"
 #include "modem.h"
 #include "pppdata.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qmessagebox.h>
+#include <qlayout.h>
+#include <qlineedit.h>
+#include <qlabel.h>
 
 InterfacePPP::InterfacePPP(QObject *parent, const char *name, bool status)
     : Interface(parent, name, status),

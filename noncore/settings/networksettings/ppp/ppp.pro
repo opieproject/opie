@@ -1,7 +1,4 @@
-#TEMPLATE        = app
-#
 TEMPLATE        = lib
-#CONFIG          += qt plugin warn_on 
 CONFIG		+= qt plugin warn_on 
 DESTDIR         = $(OPIEDIR)/plugins/networksettings
 HEADERS		= pppmodule.h  modem.h modeminfo.h pppdata.h kpppconfig.h pppdata.h runtests.h general.h modemcmds.h conwindow.h accounts.h connect.h edit.h scriptedit.h pppdargs.h  iplined.h pwentry.h pppconfig.h interfaceinformationppp.h interfaceppp.h authwidget.h chooserwidget.h devices.h

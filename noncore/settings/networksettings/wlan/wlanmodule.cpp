@@ -6,7 +6,9 @@
 #include "interfaceinformationimp.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qcheckbox.h>

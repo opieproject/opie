@@ -1,4 +1,4 @@
   config PPP
     boolean "opie-networksettingsplugin-kppp (PPP module)"
-    default "n" if NETWORKSETUP
+    default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && NETWORKSETUP && NETWORKSETUP-CORE && INTERFACES

@@ -1,17 +1,24 @@
 #include "wextensions.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qfile.h>
 #include <qtextstream.h>
 
+/* STD */
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
-
 #include <math.h>
 
 #define PROCNETWIRELESS "/proc/net/wireless"
 #define IW_LOWER 0
 #define IW_UPPER 256
+
+#warning This is duplicated code. Use libopienet2!
 
 /**
  * Constructor.  Sets hasWirelessExtensions

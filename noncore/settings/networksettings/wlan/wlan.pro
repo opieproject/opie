@@ -1,8 +1,5 @@
-#
 TEMPLATE        = lib
-#TEMPLATE        = app
 CONFIG          += qt plugin warn_on 
-#CONFIG		+= qt plugin warn_on 
 DESTDIR         = $(OPIEDIR)/plugins/networksettings
 HEADERS		= infoimp.h wlanmodule.h wextensions.h keyedit.h
 SOURCES		= infoimp.cpp wlanmodule.cpp wextensions.cpp keyedit.cpp
