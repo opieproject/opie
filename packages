@@ -15,6 +15,7 @@ CONFIG_BIGSCREEN_EXAMPLE       libopie/big-screen/example      osplitter_mail.pr
 CONFIG_BINARY	noncore/tools/calc2/binary	binary.pro
 CONFIG_BLUE-PIN	noncore/net/opietooth/blue-pin	blue-pin.pro
 CONFIG_BOUNCE	noncore/games/bounce	bounce.pro
+CONFIG_BRIGHTNESSAPPLET	noncore/applets/brightnessapplet	brightnessapplet.pro
 CONFIG_BUTTON-SETTINGS	core/settings/button	button.pro
 CONFIG_BUZZWORD	noncore/games/buzzword	buzzword.pro
 CONFIG_CALC2	noncore/tools/calc2	calc.pro

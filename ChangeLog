@@ -3,6 +3,7 @@
 	New Features
 	------------
 	* Ported opie-mediaplayer2 to recent libxine (brad,zecke)
+	* Ported brightnessapplet from Qtopia 1.7 (mickeyl)
 
 	Fixed Bugs
 	----------
