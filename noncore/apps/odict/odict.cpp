@@ -46,18 +46,21 @@ ODict::ODict() : QMainWindow()
 	setupMenus();
 
 	QHBox *hbox = new QHBox( vbox );
-	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); query_label->show();
+	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); 
+	query_label->show();
 	query_le = new QLineEdit( hbox );
 	query_co = new QComboBox( hbox );
-	connect( query_co , SIGNAL( activated(int) ), this, SLOT( slotMethodChanged(int) ) );
+	connect( query_co , SIGNAL( activated(const QString&) ), this, SLOT( slotMethodChanged(const QString&) ) );
 	ok_button = new QPushButton( tr( "&Ok" ), hbox );
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
+	top_name = new QLabel( vbox );
 	browser_top = new QTextBrowser( vbox );
+	bottom_name = new QLabel( vbox );
 	browser_bottom = new QTextBrowser( vbox );
 
 	ding = new DingWidget();
 	ding->loadValues();
-
+	
 	loadConfig();
 	setCentralWidget( vbox );
 }
@@ -78,7 +81,7 @@ void ODict::loadConfig()
 		cfg.setGroup( *it );
 		query_co->insertItem( cfg.readEntry( "Name" ) );
 	}
-	slotMethodChanged( 1 );           //FIXME: this line should not contain a integer
+//XXX	slotMethodChanged( "1" );           //FIXME: this line should not contain a integer
 }
 
 
@@ -94,42 +97,47 @@ void ODict::saveConfig()
 
 void ODict::slotStartQuery()
 {
-	/*
-	 * if the user has not yet defined a dictionary
-	 */
-	if ( !query_co->currentText() )
+	if ( !query_le->text( ).isEmpty() )
 	{
-		switch (  QMessageBox::information(  this, tr( "OPIE-Dictionary" ),
-					tr( "No dictionary defined" ),
-					tr( "&Define one" ), 
-					tr( "&Cancel" ),
-					0,      // Define a dict choosen
-					1 ) )   // Cancel choosen
-		{ 
+		/*
+		 * if the user has not yet defined a dictionary
+		 */
+		if ( !query_co->currentText() )
+		{
+			switch (  QMessageBox::information(  this, tr( "OPIE-Dictionary" ),
+						tr( "No dictionary defined" ),
+						tr( "&Define one" ), 
+						tr( "&Cancel" ),
+						0,      // Define a dict choosen
+						1 ) )   // Cancel choosen
+			{ 
 
-			case 0:
-				slotSettings();
-				break;
-			case 1: // stop here
-				return;
-		}
-	}				
+				case 0:
+					slotSettings();
+					break;
+				case 1: // stop here
+					return;
+			}
+		}				
 
-	/*
-	 * ok, the user has defined a dict
-	 */
-	QString querystring = query_le->text();
-	ding->setCaseSensitive( casesens ); 
-	ding->setCompleteWord( completewords ); 
-	ding->setDict( activated_name );
+		/*
+		 * ok, the user has defined a dict
+		 */
+		QString querystring = query_le->text();
+		ding->setCaseSensitive( casesens ); 
+		ding->setCompleteWord( completewords ); 
+		ding->setDict( activated_name );
+		top_name->setText(  ding->lang1_name );
+		bottom_name->setText( ding->lang2_name );
 
-	if ( activated_name != ding->loadedDict() )
-		ding->loadDict(activated_name);
+		if ( activated_name != ding->loadedDict() )
+			ding->loadDict(activated_name);
 
-	BroswerContent test = ding->setText( querystring );
+		BroswerContent test = ding->setText( querystring );
 
-	browser_top->setText( test.top );
-	browser_bottom->setText( test.bottom );
+		browser_top->setText( test.top );
+		browser_bottom->setText( test.bottom );
+	}
 }
 
 
@@ -146,7 +154,6 @@ void ODict::slotSettings()
 		dlg.writeEntries();
 		loadConfig();
 	}
-	else qDebug( "abgebrochen" );
 }
 
 void ODict::slotSetParameter( int count )
@@ -176,9 +183,17 @@ void ODict::slotSetParameter( int count )
  	else qWarning( "ERROR" );
 }
 
-void ODict::slotMethodChanged( int /*methodnumber*/ )
+void ODict::slotMethodChanged( const QString& methodnumber )
 {
-	activated_name = query_co->currentText();
+	activated_name =  methodnumber;
+	
+	if ( activated_name != ding->loadedDict() )
+		ding->loadDict(activated_name);
+	
+	top_name->setText(  ding->lang1_name );
+	top_name->setAlignment( AlignHCenter );
+	bottom_name->setText( ding->lang2_name );
+	bottom_name->setAlignment( AlignHCenter );
 }
 
 void ODict::setupMenus()

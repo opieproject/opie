@@ -9,6 +9,7 @@
 
 #include <qmainwindow.h>
 
+class QLabel;
 class QVBox;
 class QPopupMenu;
 class QMenuBar;
@@ -55,11 +56,13 @@ class ODict : public QMainWindow
 		void saveConfig();
 
 		QString activated_name;
+		QLabel  *bottom_name,
+				*top_name;
 	
 	private slots:
 		void slotStartQuery();
 		void slotSetErrorcount( int );
 		void slotSettings();
 		void slotSetParameter( int );
-		void slotMethodChanged( int );
+		void slotMethodChanged( const QString& );
 };

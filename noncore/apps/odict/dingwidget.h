@@ -30,6 +30,9 @@ class DingWidget
 		void setQueryWord( QString );
 		void setDict( QString );
 		void loadValues();
+		
+		QString lang1_name,
+				lang2_name;
 
 	private:
 		BroswerContent parseInfo();

@@ -68,7 +68,7 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 
 void ConfigDlg::writeEntries()
 {
-	qDebug( "richtig beendet" );
+	//XXX wozu gibt es diese Methode?
 }
 		
 void ConfigDlg::slotNewMethod()
@@ -76,12 +76,10 @@ void ConfigDlg::slotNewMethod()
 	SearchMethodDlg dlg( this, "SearchMethodDlg", true );
 	if ( dlg.exec() == QDialog::Accepted )
 	{
-		//if ( !dlg.nameLE->text() ) return; //XXX
 		dlg.saveItem();
 		QListViewItem *item = new QListViewItem( list );
 		item->setText( 0 , dlg.nameLE->text() );
 	}
-	else qDebug( "SearchMethodDlg abgebrochen" );
 }
 
 void ConfigDlg::slotChangeMethod()
@@ -91,14 +89,11 @@ void ConfigDlg::slotChangeMethod()
 		SearchMethodDlg dlg( this, "SearchMethodDlg", true, list->selectedItem()->text( 0 ) );
 		if ( dlg.exec() == QDialog::Accepted )
 		{
-			//if ( !dlg.nameLE->text() ) return; //XXX geht vielleich nicht
 			dlg.saveItem();
 			QListViewItem *item = list->selectedItem();
 			item->setText( 0 , dlg.nameLE->text() );
 		}
-		else qDebug( "SearchMethodDlg abgebrochen" );
 	}
-	else qDebug( "kein item angewählt" );
 }
 
 void ConfigDlg::slotDeleteMethod()
@@ -112,7 +107,6 @@ void ConfigDlg::slotDeleteMethod()
 		
 		list->takeItem( list->selectedItem() );
 	}
-	else qDebug("no item selected"); 
 }
 
 void ConfigDlg::loadSearchMethodNames()

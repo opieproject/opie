@@ -89,6 +89,8 @@ void DingWidget::loadValues()
 	Config cfg(  "odict" );
 	cfg.setGroup( "Method_" + methodname );
 	trenner = cfg.readEntry( "Seperator" );
+	lang1_name = cfg.readEntry( "Lang1" );
+	lang2_name = cfg.readEntry( "Lang2" );
 }
 
 BroswerContent DingWidget::setText( QString word )
