@@ -73,6 +73,7 @@ OColorButton::OColorButton ( QWidget *parent, const QColor &color, const char *n
  */
 OColorButton::~OColorButton ( )
 {
+    delete d->m_menu;
     delete d;
 }
 
