@@ -84,8 +84,8 @@ const char *soundDefaults[] =
 };
 
  
-KAstTopLevel::KAstTopLevel( QWidget *parent, const char *name )
-    : QMainWindow( parent, name )
+KAstTopLevel::KAstTopLevel( QWidget *parent, const char *_name )
+    : QMainWindow( parent, _name )
 {
     setCaption( tr("Asteroids") );
     QWidget *border = new QWidget( this );
