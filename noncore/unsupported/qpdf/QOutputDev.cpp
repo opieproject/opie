@@ -41,22 +41,18 @@
 #include <qapplication.h>
 #include <qclipboard.h>
 
+//#define QPDFDBG(x) x		// special debug mode
+#define QPDFDBG(x)   		// normal compilation
+
 
 //------------------------------------------------------------------------
 // Constants and macros
 //------------------------------------------------------------------------
 
 
-static inline int q_rnd ( fp_t d )
-{
-//	qDebug ( "Q_RND: %f -> %d\n", (double) d, (int) ( d >= 0 ? d +0.5 : d - 0.5 ));
-
-	return (int) ( d >= 0 ? d + 0.5 : d - 0.5 );
-}
-
 static inline QColor q_col ( const GfxRGB &rgb )
 {
-	return QColor ( q_rnd ( rgb. r * 255 ), q_rnd ( rgb. g * 255 ), q_rnd ( rgb. b * 255 ));
+	return QColor ( lrint ( rgb. r * 255 ), lrint ( rgb. g * 255 ), lrint ( rgb. b * 255 ));
 }
 
 
@@ -110,9 +106,9 @@ QFont QOutputDev::matchFont ( GfxFont *gfxFont, fp_t m11, fp_t m12, fp_t m21, fp
 	}
 
 	// compute size and normalized transform matrix
-	int size = q_rnd ( sqrt ( m21 * m21 + m22 * m22 ));
+	int size = lrint ( sqrt ( m21 * m21 + m22 * m22 ));
 
-/*	qDebug ( "SET FONT: Name=%s, Size=%d, Bold=%d, Italic=%d, Mono=%d, Serif=%d, Symbol=%d, CID=%d, EmbFN=%s, M=(%f,%f,%f,%f)\n",
+	QPDFDBG( printf ( "SET FONT: Name=%s, Size=%d, Bold=%d, Italic=%d, Mono=%d, Serif=%d, Symbol=%d, CID=%d, EmbFN=%s, M=(%f,%f,%f,%f)\n",
 	         (( gfxFont-> getName ( )) ? gfxFont-> getName ( )-> getCString ( ) : "<n/a>" ),
 	         size,
 	         gfxFont-> isBold ( ),
@@ -122,8 +118,8 @@ QFont QOutputDev::matchFont ( GfxFont *gfxFont, fp_t m11, fp_t m12, fp_t m21, fp
 	         gfxFont-> isSymbolic ( ),
 	         gfxFont-> isCIDFont ( ),
 	         ( gfxFont-> getEmbeddedFontName ( ) ? gfxFont-> getEmbeddedFontName ( ) : "<n/a>" ),
-	         (double) m11, (double) m12, (double) m21, (double) m22 );
-*/
+	         (double) m11, (double) m12, (double) m21, (double) m22 ));
+
 
 	QString fname (( gfxFont-> getName ( )) ? gfxFont-> getName ( )-> getCString ( ) : "<n/a>" );
 
@@ -185,6 +181,8 @@ QOutputDev::QOutputDev ( QWidget *parent, const char *name, int flags ) : QScrol
 	m_pixmap = 0;
 	m_painter = 0;
 	
+	m_use_string = true;
+	
 	// create text object
 	m_text = new TextPage ( gFalse );
 }
@@ -202,10 +200,10 @@ void QOutputDev::startPage ( int /*pageNum*/, GfxState *state )
 	delete m_pixmap;
 	delete m_painter;
 	
-	m_pixmap = new QPixmap ( q_rnd ( state-> getPageWidth ( )), q_rnd ( state-> getPageHeight ( )));
+	m_pixmap = new QPixmap ( lrint ( state-> getPageWidth ( )), lrint ( state-> getPageHeight ( )));
 	m_painter = new QPainter ( m_pixmap );
 
-//	qDebug ( "NEW PIXMAP (%d x %d)\n", q_rnd ( state-> getPageWidth ( )),  q_rnd ( state-> getPageHeight ( )));
+	QPDFDBG( printf ( "NEW PIXMAP (%ld x %ld)\n", lrint ( state-> getPageWidth ( )),  lrint ( state-> getPageHeight ( ))));
 	
 	resizeContents ( m_pixmap-> width ( ), m_pixmap-> height ( ));
 	setContentsPos ( 0, 0 );
@@ -246,7 +244,7 @@ void QOutputDev::drawLink ( Link *link, Catalog */*catalog*/ )
 
 void QOutputDev::saveState ( GfxState */*state*/ ) 
 {
-//	qDebug ( "SAVE (CLIP=%d/%d)\n",  m_painter-> hasClipping ( ), !m_painter-> clipRegion ( ). isEmpty ( ));
+	QPDFDBG( printf ( "SAVE (CLIP=%d/%d)\n",  m_painter-> hasClipping ( ), !m_painter-> clipRegion ( ). isEmpty ( )));
 
 	m_painter-> save ( );	
 }
@@ -257,7 +255,7 @@ void QOutputDev::restoreState ( GfxState */*state*/ )
 	
 //	m_painter-> setClipRegion ( QRect ( 0, 0, m_pixmap-> width ( ), m_pixmap-> height ( )));
 //	m_painter-> setClipping ( false );
-//	qDebug ( "RESTORE (CLIP=%d/%d)\n", m_painter-> hasClipping ( ), !m_painter-> clipRegion ( ). isEmpty ( ));
+	QPDFDBG ( printf ( "RESTORE (CLIP=%d/%d)\n", m_painter-> hasClipping ( ), !m_painter-> clipRegion ( ). isEmpty ( )));
 }
 
 void QOutputDev::updateAll ( GfxState *state ) 
@@ -283,7 +281,7 @@ void QOutputDev::updateLineDash ( GfxState *state )
 void QOutputDev::updateFlatness ( GfxState */*state*/ ) 
 {
 	// not supported
-//	qDebug ( "updateFlatness not supported !\n" );
+	QPDFDBG( printf ( "updateFlatness not supported !\n" ));
 }
 
 void QOutputDev::updateLineJoin ( GfxState *state ) 
@@ -299,7 +297,7 @@ void QOutputDev::updateLineCap ( GfxState *state )
 // unimplemented
 void QOutputDev::updateMiterLimit ( GfxState */*state*/ ) 
 {
-//	qDebug ( "updateMiterLimit not supported !\n" );
+	QPDFDBG( printf ( "updateMiterLimit not supported !\n" ));
 }
 
 void QOutputDev::updateLineWidth ( GfxState *state ) 
@@ -317,7 +315,7 @@ void QOutputDev::updateLineAttrs ( GfxState *state, GBool updateDash )
 	Qt::PenJoinStyle join;
 	int width;
 
-	width = q_rnd ( state-> getTransformedLineWidth ( ));
+	width = lrint ( state-> getTransformedLineWidth ( ));
 	
 	switch ( state-> getLineCap ( )) {
 		case 0: cap = FlatCap; break;
@@ -409,7 +407,7 @@ void QOutputDev::stroke ( GfxState *state )
 	// transform points
 	int n = convertPath ( state, points, lengths );
 
-//	qDebug ( "DRAWING: %d POLYS\n", n );
+	QPDFDBG( printf ( "DRAWING: %d POLYS\n", n ));
 	
 	// draw each subpath
 	int j = 0;
@@ -417,10 +415,10 @@ void QOutputDev::stroke ( GfxState *state )
 		int len = lengths [i];
 	
 		if ( len >= 2 ) {
-//			qDebug ( " - POLY %d: ", i );
-//			for ( int ii = 0; ii < len; ii++ )
-//				qDebug ( "(%d/%d) ", points [j+ii]. x ( ), points [j+ii]. y ( ));
-//			qDebug ( "\n" );
+			QPDFDBG( printf ( " - POLY %d: ", i ));
+			QPDFDBG( for ( int ii = 0; ii < len; ii++ ))
+				QPDFDBG( printf ( "(%d/%d) ", points [j+ii]. x ( ), points [j+ii]. y ( )));
+			QPDFDBG( printf ( "\n" ));
 			
 			m_painter-> drawPolyline ( points, j, len );
 		}	
@@ -456,7 +454,7 @@ void QOutputDev::doFill ( GfxState *state, bool winding )
 	// transform points
 	int n = convertPath ( state, points, lengths );
 
-//	qDebug ( "FILLING: %d POLYS\n", n );
+	QPDFDBG( printf ( "FILLING: %d POLYS\n", n ));
 	
 	QPen oldpen = m_painter-> pen ( );
 	m_painter-> setPen ( QPen ( NoPen ));
@@ -467,10 +465,10 @@ void QOutputDev::doFill ( GfxState *state, bool winding )
 		int len = lengths [i];
 	
 		if ( len >= 3 ) {
-//			qDebug ( " - POLY %d: ", i );
-//			for ( int ii = 0; ii < len; ii++ )
-//				qDebug ( "(%d/%d) ", points [j+ii]. x ( ), points [j+ii]. y ( ));
-//			qDebug ( "\n" );
+			QPDFDBG( printf ( " - POLY %d: ", i ));
+			QPDFDBG( for ( int ii = 0; ii < len; ii++ ))
+				QPDFDBG( printf ( "(%d/%d) ", points [j+ii]. x ( ), points [j+ii]. y ( )));
+			QPDFDBG( printf ( "\n" ));
 		
 			m_painter-> drawPolygon ( points, winding, j, len );
 		}	
@@ -501,7 +499,7 @@ void QOutputDev::doClip ( GfxState *state, bool winding )
 
 	QRegion region;
 	
-//	qDebug ( "CLIPPING: %d POLYS\n", n );
+	QPDFDBG( printf ( "CLIPPING: %d POLYS\n", n ));
 	
 	// draw each subpath
 	int j = 0;
@@ -512,10 +510,9 @@ void QOutputDev::doClip ( GfxState *state, bool winding )
 			QPointArray dummy;
 			dummy. setRawData ( points. data ( ) + j, len );
 		
-//			qDebug ( " - POLY %d: ", i );
-//			for ( int ii = 0; ii < len; ii++ )
-//				qDebug ( "(%d/%d) ", points [j+ii]. x ( ), points [j+ii]. y ( ));
-//			qDebug ( "\n" );
+			QPDFDBG( printf ( " - POLY %d: ", i ));
+			QPDFDBG( for ( int ii = 0; ii < len; ii++ ) printf ( "(%d/%d) ", points [j+ii]. x ( ), points [j+ii]. y ( )));
+			QPDFDBG( printf ( "\n" ));
 		
 			region |= QRegion ( dummy, winding );
 		
@@ -581,8 +578,8 @@ int QOutputDev::convertSubpath ( GfxState *state, GfxSubpath *subpath, QPointArr
 			state-> transform ( subpath-> getX ( i + 2 ), subpath-> getY ( i + 2 ), &x3, &y3 );
 			
 			QPointArray tmp;
-			tmp. setPoints ( 4, q_rnd ( x0 ), q_rnd ( y0 ), q_rnd ( x1 ), q_rnd ( y1 ),
-			                    q_rnd ( x2 ), q_rnd ( y2 ), q_rnd ( x3 ), q_rnd ( y3 ));
+			tmp. setPoints ( 4, lrint ( x0 ), lrint ( y0 ), lrint ( x1 ), lrint ( y1 ),
+			                    lrint ( x2 ), lrint ( y2 ), lrint ( x3 ), lrint ( y3 ));
 
 #if QT_VERSION < 300
 			tmp = tmp. quadBezier ( );
@@ -601,7 +598,7 @@ int QOutputDev::convertSubpath ( GfxState *state, GfxSubpath *subpath, QPointArr
 		else {
 			state-> transform ( subpath-> getX ( i ), subpath-> getY ( i ), &x1, &y1 );
 			
-			points. putPoints ( points. count ( ), 1, q_rnd ( x1 ), q_rnd ( y1 ));			
+			points. putPoints ( points. count ( ), 1, lrint ( x1 ), lrint ( y1 ));			
 			++i;
 		}
 	}
@@ -624,9 +621,9 @@ void QOutputDev::drawChar ( GfxState *state, fp_t x, fp_t y,
                            CharCode code, Unicode *u, int uLen ) 
 {
 	fp_t x1, y1, dx1, dy1;
-
-	m_text-> addChar ( state, x, y, dx, dy, u, uLen );
-
+	
+	if ( uLen > 0 )
+		m_text-> addChar ( state, x, y, dx, dy, u, uLen );
 
 	// check for invisible text -- this is used by Acrobat Capture
 	if (( state-> getRender ( ) & 3 ) == 3 ) {
@@ -651,7 +648,7 @@ void QOutputDev::drawChar ( GfxState *state, fp_t x, fp_t y,
 			}
 			else {
 				str [i] = ' ';
-//				qDebug ( "CHARACTER NOT IN FONT: %hx\n", c. unicode ( ));
+				QPDFDBG( printf ( "CHARACTER NOT IN FONT: %hx\n", c. unicode ( )));
 			}
 		}
 		
@@ -677,7 +674,7 @@ void QOutputDev::drawChar ( GfxState *state, fp_t x, fp_t y,
 
 			cerr << endl << "ROTATED: " << m11 << ", " << m12 << ", " << m21 << ", " << m22 << " / SIZE: " << fsize << " / TEXT: " << str. local8Bit ( ) << endl << endl;
 						
-			QWMatrix mat ( q_rnd ( m11 / fsize ), q_rnd ( m12 / fsize ), -q_rnd ( m21 / fsize ), -q_rnd ( m22 / fsize ), q_rnd ( x1 ), q_rnd ( y1 ));
+			QWMatrix mat ( lrint ( m11 / fsize ), lrint ( m12 / fsize ), -lrint ( m21 / fsize ), -lrint ( m22 / fsize ), lrint ( x1 ), lrint ( y1 ));
 			
 			m_painter-> setWorldMatrix ( mat );
 
@@ -696,9 +693,9 @@ void QOutputDev::drawChar ( GfxState *state, fp_t x, fp_t y,
 		}	
 
 		if ( fsize > 5 )
-			m_painter-> drawText ( q_rnd ( x1 ), q_rnd ( y1 ), str );
+			m_painter-> drawText ( lrint ( x1 ), lrint ( y1 ), str );
 		else
-			m_painter-> fillRect ( q_rnd ( x1 ), q_rnd ( y1 ), q_rnd ( QMAX( fp_t(1), dx1 )), q_rnd ( QMAX( fsize, dy1 )), m_painter-> pen ( ). color ( ));
+			m_painter-> fillRect ( lrint ( x1 ), lrint ( y1 ), lrint ( QMAX( fp_t(1), dx1 )), lrint ( QMAX( fsize, dy1 )), m_painter-> pen ( ). color ( ));
 		
 		m_painter-> setPen ( oldpen );
 		
@@ -707,7 +704,7 @@ void QOutputDev::drawChar ( GfxState *state, fp_t x, fp_t y,
 			m_painter-> setWorldMatrix ( oldmat );
 #endif	
 		
-//		qDebug ( "DRAW TEXT: \"%s\" at (%d/%d)\n", str. local8Bit ( ). data ( ), q_rnd ( x1 ), q_rnd ( y1 ));
+		QPDFDBG( printf ( "DRAW TEXT: \"%s\" at (%ld/%ld)\n", str. local8Bit ( ). data ( ), lrint ( x1 ), lrint ( y1 )));
 	} 
 	else if ( code != 0 ) {
 		// some PDF files use CID 0, which is .notdef, so just ignore it
@@ -739,13 +736,13 @@ void QOutputDev::drawImageMask ( GfxState *state, Object */*ref*/, Stream *str, 
 	
 	GfxRGB rgb;	
 	state-> getFillRGB ( &rgb );
-	uint val = ( q_rnd ( rgb. r * 255 ) & 0xff ) << 16 | ( q_rnd ( rgb. g * 255 ) & 0xff ) << 8 | ( q_rnd ( rgb. b * 255 ) & 0xff );
+	uint val = ( lrint ( rgb. r * 255 ) & 0xff ) << 16 | ( lrint ( rgb. g * 255 ) & 0xff ) << 8 | ( lrint ( rgb. b * 255 ) & 0xff );
 	
 	
 	QImage img ( width, height, 32 );	
 	img. setAlphaBuffer ( true );
 
-//	qDebug ( "IMAGE MASK (%dx%d)\n", width, height );
+	QPDFDBG( printf ( "IMAGE MASK (%dx%d)\n", width, height ));
 
 	// initialize the image stream
 	ImageStream *imgStr = new ImageStream ( str, width, 1, 1 );
@@ -800,14 +797,14 @@ void QOutputDev::drawImageMask ( GfxState *state, Object */*ref*/, Stream *str, 
 
 #else
 	if (( ctm [1] < -0.1 ) || ( ctm [1] > 0.1 ) || ( ctm [2] < -0.1 ) || ( ctm [2] > 0.1 )) {
-		qDebug (  "### ROTATED / SHEARED / ETC -- CANNOT DISPLAY THIS IMAGE\n" );
+		QPDFDBG( printf (  "### ROTATED / SHEARED / ETC -- CANNOT DISPLAY THIS IMAGE\n" ));
 	}
 	else {
-		int x = q_rnd ( ctm [4] );
-		int y = q_rnd ( ctm [5] );
+		int x = lrint ( ctm [4] );
+		int y = lrint ( ctm [5] );
 		
-		int w = q_rnd ( ctm [0] );
-		int h = q_rnd ( ctm [3] );
+		int w = lrint ( ctm [0] );
+		int h = lrint ( ctm [3] );
 		
 		if ( w < 0 ) {
 			x += w;
@@ -818,7 +815,7 @@ void QOutputDev::drawImageMask ( GfxState *state, Object */*ref*/, Stream *str, 
 			h = -h;
 		}
 	
-//		qDebug ( "DRAWING IMAGE MASKED: %d/%d - %dx%d\n", x, y, w, h );
+		QPDFDBG( printf ( "DRAWING IMAGE MASKED: %d/%d - %dx%d\n", x, y, w, h ));
 
 		img = img. smoothScale ( w, h );
 		qApp-> processEvents ( );		
@@ -863,7 +860,7 @@ void QOutputDev::drawImage(GfxState *state, Object */*ref*/, Stream *str, int wi
 	if ( maskColors )
 		img. setAlphaBuffer ( true );
 
-//	qDebug ( "IMAGE (%dx%d)\n", width, height );
+	QPDFDBG( printf ( "IMAGE (%dx%d)\n", width, height ));
 
 	// initialize the image stream
 	ImageStream *imgStr = new ImageStream ( str, width, nComps, nBits );
@@ -888,7 +885,7 @@ void QOutputDev::drawImage(GfxState *state, Object */*ref*/, Stream *str, int wi
 			imgStr-> getPixel ( pixBuf );
 			colorMap-> getRGB ( pixBuf, &rgb );
 			
-			uint val = ( q_rnd ( rgb. r * 255 ) & 0xff ) << 16 | ( q_rnd ( rgb. g * 255 ) & 0xff ) << 8 | ( q_rnd ( rgb. b * 255 ) & 0xff );
+			uint val = ( lrint ( rgb. r * 255 ) & 0xff ) << 16 | ( lrint ( rgb. g * 255 ) & 0xff ) << 8 | ( lrint ( rgb. b * 255 ) & 0xff );
 			
 			if ( maskColors ) {
 				for ( int k = 0; k < nComps; ++k ) {
@@ -930,14 +927,14 @@ void QOutputDev::drawImage(GfxState *state, Object */*ref*/, Stream *str, int wi
 #else // QT_NO_TRANSFORMATIONS
 
 	if (( ctm [1] < -0.1 ) || ( ctm [1] > 0.1 ) || ( ctm [2] < -0.1 ) || ( ctm [2] > 0.1 )) {
-		qDebug ( "### ROTATED / SHEARED / ETC -- CANNOT DISPLAY THIS IMAGE\n" );
+		QPDFDBG( printf ( "### ROTATED / SHEARED / ETC -- CANNOT DISPLAY THIS IMAGE\n" ));
 	}
 	else {
-		int x = q_rnd ( ctm [4] );
-		int y = q_rnd ( ctm [5] );
+		int x = lrint ( ctm [4] );
+		int y = lrint ( ctm [5] );
 		
-		int w = q_rnd ( ctm [0] );
-		int h = q_rnd ( ctm [3] );
+		int w = lrint ( ctm [0] );
+		int h = lrint ( ctm [3] );
 		
 		if ( w < 0 ) {
 			x += w;
@@ -948,7 +945,7 @@ void QOutputDev::drawImage(GfxState *state, Object */*ref*/, Stream *str, int wi
 			h = -h;
 		}
 	
-//		qDebug ( "DRAWING IMAGE: %d/%d - %dx%d\n", x, y, w, h );
+		QPDFDBG( printf ( "DRAWING IMAGE: %d/%d - %dx%d\n", x, y, w, h ));
 
 		img = img. smoothScale ( w, h );		
 		qApp-> processEvents ( );		
@@ -990,10 +987,10 @@ bool QOutputDev::findText ( const QString &str, int &l, int &t, int &w, int &h, 
 	fp_t y2 = (fp_t) t + h - 1;
 
 	if ( m_text-> findText ( s, len, top, bottom, &x1, &y1, &x2, &y2 )) {		
-		l = q_rnd ( x1 );
-		t = q_rnd ( y1 );
-		w = q_rnd ( x2 ) - l + 1;
-		h = q_rnd ( y2 ) - t + 1;
+		l = lrint ( x1 );
+		t = lrint ( y1 );
+		w = lrint ( x2 ) - l + 1;
+		h = lrint ( y2 ) - t + 1;
 		found = true;
 	}
 	delete [] s;
@@ -1010,10 +1007,10 @@ GBool QOutputDev::findText ( Unicode *s, int len, GBool top, GBool bottom, int *
 	fp_t yMax1 = (double) *yMax;
 	
 	if ( m_text-> findText ( s, len, top, bottom, &xMin1, &yMin1, &xMax1, &yMax1 )) {
-		*xMin = q_rnd ( xMin1 );
-		*xMax = q_rnd ( xMax1 );
-		*yMin = q_rnd ( yMin1 );
-		*yMax = q_rnd ( yMax1 );
+		*xMin = lrint ( xMin1 );
+		*xMax = lrint ( xMax1 );
+		*yMin = lrint ( yMin1 );
+		*yMax = lrint ( yMax1 );
 		found = true;
 	}
 	return found;

@@ -120,6 +120,10 @@ private:
 	friend bool operator >= <> ( int i, const fixed &f );
 	friend bool operator == <> ( int i, const fixed &f );
 	friend bool operator != <> ( int i, const fixed &f );
+	
+	friend long int lrint ( const fixed &f );
+	friend fixed sqrt ( const fixed &f );
+	friend fixed fabs ( const fixed &f );
 #endif
 };
 
@@ -149,15 +153,31 @@ template <unsigned int SH> inline bool operator >= ( int i, const fixed<SH> &f )
 template <unsigned int SH> inline bool operator == ( int i, const fixed<SH> &f ) { return fixed<SH>::i2f( i ) == f. m_f; }
 template <unsigned int SH> inline bool operator != ( int i, const fixed<SH> &f ) { return fixed<SH>::i2f( i ) != f. m_f; }
 
-
-template <unsigned int SH> inline fixed<SH> sqrt ( const fixed<SH> &f )
+template <unsigned int SH> inline long int lrint ( const fixed<SH> &f )
 {
-	return fixed<SH> ( double( sqrt ( double( f ))));
+	return fixed<SH>::f2i (( f. m_f < 0 ) ? f. m_f - ( 1 << ( SH - 1 )) : f. m_f + ( 1 << ( SH - 1 )));
 }
 
 template <unsigned int SH> inline fixed<SH> fabs ( const fixed<SH> &f )
 {
-	return ( f < 0 ) ? -f : f;
+	return ( f. m_f < 0 ) ? fixed<SH> ( -f. m_f, true ) : f;
+}
+
+// roughly from QPE / qmath.h 
+template <unsigned int SH> inline fixed<SH> sqrt ( const fixed<SH> &f )
+{
+	if ( f. m_f <= 0 )
+		return fixed<SH> ( 0, true );
+		
+	fixed<SH>::fix_t a0 = 0;
+	fixed<SH>::fix_t a1 = f. m_f; // take value as first approximation
+	
+	do {
+		a0 = a1;
+		a1 = ( a0 + fixed<SH>::div ( f. m_f, a0 )) >> 1;
+	} while ( abs ( fixed<SH>::div ( a1 - a0,  a1 )) > 1 );
+	
+	return fixed<SH> ( a1, true );
 }
 
 template <unsigned int SH> inline ostream &operator << ( ostream &o, const fixed<SH> &f )
