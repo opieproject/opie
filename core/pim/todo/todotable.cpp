@@ -641,8 +641,7 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
  	if (showDeadl){
 	  static_cast<DueTextItem*>(item(row,3))->setToDoEvent(&todo );
  	}
-	ToDoEvent *ev = new ToDoEvent( todo );
-	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(ev) );
+	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(todo) );
     }
 }
 

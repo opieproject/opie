@@ -372,7 +372,7 @@ void TodoWindow::slotEdit()
     }
 
     ToDoEvent todo = table->currentEntry();
-
+    qWarning("slotEdit" );
     NewTaskDialog e( todo, this, 0, TRUE );
     e.setCaption( tr( "Edit Task" ) );
 
@@ -382,6 +382,7 @@ void TodoWindow::slotEdit()
     int ret = e.exec();
 
     if ( ret == QDialog::Accepted ) {
+      qWarning("Replacing now" );
 	table->setPaintingEnabled( false );
         todo = e.todoEntry();
 	table->replaceCurrentEntry( todo );
