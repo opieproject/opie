@@ -2,7 +2,7 @@ Package: opie-wavplugin
 Files: plugins/codecs/libwavplugin*
 Priority: optional
 Section: opie/plugins
-Maintainer: Lorn Potter <llornkcor@handhelds.org>
+Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: WAV file plugin

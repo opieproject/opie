@@ -2,7 +2,7 @@ Package: opie-libmadplugin
 Files: plugins/codecs/libmadplugin.so.1.0.0 plugins/codecs/libmadplugin.so.1.0 plugins/codecs/libmadplugin.so.1 plugins/codecs/libmadplugin.so
 Priority: optional
 Section: opie/plugins
-Maintainer: Maximilian Reiss <max.reiss@gmx.de>
+Maintainer: Maximilian Reiss <max.reiss@gmx.de>, L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: MP3 file plugin using libmad

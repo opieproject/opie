@@ -2,7 +2,7 @@ Package: opie-formatter
 Files: plugins/application/libformatter.so* bin/formatter pics/formatter/devices.png apps/Settings/formatter.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: L.J. Potter <ljp@llornkcor.com> 
+Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Formatter

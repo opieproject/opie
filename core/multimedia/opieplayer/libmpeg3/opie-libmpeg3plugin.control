@@ -2,7 +2,7 @@ Package: opie-libmpeg3plugin
 Files: plugins/codecs/libmpeg3plugin.so.1.0.0 plugins/codecs/libmpeg3plugin.so.1.0 plugins/codecs/libmpeg3plugin.so.1 plugins/codecs/libmpeg3plugin.so
 Priority: optional
 Section: opie/plugins
-Maintainer: L.J.Potter <ljp@llornkcor.com>
+Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Mpeg video file plugin using libmad

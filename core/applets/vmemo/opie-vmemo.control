@@ -2,7 +2,7 @@ Package: opie-vmemo
 Files: plugins/applets/libvmemoapplet.so*
 Priority: optional
 Section: opie/system
-Maintainer: L.J. Potter <ljp@llornkcor.com>
+Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal, opie-vmemo-settings
 Description: Voice Memo Recorder Applet

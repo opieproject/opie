@@ -2,7 +2,7 @@ Files: bin/bartender apps/Applications/bartender.desktop
 Priority: optional
 Package: opie-bartender
 Section: opie
-Maintainer: L.J. Potter <ljp@llornkcor.com> 
+Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: qpe-base ($QPE_VERSION)

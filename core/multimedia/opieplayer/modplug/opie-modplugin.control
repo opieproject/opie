@@ -2,7 +2,7 @@ Package: opie-modplugin
 Files: plugins/codecs/libmodplugin.so*
 Priority: optional
 Section: opie/plugins
-Maintainer: Simon Hausmann <hausmann@kde.org>, L.J. Potter <llornkcor@handhelds.org>
+Maintainer: Simon Hausmann <hausmann@kde.org>, L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Version: 2.0.2
 Depends: task-opie-minimal

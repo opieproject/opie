@@ -2,7 +2,7 @@ Package: opie-vmemo-settings
 Files: plugins/application/libsound.so* bin/sound apps/Settings/Sound.desktop
 Priority: optional
 Section: opie/settings
-Maintainer: L.J. Potter
+Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Arch: iPAQ
 Conflicts: opie-sound
