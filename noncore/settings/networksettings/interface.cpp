@@ -10,7 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-Interface::Interface(QString name, bool newSatus): status(newSatus), attached(false), interfaceName(name), hardareName("Unknown"), moduleOwner("Default"), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
+Interface::Interface(QString name, bool newSatus): status(newSatus), attached(false), interfaceName(name), hardareName("Unknown"), moduleOwner(NULL), macAddress(""), ip("0.0.0.0"), broadcast(""), subnetMask("0.0.0.0"), dhcp(false){
   refresh();
 }
 

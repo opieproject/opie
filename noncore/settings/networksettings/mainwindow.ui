@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>218</width>
+            <width>217</width>
             <height>289</height>
         </rect>
     </property>
@@ -194,7 +194,18 @@
                         <name>spacing</name>
                         <number>6</number>
                     </property>
-                    <widget row="0"  column="0"  rowspan="1"  colspan="2" >
+                    <widget row="1"  column="0"  rowspan="1"  colspan="3" >
+                        <class>Line</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>Line1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>orientation</name>
+                            <enum>Horizontal</enum>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -205,7 +216,7 @@
                             <string>Current Profile</string>
                         </property>
                     </widget>
-                    <widget row="0"  column="2" >
+                    <widget row="0"  column="1" >
                         <class>QLabel</class>
                         <property stdset="1">
                             <name>name</name>
@@ -224,18 +235,28 @@
                             <string>All</string>
                         </property>
                     </widget>
-                    <widget row="1"  column="0" >
-                        <class>QLabel</class>
-                        <property stdset="1">
+                    <spacer row="0"  column="2" >
+                        <property>
                             <name>name</name>
-                            <cstring>TextLabel1_2</cstring>
+                            <cstring>Spacer2</cstring>
                         </property>
                         <property stdset="1">
-                            <name>text</name>
-                            <string>Profiles</string>
+                            <name>orientation</name>
+                            <enum>Horizontal</enum>
                         </property>
-                    </widget>
-                    <spacer row="5"  column="2" >
+                        <property stdset="1">
+                            <name>sizeType</name>
+                            <enum>Expanding</enum>
+                        </property>
+                        <property>
+                            <name>sizeHint</name>
+                            <size>
+                                <width>20</width>
+                                <height>20</height>
+                            </size>
+                        </property>
+                    </spacer>
+                    <spacer row="6"  column="2" >
                         <property>
                             <name>name</name>
                             <cstring>Spacer16</cstring>
@@ -256,14 +277,7 @@
                             </size>
                         </property>
                     </spacer>
-                    <widget row="2"  column="0"  rowspan="3"  colspan="1" >
-                        <class>QListBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>profilesList</cstring>
-                        </property>
-                    </widget>
-                    <widget row="4"  column="1"  rowspan="1"  colspan="2" >
+                    <widget row="5"  column="2" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
@@ -274,7 +288,7 @@
                             <string>&amp;Set Current</string>
                         </property>
                     </widget>
-                    <widget row="3"  column="1"  rowspan="1"  colspan="2" >
+                    <widget row="4"  column="2" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
@@ -285,7 +299,7 @@
                             <string>&amp;Remove</string>
                         </property>
                     </widget>
-                    <widget row="2"  column="1"  rowspan="1"  colspan="2" >
+                    <widget row="3"  column="2" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
@@ -294,6 +308,24 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>&amp;New</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Profiles</string>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="0"  rowspan="3"  colspan="2" >
+                        <class>QListBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>profilesList</cstring>
                         </property>
                     </widget>
                 </grid>

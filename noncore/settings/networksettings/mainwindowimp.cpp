@@ -151,7 +151,7 @@ void MainWindowImp::removeClicked(){
      return; 
   }
   
-  if(modules.find(interfaceItems[item]) == modules.end()){
+  if((interfaceItems[item])->getModuleOwner() == NULL){
     QMessageBox::information(this, "Can't remove interface.", "Interface is built in.", "Ok");
   }
   else{
@@ -171,14 +171,29 @@ void MainWindowImp::configureClicked(){
      return;
   } 
   
-  if(modules.find(interfaceItems[item]) == modules.end()){
+  if((interfaceItems[item])->getModuleOwner() == NULL){
     InterfaceSetupImp *conf = new InterfaceSetupImp(0, "InterfaceConfiguration", interfaceItems[item]);
     conf->showMaximized();
     conf->show();
   }
   else{
-    InterfaceSetupImp *conf = new InterfaceSetupImp(this, "InterfaceConfiguration");
-    conf->show();
+    QTabWidget *t = NULL;
+    QWidget *conf = (interfaceItems[item])->getModuleOwner()->configure(&t);
+    if(conf != NULL){
+      qDebug("Conf found");
+      if(t != NULL){
+        qDebug("Adding Interface");
+	InterfaceSetupImp *i = new InterfaceSetupImp(t, "TCPIPInformation", interfaceItems[item], true);
+        t->insertTab(i, "TCP/IP");
+      }
+      conf->showMaximized();
+      conf->show();
+    }
+    else{
+       InterfaceSetupImp *i = new InterfaceSetupImp(0, "TCPIPInformation", interfaceItems[item], true);
+      i->showMaximized();
+      i->show();
+    }
   }
 }
 
@@ -193,16 +208,28 @@ void MainWindowImp::informationClicked(){
     return;
   }
 
-  if(modules.find(interfaceItems[item]) == modules.end()){
+  if( (interfaceItems[item])->getModuleOwner() == NULL){
     InterfaceInformationImp *i = new InterfaceInformationImp(0, "InterfaceInformationImp", interfaceItems[item]);
     i->showMaximized();
     i->show();
   }
   else{
-    QTabWidget *t = new QTabWidget(this, "InterfaceInformationTAB");
-    InterfaceInformationImp *i = new InterfaceInformationImp(t, "TCPIPInformation", interfaceItems[item], true);
-    t->insertTab(i, "TCP/IP");
-    t->show();
+    QTabWidget *t = NULL;
+    QWidget *conf = (interfaceItems[item])->getModuleOwner()->information(&t);
+    if(conf != NULL){
+      if(t){
+        qDebug("Adding Interface");
+	InterfaceInformationImp *i = new InterfaceInformationImp(t, "TCPIPInformation", interfaceItems[item], true);
+        t->insertTab(i, "TCP/IP");
+      }
+      conf->showMaximized();
+      conf->show();
+    }
+    else{
+      InterfaceInformationImp *i = new InterfaceInformationImp(0, "TCPIPInformation", interfaceItems[item], true);
+      i->showMaximized();
+      i->show();
+    }
   }
 }
 
@@ -286,10 +313,12 @@ void MainWindowImp::updateInterface(Interface *i){
   if(items.find(i) == items.end()){
     item = new QListViewItem(serviceList, "", "", "");
     // See if you can't find a module owner for this interface
-    //EmployeeMap::Iterator it;
-    //for( it = map.begin(); it != map.end(); ++it )
-    //        printf( "%s, %s earns %d\n", it.key().latin1(), it.data().name().latin1(), it.data().salary() );
-
+    QMap<Module*, QLibrary*>::Iterator it;
+    for( it = libraries.begin(); it != libraries.end(); ++it ){
+      if(it.key()->isOwner(i))
+        i->setModuleOwner(it.key());
+    }
+    
     items.insert(i, item);
     interfaceItems.insert(item, i);
   }
@@ -309,6 +338,10 @@ void MainWindowImp::updateInterface(Interface *i){
     typeName = "irda";
   if(i->getInterfaceName().contains("wlan"))
     typeName = "wlan";
+  // Actually try to use the Module
+  if(i->getModuleOwner() != NULL){
+    typeName = i->getModuleOwner()->getPixmapName(i);
+  }
   QPixmap type = (Resource::loadPixmap(typeName));
   item->setPixmap(1, type);
 

@@ -42,7 +42,6 @@ private:
   QMap<QString, Interface*> interfaceNames;
 
   QMap<Module*, QLibrary*> libraries;
-  QMap<Interface*, Module*> modules;
   QMap<Interface*, QListViewItem*> items;
   QMap<QListViewItem*, Interface*> interfaceItems;
   

@@ -7,6 +7,7 @@
 #include "interface.h"
 
 class QWidget;
+class QTabWidget;
 
 class Module : QObject{
 
@@ -17,13 +18,13 @@ public:
   Module(){};
   
   virtual bool isOwner(Interface *){ return false; };
-  virtual QWidget *configure(){ return NULL; } ;
-  virtual QWidget *information(){ return NULL; };
+  virtual QWidget *configure(QTabWidget **tabWidget){ return NULL; } ;
+  virtual QWidget *information(QTabWidget **tabWidget){ return NULL; };
   virtual QList<Interface> getInterfaces() = 0;
   virtual QMap<QString, QString> possibleNewInterfaces() = 0;
   virtual Interface *addNewInterface(QString name) = 0;
   virtual bool remove(Interface* i) = 0;
-
+  virtual QString getPixmapName(Interface* i) = 0;
 
 };
 

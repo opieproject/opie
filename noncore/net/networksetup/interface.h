@@ -3,6 +3,7 @@
 
 #include <qstring.h>
 
+class Module;
 class Interface {
 
 public:
@@ -21,8 +22,8 @@ public:
   virtual QString getHardwareName(){ return hardareName; };
   virtual void setHardwareName(QString name="Unknown"){ hardareName = name; };
   
-  virtual QString getModuleOwner(){ return moduleOwner; };
-  virtual void setModuleOwner(QString owner="Default"){ moduleOwner = owner; };
+  virtual Module* getModuleOwner(){ return moduleOwner; };
+  virtual void setModuleOwner(Module *owner=NULL){ moduleOwner = owner; };
 
   // inet information.
   QString getMacAddress(){ return macAddress; };
@@ -45,7 +46,7 @@ private:
   bool attached;
   QString interfaceName;
   QString hardareName;
-  QString moduleOwner;
+  Module *moduleOwner;
   
   // Network information
   QString macAddress;
