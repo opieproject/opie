@@ -1,0 +1,17 @@
+moc_*
+*.moc
+Makefile*
+accounteditorbase.cpp
+accounteditorbase.h
+addresspickerbase.cpp
+addresspickerbase.h
+configdiagbase.cpp
+configdiagbase.h
+opendiagbase.cpp
+opendiagbase.h
+passdiagbase.cpp
+passdiagbase.h
+renamebase.cpp
+renamebase.h
+searchdiagbase.cpp
+searchdiagbase.h
