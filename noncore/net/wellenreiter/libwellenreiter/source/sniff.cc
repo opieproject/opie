@@ -1,7 +1,7 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.4 2002-12-08 16:26:16 max Exp $
+ *  $Id: sniff.cc,v 1.5 2002-12-09 21:19:42 max Exp $
  */
 
 #include "sniff.hh"
@@ -101,7 +101,7 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 		  wl_loginfo("Found an access point");
 		  wl_net.net_type=1;
 		}
-	      else if(pinfoptr->cap_ESS == 0 && pinfoptr->cap_IBSS == 1) 
+	      else if(pinfoptr->cap_ESS == 0 && pinfoptr->cap_IBSS == 2) 
 		{
 		  wl_loginfo("Found an ad-hoc network");
 		  wl_net.net_type=2;
