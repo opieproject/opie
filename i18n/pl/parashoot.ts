@@ -3,7 +3,7 @@
     <name>ParaShoot</name>
     <message>
         <source>ParaShoot</source>
-        <translation type="unfinished"></translation>
+        <translation>ParaShoot</translation>
     </message>
     <message>
         <source>New Game</source>

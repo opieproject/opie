@@ -275,7 +275,7 @@ Ten obszar pozwala ci na wybor aplikacji i opcji, ktore chcesz wylaczyc.</transl
     </message>
     <message>
         <source>Check Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Ptaszek</translation>
     </message>
     <message>
         <source>Sample window using the selected settings.</source>

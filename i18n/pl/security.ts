@@ -33,11 +33,11 @@ Dostep zabroniony</translation>
     </message>
     <message>
         <source>Enter new passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Wpisz nowe haslo</translation>
     </message>
     <message>
         <source>Re-enter new passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Powtorz nowe haslo</translation>
     </message>
 </context>
 <context>
@@ -60,7 +60,7 @@ Dostep zabroniony</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronizuj</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
@@ -68,15 +68,15 @@ Dostep zabroniony</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.0.0/16</translation>
     </message>
     <message>
         <source>172.16.0.0/12</source>
-        <translation type="unfinished"></translation>
+        <translation>172.16.0.0/12</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
-        <translation type="unfinished"></translation>
+        <translation>10.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
@@ -92,27 +92,27 @@ Dostep zabroniony</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.129.0/24 (domyslny)</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.1.0/24</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished"></translation>
+        <translation>1.0.0.0/8</translation>
     </message>
     <message>
         <source>Passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Haslo</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Login</translation>
     </message>
     <message>
         <source>Login Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Loguj automatycznie</translation>
     </message>
 </context>
 </TS>
