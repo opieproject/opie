@@ -82,7 +82,6 @@ fileSaver::~fileSaver()
 {
 }
 
-
 void fileSaver::populateList()
 {
     ListView->clear();
@@ -92,7 +91,7 @@ void fileSaver::populateList()
 
     currentDir.setNameFilter("*");
     QString fileL, fileS;
-    const QFileInfoList *list = currentDir.entryInfoList(QDir::All /*, QDir::SortByMask*/);
+    const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
     while ( (fi=it.current()) ) {

@@ -71,14 +71,14 @@ void fileBrowser::populateList()
 {
     ListView->clear();
 //qDebug(currentDir.canonicalPath());
-    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden );
+    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentDir.setSorting(/* QDir::Size*/ /*| QDir::Reversed | */QDir::DirsFirst);
     currentDir.setMatchAllDirs(TRUE);
 
     currentDir.setNameFilter(filterStr);
 //    currentDir.setNameFilter("*.txt;*.etx");
     QString fileL, fileS;
-    const QFileInfoList *list = currentDir.entryInfoList(QDir::All /*, QDir::SortByMask*/);
+    const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
     QFileInfo *fi;
     while ( (fi=it.current()) ) {
@@ -96,7 +96,7 @@ void fileBrowser::populateList()
             fileL.sprintf( "%s",fi->fileName().data() );
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
-//     qDebug(currentDir.canonicalPath()+fileL);
+//     qDebug( fileL);
             }
         }
         item= new QListViewItem( ListView,fileL,fileS );
