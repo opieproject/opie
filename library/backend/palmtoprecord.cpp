@@ -37,6 +37,7 @@ namespace Qtopia {
 
 Record &Record::operator=( const Record &c )
 {
+    if(this == &c ) return *this;
     mUid = c.mUid;
     mCats = c.mCats;
     customMap = c.customMap;
