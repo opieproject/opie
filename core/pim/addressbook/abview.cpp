@@ -42,7 +42,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	mCat(0),
 	m_inSearch( false ),
 	m_inPersonal( false ),
-	m_curr_category( -1 ),
+	m_curr_category( 0 ),
 	m_curr_View( TableView ),
 	m_prev_View( TableView ),
 	m_curr_Contact ( 0 ),
@@ -157,20 +157,9 @@ void AbView::load()
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
 
-	if ( m_curr_category == 0 ) {
-		// Show unfiled 
-		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
-					      Opie::OPimContactAccess::DoNotShowWithCategory, 0 );
-	} else	if ( m_curr_category != -1 ){
-		// Just show selected category
-		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
-					      Opie::OPimBase::FilterCategory, m_curr_category );
-	} else {
-		// Show all categories
-		m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName, 
-					      Opie::OPimBase::FilterOff, 0 );
-	}
-	
+	m_list = m_contactdb->sorted( true, Opie::OPimContactAccess::SortFileAsName,
+					      Opie::OPimContactAccess::FilterCategory, m_curr_category );
+
 // 	if ( m_curr_category != -1 )
 // 		clearForCategory();
 
@@ -199,9 +188,11 @@ void AbView::setShowByCategory( const QString& cat )
 
 	int intCat = 0;
 
-	// All (cat == NULL) will be stored as -1
-	if ( cat.isNull() )
-		intCat = -1;
+	// Unfiled will be stored as -1
+    if ( cat == tr( "Unfiled" ) )
+        intCat = -1;
+    else if ( cat.isNull() )
+        intCat = 0;
 	else
 		intCat = mCat.id("Contacts", cat );
 
@@ -212,9 +203,9 @@ void AbView::setShowByCategory( const QString& cat )
 
 		m_curr_category = intCat;
 		emit signalClearLetterPicker();
-
 		load();
 	}
+        m_curr_category = intCat;
 
 }
 
@@ -245,7 +236,7 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 	}else{
 		// If the current Backend is unable to solve the query, we will
 		// ignore the request ..
-		if ( ! m_contactdb->hasQuerySettings( Opie::OPimContactAccess::WildCards | 
+		if ( ! m_contactdb->hasQuerySettings( Opie::OPimContactAccess::WildCards |
 						      Opie::OPimContactAccess::IgnoreCase ) ){
 			owarn << "Tried to access queryByExample which is not supported by the current backend!!" << oendl;
 			owarn << "I have to ignore this access!" << oendl;
@@ -265,8 +256,13 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 			return;
 		}
 		m_list = m_contactdb->queryByExample( query, Opie::OPimContactAccess::WildCards | Opie::OPimContactAccess::IgnoreCase );
-		if ( m_curr_category != -1 )
+
+        if ( m_curr_category != 0 )
 			clearForCategory();
+
+        // Sort filtered results
+        m_list = m_contactdb->sorted( m_list, true, Opie::OPimContactAccess::SortFileAsName,
+                          Opie::OPimContactAccess::FilterCategory, m_curr_category );
 		m_curr_Contact = 0;
 	}
 	updateView( true );
@@ -378,7 +374,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	// Now remove all contacts with wrong category (if any selected)
 	// This algorithm is a litte bit ineffective, but
 	// we will not have a lot of matching entries..
-	if ( m_curr_category != -1 )
+	if ( m_curr_category != 0 )
 		clearForCategory();
 
 	// Now show all found entries
@@ -418,7 +414,7 @@ void AbView::clearForCategory()
 	// Now remove all contacts with wrong category if any category selected
 
 	Opie::OPimContactAccess::List allList = m_list;
-	if ( m_curr_category != -1 ){
+	if ( m_curr_category != 0 ){
 		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){
 				//odebug << "Removing " << (*it).uid() << oendl;
@@ -441,7 +437,7 @@ bool AbView::contactCompare( const Opie::OPimContact &cnt, int category )
 	//	odebug << "Number of categories: " << cats.count() << oendl;
 
 	returnMe = false;
-	if ( cats.count() == 0 && category == 0 )
+	if ( cats.count() == 0 && category == -1 )
 		// Contacts with no category will just shown on "All" and "Unfiled"
 		returnMe = true;
 	else {

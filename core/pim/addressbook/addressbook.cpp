@@ -854,8 +854,11 @@ void AddressbookWindow::slotSetCategory( const QString &category )
 	odebug << "void AddressbookWindow::slotSetCategory( " << category << " )" << oendl;
 
 	// Tell the view about the selected category
-    m_config.setCategory( category );
-	m_abView -> setShowByCategory( category );
+    QString cat = category;
+    if ( cat == tr( "All" ) )
+        cat = QString::null;
+    m_config.setCategory( cat );
+	m_abView -> setShowByCategory( cat );
 }
 
 void AddressbookWindow::slotViewSwitched( int view )

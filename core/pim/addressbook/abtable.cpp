@@ -159,7 +159,6 @@ void AbTable::setContacts( const Opie::OPimContactAccess::List& viewList )
 	setSorting( false );
 	setPaintingEnabled( FALSE );
 
-	Opie::OPimContactAccess::List::Iterator it;
 	setNumRows( m_viewList.count() );
 //	int row = 0;
 // 	for ( it = m_viewList.begin(); it != m_viewList.end(); ++it )
