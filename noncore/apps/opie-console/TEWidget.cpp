@@ -264,7 +264,7 @@ void TEWidget::fontChange(const QFont &)
 //printf("charset: %s\n",QFont::encodingName(font().charSet()).ascii());
 //printf("rawname: %s\n",font().rawName().ascii());
   fontMap =
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
   strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
           ? vt100extended
           :

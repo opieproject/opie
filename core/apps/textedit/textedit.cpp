@@ -45,7 +45,7 @@
 using namespace Opie::Core;
 using namespace Opie::Ui;
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 class QpeEditor : public QMultiLineEdit
 {
 

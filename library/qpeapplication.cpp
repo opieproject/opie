@@ -60,7 +60,7 @@
 #include "qpeapplication.h"
 #include "qpestyle.h"
 #include "styleinterface.h"
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 #include <qstylefactory.h>
 #else
 #include <qplatinumstyle.h>
@@ -1843,7 +1843,7 @@ bool QPEApplication::keepRunning() const
 */
 void QPEApplication::internalSetStyle( const QString &style )
 {
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
     if ( style == "QPE" ) {
         setStyle( new QPEStyle );
     }

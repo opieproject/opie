@@ -26,7 +26,7 @@
 #include <qwindowsstyle.h>
 #endif // QT_H
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 
 #ifdef QT_PLUGIN_STYLE_LIGHT
 #  define Q_EXPORT_STYLE_LIGHT

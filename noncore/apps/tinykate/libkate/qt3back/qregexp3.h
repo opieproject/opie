@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qregexp3.h,v 1.1 2002-11-10 21:10:14 jowenn Exp $
+** $Id: qregexp3.h,v 1.2 2005-01-21 19:56:18 ar Exp $
 **
 ** Definition of QRegExp class
 **
@@ -42,7 +42,7 @@
 #endif // QT_H
 
 
-#if QT_VERSION >=300
+#if QT_VERSION >= 0x030000
 #include <qregexp.h>
 #else
 class QRegExpEngine;
@@ -107,5 +107,5 @@ private:
     QRegExpEngine *eng;
     QRegExpPrivate *priv;
 };
-#endif // QT_VERSION >= 300
+#endif // QT_VERSION >= 0x030000
 #endif // QREGEXP_H

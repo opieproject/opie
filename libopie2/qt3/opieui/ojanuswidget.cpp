@@ -772,7 +772,7 @@ QSize OJanusWidget::minimumSizeHint() const
 
     if( mFace == TreeList )
     {
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
       s1.rwidth() += style().splitterWidth();
 #else
       s1.rwidth() += style().pixelMetric( QStyle::PM_SplitterWidth );

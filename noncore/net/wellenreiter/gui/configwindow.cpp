@@ -372,7 +372,7 @@ void WellenreiterConfigWindow::load()
     QString interface = c->readEntry( "name", "<none>" );
     if ( interface != "<none>" )
     {
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
         interfaceName->insertItem( interface, 0 );
         interfaceName->setCurrentItem( 0 );
 #else
@@ -380,7 +380,7 @@ void WellenreiterConfigWindow::load()
 #endif
 
         QString device = c->readEntry( "type", "<select>" );
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
         for ( int i = 0; i < deviceType->count(); ++i )
         {
             if ( deviceType->text( i ) == device )
@@ -427,7 +427,7 @@ void WellenreiterConfigWindow::load()
 
     c->setGroup( "GPS" );
     enableGPS->setChecked( c->readBoolEntry( "use", false ) );
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
     gpsdHost->insertItem( c->readEntry( "host", "localhost" ), 0 );
     gpsdHost->setCurrentItem( 0 );
 #else

@@ -23,7 +23,7 @@
 
 #define QCOORDARRLEN(x) sizeof(x)/(sizeof(QCOORD)*2)
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 
 #include <qdrawutil.h>
 #include <qcombobox.h>
@@ -429,7 +429,7 @@ QSize QPEStyle::sizeFromContents( ContentsType contents, const QWidget *widget,
 
 QPEStyle::QPEStyle()
 {
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
     setButtonMargin(buttonMargin());
     setScrollBarExtent(scrollBarExtent().width(),scrollBarExtent().height());
 #endif

@@ -23,7 +23,7 @@
 #define FONTFACTORY_FT_H
 
 #include <qfontmanager_qws.h>
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 # include <private/qfontdata_p.h>
 #else
 # include "qfontdata_p.h"

@@ -19,7 +19,7 @@
 **********************************************************************/
 #include "lightstyle.h"
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 
 #define INCLUDE_MENUITEM_DEF
 #include "qmenubar.h"
@@ -159,7 +159,7 @@ void LightStyle::polish(QWidget *widget)
     if (widget->inherits("QPushButton"))
 	widget->installEventFilter(this);
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
     if (widget->inherits("QLineEdit")) {
 	QLineEdit *lineedit = (QLineEdit *) widget;
 	lineedit->setFrameShape(QFrame::StyledPanel);
@@ -176,7 +176,7 @@ void LightStyle::unPolish(QWidget *widget)
     if (widget->inherits("QPushButton"))
 	widget->removeEventFilter(this);
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
     if (widget->inherits("QLineEdit")) {
 	QLineEdit *lineedit = (QLineEdit *) widget;
 	lineedit->setLineWidth(1);
@@ -414,7 +414,7 @@ void LightStyle::drawComboButton(QPainter *p, int x, int y, int w, int h,
     int indent = ((y + h) / 2) - 3;
     int xpos = x;
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
     if( QApplication::reverseLayout() )
         xpos += indent;
     else
@@ -431,7 +431,7 @@ QRect LightStyle::comboButtonRect( int x, int y, int w, int h ) const
     int indent = ((y + h) / 2) - 3;
     r.setRight(r.right() - indent - 10);
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
     if( QApplication::reverseLayout() )
         r.moveBy( indent + 10, 0 );
 #endif

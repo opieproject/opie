@@ -2,7 +2,7 @@
 #define NETCONF_MODULE_H
 
 #include <qobject.h>
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 #include <qlist.h>
 #else
 #include <qptrlist.h>

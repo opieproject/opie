@@ -141,7 +141,7 @@ public:
 	}
 	~ConfigItem(void);
 	void init(void);
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 	void okRename(int col);
 #endif
 	void updateMenu(void);

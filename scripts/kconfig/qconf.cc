@@ -17,7 +17,7 @@
 #include <qheader.h>
 #include <qfiledialog.h>
 #include <qregexp.h>
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 #include <qsettings.h>
 #endif
 
@@ -30,7 +30,7 @@
 #include "images.c"
 
 static QApplication *configApp;
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 static QSettings *configSettings;
 #endif
 
@@ -102,7 +102,7 @@ void ConfigList::updateMenuList(P* parent, struct menu* menu)
 	}
 }
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 /*
  * set the new data
  * TODO check the value
@@ -215,7 +215,7 @@ void ConfigItem::updateMenu(void)
 		const char* data;
 
 		data = sym_get_string_value(sym);
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 		int i = list->mapIdx(dataColIdx);
 		if (i >= 0)
 			setRenameEnabled(i, TRUE);
@@ -490,7 +490,7 @@ void ConfigList::changeValue(ConfigItem* item)
 	case S_INT:
 	case S_HEX:
 	case S_STRING:
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 		if (colMap[dataColIdx] >= 0)
 			item->startRename(colMap[dataColIdx]);
 		else
@@ -751,7 +751,7 @@ ConfigMainWindow::ConfigMainWindow(void)
 
 	QWidget *d = configApp->desktop();
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 	width = configSettings->readNumEntry("/kconfig/qconf/window width", d->width() - 64);
 	height = configSettings->readNumEntry("/kconfig/qconf/window height", d->height() - 64);
 	resize(width, height);
@@ -1266,7 +1266,7 @@ int main(int ac, char** av)
 
 	progname = av[0];
 	configApp = new QApplication(ac, av);
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 	configSettings = new QSettings;
 #endif
 	if (ac > 1 && av[1][0] == '-') {
@@ -1293,7 +1293,7 @@ int main(int ac, char** av)
 	configApp->connect(configApp, SIGNAL(lastWindowClosed()), SLOT(quit()));
 	configApp->exec();
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 	configSettings->writeEntry("/kconfig/qconf/window x", v->pos().x());
 	configSettings->writeEntry("/kconfig/qconf/window y", v->pos().y());
 	configSettings->writeEntry("/kconfig/qconf/window width", v->size().width());

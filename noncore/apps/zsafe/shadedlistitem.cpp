@@ -52,7 +52,7 @@ ShadedListItem::~ShadedListItem()
 void ShadedListItem::paintCell(QPainter *p, const QColorGroup &cg, int column, int width, int alignment)
 {
     QColorGroup colors(cg);
-#if QT_VERSION >=300
+#if QT_VERSION >= 0x030000
     const QColorGroup::ColorRole crole = QColorGroup::Base;
     // const QWidget::BackgroundMode bgmode = lv->viewport()->backgroundMode();
     // const QColorGroup::ColorRole crole = QPalette::backgroundRoleFromMode(bgmode);

@@ -63,7 +63,7 @@
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 #include <qradiobutton.h>
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
 #include <qstylefactory.h>
 #endif
 #include <qtoolbutton.h>
@@ -130,7 +130,7 @@ QWidget *Appearance::createStyleTab ( QWidget *parent, Config &cfg )
     QString s = cfg. readEntry ( "Style", "Light" );
 
 
-#if QT_VERSION >= 300
+#if QT_VERSION >= 0x030000
     m_style_list->insertStringList(QStyleFactory::styles());
 #else
     m_style_list-> insertItem ( new StyleListItem ( "Windows", new QWindowsStyle ( )));

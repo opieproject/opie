@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qregexp3.cpp,v 1.2 2004-05-27 22:04:47 ar Exp $
+** $Id: qregexp3.cpp,v 1.3 2005-01-21 19:56:17 ar Exp $
 **
 ** Implementation of QRegExp class
 **
@@ -34,11 +34,11 @@
 ** not clear to you.
 **
 **********************************************************************/
-#if QT_VERSION >=300
+#if QT_VERSION >= 0x030000
 #error QRegExp3 is now in QT 3 use QRegExp instead
 #endif
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 #include "./qregexp3.h"
 #else
 #include "qregexp.h"

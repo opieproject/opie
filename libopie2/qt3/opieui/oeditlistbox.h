@@ -27,7 +27,7 @@ class OLineEdit;
 class OComboBox;
 class QPushButton;
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
     enum StringComparisonMode {
         CaseSensitive   = 0x00001, // 0 0001
         BeginsWith      = 0x00002, // 0 0010

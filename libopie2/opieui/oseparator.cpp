@@ -108,7 +108,7 @@ void OSeparator::drawFrame(QPainter *p)
       p2 = QPoint( p1.x(), r.height() );
    }
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
    style().drawSeparator( p, p1.x(), p1.y(), p2.x(), p2.y(), g, true, 1, midLineWidth() );
 #else
    QStyleOption opt( lineWidth(), midLineWidth() );

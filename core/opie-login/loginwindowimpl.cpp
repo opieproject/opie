@@ -33,7 +33,7 @@
 #include <qlabel.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 #include <qgfx_qws.h>
 #endif
 #include <qwindowsystem_qws.h>
@@ -136,7 +136,7 @@ void LoginWindowImpl::calcMaxWindowRect ( )
 	else
 		wr.setCoords( 0, 0, displayWidth-1, m_taskbar->y()-1 );
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 	wr = qt_screen-> mapToDevice ( wr, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
 #endif
 

@@ -594,7 +594,7 @@ int QOutputDev::convertSubpath ( GfxState *state, GfxSubpath *subpath, QPointArr
 			tmp. setPoints ( 4, lrint ( x0 ), lrint ( y0 ), lrint ( x1 ), lrint ( y1 ),
 			                    lrint ( x2 ), lrint ( y2 ), lrint ( x3 ), lrint ( y3 ));
 
-#if QT_VERSION < 300
+#if QT_VERSION < 0x030000
 			tmp = tmp. quadBezier ( );
 
 			for ( uint loop = 0; loop < tmp. count ( ); loop++ ) {
