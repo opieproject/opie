@@ -18,6 +18,7 @@ struct mailimf_mailbox;
 struct mailimf_date_time;
 struct mailimf_group;
 struct mailimf_address_list;
+struct mailsession;
 
 /* this class hold just the funs shared between
  * mbox and pop3 (later mh, too) mail access.
@@ -48,6 +49,7 @@ protected:
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
     static void fillParameters(RecPart&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);
+    virtual void parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox);
 
     QString msgTempName;
     unsigned int last_msg_id;

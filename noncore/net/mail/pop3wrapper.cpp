@@ -5,6 +5,7 @@
 #include <libetpan/libetpan.h>
 #include <qpe/global.h>
 #include <qfile.h>
+#include <qstring.h>
 
 /* we don't fetch messages larger than 5 MB */
 #define HARD_MSG_SIZE_LIMIT 5242880
@@ -14,6 +15,7 @@ POP3wrapper::POP3wrapper( POP3account *a )
 {
     account = a;
     m_pop3 = NULL;
+    m_folder = NULL;
     msgTempName = a->getFileName()+"_msg_cache";
     last_msg_id = 0;
 }
@@ -29,13 +31,13 @@ POP3wrapper::~POP3wrapper()
 
 void POP3wrapper::pop3_progress( size_t current, size_t maximum )
 {
-    //qDebug( "POP3: %i of %i", current, maximum );
+    qDebug( "POP3: %i of %i", current, maximum );
 }
 
 RecBody POP3wrapper::fetchBody( const RecMail &mail )
 {
     int err = MAILPOP3_NO_ERROR;
-    char *message;
+    char *message = 0;
     size_t length = 0;
     
     login();
@@ -44,29 +46,26 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
     }
 
     RecBody body;
-    mailmessage * msg = 0;
-
-    QFile msg_cache(msgTempName);
-
+    mailmessage * mailmsg;
     if (mail.Msgsize()>HARD_MSG_SIZE_LIMIT) {
         qDebug("Message to large: %i",mail.Msgsize());
         return body;
     }
+    
+    QFile msg_cache(msgTempName);
+
     cleanMimeCache();
+    
     if (mail.getNumber()!=last_msg_id) {
         if (msg_cache.exists()) {
             msg_cache.remove();
         }
         msg_cache.open(IO_ReadWrite|IO_Truncate);
         last_msg_id = mail.getNumber();
-        err = mailpop3_retr( m_pop3, mail.getNumber(), &message, &length );    
-        if ( err != MAILPOP3_NO_ERROR ) {
-            qDebug( "POP3: error retrieving body with index %i", mail.getNumber() );
-            last_msg_id = 0;
-            return RecBody();
-        }
+        err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
+        err = mailmessage_fetch(mailmsg,&message,&length);
         msg_cache.writeBlock(message,length);
-    } else {    
+    } else {
         QString msg="";
         msg_cache.open(IO_ReadOnly);
         message = new char[4096];
@@ -79,60 +78,32 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
         message = (char*)malloc(msg.length()+1*sizeof(char));
         memset(message,0,msg.length()+1);
         memcpy(message,msg.latin1(),msg.length());
+        /* transform to libetpan stuff */
+        mailmsg = mailmessage_new();
+        mailmessage_init(mailmsg, NULL, data_message_driver, 0, strlen(message));
+        generic_message_t * msg_data;
+        msg_data = (generic_message_t *)mailmsg->msg_data;
+        msg_data->msg_fetched = 1;
+        msg_data->msg_message = message;
+        msg_data->msg_length = strlen(message);
     }
+    body = parseMail(mailmsg);
     
-    /* transform to libetpan stuff */
-    msg = mailmessage_new();
-    mailmessage_init(msg, NULL, data_message_driver, 0, strlen(message));
-    generic_message_t * msg_data;
-    msg_data = (generic_message_t *)msg->msg_data;
-    msg_data->msg_fetched = 1;
-    msg_data->msg_message = message;
-    msg_data->msg_length = strlen(message);
-
-    /* parse the mail */
-    body = parseMail(msg);
-
     /* clean up */
-    mailmessage_free(msg);  
-    free(message);
-
-    /* finish */
+    if (mailmsg) mailmessage_free(mailmsg);  
+    if (message) free(message);
+    
     return body;
 }
 
 void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
 {
-    int err = MAILPOP3_NO_ERROR;
-    char * header = 0;
-    /* these vars are used recurcive! set it to 0!!!!!!!!!!!!!!!!! */
-    size_t length = 0;
-    carray * messages = 0;
-
     login();
     if (!m_pop3) return;
-
-    mailpop3_list( m_pop3, &messages );
-
-    for (unsigned int i = 0; i < carray_count(messages);++i) {
-        mailpop3_msg_info *info;
-        err = mailpop3_get_msg_info(m_pop3,i+1,&info);
-        if (info->msg_deleted)
-            continue;
-        err = mailpop3_header( m_pop3, info->msg_index, &header, &length );
-        if ( err != MAILPOP3_NO_ERROR ) {
-            qDebug( "POP3: error retrieving header msgid: %i", info->msg_index );
-            free(header);
-            return;
-        }
-        RecMail *mail = parseHeader( header );
-        mail->setNumber( info->msg_index );
-        mail->setWrapper(this);
-        mail->setMsgsize(info->msg_size);
-        target.append( mail );
-        free(header);
-    }
-    Global::statusMessage( tr("Mailbox contains %1 mail(s)").arg(carray_count(messages)-m_pop3->pop3_deleted_count));
+    uint32_t res_messages,res_recent,res_unseen;
+    mailsession_status_folder(m_folder->fld_session,"INBOX",&res_messages,&res_recent,&res_unseen);
+    parseList(target,m_folder->fld_session,"INBOX");
+    Global::statusMessage( tr("Mailbox contains %1 mail(s)").arg(res_messages));
 }
 
 void POP3wrapper::login()
@@ -152,8 +123,8 @@ void POP3wrapper::login()
 	  login.show();
 	  if ( QDialog::Accepted == login.exec() ) {
 		// ok
-		user = strdup( login.getUser().latin1() );
-		pass = strdup( login.getPassword().latin1() );
+		user = login.getUser().latin1();
+		pass = login.getPassword().latin1();
 	  } else {
 		// cancel
 		qDebug( "POP3: Login canceled" );
@@ -164,33 +135,28 @@ void POP3wrapper::login()
 	  pass = account->getPassword().latin1();
 	}
 
-    m_pop3 = mailpop3_new( 200, &pop3_progress );
+    bool ssl = account->getSSL();
 
-    // connect
-    if (account->getSSL()) {
-        err = mailpop3_ssl_connect( m_pop3, (char*)server, port );
-    } else {
-        err = mailpop3_socket_connect( m_pop3, (char*)server, port );
-    }
+    m_pop3=mailstorage_new(NULL);
+    pop3_mailstorage_init(m_pop3,(char*)server,port,NULL,CONNECTION_TYPE_TRY_STARTTLS,POP3_AUTH_TYPE_TRY_APOP,
+        (char*)user,(char*)pass,0,0,0);
 
-    if ( err != MAILPOP3_NO_ERROR ) {
-        qDebug( "pop3: error connecting to %s\n reason: %s", server,
-                m_pop3->pop3_response );
-        mailpop3_free( m_pop3 );
+    m_folder = mailfolder_new(m_pop3, NULL, NULL);
+
+    if (m_folder==0) {
+        Global::statusMessage(tr("Error initializing folder"));
+        mailstorage_free(m_pop3);
         m_pop3 = NULL;
         return;
     }
-    qDebug( "POP3: connected!" );
-
-    // login
-    // TODO: decide if apop or plain login should be used
-    err = mailpop3_login( m_pop3, (char *) user, (char *) pass );
-    if ( err != MAILPOP3_NO_ERROR ) {
-        qDebug( "pop3: error logging in: %s", m_pop3->pop3_response );
-        logout();
-        return;
+    err = mailfolder_connect(m_folder);
+    if (err != MAIL_NO_ERROR) {
+        Global::statusMessage(tr("Error initializing folder"));
+        mailfolder_free(m_folder);
+        m_folder = 0;
+        mailstorage_free(m_pop3);
+        m_pop3 = 0;
     }
-
     qDebug( "POP3: logged in!" );
 }
 
@@ -198,9 +164,10 @@ void POP3wrapper::logout()
 {
     int err = MAILPOP3_NO_ERROR;
     if ( m_pop3 == NULL ) return;
-    err = mailpop3_quit( m_pop3 );
-    mailpop3_free( m_pop3 );
-    m_pop3 = NULL;
+    mailfolder_free(m_folder);
+    m_folder = 0;
+    mailstorage_free(m_pop3);
+    m_pop3 = 0;
 }
 
 
@@ -217,8 +184,8 @@ void POP3wrapper::deleteMail(const RecMail&mail)
 {
     login();
     if (!m_pop3) return;
-    int err = mailpop3_dele(m_pop3,mail.getNumber());
-    if (err != MAILPOP3_NO_ERROR) {
+    int err = mailsession_remove_message(m_folder->fld_session,mail.getNumber());
+    if (err != MAIL_NO_ERROR) {
         Global::statusMessage(tr("error deleting mail"));
     }
 }
@@ -231,24 +198,21 @@ int POP3wrapper::deleteAllMail(const Folder*)
 {
     login();
     if (!m_pop3) return 0;
-    carray * messages = 0;
-    
-    /* if connected this info is cached! */
-    int err = 0;
-    mailpop3_list( m_pop3, &messages );
-    
     int res = 1;
-    for (unsigned int i = 0; messages!=0 && i < carray_count(messages);++i) {
-        mailpop3_msg_info *info;
-        err = mailpop3_get_msg_info(m_pop3,i+1,&info);
-        if (info->msg_deleted)
-            continue;
-        err = mailpop3_dele(m_pop3,i+1);
-        if (err != MAILPOP3_NO_ERROR) {
-            Global::statusMessage(tr("Error deleting mail %1").arg(i+1));
-            res = 0;
-            break;
-        }
+
+    uint32_t result = 0;
+    int err = mailsession_messages_number(m_folder->fld_session,NULL,&result);
+    if (err != MAIL_NO_ERROR) {
+        Global::statusMessage(tr("Error getting folder info"));
+        return 0;
     }
+    for (unsigned int i = 0; i < result; ++i) {
+        err = mailsession_remove_message(m_folder->fld_session,i+1);
+        if (err != MAIL_NO_ERROR) {
+            Global::statusMessage(tr("Error deleting mail %1").arg(i+1));
+            res=0;
+        }
+        break;
+    }           
     return res;
 }

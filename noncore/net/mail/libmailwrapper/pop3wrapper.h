@@ -5,6 +5,8 @@
 #include "genericwrapper.h"
 #include <qstring.h>
 
+struct mailstorage;
+struct mailfolder;
 
 class POP3wrapper : public Genericwrapper
 {
@@ -28,7 +30,8 @@ protected:
     void login();
     void logout();
     POP3account *account;
-    mailpop3 *m_pop3;    
+    mailstorage*m_pop3;
+    mailfolder*m_folder;
 };
 
 #endif

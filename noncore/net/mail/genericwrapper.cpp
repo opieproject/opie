@@ -1,6 +1,5 @@
 #include "genericwrapper.h"
-#include <libetpan/mailmime.h>
-#include <libetpan/data_message_driver.h>
+#include <libetpan/libetpan.h>
 #include "mailtypes.h"
 
 Genericwrapper::Genericwrapper()
@@ -390,4 +389,70 @@ void Genericwrapper::cleanMimeCache()
     }
     bodyCache.clear();
     qDebug("Genericwrapper: cache cleaned");
+}
+
+void Genericwrapper::parseList(QList<RecMail> &target,mailsession*session,const QString&mailbox)
+{
+    int r;
+    mailmessage_list * env_list = 0;
+    r = mailsession_get_messages_list(session,&env_list);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error message list");
+        return;
+    }
+    r = mailsession_get_envelopes_list(session, env_list);
+    if (r != MAIL_NO_ERROR) {
+        qDebug("Error filling message list");
+        if (env_list) {
+            mailmessage_list_free(env_list);
+        }
+        return;
+    }
+    mailimf_references * refs;
+    uint32_t i = 0;
+    for(; i < carray_count(env_list->msg_tab) ; ++i) {
+        mailmessage * msg;
+        QBitArray mFlags(7);
+        msg = (mailmessage*)carray_get(env_list->msg_tab, i);
+        if (msg->msg_fields == NULL) {
+            qDebug("could not fetch envelope of message %i", i);
+            continue;
+        }
+        RecMail * mail = new RecMail();
+        mail->setWrapper(this);
+        mail_flags * flag_result = 0;
+        r = mailmessage_get_flags(msg,&flag_result);
+        if (r == MAIL_ERROR_NOT_IMPLEMENTED) {
+            mFlags.setBit(FLAG_SEEN);
+        }
+        mailimf_single_fields single_fields;
+        mailimf_single_fields_init(&single_fields, msg->msg_fields);
+        mail->setMsgsize(msg->msg_size);
+        mail->setFlags(mFlags);
+        mail->setMbox(mailbox);
+        mail->setNumber(i+1);
+        if (single_fields.fld_subject)
+            mail->setSubject( convert_String(single_fields.fld_subject->sbj_value));
+        if (single_fields.fld_from)
+            mail->setFrom(parseMailboxList(single_fields.fld_from->frm_mb_list));
+        if (single_fields.fld_to)
+            mail->setTo( parseAddressList( single_fields.fld_to->to_addr_list ) );
+        if (single_fields.fld_cc)
+            mail->setCC( parseAddressList( single_fields.fld_cc->cc_addr_list ) );
+        if (single_fields.fld_bcc)
+            mail->setBcc( parseAddressList( single_fields.fld_bcc->bcc_addr_list ) );
+        if (single_fields.fld_orig_date)
+            mail->setDate( parseDateTime( single_fields.fld_orig_date->dt_date_time ) );
+        if (single_fields.fld_message_id->mid_value)
+            mail->setMsgid(QString(single_fields.fld_message_id->mid_value));
+        refs = single_fields.fld_references;
+        if (refs && refs->mid_list && clist_count(refs->mid_list)) {
+            char * text = (char*)refs->mid_list->first->data;
+            mail->setReplyto(QString(text));
+        }
+        target.append(mail);
+    }
+    if (env_list) {
+        mailmessage_list_free(env_list);
+    }
 }
