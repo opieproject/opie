@@ -23,7 +23,6 @@
 #include <qwidget.h>
 #include <qlineedit.h>
 
-#include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
 #include <opie/oticker.h>
 

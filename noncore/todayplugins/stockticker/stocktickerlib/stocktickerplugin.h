@@ -21,7 +21,6 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
 
 #include <opie/todayplugininterface.h>
