@@ -3,8 +3,8 @@
 #include <qaction.h>
 #include <qapplication.h>
 
-//#include "mailfactory.h"
-//#include "composer.h"
+#include "settings.h"
+#include "composemail.h"
 #include "viewmail.h"
 
 AttachItem::AttachItem(QListView *parent, AttachItemStore &attachItemStore)
@@ -73,21 +73,22 @@ void ViewMail::setText()
 
      _mailHtml = tr(
 		"<html><body>"
-		"<div align=center><b>%1</b></div>"
+		"<div align=center><b><font color=#FF2222>%1</b></font></div>"
 		"<b>From:</b> %2<br>"
 		"<b>To:</b> %3<br>"
 		"%4"
 		"%5"
 		"<b>Date:</b> %6<hr>"
-		"<font face=fixed>%7</font>")
+		"<font face=fixed>")
 		.arg( deHtml( m_mail[1] ) )
 		.arg( deHtml( m_mail[0] ) )
 		.arg( deHtml( toString ) )
 		.arg( tr("<b>Cc:</b> %1<br>").arg( deHtml( ccString ) ) )
 		.arg( tr("<b>Bcc:</b> %1<br>").arg( deHtml( bccString ) ) )
-		.arg( m_mail[3] )
-		.arg("%1");
-	browser->setText( QString(_mailHtml) + deHtml( m_mail[2] ) );
+		.arg( m_mail[3] );
+	browser->setText( QString(_mailHtml) + deHtml( m_mail[2] ) + "</font>" );
+        // remove later in favor of a real handling
+	_gotBody = true;
 }
 
 
@@ -135,21 +136,21 @@ void ViewMail::slotReply()
 	}
 
 	QString rtext;
-//	rtext += QString("* %1 wrote on %2:\n")		// no i18n on purpose
-//		.arg(_mail.envelope().from()[0].toString())
-//		.arg(_mail.envelope().mailDate());
+	rtext += QString("* %1 wrote on %2:\n")		// no i18n on purpose
+		.arg(  m_mail[1] )
+		.arg( m_mail[3] );
 
-//	QString text = _mail.bodyPart(1).data();
-//	QStringList lines = QStringList::split(QRegExp("\\n"), text);
-	QStringList::Iterator it;
-//	for (it = lines.begin(); it != lines.end(); it++) {
-//		rtext += "> " + *it + "\n";
-//	}
+	QString text = m_mail[2];
+	QStringList lines = QStringList::split(QRegExp("\\n"), text);
+        QStringList::Iterator it;
+	for (it = lines.begin(); it != lines.end(); it++) {
+		rtext += "> " + *it + "\n";
+	}
 	rtext += "\n";
 
 	QString prefix;
-//	if (_mail.envelope().subject().find(QRegExp("^Re: *$")) != -1) prefix = "";
-//	else prefix = "Re: ";				// no i18n on purpose
+	if ( m_mail[1].find(QRegExp("^Re: *$")) != -1) prefix = "";
+	else prefix = "Re: ";				// no i18n on purpose
 
 //	SendMail sendMail;
 //	sendMail.setTo(_mail.envelope().from()[0].toString());
@@ -157,10 +158,13 @@ void ViewMail::slotReply()
 //	sendMail.setInReplyTo(_mail.envelope().messageId());
 //	sendMail.setMessage(rtext);
 
-//	Composer composer(this, 0, true);
-//	composer.setSendMail(sendMail);
-//	composer.showMaximized();
-//	composer.exec();
+
+/*        ComposeMail composer(this, 0, true);
+	composer.setMessage(  );
+	composer.showMaximized();
+	composer.exec();
+*/
+      qDebug ( rtext );
 }
 
 void ViewMail::slotForward()

@@ -35,6 +35,7 @@ public:
 public slots:
     void slotAdjustColumns();
 
+
 protected slots:
     void accept();
     
@@ -47,6 +48,8 @@ private slots:
     void pickAddressReply();
     void addAttachment();
     void removeAttachment();
+
+
 
 private:
     Settings *settings;

@@ -9,10 +9,10 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
     : ComposeMailUI( parent, name, modal, flags )
 {
     settings = s;
-    
+
     attList->addColumn( tr( "Name" ) );
     attList->addColumn( tr( "Size" ) );
-    
+
     QList<Account> accounts = settings->getAccounts();
     Account *it;
     for ( it = accounts.first(); it; it = accounts.next() ) {
@@ -26,7 +26,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
     if ( smtpAccounts.count() > 0 ) {
         fillValues( fromBox->currentItem() );
     } else {
-        QMessageBox::information( this, tr( "Problem" ), 
+        QMessageBox::information( this, tr( "Problem" ),
                                   tr( "<p>Please create an SMTP account first.</p>" ),
                                   tr( "Ok" ) );
     }
@@ -49,6 +49,7 @@ void ComposeMail::pickAddress( QLineEdit *line )
         line->setText( line->text() + ", " + names );
     }
 }
+
 
 void ComposeMail::pickAddressTo()
 {
@@ -93,7 +94,7 @@ void ComposeMail::fillValues( int current )
 void ComposeMail::slotAdjustColumns()
 {
     int currPage = tabWidget->currentPageIndex();
-    
+
     tabWidget->showPage( attachTab );
     attList->setColumnWidth( 0, attList->visibleWidth() - 80 );
     attList->setColumnWidth( 1, 80 );
@@ -113,7 +114,7 @@ void ComposeMail::addAttachment()
 void ComposeMail::removeAttachment()
 {
     if ( !attList->currentItem() ) {
-        QMessageBox::information( this, tr( "Error" ), 
+        QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select a File.</p>" ),
                                   tr( "Ok" ) );
     } else {
@@ -123,7 +124,7 @@ void ComposeMail::removeAttachment()
 
 void ComposeMail::accept()
 {
-    qDebug( "Sending Mail with " + 
+    qDebug( "Sending Mail with " +
             smtpAccounts.at( fromBox->currentItem() )->getAccountName() );
     Mail *mail = new Mail();
     SMTPaccount *smtp = smtpAccounts.at( fromBox->currentItem() );
@@ -164,8 +165,8 @@ AttachViewItem::AttachViewItem( QListView *parent, Attachment *att )
 {
     attachment = att;
     qDebug( att->getMimeType() );
-    setPixmap( 0, attachment->getDocLnk().pixmap().isNull() ? 
-                  Resource::loadPixmap( "UnknownDocument-14" ) : 
+    setPixmap( 0, attachment->getDocLnk().pixmap().isNull() ?
+                  Resource::loadPixmap( "UnknownDocument-14" ) :
                   attachment->getDocLnk().pixmap() );
     setText( 0, att->getName().isEmpty() ? att->getFileName() : att->getName() );
     setText( 1, QString::number( att->getSize() ) );
