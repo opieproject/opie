@@ -374,10 +374,11 @@ void AudioWidget::toggleButton( int i ) {
 
 
 void AudioWidget::paintButton( QPainter *p, int i ) {
-    if ( audioButtons[i].isDown )
+    if ( audioButtons[i].isDown ) {
         p->drawPixmap( xoff, yoff, *buttonPixDown[i] );
-    else
+    } else {
         p->drawPixmap( xoff, yoff, *buttonPixUp[i] );
+    }
 }
 
 
@@ -412,20 +413,18 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
     for ( int i = 0; i < numButtons; i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
-
-              // The test to see if the mouse click is inside the button or not
+            // The test to see if the mouse click is inside the button or not
             int x = event->pos().x() - xoff;
             int y = event->pos().y() - yoff;
 
             bool isOnButton = ( x > 0 && y > 0 && x < imgButtonMask->width()
-                                && y < imgButtonMask->height() && imgButtonMask->pixelIndex( x, y ) == i + 1 );
-
-            if ( isOnButton && i == AudioVolumeUp )
-                qDebug("on up");
+                                && y < imgButtonMask->height()
+                                && imgButtonMask->pixelIndex( x, y ) == i + 1 );
 
             if ( isOnButton && !audioButtons[i].isHeld ) {
                 audioButtons[i].isHeld = TRUE;
                 toggleButton(i);
+
                 switch (i) {
                 case AudioVolumeUp:
                     qDebug("more clicked");
