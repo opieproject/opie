@@ -417,10 +417,10 @@ void PlayListWidget::writeConfig( Config& cfg ) const {
 
 void PlayListWidget::addToSelection( const DocLnk& lnk ) {
 //    qDebug("add");
-    if( lnk.file().find(" ",0,TRUE) != -1 || lnk.file().find("%20",0,TRUE) != -1) {
-        QMessageBox::message("Note","You are trying to play\na malformed url.");
+//     if( lnk.file().find(" ",0,TRUE) != -1 || lnk.file().find("%20",0,TRUE) != -1) {
+//         QMessageBox::message("Note","You are trying to play\na malformed url.");
         
-    } else { 
+//     } else { 
 
         d->setDocumentUsed = FALSE;
         if ( mediaPlayerState->playlist() ) {
@@ -429,7 +429,7 @@ void PlayListWidget::addToSelection( const DocLnk& lnk ) {
         }
         else
             mediaPlayerState->setPlaying( TRUE );
-    }
+//    }
 }
 
 
@@ -855,7 +855,7 @@ void PlayListWidget::btnPlay(bool b) {
       {
 //            if( d->selectedFiles->current()->file().find(" ",0,TRUE) != -1
 //                if( d->selectedFiles->current()->file().find("%20",0,TRUE) != -1) {
-                QMessageBox::message("Note","You are trying to play\na malformed url.");
+//                 QMessageBox::message("Note","You are trying to play\na malformed url.");
 //            } else { 
               mediaPlayerState->setPlaying(b);
 //          }

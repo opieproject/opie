@@ -24,7 +24,12 @@
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
+#include <qmessagebox.h>
+
 #include "audiodevice.h"
+
+
+#include <errno.h>
 
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
 #include "qpe/qcopenvelope_qws.h"
@@ -209,8 +214,14 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     if ( AudioDevicePrivate::dspFd == 0 ) {
 #endif
         if ( ( d->handle = ::open( "/dev/dsp", O_WRONLY ) ) < 0 ) {
-            perror("open(\"/dev/dsp\") sending to /dev/null instead");
-            d->handle = ::open( "/dev/null", O_WRONLY );
+
+//            perror("open(\"/dev/dsp\") sending to /dev/null instead");
+        perror("open(\"/dev/dsp\")");
+        QString errorMsg=tr("Somethin's wrong with\nyour sound device.\nopen(\"/dev/dsp\")\n")+(QString)strerror(errno)+tr("\n\nClosing player now.");
+        QMessageBox::critical(0, "Vmemo", errorMsg, tr("Abort"));
+        exit(-1); //harsh?
+//            d->handle = ::open( "/dev/null", O_WRONLY );
+          // WTF?!?!
         }
 #ifdef KEEP_DEVICE_OPEN 
         AudioDevicePrivate::dspFd = d->handle;
