@@ -34,11 +34,11 @@ QString AddressBookPlugin::pluginName() const {
 }
 
 double AddressBookPlugin::versionNumber() const {
-    return 0.2;
+    return 0.3;
 }
 
 QString AddressBookPlugin::pixmapNameWidget() const {
-    return "AddressBook";
+    return "addressbook/AddressBook";
 }
 
 QWidget* AddressBookPlugin::widget( QWidget *wid ) {
@@ -47,7 +47,7 @@ QWidget* AddressBookPlugin::widget( QWidget *wid ) {
 }
 
 QString AddressBookPlugin::pixmapNameConfig() const {
-    return "AddressBook";
+    return "addressbook/AddressBook";
 }
 
 TodayConfigWidget* AddressBookPlugin::configWidget( QWidget* wid ) {
