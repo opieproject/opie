@@ -1,42 +1,46 @@
-/* This file is part of the KDE libraries
-    Copyright (C) 1997 Christian Czezakte (e9025461@student.tuwien.ac.at)
- 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
- 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
- 
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-    Boston, MA 02111-1307, USA.
+/*
+                            This file is part of the Opie Project
+                            Copyright (C) 2003-2004 Holger Freyther <zecke@handhelds.org>
+                            Copyright (C) The Opie Team <opie-devel@handhelds.org>
+             =.             Based on KProcess (C) 1997 Christian Czezatke (e9025461@student.tuwien.ac.at)
+           .=l.
+          .>+-=
+_;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=         redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :          the terms of the GNU Library General Public
+.="- .-=="i,     .._        License as published by the Free Software
+- .   .-<_>     .<>         Foundation; either version 2 of the License,
+    ._= =}       :          or (at your option) any later version.
+   .%`+i>       _;_.
+   .i_,=:_.      -<s.       This program is distributed in the hope that
+    +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+   : ..    .:,     . . .    without even the implied warranty of
+   =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;     Library General Public License for more
+++=   -.     .`     .:      details.
+:     =  ...= . :.=-
+-.   .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .   )=.  =           Library General Public License along with
+   --        :-=`           this library; see the file COPYING.LIB.
+                            If not, write to the Free Software Foundation,
+                            Inc., 59 Temple Place - Suite 330,
+                            Boston, MA 02111-1307, USA.
 */
-//
-//  KPROCESS -- A class for handling child processes in KDE without
-//  having to take care of Un*x specific implementation details
-//
-//  version 0.3.1, Jan 8th 1998
-//
-//  (C) Christian Czezatke
-//  e9025461@student.tuwien.ac.at
-//  Ported by Holger Freyther to the Open Palmtop Integrated Environment
-//
 
-#ifndef __kprocess_h__
-#define __kprocess_h__
+#ifndef OPROCESS_H
+#define OPROCESS_H
 
+/* QT */
+#include <qcstring.h>
+#include <qobject.h>
+#include <qvaluelist.h>
+
+/* STD */
 #include <sys/types.h> // for pid_t
 #include <sys/wait.h>
 #include <signal.h>
 #include <unistd.h>
-#include <qvaluelist.h>
-#include <qcstring.h>
-#include <qobject.h>
 
 class QSocketNotifier;
 class OProcessPrivate;
@@ -141,7 +145,7 @@ class OProcessPrivate;
  *client .
  *
  *@author Christian Czezakte e9025461@student.tuwien.ac.at
- *
+ *@author Holger Freyther (Opie Port)
  *
  **/
 class OProcess : public QObject
@@ -187,15 +191,15 @@ public:
     /**
      * Constructor
      */
-    OProcess(QObject *parent = 0, const char *name = 0);
+    OProcess( QObject *parent = 0, const char *name = 0 );
     /**
      * Constructor
      */
-    OProcess(const QString &arg0, QObject *parent = 0, const char *name = 0);
+    OProcess( const QString &arg0, QObject *parent = 0, const char *name = 0 );
     /**
      * Constructor
      */
-    OProcess(const QStringList &args, QObject *parent = 0, const char *name = 0);
+    OProcess( const QStringList &args, QObject *parent = 0, const char *name = 0 );
 
     /**
      *Destructor:
@@ -220,7 +224,7 @@ public:
     @see operator<<
 
     */
-    bool setExecutable(const QString& proc);
+    bool setExecutable( const QString& proc );
 
 
     /**
@@ -234,21 +238,21 @@ public:
      *  </pre>
      *
      **/
-    OProcess &operator<<(const QString& arg);
+    OProcess &operator<<( const QString& arg );
     /**
      * Similar to previous method, takes a char *, supposed to be in locale 8 bit already.
      */
-    OProcess &operator<<(const char * arg);
+    OProcess &operator<<( const char * arg );
     /**
      * Similar to previous method, takes a QCString, supposed to be in locale 8 bit already.
      */
-    OProcess &operator<<(const QCString & arg);
+    OProcess &operator<<( const QCString & arg );
 
     /**
      * Sets the executable and the command line argument list for this process,
      * in a single method call, or add a list of arguments.
      **/
-    OProcess &operator<<(const QStringList& args);
+    OProcess &operator<<( const QStringList& args );
 
     /**
      * Clear a command line argument list that has been set by using
@@ -278,8 +282,8 @@ public:
      *  @return true on success, false on error
      *  (see above for error conditions)
      **/
-    virtual bool start(RunMode  runmode = NotifyOnExit,
-                       Communication comm = NoCommunication);
+    virtual bool start( RunMode runmode = NotifyOnExit,
+                        Communication comm = NoCommunication );
 
     /**
      * Stop the process (by sending it a signal).
@@ -287,7 +291,7 @@ public:
      * @param signo	The signal to send. The default is SIGTERM.
      * @return @p true if the signal was delivered successfully.
     */
-    virtual bool kill(int signo = SIGTERM);
+    virtual bool kill( int signo = SIGTERM );
 
     /**
        @return @p true if the process is (still) considered to be running
@@ -333,7 +337,7 @@ public:
      * this function because if the process did not exit normally,
      * it does not have a valid exit status.
     */
-    int  exitStatus() const;
+    int exitStatus() const;
 
 
     /**
@@ -360,7 +364,7 @@ public:
      * data has been sent or a @ref processHasExited() signal shows that
      * the child process is no longer alive...
      **/
-    bool writeStdin(const char *buffer, int buflen);
+    bool writeStdin( const char *buffer, int buflen );
 
     void flushStdin();
 
@@ -395,7 +399,10 @@ public:
      * Lets you see what your arguments are for debugging.
      */
 
-    const QValueList<QCString> &args() { return arguments; }
+    const QValueList<QCString> &args()
+    {
+        return arguments;
+    }
 
     /**
      * Controls whether the started process should drop any
@@ -403,7 +410,7 @@ public:
      *
      * The default is @p false : drop privileges
      */
-    void setRunPrivileged(bool keepPrivileges);
+    void setRunPrivileged( bool keepPrivileges );
 
     /**
      * Returns whether the started process will drop any
@@ -415,14 +422,14 @@ public:
      * Modifies the environment of the process to be started.
      * This function must be called before starting the process.
      */
-    void setEnvironment(const QString &name, const QString &value);
+    void setEnvironment( const QString &name, const QString &value );
 
     /**
      * Changes the current working directory (CWD) of the process
      * to be started.
      * This function must be called before starting the process.
      */
-    void setWorkingDirectory(const QString &dir);
+    void setWorkingDirectory( const QString &dir );
 
     /**
      * Specify whether to start the command via a shell or directly.
@@ -435,7 +442,7 @@ public:
      * are properly quoted when passed as argument.
      * @see quote()
      */
-    void setUseShell(bool useShell, const char *shell = 0);
+    void setUseShell( bool useShell, const char *shell = 0 );
 
     /**
      * This function can be used to quote an argument string such that
@@ -443,7 +450,7 @@ public:
      * user-provided file names which may contain spaces or quotes.
      * It also prevents expansion of wild cards and environment variables.
      */
-    static QString quote(const QString &arg);
+    static QString quote( const QString &arg );
 
     /**
      * Detaches OProcess from child process. All communication is closed.
@@ -454,8 +461,6 @@ public:
      */
     void detach();
 
-
-
 signals:
 
     /**
@@ -463,7 +468,7 @@ signals:
      * the process was run in the @p NotifyOnExit  (==default option to
      * @ref start()) or the @ref Block mode.
      **/
-    void processExited(OProcess *proc);
+    void processExited( OProcess *proc );
 
 
     /**
@@ -480,7 +485,7 @@ signals:
      * You should copy the information contained in @p buffer to your private
      * data structures before returning from this slot.
      **/
-    void receivedStdout(OProcess *proc, char *buffer, int buflen);
+    void receivedStdout( OProcess *proc, char *buffer, int buflen );
 
     /**
      * Emitted when output from the child process has
@@ -497,7 +502,7 @@ signals:
      *
      * The data still has to be read from file descriptor @p fd.
      **/
-    void receivedStdout(int fd, int &len);
+    void receivedStdout( int fd, int &len );
 
 
     /**
@@ -513,15 +518,14 @@ signals:
      * You should copy the information contained in @p buffer to your private
      * data structures before returning from this slot.
     */
-    void receivedStderr(OProcess *proc, char *buffer, int buflen);
+    void receivedStderr( OProcess *proc, char *buffer, int buflen );
 
     /**
      * Emitted after all the data that has been
      * specified by a prior call to @ref writeStdin() has actually been
      * written to the child process.
      **/
-    void wroteStdin(OProcess *proc);
-
+    void wroteStdin( OProcess *proc );
 
 protected slots:
 
@@ -529,13 +533,13 @@ protected slots:
      * This slot gets activated when data from the child's stdout arrives.
      * It usually calls "childOutput"
      */
-    void slotChildOutput(int fdno);
+    void slotChildOutput( int fdno );
 
     /**
      * This slot gets activated when data from the child's stderr arrives.
      * It usually calls "childError"
      */
-    void slotChildError(int fdno);
+    void slotChildError( int fdno );
     /*
     Slot functions for capturing stdout and stderr of the child
     */
@@ -545,7 +549,7 @@ protected slots:
      * stdin. If there is no more data to be sent to stdin currently
      * available, this function must disable the QSocketNotifier "innot".
      */
-    void slotSendData(int dummy);
+    void slotSendData( int dummy );
 
 protected:
 
@@ -624,7 +628,7 @@ protected:
      * but you could overload this function and establish a TCP/IP communication for
      * network communication, for example.
      */
-    virtual int setupCommunication(Communication comm);
+    virtual int setupCommunication( Communication comm );
 
     /**
      * Called right after a (successful) fork on the parent side. This function
@@ -654,7 +658,7 @@ protected:
      * process and emits the "processExited" signal (if the process was
      * not running in the "DontCare" mode).
      */
-    virtual void processHasExited(int state);
+    virtual void processHasExited( int state );
 
     /**
      * Should clean up the communication links to the child after it has
@@ -666,9 +670,9 @@ protected:
     /**
      * the socket descriptors for stdin/stdout/stderr.
      */
-    int out[2];
-    int in[2];
-    int err[2];
+    int out[ 2 ];
+    int in[ 2 ];
+    int err[ 2 ];
 
     /**
      * The socket notifiers for the above socket descriptors.
@@ -688,14 +692,14 @@ protected:
      * child process's stdout to the respective buffer and emits the signal
      * "@ref receivedStderr".
      */
-    int childOutput(int fdno);
+    int childOutput( int fdno );
 
     /**
      * Called by "slotChildOutput" this function copies data arriving from the
      * child process's stdout to the respective buffer and emits the signal
      * "@ref receivedStderr"
      */
-    int childError(int fdno);
+    int childError( int fdno );
 
     // information about the data that has to be sent to the child:
 
@@ -708,7 +712,6 @@ protected:
      * access to various data members.
      */
     friend class OProcessController;
-
 
 private:
     /**
@@ -729,7 +732,7 @@ private:
      * Used by @ref searchShell in order to find out whether the shell found
      * is actually executable at all.
      */
-    bool isExecutable(const QCString &filename);
+    bool isExecutable( const QCString &filename );
 
     // Disallow assignment and copy-construction
     OProcess( const OProcess& );
@@ -737,11 +740,8 @@ private:
 
 private:
     void init ( );
-
     OProcessPrivate *d;
 };
-
-
 
 #endif
 
