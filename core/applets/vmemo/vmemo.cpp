@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.11 2002-02-16 03:38:51 jeremy Exp $
+ * $Id: vmemo.cpp,v 1.12 2002-02-19 20:44:24 jeremy Exp $
  */
 
 #include <sys/utsname.h>
@@ -151,9 +151,8 @@ VMemo::VMemo( QWidget *parent, const char *name )
   if (uname(&name) != -1)
 	{
 	  QString release=name.release;
-	  qWarning("System release: %s\n", name.release);
 	  if(release.find("embedix",0,TRUE) !=-1)
-		  systemZaurus=TRUE;
+		systemZaurus=TRUE;
 	  else
 		{
 		  systemZaurus=FALSE;
@@ -165,7 +164,6 @@ VMemo::VMemo( QWidget *parent, const char *name )
 		  e << QString("toggleRecord()");
 		}
 	}
-  qWarning("VMemo done init");
 }
 
 VMemo::~VMemo()
@@ -174,15 +172,14 @@ VMemo::~VMemo()
 
 void VMemo::receive( const QCString &msg, const QByteArray &data )
 {
-    QDataStream stream( data, IO_ReadOnly );
-	qWarning("VMemo::receive: %s", (const char *)msg);
-	if (msg == "toggleRecord()")
-	  {
-		if (recording)
-		  mouseReleaseEvent(NULL);
-		else
-		  mousePressEvent(NULL);
-	  }
+  QDataStream stream( data, IO_ReadOnly );
+  if (msg == "toggleRecord()")
+	{
+	  if (recording)
+		mouseReleaseEvent(NULL);
+	  else
+		mousePressEvent(NULL);
+	}
 }
 
 void VMemo::paintEvent( QPaintEvent* )
@@ -191,7 +188,7 @@ void VMemo::paintEvent( QPaintEvent* )
   p.drawPixmap( 0, 1,( const char** )  vmemo_xpm );
 }
 
-void VMemo::mousePressEvent( QMouseEvent * )
+void VMemo::mousePressEvent( QMouseEvent *me )
 {
   // just to be safe
   if (recording)
@@ -199,15 +196,19 @@ void VMemo::mousePressEvent( QMouseEvent * )
 	  recording = FALSE;
 	  return;
 	}
+
+  /* 
+	 No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
+	 mousePressEvent and mouseReleaseEvent with a NULL parameter.
+  */
+  if (!systemZaurus && me != NULL)
+	return;
   
-  qWarning("VMemo::mousePress()");
   QSound::play(Resource::findSound("vmemob"));
   
   recording = TRUE;
-  qWarning("VMemo::mousePress() -> Starting to record");
   if (openDSP() == -1)
 	{
-	  // ### Display an error box
 	  QMessageBox::critical(0, "VMemo", "Could not open dsp device.", "Abort");
 	  recording = FALSE;
 	  return;
@@ -218,6 +219,7 @@ void VMemo::mousePressEvent( QMouseEvent * )
   
   QDateTime dt = QDateTime::currentDateTime();
   QString fileName;
+
   if(systemZaurus)
 	fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
   else
@@ -235,8 +237,10 @@ void VMemo::mousePressEvent( QMouseEvent * )
   
   if(openWAV(fileName.latin1()) == -1)
 	{
-	  // ### Display an error box
-	  qWarning("VMemo::mousePress() -> WAV error");
+	  QString err("Could not open the output file: ");
+	  err += fileName;
+
+	  QMessageBox::critical(0, "VMemo", err, "Abort");
 	  close(dsp);
 	  return;
 	}
@@ -258,7 +262,6 @@ void VMemo::mousePressEvent( QMouseEvent * )
 
 void VMemo::mouseReleaseEvent( QMouseEvent * )
 {
-  qWarning("VMemo::mouseRelese() -> Done recording");
   recording = FALSE;
 }
 
@@ -320,13 +323,10 @@ int VMemo::openDSP()
 
 int VMemo::openWAV(const char *filename)
 {
-  qDebug("Creating %s ",filename);
   track.setName(filename);
   if(!track.open(IO_WriteOnly|IO_Truncate|IO_Raw))
-	{
-	  qDebug("Could not open file");
 	  return -1;
-	}
+
   wav=track.handle();
   
   WaveHeader wh;
@@ -353,37 +353,19 @@ int VMemo::openWAV(const char *filename)
 
 void VMemo::record(void)
 {
-  int length=0, result, value; //, i;
-  char sound[512]; //, leftBuffer[256], rightBuffer[256];
-  
-  qWarning("VMemo::record()");
+  int length=0, result, value;
+  char sound[512];
   
   while(recording)
 	{
 	  result = read(dsp, sound, 512); // 8192
 	  qApp->processEvents();
 
-	  /* attempt to write only one channel...didnt work.
-	  for (i = 0; i < result; i++) {
-		leftBuffer[i] = sound[2*i];
-		rightBuffer[i] = sound[2*i+1];
-	  }
-	  */
-	  qApp->processEvents();
-
-	  /* needed to only write one channel. comment out above "write/length" code.
-	  write(wav, leftBuffer, result / 2);
-	  length += result/2;
-	  */
-
 	  write(wav, sound, result);
 	  length += result;
 
 	  qApp->processEvents();
 	}
-  
-  qWarning("VMemo::record() -> Done recording");
-  qWarning("VMemo::record() -> Closing dsp");
   
   value = length+36;
   lseek(wav, 4, SEEK_SET);
@@ -396,8 +378,5 @@ void VMemo::record(void)
 	perror("ioctl(\"SNDCTL_DSP_RESET\")");
   ::close(dsp);
   
-  qWarning("VMemo::record() -> playing done recording sound");
   QSound::play(Resource::findSound("vmemoe"));
-  qWarning("VMemo::record() -> terminating");
-  //QMessageBox::information(0, "VMemo", "Recording Done", 1);
 }
