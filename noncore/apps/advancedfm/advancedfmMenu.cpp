@@ -18,12 +18,24 @@
 
 #include <qpe/lnkproperties.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/resource.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qpe/applnk.h>
+#include <qpe/ir.h>
 
 #include <qmessagebox.h>
+#include <qmultilineedit.h>
 
+#include <qstring.h>
 
+#include <qlayout.h>
+#include <qpixmap.h>
+#include <qcombobox.h>
 #include <qpopupmenu.h>
+#include <qtabwidget.h>
+#include <qtoolbutton.h>
+#include <qtabwidget.h>
+#include <qlineedit.h>
 #include <qlistview.h>
 
 #include <stdlib.h>
@@ -194,12 +206,12 @@ void AdvancedFm::doDelete()
       if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) //if file is a directory
         {
         switch ( QMessageBox::warning( this, tr("Delete Directory?"), 
-					tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
-					tr("Yes"),
-					tr("No"),
-					0,
-					0,
-					1) )
+          tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
+          tr("Yes"),
+          tr("No"),
+          0,
+          0,
+          1) )
           {
         case 0:
         {
@@ -217,12 +229,12 @@ void AdvancedFm::doDelete()
       } else {
           if(doMsg) {
         switch ( QMessageBox::warning(this,tr("Delete"),
-					tr("Really delete\n%1?").arg( f ),
-				 tr("Yes"),
-				 tr("No"),
-				 0,
-				 0,
-				 1) ) {
+          tr("Really delete\n%1?").arg( f ),
+         tr("Yes"),
+         tr("No"),
+         0,
+         0,
+         1) ) {
           case 1:
               return;
               break;
@@ -700,30 +712,23 @@ void AdvancedFm::mkSym()
 
 void AdvancedFm::doBeam()
 {
-  Ir ir;
-  if(!ir.supported())
-    {
-    }
-  else
-    {
+   Ir ir;
+   if(!ir.supported())  {
+   } else {
       QStringList curFileList = getPath();
-      if( curFileList.count() > 0)
-        {
-          for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it )
-            {
-
-              QString curFile =  CurrentDir()->canonicalPath()+"/"+(*it);
-              if( curFile.right(1) == "/")
-                {
-                  curFile = curFile.left( curFile.length() -1);
-                }
-              Ir *file = new Ir(this, "IR");
-              connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
-              file->send( curFile, curFile );
+      if( curFileList.count() > 0)  {
+         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+            QString curFile = (*it);
+            QString curFilePath =  CurrentDir()->canonicalPath()+"/"+curFile;
+            if( curFilePath.right(1) == "/") {
+               curFilePath = curFilePath.left( curFilePath.length() -1);
             }
-        }
-    }
-
+            Ir *file = new Ir(this, "IR");
+            connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
+            file->send( curFilePath, curFile );
+         }
+      }
+   }
 }
 
 void AdvancedFm::fileBeamFinished( Ir *)
