@@ -1303,6 +1303,11 @@ DLLEXPORT(void) writeVObjectsToFile(char *fname, VObject *list)
 	    }
 }
 
+#ifndef __SHARP_COMP_
+
+// This function is not available in the Sharp ROM for SL 5500 !
+// Therefore I have to move it into the header file.. (se)
+
 DLLEXPORT(const char *) vObjectTypeInfo(VObject *o)
 {
     const char *type = vObjectName( o );
@@ -1310,6 +1315,6 @@ DLLEXPORT(const char *) vObjectTypeInfo(VObject *o)
 	type = vObjectStringZValue( o );
     return type;
 }
-
+#endif
 
 // end of source file vobject.c
