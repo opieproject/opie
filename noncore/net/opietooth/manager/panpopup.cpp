@@ -49,6 +49,7 @@ void PanPopup::slotConnect() {
 }
 
 void PanPopup::slotDisconnect()  {
+    if (!m_panconnection) m_panconnection = new StartPanConnection( m_item->mac() );
     m_panconnection->stop();
 }
 

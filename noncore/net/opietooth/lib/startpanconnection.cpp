@@ -53,6 +53,7 @@ void StartPanConnection::start()  {
 
 void StartPanConnection::slotExited( OProcess* proc ) {
     delete m_panConnect;
+    m_panConnect = 0l;
 }
 
 void StartPanConnection::slotStdOut(OProcess* proc, char* chars, int len)
@@ -63,6 +64,19 @@ void StartPanConnection::stop()  {
     if ( m_panConnect )  {
         delete m_panConnect;
         m_panConnect = 0l;
+    }
+    m_panConnect = new OProcess();
+    qDebug("IM STOP " + m_mac);
+
+    *m_panConnect << "pand" << "--kill" << m_mac;
+
+    connect( m_panConnect, SIGNAL( processExited( OProcess* ) ) ,
+             this, SLOT( slotExited( OProcess* ) ) );
+    connect( m_panConnect, SIGNAL( receivedStdout( OProcess*, char*, int ) ),
+             this, SLOT( slotStdOut( OProcess*, char*, int ) ) );
+    if (!m_panConnect->start( OProcess::NotifyOnExit, OProcess::AllOutput) ) {
+        qWarning( "could not stop" );
+        delete m_panConnect;
     }
 }
 
