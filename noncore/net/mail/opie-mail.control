@@ -5,6 +5,6 @@ Section: opie/pim
 Maintainer: Rajko Albrecht <alwin@handhelds.org>, Juergen Graf <jgf@handhelds.org>, Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
 Version: 0.6-$SUB_VERSION
-Depends: task-opie-minimal, libopiedb2, libopiecore2, libopieui2, libmailwrapper (>= 0.6)
+Depends: task-opie-minimal, libopiecore2, libopieui2, libmailwrapper (>= 0.6)
 Description: Opie's mail and news client (POP3, IMAP and NNTP)
 License: LGPL
