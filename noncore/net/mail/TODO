@@ -1,11 +1,10 @@
-- crosscompile libEtPan!
+- sort order of mailheaders switchable
+- message size limit for protocols like pop3
+- option to change place of local-folders
+- optin for downloading all mails from a pop3-account to local storage
+- delete moves mail to Trash folder (imap on server, pop3 lokal trash?)
+
 - do at least some error checking and report them to the user
-- thread the whole send/recieve thing
+- thread the whole send/recieve thing (not possible this moment)
 - add mail recieve support
-- queue mails for sending
-- check source for memory leaks (there is a whole bunch out there)
-- make bigger (64x64) desktop icon
-- rename app to "mail"
-- opie taskbar plugin
-- integrate in opie pim
 - get some sleep
