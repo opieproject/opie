@@ -3,42 +3,42 @@
     <name>Today</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute</translation>
     </message>
     <message>
         <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Bitte füllen Sie die Visitenkarte aus&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; neue Nachricht(en), &lt;b&gt;%2&lt;/b&gt; ausgehende</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt &lt;b&gt;1&lt;/b&gt; aktive Aufgabe:&lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt &lt;b&gt;%1&lt;/b&gt;aktive Aufgaben:&lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine aktiven Aufgaben</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute keine Termine mehr</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute keine Termine</translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Opiemail not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Opiemail ist nicht installiert</translation>
     </message>
 </context>
 <context>
