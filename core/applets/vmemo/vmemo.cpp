@@ -11,8 +11,8 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.57 2003-08-10 23:00:44 llornkcor Exp $
- */
+ * $Id: vmemo.cpp,v 1.58 2003-11-03 17:55:02 waspe Exp $
+*/
 // copyright 2002 and 2003  L.J.Potter <ljp@llornkcor.com>
 
 extern "C" {
@@ -26,7 +26,6 @@ extern "C" {
 #include <linux/soundcard.h>
 
 #include <errno.h>
-
 
 typedef struct _waveheader {
   u_long  main_chunk; /* 'RIFF'  */
