@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>Help for SFCave</source>
-        <translation type="unfinished"></translation>
+        <translation>Hilfe für SFCave</translation>
     </message>
 </context>
 <context>

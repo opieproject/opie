@@ -8,11 +8,11 @@
     </message>
     <message>
         <source>Ne&amp;xt</source>
-        <translation type="unfinished">&amp;Weiter</translation>
+        <translation>&amp;Weiter</translation>
     </message>
     <message>
         <source>&amp;Show next</source>
-        <translation type="unfinished">&amp;Nächsten anzeigen</translation>
+        <translation>&amp;Nächsten anzeigen</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished">&amp;Spiel</translation>
+        <translation>&amp;Spiel</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
