@@ -23,6 +23,8 @@ OPimRecord::OPimRecord( const OPimRecord& rec )
 }
 
 OPimRecord &OPimRecord::operator=( const OPimRecord& rec) {
+    if ( this == &rec ) return *this;
+
     Qtopia::Record::operator=( rec );
     m_xrefman = rec.m_xrefman;
     m_lastHit = rec.m_lastHit;
