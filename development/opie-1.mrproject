@@ -9,9 +9,9 @@
   </phases>
   <calendars>
     <day-types>
-      <day-type id="0" name="Arbeitstag" description="Ein Vorgabe-Arbeitstag"/>
-      <day-type id="1" name="Kein Arbeitstag" description="Ein Vorgabetag, an dem nicht gearbeitet wird"/>
-      <day-type id="2" name="Basis verwenden" description="Tag aus dem Basis-Kalender verwenden"/>
+      <day-type id="0" name="Working" description="A default working day"/>
+      <day-type id="1" name="Nonworking" description="A default non working day"/>
+      <day-type id="2" name="Use base" description="Use day from base calendar"/>
     </day-types>
     <calendar id="1" name="Default">
       <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
@@ -104,7 +104,7 @@
       <task id="58" name="write Announcement" note="Sonntag, 18.05.2003, 16:14&#10;" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
       <task id="59" name="update Webpages" note="" work="144000" start="20030627T170000Z" end="20030629T090000Z" percent-complete="0" type="normal" scheduling="fixed-work"/>
     </task>
-    <task id="60" name="OPIE 1.0" note="" work="45000" start="20030704T170000Z" end="20030705T053000Z" percent-complete="0" type="milestone" scheduling="fixed-work">
+    <task id="60" name="OPIE 1.0" note="" work="0" start="20030704T170000Z" end="20030704T170000Z" percent-complete="0" type="milestone" scheduling="fixed-work">
       <predecessors>
         <predecessor id="1" predecessor-id="56" type="FS"/>
       </predecessors>
@@ -125,18 +125,19 @@
         <property name="cost" value=""/>
       </properties>
     </resource>
-    <resource group="2" id="3" name="Patrick Vogt" type="1" units="0" email="" note="" std-rate="0">
+    <resource group="2" id="3" name="Patrick Vogt" type="1" units="0" email="tille@handhelds.org" note="" std-rate="0">
       <properties>
         <property name="cost" value=""/>
       </properties>
     </resource>
   </resources>
   <allocations>
-    <allocation task-id="30" resource-id="1" units="100"/>
-    <allocation task-id="29" resource-id="1" units="100"/>
     <allocation task-id="28" resource-id="1" units="100"/>
+    <allocation task-id="29" resource-id="1" units="100"/>
     <allocation task-id="31" resource-id="1" units="100"/>
+    <allocation task-id="30" resource-id="1" units="100"/>
     <allocation task-id="6" resource-id="2" units="100"/>
     <allocation task-id="28" resource-id="2" units="100"/>
+    <allocation task-id="7" resource-id="3" units="100"/>
   </allocations>
 </project>
