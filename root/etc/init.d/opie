@@ -17,7 +17,7 @@ export PATH=$PATH:$OPIEDIR/bin
 #this sets the iPaqs powerbutton to mapable
 echo 1 > /proc/sys/ts/suspend_button_mode
 
-if [ ! -x $OPIEDIR/bin/opie ] ; then exit 0 ; fi
+if [ ! -x $OPIEDIR/bin/qpe ] ; then exit 0 ; fi
 
 $OPIEDIR/bin/opie-reorgfiles
 
@@ -44,12 +44,12 @@ case $1 in
         *) echo "Unknown processor type -`module_id`-!" ;;
    	 esac
 	
-	$OPIEDIR/bin/opie 2>/dev/null >/dev/null &
+	$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
 
 	;;
 'stop')
         echo "Killing Opie..."
-        killproc opie
+        killproc qpe
         ;;
 *)
         echo "usage: $0 { start | stop }"
