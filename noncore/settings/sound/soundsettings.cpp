@@ -76,7 +76,9 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     }
 //         else
 //            stereoCheckBox->hide();
-    int sRate=config.readNumEntry("SizeLimit", 30);
+    int sRate=cfg.readNumEntry("SizeLimit", 30);
+    qDebug("%d",sRate);
+
     if(sRate ==30)
         timeLimitComboBox->setCurrentItem(0);
     else if(sRate==20)
@@ -84,7 +86,6 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* objname, WFlags fl )
     else if(sRate == 15)
         timeLimitComboBox->setCurrentItem(2);
     else if(sRate == 10)
-
         timeLimitComboBox->setCurrentItem(3);
     else
         timeLimitComboBox->setCurrentItem(4);
