@@ -20,14 +20,14 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	netsetup/dialup \
 	netsetup/lan \
 	opiemail/ifaces/pop3 opiemail/ifaces/smtp \
-	mpegplayer/libmpeg3 \
-	mpegplayer/libmad \
-	mpegplayer/wavplugin \
+	core/opieplayer/libmpeg3 \
+	core/opieplayer/libmad \
+	core/opieplayer/wavplugin \
 	cardmon \
 	sdmon 
 
 APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
-    filebrowser helpbrowser minesweep mpegplayer \
+    filebrowser helpbrowser minesweep core/opieplayer \
     settings/light-and-power \
     settings/language \
     settings/rotation \
