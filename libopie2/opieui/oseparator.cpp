@@ -1,6 +1,5 @@
 /*
                              This file is part of the Opie Project
-
                              Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
                              Copyright (C) 1997 Michael Roth <mroth@wirlweb.de>
               =.
@@ -30,13 +29,14 @@
 
 */
 
+/* OPIE */
+
+#include <opie2/odebug.h>
+#include <opie2/oseparator.h>
+
 /* QT */
 
 #include <qstyle.h>
-
-/* OPIE */
-
-#include <opie2/oseparator.h>
 
 OSeparator::OSeparator(QWidget* parent, const char* name, WFlags f)
    : QFrame(parent, name, f)
@@ -69,7 +69,7 @@ void OSeparator::setOrientation(int orientation)
          break;
       
       default:
-         qWarning( "OSeparator::setOrientation(): invalid orientation, using default orientation HLine" );
+         owarn << "OSeparator::setOrientation(): invalid orientation, using default orientation HLine" << oendl;
          
       case Horizontal:
       case HLine:

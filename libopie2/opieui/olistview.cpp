@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-              =.             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+              =.             (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -37,6 +36,7 @@
 
 /* OPIE */
 
+#include <opie2/odebug.h>
 #include <opie2/olistview.h>
 
 /*======================================================================================
@@ -142,7 +142,7 @@ OListViewItem* OListView::childFactory()
 void OListView::serializeTo( QDataStream& s ) const
 {
     #warning Caution... the binary format is still under construction...
-    qDebug( "storing OListView..." );
+    odebug << "storing OListView..." << oendl;
 
     // store number of columns and the labels
     s << columns();
@@ -167,13 +167,13 @@ void OListView::serializeTo( QDataStream& s ) const
         item = item->nextSibling();
     }
 
-    qDebug( "OListview stored." );
+    odebug << "OListview stored." << oendl;
 }
 
 void OListView::serializeFrom( QDataStream& s )
 {
     #warning Caution... the binary format is still under construction...
-    qDebug( "loading OListView..." );
+    odebug << "loading OListView..." << oendl;
 
     int cols;
     s >> cols;
@@ -199,7 +199,7 @@ void OListView::serializeFrom( QDataStream& s )
         s >> *item;
     }
 
-    qDebug( "OListView loaded." );
+    odebug << "OListView loaded." << oendl;
 
 }
 
@@ -377,7 +377,7 @@ OListViewItem* OListViewItem::childFactory()
 void OListViewItem::serializeTo( QDataStream& s ) const
 {
     #warning Caution... the binary format is still under construction...
-    qDebug( "storing OListViewItem..." );
+    odebug << "storing OListViewItem..." << oendl;
 
     // store item text
     for ( int i = 0; i < listView()->columns(); ++i )
@@ -403,14 +403,14 @@ void OListViewItem::serializeTo( QDataStream& s ) const
         item = item->nextSibling();
     }
 
-    qDebug( "OListviewItem stored." );
+    odebug << "OListviewItem stored." << oendl;
 }
 
 
 void OListViewItem::serializeFrom( QDataStream& s )
 {
     #warning Caution... the binary format is still under construction...
-    qDebug( "loading OListViewItem..." );
+    odebug << "loading OListViewItem..." << oendl;
 
     for ( int i = 0; i < listView()->columns(); ++i )
     {
@@ -430,7 +430,7 @@ void OListViewItem::serializeFrom( QDataStream& s )
         s >> (*item);
     }
 
-    qDebug( "OListViewItem loaded." );
+    odebug << "OListViewItem loaded." << oendl;
 }
 
 

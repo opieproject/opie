@@ -28,6 +28,13 @@
 
 */
 
+/* OPIE */
+
+#include <opie2/odebug.h>
+#include <opie2/oversatileview.h>
+#include <opie2/oversatileviewitem.h>
+#include <opie2/olistview.h>
+
 /* QT */
 
 #include <qaction.h>
@@ -43,12 +50,6 @@
 #include <qsize.h>
 #include <qstring.h>
 #include <qwidgetstack.h>
-
-/* OPIE */
-
-#include <opie2/oversatileview.h>
-#include <opie2/oversatileviewitem.h>
-#include <opie2/olistview.h>
 
 /* XPM */
 static const char * view_icon_xpm[] = {
@@ -289,7 +290,7 @@ void OVersatileView::setDefaultPixmaps( int mode, QPixmap& leaf, QPixmap& opened
     }
     else
     {
-        qDebug( "OVersatileView::setDefaultPixmaps(): invalid mode" );
+        odebug << "OVersatileView::setDefaultPixmaps(): invalid mode" << oendl;
     }
 }
 
@@ -317,7 +318,7 @@ void OVersatileView::setViewMode( int mode )
     }
     else
     {
-        qDebug( "OVersatileView::setViewMode(): invalid mode" );
+        odebug << "OVersatileView::setViewMode(): invalid mode" << oendl;
     }
 }
 
@@ -343,7 +344,7 @@ bool OVersatileView::isValidViewMode( int mode ) const
         {
             if ( _viewmode != mode )
             {
-                qDebug( "OVersatileView::isValidViewMode(): Requested operation not valid in current mode." );
+                odebug << "OVersatileView::isValidViewMode(): Requested operation not valid in current mode." << oendl;
                 return true;
             }
         }
@@ -351,13 +352,13 @@ bool OVersatileView::isValidViewMode( int mode ) const
         {
             if ( _viewmode != mode )
             {
-                qDebug( "OVersatileView::isValidViewMode(): Requested operation not valid in current mode." );
+                odebug << "OVersatileView::isValidViewMode(): Requested operation not valid in current mode." << oendl;
                 return false;
             }
         }
         default:
         {
-            qWarning( "OVersatileView::isValidViewMode(): Inconsistent object state!" );
+            owarn << "OVersatileView::isValidViewMode(): Inconsistent object state!" << oendl;
             return true;
         }
     }
@@ -448,7 +449,7 @@ void OVersatileView::onItem( QIconViewItem * item )
 
 void OVersatileView::expanded( QListViewItem *item ) // QListView
 {
-    //qDebug( "OVersatileView::expanded(): opening tree..." );
+    //odebug << "OVersatileView::expanded(): opening tree..." << oendl;
     if ( !_treeopened.isNull() )
         item->setPixmap( 0, _treeopened );
     emit( expanded( static_cast<OVersatileViewItem*>( item ) ) );

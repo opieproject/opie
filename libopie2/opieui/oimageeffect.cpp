@@ -27,14 +27,15 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
-// $Id: oimageeffect.cpp,v 1.3 2003-09-16 13:07:56 mickeyl Exp $
+// $Id: oimageeffect.cpp,v 1.4 2003-12-20 17:47:08 mickeyl Exp $
 
 #include <math.h>
 
 #include <qimage.h>
 #include <stdlib.h>
 
-#include "oimageeffect.h"
+#include <opie2/oimageeffect.h>
+#include <opie2/odebug.h>
 
 #define MaxRGB 255L
 #define DegreesToRadians(x) ((x)*M_PI/180.0)
@@ -63,7 +64,7 @@ QImage OImageEffect::gradient(const QSize &size, const QColor &ca,
     QImage image(size, 32);
 
     if (size.width() == 0 || size.height() == 0) {
-      qDebug( "WARNING: OImageEffect::gradient: invalid image" );
+      odebug << "WARNING: OImageEffect::gradient: invalid image" << oendl;
       return image;
     }
 
@@ -349,7 +350,7 @@ QImage OImageEffect::unbalancedGradient(const QSize &size, const QColor &ca,
     QImage image(size, 32);
 
     if (size.width() == 0 || size.height() == 0) {
-      qDebug( "WARNING: OImageEffect::unbalancedGradient : invalid image" );
+      odebug << "WARNING: OImageEffect::unbalancedGradient : invalid image" << oendl;
       return image;
     }
 
@@ -568,7 +569,7 @@ QImage OImageEffect::unbalancedGradient(const QSize &size, const QColor &ca,
 QImage& OImageEffect::intensity(QImage &image, float percent)
 {
     if (image.width() == 0 || image.height() == 0) {
-      qDebug( "WARNING: OImageEffect::intensity : invalid image" );
+      odebug << "WARNING: OImageEffect::intensity : invalid image" << oendl;
       return image;
     }
 
@@ -633,7 +634,7 @@ QImage& OImageEffect::channelIntensity(QImage &image, float percent,
                                        RGBComponent channel)
 {
     if (image.width() == 0 || image.height() == 0) {
-      qDebug( "WARNING: OImageEffect::channelIntensity : invalid image" );
+      odebug << "WARNING: OImageEffect::channelIntensity : invalid image" << oendl;
       return image;
     }
 
@@ -723,7 +724,7 @@ QImage& OImageEffect::modulate(QImage &image, QImage &modImage, bool reverse,
 {
     if (image.width() == 0 || image.height() == 0 ||
         modImage.width() == 0 || modImage.height() == 0) {
-          qDebug( "WARNING: OImageEffect::modulate : invalid image" );
+          odebug << "WARNING: OImageEffect::modulate : invalid image" << oendl;
           return image;
     }
 
@@ -852,7 +853,7 @@ QImage& OImageEffect::blend(const QColor& clr, QImage& dst, float opacity)
         return dst;
 
     if (opacity < 0.0 || opacity > 1.0) {
-        qDebug( "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1] ");
+        odebug << "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1] " << oendl;
         return dst;
     }
 
@@ -895,12 +896,12 @@ QImage& OImageEffect::blend(QImage& src, QImage& dst, float opacity)
         return dst;
 
     if (src.width() != dst.width() || src.height() != dst.height()) {
-        qDebug( "WARNING: OImageEffect::blend : src and destination images are not the same size" );
+        odebug << "WARNING: OImageEffect::blend : src and destination images are not the same size" << oendl;
         return dst;
     }
 
     if (opacity < 0.0 || opacity > 1.0) {
-        qDebug( "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1]" );
+        odebug << "WARNING: OImageEffect::blend : invalid opacity. Range [0, 1]" << oendl;
         return dst;
     }
 
@@ -940,7 +941,7 @@ QImage& OImageEffect::blend(QImage &image, float initial_intensity,
                             bool anti_dir)
 {
     if (image.width() == 0 || image.height() == 0 || image.depth()!=32 ) {
-        qDebug( "WARNING: OImageEffect::blend : invalid image" );
+        odebug << "WARNING: OImageEffect::blend : invalid image" << oendl;
         return image;
     }
 
@@ -1133,7 +1134,7 @@ QImage& OImageEffect::blend(QImage &image, float initial_intensity,
             }
         }
     }
-    else qDebug( "OImageEffect::blend effect not implemented" );
+    else odebug << "OImageEffect::blend effect not implemented" << oendl;
     return image;
 }
 
@@ -1163,7 +1164,7 @@ QImage& OImageEffect::blend(QImage &image1, QImage &image2,
     if (image1.width() == 0 || image1.height() == 0 ||
         image2.width() == 0 || image2.height() == 0 ||
         blendImage.width() == 0 || blendImage.height() == 0) {
-            qDebug( "OImageEffect::blend effect invalid image" );
+            odebug << "OImageEffect::blend effect invalid image" << oendl;
             return image1;
     }
 
@@ -1261,7 +1262,7 @@ unsigned int OImageEffect::uHash(unsigned int c)
 QImage& OImageEffect::hash(QImage &image, Lighting lite, unsigned int spacing)
 {
     if (image.width() == 0 || image.height() == 0) {
-        qDebug( "OImageEffect::hash effect invalid image" );
+        odebug << "OImageEffect::hash effect invalid image" << oendl;
         return image;
     }
 
@@ -1769,7 +1770,7 @@ bool OImageEffect::blend(
       lower.depth() != 32
   )
   {
-      qDebug( "OImageEffect::blend : Sizes not correct" );
+      odebug << "OImageEffect::blend : Sizes not correct" << oendl;
       return false;
   }
 
@@ -1986,7 +1987,7 @@ void OImageEffect::normalize(QImage &img)
     histogram = (int *)calloc(MaxRGB+1, sizeof(int));
     normalize_map = (unsigned int *)malloc((MaxRGB+1)*sizeof(unsigned int));
     if(!normalize_map || !histogram){
-        qWarning("Unable to allocate normalize histogram and map");
+        owarn << "Unable to allocate normalize histogram and map" << oendl;
         free(normalize_map);
         free(histogram);
         return;
@@ -2102,7 +2103,7 @@ void OImageEffect::equalize(QImage &img)
     equalize_map  = (int *)malloc((MaxRGB+1)*sizeof(unsigned int));
 
     if(!histogram || !map || !equalize_map){
-        qWarning("Unable to allocate equalize histogram and maps");
+        owarn << "Unable to allocate equalize histogram and maps" << oendl;
         free(histogram);
         free(map);
         free(equalize_map);
@@ -2187,7 +2188,7 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
     x_offset = (double *)malloc(w*sizeof(double));
     y_offset = (double *)malloc(h*sizeof(double));
     if(!x_offset || !y_offset){
-        qWarning("Unable to allocate pixels buffer");
+        owarn << "Unable to allocate pixels buffer" << oendl;
         free(x_offset);
         free(y_offset);
         return(src);
@@ -2205,7 +2206,7 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
         unsigned int *pixels;
         pixels = (unsigned int *)malloc(src.width()*sizeof(unsigned int));
         if(!pixels){
-            qWarning("Unable to allocate pixels buffer");
+            owarn << "Unable to allocate pixels buffer" << oendl;
             free(pixels);
             free(x_offset);
             free(y_offset);
@@ -2233,7 +2234,7 @@ QImage OImageEffect::sample(QImage &src, int w, int h)
         unsigned char *pixels;
         pixels = (unsigned char *)malloc(src.width()*sizeof(unsigned char));
         if(!pixels){
-            qWarning("Unable to allocate pixels buffer");
+            owarn << "Unable to allocate pixels buffer" << oendl;
             free(pixels);
             free(x_offset);
             free(y_offset);
@@ -3072,7 +3073,7 @@ QImage OImageEffect::oilPaint(QImage &src, int radius)
 {
     // TODO 8bpp src!
     if(src.depth() < 32){
-        qWarning("Oil Paint source image < 32bpp. Convert before using!");
+        owarn << "Oil Paint source image < 32bpp. Convert before using!" << oendl;
         return(src);
     }
     int j, k, i, x, y;

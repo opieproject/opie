@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -49,9 +48,12 @@ class QLayoutItem;
  * @ref marginHint() between the buttons and the separator and a
  * @ref marginHint() above the separator as well.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@Vanille.de>
  */
+
  // lets fix up Qt instead! Size does matter. -zecke
+ // while that may be true, reducing maintainance effort for the future does also matter -
+ // and I believe that maintaining a patch against QtE is more work than our classes -mml
 
 class ODialog : public QDialog
 {
@@ -83,7 +85,7 @@ class ODialog : public QDialog
     static int mSpacingSize;
 
     class ODialogPrivate;
-    ODialogPrivate *d; // d pointer always needed! -zecke
+    ODialogPrivate *d;
 
 };
 #endif // ODIALOG_H

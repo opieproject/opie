@@ -10,9 +10,10 @@ HEADERS     = olistview.h            \
               oversatileview.h       \
               oversatileviewitem.h   \
               odialog.h              \
-	      omessagebox.h          \
-	      oresource.h            \
-              oseparator.h           
+              omessagebox.h          \
+              oresource.h            \
+              otaskbarapplet.h       \
+              oseparator.h
 
 SOURCES     = olistview.cpp          \
               oimageeffect.cpp       \
@@ -23,27 +24,24 @@ SOURCES     = olistview.cpp          \
               oversatileview.cpp     \
               oversatileviewitem.cpp \
               odialog.cpp            \
-	      oresource.cpp          \
-              oseparator.cpp         
+              oresource.cpp          \
+              otaskbarapplet.cpp     \
+              oseparator.cpp
 
 INTERFACES  =
 TARGET      = opieui2
 VERSION     = 1.8.2
+
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS        += -lopiecore2
-MOC_DIR     = moc
-OBJECTS_DIR = obj
 
+LIBS        += -lopiecore2
 
 !contains( platform, x11 ) {
   include ( $(OPIEDIR)/include.pro )
-  HEADERS     += otaskbarapplet.h
-  SOURCES     += otaskbarapplet.cpp
 }
 
 contains( platform, x11 ) {
-  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
-  message( Warning: NO otaskbarapplet ATM )
+  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
 }
 

@@ -1,7 +1,6 @@
 /*
                              This file is part of the Opie Project
-
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@Vanille.de>
               =.
             .=l.
            .>+-=
@@ -31,23 +30,26 @@
 
 #include <opie2/odialog.h>
 
-int ODialog::mMarginSize = 5; // 11 like in KDialog is probably too much for PDA
-int ODialog::mSpacingSize = 2; // 6 like in KDialog is probably too much for PDA
+#warning Make Margin and Spacing device dependend and configurable!
+
+int ODialog::mMarginSize = 5;
+int ODialog::mSpacingSize = 2;
 
 ODialog::ODialog(QWidget *parent, const char *name, bool modal, WFlags f)
-  : QDialog(parent, name, modal, f)
+        :QDialog(parent, name, modal, f)
 {
+    // d = new ODialogPrivate();
 }
 
 int ODialog::marginHint()
 {
-  return( mMarginSize );
+    return( mMarginSize );
 }
 
 
 int ODialog::spacingHint()
 {
-  return( mSpacingSize );
+    return( mSpacingSize );
 }
 
 // Placeholder for even more sophisticed things
