@@ -3,7 +3,7 @@
     <name>BatteryStatus</name>
     <message>
         <source>Close</source>
-        <translation>Bezár</translation>
+        <translation type="obsolete">Bezár</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation>Elem állapota</translation>
+        <translation type="obsolete">Elem állapota</translation>
     </message>
     <message>
         <source>Failure</source>

@@ -29,15 +29,15 @@
     </message>
     <message>
         <source>Micro</source>
-        <translation>Micro</translation>
+        <translation type="obsolete">Micro</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation>Pequena</translation>
+        <translation type="obsolete">Pequena</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation>Média</translation>
+        <translation type="obsolete">Média</translation>
     </message>
     <message>
         <source>Show command list</source>
@@ -49,7 +49,7 @@
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Pastas em Baixo</translation>
+        <translation type="obsolete">Pastas em Baixo</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -65,15 +65,15 @@
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Preto em Transparente</translation>
+        <translation type="obsolete">Preto em Transparente</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation>Preto em Vermelho</translation>
+        <translation type="obsolete">Preto em Vermelho</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation>Vermelho em Preto</translation>
+        <translation type="obsolete">Vermelho em Preto</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -109,11 +109,11 @@
     </message>
     <message>
         <source>Font</source>
-        <translation>Fontes</translation>
+        <translation type="obsolete">Fontes</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opções</translation>
+        <translation type="obsolete">Opções</translation>
     </message>
     <message>
         <source>New</source>
@@ -149,7 +149,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation>Editar</translation>
+        <translation type="obsolete">Editar</translation>
     </message>
     <message>
         <source>None</source>
@@ -193,7 +193,83 @@
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Tabs em Cima</translation>
+        <translation type="obsolete">Tabs em Cima</translation>
+    </message>
+    <message>
+        <source>Konsole</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Black on Pink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pink on Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>new session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sessions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To exit fullscreen, tap here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History Lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Konsole </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -76,11 +76,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation type="obsolete">Schließen</translation>
     </message>
     <message>
         <source>Battery status</source>
-        <translation>Batteriestatus</translation>
+        <translation type="obsolete">Batteriestatus</translation>
     </message>
     <message>
         <source>no data</source>

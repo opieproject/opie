@@ -88,7 +88,7 @@
         <translation>Aggiungi i contenuti dei Tab del Launcher come menu nel O-Menu.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
+        <source>Show Applications in Subpopups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

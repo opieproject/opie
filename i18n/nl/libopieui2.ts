@@ -183,67 +183,67 @@
     <name>OKeyChooserConfigDialog</name>
     <message>
         <source>Configure Key</source>
-        <translation>Stel sleutel in</translation>
+        <translation type="obsolete">Stel sleutel in</translation>
     </message>
 </context>
 <context>
     <name>OKeyConfigWidget</name>
     <message>
         <source>Pixmap</source>
-        <translation>Pixmap</translation>
+        <translation type="obsolete">Pixmap</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>Name of the Action in the ListView Header</comment>
-        <translation>Naam</translation>
+        <translation type="obsolete">Naam</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Sleutel</translation>
+        <translation type="obsolete">Sleutel</translation>
     </message>
     <message>
         <source>Default Key</source>
-        <translation>Standaardsleutel</translation>
+        <translation type="obsolete">Standaardsleutel</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation>Sneltoets voor geselecteerde actie</translation>
+        <translation type="obsolete">Sneltoets voor geselecteerde actie</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation>Gee&amp;n</translation>
+        <translation type="obsolete">Gee&amp;n</translation>
     </message>
     <message>
         <source>&amp;Default</source>
-        <translation>Stan&amp;daard</translation>
+        <translation type="obsolete">Stan&amp;daard</translation>
     </message>
     <message>
         <source>C&amp;ustom</source>
-        <translation>&amp;Aangepast</translation>
+        <translation type="obsolete">&amp;Aangepast</translation>
     </message>
     <message>
         <source>Configure Key</source>
-        <translation>Stel sleutel in</translation>
+        <translation type="obsolete">Stel sleutel in</translation>
     </message>
     <message>
         <source>Default: </source>
-        <translation>Standaard:</translation>
+        <translation type="obsolete">Standaard:</translation>
     </message>
     <message>
         <source>Key is on BlackList</source>
-        <translation>Sleutel staat op de zwarte lijst</translation>
+        <translation type="obsolete">Sleutel staat op de zwarte lijst</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;De gekozen sleutel staat op de zwarte lijst en mag niet worden gebruikt, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;De gekozen sleutel staat op de zwarte lijst en mag niet worden gebruikt, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Key is already assigned</source>
-        <translation>Sleutel is al toegekend</translation>
+        <translation type="obsolete">Sleutel is al toegekend</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;De gekozen sleutel is al door een andere functie in gebruik, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;De gekozen sleutel is al door een andere functie in gebruik, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -482,6 +482,25 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::Internal::OFileViewFileListView</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Grootte</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished">Datum</translation>
+    </message>
+    <message>
+        <source>Mime Type</source>
+        <translation type="unfinished">Mime Type</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -489,22 +508,89 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OKeyChooserConfigDialog</name>
+    <message>
+        <source>Configure Key</source>
+        <translation type="unfinished">Stel sleutel in</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OKeyConfigWidget</name>
+    <message>
+        <source>Pixmap</source>
+        <translation type="unfinished">Pixmap</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>Name of the Action in the ListView Header</comment>
+        <translation type="unfinished">Naam</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation type="unfinished">Sleutel</translation>
+    </message>
+    <message>
+        <source>Default Key</source>
+        <translation type="unfinished">Standaardsleutel</translation>
+    </message>
+    <message>
+        <source>Shortcut for Selected Action</source>
+        <translation type="unfinished">Sneltoets voor geselecteerde actie</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation type="unfinished">Gee&amp;n</translation>
+    </message>
+    <message>
+        <source>&amp;Default</source>
+        <translation type="unfinished">Stan&amp;daard</translation>
+    </message>
+    <message>
+        <source>C&amp;ustom</source>
+        <translation type="unfinished">&amp;Aangepast</translation>
+    </message>
+    <message>
+        <source>Configure Key</source>
+        <translation type="unfinished">Stel sleutel in</translation>
+    </message>
+    <message>
+        <source>Default: </source>
+        <translation type="unfinished">Standaard:</translation>
+    </message>
+    <message>
+        <source>Key is on BlackList</source>
+        <translation type="unfinished">Sleutel staat op de zwarte lijst</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;De gekozen sleutel staat op de zwarte lijst en mag niet worden gebruikt, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Key is already assigned</source>
+        <translation type="unfinished">Sleutel is al toegekend</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;De gekozen sleutel is al door een andere functie in gebruik, Kies een andere sleutel a.u.b.&lt;/qt&gt;</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::Private::OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation>Naam</translation>
+        <translation type="obsolete">Naam</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Grootte</translation>
+        <translation type="obsolete">Grootte</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Mime Type</translation>
+        <translation type="obsolete">Mime Type</translation>
     </message>
 </context>
 <context>

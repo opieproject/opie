@@ -165,7 +165,7 @@
     </message>
     <message>
         <source>&#xb0;C</source>
-        <translation>&#xb0;C</translation>
+        <translation>°C</translation>
     </message>
     <message>
         <source>carats</source>
@@ -189,7 +189,7 @@
     </message>
     <message>
         <source>&#xb0;F</source>
-        <translation>&#xb0;F</translation>
+        <translation>°F</translation>
     </message>
     <message>
         <source>fl oz (US)</source>

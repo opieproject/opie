@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation>Ukazovat Aplikace v podnabídkách</translation>
+        <translation type="obsolete">Ukazovat Aplikace v podnabídkách</translation>
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
@@ -89,6 +89,10 @@
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
         <translation>Přidá obsah spouštěcích záložek jako menu v O-Menu.</translation>
+    </message>
+    <message>
+        <source>Show Applications in Subpopups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Fechar</translation>
+        <translation type="obsolete">Fechar</translation>
     </message>
     <message>
         <source>External power disconnected</source>
@@ -56,7 +56,7 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation>Situação da bateria</translation>
+        <translation type="obsolete">Situação da bateria</translation>
     </message>
     <message>
         <source>Failure</source>

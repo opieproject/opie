@@ -3,7 +3,7 @@
     <name>BatteryStatus</name>
     <message>
         <source>Close</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Battery status</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Failure</source>

@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status</source>
-        <translation>Состојба на батерија</translation>
+        <translation type="obsolete">Состојба на батерија</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Затвори</translation>
+        <translation type="obsolete">Затвори</translation>
     </message>
     <message>
         <source>Failure</source>

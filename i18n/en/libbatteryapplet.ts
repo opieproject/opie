@@ -2,10 +2,6 @@
 <context>
     <name>BatteryStatus</name>
     <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Charging</source>
         <translation type="unfinished"></translation>
     </message>
@@ -51,10 +47,6 @@
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Battery status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

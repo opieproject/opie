@@ -132,11 +132,11 @@ the current page?</source>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Não</translation>
     </message>
     <message>
         <source>Do you want to delete
@@ -295,7 +295,7 @@ all the pages?</source>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nova Página</translation>
     </message>
     <message>
         <source>White</source>
@@ -307,11 +307,11 @@ all the pages?</source>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cor da Caneta</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Cor Preenchimento</translation>
     </message>
     <message>
         <source>General</source>
@@ -338,7 +338,7 @@ all the pages?</source>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Informação da Página</translation>
     </message>
     <message>
         <source>General</source>

@@ -187,67 +187,67 @@
     <name>OKeyChooserConfigDialog</name>
     <message>
         <source>Configure Key</source>
-        <translation>Настроить ключ</translation>
+        <translation type="obsolete">Настроить ключ</translation>
     </message>
 </context>
 <context>
     <name>OKeyConfigWidget</name>
     <message>
         <source>Pixmap</source>
-        <translation>Изображение</translation>
+        <translation type="obsolete">Изображение</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>Name of the Action in the ListView Header</comment>
-        <translation>Имя</translation>
+        <translation type="obsolete">Имя</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Ключ</translation>
+        <translation type="obsolete">Ключ</translation>
     </message>
     <message>
         <source>Default Key</source>
-        <translation>Ключ по умолчанию</translation>
+        <translation type="obsolete">Ключ по умолчанию</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation>Ссылка для выбранного действия</translation>
+        <translation type="obsolete">Ссылка для выбранного действия</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation>&amp;Нет</translation>
+        <translation type="obsolete">&amp;Нет</translation>
     </message>
     <message>
         <source>&amp;Default</source>
-        <translation>&amp;По умолчанию</translation>
+        <translation type="obsolete">&amp;По умолчанию</translation>
     </message>
     <message>
         <source>C&amp;ustom</source>
-        <translation>&amp;Своя</translation>
+        <translation type="obsolete">&amp;Своя</translation>
     </message>
     <message>
         <source>Configure Key</source>
-        <translation>Настроить ключ</translation>
+        <translation type="obsolete">Настроить ключ</translation>
     </message>
     <message>
         <source>Default: </source>
-        <translation>По умолчанию:</translation>
+        <translation type="obsolete">По умолчанию:</translation>
     </message>
     <message>
         <source>Key is on BlackList</source>
-        <translation>Ключ в черном списке</translation>
+        <translation type="obsolete">Ключ в черном списке</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Выбранный вами ключ находится в черном списке и не может быть использован с этим менеджером. Пожалуйста выберите другой ключ.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Выбранный вами ключ находится в черном списке и не может быть использован с этим менеджером. Пожалуйста выберите другой ключ.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Key is already assigned</source>
-        <translation>Ключ уже зарегистрирован</translation>
+        <translation type="obsolete">Ключ уже зарегистрирован</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;Выбранный вами ключ уже используется в другом пункте вашей конфигурации. Пожалуйста выберите другой ключ.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;Выбранный вами ключ уже используется в другом пункте вашей конфигурации. Пожалуйста выберите другой ключ.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -474,6 +474,25 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::Internal::OFileViewFileListView</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Имя</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Размер</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished">Дата</translation>
+    </message>
+    <message>
+        <source>Mime Type</source>
+        <translation type="unfinished">Тип Mime</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -481,22 +500,89 @@ and </source>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OKeyChooserConfigDialog</name>
+    <message>
+        <source>Configure Key</source>
+        <translation type="unfinished">Настроить ключ</translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OKeyConfigWidget</name>
+    <message>
+        <source>Pixmap</source>
+        <translation type="unfinished">Изображение</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>Name of the Action in the ListView Header</comment>
+        <translation type="unfinished">Имя</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation type="unfinished">Ключ</translation>
+    </message>
+    <message>
+        <source>Default Key</source>
+        <translation type="unfinished">Ключ по умолчанию</translation>
+    </message>
+    <message>
+        <source>Shortcut for Selected Action</source>
+        <translation type="unfinished">Ссылка для выбранного действия</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation type="unfinished">&amp;Нет</translation>
+    </message>
+    <message>
+        <source>&amp;Default</source>
+        <translation type="unfinished">&amp;По умолчанию</translation>
+    </message>
+    <message>
+        <source>C&amp;ustom</source>
+        <translation type="unfinished">&amp;Своя</translation>
+    </message>
+    <message>
+        <source>Configure Key</source>
+        <translation type="unfinished">Настроить ключ</translation>
+    </message>
+    <message>
+        <source>Default: </source>
+        <translation type="unfinished">По умолчанию:</translation>
+    </message>
+    <message>
+        <source>Key is on BlackList</source>
+        <translation type="unfinished">Ключ в черном списке</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;Выбранный вами ключ находится в черном списке и не может быть использован с этим менеджером. Пожалуйста выберите другой ключ.&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Key is already assigned</source>
+        <translation type="unfinished">Ключ уже зарегистрирован</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;Выбранный вами ключ уже используется в другом пункте вашей конфигурации. Пожалуйста выберите другой ключ.&lt;/qt&gt;</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::Private::OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation type="obsolete">Имя</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Размер</translation>
+        <translation type="obsolete">Размер</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Дата</translation>
+        <translation type="obsolete">Дата</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Тип Mime</translation>
+        <translation type="obsolete">Тип Mime</translation>
     </message>
 </context>
 <context>

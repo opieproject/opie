@@ -52,11 +52,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Fermer</translation>
+        <translation type="obsolete">Fermer</translation>
     </message>
     <message>
         <source>Battery status</source>
-        <translation>Niveau de la batterie</translation>
+        <translation type="obsolete">Niveau de la batterie</translation>
     </message>
     <message>
         <source>Failure</source>

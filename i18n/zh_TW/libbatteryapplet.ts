@@ -3,7 +3,7 @@
     <name>BatteryStatus</name>
     <message>
         <source>Close</source>
-        <translation>關閉</translation>
+        <translation type="obsolete">關閉</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -52,10 +52,6 @@
     <message>
         <source>Battery time remaining</source>
         <translation>Battery time remaining</translation>
-    </message>
-    <message>
-        <source>Battery status</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Failure</source>

@@ -262,12 +262,20 @@ The default is Qtopia. It will let you log in with username &quot;root&quot; and
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>Изменить протокол синхронизации для разных устройств.
+        <translation type="obsolete">Изменить протокол синхронизации для разных устройств.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync запретит проверку пароля но каждое соединении будет подтверждаться вами.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 будет совместим с QtopiaDesktop, MultiSync и KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 изменит метод отправки данных клиенту и не будет работать со старыми клиентами.
 
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

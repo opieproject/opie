@@ -29,15 +29,15 @@
     </message>
     <message>
         <source>Micro</source>
-        <translation>Mikro</translation>
+        <translation type="obsolete">Mikro</translation>
     </message>
     <message>
         <source>Small Fixed</source>
-        <translation>Malé</translation>
+        <translation type="obsolete">Malé</translation>
     </message>
     <message>
         <source>Medium Fixed</source>
-        <translation>Střední</translation>
+        <translation type="obsolete">Střední</translation>
     </message>
     <message>
         <source>Command List</source>
@@ -53,11 +53,11 @@
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation>Záložky dole</translation>
+        <translation type="obsolete">Záložky dole</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation>Záložky nahoře</translation>
+        <translation type="obsolete">Záložky nahoře</translation>
     </message>
     <message>
         <source>Green on Black</source>
@@ -73,15 +73,15 @@
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation>Černá na průhledné</translation>
+        <translation type="obsolete">Černá na průhledné</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation>Černá na červené</translation>
+        <translation type="obsolete">Černá na červené</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation>Červená na černé</translation>
+        <translation type="obsolete">Červená na černé</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
@@ -117,7 +117,7 @@
     </message>
     <message>
         <source>Font</source>
-        <translation>Font</translation>
+        <translation type="obsolete">Font</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -125,7 +125,7 @@
     </message>
     <message>
         <source>Options</source>
-        <translation>Možnosti</translation>
+        <translation type="obsolete">Možnosti</translation>
     </message>
     <message>
         <source>New</source>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation>Upravit</translation>
+        <translation type="obsolete">Upravit</translation>
     </message>
     <message>
         <source>None</source>
@@ -194,6 +194,82 @@
     <message>
         <source>Hide Command List</source>
         <translation>Schovat seznam příkazů</translation>
+    </message>
+    <message>
+        <source>Konsole</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bottom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Top</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hidden</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tabs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Black on Pink</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pink on Black</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>new session</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sessions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zoom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To exit fullscreen, tap here.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>History Lines:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Konsole </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

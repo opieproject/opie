@@ -196,67 +196,67 @@
     <name>OKeyChooserConfigDialog</name>
     <message>
         <source>Configure Key</source>
-        <translation>Configurer clé</translation>
+        <translation type="obsolete">Configurer clé</translation>
     </message>
 </context>
 <context>
     <name>OKeyConfigWidget</name>
     <message>
         <source>Pixmap</source>
-        <translation>Dessin</translation>
+        <translation type="obsolete">Dessin</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>Name of the Action in the ListView Header</comment>
-        <translation>Nom</translation>
+        <translation type="obsolete">Nom</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation>Touche</translation>
+        <translation type="obsolete">Touche</translation>
     </message>
     <message>
         <source>Default Key</source>
-        <translation>Touche par défaut</translation>
+        <translation type="obsolete">Touche par défaut</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation>Raccourci pour l&apos;action séléctionnée</translation>
+        <translation type="obsolete">Raccourci pour l&apos;action séléctionnée</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation>&amp;Aucun</translation>
+        <translation type="obsolete">&amp;Aucun</translation>
     </message>
     <message>
         <source>&amp;Default</source>
-        <translation>&amp;Défaut</translation>
+        <translation type="obsolete">&amp;Défaut</translation>
     </message>
     <message>
         <source>C&amp;ustom</source>
-        <translation>&amp;Personnalisé</translation>
+        <translation type="obsolete">&amp;Personnalisé</translation>
     </message>
     <message>
         <source>Configure Key</source>
-        <translation>Configurer touche</translation>
+        <translation type="obsolete">Configurer touche</translation>
     </message>
     <message>
         <source>Default: </source>
-        <translation>Défaut : </translation>
+        <translation type="obsolete">Défaut : </translation>
     </message>
     <message>
         <source>Key is on BlackList</source>
-        <translation>La touche est dans la liste noire</translation>
+        <translation type="obsolete">La touche est dans la liste noire</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;La touche que vous avez sélectionnée est dans la liste noire et ne devrait pas être utilisée avec ce gestionnaire. Veuillez utiliser une touche différente.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;La touche que vous avez sélectionnée est dans la liste noire et ne devrait pas être utilisée avec ce gestionnaire. Veuillez utiliser une touche différente.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Key is already assigned</source>
-        <translation>Touche déjà assignée</translation>
+        <translation type="obsolete">Touche déjà assignée</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
-        <translation>&lt;qt&gt;La touche que vous avez sélectionnée est déjà utilisée pour un autre élément de votre configuration. Veuillez utiliser une autre touche.&lt;/qt&gt;</translation>
+        <translation type="obsolete">&lt;qt&gt;La touche que vous avez sélectionnée est déjà utilisée pour un autre élément de votre configuration. Veuillez utiliser une autre touche.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -495,6 +495,25 @@ et </translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::Internal::OFileViewFileListView</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished">Taille</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished">Date</translation>
+    </message>
+    <message>
+        <source>Mime Type</source>
+        <translation type="unfinished">Type mime</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
@@ -502,22 +521,89 @@ et </translation>
     </message>
 </context>
 <context>
+    <name>Opie::Ui::OKeyChooserConfigDialog</name>
+    <message>
+        <source>Configure Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OKeyConfigWidget</name>
+    <message>
+        <source>Pixmap</source>
+        <translation type="unfinished">Dessin</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <comment>Name of the Action in the ListView Header</comment>
+        <translation type="unfinished">Nom</translation>
+    </message>
+    <message>
+        <source>Key</source>
+        <translation type="unfinished">Touche</translation>
+    </message>
+    <message>
+        <source>Default Key</source>
+        <translation type="unfinished">Touche par défaut</translation>
+    </message>
+    <message>
+        <source>Shortcut for Selected Action</source>
+        <translation type="unfinished">Raccourci pour l&apos;action séléctionnée</translation>
+    </message>
+    <message>
+        <source>&amp;None</source>
+        <translation type="unfinished">&amp;Aucun</translation>
+    </message>
+    <message>
+        <source>&amp;Default</source>
+        <translation type="unfinished">&amp;Défaut</translation>
+    </message>
+    <message>
+        <source>C&amp;ustom</source>
+        <translation type="unfinished">&amp;Personnalisé</translation>
+    </message>
+    <message>
+        <source>Configure Key</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default: </source>
+        <translation type="unfinished">Défaut : </translation>
+    </message>
+    <message>
+        <source>Key is on BlackList</source>
+        <translation type="unfinished">La touche est dans la liste noire</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;La touche que vous avez sélectionnée est dans la liste noire et ne devrait pas être utilisée avec ce gestionnaire. Veuillez utiliser une touche différente.&lt;/qt&gt;</translation>
+    </message>
+    <message>
+        <source>Key is already assigned</source>
+        <translation type="unfinished">Touche déjà assignée</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
+        <translation type="unfinished">&lt;qt&gt;La touche que vous avez sélectionnée est déjà utilisée pour un autre élément de votre configuration. Veuillez utiliser une autre touche.&lt;/qt&gt;</translation>
+    </message>
+</context>
+<context>
     <name>Opie::Ui::Private::OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation>Nom</translation>
+        <translation type="obsolete">Nom</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Taille</translation>
+        <translation type="obsolete">Taille</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Date</translation>
+        <translation type="obsolete">Date</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Type mime</translation>
+        <translation type="obsolete">Type mime</translation>
     </message>
 </context>
 <context>

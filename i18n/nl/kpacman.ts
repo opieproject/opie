@@ -233,6 +233,10 @@ of is in een onbekend formaat.</translation>
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Status</name>

@@ -266,11 +266,19 @@ Uwaga, wszystkie ręcznie wprowadzone zakresy zostaną usunięte!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>Zmień protokół synchronizacji aby go dostosować do różnych urządzeń.
+        <translation type="obsolete">Zmień protokół synchronizacji aby go dostosować do różnych urządzeń.
     IntelliSync wyłączy sprawdzanie hasła, ale zostaniesz poproszony o akceptację połączenia.
     Opie1.0 będzie kompatybilne z QtopiaDesktop, MultiSync i KitchenSync.
     Qtopia1.7 zmieni sposób wysyłania danych do klienta i nie będzie działać ze starszymi klientami.
     </translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

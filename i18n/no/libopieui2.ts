@@ -30,14 +30,59 @@
     </message>
 </context>
 <context>
-    <name>OKeyChooserConfigDialog</name>
+    <name>OTimePickerDialogBase</name>
+    <message>
+        <source>Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pick Time:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OTimePickerDialogBase</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::Internal::OFileViewFileListView</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mime Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OFileSelector</name>
+    <message>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Opie::Ui::OKeyChooserConfigDialog</name>
     <message>
         <source>Configure Key</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>OKeyConfigWidget</name>
+    <name>Opie::Ui::OKeyConfigWidget</name>
     <message>
         <source>Pixmap</source>
         <translation type="unfinished"></translation>
@@ -93,51 +138,6 @@
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OTimePickerDialogBase</name>
-    <message>
-        <source>Time:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pick Time:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::OFileSelector</name>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Opie::Ui::Private::OFileViewFileListView</name>
-    <message>
-        <source>Name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mime Type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

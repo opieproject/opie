@@ -87,7 +87,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
+        <source>Show Applications in Subpopups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,21 +1,59 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>AlarmDlg</name>
+    <message>
+        <source>Clock</source>
+        <translation type="unfinished">Klokke</translation>
+    </message>
+    <message>
+        <source>Snooze</source>
+        <translation type="unfinished">Blunde</translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AlarmDlgBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TextLabel1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snooze</source>
+        <translation type="unfinished">Blunde</translation>
+    </message>
+    <message>
+        <source> mins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Clock</name>
     <message>
         <source>Snooze</source>
-        <translation>Blunde</translation>
+        <translation type="obsolete">Blunde</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="obsolete">PM</translation>
     </message>
     <message>
         <source>Clock</source>
-        <translation>Klokke</translation>
+        <translation type="obsolete">Klokke</translation>
     </message>
     <message>
         <source>Stopwatch</source>
-        <translation>Stoppeklokke</translation>
+        <translation type="obsolete">Stoppeklokke</translation>
     </message>
     <message>
         <source>Start</source>
@@ -27,19 +65,19 @@
     </message>
     <message>
         <source>Set Alarm</source>
-        <translation>Still inn alarm</translation>
+        <translation type="obsolete">Still inn alarm</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation>Sett dato og tid.</translation>
+        <translation type="obsolete">Sett dato og tid.</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation>Alarm PÅ</translation>
+        <translation type="obsolete">Alarm PÅ</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation>Alarm AV</translation>
+        <translation type="obsolete">Alarm AV</translation>
     </message>
     <message>
         <source>Stop</source>
@@ -47,10 +85,157 @@
     </message>
     <message>
         <source>Clock: Alarm was missed.</source>
-        <translation>Klokke: Alarm ble oversett.</translation>
+        <translation type="obsolete">Klokke: Alarm ble oversett.</translation>
     </message>
     <message>
-        <source>Alarm set: %1</source>
+        <source>Mon</source>
+        <comment>Monday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <comment>Tuesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <comment>Wednesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <comment>Thursday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <comment>Friday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <comment>Saturday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <comment>Sunday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lap/Split</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Daily Alarm:&lt;/b&gt;&lt;p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Daily alarm requires at least
+one day to be selected.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation type="unfinished">Alle</translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished">Lyd</translation>
+    </message>
+</context>
+<context>
+    <name>ClockBase</name>
+    <message>
+        <source>Clock</source>
+        <translation type="unfinished">Klokke</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stopwatch</source>
+        <translation type="unfinished">Stoppeklokke</translation>
+    </message>
+    <message>
+        <source>Split</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation type="unfinished">Start</translation>
+    </message>
+    <message>
+        <source>Starts and stops the stopwatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Lap/Split</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Resets the stopwatch.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Daily Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enabled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check to enable the daily alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the hour the alarm will sound.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the minute the alarm will sound.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AM</source>
+        <translation type="unfinished">AM</translation>
+    </message>
+    <message>
+        <source>PM</source>
+        <translation type="unfinished">PM</translation>
+    </message>
+    <message>
+        <source>Days:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Countdown Alarm</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Sound</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play File</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -58,41 +243,41 @@
     <name>Set_Alarm</name>
     <message>
         <source>Set Alarm</source>
-        <translation>Still inn alarm</translation>
+        <translation type="obsolete">Still inn alarm</translation>
     </message>
     <message>
         <source>Hour</source>
-        <translation>Time</translation>
+        <translation type="obsolete">Time</translation>
     </message>
     <message>
         <source>Minute</source>
-        <translation>Minutter</translation>
+        <translation type="obsolete">Minutter</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation>AM</translation>
+        <translation type="obsolete">AM</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation type="obsolete">PM</translation>
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation>mp3 alarm</translation>
+        <translation type="obsolete">mp3 alarm</translation>
     </message>
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Utsett
+        <translation type="obsolete">Utsett
 (minutter)</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="obsolete">Alle</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Lyd</translation>
+        <translation type="obsolete">Lyd</translation>
     </message>
 </context>
 </TS>

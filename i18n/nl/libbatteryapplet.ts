@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status</source>
-        <translation>Batterijstatus</translation>
+        <translation type="obsolete">Batterijstatus</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Sluit</translation>
+        <translation type="obsolete">Sluit</translation>
     </message>
     <message>
         <source>Failure</source>

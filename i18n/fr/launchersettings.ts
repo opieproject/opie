@@ -89,7 +89,11 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation>Show Applications in subpopups (**)</translation>
+        <translation type="obsolete">Show Applications in subpopups (**)</translation>
+    </message>
+    <message>
+        <source>Show Applications in Subpopups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

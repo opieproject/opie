@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status</source>
-        <translation>Stav baterie</translation>
+        <translation type="obsolete">Stav baterie</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Zavřít</translation>
+        <translation type="obsolete">Zavřít</translation>
     </message>
     <message>
         <source>Failure</source>

@@ -201,7 +201,7 @@ The entry &quot;All&quot; will allow *any* IP to connect.
 The entry &quot;None&quot; will *deny* any connection.
 
 If unsure, select &quot;Any&quot;.</source>
-        <translation>Selecteer een net-bereik of vul een nieuwe in.
+        <translation type="obsolete">Selecteer een net-bereik of vul een nieuwe in.
 
 Met deze lijst kan een net-bereik gekozen worden waarmee de handheld tegestaan is te verbinden.
 
@@ -266,11 +266,32 @@ Let erop dat daarmee al uw ingevulde net-bereiken zullen worden gewist!</transla
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation>Verander het Sync protocol om aan te sluiten op de verschillende mogelijkheden.
+        <translation type="obsolete">Verander het Sync protocol om aan te sluiten op de verschillende mogelijkheden.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync zal de wachtwoordcontrole uitschakelen, maar er zal wel worden gevraagd om bevestiging van de verbinding.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 moet worden gebruit voor QtopiaDesktop, MultiSync en KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 heeft de wijze van dataverzending veranderd, en zal dus niet werken met oudere versies.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></translation>
+    </message>
+    <message>
+        <source>Select a net-range or enter a new one.  
+
+This drop-down list lets you select a net range which is allowed to connect to your Zaurus.  
+
+For example, a net range of 192.168.1.0/24 will allow any machine with an IP between 192.168.1.1 and 192.168.1.254 to connect to (and sync with) your Zaurus.  
+
+The entry &quot;All&quot; will allow *any* IP to connect. 
+The entry &quot;None&quot; will *deny* any connection.  
+
+If unsure, select &quot;Any&quot;.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alter the Sync Protocol to tweak for the different devices.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -10,5 +10,17 @@
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
         <translation type="obsolete">FOO</translation>
     </message>
+    <message>
+        <source>Set time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clock..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

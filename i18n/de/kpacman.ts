@@ -224,6 +224,10 @@ oder iist in einem unbekannten Format.</translation>
         <source></source>
         <translation></translation>
     </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Status</name>

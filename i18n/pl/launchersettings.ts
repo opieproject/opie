@@ -88,7 +88,11 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation>Pokazuj aplikacje w podokienkach</translation>
+        <translation type="obsolete">Pokazuj aplikacje w podokienkach</translation>
+    </message>
+    <message>
+        <source>Show Applications in Subpopups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

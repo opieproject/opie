@@ -73,6 +73,10 @@
         <source>End Button</source>
         <translation>Ende-Button</translation>
     </message>
+    <message>
+        <source>Todo Button</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>

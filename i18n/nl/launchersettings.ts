@@ -88,7 +88,11 @@
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation>Laat programma&apos;s in sub-popups zien</translation>
+        <translation type="obsolete">Laat programma&apos;s in sub-popups zien</translation>
+    </message>
+    <message>
+        <source>Show Applications in Subpopups</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

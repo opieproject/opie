@@ -87,7 +87,7 @@
         <translation>Añadir el contenido de las pestañas del Lanzador como menú en el Menú O.</translation>
     </message>
     <message>
-        <source>Show Applications in subpopups</source>
+        <source>Show Applications in Subpopups</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

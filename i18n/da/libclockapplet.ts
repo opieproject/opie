@@ -7,5 +7,17 @@
         <translation type="obsolete">&lt;p&gt;System-klokken ser ikke ud til at passe.
 (%1)&lt;/p&gt;&lt;p&gt;Vil du stille den nu?&lt;/p&gt;</translation>
     </message>
+    <message>
+        <source>Set time...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clock..</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarm...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

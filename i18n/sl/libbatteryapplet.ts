@@ -51,11 +51,11 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Zapri</translation>
+        <translation type="obsolete">Zapri</translation>
     </message>
     <message>
         <source>Battery status</source>
-        <translation>Status baterije</translation>
+        <translation type="obsolete">Status baterije</translation>
     </message>
     <message>
         <source>Failure</source>
