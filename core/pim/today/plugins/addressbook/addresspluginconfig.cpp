@@ -41,7 +41,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
 
     SpinBox2 = new QSpinBox( box1, "SpinBox2" );
     SpinBox2->setMaxValue( 40 );
-    QWhatsThis::add( SpinBox2 , tr( "Set the maximum number of lines that should be shown for each" ) );
+    QWhatsThis::add( SpinBox2 , tr( "Set the maximum number of lines that should be shown for each anniversaries/birthdays" ) );
 
     QHBox *box2 = new QHBox( this );
 
@@ -63,7 +63,7 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     QHBox *box4 = new QHBox( this );
 
     QLabel* colorLabel = new QLabel( box4, "" );
-    colorLabel->setText( tr( "To activate color settings:\nRestart application !" ) );
+    colorLabel->setText( tr( "To activate settings: Restart application !" ) );
 
     QHBox *box5 = new QHBox( this );
 
@@ -86,16 +86,16 @@ AddressBookPluginConfig::AddressBookPluginConfig( QWidget *parent,  const char* 
     SpinUrgentClip = new QSpinBox( box7, "SpinDays" );
     SpinUrgentClip->setMaxValue( 200 );
     QLabel* colorLabel6 = new QLabel( box7, "" );
-    colorLabel6->setText( tr( "days: " ) );
+    colorLabel6->setText( tr( " days: " ) );
     urgentColor = new OColorButton( box7, red , "urgentColor" );
-    QWhatsThis::add( urgentColor , tr( "This color will be used if we are close to the event !" ) );
-    QWhatsThis::add( SpinUrgentClip , tr( "How many days we should search forward" ) );
+    QWhatsThis::add( urgentColor , tr( "This urgent color will be used if we are close to the event !" ) );
+    QWhatsThis::add( SpinUrgentClip , tr( "The urgent color will be used if the birthday/anniversary is closer than given days !" ) );
 
 
+    layout->addWidget( box4 );
     layout->addWidget( box1 );
     layout->addWidget( box2 );
     layout->addWidget( box3 );
-    layout->addWidget( box4 );
     layout->addWidget( box5 );
     layout->addWidget( box6 );
     layout->addWidget( box7 );
