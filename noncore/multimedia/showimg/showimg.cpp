@@ -43,7 +43,7 @@
 #include <qtimer.h>
 
 
-ImagePane::ImagePane( QWidget *parent=0 ) : QWidget( parent )
+ImagePane::ImagePane( QWidget *parent ) : QWidget( parent )
 {
     vb = new QVBoxLayout( this );
 
