@@ -27,12 +27,12 @@
 #include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
 
-TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name)
-    : QWidget(parent,  name ) {
+TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
+    : QWidget( parent, name ) {
 
     todoLabel= 0l;
-
     todo = 0l;
+
     if ( todo ) {
         delete todo;
     }
@@ -47,10 +47,11 @@ TodolistPluginWidget::~TodolistPluginWidget() {
     delete todo;
 }
 
+
 void TodolistPluginWidget::readConfig() {
-    Config cfg( "todaytodolistplugin" );
+    Config cfg( "todaytodoplugin" );
     cfg.setGroup( "config" );
-    m_maxLinesTask = cfg.readNumEntry( "maxlinestask",  5 );
+    m_maxLinesTask = cfg.readNumEntry( "maxlinestask", 5 );
 }
 
 
@@ -61,13 +62,14 @@ void TodolistPluginWidget::getTodo() {
 
     QVBoxLayout* layoutTodo = new QVBoxLayout( this );
 
-    if ( todoLabel  ) {
+    if ( todoLabel ) {
         delete todoLabel;
     }
 
     todoLabel = new OClickableLabel( this );
     todoLabel->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ) );
-    connect( todoLabel,  SIGNAL( clicked() ), this,  SLOT( startTodolist() ) );
+    connect( todoLabel, SIGNAL( clicked() ), this, SLOT( startTodolist() ) );
+
     QString output;
     QString tmpout;
     int count = 0;
@@ -75,15 +77,15 @@ void TodolistPluginWidget::getTodo() {
 
     // get overdue todos first
     QValueList<ToDoEvent> overDueList = todo->overDue();
-    qBubbleSort(overDueList);
+    qBubbleSort( overDueList );
     for ( QValueList<ToDoEvent>::Iterator it = overDueList.begin();
-          it!=overDueList.end(); ++it ) {
+          it != overDueList.end(); ++it ) {
         if (!(*it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
             QString desc = (*it).summary();
             if( desc.isEmpty() ) {
                 desc = (*it).description();
             }
-            tmpout += "<font color=#e00000><b>-" + desc.mid(0, m_maxCharClip) + "</b></font><br>";
+            tmpout += "<font color=#e00000><b>-" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
             ammount++;
         }
     }
@@ -91,8 +93,8 @@ void TodolistPluginWidget::getTodo() {
     // get total number of still open todos
     QValueList<ToDoEvent> openTodo = todo->rawToDos();
     qBubbleSort( openTodo );
-    for ( QValueList<ToDoEvent>::Iterator it=openTodo.begin();
-          it!=openTodo.end(); ++it ) {
+    for ( QValueList<ToDoEvent>::Iterator it = openTodo.begin();
+          it != openTodo.end(); ++it ) {
         if ( !(*it).isCompleted() ){
             count +=1;
             // not the overdues, we allready got them, and not if we are
@@ -102,7 +104,7 @@ void TodolistPluginWidget::getTodo() {
                 if( desc.isEmpty() ) {
                     desc = (*it).description();
                 }
-                tmpout += "<b>-</b>" + desc.mid(0, m_maxCharClip) + "<br>";
+                tmpout += "<b>-</b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
                 ammount++;
             }
         }
@@ -113,12 +115,12 @@ void TodolistPluginWidget::getTodo() {
         if( count == 1 ) {
             output += QObject::tr( "There is <b> 1</b> active task:  <br>" );
         } else {
-            output += QObject::tr( "There are <b> %1</b> active tasks: <br>" ).arg(count);
+            output += QObject::tr( "There are <b> %1</b> active tasks: <br>" ).arg( count );
         }
         output += tmpout;
     } else {
         output = QObject::tr( "No active tasks" );
-  }
+    }
     todoLabel->setText( output );
     layoutTodo->addWidget( todoLabel );
 }
@@ -127,6 +129,6 @@ void TodolistPluginWidget::getTodo() {
  * start the todolist
  */
 void TodolistPluginWidget::startTodolist() {
-    QCopEnvelope e("QPE/System", "execute(QString)");
-    e << QString("todolist");
+    QCopEnvelope e( "QPE/System", "execute(QString)" );
+    e << QString( "todolist" );
 }

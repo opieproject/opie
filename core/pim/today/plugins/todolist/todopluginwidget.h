@@ -38,6 +38,7 @@ protected slots:
 private:
     OClickableLabel *todoLabel;
     ToDoDB *todo;
+
     void readConfig();
     void getTodo();
     int m_maxLinesTask;

@@ -32,7 +32,7 @@ QString TodolistPlugin::pluginName() const {
 }
 
 double TodolistPlugin::versionNumber() const {
-    return 0.1;
+    return 0.7;
 }
 
 QString TodolistPlugin::pixmapNameWidget() const {
@@ -40,7 +40,7 @@ QString TodolistPlugin::pixmapNameWidget() const {
 }
 
 QWidget* TodolistPlugin::widget( QWidget *wid ) {
-    return new TodolistPluginWidget( wid,  "Todolist" );
+    return new TodolistPluginWidget( wid, "Todolist" );
 }
 
 QString TodolistPlugin::pixmapNameConfig() const {
@@ -52,7 +52,7 @@ ConfigWidget* TodolistPlugin::configWidget( QWidget* wid ) {
 }
 
 QString TodolistPlugin::appName() const {
-    return "Todolist";
+    return  QObject::tr( "Todolist" );
 }
 
 int TodolistPlugin::minHeight()  const {
@@ -61,11 +61,5 @@ int TodolistPlugin::minHeight()  const {
 
 int TodolistPlugin::maxHeight()  const {
     return 100;
-}
-
-
-
-
- int main() {
 }
 

@@ -50,7 +50,7 @@ TodolistPluginConfig::TodolistPluginConfig( QWidget *parent,  const char* name)
 }
 
 void TodolistPluginConfig::readConfig() {
-    Config cfg( "todaydatebookplugin" );
+    Config cfg( "todaytodoplugin" );
     cfg.setGroup( "config" );
     m_max_lines_task = cfg.readNumEntry( "maxlinestask", 5 );
     SpinBox2->setValue( m_max_lines_task );
@@ -58,8 +58,9 @@ void TodolistPluginConfig::readConfig() {
 
 
 void TodolistPluginConfig::writeConfig() {
-    Config cfg( "todaydatebookplugin" );
+    Config cfg( "todaytodoplugin" );
     cfg.setGroup( "config" );
+    m_max_lines_task = SpinBox2->value();
     cfg.writeEntry( "maxlinestask", m_max_lines_task );
     cfg.write();
 }
