@@ -151,6 +151,8 @@ OpieFtp::OpieFtp( )
     Remote_View->setColumnAlignment(1,QListView::AlignRight);
     Remote_View->addColumn( tr("Date"),-1);
     Remote_View->setColumnAlignment(2,QListView::AlignRight);
+    Remote_View->addColumn( tr("Dir"),-1);
+    Remote_View->setColumnAlignment(4,QListView::AlignRight);
     Remote_View->setAllColumnsShowFocus(TRUE);
     QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
@@ -243,8 +245,7 @@ OpieFtp::OpieFtp( )
     ProgressBar = new QProgressBar( this, "ProgressBar" );
     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 3 );
 
-    serverComboSelected(0);
-    fillCombos();
+//     fillCombos();
 
 #ifdef DEVELOPERS_VERSION
     ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
@@ -260,6 +261,8 @@ OpieFtp::OpieFtp( )
     filterStr="*";
     b=FALSE;
     populateLocalView();
+    readConfig();
+    ServerComboBox->setCurrentItem(currentServerConfig);   
     TabWidget->setCurrentPage(2);
 }
 
@@ -581,15 +584,17 @@ bool OpieFtp::populateRemoteView( )
             fileDate = s.mid( 42, 55-42);
             fileDate = fileDate.stripWhiteSpace();
             if(fileL.find("total",0,TRUE) == -1) {
-                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate);
                 if(s.left(1) == "d" || fileL.find("/",0,TRUE) != -1) {
+                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate,"d");
                     item->setPixmap( 0, Resource::loadPixmap( "folder" ));
-                      if(itemDir)
+//                      if(itemDir)
                           item->moveItem(itemDir);
                       itemDir=item;
                 } else {
+                QListViewItem * item = new QListViewItem( Remote_View, fileL, fileS, fileDate,"f");
                     item->setPixmap( 0, Resource::loadPixmap( "fileopen" ));
-                      if(itemFile)
+//                      if(itemFile)
+                          item->moveItem(itemDir);
                           item->moveItem(itemFile);
                       itemFile=item;
                 }
@@ -603,7 +608,6 @@ bool OpieFtp::populateRemoteView( )
     } else
         qDebug("temp file not opened successfullly "+sfile);
     Remote_View->setSorting( 4,TRUE);
-
     return true;        
 }
 
@@ -972,31 +976,11 @@ void OpieFtp::switchToConfigTab()
 
 void OpieFtp::readConfig()
 {
-
+    fillCombos();
     Config cfg("opieftp");
     cfg.setGroup("Server");
-    QString username, remoteServer, remotePathStr, password, port, temp;
-    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
-    for (int i = 0; i <= numberOfEntries; i++) {
-        temp.setNum(i+1);
-        cfg.setGroup("Server");
-        remoteServer = cfg.readEntry( temp,"");
-        ServerComboBox->insertItem( remoteServer );
-        cfg.setGroup(temp);
-
-        remotePathStr = cfg.readEntry(remoteServer,"");
-        int divider = remoteServer.length() - remoteServer.find(":",0,TRUE);
-        port = remoteServer.right( divider+1);
-        bool ok;
-        PortSpinBox->setValue( port.toInt(&ok,10));
-
-        remoteServer = remoteServer.left(divider - 1);
-        remotePath->setText( remotePathStr);
-        username = cfg.readEntry(temp);
-        UsernameComboBox->insertItem(username);
-        password = cfg.readEntryCrypt(username,"");
-        PasswordEdit->setText(password);
-    }
+    currentServerConfig = cfg.readNumEntry("currentServer", -1);
+    serverComboSelected( currentServerConfig);
 }
 
 void OpieFtp::writeConfig()
@@ -1088,6 +1072,10 @@ void OpieFtp::serverComboSelected(int index)
     username =  cfg.readEntry("Username", "anonymous");
     UsernameComboBox->lineEdit()->setText(username);
     PasswordEdit->setText(cfg.readEntryCrypt(username, "me@opieftp.org"));
+
+    cfg.setGroup("Server");
+    temp.sprintf("%d",currentServerConfig);
+    cfg.writeEntry("currentServer", temp);    
     update();
 }
 //    UsernameComboBox->lineEdit()->setText("root");
