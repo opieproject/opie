@@ -242,7 +242,7 @@ void WellenreiterMainWindow::demoReadFromGps()
     gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     GpsLocation loc = gps->position();
 
-    QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n$1" ).arg( loc.dmsPosition() ) );
+    QMessageBox::information( this, "Wellenreiter/Opie", tr( "GPS said:\n%1" ).arg( loc.dmsPosition() ) );
 }
 
 

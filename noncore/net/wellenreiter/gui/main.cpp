@@ -72,14 +72,16 @@ int main( int argc, char **argv )
             if ( result == QMessageBox::No ) return -1;
         }
 
-        if ( OProcess::processPID( "dhcpc" ) )
+        int dhcpid = OProcess::processPID( "dhcpc" );
+
+        if ( dhcpid )
         {
             result = QMessageBox::warning( w, " - Wellenreiter II -  (dhcp)", QObject::tr( "You have a dhcp client running.\n"
-            "This can severly limit scanning!\nShould I kill it for you?" ),
+            "(PID = %1)\nThis can severly limit scanning!\nShould I kill it for you?" ).arg( dhcpid ),
             QMessageBox::Yes, QMessageBox::No );
             if ( result == QMessageBox::Yes )
             {
-                if ( -1 == ::kill( OProcess::processPID( "dhcpc" ), SIGTERM ) )
+                if ( -1 == ::kill( dhcpid, SIGTERM ) )
                     qWarning( "Wellenreiter: can't kill process #%d (%s)", result, strerror( errno ) );
                 else
                     killed = true;
