@@ -4,9 +4,8 @@
 #include <stdio.h>
 #include <time.h>
 
-#include <openssl/md5.h>
-
 #include "miscfunctions.h"
+#include "md5.h"
 
 QString MiscFunctions::encodeQPrintable(const QString &src)
 {
