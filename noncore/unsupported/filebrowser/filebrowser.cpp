@@ -208,9 +208,6 @@ void FileView::resizeEvent( QResizeEvent *e )
 
 void FileView::updateDir()
 {
-      setCaption( "Boogie on boogieboy");
-      //qDebug("Caption should be "+currentDir);
-  
     generateDir( currentDir );
 }
 
@@ -722,7 +719,8 @@ void FileBrowser::init(const QString & dir)
     sortMenu->insertItem( tr( "Ascending" ), this, SLOT( updateSorting() ) );
     sortMenu->insertSeparator();
     sortMenu->insertItem( tr( "Show Hidden "), this, SLOT( showHidden() ) );
-     fileView->showingHidden=FALSE;    
+
+//    fileView->showingHidden=FALSE;    
 
     sortMenu->setItemChecked( sortMenu->idAt( 5 ), TRUE );
     sortMenu->setItemChecked( sortMenu->idAt( 0 ), TRUE );
@@ -873,7 +871,7 @@ void FileBrowser::updateSorting()
 }
 
 void FileBrowser::showHidden() {
-    if(! fileView->showingHidden) {
+    if(!fileView->showingHidden) {
          fileView->showingHidden=TRUE;
     sortMenu->setItemChecked( sortMenu->idAt( 7),TRUE);
     } else {
