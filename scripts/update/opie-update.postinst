@@ -19,6 +19,7 @@ for p in  $pack; do
 echo "rem.  $p" >> /tmp/update.log
 $IPKG_REMOVE $p
 done
+$IPKG_REMOVE qpe-pics
 
 #might help
 sync
@@ -31,6 +32,7 @@ for p in  $pack; do
 echo "inst. $p" >> /tmp/update.log
 $IPKG_INSTALL $p
 done
+$IPKG_INSTALL opie-pics
 
 ipkg remove opie-update
 
