@@ -208,7 +208,7 @@ tiden fra serveren </translation>
     <name>SetDateTime</name>
     <message>
         <source>System Time</source>
-        <translation>System Tid</translation>
+        <translation>Dato/Tid</translation>
     </message>
     <message>
         <source>Date</source>
