@@ -22,7 +22,7 @@ public:
     Interface *addNewInterface( const QString& );
     bool remove( Interface* iface );
     QString getPixmapName( Interface*  ) {return QString::fromLatin1("Tux"); }
-    void receive( const QCString&, const QByteArray& ar ) {} // don't listen
+    void receive( const QCString& msg, const QByteArray& ar ) { Q_CONST_UNUSED(msg) Q_CONST_UNUSED(ar) } // don't listen
 private:
     QList<Interface> m_interfaces;
 };
