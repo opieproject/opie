@@ -22,20 +22,20 @@
 
 
 ScreenshotAppletImpl::ScreenshotAppletImpl()
-    : volume(0), ref(0)
+    : screenshot(0), ref(0)
 {
 }
 
 ScreenshotAppletImpl::~ScreenshotAppletImpl()
 {
-    delete volume;
+    delete screenshot;
 }
 
 QWidget *ScreenshotAppletImpl::applet( QWidget *parent )
 {
-    if ( !volume )
-  volume = new ScreenshotApplet( parent );
-    return volume;
+    if ( !screenshot )
+  screenshot = new ScreenshotApplet( parent );
+    return screenshot;
 }
 
 int ScreenshotAppletImpl::position() const

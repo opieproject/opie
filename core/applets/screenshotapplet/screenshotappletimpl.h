@@ -37,7 +37,7 @@ public:
     virtual int position() const;
 
 private:
-    ScreenshotApplet *volume;
+    ScreenshotApplet *screenshot;
     ulong ref;
 };
 
