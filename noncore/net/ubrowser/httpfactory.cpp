@@ -39,7 +39,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 //	name = name.lower();
 	name = name.stripWhiteSpace();
 	
-	printf("%s\n", name.latin1());
+//	printf("%s\n", name.latin1());
 
 	if(name.startsWith("http://"))
 	{
@@ -73,7 +73,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 		port = portS.toInt();
 	}
 
-	printf("%s %s %d\n", host.latin1(), file.latin1(), port);
+//	printf("%s %s %d\n", host.latin1(), file.latin1(), port);
 	
 	if(port == 80)
 	{
@@ -107,7 +107,7 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	}
 	
 	QByteArray data;
-	printf( "HttpFactory::data: %s\n", inet_ntoa(*((struct in_addr *)serverInfo->h_addr )) );
+//	printf( "HttpFactory::data: %s\n", inet_ntoa(*((struct in_addr *)serverInfo->h_addr )) );
 	
 	QString request("GET " + file + " HTTP/1.1\r\nHost: " + host + ':' + portS + "\r\nConnection: close\r\n\r\n");
 	 
@@ -145,8 +145,8 @@ const QMimeSource * HttpFactory::data(const QString &abs_name) const
 	
 	
 	bytesSent = send( con, request.latin1(), request.length(), 0);
-	printf("HttpFactory::data: bytes written: %d out of: %d\n", bytesSent, request.length() );
-	printf("HttpFactory::data: request sent:\n%s", request.latin1());
+//	printf("HttpFactory::data: bytes written: %d out of: %d\n", bytesSent, request.length() );
+//	printf("HttpFactory::data: request sent:\n%s", request.latin1());
 	
 	data = this->processResponse( con, isText );
 	
@@ -216,48 +216,48 @@ const QByteArray HttpFactory::processResponse( int sockfd, bool &isText ) const
 			if( currentLine.contains( "Transfer-Encoding: chunked", false) >= 1 )
 			{
 				chunked = true;
-				printf( "HttpFactory::processResponse: chunked encoding\n" );
+//				printf( "HttpFactory::processResponse: chunked encoding\n" );
 			}
 			
 			if( currentLine.contains( "Content-Type: text", false ) >= 1 )
 			{
 				isText = true;
-				printf( "HttpFactory::processResponse: content type text\n" );
+//				printf( "HttpFactory::processResponse: content type text\n" );
 				if( currentLine.contains( "html", false ) >= 1)
 				{
 					browser->setTextFormat(Qt::RichText);
-					printf( "HttpFactory::processResponse: content type html\n" );
+//					printf( "HttpFactory::processResponse: content type html\n" );
 				}
 			}
 			
 			if( currentLine.contains( "Content-Type: image", false ) >= 1 )
 			{
 				isText = false;
-				printf( "HttpFactory::processResponse: content type image\n" );
+//				printf( "HttpFactory::processResponse: content type image\n" );
 			}
 			
 			if( currentLine.contains( "Content-Length", false ) >= 1 )
 			{
 				currentLine.remove( 0, 16 );
 				dataLength = currentLine.toInt();
-				printf( "HttpFactory::processResponse: content length: %d\n", dataLength );
+//				printf( "HttpFactory::processResponse: content length: %d\n", dataLength );
 			}
 			
 			if( currentLine.contains( "404", false ) >= 1 )
 			{
-				printf( "HttpFactory::processResponse: 404 error\n" );
+//				printf( "HttpFactory::processResponse: 404 error\n" );
 				return 0;
 			}
 			
 			currentLine = "";
-			printf("HttpFactory::processResponse: reseting currentLine: %s\n", currentLine.latin1() );
+//			printf("HttpFactory::processResponse: reseting currentLine: %s\n", currentLine.latin1() );
 		}
 	}
 }
 
 const QByteArray HttpFactory::recieveNormal( int sockfd, int dataLen ) const
 {
-	printf( "HttpFactory::recieveNormal: recieving w/out chunked encoding\n" );
+//	printf( "HttpFactory::recieveNormal: recieving w/out chunked encoding\n" );
 	
 	QByteArray data( dataLen );
 	QByteArray temp( dataLen );
@@ -283,13 +283,13 @@ const QByteArray HttpFactory::recieveNormal( int sockfd, int dataLen ) const
 		temp.fill('\0');
 	}
 	
-	printf( "HttpFactory::recieveNormal: end of data\n" );
+//	printf( "HttpFactory::recieveNormal: end of data\n" );
 	return data;
 }
 
 const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 {
-	printf( "HttpFactory::recieveChunked: recieving data with chunked encoding\n" );
+//	printf( "HttpFactory::recieveChunked: recieving data with chunked encoding\n" );
 	
 	QByteArray data;
 	QByteArray temp( 1 );
@@ -306,9 +306,9 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 		recv( sockfd, temp.data(), temp.size(), 0 );
 	}
 	
-	printf( "HttpFactory::recieveChunked: cSizeS: %s\n", cSizeS.latin1() );
+//	printf( "HttpFactory::recieveChunked: cSizeS: %s\n", cSizeS.latin1() );
 	cSize = cSizeS.toInt( 0, 16 );
-	printf( "HttpFactory::recieveChunked: first chunk of size: %d\n", cSize );
+//	printf( "HttpFactory::recieveChunked: first chunk of size: %d\n", cSize );
 	
 	if( *(temp.data()) == ';' )
 	{
@@ -355,9 +355,9 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 			recv( sockfd, temp.data(), temp.size(), 0 );
 		}
 	
-		printf( "HttpFactory::recieveChunked: cSizeS: %s\n", cSizeS.latin1() );
+//		printf( "HttpFactory::recieveChunked: cSizeS: %s\n", cSizeS.latin1() );
 		cSize = cSizeS.toInt( 0, 16 );
-		printf( "HttpFactory::recieveChunked: next chunk of size: %d\n", cSize );
+//		printf( "HttpFactory::recieveChunked: next chunk of size: %d\n", cSize );
 	
 		if( *(temp.data()) == ';' )
 		{
@@ -371,6 +371,6 @@ const QByteArray HttpFactory::recieveChunked( int sockfd ) const
 		data.resize( data.size() + cSize );
 	}
 	
-	printf( "HttpFactory::recieveChunked: end of data\n" );
+//	printf( "HttpFactory::recieveChunked: end of data\n" );
 	return data;
 }

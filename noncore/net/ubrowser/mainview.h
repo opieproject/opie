@@ -16,6 +16,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include <qpe/resource.h>
 #include <qpe/qpetoolbar.h>
+#include <qpe/applnk.h>
 
 #include <qapplication.h>
 #include <qmainwindow.h>
@@ -39,6 +40,7 @@ public:
 public slots:
 	void goClicked();
 	void textChanged();
+	void setDocument( const QString& applnk_filename );
 private:
 	QToolButton *back;
 	QToolButton *forward;

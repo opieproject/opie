@@ -23,7 +23,7 @@ int main( int argc, char **argv )
 	QPEApplication a( argc, argv );
 	MainView w;
 
-	a.setMainWidget( &w );
-	w.showMaximized();
+//	a.setMainWidget( &w );
+	a.showMainDocumentWidget( &w );
 	 return a.exec();
 }

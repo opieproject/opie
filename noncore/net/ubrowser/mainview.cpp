@@ -33,6 +33,7 @@ MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name
 
 	toolbar->setStretchableWidget(location);
 	toolbar->setHorizontalStretchable(true);
+	location->setAutoCompletion( true );
 
 	addToolBar(toolbar);
 
@@ -61,12 +62,19 @@ MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name
 	if( qApp->argc() > 1 )
 	{
 		char **argv = qApp->argv();
-		QString *argv1 = new QString( argv[1] );
-		if( !argv1->startsWith( "http://" ) && !argv1->startsWith( "/" ) )
+		int i = 0;
+		QString *openfile = new QString( argv[0] );
+		while( openfile->contains( "ubrowser" ) == 0 && i < qApp->argc() )
 		{
-			argv1->insert( 0, QDir::currentDirPath()+"/" );
+			i++;
+			*openfile = argv[i];
 		}
-		location->setEditText( *argv1 );
+		*openfile = argv[i+1];
+		if( !openfile->startsWith( "http://" ) && !openfile->startsWith( "/" ) )
+		{
+			openfile->insert( 0, QDir::currentDirPath()+"/" );
+		}
+		location->setEditText( *openfile );
 		goClicked();
 	}
 }
@@ -102,4 +110,12 @@ void MainView::textChanged()
 	}
 
 	location->setEditText(browser->source());
+}
+
+void MainView::setDocument( const QString& applnk_filename )
+{
+	DocLnk *file = new DocLnk( applnk_filename );
+	
+	location->setEditText( file->file() );
+	goClicked();
 }
