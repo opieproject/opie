@@ -100,6 +100,9 @@ int WExtensions::channel(){
     return 0;
   if ( 0 != ioctl( fd, SIOCGIWFREQ, &iwr ))
     return 0;
+  
+  // http://www.elanix.com/pdf/an137e.pdf
+
   double num = (double( iwr.u.freq.m ) * pow( 10, iwr.u.freq.e ) / 1000000000);
   double left = 2.401;
   double right = 2.416;
