@@ -20,10 +20,12 @@
 #include <qlineedit.h>
 #include <qtabwidget.h>
 #include <qcombobox.h>
+#include <qmessagebox.h>
 #include <qlayout.h>
 
 #include "pksettingsbase.h"
 #include "packagelistitem.h"
+
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   QMainWindow( parent, name, f )
@@ -34,6 +36,10 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 
   setCentralWidget( listViewPackages );
   setCaption( tr("Package Manager") );
+
+//	wait = new QMessageBox(tr("oipkg"),tr("Please wait")//,QMessageBox::Information,QMessageBox::NoButton,QMessageBox::NoButton,QMessageBox::NoButton);
+	wait = new QMessageBox(this);
+ 	wait->setText(tr("Please wait"));
 
 	channel = new QCopChannel( "QPE/Application/oipkg", this );
 	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
@@ -194,30 +200,38 @@ void MainWindow::runIpkg()
 
 void MainWindow::updateList()
 {
+	wait->show();
 	QTimer *t = new QTimer( this );
   connect( t, SIGNAL(timeout()), SLOT( rotateUpdateIcon() ) );
   t->start( 0, false );
 	packageList.clear();
   ipkg->update();
   getList();
-  t->stop(); 	
+  t->stop();
+	wait->hide();
+  	
 }
 
 void MainWindow::getList()
 {
+	wait->show();
   packageList.update();
   displayList();
+	wait->hide();
 }
 
 void MainWindow::filterList()
 {
+	wait->show();
  	QString f = "";
   if ( findAction->isOn() ) f = findEdit->text();
   packageList.filterPackages( f );
+	wait->hide();
 }
 
 void MainWindow::displayList()
 {
+	wait->hide();
 	filterList();
   listViewPackages->clear();
   Package *pack = packageList.first();

@@ -16,6 +16,7 @@ class QPEToolBar;
 class QLineEdit;
 class PackageListItem;
 class QCopChannel;
+class QMessageBox;
 
 class MainWindow : public QMainWindow
 {
@@ -69,6 +70,7 @@ private:
   QPEToolBar *sectionBar;
   QComboBox *section;
   QComboBox *subsection;
+  QMessageBox *wait;
 private slots:
   void rotateUpdateIcon();
 };

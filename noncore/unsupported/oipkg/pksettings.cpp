@@ -294,9 +294,9 @@ void PackageManagerSettings::readInstallationSetting(int setting)
   for ( int i = 0; i < activeDestination->count(); i++)
     {
       if ( activeDestination->text( i ) == dest )
-	activeDestination->setCurrentItem( i );
+				activeDestination->setCurrentItem( i );
       if ( activeLinkDestination->text( i ) == linkdest )
-	activeLinkDestination->setCurrentItem( i );
+				activeLinkDestination->setCurrentItem( i );
     }
 }
 

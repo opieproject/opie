@@ -202,8 +202,8 @@ void PmIpkg::commit( PackageList pl )
 
 void PmIpkg::startDialog()
 {
-  QDialog *d = new QDialog();
-  QGridLayout *RunWindowLayout = new QGridLayout( d );
+  installDialog = new QDialog(0,0,true);
+  QGridLayout *RunWindowLayout = new QGridLayout( installDialog );
   RunWindowLayout->setSpacing( 2 );
   RunWindowLayout->setMargin( 2 );
 
@@ -211,7 +211,7 @@ void PmIpkg::startDialog()
     buttons->setSpacing( 6 );
     buttons->setMargin( 0 );
 
-    PackageListView *plv = new PackageListView(d, "install",settings);
+    PackageListView *plv = new PackageListView(installDialog, "install",settings);
     RunWindowLayout->addWidget( plv, 1, 0 );
     for (Package *it=to_remove.first(); it != 0; it=to_remove.next() )
 	  {
@@ -221,7 +221,7 @@ void PmIpkg::startDialog()
     {
       plv->insertItem( new PackageListItem(plv, it,settings) );
     }
-    QPushButton *doItButton = new QPushButton( d, "doItButton" );
+    QPushButton *doItButton = new QPushButton( installDialog, "doItButton" );
     doItButton->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)0, (QSizePolicy::SizeType)0, doItButton->sizePolicy().hasHeightForWidth() ) );
     QFont doItButton_font(  doItButton->font() );
     doItButton_font.setPointSize( 8 );
@@ -230,7 +230,7 @@ void PmIpkg::startDialog()
     doItButton->setAutoResize( FALSE );
     buttons->addWidget( doItButton );
 
-    QPushButton *installButton = new QPushButton( d, "installButton" );
+    QPushButton *installButton = new QPushButton( installDialog, "installButton" );
     QFont installButton_font(  installButton->font() );
     installButton_font.setPointSize( 8 );
     installButton->setFont( installButton_font );
@@ -238,7 +238,7 @@ void PmIpkg::startDialog()
     installButton->setAutoResize( TRUE );
     buttons->addWidget( installButton );
 
-    QPushButton *removeButton = new QPushButton( d, "removeButton" );
+    QPushButton *removeButton = new QPushButton( installDialog, "removeButton" );
     QFont removeButton_font(  removeButton->font() );
     removeButton_font.setPointSize( 7 );
     removeButton->setFont( removeButton_font );
@@ -246,7 +246,7 @@ void PmIpkg::startDialog()
     removeButton->setAutoResize( TRUE );
     buttons->addWidget( removeButton );
 
-    QPushButton *cancelButton = new QPushButton( d, "cancelButton" );
+    QPushButton *cancelButton = new QPushButton( installDialog, "cancelButton" );
     QFont cancelButton_font(  cancelButton->font() );
     cancelButton_font.setPointSize( 8 );
     cancelButton->setFont( cancelButton_font );
@@ -263,10 +263,10 @@ void PmIpkg::startDialog()
   connect( removeButton, SIGNAL( clicked() ),
   					this, SLOT( remove() ) );
   connect( cancelButton, SIGNAL( clicked() ),
-  					d, SLOT( close() ) );
-  d->showMaximized();
-  d->exec();
- // d->close();
+  					installDialog, SLOT( close() ) );
+  installDialog->showMaximized();
+  if ( installDialog->exec() ) doIt();
+ 	installDialog->close();
 }
 
 void PmIpkg::doIt()
@@ -279,6 +279,7 @@ void PmIpkg::doIt()
 void PmIpkg::remove()
 {
  	if ( to_remove.count() == 0 ) return;
+	installDialog->close();
 	show( true );
 
 	out("<hr><hr><b>"+tr("Removing")+"<br>"+tr("please wait")+"</b><br>");
@@ -300,6 +301,7 @@ void PmIpkg::remove()
 void PmIpkg::install()
 {
  	if ( to_install.count() == 0 ) return;
+	installDialog->close();
 	show( true );
 	out("<hr><hr><b>"+tr("Installing")+"<br>"+tr("please wait")+"</b><br>");
  	for (Package *it=to_install.first(); it != 0; it=to_install.next() )

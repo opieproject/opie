@@ -28,6 +28,7 @@ public:
 private:
   PackageManagerSettings* settings;
   RunWindow *runwindow;
+  QDialog *installDialog;
   QList<Package> to_remove;
   QList<Package> to_install;
   bool runwindowopen;
