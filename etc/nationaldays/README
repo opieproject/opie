@@ -12,12 +12,37 @@ then a short description tag.
 
 for example. It should be used later on.
 
-then a list of non-floating holidays follows, encapsulated with 
+then a list of holidays follows, encapsulated with 
 <entries>
 ...
 </entries>
 
-Each entry has the form 
+A non-floating holiday entry has the form 
 <entry date="M-D" name="description of holiday"/>
 
-floating holidays are not supported this moment.
+floating holidays:
+<entry name="<name>" type="floating">
+<calculation>
+ ... calc entries ..
+</calculation>
+</entry>
+
+The calcentries may following tags:
+
+date - a short date (without Year!) in form M-D or the string "easter"
+offset - integer. these days will added (or substracted) after all other calcs are made.
+weekday - the day of week as monday, tuesday and so on.
+dayofmoth - in combination with weekday you can say "first <weekday> of ..." or "second <weekday> of ..."
+month - monthname(!) eg. january, february and so on.
+datedep - dependy to "date", may "before" or "after".
+
+example:
+<calculation>
+   <weekday value="sunday"/>
+   <datedep value="before"/>
+   <date value="12-24"/>
+</calculation>
+
+these will calculate sunday before christmaseve or christmas eve itself if it is a sunday.
+
+see german.xml for futher examples.
