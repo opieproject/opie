@@ -30,16 +30,10 @@ Important:
 - Store last settings of combo-boxes
 - Name order selected in "contacteditor" not used in list view.
 
-- There should be some icons for List and Cardview
-
 - After search (Started with Return): KeyFocus should be on Tabelle
 - Searchwidget closed: Selected user is jumping
 - Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
 	zu lange..
-
-- Smarter handling of "Cancel" and klicking on exit:
-	User of the old Addressbook always closing addressbook accidentely.. :(
-- Add "Do you really want to close app" Box ?
 
 - IRDA Receive: Contact is added, but start of editor with new entry expected..
 
@@ -85,3 +79,4 @@ Fixed:
 - Return from Contacteditor: Category resettet to all
 - Personal Details not working
 - If category changed, the letterpicker should be resetted
+- There should be some icons for List and Cardview
