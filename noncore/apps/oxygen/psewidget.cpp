@@ -39,7 +39,6 @@ PSEWidget::PSEWidget() : QWidget()
         configobj.setGroup( QString::number( n+1 ));
         
         position( n+1,h,v );
-        QList<OxyFrame> PSEframe;
         PSEframe.append( new OxyFrame( this , QString::number(n), configobj.readEntry( "Symbol" ) ) );
         grid->addWidget( PSEframe.current() , v/40+1 , h/40 );
         PSEframe.current()->setMinimumHeight( 11 );
@@ -64,6 +63,11 @@ QColor PSEWidget::PSEColor( QString block )
     else if ( block == "f" ) c.setRgb( 190 , 190 , 190 );
     return  c;
 };
+
+void PSEWidget::inverseColor( QString number )
+{
+	//foo
+}
 
 void PSEWidget::slotShowElement(QString number)
 { 

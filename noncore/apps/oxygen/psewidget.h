@@ -18,9 +18,12 @@
 #define _PSEWIDGET_H
 
 #include <qwidget.h>
+#include <qlist.h>
+#include "oxyframe.h"
 
 class QGridLayout;
 class OxydataWidget;
+class PSEframe;
 
 class PSEWidget : public QWidget
 {
@@ -30,6 +33,9 @@ class PSEWidget : public QWidget
 		PSEWidget();
         QGridLayout *bottom_grid;
         OxydataWidget *oxyDW;
+
+		void inverseColor( QString );
+        QList<OxyFrame> PSEframe;
 
     private:
         QGridLayout *maingrid;
