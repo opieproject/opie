@@ -586,7 +586,7 @@ void Wellenreiter::startClicked()
     if ( cardtype != DEVTYPE_FILE )
         pcap->open( interface );
     else
-        pcap->open( QFile( interface ) );
+        pcap->openCaptureFile( interface );
 
     odebug << "Wellenreiter:: dumping to " << dumpname << "" << oendl;
     pcap->openDumpFile( dumpname );
