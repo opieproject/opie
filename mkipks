@@ -213,7 +213,7 @@ do
 	    if (which mkfs.jffs2 >/dev/null 2>&1); then
 		size=$(mkfs.jffs2 -r $DATADIR | wc -c)
 	    fi
-	    if ! (cat $i|grep -q ^Package); then
+	    if ! (cat $i|grep -q ^Package:); then
 		echo "Package: $packagename" >$CTRLDIR/control
 	    fi
 	    if [ ! -z "$size" ]; then
