@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002 by Stefan Eilers (eilers.stefan@epost.de)
 **
 ** This file is part of the Qtopia Environment.
 **
@@ -24,6 +25,7 @@
 #include <opie/opimrecord.h>
 #include <qpe/recordfields.h>
 
+#include <qdatetime.h>
 #include <qstringlist.h>
 
 #if defined(QPC_TEMPLATEDLL)
@@ -96,8 +98,8 @@ public:
     // personal
     void setSpouse( const QString &v ) { replace( Qtopia::Spouse, v ); }
     void setGender( const QString &v ) { replace( Qtopia::Gender, v ); }
-    void setBirthday( const QString &v ) { replace( Qtopia::Birthday, v ); }
-    void setAnniversary( const QString &v ) { replace( Qtopia::Anniversary, v ); }
+    void setBirthday( const QDate &v );
+    void setAnniversary( const QDate &v );
     void setNickname( const QString &v ) { replace( Qtopia::Nickname, v ); }
     void setChildren( const QString &v );
 
@@ -173,8 +175,8 @@ public:
     //personal
     QString spouse() const { return find( Qtopia::Spouse ); }
     QString gender() const { return find( Qtopia::Gender ); }
-    QString birthday() const { return find( Qtopia::Birthday ); }
-    QString anniversary() const { return find( Qtopia::Anniversary ); }
+    QDate birthday() const;
+    QDate anniversary() const;
     QString nickname() const { return find( Qtopia::Nickname ); }
     QString children() const { return find( Qtopia::Children ); }
     QStringList childrenList() const;
@@ -239,77 +241,5 @@ private:
     ContactPrivate *d;
 };
 
-// these methods are inlined to keep binary compatability with Qtopia 1.5
-inline void OContact::insertEmail( const QString &v )
-{
-    //qDebug("insertEmail %s", v.latin1());
-    QString e = v.simplifyWhiteSpace();
-    QString def = defaultEmail();
-
-    // if no default, set it as the default email and don't insert
-    if ( def.isEmpty() ) {
-	setDefaultEmail( e ); // will insert into the list for us
-	return;
-    }
-
-    // otherwise, insert assuming doesn't already exist
-    QString emailsStr = find( Qtopia::Emails );
-    if ( emailsStr.contains( e ))
-	return;
-    if ( !emailsStr.isEmpty() )
-	emailsStr += emailSeparator();
-    emailsStr += e;
-    replace( Qtopia::Emails, emailsStr );
-}
-
-inline void OContact::removeEmail( const QString &v )
-{
-    QString e = v.simplifyWhiteSpace();
-    QString def = defaultEmail();
-    QString emailsStr = find( Qtopia::Emails );
-    QStringList emails = emailList();
-	
-    // otherwise, must first contain it
-    if ( !emailsStr.contains( e ) )
-	return;
-
-    // remove it
-    //qDebug(" removing email from list %s", e.latin1());
-    emails.remove( e );
-    // reset the string
-    emailsStr = emails.join(emailSeparator()); // Sharp's brain dead separator
-    replace( Qtopia::Emails, emailsStr );
-
-    // if default, then replace the default email with the first one
-    if ( def == e ) {
-	//qDebug("removeEmail is default; setting new default");
-	if ( !emails.count() )
-	    clearEmails();
-	else // setDefaultEmail will remove e from the list
-	    setDefaultEmail( emails.first() );
-    }
-}
-inline void OContact::clearEmails()
-{
-    mMap.remove( Qtopia::DefaultEmail );
-    mMap.remove( Qtopia::Emails );
-}
-inline void OContact::setDefaultEmail( const QString &v )
-{
-    QString e = v.simplifyWhiteSpace();
-
-    //qDebug("OContact::setDefaultEmail %s", e.latin1());
-    replace( Qtopia::DefaultEmail, e );
-
-    if ( !e.isEmpty() )	
-	insertEmail( e );
-	
-}
-
-inline void OContact::insertEmails( const QStringList &v )
-{
-    for ( QStringList::ConstIterator it = v.begin(); it != v.end(); ++it )
-	insertEmail( *it );
-}
 
 #endif

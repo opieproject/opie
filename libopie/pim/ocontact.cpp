@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2002 by Stefan Eilers (eilers.stefan@epost.de)
 **
 ** This file is part of the Qtopia Environment.
 **
@@ -26,6 +27,7 @@
 
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
+#include <qpe/timestring.h>
 
 #include <qobject.h>
 #include <qregexp.h>
@@ -225,14 +227,6 @@ OContact::~OContact()
   Sets the gender of the contact to \a str.
 */
 
-/*! \fn void OContact::setBirthday( const QString &str )
-  Sets the birthday for the contact to \a str.
-*/
-
-/*! \fn void OContact::setAnniversary( const QString &str )
-  Sets the anniversary of the contact to \a str.
-*/
-
 /*! \fn void OContact::setNickname( const QString &str )
   Sets the nickname of the contact to \a str.
 */
@@ -384,14 +378,6 @@ OContact::~OContact()
 
 /*! \fn QString OContact::gender() const
   Returns the gender of the contact.
-*/
-
-/*! \fn QString OContact::birthday() const
-  Returns the birthday of the contact.
-*/
-
-/*! \fn QString OContact::anniversary() const
-  Returns the anniversary of the contact.
 */
 
 /*! \fn QString OContact::nickname() const
@@ -585,14 +571,16 @@ QString OContact::toRichText() const
     if ( !str.isEmpty() )
 	text += "<b>" + QObject::tr("Spouse: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
-    str = birthday();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Birthday: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
-    str = anniversary();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Anniversary: ") + "</b>"
-		+ Qtopia::escapeString(str) + "<br>";
+    if ( !birthday().isNull() ){
+	    str = TimeString::numberDateString( birthday() );
+	    text += "<b>" + QObject::tr("Birthday: ") + "</b>"
+		    + Qtopia::escapeString(str) + "<br>";
+    }
+    if ( !anniversary().isNull() ){
+	    str = TimeString::numberDateString( anniversary() );
+	    text += "<b>" + QObject::tr("Anniversary: ") + "</b>"
+		    + Qtopia::escapeString(str) + "<br>";
+    }
     str = nickname();
     if ( !str.isEmpty() )
 	text += "<b>" + QObject::tr("Nickname: ") + "</b>"
@@ -1134,7 +1122,7 @@ static VObject *createVObject( const OContact &c )
 
     safeAddPropValue( vcard, VCNoteProp, c.notes() );
 
-    safeAddPropValue( vcard, VCBirthDateProp, c.birthday() );
+    safeAddPropValue( vcard, VCBirthDateProp, TimeConversion::toString( c.birthday() ) );
 
     if ( !c.company().isEmpty() || !c.department().isEmpty() || !c.office().isEmpty() ) {
 	VObject *org = safeAddProp( vcard, VCOrgProp );
@@ -1150,7 +1138,7 @@ static VObject *createVObject( const OContact &c )
 
     safeAddPropValue( vcard, "X-Qtopia-Spouse", c.spouse() );
     safeAddPropValue( vcard, "X-Qtopia-Gender", c.gender() );
-    safeAddPropValue( vcard, "X-Qtopia-Anniversary", c.anniversary() );
+    safeAddPropValue( vcard, "X-Qtopia-Anniversary", TimeConversion::toString( c.anniversary() ) );
     safeAddPropValue( vcard, "X-Qtopia-Nickname", c.nickname() );
     safeAddPropValue( vcard, "X-Qtopia-Children", c.children() );
 
@@ -1353,7 +1341,7 @@ static OContact parseVObject( VObject *obj )
 	    c.setGender( value );
 	}
 	else if ( name == "X-Qtopia-Anniversary" ) {
-	    c.setAnniversary( value );
+	    c.setAnniversary( TimeConversion::fromString( value ) );
 	}
 	else if ( name == "X-Qtopia-Nickname" ) {
 	    c.setNickname( value );
@@ -1492,4 +1480,130 @@ class QString OContact::recordField( int pos ) const
 {
 	QStringList SLFIELDS = fields(); // ?? why this ? (se)
 	return SLFIELDS[pos];
+}
+
+// In future releases, we should store birthday and anniversary
+// internally as QDate instead of QString ! 
+// QString is always too complicate to interprete (DD.MM.YY, DD/MM/YY, MM/DD/YY, etc..)(se)
+
+/*! \fn void OContact::setBirthday( const QDate& date )
+  Sets the birthday for the contact to \a date.
+*/
+void OContact::setBirthday( const QDate &v )
+{ 
+	if ( ( !v.isNull() ) && ( v.isValid() ) )
+		replace( Qtopia::Birthday, TimeConversion::toString( v ) );
+	
+}
+
+
+/*! \fn void OContact::setAnniversary( const QDate &date )
+  Sets the anniversary of the contact to \a date.
+*/
+void OContact::setAnniversary( const QDate &v )
+{
+	if ( ( !v.isNull() ) && ( v.isValid() ) )
+		replace( Qtopia::Anniversary, TimeConversion::toString( v ) );
+}
+
+/*! \fn QDate OContact::birthday() const
+  Returns the birthday of the contact.
+*/
+QDate OContact::birthday() const 
+{ 
+	QDate empty;
+	QString str = find( Qtopia::Birthday );
+	qWarning ("Birthday %s", str.latin1() );
+	if ( !str.isEmpty() )
+		return  TimeConversion::fromString ( str );
+	else
+		return empty;
+}
+
+
+/*! \fn QDate OContact::anniversary() const
+  Returns the anniversary of the contact.
+*/
+QDate OContact::anniversary() const 
+{ 
+	QDate empty;
+	QString str = find( Qtopia::Anniversary );
+	qWarning ("Anniversary %s", str.latin1() );
+	if ( !str.isEmpty() )
+		return TimeConversion::fromString ( str ); 
+	else
+		return empty;
+}
+
+
+void OContact::insertEmail( const QString &v )
+{
+    //qDebug("insertEmail %s", v.latin1());
+    QString e = v.simplifyWhiteSpace();
+    QString def = defaultEmail();
+
+    // if no default, set it as the default email and don't insert
+    if ( def.isEmpty() ) {
+	setDefaultEmail( e ); // will insert into the list for us
+	return;
+    }
+
+    // otherwise, insert assuming doesn't already exist
+    QString emailsStr = find( Qtopia::Emails );
+    if ( emailsStr.contains( e ))
+	return;
+    if ( !emailsStr.isEmpty() )
+	emailsStr += emailSeparator();
+    emailsStr += e;
+    replace( Qtopia::Emails, emailsStr );
+}
+
+void OContact::removeEmail( const QString &v )
+{
+    QString e = v.simplifyWhiteSpace();
+    QString def = defaultEmail();
+    QString emailsStr = find( Qtopia::Emails );
+    QStringList emails = emailList();
+	
+    // otherwise, must first contain it
+    if ( !emailsStr.contains( e ) )
+	return;
+
+    // remove it
+    //qDebug(" removing email from list %s", e.latin1());
+    emails.remove( e );
+    // reset the string
+    emailsStr = emails.join(emailSeparator()); // Sharp's brain dead separator
+    replace( Qtopia::Emails, emailsStr );
+
+    // if default, then replace the default email with the first one
+    if ( def == e ) {
+	//qDebug("removeEmail is default; setting new default");
+	if ( !emails.count() )
+	    clearEmails();
+	else // setDefaultEmail will remove e from the list
+	    setDefaultEmail( emails.first() );
+    }
+}
+void OContact::clearEmails()
+{
+    mMap.remove( Qtopia::DefaultEmail );
+    mMap.remove( Qtopia::Emails );
+}
+void OContact::setDefaultEmail( const QString &v )
+{
+    QString e = v.simplifyWhiteSpace();
+
+    //qDebug("OContact::setDefaultEmail %s", e.latin1());
+    replace( Qtopia::DefaultEmail, e );
+
+    if ( !e.isEmpty() )	
+	insertEmail( e );
+	
+}
+
+void OContact::insertEmails( const QStringList &v )
+{
+    for ( QStringList::ConstIterator it = v.begin(); it != v.end(); ++it )
+	insertEmail( *it );
 }
