@@ -1,15 +1,15 @@
 TEMPLATE    = lib
 CONFIG      += qt plugin warn_on release
-HEADERS     = ../../apps/sysinfo/graph.h \
-            ../../apps/sysinfo/load.h  \
-            ../../apps/sysinfo/memory.h  \
+HEADERS     = ../../settings/sysinfo/graph.h \
+            ../../settings/sysinfo/load.h  \
+            ../../settings/sysinfo/memory.h  \
             memoryappletimpl.h  \
             memorymeter.h  \
             memorystatus.h \
             swapfile.h
-SOURCES     = ../../apps/sysinfo/graph.cpp \
-            ../../apps/sysinfo/load.cpp \
-            ../../apps/sysinfo/memory.cpp \
+SOURCES     = ../../settings/sysinfo/graph.cpp \
+            ../../settings/sysinfo/load.cpp \
+            ../../settings/sysinfo/memory.cpp \
             memoryappletimpl.cpp  \
             memorymeter.cpp \
             memorystatus.cpp \
