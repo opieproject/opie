@@ -21,8 +21,8 @@
 #define QTOPIA_INTERNAL_CONTACT_MRE
 
 #include "ocontact.h"
-#include "vobject_p.h"
-#include "qfiledirect_p.h"
+#include "../../library/backend/vobject_p.h"
+#include "../../library/backend/qfiledirect_p.h"
 
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
