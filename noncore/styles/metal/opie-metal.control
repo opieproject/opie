@@ -1,0 +1,9 @@
+Files: plugins/styles/libmetal.so* 
+Priority: optional
+Section: opie/system
+Maintainer: L.J. Potter <ljp@llornkcor.com>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION.1
+Depends: opie-base ($QPE_VERSION)
+Description: Metal style by Trolltech.
+ Metal style ported to OPIE.
