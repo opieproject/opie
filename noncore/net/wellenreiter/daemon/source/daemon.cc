@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.19 2003-02-09 15:48:34 mjm Exp $
+ * $Id: daemon.cc,v 1.20 2003-02-09 19:22:51 mjm Exp $
  */
 
 #include "config.hh"
@@ -30,7 +30,7 @@ int main(int argc, char **argv)
 
   if(argc < 3)
     usage();
-
+  
   /* Set sniffer device */
   memset(cardtype.iface, 0, sizeof(cardtype.iface));
   strncpy(cardtype.iface, (char *)argv[1], sizeof(cardtype.iface) - 1);
@@ -40,27 +40,27 @@ int main(int argc, char **argv)
   if(cardtype.type < 1 || cardtype.type > 4)
     usage();
 
-  if(!card_into_monitormode(&handletopcap, cardtype.iface, cardtype.type))
+  /* set card into monitor mode */
+  if(!card_into_monitormode(&handletopcap, cardtype.iface, 
+			    cardtype.type))
   {
     wl_logerr("Cannot initialize the wireless-card, aborting");
     exit(EXIT_FAILURE);
   }
   wl_loginfo("Set card into monitor mode");
 
-
-  /////// following line will be moved to lib as soon as possible ////////////
-    if((handletopcap = pcap_open_live(cardtype.iface, BUFSIZ, 1, 0, NULL)) == NULL)
-    {
-      wl_logerr("pcap_open_live() failed: %s", strerror(errno));
-      exit(EXIT_FAILURE);
-    }
-
+  /* setup pcap */
+  if((handletopcap = pcap_open_live(cardtype.iface, 
+				    BUFSIZ, 1, 0, NULL)) == NULL)
+  {
+    wl_logerr("pcap_open_live() failed: %s", strerror(errno));
+    exit(EXIT_FAILURE);
+  }
+  
 #ifdef HAVE_PCAP_NONBLOCK
-    pcap_setnonblock(handletopcap, 1, NULL);
+  pcap_setnonblock(handletopcap, 1, NULL);
 #endif
-  ////////////////////////////////////////
- 
-
+  
   /* Setup socket for incoming commands */
   if((sock=wl_setupsock(DAEMONADDR, DAEMONPORT, saddr)) < 0)
   {
@@ -70,7 +70,8 @@ int main(int argc, char **argv)
   wl_loginfo("Set up socket '%d' for GUI communication", sock);
 
   /* Create channelswitching thread */
-  if(pthread_create(&sub, NULL, channel_switcher, (void *)&cardtype) != 0)
+  if(pthread_create(&sub, NULL, channel_switcher, 
+		    (void *)&cardtype) != 0)
   {
     wl_logerr("Cannot create thread: %s", strerror(errno));
     close(sock);
@@ -95,8 +96,9 @@ int main(int argc, char **argv)
     FD_SET(sock, &rset);
     FD_SET(pcap_fileno(handletopcap), &rset);
 
-    /* socket or pcap handle bigger? Will be cleaned up, have to check pcap */
-    maxfd = (sock > pcap_fileno(handletopcap) ? sock + 1: pcap_fileno(handletopcap)) + 1;
+    /* maxfd = biggest filefd */
+    maxfd = (sock > pcap_fileno(handletopcap) ? 
+	     sock + 1 : pcap_fileno(handletopcap)) + 1;
 
     if(select(maxfd, &rset, NULL, NULL, NULL) < 0)
     {
@@ -122,11 +124,11 @@ int main(int argc, char **argv)
 	   wl_loginfo("Received STARTSNIFF command");
 	   break;
 	  case 99:
-	      wl_loginfo("Received STOPSNIFF command");
-	      break;
+	    wl_loginfo("Received STOPSNIFF command");
+	    break;
 	  default:
-	      wl_logerr("Received unknown command: %d", retval);
-	      break;
+	    wl_logerr("Received unknown command: %d", retval);
+	    break;
 	}
       }
     } /* FD_ISSET */
@@ -148,7 +150,8 @@ int main(int argc, char **argv)
   exit(EXIT_SUCCESS);
 }
 
-void usage(void)
+void 
+usage(void)
 {
   fprintf(stderr, "Usage: wellenreiter <device> <cardtype>\n"      \
 	  "\t<device>   = Wirelessdevice (e.g. wlan0)\n" \
