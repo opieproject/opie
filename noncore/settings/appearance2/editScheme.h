@@ -33,10 +33,8 @@
 
 #include <qdialog.h>
 
-using Opie::OColorButton;
-
 class QColor;
-class OColorButton;
+namespace Opie {namespace Ui {class OColor;}}
 
 class EditScheme : public QDialog {
     Q_OBJECT
@@ -51,7 +49,7 @@ protected slots:
 private:
     int m_count;
     QColor *m_colors;
-    OColorButton **m_buttons;
+    Opie::OColorButton **m_buttons;
 };
 
 #endif

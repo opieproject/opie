@@ -35,7 +35,7 @@
 
 #include <qdialog.h>
 
-using Opie::OFontSelector;
+using Opie::Ui::OFontSelector;
 
 class QCheckBox;
 class QComboBox;
@@ -47,7 +47,7 @@ class QPushButton;
 class QRadioButton;
 class QToolButton;
 class SampleWindow;
-class OFontSelector;
+namespace Opie {namespace Ui {class OFontSelector;}}
 class QListView;
 class QListViewItem;
 class Config;
@@ -112,7 +112,7 @@ private:
 
     QListBox *    m_color_list;
 
-    OFontSelector *m_fontselect;
+    Opie::Ui::OFontSelector *m_fontselect;
 
     SampleWindow *m_sample;
 

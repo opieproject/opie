@@ -73,7 +73,8 @@
 #include <qwhatsthis.h>
 
 using namespace Opie;
-
+using namespace Opie::Ui;
+using namespace Opie::Core;
 
 class DefaultWindowDecoration : public WindowDecorationInterface
 {

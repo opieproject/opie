@@ -36,6 +36,7 @@
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
+using namespace Opie::Ui;
 EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget* parent,  const char* name, bool modal, WFlags )
     : QDialog ( parent, name, modal, WStyle_ContextHelp )
 {
@@ -43,7 +44,7 @@ EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget
     QGridLayout *layout = new QGridLayout ( this, 0, 0, 4, 4 );
 
     m_count = cnt;
-    m_buttons = new OColorButton * [cnt];
+    m_buttons = new Opie::OColorButton * [cnt];
     m_colors = colors;
 
     for ( int i = 0; i < cnt; i++ )
@@ -52,7 +53,7 @@ EditScheme::EditScheme ( int cnt, const QString *labels, QColor *colors, QWidget
         layout-> addWidget ( l, i, 0 );
         QWhatsThis::add( l, tr( "Click here to select a color for: " ).arg( labels [i] ) );
 
-        m_buttons [i] = new OColorButton ( this, colors [i] );
+        m_buttons [i] = new Opie::OColorButton ( this, colors [i] );
         layout-> addWidget ( m_buttons [i], i, 1 );
         QWhatsThis::add( m_buttons [i], tr( "Click here to select a color for: " ).arg( labels [i] ) );
     }
