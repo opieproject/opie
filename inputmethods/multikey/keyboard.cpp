@@ -53,7 +53,7 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     // get the default font
     Config *config = new Config( "qpe" );
     config->setGroup( "Appearance" );
-    QString familyStr = config->readEntry( "FontFamily", "fixed" );
+    QString familyStr = config->readEntry( "FontFamily", "smallsmooth" );
     delete config;
 
     config = new Config("multikey");
