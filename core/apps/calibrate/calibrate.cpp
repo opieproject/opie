@@ -43,10 +43,10 @@ Calibrate::Calibrate( QWidget* parent, const char * name, WFlags wf ) :
 	setGeometry( 0, 0, desk.width(), desk.height() );
 	if ( desk.height() < 250 ) {
 		int w = desk.height() / 3;
-		logo.convertFromImage( Resource::loadImage( "launcher/opielogo" ).smoothScale( w, w ) );
+		logo.convertFromImage( Resource::loadImage( "logo/opielogo" ).smoothScale( w, w ) );
 	}
 	else {
-		logo = Resource::loadPixmap( "launcher/opielogo" );
+		logo = Resource::loadPixmap( "logo/opielogo" );
 	}
 	cd.screenPoints[ QWSPointerCalibrationData::TopLeft ] = QPoint( offset, offset );
 	cd.screenPoints[ QWSPointerCalibrationData::BottomLeft ] = QPoint( offset, qt_screen->deviceHeight() - offset );
