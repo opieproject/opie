@@ -1,40 +1,44 @@
 \section{GUI Classes}
+GUI elements should be provided for modifying records in a general way. The next sections 
+shows suggested widgets for this purpose.
 
 \subsubsection{Recurrence Widget}
-Opie PIM offers a recurrence Widget to let the user
+Opie PIM offers a recurrence widget to let the user
 configure the recurrence.
 
 \subsubsection{Mainwindow}
-The mainwindow implements a QCOP Interface for showing, 
+The mainwindow implements a QCOP interface for showing and 
 editing records. It can handle alarms and reminder activation.
 
 \section{Cross Reference}
 
 \subsection{The idea}
-Sometimes an Event or Todo is related to something else. 
-For example the Birthday Attribute of your children Record relate
-to the Birthday Event in your Datebook and the ``Book clown''
-in your Todolist.\\
-We need a way to select the Record and the attribute if we want
-that fine grained information.
+Sometimes a datebook-event or todo is related to something else. 
+For example, the birthday attribute of a child record relate
+to the birthday event in a datebook and to the entry ``Book clown''
+in your todolist.\\
+We need a way to interconnect information to describe such relations.
 
 \subsection{Selecting the Reference}
 \subsubsection{Out Of Process Selection}
-For an Out of Process solution we could utilize the targeted
-Application to request the selection of an record.\\
+For an out of process solution, we could utilize the targeted
+application to request the selection of an record.\\
 For that to work we need to know which application offers
-Cross Referencing and the API needs to be able to find the
+cross referencing. The API needs to be able to find the
 application and then call them via QCOP.\\
-Later for resolving the Cross Reference the same application\\
+Later, for resolving the cross-references, the same application\\
 would be either asked to give a summary string or it could
 display the reference on demand. This requires the application
-to start and a specific selection window, but more easily
-allows to cross reference attributes.
+to start a specific selection window, but more easily
+allows to cross reference attributes. \comment{``, but..'' Das verstehe ich nicht!. Ich wuerde den Satz so uebersetzen:
+Dies erfordert, dass die Application ein spezielles Auswahlfenster startet, aber viel einfacher die
+Crossreferenzierung von Attributen erlaubt.
+Meinst Du das ? }
 
-\subsubsection{In Process Selection}
-In Process Selection is possible with the usage of OPimBase 
+\subsubsection{In-Process-Selection}
+In-process-selection is possible using OPimBase 
 and OPimRecord. It allows to query and sort in a generic way.
-This would allow to have a generic Selector widget which
-can be used to select a Record and possible files as well. To
-support new types one could dlopen the Frontends to allow
-custom Frontends.
+This would allow to have a generic selector widget, which
+can be used to select a record and possible files as well. To
+support new types it should be possible to use plugins (via dlopen) do load
+and support custom frontends.

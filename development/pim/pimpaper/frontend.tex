@@ -1,24 +1,24 @@
 \section{Frontend}
 
 \subsection{Low Level Frontend}
-OPimBase is a low level not value based interface, to do basic queries
-and record finding in a generic way. It is present to allow
-generic access to all Frontends.
+For general (typeless) operations, OPimBase provides a real low level, reference based, interface, for basic queries
+and record finding. These operations are common to all frontends.
 
 \subsection{OTemplateBase}
-Inherits from OPimBase and implements bits of the OPimBase Interface.
+Inherited from OPimBase and implements bits \comment{bits? Teile ? Welche Teile ? Sollte es nicht eher vervollständigen heissen?} of the OPimBase Interface.
 This class is present to be used by the Backends ( OPimAccessBackend )
 to set cache sizes and to cache items.
 
 \subsection{OPimAccessTemplate}
 Implements OTemplateBase and OPimBase. All low level functions are
 automatically implemented by the OPimAccessTemplate which does
-additional type checking based on OPimRecord::rtti.\\
-This template is value based and utilizes the Backend. The Backend
-can be set on the Constructor, when no Backend is specified
-the default Backend Implementation will be used.
-This AccessTemplate operates on OPimRecord based types and is meant
-to be used by concrete Frontend implementations for Todo, Event,
-Note and Address. The concrete Frontends can be used by applications.
-Use this template to create your own PIM Type.
+additional type checking, based on OPimRecord::rtti.\\
+This template is value based and utilizes the backend. The backend
+can be set on instancing by the constructor. If no backend is specified,
+the default implementation will be used (which one is defined by the config file
+pimaccess.conf).
+This AccessTemplate operates on types, based on OPimRecord and is meant
+to be used by concrete frontend implementations for todo, datebook-event,
+note and contact. The concrete frontends can be used by applications.
+Use this template to create new PIM types.
 

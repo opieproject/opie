@@ -1,66 +1,65 @@
 \section{Components of Opie PIM}
 
 \subsection{The Record}
-With our API everything is based on a  OPimRecord, this record
-got a Identifier which is unique to the Backend it belongs, it is
-also possible to assign a new Unique Identifier (uid) on a newly
+The basic component of our API is the OPimRecord. Every record is identified
+by an identifier, which is unique to the backend it belongs to 
+\comment{Why it is just unique to the backend? (eilers)}. 
+If expected, is also possible to assign a new Unique Identifier (UID) on a newly
 created OPimRecord.\\
-The OPimRecord allows to assign Categories this record is in, to get
-a Rich Text summary of the content of the Record and finally to match 
+The OPimRecord allows to be assigned to categories, to provide a Rich Text 
+summary of its content and finally to match 
 the content of the Record with a regular expression.
 
 \subsection{The Frontend}
-Opie PIM got Frontends to access Todos, Events and Addressees. Using
-the default Constructor of either OTodoAccess, ODatebookAccess or
-OContactAccess uses the default data. These Access methods offer
-the common load, save, clear, reload methods and have all in common
-to query for an example record, sort a list of records for specific
-characteristics, and to match the content against a regular expression
- and give access to the Records inside the database/storage.\\
-The Frontend provide a value based Interface and operates on Records
-that inherit from OPimRecord and add extra task specific methods to it.
+Opie PIM implements frontends to access Todos, Datebook-Events and Addresses.
+The frontend provides a value based interface and operates on records inherited 
+from OPimRecord and add extra task specific methods to it.
+
+Access methods offer the common load, save, clear, reload methods, 
+give access to the records inside the database/storage and implement a general
+interface to query, for example, a record, request a sorted lists of records for specific
+characteristics and to match the content against a regular expression.\\
 
 \subsection{ORecordList and Iterator}
-The result of a query or the content of the database is a ORecordList.
-To iterate over a ORecordList you can use the Iterator. The Iterators
-behaves like the Iterators found in Qt and on dereferencing you get
-the reference to the record. Internally the record is fetched just
-in time. This delayed loading allows to exploit full power of the specific
-Backend.
+The result of a query or the content of the database is is abstracted by an ORecordList.
+To iterate over an ORecordList useing an Iterator. 
+Using STL like iterators, it is possible to iterate through an ORecordList.
+Accessing a record is easy possible by dereferencing the iterator.
+Internally, the record is fetched just in time, called delayed loading. 
+This delayed loading allows to exploit \comment{exploit??} full power of the specific
+backend.
 
 
 \subsection{The Backend}
-The Backend is a template based interface that operates on OPimRecord
-inherited data types. To implement the delayed loading the Backends
-Implementation return only a list of UIDs and these get converted
-to a OPimRecordList<T> by the Frontend.
+The backend is a template based interface that operates on data types, inherited from OPimRecord.
+Delayed loading is implemented by the idea of storing just a list of UIDs instead complete records 
+in an OPimRecordList<T> by the frontend and to fetch the records just on demand.
 
-\subsection{The cache and read ahead}
-To speed up the repeated lookup of records, specially when iterating
-over the OPimRecordList we've a cache in the Frontend which is filled
-by the Backend and specially in the iterator case the Backend
-can do a read ahead to fill the cache.
+\subsection{Caching}
+To speed up the repeated lookup of records, especially while iterating
+over the OPimRecordList, a caching mechanism, located in the frontend, is filled
+by the backend automatically.
 
 \subsection{Backend vs. Frontend}
-The Frontend is meant to be used by the normal API user to access
-and query the Records and to save it with  different Backend to
-a different file if needed.
-The Backend is used to implement concrete storage such as XML, VCF
-and SQL and exploit possible features of the chosen storage. For example
-a SQL  Backend can use the power of query, lookup, sorting of the database
+The frontend is meant to be used by the user API to access
+and query the Records. \comment{ Ist hier irrelevant und verwirrt: and to save it with  different backend to
+a different file if needed}.
+The backend is used to implement the real storage, such as XML, VCF
+and SQL and exploit \comment{exploit?} special features of the chosen storage. For example
+a SQL  backend can use the power of query, lookup, sorting of the database
 and do true delayed loading of records whereas the XML resource on
-a simple file-system normally can't (XMLLiveConnect on ReiserFS). On remote
-Backends such as LDAP one might want to use delayed initialisation and
-fetching of records as well. Due the clean separation of Frontend and Backend
-this is possible but the ease of development and deployment 
-of both Backends and Frontend remain.
+a simple file-system normally can't (XMLLiveConnect on ReiserFS\comment{???}). 
+On remote backends, such as LDAP, one might want to use delayed initialisation and
+fetching of records as well. Due to the clean separation of frontend and backend,
+it is possible to use the power of the used databases, but still keep the ease of development 
+and deployment.
 
 \subsection{Occurrences}
-A Frontend/Backend can be queried to include OPimRecords for a 
-period of time. Traditionally this only applies to Events but 
-with the Opie1.2 revision of PIM this can also be applied to
-Todo, Address and Notes.
-It behaves similar to OPimRecordList and supports the delayed
-loading of Records.
+A frontend/backend can be queried to provide OPimRecords which occur in a 
+period of time. Traditionally this only applies to Calendar-Events, but 
+due to the the revision of Opie (release 1.2), this can also be applied to
+Todo, Address and Notes, as well.
+OPimOccurence behaves similar to OPimRecordList and supports the delayed
+loading of Records as described above.
  
 %TODO implement it.... :}
