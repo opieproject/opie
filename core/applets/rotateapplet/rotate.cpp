@@ -46,12 +46,10 @@ RotateApplet::RotateApplet ( )
 	: QObject ( 0, "RotateApplet" ), ref ( 0 ), m_flipped( false )
 {
 
-#if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *rotateChannel = new QCopChannel( "QPE/Rotation" , this );
     connect ( rotateChannel, SIGNAL( received( const QCString &, const QByteArray &) ),
               this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
-#endif
 #endif
 
 }
