@@ -1,4 +1,4 @@
 config OPIEALARM
-  boolean "Opiealarm (Alarm daemon, sets RTC with wakeup time on suspend)"
+  boolean "opie-opiealarm (Alarm daemon, sets RTC with wakeup time on suspend)"
   depends ! TARGET_X86
   default "y"
