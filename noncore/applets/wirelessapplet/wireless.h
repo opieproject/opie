@@ -50,7 +50,6 @@ class WirelessControl : public QFrame
   private:
     WirelessApplet* applet;
 
-    int displayStyle;
     int updateFrequency;
 
     bool rocESSID;
@@ -82,7 +81,7 @@ class WirelessApplet : public QWidget
 
     bool mustRepaint();
     void updatePopupWindow();
-    const char** getQualityPixmap();
+    int numberOfRings();
 
   private:
     QPixmap snapshotPixmap;
@@ -92,7 +91,7 @@ class WirelessApplet : public QWidget
     Opie::Net::OWirelessNetworkInterface* interface;
 
   private:
-    const char** oldpixmap;
+    int oldrings;
     Opie::Net::OWirelessNetworkInterface* oldiface;
     int oldqualityH;
     int oldsignalH;

@@ -14,13 +14,6 @@
 #include "wireless.h"
 #include "mgraph.h"
 #include "advancedconfig.h"
-#include "connect0.xpm"
-#include "connect1.xpm"
-#include "connect2.xpm"
-#include "connect3.xpm"
-#include "connect4.xpm"
-#include "connect5.xpm"
-#include "nowireless.xpm"
 
 /* OPIE */
 #include <opie2/onetwork.h>
@@ -40,11 +33,9 @@
 #include <qtextstream.h>
 
 /* STD */
+#include <math.h>
 #include <sys/types.h>
 #include <signal.h>
-
-#define STYLE_BARS 0
-#define STYLE_ANTENNA 1
 
 //#define MDEBUG
 #undef MDEBUG
@@ -57,7 +48,6 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
 
     readConfig();
     writeConfigEntry( "UpdateFrequency", updateFrequency );
-    writeConfigEntry( "DisplayStyle", displayStyle );
 
     setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
     QGridLayout *grid = new QGridLayout( this, 3, 2, 6, 2, "top layout" );
@@ -71,7 +61,7 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
                   "Or Sharp ROM ?<br>"
                   "CELL: 00:00:00:00:00:00" );
     /*    QString text( "Station: Unknown<br>"
-    	                "ESSID: Unknown<br>"
+                        "ESSID: Unknown<br>"
                         "MODE: Unknown<br>"
                         "FREQ: Unknown<br>"
                         "CELL: AA:BB:CC:DD:EE:FF" ); */
@@ -80,15 +70,6 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     grid->addWidget( statusLabel, 0, 0 );
 
     /* visualization group box */
-
-    QButtonGroup* group = new QButtonGroup( 1, Qt::Horizontal, "Visualization", this );
-    QRadioButton* r1 = new QRadioButton( "Color Bars", group );
-    QRadioButton* r2 = new QRadioButton( "Antenna", group );
-    r1->setFocusPolicy( QWidget::NoFocus );
-    r2->setFocusPolicy( QWidget::NoFocus );
-    group->setFocusPolicy( QWidget::NoFocus );
-    group->setButton( displayStyle );
-    grid->addWidget( group, 0, 1 );
 
     /* quality graph */
 
@@ -130,11 +111,7 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     setFixedSize( sizeHint() );
     setFocusPolicy( QWidget::NoFocus );
 
-    applet->displayStyleChange( displayStyle );
     applet->updateDelayChange( updateFrequency );
-
-    connect( group, SIGNAL( clicked(int) ),
-             this, SLOT( displayStyleChange(int) ) );
 
     applet->updateDHCPConfig( rocESSID, rocFREQ, rocAP, rocMODE );
 }
@@ -187,7 +164,6 @@ void WirelessControl::readConfig()
     cfg.setGroup( "Wireless" );
 
     updateFrequency = cfg.readNumEntry( "UpdateFrequency", 2 );
-    displayStyle = cfg.readNumEntry( "DisplayStyle", STYLE_ANTENNA );
     rocESSID = cfg.readBoolEntry( "renew_dhcp_on_essid_change", false );
     rocFREQ = cfg.readBoolEntry( "renew_dhcp_on_freq_change", false );
     rocAP = cfg.readBoolEntry( "renew_dhcp_on_ap_change", false );
@@ -204,7 +180,7 @@ void WirelessControl::writeConfigEntry( const char *entry, int val )
 //===========================================================================
 
 WirelessApplet::WirelessApplet( QWidget *parent, const char *name )
-        : QWidget( parent, name ), visualStyle( STYLE_ANTENNA ),
+        : QWidget( parent, name ),
         timer( 0 ), interface( 0 ), oldiface( 0 ),
         rocESSID( false ), rocFREQ( false ), rocAP( false ), rocMODE( false )
 {
@@ -391,11 +367,11 @@ bool WirelessApplet::mustRepaint()
         }
     }
 
-    const char** pixmap = getQualityPixmap();
+    int rings = numberOfRings();
 
-    if ( pixmap && ( pixmap != oldpixmap ) )
+    if ( rings != oldrings )
     {
-        oldpixmap = pixmap;
+        oldrings = rings;
         return true;
     }
 
@@ -467,84 +443,55 @@ void WirelessApplet::updatePopupWindow()
                                   cell + " " + interface->associatedAP().toString() );
 }
 
-const char** WirelessApplet::getQualityPixmap()
+int WirelessApplet::numberOfRings()
 {
-    if ( !interface ) return ( const char** ) nowireless_xpm;
+    if ( !interface ) return -1;
     int qualityH = interface->signalStrength();
-    if ( qualityH < 0 ) return ( const char** ) nowireless_xpm;
-
-    if ( visualStyle == STYLE_ANTENNA )
-    {
-        if ( qualityH < 1 ) return ( const char** ) connect0_xpm;
-        if ( qualityH < 17 ) return ( const char** ) connect1_xpm;
-        if ( qualityH < 34 ) return ( const char** ) connect2_xpm;
-        if ( qualityH < 50 ) return ( const char** ) connect3_xpm;
-        if ( qualityH < 65 ) return ( const char** ) connect4_xpm;
-        return ( const char** ) connect5_xpm;
-    }
-
-    return 0; // please draw your bars
+    qDebug( "quality = %d", qualityH );
+    if ( qualityH < 1 ) return -1;
+    if ( qualityH < 20 ) return 0;
+    if ( qualityH < 40 ) return 1;
+    if ( qualityH < 60 ) return 2;
+    if ( qualityH < 65 ) return 3;
+    return 4;
 }
 
 void WirelessApplet::paintEvent( QPaintEvent* )
 {
     QPainter p( this );
-    QColor color;
+    int h = height();
+    int w = width();
+    int m = 2;
 
-    const char** pixmap = getQualityPixmap();
+    p.drawLine( m, h-m-1, round( w/2.0 ), round( 0+h/3.0 ) );
+    p.drawLine(         round( w/2.0 ), round( 0+h/3.0 ), w-m, h-m-1 );
+    p.setPen( QColor( 150, 150, 150 ) );
+    p.drawLine( w-m, h-m-1, m, h-m-1 );
 
-    if ( pixmap )
-        p.drawPixmap( 0, 1, pixmap );
-    else
+    int rings = numberOfRings();
+
+    if ( rings == -1 )
     {
-
-        int noiseH = 30; // iface->noisePercent() * ( height() - 3 ) / 100;
-        int signalH = 50; // iface->signalPercent() * ( height() - 3 ) / 100;
-        int qualityH = interface->signalStrength(); // iface->qualityPercent() * ( height() - 3 ) / 100;
-
-        double intensity;
-        int pixelHeight;
-        int pixelWidth = 2;
-        int Hue;
-        int barSpace = 3;
-        int leftoffset = 0;
-        int bottomoffset = 2;
-
-        // draw noise indicator
-        pixelHeight = noiseH;
-        Hue = 50;
-        for ( int i = 0; i < pixelHeight; ++i )
-        {
-            intensity = 50 + ( ( double ) i / ( double ) pixelHeight ) * 205;
-            color.setHsv( Hue, 255, intensity );
-            p.setPen ( color );
-            p.drawLine( leftoffset, height() - bottomoffset - i, pixelWidth + leftoffset, height() - bottomoffset - i );
-        }
-
-        // draw signal indicator
-        pixelHeight = signalH;
-        Hue = 100;
-        leftoffset += pixelWidth + barSpace;
-        for ( int i = 0; i < pixelHeight; ++i )
-        {
-            intensity = 50 + ( ( double ) i / ( double ) pixelHeight ) * 205;
-            color.setHsv( Hue, 255, intensity );
-            p.setPen ( color );
-            p.drawLine( leftoffset, height() - bottomoffset - i, pixelWidth + leftoffset, height() - bottomoffset - i );
-        }
-
-        // draw quality indicator
-        pixelHeight = qualityH;
-        Hue = 250;
-        leftoffset += pixelWidth + barSpace;
-        for ( int i = 0; i < pixelHeight; ++i )
-        {
-            intensity = 50 + ( ( double ) i / ( double ) pixelHeight ) * 205;
-            color.setHsv( Hue, 255, intensity );
-            p.setPen ( color );
-            p.drawLine( leftoffset, height() - bottomoffset - i, pixelWidth + leftoffset, height() - bottomoffset - i );
-        }
+        p.setPen( QPen( QColor( 200, 20, 20 ), 2 )  );
+        p.drawLine( w/2-m-m, h/2-m-m, w/2+m+m, h/2+m+m );
+        p.drawLine( w/2+m+m, h/2-m-m, w/2-m-m, h/2+m+m );
+        return;
     }
+
+    qDebug( "WirelessApplet: painting %d rings", rings );
+    int radius = 2;
+    int rstep = 4;
+    int maxrings = w/rstep;
+
+    p.setPen( QColor( 200, 20, 20 ) );
+    for ( int i = 0; i < rings; ++i )
+    {
+        p.drawEllipse( w/2 - radius/2, h/3 - radius/2, radius, radius );
+        radius += rstep;
+    };
+
+
+
 }
 
 
