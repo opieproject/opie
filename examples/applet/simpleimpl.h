@@ -29,6 +29,8 @@
  * We provide an Implementation of the interface.
  */
 #include <qwidget.h>
+#include <qlist.h>
+
 #include <qpe/taskbarappletinterface.h>
 
 
@@ -66,6 +68,9 @@ public:
      * delete this is called
      */
     Q_REFCOUNT
+
+private:
+    QList<SimpleApplet> m_applets;
 };
 
 

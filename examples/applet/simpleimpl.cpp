@@ -77,14 +77,27 @@ SimpleAppletImpl::SimpleAppletImpl() {
 }
 /* needed cause until it is only pure virtual */
 SimpleAppletImpl::~SimpleAppletImpl() {
+    /*
+     * we will delete our applets as well
+     * setAUtoDelete makes the QList free
+     * the objects behind the pointers
+     */
+    m_applets.setAutoDelete( true );
+    m_applets.clear();
 }
 
 /*
  * For the taskbar interface return a Widget
  */
 QWidget* SimpleAppletImpl::applet( QWidget* parent ) {
-    /* ownership has the parent */
-    return new SimpleApplet( parent );
+    /*
+     * There are problems with ownership. So we add
+     * our ownlist and clear this;
+     */
+    SimpleApplet* ap = new SimpleApplet( parent );
+    m_applets.append( ap );
+
+    return ap;
 }
 
 /*

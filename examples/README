@@ -15,13 +15,21 @@ Note: to integrate your apps into the build
     edit $OPIEDIR/packages
     make 
 
+Naming Conventions:
+    Most of the time we prefix member variables with m_. This allows
+    us to see if a variable in a function is a member
+    or on the stack.
+    Function naming we use setFooBar() but fooBar() to get the
+    value. So please skip the get you're used from Java.
+    Other than that please try to avoid #ifdef and #defines
+    use const but we do not have any coding style convetions.
 
 
 simple/			-  Simple Widget with quit button
 simple-icon		-  Simple Widget with loading resources and playing simple sound
 simple-main		-  Simple QMainWindow usage with toolbar and actions
 main-tab		-  QMainWindow with central tab widget
-simple-pim		-  QMainWindow + QListView + PIM
+simple-pim		-  QMainWindow + QListView + PIM + QCOP
 big-pim			-  Usage of Opie PIM with BigScreen Extension
 
 Compile by setting your environment (QTDIR, QMAKESPEC, PATH, OPIEDIR )
