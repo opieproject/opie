@@ -12,7 +12,7 @@
             <x>0</x>
             <y>0</y>
             <width>196</width>
-            <height>271</height>
+            <height>278</height>
         </rect>
     </property>
     <property stdset="1">
@@ -28,17 +28,6 @@
             <name>spacing</name>
             <number>6</number>
         </property>
-        <widget row="0"  column="0" >
-            <class>QLabel</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>TextLabel1</cstring>
-            </property>
-            <property stdset="1">
-                <name>text</name>
-                <string>Destination</string>
-            </property>
-        </widget>
         <widget row="0"  column="1" >
             <class>QComboBox</class>
             <property stdset="1">
@@ -46,7 +35,29 @@
                 <cstring>destination</cstring>
             </property>
         </widget>
-        <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+        <widget row="3"  column="0" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>btnInstall</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Start</string>
+            </property>
+        </widget>
+        <widget row="3"  column="1" >
+            <class>QPushButton</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>btnOptions</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>Options</string>
+            </property>
+        </widget>
+        <widget row="2"  column="0"  rowspan="1"  colspan="2" >
             <class>QGroupBox</class>
             <property stdset="1">
                 <name>name</name>
@@ -74,26 +85,37 @@
                 </widget>
             </grid>
         </widget>
-        <widget row="2"  column="0" >
-            <class>QPushButton</class>
+        <widget row="0"  column="0" >
+            <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>btnInstall</cstring>
+                <cstring>TextLabel1</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Start</string>
+                <string>Destination</string>
             </property>
         </widget>
-        <widget row="2"  column="1" >
-            <class>QPushButton</class>
+        <widget row="1"  column="0" >
+            <class>QLabel</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>btnOptions</cstring>
+                <cstring>TextLabel3</cstring>
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Options</string>
+                <string>Space Avail</string>
+            </property>
+        </widget>
+        <widget row="1"  column="1" >
+            <class>QLabel</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>txtAvailableSpace</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>100000000</string>
             </property>
         </widget>
     </grid>
@@ -111,8 +133,14 @@
         <receiver>InstallDlg</receiver>
         <slot>installSelected()</slot>
     </connection>
+    <connection>
+        <sender>destination</sender>
+        <signal>highlighted(const QString&amp;)</signal>
+        <receiver>InstallDlg</receiver>
+        <slot>displayAvailableSpace( const QString&amp; )</slot>
+    </connection>
+    <slot access="public">displayAvailableSpace( const QString&amp; )</slot>
     <slot access="public">installSelected()</slot>
-    <slot access="public">displayText(const QString &amp;)</slot>
     <slot access="public">optionsSelected()</slot>
 </connections>
 </UI>

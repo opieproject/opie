@@ -44,6 +44,7 @@ public:
 	bool showDlg();
 	bool upgradeServer( QString &server );
 
+
 protected:
 
 private:
@@ -60,6 +61,7 @@ private:
 	void optionsSelected();
 	void installSelected();
     void displayText(const QString &text );
+    void displayAvailableSpace( const QString &text);
 };
 
 #endif

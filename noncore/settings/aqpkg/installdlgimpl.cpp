@@ -18,6 +18,7 @@
 #ifdef QWS
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/storage.h>
 #endif
 
 #include <qmultilineedit.h>
@@ -25,12 +26,14 @@
 #include <qcombobox.h>
 #include <qcheckbox.h>
 #include <qpushbutton.h>
+#include <qlabel.h>
 
 
 #include "datamgr.h"
 #include "instoptionsimpl.h"
 #include "destination.h"
 #include "installdlgimpl.h"
+#include "utils.h"
 #include "global.h"
 
 InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
@@ -101,6 +104,8 @@ InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *d
     }
 
     output->setText( remove + install + upgrade );
+
+    displayAvailableSpace( destination->currentText() );
 }
 
 InstallDlgImpl::InstallDlgImpl( Ipkg *ipkg, QString initialText, QWidget *parent, const char *name, bool modal, WFlags fl )
@@ -177,7 +182,7 @@ void InstallDlgImpl :: installSelected()
 
         pIpkg = new Ipkg;
         connect( pIpkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
-        
+
         // First run through the remove list, then the install list then the upgrade list
         vector<InstallData>::iterator it;
         pIpkg->setOption( "remove" );
@@ -237,3 +242,33 @@ void InstallDlgImpl :: displayText(const QString &text )
     output->setText( t );
     output->setCursorPosition( output->numLines(), 0 );
 }
+
+
+void InstallDlgImpl :: displayAvailableSpace( const QString &text )
+{
+    vector<Destination>::iterator d = dataMgr->getDestination( text );
+    QString destDir = d->getDestinationPath();
+
+    long blockSize = 0;
+    long totalBlocks = 0;
+    long availBlocks = 0;
+    QString space;
+    if ( Utils::getStorageSpace( (const char *)destDir, &blockSize, &totalBlocks, &availBlocks ) )
+    {
+        long mult = blockSize / 1024;
+        long div = 1024 / blockSize;
+
+        if ( !mult ) mult = 1;
+        if ( !div ) div = 1;
+//        long total = totalBlocks * mult / div;
+        long avail = availBlocks * mult / div;
+//        long used = total - avail;
+
+        space.sprintf( "%ld Kb", avail );
+    }
+    else
+        space = "Unknown";
+        
+    txtAvailableSpace->setText( space );
+}
+
