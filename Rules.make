@@ -25,6 +25,7 @@ $(TOPDIR)/.depends.cfgs:
 	@-rm -f dirs
 
 $(TOPDIR)/stamp-headers :
+	@-rm -f $(TOPDIR)/stamp-headers*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
@@ -36,6 +37,27 @@ $(TOPDIR)/stamp-headers :
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
 	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
+	( cd $(QTDIR)/include; \
+		$(patsubst %,ln -sf ../src/kernel/%;,qgfx_qws.h qwsmouse_qws.h \
+		qcopchannel_qws.h qwindowsystem_qws.h \
+		qfontmanager_qws.h qwsdefaultdecoration_qws.h))
+	touch $@
+	
+$(TOPDIR)/stamp-headers-x11 :
+	@-rm -f $(TOPDIR)/stamp-headers*
+	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
+		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
+	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
+	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
+	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
+	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
+	( cd include/opie &&  ln -sf ../../libsql/*.h .; )
+	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
+	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
+	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
+	( cd include/qpe; ln -sf ../../x11/libqpe-x11/qpe/*.h .; )
+	cd $(QTDIR)/include; $(patsubst %,ln -sf $(OPIEDIR)/x11/libqpe-x11/qt/%;,qgfx_qws.h qwsmouse_qws.h qcopchannel_qws.h qwindowsystem_qws.h qfontmanager_qws.h qwsdefaultdecoration_qws.h)
 	touch $@
 	
 $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
@@ -59,7 +81,7 @@ define descend
 endef
 
 define makefilegen
-	cd $(shell dirname $(1)); $(TOPDIR)/qmake/qmake $(3) -o $(shell basename $(1)) `echo $(1)|sed -e 's,/Makefile$$,,g' -e 's,.*/,,g'`.pro
+	cd $(if $(1),$(shell dirname $(1))); $(TOPDIR)/qmake/qmake $(3) -o $(if $(1),$(shell basename $(1))) `echo $(1)|sed -e 's,/Makefile$$,,g' -e 's,.*/,,g'`.pro
 endef
 
 define makecfg

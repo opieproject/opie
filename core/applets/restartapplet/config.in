@@ -3,5 +3,5 @@ menu "restartapplet"
   config #RESTARTAPPLET
     boolean "restartapplet"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
 endmenu

@@ -1,4 +1,4 @@
   config MEDIUMMOUNT
     boolean "mediummount"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

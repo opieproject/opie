@@ -1,4 +1,4 @@
   config SOLITAIRE
     boolean "solitaire"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -76,6 +76,8 @@ defconfig :
 	./scripts/kconfig/conf -d ./config.in
 
 
+export
+
 -include $(TOPDIR)/.config
 -include $(TOPDIR)/..config.cmd
 -include $(TOPDIR)/.depends
@@ -84,7 +86,9 @@ export QMAKESPEC=$(QMAKESPECSDIR)/qws/$(patsubst "%",%,$(CONFIG_SPECFILE))
 
 all clean: $(subdir-y)
 
-$(subdir-y) : $(TOPDIR)/stamp-headers $(TOPDIR)/library/custom.h
+$(subdir-y) : $(if $(CONFIG_LIBQPE),$(TOPDIR)/stamp-headers) \
+	$(if $(CONFIG_LIBQPE-X11),$(TOPDIR)/stamp-headers-x11) \
+	$(TOPDIR)/library/custom.h
 
 clean : $(TOPDIR)/.config
 

@@ -1,4 +1,4 @@
   config REMOTE
     boolean "remote"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config MODPLUG
     boolean "modplug"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

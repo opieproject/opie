@@ -1,4 +1,4 @@
   config TABLEVIEWER
     boolean "tableviewer"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

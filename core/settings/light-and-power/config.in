@@ -1,4 +1,4 @@
   config LIGHT-AND-POWER
     boolean "light-and-power"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

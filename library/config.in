@@ -1,3 +1,5 @@
-  config LIBQPE
-    boolean "Qpe library"
-    default "y"
+config LIBQPE
+  boolean "Qpe library"
+  default "y" if ! X11
+  default "n" if X11
+  depends on ! X11

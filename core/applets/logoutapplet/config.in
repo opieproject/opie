@@ -1,4 +1,4 @@
   config LOGOUTAPPLET
     boolean "logoutapplet"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

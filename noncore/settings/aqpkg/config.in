@@ -1,4 +1,4 @@
   config AQPKG
     boolean "aqpkg"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config IRDAAPPLET
     boolean "irdaapplet"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config BEND
     boolean "bend"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config EMBEDDEDKONSOLE
     boolean "embeddedkonsole"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
 #  config #OPIE-WRITE
 #    boolean "opie-write"
 #    default "y"
-#    depends LIBQPE && LIBOPIE
+#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -16,7 +16,7 @@
 #CONFIG_LIBFFMPEG	core/multimedia/opieplayer/libffmpeg	libffmpeg.pro
 #CONFIG_LIBFLASH	core/multimedia/opieplayer/libflash	libflash.pro
 #CONFIG_LIBOPIE_PIM	libopie/pim	pim.pro
-#CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
+CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 #CONFIG_LIBSQL	libsql	libsql.pro
 #CONFIG_MANAGER	noncore/net/opietooth/manager	manager.pro
 #CONFIG_MOBILEMSG	noncore/comm/mobilemsg	mobilemsg.pro
@@ -30,7 +30,7 @@
 #CONFIG_RESTARTAPPLET	core/applets/restartapplet	restartapplet.pro
 #CONFIG_RESTARTAPPLET2	core/applets/restartapplet2	restartapplet2.pro
 #CONFIG_SDMON	noncore/unsupported/sdmon	sdmon.pro
-#CONFIG_SERVER	x11/ipc/server	server.pro
+CONFIG_OCOPSERVER	x11/ipc/server	ocopserver.pro
 #CONFIG_SIMPLE	noncore/tools/calc2/simple	simple.pro
 #CONFIG_SMTP	noncore/unsupported/opiemail/ifaces/smtp	smtp.pro
 #CONFIG_SPREADSHEET	noncore/unsupported/spreadsheet	spreadsheet.pro

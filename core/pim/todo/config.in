@@ -1,4 +1,4 @@
   config TODO
     boolean "todo"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

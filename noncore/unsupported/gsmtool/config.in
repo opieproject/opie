@@ -1,4 +1,4 @@
 #  config #GSMTOOL
 #    boolean "gsmtool"
 #    default "y"
-#    depends LIBQPE && LIBOPIE
+#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config METAL
     boolean "metal"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

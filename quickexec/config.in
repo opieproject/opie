@@ -1,4 +1,4 @@
 #  config #QUICKEXEC
 #    boolean "quickexec"
 #    default "y"
-#    depends LIBQPE && LIBOPIE
+#    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

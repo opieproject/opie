@@ -1,4 +1,4 @@
   config OBEX
     boolean "obex"
     default "y"
-    depends LIBQPE && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
