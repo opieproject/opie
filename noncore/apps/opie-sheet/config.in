@@ -1,4 +1,4 @@
   config OPIE-SHEET
-    boolean "opie-sheet"
+    boolean "opie-sheet (spreadsheet calculation program)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

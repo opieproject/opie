@@ -1,4 +1,4 @@
   config TEXTEDIT
-    boolean "textedit"
+    boolean "opie-textedit (simple text editor)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

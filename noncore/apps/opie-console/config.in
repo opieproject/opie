@@ -1,4 +1,4 @@
   config OPIE-CONSOLE
-    boolean "opie-console"
+    boolean "opie-console (scriptable terminal program)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

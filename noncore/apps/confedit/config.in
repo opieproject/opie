@@ -1,4 +1,4 @@
   config CONFEDIT
-    boolean "confedit"
+    boolean "opie-confeditor (generic editor for all Opie settings)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

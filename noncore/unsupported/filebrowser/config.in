@@ -1,4 +1,4 @@
   config FILEBROWSER
-    boolean "filebrowser"
+    boolean "opie-filebrowser (file manager)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

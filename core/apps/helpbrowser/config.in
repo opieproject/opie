@@ -1,4 +1,4 @@
   config HELPBROWSER
-    boolean "helpbrowser"
+    boolean "opie-helpbrowser (display html help files)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

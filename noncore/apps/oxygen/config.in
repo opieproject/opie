@@ -1,4 +1,4 @@
   config OXYGEN
-    boolean "oxygen"
+    boolean "opie-oxygen (Periodic System of the Elements)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config ADVANCEDFM
-    boolean "advancedfm"
+    boolean "opie-advancedfm (advanced file manager)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

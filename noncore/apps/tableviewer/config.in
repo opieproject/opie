@@ -1,4 +1,4 @@
   config TABLEVIEWER
-    boolean "tableviewer"
+    boolean "opie-tableviewer (XML database browser)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config AQPKG
-    boolean "aqpkg"
+    boolean "opie-aqpkg (a package manager)" 
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

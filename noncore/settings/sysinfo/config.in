@@ -1,4 +1,4 @@
   config SYSINFO
-    boolean "sysinfo"
+    boolean "opie-sysinfo (System Information dialog)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
