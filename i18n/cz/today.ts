@@ -3,132 +3,132 @@
     <name>Today</name>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished"></translation>
+        <translation>Vlastník</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím vyplňte vizitku</translation>
     </message>
     <message>
         <source>Click here to launch the associated app</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro spuštění přidružené aplikace</translation>
     </message>
     <message>
         <source>No plugins found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejsou žádné pluginy</translation>
     </message>
     <message>
         <source>No plugins activated</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejsou aktivovány žádné pluginy</translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Today</translation>
     </message>
     <message>
         <source>Today by Maximilian Rei&#xdf;</source>
-        <translation type="unfinished"></translation>
+        <translation>Today napsal Maximilian Reiß</translation>
     </message>
     <message>
         <source>Click here to get to the config dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde klikněte pro okno s nastavením</translation>
     </message>
 </context>
 <context>
     <name>TodayConfig</name>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurace Today</translation>
     </message>
     <message>
         <source>Load which plugins in what order:</source>
-        <translation type="unfinished"></translation>
+        <translation>V jakém pořadí nahrát jaké pluginy:</translation>
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Pro aktivaci pluginu jej zaškrtněte, nebo použijte šipky na pravé straně pro změnu pořadí spouštění</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout nahoru</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Posunout dolů</translation>
     </message>
     <message>
         <source>active/order</source>
-        <translation type="unfinished"></translation>
+        <translation>aktivní/pořadí</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatní</translation>
     </message>
 </context>
 <context>
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Form1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaškrtněte, pokud se má Today automaticky spustit po probuzení.</translation>
     </message>
     <message>
         <source>autostart on resume?</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit po probuzení?</translation>
     </message>
     <message>
         <source>tiny banner</source>
-        <translation type="unfinished"></translation>
+        <translation>malý banner</translation>
     </message>
     <message>
         <source>Have small banner </source>
-        <translation type="unfinished"></translation>
+        <translation>Požít malý banner</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolik minut má být PDA uspáno předtím, než ho funkce automatické spuštění probudí</translation>
     </message>
     <message>
         <source>minutes inactive</source>
-        <translation type="unfinished"></translation>
+        <translation>minut neaktivní</translation>
     </message>
     <message>
         <source> pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>bod</translation>
     </message>
     <message>
         <source>Set the icon size in pixel</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavte velikost ikon v bodech</translation>
     </message>
     <message>
         <source>icon size</source>
-        <translation type="unfinished"></translation>
+        <translation>velikost ikon</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sek</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>nikdy</translation>
     </message>
     <message>
         <source>How often should Today refresh itself</source>
-        <translation type="unfinished"></translation>
+        <translation>Jak často se má Today obnovovat</translation>
     </message>
     <message>
         <source>refresh</source>
-        <translation type="unfinished"></translation>
+        <translation>obnovení</translation>
     </message>
 </context>
 </TS>

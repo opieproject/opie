@@ -3,85 +3,86 @@
     <name>AppEdit</name>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikace</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Název:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona:</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Spustit:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentář:</translation>
     </message>
 </context>
 <context>
     <name>TabManager</name>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Zpráva</translation>
     </message>
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze odstranit s aplikacemi,
+které jsou stále ve skupině.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete smazat?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ano</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nelze odstranit.</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sbírám ikony...</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Záložka</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikace</translation>
     </message>
 </context>
 <context>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Správce záložek</translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation type="unfinished"></translation>
+        <translation>Hierarchie</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím čekejte...</translation>
     </message>
 </context>
 </TS>

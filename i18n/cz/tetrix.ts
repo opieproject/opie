@@ -3,61 +3,61 @@
     <name>OHighscore</name>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>prázdné</translation>
     </message>
     <message>
         <source>Enter your name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte vaše jméno!</translation>
     </message>
 </context>
 <context>
     <name>OHighscoreDialog</name>
     <message>
         <source>Highscores</source>
-        <translation type="unfinished"></translation>
+        <translation>Nejlepší skóre</translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Jméno</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Body</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Úroveň</translation>
     </message>
 </context>
 <context>
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Tetrix</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Další</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Skóre</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Úroveň</translation>
     </message>
     <message>
         <source>Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstraněno</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Start</translation>
     </message>
 </context>
 </TS>

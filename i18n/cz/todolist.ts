@@ -3,148 +3,148 @@
     <name>MainWindow</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;h1&gt;Alarm v %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
     <name>OTaskEditor</name>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor úkolů</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informace</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav</translation>
     </message>
     <message>
         <source>Alarms</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarmy</translation>
     </message>
     <message>
         <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Opakování</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Todolist</translation>
     </message>
     <message>
         <source>Enter Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadat úkol</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit úkol</translation>
     </message>
     <message>
         <source>silent</source>
-        <translation type="unfinished"></translation>
+        <translation>tichý</translation>
     </message>
     <message>
         <source>loud</source>
-        <translation type="unfinished"></translation>
+        <translation>hlasitý</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový ze šablony</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový úkol</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro vytvoření nového úkolu.</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit úkol</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro změnu aktuálního úkolu.</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit úkol</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat...</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro odstranění aktuálního úkolu.</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat vše...</translation>
     </message>
     <message>
         <source>Delete completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazání dokončeno</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplikovat</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro odeslání aktuálního úkolu jinému zařízení.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit hotové úkoly</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit jen nestihnuté úkoly</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit konečné termíny</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit lištu zkratek</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Data</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Možnosti</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>Rychlá úprava</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -154,19 +154,25 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Toto je seznam všech aktuálních úkolů.
+
+Seznam zobrazuje následující informace:
+1. Dokončené - Zelená značka znamená dokončený úkol. Klikněte sem pro dokončení úkolu.
+2. Priorita - grafické znázornění priority úkolu. Změnu provedete dvojklikem.
+3. Popis - Popis úkolu. Klikněte sem pro výběr úkolu.
+4. Konečný termín - zobrazuje čas dokončení úkolu. Tento sloupec můžete zobrazit nebo skrýt výběrem Možnosti -&gt;&apos;Zobrazit konečné termíny&apos; z menu nahoře.</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Všechny kategorie</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezařazené</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Došlo místo</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -175,79 +181,84 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo nemůže
+zapsat změny.
+Uvolněte nějaké místo
+a zkuste to znovu.
+
+Přesto skončit?</translation>
     </message>
     <message>
         <source>Todo</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Data nelze upravovat, synchronizuje se</translation>
     </message>
     <message>
         <source>all tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>všechny úkoly?</translation>
     </message>
     <message>
         <source>all completed tasks?</source>
-        <translation type="unfinished"></translation>
+        <translation>všechny dokončené úkoly?</translation>
     </message>
     <message>
         <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Bylo přijato %1 nových úkolů.&lt;p&gt;Chcete je přidat do vašeho seznamu úkolů?</translation>
     </message>
     <message>
         <source>New Tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Nové úkoly</translation>
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Data nelze upravovat, synchronizuje se</translation>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished"></translation>
+        <translation>C.</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorita</translation>
     </message>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Shrnutí</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Konečný termín</translation>
     </message>
     <message>
         <source>Configure Templates</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat šablony</translation>
     </message>
     <message>
         <source>Template Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor šablon</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstranit</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Název</translation>
     </message>
     <message>
         <source>New Template %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová šablona  %1</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -255,7 +266,11 @@ Quit Anyway?</source>
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro nastavení priority nového úkolu.
+
+Tato oblast je nazvaná lišta zkratek.
+
+Umožní vám rychle přidat nový úkol do vašeho seznamu. Tuto lištu můžete zobrazit, nebo skrýt nastavením Možnosti-&gt;&apos;Zobrazit lištu zkratek&apos; z menu nahoře.</translation>
     </message>
     <message>
         <source>Enter description of new task here.
@@ -263,11 +278,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadejte sem popis nového úkolu.
+
+Tato oblast je nazvaná lišta zkratek.
+
+Umožní vám rychle přidat nový úkol do vašeho seznamu. Tuto lištu můžete zobrazit, nebo skrýt nastavením Možnosti-&gt;&apos;Zobrazit lištu zkratek&apos; z menu nahoře.</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Více</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -275,11 +294,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro zadání dalších informací o novém úkolu.
+
+Tato oblast je nazvaná lišta zkratek.
+
+Umožní vám rychle přidat nový úkol do vašeho seznamu. Tuto lištu můžete zobrazit, nebo skrýt nastavením Možnosti-&gt;&apos;Zobrazit lištu zkratek&apos; z menu nahoře.</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>Vložit</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -287,11 +310,15 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro přidání nového úkolu.
+
+Tato oblast je nazvaná lišta zkratek.
+
+Umožní vám rychle přidat nový úkol do vašeho seznamu. Tuto lištu můžete zobrazit, nebo skrýt nastavením Možnosti-&gt;&apos;Zobrazit lištu zkratek&apos; z menu nahoře.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Storno</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -299,64 +326,68 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte sem pro resetování informací o novém úkolu.
+
+Tato oblast je nazvaná lišta zkratek.
+
+Umožní vám rychle přidat nový úkol do vašeho seznamu. Tuto lištu můžete zobrazit, nebo skrýt nastavením Možnosti-&gt;&apos;Zobrazit lištu zkratek&apos; z menu nahoře.</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorita:</translation>
     </message>
 </context>
 <context>
     <name>TableView</name>
     <message>
         <source>Table View</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabulkové zobrazení</translation>
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 dnů</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Žádný</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas</translation>
     </message>
     <message>
         <source>Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Typ</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nový</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Shrnutí:</translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem zadejte krátký popis úkolu.</translation>
     </message>
     <message>
         <source>Complete </source>
