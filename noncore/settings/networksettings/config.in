@@ -1,7 +1,7 @@
 config NETWORKSETUP
   boolean "opie-networksettings (TCP/IP network settings)"
   default "y"
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2NET
 
 config NETWORKSETUP-CORE
   boolean
