@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Contacts
- A simple addressbook for the Qtopia environment.
+ A simple addressbook for the Opie environment.

@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Game: find the mines
- A game for the Qtopia environment.
+ A game for the Opie environment.

@@ -7,5 +7,5 @@ Version: 1.0.0
 Depends: qpe-base ($QPE_VERSION)
 License: Public Domain
 Description: Example program
- An example program for the Qtopia environment.
+ An example program for the Opie environment.
  Does nothing interesting.

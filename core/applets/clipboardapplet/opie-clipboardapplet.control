@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Clipboard applet
- Clipboard applet for the Qtopia environment taskbar.
+ Clipboard applet for the Opie environment taskbar.

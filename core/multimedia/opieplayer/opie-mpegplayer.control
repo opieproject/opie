@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: MPEG video/audio player
- The mpegplayer for the Qtopia environment.
+ The mpegplayer for the Opie environment.

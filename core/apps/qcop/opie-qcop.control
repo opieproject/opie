@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: qt-embedded (>=$QTE_VERSION)
 Description: Interprocess communication client
- Interprocess communication client for the Qtopia environment.
+ Interprocess communication client for the Opie environment.

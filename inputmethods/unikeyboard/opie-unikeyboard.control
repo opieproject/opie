@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Unicode input method
- Basic unicode input method for the Qtopia environment.
+ Basic unicode input method for the Opie environment.

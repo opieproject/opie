@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Clock applet
- Clock applet for the Qtopia environment taskbar.
+ Clock applet for the Opie environment taskbar.

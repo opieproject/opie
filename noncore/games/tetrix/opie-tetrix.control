@@ -7,4 +7,4 @@ Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Game: control falling blocks
- A game for the Qtopia environment.
+ A game for the Opie environment.

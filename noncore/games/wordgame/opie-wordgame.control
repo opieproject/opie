@@ -6,5 +6,5 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Crossword game
- A crossword game for the Qtopia environment.
+ A crossword game for the Opie environment.
  Play against the computer or human opponents.

@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: TODO-list manager
- A Todo-list manager for the Qtopia environment.
+ A Todo-list manager for the Opie environment.

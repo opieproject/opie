@@ -7,4 +7,4 @@ Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Sound settings dialog
- For the Qtopia environment.
+ For the Opie environment.

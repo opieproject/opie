@@ -6,5 +6,5 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Image Viewer
- The image viewer for the Qtopia environment. Supports
+ The image viewer for the Opie environment. Supports
  Whichever formats are compiled into Qt/Embedded (eg. PNG).

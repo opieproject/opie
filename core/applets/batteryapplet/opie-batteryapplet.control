@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Battery Monitor applet
- Battery Monitor applet for the Qtopia environment taskbar.
+ Battery Monitor applet for the Opie environment taskbar.

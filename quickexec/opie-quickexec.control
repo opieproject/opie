@@ -7,5 +7,5 @@ Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Calculator
- A multi-function calculator for the Qtopia environment.
+ A multi-function calculator for the Opie environment.
  Includes units conversion.

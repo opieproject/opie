@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Light and Power settings dialog
- For the Qtopia environment.
+ For the Opie environment.

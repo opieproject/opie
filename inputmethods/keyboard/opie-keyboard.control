@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Keyboard input method
- Keyboard input method for the Qtopia environment.
+ Keyboard input method for the Opie environment.

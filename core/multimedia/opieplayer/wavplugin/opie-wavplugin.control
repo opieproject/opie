@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: WAV file plugin
- Plugin to play WAV files with the mediaplayer in the Qtopia environment.
+ Plugin to play WAV files with the mediaplayer in the Opie environment.

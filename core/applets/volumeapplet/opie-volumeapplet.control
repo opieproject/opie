@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Volume applet
- Volume applet for the Qtopia environment taskbar.
+ Volume applet for the Opie environment taskbar.

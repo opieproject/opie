@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION), ptydevs
 Description: KDE's konsole (shell terminal)
- Ported to the Qtopia environment.
+ Ported to the Opie environment.

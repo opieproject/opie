@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: A datebook/appointment manager
- A datebook/appointment manager for the Qtopia environment.
+ A datebook/appointment manager for the Opie environment.

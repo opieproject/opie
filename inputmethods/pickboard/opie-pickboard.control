@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: Pickboard input method
- Pickboard dictionary-based input method for the Qtopia environment.
+ Pickboard dictionary-based input method for the Opie environment.

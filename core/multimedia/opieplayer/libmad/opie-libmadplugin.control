@@ -6,4 +6,4 @@ Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: MP3 file plugin using libmad
- Plugin to play MP3 files with the mediaplayer in the Qtopia environment.
+ Plugin to play MP3 files with the mediaplayer in the Opie environment.
