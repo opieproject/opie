@@ -20,14 +20,18 @@ class OTodoAccess;
 /**
 @author Patrick S. Vogt
 */
-class TodoSearch : public SearchGroup 
+class TodoSearch : public SearchGroup
 {
 public:
     TodoSearch(QListView* parent, QString name);
 
     ~TodoSearch();
 
-    virtual void expand();
+protected:
+	virtual void load();
+	virtual int search();
+	virtual void insertItem( void* );
+
 private:
     OTodoAccess *_todos;
 };

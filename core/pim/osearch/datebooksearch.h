@@ -27,7 +27,11 @@ public:
 
     ~DatebookSearch();
 
-    virtual void expand();
+protected:
+	virtual void load();
+	virtual int search();
+	virtual void insertItem( void* );
+
 private:
     ODateBookAccess *_dates;
 

@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -30,25 +30,21 @@ AppLnkItem::~AppLnkItem()
 QString AppLnkItem::toRichText()
 {
     QString text;
-    text += "<b><h3>";
-    text += _app->name();
-    text += "</b></h3><br>";
-    text += _app->comment();
-    text += "<br><br>`";
-    text += _app->exec();
-    text += "`";
+    text += "<b><h3>" + _app->name() + "</b></h3><br>";
+    text += _app->comment() + "<br>";
+    text += "<br>`" + _app->exec() + "`<br>";
     return text;
 }
 
-void AppLnkItem::editItem()
+void AppLnkItem::action( int act )
 {
-	_app->execute();
+	if (!_app->isValid()) qDebug("INVALID");
+	if (act == 0) _app->execute();
 }
 
-void AppLnkItem::showItem()
+QIntDict<QString> AppLnkItem::actions()
 {
-/* 	QCopEnvelope e("QPE/Application/addressbook", "edit(int)");
-	e << _contact->uid();*/
-   ResultItem::showItem();
+	QIntDict<QString> result;
+	result.insert( 0, new QString( QObject::tr("execute") ) );
+	return result;
 }
-

@@ -15,21 +15,21 @@
 #include <qmainwindow.h>
 #include <qdialog.h>
 #include <qaction.h>
+#include <qlist.h>
 #include <qtimer.h>
 #include <qpopupmenu.h>
 
 class QPEToolBar;
 class QVBoxLayout;
+class QHBoxLayout;
 class QTextView;
 class QFrame;
 class QListViewItem;
 class OListView;
 class OListViewItem;
-class AdressSearch;
-class TodoSearch;
-class DatebookSearch;
-class AppLnkSearch;
-class DocLnkSearch;
+class QHButtonGroup;
+
+class SearchGroup;
 
 class MainWindow : public QMainWindow
 {
@@ -48,24 +48,21 @@ public slots:
   void setSearch( const QString& );
 
 protected slots:
-  void showItem();
-  void editItem();
+  void slotAction(int);
 
 private:
   OListView *resultsList;
   QTextView *richEdit;
   OListViewItem *_currentItem;
   QVBoxLayout *mainLayout;
+  QHBoxLayout *buttonLayout;
   QFrame *detailsFrame;
-  OListViewItem *_item;
+//  OListViewItem *_item;
   QTimer *popupTimer;
 
-  AdressSearch *adrSearch;
-  TodoSearch *todoSearch;
-  DatebookSearch *datebookSearch;
-  AppLnkSearch *applnkSearch;
-  DocLnkSearch *doclnkSearch;
-
+  QList<SearchGroup> searches;
+  QHButtonGroup *buttonGroupActions;
+  uint _buttonCount;
   void makeMenu();
 };
 

@@ -15,7 +15,7 @@
 
 #include "olistviewitem.h"
 
-#include <qregexp.h>
+class QRegExp;
 
 /**
 @author Patrick S. Vogt
@@ -32,11 +32,18 @@ public:
     virtual void setSearch(QRegExp);
     virtual int rtti() { return Searchgroup;}
 
+
+
 protected:
 	QRegExp _search;
+	virtual void load() = 0;
+	virtual int search() = 0;
+	virtual void insertItem( void* ) = 0;
 private:
+	void clearList();
 	QString _name;
 	bool expanded;
+	bool loaded;
 };
 
 #endif

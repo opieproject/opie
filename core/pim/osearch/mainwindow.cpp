@@ -25,7 +25,9 @@
 #include <qstring.h>
 #include <qlabel.h>
 #include <qfile.h>
+#include <qhbuttongroup.h>
 #include <qpushbutton.h>
+#include <qintdict.h>
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qtextbrowser.h>
@@ -44,7 +46,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
 {
   setCaption( tr("OSearch") );
 
-  setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+  setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
 
   QFrame *mainFrame = new QFrame( this, "mainFrame" );
 
@@ -53,33 +55,41 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   mainLayout->setMargin( 0 );
 
   resultsList = new OListView( mainFrame );
-  resultsList->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
-  mainLayout->addWidget( resultsList );
+  resultsList->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
+  mainLayout->addWidget( resultsList, 1 );
 
   detailsFrame = new QFrame( mainFrame, "detailsFrame" );
   QVBoxLayout *detailsLayout = new QVBoxLayout( detailsFrame );
   richEdit = new QTextView( detailsFrame );
-  richEdit->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
-  detailsLayout->addWidget( richEdit, 0 );
-  QHBoxLayout *buttonLayout = new QHBoxLayout( detailsFrame );
-  detailsLayout->addLayout( buttonLayout, 0 );
+  richEdit->setSizePolicy( QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Expanding));
+  //richEdit->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Minimum ));
+  detailsLayout->addWidget( richEdit, 1 );
+
+  buttonGroupActions = new QHButtonGroup( this );
+  _buttonCount = 0;
+//  buttonGroupActions->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
+
+  buttonLayout = new QHBoxLayout( detailsFrame );
+  buttonGroupActions->hide();
+  //buttonLayout->addWidget( buttonGroupActions, 0 );
+
+   detailsLayout->addLayout( buttonLayout );
+   /*
    QPushButton *buttonShow = new QPushButton( detailsFrame, "Show" );
    buttonShow->setText( tr("show") );
-//   buttonShow->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
    QPushButton *buttonEdit = new QPushButton( detailsFrame, "Edit" );
    buttonEdit->setText( tr("edit") );
- //  buttonEdit->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
    buttonLayout->addWidget( buttonShow, 0 );
    buttonLayout->addWidget( buttonEdit, 0 );
-
-  mainLayout->addWidget( detailsFrame, 0 );
+*/
+  mainLayout->addWidget( detailsFrame );
   detailsFrame->hide();
 
-  adrSearch = new AdressSearch( resultsList, tr("adressbook") );
-  todoSearch = new TodoSearch( resultsList, tr("todo") );
-  datebookSearch = new DatebookSearch( resultsList, tr("datebook") );
-  applnkSearch = new AppLnkSearch( resultsList, tr("applications") );
-  doclnkSearch = new DocLnkSearch( resultsList, tr("documents") );
+  searches.append( new AdressSearch( resultsList, tr("adressbook") ) );
+  searches.append( new TodoSearch( resultsList, tr("todo") ) );
+  searches.append( new DatebookSearch( resultsList, tr("datebook") ) );
+  searches.append( new AppLnkSearch( resultsList, tr("applications") ) );
+  searches.append( new DocLnkSearch( resultsList, tr("documents") ) );
 
   makeMenu();
   setCentralWidget( mainFrame );
@@ -89,9 +99,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(popupTimer, SIGNAL(timeout()), SLOT(showPopup()));
   connect(resultsList, SIGNAL(pressed(QListViewItem*)), SLOT(setCurrent(QListViewItem*)));
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
-  connect(buttonShow, SIGNAL(clicked()), SLOT( showItem() ) );
-  connect(buttonEdit, SIGNAL(clicked()), SLOT( editItem() ) );
-
+  connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
+//   connect(buttonEdit, SIGNAL(clicked()), SLOT( editItem() ) );
 
 }
 
@@ -136,6 +145,30 @@ void MainWindow::setCurrent(QListViewItem *item)
 		ResultItem *res = (ResultItem*)item;
 //		ResultItem *res = dynamic_cast<ResultItem*>(item);
 		richEdit->setText( res->toRichText() );
+		QIntDict<QString> acts = res->actions();
+		QButton *button;
+		for (uint i = 0; i < acts.count(); i++){
+			button = buttonGroupActions->find( i );
+			qDebug("action %i >%s<",i,acts[i]->latin1());
+			if (!button) {
+				qDebug("BUTTON");
+				button = new QPushButton( detailsFrame );
+				buttonLayout->addWidget( button, 0 );
+				buttonGroupActions->insert( button, i);
+			}
+			button->setText( *acts[i] );
+			button->show();
+		}
+		for (uint i = acts.count(); i < _buttonCount; i++){
+			qDebug("remove button %i of %i",i, _buttonCount);
+			button = buttonGroupActions->find( i );
+			if (button) button->hide();
+		}
+		_buttonCount = acts.count();
+// 		buttonShow = new QPushButton( detailsFrame, "Show" ) ;
+// 		buttonShow->setText( "test" );
+// 		buttonLayout->addWidget( buttonShow, 0 );
+// buttonGroupActions->insert(buttonShow);
 		detailsFrame->show();
 	}else detailsFrame->hide();
 	//_currentItem = (OListViewItem*)item;
@@ -150,33 +183,22 @@ void MainWindow::stopTimer(QListViewItem*)
 void MainWindow::showPopup()
 {
 	qDebug("showPopup");
-        if (!_item) return;
+        if (!_currentItem) return;
 }
 
 void MainWindow::setSearch( const QString &key )
 {
-  adrSearch->setSearch(key);
-  todoSearch->setSearch(key);
-  datebookSearch->setSearch(key);
-  applnkSearch->setSearch(key);
-  doclnkSearch->setSearch(key);
+	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() )
+		s->setSearch( key );
 }
 
 
-void MainWindow::showItem()
+void MainWindow::slotAction( int act)
 {
 	if (_currentItem->rtti() == OListViewItem::Result){
 		ResultItem *res = (ResultItem*)_currentItem;
 //		ResultItem *res = dynamic_cast<ResultItem*>(item);
-		res->showItem();
+		res->action(act);
 	}
 }
 
-void MainWindow::editItem()
-{
-	if (_currentItem->rtti() == OListViewItem::Result){
-		ResultItem *res = (ResultItem*)_currentItem;
-//		ResultItem *res = dynamic_cast<ResultItem*>(item);
-		res->editItem();
-	}
-}

@@ -2,7 +2,7 @@
 //
 // C++ Interface: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -25,10 +25,9 @@ public:
     TodoItem(OListViewItem* parent, OTodo *todo);
     ~TodoItem();
 
-    virtual void expand();
     virtual QString toRichText();
-    virtual void showItem();
-    virtual void editItem();
+    virtual void action( int );
+    virtual QIntDict<QString> actions();
 
 private:
     OTodo *_todo;

@@ -13,6 +13,8 @@
 #ifndef RESULTITEM_H
 #define RESULTITEM_H
 
+#include <qintdict.h>
+
 #include "olistviewitem.h"
 
 /**
@@ -26,8 +28,8 @@ public:
 
     virtual QString toRichText() {return "no text";};
     virtual int rtti() { return Result;}
-    virtual void showItem();
-    virtual void editItem();
+    virtual void action( int ) = 0;
+    virtual QIntDict<QString> actions() = 0;
 };
 
 #endif

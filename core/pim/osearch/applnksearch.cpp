@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -29,18 +29,27 @@ AppLnkSearch::~AppLnkSearch()
 }
 
 
-void AppLnkSearch::expand()
+void AppLnkSearch::load()
 {
-	SearchGroup::expand();
-	if (_search.isEmpty()) return;
-	if (!_apps) _apps = new AppLnkSet(QPEApplication::qpeDir());
-	QList<AppLnk> appList = _apps->children();
-	for ( AppLnk *app = appList.first(); app != 0; app = appList.next() ){
-//		if (app->name().contains(_search) || app->comment().contains(_search))
-		if ( (_search.match( app->name() ) != -1)
-		    || (_search.match(app->comment()) != -1)
-		    || (_search.match(app->exec()) != -1) )
-			new AppLnkItem( this, app );
-	}
+	_apps = new AppLnkSet(QPEApplication::qpeDir());
 }
 
+int AppLnkSearch::search()
+{
+	int count = 0;
+	QList<AppLnk> appList = _apps->children();
+	for ( AppLnk *app = appList.first(); app != 0; app = appList.next() ){
+		if ( (_search.match( app->name() ) != -1)
+		    || (_search.match(app->comment()) != -1)
+		    || (_search.match(app->exec()) != -1) ) {
+		    	count++;
+			insertItem( app );
+		}
+	}
+	return count;
+}
+
+void AppLnkSearch::insertItem( void *rec )
+{
+	new AppLnkItem( this, (AppLnk*)rec );
+}

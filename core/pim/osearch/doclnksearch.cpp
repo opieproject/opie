@@ -17,30 +17,22 @@
 
 #include "doclnkitem.h"
 
-DocLnkSearch::DocLnkSearch(QListView* parent, QString name): SearchGroup(parent, name)
+DocLnkSearch::DocLnkSearch(QListView* parent, QString name)
+: AppLnkSearch(parent, name)
 {
-	_docs = 0;
 }
 
 
 DocLnkSearch::~DocLnkSearch()
 {
-	delete _docs;
 }
 
-
-void DocLnkSearch::expand()
+void DocLnkSearch::load()
 {
-	SearchGroup::expand();
-	if (_search.isEmpty()) return;
-	if (!_docs) _docs = new DocLnkSet(QPEApplication::documentDir());
-	QList<DocLnk> appList = _docs->children();
-	for ( DocLnk *app = appList.first(); app != 0; app = appList.next() ){
-//		if (app->name().contains(_search) || app->comment().contains(_search))
-		if ( (_search.match( app->name() ) != -1)
-		    || (_search.match(app->comment()) != -1)
-		    || (_search.match(app->exec()) != -1) )
-			new DocLnkItem( this, app );
-	}
+	_apps = new DocLnkSet(QPEApplication::documentDir());
 }
 
+void DocLnkSearch::insertItem( void *rec )
+{
+	new DocLnkItem( this, (DocLnk*)rec );
+}

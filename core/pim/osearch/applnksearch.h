@@ -2,7 +2,7 @@
 //
 // C++ Interface: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -27,9 +27,12 @@ public:
 
     ~AppLnkSearch();
 
-    virtual void expand();
-private:
-    AppLnkSet *_apps;
+protected:
+	virtual void load();
+	virtual int search();
+	virtual void insertItem( void* );
+
+	AppLnkSet *_apps;
 };
 
 #endif

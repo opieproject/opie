@@ -30,22 +30,21 @@ TodoSearch::~TodoSearch()
 }
 
 
-void TodoSearch::expand()
+void TodoSearch::load()
 {
-	SearchGroup::expand();
-	if (_search.isEmpty()) return;
-
-	if (!_todos){
 	 _todos = new OTodoAccess();
 	 _todos->load();
-	 }
-
-	ORecordList<OTodo> results = _todos->matchRegexp(_search);
-	setText(0, text(0) + " (" + QString::number( results.count() ) + ")");
-	for (uint i = 0; i < results.count(); i++) {
-		new TodoItem( this, new OTodo( results[i] ));
-	}
-
 }
 
+int TodoSearch::search()
+{
+	ORecordList<OTodo> results = _todos->matchRegexp(_search);
+	for (uint i = 0; i < results.count(); i++)
+		new TodoItem( this, new OTodo( results[i] ));
+	return results.count();
+}
 
+void TodoSearch::insertItem( void* )
+{
+
+}

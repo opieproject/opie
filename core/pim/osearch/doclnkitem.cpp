@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -13,6 +13,8 @@
 #include "doclnkitem.h"
 
 #include <qpe/applnk.h>
+#include <qfile.h>
+#include <qtextstream.h>
 
 DocLnkItem::DocLnkItem(OListViewItem* parent, DocLnk *app)
 	: ResultItem(parent)
@@ -21,34 +23,48 @@ DocLnkItem::DocLnkItem(OListViewItem* parent, DocLnk *app)
 	setText(0, _doc->name() );
 }
 
-
 DocLnkItem::~DocLnkItem()
 {
 }
 
-
 QString DocLnkItem::toRichText()
 {
     QString text;
-    text += "<b><h3>";
-    text += _doc->name();
-    text += "</b></h3><br>";
-    text += _doc->comment();
-    text += "<br><br>`";
+    text += "<b><h3>" + _doc->name() + "</b></h3><br>";
+    text += _doc->comment() + "<br>";
+    text += "File: " + _doc->file() + "<br>";
+    text += "Mimetype: " + _doc->type() + "<br>";
+    if ( _doc->type().contains( "text" ) ){
+	text += "<br><br><hr><br>";
+  	QFile f(_doc->file());
+  	if ( f.open(IO_ReadOnly) ) {
+       		QTextStream t( &f );
+        	while ( !t.eof() )
+       	    		text += t.readLine() + "<br>";
+        }
+  	f.close();
+    }
+   /* text += "<br><br>`";
     text += _doc->exec();
-    text += "`";
+    text += "`";*/
+    QStringList list = _doc->mimeTypes();
+   int i = 0;
+    for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+            text += QString::number( i++) + " - " + *it ;
+        }
     return text;
 }
 
-void DocLnkItem::editItem()
+void DocLnkItem::action( int act )
 {
-	_doc->execute();
+	qDebug("action %i",act);
+	if (!_doc->isValid()) qDebug("INVALID");
+	if (act == 0) _doc->execute();
 }
 
-void DocLnkItem::showItem()
+QIntDict<QString> DocLnkItem::actions()
 {
-/* 	QCopEnvelope e("QPE/Application/addressbook", "edit(int)");
-	e << _contact->uid();*/
-   ResultItem::showItem();
+	QIntDict<QString> result;
+	result.insert( 0, new QString( QObject::tr("open with ") + _doc->exec() ) );
+	return result;
 }
-

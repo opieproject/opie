@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -34,18 +34,23 @@ QString ContactItem::toRichText()
     return _contact->toRichText();
 }
 
-
-void ContactItem::editItem()
+void ContactItem::action( int act )
 {
-	QCopEnvelope e("QPE/Application/addressbook", "edit(int)");
-//	QCopEnvelope e("QPE/Addressbook", "edit(int)");
-	e << _contact->uid();
-}
-
-void ContactItem::showItem()
-{
+if (act == 0){
 	QCopEnvelope e("QPE/Application/addressbook", "show(int)");
-//	QCopEnvelope e("QPE/Addressbook", "show(int)");
 	e << _contact->uid();
+}else if(act == 1){
+ 	QCopEnvelope e("QPE/Application/addressbook", "edit(int)");
+ 	e << _contact->uid();
 }
 
+}
+
+QIntDict<QString> ContactItem::actions()
+{
+	QIntDict<QString> result;
+	result.insert( 0, new QString( QObject::tr("show") ) );
+	result.insert( 1, new QString( QObject::tr("edit") ) );
+	return result;
+
+}

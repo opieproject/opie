@@ -34,17 +34,21 @@ QString EventItem::toRichText()
     return _event->toRichText();
 }
 
-void EventItem::editItem()
+void EventItem::action( int act )
 {
-	QCopEnvelope e("QPE/Application/datebook", "editEvent(int)");
-	e << _event->uid();
+	if (act == 0){
+		QCopEnvelope e("QPE/Application/datebook", "viewDefault(QDate)");
+		e << _event->startDateTime().date();
+	}else if(act == 1){
+ 		QCopEnvelope e("QPE/Application/datebook", "editEvent(int)");
+ 		e << _event->uid();
+	}
 }
 
-void EventItem::showItem()
+QIntDict<QString> EventItem::actions()
 {
-	QCopEnvelope e("QPE/Application/datebook", "viewDefault(QDate)");
-	QDate day = _event->startDateTime().date();
-	qDebug("sending view day %s",day.toString().latin1());
-	e << day;
+	QIntDict<QString> result;
+	result.insert( 0, new QString( QObject::tr("show") ) );
+	result.insert( 1, new QString( QObject::tr("edit") ) );
+	return result;
 }
-

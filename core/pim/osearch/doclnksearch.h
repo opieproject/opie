@@ -13,23 +13,21 @@
 #ifndef DOCLNKSEARCH_H
 #define DOCLNKSEARCH_H
 
-#include "searchgroup.h"
-
-class DocLnkSet;
+#include "applnksearch.h"
 
 /**
 @author Patrick S. Vogt
 */
-class DocLnkSearch : public SearchGroup
+class DocLnkSearch : public AppLnkSearch 
 {
 public:
     DocLnkSearch(QListView* parent, QString name);
-
     ~DocLnkSearch();
 
-    virtual void expand();
-private:
-    DocLnkSet *_docs;
+protected:
+	virtual void load();
+	virtual void insertItem( void* );
+
 };
 
 #endif

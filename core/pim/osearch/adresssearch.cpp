@@ -30,16 +30,21 @@ AdressSearch::~AdressSearch()
 	delete _contacts;
 }
 
-
-void AdressSearch::expand()
+void AdressSearch::load()
 {
-	SearchGroup::expand();
-	if (_search.isEmpty()) return;
- 	if (!_contacts) _contacts = new OContactAccess("osearch");
+	_contacts = new OContactAccess("osearch");
+}
+
+int AdressSearch::search()
+{
 	ORecordList<OContact> results = _contacts->matchRegexp(_search);
-	setText(0, text(0) + " (" + QString::number( results.count() ) + ")" );
 	for (uint i = 0; i < results.count(); i++) {
 		new ContactItem( this, new OContact( results[i] ));
 	}
+	return results.count();
 }
 
+void AdressSearch::insertItem( void* )
+{
+
+}

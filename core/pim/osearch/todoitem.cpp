@@ -2,7 +2,7 @@
 //
 // C++ Implementation: $MODULE$
 //
-// Description: 
+// Description:
 //
 //
 // Author: Patrick S. Vogt <tille@handhelds.org>, (C) 2003
@@ -22,16 +22,9 @@ TodoItem::TodoItem(OListViewItem* parent, OTodo *todo)
 	setText( 0, todo->toShortText() );
 }
 
-
 TodoItem::~TodoItem()
 {
 	delete _todo;
-}
-
-
-void TodoItem::expand()
-{
-    ResultItem::expand();
 }
 
 QString TodoItem::toRichText()
@@ -39,16 +32,21 @@ QString TodoItem::toRichText()
 	return _todo->toRichText();
 }
 
-void TodoItem::showItem()
+void TodoItem::action( int act )
 {
-//	QCopEnvelope e("QPE/Todolist", "show(int)");
-	QCopEnvelope e("QPE/Application/todolist", "show(int)");
-	e << _todo->uid();
+	if (act == 0){
+		QCopEnvelope e("QPE/Application/todolist", "show(int)");
+		e << _todo->uid();
+	}else if (act == 1){
+		QCopEnvelope e("QPE/Application/todolist", "edit(int)");
+		e << _todo->uid();
+	}
 }
 
-void TodoItem::editItem()
+QIntDict<QString> TodoItem::actions()
 {
-//	QCopEnvelope e("QPE/Todolist", "edit(int)");
-	QCopEnvelope e("QPE/Application/todolist", "edit(int)");
-	e << _todo->uid();
+	QIntDict<QString> result;
+	result.insert( 0, new QString( QObject::tr("show") ) );
+	result.insert( 1, new QString( QObject::tr("edit") ) );
+	return result;
 }

@@ -28,8 +28,8 @@ public:
     ~EventItem();
 
     virtual QString toRichText();
-    virtual void editItem();
-    virtual void showItem();
+    virtual void action( int );
+    virtual QIntDict<QString> actions();
 
 private:
     OEvent *_event;

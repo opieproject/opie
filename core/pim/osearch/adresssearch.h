@@ -26,10 +26,10 @@ public:
     AdressSearch(QListView* parent, QString name);
     ~AdressSearch();
 
-    virtual void expand();
-
 protected:
-
+	virtual void load();
+	virtual int search();
+	virtual void insertItem( void* );
 
 private:
     OContactAccess *_contacts;

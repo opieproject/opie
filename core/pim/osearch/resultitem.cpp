@@ -27,15 +27,3 @@ ResultItem::ResultItem(OListViewItem* parent)
 ResultItem::~ResultItem()
 {
 }
-
-void ResultItem::showItem()
-{
-	QMessageBox::warning(0,"Not implemented","show is not yet implemented for this");
-}
-
-
-void ResultItem::editItem()
-{
-	QMessageBox::warning(0,"Not implemented","edit is not yet implemented for this");
-}
-

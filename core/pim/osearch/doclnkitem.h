@@ -27,8 +27,8 @@ public:
     ~DocLnkItem();
 
     virtual QString toRichText();
-    virtual void editItem();
-    virtual void showItem();
+    virtual void action( int );
+    virtual QIntDict<QString> actions();
 
 private:
     DocLnk *_doc;

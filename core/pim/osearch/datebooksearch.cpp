@@ -30,17 +30,21 @@ DatebookSearch::~DatebookSearch()
 }
 
 
-void DatebookSearch::expand()
+void DatebookSearch::load()
 {
-	SearchGroup::expand();
- 	if (!_dates){
 	 _dates = new ODateBookAccess();
 	 _dates->load();
-	 }
-	ORecordList<OEvent> results = _dates->matchRegexp(_search);
-	setText(0, text(0) + " (" + QString::number( results.count() ) + ")" );
-	for (uint i = 0; i < results.count(); i++) {
-		new EventItem( this, new OEvent( results[i] ));
-	}
 }
 
+int DatebookSearch::search()
+{
+	ORecordList<OEvent> results = _dates->matchRegexp(_search);
+	for (uint i = 0; i < results.count(); i++)
+		new EventItem( this, new OEvent( results[i] ));
+	return results.count();
+}
+
+void DatebookSearch::insertItem( void* )
+{
+
+}
