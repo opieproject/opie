@@ -300,7 +300,8 @@ void Composer::slotQueueMail()
 		cfg.writeEntry( an + "docLnk", a.docLnk().file() );	
 	}
 
- //	cfg.close();
+	QMessageBox::information(this, tr("Success"), tr("<p>The mail was queued successfully.</p><p>The queue contains ")+QString::number(count)+tr(" mails.</p>"), tr("Ok"));
+
 }
 
 void Composer::slotSendError(const QString &error)
