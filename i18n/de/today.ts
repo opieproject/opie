@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Today</name>
     <message>
@@ -39,7 +40,7 @@
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Heute keine Termine mehr</translation>
     </message>
 </context>
 <context>
@@ -76,7 +77,7 @@ angezeigt werden?</translation>
     <message>
         <source>Show only later
 appointments</source>
-        <translation>Nur spätere Verabredungen
+        <translation>Nur spätere Termine
 anzeigen</translation>
     </message>
     <message>
@@ -99,7 +100,7 @@ werden?</translation>
         <source>Clip after how
 many letters</source>
         <translation>Zeilenumbruch nach
-wievielen Buchstaben?</translation>
+Buchstaben?</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -118,10 +119,8 @@ werden?</translation>
         <source>Should today be
 autostarted on
 resume? (Opie only)</source>
-        <translation>Solle &apos;Heute&apos;
-automatisch
-gestartet werden?
-(Nur in Opie)</translation>
+        <translation>&apos;Heute&apos; automatisch
+starten? (Nur in Opie)</translation>
     </message>
     <message>
         <source>Activate the  

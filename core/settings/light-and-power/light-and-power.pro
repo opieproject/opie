@@ -22,4 +22,5 @@ TRANSLATIONS = ../../../i18n/de/light-and-power.ts \
 	 ../../../i18n/pt_BR/light-and-power.ts \
 	 ../../../i18n/sl/light-and-power.ts \
 	 ../../../i18n/zh_CN/light-and-power.ts \
-	 ../../../i18n/zh_TW/light-and-power.ts
+	 ../../../i18n/zh_TW/light-and-power.ts \
+	 ../../../i18n/it/light-and-power.ts

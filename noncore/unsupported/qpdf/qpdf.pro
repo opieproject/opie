@@ -66,4 +66,5 @@ TRANSLATIONS = ../../../i18n/de/qpdf.ts \
 	 ../../../i18n/pt_BR/qpdf.ts \
 	 ../../../i18n/sl/qpdf.ts \
 	 ../../../i18n/zh_CN/qpdf.ts \
+	 ../../../i18n/it/qpdf.ts \
 	 ../../../i18n/zh_TW/qpdf.ts

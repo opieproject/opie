@@ -52,4 +52,5 @@ TRANSLATIONS = ../../../i18n/de/datebook.ts \
 	 ../../../i18n/pt_BR/datebook.ts \
 	 ../../../i18n/sl/datebook.ts \
 	 ../../../i18n/zh_CN/datebook.ts \
+	 ../../../i18n/it/datebook.ts \
 	 ../../../i18n/zh_TW/datebook.ts

@@ -13,4 +13,5 @@ TRANSLATIONS = ../../../i18n/de/calibrate.pro.in.ts \
 	 ../../../i18n/pt_BR/calibrate.pro.in.ts \
 	 ../../../i18n/sl/calibrate.pro.in.ts \
 	 ../../../i18n/zh_CN/calibrate.pro.in.ts \
+	 ../../../i18n/it/calibrate.pro.in.ts \
 	 ../../../i18n/zh_TW/calibrate.pro.in.ts

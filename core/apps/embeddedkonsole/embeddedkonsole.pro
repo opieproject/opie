@@ -35,16 +35,17 @@ LIBS            += -lqpe -lopie
 REQUIRES  = embeddedkonsole
 
 TRANSLATIONS = ../../../i18n/de/embeddedkonsole.ts \
-   ../../../i18n/en/embeddedkonsole.ts \
-   ../../../i18n/es/embeddedkonsole.ts \
-   ../../../i18n/fr/embeddedkonsole.ts \
-   ../../../i18n/hu/embeddedkonsole.ts \
-   ../../../i18n/ja/embeddedkonsole.ts \
-   ../../../i18n/ko/embeddedkonsole.ts \
-   ../../../i18n/no/embeddedkonsole.ts \
-   ../../../i18n/pl/embeddedkonsole.ts \
-   ../../../i18n/pt/embeddedkonsole.ts \
-   ../../../i18n/pt_BR/embeddedkonsole.ts \
-   ../../../i18n/sl/embeddedkonsole.ts \
-   ../../../i18n/zh_CN/embeddedkonsole.ts \
-   ../../../i18n/zh_TW/embeddedkonsole.ts
+        ../../../i18n/en/embeddedkonsole.ts \
+        ../../../i18n/es/embeddedkonsole.ts \
+        ../../../i18n/fr/embeddedkonsole.ts \
+        ../../../i18n/hu/embeddedkonsole.ts \
+        ../../../i18n/ja/embeddedkonsole.ts \
+        ../../../i18n/ko/embeddedkonsole.ts \
+        ../../../i18n/no/embeddedkonsole.ts \
+        ../../../i18n/pl/embeddedkonsole.ts \
+        ../../../i18n/pt/embeddedkonsole.ts \
+        ../../../i18n/pt_BR/embeddedkonsole.ts \
+        ../../../i18n/sl/embeddedkonsole.ts \
+        ../../../i18n/zh_CN/embeddedkonsole.ts \
+        ../../../i18n/zh_TW/embeddedkonsole.ts \
+        ../../../i18n/it/embeddedkonsole.ts

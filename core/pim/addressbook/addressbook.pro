@@ -33,4 +33,5 @@ TRANSLATIONS = ../../../i18n/de/addressbook.ts \
 	 ../../../i18n/pt_BR/addressbook.ts \
 	 ../../../i18n/sl/addressbook.ts \
 	 ../../../i18n/zh_CN/addressbook.ts \
+	 ../../../i18n/it/addressbook.ts \
 	 ../../../i18n/zh_TW/addressbook.ts
