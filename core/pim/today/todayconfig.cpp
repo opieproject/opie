@@ -1,26 +1,40 @@
 /*
- * todayconfig.cpp
- *
- * copyright   : (c) 2002, 2003, 2004 by Maximilian Rei�
- * email       : harlekin@handhelds.org
- *
- */
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+                             This file is part of the Opie Project
+
+                             Copyright (C) Maximilian Reiss <harlekin@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
 #include "todayconfig.h"
 
 #include <opie2/oconfig.h>
 #include <opie2/opluginloader.h>
+#include <opie2/oresource.h>
 #include <opie2/todayplugininterface.h>
 
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 
@@ -44,7 +58,8 @@ class ToolButton : public QToolButton {
 public:
     ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
 : QToolButton( parent, name ) {
-        setPixmap( Resource::loadPixmap( icon ) );
+        setUsesBigPixmap( true );
+        setPixmap( Opie::Core::OResource::loadPixmap( icon, Opie::Core::OResource::SmallIcon ) );
         setAutoRaise( TRUE );
         setFocusPolicy( QWidget::NoFocus );
         setToggleButton( t );
@@ -242,7 +257,7 @@ void TodayConfig::pluginManagement( OPluginItem plugItem ) {
     QCheckListItem *item = new QCheckListItem( m_appletListView, plugItem.name(), QCheckListItem::CheckBox );
 
     TodayPluginInterface* iface = m_pluginLoader->load<TodayPluginInterface>( plugItem, IID_TodayPluginInterface );
-    QPixmap icon = Resource::loadPixmap( iface->guiPart()->pixmapNameWidget() );
+    QPixmap icon = Opie::Core::OResource::loadPixmap( iface->guiPart()->pixmapNameWidget(), Opie::Core::OResource::SmallIcon );
     if ( !icon.isNull() ) {
         item->setPixmap( 0, icon );
     }

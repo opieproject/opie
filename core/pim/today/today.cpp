@@ -1,27 +1,41 @@
 /*
- * today.cpp
- *
- * copyright   : (c) 2002,2003,2004 by Maximilian Rei�
- * email       : harlekin@handhelds.org
- *
- */
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+                             This file is part of the Opie Project
+
+                             Copyright (C) Maximilian Reiss <harlekin@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
 #include "today.h"
 
 #include <opie2/odebug.h>
 #include <opie2/opluginloader.h>
 #include <opie2/oconfig.h>
+#include <opie2/oresource.h>
 
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/contact.h>
 
@@ -218,7 +232,7 @@ void Today::loadPluginWidgets() {
         plugin.guiBox = new QWidget( m_big_box );
         QHBoxLayout *boxLayout = new QHBoxLayout( plugin.guiBox );
         QPixmap plugPix;
-        plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
+        plugPix.convertFromImage( Opie::Core::OResource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( m_iconSize, m_iconSize ), 0 );
         OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
         plugIcon->setPixmap( plugPix );
         QWhatsThis::add

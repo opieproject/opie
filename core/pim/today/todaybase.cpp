@@ -1,23 +1,38 @@
 /*
- * todaybase.cpp
- *
- * copyright   : (c) 2002, 2003, 2004 by Maximilian Rei�
- * email       : harlekin@handhelds.org
- *
- */
-/***************************************************************************
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
+                             This file is part of the Opie Project
+
+                             Copyright (C) Maximilian Reiss <harlekin@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+*/
 
 #include "todaybase.h"
 
+#include <opie2/oresource.h>
+
 #include <qpe/applnk.h>
-#include <qpe/resource.h>
 
 #include <qvbox.h>
 #include <qwhatsthis.h>
@@ -26,13 +41,12 @@ using namespace Opie::Ui;
 TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp ) {
 
-  QPixmap logo = Resource::loadPixmap( "today/today_logo"); // logo
-  QImage  opiezillaimage = QImage( Resource::loadImage("logo/opielogo" ) );
+  QPixmap logo = Opie::Core::OResource::loadPixmap( "today/today_logo" ); // logo
+  QImage  opiezillaimage = QImage( Opie::Core::OResource::loadImage( "logo/opielogo" ) );
   opiezillaimage = opiezillaimage.smoothScale( 45, 45 );
   QPixmap opiezilla; //the opiezilla
   opiezilla.convertFromImage( opiezillaimage );
-  QPixmap config;
-  config.convertFromImage( Resource::loadImage( "SettingsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+  QPixmap config = Opie::Core::OResource::loadPixmap( "SettingsIcon", Opie::Core::OResource::SmallIcon );
 
   layout = 0L;
 
@@ -81,7 +95,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   // Opiezilla
   Opiezilla = new QLabel( Frame, "OpieZilla" );
   Opiezilla->setPixmap( opiezilla );
-  QWhatsThis::add( Opiezilla , tr( "Today by Maximilian Rei�" ) );
+  QWhatsThis::add( Opiezilla , tr( "Today by Maximilian Rei�" ) );
   Opiezilla->setBackgroundOrigin( QLabel::ParentOrigin );
 
 
