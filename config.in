@@ -13,7 +13,7 @@ choice
     boolean "Intel X86"
 
   config TARGET_SHARP
-    boolean "Sharp Zaurus SL-5x00 - stock"
+    boolean "Sharp Zaurus"
 
   config TARGET_IPAQ
     boolean "iPAQ"
@@ -139,7 +139,10 @@ endmenu
 
 menu "Tools"
   source noncore/tools/config.in
-  source development/config.in
+endmenu
+
+menu "Development"
+  source development/keyview/config.in
 endmenu
 
 comment ""
