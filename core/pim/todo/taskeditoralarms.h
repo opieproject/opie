@@ -1,6 +1,6 @@
 /*
                =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 <>
+             .=l.            Copyright (c)  2002,2003 <>
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
@@ -32,21 +32,41 @@
 #include <qwidget.h>
 
 class QListView;
+class QListViewItem;
+class OTodo;
 
+class AlarmItem;
+class DateBookMonth;
 class TaskEditorAlarms : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:
-    TaskEditorAlarms( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    enum Type {
+        Alarm = 0,
+        Reminders
+    };
+    TaskEditorAlarms( QWidget* parent = 0, int type = Alarm,  const char* name = 0, WFlags fl = 0 );
     ~TaskEditorAlarms();
+    void load( const OTodo& );
+    void save( OTodo& );
+private:
+    QPopupMenu* popup( int column );
+    void inlineSetDate( AlarmItem*, const QPoint& p );
+    void inlineSetTime( AlarmItem*);
+    void inlineSetType( AlarmItem*, const QPoint& p );
 
     QListView* lstAlarms;
+    QPopupMenu* m_date;
+    QPopupMenu* m_time;
+    QPopupMenu* m_type;
+    DateBookMonth* m_dbMonth;
 
 protected slots:
     void slotNew();
     void slotEdit();
     void slotDelete();
+    void inlineEdit( QListViewItem*, const QPoint& p, int );
 };
 
 #endif // TASKEDITORALARMS_H

@@ -9,6 +9,8 @@
 
 using namespace Todo;
 
+/* TRANSLATOR Todo::TemplateDialogImpl */
+
 namespace {
     class TemplateListItem : public QListViewItem {
     public:
@@ -61,7 +63,7 @@ TemplateDialogImpl::TemplateDialogImpl( MainWindow* win,
          it != list.end(); ++it  ) {
         new TemplateListItem( listView(), (*it), man->templateEvent( (*it) ) );
     }
-    listView()->addColumn( tr("Name") );
+    listView()->addColumn( QWidget::tr("Name") );
 
     connect( listView(), SIGNAL(clicked(QListViewItem*) ),
              this, SLOT(slotClicked(QListViewItem*) ) );
@@ -70,7 +72,7 @@ TemplateDialogImpl::~TemplateDialogImpl() {
 
 }
 void TemplateDialogImpl::slotAdd() {
-    QString str = tr("New Template %1").arg( listView()->childCount() );
+    QString str = QWidget::tr("New Template %1").arg( listView()->childCount() );
     OTodo ev;
     m_man->addEvent(str, ev);
     new TemplateListItem( listView(), str, ev );
@@ -87,9 +89,7 @@ void TemplateDialogImpl::slotEdit() {
     TemplateListItem* item = (TemplateListItem*)listView()->currentItem();
     OTodo ev = m_win->currentEditor()->edit( m_win, item->event() );
     if ( m_win->currentEditor()->accepted() ) {
-        qWarning("accepted");
         item->setEvent( ev );
-        qWarning("Priority %d", ev.priority() );
         m_man->removeEvent( item->text() );
         m_man->addEvent( item->text(), ev );
     }
@@ -113,7 +113,7 @@ void TemplateDialogImpl::slotClicked( QListViewItem* item) {
     if (!item)
         return;
 
-    TemplateListItem* tbl = (TemplateListItem*)item;
+    TemplateListItem* tbl = static_cast<TemplateListItem*>(item);
     edit()->setText( tbl->text() );
 }
 

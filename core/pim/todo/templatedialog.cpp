@@ -9,10 +9,12 @@
 
 using namespace Todo;
 
+/* TRANSLATOR Todo::TemplateDialog */
+
 TemplateDialog::TemplateDialog( QWidget* widget )
     : QDialog( widget, "TemplateDialog", TRUE )
 {
-    setCaption( tr("Template Editor") );
+    setCaption( QWidget::tr("Template Editor") );
     m_main = new QVBoxLayout(this );
 
     m_list = new QListView( this );
@@ -22,9 +24,9 @@ TemplateDialog::TemplateDialog( QWidget* widget )
     m_main->addWidget( m_lne );
 
     m_btnBar = new QHBox( this );
-    m_add = new QPushButton( tr("Add"), m_btnBar );
-    m_edit = new QPushButton( tr("Edit"), m_btnBar );
-    m_rem = new QPushButton( tr("Remove"), m_btnBar );
+    m_add = new QPushButton( QWidget::tr("Add"), m_btnBar );
+    m_edit = new QPushButton( QWidget::tr("Edit"), m_btnBar );
+    m_rem = new QPushButton( QWidget::tr("Remove"), m_btnBar );
     m_main->addWidget( m_btnBar );
 
     connect(m_add,  SIGNAL(clicked() ),

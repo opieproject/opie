@@ -29,11 +29,10 @@ void TemplateEditor::init() {
     a->addTo( m_main->options() );
 }
 void TemplateEditor::setUp() {
-    qWarning("set up");
     TemplateDialogImpl dlg(m_main, m_man );
     int ret= dlg.exec();
-    if (QDialog::Accepted != ret ) {
+    if (QDialog::Accepted != ret )
         m_man->load();
-    }else
+    else
         m_main->populateTemplates();
 }

@@ -104,6 +104,8 @@ private slots:
         void closeEvent( QCloseEvent* e );
 
     private:
+        /* handle setting and removing alarms */
+        void handleAlarms( const OTodo& oldTodo, const OTodo& newTodo );
         void receiveFile( const QString& filename );
         void connectBase( ViewBase* );
         void initUI();
@@ -195,7 +197,8 @@ private slots:
         void show( int uid );
         void edit( int uid );
         void add( const OPimRecord& );
+        void doAlarm( const QDateTime& dt, int uid );
     };
-};
+}
 
 #endif

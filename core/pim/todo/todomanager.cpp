@@ -122,7 +122,6 @@ bool TodoManager::isLoaded()const {
 }
 void TodoManager::load() {
     if (!m_db) {
-        qWarning("loading!");
         m_db = new OTodoAccess();
         m_db->load();
     }

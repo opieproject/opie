@@ -32,6 +32,7 @@
 #include <qmessagebox.h>
 #include <qtoolbar.h>
 #include <qpopupmenu.h>
+#include <qpushbutton.h>
 #include <qwidgetstack.h>
 #include <qaction.h>
 #include <qtimer.h>
@@ -45,8 +46,12 @@
 #include <qpe/ir.h>
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
+#include <qpe/alarmserver.h>
+#include <qpe/timestring.h>
+#include <qpe/qpeapplication.h>
 
 #include <opie/orecur.h>
+#include <opie/opimnotifymanager.h>
 #include <opie/otodoaccessvcal.h>
 
 #include "quickeditimpl.h"
@@ -301,6 +306,10 @@ OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     int cat = 0;
     if ( m_curCat != QWidget::tr("All Categories") )
         cat = currentCatId();
+    if ( m_curCat == QWidget::tr("Unfiled") )
+        cat = -1;
+
+    qWarning(" Category %d %s",  cat, m_curCat.latin1() );
 
     int filter = 1;
 
@@ -315,6 +324,9 @@ OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
     int cat = 0;
     if ( m_curCat != QWidget::tr("All Categories") )
         cat = currentCatId();
+
+    if ( m_curCat == QWidget::tr("Unfiled") )
+        cat = -1;
 
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
 }
@@ -450,6 +462,7 @@ void MainWindow::slotDelete() {
     if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), strName ) )
         return;
 
+    handleAlarms( OTodo(), m_todoMgr.event( currentView()->current() ) );
     m_todoMgr.remove( currentView()->current() );
     currentView()->removeEvent( currentView()->current() );
     raiseCurrentView();
@@ -641,13 +654,14 @@ void MainWindow::slotEdit( int uid ) {
 	return;
     }
 
-    OTodo todo = m_todoMgr.event( uid );
+    OTodo old_todo = m_todoMgr.event( uid );
 
-    todo = currentEditor()->edit(this, todo );
+    OTodo todo = currentEditor()->edit(this, old_todo );
 
     /* if completed */
     if ( currentEditor()->accepted() ) {
         qWarning("Replacing now" );
+        handleAlarms( old_todo, todo );
         m_todoMgr.update( todo.uid(), todo );
 	currentView()->replaceEvent( todo );
         /* a Category might have changed */
@@ -766,6 +780,7 @@ int MainWindow::create() {
     if ( currentEditor()->accepted() ) {
 	//todo.assignUid();
         uid = todo.uid();
+        handleAlarms( OTodo(), todo );
         m_todoMgr.add( todo );
         currentView()->addEvent( todo );
 
@@ -782,6 +797,9 @@ int MainWindow::create() {
 /* delete it silently... */
 bool MainWindow::remove( int uid ) {
     if (m_syncing) return false;
+
+    /* argh need to get the whole OEvent... to disable alarms -zecke */
+    handleAlarms( OTodo(), m_todoMgr.event( uid ) );
 
     return m_todoMgr.remove( uid );
 }
@@ -820,4 +838,115 @@ void MainWindow::add( const OPimRecord& rec) {
 }
 void MainWindow::slotReturnFromView() {
     raiseCurrentView();
+}
+
+namespace {
+    OPimNotifyManager::Alarms findNonMatching( const OPimNotifyManager::Alarms& oldAls,
+                                               const OPimNotifyManager::Alarms& newAls ) {
+        OPimNotifyManager::Alarms nonMatching;
+        OPimNotifyManager::Alarms::ConstIterator oldIt = oldAls.begin();
+        OPimNotifyManager::Alarms::ConstIterator newIt;
+        for ( ; oldIt != oldAls.end(); ++oldIt ) {
+            bool found = false;
+            QDateTime oldDt = (*oldIt).dateTime();
+            for (newIt= newAls.begin(); newIt != newAls.end(); ++newIt ) {
+                if ( oldDt == (*newIt).dateTime() ) {
+                    found = true;
+                    break;
+                    }
+            }
+            if (!found)
+                nonMatching.append( (*oldIt) );
+        }
+        return nonMatching;
+    }
+    void addAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
+        OPimNotifyManager::Alarms::ConstIterator it;
+        for ( it = als.begin(); it != als.end(); ++it ) {
+            qWarning("Adding alarm for %s", (*it).dateTime().toString().latin1() );
+            AlarmServer::addAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
+        }
+
+    }
+    void removeAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
+        OPimNotifyManager::Alarms::ConstIterator it;
+        for ( it = als.begin(); it != als.end(); ++it ) {
+            qWarning("Removinf alarm for %s",  (*it).dateTime().toString().latin1() );
+            AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
+        }
+    }
+}
+
+void MainWindow::handleAlarms( const OTodo& oldTodo, const OTodo& newTodo) {
+    /*
+     * if oldTodo is not empty and has notifiers we need to find the deleted ones
+     */
+    if(!oldTodo.isEmpty() && oldTodo.hasNotifiers() ) {
+        OPimNotifyManager::Alarms removed;
+        OPimNotifyManager::Alarms oldAls = oldTodo.notifiers().alarms();
+        if (!newTodo.hasNotifiers() )
+            removed = oldAls;
+        else
+            removed = findNonMatching( oldAls, newTodo.notifiers().alarms() );
+
+        removeAlarms( removed, oldTodo.uid() );
+    }
+    if ( newTodo.hasNotifiers() ) {
+        OPimNotifyManager::Alarms added;
+        if ( oldTodo.isEmpty() || !oldTodo.hasNotifiers() )
+            added = newTodo.notifiers().alarms();
+        else
+            added = findNonMatching( newTodo.notifiers().alarms(), oldTodo.notifiers().alarms() );
+
+        addAlarms( added, newTodo.uid() );
+    }
+}
+/* we might have not loaded the db */
+void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
+    m_todoMgr.load();
+
+    OTodo todo = m_todoMgr.event( uid );
+    if (!todo.hasNotifiers() ) return;
+
+    /*
+     * let's find the right alarm and find out if silent
+     * then show a richtext widget
+     */
+    bool loud = false;
+    OPimNotifyManager::Alarms als = todo.notifiers().alarms();
+    OPimNotifyManager::Alarms::Iterator it;
+    for ( it = als.begin(); it != als.end(); ++it ) {
+        if ( (*it).dateTime() == dt ) {
+            loud = ( (*it).sound() == OPimAlarm::Loud );
+            break;
+        }
+    }
+    if (loud)
+        startAlarm();
+
+    QDialog dlg(this, 0, TRUE );
+    QVBoxLayout* lay = new QVBoxLayout( &dlg );
+    QTextView* view = new QTextView( &dlg );
+    lay->addWidget( view );
+    QPushButton* btnOk = new QPushButton( tr("Ok"), &dlg );
+    connect( btnOk, SIGNAL(clicked() ), &dlg, SLOT(accept() ) );
+    lay->addWidget( btnOk );
+
+    QString text = tr("<h1>Alarm at %0</h1><br>").arg( TimeString::dateString( dt ) );
+    text += todo.toRichText();
+    view->setText( text );
+
+    dlg.showMaximized();
+    bool needToStay = dlg.exec();
+
+    if (loud)
+        killAlarm();
+
+    if (needToStay) {
+        showMaximized();
+        raise();
+        QPEApplication::setKeepRunning();
+        setActiveWindow();
+    }
+
 }

@@ -144,6 +144,7 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     layout->addItem( spacer, 5, 0 );
 
     // Maintainer mode
+#if 0
     label = new QLabel( tr( "Maintainer Mode:" ), container );
     layout->addWidget( label, 6, 0 );
     QWhatsThis::add( label, tr( "Click here to set the maintainer's role." ) );
@@ -152,7 +153,7 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     cmbMaintMode->insertItem( tr( "Responsible" ) );
     cmbMaintMode->insertItem( tr( "Done By" ) );
     cmbMaintMode->insertItem( tr( "Coordinating" ) );
-    layout->addMultiCellWidget( cmbMaintMode, 6, 6, 1, 2 );
+//    layout->addMultiCellWidget( cmbMaintMode, 6, 6, 1, 2 );
     QWhatsThis::add( cmbMaintMode, tr( "Click here to set the maintainer's role." ) );
 
     // Maintainer
@@ -165,8 +166,9 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     QWhatsThis::add( txtMaintainer, tr( "This is the name of the current task maintainer." ) );
     tbtMaintainer = new QToolButton( container );
     tbtMaintainer->setPixmap( Resource::loadPixmap( "todo/more" ) );
-    layout->addWidget( tbtMaintainer, 7, 2 );
+//    layout->addWidget( tbtMaintainer, 7, 2 );
     QWhatsThis::add( tbtMaintainer, tr( "Click here to select the task maintainer." ) );
+#endif
 }
 
 TaskEditorStatus::~TaskEditorStatus()
@@ -216,11 +218,12 @@ void TaskEditorStatus::load( const OTodo &todo )
         btnComp->setText( str );
 
     // Maintainer Mode
+#if 0
     state = todo.hasMaintainer() ? todo.maintainer().mode() : OPimMaintainer::Nothing;
     if ( state == OPimMaintainer::Undefined )
         state = OPimMaintainer::Nothing;
     cmbMaintMode->setCurrentItem( state );
-
+#endif
     // Maintainer - not implemented yet
 }
 
@@ -260,11 +263,13 @@ void TaskEditorStatus::save( OTodo &todo )
     else
         todo.setCompletedDate( inval );
 
+#if 0
     // Maintainer mode - not implemented yet
 
     // Maintainer
     /* TODO - resolve name to uid.....*/
     todo.setMaintainer( OPimMaintainer( cmbMaintMode->currentItem(), -10 ) );
+#endif
 }
 
 void TaskEditorStatus::slotStartChecked()

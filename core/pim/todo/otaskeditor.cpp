@@ -42,6 +42,7 @@ OTodo OTaskEditor::todo()const{
     m_overView->save( to );
     m_stat->save( to );
     to.setRecurrence( m_rec->recurrence() );
+    m_alarm->save( to );
 
     return to;
 }
@@ -49,6 +50,8 @@ void OTaskEditor::load(const OTodo& to) {
     m_overView->load( to );
     m_stat->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
+    m_alarm->setEnabled( !to.hasRecurrence() );
+    m_alarm->load( to );
 }
 void OTaskEditor::init() {
     setCaption("Task Editor");
@@ -69,12 +72,12 @@ void OTaskEditor::init() {
     m_alarm = new TaskEditorAlarms( m_tab );
     m_tab->addTab( m_alarm, "todo/alarm", tr("Alarms") );
 
-    m_remind = new TaskEditorAlarms( m_tab );
-    m_tab->addTab( m_remind, "todo/reminder", tr("Reminders") );
+//    m_remind = new TaskEditorAlarms( m_tab );
+//    m_tab->addTab( m_remind, "todo/reminder", tr("Reminders") );
 
-    QLabel* lbl = new QLabel( m_tab );
-    lbl->setText( tr("X-Ref") );
-    m_tab->addTab( lbl, "todo/xref", tr("X-Ref") );
+//    QLabel* lbl = new QLabel( m_tab );
+//    lbl->setText( tr("X-Ref") );
+//    m_tab->addTab( lbl, "todo/xref", tr("X-Ref") );
 
     m_rec = new ORecurranceWidget( true, QDate::currentDate(), this );
     m_tab->addTab( m_rec, "repeat", tr("Recurrence") );
