@@ -316,7 +316,9 @@ void MyPty::readPty()
 }
 QBitArray MyPty::supports()const {
     QBitArray ar(3);
+    //autoconnect
     ar[0] = 1;
+    //
     ar[1] = 0;
     ar[2] = 0;
 
