@@ -140,13 +140,13 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	
 	// make it possible to go directly to businesscard via qcop call
-#if defined(Q_WS_QWS)
-#if !defined(QT_NO_COP)
+	//#if defined(Q_WS_QWS) // Why this ? (se)
+#if !defined(QT_NO_COP) 
 	QCopChannel *addressChannel = new QCopChannel("QPE/Addressbook" , this );
 	connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
 		 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
 #endif
-#endif
+	// #endif 
 	a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ),
 			 QString::null, 0, this, 0 );
 	actionFind = a;

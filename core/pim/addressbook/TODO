@@ -31,7 +31,6 @@ Bugs but not in addressbook:
 Urgent:
 --------
 - Implement Button Pics
-- Fix start of opie-mail
 
 ContactEditor:
 - Contact-Editor is temporarely reenabled. Wait for replacement.
@@ -108,3 +107,4 @@ Fixed:
 - Name order selected in "contacteditor" not used in list view.
 - OK-Key does not switch from Detailview (ablable) to Listview
 - Receiving of beams should open a dialog
+- Fix start of opie-mail
