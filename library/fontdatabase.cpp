@@ -161,6 +161,10 @@ void FontDatabase::loadRenderers()
 
     QString path = QPEApplication::qpeDir() + "/plugins/fontfactories";
     QDir dir( path, "lib*.so" );
+    
+    if ( !dir.exists())
+    	return;
+    
     QStringList list = dir.entryList();
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
