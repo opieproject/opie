@@ -8,7 +8,7 @@
 
 class encodedString;
 struct mailmbox_folder;
-namespace Opie {namespace Core {class Opie::Core::OProcess;}}
+namespace Opie {namespace Core {class OProcess;}}
 
 class MHwrapper : public Genericwrapper
 {
