@@ -109,6 +109,7 @@ char MediaPlayerState::view() {
 
 // slots
 void MediaPlayerState::setIsStreaming( bool b ) {
+
     if ( isStreaming == b ) {
         return;
     }

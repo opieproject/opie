@@ -251,7 +251,7 @@ void AudioWidget::sliderReleased() {
 }
 
 void AudioWidget::setPosition( long i ) {
-    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<set position %d",i);
+//    qDebug("<<<<<<<<<<<<<<<<<<<<<<<<set position %d",i);
     updateSlider( i, mediaPlayerState->length() );
 }
 
@@ -290,7 +290,6 @@ void AudioWidget::setView( char view ) {
 
 
 static QString timeAsString( long length ) {
-    length /= 44100;
     int minutes = length / 60;
     int seconds = length % 60;
     return QString("%1:%2%3").arg( minutes ).arg( seconds / 10 ).arg( seconds % 10 );
@@ -299,7 +298,8 @@ static QString timeAsString( long length ) {
 void AudioWidget::updateSlider( long i, long max ) {
 
     time.setText( timeAsString( i ) + " / " + timeAsString( max ) );
-
+//    qDebug( timeAsString( i ) + " / " + timeAsString( max ) ) ;
+    
     if ( max == 0 ) {
         return;
     }

@@ -50,17 +50,16 @@ public slots:
     void stop( bool );
     void pause( bool );
     void setFullscreen( bool );
-    int currentTime();
+    long currentTime();
     void seekTo( long );
     // get length of media file and set it
     void length();
-
     long position();
 
 private:
     XINE::Lib *libXine;
     MediaDetect mdetect;
-    int m_currentTime;
+    long m_currentTime;
     long m_position;
 
 signals:

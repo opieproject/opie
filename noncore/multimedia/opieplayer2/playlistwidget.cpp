@@ -172,7 +172,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     QHBox *hbox6 = new QHBox( vbox4 ); hbox6->setBackgroundMode( PaletteButton );
 
     tabWidget = new QTabWidget( hbox6, "tabWidget" );
-    tabWidget->setTabShape(QTabWidget::Triangular);
+//    tabWidget->setTabShape(QTabWidget::Triangular);
 
     QWidget *pTab;
     pTab = new QWidget( tabWidget, "pTab" );
@@ -426,6 +426,7 @@ void PlayListWidget::setDocument(const QString& fileref) {
 
 
 void PlayListWidget::setActiveWindow() {
+    qDebug("SETTING active window");
     // When we get raised we need to ensure that it switches views
     char origView = mediaPlayerState->view();
     mediaPlayerState->setView( 'l' ); // invalidate

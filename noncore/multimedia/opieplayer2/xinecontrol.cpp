@@ -80,7 +80,6 @@ void XineControl::play( const QString& fileName ) {
     mediaPlayerState->setView( whichGui );
     length();
     position();
-
 }
 
 void XineControl::stop( bool isSet ) {
@@ -97,7 +96,7 @@ void XineControl::pause( bool isSet) {
     libXine->pause();
 }
 
-int XineControl::currentTime() {
+long XineControl::currentTime() {
     // todo: jede sekunde überprüfen
     m_currentTime =  libXine->currentTime();
     return m_currentTime;
@@ -110,14 +109,14 @@ void  XineControl::length() {
 }
 
 long XineControl::position() {
-    qDebug("<<<<<<<<<<<< xinecontrol setPostion>>>>>>>>>");
-    m_position = (m_currentTime/m_length*100);
+    m_position = ( currentTime()  );
     mediaPlayerState->setPosition( m_position  );
     long emitPos = (long)m_position;
     emit positionChanged( emitPos );
+    if(mediaPlayerState->isPlaying)
     // needs to be stopped the media is stopped
     QTimer::singleShot( 1000, this, SLOT( position() ) );
-    qDebug("POSITION : " +  m_position);
+//    qDebug("POSITION : %d", m_position);
     return m_position;
 }
 
