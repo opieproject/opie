@@ -49,6 +49,9 @@
 #ifndef IFNAMSIZ
 #define IFNAMSIZ 16
 #endif
+#ifndef IW_MAX_PRIV_DEF
+#define IW_MAX_PRIV_DEF        128
+#endif
 
 // ML: Yeah, I hate to include kernel headers, but it's necessary here
 // ML: Here comes an ugly hack to prevent <linux/wireless.h> including <linux/if.h>
@@ -108,7 +111,7 @@ class ONetwork : public QObject
  * ONetworkInterface
  *======================================================================================*/
 
-class ONetworkInterface
+class ONetworkInterface : public QObject
 {
     friend class OMonitoringInterface;
     friend class OCiscoMonitoringInterface;
@@ -117,10 +120,9 @@ class ONetworkInterface
     friend class OOrinocoMonitoringInterface;
 
   public:
-    ONetworkInterface( const QString& name );
+    ONetworkInterface( QObject* parent, const char* name );
     virtual ~ONetworkInterface();
 
-    const QString& name() const;
     void setMonitoring( OMonitoringInterface* );
     OMonitoringInterface* monitoring() const;
     bool setPromiscuousMode( bool );
@@ -133,7 +135,6 @@ class ONetworkInterface
     OMacAddress macAddress() const;
 
   protected:
-    const QString _name;
     const int _sfd;
     mutable ifreqstruct _ifr;
     OMonitoringInterface* _mon;
@@ -185,7 +186,7 @@ class OWirelessNetworkInterface : public ONetworkInterface
   public:
     enum Mode { AdHoc, Managed, Monitor };
 
-    OWirelessNetworkInterface( const QString& name );
+    OWirelessNetworkInterface( QObject* parent, const char* name );
     virtual ~OWirelessNetworkInterface();
 
     virtual void setChannel( int ) const;
@@ -213,14 +214,16 @@ class OWirelessNetworkInterface : public ONetworkInterface
     virtual QString SSID() const;
 
   protected:
-    mutable iwreqstruct _iwr;
-    QMap<int,int> _channels;
-
-  protected:
+    void buildChannelList();
+    void buildPrivateList();
     virtual void init();
     iwreqstruct& iwr() const;
     bool wioctl( int call ) const;
     bool wioctl( int call, iwreqstruct& ) const;
+
+  protected:
+    mutable iwreqstruct _iwr;
+    QMap<int,int> _channels;
 
   private:
     OChannelHopper* _hopper;

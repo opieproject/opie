@@ -92,12 +92,12 @@ void ONetwork::synchronize()
         ONetworkInterface* iface;
         if ( isWirelessInterface( str ) )
         {
-            iface = new OWirelessNetworkInterface( str );
+            iface = new OWirelessNetworkInterface( this, str );
             qDebug( "ONetwork: interface '%s' has Wireless Extensions", (const char*) str );
         }
         else
         {
-            iface = new ONetworkInterface( str );
+            iface = new ONetworkInterface( this, str );
         }
         _interfaces.insert( str, iface );
         s.readLine();
@@ -126,7 +126,7 @@ ONetwork::InterfaceIterator ONetwork::iterator() const
 
 bool ONetwork::isWirelessInterface( const char* name ) const
 {
-    int sfd = socket( AF_INET, SOCK_DGRAM, 0 );
+    int sfd = socket( AF_INET, SOCK_STREAM, 0 );
     iwreqstruct iwr;
     memset( &iwr, 0, sizeof( iwreqstruct ) );
     strcpy( (char*) &iwr.ifr_name, name );
@@ -142,8 +142,9 @@ bool ONetwork::isWirelessInterface( const char* name ) const
  * ONetworkInterface
  *======================================================================================*/
 
-ONetworkInterface::ONetworkInterface( const QString& name )
-                   :_name( name ), _sfd( socket( AF_INET, SOCK_DGRAM, 0 ) ), _mon( 0 )
+ONetworkInterface::ONetworkInterface( QObject* parent, const char* name )
+                 :QObject( parent, name ),
+                 _sfd( socket( AF_INET, SOCK_DGRAM, 0 ) ), _mon( 0 )
 {
     qDebug( "ONetworkInterface::ONetworkInterface()" );
     init();
@@ -164,7 +165,7 @@ void ONetworkInterface::init()
 
     if ( _sfd == -1 )
     {
-        qDebug( "ONetworkInterface::init(): Warning - can't get socket for device '%s'", (const char*) _name );
+        qDebug( "ONetworkInterface::init(): Warning - can't get socket for device '%s'", name() );
         return;
     }
 }
@@ -183,7 +184,7 @@ bool ONetworkInterface::ioctl( int call, ifreqstruct& ifreq ) const
 
 bool ONetworkInterface::ioctl( int call ) const
 {
-    strcpy( _ifr.ifr_name, (const char*) _name );
+    strcpy( _ifr.ifr_name, name() );
     return ioctl( call, _ifr );
 }
 
@@ -240,19 +241,13 @@ OMacAddress ONetworkInterface::macAddress() const
 void ONetworkInterface::setMonitoring( OMonitoringInterface* m )
 {
     _mon = m;
-    qDebug( "ONetwork::setMonitoring(): Installed monitoring driver '%s' on interface '%s'", (const char*) m->name(), (const char*) _name );
+    qDebug( "ONetwork::setMonitoring(): Installed monitoring driver '%s' on interface '%s'", (const char*) m->name(), name() );
 }
 
 
 OMonitoringInterface* ONetworkInterface::monitoring() const
 {
     return _mon;
-}
-
-
-const QString& ONetworkInterface::name() const
-{
-    return _name;
 }
 
 
@@ -368,8 +363,8 @@ int OChannelHopper::interval() const
  * OWirelessNetworkInterface
  *======================================================================================*/
 
-OWirelessNetworkInterface::OWirelessNetworkInterface( const QString& name )
-                           :ONetworkInterface( name ), _hopper( 0 )
+OWirelessNetworkInterface::OWirelessNetworkInterface( QObject* parent, const char* name )
+                         :ONetworkInterface( parent, name ), _hopper( 0 )
 {
     qDebug( "OWirelessNetworkInterface::OWirelessNetworkInterface()" );
     init();
@@ -390,35 +385,9 @@ iwreqstruct& OWirelessNetworkInterface::iwr() const
 void OWirelessNetworkInterface::init()
 {
     qDebug( "OWirelessNetworkInterface::init()" );
-
     memset( &_iwr, 0, sizeof( struct iwreq ) );
-
-    // IEEE802.11(b) radio frequency channels
-
-    iwrangestruct range;
-    //ML: work around an ugly HostAP bug, which needs
-    //ML: extra space or will complain with "invalid argument length"... :-(
-    //ML: But don't allocate too much or prism2_usb will segfault *sigh*
-    char __extraBufferForBuggyDrivers[20];
-
-    qDebug( "sizeof(iwrangestruct)=%d, sizeof range=%d, sizeof range*2=%d", sizeof(iwrangestruct), sizeof range, (sizeof range)*2 );
-
-    _iwr.u.data.pointer = (char*) &range;
-    _iwr.u.data.length =  sizeof(iwrangestruct)+20;
-    _iwr.u.data.flags = 0;
-    if ( !wioctl( SIOCGIWRANGE ) )
-    {
-        qDebug( "OWirelessNetworkInterface::init(): SIOCGIWRANGE failed (%s)", strerror( errno ) );
-        return;
-    }
-
-    qDebug( "OWirelessNetworkInterface::init(): Interface %s reported to have %d channels.", (const char*) _name, range.num_frequency );
-
-    for ( int i = 0; i < range.num_frequency; ++i )
-    {
-        int freq = (int) ( double( range.freq[i].m ) * pow( 10.0, range.freq[i].e ) / 1000000.0 );
-        _channels.insert( freq, i+1 );
-    }
+    buildChannelList();
+    buildPrivateList();
 }
 
 
@@ -442,6 +411,73 @@ QString OWirelessNetworkInterface::associatedAP() const
         mac = "<Unknown>";
     }
     return mac;
+}
+
+
+void OWirelessNetworkInterface::buildChannelList()
+{
+    // IEEE802.11(b) radio frequency channels
+    struct iw_range range;
+
+    //ML: If you listen carefully enough, you can hear lots of WLAN drivers suck
+    //ML: The HostAP drivers need more than sizeof struct_iw range to complete
+    //ML: SIOCGIWRANGE otherwise they fail with "Invalid Argument Length".
+    //ML: The Wlan-NG drivers on the otherside fail (segfault!) if you allocate
+    //ML: _too much_ space. This is damn shitty crap *sigh*
+
+    _iwr.u.data.pointer = (char*) &range;
+    _iwr.u.data.length = IW_MAX_FREQUENCIES; //sizeof range;
+    _iwr.u.data.flags = 0;
+
+    if ( !wioctl( SIOCGIWRANGE ) )
+    {
+        qDebug( "OWirelessNetworkInterface::buildChannelList(): SIOCGIWRANGE failed (%s) - defaulting to 11 channels", strerror( errno ) );
+        _channels.insert( 2412,  1 ); // 2.412 GHz
+        _channels.insert( 2417,  2 ); // 2.417 GHz
+        _channels.insert( 2422,  3 ); // 2.422 GHz
+        _channels.insert( 2427,  4 ); // 2.427 GHz
+        _channels.insert( 2432,  5 ); // 2.432 GHz
+        _channels.insert( 2437,  6 ); // 2.437 GHz
+        _channels.insert( 2442,  7 ); // 2.442 GHz
+        _channels.insert( 2447,  8 ); // 2.447 GHz
+        _channels.insert( 2452,  9 ); // 2.452 GHz
+        _channels.insert( 2457, 10 ); // 2.457 GHz
+        _channels.insert( 2462, 11 ); // 2.462 GHz
+    }
+    else
+    {
+        qDebug( "OWirelessNetworkInterface::buildChannelList(): Interface %s reported to have %d channels.", name(), range.num_frequency );
+        for ( int i = 0; i < range.num_frequency; ++i )
+        {
+            int freq = (int) ( double( range.freq[i].m ) * pow( 10.0, range.freq[i].e ) / 1000000.0 );
+            _channels.insert( freq, i+1 );
+        }
+    }
+    qDebug( "OWirelessNetworkInterface::buildChannelList(): Channel list constructed." );
+}
+
+
+void OWirelessNetworkInterface::buildPrivateList()
+{
+    qDebug( "OWirelessNetworkInterface::buildPrivateList()" );
+
+    struct iw_priv_args priv[IW_MAX_PRIV_DEF];
+
+    _iwr.u.data.pointer = (char*) &priv;
+    _iwr.u.data.length = IW_MAX_PRIV_DEF; // length in terms of number of (sizeof iw_priv_args), not (sizeof iw_priv_args) itself
+    _iwr.u.data.flags = 0;
+
+    if ( !wioctl( SIOCGIWPRIV ) )
+    {
+        qDebug( "OWirelessNetworkInterface::buildPrivateList(): SIOCGIWPRIV failed (%s) - can't get private ioctl information.", strerror( errno ) );
+        return;
+    }
+
+    for ( int i = 0; i < _iwr.u.data.length; ++i )
+    {
+        new OPrivateIOCTL( this, priv[i].name, priv[i].cmd, priv[i].get_args, priv[i].set_args );
+    }
+    qDebug( "OWirelessNetworkInterface::buildPrivateList(): Private IOCTL list constructed." );
 }
 
 
@@ -504,6 +540,7 @@ void OWirelessNetworkInterface::setChannelHopping( int interval )
     if ( !_hopper ) _hopper = new OChannelHopper( this );
     _hopper->setInterval( interval );
     //FIXME: When and by whom will the channel hopper be deleted?
+    //TODO: rely on QObject hierarchy
 }
 
 
@@ -582,7 +619,7 @@ bool OWirelessNetworkInterface::wioctl( int call, iwreqstruct& iwreq ) const
 
 bool OWirelessNetworkInterface::wioctl( int call ) const
 {
-    strcpy( _iwr.ifr_name, (const char*) _name );
+    strcpy( _iwr.ifr_name, name() );
     return wioctl( call, _iwr );
 }
 

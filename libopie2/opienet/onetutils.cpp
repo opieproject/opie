@@ -36,6 +36,16 @@
 #include <cstdio>
 using namespace std;
 
+#define IW_PRIV_TYPE_MASK       0x7000
+#define IW_PRIV_TYPE_NONE       0x0000
+#define IW_PRIV_TYPE_BYTE       0x1000
+#define IW_PRIV_TYPE_CHAR       0x2000
+#define IW_PRIV_TYPE_INT        0x4000
+#define IW_PRIV_TYPE_FLOAT      0x5000
+#define IW_PRIV_TYPE_ADDR       0x6000
+#define IW_PRIV_SIZE_FIXED      0x0800
+#define IW_PRIV_SIZE_MASK       0x07FF
+
 /*======================================================================================
  * OMacAddress
  *======================================================================================*/
@@ -86,6 +96,55 @@ bool operator==( const OMacAddress &m1, const OMacAddress &m2 )
 {
     return memcmp( &m1._bytes, &m2._bytes, 6 ) == 0;
 }
+
+
+/*======================================================================================
+ * OHostAddress
+ *======================================================================================*/
+
+
+/*======================================================================================
+ * OPrivateIOCTL
+ *======================================================================================*/
+
+OPrivateIOCTL::OPrivateIOCTL( QObject* parent, const char* name, int cmd, int getargs, int setargs )
+              :QObject( parent, name ), _ioctl( cmd ), _getargs( getargs ), _setargs( setargs )
+{
+}
+
+
+OPrivateIOCTL::~OPrivateIOCTL()
+{
+}
+
+
+inline int OPrivateIOCTL::numberGetArgs() const
+{
+    return _getargs & IW_PRIV_SIZE_MASK;
+}
+
+
+inline int OPrivateIOCTL::typeGetArgs() const
+{
+    return _getargs & IW_PRIV_TYPE_MASK >> 12;
+}
+
+
+inline int OPrivateIOCTL::numberSetArgs() const
+{
+    return _setargs & IW_PRIV_SIZE_MASK;
+}
+
+
+inline int OPrivateIOCTL::typeSetArgs() const
+{
+    return _setargs & IW_PRIV_TYPE_MASK >> 12;
+}
+
+
+/*======================================================================================
+ * assorted functions
+ *======================================================================================*/
 
 void dumpBytes( const unsigned char* data, int num )
 {

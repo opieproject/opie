@@ -36,8 +36,12 @@
 #include <qmap.h>
 #include <qstring.h>
 #include <qhostaddress.h>
+#include <qobject.h>
+
+#include <sys/types.h>
 
 struct ifreq;
+class OWirelessNetworkInterface;
 
 /*======================================================================================
  * OMacAddress
@@ -80,6 +84,27 @@ class OHostAddress : public QHostAddress
 
 
 /*======================================================================================
+ * OPrivateIOCTL
+ *======================================================================================*/
+
+class OPrivateIOCTL : public QObject
+{
+  public:
+    OPrivateIOCTL( QObject* parent, const char* name, int cmd, int getargs, int setargs );
+    ~OPrivateIOCTL();
+
+    int numberGetArgs() const;
+    int typeGetArgs() const;
+    int numberSetArgs() const;
+    int typeSetArgs() const;
+
+  private:
+    u_int32_t _ioctl;
+    u_int16_t _getargs;
+    u_int16_t _setargs;
+};
+
+ /*======================================================================================
  * Miscellaneous
  *======================================================================================*/
 
