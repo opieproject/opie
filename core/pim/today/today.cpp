@@ -198,7 +198,7 @@ void Today::getDates()
 		  msg += " <i>note</i>:" +((*it).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
 		}
 	    }
-	  else if ((time.toString() <= TimeString::dateString((*it).event().end())) && ONLY_LATER )
+	  else if ((time.toString() <= TimeString::dateString((*it).event().end())) )
 	    {
 	      msg += "<B>" + (*it).description() + "</B>";
 	      // include location or not
@@ -219,12 +219,11 @@ void Today::getDates()
 		}
 	    }
 	}
-      
-      if (msg.isEmpty())
-	{
-	  msg = "No more appointments today";
-	}
     }
+    if (msg.isEmpty())
+      {
+	msg = "No more appointments today";
+      }
     DatesField->setText(msg);
   }
 }
