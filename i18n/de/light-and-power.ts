@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
-        <translation>LCD nur ausschalten, wenn das Gerät deaktiviert ist</translation>
+        <translation>LCD nur ausschalten, wenn Gerät deaktiviert</translation>
     </message>
     <message>
         <source>Light and Power Settings</source>
