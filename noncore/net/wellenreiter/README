@@ -19,6 +19,8 @@ Release Notes for Opie-ALPHA Version January 2002
 =      Build        =
 =====================
 
+(I) Opie Build Environment
+
 To compile Wellenreiter within the Opie build environment, add the
 following directories to $OPIEDIR/Makefile, e.g. to 'NONAPPS='
 
@@ -29,8 +31,10 @@ noncore/net/wellenreiter/gui
 
 ./configure and rebuild. Note that you need libpcap in your toolchain.
 
+(II) OpenZaurus Build Environment
+
 To compile Wellenreiter within the OZ build environment, add the
-following lines to $OPIEDIR/packages
+following lines to $OPIEDIR/packages:
 CONFIG_WELLENREITER noncore/net/wellenreiter/libwellenreiter libwellenreiter.pro
 CONFIG_WELLENREITER noncore/net/wellenreiter/daemon daemon.pro
 CONFIG_WELLENREITER noncore/net/wellenreiter/gui gui.pro
@@ -40,12 +44,21 @@ make -f Makefile.test clean-configs
 cd <BUILDROOT>
 make SUBDIRS=packages/opie package
 
+(III) To compile a standalone Wellenreiter for X11, you need Qt3 and the development
+packages for Qt3, e.g. libqt3-devel. Assuming, $OPIEDIR and $QTDIR is set to Opie resp.
+Qt (e.g. /usr/lib/qt3), do the following:
+export QMAKESPEC=$OPIEDIR/mkspecs/linux-g++
+cd $OPIEDIR/noncore/net/wellenreiter
+qmake -makefile wellenreiter.pro
+make qmake
+make
+
 =====================
 =     Install       =
 =====================
 
 Alternatively, you can use our precompiled ipk. Get it from
-http://opie.net.wox.org/wellenreiter/current/. This also includes a recent libpcap.
+http://opie.net.wox.org/wellenreiter/. This also includes a recent libpcap.
 
 =====================
 =       Run         =
