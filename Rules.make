@@ -106,10 +106,12 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
 	( cd include/qtopia && rm -f *.h; ln -sf ../../library/*.h .; )
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
+ifeq ($(CONFIG_LIBOPIE),y)
 	# libopie1
 	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
 	( cd include/opie &&  ln -sf ../../libopie/big-screen/*.h .; )
+endif
 	# libopie2
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/device/*.h .; )
@@ -127,8 +129,10 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/opie2 && ln -sf ../../libqtaux/*.h .; )
 	( cd include/sl && ln -sf ../../libslcompat/*.h .; )
 	# all
+ifeq ($(CONFIG_LIBOPIE),y)
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
+endif
 	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opieui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie2/opieui/$$generatedHeader $$generatedHeader; done )
 	( cd include/opie2; for generatedHeader in `cd ../../libopie2/opiepim/ui; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
