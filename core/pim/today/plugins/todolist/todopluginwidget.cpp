@@ -64,11 +64,13 @@ void TodolistPluginWidget::readConfig() {
 }
 
 void TodolistPluginWidget:: refresh()  {
+    todo->reload();
     getTodo();
 }
 
 void TodolistPluginWidget::reinitialize()  {
     readConfig();
+    todo->reload();
     getTodo();
 }
 
