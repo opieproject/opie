@@ -21,7 +21,6 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-#undef USEPAM // FOR my toolchain
 #ifdef USEPAM
 extern "C" {
 #include <security/pam_appl.h>
