@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A Text Editing Program
 Comment[es]=Un editor de textos
+Comment[da]=Et tekst redigerings program
 Exec=textedit
 Icon=TextEditor
 Type=Application
@@ -16,3 +17,4 @@ Name[ko]=텍스트 편집기
 Name[hu]=Szöveg- szerkesztõ
 Name[pt]=Editor Texto
 Name[es]=Editor
+Name[da]=Tekstredigering

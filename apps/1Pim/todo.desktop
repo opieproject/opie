@@ -2,6 +2,7 @@
 Comment=A Todo List Program
 Comment[es]=Un programa de lista de tareas
 Comment[de]=Ein Programm zur Verwaltung von Aufgaben
+Comment[da]=Et program til styring af opgaver
 Exec=todolist
 Icon=TodoList
 Type=Application
@@ -15,3 +16,4 @@ Name[pt]=Tarefas
 Name[es]=Tareas
 Name[zh_TW]=待辦事項
 Name[ko]=할일 목록
+Name[da]=Opgaveliste

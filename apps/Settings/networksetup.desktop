@@ -10,5 +10,7 @@ Name[pt]=Rede
 Name[es]=Red
 Name[zh_TW]=網絡
 Name[ko]=네트워크 설정
+Name[da]=Netværk
 Comment=Network setup tool
 Comment[es]=Herramienta de configuración de la red
+Comment[da]=Netværksindstillinger

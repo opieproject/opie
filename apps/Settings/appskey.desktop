@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Set Application Key
 Comment[es]=Aplicaciones que lanzan las teclas rápidas
+Comment[da]=Ændre program taster.
 Exec=appskey
 Icon=AppsKey/CustomizeKeys
 Type=Application
@@ -12,3 +13,4 @@ Name[es]=Botones
 Name[it]=Pulsanti
 Name[zh_TW]=程式鍵
 Name[ko]=실행단추
+Name[da]=Program Taster

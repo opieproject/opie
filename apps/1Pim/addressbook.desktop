@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=An Address Book Program
 Comment[es]=Una libreta de direcciones
+Comment[da]=Adressebog med kontaktpersoner, adresser, telefonnumre m.m.
 Exec=addressbook
 Icon=AddressBook
 Type=Application
@@ -15,3 +16,4 @@ Name[pt]=Contactos
 Name[es]=Contactos
 Name[zh_TW]=地址簿
 Name[ko]=주소록
+Name[da]=Adressebog
