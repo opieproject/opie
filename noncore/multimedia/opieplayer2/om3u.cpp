@@ -60,7 +60,8 @@ Om3u::~Om3u(){}
 void Om3u::readM3u() {
 //    qDebug("<<<<<<reading m3u "+f.name());
     QTextStream t(&f);
-    QString s;
+		t.setEncoding(QTextStream::UnicodeUTF8);
+		QString s;
     while ( !t.atEnd() ) {
         s=t.readLine();
 //                qDebug(s);
@@ -84,7 +85,8 @@ void Om3u::readM3u() {
 
 void Om3u::readPls() { //it's a pls file
         QTextStream t( &f );
-        QString s;
+				t.setEncoding(QTextStream::UnicodeUTF8);
+				QString s;
         while ( !t.atEnd() ) {
             s = t.readLine();
             if( s.left(4)  == "File" ) {
@@ -121,12 +123,13 @@ void Om3u::readPls() { //it's a pls file
 
 void Om3u::write() { //writes list to m3u file
   QString list;
-  if(count()>0) {
+	QTextStream t(&f);
+  t.setEncoding(QTextStream::UnicodeUTF8);
+ if(count()>0) {
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
 //      qDebug(*it);
-      list += *it+"\n";
+				t << *it << "\n";
     }
-    f.writeBlock( list, list.length() );
   }
 //    f.close();
 }

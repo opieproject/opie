@@ -207,7 +207,7 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
     //m_queue = xine_event_new_queue (m_stream);
     //xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
-    if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
+     if ( !xine_open( m_stream, str.utf8().data() ) ) {
         return 0;
     }
     return xine_play( m_stream, startPos, start_time);
