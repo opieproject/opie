@@ -17,6 +17,6 @@ LIBS       += -lqpe -lopiecore2
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(OPIEDIR)/plugins/styles
 TARGET       = theme
-VERSION      = 1.0.0
+VERSION      = 1.0.1
 
 include ( $(OPIEDIR)/include.pro )
