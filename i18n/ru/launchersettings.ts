@@ -11,14 +11,14 @@
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation>Установите если хотите чтобы была видна вкладка Документы.</translation>
+        <translation>Установите, если хотите чтобы была видна вкладка Документы.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation>Измеить размер при появлении</translation>
+        <translation>Изменить размер при появлении</translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation>Отметьте если вы хотите чтобы размер окна был автоматически измене при появлении метода ввода.</translation>
+        <translation>Отметьте если вы хотите чтобы размер окна был автоматически изменен при появлении метода ввода.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation>Установите процент ширины экрана отводимый для методов ввода</translation>
+        <translation>Установите процент ширины экрана, отводимый для методов ввода</translation>
     </message>
 </context>
 <context>
@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
-        <translation>Выберите апплеты, чтобы  включить их в О-Меню.</translation>
+        <translation>Выберите апплеты, которые вы хотите включить в О-Меню.</translation>
     </message>
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
@@ -114,7 +114,7 @@
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
-        <translation>Ред. вкладку</translation>
+        <translation>Правка вкладки</translation>
     </message>
     <message>
         <source>Background</source>
@@ -197,7 +197,7 @@
     </message>
     <message>
         <source>Edit</source>
-        <translation>Редакт.</translation>
+        <translation>Правка</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -221,7 +221,7 @@
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation>Открывает диалог для редакт. свойств выбранной вкладки.</translation>
+        <translation>Открывает диалог для правки свойств выбранной вкладки.</translation>
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
