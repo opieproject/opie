@@ -183,6 +183,9 @@ void SoundSettings::setSizeLimitButton(const QString &index) {
 
     Config cfg("Vmemo");
     cfg.setGroup("Record");
-    cfg.writeEntry("SizeLimit", index);
+    if(index.find("Unlimited",0,TRUE) != -1)
+      cfg.writeEntry("SizeLimit", -1);
+    else
+      cfg.writeEntry("SizeLimit", index);
     cfg.write();    
 }
