@@ -47,7 +47,8 @@ bool WavFile::newFile() {
 
   currentFileName=cfg.readEntry("directory",QDir::homeDirPath());
   QString date;
-  date = TimeString::dateString( QDateTime::currentDateTime(),false,true);
+  QDateTime dt = QDateTime::currentDateTime();
+  date = dt.toString();//TimeString::dateString( QDateTime::currentDateTime(),false,true);
   date.replace(QRegExp("'"),"");
   date.replace(QRegExp(" "),"_");
   date.replace(QRegExp(":"),".");

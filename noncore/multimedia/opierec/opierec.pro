@@ -1,4 +1,5 @@
-CONFIG   = qt warn_on release
+#CONFIG   = qt qtopia warn_on release pdaudio
+CONFIG   = qt warn_on release opie
 #CONFIG    = qt warn_on release quick-app
 HEADERS   = adpcm.h \
 	pixmaps.h \
@@ -14,13 +15,26 @@ SOURCES   = adpcm.c \
 	device.cpp \
 	wavFile.cpp \
 	waveform.cpp
-INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH  += $(OPIEDIR)/include
-#LIBS            += -L/opt/buildroot-opie/output/staging/target/lib -lqpe -lpthread -ljpeg -lpng -lz
-LIBS            += -lqpe -lpthread
 INTERFACES  =
-TARGET    = opierec
-DESTDIR=$(OPIEDIR)/bin
 
-include ( $(OPIEDIR)/include.pro )
+contains(CONFIG, pdaudio) {
+#  LIBS += -L/opt/buildroot-opie/output/staging/target/lib -lqpe -lpthread -ljpeg -lpng -lz
+  LIBS += -L$(QPEDIR)/lib -lqpe -lpthread -ljpeg -lpng -lz
+  INCLUDEPATH += $(QPEDIR)/include
+  DEPENDPATH  += $(QPEDIR)/include
+  DEFINES += PDAUDIO
+  TARGET    = qperec
+
+#  DESTDIR=$(QPEDIR)/bin
+}
+
+contains(CONFIG, opie) {
+  INCLUDEPATH += $(OPIEDIR)/include
+  DEPENDPATH  += $(OPIEDIR)/include
+  DESTDIR=$(OPIEDIR)/bin
+  LIBS            += -lqpe -lpthread
+  TARGET    = opierec
+  include ( $(OPIEDIR)/include.pro )
+}
+
 

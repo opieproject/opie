@@ -56,6 +56,16 @@ extern "C" {
 #include <sys/wait.h>
 #include <sys/signal.h>
 
+
+#ifdef PDAUDIO //ALSA
+#include <alsa/asoundlib.h>
+static int deviceSampleRates[8] = { 32000, 44100, 48000, 88200, 96000, 176400, 192000, -1 };
+static int deviceBitRates[] = { 8, 16, 24, 32, -1 };
+#else //OSS
+static int deviceSampleRates[6] = { 11025, 16000, 22050, 32000, 44100, -1 };
+static int deviceBitRates[] = { 8, 16, -1 };
+#endif
+
 #if defined(QT_QWS_SL5XXX)
 ///#if defined(QT_QWS_EBX)
 
@@ -108,9 +118,9 @@ Device *soundDevice;
 
 // threaded recording
 //fuckin fulgy here
-void quickRec()
-{
-//void QtRec::quickRec() {
+//void quickRec()
+//{
+void QtRec::quickRec() {
 
    qDebug("%d",
           filePara.numberSamples/filePara.sampleRate * filePara.channels);
@@ -163,8 +173,10 @@ void quickRec()
             //if(stereo == 2) {
 //        adpcm_coder( sbuf2, abuf, number/2, &encoder_state);
             adpcm_coder( sbuf, abuf, number/2, &encoder_state);
-            bytesWritten = soundDevice->devWrite( filePara.fd , (short *)abuf, number/4);
-            waveform->newSamples( (const short *)abuf, bytesWritten );
+
+            bytesWritten = ::write( filePara.fd , (short *)abuf, number/4);
+
+						waveform->newSamples( (const short *)abuf, bytesWritten );
 
             total += bytesWritten;
             filePara.numberSamples = total;
@@ -193,7 +205,7 @@ void quickRec()
                return;
             }
 
-            number =  soundDevice ->devRead( filePara.sd, (short *)inbuffer, BUFSIZE);
+            number = soundDevice->devRead( filePara.sd, (short *)inbuffer, BUFSIZE);
             waveform->newSamples( inbuffer, number );
 
             if( number <= 0) {
@@ -203,7 +215,7 @@ void quickRec()
                return;
             }
 
-            bytesWritten = soundDevice->devWrite( filePara.fd , inbuffer, number);
+            bytesWritten = ::write( filePara.fd , inbuffer, number);
 
             if( bytesWritten < 0) {
                perror("File writing error ");
@@ -270,8 +282,9 @@ void quickRec()
    }
 } /// END quickRec()
 
+void QtRec::playIt()
 
-void playIt()
+//void playIt()
 {
    int bytesWritten, number;
    int total = 0;  // Total number of bytes read in so far.
@@ -569,15 +582,13 @@ void QtRec::init() {
    sampleRateComboBox = new QComboBox( false, sampleGroup, "SampleRateComboBox" );
    sampleRateComboBox->setGeometry( QRect( 10, 20, 80, 25 ) );
 //#ifndef QT_QWS_EBX
-   sampleRateComboBox->insertItem( tr( "44100"));
-   sampleRateComboBox->insertItem( tr( "32000"));
-//#endif
-   sampleRateComboBox->insertItem( tr( "22050"));
-   //#ifndef QT_QWS_VERCEL_IDR
-   sampleRateComboBox->insertItem( tr( "16000"));
-   sampleRateComboBox->insertItem( tr( "11025"));
-   sampleRateComboBox->insertItem( tr( "8000"));
-   //#endif
+		QString s;
+		int z = 0;
+		while( deviceSampleRates[z] != -1) {
+				sampleRateComboBox->insertItem( s.setNum( deviceSampleRates[z], 10));
+				z++;
+		}
+
 
    glayout3->addMultiCellWidget(  sampleGroup, 0, 0, 0, 0);
 
@@ -609,9 +620,14 @@ void QtRec::init() {
    bitGroup->setFixedSize( 65, 50);
 
    bitRateComboBox = new QComboBox( false, bitGroup, "BitRateComboBox" );
-   bitRateComboBox->insertItem( tr( "16" ) );
-   bitRateComboBox->insertItem( tr( "8" ) );
-   bitRateComboBox->setGeometry( QRect( 5, 20, 50, 25 ) );
+
+		z = 0;
+	 while( deviceBitRates[z] != -1) {
+				bitRateComboBox->insertItem( s.setNum( deviceBitRates[z], 10) );
+				z++;
+		}
+
+		bitRateComboBox->setGeometry( QRect( 5, 20, 50, 25 ) );
 
    glayout3->addMultiCellWidget(  bitGroup, 1, 1, 1, 1);
 
@@ -844,10 +860,15 @@ void QtRec::initConfig() {
    }
 
    i = cfg.readNumEntry("bitrate",16);
-   if(i == 16)
-      bitRateComboBox->setCurrentItem( 0);
-   else
-      bitRateComboBox->setCurrentItem( 1);
+		if(i == 16)
+				bitRateComboBox->setCurrentItem( 1);
+		else	if(i == 24)
+				bitRateComboBox->setCurrentItem( 2);
+		else	if(i == 32)
+				bitRateComboBox->setCurrentItem( 3);
+		else
+				bitRateComboBox->setCurrentItem( 0);
+
    filePara.resolution = i;
 
    i = cfg.readNumEntry("sizeLimit", 5 );
@@ -990,13 +1011,13 @@ bool QtRec::rec() { //record
 //               qDebug("Start recording thread");
                stopped = false;
 
-                pthread_t thread1;
-                pthread_create( &thread1, NULL, (void * (*)(void *))quickRec, NULL/* &*/);
+//                 pthread_t thread1;
+//                 pthread_create( &thread1, NULL, (void * (*)(void *))quickRec, NULL/* &*/);
                toBeginningButton->setEnabled( false);
                toEndButton->setEnabled( false);
 
                startTimer(1000);
-//               quickRec();
+               quickRec();
             }
          } //end setUpFile
    } //end setupAudio
@@ -1053,6 +1074,22 @@ bool QtRec::setupAudio( bool b) {
 
    filePara.resolution = bitRateComboBox->currentText().toInt( &ok,10);  //16
 
+#ifdef PDAUDIO //ALSA
+		if( !b) { // we want to play
+				if( filePara.resolution == 16 || compressionCheckBox->isChecked() ) {
+						sampleformat = SND_PCM_FORMAT_S16;
+						filePara.resolution = 16;
+				} else if( filePara.resolution == 24 || compressionCheckBox->isChecked() ) {
+						sampleformat = SND_PCM_FORMAT_S24;
+						filePara.resolution = 24;
+				} else if( filePara.resolution == 32 || compressionCheckBox->isChecked() ) {
+						sampleformat = SND_PCM_FORMAT_S32;
+						filePara.resolution = 32;
+				} else {
+						sampleformat = SND_PCM_FORMAT_U8;
+						filePara.resolution = 8;
+				}
+#else
    if( !b) {
 // we want to play
       if( filePara.resolution == 16 || compressionCheckBox->isChecked() ) {
@@ -1062,7 +1099,8 @@ bool QtRec::setupAudio( bool b) {
          sampleformat = AFMT_U8;
          filePara.resolution = 8;
       }
-
+#endif
+			
       stereo = filePara.channels;
       flags = O_WRONLY;
       dspString = DSPSTROUT;
@@ -1070,7 +1108,18 @@ bool QtRec::setupAudio( bool b) {
       recording = false;
    } else { // we want to record
 
-      if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "16")
+#ifdef PDAUDIO //ALSA
+				if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "16")
+						sampleformat = SND_PCM_FORMAT_S16;
+				else if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "24")
+						sampleformat = SND_PCM_FORMAT_S24;
+				else if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "32")
+						sampleformat = SND_PCM_FORMAT_S32;
+				else
+						sampleformat = SND_PCM_FORMAT_U8;
+
+#else
+			 if( !bitRateComboBox->isEnabled() || bitRateComboBox->currentText() == "16")
          sampleformat = AFMT_S16_LE;
       else
          sampleformat = AFMT_U8;
@@ -1083,7 +1132,8 @@ bool QtRec::setupAudio( bool b) {
          sampleformat = AFMT_S16_LE;
 //          qDebug("WAVE_FORMAT_DVI_ADPCM");
       }
-
+#endif
+			
       stereo = filePara.channels;
 //        filePara.sampleRate = sampleRateComboBox->currentText().toInt( &ok,10);//44100;
       flags= O_RDWR;
@@ -1183,11 +1233,12 @@ bool QtRec::doPlay() {
 #endif
 
     startTimer( 1000);
-    pthread_t thread2;
-    pthread_create( &thread2, NULL, (void * (*)(void *))playIt, NULL/* &*/);
+//     pthread_t thread2;
+//     pthread_create( &thread2, NULL, (void * (*)(void *))playIt, NULL/* &*/);
 
     toBeginningButton->setEnabled( false);
     toEndButton->setEnabled( false);
+		playIt();
 
    return true;
 }
@@ -1197,8 +1248,10 @@ void QtRec::changebitrateCombo(int i) {
    Config cfg("OpieRec");
    cfg.setGroup("Settings");
    int bits = 0;
-   if( i == 0) { bits = 16; }
-   else { bits=8; }
+		if( i == 1) { bits = 16; }
+		else if( i == 2) { bits = 24; }
+		else if( i == 3) { bits = 32; }
+		else { bits=8; }
    cfg.writeEntry("bitrate", bits);
    filePara.resolution = bits;
    cfg.write();

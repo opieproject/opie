@@ -4,7 +4,7 @@ copyright 2002 by L.J. Potter ljp@llornkcor.com
 ****************************************************************************/
 #ifndef QTREC_H
 #define QTREC_H
-#define VERSION 20030920
+#define VERSION 20040101
 
 #include <qpe/ir.h>
 
@@ -177,8 +177,9 @@ protected:
    void keyReleaseEvent( QKeyEvent *e);
    void receive( const QCString &, const QByteArray & );
    void showListMenu(QListViewItem * );
-//   void quickRec();
-    
+   void quickRec();
+	 void playIt();
+  
 };
 
 #endif // QTREC_H
