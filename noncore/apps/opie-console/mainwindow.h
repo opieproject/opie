@@ -104,7 +104,6 @@ private:
     QToolBar* m_buttonBar;
     QMenuBar* m_bar;
     QPopupMenu* m_console;
-    QPopupMenu* m_settings;
     QPopupMenu* m_sessionsPop;
     QPopupMenu* m_scripts;
     QAction* m_connect;
