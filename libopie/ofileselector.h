@@ -1,5 +1,5 @@
 /*
-  This is based on code and idea of
+  This is based on code and ideas of
   L. J. Potter ljp@llornkcor.com
   Thanks a lot
 
@@ -7,24 +7,24 @@
                =.            This file is part of the OPIE Project
              .=l.            Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
            .>+-=
- _;:,     .>    :=|.         This library is free software; you can 
+ _;:,     .>    :=|.         This library is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
  - .   .-<_>     .<>         Foundation; either version 2 of the License,
      ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.        
-    .i_,=:_.      -<s.       This library is distributed in the hope that  
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This library is distributed in the hope that
      +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
 ..}^=.=       =       ;      Library General Public License for more
 ++=   -.     .`     .:       details.
- :     =  ...= . :.=-        
+ :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
   -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB. 
+    --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
@@ -43,11 +43,12 @@
 
 #include <qpe/applnk.h>
 #include <qlistview.h>
+
 /** This is OPIEs FileDialog Widget. You can use it
  *  as a dropin replacement of the fileselector and
  *  or use any of the new features.
  *  This is also a complete FileSave and FileLoad widget
- *  If you look for a Dialog check OFileDialog  
+ *  If you look for a Dialog check OFileDialog
  *
  */
 class DocLnk;
@@ -64,22 +65,55 @@ class QVBoxLayout;
 class QPopupMenu;
 class QFileInfo;
 class QHBox;
-// 
+//
 
+typedef QMap< QString, QStringList> MimeTypes;
 
 class OFileSelector : public QWidget {
   Q_OBJECT
  public:
+  /**
+   *  The mode of the file selector
+   *  Either open, save, fileselector or dir browsing mode
+   *
+   */
   enum Mode {OPEN=1, SAVE=2, FILESELECTOR=4, DIR=8 };
+
+  /**
+   * Selector. Either NORMAL for the one shipped with
+   * libqpe or EXTENDED. for the EXTENDED
+   * EXTENDED_ALL also shows 'hidden' files
+   */
   enum Selector{NORMAL=0, EXTENDED = 1, EXTENDED_ALL =2 };
+
+  /**
+   *  This is reserved for futrue views
+   */
   enum View { DIRS = 1, FILES = 2, TREE = 4, ICON = 8 };
 
-  OFileSelector(QWidget *wid, int mode, int selector, 
+  /**
+   *  A c'tor which should be used for advanced mode
+   *  @param wid the parent
+   *  @param mode the Mode of the Selector
+   *  @param selector the current View of the Selector
+   *  @param dirName in which dir to start
+   *  @param fileName  a proposed filename
+   *  @param mimetypes A list of mimetypes \
+   *   QString is for a identifier name like "Text files"
+   *   the coresponding QStringList is used for the mimetypes
+   *   if empty it'll fill the list of mimetypes depending
+   *   on the content of the current directory
+   */
+
+  OFileSelector(QWidget *wid, int mode, int selector,
 		const QString &dirName,
 		const QString &fileName = QString::null,
-		const QStringList &mimetypes = QStringList() );
+                const MimeTypes &mimetypes = MimeTypes() );
 
 
+  /**
+   * This is a QPE compatible c'tor
+   */
   OFileSelector(const QString &mimeFilter, QWidget *parent,
 		const char *name, bool newVisible = TRUE,
 		bool closeVisible = FALSE );
@@ -130,7 +164,7 @@ class OFileSelector : public QWidget {
   int mode()const { return m_mode;  };
   int selector()const { return m_selector; };
   void setSelector( int );
-  
+
   bool showPopup()const { return m_showPopup; };
   void setShowPopup( bool pop ) { m_showPopup = pop; };
   void setPopupMenu( QPopupMenu * );
@@ -175,7 +209,7 @@ class OFileSelector : public QWidget {
  private:
   void init();
   void updateMimes();
-  
+
  protected:
 
  private:
@@ -190,7 +224,8 @@ class OFileSelector : public QWidget {
 
   QString m_currentDir;
   QString m_name;
-  QStringList m_mimetypes;
+//  QStringList m_mimetypes;
+  QMap<QString, QStringList> m_mimetypes;
 
   FileSelector *m_select;
   QWidgetStack *m_stack;
@@ -232,12 +267,22 @@ class OFileSelector : public QWidget {
   void initializeListView();
   void initializePerm();
   void initPics();
-  bool compliesMime(const QString &path, const QString &mime);
+  bool compliesMime(const QString &path,
+                    const QString &mime);
+  bool compliesMime(const QString& mime );
+    /**
+     * Updates the QComboBox with the current mimetypes
+     */
+  void updateMimeCheck();
 
+    /**
+     * Returns the current mimetype
+     */
+  QString currentMimeType()const;
   class OFileSelectorPrivate;
   OFileSelectorPrivate *d;
   static QMap<QString,QPixmap> *m_pixmaps;
- 
+
 private slots:
    void slotFileSelected(const QString & ); // not really meant to be a slot
    void slotFileBridgeSelected( const DocLnk & );

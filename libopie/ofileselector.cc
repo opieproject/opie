@@ -99,17 +99,19 @@ namespace {
 
 OFileSelector::OFileSelector( QWidget *wid, int mode, int selector,
 			      const QString &dirName,
-			      const QString &fileName,
-			      const QStringList &mimeTypes )
+   			      const QString &fileName,
+                              const QMap<QString,QStringList>& mimeTypes)
   : QWidget( wid, "OFileSelector")
 {
   m_mimetypes = mimeTypes;
+  if (mode == SAVE )
+      m_name = fileName;
   initVars();
   m_mode = mode;
   m_selector = selector;
   m_currentDir =  dirName;
   init();
-QTimer::singleShot(6*1000, this, SLOT( slotTest() ) );
+  //QTimer::singleShot(6*1000, this, SLOT( slotTest() ) );
 }
 
 OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
@@ -117,9 +119,12 @@ OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
 			     bool closeVisible )
   : QWidget( parent, name )
 {
-  m_mimetypes = QStringList::split(";", mimeFilter );
+  if (!mimeFilter.isEmpty() ) {
+      QStringList list = QStringList::split(";", mimeFilter );
+      m_mimetypes.insert(mimeFilter, list );
+  }
   initVars();
-  m_currentDir = QPEApplication::documentDir(); 
+  m_currentDir = QPEApplication::documentDir();
   m_mode = OPEN;
   m_selector = NORMAL;
   m_shClose = closeVisible;
@@ -129,11 +134,12 @@ OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
   m_shYesNo = false;
   init();
 
-  
+
 }
 
 OFileSelector::~OFileSelector()
 {
+
 
 }
 
@@ -143,8 +149,8 @@ void OFileSelector::setNewVisible( bool visible )
   if( m_selector == NORMAL ){
     delete m_select;
     // we need to initialize but keep the selected mimetype
-    QString mime = m_mimeCheck == 0 ? QString::null : m_mimeCheck->currentText() ;
-    m_select = new FileSelector( m_autoMime ? mime : m_mimetypes.join(";") ,
+    QString mime = currentMimeType();
+    m_select = new FileSelector( mime ,
 				 m_stack, "fileselector",
 				 m_shNew, m_shClose);
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
@@ -341,7 +347,7 @@ QStringList OFileSelector::selectedNames()const
   return list;
 }
 /** If mode is set to the Dir selection this will return the selected path.
- *  
+ *
  *
  */
 QString OFileSelector::selectedPath()const
@@ -364,7 +370,7 @@ QString OFileSelector::directory()const
 {
   if( m_selector == NORMAL )
     return QPEApplication::documentDir();
-  
+
   return QDir(m_currentDir).absPath();
 }
 
@@ -425,13 +431,15 @@ void OFileSelector::slotViewCheck(const QString &sel)
   if( sel == tr("Documents" ) ){
     if( m_select == 0 ){
       // autMime? fix cause now we use All and not the current
-      m_select = new FileSelector(m_autoMime ? QString::null : m_mimetypes.join(";"),
+        // yes currentMime fixes that for us
+        QString mime = currentMimeType();
+      m_select = new FileSelector(mime,
 				  m_stack, "fileselector",
 				  FALSE, FALSE);
       connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
       //connect to close me and other signals as well
-      
+
       m_stack->addWidget( m_select, NORMAL );
     }
     m_stack->raiseWidget( NORMAL );
@@ -445,17 +453,48 @@ void OFileSelector::slotViewCheck(const QString &sel)
     m_selector = EXTENDED_ALL;
     initializeListView();
     reparse();
-    m_stack->raiseWidget( EXTENDED ); // same widget other QFileFilter 
+    m_stack->raiseWidget( EXTENDED ); // same widget other QFileFilter
   }
+}
+// not yet finished.....
+QString OFileSelector::currentMimeType() const{
+    QString mime;
+    QString currentText;
+    if (m_shChooser )
+        currentText = m_mimeCheck->currentText();
+
+    if (tr("All") == currentText ) return QString::null;
+    else if (currentText.isEmpty() ) {
+        ;
+    }else {
+        QMap<QString, QStringList>::ConstIterator it;
+        it = m_mimetypes.find( currentText );
+        if ( it == m_mimetypes.end() ) {
+            mime = it.data().join(";");
+        }else{
+            mime = currentText;
+        }
+    }
+    return mime;
 }
 void OFileSelector::slotMimeCheck(const QString &mime)
 {
   if( m_selector == NORMAL ){
-    if( m_autoMime ){
+      //if( m_autoMime ){
+      QString newMimeType;
+      if (mime != tr("All") ) {
+          QMap<QString, QStringList>::Iterator it;
+          it = m_mimetypes.find(mime);
+          if ( it != m_mimetypes.end() ) {
+              newMimeType = it.data().join(";");
+          }else{
+              newMimeType = mime;
+          }
+      }
       delete m_select;
-      m_select = new FileSelector( mime == tr("All") ? QString::null : mime,
-				m_stack, "fileselector",
-				FALSE, FALSE);
+      m_select = new FileSelector( newMimeType,
+                                   m_stack, "fileselector",
+                                   FALSE, FALSE);
 
       connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
@@ -463,10 +502,9 @@ void OFileSelector::slotMimeCheck(const QString &mime)
       m_stack->addWidget( m_select, NORMAL );
       m_stack->raiseWidget( NORMAL );
       updateMimes();
-      m_mimeCheck->clear();
-      m_mimeCheck->insertStringList(m_mimetypes );
+      updateMimeCheck();
       m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime) );
-    }
+      //}
   }else{ // others
     qWarning("Mime %s", mime.latin1() );
     if(m_shChooser ){
@@ -512,7 +550,15 @@ void OFileSelector::init()
 
   m_stack = new QWidgetStack( this );
   if( m_selector == NORMAL ){
-    m_select = new FileSelector(m_autoMime ? QString::null : m_mimetypes.join(";"),
+      QString mime;
+      if (!m_autoMime) {
+          if (!m_mimetypes.isEmpty() ) {
+              QMap<QString, QStringList>::Iterator it;
+              it = m_mimetypes.begin(); // cause we're in the init
+              mime = it.data().join(";");
+          }
+      }
+    m_select = new FileSelector(mime,
 				m_stack, "fileselector",
 				FALSE, FALSE);
 
@@ -545,14 +591,14 @@ void OFileSelector::updateMimes()
 {
   if( m_autoMime ){
     m_mimetypes.clear();
-    m_mimetypes.append( tr("All") );
+    m_mimetypes.insert( tr("All"), QString::null );
     if( m_selector == NORMAL ){
       DocLnkSet  set;
       Global::findDocuments(&set, QString::null );
       QListIterator<DocLnk> dit( set.children() );
       for( ; dit.current(); ++dit ){
 	if( !m_mimetypes.contains( (*dit)->type() ) )
-	  m_mimetypes.append( (*dit)->type() );
+	  m_mimetypes.insert( (*dit)->type(), (*dit)->type() );
       }
     }// else done in reparse
   }
@@ -628,7 +674,7 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
     name = info->fileName();
     if( ( m_mode == OPEN && !info->isReadable() )||
 	( m_mode == SAVE && !info->isWritable() ) ){
-      
+
       locked = true; pix = Resource::loadPixmap("locked");
     }
   }
@@ -657,7 +703,7 @@ void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink )
     name = symlink ? info->fileName() + "->" + info->dirPath(true) + "/" +info->readLink() : info->fileName() ;
     new OFileSelectorItem( m_View, pix, name,
 			   info->lastModified().toString(),
-			   QString::number( info->size() ), 
+			   QString::number( info->size() ),
 			   info->dirPath( true ), locked,
 			   true );
 
@@ -670,8 +716,8 @@ void OFileSelector::delItems()
 void OFileSelector::initializeName()
 {
   /**  Name Layout Line
-   *   This is the Layout line arranged in 
-   *   horizontal way each components 
+   *   This is the Layout line arranged in
+   *   horizontal way each components
    *   are next to each other
    *   but we will only do this if
    *   we didn't initialize a while ago.
@@ -681,6 +727,7 @@ void OFileSelector::initializeName()
     m_fnLabel = new QLabel( m_boxName );
     m_fnLabel->setText( tr("Name:") );
     m_edit = new QLineEdit( m_boxName );
+    m_edit->setText( m_name );
     //m_boxName->addWidget( m_fnLabel );
     m_boxName->setMargin( 5 );
     m_boxName->setSpacing( 8 );
@@ -688,7 +735,7 @@ void OFileSelector::initializeName()
 
     m_lay->addWidget( m_boxName, 0 ); // add it to the topLevel layout
   }// else we already initialized
-  // maybe show the components? 
+  // maybe show the components?
   //
 }
 void OFileSelector::initializeYes()
@@ -713,6 +760,24 @@ void OFileSelector::initializeYes()
 	     this, SLOT( slotCancel() ) );
   }
 }
+/*
+ * OK m_mimeCheck is a QComboBox we now want to fill
+ * out that combobox
+ * if automime we need to update the mimetypes
+ */
+void OFileSelector::updateMimeCheck() {
+    m_mimeCheck->clear();
+    if (m_autoMime ) {
+        //m_mimeCheck->insertItem( tr("All") );
+        updateMimes();
+    }
+
+    QMap<QString, QStringList>::Iterator it;
+    for (it = m_mimetypes.begin(); it != m_mimetypes.end(); ++it ) {
+        m_mimeCheck->insertItem( it.key() );
+    }
+}
+
 void OFileSelector::initializeChooser()
 {
   if( m_boxView == 0 ){
@@ -725,12 +790,8 @@ void OFileSelector::initializeChooser()
     m_viewCheck->insertItem( tr("Documents") );
     m_viewCheck->insertItem( tr("Files") );
     m_viewCheck->insertItem( tr("All Files") );
-    if(!m_autoMime )
-      m_mimeCheck->insertItem(m_mimetypes.join(",") );
-    else{
-      updateMimes();
-      m_mimeCheck->insertStringList( m_mimetypes );
-    }
+    updateMimeCheck();
+
     connect( m_viewCheck, SIGNAL( activated(const QString & ) ),
 	     this, SLOT( slotViewCheck(const QString & ) ) );
     connect( m_mimeCheck, SIGNAL( activated(const QString & ) ),
@@ -746,11 +807,11 @@ void OFileSelector::initializeListView()
     m_boxToolbar = new QHBox( m_pseudo );
     m_boxToolbar->setSpacing(0 ); // next to each other please
 
-    // toolbar members 
+    // toolbar members
     {
       // location QComboBox
       m_location = new QComboBox( m_boxToolbar );
-      m_location->setEditable( TRUE ); 
+      m_location->setEditable( TRUE );
       m_location->setDuplicatesEnabled( FALSE );
       connect( m_location, SIGNAL(activated(const QString &) ),
 	       this, SLOT( slotLocationActivated(const QString &) ) );
@@ -831,13 +892,13 @@ void OFileSelector::initializeListView()
     connect(m_View, SIGNAL(currentChanged(QListViewItem *) ),
 	    this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
 
-    connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ), 
+    connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ),
 	    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
 
-    connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )), 
+    connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )),
 	    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
 
-    m_pseudoLayout->addWidget( m_View, 288 ); 
+    m_pseudoLayout->addWidget( m_View, 288 );
     m_stack->addWidget( m_pseudo, EXTENDED );
   }
 }
@@ -876,7 +937,12 @@ bool OFileSelector::compliesMime( const QString &path, const QString &mime )
     return true;
   return false;
 }
+/*  check if the mimetype in mime
+ *  complies with the  one which is current
+ */
+bool OFileSelector::compliesMime( const QString& mime ) {
 
+}
 void OFileSelector::slotFileSelected( const QString &string )
 {
   if( m_shLne )
@@ -1050,22 +1116,22 @@ void OFileSelector::reparse()
 	MimeType type( fi->absFilePath() );
 	if( !m_mimetypes.contains( type.id() ) ){
 	  //qWarning("Type %s", type.id().latin1() );
-	  m_mimetypes.append( type.id() );
+	  m_mimetypes.insert( type.id(), type.id() );
 	}
 
 	++it;
       }
       // add them to the chooser
-      m_mimeCheck->insertItem( tr("All") );
-      m_mimeCheck->insertStringList( m_mimetypes );
+      updateMimeCheck();
       m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currentMimeType ) );
       currentMimeType = m_mimeCheck->currentText();
     }
   }else { // no autoMime
-    currentMimeType = m_mimetypes.join(";");
+      // let the mimetype be set from out side the m_mimeCheck FEATURE
+
     if( m_shChooser ){
-      m_mimeCheck->clear();
-      m_mimeCheck->insertItem(m_mimetypes.join(",") );
+        currentMimeType = m_mimeCheck->currentText();
+        updateMimeCheck();
     }
   }
   // now we got our mimetypes we can add the files
@@ -1075,7 +1141,7 @@ void OFileSelector::reparse()
   int sort;
   if ( m_case )
     sort = (QDir::IgnoreCase | QDir::Name | QDir::DirsFirst | QDir::Reversed);
-  else  
+  else
     sort = (QDir::Name | QDir::DirsFirst | QDir::Reversed);
   dir.setSorting( sort );
 
@@ -1125,7 +1191,7 @@ void OFileSelector::reparse()
     //qWarning( "%s", fi->fileName().latin1() );
     ++it;
   } // of while loop
-  m_View->sort(); 
+  m_View->sort();
   if( m_shTool ){
     m_location->insertItem( m_currentDir );
 
