@@ -688,7 +688,7 @@ int iPAQ::readLightSensor ( )
 	int fd;
 	int val = -1;
 	
-	if (( fd = ::open ( "/proc/hal/lightsensor", O_RDONLY )) >= 0 ) {
+	if (( fd = ::open ( "/proc/hal/light_sensor", O_RDONLY )) >= 0 ) {
 		char buffer [5];
 	
 		if ( ::read ( fd, buffer, 4 ) == 4 ) {
