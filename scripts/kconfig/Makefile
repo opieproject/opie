@@ -19,15 +19,13 @@ endif
 endif
 
 ifndef QTLIB
-ifeq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt.so ]; then echo foundit; fi),foundit)
-QTLIB=-lqt
-else
 ifeq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt-mt.so ]; then echo foundit; fi),foundit)
 QTLIB=-lqt-mt
 else
-QTLIB=-lqt
+ifneq ($(shell if [ -e $(HOSTQTDIR)/lib/libqt.so ]; then echo foundit; fi),foundit)
 $(warning Unable to locate libqt.so!)
 endif
+QTLIB=-lqt
 endif
 endif
 
