@@ -105,7 +105,7 @@ void StorageInfo::update()
       QString fs = me->mnt_fsname;
       if ( fs.left(7)=="/dev/hd" || fs.left(7)=="/dev/sd"
         || fs.left(8)=="/dev/mtd" || fs.left(9) == "/dev/mmcd"
-        ||  fs.left(8)=="/dev/ram")
+        ||  fs.left(8)=="/dev/ram" || fs.left(5)=="tmpfs" )
       {
     n++;
     curdisks.append(fs);
