@@ -51,6 +51,7 @@
 #include <qsignal.h>
 #include <qmainwindow.h>
 #include <qwidgetlist.h>
+#include <qpixmapcache.h>
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
 #define QTOPIA_INTERNAL_INITAPP
@@ -99,7 +100,7 @@ public:
 	QPEApplicationData ( )
 		: presstimer( 0 ), presswidget( 0 ), rightpressed( false ), kbgrabbed( false ),
 		  notbusysent( false ), preloaded( false ), forceshow( false ), nomaximize( false ),
-		  keep_running( true ), qpe_main_widget( 0 ), qcopQok( false )
+		  keep_running( true ), qcopQok( false ), qpe_main_widget( 0 )
 
 	{}
 
@@ -113,8 +114,8 @@ public:
 	bool preloaded    : 1;
 	bool forceshow    : 1;
 	bool nomaximize   : 1;
-        bool qcopQok      : 1;
 	bool keep_running : 1;
+        bool qcopQok      : 1;
 
 
         QStringList langs;
@@ -214,6 +215,7 @@ public:
 		setWidgetCaptionFromAppName( mw, appName, QPEApplication::qpeDir() + "apps" );
 		nomaximize = nomax;
 		qpe_main_widget = mw;
+                qcopQok = TRUE;
 #ifndef QT_NO_COP
 
 		sendQCopQ();
@@ -576,6 +578,8 @@ void QPEApplication::processQCopFile()
 QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		: QApplication( hack(argc), argv, t ), pidChannel( 0 )
 {
+        QPixmapCache::setCacheLimit(256); // sensible default for smaller devices.
+
 	d = new QPEApplicationData;
 	d->loadTextCodecs();
 	d->loadImageCodecs();
@@ -1776,6 +1780,9 @@ void QPEApplication::setStylusOperation( QWidget * w, StylusMode mode )
 */
 bool QPEApplication::eventFilter( QObject *o, QEvent *e )
 {
+        if ( !o->isWidgetType() )
+            return FALSE;
+
 	if ( stylusDict && e->type() >= QEvent::MouseButtonPress && e->type() <= QEvent::MouseMove ) {
 		QMouseEvent * me = ( QMouseEvent* ) e;
 		StylusMode mode = (StylusMode)(int)stylusDict->find(o);
@@ -1784,7 +1791,8 @@ bool QPEApplication::eventFilter( QObject *o, QEvent *e )
 				switch ( me->type() ) {
 					case QEvent::MouseButtonPress:
 						if ( me->button() == LeftButton ) {
-							d->presstimer = startTimer(500); // #### pref.
+                                                    if (!d->presstimer )
+                                                        d->presstimer = startTimer(500); // #### pref.
 							d->presswidget = (QWidget*)o;
 							d->presspos = me->pos();
 							d->rightpressed = FALSE;
@@ -1904,6 +1912,8 @@ int QPEApplication::exec()
         d->qcopQok = true;
 #ifndef QT_NO_COP
 	d->sendQCopQ();
+        if ( !d->keep_running )
+            processEvents(); // we may have received QCop messages in the meantime.
 #endif
 
 	if ( d->keep_running )
