@@ -53,15 +53,14 @@ class OHighscore : public QWidget
 		 */
 		void checkIfItIsANewhighscore( int );
 
-		/*
-		 * returns the players scores position in the highscore as a QString
-		 */
-		QString position();
-		
 		list<t_playerData*> playerData;
 	    list<t_playerData*>::iterator iPlayerData;
 
+		/*
+		 * this inserts the new entry at the correct position
+		 */
 		void insertData( QString , int );
+		void writeList();
 		
 	private:
 		/*
@@ -73,17 +72,6 @@ class OHighscore : public QWidget
 		 * get all scores in a QMap and give "lowest" a value
 		 */
 		void getList();
-		
-		/*
-		 * read in all scores and put them in a QMap
-		 */
-		void readHighscores();
-
-		/*
-		 * sort the score so that item number 1 is the best score and item
-		 * number 10 is the least good
-		 */
-		void sortHighscores();
 };
 
 class OHighscoreDialog : public QDialog
@@ -95,9 +83,7 @@ class OHighscoreDialog : public QDialog
 
 		OHighscore *hs_;
 		
-
 		QVBoxLayout *vbox_layout;
-		
 		
 		void createHighscoreListView();
 

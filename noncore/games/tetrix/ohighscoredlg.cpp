@@ -65,9 +65,9 @@ void OHighscore::getList()
 
 		playerData.push_back( pPlayerData );
 
-		qDebug( QString::number( i ) );
-		qDebug( pPlayerData->sName );
-		qDebug( QString::number( pPlayerData->points ) );
+//X 		qDebug( QString::number( i ) );
+//X 		qDebug( pPlayerData->sName );
+//X 		qDebug( QString::number( pPlayerData->points ) );
 		
 		if ( (temp < lowest) ) lowest = temp;
 	}
@@ -76,17 +76,21 @@ void OHighscore::getList()
 
 void OHighscore::checkIfItIsANewhighscore( int points)
 {
-	if ( points > lowest ) isNewhighscore = true;
-	else isNewhighscore = false;
+	qDebug( "Die niedrigste Zahl ist" );
+	qDebug( QString::number( lowest ) );
+	if ( points > lowest ) {
+		qDebug( "isNewhighscore == true" ) ; isNewhighscore = true;
+	}
+	else { 
+		qDebug( "isNewhighscore == true" ) ;isNewhighscore = false;
+	}
 }
 
 void OHighscore::insertData( QString name , int punkte )
 {
-	qDebug( "insertData" );
 	std::list<t_playerData*>::iterator insertIterator = playerData.begin();
 	while ( insertIterator != playerData.end() )
 	{
-		qDebug( ( *insertIterator )->sName );
 		if ( punkte > ( *insertIterator )->points )
 		{
 			t_playerData* temp = new t_playerData;
@@ -95,16 +99,17 @@ void OHighscore::insertData( QString name , int punkte )
 			playerData.insert( insertIterator , temp );
 			insertIterator = playerData.end();
 			insertIterator--;
-			delete *insertIterator;
+//X 			delete *insertIterator;              //memleak?
 			playerData.erase( insertIterator );
+			return;
 		}
 		insertIterator++;
 	} 
 }
 
-QString OHighscore::position()
+void OHighscore::writeList()
 {
-	return "1";
+	qDebug( "writeList()" );
 }
 
 QString OHighscore::getName()
@@ -121,14 +126,6 @@ QString OHighscore::getName()
     }
     //delete d;
 	return name;
-}
-
-void OHighscore::readHighscores()
-{
-}
-	
-void OHighscore::sortHighscores()
-{
 }
 
 OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const char *name, bool modal) : QDialog(parent, name,modal)
@@ -150,8 +147,6 @@ OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const
 
 void OHighscoreDialog::createHighscoreListView()
 {
-
-	qDebug("sdfljsdlkj" );
 	int pos = 1;
 	std::list<t_playerData*>::iterator iListe = hs_->playerData.begin();
 	

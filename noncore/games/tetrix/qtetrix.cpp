@@ -167,14 +167,16 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
 
 void QTetrix::gameOver()
 {
-	qDebug(showScore->text());
 	OHighscore *hs = new OHighscore( showScore->text().toInt() );
-//	if ( hs->isNewhighscore )
-//	{
+	if ( hs->isNewhighscore )
+	{
+		qDebug( "ist nun in der ifcondition" );
 		hs->insertData( /*hs->getName()*/"oscars" , showScore->text().toInt() );
+		qDebug( "Ende der ifcondition" );
+		hs->writeList();
+	}
 		OHighscoreDialog hscdlg( hs, this, "OHighscoreDialog", true );
 		hscdlg.exec();
-//	}
 }
 
 void QTetrix::quit()
