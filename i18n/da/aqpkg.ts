@@ -481,6 +481,13 @@ Er du sikker?
     </message>
 </context>
 <context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Fjern</translation>
+    </message>
+</context>
+<context>
     <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>

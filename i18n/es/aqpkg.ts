@@ -480,6 +480,13 @@ Opie/Qtopia está corriendo!
     </message>
 </context>
 <context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Borrar</translation>
+    </message>
+</context>
+<context>
     <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>

@@ -480,6 +480,13 @@ er IKKE anbefalt!</translation>
     </message>
 </context>
 <context>
+    <name>QuestionDlg</name>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Slett</translation>
+    </message>
+</context>
+<context>
     <name>SettingsImpl</name>
     <message>
         <source>Configuration</source>

@@ -1,6 +1,6 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainWindow</name>
+    <name>MediumMountSetting::MainWindow</name>
     <message>
         <source>Medium Mount Settings</source>
         <translation type="unfinished"></translation>
@@ -11,7 +11,7 @@
     </message>
 </context>
 <context>
-    <name>MediumGlobalWidget</name>
+    <name>MediumMountSetting::MediumGlobalWidget</name>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
         <translation type="unfinished"></translation>
@@ -50,7 +50,7 @@
     </message>
 </context>
 <context>
-    <name>MediumMountWidget</name>
+    <name>MediumMountSetting::MediumMountWidget</name>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
         <translation type="unfinished"></translation>
