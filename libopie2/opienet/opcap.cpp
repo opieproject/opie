@@ -57,7 +57,7 @@ namespace Net  {
 OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* data, QObject* parent )
         :QObject( parent, "Generic" ), _hdr( header ), _data( data )
 {
-    //qDebug( "OPacket::OPacket(): (Len %d, CapLen %d)" /*, ctime((const time_t*) header.ts.tv_sec)*/, header.len, header.caplen );
+    qDebug( "OPacket::OPacket(): (Len %d, CapLen %d)" /*, ctime((const time_t*) header.ts.tv_sec)*/, header.len, header.caplen );
 
     _end = (unsigned char*) data + header.len;
     //qDebug( "OPacket::data @ %0x, end @ %0x", data, _end );
@@ -87,6 +87,7 @@ OPacket::OPacket( int datalink, packetheaderstruct header, const unsigned char* 
 
 OPacket::~OPacket()
 {
+    qDebug( "OPacket::~OPacket( %s )", name() );
 }
 
 
@@ -1063,7 +1064,7 @@ QString OWaveLanControlPacket::controlType() const
  *======================================================================================*/
 
 OPacketCapturer::OPacketCapturer( QObject* parent, const char* name )
-                :QObject( parent, name ), _name( QString::null ), _open( false ), _pch( 0 ), _pcd( 0 ), _sn( 0 )
+                :QObject( parent, name ), _name( QString::null ), _open( false ), _pch( 0 ), _pcd( 0 ), _sn( 0 ), _autodelete( true )
 {
 }
 
@@ -1075,6 +1076,18 @@ OPacketCapturer::~OPacketCapturer()
         odebug << "OPacketCapturer::~OPacketCapturer(): pcap still open, autoclosing." << oendl;
         close();
     }
+}
+
+
+void OPacketCapturer::setAutoDelete( bool b )
+{
+    _autodelete = b;
+}
+
+
+bool OPacketCapturer::autoDelete() const
+{
+    return _autodelete;
 }
 
 
@@ -1321,8 +1334,8 @@ void OPacketCapturer::readyToReceive()
     odebug << "OPacketCapturer::readyToReceive(): about to emit 'receivePacket(p)'" << oendl;
     OPacket* p = next();
     emit receivedPacket( p );
-    // emit is synchronous - packet has been dealt with, now it's safe to delete
-    delete p;
+    // emit is synchronous - packet has been dealt with, now it's safe to delete (if enabled)
+    if ( _autodelete ) delete p;
 }
 
 

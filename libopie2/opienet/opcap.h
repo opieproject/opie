@@ -134,9 +134,8 @@ class OPacket : public QObject
 
     void updateStats( QMap<QString,int>&, QObjectList* );
 
-  private:
-
     QString dumpStructure() const;
+  private:
     QString _dumpStructure( QObjectList* ) const;
 
   private:
@@ -693,6 +692,18 @@ class OPacketCapturer : public QObject
      * @see QMap
      */
     const QMap<QString,int>& statistics() const;
+    /**
+     * Enable or disable the auto-delete option.
+     * If auto-delete is enabled, then the packet capturer will delete a packet right
+     * after it has been emit'ted. This is the default, which is useful if the packet
+     * capturer has the only reference to the packets. If you pass the packet for adding
+     * into a collection or do processing after the SLOT, the auto delete must be disabled.
+     */
+    void setAutoDelete( bool enable );
+    /**
+     * @returns the auto-delete value.
+     */
+    bool autoDelete() const;
 
   signals:
     /**
@@ -711,8 +722,9 @@ class OPacketCapturer : public QObject
     QSocketNotifier* _sn;                           // socket notifier for main loop
     mutable char _errbuf[PCAP_ERRBUF_SIZE];         // holds error strings from libpcap
     QMap<QString, int> _stats;                      // statistics;
-    class Private;			   	    // Private Forward declaration
-    Private *d;					    // if we need to add data
+    bool _autodelete;                               // if we auto delete packets after emit
+    class Private;                                  // Private Forward declaration
+    Private *d;                                     // if we need to add data
 };
 }
 }
