@@ -202,7 +202,13 @@ QList<Folder>* NNTPwrapper::listFolders() {
     return folders;
 }
 
-QStringList NNTPwrapper::listAllNewsgroups() {
+/* we made this method in raw nntp access of etpan and not via generic interface
+ * 'cause in that case there will be doubled copy operations. eg. the etpan would
+ * copy that stuff into its own structures and we must copy it into useable c++ 
+ * structures for our frontend. this would not make sense, so it is better to reimplement
+ * the stuff from generic interface of etpan but copy it direct to qt classes.
+ */
+QStringList NNTPwrapper::listAllNewsgroups(const QString&mask) {
     login();
     QStringList res;
     clist *result = 0;
@@ -212,7 +218,14 @@ QStringList NNTPwrapper::listAllNewsgroups() {
     if ( m_nntp )   {
         mailsession * session = m_nntp->sto_session;
         newsnntp * news =  ( (  nntp_session_state_data * )session->sess_data )->nntp_session;
-        int err = newsnntp_list_newsgroups(news, NULL, &result);
+        int err = NEWSNNTP_NO_ERROR;
+        if (mask.isEmpty()) {
+            err = newsnntp_list(news, &result);
+        } else {
+            /* taken from generic wrapper of etpan */
+            QString nmask = mask+".*";
+            err = newsnntp_list_active(news, nmask.latin1(), &result);
+        }
         if ( err == NEWSNNTP_NO_ERROR && result) {
             for ( current=clist_begin(result);current!=NULL;current=clist_next(current) ) {
                 group = (  newsnntp_group_description* ) current->data;
@@ -222,7 +235,7 @@ QStringList NNTPwrapper::listAllNewsgroups() {
         }
     }
     if (result) {
-        clist_free(result);
+        newsnntp_list_free(result);
     }
     return res;
 }
