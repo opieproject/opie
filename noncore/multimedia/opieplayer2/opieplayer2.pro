@@ -15,7 +15,7 @@ SOURCES   = main.cpp \
 TARGET    = opieplayer2
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include 
-LIBS        += -lqpe -lpthread -lopiecore2 -lxine -lstdc++
+LIBS        += -lqpe -lpthread -lxine -lstdc++
 MOC_DIR   = qpeobj
 OBJECTS_DIR = qpeobj
 
