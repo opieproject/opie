@@ -34,6 +34,52 @@ typedef struct typeCellData
   QString data;
 };
 
+
+#define NONE_TOKEN 0
+#define NUMBER_TOKEN 1
+#define VARIABLE_TOKEN 2
+#define FUNCTION_TOKEN 3
+#define SYMBOL_TOKEN 4
+#define STRING_TOKEN 5
+
+class Expression
+{
+public:
+	QString Body;
+	QList<QString> CompiledBody;
+	QList<int> CompiledBodyType;
+	QString SYMBOL;
+	QString MATHSYMBOL;
+	QArray<int> ArgsOfFunc;
+	int FuncDepth;
+	bool ErrorFound;
+	int n; // holds the current parser position
+	QString chunk; // the piece in the parser we are on
+	int SymbGroup; // the current type
+
+	QString InExpr;
+
+	QChar chunk0(void); // retunrs the first char of expression;
+	Expression(QString expr1);// constructor
+
+	bool isSymbol(QChar ch);
+	bool isMathSymbol(QChar ch);
+	void GetNext();
+	void First();
+	void Third();
+	void Fourth();
+	void Fifth();
+	void Sixth();
+	void Seventh();
+	void Eighth();
+	void Ninth();
+
+	bool Expression::Parse(); //parses the expression in RPN format;
+
+};
+
+
+
 class Sheet: public QTable
 {
   Q_OBJECT
@@ -50,21 +96,50 @@ class Sheet: public QTable
   QStringList listDataParser;
 
   // Private functions
-  int getOperatorPriority(char oper);
   bool findRowColumn(const QString &variable, int *row, int *col, bool giveError=FALSE);
   QString findCellName(int row, int col);
   bool findRange(const QString &variable1, const QString &variable2, int *row1, int *col1, int *row2, int *col2);
-  double calculateVariable(const QString &variable);
-  double calculateFunction(const QString &function, const QString &parameters);
-  QChar popCharStack(QStack<QChar> *stackChars);
-  QString popStringStack(QStack<QString> *stackStrings);
+  QString calculateVariable(const QString &variable);
+  QString calculateFunction(const QString &function, const QString &parameters, int NumOfParams);
   QString getParameter(const QString &parameters, int paramNo, bool giveError=FALSE, const QString funcName="");
   QString dataParser(const QString &cell, const QString &data);
   QString dataParserHelper(const QString &data);
   typeCellData *createCellData(int row, int col);
   typeCellData *findCellData(int row, int col);
-  void pushCharStack(QStack<QChar> *stackChars, const QChar &character);
-  void pushStringStack(QStack<QString> *stackStrings, const QString &string);
+
+
+//LOGICAL / INFO
+  double functionCountIf(const QString &param1, const QString &param2, const QString &param3);
+  double functionSumSQ(const QString &param1, const QString &param2); //sum of squares
+  QString functionIndex(const QString &param1, const QString &param2, int indx);
+//math functions computations
+  double BesselI0(double x);
+  double BesselI(int n, double x);
+  double BesselK0(double x);
+  double BesselI1(double x);
+  double BesselK1(double x);
+  double BesselK(int n, double x);
+  double BesselJ0(double x);
+  double BesselY0(double x);
+  double BesselJ1(double x);
+  double BesselY1(double x);
+  double BesselY(int n, double x);
+  double BesselJ(int n, double x);
+  double GammaLn(double xx);
+  double Factorial(double n);
+  double GammaP(double a, double x);
+  double GammaQ(double a,double x);
+  void GammaSeries(double *gamser, double a, double x, double *gln);
+  void GammaContinuedFraction(double *gammcf, double a, double x, double *gln);
+  double ErrorFunction(double x);
+  double ErrorFunctionComplementary(double x);
+  double Beta(double z, double w);
+  double BetaContinuedFraction(double a, double b, double x);
+  double BetaIncomplete(double a, double b, double x);
+  double functionVariance(const QString &param1, const QString &param2);
+  double functionVariancePopulation(const QString &param1, const QString &param2);
+  double functionSkew(const QString &param1, const QString &param2);
+  double functionKurt(const QString &param1, const QString &param2);
 
   // Sheet/Qt parser functions
   double functionSum(const QString &param1, const QString &param2);
@@ -79,14 +154,14 @@ class Sheet: public QTable
   void viewportMouseMoveEvent(QMouseEvent *e);
   void viewportMouseReleaseEvent(QMouseEvent *e);
 
-  private slots:
+  public slots:
     void slotCellSelected(int row, int col);
     void slotCellChanged(int row, int col);
 
   public:
     Sheet(int numRows, int numCols, QWidget *parent);
     ~Sheet();
-
+    void ReCalc(void);
     void setData(const QString &data);
     QString getData();
 

@@ -25,7 +25,7 @@
 #include <qbutton.h>
 #include <qcombobox.h>
 #include <qtoolbutton.h>
-
+#include "Excel.h"
 #include "sheet.h"
 
 typedef struct typeSheet
@@ -43,12 +43,15 @@ class MainWindow: public QMainWindow
   QMenuBar *menu;
   QToolBar *toolbarFunctions, *toolbarEdit, *toolbarStandard;
   FileSelector *fileSelector;
+  FileSelector *ExcelSelector;
 
   // QT objects
   QPopupMenu *menuFile, *menuEdit, *menuInsert, *menuFormat, *menuData, *menuHelp,
-             *submenuFunc, *submenuFuncStd, *submenuFuncMath, *submenuFuncStat,
+             *submenuFunc, *submenuFuncStd, *submenuFuncStandard, *submenuFuncLogic,
+	     *submenuFuncTrig, *submenuFuncString, *submenuFuncScientific, *submenuFuncDistr,
+	     *submenuFuncStat,
              *submenuRow, *submenuCol, *submenuSheet;
-  QAction *fileNew, *fileOpen, *fileSave, *fileSaveAs, *fileQuit, *helpAbout, *editAccept, *editCancel, *formatCells,
+  QAction *fileNew, *fileOpen, *fileSave, *fileSaveAs, *fileExcelImport, *fileQuit, *helpAbout, *editAccept, *editCancel, *formatCells,
           *funcPlus, *funcMinus, *funcCross, *funcDivide, *funcParanOpen, *funcParanClose, *funcComma, *funcEqual,
           *editCut, *editCopy, *editPaste, *editPasteContents, *editClear, *insertCols, *insertRows, *insertSheets, *insertCells,
           *rowHeight, *rowShow, *rowHide, *rowAdjust, *colWidth, *colShow, *colHide, *colAdjust, *sheetRename, *sheetRemove,
@@ -87,6 +90,11 @@ class MainWindow: public QMainWindow
     void slotFileOpen();
     void slotFileSave();
     void slotFileSaveAs();
+
+    void slotImportExcel(const DocLnk &lnkDoc);
+    void slotImportExcelOpen();
+    void ExcelSelectorHide();
+
     void slotHelpAbout();
     void slotEditAccept();
     void slotEditCancel();
