@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>Hold:</source>
-        <translation type="unfinished">Maintenir :</translation>
+        <translation>Maintenir : </translation>
     </message>
     <message>
         <source>Beam VCard</source>
