@@ -507,7 +507,6 @@ void Wellenreiter::startClicked()
 
     // open pcap and start sniffing
 
-    QString dumpname;
     if ( configwindow->writeCaptureFile->isChecked() ) // write to a user specified capture file?
     {
         dumpname = configwindow->captureFileName->text();

@@ -51,6 +51,7 @@ class Wellenreiter : public WellenreiterBase {
     MLogWindow* logWindow() const { return logwindow; };
     MHexWindow* hexWindow() const { return hexwindow; };
     bool isDaemonRunning() const { return sniffing; };
+    QString captureFileName() const { return dumpname; };
 
   public:
     bool sniffing;
@@ -88,6 +89,7 @@ class Wellenreiter : public WellenreiterBase {
     OSystem _system;                // Opie Operating System identifier
     #endif
 
+    QString dumpname;
     OWirelessNetworkInterface* iface;
     OPacketCapturer* pcap;
     WellenreiterConfigWindow* configwindow;

@@ -422,16 +422,18 @@ void WellenreiterMainWindow::uploadSession()
     rhost_info = (struct hostent *) ::gethostbyname( CAP_hostname );
     if ( rhost_info )
     {
-        if ( !QFile::exists( "/var/log/dump.wellenreiter" ) )
+
+
+        if ( !QFile::exists( mw->captureFileName() ) )
         {
-            QMessageBox::warning( 0, tr( "Error" ), tr( "<p>Logfile doesn't exist</p>") );
+            QMessageBox::warning( 0, tr( "Error" ), tr( "<p>Logfile '%1' doesn't exist</p>").arg( mw->captureFileName() ) );
             return;
         }
 
-        QFile f( "/var/log/dump.wellenreiter" );
+        QFile f( mw->captureFileName() );
         if ( !f.open( IO_ReadOnly ) )
         {
-            QMessageBox::warning( 0, tr( "Error" ), tr( "<p>Can't open Logfile</p>") );
+            QMessageBox::warning( 0, tr( "Error" ), tr( "<p>Can't open Logfile '%1'</p>").arg( mw->captureFileName() ) );
             return;
         }
 
@@ -481,7 +483,7 @@ void WellenreiterMainWindow::uploadSession()
                 "\r\n"
                 "%3\r\n"
                 "-----------------------------97267758015830030481215568065\r\n"
-                "Content-Disposition: form-data; name=\"upfile\"; filename=\"/var/log/dump.wellenreiter\"\r\n"
+                "Content-Disposition: form-data; name=\"upfile\"; filename=\"%4\"\r\n"
                 "Content-Type: application/octet-stream\r\n"
                 "\r\n";
 
@@ -491,6 +493,7 @@ void WellenreiterMainWindow::uploadSession()
                 content = content.arg( from->text().isEmpty() ? QString( "Anonymous Wellenreiter II User" ) : from->text() );
                 content = content.arg( location->text().isEmpty() ? QString( "Anonymous Wellenreiter II Location" ) : location->text() );
                 content = content.arg( comments->text().isEmpty() ? QString( "Anonymous Wellenreiter II Comments" ) : comments->text() );
+                content = content.arg( mw->captureFileName() );
 
                 header = header.arg( QString::number( content.length() + f.size() + preambel.length() ) );
 
