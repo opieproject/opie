@@ -61,7 +61,12 @@ MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name
 	if( qApp->argc() > 1 )
 	{
 		char **argv = qApp->argv();
-		location->setEditText( argv[1] );
+		QString *argv1 = new QString( argv[1] );
+		if( !argv1->startsWith( "http://" ) && !argv1->startsWith( "/" ) )
+		{
+			argv1->insert( 0, QDir::currentDirPath()+"/" );
+		}
+		location->setEditText( *argv1 );
 		goClicked();
 	}
 }
