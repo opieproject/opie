@@ -2,11 +2,11 @@
 /*                W e l l e n r e i t e r   I I
 /*               ===============================
 /*
-/*                    Version: April BETA
+/*                    Version: 1.0-rc2
 /************************************************************************
 
 ----------------------------------------------------
-Release Notes for Opie-Wellenreiter Version BETA April 2003
+Release Notes for Wellenreiter II / July 2003
 ----------------------------------------------------
 
 =====================
@@ -23,7 +23,7 @@ Release Notes for Opie-Wellenreiter Version BETA April 2003
 =        Build
 =====================
 
-To compile a standalone Wellenreiter for X11, you need Qt3 and the development
+To compile a standalone Wellenreiter II for X11, you need Qt3 and the development
 packages for Qt3, e.g. libqt3-devel.
 
  * Set $QTDIR to the appropriate directory (e.g. /usr/lib/qt3)
@@ -37,6 +37,7 @@ packages for Qt3, e.g. libqt3-devel.
 
 Precompiled binaries are available for the PDA-Version.
 Get them from http://opie.net.wox.org/wellenreiter/
+Sorry, RPMS are not yet available but will follow soon.
 
 =====================
 =       Run
@@ -60,7 +61,7 @@ Michael Lauer    <mickeyl@handhelds.org>
 =      Links        =
 =====================
 
-Wellenreiter:               http://www.remote-exploit.org
+Wellenreiter:               http://www.wellenreiter.net
 Wellenreiter/Opie:          http://opie.net.wox.org/wellenreiter
 Opie Project:               http://opie.handhelds.org
 OpenZaurus Project:         http://openzaurus.org

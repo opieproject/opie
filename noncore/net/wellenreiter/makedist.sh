@@ -26,7 +26,7 @@ cp -dfR gui $TMPDIR
 cp -dfR lib $TMPDIR
 cp -dfR build README wellenreiter.pro $TMPDIR
 cp -dfR $OPIEDIR/pics/wellenreiter/* $OUTPUT/share/wellenreiter/
-cp -dfR $OPIEDIR/share/wellenreiter/* $OUTPUT/share/wellenreiter/
+cp -dfR $OPIEDIR/etc/manufacturers $OUTPUT/share/wellenreiter/
 
 # take care about sourcefiles
 
