@@ -29,7 +29,7 @@ private:
 };
 
 inline bool SlaveInterface::supports( const QString& str)const {
-    return m_list.contains( QFileInfo( str ).extension(false) );
+    return m_list.contains( QFileInfo( str ).extension(false).lower() );
 }
 
 typedef SlaveInterface* (*phunkSlaveCreateFunc )();
