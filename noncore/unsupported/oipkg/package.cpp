@@ -404,7 +404,7 @@ void Package::parseIpkgFile( QString file)
 // 20020830
 // a quick hack to make oipkg understand the new ipk format
 // neu:  ar pf PACKAGE control.tar.gz | tar xfOz - ./control > /tmp/control
-    if (! system("ar pf "+file+" control.tar.gz | tar xfOz - ./control > /tmp/control") )
+    if (system("ar pf "+file+" control.tar.gz | tar xfOz - ./control > /tmp/control") != 0)
     {
 //#old tar ipk format
         system("tar xzf "+file+" -C /tmp");
