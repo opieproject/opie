@@ -156,7 +156,7 @@
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>Wil je het huidige&lt;BR&gt;bestand echt&lt;B&gt;verwijderen&lt;/B&gt;van de schijf?
+        <translation type="obsolete">Wil je het huidige&lt;BR&gt;bestand echt&lt;B&gt;verwijderen&lt;/B&gt;van de schijf?
 &lt;BR&gt;Dit is &lt;B&gt;onomkeerbaar!!&lt;/B&gt;</translation>
     </message>
     <message>
@@ -197,6 +197,15 @@ Doorgaan met opslaan?
     <message>
         <source>Not enough lines</source>
         <translation>Niet genoeg regels</translation>
+    </message>
+    <message>
+        <source>%1 - Text Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

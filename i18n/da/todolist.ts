@@ -6,7 +6,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -186,7 +186,7 @@ Afslut alligevel?</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Kan ikke redigere data da en synkronisering er igang</translation>
+        <translation type="obsolete">Kan ikke redigere data da en synkronisering er igang</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -331,6 +331,14 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 Dette område kaldes genvejspanelet.
 
 Det hjælper dig med hurtigt at tilføje en ny opgave til din liste. Dette område kan blive vist eller skjules ved at vælge Valgmuligheder-&gt;&apos;Vis genvejspanel&apos; fra menuen foroven.</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -23,7 +23,7 @@ nie wpadac na sciany i przeszkody</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Wcisnij dowolny klawisz do uruchomienia</translation>
+        <translation type="obsolete">Wcisnij dowolny klawisz do uruchomienia</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -37,7 +37,15 @@ nie wpadac na sciany i przeszkody</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Wcisnij dowolny klawisz a rozpoczniesz gre.</translation>
+        <translation type="obsolete">Wcisnij dowolny klawisz a rozpoczniesz gre.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

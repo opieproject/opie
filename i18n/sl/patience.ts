@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>&amp;Zamenjaj zadnjo stran kart</translation>
+        <translation type="obsolete">&amp;Zamenjaj zadnjo stran kart</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>Z&amp;askoči na položaj</translation>
+        <translation type="obsolete">Z&amp;askoči na položaj</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -39,15 +39,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation>Zamenjaj zadnje strani kart</translation>
+        <translation type="obsolete">Zamenjaj zadnje strani kart</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Zaskoči na položaj</translation>
+        <translation type="obsolete">Zaskoči na položaj</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation>Obrni eno karto</translation>
+        <translation type="obsolete">Obrni eno karto</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation>Obrni tri karte</translation>
+        <translation type="obsolete">Obrni tri karte</translation>
     </message>
     <message>
         <source>Chicane</source>
@@ -68,6 +68,30 @@
     <message>
         <source>Teeclub</source>
         <translation>Teeclub</translation>
+    </message>
+    <message>
+        <source>&amp;Change card backs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Snap to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change card backs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snap to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn one card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn three cards</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -231,7 +231,7 @@ Mail has NOT been sent</source>
     </message>
     <message>
         <source>Examine mail</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Central view area</source>
@@ -322,7 +322,7 @@ reviewed by double clicking the entry.</source>
     </message>
     <message>
         <source>This button opens the address selector with all mail adresses from your OPIE addressbook</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Enter your mail text here</source>

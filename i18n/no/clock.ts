@@ -49,6 +49,10 @@
         <source>Clock: Alarm was missed.</source>
         <translation>Klokke: Alarm ble oversett.</translation>
     </message>
+    <message>
+        <source>Alarm set: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Set_Alarm</name>

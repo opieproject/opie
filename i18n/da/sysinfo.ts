@@ -120,7 +120,7 @@ Hukommelse er kategoriseret som følgende:
     </message>
     <message>
         <source>Used By</source>
-        <translation>Brugt af</translation>
+        <translation type="obsolete">Brugt af</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -149,8 +149,16 @@ Klik og hold på et modul for at se yderligere information om modulet eller for 
     <message>
         <source>You really want to execute
 </source>
-        <translation>Vil du virkelig køre
+        <translation type="obsolete">Vil du virkelig køre
 </translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -213,8 +221,12 @@ Klik og hold på en proces for at se yderligere information om processen eller f
     <message>
         <source>You really want to send
 </source>
-        <translation>Vil du sende
+        <translation type="obsolete">Vil du sende
 </translation>
+    </message>
+    <message>
+        <source>You really want to send %1 to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

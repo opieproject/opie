@@ -24,7 +24,7 @@ scontrare con i muri, gli angoli o la tua coda.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Premi un Tasto per Iniziare</translation>
+        <translation type="obsolete">Premi un Tasto per Iniziare</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -38,7 +38,15 @@ scontrare con i muri, gli angoli o la tua coda.</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Premi un Tasto per Iniziare una Nuova Partita.</translation>
+        <translation type="obsolete">Premi un Tasto per Iniziare una Nuova Partita.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

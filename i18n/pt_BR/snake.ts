@@ -12,7 +12,7 @@
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Pressione Qualquer Tecla Para Começar um Novo Jogo</translation>
+        <translation type="obsolete">Pressione Qualquer Tecla Para Começar um Novo Jogo</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -38,7 +38,15 @@ bater nas paredes, cantos ou na própria cauda.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Pressione Qualquer Tecla Para Começar</translation>
+        <translation type="obsolete">Pressione Qualquer Tecla Para Começar</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

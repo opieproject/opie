@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation>Proprietà di</translation>
+        <translation type="obsolete">Proprietà di</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -25,6 +25,10 @@
     <message>
         <source>Click here to launch the associated app</source>
         <translation>Premi qui per lanciare l&apos;app. associata</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -8,7 +8,11 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Réveil à %0&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Réveil à %0&lt;/h1&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation type="unfinished">&lt;h1&gt;Réveil à %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -186,7 +190,7 @@ Quitter?</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Impossible d&apos;éditer les données, Synchronization en cours</translation>
+        <translation type="obsolete">Impossible d&apos;éditer les données, Synchronization en cours</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -331,6 +335,14 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 Cette partie est appelé &quot;la barre d&apos;outils&quot;.
 
 Elle vous permet d&apos;ajouter rapidement une nouvelle tâche à votre liste. Cette partie peut-être affichée ou cachée en selectionnant Option-&gt;&apos;Montrer la barre d&apos;outils&apos; dans le menu ci-dessus.</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

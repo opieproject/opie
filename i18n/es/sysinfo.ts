@@ -120,7 +120,7 @@ La memoria se cataloga como sigue:
     </message>
     <message>
         <source>Used By</source>
-        <translation>Usado por</translation>
+        <translation type="obsolete">Usado por</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -145,12 +145,20 @@ Mantenga pulsado un módulo para ver información adicional sobre el módulo, o 
     <message>
         <source>You really want to execute
 </source>
-        <translation>Seguro que quiere ejecutar
+        <translation type="obsolete">Seguro que quiere ejecutar
 </translation>
     </message>
     <message>
         <source>This area shows detailed information about this module.</source>
         <translation>Esta área muestra información detallada sobre este módulo.</translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -213,8 +221,12 @@ Mantenga pulsado un proceso para ver información adicional, o para enviarle una
     <message>
         <source>You really want to send
 </source>
-        <translation>Seguro que quiere enviar
+        <translation type="obsolete">Seguro que quiere enviar
 </translation>
+    </message>
+    <message>
+        <source>You really want to send %1 to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -437,7 +437,7 @@ and </source>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Office: </source>
@@ -465,7 +465,7 @@ and </source>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
@@ -561,7 +561,7 @@ and </source>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Every </source>

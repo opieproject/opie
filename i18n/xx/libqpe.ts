@@ -472,7 +472,7 @@ Free some memory and try again.</source>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>All</source>

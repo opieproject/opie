@@ -120,7 +120,7 @@ A memória az alábbiak szerint van kategoruzálva:
     </message>
     <message>
         <source>Used By</source>
-        <translation>Használja</translation>
+        <translation type="obsolete">Használja</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -149,8 +149,16 @@ Bökjön a modul nevére és tartsa, hogy további információkat kapjon a modu
     <message>
         <source>You really want to execute
 </source>
-        <translation>Tényleg futtatni akarja
+        <translation type="obsolete">Tényleg futtatni akarja
 </translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -213,8 +221,12 @@ Bökjön a processzre és tartsa, hogy további információkat kapjon a process
     <message>
         <source>You really want to send
 </source>
-        <translation>Biztosan küldeni akar
+        <translation type="obsolete">Biztosan küldeni akar
 </translation>
+    </message>
+    <message>
+        <source>You really want to send %1 to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

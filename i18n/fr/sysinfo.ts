@@ -118,7 +118,7 @@ La mémoire est divisée en catégories comme suit:
     </message>
     <message>
         <source>Used By</source>
-        <translation>Utilisé par</translation>
+        <translation type="obsolete">Utilisé par</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -147,9 +147,17 @@ Cliquez et maintenez appuyer pour voir les informations à propos du module ou p
     <message>
         <source>You really want to execute
 </source>
-        <translation>Voulez-vous vraiment exécuter
+        <translation type="obsolete">Voulez-vous vraiment exécuter
 
 </translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -212,8 +220,12 @@ Cliquez et maintenez appuyer pour voir les informations à propos du processus o
     <message>
         <source>You really want to send
 </source>
-        <translation>Voulez-vous vraiment envoyer
+        <translation type="obsolete">Voulez-vous vraiment envoyer
 </translation>
+    </message>
+    <message>
+        <source>You really want to send %1 to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

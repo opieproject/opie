@@ -120,7 +120,7 @@ Gehugen wordt als volgt onderverdeeld:
     </message>
     <message>
         <source>Used By</source>
-        <translation>Gebruikt door</translation>
+        <translation type="obsolete">Gebruikt door</translation>
     </message>
     <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
@@ -149,8 +149,16 @@ Druk een tijd op een module om meer informatie over de module te zien, of hem te
     <message>
         <source>You really want to execute
 </source>
-        <translation>Wilt u dit echt uitvoeren
+        <translation type="obsolete">Wilt u dit echt uitvoeren
 </translation>
+    </message>
+    <message>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -213,8 +221,12 @@ Druk een tijd op een module om meer informatie over de module te zien, of een si
     <message>
         <source>You really want to send
 </source>
-        <translation>Wilt u dit echt zenden
+        <translation type="obsolete">Wilt u dit echt zenden
 </translation>
+    </message>
+    <message>
+        <source>You really want to send %1 to this process?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

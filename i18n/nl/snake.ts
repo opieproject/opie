@@ -23,7 +23,7 @@ de muren, randen en de staart ontwijken.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Druk een toets om te starten</translation>
+        <translation type="obsolete">Druk een toets om te starten</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -37,7 +37,15 @@ Uw score: %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Druk een toets om opnieuw te starten.</translation>
+        <translation type="obsolete">Druk een toets om opnieuw te starten.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -9,6 +9,51 @@
         <source>Backup and Restore</source>
         <translation>FOO</translation>
     </message>
+    <message>
+        <source>Error from System:
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Message</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backup Failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backup and Restore.. Failed !!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Backup Successfull.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please select something to restore.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Failed.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to open File: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restore Successfull.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
@@ -51,6 +96,21 @@
     <message>
         <source>Update Filelist</source>
         <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>ErrorDialog</name>
+    <message>
+        <source>Error Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error Message:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

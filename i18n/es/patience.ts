@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>Cambiar &amp;reverso cartas</translation>
+        <translation type="obsolete">Cambiar &amp;reverso cartas</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Saltar a la posición</translation>
+        <translation type="obsolete">&amp;Saltar a la posición</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -39,15 +39,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation>Cambiar reverso cartas</translation>
+        <translation type="obsolete">Cambiar reverso cartas</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Saltar a la posición</translation>
+        <translation type="obsolete">Saltar a la posición</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation>Volver una carta</translation>
+        <translation type="obsolete">Volver una carta</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation>Volver tres cartas</translation>
+        <translation type="obsolete">Volver tres cartas</translation>
     </message>
     <message>
         <source>Chicane</source>
@@ -68,6 +68,30 @@
     <message>
         <source>Teeclub</source>
         <translation>Club de té</translation>
+    </message>
+    <message>
+        <source>&amp;Change card backs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Snap to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change card backs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snap to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn one card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn three cards</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

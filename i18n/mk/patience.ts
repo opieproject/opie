@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>&amp;Смени Карти</translation>
+        <translation type="obsolete">&amp;Смени Карти</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Залепи за позиција</translation>
+        <translation type="obsolete">&amp;Залепи за позиција</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -51,15 +51,15 @@
     </message>
     <message>
         <source>Change Card Backs</source>
-        <translation>Смени Карти</translation>
+        <translation type="obsolete">Смени Карти</translation>
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Залепи за позиција</translation>
+        <translation type="obsolete">Залепи за позиција</translation>
     </message>
     <message>
         <source>Turn One Card</source>
-        <translation>сврти една карта</translation>
+        <translation type="obsolete">сврти една карта</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -67,7 +67,31 @@
     </message>
     <message>
         <source>Turn Three Cards</source>
-        <translation>Сврти три карти</translation>
+        <translation type="obsolete">Сврти три карти</translation>
+    </message>
+    <message>
+        <source>&amp;Change card backs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Snap to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Change card backs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Snap to position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn one card</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Turn three cards</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

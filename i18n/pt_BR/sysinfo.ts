@@ -114,10 +114,6 @@ Memory is categorized as follows:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Used By</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>This is a list of all the kernel modules currently loaded on this handheld device.
 
 Click and hold on a module to see additional information about the module, or to unload it.</source>
@@ -140,8 +136,11 @@ Click and hold on a module to see additional information about the module, or to
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You really want to execute
-</source>
+        <source>Used by</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You really want to execute %1 for this module?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -201,8 +200,7 @@ Click and hold on a process to see additional information about the process, or 
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You really want to send
-</source>
+        <source>You really want to send %1 to this process?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

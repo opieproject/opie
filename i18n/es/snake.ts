@@ -23,7 +23,7 @@ contra muros, orillas o su cola.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Pulse una tecla para empezar</translation>
+        <translation type="obsolete">Pulse una tecla para empezar</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -37,7 +37,15 @@ Puntuación: %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Pulse una tecla para empezar de nuevo.</translation>
+        <translation type="obsolete">Pulse una tecla para empezar de nuevo.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -6,7 +6,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -183,7 +183,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished">正在同步資料中，無法進行編輯</translation>
+        <translation type="obsolete">正在同步資料中，無法進行編輯</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -299,6 +299,14 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Priority:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

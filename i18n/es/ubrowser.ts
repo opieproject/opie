@@ -9,6 +9,10 @@
         <source> - uBrowser</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>%1 - uBrowser</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -17,15 +21,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>couldnt find ip address</source>
+        <source>IP-Address not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>couldnt create socket</source>
+        <source>Error creating socket</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>couldnt connect to socket</source>
+        <source>Error connecting to socket</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -24,7 +24,7 @@ Wände noch Ihren Schwanz berühren.</translation>
     </message>
     <message>
         <source>Press Any Key To Start</source>
-        <translation>Drücken Sie eine Taste, um zu starten</translation>
+        <translation type="obsolete">Drücken Sie eine Taste, um zu starten</translation>
     </message>
     <message>
         <source>     Score :    %1   </source>
@@ -38,8 +38,16 @@ Ihre Punktezahl: %1</translation>
     </message>
     <message>
         <source>Press Any Key to Begin a New Game.</source>
-        <translation>Drücken Sie eine Taste, um ein neues
+        <translation type="obsolete">Drücken Sie eine Taste, um ein neues
 Spiel zu beginnen.</translation>
+    </message>
+    <message>
+        <source>Press any key to start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press any key to begin a new game.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

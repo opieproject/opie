@@ -7,7 +7,11 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>&lt;h1&gt;Alarm om %0&lt;/h1&gt;&lt;br&gt;</translation>
+        <translation type="obsolete">&lt;h1&gt;Alarm om %0&lt;/h1&gt;&lt;br&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation type="unfinished">&lt;h1&gt;Alarm om %1&lt;/h1&gt;&lt;br&gt;</translation>
     </message>
 </context>
 <context>
@@ -194,7 +198,7 @@ Toch stoppen?</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Kan data niet wijzigen tijdens synchronisatie</translation>
+        <translation type="obsolete">Kan data niet wijzigen tijdens synchronisatie</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -331,6 +335,14 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     <message>
         <source>Priority:</source>
         <translation>Prioriteit:</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

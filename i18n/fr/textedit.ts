@@ -157,7 +157,7 @@
     <message>
         <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
 from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>Voulez-vous réellement &lt;B&gt;effacer&lt;/b&gt; le fichier courant
+        <translation type="obsolete">Voulez-vous réellement &lt;B&gt;effacer&lt;/b&gt; le fichier courant
 du disque?&lt;br&gt; C&apos;est &lt;b&gt;irréversible!!&lt;/b&gt;</translation>
     </message>
     <message>
@@ -195,6 +195,15 @@ continuer et sauvegarder?</translation>
     <message>
         <source>Not enough lines</source>
         <translation>Pas assez de lignes</translation>
+    </message>
+    <message>
+        <source>%1 - Text Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

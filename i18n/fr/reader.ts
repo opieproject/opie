@@ -319,7 +319,7 @@ Leading</source>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Favoris</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -444,15 +444,15 @@ Leading</source>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Revenir</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Accueil</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avancer</translation>
     </message>
     <message>
         <source>Page Up</source>
@@ -724,15 +724,15 @@ Leading</source>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Revenir</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Accueil</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Avancer</translation>
     </message>
     <message>
         <source>Scrolling</source>
@@ -756,7 +756,7 @@ Leading</source>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Favoris</translation>
     </message>
     <message>
         <source>Reader</source>

@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation>Dieses Gerät gehört </translation>
+        <translation type="obsolete">Dieses Gerät gehört </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -25,6 +25,10 @@
         <source>Click here to launch the associated app</source>
         <translation>Hier klicken, um das entsprechende 
 Programm zu starten</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation>所有人</translation>
+        <translation type="obsolete">所有人</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -24,6 +24,10 @@
     <message>
         <source>Click here to launch the associated app</source>
         <translation>按此處啟動聯結的應用程式</translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

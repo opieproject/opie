@@ -176,11 +176,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source> As</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Could not move

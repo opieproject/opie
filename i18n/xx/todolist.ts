@@ -7,7 +7,11 @@
     </message>
     <message>
         <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %1&lt;/h1&gt;&lt;br&gt;</source>
+        <translation type="unfinished">FOO {1?} {1?} {1?}</translation>
     </message>
 </context>
 <context>
@@ -175,7 +179,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>all tasks?</source>
@@ -300,6 +304,14 @@ This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
         <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Data can not be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Data can&apos;t be edited, currently syncing</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -436,7 +448,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Notes:</source>
-        <translation>FOO</translation>
+        <translation type="obsolete">FOO</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>

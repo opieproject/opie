@@ -95,7 +95,11 @@
     </message>
     <message>
         <source>File does not exist !</source>
-        <translation>Filen eksisterer ikke!</translation>
+        <translation type="obsolete">Filen eksisterer ikke!</translation>
+    </message>
+    <message>
+        <source>File does not exist!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
