@@ -1,7 +1,8 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2003 Stefan Eilers (eilers.stefan@epost.de)
 **
-** This file is part of Qt Palmtop Environment.
+** This file is part of the Open Palmtop Environment (see www.opie.info).
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -13,8 +14,6 @@
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
-** OContact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
 **
 **********************************************************************/
 
@@ -113,12 +112,12 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	moveToolBar( listTools, m_config.getToolBarPos() );
 
 	// View Icons
-	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "addressbook/weeklst" ),
+	m_tableViewButton  = new QAction( tr( "List" ), Resource::loadPixmap( "addressbook/listview" ),
 					  QString::null, 0, this, 0 );
 	connect( m_tableViewButton, SIGNAL( activated() ), this, SLOT( slotListView() ) );
 	m_tableViewButton->setToggleAction( true );
 	m_tableViewButton->addTo( listTools );
-	m_cardViewButton = new QAction( tr( "Card" ), Resource::loadPixmap( "day" ),  QString::null, 0, this, 0 );
+	m_cardViewButton = new QAction( tr( "Card" ), Resource::loadPixmap( "addressbook/cardview" ),  QString::null, 0, this, 0 );
 	connect( m_cardViewButton, SIGNAL( activated() ), this, SLOT( slotCardView() ) );
 	m_cardViewButton->setToggleAction( true );
 	m_cardViewButton->addTo( listTools );
@@ -652,7 +651,9 @@ static void parseName( const QString& name, QString *first, QString *middle,
 
 void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 {
-	qWarning("Receiving QCop-Call with message %s", QString( msg ).latin1() );
+        bool needShow = FALSE;
+        qWarning("Receiving QCop-Call with message %s", QString( msg ).latin1() );
+
 
 	if (msg == "editPersonal()") {
 		editPersonal();
@@ -689,6 +690,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		QString description = "mycard.vcf";
 		ir->send( beamFilename, description, "text/x-vCard" );
 	} else if ( msg == "show(int)" ) {
+                raise();
 		QDataStream stream(data,IO_ReadOnly);
 		int uid;
 		stream >> uid;
@@ -705,9 +707,9 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setShowByCategory( QString::null );
 		m_abView -> setCurrentUid( uid );
 		slotViewSwitched ( AbView::CardView );
-		
-		showMaximized();
-		qApp->exec();
+
+	        needShow = true;
+
 
 	} else if ( msg == "edit(int)" ) {
 		QDataStream stream(data,IO_ReadOnly);
@@ -724,7 +726,10 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setShowByCategory( QString::null );
 		m_abView -> setCurrentUid( uid );
 		slotViewEdit();
-	} 
+	}
+
+        if (needShow)
+            QPEApplication::setKeepRunning();
 
 }
 
@@ -900,7 +905,7 @@ void AddressbookWindow::slotNotFound()
 {
 	qWarning("Got notfound signal!");
 	QMessageBox::information( this, tr( "Not Found" ),
-				  tr( "Unable to find a contact for this \n search pattern!" ) );
+				 "<qt>" + tr( "Unable to find a contact for this search pattern!" ) + "</qt>" );
 
 
 }
@@ -950,7 +955,7 @@ void AddressbookWindow::slotSetCategory( int c )
 				cat = QString::null;
 			}else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
-				qWarning ("Unfiled selected!!!");
+				qWarning ("Unfiled selected!");
 			}else{
 				cat = m_abView->categories()[i - 4];
 			}

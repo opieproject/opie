@@ -4,6 +4,7 @@
 
 #include <qpe/sound.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
 
 #include "opimresolver.h"
 #include "opimmainwindow.h"
@@ -38,30 +39,37 @@ void OPimMainWindow::doSetDocument( const QString&  ) {
 
 }
 void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) {
+    bool needShow = false;
     /*
      * create demands to create
      * a new record...
      */
     QDataStream stream(array, IO_ReadOnly);
     if ( cmd == "create()" ) {
+        raise();
         int uid = create();
         QCopEnvelope e(m_str, "created(int)" );
         e << uid;
+        needShow = true;
     }else if ( cmd == "remove(int)" ) {
         int uid;
         stream >> uid;
         bool rem = remove( uid );
         QCopEnvelope e(m_str, "removed(bool)" );
         e << rem;
+        needShow = true;
     }else if ( cmd == "beam(int)" ) {
         int uid;
         stream >> uid;
         beam( uid);
     }else if ( cmd == "show(int)" ) {
+        raise();
         int uid;
         stream >> uid;
         show( uid );
+        needShow = true;
     }else if ( cmd == "edit(int)" ) {
+        raise();
         int uid;
         stream >> uid;
         edit( uid );
@@ -75,6 +83,7 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         add( *m_fallBack );
         delete m_fallBack;
     }else if ( cmd == "alarm(QDateTime,int)" ) {
+        raise();
         QDateTime dt; int uid;
         stream >> dt;
         stream >> uid;
@@ -83,8 +92,11 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         if ( current.time().hour() != dt.time().hour() && current.time().minute() != dt.time().minute() )
             return;
         doAlarm( dt,  uid );
-
+        needShow = true;
     }
+
+    if (needShow )
+        QPEApplication::setKeepRunning();
 }
 /* implement the url scripting here */
 void OPimMainWindow::setDocument( const QString& str) {

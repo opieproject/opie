@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.6 2003-07-07 16:19:47 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.cpp,v 1.7 2003-08-01 12:30:16 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.cpp,v $
- * Revision 1.6  2003-07-07 16:19:47  eilers
+ * Revision 1.7  2003-08-01 12:30:16  eilers
+ * Merging changes from BRANCH_1_0 to HEAD
+ *
+ * Revision 1.6  2003/07/07 16:19:47  eilers
  * Fixing serious bug in hasQuerySettings()
  *
  * Revision 1.5  2003/04/13 18:07:10  zecke

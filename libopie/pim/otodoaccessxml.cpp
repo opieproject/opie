@@ -87,7 +87,7 @@ bool OTodoAccessXML::load() {
     /*
      * UPDATE dict if you change anything!!!
      */
-    QAsciiDict<int> dict(21);
+    QAsciiDict<int> dict(26);
     dict.setAutoDelete( TRUE );
     dict.insert("Categories" ,     new int(OTodo::Category)         );
     dict.insert("Uid" ,            new int(OTodo::Uid)              );
@@ -836,10 +836,12 @@ QArray<int> OTodoAccessXML::sorted( bool asc,  int sortOrder,
     return array;
 };
 void OTodoAccessXML::removeAllCompleted() {
+    QMap<int, OTodo> events = m_events;
     for ( QMap<int, OTodo>::Iterator it = m_events.begin(); it != m_events.end(); ++it ) {
         if ( (*it).isCompleted() )
-            m_events.remove( it );
+            events.remove( it.key() );
     }
+    m_events = events;
 }
 QBitArray OTodoAccessXML::supports()const {
     static QBitArray ar = sup();

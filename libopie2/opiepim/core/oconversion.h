@@ -37,6 +37,11 @@ public:
      */
     static QString dateTimeToString( const QDateTime& );
     static QDateTime dateTimeFromString( const QString& );
+    
+private:
+    class Private;
+    Private* d;    
+    
 };
 
 #endif // __oconversion_h__

@@ -12,11 +12,19 @@
  * =====================================================================
  * ToDo: Use plugins
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.6 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: obackendfactory.h,v 1.7 2003-08-01 12:30:16 eilers Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.6  2003-04-13 18:07:10  zecke
+ * Revision 1.7  2003-08-01 12:30:16  eilers
+ * Merging changes from BRANCH_1_0 to HEAD
+ *
+ * Revision 1.6.4.1  2003/06/30 14:34:19  eilers
+ * Patches from Zecke:
+ * Fixing and cleaning up extraMap handling
+ * Adding d_ptr for binary compatibility in the future
+ *
+ * Revision 1.6  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null
@@ -67,6 +75,8 @@
 #ifdef __USE_SQL
 #include "otodoaccesssql.h"
 #endif
+
+class OBackendPrivate;
 
 /**
  * This class is our factory. It will give us the default implementations
@@ -148,6 +158,8 @@ class OBackendFactory
 
 
 	}
+    private:
+	OBackendPrivate* d;
 };
 
 

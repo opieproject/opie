@@ -28,6 +28,11 @@ struct OTodo::OTodoData : public QShared {
         maintainer = 0;
         notifiers = 0;
     };
+    ~OTodoData() {
+        delete recur;
+        delete maintainer;
+        delete notifiers;
+    }
 
     QDate date;
     bool isCompleted:1;
@@ -274,7 +279,7 @@ QString OTodo::toRichText() const
   QStringList catlist;
 
   // summary
-  text += "<b><h3><img src=\"todo/TodoList\">";
+  text += "<b><h3><img src=\"todo/TodoList\"> ";
   if ( !summary().isEmpty() ) {
       text += Qtopia::escapeString(summary() ).replace(QRegExp( "[\n]"),  "" );
   }
@@ -282,16 +287,15 @@ QString OTodo::toRichText() const
 
   // description
   if( !description().isEmpty() ){
-    text += "<b>" + QObject::tr( "Description:" ) + "</b><br>";
-    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) ;
+    text += "<b>" + QObject::tr( "Notes:" ) + "</b><br>";
+    text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"), "<br>" ) + "<br>";
   }
 
   // priority
   int priorityval = priority();
   text += "<b>" + QObject::tr( "Priority:") +" </b><img src=\"todo/priority" +
-          QString::number( priorityval ) + "\">";
-//  text += "<b>" + QObject::tr( "Priority:") +"</b><img src=\"todo/priority" +
-//          QString::number( priority() ) + "\"><br>";
+          QString::number( priorityval ) + "\"> ";
+
   switch ( priorityval )
   {
     case 1 : text += QObject::tr( "Very high" );

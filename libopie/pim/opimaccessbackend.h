@@ -7,6 +7,7 @@
 #include <opie/opimrecord.h>
 
 
+class OPimAccessBackendPrivate;
 /**
  * OPimAccessBackend is the base class
  * for all private backends
@@ -107,8 +108,7 @@ protected:
     uint readAhead()const;
 
 private:
-    class Private;
-    Private* d;
+    OPimAccessBackendPrivate *d;
     Frontend* m_front;
     uint m_read;
     int m_acc;

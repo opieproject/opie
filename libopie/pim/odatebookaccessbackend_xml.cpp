@@ -430,9 +430,9 @@ bool ODateBookAccessBackend_XML::loadFile() {
              */
             find = dict[attr.data()];
             if (!find)
-                ev.setCustomField( attr, value );
+                ev.setCustomField( attr, str );
             else {
-                setField( ev, *find, value );
+                setField( ev, *find, str );
             }
         }
         /* time to finalize */
@@ -453,7 +453,7 @@ void ODateBookAccessBackend_XML::finalizeRecord( OEvent& ev ) {
         ev.setTimeZone( "UTC"); // make sure it is really utc
     }else {
         /* to current date time */
-        qWarning(" Start is %d", start );
+        // qWarning(" Start is %d", start );
         OTimeZone zone( ev.timeZone().isEmpty() ? OTimeZone::current() : ev.timeZone() );
         QDateTime date = zone.toDateTime( start );
         qWarning(" Start is %s", date.toString().latin1() );

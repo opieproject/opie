@@ -7,6 +7,7 @@
 #include "otemplatebase.h"
 #include "opimrecord.h"
 
+class ORecordListIteratorPrivate;
 /**
  * Our List Iterator
  * it behaves like STL or Qt
@@ -71,9 +72,10 @@ private:
     bool m_direction :1;
 
     /* d pointer for future versions */
-    class IteratorPrivate;
-    IteratorPrivate *d;
+    ORecordListIteratorPrivate *d;
 };
+
+class ORecordListPrivate;
 /**
  * The recordlist used as a return type
  * from OPimAccessTemplate
@@ -111,7 +113,7 @@ ORecordList( const QArray<int>& ids,
     T operator[]( uint i );
     int uidAt(uint i );
 
-   /** 
+   /**
     * Remove the contact with given uid
     */
     bool remove( int uid );
@@ -123,6 +125,7 @@ ORecordList( const QArray<int>& ids,
 private:
     QArray<int> m_ids;
     const Base* m_acc;
+    ORecordListPrivate *d;
 };
 
 /* ok now implement it  */
@@ -220,6 +223,9 @@ ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
     : m_uids( uids ), m_current( 0 ),  m_temp( t ), m_end( false ),
       m_direction( false )
 {
+    /* if the list is empty we're already at the end of the list */
+    if (uids.count() == 0 )
+        m_end = true;
 }
 template <class T>
 uint ORecordListIterator<T>::current()const {

@@ -10,6 +10,7 @@
 #include "opimcache.h"
 #include "otemplatebase.h"
 
+class OPimAccessTemplatePrivate;
 /**
  * Thats the frontend to our OPIE PIM
  * Library. Either you want to use it's
@@ -151,6 +152,9 @@ protected:
     BackEnd* backEnd();
     BackEnd* m_backEnd;
     Cache m_cache;
+
+private:
+    OPimAccessTemplatePrivate *d;
 
 };
 

@@ -15,12 +15,20 @@ namespace {
         // description
         if( ( ob = isAPropertyOf( obj, VCDescriptionProp )) != 0 ){
             name = vObjectStringZValue( ob );
+#if 0
             event.setDescription( name );
+#else
+            event.setSummary( name );
+#endif
         }
         // summary
         if ( ( ob = isAPropertyOf( obj,  VCSummaryProp ) ) != 0 ) {
             name = vObjectStringZValue( ob );
+#if 0
             event.setSummary( name );
+#else
+            event.setDescription( name );
+#endif
         }
         // completed
         if( ( ob = isAPropertyOf( obj, VCStatusProp )) != 0 ){
@@ -74,11 +82,27 @@ namespace {
         addPropValue( task, VCCategoriesProp,
                       event.idsToString( event.categories() ).local8Bit() );
 
+#if 0
+
+	// There seems a misrepresentation between summary in otodoevent
+	// and summary in vcard. 
+	// The same with description..
+	// Description is summary and vice versa.. Argh.. (eilers)
+
+
         addPropValue( task, VCDescriptionProp,
                       event.description().local8Bit() );
 
         addPropValue( task, VCSummaryProp,
                       event.summary().local8Bit() );
+
+#else
+        addPropValue( task, VCDescriptionProp,
+                      event.summary().local8Bit() );
+
+        addPropValue( task, VCSummaryProp,
+                      event.description().local8Bit() );
+#endif 
   return task;
 };
 }
@@ -185,7 +209,7 @@ QArray<int> OTodoAccessVCal::allRecords()const {
     }
     return ar;
 }
-QArray<int> OTodoAccessVCal::matchRegexp(const QRegExp &r)const {
+QArray<int> OTodoAccessVCal::matchRegexp(const QRegExp& /* r */)const {
     QArray<int> ar(0);
     return ar;
 }

@@ -13,11 +13,26 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.10 2003-04-13 18:07:10 zecke Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.11 2003-08-01 12:30:16 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.10  2003-04-13 18:07:10  zecke
+ * Revision 1.11  2003-08-01 12:30:16  eilers
+ * Merging changes from BRANCH_1_0 to HEAD
+ *
+ * Revision 1.10.4.3  2003/07/23 08:54:37  eilers
+ * Default email was added to the list of all emails, which already contains
+ * the default email..
+ * This closes bug #1045
+ *
+ * Revision 1.10.4.2  2003/07/23 08:44:45  eilers
+ * Importing of Notes in vcard files wasn't implemented.
+ * Closes bug #1044
+ *
+ * Revision 1.10.4.1  2003/06/02 13:37:49  eilers
+ * Fixing memory leak
+ *
+ * Revision 1.10  2003/04/13 18:07:10  zecke
  * More API doc
  * QString -> const QString&
  * QString = 0l -> QString::null
@@ -151,6 +166,7 @@ bool OContactAccessBackend_VCard::save()
 		cleanVObject( vo );
 	}
 	cleanStrTbl();
+	deleteVObject( obj );
 
 	m_dirty = false;
 	return true;
@@ -446,7 +462,9 @@ OContact OContactAccessBackend_VCard::parseVObject( VObject *obj )
 			c.setBirthday( convVCardDateToDate( value ) );
 
 		}
-
+		else if ( name == VCCommentProp ) {
+			c.setNotes( value );
+		}
 #if 0
 		else {
 			printf("Name: %s, value=%s\n", name.data(), vObjectStringZValue( o ) );
@@ -534,7 +552,7 @@ VObject* OContactAccessBackend_VCard::createVObject( const OContact &c )
 
 
 	QStringList emails = c.emailList();
-	emails.prepend( c.defaultEmail() );
+	// emails.prepend( c.defaultEmail() ); Fix for bugreport #1045
 	for( QStringList::Iterator it = emails.begin(); it != emails.end(); ++it ) {
 		VObject *email = safeAddPropValue( vcard, VCEmailAddressProp, *it );
 		safeAddProp( email, VCInternetProp );

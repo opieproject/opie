@@ -36,6 +36,8 @@ public:
 
 private:
     OPimXRef::ValueList m_list;
+    class Private;
+    Private *d;
 };
 
 #endif

@@ -32,7 +32,7 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 // MOC_SKIP_END
 #endif
 
-class ContactPrivate;
+class OContactPrivate;
 
 /**
  * OContact class represents a specialised PIM Record for contacts.
@@ -48,6 +48,11 @@ public:
     OContact();
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
+
+    enum DateFormat{
+	    Zip_City_State = 0,
+	    City_State_Zip
+    };
 
     /*
      * do we need to inline them
@@ -233,7 +238,7 @@ private:
 			    const QString &country ) const;
 
     QMap<int, QString> mMap;
-    ContactPrivate *d;
+    OContactPrivate *d;
 };
 
 
