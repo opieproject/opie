@@ -113,7 +113,7 @@ ved opvågning?
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Afkryds feltet for at aktivere/deaktivere et plugin eller brug piletasterne til højre for at ændre rækkefølgen de bliver vist</translation>
     </message>
 </context>
 </TS>
