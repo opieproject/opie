@@ -11,6 +11,7 @@
 #include <qpushbutton.h>
 #include <qvbox.h>
 #include <qwhatsthis.h>
+#include <qcombobox.h>
 
 
 #include <qpe/config.h>
@@ -107,15 +108,25 @@ void MediumMountWidget::initGUI()
   m_lblPath = new QLabel(tr("Limit search to:"), this );
   m_box->addWidget( m_lblPath );
 
-  // add to
+  
+  m_subList = new QComboBox(FALSE,this,"docFolderList");
+  m_subList->setDuplicatesEnabled(FALSE);
+  m_subList->setEditable(TRUE);
+  m_box->addWidget(m_subList);
+
   m_hboxAdd = new QHBox( this );
-  //m_hboxAdd->setSpacing( 10 );
-  m_edit = new QLineEdit(m_hboxAdd );
   m_add = new QPushButton(m_hboxAdd );
   m_add->setText( tr("Add") );
+  m_del = new QPushButton(m_hboxAdd);
+  m_del->setText(tr("Remove"));
+  
+  connect(m_add, SIGNAL(clicked() ),
+    this, SLOT(slotAdd() ) );
+  connect(m_del, SIGNAL(clicked() ),
+    this, SLOT(slotRemove() ) );
 
   m_box->addWidget(m_hboxAdd );
-
+  
   m_always = new QCheckBox( tr("Always check this medium"), this );
 
   m_box->addWidget( m_always );
@@ -154,6 +165,10 @@ void MediumMountWidget::readConfig( )
     m_text->setChecked ( m_config->readBoolEntry("text" , true ) );
     m_video->setChecked( m_config->readBoolEntry("video", true ) );
   };
+  m_config->setGroup("subdirs");
+  QStringList entries = m_config->readListEntry("subdirs",':');
+  m_subList->clear();
+  m_subList->insertStringList(entries);
 }
 
 void MediumMountWidget::writeConfig()
@@ -170,6 +185,19 @@ void MediumMountWidget::writeConfig()
     m_config->writeEntry("text" , m_text->isChecked()  );
     m_config->writeEntry("video", m_video->isChecked() );
   }
+  m_config->setGroup("subdirs");
+  QStringList entries;
+  QString ctext;
+  for (int i = 0; i < m_subList->count();++i) {
+      ctext = m_subList->text(i);
+      if (ctext.isEmpty())
+          continue;
+      if (ctext.startsWith("/")&&ctext.length()>1) {
+          ctext = ctext.right(ctext.length()-1);
+      }
+      entries.append(ctext);
+  }
+  m_config->writeEntry("subdirs",entries,':');
 }
 MediumMountWidget::~MediumMountWidget()
 {
@@ -178,8 +206,21 @@ MediumMountWidget::~MediumMountWidget()
 
 void MediumMountWidget::slotAdd()
 {
-
+    if (m_subList->currentText()==m_subList->text(m_subList->currentItem()))
+        return;
+    m_subList->insertItem(m_subList->currentText());
 }
+
+void MediumMountWidget::slotRemove()
+{
+    QString text = m_subList->currentText();
+    if (text != m_subList->text(m_subList->currentItem())) {
+        m_subList->clearEdit ();
+    } else {
+        m_subList->removeItem(m_subList->currentItem());
+    }
+}
+
 void MediumMountWidget::slotStateChanged()
 {
   bool state = !(m_all->isChecked());

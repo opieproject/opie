@@ -18,6 +18,7 @@ class QGroupBox;
 class QVBox;
 class QHBox;
 class QLineEdit;
+class QComboBox;
 
 namespace MediumMountSetting {
 
@@ -32,6 +33,7 @@ namespace MediumMountSetting {
     
   private slots:
     void slotAdd();
+    void slotRemove();
     void slotStateChanged();
 
   private:
@@ -51,8 +53,9 @@ namespace MediumMountSetting {
     QLabel *m_label;
     QLabel *m_desc;
 
-    QLineEdit *m_edit;
     QPushButton *m_add;
+    QComboBox *m_subList;
+    QPushButton *m_del;
 
     QVBoxLayout *m_box;
     QGridLayout *m_checks;
