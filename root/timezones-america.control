@@ -1,4 +1,4 @@
-Package: timezones
+Package: timezones-america
 Files: root/usr/share/zoneinfo/America
 Priority: optional
 Section: base
