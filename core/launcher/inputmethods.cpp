@@ -23,8 +23,9 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
-#include <qtopia/config.h>
-#include <qtopia/qpeapplication.h>
+#include <qpe/config.h>
+#include <qpe/global.h>
+#include <qpe/qpeapplication.h>
 using namespace Opie::Core;
 
 /* QT */
