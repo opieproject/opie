@@ -238,9 +238,6 @@ void Zaurus::initButtons()
     if ( d->m_buttons )
         return;
 
-    if ( isQWS( ) ) {
-        addPreHandler(this);
-    }
 
     d->m_buttons = new QValueList <ODeviceButton>;
 
@@ -249,6 +246,9 @@ void Zaurus::initButtons()
     switch ( d->m_model ) {
         case Model_Zaurus_SLC3000: // fallthrough
         case Model_Zaurus_SLC7x0:
+            if ( isQWS( ) ) {
+                addPreHandler(this); // hinge-sensor-handler
+            }
             pz_buttons = z_buttons_c700;
             buttoncount = ARRAY_SIZE(z_buttons_c700);
             break;
@@ -603,13 +603,9 @@ OHingeStatus Zaurus::readHingeSensor() const
  */
 bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, bool autoRepeat )
 {
-    Transformation rot;
     int newkeycode = keycode;
 
-
     if (d->m_model!=Model_Zaurus_SLC3000 && d->m_model!=Model_Zaurus_SLC7x0) return false;
-    rot = rotation();
-    if (rot==Rot0) return false;
 
     /* map cursor keys depending on the hinge status */
     switch ( keycode ) {
@@ -619,7 +615,7 @@ bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress,
         case Key_Up   :
         case Key_Down :
         {
-            if (rot==Rot90) {
+            if (rotation()==Rot90) {
                 newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
             }
         }
@@ -634,3 +630,4 @@ bool Zaurus::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress,
     }
     return false;
 }
+
