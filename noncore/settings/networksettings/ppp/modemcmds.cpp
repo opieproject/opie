@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.cpp,v 1.3.2.5 2003-07-30 20:31:12 tille Exp $
+ * $Id: modemcmds.cpp,v 1.3.2.6 2003-07-31 11:59:20 tille Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -30,7 +30,6 @@
 #include <qscrollview.h>
 #include <qapplication.h>
 #include <stdlib.h>
-#define i18n QObject::tr
 #include "modemcmds.h"
 #include "pppdata.h"
 
@@ -42,7 +41,7 @@
 ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bool modal, WFlags f)
     : QDialog( parent, name, modal,  f ), _pppdata(pd)
 {
-    setCaption(i18n("Edit Modem Commands"));
+    setCaption(QObject::tr("Edit Modem Commands"));
 
   const int GRIDROWS = 22;
   int row = 0;
@@ -82,12 +81,12 @@ ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bo
   l2->addWidget(lpreinitslider, 0);
   l2->addWidget(preinitslider, 1);
 
-  lpreinit = new QLabel(i18n("Pre-init delay (sec/100):"), mainW);
+  lpreinit = new QLabel(QObject::tr("Pre-init delay (sec/100):"), mainW);
   l1->addWidget(lpreinit, row++, 1);
 
   for(int i = 0; i < PPPData::NumInitStrings; i++) {
       initstr[i] = new QLineEdit(mainW);
-      QLabel *initLabel = new QLabel(i18n("Initialization string %1:").arg(i + 1),
+      QLabel *initLabel = new QLabel(QObject::tr("Initialization string %1:").arg(i + 1),
 				    mainW);
       ADJUSTEDIT(initstr[i]);
       l1->addWidget(initLabel, row, 1);
@@ -106,7 +105,7 @@ ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bo
   l3->addWidget(linitslider, 0);
   l3->addWidget(initslider, 1);
 
-  label3 = new QLabel(i18n("Post-init delay (sec/100):"), mainW);
+  label3 = new QLabel(QObject::tr("Post-init delay (sec/100):"), mainW);
   l1->addWidget(label3, row++, 1);
 
   /* Set ATS11 (Dial tone duration) between 0-255 (Default ~ 70) */
@@ -122,90 +121,90 @@ ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bo
   l4->addWidget(ldurationslider, 0);
   l4->addWidget(durationslider, 1);
 
-  lduration = new QLabel(i18n("Dialing speed (sec/100):"), mainW);
+  lduration = new QLabel(QObject::tr("Dialing speed (sec/100):"), mainW);
   l1->addWidget(lduration, row++, 1);
 
 
   initresp = new QLineEdit(mainW);
-  label2 = new QLabel(i18n("Init response:"), mainW);
+  label2 = new QLabel(QObject::tr("Init response:"), mainW);
   ADJUSTEDIT(initresp);
   l1->addWidget(label2, row, 1);
   l1->addWidget(initresp, row++, 2);
 
   nodetectdialtone = new QLineEdit(mainW);
-  lnodetectdialtone = new QLabel(i18n("No dial tone detection:"), mainW);
+  lnodetectdialtone = new QLabel(QObject::tr("No dial tone detection:"), mainW);
   ADJUSTEDIT(nodetectdialtone);
   l1->addWidget(lnodetectdialtone, row, 1);
   l1->addWidget(nodetectdialtone, row++, 2);
 
   dialstr = new QLineEdit(mainW);
-  label4 = new QLabel(i18n("Dial string:"),mainW);
+  label4 = new QLabel(QObject::tr("Dial string:"),mainW);
   ADJUSTEDIT(dialstr);
   l1->addWidget(label4, row, 1);
   l1->addWidget(dialstr, row++, 2);
 
   connectresp = new QLineEdit(mainW);
-  label5 = new QLabel(i18n("Connect response:"), mainW);
+  label5 = new QLabel(QObject::tr("Connect response:"), mainW);
   ADJUSTEDIT(connectresp);
   l1->addWidget(label5, row, 1);
   l1->addWidget(connectresp, row++, 2);
 
   busyresp = new QLineEdit(mainW);
-  label6 = new QLabel(i18n("Busy response:"), mainW);
+  label6 = new QLabel(QObject::tr("Busy response:"), mainW);
   ADJUSTEDIT(busyresp);
   l1->addWidget(label6, row, 1);
   l1->addWidget(busyresp, row++, 2);
 
   nocarrierresp = new QLineEdit(mainW);
-  label7 = new QLabel(i18n("No carrier response:"), mainW);
+  label7 = new QLabel(QObject::tr("No carrier response:"), mainW);
   ADJUSTEDIT(nocarrierresp);
   l1->addWidget(label7, row, 1);
   l1->addWidget(nocarrierresp, row++, 2);
 
   nodialtoneresp = new QLineEdit(mainW);
-  label8 = new QLabel(i18n("No dial tone response:"), mainW);
+  label8 = new QLabel(QObject::tr("No dial tone response:"), mainW);
   ADJUSTEDIT(nodialtoneresp);
   l1->addWidget(label8, row, 1);
   l1->addWidget(nodialtoneresp, row++, 2);
 
   hangupstr = new QLineEdit(mainW);
-  label9 = new QLabel(i18n("Hangup string:"), mainW);
+  label9 = new QLabel(QObject::tr("Hangup string:"), mainW);
   ADJUSTEDIT(hangupstr);
   l1->addWidget(label9, row, 1);
   l1->addWidget(hangupstr, row++, 2);
 
   hangupresp = new QLineEdit(mainW);
-  label10 = new QLabel(i18n("Hangup response:"), mainW);
+  label10 = new QLabel(QObject::tr("Hangup response:"), mainW);
   ADJUSTEDIT(hangupresp);
   l1->addWidget(label10, row, 1);
   l1->addWidget(hangupresp, row++, 2);
 
   answerstr = new QLineEdit(mainW);
-  label11 = new QLabel(i18n("Answer string:"), mainW);
+  label11 = new QLabel(QObject::tr("Answer string:"), mainW);
   ADJUSTEDIT(answerstr);
   l1->addWidget(label11, row, 1);
   l1->addWidget(answerstr, row++, 2);
 
   ringresp = new QLineEdit(mainW);
-  label12 = new QLabel(i18n("Ring response:"), mainW);
+  label12 = new QLabel(QObject::tr("Ring response:"), mainW);
   ADJUSTEDIT(ringresp);
   l1->addWidget(label12, row, 1);
   l1->addWidget(ringresp, row++, 2);
 
   answerresp = new QLineEdit(mainW);
-  label13 = new QLabel(i18n("Answer response:"), mainW);
+  label13 = new QLabel(QObject::tr("Answer response:"), mainW);
   ADJUSTEDIT(answerresp);
   l1->addWidget(label13, row, 1);
   l1->addWidget(answerresp, row++, 2);
 
   escapestr = new QLineEdit(mainW);
-  label14 = new QLabel(i18n("Escape string:"), mainW);
+  label14 = new QLabel(QObject::tr("Escape string:"), mainW);
   ADJUSTEDIT(escapestr);
   l1->addWidget(label14, row, 1);
   l1->addWidget(escapestr, row++, 2);
 
   escaperesp = new QLineEdit(mainW);
-  label15 = new QLabel(i18n("Escape response:"), mainW);
+  label15 = new QLabel(QObject::tr("Escape response:"), mainW);
   ADJUSTEDIT(escaperesp);
   l1->addWidget(label15, row, 1);
   l1->addWidget(escaperesp, row++, 2);
@@ -223,10 +222,10 @@ ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bo
   l5->addWidget(lslider, 0);
   l5->addWidget(slider, 1);
 
-  label16 = new QLabel(i18n("Guard time (sec/50):"), mainW);
+  label16 = new QLabel(QObject::tr("Guard time (sec/50):"), mainW);
   l1->addWidget(label16, row++, 1);
 
-  QLabel *l = new QLabel(i18n("Volume off/low/high:"), mainW);
+  QLabel *l = new QLabel(QObject::tr("Volume off/low/high:"), mainW);
   l1->addWidget(l, row, 1);
   QHBoxLayout *l6 = new QHBoxLayout;
   l1->addLayout(l6, row++, 2);

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.4.2.7 2003-07-31 11:48:34 tille Exp $
+ * $Id: general.cpp,v 1.4.2.8 2003-07-31 11:59:20 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -47,7 +47,7 @@
 //#include "devices.h"
 #include "pppdata.h"
 //#include <klocale.h>
-#define i18n QObject::tr
+
 
 
 
@@ -60,7 +60,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
 
   QLabel *label1;
 
-  label1 = new QLabel(i18n("Modem &name:"), this);
+  label1 = new QLabel(tr("Modem &name:"), this);
   tl->addWidget(label1, 0, 0);
 
   modemname = new QLineEdit(this, "modemName");
@@ -68,7 +68,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   label1->setBuddy(modemname);
   tl->addWidget(modemname, 0, 1);
 
-  label1 = new QLabel(i18n("Modem de&vice:"), this);
+  label1 = new QLabel(tr("Modem de&vice:"), this);
   tl->addWidget(label1, 1, 0);
 
   modemdevice = new QComboBox(false, this);
@@ -89,7 +89,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
 //   connect(modemdevice, SIGNAL(textChanged( const QString & ) ),
 //           SLOT( setmodemdc( const QString &) ) );
 
-  QString tmp = i18n("This specifies the serial port your modem is attached \n"
+  QString tmp = tr("This specifies the serial port your modem is attached \n"
 		     "to. On Linux/x86, typically this is either /dev/ttyS0 \n"
 		     "(COM1 under DOS) or /dev/ttyS1 (COM2 under DOS).\n"
 		     "\n"
@@ -101,19 +101,19 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   QWhatsThis::add(modemdevice,tmp);
 
 
-  label1 = new QLabel(i18n("&Flow control:"), this);
+  label1 = new QLabel(tr("&Flow control:"), this);
   tl->addWidget(label1, 2, 0);
 
   flowcontrol = new QComboBox(false, this);
   label1->setBuddy(flowcontrol);
-  flowcontrol->insertItem(i18n("Hardware [CRTSCTS]"));
-  flowcontrol->insertItem(i18n("Software [XON/XOFF]"));
-  flowcontrol->insertItem(i18n("None"));
+  flowcontrol->insertItem(tr("Hardware [CRTSCTS]"));
+  flowcontrol->insertItem(tr("Software [XON/XOFF]"));
+  flowcontrol->insertItem(tr("None"));
   tl->addWidget(flowcontrol, 2, 1);
 //   connect(flowcontrol, SIGNAL(activated(int)),
 // 	  SLOT(setflowcontrol(int)));
 
-  tmp = i18n("<p>Specifies how the serial port and modem\n"
+  tmp = tr("<p>Specifies how the serial port and modem\n"
 	     "communicate. You should not change this unless\n"
 	     "you know what you are doing.\n"
 	     "\n"
@@ -122,7 +122,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   QWhatsThis::add(label1,tmp);
   QWhatsThis::add(flowcontrol,tmp);
 
-  QLabel *labelenter = new QLabel(i18n("&Line termination:"), this);
+  QLabel *labelenter = new QLabel(tr("&Line termination:"), this);
   tl->addWidget(labelenter, 3, 0);
 
   enter = new QComboBox(false, this);
@@ -132,7 +132,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   enter->insertItem("CR/LF");
   tl->addWidget(enter, 3, 1);
 //  connect(enter, SIGNAL(activated(int)), SLOT(setenter(int)));
-  tmp = i18n("<p>Specifies how AT commands are sent to your\n"
+  tmp = tr("<p>Specifies how AT commands are sent to your\n"
 	     "modem. Most modems will work fine with the\n"
 	     "default <i>CR/LF</i>. If your modem does not react\n"
 	     "to the init string, you should try different\n"
@@ -143,7 +143,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   QWhatsThis::add(labelenter,tmp);
   QWhatsThis::add(enter, tmp);
 
-  QLabel *baud_label = new QLabel(i18n("Co&nnection speed:"), this);
+  QLabel *baud_label = new QLabel(tr("Co&nnection speed:"), this);
   tl->addWidget(baud_label, 4, 0);
   baud_c = new QComboBox(this);
   baud_label->setBuddy(baud_c);
@@ -180,7 +180,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
 // 	  this, SLOT(speed_selection(int)));
   tl->addWidget(baud_c, 4, 1);
 
-  tmp = i18n("Specifies the speed your modem and the serial\n"
+  tmp = tr("Specifies the speed your modem and the serial\n"
 	     "port talk to each other. You should begin with\n"
 	     "the default of 38400 bits/sec. If everything\n"
 	     "works you can try to increase this value, but to\n"
@@ -198,7 +198,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   tl->addRowSpacing(5, 10);
 
   //Modem Lock File
-  modemlockfile = new QCheckBox(i18n("&Use lock file"), this);
+  modemlockfile = new QCheckBox(tr("&Use lock file"), this);
 
   modemlockfile->setChecked(_pppdata->modemLockFile());
 //   connect(modemlockfile, SIGNAL(toggled(bool)),
@@ -206,7 +206,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   tl->addMultiCellWidget(modemlockfile, 6, 6, 0, 1);
   //  l12->addStretch(1);
   QWhatsThis::add(modemlockfile,
-		  i18n("<p>To prevent other programs from accessing the\n"
+		  tr("<p>To prevent other programs from accessing the\n"
 		       "modem while a connection is established, a\n"
 		       "file can be created to indicate that the modem\n"
 		       "is in use. On Linux an example file would be\n"
@@ -221,9 +221,9 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   QLabel *timeoutlabel = new QLabel( tr("Modem timeout:") ,this, "timeout" );
   modemtimeout = new QSpinBox( 1, 120, 1, this, "modemTimeout" );
 //   modemtimeout = new KIntNumInput(_pppdata->modemTimeout(), this);
-//   modemtimeout->setLabel(i18n("Modem &timeout:"));
+//   modemtimeout->setLabel(tr("Modem &timeout:"));
 //  modemtimeout->setRange(1, 120, 1);
-  modemtimeout->setSuffix(i18n(" sec"));
+  modemtimeout->setSuffix(tr(" sec"));
   modemtimeout->setValue( _pppdata->modemTimeout() );
 //   connect(modemtimeout, SIGNAL(valueChanged(int)),
 // 	  SLOT(modemtimeoutchanged(int)));
@@ -232,7 +232,7 @@ ModemWidget::ModemWidget( PPPData *pd, QWidget *parent, const char *name )
   tl->addMultiCellLayout(timeoutLayout, 7, 7, 0, 1);
 
   QWhatsThis::add(modemtimeout,
-                  i18n("This specifies how long <i>kppp</i> waits for a\n"
+                  tr("This specifies how long <i>kppp</i> waits for a\n"
                        "<i>CONNECT</i> response from your modem. The\n"
                        "recommended value is 30 seconds."));
 
@@ -348,12 +348,12 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
     QVBoxLayout *l1 = new QVBoxLayout(this, 0 );//, KDialog::spacingHint());
 
 
-  waitfordt = new QCheckBox(i18n("&Wait for dial tone before dialing"), this);
+  waitfordt = new QCheckBox(tr("&Wait for dial tone before dialing"), this);
   waitfordt->setChecked(_pppdata->waitForDialTone());
 //  connect(waitfordt, SIGNAL(toggled(bool)), SLOT(waitfordtchanged(bool)));
   l1->addWidget(waitfordt);
   QWhatsThis::add(waitfordt,
-		  i18n("<p>Normally the modem waits for a dial tone\n"
+		  tr("<p>Normally the modem waits for a dial tone\n"
 		       "from your phone line, indicating that it can\n"
 		       "start to dial a number. If your modem does not\n"
 		       "recognize this sound, or your local phone system\n"
@@ -365,16 +365,16 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
   QLabel *waitLabel = new QLabel( tr("Busy wait:"), this, "busyWait" );
   busywait = new QSpinBox( 0, 300, 5, this, "busyWait" );
 //   busywait = new KIntNumInput(_pppdata->busyWait(), this);
-//   busywait->setLabel(i18n("B&usy wait:"));
+//   busywait->setLabel(tr("B&usy wait:"));
 //   busywait->setRange(0, 300, 5, true);
-   busywait->setSuffix(i18n(" sec"));
+   busywait->setSuffix(tr(" sec"));
 //  connect(busywait, SIGNAL(valueChanged(int)), SLOT(busywaitchanged(int)));
   waitLayout->addWidget(waitLabel);
   waitLayout->addWidget(busywait);
   l1->addLayout( waitLayout );
 
   QWhatsThis::add(busywait,
-                  i18n("Specifies the number of seconds to wait before\n"
+                  tr("Specifies the number of seconds to wait before\n"
                        "redial if all dialed numbers are busy. This is\n"
                        "necessary because some modems get stuck if the\n"
                        "same number is busy too often.\n"
@@ -387,7 +387,7 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
   QHBoxLayout *hbl = new QHBoxLayout;
   hbl->setSpacing(2);//KDialog::spacingHint());
 
-  QLabel *volumeLabel = new QLabel(i18n("Modem &volume:"), this);
+  QLabel *volumeLabel = new QLabel(tr("Modem &volume:"), this);
   hbl->addWidget(volumeLabel);
   volume = new QSlider(0, 2, 1, _pppdata->volume(),
                        QSlider::Horizontal, this);
@@ -399,7 +399,7 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
 
 //   connect(volume, SIGNAL(valueChanged(int)),
 // 	  this, SLOT(volumeChanged(int)));
-  QString tmp = i18n("Most modems have a speaker which makes\n"
+  QString tmp = tr("Most modems have a speaker which makes\n"
 	     "a lot of noise when dialing. Here you can\n"
 	     "either turn this completely off or select a\n"
 	     "lower volume.\n"
@@ -413,7 +413,7 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
   l1->addSpacing(20);
 
 #if 0
-  chkbox1 = new QCheckBox(i18n("Modem asserts CD line"), this);
+  chkbox1 = new QCheckBox(tr("Modem asserts CD line"), this);
   chkbox1->setChecked(_pppdata->UseCDLine());
   connect(chkbox1,SIGNAL(toggled(bool)),
 	  this,SLOT(use_cdline_toggled(bool)));
@@ -421,30 +421,30 @@ ModemWidget2::ModemWidget2( PPPData *pd, InterfacePPP *ip, QWidget *parent,
   l12->addStretch(1);
   l1->addStretch(1);
   QWhatsThis::add(chkbox1,
-		  i18n("This controls how <i>kppp</i> detects that the modem\n"
+		  tr("This controls how <i>kppp</i> detects that the modem\n"
 		       "is not responding. Unless you are having\n"
 		       "problems with this, do not modify this setting.\n"
 		       "\n"
 		       "<b>Default</b>: Off"));
 #endif
 
-  modemcmds = new QPushButton(i18n("Mod&em Commands..."), this);
+  modemcmds = new QPushButton(tr("Mod&em Commands..."), this);
   QWhatsThis::add(modemcmds,
-		  i18n("Allows you to change the AT command for\n"
+		  tr("Allows you to change the AT command for\n"
 		       "your modem."));
 
-  modeminfo_button = new QPushButton(i18n("&Query Modem..."), this);
+  modeminfo_button = new QPushButton(tr("&Query Modem..."), this);
   QWhatsThis::add(modeminfo_button,
-		  i18n("Most modems support the ATI command set to\n"
+		  tr("Most modems support the ATI command set to\n"
 		       "find out vendor and revision of your modem.\n"
 		       "\n"
 		       "Press this button to query your modem for\n"
 		       "this information. It can be useful to help\n"
 		       "you setup the modem"));
 
-//   terminal_button = new QPushButton(i18n("&Terminal..."), this);
+//   terminal_button = new QPushButton(tr("&Terminal..."), this);
 //   QWhatsThis::add(terminal_button,
-// 		  i18n("Opens the built-in terminal program. You\n"
+// 		  tr("Opens the built-in terminal program. You\n"
 // 		       "can use this if you want to play around\n"
 // 		       "with your modem's AT command set"));
 

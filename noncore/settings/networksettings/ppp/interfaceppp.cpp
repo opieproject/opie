@@ -3,7 +3,6 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qlabel.h>
-#define i18n QObject::tr
 
 #include "auth.h"
 #include "interfaceppp.h"
@@ -76,7 +75,7 @@ void InterfacePPP::start()
 
   if(!info.exists()){
     QMessageBox::warning(0, tr("Error"),
-                         i18n("<qt>Cannot find the PPP daemon!<br>"
+                         QObject::tr("<qt>Cannot find the PPP daemon!<br>"
                               "Make sure that pppd is installed and "
                               "that you have entered the correct path.</qt>"));
     return;
@@ -85,7 +84,7 @@ void InterfacePPP::start()
   if(!info.isExecutable()){
 
     QString string;
-    string = i18n( "<qt>Cannot execute:<br> %1<br>"
+    string = QObject::tr( "<qt>Cannot execute:<br> %1<br>"
     		   "Please make sure that you have given "
 		   "setuid permission and that "
 		   "pppd is executable.<br>").arg(pppdPath());
@@ -99,7 +98,7 @@ void InterfacePPP::start()
 
   if(!info2.exists()){
     QString string;
-    string = i18n( "<qt>Cannot find:<br> %1<br>"
+    string = QObject::tr( "<qt>Cannot find:<br> %1<br>"
                    "Please make sure you have setup "
 		   "your modem device properly "
 		   "and/or adjust the location of the modem device on "
@@ -116,7 +115,7 @@ void InterfacePPP::start()
      data()->authMethod() == AUTH_PAPCHAP ) {
       if(false){ //FIXME: ID_Edit->text().isEmpty()) {
         QMessageBox::warning(0,tr("Error"),
-			   i18n("<qt>You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!</qt>"));
+			   QObject::tr("<qt>You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!</qt>"));
 // FIXME:      return;
     } else {
       if(!modem()->setSecret(data()->authMethod(),
@@ -124,7 +123,7 @@ void InterfacePPP::start()
                              PPPData::encodeWord(data()->password()))
           ) {
 	QString s;
-	s = i18n("<qt>Cannot create PAP/CHAP authentication<br>"
+	s = QObject::tr("<qt>Cannot create PAP/CHAP authentication<br>"
 				     "file \"%1\"</qt>").arg(PAP_AUTH_FILE);
 	QMessageBox::warning(0, tr("Error"), s);
 	return;
@@ -133,7 +132,7 @@ void InterfacePPP::start()
   }
 
   if (data()->phonenumber().isEmpty()) {
-    QString s = i18n("You must specify a telephone number!");
+    QString s = QObject::tr("You must specify a telephone number!");
     QMessageBox::warning(0, tr("Error"), s);
     return;
   }

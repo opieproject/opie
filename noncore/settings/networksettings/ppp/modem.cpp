@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: modem.cpp,v 1.7.2.3 2003-07-24 13:15:37 harlekin Exp $
+ * $Id: modem.cpp,v 1.7.2.4 2003-07-31 11:59:20 tille Exp $
  *
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
@@ -51,11 +51,8 @@
 #include "auth.h"
 #include "modem.h"
 #include "pppdata.h"
-//#include <klocale.h>
-#define i18n QObject::tr
 #define qError qDebug
-//#include <kdebug.h>
-//#include <config.h>
+
 
 #define MY_ASSERT(x)  if (!(x)) { \
         qFatal( "ASSERT: \"%s\" in %s (%d)\n",#x,__FILE__,__LINE__); \
@@ -169,7 +166,7 @@ bool Modem::opentty() {
     device = _pppdata->modemDevice();
     if ((modemfd = open(device, O_RDWR|O_NDELAY|O_NOCTTY)) == -1) {
         qDebug("error opening modem device !");
-        errmsg = i18n("Unable to open modem.");
+        errmsg = QObject::tr("Unable to open modem.");
         return false;
     }
 //bend  if((modemfd = Requester::rq->openModem(gpppdata.modemDevice()))<0) {
@@ -178,13 +175,13 @@ bool Modem::opentty() {
 #if 0
   if(_pppdata->UseCDLine()) {
     if(ioctl(modemfd, TIOCMGET, &flags) == -1) {
-      errmsg = i18n("Unable to detect state of CD line.");
+      errmsg = QObject::tr("Unable to detect state of CD line.");
       ::close(modemfd);
       modemfd = -1;
       return false;
     }
     if ((flags&TIOCM_CD) == 0) {
-      errmsg = i18n("The modem is not ready.");
+      errmsg = QObject::tr("The modem is not ready.");
       ::close(modemfd);
       modemfd = -1;
       return false;
@@ -200,7 +197,7 @@ bool Modem::opentty() {
     tcsendbreak(modemfd, 0);
     sleep(1);
     if(tcgetattr(modemfd, &tty) < 0){
-      errmsg = i18n("The modem is busy.");
+      errmsg = QObject::tr("The modem is busy.");
       ::close(modemfd);
       modemfd = -1;
       return false;
@@ -245,13 +242,13 @@ bool Modem::opentty() {
   tcdrain(modemfd);
 
   if(tcsetattr(modemfd, TCSANOW, &tty) < 0){
-    errmsg = i18n("The modem is busy.");
+    errmsg = QObject::tr("The modem is busy.");
     ::close(modemfd);
     modemfd=-1;
     return false;
   }
 
-  errmsg = i18n("Modem Ready.");
+  errmsg = QObject::tr("Modem Ready.");
   return true;
 }
 
@@ -263,7 +260,7 @@ bool Modem::closetty() {
     tcflush(modemfd, TCIOFLUSH);
 
     if(tcsetattr(modemfd, TCSANOW, &initial_tty) < 0){
-      errmsg = i18n("Can't restore tty settings: tcsetattr()\n");
+      errmsg = QObject::tr("Can't restore tty settings: tcsetattr()\n");
       ::close(modemfd);
       modemfd = -1;
       return false;
@@ -413,7 +410,7 @@ bool Modem::hangup() {
       closetty();
       close(modemfd);
       modemfd = -1;
-      errmsg = i18n("The modem does not respond.");
+      errmsg = QObject::tr("The modem does not respond.");
       return false;
     }
 
@@ -555,7 +552,7 @@ QString Modem::parseModemSpeed(const QString &s) {
   }
 
   if(rx == -1 && tx == -1)
-    result = i18n("Unknown speed");
+    result = QObject::tr("Unknown speed");
   else if(tx == -1)
     result.setNum(rx);
   else if(rx == -1) // should not happen

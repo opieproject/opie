@@ -32,7 +32,6 @@
 #include <qapplication.h>
 //#include <kdebug.h>
 //#include <klocale.h>
-#define i18n QObject::tr
 #include <qmessagebox.h>
 #include <qpushbutton.h>
 
@@ -99,7 +98,7 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
   modified_hostname = false;
 
   QVBoxLayout *tl = new QVBoxLayout(this, 8, 10);
-  QString tit = i18n("Connecting to: ");
+  QString tit = QObject::tr("Connecting to: ");
   setCaption(tit);
 
   QHBoxLayout *l0 = new QHBoxLayout(10);
@@ -108,15 +107,15 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
   messg = new QLabel(this, "messg");
   messg->setFrameStyle(QFrame::Panel|QFrame::Sunken);
   messg->setAlignment(AlignCenter);
-  messg->setText(i18n("Unable to create modem lock file."));
+  messg->setText(QObject::tr("Unable to create modem lock file."));
   messg->setMinimumHeight(messg->sizeHint().height() + 5);
 //   int messw = (messg->sizeHint().width() * 12) / 10;
 //   messw = QMAX(messw,280);
 //   messg->setMinimumWidth(messw);
   if (_ifaceppp->getStatus())
-	  messg->setText(i18n("Online"));
+	  messg->setText(QObject::tr("Online"));
   else
-	  messg->setText(i18n("Offline"));
+	  messg->setText(QObject::tr("Offline"));
   l0->addSpacing(10);
   l0->addWidget(messg);
   l0->addSpacing(10);
@@ -125,12 +124,12 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
   tl->addLayout(l1);
   l1->addStretch(1);
 
-  debug = new QPushButton(i18n("Log"), this);
+  debug = new QPushButton(QObject::tr("Log"), this);
   debug->setToggleButton(true);
   debug->setEnabled( false ); // FIXME: disable the log button
   connect(debug, SIGNAL(clicked()), SIGNAL(toggleDebugWindow()));
 
-  cancel = new QPushButton(i18n("Cancel"), this);
+  cancel = new QPushButton(QObject::tr("Cancel"), this);
   cancel->setFocus();
   connect(cancel, SIGNAL(clicked()), SLOT(cancelbutton()));
 
@@ -173,7 +172,7 @@ ConnectWidget::~ConnectWidget() {
 void ConnectWidget::preinit() {
   // this is all just to keep the GUI nice and snappy ....
   // you have to see to believe ...
-  messg->setText(i18n("Looking for modem..."));
+  messg->setText(QObject::tr("Looking for modem..."));
   inittimer->start(100);
 }
 
@@ -201,15 +200,15 @@ void ConnectWidget::init() {
   comlist = &_ifaceppp->data()->scriptType();
   arglist = &_ifaceppp->data()->script();
 
-  QString tit = i18n("Connecting to: %1").arg(_ifaceppp->data()->accname());
+  QString tit = QObject::tr("Connecting to: %1").arg(_ifaceppp->data()->accname());
   setCaption(tit);
 
   qApp->processEvents();
 
   // run the "before-connect" command
   if (!_ifaceppp->data()->command_before_connect().isEmpty()) {
-    messg->setText(i18n("Running pre-startup command..."));
-    emit debugMessage(i18n("Running pre-startup command..."));
+    messg->setText(QObject::tr("Running pre-startup command..."));
+    emit debugMessage(QObject::tr("Running pre-startup command..."));
 
     qApp->processEvents();
     QApplication::flushX();
@@ -226,13 +225,13 @@ void ConnectWidget::init() {
   int lock = _ifaceppp->modem()->lockdevice();
 
   if (lock == 1) {
-    messg->setText(i18n("Modem device is locked."));
+    messg->setText(QObject::tr("Modem device is locked."));
     vmain = 20; // wait until cancel is pressed
     return;
   }
 
   if (lock == -1) {
-    messg->setText(i18n("Unable to create modem lock file."));
+    messg->setText(QObject::tr("Unable to create modem lock file."));
     vmain = 20; // wait until cancel is pressed
     return;
   }
@@ -279,8 +278,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
     assert(PPPData::NumInitStrings > 0);
     // first init string ?
     if(substate == -1) {
-      messg->setText(i18n("Initializing modem..."));
-      emit debugMessage(i18n("Initializing modem..."));
+      messg->setText(QObject::tr("Initializing modem..."));
+      emit debugMessage(QObject::tr("Initializing modem..."));
       substate = 0;
     }
 
@@ -317,7 +316,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
   if (vmain == 5) {
     if(!expecting) {
         QString sToneDuration = "ATS11=" + QString::number(_ifaceppp->data()->modemToneDuration());
-        QString msg = i18n("Setting ") + sToneDuration;
+        QString msg = QObject::tr("Setting ") + sToneDuration;
         messg->setText(msg);
 	emit debugMessage(msg);
 	setExpect(_ifaceppp->data()->modemInitResp());
@@ -340,8 +339,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
         vmain = 4;
         return;
       }
-      messg->setText(i18n("Setting speaker volume..."));
-      emit debugMessage(i18n("Setting speaker volume..."));
+      messg->setText(QObject::tr("Setting speaker volume..."));
+      emit debugMessage(QObject::tr("Setting speaker volume..."));
 
       setExpect(_ifaceppp->data()->modemInitResp());
       QString vol("AT");
@@ -356,7 +355,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
   if(vmain == 4) {
     if(!expecting) {
       if(!_ifaceppp->data()->waitForDialTone()) {
-	QString msg = i18n("Turning off dial tone waiting...");
+	QString msg = QObject::tr("Turning off dial tone waiting...");
 	messg->setText(msg);
 	emit debugMessage(msg);
 	setExpect(_ifaceppp->data()->modemInitResp());
@@ -377,7 +376,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       QStringList &plist = _ifaceppp->data()->phonenumbers();
       QString bmarg= _ifaceppp->data()->dialPrefix();
       bmarg += *plist.at(dialnumber);
-      QString bm = i18n("Dialing %1").arg(bmarg);
+      QString bm = QObject::tr("Dialing %1").arg(bmarg);
       messg->setText(bm);
       emit debugMessage(bm);
 
@@ -408,12 +407,12 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       timeout_timer->stop();
       timeout_timer->start(_ifaceppp->data()->modemTimeout()*1000);
 
-      messg->setText(i18n("Line busy. Hanging up..."));
+      messg->setText(QObject::tr("Line busy. Hanging up..."));
       emit debugPutChar('\n');
       _ifaceppp->modem()->hangup();
 
       if(_ifaceppp->data()->busyWait() > 0) {
-	QString bm = i18n("Line busy. Waiting: %1 seconds").arg(_ifaceppp->data()->busyWait());
+	QString bm = QObject::tr("Line busy. Waiting: %1 seconds").arg(_ifaceppp->data()->busyWait());
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -432,7 +431,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
     if(readbuffer.contains(_ifaceppp->data()->modemNoDialtoneResp())) {
       timeout_timer->stop();
 
-      messg->setText(i18n("No Dialtone"));
+      messg->setText(QObject::tr("No Dialtone"));
       vmain = 20;
       _ifaceppp->modem()->unlockdevice();
       return;
@@ -441,7 +440,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
     if(readbuffer.contains(_ifaceppp->data()->modemNoCarrierResp())) {
       timeout_timer->stop();
 
-      messg->setText(i18n("No Carrier"));
+      messg->setText(QObject::tr("No Carrier"));
       vmain = 20;
       _ifaceppp->modem()->unlockdevice();
       return;
@@ -479,7 +478,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "Scan") {
-	QString bm = i18n("Scanning %1").arg(scriptArgument);
+	QString bm = QObject::tr("Scanning %1").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -489,7 +488,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "Save") {
-	QString bm = i18n("Saving %1").arg(scriptArgument);
+	QString bm = QObject::tr("Saving %1").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -507,7 +506,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
 
       if (scriptCommand == "Send" || scriptCommand == "SendNoEcho") {
-	QString bm = i18n("Sending %1");
+	QString bm = QObject::tr("Sending %1");
 
 	// replace %USERNAME% and %PASSWORD%
 	QString arg = scriptArgument;
@@ -532,7 +531,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "Expect") {
-        QString bm = i18n("Expecting %1").arg(scriptArgument);
+        QString bm = QObject::tr("Expecting %1").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -546,7 +545,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
 
       if (scriptCommand == "Pause") {
-	QString bm = i18n("Pause %1 seconds").arg(scriptArgument);
+	QString bm = QObject::tr("Pause %1 seconds").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -563,7 +562,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
 	timeout_timer->stop();
 
-	QString bm = i18n("Timeout %1 seconds").arg(scriptArgument);
+	QString bm = QObject::tr("Timeout %1 seconds").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -575,8 +574,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "Hangup") {
-	messg->setText(i18n("Hangup"));
-	emit debugMessage(i18n("Hangup"));
+	messg->setText(QObject::tr("Hangup"));
+	emit debugMessage(QObject::tr("Hangup"));
 
 	writeline(_ifaceppp->data()->modemHangupStr());
 	setExpect(_ifaceppp->data()->modemHangupResp());
@@ -589,8 +588,8 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
 	timeout_timer->stop();
 
-	messg->setText(i18n("Answer"));
-	emit debugMessage(i18n("Answer"));
+	messg->setText(QObject::tr("Answer"));
+	emit debugMessage(QObject::tr("Answer"));
 
 	setExpect(_ifaceppp->data()->modemRingResp());
 	vmain = 150;
@@ -598,7 +597,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "ID") {
-	QString bm = i18n("ID %1").arg(scriptArgument);
+	QString bm = QObject::tr("ID %1").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -634,7 +633,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "Password") {
-	QString bm = i18n("Password %1").arg(scriptArgument);
+	QString bm = QObject::tr("Password %1").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -671,7 +670,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "Prompt") {
-	QString bm = i18n("Prompting %1");
+	QString bm = QObject::tr("Prompting %1");
 
         // if the scriptindex (aka the prompt text) includes a ## marker
         // this marker should get substituted with the contents of our stored
@@ -708,7 +707,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "PWPrompt") {
-	QString bm = i18n("PW Prompt %1").arg(scriptArgument);
+	QString bm = QObject::tr("PW Prompt %1").arg(scriptArgument);
 	messg->setText(bm);
 	emit debugMessage(bm);
 
@@ -733,7 +732,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 
       if (scriptCommand == "LoopStart") {
 
-        QString bm = i18n("Loop Start %1").arg(scriptArgument);
+        QString bm = QObject::tr("Loop Start %1").arg(scriptArgument);
 
 	// The incrementing of the scriptindex MUST be before the
 	// call to setExpect otherwise the expect will miss a string that is
@@ -741,10 +740,10 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
 	scriptindex++;
 
 	if ( loopnest > (MAXLOOPNEST-2) ) {
-		bm += i18n("ERROR: Nested too deep, ignored.");
+		bm += QObject::tr("ERROR: Nested too deep, ignored.");
 		vmain=20;
 		cancelbutton();
-	        QMessageBox::critical(0, "error", i18n("Loops nested too deeply!"));
+	        QMessageBox::critical(0, "error", QObject::tr("Loops nested too deeply!"));
 	} else {
         	setExpect(scriptArgument);
 		loopstartindex[loopnest] = scriptindex;
@@ -758,9 +757,9 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       }
 
       if (scriptCommand == "LoopEnd") {
-        QString bm = i18n("Loop End %1").arg(scriptArgument);
+        QString bm = QObject::tr("Loop End %1").arg(scriptArgument);
 	if ( loopnest <= 0 ) {
-		bm = i18n("LoopEnd without matching Start! Line: %1").arg(bm);
+		bm = QObject::tr("LoopEnd without matching Start! Line: %1").arg(bm);
 		vmain=20;
 		cancelbutton();
 	        QMessageBox::critical(0, "error", bm);
@@ -848,7 +847,7 @@ void ConnectWidget::timerEvent(QTimerEvent *) {
       semaphore = true;
       result = execppp();
 
-      emit debugMessage(i18n("Starting pppd..."));
+      emit debugMessage(QObject::tr("Starting pppd..."));
       qDebug("execppp() returned with return-code %i", result );
 
       if(result) {
@@ -930,7 +929,7 @@ void ConnectWidget::checkBuffers() {
       scanvar = scanvar.stripWhiteSpace();
 
       // Show the Variabel content in the debug window
-      QString sv = i18n("Scan Var: %1").arg(scanvar);
+      QString sv = QObject::tr("Scan Var: %1").arg(scanvar);
       emit debugMessage(sv);
   }
 
@@ -940,7 +939,7 @@ void ConnectWidget::checkBuffers() {
       // keep everything after the expected string
       readbuffer.remove(0, readbuffer.find(expectstr) + expectstr.length());
 
-      QString ts = i18n("Found: %1").arg(expectstr);
+      QString ts = QObject::tr("Found: %1").arg(expectstr);
       emit debugMessage(ts);
 
       if (loopend) {
@@ -951,7 +950,7 @@ void ConnectWidget::checkBuffers() {
     if (loopend && readbuffer.contains(loopstr[loopnest])) {
       expecting = false;
       readbuffer = "";
-      QString ts = i18n("Looping: %1").arg(loopstr[loopnest]);
+      QString ts = QObject::tr("Looping: %1").arg(loopstr[loopnest]);
       emit debugMessage(ts);
       scriptindex = loopstartindex[loopnest];
       loopend = false;
@@ -984,7 +983,7 @@ void ConnectWidget::cancelbutton() {
 //     this->show();
 //   }
 
-  messg->setText(i18n("One moment please..."));
+  messg->setText(QObject::tr("One moment please..."));
 
   // just to be sure
   _ifaceppp->modem()->removeSecret(AUTH_PAP);
@@ -1029,7 +1028,7 @@ void ConnectWidget::script_timed_out() {
     prompt->hide();
 
   prompt->setConsumed();
-  messg->setText(i18n("Script timed out!"));
+  messg->setText(QObject::tr("Script timed out!"));
   _ifaceppp->modem()->hangup();
   emit stopAccounting();
 //  p_kppp->con_win->stopClock();
@@ -1044,7 +1043,7 @@ void ConnectWidget::setScan(const QString &n) {
   scanstr = n;
   scanbuffer = "";
 
-  QString ts = i18n("Scanning: %1").arg(n);
+  QString ts = QObject::tr("Scanning: %1").arg(n);
   emit debugMessage(ts);
 }
 
@@ -1053,7 +1052,7 @@ void ConnectWidget::setExpect(const QString &n) {
   expecting = true;
   expectstr = n;
 
-  QString ts = i18n("Expecting: %1").arg(n);
+  QString ts = QObject::tr("Expecting: %1").arg(n);
   ts.replace(QRegExp("\n"), "<LF>");
   emit debugMessage(ts);
 
@@ -1088,7 +1087,7 @@ void ConnectWidget::pppdDied()
 }
 
 void ConnectWidget::if_waiting_slot() {
-  messg->setText(i18n("Logging on to network..."));
+  messg->setText(QObject::tr("Logging on to network..."));
 
 //   if(!stats->ifIsUp()) {
 
@@ -1119,19 +1118,19 @@ void ConnectWidget::if_waiting_slot() {
   auto_hostname(_ifaceppp);
 
   if(!_ifaceppp->data()->command_on_connect().isEmpty()) {
-    messg->setText(i18n("Running startup command..."));
+    messg->setText(QObject::tr("Running startup command..."));
 
     // make sure that we don't get any async errors
     qApp->flushX();
     execute_command(_ifaceppp->data()->command_on_connect());
-    messg->setText(i18n("Done"));
+    messg->setText(QObject::tr("Done"));
   }
 
   // remove the authentication file
   _ifaceppp->modem()->removeSecret(AUTH_PAP);
   _ifaceppp->modem()->removeSecret(AUTH_CHAP);
 
-  emit debugMessage(i18n("Done"));
+  emit debugMessage(QObject::tr("Done"));
   set_con_speed_string();
 
 //  p_kppp->con_win->setConnectionSpeed(p_kppp->con_speed);
@@ -1172,9 +1171,9 @@ void ConnectWidget::if_waiting_slot() {
 void ConnectWidget::refresh()  {
     _ifaceppp->refresh();
     if ( _ifaceppp->getStatus() )  {
-        messg->setText(i18n("Online"));
+        messg->setText(QObject::tr("Online"));
     } else {
-        messg->setText(i18n("Offline"));
+        messg->setText(QObject::tr("Offline"));
     }
 }
 
@@ -1264,7 +1263,7 @@ bool ConnectWidget::execppp() {
   command += " call opie-kppp logfd 11";
 
   if (command.length() > MAX_CMDLEN) {
-      QMessageBox::critical(this, "error", i18n(
+      QMessageBox::critical(this, "error", QObject::tr(
 			      "pppd command + command-line arguments exceed "
 			      "2024 characters in length."
 			      ));

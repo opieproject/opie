@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.11.2.9 2003-07-31 11:48:34 tille Exp $
+ * $Id: pppdata.cpp,v 1.11.2.10 2003-07-31 11:59:21 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -28,7 +28,6 @@
 #include "runtests.h"
 //#include "devices.h"
 //#include <klocale.h>
-#define i18n QObject::tr
 #include <qpe/config.h>
 #include <qmessagebox.h>
 #include <qapplication.h>
@@ -885,7 +884,7 @@ int PPPData::copyaccount(const QString&) {
 //    QMap <QString, QString> map = config->entryMap(cgroup);
 //    QMap <QString, QString>::ConstIterator it = map.begin();
 
-//    QString newname = i18n("%1_copy").arg(accname());
+//    QString newname = QObject::tr("%1_copy").arg(accname());
 
 //    newaccount();
 
