@@ -205,6 +205,10 @@ void PlayListWidget::clearList() {
     while ( first() ) {
         d->selectedFiles->removeSelected();
     }
+  Config cfg( "OpiePlayer" );
+  cfg.setGroup("PlayList");
+  cfg.writeEntry("CurrentPlaylist","default");
+  setCaption("OpiePlayer");
 }
 
 void PlayListWidget::viewPressed( int mouse, QListViewItem *, const QPoint& , int) {
@@ -492,7 +496,7 @@ void PlayListWidget::addSelected() {
 
   currentFileListView->clearSelection();
 
-  tabWidget->setCurrentPage( 0 );
+//  tabWidget->setCurrentPage( 0 );
   writeCurrentM3u();
 }
 
@@ -527,7 +531,7 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
     d->selectedFiles->addToSelection(  lnk);
  
     writeCurrentM3u();          
-    tabWidget->setCurrentPage(0);
+//    tabWidget->setCurrentPage(0);
         
   }
 }
