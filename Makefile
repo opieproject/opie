@@ -50,7 +50,7 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
 	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
 
-NONCORESTYLES = noncore/styles/liquid
+NONCORESTYLES = noncore/styles/liquid noncore/styles/liquid/settings
 
 GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/tetrix noncore/games/wordgame \
