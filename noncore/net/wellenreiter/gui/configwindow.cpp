@@ -341,5 +341,7 @@ void WellenreiterConfigWindow::save()
     c->writeEntry( "start", startGPS->isChecked() );
     c->writeEntry( "command", commandGPS->text() );
 
+    c->write();
+
 #endif
 }
