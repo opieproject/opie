@@ -33,7 +33,7 @@ dataWidgetUI::dataWidgetUI() : QWidget()
     dataCombo = new QComboBox( this );
     
     //read in all names of the 118 elements
-    Config configobj( "oxygendata" );
+    Config configobj( QPEApplication::qpeDir() +"share/oxygen/oxygendata", Config::File );
     for ( int i = 1 ; i < 119 ; i++ )
     {
         configobj.setGroup( QString::number( i ) );
