@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Trash</source>
-        <translation type="unfinished"></translation>
+        <translation>Koš</translation>
     </message>
 </context>
 </TS>

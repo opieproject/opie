@@ -3,95 +3,95 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav baterie</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Závada</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation type="unfinished"></translation>
+        <translation>nelze otevřít soubor</translation>
     </message>
     <message>
         <source>no data</source>
-        <translation type="unfinished"></translation>
+        <translation>nejsou data</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Nabíjení obou zařízení</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation type="unfinished"></translation>
+        <translation>Nabíjení</translation>
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Stav baterie v procentech</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Stav baterie:</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Dobrý</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Špatný</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Velmi špatný</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritický</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámý</translation>
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Na záložním napájení</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojeno k síti</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Externí zdroj odpojen</translation>
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Do vybití zbývá</translation>
     </message>
     <message>
         <source>Ipaq  </source>
-        <translation type="unfinished"></translation>
+        <translation>Ipaq</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Stav baterie v procentech:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Do vybití zbývá:</translation>
     </message>
     <message>
         <source>Jacket  </source>
-        <translation type="unfinished"></translation>
+        <translation>Košilka</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Nebyla vložena košilka s baterií</translation>
     </message>
 </context>
 </TS>

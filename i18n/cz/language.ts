@@ -3,22 +3,22 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Angličtina</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Výchozí</translation>
     </message>
 </context>
 <context>
     <name>LanguageSettingsBase</name>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení jazyka</translation>
     </message>
     <message>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte jazyk</translation>
     </message>
 </context>
 </TS>

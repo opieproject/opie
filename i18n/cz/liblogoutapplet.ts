@@ -3,16 +3,17 @@
     <name>LogoutApplet</name>
     <message>
         <source>Logout shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkratka odhlášení</translation>
     </message>
     <message>
         <source>Logout</source>
-        <translation type="unfinished"></translation>
+        <translation>Odhlášení</translation>
     </message>
     <message>
         <source>Do you really want to
 end this session ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Opravdu chcete
+ukončit tuto relaci?</translation>
     </message>
 </context>
 </TS>

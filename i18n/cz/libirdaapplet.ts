@@ -3,39 +3,39 @@
     <name>IrdaApplet</name>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nalezeno:</translation>
     </message>
     <message>
         <source>Lost:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ztraceno:</translation>
     </message>
     <message>
         <source>Discovered Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zjištěno zařízení:</translation>
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnout IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnout vyhledávání</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout vyhledávání</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Vypnout příjem</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnout příjem</translation>
     </message>
 </context>
 </TS>

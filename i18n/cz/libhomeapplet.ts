@@ -3,11 +3,11 @@
     <name>HomeApplet</name>
     <message>
         <source>Home shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Zkratka domů</translation>
     </message>
     <message>
         <source>Desktop</source>
-        <translation type="unfinished"></translation>
+        <translation>Plocha</translation>
     </message>
 </context>
 </TS>
