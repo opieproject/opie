@@ -1,0 +1,17 @@
+*.ipk
+..config.cmd
+.config
+.config.old
+.depends
+.depends.cfgs
+.tmpconfig.h
+Packages
+config.in
+include
+moc_*
+stamp-headers
+.config.cmd
+gen.pro
+Vars.local
+a
+.patches
