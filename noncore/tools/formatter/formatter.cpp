@@ -54,7 +54,7 @@
 
 /* 
    Blah blah blah blah */
-FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool modal, WFlags fl )
+FormatterApp::FormatterApp( QWidget* parent,  const char* name, bool , WFlags fl )
         : QMainWindow( parent, name, fl )
 //    : QDialog( parent, name, modal, fl )
 {
@@ -205,13 +205,13 @@ void FormatterApp::doFormat() {
     }
 
     switch ( QMessageBox::warning(this,tr("Format?") 
-								, tr("Really format\n") +diskName+" "+ currentText +
+                , tr("Really format\n") +diskName+" "+ currentText +
                                   tr("\nwith %1 filesystem?\nYou will loose all data!!").arg( fs )
-								  ,tr("Yes")
-								  ,tr("No")
-								  ,0
-								  ,1
-								  ,1) ) {
+                  ,tr("Yes")
+                  ,tr("No")
+                  ,0
+                  ,1
+                  ,1) ) {
       case 0: {
           if(fs == "vfat")
               cmd = "mkdosfs -v " + diskDevice+" 2>&1";
@@ -229,14 +229,14 @@ void FormatterApp::doFormat() {
           FILE *fp;
           char line[130];
 
-		  //FIXME: Shouldn't this be tr("Trying to umount %1.).arg(currentText) ???
-          outDlg->OutputEdit->append( tr("Trying to umount.") + currentText );
+
+          outDlg->OutputEdit->append( tr("Trying to umount %1.").arg( currentText) );
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
 
           sleep(1);
           qDebug("Command is "+umountS);
           fp = popen(  (const char *) umountS, "r");
-          qDebug("%d", fp);
+          //          qDebug("%d", fp);
           if ( !fp ) {
               qDebug("Could not execute '" + umountS + "'! err=%d\n" +(QString)strerror(errno), err); 
               QMessageBox::warning( this, tr("Formatter"), tr("umount failed!"), tr("&OK") );
@@ -285,8 +285,7 @@ void FormatterApp::doFormat() {
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
           pclose(fp);             
 
-		  //FIXME: see abouve
-          outDlg->OutputEdit->append( tr("Trying to mount.") + currentText );
+          outDlg->OutputEdit->append( tr("Trying to mount %1.").arg( currentText) );
           outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
           fp = popen(  (const char *) remountS, "r"); 
           if ( !fp) {
@@ -294,8 +293,7 @@ void FormatterApp::doFormat() {
               QMessageBox::warning( this, tr("Formatter"), tr("Card mount failed!"), tr("&OK") );
 
           } else {
-			  //FIXME: looks like a tr-bug to me
-              outDlg->OutputEdit->append( currentText + tr("\nhas been successfully mounted."));
+              outDlg->OutputEdit->append(tr("%1\nhas been successfully mounted.").arg( currentText ));
               while ( fgets( line, sizeof line, fp)) {
                   QString lineStr = line;
                   lineStr=lineStr.left(lineStr.length()-1);
@@ -346,7 +344,7 @@ void FormatterApp::fillCombos() {
 }
 
 
-void FormatterApp::fsComboSelected(int index) {
+void FormatterApp::fsComboSelected(int ) {
 
 }
     
@@ -355,8 +353,7 @@ void FormatterApp::storageComboSelected(int index ) {
     QString currentText = storageComboBox->text(index);
     QString nameS = currentText.left( currentText.find("->",0,TRUE));
 
-	//FIXME:tr-bug???
-    TextLabel4->setText( tr( "Storage Type: ") + nameS );
+    TextLabel4->setText( tr( "Storage Type: %1").arg( nameS) );
     currentText = currentText.right( currentText.length() - currentText.find(" -> ",0,TRUE) - 4);
 
     QString fsType = getFileSystemType((const QString &) currentText);
@@ -403,8 +400,7 @@ void FormatterApp::deviceComboSelected(int index) {
     }
     fsType = getFileSystemType((const QString &)selectedText);
 
-	//FIXME:tr-bug!
-    TextLabel5->setText("Type: "+ nameS+"\nFormatted with "+ fsType + " \n" + totalS + usedS + avS);
+    TextLabel5->setText(tr("Type: %1\nFormatted with %1\n%1, %1, %1").arg( nameS).arg( fsType).arg(totalS).arg( usedS).arg( avS )); 
 //     storageComboSelected(0);
 }
 
@@ -576,12 +572,12 @@ bool FormatterApp::doFsckCheck() {
     return FALSE;
 }
 
-int FormatterApp::formatCheck(const QString &deviceStr) {
+int FormatterApp::formatCheck(const QString &) {
 
     return -1;
 }
 
-int FormatterApp::runCommand(const QString &command) {
+int FormatterApp::runCommand(const QString &) {
 
     return -1;
 }
