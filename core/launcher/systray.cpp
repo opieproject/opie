@@ -91,6 +91,7 @@ void SysTray::addApplets()
     cfg.write();
     QStringList exclude = cfg.readListEntry( "ExcludeApplets", ',' );
 
+    QString lang = getenv( "LANG" );
     QString path = QPEApplication::qpeDir() + "/plugins/applets";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
@@ -107,6 +108,14 @@ void SysTray::addApplets()
 	    applets[napplets++] = applet;
 	    applet->library = lib;
 	    applet->iface = iface;
+	    
+	    QTranslator *trans = new QTranslator(qApp);
+	    QString type = (*it).left( (*it).find(".") );
+	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+	    if ( trans->load( tfn ))
+		qApp->installTranslator( trans );
+	    else
+		delete trans;	    
 	} else {
 	    exclude += *it;
 	    delete lib;
@@ -118,14 +127,6 @@ void SysTray::addApplets()
 	TaskbarApplet *applet = applets[napplets];
 	applet->applet = applet->iface->applet( this );
 	appletList.append(*applet);
-	QString lang = getenv( "LANG" );
-	QTranslator * trans = new QTranslator(qApp);
-	QString type = (*it).left( (*it).find(".") );
-	QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-	if ( trans->load( tfn ))
-	    qApp->installTranslator( trans );
-	else
-	    delete trans;
     }
     delete applets;
 #else

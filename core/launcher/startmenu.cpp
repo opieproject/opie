@@ -312,6 +312,7 @@ void StartMenu::loadApplets()
     cfg.write();
     QStringList exclude = cfg.readListEntry( "ExcludeApplets", ',' );
 
+    QString lang = getenv( "LANG" );
     QString path = QPEApplication::qpeDir() + "/plugins/applets";
     QDir dir( path, "lib*.so" );
     QStringList list = dir.entryList();
@@ -328,6 +329,14 @@ void StartMenu::loadApplets()
             xapplets[napplets++] = applet;
             applet->library = lib;
             applet->iface = iface;
+            
+            QTranslator *trans = new QTranslator(qApp);
+            QString type = (*it).left( (*it).find(".") );
+            QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
+            if ( trans->load( tfn ))
+                qApp->installTranslator( trans );
+            else
+                delete trans;            
         } else {
             exclude += *it;
             delete lib;
@@ -342,14 +351,6 @@ void StartMenu::loadApplets()
                
     while (napplets--) {
         MenuApplet *applet = xapplets[napplets];
-        QString lang = getenv( "LANG" );
-        QTranslator * trans = new QTranslator(qApp);
-        QString type = (*it).left( (*it).find(".") );
-        QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-        if ( trans->load( tfn ))
-            qApp->installTranslator( trans );
-        else
-            delete trans;
             
         applet-> popup = applet-> iface-> popup ( this );
         
