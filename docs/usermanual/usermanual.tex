@@ -295,4 +295,20 @@ To delete a file, run the ``rm'' command, and to delete a directory, run the ``r
 \section{Linking Files}
 
 In Linux, you can have a special file called a ``symbolic link'' that acts just like a copy of another file, except it takes up less space.  This is convinient if two applications are looking for the same file in two separate places, because the file can be in both places at once, without taking up any extra space, and any change to one is automatically applied to the other (really, there is only one file, the link is just a file pointing to the original file).  This is also useful for naming applications independant of their version number.  For instance, you could have a link called ``application'' that points to ``application1.0''.  To create a link, use the following command: \verb+ln -s originalfile link+.
+
+\part{Settings}
+\chapter{Software}
+%This section needs a lot of work, describing things like destinations, feeds, etc, but this should probably be added after oipkg works properly.
+
+The ``Software'' application, also called oipkg, is what is used to install and remove software.  It is actually a frontend to the command line program ``ipkg'' so most things you can do with oipkg you can also do with ipkg.  Oipkg can install things either remotely from a web server (called a ``feed'') or it can install an ipkg package file that resides on the local filesystem.
+
+Note: There is a bug in oipkg that prevents it from installing packages properly.  There is, however, a workaround for it.  Simply run oipkg from Embedded Konsole to avoid the bug.
+
+\section{Installing Software}
+
+To install software, first select ``Opie'' from the ``Section'' pulldown menu, the press the ``+'' icon next to ``Feeds'' in the main view.  This will show all the available Opie packages (you can change which packages to view by selecting something else from the ``Section'' pulldown).  Installed packages are marked with a blue circle, while packages that are not installed are marked with a red box.  If you click on the icon for an uninstalled package, it will turn into an open box, with a blue circle coming out of it, indicating that you have marked this package to be installed.  Mark as many packages as you wish this way, and then press the ``Apply'' icon (same red box and blue dot icon) to install all the marked packages.  It will also remove any packages marked for removal (see below).  Clicking this will open a window showing all the packages marked to be removed and installed, with some check boxes on the bottom, which represent arguments to be sent to ipkg, which you can usually ignore.  After verifying that all the packages to be installed are correct, press ``Ok'' in the upper right corner (or press ``x'' to cancel and go back to the package selection window).  The packages should then install, and you should see their icons appear in the Launcher, if they are Opie applications.
+
+\section{Removing Software}
+
+Removing software is the same as installing software, except you will press the blue circle icon of an installed package, and it will have a red ``X'' over it.  Then press the apply icon, and ``Ok''.  You can install and remove packages at the same time by marking the ones you want to install and the ones you want to remove, and then pressing apply.
 \end{document}
