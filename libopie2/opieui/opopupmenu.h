@@ -234,7 +234,7 @@ signals:
      * @param ctxMenu The context menu itself
      * @since 3.2
      */
-    void aboutToShowContextMenu(OPopupMenu* menu, int menuItem, QPopupMenu* ctxMenu);
+    void aboutToShowContextMenu(Opie::Ui::OPopupMenu* menu, int menuItem, QPopupMenu* ctxMenu);
 
 protected:
     virtual void closeEvent(QCloseEvent *);

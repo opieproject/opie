@@ -19,6 +19,7 @@
 #include <qpushbutton.h>
 #include <qsignalmapper.h>
 
+using namespace Opie::Core;
 using namespace Opie::Ui;
 
 OPIE_EXPORT_APP( OApplicationFactory<StackExample> )

@@ -101,8 +101,8 @@ class OProcessPrivate;
  *
  **proc << "my_executable";
  **proc << "These" << "are" << "the" << "command" << "line" << "args";
- *QApplication::connect(proc, SIGNAL(processExited(OProcess *)),
- *                      pointer_to_my_object, SLOT(my_objects_slot(OProcess *)));
+ *QApplication::connect(proc, SIGNAL(processExited(Opie::Core::OProcess *)),
+ *                      pointer_to_my_object, SLOT(my_objects_slot(Opie::Core::OProcess *)));
  *proc->start();
  *</pre>
  *
@@ -480,7 +480,7 @@ signals:
      * the process was run in the @p NotifyOnExit  (==default option to
      * @ref start()) or the @ref Block mode.
      **/
-    void processExited( OProcess *proc );
+    void processExited( Opie::Core::OProcess *proc );
 
 
     /**
@@ -497,7 +497,7 @@ signals:
      * You should copy the information contained in @p buffer to your private
      * data structures before returning from this slot.
      **/
-    void receivedStdout( OProcess *proc, char *buffer, int buflen );
+    void receivedStdout( Opie::Core::OProcess *proc, char *buffer, int buflen );
 
     /**
      * Emitted when output from the child process has
@@ -530,14 +530,14 @@ signals:
      * You should copy the information contained in @p buffer to your private
      * data structures before returning from this slot.
     */
-    void receivedStderr( OProcess *proc, char *buffer, int buflen );
+    void receivedStderr( Opie::Core::OProcess *proc, char *buffer, int buflen );
 
     /**
      * Emitted after all the data that has been
      * specified by a prior call to @ref writeStdin() has actually been
      * written to the child process.
      **/
-    void wroteStdin( OProcess *proc );
+    void wroteStdin( Opie::Core::OProcess *proc );
 
 protected slots:
 

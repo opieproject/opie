@@ -125,8 +125,5 @@ private:
 /* for Qt2  */
 #if ( QT_VERSION-0 >= 0x030000 )
 #error "Fix the UI File to use namespaces"
-#else
-typedef Opie::Ui::OTimePicker OUIOTimePicker;
 #endif
 #endif
-

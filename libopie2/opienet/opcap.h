@@ -698,7 +698,7 @@ class OPacketCapturer : public QObject
     /**
      * This signal is emitted, when a packet has been received.
      */
-    void receivedPacket( OPacket* );
+    void receivedPacket( Opie::Net::OPacket* );
 
   protected slots:
     void readyToReceive();

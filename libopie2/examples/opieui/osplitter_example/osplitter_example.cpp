@@ -12,6 +12,7 @@
 #include <qlayout.h>
 
 using namespace Opie::Ui;
+using namespace Opie::Core;
 
 OPIE_EXPORT_APP( OApplicationFactory<OSplitterExample> )
 

@@ -147,7 +147,7 @@ class OVersatileView : public QWidgetStack
 
   signals:
 
-    void contextMenuRequested( OVersatileViewItem * item, const QPoint& pos, int col );
+    void contextMenuRequested( Opie::Ui::OVersatileViewItem * item, const QPoint& pos, int col );
 
     /*#ifndef QT_NO_DRAGANDDROP
     void dropped( QDropEvent *e, const QValueList<QIconDragItem> &lst );  // QIconView
@@ -236,8 +236,8 @@ public:
     void triggerUpdate();  // QListView
 
   signals:
-    void expanded( OVersatileViewItem *item ); // QListView
-    void collapsed( OVersatileViewItem *item ); // QListView
+    void expanded( Opie::Ui::OVersatileViewItem *item ); // QListView
+    void collapsed( Opie::Ui::OVersatileViewItem *item ); // QListView
 
     //
     // only in QIconView
@@ -297,8 +297,8 @@ public:
     #endif
     */
     void moved();  // QIconView
-    void itemRenamed( OVersatileViewItem *item, const QString & );  // QIconView
-    void itemRenamed( OVersatileViewItem *item );  // QIconView
+    void itemRenamed( Opie::Ui::OVersatileViewItem *item, const QString & );  // QIconView
+    void itemRenamed( Opie::Ui::OVersatileViewItem *item );  // QIconView
 
   //==============================================================================================//
   // "Derived" API - Case 2: Methods existing in QListView and QIconView with the same signatures
@@ -340,15 +340,15 @@ public:
 
   signals:
     void selectionChanged();
-    void selectionChanged( OVersatileViewItem * );
-    void currentChanged( OVersatileViewItem * );
-    void clicked( OVersatileViewItem * );
-    void pressed( OVersatileViewItem * );
+    void selectionChanged( Opie::Ui::OVersatileViewItem * );
+    void currentChanged( Opie::Ui::OVersatileViewItem * );
+    void clicked( Opie::Ui::OVersatileViewItem * );
+    void pressed( Opie::Ui::OVersatileViewItem * );
 
-    void doubleClicked( OVersatileViewItem * );
-    void returnPressed( OVersatileViewItem * );
+    void doubleClicked( Opie::Ui::OVersatileViewItem * );
+    void returnPressed( Opie::Ui::OVersatileViewItem * );
 
-    void onItem( OVersatileViewItem * );
+    void onItem( Opie::Ui::OVersatileViewItem * );
     void onViewport();
 
   //==============================================================================================//
@@ -373,23 +373,23 @@ public:
   */
 
   signals:
-    void clicked( OVersatileViewItem *, const QPoint &, int );  // QListView
-    void clicked( OVersatileViewItem *, const QPoint & );  // QIconView
+    void clicked( Opie::Ui::OVersatileViewItem *, const QPoint &, int );  // QListView
+    void clicked( Opie::Ui::OVersatileViewItem *, const QPoint & );  // QIconView
 
-    void pressed( OVersatileViewItem *, const QPoint &, int );  // QListView
-    void pressed( OVersatileViewItem *, const QPoint & );  // QIconView
+    void pressed( Opie::Ui::OVersatileViewItem *, const QPoint &, int );  // QListView
+    void pressed( Opie::Ui::OVersatileViewItem *, const QPoint & );  // QIconView
 
-    void rightButtonClicked( OVersatileViewItem* item, const QPoint& pos );  // QIconView
-    void rightButtonClicked( OVersatileViewItem *, const QPoint&, int );  // QListView
+    void rightButtonClicked( Opie::Ui::OVersatileViewItem* item, const QPoint& pos );  // QIconView
+    void rightButtonClicked( Opie::Ui::OVersatileViewItem *, const QPoint&, int );  // QListView
 
-    void rightButtonPressed( OVersatileViewItem* item, const QPoint& pos );  // QIconView
-    void rightButtonPressed( OVersatileViewItem *, const QPoint&, int );  // QListView
+    void rightButtonPressed( Opie::Ui::OVersatileViewItem* item, const QPoint& pos );  // QIconView
+    void rightButtonPressed( Opie::Ui::OVersatileViewItem *, const QPoint&, int );  // QListView
 
-    void mouseButtonPressed( int, OVersatileViewItem *, const QPoint& , int );  // QListView
-    void mouseButtonPressed( int button, OVersatileViewItem* item, const QPoint& pos );  // QIconView
+    void mouseButtonPressed( int, Opie::Ui::OVersatileViewItem *, const QPoint& , int );  // QListView
+    void mouseButtonPressed( int button, Opie::Ui::OVersatileViewItem* item, const QPoint& pos );  // QIconView
 
-    void mouseButtonClicked( int, OVersatileViewItem *,  const QPoint&, int );  // QListView
-    void mouseButtonClicked( int button, OVersatileViewItem* item, const QPoint& pos );  // QIconView
+    void mouseButtonClicked( int, Opie::Ui::OVersatileViewItem *,  const QPoint&, int );  // QListView
+    void mouseButtonClicked( int button, Opie::Ui::OVersatileViewItem* item, const QPoint& pos );  // QIconView
 
 };
 
