@@ -1,7 +1,6 @@
 Files: bin/opie-sh-ssh-askpass.sh
 Installed-Size:  0 
 Version: $QPE_VERSION-$SUB_VERSION
-# We depend on opie-sh with the '-p' option. Not really on ssh though.
 Depends: opie-base (1.5.0+), opie-sh (0.5-20020919+)
 Priority: optional
 Section: opie/system
