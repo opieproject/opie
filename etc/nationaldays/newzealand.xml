@@ -19,5 +19,19 @@
 <entry name="Otago Anniversary Day" date="03-23"/>
 <entry name="Southland Anniversary Day" date="01-17"/>
 <entry name="Chatham Islands Anniversary Day" date="11-30"/>
+<entry name="Queen's Birthday" type="floating">
+       <calculation>
+               <weekday value="monday"/>
+               <dayofmonth value="first"/>
+               <month value="june"/>
+       </calculation>
+</entry>
+<entry name="Labour Day" type="floating">
+       <calculation>
+               <weekday value="monday"/>
+               <dayofmonth value="fourth"/>
+               <month value="october"/>
+       </calculation>
+</entry>
 </entries>
 </nationaldays>
