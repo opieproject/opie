@@ -2,6 +2,7 @@
                              This file is part of the Opie Project
 
                              (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+
                              Inspired by the config classes from the KDE Project which are
               =.             (C) 1997 Matthias Kalle Dalheimer <kalle@kde.org>
             .=l.
@@ -108,8 +109,16 @@ private:
  * one group (including the creation of the OConfigGroupSaver object)
  * in one block.
  *
+ * \code
+ * OConfigGroupSaver saver(cfg,"TheGroupThatInWhat");
+ * \endcode
+ *
+ * Note that OConfigGroupSaver (cfg,"TheGroupThatInWhat"); would get imediately
+ * destructed after created and that you would save in the old group which
+ * is unwished.
+ *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.8 2004-04-04 21:27:42 zecke Exp $
+ * @version $Id: oconfig.h,v 1.9 2004-05-17 21:19:23 zecke Exp $
  * @see OConfig
  */
 
