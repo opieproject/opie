@@ -84,7 +84,7 @@ NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
  	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg \
  	noncore/apps/opie-console 
 	
-NONNET = noncore/net/networksetup \
+NONNET = noncore/net/networksetup/interfaces noncore/net/networksetup \
 	noncore/net/opieftp \
 	noncore/mail
 
