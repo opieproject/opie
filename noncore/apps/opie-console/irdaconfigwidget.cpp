@@ -84,6 +84,9 @@ void IrdaConfigWidget::load( const Profile& prof ) {
     case 2400:
         m_base->setSpeed( IOLayerBase::Baud_2400  );
         break;
+    case 1200:
+    	m_base->setSpeed( IOLayerBase::Baud_1200	);
+    	break;
     case 9600:
     default:
         m_base->setSpeed(IOLayerBase::Baud_9600 );
@@ -148,6 +151,9 @@ void IrdaConfigWidget::save( Profile& prof ) {
     case IOLayerBase::Baud_2400:
         speed = 2400;
         break;
+    case IOLayerBase::Baud_1200:
+    	speed = 2400;
+    	break;
     default:
     case IOLayerBase::Baud_9600:
         speed = 9600;

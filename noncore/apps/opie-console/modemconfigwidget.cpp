@@ -116,6 +116,8 @@ void ModemConfigWidget::load( const Profile& prof ) {
     case 2400:
         m_base->setSpeed( IOLayerBase::Baud_2400 );
         break;
+    case 1200:
+    	m_base->setSpeed( IOLayerBase::Baud_1200 );
     case 9600:
     default:
         m_base->setSpeed( IOLayerBase::Baud_9600 );
@@ -209,6 +211,9 @@ void ModemConfigWidget::save( Profile& prof ) {
     case IOLayerBase::Baud_2400:
         speed = 2400;
         break;
+    case IOLayerBase::Baud_1200:
+    	speed = 1200;
+    	break;
     }
 
     switch( m_base->data() ) {
