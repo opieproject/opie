@@ -597,7 +597,7 @@ void ContactEditor::init() {
 	  if (((*it) == "Anniversary") || 
 	      ((*it) == "Birthday")|| ((*it) == "Gender")) continue;
 
-	  l = new QLabel( mapIdToStr[mapStrToID[*it]].utf8() , container );
+	  l = new QLabel( mapIdToStr[mapStrToID[*it]], container );
 		listName.append( l );
 		gl->addWidget( l, i, 0 );
 		QLineEdit *e = new QLineEdit( container );
