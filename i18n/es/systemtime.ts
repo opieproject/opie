@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>ConfiguraciÃ³n</translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Predict</source>
@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Continue?</source>
-        <translation>Â¿ContinÃºo?</translation>
+        <translation>¿Continúo?</translation>
     </message>
     <message>
         <source>Running:
@@ -106,7 +106,7 @@ servidor: </translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation>PreguntÃ³ por un retraso de %1 minutos, pero sÃ³lo %2 minutos transcurrieron desde el Ãºltimo ajuste.&lt;br&gt;Â¿ContinÃºo?</translation>
+        <translation>Preguntó por un retraso de %1 minutos, pero sólo %2 minutos transcurrieron desde el último ajuste.&lt;br&gt;¿Continúo?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
@@ -144,7 +144,7 @@ servidor: </translation>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation>PredicciÃ³n de deriva horaria</translation>
+        <translation>Predicción de deriva horaria</translation>
     </message>
     <message>
         <source>n/a</source>
@@ -164,11 +164,11 @@ servidor: </translation>
     </message>
     <message>
         <source>Last [h]</source>
-        <translation>Ãšltima [h]</translation>
+        <translation>Última [h]</translation>
     </message>
     <message>
         <source>Offset [s]</source>
-        <translation>CorrecciÃ³n [s]</translation>
+        <translation>Corrección [s]</translation>
     </message>
     <message>
         <source>Predict time</source>
@@ -195,19 +195,19 @@ servidor: </translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation>minutos estre actualizaciones horarias</translation>
+        <translation>minutos entre actualizaciones horarias</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation>minutos estre predicciones</translation>
+        <translation>minutos entre predicciones</translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation>Mostrar informaciÃ³n del servidor horario</translation>
+        <translation>Mostrar información del servidor horario</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation>Mostrar informaciÃ³n de la predicciÃ³n horaria</translation>
+        <translation>Mostrar información de la predicción horaria</translation>
     </message>
 </context>
 <context>
