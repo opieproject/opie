@@ -187,4 +187,13 @@ well as the start date, and whether you want the search to be case sensitive.
 Click "Find" to find the next appointment that matches your criteria.
 </para>
 </section>
+
+<section><title>Beaming Appointments</title>
+<para>
+To beam an appointment to another device using the IrDA and OBEX protocols, you must first install the IrDA 
+Applet and enable IrDA with it (see <xref linkend=irda>).  Then select the appointment that you would like to 
+send in the Day View, and select Beam from the menu that appears.  Opie will then send the appointment to any 
+waiting device.
+</para>
+</section>
 </chapter>

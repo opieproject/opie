@@ -89,6 +89,15 @@ times to get to "B" and 2 more times to get back to all letters. 2+2=4).
 </para>
 </section>
 
+<section><title>Beaming Contacts</title>
+<para>
+To beam a contact to another device, you must first have the IrDA Applet installed, and you must enable IrDA in it.  
+(see <xref linkend=irda>).  Once this is done, you can select the contact you would like to beam, and press the 
+beam icon in the toolbar, or select Contact&arrow;Beam Entry.  Opie will then send the contact using the IrDA and 
+OBEX protocols to any waiting device.
+</para>
+</section>
+
 <section><title>Personal Details</title>
 <para>
 Change your personal details by going to <GUIMenu>Contact </GUIMenu>

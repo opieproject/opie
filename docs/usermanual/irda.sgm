@@ -1,4 +1,4 @@
-<chapter><title>IrDA Applet</title>
+<chapter id=irda><title>IrDA Applet</title>
 <para>
 The IrDA Applet provides a GUI for easilly controlling communication between your device and others using the IrDA 
 protocol.  You can use it to communicate with PalmOS based devices, cell phones, and almost anything else that
@@ -23,6 +23,17 @@ appropriate.
 <para>
 When you are done recieving files, you will want to select "Disable Recieve" and "Disable Discovery" from the 
 IrDA Applet's menu so that you are not wasting system resources.
+</para>
+</section>
+<section><title>Beaming Files</title>
+<para>
+Several applications support beaming files in a format specific to that application (specifically, Contacts, Calendar, 
+and Todo).  However, sometimes you may need to simply send a file to another device via IrDA, regardless of the 
+file type.  To do this, you can use either AdvancedFM (yet to be documented), or you can do this from the 
+Documents tab.  To beam a file from the Documents tab, you must first add that file to the Documents tab if you 
+havent already (see <xref linkend="adddoc">).  Then, go to the Documents tab and press and hold on the icon for 
+the file you want to send.  A dialog should appear, with a button in the bottom right labeled "Beam".  Press this 
+button, and Opie will beam the file to any waiting devices.
 </para>
 </section>
 <section><title>Stoping IrDA</title>

@@ -83,4 +83,13 @@ just check Completed tasks in the options menu, and you can see and edit it
 again.
 </para>
 </section>
+
+<section><title>Beaming Tasks</title>
+<para>
+To beam a task to another device using the IrDA and OBEX protocols, you must first install the IrDA
+Applet and enable IrDA with it (see <xref linkend=irda>).  Then select the task that you would like to and select 
+press the Beam icon in the toolbar, or select Data&arrow;Beam.  Opie will then send the task to any waiting 
+device.
+</para>
+</section>
 </chapter>
