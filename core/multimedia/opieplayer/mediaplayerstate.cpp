@@ -42,14 +42,14 @@
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
     : QObject( parent, name ), decoder( NULL ), libmpeg3decoder( NULL ) {
-    Config cfg( "MediaPlayer" );
+    Config cfg( "OpiePlayer" );
     readConfig( cfg );
     loadPlugins();
 }
 
 
 MediaPlayerState::~MediaPlayerState() {
-    Config cfg( "MediaPlayer" );
+    Config cfg( "OpiePlayer" );
     writeConfig( cfg );
 }
 

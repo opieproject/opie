@@ -289,7 +289,7 @@ populateVideoView();
 
     setCentralWidget( vbox5 );
 
-    Config cfg( "MediaPlayer" );
+    Config cfg( "OpiePlayer" );
     readConfig( cfg );
     QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
 //    qDebug("currentList is "+currentPlaylist);
@@ -301,7 +301,7 @@ populateVideoView();
 
 
 PlayListWidget::~PlayListWidget() {
-    Config cfg( "MediaPlayer" );
+    Config cfg( "OpiePlayer" );
     writeConfig( cfg );
      
 
@@ -625,7 +625,7 @@ void PlayListWidget::saveList() {
         if(!lnk.writeLink())
             qDebug("Writing doclink did not work");
       }
-        Config config( "MediaPlayer" );
+        Config config( "OpiePlayer" );
         config.writeEntry("CurrentPlaylist",filename);
         setCaption(tr("OpiePlayer: ")+filename);
         d->selectedFiles->first();
@@ -645,7 +645,7 @@ void PlayListWidget::loadList( const DocLnk & lnk) {
 
         tabWidget->setCurrentPage(0);
 
-        Config config( "MediaPlayer" );
+        Config config( "OpiePlayer" );
         config.writeEntry("CurrentPlaylist", name);
 //        d->selectedFiles->first();
     }
@@ -668,7 +668,7 @@ void PlayListWidget::setView( char view ) {
 
 void PlayListWidget::addSelected() {
 
-      Config cfg( "MediaPlayer" );
+      Config cfg( "OpiePlayer" );
       cfg.setGroup("PlayList");
       QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
       int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
@@ -879,7 +879,7 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *item, const 
 }
 
 void PlayListWidget::listDelete() {
-      Config cfg( "MediaPlayer" );
+      Config cfg( "OpiePlayer" );
       cfg.setGroup("PlayList");
       QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
       QString file;
