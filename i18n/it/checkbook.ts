@@ -12,11 +12,11 @@
     </message>
     <message>
         <source>Info</source>
-        <translation>Info</translation>
+        <translation>Informazioni</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation>Transazioni</translation>
+        <translation>Movimenti</translation>
     </message>
     <message>
         <source>Charts</source>
@@ -40,7 +40,7 @@
     </message>
     <message>
         <source>Savings</source>
-        <translation>Risparmi</translation>
+        <translation>Risparmio</translation>
     </message>
     <message>
         <source>Checking</source>
@@ -56,11 +56,11 @@
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation>Mutui</translation>
+        <translation>Mutuo</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation>Altri</translation>
+        <translation>Altro</translation>
     </message>
     <message>
         <source>Bank:</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation>Inizio saldo:</translation>
+        <translation>Saldo iniziale:</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation>Bilancio attuale: %10.00</translation>
+        <translation>Saldo: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
@@ -114,7 +114,7 @@
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation>Questa è una lista di tutte le transazioni inserite per questa nota spese.
+        <translation>Questa è una lista di tutti i movimenti inseriti per questa nota spese.
 
 Per ordinarla per un campo specifico, clicca sul nome della colonna.</translation>
     </message>
@@ -128,15 +128,15 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Amount</source>
-        <translation>Ammontare</translation>
+        <translation>Importo</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nuova</translation>
+        <translation>Nuovo</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation>Clicca qui per aggiungere una nuova transazione.</translation>
+        <translation>Clicca qui per aggiungere un nuovo movimento.</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -144,7 +144,7 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation>Seleziona una transazione e clicca qui per modificarla.</translation>
+        <translation>Seleziona un movimento e clicca qui per modificarlo.</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -184,15 +184,15 @@ Per ordinarla per un campo specifico, clicca sul nome della colonna.</translatio
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation>Bilancio attuale: %1%2</translation>
+        <translation>Saldo: %1%2</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation>Elimina transazione</translation>
+        <translation>Elimina movimento</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation>Protetto da password</translation>
+        <translation>Protetta da password</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
@@ -264,7 +264,7 @@ da password</translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nuovo</translation>
+        <translation>Nuova</translation>
     </message>
     <message>
         <source>Click here to create a new checkbook.
@@ -272,7 +272,7 @@ da password</translation>
 You also can select New from the Checkbook menu.</source>
         <translation>Clicca per creare una nuova nota spese.
 
-Puoi anche selezionare Nuovo dal menu.</translation>
+Puoi anche selezionare Nuova dal menu.</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -294,7 +294,7 @@ Puoi anche selezionare Modifica dal menu, o clicca e tieni premuto sul nome dell
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation>Seleziona una nota spese e clicca qui per eliminarla.
+        <translation>Seleziona un movimento e clicca qui per eliminarlo.
 
 Puoi anche selezionare Elimina dal menu.</translation>
     </message>
@@ -312,7 +312,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation>Clicca qui per configurare questa app.</translation>
+        <translation>Clicca qui per configurare questa applicazione.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
@@ -320,7 +320,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation>Bilancio</translation>
+        <translation>Saldo</translation>
     </message>
     <message>
         <source>Enter password</source>
@@ -335,7 +335,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation>Transazione per</translation>
+        <translation>Movimento </translation>
     </message>
     <message>
         <source>Withdrawal</source>
@@ -343,7 +343,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation>Seleziona qui se la transazione è un prelievo o un deposito.</translation>
+        <translation>Seleziona qui se il movimento è un prelievo o un deposito.</translation>
     </message>
     <message>
         <source>Deposit</source>
@@ -355,7 +355,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation>Seleziona qui la data della transazione.</translation>
+        <translation>Seleziona qui la data del movimento.</translation>
     </message>
     <message>
         <source>Number:</source>
@@ -371,7 +371,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
-        <translation>Inserisci qui la descrizione della transazione.</translation>
+        <translation>Inserisci qui la descrizione del movimento.</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -379,7 +379,7 @@ Puoi anche selezionare Elimina dal menu.</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
-        <translation>Seleziona qui la categoria della transazione.</translation>
+        <translation>Seleziona qui la categoria del movimento.</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -389,19 +389,19 @@ Puoi anche selezionare Elimina dal menu.</translation>
         <source>Select transaction type here.
 
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
-        <translation>Seleziona qui il tipo di transazione.
+        <translation>Seleziona qui il tipo di movimento.
 
-Le opzioni disponibili variano a seconda se la transazione è un deposito o un prelievo.</translation>
+Le opzioni disponibili variano a seconda se il movimento è un deposito o un prelievo.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation>Ammontare:</translation>
+        <translation>Importo:</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
 
 The value entered should always be positive.</source>
-        <translation>Inserisci qui l&apos;importo della transazione.
+        <translation>Inserisci qui l&apos;importo del movimento.
 
 Il valore inserito deve essere sempre positivo.</translation>
     </message>
@@ -413,7 +413,7 @@ Il valore inserito deve essere sempre positivo.</translation>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation>Inserisci ogni tassa associata a questa transazione.
+        <translation>Inserisci ogni tassa associata a questo movimento.
 
 Il valore inserito deve essere sempre positivo.</translation>
     </message>
@@ -423,7 +423,7 @@ Il valore inserito deve essere sempre positivo.</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
-        <translation>Inserisci qui ogni altra informazione per questa transazione.</translation>
+        <translation>Inserisci qui ogni altra informazione per questo movimento.</translation>
     </message>
     <message>
         <source>Automobile</source>

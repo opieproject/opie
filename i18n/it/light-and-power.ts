@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>on AC</source>
-        <translation>con Corrente</translation>
+        <translation>con AC</translation>
     </message>
     <message>
         <source>Warnings</source>
