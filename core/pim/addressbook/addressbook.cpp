@@ -355,7 +355,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 
 	if ( !allList.count() ) {
 		QMessageBox::information( this, "Import VCard",
-					  "It was impossible to import the VCard.\n"
+					  "It was impossible to import\nthe VCard.\n"
 					  "The VCard may be corrupted!" );
 	}
 
