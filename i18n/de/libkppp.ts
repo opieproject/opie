@@ -1,132 +1,138 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AccountWidget</name>
     <message>
         <source>&amp;Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Editieren...</translation>
     </message>
     <message>
         <source>Allows you to modify the selected account</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermöglicht die Modifikation des Zugangs</translation>
     </message>
     <message>
         <source>&amp;New...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neu...</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellung einer neuen Wählverbindung
+ins Internet</translation>
     </message>
     <message>
         <source>Co&amp;py</source>
-        <translation type="unfinished"></translation>
+        <translation>Ko&amp;pieren</translation>
     </message>
     <message>
         <source>Makes a copy of the selected account. All
 settings of the selected account are copied
 to a new account, that you can modify to fit your
 needs</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellt eine Kopie des gewählten Zugangs. Alle
+Einstellungen des selektierten Zugangs werden in einen
+neuen Zugang kopiert, der modifiziert werden kann</translation>
     </message>
     <message>
         <source>De&amp;lete</source>
-        <translation type="unfinished"></translation>
+        <translation>L&amp;öschen</translation>
     </message>
     <message>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Löscht den gewählten Zugang
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>Maximum number of accounts reached.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maximale Anzahl Zugänge erreicht.</translation>
     </message>
     <message>
         <source>No account selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Zugang gewählt.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
 the account &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sich Sie sicher den Zugang &quot;%1&quot; löschen 
+zu wollen ?</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestätigen</translation>
     </message>
     <message>
         <source>New Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer Zugang</translation>
     </message>
     <message>
         <source>Edit Account: </source>
-        <translation type="unfinished"></translation>
+        <translation>Zugang Bearbeiten: </translation>
     </message>
     <message>
         <source>Dial</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen</translation>
     </message>
     <message>
         <source>Edit Login Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Login Script editieren</translation>
     </message>
     <message>
         <source>Authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentisierung</translation>
     </message>
     <message>
         <source>IP Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Einstellung</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation>IP</translation>
     </message>
     <message>
         <source>Gateway Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Gateway Setup</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Gateway</translation>
     </message>
     <message>
         <source>DNS Servers</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Server</translation>
     </message>
     <message>
         <source>DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS</translation>
     </message>
     <message>
         <source>Execute Programs</source>
-        <translation type="unfinished"></translation>
+        <translation>Programme ausführen</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführen</translation>
     </message>
     <message>
         <source>You must enter a unique account name</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie müssen einen eindeutigen Zugangsnamen angeben</translation>
     </message>
     <message>
         <source>Byte</source>
-        <translation type="unfinished"></translation>
+        <translation>Byte</translation>
     </message>
     <message>
         <source>KB</source>
-        <translation type="unfinished"></translation>
+        <translation>KB</translation>
     </message>
     <message>
         <source>MB</source>
-        <translation type="unfinished"></translation>
+        <translation>MB</translation>
     </message>
     <message>
         <source>GB</source>
-        <translation type="unfinished"></translation>
+        <translation>GB</translation>
     </message>
 </context>
 <context>
@@ -185,7 +191,7 @@ whether PAP or CHAP is right, choose PAP/CHAP.</source>
     </message>
     <message>
         <source>Store password</source>
-        <translation type="unfinished"></translation>
+        <translation>Passwort speichern</translation>
     </message>
     <message>
         <source>&lt;p&gt;When this is turned on, your ISP password
