@@ -1,5 +1,6 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
+	* Improved multikeyboard support, added keyboard layout switching applet (mouse)
 	* Added a new mail client based on libetpan (harlekin,alwin,jgf)
 	* Improved light-n-power for C7x0 (mickeyl)
 	* Added automatic rotation support for C7x0 (treke)
