@@ -54,6 +54,9 @@ public:
         ButtonType type;
     };
 
+    typedef std::vector<QBitmap> MaskVector;
+    typedef std::vector<QPixmap> PixmapVector;
+
     MediaWidget( PlayListWidget &_playList, MediaPlayerState &_mediaPlayerState, QWidget *parent = 0, const char *name = 0 );
     virtual ~MediaWidget();
 
@@ -86,6 +89,10 @@ protected:
     ButtonVector buttons;
 
     QImage buttonMask;
+
+    MaskVector masks;
+    PixmapVector buttonPixUp;
+    PixmapVector buttonPixDown;
 
     QPoint upperLeftOfButtonMask;
 };
