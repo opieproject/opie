@@ -35,14 +35,14 @@ $(TOPDIR)/stamp-headers :
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
 	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
 	ln -sf ../../libopie/$$generatedHeader $$generatedHeader; done )
+	ln -sf ../../library/custom.h $(TOPDIR)/include/qpe/custom.h
 	touch $@
 	
 $(TOPDIR)/library/custom.h : $(TOPDIR)/.config
 	@-rm -f $@
-	$(if $(patsubst "%",%,$(CONFIG_CUSTOMFILE)),\
-		ln -sf $(patsubst "%",%,$(CONFIG_CUSTOMFILE)) $@,\
-		touch $@\
-	)
+	@$(if $(patsubst "%",%,$(CONFIG_CUSTOMFILE)),\
+		ln -sf $(patsubst "%",%,$(CONFIG_CUSTOMFILE)) $@)
+	@touch $@
 
 $(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/conf scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/mconf scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/qconf scripts/kconfig/qconf $(TOPDIR)/qmake/qmake :
 	$(call descend,$(shell dirname $@),$(shell basename $@))
@@ -55,7 +55,7 @@ $(TOPDIR)/mkspecs/default :
 ## general rules ##
 
 define descend
-	$(MAKE) -C $(1) $(2)
+	$(MAKE) $(if $(QMAKE),QMAKE=$(QMAKE)) -C $(1) $(2)
 endef
 
 define makefilegen
