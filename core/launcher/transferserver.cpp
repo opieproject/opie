@@ -25,10 +25,14 @@
 #include <time.h>
 #include <shadow.h>
 
+#ifndef  _OS_LINUX_
+
 extern "C" {
 #include <uuid/uuid.h>
 #define UUID_H_INCLUDED
 }
+
+#endif // not defined linux
 
 #if defined(_OS_LINUX_)
 #include <shadow.h>
@@ -76,15 +80,46 @@ void TransferServer::newConnection( int socket )
     (void) new ServerPI( socket, this );
 }
 
+/*
+ * small class in anonymous namespace
+ * to generate a QUUid for us
+ */
+namespace {
+    struct UidGen {
+        QString uuid();
+    };
+#if defined(_OS_LINUX_)
+    /*
+     * linux got a /proc/sys/kernel/random/uuid file
+     * it'll generate the uuids for us
+     */
+    QString UidGen::uuid() {
+        QFile file( "/proc/sys/kernel/random/uuid" );
+        if (!file.open(IO_ReadOnly ) )
+            return QString::null;
+
+        QTextStream stream(&file);
+
+        return "{" + stream.read().stripWhiteSpace() + "}";
+    }
+#else
+    QString UidGen::uuid() {
+        uuid_t uuid;
+        uuid_generate( uuid );
+        return QUUid( uuid ).toString();
+    }
+#endif
+}
+
 QString SyncAuthentication::serverId()
 {
     Config cfg("Security");
     cfg.setGroup("Sync");
     QString r=cfg.readEntry("serverid");
     if ( r.isEmpty() ) {
-  uuid_t uuid;
-  uuid_generate( uuid );
-  cfg.writeEntry("serverid",(r = QUuid( uuid ).toString()));
+        UidGen gen;
+        r = gen.uuid();
+        cfg.writeEntry("serverid", r );
     }
     return r;
 }
@@ -115,7 +150,7 @@ int SyncAuthentication::isAuthorized(QHostAddress peeraddress)
     cfg.setGroup("Sync");
 //    QString allowedstr = cfg.readEntry("auth_peer","192.168.1.0");
      uint auth_peer = cfg.readNumEntry("auth_peer",0xc0a80100);
-    
+
 //    QHostAddress allowed;
 //    allowed.setAddress(allowedstr);
 //    uint auth_peer = allowed.ip4Addr();
@@ -173,14 +208,14 @@ bool SyncAuthentication::checkPassword( const QString& password )
 
     // Second, check sync password...
     QString pass = password.left(6);
-    /* old QtopiaDesktops are sending 
+    /* old QtopiaDesktops are sending
      * rootme newer versions got a Qtopia
      * prefixed. Qtopia prefix will suceed
      * until the sync software syncs up
      * FIXME
      */
     if ( pass == "rootme" || pass == "Qtopia") {
-          
+
   QString cpassword = QString::fromLocal8Bit( crypt( password.mid(8).local8Bit(), "qp" ) );
   Config cfg("Security");
   cfg.setGroup("Sync");
@@ -224,11 +259,11 @@ ServerPI::ServerPI( int socket, QObject *parent , const char* name  )
   state = Forbidden;
   startTimer( 0 );
     } else
-#endif  
+#endif
     {
   connect( this, SIGNAL( readyRead() ), SLOT( read() ) );
   connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
-  
+
   passiv = FALSE;
   for( int i = 0; i < 4; i++ )
       wait[i] = FALSE;
@@ -627,7 +662,7 @@ void ServerPI::process( const QString& message )
         qDebug("sending back gzip guess of %d", guess);
         send( "213 " + QString::number(guess) );
     }
-      }     
+      }
   }
     }
     // name list (NLST)
@@ -1177,7 +1212,7 @@ void ServerDTP::readyRead()
     else if ( RetrieveGzipFile == mode ) {
   if ( !gzipProc->isRunning() )
       gzipProc->start();
-  
+
         QByteArray s;
   s.resize( bytesAvailable() );
   readBlock( s.data(), bytesAvailable() );
@@ -1260,7 +1295,7 @@ void ServerDTP::sendGzipFile( const QString &fn,
     connect( createTargzProc,
        SIGNAL( readyReadStdout() ), SLOT( gzipTarBlock() ) );
 
-    gzipProc->setArguments( "gzip" ); 
+    gzipProc->setArguments( "gzip" );
     connect( gzipProc, SIGNAL( readyReadStdout() ),
        SLOT( writeTargzBlock() ) );
 }
@@ -1306,7 +1341,7 @@ void ServerDTP::retrieveGzipFile( const QString &fn )
     file.setName( fn );
     mode = RetrieveGzipFile;
 
-    gzipProc->setArguments( "gunzip" ); 
+    gzipProc->setArguments( "gunzip" );
     connect( gzipProc, SIGNAL( readyReadStdout() ),
        SLOT( tarExtractBlock() ) );
     connect( gzipProc, SIGNAL( processExited() ),

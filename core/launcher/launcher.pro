@@ -99,7 +99,7 @@ DEPENDPATH	+= ../../core/apps/calibrate
 INCLUDEPATH += ../../rsync
 DEPENDPATH	+= ../../rsync
 TARGET		= qpe
-LIBS		+= -lqpe -lcrypt -lopie -luuid
+LIBS		+= -lqpe -lcrypt -lopie 
 
 TRANSLATIONS = ../../i18n/de/qpe.ts \
 	 ../../i18n/en/qpe.ts \
