@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.4 2002-12-28 15:40:30 mjm Exp $
+ * $Id: wl_proto.cc,v 1.5 2002-12-28 15:45:35 mjm Exp $
  */
 
 #include "wl_proto.hh"
@@ -9,7 +9,7 @@
 #include "wl_sock.hh"
 
 /* Adds a field to the buffer */
-int add_field(char *buffer, char *string, int len)
+int add_field(char *buffer, const char *string, int len)
 {
   char newlen[5];
   
@@ -24,7 +24,7 @@ int add_field(char *buffer, char *string, int len)
   return (atoi(newlen) + 3);
 }
 
-int get_field(const char *buffer, char *out)
+int get_field(const char *buffer, char *out, int maxlen)
 {
   char len[5];
 
@@ -32,8 +32,12 @@ int get_field(const char *buffer, char *out)
   memcpy(len, buffer, 3);
 
   /* Copy buffer to out pointer */
-  memset(out, 0, atoi(len) + 1);
-  memcpy(out, buffer + 3, atoi(len));
+  memset(out, 0, maxlen);
+
+  if(atoi(len)-3 > maxlen -1)
+    memcpy(out, buffer + 3, maxlen - 1);
+  else
+    memcpy(out, buffer + 3, atoi(len));
 
   /* Return length of whole field (including 3 byte length) */
   return (atoi(len) + 3);
@@ -100,24 +104,24 @@ int get_network_found (void *structure, const char *buffer)
 
   /* Get net type (accesspoint || ad-hoc || ...) */
   memset(temp, 0, sizeof(temp));
-  len += get_field(buffer + len, temp);
+  len += get_field(buffer + len, temp, sizeof(temp));
   ptr->net_type = atoi(temp); 
    
   /* Get channel */
   memset(temp, 0, sizeof(temp));
-  len += get_field(buffer + len, temp);
+  len += get_field(buffer + len, temp, sizeof(temp));
   ptr->channel = atoi(temp);
 
   /* Set WEP y/n */
   memset(temp, 0, sizeof(temp));
-  len += get_field(buffer + len, temp);
+  len += get_field(buffer + len, temp, sizeof(temp));
   ptr->wep = atoi(temp);
 
   /* Set MAC address */
-  len += get_field(buffer + len, ptr->mac);
+  len += get_field(buffer + len, ptr->mac, sizeof(ptr->mac));
 
   /* Set BSSID */
-  len += get_field(buffer + len, ptr->bssid);
+  len += get_field(buffer + len, ptr->bssid, sizeof(ptr->bssid));
 
   return 1;
 }

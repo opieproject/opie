@@ -1,4 +1,4 @@
-/* $Id: wl_proto.hh,v 1.2 2002-12-28 15:28:49 mjm Exp $ */
+/* $Id: wl_proto.hh,v 1.3 2002-12-28 15:45:35 mjm Exp $ */
 
 #ifndef WLPROTO_HH
 #define WLPROTO_HH
@@ -13,6 +13,8 @@
 #define STARTSNIFF 98
 #define STOPSNIFF  99
 
+int add_field(char *, const char *, int);
+int get_field(const char *, char *, int);
 int send_network_found (const char *, int, void *);
 int get_network_found (void *, const char *);
 
