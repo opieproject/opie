@@ -1,0 +1,4 @@
+Makefile*
+moc_*
+sshkeysbase.cpp
+sshkeysbase.h

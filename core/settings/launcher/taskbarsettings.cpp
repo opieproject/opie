@@ -88,17 +88,18 @@ void TaskbarSettings::init ( )
 
 		QLibrary *lib = new QLibrary ( path + "/" + *it );
 		lib-> queryInterface ( IID_TaskbarNamedApplet, (QUnknownInterface**) &iface );
-		if ( iface ) {
-			QString lang = getenv( "LANG" );
-			QTranslator *trans = new QTranslator ( qApp );
-			QString type = (*it). left ((*it). find ("."));
-			QString tfn = QPEApplication::qpeDir ( ) + "/i18n/" + lang + "/" + type + ".qm";
-			if ( trans-> load ( tfn ))
-				qApp-> installTranslator ( trans );
+                if ( iface ) {
+
+                    QString lang = getenv( "LANG" );
+                    QTranslator *trans = new QTranslator ( qApp );
+                    QString type = (*it). left ((*it). find ("."));
+                    QString tfn = QPEApplication::qpeDir ( ) + "/i18n/" + lang + "/" + type + ".qm";
+                    if ( trans-> load ( tfn ))
+                        qApp-> installTranslator ( trans );
 		    else
-				delete trans;
-			name = iface-> name ( );
-			icon = iface-> icon ( );
+                        delete trans;
+                    name = iface-> name ( );
+                    icon = iface-> icon ( );
 			iface-> release ( );
 			lib-> unload ( );
 		} else {
@@ -106,7 +107,7 @@ void TaskbarSettings::init ( )
 			name = (*it). mid ( 3 );
 			int sep = name. find( ".so" );
 			if ( sep > 0 )
-				name. truncate ( sep );
+                            name. truncate ( sep );
 			sep = name. find ( "applet" );
 			if ( sep == (int) name.length ( ) - 6 )
 				name. truncate ( sep );
