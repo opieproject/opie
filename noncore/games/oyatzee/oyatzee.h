@@ -107,9 +107,6 @@ class Board : public QWidget
 	Q_OBJECT
 	public:
 		Board( QWidget *parent = 0, const char* name = 0 );
-
-	protected:
-		virtual void paintEvent(  QPaintEvent *e );
 };
 
 class Possibilityboard : public Board
@@ -166,7 +163,12 @@ class Game
 {
 	public:
 		Game( playerList pla );
+
 		playerList players;
+		int currentPlayer;
+
+		void startGame();
+		void stopGame();
 };
 
 #endif // WORDGAME_H

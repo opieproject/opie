@@ -47,8 +47,8 @@ OYatzee::OYatzee( QWidget *parent , const char *name, WFlags fl ) : QMainWindow(
 	ps.append( new Player( "Christine" ) );
 	ps.append( new Player( "Stephan" ) );
 
-	Game *g = new Game( ps );
-	
+//X 	Game *g = new Game( ps );
+//X 	
 	
 	QVBoxLayout *vbox = new QVBoxLayout( thing );
 
@@ -404,14 +404,6 @@ Board::Board( QWidget *parent , const char* name ) : QWidget ( parent , name )
 {
 }
 
-void Board::paintEvent( QPaintEvent* )
-{
-	QPainter p;
-	p.begin( this );
-
-	p.drawRect( 0,0, this->width() , this->height() );
-}
-
 /*
  * Resultboard
  */
@@ -443,7 +435,36 @@ void Possibilityboard::paintEvent( QPaintEvent* )
 	QPainter p;
 	p.begin( this );
 
-	p.drawRect( 0,0, this->width() , this->height() );
+	const int cell_width = this->width();
+	const int h = this->height();
+	const int cell_height = h/17;
+
+	QStringList begriffe;
+	begriffe.append( "1er" );
+	begriffe.append( "2er" );
+	begriffe.append( "3er" );
+	begriffe.append( "4er" );
+	begriffe.append( "5er" );
+	begriffe.append( "6er" );
+	begriffe.append( "Total" );
+	begriffe.append( "Bonus" );
+	begriffe.append( "3oaK" );
+	begriffe.append( "4oaK" );
+	begriffe.append( "Full House" );
+	begriffe.append( "Short S" );
+	begriffe.append( "Long S" );
+	begriffe.append( "Yatzee!" );
+	begriffe.append( "Chance" );
+	begriffe.append( "Score" );
+
+	QStringList::Iterator it = begriffe.begin();
+	
+	for ( int i = 1 ; i < 18 ; ++i )
+	{
+		p.drawRect( 0 , i*cell_height , cell_width , cell_height );
+		p.drawText( 0 , i*cell_height , cell_width , cell_height , Qt::AlignCenter , *it );
+		++it;
+	}
 }
 
 /*
@@ -454,4 +475,10 @@ Game::Game( playerList pla )
 {
 	players = pla;
 }
+
+void Game::startGame()
+{}
+
+void Game::stopGame()
+{}
 
