@@ -83,7 +83,7 @@ public:
 #endif
     }
 
-    QPixmap* busyPixmap() const { return (QPixmap*)&bpm; }
+    QPixmap* busyPixmap() const { return (QPixmap*)&bpm[::abs(busystate)]; }
     QIconViewItem* busyItem() const { return bsy; }
     void setBigIcons( bool bi ) { bigIcns = bi; }
 
@@ -103,11 +103,11 @@ public:
 	    bsy = c;
 	
 	    if ( bsy ) {
+	    	busystate = 5;
+	    	for ( int i = 0; i <= 5; i++ )
+	    		bpm [i] = QPixmap ( );
+	    	timerEvent ( 0 );
 	    	busytimer = startTimer ( 150 );
-	    	busystate = 50;
-		// not sure what this startTimer is for, maybe i am just to tired. But 
-		// currently that causes 100% cpuload on app launch
-		//startTimer ( 0 );
 	    }
 	    else
 		killTimer ( busytimer );
@@ -118,39 +118,40 @@ public:
     {
 	if ( !te || ( te-> timerId ( ) == busytimer )) {
 	    if ( bsy ) {
-		QPixmap *src = bsy-> QIconViewItem::pixmap();
-		QImage img = src->convertToImage();
-		QRgb* rgb;
-		int count;
-		if ( img.depth() == 32 ) {
-		    rgb = (QRgb*)img.bits();
-		    count = img.bytesPerLine()/sizeof(QRgb)*img.height();
-		} else {
-		    rgb = img.colorTable();
-		    count = img.numColors();
-		}
-		int rc, gc, bc;
-		int bs = ::abs ( busystate ) + 25;
-		colorGroup().highlight().rgb( &rc, &gc, &bc );
-		rc = rc * bs / 100;
-		gc = gc * bs / 100;
-		bc = bc * bs / 100;
+	        if ( bpm [::abs(busystate)]. isNull ( )) {
+		    QPixmap *src = bsy-> QIconViewItem::pixmap();
+		    QImage img = src->convertToImage();
+		    QRgb* rgb;
+		    int count;
+		    if ( img.depth() == 32 ) {
+			rgb = (QRgb*)img.bits();
+			count = img.bytesPerLine()/sizeof(QRgb)*img.height();
+		    } else {
+			rgb = img.colorTable();
+			count = img.numColors();
+		    }
+		    int rc, gc, bc;
+		    int bs = ::abs ( busystate * 10 ) + 25;
+		    colorGroup().highlight().rgb( &rc, &gc, &bc );
+		    rc = rc * bs / 100;
+		    gc = gc * bs / 100;
+		    bc = bc * bs / 100;
 		
-		for ( int r = 0; r < count; r++, rgb++ ) {
-		    int ri = rc + qRed   ( *rgb ) * ( 100 - bs ) / 100;
-		    int gi = gc + qGreen ( *rgb ) * ( 100 - bs ) / 100;
-		    int bi = bc + qBlue  ( *rgb ) * ( 100 - bs ) / 100;
-		    int ai = qAlpha ( *rgb );
-		    *rgb = qRgba ( ri, gi, bi, ai );
-		}
+		    for ( int r = 0; r < count; r++, rgb++ ) {
+			int ri = rc + qRed   ( *rgb ) * ( 100 - bs ) / 100;
+			int gi = gc + qGreen ( *rgb ) * ( 100 - bs ) / 100;
+			int bi = bc + qBlue  ( *rgb ) * ( 100 - bs ) / 100;
+			int ai = qAlpha ( *rgb );
+			*rgb = qRgba ( ri, gi, bi, ai );
+		    }
 
-		bpm.convertFromImage( img );
-		
+		    bpm [::abs(busystate)].convertFromImage( img );
+		}
 		bsy-> repaint ( );
 
-		busystate += 10;
-		if ( busystate > 50 )
-			busystate = -40;
+		busystate++;
+		if ( busystate > 5 )
+			busystate = -4;
 	    }
 	}
     }
@@ -311,7 +312,7 @@ private:
     bool ike;
     bool bigIcns;
     QPixmap bgPixmap;
-    QPixmap bpm;
+    QPixmap bpm [6];
     QColor bgColor;
     int busytimer;
     int busystate;
