@@ -1,6 +1,6 @@
-#include <stdlib.h>
 #include "accountview.h"
 #include <libmailwrapper/mailtypes.h>
+#include <libmailwrapper/abstractmail.h>
 #include "defines.h"
 #include "newmaildir.h"
 #include <qmessagebox.h>
@@ -446,8 +446,7 @@ void AccountView::populate( QList<Account> list )
 {
     clear();
 
-    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
-    (void) new MBOXviewItem(localfolders,this);
+    (void) new MBOXviewItem(AbstractMail::defaultLocalfolder(),this);
 
     Account *it;
     for ( it = list.first(); it; it = list.next() ) {

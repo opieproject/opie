@@ -62,6 +62,7 @@ protected:
     int sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which);
 
     int m_queuedMail;
+    static const char* USER_AGENT;
 
 protected slots:
    void emitQCop( int queued );

@@ -45,6 +45,8 @@ public:
     /* mbox only! */
     static AbstractMail* getWrapper(const QString&a);
 
+    static QString defaultLocalfolder();
+    
 protected:
     static encodedString*decode_String(const encodedString*text,const QString&enc);
     static QString convert_String(const char*text);

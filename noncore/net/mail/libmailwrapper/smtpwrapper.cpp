@@ -20,7 +20,7 @@
 //#include "defines.h"
 #include "sendmailprogress.h"
 
-#define USER_AGENT          "OpieMail v0.1"
+const char* SMTPwrapper::USER_AGENT="OpieMail v0.3";
 
 progressMailSend*SMTPwrapper::sendProgress = 0;
 
@@ -488,7 +488,7 @@ void SMTPwrapper::progress( size_t current, size_t maximum )
 void SMTPwrapper::storeMail(char*mail, size_t length, const QString&box)
 {
     if (!mail) return;
-    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
+    QString localfolders = AbstractMail::defaultLocalfolder();
     MBOXwrapper*wrap = new MBOXwrapper(localfolders);
     wrap->storeMessage(mail,length,box);
     delete wrap;
@@ -689,7 +689,7 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
 
     if (!smtp) return false;
 
-    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
+    QString localfolders = AbstractMail::defaultLocalfolder();
     MBOXwrapper*wrap = new MBOXwrapper(localfolders);
     if (!wrap) {
         qDebug("memory error");

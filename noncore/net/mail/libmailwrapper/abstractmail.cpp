@@ -92,3 +92,10 @@ int AbstractMail::createMbox(const QString&,const Folder*,const QString& delemit
 {
     return 0;
 }
+
+QString AbstractMail::defaultLocalfolder()
+{
+    QString f = getenv( "HOME" );
+    f += "/Applications/opiemail/localmail";
+    return f;
+}
