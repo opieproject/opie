@@ -34,6 +34,9 @@ class WirelessControl : public QFrame
 public:
     WirelessControl( WirelessApplet* icon, QWidget *parent=0, const char *name=0 );
     void show( bool );
+    
+    void readConfig();
+    void writeConfigEntry( const char* entry, int val );
 
     MGraph* mgraph;
     QLabel* statusLabel;
@@ -41,9 +44,14 @@ public:
 
 public slots:
     void updateDelayChange( int );
+    void displayStyleChange( int );
         
 private:
     WirelessApplet* applet;
+
+    int displayStyle;
+    int updateFrequency;
+
 };
 
 class WirelessApplet : public QWidget
@@ -56,9 +64,7 @@ public:
     
     virtual void timerEvent( QTimerEvent* );
     void updateDelayChange( int delay );
-    
-public slots:
-    void styleChange( int );
+    void displayStyleChange( int style );
 
 private:
     void mousePressEvent( QMouseEvent * );

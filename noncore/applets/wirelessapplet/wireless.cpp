@@ -17,6 +17,7 @@
 
 #include <qapplication.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
 #include <qpoint.h>
 #include <qradiobutton.h>
@@ -49,6 +50,10 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
 {
 
+    readConfig();
+    writeConfigEntry( "UpdateFrequency", updateFrequency );
+    writeConfigEntry( "DisplayStyle", displayStyle );
+    
     setFrameStyle( QFrame::PopupPanel | QFrame::Raised );    
     QGridLayout *grid = new QGridLayout( this, 3, 2, 6, 2, "top layout" );  
     
@@ -77,7 +82,7 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     r1->setFocusPolicy( QWidget::NoFocus );
     r2->setFocusPolicy( QWidget::NoFocus );
     group->setFocusPolicy( QWidget::NoFocus );
-    group->setButton( STYLE_ANTENNA );
+    group->setButton( displayStyle );
     grid->addWidget( group, 0, 1 );
 
     /* quality graph */
@@ -99,17 +104,18 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     /* update Frequency Label */
     
     updateLabel = new QLabel( this );
-    updateLabel->setText( "Update every 500 ms" );
+    text.sprintf( "Update every %d s", updateFrequency );
+    updateLabel->setText( text );
     grid->addWidget( updateLabel, 2, 1 );
 
     /* update Frequency Slider */
     
     QSlider* updateSlider = new QSlider( QSlider::Horizontal, this );
-    updateSlider->setRange( 50, 999 );
-    updateSlider->setValue( 500 );
+    updateSlider->setRange( 0, 9 );
+    updateSlider->setValue( updateFrequency );
     updateSlider->setTickmarks( QSlider::Both );
-    updateSlider->setTickInterval( 100 );
-    updateSlider->setSteps( 50, 50 );
+    updateSlider->setTickInterval( 1 );
+    updateSlider->setSteps( 1, 1 );
     updateSlider->setFocusPolicy( QWidget::NoFocus );
     grid->addWidget( updateSlider, 1, 1 );
     connect( updateSlider, SIGNAL( valueChanged( int ) ),
@@ -118,17 +124,26 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     setFixedSize( sizeHint() );
     setFocusPolicy( QWidget::NoFocus );
 
+    applet->displayStyleChange( displayStyle );
+    applet->updateDelayChange( updateFrequency );
+    
     connect( group, SIGNAL( clicked( int ) ),
-             applet, SLOT( styleChange( int ) ) );   
-
+             this, SLOT( displayStyleChange( int ) ) );    
 }
 
 void WirelessControl::updateDelayChange( int delay )
 {
     QString text;
-    text.sprintf( "Update every %3d ms", delay );
+    text.sprintf( "Update every %d s", delay );
     updateLabel->setText( text );
     applet->updateDelayChange( delay );
+    writeConfigEntry( "UpdateFrequency", delay );
+}
+
+void WirelessControl::displayStyleChange( int style )
+{
+    applet->displayStyleChange( style );
+    writeConfigEntry( "DisplayStyle", style );
 }
 
 void WirelessControl::show ( bool )
@@ -145,19 +160,32 @@ void WirelessControl::show ( bool )
   QFrame::show();
 }
 
+void WirelessControl::readConfig()
+{
+    Config cfg( "qpe" );
+    cfg.setGroup( "Wireless" );
+    
+    updateFrequency = cfg.readNumEntry( "UpdateFrequency", 2 );
+    displayStyle = cfg. readNumEntry( "DisplayStyle", STYLE_ANTENNA );   
+}
 
+void WirelessControl::writeConfigEntry( const char *entry, int val )
+{
+    Config cfg( "qpe" );
+    cfg.setGroup( "Wireless" );
+    cfg.writeEntry( entry, val );
+}
+  
 //===========================================================================
 
 WirelessApplet::WirelessApplet( QWidget *parent, const char *name )
-    : QWidget( parent, name ), visualStyle( STYLE_ANTENNA ), interface( 0 )
+    : QWidget( parent, name ), visualStyle( STYLE_ANTENNA ),
+      timer( 0 ), interface( 0 )
 {
     setFixedHeight( 18 );
     setFixedWidth( 14 );
-    status = new WirelessControl( this, 0, "wireless status" );
-
     network = new MWirelessNetwork();
-    
-    timer = startTimer( 500 );
+    status = new WirelessControl( this, 0, "wireless status" );
 }
 
 void WirelessApplet::checkInterface()
@@ -176,18 +204,22 @@ void WirelessApplet::checkInterface()
 
 void WirelessApplet::updateDelayChange( int delay )
 {
-    killTimer( timer );
+    if ( timer )
+        killTimer( timer );
+    delay *= 1000;
+    if ( delay == 0 )
+        delay = 50;
     timer = startTimer( delay );
+}
+
+void WirelessApplet::displayStyleChange( int style )
+{
+    visualStyle = style;
+    repaint();
 }
 
 WirelessApplet::~WirelessApplet()
 {
-}
-
-void WirelessApplet::styleChange( int style )
-{
-    visualStyle = style;
-    repaint();
 }
 
 void WirelessApplet::timerEvent( QTimerEvent* )
