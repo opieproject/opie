@@ -27,6 +27,7 @@ public:
   void displayDetails();
 
 private:
+	QCheckListItem *nameItem;
 	QCheckListItem *destItem;
 	QCheckListItem *linkItem;
   PackageManagerSettings *settings;

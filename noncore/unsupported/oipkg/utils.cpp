@@ -1,7 +1,7 @@
 /***************************************************************************
-                          packagelistview.h  -  description
+                          utils.cpp  -  description
                              -------------------
-    begin                : Sat Apr 27 2002
+    begin                : Sun Apr 28 2002
     copyright            : (C) 2002 by tille
     email                : tille@handhelds.org
  ***************************************************************************/
@@ -15,41 +15,13 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef PACKAGELISTVIEW_H
-#define PACKAGELISTVIEW_H
+#include <qcombobox.h>
+#include <qstring.h>
+#include "utils.h"
 
-#include <qlistview.h>
-#include <qaction.h>
-#include <qtimer.h>
-#include <qwidget.h>
-#include <qpopupmenu.h>
-#include "debug.h"
-
-class PackageListItem;
-class Package;
-class PackageManagerSettings;
-
-class PackageListView : public QListView
+void setComboName( QComboBox* combo, QString s)
 {
-    Q_OBJECT
-
-public:
-	PackageListView(QWidget*, const char*, PackageManagerSettings*);
-//	~PackageListView();
-  QTimer *popupTimer;
-private:
-	PackageManagerSettings *settings;
-  Package *activePackage;
-  PackageListItem *activePackageListItem;
-  QPopupMenu *popupMenu;
-  QPopupMenu *destsMenu;
-public slots:
-  void showPopup();
-  void changePackageDest( int );
-  void setCurrent( QListViewItem* );
-  void stopTimer( QListViewItem* );
-  /** No descriptions */
-  void toggleProcess();
-};
-
-#endif
+  for ( int i = 0; i < combo->count(); i++)
+      if ( combo->text( i ) == s )
+				combo->setCurrentItem( i );
+}

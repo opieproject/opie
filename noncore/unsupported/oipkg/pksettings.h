@@ -17,10 +17,13 @@ public:
   QString getDestinationName();
   QString getLinkDestinationName();
   bool createLinks();
+  QStringList getServers();
   QStringList getActiveServers();
   QStringList getDestinationUrls();
   QStringList getDestinationNames();
   QString getDestinationUrlByName(QString);
+  /** No descriptions */
+  QComboBox* getDestCombo();
 
 private:
   QIntDict<QString> serverurlDic;
@@ -59,6 +62,7 @@ public slots:
   void newInstallationSetting();
   void removeInstallationSetting();
   void renameInstallationSetting();
+  void activeServerChanged();
 };
 
 #endif

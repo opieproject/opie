@@ -1,11 +1,9 @@
-* setDocument function
 * Settings Class
 * tr() ;)
 * Dialog to display ipkg output live
 * parse "to install" and "to remove" from status
-* install local file
+* install local file dialog
 * qcop
 * error handling
 * manage links
 * dependency checking
-* ipkg options in runwindow

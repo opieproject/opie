@@ -17,35 +17,20 @@ PackageListItem::PackageListItem(QListView* lv, Package *pi, PackageManagerSetti
   settings = s;
   setExpandable( true );
 	QCheckListItem *item;
-#ifndef NEWLAYOUT
-	item = new QCheckListItem( this, QObject::tr("Name") );
-  item->setText(1,pi->name());
-	item = new QCheckListItem( this, QObject::tr("Description") );
-  item->setText(1,pi->desc()+"\ntest multi\nline");
-	item = new QCheckListItem( this, QObject::tr("Size") );
-  item->setText(1,pi->size());
-	item = new QCheckListItem( this, QObject::tr("Destination") );
-  item->setText(1,pi->getDest());
-#endif
-#ifdef NEWLAYOUT
-	item = new QCheckListItem( this, QObject::tr("Name: ")+pi->name() );
+	nameItem = new QCheckListItem( this, "" );
 	item = new QCheckListItem( this, QObject::tr("Description: ")+pi->desc() );
 	item = new QCheckListItem( this, QObject::tr("Size: ")+pi->size() );
 	destItem = new QCheckListItem( this, "" );
 	linkItem = new QCheckListItem( this, "" );
   displayDetails();
-#endif
 
-  if (!pm_uninstalled) {
+  if (!pm_uninstalled)
+  {
     pm_uninstalled = new QPixmap(Resource::loadPixmap("oipkg/uninstalled"));
     pm_installed = new QPixmap(Resource::loadPixmap("oipkg/installed"));
     pm_install = new QPixmap(Resource::loadPixmap("oipkg/install"));
     pm_uninstall = new QPixmap(Resource::loadPixmap("oipkg/uninstall"));
   }
-#ifndef NEWLAYOUT
-  setText(1, package->shortDesc() );
-  setText(2, package->size() );
-#endif
 }
 
 void PackageListItem::paintCell( QPainter *p,  const QColorGroup & cg,
@@ -120,19 +105,17 @@ void PackageListItem::setOn( bool b )
 {
   QCheckListItem::setOn( b );
   package->toggleProcess();
-//  if ( b )
-//  {
-//    if ((package->dest()).isEmpty)
-//	  	package->setDest( settings->getDestinationName() );
-//  }else{
-//    package->setDest( QObject::tr("not installed"));
-//  }
   package->setLink( settings->createLinks() );
   displayDetails();
 }
 
 void PackageListItem::displayDetails()
 {
+	QString sod = " ("+package->sizeUnits();
+ 	sod += package->dest().isEmpty()?QString(""):QString(QObject::tr(" on ")+package->dest());
+  sod += ")";
+  setText(0, package->name()+sod );
+	nameItem->setText( 0, QObject::tr("Name: ")+package->name());
 	linkItem->setText( 0, QObject::tr("Link: ")+QString(package->link()?QObject::tr("Yes"):QObject::tr("No")) );
   destItem->setText( 0, QObject::tr("Destination: ")+package->dest() );
   repaint();

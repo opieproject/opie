@@ -9,9 +9,9 @@
 
 #include "debug.h"
 
-Package::~Package()
-{
-}
+//Package::~Package()
+//{
+//}
 
 Package::Package( PackageManagerSettings *s )
 {
@@ -61,65 +61,56 @@ Package::Package( Package *pi )
 
 void Package::setValue( QString n, QString t )
 {
-  if ( n == "Status" && installed() ) return;
   if ( n == "Package" )
-    {
+  {
       _name = QString( t );
-    }
-  if ( n == "Installed-Size" )
-    {
+  }else if ( n == "Installed-Size" )
+  {
       _size = t;
-    }
-  if ( n == "Priority")
-    {
+  }else if ( n == "Priority")
+  {
 
-    }
-  if ( n == "Section")
-    {
+  }else if ( n == "Section")
+  {
       setSection( t );
-    }
-  if ( n == "Maintainer")
-    {
+  }else if ( n == "Maintainer")
+  {
 
-    }
-  if ( n == "Architecture")
-    {
+  }else if ( n == "Architecture")
+  {
 
-    }
-  if ( n == "Version")
-    {
+  }else if ( n == "Version")
+  {
 
-    }
-  if ( n == "Pre-Depends")
-    {
+  }else if ( n == "Pre-Depends")
+  {
 
-    }
-  if ( n == "Depends")
-    {
+  }else if ( n == "Depends")
+  {
 
-    }else if ( n == "Filename")
-      {
+  }else if ( n == "Filename")
+  {
 
-      }else if ( n == "Size")
+  }else if ( n == "Size")
  	{
-
+  	
 	}else if ( n == "MD5Sum")
-	  {
+	{
 
-	  }
+	}
   if ( n == "Description")
-    {
+  {
       setDesc( t );
-    }
+  }
   if ( n == "Status")
-    {
+  {
       if ( installed() ) return;
       _status = t;
-    }
+  }
   if ( t == "Essential")
-    {
+  {
 
-    }
+  }
 };
 
 QString Package::name()
@@ -151,6 +142,22 @@ QString Package::shortDesc()
 QString Package::size()
 {
   return _size;
+}
+
+QString Package::sizeUnits()
+{
+	int i = _size.toInt();
+ 	int c = 0;
+  QString ret;
+ 	QStringList unit;
+  unit << "B" << "KB" << "MB" << "GB" << "TB"; //prepair for the future ;)
+	while (i > 1)
+ 	{
+  	ret=QString::number(i)+" "+unit[c];
+   	c++;
+   	i /= 1024;
+  }
+  return ret;
 }
 
 bool Package::toProcess()

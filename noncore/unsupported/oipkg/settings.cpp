@@ -434,3 +434,8 @@ void PackageManagerSettings::linkEnabled( bool b )
 {
   activeLinkDestination->setEnabled( b );
 }
+
+void PackageManagerSettings::activeDestinationChange(int i)
+{
+  activeLinkDestination->setCurrentItem( i );
+}

@@ -12,10 +12,10 @@
 
 class Package //: public QObject
 {
-  //	Q_OBJECT
+//  	Q_OBJECT
  public:
   Package(PackageManagerSettings *);
-  ~Package();
+ // ~Package();
   Package( QStringList, PackageManagerSettings * );
   Package( QString, PackageManagerSettings * );
   Package( Package* );
@@ -30,6 +30,7 @@ class Package //: public QObject
   QString shortDesc();
   QString desc();
   QString size();
+  QString sizeUnits();
   void    setSection( QString );
   QString section();
   QString subSection();
@@ -45,7 +46,6 @@ class Package //: public QObject
   void setLink(bool);
   void parseIpkgFile( QString );;
 public slots:
-  /** No descriptions */
   QString getPackageName();
   void toggleProcess();
 

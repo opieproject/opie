@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>349</width>
+            <width>345</width>
             <height>454</height>
         </rect>
     </property>
@@ -176,7 +176,7 @@
                                 </property>
                                 <property stdset="1">
                                     <name>text</name>
-                                    <string>Link Destination: root</string>
+                                    <string>Link to root destination</string>
                                 </property>
                             </widget>
                             <widget>
@@ -718,6 +718,24 @@
     </grid>
 </widget>
 <connections>
+    <connection>
+        <sender>activeServers</sender>
+        <signal>pressed(QListBoxItem*)</signal>
+        <receiver>Form4</receiver>
+        <slot>activeServerChanged()</slot>
+    </connection>
+    <connection>
+        <sender>activeServers</sender>
+        <signal>selectionChanged(QListBoxItem*)</signal>
+        <receiver>Form4</receiver>
+        <slot>activeServerChanged()</slot>
+    </connection>
+    <connection>
+        <sender>activeServers</sender>
+        <signal>pressed(QListBoxItem*)</signal>
+        <receiver>Form4</receiver>
+        <slot>activeServerChanged()</slot>
+    </connection>
     <slot access="public">destNameChanged(const QString&amp;)</slot>
     <slot access="public">destUrlChanged(const QString&amp;)</slot>
     <slot access="public">editDestination(int)</slot>
@@ -728,6 +746,7 @@
     <slot access="public">newDestination()</slot>
     <slot access="public">newInstallationSetting()</slot>
     <slot access="public">newServer()</slot>
+    <slot access="public">activeServerChanged()</slot>
     <slot access="public">removeDestination()</slot>
     <slot access="public">removeInstallationSetting()</slot>
     <slot access="public">removeServer()</slot>

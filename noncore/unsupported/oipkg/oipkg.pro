@@ -5,12 +5,14 @@ CONFIG		= qt warn_on debug
 HEADERS		= mainwindow.h \
 		pksettings.h \
 		pmipkg.h \
+		utils.h \
 		packagelistitem.h \
 		packagelist.h \
 		packagelistview.h \
 		package.h
 SOURCES		= main.cpp \
 		mainwindow.cpp \
+		utils.cpp \
 		packagelistview.cpp \
 		pksettings.cpp \
 		pmipkg.cpp \

@@ -52,7 +52,7 @@ void PackageListView::setCurrent( QListViewItem* p )
   if ( !p ) return;
   activePackageListItem = (PackageListItem*)p;
   activePackage = activePackageListItem->getPackage();
-  pvDebug(5, "start timer");
+  if (!activePackage) return;
   popupTimer->start( 750, true );
 }
 
@@ -63,21 +63,31 @@ void PackageListView::showPopup()
   destsMenu->clear();
  		
  	QAction *popupAction;
-  popupMenu->insertItem( QObject::tr("Install to"), destsMenu );
-  QStringList dests = settings->getDestinationNames();
-  for (uint i = 0; i < dests.count(); i++ )
-  {		
-	  popupAction = new QAction( dests[i], QString::null, 0, this, 0 );
-	  popupAction->addTo( destsMenu );
-  }
-  connect( destsMenu, SIGNAL( activated( int ) ),
-	   this, SLOT( changePackageDest( int ) ) );
+  if ( !activePackage->installed() )
+  {
+	  popupMenu->insertItem( QObject::tr("Install to"), destsMenu );
+  	QStringList dests = settings->getDestinationNames();
+   	QString ad = settings->getDestinationName();
+	  for (uint i = 0; i < dests.count(); i++ )
+  	{		
+	  	popupAction = new QAction( dests[i], QString::null, 0, this, 0 );
+		  popupAction->addTo( destsMenu );
+    	if ( dests[i] == ad && activePackage->toInstall() )
+     	{
+        popupAction->setToggleAction( true );
+			  popupAction->setOn(true);
+  		};
+  	}
+	  connect( destsMenu, SIGNAL( activated( int ) ),
+		   this, SLOT( changePackageDest( int ) ) );
+   }else{
+//   	popupActcat setOn( activePackage->toProcess() );
+   }
   popupMenu->popup( QCursor::pos() );
 }
 
 void PackageListView::stopTimer( QListViewItem* )
 {
-	pvDebug( 5, "stop timer" );
 	popupTimer->stop();
 }
 
@@ -87,5 +97,11 @@ void PackageListView::changePackageDest( int i )
  	activePackage->setDest( destsMenu->text(i) );
   activePackage->setOn();
   activePackage->setLink( settings->createLinks() );
+  activePackageListItem->displayDetails();
+}
+
+void PackageListView::toggleProcess()
+{
+  activePackage->toggleProcess() ;
   activePackageListItem->displayDetails();
 }

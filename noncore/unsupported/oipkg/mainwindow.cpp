@@ -6,6 +6,7 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qaction.h>
@@ -17,6 +18,7 @@
 #include <qfile.h>
 #include <qlistview.h>
 #include <qtextview.h>
+#include <qcheckbox.h>
 #include <qlineedit.h>
 #include <qtabwidget.h>
 #include <qcombobox.h>
@@ -24,39 +26,34 @@
 #include <qlayout.h>
 
 #include "pksettingsbase.h"
+#include "utils.h"
 #include "packagelistitem.h"
 
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   QMainWindow( parent, name, f )
 {	
+  setCaption( tr("Package Manager") );
   settings = new PackageManagerSettings(this,0,TRUE);
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
-  ipkg = new PmIpkg( settings, this );
-
   setCentralWidget( listViewPackages );
-  setCaption( tr("Package Manager") );
 
 //	wait = new QMessageBox(tr("oipkg"),tr("Please wait")//,QMessageBox::Information,QMessageBox::NoButton,QMessageBox::NoButton,QMessageBox::NoButton);
-	wait = new QMessageBox(this);
- 	wait->setText(tr("Please wait"));
-
-	channel = new QCopChannel( "QPE/Application/oipkg", this );
-	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-		this, SLOT(receive(const QCString&, const QByteArray&)) );
-
-  makeMenu();		
-
-  connect( section, SIGNAL( activated(int) ),
-	   this, SLOT( sectionChanged() ) );
-  connect( subsection, SIGNAL(activated(int) ),
-	   this, SLOT( subSectionChanged() ) );
-
+//	wait = new QMessageBox(this);
+// 	wait->setText(tr("Please wait"));
   ipkg = new PmIpkg( settings, this );
   packageList.setSettings( settings );
-  getList();	
-  setSections();
-  setSubSections();
+  packageList.update();
+  makeMenu();	
+  makeChannel();
+  //opie is hardcoded default ;)
+  for (int i=0;i<section->count();i++)
+  	if (section->text(i)=="opie")
+   		section->setCurrentItem(i);
+  sectionChanged();
+
+  connect( section,    SIGNAL(activated(int)), SLOT(sectionChanged()) );
+  connect( subsection, SIGNAL(activated(int)), SLOT(subSectionChanged()) );
   displayList();
 }
 
@@ -100,38 +97,34 @@ void MainWindow::makeMenu()
   updateAction->addTo( toolBar );
   updateAction->addTo( srvMenu );
 
-// would we use for find
-//  detailsAction = new QAction( tr( "Details" ),
+// could we use for find
+//  detailsAction = new QAction( tr( "Find" ),
 //      		Resource::loadIconSet( "find" ),
 //  		    QString::null, 0, this, 0 );
 //  connect( detailsAction, SIGNAL( activated() ),
-//               this , SLOT( showDetails() ) );
+//               this , SLOT( showFind() ) );
 //  detailsAction->addTo( toolBar );
-//  detailsAction->addTo( srvMenu );
 
   QAction *cfgact;
 
   cfgact = new QAction( tr( "Setups" ),
-	//		Resource::loadIconSet( "" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettings() ) );
   cfgact->addTo( cfgMenu );
 		
   cfgact = new QAction( tr( "Servers" ),
-	//		Resource::loadIconSet( "" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettingsSrv() ) );
   cfgact->addTo( cfgMenu );
   cfgact = new QAction( tr( "Destinations" ),
-		//	Resource::loadIconSet( "" ),
 			QString::null, 0, this, 0 );
   connect( cfgact, SIGNAL( activated() ),
 	   SLOT( showSettingsDst() ) );
   cfgact->addTo( cfgMenu );
 
-    QAction *a;
+  QAction *a;
 
 	sectionBar = new QPEToolBar( this );
  	addToolBar( sectionBar,  "Section", QMainWindow::Top, TRUE );
@@ -140,19 +133,19 @@ void MainWindow::makeMenu()
   label->setBackgroundColor( sectionBar->backgroundColor() );
  	sectionBar->setStretchableWidget( label );
   section = new QComboBox( false, sectionBar );
-//  section->setBackgroundMode( PaletteBackground );
   label = new QLabel( " / ", sectionBar );
   label->setBackgroundColor( sectionBar->backgroundColor() );
   subsection = new QComboBox( false, sectionBar );
-
   a = new QAction( tr( "Close Section" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( sectionClose() ) );
   a->addTo( sectionBar );
 
+  setSections();
+  setSubSections();
+
   sectionAction = new QAction( tr( "Sections" ), QString::null, 0, this, 0 );
   connect( sectionAction, SIGNAL( toggled(bool) ), this, SLOT( sectionShow(bool) ) );
   sectionAction->setToggleAction( true );
-  sectionAction->setOn( true );
   sectionAction->addTo( viewMenu );
 
   findBar = new QPEToolBar(this);
@@ -165,30 +158,65 @@ void MainWindow::makeMenu()
   connect( findEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( displayList() ) );
 
+  a = new QAction( tr( "Clear Find" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated() ), findEdit, SLOT( clear() ) );
+  a->addTo( findBar );
   a = new QAction( tr( "Close Find" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( findClose() ) );
   a->addTo( findBar );
   findAction = new QAction( tr( "Find" ), QString::null, 0, this, 0 );
   connect( findAction, SIGNAL( toggled(bool) ), this, SLOT( findShow(bool) ) );
   findAction->setToggleAction( true );
-  findAction->setOn( true );
   findAction->addTo( viewMenu );
 
-  #ifdef NEW
+  destBar = new QPEToolBar(this);
+  addToolBar( destBar,  "Destination", QMainWindow::Top, TRUE );
+  label = new QLabel( tr("Destination: "), destBar );
+  label->setBackgroundColor( destBar->backgroundColor() );
+  destBar->setHorizontalStretchable( TRUE );
+  destination = new QComboBox( false, destBar );
+  destination->insertStringList( settings->getDestinationNames() );
+  setComboName(destination,settings->getDestinationName());
+//  connect( destination, SIGNAL(activated(int)),
+//  			 SLOT(activeDestinationChange(int)) );
+  spacer = new QLabel( " ", destBar );
+  spacer->setBackgroundColor( destBar->backgroundColor() );
+  CheckBoxLink = new QCheckBox( tr("Link"), destBar);
+  CheckBoxLink->setBackgroundColor( destBar->backgroundColor() );
+  CheckBoxLink->setChecked( settings->createLinks() );
+//  connect( CheckBoxLink, SIGNAL(toggled(bool)),
+//     				 settings, SLOT(linkEnabled(bool)) );
+  destAction = new QAction( tr( "Destinations" ), QString::null, 0, this, 0 );
+  connect( destAction, SIGNAL( toggled(bool) ), SLOT( destShow(bool) ) );
+  a = new QAction( tr( "Close Destinations" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
+  connect( a, SIGNAL( activated() ), SLOT( destClose() ) );
+  a->addTo( destBar );
+  destBar->setStretchableWidget( CheckBoxLink );
+  destAction->setToggleAction( true );
+ // destAction->addTo( viewMenu );
+
+  // configure the menus
   Config cfg( "oipkg", Config::User );
-  cfg.setGroup( "Setting_" + QString::number( setting ) );
-  CheckBoxLink->setChecked( cfg.readBoolEntry( "link", false ) );
-  findShow(bool b)
-  sectionShow(bool b)
-  #endif
+  cfg.setGroup( "gui" );
+
+  findShow( cfg.readBoolEntry( "findBar", true ) );
+  sectionShow( cfg.readBoolEntry( "sectionBar", true ) );
+  destShow( cfg.readBoolEntry( "destBar", false ) );
 }
 
 MainWindow::~MainWindow()
 {
+  Config cfg( "oipkg", Config::User );
+  cfg.setGroup( "gui" );
+  cfg.writeEntry( "findBar", !findBar->isHidden() );
+  cfg.writeEntry( "sectionBar", !sectionBar->isHidden() );
+  cfg.writeEntry( "destBar", !destBar->isHidden() );
+	
 }
 
 void MainWindow::runIpkg()
 {
+  packageList.allPackages();
   ipkg->commit( packageList );
   // ##### If we looked in the list of files, we could send out accurate
   // ##### messages. But we don't bother yet, and just do an "all".
@@ -200,38 +228,29 @@ void MainWindow::runIpkg()
 
 void MainWindow::updateList()
 {
-	wait->show();
+//	wait->show();
 	QTimer *t = new QTimer( this );
   connect( t, SIGNAL(timeout()), SLOT( rotateUpdateIcon() ) );
   t->start( 0, false );
 	packageList.clear();
   ipkg->update();
-  getList();
-  t->stop();
-	wait->hide();
-  	
-}
-
-void MainWindow::getList()
-{
-	wait->show();
   packageList.update();
-  displayList();
-	wait->hide();
+  t->stop();
+//	wait->hide();  	
 }
 
 void MainWindow::filterList()
 {
-	wait->show();
+//	wait->show();
  	QString f = "";
   if ( findAction->isOn() ) f = findEdit->text();
   packageList.filterPackages( f );
-	wait->hide();
+//	wait->hide();
 }
 
 void MainWindow::displayList()
 {
-	wait->hide();
+//	wait->hide();
 	filterList();
   listViewPackages->clear();
   Package *pack = packageList.first();
@@ -326,6 +345,18 @@ void MainWindow::findClose()
   findAction->setOn( false );
 }
 
+void MainWindow::destShow(bool b)
+{
+	if (b) destBar->show();
+  else destBar->hide();
+  destAction->setOn( b );
+}
+
+void MainWindow::destClose()
+{
+  destAction->setOn( false );
+}
+
 void MainWindow::rotateUpdateIcon()
 {
 	pvDebug(2, "MainWindow::rotateUpdateIcon");
@@ -361,11 +392,31 @@ void MainWindow::installFile(const QString &fileName)
   displayList();
 }
 
+void MainWindow::makeChannel()
+{   	
+	channel = new QCopChannel( "QPE/Application/oipkg", this );
+	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+		this, SLOT(receive(const QCString&, const QByteArray&)) );
+}
+
+
+
 void MainWindow::receive(const QCString &msg, const QByteArray &arg)
 {
-	pvDebug(3, "QCop "+msg);
+	pvDebug(3, "QCop "+msg+" "+QCString(arg));
 	if ( msg == "installFile(QString)" )
  	{
-  	installFile( QString(arg) );
-	}
+  	ipkg->installFile( QString(arg) );
+	}else if( msg == "removeFile(QString)" )
+ 	{
+  	ipkg->removeFile( QString(arg) );
+	}else if( msg == "createLinks(QString)" )
+ 	{
+  	ipkg->createLinks( QString(arg) );
+	}else if( msg == "removeLinks(QString)" )
+ 	{
+  	ipkg->removeLinks( QString(arg) );
+	}else{
+    	pvDebug(2,"Huh what do ya want")
+ 	}
 }

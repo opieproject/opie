@@ -21,28 +21,13 @@ public:
   QStringList getActiveServers();
   QStringList getDestinationUrls();
 
-private:
-  QIntDict<QString> serverurlDic;
-  QIntDict<QString> destinationurlDic;
-  int ipkg_old;
-  int editedserver;
-  int editeddestination;
-  int currentSetting;
-  int installationSettingsCount;
-  bool changed;
-
-  bool readIpkgConfig(const QString&);
-  void writeIpkgConfig(const QString&);
-  void writeSettings();
-  void readSettings();
-
 public slots:
-    void writeInstallationSettings();
+	void writeInstallationSettings();
   void readInstallationSettings();
   void writeCurrentInstallationSetting();
   void readInstallationSetting(int);
   void installationSettingSetName(const QString &);
-
+  void activeDestinationChange(int)
   void newServer();
   void editServer(int);
   void removeDestination();
@@ -58,6 +43,21 @@ public slots:
   void newInstallationSetting();
   void removeInstallationSetting();
   void renameInstallationSetting();
+
+private:
+  QIntDict<QString> serverurlDic;
+  QIntDict<QString> destinationurlDic;
+  int ipkg_old;
+  int editedserver;
+  int editeddestination;
+  int currentSetting;
+  int installationSettingsCount;
+  bool changed;
+
+  bool readIpkgConfig(const QString&);
+  void writeIpkgConfig(const QString&);
+  void writeSettings();
+  void readSettings();
 };
 
 #endif

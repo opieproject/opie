@@ -17,6 +17,7 @@ class QLineEdit;
 class PackageListItem;
 class QCopChannel;
 class QMessageBox;
+class QCheckBox;
 
 class MainWindow : public QMainWindow
 {
@@ -26,12 +27,12 @@ class MainWindow : public QMainWindow
 public:
   MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
   ~MainWindow();
+  void makeChannel();
 
 	QCopChannel *channel;
 
 protected slots:
   void runIpkg();
-  void getList();
   void updateList();
   void displayList();
   void subSectionChanged();
@@ -45,6 +46,8 @@ public slots:
   void sectionShow(bool);
   void findClose();
   void findShow(bool);
+  void destClose();
+  void destShow(bool);
   void filterList();
 	void receive (const QCString &, const QByteArray &);
 	void setDocument (const QString &);
@@ -60,17 +63,20 @@ private:
   PackageManagerSettings *settings;
   PackageList packageList;
   QAction *runAction;
-  QAction *detailsAction;
   QAction *updateAction;
   QAction *findAction;
   QAction *sectionAction;
+  QAction *destAction;
   PackageListView *listViewPackages;
   QPEToolBar *findBar;
   QLineEdit *findEdit;
   QPEToolBar *sectionBar;
   QComboBox *section;
   QComboBox *subsection;
-  QMessageBox *wait;
+  QPEToolBar *destBar;
+  QComboBox *destination;
+  QCheckBox* CheckBoxLink;
+//  QMessageBox *wait;
 private slots:
   void rotateUpdateIcon();
 };

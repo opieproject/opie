@@ -15,7 +15,7 @@ if ( debugLevel < 3 ) \
 	if ( I <= debugLevel ) qDebug(S);\
 }else{\
 	if ( I <= debugLevel ) \
-		qDebug("# %s \t\t(Level: %i)\n",QString(S).latin1(),I);\
+		qDebug("#%s:%i: %s \t\t(Level: %i)",__FILE__,__LINE__,QString(S).latin1(),I);\
 }
 
 #endif

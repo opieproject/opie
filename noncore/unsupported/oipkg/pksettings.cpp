@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "debug.h"
+//#include "utils.h"
 
 PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* name, WFlags fl )
   : PackageManagerSettingsBase( parent, name, fl )
@@ -56,6 +57,7 @@ PackageManagerSettings::PackageManagerSettings( QWidget* parent,  const char* na
   destinationurl->setEnabled(FALSE);
   destinationurlDic.setAutoDelete(TRUE);
   readSettings();
+	activeLinkDestination->hide();
 }
 
 PackageManagerSettings::~PackageManagerSettings()
@@ -76,8 +78,10 @@ void PackageManagerSettings::newServer()
     servers->insertItem(servername->text());
     activeServers->insertItem(servername->text());
   }
+  changed = true;
   servers->setSelected(i,TRUE);
   editServer(i);
+  changed = true;
 }
 
 void PackageManagerSettings::newDestination()
@@ -97,6 +101,7 @@ void PackageManagerSettings::newDestination()
   }
   destinations->setSelected(i,TRUE);
   editDestination(i);
+  changed = true;
 }
 
 
@@ -117,6 +122,7 @@ void PackageManagerSettings::editServer(int i)
 
   connect( servername, SIGNAL(textChanged(const QString&)), this, SLOT(serverNameChanged(const QString&)) );
   connect( serverurl, SIGNAL(textChanged(const QString&)), this, SLOT(serverUrlChanged(const QString&)) );
+  changed = true;
 }
 
 
@@ -137,6 +143,7 @@ void PackageManagerSettings::editDestination(int i)
 
   connect( destinationname, SIGNAL(textChanged(const QString&)), this, SLOT(destNameChanged(const QString&)) );
   connect( destinationurl, SIGNAL(textChanged(const QString&)), this, SLOT(destUrlChanged(const QString&)) );
+  changed = true;
 }
 
 void PackageManagerSettings::removeServer()
@@ -151,6 +158,7 @@ void PackageManagerSettings::removeServer()
   connect( servers, SIGNAL(highlighted(int)), this, SLOT(editServer(int)) );
   servername->setEnabled(FALSE);
   serverurl->setEnabled(FALSE);
+  changed = true;
 }
 
 void PackageManagerSettings::removeDestination()
@@ -166,6 +174,7 @@ void PackageManagerSettings::removeDestination()
   connect( destinations, SIGNAL(highlighted(int)), this, SLOT(editDestination(int)) );
   destinationname->setEnabled(FALSE);
   destinationurl->setEnabled(FALSE);
+  changed = true;
 }
 
 void PackageManagerSettings::serverNameChanged(const QString& t)
@@ -173,7 +182,9 @@ void PackageManagerSettings::serverNameChanged(const QString& t)
   disconnect( servers, SIGNAL(highlighted(int)), this, SLOT(editServer(int)) );
   servers->changeItem( t, editedserver );
   activeServers->changeItem( t, editedserver );
+  changed = true;
   connect( servers, SIGNAL(highlighted(int)), this, SLOT(editServer(int)) );
+  changed = true;
 }
 
 void PackageManagerSettings::destNameChanged(const QString& t)
@@ -183,16 +194,19 @@ void PackageManagerSettings::destNameChanged(const QString& t)
   activeDestination->changeItem( t, editeddestination );
   activeLinkDestination->changeItem( t, editeddestination );
   connect( destinations, SIGNAL(highlighted(int)), this, SLOT(editDestination(int)) );
+  changed = true;
 }
 
 void PackageManagerSettings::serverUrlChanged(const QString& t)
 {
   serverurlDic.replace(editedserver, new QString(t));
+  changed = true;
 }
 
 void PackageManagerSettings::destUrlChanged(const QString& t)
 {
   destinationurlDic.replace(editeddestination, new QString(t));
+  changed = true;
 }
 
 void PackageManagerSettings::writeIpkgConfig(const QString& conffile)
@@ -265,11 +279,11 @@ void PackageManagerSettings::installationSettingChange(int cs)
   writeCurrentInstallationSetting();
   currentSetting = cs;
   readInstallationSetting( cs );
+  changed = true;
 }
 
 void PackageManagerSettings::writeInstallationSettings()
 {
-  if ( ! changed ) return ;
   {
     Config cfg( "oipkg", Config::User );
     cfg.setGroup( "Settings" );
@@ -285,25 +299,23 @@ void PackageManagerSettings::readInstallationSetting(int setting)
   if ( setting < 0 ) return;
   Config cfg( "oipkg", Config::User );
   cfg.setGroup( "Setting_" + QString::number( setting ) );
-  CheckBoxLink->setChecked( cfg.readBoolEntry( "link", false ) );
+  CheckBoxLink->setChecked( cfg.readBoolEntry( "link", true ) );
   QString dest = cfg.readEntry( "dest" );
   QString linkdest = cfg.readEntry( "linkdest" );
   pvDebug(3, "dest="+dest);
   pvDebug(3, "linkdest="+linkdest);
-
   for ( int i = 0; i < activeDestination->count(); i++)
-    {
-      if ( activeDestination->text( i ) == dest )
-				activeDestination->setCurrentItem( i );
-      if ( activeLinkDestination->text( i ) == linkdest )
-				activeLinkDestination->setCurrentItem( i );
-    }
+  {
+  	if ( activeDestination->text( i ) == dest )
+			activeDestination->setCurrentItem( i );
+		if ( activeLinkDestination->text( i ) == linkdest )
+			activeLinkDestination->setCurrentItem( i );
+   }
 }
 
 void PackageManagerSettings::writeCurrentInstallationSetting()
 {
   Config cfg( "oipkg", Config::User );
-  changed = false;
   cfg.setGroup( "Setting_"  + QString::number(currentSetting) );
   cfg.writeEntry( "link", CheckBoxLink->isChecked() );
   cfg.writeEntry( "dest", getDestinationName() );
@@ -332,6 +344,7 @@ void PackageManagerSettings::installationSettingSetName(const QString &name)
 bool PackageManagerSettings::readIpkgConfig(const QString& conffile)
 {
   QFile conf(conffile);
+  changed = false;
   if ( conf.open(IO_ReadOnly) ) {
     QTextStream s(&conf);
     servers->clear();
@@ -424,7 +437,7 @@ void PackageManagerSettings::readSettings()
 
 void PackageManagerSettings::writeSettings()
 {
-  writeIpkgConfig("/etc/ipkg.conf");
+  if ( changed ) writeIpkgConfig("/etc/ipkg.conf");
   writeInstallationSettings();
 }
 /** shows the setting dialog */
@@ -435,7 +448,7 @@ bool PackageManagerSettings::showDialog( int i )
   bool ret = exec();
   if ( ret ) writeSettings();
   else readSettings();
-  return ret;
+  return (changed && ret);
 }
 /** Returns the installation destination */
 QString PackageManagerSettings::getDestinationName()
@@ -466,6 +479,15 @@ QStringList PackageManagerSettings::getActiveServers()
     {
       if ( activeServers->isSelected(i) )
 	sl += activeServers->text(i);
+    }
+  return sl;
+}
+ QStringList PackageManagerSettings::getServers()
+{
+  QStringList sl;	
+  for (int i=0; i<(int)activeServers->count(); i++)
+    {
+			sl += activeServers->text(i);
     }
   return sl;
 }
@@ -506,6 +528,15 @@ QStringList PackageManagerSettings::getDestinationNames()
 
 void PackageManagerSettings::linkEnabled( bool b )
 {
-  changed = true;
   activeLinkDestination->setEnabled( b );
+}
+
+void PackageManagerSettings::activeServerChanged()
+{
+	changed = true;
+}
+
+QComboBox* PackageManagerSettings::getDestCombo()
+{
+	return new QComboBox(activeDestination);
 }
