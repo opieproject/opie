@@ -27,7 +27,7 @@ fileBrowser::fileBrowser( QWidget* parent,  const char* name, bool modal, WFlags
     if ( !name )
   setName( "fileBrowser" );
     resize( 240, 280 );
-    setCaption(tr( "Browse for file" ) );
+    setCaption(tr( name ) );
     filterStr=filter;
 
     dirLabel = new QLabel(this, "DirLabel");

@@ -31,7 +31,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     if ( !name )
   setName( "fileSaver" );
     resize( 240, 280 );
-    setCaption(tr( "Save file" ) );
+    setCaption(tr( name ) );
     QFileInfo fi(currentFileName);
     QString tmpFileName=fi.fileName();
 //    qDebug( tmpFileName);

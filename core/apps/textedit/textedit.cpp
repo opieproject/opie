@@ -524,7 +524,7 @@ void TextEdit::fileOpen()
 
 void TextEdit::newFileOpen()
 {
-    browseForFiles=new fileBrowser(this,"fileBrowser",TRUE,0, "*");
+    browseForFiles=new fileBrowser(this,"Open File",TRUE,0, "*");
     if( browseForFiles->exec() != -1 ) {
         QString selFile= browseForFiles->selectedFileName;
         QStringList fileList=browseForFiles->fileList;
@@ -763,7 +763,7 @@ bool TextEdit::saveAs()
     }
 
     
-    fileSaveDlg=new fileSaver(this,"SaveFile",TRUE, 0, currentFileName);
+    fileSaveDlg=new fileSaver(this,"Save File",TRUE, 0, currentFileName);
     qDebug("wanna save filename "+currentFileName);
     fileSaveDlg->exec();
     if( fileSaveDlg->result() == 1 ) {
