@@ -122,4 +122,5 @@ endif
 
 export CCACHE=$(shell which ccache 2>/dev/null)
 export DISTCC=$(shell which distcc 2>/dev/null)
+export CCACHE_PREFIX=$(shell which distcc &>/dev/null && echo distcc)
 
