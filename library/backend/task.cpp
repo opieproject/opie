@@ -51,6 +51,7 @@ mDueDate( QDate::currentDate() ), mCompleted( FALSE ), mPriority( 3 ), mDesc()
 	case Priority: setPriority( (*it).toInt() ); break;
 	case Date: mDueDate = TimeConversion::fromString( (*it) ); break;
 	case TaskUid: setUid( (*it).toInt() ); break;
+	default: break;
 	}
 }
 
