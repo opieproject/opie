@@ -1,7 +1,7 @@
 /*
  * Socket operations for wellenreiter
  *
- * $Id: sock.cc,v 1.1 2002-11-22 23:39:26 mjm Exp $
+ * $Id: sock.cc,v 1.2 2002-11-27 21:16:52 mjm Exp $
  */
 
 #include "sock.hh"
@@ -48,16 +48,16 @@ int sendcomm(const char *host, int port, const char *string, ...)
   vsnprintf(buffer, sizeof(buffer)-1, string, ap);
   va_end(ap);
 
+  saddr.sin_family = AF_INET;
+  saddr.sin_port = htons(port);
+  saddr.sin_addr.s_addr = inet_addr(host);
+
   /* Setup socket */
   if((sock=socket(AF_INET, SOCK_DGRAM, 0)) < 0)
   {
     wl_logerr("Cannot set up socket: %s", strerror(errno));
     return -1;
   }
-
-  saddr.sin_family = AF_INET;
-  saddr.sin_port = htons(port);
-  saddr.sin_addr.s_addr = inet_addr(host);
 
   if(sendto(sock, buffer, sizeof(buffer), 0, (struct sockaddr *)&saddr, sizeof(saddr)) < 0)
   {
@@ -70,4 +70,24 @@ int sendcomm(const char *host, int port, const char *string, ...)
     wl_logerr("Cannot close socket: %s", strerror(errno));
 
   return 1;
+}
+
+/* Check for new messages on commsock */
+int recvcomm(int *sock, char *out, int maxlen)
+{
+  struct sockaddr_in *cliaddr;
+  socklen_t len=sizeof(struct sockaddr);
+  char buffer[128], retval[3];
+
+  memset(buffer, 0, sizeof(buffer));
+  if(recvfrom(*sock, buffer, sizeof(buffer)-1, 0, (struct sockaddr *)cliaddr, &len) < 0)
+    return -1;
+
+  memset(out, 0, maxlen);
+  memcpy(out, buffer, maxlen - 1);
+
+  memset(retval, 0, sizeof(retval));
+  memcpy(retval, out, 2);
+
+  return atoi(retval);
 }

@@ -15,5 +15,6 @@
 
 int commsock(const char *, int);
 int sendcomm(const char *, int, const char *, ...);
+int recvcomm(int *, char *, int);
 
 #endif /* WLSOCK_HH */
