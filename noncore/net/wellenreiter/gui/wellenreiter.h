@@ -25,6 +25,7 @@ using namespace Opie;
 
 class QTimerEvent;
 class QPixmap;
+class ManufacturerDB;
 
 class Wellenreiter : public WellenreiterBase {
     Q_OBJECT
@@ -48,7 +49,9 @@ private:
     OSystem _system;                // Opie Operating System identifier
     #endif
     void handleMessage();
-    
+
+    ManufacturerDB* manufacturerdb;
+        
     //void readConfig();
     //void writeConfig();
 };

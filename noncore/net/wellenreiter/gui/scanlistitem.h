@@ -49,6 +49,28 @@ class MScanListItem: public QListViewItem
   
     QString type;
     
+  public:
+    
+    //const QString& type() { return _type; };
+    const QString& essid() { return _essid; };
+    const QString& macaddr() { return _macaddr; };
+    bool wep() { return _wep; };
+    int channel() { return _channel; };
+    int signal() { return _signal; };
+    int received() { return _received; };
+    
+    void setSignal( int signal ) { /* TODO */ };
+    void incReceived() { _received++; };
+      
+  private:
+    QString _type;
+    QString _essid;
+    QString _macaddr;
+    bool _wep;
+    int _channel;
+    int _signal;
+    int _received;
+    
 };
 
 #endif

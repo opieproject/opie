@@ -53,6 +53,8 @@ using namespace Opie;
 #include "hexwindow.h"
 #include "configwindow.h"
 
+#include "manufacturers.h"
+
 #include <libwellenreiter/source/wl_sock.hh>
 #include <libwellenreiter/source/wl_proto.hh>
 #include <daemon/source/config.hh>
@@ -60,6 +62,18 @@ using namespace Opie;
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     : WellenreiterBase( parent, name, fl ), daemonRunning( false )
 {
+
+    //
+    // construct manufacturer database
+    //
+    
+    QString manufile;
+    #ifdef QWS
+    manufile.sprintf( "%s/share/wellenreiter/manufacturers.dat", (const char*) qApp.qpeDir() );
+    #else
+    manufile.sprintf( "/home/mickey/work/opie/share/wellenreiter/manufacturers.dat" );
+    #endif
+    manufacturerdb = new ManufacturerDB( manufile );
 
     logwindow->log( "(i) Wellenreiter has been started." );
     
@@ -103,6 +117,8 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
 Wellenreiter::~Wellenreiter()
 {
     // no need to delete child widgets, Qt does it all for us
+    
+    delete manufacturerdb;
 }
 
 void Wellenreiter::handleMessage()
