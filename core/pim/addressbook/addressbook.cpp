@@ -664,8 +664,12 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 		abEditor->setEntry( m_abView -> currentEntry() );
 	else if ( entryMode == NewEntry )
 		abEditor->setEntry( entry );
-	// other things may change the caption.
-	abEditor->setCaption( tr("Edit Address") );
+
+    // Set the dialog caption
+    if ( m_actionPersonal->isOn() )
+        abEditor->setCaption( tr( "Edit My Personal Details" ) );
+    else
+        abEditor->setCaption( tr( "Edit Contact" ) );
 
 	// fix the focus...
 	abEditor->setNameFocus();
@@ -706,10 +710,9 @@ void AddressbookWindow::editPersonal()
 		abEditor = new ContactEditor( entry, this, "editor" );
 	}
 
- 	abEditor->setCaption(tr("Edit My Personal Details"));
- 	abEditor->setPersonalView( true );
+	abEditor->setPersonalView( true );
 	editEntry( EditEntry );
- 	abEditor->setPersonalView( false );
+	abEditor->setPersonalView( false );
 
 }
 
