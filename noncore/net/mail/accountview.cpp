@@ -70,8 +70,9 @@ void IMAPviewItem::refresh(QList<RecMail>&)
     }
 
     Folder *it;
+    QListViewItem*item = 0;
     for ( it = folders->first(); it; it = folders->next() ) {
-        (void) new IMAPfolderItem( it, this );
+        item = new IMAPfolderItem( it, this , item );
     }
 }
 
@@ -85,8 +86,8 @@ IMAPfolderItem::~IMAPfolderItem()
     delete folder;
 }
 
-IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent )
-    : AccountViewItem( parent )
+IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QListViewItem*after )
+    : AccountViewItem( parent,after )
 {
     folder = folderInit;
     imap = parent;
@@ -113,6 +114,7 @@ AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
 {
     connect( this, SIGNAL( clicked( QListViewItem * ) ),
              SLOT( refresh( QListViewItem * ) ) );
+    setSorting(-1);
 }
 
 void AccountView::populate( QList<Account> list )

@@ -17,7 +17,8 @@ class AccountViewItem : public QListViewItem
         
 public:
     AccountViewItem( QListView *parent ) : QListViewItem( parent ) {}
-    AccountViewItem( QListViewItem *parent ) : QListViewItem( parent ) {}
+    AccountViewItem( QListViewItem *parent) : QListViewItem( parent) {}
+    AccountViewItem( QListViewItem *parent , QListViewItem*after  ) : QListViewItem( parent,after ) {}
     virtual void refresh(QList<RecMail>&)=0;
     virtual RecBody fetchBody(const RecMail&)=0;
 };
@@ -55,7 +56,7 @@ class IMAPfolderItem : public AccountViewItem
 {
 
 public:
-    IMAPfolderItem( Folder *folder, IMAPviewItem *parent );
+    IMAPfolderItem( Folder *folder, IMAPviewItem *parent , QListViewItem*after  );
     ~IMAPfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
