@@ -103,6 +103,9 @@ void NewTaskDialog::init()
     connect( picker, SIGNAL( dateClicked( int, int, int ) ),
              this, SLOT( dateChanged( int, int, int ) ) );
 
+    connect ( selectGroupButton, SIGNAL( clicked() ),
+	      this, SLOT( groupButtonClicked () ) );
+
     buttonDate->setText( TimeString::longDateString( date ) );
     picker->setDate( date.year(), date.month(), date.day() );
     lblDown->setPixmap(Resource::loadPixmap("down") );
@@ -120,9 +123,22 @@ void NewTaskDialog::dateChanged( int y, int m, int d )
     date = QDate( y, m, d );
     buttonDate->setText( TimeString::longDateString( date ) );
 }
+void NewTaskDialog::groupButtonClicked ()
+{
+	OContactSelectorDialog cd(this);
+	cd.showMaximized();
+	cd.exec();
+	QValueList<int> selected = cd.getSelected();
+	for (uint i=0; i < selected.count(); i++){
+		printf ("Selected: %d\n", (*selected.at(i)));
+	}
 
-/*!
-*/
+	// Check if setting works...
+	OContactSelectorDialog cd2(this);
+	cd2.setSelected (selected);
+	cd2.showMaximized();
+	cd2.exec();
+}
 
 ToDoEvent NewTaskDialog::todoEntry()
 {

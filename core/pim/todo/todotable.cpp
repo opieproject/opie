@@ -52,72 +52,6 @@ namespace {
   static QString journalFileName();
   static ToDoEvent xmlToEvent( XMLElement *ev );
 }
-CheckItem::CheckItem( QTable *t, const QString &key )
-    : QTableItem( t, Never, "" ), checked( FALSE ), sortKey( key )
-{
-}
-
-QString CheckItem::key() const
-{
-    return sortKey;
-}
-
-void CheckItem::setChecked( bool b )
-{
-    checked = b;
-    table()->updateCell( row(), col() );
-}
-
-void CheckItem::toggle()
-{
-    TodoTable *parent = static_cast<TodoTable*>(table());
-    ToDoEvent newTodo = parent->currentEntry();
-    checked = !checked;
-    newTodo.setCompleted( checked );
-    table()->updateCell( row(), col() );
-    parent->replaceCurrentEntry( newTodo, true );
-}
-
-bool CheckItem::isChecked() const
-{
-    return checked;
-}
-
-static const int BoxSize = 10;
-
-void CheckItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr,
-		       bool )
-{
-    p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
-
-    int marg = ( cr.width() - BoxSize ) / 2;
-    int x = 0;
-    int y = ( cr.height() - BoxSize ) / 2;
-    p->setPen( QPen( cg.text() ) );
-    p->drawRect( x + marg, y, BoxSize, BoxSize );
-    p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
-    p->setPen( darkGreen );
-    x += 1;
-    y += 1;
-    if ( checked ) {
-	QPointArray a( 7*2 );
-	int i, xx, yy;
-	xx = x+1+marg;
-	yy = y+2;
-	for ( i=0; i<3; i++ ) {
-	    a.setPoint( 2*i,   xx, yy );
-	    a.setPoint( 2*i+1, xx, yy+2 );
-	    xx++; yy++;
-	}
-	yy -= 2;
-	for ( i=3; i<7; i++ ) {
-	    a.setPoint( 2*i,   xx, yy );
-	    a.setPoint( 2*i+1, xx, yy+2 );
-	    xx++; yy--;
-	}
-	p->drawLineSegments( a );
-    }
-}
 
 
 ComboItem::ComboItem( QTable *t, EditType et )
@@ -194,8 +128,12 @@ void DueTextItem::setToDoEvent( const ToDoEvent *ev )
   if( ev->hasDate() ){
     QDate today = QDate::currentDate();
     m_off = today.daysTo(ev->date() );
-    //qWarning("DueText m_off=%d", m_off );
-    setText( QString::number(m_off)  + " day(s) " );
+    if (m_off == 0){
+	    setText( TodoTable::tr( "today" ) + " !!!" );
+    }else{
+	    //qWarning("DueText m_off=%d", m_off );
+	    setText( QString::number(m_off)  + " " + TodoTable::tr( "day(s)" ));
+    }
   }else{
     setText("n.d." );
     m_off = 0;
@@ -211,7 +149,7 @@ void DueTextItem::paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bo
     if( m_off < 0 ){
       cg2.setColor(QColorGroup::Text, QColor(red ) );
     }else if( m_off == 0 ){
-      cg2.setColor(QColorGroup::Text, QColor(yellow) ); // orange isn't predefined
+      cg2.setColor(QColorGroup::Text, QColor(red) );
     }else if( m_off > 0){
       cg2.setColor(QColorGroup::Text, QColor(green ) );
     }
@@ -289,15 +227,22 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
     switch ( col )
     {
         case 0: {
-		CheckItem *i = static_cast<CheckItem*>(item( row, col ));
+		OCheckItem *i = static_cast<OCheckItem*>(item( row, col ));
 		if ( i ) {
 		    int x = pos.x() - columnPos( col );
 		    int y = pos.y() - rowPos( row );
 		    int w = columnWidth( col );
 		    int h = rowHeight( row );
-		    if ( i && x >= ( w - BoxSize ) / 2 && x <= ( w - BoxSize ) / 2 + BoxSize &&
-			    y >= ( h - BoxSize ) / 2 && y <= ( h - BoxSize ) / 2 + BoxSize ) {
-			i->toggle();
+		    printf ("Boxsize: %d = 10 ??\n",OCheckItem::BoxSize);
+		    if ( i && x >= ( w - OCheckItem::BoxSize ) / 2 
+			 && x <= ( w - OCheckItem::BoxSize ) / 2 + OCheckItem::BoxSize 
+			 && y >= ( h - OCheckItem::BoxSize ) / 2 
+			 && y <= ( h - OCheckItem::BoxSize ) / 2 + OCheckItem::BoxSize ) {
+			    i->toggle();
+			    ToDoEvent newTodo = currentEntry();
+			    newTodo.setCompleted( i->isChecked() );
+			    replaceCurrentEntry( newTodo, true );
+			    updateCell( row, col);
 		    }
 		    emit signalDoneChanged( i->isChecked() );
 		}
@@ -309,7 +254,7 @@ void TodoTable::slotClicked( int row, int col, int, const QPoint &pos )
 	  // Show detailed view of the selected entry
 	  {
 	    menuTimer->stop();
-	    ToDoEvent *todo = todoList[static_cast<CheckItem*>(item(row, 0))];
+	    ToDoEvent *todo = todoList[static_cast<OCheckItem*>(item(row, 0))];
 	    emit showDetails( *todo );
 	  }
 	  break;
@@ -354,8 +299,8 @@ ToDoEvent TodoTable::currentEntry() const
     QTableItem *i = item( currentRow(), 0 );
     if ( !i || rowHeight( currentRow() ) <= 0 )
         return ToDoEvent();
-    ToDoEvent *todo = todoList[(CheckItem*)i];
-    todo->setCompleted( ( (CheckItem*)item( currentRow(), 0 ) )->isChecked() );
+    ToDoEvent *todo = todoList[(OCheckItem*)i];
+    todo->setCompleted( ( (OCheckItem*)item( currentRow(), 0 ) )->isChecked() );
     todo->setPriority( ( (ComboItem*)item( currentRow(), 1 ) )->text().toInt() );
     return *todo;
 }
@@ -375,9 +320,9 @@ void TodoTable::removeCurrentEntry()
 {
     ToDoEvent *oldTodo;
     int row = currentRow();
-    CheckItem *chk;
+    OCheckItem *chk;
 
-    chk = static_cast<CheckItem*>(item(row, 0 ));
+    chk = static_cast<OCheckItem*>(item(row, 0 ));
     if ( !chk )
 	return;
     oldTodo = todoList[chk];
@@ -396,13 +341,13 @@ bool TodoTable::save( const QString &fn )
     QString strNewFile = fn + ".new";
     QFile::remove( strNewFile ); // just to be sure
     ToDoDB todoDB( strNewFile );
-    for ( QMap<CheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
+    for ( QMap<OCheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
 	  it != todoList.end(); ++it ) {
         if ( !item( it.key()->row(), 0 ) )
             continue;
         ToDoEvent *todo = *it;
 	// sync item with table
-	todo->setCompleted( ((CheckItem*)item(it.key()->row(), 0))->isChecked() );
+	todo->setCompleted( ((OCheckItem*)item(it.key()->row(), 0))->isChecked() );
 	todo->setPriority( ((ComboItem*)item( it.key()->row(), 1))->text().toInt() );
 	todoDB.addEvent( *todo );
     }
@@ -450,7 +395,7 @@ void TodoTable::updateVisible()
     int visible = 0;
     int id = mCat.id( "Todo List", showCat );
     for ( int row = 0; row < numRows(); row++ ) {
-	CheckItem *ci = (CheckItem *)item( row, 0 );
+	OCheckItem *ci = (OCheckItem *)item( row, 0 );
 	ToDoEvent *t = todoList[ci];
 	QArray<int> vlCats = t->categories();
 	bool hide = false;
@@ -511,7 +456,7 @@ void TodoTable::setPaintingEnabled( bool e )
 
 void TodoTable::clear()
 {
-    for ( QMap<CheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
+    for ( QMap<OCheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
 	  it != todoList.end(); ++it ) {
 	ToDoEvent *todo = it.data();
 	updateJournal( *todo, ACTION_REMOVE );
@@ -530,12 +475,14 @@ void TodoTable::clear()
 
 void TodoTable::sortColumn( int col, bool ascending, bool /*wholeRows*/ )
 {
-    // The default for wholeRows is false, however
-    // for this todo table we want to exchange complete
-    // rows when sorting. Also, we always want ascending, since
-    // the values have a logical order.
-    QTable::sortColumn( col, ascending, TRUE );
-    updateVisible();
+	// The default for wholeRows is false, however
+	// for this todo table we want to exchange complete
+	// rows when sorting. Also, we always want ascending, since
+	// the values have a logical order.
+	// Added by se: Disable visibility while sorting !
+	// setPaintingEnabled( FALSE );
+	QTable::sortColumn( col, ascending, TRUE );
+	updateVisible();
 }
 
 void TodoTable::slotCheckPriority(int row, int col )
@@ -617,7 +564,7 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 	//todo.setSummary(strTodo );
     }
     if ( row == -1 ) {
-	QMapIterator<CheckItem*, ToDoEvent *> it;
+	QMapIterator<OCheckItem*, ToDoEvent *> it;
 	for ( it = todoList.begin(); it != todoList.end(); ++it ) {
 	    if ( *(*it) == todo ) {
 		row = it.key()->row();
@@ -633,24 +580,24 @@ void TodoTable::journalFreeReplaceEntry( const ToDoEvent &todo, int row )
 	    }
 	}
     } else {
-	ToDoEvent *t = todoList[static_cast<CheckItem*>(item(row, 0))];
-	todoList.remove( static_cast<CheckItem*>(item(row, 0)) );
+	ToDoEvent *t = todoList[static_cast<OCheckItem*>(item(row, 0))];
+	todoList.remove( static_cast<OCheckItem*>(item(row, 0)) );
 	delete t;
-	static_cast<CheckItem*>(item(row, 0))->setChecked( todo.isCompleted() );
+	static_cast<OCheckItem*>(item(row, 0))->setChecked( todo.isCompleted() );
 	static_cast<ComboItem*>(item(row, 1))->setText( QString::number(todo.priority()) );
 	item( row, 2 )->setText( strTodo );
 
  	if (showDeadl){
 	  static_cast<DueTextItem*>(item(row,3))->setToDoEvent(&todo );
  	}
-	todoList.insert( static_cast<CheckItem*>(item(row,0)), new ToDoEvent(todo) );
+	todoList.insert( static_cast<OCheckItem*>(item(row,0)), new ToDoEvent(todo) );
     }
 }
 
 void TodoTable::journalFreeRemoveEntry( int row )
 {
-    CheckItem *chk;
-    chk = static_cast<CheckItem*>(item(row, 0 ));
+    OCheckItem *chk;
+    chk = static_cast<OCheckItem*>(item(row, 0 ));
     if ( !chk )
 	return;
     todoList.remove( chk );
@@ -663,16 +610,21 @@ void TodoTable::keyPressEvent( QKeyEvent *e )
 	if ( e->key() == Key_Space || e->key() == Key_Return ) {
 		switch ( currentColumn() ) {
 		case 0: {
-			CheckItem *i = static_cast<CheckItem*>(item(currentRow(),
+			OCheckItem *i = static_cast<OCheckItem*>(item(currentRow(),
 								    currentColumn()));
-			if ( i )
+			if ( i ){
 				i->toggle();
+				ToDoEvent newTodo = currentEntry();
+				newTodo.setCompleted( i->isChecked() );
+				replaceCurrentEntry( newTodo, true );
+				updateCell( currentRow(), currentColumn() );
+			}
 			break;
 		}
 		case 1:
 			break;
 		case 2:{
-			ToDoEvent *todo = todoList[static_cast<CheckItem*>(item(currentRow(), 0))];
+			ToDoEvent *todo = todoList[static_cast<OCheckItem*>(item(currentRow(), 0))];
 			emit showDetails(*todo);
 			break;
 		}
@@ -706,7 +658,7 @@ void TodoTable::slotDoFind( const QString &findString, bool caseSensitive,
     clearSelection( TRUE );
     int rows,
 	row;
-    CheckItem *chk;
+    OCheckItem *chk;
     QRegExp r( findString );
 
     r.setCaseSensitive( caseSensitive );
@@ -715,13 +667,13 @@ void TodoTable::slotDoFind( const QString &findString, bool caseSensitive,
 
    if ( !backwards ) {
     for ( row = currFindRow + 1; row < rows; row++ ) {
-	chk = static_cast<CheckItem*>( item(row, 0) );
+	chk = static_cast<OCheckItem*>( item(row, 0) );
 	if ( taskCompare(*(todoList[chk]), r, category) )
 	    break;
     }
     } else {
  	for ( row = currFindRow - 1; row > -1; row-- ) {
- 	    chk = static_cast<CheckItem*>( item(row, 0) );
+ 	    chk = static_cast<OCheckItem*>( item(row, 0) );
  	    if ( taskCompare(*(todoList[chk]), r, category) )
  		break;
  	}
@@ -809,7 +761,7 @@ void TodoTable::slotCheckDay()
   if( mDay.daysTo(date )!= 0 ){
     setPaintingEnabled( FALSE );
     for(int i=0; i < numRows(); i++ ){
-      ToDoEvent *t = todoList[static_cast<CheckItem*>(item(i, 0))];      
+      ToDoEvent *t = todoList[static_cast<OCheckItem*>(item(i, 0))];      
       static_cast<DueTextItem*>(item(i, 3) )->setToDoEvent( t );
 
     }

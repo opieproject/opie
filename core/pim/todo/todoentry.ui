@@ -30,7 +30,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>260</width>
+            <width>248</width>
             <height>321</height>
         </rect>
     </property>
@@ -44,16 +44,156 @@
     <property>
         <name>layoutSpacing</name>
     </property>
-    <grid>
+    <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>11</number>
+            <number>5</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>6</number>
+            <number>1</number>
         </property>
-        <widget row="2"  column="0" >
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout20</cstring>
+            </property>
+            <property>
+                <name>layoutSpacing</name>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Priority:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>1 - Very High</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>2 - High</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>3 - Normal</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>4 - Low</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>5 - Very Low</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>comboPriority</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>0</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>currentItem</name>
+                        <number>2</number>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout21</cstring>
+            </property>
+            <hbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>checkCompleted</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>&amp;Completed</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>checkDate</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>D&amp;ue</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>buttonDate</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>1 Jan 2001</string>
+                    </property>
+                </widget>
+            </hbox>
+        </widget>
+        <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -68,6 +208,43 @@
                     <name>spacing</name>
                     <number>6</number>
                 </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>txtProg_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>MShape</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>MShadow</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Group:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QPushButton</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>selectGroupButton</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Select</string>
+                    </property>
+                </widget>
                 <widget>
                     <class>QLabel</class>
                     <property stdset="1">
@@ -153,11 +330,11 @@
                 </widget>
             </hbox>
         </widget>
-        <widget row="0"  column="0" >
+        <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
-                <cstring>Layout20</cstring>
+                <cstring>Layout33</cstring>
             </property>
             <hbox>
                 <property stdset="1">
@@ -172,7 +349,7 @@
                     <class>QLabel</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>TextLabel2</cstring>
+                        <cstring>TextLabel3</cstring>
                     </property>
                     <property stdset="1">
                         <name>sizePolicy</name>
@@ -182,61 +359,38 @@
                         </sizepolicy>
                     </property>
                     <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>NoFrame</enum>
+                    </property>
+                    <property stdset="1">
                         <name>text</name>
-                        <string>Priority:</string>
+                        <string>Category:</string>
                     </property>
                 </widget>
                 <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>1 - Very High</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>2 - High</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>3 - Normal</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>4 - Low</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>5 - Very Low</string>
-                        </property>
-                    </item>
+                    <class>CategorySelect</class>
                     <property stdset="1">
                         <name>name</name>
-                        <cstring>comboPriority</cstring>
+                        <cstring>comboCategory</cstring>
                     </property>
                     <property stdset="1">
                         <name>sizePolicy</name>
                         <sizepolicy>
-                            <hsizetype>0</hsizetype>
+                            <hsizetype>7</hsizetype>
                             <vsizetype>0</vsizetype>
                         </sizepolicy>
                     </property>
                     <property stdset="1">
-                        <name>currentItem</name>
-                        <number>2</number>
+                        <name>minimumSize</name>
+                        <size>
+                            <width>60</width>
+                            <height>20</height>
+                        </size>
                     </property>
                 </widget>
             </hbox>
         </widget>
-        <widget row="4"  column="0" >
+        <widget>
             <class>QLayoutWidget</class>
             <property stdset="1">
                 <name>name</name>
@@ -306,61 +460,7 @@
                 </widget>
             </hbox>
         </widget>
-        <widget row="1"  column="0" >
-            <class>QLayoutWidget</class>
-            <property stdset="1">
-                <name>name</name>
-                <cstring>Layout21</cstring>
-            </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>checkCompleted</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>&amp;Completed</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QCheckBox</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>checkDate</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>D&amp;ue</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QPushButton</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>buttonDate</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>1 Jan 2001</string>
-                    </property>
-                </widget>
-            </hbox>
-        </widget>
-        <widget row="5"  column="0" >
+        <widget>
             <class>QMultiLineEdit</class>
             <property stdset="1">
                 <name>name</name>
@@ -373,68 +473,12 @@
                     <vsizetype>7</vsizetype>
                 </sizepolicy>
             </property>
-        </widget>
-        <widget row="3"  column="0" >
-            <class>QLayoutWidget</class>
             <property stdset="1">
-                <name>name</name>
-                <cstring>Layout33</cstring>
+                <name>wordWrap</name>
+                <enum>WidgetWidth</enum>
             </property>
-            <hbox>
-                <property stdset="1">
-                    <name>margin</name>
-                    <number>0</number>
-                </property>
-                <property stdset="1">
-                    <name>spacing</name>
-                    <number>6</number>
-                </property>
-                <widget>
-                    <class>QLabel</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>TextLabel3</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>1</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>frameShape</name>
-                        <enum>NoFrame</enum>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>Category:</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>CategorySelect</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>comboCategory</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>7</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
-                    </property>
-                    <property stdset="1">
-                        <name>minimumSize</name>
-                        <size>
-                            <width>60</width>
-                            <height>20</height>
-                        </size>
-                    </property>
-                </widget>
-            </hbox>
         </widget>
-    </grid>
+    </vbox>
 </widget>
 <customwidgets>
     <customwidget>
@@ -492,14 +536,4 @@
     <slot access="protected">dateChanged( int, int, int )</slot>
     <slot access="protected">slotCopy()</slot>
 </connections>
-<tabstops>
-    <tabstop>comboPriority</tabstop>
-    <tabstop>checkCompleted</tabstop>
-    <tabstop>checkDate</tabstop>
-    <tabstop>buttonDate</tabstop>
-    <tabstop>cmbProg</tabstop>
-    <tabstop>comboCategory</tabstop>
-    <tabstop>lneSum</tabstop>
-    <tabstop>txtTodo</tabstop>
-</tabstops>
 </UI>

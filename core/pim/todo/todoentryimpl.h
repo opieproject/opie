@@ -24,6 +24,7 @@
 #include "todoentry.h"
 
 #include <opie/todoevent.h>
+#include <opie/ocontactselector.h>
 
 #include <qdatetime.h>
 #include <qpalette.h>
@@ -47,6 +48,7 @@ public:
 
 protected slots:
     void dateChanged( int y, int m, int d );
+    void groupButtonClicked (); 
     void slotCopy();
 protected:
     virtual void accept();

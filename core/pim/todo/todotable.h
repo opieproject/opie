@@ -25,6 +25,7 @@
 #include <qpe/stringutil.h>
 //#include <qpe/task.h>
 #include <opie/todoevent.h>
+#include <opie/ocheckitem.h>
 
 #include <qtable.h>
 #include <qmap.h>
@@ -34,23 +35,6 @@ class Node;
 class QComboBox;
 class QTimer;
 
-class CheckItem : public QTableItem
-{
-public:
-    CheckItem( QTable *t, const QString &sortkey );
-
-    void setChecked( bool b );
-    void toggle();
-    bool isChecked() const;
-    void setKey( const QString &key ) { sortKey = key; }
-    QString key() const;
-
-    void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
-
-private:
-    bool checked;
-    QString sortKey;
-};
 
 class ComboItem : public QTableItem
 {
@@ -176,7 +160,7 @@ private slots:
 private:
     friend class TodoWindow;
 
-    QMap<CheckItem*, ToDoEvent *> todoList;
+    QMap<OCheckItem*, ToDoEvent *> todoList;
     QStringList categoryList;
     bool showComp;
     QString showCat;
@@ -193,9 +177,9 @@ private:
 inline void TodoTable::insertIntoTable( ToDoEvent *todo, int row )
 {
     QString sortKey = (char) ((todo->isCompleted() ? 'a' : 'A') 
-			      + todo->priority() ) 
-		      + Qtopia::buildSortKey( todo->description() );
-    CheckItem *chk = new CheckItem( this, sortKey );
+			      + todo->priority()) 
+	    + Qtopia::buildSortKey( todo->description() ); // add DueDate/Deadline ? (se) 
+    OCheckItem *chk = new OCheckItem( this, sortKey );
     chk->setChecked( todo->isCompleted() );
     ComboItem *cmb = new ComboItem( this, QTableItem::WhenCurrent );
     cmb->setText( QString::number( todo->priority() ) );

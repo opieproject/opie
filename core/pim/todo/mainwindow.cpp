@@ -253,7 +253,6 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f ) :
 	     this, SLOT( slotShowPopup(const QPoint &)) );
 
 //     qDebug("mainwindow #3: t=%d", t.elapsed() );
-    table->updateVisible();
     table->setUpdatesEnabled( TRUE );
     table->setPaintingEnabled( TRUE );
     table->viewport()->setUpdatesEnabled( TRUE );
