@@ -32,13 +32,14 @@ public:
 	void setItemSelected(bool enable);
 	bool isItemSelected();
 	bool itemSelected();
-	
+
 protected:
 	void paintCell( QPainter *p, const QColorGroup &cg,
 			int column, int width, int alignment );
 private:
 	Email mail;
 	bool selected;
+	QString dateFromULCString( QString ulc );
 };
 
 #endif
