@@ -78,6 +78,11 @@ public:
     void setProperty(const QString& key, const QString& value);
     QString property(const QString& key) const;
 
+//#ifdef QTOPIA_INTERNAL_PRELOADACCESS
+    bool isPreloaded() const;
+    void setPreloaded(bool yesNo);
+//#endif
+
 protected:
     QString mName;
     QPixmap mPixmap;

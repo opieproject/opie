@@ -354,10 +354,10 @@ QString AppLnk::linkFile() const
 		  while (QFile::exists((nn=that->mLinkFile+"_"+QString::number(n))+".desktop")){
 		    n++;
 		    AppLnk lnk(nn ); // just to be sure
-		    if(lnk.file() ==that->file() ){ 
+		    if(lnk.file() ==that->file() ){
 		      break;
-		    }   
-		  }    
+		    }
+		  }
 		  that->mLinkFile = nn;
 		}
 	    }
@@ -603,6 +603,29 @@ QString AppLnk::property(const QString& key) const
 	return QString::null;
     Config cfg(lf, Config::File);
     return cfg.readEntry(key);
+}
+
+
+bool AppLnk::isPreloaded() const {
+  // Preload information is stored in the Launcher config in v1.5.
+  Config cfg("Launcher");
+  cfg.setGroup("Preload");
+  QStringList apps = cfg.readListEntry("Apps",',');
+  if (apps.contains(exec()))
+    return true;
+  return false;
+}
+
+void AppLnk::setPreloaded(bool yesNo) {
+  // Preload information is stored in the Launcher config in v1.5.
+  Config cfg("Launcher");
+  cfg.setGroup("Preload");
+  QStringList apps = cfg.readListEntry("Apps", ',');
+  if (apps.contains(exec()) && !yesNo)
+    apps.remove(exec());
+  else if (yesNo && !apps.contains(exec()))
+    apps.append(exec());
+  cfg.writeEntry("Apps", apps, ',');
 }
 
 
