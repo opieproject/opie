@@ -40,6 +40,7 @@
 #include <qpixmap.h>
 #include <qmessagebox.h>
 #include <qlineedit.h>
+#include <qregexp.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -145,7 +146,7 @@ OpieFtp::OpieFtp( )
     UsernameComboBox = new QComboBox( FALSE, tab_3, "UsernameComboBox" );
     UsernameComboBox->setGeometry( QRect( 10, 25, 196, 21 ) );
     UsernameComboBox->setEditable(TRUE);
-    UsernameComboBox->lineEdit()->setText("root");
+    UsernameComboBox->lineEdit()->setText("llornkcor");
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
     TextLabel2->setGeometry( QRect( 10, 50, 65, 16 ) ); 
@@ -160,14 +161,14 @@ OpieFtp::OpieFtp( )
     ServerComboBox = new QComboBox( FALSE, tab_3, "ServerComboBox" );
     ServerComboBox->setGeometry( QRect( 10, 105, 195, 21 ) );
     ServerComboBox->setEditable(TRUE);
-    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
+    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
     TextLabel5->setGeometry( QRect( 10, 130, 95, 16 ) ); 
     TextLabel5->setText( tr( "Remote path" ) );
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
     remotePath->setGeometry( QRect( 10, 145, 195, 16 ) );
-    remotePath->setText( currentRemoteDir = "/");
+    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
     
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
     TextLabel4->setGeometry( QRect( 10, 170, 30, 21 ) ); 
@@ -176,7 +177,8 @@ OpieFtp::OpieFtp( )
     PortSpinBox->setGeometry( QRect( 40, 175, 75, 20 ) ); 
     PortSpinBox->setButtonSymbols( QSpinBox::UpDownArrows );
     PortSpinBox->setMaxValue(32786);
-    PortSpinBox->setValue( 4242 );
+    PortSpinBox->setValue( 21);
+
     TabWidget->insertTab( tab_3, tr( "Config" ) );
 
     connect(TabWidget,SIGNAL(currentChanged(QWidget *)),
@@ -226,28 +228,38 @@ void OpieFtp::localUpload()
     QString remoteFile= currentRemoteDir+strItem;
     QFileInfo fi(localFile);
     if( !fi.isDir()) {
-    fsz=fi.size();
-    ProgressBar->setTotalSteps(fsz);
+        fsz=fi.size();
+        ProgressBar->setTotalSteps(fsz);
 
-    FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
-    FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
-    FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
-    FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
-    qDebug("Put: %s, %s",localFile.latin1(),remoteFile.latin1());
+        FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
+        FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
+        FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
+        FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
+        qDebug("Put: %s, %s",localFile.latin1(),remoteFile.latin1());
 
-    if( !FtpPut( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
-        QString msg;
-        msg.sprintf("Unable to upload\n%s",FtpLastResponse(conn));
-        QMessageBox::message("Note",msg);
-        FtpQuit(conn);
-    }
-    ProgressBar->reset();
+        if( !FtpPut( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
+            QString msg;
+            msg.sprintf("Unable to upload\n%s",FtpLastResponse(conn));
+            msg.replace(QRegExp(":"),"\n");
+            QMessageBox::message("Note",msg);
+//            FtpQuit(conn);
+        }
+        ProgressBar->reset();
+        nullifyCallBack();
     } else {
         QMessageBox::message("Note","Cannot upload directories");
     }
     TabWidget->setCurrentPage(1);
     populateRemoteView();
     QCopEnvelope ( "QPE/System", "notBusy()" );
+}
+
+void OpieFtp::nullifyCallBack() {
+        FtpOptions(FTPLIB_CALLBACK, NULL, conn);
+        FtpOptions(FTPLIB_IDLETIME, NULL, conn);
+        FtpOptions(FTPLIB_CALLBACKARG, NULL, conn);
+        FtpOptions(FTPLIB_CALLBACKBYTES, NULL, conn);
+
 }
 
 void OpieFtp::remoteDownload()
@@ -273,10 +285,12 @@ void OpieFtp::remoteDownload()
     if(!FtpGet( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
         QString msg;
         msg.sprintf("Unable to download \n%s",FtpLastResponse(conn));
+        msg.replace(QRegExp(":"),"\n");
         QMessageBox::message("Note",msg);
-        FtpQuit(conn);
+//        FtpQuit(conn);
     }
     ProgressBar->reset();
+    nullifyCallBack();
     TabWidget->setCurrentPage(0);
     populateLocalView();
     QCopEnvelope ( "QPE/System", "notBusy()" );
@@ -317,6 +331,7 @@ void OpieFtp::connector()
         if (!FtpLogin( ftp_user.latin1(), ftp_pass.latin1(),conn )) {
             QString msg;
             msg.sprintf("Unable to log in\n%s",FtpLastResponse(conn));
+            msg.replace(QRegExp(":"),"\n");
             QMessageBox::message("Note",msg);
             FtpQuit(conn);
             return ;
@@ -340,8 +355,9 @@ bool OpieFtp::remoteDirList(const QString &dir)
     if (!FtpDir( "./._temp", dir.latin1(), conn) ) {
         QString msg;
         msg.sprintf("Unable to list the directory\n"+dir+"\n%s",FtpLastResponse(conn) );
+        msg.replace(QRegExp(":"),"\n");
         QMessageBox::message("Note",msg);
-        FtpQuit(conn);
+//        FtpQuit(conn);
         return false;
     }
     populateRemoteView();
@@ -354,9 +370,11 @@ bool OpieFtp::remoteChDir(const QString &dir)
     QCopEnvelope ( "QPE/System", "busy()" );
     if (!FtpChdir( dir.latin1(), conn )) {
         QString msg;
-        msg.sprintf("Unable to change directories "+dir+"\n%s",FtpLastResponse(conn));
+        msg.sprintf("Unable to change directories\n"+dir+"\n%s",FtpLastResponse(conn));
+        msg.replace(QRegExp(":"),"\n");
         QMessageBox::message("Note",msg);
-        FtpQuit(conn);
+            qDebug(msg);
+//        FtpQuit(conn);
         QCopEnvelope ( "QPE/System", "notBusy()" );
         return FALSE;
     }
@@ -429,38 +447,48 @@ bool OpieFtp::populateRemoteView()
 void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
 {
     QCopEnvelope ( "QPE/System", "busy()" );
+    QString  oldRemoteCurrentDir =  currentRemoteDir;
     QString strItem=selectedItem->text(0);
     strItem=strItem.simplifyWhiteSpace();
-    if(strItem == "../") {
+    if(strItem == "../") { // the user wants to go ^
         if( FtpCDUp( conn) == 0) {
             QString msg;
-            msg.sprintf("Unable to change directories \n%s",FtpLastResponse(conn));
+            msg.sprintf("Unable to cd up\n%s",FtpLastResponse(conn));
+            msg.replace(QRegExp(":"),"\n");
             QMessageBox::message("Note",msg);
+            qDebug(msg);
         }
         char path[256];
-        if( FtpPwd( path,sizeof(path),conn) == 0) {
+        if( FtpPwd( path,sizeof(path),conn) == 0) { //this is easier than fudging the string
             QString msg;
             msg.sprintf("Unable to get working dir\n%s",FtpLastResponse(conn));
+            msg.replace(QRegExp(":"),"\n");
             QMessageBox::message("Note",msg);
+            qDebug(msg);
         }
         currentRemoteDir=path;
     } else {
         if(strItem.find("->",0,TRUE) != -1) { //symlink on some servers
-            strItem=strItem.right( strItem.length() - strItem.find("->",0,TRUE)-3 );
+            strItem=strItem.right( strItem.length() - strItem.find("->",0,TRUE) - 2 );
             strItem = strItem.stripWhiteSpace();
             currentRemoteDir = strItem;
-            if( remoteChDir( (const QString &)strItem) ==0) {
-                QString msg;
-                msg.sprintf("Unable to change directories \n%s",FtpLastResponse(conn));
-                QMessageBox::message("Note",msg);
+            if( !remoteChDir( (const QString &)strItem)) {
+                currentRemoteDir = oldRemoteCurrentDir;
+                strItem="";
+                populateRemoteView();
+                qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
             }
-        } else if(strItem.find("/",0,TRUE) != -1) {
-            if( remoteChDir( (const QString &)currentRemoteDir+strItem) ==0) {
-                QString msg;
-                msg.sprintf("Unable to change directories \n%s",FtpLastResponse(conn));
-                QMessageBox::message("Note",msg);
-            }
+        } else if(strItem.find("/",0,TRUE) != -1) { // this is a directory
+            qDebug("trying directory");
+            if( !remoteChDir( (const QString &)currentRemoteDir + strItem)) {
+                currentRemoteDir = oldRemoteCurrentDir;
+                strItem="";
+                qDebug("RemoteCurrentDir1 "+oldRemoteCurrentDir);
+                
+                populateRemoteView();
+            } else {
             currentRemoteDir = currentRemoteDir+strItem;
+            }
         } else {
             qDebug("download "+strItem);
         }
@@ -479,7 +507,7 @@ void OpieFtp::remoteListClicked(QListViewItem *selectedItem)
     strSize=strSize.stripWhiteSpace();
     if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
           // is symlink
-        QString strItem2=strItem.right( (strItem.length()-strItem.find("->",0,TRUE)) -4);
+        QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
         if(QDir(strItem2).exists() ) {
             currentDir.cd(strItem2, TRUE);
             populateLocalView();
@@ -627,6 +655,7 @@ void OpieFtp::remoteMakDir()
        if(FtpMkdir( tmp.latin1(), conn) == 0) {
            QString msg;
            msg.sprintf("Unable to make directory\n%s",FtpLastResponse(conn));
+           msg.replace(QRegExp(":"),"\n");
            QMessageBox::message("Note",msg);
        }
        QCopEnvelope ( "QPE/System", "notBusy()" );
@@ -647,6 +676,7 @@ void OpieFtp::remoteDelete()
               if(FtpRmdir( path.latin1(), conn) ==0) {
                   QString msg;
                   msg.sprintf("Unable to remove directory\n%s",FtpLastResponse(conn));
+                  msg.replace(QRegExp(":"),"\n");
                   QMessageBox::message("Note",msg);
               }
           }
@@ -660,6 +690,7 @@ void OpieFtp::remoteDelete()
               if(FtpDelete( path.latin1(), conn)==0) {
                   QString msg;
                   msg.sprintf("Unable to delete file\n%s",FtpLastResponse(conn));
+                  msg.replace(QRegExp(":"),"\n");
                   QMessageBox::message("Note",msg);
               }
           }
@@ -683,6 +714,7 @@ void OpieFtp::remoteRename()
         if(FtpRename( oldName.latin1(), newName.latin1(),conn) == 0) {
             QString msg;
             msg.sprintf("Unable to rename file\n%s",FtpLastResponse(conn));
+            msg.replace(QRegExp(":"),"\n");
             QMessageBox::message("Note",msg);
         }
         QCopEnvelope ( "QPE/System", "notBusy()" );
@@ -708,6 +740,8 @@ void OpieFtp::localRename()
 
 void OpieFtp::currentPathEditChanged()
 {
+    QString  oldRemoteCurrentDir =  currentRemoteDir;
+ qDebug("oldRemoteCurrentDir "+oldRemoteCurrentDir);
     if (TabWidget->currentPageIndex() == 0) {
         if(QDir( currentPathEdit->text()).exists()) {
             currentDir.setPath( currentPathEdit->text() );
@@ -722,7 +756,11 @@ void OpieFtp::currentPathEditChanged()
             currentRemoteDir = currentRemoteDir +"/";
             currentPathEdit->setText( currentRemoteDir );
         }
-        remoteChDir( (const QString &)currentRemoteDir);
+            if( !remoteChDir( (const QString &)currentRemoteDir) ) {
+                currentRemoteDir = oldRemoteCurrentDir;
+                currentPathEdit->setText( currentRemoteDir );
+            }
+        
         remoteDirList( (const QString &)currentRemoteDir);
     }
 }

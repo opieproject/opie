@@ -87,6 +87,9 @@ protected slots:
     void remoteRename();
     void localRename();
     void currentPathEditChanged();
+protected:
+    void nullifyCallBack();
+    
 };
 
 #endif // OPIEFTP_H
