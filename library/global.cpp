@@ -582,7 +582,7 @@ void Global::invoke(const QString &c)
 #endif
 
 #ifdef QT_NO_QWS_MULTIPROCESS
-    QMessageBox::warning( 0, "Error", "Could not find the application " + c, "Ok", 0, 0, 0, 1 );
+    QMessageBox::warning( 0, QObject::tr("Error"), QObject::tr("Could not find the application ") + c, QObject::tr("Ok"), 0, 0, 0, 1 );
 #else
 
     QStrList slist;
@@ -661,7 +661,7 @@ void Global::invoke(const QString &c)
         if ( success )
             StartingAppList::add( list[0] );
         else
-            QMessageBox::warning( 0, "Error", "Could not start the application " + c, "Ok", 0, 0, 0, 1 );
+            QMessageBox::warning( 0, QObject::tr("Error"), QObject::tr("Could not start the application ") + c, QObject::tr("Ok"), 0, 0, 0, 1 );
     }
 #endif //QT_NO_QWS_MULTIPROCESS
 }

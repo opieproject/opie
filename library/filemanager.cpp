@@ -28,7 +28,7 @@
 
 #include <errno.h>
 #include <stdlib.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <sys/stat.h>
 #include <dirent.h>
 #include <sys/sendfile.h>
@@ -197,10 +197,10 @@ bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
     bytesRead -= bytesWritten;
   }
     }
-    
+
     if ( ok )
   ok = dest.writeLink();
-    
+
     if ( ok ) {
   // okay now rename the file...
   if ( !renameFile( fn.latin1(), dest.file().latin1() )  ) {
@@ -234,7 +234,7 @@ bool FileManager::copyFile( const QString & src, const QString & dest ) {
       fstat (read_fd, &stat_buf);
       if( !destFile.open( IO_WriteOnly|IO_Raw ) )
             return success = false;
-      write_fd = destFile.handle(); 
+      write_fd = destFile.handle();
       if(write_fd != -1) {
          int err=0;
          QString msg;
@@ -273,7 +273,7 @@ bool FileManager::renameFile( const QString & src, const QString & dest ) {
        return true;
       }
    }
-    return false;  
+    return false;
 }
 
 

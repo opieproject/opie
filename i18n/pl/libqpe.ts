@@ -861,6 +861,22 @@ Zwolnij wiecej pamieci</translation>
         <source>Dec</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Blad</translation>
+    </message>
+    <message>
+        <source>Could not find the application </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start the application </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>

@@ -864,6 +864,22 @@ frei und versuchen Sie es noch einmal
         <source>Dec</source>
         <translation>Dez</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Fehler</translation>
+    </message>
+    <message>
+        <source>Could not find the application </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start the application </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>

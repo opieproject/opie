@@ -869,6 +869,22 @@ Libérez de la mémoire et réessayez.</translation>
         <translation>&lt;qt&gt;Voulez-vous vraiment supprimer
 %1 ?&lt;/qt&gt;</translation>
     </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished">Erreur</translation>
+    </message>
+    <message>
+        <source>Could not find the application </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ok</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not start the application </source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
