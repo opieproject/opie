@@ -85,7 +85,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	m_config.load();
 
-	initFields();
+	//	initFields();
 	
 	setCaption( tr("Contacts") );
 	setIcon( Resource::loadPixmap( "AddressBook" ) );
@@ -790,31 +790,31 @@ void AddressbookWindow::slotSave()
 // }
 
 // This should be moved to the contact editor.. (se)
-void AddressbookWindow::initFields()
-{
-	// we really don't need the things from the configuration, anymore
-	// only thing that is important are the important categories.  So,
-	// Call the contact functions that correspond to these old functions...
+//void AddressbookWindow::initFields()
+//{
+// 	// we really don't need the things from the configuration, anymore
+// 	// only thing that is important are the important categories.  So,
+// 	// Call the contact functions that correspond to these old functions...
 	
-	QStringList xmlFields = OContact::fields();
-	QStringList visibleFields = OContact::untrfields();
-	// QStringList trFields = OContact::trfields();
+// 	QStringList xmlFields = OContact::fields();
+// 	QStringList visibleFields = OContact::untrfields();
+// 	// QStringList trFields = OContact::trfields();
 
-	xmlFields.remove( "Title" );
-	visibleFields.remove( "Name Title" );
-	visibleFields.remove( "Notes" );
+// 	xmlFields.remove( "Title" );
+// 	visibleFields.remove( "Name Title" );
+// 	visibleFields.remove( "Notes" );
 	
-	int i;
-	Config cfg( "AddressBook" );
-	QString zn;
+// 	int i;
+// 	Config cfg( "AddressBook" );
+// 	QString zn;
 	
-	// ### Write a function to keep this from happening again...
-	{
-	QStringList::ConstIterator it;
-	for ( i = 0, it = xmlFields.begin(); it != xmlFields.end(); ++it, i++ ) {
-		allFields.append( i + 3 );
-	}
-	}
+// 	// ### Write a function to keep this from happening again...
+// 	{
+// 	QStringList::ConstIterator it;
+// 	for ( i = 0, it = xmlFields.begin(); it != xmlFields.end(); ++it, i++ ) {
+// 		allFields.append( i + 3 );
+// 	}
+// 	}
 	
 // 	cfg.setGroup( "Version" );
 // 	version = cfg.readNumEntry( "version" );
@@ -857,31 +857,31 @@ void AddressbookWindow::initFields()
 // 			}
 // 		}
 // 	} else {
-		QValueList<int>::ConstIterator it;
-		for ( it = allFields.begin(); it != allFields.end(); ++it )
-			orderedFields.append( *it );
+// 		QValueList<int>::ConstIterator it;
+// 		for ( it = allFields.begin(); it != allFields.end(); ++it )
+// 			orderedFields.append( *it );
 		
-		slOrderedFields = visibleFields;
-		orderedFields.remove( Qtopia::AddressUid );
-		orderedFields.remove( Qtopia::Title );
-		orderedFields.remove( Qtopia::Groups );
-		orderedFields.remove( Qtopia::AddressCategory );
-		orderedFields.remove( Qtopia::FirstName );
-		orderedFields.remove( Qtopia::LastName );
-		orderedFields.remove( Qtopia::DefaultEmail );
-		orderedFields.remove( Qtopia::FileAs );
-		orderedFields.remove( Qtopia::Notes );
-		orderedFields.remove( Qtopia::Gender );
-		slOrderedFields.remove( "Name Title" );
-		slOrderedFields.remove( "First Name" );
-		slOrderedFields.remove( "Last Name" );
-		slOrderedFields.remove( "File As" );
-		slOrderedFields.remove( "Default Email" );
-		slOrderedFields.remove( "Notes" );
-		slOrderedFields.remove( "Gender" );
+// 		slOrderedFields = visibleFields;
+// 		orderedFields.remove( Qtopia::AddressUid );
+// 		orderedFields.remove( Qtopia::Title );
+// 		orderedFields.remove( Qtopia::Groups );
+// 		orderedFields.remove( Qtopia::AddressCategory );
+// 		orderedFields.remove( Qtopia::FirstName );
+// 		orderedFields.remove( Qtopia::LastName );
+// 		orderedFields.remove( Qtopia::DefaultEmail );
+// 		orderedFields.remove( Qtopia::FileAs );
+// 		orderedFields.remove( Qtopia::Notes );
+// 		orderedFields.remove( Qtopia::Gender );
+// 		slOrderedFields.remove( "Name Title" );
+// 		slOrderedFields.remove( "First Name" );
+// 		slOrderedFields.remove( "Last Name" );
+// 		slOrderedFields.remove( "File As" );
+// 		slOrderedFields.remove( "Default Email" );
+// 		slOrderedFields.remove( "Notes" );
+// 		slOrderedFields.remove( "Gender" );
 		
 // 	}
-}
+//}
 
 
 // AbLabel* AddressbookWindow::abView()

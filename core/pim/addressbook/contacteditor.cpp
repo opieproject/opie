@@ -63,7 +63,6 @@ ContactEditor::ContactEditor(	const OContact &entry,
 {
 
 	init();
-	//	initMap();
 	setEntry( entry );
 }
 
@@ -83,25 +82,12 @@ void ContactEditor::init() {
 		slBusinessAddress.append( "" );
 	}
 
-	//	{
-	// 	hasGender = FALSE;
-// 		hasTitle = FALSE;
-// 		hasCompany = FALSE;
-// 		hasNotes = FALSE;
-// 		hasStreet = FALSE;
-// 		hasStreet2 = FALSE;
-// 		hasPOBox = FALSE;
-// 		hasCity = FALSE;
-// 		hasState = FALSE;
-// 		hasZip = FALSE;
-// 		hasCountry = FALSE;
-
-		trlChooserNames   = OContact::trphonefields();
-		slChooserNames    = OContact::untrphonefields();
-		slDynamicEntries  = OContact::untrdetailsfields();
-		trlDynamicEntries = OContact::trdetailsfields();
-		for (i = 0; i < slChooserNames.count(); i++)
-		  slChooserValues.append("" );
+	trlChooserNames   = OContact::trphonefields();
+	slChooserNames    = OContact::untrphonefields();
+	slDynamicEntries  = OContact::untrdetailsfields();
+	trlDynamicEntries = OContact::trdetailsfields();
+	for (i = 0; i < slChooserNames.count(); i++)
+	  slChooserValues.append("");
 
 
 	QVBoxLayout *vb = new QVBoxLayout( this );
@@ -205,17 +191,7 @@ void ContactEditor::init() {
 	gl->addWidget( l, 1, 0 );
 	txtAddress = new QLineEdit( container );
 	gl->addMultiCellWidget( txtAddress, 1, 1, 1, 2 );
-/*
-	l = new QLabel( tr( "Address 2" ), container );
-	gl->addWidget( l, 2, 0 );
-	txtAddress2 = new QLineEdit( container );
-	gl->addMultiCellWidget( txtAddress2, 2, 2, 1, 2 );
 
-	l = new QLabel( tr( "P.O. Box" ), container );
-	gl->addWidget( l, 3, 0 );
-	txtPOBox = new QLineEdit( container );
-	gl->addMultiCellWidget( txtPOBox, 3, 3, 1, 2 );
-*/
 	l = new QLabel( tr( "City" ), container );
 	gl->addWidget( l, 2, 0 );
 	txtCity = new QLineEdit( container );
@@ -631,11 +607,6 @@ void ContactEditor::init() {
 	new QPEDialogListener(this);
 }
 
-void ContactEditor::initMap()
-{
- 
-}
-
 void ContactEditor::slotChooser1Change( const QString &textChanged ) {
 
 	int index = cmbChooserField1->currentItem();
@@ -802,11 +773,6 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 	useFullName = true;
 
 }
-
-// // Loads the detail fields
- void ContactEditor::loadFields() {
-
- }
 
 void ContactEditor::accept() {
 

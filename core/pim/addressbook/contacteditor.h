@@ -59,7 +59,6 @@ class ContactEditor : public QDialog {
 				const char *name = 0,
 				WFlags fl = 0 );
 		~ContactEditor();
-		void loadFields();
 		void setNameFocus();
 		void setPersonalView( bool personal = true );
 		OContact entry() const { return ent; }
@@ -74,7 +73,6 @@ class ContactEditor : public QDialog {
 
 	private:
 		void init();
-		void initMap();
 		void saveEntry();
 		bool isEmpty();
 		void cleanupFields();

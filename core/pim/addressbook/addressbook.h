@@ -97,15 +97,15 @@ private slots:
 	void slotConfig();
 
 private:
-	void initFields();  // inititialize our fields...
+	//	void initFields();  // inititialize our fields...
 	// AbLabel *abView();
 	void populateCategories();
 
 	QPopupMenu *catMenu;
 	QPEToolBar *listTools;
 	QToolButton *deleteButton;
-	QValueList<int> allFields, orderedFields;
-	QStringList slOrderedFields;
+	//	QValueList<int> allFields, orderedFields;
+	//	QStringList slOrderedFields;
 	enum Panes { paneList=0, paneView, paneEdit };
 	ContactEditor *abEditor;
 	LetterPicker *pLabel;
