@@ -238,7 +238,7 @@ de cette liste</translation>
     <name>LnkProperties</name>
     <message>
         <source>Document View</source>
-        <translation>Vue &quot;Document&quot;</translation>
+        <translation>Vue Document</translation>
     </message>
     <message>
         <source>Delete</source>
