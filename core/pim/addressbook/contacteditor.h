@@ -100,6 +100,7 @@ class ContactEditor : public QDialog {
 		void slotZipChange( const QString &textChanged );
 		void slotCountryChange( const QString &textChanged );
 		void slotFullNameChange( const QString &textChanged );
+		void slotSuffixChange( const QString &textChanged );
 		void slotAnniversaryDateChanged( int year, int month, int day);
 		void slotBirthdayDateChanged( int year, int month, int day);
 		void slotRemoveBirthday();

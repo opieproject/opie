@@ -645,6 +645,8 @@ void ContactEditor::init() {
 
 	connect( txtFullName, SIGNAL(textChanged(const QString &)), this, SLOT(slotFullNameChange(const QString &)) );
 
+	connect( txtSuffix, SIGNAL(textChanged(const QString &)), this, SLOT(slotSuffixChange(const QString &)) );
+
 	connect( txtChooserField1, SIGNAL(textChanged(const QString &)),
                  this, SLOT(slotChooser1Change(const QString &)) );
 	connect( txtChooserField2, SIGNAL(textChanged(const QString &)),
@@ -1037,6 +1039,11 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 
 }
 
+void ContactEditor::slotSuffixChange( const QString& ) {
+	// Just want to update the FileAs combo if the suffix was changed..
+	slotFullNameChange( txtFullName->text() );
+}
+
 void ContactEditor::accept() {
 
 	if ( isEmpty() ) {
@@ -1070,7 +1077,7 @@ void ContactEditor::slotName() {
 	dlgName->showMaximized();
 	if ( dlgName->exec() ) {
 
-		tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text() + " " + txtSuffix->text();
+		tmpName = txtFirstName->text() + " " + txtMiddleName->text() + " " + txtLastName->text();
 		txtFullName->setText( tmpName.simplifyWhiteSpace() );
 		slotFullNameChange( txtFullName->text() );
 		useFullName = false;
@@ -1106,7 +1113,6 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	QString strFirstName;
 	QString strMiddleName;
 	QString strLastName;
-	QString strSuffix;
 	QString strTitle;
 	int commapos;
 	bool haveLastName = false;
@@ -1161,7 +1167,6 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	qWarning(" strFirstName: %s",  strFirstName.latin1());
 	qWarning(" strMiddleName: %s",  strMiddleName.latin1());
 	qWarning(" strLastName: %s",  strLastName.latin1());
-	qWarning(" strSuffix: %s",  strSuffix.latin1());
 	qWarning(" strTitle: %s",  strTitle.latin1());
 
 	switch (type) {
@@ -1175,7 +1180,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 		return strLastName + ", " + strFirstName + " " + strMiddleName;
 		
 	case NAME_FMLS:
-		return strFirstName + " " + strMiddleName + " " + strLastName + " " + strSuffix;
+		return strFirstName + " " + strMiddleName + " " + strLastName + " " + txtSuffix->text();
 		
 	case NAME_F:
 		return strFirstName;
@@ -1187,7 +1192,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 		return strLastName;
 		
 	case NAME_S:
-		return strSuffix;
+		return txtSuffix->text();
 		
 	}
 	return QString::null;
