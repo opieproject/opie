@@ -1026,10 +1026,10 @@ void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 
 	cmbFileAs->clear();
 
-	cmbFileAs->insertItem( parseName( textChanged, NAME_FL ) );
-	cmbFileAs->insertItem( parseName( textChanged, NAME_FMLS ) );
 	cmbFileAs->insertItem( parseName( textChanged, NAME_LF ) );
 	cmbFileAs->insertItem( parseName( textChanged, NAME_LFM ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_FL ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_FMLS ) );
 
 	cmbFileAs->setCurrentItem( index );
 
@@ -1152,8 +1152,11 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 		
 		strMiddleName = allSecondNames.join(" ");
 		strLastName = *(--allNames.end());
-
+		
 	}
+
+	if ( strFirstName == strLastName )
+		strFirstName = "";
 
 	qWarning(" strFirstName: %s",  strFirstName.latin1());
 	qWarning(" strMiddleName: %s",  strMiddleName.latin1());
