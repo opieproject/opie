@@ -58,11 +58,11 @@ const int sw_prec = 2;
 
 void startPlayer()
 {
-	Config config( "qpe" );
-	config.setGroup( "Time" );
-	sleep(15);
-	QCopEnvelope e( "QPE/Application/opieplayer", "setDocument(QString)" );
-	e << config.readEntry( "mp3File", "" );
+  Config config( "qpe" );
+  config.setGroup( "Time" );
+  sleep(15);
+  QCopEnvelope e( "QPE/Application/opieplayer", "setDocument(QString)" );
+  e << config.readEntry( "mp3File", "" );
 }
 
 
@@ -183,24 +183,25 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
   minute = tmp.toInt( &ok, 10 );
 
   if ( config.readEntry( "clockAlarmSet", "FALSE" ) == "TRUE" )
-		{
-			alarmOffBtn->setText( tr( "Alarm Is On" ) );
-			alarmBool = TRUE;
-			snoozeBtn->show();
-		}
+    {
+      alarmOffBtn->setText( tr( "Alarm Is On" ) );
+      alarmBool = TRUE;
+      snoozeBtn->show();
+    }
   else
-		{
-			alarmOffBtn->setText( tr( "Alarm Is Off" ) );
-			alarmBool = FALSE;
-			snoozeBtn->hide();
-		}
+    {
+      alarmOffBtn->setText( tr( "Alarm Is Off" ) );
+      alarmBool = FALSE;
+      snoozeBtn->hide();
+    }
 
   QTimer::singleShot( 0, this, SLOT( updateClock() ) );
 
   Config cfg( "Clock" );
   cfg.setGroup( "Mode" );
-	int mode = cfg.readBoolEntry( "clockMode");setSwatchMode( mode);
-	modeSelect( mode);
+  int mode = cfg.readBoolEntry( "clockMode");
+  setSwatchMode( mode);
+  modeSelect( mode);
 }
 
 Clock::~Clock()
@@ -211,46 +212,46 @@ Clock::~Clock()
 void Clock::updateClock()
 {
   if ( clockRB->isChecked() )
-		{
-			QTime tm = QDateTime::currentDateTime().time();
-			QString s;
-			if ( ampm )
-				{
-					int hour = tm.hour();
-					if ( hour == 0 )
-						hour = 12;
-					if ( hour > 12 )
-						hour -= 12;
-					s.sprintf( "%2d%c%02d", hour, ':', tm.minute() );
-					ampmLabel->setText( ( tm.hour() >= 12 ) ? "PM" : "AM" );
-					ampmLabel->show();
-				}
-			else
-				{
-					s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
-					ampmLabel->hide();
-				}
-			lcd->display( s );
-			lcd->repaint( FALSE );
-			aclock->display( QTime::currentTime() );
-			date->setText( TimeString::longDateString( QDate::currentDate() ) );
-		}
+    {
+      QTime tm = QDateTime::currentDateTime().time();
+      QString s;
+      if ( ampm )
+        {
+          int hour = tm.hour();
+          if ( hour == 0 )
+            hour = 12;
+          if ( hour > 12 )
+            hour -= 12;
+          s.sprintf( "%2d%c%02d", hour, ':', tm.minute() );
+          ampmLabel->setText( ( tm.hour() >= 12 ) ? "PM" : "AM" );
+          ampmLabel->show();
+        }
+      else
+        {
+          s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
+          ampmLabel->hide();
+        }
+      lcd->display( s );
+      lcd->repaint( FALSE );
+      aclock->display( QTime::currentTime() );
+      date->setText( TimeString::longDateString( QDate::currentDate() ) );
+    }
   else
-		{
-			QTime swatch_time;
-			QString lcdtext;
-			int totalms = swatch_totalms;
-			if ( swatch_running )
-				totalms += swatch_start.elapsed();
-			swatch_time = QTime( 0, 0, 0 ).addMSecs( totalms );
-			QString d = swatch_running ? QString( "    " )
-									: QString::number( totalms % 1000 + 1000 );
-			lcdtext = swatch_time.toString() + "." + d.right( 3 ).left( sw_prec );
-			lcd->display( lcdtext );
-			lcd->repaint( FALSE );
-			aclock->display( swatch_time );
-			date->setText( TimeString::longDateString( QDate::currentDate() ) );
-		}
+    {
+      QTime swatch_time;
+      QString lcdtext;
+      int totalms = swatch_totalms;
+      if ( swatch_running )
+        totalms += swatch_start.elapsed();
+      swatch_time = QTime( 0, 0, 0 ).addMSecs( totalms );
+      QString d = swatch_running ? QString( "    " )
+                  : QString::number( totalms % 1000 + 1000 );
+      lcdtext = swatch_time.toString() + "." + d.right( 3 ).left( sw_prec );
+      lcd->display( lcdtext );
+      lcd->repaint( FALSE );
+      aclock->display( swatch_time );
+      date->setText( TimeString::longDateString( QDate::currentDate() ) );
+    }
 }
 
 void Clock::changeClock( bool a )
@@ -267,35 +268,41 @@ void Clock::clearClock( void )
 
 void Clock::startSWatch()
 {
-		swatch_start.start();
-		set->setText( tr( "Stop" ) );
-		t->start( 1000 );
-		swatch_running = TRUE;
-			// disable screensaver while stop watch is running
-		toggleScreenSaver( FALSE );
+   if(swatch_running) {
+      stopSWatch();
+      return;
+   }
+   qDebug("startSWatch()");
+    swatch_start.start();
+    set->setText( tr( "Stop" ) );
+    t->start( 1000 );
+    swatch_running = TRUE;
+      // disable screensaver while stop watch is running
+    toggleScreenSaver( FALSE );
 }
 
 void Clock::stopSWatch()
 {
-		swatch_totalms += swatch_start.elapsed();
-		set->setText( tr( "Start" ) );
-		t->stop();
-		swatch_running = FALSE;
-		toggleScreenSaver( TRUE );
-		updateClock();
+   qDebug("stopSWatch()");
+    swatch_totalms += swatch_start.elapsed();
+    set->setText( tr( "Start" ) );
+    t->stop();
+    swatch_running = FALSE;
+    toggleScreenSaver( TRUE );
+    updateClock();
 }
 
 
 void Clock::slotSet()
 {
   if ( t->isActive() )
-		{
-				startSWatch();
-		}
+    {
+        startSWatch();
+    }
   else
-		{
-				stopSWatch();
-		}
+    {
+        stopSWatch();
+    }
 }
 
 void Clock::slotReset()
@@ -312,30 +319,37 @@ void Clock::slotReset()
 
 void Clock::modeSelect( int m )
 {
-	qDebug("Clock::modeSelect( %d) ", m);
-	if ( m )
-		{
-			lcd->setNumDigits( 8 + 1 + sw_prec );
-			lcd->setMinimumWidth( lcd->sizeHint().width() );
-			set->setEnabled( TRUE );
-			reset->setEnabled( TRUE );
-			ampmLabel->hide();
+  qDebug("Clock::modeSelect( %d) ", m);
+  if ( m != 0 )
+    {
+      lcd->setNumDigits( 8 + 1 + sw_prec );
+      lcd->setMinimumWidth( lcd->sizeHint().width() );
+      set->setEnabled( TRUE );
+      reset->setEnabled( TRUE );
+      ampmLabel->hide();
 
-			if ( !swatch_running )
-				t->stop();
-		}
-  else
-		{
-			lcd->setNumDigits( 5 );
-			lcd->setMinimumWidth( lcd->sizeHint().width() );
-			set->setEnabled( FALSE );
-			reset->setEnabled( FALSE );
-			t->start( 1000 );
-		}
+//      if(m == 2) {
+         if ( !swatch_running ) {
+          t->start( 1000 );
+         }
+//          else
+//          {
+//             stopSWatch();
+//          }
+//    }
+    }
+  else //clock mode
+    {
+      lcd->setNumDigits( 5 );
+      lcd->setMinimumWidth( lcd->sizeHint().width() );
+      set->setEnabled( FALSE );
+      reset->setEnabled( FALSE );
+      t->start( 1000 );
+    }
 
-	Config config( "Clock" );
-	config.setGroup( "Mode" );
-	config.writeEntry( "clockMode", m );
+  Config config( "Clock" );
+  config.setGroup( "Mode" );
+  config.writeEntry( "clockMode", m );
   updateClock();
 }
 
@@ -387,21 +401,21 @@ void Clock::slotToggleAlarm()
   Config config( "qpe" );
   config.setGroup( "Time" );
   if ( alarmBool )
-		{
-			config.writeEntry( "clockAlarmSet", "FALSE" );
-			alarmOffBtn->setText( tr( "Alarm Is Off" ) );
-			snoozeBtn->hide();
-			alarmBool = FALSE;
-			alarmOff();
-		}
+    {
+      config.writeEntry( "clockAlarmSet", "FALSE" );
+      alarmOffBtn->setText( tr( "Alarm Is Off" ) );
+      snoozeBtn->hide();
+      alarmBool = FALSE;
+      alarmOff();
+    }
   else
-		{
-			config.writeEntry( "clockAlarmSet", "TRUE" );
-			alarmOffBtn->setText( tr( "Alarm Is On" ) );
-			snoozeBtn->show();
-			alarmBool = TRUE;
-			alarmOn();
-		}
+    {
+      config.writeEntry( "clockAlarmSet", "TRUE" );
+      alarmOffBtn->setText( tr( "Alarm Is On" ) );
+      snoozeBtn->show();
+      alarmBool = TRUE;
+      alarmOn();
+    }
   config.write();
 }
 
@@ -435,10 +449,10 @@ void Clock::alarmOff()
 
 void Clock::clearTimer()
 {
-	alarmOffBtn->setText( tr( "Alarm Is Off" ) );
-	alarmBool = FALSE;
-	snoozeBtn->hide();
-	setCaption( "Clock" );
+  alarmOffBtn->setText( tr( "Alarm Is Off" ) );
+  alarmBool = FALSE;
+  snoozeBtn->hide();
+  setCaption( "Clock" );
 }
 
 void Clock::appMessage( const QCString& msg, const QByteArray& /*data*/ )
@@ -448,36 +462,36 @@ void Clock::appMessage( const QCString& msg, const QByteArray& /*data*/ )
   bSound = TRUE;
   qDebug( "Message received in clock" );
   if ( msg == "alarm(QDateTime,int)" )
-		{
-			Config config( "qpe" );
-			config.setGroup( "Time" );
-			if ( config.readBoolEntry( "mp3Alarm", 0 ) )
-				{
-					clearTimer();
-					pthread_t thread;
-					pthread_create(&thread, NULL,  (void * (*) (void *))startPlayer, NULL/* &*/);
+    {
+      Config config( "qpe" );
+      config.setGroup( "Time" );
+      if ( config.readBoolEntry( "mp3Alarm", 0 ) )
+        {
+          clearTimer();
+          pthread_t thread;
+          pthread_create(&thread, NULL,  (void * (*) (void *))startPlayer, NULL/* &*/);
 
-				}
-			else
-				{
+        }
+      else
+        {
 
-					Sound::soundAlarm();
-					stopTimer = startTimer( timerStay );
-				}
-		}
+          Sound::soundAlarm();
+          stopTimer = startTimer( timerStay );
+        }
+    }
 
-	if ( msg == "timerStart()" )
-		{
-			slotStartTimer();
-		}
-	if ( msg == "timerStop()" )
-		{
-			slotStopTimer();
-		}
-	if ( msg == "timerReset()" )
-		{
-			slotResetTimer();
-		}
+  if ( msg == "timerStart()" )
+    {
+      slotStartTimer();
+    }
+  if ( msg == "timerStop()" )
+    {
+      slotStopTimer();
+    }
+  if ( msg == "timerReset()" )
+    {
+      slotResetTimer();
+    }
 
   show();
   raise();
@@ -489,17 +503,17 @@ void Clock::timerEvent( QTimerEvent *e )
 {
   static int stop = 0;
   if ( stop < 120 && bSound )
-		{
-			Sound::soundAlarm();
-			stop++;
-		}
+    {
+      Sound::soundAlarm();
+      stop++;
+    }
   else
-		{
-			stop = 0;
-			killTimer( e->timerId() );
-			clearTimer();
-			setCaption( tr( "Clock: Alarm was missed." ) );
-		}
+    {
+      stop = 0;
+      killTimer( e->timerId() );
+      clearTimer();
+      setCaption( tr( "Clock: Alarm was missed." ) );
+    }
 }
 
 
@@ -525,22 +539,22 @@ void AnalogClock::drawContents( QPainter *p )
 
 
   if ( clear )
-		{
-			erase ( r );
-			p-> setPen ( NoPen );
-			p-> setBrush ( colorGroup ( ). color ( QColorGroup::Base ));
-			p-> drawEllipse ( fr );
-			p-> setBrush ( NoBrush );
+    {
+      erase ( r );
+      p-> setPen ( NoPen );
+      p-> setBrush ( colorGroup ( ). color ( QColorGroup::Base ));
+      p-> drawEllipse ( fr );
+      p-> setBrush ( NoBrush );
 
-				// draw ticks
-			p->setPen( QPen( colorGroup ( ). color ( QColorGroup::Text ), 1 ) );
-			for ( int i = 0; i < 12; i++ )
-				p->drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
-		}
+        // draw ticks
+      p->setPen( QPen( colorGroup ( ). color ( QColorGroup::Text ), 1 ) );
+      for ( int i = 0; i < 12; i++ )
+        p->drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
+    }
   else
-		{
-			drawPointers ( p, fr, colorGroup ( ). color ( QColorGroup::Base ), prevTime, &currTime );
-		}
+    {
+      drawPointers ( p, fr, colorGroup ( ). color ( QColorGroup::Base ), prevTime, &currTime );
+    }
 
   drawPointers ( p, fr, colorGroup ( ). color ( QColorGroup::Text ), currTime );
 
@@ -562,7 +576,7 @@ void AnalogClock::drawPointers ( QPainter *p, const QRect &r, const QColor &c, c
 
 
   if ( !t2 || ( t. minute ( ) != t2-> minute ( ) || t. hour ( ) != t2-> hour ( ))) {
-			// draw hour pointer
+      // draw hour pointer
     h1 = rotate( center, h1, 30 * ( t.hour() % 12 ) + t.minute() / 2 );
     h2 = rotate( center, h2, 30 * ( t.hour() % 12 ) + t.minute() / 2 );
     p-> setPen ( QPen ( c, 3 ));
@@ -570,7 +584,7 @@ void AnalogClock::drawPointers ( QPainter *p, const QRect &r, const QColor &c, c
   }
 
   if ( !t2 || ( t. minute ( ) != t2-> minute ( ))) {
-			// draw minute pointer
+      // draw minute pointer
     m1 = rotate( center, m1, t.minute() * 6 );
     m2 = rotate( center, m2, t.minute() * 6 );
     p-> setPen ( QPen ( c, 2 ));
@@ -578,7 +592,7 @@ void AnalogClock::drawPointers ( QPainter *p, const QRect &r, const QColor &c, c
   }
 
   if ( !t2 || ( t. second ( ) != t2-> second ( ))) {
-			// draw second pointer
+      // draw second pointer
     s1 = rotate( center, s1, t.second() * 6 );
     s2 = rotate( center, s2, t.second() * 6 );
     p-> setPen ( QPen ( c, 1 ));
@@ -613,28 +627,28 @@ void Clock::slotAdjustTime()
 void Clock::slotStartTimer()
 {
   if ( clockRB->isChecked() )
-		setSwatchMode( 1);
-	startSWatch();
+    setSwatchMode( 1);
+  startSWatch();
 }
 
 void Clock::slotStopTimer()
 {
   if ( clockRB->isChecked() )
-		setSwatchMode( 1);
-	stopSWatch();
+    setSwatchMode( 1);
+  stopSWatch();
 }
 
 void Clock::slotResetTimer()
 {
   if ( clockRB->isChecked() )
-		setSwatchMode( 1);
+    setSwatchMode( 1);
 slotReset();
 }
 
 void Clock::setSwatchMode(int mode)
 {
-	qDebug("Clock::setSwatchMode( %d)", mode);
-	swatchRB->setChecked( mode);
-	clearClock( );
-	modeSelect( mode );
+  qDebug("Clock::setSwatchMode( %d)", mode);
+  swatchRB->setChecked( mode);
+  clearClock( );
+  modeSelect( mode );
 }
