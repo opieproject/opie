@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation>elementare Zusammensetzunh (%):</translation>
+        <translation>elementare Zusammensetzung (%):</translation>
     </message>
 </context>
 <context>

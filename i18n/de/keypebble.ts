@@ -181,7 +181,7 @@ Bitte versuchen Sie es es später noch einmal.</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation>Rechenrname: </translation>
+        <translation>Rechnername: </translation>
     </message>
     <message>
         <source>Display Number:</source>

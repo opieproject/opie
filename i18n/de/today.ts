@@ -142,8 +142,7 @@ automatisch laden?
     </message>
     <message>
         <source>tiny banner</source>
-        <translation>
-Kleiner Banner</translation>
+        <translation>Kleiner Banner</translation>
     </message>
     <message>
         <source>Have small banner </source>
