@@ -974,7 +974,7 @@ void TextEdit::updateCaption( const QString &name ) {
         }
 //         if(s.left(1) == "/")
 //             s = s.right(s.length()-1);
-        setCaption( s + " - " + tr("Text Editor") );
+        setCaption( tr("%1 - Text Editor").arg( s ) );
     }
 }
 
@@ -1020,7 +1020,7 @@ void TextEdit::editDelete() {
     switch ( QMessageBox::warning(this,tr("Text Editor"),
                                   tr("Do you really want<BR>to <B>delete</B> "
                                      "the current file\nfrom the disk?<BR>This is "
-                                     "<B>irreversable!!</B>"),
+                                     "<B>irreversable!</B>"),
                                   tr("Yes"),tr("No"),0,0,1) ) {
       case 0:
           if(doc) {
