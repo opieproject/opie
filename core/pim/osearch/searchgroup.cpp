@@ -42,6 +42,14 @@ void SearchGroup::expand()
 	delete dummy;
 }
 
+void SearchGroup::doSearch()
+{
+	clearList();
+	if (_search.isEmpty()) return;
+	if (!loaded) load();
+	int res_count = search();
+	setText(0, _name + " - " + _search.pattern() + " (" + QString::number( res_count ) + ")");
+}
 
 void SearchGroup::clearList()
 {
@@ -55,13 +63,6 @@ void SearchGroup::clearList()
 	}
 	expanded = true;
 }
-
-void SearchGroup::setSearch(QString s)
-{
-	setSearch( QRegExp( s ) );
-	_search.setCaseSensitive(false);
-}
-
 
 void SearchGroup::setSearch(QRegExp re)
 {

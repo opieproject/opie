@@ -1,6 +1,7 @@
 DEPENDPATH += $(OPIEDIR)/include
 LIBS += -lqpe -lopie
 INTERFACES =
+include ( $(OPIEDIR)/include.pro )
 TEMPLATE = app
 CONFIG += debug warn_on qt
 DESTDIR = $(OPIEDIR)/bin

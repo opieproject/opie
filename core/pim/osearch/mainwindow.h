@@ -46,6 +46,7 @@ public slots:
   void showPopup();
   void stopTimer( QListViewItem* );
   void setSearch( const QString& );
+  void searchAll();
 
 protected slots:
   void slotAction(int);
@@ -57,11 +58,12 @@ private:
   QVBoxLayout *mainLayout;
   QHBoxLayout *buttonLayout;
   QFrame *detailsFrame;
-//  OListViewItem *_item;
   QTimer *popupTimer;
 
   QList<SearchGroup> searches;
   QHButtonGroup *buttonGroupActions;
+  QAction *actionCaseSensitiv;
+  QAction *actionWildcards;
   uint _buttonCount;
   void makeMenu();
 };

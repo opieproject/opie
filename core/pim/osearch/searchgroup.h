@@ -28,11 +28,9 @@ public:
     ~SearchGroup();
 
     virtual void expand();
-    virtual void setSearch(QString);
+    virtual void doSearch();
     virtual void setSearch(QRegExp);
     virtual int rtti() { return Searchgroup;}
-
-
 
 protected:
 	QRegExp _search;

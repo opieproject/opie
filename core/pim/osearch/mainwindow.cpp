@@ -31,6 +31,7 @@
 #include <qlayout.h>
 #include <qlineedit.h>
 #include <qtextbrowser.h>
+#include <qregexp.h>
 
 #include "olistview.h"
 #include "olistviewitem.h"
@@ -66,22 +67,13 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   detailsLayout->addWidget( richEdit, 1 );
 
   buttonGroupActions = new QHButtonGroup( this );
+  buttonGroupActions->hide();
   _buttonCount = 0;
 //  buttonGroupActions->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
 
   buttonLayout = new QHBoxLayout( detailsFrame );
-  buttonGroupActions->hide();
-  //buttonLayout->addWidget( buttonGroupActions, 0 );
+  detailsLayout->addLayout( buttonLayout );
 
-   detailsLayout->addLayout( buttonLayout );
-   /*
-   QPushButton *buttonShow = new QPushButton( detailsFrame, "Show" );
-   buttonShow->setText( tr("show") );
-   QPushButton *buttonEdit = new QPushButton( detailsFrame, "Edit" );
-   buttonEdit->setText( tr("edit") );
-   buttonLayout->addWidget( buttonShow, 0 );
-   buttonLayout->addWidget( buttonEdit, 0 );
-*/
   mainLayout->addWidget( detailsFrame );
   detailsFrame->hide();
 
@@ -100,35 +92,39 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   connect(resultsList, SIGNAL(pressed(QListViewItem*)), SLOT(setCurrent(QListViewItem*)));
   connect(resultsList, SIGNAL(clicked(QListViewItem*)), SLOT(stopTimer(QListViewItem*)));
   connect(buttonGroupActions, SIGNAL(clicked(int)), SLOT( slotAction(int) ) );
-//   connect(buttonEdit, SIGNAL(clicked()), SLOT( editItem() ) );
 
 }
 
 void MainWindow::makeMenu()
 {
-//   QPEToolBar *toolBar = new QPEToolBar( this );
-//   QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
-//   QPopupMenu *searchMenu = new QPopupMenu( menuBar );
+   QPEToolBar *toolBar = new QPEToolBar( this );
+   QPEToolBar *searchBar = new QPEToolBar(this);
+   QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
+   QPopupMenu *searchMenu = new QPopupMenu( menuBar );
 //   QPopupMenu *viewMenu = new QPopupMenu( menuBar );
 //   QPopupMenu *cfgMenu = new QPopupMenu( menuBar );
 //
    setToolBarsMovable( false );
-//   toolBar->setHorizontalStretchable( true );
-//   menuBar->insertItem( tr( "Search" ), searchMenu );
+   toolBar->setHorizontalStretchable( true );
+   menuBar->insertItem( tr( "Search" ), searchMenu );
 //   menuBar->insertItem( tr( "View" ), viewMenu );
 //   menuBar->insertItem( tr( "Settings" ), cfgMenu );
 
   //SEARCH
-  QPEToolBar *searchBar = new QPEToolBar(this);
-  addToolBar( searchBar,  "Search", QMainWindow::Top, TRUE );
-  QLabel *label = new QLabel( tr("Search: "), searchBar );
-//  label->setBackgroundMode( PaletteForeground );
-  searchBar->setHorizontalStretchable( TRUE );
+  QAction *action = new QAction( tr("Search all"),QString::null,  0, this, 0 );
+  connect( action, SIGNAL(activated()), this, SLOT(searchAll()) );
+  action->addTo( searchMenu );
+  actionCaseSensitiv = new QAction( tr("Case sensitiv"),QString::null,  0, this, 0, true );
+  actionCaseSensitiv->addTo( searchMenu );
+  actionWildcards = new QAction( tr("Use wildcards"),QString::null,  0, this, 0, true );
+  actionWildcards->addTo( searchMenu );
+
+  addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
+  searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
   connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
        this, SLOT( setSearch( const QString & ) ) );
-
 
 }
 
@@ -188,10 +184,18 @@ void MainWindow::showPopup()
 
 void MainWindow::setSearch( const QString &key )
 {
+	QRegExp re( key, actionCaseSensitiv->isOn(), actionWildcards->isOn() );
 	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() )
-		s->setSearch( key );
+		s->setSearch( re );
 }
 
+void MainWindow::searchAll()
+{
+	bool openState;
+	for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
+		s->doSearch();
+	}
+}
 
 void MainWindow::slotAction( int act)
 {
