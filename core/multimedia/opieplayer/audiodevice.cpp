@@ -248,6 +248,7 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     
 
 AudioDevice::~AudioDevice() {
+    qDebug("destryo audiodevice");
 #ifdef Q_OS_WIN32
     waveOutClose( (HWAVEOUT)d->handle );
 #else
