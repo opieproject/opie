@@ -107,7 +107,7 @@ void Security::updateGUI()
 
 void Security::show()
 {
-    valid=FALSE;
+    //valid=FALSE;
     setEnabled(FALSE);
     SecurityBase::show();
     if ( passcode.isEmpty() ) {
@@ -116,13 +116,16 @@ void Security::show()
         //if ( passcode.isEmpty() )
         //reject();
     } else {
-        QString pc = enterPassCode(tr("Enter passcode"));
-        if ( pc != passcode ) {
-            QMessageBox::critical(this, tr("Passcode incorrect"),
-                    tr("The passcode entered is incorrect.\nAccess denied"));
-            reject();
-            return;
-        }
+		if (!valid) // security passcode was not asked yet, so ask now
+		{
+			QString pc = enterPassCode(tr("Enter passcode"));
+			if ( pc != passcode ) {
+				QMessageBox::critical(this, tr("Passcode incorrect"),
+						tr("The passcode entered is incorrect.\nAccess denied"));
+				reject();
+				return;
+			}
+		}
     }
     setEnabled(TRUE);
     valid=TRUE;
