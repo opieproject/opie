@@ -5,6 +5,6 @@ Section: opie/system
 Maintainer: Project Opie <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopie1, opie-security
 Description: Multiuser login for OPIE
  A xdm/kdm equivalent for OPIE.
