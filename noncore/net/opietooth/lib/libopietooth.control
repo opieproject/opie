@@ -5,5 +5,5 @@ Package: libopietooth
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: qt-embedded (>=$QTE_VERSION), libopie
+Depends: qt-embedded (>=$QTE_VERSION), libopie, task-bluez
 Description: Opie bluetooth library
