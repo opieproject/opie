@@ -56,6 +56,7 @@ void QTetrixBoard::startGame(int gameType,int fillRandomLines)
     if ( isPaused )
         return;		// ignore if game is paused
     noGame = FALSE;
+    
     GenericTetrix::startGame( gameType, fillRandomLines );
     // Note that the timer is started by updateLevel!
 }
@@ -206,8 +207,11 @@ void QTetrixBoard::drawContents( QPainter *p )
 void QTetrixBoard::resizeEvent(QResizeEvent *e)
 {
     QSize sz = e->size();
+
     blockWidth  = (sz.width() - 2)/10;
     blockHeight = (sz.height() - 2)/22;
+/*    blockWidth > blockHeight ? blockWidth = blockHeight
+                             : blockHeight = blockWidth;*/
     xOffset     = 1;
     //yOffset     = 1;
     yOffset     = (sz.height() - 2) - (blockHeight *22);

@@ -26,6 +26,7 @@
 #include <qlabel.h>
 #include <qdatetime.h>
 #include <qlayout.h>
+#include <qtimer.h>
 
 #include "ohighscoredlg.h"
 
@@ -107,6 +108,8 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
     setCentralWidget( gameArea );
 
     QGridLayout *gl = new QGridLayout( gameArea, 5, 3, 8 );
+    gl->setColStretch( 1, 5 );
+    gl->setColStretch( 2, 10 );
 
     QLabel *l;
     l = new QLabel( tr("Next"), gameArea );
@@ -130,11 +133,7 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
 
     board = new QTetrixBoard(gameArea);
     board->setBackgroundColor(QColor(0,0,0));
-    board->setFixedWidth( 124 );
     gl->addMultiCellWidget( board, 0, 4, 2, 2 );
-    gl->addColSpacing( 2, 100 );
-    gl->addColSpacing( 1, 35 );
-    gl->addRowSpacing( 0, 35 );
 
     QPushButton *pb = new QPushButton( tr("Start"), gameArea );
     pb->setFocusPolicy( NoFocus );
@@ -142,21 +141,25 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
     gl->addMultiCellWidget( pb, 4, 4, 0, 1 );
 
     connect( board, SIGNAL(gameOverSignal()), SLOT(gameOver()) );
-    connect( board, SIGNAL(drawNextSquareSignal(int,int,QColor*)), showNext,
-	     SLOT(drawNextSquare(int,int,QColor*)) );
+    connect( board, SIGNAL(drawNextSquareSignal(int,int,QColor*)), this,
+	     SLOT(setNext(int,int,QColor*)) );
     connect( showNext, SIGNAL(update()), board, SLOT(updateNext()) );
-    connect( board, SIGNAL(updateScoreSignal(int)), showScore,
-	     SLOT(setNum(int)) );
-    connect( board, SIGNAL(updateLevelSignal(int)), showLevel,
-	     SLOT(setNum(int)));
-    connect( board, SIGNAL(updateRemovedSignal(int)), showLines,
-	     SLOT(setNum(int)));
+    connect( board, SIGNAL(updateScoreSignal(int)), showScore, SLOT(setNum(int)) );
+    connect( board, SIGNAL(updateLevelSignal(int)), showLevel, SLOT(setNum(int)) );
+    connect( board, SIGNAL(updateRemovedSignal(int)), showLines, SLOT(setNum(int)) );
 
     showScore->setNum( 0 );
     showLevel->setNum( 0 );
     showLines->setNum( 0 );
     board->revealNextPiece(TRUE);
     board->setFocusPolicy( StrongFocus );
+    
+    QTimer::singleShot( -1, this, SLOT(setup()) );
+}
+
+void QTetrix::setup()
+{
+    resizeEvent( 0x0 );
 }
 
 void QTetrix::gameOver()
@@ -171,4 +174,35 @@ void QTetrix::gameOver()
 void QTetrix::quit()
 {
     close();
+}
+
+void QTetrix::setNext( int x, int y, QColor *color )
+{
+    resizeEvent( 0x0 );
+    showNext->drawNextSquare( x, y, color );
+}
+    
+void QTetrix::resizeEvent( QResizeEvent * )
+{
+    // Set size of board
+    int widthFactor = board->QFrame::width() / board->boardWidth();
+    if ( widthFactor < 1 )
+        widthFactor = 1;
+    int heightFactor = board->QFrame::height() / board->boardHeight();
+    if ( heightFactor < 1 )
+        heightFactor = 1;
+    widthFactor > heightFactor ? board->resize( heightFactor * board->boardWidth() + 2,
+                                                heightFactor * board->boardHeight() + 2 )
+                               : board->resize( widthFactor * board->boardWidth() + 2,
+                                                widthFactor * board->boardHeight() + 2 );
+    
+    // Set size of preview widget
+    widthFactor = showNext->width() / 5;
+    if ( widthFactor < 1 )
+        widthFactor = 1;
+    heightFactor = showNext->height() / 6;
+    if ( heightFactor < 1 )
+        heightFactor = 1;
+    widthFactor > heightFactor ? showNext->resize( heightFactor * 5 + 2, heightFactor * 6 + 2 )
+                               : showNext->resize( widthFactor * 5 + 2, widthFactor * 6 + 2 );
 }

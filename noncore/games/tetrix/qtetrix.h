@@ -57,10 +57,18 @@ public:
     void startGame() { board->startGame(); }
 
 public slots:
+    void setup();
     void gameOver();
     void quit();
+    
+    void setNext( int x, int y, QColor *color );
+//    void setScore( int score );
+//    void setLevel( int level );
+//    void setLines( int lines );
+    
 private:
     void keyPressEvent( QKeyEvent *e ) { board->keyPressEvent(e); }
+    void resizeEvent( QResizeEvent * );
 
     QTetrixBoard  *board;
     ShowNextPiece *showNext;
