@@ -22,6 +22,8 @@
 /**
  * Constuctor.  Set up the connection. A profile must be set.
  */
+using namespace Opie::Ui;
+using namespace Opie::Core;
 InterfaceSetupImp::InterfaceSetupImp(QWidget* parent, const char* name, Interface *i, Interfaces *j, WFlags fl) : InterfaceSetup(parent, name, fl), interface(i), interfaces(j), delInterfaces(false){
   if (j == 0) {
     delInterfaces = true;

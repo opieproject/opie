@@ -27,13 +27,14 @@
 #include <signal.h>
 
 
-using namespace Opie;
+using namespace Opie::Core;
 
 
 /**
  * UserDialog constructor. Setup the dialog, fill the groupComboBox & groupsListView with all groups.
  *
  */
+using namespace Opie::Ui;
 UserDialog::UserDialog(int viewmode, QWidget* parent, const char* name, bool modal, WFlags fl) : QDialog(parent, name, modal, fl)
 {
     vm=viewmode;

@@ -47,7 +47,7 @@
 #define MAKE_LINKS                              0x0010
 #define VERBOSE_WGET                            0x0020
 
-class OProcess;
+namespace Opie {namespace Core {class OProcess;}}
 
 class Ipkg : public QObject
 {
@@ -70,8 +70,8 @@ signals:
     void ipkgFinished();
 
 public slots:
-    void commandStdout(OProcess*, char *buffer, int buflen);
-    void commandStderr(OProcess*, char *buffer, int buflen);
+    void commandStdout(Opie::Core::OProcess*, char *buffer, int buflen);
+    void commandStderr(Opie::Core::OProcess*, char *buffer, int buflen);
     void processFinished();
     void abort();
 
@@ -85,7 +85,7 @@ private:
     QString destination;
     QString destDir;
     QString runtimeDir;
-    OProcess *proc;
+    Opie::Core::OProcess *proc;
     int flags;
     int infoLevel;
     bool finished;

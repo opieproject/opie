@@ -35,4 +35,5 @@
 extern QString LOCAL_SERVER;
 extern QString LOCAL_IPKGS;
 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<MainWindow> )

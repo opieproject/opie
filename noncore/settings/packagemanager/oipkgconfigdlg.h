@@ -74,7 +74,7 @@ private:
 
     // UI controls
     QVBoxLayout  m_layout;        // Main dialog layout control
-    OTabWidget   m_tabWidget;     // Main tab widget control
+    Opie::Ui::OTabWidget   m_tabWidget;     // Main tab widget control
     QWidget     *m_serverWidget;  // Widget containing server configuration controls
     QWidget     *m_destWidget;    // Widget containing destination configuration controls
     QWidget     *m_proxyWidget;   // Widget containing proxy configuration controls

@@ -48,6 +48,8 @@
 #include <qstring.h>
 #include <qtimer.h>
 
+using namespace Opie::Ui;
+using namespace Opie::Core;
 MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags f )
     : QDialog( 0x0, 0x0, TRUE, 0 )
 {
@@ -188,9 +190,9 @@ void MainWindow::runNTP()
     if ( !ntpProcess )
     {
         ntpProcess = new OProcess();
-        connect( ntpProcess, SIGNAL(receivedStdout(OProcess*,char*,int)),
+        connect( ntpProcess, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
                  this, SLOT(slotNtpOutput(OProcess*,char*,int)) );
-        connect( ntpProcess, SIGNAL(processExited(OProcess*)),
+        connect( ntpProcess, SIGNAL(processExited(Opie::Core::OProcess*)),
                  this, SLOT(slotNtpFinished(OProcess*)) );
     }
 

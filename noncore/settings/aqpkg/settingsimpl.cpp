@@ -52,6 +52,8 @@
 #include <algorithm>
 using namespace std;
 
+using namespace Opie::Ui;
+using namespace Opie::Ui;
 SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
         : QDialog( parent, name, modal, fl )
 {
@@ -63,7 +65,7 @@ SettingsImpl :: SettingsImpl( DataManager *dataManager, QWidget * parent, const 
     layout->setSpacing( 4 );
 
     // Setup tabs for all info
-    Opie::OTabWidget *tabwidget = new Opie::OTabWidget( this );
+    OTabWidget *tabwidget = new OTabWidget( this );
     layout->addWidget( tabwidget );
 
     tabwidget->addTab( initServerTab(), "aqpkg/servertab", tr( "Servers" ) );

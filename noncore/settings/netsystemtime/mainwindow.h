@@ -40,7 +40,6 @@ class SettingsTabWidget;
 class NTPTabWidget;
 class PredictTabWidget;
 
-using Opie::OTabWidget;
 
 class QDateTime;
 class QSocket;
@@ -60,7 +59,7 @@ protected:
     void reject();
 
 private:
-    OTabWidget *mainWidget;
+    Opie::Ui::OTabWidget *mainWidget;
 
     TimeTabWidget     *timeTab;
     FormatTabWidget   *formatTab;
@@ -71,7 +70,7 @@ private:
     bool ntpTabEnabled;
     bool predictTabEnabled;
 
-    OProcess *ntpProcess;
+    Opie::Core::OProcess *ntpProcess;
     QTimer   *ntpTimer;
     QSocket  *ntpSock;
     int       ntpDelay;
@@ -90,8 +89,8 @@ private slots:
     void slotGetNTPTime();
     void slotTimerGetNTPTime();
     void slotProbeNTPServer();
-    void slotNtpOutput( OProcess *, char *, int );
-    void slotNtpFinished( OProcess* );
+    void slotNtpOutput( Opie::Core::OProcess *, char *, int );
+    void slotNtpFinished( Opie::Core::OProcess* );
     void slotNTPDelayChanged( int );
     void slotCheckNtp( int );
 };

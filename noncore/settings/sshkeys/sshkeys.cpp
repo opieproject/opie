@@ -33,6 +33,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
+using namespace Opie::Core;
 static char *keynames[] = { "identity", "id_rsa", "id_dsa" };
 
 SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
@@ -45,11 +46,11 @@ SSHKeysApp::SSHKeysApp( QWidget* parent,  const char* name, WFlags fl )
     connect(RefreshListButton, SIGNAL(clicked()), this, SLOT(doRefreshListButton()));
     connect(RemoveAllButton, SIGNAL(clicked()), this, SLOT(doRemoveAllButton()));
 
-    connect(&addprocess, SIGNAL(receivedStdout(OProcess*,char*,int)),
+    connect(&addprocess, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
         this, SLOT(log_sshadd_output(OProcess*,char*,int)));
-    connect(&addprocess, SIGNAL(receivedStderr(OProcess*,char*,int)),
+    connect(&addprocess, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
         this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
-    connect(&addprocess, SIGNAL(processExited(OProcess*)),
+    connect(&addprocess, SIGNAL(processExited(Opie::Core::OProcess*)),
         this, SLOT(ssh_add_exited(OProcess*)));
 
     connect(KeyFileName, SIGNAL(textChanged(const QString&)),
@@ -86,9 +87,9 @@ void SSHKeysApp::doRefreshListButton()
         t = next;
     }
 
-    connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
+    connect(&sshadd_process, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
         this, SLOT(get_list_keys_output(OProcess*,char*,int)));
-    connect(&sshadd_process, SIGNAL(receivedStderr(OProcess*,char*,int)),
+    connect(&sshadd_process, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
         this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
 
     keystate = KeySize;
@@ -277,9 +278,9 @@ void SSHKeysApp::doRemoveAllButton()
 {
     OProcess sshadd_process;
 
-    connect(&sshadd_process, SIGNAL(receivedStdout(OProcess*,char*,int)),
+    connect(&sshadd_process, SIGNAL(receivedStdout(Opie::Core::OProcess*,char*,int)),
         this, SLOT(log_sshadd_output(OProcess*,char*,int)));
-    connect(&sshadd_process, SIGNAL(receivedStderr(OProcess*,char*,int)),
+    connect(&sshadd_process, SIGNAL(receivedStderr(Opie::Core::OProcess*,char*,int)),
         this, SLOT(log_sshadd_stderr(OProcess*,char*,int)));
 
 //    log_text(tr("Running ssh-add -D"));

@@ -49,6 +49,7 @@
 
 #include "opackagemanager.h"
 
+using namespace Opie::Ui;
 InstallDlg::InstallDlg( QWidget *parent, OPackageManager *pm, const QString &caption, bool showDestInfo,
                         OPackage::Command command1, QStringList *packages1,
                         OPackage::Command command2, QStringList *packages2,
@@ -275,7 +276,7 @@ void InstallDlg::slotBtnOptions()
     text << "*";
     map.insert( tr( "All" ), text );
 
-    QString filename = Opie::OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
+    QString filename = OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
     if( !filename.isEmpty() )
     {
         QString currentFileName = QFileInfo( filename ).fileName();

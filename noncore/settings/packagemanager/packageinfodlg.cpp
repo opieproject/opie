@@ -38,6 +38,7 @@
 
 #include <opie2/otabwidget.h>
 
+using namespace Opie::Ui;
 PackageInfoDlg::PackageInfoDlg( QWidget *parent, OPackageManager *pm, const QString &package )
     : QWidget( 0x0 )
     , m_packman( pm )

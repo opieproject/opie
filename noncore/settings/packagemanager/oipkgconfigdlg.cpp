@@ -42,6 +42,7 @@
 
 #include <qpe/resource.h>
 
+using namespace Opie::Ui;
 OIpkgConfigDlg::OIpkgConfigDlg( OIpkg *ipkg, bool installOptions, QWidget *parent )
     : QDialog( parent, QString::null, true )
     , m_ipkg( ipkg )

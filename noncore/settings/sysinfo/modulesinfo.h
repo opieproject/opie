@@ -26,8 +26,9 @@
 
 class Detail;
 class QComboBox;
-class OListView;
-class OListViewItem;
+class QListViewItem;
+namespace Opie {namespace Ui {class OListView;}}
+namespace Opie {namespace Ui {class OListViewItem;}}
 
 class ModulesInfo : public QWidget
 {
@@ -37,7 +38,7 @@ public:
     ~ModulesInfo();
 
 private:
-	OListView* ModulesView;
+	Opie::Ui::OListView* ModulesView;
     QComboBox* CommandCB;
 
 	Detail* ModulesDtl;
@@ -45,7 +46,8 @@ private:
 private slots:
     void updateData();
     void slotSendClicked();
-	void viewModules( OListViewItem * );
+    void viewModules( QListViewItem* );
+    void viewModules( Opie::Ui::OListViewItem * );
 };
 
 #endif

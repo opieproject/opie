@@ -24,8 +24,9 @@
 
 class Detail;
 class QComboBox;
-class OListView;
-class OListViewItem;
+class QListViewItem;
+namespace Opie {namespace Ui {class OListView;}}
+namespace Opie {namespace Ui {class OListViewItem;}}
 
 class ProcessInfo : public QWidget
 {
@@ -35,7 +36,7 @@ public:
     ~ProcessInfo();
 
 private:
-    OListView*   ProcessView;
+    Opie::Ui::OListView*   ProcessView;
     QComboBox*   SignalCB;
     QPushButton* SendButton;
 
@@ -44,7 +45,8 @@ private:
 private slots:
     void updateData();
     void slotSendClicked();
-    void viewProcess( OListViewItem * );
+    void viewProcess( QListViewItem* );
+    void viewProcess( Opie::Ui::OListViewItem * );
 };
 
 #endif

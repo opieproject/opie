@@ -38,6 +38,7 @@
 
 #include <qlayout.h>
 
+using namespace Opie::Ui;
 SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )
 {

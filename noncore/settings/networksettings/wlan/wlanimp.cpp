@@ -25,6 +25,7 @@
 /**
  * Constructor, read in the wireless.opts file for parsing later.
  */
+using namespace Opie::Core;
 WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl):WLAN(parent, name, modal, fl), currentProfile("*") {
   interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i);
   tabWidget->insertTab(interfaceSetup, "TCP/IP");

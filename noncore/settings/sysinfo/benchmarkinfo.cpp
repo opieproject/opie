@@ -51,7 +51,10 @@
 extern double round(double);
 #endif
 
+using namespace Opie::Ui;
+using namespace Opie::Core;
 extern "C"
+
 {
     void BenchFFT( void );
     double dhry_main( int );
@@ -175,12 +178,12 @@ void BenchmarkInfo::machineActivated( int index )
     }
     QStringList::Iterator it = results->begin();
     test_alu->setText( 2, *(it++) );
-    test_fpu->setText( 2, *(it++) );   
+    test_fpu->setText( 2, *(it++) );
     test_txt->setText( 2, *(it++) );
     test_gfx->setText( 2, *(it++) );
     test_ram->setText( 2, *(it++) );
     test_sd->setText( 2, *(it++) );
-    test_cf->setText( 2, *(it++) );   
+    test_cf->setText( 2, *(it++) );
 }
 
 
@@ -259,7 +262,7 @@ int BenchmarkInfo::textRendering( int seconds )
     BenchmarkPaintWidget bpw;
 
     int loops = 0;
-    
+
     while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
@@ -269,7 +272,7 @@ int BenchmarkInfo::textRendering( int seconds )
         bpw.p.drawText( rand() % w, rand() % h, text, text.length() );
         ++loops;
     }
-    
+
     return loops * text.length();
 }
 
@@ -290,7 +293,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
     t.start();
     int stop = t.elapsed() + seconds*1000;
     int loops = 0;
-    
+
     while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
@@ -301,7 +304,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
 
     t.restart();
     stop = t.elapsed() + seconds*1000;
-    
+
     while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
@@ -314,7 +317,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
     br1.setStyle( SolidPattern );
     t.restart();
     stop = t.elapsed() + seconds*1000;
-    
+
     while ( t.elapsed() < stop )
     {
         int k = rand() % 9;
@@ -326,7 +329,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
     QPixmap p = Resource::loadPixmap( "sysinfo/pattern" );
     t.restart();
     stop = t.elapsed() + seconds*1000;
-    
+
     while ( t.elapsed() < stop )
     {
         bpw.p.drawPixmap( rand()%w, rand()%h, p );
@@ -334,7 +337,7 @@ int BenchmarkInfo::gfxRendering( int seconds )
     }
 
     return loops;
-    
+
 }
 
 void BenchmarkInfo::performFileTest( const QString& fname, OCheckListItem* item )

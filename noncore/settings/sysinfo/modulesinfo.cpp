@@ -36,6 +36,7 @@
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
+using namespace Opie::Ui;
 ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
         : QWidget( parent, name, fl )
 {
@@ -58,8 +59,8 @@ ModulesInfo::ModulesInfo( QWidget* parent,  const char* name, WFlags fl )
     if ( QFile::exists( "/sbin/modinfo" ) )
     {
         QPEApplication::setStylusOperation( ModulesView->viewport(), QPEApplication::RightOnHold );
-        connect( ModulesView, SIGNAL( rightButtonPressed(OListViewItem*,const QPoint&,int) ),
-                 this, SLOT( viewModules(OListViewItem*) ) );
+        connect( ModulesView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
+                 this, SLOT( viewModules(QListViewItem*) ) );
     }
 
     CommandCB = new QComboBox( FALSE, this );
@@ -163,6 +164,11 @@ void ModulesInfo::slotSendClicked()
 
 }
 
+void ModulesInfo::viewModules( QListViewItem *module ) {
+    if ( !module )
+        return;
+    viewModules(  static_cast<OListViewItem*>( module ) );
+}
 void ModulesInfo::viewModules( OListViewItem *modules )
 {
     QString modname = modules->text( 0 );

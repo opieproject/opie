@@ -38,6 +38,7 @@
 #include <sys/types.h>
 #include <signal.h>
 
+using namespace Opie::Ui;
 ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
         : QWidget( parent, name, fl )
 {
@@ -55,8 +56,8 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     ProcessView->setColumnAlignment( colnum, Qt::AlignRight );
     ProcessView->setAllColumnsShowFocus( TRUE );
     QPEApplication::setStylusOperation( ProcessView->viewport(), QPEApplication::RightOnHold );
-    connect( ProcessView, SIGNAL( rightButtonPressed(OListViewItem*,const QPoint&,int) ),
-             this, SLOT( viewProcess(OListViewItem*) ) );
+    connect( ProcessView, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ),
+             this, SLOT( viewProcess(QListViewItem*) ) );
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
     QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
 
@@ -183,6 +184,12 @@ void ProcessInfo::slotSendClicked()
         }
     }
 
+}
+
+void ProcessInfo::viewProcess( QListViewItem* process ) {
+    if ( !process )
+        return;
+    viewProcess( static_cast<OListViewItem*>( process ) );
 }
 
 void ProcessInfo::viewProcess( OListViewItem *process )

@@ -33,7 +33,7 @@
 #include <qtextstream.h>
 #include <qwhatsthis.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     : QWidget( parent, name, f )

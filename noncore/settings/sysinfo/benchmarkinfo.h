@@ -23,9 +23,9 @@
 
 class QClipboard;
 class QComboBox;
-class OCheckListItem;
+namespace Opie {namespace Ui {class OCheckListItem;}}
 class QPushButton;
-class OListView;
+namespace Opie {namespace Ui {class OListView;}}
 
 class BenchmarkInfo : public QWidget
 {
@@ -35,13 +35,13 @@ public:
     BenchmarkInfo( QWidget *parent = 0, const char *name = 0, int wFlags = 0 );
     ~BenchmarkInfo();
 
-    OCheckListItem* test_alu;
-    OCheckListItem* test_fpu;
-    OCheckListItem* test_txt;
-    OCheckListItem* test_gfx;
-    OCheckListItem* test_ram;
-    OCheckListItem* test_sd;
-    OCheckListItem* test_cf;
+    Opie::Ui::OCheckListItem* test_alu;
+    Opie::Ui::OCheckListItem* test_fpu;
+    Opie::Ui::OCheckListItem* test_txt;
+    Opie::Ui::OCheckListItem* test_gfx;
+    Opie::Ui::OCheckListItem* test_ram;
+    Opie::Ui::OCheckListItem* test_sd;
+    Opie::Ui::OCheckListItem* test_cf;
 
     bool main_rd;
     bool main_wt;
@@ -52,13 +52,13 @@ public:
 
     QClipboard* clb;
     QComboBox* machineCombo;
-    OListView* tests;
+    Opie::Ui::OListView* tests;
     QPushButton* startButton;
     QDict <QStringList> machines;
 
     int textRendering( int );
     int gfxRendering( int );
-    void performFileTest( const QString& fname, OCheckListItem* item );
+    void performFileTest( const QString& fname, Opie::Ui::OCheckListItem* item );
 
 private slots:
     bool writeFile( const QString& );

@@ -9,7 +9,7 @@
 class InterfaceSetupImp;
 class Interface;
 class Config;
-class OPacket;
+namespace Opie {namespace Net {class OPacket;}}
 class QListViewItem;
 
 const int col_mode= 0;
@@ -38,8 +38,8 @@ private:
 
   void parseKeyStr(QString keystr);
 
-  void handlePacket( OPacket* );
-  void displayFoundNetwork( const QString& mode, int channel, const QString& ssid, const OMacAddress& mac );
+  void handlePacket( Opie::Net::OPacket* );
+  void displayFoundNetwork( const QString& mode, int channel, const QString& ssid, const Opie::Net::OMacAddress& mac );
 
   InterfaceSetupImp *interfaceSetup;
   Interfaces *interfaces;

@@ -43,7 +43,7 @@ class SSHKeysApp : public SSHKeysBase
     QString incoming_keysize;
     QString incoming_keyfingerprint;
     QString incoming_noise;
-    OProcess addprocess;
+    Opie::Core::OProcess addprocess;
     QString pending_stdout;
     QString pending_stderr;
 
@@ -51,10 +51,10 @@ class SSHKeysApp : public SSHKeysBase
     void doAddButton();
     void doRefreshListButton();
     void doRemoveAllButton();
-    void get_list_keys_output(OProcess *proc, char *buffer, int buflen);
-    void log_sshadd_output(OProcess *proc, char *buffer, int buflen);
-    void log_sshadd_stderr(OProcess *proc, char *buffer, int buflen);
-    void ssh_add_exited(OProcess *proc);
+    void get_list_keys_output(Opie::Core::OProcess *proc, char *buffer, int buflen);
+    void log_sshadd_output(Opie::Core::OProcess *proc, char *buffer, int buflen);
+    void log_sshadd_stderr(Opie::Core::OProcess *proc, char *buffer, int buflen);
+    void ssh_add_exited(Opie::Core::OProcess *proc);
     void add_text_changed(const QString &text);
 };
 #endif

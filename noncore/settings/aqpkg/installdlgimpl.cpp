@@ -57,6 +57,7 @@
 #include "utils.h"
 #include "global.h"
 
+using namespace Opie::Ui;
 enum {
     MAXLINES = 100,
 };
@@ -233,7 +234,7 @@ void InstallDlgImpl :: optionsSelected()
         text << "*";
         map.insert( tr( "All" ), text );
 
-        QString filename = Opie::OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
+        QString filename = OFileDialog::getSaveFileName( 2, "/", "ipkg-output", map );
         if( !filename.isEmpty() )
         {
             QString currentFileName = QFileInfo( filename ).fileName();
