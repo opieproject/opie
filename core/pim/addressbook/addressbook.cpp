@@ -217,9 +217,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     fontMenu->setCheckable( true );
     connect( fontMenu, SIGNAL(activated(int)), this, SLOT(slotSetFont(int)));
 
-    fontMenu->insertItem("Small", 0);
-    fontMenu->insertItem("Normal", 1);
-    fontMenu->insertItem("Large", 2);
+    fontMenu->insertItem(tr( "Small" ), 0);
+    fontMenu->insertItem(tr( "Normal" ), 1);
+    fontMenu->insertItem(tr( "Large" ), 2);
 
     defaultFont = new QFont( abList->font() );
 
