@@ -4,15 +4,15 @@
 
 
 IRCOutputEscapeSecuences IRCOutput::m_escapeSecuences[] = {
-    { '', "<b>", "</b>"},
-    { '', "<u>", "</u>"},
+    { '\002', "<b>", "</b>"},
+    { '\037', "<u>", "</u>"},
     { 0, 0, 0},
 };
 
 IRCOutput::IRCOutput(IRCOutputType type, QString message) {
     m_type = type;
-    /* Filter color, bold and underline escape sequences, since they aren't implemented yet */
-    m_message = message.replace(QRegExp("[1-9]*,*[1-9]*"), "");
+    /* Filter color escape sequences, since they aren't implemented yet */
+    m_message = message.replace(QRegExp("\003[1-9]*,*[1-9]*"), "");
 }
 
 IRCOutputType IRCOutput::type() {
