@@ -483,8 +483,9 @@ bool AppLauncher::execute(const QString &c, const QString &docParam, bool noRais
     qWarning("AppLauncher::execute '%s' '%s'", (const char*) c, (const char*) docParam );
     // Convert the command line in to a list of arguments
     QStringList list = QStringList::split(QRegExp("  *"),c);
-    if ( !docParam.isEmpty() )
-	list.append( docParam );
+    QStringList arglist = QStringList::split(QRegExp("  *"),docParam);
+    for ( QStringList::Iterator it = arglist.begin(); it != arglist.end(); ++it )
+        list.append( *it );
 
     QString appName = list[0];
     if ( isRunning(appName) ) {
