@@ -34,13 +34,10 @@ ModemConfigWidget::ModemConfigWidget( const QString& name, QWidget* parent,
 
     QLabel* telLabel = new QLabel( this );
     telLabel->setText( tr( "Enter telefon number here:" ) );
-    // m_telNumber = new QLineEdit( this );
     QHBox *buttonBox = new QHBox( this );
     m_telNumber = new QLineEdit( buttonBox );
     QPushButton *atButton = new QPushButton( buttonBox );
     atButton->setText( tr( "AT commands" ) );
-    // disabled for now
-    atButton->hide();
     connect( atButton, SIGNAL( clicked() ), this, SLOT( slotAT() ) );
 
     QPushButton *dialButton = new QPushButton( buttonBox );

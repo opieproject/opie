@@ -51,12 +51,10 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
     m_groupConv = new QHGroupBox(tr("Line-break conversions"), this );
     m_convInbound  = new QCheckBox(tr("Inbound"), m_groupConv );
     m_convOutbound = new QCheckBox(tr("Outbound"), m_groupConv );
-    m_groupConv->hide();
 
     m_groupOptions = new QHGroupBox( tr("Options"), this );
     m_optionEcho = new QCheckBox(tr("Local echo"), m_groupOptions );
     m_optionWrap = new QCheckBox(tr("Line wrap"), m_groupOptions );
-    m_groupOptions->hide();
 
     m_lroot = new QVBoxLayout( this  );
     m_typeBox = new  QVBoxLayout( m_lroot );
