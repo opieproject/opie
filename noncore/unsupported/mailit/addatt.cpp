@@ -23,15 +23,17 @@
 #include "resource.h"
 #include "addatt.h"
 
-FileItem::FileItem(QListView *parent, QFileInfo fileInfo, QString fileType)
+FileItem::FileItem(QListView *parent, DocLnk* dl)
 		: QListViewItem(parent)
 {
-	file = fileInfo;
-	type = fileType;
-
-	setText(0, fileInfo.baseName());
+	/*file = fileInfo;
+	type = fileType;*/
 	
-	if (fileType == "Picture") {
+	doclnk=dl;
+
+	setText(0, doclnk->name());
+	
+/*	if (fileType == "Picture") {
 		setPixmap(0, Resource::loadPixmap("pixmap"));
 	} else if (fileType == "Document") {
 		setPixmap(0, Resource::loadPixmap("txt"));	
@@ -41,17 +43,13 @@ FileItem::FileItem(QListView *parent, QFileInfo fileInfo, QString fileType)
 		setPixmap(0, Resource::loadPixmap("MPEGPlayer"));
 	} else if (fileType == "File") {
 		setPixmap(0, Resource::loadPixmap("exec"));
-	}
+	}*/
 }
 
-QFileInfo FileItem::getFileInfo()
+FileItem::~FileItem()
 {
-	return file;
-}
-
-QString FileItem::getFileType()
-{
-	return type;
+	if (doclnk!=NULL) delete doclnk;
+	doclnk=NULL;
 }
 
 AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
@@ -59,13 +57,14 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 {
 	setCaption("Adding attatchments");
 
-	QGridLayout *top = new QGridLayout(this, 3, 2);
+	QGridLayout *top = new QGridLayout(this, 3,1 );
+	
 
-	fileCategoryButton = new QPushButton(this);
+	/*fileCategoryButton = new QPushButton(this);*/
 	attatchButton = new QPushButton("Attatch ->", this);
 	removeButton = new QPushButton("Remove", this);
 
-	fileCategories = new QPopupMenu(fileCategoryButton);
+	/*fileCategories = new QPopupMenu(fileCategoryButton);
 	fileCategoryButton->setPopup(fileCategories);
 	fileCategories->insertItem("Document");
 	fileCategories->insertItem("Picture");
@@ -74,63 +73,81 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	fileCategories->insertItem("File");
 
 	fileCategoryButton->setText("Document");
-	top->addWidget(fileCategoryButton, 0, 0);
-	top->addWidget(attatchButton, 2, 0);
-	top->addWidget(removeButton, 2, 1);
+	top->addWidget(fileCategoryButton, 0, 0);*/
+	
+	//ofs=new OFileSelector(this,2,0,"/root/Documents");
+	
+	
+	top->addWidget(attatchButton,1,0);
+	top->addWidget(removeButton,2,0);
 
-	connect(fileCategories, SIGNAL(activated(int)), this,
-    		SLOT(fileCategorySelected(int)) );
+	/*connect(fileCategories, SIGNAL(activated(int)), this,
+    		SLOT(fileCategorySelected(int)) );*/
 	connect(attatchButton, SIGNAL(clicked()), this,
 		SLOT(addAttatchment()) );
 	connect(removeButton, SIGNAL(clicked()), this,
 		SLOT(removeAttatchment()) );
 	
-	listView = new QListView(this, "AttView");
-	listView->addColumn("Documents");
+	/*listView = new QListView(this, "AttView");
+	listView->addColumn("Documents");*
 	connect(listView, SIGNAL(doubleClicked(QListViewItem *)), this,
-		SLOT(addAttatchment()) );
+		SLOT(addAttatchment()) );*/
+	
 	
 	attView = new QListView(this, "Selected");
-	attView->addColumn("Attatched");
+	attView->addColumn(tr("Attached"));
+	attView->addColumn(tr("File type"));
 	connect(attView, SIGNAL(doubleClicked(QListViewItem *)), this,
 		SLOT(removeAttatchment()) );
 
-	top->addWidget(listView, 1,0);
-	top->addWidget(attView, 1,1);
+	//top->addWidget(ofs, 0,0);
+	top->addWidget(attView, 0,0);
 	
-	clear();	
+	clear();
+	
+
 }
 
 void AddAtt::clear()
 {
 	attView->clear();
-	getFiles();
+	//getFiles();
 	modified = FALSE;
 }
 
-void AddAtt::fileCategorySelected(int id)
+/*void AddAtt::fileCategorySelected(int id)
 {
 	fileCategoryButton->setText(fileCategories->text(id));
 	getFiles();
-}
+}*/
 
 void AddAtt::addAttatchment()
-{
-	QFileInfo info;
-	QString type;
+{	
+	QDialog qd(this,tr("Select attachment"),true);
 	
-	if (listView->selectedItem() != NULL) {
-		item = (FileItem *) listView->selectedItem();
-		info = item->getFileInfo();
-		type = item->getFileType();
-		item = new FileItem(attView, info, type);
+	QGridLayout top(&qd,1,1);
+	
+	OFileSelector ofs(&qd,1,0,"/root/Documents");
+	
+	top.addWidget(&ofs,0,0);
+	
+	qd.showMaximized();
+	
+	if (qd.exec()==QDialog::Accepted)
+	{
+		DocLnk* dl=new DocLnk(ofs.selectedDocument());
+		FileItem* fi=new FileItem(attView,dl);
+		fi->setPixmap(0,dl->pixmap());
+		fi->setText(1,dl->type());
+		attView->insertItem(fi);
+		modified = TRUE;	
 	}
-	modified = TRUE;
 }
 
 void AddAtt::removeAttatchment()
 {
-	if (attView->selectedItem() != NULL) {
+	if (attView->selectedItem() != NULL) 
+	{
 		attView->takeItem(attView->selectedItem());
 	}
 	modified = TRUE;
@@ -153,9 +170,8 @@ void AddAtt::accept()
 void AddAtt::getFiles()
 {
 	QString path, selected;
-	QDir *dir;
 	
-	listView->clear();
+	/*listView->clear();
 	
 	selected = fileCategoryButton->text();
 	if (selected == "Picture") {
@@ -177,9 +193,9 @@ void AddAtt::getFiles()
 	QFileInfoListIterator it(*dirInfoList);      // create list iterator
 
 	while ( (fi=it.current()) ) {           // for each file...
-		item = new FileItem(listView, *fi, selected);
+		item = new FileItem(lis+ütView, *fi, selected);
 		++it;                               // goto next list element
-	}
+	}*/
 }
 
 QStringList AddAtt::returnAttatchedFiles()
@@ -188,9 +204,13 @@ QStringList AddAtt::returnAttatchedFiles()
 	QStringList list;
 	
 	item = (FileItem *) attView->firstChild();
+	
+	
 	while (item != NULL) {
-		info = item->getFileInfo();
-		list += info.filePath();
+		DocLnk* dl=item->getDocLnk();
+		list+=dl->file();
+		/*info = item->getFileInfo();
+		list += info.filePath();*/
 		item = (FileItem *) item->nextSibling();
 	}
 	return list;
@@ -199,10 +219,11 @@ QStringList AddAtt::returnAttatchedFiles()
 QStringList AddAtt::returnFileTypes()
 {
 	QStringList list;
-	
+		
 	item = (FileItem *) attView->firstChild();
+			
 	while (item != NULL) {
-		list += item->getFileType();
+		list += item->getDocLnk()->type();
 		item = (FileItem *) item->nextSibling();
 	}
 	return list;

@@ -161,6 +161,7 @@ void EmailClient::init()
   cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("close"), QString::null, 0, this, 0);
   connect(cancelButton, SIGNAL(activated()), this, SLOT(cancel()) );
   cancelButton->addTo(mail);
+  cancelButton->addTo(bar);
   cancelButton->setEnabled(FALSE);
   
   mailboxView = new OTabWidget( this, "mailboxView" );
@@ -214,6 +215,12 @@ AddressList* EmailClient::getAdrListRef()
 //this needs to be rewritten to syncronize with outboxView
 void EmailClient::enqueMail(const Email &mail)
 {
+ if (accountList.count() == 0) {
+    QMessageBox::warning(qApp->activeWindow(),
+      tr("No account selected"), tr("You must create an account"), "OK\n");
+    return;
+  }
+   
   if (accountList.count() > 0) {
     currentAccount = accountList.first();
     qWarning("using account " + currentAccount->name);
@@ -232,8 +239,7 @@ void EmailClient::sendQuedMail()
   int count = 0;
 
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(),
-      "No account selected", "You must create an account", "OK\n");
+    QMessageBox::warning(qApp->activeWindow(), "No account selected", "You must create an account", "OK\n");
     return;
   }
   //traverse listview, find messages to send

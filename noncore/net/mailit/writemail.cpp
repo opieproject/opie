@@ -64,7 +64,7 @@ void WriteMail::init()
 	menu->insertItem( tr( "&Add" ), addMenu);
 	
 	bar = new QToolBar(this);
-	attatchButton = new QAction(tr("Attatchment"), Resource::loadPixmap("fileopen"), QString::null, 0, this, 0);
+	attatchButton = new QAction(tr("Attatchment"), Resource::loadPixmap("mailit/attach"), QString::null, 0, this, 0);
 	attatchButton->addTo(bar);
 	attatchButton->addTo(addMenu);
 	connect( attatchButton, SIGNAL( activated() ), this, SLOT( attatchFile() ) );
@@ -171,9 +171,7 @@ void WriteMail::accept()
 	QStringList::Iterator itType = attatchmentsType.begin();
 	
 	Enclosure e;
-	for ( QStringList::Iterator it = attatchedFiles.begin();
-    		it != attatchedFiles.end(); ++it ) {
-		
+	for ( QStringList::Iterator it = attatchedFiles.begin(); it != attatchedFiles.end(); ++it ) {
 		e.id = idCount;
 		e.originalName = (*it).latin1();
 		e.contentType = (*itType).latin1();

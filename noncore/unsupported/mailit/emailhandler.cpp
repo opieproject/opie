@@ -412,12 +412,15 @@ int EmailHandler::parse64base(char *src, char *bufOut) {
   return processed;
 }
 
-int EmailHandler::encodeMime(Email *mail) {
+int EmailHandler::encodeMime(Email *mail) 
+{
+  
   QString fileName, fileType, contentType, newBody, boundary;
   Enclosure *ePtr;
   
   QString userName = mailAccount.name;
-  userName += " <" + mailAccount.emailAddress + ">";
+  if (userName.length()>0)	//only embrace it if there is a user name
+  	userName += " <" + mailAccount.emailAddress + ">";
   
   //add standard headers
   newBody = "From: " + userName + "\r\nTo: ";

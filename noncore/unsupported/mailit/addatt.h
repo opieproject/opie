@@ -27,17 +27,20 @@
 #include <qstring.h>
 #include <qfileinfo.h>
 #include <qstringlist.h>
+#include <opie/ofileselector.h>
+#include <qpe/applnk.h>
 
 class FileItem : public QListViewItem
 {
 public:
-	FileItem(QListView *parent, QFileInfo fileInfo, QString fileType);
-	QFileInfo getFileInfo();
-	QString getFileType();
-
+	//FileItem(QListView *parent, QFileInfo fileInfo, QString fileType);
+	FileItem(QListView*, DocLnk*);
+	~FileItem();
+	DocLnk* getDocLnk() {return doclnk;}
+	
+	
 private:
-	QFileInfo file;
-	QString type;
+	DocLnk* doclnk;
 };
 
 class AddAtt : public QDialog
@@ -51,20 +54,23 @@ public:
 	void getFiles();
 	void clear();
 	
+	
 public slots:
-	void fileCategorySelected(int);
+	//void fileCategorySelected(int);
 	void addAttatchment();
 	void removeAttatchment();
 	void reject();
 	void accept();
 	
 private:
-	FileItem *item;
-	QListView *listView, *attView;
+	FileItem* item;
+	QListView *attView;
 	QPushButton *fileCategoryButton, *attatchButton, *removeButton;
 	QPopupMenu *fileCategories;
 	bool modified;
 	QFileInfo *fi;
+	
+	OFileSelector* ofs;
 };
 
 #endif
