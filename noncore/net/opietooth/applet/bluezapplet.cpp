@@ -62,6 +62,9 @@ namespace OpieTooth {
     }
 
     BluezApplet::~BluezApplet() {
+        if ( btDevice ) {
+            delete btDevice;
+        }
     }
 
     bool BluezApplet::checkBluezStatus() {
