@@ -19,7 +19,7 @@
  * AUTHOR: Christian Rahn
  * EMAIL: cdr@lisa.de
  *
- * $Id: qdmdialogimpl.cpp,v 1.2 2002-03-28 23:34:43 kergoth Exp $
+ * $Id: qdmdialogimpl.cpp,v 1.3 2002-04-24 22:29:40 kergoth Exp $
  */
 
 #include "qdm_config.h"
@@ -39,7 +39,7 @@
 #include <qcombobox.h>
 #include <qlineedit.h>
 #include <qtranslator.h>
-#include <qpeapplication.h>
+#include <qpe/qpeapplication.h>
 
 #include <qwsdisplay_qws.h>
 
@@ -54,7 +54,7 @@
 #include <sys/shm.h>
 #include <sys/ipc.h>
 
-#include <global.h>
+#include <qpe/global.h>
 
 #if defined(QT_QWS_LOGIN_USEPAM)
 extern "C" {
