@@ -1,4 +1,4 @@
   config MULTIAUTH_DEMO
-    boolean "opie-security multiauth demo (provides several ways to lock and unlock the device)"
-    default "y"
+    boolean "opie-security multiauth demo (small app only used for testing security plugins & framework)"
+    default "n"
     depends SECURITY
