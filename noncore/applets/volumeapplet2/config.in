@@ -1,0 +1,6 @@
+  config VOLUMEAPPLET2
+    boolean "opie-volumeapplet2 (control mixer volume on-the-fly)"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2MM
+    comment "Volume applet needs a libqpe and libopie2 (core, ui, mm)"
+    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2MM)
