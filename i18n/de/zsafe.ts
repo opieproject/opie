@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CategoryDialog</name>
     <message>
@@ -97,27 +98,28 @@
         <source>ComboBox FileTypeFilter
 
 edit or select the filter</source>
-        <translation type="unfinished"></translation>
+        <translation>ComboBox DateitypFilter
+Bearbeiten oder auswählen des Filters</translation>
     </message>
     <message>
         <source>confirms the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>bestätigt die Auswahl und schließt den Dialog</translation>
     </message>
     <message>
         <source>OKButton</source>
-        <translation type="unfinished">OK</translation>
+        <translation>OKKnopf</translation>
     </message>
     <message>
         <source>cancels the selection and closes the form</source>
-        <translation type="unfinished"></translation>
+        <translation>verwirft die Auswahl und schließt den Dialog</translation>
     </message>
     <message>
         <source>CancelButton</source>
-        <translation type="unfinished">Abbruch</translation>
+        <translation>AbbruchKnopf</translation>
     </message>
     <message>
         <source>shows the selected filename</source>
-        <translation type="unfinished"></translation>
+        <translation>zeigt den ausgewählten Dateinamen</translation>
     </message>
     <message>
         <source>Filename LineEdit
@@ -125,16 +127,21 @@ edit or select the filter</source>
 shows the selected file
 and allows the direct filename
 edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Dateinamen Zeileneditor
+
+Zeigt die ausgewählte Zeile
+und erlaubt die direkte
+Dateinamen Eingabe</translation>
     </message>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation type="unfinished"></translation>
+        <translation>ComboBox Verzeichnis
+Bearbeiten oder auswählen des Verzeichnisnamens</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>size</source>
@@ -152,14 +159,16 @@ edit or select the directories name</source>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnis Listenansicht
+
+Zeigt die Liste der Verzeichnisse und Dateien</translation>
     </message>
 </context>
 <context>
     <name>ScQtFileEditDlg</name>
     <message>
         <source>dir</source>
-        <translation type="unfinished">Verz.</translation>
+        <translation>Verz</translation>
     </message>
     <message>
         <source>file</source>
@@ -523,7 +532,7 @@ sichern</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.0&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>ZSafe Version 2.1.0&lt;br&gt;</translation>
     </message>
 </context>
 </TS>

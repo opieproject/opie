@@ -149,11 +149,11 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Hex</source>
-        <translation type="unfinished"></translation>
+        <translation>Hex</translation>
     </message>
     <message>
         <source>Stat</source>
-        <translation type="unfinished"></translation>
+        <translation>Stat</translation>
     </message>
     <message>
         <source>About</source>
@@ -168,7 +168,7 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     <name>WellenreiterConfigBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Formular1</translation>
     </message>
     <message>
         <source>Sniffer</source>
@@ -248,19 +248,19 @@ Michael Lauer&lt;br&gt;&lt;hr&gt;
     </message>
     <message>
         <source>Ignore</source>
-        <translation type="unfinished">Ignorieren</translation>
+        <translation>Ignorieren</translation>
     </message>
     <message>
         <source>Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Erneuern</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel</translation>
     </message>
     <message>
         <source>Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm</translation>
     </message>
     <message>
         <source>sound on beacon</source>

@@ -340,7 +340,7 @@ Alle Mails werden entfernt.</translation>
     <name>SplitterWidgetBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Formular1</translation>
     </message>
 </context>
 </TS>
