@@ -73,7 +73,7 @@ public slots:
     bool last();
     bool next();
     bool prev();
-    void writeConfig( Config& cfg ) const;
+    void writeDefaultPlaylist( );
     QString currentFileListPathName();
 protected:
     void keyReleaseEvent( QKeyEvent *e);
@@ -84,7 +84,6 @@ private:
     void readm3u(const QString &);
     void readPls(const QString &);
     void initializeStates();
-    void readConfig( Config& cfg );
     void populateAudioView();
     void populateVideoView();
 

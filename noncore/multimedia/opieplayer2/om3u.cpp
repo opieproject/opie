@@ -63,13 +63,13 @@ Om3u::Om3u( const QString &filePath, int mode)
 
 Om3u::~Om3u(){}
 
-void Om3u::readM3u() { //it's m3u
+void Om3u::readM3u() {
 //    qDebug("<<<<<<reading m3u "+f.name());
     QTextStream t(&f);
     QString s;
     while ( !t.atEnd() ) {
         s=t.readLine();
-        //        qDebug(s);
+                qDebug(s);
         if( s.find( "#", 0, TRUE) == -1 ) {
                 if( s.left(2) == "E:" || s.left(2) == "P:" ) {
                     s = s.right( s.length() -2 );
@@ -82,11 +82,11 @@ void Om3u::readM3u() { //it's m3u
                 } else { // is url
                     s.replace( QRegExp( "%20" )," " );
                     QString name;
-                    if( name.left( 4 ) == "http" ) {
-                        name = s.right( s.length() - 7 );
-                    } else {
+//                     if( name.left( 4 ) == "http" ) {
+//                         name = s.right( s.length() - 7 );
+//                     } else {
                         name = s;
-                    }
+//                     }
                     append(name);
 //                    qDebug(name);
                 }
@@ -137,7 +137,7 @@ void Om3u::write() { //writes list to m3u file
         list += *it+"\n";
     }
     f.writeBlock( list, list.length() );
-    f.close();
+//    f.close();
 }
 
 void Om3u::add(const QString &filePath) { //adds to m3u file
@@ -145,10 +145,21 @@ void Om3u::add(const QString &filePath) { //adds to m3u file
 }
 
 void Om3u::remove(const QString &filePath) { //removes from m3u list
+    QString list, currentFile;
+    for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
+        currentFile=*it;
+//        qDebug(*it);
+        
+        if( filePath != currentFile)
+        list += currentFile+"\n";
+    }
+    f.writeBlock( list, list.length() );
 
 }
 
 void Om3u::deleteFile(const QString &filePath) {//deletes m3u file
+     f.close();
+     f.remove();
 
 }
 
