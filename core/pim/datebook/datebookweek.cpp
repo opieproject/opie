@@ -135,14 +135,16 @@ void DateBookWeekView::initNames()
 
 void DateBookWeekView::showEvents( QValueList<EffectiveEvent> &ev )
 {
-    items.clear();
-    QValueListIterator<EffectiveEvent> it;
-    for ( it = ev.begin(); it != ev.end(); ++it ) {
-	DateBookWeekItem *i = new DateBookWeekItem( *it );
-	positionItem( i );
-	items.append( i );
-    }
-    viewport()->update();
+	items.clear();
+	QValueListIterator<EffectiveEvent> it;
+	for ( it = ev.begin(); it != ev.end(); ++it ) {
+		DateBookWeekItem *i = new DateBookWeekItem( *it );
+		if(!(i->event().end().hour()==i->event().start().hour() && i->event().end().minute()==i->event().start().minute())) {	// Skip effective events with no duration. (i.e ending at 00:00)
+			positionItem( i );
+			items.append( i );
+		}
+	}
+	viewport()->update();
 }
 
 void DateBookWeekView::moveToHour( int h )
