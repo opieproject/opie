@@ -18,6 +18,8 @@
 #ifndef TODAY_H
 #define TODAY_H
 
+#include <qscrollview.h>
+#include <qvbox.h>
 
 #include <qpe/qlibrary.h>
 
@@ -50,6 +52,8 @@ private:
     void setOwnerField(QString &string);
     void loadPlugins();
     void draw();
+    void reinitialize();
+
     void setRefreshTimer( int );
 
 private slots:
@@ -59,6 +63,10 @@ private slots:
     TodayConfig *conf;
     QStringList m_excludeApplets;
     QStringList m_allApplets;
+
+    QScrollView *sv;
+    QVBox* big_box;
+
 
     QTimer *m_refreshTimer;
 

@@ -67,6 +67,11 @@ void TodolistPluginWidget:: refresh()  {
     getTodo();
 }
 
+void TodolistPluginWidget::reinitialize()  {
+    readConfig();
+    getTodo();
+}
+
 /**
  * Get the todos
  */

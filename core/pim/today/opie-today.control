@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
-Version: 0.6.2-$SUB_VERSION
+Version: 0.7-$SUB_VERSION
 Depends: task-opie-minimal, libopie1
 License: GPL
 Description: today screen

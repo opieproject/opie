@@ -69,3 +69,10 @@ void DatebookPlugin::refresh() {
         m_widget->refresh();
     }
 }
+
+void DatebookPlugin::reinitialize()  {
+    if ( m_widget )  {
+        m_widget->reinitialize();
+    }
+}
+

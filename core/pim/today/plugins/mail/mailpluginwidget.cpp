@@ -29,7 +29,7 @@ MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
         delete m_mailLabel;
     }
     m_mailLabel = new OClickableLabel( this );
-    m_mailLabel->setMaximumHeight( 15 );
+    //m_mailLabel->setMaximumHeight( 15 );
     connect( m_mailLabel, SIGNAL( clicked() ), this, SLOT( startMail() ) );
 
     if ( m_layout )  {

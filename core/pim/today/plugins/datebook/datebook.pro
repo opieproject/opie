@@ -6,6 +6,7 @@ HEADERS = datebookplugin.h datebookpluginimpl.h datebookpluginconfig.h \
 	datebookevent.h datebookpluginwidget.h
 SOURCES = datebookplugin.cpp datebookpluginimpl.cpp datebookpluginconfig.cpp \
 	datebookevent.cpp datebookpluginwidget.cpp
+INTERFACES = datebookpluginconfigbase.ui
 
 INCLUDEPATH     += $(OPIEDIR)/include \
 		../ ../library

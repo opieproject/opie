@@ -34,6 +34,7 @@ public:
     DatebookPluginWidget( QWidget *parent,  const char *name );
     ~DatebookPluginWidget();
     void refresh();
+    void reinitialize();
 
 private:
     DateBookDB* db;

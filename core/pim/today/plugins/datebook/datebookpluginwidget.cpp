@@ -45,7 +45,6 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
 
     readConfig();
     getDates();
-    m_layoutDates->addStretch(5);
 }
 
 DatebookPluginWidget::~DatebookPluginWidget() {
@@ -64,6 +63,11 @@ void DatebookPluginWidget::readConfig() {
     m_moreDays = cfg.readNumEntry( "moredays", 0 );
 }
 
+void DatebookPluginWidget::reinitialize()  {
+    readConfig();
+    refresh();
+}
+
 void DatebookPluginWidget::refresh()  {
     m_eventsList.clear();
 
@@ -74,7 +78,6 @@ void DatebookPluginWidget::refresh()  {
     m_layoutDates->setAutoAdd( true );
 
     getDates();
-    m_layoutDates->addStretch(5);
 }
 
 /**

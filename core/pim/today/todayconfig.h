@@ -1,7 +1,7 @@
 /*
  * todayconfig.h
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002,2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -21,6 +21,9 @@
 #include <qdialog.h>
 #include <qlistview.h>
 #include <opie/otabwidget.h>
+
+
+#include "todayconfigmiscbase.h"
 
 class QCheckBox;
 class QLabel;
@@ -59,16 +62,12 @@ private:
     QStringList m_excludeApplets;
     bool m_applets_changed;
 
-    QLabel* TextLabel2;
-    QCheckBox* CheckBoxAuto, *CheckBoxHide;
     QWidget* tab_2;
     QWidget* tab_3;
     QLabel* TextLabel1, *TextLabel4;
     QSpinBox* SpinBox7;
-    QLabel* TimeLabel;
-    QSpinBox* SpinBoxTime;
-    QSpinBox* SpinRefresh;
-    QSpinBox* SpinBoxIconSize;
+
+    TodayConfigMiscBase *m_guiMisc;
 };
 
 #endif

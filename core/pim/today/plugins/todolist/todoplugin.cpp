@@ -1,7 +1,7 @@
 /*
  * todoplugin.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiß
+ * copyright   : (c) 2002,2003 by Maximilian Reiß
  * email       : harlekin@handhelds.org
  *
  */
@@ -66,5 +66,11 @@ bool TodolistPlugin::excludeFromRefresh() const {
 void TodolistPlugin::refresh()  {
     if ( m_widget )  {
         m_widget->refresh();
+    }
+}
+
+void TodolistPlugin::reinitialize()  {
+    if ( m_widget )  {
+        m_widget->reinitialize();
     }
 }

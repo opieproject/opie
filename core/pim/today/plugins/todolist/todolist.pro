@@ -7,6 +7,7 @@ HEADERS = todoplugin.h todopluginimpl.h todopluginconfig.h  \
 	todopluginwidget.h
 SOURCES = todoplugin.cpp todopluginimpl.cpp todopluginconfig.cpp \
 	todopluginwidget.cpp
+INTERFACES= todopluginconfigbase.ui
 
 INCLUDEPATH     += $(OPIEDIR)/include \
 		../ ../library

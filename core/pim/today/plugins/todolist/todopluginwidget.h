@@ -32,6 +32,7 @@ public:
     ~TodolistPluginWidget();
 
     void refresh();
+    void reinitialize();
 
 protected slots:
     void  startTodolist();

@@ -23,7 +23,10 @@
 
 #include <opie/todayconfigwidget.h>
 
-class DatebookPluginConfig : public TodayConfigWidget {
+#include "datebookpluginconfigbase.h"
+
+class DatebookPluginConfig : public TodayConfigWidget  {
+
     Q_OBJECT
 
 
@@ -39,13 +42,8 @@ private:
     bool changed();
     void readConfig();
 
-    QCheckBox* CheckBox2;
-    QCheckBox* CheckBox1;
-    QCheckBox* CheckBox3;
-    QSpinBox* SpinBox1;
-    QSpinBox* SpinBox2;
 
-
+    DatebookPluginConfigBase *m_gui;
     // how many lines should be showed in the datebook section
     int m_max_lines_meet;
     // If location is to be showed too, 1 to activate it.
