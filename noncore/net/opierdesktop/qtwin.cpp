@@ -20,11 +20,7 @@
 */
 
 #include "rdesktop.h"
-#ifdef SHARP
 #include <qpe/qpeapplication.h>
-#else
-#include <qapplication.h>
-#endif
 #include <qmainwindow.h>
 #include <qwidget.h>
 #include <qpainter.h>
@@ -57,11 +53,7 @@ extern char username[];
 int global_sock;
 
 QSocketNotifier* SocketNotifier;
-#ifdef SHARP
 QPEApplication* App;
-#else
-QApplication* App;
-#endif
 QMyMainWindow* MW;
 QMyScrollView* SV;
 struct QColorMap
@@ -1027,11 +1019,7 @@ BOOL ui_init(void)
 
   CM = NULL;
   BS = NULL;
-#ifdef SHARP
   App = new QPEApplication(g_argc, g_argv);
-#else
-  App = new QApplication(g_argc, g_argv, QApplication::GuiServer);
-#endif
   if (fullscreen)
   {
     d = QApplication::desktop();
@@ -1616,11 +1604,7 @@ int main(int argc, char** argv)
 {
   CM = NULL;
   BS = NULL;
-#ifdef SHARP
   App = new QPEApplication(argc, argv);
-#else
-  App = new QApplication(argc, argv, QApplication::GuiServer);
-#endif
   SV = new QMyScrollView();
   App->setMainWidget(SV);
   SV->showMaximized();
