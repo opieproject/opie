@@ -45,7 +45,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity7_font.setBold( TRUE );
     cmdCity7->setFont( cmdCity7_font );
     cmdCity7->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity7->setText( tr( "" ) );
+    cmdCity7->setText( "" );
     cmdCity7->setToggleButton( TRUE );
     cmdCity7->setToggleButton( TRUE );
 
@@ -56,7 +56,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime9_font(  lblCTime9->font() );
     lblCTime9_font.setPointSize( 10 );
     lblCTime9->setFont( lblCTime9_font );
-    lblCTime9->setText( tr( "" ) );
+    lblCTime9->setText( "" );
     lblCTime9->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime9, 2, 3 );
@@ -67,7 +67,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity8_font.setBold( TRUE );
     cmdCity8->setFont( cmdCity8_font );
     cmdCity8->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity8->setText( tr( "" ) );
+    cmdCity8->setText( "" );
     cmdCity8->setToggleButton( TRUE );
     cmdCity8->setToggleButton( TRUE );
 
@@ -78,7 +78,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity2_font.setBold( TRUE );
     cmdCity2->setFont( cmdCity2_font );
     cmdCity2->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity2->setText( tr( "" ) );
+    cmdCity2->setText( "" );
     cmdCity2->setToggleButton( TRUE );
     cmdCity2->setToggleButton( TRUE );
 
@@ -88,7 +88,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime6_font(  lblCTime6->font() );
     lblCTime6_font.setPointSize( 10 );
     lblCTime6->setFont( lblCTime6_font );
-    lblCTime6->setText( tr( "" ) );
+    lblCTime6->setText( "" );
     lblCTime6->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime6, 5, 1 );
@@ -99,7 +99,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity6_font.setBold( TRUE );
     cmdCity6->setFont( cmdCity6_font );
     cmdCity6->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity6->setText( tr( "" ) );
+    cmdCity6->setText( "" );
     cmdCity6->setToggleButton( TRUE );
     cmdCity6->setToggleButton( TRUE );
 
@@ -111,7 +111,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity4_font.setBold( TRUE );
     cmdCity4->setFont( cmdCity4_font );
     cmdCity4->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity4->setText( tr( "" ) );
+    cmdCity4->setText( "" );
     cmdCity4->setToggleButton( TRUE );
     cmdCity4->setToggleButton( TRUE );
 
@@ -121,7 +121,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime5_font(  lblCTime5->font() );
     lblCTime5_font.setPointSize( 10 );
     lblCTime5->setFont( lblCTime5_font );
-    lblCTime5->setText( tr( "" ) );
+    lblCTime5->setText( "" );
     lblCTime5->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime5, 4, 1 );
@@ -131,7 +131,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime2_font(  lblCTime2->font() );
     lblCTime2_font.setPointSize( 10 );
     lblCTime2->setFont( lblCTime2_font );
-    lblCTime2->setText( tr( "" ) );
+    lblCTime2->setText( "" );
     lblCTime2->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime2, 1, 1 );
@@ -141,7 +141,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime1_font(  lblCTime1->font() );
     lblCTime1_font.setPointSize( 10 );
     lblCTime1->setFont( lblCTime1_font );
-    lblCTime1->setText( tr( "" ) );
+    lblCTime1->setText( "" );
     lblCTime1->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime1, 0, 1 );
@@ -152,7 +152,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity3_font.setBold( TRUE );
     cmdCity3->setFont( cmdCity3_font );
     cmdCity3->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity3->setText( tr( "" ) );
+    cmdCity3->setText( "" );
     cmdCity3->setToggleButton( TRUE );
     cmdCity3->setToggleButton( TRUE );
 
@@ -163,7 +163,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime8_font(  lblCTime8->font() );
     lblCTime8_font.setPointSize( 10 );
     lblCTime8->setFont( lblCTime8_font );
-    lblCTime8->setText( tr( "" ) );
+    lblCTime8->setText( "" );
     lblCTime8->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime8, 1, 3 );
@@ -174,7 +174,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity1_font.setBold( TRUE );
     cmdCity1->setFont( cmdCity1_font );
     cmdCity1->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity1->setText( tr( "" ) );
+    cmdCity1->setText( "" );
     cmdCity1->setToggleButton( TRUE );
     cmdCity1->setToggleButton( TRUE );
 
@@ -185,7 +185,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime7_font(  lblCTime7->font() );
     lblCTime7_font.setPointSize( 10 );
     lblCTime7->setFont( lblCTime7_font );
-    lblCTime7->setText( tr( "" ) );
+    lblCTime7->setText( "" );
     lblCTime7->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime7, 0, 3 );
@@ -194,7 +194,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime4_font(  lblCTime4->font() );
     lblCTime4_font.setPointSize( 10 );
     lblCTime4->setFont( lblCTime4_font );
-    lblCTime4->setText( tr( "" ) );
+    lblCTime4->setText( "" );
     lblCTime4->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime4, 3, 1 );
@@ -205,7 +205,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity5_font.setBold( TRUE );
     cmdCity5->setFont( cmdCity5_font );
     cmdCity5->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity5->setText( tr( "" ) );
+    cmdCity5->setText( "" );
     cmdCity5->setToggleButton( TRUE );
     cmdCity5->setToggleButton( TRUE );
 
@@ -215,7 +215,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     QFont lblCTime3_font(  lblCTime3->font() );
     lblCTime3_font.setPointSize( 10 );
     lblCTime3->setFont( lblCTime3_font );
-    lblCTime3->setText( tr( "" ) );
+    lblCTime3->setText( "" );
     lblCTime3->setAlignment( int( QLabel::AlignVCenter | QLabel::AlignRight ) );
 
     Layout2->addWidget( lblCTime3, 2, 1 );
@@ -226,7 +226,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     cmdCity9_font.setBold( TRUE );
     cmdCity9->setFont( cmdCity9_font );
     cmdCity9->setFocusPolicy( QToolButton::TabFocus );
-    cmdCity9->setText( tr( "" ) );
+    cmdCity9->setText( "" );
     cmdCity9->setToggleButton( TRUE );
     cmdCity9->setToggleButton( TRUE );
 

@@ -99,7 +99,7 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 	hb4->setSpacing(5);
 
 	swapStatusIcon = new QLabel(hb4);
-	swapStatus = new QLabel(tr(""), hb4);
+	swapStatus = new QLabel("", hb4);
 	hb4->setStretchFactor(swapStatus, 99);
     vb->addWidget(hb4);
 

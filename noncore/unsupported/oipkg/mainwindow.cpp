@@ -272,7 +272,7 @@ void MainWindow::makeMenu()
 	a = new QAction( tr( "New version, old version installed" ),
  						Resource::loadPixmap( "oipkg/uninstalledInstalledOld" ), QString::null, 0, this, 0 );
  	a->addTo( helpMenu );
-//	a = new QAction( tr( "" ),
+//	a = new QAction( "",
 // 						Resource::loadPixmap( "oipkg/" ), QString::null, 0, this, 0 );
 // 	a->addTo( helpMenu );
 

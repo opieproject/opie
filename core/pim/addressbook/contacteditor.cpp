@@ -266,7 +266,7 @@ void ContactEditor::init() {
 	l = new QLabel( tr( "Country" ), container );
 	gl->addWidget( l, 5, 0 );
 	cmbCountry = new QComboBox( TRUE, container );
-	cmbCountry->insertItem( tr( "" ) );
+	cmbCountry->insertItem( "" );
 	cmbCountry->insertItem( tr ( "United States" ) );
 	cmbCountry->insertItem( tr ( "United Kingdom" ) );
 	cmbCountry->insertItem( tr ( "Afghanistan" ) );

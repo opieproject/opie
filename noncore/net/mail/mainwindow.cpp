@@ -97,7 +97,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     layout->addWidget( folderView );
 
     mailView = new QListView( view );
-    mailView->addColumn( tr( "" ) );
+    mailView->addColumn( "" );
     mailView->addColumn( tr( "Subject" ),QListView::Manual );
     mailView->addColumn( tr( "Sender" ),QListView::Manual );
     mailView->addColumn( tr( "Size" ),QListView::Manual);

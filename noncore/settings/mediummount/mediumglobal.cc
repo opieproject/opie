@@ -39,7 +39,7 @@ void MediumGlobalWidget::initGUI()
 
   m_label = new QLabel( this );
   m_label->setTextFormat( Qt::RichText );
-  m_label->setText( tr("") );
+  m_label->setText( "" );
   QWhatsThis::add( this, tr("If a medium gets inserted into this device Opie "
            "tries to search the medium for Documents. On "
            "large mediums this can take some time. You can choose "

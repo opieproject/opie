@@ -198,12 +198,12 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
 
     transport_rec = new QPushButton( tab, "transport_rec" );
     transport_rec->setGeometry( QRect( 170, 80, 30, 30 ) ); 
-    transport_rec->setText( tr( "" ) );
+    transport_rec->setText( "" );
     transport_rec->setPixmap( image2 );
 
     play_sound = new QPushButton( tab, "play_sound" );
     play_sound->setGeometry( QRect( 170, 180, 60, 55 ) ); 
-    play_sound->setText( tr( "" ) );
+    play_sound->setText( "" );
     play_sound->setPixmap( image3 );
 
     Frame6_2 = new QFrame( tab, "Frame6_2" );
@@ -214,26 +214,26 @@ PowerchordBase::PowerchordBase( QWidget* parent,  const char* name, WFlags fl )
     transport_play = new QPushButton( tab, "transport_play" );
     transport_play->setEnabled( FALSE );
     transport_play->setGeometry( QRect( 200, 80, 30, 30 ) ); 
-    transport_play->setText( tr( "" ) );
+    transport_play->setText( "" );
     transport_play->setPixmap( image3 );
 
     transport_rew = new QPushButton( tab, "transport_rew" );
     transport_rew->setEnabled( FALSE );
     transport_rew->setGeometry( QRect( 170, 110, 30, 30 ) ); 
-    transport_rew->setText( tr( "" ) );
+    transport_rew->setText( "" );
     transport_rew->setPixmap( image4 );
 
     transport_fwd = new QPushButton( tab, "transport_fwd" );
     transport_fwd->setEnabled( FALSE );
     transport_fwd->setGeometry( QRect( 200, 110, 30, 30 ) ); 
-    transport_fwd->setText( tr( "" ) );
+    transport_fwd->setText( "" );
     transport_fwd->setPixmap( image5 );
 
     chordname = new QLabel( tab, "chordname" );
     chordname->setGeometry( QRect( 146, 0, 90, 20 ) ); //cxm moved l 5
     chordname->setText( tr( "A" ) );
     chordname->setAlignment( int( QLabel::AlignCenter ) );
-    QToolTip::add(  chordname, tr( "" ) );
+    QToolTip::add(  chordname, "" );
 
     synth = new gs();
     tuner = new gt();

@@ -199,7 +199,7 @@ void MainWindow::makeMenu()
 
   //Clear text
   ClearSearchText = new QToolButton( searchBar, "ClearSearchText");
-  ClearSearchText->setText( tr( "" ) );
+  ClearSearchText->setText( "" );
   ClearSearchText->setPixmap( image1 );
 
   connect( searchEdit, SIGNAL( textChanged(const QString&) ),this, SLOT( setSearch(const QString&) ) );

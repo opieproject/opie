@@ -127,7 +127,7 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     SoundSettingsBaseLayout->addMultiCellWidget(TextLabelKey , 5, 5, 0, 0, 1);
 
     keyComboBox = new QComboBox( FALSE, this, "keyComboBox" );
-    keyComboBox->insertItem( tr( "" ) );
+    keyComboBox->insertItem( "" );
     keyComboBox->insertItem( tr( "Taskbar Icon" ) );
     keyComboBox->insertItem( tr( "Key_Record" ) );
     keyComboBox->insertItem( tr( "Key_Space" ) );

@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.16 2004-05-31 15:26:51 ar Exp $
+** $Id: zsafe.cpp,v 1.17 2004-06-17 23:11:26 clem Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -587,25 +587,25 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     New = new QToolButton( menu, "New" );
     New->setGeometry( QRect( DeskW-84, 2, 20, 20 ) );
     New->setMouseTracking( TRUE );
-    New->setText( tr( "" ) );
+    New->setText( "" );
     New->setPixmap( new_img );
     QToolTip::add(  New, tr( "New entry" ) );
 
     Edit = new QToolButton( menu, "Edit" );
     Edit->setGeometry( QRect( DeskW-64, 2, 20, 20 ) );
-    Edit->setText( tr( "" ) );
+    Edit->setText( "" );
     Edit->setPixmap( edit_img );
     QToolTip::add(  Edit, tr( "Edit category or entry" ) );
 
     Delete = new QToolButton( menu, "Delete" );
     Delete->setGeometry( QRect( DeskW-44, 2, 20, 20 ) );
-    Delete->setText( tr( "" ) );
+    Delete->setText( "" );
     Delete->setPixmap( trash_img );
     QToolTip::add(  Delete, tr( "Delete category or entry" ) );
 
     Find = new QToolButton( menu, "Find" );
     Find->setGeometry( QRect( DeskW-24, 2, 20, 20 ) );
-    Find->setText( tr( "" ) );
+    Find->setText( "" );
     Find->setPixmap( find_img );
     QToolTip::add(  Find, tr( "Find entry" ) );
 

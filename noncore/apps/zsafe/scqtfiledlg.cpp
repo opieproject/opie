@@ -131,7 +131,7 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
     Layout3->addItem( spacer );
 
     OkButton = new QToolButton( this, "OkButton" );
-    OkButton->setText( tr( "" ) );
+    OkButton->setText( "" );
     OkButton->setPixmap( image0 );
     OkButton->setUsesBigPixmap( FALSE );
     QToolTip::add(  OkButton, tr( "confirms the selection and closes the form" ) );
@@ -139,7 +139,7 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
     Layout3->addWidget( OkButton );
 
     CancelButton = new QToolButton( this, "CancelButton" );
-    CancelButton->setText( tr( "" ) );
+    CancelButton->setText( "" );
     CancelButton->setPixmap( image1 );
     CancelButton->setUsesBigPixmap( FALSE );
     QToolTip::add(  CancelButton, tr( "cancels the selection and closes the form" ) );
@@ -161,7 +161,7 @@ ScQtFileDlg::ScQtFileDlg( QWidget* parent,  const char* name, bool modal, WFlags
     Layout3_2->addWidget( FNameLineEdit );
 
     MkDirButton = new QToolButton( this, "MkDirButton" );
-    MkDirButton->setText( tr( "" ) );
+    MkDirButton->setText( "" );
     MkDirButton->setPixmap( image2 );
     MkDirButton->setUsesBigPixmap( FALSE );
     QToolTip::add(  MkDirButton, tr( "confirms the selection and closes the form" ) );
