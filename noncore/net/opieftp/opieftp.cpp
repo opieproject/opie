@@ -42,7 +42,6 @@ using namespace Opie::Core;
 #include <qlineedit.h>
 #include <qlistbox.h>
 #include <qvbox.h>
-
 /* STD */
 #include <unistd.h>
 #include <stdlib.h>
@@ -302,10 +301,8 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     TabWidget->insertTab( tab_3, tr( "Config" ) );
 
-#if 0
     connect(TabWidget,SIGNAL(currentChanged(QWidget*)),
             this,SLOT(tabChanged(QWidget*)));
-#endif
 
     currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
     currentDir.setPath( QDir::currentDirPath());
@@ -317,21 +314,17 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     currentPathCombo->setEditable(TRUE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
-#if 0
     connect( currentPathCombo, SIGNAL( activated(const QString&) ),
               this, SLOT(  currentPathComboActivated(const QString&) ) );
 
     connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
              this,SLOT(currentPathComboChanged()));
-#endif
     ProgressBar = new QProgressBar( view, "ProgressBar" );
     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 4);
     ProgressBar->setMaximumHeight(10);
     filterStr="*";
     b=FALSE;
-#if 0
     populateLocalView();
-#endif
     readConfig();
 
 //    ServerComboBox->setCurrentItem(currentServerConfig);
@@ -667,22 +660,24 @@ void OpieFtp::populateLocalView()
     while ( (fi=it.current()) ) {
         if (fi->isSymLink() ){
             QString symLink=fi->readLink();
-         odebug << "Symlink detected "+symLink << oendl; 
+//         odebug << "Symlink detected "+symLink << oendl; 
             QFileInfo sym( symLink);
             fileS.sprintf( "%10i", sym.size() );
             fileL.sprintf( "%s ->  %s",  fi->fileName().data(),sym.absFilePath().data() );
             fileDate = sym.lastModified().toString();
         } else {
-        odebug << "Not a dir: "+currentDir.canonicalPath()+fileL << oendl; 
+//        odebug << "Not a dir: "+currentDir.canonicalPath()+fileL << oendl; 
             fileS.sprintf( "%10i", fi->size() );
             fileL.sprintf( "%s",fi->fileName().data() );
             fileDate= fi->lastModified().toString();
             if( QDir(QDir::cleanDirPath(currentDir.canonicalPath()+"/"+fileL)).exists() ) {
                 fileL+="/";
                 isDir=TRUE;
-     odebug << fileL << oendl; 
+//     odebug << fileL << oendl; 
             }
         }
+
+
         if(fileL !="./" && fi->exists()) {
             item = new QListViewItem( Local_View,fileL, fileDate, fileS );
             QPixmap pm;
@@ -718,7 +713,7 @@ void OpieFtp::populateLocalView()
     }
     Local_View->setSorting( 3,FALSE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath() );
-    fillCombo( (const QString &)currentDir);
+			//   fillCombo( (const QString &)currentDir);
 }
 
 bool OpieFtp::populateRemoteView( )
@@ -1145,15 +1140,20 @@ void OpieFtp::currentPathComboActivated(const QString & currentPath) {
 }
 
 void OpieFtp::fillCombo(const QString &currentPath) {
-
+		qDebug("Fill Combo "+currentPath);
         currentPathCombo->lineEdit()->setText(currentPath);
+
         if( localDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+						qDebug("Clearing local");
             currentPathCombo->clear();
             localDirPathStringList.prepend(currentPath );
             currentPathCombo->insertStringList( localDirPathStringList,-1);
         }
+
         currentPathCombo->lineEdit()->setText(currentPath);
-        if( remoteDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+
+				if( remoteDirPathStringList.grep(currentPath,TRUE).isEmpty() ) {
+						qDebug("Clearing remote");
             currentPathCombo->clear();
             remoteDirPathStringList.prepend(currentPath );
             currentPathCombo->insertStringList( remoteDirPathStringList,-1);
@@ -1287,6 +1287,7 @@ void OpieFtp::clearCombos() {
 void OpieFtp::fillCombos()
 {
     clearCombos();
+		qDebug("did we get here yet?");
 
     Config cfg("opieftp");
     cfg.setGroup("Server");
