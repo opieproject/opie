@@ -94,7 +94,7 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
         tabBar->setShape( QTabBar::RoundedBelow );
     }
 
-    tabs.setAutoDelete( TRUE );
+    //tabs.setAutoDelete( TRUE );
     currentTab= 0x0;
 }
 
@@ -140,7 +140,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
 
 void OTabWidget::removePage( QWidget *childwidget )
 {
-    if ( childwidget )
+	if ( childwidget )
     {
         OTabInfo *tab = tabs.first();
         while ( tab && tab->control() != childwidget )
@@ -162,6 +162,8 @@ void OTabWidget::removePage( QWidget *childwidget )
             }
             widgetStack->removeWidget( childwidget );
             tabs.remove( tab );
+            delete tab;
+            currentTab = tabs.current();
             setUpLayout();
         }
     }
@@ -249,7 +251,7 @@ void OTabWidget::selectTab( OTabInfo *tab )
     {
         if ( currentTab )
         {
-            tabBar->tab( currentTab->id() )->setText( QString::null );
+            tabBar->tab( currentTab->id() )->setText( "" );
             setUpLayout();
         }
         tabBar->tab( tab->id() )->setText( tab->label() );
