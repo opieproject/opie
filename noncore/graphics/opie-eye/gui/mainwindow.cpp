@@ -224,6 +224,7 @@ void PMainWindow::slotConfig() {
         PDirView *view = (_it.data())(*m_cfg);
         PInterfaceInfo *inf =  view->interfaceInfo();
         QWidget *_wid = inf->configWidget( *m_cfg );
+        if (!_wid) continue;
         _wid->reparent(wid, QPoint() );
         lst.insert( view, _wid );
         wid->addTab( _wid, "fileopen", inf->name() );

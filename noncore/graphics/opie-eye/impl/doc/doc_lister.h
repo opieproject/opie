@@ -32,7 +32,6 @@ public:
 
 private:
     QMap<QString,QString> m_namemap,m_filemap;
-    QStringList m_out;
 protected slots:
     virtual void slotFullInfo(const QString&, const QString&);
     virtual void slotThumbInfo(const QString&, const QString&);

@@ -31,32 +31,31 @@ Doc_DirLister::Doc_DirLister()
     connect( master, SIGNAL(sig_thumbNail(const QString&, const QPixmap&)),
              this, SLOT(slotThumbNail(const QString&, const QPixmap&)) );
 
+    m_namemap.clear();
+    m_filemap.clear();
 }
 
 QString Doc_DirLister::defaultPath()const {
     return ""; QPEApplication::documentDir();
 }
 
-QString Doc_DirLister::setStartPath( const QString& path ) {
-    m_namemap.clear();
-    m_out.clear();
+QString Doc_DirLister::setStartPath(const QString&) {
     static const QString Mtype_str("image/jpeg;image/gif;image/bmp;image/png");
-    owarn << "Set start path" << oendl;
-    DocLnkSet ds;
-    Global::findDocuments(&ds,Mtype_str);
-    QListIterator<DocLnk> dit(ds.children());
-    for( ; dit.current(); ++dit) {
-        owarn << (*dit)->file() << oendl;
-        m_namemap[(*dit)->name()]=(*dit)->file();
-        m_filemap[(*dit)->file()]=(*dit)->name();
-        m_out.append((*dit)->name());
+    if (m_namemap.isEmpty()) {
+        DocLnkSet ds;
+        Global::findDocuments(&ds,Mtype_str);
+        QListIterator<DocLnk> dit(ds.children());
+        for( ; dit.current(); ++dit) {
+            owarn << (*dit)->file() << oendl;
+            m_namemap[(*dit)->name()]=(*dit)->file();
+            m_filemap[(*dit)->file()]=(*dit)->name();
+        }
     }
-    owarn << "Set start path end" << oendl;
-    return "";
+    return QString::null;
 }
 
 QString Doc_DirLister::currentPath()const {
-      return "";
+      return QString::null;
 }
 
 
@@ -65,10 +64,16 @@ QStringList Doc_DirLister::folders()const {
 }
 
 QStringList Doc_DirLister::files()const {
-    return m_out;
+    QStringList out;
+    QMap<QString,QString>::ConstIterator it;
+    for (it = m_namemap.begin();it != m_namemap.end();++it) {
+        out.append(it.key());
+    }
+    return out;
 }
 
-void Doc_DirLister::deleteImage( const QString& ) {
+void Doc_DirLister::deleteImage( const QString& )
+{
 }
 
 void Doc_DirLister::thumbNail( const QString& str, int w, int h) {
@@ -95,7 +100,6 @@ void Doc_DirLister::imageInfo( const QString& str) {
         return;
     }
     QString fname = m_namemap[str];
-    owarn << "Image info: " << fname << oendl;
     SlaveMaster::self()->thumbInfo( fname );
 }
 

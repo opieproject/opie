@@ -239,7 +239,9 @@ void PIconView::initKeys() {
 /*
  * change one dir up
  */
-void PIconView::slotDirUp() {
+void PIconView::slotDirUp()
+{
+    if (m_path.isEmpty()) return;
     QDir dir( m_path );
     dir.cdUp();
     slotChangeDir( dir.absPath() );
@@ -580,6 +582,8 @@ void PIconView::slotChangeMode( int mode ) {
         m_mode = mode;
 
     m_cfg->writeEntry("ListViewMode", m_mode);
+    /* performance! */
+    m_view->clear();
     calculateGrid();
     slotReloadDir();
 }
