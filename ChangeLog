@@ -8,8 +8,10 @@
     
 	BugFixes
 	--------
-	* #1324 - ZSafe not starting up (mickeyl)
+	* #1068 - Country Drop Down Box Off Screen
+	* #1294 - opie does not know about British Summer Time
 	* #1314 - Drawpad initialization (mickeyl)
+	* #1324 - ZSafe not starting up (mickeyl)
 	* #1348 - Datebook dependency on libopiedb2 (chicken)
 
 2004-25-04	The Opie Team <opie@handhelds.org>
