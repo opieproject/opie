@@ -146,7 +146,7 @@ QImage Skin::buttonMaskImage( const QString &fileName ) const
     SkinData::ButtonMaskImageMap::Iterator it = d->buttonMasks.find( fileName );
     if ( it == d->buttonMasks.end() ) {
         QString prefix = m_skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( m_fileNameInfix );
-        QString path = prefix + fileName + ".png";
+        QString path = prefix + fileName;
         it = d->buttonMasks.insert( fileName, loadImage( path ) );
     }
     return *it;
