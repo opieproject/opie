@@ -3,7 +3,7 @@
     <name>AbTable</name>
     <message>
         <source>Full Name</source>
-        <translation>Voller Name</translation>
+        <translation>Kompletter Name</translation>
     </message>
     <message>
         <source>Contact</source>
@@ -133,7 +133,7 @@ Daten eingeben!</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Kategorie</translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Small</source>
@@ -302,46 +302,47 @@ trotzdem öffnen?</translation>
     <name>ConfigDlg_Base</name>
     <message>
         <source>Query Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Eingabemuster</translation>
     </message>
     <message>
         <source>Use Regular Expressions</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutze reguläre Ausdrücke</translation>
     </message>
     <message>
         <source>Use Wildcards (*,?)</source>
-        <translation type="unfinished"></translation>
+        <translation>Benutze Wildcards (*,?)</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Beachte Großschreibung</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Mail</translation>
     </message>
     <message>
         <source>Prefer QT-Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>Bevorzuge QT-Mail</translation>
     </message>
     <message>
         <source>Prefer Opie-Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Bevorzuge Opie-Mail</translation>
     </message>
     <message>
         <source>Notice: QT-Mail is just 
 provided in the SHARP 
 default ROM. Opie-Mail 
 is provided free !</source>
-        <translation type="unfinished"></translation>
+        <translation>Beachte: QT-Mail is nur im Sharp Default-Rom enthalten. Opie-Mail
+ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiedenes</translation>
     </message>
     <message>
         <source>Search Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Sucheinstellungen</translation>
     </message>
     <message>
         <source>Font</source>
@@ -361,11 +362,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Order</source>
-        <translation type="unfinished"></translation>
+        <translation>Reihenfolge</translation>
     </message>
     <message>
         <source>Select Contact Order:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle Reihenfolge für Kontakt:</translation>
     </message>
     <message>
         <source>Up</source>
@@ -377,11 +378,11 @@ is provided free !</source>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Hinzufügen</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfernen</translation>
     </message>
 </context>
 <context>
