@@ -107,19 +107,19 @@ REQUIRES=
 
 main.o: main.cpp \
 		minesweep.h \
-		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/qpeapplication.h
+		$(OPIEDIR)/include/qpe/qpeapplication.h
 
 minefield.o: minefield.cpp \
 		minefield.h \
-		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/config.h
+		$(OPIEDIR)/include/qpe/config.h
 
 minesweep.o: minesweep.cpp \
 		minesweep.h \
 		minefield.h \
-		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/resource.h \
-		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/config.h \
-		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/qpetoolbar.h \
-		/home/kergoth/roms/openzaurus/buildroot-oz/build/opie/include/qpe/qpemenubar.h
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h \
+		$(OPIEDIR)/include/qpe/qpemenubar.h
 
 moc_minefield.o: moc_minefield.cpp \
 		minefield.h
