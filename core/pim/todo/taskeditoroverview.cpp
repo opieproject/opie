@@ -87,7 +87,7 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     QWhatsThis::add( cmbDesc, tr( "Enter brief description of the task here." ) );
 
     // Priority
-    label = new QLabel( tr( "Priority:" ), container );
+    label = new QLabel( QWidget::tr( "Priority:" ), container );
     layout->addWidget( label, 2, 0 );
     QWhatsThis::add( label, tr( "Select priority of task here." ) );
     cmbPriority = new QComboBox( FALSE, container );

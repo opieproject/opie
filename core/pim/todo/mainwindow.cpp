@@ -88,49 +88,49 @@ void MainWindow::initTemplate() {
 void MainWindow::initActions() {
     
     // Data menu
-    m_edit->insertItem(tr("New from template"), m_template,
+    m_edit->insertItem(QWidget::tr("New from template"), m_template,
                        -1, 0 );
     
-    QAction* a = new QAction( tr("New Task" ), Resource::loadPixmap( "new" ),
+    QAction* a = new QAction( QWidget::tr("New Task" ), Resource::loadPixmap( "new" ),
                               QString::null, 0, this, 0 );
     connect(a, SIGNAL( activated() ),
             this, SLOT( slotNew() ) );
-    a->setWhatsThis( tr( "Click here to create a new task." ) );
+    a->setWhatsThis( QWidget::tr( "Click here to create a new task." ) );
     a->addTo(m_tool );
     a->addTo(m_edit );
 
-    a = new QAction( tr("Edit Task"), Resource::loadIconSet( "edit" ),
+    a = new QAction( QWidget::tr("Edit Task"), Resource::loadIconSet( "edit" ),
                      QString::null, 0, this, 0 );
     connect(a, SIGNAL(activated() ),
             this, SLOT( slotEdit() ) );
-    a->setWhatsThis( tr( "Click here to modify the current task." ) );
+    a->setWhatsThis( QWidget::tr( "Click here to modify the current task." ) );
     a->addTo( m_tool );
     a->addTo( m_edit );
     m_editAction = a;
 
-    a = new QAction( QString::null, tr("View Task"), 0, this, 0 );
+    a = new QAction( QString::null, QWidget::tr("View Task"), 0, this, 0 );
     connect(a, SIGNAL( activated() ),
             this, SLOT( slotShowDetails() ) );
     a->addTo( m_edit );
 
     m_edit->insertSeparator();
 
-    a = new QAction( tr("Delete..."),  Resource::loadIconSet( "trash" ),
+    a = new QAction( QWidget::tr("Delete..."),  Resource::loadIconSet( "trash" ),
                      QString::null, 0, this, 0 );
     connect(a, SIGNAL(activated() ),
             this, SLOT(slotDelete() ) );
-    a->setWhatsThis( tr( "Click here to remove the current task." ) );
+    a->setWhatsThis( QWidget::tr( "Click here to remove the current task." ) );
     a->addTo( m_tool );
     a->addTo( m_edit );
     m_deleteAction = a;
 
-    a = new QAction( QString::null, tr("Delete all..."), 0, this, 0 );
+    a = new QAction( QString::null, QWidget::tr("Delete all..."), 0, this, 0 );
     connect(a, SIGNAL( activated() ),
             this, SLOT( slotDeleteAll() ) );
     a->addTo(m_edit );
     m_deleteAllAction = a;
 
-    a = new QAction( QString::null, tr("Delete completed"),
+    a = new QAction( QString::null, QWidget::tr("Delete completed"),
                      0, this, 0 );
     connect(a, SIGNAL( activated() ),
             this, SLOT( slotDeleteCompleted() ) );
@@ -140,7 +140,7 @@ void MainWindow::initActions() {
 
     m_edit->insertSeparator();
 
-    a = new QAction( QString::null, tr("Duplicate"), 0, this, 0 );
+    a = new QAction( QString::null, QWidget::tr("Duplicate"), 0, this, 0 );
     connect(a, SIGNAL( activated() ),
             this, SLOT( slotDuplicate() ) );
     a->addTo(m_edit );
@@ -149,15 +149,15 @@ void MainWindow::initActions() {
     m_edit->insertSeparator();
 
     if ( Ir::supported() ) {
-        a = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ), QString::null, 0, this, 0 );
+        a = new QAction( QWidget::tr( "Beam" ), Resource::loadPixmap( "beam" ), QString::null, 0, this, 0 );
         connect( a, SIGNAL( activated() ), this, SLOT( slotBeam() ) );
-        a->setWhatsThis( tr( "Click here to send the current task to another device." ) );
+        a->setWhatsThis( QWidget::tr( "Click here to send the current task to another device." ) );
         a->addTo( m_edit );
         a->addTo( m_tool );
     }
 
     // Options menu
-    a = new QAction( tr("Find"), Resource::loadIconSet( "mag" ),
+    a = new QAction( QWidget::tr("Find"), Resource::loadIconSet( "mag" ),
                      QString::null, 0, this, 0 );
     connect(a, SIGNAL( activated() ), this, SLOT( slotFind() ) );
     a->addTo( m_options );
@@ -165,25 +165,25 @@ void MainWindow::initActions() {
 
     m_options->insertSeparator();
 
-    m_completedAction = new QAction( QString::null, tr("Show completed tasks"),
+    m_completedAction = new QAction( QString::null, QWidget::tr("Show completed tasks"),
                                      0, this, 0, TRUE );
     m_completedAction->addTo( m_options );
     m_completedAction->setOn( showCompleted() );
     connect(m_completedAction, SIGNAL( toggled(bool) ), this, SLOT(slotShowCompleted(bool) ) );
 
-    a = new QAction( QString::null, tr("Show only over-due tasks"),
+    a = new QAction( QString::null, QWidget::tr("Show only over-due tasks"),
                      0, this, 0, TRUE );
     a->addTo( m_options );
     a->setOn( showOverDue() );
     connect(a, SIGNAL(toggled(bool)), this, SLOT(slotShowDue(bool) ) );
 
-    m_showDeadLineAction = new QAction( QString::null, tr("Show task deadlines"),
+    m_showDeadLineAction = new QAction( QString::null, QWidget::tr("Show task deadlines"),
                                         0, this, 0, TRUE );
     m_showDeadLineAction->addTo( m_options );
     m_showDeadLineAction->setOn( showDeadline() );
     connect(m_showDeadLineAction, SIGNAL(toggled(bool) ), this, SLOT( slotShowDeadLine( bool ) ) );
 
-    m_showQuickTaskAction = new QAction( QString::null, tr("Show quick task bar"),
+    m_showQuickTaskAction = new QAction( QString::null, QWidget::tr("Show quick task bar"),
                                      0, this, 0, TRUE );
     m_showQuickTaskAction->addTo( m_options );
     m_showQuickTaskAction->setOn( showQuickTask() );
@@ -191,12 +191,12 @@ void MainWindow::initActions() {
 
     m_options->insertSeparator();
 
-    m_bar->insertItem( tr("Data") ,m_edit );
-    m_bar->insertItem( tr("Category"),  m_catMenu );
-    m_bar->insertItem( tr("Options"), m_options );
+    m_bar->insertItem( QWidget::tr("Data") ,m_edit );
+    m_bar->insertItem( QWidget::tr("Category"),  m_catMenu );
+    m_bar->insertItem( QWidget::tr("Options"), m_options );
 
     m_curQuick = new QuickEditImpl( this, m_quicktask );
-    addToolBar( (QPEToolBar *)m_curQuick->widget(), tr( "QuickEdit" ), QMainWindow::Top, TRUE );
+    addToolBar( (QPEToolBar *)m_curQuick->widget(), QWidget::tr( "QuickEdit" ), QMainWindow::Top, TRUE );
     m_curQuick->signal()->connect( this, SLOT(slotQuickEntered() ) );
 
 }
@@ -237,7 +237,7 @@ void MainWindow::initUI() {
 }
 void MainWindow::initViews() {
     TableView* tableView = new TableView( this, m_stack );
-    QWhatsThis::add( tableView, tr( "This is a listing of all current tasks.\n\nThe list displays the following information:\n1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.\n2. Priority - a graphical representation of task priority.  Double-click here to modify.\n3. Description - description of task.  Click here to select the task.\n4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options->'Show task deadlines' from the menu above." ) );
+    QWhatsThis::add( tableView, QWidget::tr( "This is a listing of all current tasks.\n\nThe list displays the following information:\n1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.\n2. Priority - a graphical representation of task priority.  Double-click here to modify.\n3. Description - description of task.  Click here to select the task.\n4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options->'Show task deadlines' from the menu above." ) );
     m_stack->addWidget( tableView,  m_counter++ );
     m_views.append( tableView );
     m_curView = tableView;
@@ -295,7 +295,7 @@ OTodoAccess::List MainWindow::list()const {
 }
 OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     int cat = 0;
-    if ( m_curCat != tr("All Categories") )
+    if ( m_curCat != QWidget::tr("All Categories") )
         cat = currentCatId();
 
     int filter = 1;
@@ -309,7 +309,7 @@ OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
 }
 OTodoAccess::List MainWindow::sorted( bool asc, int sortOrder, int addFilter) {
     int cat = 0;
-    if ( m_curCat != tr("All Categories") )
+    if ( m_curCat != QWidget::tr("All Categories") )
         cat = currentCatId();
 
     return m_todoMgr.sorted(asc, sortOrder, addFilter,  cat );
@@ -353,8 +353,8 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
         qWarning("saved");
         quit = true;
     }else {
-	if ( QMessageBox::critical( this, tr("Out of space"),
-				    tr("Todo was unable\n"
+	if ( QMessageBox::critical( this, QWidget::tr("Out of space"),
+				    QWidget::tr("Todo was unable\n"
 				       "to save your changes.\n"
 				       "Free up some space\n"
 				       "and try again.\n"
@@ -421,8 +421,8 @@ void MainWindow::slotNew() {
 }
 void MainWindow::slotDuplicate() {
     if(m_syncing) {
-        QMessageBox::warning(this, tr("Todo"),
-                             tr("Can not edit data, currently syncing"));
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Can not edit data, currently syncing"));
         return;
     }
     OTodo ev = m_todoMgr.event( currentView()->current() );
@@ -438,12 +438,12 @@ void MainWindow::slotDelete() {
         return;
 
     if(m_syncing) {
-	QMessageBox::warning(this, tr("Todo"),
-			     tr("Can not edit data, currently syncing"));
+	QMessageBox::warning(this, QWidget::tr("Todo"),
+			     QWidget::tr("Can not edit data, currently syncing"));
 	return;
     }
     QString strName = currentView()->currentRepresentation();
-    if (!QPEMessageBox::confirmDelete(this, tr("Todo"), strName ) )
+    if (!QPEMessageBox::confirmDelete(this, QWidget::tr("Todo"), strName ) )
         return;
 
     m_todoMgr.remove( currentView()->current() );
@@ -452,13 +452,13 @@ void MainWindow::slotDelete() {
 }
 void MainWindow::slotDeleteAll() {
     if(m_syncing) {
-        QMessageBox::warning(this, tr("Todo"),
-                             tr("Can not edit data, currently syncing"));
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Can not edit data, currently syncing"));
         return;
     }
 
 
-    if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all tasks?") ) )
+    if ( !QPEMessageBox::confirmDelete( this, QWidget::tr( "Todo" ), QWidget::tr("all tasks?") ) )
         return;
 
     m_todoMgr.removeAll();
@@ -468,12 +468,12 @@ void MainWindow::slotDeleteAll() {
 }
 void MainWindow::slotDeleteCompleted() {
     if(m_syncing) {
-        QMessageBox::warning(this, tr("Todo"),
-                             tr("Can not edit data, currently syncing"));
+        QMessageBox::warning(this, QWidget::tr("Todo"),
+                             QWidget::tr("Can not edit data, currently syncing"));
         return;
     }
 
-    if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("all completed tasks?") ) )
+    if ( !QPEMessageBox::confirmDelete( this, QWidget::tr( "Todo" ), QWidget::tr("all completed tasks?") ) )
         return;
 
 
@@ -499,14 +499,14 @@ void MainWindow::setCategory( int c) {
 
     if (c == 1 ) {
         m_curCat = QString::null;
-        setCaption( tr("Todo") + " - " + tr("All Categories" ) );
+        setCaption( QWidget::tr("Todo") + " - " + QWidget::tr("All Categories" ) );
 
     }else if ( c == (int)m_catMenu->count() - 1 ) {
-        m_curCat = tr("Unfiled");
-        setCaption( tr("Todo") + " - " + tr("Unfiled") );
+        m_curCat = QWidget::tr("Unfiled");
+        setCaption( QWidget::tr("Todo") + " - " + QWidget::tr("Unfiled") );
     }else {
         m_curCat = m_todoMgr.categories()[c-2];
-        setCaption( tr("Todo") + " - " + m_curCat );
+        setCaption( QWidget::tr("Todo") + " - " + m_curCat );
     }
     m_catMenu->setItemChecked( c, true );
 
@@ -553,9 +553,9 @@ void MainWindow::receiveFile( const QString& filename ) {
     acc.load();
     OTodoAccess::List list = acc.allRecords();
 
-    QString message = tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
+    QString message = QWidget::tr("<P>%1 new tasks arrived.<p>Would you like to add them to your Todolist?").arg(list.count() );
 
-    if ( QMessageBox::information(this, tr("New Tasks"),
+    if ( QMessageBox::information(this, QWidget::tr("New Tasks"),
                                   message, QMessageBox::Ok,
                                   QMessageBox::Cancel ) == QMessageBox::Ok ) {
         OTodoAccess::List::Iterator it;
@@ -585,10 +585,10 @@ void MainWindow::populateCategories() {
     id = 1;
     rememberId = 1;
 
-    m_catMenu->insertItem( tr( "All Categories" ), id++ );
+    m_catMenu->insertItem( QWidget::tr( "All Categories" ), id++ );
     m_catMenu->insertSeparator();
     QStringList categories = m_todoMgr.categories();
-    categories.append( tr( "Unfiled" ) );
+    categories.append( QWidget::tr( "Unfiled" ) );
     for ( QStringList::Iterator it = categories.begin();
 	  it != categories.end(); ++it ) {
 	m_catMenu->insertItem( *it, id );
@@ -631,8 +631,8 @@ void MainWindow::slotShow( int uid ) {
 }
 void MainWindow::slotEdit( int uid ) {
     if(m_syncing) {
-	QMessageBox::warning(this, tr("Todo"),
-			     tr("Can not edit data, currently syncing"));
+	QMessageBox::warning(this, QWidget::tr("Todo"),
+			     QWidget::tr("Can not edit data, currently syncing"));
 	return;
     }
 
@@ -749,8 +749,8 @@ void MainWindow::reload() {
 int MainWindow::create() {
     int uid = 0;
     if(m_syncing) {
-	QMessageBox::warning(this, tr("Todo"),
-			     tr("Can not edit data, currently syncing"));
+	QMessageBox::warning(this, QWidget::tr("Todo"),
+			     QWidget::tr("Can not edit data, currently syncing"));
 	return uid;
     }
 

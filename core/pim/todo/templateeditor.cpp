@@ -21,7 +21,7 @@ TemplateEditor::~TemplateEditor() {
 }
 /* ok we add us to the Menubar */
 void TemplateEditor::init() {
-    QAction* a = new QAction( QString::null, tr("Configure Templates"),
+    QAction* a = new QAction( QString::null, QWidget::tr("Configure Templates"),
                               0, this, 0, FALSE );
     connect(a, SIGNAL(activated() ),
             this, SLOT(setUp() ) );
