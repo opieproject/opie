@@ -1,6 +1,7 @@
 #ifndef __FIXED_H__
 #define __FIXED_H__
 
+#include <stdlib.h>
 #include <iostream>
 
 #define _GCC_TEMPLATE_BUG_ 1
