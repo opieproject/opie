@@ -51,7 +51,8 @@ QRESULT WeatherPluginImpl::queryInterface( const QUuid &uuid, QUnknownInterface 
 	if ( ( uuid == IID_QUnknown ) || ( uuid == IID_TodayPluginInterface ) )
 	{
 		*iface = this, (*iface)->addRef();
-	}
+	}else
+	    return QS_FALSE;
 
 	return QS_OK;
 }
