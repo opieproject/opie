@@ -1,4 +1,3 @@
-#include "useqpe.h"
 #include "usenef.h"
 #include <stdio.h>
 #include <string.h>
@@ -21,7 +20,6 @@
 #endif /* USEQPE */
 #include <qimage.h>
 
-#include "static.h"
 #include "plucker_base.h"
 #include "Aportis.h"
 #include "hrule.h"
@@ -1359,7 +1357,6 @@ tchar CPlucker_base::getch_base(bool fast)
   return (ch == EOF) ? UEOF : ch;
 }
 
-#include "static.h"
 #if defined(__STATIC) && defined(USENEF)
 #include "Model.h"
 void (*CPlucker_base::getdecompressor(const QString& _s))(UInt8*, size_t, UInt8*, size_t)

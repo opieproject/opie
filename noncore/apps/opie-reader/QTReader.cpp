@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.12 2004-08-24 20:52:46 pohly Exp $
+** $Id: QTReader.cpp,v 1.13 2004-08-26 05:57:55 pohly Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -10,7 +10,6 @@
 
 const int _SBARHEIGHT = 3;
 
-#include "useqpe.h"
 #include <qpainter.h>
 //#include <qdirectpainter_qws.h>
 #include <qimage.h>

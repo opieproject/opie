@@ -9,7 +9,6 @@
 #ifndef __CLOSEDIALOG_H
 #define __CLOSEDIALOG_H
 
-#include "useqpe.h"
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qtabdialog.h>

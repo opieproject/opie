@@ -3,7 +3,6 @@
 #include <winsock2.h>
 #endif
 
-#include "useqpe.h"
 
 #ifdef USEQPE
 void Cpdb::suspend()

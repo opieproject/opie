@@ -1,4 +1,3 @@
-#include "useqpe.h"
 #include <stdio.h>
 #include <string.h>
 #include <qmessagebox.h>
@@ -20,7 +19,6 @@
 #include "plucker.h"
 #include "Aportis.h"
 #include "Palm2QImage.h"
-#include "static.h"
 
 
 struct CPlucker_dataRecord

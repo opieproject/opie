@@ -9,7 +9,6 @@
 #ifndef __URLDIALOG_H
 #define __URLDIALOG_H
 
-#include "useqpe.h"
 #include <qvariant.h>
 #include <qwidget.h>
 #include <qtabdialog.h>

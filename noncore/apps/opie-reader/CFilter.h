@@ -391,7 +391,6 @@ class HighlightFilter : public CFilter
   QString about() { return QString("High-lighting filter (c) Tim Wentford\n")+parent->about(); }
 };
 
-#include "static.h"
 #ifndef __STATIC
 #include <dlfcn.h>
 

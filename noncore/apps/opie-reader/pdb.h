@@ -4,7 +4,7 @@
  * Palm SDK.  However, I don't want to require the presense of the SDK for a
  * small utility since most Palm owners won't have it.
  *
- * $Id: pdb.h,v 1.6 2004-08-24 20:52:46 pohly Exp $
+ * $Id: pdb.h,v 1.7 2004-08-26 05:57:55 pohly Exp $
  *
  */
 
@@ -15,7 +15,6 @@
 #include <netinet/in.h>
 #endif
 #include <stdio.h>
-#include "useqpe.h"
 #include "CExpander.h"
 
 /* Normal Palm typedefs */

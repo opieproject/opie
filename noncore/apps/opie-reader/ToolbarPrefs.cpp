@@ -6,7 +6,6 @@
 **
 ** WARNING! All changes made in this file will be lost!
 ****************************************************************************/
-#include "useqpe.h"
 #include "ToolbarPrefs.h"
 
 #include <qcheckbox.h>

@@ -11,7 +11,7 @@ INTERFACES	=
 DESTDIR		= $(OPIEDIR)/lib
 TARGET		= reader_codec
 
-INCLUDEPATH	+= ../OREADERINC $(OPIEDIR)/include
-DEPENDPATH	+= ../OREADERINC $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 
 include ( $(OPIEDIR)/include.pro )

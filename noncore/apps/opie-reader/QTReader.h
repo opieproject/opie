@@ -2,7 +2,6 @@
 #define __QTREADER_H
 
 //#define _SCROLLPIPE
-#include "static.h"
 #include <qwidget.h>
 //#include <qpainter.h>
 #include "my_list.h"

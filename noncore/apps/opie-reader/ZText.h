@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <zlib.h>
 #include <sys/stat.h>
-#include "useqpe.h"
 #include "CExpander.h"
 
 class Text: public CExpander {

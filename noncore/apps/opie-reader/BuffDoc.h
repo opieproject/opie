@@ -1,7 +1,6 @@
 #ifndef __BuffDoc_h
 #define __BuffDoc_h
 
-#include "useqpe.h"
 #include "CDrawBuffer.h"
 #include "CFilter.h"
 #include "CExpander.h"

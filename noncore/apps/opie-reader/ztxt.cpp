@@ -3,7 +3,6 @@
 #include "ztxt.h"
 #include "my_list.h"
 #include "Bkmks.h"
-#include "static.h"
 
 ztxt::ztxt() : bInit(false), expandedtextbuffer(NULL), compressedtextbuffer(NULL) { /*printf("constructing:%x\n",fin);*/ }
 

@@ -12,8 +12,8 @@ DESTDIR		= $(OPIEDIR)/plugins/reader/codecs
 TARGET		= iSilo
 LIBS            += -lreader_pdb -lreader_codec
 
-INCLUDEPATH	+= ../OREADERINC $(OPIEDIR)/include
-DEPENDPATH	+= ../OREADERINC $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 
 include ( $(OPIEDIR)/include.pro )
 

@@ -1,7 +1,6 @@
 #ifndef __ppm_expander_h
 #define __ppm_expander_h
 
-#include "useqpe.h"
 #include "CExpander.h"
 #include <sys/stat.h>
 

@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "static.h"
 
 /***************************************************************************
  * Interface avec les routines de compression

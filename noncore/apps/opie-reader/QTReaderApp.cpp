@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#include "useqpe.h"
 #include <qregexp.h>
 #include <qclipboard.h>
 #include <qwidgetstack.h>
@@ -83,7 +82,6 @@ using namespace Opie::Ui;
 #include "QTReaderApp.h"
 #include "CDrawBuffer.h"
 #include "Filedata.h"
-#include "useqpe.h"
 #include "names.h"
 #include "CEncoding_tables.h"
 #include "CloseDialog.h"

@@ -1,4 +1,3 @@
-#include "useqpe.h"
 #ifndef USEQPE
 #ifndef __PREFERENCES_H
 #define __PREFERENCES_H

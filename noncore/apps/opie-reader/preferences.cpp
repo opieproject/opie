@@ -1,4 +1,3 @@
-#include "useqpe.h"
 #ifndef USEQPE
 
 #include "preferences.h"

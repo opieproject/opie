@@ -2,7 +2,6 @@
 #include <qfileinfo.h>
 #include <qtextstream.h>
 #include <qdir.h>
-#include "useqpe.h"
 #ifdef USEQPE
 #include <qpe/global.h>
 #endif

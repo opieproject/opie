@@ -26,7 +26,6 @@
 //#define MAX_ENCODING 6
 #define MAX_ACTIONS 5
 
-#include "useqpe.h"
 #include <sys/timeb.h>
 #include <qmainwindow.h>
 #include "CExpander.h"

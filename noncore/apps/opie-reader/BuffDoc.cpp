@@ -1,10 +1,8 @@
-#include "static.h"
 #include "names.h"
 
 #define NEWLINEBREAK
 #define INCREMENTALWIDTH
 
-#include "useqpe.h"
 #include "usenef.h"
 #include "BuffDoc.h"
 #include "config.h"

@@ -2,7 +2,6 @@
 #define __CHM_h
 #include <stdio.h>
 #include <sys/stat.h>
-#include "useqpe.h"
 #include "CExpander.h"
 #include "chm_lib.h"
 #include "my_list.h"

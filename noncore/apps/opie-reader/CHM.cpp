@@ -1,6 +1,5 @@
 #include "CHM.h"
 #include "chm_lib.h"
-#include "static.h"
 #include <qstring.h>
 #include <qstringlist.h>
 #include <stdio.h>

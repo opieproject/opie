@@ -3,14 +3,12 @@
 #include <qfileinfo.h>
 #include <qdir.h>
 
-#include "useqpe.h"
 #ifdef USEQPE
 #include <qpe/global.h>
 #endif
 
 #include "util.h"
 
-#include "static.h"
 #ifndef __STATIC
 #include <dlfcn.h>
 class ebookcodec : public CExpander_Interface

@@ -4,7 +4,6 @@
 #include <qpainter.h>
 #include <qpixmap.h>
 #include <qimage.h>
-#include "useqpe.h"
 
 CDrawBuffer::~CDrawBuffer()
 {

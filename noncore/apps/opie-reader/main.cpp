@@ -1,4 +1,3 @@
-#include "useqpe.h"
 #ifdef USEQPE
 #include <qpe/qpeapplication.h>
 #else

@@ -3,7 +3,6 @@
 #include "Aportis.h"
 #include "my_list.h"
 #include "Bkmks.h"
-#include "static.h"
 
 Aportis::Aportis() : peanutfile(false) { /*printf("constructing:%x\n",fin);*/ }
 

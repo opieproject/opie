@@ -8,7 +8,6 @@
 #include <time.h>
 #include <sys/stat.h>
 #include <qmessagebox.h>
-#include "useqpe.h"
 #include "config.h"
 #include "StyleConsts.h"
 #include "Markups.h"

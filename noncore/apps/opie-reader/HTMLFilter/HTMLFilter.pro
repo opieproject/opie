@@ -14,7 +14,7 @@ INTERFACES	=
 DESTDIR		= $(OPIEDIR)/plugins/reader/filters
 TARGET		= HTMLfilter
 
-INCLUDEPATH	+= ../OREADERINC $(OPIEDIR)/include
-DEPENDPATH	+= ../OREADERINC $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
 
 include ( $(OPIEDIR)/include.pro )
