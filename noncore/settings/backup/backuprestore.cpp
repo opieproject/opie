@@ -70,7 +70,7 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     {
         backupLocations.insert("CF", "/mnt/cf");
     }
-    if (StorageInfo::hasSd || StorageInfo::hasMmc)
+    if (StorageInfo::hasSd() || StorageInfo::hasMmc())
     {
         backupLocations.insert("SD", "/mnt/card");
     }
