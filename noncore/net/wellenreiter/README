@@ -5,14 +5,22 @@
 /*                                                  Version: Opie-ALPHA  */
 /*************************************************************************/
 
+--------------------------------------------------
 Release Notes for Opie-ALPHA Version December 2002
 --------------------------------------------------
 
+=====================
 = Supported Devices =
+=====================
 
 * low-level orinoco_cs-based (including prism2 and spectrum_cs)
 
-= Build =
+* Supported Interfaces: wlan0 (yes, I know this is hardcoded and
+  lame, but we're in a hurry and this can be configured soon...)
+
+=====================
+=      Build        =
+=====================
 
 To compile Wellenreiter within the Opie build environment, add the
 following directories to $OPIEDIR/Makefile, e.g. to 'NONAPPS='
@@ -22,15 +30,56 @@ noncore/net/wellenreiter/daemon \
 noncore/net/wellenreiter/contrib/orinoco_hopper \
 noncore/net/wellenreiter/gui
 
-./configure and rebuild.
+./configure and rebuild. Note that you need libpcap in your toolchain.
 
-= Run =
+=====================
+=     Install       =
+=====================
 
-1. Place card in monitor mode: iwpriv <interface> 2 1
-2. Start $OPIEDIR/bin/orinoco_hopper <interface>
-3. Start Wellenreiter
+Alternatively, you can use our precompiled ipk. Get it from
+http://opie.net.wox.org/elan/current. You will also need libpcap.
 
-= Credits =
+=====================
+=       Run         =
+=====================
+
+1. Place card in monitor mode. This is device dependent.
+
+   Caution: Don't do this while you're logged in via ssh
+   or otherwise using the wireless interface - your connection
+   will freeze: The card can't be used normally when sniffing!
+
+   For most orinoco-based cards this can be done using
+   'iwpriv <interface> 2' or 'iwpriv <interface> 2 1'.  
+   
+   You can check if this works, by calling 'ifconfig <interface>'.
+   If you see 'Protocol: UNSPEC' and an unusual long MAC-Address,
+   then your card has been successfully set to the monitor mode.
+
+2. Start a channel hopper. A wireless card has several channels
+   (e.g. radio frequencies) here it can listen for beacons.
+   Beacons are management data frames from other stations.
+   Remember, this is radio transmission, so the card has to be
+   "tuned" to a certain channel to be able to receive the beacons.
+   
+   In order to scan the complete frequency spectrum and thus be able
+   to detect all available stations, you have to 'hop' through the
+   channels frequently. You can do this manually (e.g. with 'iwconfig')
+   [hahaha] or you can use a channel hopper.  
+   
+   For convenience, the current Wellenreiter Alpha comes with a 
+   channel hopper for Orinoco-based cards. Start this via 
+   orinoco_hopper <interface>.
+
+3. Start the Wellenreiter sniffing daemon: wellenreiterd.
+
+4. Start the Wellenreiter GUI and sniff like hell. Don't press the button
+   "Start Scan" yet, because it enables the demo mode and will crash the
+   wellenreiterd daemon if running.
+
+=====================
+=     Credits       =
+=====================
 
 Sniffer: Max Moser <max@remote-exploit.org>
 Communication and Protocol: Martin J. Muench <mjm@remote-exploit.org>
