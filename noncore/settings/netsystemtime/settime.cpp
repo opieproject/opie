@@ -261,16 +261,16 @@ void  SetDateTime::setTime(QDateTime dt)
   if ( myTv.tv_sec != -1 )
       ::settimeofday( &myTv, 0 );
   Global::writeHWClock();
+  // since time has changed quickly load in the datebookdb
+  // to allow the alarm server to get a better grip on itself
+  // (example re-trigger alarms for when we travel back in time)
+  DateBookDB db;
 }
 
 void SetDateTime::updateSystem(int i)
 {
 	qDebug("SetDateTime::updateSystem(int %i)",i);
  	writeSettings();
-  // since time has changed quickly load in the datebookdb
-  // to allow the alarm server to get a better grip on itself
-  // (example re-trigger alarms for when we travel back in time)
- // DateBookDB db;
 
     // set the timezone for everyone else...
     QCopEnvelope setTimeZone( "QPE/System", "timeChange(QString)" );
@@ -291,6 +291,10 @@ void SetDateTime::updateSystem(int i)
     // Restore screensaver
     QCopEnvelope enableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
     enableScreenSaver << -1 << -1 << -1;
+  // since time has changed quickly load in the datebookdb
+  // to allow the alarm server to get a better grip on itself
+  // (example re-trigger alarms for when we travel back in time)
+  DateBookDB db;
 
 }
 

@@ -6,6 +6,7 @@
 #include <qsocket.h>
 #include <qlineedit.h>
 #include <qspinbox.h>
+#include <qmessagebox.h>
 #include <qmultilineedit.h>
 #include <opie/oprocess.h>
 #include <qpe/config.h>
@@ -26,8 +27,8 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   cfg.setGroup("settings");
 // 	_maxOffset = cfg.readNumEntry("maxOffset",5);
 //  _minLookupDiff = cfg.readNumEntry("minLookupDiff",10);
-	SpinBoxMinDelay->setValue( cfg.readNumEntry("minLookupDiff",10) );
-	SpinBoxMinDelay->setMinValue( 7 );
+	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",60) );
+	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",60) );
   LineEditNtpSrv->setText( cfg.readEntry("ntpServer", tr("time.fu-berlin.de")) );
  	ntpProcess = new OProcess( );
 
@@ -52,12 +53,31 @@ Ntp::~Ntp()
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
   cfg.writeEntry("ntpServer", LineEditNtpSrv->text());
-  cfg.writeEntry( "minLookupDiff", SpinBoxMinDelay->value() );
+  cfg.writeEntry( "minLookupDiff", SpinBoxMinLookupDelay->value() );
+ 	cfg.writeEntry( "ntpRefreshFreq", SpinBoxNtpDelay->value() );
 }
 
 
 void Ntp::slotRunNtp()
 {
+	Config cfg("ntp",Config::User);
+  cfg.setGroup("lookups");
+  int lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
+
+  if ( lookupDiff < SpinBoxNtpDelay->value()*60 )
+  {
+  	switch (
+   	 QMessageBox::warning(this, tr("Run ntp?"),
+     tr("You asked for a delay of ")+SpinBoxNtpDelay->text()+tr(" minutes, but only ")+
+     QString::number(lookupDiff%60)+tr(" minutes elapsed since last loopup.")+
+     "<br>"+tr("Rerun ntp?"),
+     QMessageBox::Ok,QMessageBox::Cancel)
+   	) {
+	    	case QMessageBox::Ok:     break;
+  	   	case QMessageBox::Cancel: return;
+    	  default: return;
+      }
+  }
 	TextLabelStartTime->setText(QDateTime::currentDateTime().toString());
 	ntpProcess->clearArguments();
 	*ntpProcess << "ntpdate" << LineEditNtpSrv->text();
@@ -95,7 +115,8 @@ void  Ntp::ntpFinished(OProcess*)
   if (timeShift == 0.0) return;
  	int secsSinceLast = time - lastLookup;
   TextLabelNewTime->setText(QDateTime::currentDateTime().toString());
-  if ( lastLookup > 0 && secsSinceLast > 60*24* SpinBoxMinDelay->value())
+  TextLabelTimeShift->setText(QString::number(timeShift)+tr(" seconds"));
+  if ( lastLookup > 0 && secsSinceLast > 60* SpinBoxMinLookupDelay->value())
   {
 	  lookupCount++;
    	cfg.writeEntry("count",lookupCount);
@@ -108,28 +129,6 @@ void  Ntp::ntpFinished(OProcess*)
   }
 }
 
-//void Ntp::correctClock()
-//{
-//	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
-//	Config cfg("ntp",Config::User);
-//  cfg.setGroup("correction");
-// 	int lastTime = cfg.readNumEntry("time",0);
-//  if ( lastTime == 0 )
-//  {
-//   	return;
-//  }
-//  int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
-//  int corr = int((now - lastTime) * _shiftPerSec);
-//  struct timeval myTv;
-//  myTv.tv_sec = TimeConversion::toUTC( QDateTime::currentDateTime().addSecs(corr) );
-//  myTv.tv_usec = 0;
-//
-//  if ( myTv.tv_sec != -1 )
-//      ::settimeofday( &myTv, 0 );
-//  Global::writeHWClock();
-//  cfg.writeEntry("time",now);
-//	qDebug("current time: %s",QDateTime::currentDateTime().toString().latin1());
-//}
 
 float Ntp::getTimeShift()
 {
@@ -143,7 +142,6 @@ float Ntp::getTimeShift()
   QString diff = _ntpOutput.mid(posOffset, posEndOffset-posOffset-1);
   qDebug("%s", _ntpOutput.latin1());
   qDebug("diff = >%s<",diff.latin1());
-  TextLabelTimeShift->setText(diff);
   return diff.toFloat();
 }
 
@@ -164,6 +162,8 @@ void Ntp::readLookups()
   TableLookups->setColumnWidth( 0, cw+30 );
   TableLookups->setColumnWidth( 1, cw );
   TableLookups->setColumnWidth( 2, cw );
+  TableLookups->sortColumn(0, false, true );
+ // TableLookups->setSorting( true );
   for (int i=0; i < lookupCount; i++)
   {
 	  cfg.setGroup("lookup_"+QString::number(i));
@@ -178,7 +178,7 @@ void Ntp::readLookups()
 	  TableLookups->setText( i,1,QString::number(last));
   }
   _shiftPerSec /= lookupCount+1;
-  TextLabelShift->setText(QString::number(_shiftPerSec));
+  TextLabelShift->setText(QString::number(_shiftPerSec)+tr(" seconds"));
 }
 
 void Ntp::preditctTime()
@@ -192,7 +192,7 @@ void Ntp::preditctTime()
   int corr = int((now - lastTime) * _shiftPerSec);
   predictedTime = QDateTime::currentDateTime().addSecs(corr);
  	TextLabelPredTime->setText(predictedTime.toString());
-  TextLabelMainPredTime->setText(predictedTime.toString());
+  TextLabelMainPredTime->setText(tr("Predicted time:")+"<br><b>"+predictedTime.toString()+"</b>");
 }
 
 void Ntp::setPredictTime()
@@ -210,7 +210,7 @@ void Ntp::slotCheckNtp(int i)
 	  connect( ButtonSetTime, SIGNAL(clicked()), SLOT(slotRunNtp()) );
   }else{
 	  preditctTime();
-		ButtonSetTime->setText( tr("Predict time") );
+		ButtonSetTime->setText( tr("Set predicted time") );
   	connect( ButtonSetTime, SIGNAL(clicked()), SLOT(setPredictTime()) );
   };
 }
