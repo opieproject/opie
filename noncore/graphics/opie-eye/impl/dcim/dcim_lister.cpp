@@ -152,7 +152,7 @@ QStringList DCIM_DirLister::findImages()const {
 void DCIM_DirLister::deleteImage( const QString& fl ) {
     QFileInfo inf( fl );
     QFile::remove( fl );
-    QFile::remove( inf.dirPath ()+"/preview"+
+    QFile::remove( inf.dirPath ()+"/preview/"+
                    inf.fileName() );
 }
 

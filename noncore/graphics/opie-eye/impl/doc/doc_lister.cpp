@@ -93,8 +93,18 @@ QStringList Doc_DirLister::files()const {
     return out;
 }
 
-void Doc_DirLister::deleteImage( const QString& )
+void Doc_DirLister::deleteImage( const QString& f)
 {
+    /*
+     * find the file in the set of doclnks
+     */
+    QListIterator<DocLnk> dit(m_ds.children());
+    for( ; dit.current(); ++dit) {
+        if ( f == (*dit)->file() ) {
+            (*dit)->removeFiles();
+            return;
+        }
+    }
 }
 
 void Doc_DirLister::thumbNail( const QString& str, int w, int h)
