@@ -1,23 +1,22 @@
 /**********************************************************************
- ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
- **
- ** This file is part of Qtopia Environment.
- **
- ** This file may be distributed and/or modified under the terms of the
- ** GNU General Public License version 2 as published by the Free Software
- ** Foundation and appearing in the file LICENSE.GPL included in the
- ** packaging of this file.
- **
- ** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
- ** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
- **
- ** See http://www.trolltech.com/gpl/ for GPL licensing information.
- **
- ** Contact info@trolltech.com if any conditions of this licensing are
- ** not clear to you.
- **
- **********************************************************************/
-// code added and Copyright (C) by L. J. Potter <ljp@llornkcor.com> 2002
+** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+**
+** This file is part of Qtopia Environment.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
+**
+** Contact info@trolltech.com if any conditions of this licensing are
+** not clear to you.
+**
+**********************************************************************/
 
 #include "clock.h"
 #include "setAlarm.h"
@@ -31,6 +30,8 @@
 #include <qpe/resource.h>
 #include <qsound.h>
 #include <qtimer.h>
+
+#include <opie/oclickablelabel.h>
 
 #include <qlcdnumber.h>
 #include <qslider.h>
@@ -56,7 +57,7 @@ static void toggleScreenSaver( bool on )
 }
 
 Clock::Clock( QWidget * parent, const char * name, WFlags f )
-        : QVBox( parent, name , f )
+    : QVBox( parent, name , f )
 {
     setSpacing( 4 );
     setMargin( 1 );
@@ -93,7 +94,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     date->setText( TimeString::longDateString( QDate::currentDate() ) );
 
     QWidget *controls = new QWidget( this );
-    QGridLayout *gl = new QGridLayout( controls, 2, 2, 6, 4 );
+    QGridLayout *gl = new QGridLayout( controls, 3, 2, 6, 4 );
 
     QButtonGroup *grp = new QButtonGroup( controls );
     grp->setRadioButtonExclusive( true );
@@ -132,6 +133,11 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     gl->addWidget( alarmBtn, 1, 2 );
     alarmBtn->setText( tr( "Set Alarm" ) );
 
+    OClickableLabel *click = new OClickableLabel(controls, "label" );
+    click->setText(tr("Set date and time." ) );
+    gl->addMultiCellWidget( click,  3,  3,  0, 2,  AlignHCenter);
+    connect( click, SIGNAL(clicked() ), this, SLOT(slotAdjustTime() ) );
+
     connect( set, SIGNAL( pressed() ), SLOT( slotSet() ) );
     connect( reset, SIGNAL( clicked() ), SLOT( slotReset() ) );
 
@@ -140,7 +146,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
     connect( alarmOffBtn, SIGNAL( clicked() ), SLOT( slotToggleAlarm() ) );
 
     connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-             this, SLOT(appMessage(const QCString&, const QByteArray&)) );
+       this, SLOT(appMessage(const QCString&, const QByteArray&)) );
 
     t = new QTimer( this );
     connect( t, SIGNAL( timeout() ), SLOT( updateClock() ) );
@@ -168,7 +174,7 @@ Clock::Clock( QWidget * parent, const char * name, WFlags f )
         alarmBool=FALSE;
         snoozeBtn->hide();
     }
-    
+
     QTimer::singleShot( 0, this, SLOT(updateClock()) );
     modeSelect(0);
 }
@@ -181,39 +187,39 @@ Clock::~Clock()
 void Clock::updateClock()
 {
     if ( clockRB->isChecked() ) {
-        QTime tm = QDateTime::currentDateTime().time();
-        QString s;
-        if ( ampm ) {
-            int hour = tm.hour();
-            if (hour == 0) 
-                hour = 12;
-            if (hour > 12)
-                hour -= 12;
-            s.sprintf( "%2d%c%02d", hour, ':', tm.minute() );
-            ampmLabel->setText( (tm.hour() >= 12) ? "PM" : "AM" );
-            ampmLabel->show();
-        } else {
-            s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
-            ampmLabel->hide();
-        }
-        lcd->display( s );
-        lcd->repaint( FALSE );
-        aclock->display( QTime::currentTime() );
-        date->setText( TimeString::longDateString( QDate::currentDate() ) );
+  QTime tm = QDateTime::currentDateTime().time();
+  QString s;
+  if ( ampm ) {
+      int hour = tm.hour();
+      if (hour == 0)
+    hour = 12;
+      if (hour > 12)
+    hour -= 12;
+      s.sprintf( "%2d%c%02d", hour, ':', tm.minute() );
+      ampmLabel->setText( (tm.hour() >= 12) ? "PM" : "AM" );
+      ampmLabel->show();
+  } else {
+      s.sprintf( "%2d%c%02d", tm.hour(), ':', tm.minute() );
+      ampmLabel->hide();
+  }
+  lcd->display( s );
+  lcd->repaint( FALSE );
+  aclock->display( QTime::currentTime() );
+  date->setText( TimeString::longDateString( QDate::currentDate() ) );
     } else {
-        QTime swatch_time;
-        QString lcdtext;
-        int totalms = swatch_totalms;
-        if ( swatch_running )
-            totalms += swatch_start.elapsed();
-        swatch_time = QTime(0,0,0).addMSecs(totalms);
-        QString d = swatch_running ? QString("    ")
-            : QString::number(totalms%1000+1000);
-        lcdtext = swatch_time.toString() + "." + d.right(3).left(sw_prec);
-        lcd->display( lcdtext );
-        lcd->repaint( FALSE );
-        aclock->display( swatch_time );
-        date->setText( TimeString::longDateString( QDate::currentDate() ) );
+  QTime swatch_time;
+  QString lcdtext;
+  int totalms = swatch_totalms;
+  if ( swatch_running )
+      totalms += swatch_start.elapsed();
+  swatch_time = QTime(0,0,0).addMSecs(totalms);
+  QString d = swatch_running ? QString("    ")
+        : QString::number(totalms%1000+1000);
+  lcdtext = swatch_time.toString() + "." + d.right(3).left(sw_prec);
+  lcd->display( lcdtext );
+  lcd->repaint( FALSE );
+  aclock->display( swatch_time );
+  date->setText( TimeString::longDateString( QDate::currentDate() ) );
     }
 }
 
@@ -232,19 +238,19 @@ void Clock::clearClock( void )
 void Clock::slotSet()
 {
     if  ( t->isActive() ) {
-        swatch_totalms += swatch_start.elapsed();
-        set->setText( tr( "Start" ) );
-        t->stop();
-        swatch_running = FALSE;
-        toggleScreenSaver( TRUE );
-        updateClock();
+  swatch_totalms += swatch_start.elapsed();
+  set->setText( tr( "Start" ) );
+  t->stop();
+  swatch_running = FALSE;
+  toggleScreenSaver( TRUE );
+  updateClock();
     } else {
-        swatch_start.start();
-        set->setText( tr( "Stop" ) );
+  swatch_start.start();
+  set->setText( tr( "Stop" ) );
         t->start( 1000 );
-        swatch_running = TRUE;
-          // disable screensaver while stop watch is running
-        toggleScreenSaver( FALSE );
+  swatch_running = TRUE;
+  // disable screensaver while stop watch is running
+  toggleScreenSaver( FALSE );
     }
 }
 
@@ -255,7 +261,7 @@ void Clock::slotReset()
     swatch_totalms = 0;
 
     if (swatch_running )
-        t->start(1000);
+  t->start(1000);
 
     updateClock();
 }
@@ -263,26 +269,26 @@ void Clock::slotReset()
 void Clock::modeSelect( int m )
 {
     if ( m ) {
-        lcd->setNumDigits( 8+1+sw_prec );
-        lcd->setMinimumWidth( lcd->sizeHint().width() );
-        set->setEnabled( TRUE );
-        reset->setEnabled( TRUE );
-        ampmLabel->hide();
+  lcd->setNumDigits( 8+1+sw_prec );
+  lcd->setMinimumWidth( lcd->sizeHint().width() );
+  set->setEnabled( TRUE );
+  reset->setEnabled( TRUE );
+  ampmLabel->hide();
 
-        if ( !swatch_running )
-            t->stop();
+  if ( !swatch_running )
+      t->stop();
     } else {
-        lcd->setNumDigits( 5 );
-        lcd->setMinimumWidth( lcd->sizeHint().width() );
-        set->setEnabled( FALSE );
-        reset->setEnabled( FALSE );
-        t->start(1000);
+  lcd->setNumDigits( 5 );
+  lcd->setMinimumWidth( lcd->sizeHint().width() );
+  set->setEnabled( FALSE );
+  reset->setEnabled( FALSE );
+  t->start(1000);
     }
     updateClock();
 }
 
 //this sets the alarm time
-void Clock::slotSetAlarm() 
+void Clock::slotSetAlarm()
 {
     if( !snoozeBtn->isHidden())
         slotToggleAlarm();
@@ -304,24 +310,24 @@ void Clock::slotSetAlarm()
         config.writeEntry("clockAlarmMinute",tmp.setNum( minute ),10);
         config.writeEntry("clockAlarmSnooze",tmp.setNum( snoozeTime ),10);
         config.write();
-    } 
+    }
 }
 
 void Clock::slotSnooze()
 {
     bSound=FALSE;
-    int warn;
+    int warn = 0;
     QTime t = QTime::currentTime();
     QDateTime whenl( when.date(), t.addSecs( snoozeTime*60));
     when=whenl;
     AlarmServer::addAlarm( when,
-                           "QPE/Application/clock",
-                           "alarm(QDateTime,int)", warn );
+                             "QPE/Application/clock",
+                             "alarm(QDateTime,int)", warn );
 
 }
 
 //toggles alarm on/off
-void Clock::slotToggleAlarm() 
+void Clock::slotToggleAlarm()
 {
     Config config( "qpe" );
     config.setGroup("Time");
@@ -349,24 +355,24 @@ void Clock::alarmOn()
     QTime t = QTime::currentTime();
     if( t > tm)
         d = d.addDays(1);
-    int warn;
+    int warn = 0;
     QDateTime whenl(d,tm);
     when=whenl;
-    AlarmServer::addAlarm( when,
-                           "QPE/Application/clock",
-                           "alarm(QDateTime,int)", warn );
+      AlarmServer::addAlarm( when,
+                             "QPE/Application/clock",
+                             "alarm(QDateTime,int)", warn );
     setCaption("Alarm set: "+ whenl.toString());
 }
 
 void Clock::alarmOff()
 {
-    int warn;
+    int warn = 0;
     bSound=FALSE;
-    AlarmServer::deleteAlarm( when,
-                              "QPE/Application/clock",
-                              "alarm(QDateTime,int)", warn );
-    qDebug("Alarm Off "+ when.toString());
-    setCaption("Clock");
+        AlarmServer::deleteAlarm( when,
+                               "QPE/Application/clock",
+                               "alarm(QDateTime,int)", warn );
+      qDebug("Alarm Off "+ when.toString());
+      setCaption("Clock");
 }
 
 void Clock::appMessage(const QCString& msg, const QByteArray& data)
@@ -374,10 +380,10 @@ void Clock::appMessage(const QCString& msg, const QByteArray& data)
     int stopTimer = 0;
     int timerStay = 5000;
     bSound=TRUE;
-    if ( msg == "alarm(QDateTime,int)" ) {
-        Sound::soundAlarm();
-        stopTimer = startTimer( timerStay);
-    }
+   if ( msg == "alarm(QDateTime,int)" ) {
+       Sound::soundAlarm();
+       stopTimer = startTimer( timerStay);
+   }
 }
 
 void Clock::timerEvent( QTimerEvent *e )
@@ -423,42 +429,42 @@ void AnalogClock::drawContents( QPainter *p )
     QTime time = clear ? prevTime : currTime;
 
     if ( clear && prevTime.secsTo(currTime) > 1 ) {
-        p->eraseRect( rect() );
-        return;
+  p->eraseRect( rect() );
+  return;
     }
 
     if ( !clear ) {
-          // draw ticks
-        p->setPen( QPen( color, 1 ) );
-        for ( int i = 0; i < 12; i++ )
-            p->drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
+  // draw ticks
+  p->setPen( QPen( color, 1 ) );
+  for ( int i = 0; i < 12; i++ )
+      p->drawLine( rotate( center, l1, i * 30 ), rotate( center, l2, i * 30 ) );
     }
 
     if ( !clear || prevTime.minute() != currTime.minute() ||
-         prevTime.hour() != currTime.hour() ) {
-          // draw hour pointer
-        h1 = rotate( center, h1, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
-        h2 = rotate( center, h2, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
-        p->setPen( QPen( color, 3 ) );
-        p->drawLine( h1, h2 );
+      prevTime.hour() != currTime.hour() ) {
+  // draw hour pointer
+  h1 = rotate( center, h1, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
+  h2 = rotate( center, h2, 30 * ( time.hour() % 12 ) + time.minute() / 2 );
+  p->setPen( QPen( color, 3 ) );
+  p->drawLine( h1, h2 );
     }
 
     if ( !clear || prevTime.minute() != currTime.minute() ) {
-          // draw minute pointer
-        m1 = rotate( center, m1, time.minute() * 6 );
-        m2 = rotate( center, m2, time.minute() * 6 );
-        p->setPen( QPen( color, 2 ) );
-        p->drawLine( m1, m2 );
+  // draw minute pointer
+  m1 = rotate( center, m1, time.minute() * 6 );
+  m2 = rotate( center, m2, time.minute() * 6 );
+  p->setPen( QPen( color, 2 ) );
+  p->drawLine( m1, m2 );
     }
 
-      // draw second pointer
+    // draw second pointer
     s1 = rotate( center, s1, time.second() * 6 );
     s2 = rotate( center, s2, time.second() * 6 );
     p->setPen( QPen( color, 1 ) );
     p->drawLine( s1, s2 );
 
     if ( !clear )
-        prevTime = currTime;
+  prevTime = currTime;
 }
 
 void AnalogClock::display( const QTime& t )
@@ -474,8 +480,13 @@ QPoint AnalogClock::rotate( QPoint c, QPoint p, int a )
 {
     double angle = deg2rad * ( - a + 180 );
     double nx = c.x() - ( p.x() - c.x() ) * cos( angle ) -
-        ( p.y() - c.y() ) * sin( angle );
+    ( p.y() - c.y() ) * sin( angle );
     double ny = c.y() - ( p.y() - c.y() ) * cos( angle ) +
-        ( p.x() - c.x() ) * sin( angle );
+    ( p.x() - c.x() ) * sin( angle );
     return QPoint( nx, ny );
+}
+void Clock::slotAdjustTime()
+{
+    QCopEnvelope e("QPE/System", "execute(QString)");
+    e << QString("systemtime");
 }
