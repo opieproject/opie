@@ -106,7 +106,6 @@ PiecesTable::PiecesTable(QWidget* parent, const char* name )
   setNumCols(4);
 
   // init arrays
-  initMap();
   readConfig();
   initColors();
 
@@ -124,11 +123,17 @@ void PiecesTable::writeConfig()
   Config cfg("Fifteen");
   cfg.setGroup("Game");
   QStringList map;
-  for (int i = 0; i < 16; i++)
+
+  int items = numRows()*numCols();
+
+  for (int i = 0; i < items; i++)
     map.append( QString::number( _map[i] ) );
+
   cfg.writeEntry("Map", map, '-');
   cfg.writeEntry("Randomized", _randomized );
   cfg.writeEntry("Image", _image );
+  cfg.writeEntry("Rows", numRows() );
+  cfg.writeEntry("Cols", numCols() );
 }
 
 void PiecesTable::readConfig()
@@ -138,11 +143,25 @@ void PiecesTable::readConfig()
   QStringList map = cfg.readListEntry("Map", '-');
   _randomized = cfg.readBoolEntry( "Randomized", FALSE );
   _image = cfg.readEntry( "Image", QString::null );
-  int i = 0;
+
+  int rows = cfg.readNumEntry( "Rows", 4 );
+  int cols = cfg.readNumEntry( "Cols", 4 );
+  uint items= rows*cols;
+  setNumRows( rows );
+  setNumCols( cols );
+
+  initMap();
+
+  /* if we've more items than 'stones' don't restore the state */
+  if ( items > map.count() )
+      return;
+
+
+  uint i = 0;
   for ( QStringList::Iterator it = map.begin(); it != map.end(); ++it ) {
     _map[i] = (*it).toInt();
     i++;
-    if ( i > 15 ) break;
+    if ( i > items ) break;
   }
 
 }
@@ -152,7 +171,7 @@ void PiecesTable::clear() {
     /* clean up and resize */
     for (uint i = 0; i < _pixmap.count(); ++i )
         delete _pixmap[i];
-    _pixmap.resize( 16 );
+    _pixmap.resize( numRows()*numCols() );
 }
 
 /*
@@ -160,22 +179,24 @@ void PiecesTable::clear() {
  * background or we use the drawRect  to fill the background and
  * last we put the number on it
  */
-void PiecesTable::slotCustomImage( const QString& _str , bool upd ) {
+void PiecesTable::slotCustomImage( const QString& _str ) {
     QString str = _str;
 
 
     /* couldn't load image fall back to plain tiles*/
     QImage img = QImage(str);
+    QPixmap pix;
     if(img.isNull())
         str = QString::null;
-    else
+    else{
         img = img.smoothScale( width(),height() );
+        pix.convertFromImage( img );
+    }
 
-    QPixmap pix;
-    pix.convertFromImage( img );
-
+    /* initialize base point */
     uint image=0;
 
+    /* clear the old tiles */
     clear();
 
     /* used variables */
@@ -190,14 +211,16 @@ void PiecesTable::slotCustomImage( const QString& _str , bool upd ) {
     int	x_offset = cellW - int(cellW * bw);	// 10% should be enough
     int	y_offset = cellH - int(cellH * bw);
 
-    /* border polygon */
+    /* border polygon calculation*/
     initPolygon(cellW, cellH, x_offset, y_offset );
 
+    /* avoid crashes with isNull() pixmap later */
     if ( cellW == 0 || cellH == 0 ) {
         _pixmap.resize( 0 );
         return;
     }
 
+    /* make it bold and bigger */
     QFont f = font();
     f.setPixelSize(18);
     f.setBold( TRUE );
@@ -235,9 +258,6 @@ void PiecesTable::slotCustomImage( const QString& _str , bool upd ) {
         }
     }
     _image = str;
-
-    if ( upd )
-        update();
 }
 
 /*
@@ -266,16 +286,25 @@ void PiecesTable::paintCell(QPainter *p, int row, int col)
   int w = cellWidth();
   int h = cellHeight();
 
+  uint pos = col+row*numCols();
+
+  /* sanity check. setNumRows()/setNumCols() calls repaint() directly */
+  if ( pos >= _map.count() ) {
+      p->drawRect(0, 0, w, h);
+      return;
+  }
+
   int number = _map[col + row * numCols()] + 1;
 
   // draw cell background
-  if(number == 16) {
+  if(number == numCols()*numRows() ) {
     p->setBrush(colorGroup().background());
     p->setPen(NoPen);
     p->drawRect(0, 0, w, h);
     return;
   }
 
+  /* no tiles then contentRect() is not visible or too small anyway */
   if( _pixmap.count() == 0 )
       return;
 
@@ -284,10 +313,15 @@ void PiecesTable::paintCell(QPainter *p, int row, int col)
 
 void PiecesTable::resizeEvent(QResizeEvent *e)
 {
-  QTableView::resizeEvent(e);
+  /*
+   * null if we faked it after the config dialog ran to
+   * regenerate everything
+   */
+  if ( e )
+      QTableView::resizeEvent(e);
 
-  setCellWidth(contentsRect().width()/ numRows());
-  setCellHeight(contentsRect().height() / numCols());
+  setCellWidth(contentsRect().width()/ numCols());
+  setCellHeight(contentsRect().height() / numRows());
 
 
   /* update the image and calculate border*/
@@ -300,13 +334,14 @@ void PiecesTable::initColors()
   _colors.resize(numRows() * numCols());
   for (int r = 0; r < numRows(); r++)
     for (int c = 0; c < numCols(); c++)
-      _colors[c + r *numCols()] = QColor(255 - 70 * c,255 - 70 * r, 150);
+      _colors[c + r *numCols()] = QColor( 255 - (70 * c)%255 ,255 - (70 * r)%255, 150);
 }
 
 void PiecesTable::initMap()
 {
-  _map.resize(16);
-  for ( int i = 0; i < 16; i++)
+  int items = numCols()*numRows();
+  _map.resize( items );
+  for ( int i = 0; i < items; i++)
     _map[i] = i;
 
   _randomized = false;
@@ -317,21 +352,23 @@ void PiecesTable::randomizeMap()
   initMap();
   _randomized = true;
   // find the free position
-  int pos = _map.find(15);
+  int cols = numCols();
+  int rows = numRows();
+  int pos = _map.find( cols*rows -1 );
 
   int move = 0;
   while ( move < 333 ) {
 
-    int frow = pos / numCols();
-    int fcol = pos - frow * numCols();
+    int frow = pos / cols;
+    int fcol = pos - frow * cols;
 
     // find click position
-    int row = rand()%4;
-    int col = rand()%4;
+    int row = rand()%rows;
+    int col = rand()%cols;
 
     // sanity check
-    if ( row < 0 || row >= numRows() ) continue;
-    if ( col < 0 || col >= numCols() ) continue;
+    if ( row < 0 || row >= rows ) continue;
+    if ( col < 0 || col >= cols ) continue;
     if ( row != frow && col != fcol ) continue;
 
     move++;
@@ -341,12 +378,12 @@ void PiecesTable::randomizeMap()
 
       if (col < fcol) {
 	for(int c = fcol; c > col; c--) {
-	  _map[c + row * numCols()] = _map[ c-1 + row *numCols()];
+	  _map[c + row * cols] = _map[ c-1 + row *cols];
 	}
       }
       else if (col > fcol) {
 	for(int c = fcol; c < col; c++) {
-	  _map[c + row * numCols()] = _map[ c+1 + row *numCols()];
+	  _map[c + row * cols] = _map[ c+1 + row *cols];
 	}
       }
     }
@@ -355,17 +392,17 @@ void PiecesTable::randomizeMap()
 
       if (row < frow) {
 	for(int r = frow; r > row; r--) {
-	  _map[col + r * numCols()] = _map[ col + (r-1) *numCols()];
+	  _map[col + r * cols] = _map[ col + (r-1) *cols];
 	}
       }
       else if (row > frow) {
 	for(int r = frow; r < row; r++) {
-	  _map[col + r * numCols()] = _map[ col + (r+1) *numCols()];
+	  _map[col + r * cols] = _map[ col + (r+1) *cols];
 	}
       }
     }
     // move free cell to click position
-    _map[pos=(col + row * numCols())] = 15;
+    _map[pos=(col + row * cols)] = rows*cols-1;
   }
   repaint();
 }
@@ -374,12 +411,13 @@ void PiecesTable::checkwin()
 {
   if(!_randomized) return;
 
+  int items=numCols()*numRows();
   int i;
-  for (i = 0; i < 16; i++)
+  for (i = 0; i < items; i++)
     if(i != _map[i])
       break;
 
-  if (i == 16) {
+  if (i == items) {
     QMessageBox::information(this, tr("Fifteen Pieces"),
 			     tr("Congratulations!\nYou win the game!"));
     _randomized = FALSE;
@@ -427,21 +465,24 @@ void PiecesTable::mousePressEvent(QMouseEvent* e)
   }
   else {
     // GAME LOGIC
+    int cols = numCols();
+    int rows = numRows();
+    int item = cols*rows -1;
 
     // find the free position
-    int pos = _map.find(15);
+    int pos = _map.find(item);
     if(pos < 0) return;
 
-    int frow = pos / numCols();
-    int fcol = pos - frow * numCols();
+    int frow = pos / cols;
+    int fcol = pos - frow * cols;
 
     // find click position
     int row = findRow(e->y());
     int col = findCol(e->x());
 
     // sanity check
-    if (row < 0 || row >= numRows()) return;
-    if (col < 0 || col >= numCols()) return;
+    if (row < 0 || row >= rows) return;
+    if (col < 0 || col >= cols) return;
     if ( row != frow && col != fcol ) return;
 
     // valid move?
@@ -452,13 +493,13 @@ void PiecesTable::mousePressEvent(QMouseEvent* e)
 
       if (col < fcol) {
 	for(int c = fcol; c > col; c--) {
-	  _map[c + row * numCols()] = _map[ c-1 + row *numCols()];
+	  _map[c + row * cols] = _map[ c-1 + row *cols];
 	  updateCell(row, c, false);
 	}
       }
       else if (col > fcol) {
 	for(int c = fcol; c < col; c++) {
-	  _map[c + row * numCols()] = _map[ c+1 + row *numCols()];
+	  _map[c + row * cols] = _map[ c+1 + row *cols];
 	  updateCell(row, c, false);
 	}
       }
@@ -468,19 +509,19 @@ void PiecesTable::mousePressEvent(QMouseEvent* e)
 
       if (row < frow) {
 	for(int r = frow; r > row; r--) {
-	  _map[col + r * numCols()] = _map[ col + (r-1) *numCols()];
+	  _map[col + r * cols] = _map[ col + (r-1) *cols];
 	  updateCell(r, col, false);
 	}
       }
       else if (row > frow) {
 	for(int r = frow; r < row; r++) {
-	  _map[col + r * numCols()] = _map[ col + (r+1) *numCols()];
+	  _map[col + r * cols] = _map[ col + (r+1) *cols];
 	  updateCell(r, col, false);
 	}
       }
     }
     // move free cell to click position
-    _map[col + row * numCols()] = 15;
+    _map[col + row * cols] = item;
     updateCell(row, col, false);
 
     // check if the player wins with this move
@@ -494,6 +535,24 @@ void PiecesTable::slotConfigure() {
 
 
     _dialog->setImageSrc( _image );
-    if ( QPEApplication::execDialog(_dialog) == QDialog::Accepted )
-        slotCustomImage( _dialog->imageSrc(), true );
+    _dialog->setGameboard( numRows(), numCols() );
+
+    if ( QPEApplication::execDialog(_dialog) == QDialog::Accepted ) {
+        /*
+         * update the board grid and reinit the game if changed
+         * First set new columns so the update will regenerate the
+         * tiles with slotCustomImage
+         */
+        _image = _dialog->imageSrc();
+        if (numRows() != _dialog->rows() ||
+            numCols() != _dialog->columns() ) {
+            setNumCols(_dialog->columns());
+            setNumRows(_dialog->rows());
+            slotReset();
+        }
+        resizeEvent( 0l );
+
+
+        update();
+    }
 }

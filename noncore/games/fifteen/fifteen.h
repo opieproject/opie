@@ -41,7 +41,7 @@ class PiecesTable : public QTableView
 
  protected slots:
   void slotConfigure();
-  void slotCustomImage(const QString &str, bool upd = false);
+  void slotCustomImage(const QString &str);
   void slotRandomize();
   void slotReset();
 

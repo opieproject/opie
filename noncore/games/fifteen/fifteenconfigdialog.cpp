@@ -45,9 +45,7 @@ using Opie::Ui::OFileDialog;
 
 FifteenConfigDialog::FifteenConfigDialog( QWidget* parent, const char* name, bool modal )
     : FifteenConfigDialogBase( parent, name, modal )
-{
-    grpGameGrid->hide();
-}
+{}
 
 FifteenConfigDialog::~FifteenConfigDialog()
 {}
