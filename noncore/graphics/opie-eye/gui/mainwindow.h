@@ -22,6 +22,7 @@ namespace Core{
 }
 
 class ImageView;
+class ImageWidget;
 class PIconView;
 class imageinfo;
 
@@ -67,7 +68,7 @@ private:
     bool autoRotate;
     bool autoScale;
     bool zoomerOn;
-    QWidget*tFrame;
+    ImageWidget*tFrame;
     QToolButton*rotateButton,*upButton,*fsButton,*viewModeButton;
     QToolButton*nextButton,*prevButton,*zoomButton,*scaleButton;
 

@@ -331,7 +331,7 @@ void PMainWindow::slotToggleFullScreen()
         odebug << "full" << oendl;
         m_disp->setBackgroundColor(black);
         if (!tFrame) {
-            tFrame = new QWidget(0,0,WStyle_Customize|WStyle_NoBorder);
+            tFrame = new ImageWidget(0,0,WStyle_Customize|WStyle_NoBorder);
             tFrame->resize(qApp->desktop()->width(), qApp->desktop()->height());
             tFrame->setMinimumSize(qApp->desktop()->width(), qApp->desktop()->height());
         }
@@ -398,8 +398,8 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         viewModeButton->hide();
     }
     if (m_disp->fullScreen()) {
-        tFrame->setActiveWindow();
-        tFrame->showFullScreen();
+//        tFrame->showFullScreen();
+        m_disp->enableFullscreen();
     } else {
         m_stack->raiseWidget( ImageDisplay );
     }

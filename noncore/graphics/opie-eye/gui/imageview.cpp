@@ -14,6 +14,8 @@ ImageView::ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name
     : Opie::MM::OImageScrollView(parent,name,fl)
 {
     m_viewManager = 0;
+    m_focus_out = false;
+    block_next_focus = true;
     m_cfg = cfg;
     m_isFullScreen = false;
     QPEApplication::setStylusOperation(viewport(),QPEApplication::RightOnHold);
@@ -126,8 +128,6 @@ void ImageView::contentsMousePressEvent ( QMouseEvent * e)
     /* if we were fullScreen() and must overlap the taskbar again */
     if (fullScreen() && old) {
           enableFullscreen();
-//        parentWidget()->hide();
-//        parentWidget()->show();
     }
 }
 
@@ -136,25 +136,50 @@ void ImageView::setFullScreen(bool how)
     m_isFullScreen = how;
 }
 
-void ImageView::focusInEvent(QFocusEvent *) 
+void ImageView::focusInEvent(QFocusEvent *)
 {
       // Always do it here, no matter the size.
-     /* result in an endless loop */
-//    if (fullScreen()) enableFullscreen();
+    odebug << "Focus in" << oendl;
+}
+
+void ImageView::focusOutEvent(QFocusEvent *)
+{
+    odebug << "Focus out" << oendl;
 }
 
 void ImageView::enableFullscreen()
 {
-      if (!fullScreen()) return;
-      // Make sure size is correct
-      parentWidget()->setFixedSize(qApp->desktop()->size());
       // This call is needed because showFullScreen won't work
       // correctly if the widget already considers itself to be fullscreen.
+      setUpdatesEnabled(false);
+      odebug << "showNormal();" << oendl;
       parentWidget()->showNormal();
+      odebug << "showNormal(); done " << oendl;
       // This is needed because showNormal() forcefully changes the window
       // style to WSTyle_TopLevel.
+      odebug << " reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));" << oendl;
       parentWidget()->reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0));
+      odebug << " reparent(0, WStyle_Customize | WStyle_NoBorder, QPoint(0,0)); done" << oendl;
       // Enable fullscreen.
+      odebug << "showFullScreen();" << oendl;
       parentWidget()->showFullScreen();
+      odebug << "showFullScreen(); done" << oendl;
+      setUpdatesEnabled(true);
 }
 
+void ImageWidget::show()
+{
+    QWidget::show();
+}
+
+void ImageWidget::hide()
+{
+    QWidget::hide();
+}
+
+ImageWidget::ImageWidget(QWidget * parent, const char * name, WFlags f)
+    : QWidget(parent,name,f)
+{
+      // Make sure size is correct
+      setFixedSize(qApp->desktop()->size());
+}

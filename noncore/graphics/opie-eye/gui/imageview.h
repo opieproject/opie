@@ -3,6 +3,8 @@
 
 #include <opie2/oimagescrollview.h>
 
+#include <qwidget.h>
+
 namespace Opie {
     namespace Core {
         class OConfig;
@@ -29,6 +31,7 @@ public:
     virtual ~ImageView();
     Opie::Core::OKeyConfigManager* manager();
     void setFullScreen(bool how);
+    virtual void enableFullscreen();
     bool fullScreen(){return m_isFullScreen;}
 
 signals:
@@ -46,13 +49,32 @@ protected:
     Opie::Core::OKeyConfigManager*m_viewManager;
     void initKeys();
     bool m_isFullScreen:1;
-    void enableFullscreen();
+    bool m_focus_out:1;
+    bool block_next_focus:1;
+
+    virtual void focusInEvent ( QFocusEvent * );
+    virtual void focusOutEvent ( QFocusEvent * );
 
 protected slots:
     virtual void slotShowImageInfo();
     virtual void keyReleaseEvent(QKeyEvent * e);
     virtual void contentsMousePressEvent ( QMouseEvent * e);
-    virtual void focusInEvent ( QFocusEvent * );
+};
+
+class ImageWidget:public QWidget
+{
+    Q_OBJECT
+public:
+    ImageWidget(QWidget * parent=0, const char * name=0, WFlags f = WStyle_Customize | WStyle_NoBorder);
+    virtual ~ImageWidget(){};
+
+protected:
+
+public slots:
+    virtual void show();
+    virtual void hide();
+
+protected slots:
 };
 
 #endif
