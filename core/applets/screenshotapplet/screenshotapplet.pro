@@ -12,5 +12,16 @@ MOC_DIR=opieobj
 OBJECTS_DIR=opieobj
 
 TRANSLATIONS = ../../i18n/pt_BR/libscreenshotapplet.ts
-TRANSLATIONS += ../../i18n/es/libscreenshotapplet.ts
 TRANSLATIONS += ../../i18n/pt/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/de/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/en/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/es/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/fr/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/hu/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/ja/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/ko/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/no/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/pl/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/sl/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/zh_CN/libscreenshotapplet.ts
+TRANSLATIONS += ../../i18n/zh_TW/libscreenshotapplet.ts
