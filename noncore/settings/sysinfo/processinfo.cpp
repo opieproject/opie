@@ -23,6 +23,10 @@
 #include <qtimer.h>
 #include <qfile.h>
 #include <qdir.h>
+#include <qmessagebox.h>
+
+#include <sys/types.h>
+#include <signal.h>
 
 #include "processinfo.h"
 
@@ -115,5 +119,21 @@ void ProcessInfo::updateData()
 
 void ProcessInfo::viewProcess(QListViewItem *process)
 {
+    QString pid= process->text(0);
+    QString command = process->text(1);
+    switch( QMessageBox::information( this, (tr("Kill Process?")),
+                                      (tr("You really want to kill\n"+command+" PID: "+pid+"?")),
+                                      (tr("Yes")), (tr("No")), 0 )){
+        case 0: // Yes clicked,
+        {
+            bool ok;
+            pid_t child=pid.toInt(&ok,10);
+            if((kill(child,SIGTERM)) < 0)
+                perror("kill:SIGTERM");
+        }   
+            break;
+        case 1: // Cancel
+            break;
+    };
 //printf("Double click for PID: %s\n", process->text(0).stripWhiteSpace().latin1());
 }
