@@ -59,6 +59,8 @@ protected:
 	virtual void init ( );
 	
 public:
+	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
+
 	virtual void alarmSound ( );
 
 	virtual uint hasLeds ( ) const;
@@ -71,6 +73,8 @@ protected:
 	virtual void init ( );
 
 public:	
+	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
+
 	virtual void alarmSound ( );
 	virtual void keySound ( );
 	virtual void touchSound ( );	
@@ -131,6 +135,11 @@ ODevice::~ODevice ( )
 
 #define APM_IOC_SUSPEND          (( 0<<30 ) | ( 'A'<<8 ) | ( 2 ) | ( 0<<16 ))
 
+bool ODevice::setPowerButtonHandler ( ODevice::PowerButtonHandler )
+{
+	return false;
+}
+
 bool ODevice::suspend ( )
 {
 	if ( d-> m_model == OMODEL_Unknown ) // better don't suspend in qvfb / on unkown devices
@@ -148,7 +157,7 @@ bool ODevice::suspend ( )
 	
 		::sync ( ); // flush fs caches
 	
-		res = ( ::ioctl ( fd, APM_IOC_SUSPEND ) == 0 ); // tell the kernel to "start" suspending
+		res = ( ::ioctl ( fd, APM_IOC_SUSPEND, 0 ) == 0 ); // tell the kernel to "start" suspending
 
 		if ( res ) {	
 			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in our process group
@@ -404,14 +413,29 @@ bool ODeviceIPAQ::setLed ( uint which, OLedState st )
 	return false;
 }
 
+bool ODeviceIPAQ::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
+{
+	bool res = false;
+	int fd;
+	
+	if (( fd = ::open ( "/proc/sys/ts/suspend_button_mode", O_WRONLY )) >= 0 ) {
+		if ( ::write ( fd, p == KERNEL ? "0" : "1", 1 ) == 1 )
+			res = true;
+		else
+			::perror ( "write to /proc/sys/ts/suspend_button_mode" );
+		
+		::close ( fd );
+	}
+	else
+		::perror ( "/proc/sys/ts/suspend_button_mode" );
+	
+	return res;
+}
 
-//#endif
 
 
 
 
-
-//#if defined( QT_QWS_EBX ) // Zaurus
 
 void ODeviceZaurus::init ( )
 {
@@ -494,6 +518,12 @@ typedef struct sharp_led_status {
 #define LED_MAIL_NEWMAIL_EXISTS  1   /* for SHARP_LED_MAIL_EXISTS */
 #define LED_MAIL_UNREAD_MAIL_EX  2   /* for SHARP_LED_MAIL_EXISTS */
 
+// #include <asm/sharp_apm.h> // including kernel headers is evil ...
+
+#define APM_IOCGEVTSRC          (( 2 ) | ( 'A'<<8 ) | ( 203 ) | ( sizeof(int) ))
+#define APM_IOCSEVTSRC          (( 3 ) | ( 'A'<<8 ) | ( 204 ) | ( sizeof(int) ))
+#define APM_EVT_POWER_BUTTON    (1 << 0)
+
 
 
 void ODeviceZaurus::buzzer ( int sound )
@@ -560,4 +590,34 @@ bool ODeviceZaurus::setLed ( uint which, OLedState st )
 	return false;
 }
 
-//#endif
+bool ODeviceZaurus::setPowerButtonHandler ( ODevice::PowerButtonHandler p )
+{
+	bool res = false;
+	int fd;
+
+	if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
+        (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {
+
+		int sources = ::ioctl ( fd, APM_IOCGEVTSRC, 0 ); // get current event sources
+
+		if ( sources >= 0 ) {
+			if ( p == KERNEL )
+				sources |= APM_EVT_POWER_BUTTON;
+			else 
+				sources &= ~APM_EVT_POWER_BUTTON;
+
+			if ( ::ioctl ( fd, APM_IOCSEVTSRC, sources & ~APM_EVT_POWER_BUTTON ) >= 0 ) // set new event sources
+				res = true;
+			else
+				perror ( "APM_IOCGEVTSRC" );
+		}
+		else
+			perror ( "APM_IOCGEVTSRC" );
+		
+		::close ( fd );
+	}
+	else
+		perror ( "/dev/apm_bios or /dev/misc/apm_bios" );
+		
+    return res;
+}

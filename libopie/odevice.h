@@ -67,6 +67,12 @@ public:
 	static ODevice *inst ( );
 
 // system	
+	enum PowerButtonHandler {
+		KERNEL,
+		OPIE
+	};
+
+	virtual bool setPowerButtonHandler ( PowerButtonHandler h );
 	virtual bool suspend ( );
 
 // information
