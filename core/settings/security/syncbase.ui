@@ -1,0 +1,213 @@
+<!DOCTYPE UI><UI>
+<class>SyncBase</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>SyncBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>303</width>
+            <height>233</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>SyncBase</string>
+    </property>
+    <grid>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <spacer row="1"  column="0" >
+            <property>
+                <name>name</name>
+                <cstring>Spacer1</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+        <widget row="0"  column="0" >
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupBox2</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Sync</string>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>6</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Accept sync from network:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>textFormat</name>
+                        <enum>RichText</enum>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>syncnet</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>editable</name>
+                        <bool>true</bool>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Select a net-range or enter a new one.  
+
+This drop-down list lets you select a net range which is allowed to connect to your Zaurus.  
+
+For example, a net range of 192.168.1.0/24 will allow any machine with an IP between 192.168.1.1 and 192.168.1.254 to connect to (and sync with) your Zaurus.  
+
+The entry "All" will allow *any* IP to connect. 
+The entry "None" will *deny* any connection.  
+
+If unsure, select "Any".</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout4</cstring>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>deleteentry</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Delete Entry</string>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Delete the selected net range from the list
+
+If you press this button, the currently selected net range will be deleted from the list of net ranges.
+
+If you hit this button in error, the button "Restore Defaults" will restore
+the list to the state it has been when you initially booted your Zaurus.</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>restoredefaults</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Restore Defaults</string>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>This button will restore the list of net ranges
+to the defaults.
+
+Beware that all manually entered net ranges will be lost!</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Select your sync software</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Qtopia 1.7</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Opie 1.0</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>IntelliSync</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>syncModeCombo</cstring>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Alter the Sync Protocol to tweak for the different devices.
+				    IntelliSync will disable the password check but you'll be prompted to accept the connection.
+				    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
+				    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
+				    </string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+    </grid>
+</widget>
+</UI>

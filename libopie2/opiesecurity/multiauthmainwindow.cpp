@@ -20,7 +20,7 @@ MultiauthMainWindow::MultiauthMainWindow()
     Config *pcfg = new Config("Security");
     pcfg->setGroup("Misc");
     explanScreens = pcfg->readBoolEntry("explanScreens", true);
-    allowBypass = pcfg->readBoolEntry("allowBypass", true);
+    allowBypass = pcfg->readBoolEntry("allowBypass", false);
     delete pcfg;
 
     layout = new QVBoxLayout(this);

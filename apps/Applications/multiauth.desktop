@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=multiauth
+Icon=security/multiauth
+Type=Application
+Name=Multiauth demo
+Comment=Multi-authentication demonstration

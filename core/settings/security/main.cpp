@@ -1,30 +1,46 @@
-/**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
-**
-** This file is part of Qtopia Environment.
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
-
-
-#include "security.h"
-
-#include <opie2/oapplicationfactory.h>
-
-using namespace Opie::Core;
-OPIE_EXPORT_APP( OApplicationFactory<Security> )
+#include "multiauthconfig.h"
+#include <opie2/oapplication.h>
+#include <opie2/odebug.h>
 
 
 
+int main(int argc, char **argv) {
+    Opie::Core::OApplication app(argc, argv, "MultiAuthentication Config");
+    // protect this dialog if option set
+    Config* pcfg = new Config("Security");
+    pcfg->setGroup( "Misc" );
+    bool protectConfigDialog = ! pcfg->readBoolEntry("noProtectConfig", true);
+    delete pcfg;
+    bool show = true;
+    if ( protectConfigDialog )
+    {
+        if (Opie::Security::Internal::runPlugins() != 0)
+        {
+            // authentication failed
+            show = false;
+        }
+    }
+    if ( show == true )
+    {
+    printf("building dialog\n");
+        MultiauthConfig dialog;
+        app.setMainWidget(&dialog);
+
+        if ( dialog.exec() == QDialog::Accepted ) {
+            // write the general, login and sync config
+            dialog.writeConfig();
+            // call writeConfig() on each plugin config widget
+            Opie::Security::MultiauthConfigWidget *confWidget;
+            for ( confWidget = dialog.configWidgetList.first(); confWidget != 0;
+                  confWidget = dialog.configWidgetList.next() ) {
+                confWidget->writeConfig();
+            }
+        }
+        dialog.close();
+        app.quit();
+        return 0;
+    } else {
+        owarn << "authentication failed, not showing opie-security" << oendl;
+        return 1;
+    }
+}

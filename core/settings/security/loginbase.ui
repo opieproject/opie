@@ -1,0 +1,106 @@
+<!DOCTYPE UI><UI>
+<class>LoginBase</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>LoginBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>174</width>
+            <height>126</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>LoginBase</string>
+    </property>
+    <vbox>
+        <property stdset="1">
+            <name>margin</name>
+            <number>11</number>
+        </property>
+        <property stdset="1">
+            <name>spacing</name>
+            <number>6</number>
+        </property>
+        <widget>
+            <class>QGroupBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>GroupBox3</cstring>
+            </property>
+            <property stdset="1">
+                <name>title</name>
+                <string>Login</string>
+            </property>
+            <vbox>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>6</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>autologinToggle</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Login Automatically</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>If you select this option, opie-login will automagically log you in with the user you have selected in the drop-down list.  
+
+For the Zaurus 5x00 this is always the user "root".</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>userlist</cstring>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>This drop-down list allows you to select the user for auto-login
+(if enabled above).  
+
+You can only select an actually configured user.</string>
+                    </property>
+                </widget>
+            </vbox>
+        </widget>
+        <spacer>
+            <property>
+                <name>name</name>
+                <cstring>Spacer2</cstring>
+            </property>
+            <property stdset="1">
+                <name>orientation</name>
+                <enum>Vertical</enum>
+            </property>
+            <property stdset="1">
+                <name>sizeType</name>
+                <enum>Expanding</enum>
+            </property>
+            <property>
+                <name>sizeHint</name>
+                <size>
+                    <width>20</width>
+                    <height>20</height>
+                </size>
+            </property>
+        </spacer>
+    </vbox>
+</widget>
+</UI>
