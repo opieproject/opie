@@ -111,25 +111,6 @@ AudioWidget::~AudioWidget() {
 //    mediaPlayerState->setPlaying(false);
 }
 
-namespace {
-
-QPixmap combineImageWithBackground( QImage img, QPixmap bg, QPoint offset ) {
-    QPixmap pix( img.width(), img.height() );
-    QPainter p( &pix );
-    p.drawTiledPixmap( pix.rect(), bg, offset );
-    p.drawImage( 0, 0, img );
-    return pix;
-}
-
-
-QPixmap maskPixToMask( QPixmap pix, QBitmap mask ) {
-    QPixmap pixmap( pix );
-    pixmap.setMask( mask );
-    return pixmap;
-}
-
-};
-
 void AudioWidget::resizeEvent( QResizeEvent *e ) {
     int h = height();
     int w = width();
