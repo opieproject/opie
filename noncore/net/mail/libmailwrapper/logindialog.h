@@ -8,7 +8,7 @@ class LoginDialog : public LoginDialogUI
     Q_OBJECT
 
 public:
-    LoginDialog( QString user, QString pass, QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
+    LoginDialog(const QString&user,const QString&pass, QWidget *parent = 0, const char *name = 0, bool modal = false, WFlags flags = 0 );
     QString getUser() { return _user; }
     QString getPassword() { return _pass; }
 
