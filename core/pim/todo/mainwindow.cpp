@@ -445,7 +445,7 @@ void MainWindow::slotNew() {
 void MainWindow::slotDuplicate() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-                             QWidget::tr("Can not edit data, currently syncing"));
+							 QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
     OTodo ev = m_todoMgr.event( currentView()->current() );
@@ -462,7 +462,7 @@ void MainWindow::slotDelete() {
 
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+							 QWidget::tr("Data can not be edited, currently syncing"));
 	return;
     }
     QString strName = currentView()->currentRepresentation();
@@ -478,7 +478,7 @@ void MainWindow::slotDelete(int uid ) {
     if( uid == 0 ) return;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+							 QWidget::tr("Data can not be edited, currently syncing"));
 	return;
     }
     OTodo to = m_todoMgr.event(uid);
@@ -493,7 +493,7 @@ void MainWindow::slotDelete(int uid ) {
 void MainWindow::slotDeleteAll() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-                             QWidget::tr("Can not edit data, currently syncing"));
+                             QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
 
@@ -509,7 +509,7 @@ void MainWindow::slotDeleteAll() {
 void MainWindow::slotDeleteCompleted() {
     if(m_syncing) {
         QMessageBox::warning(this, QWidget::tr("Todo"),
-                             QWidget::tr("Can not edit data, currently syncing"));
+                             QWidget::tr("Data can not be edited, currently syncing"));
         return;
     }
 
@@ -691,7 +691,7 @@ void MainWindow::slotEdit( int uid ) {
     if (uid == 0 ) return;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+			     QWidget::tr("Data can't be edited, currently syncing"));
 	return;
     }
 
@@ -836,7 +836,7 @@ int MainWindow::create() {
     int uid = 0;
     if(m_syncing) {
 	QMessageBox::warning(this, QWidget::tr("Todo"),
-			     QWidget::tr("Can not edit data, currently syncing"));
+			     QWidget::tr("Data can not be edited, currently syncing"));
 	return uid;
     }
     m_todoMgr.load();
@@ -1011,7 +1011,7 @@ void MainWindow::doAlarm( const QDateTime& dt, int uid ) {
     connect( btnOk, SIGNAL(clicked() ), &dlg, SLOT(accept() ) );
     lay->addWidget( btnOk );
 
-    QString text = tr("<h1>Alarm at %0</h1><br>").arg( TimeString::dateString( dt ) );
+    QString text = tr("<h1>Alarm at %1</h1><br>").arg( TimeString::dateString( dt ) );
     text += todo.toRichText();
     view->setText( text );
 
