@@ -122,7 +122,7 @@ still in the group.</source>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished">Prosim počakajte...</translation>
+        <translation>Prosim počakajte...</translation>
     </message>
 </context>
 </TS>

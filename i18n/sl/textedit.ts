@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>FontDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>DialogPisave</translation>
     </message>
 </context>
 <context>
@@ -118,7 +118,7 @@
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Pisava</translation>
+        <translation>Pisava</translation>
     </message>
     <message>
         <source>Save File As?</source>
@@ -126,30 +126,33 @@
     </message>
     <message>
         <source>Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravice</translation>
     </message>
     <message>
         <source>FontDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>DialogPisave</translation>
     </message>
     <message>
         <source>Do you really want
 to delete the current file
 from the disk?
 This is irreversable!!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali res želite
+izbrisati trenutno
+datoteko iz diska?
+To se ne da preklicati!!</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Open File</source>
@@ -159,23 +162,25 @@ This is irreversable!!</source>
         <source>Text Editor has detected
  you selected a .desktop file.
 Open .desktop file or linked file?</source>
-        <translation type="unfinished"></translation>
+        <translation>Urejevalnik besedil je zaznal,
+da ste izbrali .desktop datoteko.
+Odprem .desktop datoteko ali povezano datoteko?</translation>
     </message>
     <message>
         <source>.desktop File</source>
-        <translation type="unfinished"></translation>
+        <translation>.desktop datoteka</translation>
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Povezan dokument</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Vse</translation>
+        <translation>Vse</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Besedilo</translation>
     </message>
 </context>
 <context>
@@ -273,27 +278,27 @@ Open .desktop file or linked file?</source>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Pravicedatoteke</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Opozorilo</translation>
     </message>
     <message>
         <source>Error- no user</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka- ni uporabnika</translation>
     </message>
     <message>
         <source>Error- no  group</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka- ni skupine</translation>
     </message>
     <message>
         <source>Error setting ownership or group</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka pri nastavitvi lastništva ali skupine</translation>
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka pri nastavitvi načina</translation>
     </message>
 </context>
 <context>

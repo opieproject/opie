@@ -3,422 +3,425 @@
     <name>AccountEditor</name>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Opozorilo</translation>
     </message>
     <message>
         <source>&lt;p&gt;Your signature is longer than 4 lines. This is considered inpolite by many people. You should shorten your signature.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Vaš podpis je daljši od 4 vrstic. To jenevljudno za mnogo ljudi. Dobro bi bilo, da skrajšate podpis.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamenjaj</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Nadaljuj</translation>
     </message>
 </context>
 <context>
     <name>AccountEditorBase</name>
     <message>
         <source>Account Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Urejevalnik računov</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Strežnik</translation>
     </message>
     <message>
         <source>&lt;b&gt;Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vrata:</translation>
     </message>
     <message>
         <source>&lt;b&gt;IMAP:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;IMAP:</translation>
     </message>
     <message>
         <source>[--]</source>
-        <translation type="unfinished"></translation>
+        <translation>[--]</translation>
     </message>
     <message>
         <source>&lt;b&gt;SMTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;SMTP:</translation>
     </message>
     <message>
         <source>&lt;b&gt;User:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Uporabnik:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Pass:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Geslo:</translation>
     </message>
     <message>
         <source>Identity</source>
-        <translation type="unfinished"></translation>
+        <translation>Identiteta</translation>
     </message>
     <message>
         <source>&lt;b&gt;Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ime:</translation>
     </message>
     <message>
         <source>&lt;b&gt;E-Mail:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;E-pošta:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Org:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Org:</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Napredno</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Kp</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished"></translation>
+        <translation>Skp</translation>
     </message>
     <message>
         <source>Reply-To</source>
-        <translation type="unfinished"></translation>
+        <translation>Odgovori</translation>
     </message>
     <message>
         <source>&lt;b&gt;Signature:</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Podpis:</translation>
     </message>
     <message>
         <source>SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>SSL</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation>IMAP</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi SSL</translation>
     </message>
     <message>
         <source>993</source>
-        <translation type="unfinished"></translation>
+        <translation>993</translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation>SMTP</translation>
     </message>
 </context>
 <context>
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ni nobenih vnosov v imeniku.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Izbrati morate najmanj en naslov.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerBase</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished"></translation>
+        <translation>Pobiralec naslovov</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekliči</translation>
     </message>
 </context>
 <context>
     <name>Composer</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <source>Please select an entry first.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim prvo izberite vnos.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Set Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi opis</translation>
     </message>
     <message>
         <source>&lt;div align=center&gt;Description</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;div align=center&gt;Opis</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to specify a recipient.&lt;br&gt;(eg: foo@bar.org)&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Morate izbrati naslovnika.&lt;br&gt;(primer: nekdo@nekje.si)&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;There was a problem sending some of the queued mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Prišlo je do problema pri pošiljanju čakajoče pošte.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Uspeh</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was queued successfully.&lt;/p&gt;&lt;p&gt;The queue contains </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sporočilo uspešno čaka v vrsti.&lt;/p&gt;&lt;p&gt;Vrsta vsebuje</translation>
     </message>
     <message>
         <source> mails.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>sporočil.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;font color=#ff0000&gt;Error occoured during sending.&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;font color=#ff0000&gt;Napaka se je pojavila pri pošiljanju.&lt;/font&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1&lt;/p</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1&lt;/p</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail was sent successfully.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Sporočilo je bilo uspešno poslano.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;The queued mails </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Čakajoča sporočila</translation>
     </message>
     <message>
         <source> of </source>
-        <translation type="unfinished"></translation>
+        <translation>od</translation>
     </message>
 </context>
 <context>
     <name>ComposerBase</name>
     <message>
         <source>Compose Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Sestavi sporočilo</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošta</translation>
     </message>
     <message>
         <source>Send the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošlji pošto</translation>
     </message>
     <message>
         <source>Queue the mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Postavi pošto v vrsto</translation>
     </message>
     <message>
         <source>Attach a file</source>
-        <translation type="unfinished"></translation>
+        <translation>Pripni datoteko</translation>
     </message>
     <message>
         <source>Addressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Imenik</translation>
     </message>
     <message>
         <source>Abort sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekini pošiljanje</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished"></translation>
+        <translation>Od</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished"></translation>
+        <translation>Odgovori</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished"></translation>
+        <translation>Za</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished"></translation>
+        <translation>Kp</translation>
     </message>
     <message>
         <source>Bcc</source>
-        <translation type="unfinished"></translation>
+        <translation>Skp</translation>
     </message>
     <message>
         <source>Subj.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zad.</translation>
     </message>
     <message>
         <source>Prio.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prio.</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Nizka</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normalna</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Visoka</translation>
     </message>
     <message>
         <source>Add an Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj prilogo</translation>
     </message>
     <message>
         <source>Remove Attachement</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrani prilogo</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenuj</translation>
     </message>
     <message>
         <source>Change Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Zamenjaj opis</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrani</translation>
     </message>
 </context>
 <context>
     <name>ConfigDiag</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select an account first.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Najprej morate izbrati račun.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vprašanje</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you relly want to delete the selected account?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ali res želite izbrisati izbrani račun?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
 </context>
 <context>
     <name>ConfigDiagBase</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve</translation>
     </message>
     <message>
         <source>Accounts</source>
-        <translation type="unfinished"></translation>
+        <translation>Računi</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>[Hidden]</source>
-        <translation type="unfinished"></translation>
+        <translation>[Skrit]</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nov</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Splošno</translation>
     </message>
     <message>
         <source>Mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Poštno obveščanje</translation>
     </message>
     <message>
         <source>Blink LED</source>
-        <translation type="unfinished"></translation>
+        <translation>LED naj utripa</translation>
     </message>
     <message>
         <source>Play sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Predvajaj zvok</translation>
     </message>
     <message>
         <source>&lt;b&gt;Check&amp;nbsp;every</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Preveri&amp;nbsp;vsakih</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished"></translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Disable mail notification</source>
-        <translation type="unfinished"></translation>
+        <translation>Onemogoči poštno obveščanje</translation>
     </message>
     <message>
         <source>&lt;p&gt;&lt;b&gt;Mail version %1&lt;/b&gt;&lt;hr&gt;
 Sponsored and Programmed by LISAsystems&lt;br&gt;
 Visit http://www.lisa.de/ for Information.
                             </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;&lt;b&gt;Različica pošte %1&lt;/b&gt;&lt;hr&gt;
+Sponzoriral in sprogramiral LISAsystems&lt;br&gt;
+Obiščite http://www.lisa.de/ za informacije.
+</translation>
     </message>
 </context>
 <context>
     <name>FolderWidget</name>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Preimenuj</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Premakni</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <source>Create folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustvari imenik</translation>
     </message>
     <message>
         <source>Rescan folder list</source>
@@ -426,7 +429,7 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please select an item first.&lt;/p&gt;</source>
@@ -434,11 +437,11 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Question</source>
-        <translation type="unfinished"></translation>
+        <translation>Vprašanje</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete &lt;pre&gt;%1&lt;/pre&gt;?</source>
@@ -446,15 +449,15 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>ne</translation>
     </message>
     <message>
         <source>Foldername</source>
-        <translation type="unfinished"></translation>
+        <translation>Imeimenika</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please enter the name of the new folder.&lt;/p&gt;</source>
@@ -462,15 +465,15 @@ Visit http://www.lisa.de/ for Information.
     </message>
     <message>
         <source>Looking up host...</source>
-        <translation type="unfinished"></translation>
+        <translation>Iščem gostitelja...</translation>
     </message>
     <message>
         <source>Host found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Gostitelj najden.</translation>
     </message>
     <message>
         <source>Connected to host.</source>
-        <translation type="unfinished"></translation>
+        <translation>Priklopljen na gostitelja.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The IMAP connection was refused.&lt;/p&gt;</source>

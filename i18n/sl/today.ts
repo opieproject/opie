@@ -31,19 +31,19 @@
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Danes ni več sestankov</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Danes ni sestankov</translation>
     </message>
     <message>
         <source>Owned by </source>
-        <translation type="unfinished"></translation>
+        <translation>Lastnik je</translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosim izplonite poslovno kartico</translation>
     </message>
 </context>
 <context>
@@ -54,7 +54,7 @@
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished">Danes</translation>
+        <translation>Danes</translation>
     </message>
 </context>
 <context>
@@ -132,19 +132,26 @@ nadaljevanju? (samo Opie)</translation>
 appointment
 should
 be shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Koliko
+sestankov
+naj bo
+prikazanih?</translation>
     </message>
     <message>
         <source>Should today be
 autostarted on
 resume? (Opie only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Naj se danes
+avtomatsko zažene
+ob nadaljevanju? (samo Opie)</translation>
     </message>
     <message>
         <source>Activate the  
 autostart after how
 many minutes?</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiviraj
+avtomatski zagon po
+koliko minutah?</translation>
     </message>
 </context>
 </TS>

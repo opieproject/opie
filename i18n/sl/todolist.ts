@@ -54,35 +54,35 @@
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Povzetek:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Napredovanje:</translation>
     </message>
     <message>
         <source>0%</source>
-        <translation type="unfinished"></translation>
+        <translation>0%</translation>
     </message>
     <message>
         <source>20%</source>
-        <translation type="unfinished"></translation>
+        <translation>20%</translation>
     </message>
     <message>
         <source>40%</source>
-        <translation type="unfinished"></translation>
+        <translation>40%</translation>
     </message>
     <message>
         <source>60%</source>
-        <translation type="unfinished"></translation>
+        <translation>60%</translation>
     </message>
     <message>
         <source>80%</source>
-        <translation type="unfinished"></translation>
+        <translation>80%</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Rok</translation>
     </message>
 </context>
 <context>
@@ -198,39 +198,39 @@ Izhod?</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži rok</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Podatki</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation type="unfinished"></translation>
+        <translation>Pisave</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation type="unfinished"></translation>
+        <translation>Poglej opravila</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši vse...</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Podvoji</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbire</translation>
     </message>
     <message>
         <source>Delete all tasks?</source>
@@ -238,7 +238,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>all tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>vsa opravila</translation>
     </message>
 </context>
 </TS>
