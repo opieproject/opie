@@ -13,6 +13,7 @@
 
 /* OPIE */
 #include <opie2/odebug.h>
+#include <qpe/applnk.h>
 #include <qpe/storage.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -51,33 +52,40 @@ void AdvancedFm::init() {
 	 menuBar->insertItem( tr( "File" ), fileMenu);
 	 menuBar->insertItem( tr( "View" ), viewMenu);
 
+	 QPixmap pm;
 	 cdUpButton = new QToolButton( 0,"cdUpButton");
-	 cdUpButton->setPixmap(Resource::loadPixmap("up"));
+	 pm.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+	 cdUpButton->setPixmap( pm );
 	 cdUpButton->setAutoRaise( true );
 	 menuBar->insertItem( cdUpButton );
 
 	 qpeDirButton= new QToolButton( 0,"QPEButton");
-	 qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
+	 pm.convertFromImage( Resource::loadImage( "logo/opielogo" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+	 qpeDirButton->setPixmap( pm );//,"",this,"QPEButton");
 	 qpeDirButton->setAutoRaise( true );
 	 menuBar->insertItem( qpeDirButton );
 
 	 cfButton = new QToolButton( 0, "CFButton");
-	 cfButton->setPixmap(Resource::loadPixmap("cardmon/pcmcia"));
+	 pm.convertFromImage( Resource::loadImage( "cardmon/pcmcia" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+	 cfButton->setPixmap( pm );
 	 cfButton->setAutoRaise( true );
 	 menuBar->insertItem( cfButton );
 
 	 sdButton = new QToolButton( 0, "SDButton");
-	 sdButton->setPixmap(Resource::loadPixmap("advancedfm/sdcard"));
+	 pm.convertFromImage( Resource::loadImage( "advancedfm/sdcard" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+	 sdButton->setPixmap( pm );
 	 sdButton->setAutoRaise( true );
 	 menuBar->insertItem( sdButton );
 
 	 docButton = new QToolButton( 0,"docsButton");
-	 docButton->setPixmap(Resource::loadPixmap("DocsIcon"));
+	 pm.convertFromImage( Resource::loadImage( "DocsIcon" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+	 docButton->setPixmap( pm );
 	 docButton->setAutoRaise( true );
 	 menuBar->insertItem( docButton );
 
 	 homeButton = new QToolButton( 0, "homeButton");
-	 homeButton->setPixmap(Resource::loadPixmap("home"));
+	 pm.convertFromImage( Resource::loadImage( "home" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+	 homeButton->setPixmap( pm );
 	 homeButton->setAutoRaise( true );
 	 menuBar->insertItem( homeButton );
 
