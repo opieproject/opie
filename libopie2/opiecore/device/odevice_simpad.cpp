@@ -196,6 +196,67 @@ void SIMpad::initButtons()
 #define SIMPAD_BACKLIGHT_CONTROL "/proc/driver/mq200/registers/PWM_CONTROL"
 #define SIMPAD_BACKLIGHT_MASK    0x00a10044
 
+
+/*
+ * The SIMpad exposes ChipSelect3 to userspace
+ * via a proc filesystem file. Using this register
+ * one can toggle power of serial, irda, dect circuits
+ * change the video driver and display status and
+ * many more things.
+ * To not lose the current setting we read the current
+ * cs3 setting and toggle the necessary bits and then
+ * write it.
+ */
+static bool setCS3Bit(  bool bitset, int bit ) {
+    int cs3_fd = ::open( SIMPAD_BOARDCONTROL, O_RDONLY );
+
+    if ( cs3_fd < 0 )
+        return false;
+
+    static char line[32];
+    int  val = 0;
+    bool ok  = false;
+
+    /*
+     * try to read and parse the Chipselect3 status
+     * be paranoid and make sure line[31] is null
+     * terminated
+     */
+    while( !ok && ::read(cs3_fd, &line, sizeof(line)) > 0 ) {
+        line[31] = '\0';
+        if (::sscanf(line, "Chipselect3 : %x", &val ))
+            ok = true;
+    }
+
+    ::close(cs3_fd);
+
+    /*
+     * we were not able to find the current value
+     * and as a result we won't set it
+     */
+    if ( !ok )
+        return false;
+
+    /*
+     * change the value
+     */
+    val = bitset ? (val | bit) : (val & ~bit);
+
+    /*
+     * write it back
+     */
+    cs3_fd = ::open( SIMPAD_BOARDCONTROL, O_WRONLY );
+    if ( cs3_fd < 0 )
+        return false;
+
+    ::snprintf(line, sizeof(line), "0x%04x\n", val);
+    ::write(cs3_fd, line, strlen(line));
+    ::close(cs3_fd);
+
+    return true;
+}
+
+
 QValueList <OLed> SIMpad::ledList() const
 {
     QValueList <OLed> vl;
@@ -229,21 +290,12 @@ OLedState SIMpad::ledState ( OLed l ) const
 
 bool SIMpad::setLedState ( OLed l, OLedState st )
 {
-#if 0
-    static int fd = ::open ( SIMPAD_BOARDCONTROL, O_RDWR | O_NONBLOCK );
+    if ( l == Led_Power ) {
+        m_leds [0] = st;
+        setCS3Bit(st == Led_On, SIMPAD_LED2_ON);
+	return true;
+    }
 
-            /*TODO Implement this like that:
-            read from cs3
-            && with SIMPAD_LED2_ON
-            write to cs3 */
-                m_leds [0] = st;
-                return true;
- //          }
-//        }
-#else
-    Q_UNUSED( l )
-    Q_UNUSED( st )
-#endif
     return false;
 }
 
@@ -310,10 +362,7 @@ bool SIMpad::setDisplayStatus ( bool on )
 {
     qDebug( "ODevice for SIMpad: setDisplayStatus(%s)", on? "on" : "off" );
 
-
-    QString cmdline = QString().sprintf( "echo %s > /proc/cs3", on ? "0xd41a" : "0xd40a" ); //TODO make better :)
-
-    return ( ::system( (const char*) cmdline ) == 0 );
+    return setCS3Bit(on, SIMPAD_DISPLAY_ON);
 }
 
 
