@@ -27,7 +27,7 @@
 #ifndef QTOPIA_PROGRAM_MONITOR
 #define QTOPIA_PROGRAM_MONITOR
 #endif
-#include <qtopia/global.h>
+#include <opie2/oglobal.h>
 
 #ifndef Q_OS_WIN32
 #include <sys/stat.h>
@@ -61,7 +61,6 @@
 
 #include "applauncher.h"
 #include "documentlist.h"
-#include "launcherglobal.h"
 
 const int AppLauncher::RAISE_TIMEOUT_MS = 5000;
 
@@ -404,7 +403,7 @@ void AppLauncher::sigStopped(int sigPid, int sigStatus)
 	if ( exitStatus == 255 ) {  //could not find app (because global returns -1)
 	    QMessageBox::information(0, tr("Application not found"), tr("<qt>Could not locate application <b>%1</b></qt>").arg( app->exec() ) );
 	} else  {
-	    QFileInfo fi(Opie::Global::tempDir() + "qcop-msg-" + appName);
+	    QFileInfo fi(OGlobal::tempDirPath() + "qcop-msg-" + appName);
 	    if ( fi.exists() && fi.size() ) {
 		emit terminated(sigPid, appName);
                 qWarning("Re executing obmitted for %s", appName.latin1() );
@@ -446,8 +445,8 @@ bool AppLauncher::isRunning(const QString &app)
 
 bool AppLauncher::executeBuiltin(const QString &c, const QString &document)
 {
-    Global::Command* builtin = Opie::Global::builtinCommands();
-    QGuardedPtr<QWidget> *running = Opie::Global::builtinRunning();
+    Global::Command* builtin = OGlobal::builtinCommands();
+    QGuardedPtr<QWidget> *running = OGlobal::builtinRunning();
 
     // Attempt to execute the app using a builtin class for the app
     if (builtin) {
@@ -497,7 +496,7 @@ bool AppLauncher::execute(const QString &c, const QString &docParam, bool noRais
 	channel += appName.latin1();
 
 	// Need to lock it to avoid race conditions with QPEApplication::processQCopFile
-	QFile f(Opie::Global::tempDir() + "qcop-msg-" + appName);
+	QFile f(OGlobal::tempDirPath() + "qcop-msg-" + appName);
 	if ( !noRaise && f.open(IO_WriteOnly | IO_Append) ) {
 #ifndef Q_OS_WIN32
 	    flock(f.handle(), LOCK_EX);

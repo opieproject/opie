@@ -51,8 +51,8 @@
 #include <qtopia/global.h>
 //#include <qtopia/custom.h>
 
-#include <opie/odevicebutton.h>
-#include <opie/odevice.h>
+#include <opie2/odevicebutton.h>
+#include <opie2/odevice.h>
 
 #include <unistd.h>
 #include <qmainwindow.h>

@@ -5,7 +5,7 @@
 #include <qpe/power.h>
 #include <qpe/network.h>
 
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 
 using namespace Opie;

@@ -19,12 +19,12 @@
 **********************************************************************/
 #include "documentlist.h"
 #include "serverinterface.h"
-#include "launcherglobal.h"
+
+#include <opie2/oglobal.h>
 
 #include <qtopia/config.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/resource.h>
-#include <qtopia/global.h>
 #include <qtopia/private/categories.h>
 #include <qtopia/qpeapplication.h>
 #include <qtopia/applnk.h>
@@ -90,7 +90,10 @@ public:
 };
 
 
-DocumentList::DocumentList( ServerInterface *serverGui, bool scanDocs,
+/*
+ * scandocs will be read from Config
+ */
+DocumentList::DocumentList( ServerInterface *serverGui, bool /*scanDocs*/,
 			    QObject *parent, const char *name )
  : QObject( parent, name )
 {
@@ -269,7 +272,7 @@ void DocumentList::linkChanged( QString arg )
 {
     //qDebug( "linkchanged( %s )", arg.latin1() );
 
-    if ( arg.isNull() || Opie::Global::isAppLnkFileName( arg ) ) {
+    if ( arg.isNull() || OGlobal::isAppLnkFileName( arg ) ) {
 	reloadAppLnks();
     } else {
 

@@ -46,7 +46,6 @@ HEADERS		+= server.h \
 	$$(OPIEDIR)/rsync/qrsync.h \
 		  syncdialog.h \
 		  serverapp.h \
-		  launcherglobal.h \
 		  qprocess.h \
 		  screensaver.h
 
@@ -101,7 +100,6 @@ SOURCES		+= server.cpp \
 	$$(OPIEDIR)/rsync/qrsync.cpp \
 		  syncdialog.cpp \
 		  serverapp.cpp \
-		  launcherglobal.cpp \
 		  qprocess.cpp \
 		  qprocess_unix.cpp \
 		  screensaver.cpp
@@ -115,11 +113,12 @@ DEPENDPATH	+= $(OPIEDIR)/rsync
 
 TARGET		= qpe
 
+#needs OWait and ODevice
 CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
 contains( CONFTEST, y ){
-  LIBS += -lqpe -lopie
+  LIBS += -lqpe -lopiecore2 -lopieui2
 }else{
-  LIBS	+= -lcrypt -lqpe -lopie
+  LIBS	+= -lcrypt -lqpe -lopiecore2 -lopieui2
 }
 
 include ( $(OPIEDIR)/include.pro )

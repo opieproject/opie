@@ -19,7 +19,7 @@
 **********************************************************************/
 //#define _XOPEN_SOURCE
 
-#include <qtopia/global.h>
+#include <opie2/oglobal.h>
 #include <qtopia/qpeapplication.h>
 
 #ifndef Q_OS_WIN32
@@ -32,7 +32,7 @@
 #ifndef Q_OS_MACX
 #include <shadow.h>
 #include <crypt.h>
-#endif /* Q_OS_MACX */ 
+#endif /* Q_OS_MACX */
 
 #else
 #include <stdlib.h>
@@ -63,7 +63,6 @@
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 
-#include "launcherglobal.h"
 
 #include "transferserver.h"
 #include <qtopia/qprocess.h>
@@ -114,7 +113,7 @@ QString SyncAuthentication::serverId()
     QString r = cfg.readEntry("serverid");
 
     if ( r.isEmpty() ) {
-        r = Opie::Global::uuid();
+        r = OGlobal::generateUuid();
         cfg.writeEntry("serverid", r );
     }
    return r;
@@ -193,18 +192,18 @@ bool SyncAuthentication::checkPassword( const QString& password )
     static int lastdenial=0;
     static int denials=0;
     int now = time(0);
- 
+
     Config cfg("Security");
-    cfg.setGroup("Sync");    
+    cfg.setGroup("Sync");
     QString syncapp = cfg.readEntry("syncapp","Qtopia");
-    
+
     //No password needed if the user really wants it
     if (syncapp == "IntelliSync") {
     	return TRUE;
-    }	
-      
+    }
+
     // Detect old Qtopia Desktop (no password)
-    if ( password.isEmpty() ) {	
+    if ( password.isEmpty() ) {
 		if ( denials < 3 || now > lastdenial+600 ) {
 		    QMessageBox unauth(
 			tr("Sync Connection"),
@@ -219,17 +218,17 @@ bool SyncAuthentication::checkPassword( const QString& password )
 
 		    denials++;
 		    lastdenial=now;
-		 } 
+		 }
 		return FALSE;
-	   
-    } 
+
+    }
 
     // Second, check sync password...
 
     static int lock=0;
     if ( lock ) return FALSE;
 
-    ++lock;    
+    ++lock;
 
     /*
      *  we need to support old Sync software and QtopiaDesktop

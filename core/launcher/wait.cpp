@@ -23,7 +23,7 @@
 #include <qtopia/resource.h>
 #include <qtopia/config.h>
 
-#include <opie/owait.h>
+#include <opie2/owait.h>
 
 #include <qwidget.h>
 #include <qpixmap.h>

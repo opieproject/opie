@@ -21,11 +21,13 @@
 #include "qcopbridge.h"
 #include "transferserver.h"
 
+#include <opie2/oglobal.h>
+
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 #include <qtopia/qpeapplication.h>
-#include <qtopia/global.h>
+
 #include <qtopia/version.h>
 #include <qtopia/config.h>
 
@@ -55,7 +57,6 @@
 #include <shadow.h>
 #endif
 
-#include "launcherglobal.h"
 
 //#define INSECURE
 
@@ -325,7 +326,7 @@ void QCopBridgePI::sendDesktopMessage( const QCString &msg, const QByteArray& da
     writeBlock(hdr,sizeof(hdr)-1);
     writeBlock(msg,msg.length());
     writeBlock(" ",1);
-    QByteArray b64 = Opie::Global::encodeBase64(data);
+    QByteArray b64 = OGlobal::encodeBase64(data);
     writeBlock(b64.data(),b64.size());
     writeBlock("\r\n",2);
 

@@ -354,7 +354,6 @@ void StartMenu::loadApplets()
 
     while ( napplets-- ) {
         MenuApplet *applet = xapplets[napplets];
-
         applet->popup = applet->iface->popup( this );
 
         // menuApplets got an id < -1
@@ -383,6 +382,7 @@ void StartMenu::addApplets(QPopupMenu* pop) {
         else
             applet->id = pop->insertItem( applet->iface->icon(),
                                           applet->iface->text() );
+
 
         dict.insert( applet->id, new MenuApplet( *applet ) );
     }

@@ -27,13 +27,14 @@
 #include "stabmon.h"
 #include "launcher.h"
 #include "firstuse.h"
-#include "launcherglobal.h"
+
+#include <opie2/oglobal.h>
 
 #include <qtopia/qpeapplication.h>
 #include <qtopia/network.h>
 #include <qtopia/config.h>
 //#include <qtopia/custom.h>
-#include <qtopia/global.h>
+
 
 #include <qfile.h>
 #include <qdir.h>
@@ -64,14 +65,14 @@
 #endif
 
 #include <qmessagebox.h>
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 
 using namespace Opie;
 
 
 static void cleanup()
 {
-    QDir dir( Opie::Global::tempDir(), "qcop-msg-*" );
+    QDir dir( OGlobal::tempDirPath(), "qcop-msg-*" );
 
     QStringList stale = dir.entryList();
     QStringList::Iterator it;
