@@ -16,8 +16,7 @@
 /**
  * Constructor.  Sets hasWirelessExtensions
  */ 
-WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false){
-  interface = interfaceName;
+WExtensions::WExtensions(QString interfaceName): hasWirelessExtensions(false), interface(interfaceName) {
   fd = socket( AF_INET, SOCK_DGRAM, 0 );
   if(fd == -1) 
     return;

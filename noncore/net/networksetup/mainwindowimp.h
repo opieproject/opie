@@ -33,10 +33,10 @@ private slots:
   void newProfileChanged(const QString& newText);
 
 private:
-  void loadModules(QString path);
+  void loadModules(const QString &path);
   
-  Module* loadPlugin(QString pluginFileName,
-		     QString resolveString = "create_plugin");
+  Module* loadPlugin(const QString &pluginFileName,
+		     const QString &resolveString = "create_plugin");
 
   // For our local list of names
   QMap<QString, Interface*> interfaceNames;

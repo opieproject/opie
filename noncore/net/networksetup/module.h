@@ -22,7 +22,7 @@ public:
    * neccesary changes also.
    * @param newProfile what the profile should be changed to.
    */ 
-  virtual void setProfile(QString newProfile) = 0;
+  virtual void setProfile(const QString &newProfile) = 0;
   
   /**
    * get the icon name for this device.
@@ -70,7 +70,7 @@ public:
    * @return Interface* NULL if it was unable to be created.
    * @param name the type of interface to create
    */  
-  virtual Interface *addNewInterface(QString name) = 0;
+  virtual Interface *addNewInterface(const QString &name) = 0;
   
   /**
    * Attempts to remove the interface, doesn't delete i

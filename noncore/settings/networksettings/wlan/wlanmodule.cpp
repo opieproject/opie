@@ -26,7 +26,7 @@ WLANModule::~WLANModule(){
 /**
  * Change the current profile
  */ 
-void WLANModule::setProfile(QString newProfile){
+void WLANModule::setProfile(const QString &newProfile){
   profile = newProfile;
 }
 
@@ -94,7 +94,7 @@ QList<Interface> WLANModule::getInterfaces(){
  *  by possibleNewInterfaces();
  * @return Interface* NULL if it was unable to be created.
  */ 
-Interface *WLANModule::addNewInterface(QString ){
+Interface *WLANModule::addNewInterface(const QString &){
   // We can't add a 802.11 interface, either the hardware will be there
   // or it wont. 
   return NULL; 

@@ -4,7 +4,7 @@
 #include "info.h"
 
 class QTimer;
-class WExtensions;
+//class WExtensions;
 
 class WlanInfoImp : public WlanInfo {
   Q_OBJECT

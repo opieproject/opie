@@ -21,7 +21,6 @@ public slots:
 private:
   Interfaces *interfaces;
   Interface *interface;
-
 };
 
 

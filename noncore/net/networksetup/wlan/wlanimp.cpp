@@ -44,7 +44,7 @@ WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, W
 /**
  * Change the profile for both wireless settings and network settings.
  */ 
-void WLANImp::setProfile(QString &profile){
+void WLANImp::setProfile(const QString &profile){
   interfaceSetup->setProfile(profile);
   parseSettingFile();
 }

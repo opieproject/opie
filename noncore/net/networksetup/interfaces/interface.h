@@ -15,21 +15,20 @@ signals:
   
 public:
   Interface(QObject * parent=0, const char * name= "unknown", bool status = false);
-  virtual ~Interface(){};
   
-  virtual QString getInterfaceName(){ QString n(this->name()); return n; };
+  QString getInterfaceName(){ QString n(this->name()); return n; };
   
-  virtual bool getStatus(){ return status; };
-  virtual void setStatus(bool newStatus);
+  bool getStatus(){ return status; };
+  void setStatus(bool newStatus);
 
-  virtual bool isAttached(){ return attached; };
-  virtual void setAttached(bool isAttached=false);
+  bool isAttached(){ return attached; };
+  void setAttached(bool isAttached=false);
   
-  virtual QString getHardwareName(){ return hardwareName; };
-  virtual void setHardwareName(QString name="Unknown");
+  QString getHardwareName(){ return hardwareName; };
+  void setHardwareName(const QString &name="Unknown");
   
-  virtual Module* getModuleOwner(){ return moduleOwner; };
-  virtual void setModuleOwner(Module *owner=NULL);
+  Module* getModuleOwner(){ return moduleOwner; };
+  void setModuleOwner(Module *owner=NULL);
 
   // inet information.
   QString getMacAddress(){ return macAddress; };

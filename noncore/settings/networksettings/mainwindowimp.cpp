@@ -30,7 +30,7 @@
 
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 
-MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true), advancedUserMode(false){
+MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, true), advancedUserMode(false), scheme(DEFAULT_SCHEME){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
@@ -189,7 +189,7 @@ void MainWindowImp::getAllInterfaces(){
  * @param path a directory that is scaned for any plugins that can be loaded
  *  and attempts to load them
  */ 
-void MainWindowImp::loadModules(QString path){
+void MainWindowImp::loadModules(const QString &path){
   //qDebug(path.latin1());
   QDir d(path);
   if(!d.exists())
@@ -214,7 +214,7 @@ void MainWindowImp::loadModules(QString path){
  * @param resolveString - function pointer to resolve 
  * @return pointer to the function with name resolveString or NULL
  */ 
-Module* MainWindowImp::loadPlugin(QString pluginFileName, QString resolveString){
+Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &resolveString){
   //qDebug(QString("MainWindowImp::loadPlugin: %1").arg(pluginFileName).latin1());
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);

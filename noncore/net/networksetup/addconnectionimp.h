@@ -13,7 +13,7 @@ Q_OBJECT
 	
 public:
   AddConnectionImp(QWidget *parent=0, const char *name=0, WFlags f=0);
-  void addConnections(QMap<QString, QString> newList);
+  void addConnections(const QMap<QString, QString> &newList);
    
 private slots:
   void changed();

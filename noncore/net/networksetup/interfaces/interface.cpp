@@ -42,7 +42,7 @@ void Interface::setAttached(bool isAttached){
  * @param name - the new name
  * emit updateInterface
  */ 
-void Interface::setHardwareName(QString name){
+void Interface::setHardwareName(const QString &name){
   hardwareName = name;
   emit(updateInterface(this));
 };
