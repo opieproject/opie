@@ -1,4 +1,5 @@
 Makefile
+Makefile.in
 moc*
 pindlgbase.cpp
 pindlgbase.h
