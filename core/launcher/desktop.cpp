@@ -188,13 +188,16 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
 	    return TRUE;
 	  bool press = ke->simpleData.is_press;
 
-	  KeyRegisterList::Iterator it;
-	  for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
+	  if (!keyRegisterList.isEmpty())
 		{
-		  if ((*it).getKeyCode() == ke->simpleData.keycode)
-			QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+		  KeyRegisterList::Iterator it;
+		  for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
+			{
+			  if ((*it).getKeyCode() == ke->simpleData.keycode)
+				QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+			}
 		}
-	  
+
 	  if ( !keyboardGrabbed() ) {
 	    if ( ke->simpleData.keycode == Key_F9 ) {
 		  if ( press ) emit datebook();
@@ -228,12 +231,7 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
 		  return TRUE;
 	    }
 	  }
-	  /*
-	  if ( ke->simpleData.keycode == 4096 ) {
-		QCopEnvelope e("QPE/VMemo", "toggleRecord()");
-		return TRUE;
-	  }
-	  */
+
 	  if ( ke->simpleData.keycode == Key_F34 ) {
 	    if ( press ) emit power();
 	    return TRUE;
