@@ -5,6 +5,7 @@
 
 #include <opie2/oapplicationfactory.h>
 #include <qpe/config.h>
+#include <qpe/global.h>
 
 #include <qapplication.h>
 #include <qdir.h>
@@ -143,9 +144,7 @@ SFCave :: SFCave( QWidget *w, const char *name, WFlags fl )
     
     replayIt = 0;
 
-    replayFile = QDir::home().path();
-    replayFile += "/sfcave.replay";
-    printf( "%s\n", (const char *)replayFile );
+    replayFile = Global::applicationFileName("sfcave", "replay");
 
     sWidth = width();
     sHeight = height();
@@ -924,10 +923,10 @@ void SFCave :: saveScore()
 void SFCave :: saveReplay()
 {
     FILE *out;
-    out = fopen( (const char *)replayFile, "w" );
+    out = fopen( QFile::encodeName(replayFile).data(), "w" );
     if ( !out )
     {
-        printf( "Couldn't write to /home/root/sfcave.replay\n" );
+        printf( "Couldn't write to %s\n", QFile::encodeName(replayFile).data() );
         return;
     }
 
@@ -955,13 +954,13 @@ void SFCave :: saveReplay()
    
     fclose( out );
 
-    printf( "Replay saved to %s\n", (const char *)replayFile );
+    printf( "Replay saved to %s\n", QFile::encodeName(replayFile).data() );
 
 }
 
 void SFCave :: loadReplay()
 {
-    FILE *in = fopen( (const char *)replayFile, "r" );
+    FILE *in = fopen( QFile::encodeName(replayFile).data() , "r" );
 
     if ( in == 0 )
     {
@@ -1003,7 +1002,7 @@ void SFCave :: loadReplay()
 
     fclose( in );
     
-    printf( "Replay loaded from %s\n", (const char *)replayFile );
+    printf( "Replay loaded from %s\n", QFile::encodeName(replayFile).data() );
 }
 
 
