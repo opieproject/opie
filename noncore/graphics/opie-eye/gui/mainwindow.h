@@ -14,8 +14,10 @@
 
 namespace Opie {
 namespace Ui{
-    class OKeyConfigManager;
     class OWidgetStack;
+}
+namespace Core{
+    class OKeyConfigManager;
 }
 }
 

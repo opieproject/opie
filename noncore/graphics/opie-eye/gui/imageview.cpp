@@ -23,7 +23,7 @@ ImageView::~ImageView()
     }
 }
 
-Opie::Ui::OKeyConfigManager* ImageView::manager()
+Opie::Core::OKeyConfigManager* ImageView::manager()
 {
     if (!m_viewManager) {
         initKeys();
@@ -38,18 +38,18 @@ void ImageView::initKeys()
         m_cfg = new Opie::Core::OConfig("phunkview");
         m_cfg->setGroup("image_view_keys" );
     }
-    Opie::Ui::OKeyPair::List lst;
-    lst.append( Opie::Ui::OKeyPair::upArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::downArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::leftArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::returnKey() );
+    Opie::Core::OKeyPair::List lst;
+    lst.append( Opie::Core::OKeyPair::upArrowKey() );
+    lst.append( Opie::Core::OKeyPair::downArrowKey() );
+    lst.append( Opie::Core::OKeyPair::leftArrowKey() );
+    lst.append( Opie::Core::OKeyPair::rightArrowKey() );
+    lst.append( Opie::Core::OKeyPair::returnKey() );
 
-    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "image_view_keys",
+    m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "image_view_keys",
                                                     lst, false,this, "image_view_keys" );
-    m_viewManager->addKeyConfig( Opie::Ui::OKeyConfigItem(tr("View Image Info"), "imageviewinfo",
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Image Info"), "imageviewinfo",
                                                 Resource::loadPixmap("1to1"), ViewInfo,
-                                                Opie::Ui::OKeyPair(Qt::Key_I,Qt::ShiftButton),
+                                                Opie::Core::OKeyPair(Qt::Key_I,Qt::ShiftButton),
                                                 this, SLOT(slotShowImageInfo())));
     m_viewManager->handleWidget( this );
     m_viewManager->load();

@@ -29,7 +29,7 @@ public:
 private slots:
     void slotClicked();
 private:
-    Opie::Ui::OKeyConfigManager *m_manager;
+    Opie::Core::OKeyConfigManager *m_manager;
 };
 
 
@@ -76,23 +76,23 @@ TestMainWindow::TestMainWindow( QWidget* parent, const char* slot, WFlags fl )
     m_config  = new Opie::Core::OConfig( "test_config_foo" );
 
     /* generate the black list */
-    Opie::Ui::OKeyPair::List blackList;
-    blackList.append( Opie::Ui::OKeyPair::leftArrowKey() );
-    blackList.append( Opie::Ui::OKeyPair::rightArrowKey() );
-    blackList.append( Opie::Ui::OKeyPair::downArrowKey() );
-    blackList.append( Opie::Ui::OKeyPair::upArrowKey() );
+    Opie::Core::OKeyPair::List blackList;
+    blackList.append( Opie::Core::OKeyPair::leftArrowKey() );
+    blackList.append( Opie::Core::OKeyPair::rightArrowKey() );
+    blackList.append( Opie::Core::OKeyPair::downArrowKey() );
+    blackList.append( Opie::Core::OKeyPair::upArrowKey() );
 
-    m_manager = new Opie::Ui::OKeyConfigManager( m_config, "Key Group",
+    m_manager = new Opie::Core::OKeyConfigManager( m_config, "Key Group",
                                                  blackList, false, this, "Key Manager" );
 
-    m_manager->addKeyConfig( Opie::Ui::OKeyConfigItem( tr( "Delete Action" ), "delete_key", QPixmap(),
-                                                       10, Opie::Ui::OKeyPair( Qt::Key_D, Qt::ShiftButton ), this,
+    m_manager->addKeyConfig( Opie::Core::OKeyConfigItem( tr( "Delete Action" ), "delete_key", QPixmap(),
+                                                       10, Opie::Core::OKeyPair( Qt::Key_D, Qt::ShiftButton ), this,
                                                        SLOT(slotDelete(QWidget*,QKeyEvent*)) ) );
-    m_manager->addKeyConfig( Opie::Ui::OKeyConfigItem( tr( "Show Action" ), "show_key", QPixmap(),
-                                                       11, Opie::Ui::OKeyPair( Qt::Key_S, Qt::AltButton ) ) );
+    m_manager->addKeyConfig( Opie::Core::OKeyConfigItem( tr( "Show Action" ), "show_key", QPixmap(),
+                                                       11, Opie::Core::OKeyPair( Qt::Key_S, Qt::AltButton ) ) );
 
-    connect(m_manager, SIGNAL(actionActivated(QWidget*,QKeyEvent*,const Opie::Ui::OKeyConfigItem&)),
-            this, SLOT(slotAction(QWidget*, QKeyEvent*, const Opie::Ui::OKeyConfigItem&)) );
+    connect(m_manager, SIGNAL(actionActivated(QWidget*,QKeyEvent*,const Opie::Core::OKeyConfigItem&)),
+            this, SLOT(slotAction(QWidget*, QKeyEvent*, const Opie::Core::OKeyConfigItem&)) );
 // when commenting the line below out the keyPressEvent will work
     m_manager->handleWidget( this );
     m_manager->load();
@@ -103,7 +103,7 @@ TestMainWindow::~TestMainWindow() {
     delete m_config;
 }
 
-Opie::Ui::OKeyConfigManager* TestMainWindow::manager() {
+Opie::Core::OKeyConfigManager* TestMainWindow::manager() {
     return m_manager;
 }
 
@@ -121,7 +121,7 @@ void TestMainWindow::slotDelete( QWidget* wid, QKeyEvent* ev ) {
     qWarning( "Slot Delete %d %d %d", wid, ev->key(), ev->state() );
 }
 
-void TestMainWindow::slotAction( QWidget* wid, QKeyEvent* ev, const Opie::Ui::OKeyConfigItem& item) {
+void TestMainWindow::slotAction( QWidget* wid, QKeyEvent* ev, const Opie::Core::OKeyConfigItem& item) {
     qWarning( "Slot Action %d %d %d %s %d", wid, ev->key(), ev->state(), item.text().latin1(),  item.id() );
 }
 

@@ -3,29 +3,31 @@
  */
 #include <opie2/olistview.h>
 
+#include <opie2/okeyconfigmanager_p.h>
 
 namespace Opie {
 namespace Ui {
 namespace Internal {
-    static QString keyToString( const OKeyPair& );
-    static void fixupKeys( int&, int&, QKeyEvent* );
+    static QString keyToString( const Opie::Core::OKeyPair& );
     class OKeyListViewItem : public Opie::Ui::OListViewItem {
     public:
-        OKeyListViewItem( const OKeyConfigItem& item, OKeyConfigManager*, Opie::Ui::OListViewItem* parent);
+        OKeyListViewItem( const Opie::Core::OKeyConfigItem& item,
+                          Opie::Core::OKeyConfigManager*,
+                          Opie::Ui::OListViewItem* parent);
         ~OKeyListViewItem();
 
         void setDefault();
 
-        OKeyConfigItem& item();
-        OKeyConfigItem origItem()const;
-        void setItem( const OKeyConfigItem& item );
+        Opie::Core::OKeyConfigItem& item();
+        Opie::Core::OKeyConfigItem origItem()const;
+        void setItem( const Opie::Core::OKeyConfigItem& item );
         void updateText();
 
-        OKeyConfigManager *manager();
+        Opie::Core::OKeyConfigManager *manager();
     private:
-        OKeyConfigItem m_item;
-        OKeyConfigItem m_origItem;
-        OKeyConfigManager* m_manager;
+        Opie::Core::OKeyConfigItem m_item;
+        Opie::Core::OKeyConfigItem m_origItem;
+        Opie::Core::OKeyConfigManager* m_manager;
 
     };
 }

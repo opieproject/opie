@@ -33,7 +33,7 @@
 #include <qstyle.h>
 
 
-using Opie::Ui::OKeyConfigItem;
+using Opie::Core::OKeyConfigItem;
 
 /*
  * The Icons, Request Cache and IconViewItem for the IconView
@@ -156,7 +156,7 @@ PIconView::~PIconView() {
     delete m_viewManager;
 }
 
-Opie::Ui::OKeyConfigManager* PIconView::manager() {
+Opie::Core::OKeyConfigManager* PIconView::manager() {
     return m_viewManager;
 }
 
@@ -166,30 +166,30 @@ Opie::Ui::OKeyConfigManager* PIconView::manager() {
  * called from the c'tor
  */
 void PIconView::initKeys() {
-    Opie::Ui::OKeyPair::List lst;
-    lst.append( Opie::Ui::OKeyPair::upArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::downArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::leftArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::returnKey() );
+    Opie::Core::OKeyPair::List lst;
+    lst.append( Opie::Core::OKeyPair::upArrowKey() );
+    lst.append( Opie::Core::OKeyPair::downArrowKey() );
+    lst.append( Opie::Core::OKeyPair::leftArrowKey() );
+    lst.append( Opie::Core::OKeyPair::rightArrowKey() );
+    lst.append( Opie::Core::OKeyPair::returnKey() );
 
-    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "View-KeyBoard-Config",
+    m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "View-KeyBoard-Config",
                                                     lst, false,this, "keyconfig name" );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Beam Current Item") , "beam",
                                                 Resource::loadPixmap("beam"), BeamItem,
-                                                Opie::Ui::OKeyPair(Qt::Key_B, Qt::ShiftButton),
+                                                Opie::Core::OKeyPair(Qt::Key_B, Qt::ShiftButton),
                                                 this, SLOT(slotBeam())) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Delete Current Item"), "delete",
                                                 Resource::loadPixmap("trash"), DeleteItem,
-                                                Opie::Ui::OKeyPair(Qt::Key_D, Qt::ShiftButton),
+                                                Opie::Core::OKeyPair(Qt::Key_D, Qt::ShiftButton),
                                                 this, SLOT(slotTrash())) );
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("View Current Item"), "view",
                                                 Resource::loadPixmap("1to1"), ViewItem,
-                                                Opie::Ui::OKeyPair(Qt::Key_V, Qt::ShiftButton),
+                                                Opie::Core::OKeyPair(Qt::Key_V, Qt::ShiftButton),
                                                 this, SLOT(slotShowImage())));
     m_viewManager->addKeyConfig( OKeyConfigItem(tr("Show Image Info") , "info",
                                                 Resource::loadPixmap("DocumentTypeWord"), InfoItem,
-                                                Opie::Ui::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
+                                                Opie::Core::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
                                                 this, SLOT(slotImageInfo()) ) );
     m_viewManager->load();
     m_viewManager->handleWidget( m_view );

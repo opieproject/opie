@@ -8,12 +8,12 @@
 namespace Opie{
 namespace Ui{
     class OTabWidget;
-    class OKeyConfigManager;
     class OListView;
-    class OKeyConfigItem;
 }
 namespace Core {
     class OConfig;
+    class OKeyConfigManager;
+    class OKeyConfigItem;
 }
 }
 class QKeyEvent;
@@ -26,15 +26,15 @@ public:
     TestMainWindow(QWidget* parent, const char*, WFlags fl );
     ~TestMainWindow();
 
-    Opie::Ui::OKeyConfigManager *manager();
+    Opie::Core::OKeyConfigManager *manager();
 protected:
     void keyPressEvent( QKeyEvent* );
 private slots:
     void slotDelete( QWidget*, QKeyEvent* );
-    void slotAction( QWidget*, QKeyEvent*, const Opie::Ui::OKeyConfigItem& );
+    void slotAction( QWidget*, QKeyEvent*, const Opie::Core::OKeyConfigItem& );
 private:
     Opie::Core::OConfig *m_config;
-    Opie::Ui::OKeyConfigManager *m_manager;
+    Opie::Core::OKeyConfigManager *m_manager;
 };
 
 #endif

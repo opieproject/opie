@@ -7,8 +7,6 @@
 namespace Opie {
     namespace Core {
         class OConfig;
-    }
-    namespace Ui {
         class OKeyConfigManager;
     }
 }
@@ -24,7 +22,7 @@ class ImageView:public ImageScrollView
 public:
     ImageView(Opie::Core::OConfig *cfg, QWidget* parent, const char* name = 0, WFlags fl = 0 );
     virtual ~ImageView();
-    Opie::Ui::OKeyConfigManager* manager();
+    Opie::Core::OKeyConfigManager* manager();
 
 signals:
     void dispImageInfo(const QString&);
@@ -32,7 +30,7 @@ signals:
 
 protected:
     Opie::Core::OConfig * m_cfg;
-    Opie::Ui::OKeyConfigManager*m_viewManager;
+    Opie::Core::OKeyConfigManager*m_viewManager;
     void initKeys();
 protected slots:
     virtual void slotShowImageInfo();

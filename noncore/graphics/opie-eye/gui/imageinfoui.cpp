@@ -46,7 +46,7 @@ imageinfo::imageinfo(const QString&_path, QWidget* parent,  const char* name, WF
     slotChangeName(_path);
 }
 
-Opie::Ui::OKeyConfigManager* imageinfo::manager()
+Opie::Core::OKeyConfigManager* imageinfo::manager()
 {
     if (!m_viewManager) {
         initKeys();
@@ -63,19 +63,19 @@ void imageinfo::initKeys()
         m_cfg->setGroup("imageinfo_keys" );
     }
 #endif
-    Opie::Ui::OKeyPair::List lst;
-    lst.append( Opie::Ui::OKeyPair::upArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::downArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::leftArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
-    lst.append( Opie::Ui::OKeyPair::returnKey() );
+    Opie::Core::OKeyPair::List lst;
+    lst.append( Opie::Core::OKeyPair::upArrowKey() );
+    lst.append( Opie::Core::OKeyPair::downArrowKey() );
+    lst.append( Opie::Core::OKeyPair::leftArrowKey() );
+    lst.append( Opie::Core::OKeyPair::rightArrowKey() );
+    lst.append( Opie::Core::OKeyPair::returnKey() );
 
-    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "imageinfo_keys",
+    m_viewManager = new Opie::Core::OKeyConfigManager(m_cfg, "imageinfo_keys",
                                                     lst, false,this, "keyconfig name" );
-    m_viewManager->addKeyConfig( Opie::Ui::OKeyConfigItem(tr("View Full Image"), "infoview",
-                                                Resource::loadPixmap("1to1"), ViewItem,
-                                                Opie::Ui::OKeyPair(Qt::Key_V, Qt::ShiftButton),
-                                                this, SLOT(slotShowImage())));
+    m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("View Full Image"), "infoview",
+                                                            Resource::loadPixmap("1to1"), ViewItem,
+                                                            Opie::Core::OKeyPair(Qt::Key_V, Qt::ShiftButton),
+                                                            this, SLOT(slotShowImage())));
     m_viewManager->load();
     m_viewManager->handleWidget( this );
     m_viewManager->handleWidget( TextView1 );

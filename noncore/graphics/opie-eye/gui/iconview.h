@@ -19,8 +19,6 @@ class Ir;
 namespace Opie {
 namespace Core{
     class OConfig;
-}
-namespace Ui {
     class OKeyConfigManager;
 }
 }
@@ -35,7 +33,7 @@ public:
     PIconView( QWidget* wid, Opie::Core::OConfig *cfg );
     ~PIconView();
     void resetView();
-    Opie::Ui::OKeyConfigManager* manager();
+    Opie::Core::OKeyConfigManager* manager();
 
 signals:
     void sig_showInfo( const QString& );
@@ -73,7 +71,7 @@ private slots:
     void slotThumbInfo(const QString&, const QString&);
     void slotThumbNail(const QString&, const QPixmap&);
 private:
-    Opie::Ui::OKeyConfigManager *m_viewManager;
+    Opie::Core::OKeyConfigManager *m_viewManager;
     Opie::Core::OConfig *m_cfg;
     QComboBox* m_views;
     QIconView* m_view;

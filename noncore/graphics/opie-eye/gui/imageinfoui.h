@@ -15,8 +15,6 @@ class QTextView;
 namespace Opie {
     namespace Core {
         class OConfig;
-    }
-    namespace Ui {
         class OKeyConfigManager;
     }
 }
@@ -34,7 +32,7 @@ public:
     virtual ~imageinfo();
 
     void setDestructiveClose();
-    Opie::Ui::OKeyConfigManager* manager();
+    Opie::Core::OKeyConfigManager* manager();
 
 signals:
     void dispImage(const QString&);
@@ -56,7 +54,7 @@ protected:
     QString currentFile;
 
     Opie::Core::OConfig * m_cfg;
-    Opie::Ui::OKeyConfigManager*m_viewManager;
+    Opie::Core::OKeyConfigManager*m_viewManager;
     void initKeys();
 
 protected slots:

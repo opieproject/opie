@@ -6,6 +6,7 @@ HEADERS     = oapplication.h            \
               odebug.h                  \
               oglobal.h                 \
               oglobalsettings.h         \
+	      okeyconfigmanager.h       \
               oprocess.h                \
               oprocctrl.h               \
               osmartpointer.h           \
@@ -17,6 +18,7 @@ SOURCES     = oapplication.cpp          \
               odebug.cpp                \
               oglobal.cpp               \
               oglobalsettings.cpp       \
+	      okeyconfigmanager.cpp     \
               oprocess.cpp              \
               oprocctrl.cpp             \
               ostorageinfo.cpp          \
