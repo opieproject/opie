@@ -141,6 +141,7 @@ CONFIG_SOLITAIRE	noncore/games/solitaire	solitaire.pro
 CONFIG_SOUND	noncore/settings/sound	sound.pro
 CONFIG_SSHKEYS	noncore/settings/sshkeys	sshkeys.pro
 CONFIG_SUSPENDAPPLET	core/applets/suspendapplet	suspendapplet.pro
+CONFIG_ROTATEAPPLET	core/applets/rotateapplet	rotateapplet.pro
 CONFIG_SYSINFO	noncore/apps/sysinfo	sysinfo.pro
 CONFIG_TABLEVIEWER	noncore/apps/tableviewer	tableviewer.pro
 CONFIG_TABMANAGER	noncore/settings/tabmanager	tabmanager.pro
