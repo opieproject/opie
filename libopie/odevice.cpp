@@ -1327,17 +1327,24 @@ void Zaurus::init ( )
 	d-> m_vendorstr = "Sharp";
 	d-> m_vendor = Vendor_Sharp;
 
-	QFile f ( "/proc/filesystems" );
+	// QFile f ( "/proc/filesystems" );
 	QString model;
 
-	if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
+	// It isn't a good idea to check the system configuration to 
+	// detect the distribution ! 
+	// Otherwise it may happen that any other distribution is detected as openzaurus, just
+	// because it uses a jffs2 filesystem..  
+	// (eilers)
+	// if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
+	QFile f ("/etc/oz_version");
+	if ( f.exists() ){
 		d-> m_vendorstr = "OpenZaurus Team";
 		d-> m_systemstr = "OpenZaurus";
 		d-> m_system = System_OpenZaurus;
 
-		f. close ( );
+		// f. close ( );
 
-		f. setName ( "/etc/oz_version" );
+		// f. setName ( "/etc/oz_version" );
 		if ( f. open ( IO_ReadOnly )) {
 			QTextStream ts ( &f );
 			d-> m_sysverstr = ts. readLine ( );//. mid ( 10 );
@@ -1365,7 +1372,10 @@ void Zaurus::init ( )
 	if ( model == "SHARP Corgi" ) {
 		d-> m_model = Model_Zaurus_SLC700;
 		d-> m_modelstr = "Zaurus SL-C700";
-	} else if ( model == "SHARP Poodle" ) {
+	} else if ( model == "SHARP Shepherd" ) {
+		d-> m_model = Model_Zaurus_SLC700; // Do we need a special type for the C750 ? (eilers)
+		d-> m_modelstr = "Zaurus SL-C750";
+	}else if ( model == "SHARP Poodle" ) {
 		d-> m_model = Model_Zaurus_SLB600;
 		d-> m_modelstr = "Zaurus SL-B500 or SL-5600";
 	} else if ( model = "Sharp-Collie" ) {
@@ -1514,12 +1524,71 @@ typedef struct sharp_led_status {
 
 void Zaurus::buzzer ( int sound )
 {
-	int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
+	// Not all devices have real sound.
+#ifndef QT_NO_SOUND
+	switch ( d-> m_model ) { 
+	case Model_Zaurus_SLC700:{
+		int fd;
+		int vol;
+		bool vol_reset = false;
 
-	if ( fd >= 0 ) {
-		::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
-		::close ( fd );
+		QString soundname;
+		
+		switch ( sound ){
+		case SHARP_BUZ_SCHEDULE_ALARM:
+			soundname = "alarm";
+			break;
+		case SHARP_BUZ_TOUCHSOUND:
+			soundname = "touchsound";
+			break;
+		case SHARP_BUZ_KEYSOUND:
+			soundname = "keysound";
+			break;
+		default:
+			soundname = "alarm";
+			
+		}
+
+		Sound snd ( soundname );
+		
+		if (( fd = ::open ( "/dev/sound/mixer", O_RDWR )) >= 0 ) {
+			if ( ::ioctl ( fd, MIXER_READ( 0 ), &vol ) >= 0 ) {
+				Config cfg ( "qpe" );
+				cfg. setGroup ( "Volume" );
+
+				int volalarm = cfg. readNumEntry ( "AlarmPercent", 50 );
+				if ( volalarm < 0 )
+					volalarm = 0;
+				else if ( volalarm > 100 )
+					volalarm = 100;
+				volalarm |= ( volalarm << 8 );
+
+				if ( ::ioctl ( fd, MIXER_WRITE( 0 ), &volalarm ) >= 0 )
+					vol_reset = true;
+			}
+		}
+
+		snd. play ( );
+		while ( !snd. isFinished ( ))
+			qApp-> processEvents ( );
+
+		if ( fd >= 0 ) {
+			if ( vol_reset )
+				::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
+			::close ( fd );
+		}
+		break;
 	}
+	default:{ // Devices with buzzer
+		int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
+		
+		if ( fd >= 0 ) {
+			::ioctl ( fd, SHARP_BUZZER_MAKESOUND, sound );
+			::close ( fd );
+		}
+	}
+	}
+#endif
 }
 
 
