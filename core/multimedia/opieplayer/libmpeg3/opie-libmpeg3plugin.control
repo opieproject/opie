@@ -1,9 +1,9 @@
 Files: plugins/codecs/libmpeg3plugin.so.1.0.0 plugins/codecs/libmpeg3plugin.so.1.0 plugins/codecs/libmpeg3plugin.so.1 plugins/codecs/libmpeg3plugin.so
 Priority: optional
 Section: opie/plugins
-Maintainer: John Ryland <jryland@trolltech.com>
+Maintainer: L.J.Potter <ljp@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
-Description: Mpeg file plugin using libmad
- Plugin to play MPeg3 files with the mediaplayer in the Opie environment.
+Description: Mpeg video file plugin using libmad
+ Plugin to play MPeg3 video files with the mediaplayer in the Opie environment.
