@@ -1,0 +1,47 @@
+
+<p>
+People started to use Opie on bigger screens. Some design decisions made don't apply
+to bigger screen resolutions. The Opie big screen extension classes are aimed to fill
+this gap. With little modification of the application Opie will get a consitent look
+and feel on small devices to desktop computers.
+Again. Add tasks/features. pick tasks and features mail me.
+</p>
+
+
+<?php
+
+$version = "BigScreen";
+
+require_once "kde-features.inc";
+
+parse("opie-featurelist.xml");
+?>
+
+
+<table width="100%" border="0">
+  <tr><td bgcolor="red"><div align="center">TODO</div></td><td bgcolor="#ffeeee">
+
+<?php echo printHtml($version,'todo') ?>
+
+  </td></tr>
+
+  <tr><td bgcolor="yellow"><div align="center">In Progress</div></td><td bgcolor="#ffffee">
+
+<?php echo printHtml($version,'inprogress') ?>
+
+  </td></tr>
+
+<tr><td bgcolor="green"><div align="center">Finished</div></td><td bgcolor="#eeffee">
+
+<?php echo printHtml($version,'done') ?>
+
+</td></tr>
+</table>
+
+
+    <hr>
+    <address><a href="mailto:zecke@handhelds.org">zecke/hOlgAr</a></address>
+<!-- Created: Fri Aug 22 20:00:19 CEST 2003 -->
+<!-- hhmts start -->
+Last modified: Fri Aug 22 20:27:16 CEST 2003
+<!-- hhmts end -->

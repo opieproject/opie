@@ -1,0 +1,24 @@
+
+<!ELEMENT features (category+)> 
+
+<!ELEMENT category (feature|category)*>
+<!ATTLIST category name CDATA #REQUIRED > 
+
+<!ELEMENT feature (summary?,responsible*)> 
+<!ATTLIST feature status (inprogress|todo|done) "todo"
+                  target CDATA #REQUIRED>
+
+<!ELEMENT responsible EMPTY> 
+<!ATTLIST responsible name CDATA #IMPLIED
+                      email CDATA #IMPLIED>
+
+<!ELEMENT summary (#PCDATA|i|a|b|em|strong)*> 
+
+<!ELEMENT i (#PCDATA)>
+<!ELEMENT b (#PCDATA)>
+<!ELEMENT em (#PCDATA)>
+<!ELEMENT strong (#PCDATA)>
+
+<!ELEMENT a (#PCDATA)>
+<!ATTLIST a href CDATA #IMPLIED>
+<!ATTLIST a title CDATA #IMPLIED>

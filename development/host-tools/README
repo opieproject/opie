@@ -12,7 +12,7 @@ opie-langchecker.tar.gz -	with make messages and make all-messages
 				basis which strings are not available as tr.
 				This helps you to find application
 
-opie-featurelist.tar.gz	-	Is currently just a small hack application
+opie-featurelist.tar.bz2-	Is currently just a small hack application
 				to create feature lists conforming to
 				Cornelius Schumachers XML features file.
 				Maybe it'll turn into a full blown
@@ -20,3 +20,4 @@ opie-featurelist.tar.gz	-	Is currently just a small hack application
 				( kmaschru ) or one simply writes a new
 				TODO view + backend or changes the file
 				format...
+				BUILD: qmake -o Makefile opie-featurelist.pro
