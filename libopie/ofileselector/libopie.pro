@@ -7,7 +7,7 @@ HEADERS   = ofontmenu.h \
     ofileselector/ofilelistview.h \
     ofileselector/ofileselector.h \
     ofileselector/ofileselectoritem.h \
-    ofileselector/ofileseleczormain.h \
+    ofileselector/ofileselectormain.h \
     ofileselector/ofileview.h \
     ofileselector/olister.h \
     ofileselector/olocallister.h \
