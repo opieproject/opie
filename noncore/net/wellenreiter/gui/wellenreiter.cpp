@@ -106,7 +106,7 @@ Wellenreiter::Wellenreiter( QWidget* parent )
         int flags;
         flags = fcntl( daemon_fd, F_GETFL, 0 );
         fcntl( daemon_fd, F_SETFL, flags | O_NONBLOCK );
-        QSocketNotifier *sn  = new QSocketNotifier( daemon_fd, QSocketNotifier::Read, parent );
+        QSocketNotifier *sn  = new QSocketNotifier( daemon_fd, QSocketNotifier::Read, this );
         connect( sn, SIGNAL( activated( int ) ), this, SLOT( dataReceived() ) );
     }
 
@@ -124,18 +124,13 @@ Wellenreiter::~Wellenreiter()
 
     delete manufacturerdb;
 
-    // X11-only - Hmm... Closing the socket here segfaults on exit,
-    // Maybe because the notifier still has a handle to it!? Seems not to
-    // occur on Qt/Embedded
-
-    #ifdef QWS
     if ( daemon_fd != -1 )
     {
         qDebug( "closing comm socket" );
-        close( daemon_fd );
+        ::shutdown( daemon_fd, 0 );
+        ::close( daemon_fd );
+        qDebug( "comm socket closed." );
     }
-    #endif
-
 }
 
 void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )
