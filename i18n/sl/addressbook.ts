@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>Neizpolnjen</translation>
+        <translation>Brez</translation>
     </message>
 </context>
 <context>
@@ -38,7 +38,7 @@
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta Epošta</translation>
+        <translation>Privzeta epošta</translation>
     </message>
     <message>
         <source>Notes</source>
@@ -100,7 +100,7 @@
     </message>
     <message>
         <source>Beam Entry</source>
-        <translation>Prežarči vnos</translation>
+        <translation>Pošlji vnos preko IR</translation>
     </message>
     <message>
         <source>My Personal Details</source>
@@ -108,7 +108,7 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Uredi polja</translation>
+        <translation>Uredi urejevalna polja</translation>
     </message>
     <message>
         <source>Out of Space</source>
