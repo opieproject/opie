@@ -217,9 +217,7 @@ endmenu
 comment ""
 
 menu "Unsupported / Unmaintained"
-  source noncore/unsupported/filebrowser/config.in
-  source noncore/unsupported/oipkg/config.in
-  source noncore/unsupported/qpdf/config.in
+  source noncore/unsupported/config.in
 endmenu
 
 comment ""
