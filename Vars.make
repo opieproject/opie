@@ -11,6 +11,10 @@ ifeq ($(IPK_DIR),)
     export IPK_DIR:=$(OPIEDIR)
 endif
 
+ifneq ($(wildcard $(TOPDIR)/.config),)
+    include $(TOPDIR)/.config
+endif
+
 export QMAKE:=$(OPIEDIR)/qmake/qmake
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
@@ -61,3 +65,21 @@ endif
 export QTE_VERSION
 
 export PATH:=$(OPIEDIR)/scripts:$(PATH)
+export QMAKESPEC=$(QMAKESPECSDIR)/$(patsubst "%",%,$(CONFIG_SPECFILE))
+
+ifdef CONFIG_OPTIMIZATIONS
+export CFLAGS_RELEASE=$(patsubst "%,%,$(CONFIG_OPTIMIZATIONS))
+export CFLAGS_RELEASE:=$(patsubst %",%,$(CFLAGS_RELEASE))
+endif
+
+ifeq ($(STRIP),)
+    ifneq ($(CONFIG_TARGET_X86),)
+        STRIP=strip
+    endif
+    ifneq ($(CONFIG_TARGET_IPAQ),)
+        STRIP=arm-linux-strip
+    endif
+    ifneq ($(CONFIG_TARGET_SHARP),)
+        STRIP=arm-linux-strip
+    endif
+endif

@@ -21,9 +21,7 @@ configs += $(TOPDIR)/core/applets/config.in $(TOPDIR)/core/apps/config.in $(TOPD
  
 all : $(TOPDIR)/.config
 
-STRIP=arm-linux-strip
-
-ipks: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE
+ipks: $(OPIEDIR)/scripts/subst $(OPIEDIR)/scripts/filesubst FORCE $(TOPDIR)/.config
 	@find $(OPIEDIR)/ -type f -name \*.control | ( for ctrl in `cat`; do \
 		prerm=`echo $$ctrl|sed -e 's,\.control$$,.prerm,'`; \
 		preinst=`echo $$ctrl|sed -e 's,\.control$$,.preinst,'`; \
@@ -106,13 +104,6 @@ endif
 -include $(TOPDIR)/.config.cmd
 
 SUBDIRS = $(subdir-y)
-
-export QMAKESPEC=$(QMAKESPECSDIR)/$(patsubst "%",%,$(CONFIG_SPECFILE))
-
-ifdef CONFIG_OPTIMIZATIONS
-export CFLAGS_RELEASE=$(patsubst "%,%,$(CONFIG_OPTIMIZATIONS))
-export CFLAGS_RELEASE:=$(patsubst %",%,$(CFLAGS_RELEASE))
-endif
 
 all clean install ipk: $(SUBDIRS) 
 
