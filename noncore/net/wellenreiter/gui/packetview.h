@@ -21,6 +21,7 @@
 
 #include <opie2/opcap.h>
 
+class QWidget;
 class QLabel;
 class QString;
 class QSpinBox;
@@ -31,17 +32,18 @@ namespace Opie {namespace Ui {class OListView;}}
 
 class PacketView: public QFrame
 {
-  Q_OBJECT 
-  
+  Q_OBJECT
+
   public:
     PacketView( QWidget * parent = 0, const char * name = "PacketView", WFlags f = 0 );
 
-    void add( const Opie::Net::OPacket* p );
+    void add( const Opie::Net::OPacket* p, int size );
     const QString getLog() const;
     void clear();
-    
+
   public slots:
     void showPacket( int number );
+    void activated( QWidget* );
 
   protected:
     QSpinBox* _number;
@@ -49,7 +51,7 @@ class PacketView: public QFrame
     Opie::Ui::OListView* _list;
     QTextView* _hex;
     QList<const Opie::Net::OPacket> _packets;
-    
+
   protected:
     void _doSubPackets( QObjectList*, int );
     void _doHexPacket( const Opie::Net::OPacket* );

@@ -19,6 +19,7 @@
 #include <opie2/opcap.h>
 #include <opie2/odebug.h>
 #include <opie2/olistview.h>
+#include <opie2/oapplication.h>
 
 /* QT */
 #include <qfont.h>
@@ -38,10 +39,8 @@ PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
            :QFrame( parent, name, f )
 {
     _number = new QSpinBox( this );
-    _number->setPrefix( "Packet # " );
+    _number->setPrefix( "Pkt# " );
     _label = new QLabel( this );
-    _label->setText( "eth0 2004/03/08 - 00:00:21" );
-    
     _list = new OListView( this );
     _list->addColumn( "#" );
     _list->addColumn( "Packet Type" );
@@ -49,42 +48,70 @@ PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
     _list->setColumnAlignment( 1, Qt::AlignLeft );
     _list->setAllColumnsShowFocus( true );
     _list->setFont( QFont( "Fixed", 8 ) );
-    
+
     _hex = new QTextView( this );
+    _hex->setMargin( 0 );
     _hex->setFont( QFont( "Fixed", 8 ) );
 
     QVBoxLayout* vb = new QVBoxLayout( this, 2, 2 );
     QHBoxLayout* hb = new QHBoxLayout( vb, 2 );
-    hb->addWidget( _label );
-    hb->addWidget( _number );
-    vb->addWidget( _list );
-    vb->addWidget( _hex );
+    hb->addWidget( _label, 5 );
+    hb->addWidget( _number, 2 );
+    vb->addWidget( _list, 3 );
+    vb->addWidget( _hex, 4 ); // allow a bit (4/3) more space
 
     _packets.setAutoDelete( true );
-    
+
     connect( _number, SIGNAL( valueChanged( int ) ), this, SLOT( showPacket( int ) ) );
+    connect( parent, SIGNAL( currentChanged( QWidget *) ), this, SLOT( activated( QWidget* ) ) );
+
+    clear();
+
 }
 
-void PacketView::add( const OPacket* p )
+void PacketView::add( const OPacket* p, int size )
 {
-    _packets.append( p );
-    // Add Circular Buffer and check for number of elements here
+    odebug << "PacketView::add() size = " << size << oendl;
+    if ( size == -1 ) // unlimited buffer
+    {
+        _packets.append( p );
+    }
+    else
+    // limited buffer, limit = size
+    if ( _packets.count() < size )
+    {
+        _packets.append( p );
+    }
+
+    _number->setMinValue( 1 );
+    _number->setMaxValue( _packets.count() );
+    _number->setValue( _packets.count() );
 }
 
 void PacketView::showPacket( int number )
 {
     _list->clear();
     _hex->setText("");
-    const OPacket* p = _packets.at( number );
-    
+    const OPacket* p = _packets.at( number-1 );
+
     if ( p )
     {
         _doSubPackets( const_cast<QObjectList*>( p->children() ), 0 );
         _doHexPacket( p );
+        QDateTime dt; dt.setTime_t( p->timeval().tv_sec );
+        _label->setText( dt.toString() + QString().sprintf( " Len=%d", p->len() ) );
     }
     else
     {
-        odebug << "D'oh! No packet!" << oendl; 
+        odebug << "D'oh! No packet!" << oendl;
+    }
+}
+
+void PacketView::activated( QWidget* w )
+{
+    if ( ( this == w ) && _packets.count() )
+    {
+        _number->setValue( 1 );
     }
 }
 
@@ -98,11 +125,14 @@ void PacketView::_doSubPackets( QObjectList* l, int counter )
         _doSubPackets( const_cast<QObjectList*>( o->children() ), counter );
         o = l->next();
     }
-}    
+}
 
 void PacketView::_doHexPacket( const OPacket* p )
-{      
-    _hex->setText( p->dump( 16 ) );
+{
+    if ( oApp->desktop()->width() > 320 )
+        _hex->setText( p->dump( 16 ) );
+    else
+        _hex->setText( p->dump( 8 ) );
 }
 
 const QString PacketView::getLog() const
@@ -116,6 +146,6 @@ void PacketView::clear()
     _number->setMaxValue( 0 );
     _label->setText( "---" );
     _list->clear();
-    _hex->setText( " <i>-- no Packet available --</i> " );
+    _hex->setText( " <center><i>-- no Packet available --</i></center> " );
 }
 

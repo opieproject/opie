@@ -413,7 +413,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
 
 void Wellenreiter::receivePacket( OPacket* p )
 {
-    hexWindow()->add( p );
+    hexWindow()->add( p, configwindow->hexViewBuffer() );
 
     if ( checkDumpPacket( p ) )
     {

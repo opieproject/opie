@@ -58,6 +58,8 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     void save();
     void load();
 
+    int hexViewBuffer() const;
+
   public slots:
     void changedDeviceType(int);
     void changedNetworkAction(int t);
