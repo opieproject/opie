@@ -334,7 +334,10 @@ void OpieFtp::remoteDownload()
     QString strItem = Remote_View->currentItem()->text(0);
 //      strItem=strItem.right(strItem.length()-1);
 
-    QString localFile = currentDir.canonicalPath()+strItem;
+    QString localFile = currentDir.canonicalPath();
+    if(localFile.right(1).find("/",0,TRUE) == -1)
+        localFile += "/";
+    localFile += strItem;
 //    QString localFile = currentDir.canonicalPath()+"/"+strItem;
     QString remoteFile= currentRemoteDir+strItem;
     if (!FtpSize( remoteFile.latin1(), &fsz, FTPLIB_ASCII, conn))
