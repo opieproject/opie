@@ -38,6 +38,10 @@ WidgetLayer::WidgetLayer( const Profile &config, QWidget *parent, const char *na
 	// just for demonstrating
 	//m_image = QArray<Character>( m_lines * m_columns ); 
 	m_image = QArray<Character>( 1 );
+	
+	// we need to install an event filter,
+	// to emit keypresses.
+	qApp->installEventFilter( this );
 
 }
 
@@ -47,6 +51,7 @@ WidgetLayer::~WidgetLayer()
 	// clean up
 	delete m_image;
 }
+
 
 /* --------------------------------- audio ---------------------------------- */
 
