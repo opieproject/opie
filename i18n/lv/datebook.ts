@@ -253,7 +253,7 @@ Labot</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation>Nedēļu Saraksts</translation>
+        <translation>Nedēļas</translation>
     </message>
     <message>
         <source>Month</source>
@@ -269,7 +269,7 @@ Labot</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation>Noklusētais</translation>
+        <translation>Noklusēts</translation>
     </message>
     <message>
         <source>Medium</source>
@@ -305,7 +305,7 @@ Labot</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation>Atgādinājuma Iestādīšana</translation>
+        <translation>Atgādinājums Pēc</translation>
     </message>
     <message>
         <source> minutes</source>
@@ -501,7 +501,7 @@ Labot</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation>Sākums - Beigas</translation>
+        <translation>Sākt - Beigt</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
