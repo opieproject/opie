@@ -42,11 +42,12 @@ void TodoSearch::expand()
 	 _todos->load();
 	 }
 
+#ifdef LIPBOPIE_SEARCH
 	ORecordList<OTodo> results = _todos->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++) {
 		new TodoItem( this, new OTodo( results[i] ));
 	}
-/*
+#else
 	ORecordList<OTodo> list = _todos->allRecords();
        QArray<int> m_currentQuery( list.count() );
        for( uint i=0; i<list.count(); i++ ){
@@ -56,7 +57,8 @@ void TodoSearch::expand()
 			new TodoItem( this, new OTodo( list[i] ) );
                  }
 
-        }*/
+        }
+#endif
 
 }
 

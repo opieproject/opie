@@ -37,9 +37,8 @@ void DatebookSearch::expand()
 	 _dates = new ODateBookAccess();
 	 _dates->load();
 	 }
-#define LIPBOPIE_SEARCH
 #ifdef LIPBOPIE_SEARCH
-	ORecordList<OEvent> results = _dates->matchRegexp(_search); 
+	ORecordList<OEvent> results = _dates->matchRegexp(_search);
 	for (uint i = 0; i < results.count(); i++) {
 		new EventItem( this, new OEvent( results[i] ));
 	}
