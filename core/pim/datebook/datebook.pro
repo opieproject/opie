@@ -11,7 +11,8 @@ HEADERS	= datebookday.h \
 	  datebookweeklst.h \
 	  datebookweekheaderimpl.h \
 	  repeatentry.h \
-	  timepicker.h
+	  timepicker.h \
+	  noteentryimpl.h
 
 SOURCES	= main.cpp \
 	  datebookday.cpp \
@@ -23,7 +24,8 @@ SOURCES	= main.cpp \
 	  datebookweeklst.cpp \
 	  datebookweekheaderimpl.cpp \
 	  repeatentry.cpp \
-	  timepicker.cpp
+	  timepicker.cpp \
+	  noteentryimpl.cpp
 
 INTERFACES	= dateentry.ui \
 		  datebookdayheader.ui \
@@ -31,7 +33,8 @@ INTERFACES	= dateentry.ui \
 		  datebookweekheader.ui \
 		  datebookweeklstheader.ui \		  
  		  datebookweeklstdayhdr.ui \		  
- 		  repeatentrybase.ui
+ 		  repeatentrybase.ui \
+		  noteentry.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include

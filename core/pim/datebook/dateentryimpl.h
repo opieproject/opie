@@ -21,6 +21,7 @@
 #define DATEENTRY_H
 
 #include "dateentry.h"
+#include "noteentryimpl.h"
 
 #include <qpe/event.h>
 
@@ -55,6 +56,7 @@ public slots:
     void slotRepeat();
     void slotChangeClock( bool );
     void slotChangeStartOfWeek( bool );
+    void slotEditNote();
 
 private:
     void init();
@@ -70,6 +72,8 @@ private:
     bool ampm:1;
     bool startWeekOnMonday:1;
     bool m_showStart:1;
+
+    QString noteStr;
 };
 
 #endif // DATEENTRY_H

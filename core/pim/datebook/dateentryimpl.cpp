@@ -128,8 +128,8 @@ DateEntry::DateEntry( bool startOnMonday, const Event &event, bool whichClock,
 	addOrPick( comboLocation, event.location() );
     checkAlarm->setChecked( event.hasAlarm() );
     checkAllDay->setChecked( event.type() == Event::AllDay );
-    if(!event.notes().isEmpty())
-	editNote->setText(event.notes());
+    if(!event.notes().isEmpty()) noteStr=event.notes();
+    else noteStr="";
     spinAlarm->setValue(event.alarmTime());
     if ( event.alarmSound() != Event::Silent )
 	comboSound->setCurrentItem( 1 );
@@ -210,6 +210,9 @@ void DateEntry::init()
 	     this, SLOT( slotChangeClock( bool ) ) );
     connect( qApp, SIGNAL(weekChanged(bool)),
 	     this, SLOT(slotChangeStartOfWeek(bool)) );
+    
+    connect( editNote, SIGNAL(clicked()),
+	     this, SLOT(slotEditNote()) );
 
     QPopupMenu *m2 = new QPopupMenu( this );
     endPicker = new DateBookMonth( m2, 0, TRUE );
@@ -220,7 +223,6 @@ void DateEntry::init()
 
     connect(timePickerStart, SIGNAL( timeChanged(const QTime &) ),
 	    this, SLOT( startTimePicked(const QTime &) ));
-    editNote->setFixedVisibleLines(3);
     // install eventFilters
     comboEnd->installEventFilter( this );
     comboStart->installEventFilter( this );
@@ -238,6 +240,22 @@ DateEntry::~DateEntry()
 /*
  * public slot
  */
+
+void DateEntry::slotEditNote() {
+  QString s;
+  s.sprintf("<B>%d/%d</B> ", startDate.day(), startDate.month());
+  NoteEntry noteDlg(s+comboDescription->currentText(), noteStr,
+		    this,0,TRUE);  
+
+#if defined(Q_WS_QWS) || defined(_WS_QWS_)
+  noteDlg.showMaximized();
+#endif
+  if (noteDlg.exec() ) {
+    noteStr=noteDlg.note->text();
+  }
+
+}
+
 void DateEntry::endDateChanged( int y, int m, int d )
 {
     endDate.setYMD( y, m, d );
@@ -455,7 +473,7 @@ Event DateEntry::event()
     ev.setAlarm( checkAlarm->isChecked(), spinAlarm->value(), st );
     if ( rp.type != Event::NoRepeat )
 	ev.setRepeat( TRUE, rp );
-    ev.setNotes( editNote->text() );
+    ev.setNotes( noteStr );
 
 		//cout << "Start: " << comboStart->currentText() << endl;
 
