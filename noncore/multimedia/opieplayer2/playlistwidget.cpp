@@ -709,6 +709,8 @@ void PlayListWidget::populateVideoView() {
 
 
 void PlayListWidget::openFile() {
+                // http://66.28.164.33:2080
+                // http://somafm.com/star0242.m3u
     QString filename, name;
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Open file or URL"),TRUE, 0);
@@ -859,7 +861,7 @@ void PlayListWidget::writeCurrentM3u() {
   qDebug("writing to current m3u");
   Config cfg( "OpiePlayer" );
   cfg.setGroup("PlayList");
-  QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
+  QString currentPlaylist = cfg.readEntry("CurrentPlaylist","default");
 
   if( d->selectedFiles->first()) {
   Om3u *m3uList;
