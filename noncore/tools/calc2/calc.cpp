@@ -26,7 +26,7 @@
 #include "calc.h"
 #include "plugininterface.h"
 
-calc::calc (QWidget * p = 0, const char *n = 0):QWidget (p, n)
+calc::calc (QWidget * p, const char *n):QWidget (p, n)
 {
   setCaption (tr ("Calculator"));
 
