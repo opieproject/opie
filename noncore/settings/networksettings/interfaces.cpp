@@ -167,6 +167,32 @@ bool Interfaces::addInterface(QString interface, QString family, QString method)
 }
 
 /**
+ * Copies interface with name interface to name newInterface
+ * @param newInterface name of the new interface.
+ * @return bool true if successfull
+ */ 
+bool Interfaces::copyInterface(QString interface, QString newInterface){
+  if(!setInterface(interface)) return false;
+	 
+  QStringList::Iterator it = currentIface;
+  it++;
+  
+  bool error;
+  addInterface(newInterface, getInterfaceFamily(error), getInterfaceMethod(error));
+  if(!setInterface(newInterface)) return false;
+  QStringList::Iterator newIface = currentIface;
+  newIface++;
+  
+  for ( it; it != interfaces.end(); ++it ){
+    if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO)))
+      break;
+    newIface = interfaces.insert(newIface, *it);
+  }
+ 
+  return true;
+}
+
+/**
  * Remove the currently selected interface and all of its options.
  * @return bool if successfull or not.
  */ 
@@ -401,12 +427,26 @@ bool Interfaces::setStanza(QString stanza, QString option, QStringList::Iterator
   for ( QStringList::Iterator it = interfaces.begin(); it != interfaces.end(); ++it ) {
     QString line = (*it).simplifyWhiteSpace();
     if(line.contains(stanza) && line.contains(option)){
-      if(found == true){
-        qDebug(QString("Interfaces: Found multiple stanza's for search: %1 %2").arg(stanza).arg(option).latin1());
+      uint point = line.find(option);
+      bool valid = true;
+      if(point > 0){
+	// There are more chars in the line. check +1
+        if(line.at(point-1) != ' ')
+	  valid = false;
       }
-      qDebug("Found");
-      found = true;
-      iterator = it;
+      point += option.length();
+      if(point < line.length()-1){
+	// There are more chars in the line. check -1
+        if(line.at(point) != ' ')
+	  valid = false;
+      }
+      if(valid){
+        if(found == true){
+          qDebug(QString("Interfaces: Found multiple stanza's for search: %1 %2").arg(stanza).arg(option).latin1());
+        }
+        found = true;
+        iterator = it;
+      }
     }
   }
   return found;

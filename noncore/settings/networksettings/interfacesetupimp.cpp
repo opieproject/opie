@@ -89,17 +89,15 @@ bool InterfaceSetupImp::saveSettings(){
  * @profile the new profile.
  */ 
 void InterfaceSetupImp::setProfile(const QString &profile){
-  QString newInterfaceName = interface->getInterfaceName() + profile;
-  
+  QString newInterfaceName = interface->getInterfaceName();
+  if(profile.length() > 0)
+    newInterfaceName += "_" + profile;
+  qDebug( newInterfaceName.latin1());
   // See if we have to make a interface.
   if(!interfaces->setInterface(newInterfaceName)){
-    interfaces->addInterface(newInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
-    if(!interfaces->setInterface(newInterfaceName)){
-      qDebug("InterfaceSetupImp: Added interface, but still can't set.");
-      return;	      
-    }
     // Add making for this new interface if need too
     if(profile != ""){
+      interfaces->copyInterface(interface->getInterfaceName(), newInterfaceName);
       if(!interfaces->setMapping(interface->getInterfaceName())){
         interfaces->addMapping(interface->getInterfaceName());
         if(!interfaces->setMapping(interface->getInterfaceName())){
@@ -107,8 +105,15 @@ void InterfaceSetupImp::setProfile(const QString &profile){
           return;
 	}
       }
-      interfaces->setScript("getprofile.sh");
       interfaces->setMap("map", newInterfaceName);
+      interfaces->setScript("getprofile.sh");
+    }
+    else{
+      interfaces->addInterface(newInterfaceName, INTERFACES_FAMILY_INET, INTERFACES_METHOD_DHCP);
+      if(!interfaces->setInterface(newInterfaceName)){
+        qDebug("InterfaceSetupImp: Added interface, but still can't set.");
+        return;	      
+      }
     }
   }
   

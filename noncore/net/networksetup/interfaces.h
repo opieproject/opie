@@ -30,6 +30,7 @@ public:
   
   bool removeInterface();
   bool addInterface(QString interface, QString family, QString method);
+  bool copyInterface(QString oldInterface, QString newInterface);
   bool setInterface(QString interface);
   bool isInterfaceSet();
   QString getInterfaceName(bool &error);

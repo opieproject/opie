@@ -228,13 +228,13 @@ void MainWindowImp::configureClicked(){
   
   Interface *i = interfaceItems[item];
   if(i->getModuleOwner()){
-    i->getModuleOwner()->setProfile(currentProfileLabel->text());
+    i->getModuleOwner()->setProfile(currentProfile);
     QTabWidget *tabWidget = NULL;
     QWidget *moduleConfigure = i->getModuleOwner()->configure(&tabWidget);
     if(moduleConfigure != NULL){
       if(tabWidget != NULL){
 	InterfaceSetupImp *configure = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, true);
-        configure->setProfile(currentProfileLabel->text());
+        configure->setProfile(currentProfile);
 	tabWidget->insertTab(configure, "TCP/IP");
       
       }
@@ -245,7 +245,7 @@ void MainWindowImp::configureClicked(){
   }
   
   InterfaceSetupImp *configure = new InterfaceSetupImp(0, "InterfaceSetupImp", i, true);
-  configure->setProfile(currentProfileLabel->text());
+  configure->setProfile(currentProfile);
   configure->showMaximized();
   configure->show();
 }
@@ -377,12 +377,14 @@ void MainWindowImp::jobDone(KProcess *process){
 	  found = true;
       }
       if(!found){
-        Interface *i = new Interface(this, *ni, false);
-	i->setAttached(false);
-	i->setHardwareName("Disconnected");
-	interfaceNames.insert(i->getInterfaceName(), i);
-	updateInterface(i);
-      	connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+        if(!(*ni).contains("_")){
+	  Interface *i = new Interface(this, *ni, false);
+	  i->setAttached(false);
+	  i->setHardwareName("Disconnected");
+	  interfaceNames.insert(i->getInterfaceName(), i);
+	  updateInterface(i);
+      	  connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
+	}
       }
     }
   }
@@ -489,6 +491,9 @@ void MainWindowImp::removeProfile(){
     for ( QStringList::Iterator it = profiles.begin(); it != profiles.end(); ++it)
       profilesList->insertItem((*it));
   }
+
+  // Remove any interface settings and mappings.
+  //TODO
 }
 
 /**
@@ -503,6 +508,7 @@ void MainWindowImp::changeProfile(){
   QString newProfile = profilesList->text(profilesList->currentItem());
   if(newProfile != currentProfileLabel->text()){
     currentProfileLabel->setText(newProfile);
+    QFile::remove(SCHEME);
     QFile file(SCHEME);
     if ( file.open(IO_ReadWrite) ) {
       QTextStream stream( &file );
