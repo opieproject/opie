@@ -775,8 +775,8 @@ void AdvancedFm::removeCustomDir()
 //first remove list
   if(list.grep(dir,true).isEmpty())
     {
-      QMessageBox::message("AdvancedFm",
-                           tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!!"));
+      QMessageBox::message(tr( "AdvancedFm" ),
+                           tr("Cannot remove current directory\nfrom bookmarks.\nIt is not bookmarked!"));
     }
   else
     {
