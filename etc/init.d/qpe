@@ -4,7 +4,7 @@
 export LOGNAME=root
 export HOME=/$LOGNAME
 export QWS_DISPLAY=Transformed:Rot270:0
-export QTDIR=/usr
+export QTDIR=/opt/QtPalmtop
 export OPIEDIR=/opt/QtPalmtop
 export QPEDIR=/opt/QtPalmtop
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OPIEDIR/lib
