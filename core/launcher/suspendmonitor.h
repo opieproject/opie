@@ -17,18 +17,40 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef SUSPEND_MONITOR_H
+#define SUSPEND_MONITOR_H
 
-
-#ifndef STABMON_H
-#define STABMON_H
 
 #include <qobject.h>
+#include <qvaluelist.h>
 
-class SysFileMonitor : public QObject {
+
+class TempScreenSaverMonitor : public QObject
+{
+    Q_OBJECT
 public:
-    SysFileMonitor(QObject* parent);
+    TempScreenSaverMonitor(QObject *parent = 0, const char *name = 0);
+
+    void setTempMode(int,int);
+    void applicationTerminated(int);
+
+signals:
+    void forceSuspend();
+
 protected:
-    void timerEvent(QTimerEvent*);
+    void timerEvent(QTimerEvent *);
+
+private:
+    bool removeOld(int);
+    void updateAll();
+    int timerValue();
+
+private:
+    QValueList<int> sStatus[3];
+    int currentMode;
+    int timerId;
 };
 
-#endif
+
+#endif // SUSPEND_MONITOR_H
+

@@ -18,17 +18,41 @@
 **
 **********************************************************************/
 
+#ifndef SYNCDIALOG_H
+#define SYNCDIALOG_H
 
-#ifndef STABMON_H
-#define STABMON_H
+#include <qdialog.h>
+#include <qimage.h>
+#include <qpointarray.h>
 
-#include <qobject.h>
 
-class SysFileMonitor : public QObject {
+class SyncDialog : public QDialog
+{
+    Q_OBJECT
 public:
-    SysFileMonitor(QObject* parent);
+    SyncDialog( QWidget *parent, const QString & );
+
+signals:
+    void cancel();
+
 protected:
-    void timerEvent(QTimerEvent*);
+    void paintEvent( QPaintEvent * );
+    void timerEvent( QTimerEvent * );
+
+    void loadPath();
+    QPointArray scalePath( const QPointArray &pa, int xn, int xd, int yn, int yd );
+    QPointArray generatePath( const QPointArray &pa, int dist );
+
+private:
+    QImage img;
+    QImage dot;
+    QString what;
+    QPointArray path;
+    int nextPt;
+    bool rev;
+    bool hideDot;
 };
 
+
 #endif
+

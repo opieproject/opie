@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,7 +21,7 @@
 #ifndef OBEXINTERFACE_H
 #define OBEXINTERFACE_H
 
-#include <qpe/qcom.h>
+#include <qtopia/qcom.h>
 
 #ifndef QT_NO_COMPONENT
 // ### regenerate!!!!!!
@@ -33,7 +33,7 @@
 
 class QObject;
 
-struct ObexInterface : public QUnknownInterface
+struct QTOPIA_EXPORT ObexInterface : public QUnknownInterface
 {
 };
 
