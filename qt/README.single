@@ -1,0 +1,8 @@
+
+
+The qconfig-qpe-single.h (single boot-floppy build) has been removed 
+(cvs remove), since it didn't work with OPIE 0.9.1 anymore and nobody 
+had the time to maintain it.
+
+Feel free to reanimate the boot-floppy functionality, if you like.
+ 
