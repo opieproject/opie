@@ -313,9 +313,10 @@ void DateBookWeekView::resizeEvent( QResizeEvent *e )
 {
     const int hourWidth = 20;
     QScrollView::resizeEvent( e );
-    int avail = width()-qApp->style().scrollBarExtent().width()-1;
-    header->setGeometry( 0, 0, avail, header->sizeHint().height() );
-    setMargins( 0, header->height(), 0, 0 );
+    int avail = visibleWidth();
+    header->setGeometry( leftMargin()+frameWidth()+frameRect().left() , frameWidth(),
+			  visibleWidth(), header->sizeHint().height() );
+    setMargins( 0, header->sizeHint().height(), 0, 0 );
     header->resizeSection( 0, hourWidth );
     int sw = (avail - hourWidth) / 7;
     for ( int i = 1; i < 7; i++ )
