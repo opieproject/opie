@@ -3,39 +3,39 @@
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Empieza el ordenador</translation>
     </message>
     <message>
         <source>Human starts</source>
-        <translation type="unfinished"></translation>
+        <translation>Empieza el humano</translation>
     </message>
     <message>
         <source>Play!</source>
-        <translation type="unfinished"></translation>
+        <translation>Juegar!</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>Salir</translation>
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation type="unfinished"></translation>
+        <translation>Pulsa Jugar para empezar</translation>
     </message>
     <message>
         <source>Make your move</source>
-        <translation type="unfinished"></translation>
+        <translation>Haz tu movimiento</translation>
     </message>
     <message>
         <source>You won!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡Tú ganas!</translation>
     </message>
     <message>
         <source>Computer won!</source>
-        <translation type="unfinished"></translation>
+        <translation>¡El ordenador gana!</translation>
     </message>
     <message>
         <source>It&apos;s a draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Empate</translation>
     </message>
 </context>
 </TS>

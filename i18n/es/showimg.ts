@@ -3,67 +3,67 @@
     <name>ImageViewer</name>
     <message>
         <source>Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visor de imágenes</translation>
     </message>
     <message>
         <source>Horizontal flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Espejo horizontal</translation>
     </message>
     <message>
         <source>Vertical flip</source>
-        <translation type="unfinished"></translation>
+        <translation>Espejo vertical</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Rotate 180</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotar 180º</translation>
     </message>
     <message>
         <source>Rotate 90</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotat 90º</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla completa</translation>
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>- Visor de imágenes</translation>
     </message>
     <message>
         <source>Loading image...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cargando imangen...</translation>
     </message>
     <message>
         <source>Could not load image</source>
-        <translation type="unfinished"></translation>
+        <translation>No puedo cargar imangen</translation>
     </message>
     <message>
         <source>No image - select Open from File menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin imagen - selecione Abrir del menú Fichero.</translation>
     </message>
     <message>
         <source>, %1/%2 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1/%2 colores</translation>
     </message>
     <message>
         <source>, %1 colors</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1 colores</translation>
     </message>
     <message>
         <source> True color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color verdadero</translation>
     </message>
     <message>
         <source>, %1 alpha levels</source>
-        <translation type="unfinished"></translation>
+        <translation>, %1 niveles alpha</translation>
     </message>
     <message>
         <source>, 8-bit alpha channel</source>
-        <translation type="unfinished"></translation>
+        <translation>, canal alpha de 8-bit</translation>
     </message>
 </context>
 </TS>

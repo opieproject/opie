@@ -3,91 +3,92 @@
     <name>Security</name>
     <message>
         <source>Set passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar código</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar código</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducir código</translation>
     </message>
     <message>
         <source>Passcode incorrect</source>
-        <translation type="unfinished"></translation>
+        <translation>Código incorrecto</translation>
     </message>
     <message>
         <source>The passcode entered is incorrect.
 Access denied</source>
-        <translation type="unfinished"></translation>
+        <translation>El código introducido es incorrecto.
+Acceso denegado</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Cualquiera</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguna</translation>
     </message>
 </context>
 <context>
     <name>SecurityBase</name>
     <message>
         <source>Security Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de seguridad</translation>
     </message>
     <message>
         <source>Change passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambiar código</translation>
     </message>
     <message>
         <source>Clear passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar código</translation>
     </message>
     <message>
         <source>Require pass code at power-on</source>
-        <translation type="unfinished"></translation>
+        <translation>Solicitar código al encender</translation>
     </message>
     <message>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Sincronizar</translation>
     </message>
     <message>
         <source>Accept sync from network:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sincronización desde red:</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.129.0/24 (predefinido)</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.1.0/24</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
-        <translation type="unfinished"></translation>
+        <translation>192.168.0.0/16</translation>
     </message>
     <message>
         <source>172.16.0.0/12</source>
-        <translation type="unfinished"></translation>
+        <translation>172.16.0.0/12</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
-        <translation type="unfinished"></translation>
+        <translation>10.0.0.0/8</translation>
     </message>
     <message>
         <source>Any</source>
-        <translation type="unfinished"></translation>
+        <translation>Cualquiera</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguna</translation>
     </message>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;P&gt;Elegir un código proporciona un mínimo nivel de protección contra accesos esporádicos al dispositivo.</translation>
     </message>
 </context>
 </TS>
