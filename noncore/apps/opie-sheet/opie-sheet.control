@@ -1,10 +1,10 @@
 Package: opie-sheet
-Files: plugins/application/libsheetqt.so* bin/sheetqt apps/Applications/opie-sheet.desktop help/en/html/sheetqt.html pics/opie-sheet/sheetqt.png
+Files: plugins/application/libsheetqt.so* bin/sheetqt apps/Applications/opie-sheet.desktop help/en/html/sheetqt.html pics/opie-sheet/*.png
 Priority: optional
 Section: opie/applications
 Maintainer: Serdar Ozler <sozler@sitebest.com>
 Architecture: arm
-Version: 1.0.2
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal
 License: Public Domain
 Description: Opie Sheet
