@@ -47,8 +47,10 @@ class QMultiLineEdit;
 class QLineEdit;
 class QComboBox;
 class QPushButton;
+class QLineEdit;
 class CategorySelect;
 class QLabel;
+class OContactFields;
 
 class ContactEditor : public QDialog {
 	Q_OBJECT
@@ -106,6 +108,7 @@ class ContactEditor : public QDialog {
 		int defaultEmailChooserPosition;
 		void populateDefaultEmailCmb();
 		void chooserChange( const QString&, int , QLineEdit*, int );
+		OContactFields *contactfields;
 
 		bool useFullName;
 

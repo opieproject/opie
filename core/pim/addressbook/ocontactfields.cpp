@@ -6,6 +6,7 @@
 
 // We should use our own enum in the future ..
 #include <qpe/recordfields.h>
+#include <opie/ocontact.h>
 
 /*!
   \internal
@@ -280,4 +281,40 @@ QMap<QString, int> OContactFields::trFieldsToId()
 	
 
 	return ret_map;
+}
+
+OContactFields::OContactFields( const OContact &co){
+  qDebug("ocontactfields c'tor");
+  contact = co;
+  qDebug("get custom field");
+  fieldOrder = "1234";
+  qDebug("fieldOrder >%s<",fieldOrder.latin1());
+  fieldOrder = contact.customField( CONTACT_FIELD_ODER_NAME );
+ qDebug("fieldOrder >%s<",fieldOrder.latin1());
+ //  if (fieldOrder.isEmpty()) fieldOrder = "1234";
+}
+
+OContactFields::~OContactFields(){
+  saveToRecord();
+}
+
+
+void OContactFields::saveToRecord(){
+  qDebug("ocontactfields saveToRecord");
+  contact.setCustomField( CONTACT_FIELD_ODER_NAME, fieldOrder );
+}
+
+void OContactFields::setFieldOrder( int pos, int index ){
+  qDebug("qcontactfields setfieldorder");
+  fieldOrder[pos] = index;
+}
+
+int OContactFields::getFieldOrder( int pos ){
+  qDebug("ocontactfields getFieldOrder");
+  if(fieldOrder.isEmpty()) qDebug("PANIC fieldOrder empty");
+  else qDebug("fieldOrder ok");
+  qDebug("fieldOrder >%s<",fieldOrder.latin1());
+  int ret = QString( fieldOrder[pos] ).toInt();
+  qDebug("pos %i -> %i",pos,ret);
+  return ret;
 }

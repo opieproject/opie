@@ -67,18 +67,19 @@ ContactEditor::ContactEditor(	const OContact &entry,
 	  m_personalView ( false )
 	  
 {
-
+	cmbDefaultEmail = 0;
+	contactfields = 0;
+	defaultEmailChooserPosition = -1;
 	init();
 	setEntry( entry );
-	cmbDefaultEmail = 0;
-	defaultEmailChooserPosition = -1;
 }
 
 ContactEditor::~ContactEditor() {
+  delete contactfields;
 }
 
 void ContactEditor::init() {
-	
+
 	useFullName = true;
 
 	uint i = 0;
@@ -578,9 +579,10 @@ void ContactEditor::init() {
 	cmbChooserField3->insertStringList( trlChooserNames );
 	cmbChooserField4->insertStringList( trlChooserNames );
 
-	cmbChooserField1->setCurrentItem( 0 );
-	cmbChooserField2->setCurrentItem( 1 );
-	cmbChooserField3->setCurrentItem( 2 );
+	qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
+//	cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(0) );
+//	cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(1) );
+//	cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(2) );
 
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 
@@ -644,6 +646,7 @@ void ContactEditor::populateDefaultEmailCmb(){
 void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid, int widgetPos ) {
 	QString type = slChooserNames[index];
 	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",type.latin1(),textChanged.latin1(), index,  widgetPos );
+//	contactfields->setFieldOrder( widgetPos, index );
         if ( type == "Default Email"){         
 	  defaultEmail = textChanged;
 	  if (cmbDefaultEmail) delete cmbDefaultEmail;
@@ -1119,6 +1122,10 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	ent = entry;
 
 
+	qDebug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+	delete contactfields;
+	contactfields = new OContactFields( entry );
+	qDebug("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
 
 	emails = QStringList(ent.emailList());
 	defaultEmail = ent.defaultEmail();
