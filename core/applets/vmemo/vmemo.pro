@@ -5,7 +5,7 @@ SOURCES	=   vmemo.cpp vmemoimpl.cpp
 TARGET		= vmemoapplet
 DESTDIR		=$(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
-DEPENDPATH      += ../$(OPIEDIR)/include
+DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
