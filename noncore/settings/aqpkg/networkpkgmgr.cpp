@@ -551,7 +551,7 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
         else if ( val == -1 )
         {
             // Version available is older - remove only
-            item.option = "R";
+            item.option = "D";
         }
         else
         {
@@ -586,6 +586,7 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
                                     msgtext, "Remove", secondButton ) )
                 {
                     case 0: // Try again or Enter
+						// option 0 = Remove
                         item.option = "D";
                         break;
                     case 1: // Quit or Escape
