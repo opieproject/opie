@@ -130,59 +130,6 @@
                             <bool>true</bool>
                         </property>
                     </widget>
-                    <widget row="0"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QButtonGroup</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>frame_type</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>title</name>
-                            <string>Type</string>
-                        </property>
-                        <property>
-                            <name>layoutMargin</name>
-                        </property>
-                        <property>
-                            <name>layoutSpacing</name>
-                        </property>
-                        <grid>
-                            <property stdset="1">
-                                <name>margin</name>
-                                <number>6</number>
-                            </property>
-                            <property stdset="1">
-                                <name>spacing</name>
-                                <number>2</number>
-                            </property>
-                            <widget row="1"  column="0" >
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>cb_type_fullbackup</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>Full Backup (Root File System)</string>
-                                </property>
-                            </widget>
-                            <widget row="0"  column="0" >
-                                <class>QRadioButton</class>
-                                <property stdset="1">
-                                    <name>name</name>
-                                    <cstring>cb_type_userdata</cstring>
-                                </property>
-                                <property stdset="1">
-                                    <name>text</name>
-                                    <string>User Data (Configuration + PIM)</string>
-                                </property>
-                                <property stdset="1">
-                                    <name>checked</name>
-                                    <bool>true</bool>
-                                </property>
-                            </widget>
-                        </grid>
-                    </widget>
                 </grid>
             </widget>
             <widget>
