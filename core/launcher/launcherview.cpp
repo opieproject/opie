@@ -429,19 +429,26 @@ void LauncherIconView::setEyePixmap(const QPixmap&aPixmap,const QString&aFile,in
 {
     int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
     if (s!=width) return;
-    LauncherItem*item = findDocItem(aFile);
+    LauncherItem*item = 0;
+    QMap<QString,LauncherItem*>::Iterator it;
+    if ( ( it = m_itemCache.find(aFile))!=m_itemCache.end()) {
+        item = it.data();
+        m_itemCache.remove(it);
+    } else {
+        item = findDocItem(aFile);
+    }
     if (!item||!item->isEyeImage()) return;
     item->setEyePixmap(aPixmap);
 }
 
 void LauncherIconView::checkCallback()
 {
-    if (m_EyeCallBack) {
-        return;
+    if (!m_EyeCallBack) {
+        m_EyeCallBack = new LauncherThumbReceiver();
+        connect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&,int)),
+            this,SLOT(setEyePixmap(const QPixmap&,const QString&,int)));
+        m_eyeTimer.changeInterval(600000);
     }
-    m_EyeCallBack = new LauncherThumbReceiver();
-    connect(m_EyeCallBack,SIGNAL(sig_Thumbnail(const QPixmap&,const QString&,int)),
-        this,SLOT(setEyePixmap(const QPixmap&,const QString&,int)));
 }
 
 void LauncherIconView::addCheckItem(AppLnk* app)
@@ -456,20 +463,20 @@ void LauncherIconView::requestEyePix(const LauncherItem*item)
 {
     if (!item) return;
     if (item->isEyeImage()) {
-        m_eyeTimer.changeInterval(600000);
         checkCallback();
         int s = ( bigIcns ) ? AppLnk::bigIconSize() : AppLnk::smallIconSize();
+        m_itemCache[item->appLnk()->file()]=(LauncherItem*)item;
         m_EyeCallBack->requestThumb(item->appLnk()->file(),s,s);
     }
 }
 
 void LauncherIconView::stopEyeTimer()
 {
-    odebug << "Launcherview: delete opie-eye handle" << oendl;
     if (m_EyeCallBack) {
         delete m_EyeCallBack;
         m_EyeCallBack=0;
     }
+    m_itemCache.clear();
     m_eyeTimer.stop();
 }
 

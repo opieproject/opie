@@ -26,6 +26,7 @@
 #include <qvbox.h>
 #include <qiconview.h>
 #include <qtimer.h>
+#include <qmap.h>
 
 class CategorySelect;
 class LauncherIconView;
@@ -239,6 +240,7 @@ private:
 #endif
     BusyIndicatorType busyType;
     QTimer m_eyeTimer;
+    QMap<QString,LauncherItem*> m_itemCache;
 };
 
 #endif // LAUNCHERVIEW_H
