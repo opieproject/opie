@@ -58,8 +58,8 @@ bool InterfaceSetupImp::saveSettings(){
     return true;
   }
   
-  if(!dhcpCheckBox->isChecked() && (ipAddressEdit->text().isEmpty() || subnetMaskEdit->text().isEmpty() || firstDNSLineEdit->text().isEmpty())){
-   QMessageBox::information(this, "Empy Fields.", "Please fill in address, subnet,\n gateway and the first dns entries.", "Ok");
+  if(!dhcpCheckBox->isChecked() && (ipAddressEdit->text().isEmpty() || subnetMaskEdit->text().isEmpty())){
+   QMessageBox::information(this, "Empy Fields.", "Please fill in address, subnet,\n and gateway entries.", "Ok");
    return false;
   }	
   interfaces->removeAllInterfaceOptions();
@@ -75,9 +75,11 @@ bool InterfaceSetupImp::saveSettings(){
     interfaces->setInterfaceOption("address", ipAddressEdit->text());
     interfaces->setInterfaceOption("netmask", subnetMaskEdit->text());
     interfaces->setInterfaceOption("gateway", gatewayEdit->text());
-    QString dns = firstDNSLineEdit->text() + " " + secondDNSLineEdit->text();
-    interfaces->setInterfaceOption("up "DNSSCRIPT" -a ", dns);
-    interfaces->setInterfaceOption("down "DNSSCRIPT" -r ", dns);
+    if(!firstDNSLineEdit->text().isEmpty() || !secondDNSLineEdit->text().isEmpty()){
+      QString dns = firstDNSLineEdit->text() + " " + secondDNSLineEdit->text();
+      interfaces->setInterfaceOption("up "DNSSCRIPT" -a ", dns);
+      interfaces->setInterfaceOption("down "DNSSCRIPT" -r ", dns);
+    }
   }
   
   // IP Information
