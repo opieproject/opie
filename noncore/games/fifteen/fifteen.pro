@@ -1,6 +1,4 @@
-DESTDIR		= $(OPIEDIR)/bin
-TEMPLATE	= app
-CONFIG		= qt warn_on release
+CONFIG		= qt warn_on release quick-app
 HEADERS		= fifteen.h
 SOURCES		= fifteen.cpp \
 		main.cpp

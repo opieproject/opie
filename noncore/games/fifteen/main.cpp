@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2004 Holger Freyther.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of Opie Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -13,21 +13,11 @@
 **
 ** See http://www.trolltech.com/gpl/ for GPL licensing information.
 **
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
 **********************************************************************/
 
 #include "fifteen.h"
 
-#include <qpe/qpeapplication.h>
+#include <opie/oapplicationfactory.h>
 
-int main( int argc, char ** argv)
-{
-  QPEApplication app( argc, argv );
-    
-  FifteenMainWindow mw;
-  mw.setCaption( FifteenMainWindow::tr("Fifteen Pieces") );
-  app.showMainWidget( &mw );
-  return app.exec();
-}
+OPIE_EXPORT_APP(  OApplicationFactory<FifteenMainWindow> )
+

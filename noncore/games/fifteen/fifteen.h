@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -24,6 +24,7 @@
 #include <qmainwindow.h>
 #include <qtableview.h>
 #include <qarray.h>
+#include <qpointarray.h>
 
 class QPopupMenu;
 
@@ -57,6 +58,8 @@ class PiecesTable : public QTableView
   QArray<QColor> _colors;
   QPopupMenu     *_menu;
   bool            _randomized;
+  QPointArray	light_border;
+  QPointArray	dark_border;
 
   enum MenuOp { mRandomize = 1, mReset = 2 };
 };
@@ -77,7 +80,10 @@ class FifteenMainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    FifteenMainWindow(QWidget *parent=0, const char* name=0);
+    static QString appName() {
+        return QString::fromLatin1("fifteen");
+    }
+    FifteenMainWindow(QWidget *parent=0, const char* name=0, WFlags fl=0);
 };
 
 #endif

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,8 +20,8 @@
 
 #include "fifteen.h"
 
-#include <qpe/resource.h>
-#include <qpe/config.h>
+#include <qtopia/resource.h>
+#include <qtopia/config.h>
 
 #include <qvbox.h>
 #include <qaction.h>
@@ -29,37 +29,39 @@
 #include <qpainter.h>
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qmenubar.h>
 #include <qstringlist.h>
 #include <qapplication.h>
+#include <qtoolbutton.h>
 
 #include <stdlib.h>
 #include <time.h>
 
-FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name)
-  : QMainWindow( parent, name )
+FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name, WFlags fl)
+  : QMainWindow( parent, name, fl )
 {
   // random seed
   srand(time(0));
+  setCaption( tr("Fifteen Pieces") );
+
+  QToolBar *toolbar = new QToolBar(this);
+  toolbar->setHorizontalStretchable( FALSE );
+  QMenuBar *menubar = new QMenuBar( toolbar );
+  menubar->setMargin(0);
+  QPopupMenu *game = new QPopupMenu( this );
+
+  QWidget *spacer = new QWidget( toolbar );
+  spacer->setBackgroundMode( PaletteButton );
+  toolbar->setStretchableWidget( spacer );
+
 
   setToolBarsMovable( FALSE );
   QVBox *vbox = new QVBox( this );
   PiecesTable *table = new PiecesTable( vbox );
   setCentralWidget(vbox);
 
-  QToolBar *toolbar = new QToolBar(this);
-  toolbar->setHorizontalStretchable( TRUE );
-  addToolBar(toolbar);
 
-  QMenuBar *menubar = new QMenuBar( toolbar );
-  menubar->setMargin(0);
-
-  QPopupMenu *game = new QPopupMenu( this );
-
-  QWidget *spacer = new QWidget( toolbar );
-  spacer->setBackgroundMode( PaletteButton );
-  toolbar->setStretchableWidget( spacer );
 
   QAction *a = new QAction( tr( "Randomize" ), Resource::loadPixmap( "new" ),
 			    QString::null, 0, this, 0 );
@@ -67,12 +69,13 @@ FifteenMainWindow::FifteenMainWindow(QWidget *parent, const char* name)
   a->addTo( game );
   a->addTo( toolbar );
 
-  a = new QAction( tr( "Solve" ), Resource::loadPixmap( "repeat" ),
+    /* This is pointless and confusing.
+  a = new QAction( tr( "Solve" ), Resource::loadIconSet( "repeat" ),
 		   QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), table, SLOT( slotReset() ) );
   a->addTo( game );
   a->addTo( toolbar );
-
+    */
   menubar->insertItem( tr( "Game" ), game );
 }
 
@@ -109,7 +112,7 @@ void PiecesTable::writeConfig()
   Config cfg("Fifteen");
   cfg.setGroup("Game");
   QStringList map;
-  for (unsigned int i = 0; i < 16; i++)
+  for (int i = 0; i < 16; i++)
     map.append( QString::number( _map[i] ) );
   cfg.writeEntry("Map", map, '-');
   cfg.writeEntry("Randomized", _randomized );
@@ -121,7 +124,7 @@ void PiecesTable::readConfig()
   cfg.setGroup("Game");
   QStringList map = cfg.readListEntry("Map", '-');
   _randomized = cfg.readBoolEntry( "Randomized", FALSE );
-  unsigned int i = 0;
+  int i = 0;
   for ( QStringList::Iterator it = map.begin(); it != map.end(); ++it ) {
     _map[i] = (*it).toInt();
     i++;
@@ -146,18 +149,18 @@ void PiecesTable::paintCell(QPainter *p, int row, int col)
   p->setPen(NoPen);
   p->drawRect(0, 0, w, h);
 
+  if (number == 16) return;
+
   // draw borders
   if (height() > 40) {
-    p->setPen(colorGroup().text());
-    if(col < numCols()-1)
-      p->drawLine(x2, 0, x2, y2); // right border line
+    p->setBrush(_colors[number-1].light(130));
+    p->drawPolygon(light_border);
 
-    if(row < numRows()-1)
-      p->drawLine(0, y2, x2, y2); // bottom boder line
+    p->setBrush(_colors[number-1].dark(130));
+    p->drawPolygon(dark_border);
   }
 
   // draw number
-  if (number == 16) return;
   p->setPen(black);
   p->drawText(0, 0, x2, y2, AlignHCenter | AlignVCenter, QString::number(number));
 }
@@ -168,6 +171,30 @@ void PiecesTable::resizeEvent(QResizeEvent *e)
 
   setCellWidth(contentsRect().width()/ numRows());
   setCellHeight(contentsRect().height() / numCols());
+
+  //
+  // Calculate 3d-effect borders
+  //
+  int	cell_w = cellWidth();
+  int	cell_h = cellHeight();
+  int	x_offset = cell_w - int(cell_w * 0.9);	// 10% should be enough
+  int	y_offset = cell_h - int(cell_h * 0.9);
+
+  light_border.setPoints(6,
+    0, 0,
+    cell_w, 0,
+    cell_w - x_offset, y_offset,
+    x_offset, y_offset,
+    x_offset, cell_h - y_offset,
+    0, cell_h);
+
+  dark_border.setPoints(6,
+    cell_w, 0,
+    cell_w, cell_h,
+    0, cell_h,
+    x_offset, cell_h - y_offset,
+    cell_w - x_offset, cell_h - y_offset,
+    cell_w - x_offset, y_offset);
 }
 
 void PiecesTable::initColors()
@@ -181,7 +208,7 @@ void PiecesTable::initColors()
 void PiecesTable::initMap()
 {
   _map.resize(16);
-  for (unsigned int i = 0; i < 16; i++)
+  for ( int i = 0; i < 16; i++)
     _map[i] = i;
 
   _randomized = false;
@@ -241,8 +268,8 @@ void PiecesTable::randomizeMap()
     }
     // move free cell to click position
     _map[pos=(col + row * numCols())] = 15;
-    repaint();
   }
+  repaint();
 }
 
 void PiecesTable::checkwin()
