@@ -126,6 +126,9 @@ LnkProperties::LnkProperties( AppLnk* l, QWidget* parent )
 	    d->rotateButtons->setEnabled(false);
 	}
 
+        if ( !l->property( "Arguments" ).isEmpty() )
+            d->arguments->setText( l->property( "Arguments" ) );
+
 	Config cfg("Launcher");
 	cfg.setGroup("Preload");
 	QStringList apps = cfg.readListEntry("Apps",',');
