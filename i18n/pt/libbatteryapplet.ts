@@ -83,15 +83,15 @@
     </message>
     <message>
         <source>no data</source>
-        <translation type="unfinished"></translation>
+        <translation>sem dados</translation>
     </message>
     <message>
         <source>Ipaq  </source>
-        <translation type="unfinished"></translation>
+        <translation>Ipaq</translation>
     </message>
     <message>
         <source>Jacket  </source>
-        <translation type="unfinished"></translation>
+        <translation>Acessório</translation>
     </message>
 </context>
 </TS>

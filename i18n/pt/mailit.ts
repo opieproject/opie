@@ -207,16 +207,17 @@ Verifique conta e palavra chave&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Mailit ! No account defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Mailit | Sem conta definida</translation>
     </message>
     <message>
         <source>Delete account:
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar conta:
+</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova</translation>
     </message>
 </context>
 <context>

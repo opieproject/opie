@@ -137,199 +137,199 @@
     <name>QObject</name>
     <message>
         <source>Standard</source>
-        <translation type="unfinished">Simples</translation>
+        <translation>Simples</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Peso</translation>
     </message>
     <message>
         <source>Distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Distancia</translation>
     </message>
     <message>
         <source>Area</source>
-        <translation type="unfinished"></translation>
+        <translation>Área</translation>
     </message>
     <message>
         <source>Temperatures</source>
-        <translation type="unfinished"></translation>
+        <translation>Temperatura</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume</translation>
     </message>
     <message>
         <source>acres</source>
-        <translation type="unfinished"></translation>
+        <translation>acres</translation>
     </message>
     <message>
         <source>&#xb0;C</source>
-        <translation type="unfinished"></translation>
+        <translation>ºC</translation>
     </message>
     <message>
         <source>carats</source>
-        <translation type="unfinished"></translation>
+        <translation>caracs</translation>
     </message>
     <message>
         <source>cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm</translation>
     </message>
     <message>
         <source>cu cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm cub</translation>
     </message>
     <message>
         <source>cu ft</source>
-        <translation type="unfinished"></translation>
+        <translation>pés cub</translation>
     </message>
     <message>
         <source>cu in</source>
-        <translation type="unfinished"></translation>
+        <translation>pol cub</translation>
     </message>
     <message>
         <source>&#xb0;F</source>
-        <translation type="unfinished"></translation>
+        <translation>ºF</translation>
     </message>
     <message>
         <source>fl oz (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>oz fl (US)</translation>
     </message>
     <message>
         <source>ft</source>
-        <translation type="unfinished"></translation>
+        <translation>pés</translation>
     </message>
     <message>
         <source>g</source>
-        <translation type="unfinished"></translation>
+        <translation>g</translation>
     </message>
     <message>
         <source>gal (US)</source>
-        <translation type="unfinished"></translation>
+        <translation>gal (US)</translation>
     </message>
     <message>
         <source>hectares</source>
-        <translation type="unfinished"></translation>
+        <translation>hectares</translation>
     </message>
     <message>
         <source>in</source>
-        <translation type="unfinished"></translation>
+        <translation>polegadas</translation>
     </message>
     <message>
         <source>kg</source>
-        <translation type="unfinished"></translation>
+        <translation>kg</translation>
     </message>
     <message>
         <source>km</source>
-        <translation type="unfinished"></translation>
+        <translation>km</translation>
     </message>
     <message>
         <source>l</source>
-        <translation type="unfinished"></translation>
+        <translation>l</translation>
     </message>
     <message>
         <source>lb</source>
-        <translation type="unfinished"></translation>
+        <translation>lb</translation>
     </message>
     <message>
         <source>Lg tons</source>
-        <translation type="unfinished"></translation>
+        <translation>ton Lg</translation>
     </message>
     <message>
         <source>m</source>
-        <translation type="unfinished"></translation>
+        <translation>m</translation>
     </message>
     <message>
         <source>mg</source>
-        <translation type="unfinished"></translation>
+        <translation>mg</translation>
     </message>
     <message>
         <source>mi</source>
-        <translation type="unfinished"></translation>
+        <translation>mp</translation>
     </message>
     <message>
         <source>ml</source>
-        <translation type="unfinished"></translation>
+        <translation>ml</translation>
     </message>
     <message>
         <source>mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm</translation>
     </message>
     <message>
         <source>naut. mi</source>
-        <translation type="unfinished"></translation>
+        <translation>mil naut</translation>
     </message>
     <message>
         <source>oz</source>
-        <translation type="unfinished"></translation>
+        <translation>oz</translation>
     </message>
     <message>
         <source>points</source>
-        <translation type="unfinished"></translation>
+        <translation>pontos</translation>
     </message>
     <message>
         <source>pt</source>
-        <translation type="unfinished"></translation>
+        <translation>pt</translation>
     </message>
     <message>
         <source>qt</source>
-        <translation type="unfinished"></translation>
+        <translation>qt</translation>
     </message>
     <message>
         <source>sq cm</source>
-        <translation type="unfinished"></translation>
+        <translation>cm quad</translation>
     </message>
     <message>
         <source>sq ft</source>
-        <translation type="unfinished"></translation>
+        <translation>pés quad</translation>
     </message>
     <message>
         <source>sq in</source>
-        <translation type="unfinished"></translation>
+        <translation>polegadas quad</translation>
     </message>
     <message>
         <source>sq km</source>
-        <translation type="unfinished"></translation>
+        <translation>km quad</translation>
     </message>
     <message>
         <source>sq m</source>
-        <translation type="unfinished"></translation>
+        <translation>m quad</translation>
     </message>
     <message>
         <source>sq mi</source>
-        <translation type="unfinished"></translation>
+        <translation>mil quad</translation>
     </message>
     <message>
         <source>sq mm</source>
-        <translation type="unfinished"></translation>
+        <translation>mm quad</translation>
     </message>
     <message>
         <source>sq yd</source>
-        <translation type="unfinished"></translation>
+        <translation>jardas quad</translation>
     </message>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation>st</translation>
     </message>
     <message>
         <source>St tons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ton st</translation>
     </message>
     <message>
         <source>tblspoon</source>
-        <translation type="unfinished"></translation>
+        <translation>tblspoon</translation>
     </message>
     <message>
         <source>teaspoons</source>
-        <translation type="unfinished"></translation>
+        <translation>teaspoons</translation>
     </message>
     <message>
         <source>tonnes</source>
-        <translation type="unfinished"></translation>
+        <translation>toneladas</translation>
     </message>
     <message>
         <source>yd</source>
-        <translation type="unfinished"></translation>
+        <translation>jardas</translation>
     </message>
 </context>
 </TS>
