@@ -2,12 +2,12 @@
  * this file describes how the usage in namespaces in libopie2 should be done
  * ODP is the namespace for whole opie2 stuff
  * the parts are separated as follow:
- * ONet: opienet2
- * OPim: opiepim2
- * ODb:  opiedb2
- * OCore: opiecore2 
- * OMm:  opiemm2
- * OUi:  opieui2
+ * Net: opienet2
+ * Pim: opiepim2
+ * Db:  opiedb2
+ * Core: opiecore2 
+ * Mm:  opiemm2
+ * Ui:  opieui2
  * a class MUST start with O - so we make sure that it does not 
  * conflict with other stuff.
  * don't use "using namespace .." in implementations.
@@ -53,7 +53,7 @@ qte includes here
 standard includes here
 
 namespace ODP {
- namespace ONet {
+ namespace Net {
    OFtpNetwork::OFtpNetwork() {
 
    }
