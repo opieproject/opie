@@ -141,7 +141,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
 
 void OTabWidget::removePage( QWidget *childwidget )
 {
-	if ( childwidget )
+  if ( childwidget )
     {
         OTabInfo *tab = tabs.first();
         while ( tab && tab->control() != childwidget )
@@ -200,6 +200,19 @@ void OTabWidget::setCurrentTab( const QString &tabname )
         selectTab( newtab );
     }
 }
+
+void OTabWidget::setCurrentTab(int tabindex) {
+    OTabInfo *newtab = tabs.first();
+    while ( newtab && newtab->id() != tabindex )
+    {
+        newtab = tabs.next();
+    }
+    if ( newtab && newtab->id() == tabindex )
+    {
+        selectTab( newtab );
+    }
+}
+
 
 OTabWidget::TabStyle OTabWidget::tabStyle() const
 {
@@ -305,3 +318,12 @@ void OTabWidget::resizeEvent( QResizeEvent * )
 {
     setUpLayout();
 }
+
+int OTabWidget::getCurrentTab() {
+    if ( currentTab )
+      {
+          return currentTab->id();            
+      }
+    return -1;
+}
+

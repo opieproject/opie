@@ -170,10 +170,24 @@ public:
     void setCurrentTab( const QString & );
 
 /**
+ * @fn setCurrentTab( int )
+ * @brief Selects and brings to top the desired widget, by using id.
+ *
+ * @param tab id for widget to select.
+ */
+    void setCurrentTab(int);
+
+/**
  * @fn sizeHint()
  * @brief Reimplemented for internal purposes.
  */
     QSize sizeHint() const;
+
+/**
+ * @fn getCurrentTab( )
+ * @brief returns current tab id.
+ */
+    int getCurrentTab();
 
 
 protected:
@@ -219,6 +233,7 @@ private:
  */
     void    setUpLayout();
 
+    
 signals:
 /**
  * @fn currentChanegd( QWidget *widget )
