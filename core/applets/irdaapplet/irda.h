@@ -1,5 +1,6 @@
 /**********************************************************************
-** Copyright (C) 2002 L.J. Potter ljp@llornkcor.com
+** Copyright (C) 2002 L.J. Potter ljp@llornkcor.com,
+**                    Robert Griebl sandman@handhelds.org
 **  All rights reserved.
 **
 ** This file may be distributed and/or modified under the terms of the
@@ -12,60 +13,60 @@
 **
 **********************************************************************/
 
-#ifndef SCREENSHOT_APPLET_H__
-#define SCREENSHOT_APPLET_H__
-
-
+#ifndef __OPIE_IRDA_APPLET_H__
+#define __OPIE_IRDA_APPLET_H__
 
 #include <qwidget.h>
-#include <qframe.h>
 #include <qpixmap.h>
-#include <qguardedptr.h>
-#include <qtimer.h>
-#include <qfile.h>
 #include <qpopupmenu.h>
-#include <qdict.h>
+#include <qmap.h>
 
 class IrdaApplet : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
+	
 public:
-    IrdaApplet( QWidget *parent = 0, const char *name=0 );
-    ~IrdaApplet();
+	IrdaApplet( QWidget *parent = 0, const char *name = 0 );
+	~IrdaApplet();
+
+	virtual void show ( );
 
 protected:
-    void timerEvent(QTimerEvent *te );
-
-private:
-    void mousePressEvent( QMouseEvent * );
-    void paintEvent( QPaintEvent* );
-    int checkIrdaStatus();
-    int setIrdaStatus(int);
-    int checkIrdaDiscoveryStatus();
-    int setIrdaDiscoveryStatus(int);
-    int setIrdaReceiveStatus(int);
-    void showDiscovered();
-    int sockfd;
-
-public slots:
-    void show();
-
+	virtual void timerEvent ( QTimerEvent * );
+	virtual void mousePressEvent ( QMouseEvent * );
+	virtual void paintEvent ( QPaintEvent* );
+	
 private slots:
-    void popupTimeout();
+	void popupTimeout ( );
 
 private:
-    QPixmap irdaOnPixmap;
-    QPixmap irdaOffPixmap;
-    QPixmap irdaDiscoveryOnPixmap;
-    QPixmap receiveActivePixmap;
-    int irdaactive; // bool and bitfields later bool irdaactive :1 ;
-    int irdaDiscoveryActive;
-    bool receiveActive : 1;
-    bool receiveStateChanged;
-    QPopupMenu *popupMenu;
-    void popup(QString message, QString icon="");
-    QDict<QString> devicesAvailable;
+	void popup( QString message, QString icon = QString::null );
+
+	bool checkIrdaStatus ( );
+	bool setIrdaStatus ( bool );
+	bool checkIrdaDiscoveryStatus ();
+	bool setIrdaDiscoveryStatus ( bool );
+	bool setIrdaReceiveStatus ( bool );
+
+	void showDiscovered();
+	
+private:
+	QPixmap m_irdaOnPixmap;
+	QPixmap m_irdaOffPixmap;
+	QPixmap m_irdaDiscoveryOnPixmap;
+	QPixmap m_receiveActivePixmap;
+	
+	bool m_irda_active; 
+	bool m_irda_discovery_active;
+	bool m_receive_active;
+	bool m_receive_state_changed;
+	
+	QPopupMenu *m_popup;
+
+	int m_sockfd;
+	
+	QMap <QString, QString> m_devices;
 };
 
 
-#endif // __SCREENSHOT_APPLET_H__
+#endif // __OPIE_IRDA_APPLET_H__

@@ -1,7 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2002 David Woodhouse <dwmw2@infradead.org>
-** Heavily based on volumeapplet, (C) 2002 L.J. Potter ljp@llornkcor.com
-**  All rights reserved.
+**                    Max Reiss <harlekin@handhelds.org> [trivial stuff]
+**                    Robert Griebl <sandman@handhelds.org>
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -13,357 +13,301 @@
 **
 **********************************************************************/
 
-#include "irda.h"
-#include <qapplication.h>
-#include <stdlib.h>
-
-
-#include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
 #include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/applnk.h>
-#include <qpe/config.h>
 #include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/sound.h>
 
-#include <qdir.h>
-#include <qfileinfo.h>
-#include <qpoint.h>
-#include <qpushbutton.h>
 #include <qpainter.h>
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qslider.h>
-#include <qlayout.h>
-#include <qframe.h>
-#include <qpixmap.h>
-#include <qstring.h>
 #include <qfile.h>
 #include <qtimer.h>
 #include <qtextstream.h>
 #include <qpopupmenu.h>
-#include <qsound.h>
 
+#include <unistd.h>
 #include <net/if.h>
 #include <netinet/in.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 
+#include "irda.h"
 
 //===========================================================================
 
-IrdaApplet::IrdaApplet( QWidget *parent, const char *name )
-    : QWidget( parent, name ) {
-    setFixedHeight( 14 );
-    setFixedWidth( 14 );
-    sockfd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
-    irdaOnPixmap = Resource::loadPixmap( "irdaapplet/irdaon" );
-    irdaOffPixmap = Resource::loadPixmap( "irdaapplet/irdaoff" );
-    irdaDiscoveryOnPixmap = Resource::loadPixmap( "irdaapplet/magglass" );
-    receiveActivePixmap = Resource::loadPixmap("irdaapplet/receive");
-    receiveActive = false;
-    popupMenu = 0;
-    devicesAvailable.setAutoDelete(TRUE);
+IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
+		: QWidget ( parent, name )
+{
+	setFixedHeight ( 18 );
+	setFixedWidth ( 14 );
+	
+	m_sockfd = ::socket ( PF_INET, SOCK_DGRAM, IPPROTO_IP );
+	
+	m_irdaOnPixmap          = Resource::loadPixmap( "irdaapplet/irdaon" );
+	m_irdaOffPixmap         = Resource::loadPixmap( "irdaapplet/irdaoff" );
+	m_irdaDiscoveryOnPixmap = Resource::loadPixmap( "irdaapplet/magglass" );
+	m_receiveActivePixmap   = Resource::loadPixmap( "irdaapplet/receive" );
+	
+	m_irda_active = false;
+	m_irda_discovery_active = false;
+	m_receive_active = false;
+	m_receive_state_changed = false;
+	m_popup = 0;
 }
 
-void IrdaApplet::show() {
-    QWidget::show();
-    startTimer(2000);
+void IrdaApplet::show()
+{
+	QWidget::show ( );
+	startTimer ( 2000 );
 }
 
-IrdaApplet::~IrdaApplet() {
-    close(sockfd);
-    if( popupMenu ) { delete popupMenu; }
+IrdaApplet::~IrdaApplet()
+{
+	if ( m_sockfd >= 0 )
+		::close ( m_sockfd );
 }
 
-void IrdaApplet::popup(QString message, QString icon="") {
-    if ( ! popupMenu ) {
-	popupMenu = new QPopupMenu();
-    }
-    popupMenu->clear();
-    if( icon == "" ) {
-	popupMenu->insertItem( message, 0 );
-    } else {
-	popupMenu->insertItem( QIconSet ( Resource::loadPixmap ( icon )),
-		message, 0 );
-    }
+void IrdaApplet::popup ( QString message, QString icon )
+{
+	if ( !m_popup ) 
+		m_popup = new QPopupMenu ( this );
 
-    QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
-    QSize s = popupMenu->sizeHint ( );
-    popupMenu->popup( QPoint (
-	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
-	p. y ( ) - s. height ( ) ), 0);
+	m_popup-> clear ( );
+	
+	if ( icon. isEmpty ( )) 
+		m_popup-> insertItem ( message, 0 );
+	else 
+		m_popup-> insertItem ( QIconSet ( Resource::loadPixmap ( icon )), message, 0 );
 
-    QTimer::singleShot( 2000, this, SLOT(popupTimeout()) );
+	QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
+	QSize s = m_popup-> sizeHint ( );
+	m_popup-> popup ( QPoint ( p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
+	                           p. y ( ) - s. height ( )));
+
+	QTimer::singleShot ( 2000, this, SLOT( popupTimeout ( )));
 }
 
-void IrdaApplet::popupTimeout() {
-    popupMenu->hide();
+void IrdaApplet::popupTimeout ( )
+{
+	m_popup-> hide ( );
 }
 
-int IrdaApplet::checkIrdaStatus() {
-    struct ifreq ifr;
+bool IrdaApplet::checkIrdaStatus ( )
+{
+	struct ifreq ifr;
+	strcpy ( ifr. ifr_name, "irda0" );
 
-    strcpy(ifr.ifr_name, "irda0");
+	if ( ::ioctl ( m_sockfd, SIOCGIFFLAGS, &ifr ) < 0 )
+		return false;
 
-    if (ioctl(sockfd, SIOCGIFFLAGS, &ifr))
-        return -1;
-
-    return (ifr.ifr_flags & IFF_UP)?1:0;
+	return ( ifr. ifr_flags & IFF_UP );
 }
 
-int IrdaApplet::setIrdaStatus(int c) {
-    struct ifreq ifr;
+bool IrdaApplet::setIrdaStatus ( bool b )
+{
+	struct ifreq ifr;
+	strcpy ( ifr. ifr_name, "irda0" );
 
-    strcpy(ifr.ifr_name, "irda0");
+	if ( ::ioctl ( m_sockfd, SIOCGIFFLAGS, &ifr ) < 0 )
+		return false;
 
-    if (ioctl(sockfd, SIOCGIFFLAGS, &ifr))
-        return -1;
-
-    if (c) {
-        ifr.ifr_flags |= IFF_UP;
-    } else {
-	setIrdaDiscoveryStatus(0);
-	setIrdaReceiveStatus(0);
-        ifr.ifr_flags &= ~IFF_UP;
-    }
-
-    if (ioctl(sockfd, SIOCSIFFLAGS, &ifr))
-        return -1;
-
-    return 0;
-}
-
-int IrdaApplet::checkIrdaDiscoveryStatus() {
-
-    QFile discovery("/proc/sys/net/irda/discovery");
-
-    QString streamIn = "0";
-
-    if (discovery.open(IO_ReadOnly) ) {
-        QTextStream stream ( &discovery );
-        streamIn = stream.read();
-    }
-
-    discovery.close();
-
-    return( streamIn.toInt() );
-}
-
-
-int IrdaApplet::setIrdaDiscoveryStatus(int d) {
-    QFile discovery("/proc/sys/net/irda/discovery");
-
-    discovery.open( IO_WriteOnly|IO_Raw );
-
-    if (d)
-        discovery.putch('1');
-    else
-        discovery.putch('0');
-
-    discovery.close();
-
-    return 0;
-}
-
-int IrdaApplet::setIrdaReceiveStatus(int d) {
-    if(d) {
-        qWarning("Enable receive" );
-        QCopEnvelope e("QPE/Obex", "receive(int)" );
-        e << 1;
-        receiveActive = true;
-        receiveStateChanged = true;
-    } else {
-        qWarning("Disable receive" );
-        QCopEnvelope e("QPE/Obex", "receive(int)" );
-        e << 0;
-        receiveActive = false;
-        receiveStateChanged = true;
-    }
-    return 0;
-}
-
-void IrdaApplet::showDiscovered() {
-    QFile discovery("/proc/net/irda/discovery");
-
-    if (discovery.open(IO_ReadOnly) ) {
-	int qcopsend = FALSE;
-
-	QString discoveredDevice;
-	QString deviceAddr;
-        QStringList list;
-        // since it is /proc we _must_ use QTextStream
-        QTextStream stream ( &discovery);
-        QString streamIn;
-        streamIn = stream.read();
-        list = QStringList::split("\n", streamIn);
-
-	QDictIterator<QString> it( devicesAvailable ); 
-	while ( it.current() ) {
-	    devicesAvailable.replace( it.currentKey(), new QString("+++" + *devicesAvailable[it.currentKey()]) );
-	    //qDebug("IrdaMon: " + it.currentKey());
-	    //qDebug("  =" + *devicesAvailable[it.currentKey()] );
-	    ++it;
+	if ( b ) {
+		ifr. ifr_flags |= IFF_UP;
+	}
+	else {
+		setIrdaDiscoveryStatus ( 0 );
+		setIrdaReceiveStatus ( 0 );
+		ifr. ifr_flags &= ~IFF_UP;
 	}
 
-        for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
-	    // qDebug( (*line) );
-            if( (*line).startsWith("nickname:") ){
-                discoveredDevice  = (*line).mid(((*line).find(':'))+2,(*line).find(',')-(*line).find(':')-2);
-                deviceAddr = (*line).mid( (*line).find( "daddr:" )+9, 8 );
+	if ( ::ioctl ( m_sockfd, SIOCSIFFLAGS, &ifr ) < 0 )
+		return false;
 
-                // qDebug(discoveredDevice + "(" + deviceAddr + ")");
+	return true;
+}
 
-		if( ! devicesAvailable.find(deviceAddr) ) {
-		    popup( tr("Found:") + " " + discoveredDevice );
-		    QSound::play(Resource::findSound("irdaapplet/irdaon"));
-		    qcopsend = TRUE;
+bool IrdaApplet::checkIrdaDiscoveryStatus ( )
+{
+	QFile discovery ( "/proc/sys/net/irda/discovery" );
+
+	QString streamIn = "0";
+
+	if ( discovery. open ( IO_ReadOnly )) {
+		QTextStream stream ( &discovery );
+		streamIn = stream. read ( );
+	}
+
+	return streamIn. toInt ( ) > 0;
+}
+
+
+bool IrdaApplet::setIrdaDiscoveryStatus ( bool d )
+{
+	QFile discovery ( "/proc/sys/net/irda/discovery" );
+
+	if ( discovery. open ( IO_WriteOnly | IO_Raw )) {
+		discovery.putch ( d ? '1' : '0' );		
+		return true;
+	}
+	return false;
+}
+
+
+bool IrdaApplet::setIrdaReceiveStatus ( bool d )
+{
+	QCopEnvelope e ( "QPE/Obex", "receive(int)" );
+	e << ( d ? 1 : 0 );
+	
+	m_receive_active = d;
+	m_receive_state_changed = true;
+	
+	return true;
+}
+
+
+void IrdaApplet::showDiscovered ( )
+{
+	static Sound snd_found ( "irdaapplet/irdaon" );
+	static Sound snd_lost ( "irdaapplet/irdaoff" );
+
+	QFile discovery ( "/proc/net/irda/discovery" );
+
+	if ( discovery. open ( IO_ReadOnly )) {
+		bool qcopsend = false;
+
+		QString discoveredDevice;
+		QString deviceAddr;
+		
+		// since it is /proc we _must_ use QTextStream
+		QStringList list =  QStringList::split ( "\n", QTextStream ( &discovery ). read ( ));
+
+		QMap <QString, QString>::Iterator it;
+
+		for ( it = m_devices. begin ( ); it != m_devices. end ( ); ++it )
+			it. data ( ). prepend ( "+++" );
+
+		for ( QStringList::Iterator lit = list. begin ( ); lit != list. end ( ); ++lit ) {
+			const QString &line = *lit;
+		
+			if ( line. startsWith ( "nickname:" )) {
+				discoveredDevice = line. mid ( line. find ( ':' ) + 2, line. find ( ',' ) - line. find ( ':' ) - 2 );
+				deviceAddr       = line. mid ( line. find ( "daddr:" ) + 9, 8 );
+
+				// qDebug(discoveredDevice + "(" + deviceAddr + ")");
+
+				if ( !m_devices. contains ( deviceAddr )) {
+					popup ( tr( "Found:" ) + " " + discoveredDevice );
+					snd_found. play ( );
+					qcopsend = true;
+				}
+				m_devices. replace ( deviceAddr, discoveredDevice );
+			}
 		}
-		devicesAvailable.replace( deviceAddr, new QString(discoveredDevice) );
-		// qDebug("IrdaMon: " + deviceAddr + "=" + *devicesAvailable[deviceAddr] );
-            }
-        }
 
-	it.toFirst();
-	while ( it.current() ) {
-	    // qDebug("IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?");
-	    if ( (*it.current()).left(3) == "+++" ) {
-		popup( tr("Lost:") + " " + (*devicesAvailable[it.currentKey()]).mid(3) );
-		QSound::play(Resource::findSound("irdaapplet/irdaoff"));
-		devicesAvailable.remove( it.currentKey() );
-	        // qDebug("IrdaMon: delete " + it.currentKey() + "!");
-		qcopsend = TRUE;
-	    }
-	    ++it;
+		for ( it = m_devices. begin ( ); it != m_devices. end ( ); ) {
+			// qDebug("IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?");
+			
+			if ( it. data ( ). left ( 3 ) == "+++" ) {
+				popup ( tr( "Lost:" ) + " " + it. data ( ). mid ( 3 ));
+				snd_lost. play ( );
+				
+				QMap <QString, QString>::Iterator tmp = it;
+				tmp++;
+				m_devices. remove ( it ); // in contrast to QValueListIterator this remove doesn't return the next Iterator
+				it = tmp;
+				
+				qcopsend = true;
+			}
+			else
+				it++;
+		}
+		// XXX if( qcopsend ) {
+		    QCopEnvelope e ( "QPE/Network", "irdaSend(bool)" );
+		    e << ( m_devices. count ( ) > 0 );
+		// } 
 	}
-	/* XXX if( qcopsend ) {
-	    QCopEnvelope e("QPE/Network", "irdaSend(bool)" );
-	    e << (devicesAvailable.count() > 0) ;
-	} */
-    }
 }
 
-void IrdaApplet::mousePressEvent( QMouseEvent *) {
-    QPopupMenu *menu = new QPopupMenu();
-    QString cmd;
-    int ret=0;
+void IrdaApplet::mousePressEvent ( QMouseEvent * )
+{
+	QPopupMenu *menu = new QPopupMenu ( this );
+	QString cmd;
 
-    /* Refresh active state */
-    timerEvent(NULL);
+	/* Refresh active state */
+	timerEvent ( 0 );
 
-//	menu->insertItem( tr("More..."), 4 );
+	//	menu->insertItem( tr("More..."), 4 );
 
-    if (irdaactive && devicesAvailable.count() > 0) {
-	menu->insertItem( tr("Discovered Device:"), 9);
-	QDictIterator<QString> it( devicesAvailable );
-	while ( it.current() ) {
-	    menu->insertItem( *devicesAvailable[it.currentKey()]);
-	    ++it;
-	}
-	menu->insertSeparator();
-    }
+	if ( m_irda_active && !m_devices. isEmpty ( )) {
+		menu-> insertItem ( tr( "Discovered Device:" ), 9 );
 
-    if (irdaactive) {
-        menu->insertItem( tr("Disable IrDA"), 0 );
-    } else {
-        menu->insertItem( tr("Enable IrDA"), 1 );
-    }
+		for ( QMap<QString, QString>::Iterator it = m_devices. begin ( ); it != m_devices. end ( ); ++it )
+			menu-> insertItem ( *it );
 
-    if (irdaactive) {
-	if (irdaDiscoveryActive) {
-	    menu->insertItem( tr("Disable Discovery"), 2 );
-	} else {
-	    menu->insertItem( tr("Enable Discovery"), 3 );
+		menu-> insertSeparator ( );
 	}
 
-	if( receiveActive ){
-	    menu->insertItem( tr("Disable Receive"), 4 );
-	} else {
-	    menu->insertItem( tr("Enable Receive"), 5 );
+	menu-> insertItem ( m_irda_active ? tr( "Disable IrDA" ) : tr( "Enable IrDA" ), 0 );
+
+	if ( m_irda_active ) {
+		menu-> insertItem ( m_irda_discovery_active ? tr( "Disable Discovery" ) : tr( "Enable Discovery" ), 1 );
+		menu-> insertItem ( m_receive_active ? tr( "Disable Receive" ) : tr( "Enable Receive" ), 2 );
 	}
-    }
 
-    QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
-    QSize s = menu-> sizeHint ( );
-    ret = menu->exec( QPoint ( 
-	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), 
-	p. y ( ) - s. height ( ) ), 0);
+	QPoint p = mapToGlobal ( QPoint ( 0, 0 ) );
+	QSize s = menu-> sizeHint ( );
 
-    // qDebug("ret was %d\n", ret);
-
-    switch(ret) {
-    case 0:
-        setIrdaStatus(0);
-        timerEvent(NULL);
-        break;
-    case 1:
-        setIrdaStatus(1);
-        timerEvent(NULL);
-        break;
-    case 2:
-        setIrdaDiscoveryStatus(0);
-        timerEvent(NULL);
-        break;
-    case 3:
-        setIrdaDiscoveryStatus(1);
-        timerEvent(NULL); // NULL is undefined in c++ use 0 or 0l
-        break;
-    case 4: { // enable receive
-	setIrdaReceiveStatus(0);
-        timerEvent(NULL);
-        break;
-    }
-    case 5: { // disable receive
-	setIrdaReceiveStatus(1);
-        timerEvent(NULL);
-        break;
-    }
-    }
-    delete menu; // Can somebody explain why use a QPopupMenu* and not QPopupMenu nor QAction. with out delete we will leak cause QPopupMenu doesn't have a parent in this case
+	p = QPoint ( p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ), p. y ( ) - s. height ( ));
+	
+	switch (  menu-> exec ( p )) {
+		case 0:
+			setIrdaStatus ( !m_irda_active );
+			timerEvent ( 0 );
+			break;
+		case 1:
+			setIrdaDiscoveryStatus ( !m_irda_discovery_active );
+			timerEvent ( 0 );
+			break;
+		case 2:
+			setIrdaReceiveStatus ( !m_receive_active );
+			timerEvent( 0 );
+			break;
+	}
+	
+	delete menu;
 }
 
-void IrdaApplet::timerEvent( QTimerEvent * ) {
-    int oldactive = irdaactive;
-    int olddiscovery = irdaDiscoveryActive;
-    bool receiveUpdate = false;
+void IrdaApplet::timerEvent ( QTimerEvent * )
+{
+	bool oldactive     = m_irda_active;
+	bool olddiscovery  = m_irda_discovery_active;
+	bool receiveUpdate = false;
 
-    if (receiveStateChanged) {
-        receiveUpdate = true;
-        receiveStateChanged = false;
-    }
+	if ( m_receive_state_changed ) {
+		receiveUpdate = true;
+		m_receive_state_changed = false;
+	}
 
-    irdaactive = checkIrdaStatus();
-    irdaDiscoveryActive = checkIrdaDiscoveryStatus();
+	m_irda_active           = checkIrdaStatus ( );
+	m_irda_discovery_active = checkIrdaDiscoveryStatus ( );
 
-    
-    if (irdaDiscoveryActive) {
-	showDiscovered();
-    }
+	if ( m_irda_discovery_active ) 
+		showDiscovered ( );
 
-    if ((irdaactive != oldactive) || (irdaDiscoveryActive != olddiscovery) || receiveUpdate ) {
-        paintEvent(NULL);
-    }
-
+	if (( m_irda_active != oldactive ) || ( m_irda_discovery_active != olddiscovery ) || receiveUpdate ) 
+		update ( );
 }
 
-void IrdaApplet::paintEvent( QPaintEvent* ) {
-    QPainter p(this);
-    // qDebug("paint irda pixmap");
+void IrdaApplet::paintEvent ( QPaintEvent * )
+{
+	QPainter p ( this );
 
-    p.eraseRect ( 0, 0, this->width(), this->height() );
-    if (irdaactive > 0) {
-        p.drawPixmap( 0, 0,  irdaOnPixmap );
-    } else {
-        p.drawPixmap( 0, 0,  irdaOffPixmap );
-    }
+	p. drawPixmap ( 0, 1, m_irda_active ? m_irdaOnPixmap : m_irdaOffPixmap );
 
-    if (irdaDiscoveryActive > 0) {
-        p.drawPixmap( 0, 0,  irdaDiscoveryOnPixmap );
-    }
-    if (receiveActive) {
-        p.drawPixmap( 0, 0, receiveActivePixmap);
-    }
+	if ( m_irda_discovery_active )
+		p. drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
+
+	if ( m_receive_active ) 
+		p. drawPixmap( 0, 1, m_receiveActivePixmap );
 }
