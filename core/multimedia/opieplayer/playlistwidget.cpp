@@ -244,6 +244,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     audioView->addColumn( tr("Title"),140);
     audioView->addColumn(tr("Size"), -1);
     audioView->addColumn(tr("Media"),-1);
+    audioView->addColumn( tr( "Path" ), 0 );
+    
     audioView->setColumnAlignment(1, Qt::AlignRight);
     audioView->setColumnAlignment(2, Qt::AlignRight);
     audioView->setAllColumnsShowFocus(TRUE);
@@ -267,6 +269,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView->addColumn(tr("Title"),140);
     videoView->addColumn(tr("Size"),-1);
     videoView->addColumn(tr("Media"),-1);
+    videoView->addColumn(tr( "Path" ), 0 );
     videoView->setColumnAlignment(1, Qt::AlignRight);
     videoView->setColumnAlignment(2, Qt::AlignRight);
     videoView->setAllColumnsShowFocus(TRUE);
@@ -319,9 +322,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
-    QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
+    QString currentPlaylist = cfg.readEntry("CurrentPlaylist","default");
     loadList(DocLnk( currentPlaylist));
-    setCaption(tr("OpiePlayer: ")+ currentPlaylist );
+    setCaption(tr("OpiePlayer: ")+ QFileInfo(currentPlaylist).baseName());
     
     initializeStates();
 }
@@ -423,6 +426,10 @@ void PlayListWidget::addAllToList() {
     for ( ; Adit.current(); ++Adit )
         if(QFileInfo(Adit.current()->file()).exists())
             d->selectedFiles->addToSelection( **Adit );
+    tabWidget->setCurrentPage(0);
+    
+    writeCurrentM3u();
+    d->selectedFiles->first();
 }
 
 
@@ -431,6 +438,10 @@ void PlayListWidget::addAllMusicToList() {
     for ( ; dit.current(); ++dit ) 
         if(QFileInfo(dit.current()->file()).exists())
             d->selectedFiles->addToSelection( **dit );
+    tabWidget->setCurrentPage(0);
+    
+    writeCurrentM3u();
+    d->selectedFiles->first();
 }
 
 
@@ -439,6 +450,10 @@ void PlayListWidget::addAllVideoToList() {
     for ( ; dit.current(); ++dit )
         if(QFileInfo( dit.current()->file()).exists())
             d->selectedFiles->addToSelection( **dit );
+    tabWidget->setCurrentPage(0);
+    
+    writeCurrentM3u();
+    d->selectedFiles->first();
 }
 
 
@@ -645,67 +660,33 @@ void PlayListWidget::setView( char view ) {
 }
 
 void PlayListWidget::addSelected() {
-
-    Config cfg( "OpiePlayer" );
-    cfg.setGroup("PlayList");
-    QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-//    int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
-
+  qDebug("addSelected");
+  DocLnk lnk;
+  QString filename;
     switch (tabWidget->currentPageIndex()) {
-      case 0: //playlist
-          break;
-      case 1: { //audio
-//                 QString entryName;
-//                 entryName.sprintf( "File%i", i + 1 );
-//                 QString linkFile = cfg.readEntry( entryName );
-          QListViewItemIterator it(  audioView  );
-            // iterate through all items of the listview
-          for ( ; it.current(); ++it ) {
-              if ( it.current()->isSelected() ) {
-                  QListIterator<DocLnk> dit( files.children() );
-                  for ( ; dit.current(); ++dit ) {
-                      if( dit.current()->name() == it.current()->text(0) ) {
-                          d->selectedFiles->addToSelection(  **dit );
-                      }
-                  }
-                  audioView->setSelected( it.current(),FALSE);
-              }
-          }
-          tabWidget->setCurrentPage(0);
-      }           
-      break;
-      case 2: { // video
-          QListViewItemIterator it(  videoView  );
-            // iterate through all items of the listview
-          for ( ; it.current(); ++it ) {
-              if ( it.current()->isSelected() ) {
-                  QListIterator<DocLnk> dit( vFiles.children() );
-                  for ( ; dit.current(); ++dit ) {
-                      if( dit.current()->name() == it.current()->text(0) ) {
-                          d->selectedFiles->addToSelection(  **dit );
-                      }
-                  }
 
-                  videoView->setSelected( it.current(),FALSE);
-              }
-          }
-//             for ( int i = 0; i < noOfFiles; i++ ) {
-//                 QString entryName;
-//                 entryName.sprintf( "File%i", i + 1 );
-//                 QString linkFile = cfg.readEntry( entryName );
-//                   if( DocLnk( linkFile).name() == videoView->selectedItem()->text(0) ) {
-//                       int result= QMessageBox::warning(this,tr("OpiePlayer"),
-//                                   tr("This is all ready in your playlist.\nContinue?"),
-//                                   tr("Yes"),tr("No"),0,0,1);
-//                       if (result !=0)
-//                           return;
-//                   }
-//             }
-//             addToSelection( videoView->selectedItem() );
-          tabWidget->setCurrentPage(0);
-      }
-      break;
-    };
+  case 0: //playlist
+    return;
+    break;
+  case 1: { //audio
+    filename=audioView->currentItem()->text(3);
+    //    d->selectedFiles->next();
+  }
+    break;
+    
+  case 2: { // video
+    filename=videoView->currentItem()->text(3);
+    //          tabWidget->setCurrentPage(0);
+    
+  }
+    break;
+  };
+  lnk.setName( QFileInfo(filename).baseName() ); //sets name
+  lnk.setFile( filename ); //sets file name
+  d->selectedFiles->addToSelection(  lnk);
+  tabWidget->setCurrentPage(0);
+  writeCurrentM3u();          
+
 }
 
 void PlayListWidget::removeSelected() {
@@ -722,33 +703,27 @@ void PlayListWidget::playIt( QListViewItem *) {
 }
 
 void PlayListWidget::addToSelection( QListViewItem *it) {
-    d->setDocumentUsed = FALSE;
-    
-    if(it) {
-        switch (tabWidget->currentPageIndex()) {
-          case 1: {
-              QListIterator<DocLnk> dit( files.children() );
-              for ( ; dit.current(); ++dit ) {
-                  if( dit.current()->name() == it->text(0)) {
-                      d->selectedFiles->addToSelection(  **dit );
-                  }
-              }
-          }
-          break;
-          case 2: {
-              QListIterator<DocLnk> dit( vFiles.children() );
-              for ( ; dit.current(); ++dit ) {
-                  if( dit.current()->name() == it->text(0)) {
-                      d->selectedFiles->addToSelection(  **dit );
-                  }
-              }
-          }
-          break;
-          case 0:
-              break;
-        };
-        tabWidget->setCurrentPage(0);
-    }
+  d->setDocumentUsed = FALSE;
+
+  if(it) {
+    switch ( tabWidget->currentPageIndex()) {
+    case 0: //playlist
+      return;
+      break;
+    };
+    //      case 1: {
+    DocLnk lnk;
+    QString filename;
+
+    filename=it->text(3);
+    lnk.setName( QFileInfo(filename).baseName() ); //sets name
+    lnk.setFile( filename ); //sets file name
+    d->selectedFiles->addToSelection(  lnk);
+ 
+    writeCurrentM3u();          
+    tabWidget->setCurrentPage(0);
+        
+  }
 }
 
 void PlayListWidget::tabChanged(QWidget *) {
@@ -989,7 +964,7 @@ void PlayListWidget::populateAudioView() {
                 size = QFile( dit.current()->file() ).size();
 //            qDebug(dit.current()->name());
             newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(),
-                                                   QString::number(size ), storage);
+                      QString::number(size ), storage, dit.current()->file());
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/musicfile" ));
         }
     }
@@ -1017,7 +992,8 @@ void PlayListWidget::populateVideoView() {
         QListViewItem * newItem;
         if ( QFile( Vdit.current()->file()).exists() ) {
             newItem= /*(void)*/ new QListViewItem( videoView, Vdit.current()->name(),
-                                                   QString::number( QFile( Vdit.current()->file()).size() ), storage);
+                   QString::number( QFile( Vdit.current()->file() ).size() ),
+                                                   storage, Vdit.current()->file());
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/videofile" ));
         }
     }
@@ -1062,7 +1038,9 @@ void PlayListWidget::openFile() {
         } else if( filename.right(3) == "pls" ) {
             readPls( filename );
         } else {
-            d->selectedFiles->addToSelection(  DocLnk(filename) );
+            lnk.setName( QFileInfo(filename).baseName() ); //sets name
+            lnk.setFile( filename ); //sets file name
+            d->selectedFiles->addToSelection(  lnk);
             writeCurrentM3u();
         }
     }
@@ -1177,11 +1155,10 @@ void PlayListWidget::writeCurrentM3u() {
   Config cfg( "OpiePlayer" );
   cfg.setGroup("PlayList");
   QString currentPlaylist = cfg.readEntry("CurrentPlaylist","");
-
-  if( d->selectedFiles->first()) {
   Om3u *m3uList;
   m3uList = new Om3u( currentPlaylist, IO_ReadWrite | IO_Truncate );
 
+  if( d->selectedFiles->first()) {
   do {
       qDebug( "writeCurrentM3u " +d->selectedFiles->current()->file());
     m3uList->add( d->selectedFiles->current()->file() );

@@ -84,6 +84,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
       //skin = "scaleTest";
 // color of background, frame, degree of transparency
 
+//    QString skinPath = "opieplayer/skins/" + skin;
     QString skinPath = "opieplayer2/skins/" + skin;
     qDebug("skin path "+skinPath);
     
@@ -120,9 +121,9 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 
     songInfo.setFocusPolicy( QWidget::NoFocus );
     
-    changeTextColor( &songInfo );
-    songInfo.setBackgroundColor( QColor( 167, 212, 167 ));
-    songInfo.setFrameStyle( QFrame::NoFrame);
+//    changeTextColor( &songInfo );
+//    songInfo.setBackgroundColor( QColor( 167, 212, 167 ));
+//    songInfo.setFrameStyle( QFrame::NoFrame);
 //    songInfo.setFrameStyle( QFrame::WinPanel | QFrame::Sunken );
       //NoFrame
 //    songInfo.setForegroundColor(Qt::white);
