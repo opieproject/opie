@@ -11,7 +11,7 @@
 ************************************************************************************/
 
 /*
- * $Id: vmemo.cpp,v 1.13 2002-03-18 01:56:15 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.14 2002-03-20 02:23:27 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -148,15 +148,15 @@ VMemo::VMemo( QWidget *parent, const char *name )
           systemZaurus=TRUE;
       else {
           systemZaurus=FALSE;
-//            myChannel = new QCopChannel( "QPE/VMemo", this );
-//            connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
-//                     this, SLOT(receive(const QCString&, const QByteArray&)) );
-      
+            myChannel = new QCopChannel( "QPE/VMemo", this );
+            connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
+                     this, SLOT(receive(const QCString&, const QByteArray&)) );
+
 //              // Register the REC key press, for ipaq only
-//            QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
-//            e << 4096;
-//            e << QString("QPE/VMemo");
-//            e << QString("toggleRecord()");
+            QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
+            e << 4096;
+            e << QString("QPE/VMemo");
+            e << QString("toggleRecord()");
       }
   }
 }
@@ -271,11 +271,11 @@ int VMemo::openDSP()
     format = AFMT_S16_LE;
     resolution = 16;
   }
-//    else  {
-//      format = AFMT_U8;
-//      resolution = 8;
-//    }
-  
+    else  {
+      format = AFMT_S8;
+      resolution = 8;
+    }
+
   if(systemZaurus) {
     dsp = open("/dev/dsp1", O_RDWR); //Zaurus needs /dev/dsp1
     channels=1; //zaurus has one input channel
@@ -317,7 +317,7 @@ int VMemo::openWAV(const char *filename)
   wav=track.handle();
   
   WaveHeader wh;
-  
+
   wh.main_chunk = RIFF;
   wh.length=0; 
   wh.chunk_type = WAVE;
@@ -343,8 +343,10 @@ void VMemo::record(void)
   int length=0, result, value;
   qDebug("Recording");
 
-  if(format==AFMT_S16_LE)  {
+  if(systemZaurus) {
     signed short sound[512], monoBuffer[512];
+
+  if(format==AFMT_S16_LE)  {
     while(recording)   {
       result = read(dsp, sound, 512); // 8192
       qApp->processEvents();
@@ -367,56 +369,54 @@ void VMemo::record(void)
      fflush(stdout);
    }
   }
-  // else { //AFMT_U8 // don't try this yet.. as player doesn't understand
-// 8bit unsigned
- //       unsigned short sound[512], monoBuffer[512];
-//       while(recording)
-//   {
-//     result = read(dsp, sound, 512); // 8192
-//     qApp->processEvents();
-//     int j=0;
-//       if(systemZaurus) 
-//         {
-//             for (int i = 0; i < result; i++) { //since Z is mono do normally
-//               monoBuffer[i] = sound[i];
-//           }
-//             qApp->processEvents();
-//             length+=write(wav, monoBuffer, result);
-//         } else { //ipaq /stereo inputs
-//             for (int i = 0; i < result; i+=2) {
-//                 monoBuffer[j] = (sound[i]+sound[i+1])/2;
-//                 j++;
-//             }
-//             qApp->processEvents();
-//             length+=write(wav, monoBuffer, result/2);
-//         }
-// //    length += result;
-//     printf("%d\r",length);
-//     fflush(stdout);
+ else { //AFMT_S8 // don't try this yet.. as player doesn't understand 8bit unsigned
+     while(recording)
+ {
+   result = read(dsp, sound, 512); // 8192
+   qApp->processEvents();
+   int j=0;
+     if(systemZaurus) 
+       {
+           for (int i = 0; i < result; i++) { //since Z is mono do normally
+             monoBuffer[i] = sound[i];
+         }
+           qApp->processEvents();
+           length+=write(wav, monoBuffer, result);
+       } else { //ipaq /stereo inputs
+           for (int i = 0; i < result; i+=2) {
+               monoBuffer[j] = (sound[i]+sound[i+1])/2;
+               j++;
+           }
+           qApp->processEvents();
+           length+=write(wav, monoBuffer, result/2);
+       }
+  length += result;
+   printf("%d\r",length);
+   fflush(stdout);
 
-//      qApp->processEvents();
-//    }
-//  }
+    qApp->processEvents();
+  }
+}
 
+} else {
 
-  
-//   char sound[512]; //char is 8 bit
-  
-//   while(recording)
-//  {
-//    result = read(dsp, sound, 512); // 8192
-//    qApp->processEvents();
+ char sound[512]; //char is 8 bit
 
-//    write(wav, sound, result);
-//    length += result;
+ while(recording)
+{
+  result = read(dsp, sound, 512); // 8192
+  qApp->processEvents();
 
-//    qApp->processEvents();
-//  }
+  write(wav, sound, result);
+  length += result;
+
+  qApp->processEvents();
+}
 //  qDebug("file has length of %d lasting %d seconds",
 //         length, (( length / speed) / channels) / 2 );
 // medialplayer states wrong length in secs
-  
-  
+}
+
   value = length+36;
   lseek(wav, 4, SEEK_SET);
   write(wav, &value, 4);
@@ -427,7 +427,7 @@ void VMemo::record(void)
   if( ioctl( dsp, SNDCTL_DSP_RESET,0) == -1)
   perror("ioctl(\"SNDCTL_DSP_RESET\")");
   ::close(dsp);
-//  if(systemZaurus)
+  if(systemZaurus)
         QMessageBox::message("Vmemo"," Done recording");
   
   QSound::play(Resource::findSound("vmemoe"));
