@@ -163,6 +163,14 @@ or is of an unknown format.</source>
         <source>&quot;CLYDE&quot;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>QTOPIA PORT: CATALIN CLIMOV</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>PRESS CURSOR TO START</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Score</name>
@@ -207,7 +215,7 @@ To grant access to the other users, set the appropriate rights (a+w)
 on that file or ask your systemadministator for that favor.
 
 To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>You&apos;re using a private highscore-file, that&apos;s mostly because of
@@ -218,7 +226,7 @@ Ask your systemadministrator for granting you access to that file,
 by setting the appropriate rights (a+w) on it.
 
 To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>

@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation>Trenutno je &lt;b&gt; 1&lt;/b&gt; tekoče opravilo:  &lt;br&gt;</translation>
+        <translation type="obsolete">Trenutno je &lt;b&gt; 1&lt;/b&gt; tekoče opravilo:  &lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation>Trenutno je &lt;b&gt; %1&lt;/b&gt; tekočih opravil: &lt;br&gt;</translation>
+        <translation type="obsolete">Trenutno je &lt;b&gt; %1&lt;/b&gt; tekočih opravil: &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
-        <translation>Ni tekočih opravil</translation>
+        <translation type="obsolete">Ni tekočih opravil</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; novih sporočil, &lt;b&gt;%2&lt;/b&gt; izhodnih</translation>
+        <translation type="obsolete">&lt;b&gt;%1&lt;/b&gt; novih sporočil, &lt;b&gt;%2&lt;/b&gt; izhodnih</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation>Danes ni sestankov</translation>
+        <translation type="obsolete">Danes ni sestankov</translation>
     </message>
     <message>
         <source>Owned by </source>
@@ -35,6 +35,14 @@
     </message>
     <message>
         <source>No more appointments today</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>No plugins found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No plugins activated</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -42,71 +50,112 @@
     <name>TodayBase</name>
     <message>
         <source>Opiemail not installed</source>
-        <translation>OpiePošta ni nameščena</translation>
+        <translation type="obsolete">OpiePošta ni nameščena</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Danes</translation>
+        <translation type="obsolete">Danes</translation>
+    </message>
+    <message>
+        <source>Today&#xb2;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfig</name>
+    <message>
+        <source>Today config</source>
+        <translation type="unfinished">Nastavitve Danes</translation>
+    </message>
+    <message>
+        <source>Load which plugins in what order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>active/order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>autostart on 
+resume?
+ (Opie only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished">Različno</translation>
     </message>
 </context>
 <context>
     <name>todayconfig</name>
     <message>
         <source>Today config</source>
-        <translation>Nastavitve Danes</translation>
+        <translation type="obsolete">Nastavitve Danes</translation>
     </message>
     <message>
         <source>Should the 
 location 
 be shown?</source>
-        <translation>Naj bo 
+        <translation type="obsolete">Naj bo 
 lokacija 
 prikazana?</translation>
     </message>
     <message>
         <source>Should the notes 
 be shown?</source>
-        <translation>Naj bodo zapiski 
+        <translation type="obsolete">Naj bodo zapiski 
 prikazani?</translation>
     </message>
     <message>
         <source>Show only later
 appointments</source>
-        <translation>Prikaži samo kasnejše
+        <translation type="obsolete">Prikaži samo kasnejše
 zmenke</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation>Koledar</translation>
+        <translation type="obsolete">Koledar</translation>
     </message>
     <message>
         <source>How many
 tasks should 
 be shown?</source>
-        <translation>Koliko opravil
+        <translation type="obsolete">Koliko opravil
 naj bo 
 prikazanih?</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation>Opravila</translation>
+        <translation type="obsolete">Opravila</translation>
     </message>
     <message>
         <source>Clip after how
 many letters</source>
-        <translation>Odščipni po koliko
+        <translation type="obsolete">Odščipni po koliko
 znakih</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Različno</translation>
+        <translation type="obsolete">Različno</translation>
     </message>
     <message>
         <source>How many 
 appointment
 should
 be shown?</source>
-        <translation>Koliko
+        <translation type="obsolete">Koliko
 sestankov
 naj bo
 prikazanih?</translation>
@@ -115,7 +164,7 @@ prikazanih?</translation>
         <source>Should today be
 autostarted on
 resume? (Opie only)</source>
-        <translation>Naj se danes
+        <translation type="obsolete">Naj se danes
 avtomatsko zažene
 ob nadaljevanju? (samo Opie)</translation>
     </message>
@@ -123,7 +172,7 @@ ob nadaljevanju? (samo Opie)</translation>
         <source>Activate the  
 autostart after how
 many minutes?</source>
-        <translation>Aktiviraj
+        <translation type="obsolete">Aktiviraj
 avtomatski zagon po
 koliko minutah?</translation>
     </message>

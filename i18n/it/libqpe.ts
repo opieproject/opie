@@ -70,6 +70,26 @@
         <source>Global</source>
         <translation>Totali</translation>
     </message>
+    <message>
+        <source>Check the categories this document belongs to.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter a new category to the left and press to add it to the list.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Press to delete the highlighted category.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check to make this property available to all applications.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CategoryMenu</name>
@@ -104,18 +124,61 @@ modificando le categorie.</translation>
     </message>
 </context>
 <context>
+    <name>DateBookMonthHeader</name>
+    <message>
+        <source>Show January in the selected year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the previous month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show the next month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show December in the selected year</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>FileSelector</name>
     <message>
         <source>View</source>
-        <translation>Vista</translation>
+        <translation type="obsolete">Vista</translation>
     </message>
     <message>
         <source>Create a new Document</source>
-        <translation>Crea un nuovo documento</translation>
+        <translation type="obsolete">Crea un nuovo documento</translation>
     </message>
     <message>
         <source>Close the File Selector</source>
         <translation>Chiudi Selettore File</translation>
+    </message>
+    <message>
+        <source>Show documents of this type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Document View</source>
+        <translation type="unfinished">Vista Documento</translation>
+    </message>
+    <message>
+        <source>Show documents in this category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to select a document from the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -126,7 +189,14 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>There are no files in this directory.</source>
-        <translation>Non ci sono file in questa directory.</translation>
+        <translation type="obsolete">Non ci sono file in questa directory.</translation>
+    </message>
+</context>
+<context>
+    <name>FindDialog</name>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">Trova</translation>
     </message>
 </context>
 <context>
@@ -152,7 +222,7 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation>&amp;Trova</translation>
+        <translation type="obsolete">&amp;Trova</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -187,7 +257,7 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>File does not exist.</source>
-        <translation>File inesistente.</translation>
+        <translation type="obsolete">File inesistente.</translation>
     </message>
     <message>
         <source>File deletion failed.</source>
@@ -195,11 +265,11 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>Delete Icon and leave file</source>
-        <translation>Cancella Icona e non modificare il file</translation>
+        <translation type="obsolete">Cancella Icona e non modificare il file</translation>
     </message>
     <message>
         <source>Icon deletion failed.</source>
-        <translation>Cancellazione icona fallita.</translation>
+        <translation type="obsolete">Cancellazione icona fallita.</translation>
     </message>
     <message>
         <source>Copy of </source>
@@ -224,6 +294,10 @@ modificando le categorie.</translation>
     <message>
         <source>Hard Disk</source>
         <translation type="unfinished">Hard Disk</translation>
+    </message>
+    <message>
+        <source>Properties</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -258,7 +332,7 @@ modificando le categorie.</translation>
     </message>
     <message>
         <source>Del Icon</source>
-        <translation>Cancella Icona</translation>
+        <translation type="obsolete">Cancella Icona</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -267,6 +341,30 @@ modificando le categorie.</translation>
     <message>
         <source>Beam</source>
         <translation>Trasmetti via IrDA</translation>
+    </message>
+    <message>
+        <source>The media the document resides on.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name of this document.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preload this application so that it is available instantly.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete this document.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Make a copy of this document.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam this document to another device.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -699,6 +797,51 @@ riprovare.</translation>
         <source>Groups</source>
         <translation>Gruppi</translation>
     </message>
+    <message>
+        <source>New Document</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPEApplication</name>
+    <message>
+        <source>%1 document</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPEDecoration</name>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QPEManager</name>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>StorageInfo</name>
@@ -728,6 +871,13 @@ riprovare.</translation>
     </message>
 </context>
 <context>
+    <name>TZCombo</name>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
@@ -739,6 +889,26 @@ Please free up space and try again</source>
         <translation>Impossibile programmare l&apos;allarme.
 Liberare dello spazio di memoria e
 riprovare</translation>
+    </message>
+</context>
+<context>
+    <name>TypeCombo</name>
+    <message>
+        <source>%1 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 %2</source>
+        <comment>minor mimetype / major mimetype</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All %1 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All files</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -16,63 +16,112 @@
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation>Nessun altro appuntamento per oggi</translation>
+        <translation type="obsolete">Nessun altro appuntamento per oggi</translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation>Nessun appuntamento per oggi</translation>
+        <translation type="obsolete">Nessun appuntamento per oggi</translation>
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; nuove Email, &lt;b&gt;%2&lt;/b&gt; in uscita</translation>
+        <translation type="obsolete">&lt;b&gt;%1&lt;/b&gt; nuove Email, &lt;b&gt;%2&lt;/b&gt; in uscita</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation>C&apos;è &lt;b&gt; 1&lt;/b&gt; impegno attivo:  &lt;br&gt;</translation>
+        <translation type="obsolete">C&apos;è &lt;b&gt; 1&lt;/b&gt; impegno attivo:  &lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation>Ci sono&lt;b&gt; %1&lt;/b&gt; impegni attivi: &lt;br&gt;</translation>
+        <translation type="obsolete">Ci sono&lt;b&gt; %1&lt;/b&gt; impegni attivi: &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
-        <translation>Non ci sono promemoria attivi</translation>
+        <translation type="obsolete">Non ci sono promemoria attivi</translation>
+    </message>
+    <message>
+        <source>No plugins found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No plugins activated</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TodayBase</name>
     <message>
         <source>Today</source>
-        <translation>Oggi</translation>
+        <translation type="obsolete">Oggi</translation>
     </message>
     <message>
         <source>Opiemail not installed</source>
-        <translation>Opiemail non installato</translation>
+        <translation type="obsolete">Opiemail non installato</translation>
+    </message>
+    <message>
+        <source>Today&#xb2;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodayConfig</name>
+    <message>
+        <source>Today config</source>
+        <translation type="unfinished">Configurazione di &apos;Oggi&apos;</translation>
+    </message>
+    <message>
+        <source>Load which plugins in what order:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Move Down</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>active/order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>autostart on 
+resume?
+ (Opie only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>minutes inactive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc</source>
+        <translation type="unfinished">Varie</translation>
     </message>
 </context>
 <context>
     <name>todayconfig</name>
     <message>
         <source>Today config</source>
-        <translation>Configurazione di &apos;Oggi&apos;</translation>
+        <translation type="obsolete">Configurazione di &apos;Oggi&apos;</translation>
     </message>
     <message>
         <source>Should the 
 location 
 be shown?</source>
-        <translation>Visualizzare
+        <translation type="obsolete">Visualizzare
 la posizione?</translation>
     </message>
     <message>
         <source>Should the notes 
 be shown?</source>
-        <translation>Visualizzare le
+        <translation type="obsolete">Visualizzare le
 note?</translation>
     </message>
     <message>
         <source>Show only later
 appointments</source>
-        <translation>Mostrare solo gli
+        <translation type="obsolete">Mostrare solo gli
 appuntamenti successivi?</translation>
     </message>
     <message>
@@ -80,36 +129,36 @@ appuntamenti successivi?</translation>
 appointment
 should
 be shown?</source>
-        <translation>Quanti
+        <translation type="obsolete">Quanti
 appuntamenti
 visualizzare?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation>Rubrica</translation>
+        <translation type="obsolete">Rubrica</translation>
     </message>
     <message>
         <source>How many
 tasks should 
 be shown?</source>
-        <translation>Quanti promemoria
+        <translation type="obsolete">Quanti promemoria
 visualizzare?</translation>
     </message>
     <message>
         <source>Tasks</source>
-        <translation>Promemoria</translation>
+        <translation type="obsolete">Promemoria</translation>
     </message>
     <message>
         <source>Clip after how
 many letters</source>
-        <translation>Quanti caratteri
+        <translation type="obsolete">Quanti caratteri
 visualizzare?</translation>
     </message>
     <message>
         <source>Should today be
 autostarted on
 resume? (Opie only)</source>
-        <translation>Avviare &apos;Oggi&apos; 
+        <translation type="obsolete">Avviare &apos;Oggi&apos; 
 automaticamente
 all&apos;accensione?</translation>
     </message>
@@ -117,13 +166,13 @@ all&apos;accensione?</translation>
         <source>Activate the  
 autostart after how
 many minutes?</source>
-        <translation>Dopo quanti
+        <translation type="obsolete">Dopo quanti
 minuti attivare
 l&apos;avvio automatico?</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation>Varie</translation>
+        <translation type="obsolete">Varie</translation>
     </message>
 </context>
 </TS>
