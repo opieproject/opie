@@ -788,9 +788,10 @@ bool TextEdit::save() {
 				name = doc->name();
 				odebug << "File named "+name << oendl;
 		} else {
-				name = file = currentFileName;
+				file = currentFileName;
+        name = QFileInfo(currentFileName).baseName();
 		 }
-		
+
     QString rt = editor->text();
     if( !rt.isEmpty() ) {
         if(name.isEmpty()) {
@@ -924,7 +925,7 @@ bool TextEdit::saveAs() {
             doc = new DocLnk(nf);
 //        editor->setText(rt);
             odebug << "Saving file as "+currentFileName << oendl;
-            doc->setName( currentFileName);
+            doc->setName( fi.baseName() /*currentFileName*/);
             updateCaption( currentFileName);
 
             FileManager fm;
