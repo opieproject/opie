@@ -2,22 +2,24 @@
 
 OPimRecord::OPimRecord( int uid )
     : Qtopia::Record() {
+
     setUid( uid );
+    /* assign a new UID */
     if ( uid == 1 )
         assignUid();
 }
 OPimRecord::~OPimRecord() {
 }
-OPimRecord::OPimRecord( OPimRecord& rec )
+OPimRecord::OPimRecord( const OPimRecord& rec )
     : Qtopia::Record( rec )
 {
     (*this) = rec;
 }
 
 OPimRecord &OPimRecord::operator=( const OPimRecord& rec) {
-   /* how do I call the parent copy operator ? */
-    setUid( rec.uid() );
-    setCategories( rec.categories() );
+    Qtopia::Record::operator=( rec );
+    m_relations = rec.m_relations;
+
     return  *this;
 }
 QStringList OPimRecord::categoryNames()const {
@@ -25,7 +27,7 @@ QStringList OPimRecord::categoryNames()const {
 
     return list;
 }
-void OPimRecord::setCategoryName( const QStringList& ) {
+void OPimRecord::setCategoryNames( const QStringList& ) {
 
 }
 void OPimRecord::addCategoryName( const QString& ) {
@@ -87,4 +89,18 @@ void OPimRecord::setRelations( const QString& app,  QArray<int> ids ) {
 
     }
     m_relations.replace( app,  tmp );
+}
+QString OPimRecord::crossToString()const {
+    QString str;
+    QMap<QString, QArray<int> >::ConstIterator it;
+    for (it = m_relations.begin(); it != m_relations.end(); ++it ) {
+        QArray<int> id = it.data();
+        for ( uint i = 0; i < id.size(); ++i ) {
+            str += it.key() + "," + QString::number( i ) + ";";
+        }
+    }
+    str = str.remove( str.length()-1, 1); // strip the ;
+    //qWarning("IDS " + str );
+
+    return str;
 }

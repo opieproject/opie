@@ -1,22 +1,43 @@
 TEMPLATE        = lib
 CONFIG          += qte warn_on release
-HEADERS   = ofontmenu.h ofileselector.h \
-    ofiledialog.h tododb.h \
+HEADERS   = ofontmenu.h \
+    tododb.h \
     todoevent.h todoresource.h \
     todovcalresource.h xmltree.h \
     colordialog.h colorpopupmenu.h \
     oclickablelabel.h oprocctrl.h \
     oprocess.h odevice.h \
     otimepicker.h otabwidget.h \
-    otabbar.h otabinfo.h
-SOURCES   = ofontmenu.cc ofileselector.cc \
-	    ofiledialog.cc xmltree.cc \
+    otabbar.h otabinfo.h \
+    ofileselector/ofiledialog.h \
+    ofileselector/ofilelistview.h \
+    ofileselector/ofileselector.h \
+    ofileselector/ofileselectoritem.h \
+    ofileselector/ofileview.h \
+    ofileselector/olister.h \
+    ofileselector/olocallister.h \
+    ofileselector/ofileselectormain.h \
+    pim/opimrecord.h \
+    pim/otodo.h
+    
+SOURCES   = ofontmenu.cc \
+	    xmltree.cc \
 	    tododb.cpp todoevent.cpp \
 	    todovcalresource.cpp  colordialog.cpp \
 	    colorpopupmenu.cpp oclickablelabel.cpp \
 	    oprocctrl.cpp oprocess.cpp \
 	    odevice.cpp otimepicker.cpp \
-	     otabwidget.cpp otabbar.cpp
+	     otabwidget.cpp otabbar.cpp \
+	     ofileselector/ofiledialog.cpp \
+	     ofileselector/ofilelistview.cpp \
+	     ofileselector/ofileselector.cpp \
+	     ofileselector/ofileselectoritem.cpp \
+	     ofileselector/ofileview.cpp \
+	     ofileselector/olister.cpp \
+	     ofileselector/olocallister.cpp \
+	     ofileselector/ofileselectormain.cpp \
+	     pim/opimrecord.cpp \
+	     pim/otodo.cpp
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(QTDIR)/lib$(PROJMAK)

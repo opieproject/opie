@@ -18,7 +18,7 @@
 
 class OTodo : public  OPimRecord  {
 public:
-    typedef QValueList<ToDoEvent> ValueList;
+    typedef QValueList<OTodo> ValueList;
     enum RecordFields {
         Uid = Qtopia::UID_ID,
         Category = Qtopia::CATEGORY_ID,
@@ -118,6 +118,13 @@ public:
      */
     QString toRichText() const;
 
+    /**
+     * reimplementation
+     */
+    QString type()const;
+    QString toShortText()const;
+    QMap<QString, QString> toExtraMap()const;
+    QString recordField(int id )const;
 
     /**
      * returns a list of apps which have related items
@@ -183,23 +190,22 @@ public:
     bool operator>(const OTodo &toDoEvent )const;
     bool operator>=(const OTodo &toDoEvent)const;
     bool operator==(const OTodo &toDoEvent )const;
-    ToDoEvent &operator=(const OTodo &toDoEvent );
+    OTodo &operator=(const OTodo &toDoEvent );
 
  private:
     class OTodoPrivate;
-    struct OTodoEventData;
+    struct OTodoData;
 
     void deref();
     void changeOrModify();
     void copy( OTodoData* src, OTodoData* dest );
-    ToDoEventPrivate *d;
-    ToDoEventData *data;
+    OTodoPrivate *d;
+    OTodoData *data;
 
-    static Qtopia::UidGen m_gen;
 };
-    inline bool ToDoEvent::operator!=(const ToDoEvent &toDoEvent )const {
-        return !(*this == toDoEvent);
-    }
-};
+inline bool OTodo::operator!=(const OTodo &toDoEvent )const {
+    return !(*this == toDoEvent);
+}
+
 
 #endif

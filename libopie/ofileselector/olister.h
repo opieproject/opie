@@ -4,6 +4,7 @@
 #include <qfileinfo.h>
 #include <qmap.h>
 #include <qstring.h>
+#include <qstringlist.h>
 
 class OFileSelector;
 /**

@@ -19,7 +19,7 @@ public:
     /**
      * copy c'tor
      */
-    OPimRecord( OPimRecord& rec );
+    OPimRecord( const OPimRecord& rec );
 
     /**
      * copy operator
@@ -34,7 +34,7 @@ public:
     /**
      * set category names they will be resolved
      */
-    void setCategoryName( const QStringList& );
+    void setCategoryNames( const QStringList& );
 
     /**
      * addCategoryName adds a name

@@ -69,6 +69,7 @@ class QFileInfo;
 class QHBox;
 class OFileView;
 class OLister;
+class OFileSelectorMain;
 //
 
 /* the mimetypes one name and a list of mimetypes */
@@ -108,7 +109,7 @@ class OFileSelector : public QWidget {
    * libqpe or Extended. for the Extended
    * ExtendedAll also shows 'hidden' files
    */
-  enum Selector{Normal=0, Extended = 1, ExtendedAll =2 };
+  enum Selector{Normal=0, Extended = 1, ExtendedAll = 2};
 
   /**
    *  This is reserved for futrue views
@@ -342,6 +343,8 @@ class OFileSelector : public QWidget {
   int filter();
   int sorting();
   QPixmap pixmap( const QString& );
+    /* our tool bar */
+  QWidget* toolBar();
 
  signals:
   void fileSelected( const DocLnk & );
@@ -369,6 +372,9 @@ class OFileSelector : public QWidget {
 
  private:
 
+    OFileSelectorMain* m_mainView;
+    OLister* m_lister;
+    OFileView* m_fileView;
     FileSelector* m_select;
     int m_mode, m_selector;
     QComboBox *m_location,
@@ -390,72 +396,75 @@ class OFileSelector : public QWidget {
 
     QString m_currentDir;
     QString m_name;
-  QMap<QString, QStringList> m_mimetypes;
+
+    QMap<QString, QStringList> m_mimetypes;
+
+    QVBoxLayout *m_lay;
+    QGridLayout *m_Oselector;
+
+    QHBox *m_boxToolbar;
+    QHBox *m_boxOk;
+    QHBox *m_boxName;
+    QHBox *m_boxView;
 
 
-  QWidgetStack *m_stack;
-  QVBoxLayout *m_lay;
-  QGridLayout *m_Oselector;
+    QLineEdit *m_edit;
+    QLabel *m_fnLabel;
 
-  QHBox *m_boxToolbar;
-  QHBox *m_boxOk;
-  QHBox *m_boxName;
-  QHBox *m_boxView;
+    bool m_shClose     : 1;
+    bool m_shNew       : 1;
+    bool m_shTool      : 1;
+    bool m_shPerm      : 1;
+    bool m_shLne       : 1;
+    bool m_shChooser   : 1;
+    bool m_shYesNo     : 1;
+    bool m_boCheckPerm : 1;
+    bool m_autoMime    : 1;
+    bool m_case        : 1;
+    bool m_dir         : 1;
+    bool m_files       : 1;
+    bool m_showPopup   : 1;
+    bool m_showHidden : 1;
 
-  QPopupMenu *m_custom;
+    void initVars();
 
-  QLineEdit *m_edit;
-  QLabel *m_fnLabel;
-
-  bool m_shClose     : 1;
-  bool m_shNew       : 1;
-  bool m_shTool      : 1;
-  bool m_shPerm      : 1;
-  bool m_shLne       : 1;
-  bool m_shChooser   : 1;
-  bool m_shYesNo     : 1;
-  bool m_boCheckPerm : 1;
-  bool m_autoMime    : 1;
-  bool m_case        : 1;
-  bool m_dir         : 1;
-  bool m_files       : 1;
-  bool m_showPopup   : 1;
-
-  void initVars();
-
-  void delItems();
-  void initializeName();
-  void initializeYes();
-  void initializeChooser();
-  void initializeListView();
-  void initializePerm();
-  void initPics();
-  bool compliesMime(const QString &path,
-                    const QString &mime);
-  bool compliesMime(const QString& mime );
+    void delItems();
+    void initializeName();
+    void initializeYes();
+    void initializeChooser();
+    void initializePerm();
+    void initPics();
+    bool compliesMime(const QString &path,
+                      const QString &mime);
+    bool compliesMime(const QString& mime );
     /**
      * Updates the QComboBox with the current mimetypes
      */
-  void updateMimeCheck();
+    void updateMimeCheck();
 
+    void initializeOldSelector();
+    void initLister();
+    void initToolbar();
+    void initLocations();
+    void initializeView() {}; // FIXME
     /**
      * Returns the current mimetype
      */
-  QString currentMimeType()const;
-  class OFileSelectorPrivate;
-  OFileSelectorPrivate *d;
-  static QMap<QString,QPixmap> *m_pixmaps;
+    QString currentMimeType()const;
+    class OFileSelectorPrivate;
+    OFileSelectorPrivate *d;
+    static QMap<QString,QPixmap> *m_pixmaps;
 
 private slots:
-   void slotFileSelected(const QString & ); // not really meant to be a slot
-   void slotFileBridgeSelected( const DocLnk & );
-   // listview above
-   // popup below
-   virtual void slotDelete();
-   virtual void cdUP();
-   virtual void slotHome();
-   virtual void slotDoc();
-   virtual void slotNavigate( );
+    void slotFileSelected(const QString & ); // not really meant to be a slot
+    void slotFileBridgeSelected( const DocLnk & );
+    // listview above
+    // popup below
+    virtual void slotDelete();
+    virtual void cdUP();
+    virtual void slotHome();
+    virtual void slotDoc();
+    virtual void slotNavigate( );
 
     /* for OLister */
 private:
