@@ -87,15 +87,15 @@
     </message>
     <message>
         <source>Ionization Energy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ionosationsenergie</translation>
     </message>
     <message>
         <source>Boiling point</source>
-        <translation type="unfinished"></translation>
+        <translation>Siedepunkt</translation>
     </message>
     <message>
         <source>Melting point</source>
-        <translation type="unfinished"></translation>
+        <translation>Schmelzpunkt</translation>
     </message>
 </context>
 <context>

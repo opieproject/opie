@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>DocTab</translation>
     </message>
 </context>
 <context>
@@ -174,7 +174,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Der Documentenreiter&lt;p&gt;wurde deaktiviert.&lt;p&gt;Verwenden Sie Einstellungen-&gt;Launcher-&gt;DocTab&lt;p&gt;zum reaktivieren.&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -192,11 +192,11 @@ accurately to calibrate your screen.</source>
     <name>Mediadlg</name>
     <message>
         <source>A new storage media detected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Speichermedium erkannt:</translation>
     </message>
     <message>
         <source>What should I do with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Was soll durchgeführt werden ?</translation>
     </message>
 </context>
 <context>
@@ -338,23 +338,26 @@ sofort beenden.</translation>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>Achtung</translation>
     </message>
     <message>
         <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Batteriestatus ist kritisch!
+Schließen Sie das Gerät schnellst 
+möglich an die Stromversorgung an</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>The battery is running very low. </source>
-        <translation type="unfinished"></translation>
+        <translation>Batterie nahezu erschöpft.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Ersatzbatterie ist schwach.
+Bitte laden Sie sie auf</translation>
     </message>
 </context>
 <context>
@@ -418,11 +421,11 @@ Die Optionen zum Herunterfahren sind ausschließlich zur Entwicklung und für Te
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ein nicht authorisiertes System erwartet den Zugriff auf das Gerät.&lt;p&gt;Wenn Sie eine Version von QtopiaDesktop verwenden, die älter als 1.5.1 ist sollten Sie diese upgraden oder ändern sie die Sicherheitseinstellungen um IntelliSync zu verwenden.</translation>
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Ein nicht authorisiertes System erwartet den Zugriff auf das Gerät.&lt;p&gt; Da Sie IntelliSync verwenden können sie die Verbindung erlauben oder ablehnen.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>

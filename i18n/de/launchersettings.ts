@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Show Applications in Subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwendungen in Untermenüs anzeigen</translation>
     </message>
 </context>
 <context>
