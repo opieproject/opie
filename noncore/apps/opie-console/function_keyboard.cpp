@@ -14,7 +14,7 @@
 #include <qdir.h>
 
 #define DEFAULT_ROWS 2
-#define DEFAULT_COLS 11
+#define DEFAULT_COLS 12
 
 /* FunctionKeyboard {{{1 */
 
@@ -240,6 +240,7 @@ void FunctionKeyboard::loadDefaults() {
     keys.insert( "r0c8", FKey ("End", 0, 4113, 0));
     keys.insert( "r0c9", FKey ("PU", 0, 4118, 0));
     keys.insert( "r0c10", FKey ("PD", 0, 4119, 0));
+    keys.insert( "r0c11", FKey ("esc", 0, Qt::Key_Escape, 0xfff));
 
     keys.insert( "r1c0", FKey ("F1", 0, 4144, 0));
     keys.insert( "r1c1", FKey ("F2", 0, 4145, 0));
@@ -252,6 +253,7 @@ void FunctionKeyboard::loadDefaults() {
     keys.insert( "r1c8", FKey ("F9", 0, 4152, 0));
     keys.insert( "r1c9", FKey ("F10", 0, 4153, 0));
     keys.insert( "r1c10", FKey ("F11", 0, 4154, 0));
+    keys.insert( "r1c11", FKey ("F12", 0, 4155, 0));
 
 
 }
