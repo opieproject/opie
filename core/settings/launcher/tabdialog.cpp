@@ -307,7 +307,7 @@ TabDialog::~TabDialog ( )
 
 QWidget *TabDialog::createFontTab ( QWidget *parent )
 {
-    m_fontselect = new OFontSelector ( parent, "FontTab" );    
+    m_fontselect = new OFontSelector ( false, parent, "FontTab" );    
     
     connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
              this, SLOT( fontClicked ( const QFont & )));

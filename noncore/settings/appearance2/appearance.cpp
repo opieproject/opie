@@ -251,7 +251,7 @@ QWidget *Appearance::createFontTab ( QWidget *parent )
     QString styleStr = config.readEntry( "FontStyle", "Regular" );
     int size = config.readNumEntry( "FontSize", 10 );
 
-    m_fontselect = new OFontSelector ( parent, "FontTab" );    
+    m_fontselect = new OFontSelector ( false, parent, "FontTab" );    
     m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
     
     connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
