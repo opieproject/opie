@@ -20,17 +20,19 @@
 
 #include "swapfile.h"
 
+#include <qfile.h>
+#include <qtextstream.h>
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qlayout.h>
 #include <qpushbutton.h>
-#include <qhbuttongroup.h> 
-#include <qradiobutton.h> 
-#include <qlineedit.h> 
-#include <qprogressbar.h> 
-#include <qcombobox.h> 
-#include <qvgroupbox.h> 
-#include <qhbox.h> 
+#include <qhbuttongroup.h>
+#include <qradiobutton.h>
+#include <qlineedit.h>
+#include <qprogressbar.h>
+#include <qcombobox.h>
+#include <qvgroupbox.h>
+#include <qhbox.h>
 #include <qmessagebox.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -57,7 +59,7 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 	QHButtonGroup* cfsdRBG = new QHButtonGroup(tr("Swapfile location"), this);
 	cfsdRBG->setRadioButtonExclusive(true);
     vb->addWidget(cfsdRBG);
-	
+
 	ramRB = new QRadioButton(tr("RAM"), cfsdRBG);
 	cfRB = new QRadioButton(tr("CF Card"), cfsdRBG);
 	sdRB = new QRadioButton(tr("SD Card"), cfsdRBG);
@@ -106,12 +108,12 @@ Swapfile::Swapfile( QWidget *parent, const char *name, WFlags f )
 
 	cfRB->setEnabled(FALSE);
     sdRB->setEnabled(FALSE);
-    
+
     QCopChannel *pcmciaChannel = new QCopChannel("QPE/Card", this);
     connect(pcmciaChannel, SIGNAL(received(const QCString &, const QByteArray &)), this, SLOT(cardnotify(const QCString &, const QByteArray &)));
     QCopChannel *sdChannel = new QCopChannel("QPE/Card", this);
     connect(sdChannel, SIGNAL(received(const QCString &, const QByteArray &)), this, SLOT(cardnotify(const QCString &, const QByteArray &)));
-    
+
     cardInPcmcia0 = FALSE;
     cardInPcmcia1 = FALSE;
     cardInSd = FALSE;
@@ -133,11 +135,11 @@ Swapfile::~Swapfile()
 
 void Swapfile::cardnotify(const QCString & msg, const QByteArray &)
 {
-    if (msg == "stabChanged()") 
+    if (msg == "stabChanged()")
 	{
         getStatusPcmcia();
-    } 
-	else if (msg == "mtabChanged()") 
+    }
+	else if (msg == "mtabChanged()")
 	{
         getStatusSd();
 	}
@@ -193,19 +195,19 @@ void Swapfile::getStatusPcmcia()
 	    QString what = QString::null;
 	    if (cardWas0 != cardInPcmcia0) {
 		if (cardInPcmcia0) {
-		   cfRB->setEnabled(TRUE); 
+		   cfRB->setEnabled(TRUE);
 		} else {
     		   cfRB->setChecked(FALSE);
-		   cfRB->setEnabled(FALSE); 
+		   cfRB->setEnabled(FALSE);
 		}
 	    }
 
 	    if (cardWas1 != cardInPcmcia1) {
 		if (cardInPcmcia1) {
-		   cfRB->setEnabled(TRUE); 
+		   cfRB->setEnabled(TRUE);
 		} else {
     		   cfRB->setChecked(FALSE);
-		   cfRB->setEnabled(FALSE); 
+		   cfRB->setEnabled(FALSE);
 		}
 	    }
 	}
@@ -245,10 +247,10 @@ void Swapfile::getStatusSd()
 	QString text = QString::null;
 	QString what = QString::null;
 	if (cardInSd) {
-	   sdRB->setEnabled(TRUE); 
+	   sdRB->setEnabled(TRUE);
 	} else {
     	   sdRB->setChecked(FALSE);
-	   sdRB->setEnabled(FALSE); 
+	   sdRB->setEnabled(FALSE);
 	}
     }
 #else
@@ -287,7 +289,7 @@ void Swapfile::setStatusMessage(const QString& text, bool error /* = false */)
 void Swapfile::swapoff()
 {
 	char swapcmd[128] ="swapoff ";
-	if (Swapfile::cfRB->isChecked() == TRUE) 
+	if (Swapfile::cfRB->isChecked() == TRUE)
 	Swapfile::cfsdchecked();
 	strcat(swapcmd,swapPath1->text());
 	char *runcmd = swapcmd;
@@ -307,7 +309,7 @@ void Swapfile::cfsdchecked()
 {
 /*       	Swapfile::swapPath->clear();*/
        	Swapfile::swapPath1->clear();
-	if (Swapfile::ramRB->isChecked() == TRUE) 
+	if (Swapfile::ramRB->isChecked() == TRUE)
 	{
 		Swapfile::swapPath1->insert("/home/swapfile");
 	}
@@ -323,10 +325,10 @@ void Swapfile::cfsdchecked()
 }
 
 void Swapfile::makeswapfile()
-{	
+{
 	int i = swapSize->currentItem();
 
-	mkswapProgress->setProgress(1);	
+	mkswapProgress->setProgress(1);
 	switch ( i ) {
 		case 0: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=2048").arg(swapPath1->text()));
 		break;
@@ -336,20 +338,20 @@ void Swapfile::makeswapfile()
 		break;
 		case 3: rc=exec(QString("dd if=/dev/zero of=%1 bs=1k count=8192").arg(swapPath1->text()));
 		break;
-	}		
+	}
 	if (rc != 0) {
 		   setStatusMessage(tr("Failed to create swapfile."), true);
         }
 
-	mkswapProgress->setProgress(2);	
+	mkswapProgress->setProgress(2);
 	rc=exec(QString("mkswap %1").arg(swapPath1->text()));
 	if (rc != 0) {
 		   setStatusMessage(tr("Failed to initialize swapfile."), true);
         }
-	mkswapProgress->setProgress(3);	
-	mkswapProgress->reset();	
+	mkswapProgress->setProgress(3);
+	mkswapProgress->reset();
 	setStatusMessage(tr("Swapfile created."));
-}	
+}
 
 void Swapfile::removeswapfile()
 {
@@ -374,45 +376,45 @@ void Swapfile::status()
 	       sscanf(buffer, "%s %s %d %s %s\n", swapfile, temp, &swapsize, temp, temp);
    	}
 	fclose(fp);
-    
+
 	ramRB->setChecked(FALSE);
         cfRB->setChecked(FALSE);
         sdRB->setChecked(FALSE);
 
         i=strcmp(swapfile, "/home/swapfile");
         if ( i == 0 ) {
-           ramRB->setChecked(TRUE); 
+           ramRB->setChecked(TRUE);
 /*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/usr/mnt.rom/cf/swapfile");
         if ( i == 0 ) {
-           cfRB->setChecked(TRUE); 
+           cfRB->setChecked(TRUE);
 /*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/mnt/cf/swapfile");
         if ( i == 0 ) {
-           cfRB->setChecked(TRUE); 
+           cfRB->setChecked(TRUE);
 /*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/usr/mnt.rom/card/swapfile");
         if ( i == 0 ) {
-           sdRB->setChecked(TRUE); 
+           sdRB->setChecked(TRUE);
 /*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 	i=strcmp(swapfile, "/mnt/card/swapfile");
         if ( i == 0 ) {
-           sdRB->setChecked(TRUE); 
+           sdRB->setChecked(TRUE);
 /*	   QMessageBox::information(this, "Information", "Swapfile is active!"); */
 	   setStatusMessage(tr("Swapfile activated."));
 	}
 
 	Swapfile::cfsdchecked();
-	    
-        	
+
+
 	swapsize /=1000;
 
 	switch ( swapsize ) {
@@ -424,8 +426,8 @@ void Swapfile::status()
 		break;
 		case 8: swapSize->setCurrentItem(3);
 		break;
-	}		
-	
+	}
+
 
 }
 
