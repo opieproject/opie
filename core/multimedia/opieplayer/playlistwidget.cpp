@@ -250,7 +250,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
              this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
 
     tabWidget->insertTab( vTab,tr("Video"));
-
+populateVideoView();
 
 //playlists list
     QWidget *LTab;
