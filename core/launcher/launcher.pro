@@ -111,15 +111,15 @@ TARGET		= opie
 
 LIBS		+= -lqpe -lcrypt -lopie
 
-TRANSLATIONS = ../i18n/de/qpe.ts
-TRANSLATIONS += ../i18n/es/qpe.ts
-TRANSLATIONS += ../i18n/pt/qpe.ts
-TRANSLATIONS += ../i18n/pt_BR/qpe.ts
-TRANSLATIONS   += ../i18n/en/qpe.ts
-TRANSLATIONS   += ../i18n/hu/qpe.ts
-TRANSLATIONS   += ../i18n/ja/qpe.ts
-TRANSLATIONS   += ../i18n/fr/qpe.ts
-TRANSLATIONS   += ../i18n/ko/qpe.ts
-TRANSLATIONS   += ../i18n/no/qpe.ts
-TRANSLATIONS   += ../i18n/zh_CN/qpe.ts
-TRANSLATIONS   += ../i18n/zh_TW/qpe.ts
+TRANSLATIONS = ../i18n/de/opie.ts
+TRANSLATIONS += ../i18n/es/opie.ts
+TRANSLATIONS += ../i18n/pt/opie.ts
+TRANSLATIONS += ../i18n/pt_BR/opie.ts
+TRANSLATIONS   += ../i18n/en/opie.ts
+TRANSLATIONS   += ../i18n/hu/opie.ts
+TRANSLATIONS   += ../i18n/ja/opie.ts
+TRANSLATIONS   += ../i18n/fr/opie.ts
+TRANSLATIONS   += ../i18n/ko/opie.ts
+TRANSLATIONS   += ../i18n/no/opie.ts
+TRANSLATIONS   += ../i18n/zh_CN/opie.ts
+TRANSLATIONS   += ../i18n/zh_TW/opie.ts
