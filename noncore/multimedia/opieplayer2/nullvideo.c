@@ -624,12 +624,12 @@ void null_preload_decoders( xine_stream_t *stream )
 
     for ( i = 0; i < preloadedAudioDecoderCount; ++i ) {
         audio_decoder_t *decoder = get_audio_decoder( stream, ( preloadedAudioDecoders[ i ] >> 16 ) & 0xff );
-        free_audio_decoder( stream, decoder );
+/*        free_audio_decoder( stream, decoder ); */
     }
 
     for ( i = 0; i < preloadedVideoDecoderCount; ++i ) {
          video_decoder_t *decoder = get_video_decoder( stream, ( preloadedVideoDecoders[ i ] >> 16 ) & 0xff );
-         free_video_decoder( stream, decoder );
+/*         free_video_decoder( stream, decoder ); */
     }
 }
 
