@@ -17,7 +17,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 
 #include "mainview.h"
 
-MainView::MainView(QWidget *parent=0, const char *name=0) : QMainWindow(parent, name)
+MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name)
 {
 	setCaption("uBrowser");
 
