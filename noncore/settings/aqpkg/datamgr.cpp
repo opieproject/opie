@@ -111,6 +111,11 @@ void DataManager :: loadServers()
 
     // Go through the server destination list and add root, cf and card if they
     // don't already exist
+	/* AQ - commented out as if you don't have a CF or SD card in then
+	 * this causes IPKG to try to create directories on non existant devices
+	 * (which of course fails), gives a nasty error message and can cause ipkg
+	 * to seg fault.
+	 *
     vector<Destination>::iterator dit;
     bool foundRoot = false;
     bool foundCF = false;
@@ -137,7 +142,7 @@ void DataManager :: loadServers()
         destList.push_back( Destination( "card", "/mnt/card" ) );
 #endif
 #endif
-    
+*/    
     vector<Server>::iterator it;
     for ( it = serverList.begin() ; it != serverList.end() ; ++it )
         reloadServerData( it->getServerName() );
