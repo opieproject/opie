@@ -26,7 +26,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	sdmon 
 
 APPS=$(LOCALAPPS) addressbook calculator clock datebook \
-    filebrowser helpbrowser minesweep \
+    filebrowser helpbrowser minesweep mpegplayer \
     settings/light-and-power \
     settings/language \
     settings/rotation \
@@ -36,7 +36,7 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     settings/systemtime \
     solitaire spreadsheet tetrix textedit \
     todo wordgame embeddedkonsole taskbar sysinfo \
-    parashoot snake citytime showimg netsetup \
+    parashoot snake citytime showimg netsetup tableviewer \
     qipkg mindbreaker go qasteroids qcop fifteen keypebble  today opiemail/converter opiemail 
 
 DOCS = docs/src/opie-policy
