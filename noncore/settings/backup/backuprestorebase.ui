@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>234</width>
-            <height>216</height>
+            <width>235</width>
+            <height>275</height>
         </rect>
     </property>
     <property stdset="1">
@@ -36,6 +36,9 @@
             <property stdset="1">
                 <name>name</name>
                 <cstring>tabWidget</cstring>
+            </property>
+            <property>
+                <name>layoutMargin</name>
             </property>
             <widget>
                 <class>QWidget</class>
@@ -150,7 +153,7 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>11</number>
+                        <number>4</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -163,18 +166,7 @@
                             <cstring>restoreSource</cstring>
                         </property>
                     </widget>
-                    <widget row="0"  column="0" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel1_2</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Select Source</string>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+                    <widget row="2"  column="0"  rowspan="1"  colspan="2" >
                         <class>QListView</class>
                         <column>
                             <property>
@@ -202,7 +194,7 @@
                             </size>
                         </property>
                     </widget>
-                    <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                    <widget row="3"  column="0"  rowspan="1"  colspan="2" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
@@ -211,6 +203,28 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>&amp;Restore</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QPushButton</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>updateList</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Update Filelist</string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1_2</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Select Source</string>
                         </property>
                     </widget>
                 </grid>

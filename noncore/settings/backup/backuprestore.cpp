@@ -44,6 +44,8 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
           this, SLOT(selectItem(QListViewItem*))); 
   connect(restoreSource, SIGNAL(activated( int  )),
           this, SLOT(sourceDirChanged(int))); 
+  connect(updateList, SIGNAL(clicked()),
+          this, SLOT( fileListUpdate())); 
 
   applicationSettings = new QListViewItem(backupList, "Application Settings", "",
                                           QDir::homeDirPath() + "/Settings/");
@@ -182,8 +184,10 @@ void BackupAndRestore::backupPressed(){
   setCaption(tr("Backup and Restore... working..."));
   QString outputFile = backupLocations[storeToLocation->currentText()];
 
-  QDateTime time = QDateTime::currentDateTime();
-  QString dateString = time.date().toString().replace(QRegExp(" "), "");
+  QDateTime datetime = QDateTime::currentDateTime();
+  QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') + 
+	  QString::number( datetime.date().day() ).rightJustify(2, '0');
+
   outputFile += "/" + dateString;
  
   QString t = outputFile;
@@ -192,6 +196,7 @@ void BackupAndRestore::backupPressed(){
     outputFile = t + QString("%1").arg(c);
     c++;
   }
+  qDebug( "Storing file: %s", outputFile.latin1() );
 
   qDebug(QString("system(\"tar -c %1 | gzip > %2\")").arg(backupFiles).arg(outputFile).latin1());
   outputFile += EXTENSION;
@@ -250,6 +255,13 @@ int BackupAndRestore::getBackupFiles(QString &backupFiles, QListViewItem *parent
 void BackupAndRestore::sourceDirChanged(int selection){
   restoreList->clear();
   rescanFolder(backupLocations[restoreSource->text(selection)]);
+}
+
+void BackupAndRestore::fileListUpdate()
+{
+	qWarning("void BackupAndRestore::fileListUpdate()");
+	restoreList->clear();
+	rescanFolder( backupLocations[restoreSource->currentText()] );
 }
 
 /**

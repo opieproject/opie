@@ -23,6 +23,7 @@ private slots:
   void selectItem(QListViewItem *currentItem);
   void sourceDirChanged(int);
   void rescanFolder(QString directory);
+  void fileListUpdate();
 
 private:
   void scanForApplicationSettings();
