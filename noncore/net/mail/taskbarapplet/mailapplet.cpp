@@ -35,6 +35,8 @@ MailApplet::MailApplet( QWidget *parent, const char *name, WFlags fl )
 
 	hide();
 
+        m_statusMail = 0;
+
   	connect( this, SIGNAL( clicked() ), SLOT( slotClicked() ) );
 
 	if ( !m_config->readBoolEntry( "Disabled", false ) ) {
@@ -49,7 +51,7 @@ MailApplet::MailApplet( QWidget *parent, const char *name, WFlags fl )
 }
 
 MailApplet::~MailApplet() {
-       delete m_statusMail;
+       if (m_statusMail) delete m_statusMail;
 }
 
 void MailApplet::drawButton(QPainter *) { }
