@@ -6,7 +6,6 @@
 #include <qpe/resource.h>
 
 #include "defines.h"
-#include "readmailgui.h"
 #include "mainwindow.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
