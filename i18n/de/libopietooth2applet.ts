@@ -3,15 +3,15 @@
     <name>Opietooth2::Opietooth2Applet</name>
     <message>
         <source>Disable</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktivieren</translation>
     </message>
     <message>
         <source>Enable</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivieren</translation>
     </message>
     <message>
         <source>Launch manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Starte Manager</translation>
     </message>
 </context>
 </TS>

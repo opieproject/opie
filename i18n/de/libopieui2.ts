@@ -420,134 +420,134 @@ und</translation>
     </message>
     <message>
         <source>OTimePickerDialogBase</source>
-        <translation type="unfinished"></translation>
+        <translation>OTimePickerDialogBase</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::Internal::OFileViewFileListView</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation type="unfinished">Dateityp</translation>
+        <translation>Dateityp</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished">Dateidialog</translation>
+        <translation>Dateidialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Öffnen</translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Speichern</translation>
+        <translation>Speichern</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle Verzeichnis</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::OFileSelector</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Name:</translation>
+        <translation>Name:</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Stil</translation>
+        <translation>Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished">Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
+        <translation>Falsches Üben von Xylophonmusik quält jeden größeren Zwerg</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::OKeyChooserConfigDialog</name>
     <message>
         <source>Configure Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere Tasten</translation>
     </message>
 </context>
 <context>
     <name>Opie::Ui::OKeyConfigWidget</name>
     <message>
         <source>Pixmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Pixmap</translation>
     </message>
     <message>
         <source>Name</source>
         <comment>Name of the Action in the ListView Header</comment>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Taste</translation>
     </message>
     <message>
         <source>Default Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgabe Taste</translation>
     </message>
     <message>
         <source>Shortcut for Selected Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Abkürzungstaste für gewählte Aktion</translation>
     </message>
     <message>
         <source>&amp;None</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Keine</translation>
     </message>
     <message>
         <source>&amp;Default</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vorgabe</translation>
     </message>
     <message>
         <source>C&amp;ustom</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eigene</translation>
     </message>
     <message>
         <source>Configure Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguriere Tasten</translation>
     </message>
     <message>
         <source>Default: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vorgabe:</translation>
     </message>
     <message>
         <source>Key is on BlackList</source>
-        <translation type="unfinished"></translation>
+        <translation>Taste ist in der Blacklist</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is on the black list and may not be used with this manager. Please use a different key.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Die gewählte Taste befindet sich in der Blacklist und kann somit nicht in diesem Manager genutzt werden. Bitte nehmen sie eine andere.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Key is already assigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Taste ist bereits vergeben</translation>
     </message>
     <message>
         <source>&lt;qt&gt;The Key you choose is already taken by a different Item of your config. Please tryusing a different key.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;Die gewählte Taste wurde von bereits einem anderen Element zugeordnet. Bitte versuchen sie, eine andere Taste zu nutzen.&lt;/qt&gt;</translation>
     </message>
 </context>
 <context>
@@ -813,15 +813,15 @@ und</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Keines</translation>
+        <translation>Keines</translation>
     </message>
     <message>
         <source>Directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzeichnisse</translation>
     </message>
     <message>
         <source>All Directories</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Verzeichnisse</translation>
     </message>
 </context>
 <context>
