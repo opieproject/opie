@@ -21,7 +21,7 @@
 #ifndef APP_LAUNCHER_H
 #define APP_LAUNCHER_H
 
-#include <qtopia/qpeglobal.h>
+#include <qtopia/global.h>
 #include <qobject.h>
 #include <qmap.h>
 #ifdef Q_OS_WIN32
