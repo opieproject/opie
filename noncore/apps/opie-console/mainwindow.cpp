@@ -29,6 +29,10 @@ using namespace Opie::Ui;
 /* STD */
 #include <assert.h>
 
+#ifdef EAST
+#include <opie2/oconfig.h>
+#endif
+
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
 
 #ifdef FSCKED_DISTRI
@@ -203,8 +207,10 @@ void MainWindow::initUI() {
     m_saveScript = new QAction(tr("Save Script"), QString::null, 0, this, 0);
     m_saveScript->addTo(m_scripts);
     connect(m_saveScript, SIGNAL(activated()), this, SLOT(slotSaveScript()));
-
-
+   
+	 
+	
+	
     /*
      * action that open/closes the keyboard
      */
@@ -222,7 +228,13 @@ void MainWindow::initUI() {
     m_bar->insertItem( tr("Connection"), m_console );
 
     /* the scripts menu */
-    m_bar->insertItem( tr("Scripts"), m_scripts );
+    #ifdef EAST
+    OConfig cfg("opie-console");
+	cfg.setGroup("10east");
+   	if( !cfg.readEntry("scripthide",0) ) {
+    	m_bar->insertItem( tr("Scripts"), m_scripts );
+    }
+	#endif
 
     /* and the keyboard */
     m_keyBar = new QToolBar(this);
