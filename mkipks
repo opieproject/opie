@@ -11,6 +11,7 @@ ln -s ../init.d/qpe etc/rc2.d/S98qpe
 VERSION_MAJ=$(sed -n -e 's/.*QPE_VERSION "\([0-9]*\)\..*\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
 VERSION_MIN=$(sed -n -e 's/.*QPE_VERSION ".*\.\([0-9]*\)\..*".*/\1/p' <$OPIEDIR/include/qpe/version.h)
 VERSION_PAT=$(sed -n -e 's/.*QPE_VERSION ".*\..*\.\([0-9]*\).*/\1/p' <$OPIEDIR/include/qpe/version.h)
+SUB_VERSION=$(sed -n -e 's,.*SUB_VERSION \"\(.*\)\".*,\1,p' <$OPIEDIR/include/qpe/version.h)
 if grep -q 'QPE_VERSION .*snapshot' $OPIEDIR/include/qpe/version.h
 then
     VERSION_CVS="_$(date +%Y%m%d)"
