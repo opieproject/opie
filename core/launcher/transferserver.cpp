@@ -217,12 +217,12 @@ bool SyncAuthentication::checkPassword( const QString& password )
     if ( lock ) return FALSE;
 
     ++lock;
-    
+
     /*
      *  we need to support old Sync software and QtopiaDesktop
      */
     if ( password.left(6) == "Qtopia" || password.left(6) == "rootme" ) {
-	Config cfg( QPEApplication::qpeDir()+"/etc/Security.conf", Config::File );
+	Config cfg( "Security.conf" );
 	cfg.setGroup("Sync");
 	QStringList pwds = cfg.readListEntry("Passwords",' ');
 	for (QStringList::ConstIterator it=pwds.begin(); it!=pwds.end(); ++it) {
