@@ -50,6 +50,7 @@ Package::Package( char *name )
     installedToRoot = false;
     installed = false;
     installedTo = 0;
+    differentVersionAvailable = false;
 }
 
 Package::~Package()
@@ -89,7 +90,7 @@ void Package :: setLocalPackage( Package *p )
     localPackage = p;
 
     if ( localPackage )
-        if ( localPackage->getVersion() != getVersion() )
+        if ( localPackage->getVersion() < getVersion() && !installed )
             differentVersionAvailable = true;
         else
             differentVersionAvailable = false;
@@ -100,7 +101,7 @@ void Package :: setVersion( const QString &v )
     version = v;
 
     if ( localPackage )
-        if ( localPackage->getVersion() != getVersion() )
+        if ( localPackage->getVersion() < getVersion() && !installed )
             differentVersionAvailable = true;
         else
             differentVersionAvailable = false;

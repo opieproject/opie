@@ -184,7 +184,7 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
             }
             else
             {
-                if (currPackage->getStatus().find( "deinstall" ) != -1 )
+                if ( currPackage->isInstalled() )
                     currPackage->setInstalledTo( dest );
             }
         }

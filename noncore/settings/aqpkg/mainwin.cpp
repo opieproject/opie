@@ -639,8 +639,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
         // Apply show only new installed packages filter
         if ( showUpgradedPkgs )
         {
-            if ( !package->isInstalled() ||
-                 compareVersions( package->getInstalledVersion(), package->getVersion() ) != 1 )
+            if ( !package->isInstalled() || !package->getNewVersionAvailable() )
                 continue;
         }
 
@@ -663,8 +662,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
         {
             // If a different version of package is available, show update available icon
             // Otherwise, show installed icon
-            if ( package->getVersion() != package->getInstalledVersion() &&
-                 compareVersions( package->getInstalledVersion(), package->getVersion() ) == 1)
+            if ( package->getNewVersionAvailable())
             {
 
                 item->setPixmap( 0, updatedIcon );

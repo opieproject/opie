@@ -47,15 +47,16 @@ public:
     void setPackageSize( const QString &size )         { packageSize = size; }
     void setSection( const QString &sect)              { section = sect; }
 
-    Package *getLocalPackage()      { return localPackage; }
-    QString getPackageName()        { return packageName; }
-    QString getVersion()            { return version; }
-    QString getStatus()             { return status; }
-    QString getDescription()        { return description; }
-    QString getFilename()           { return filename; }
-    QString getDependancies()       { return dependancies; }
-    QString getPackageSize()        { return packageSize; }
-    QString getSection()            { return section; }
+    Package *getLocalPackage()       { return localPackage; }
+    QString getPackageName()         { return packageName; }
+    QString getVersion()             { return version; }
+    QString getStatus()              { return status; }
+    QString getDescription()         { return description; }
+    QString getFilename()            { return filename; }
+    QString getDependancies()        { return dependancies; }
+    QString getPackageSize()         { return packageSize; }
+    QString getSection()             { return section; }
+    bool    getNewVersionAvailable() { return differentVersionAvailable; }
 
     bool isInstalled();
 	bool isPackageStoredLocally()	{ return packageStoredLocally; }
