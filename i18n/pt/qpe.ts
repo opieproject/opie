@@ -1,17 +1,79 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppMonitor</name>
+    <name>@default</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time and Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation>Problema na Aplicação</translation>
+        <translation type="unfinished">Problema na Aplicação</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;A aplicação %1 não está a responder.&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;A aplicação %1 não está a responder.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application terminated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppMonitor</name>
+    <message>
+        <source>Application Problem</source>
+        <translation type="obsolete">Problema na Aplicação</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;A aplicação %1 não está a responder.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;Quer forçar o término da aplicação?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -19,27 +81,27 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Toque na cruz com firmeza e 
+        <translation type="obsolete">Toque na cruz com firmeza e 
 precisão para calibrar o ecrâ.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Bem-vindo ao Opie</translation>
+        <translation type="obsolete">Bem-vindo ao Opie</translation>
     </message>
 </context>
 <context>
     <name>CategoryTabWidget</name>
     <message>
         <source>Documents</source>
-        <translation>Documentos</translation>
+        <translation type="obsolete">Documentos</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation>Vista em Icones</translation>
+        <translation type="obsolete">Vista em Icones</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation>Vista em Lista</translation>
+        <translation type="obsolete">Vista em Lista</translation>
     </message>
 </context>
 <context>
@@ -47,32 +109,81 @@ precisão para calibrar o ecrâ.</translation>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>O nível de energia está muito baixo.
+        <translation type="obsolete">O nível de energia está muito baixo.
 Desligue o dispositivo ou ligue-o à corrente!</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
-        <translation>O nível de energia está baixo.</translation>
+        <translation type="obsolete">O nível de energia está baixo.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation>O nível de energia da bateria extra está baixo.
+        <translation type="obsolete">O nível de energia da bateria extra está baixo.
 Deve carregá-la.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation>Cartão de Visita</translation>
+        <translation type="obsolete">Cartão de Visita</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informação</translation>
+        <translation type="obsolete">Informação</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;A data do sistema não parece ser válida.
+        <translation type="obsolete">&lt;p&gt;A data do sistema não parece ser válida.
 (%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>DesktopPowerAlerter</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Estado da Bateria</translation>
+    </message>
+    <message>
+        <source>Low Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FirstUse</name>
+    <message>
+        <source>&lt;&lt; Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next &gt;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap anywhere on the screen to continue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait, loading %1 settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FirstUseBackground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Unicode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -95,88 +206,202 @@ Deve carregá-la.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation>A procurar documentos</translation>
+        <translation type="obsolete">A procurar documentos</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation>A procurar nos documentos</translation>
+        <translation type="obsolete">A procurar nos documentos</translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Documentos</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LauncherTabWidget</name>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon View</source>
+        <translation type="unfinished">Vista em Icones</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation type="unfinished">Vista em Lista</translation>
     </message>
 </context>
 <context>
     <name>LauncherView</name>
     <message>
         <source>%1 files</source>
-        <translation>%1 ficheiros</translation>
+        <translation type="obsolete">%1 ficheiros</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Todos os tipos de ficheiros</translation>
+        <translation type="obsolete">Todos os tipos de ficheiros</translation>
     </message>
     <message>
         <source>Document View</source>
         <translation>Vista de Documentos</translation>
+    </message>
+    <message>
+        <source>All types</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediumMountGui</name>
     <message>
         <source>Medium inserted</source>
-        <translation>Cartão inserido</translation>
+        <translation type="obsolete">Cartão inserido</translation>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation>Foi inserido um cartão. Quer indexar os ficheiros dele?</translation>
+        <translation type="obsolete">Foi inserido um cartão. Quer indexar os ficheiros dele?</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation>Que tipos de ficheiros</translation>
+        <translation type="obsolete">Que tipos de ficheiros</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Àudio</translation>
+        <translation type="obsolete">Àudio</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Imagem</translation>
+        <translation type="obsolete">Imagem</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Texto</translation>
+        <translation type="obsolete">Texto</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Vídeo</translation>
+        <translation type="obsolete">Vídeo</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Todos</translation>
+        <translation type="obsolete">Todos</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation>Aplicações</translation>
+        <translation type="obsolete">Aplicações</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
-        <translation>Limitar a procura à directoria: (por implementar)</translation>
+        <translation type="obsolete">Limitar a procura à directoria: (por implementar)</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Adicionar</translation>
+        <translation type="obsolete">Adicionar</translation>
     </message>
     <message>
         <source>Your decision will be stored on the medium.</source>
-        <translation>A sua decisão será guardada no cartão.</translation>
+        <translation type="obsolete">A sua decisão será guardada no cartão.</translation>
     </message>
     <message>
         <source>Do not ask again for this medium</source>
-        <translation>Não perguntar novamente para este cartão</translation>
+        <translation type="obsolete">Não perguntar novamente para este cartão</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation>Estado da Bateria</translation>
+        <translation type="obsolete">Estado da Bateria</translation>
+    </message>
+</context>
+<context>
+    <name>SafeMode</name>
+    <message>
+        <source>Safe Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart Qtopia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerApplication</name>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Informação</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
+(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
+        <translation type="unfinished">&lt;p&gt;A data do sistema não parece ser válida.
+(%1)&lt;/p&gt;&lt;p&gt;Deseja acertar o relógio?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Battery level is critical!
+Keep power off until power restored!</source>
+        <translation type="unfinished">O nível de energia está muito baixo.
+Desligue o dispositivo ou ligue-o à corrente!</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Back-up battery is very low.
+Please charge the back-up battery.</source>
+        <translation type="unfinished">O nível de energia da bateria extra está baixo.
+Deve carregá-la.</translation>
+    </message>
+    <message>
+        <source>business card</source>
+        <translation type="unfinished">Cartão de Visita</translation>
+    </message>
+    <message>
+        <source>Safe Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory Low
+Please save data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical Memory Shortage
+Please end this application
+immediately.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -243,15 +468,23 @@ Estas operações estão disponíveis principalmente para desenvolvimento e test
     <name>SyncDialog</name>
     <message>
         <source>Syncing</source>
-        <translation>A sincronizar</translation>
+        <translation type="obsolete">A sincronizar</translation>
     </message>
     <message>
         <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Contactos&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Contactos&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="obsolete">&amp;Cancelar</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Syncing:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -1,17 +1,79 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppMonitor</name>
+    <name>@default</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time and Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation>Programma probleem</translation>
+        <translation type="unfinished">Programma probleem</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;%1 reageert niet.&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;%1 reageert niet.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Wilt u het programma geforceerd verlaten?&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;Wilt u het programma geforceerd verlaten?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application terminated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppMonitor</name>
+    <message>
+        <source>Application Problem</source>
+        <translation type="obsolete">Programma probleem</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;%1 reageert niet.&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;Wilt u het programma geforceerd verlaten?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -19,27 +81,27 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Raak de richtkruizen duidelijk en
+        <translation type="obsolete">Raak de richtkruizen duidelijk en
 precies aan om het scherm in te stellen.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Welkom bij Opie</translation>
+        <translation type="obsolete">Welkom bij Opie</translation>
     </message>
 </context>
 <context>
     <name>CategoryTabWidget</name>
     <message>
         <source>Documents</source>
-        <translation>Documenten</translation>
+        <translation type="obsolete">Documenten</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation>Icoonaanzicht</translation>
+        <translation type="obsolete">Icoonaanzicht</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation>Lijstaanzicht</translation>
+        <translation type="obsolete">Lijstaanzicht</translation>
     </message>
 </context>
 <context>
@@ -47,31 +109,31 @@ precies aan om het scherm in te stellen.</translation>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>Batterijlading is kritiek!
+        <translation type="obsolete">Batterijlading is kritiek!
 Laat uitgeschakeld tot kan worden opgeladen!</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
-        <translation>Batterijlading is erg laag.</translation>
+        <translation type="obsolete">Batterijlading is erg laag.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation>De reservebatterijlading is erg laag.
+        <translation type="obsolete">De reservebatterijlading is erg laag.
 Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation>visitekaartje</translation>
+        <translation type="obsolete">visitekaartje</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informatie</translation>
+        <translation type="obsolete">Informatie</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;De systeemdatum lijkt niet correct.
+        <translation type="obsolete">&lt;p&gt;De systeemdatum lijkt niet correct.
 (%1)&lt;/p&gt;&lt;p&gt;Wilt u deze corrigeren?&lt;/p&gt;</translation>
     </message>
 </context>
@@ -79,7 +141,49 @@ Reservebatterij opladen aub.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation type="obsolete">Batterijstatus</translation>
+        <translation type="unfinished">Batterijstatus</translation>
+    </message>
+    <message>
+        <source>Low Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FirstUse</name>
+    <message>
+        <source>&lt;&lt; Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next &gt;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap anywhere on the screen to continue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait, loading %1 settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FirstUseBackground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Unicode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -90,11 +194,11 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation>Vinden documenten</translation>
+        <translation type="obsolete">Vinden documenten</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation>Zoeken documenten</translation>
+        <translation type="obsolete">Zoeken documenten</translation>
     </message>
     <message>
         <source> - Launcher</source>
@@ -108,82 +212,196 @@ Reservebatterij opladen aub.</translation>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
         <translation>Er is geen programma ingesteld voor dit document.&lt;p&gt;Type is %1.</translation>
     </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Documenten</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LauncherTabWidget</name>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon View</source>
+        <translation type="unfinished">Icoonaanzicht</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation type="unfinished">Lijstaanzicht</translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
     <message>
         <source>%1 files</source>
-        <translation>%1 bestanden</translation>
+        <translation type="obsolete">%1 bestanden</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Alle types van bestand</translation>
+        <translation type="obsolete">Alle types van bestand</translation>
     </message>
     <message>
         <source>Document View</source>
         <translation>Documentaanzicht</translation>
+    </message>
+    <message>
+        <source>All types</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediumMountGui</name>
     <message>
         <source>Medium inserted</source>
-        <translation>Ingeschakeld medium</translation>
+        <translation type="obsolete">Ingeschakeld medium</translation>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation>Een &lt;b&gt;opslagmedium&lt;/b&gt; is ingeschakeld. Moet dit onderzocht worden op mediabestanden?</translation>
+        <translation type="obsolete">Een &lt;b&gt;opslagmedium&lt;/b&gt; is ingeschakeld. Moet dit onderzocht worden op mediabestanden?</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation>Welke mediabestanden</translation>
+        <translation type="obsolete">Welke mediabestanden</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation type="obsolete">Audio</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Plaatjes</translation>
+        <translation type="obsolete">Plaatjes</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Tekst</translation>
+        <translation type="obsolete">Tekst</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="obsolete">Video</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Alle</translation>
+        <translation type="obsolete">Alle</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation>Koppel programma&apos;s</translation>
+        <translation type="obsolete">Koppel programma&apos;s</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
-        <translation>Beperk zoeken tot map: (nog niet gebruikt)</translation>
+        <translation type="obsolete">Beperk zoeken tot map: (nog niet gebruikt)</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Voeg toe</translation>
+        <translation type="obsolete">Voeg toe</translation>
     </message>
     <message>
         <source>Your decision will be stored on the medium.</source>
-        <translation>Uw beslissing word opgeslagen op het medium.</translation>
+        <translation type="obsolete">Uw beslissing word opgeslagen op het medium.</translation>
     </message>
     <message>
         <source>Do not ask again for this medium</source>
-        <translation>Vraag niet nogmaals voor dit medium</translation>
+        <translation type="obsolete">Vraag niet nogmaals voor dit medium</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation>Batterijstatus</translation>
+        <translation type="obsolete">Batterijstatus</translation>
+    </message>
+</context>
+<context>
+    <name>SafeMode</name>
+    <message>
+        <source>Safe Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart Qtopia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerApplication</name>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Informatie</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
+(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
+        <translation type="unfinished">&lt;p&gt;De systeemdatum lijkt niet correct.
+(%1)&lt;/p&gt;&lt;p&gt;Wilt u deze corrigeren?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Battery level is critical!
+Keep power off until power restored!</source>
+        <translation type="unfinished">Batterijlading is kritiek!
+Laat uitgeschakeld tot kan worden opgeladen!</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Back-up battery is very low.
+Please charge the back-up battery.</source>
+        <translation type="unfinished">De reservebatterijlading is erg laag.
+Reservebatterij opladen aub.</translation>
+    </message>
+    <message>
+        <source>business card</source>
+        <translation type="unfinished">visitekaartje</translation>
+    </message>
+    <message>
+        <source>Safe Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory Low
+Please save data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical Memory Shortage
+Please end this application
+immediately.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -250,15 +468,23 @@ Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en test
     <name>SyncDialog</name>
     <message>
         <source>Syncing</source>
-        <translation>Synchroniseren</translation>
+        <translation type="obsolete">Synchroniseren</translation>
     </message>
     <message>
         <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Kontakten&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Kontakten&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Annuleren</translation>
+        <translation type="obsolete">&amp;Annuleren</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Syncing:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

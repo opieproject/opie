@@ -1,17 +1,79 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppMonitor</name>
+    <name>@default</name>
+    <message>
+        <source>Language</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time and Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Personal Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppLauncher</name>
     <message>
         <source>Application Problem</source>
-        <translation>Проблем со апликацијата</translation>
+        <translation type="unfinished">Проблем со апликацијата</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation>&lt;p&gt;%1 не одговара&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;%1 не одговара&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;Присилно да се иклучи апликацијата?&lt;/p&gt;</translation>
+        <translation type="unfinished">&lt;p&gt;Присилно да се иклучи апликацијата?&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;p&gt;Fast loading has been disabled for this application.  Tap and hold the application icon to reenable it.&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;&lt;b&gt;%1&lt;/b&gt; was terminated due to signal code %2&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application terminated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Application not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not locate application &lt;b&gt;%1&lt;/b&gt;&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Could not find the application %1&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AppMonitor</name>
+    <message>
+        <source>Application Problem</source>
+        <translation type="obsolete">Проблем со апликацијата</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;%1 не одговара&lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
+        <translation type="obsolete">&lt;p&gt;Присилно да се иклучи апликацијата?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -19,27 +81,27 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation>Кликни на крстовите цврсто и 
+        <translation type="obsolete">Кликни на крстовите цврсто и 
 прецизно за да го калибрираш екранот.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation>Добредојде во Opie</translation>
+        <translation type="obsolete">Добредојде во Opie</translation>
     </message>
 </context>
 <context>
     <name>CategoryTabWidget</name>
     <message>
         <source>Documents</source>
-        <translation>Документи</translation>
+        <translation type="obsolete">Документи</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation>Преглед по икони</translation>
+        <translation type="obsolete">Преглед по икони</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation>Преглед по листа</translation>
+        <translation type="obsolete">Преглед по листа</translation>
     </message>
 </context>
 <context>
@@ -47,31 +109,80 @@ accurately to calibrate your screen.</source>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation>Нивото на батеријата е критично!</translation>
+        <translation type="obsolete">Нивото на батеријата е критично!</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
-        <translation>Нивото на батеријата е многу ниско.</translation>
+        <translation type="obsolete">Нивото на батеријата е многу ниско.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation>Помошната батерија е многу слаба.
+        <translation type="obsolete">Помошната батерија е многу слаба.
 Наполни ја помошната батерија.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation>Визиткарта</translation>
+        <translation type="obsolete">Визиткарта</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished">Информации</translation>
+        <translation type="obsolete">Информации</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Датумот на системот не е валиден.
+        <translation type="obsolete">&lt;p&gt;Датумот на системот не е валиден.
 (%1)&lt;/p&gt;&lt;p&gt;Да се поправи саатот ? &lt;/p&gt;</translation>
+    </message>
+</context>
+<context>
+    <name>DesktopPowerAlerter</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Состојба на батерија</translation>
+    </message>
+    <message>
+        <source>Low Battery</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FirstUse</name>
+    <message>
+        <source>&lt;&lt; Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next &gt;&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tap anywhere on the screen to continue.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait, loading %1 settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Please wait...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FirstUseBackground</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finish</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Unicode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -82,11 +193,11 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>Finding documents</source>
-        <translation>Барање документи</translation>
+        <translation type="obsolete">Барање документи</translation>
     </message>
     <message>
         <source>Searching documents</source>
-        <translation>Пребарување на документи</translation>
+        <translation type="obsolete">Пребарување на документи</translation>
     </message>
     <message>
         <source> - Launcher</source>
@@ -100,82 +211,195 @@ Please charge the back-up battery.</source>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
         <translation>&lt;p&gt;Нема апликација дефинирана за овој документ.&lt;p&gt;Типот е %1.</translation>
     </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished">Документи</translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View as text</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>LauncherTabWidget</name>
+    <message>
+        <source>&lt;b&gt;Finding Documents...&lt;/b&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon View</source>
+        <translation type="unfinished">Преглед по икони</translation>
+    </message>
+    <message>
+        <source>List View</source>
+        <translation type="unfinished">Преглед по листа</translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>
     <message>
         <source>%1 files</source>
-        <translation>%1 датотеки</translation>
+        <translation type="obsolete">%1 датотеки</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Аите типови на датотека</translation>
+        <translation type="obsolete">Аите типови на датотека</translation>
     </message>
     <message>
         <source>Document View</source>
         <translation>Преглед на документи</translation>
+    </message>
+    <message>
+        <source>All types</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MediumMountGui</name>
     <message>
         <source>Medium inserted</source>
-        <translation>Внесен медиум</translation>
+        <translation type="obsolete">Внесен медиум</translation>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation>А &lt;b&gt;медиумот&lt;/b&gt;  е внесен. Да се скенира за мултимедијални датотеки?</translation>
+        <translation type="obsolete">А &lt;b&gt;медиумот&lt;/b&gt;  е внесен. Да се скенира за мултимедијални датотеки?</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation>Кои датотеки</translation>
+        <translation type="obsolete">Кои датотеки</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation>Аудио</translation>
+        <translation type="obsolete">Аудио</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation>Слика</translation>
+        <translation type="obsolete">Слика</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation>Текст</translation>
+        <translation type="obsolete">Текст</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation>Видео</translation>
+        <translation type="obsolete">Видео</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Сите</translation>
+        <translation type="obsolete">Сите</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation>Поврзи апликации</translation>
+        <translation type="obsolete">Поврзи апликации</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
-        <translation>Ограничи пребарување надиректориум: (сеуште не се користи)</translation>
+        <translation type="obsolete">Ограничи пребарување надиректориум: (сеуште не се користи)</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation>Додај</translation>
+        <translation type="obsolete">Додај</translation>
     </message>
     <message>
         <source>Your decision will be stored on the medium.</source>
-        <translation>Твојата одлука ќе биде снимена на медиумот.</translation>
+        <translation type="obsolete">Твојата одлука ќе биде снимена на медиумот.</translation>
     </message>
     <message>
         <source>Do not ask again for this medium</source>
-        <translation>Не го барај овој медиум пак</translation>
+        <translation type="obsolete">Не го барај овој медиум пак</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation>Состојба на батерија</translation>
+        <translation type="obsolete">Состојба на батерија</translation>
+    </message>
+</context>
+<context>
+    <name>SafeMode</name>
+    <message>
+        <source>Safe Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Restart Qtopia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ServerApplication</name>
+    <message>
+        <source>Information</source>
+        <translation type="unfinished">Информации</translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
+(%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
+        <translation type="unfinished">&lt;p&gt;Датумот на системот не е валиден.
+(%1)&lt;/p&gt;&lt;p&gt;Да се поправи саатот ? &lt;/p&gt;</translation>
+    </message>
+    <message>
+        <source>Battery level is critical!
+Keep power off until power restored!</source>
+        <translation type="unfinished">Нивото на батеријата е критично!</translation>
+    </message>
+    <message>
+        <source>Battery is running very low. </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The Back-up battery is very low.
+Please charge the back-up battery.</source>
+        <translation type="unfinished">Помошната батерија е многу слаба.
+Наполни ја помошната батерија.</translation>
+    </message>
+    <message>
+        <source>business card</source>
+        <translation type="unfinished">Визиткарта</translation>
+    </message>
+    <message>
+        <source>Safe Mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;A system startup error occurred, and the system is now in Safe Mode. Plugins are not loaded in Safe Mode. You can use the Plugin Manager to disable plugins that cause system error.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plugin Manager...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Memory Low
+Please save data.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Critical Memory Shortage
+Please end this application
+immediately.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -242,15 +466,23 @@ These termination options are provided primarily for use while developing and te
     <name>SyncDialog</name>
     <message>
         <source>Syncing</source>
-        <translation>Синхронизирање</translation>
+        <translation type="obsolete">Синхронизирање</translation>
     </message>
     <message>
         <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Контакти&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Контакти&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Откажи</translation>
+        <translation type="obsolete">&amp;Откажи</translation>
+    </message>
+    <message>
+        <source>Abort</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Syncing:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
