@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.3 2003-06-02 17:23:32 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.4 2003-06-03 18:07:06 zecke Exp $
 **
 **********************************************************************/
 
@@ -443,6 +443,16 @@ void DateBook::duplicateEvent( const Event &e )
 			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0)
 				continue;
 		}
+                /*
+                 * The problem:
+                 * DateBookDB does remove repeating events not by uid but by the time
+                 * the recurrence was created
+                 * so we need to update that time as well
+                 */
+                Event::RepeatPattern rp = newEv.repeatPattern();
+                rp.createTime = ::time( NULL );
+                newEv.setRepeat( TRUE, rp ); // has repeat and repeatPattern...
+
 		db->addEvent(newEv);
 		emit newEvent();
 		break;

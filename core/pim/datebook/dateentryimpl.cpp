@@ -402,6 +402,8 @@ void DateEntry::slotRepeat()
 	rp = e->repeatPattern();
 	setRepeatLabel();
     }
+    // deleting sounds like a nice idea...
+    delete e;
 }
 
 void DateEntry::slotChangeStartOfWeek( bool onMonday )
