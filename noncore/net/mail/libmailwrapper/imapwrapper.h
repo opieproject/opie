@@ -4,6 +4,7 @@
 #include <qlist.h>
 #include "mailwrapper.h"
 #include "abstractmail.h"
+#include "mailstatics.h"
 #include <libetpan/clist.h>
 
 struct mailimap;
@@ -17,7 +18,7 @@ struct mailimap_body_fields;
 struct mailimap_msg_att;
 class encodedString;
 
-class IMAPwrapper : public AbstractMail
+class IMAPwrapper : public AbstractMail,public MailStatics
 {
     Q_OBJECT
 public:

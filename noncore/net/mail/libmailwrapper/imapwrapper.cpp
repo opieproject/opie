@@ -10,7 +10,7 @@
 
 using namespace Opie::Core;
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )
-    : AbstractMail()
+    : AbstractMail(),MailStatics()
 {
     account = a;
     m_imap = 0;
@@ -424,9 +424,8 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
         }
         if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_ENVELOPE) {
             mailimap_envelope * head = item->att_data.att_static->att_data.att_env;
-            m->setDate(head->env_date);
+            m->setDate(parseDateTime(head->env_date));
             m->setSubject(convert_String((const char*)head->env_subject));
-            //m->setSubject(head->env_subject);
             if (head->env_from!=NULL) {
                 addresslist = address_list_to_stringlist(head->env_from->frm_list);
                 if (addresslist.count()) {
@@ -468,18 +467,7 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
                 m->setMsgid(QString(head->env_message_id));
             }
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_INTERNALDATE) {
-#if 0
-            mailimap_date_time*date = item->att_data.att_static->att_data.att_internal_date;
-            if (date->dt_sec>60 || date->dt_sec<0) date->dt_sec=0;
-            //QDateTime da(QDate(d->dt_year,date->dt_month,date->dt_day),QTime(date->dt_hour,date->dt_min,date->dt_sec));
-            QString timestring = TimeString::numberDateString(QDate(date->dt_year,date->dt_month,date->dt_day))+" ";
-            timestring+=TimeString::timeString(QTime(date->dt_hour,date->dt_min,date->dt_sec))+" ";
-            timestring.sprintf(timestring+" %+05i",date->dt_zone);
-            m->setDate(timestring);
-            QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
-            odebug << "" << d->dt_year << " " << d->dt_month << " " << d->dt_day << " - " << d->dt_hour << " " << d->dt_min << " " << d->dt_sec << "" << oendl;
-            odebug << da.toString() << oendl;
-#endif
+            // not used this moment
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_RFC822_SIZE) {
             //size = item->att_data.att_static->att_data.att_rfc822_size;
             m->setMsgsize(item->att_data.att_static->att_data.att_rfc822_size);
