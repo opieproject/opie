@@ -88,7 +88,7 @@ void AdvancedFm::tabChanged(QWidget *w)
   QString fs= getFileSystemType( (const QString &)  path);
 
   setCaption( tr("AdvancedFm :: ")+fs+" :: "
-             +checkDiskSpace( (const QString &) path )+ " kB free" );
+             +checkDiskSpace( (const QString &) path )+ tr(" kB free") );
   chdir( path.latin1());
 }
 
@@ -106,8 +106,8 @@ void AdvancedFm::populateView()
   thisDir->setNameFilter(filterStr);
   QString fileL, fileS, fileDate;
   QString fs= getFileSystemType((const QString &) path);
-  setCaption("AdvancedFm :: "+fs+" :: "
-             +checkDiskSpace((const QString &) path)+" kB free" );
+  setCaption(tr("AdvancedFm :: ")+fs+" :: "
+             +checkDiskSpace((const QString &) path)+tr(" kB free") );
   bool isDir=FALSE;
   const QFileInfoList *list = thisDir->entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
   QFileInfoListIterator it(*list);
@@ -407,7 +407,8 @@ void AdvancedFm::CFButtonPushed()
 
 void AdvancedFm::doAbout()
 {
-  QMessageBox::message("AdvancedFm",tr("Advanced FileManager\n"
+    /* tr obsolete... not even documented -zecke */
+  QMessageBox::message(tr("AdvancedFm"),tr("Advanced FileManager\n"
                                        "is copyright 2002-2003 by\n"
                                        "L.J.Potter<llornkcor@handhelds.org>\n"
                                        "and is licensed by the GPL"));

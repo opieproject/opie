@@ -205,7 +205,7 @@ void AdvancedFm::doDelete()
       f += myFile;
       if(QDir(f).exists() && !QFileInfo(f).isSymLink() ) //if file is a directory
         {
-        switch ( QMessageBox::warning( this, tr("Delete Directory?"), 
+        switch ( QMessageBox::warning( this, tr("Delete Directory?"),
           tr("Really delete %1\nand all it's contents ?" ).arg( f ) ,
           tr("Yes"),
           tr("No"),
@@ -369,7 +369,7 @@ void AdvancedFm::copy()
 
         if( !copyFile( curFile, destFile) )
           {
-            QMessageBox::message("AdvancedFm",
+            QMessageBox::message(tr("AdvancedFm"),
                                  tr( "Could not copy %1 to %2").arg( curFile ).arg( destFile ) );
             return;
           }
@@ -395,7 +395,7 @@ void AdvancedFm::copyAs()
       QString destFile;
       item=(*it);
       curFile = thisDir->canonicalPath()+"/"+(*it);
-      fileDlg = new InputDialog( this, tr("Copy "+curFile+" As"), TRUE, 0);
+      fileDlg = new InputDialog( this, tr("Copy '%1' As").arg(curFile), TRUE, 0);
 
       fileDlg->setInputText((const QString &) destFile );
       fileDlg->exec();
@@ -422,7 +422,7 @@ void AdvancedFm::copyAs()
             }
           if( !copyFile( curFile, destFile) )
             {
-              QMessageBox::message("AdvancedFm",tr("Could not copy\n")
+              QMessageBox::message(tr("AdvancedFm"),tr("Could not copy\n")
                                    +curFile +tr("to\n")+destFile);
               return;
             }
@@ -448,7 +448,7 @@ void AdvancedFm::copySameDir()
       item=(*it);
       curFile = thisDir->canonicalPath()+"/"+ item;
 
-      fileDlg = new InputDialog(this,tr("Copy ")+curFile+tr(" As"),TRUE, 0);
+      fileDlg = new InputDialog(this,tr("Copy '%1' As").arg(curFile),TRUE, 0);
       fileDlg->setInputText((const QString &) destFile );
       fileDlg->exec();
 
@@ -475,7 +475,7 @@ void AdvancedFm::copySameDir()
             }
           if(!copyFile( curFile,destFile) )
             {
-              QMessageBox::message("AdvancedFm",tr("Could not copy\n")
+              QMessageBox::message(tr("AdvancedFm"),tr("Could not copy\n")
                                    +curFile +tr("to\n")+destFile);
               return;
             }
