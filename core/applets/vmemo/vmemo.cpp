@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.39 2002-06-29 01:11:48 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.40 2002-06-29 01:12:52 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -283,7 +283,7 @@ bool VMemo::startRecording() {
   Config config( "Vmemo" );
   config.setGroup( "System" );
 
-  useAlerts = config.readBoolEntry("Alert");
+  useAlerts = config.readBoolEntry("Alert",1);
   if(useAlerts) {
 
     msgLabel = new QLabel( 0, "alertLabel" );
