@@ -46,13 +46,11 @@ namespace Opie {
 class OPimTodoAccess : public QObject, public OPimAccessTemplate<OPimTodo> {
     Q_OBJECT
 public:
-    enum SortOrder { Completed = 0,
+    enum SortOrder { Completed = SortCustom,
                      Priority,
-                     Description,
                      Deadline };
-    enum SortFilter{ Category =1,
-                     OnlyOverDue= 2,
-                     DoNotShowCompleted =4  };
+    enum SortFilter{ OnlyOverDue= FilterCustom,
+                     DoNotShowCompleted = FilterCustom<<1  };
     /**
      * if you use 0l
      * the default resource will be
@@ -70,25 +68,20 @@ public:
      */
     List effectiveToDos( const QDate& start,
                          const QDate& end,
-                         bool includeNoDates = true );
+                         bool includeNoDates = true )const;
 
     /**
      * start
      * end date taken from the currentDate()
      */
     List effectiveToDos( const QDate& start,
-                         bool includeNoDates = true );
+                         bool includeNoDates = true )const;
 
 
     /**
      * return overdue OPimTodos
      */
-    List overDue();
-
-    /**
-     *
-     */
-    List sorted( bool ascending, int sortOrder, int sortFilter, int cat );
+    List overDue()const;
 
     /**
      * merge a list of OPimTodos into
@@ -102,23 +95,6 @@ public:
     void removeAllCompleted();
 
     /**
-     * request information about what a backend supports.
-     * Supports in the sense of beeing able to store.
-     * This is related to the enum in OPimTodo
-     *
-     * @param backend Will be used in the future when we support multiple backend
-     */
-    QBitArray backendSupport( const QString& backend = QString::null )const;
-
-    /**
-     * see above but for a specefic attribute. This method was added for convience
-     * @param attr The attribute to be queried for
-     * @param backend Will be used in the future when we support multiple backends
-     */
-    bool backendSupports( int attr, const QString& backend = QString::null  )const;
-
-
-    /** 
      * Return identification of used records
      */
     int rtti() const;

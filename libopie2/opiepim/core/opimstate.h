@@ -38,12 +38,6 @@ namespace Opie {
  * This class encapsules the state of a todo
  * and it's shared too
  */
-/*
- * in c a simple struct would be enough ;)
- * g_new_state();
- * g_do_some_thing( state_t*  );
- * ;)
- */
 class OPimState {
 
   public:

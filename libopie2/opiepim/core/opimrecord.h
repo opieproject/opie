@@ -32,6 +32,8 @@
 
 /* OPIE */
 #include <opie2/opimxrefmanager.h>
+#include <opie2/opimglobal.h>
+
 /*
  * we need to get customMap which is private...
  */
@@ -60,7 +62,7 @@ class OPimRecord : public Qtopia::Record
      * uid of 0 isEmpty
      * uid of 1 will be assigned a new one
      */
-    OPimRecord( int uid = 0 );
+    OPimRecord( UID uid = 0 );
     ~OPimRecord();
 
     /**
@@ -138,10 +140,15 @@ class OPimRecord : public Qtopia::Record
     QMap<QString, QString> toExtraMap() const;
     void setExtraMap( const QMap<QString, QString>& );
 
+//@{
     /**
      * the name for a recordField
      */
-    virtual QString recordField( int ) const = 0;
+    virtual QString           recordField( int )    const = 0;
+//    virtual QArray<int>       recordAttributes()const = 0;
+//    virtual QMap<int,QString> recordAttributesTranslated() const = 0;
+//    QString                   recordAttributeTranslated(int field)const;
+//@}
 
     /**
      * returns a reference of the

@@ -49,9 +49,6 @@ public:
     ODateBookAccess( ODateBookAccessBackend* = 0l, enum Access acc = Random );
     ~ODateBookAccess();
 
-    /* return all events */
-    List rawEvents()const;
-
     /* return repeating events */
     List rawRepeats()const;
 
@@ -59,12 +56,10 @@ public:
     List nonRepeats()const;
 
     /* return non repeating events (from,to) */
-    OEffectiveEvent::ValueList effectiveEvents( const QDate& from, const QDate& to ) const;
-    OEffectiveEvent::ValueList effectiveEvents( const QDateTime& start ) const;
-    OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) const;
-    OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDateTime& start ) const;
+    OPimOccurrence::List effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) const;
+    OPimOccurrence::List effectiveNonRepeatingEvents( const QDateTime& start ) const;
 
-    /** 
+    /**
      * Return identification of used records
      */
     int rtti() const;

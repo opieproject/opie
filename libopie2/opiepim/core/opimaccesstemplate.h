@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) Holger Freyther <zecke@handhelds.org>
-                 Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
+                             Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -40,6 +40,7 @@
 
 /* QT */
 #include <qarray.h>
+#include <qdatetime.h>
 
 namespace Opie {
 
@@ -56,6 +57,9 @@ class OPimAccessTemplatePrivate;
 template <class T = OPimRecord >
 class OPimAccessTemplate : public OTemplateBase<T> {
 public:
+    /**
+     *
+     */
     enum Access {
         Random = 0,
         SortedAccess
@@ -64,124 +68,72 @@ public:
     typedef OPimAccessBackend<T> BackEnd;
     typedef OPimCache<T> Cache;
 
-    /**
-     * c'tor BackEnd
-     * enum Access a small hint on how to handle the backend
-     */
+    //@{
     OPimAccessTemplate( BackEnd* end);
-
     virtual ~OPimAccessTemplate();
+    //@}
 
-    /**
-     * load from the backend
-     */
+    //@{
     bool load();
-
-    /** Reload database.
-     * You should execute this function if the external database
-     * was changed.
-     * This function will load the external database and afterwards
-     * rejoin the local changes. Therefore the local database will be set consistent.
-     */
     virtual bool reload();
-
-    /** Save contacts database.
-     * Save is more a "commit". After calling this function, all changes are public available.
-     * @return true if successful
-     */
     bool save();
+    void clear() ;
+    //@}
 
-    /**
-     * if the resource was changed externally
-     * You should use the signal handling instead of polling possible changes !
-     * zecke: Do you implement a signal for otodoaccess ?
-     */
+
     bool wasChangedExternally()const;
 
-    /**
-     * return a List of records
-     * you can iterate over them
-     */
+    //@{
     virtual List allRecords()const;
-
-     /**
-     * return a List of records
-     * that match the regex
-     */
     virtual List matchRegexp(  const QRegExp &r ) const;
-
-    /**
-     * queryByExample.
-     * @see otodoaccess, ocontactaccess
-     */
     virtual List queryByExample( const T& t, int querySettings, const QDateTime& d = QDateTime() );
+    virtual T find( UID uid )const;
+    virtual T find( UID uid, const QArray<int>&,
+		    uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
+    virtual List sorted( const List&, bool ascending, int sortOrder,
+			 int sortFilter, int cat )const;
+    virtual List sorted( const List&, bool ascending, int sortOrder,
+			 int sortFilter, const QArray<UID>& cats )const;
+    virtual List sorted( bool ascending, int sortOrder, int sortFilter, int cat )const;
+    virtual List sorted( bool ascending, int sortOrder, int sortOrder,
+			 const QArray<UID>& cats )const;
+    //@}
 
     /**
-     * find the OPimRecord uid
+     * (Re)Implementation
      */
-    T find( int uid )const;
+    //@{
+    UIDArray matchRegexpSimple( const QRegExp& r )const;
+    UIDArray queryByExampleSimple( const OPimRecord*, int, const QDateTime& )const;
+    UIDArray sortedSimple( const UIDArray&, bool asc, int sortOrder,
+                           int sortFilter, int cat )const;
+    UIDArray sortedSimple( const UIDArray&, bool asc, int sortOrder,
+                           int sortFilter, const QArray<int>& )const;
+    UIDArray sortedSimple( bool ascending, int sortOrder, int sortFilter,
+                           int cat )const;
+    UIDArray sortedSimple( bool ascending, int sortOrder, int sortFilter,
+                           const QArray<int>& )const;
+    OPimOccurrence::List occurrences( const QDate& start,  const QDate& end )const;
+    OPimOccurrence::List occurrences( const QDateTime& dt )const;
+    //@}
 
-    /**
-     * read ahead cache find method ;)
-     */
-    T find( int uid, const QArray<int>&,
-                    uint current, typename OTemplateBase<T>::CacheDirection dir = OTemplateBase<T>::Forward )const;
-
-
-    /* invalidate cache here */
-    /**
-     * clears the backend and invalidates the backend
-     */
-    void clear() ;
-
-    /**
-     * add T to the backend
-     * @param t The item to add.
-     * @return <i>true</i> if added successfully.
-     */
-     virtual bool add( const T& t ) ;
-
+    //@{
+    virtual bool add( const T& t ) ;
     bool add( const OPimRecord& );
-    /** 
-     * Add an Opie PimRecord.
-     * Info: Take this if  you are working with OPimRecords and you need to add it into any database.
-     *       But take care that the accessing database is compatible to the real type of OPimRecord !! 
-     *       Otherwise this access will be rejected !
-     */
     bool add( const OPimRecord* );
-
-
-    /* only the uid matters */
-    /**
-     * remove T from the backend
-     * @param t The item to remove
-     * @return <i>true</i> if successful.
-     */
     virtual bool remove( const T& t );
-
-    /**
-     * remove the OPimRecord with uid
-     * @param uid The ID of the item to remove
-     * @return <i>true</i> if successful.
-     */
-    bool remove( int uid );
+    bool remove( UID uid );
     bool remove( const OPimRecord& );
-
-    /**
-     * replace T from backend
-     * @param t The item to replace
-     * @return <i>true</i> if successful.
-     */
     virtual bool replace( const T& t) ;
 
+    //@}
+
     void setReadAhead( uint count );
-    /**
-     * @internal
-     */
+    virtual T cacheFind( int uid )const;
     void cache( const T& )const;
     void setSaneCacheSize( int );
 
-    QArray<int> records()const;
+    QArray<UID> records()const;
 protected:
     /**
      * invalidate the cache
@@ -202,6 +154,10 @@ private:
 
 };
 
+/**
+ * c'tor BackEnd
+ * enum Access a small hint on how to handle the backend
+ */
 template <class T>
 OPimAccessTemplate<T>::OPimAccessTemplate( BackEnd* end )
     : OTemplateBase<T>(), m_backEnd( end )
@@ -211,39 +167,76 @@ OPimAccessTemplate<T>::OPimAccessTemplate( BackEnd* end )
 }
 template <class T>
 OPimAccessTemplate<T>::~OPimAccessTemplate() {
-    owarn << "~OPimAccessTemplate<T>" << oendl;
     delete m_backEnd;
 }
+
+/**
+ * load from the backend
+ */
 template <class T>
 bool OPimAccessTemplate<T>::load() {
     invalidateCache();
     return m_backEnd->load();
 }
+
+/** Reload database.
+ * You should execute this function if the external database
+ * was changed.
+ * This function will load the external database and afterwards
+ * rejoin the local changes. Therefore the local database will be set consistent.
+ */
 template <class T>
 bool OPimAccessTemplate<T>::reload() {
     invalidateCache();
     return m_backEnd->reload();
 }
+
+/**
+ * Save contacts database.
+ * Save is more a "commit". After calling this function, all changes are public available.
+ * @return true if successful
+ */
 template <class T>
 bool OPimAccessTemplate<T>::save() {
     return m_backEnd->save();
 }
+
+
+/**
+ * return a List of records
+ * you can iterate over them
+ */
 template <class T>
 typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::allRecords()const {
     QArray<int> ints = m_backEnd->allRecords();
     List lis(ints, this );
     return lis;
 }
+
+/**
+ * return a List of records
+ * that match the regex
+ */
 template <class T>
 typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::matchRegexp( const QRegExp &r )const {
     QArray<int> ints = m_backEnd->matchRegexp( r );
     List lis(ints, this );
     return lis;
 }
+
+/**
+ * find the OPimRecord uid
+ */
 template <class T>
 QArray<int> OPimAccessTemplate<T>::records()const {
     return m_backEnd->allRecords();
 }
+
+
+/**
+ * queryByExample.
+ * @see otodoaccess, ocontactaccess
+ */
 template <class T>
 typename OPimAccessTemplate<T>::List
 OPimAccessTemplate<T>::queryByExample( const T& t, int settings, const QDateTime& d ) {
@@ -252,8 +245,9 @@ OPimAccessTemplate<T>::queryByExample( const T& t, int settings, const QDateTime
     List lis(ints, this );
     return lis;
 }
+
 template <class T>
-T OPimAccessTemplate<T>::find( int uid ) const{
+T OPimAccessTemplate<T>::find( UID uid ) const{
     // First search in cache..
     if ( m_cache.contains( uid ) )
 	    return m_cache.find( uid );
@@ -265,27 +259,46 @@ T OPimAccessTemplate<T>::find( int uid ) const{
 }
 
 template <class T>
-T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
+T OPimAccessTemplate<T>::cacheFind( int uid ) const
+{
+	return m_cache.find( uid );
+}
+
+/**
+ * read ahead cache find method ;)
+ */
+template <class T>
+T OPimAccessTemplate<T>::find( UID uid, const QArray<int>& ar,
                                uint current, typename OTemplateBase<T>::CacheDirection dir )const {
     /*
      * better do T.isEmpty()
      * after a find this way we would
      * avoid two finds in QCache...
      */
-    // owarn << "find it now " << uid << oendl;
-    if ( m_cache.contains( uid ) ) {
+    if (m_cache.contains( uid ) )
         return m_cache.find( uid );
-    }
+
 
     T t = m_backEnd->find( uid, ar, current, dir );
     cache( t );
     return t;
 }
+
+/**
+ * clears the backend and invalidates the backend
+ */
 template <class T>
 void OPimAccessTemplate<T>::clear() {
     invalidateCache();
     m_backEnd->clear();
 }
+
+
+/**
+ * add T to the backend
+ * @param t The item to add.
+ * @return <i>true</i> if added successfully.
+ */
 template <class T>
 bool OPimAccessTemplate<T>::add( const T& t ) {
     cache( t );
@@ -305,6 +318,12 @@ bool OPimAccessTemplate<T>::add( const OPimRecord& rec ) {
     return false;
 }
 
+/**
+ * Add an Opie PimRecord.
+ * Info: Take this if  you are working with OPimRecords and you need to add it into any database.
+ *       But take care that the accessing database is compatible to the real type of OPimRecord !!
+ *       Otherwise this access will be rejected !
+ */
 template <class T>
 bool OPimAccessTemplate<T>::add( const OPimRecord* rec) {
     /* same type, but pointer  */
@@ -318,12 +337,23 @@ bool OPimAccessTemplate<T>::add( const OPimRecord* rec) {
     return false;
 }
 
+/**
+ * remove T from the backend
+ * @param t The item to remove
+ * @return <i>true</i> if successful.
+ */
 template <class T>
 bool OPimAccessTemplate<T>::remove( const T& t ) {
     return remove( t.uid() );
 }
+
+/**
+ * remove the OPimRecord with uid
+ * @param uid The ID of the item to remove
+ * @return <i>true</i> if successful.
+ */
 template <class T>
-bool OPimAccessTemplate<T>::remove( int uid ) {
+bool OPimAccessTemplate<T>::remove( UID uid ) {
     m_cache.remove( uid );
     return m_backEnd->remove( uid );
 }
@@ -331,11 +361,21 @@ template <class T>
 bool OPimAccessTemplate<T>::remove( const OPimRecord& rec) {
     return remove( rec.uid() );
 }
+
+/**
+ * replace T from backend
+ * @param t The item to replace
+ * @return <i>true</i> if successful.
+ */
 template <class T>
 bool OPimAccessTemplate<T>::replace( const T& t ) {
     m_cache.replace( t );
     return m_backEnd->replace( t );
 }
+
+/**
+ * @internal
+ */
 template <class T>
 void OPimAccessTemplate<T>::invalidateCache() {
     m_cache.invalidate();
@@ -344,6 +384,12 @@ template <class T>
 typename OPimAccessTemplate<T>::BackEnd* OPimAccessTemplate<T>::backEnd() {
     return m_backEnd;
 }
+
+/**
+ * if the resource was changed externally
+ * You should use the signal handling instead of polling possible changes !
+ * zecke: Do you implement a signal for otodoaccess ?
+ */
 template <class T>
 bool OPimAccessTemplate<T>::wasChangedExternally()const {
     return false;
@@ -368,6 +414,109 @@ void OPimAccessTemplate<T>::setReadAhead( uint count ) {
     m_backEnd->setReadAhead( count );
 }
 
+
+template <class T>
+typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::sorted( const OPimAccessTemplate::List& lst,
+                                                                    bool ascending, int sortOrder,
+                                                                    int sortFilter, int cat )const {
+    QArray<int> cats( 1 );
+    cats[0] = cat;
+    UIDArray ints = m_backEnd->sorted( lst.uids(), ascending, sortOrder,
+                                       sortFilter, cats );
+    return List(ints, this);
+}
+
+template<class T>
+typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::sorted( const OPimAccessTemplate::List& lst,
+                                                                    bool ascending, int sortOrder,
+                                                                    int sortFilter, const QArray<UID>& cats )const {
+    UIDArray ints = m_backEnd->sorted( lst.uids(), ascending, sortOrder,
+                                       sortFilter, cats );
+    return List(ints, this);
+}
+
+template<class T>
+typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::sorted( bool ascending, int sortOrder,
+                                                                    int sortFilter, int cat )const {
+    QArray<int> cats( 1 );
+    cats[0] = cat;
+    UIDArray ints = m_backEnd->sorted( ascending, sortOrder,
+                                       sortFilter, cats );
+    return List(ints, this);
+}
+
+template<class T>
+typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::sorted( bool ascending, int sortOrder,
+                                                                    int sortFilter, const QArray<UID>& cats )const {
+    UIDArray ints = m_backEnd->sorted( ascending, sortOrder,
+                                       sortFilter, cats );
+    return List(ints, this);
+}
+
+template <class T>
+OPimOccurrence::List OPimAccessTemplate<T>::occurrences( const QDate& start,
+                                                         const QDate& end ) const {
+    /*
+     * Some magic involved to go from single OPimBackendOccurrence
+     * to multiple OPimOccurrence's
+     */
+    return OPimBase::convertOccurrenceFromBackend( m_backEnd->occurrences( start, end ) );
+}
+
+template<class T>
+OPimOccurrence::List OPimAccessTemplate<T>::occurrences( const QDateTime& dt )const {
+    return OPimBase::convertOccurrenceFromBackend(  m_backEnd->occurrences( dt ) );
+}
+
+/*
+ *Implementations!!
+ */
+template <class T>
+UIDArray OPimAccessTemplate<T>::matchRegexpSimple( const QRegExp &r )const {
+    return m_backEnd->matchRegexp( r );
+}
+
+template <class T>
+UIDArray OPimAccessTemplate<T>::queryByExampleSimple( const OPimRecord* rec,
+                                                      int settings,
+                                                      const QDateTime& d )const {
+    return m_backEnd->queryByExample( rec, settings, d );
+}
+
+template <class T>
+UIDArray OPimAccessTemplate<T>::sortedSimple( const UIDArray& lst,
+                                              bool ascending,
+                                              int sortOrder, int sortFilter,
+                                              int cat ) const{
+    QArray<int> cats( 1 );
+    cats[0] = cat;
+    return m_backEnd->sorted( lst, ascending, sortOrder, sortFilter, cats );
+}
+
+template <class T>
+UIDArray OPimAccessTemplate<T>::sortedSimple( const UIDArray& lst,
+                                              bool ascending,
+                                              int sortOrder, int sortFilter,
+                                              const QArray<int>& cats ) const{
+    return m_backEnd->sorted( lst, ascending, sortOrder, sortFilter, cats );
+}
+
+template <class T>
+UIDArray OPimAccessTemplate<T>::sortedSimple( bool ascending,
+                                              int sortOrder, int sortFilter,
+                                              int cat ) const{
+    QArray<int> cats( 1 );
+    cats[0] = cat;
+
+    return m_backEnd->sorted( ascending, sortOrder, sortFilter, cats );
+}
+
+template <class T>
+UIDArray OPimAccessTemplate<T>::sortedSimple( bool ascending,
+                                              int sortOrder, int sortFilter,
+                                              const QArray<int>& cats ) const{
+    return m_backEnd->sorted( ascending, sortOrder, sortFilter, cats );
+}
 }
 
 #endif

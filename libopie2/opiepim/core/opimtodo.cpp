@@ -64,6 +64,7 @@ struct OPimTodo::OPimTodoData : public QShared
         delete recur;
         delete maintainer;
         delete notifiers;
+        delete state;
     }
 
     QDate date;
@@ -87,17 +88,14 @@ OPimTodo::OPimTodo( const OPimTodo &event )
         : OPimRecord( event ), data( event.data )
 {
     data->ref();
-    //    owarn << "ref up" << oendl;
 }
 
 
 OPimTodo::~OPimTodo()
 {
 
-    //    owarn << "~OPimTodo " << oendl;
     if ( data->deref() )
     {
-        //        owarn << "OPimTodo::dereffing" << oendl;
         delete data;
         data = 0l;
     }
@@ -112,7 +110,6 @@ OPimTodo::OPimTodo( bool completed, int priority,
               bool hasDate, QDate date, int uid )
         : OPimRecord( uid )
 {
-    //    owarn << "OPimTodoData " + summary << oendl;
     setCategories( category );
 
     data = new OPimTodoData;
@@ -135,7 +132,6 @@ OPimTodo::OPimTodo( bool completed, int priority,
               bool hasDate, QDate date, int uid )
         : OPimRecord( uid )
 {
-    //    owarn << "OPimTodoData" + summary << oendl;
     setCategories( idsFromString( category.join( ";" ) ) );
 
     data = new OPimTodoData;
@@ -187,13 +183,33 @@ bool OPimTodo::hasDueDate() const
     return data->hasDate;
 }
 
-
+/**
+ * \brief Does this Todo have a start date
+ *
+ * Does this Todo have a start date. The decision
+ * is based on if the internal startDate isValid
+ * in the sense of QDate::isValid.
+ *
+ * @return True if the startDate isValid
+ * @see startDate
+ * @see setStartDate
+ * @see QDate::isValid()
+ */
 bool OPimTodo::hasStartDate() const
 {
     return data->start.isValid();
 }
 
-
+/**
+ * \brief Does this Todo have a Date when it was completed
+ *
+ * As in \sa hasStartDate() it is determined if there
+ * is a completed date by looking if the internal date
+ * isValid \sa QDate::isValid.
+ *
+ * @see hasStartDate
+ * @return True if the completedDate is set and valid.
+ */
 bool OPimTodo::hasCompletedDate() const
 {
     return data->completed.isValid();
@@ -308,7 +324,6 @@ void OPimTodo::setHasDueDate( bool hasDate )
 
 void OPimTodo::setDescription( const QString &desc )
 {
-    //    owarn << "desc " + desc << oendl;
     changeOrModify();
     data->desc = Qtopia::simplifyMultiLineSpace( desc );
 }
@@ -380,7 +395,7 @@ void OPimTodo::setMaintainer( const OPimMaintainer& pim )
 }
 
 
-bool OPimTodo::isOverdue( )
+bool OPimTodo::isOverdue( )const
 {
     if ( data->hasDate && !data->isCompleted )
         return QDate::currentDate() > data->date;
@@ -593,10 +608,8 @@ bool OPimTodo::operator==( const OPimTodo &toDoEvent ) const
 void OPimTodo::deref()
 {
 
-    //    owarn << "deref in ToDoEvent" << oendl;
     if ( data->deref() )
     {
-        //        owarn << "deleting" << oendl;
         delete data;
         data = 0;
     }
@@ -608,7 +621,6 @@ OPimTodo &OPimTodo::operator=( const OPimTodo &item )
     if ( this == &item ) return * this;
 
     OPimRecord::operator=( item );
-    //owarn << "operator= ref " << oendl;
     item.data->ref();
     deref();
     data = item.data;
@@ -651,7 +663,6 @@ void OPimTodo::changeOrModify()
 {
     if ( data->count != 1 )
     {
-        owarn << "changeOrModify" << oendl;
         data->deref();
         OPimTodoData* d2 = new OPimTodoData();
         copy( data, d2 );
@@ -699,15 +710,101 @@ QString OPimTodo::type() const
 }
 
 
-QString OPimTodo::recordField( int /*id*/ ) const
+QString OPimTodo::recordField( int  id) const
 {
-    return QString::null;
+    QString res;
+    Q_UNUSED( id )
+#if 0
+    switch( id ) {
+    case HasDate:
+        res = (hasDueDate() ?
+              QObject::tr( "Has a due-date" )
+              : QObject::tr( "No due-date" ));
+        break;
+    case Completed:
+        res = ( isCompleted() ?
+                QObject::tr( "Completed" ) :
+                QObject::tr( "Not completed" ));
+        break;
+    case Description:
+        res = description();
+        break;
+    case Summary:
+        res = summary();
+        break;
+    case Priority:
+        res = QString::number( priority() );
+        break;
+    case DateDay:
+        res = QString::number( dueDate().day() );
+        break;
+    case DateMonth:
+        res = QString::number( dueDate().month() );
+        break;
+    case DateYear:
+        res = QString::number( dueDate().year() );
+        break;
+    case Progress:
+        res = QString::number( progress() );
+        break;
+    case State:
+        res = QString::number( state().state() );
+        break;
+    case Recurrence:
+        res = ( hasRecurrence() ?
+                QString::null /*recurrence().summary()*/ :
+                QObject::tr("No reccurrence"));
+        break;
+    case Alarms:
+        break;
+    case Reminders:
+        break;
+    case Maintainer:
+        break;
+    case StartDate:
+        res = ( hasStartDate() ?
+                /*TimeString::()*/ QString::null :
+                QObject::tr( "No start-date" ) );
+        break;
+    case CompletedDate:
+        res = ( hasCompletedDate() ?
+                /*TimeString::()*/ QString::null :
+                QObject::tr( "No completed-date" ) );
+        break;
+    case DueDate:
+        res = ( hasDueDate() ?
+                /*TimeString::()*/ QString::null :
+                QObject::tr( "No due-date" );
+                break;
+    default:
+        res = OPimRecord::recordField( id );
+    }
+
+#endif
+    return res;
 }
 
 
 int OPimTodo::rtti() const
 {
     return OPimResolver::TodoList;
+}
+
+/**
+ * \brief Provide a SafeCast to OPimTodo from a OPimRecord
+ *
+ * Provide a safe cast that will return 0 if the record
+ * type is not OPimTodo. In the other case it will
+ * be casted to OPimTodo and returned
+ *
+ * @param rec The OPimRecord to be casted
+ *
+ * @return a pointer to OPimTodo or 0l
+ */
+OPimTodo* OPimTodo::safeCast( const OPimRecord* rec ) {
+    return (rec && rec->rtti() == OPimResolver::TodoList ) ?
+        static_cast<OPimTodo*>( const_cast<OPimRecord*>(rec) ) :
+        0l;
 }
 
 }

@@ -489,6 +489,25 @@ int OPimEvent::rtti() const
     return OPimResolver::DateBook;
 }
 
+/**
+ * \brief Cast safely to OPimEvent from OPimRecord
+ *
+ * Safely cast from OPimRecord to OPimEvent. If the
+ * OPimRecord is not of type OPimEvent Null will be
+ * returned.
+ *
+ * @param rec The OPimRecord to be casted to OPimEvent
+ *
+ * @see OPimTodo::safeCast
+ * @return OPimEvent or Null Pointer
+ */
+OPimEvent* OPimEvent::safeCast( const OPimRecord* rec) {
+    return ( rec && rec->rtti() == OPimResolver::DateBook ) ?
+        static_cast<OPimEvent*>( const_cast<OPimRecord*>(rec) ) :
+        0l;
+}
+
+
 
 bool OPimEvent::loadFromStream( QDataStream& )
 {

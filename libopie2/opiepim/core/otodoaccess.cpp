@@ -50,8 +50,8 @@ OPimTodoAccess::OPimTodoAccess( OPimTodoAccessBackend* end, enum Access )
     setBackEnd( m_todoBackEnd );
 }
 OPimTodoAccess::~OPimTodoAccess() {
-//    owarn << "~OPimTodoAccess" << oendl; 
 }
+
 void OPimTodoAccess::mergeWith( const QValueList<OPimTodo>& list ) {
     QValueList<OPimTodo>::ConstIterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
@@ -60,38 +60,25 @@ void OPimTodoAccess::mergeWith( const QValueList<OPimTodo>& list ) {
 }
 OPimTodoAccess::List OPimTodoAccess::effectiveToDos( const QDate& start,
                                                const QDate& end,
-                                               bool includeNoDates ) {
+                                               bool includeNoDates )const {
     QArray<int> ints = m_todoBackEnd->effectiveToDos( start, end, includeNoDates );
 
     List lis( ints, this );
     return lis;
 }
 OPimTodoAccess::List OPimTodoAccess::effectiveToDos( const QDate& start,
-                                               bool includeNoDates ) {
+                                               bool includeNoDates )const {
     return effectiveToDos( start, QDate::currentDate(),
                            includeNoDates );
 }
-OPimTodoAccess::List OPimTodoAccess::overDue() {
+OPimTodoAccess::List OPimTodoAccess::overDue()const {
     List lis( m_todoBackEnd->overDue(), this );
     return lis;
 }
-/* sort order */
-OPimTodoAccess::List OPimTodoAccess::sorted( bool ascending, int sort,int filter, int cat ) {
-    QArray<int> ints = m_todoBackEnd->sorted( ascending, sort,
-                                      filter, cat );
-    OPimTodoAccess::List list( ints, this );
-    return list;
-}
+
 void OPimTodoAccess::removeAllCompleted() {
     m_todoBackEnd->removeAllCompleted();
 }
-QBitArray OPimTodoAccess::backendSupport( const QString& ) const{
-    return m_todoBackEnd->supports();
-}
-bool OPimTodoAccess::backendSupports( int attr,  const QString& ar) const{
-    return backendSupport(ar).testBit( attr );
-}
-
 
 int OPimTodoAccess::rtti() const
 {

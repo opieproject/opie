@@ -70,7 +70,6 @@ OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
 	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
 	 */
         if( end == 0 ) {
-		owarn << "Using BackendFactory !" << oendl;
 		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
         }
 	// Set backend locally and in template
@@ -128,11 +127,14 @@ bool OPimContactAccess::hasQuerySettings ( int querySettings ) const
 {
     return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
+
+#if 0
 OPimRecordList<OPimContact> OPimContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
 {
     QArray<int> matchingContacts = m_backEnd -> sorted( ascending, sortOrder, sortFilter, cat );
     return ( OPimRecordList<OPimContact>(matchingContacts, this) );
 }
+#endif
 
 
 bool OPimContactAccess::wasChangedExternally()const
@@ -144,13 +146,10 @@ bool OPimContactAccess::wasChangedExternally()const
 void OPimContactAccess::copMessage( const QCString &msg, const QByteArray & )
 {
     if ( msg == "addressbookUpdated()" ){
-        owarn << "OPimContactAccess: Received addressbokUpdated()" << oendl;
         emit signalChanged ( this );
     } else if ( msg == "flush()" ) {
-        owarn << "OPimContactAccess: Received flush()" << oendl;
         save ();
     } else if ( msg == "reload()" ) {
-        owarn << "OPimContactAccess: Received reload()" << oendl;
         reload ();
         emit signalChanged ( this );
     }

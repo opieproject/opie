@@ -39,7 +39,7 @@ namespace Opie {
  * @param back The backend to be used or 0 for the default backend
  * @param ac What kind of access is intended
  */
-ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access ac )
+ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access  )
     : OPimAccessTemplate<OPimEvent>( back )
 {
     if (!back )
@@ -51,15 +51,6 @@ ODateBookAccess::ODateBookAccess( ODateBookAccessBackend* back, enum Access ac )
 ODateBookAccess::~ODateBookAccess() {
 }
 
-/**
- * @return all events available
- */
-ODateBookAccess::List ODateBookAccess::rawEvents()const {
-    QArray<int> ints = m_backEnd->rawEvents();
-
-    List lis( ints, this );
-    return lis;
-}
 
 /**
  * @return all repeating events
@@ -82,34 +73,20 @@ ODateBookAccess::List ODateBookAccess::nonRepeats()const {
 }
 
 /**
- * @return dates in the time span between from and to
- * @param from Include all events from...
- * @param to Include all events to...
- */
-OEffectiveEvent::ValueList ODateBookAccess::effectiveEvents( const QDate& from, const QDate& to ) const {
-    return m_backEnd->effectiveEvents( from, to );
-}
-/**
- * @return all events at a given datetime
- */
-OEffectiveEvent::ValueList ODateBookAccess::effectiveEvents( const QDateTime& start ) const {
-    return m_backEnd->effectiveEvents( start );
-}
-
-/**
  * @return non repeating dates in the time span between from and to
  * @param from Include all events from...
  * @param to Include all events to...
  */
-OEffectiveEvent::ValueList ODateBookAccess::effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) const {
-    return m_backEnd->effectiveNonRepeatingEvents( from, to );
+OPimOccurrence::List ODateBookAccess::effectiveNonRepeatingEvents( const QDate& from, const QDate& to ) const {
+    return OPimBase::convertOccurrenceFromBackend( m_backEnd->effectiveNonRepeatingEvents( from, to ) );
 }
 /**
  * @return all non repeating events at a given datetime
  */
-OEffectiveEvent::ValueList ODateBookAccess::effectiveNonRepeatingEvents( const QDateTime& start ) const {
-    return m_backEnd->effectiveNonRepeatingEvents( start );
+OPimOccurrence::List ODateBookAccess::effectiveNonRepeatingEvents( const QDateTime& start ) const {
+    return OPimBase::convertOccurrenceFromBackend( m_backEnd->effectiveNonRepeatingEvents( start ) );
 }
+
 int ODateBookAccess::rtti() const
 {
 	return OPimResolver::DateBook;

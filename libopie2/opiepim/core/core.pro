@@ -12,6 +12,7 @@ HEADERS += \
         core/opimmaintainer.h     \
         core/opimnotify.h         \
         core/opimnotifymanager.h  \       
+	core/opimoccurrence.h     \
         core/opimrecord.h         \
         core/opimrecordlist.h     \
         core/opimrecurrence.h     \
@@ -35,10 +36,12 @@ SOURCES += \
         core/opimmaintainer.cpp     \
         core/opimnotify.cpp         \
         core/opimnotifymanager.cpp  \       
+	core/opimoccurrence.cpp      \
         core/opimrecord.cpp         \      
         core/opimrecurrence.cpp     \
         core/opimresolver.cpp       \
         core/opimstate.cpp          \       
+	core/opimtemplatebase.cpp   \
         core/opimtimezone.cpp       \
         core/opimtodo.cpp           \
         core/opimxref.cpp           \

@@ -70,11 +70,12 @@ class OPimTodo : public OPimRecord
         State,
         Recurrence,
         Alarms,
-        Reminders,
-        Notifiers,
+	Reminders,
         Maintainer,
         StartDate,
-        CompletedDate
+	CompletedDate,
+//ADDITIONAL FOR RECORDFIELD
+	DueDate,
     };
   public:
     // priorities from Very low to very high
@@ -282,7 +283,7 @@ class OPimTodo : public OPimRecord
      */
     void setMaintainer( const OPimMaintainer& );
 
-    bool isOverdue();
+    bool isOverdue()const;
 
 
     virtual bool match( const QRegExp &r ) const;
@@ -295,7 +296,11 @@ class OPimTodo : public OPimRecord
     bool operator==( const OPimTodo &toDoEvent ) const;
     OPimTodo &operator=( const OPimTodo &toDoEvent );
 
+    //@{
     int rtti() const;
+    static OPimTodo* safeCast( const OPimRecord* );
+    //@}
+
 
   private:
     class OPimTodoPrivate;

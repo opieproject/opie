@@ -60,6 +60,26 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
     Q_OBJECT
 
  public:
+    enum SortFilter {
+        DoNotShowNoneChildren      = FilterCustom<<1,
+        DoNotShowNoneAnniversary   = FilterCustom<<2,
+        DoNotShowNoneBirthday      = FilterCustom<<3,
+        DoNotShowNoHomeAddress     = FilterCustom<<4,
+        DoNotShowNoBusinessAddress = FilterCustom<<5
+    };
+
+    enum SortOrder {
+        SortTitle = SortCustom,
+        SortFirstName,
+        SortMiddleName,
+        SortSuffix,
+        SortEmail,
+        SortNickname,
+        SortAnniversary,
+        SortBirthday,
+        SortGender
+    };
+
 	/**
          * Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database
@@ -75,34 +95,9 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	 * @see OPimContactAccessBackend
 	 */
 	OPimContactAccess (const QString appname, const QString filename = 0l,
-                    OPimContactAccessBackend* backend = 0l, bool handlesync = true);
-	~OPimContactAccess ();
+                           OPimContactAccessBackend* backend = 0l, bool handlesync = true);
+        ~OPimContactAccess ();
 
-	/** Constants for query.
-	 * Use this constants to set the query parameters.
-	 * Note: <i>query_IgnoreCase</i> just make sense with one of the other attributes !
-	 * @see queryByExample()
-	 */
-	enum QuerySettings {
-		WildCards  = 0x0001,
-		IgnoreCase = 0x0002,
-		RegExp     = 0x0004,
-		ExactMatch = 0x0008,
-		MatchOne   = 0x0010, // Only one Entry must match
-		DateDiff   = 0x0020, // Find all entries from today until given date
-		DateYear   = 0x0040, // The year matches
-		DateMonth  = 0x0080, // The month matches
-		DateDay    = 0x0100, // The day matches
-	};
-
-
-	/** Return all Contacts in a sorted manner.
-	 *  @param ascending true: Sorted in acending order.
-	 *  @param sortOrder Currently not implemented. Just defined to stay compatible to otodoaccess
-	 *  @param sortFilter Currently not implemented. Just defined to stay compatible to otodoaccess
-	 *  @param cat Currently not implemented. Just defined to stay compatible to otodoaccess
-	 */
-	List sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const;
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend
@@ -126,9 +121,9 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 	 * Save is more a "commit". After calling this function, all changes are public available.
 	 * @return true if successful
 	 */
-	bool save();
-	
-	/** 
+        bool save();
+
+	/**
 	 * Return identification of used records
 	 */
 	int rtti() const;
@@ -144,8 +139,6 @@ class OPimContactAccess: public QObject, public OPimAccessTemplate<OPimContact>
 
 
  private:
-	// class OPimContactAccessPrivate;
-	// OPimContactAccessPrivate* d;
         OPimContactAccessBackend *m_backEnd;
         bool m_loading:1;
 

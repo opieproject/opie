@@ -41,6 +41,7 @@
 namespace Opie
 {
 
+template<class T> class OPimAccessTemplate;
 class OPimRecordListIteratorPrivate;
 /**
  * Our List Iterator
@@ -120,6 +121,7 @@ class OPimRecordListPrivate;
 template <class T = OPimRecord >
 class OPimRecordList
 {
+   template<class> friend class OPimAccessTemplate;
   public:
     typedef OTemplateBase<T> Base;
     typedef OPimRecordListIterator<T> Iterator;
@@ -127,10 +129,9 @@ class OPimRecordList
     /**
      * c'tor
      */
-    OPimRecordList ()
-    {}
+    OPimRecordList (){}
     OPimRecordList( const QArray<int>& ids,
-                 const Base* );
+		    const Base* );
     ~OPimRecordList();
 
     /**
@@ -160,6 +161,9 @@ class OPimRecordList
       ConstIterator begin()const;
       ConstIterator end()const;
     */
+  protected:
+    UIDArray uids()const;
+
   private:
     QArray<int> m_ids;
     const Base* m_acc;
@@ -190,7 +194,6 @@ OPimRecordListIterator<T>::~OPimRecordListIterator()
 template <class T>
 OPimRecordListIterator<T>::OPimRecordListIterator( const OPimRecordListIterator<T>& it )
 {
-    //owarn << "OPimRecordListIterator copy c'tor" << oendl;
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -216,7 +219,6 @@ OPimRecordListIterator<T> &OPimRecordListIterator<T>::operator=( const OPimRecor
 template <class T>
 T OPimRecordListIterator<T>::operator*()
 {
-    //owarn << "operator* " << m_current << " " << m_uids[m_current] << oendl;
     if ( !m_end )
         m_record = m_temp->find( m_uids[ m_current ], m_uids, m_current,
                                  m_direction ? Base::Forward :
@@ -397,6 +399,11 @@ bool OPimRecordList<T>::remove( int uid )
 
 
     return ret_val;
+}
+
+template<class T>
+UIDArray OPimRecordList<T>::uids()const {
+    return m_ids;
 }
 
 }

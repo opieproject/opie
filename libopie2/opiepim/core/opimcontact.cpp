@@ -81,7 +81,6 @@ OPimContact::OPimContact( const QMap<int, QString> &fromMap ):OPimRecord(), mMap
 
     if ( uidStr.isEmpty() || ( uidStr.toInt() == 0 ) )
     {
-        owarn << "Invalid UID found. Generate new one.." << oendl;
         setUid( uidGen().generate() );
     }
     else
@@ -1138,7 +1137,6 @@ void OPimContact::setBirthday( const QDate &v )
 {
     if ( v.isNull() )
     {
-        owarn << "Remove Birthday" << oendl;
         replace( Qtopia::Birthday, QString::null );
         return ;
     }
@@ -1157,7 +1155,6 @@ void OPimContact::setAnniversary( const QDate &v )
 {
     if ( v.isNull() )
     {
-        owarn << "Remove Anniversary" << oendl;
         replace( Qtopia::Anniversary, QString::null );
         return ;
     }
@@ -1173,7 +1170,6 @@ void OPimContact::setAnniversary( const QDate &v )
 QDate OPimContact::birthday() const
 {
     QString str = find( Qtopia::Birthday );
-    // owarn << "Birthday " << str << oendl;
     if ( !str.isEmpty() )
         return OPimDateConversion::dateFromString ( str );
     else
@@ -1188,7 +1184,6 @@ QDate OPimContact::anniversary() const
 {
     QDate empty;
     QString str = find( Qtopia::Anniversary );
-    // owarn << "Anniversary " << str << oendl;
     if ( !str.isEmpty() )
         return OPimDateConversion::dateFromString ( str );
     else
@@ -1280,6 +1275,25 @@ void OPimContact::insertEmails( const QStringList &v )
 int OPimContact::rtti() const
 {
     return OPimResolver::AddressBook;
+}
+
+/**
+ * \brief Cast to OPimContact or on failure return 0l
+ *
+ * This method tries to cast from a OPimRecord to a
+ * OPimContact it uses. If the OPimRecord is from type
+ * OPimContact the case will suceed and a pointer to
+ * OPimContact is returned otherwise a Null Pointer is returned.
+ *
+ *
+ * @see OPimTodo::safeCast()
+ * @see OPimEvent::safeCast()
+ * @return Return a OPimContact or a Null Pointer
+ */
+OPimContact* OPimContact::safeCast( const OPimRecord* rec ) {
+    return( rec && rec->rtti() == OPimResolver::AddressBook ) ?
+        static_cast<OPimContact*>( const_cast<OPimRecord*>(rec) ) :
+        0l;
 }
 
 

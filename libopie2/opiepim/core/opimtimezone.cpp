@@ -40,7 +40,28 @@
 namespace Opie
 {
 
-QDateTime utcTime( time_t t )
+/*
+ * Save the old timeZone in a secure way (NULL Pointer check),
+ * set the new timeZone from the parameter, call tzset
+ * and then return the old timezone
+ */
+static QString setTimeZone( const QString& zone) {
+    QString old;
+    char *org = ::getenv( "TZ" );
+    if( org )
+        old = QString::fromLocal8Bit( org );
+
+    ::setenv( "TZ", zone.local8Bit(), true );
+    ::tzset();
+
+    return old;
+}
+
+static void resetTimeZone( const QString& zone ) {
+    ::setenv( "TZ", zone.local8Bit(), true );
+}
+
+static QDateTime utcTime( time_t t )
 {
     tm * broken = ::gmtime( &t );
     QDateTime ret;
@@ -49,16 +70,13 @@ QDateTime utcTime( time_t t )
     return ret;
 }
 
-QDateTime utcTime( time_t t, const QString& zone )
+static QDateTime utcTime( time_t t, const QString& zone )
 {
-    QCString org = ::getenv( "TZ" );
+
 #ifndef Q_OS_MACX   // Following line causes bus errors on Mac
-
-    ::setenv( "TZ", zone.latin1(), true );
-    ::tzset();
-
+    QString old = setTimeZone( zone );
     tm* broken = ::localtime( &t );
-    ::setenv( "TZ", org, true );
+    resetTimeZone( old );
 #else
 #warning "Need a replacement for MacOSX!!"
 
@@ -73,7 +91,7 @@ QDateTime utcTime( time_t t, const QString& zone )
 }
 
 
-time_t to_Time_t( const QDateTime& utc, const QString& str )
+static time_t to_Time_t( const QDateTime& utc, const QString& str )
 {
     QDate d = utc.date();
     QTime t = utc.time();
@@ -86,14 +104,10 @@ time_t to_Time_t( const QDateTime& utc, const QString& str )
     broken.tm_min = t.minute();
     broken.tm_sec = t.second();
 
-    QCString org = ::getenv( "TZ" );
 #ifndef Q_OS_MACX   // Following line causes bus errors on Mac
-
-    ::setenv( "TZ", str.latin1(), true );
-    ::tzset();
-
+    QString old = setTimeZone( str );
     time_t ti = ::mktime( &broken );
-    ::setenv( "TZ", org, true );
+    resetTimeZone( old );
 #else
 #warning "Need a replacement for MacOSX!!"
 

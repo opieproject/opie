@@ -118,21 +118,29 @@ class OPimEvent : public OPimRecord
     ~OPimEvent();
     OPimEvent &operator=( const OPimEvent& );
 
+    //@{
     QString description() const;
     void setDescription( const QString& description );
 
     QString location() const;
     void setLocation( const QString& loc );
+    //@}
 
+    //@{
     bool hasNotifiers() const;
     OPimNotifyManager &notifiers() const;
+    //@}
 
+    //@{
     OPimRecurrence recurrence() const;
     void setRecurrence( const OPimRecurrence& );
     bool hasRecurrence() const;
+    //@}
 
+    //@{
     QString note() const;
     void setNote( const QString& note );
+    //@}
 
 
     QDateTime createdDateTime() const;
@@ -161,13 +169,13 @@ class OPimEvent : public OPimRecord
     QString timeZone() const;
 
 
-    virtual bool match( const QRegExp& ) const;
-
+    //@{
     /** For exception to recurrence here is a list of children...  */
     QArray<int> children() const;
     void setChildren( const QArray<int>& );
     void addChild( int uid );
     void removeChild( int uid );
+    //@}
 
     /** return the parent OPimEvent */
     int parent() const;
@@ -175,6 +183,8 @@ class OPimEvent : public OPimRecord
 
 
     /* needed reimp */
+    //@{ Reimplementations
+    virtual bool match( const QRegExp& ) const;
     QString toRichText() const;
     QString toShortText() const;
     QString type() const;
@@ -183,12 +193,16 @@ class OPimEvent : public OPimRecord
     void fromMap( const QMap<int, QString>& map );
     QString recordField( int ) const;
 
-    int rtti() const;
-
     bool loadFromStream( QDataStream& );
     bool saveToStream( QDataStream& ) const;
+    //@}
 
-    /*    bool operator==( const OPimEvent& );
+    //@{
+    int rtti() const;
+    static OPimEvent* safeCast( const OPimRecord* );
+    //@}
+
+  /*    bool operator==( const OPimEvent& );
         bool operator!=( const OPimEvent& );
         bool operator<( const OPimEvent& );
         bool operator<=( const OPimEvent& );

@@ -228,7 +228,11 @@ class QPC_EXPORT OPimContact : public OPimRecord
     // the emails should be seperated by a comma
     void setEmails( const QString &v );
     QString emails() const { return find( Qtopia::Emails ); }
+
+    //@{
     int rtti() const;
+    static OPimContact* safeCast( const OPimRecord* );
+    //@}
 
   private:
     // The XML Backend needs some access to the private functions

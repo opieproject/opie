@@ -45,8 +45,6 @@ namespace Opie {
  * to traverse through a list of alarms, reminders
  * to get access to built in PIM functionality
  * and to more stuff
- * THE PERFORMANCE will depend on THE BACKEND
- * USING XML is a waste of memory!!!!!
  */
 class OPimResolver {
   

@@ -29,12 +29,24 @@
 #ifndef __OPIMGLOBAL_H_
 #define __OPIMGLOBAL_H_
 
+#include <qarray.h>
+
 namespace Opie{
+
+/**
+ * The unique identifier for every
+ * PIM record. For now it is a negative
+ * int but we could change it to long or QUuid
+ * in the future
+ */
+typedef int UID;
+typedef QArray<UID> UIDArray;
+
 namespace Pim{
 
 
-	/** 
-	 * Contains global types and enums for the PIM-API 
+	/**
+	 * Contains global types and enums for the PIM-API
 	 */
 class OPimGlobal{
  public:
@@ -44,7 +56,7 @@ class OPimGlobal{
 		DATEBOOK,
 		_END_PimType
 	};
-	
+
 	enum DatabaseStyle {
 		DEFAULT,      // Use default Database
 		UNKNOWN,      // Unknown database style

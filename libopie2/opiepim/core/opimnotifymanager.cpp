@@ -164,7 +164,6 @@ void OPimNotifyManager::deregister( const OPimNotify& )
 
 bool OPimNotifyManager::isEmpty() const
 {
-    owarn << "is Empty called on OPimNotifyManager " << m_rem.count() << " " << m_al.count() << "" << oendl;
     if ( m_rem.isEmpty() && m_al.isEmpty() ) return true;
     else return false;
 }
@@ -192,7 +191,6 @@ QString OPimNotifyManager::alarmsToString() const
             }
         }
         // now write the list
-        owarn << "als: " << als.join( "____________" ) << "" << oendl;
         str = als.join( ";" );
     }
 
@@ -226,9 +224,6 @@ void OPimNotifyManager::alarmsFromString( const QString& str )
     for ( QStringList::Iterator it = als.begin(); it != als.end(); ++it )
     {
         QStringList alarm = QStringList::split( ":", ( *it ), TRUE ); // allow empty
-        owarn << "alarm: " << alarm.join( "___" ) << "" << oendl;
-        owarn << "alarm[0]: " << alarm[ 0 ] << " "
-              << OPimDateConversion::dateTimeFromString( alarm[ 0 ] ).toString() << oendl;
         OPimAlarm al( alarm[ 2 ].toInt(), OPimDateConversion::dateTimeFromString( alarm[ 0 ] ),
                       alarm[ 1 ].toInt() );
         add( al );
