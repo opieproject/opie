@@ -117,24 +117,18 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     layout->setStretchFactor( folderView, 1 );
     layout->setStretchFactor( mailView, 2 );
 
-
     slotAdjustLayout();
     
     QPEApplication::setStylusOperation( mailView->viewport(),QPEApplication::RightOnHold);
-    
+    QPEApplication::setStylusOperation( folderView->viewport(),QPEApplication::RightOnHold);
+
     connect( mailView, SIGNAL( mouseButtonClicked(int, QListViewItem *,const QPoint&,int  ) ),this,
              SLOT( mailLeftClicked( int, QListViewItem *,const QPoint&,int  ) ) );     
-    
     connect( mailView, SIGNAL( mouseButtonPressed(int, QListViewItem *,const QPoint&,int  ) ),this,
              SLOT( mailHold( int, QListViewItem *,const QPoint&,int  ) ) );         
-#if 0
-    connect( mailView, SIGNAL( rightButtonClicked( QListViewItem *,const QPoint&,int ) ),this,
-            SLOT( mailHold(QListViewItem *,const QPoint&,int) ));
-#endif
     connect(folderView, SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
-   QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
-
+    QTimer::singleShot( 1000, this, SLOT( slotAdjustColumns() ) );
 }
 
 

@@ -28,8 +28,8 @@ const QString& Folder::Separator()const
     return separator;
 }
 
-IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,const QString&prefix )
-    : Folder( name,sep ),m_MaySelect(select)
+IMAPFolder::IMAPFolder(const QString&name,const QString&sep, bool select,bool no_inf, const QString&prefix )
+    : Folder( name,sep ),m_MaySelect(select),m_NoInferior(no_inf)
 {
   // Decode IMAP foldername
   nameDisplay = IMAPFolder::decodeFolderName( name );

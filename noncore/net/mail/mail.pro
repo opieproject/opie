@@ -15,13 +15,14 @@ HEADERS         = defines.h \
                mailtypes.h \
                mailistviewitem.h \
                pop3wrapper.h \
-           abstractmail.h  \
-        settingsdialog.h \
-        statuswidget.h \
-        smtpwrapper.h \
-        genericwrapper.h \
-         mboxwrapper.h \
-		sendmailprogress.h 
+               abstractmail.h  \
+               settingsdialog.h \
+               statuswidget.h \
+               smtpwrapper.h \
+               genericwrapper.h \
+               mboxwrapper.h \
+               sendmailprogress.h \
+               newmaildir.h
                
 SOURCES         = main.cpp \
                opiemail.cpp \
@@ -38,13 +39,14 @@ SOURCES         = main.cpp \
                settings.cpp \
                mailtypes.cpp \
                pop3wrapper.cpp \
-           abstractmail.cpp \
-        settingsdialog.cpp \
-         statuswidget.cpp \
-        smtpwrapper.cpp \
-        genericwrapper.cpp \
-        mboxwrapper.cpp \
-		sendmailprogress.cpp
+               abstractmail.cpp \
+               settingsdialog.cpp \
+               statuswidget.cpp \
+               smtpwrapper.cpp \
+               genericwrapper.cpp \
+               mboxwrapper.cpp \
+               sendmailprogress.cpp \
+               newmaildir.cpp
                
 INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \
@@ -55,9 +57,10 @@ INTERFACES     = editaccountsui.ui \
                addresspickerui.ui \
                logindialogui.ui \
                composemailui.ui \
-        settingsdialogui.ui \
-        statuswidgetui.ui \
-	sendmailprogressui.ui
+               settingsdialogui.ui \
+               statuswidgetui.ui \
+               sendmailprogressui.ui \
+               newmaildirui.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
 

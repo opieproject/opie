@@ -69,7 +69,8 @@ public:
     Folder( const QString&init_name,const QString&sep );
     const QString&getDisplayName()const { return nameDisplay; }
     const QString&getName()const { return name; }
-    virtual bool may_select()const{return true;};    
+    virtual bool may_select()const{return true;}
+    virtual bool no_inferior()const{return true;}
     const QString&Separator()const;
 
 protected:
@@ -80,12 +81,12 @@ protected:
 class IMAPFolder : public Folder
 {
     public:
-        IMAPFolder(const QString&name, const QString&sep, bool select=true,const QString&prefix="" );
+        IMAPFolder(const QString&name, const QString&sep, bool select=true,bool noinf=false,const QString&prefix="" );
         virtual bool may_select()const{return m_MaySelect;}
+        virtual bool no_inferior()const{return m_NoInferior;}
     private:
-		static QString decodeFolderName( const QString &name );
-        bool m_MaySelect;
-
+        static QString decodeFolderName( const QString &name );
+        bool m_MaySelect,m_NoInferior;
 };
 
 #endif

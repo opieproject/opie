@@ -27,12 +27,16 @@ public:
     
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
+    virtual int deleteAllMail(const Folder*folder);
 
     virtual RecBody fetchBody(const RecMail&mail);
     virtual QString fetchTextPart(const RecMail&mail,const RecPart&part);
     virtual encodedString* fetchDecodedPart(const RecMail&mail,const RecPart&part);
     virtual encodedString* fetchRawPart(const RecMail&mail,const RecPart&part);
 
+    virtual int createMbox(const QString&,const Folder*parentfolder=0,const QString& delemiter="/",bool getsubfolder=false);
+    virtual int deleteMbox(const Folder*folder);
+    
     static void imap_progress( size_t current, size_t maximum );
 
 protected:

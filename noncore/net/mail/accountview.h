@@ -11,6 +11,7 @@
 class POP3wrapper;
 class RecMail;
 class RecBody;
+class QPopupMenu;
 
 class AccountViewItem : public QListViewItem
 {
@@ -21,6 +22,8 @@ public:
     AccountViewItem( QListViewItem *parent , QListViewItem*after  ) : QListViewItem( parent,after ) {}
     virtual void refresh(QList<RecMail>&)=0;
     virtual RecBody fetchBody(const RecMail&)=0;
+    virtual QPopupMenu * getContextMenu(){return 0;};
+    virtual void contextMenuSelected(int){}
 };
 
 class POP3viewItem : public AccountViewItem
@@ -55,16 +58,20 @@ class IMAPfolderItem;
 
 class IMAPviewItem : public AccountViewItem
 {
-
+    friend class IMAPfolderItem;
 public:
     IMAPviewItem( IMAPaccount *a, QListView *parent );
     ~IMAPviewItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
     AbstractMail *getWrapper();
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
 
 protected:
     IMAPfolderItem*findSubItem(const QString&path,IMAPfolderItem*start=0);
+    virtual void refreshFolders(bool force=false);
+    virtual void createNewFolder();
 
 private:
     IMAPaccount *account;
@@ -81,6 +88,14 @@ public:
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
     bool matchName(const QString&name)const;
+    virtual void deleteAllMails();    
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
+    virtual const QString& Delemiter()const;
+protected:
+    virtual void createNewFolder();
+    virtual void deleteFolder();
+    
 private:
     Folder *folder;
     IMAPviewItem *imap;
@@ -126,10 +141,12 @@ public:
     RecBody fetchBody(const RecMail&aMail);
 
 public slots:
-    void refreshAll();
-    void refresh(QListViewItem *item);
-    void refreshCurrent();
-    
+    virtual void refreshAll();
+    virtual void refresh(QListViewItem *item);
+    virtual void refreshCurrent();
+    virtual void slotHold(int, QListViewItem *,const QPoint&,int);
+    virtual void slotContextMenu(int id);
+
 signals:
     void refreshMailview(QList<RecMail>*);  
 

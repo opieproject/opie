@@ -1,7 +1,6 @@
-
 #include <stdlib.h>
-
 #include <libetpan/libetpan.h>
+#include <qpe/global.h>
 
 #include "imapwrapper.h"
 #include "mailtypes.h"
@@ -71,7 +70,7 @@ void IMAPwrapper::login()
     if ( err != MAILIMAP_NO_ERROR &&
          err != MAILIMAP_NO_ERROR_AUTHENTICATED &&
          err != MAILIMAP_NO_ERROR_NON_AUTHENTICATED ) {
-         qDebug("error connecting server: %s",m_imap->imap_response);
+         Global::statusMessage(tr("error connecting imap server: %1").arg(m_imap->imap_response));
          mailimap_free( m_imap );
          m_imap = 0;
          return;
@@ -80,7 +79,7 @@ void IMAPwrapper::login()
     /* login */
     err = mailimap_login_simple( m_imap, (char*)user, (char*)pass );
     if ( err != MAILIMAP_NO_ERROR ) {
-        qDebug("error logging in imap: %s",m_imap->imap_response);
+        Global::statusMessage(tr("error logging in imap server: %1").arg(m_imap->imap_response));
         err = mailimap_close( m_imap );
         mailimap_free( m_imap );
         m_imap = 0;
@@ -115,15 +114,17 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
     /* select mailbox READONLY for operations */
     err = mailimap_examine( m_imap, (char*)mb);
     if ( err != MAILIMAP_NO_ERROR ) {
-        qDebug("error selecting mailbox: %s",m_imap->imap_response);
+        Global::statusMessage(tr("error selecting mailbox: %1").arg(m_imap->imap_response));
         return;
     }
 
     int last = m_imap->imap_selection_info->sel_exists;
 
     if (last == 0) {
-        qDebug("mailbox has no mails");
+        Global::statusMessage(tr("Mailbox has no mails"));
         return;
+    } else {
+        Global::statusMessage(tr("Mailbox has %1 mails").arg(last));
     }
 
     /* the range has to start at 1!!! not with 0!!!! */
@@ -155,7 +156,7 @@ void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
             }
         }
     } else {
-        qDebug("Error fetching headers: %s",m_imap->imap_response);
+        Global::statusMessage(tr("Error fetching headers: %1").arg(m_imap->imap_response));
     }
     if (result) mailimap_fetch_list_free(result);
 }
@@ -166,6 +167,8 @@ QList<Folder>* IMAPwrapper::listFolders()
     int err = MAILIMAP_NO_ERROR;
     clist *result = 0;
     clistcell *current = 0;
+    clistcell*cur_flag = 0;
+    mailimap_mbx_list_flags*bflags = 0;
 
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
@@ -184,6 +187,8 @@ QList<Folder>* IMAPwrapper::listFolders()
     mailimap_mailbox_list *list;
     err = mailimap_list( m_imap, (char*)"", (char*)mask, &result );
     QString del;
+    bool selectable = true;
+    bool no_inferiors = false;
     if ( err == MAILIMAP_NO_ERROR ) {
         current = result->first;
         for ( int i = result->count; i > 0; i-- ) {
@@ -192,8 +197,17 @@ QList<Folder>* IMAPwrapper::listFolders()
             // instead of using strdup!
             temp = list->mb_name;
             del = list->mb_delimiter;
-            folders->append( new IMAPFolder(temp,del,true,account->getPrefix()));
             current = current->next;
+            if ( (bflags = list->mb_flag) ) {
+                selectable = !(bflags->mbf_type==MAILIMAP_MBX_LIST_FLAGS_SFLAG&&
+                            bflags->mbf_sflag==MAILIMAP_MBX_LIST_SFLAG_NOSELECT);
+                for(cur_flag=clist_begin(bflags->mbf_oflags);cur_flag;cur_flag=clist_next(cur_flag)) {
+                    if ( ((mailimap_mbx_list_oflag*)cur_flag->data)->of_type==MAILIMAP_MBX_LIST_OFLAG_NOINFERIORS) {
+                        no_inferiors = true;
+                    }
+                }
+            }
+            folders->append( new IMAPFolder(temp,del,selectable,no_inferiors,account->getPrefix()));
         }
     } else {
         qDebug("error fetching folders: %s",m_imap->imap_response);
@@ -207,12 +221,11 @@ QList<Folder>* IMAPwrapper::listFolders()
     path = account->getPrefix().latin1();
     if (!path) path = "";
     qDebug(path);
-    bool selectable = true;
-    mailimap_mbx_list_flags*bflags;
     err = mailimap_list( m_imap, (char*)path, (char*)mask, &result );
     if ( err == MAILIMAP_NO_ERROR ) {
         current = result->first;
         for ( current=clist_begin(result);current!=NULL;current=clist_next(current)) {
+            no_inferiors = false;
             list = (mailimap_mailbox_list *) current->data;
             // it is better use the deep copy mechanism of qt itself
             // instead of using strdup!
@@ -224,9 +237,14 @@ QList<Folder>* IMAPwrapper::listFolders()
             if ( (bflags = list->mb_flag) ) {
                 selectable = !(bflags->mbf_type==MAILIMAP_MBX_LIST_FLAGS_SFLAG&&
                             bflags->mbf_sflag==MAILIMAP_MBX_LIST_SFLAG_NOSELECT);
+                for(cur_flag=clist_begin(bflags->mbf_oflags);cur_flag;cur_flag=clist_next(cur_flag)) {
+                    if ( ((mailimap_mbx_list_oflag*)cur_flag->data)->of_type==MAILIMAP_MBX_LIST_OFLAG_NOINFERIORS) {
+                        no_inferiors = true;
+                    }
+                }
             }
             del = list->mb_delimiter;
-            folders->append(new IMAPFolder(temp,del,selectable,account->getPrefix()));
+            folders->append(new IMAPFolder(temp,del,selectable,no_inferiors,account->getPrefix()));
         }
     } else {
         qDebug("error fetching folders %s",m_imap->imap_response);
@@ -817,4 +835,88 @@ encodedString* IMAPwrapper::fetchDecodedPart(const RecMail&mail,const RecPart&pa
 encodedString* IMAPwrapper::fetchRawPart(const RecMail&mail,const RecPart&part)
 {
     return fetchRawPart(mail,part.Positionlist(),false);
+}
+
+int IMAPwrapper::deleteAllMail(const Folder*folder)
+{
+    login();
+    if (!m_imap) {
+        return 0;
+    }
+    mailimap_flag_list*flist;
+    mailimap_set *set;
+    mailimap_store_att_flags * store_flags;
+    int err = mailimap_select( m_imap, folder->getName().latin1());
+    if ( err != MAILIMAP_NO_ERROR ) {
+        Global::statusMessage(tr("error selecting mailbox: %1").arg(m_imap->imap_response));
+        return 0;
+    }
+    int last = m_imap->imap_selection_info->sel_exists;
+    if (last == 0) {
+        Global::statusMessage(tr("Mailbox has no mails!"));
+        return 0;
+    }
+    flist = mailimap_flag_list_new_empty();
+    mailimap_flag_list_add(flist,mailimap_flag_new_deleted());
+    store_flags = mailimap_store_att_flags_new_set_flags(flist);
+    set = mailimap_set_new_interval( 1, last );
+    err = mailimap_store(m_imap,set,store_flags);
+    mailimap_set_free( set );
+    mailimap_store_att_flags_free(store_flags);
+    if (err != MAILIMAP_NO_ERROR) {
+        Global::statusMessage(tr("error deleting mail: %s").arg(m_imap->imap_response));
+        return 0;
+    }
+    qDebug("deleting mail: %s",m_imap->imap_response);
+    /* should we realy do that at this moment? */
+    err = mailimap_expunge(m_imap);
+    if (err != MAILIMAP_NO_ERROR) {
+        Global::statusMessage(tr("error deleting mail: %s").arg(m_imap->imap_response));
+        return 0;
+    }
+    qDebug("Delete successfull %s",m_imap->imap_response);
+    return 1;
+}
+
+int IMAPwrapper::createMbox(const QString&folder,const Folder*parentfolder,const QString& delemiter,bool getsubfolder)
+{
+    if (folder.length()==0) return 0;
+    login();
+    if (!m_imap) {return 0;}
+    QString pre = account->getPrefix();
+    if (delemiter.length()>0 && pre.findRev(delemiter)!=pre.length()-1) {
+        pre+=delemiter;
+    }
+    if (parentfolder) {
+        pre += parentfolder->getDisplayName()+delemiter;
+    }
+    pre+=folder;
+    if (getsubfolder) {
+        if (delemiter.length()>0) {
+            pre+=delemiter;
+        } else {
+            Global::statusMessage(tr("Cannot create folder %1 for holding subfolders").arg(pre));
+            return 0;
+        }
+    }
+    qDebug("Creating %s",pre.latin1());
+    int res = mailimap_create(m_imap,pre.latin1());
+    if (res != MAILIMAP_NO_ERROR) {
+        Global::statusMessage(tr("%1").arg(m_imap->imap_response));
+        return 0;
+    }
+    return 1;
+}
+
+int IMAPwrapper::deleteMbox(const Folder*folder)
+{
+    if (!folder) return 0;
+    login();
+    if (!m_imap) {return 0;}
+    int res = mailimap_delete(m_imap,folder->getName());
+    if (res != MAILIMAP_NO_ERROR) {
+        Global::statusMessage(tr("%1").arg(m_imap->imap_response));
+        return 0;
+    }
+    return 1;
 }
