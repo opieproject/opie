@@ -33,6 +33,8 @@
 #ifndef QPE_GLOBAL_DEFINES_H
 #define QPE_GLOBAL_DEFINES_H
 
+#include <qglobal.h>
+
 /**
  * Defines for used compiler attributes
  *
