@@ -37,6 +37,7 @@ INTERFACES	= dateentry.ui \
 		  datebookweeklstheader.ui \		  
  		  datebookweeklstdayhdr.ui \		  
  		  repeatentrybase.ui \
+		  datebooksettingsbase.ui \
 		  noteentry.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
