@@ -181,7 +181,7 @@ inline void QPEApplication::setCurrentRotation( int r )
     }
 
     qDebug("calling qApp->desktop()->qwsDisplay()->setTransformation( %d )\n", e);
-    //qApp->desktop()->qwsDisplay()->setTransformation( e );
+    qApp->desktop()->qwsDisplay()->setTransformation( e );
 }
 
 
