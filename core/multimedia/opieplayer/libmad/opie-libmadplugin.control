@@ -7,3 +7,4 @@ Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Description: MP3 file plugin using libmad
  Plugin to play MP3 files with the mediaplayer in the Opie environment.
+ It also hast streaming support (Shoutcast/Icecast).
