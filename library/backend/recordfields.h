@@ -31,7 +31,9 @@ namespace Qtopia
     enum AddressBookFields {
 	AddressUid = UID_ID,	
 	AddressCategory = CATEGORY_ID,
-	
+
+	// NOTE: Order of fields dependency in backend/contact.cpp
+
 	Title,
 	FirstName,
 	MiddleName,

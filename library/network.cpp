@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_LANGLIST
 #include "qpe/network.h"
 #include "qpe/networkinterface.h"
 #include "qpe/global.h"
@@ -418,14 +419,16 @@ NetworkInterface* Network::loadPlugin(const QString& type)
 	if ( !lib.queryInterface( IID_Network, (QUnknownInterface**)&iface ) == QS_OK )
 	    return 0;
 	ifaces->insert(type,iface);
-	QString lang = getenv( "LANG" );
-	QTranslator * trans = new QTranslator(qApp);
-	QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/lib"+type+".qm";
-	if ( trans->load( tfn ))
-	    qApp->installTranslator( trans );
-	else
-	    delete trans;
-
+	QStringList langs = Global::languageList();
+	for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
+	    QString lang = *it;
+	    QTranslator * trans = new QTranslator(qApp);
+	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/lib"+type+".qm";
+	    if ( trans->load( tfn ))
+		qApp->installTranslator( trans );
+	    else
+		delete trans;
+	}
     }
     return iface;
 #else

@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+#define QTOPIA_INTERNAL_LANGLIST
 #include <qapplication.h>
 #include <qstyle.h>
 #include <qwidget.h>
@@ -244,10 +245,10 @@ QPEDecoration::QPEDecoration()
     imageClose = Resource::loadImage( "CloseButton" );
     imageHelp = Resource::loadImage( "HelpButton" );
     helpFile = QString(qApp->argv()[0]) + ".html";
-    QString lang = getenv( "LANG" );
-    helpExists = QFile::exists( QPEApplication::qpeDir() + "/help/" + lang + "/html/" + helpFile );
-    if ( !helpExists )
-	helpExists = QFile::exists( QPEApplication::qpeDir() + "/help/en/html/" + helpFile );
+    QStringList path = Global::helpPath();
+    helpExists = FALSE;
+    for (QStringList::ConstIterator it=path.begin(); it!=path.end() && !helpExists; ++it)
+	helpExists = QFile::exists( *it + "/" + helpFile );
 #ifndef MINIMIZE_HELP_HACK
     qpeManager = new QPEManager( this );
 #else

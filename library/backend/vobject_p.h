@@ -396,6 +396,9 @@ extern VObject* Parse_MIME_FromFile(CFile *file);
 extern VObject* Parse_MIME_FromFile(FILE *file);
 #endif
 
+extern DLLEXPORT(const char *) vObjectTypeInfo(VObject *o);
+
+
 #endif /* __VOBJECT_H__ */
 
 

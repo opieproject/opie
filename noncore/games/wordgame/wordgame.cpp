@@ -59,6 +59,13 @@ enum RuleEffects {
     Start=128
 };
 
+static int tile_smallw = 16;
+static int tile_smallh = 16;
+static int tile_bigw = 22;
+static int tile_bigh = 22;
+static int tile_stweak = -2;
+static int tile_btweak = -1;
+
 static const int rack_tiles=7;
 
 const char* sampleWGR=
@@ -111,6 +118,15 @@ const char* sampleWGR=
 WordGame::WordGame( QWidget* parent, const char* name, WFlags fl ) :
     QMainWindow(parent, name, fl)
 {
+    if ( qApp->desktop()->width() < 240 ) {
+	tile_smallw = 10;
+	tile_smallh = 10;
+	tile_bigw = 16;
+	tile_bigh = 16;
+	tile_stweak = 0;
+	tile_btweak = 0;
+    }
+
     setIcon( Resource::loadPixmap( "wordgame" ) );
     setCaption( tr("Word Game") );
 
@@ -247,6 +263,7 @@ void WordGame::startGame(const QStringList& playerlist)
 {
     toolbar->show();
     racks = new QWidgetStack(vbox);
+    racks->setFixedHeight(TileItem::bigHeight()+2);
     namelist.clear();
     nplayers=0;
     for (QStringList::ConstIterator it=playerlist.begin(); it!=playerlist.end(); ++it)
@@ -283,7 +300,6 @@ bool WordGame::loadRules(const QString &name)
     if ( htiles < 3 || vtiles < 3 )
 	return FALSE;
 
-    QPixmap bgshapes = Resource::loadPixmap(shapepixmap);
     QString rule_shapes;
     for (int i=0; i<vtiles; i++) {
 	QString line;
@@ -297,6 +313,12 @@ bool WordGame::loadRules(const QString &name)
 	rule_effects[re] = e;
 	if ( re++ < 10 ) ts >> e;
     }
+
+    QImage shim = Resource::loadImage(shapepixmap);
+    shim = shim.smoothScale((re-1)*TileItem::smallWidth(),TileItem::smallHeight());
+    QPixmap bgshapes;
+    bgshapes.convertFromImage(shim);
+
     rule_effects[re++] = 100; // default bonus
     board = new Board(bgshapes, htiles, vtiles, vbox);
     board->setRules(rule_shapes, rule_effects);
@@ -681,22 +703,22 @@ qDebug("%d,%d: %s (%d) for %d",current.x(),current.y(),st.latin1(),n,s);
 
 int TileItem::smallWidth()
 {
-    return 16;
+    return tile_smallw;
 }
 
 int TileItem::smallHeight()
 {
-    return 16;
+    return tile_smallh;
 }
 
 int TileItem::bigWidth()
 {
-    return 22;
+    return tile_bigw;
 }
 
 int TileItem::bigHeight()
 {
-    return 22;
+    return tile_bigh;
 }
 
 void TileItem::setState( State state )
@@ -720,26 +742,36 @@ void TileItem::setBig(bool b)
 
 void TileItem::drawShape(QPainter& p)
 {
-    static QFont value_font("heletica",8);
-    static QFont big_font("smoothtimes",17);
-    static QFont small_font("smoothtimes",10);
+    static QFont *value_font=0;
+    static QFont *big_font=0;
+    static QFont *small_font=0;
+    if ( !value_font ) {
+	value_font = new QFont("helvetica",8);
+	if ( TileItem::bigWidth() < 20 ) {
+	    big_font = new QFont("helvetica",12);
+	    small_font = new QFont("helvetica",8);
+	} else {
+	    big_font = new QFont("smoothtimes",17);
+	    small_font = new QFont("smoothtimes",10);
+	}
+    }
 
     QRect area(x(),y(),width(),height());
     p.setBrush(s == Floating ? yellow/*lightGray*/ : white);
     p.drawRect(area);
     if ( big ) {
-	p.setFont(value_font);
+	p.setFont(*value_font);
 	QString n = QString::number(t.value());
 	int w = p.fontMetrics().width('1');
 	int h = p.fontMetrics().height();
 	w *= n.length();
-	QRect valuearea(x()+width()-w-2,y()+height()-h+1,w,h);
+	QRect valuearea(x()+width()-w-1,y()+height()-h,w,h);
 	p.drawText(valuearea,AlignCenter,n);
-	p.setFont(big_font);
-	area = QRect(x(),y(),width()-2,height()-1);
+	p.setFont(*big_font);
+	area = QRect(x(),y()+tile_btweak,width()-4,height()-1);
     } else {
-	p.setFont(small_font);
-	area = QRect(x(),y()+2,width(),height()-2);
+	p.setFont(*small_font);
+	area = QRect(x()+1+tile_stweak,y()+1,width(),height()-3);
     }
     if ( t.value() == 0 )
 	p.setPen(darkGray);
@@ -750,6 +782,7 @@ Board::Board(QPixmap bgshapes, int w, int h, QWidget* parent) :
     QCanvasView(new QCanvas(bgshapes,w,h, TileItem::smallWidth(), TileItem::smallHeight()),
 		parent)
 {
+    setFixedSize(w*TileItem::smallWidth(),h*TileItem::smallHeight());
     grid = new TileItem*[w*h];
     memset(grid,0,w*h*sizeof(TileItem*));
     setFrameStyle(0);
@@ -762,6 +795,11 @@ Board::Board(QPixmap bgshapes, int w, int h, QWidget* parent) :
 Board::~Board()
 {
     delete canvas();
+}
+
+QSize Board::sizeHint() const
+{
+    return QSize(canvas()->width(),canvas()->height());
 }
 
 void Board::writeConfig(Config& cfg)
@@ -1179,6 +1217,11 @@ Rack::~Rack()
 {
     clear();
     delete canvas();
+}
+
+QSize Rack::sizeHint() const
+{
+    return QSize(-1,TileItem::bigHeight()+2);
 }
 
 void Rack::clear()

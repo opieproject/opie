@@ -33,7 +33,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#define QTOPIA_INTERNAL_LANGLIST
 #include "config.h"
+#include "global.h"
 
 
 /*!
@@ -95,14 +97,9 @@ Config::Config( const QString &name, Domain domain )
 {
     git = groups.end();
     read();
-
-    lang = getenv("LANG");
-    int i  = lang.find(".");
-    if ( i > 0 )
-	lang = lang.left( i );
-    i = lang.find( "_" );
-    if ( i > 0 )
-	glang = lang.left(i);
+    QStringList l = Global::languageList();
+    lang = l[0];
+    glang = l[1];
 }
 
 /*!

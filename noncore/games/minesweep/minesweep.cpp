@@ -219,6 +219,23 @@ void ResultIndicator::timerEvent( QTimerEvent *te )
 }
 
 
+class MineFrame : public QFrame
+{
+public:
+    MineFrame( QWidget *parent, const char *name = 0 )
+	:QFrame( parent, name ) {}
+    void setField( MineField *f ) { field = f; }
+protected:
+    void resizeEvent( QResizeEvent *e ) {
+	field->setAvailableRect( contentsRect());
+	QFrame::resizeEvent(e); 
+    }
+private:
+    MineField *field;
+};
+
+
+
 MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
 : QMainWindow( parent, name, f )
 {
@@ -226,8 +243,10 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     setCaption( tr("Mine Hunt") );
     setIcon( Resource::loadPixmap( "minesweep_icon" ) );
 
-    QPEToolBar *menuToolBar = new QPEToolBar( this );
-    QPEMenuBar *menuBar = new QPEMenuBar( menuToolBar );
+    QPEToolBar *toolBar = new QPEToolBar( this );
+    toolBar->setHorizontalStretchable( TRUE );
+
+    QPEMenuBar *menuBar = new QPEMenuBar( toolBar );
 
     QPopupMenu *gameMenu = new QPopupMenu( this );
     gameMenu->insertItem( tr("Beginner"), this, SLOT( beginner() ) );
@@ -235,9 +254,6 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     gameMenu->insertItem( tr("Expert"), this, SLOT( expert() ) );
 
     menuBar->insertItem( tr("Game"), gameMenu );
-
-    QPEToolBar *toolBar = new QPEToolBar( this );
-    toolBar->setHorizontalStretchable( TRUE );
     
     guessLCD = new QLCDNumber( toolBar );
     toolBar->setStretchableWidget( guessLCD );
@@ -265,17 +281,16 @@ MineSweep::MineSweep( QWidget* parent, const char* name, WFlags f )
     
     setToolBarsMovable ( FALSE );
 
-    addToolBar( menuToolBar );
     addToolBar( toolBar );
 
-    QFrame *mainframe = new QFrame( this );
+    MineFrame *mainframe = new MineFrame( this );
     mainframe->setFrameShape( QFrame::Box );
     mainframe->setFrameShadow( QFrame::Raised );
-    mainframe->setMargin(5);
+
     mainframe->setLineWidth(2);
-    QBoxLayout *box = new QVBoxLayout( mainframe );
+
     field = new MineField( mainframe );
-    box->addWidget( field, 0, AlignCenter );
+    mainframe->setField( field );
     QFont fnt = field->font();
     fnt.setBold( TRUE );
     field->setFont( QFont( fnt ) );
