@@ -151,12 +151,12 @@ void Wellenreiter::handleNotification( OPacket* p )
         if ( configwindow->parsePackets->isProtocolChecked( name ) )
         {
             QString action = configwindow->parsePackets->protocolAction( name );
-            qDebug( "action for '%s' seems to be '%s'", (const char*) name, (const char*) action );
+            qDebug( "parsePacket-action for '%s' seems to be '%s'", (const char*) name, (const char*) action );
             doAction( action, name, p );
         }
         else
         {
-            qDebug( "protocol '%s' not checked.", (const char*) name );
+            qDebug( "protocol '%s' not checked in parsePackets.", (const char*) name );
         }
     ++it;
     }
@@ -271,9 +271,47 @@ void Wellenreiter::handleData( OPacket* p, OWaveLanDataPacket* data )
 }
 
 
-QObject* childIfToParse( OPacket* p, const QString& protocol )
+QObject* Wellenreiter::childIfToParse( OPacket* p, const QString& protocol )
 {
-    //FIXME: Implement
+    if ( configwindow->parsePackets->isProtocolChecked( protocol ) )
+        if ( configwindow->parsePackets->protocolAction( protocol ) == "Discard!" )
+            return 0;
+
+    return p->child( protocol );
+}
+
+
+bool Wellenreiter::checkDumpPacket( OPacket* p )
+{
+    // go through all child packets and see if one is inside the child hierarchy for p
+    // if so, do what the user requested (protocolAction), e.g. pass or discard
+    if ( !configwindow->writeCaptureFile->isOn() )
+        return false;
+
+    QObjectList* l = p->queryList();
+    QObjectListIt it( *l );
+    QObject* o;
+
+    while ( (o = it.current()) != 0 )
+    {
+        QString name = it.current()->name();
+        if ( configwindow->capturePackets->isProtocolChecked( name ) )
+        {
+            QString action = configwindow->capturePackets->protocolAction( name );
+            qDebug( "capturePackets-action for '%s' seems to be '%s'", (const char*) name, (const char*) action );
+            if ( action == "Discard" )
+            {
+                logwindow->log( QString().sprintf( "(i) dump-discarding of '%s' packet requested.", (const char*) name ) );
+                return false;
+            }
+        }
+        else
+        {
+            qDebug( "protocol '%s' not checked in capturePackets.", (const char*) name );
+        }
+    ++it;
+    }
+    return true;
 }
 
 
@@ -281,10 +319,13 @@ void Wellenreiter::receivePacket( OPacket* p )
 {
     hexWindow()->log( p->dump( 8 ) );
 
-    handleNotification( p );
+    if ( checkDumpPacket( p ) )
+    {
+        pcap->dump( p );
+    }
 
     // check if we received a beacon frame
-    OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
+    OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( childIfToParse( p, "802.11 Management" ) );
     if ( beacon && beacon->managementType() == "Beacon" )
     {
         handleBeacon( p, beacon );
@@ -294,11 +335,14 @@ void Wellenreiter::receivePacket( OPacket* p )
     //TODO: WEP check here
 
     // check for a data frame
-    OWaveLanDataPacket* data = static_cast<OWaveLanDataPacket*>( p->child( "802.11 Data" ) );
+    OWaveLanDataPacket* data = static_cast<OWaveLanDataPacket*>( childIfToParse( p, "802.11 Data" ) );
     if ( data )
     {
         handleData( p, data );
     }
+
+    handleNotification( p );
+
 }
 
 
@@ -394,13 +438,15 @@ void Wellenreiter::startClicked()
     // open pcap and start sniffing
     if ( cardtype != DEVTYPE_FILE )
     {
-        if ( configwindow->writeCaptureFile->isEnabled() ) //FIXME: bug!?
+        pcap->open( interface );
+
+        if ( configwindow->writeCaptureFile->isOn() )
         {
             QString dumpname( configwindow->captureFileName->text() );
             dumpname.append( '-' );
             dumpname.append( QTime::currentTime().toString().replace( QRegExp( ":" ), "-" ) );
             dumpname.append( ".wellenreiter" );
-            pcap->open( interface, dumpname );
+            pcap->openDumpFile( dumpname );
         }
         else
         {

@@ -28,7 +28,7 @@
 ProtocolListView::ProtocolListView( QWidget* parent, const char* name, WFlags f )
                  :QScrollView( parent, name, f )
 {
-    actions = ( QString( "parsePackets" ) == QString( name ) );
+    parse = ( QString( "parsePackets" ) == QString( name ) );
 
     setMargins( 3, 3, 0, 0 );
     viewport()->setBackgroundColor( QCheckBox(0).palette().color( QPalette::Active, QColorGroup::Background ) );
@@ -40,7 +40,7 @@ ProtocolListView::ProtocolListView( QWidget* parent, const char* name, WFlags f 
     QHBox* hbox = new QHBox( vbox );
     hbox->setSpacing( 40 );
     new QLabel( tr( "Protocol Family" ), hbox );
-    if ( actions ) new QLabel( tr( "Perform Action" ), hbox );
+    new QLabel( tr( "Perform Action" ), hbox );
     QFrame* frame = new QFrame( vbox );
     frame->setFrameStyle( QFrame::HLine + QFrame::Sunken );
 
@@ -78,13 +78,14 @@ void ProtocolListView::addProtocol( const QString& name )
     QHBox* hbox = new QHBox( vbox );
     new QCheckBox( name, hbox, (const char*) name );
 
-    if ( actions )
+    if ( parse )
     {
         QComboBox* combo = new QComboBox( hbox, (const char*) name );
         #ifdef QWS
         combo->setFixedWidth( 75 );
         #endif
         combo->insertItem( "Ignore" );
+        combo->insertItem( "Discard!" );
         combo->insertItem( "TouchSound" );
         combo->insertItem( "AlarmSound" );
         combo->insertItem( "KeySound" );
@@ -92,6 +93,15 @@ void ProtocolListView::addProtocol( const QString& name )
         combo->insertItem( "LedOff" );
         combo->insertItem( "LogMessage" );
         combo->insertItem( "MessageBox" );
+    }
+    else
+    {
+        QComboBox* combo = new QComboBox( hbox, (const char*) name );
+        #ifdef QWS
+        combo->setFixedWidth( 75 );
+        #endif
+        combo->insertItem( "Pass" );
+        combo->insertItem( "Discard!" );
     }
 }
 
@@ -105,9 +115,6 @@ bool ProtocolListView::isProtocolChecked( const QString& name )
 
 QString ProtocolListView::protocolAction( const QString& name )
 {
-    //QObject * child ( const char * objName, const char * inheritsClass = 0,
-    //       bool recursiveSearch = TRUE )
-
     QComboBox* combo = (QComboBox*) child( (const char*) name, "QComboBox" );
     if ( combo )
         return combo->currentText();

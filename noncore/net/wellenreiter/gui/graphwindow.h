@@ -43,8 +43,11 @@ class MFrequencySpectrum : public QWidget
 
   protected:
     virtual void paintEvent( QPaintEvent* );
+    virtual void mousePressEvent( QMouseEvent* );
 
     void drawLine( QPainter* p, int x, int y, int width, const QColor& c );
+    void drawTopLine( QPainter* p, int x, int y, int width, const QColor& c );
+    void drawBottomLine( QPainter* p, int x, int y, int width, const QColor& c );
     void MFrequencySpectrum::drawBar( QPainter* p, int x, int y, int width, int height, int maxheight );
 
   private:

@@ -11,8 +11,8 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>209</width>
-            <height>287</height>
+            <width>261</width>
+            <height>280</height>
         </rect>
     </property>
     <property stdset="1">
@@ -95,21 +95,6 @@
                             <string>Driver:</string>
                         </property>
                     </widget>
-                    <widget row="4"  column="0"  rowspan="1"  colspan="2" >
-                        <class>QCheckBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>hopChannels</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Hop Channels</string>
-                        </property>
-                        <property stdset="1">
-                            <name>checked</name>
-                            <bool>true</bool>
-                        </property>
-                    </widget>
                     <widget row="2"  column="0"  rowspan="1"  colspan="4" >
                         <class>QCheckBox</class>
                         <property stdset="1">
@@ -121,42 +106,7 @@
                             <string>Use additional PRISM header</string>
                         </property>
                     </widget>
-                    <widget row="4"  column="3" >
-                        <class>QSpinBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>hopInterval</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>true</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>suffix</name>
-                            <string> ms</string>
-                        </property>
-                        <property stdset="1">
-                            <name>maxValue</name>
-                            <number>2000</number>
-                        </property>
-                        <property stdset="1">
-                            <name>minValue</name>
-                            <number>100</number>
-                        </property>
-                        <property stdset="1">
-                            <name>lineStep</name>
-                            <number>100</number>
-                        </property>
-                        <property stdset="1">
-                            <name>value</name>
-                            <number>1000</number>
-                        </property>
-                        <property>
-                            <name>whatsThis</name>
-                            <string>Choose the channel hop interval.</string>
-                        </property>
-                    </widget>
-                    <widget row="5"  column="0"  rowspan="1"  colspan="4" >
+                    <widget row="6"  column="0"  rowspan="1"  colspan="4" >
                         <class>QGroupBox</class>
                         <property stdset="1">
                             <name>name</name>
@@ -420,17 +370,6 @@
                             <string>Choose the type of driver used for sniffing.</string>
                         </property>
                     </widget>
-                    <widget row="4"  column="2" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>TextLabel1</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>every</string>
-                        </property>
-                    </widget>
                     <spacer row="3"  column="0" >
                         <property>
                             <name>name</name>
@@ -452,6 +391,78 @@
                             </size>
                         </property>
                     </spacer>
+                    <widget row="4"  column="2" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>TextLabel1</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>every</string>
+                        </property>
+                    </widget>
+                    <widget row="4"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>hopChannels</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Hop Channels</string>
+                        </property>
+                        <property stdset="1">
+                            <name>checked</name>
+                            <bool>true</bool>
+                        </property>
+                    </widget>
+                    <widget row="4"  column="3" >
+                        <class>QSpinBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>hopInterval</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>true</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>suffix</name>
+                            <string> ms</string>
+                        </property>
+                        <property stdset="1">
+                            <name>maxValue</name>
+                            <number>2000</number>
+                        </property>
+                        <property stdset="1">
+                            <name>minValue</name>
+                            <number>100</number>
+                        </property>
+                        <property stdset="1">
+                            <name>lineStep</name>
+                            <number>100</number>
+                        </property>
+                        <property stdset="1">
+                            <name>value</name>
+                            <number>1000</number>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Choose the channel hop interval.</string>
+                        </property>
+                    </widget>
+                    <widget row="5"  column="0"  rowspan="1"  colspan="4" >
+                        <class>QCheckBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>adaptiveHopping</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Use Adaptive(TM) Hop Scheme</string>
+                        </property>
+                    </widget>
                 </grid>
             </widget>
             <widget>
@@ -478,6 +489,10 @@
                         <property stdset="1">
                             <name>name</name>
                             <cstring>capturePackets</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>false</bool>
                         </property>
                         <property stdset="1">
                             <name>sizePolicy</name>
@@ -863,6 +878,12 @@
         <sender>writeCaptureFile</sender>
         <signal>toggled(bool)</signal>
         <receiver>captureFileName</receiver>
+        <slot>setEnabled(bool)</slot>
+    </connection>
+    <connection>
+        <sender>writeCaptureFile</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>capturePackets</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
 </connections>

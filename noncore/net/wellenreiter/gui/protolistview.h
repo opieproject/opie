@@ -18,8 +18,6 @@
 
 #include <qscrollview.h>
 #include <qdict.h>
-//#include <qcheckbox.h>
-//#include <qcombobox.h>
 class QCheckBox;
 class QComboBox;
 
@@ -39,7 +37,7 @@ class ProtocolListView : public QScrollView
 
   private:
     QVBox* vbox;
-    bool actions;
+    bool parse;
 };
 
 

@@ -29,8 +29,22 @@ MFrequencySpectrum::MFrequencySpectrum( int channels, QWidget* parent, const cha
         _dirty[i] = true;
     }
 
-    // we draw everything alone
+    // we draw everything on our own
     setBackgroundMode( QWidget::NoBackground );
+}
+
+
+void MFrequencySpectrum::drawTopLine( QPainter* p, int x, int y, int width, const QColor& c )
+{
+    p->setPen( c.light() );
+    p->drawLine( x, y, x+width-1, y );
+}
+
+
+void MFrequencySpectrum::drawBottomLine( QPainter* p, int x, int y, int width, const QColor& c )
+{
+    p->setPen( c.dark() );
+    p->drawLine( x, y, x+width-1, y );
 }
 
 
@@ -61,12 +75,13 @@ void MFrequencySpectrum::drawBar( QPainter* p, int x, int y, int width, int heig
         int h = (h2-h1)*i/maxheight + h1;
         int s = (s2-s1)*i/maxheight + s1;
         int v = (v2-v1)*i/maxheight + v1;
-        drawLine( p, x, y-i, width, QColor( h,s,v, QColor::Hsv ) );
+        if ( i == 0 )
+            drawBottomLine( p, x, y-i, width, QColor( h,s,v, QColor::Hsv ) );
+        else if ( i == height-1 )
+            drawTopLine( p, x, y-i, width, QColor( h,s,v, QColor::Hsv ) );
+        else
+            drawLine( p, x, y-i, width, QColor( h,s,v, QColor::Hsv ) );
     }
-
-    /*for ( int i = height; i < maxheight; ++i )
-        drawLine( p, x, y-i, width, QColor( 47, 68, 76 ) );*/
-
 }
 
 
@@ -98,6 +113,22 @@ void MFrequencySpectrum::paintEvent( QPaintEvent* e )
 }
 
 
+void MFrequencySpectrum::mousePressEvent( QMouseEvent* e )
+{
+    int xmargin = 5;
+    int ymargin = 2;
+    int y = size().height() - 2 * ymargin;
+    int x = 0;
+    int width = ( size().width() - 2 * xmargin ) / _channels;
+
+    QPoint pos = e->pos();
+    int channel = ( pos.x()-xmargin ) / width;
+    int height = 100 - ( pos.y()-ymargin )*100/y;
+    if ( channel < 15 ) _values[channel] = height;
+
+}
+
+
 Legende::Legende( int channels, QWidget* parent, const char* name, WFlags f )
         :QFrame( parent, name, f ), _channels( channels )
 {
@@ -125,10 +156,7 @@ MGraphWindow::MGraphWindow( QWidget* parent, const char* name, WFlags f )
 {
     spectrum = new MFrequencySpectrum( 14, this );
     legende = new Legende( 14, this );
-    startTimer( 50 ); //FIXME: tweak
-
-    //testGraph();
-
+    startTimer( 50 );
 };
 
 
@@ -146,7 +174,7 @@ void MGraphWindow::timerEvent( QTimerEvent* e )
 {
     for ( int i = 0; i < 14; i++ )
     {
-        spectrum->decrease( i, 1 ); //TODO: make this customizable?
+        spectrum->decrease( i, 1 );
     }
     spectrum->repaint();
 }
