@@ -24,9 +24,10 @@
 #include <qpe/resource.h>
 
 #include <qwidget.h>
+#include <qlabel.h>
 #include <qpixmap.h>
 #include <qpainter.h>
-
+#include "waitpopup.h"
 
 class Wait : public QWidget
 {
@@ -36,6 +37,7 @@ public:
     void paintEvent( QPaintEvent * );
     static Wait *getWaitObject();
 private:
+    WaitPopup* centralWait;
     QPixmap pm;
     bool waiting;
 };

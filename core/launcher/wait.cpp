@@ -21,6 +21,7 @@
 #include "wait.h"
 
 #include <qpe/resource.h>
+#include <qpe/config.h>
 
 #include <qwidget.h>
 #include <qpixmap.h>
@@ -35,6 +36,8 @@ Wait::Wait( QWidget *parent ) : QWidget( parent ),
 {
     setFixedSize( pm.size() );
     lastWaitObject = this;
+    centralWait = new WaitPopup( 0L );
+    centralWait->hide();
     hide();
 }
 
@@ -47,11 +50,21 @@ Wait *Wait::getWaitObject()
 
 void Wait::setWaiting( bool w )
 {
+    Config cfg ( "Launcher" );
+    cfg. setGroup ( "GUI" );
+
+
     waiting = w;
-    if ( w )
-	show();
-    else
-	hide();
+    if ( w ) {
+        if (   cfg. readBoolEntry ( "BigBusy" ) )  {
+            centralWait->show();
+        } else {
+            show();
+        }
+    } else {
+        centralWait->hide();
+        hide();
+    }
 }
 
 
