@@ -152,6 +152,7 @@ public:
     void reread( bool all = false );
     int fileCount()const;
     QString currentDir()const;
+    bool allItem( const QString& )const;
 protected:
     bool eventFilter (QObject *o, QEvent *e);
 private slots:

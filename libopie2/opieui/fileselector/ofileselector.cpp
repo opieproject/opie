@@ -530,6 +530,14 @@ bool OFileViewFileListView::eventFilter (QObject *, QEvent *e)
     return false;
 }
 
+/**
+ * @return true if the item show all files or directories
+ */
+bool OFileViewFileListView::allItem( const QString& item )const
+{
+    return m_sel->allItem( item );
+}
+
 void OFileViewFileListView::connectSlots()
 {
     connect(m_view, SIGNAL(clicked(QListViewItem*) ),
@@ -815,9 +823,9 @@ QWidget* OFileViewFileSystem::widget( QWidget* parent )
     return m_view;
 }
 
-void OFileViewFileSystem::activate( const QString& str)
+void OFileViewFileSystem::activate( const QString& str )
 {
-    m_all = ( str.find( "All" ) != -1 );
+    m_all = m_view->allItem( str );
 }
 
 
@@ -866,6 +874,8 @@ OFileSelector::OFileSelector( QWidget* parent, int mode, int sel,
 
     m_mode = mode;
     m_selector = sel;
+
+    m_allList = new QStringList();
 
     initUI();
     m_lneEdit->setText( fileName );
@@ -1023,10 +1033,12 @@ void OFileSelector::initViews()
     {
         m_views.insert( QObject::tr("Directories"), in );
         m_views.insert( QObject::tr("All Directories"), in );
+        m_allList->append( QObject::tr("All Directories") );
     } else {
         m_views.insert( QObject::tr("Documents"), new ODocumentFileView(this) );
         m_views.insert( QObject::tr("Files"), in );
         m_views.insert( QObject::tr("All Files"), in );
+        m_allList->append( QObject::tr("All Files") );
     }
 }
 
@@ -1146,6 +1158,14 @@ int OFileSelector::selector()const
     return m_selector;
 }
 
+/**
+ * @return true if the item show all files or directories
+ */
+bool OFileSelector::allItem( const QString& item )const
+{
+    return ( m_allList->findIndex( item ) != -1 );
+}
+
 QStringList OFileSelector::currentMimeType()const
 {
     return m_mimeType[m_cmbMime->currentText()];
@@ -1175,7 +1195,6 @@ void OFileSelector::slotViewChange( const QString& view )
     if (!interface)
         return;
 
-    interface->activate( view );
     if (m_current)
         m_stack->removeWidget( m_current->widget( m_stack ) );
 
@@ -1184,6 +1203,7 @@ void OFileSelector::slotViewChange( const QString& view )
     m_stack->addWidget( interface->widget(m_stack), id );
     m_stack->raiseWidget( id );
 
+    interface->activate( view );
     interface->reread();
     m_current = interface;
 

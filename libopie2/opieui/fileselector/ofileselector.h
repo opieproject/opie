@@ -121,6 +121,7 @@ public:
 
     int mode()const;
     int selector()const;
+    bool allItem( const QString& )const;
 
     /**
      * Set the Icon visible
@@ -211,6 +212,8 @@ private:
     QString m_startDir;
     int m_mode;
     int m_selector;
+
+    QStringList* m_allList;
 
     struct Data; // used for future versions
     Data *d;
