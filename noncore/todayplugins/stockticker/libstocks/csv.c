@@ -9,7 +9,7 @@
  *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.	 See the GNU
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Library General Public License for more details.
  *
  * You should have received a copy of the GNU Library General Public
@@ -19,6 +19,7 @@
  */
 
 #define __CSV_C__
+#ifdef __UNIX__
 
 #include <string.h>
 #include <stdlib.h>
@@ -126,152 +127,152 @@ stock *parse_csv_file(char *csv)
       test = line;
       valid = 0;
       while ( (test = strstr(test, "N/A")) )
-	{
-	  valid ++;
-	  test = test +3;
-	}
+  {
+    valid ++;
+    test = test +3;
+  }
       
       if (valid < 6)
-	{
-	  /* This Symbol is valid */
+  {
+    /* This Symbol is valid */
 
-	  StockPtr = malloc_stock();
-	  
-	  ptr = csv_strtok(line, ",");
-	  if (!ptr) return 0;
+    StockPtr = malloc_stock();
+    
+    ptr = csv_strtok(line, ",");
+    if (!ptr) return 0;
 
-	  symbol = (char *)malloc(strlen(ptr)+1);
-	  if (symbol==NULL)
-	    {
-	      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-		      ,__FILE__, __LINE__);
-	      exit(1);
-	    }
-	  strcpy((char *)(symbol), ptr);
-	  StockPtr->Symbol = symbol;
+    symbol = (char *)malloc(strlen(ptr)+1);
+    if (symbol==NULL)
+      {
+        fprintf(stderr,"Memory allocating error (%s line %d)\n"
+          ,__FILE__, __LINE__);
+        exit(1);
+      }
+    strcpy((char *)(symbol), ptr);
+    StockPtr->Symbol = symbol;
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
 
-	  name = (char *)malloc(strlen(ptr)+1);
-	  if (name==NULL)
-	    {
-	      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-		      ,__FILE__, __LINE__);
-	      exit(1);
-	    }
-	  strcpy((char *)(name), ptr);
-	  StockPtr->Name = name;
+    name = (char *)malloc(strlen(ptr)+1);
+    if (name==NULL)
+      {
+        fprintf(stderr,"Memory allocating error (%s line %d)\n"
+          ,__FILE__, __LINE__);
+        exit(1);
+      }
+    strcpy((char *)(name), ptr);
+    StockPtr->Name = name;
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
-	  sscanf(ptr,"%f",&(StockPtr->CurrentPrice));
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
+    sscanf(ptr,"%f",&(StockPtr->CurrentPrice));
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
 
-	  date = (char *)malloc(strlen(ptr)+1);
-	  if (date==NULL)
-	    {
-	      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-		      ,__FILE__, __LINE__);
-	      exit(1);
-	    }
-	  strcpy((char *)(date), ptr);
-	  StockPtr->Date = date;
+    date = (char *)malloc(strlen(ptr)+1);
+    if (date==NULL)
+      {
+        fprintf(stderr,"Memory allocating error (%s line %d)\n"
+          ,__FILE__, __LINE__);
+        exit(1);
+      }
+    strcpy((char *)(date), ptr);
+    StockPtr->Date = date;
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
 
-	  time = (char *)malloc(strlen(ptr)+1);
-	  if (time==NULL)
-	    {
-	      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-		      ,__FILE__, __LINE__);
-	      exit(1);
-	    }
-	  strcpy((char *)(time), ptr);
-	  StockPtr->Time = time;
-	  
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
-	  sscanf(ptr,"%f",&(StockPtr->Variation));      
-	  
-	  StockPtr->Pourcentage = 100 * StockPtr->Variation /
-	    (StockPtr->CurrentPrice - StockPtr->Variation);
+    time = (char *)malloc(strlen(ptr)+1);
+    if (time==NULL)
+      {
+        fprintf(stderr,"Memory allocating error (%s line %d)\n"
+          ,__FILE__, __LINE__);
+        exit(1);
+      }
+    strcpy((char *)(time), ptr);
+    StockPtr->Time = time;
+    
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
+    sscanf(ptr,"%f",&(StockPtr->Variation));      
+    
+    StockPtr->Pourcentage = 100 * StockPtr->Variation /
+      (StockPtr->CurrentPrice - StockPtr->Variation);
 
-	  StockPtr->LastPrice = StockPtr->CurrentPrice - StockPtr->Variation;
+    StockPtr->LastPrice = StockPtr->CurrentPrice - StockPtr->Variation;
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
-	  sscanf(ptr,"%f",&(StockPtr->OpenPrice));      
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
+    sscanf(ptr,"%f",&(StockPtr->OpenPrice));      
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
-	  sscanf(ptr,"%f",&(StockPtr->MaxPrice));      
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
+    sscanf(ptr,"%f",&(StockPtr->MaxPrice));      
 
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
-	  sscanf(ptr,"%f",&(StockPtr->MinPrice));      
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
+    sscanf(ptr,"%f",&(StockPtr->MinPrice));      
   
-	  ptr = csv_strtok(NULL, ",");
-	  if (!ptr) return 0;
-	  StockPtr->Volume = atoi(ptr);
+    ptr = csv_strtok(NULL, ",");
+    if (!ptr) return 0;
+    StockPtr->Volume = atoi(ptr);
 
-	  if( !FirstStockPtr ) 
-	    {
-	      FirstStockPtr = StockPtr;
-	      StockPtr->PreviousStock = 0;
-	    }
-	  
-	  StockPtr->NextStock = 0;
-	
-	  if (LastStockPtr) 
-	    {
-	      LastStockPtr->NextStock = StockPtr;
-	      StockPtr->PreviousStock = LastStockPtr;
-	    }
-	  
-	  LastStockPtr = StockPtr;
-	  
-	}
+    if( !FirstStockPtr ) 
+      {
+        FirstStockPtr = StockPtr;
+        StockPtr->PreviousStock = 0;
+      }
+    
+    StockPtr->NextStock = 0;
+  
+    if (LastStockPtr) 
+      {
+        LastStockPtr->NextStock = StockPtr;
+        StockPtr->PreviousStock = LastStockPtr;
+      }
+    
+    LastStockPtr = StockPtr;
+    
+  }
       else
-	{
-	  /* this symbol is not valid */
-	  /* Set the stock struct just with Symbol, all other are NULL */
-	  /* This can be used to see if the symbol has been reached are not */
+  {
+    /* this symbol is not valid */
+    /* Set the stock struct just with Symbol, all other are NULL */
+    /* This can be used to see if the symbol has been reached are not */
 
-	  StockPtr = malloc_stock();
-	  
-	  ptr = csv_strtok(line, ",");
-	  if (!ptr) return 0;
+    StockPtr = malloc_stock();
+    
+    ptr = csv_strtok(line, ",");
+    if (!ptr) return 0;
 
-	  symbol = (char *)malloc(strlen(ptr)+1);
-	  if (symbol==NULL)
-	    {
-	      fprintf(stderr,"Memory allocating error (%s line %d)\n"
-		      ,__FILE__, __LINE__);
-	      exit(1);
-	    }
-	  strcpy((char *)(symbol), ptr);
-	  StockPtr->Symbol = symbol;
+    symbol = (char *)malloc(strlen(ptr)+1);
+    if (symbol==NULL)
+      {
+        fprintf(stderr,"Memory allocating error (%s line %d)\n"
+          ,__FILE__, __LINE__);
+        exit(1);
+      }
+    strcpy((char *)(symbol), ptr);
+    StockPtr->Symbol = symbol;
 
-	  if( !FirstStockPtr ) 
-	    {
-	      FirstStockPtr = StockPtr;
-	      StockPtr->PreviousStock = 0;
-	    }
-	  
-	  StockPtr->NextStock = 0;
-	
-	  if (LastStockPtr) 
-	    {
-	      LastStockPtr->NextStock = StockPtr;
-	      StockPtr->PreviousStock = LastStockPtr;
-	    }
-	  
-	  LastStockPtr = StockPtr;
-	}
+    if( !FirstStockPtr ) 
+      {
+        FirstStockPtr = StockPtr;
+        StockPtr->PreviousStock = 0;
+      }
+    
+    StockPtr->NextStock = 0;
+  
+    if (LastStockPtr) 
+      {
+        LastStockPtr->NextStock = StockPtr;
+        StockPtr->PreviousStock = LastStockPtr;
+      }
+    
+    LastStockPtr = StockPtr;
+  }
 
       end_line++;
       line = end_line; 
@@ -321,7 +322,7 @@ stock *parse_csv_history_file(char *csv_file)
       *end_line = 0;
 
       StockPtr = malloc_stock();
-	  
+    
       /* Date */
       ptr = strtok(line, ",");
       if (!ptr) return 0;
@@ -340,11 +341,11 @@ stock *parse_csv_history_file(char *csv_file)
 
       date = (char *)malloc(DATE_LENGTH);
       if (date==NULL)
-	{
-	  fprintf(stderr,"Memory allocating error (%s line %d)\n"
-		  ,__FILE__, __LINE__);
-	  exit(1);
-	}
+  {
+    fprintf(stderr,"Memory allocating error (%s line %d)\n"
+      ,__FILE__, __LINE__);
+    exit(1);
+  }
       sprintf(date,"%.2d%.2d%.2d", year, month, day);
       StockPtr->Date = date;    
       
@@ -372,25 +373,25 @@ stock *parse_csv_history_file(char *csv_file)
 
       ptr = strtok(NULL, ",");
       if (!ptr) 
-	/* It seems to be an indice */
-	/* No volume for indices */
-	StockPtr->Volume = 0;
+  /* It seems to be an indice */
+  /* No volume for indices */
+  StockPtr->Volume = 0;
       else
-	StockPtr->Volume = atoi(ptr);
+  StockPtr->Volume = atoi(ptr);
 
       if( !FirstStockPtr ) 
-	{
-	  FirstStockPtr = StockPtr;
-	  StockPtr->PreviousStock = 0;
-	}
+  {
+    FirstStockPtr = StockPtr;
+    StockPtr->PreviousStock = 0;
+  }
       
       StockPtr->NextStock = 0;
       
       if (LastStockPtr) 
-	{
-	  LastStockPtr->NextStock = StockPtr;
-	  StockPtr->PreviousStock = LastStockPtr;
-	}
+  {
+    LastStockPtr->NextStock = StockPtr;
+    StockPtr->PreviousStock = LastStockPtr;
+  }
       
       LastStockPtr = StockPtr;
 
