@@ -71,9 +71,9 @@ void TodoView::setAscending( bool b ) {
     qWarning("setAscending %d", b );
     m_asc = b;
 }
-void TodoView::update(int uid, const SmallTodo& to ) {
+void TodoView::update(int, const SmallTodo&  ) {
     //m_main->slotUpate1( uid, to );
 }
-void TodoView::update(int uid, const OTodo& ev ) {
+void TodoView::update(int , const OTodo& ev ) {
     m_main->updateTodo( ev );
 }

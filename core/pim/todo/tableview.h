@@ -98,6 +98,8 @@ private slots:
         void slotCurrentChanged(int, int );
         void slotPriority();
     private:
+        void initConfig();
+        int m_completeStrokeWidth;
         bool m_row : 1;
         QPoint m_prevP;
     };

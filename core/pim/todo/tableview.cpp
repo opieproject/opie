@@ -26,11 +26,14 @@
 
 */
 #include <stdlib.h>
+#include <cmath>
 
 #include <qlineedit.h>
 #include <qtimer.h>
 #include <qpoint.h>
 #include <qpopupmenu.h>
+
+#include <qpe/config.h>
 
 #include "mainwindow.h"
 //#include "tableitems.h"
@@ -43,6 +46,12 @@ namespace {
     static const int RowHeight = 20;
 }
 
+
+void TableView::initConfig() {
+    Config config( "todo" );
+    config.setGroup( "Options" );
+    m_completeStrokeWidth = config.readNumEntry( "CompleteStrokeWidth", 8 );
+}
 
 TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
@@ -96,6 +105,9 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setSortOrder( 0 );
     setAscending( TRUE );
     m_first = true;
+
+    /* now let's init the config */
+    initConfig();
 }
 /* a new day has started
  * update the day
@@ -488,7 +500,7 @@ void TableView::timerEvent( QTimerEvent* ev ) {
 void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
     int row = rowAt(m_prevP.y());
     if ( row == rowAt( e->y() ) && row != -1 ) {
-        if ( abs( m_prevP.x() - e->x() ) >= 8 ) {
+        if ( ::abs( m_prevP.x() - e->x() ) >=  m_completeStrokeWidth ) {
             qWarning("current row %d", row );
             OTodo todo = sorted()[row];
             todo.setCompleted( !todo.isCompleted() );
