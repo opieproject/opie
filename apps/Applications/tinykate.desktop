@@ -5,4 +5,5 @@ Exec = tinykate
 File = 
 Icon = tinykate/tinykate
 Name = TinyKATE
+MimeType = text/plain
 Type = Applications
