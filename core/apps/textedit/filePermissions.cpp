@@ -35,7 +35,7 @@ filePermissions::filePermissions( QWidget* parent,  const char* name, bool modal
     : QDialog( parent, name, modal, fl )
 {
     if ( !name )
-  setName( tr("filePermissions") );
+  setName( tr("File Permissions") );
 //    qDebug("FilePermissions "+fileName);
     resize( 236, 210 ); 
     setMaximumSize( QSize( 236, 210 ) );
