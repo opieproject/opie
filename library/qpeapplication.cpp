@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.22 2002-10-04 00:41:19 sandman Exp $
+** $Id: qpeapplication.cpp,v 1.23 2002-10-04 01:22:50 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -1233,7 +1233,7 @@ void QPEApplication::internalSetStyle( const QString &style )
         StyleInterface *iface = 0;
 
         if (( lib-> queryInterface ( IID_Style, ( QUnknownInterface ** ) &iface ) == QS_OK ) && iface )
-            sty = iface-> create ( );
+            sty = iface-> style ( );
 
         if ( sty ) {
             setStyle ( sty );

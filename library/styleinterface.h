@@ -20,41 +20,40 @@
 
 #ifndef QT_NO_COMPONENT
 
-// {6C33B4F9-D529-453A-8FB3-DA42B21872BD}  
-# ifndef IID_Style 
-#  define IID_Style QUuid( 0x6c33b4f9, 0xd529, 0x453a, 0x8f, 0xb3, 0xda, 0x42, 0xb2, 0x18, 0x72, 0xbd) 
+// {17AF792C-E461-49A9-9B71-068B9A8DDAE4}
+#ifndef IID_Style
+#define IID_Style QUuid( 0x17af792c, 0xe461, 0x49a9, 0x9b, 0x71, 0x06, 0x8b, 0x9a, 0x8d, 0xda, 0xe4)
 #endif
 
-// {9757A252-3FD4-438F-A756-80BE4A9FB8DC}
-# ifndef IID_StyleSettings
-#  define IID_StyleSettings QUuid( 0x9757a252, 0x3fd4, 0x438f, 0xa7, 0x56, 0x80, 0xbe, 0x4a, 0x9f, 0xb8, 0xdc)
-# endif
+// {6C33B4F9-D529-453A-8FB3-DA42B21872BD}  
+# ifndef IID_StyleExtended
+#  define IID_StyleExtended QUuid( 0x6c33b4f9, 0xd529, 0x453a, 0x8f, 0xb3, 0xda, 0x42, 0xb2, 0x18, 0x72, 0xbd) 
+#endif
 
 #endif
 
 class QWidget;
 class QStyle;
 
+
+class QStyle;
+
 struct StyleInterface : public QUnknownInterface
 {
 	//! Return a new style.
-	virtual QStyle *create ( ) = 0;
-	
+	virtual QStyle *style() = 0;
+	//! Return a short name for the style.
+	virtual QString name() const = 0;
+};
+
+struct StyleExtendedInterface : public StyleInterface
+{
 	//! Return a (longer) description for the style.
 	virtual QString description ( ) = 0;
 
-	//! Return a short name for the style.
-	virtual QString name ( ) = 0;
+	//! Does this style support customization
+	virtual bool hasSettings ( ) const = 0;
 	
-	//! Return the library basename (libliquid.so => liquid)
-	virtual QCString key ( ) = 0;
-	
-	//! QT_VERSION like 1.2.3 == 123
-	virtual unsigned int version ( ) = 0;
-};
-
-struct StyleSettingsInterface : public QUnknownInterface
-{
 	//! Return a new settings page.
 	virtual QWidget *create ( QWidget *parent, const char *name = 0 ) = 0;
 	
