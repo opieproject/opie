@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -33,7 +33,9 @@
 #include <qhbuttongroup.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 
 void PickboardPicks::doMenu()
 {
@@ -248,6 +250,7 @@ static const char *Space_xpm[] = {
 PickboardPicks::PickboardPicks(QWidget* parent, const char* name, WFlags f ) :
     QFrame(parent,name,f)
 {
+    configs.setAutoDelete( TRUE );
 }
 
 void PickboardPicks::initialise(void)
@@ -256,22 +259,18 @@ void PickboardPicks::initialise(void)
     mode = 0;
 
     DictFilterConfig* dc = new DictFilterConfig(this);
-    dc->addSet("ABC");
-    dc->addSet("DEF");
-    dc->addSet("GHI");
-    dc->addSet("JKL");
-    dc->addSet("MNO");
-    dc->addSet("PQR");
-    dc->addSet("STU");
-    dc->addSet("VWX");
-    dc->addSet("YZ-'");
+    QStringList sets_a = QStringList::split(' ',tr("ABC DEF GHI JKL MNO PQR STU VWX YZ-'"));
+    QStringList sets = QStringList::split(' ',
+                                          tr("ABC%/1€“iso8859-15ÀÁÂÃÄÅÆÇ DEF%/1€iso8859-15ÐÈÉÊË GHI%/1€iso8859-15ÌÍÎÏ JKL MNO%/1€’iso8859-15ÑÒÓÔÕÖØ PQR%/1€Œiso8859-15Þ STU%/1€iso8859-15ßÙÚÛÜ VWX YZ-'%/1€iso8859-15Ýÿ"));
+    for (QStringList::ConstIterator it = sets.begin(), it_a = sets_a.begin(); it!=sets.end(); ++it,++it_a)
+        dc->addSet(*it_a,*it);
     dc->addMode("123");
     dc->addMode("@*!?");
-    dc->addMode("KEY");
-    dc->addMode("Space");
-    dc->addMode("Back");
-    dc->addMode("Enter");
-    dc->addMode("Shift");
+    dc->addMode(tr("KEY"));
+    dc->addMode(tr("Space"));
+    dc->addMode(tr("Back"));
+    dc->addMode(tr("Enter"));
+    dc->addMode(tr("Shift"));
     configs.append(dc);
 
     CharStringConfig* number = new CharStringConfig(this);

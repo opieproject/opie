@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -76,7 +76,8 @@ private:
     int nlc;
 };
 
-class PickboardConfig : QObject {
+class PickboardConfig : public QObject {
+    Q_OBJECT
 public:
     PickboardConfig(PickboardPicks* p) : parent(p), nrows(2), pressx(-1) { }
     virtual ~PickboardConfig();
@@ -104,6 +105,7 @@ private:
 };
 
 class StringConfig : public PickboardConfig {
+    Q_OBJECT
 public:
     StringConfig(PickboardPicks* p) : PickboardConfig(p) { }
 
@@ -112,13 +114,14 @@ public:
 protected:
     virtual QString text(int r, int i)=0;
     virtual bool spreadRow(int i)=0;
-    virtual QColor rowColor(int) { return ::Qt::black; }
+    virtual QColor rowColor(int) { return Qt::black; }
     virtual void pickInRow(int r, int xpos, bool press);
     virtual void updateItem(int r, int i);
     virtual bool highlight(int,int) const;
 };
 
 class CharStringConfig : public StringConfig {
+    Q_OBJECT
     QString input;
     QStringList chars;
 public:
@@ -134,7 +137,9 @@ protected:
 };
 
 class DictFilterConfig : public StringConfig {
+    Q_OBJECT
     QStringList matches;
+    QStringList sets_a;
     QStringList sets;
     QStringList othermodes;
     int lit0;
@@ -152,7 +157,7 @@ public:
 	lit1 = -1;
     }
 
-    void addSet(const QString& s);
+    void addSet(const QString& apperance, const QString& set);
     void addMode(const QString& s);
 
     void fillMenu(QPopupMenu& menu);
@@ -175,6 +180,7 @@ protected:
 };
 
 class CharConfig : public StringConfig {
+    Q_OBJECT
     QStringList chars1;
     QStringList chars2;
 public:
@@ -192,8 +198,7 @@ class KeycodeConfig : public PickboardConfig {
     QValueList<int> keys2;
     QValueList<QPixmap> keypm1;
     QValueList<QPixmap> keypm2;
-    static const int xw = 8;
-    static const int xmarg = 8;
+    enum { xw = 8, xmarg = 8 };
 
 public:
     KeycodeConfig(PickboardPicks* p) : PickboardConfig(p) { }

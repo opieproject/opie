@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -34,7 +34,25 @@
 #include <qhbuttongroup.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
+
+/*! \class Pickboard
+  \brief The Pickboard class provides an input method
+  based on a virtual keyboard combined with word-completion.
+
+  This version of Pickboard is Dual Licensed Software. However, for you to be
+  able to license the technology to others, you may require a T9(R) Text
+  Input license from Tegic Communications Corporation. More information can
+  be found at http://www.t9.com/.
+
+  \legalese
+  This version of Pickboard is Dual Licensed Software. However, for you to be
+  able to license the technology to others, you may require a T9(R) Text
+  Input license from Tegic Communications Corporation. More information can
+  be found at http://www.t9.com/.
+*/
 
 /* XPM */
 static const char * const menu_xpm[]={
@@ -74,7 +92,10 @@ Pickboard::Pickboard(QWidget* parent, const char* name, WFlags f) :
 {
     (new QHBoxLayout(this))->setAutoAdd(TRUE);
     d = new PickboardPrivate(this);
+// under Win32 we may not have smallsmooth font
+#ifndef Q_OS_WIN32
     setFont( QFont( "smallsmooth", 9 ) );
+#endif
 }
 
 Pickboard::~Pickboard()

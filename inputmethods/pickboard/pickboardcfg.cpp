@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -34,17 +34,19 @@
 #include <qhbuttongroup.h>
 #include <qpushbutton.h>
 #include <qmessagebox.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
+#endif
 
 static const char * pickboard_help =
-    "<h1>The Pickboard</h1>"
+    QT_TRANSLATE_NOOP("PickboardConfig", "<h1>The Pickboard</h1>"
     "<i>The smallest and fastest way to type.</i>"
     "<p>"
     "Enter a word by tapping letter-groups and picking the word."
     "<br>Enter spaces with \"Space\", or other keys through \"KEY\"."
     "<br>Use \"Shift\" to capitalize words that are not normally capitalized."
     "<br>Press \"Shift\" twice for an all-capitals word."
-    "<br>Add custom words by picking them, then selecting \"Add...\" from the menu on the right."
+    "<br>Add custom words by picking them, then selecting \"Add...\" from the menu on the right." )
     ;
 
 const int intermatchmargin=5;
@@ -76,10 +78,14 @@ void PickboardConfig::generateText(const QString& s)
 {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
     for (int i=0; i<(int)s.length(); i++) {
-	parent->emitKey(s[i].unicode(), 0, 0, true, false);
-	parent->emitKey(s[i].unicode(), 0, 0, false, false);
+        uint code = 0;
+        if ( s[i].unicode() >= 'a' && s[i].unicode() <= 'z' ) {
+            code = s[i].unicode() - 'a' + Key_A;
+        }
+        parent->emitKey(s[i].unicode(), code, 0, true, false);
+        parent->emitKey(s[i].unicode(), code, 0, false, false);
     }
-#endif   
+#endif
 }
 void PickboardConfig::generateKey( int k )
 {
@@ -112,9 +118,9 @@ void PickboardConfig::pickPoint(const QPoint& p, bool press)
 
 void PickboardConfig::fillMenu(QPopupMenu& menu)
 {
-    menu.insertItem("Reset",100);
+    menu.insertItem(tr("Reset"),100);
     menu.insertSeparator();
-    menu.insertItem("Help",1);
+    menu.insertItem(tr("Help"),1);
 }
 
 void PickboardConfig::doMenu(int i)
@@ -127,7 +133,7 @@ void PickboardConfig::doMenu(int i)
 	    }
 	    break;
 	case 1: {
-	    QMessageBox help("Pickboard Help", pickboard_help,
+            QMessageBox help(tr("Pickboard Help"), tr(pickboard_help),
 		QMessageBox::NoIcon, 1, 0, 0);
 	    help.showMaximized();
 	    help.exec();
@@ -158,10 +164,10 @@ void StringConfig::draw(QPainter* p)
 	for (; !(s=text(r,i)).isNull(); ++i) {
 	    int w = fm.width(s)+xw;
 	    if ( highlight(r,i) ) {
-		p->fillRect(x-xw/2,1+fm.descent()-fm.lineSpacing(),w,fm.lineSpacing(),::Qt::black);
-		p->setPen(::Qt::white);
+		p->fillRect(x-xw/2,1+fm.descent()-fm.lineSpacing(),w,fm.lineSpacing(),Qt::black);
+                p->setPen(Qt::white);
 	    }else{
-		p->setPen(::Qt::black);
+                p->setPen(Qt::black);
 	    }
 	    p->drawText(x,-fm.descent()-1,s);
 	    x += w;
@@ -293,9 +299,9 @@ PickboardAdd::PickboardAdd(QWidget* owner, const QStringList& setlist) :
     sv->addChild(letters);
     QHBox* hb = new QHBox(this);
     hb->setSpacing(0);
-    yes = new QPushButton("OK",hb);
+    yes = new QPushButton(tr("OK"),hb);
     yes->setEnabled(FALSE);
-    QPushButton *no = new QPushButton("Cancel",hb);
+    QPushButton *no = new QPushButton(tr("Cancel"),hb);
     connect(yes, SIGNAL(clicked()), this, SLOT(accept()));
     connect(no, SIGNAL(clicked()), this, SLOT(reject()));
 }
@@ -343,11 +349,11 @@ void DictFilterConfig::doMenu(int i)
     switch (i) {
       case 300:
 	if ( input.count() == 0 ) {
-	    QMessageBox::information(0, "Adding Words",
-		"To add words, pick the letters,\nthen "
+	    QMessageBox::information(0, tr("Adding Words"),
+		tr("To add words, pick the letters,\nthen "
 		"open the Add dialog. In that\ndialog, tap "
 		"the correct letters\nfrom the list "
-		"(tap twice for\ncapitals).");
+		"(tap twice for\ncapitals)."));
 	} else {
 	    PickboardAdd add(parent,capitalize(input));
 	    if ( add.exec() )
@@ -374,7 +380,7 @@ void DictFilterConfig::doMenu(int i)
 
 QString DictFilterConfig::text(int r, int i)
 {
-    QStringList l = r ? sets : input.isEmpty() ? othermodes : matches;
+    QStringList l = r ? sets_a : input.isEmpty() ? othermodes : matches;
     return i < (int)l.count() ?
 	(input.isEmpty() ? l[i] : capitalize(l[i]))
 	: QString::null;
@@ -426,16 +432,16 @@ void DictFilterConfig::pick(bool press, int row, int item)
 	if ( press ) {
 	    if ( input.isEmpty() ) {
 		lit0 = item;
-		if ( othermodes[item] == "Space" ) {
+                if ( othermodes[item] == PickboardPicks::tr("Space") ) {
 		    updateItem(row,item);
 		    generateText(" ");
-		} else if ( othermodes[item] == "Back" ) {
+                } else if ( othermodes[item] == PickboardPicks::tr("Back") ) {
 		    updateItem(row,item);
 		    generateKey(::Qt::Key_Backspace);
-		} else if ( othermodes[item] == "Enter" ) {
-		    updateItem(row,item);
+                } else if ( othermodes[item] == PickboardPicks::tr("Enter") ) {
+                    updateItem(row,item);
 		    generateKey(::Qt::Key_Return);
-		} else if ( othermodes[item] == "Shift" ) {
+                } else if ( othermodes[item] == PickboardPicks::tr("Shift") ) {
 		    updateItem(row,item);
 		    shift = (shift+1)%3;
 		}
@@ -455,8 +461,8 @@ void DictFilterConfig::pick(bool press, int row, int item)
 		updateRows(0,1);
 	    }
 	    if ( lit0 >= 0 ) {
-		if ( !shift || othermodes[lit0] != "Shift" ) {
-		    updateItem(0,lit0); 
+                if ( !shift || othermodes[lit0] != PickboardPicks::tr("Shift") ) {
+                    updateItem(0,lit0);
 		    lit0 = -1;
 		}
 	    }
@@ -466,10 +472,10 @@ void DictFilterConfig::pick(bool press, int row, int item)
 	if ( press && item >= 0 ) {
 	    lit1 = item;
 	    add(sets[item]);
-	    updateItem(1,item); 
+	    updateItem(1,item);
 	    updateRows(0,0);
 	} else {
-	    updateItem(1,lit1); 
+	    updateItem(1,lit1);
 	    lit1 = -1;
 	}
     }
@@ -568,9 +574,10 @@ bool DictFilterConfig::highlight(int r,int c) const
 }
 
 
-void DictFilterConfig::addSet(const QString& s)
+void DictFilterConfig::addSet(const QString& appearance, const QString& set)
 {
-    sets.append(s);
+    sets_a.append( appearance );
+    sets.append( set );
 }
 
 void DictFilterConfig::addMode(const QString& s)
@@ -580,7 +587,7 @@ void DictFilterConfig::addMode(const QString& s)
 
 void DictFilterConfig::fillMenu(QPopupMenu& menu)
 {
-    menu.insertItem("Add...",300);
+    menu.insertItem(tr("Add..."),300);
     StringConfig::fillMenu(menu);
 }
 
