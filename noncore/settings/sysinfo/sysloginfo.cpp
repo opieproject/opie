@@ -62,8 +62,8 @@ SyslogInfo::SyslogInfo( QWidget* parent,  const char* name, WFlags fl )
         : QWidget( parent, name, fl )
 {
     QGridLayout *layout = new QGridLayout( this );
-    layout->setSpacing( 4 );
-    layout->setMargin( 4 );
+    layout->setSpacing( 2 );
+    layout->setMargin( 0 );
 
     syslogview = new QTextView( this );
     syslogview->setTextFormat( PlainText );
