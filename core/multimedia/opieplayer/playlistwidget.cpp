@@ -471,50 +471,51 @@ const DocLnk *PlayListWidget::current() { // this is fugly
 //              }
 //          }
 //      } else
-//    qDebug("current");
-//     switch (tabWidget->currentPageIndex()) {
-//          case 0: //playlist
-//          {
-//    qDebug("playlist");
-    if ( mediaPlayerState->playlist() ) {
-        return d->selectedFiles->current();
-    }
-    else if ( d->setDocumentUsed && d->current ) {
-        return d->current;
-    } else {
-        return d->files->selected();
-    }
-//        }
-//        break;
-//        case 1://audio
-//        {
-//            qDebug("audioView");
-//            Global::findDocuments(&files, "audio/*");
-//            QListIterator<DocLnk> dit( files.children() );
-//            for ( ; dit.current(); ++dit ) {
-//                if( dit.current()->name() == audioView->currentItem()->text(0) && !insanityBool) {
-//                    qDebug("here");
-//                    insanityBool=TRUE;
-//                    return dit;
-//                }
-//            }
-//        }           
-//        break;
-//        case 2: // video
-//        {
-//            qDebug("videoView");
-//            Global::findDocuments(&vFiles, "video/*");
-//            QListIterator<DocLnk> Vdit( vFiles.children() );
-//            for ( ; Vdit.current(); ++Vdit ) {
-//                if( Vdit.current()->name() == videoView->currentItem()->text(0) && !insanityBool) {
-//                    insanityBool=TRUE;
-//                    return Vdit;
-//                }
-//            }
-//        }
-//        break;
-//      };
-//  return 0;
+
+
+    switch (tabWidget->currentPageIndex()) {
+      case 0: //playlist
+      {
+          qDebug("playlist");
+          if ( mediaPlayerState->playlist() ) {
+              return d->selectedFiles->current();
+          }
+          else if ( d->setDocumentUsed && d->current ) {
+              return d->current;
+          } else {
+              return d->files->selected();
+          }
+      }
+      break;
+      case 1://audio
+      {
+          qDebug("audioView");
+//             Global::findDocuments(&files, "audio/*");
+          QListIterator<DocLnk> dit( files.children() );
+          for ( ; dit.current(); ++dit ) {
+              if( dit.current()->name() == audioView->currentItem()->text(0) && !insanityBool) {
+                  qDebug("here");
+                  insanityBool=TRUE;
+                  return dit;
+              }
+          }
+      }           
+      break;
+      case 2: // video
+      {
+          qDebug("videoView");
+//             Global::findDocuments(&vFiles, "video/*");
+          QListIterator<DocLnk> Vdit( vFiles.children() );
+          for ( ; Vdit.current(); ++Vdit ) {
+              if( Vdit.current()->name() == videoView->currentItem()->text(0) && !insanityBool) {
+                  insanityBool=TRUE;
+                  return Vdit;
+              }
+          }
+      }
+      break;
+    };
+    return 0;
 }
 
 bool PlayListWidget::prev() {
@@ -794,12 +795,10 @@ void PlayListWidget::btnPlay(bool b) {
       {
           addToSelection( audioView->selectedItem() );
           mediaPlayerState->setPlaying(b);
-//            qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(1);
-           audioView->clearSelection();
-//      d->selectedFiles->unSelect();
-//            mediaPlayerState->setPlaying(FALSE);
+          d->selectedFiles->unSelect();
+//          audioView->clearSelection();
       }
       break;
       case 2:
@@ -809,9 +808,8 @@ void PlayListWidget::btnPlay(bool b) {
           qApp->processEvents();
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(2);
-           videoView->clearSelection();
-//      d->selectedFiles->unSelect();
-//            mediaPlayerState->setPlaying(FALSE);
+          d->selectedFiles->unSelect();
+//          videoView->clearSelection();
       }
       break;
     };
