@@ -66,7 +66,7 @@ void SysFileMonitor::timerEvent(QTimerEvent*)
     
     // st_size is no use, it's 0 for /proc/mounts too. Read it all.
     static int mtabSize = 0;
-    QFile f( "/etc/mtab" );
+    QFile f( "/proc/mounts" );
     if ( f.open(IO_ReadOnly) ) {
 #if 0
 	// readAll does not work correctly on sequential devices (as eg. /proc files)
