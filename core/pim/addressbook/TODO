@@ -29,7 +29,6 @@ Urgent:
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
 
-- Fix handling of 3 Firstnames
 
 Important:
 ----------
@@ -114,3 +113,4 @@ Fixed/Ready:
 - Default Email-button: A lot of problems:
 	If on second tab: The combo chooser is on the top left of the screen ! :(
 - Default Email-Button: Sometimes not hiding the textfields completely
+- Fix handling of 3 Firstnames

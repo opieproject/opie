@@ -157,61 +157,66 @@ void ContactEditor::init() {
 	txtJobTitle = new QLineEdit( container );
 	gl->addWidget( txtJobTitle, 1, 1 );
 
-	l = new QLabel( tr( "Organization" ), container );
+	l = new QLabel( tr("Suffix"), container );
 	gl->addWidget( l, 2, 0 );
+	txtSuffix = new QLineEdit( container );
+	gl->addWidget( txtSuffix, 2, 1 );
+
+	l = new QLabel( tr( "Organization" ), container );
+	gl->addWidget( l, 3, 0 );
 	txtOrganization = new QLineEdit( container );
-	gl->addWidget( txtOrganization, 2, 1 );
+	gl->addWidget( txtOrganization, 3, 1 );
 
 	// Chooser 1 
 	cmbChooserField1 = new QComboBox( FALSE, container );
 	cmbChooserField1->setMaximumWidth( 90 );
-	gl->addWidget( cmbChooserField1, 3, 0 );
+	gl->addWidget( cmbChooserField1, 4, 0 );
 	// Textfield for chooser 1.
 	// Now use Widgetstack to contain the textfield and the default-email combo !
 	m_widgetStack1 = new QWidgetStack( container );
 	txtChooserField1 = new QLineEdit( m_widgetStack1 );
 	m_widgetStack1 -> addWidget( txtChooserField1, TextField );
-	gl->addWidget( m_widgetStack1, 3, 1 );
+	gl->addWidget( m_widgetStack1, 4, 1 );
 	m_widgetStack1 -> raiseWidget( TextField );
 
 	// Chooser 2
 	cmbChooserField2 = new QComboBox( FALSE, container );
 	cmbChooserField2->setMaximumWidth( 90 );
-	gl->addWidget( cmbChooserField2, 4, 0 );
+	gl->addWidget( cmbChooserField2, 5, 0 );
 	// Textfield for chooser 2
 	// Now use WidgetStack to contain the textfield and the default-email combo!
 	m_widgetStack2 = new QWidgetStack( container );
 	txtChooserField2 = new QLineEdit( m_widgetStack2 );
 	m_widgetStack2 -> addWidget( txtChooserField2, TextField );
-	gl->addWidget( m_widgetStack2, 4, 1 );
+	gl->addWidget( m_widgetStack2, 5, 1 );
 	m_widgetStack2 -> raiseWidget( TextField );
 
 	// Chooser 3
 	cmbChooserField3 = new QComboBox( FALSE, container );
 	cmbChooserField3->setMaximumWidth( 90 );
-	gl->addWidget( cmbChooserField3, 5, 0 );
+	gl->addWidget( cmbChooserField3, 6, 0 );
 	// Textfield for chooser 2
 	// Now use WidgetStack to contain the textfield and the default-email combo!
 	m_widgetStack3 = new QWidgetStack( container );
 	txtChooserField3 = new QLineEdit( m_widgetStack3 );
 	m_widgetStack3 -> addWidget( txtChooserField3, TextField );
-	gl->addWidget( m_widgetStack3, 5, 1 );
+	gl->addWidget( m_widgetStack3, 6, 1 );
 	m_widgetStack3 -> raiseWidget( TextField );
 
 	l = new QLabel( tr( "File As" ), container );
-	gl->addWidget( l, 6, 0 );
+	gl->addWidget( l, 7, 0 );
 	cmbFileAs = new QComboBox( TRUE, container );
-	gl->addWidget( cmbFileAs, 6, 1 );
+	gl->addWidget( cmbFileAs, 7, 1 );
 
 	labCat = new QLabel( tr( "Category" ), container );
-	gl->addWidget( labCat, 7, 0 );
+	gl->addWidget( labCat, 8, 0 );
 	cmbCat = new CategorySelect( container );
-	gl->addWidget( cmbCat, 7, 1 );
+	gl->addWidget( cmbCat, 8, 1 );
 	labCat->show();
 	cmbCat->show();
 
 	btnNote = new QPushButton( tr( "Notes..." ), container );
-	gl->addWidget( btnNote, 8, 1 );
+	gl->addWidget( btnNote, 9, 1 );
 
 	tabMain->insertTab( tabViewport, tr( "General" ) );
 
@@ -618,10 +623,10 @@ void ContactEditor::init() {
 	txtLastName = new QLineEdit( dlgName );
 	gl->addWidget( txtLastName, 2, 1 );
 
-	l = new QLabel( tr("Suffix"), dlgName );
-	gl->addWidget( l, 3, 0 );
-	txtSuffix = new QLineEdit( dlgName );
-	gl->addWidget( txtSuffix, 3, 1 );
+// 	l = new QLabel( tr("Suffix"), dlgName );
+// 	gl->addWidget( l, 3, 0 );
+// 	txtSuffix = new QLineEdit( dlgName );
+// 	gl->addWidget( txtSuffix, 3, 1 );
         space = new QSpacerItem(1,1,
                                 QSizePolicy::Maximum,
                                 QSizePolicy::MinimumExpanding );
@@ -1015,14 +1020,16 @@ void ContactEditor::slotAddressTypeChange( int index ) {
 
 void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 
+	qWarning( "ContactEditor::slotFullNameChange( %s )", textChanged.latin1() );
+
 	int index = cmbFileAs->currentItem();
 
 	cmbFileAs->clear();
 
-	cmbFileAs->insertItem( parseName( textChanged, 0 ) );
-	cmbFileAs->insertItem( parseName( textChanged, 1 ) );
-	cmbFileAs->insertItem( parseName( textChanged, 2 ) );
-	cmbFileAs->insertItem( parseName( textChanged, 3 ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_FL ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_FMLS ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_LF ) );
+	cmbFileAs->insertItem( parseName( textChanged, NAME_LFM ) );
 
 	cmbFileAs->setCurrentItem( index );
 
@@ -1058,7 +1065,7 @@ void ContactEditor::slotName() {
 		txtFirstName->setText( parseName(txtFullName->text(), NAME_F) );
 		txtMiddleName->setText( parseName(txtFullName->text(), NAME_M) );
 		txtLastName->setText( parseName(txtFullName->text(), NAME_L) );
-		txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
+		// txtSuffix->setText( parseName(txtFullName->text(), NAME_S) );
 	}
 	dlgName->showMaximized();
 	if ( dlgName->exec() ) {
@@ -1102,194 +1109,99 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	QString strSuffix;
 	QString strTitle;
 	int commapos;
-	int spCount;
-	int spPos;
-	int spPos2;
+	bool haveLastName = false;
 
+	qWarning("Fullname: %s", simplifiedName.latin1());
 
 	commapos = simplifiedName.find( ',', 0, TRUE);
-	spCount = simplifiedName.contains( ' ', TRUE );
+	if ( commapos >= 0 ) {
+		qWarning(" Commapos: %d", commapos );
 
-	if ( commapos == -1 ) {
+		// A comma (",") separates the lastname from one or
+		// many first names. Thus, remove the lastname from the 
+		// String and parse the firstnames.
 
-		switch (spCount) {
-			case 0:
-				//return simplifiedName;
-				if (txtLastName->text() != "") {
-					strLastName = simplifiedName;
-					break;
-				}
-				if (txtMiddleName->text() != "") {
-					strMiddleName = simplifiedName;
-					break;
-				}
-				if (txtSuffix->text() != "") {
-					strSuffix = simplifiedName;
-					break;
-				}
-				strFirstName = simplifiedName;
-				break;
+		strLastName = simplifiedName.left( commapos );
+		simplifiedName= simplifiedName.mid( commapos + 1 );
+		haveLastName = true;
+		qWarning("Fullname without ',': %s", simplifiedName.latin1());
 
-			case 1:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strFirstName = simplifiedName.left( spPos );
-				strLastName = simplifiedName.mid( spPos + 1 );
-				break;
+		// If we have any lastname, we should now split all first names.
+		// The first one will be the used as first, the rest as "middle names"
 
-			case 2:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strFirstName = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				strLastName = simplifiedName.mid( spPos2 + 1 );
-				break;
+		QStringList allFirstNames = QStringList::split(" ", simplifiedName);
+		QStringList::Iterator it = allFirstNames.begin();
+		strFirstName = *it++;
+		QStringList allSecondNames;
+		for ( ; it != allFirstNames.end(); ++it )
+			allSecondNames.append( *it );
+		
+		strMiddleName = allSecondNames.join(" ");
 
-			case 3:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strFirstName = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strLastName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
-				strSuffix = simplifiedName.mid( spPos + 1 );
-				break;
-
-			case 4:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strTitle = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strLastName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				strSuffix = simplifiedName.mid( spPos2 + 1 );
-				break;
-
-			default:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strTitle = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strLastName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				strSuffix = simplifiedName.mid( spPos2 + 1 );
-				break;
-		}
 	} else {
-		simplifiedName.replace( commapos, 1, " " );
-		simplifiedName = simplifiedName.simplifyWhiteSpace();
 
-		switch (spCount) {
-			case 0:
-				//return simplifiedName;
-				if (txtLastName->text() != "") {
-					strLastName = simplifiedName;
-					break;
-				}
-				if (txtMiddleName->text() != "") {
-					strMiddleName = simplifiedName;
-					break;
-				}
-				if (txtSuffix->text() != "") {
-					strSuffix = simplifiedName;
-					break;
-				}
-				strFirstName = simplifiedName;
-				break;
+		// No comma separator used: We use the first word as firstname, the 
+		// last as second/lastname and everything in the middle as middlename
 
-			case 1:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strLastName = simplifiedName.left( spPos );
-				strFirstName = simplifiedName.mid( spPos + 1 );
-				break;
+		QStringList allNames = QStringList::split(" ", simplifiedName);
+		QStringList::Iterator it = allNames.begin();
+		strFirstName = *it++;
+		QStringList allSecondNames;
+		for ( ; it != --allNames.end(); ++it )
+			allSecondNames.append( *it );
+		
+		strMiddleName = allSecondNames.join(" ");
+		strLastName = *(--allNames.end());
 
-			case 2:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strLastName = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				strMiddleName = simplifiedName.mid( spPos2 + 1 );
-				break;
-
-			case 3:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strLastName = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
-				strSuffix = simplifiedName.mid( spPos + 1 );
-				break;
-
-			case 4:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strLastName = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strTitle = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos2 );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				strSuffix = simplifiedName.mid( spPos2 + 1 );
-				break;
-
-			default:
-				spPos = simplifiedName.find( ' ', 0, TRUE );
-				strLastName = simplifiedName.left( spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strTitle = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				spPos = simplifiedName.find( ' ', spPos2 + 1, TRUE );
-				strFirstName = simplifiedName.mid( spPos2 + 1, (spPos - 1) - spPos );
-				spPos2 = simplifiedName.find( ' ', spPos + 1, TRUE );
-				strMiddleName = simplifiedName.mid( spPos + 1, (spPos2 - 1) - spPos );
-				strSuffix = simplifiedName.mid( spPos2 + 1 );
-				break;
-		}
 	}
+
+	qWarning(" strFirstName: %s",  strFirstName.latin1());
+	qWarning(" strMiddleName: %s",  strMiddleName.latin1());
+	qWarning(" strLastName: %s",  strLastName.latin1());
+	qWarning(" strSuffix: %s",  strSuffix.latin1());
+	qWarning(" strTitle: %s",  strTitle.latin1());
+
 	switch (type) {
-		case NAME_FL:
-			return strFirstName + " " + strLastName;
-
-		case NAME_LF:
-			return strLastName + ", " + strFirstName;
-
-		case NAME_LFM:
-			return strLastName + ", " + strFirstName + " " + strMiddleName;
-
-		case NAME_FMLS:
-			return strFirstName + " " + strMiddleName + " " + strLastName + " " + strSuffix;
-
-		case NAME_F:
-			return strFirstName;
-
-		case NAME_M:
-			return strMiddleName;
-
-		case NAME_L:
-			return strLastName;
-
-		case NAME_S:
-			return strSuffix;
-
+	case NAME_FL:
+		return strFirstName + " " + strLastName;
+		
+	case NAME_LF:
+		return strLastName + ", " + strFirstName;
+		
+	case NAME_LFM:
+		return strLastName + ", " + strFirstName + " " + strMiddleName;
+		
+	case NAME_FMLS:
+		return strFirstName + " " + strMiddleName + " " + strLastName + " " + strSuffix;
+		
+	case NAME_F:
+		return strFirstName;
+		
+	case NAME_M:
+		return strMiddleName;
+		
+	case NAME_L:
+		return strLastName;
+		
+	case NAME_S:
+		return strSuffix;
+		
 	}
 	return QString::null;
 }
 
 void ContactEditor::cleanupFields() {
 	QStringList::Iterator it = slChooserValues.begin();
-
+	
 	for ( int i = 0; it != slChooserValues.end(); i++, ++it ) {
 		(*it) = "";
 	}
-
+	
 	for ( int i = 0; i < 7; i++ ) {
 		slHomeAddress[i] = "";
 		slBusinessAddress[i] = "";
 	}
-
+	
 	QListIterator<QLineEdit> itLV( listValue );
 	for ( ; itLV.current(); ++itLV ) {
 		(*itLV)->setText( "" );
@@ -1314,192 +1226,197 @@ void ContactEditor::cleanupFields() {
 	txtTmp->setText("");
 	txtTmp = cmbFileAs->lineEdit();
 	txtTmp->setText("");
-
+	
 }
 
 void ContactEditor::setEntry( const OContact &entry ) {
-
+	
 	initializing = true;
-
+	
 	cleanupFields();
-
+	
 	ent = entry;
-
+	
 	emails = QStringList(ent.emailList());
 	defaultEmail = ent.defaultEmail();
 	if (defaultEmail.isEmpty()) defaultEmail = emails[0];
 	qDebug("default email=%s",defaultEmail.latin1());
-
+	
 	useFullName = false;
 	txtFirstName->setText( ent.firstName() );
 	txtMiddleName->setText( ent.middleName() );
 	txtLastName->setText( ent.lastName() );
 	txtSuffix->setText( ent.suffix() );
+	
+// 	QString *tmpString = new QString;
+// 	*tmpString = ent.firstName() + " " + ent.middleName() +
+// 		+ " " + ent.lastName() + " " + ent.suffix();
+//	txtFullName->setText( tmpString->simplifyWhiteSpace() );
 
-	QString *tmpString = new QString;
-	*tmpString = ent.firstName() + " " + ent.middleName() +
-		+ " " + ent.lastName() + " " + ent.suffix();
-
-	txtFullName->setText( tmpString->simplifyWhiteSpace() );
-
+	// Lastnames with multiple words need to be protected by a comma !
+	if ( ent.lastName().contains( ' ', TRUE ) )
+		txtFullName->setText( ent.lastName() + ", " + ent.firstName() + " " + ent.middleName() );
+	else
+		txtFullName->setText( ent.firstName() + " " + ent.middleName() + " " + ent.lastName() );
+	
 	cmbFileAs->setEditText( ent.fileAs() );
-
+	
 	//	if (hasTitle)
-		txtJobTitle->setText( ent.jobTitle() );
-
-		//	if (hasCompany)
-		txtOrganization->setText( ent.company() );
-
-		//	if (hasNotes)
-		txtNote->setText( ent.notes() );
-
-		//	if (hasStreet) {
-		slHomeAddress[0] = ent.homeStreet();
-		slBusinessAddress[0] = ent.businessStreet();
-		//	}
-
-//	if (hasCity) {
-		slHomeAddress[3] = ent.homeCity();
-		slBusinessAddress[3] = ent.businessCity();
-//}
-
-//if (hasState) {
-		slHomeAddress[4] = ent.homeState();
-		slBusinessAddress[4] = ent.businessState();
-//}
-
-//if (hasZip) {
-		slHomeAddress[5] = ent.homeZip();
-		slBusinessAddress[5] = ent.businessZip();
-//}
-
-//if (hasCountry) {
-		slHomeAddress[6] = ent.homeCountry();
-		slBusinessAddress[6] = ent.businessCountry();
-//}
-
+	txtJobTitle->setText( ent.jobTitle() );
+	
+	//	if (hasCompany)
+	txtOrganization->setText( ent.company() );
+	
+	//	if (hasNotes)
+	txtNote->setText( ent.notes() );
+	
+	//	if (hasStreet) {
+	slHomeAddress[0] = ent.homeStreet();
+	slBusinessAddress[0] = ent.businessStreet();
+	//	}
+	
+	//	if (hasCity) {
+	slHomeAddress[3] = ent.homeCity();
+	slBusinessAddress[3] = ent.businessCity();
+	//}
+	
+	//if (hasState) {
+	slHomeAddress[4] = ent.homeState();
+	slBusinessAddress[4] = ent.businessState();
+	//}
+	
+	//if (hasZip) {
+	slHomeAddress[5] = ent.homeZip();
+	slBusinessAddress[5] = ent.businessZip();
+	//}
+	
+	//if (hasCountry) {
+	slHomeAddress[6] = ent.homeCountry();
+	slBusinessAddress[6] = ent.businessCountry();
+	//}
+	
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); itLE.current()/* != slDynamicEntries.end()*/; ++it, ++itLE) {
-
+		
 		qWarning(" Filling dynamic Field: %s", (*it).latin1() );
-
+		
 		if ( *it ==  "Department"  )
 			(*itLE)->setText( ent.department() );
-
+		
 		if ( *it == "Company" )
 			(*itLE)->setText( ent.company() );
-
+		
 		if ( *it ==  "Office" )
 			(*itLE)->setText( ent.office() );
-
+		
 		if ( *it ==  "Profession" )
 			(*itLE)->setText( ent.profession() );
-
+		
 		if ( *it == "Assistant" )
 			(*itLE)->setText( ent.assistant() );
-
+		
 		if ( *it == "Manager" )
 			(*itLE)->setText( ent.manager() );
-
+		
 		if ( *it == "Spouse" )
 			(*itLE)->setText( ent.spouse() );
-
+		
 		if ( *it == "Nickname" ){
 			qWarning("**** Nichname: %s", ent.nickname().latin1() );
 			(*itLE)->setText( ent.nickname() );
 		}
-
+		
 		if ( *it == "Children" )
 			(*itLE)->setText( ent.children() );
-
+		
 	}
-
+	
 	QStringList::Iterator itV;
 	for ( it = slChooserNames.begin(), itV = slChooserValues.begin(); it != slChooserNames.end(); ++it, ++itV ) {
-
+		
 		if ( ( *it == "Business Phone") || ( *it == "Work Phone" ) )
 			*itV = ent.businessPhone();
-/*
-		if ( *it == "Business 2 Phone" )
-			*itV = ent.business2Phone();
-*/
+		/*
+		  if ( *it == "Business 2 Phone" )
+		  *itV = ent.business2Phone();
+		  */
 		if ( ( *it == "Business Fax") || ( *it == "Work Fax" ) )
 			*itV = ent.businessFax();
-
+		
 		if ( ( *it == "Business Mobile" ) || ( *it == "work Mobile" ) )
 			*itV = ent.businessMobile();
-/*
-		if ( *it == "Company Phone" )
-			*itV = ent.companyPhone();
-*/
+		/*
+		  if ( *it == "Company Phone" )
+		  *itV = ent.companyPhone();
+		  */
 		if ( *it == "Default Email" )
 			*itV = ent.defaultEmail();
-
+		
 		if ( *it == "Emails" )
 			*itV = ent.emailList().join(", ");  // :SX
-
+		
 		if ( *it == "Home Phone" )
 			*itV = ent.homePhone();
-/*
-		if ( *it == "Home 2 Phone" )
-			*itV = ent.home2Phone();
-*/
+		/*
+		  if ( *it == "Home 2 Phone" )
+		  *itV = ent.home2Phone();
+		  */
 		if ( *it == "Home Fax" )
 			*itV = ent.homeFax();
-
+		
 		if ( *it == "Home Mobile" )
 			*itV = ent.homeMobile();
-/*
-		if ( *it == "Car Phone" )
-			*itV = ent.carPhone();
-
-		if ( *it == "ISDN Phone" )
-			*itV = ent.ISDNPhone();
-
-		if ( *it == "Other Phone" )
-			*itV = ent.otherPhone();
-*/
+		/*
+		  if ( *it == "Car Phone" )
+		  *itV = ent.carPhone();
+		  
+		  if ( *it == "ISDN Phone" )
+		  *itV = ent.ISDNPhone();
+		  
+		  if ( *it == "Other Phone" )
+		  *itV = ent.otherPhone();
+		  */
 		if ( ( *it == "Business Pager" ) || ( *it == "Work Pager" ) )
 			*itV = ent.businessPager();
-/*
-		if ( *it == "Home Pager")
-			*itV = ent.homePager();
-
-		if ( *it == "AIM IM" )
-			*itV = ent.AIMIM();
-
-		if ( *it == "ICQ IM" )
-			*itV = ent.ICQIM();
-
-		if ( *it == "Jabber IM" )
-			*itV = ent.jabberIM();
-
-		if ( *it == "MSN IM" )
-			*itV = ent.MSNIM();
-
-		if ( *it == "Yahoo IM" )
-			*itV = ent.yahooIM();
-*/
+		/*
+		  if ( *it == "Home Pager")
+		  *itV = ent.homePager();
+		  
+		  if ( *it == "AIM IM" )
+		  *itV = ent.AIMIM();
+		  
+		  if ( *it == "ICQ IM" )
+		  *itV = ent.ICQIM();
+		  
+		  if ( *it == "Jabber IM" )
+		  *itV = ent.jabberIM();
+		  
+		  if ( *it == "MSN IM" )
+		  *itV = ent.MSNIM();
+		  
+		  if ( *it == "Yahoo IM" )
+		  *itV = ent.yahooIM();
+		  */
 		if ( *it == "Home Web Page" )
 			*itV = ent.homeWebpage();
-
+		
 		if ( ( *it == "Business WebPage" ) || ( *it == "Work Web Page" ) )
 			*itV = ent.businessWebpage();
-
-
+		
+		
 	}
-
+	
 	
 	cmbCat->setCategories( ent.categories(), "Contacts", tr("Contacts") );
-
+	
 	QString gender = ent.gender();
 	cmbGender->setCurrentItem( gender.toInt() );
-
+	
 	txtNote->setText( ent.notes() );
-
+	
 	slotAddressTypeChange( cmbAddress->currentItem() );
-
+	
 	// Calling "show()" to arrange all widgets. Otherwise we will get
 	// a wrong position of the textfields and are unable to put our
 	// default-email combo over it.. This is very ugly !
@@ -1507,7 +1424,7 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	// Basically we should rethink the strategy to hide
 	// a textfield with overwriting.. (se)
 	show();
-
+	
 	// Get combo-settings from contact and set preset..
 	contactfields.loadFromRecord( ent );
 	cmbChooserField1->setCurrentItem( contactfields.getFieldOrder(0, 7) );
@@ -1520,9 +1437,9 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	slotCmbChooser3Change( cmbChooserField3->currentItem() );
 	slotCmbChooser4Change( cmbChooserField4->currentItem() );
 	slotAddressTypeChange( cmbAddress->currentItem() );
-
+	
 	updateDatePicker();
-
+	
 	initializing = false;
 }
 void ContactEditor::updateDatePicker()
@@ -1533,119 +1450,119 @@ void ContactEditor::updateDatePicker()
 		birthdayPicker->setDate( ent.birthday() );
 	} else
 		birthdayButton->setText( tr ("Unknown") );
-		
+	
 	if ( !ent.anniversary().isNull() ){
 		anniversaryButton->setText( TimeString::numberDateString( ent.anniversary() ) );
 		anniversaryPicker->setDate( ent.anniversary() );
 	} else
 		anniversaryButton->setText( tr ("Unknown") );
-
+	
 }
 
 void ContactEditor::saveEntry() {
-
+	
 	// Store current combo into contact
 	contactfields.saveToRecord( ent );
- 
+	
 	if ( useFullName ) {
 		txtFirstName->setText( parseName( txtFullName->text(), NAME_F ) );
 		txtMiddleName->setText( parseName( txtFullName->text(), NAME_M ) );
 		txtLastName->setText( parseName( txtFullName->text(), NAME_L ) );
-		txtSuffix->setText( parseName( txtFullName->text(), NAME_S ) );
-
+		// txtSuffix->setText( parseName( txtFullName->text(), NAME_S ) );
+		
 		useFullName = false;
 	}
-
+	
 	ent.setFirstName( txtFirstName->text() );
 	ent.setLastName( txtLastName->text() );
 	ent.setMiddleName( txtMiddleName->text() );
 	ent.setSuffix( txtSuffix->text() );
-
+	
 	ent.setFileAs( cmbFileAs->currentText() );
-
+	
 	ent.setCategories( cmbCat->currentCategories() );
-
-
+	
+	
 	//if (hasTitle)
-		ent.setJobTitle( txtJobTitle->text() );
-
-		//if (hasCompany)
-		ent.setCompany( txtOrganization->text() );
-
-//	if (hasNotes)
-		ent.setNotes( txtNote->text() );
-
-		//if (hasStreet) {
-		ent.setHomeStreet( slHomeAddress[0] );
-		ent.setBusinessStreet( slBusinessAddress[0] );
-		//	}
-
-		//	if (hasCity) {
-		ent.setHomeCity( slHomeAddress[3] );
-		ent.setBusinessCity( slBusinessAddress[3] );
-		//	}
-
-		//	if (hasState) {
-		ent.setHomeState( slHomeAddress[4] );
-		ent.setBusinessState( slBusinessAddress[4] );
-		//	}
-
-		//	if (hasZip) {
-		ent.setHomeZip( slHomeAddress[5] );
-		ent.setBusinessZip( slBusinessAddress[5] );
-		//	}
-
-		//	if (hasCountry) {
-		ent.setHomeCountry( slHomeAddress[6] );
-		ent.setBusinessCountry( slBusinessAddress[6] );
-		//	}
-
+	ent.setJobTitle( txtJobTitle->text() );
+	
+	//if (hasCompany)
+	ent.setCompany( txtOrganization->text() );
+	
+	//	if (hasNotes)
+	ent.setNotes( txtNote->text() );
+	
+	//if (hasStreet) {
+	ent.setHomeStreet( slHomeAddress[0] );
+	ent.setBusinessStreet( slBusinessAddress[0] );
+	//	}
+	
+	//	if (hasCity) {
+	ent.setHomeCity( slHomeAddress[3] );
+	ent.setBusinessCity( slBusinessAddress[3] );
+	//	}
+	
+	//	if (hasState) {
+	ent.setHomeState( slHomeAddress[4] );
+	ent.setBusinessState( slBusinessAddress[4] );
+	//	}
+	
+	//	if (hasZip) {
+	ent.setHomeZip( slHomeAddress[5] );
+	ent.setBusinessZip( slBusinessAddress[5] );
+	//	}
+	
+	//	if (hasCountry) {
+	ent.setHomeCountry( slHomeAddress[6] );
+	ent.setBusinessCountry( slBusinessAddress[6] );
+	//	}
+	
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); itLE.current() && it != slDynamicEntries.end(); ++it, ++itLE) {
-
+		
 		if ( *it == "Department" )
 			ent.setDepartment( (*itLE)->text() );
-
+		
 		if ( *it == "Company" )
 			ent.setCompany( (*itLE)->text() );
-
+		
 		if ( *it == "Office" )
 			ent.setOffice( (*itLE)->text() );
-
+		
 		if ( *it == "Profession" )
 			ent.setProfession( (*itLE)->text() );
-
+		
 		if ( *it == "Assistant" )
 			ent.setAssistant( (*itLE)->text() );
-
+		
 		if ( *it == "Manager" )
 			ent.setManager( (*itLE)->text() );
-
+		
 		if ( *it == "Spouse" )
 			ent.setSpouse( (*itLE)->text() );
-
+		
 		if ( *it == "Nickname" )
 			ent.setNickname( (*itLE)->text() );
-
+		
 		if ( *it == "Children" )
 			ent.setChildren( (*itLE)->text() );
-
+		
 	}
-
-	 
+	
+	
 	QStringList::ConstIterator itV;
 	for ( it = slChooserNames.begin(), itV = slChooserValues.begin(); it != slChooserNames.end(); ++it, ++itV ) {
-
+		
 		if ( ( *it == "Business Phone" ) || ( *it == "Work Phone"  ) )
 			ent.setBusinessPhone( *itV );
-
+		
 		if ( ( *it == "Business Fax" ) || ( *it == "Work Fax" ) )
 			ent.setBusinessFax( *itV );
-
+		
 		if ( ( *it == "Business Mobile" ) || ( *it == "Work Mobile" ) )
 			ent.setBusinessMobile( *itV );
-
+		
 		if ( *it == "Emails" ){
  			QString allemail;
  			QString defaultmail;
@@ -1657,113 +1574,113 @@ void ContactEditor::saveEntry() {
 			}
  			ent.setEmails( allemail );
 		}
-
+		
 		if ( *it == "Default Email")
 			ent.setDefaultEmail( defaultEmail /* *itV */ );
-
+		
 		if ( *it == "Home Phone" )
 			ent.setHomePhone( *itV );
-
+		
 		if ( *it == "Home Fax" )
 			ent.setHomeFax( *itV );
-
+		
 		if ( *it == "Home Mobile" )
 			ent.setHomeMobile( *itV );
-
+		
 		if ( ( *it == "Business Pager" ) || ( *it == "Work Pager" ) )
 			ent.setBusinessPager( *itV );
-
+		
 		if ( *it == "Home Web Page" )
 			ent.setHomeWebpage( *itV );
-
+		
 		if ( ( *it == "Business WebPage" ) || ( *it == "Work Web Page" ) )
 			ent.setBusinessWebpage( *itV );
-
-
+		
+		
 	}
-
+	
 	int gender = cmbGender->currentItem();
 	ent.setGender( QString::number( gender ) );
-
+	
 	QString str = txtNote->text();
 	if ( !str.isNull() )
 		ent.setNotes( str );
-
+	
 }
 
 void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
 		     QString &strAll )
 {
-    int where,
-	start;
-    if ( txt.isEmpty() )
-	return;
-    // find the first
-    where = txt.find( ',' );
-    if ( where < 0 ) {
-	strDefaultEmail = txt;
-	strAll = txt;
-    } else {
-	strDefaultEmail = txt.left( where ).stripWhiteSpace();
-	strAll = strDefaultEmail;
-	while ( where > -1 ) {
-	    strAll.append(" ");
-	    start = where;
-	    where = txt.find( ',', where + 1 );
-	    if ( where > - 1 )
-		strAll.append( txt.mid(start + 1, where - start - 1).stripWhiteSpace() );
-	    else // grab until the end...
-		strAll.append( txt.right(txt.length() - start - 1).stripWhiteSpace() );
+	int where,
+		start;
+	if ( txt.isEmpty() )
+		return;
+	// find the first
+	where = txt.find( ',' );
+	if ( where < 0 ) {
+		strDefaultEmail = txt;
+		strAll = txt;
+	} else {
+		strDefaultEmail = txt.left( where ).stripWhiteSpace();
+		strAll = strDefaultEmail;
+		while ( where > -1 ) {
+			strAll.append(" ");
+			start = where;
+			where = txt.find( ',', where + 1 );
+			if ( where > - 1 )
+				strAll.append( txt.mid(start + 1, where - start - 1).stripWhiteSpace() );
+			else // grab until the end...
+				strAll.append( txt.right(txt.length() - start - 1).stripWhiteSpace() );
+		}
 	}
-    }
 }
 
 void parseEmailTo( const QString &strDefaultEmail,
 		   const QString &strOtherEmail, QString &strBack )
 {
-    // create a comma dilimeted set of emails...
-    // use the power of short circuiting...
-    bool foundDefault = false;
-    QString strTmp;
-    int start = 0;
-    int where;
-    // start at the beginng.
-    strBack = strDefaultEmail;
-    where = 0;
-    while ( where > -1 ) {
-	start = where;
-	where = strOtherEmail.find( ' ', where + 1 );
-	if ( where > 0 ) {
-	    strTmp = strOtherEmail.mid( start, where - start ).stripWhiteSpace();
-	} else
-	    strTmp = strOtherEmail.right( strOtherEmail.length() - start ).stripWhiteSpace();
-	if ( foundDefault || strTmp != strDefaultEmail ) {
-	    strBack.append( ", " );
-	    strBack.append( strTmp );
-	} else
-	    foundDefault = true;
-    }
+	// create a comma dilimeted set of emails...
+	// use the power of short circuiting...
+	bool foundDefault = false;
+	QString strTmp;
+	int start = 0;
+	int where;
+	// start at the beginng.
+	strBack = strDefaultEmail;
+	where = 0;
+	while ( where > -1 ) {
+		start = where;
+		where = strOtherEmail.find( ' ', where + 1 );
+		if ( where > 0 ) {
+			strTmp = strOtherEmail.mid( start, where - start ).stripWhiteSpace();
+		} else
+			strTmp = strOtherEmail.right( strOtherEmail.length() - start ).stripWhiteSpace();
+		if ( foundDefault || strTmp != strDefaultEmail ) {
+			strBack.append( ", " );
+			strBack.append( strTmp );
+		} else
+			foundDefault = true;
+	}
 }
 
 
 static inline bool containsAlphaNum( const QString &str )
 {
-    int i,
-	count = str.length();
-    for ( i = 0; i < count; i++ )
-	if ( !str[i].isSpace() )
-	    return TRUE;
-    return FALSE;
+	int i,
+		count = str.length();
+	for ( i = 0; i < count; i++ )
+		if ( !str[i].isSpace() )
+			return TRUE;
+	return FALSE;
 }
 
 static inline bool constainsWhiteSpace( const QString &str )
 {
-    int i,
-	count = str.length();
-    for (i = 0; i < count; i++ )
-	if ( str[i].isSpace() )
-	    return TRUE;
-    return FALSE;
+	int i,
+		count = str.length();
+	for (i = 0; i < count; i++ )
+		if ( str[i].isSpace() )
+			return TRUE;
+	return FALSE;
 }
 
 void ContactEditor::setPersonalView( bool personal )
@@ -1773,11 +1690,11 @@ void ContactEditor::setPersonalView( bool personal )
 	// Currently disbled due to the fact that
 	// show will not work...
 	return;
-
+	
 	if ( personal ){
 		cmbCat->hide();
 		labCat->hide();
-
+		
 	} else{
 		cmbCat->show();
 		labCat->show();		
@@ -1786,20 +1703,20 @@ void ContactEditor::setPersonalView( bool personal )
 
 void ContactEditor::slotAnniversaryDateChanged( int year, int month, int day)
 {
-    QDate date;
-    date.setYMD( year, month, day );
-    QString dateString = TimeString::numberDateString( date );
-    anniversaryButton->setText( dateString );
-    ent.setAnniversary ( date );
+	QDate date;
+	date.setYMD( year, month, day );
+	QString dateString = TimeString::numberDateString( date );
+	anniversaryButton->setText( dateString );
+	ent.setAnniversary ( date );
 }
 
 void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
 {
-    QDate date;
-    date.setYMD( year, month, day );
-    QString dateString = TimeString::numberDateString( date );
-    birthdayButton->setText( dateString );
-    ent.setBirthday ( date );
+	QDate date;
+	date.setYMD( year, month, day );
+	QString dateString = TimeString::numberDateString( date );
+	birthdayButton->setText( dateString );
+	ent.setBirthday ( date );
 }
 
 void ContactEditor::slotRemoveBirthday()
