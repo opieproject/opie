@@ -19,11 +19,11 @@
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
+..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
@@ -51,6 +51,7 @@ XineControl::XineControl( QObject *parent, const char *name )
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
+    connect( mediaPlayerState,  SIGNAL( videoGammaChanged( int ) ), this,  SLOT( setGamma( int ) ) );
     connect( libXine, SIGNAL( stopped() ),  this, SLOT( nextMedia() ) );
 
     disabledSuspendScreenSaver = FALSE;
@@ -71,9 +72,9 @@ void XineControl::play( const QString& fileName ) {
     hasVideoChannel=FALSE;
     hasAudioChannel=FALSE;
     m_fileName = fileName;
-    
-    qDebug("<<FILENAME: " + fileName  + ">>>>");
-    
+
+    //qDebug("<<FILENAME: " + fileName  + ">>>>");
+
     libXine->play( fileName );
     mediaPlayerState->setPlaying( true );
     // default to audio view until we know how to handle video
@@ -112,6 +113,10 @@ void XineControl::play( const QString& fileName ) {
 
 void XineControl::nextMedia() {
     mediaPlayerState->setNext();
+}
+
+void XineControl::setGamma( int value ) {
+    libXine->setGamma( value );
 }
 
 void XineControl::stop( bool isSet ) {

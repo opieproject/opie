@@ -19,17 +19,19 @@
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
+..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
 */
+
+// this file is based on work by trolltech
 
 #ifndef MEDIA_PLAYER_STATE_H
 #define MEDIA_PLAYER_STATE_H
@@ -79,6 +81,7 @@ public slots:
     void setLength( long l );
     void setView( char v );
     void setBlanked( bool b );
+    void setVideoGamma( int v );
 
     void setPrev();
     void setNext();
@@ -111,6 +114,7 @@ signals:
     void lengthChanged( long );
     void viewChanged( char );
     void blankToggled( bool );
+    void videoGammaChanged( int );
     void prev();
     void next();
 
@@ -125,7 +129,7 @@ private:
     long curPosition;
     long curLength;
     char curView;
-
+    int videoGamma;
     void readConfig( Config& cfg );
 
 };

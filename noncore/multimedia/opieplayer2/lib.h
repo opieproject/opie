@@ -112,6 +112,13 @@ namespace XINE {
          *
          */
         void setScaling( bool );
+
+        /**
+         * Set the Gamma value for video output
+         * @param int the value between -100 and 100, 0 is original
+         */
+        void setGamma( int );
+
         /**
          * test
          */

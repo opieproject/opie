@@ -60,6 +60,7 @@ extern "C" {
     void null_set_gui_width( vo_driver_t* self, int width );
     void null_set_gui_height( vo_driver_t* self, int height );
     void null_set_mode( vo_driver_t* self, int depth,  int rgb  );
+    void null_set_videoGamma(  vo_driver_t* self , int value );
     void null_display_handler(vo_driver_t* self, display_xine_frame_t t, void* user_data);
 }
 
@@ -92,7 +93,7 @@ Lib::Lib(XineVideoWidget* widget) {
         printf("!0\n" );
         resize ( m_wid-> size ( ));
         ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
-        m_wid-> setImage ( new QImage ( Resource::loadImage("")));
+        m_wid-> setImage ( new QImage ( Resource::loadImage("") ) );
         m_wid->repaint();
     }
     null_display_handler( m_videoOutput,
@@ -203,6 +204,12 @@ bool Lib::isVideoFullScreen() {
 void Lib::setScaling( bool scale ) {
     ::null_set_scaling( m_videoOutput, scale  );
 }
+
+void Lib::setGamma( int value ) {
+    //qDebug( QString( "%1").arg(value)  );
+    ::null_set_videoGamma( m_videoOutput, value );
+}
+
 bool Lib::isScaling() {
     return ::null_is_scaling( m_videoOutput );
 }

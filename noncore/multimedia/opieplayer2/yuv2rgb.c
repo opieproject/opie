@@ -22,7 +22,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  *
- * $Id: yuv2rgb.c,v 1.2 2002-08-04 20:23:19 sandman Exp $
+ * $Id: yuv2rgb.c,v 1.3 2002-09-02 17:18:30 harlekin Exp $
  */
 
 #include <stdio.h>
@@ -3063,16 +3063,15 @@ yuv2rgb_t *yuv2rgb_create_converter (yuv2rgb_factory_t *factory) {
 /*
  * factory functions 
  */
-
 void yuv2rgb_set_gamma (yuv2rgb_factory_t *this, int gamma) {
-
-  int i;
-  
-  for (i = 0; i < 256; i++) {
-    (uint8_t *)this->table_rV[i] += this->entry_size*(gamma - this->gamma);
-    (uint8_t *)this->table_gU[i] += this->entry_size*(gamma - this->gamma);
-    (uint8_t *)this->table_bU[i] += this->entry_size*(gamma - this->gamma);
-  }
+    
+    int i;
+    
+    for (i = 0; i < 256; i++) {
+	(uint8_t *)this->table_rV[i] += this->entry_size*(gamma - this->gamma);
+	(uint8_t *)this->table_gU[i] += this->entry_size*(gamma - this->gamma);
+	(uint8_t *)this->table_bU[i] += this->entry_size*(gamma - this->gamma);
+    }
 #ifdef ARCH_X86
   mmx_yuv2rgb_set_gamma(gamma);
 #endif  

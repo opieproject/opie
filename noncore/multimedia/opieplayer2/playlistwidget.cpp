@@ -19,11 +19,11 @@
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
+..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
@@ -118,6 +118,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ), d->tbShuffle, SLOT( setOn( bool ) ) );
     connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ), this, SLOT( setPlaylist( bool ) ) );
     connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( playIt( QListViewItem *) ) );
+    connect ( gammaSlider,  SIGNAL( valueChanged( int ) ),  mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
 
     readConfig( cfg );
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "" );
@@ -133,7 +134,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
 
 PlayListWidget::~PlayListWidget() {
-      // WTF?!@?! 
+      // WTF?!@?!
 
     if ( d->current ) {
         delete d->current;
@@ -733,7 +734,7 @@ void PlayListWidget::populateAudioView() {
             long size;
             if( dit.current()->file().left(4) == "http" )
                 size=0;
-            else 
+            else
                 size = QFile( dit.current()->file() ).size();
             newItem= /*(void)*/ new QListViewItem( audioView, dit.current()->name(), QString::number(size ), storage);
             newItem->setPixmap( 0, Resource::loadPixmap( "opieplayer2/musicfile" ) );
@@ -934,7 +935,7 @@ void PlayListWidget::writem3u() {
 
             // so maybe we should do some net checking to ,-)
             // no, cause it takes to long...
-            
+
             list += d->selectedFiles->current()->file() + "\n";
             noOfFiles++;
         }

@@ -129,74 +129,74 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
       qt_bug_workaround_clip_rects. resize ( dp. numRects ( ));
 
       for ( int i = dp. numRects ( ) - 1; i >= 0; i-- ) {
-        const QRect &clip = dp. rect ( i );
+          const QRect &clip = dp. rect ( i );
 
-        qt_bug_workaround_clip_rects [i] = qt_screen-> mapFromDevice ( clip, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
+          qt_bug_workaround_clip_rects [i] = qt_screen-> mapFromDevice ( clip, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
 
-        uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb );
-        uchar *src = frame;
+          uchar *dst = fb + ( clip. x ( ) * m_bytes_per_pixel ) + ( clip. y ( ) * m_bytes_per_line_fb );
+          uchar *src = frame;
 
-        switch ( rot ) {
+          switch ( rot ) {
           case 0: src += ( (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) ); break;
           case 1: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_pixel ) ); break;
           case 2: src += ( (( clip. x ( ) - framerect. x ( )) * m_bytes_per_pixel ) + (( clip. y ( ) - framerect. y ( )) * m_bytes_per_line_frame ) + (( framerect. height ( ) - 1 ) * m_bytes_per_line_frame ) ); break;
           case 3: src += ( (( clip. y ( ) - framerect. y ( )) * m_bytes_per_pixel ) + (( clip. x ( ) - framerect. x ( )) * m_bytes_per_line_frame ) ); break;
-	  default: break;
-        }
-
-        uint leftfill = 0;
-        uint framefill = 0;
-        uint rightfill = 0;
-        uint clipwidth = clip. width ( ) * m_bytes_per_pixel;
-
-        if ( clip. left ( ) < framerect. left ( ))
-          leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
-        if ( clip. right ( ) > framerect. right ( ))
-          rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
-
-        framefill = clipwidth - ( leftfill + rightfill );
-
-        for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
-          if (( y < framerect. top ( )) || ( y > framerect. bottom ( ))) {
-            memset ( dst, 0, clipwidth );
+          default: break;
           }
-          else {
-            if ( leftfill )
-              memset ( dst, 0, leftfill );
 
-            if ( framefill ) {
-              switch ( rot ) {
-                case 0: memcpy ( dst + leftfill, src, framefill );                                  break;
-                case 1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );     break;
-                case 2: memcpy_rev ( dst + leftfill, src, framefill );                              break;
-                case 3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
-		default: break;
+          uint leftfill = 0;
+          uint framefill = 0;
+          uint rightfill = 0;
+          uint clipwidth = clip. width ( ) * m_bytes_per_pixel;
+
+          if ( clip. left ( ) < framerect. left ( ))
+              leftfill = (( framerect. left ( ) - clip. left ( )) * m_bytes_per_pixel ) <? clipwidth;
+          if ( clip. right ( ) > framerect. right ( ))
+              rightfill = (( clip. right ( ) - framerect. right ( )) * m_bytes_per_pixel ) <? clipwidth;
+
+          framefill = clipwidth - ( leftfill + rightfill );
+
+          for ( int y = clip. top ( ); y <= clip. bottom ( ); y++ ) {
+              if (( y < framerect. top ( )) || ( y > framerect. bottom ( ))) {
+                  memset ( dst, 0, clipwidth );
               }
-            }
+          else {
+              if ( leftfill )
+                  memset ( dst, 0, leftfill );
+
+              if ( framefill ) {
+                  switch ( rot ) {
+                  case 0: memcpy ( dst + leftfill, src, framefill );                                  break;
+                  case 1: memcpy_step ( dst + leftfill, src, framefill, m_bytes_per_line_frame );     break;
+                  case 2: memcpy_rev ( dst + leftfill, src, framefill );                              break;
+                  case 3: memcpy_step_rev ( dst + leftfill, src, framefill, m_bytes_per_line_frame ); break;
+                  default: break;
+                  }
+              }
             if ( rightfill )
-              memset ( dst + leftfill + framefill, 0, rightfill );
+                memset ( dst + leftfill + framefill, 0, rightfill );
           }
 
-          dst += m_bytes_per_line_fb;
+              dst += m_bytes_per_line_fb;
 
-          switch ( rot ) {
-            case 0: src += m_bytes_per_line_frame; break;
-            case 1: src -= m_bytes_per_pixel;      break;
-            case 2: src -= m_bytes_per_line_frame; break;
+              switch ( rot ) {
+              case 0: src += m_bytes_per_line_frame; break;
+              case 1: src -= m_bytes_per_pixel;      break;
+              case 2: src -= m_bytes_per_line_frame; break;
             case 3: src += m_bytes_per_pixel;      break;
-	    default: break;
+              default: break;
+              }
           }
-        }
       }
     }
     //qWarning ( " ||| painting |||" );
     {
-      // QVFB hack by MArtin Jones
-      QPainter p ( this );
+        // QVFB hack by MArtin Jones
+        QPainter p ( this );
 
-      for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
-        p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [i]. topLeft ( )), qt_bug_workaround_clip_rects [i]. size ( )), QBrush ( NoBrush ) );
-      }
+        for ( int i = qt_bug_workaround_clip_rects. size ( ) - 1; i >= 0; i-- ) {
+            p. fillRect ( QRect ( mapFromGlobal ( qt_bug_workaround_clip_rects [i]. topLeft ( )), qt_bug_workaround_clip_rects [i]. size ( )), QBrush ( NoBrush ) );
+        }
     }
   }
   //qWarning( "painting >>>" );

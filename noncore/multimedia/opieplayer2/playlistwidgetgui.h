@@ -19,11 +19,11 @@
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
+..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
@@ -44,7 +44,8 @@
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
 #include <qaction.h>
-
+#include <qslider.h>
+#include <qlcdnumber.h>
 
 class PlayListWidgetPrivate;
 class PlayListSelection;
@@ -104,6 +105,9 @@ protected:
     QListView *audioView, *videoView, *playlistView;
     QLabel *libString;
     QPopupMenu *pmView ;
+    QPopupMenu *gammaMenu;
+    QSlider *gammaSlider;
+    QLCDNumber *gammaLCD;
     bool fromSetDocument;
     bool insanityBool;
     QString setDocFileRef;

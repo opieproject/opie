@@ -19,11 +19,11 @@
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
+..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
@@ -50,26 +50,53 @@ public:
 public slots:
     void play( const QString& fileName );
     void stop( bool );
+
+    /**
+     * Pause the media stream
+     * @param if pause or not
+     */
     void pause( bool );
+
+    /**
+     * Set videos fullscreen
+     * @param yes or no
+     */
     void setFullscreen( bool );
+
+    /**
+     *
+     */
     long currentTime();
     void seekTo( long );
     // get length of media file and set it
     void length();
     long position();
+
+    /**
+     * Proceed to the next media file in playlist
+     */
     void nextMedia();
+
     void videoResized ( const QSize &s );
+
+    /**
+     * Set the gamma value of the video output
+     *  @param int value between -100 and 100, 0 is original
+     */
+    void setGamma( int );
+
 
 private:
     XINE::Lib *libXine;
     MediaDetect mdetect;
-    long m_currentTime;    
+    long m_currentTime;
     long m_position;
     int m_length;
     QString m_fileName;
     bool disabledSuspendScreenSaver : 1;
     bool hasVideoChannel : 1;
     bool hasAudioChannel : 1;
+
 signals:
     void positionChanged( long );
 

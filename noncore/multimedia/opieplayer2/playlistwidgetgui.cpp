@@ -19,11 +19,11 @@
     : ..    .:,     . . .    without even the implied warranty of
     =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
   _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
+..}^=.=       =       ;      General Public License for more
 ++=   -.     .`     .:       details.
  :     =  ...= . :.=-
  -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
+  -_. . .   )=.  =           General Public License along with
     --        :-=`           this library; see the file COPYING.LIB.
                              If not, write to the Free Software Foundation,
                              Inc., 59 Temple Place - Suite 330,
@@ -99,6 +99,25 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
     pmView->insertItem( tr( "Skins" ), skinsMenu );
     skinsMenu->isCheckable();
 
+    gammaMenu = new QPopupMenu( this );
+    pmView->insertItem( tr( "Gamma" ),  gammaMenu );
+    gammaMenu->setMinimumHeight( 50 );
+
+    gammaSlider = new QSlider( QSlider::Vertical,  gammaMenu );
+    gammaSlider->setRange( -100, 100 );
+    gammaSlider->setTickmarks( QSlider::Left );
+    gammaSlider->setTickInterval( 20 );
+    gammaSlider->setFocusPolicy( QWidget::NoFocus );
+    gammaSlider->setValue( 0 );
+    gammaSlider->setMinimumHeight( 50 );
+
+    gammaLCD = new QLCDNumber( 3,  gammaMenu );
+
+    gammaMenu->insertItem( gammaSlider );
+    gammaMenu->insertItem( gammaLCD );
+
+    connect( gammaSlider, SIGNAL( valueChanged( int ) ), gammaLCD, SLOT( display( int ) ) );
+
     vbox5 = new QVBox( this );
     QVBox *vbox4 = new QVBox( vbox5 );
     QHBox *hbox6 = new QHBox( vbox4 );
@@ -107,7 +126,7 @@ PlayListWidgetGui::PlayListWidgetGui( QWidget* parent, const char* name, WFlags 
 
     QWidget *pTab;
     pTab = new QWidget( tabWidget, "pTab" );
-    tabWidget->insertTab( pTab,"Playlist");
+    tabWidget->insertTab( pTab, "Playlist");
 
     QGridLayout *Playout = new QGridLayout( pTab );
     Playout->setSpacing( 2);

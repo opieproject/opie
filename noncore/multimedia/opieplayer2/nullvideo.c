@@ -1,3 +1,35 @@
+/*
+                            This file is part of the Opie Project
+
+                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
+                             Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 
 /*#include <xine.h>*/
 #include <stdlib.h>
@@ -31,7 +63,7 @@ struct null_driver_s {
     int depth, bpp, bytes_per_pixel;
     int yuv2rgb_mode;
     int yuv2rgb_swap;
-    int zuv2rgb_gamma;
+    int yuv2rgb_gamma;
     uint8_t *yuv2rgb_cmap;
     yuv2rgb_factory_t *yuv2rgb_factory;
     vo_overlay_t *overlay;
@@ -605,6 +637,12 @@ void null_set_fullscreen( vo_driver_t* self, int screen ){
 int null_is_scaling( vo_driver_t* self ){
     return ((null_driver_t*)self)->m_is_scaling;
 }
+
+void null_set_videoGamma(  vo_driver_t* self , int value ) {
+     ((null_driver_t*) self) ->yuv2rgb_gamma = value;
+     ((null_driver_t*) self) ->yuv2rgb_factory->set_gamma( ((null_driver_t*) self) ->yuv2rgb_factory, value );
+}
+
 void null_set_scaling( vo_driver_t* self, int scale ){
     ((null_driver_t*)self)->m_is_scaling = scale;
 }
@@ -615,6 +653,8 @@ void null_set_gui_width( vo_driver_t* self, int width ){
 void null_set_gui_height( vo_driver_t* self, int height ){
     ((null_driver_t*)self)->gui_height = height;
 }
+
+
 void null_set_mode( vo_driver_t* self, int depth,  int rgb  ){
     null_driver_t* this = (null_driver_t*)self;
     
@@ -670,3 +710,4 @@ void null_display_handler(vo_driver_t* self, display_xine_frame_t t, void* user_
     this->caller = user_data;
     this->frameDis = t;
 }
+
