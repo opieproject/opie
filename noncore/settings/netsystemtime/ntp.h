@@ -21,6 +21,7 @@ public slots:
   void setDocument (const QString &);
 protected:
   virtual void accept( );
+  virtual void reject( );
   QDateTime predictedTime;
   void makeChannel();
 protected slots:

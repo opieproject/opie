@@ -56,7 +56,7 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
     : NtpBase( parent, name, true, f )
 {
     setCaption( tr("System Time") );
-
+    _oldTimeZone="";
     QVBoxLayout *vb = new QVBoxLayout( FrameSystemTime, 5 );
 
 //    TextLabelMainPredTime = new QLabel( FrameSystemTime );
@@ -318,14 +318,13 @@ void SetDateTime::updateSystem()
 void SetDateTime::tzChange( const QString &tz )
 {
     // set the TZ get the time and leave gracefully...
-    QString strSave;
-    strSave = getenv( "TZ" );
+    _oldTimeZone = getenv( "TZ" );
     setenv( "TZ", tz, 1 );
 
     QDate d = QDate::currentDate();
     // reset the time.
-    if ( !strSave.isNull() ) {
-      setenv( "TZ", strSave, 1 );
+    if ( !_oldTimeZone.isNull() ) {
+      setenv( "TZ", _oldTimeZone, 1 );
     }
     dateButton->setDate( d );
     updateSystem();

@@ -415,7 +415,7 @@ void Ntp::showAdvancedFeatures(bool advMode)
 
 
 void Ntp::accept( ){
-    qDebug("accepted");
+    qDebug("saving");
     //SetTimeDate
     commitTime();
   	writeSettings(); 
@@ -423,4 +423,13 @@ void Ntp::accept( ){
     // Ntp
     saveConfig();    
     qApp->quit();
+}
+
+void Ntp::reject( ){
+    qDebug("_oldTimeZone %s",_oldTimeZone.latin1());
+    if (!_oldTimeZone.isEmpty()){
+      qDebug("reverting timezone");
+      tzChange(_oldTimeZone);
+      commitTime();
+    }
 }

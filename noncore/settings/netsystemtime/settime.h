@@ -87,12 +87,12 @@ protected:
     SetTime *timeButton;
     DateButton *dateButton;
     TimeZoneSelector *tz;
+    QString _oldTimeZone;
     QComboBox *weekStartCombo;
     QComboBox *ampmCombo;
     QComboBox *dateFormatCombo;
     QComboBox *clockAppletCombo;
     QPushButton *ButtonSetTime;
-   // QLabel *TextLabelMainPredTime;
 
     DateFormat date_formats[4];
 };

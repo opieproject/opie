@@ -1,3 +1,2 @@
-- handle hour > 24 in SetTime::slotClockTick
 - improve tz setting
   	atm the tz gets written to the system as soon as changed...
