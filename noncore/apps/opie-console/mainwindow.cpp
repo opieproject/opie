@@ -274,6 +274,7 @@ void MainWindow::slotConfigure() {
     if ( QDialog::Accepted == ret ) {
         qWarning("conf %d", conf.list().count() );
         manager()->setProfiles( conf.list() );
+        manager()->save();
         populateProfiles();
     }
 }

@@ -13,7 +13,7 @@
 namespace {
     enum TermIds {
         id_term_vt100,
-        id_term_vt220,
+        id_term_vt102,
         id_term_ansi
     };
 
@@ -73,8 +73,8 @@ TerminalWidget::TerminalWidget( const QString& name, QWidget* parent,
 
     // Fill in some options
     m_terminalBox->insertItem( tr("VT 100"), id_term_vt100 );
-    m_terminalBox->insertItem( tr("VT 220"), id_term_vt220 );
-    m_terminalBox->insertItem( tr("ANSI"), id_term_ansi );
+    m_terminalBox->insertItem( tr("VT 102"), id_term_vt102 );
+    //m_terminalBox->insertItem( tr("ANSI"), id_term_ansi );
 
     m_colorCmb->insertItem( tr("black on white"), id_term_black );
     m_colorCmb->insertItem( tr("white on black"), id_term_white );
@@ -110,8 +110,11 @@ void TerminalWidget::load( const Profile& prof ) {
     int opt_outbound = prof.readNumEntry("Outbound");
 
     switch( term ) {
-    case Profile::VT102:
+    case Profile::VT100:
         m_terminalBox->setCurrentItem(id_term_vt100 );
+        break;
+    case Profile::VT102:
+        m_terminalBox->setCurrentItem(id_term_vt102 );
         break;
     default:
         break;
@@ -152,14 +155,14 @@ void TerminalWidget::load( const Profile& prof ) {
 void TerminalWidget::save( Profile& profile ) {
     switch(m_terminalBox->currentItem() ) {
     case id_term_vt100:
+        profile.writeEntry("Terminal", Profile::VT100 );
+        break;
+    case id_term_vt102:
         profile.writeEntry("Terminal", Profile::VT102 );
         break;
-    case id_term_vt220:
-        profile.writeEntry("Terminal", Profile::VT102 );
-        break;
-    case id_term_ansi:
-        profile.writeEntry("Terminal", Profile::VT102 );
-        break;
+    //case id_term_ansi:
+    //    profile.writeEntry("Terminal", Profile::VT102 );
+    //    break;
     default:
         break;
     };

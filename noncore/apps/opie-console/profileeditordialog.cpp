@@ -58,6 +58,7 @@ void ProfileEditorDialog::initUI()
 
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
     OTabWidget *tabWidget = new OTabWidget( this );
+    tabWidget->setTabStyle(OTabWidget::TextTab);
     mainLayout->add(tabWidget);
 
     QWidget *tabprof;

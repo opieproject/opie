@@ -18,7 +18,7 @@ public:
     enum Color { Black = 0,
                  White,
                  Gray };
-    enum Terminal {VT102 = 0 };
+    enum Terminal {VT102 = 0, VT100 };
     enum Font { Micro = 0,  Small, Medium };
     Profile();
     Profile( const QString& name,
