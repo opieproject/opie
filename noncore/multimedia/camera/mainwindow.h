@@ -18,10 +18,9 @@
 
 #include <qmainwindow.h>
 
-class Wellenreiter;
-class WellenreiterConfigWindow;
 class QIconSet;
 class QToolButton;
+class QLabel;
 
 class CameraMainWindow: public QMainWindow
 {
@@ -35,6 +34,9 @@ class CameraMainWindow: public QMainWindow
 
   public slots:
     void clickedSnapShot();
+
+  private:
+    QLabel* l;
 };
 
 #endif

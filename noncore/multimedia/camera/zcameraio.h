@@ -25,11 +25,12 @@ class ZCameraIO
     virtual ~ZCameraIO();
 
     bool isOpen() const { return _driver != -1; };
-
     bool snapshot( QImage* );
+    static ZCameraIO* instance() { return _instance; };
 
   private:
     int _driver;
+    static ZCameraIO* _instance;
 };
 
 #endif

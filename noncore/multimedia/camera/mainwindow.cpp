@@ -14,6 +14,7 @@
 **********************************************************************/
 
 #include "mainwindow.h"
+#include "zcameraio.h"
 
 #include <qvbox.h>
 #include <qpushbutton.h>
@@ -26,7 +27,7 @@ CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags 
            :QMainWindow( parent, name, f )
 {
     QVBox* v = new QVBox( this );
-    QLabel* l = new QLabel( v );
+    l = new QLabel( v );
     l->setFixedSize( QSize( 240, 160 ) );
     QPushButton* p = new QPushButton( "Snapshot", v );
     connect( p, SIGNAL( clicked() ), this, SLOT( clickedSnapShot() ) );
@@ -45,6 +46,12 @@ CameraMainWindow::~CameraMainWindow()
 
 void CameraMainWindow::clickedSnapShot()
 {
-    qDebug( "Hello!" );
+    QImage i;
+    QPixmap p;
+    if ( ZCameraIO::instance()->snapshot( &i ) )
+    {
+        p.convertFromImage( i );
+        l->setPixmap( p );
+    }
 }
 
