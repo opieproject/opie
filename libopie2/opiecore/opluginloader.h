@@ -32,8 +32,10 @@ class OPluginItem {
 public:
     typedef QValueList<OPluginItem> List;
     OPluginItem();
-    OPluginItem( const QString& name, const QString& path, int pos = -1 );
+    OPluginItem( const QString& name, const QString& path, bool enabled = true, int pos = -1 );
     ~OPluginItem();
+
+    bool isEmpty()const;
 
     bool operator==( const OPluginItem& )const;
     bool operator!=( const OPluginItem& )const;
@@ -41,15 +43,18 @@ public:
 
     QString  name()const;
     QString  path()const;
+    bool isEnabled()const;
     int position()const;
 
     void setName( const QString& );
     void setPath( const QString& );
+    void setEnabled(  bool );
     void setPosition( int );
 
 private:
     QString m_name;
     QString m_path;
+    bool  m_enabled : 1;
     int m_pos;
     struct Private;
     Private *d;
@@ -76,26 +81,26 @@ public:
     bool autoDelete()const;
     void clear();
 
-
+    QString name()const;
+    bool isSorted()const;
     bool isInSafeMode()const;
 
 
-    List  allAvailable(bool sorted = FALSE)const;
-    List  filtered(bool sorted = FALSE)const;
+    List  allAvailable(bool sorted = false )const;
+    List  filtered(bool sorted = false )const;
 
 
     virtual QUnknownInterface* load( const OPluginItem& item, const QUuid& );
     virtual void unload( QUnknownInterface* );
 
 protected:
+    friend class OPluginManager; // we need the static unlibify
     void readConfig();
     virtual List plugins( const QString& dir, bool sorted, bool disabled )const;
     void setPluginDirs( const QStringList& );
     void setPluginDir( const QString& );
-    bool isSorted()const;
     void setSafeMode(const QString& app = QString::null,  bool b = false);
     static QString unlibify( const QString& str );
-
 private:
     QStringList languageList();
     void installTranslators(const QString& type);
@@ -133,42 +138,62 @@ private:
 class OPluginLoader : public OGenericPluginLoader {
 public:
     OPluginLoader( const QString& name, bool sorted = false );
-    ~OPluginLoader();
+    virtual ~OPluginLoader();
 
     template<class IFace>
     IFace* load( const OPluginItem& item, const QUuid& );
 };
 
 /**
- * \brief A class to manager order and activation of plugins
+ * \brief A class to manage order and activation of plugins
  *
  * Manage order and activation. This is used by the Opie::Ui::OPluginConfig
  * This class controls the activation and order of plugins depending
  * on the OPluginLoader you supply.
+ * You must call load() and save after construnction an instance
  *
- * @see OPluginConfig
+ * @see Opie::Ui::OPluginConfig
  *
  */
 class OPluginManager {
 public:
-    OPluginManager( OGenericPluginLoader* , const QString& name);
-    OPluginManager( OConfig* conf, const QString&,
-                    const QCString& group, const OPluginItem::List& );
-    ~OPluginManager();
+    OPluginManager( OGenericPluginLoader* );
+    OPluginManager( const QString& name, const OPluginItem::List&, bool isSorted = false );
+    virtual ~OPluginManager();
 
-    QString name();
-    void setName( const QString& );
+    OPluginItem crashedPlugin()const;
+
+    OPluginItem::List managedPlugins()const;
 
     void setPosition( const OPluginItem& );
     void enable( const OPluginItem& );
     void disable( const OPluginItem& );
     void setEnabled( const OPluginItem&, bool = true);
 
-    void load();
-    void save();
+    virtual void load();
+    virtual void save();
+
+protected:
+    QString configName()const;
+    void replace( const OPluginItem& );
+private:
+    OGenericPluginLoader *m_loader;
+    QString m_cfgName;
+    OPluginItem::List m_plugins;
+    OPluginItem m_crashed;
+    bool m_isSorted : 1;
 };
 
 
+/**
+ * This is a template method allowing you to safely cast
+ * your load function
+ *
+ * \code
+ * MyTypePlugin *plug = load->load<MyTypePlugin>( item, IID_MyPlugin );
+ * \endcode
+ *
+ */
 template<class IFace>
 IFace* OPluginLoader::load( const OPluginItem& item, const QUuid& uid ) {
     return static_cast<IFace*>( OGenericPluginLoader::load( item, uid ) );

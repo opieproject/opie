@@ -11,6 +11,7 @@
 #include <qdir.h>
 #include <qdict.h>
 #include <qtl.h>
+#include <qfile.h>
 
 #include <stdlib.h>
 
@@ -110,18 +111,22 @@ OPluginItem::OPluginItem()
 }
 
 /**
+ * @todo Create Internal name so we can have the plugin names translated. Or only for the gui? I'm not yet sure
  * \brief Create an OPluginItem
  *
- * Create a Plugin Item with all information.
+ * Create a Plugin Item with all information. If you for some reasons
+ * need to create your own OPluginItems make sure that 'name' is always the same
+ * as it if used for positions and exclude list.
  *
  * @param name The if available translated Name
- * @param path The path to the plugin
+ * @param path The path to the plugin must be absolute.
+ * @param b If the OPluginItem is enabled or not
  * @param pos  The position of the plugin if used for sorting
  *
  */
-OPluginItem::OPluginItem( const QString& name, const QString& path, int pos )
-    : m_name( name ), m_path( path ), m_pos( pos ) {
-}
+OPluginItem::OPluginItem( const QString& name, const QString& path, bool b, int pos )
+    : m_name( name ), m_path( path ), m_enabled( b ), m_pos( pos )
+{}
 
 /**
  * \brief simple d'tor
@@ -130,20 +135,44 @@ OPluginItem::~OPluginItem() {
 }
 
 /**
- * operator to test equalness of two OPluginItem
+ * \brief Test if this Item is Empty and does not represent a loadable plugin
+ * Test if a OPluginItem is empty. A OPluginItem is empty if name and path are empty
+ * ,pos equals -1 and the item is disabled
+ *
+ * @see QString::isEmpty()
+ *
  */
-bool OPluginItem::operator==( const OPluginItem& r )const{
-    if ( m_pos  != r.m_pos  ) return false;
-    if ( m_name != r.m_name ) return false;
-    if ( m_path != r.m_path ) return false;
+bool OPluginItem::isEmpty()const {
+    if ( m_pos != -1 )       return false;
+    if ( m_enabled )         return false;
+    if ( !m_name.isEmpty() ) return false;
+    if ( !m_path.isEmpty() ) return false;
+
     return true;
 }
 
+/**
+ * \brief test equality
+ * operator to test equalness of two OPluginItem
+ */
+bool OPluginItem::operator==( const OPluginItem& r )const{
+    if ( m_pos     != r.m_pos    ) return false;
+    if ( m_enabled != r.m_enabled) return false;
+    if ( m_name    != r.m_name   ) return false;
+    if ( m_path    != r.m_path   ) return false;
+    return true;
+}
+
+/**
+ * \brief test non equality
+ * operator to test non-equalness of two OPluginItem
+ */
 bool OPluginItem::operator!=( const OPluginItem& r )const{
     return !( *this == r );
 }
 
 /**
+ * \brief returns the name of the plugin
  * return the name of this Plugin
  */
 QString OPluginItem::name()const {
@@ -151,17 +180,35 @@ QString OPluginItem::name()const {
 }
 
 /**
- * return the path of the plugin
+ * \brief return the path of the plugin
  */
 QString OPluginItem::path()const {
     return m_path;
 }
 
+/**
+ * \brief Return if this item is enabled.
+ */
+bool OPluginItem::isEnabled()const {
+    return m_enabled;
+}
+
+/**
+ * \brief return the position of a plugin.
+ * return the position of the item
+ * -1 is the default value and means normally that the whole items are unsorted.
+ * Higher numbers belong to an upper position. With plugins with the postions 20,19,5,3
+ * the item with pos  20 would be the first in the list returned by the OGenericPluginLoader
+ *
+ * @see OGenericPluginLoader::allAvailable
+ * @see OGenericPluginLoader::filtered
+ */
 int OPluginItem::position()const{
     return m_pos;
 }
 
 /**
+ * \brief set the name of a plugin
  * Set the name of the Plugin Item
  * @param name
  */
@@ -170,7 +217,8 @@ void OPluginItem::setName(  const QString& name ) {
 }
 
 /**
- * Set the path of Plugin Item
+ * \brief set the path of a plugin
+ * Set the path of Plugin Item. The path must be absolute.
  * @param name The path of the plugin
  */
 void OPluginItem::setPath( const QString& name ) {
@@ -178,8 +226,23 @@ void OPluginItem::setPath( const QString& name ) {
 }
 
 /**
+ * \brief enable or disable the to load attribute
+ * Set the Enabled attribute. Such changes won't be saved. If you want to save it
+ * use a OPluginManager to configure your plugins manually or Opie::Ui::OPluginConfig
+ * for a graphical frontend.
+ *
+ * @param enabled Enable or Disable the Enabled Attribute
+ */
+void OPluginItem::setEnabled(  bool enabled ) {
+    m_enabled = enabled;
+}
+
+/**
+ * \brief Set the position.
  * Set the position
  * @param pos The position
+ *
+ * @see position()
  */
 void OPluginItem::setPosition( int pos ) {
     m_pos = pos;
@@ -224,6 +287,8 @@ OGenericPluginLoader::OGenericPluginLoader( const QString& name,  bool isSorted)
 
 
 /**
+ * \brief simple d'tor that cleans up depending on autoDelete
+ *
  * calls clear if autoDelete is true. This will release all interfaces
  * and remove the library from this process if the refcount falls to zero
  */
@@ -233,6 +298,8 @@ OGenericPluginLoader::~OGenericPluginLoader() {
 }
 
 /**
+ * \brief Enable or disable autoDelete on destruction
+ *
  * enable autoDelete. This will call clear on the d'tor
  *
  * @see ~OGenericPluginLoader
@@ -243,13 +310,15 @@ void OGenericPluginLoader::setAutoDelete( bool t ) {
 }
 
 /**
- * see if autoDelet is enabled
+ * \brief See if autoDelete is enabled.
  */
 bool OGenericPluginLoader::autoDelete()const{
     return m_autoDelete;
 }
 
 /**
+ * \brief unload all loaded Plugins
+ *
  * This will unload all returned QUnknownInterfaces by load. Unload
  * will be called.
  */
@@ -260,6 +329,8 @@ void OGenericPluginLoader::clear() {
 }
 
 /**
+ * \brief unload the Plugin and the accompanied Resources.
+ *
  * This will take the iface from the internal QPtrDict, Release it,
  * and deref the libray used.
  * The visibility depends on the QPtrDict.
@@ -274,6 +345,18 @@ void OGenericPluginLoader::unload( QUnknownInterface* iface ) {
 }
 
 /**
+ * \brief The name of the plugins.
+ *
+ * Return the name/type you specified in the constructor.
+ * This is at least used by the OPluginManager to find the right config
+ */
+QString OGenericPluginLoader::name()const {
+    return m_dir;
+}
+
+
+/**
+ * \brief See if loading of a plugin segfaulted
  * This tells you
  * if by previous tries to load, loading crashed your application.
  * If isInSafeMode you can use the GUI to configure the plugins prior to loading
@@ -286,6 +369,7 @@ bool OGenericPluginLoader::isInSafeMode()const {
 
 
 /**
+ * \brief Return all Plugins found in the plugins dirs.
  * Return the list of all available plugins. This will go through all plugin
  * directories and search for your type of plugins ( by subdir )
  *
@@ -302,6 +386,7 @@ OPluginItem::List OGenericPluginLoader::allAvailable( bool sorted )const {
 }
 
 /**
+ * \brief Return only the enabled plugins
  * Return only activated plugins.
  *
  * @param sorted If the list should be sorted
@@ -318,7 +403,15 @@ OPluginItem::List OGenericPluginLoader::filtered( bool sorted )const {
 
 
 /**
+ * \brief Load a OPluginItem for the specified interface
+ * This will open the resource of the OPluginItem::path() and then will query
+ * if the Interface specified in the uuid is available and then will manage the
+ * resource and Interface.
  *
+ * @param item The OPluginItem that should be loaded
+ * @param uuid The Interface to query for
+ *
+ * @return Either 0 in case of failure or the Plugin as QUnknownInterface*
  */
 QUnknownInterface* OGenericPluginLoader::load( const OPluginItem& item, const QUuid& uuid) {
     /*
@@ -358,14 +451,16 @@ QUnknownInterface* OGenericPluginLoader::load( const OPluginItem& item, const QU
  * @internal and reads in the safe mode
  */
 void OGenericPluginLoader::readConfig() {
-    /* read the config for SafeMode */
+
+
+/* read the config for SafeMode */
     OConfig conf(  m_dir + "-odpplugins" );
     conf.setGroup( "General" );
     m_isSafeMode = conf.readBoolEntry( "SafeMode", false );
 }
 
 /**
- * Enter or leave SafeMode
+ * @internal Enter or leave SafeMode
  */
 void OGenericPluginLoader::setSafeMode(const QString& str, bool b) {
     OConfig conf(  m_dir + "-odpplugins" );
@@ -420,7 +515,11 @@ QString OGenericPluginLoader::unlibify( const QString& str ) {
 }
 
 /**
- * Return a List of Plugins for a dir and add positions and remove disabled.
+ * @internal
+ *
+ * \brief method to return available plugins. Internal and for reeimplementations
+ *
+ *Return a List of Plugins for a dir and add positions and remove disabled.
  * If a plugin is on the excluded list assign position -2
  *
  * @param dir The dir to look in
@@ -473,12 +572,12 @@ OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorte
 
         bool ex = excludedMap.contains( str );
         /*
-         * if disabled but we should show all assign a -2
+         * if disabled but we should show all mark it as disabled
          * else continue because we don't want to add the item
          * else if sorted we assign the right position
          */
         if ( ex && !disabled)
-            item.setPosition( -2 );
+            item.setEnabled( false );
         else if ( ex && disabled )
             continue;
         else if ( sorted )
@@ -514,6 +613,10 @@ QStringList OGenericPluginLoader::languageList() {
     return m_languages;
 }
 
+/**
+ * @internal
+ * Tries to install languages using the languageList for the type
+ */
 void OGenericPluginLoader::installTranslators(const QString& type) {
     QStringList lst = languageList();
 
@@ -535,7 +638,241 @@ void OGenericPluginLoader::installTranslators(const QString& type) {
     }
 }
 
+/**
+ * \brief Simple c'tor.
+ *
+ * Simple C'tor same as the one of the base class. Additional this
+ * class can cast for you if you nee it.
+ *
+ *
+ * @param name The name of your plugin class
+ * @param sorted If plugins are sorted
+ *
+ * @see OGenericPluginLoader
+ */
+OPluginLoader::OPluginLoader( const QString& name,  bool sorted )
+    : OGenericPluginLoader( name, sorted )
+{
+}
 
+/**
+ * d'tor
+ * @see OGenericPluginLoader::~OGenericPluginLoader
+ */
+OPluginLoader::~OPluginLoader() {
+}
+
+/**
+ * \brief C'Tor using a OGenericPluginLoader
+ * The C'tor. Pass your OGenericPluginLoader to manage
+ * OGenericPluginLoader::allAvailable plugins.
+ *
+ *
+ * @param loader A Pointer to your OGenericPluginLoader
+ * @param name The name
+ */
+OPluginManager::OPluginManager(  OGenericPluginLoader* loader)
+    : m_loader( loader )
+{
+}
+
+/**
+ * \brief Overloaded c'tor using a List of Plugins and a type name
+ * Overloaded Constructor to work with a 'Type' of plugins
+ * and a correspending list of those. In this case calling load
+ * is a no operation.
+ *
+ * @param name The name of your plugin ('today','inputmethods','applets')
+ * @param lst A List with plugins of your type to manage
+ * @param isSorted If the List should be treated sorted
+ */
+OPluginManager::OPluginManager( const QString& name, const OPluginItem::List& lst,  bool isSorted)
+    : m_loader( 0l ), m_cfgName( name ), m_plugins( lst ), m_isSorted( isSorted )
+{
+}
+
+/**
+ * \brief A simple d'tor
+ */
+OPluginManager::~OPluginManager() {
+}
+
+/**
+ * \brief Return the OPluginItem where loading is likely to have crashed  on.
+
+ * Return the Item that made the OGenericPluginLoader crash
+ * the returned OPluginItem could be  empty if no crash occured
+ * which should apply most of the time. It could also be empty if the crashed
+ * plugin is not in the current list of available/managed plugins
+ *
+ * @see OPluginItem::isEmpty
+ * @return OPluginItem that crashed  the loader
+ */
+OPluginItem OPluginManager::crashedPlugin()const {
+    return m_crashed;
+}
+
+/**
+ * \brief Return a list of plugins that are managed by this OPluginManager
+ *
+ * Return the list of managed plugins. This could either result
+ * from passing a OGenericPluginLoader and calling load or by
+ * giving name and a list of plugins.
+ */
+OPluginItem::List OPluginManager::managedPlugins()const {
+    return m_plugins;
+}
+
+/**
+ * \brief Set the position of the items
+ *
+ * Replace the OPluginItem  with the name and path and this way
+ * apply the new position. The search is linear and this way O(n/2)
+ * You still need to call save()  to make your changes effective. After saving
+ * a call to OGenericPluginLoader::filtered() returns the newly configured order and items
+ *
+ * @param item The  OPluginItem to be replaced internall
+ *
+ */
+void OPluginManager::setPosition( const OPluginItem& item) {
+    replace( item );
+}
+
+/**
+ * \brief Enable the item specified as argument
+ *
+ * This will make sure that OPluginItem::setEnabled is called and then will replace
+ * the item with one that matches name and path internally.
+ * @see setPosition
+ *
+ * @param the Item to enable
+ */
+void OPluginManager::enable(  const OPluginItem& item ) {
+    setEnabled( item, true );
+}
+
+/**
+ * \brief disable the Item.
+ *
+ * Disable the OPluginItem. Same applies as in
+ * @see setPosition and @see enable
+ *
+ * @param item Item to disable
+ */
+void OPluginManager::disable( const OPluginItem& item) {
+    setEnabled( item, false );
+}
+
+/**
+ * \brief Enable or disable the OPluginItem.
+ * Depending on the value of the parameter this will either disable
+ * or enable the pluginitem.
+ * Beside that same as in @see disable,  @see enable, @see setPosition
+ * applies.
+ *
+ * @param _item The OPluginItem to enable or to disable.
+ * @param b Enable or disable the plugin.
+ *
+ */
+void OPluginManager::setEnabled( const OPluginItem& _item, bool b ) {
+    OPluginItem item = _item;
+    item.setEnabled( b );
+    replace( item );
+}
+
+/**
+ * \brief Load necessary information after constructing the object
+ * If you speified  a OGenericPluginLoader you need to call this method
+ * so that this manager knows what to manage and have a right value for \sa crashedPlugin
+ * For the name and the list of plugins this does only try to find out the crashed plugin
+ */
+void OPluginManager::load() {
+    OConfig cfg( configName() );
+    cfg.setGroup(  "General" );
+    QString crashedPath = cfg.readEntry( "CrashedPlugin" );
+
+    /* if we've a loader this applies if we were called from the first part */
+    if ( m_loader )
+        m_plugins = m_loader->allAvailable( m_loader->isSorted() );
+
+    /*  fast and normal route if we did not crash... */
+    if ( crashedPath.isEmpty() )
+        return;
+
+    /* lets try to find the plugin path and this way the associated item */
+    for ( OPluginItem::List::Iterator it = m_plugins.begin(); it != m_plugins.end(); ++it )
+        if (  (*it).path() ==  crashedPath ) {
+            m_crashed = *it;
+            break;
+        }
+}
+
+
+/**
+ * \brief Save the values and this way make it available.
+ *
+ * Save the current set of data. A call to @see OGenericPluginLoader::filtered
+ * now would return  your saved changes.
+ */
+void OPluginManager::save() {
+    QMap<QString, QStringList> excluded;  // map for path to excluded name
+    QMap<QString, QStringList> positions; // if positions matter contains splitted up by dirs
+    bool sorted = m_loader ? m_loader->isSorted() : m_isSorted;
+
+    /*
+     * We will create some maps for the  groups to include positions a
+     */
+    for ( OPluginItem::List::Iterator it = m_plugins.begin(); it != m_plugins.end(); ++it ) {
+        OPluginItem item = *it;
+        QString path = QFileInfo(  item.path() ).filePath();
+        if ( sorted ) {
+            positions[path].append( item.name() );
+            positions[path].append( QString::number( item.position() ) );
+        }
+
+        if ( !item.isEnabled() )
+            excluded[path].append( item.name() );
+    }
+
+/*
+ * The code below wouldn't work because we can't delete groups/keys from the config
+ * ### for ODP   make Config right!
+ */
+//    if ( excluded.isEmpty() && positions.isEmpty() ) return;
+    /*
+     * Now safe for each path
+     */
+    OConfig cfg( configName() );
+
+    /* safe excluded items */
+    for ( QMap<QString, QStringList>::Iterator it = excluded.begin(); it != excluded.end(); ++it ) {
+        OConfigGroupSaver saver( &cfg, it.key() );
+        cfg.writeEntry("Excluded", it.data(), ',' );
+    }
+
+    /*  safe positions we could also see if positions.contains(path) and remove/write in the above loop
+     * ### Write a Test Suite that can profile these runs...
+     */
+    for ( QMap<QString, QStringList>::Iterator it = positions.begin(); it != positions.end(); ++it ) {
+        OConfigGroupSaver saver( &cfg, it.key() );
+        cfg.writeEntry("Positions", it.data(), '.' );
+    }
+}
+
+/**
+ * @internal
+ */
+QString OPluginManager::configName()const {
+    QString str = m_loader ? m_loader->name() : m_cfgName;
+    return str + "odpplugins";
+}
+
+/**
+ * @internal.. replace in m_plugins by path... this is linear search O(n/2)
+ */
+void OPluginManager::replace( const OPluginItem& item ) {
+// ### fixme
+}
 
 }
 }
