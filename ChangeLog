@@ -7,7 +7,6 @@
         * Added daemonizing capabilities to QWS Server [via Qt/Embedded] (mickeyl)
         * Integrated the new security framework into libopie2 (zecke,clem)
         * Converted the launcher to use the new security framework (zecke)
-	* Screenshot applet can send the image to drawpad (zecke)
 
 	Fixed Bugs
 	--------
