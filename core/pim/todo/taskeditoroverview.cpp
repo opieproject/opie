@@ -81,6 +81,10 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     cmbDesc->insertItem( tr( "Call " ) );
     cmbDesc->insertItem( tr( "Mail " ) );
     cmbDesc->clearEdit();
+
+    // This will trim the QWidget to correct size, if the description is very long!
+    cmbDesc->sizeHint();
+
     layout->addMultiCellWidget( cmbDesc, 1, 1, 0, 1 );
     QWhatsThis::add( cmbDesc, tr( "Enter brief description of the task here." ) );
 
