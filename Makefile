@@ -35,6 +35,7 @@ APPS=$(LOCALAPPS) core/addressbook calculator clock datebook \
     settings/security \
     settings/sound \
     settings/systemtime \
+    settings/mediummount \
     solitaire spreadsheet tetrix textedit \
     todo wordgame embeddedkonsole launcher sysinfo \
     parashoot snake citytime showimg netsetup core/wlansetup tableviewer \

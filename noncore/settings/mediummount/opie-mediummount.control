@@ -1,4 +1,4 @@
-Files: bin/mediummount apps/Settings/mediummount.desktop pics/mediummount/*
+Files: bin/mediummount apps/Settings/medium.desktop
 Priority: optional
 Section: opie/settings
 Maintainer: Holger Freyther <zecke@handhelds.org>
