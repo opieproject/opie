@@ -11,6 +11,7 @@ HEADERS     = oapplication.h            \
 	      opluginloader.h           \
               oprocess.h                \
               oprocctrl.h               \
+	      osharedpointer.h          \
               osmartpointer.h           \
               ostorageinfo.h            \
               xmltree.h
@@ -25,6 +26,7 @@ SOURCES     = oapplication.cpp          \
 	      opluginloader.cpp         \
               oprocess.cpp              \
               oprocctrl.cpp             \	    
+	      osmartpointer.cpp         \
               ostorageinfo.cpp          \
               xmltree.cpp
 

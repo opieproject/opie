@@ -3,7 +3,7 @@
                             This file is part of the Opie Project
                             Copyright (C) 2004 Rajko Albrecht <alwin@handhelds.org>
                             Copyright (C) The Opie Team <opie-devel@handhelds.org>
-             =.             
+             =.
            .=l.
           .>+-=
 _;:,     .>    :=|.         This program is free software; you can
@@ -48,29 +48,24 @@ namespace Core {
 class ORefCount {
 protected:
     //! reference count member
-    long m_RefCount;
+    unsigned long m_RefCount;
 public:
     //! first reference must be added after "new" via Pointer()
-    ORefCount() : m_RefCount(0)
-    {}
-    virtual ~ORefCount() {}
+    ORefCount();
+    virtual ~ORefCount();
     //! add a reference
-    void Incr() {
-        ++m_RefCount;
-    }
+    void Incr();
     //! delete a reference
-    void Decr() {
-        --m_RefCount;
-    }
+    void Decr();
     //! is it referenced
-    bool Shared() { return (m_RefCount > 0); }
+    bool Shared();
 };
 
 //! reference counting wrapper class
 template<class T> class OSmartPointer {
     //! pointer to object
     /*!
-     * this object must contain Incr(), Decr() and Shared() 
+     * this object must contain Incr(), Decr() and Shared()
      * methode as public members. The best way is, that it will be a child
      * class of RefCount
      */
@@ -94,15 +89,15 @@ public:
     //! construction
     OSmartPointer(T* t) { if (ptr = t) ptr->Incr(); }
     //! Pointer copy
-    OSmartPointer(const OSmartPointer<T>& p) 
+    OSmartPointer(const OSmartPointer<T>& p)
     { if (ptr = p.ptr) ptr->Incr(); }
     //! pointer copy by assignment
-    OSmartPointer<T>& operator= (const OSmartPointer<T>& p) 
+    OSmartPointer<T>& operator= (const OSmartPointer<T>& p)
     {
         // already same: nothing to do
         if (ptr == p.ptr) return *this;
         // decouple reference
-        if (ptr) { ptr->Decr(); if (!ptr->Shared()) delete ptr; } 
+        if (ptr) { ptr->Decr(); if (!ptr->Shared()) delete ptr; }
         // establish new reference
         if (ptr = p.ptr) ptr->Incr();
         return *this;
@@ -120,7 +115,7 @@ public:
 
     //! cast to conventional pointer
     operator T* () const { return ptr; }
-    
+
     //! deref: fails for NULL pointer
     T& operator* () {return *ptr; }
     //! deref: fails for NULL pointer
@@ -130,12 +125,12 @@ public:
     T* operator-> () {return ptr; }
     //! deref with const method call
     const T* operator-> ()const {return ptr; }
-    
+
     //! supports "if (pointer)"
     operator bool () const { return (ptr != NULL); }
     //! "if (pointer)" as non const
     operator bool () { return ptr != NULL;}
-    
+
     //! support if (!pointer)"
     bool operator! () const { return (ptr == NULL); }
     //! support if (!pointer)" as non const
