@@ -18,7 +18,7 @@
 **
 **********************************************************************/
 
-#include "settings.h"
+#include "doctab.h"
 
 #include <opie/oapplicationfactory.h>
 
