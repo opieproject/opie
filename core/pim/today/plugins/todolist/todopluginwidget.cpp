@@ -94,7 +94,7 @@ void TodolistPluginWidget::getTodo() {
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
             }
-            tmpout += "<font color=#e00000><b>-" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
+            tmpout += "<font color=#e00000><b>[" +  QString("%1").arg((*m_it).priority() )  + "]" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
             ammount++ ;
         }
     }
@@ -111,7 +111,7 @@ void TodolistPluginWidget::getTodo() {
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
             }
-            tmpout += "<b>-</b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
+            tmpout += "<b> [" +  QString("%1").arg((*m_it).priority() )  + "] </b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
             ammount++;
         }
     }
