@@ -349,23 +349,23 @@ sinnvoll sein.</translation>
     <name>DialWidget</name>
     <message>
         <source>Connection name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbindungsname:</translation>
     </message>
     <message>
         <source>Type in a unique name for this connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie einene eindeutigen Namen an</translation>
     </message>
     <message>
         <source>Phone number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tel. Nummer:</translation>
     </message>
     <message>
         <source>&amp;Add...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hinzu...</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Entfernen</translation>
     </message>
     <message>
         <source>&lt;p&gt;Specifies the phone numbers to dial. You
@@ -376,22 +376,33 @@ arrow buttons.
 
 When a number is busy or fails, &lt;i&gt;kppp&lt;/i&gt; will 
 try the next number and so on</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Gibt die zu wählende Telefonnummer an.
+Sie können hier mehrere Nummern angeben
+durhc Verwenden von &quot;Hinzu&quot;. Sie können die
+Reihenfolge der zu verwendenen Nummern ändern,
+indem sie die Pfeil-Tasten verwenden.
+
+Ist eine Nummer besetzt oder ungültig wird &lt;i&gt;kppp&lt;/I&gt; 
+die nächste Nummer versuchen</translation>
     </message>
     <message>
         <source>Customize pppd Arguments...</source>
-        <translation type="unfinished"></translation>
+        <translation>pppd-Parameter spezifizieren...</translation>
     </message>
 </context>
 <context>
     <name>ExecWidget</name>
     <message>
         <source>Here you can select commands to run at certain stages of the connection. The commands are run with your real user id, so you cannot run any commands here requiring root permissions (unless, of course, you are root).&lt;br&gt;&lt;br&gt;Be sure to supply the whole path to the program otherwise we might be unable to find it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier können Befehle eingegeben werden die 
+in unterschieldichen Stufen des Verbindungsaufbaus
+ausgeführt werden.
+Befehle die root-Rechte benötigen können nicht 
+verwendet werden, solange Sie nicht als root angemeldet sind.</translation>
     </message>
     <message>
         <source>Before connect:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vor der Verbindung:</translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;before&lt;/b&gt; a connection
@@ -400,11 +411,16 @@ dialing has begun.
 
 This might be useful, e.g. to stop HylaFAX blocking the
 modem.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermöglicht das Ausführen eines Programms &lt;b&gt;bevor&lt;/b&gt; 
+eine Verbindung aufgebaut wird. Es wird unmittelbar 
+aufgerufen bevor der Wählvorgang initiiert wird.
+
+Das kann bspw. notwendig sein um Programme zu stoppen 
+die das Modem blockieren.</translation>
     </message>
     <message>
         <source>Upon connect:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei Verbindung:</translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;after&lt;/b&gt; a connection
@@ -412,37 +428,44 @@ is established. When your program is called, all
 preparations for an Internet connection are finished.
 
 Very useful for fetching mail and news</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermöglicht das Ausführen eines Programms &lt;b&gt;nachdem&lt;/b&gt; 
+eine Verbindung aufgebaut wird. Zu diesem Zeitpunkt besteht 
+bereits eine Internetverbindung.
+
+Sehr nützlich um bspw. Mail und News zu holen</translation>
     </message>
     <message>
         <source>Before disconnect:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vor dem Verbindungsabbau:</translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;before&lt;/b&gt; a connection
 is closed. The connection will stay open until
 the program exits.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermöglicht das Ausführen eines Programms &lt;b&gt;bevor&lt;/b&gt; 
+eine Verbindung abgebaut wird. Die Verbindung bleibt
+bestehen bis das Programm beendet ist.</translation>
     </message>
     <message>
         <source>Upon disconnect:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bei Verbindungsabbau:</translation>
     </message>
     <message>
         <source>Allows you to run a program &lt;b&gt;after&lt;/b&gt; a connection
 has been closed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermöglicht das Ausführen eines Programms &lt;b&gt;nachdem&lt;/b&gt; 
+eine Verbindung abgebaut ist.</translation>
     </message>
 </context>
 <context>
     <name>GatewayWidget</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Default gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Default Gateway</translation>
     </message>
     <message>
         <source>This makes the PPP peer computer (the computer
@@ -453,24 +476,28 @@ computer, which will route these packets.
 
 This is the default for most ISPs, so you should
 probably leave this option on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies lässt die PPP-Gegenstelle als Router auftreten.
+
+Dies ist normal für die meisten ISPs, daher sollte diese 
+Option normalerweise angeschaltet sein.</translation>
     </message>
     <message>
         <source>Static gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Statisches Gateway</translation>
     </message>
     <message>
         <source>&lt;p&gt;Allows you to specify which computer you want
 to use as gateway (see &lt;i&gt;Default Gateway&lt;/i&gt; above)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ermöglicht die Angabe eines Routers (s.
+&lt;i&gt;Default Gateway&lt;/i&gt;)</translation>
     </message>
     <message>
         <source>Gateway IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gateway IP Addresse:</translation>
     </message>
     <message>
         <source>Assign the default route to this gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Setzen der Default Route für dieses Gateway</translation>
     </message>
     <message>
         <source>If this option is enabled, all packets not
@@ -478,18 +505,22 @@ going to the local net are routed through
 the PPP connection.
 
 Normally, you should turn this on</source>
-        <translation type="unfinished"></translation>
+        <translation>Ist diese Option angeschaltet werden alle 
+Pakete die nicht ins lokale Netz gehen über PPP
+geroutet.
+
+Normalerweise sollte diese Aoption einschaltet sein</translation>
     </message>
 </context>
 <context>
     <name>IPWidget</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfiguration</translation>
     </message>
     <message>
         <source>Dynamic IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Dynamische IP Addresse</translation>
     </message>
     <message>
         <source>Select this option when your computer gets an
@@ -498,11 +529,15 @@ connection is made.
 
 Almost every Internet Service Provider uses
 this method, so this should be turned on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diese Option wenn Ihr Rechner
+automatisch eine IP-Adresse vom ISP bei 
+Verbindungsaufbau bezieht.
+
+Die meisten ISPs benutzen diese Option.</translation>
     </message>
     <message>
         <source>Static IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Statische IP Adresse</translation>
     </message>
     <message>
         <source>Select this option when your computer has a
@@ -510,20 +545,24 @@ fixed internet address (IP). Most computers
 don&apos;t have this, so you should probably select
 dynamic IP addressing unless you know what you
 are doing.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie diese Option wenn Ihr Rechner eine
+statische IP-Adresse besitzt. Dies ist nicht die Regel,
+so dass es eine gute Idee ist dynamische Adressen
+zu verwenden.</translation>
     </message>
     <message>
         <source>IP address:</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adresse:</translation>
     </message>
     <message>
         <source>If your computer has a permanent internet
 address, you must supply your IP address here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hat Ihr Rechner eine permanente Verbindung
+ins Internet muss die Adresse hier angegebn werden.</translation>
     </message>
     <message>
         <source>Subnet mask:</source>
-        <translation type="unfinished"></translation>
+        <translation>Subnetzmaske:</translation>
     </message>
     <message>
         <source>&lt;p&gt;If your computer has a static Internet address,
@@ -532,11 +571,16 @@ all cases this netmask will be &lt;b&gt;255.255.255.0&lt;/b&gt;,
 but your mileage may vary.
 
 If unsure, contact your Internet Service Provider</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Hat Ihr Rechner eine statische Internet-Adresse
+muss die Netzwerkmaske hier angegeben werden. In den 
+meisten Fällen ist dies &lt;b&gt;255.255.255.0&lt;/b&gt;, dies kann jedoch 
+auch anders sein.
+
+Wenn Sie unsicher sind kontaktieren Sie Ihren ISP</translation>
     </message>
     <message>
         <source>Auto-configure hostname from this IP</source>
-        <translation type="unfinished"></translation>
+        <translation>Hostnamen-Autokonfiguration</translation>
     </message>
     <message>
         <source>&lt;p&gt;Whenever you connect, this reconfigures
