@@ -224,7 +224,8 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   configMenu = new QPopupMenu( this);
   colorMenu = new QPopupMenu( this);
-
+  scrollMenu = new QPopupMenu( this);
+  
   bool listHidden;
   cfg.setGroup("Menubar");
   if( cfg.readEntry("Hidden","FALSE") == "TRUE")  {
@@ -263,6 +264,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   connect( fontList, SIGNAL( activated(int) ), this, SLOT( fontChanged(int) ));
   connect( configMenu, SIGNAL( activated(int) ), this, SLOT( configMenuSelected(int) ));
   connect( colorMenu, SIGNAL( activated(int) ), this, SLOT( colorMenuSelected(int) ));
+  connect( scrollMenu, SIGNAL(activated(int)),this,SLOT(scrollMenuSelected(int)));
 
   menuBar->insertItem( tr("Font"), fontList );
   menuBar->insertItem( tr("Options"), configMenu );
@@ -316,6 +318,11 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   connect( commonCombo, SIGNAL( activated(int) ), this, SLOT( enterCommand(int) ));
 
+  scrollMenu->insertItem("None");
+  scrollMenu->insertItem("Left");
+  scrollMenu->insertItem("Right");
+  configMenu->insertItem("ScrollBar",scrollMenu);
+  
       // create applications /////////////////////////////////////////////////////
   setCentralWidget(tab);
 
@@ -762,4 +769,26 @@ void Konsole::setColor()
     int scheme = cfg.readNumEntry("Schema",1);
     if(scheme != 1) colorMenuSelected( -scheme);
 
+}
+
+void Konsole::scrollMenuSelected(int index)
+{
+    TEWidget* te = getTe();
+Config cfg("Konsole");
+ cfg.setGroup("Scrollbar");
+    switch( index){
+    case -21:
+        te->setScrollbarLocation(0);
+        cfg.writeEntry("Position",0);
+        break;
+    case -22:
+        te->setScrollbarLocation(1);
+        cfg.writeEntry("Position",1);
+        break;
+    case -23:
+        te->setScrollbarLocation(2);
+        cfg.writeEntry("Position",2);
+        break;
+    };
+   
 }

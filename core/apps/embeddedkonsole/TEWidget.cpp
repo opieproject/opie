@@ -50,6 +50,7 @@
 // #include "config.h"
 #include "TEWidget.h"
 #include "session.h"
+#include <qpe/config.h>
 
 #include <qcursor.h>
 #include <qregexp.h>
@@ -152,7 +153,7 @@ const QPixmap *TEWidget::backgroundPixmap()
 void TEWidget::setColorTable(const ColorEntry table[])
 {
   for (int i = 0; i < TABLE_COLORS; i++) color_table[i] = table[i];
-  
+
   const QPixmap* pm = backgroundPixmap();
   if (!pm) setBackgroundColor(color_table[DEFAULT_BACK_COLOR].color);
   update();
@@ -285,7 +286,20 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
   scrollbar = new QScrollBar(this);
   scrollbar->setCursor( arrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
-  scrollLoc = SCRNONE;
+
+  Config cfg("Konsole");
+  cfg.setGroup("ScrollBar");
+  switch( cfg.readNumEntry("Position",2)){
+  case 0:
+      scrollLoc = SCRNONE;
+      break;
+  case 1:
+      scrollLoc = SCRLEFT;
+      break;
+  case 2:
+      scrollLoc = SCRRIGHT;
+      break;
+  };
 
   blinkT   = new QTimer(this);
   connect(blinkT, SIGNAL(timeout()), this, SLOT(blinkEvent()));
@@ -651,7 +665,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       emit clearSelectionSignal();
       iPntSel = pntSel = pos;
       actSel = 1; // left mouse button pressed but nothing selected yet.
-      grabMouse(   /*crossCursor*/  ); // handle with care! 
+      grabMouse(   /*crossCursor*/  ); // handle with care!
     }
     else
     {

@@ -70,7 +70,7 @@ private slots:
   void switchSession(QWidget *);
   void newSession();
   void changeCommand(const QString &, int);
-
+  void scrollMenuSelected(int);
 private:
   void init(const char* _pgm, QStrList & _args);
   void initSession(const char* _pgm, QStrList & _args);
@@ -112,7 +112,7 @@ private:
   QCString se_pgm;
   QStrList se_args;
 
-  QPopupMenu* fontList,*configMenu,*colorMenu;
+  QPopupMenu* fontList,*configMenu,*colorMenu,*scrollMenu;
   QComboBox *commonCombo;
     // history scrolling I think
   bool        b_scroll;
