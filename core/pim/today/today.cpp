@@ -189,15 +189,22 @@ void Today::getDates()
 	      // include location or not
 	      if (SHOW_LOCATION == 1) 
 		{
-		  msg+= "<BR>" + (*it).location();
+		  msg+= "<BR><i>" + (*it).location();
 		}
-	      msg += "<BR>"
+	      msg += "</i><BR>";
 		
-		// start time of event
-		+ TimeString::timeString(QTime((*it).event().start().time()) )
-		// end time of event
-		+ "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) )
-		+ "<BR>";
+		if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") )
+		  {
+		    msg += "All day";
+		  }
+		else 
+		  {
+		    // start time of event
+		    msg += TimeString::timeString(QTime((*it).event().start().time()) )
+		      // end time of event
+		      + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
+		      }
+	      msg += "<BR>";
 	      // include possible note or not
 	      if (SHOW_NOTES == 1)
 		{
@@ -214,14 +221,22 @@ void Today::getDates()
 	      // include location or not
 	      if (SHOW_LOCATION == 1) 
 		{
-		  msg+= "<BR>" + (*it).location();
+		  msg+= "<BR><i>" + (*it).location();
 		}
-	      msg += "<BR>"
-		// start time of event
-		+ TimeString::timeString(QTime((*it).event().start().time()) )
-		// end time of event
-		+ "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) )
-		+ "<BR>";
+	      msg += "</i><BR>";
+		
+	      if ( (TimeString::timeString(QTime((*it).event().start().time()) ) == "00:00") &&  (TimeString::timeString(QTime((*it).event().end().time()) ) == "23:59") )
+		  {
+		    msg += "All day";
+		  }
+	      else 
+		{
+		    // start time of event
+		  msg += TimeString::timeString(QTime((*it).event().start().time()) )
+		    // end time of event
+		    + "<b> - </b>" + TimeString::timeString(QTime((*it).event().end().time()) );
+		}
+	      msg += "<BR>";
 	      // include possible note or not
 	      if (SHOW_NOTES == 1)
 		{

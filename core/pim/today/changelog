@@ -1,3 +1,9 @@
+0.2.6
+
+* added scrollbars to dates and todo
+* all day detection
+* some smaller bugfixes
+
 0.2.5
 
 * some other minor fixes regarding autoupdate

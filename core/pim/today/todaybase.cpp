@@ -54,17 +54,13 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QWidget *d = QApplication::desktop();
   int w=d->width();                 
   int h=d->height();                
-  resize( w , h ); // not good, what happens on rotation
+  resize( w , h ); 
   
   // hehe, qt is ...
   getridoffuckingstrippeldlinesbutton =  new QPushButton (this, "asdfsad" );
   getridoffuckingstrippeldlinesbutton->setGeometry( QRect( -5, 10, 0, 0 ) );
 
-
-
   QVBoxLayout * layout = new QVBoxLayout(this);
-  
-  
 
   // --- logo Section ---
   QPalette pal2;
@@ -121,15 +117,12 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
  // --- mail section ---
   MailFrame = new QFrame( this ,"MailFrame" );
-  //MailFrame->setPalette( pal );
   MailFrame->setBackgroundOrigin( QScrollView::ParentOrigin );
-  //MailFrame->setFrameShape( QScrollView::StyledPanel );
-  //MailFrame->setFrameShadow( QScrollView::Sunken );
   MailFrame->setGeometry (QRect( 0, 0, this->width() , 15) ); 
   MailFrame->setFrameStyle( QFrame::NoFrame );
   
   QFrame* Line1 = new QFrame( MailFrame);
-  Line1->setGeometry( QRect( 0, 0, MailFrame->width(), 5 ) );
+  Line1->setGeometry( QRect( -5, 0, MailFrame->width()+5, 5 ) );
   Line1->setFrameStyle( QFrame::HLine | QFrame::Sunken );
 
   MailButton = new QPushButton (MailFrame, "MailButton" );
@@ -148,13 +141,11 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   
   // --- todo section --
   Frame15 = new QFrame( this, "Frame15" );
-  //Frame15->setFrameShape( QFrame::StyledPanel );
-  //Frame15->setFrameShadow( QFrame::Sunken );
   Frame15->setFrameStyle( QFrame::NoFrame );
   Frame15->setGeometry (QRect( 40, 3, this->width() , this->height()) ); 
 
   QFrame* Line2 = new QFrame( Frame15);
-  Line2->setGeometry( QRect( 0, 0, MailFrame->width(), 5 ) );
+  Line2->setGeometry( QRect( -5, 0, MailFrame->width()+5, 5 ) );
   Line2->setFrameStyle( QFrame::HLine | QFrame::Sunken );
 
   TodoButton = new QPushButton (Frame15, "TodoButton" );
@@ -171,7 +162,6 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   TodoField = new QLabel( sv2->viewport(), "TodoField" );
   sv2->addChild(TodoField);
-  //TodoField->setGeometry( QRect( 40, 4, 196, 120 ) ); 
   TodoField->setFrameShadow( QLabel::Plain );
   //TodoField->setText( tr( "No current todos" ) );
   TodoField->setAlignment( int( QLabel::AlignTop | QLabel::AlignLeft ) );

@@ -4,13 +4,9 @@ TODO for today:
 
 * show alarm icons on alarm events
 
-* problems with updating
-
 * add am/pm mode instead of 24 h, take system default
 
 * fix 23 pm bug		 (done??)
-
-* scrollbar?
 
 * qcop integration for updating events?
 
