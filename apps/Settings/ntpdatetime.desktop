@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Set date and time from network
+Exec=netsystemtime
+Icon=DateTime
+Type=Application
+Name=NTP-Date/Time
