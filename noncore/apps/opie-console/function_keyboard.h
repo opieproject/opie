@@ -2,6 +2,7 @@
 #define OPIE_FUNCTION_KEYBOARD_H
 
 #include <qpe/config.h>
+#include <qpe/qpeapplication.h>
 #include <qframe.h>
 #include <qpainter.h>
 #include <qvbox.h>
@@ -12,21 +13,22 @@
 #include "profiledialogwidget.h"
 
 
-class FKey {
-
-public:
+struct FKey {
 
     FKey(): qcode(0), unicode(0) {};
-    FKey(const QString &l, ushort q, ushort u): label(l), qcode(q), unicode(u) {};
+    FKey(const QString &l, const QString &f, ushort q, ushort u): 
+            label(l), pixFile(f), qcode(q), unicode(u) {
+            
+        if (!f.isEmpty()) {
 
-    QString getL() { return label; }
-    ushort getQ() { return qcode; }
-    ushort getU() { return unicode; }
+            pix = new QPixmap (QPEApplication::qpeDir() + "pics/console/keys/" + f);
 
-
-private:
+        }
+    };
 
     QString label;
+    QPixmap *pix;
+    QString pixFile;
     ushort qcode;
     ushort unicode;
 };
@@ -38,11 +40,15 @@ public:
     FunctionKeyboard(QWidget *parent = 0);
     ~FunctionKeyboard();
 
+    friend class FunctionKeyboardConfig;
+
     void changeRows(int);
     void changeCols(int);
 
+    //Key getKey(int, int);
+
     void paintEvent(QPaintEvent *);
-    void paintKey(int, int);
+    void paintKey(uint, uint);
     void mousePressEvent(QMouseEvent*);
     void mouseReleaseEvent(QMouseEvent*);
     void resizeEvent(QResizeEvent*);
@@ -50,7 +56,7 @@ public:
 
 signals:
 
-    void keyPressed(ushort, ushort, bool, bool, bool, ushort, ushort);
+    void keyPressed(FKey, ushort, ushort, bool);
 
 private:
 
@@ -87,16 +93,19 @@ public:
 
 private slots:
 
-    void slotKeyPressed(ushort, ushort, bool, bool, bool, ushort, ushort);
+    void slotKeyPressed(FKey, ushort, ushort, bool);
     void slotChangeRows(int);
     void slotChangeCols(int);
     void slotChangeIcon(int);
+    void slotChangeLabelText(const QString &);
 
 private:
 
+    ushort selectedRow, selectedCol;
+
     FunctionKeyboard *kb;
     QSpinBox *m_rowBox, *m_colBox;
-    QComboBox *m_labels;
+    QComboBox *m_labels, *m_qvalues;
 
 };
 

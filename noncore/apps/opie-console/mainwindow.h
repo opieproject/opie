@@ -20,6 +20,7 @@ class TabWidget;
 class ProfileManager;
 class Profile;
 class FunctionKeyboard;
+class FKey;
 class QuickButton;
 
 class MainWindow : public QMainWindow {
@@ -67,7 +68,7 @@ private slots:
     void slotRunScript();
     void slotFullscreen();
     void slotSessionChanged( Session* );
-    void slotKeyReceived(ushort, ushort, bool, bool, bool, ushort,  ushort);
+    void slotKeyReceived(FKey, ushort, ushort, bool);
 
 private:
     void initUI();

@@ -208,17 +208,19 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
-    connect(m_kb, SIGNAL(keyPressed(ushort, ushort, bool, bool, bool, ushort, ushort)),
-            this, SLOT(slotKeyReceived(ushort, ushort, bool, bool, bool, ushort, ushort)));
+    connect(m_kb, SIGNAL(keyPressed(FKey, ushort, ushort, bool)),
+            this, SLOT(slotKeyReceived(FKey, ushort, ushort, bool)));
 
     m_buttonBar = new QToolBar( this );
     addToolBar( m_buttonBar, "Buttons",  QMainWindow::Top, TRUE );
     m_buttonBar->setHorizontalStretchable( TRUE );
     m_buttonBar->hide();
 
+    /*
     m_qb = new QuickButton( m_buttonBar );
     connect( m_qb, SIGNAL( keyPressed( ushort, ushort, bool, bool, bool) ),
             this, SLOT( slotKeyReceived( ushort, ushort, bool, bool, bool) ) );
+    */
 
 
     m_connect->setEnabled( false );
@@ -520,9 +522,7 @@ void MainWindow::slotFullscreen() {
 }
 
 
-void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool pressed, bool, ushort, ushort) {
-
-    //qWarning("unicode: %x, qkey: %x, %s", u, q, pressed ? "pressed" : "released");
+void MainWindow::slotKeyReceived(FKey k, ushort, ushort, bool pressed) {
 
     if ( m_curSession ) {
 
@@ -531,7 +531,7 @@ void MainWindow::slotKeyReceived(ushort u, ushort q, bool, bool pressed, bool, u
         if (pressed) state = QEvent::KeyPress;
         else state = QEvent::KeyRelease;
 
-        QKeyEvent ke(state, q, u, 0, QString(QChar(u)));
+        QKeyEvent ke(state, k.qcode, k.unicode, 0, QString(QChar(k.unicode)));
 
         // where should i send this event? doesnt work sending it here
         QApplication::sendEvent((QObject *)m_curSession->widget(), &ke);
