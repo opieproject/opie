@@ -17,6 +17,9 @@ Send/receive: lrzsz behaves strange when trying to use
  Should be fixed -zecke
 
 - scripting with "direct subpopup"
+  also:
+  - an indication that it is currently recording, also change menu entry to
+  "cancel recording" then   
 
 - kill more compiler warnings.
 
@@ -26,4 +29,16 @@ Send/receive: lrzsz behaves strange when trying to use
 connection is allready up, and extended stuff is a lot of work; maybe later
 in again ).
 
-- main tabwidget a bit to long 
+- new conntection -> configure -> use . does not end up in profile dialog,
+
+- copy n paste as default setup keys in "keys"
+
+- console mode quick button in menubar?
+
+- disable tranfer file for console mode
+
+- scripts need an extension and also an icon
+
+- help documentation needs to be extended
+
+
