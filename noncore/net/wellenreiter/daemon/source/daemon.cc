@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.8 2002-11-28 00:00:08 mjm Exp $
+ * $Id: daemon.cc,v 1.9 2002-12-04 19:51:46 mjm Exp $
  */
 
 #include "config.hh"
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
       packet = pcap_next(handletopcap, &header);
 
       /* process the packet */
-      process_packets(&header,*&packet);
+      process_packets(&header,*&packet, GUIADDR, GUIPORT);
     }
 
   } /* while(1) */
