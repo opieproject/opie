@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include <iostream>
+using namespace std;
 
 #include <qmenubar.h>
 #include <qpopupmenu.h>
@@ -51,7 +52,7 @@ MainWindow :: MainWindow( QWidget *p, char *name )
 	edit->insertItem( "Find &Next", this, SLOT(repeatSearchForPackage()), Qt::CTRL+Qt::Key_N );
 
     filter = new QPopupMenu( this );
-	mnuShowUninstalledPkgsId = filter->insertItem( "Show &Uninstalled Packages", this, SLOT(filterUninstalledPackages()), Qt::CTRL+Qt::Key_U );
+	mnuShowUninstalledPkgsId = filter->insertItem( "Show &Non-Installed Packages", this, SLOT(filterUninstalledPackages()), Qt::CTRL+Qt::Key_U );
 	mnuShowInstalledPkgsId = filter->insertItem( "Show In&stalled Packages", this, SLOT(filterInstalledPackages()), Qt::CTRL+Qt::Key_S );
 	mnuShowUpgradedPkgsId = filter->insertItem( "Show U&pdated Packages", this, SLOT(filterUpgradedPackages()), Qt::CTRL+Qt::Key_P );
     filter->insertSeparator();

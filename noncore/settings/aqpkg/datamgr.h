@@ -38,17 +38,17 @@ class DataManager
 {
 public:
     DataManager();
-	~DataManager();
+    ~DataManager();
 
     void setActiveServer( const QString &act )      { activeServer = act; }
     QString &getActiveServer( )      				{ return activeServer; }
 
-    Server *getLocalServer()    					{ return getServer( LOCAL_SERVER ); }
+    Server *getLocalServer()    					{ return &( *getServer( LOCAL_SERVER ) ); }
     vector<Server> &getServerList()   				{ return serverList; }
-    Server *getServer( const char *name );
+    vector<Server>::iterator getServer( const char *name );
 
     vector<Destination> &getDestinationList()  		{ return destList; }
-    Destination *getDestination( const char *name );
+    vector<Destination>::iterator getDestination( const char *name );
 
     void loadServers();
     void reloadServerData( );

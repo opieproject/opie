@@ -39,34 +39,32 @@ DataManager::~DataManager()
 {
 }
 
-Server *DataManager :: getServer( const char *name )
+vector<Server>::iterator DataManager :: getServer( const char *name )
 {
-	Server *s = 0;
-	vector<Server>::iterator it = serverList.begin();
-    while ( it != serverList.end() && s == 0 )
+    vector<Server>::iterator it = serverList.begin();
+    while ( it != serverList.end() )
     {
 		if ( it->getServerName() == name )
-			s = &(*it);
+			return it;
 
 		++it;
 	}
 
-	return s;
+	return serverList.end();
 }
 
-Destination *DataManager :: getDestination( const char *name )
+vector<Destination>::iterator DataManager :: getDestination( const char *name )
 {
-	Destination *d = 0;
 	vector<Destination>::iterator it = destList.begin();
-    while ( it != destList.end() && d == 0 )
+    while ( it != destList.end() )
     {
 		if ( it->getDestinationName() == name )
-			d = &(*it);
+			return it;
 
 		++it;
 	}
 
-	return d;
+	return destList.end();
 }
 
 void DataManager :: loadServers()
@@ -150,11 +148,6 @@ void DataManager :: loadServers()
     }
     fclose( fp );
 
-    cout << "httpProxy = " << httpProxy << endl;
-    cout << "ftpProxy = " << ftpProxy << endl;
-    cout << "proxyUsername = " << proxyUsername << endl;
-    cout << "proxyPassword = " << proxyPassword << endl;
-
     reloadServerData( );
 }
 
@@ -171,9 +164,9 @@ void DataManager :: reloadServerData( )
     	if ( it->getServerName() == LOCAL_SERVER )
         	it->readStatusFile( destList );
     	else if ( it->getServerName() == LOCAL_IPKGS )
-    		it->readLocalIpks( getServer( LOCAL_SERVER ) );
+            it->readLocalIpks( &( *getServer( LOCAL_SERVER ) ) );
     	else
-        	it->readPackageFile( getServer( LOCAL_SERVER ) );
+            it->readPackageFile( &( *getServer( LOCAL_SERVER ) ) );     
 	}
 }
 

@@ -165,7 +165,7 @@ void InstallDlgImpl :: installSelected()
     else
     {
         output->setText( "" );
-        Destination *d = dataMgr->getDestination( destination->currentText() );
+        vector<Destination>::iterator d = dataMgr->getDestination( destination->currentText() );
         QString dest = d->getDestinationName();
         QString destDir = d->getDestinationPath();
         int instFlags = flags;

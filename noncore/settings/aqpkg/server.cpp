@@ -80,7 +80,7 @@ void Server :: readStatusFile(  vector<Destination> &destList )
         }   
         
         packageFile = path + "usr/lib/ipkg/status";
-        readPackageFile( 0, false, installingToRoot, dit );
+        readPackageFile( 0, false, installingToRoot, &( *dit ) );
     }
 
     // Ensure that the root status file is read

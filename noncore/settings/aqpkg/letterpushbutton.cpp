@@ -17,7 +17,7 @@
 
 #include "letterpushbutton.h"
 
-LetterPushButton :: LetterPushButton( const QString &text, QWidget *parent, const char *name=0 )
+LetterPushButton :: LetterPushButton( const QString &text, QWidget *parent, const char *name )
    : QPushButton( text, parent, name )
 {
    connect( this, SIGNAL(released()), this, SLOT(released_emmitor()) );

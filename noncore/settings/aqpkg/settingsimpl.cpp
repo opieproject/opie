@@ -16,6 +16,7 @@
  ***************************************************************************/
 
 #include <fstream>
+#include <algorithm>
 using namespace std;
 
 #include <qlistbox.h>
@@ -91,7 +92,7 @@ void SettingsImpl :: setupData()
 void SettingsImpl :: editServer( int sel )
 {
 	currentSelectedServer = sel;
-    Server *s = dataMgr->getServer( servers->currentText() );
+    vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
     serverName = s->getServerName();
     servername->setText( s->getServerName() );
     serverurl->setText( s->getServerUrl() );
@@ -109,10 +110,10 @@ void SettingsImpl :: newServer()
 
 void SettingsImpl :: removeServer()
 {
-	changed = true;
-    Server *s = dataMgr->getServer( servers->currentText() );
-	dataMgr->getServerList().erase( s );
-	servers->removeItem( currentSelectedServer );
+    changed = true;
+    vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
+    dataMgr->getServerList().erase( s );
+    servers->removeItem( currentSelectedServer );
 }
 
 void SettingsImpl :: changeServerDetails()
@@ -122,7 +123,7 @@ void SettingsImpl :: changeServerDetails()
 	QString newName = servername->text();
 	if ( !newserver )
 	{
-		Server *s = dataMgr->getServer( serverName );
+		vector<Server>::iterator s = dataMgr->getServer( servers->currentText() );
 
 		// Update url
 		s->setServerUrl( serverurl->text() );
@@ -159,7 +160,7 @@ void SettingsImpl :: changeServerDetails()
 void SettingsImpl :: editDestination( int sel )
 {
 	currentSelectedDestination = sel;
-    Destination *d = dataMgr->getDestination( destinations->currentText() );
+    vector<Destination>::iterator d = dataMgr->getDestination( destinations->currentText() );
     destinationName = d->getDestinationName();
     destinationname->setText( d->getDestinationName() );
     destinationurl->setText( d->getDestinationPath() );
@@ -177,9 +178,9 @@ void SettingsImpl :: newDestination()
 
 void SettingsImpl :: removeDestination()
 {
-	changed = true;
-    Destination *d = dataMgr->getDestination( destinations->currentText() );
-	dataMgr->getDestinationList().erase( d );
+    changed = true;
+    vector<Destination>::iterator d = dataMgr->getDestination( destinations->currentText() );
+    dataMgr->getDestinationList().erase( d );
 	destinations->removeItem( currentSelectedDestination );
 }
 
@@ -195,7 +196,7 @@ void SettingsImpl :: changeDestinationDetails()
     QString newName = destinationname->text();
 	if ( !newdestination )
 	{
-		Destination *d = dataMgr->getDestination( destinationName );
+		vector<Destination>::iterator d = dataMgr->getDestination( destinations->currentText() );
 
 		// Update url
 		d->setDestinationPath( destinationurl->text() );

@@ -217,7 +217,7 @@ void NetworkPackageManager :: serverSelected( int )
         cfg.writeEntry( "selectedServer", currentlySelectedServer );
 #endif
 
-    Server *s = dataMgr->getServer( serverName );
+    vector<Server>::iterator s = dataMgr->getServer( serverName );
 
     vector<Package> &list = s->getPackageList();
     vector<Package>::iterator it;
@@ -612,7 +612,7 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
         name.truncate( pos - 1 );
 
     // Get package
-    Server *s = dataMgr->getServer( serversList->currentText() );
+    vector<Server>::iterator s = dataMgr->getServer( serversList->currentText() );
     Package *p = s->getPackage( name );
 
     // If the package has a filename then it is a local file
