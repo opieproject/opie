@@ -230,7 +230,7 @@ static bool setCS3Bit(  bool bitset, int bit ) {
     while ( !stream.atEnd() ) {
         QString line = stream.readLine();
         if ( line.startsWith( "Chipselect3 : " ) ) {
-            val = line.mid( 15 ).toUInt( 0, 16 );
+            val = line.mid( 14 ).toUInt( 0, 16 );
             ok = true;
             break;
         }
