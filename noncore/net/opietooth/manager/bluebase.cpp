@@ -52,19 +52,19 @@ namespace OpieTooth {
 
         connect( PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan() ) );
         connect( configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges() ) );
-        connect( ListView2, SIGNAL( expanded ( QListViewItem *item ) ),
-                          this, SLOT( addServicesToDevice( QListViewItem *item ) ) );
+        connect( ListView2, SIGNAL( expanded ( QListViewItem* ) ),
+                          this, SLOT( addServicesToDevice( QListViewItem * ) ) );
         connect( ListView2, SIGNAL( clicked( QListViewItem* )),
-                          this, SLOT( startServiceActionClicked( QListViewItem *item ) ) );
-        connect( localDevice, SIGNAL( foundServices( const QString& device, Services::ValueList ) ),
-                this, SLOT( addServicesToDevice( const QString& device, Services::ValueList ) ) );
+                          this, SLOT( startServiceActionClicked( QListViewItem* ) ) );
+        connect( localDevice , SIGNAL( foundServices( const QString& , Services::ValueList ) ),
+                this, SLOT( addServicesToDevice( const QString& , Services::ValueList ) ) );
 
 
         //Load all icons needed
 
 
-        QPixmap offPix = Resource::loadPixmap( "editdelete" );
-        QPixmap onPix = Resource::loadPixmap( "installed" );
+        offPix = Resource::loadPixmap( "editdelete" );
+        onPix = Resource::loadPixmap( "installed" );
 
         QPalette pal = this->palette();
         QColor col = pal.color(QPalette::Active, QColorGroup::Background);
@@ -85,12 +85,12 @@ namespace OpieTooth {
         ListView2->setRootIsDecorated(true);
 
         QListViewItem *topLV = new QListViewItem( ListView2, "Harlekins Dongle" , "yes");
-        topLV->setPixmap( 0, offPix );
+        topLV->setPixmap( 1, offPix );
         //  (void) new QListViewItem( topLV, "on" );
         //(void) new QListViewItem( topLV, "off"  );
 
         QListViewItem *topLV2 = new QListViewItem( ListView2, "Siemens S45" , "no" );
-        topLV2->setPixmap( 0, onPix );
+        topLV2->setPixmap( 1, onPix );
         (void) new QListViewItem( topLV2, "on"  );
         (void) new QListViewItem( topLV2, "off" );
 
@@ -257,7 +257,7 @@ namespace OpieTooth {
     /*
      * Action that is toggled on entrys on click
      */
-    void BlueBase::startServiceActionClicked( QListViewItem * item ) {
+    void BlueBase::startServiceActionClicked( QListViewItem *item ) {
 
 
     }

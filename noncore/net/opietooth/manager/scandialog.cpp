@@ -101,7 +101,7 @@ namespace OpieTooth {
 
         progressStat++;
             if (progressStat++ < 20) {
-                QTimer::singleShot( 1000, this, SLOT(progressTimer() ) );
+                QTimer::singleShot( 2000, this, SLOT(progressTimer() ) );
             }
             progress->setProgress(progressStat++);
 
