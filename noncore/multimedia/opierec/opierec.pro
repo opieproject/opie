@@ -1,4 +1,4 @@
-CONFIG   = qt warn_on
+CONFIG   = qt quick-app
 HEADERS   = adpcm.h \
 	pixmaps.h \
 	helpwindow.h \
@@ -30,7 +30,6 @@ contains(CONFIG, pdaudio) {
 !contains(CONFIG, pdaudio) {
   INCLUDEPATH += $(OPIEDIR)/include
   DEPENDPATH  += $(OPIEDIR)/include
-  DESTDIR=$(OPIEDIR)/bin
   LIBS            += -lqpe -lopiecore2 -lpthread
   TARGET    = opierec
   include ( $(OPIEDIR)/include.pro )
