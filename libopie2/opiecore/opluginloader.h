@@ -17,7 +17,7 @@ namespace Internal {
 class OPluginLibraryHolder;
 }
 
-template class QPtrDict<QLibrary>;
+// template class QPtrDict<QLibrary>;
 
 /**
  * \brief A small item representing the Plugin Information
