@@ -44,6 +44,7 @@ void TodoSearch::expand()
 
 #ifdef LIPBOPIE_SEARCH
 	ORecordList<OTodo> results = _todos->matchRegexp(_search);
+	setText(0, text(0) + " (" + QString::number( results.count() ) + ")");
 	for (uint i = 0; i < results.count(); i++) {
 		new TodoItem( this, new OTodo( results[i] ));
 	}

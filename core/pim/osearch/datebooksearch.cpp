@@ -39,6 +39,7 @@ void DatebookSearch::expand()
 	 }
 #ifdef LIPBOPIE_SEARCH
 	ORecordList<OEvent> results = _dates->matchRegexp(_search);
+	setText(0, text(0) + " (" + QString::number( results.count() ) + ")" );
 	for (uint i = 0; i < results.count(); i++) {
 		new EventItem( this, new OEvent( results[i] ));
 	}
