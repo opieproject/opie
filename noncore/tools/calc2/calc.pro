@@ -13,6 +13,7 @@ TRANSLATIONS = ../i18n/pt_BR/calc.ts
 TRANSLATIONS   += ../i18n/de/calc.ts
 TRANSLATIONS   += ../i18n/en/calc.ts
 TRANSLATIONS   += ../i18n/hu/calc.ts
+TRANSLATIONS   += ../i18n/fr/calc.ts
 TRANSLATIONS   += ../i18n/ja/calc.ts
 TRANSLATIONS   += ../i18n/ko/calc.ts
 TRANSLATIONS   += ../i18n/no/calc.ts

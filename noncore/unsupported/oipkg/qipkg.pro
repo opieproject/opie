@@ -11,4 +11,5 @@ INTERFACES	= packagemanagerbase.ui pkdesc.ui pkfind.ui pksettings.ui
 TARGET		= qipkg
 
 TRANSLATIONS = ../i18n/de/qipkg.ts
+TRANSLATIONS = ../i18n/fr/qipkg.ts
 TRANSLATIONS += ../i18n/pt_BR/qipkg.ts

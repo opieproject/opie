@@ -38,6 +38,7 @@ TRANSLATIONS = ../i18n/pt_BR/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/de/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/en/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/hu/embeddedkonsole.ts
+TRANSLATIONS   += ../i18n/fr/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/ja/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/ko/embeddedkonsole.ts
 TRANSLATIONS   += ../i18n/no/embeddedkonsole.ts

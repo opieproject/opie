@@ -12,6 +12,7 @@ TRANSLATIONS += ../i18n/pt_BR/filebrowser.ts
 TRANSLATIONS   += ../i18n/en/filebrowser.ts
 TRANSLATIONS   += ../i18n/hu/filebrowser.ts
 TRANSLATIONS   += ../i18n/ja/filebrowser.ts
+TRANSLATIONS   += ../i18n/fr/filebrowser.ts
 TRANSLATIONS   += ../i18n/ko/filebrowser.ts
 TRANSLATIONS   += ../i18n/no/filebrowser.ts
 TRANSLATIONS   += ../i18n/zh_CN/filebrowser.ts

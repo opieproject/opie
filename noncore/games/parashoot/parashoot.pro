@@ -14,6 +14,7 @@ TRANSLATIONS   += ../i18n/en/parashoot.ts
 TRANSLATIONS   += ../i18n/hu/parashoot.ts
 TRANSLATIONS   += ../i18n/ja/parashoot.ts
 TRANSLATIONS   += ../i18n/ko/parashoot.ts
+TRANSLATIONS   += ../i18n/fr/parashoot.ts
 TRANSLATIONS   += ../i18n/no/parashoot.ts
 TRANSLATIONS   += ../i18n/zh_CN/parashoot.ts
 TRANSLATIONS   += ../i18n/zh_TW/parashoot.ts

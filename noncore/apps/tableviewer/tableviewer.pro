@@ -40,6 +40,7 @@ TRANSLATIONS   += ../i18n/en/tableviewer.ts
 TRANSLATIONS   += ../i18n/de/tableviewer.ts
 TRANSLATIONS   += ../i18n/hu/tableviewer.ts
 TRANSLATIONS   += ../i18n/ja/tableviewer.ts
+TRANSLATIONS   += ../i18n/fr/tableviewer.ts
 TRANSLATIONS   += ../i18n/ko/tableviewer.ts
 TRANSLATIONS   += ../i18n/no/tableviewer.ts
 TRANSLATIONS   += ../i18n/zh_CN/tableviewer.ts

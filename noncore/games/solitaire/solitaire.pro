@@ -22,5 +22,6 @@ TRANSLATIONS   += ../i18n/hu/patience.ts
 TRANSLATIONS   += ../i18n/ja/patience.ts
 TRANSLATIONS   += ../i18n/ko/patience.ts
 TRANSLATIONS   += ../i18n/no/patience.ts
+TRANSLATIONS   += ../i18n/fr/patience.ts
 TRANSLATIONS   += ../i18n/zh_CN/patience.ts
 TRANSLATIONS   += ../i18n/zh_TW/patience.ts

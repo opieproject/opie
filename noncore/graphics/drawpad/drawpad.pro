@@ -41,3 +41,14 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS		+= -lqpe
 DESTDIR		= $(OPIEDIR)/bin
 TARGET		= drawpad
+
+TRANSLATIONS    = ../../i18n/pt_BR/drawpad.ts
+TRANSLATIONS   += ../../i18n/de/drawpad.ts
+TRANSLATIONS   += ../../i18n/en/drawpad.ts
+TRANSLATIONS   += ../../i18n/hu/drawpad.ts
+TRANSLATIONS   += ../../i18n/ja/drawpad.ts
+TRANSLATIONS   += ../../i18n/fr/drawpad.ts
+TRANSLATIONS   += ../../i18n/ko/drawpad.ts
+TRANSLATIONS   += ../../i18n/no/drawpad.ts
+TRANSLATIONS   += ../../i18n/zh_CN/drawpad.ts
+TRANSLATIONS   += ../../i18n/zh_TW/drawpad.ts
