@@ -83,58 +83,57 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     QPixmap image1( ( const char** ) image1_data );
     if ( !name )
   setName( "SoundSettingsBase" );
+    //    resize(255,301);
     setCaption( tr( "Vmemo Settings" ) );
 
     SoundSettingsBaseLayout = new QGridLayout( this ); 
     SoundSettingsBaseLayout->setSpacing( 4 );
-    SoundSettingsBaseLayout->setMargin( 6 );
+    SoundSettingsBaseLayout->setMargin( 4 );
+
+    QHBoxLayout *Layout11;
+    Layout11 = new QHBoxLayout; 
+    Layout11->setSpacing( 4 );
+    Layout11->setMargin( 0 );
 
     stereoCheckBox = new QCheckBox( this, "stereoCheckBox" );
     stereoCheckBox->setText( tr( "Stereo" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget(stereoCheckBox , 0, 0, 0, 0 );
+    Layout11->addWidget( stereoCheckBox );
 
     sixteenBitCheckBox = new QCheckBox( this, "sixteenBitCheckBox" );
     sixteenBitCheckBox->setText( tr( "16 bit" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget( sixteenBitCheckBox , 0, 0, 1, 1 );
+    Layout11->addWidget( sixteenBitCheckBox );
 
     AlertCheckBox = new QCheckBox( this, "AlertCheckBox" );
     AlertCheckBox->setText( tr( "Visual Alerts" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget( AlertCheckBox  , 0, 0, 2, 2 );
+    Layout11->addWidget( AlertCheckBox );
 
-    QSpacerItem* spacer0 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
-    SoundSettingsBaseLayout->addItem( spacer0, 0, 3 );
-   
+    SoundSettingsBaseLayout->addLayout( Layout11, 0, 0);
+    
     sampleRateLabel = new QLabel(this, "sampleRateLabel" );
     sampleRateLabel->setText( tr( "Sample Rate:" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget(  sampleRateLabel  , 1, 1, 0, 0 );
+    SoundSettingsBaseLayout->addMultiCellWidget(  sampleRateLabel  , 1, 1, 0, 0, 1);
 
     sampleRate = new QComboBox( FALSE,this, "sampleRate" );
+    
     sampleRate->insertItem( tr( "8000" ) );
     sampleRate->insertItem( tr( "11025" ) );
     sampleRate->insertItem( tr( "22050" ) );
     sampleRate->insertItem( tr( "33075" ) );
     sampleRate->insertItem( tr( "44100" ) );
-//    sampleRate->setFixedWidth(90);
-    SoundSettingsBaseLayout->addMultiCellWidget(  sampleRate, 2, 2, 0, 2 );
-
-//      QSpacerItem* spacer = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
-//      SoundSettingsBaseLayout->addItem( spacer, 1, 3 );
+    SoundSettingsBaseLayout->addMultiCellWidget(  sampleRate, 2, 2, 0, 0, 1 );
 
     TextLabel1 = new QLabel( this, "TextLabel1" );
     TextLabel1->setText( tr( "Recording Directory:" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget( TextLabel1, 3, 3, 0, 0 );
+    SoundSettingsBaseLayout->addMultiCellWidget( TextLabel1, 3, 3, 0, 0, 1);
 
 
     LocationComboBox = new QComboBox( FALSE, this, "LocationComboBox" );
-    SoundSettingsBaseLayout->addMultiCellWidget(  LocationComboBox, 4, 4, 0, 2 );
-
-//      QSpacerItem* spacer1 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
-//      SoundSettingsBaseLayout->addItem( spacer1, 2, 3 );
+    SoundSettingsBaseLayout->addMultiCellWidget(  LocationComboBox, 4, 4, 0, 8, 1);
 
     QLabel *TextLabelKey;
     TextLabelKey = new QLabel( this, "TextLabelKey" );
     TextLabelKey->setText( tr( "Recording Key:" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget(TextLabelKey , 5, 5, 0, 0 );
+    SoundSettingsBaseLayout->addMultiCellWidget(TextLabelKey , 5, 5, 0, 0, 1);
 
     keyComboBox = new QComboBox( FALSE, this, "keyComboBox" );
     keyComboBox->insertItem( tr( "" ) );
@@ -146,15 +145,12 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     keyComboBox->insertItem( tr( "Key_Contacts" ) );
     keyComboBox->insertItem( tr( "Key_Menu" ) );
     keyComboBox->insertItem( tr( "Key_Mail" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget( keyComboBox , 6, 6, 0, 2 );
-
-//      QSpacerItem* spacer2 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
-//      SoundSettingsBaseLayout->addItem( spacer2, 3, 3 );
+    SoundSettingsBaseLayout->addMultiCellWidget( keyComboBox , 6, 6, 0, 0 ,1);
 
     QLabel *timeLimitLabel;
     timeLimitLabel= new QLabel( this, "timeLimitLabel" );
     timeLimitLabel->setText( tr( "Recording Limit in seconds:" ) );
-    SoundSettingsBaseLayout->addMultiCellWidget(  timeLimitLabel  , 7, 7, 0, 0 );
+    SoundSettingsBaseLayout->addMultiCellWidget(  timeLimitLabel  , 7, 7, 0, 0, 1);
 
     timeLimitComboBox = new QComboBox( FALSE, this, "timeLimitComboBox" );
     timeLimitComboBox->insertItem( tr( "30" ) );
@@ -164,12 +160,10 @@ SoundSettingsBase::SoundSettingsBase( QWidget* parent,  const char* name, bool m
     timeLimitComboBox->insertItem( tr( "5" ) );
     timeLimitComboBox->insertItem( tr( "Unlimited" ) );
 
-    SoundSettingsBaseLayout->addMultiCellWidget(timeLimitComboBox  , 8, 8, 0, 2);
+    SoundSettingsBaseLayout->addMultiCellWidget(timeLimitComboBox  , 8, 8, 0, 0, 1);
 
-//      QSpacerItem* spacer3 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
-//      SoundSettingsBaseLayout->addItem( spacer3, 4, 3 );
 
-      QSpacerItem* spacer4 = new QSpacerItem( 20, 20,QSizePolicy::Expanding, QSizePolicy::Expanding );
+      QSpacerItem* spacer4 = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
       SoundSettingsBaseLayout->addItem( spacer4, 9, 0 );
 }
 
