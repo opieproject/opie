@@ -30,6 +30,7 @@
 Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   : SetDateTime( parent, name, fl )
 {
+  _interactive = false;
   Config ntpSrvs(QPEApplication::qpeDir()+"etc/ntpservers",Config::File);
   ntpSrvs.setGroup("servers");
   int srvCount = ntpSrvs.readNumEntry("count", 0 );
@@ -78,15 +79,14 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 	   SLOT(slotNtpDelayChanged(int)) );
 
   ntpSock = new QSocket( this );
-  connect( ntpSock, SIGNAL( error(int) ),
-	   SLOT(slotCheckNtp(int)) );
+  connect( ntpSock, SIGNAL( error(int) ),SLOT(slotCheckNtp(int)) );
   slotProbeNtpServer();
 
   connect ( ntpProcess, SIGNAL(receivedStdout(OProcess*,char*,int)),
 	    this, SLOT(getNtpOutput(OProcess*,char*,int)));
   connect ( ntpProcess, SIGNAL(processExited(OProcess*)),
 	    this, SLOT(ntpFinished(OProcess*)));
-  connect(runNtp, SIGNAL(clicked()), this, SLOT(slotRunNtp()));
+  connect(runNtp, SIGNAL(clicked()), this, SLOT(slotButtonRunNtp()));
   connect(PushButtonPredict, SIGNAL(clicked()), this, SLOT(preditctTime()));
   connect(PushButtonSetPredTime, SIGNAL(clicked()), this, SLOT(setPredictTime()));
   slotCheckNtp(-1);
@@ -96,13 +96,21 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 Ntp::~Ntp()
 {
   delete ntpProcess;
-  Config ntpSrvs("/etc/ntpservers",Config::File);
-  ntpSrvs.setGroup("servers");
   int srvCount = ComboNtpSrv->count();
-  ntpSrvs.writeEntry("count", srvCount);
+  bool serversChanged = true;
+  QString edit = ComboNtpSrv->currentText();
   for (int i = 0; i < srvCount; i++){
-    ntpSrvs.setGroup(QString::number(i));
-    ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i) );
+       if ( edit ==  ComboNtpSrv->text(i)) serversChanged = false;
+  }
+  if (serversChanged){
+    Config ntpSrvs("/etc/ntpservers",Config::File);
+    ntpSrvs.setGroup("servers");
+    ntpSrvs.writeEntry("count", srvCount);
+    for (int i = 0; i < srvCount; i++){
+      qDebug("ntpSrvs[%i/%i]=%s",i,srvCount,ComboNtpSrv->text(i).latin1());
+      ntpSrvs.setGroup(QString::number(i));
+      ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i) );
+    }
   }
   Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
@@ -126,6 +134,19 @@ QString Ntp::getNtpServer()
 {
   return ComboNtpSrv->currentText();
 }
+
+void Ntp::slotButtonRunNtp()
+{
+  _interactive = true;
+  slotRunNtp();
+}
+
+void Ntp::slotTimerRunNtp()
+{
+  _interactive = false;
+  slotRunNtp();
+}
+
 
 void Ntp::slotRunNtp()
 {
@@ -176,14 +197,11 @@ void  Ntp::ntpFinished(OProcess *p)
   qDebug("p->exitStatus() %i",p->exitStatus());
   if (p->exitStatus()!=0 || !p->normalExit())
     {      
-      if ( isVisible() ) {
-	QMessageBox::critical(this, tr("ntp error"),
-			    tr("Error while getting time form\n server")+ 
-			    getNtpServer()+"\n"+
-			    _ntpOutput );
-	TabWidgetMain->showPage( tabManualSetTime );
+      if ( isVisible() && _interactive ){
+        QMessageBox::critical(this, tr("ntp error"),tr("Error while getting time form\n server")+getNtpServer()+"\n"+_ntpOutput );
+        TabWidgetMain->showPage( tabManualSetTime );
       }
-      
+
       return;
     }
 
@@ -303,14 +321,14 @@ void Ntp::slotCheckNtp(int i)
     {
       TextLabelMainPredTime->hide();
       ButtonSetTime->setText( tr("Get time from network") );
-      connect( ButtonSetTime, SIGNAL(clicked()), SLOT(slotRunNtp()) );
+      connect( ButtonSetTime, SIGNAL(clicked()), SLOT(slotButtonRunNtp()) );
       if ( ntpDelayElapsed() )
    	{
 	  slotRunNtp();
 	  disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotProbeNtpServer()) );
-	  connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotRunNtp()) );
+	  connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotTimerRunNtp()) );
 	}else{
-	  disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotRunNtp()) );
+	  disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotTimerRunNtp()) );
 	  connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
 	}
     }else{
@@ -354,6 +372,7 @@ void Ntp::receive(const QCString &msg, const QByteArray &arg)
   qDebug("QCop(Ntp) "+msg+" "+QCString(arg));
   if ( msg == "ntpLookup(QString)" )
     {
+      _interactive = false;
       slotRunNtp();
     }
   if ( msg == "setPredictedTime(QString)" )

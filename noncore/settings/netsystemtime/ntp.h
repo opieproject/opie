@@ -32,13 +32,15 @@ private:
   QTimer *ntpTimer;
   QSocket *ntpSock;
   QCopChannel *channel;
-
+  bool _interactive;
   float getTimeShift();
   void readLookups();
   void ntpOutPut(QString);
   bool ntpDelayElapsed();
   QString getNtpServer();
 private slots:
+  void slotTimerRunNtp();
+  void slotButtonRunNtp();
   void slotRunNtp();
   void getNtpOutput(OProcess *proc, char *buffer, int buflen);
   void ntpFinished(OProcess*);
