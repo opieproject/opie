@@ -57,7 +57,7 @@ void Parser::parse( const QString& string) {
     QStringList list = QStringList::split('\n', string,TRUE );
     QStringList::Iterator it;
     for (it = list.begin(); it != list.end(); ++it ) {
-        qWarning("line:%s:line", (*it).latin1() );
+        //qWarning("line:%s:line", (*it).latin1() );
         if ( (*it).startsWith("Browsing") ) continue;
 
         if ( (*it).stripWhiteSpace().isEmpty() ) { // line is empty because a new Service begins
@@ -80,7 +80,7 @@ void Parser::parse( const QString& string) {
     }
     // missed the last one
     if (m_complete) {
-        qWarning("adding");
+//        qWarning("adding");
         if (!m_item.serviceName().isEmpty() )
             m_list.append(m_item );
     }
@@ -118,10 +118,13 @@ bool Parser::parseRecHandle( const QString& str) {
 }
 bool Parser::parseClassId( const QString& str) {
     if (str.startsWith("Service Class ID List:") ) {
+        qWarning("found class id" );
+	qWarning("line:%s", str.latin1() );
         m_classOver = true;
         return true;
-    }else if ( m_classOver && str.startsWith("   " )  ){ // ok now are the informations in place
-
+    }else if ( m_classOver && str.startsWith("  " )  ){ // ok now are the informations in place
+        qWarning("line with class id" );
+	qWarning("%s",str.latin1() );
 
         // "Obex Object Push" (0x1105)
         //  find backwards the " and the from 0 to pos and the mid pos+1
@@ -134,8 +137,10 @@ bool Parser::parseClassId( const QString& str) {
         m_item.insertClassId( ids, classes );
 
         return true;
-    }else
+    }else{
+        qWarning("Else %d", m_classOver );
         m_classOver = false;
+    }
     return false;
 }
 bool Parser::parseProtocol( const QString& str) {

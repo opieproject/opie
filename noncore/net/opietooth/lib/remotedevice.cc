@@ -46,3 +46,9 @@ QString RemoteDevice::name() const{
 void RemoteDevice::setName( const QString& name ){
   m_name = name;
 }
+bool RemoteDevice::equals( const RemoteDevice& dev ) const {
+    if ( m_mac == dev.m_mac && m_name == dev.m_name )
+        return true;
+    else
+        return false;
+};
