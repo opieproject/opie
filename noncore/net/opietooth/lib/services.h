@@ -11,7 +11,7 @@ namespace OpieTooth {
    * on a remote device
    */
   class Services {
-
+   public:
     /** The profile descriptor
      *
      */
@@ -70,6 +70,7 @@ namespace OpieTooth {
       int m_idInt;
       int m_version;
     };
+  public:
     /**
      * Protocol Descriptor
      */
