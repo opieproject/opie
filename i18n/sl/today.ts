@@ -52,6 +52,10 @@
         <source>Opiemail not installed</source>
         <translation>OpiePošta ni nameščena</translation>
     </message>
+    <message>
+        <source>Today</source>
+        <translation type="unfinished">Danes</translation>
+    </message>
 </context>
 <context>
     <name>todayconfig</name>
@@ -134,6 +138,12 @@ be shown?</source>
         <source>Should today be
 autostarted on
 resume? (Opie only)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Activate the  
+autostart after how
+many minutes?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -653,7 +653,7 @@ Zwolnij wiecej pamieci</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Dom Panstwo></translation>
+        <translation>Dom Panstwo&gt;</translation>
     </message>
     <message>
         <source>Home Web Page</source>

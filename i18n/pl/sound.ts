@@ -3,7 +3,7 @@
     <name>SoundSettingsBase</name>
     <message>
         <source>Sound Settings</source>
-        <translation>Ustawienia dzwieku</translation>
+        <translation type="obsolete">Ustawienia dzwieku</translation>
     </message>
     <message>
         <source>Vmemo</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>44100</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Screen sounds</source>
-        <translation>Dzwieki z ekranu</translation>
+        <translation type="obsolete">Dzwieki z ekranu</translation>
     </message>
     <message>
         <source>Keyboard sounds</source>
-        <translation>Dzwieki z klawiatury</translation>
+        <translation type="obsolete">Dzwieki z klawiatury</translation>
     </message>
     <message>
         <source>Levels</source>
@@ -64,6 +64,26 @@
     <message>
         <source>Silent</source>
         <translation>Cicho</translation>
+    </message>
+    <message>
+        <source>Vmemo Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>33075</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visual Alerts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

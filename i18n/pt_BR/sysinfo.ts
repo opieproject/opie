@@ -46,11 +46,15 @@
     </message>
     <message>
         <source> total: %1 kB</source>
-        <translation> total: %1 kB</translation>
+        <translation type="obsolete"> total: %1 kB</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
         <translation>Usado (%1 kB)</translation>
+    </message>
+    <message>
+        <source> : %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -99,19 +103,23 @@
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation>Armazenamento Interno</translation>
+        <translation type="obsolete">Armazenamento Interno</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation>Cartão SD</translation>
+        <translation type="obsolete">Cartão SD</translation>
     </message>
     <message>
         <source>CF Card</source>
-        <translation>Cartão CF</translation>
+        <translation type="obsolete">Cartão CF</translation>
     </message>
     <message>
         <source>Hard Disk</source>
         <translation>Disco Rígido</translation>
+    </message>
+    <message>
+        <source>Int. Storage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

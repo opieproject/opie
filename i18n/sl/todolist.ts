@@ -104,11 +104,11 @@ preden vnesete podatke</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Uredi</translation>
+        <translation type="obsolete">Uredi</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Izbriši</translation>
+        <translation type="obsolete">Izbriši</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -128,7 +128,7 @@ preden vnesete podatke</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Pogled</translation>
+        <translation type="obsolete">Pogled</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -174,6 +174,34 @@ Izhod?</translation>
     </message>
     <message>
         <source>Fonts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all tasks?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Load</source>
-        <translation>Odpri</translation>
+        <translation type="obsolete">Odpri</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -81,6 +81,18 @@
     </message>
     <message>
         <source>Open File</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -92,127 +104,127 @@
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished">Več</translation>
+        <translation type="obsolete">Več</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished">Več...</translation>
+        <translation type="obsolete">Več...</translation>
     </message>
 </context>
 <context>
     <name>QColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation>Odtenek:</translation>
+        <translation type="obsolete">Odtenek:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation>Nasičenje:</translation>
+        <translation type="obsolete">Nasičenje:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation>Jakost:</translation>
+        <translation type="obsolete">Jakost:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rdeča:</translation>
+        <translation type="obsolete">Rdeča:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Zelena:</translation>
+        <translation type="obsolete">Zelena:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Modra:</translation>
+        <translation type="obsolete">Modra:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Alfa kanal:</translation>
+        <translation type="obsolete">Alfa kanal:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Izberi barvo</translation>
+        <translation type="obsolete">Izberi barvo</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="obsolete">Velikost</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumenti</translation>
+        <translation type="obsolete">Dokumenti</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Vse datoteke</translation>
+        <translation type="obsolete">Vse datoteke</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation>Skrite datoteke</translation>
+        <translation type="obsolete">Skrite datoteke</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation>Tip: %1</translation>
+        <translation type="obsolete">Tip: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Zamenjaj Imenik</translation>
+        <translation type="obsolete">Zamenjaj Imenik</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Ustvari Imenik</translation>
+        <translation type="obsolete">Ustvari Imenik</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation>Preišči</translation>
+        <translation type="obsolete">Preišči</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Preimenuj</translation>
+        <translation type="obsolete">Preimenuj</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Zbriši</translation>
+        <translation type="obsolete">Zbriši</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Vse</translation>
+        <translation type="obsolete">Vse</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 </TS>

@@ -57,7 +57,7 @@ Acesso negado</translation>
     </message>
     <message>
         <source>192.168.1.0/24 (default)</source>
-        <translation type="unfinished">192.168.1.0/24 (padrão)</translation>
+        <translation type="obsolete">192.168.1.0/24 (padrão)</translation>
     </message>
     <message>
         <source>Security Settings</source>
@@ -85,6 +85,14 @@ Acesso negado</translation>
     </message>
     <message>
         <source>10.0.0.0/8</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>192.168.129.0/24 (default)</source>
+        <translation type="unfinished">192.168.129.0/24 (padrão)</translation>
+    </message>
+    <message>
+        <source>192.168.1.0/24</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

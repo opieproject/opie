@@ -23,19 +23,19 @@
     </message>
     <message>
         <source>Press Calendar to start playing</source>
-        <translation>Wcisnij 'Kalendarz' w celu uruchomienia</translation>
+        <translation>Wcisnij &apos;Kalendarz&apos; w celu uruchomienia</translation>
     </message>
     <message>
         <source>Ship Destroyed.
 Press Contacts/Home key.</source>
         <translation>Statek zniszczony.
-Wcisnij 'Kontakty'.</translation>
+Wcisnij &apos;Kontakty&apos;.</translation>
     </message>
     <message>
         <source>Game Over.
 Press Calendar for a new game.</source>
         <translation>Koniec gry.
-Wcisnij 'Kaledarz' dla nowej gry.</translation>
+Wcisnij &apos;Kaledarz&apos; dla nowej gry.</translation>
     </message>
 </context>
 </TS>

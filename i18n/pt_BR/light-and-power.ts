@@ -46,5 +46,9 @@
         <source>Bright</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Only deactivate LCD during Suspend</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

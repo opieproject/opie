@@ -108,7 +108,7 @@ Wyjsc ?</translation>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>M</source>
@@ -247,7 +247,7 @@ Wyjsc ?</translation>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Y: </source>
@@ -266,14 +266,14 @@ Wyjsc ?</translation>
     <name>DateBookWeekLstDayHdrBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>Form2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>W: 00,00</source>
@@ -360,6 +360,14 @@ Wyjsc ?</translation>
         <source>No Repeat...</source>
         <translation>Jednorazowo...</translation>
     </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Time</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateEntryBase</name>
@@ -393,7 +401,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation type="obsolete">Opis</translation>
     </message>
     <message>
         <source>Office</source>
@@ -405,7 +413,7 @@ Wyjsc ?</translation>
     </message>
     <message>
         <source>Start - End</source>
-        <translation>Poczatek - Koniec</translation>
+        <translation type="obsolete">Poczatek - Koniec</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
@@ -447,12 +455,35 @@ Wyjsc ?</translation>
         <source>No Repeat...</source>
         <translation>Nie powtarzaj</translation>
     </message>
+    <message>
+        <source>Description </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start - End </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEntryBase</name>
+    <message>
+        <source>Edit Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Poczatek</translation>
     </message>
     <message>
         <source>End</source>

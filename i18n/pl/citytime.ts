@@ -62,7 +62,7 @@
     </message>
     <message>
         <source>&lt;location 1&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;location 1&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 3 TIME&gt;</source>

@@ -99,11 +99,11 @@
     </message>
     <message>
         <source>More</source>
-        <translation>Več</translation>
+        <translation type="obsolete">Več</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Več...</translation>
+        <translation type="obsolete">Več...</translation>
     </message>
     <message>
         <source>Pen Color</source>
@@ -120,6 +120,10 @@
     <message>
         <source>Page</source>
         <translation>Stran</translation>
+    </message>
+    <message>
+        <source>Insert Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -153,6 +157,14 @@ trenutno stran?</translation>
 the current page?</source>
         <translation>Ali želite izbrisati
 trenutno stran?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -253,42 +265,53 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Brush Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Fill Color</source>
+        <translation type="unfinished">Barva polnila</translation>
     </message>
 </context>
 <context>
     <name>QColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation>Odtenek:</translation>
+        <translation type="obsolete">Odtenek:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation>Nasičenje:</translation>
+        <translation type="obsolete">Nasičenje:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation>Jakost:</translation>
+        <translation type="obsolete">Jakost:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rdeča:</translation>
+        <translation type="obsolete">Rdeča:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Zelena:</translation>
+        <translation type="obsolete">Zelena:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Modra:</translation>
+        <translation type="obsolete">Modra:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Alfa kanal:</translation>
+        <translation type="obsolete">Alfa kanal:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Izberi barvo</translation>
+        <translation type="obsolete">Izberi barvo</translation>
+    </message>
+</context>
+<context>
+    <name>TextToolDialog</name>
+    <message>
+        <source>Insert Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

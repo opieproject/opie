@@ -147,6 +147,28 @@ This is irreversable!!</source>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Editor has detected
+ you selected a .desktop file.
+Open .desktop file or linked file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>.desktop File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Linked Document</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>fileBrowser</name>

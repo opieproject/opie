@@ -60,7 +60,7 @@ Dostep zabroniony</translation>
     </message>
     <message>
         <source>192.168.1.0/24 (default)</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
@@ -85,6 +85,14 @@ Dostep zabroniony</translation>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation>&lt;P&gt;Haslo zabezpieczajace pozwala na minimalny poziom zabezpieczen do tego urzadzenia.</translation>
+    </message>
+    <message>
+        <source>192.168.129.0/24 (default)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>192.168.1.0/24</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -102,11 +102,11 @@ before you enter any data</source>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Edycja</translation>
+        <translation type="obsolete">Edycja</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation type="obsolete">Usun</translation>
     </message>
     <message>
         <source>Beam</source>
@@ -122,11 +122,11 @@ before you enter any data</source>
     </message>
     <message>
         <source>Task</source>
-        <translation>Proces</translation>
+        <translation type="obsolete">Proces</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Widok</translation>
+        <translation type="obsolete">Widok</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
@@ -168,6 +168,34 @@ Quit Anyway?</source>
     <message>
         <source>Fonts</source>
         <translation>Czcionka</translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all tasks?</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>SoundSettingsBase</name>
     <message>
         <source>Sound Settings</source>
-        <translation>Nastavitve zvoka</translation>
+        <translation type="obsolete">Nastavitve zvoka</translation>
     </message>
     <message>
         <source>Vmemo</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>32000</source>
-        <translation>32000</translation>
+        <translation type="obsolete">32000</translation>
     </message>
     <message>
         <source>44100</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Screen sounds</source>
-        <translation>Zaslonski zvoki</translation>
+        <translation type="obsolete">Zaslonski zvoki</translation>
     </message>
     <message>
         <source>Keyboard sounds</source>
-        <translation>Zvoki tipkovnice</translation>
+        <translation type="obsolete">Zvoki tipkovnice</translation>
     </message>
     <message>
         <source>Levels</source>
@@ -64,6 +64,26 @@
     <message>
         <source>Silent</source>
         <translation>Tiho</translation>
+    </message>
+    <message>
+        <source>Vmemo Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>33075</source>
+        <translation type="unfinished">33075</translation>
+    </message>
+    <message>
+        <source>Visual Alerts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

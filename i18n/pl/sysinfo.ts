@@ -41,7 +41,7 @@
     <name>MountInfo</name>
     <message>
         <source> total: %1 kB</source>
-        <translation> razem: %1 kB</translation>
+        <translation type="obsolete"> razem: %1 kB</translation>
     </message>
     <message>
         <source>Used (%1 kB)</source>
@@ -50,6 +50,10 @@
     <message>
         <source>Available (%1 kB)</source>
         <translation>Dostepne (%1 kB)</translation>
+    </message>
+    <message>
+        <source> : %1 kB</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -82,7 +86,7 @@
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -90,7 +94,7 @@
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
@@ -98,7 +102,11 @@
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation>Wewnetrzna pamiec</translation>
+        <translation type="obsolete">Wewnetrzna pamiec</translation>
+    </message>
+    <message>
+        <source>Int. Storage</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -233,5 +233,13 @@ To musi byc puste</translation>
         <source>That directory does not exist</source>
         <translation>Ten katalog nie istnieje</translation>
     </message>
+    <message>
+        <source>About</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rescan</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

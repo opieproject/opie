@@ -60,7 +60,7 @@ Dostop zavrnjen</translation>
     </message>
     <message>
         <source>192.168.1.0/24 (default)</source>
-        <translation>192.168.1.0/24 (privzeto)</translation>
+        <translation type="obsolete">192.168.1.0/24 (privzeto)</translation>
     </message>
     <message>
         <source>192.168.0.0/16</source>
@@ -85,6 +85,14 @@ Dostop zavrnjen</translation>
     <message>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation>&lt;P&gt;Koda prinaša minimalno zaščito za varovanje vaše naprave.</translation>
+    </message>
+    <message>
+        <source>192.168.129.0/24 (default)</source>
+        <translation type="unfinished">192.168.129.0/24 (privzeto)</translation>
+    </message>
+    <message>
+        <source>192.168.1.0/24</source>
+        <translation type="unfinished">192.168.1.0/24</translation>
     </message>
 </context>
 </TS>

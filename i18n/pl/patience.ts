@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Skocz do pozycji></translation>
+        <translation>&amp;Skocz do pozycji&gt;</translation>
     </message>
     <message>
         <source>&amp;Settings</source>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Load</source>
-        <translation>Zaladuj</translation>
+        <translation type="obsolete">Zaladuj</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Open File</source>
-        <translation>Otworz plik</translation>
+        <translation type="obsolete">Otworz plik</translation>
     </message>
     <message>
         <source>Delete scheme</source>
@@ -73,6 +73,18 @@
         <source>Current scheme</source>
         <translation>Aktualny schemat</translation>
     </message>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditScheme</name>
@@ -82,129 +94,129 @@
     </message>
     <message>
         <source>More</source>
-        <translation>Wiecej</translation>
+        <translation type="obsolete">Wiecej</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Wiecej...</translation>
+        <translation type="obsolete">Wiecej...</translation>
     </message>
 </context>
 <context>
     <name>QColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation>Barwa:</translation>
+        <translation type="obsolete">Barwa:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Czerwony:</translation>
+        <translation type="obsolete">Czerwony:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Zielony:</translation>
+        <translation type="obsolete">Zielony:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Niebieski:</translation>
+        <translation type="obsolete">Niebieski:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Kanal alfa:</translation>
+        <translation type="obsolete">Kanal alfa:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Wybierz kolor</translation>
+        <translation type="obsolete">Wybierz kolor</translation>
     </message>
 </context>
 <context>
     <name>fileBrowser</name>
     <message>
         <source>Name</source>
-        <translation>Nazwa</translation>
+        <translation type="obsolete">Nazwa</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Rozmiar</translation>
+        <translation type="obsolete">Rozmiar</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Data</translation>
+        <translation type="obsolete">Data</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation>Dokumenty</translation>
+        <translation type="obsolete">Dokumenty</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation>Wszyskie pliki</translation>
+        <translation type="obsolete">Wszyskie pliki</translation>
     </message>
     <message>
         <source>Hidden files</source>
-        <translation>Ukryte pliki</translation>
+        <translation type="obsolete">Ukryte pliki</translation>
     </message>
     <message>
         <source>Type: %1</source>
-        <translation>Typ: %1</translation>
+        <translation type="obsolete">Typ: %1</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation>Zmien katalog</translation>
+        <translation type="obsolete">Zmien katalog</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation>Utworz katalog</translation>
+        <translation type="obsolete">Utworz katalog</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation>Przeskanuj</translation>
+        <translation type="obsolete">Przeskanuj</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation>Zmiana nazwy</translation>
+        <translation type="obsolete">Zmiana nazwy</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation type="obsolete">Usun</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation>Komentarz</translation>
+        <translation type="obsolete">Komentarz</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation>Nie moge zmianic nazwy</translation>
+        <translation type="obsolete">Nie moge zmianic nazwy</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Naprawde chcesz usunac
+        <translation type="obsolete">Naprawde chcesz usunac
 </translation>
     </message>
     <message>
         <source> ?
 It must be empty</source>
-        <translation>?
+        <translation type="obsolete">?
 To musi byc puste?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Tak</translation>
+        <translation type="obsolete">Tak</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Nie</translation>
+        <translation type="obsolete">Nie</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Wszystkie</translation>
+        <translation type="obsolete">Wszystkie</translation>
     </message>
 </context>
 </TS>

@@ -109,7 +109,7 @@ Izhod?</translation>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>Form1</source>
-        <translation>Obrazec1</translation>
+        <translation type="obsolete">Obrazec1</translation>
     </message>
     <message>
         <source>M</source>
@@ -248,7 +248,7 @@ Izhod?</translation>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>Form1</source>
-        <translation>Obrazec1</translation>
+        <translation type="obsolete">Obrazec1</translation>
     </message>
     <message>
         <source>Y: </source>
@@ -267,7 +267,7 @@ Izhod?</translation>
     <name>DateBookWeekLstDayHdrBase</name>
     <message>
         <source>Form1</source>
-        <translation>Obrazec1</translation>
+        <translation type="obsolete">Obrazec1</translation>
     </message>
 </context>
 <context>
@@ -360,6 +360,14 @@ Izhod?</translation>
     <message>
         <source>No Repeat...</source>
         <translation>Ne ponovi...</translation>
+    </message>
+    <message>
+        <source>Start Time</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End Time</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -642,11 +650,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Opis</translation>
+        <translation type="obsolete">Opis</translation>
     </message>
     <message>
         <source>Start - End</source>
-        <translation>Začetek - Konec</translation>
+        <translation type="obsolete">Začetek - Konec</translation>
     </message>
     <message>
         <source>Start time</source>
@@ -655,6 +663,29 @@ Izhod?</translation>
     <message>
         <source>Time zone</source>
         <translation>Časovni pas</translation>
+    </message>
+    <message>
+        <source>Description </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start - End </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NoteEntryBase</name>
+    <message>
+        <source>Edit Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -3,35 +3,35 @@
     <name>PIMSpreadsheetWindow</name>
     <message>
         <source>Spreadsheet</source>
-        <translation>Arkusz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Nowy</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Otworz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Close</source>
-        <translationZamknij></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Equation</source>
-        <translation>Przelicz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clear Cell</source>
-        <translation>Wyczysc komorke</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>File</source>
-        <translation>Plik</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation>Edycja</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

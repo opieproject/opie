@@ -36,7 +36,7 @@
     </message>
     <message>
         <source>Sound Settings</source>
-        <translation type="unfinished">Ajuste de Som</translation>
+        <translation type="obsolete">Ajuste de Som</translation>
     </message>
     <message>
         <source>Keyboard sound</source>
@@ -60,7 +60,7 @@
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>44100</source>
@@ -72,11 +72,11 @@
     </message>
     <message>
         <source>Screen sounds</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Keyboard sounds</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Levels</source>
@@ -88,6 +88,26 @@
     </message>
     <message>
         <source>Mic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vmemo Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8000</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>33075</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Visual Alerts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Location</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

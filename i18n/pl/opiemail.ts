@@ -277,7 +277,7 @@ Wszystkie wiadomosci beza usuniete.</translation>
     </message>
     <message>
         <source>Protocol</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Protokol</translation>
     </message>
     <message>
         <source>Server:</source>

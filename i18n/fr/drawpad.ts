@@ -99,11 +99,11 @@
     </message>
     <message>
         <source>More</source>
-        <translation>Plus</translation>
+        <translation type="obsolete">Plus</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Plus...</translation>
+        <translation type="obsolete">Plus...</translation>
     </message>
     <message>
         <source>Pen Color</source>
@@ -120,6 +120,10 @@
     <message>
         <source>Page</source>
         <translation>Page</translation>
+    </message>
+    <message>
+        <source>Insert Text</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -153,6 +157,14 @@ la page actuelle ?</translation>
 the current page?</source>
         <translation>Voulez-vous supprimer
 la page actuelle ?</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -253,41 +265,52 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Brush Color</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Fill Color</source>
+        <translation type="unfinished">Couleur Remplissage</translation>
     </message>
 </context>
 <context>
     <name>QColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rouge</translation>
+        <translation type="obsolete">Rouge</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Vert</translation>
+        <translation type="obsolete">Vert</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Bleu</translation>
+        <translation type="obsolete">Bleu</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Select color</source>
+        <translation type="obsolete"></translation>
+    </message>
+</context>
+<context>
+    <name>TextToolDialog</name>
+    <message>
+        <source>Insert Text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
