@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: devices.cpp,v 1.1.4.5 2003-07-31 12:29:44 tille Exp $
+ * $Id: devices.cpp,v 1.1.4.6 2003-07-31 12:38:15 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -51,7 +51,7 @@ DevicesWidget::DevicesWidget( InterfacePPP* ip, QWidget *parent, const char *nam
 {
   _ifaceppp = ip;
   QWhatsThis::add(edit_b, tr("Allows you to modify the selected device"));
-  QWhatsThis::add(new_b, tr("Create a new device");
+  QWhatsThis::add(new_b, tr("Create a new device") );
 
   QWhatsThis::add(copy_b,
 		  tr("Makes a copy of the selected device. All\n"
