@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Settings1</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações 1</translation>
     </message>
     <message>
         <source>Settings2</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações 2</translation>
     </message>
     <message>
         <source>Init string </source>
@@ -75,11 +75,11 @@
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>Modem has DCD line </source>
@@ -94,7 +94,7 @@
     <name>BTConfigWidget</name>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
     <message>
         <source>Or peer mac address</source>
@@ -105,23 +105,23 @@
     <name>ConfigureBase</name>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Profile Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nome do </translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Adicionar</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Editar</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Remover</translation>
     </message>
 </context>
 <context>
@@ -136,23 +136,23 @@
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome:</translation>
     </message>
     <message>
         <source>Value :</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor:</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover</translation>
     </message>
     <message>
         <source>Add</source>
@@ -190,11 +190,11 @@
     </message>
     <message>
         <source>Foreground:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fundo:</translation>
     </message>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Preto</translation>
     </message>
     <message>
         <source>White</source>
@@ -214,7 +214,7 @@
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Micro</translation>
     </message>
     <message>
         <source>Small</source>
@@ -266,15 +266,15 @@
     </message>
     <message>
         <source>Hardware</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware</translation>
     </message>
     <message>
         <source>Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Software</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum</translation>
     </message>
     <message>
         <source>Parity</source>
@@ -326,23 +326,23 @@
     </message>
     <message>
         <source>115200 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>115200 baud</translation>
     </message>
     <message>
         <source>57600 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>57600 baud</translation>
     </message>
     <message>
         <source>38400 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>38400 baud</translation>
     </message>
     <message>
         <source>19200 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>19200 baud</translation>
     </message>
     <message>
         <source>9600 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>9600 baud</translation>
     </message>
 </context>
 <context>
@@ -364,30 +364,30 @@
     <name>IrdaConfigWidget</name>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Configure Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuração de Perfis</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nova Ligação</translation>
     </message>
     <message>
         <source>Save Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Ligação</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligar</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Desligar</translation>
     </message>
     <message>
         <source>QuickLaunch</source>
@@ -399,11 +399,11 @@
     </message>
     <message>
         <source>Transfer file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferir ficheiro...</translation>
     </message>
     <message>
         <source>Line wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Quebrar linha</translation>
     </message>
     <message>
         <source>Full screen</source>
@@ -411,15 +411,15 @@
     </message>
     <message>
         <source>Save history</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar histórico</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminar</translation>
     </message>
     <message>
         <source>Close Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Fechar Janela</translation>
     </message>
     <message>
         <source>Run Script</source>
@@ -435,15 +435,15 @@
     </message>
     <message>
         <source>Open Keyboard...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Teclado...</translation>
     </message>
     <message>
         <source>New from Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Novo a partir do Perfil</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação</translation>
     </message>
     <message>
         <source>Scripts</source>
@@ -451,11 +451,11 @@
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Colar</translation>
     </message>
     <message>
         <source>Script</source>
@@ -467,7 +467,7 @@
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Histórico</translation>
     </message>
 </context>
 <context>
@@ -500,11 +500,11 @@
     <name>ProfileEditorDialog</name>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Auto connect after load</source>
@@ -512,7 +512,7 @@
     </message>
     <message>
         <source>Local Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola Local</translation>
     </message>
 </context>
 <context>
@@ -523,7 +523,7 @@
     </message>
     <message>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou</translation>
     </message>
     <message>
         <source>Connecting failed for this session.</source>
@@ -543,47 +543,47 @@
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Receber</translation>
     </message>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar ficheiro</translation>
     </message>
     <message>
         <source>Transfer protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protocolo de Transferência</translation>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Progresso</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparado</translation>
     </message>
     <message>
         <source>Start transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar transferência</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>File transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferir ficheiro</translation>
     </message>
     <message>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Atenção</translation>
     </message>
     <message>
         <source>No file has been specified.</source>
@@ -591,15 +591,15 @@
     </message>
     <message>
         <source>Sending...</source>
-        <translation type="unfinished"></translation>
+        <translation>A enviar...</translation>
     </message>
     <message>
         <source>Receiving...</source>
-        <translation type="unfinished"></translation>
+        <translation>A receber...</translation>
     </message>
     <message>
         <source>Cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelado</translation>
     </message>
     <message>
         <source>The file transfer has been cancelled.</source>
@@ -607,7 +607,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro</translation>
     </message>
     <message>
         <source>Operation not supported.</source>
@@ -619,7 +619,7 @@
     </message>
     <message>
         <source>No error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum erro.</translation>
     </message>
     <message>
         <source>Undefined error occured.</source>
@@ -627,51 +627,51 @@
     </message>
     <message>
         <source>Incomplete transfer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferência incompleta.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro desconhecido.</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviado</translation>
     </message>
     <message>
         <source>File has been sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>O ficheiro foi enviado.</translation>
     </message>
     <message>
         <source>Received</source>
-        <translation type="unfinished"></translation>
+        <translation>Recebido</translation>
     </message>
     <message>
         <source>File has been received.</source>
-        <translation type="unfinished"></translation>
+        <translation>O ficheiro foi recebido.</translation>
     </message>
     <message>
         <source>Profile name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nome do perfil</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Special Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclas Especiais</translation>
     </message>
     <message>
         <source>Invalid profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil inválido</translation>
     </message>
     <message>
         <source>Please enter a profile name.</source>
@@ -679,63 +679,63 @@
     </message>
     <message>
         <source>Z-Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Z-Modem</translation>
     </message>
     <message>
         <source>Y-Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Y-Modem</translation>
     </message>
     <message>
         <source>X-Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>X-Modem</translation>
     </message>
     <message>
         <source>Serial</source>
-        <translation type="unfinished"></translation>
+        <translation>Série</translation>
     </message>
     <message>
         <source>Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem</translation>
     </message>
     <message>
         <source>Local Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola Local</translation>
     </message>
     <message>
         <source>Default Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal por Omissão</translation>
     </message>
     <message>
         <source>Default Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclado por Omissão</translation>
     </message>
     <message>
         <source>SynchronizedFile</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro Sincronizado</translation>
     </message>
     <message>
         <source>Dialing number: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>A marcar número: %1</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou</translation>
     </message>
     <message>
         <source>Dialing the number failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falhou a marcação do número.</translation>
     </message>
     <message>
         <source>Cancelling...</source>
-        <translation type="unfinished"></translation>
+        <translation>A cancelar...</translation>
     </message>
     <message>
         <source>Searching modem</source>
-        <translation type="unfinished"></translation>
+        <translation>À procura do modem</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciando...</translation>
     </message>
     <message>
         <source>Reset speakers</source>
@@ -743,19 +743,19 @@
     </message>
     <message>
         <source>Turning off dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>A desligar o tom de ligação</translation>
     </message>
     <message>
         <source>Dial number</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligar ao número</translation>
     </message>
     <message>
         <source>Line busy, redialing number</source>
-        <translation type="unfinished"></translation>
+        <translation>Número ocupado, a remarcar</translation>
     </message>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação estabelecida</translation>
     </message>
     <message>
         <source>Dismiss</source>
@@ -766,34 +766,34 @@
     <name>SerialConfigWidget</name>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
 </context>
 <context>
     <name>TerminalWidget</name>
     <message>
         <source>Terminal Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de Terminal</translation>
     </message>
     <message>
         <source>Color scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Esquema de cores</translation>
     </message>
     <message>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho da fonte</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation>pequena</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation type="unfinished"></translation>
+        <translation>média</translation>
     </message>
     <message>
         <source>large</source>
-        <translation type="unfinished"></translation>
+        <translation>grande</translation>
     </message>
     <message>
         <source>Line-break conversions</source>
@@ -809,47 +809,47 @@
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opções</translation>
     </message>
     <message>
         <source>Local echo</source>
-        <translation type="unfinished"></translation>
+        <translation>Eco local</translation>
     </message>
     <message>
         <source>Line wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Quebra de linha</translation>
     </message>
     <message>
         <source>VT 100</source>
-        <translation type="unfinished"></translation>
+        <translation>VT 100</translation>
     </message>
     <message>
         <source>VT 102</source>
-        <translation type="unfinished"></translation>
+        <translation>VT 102</translation>
     </message>
     <message>
         <source>Linux Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola Linux</translation>
     </message>
     <message>
         <source>X-Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal X</translation>
     </message>
     <message>
         <source>black on white</source>
-        <translation type="unfinished"></translation>
+        <translation>preto em branco</translation>
     </message>
     <message>
         <source>white on black</source>
-        <translation type="unfinished"></translation>
+        <translation>branco em preto</translation>
     </message>
     <message>
         <source>green on black</source>
-        <translation type="unfinished"></translation>
+        <translation>verde em preto</translation>
     </message>
     <message>
         <source>orange on black</source>
-        <translation type="unfinished"></translation>
+        <translation>laranja em preto</translation>
     </message>
 </context>
 </TS>
