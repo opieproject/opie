@@ -5,7 +5,7 @@ class Newmdirdlg : public Newmdirdlgui
 {
     Q_OBJECT
 public:
-    Newmdirdlg( QWidget* parent = 0, const char* name = 0);
+    Newmdirdlg( QWidget* parent = 0, const char* name = 0,bool no_sub=false);
     ~Newmdirdlg();
     
     const QString&Newdir()const;

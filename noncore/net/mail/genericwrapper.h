@@ -49,8 +49,6 @@ protected:
     static void fillParameters(RecPart&target,clist*parameters);
     static QString getencoding(mailmime_mechanism*aEnc);
 
-    POP3account *account;
-    mailpop3 *m_pop3;
     QString msgTempName;
     unsigned int last_msg_id;
     QMap<QString,encodedString*> bodyCache;

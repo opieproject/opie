@@ -26,7 +26,8 @@ public:
 protected:
     void login();
     void logout();
-    
+    POP3account *account;
+    mailpop3 *m_pop3;    
 };
 
 #endif

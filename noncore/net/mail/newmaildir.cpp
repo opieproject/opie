@@ -4,9 +4,13 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 
-Newmdirdlg::Newmdirdlg( QWidget* parent, const char* name)
+Newmdirdlg::Newmdirdlg( QWidget* parent, const char* name,bool no_sub)
     : Newmdirdlgui(parent,name,true),ndir(""),possible_subs(false)
 {
+    if (no_sub) {
+        subdirsPossibleBox->setChecked(false);
+        subdirsPossibleBox->hide();
+    }
 }
 
 Newmdirdlg::~Newmdirdlg()

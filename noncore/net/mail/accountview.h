@@ -24,6 +24,8 @@ public:
     virtual RecBody fetchBody(const RecMail&)=0;
     virtual QPopupMenu * getContextMenu(){return 0;};
     virtual void contextMenuSelected(int){}
+protected:
+    static const QString contextName;
 };
 
 class POP3viewItem : public AccountViewItem
@@ -88,13 +90,13 @@ public:
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
     bool matchName(const QString&name)const;
-    virtual void deleteAllMails();    
     virtual QPopupMenu * getContextMenu();
     virtual void contextMenuSelected(int);
     virtual const QString& Delemiter()const;
 protected:
     virtual void createNewFolder();
     virtual void deleteFolder();
+    virtual void deleteAllMails();    
     
 private:
     Folder *folder;
@@ -103,6 +105,7 @@ private:
 
 class MBOXviewItem : public AccountViewItem
 {
+    friend class MBOXfolderItem;
 
 public:
 //    MBOXviewItem( MBOXaccount *a, QListView *parent );
@@ -111,6 +114,13 @@ public:
     virtual void refresh( QList<RecMail> &target );
     virtual RecBody fetchBody( const RecMail &mail );
     AbstractMail *getWrapper();
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
+
+protected:
+    virtual void refresh(bool force=false);
+    virtual void createFolder();
+
 private:
 //    MBOXaccount *account;
     QString m_Path;
@@ -126,6 +136,12 @@ public:
     ~MBOXfolderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
+
+protected:
+    virtual void deleteAllMails();
+    virtual void deleteFolder();
 private:
     Folder *folder;
     MBOXviewItem *mbox;

@@ -2,9 +2,8 @@
 #include "pop3wrapper.h"
 #include "mailtypes.h"
 #include "logindialog.h"
-#include <libetpan/mailpop3.h>
-#include <libetpan/mailmime.h>
-#include <libetpan/data_message_driver.h>
+#include <libetpan/libetpan.h>
+#include <qpe/global.h>
 #include <qfile.h>
 
 /* we don't fetch messages larger than 5 MB */
@@ -112,6 +111,7 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
 
     login();
     if (!m_pop3) return;
+
     mailpop3_list( m_pop3, &messages );
 
     for (unsigned int i = 0; i < carray_count(messages);++i) {
@@ -132,6 +132,7 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
         target.append( mail );
         free(header);
     }
+    Global::statusMessage( tr("Mailbox contains %1 mail(s)").arg(carray_count(messages)-m_pop3->pop3_deleted_count));
 }
 
 void POP3wrapper::login()

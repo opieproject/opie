@@ -185,10 +185,10 @@ QPopupMenu * IMAPviewItem::getContextMenu()
 {
     QPopupMenu *m = new QPopupMenu(0);
     if (m) {
-        m->insertItem(QObject::tr("Refresh folder list","IMAPviewItem"),0);
-        m->insertItem(QObject::tr("Create new folder","IMAPviewItem"),1);
+        m->insertItem(QObject::tr("Refresh folder list",contextName),0);
+        m->insertItem(QObject::tr("Create new folder",contextName),1);
         m->insertSeparator();
-        m->insertItem(QObject::tr("Disconnect","IMAPviewItem"),2);
+        m->insertItem(QObject::tr("Disconnect",contextName),2);
     }
     return m;
 }
@@ -291,14 +291,14 @@ QPopupMenu * IMAPfolderItem::getContextMenu()
     QPopupMenu *m = new QPopupMenu(0);
     if (m) {
         if (folder->may_select()) {
-            m->insertItem(QObject::tr("Refresh header list","IMAPfolderItem"),0);
-            m->insertItem(QObject::tr("Delete all mails","IMAPfolderItem"),1);
+            m->insertItem(QObject::tr("Refresh header list",contextName),0);
+            m->insertItem(QObject::tr("Delete all mails",contextName),1);
         }
         if (folder->no_inferior()==false) {
-            m->insertItem(QObject::tr("Create new subfolder","IMAPfolderItem"),2);
+            m->insertItem(QObject::tr("Create new subfolder",contextName),2);
         }
         if (folder->getDisplayName().lower()!="inbox") {
-            m->insertItem(QObject::tr("Delete folder","IMAPfolderItem"),3);
+            m->insertItem(QObject::tr("Delete folder",contextName),3);
         }
     }
     return m;
@@ -306,10 +306,10 @@ QPopupMenu * IMAPfolderItem::getContextMenu()
 
 void IMAPfolderItem::deleteAllMails()
 {
-    int yesno = QMessageBox::warning(0,QObject::tr("Delete all mails","IMAPfolderItem"),
-        QObject::tr("<center>Realy delete all mails in box <br>%1</center>","IMAPfolderItem").arg(folder->getDisplayName()),
-        QObject::tr("Yes","IMAPfolderItem"),
-        QObject::tr("No","IMAPfolderItem"),QString::null,1,1);
+    int yesno = QMessageBox::warning(0,QObject::tr("Delete all mails",contextName),
+        QObject::tr("<center>Realy delete all mails in box <br>%1</center>",contextName).arg(folder->getDisplayName()),
+        QObject::tr("Yes",contextName),
+        QObject::tr("No",contextName),QString::null,1,1);
     qDebug("Auswahl: %i",yesno);
     if (yesno == 0) {
         if (imap->getWrapper()->deleteAllMail(folder)) {
@@ -335,16 +335,21 @@ void IMAPfolderItem::createNewFolder()
 
 void IMAPfolderItem::deleteFolder()
 {
-    int yesno = QMessageBox::warning(0,QObject::tr("Delete folder","IMAPfolderItem"),
-        QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>","IMAPfolderItem").arg(folder->getDisplayName()),
-        QObject::tr("Yes","IMAPfolderItem"),
-        QObject::tr("No","IMAPfolderItem"),QString::null,1,1);
+    int yesno = QMessageBox::warning(0,QObject::tr("Delete folder",contextName),
+        QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
+        QObject::tr("Yes",contextName),
+        QObject::tr("No",contextName),QString::null,1,1);
     qDebug("Auswahl: %i",yesno);
     if (yesno == 0) {
         if (imap->getWrapper()->deleteMbox(folder)) {
-            /* be carefull - after that this object is destroyd so don't call 
+            QListView*v=listView();
+            IMAPviewItem * box = imap;
+            /* be carefull - after that this object is destroyd so don't use
              * any member of it after that call!!*/
             imap->refreshFolders(true);
+            if (v) {
+                v->setSelected(box,true);
+            }
         }
     }
 }
@@ -374,6 +379,8 @@ void IMAPfolderItem::contextMenuSelected(int id)
 /**
  * Generic stuff
  */
+
+const QString AccountViewItem::contextName="AccountViewItem";
 
 AccountView::AccountView( QWidget *parent, const char *name, WFlags flags )
     : QListView( parent, name, flags )
@@ -490,6 +497,12 @@ AbstractMail *MBOXviewItem::getWrapper()
 
 void MBOXviewItem::refresh( QList<RecMail> & )
 {
+    refresh(false);
+}
+
+void MBOXviewItem::refresh(bool force)
+{
+    if (childCount()>0 && force==false) return;
     QList<Folder> *folders = wrapper->listFolders();
     QListViewItem *child = firstChild();
     while ( child ) {
@@ -510,8 +523,44 @@ void MBOXviewItem::refresh( QList<RecMail> & )
 
 RecBody MBOXviewItem::fetchBody( const RecMail &mail )
 {
-    qDebug( "POP3 fetchBody" );
+    qDebug( "MBOX fetchBody" );
     return wrapper->fetchBody( mail );
+}
+
+QPopupMenu * MBOXviewItem::getContextMenu()
+{
+    QPopupMenu *m = new QPopupMenu(0);
+    if (m) {
+        m->insertItem(QObject::tr("Refresh folder list",contextName),0);
+        m->insertItem(QObject::tr("Create new folder",contextName),1);
+    }
+    return m;
+}
+
+void MBOXviewItem::createFolder()
+{
+    Newmdirdlg ndirdlg(0,0,true);
+    ndirdlg.showMaximized();
+    if (ndirdlg.exec()) {
+        QString ndir = ndirdlg.Newdir();
+        if (wrapper->createMbox(ndir)) {
+            refresh(true);
+        }
+    }
+}
+
+void MBOXviewItem::contextMenuSelected(int which)
+{
+    switch (which) {
+    case 0:
+        refresh(true);
+        break;
+    case 1:
+        createFolder();
+        break;
+    default:
+        break;
+    }
 }
 
 MBOXfolderItem::~MBOXfolderItem()
@@ -543,4 +592,64 @@ void MBOXfolderItem::refresh(QList<RecMail>&target)
 RecBody MBOXfolderItem::fetchBody(const RecMail&aMail)
 {
     return mbox->getWrapper()->fetchBody(aMail);
+}
+
+void MBOXfolderItem::deleteAllMails()
+{
+    int yesno = QMessageBox::warning(0,QObject::tr("Delete all mails",contextName),
+        QObject::tr("<center>Realy delete all mails in box <br>%1</center>",contextName).arg(folder->getDisplayName()),
+        QObject::tr("Yes",contextName),
+        QObject::tr("No",contextName),QString::null,1,1);
+    qDebug("Auswahl: %i",yesno);
+    if (yesno == 0) {
+        if (mbox->getWrapper()->deleteAllMail(folder)) {
+            AccountView * view = (AccountView*)listView();
+            if (view) view->refreshCurrent();
+        }
+    }
+}
+
+void MBOXfolderItem::deleteFolder()
+{
+    int yesno = QMessageBox::warning(0,QObject::tr("Delete folder",contextName),
+        QObject::tr("<center>Realy delete folder <br><b>%1</b><br>and all if it content?</center>",contextName).arg(folder->getDisplayName()),
+        QObject::tr("Yes",contextName),
+        QObject::tr("No",contextName),QString::null,1,1);
+    qDebug("Auswahl: %i",yesno);
+    if (yesno == 0) {
+        if (mbox->getWrapper()->deleteMbox(folder)) {
+            QListView*v=listView();
+            MBOXviewItem * box = mbox;
+            /* be carefull - after that this object is destroyd so don't use
+             * any member of it after that call!!*/
+            mbox->refresh(true);
+            if (v) {
+                v->setSelected(box,true);
+            }
+        }
+    }
+}
+
+QPopupMenu * MBOXfolderItem::getContextMenu()
+{
+    QPopupMenu *m = new QPopupMenu(0);
+    if (m) {
+        m->insertItem(QObject::tr("Delete all mails",contextName),0);
+        m->insertItem(QObject::tr("Delete folder",contextName),1);
+    }
+    return m;
+}
+
+void MBOXfolderItem::contextMenuSelected(int which)
+{
+    switch(which) {
+    case 0:
+        deleteAllMails();
+        break;
+    case 1:
+        deleteFolder();
+        break;
+    default:
+        break;
+    }
 }
