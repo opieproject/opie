@@ -40,18 +40,18 @@ class QResizeEvent;
 
 class DateBookDayViewQuickLineEdit : public QLineEdit
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name=0);
+    DateBookDayViewQuickLineEdit(const QDateTime &start, const QDateTime &end,QWidget * parent, const char *name=0);
 protected:
-	Event quickEvent;
-	int active;
-	void focusOutEvent( QFocusEvent *e );
+    Event quickEvent;
+    int active;
+    void focusOutEvent( QFocusEvent *e );
 protected slots:
-	void slotReturnPressed(void);
+    void slotReturnPressed(void);
         void finallyCallClose();
 signals:
-	void insertEvent(const Event &e);
+    void insertEvent(const Event &e);
 };
 
 
@@ -67,13 +67,13 @@ public:
 public slots:
     void moveUp();
     void moveDown();
-	void slotDateChanged( int year, int month, int day );
+    void slotDateChanged( int year, int month, int day );
 
 signals:
     void sigColWidthChanged();
     void sigCapturedKey( const QString &txt );
 protected slots:
-	void slotChangeClock( bool );
+    void slotChangeClock( bool );
 protected:
     virtual void paintCell( QPainter *p, int row, int col, const QRect &cr, bool selected );
     virtual void paintFocus( QPainter *p, const QRect &cr );
@@ -84,8 +84,8 @@ protected:
     void initHeader();
 private:
     bool ampm;
-	QDate currDate;
-	DateBookDayViewQuickLineEdit *quickLineEdit;
+    QDate currDate;
+    DateBookDayViewQuickLineEdit *quickLineEdit;
 };
 
 class DateBookDay;
@@ -157,19 +157,19 @@ private:
 //reimplemented the compareItems function so that it sorts DayWidgets by geometry heights
 class WidgetListClass : public QList<DateBookDayWidget>
 {
-	private:
+    private:
 
-	int compareItems( QCollection::Item s1, QCollection::Item s2 )
-	{
-		//hmm, don't punish me for that ;)
-		if (reinterpret_cast<DateBookDayWidget*>(s1)->geometry().height() > reinterpret_cast<DateBookDayWidget*>(s2)->geometry().height())
-		{
-			return -1;
-		} else
-		{
-			return 1;
-		}
-	}
+    int compareItems( QCollection::Item s1, QCollection::Item s2 )
+    {
+        //hmm, don't punish me for that ;)
+        if (reinterpret_cast<DateBookDayWidget*>(s1)->geometry().height() > reinterpret_cast<DateBookDayWidget*>(s2)->geometry().height())
+        {
+            return -1;
+        } else
+        {
+            return 1;
+        }
+    }
 
 
 };
@@ -180,9 +180,10 @@ class DateBookDay : public QVBox
 
     friend class DateBookDayWidget; // for beam this occurence and access to DateBookDB
 public:
-    DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb,
-		 QWidget *parent, const char *name );
+    DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb,DateBookHoliday*newHdb,
+         QWidget *parent, const char *name );
     void selectedDates( QDateTime &start, QDateTime &end );
+
     QDate date() const;
     DateBookDayView *dayView() const { return view; }
     void setStartViewTime( int startHere );
@@ -199,7 +200,7 @@ public slots:
     void setDate( QDate );
     void redraw();
     void slotWeekChanged( bool bStartOnMonday );
-    void updateView();	//updates TimeMarker and DayWidget-colors
+    void updateView();  //updates TimeMarker and DayWidget-colors
 
 signals:
     void removeEvent( const Event& );
@@ -225,12 +226,13 @@ private:
     DateBookDayHeader *header;
     DatebookdayAllday *m_allDays;
     DateBookDB *db;
-    WidgetListClass widgetList;	//reimplemented QList for sorting widgets by height
+    WidgetListClass widgetList; //reimplemented QList for sorting widgets by height
     int startTime;
-    bool jumpToCurTime;	//should we jump to current time in dayview?
+    bool jumpToCurTime; //should we jump to current time in dayview?
     int rowStyle;
     DateBookDayWidget *selectedWidget; //actual selected widget (obviously)
-    DateBookDayTimeMarker *timeMarker;	//marker for current time
+    DateBookDayTimeMarker *timeMarker;  //marker for current time
+    DateBookHoliday*_holiday_db;
 };
 
 #endif

@@ -66,6 +66,20 @@ DatebookAlldayDisp* DatebookdayAllday::addEvent(const EffectiveEvent&ev)
     return lb;
 }
 
+DatebookAlldayDisp* DatebookdayAllday::addHoliday(const QString&e)
+{
+    DatebookAlldayDisp * lb;
+    lb = new DatebookAlldayDisp(e,m_MainFrame,NULL);
+    lb->show();
+    datebookdayalldayLayout->addWidget(lb);
+    subWidgets.append(lb);
+
+    connect(lb,SIGNAL(displayMe(const Event&)),lblDesc,SLOT(disp_event(const Event&)));
+    ++item_count;
+
+    return lb;
+}
+
 void DatebookdayAllday::removeAllEvents()
 {
     subWidgets.clear();
@@ -85,6 +99,26 @@ DatebookAlldayDisp::DatebookAlldayDisp(DateBookDB *db,const EffectiveEvent& ev,
     int s = QFontMetrics(font()).height()+4;
     setMaximumHeight( s );
     setMinimumSize( QSize( 0, s ) );
+    m_holiday = false;
+}
+
+DatebookAlldayDisp::DatebookAlldayDisp(const QString&aholiday,QWidget* parent,const char* name, WFlags fl)
+    : QLabel(parent,name,fl),m_Ev(),dateBook(0)
+{
+    QString strDesc = aholiday;
+    strDesc = strDesc.replace(QRegExp("<"),"&#60;");
+    Event ev;
+    ev.setDescription(strDesc);
+    ev.setAllDay(true);
+    m_Ev.setEvent(ev);
+    setBackgroundColor(yellow);
+    setText(strDesc);
+    setFrameStyle(QFrame::Raised|QFrame::Panel);
+
+    int s = QFontMetrics(font()).height()+4;
+    setMaximumHeight( s );
+    setMinimumSize( QSize( 0, s ) );
+    m_holiday = true;
 }
 
 DatebookAlldayDisp::~DatebookAlldayDisp()
@@ -93,6 +127,7 @@ DatebookAlldayDisp::~DatebookAlldayDisp()
 
 void DatebookAlldayDisp::beam_single_event()
 {
+    if (m_holiday) return;
     // create an Event and beam it...
     /*
      * Start with the easy stuff. If start and  end date is the same we can just use
@@ -151,11 +186,13 @@ void DatebookAlldayDisp::mousePressEvent(QMouseEvent*e)
     setBackgroundColor(green);
     update();
     QPopupMenu m;
-    m.insertItem( DateBookDayWidget::tr( "Edit" ), 1 );
-    m.insertItem( DateBookDayWidget::tr( "Duplicate" ), 4 );
-    m.insertItem( DateBookDayWidget::tr( "Delete" ), 2 );
-    if(Ir::supported()) m.insertItem( DateBookDayWidget::tr( "Beam" ), 3 );
-    if(Ir::supported() && m_Ev.event().doRepeat() ) m.insertItem( DateBookDayWidget::tr( "Beam this occurence"), 5 );
+    if (!m_holiday) {
+        m.insertItem( DateBookDayWidget::tr( "Edit" ), 1 );
+        m.insertItem( DateBookDayWidget::tr( "Duplicate" ), 4 );
+        m.insertItem( DateBookDayWidget::tr( "Delete" ), 2 );
+        if(Ir::supported()) m.insertItem( DateBookDayWidget::tr( "Beam" ), 3 );
+        if(Ir::supported() && m_Ev.event().doRepeat() ) m.insertItem( DateBookDayWidget::tr( "Beam this occurence"), 5 );
+    }
     m.insertItem( tr( "Info"),6);
     int r = m.exec( e->globalPos() );
     setBackgroundColor(b);

@@ -24,6 +24,7 @@ public:
             QWidget* parent = 0, const char* name = 0, WFlags fl = 0);
     ~DatebookdayAllday();
     DatebookAlldayDisp* addEvent(const EffectiveEvent&e);
+    DatebookAlldayDisp* addHoliday(const QString&e);
     const unsigned int items()const{return item_count;}
 
 public slots:
@@ -45,6 +46,8 @@ class DatebookAlldayDisp : public QLabel
 public:
     DatebookAlldayDisp(DateBookDB* db,const EffectiveEvent& e,
                        QWidget* parent=0,const char* name = 0, WFlags fl=0);
+    DatebookAlldayDisp(const QString&aholiday,
+                       QWidget* parent=0,const char* name = 0, WFlags fl=0);
     virtual ~DatebookAlldayDisp();
 
 signals:
@@ -61,6 +64,7 @@ protected:
     DateBookDB* dateBook;
     void mousePressEvent( QMouseEvent *e );
     void beam_single_event();
+    bool m_holiday:1;
 };
 
 class DatebookEventDesc: public QLabel
