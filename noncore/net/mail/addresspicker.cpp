@@ -10,9 +10,7 @@
 /* QT */
 #include <qpushbutton.h>
 #include <qmessagebox.h>
-#include <qtextstream.h>
 #include <qlistbox.h>
-#include <qfile.h>
 
 /* STD */
 #include <stdlib.h>

@@ -20,7 +20,6 @@
 #include <assert.h>
 #include <qcursor.h>
 #include <qdatetime.h>
-#include <qtextstream.h>
 #include <qpopupmenu.h>
 #include <qcheckbox.h>
 

@@ -1,12 +1,5 @@
 #include "selectsmtp.h"
 #include <libmailwrapper/mailwrapper.h>
-#include <qlist.h>
-#include <qlabel.h>
-#include <qlayout.h>
-#include <qcheckbox.h>
-#include <qframe.h>
-#include <qlineedit.h>
-#include <qcombobox.h>
 
 selectsmtp::selectsmtp(QWidget* parent, const char* name, bool modal, WFlags fl)
     : selectstoreui(parent,name,modal,fl)

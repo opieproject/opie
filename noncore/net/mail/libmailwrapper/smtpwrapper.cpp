@@ -4,9 +4,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <string.h>
-#include <qdir.h>
 #include <qt.h>
-#include <qmessagebox.h>
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>

@@ -3,7 +3,6 @@
 #include <qaction.h>
 #include <qlabel.h>
 #include <qvbox.h>
-#include <qpopupmenu.h>
 
 #include <qpe/qpetoolbar.h>
 #include <qmenubar.h>

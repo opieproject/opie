@@ -1,7 +1,6 @@
 #include "sendmailprogress.h"
 #include <qprogressbar.h>
 #include <qlabel.h>
-#include <qstring.h>
 
 progressMailSend::progressMailSend(QWidget*parent, const char * name)
     :progressMailSendUI(parent,name,true),m_current_mail(0),m_current_single(0),m_max_mail(0),m_max_single(0)

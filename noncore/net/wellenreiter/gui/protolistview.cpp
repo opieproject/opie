@@ -18,12 +18,8 @@
 
 #include <qcheckbox.h>
 #include <qcombobox.h>
-#include <qhbox.h>
 #include <qvbox.h>
-#include <qpalette.h>
-#include <qcolor.h>
 #include <qlabel.h>
-#include <qframe.h>
 
 ProtocolListView::ProtocolListView( QWidget* parent, const char* name, WFlags f )
                  :QScrollView( parent, name, f )

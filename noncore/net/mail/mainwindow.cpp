@@ -3,10 +3,8 @@
 #include <qheader.h>
 #include <qtimer.h>
 #include <qlayout.h>
-#include <qmessagebox.h>
 
 #include <qpe/qpeapplication.h>
-#include <qpe/resource.h>
 
 #include "defines.h"
 #include "mainwindow.h"

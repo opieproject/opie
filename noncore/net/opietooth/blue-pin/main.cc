@@ -3,7 +3,6 @@
 
 
 #include <qpe/qpeapplication.h>
-#include <qpe/config.h>
 
 #include "pindlg.h"
 

@@ -1,5 +1,4 @@
 #include "statusmail.h"
-#include <qlist.h>
 
 StatusMail::StatusMail(QList<Account>&list)
 {

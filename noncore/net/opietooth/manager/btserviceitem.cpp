@@ -1,5 +1,4 @@
 
-#include <qobject.h>
 #include "btserviceitem.h"
 
 using namespace OpieTooth;

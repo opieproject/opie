@@ -1,6 +1,5 @@
 #include "composemail.h"
 #include "viewmail.h"
-#include "accountview.h"
 
 /* OPIE */
 #include <libmailwrapper/settings.h>
@@ -18,8 +17,6 @@
 #include <qaction.h>
 #include <qpopupmenu.h>
 #include <qfile.h>
-#include <qapplication.h>
-#include <qvaluelist.h>
 
 AttachItem::AttachItem(QListView * parent,QListViewItem *after, const QString&mime,const QString&desc,const QString&file,
                        const QString&fsize,int num,const QValueList<int>&path)

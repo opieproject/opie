@@ -1,7 +1,6 @@
 
 #include "bticonloader.h"
 
-#include <qpixmap.h>
 #include <qpe/resource.h>
 
 namespace OpieTooth {

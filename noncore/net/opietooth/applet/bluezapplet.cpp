@@ -30,10 +30,9 @@
 #include "bluezapplet.h"
 #include <qapplication.h>
 
-#include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/resource.h>
 
 #include <opie/odevice.h>
 

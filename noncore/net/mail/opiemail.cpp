@@ -12,14 +12,10 @@
 #include <libmailwrapper/smtpwrapper.h>
 #include <libmailwrapper/mailtypes.h>
 #include <libmailwrapper/abstractmail.h>
-#include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
 
 /* QT */
-#include <qmessagebox.h>
-#include <qaction.h>
-#include <qapplication.h>
 
 OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
         : MainWindow( parent, name, WStyle_ContextHelp )

@@ -9,7 +9,6 @@
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qtimer.h>
 
 /* STD */
 #include <stdio.h>

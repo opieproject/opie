@@ -3,7 +3,6 @@
 
 #include <qlineedit.h>
 #include <qcombobox.h>
-#include <qlabel.h>
 #include <qgroupbox.h>
 
 using namespace OpieTooth;

@@ -3,10 +3,8 @@
 #include "pop3wrapper.h"
 #include "nntpwrapper.h"
 #include "mhwrapper.h"
-#include "mboxwrapper.h"
 #include "mailtypes.h"
 
-#include <qstring.h>
 #include <qfile.h>
 #include <qtextstream.h>
 #include <stdlib.h>

@@ -1,6 +1,4 @@
 #include "newmaildir.h"
-#include <qdialog.h>
-#include <qvariant.h>
 #include <qlineedit.h>
 #include <qcheckbox.h>
 

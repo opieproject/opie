@@ -17,7 +17,6 @@
 
 #define PIXMAPPATH "/usr/local/share"
 
-#include <qpixmap.h>
 #include <qiconset.h>
 
 namespace Resource

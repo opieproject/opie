@@ -1,7 +1,6 @@
 
 #include "accountitem.h"
 #include "accountview.h"
-#include "selectstore.h"
 #include "newmaildir.h"
 #include "defines.h"
 
