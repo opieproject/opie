@@ -48,7 +48,7 @@ class Ir;
 using namespace Opie;
 
 namespace Todo {
-    typedef TodoView<QWidget> View;
+    typedef TodoView View;
     class MainWindow : public QMainWindow {
         Q_OBJECT
     public:

@@ -52,7 +52,7 @@ namespace Todo {
         Q_OBJECT
     public:
         InternQtHack() : QObject() {};
-        void emitShow(int uid) { emit show(uid);  }
+        void emitShow(int uid) { emit showTodo(uid);  }
         void emitEdit(int uid) { emit edit(uid ); }
         void emitUpdate( int uid,
                          const SmallTodo& to) {
@@ -69,7 +69,7 @@ namespace Todo {
             emit update( wid );
         }
     signals:
-        void show(int uid );
+        void showTodo(int uid );
         void edit(int uid );
         void update( int uid, const SmallTodo& );
         void update( int uid, const ToDoEvent& );
@@ -122,59 +122,37 @@ namespace Todo {
      * It's not possible to have signal and slots from within
      * templates this way you've to register for a signal
      */
-    template <class T = QWidget>
-    class TodoView : public T, public ViewBase{
+    class TodoView : public ViewBase{
 
     public:
         /**
          * c'tor
          */
-        TodoView( MainWindow* win, QWidget* parent )
-            : T(parent),  m_main( win ) {
-            hack = new InternQtHack;
-        }
+        TodoView( MainWindow* win );
+
         /**
          *d'tor
          */
-        virtual ~TodoView() {
-            delete hack;
-        };
-        QWidget* widget() {
-            return this;
-        }
+        virtual ~TodoView();
 
         /* connect to the show signal */
         void connectShow(QObject* obj,
-                         const char* slot ) {
-            QObject::connect( hack, SIGNAL(show(int) ),
-                              obj, slot );
-        }
+                         const char* slot );
+
         /* connect to edit */
         void connectEdit( QObject* obj,
-                          const char* slot ) {
-            QObject::connect( hack, SIGNAL(edit(int) ),
-                              obj, slot );
-        }
+                          const char* slot );
         void connectUpdateSmall( QObject* obj,
-                                 const char* slot ) {
-            QObject::connect( hack, SIGNAL(update(int, const SmallTodo& ) ),
-                              obj, slot );
-        }
+                                 const char* slot );
         void connectUpdateBig( QObject* obj,
-                               const char* slot ) {
-            QObject::connect( hack, SIGNAL(update(int, const ToDoEvent& ) ),
-                              obj, slot );
-        }
+                               const char* slot ) ;
         void connectUpdateView( QObject* obj,
-                                const char* slot ) {
-            QObject::connect( hack, SIGNAL(update(QWidget*) ),
-                              obj, slot );
-        }
+                                const char* slot );
     protected:
-        MainWindow* mainwindow() { return m_main; }
-        ToDoEvent event(int uid ) { return m_main->event( uid ); }
-        ToDoDB::Iterator begin() { return m_main->begin(); }
-        ToDoDB::Iterator end() { return m_main->end(); }
+        MainWindow* todoWindow();
+        ToDoEvent event(int uid );
+        ToDoDB::Iterator begin();
+        ToDoDB::Iterator end();
 
         /*
           These things needs to be implemented
@@ -182,10 +160,9 @@ namespace Todo {
     signals:
         */
     protected:
-        void show( int uid ) { hack->emitShow(uid); }
+        void showTodo( int uid ) { hack->emitShow(uid); }
         void edit( int uid ) { hack->emitEdit(uid); }
         void update(int uid, const SmallTodo& to ) {
-
             hack->emitUpdate(uid, to );
         }
         void update(int uid, const ToDoEvent& ev) {
