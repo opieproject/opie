@@ -33,19 +33,19 @@ export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
 You have to apply the qte<version>-all.patch to the Qt/Embedded
 sources and copy the qconfig-qpe.h file to $QTDIR/src/tools:
-cd $QTDIR; cat $OPIEDIR/qt/qte<version>*.patch | patch -p1
+cd $QTDIR; cat $OPIEDIR/qt/qte<version>-all.patch | patch -p1
 cp $OPIEDIR/qt/qconfig-qpe.h $QTDIR/src/tools
 
 You are now ready to configure and build Qt/Embedded
 
 cd $QTDIR
-echo 'yes' | ./configure -qconfig qpe -depths 4,16,24,32 -system-jpeg -system-libpng -system-zlib -no-xft -qvfb
+echo 'yes' | ./configure -qconfig qpe -depths 4,16,24,32 -system-jpeg -system-libpng -system-zlib -no-xkb -no-sm -no-xft -qvfb
 make
 
 Note that the above command ( -qvfb ) compiles in the Virtual 
-Framebuffer and is mostly meant on your host system. For cross
-compiling you will need to use the -xplatform switch but call
-./configure --help to see your options.
+Framebuffer and is mostly meant for development on your host system.
+For cross compiling, you will need to use the -xplatform switch.
+See ./configure --help for details about the possible options.
 
 Once you have these compiled, be sure to set the PATH to ensure your (cross)compiler
 is available.
@@ -58,12 +58,7 @@ make menuconfig
 Now you can move through the menu and select or deselect anything..
 Exit and save the configuration and enter "make" to create opie...
 
-Have fun with it !
-
-If you get into trouble there are other makefile targets
-
-make clean-configs
-is a useful one.
+Have fun!
 
 2. Used Libraries
 ================
@@ -82,10 +77,12 @@ commit a new README or send a mail to opie-devel@handhelds.org
 * libpcap 0.7.2
   http://www.tcpdump.org/release/
 
-* libetpan 0.31
+* libetpan 0.33pre
   http://prdownloads.sourceforge.net/libetpan/ + patch in noncore/net/mail/libetpanstuff
 
 * libsqlite 2.8.6
   http://www.sqlite.org/download.html
 
+* libipk v109 (or greater)
+  ftp://handhelds.org/linux/packages/ipkg
 
