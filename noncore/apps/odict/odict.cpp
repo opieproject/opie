@@ -78,7 +78,7 @@ void ODict::loadConfig()
 		cfg.setGroup( *it );
 		query_co->insertItem( cfg.readEntry( "Name" ) );
 	}
-	slotMethodChanged(1 );           //FIXME: this line should not contain a integer
+	slotMethodChanged( 1 );           //FIXME: this line should not contain a integer
 }
 
 
@@ -94,6 +94,30 @@ void ODict::saveConfig()
 
 void ODict::slotStartQuery()
 {
+	/*
+	 * if the user has not yet defined a dictionary
+	 */
+	if ( !query_co->currentText() )
+	{
+		switch (  QMessageBox::information(  this, tr( "OPIE-Dictionary" ),
+					tr( "No dictionary defined" ),
+					tr( "&Define one" ), 
+					tr( "&Cancel" ),
+					0,      // Define a dict choosen
+					1 ) )   // Cancel choosen
+		{ 
+
+			case 0:
+				slotSettings();
+				break;
+			case 1: // stop here
+				return;
+		}
+	}				
+
+	/*
+	 * ok, the user has defined a dict
+	 */
 	QString querystring = query_le->text();
 	ding->setCaseSensitive( casesens ); 
 	ding->setCompleteWord( completewords ); 
