@@ -1,6 +1,5 @@
 TEMPLATE        = subdirs
-unix:SUBDIRS    = gui
-
+unix:SUBDIRS    = lib gui
 
 !contains( platform, x11 ) {
   message( Configuring Wellenreiter for build on Opie )

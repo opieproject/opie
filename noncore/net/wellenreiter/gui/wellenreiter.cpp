@@ -13,14 +13,6 @@
 **
 ***********************************************************************/
 
-// Qt
-
-#include <qpushbutton.h>
-#include <qmessagebox.h>
-#include <qcombobox.h>
-#include <qspinbox.h>
-#include <qsocketnotifier.h>
-
 // Opie
 
 #ifdef QWS
@@ -28,9 +20,21 @@
 using namespace Opie;
 #endif
 
+#ifdef QWS
 #include <opie2/oapplication.h>
+#else
+#include <qapplication.h>
+#endif
 #include <opie2/onetwork.h>
 #include <opie2/opcap.h>
+
+// Qt
+
+#include <qpushbutton.h>
+#include <qmessagebox.h>
+#include <qcombobox.h>
+#include <qspinbox.h>
+#include <qsocketnotifier.h>
 
 // Standard
 
@@ -143,7 +147,11 @@ void Wellenreiter::startStopClicked()
         iface->setChannelHopping(); // stop hopping channels
         pcap->close();
         sniffing = false;
+        #ifdef QWS
         oApp->setTitle();
+        #else
+        qApp->mainWidget()->setCaption( "Wellenreiter II" );
+        #endif
 
         // get interface name from config window
         const QString& interface = configwindow->interfaceName->currentText();
@@ -221,7 +229,11 @@ void Wellenreiter::startStopClicked()
         connect( pcap, SIGNAL( receivedPacket(OPacket*) ), this, SLOT( receivePacket(OPacket*) ) );
 
         logwindow->log( "(i) Daemon has been started." );
+        #ifdef QWS
         oApp->setTitle( "Scanning ..." );
+        #else
+        qApp->mainWidget()->setCaption( "Wellenreiter II / Scanning ..." );
+        #endif
         sniffing = true;
 
     }

@@ -14,13 +14,26 @@
 **********************************************************************/
 
 #include "mainwindow.h"
+#ifdef QWS
 #include <opie2/oapplication.h>
+#else
+#include <qapplication.h>
+#endif
 
 int main( int argc, char **argv )
 {
+    #ifdef QWS
     OApplication a( argc, argv, "Wellenreiter II" );
+    #else
+    QApplication a( argc, argv );
+    #endif
     WellenreiterMainWindow* w = new WellenreiterMainWindow();
+    #ifdef QWS
     a.showMainWidget( w );
+    #else
+    a.setMainWidget( w );
+    w->show();
+    #endif
     a.exec();
     delete w;
     return 0;

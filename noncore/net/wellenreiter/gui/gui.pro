@@ -25,18 +25,17 @@ SOURCES         = main.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS            += -lopiecore2 -lopieui2 -lopienet2
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
 
 !contains( platform, x11 ) {
   message( qws )
   include ( $(OPIEDIR)/include.pro )
-  LIBS += -lqpe -lopie
+  LIBS += -lqpe -lopie -lopiecore2 -lopieui2 -lopienet2
 }
 
 contains( platform, x11 ) {
-  LIBS += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
+  LIBS += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib -lwellenreiter
   SOURCES += resource.cpp
   HEADERS += resource.h
 }
