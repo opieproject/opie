@@ -394,32 +394,33 @@ neuen Zugang kopiert, der modifiziert werden kann</translation>
     </message>
     <message>
         <source>No devices selected.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kein Gerät ausgewählt.</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
 the device &quot;%1&quot;?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sind Sie sicher, dass sie das Gerät
+&quot;%1&quot; löschen wollen?</translation>
     </message>
     <message>
         <source>Confirm</source>
-        <translation type="unfinished">Bestätigen</translation>
+        <translation>Bestätigen</translation>
     </message>
     <message>
         <source>New Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Gerät</translation>
     </message>
     <message>
         <source>Edit Device: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gerät bearbeiten:</translation>
     </message>
     <message>
         <source>&amp;Device</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gerät</translation>
     </message>
     <message>
         <source>&amp;Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Modem</translation>
     </message>
     <message>
         <source>You must enter a unique account name</source>
@@ -427,28 +428,32 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>Allows you to modify the selected device</source>
-        <translation type="unfinished"></translation>
+        <translation>Ermöglicht die Modifikation des Geräts</translation>
     </message>
     <message>
         <source>Create a new device</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Gerät erstellen</translation>
     </message>
     <message>
         <source>Makes a copy of the selected device. All
 settings of the selected device are copied
 to a new device, that you can modify to fit your
 needs</source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellt eine Kopie des gewählten Geräts. Alle
+Einstellungen des selektierten Geräts werden in ein
+neues Gerät kopiert, das modifiziert werden kann</translation>
     </message>
     <message>
         <source>&lt;p&gt;Deletes the selected device
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Löscht das gewählte Zugang
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>You must enter a unique device name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Sie müssen einen eindeutigen Gerätnamen angeben</translation>
     </message>
 </context>
 <context>
@@ -706,7 +711,7 @@ For more information take a look at the handbook (or help) in the section &quot;
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnung</translation>
     </message>
 </context>
 <context>
@@ -730,7 +735,7 @@ Bitte Passwort eingeben</translation>
     <name>ModemTransfer</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fehler</translation>
     </message>
 </context>
 <context>
@@ -1378,7 +1383,9 @@ Ask your system administrator to create this file (can be empty) with appropriat
     </message>
     <message>
         <source>pppd command + command-line arguments exceed 2024 characters in length.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">&lt;p&gt;Löscht das gewählte Gerät
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot find the PPP daemon!&lt;br&gt;Make sure that pppd is installed and that you have entered the correct path.&lt;/qt&gt;</source>
