@@ -20,6 +20,7 @@
 #include "datebookdayheaderimpl.h"
 
 #include <qpe/datebookmonth.h>
+#include <qpe/resource.h>
 #include <qpe/timestring.h>
 
 #include <qbuttongroup.h>
@@ -27,6 +28,7 @@
 #include <qstringlist.h>
 #include <qtimer.h>
 #include <qtoolbutton.h>
+
 
 /*
  *  Constructs a DateBookDayHeader which is a child of 'parent', with the
@@ -43,6 +45,9 @@ DateBookDayHeader::DateBookDayHeader( bool useMonday,
     connect(date,SIGNAL(pressed()),this,SLOT(pickDate()));
 
     setupNames();
+
+    forward->setPixmap(  Resource::loadPixmap( "forward" ) );
+    back->setPixmap(  Resource::loadPixmap( "back" ) );
 
     setBackgroundMode( PaletteButton );
     grpDays->setBackgroundMode( PaletteButton );
