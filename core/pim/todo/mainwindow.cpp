@@ -910,7 +910,8 @@ void MainWindow::edit( int uid ) {
     slotEdit( uid );
 }
 void MainWindow::add( const OPimRecord& rec) {
-    if ( rec.rtti() != OPimTodo::rtti() ) return;
+    OPimTodo test;
+    if ( rec.rtti() != test.rtti() ) return;
     m_todoMgr.load(); // might not be loaded
 
     const OPimTodo& todo = static_cast<const OPimTodo&>(rec);
