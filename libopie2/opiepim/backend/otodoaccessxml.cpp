@@ -1,3 +1,13 @@
+#include <errno.h>
+#include <fcntl.h>
+
+#include <sys/mman.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+
+#include <unistd.h>
+
+
 #include <qfile.h>
 #include <qvector.h>
 
@@ -52,20 +62,36 @@ bool OTodoAccessXML::load() {
 
     // here the custom XML parser from TT it's GPL
     // but we want to push OpiePIM... to TT.....
-    QFile f(m_file );
-    if (!f.open(IO_ReadOnly) )
-        return false;
+    // mmap part from zecke :)
+    int fd = ::open( QFile::encodeName(m_file).data(), O_RDONLY );
+    struct stat attribut;
+    if ( fd < 0 ) return false;
 
-    QByteArray ba = f.readAll();
-    f.close();
-    char* dt = ba.data();
-    int len = ba.size();
+    if ( fstat(fd, &attribut ) == -1 ) {
+        ::close( fd );
+        return false;
+    }
+    void* map_addr = ::mmap(NULL,  attribut.st_size, PROT_READ, MAP_SHARED, fd, 0 );
+    if ( map_addr == ( (caddr_t)-1) ) {
+        ::close(fd );
+        return false;
+    }
+    /* advise the kernel who we want to read it */
+    ::madvise( map_addr,  attribut.st_size,  MADV_SEQUENTIAL );
+    /* we do not the file any more */
+    ::close( fd );
+
+    char* dt = (char*)map_addr;
+    int len = attribut.st_size;
     int i = 0;
     char *point;
     const char* collectionString = "<Task ";
+    int strLen = strlen(collectionString);
     while ( dt+i != 0 && ( point = strstr( dt+i, collectionString ) ) != 0l ) {
         i = point -dt;
-        i+= strlen(collectionString);
+        i+= strLen;
+        qWarning("Found a start at %d %d", i,  (point-dt) );
+
         OTodo ev;
         m_year = m_month = m_day = 0;
 
@@ -120,6 +146,7 @@ bool OTodoAccessXML::load() {
         /*
          * now add it
          */
+        qWarning("End at %d", i );
         if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
             ev.setUid( 1 );
             m_changed = true;
@@ -130,6 +157,8 @@ bool OTodoAccessXML::load() {
         m_events.insert(ev.uid(), ev );
         m_year = m_month = m_day = -1;
     }
+
+    munmap(map_addr, attribut.st_size );
 
     qWarning("counts %d records loaded!", m_events.count() );
     return true;

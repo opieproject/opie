@@ -3,11 +3,12 @@
 
 #include <qpe/qcopenvelope_qws.h>
 
+#include "opimresolver.h"
 #include "opimmainwindow.h"
 
 OPimMainWindow::OPimMainWindow( const QString& service, QWidget* parent,
                                 const char* name, WFlags flag )
-    : QMainWindow( parent, name, flag ), m_service( service ), m_fallBack(0l) {
+    : QMainWindow( parent, name, flag ), m_rtti(-1), m_service( service ), m_fallBack(0l) {
 
     /*
      * let's generate our QCopChannel
@@ -28,6 +29,9 @@ OPimMainWindow::~OPimMainWindow() {
 }
 QCopChannel* OPimMainWindow::channel() {
     return m_channel;
+}
+void OPimMainWindow::doSetDocument( const QString&  ) {
+
 }
 void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) {
     /*
@@ -68,4 +72,34 @@ void OPimMainWindow::appMessage( const QCString& cmd, const QByteArray& array ) 
         add( *m_fallBack );
         delete m_fallBack;
     }
+}
+/* implement the url scripting here */
+void OPimMainWindow::setDocument( const QString& str) {
+    doSetDocument( str );
+}
+/*
+ * we now try to get the array demarshalled
+ * check if the rtti matches this one
+ */
+OPimRecord* OPimMainWindow::record( int rtti,  const QByteArray& array ) {
+    if ( service() != rtti )
+        return 0l;
+
+    OPimRecord* record = OPimResolver::self()->record( rtti );
+    QDataStream str(array, IO_ReadOnly );
+    if ( !record || !record->loadFromStream(str) ) {
+        delete record;
+        record = 0l;
+    }
+
+    return record;
+}
+/*
+ * get the rtti for the service
+ */
+int OPimMainWindow::service() {
+    if ( m_rtti == -1 )
+        m_rtti  =  OPimResolver::self()->serviceId( m_service );
+
+    return m_rtti;
 }

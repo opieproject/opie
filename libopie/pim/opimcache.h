@@ -9,7 +9,10 @@ template <class T = OPimRecord>
 class OPimCacheItem {
 public:
     OPimCacheItem( const T& t = T() );
+    OPimCacheItem( const OPimCacheItem& );
     ~OPimCacheItem();
+
+    OPimCacheItem &operator=( const OPimCacheItem& );
 
     T record()const;
     void setRecord( const T& );
@@ -27,7 +30,10 @@ class OPimCache {
 public:
     typedef OPimCacheItem<T> Item;
     OPimCache();
+    OPimCache( const OPimCache& );
     ~OPimCache();
+
+    OPimCache &operator=( const OPimCache& );
 
     bool contains(int uid)const;
     void invalidate();

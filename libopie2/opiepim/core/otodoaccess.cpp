@@ -6,7 +6,7 @@
 #include "otodoaccess.h"
 #include "obackendfactory.h"
 
-OTodoAccess::OTodoAccess( OTodoAccessBackend* end )
+OTodoAccess::OTodoAccess( OTodoAccessBackend* end, enum Access )
     : QObject(), OPimAccessTemplate<OTodo>( end ),  m_todoBackEnd( end )
 {
 //     if (end == 0l )
@@ -43,36 +43,6 @@ OTodoAccess::List OTodoAccess::effectiveToDos( const QDate& start,
 OTodoAccess::List OTodoAccess::overDue() {
     List lis( m_todoBackEnd->overDue(), this );
     return lis;
-}
-void OTodoAccess::addAlarm( const OTodo& event) {
-/* FIXME use the new notifier architecture
-  if (!event.hasAlarmDateTime() )
-        return;
-
-    QDateTime now      = QDateTime::currentDateTime();
-    QDateTime schedule = event.alarmDateTime();
-
-    if ( schedule > now ){
-        AlarmServer::addAlarm( schedule,
-                               "QPE/Application/todolist",
-                               "alarm(QDateTime,int)", event.uid() );
-
-    }
-*/
-}
-void OTodoAccess::delAlarm( int uid) {
-
-    QDateTime schedule; // Create null DateTime
-
-    // I hope this will remove all scheduled alarms
-    // with the given uid !?
-    // If not: I have to rethink how to remove already
-    // scheduled events... (se)
-    //  it should be fine -zecke
-//    qWarning("Removing alarm for event with uid %d", uid );
-    AlarmServer::deleteAlarm( schedule ,
-                              "QPE/Application/todolist",
-                              "alarm(QDateTime,int)", uid );
 }
 /* sort order */
 OTodoAccess::List OTodoAccess::sorted( bool ascending, int sort,int filter, int cat ) {

@@ -29,7 +29,7 @@ public:
      * the default resource will be
      * picked up
      */
-    OTodoAccess( OTodoAccessBackend* = 0l);
+    OTodoAccess( OTodoAccessBackend* = 0l, enum Access acc = Random );
     ~OTodoAccess();
 
 
@@ -78,17 +78,6 @@ signals:
      */
     void signalChanged( const OTodoAccess* );
 private:
-    /**
-     * add an Alarm to the AlarmServer
-     */
-    void addAlarm( const OTodo& );
-
-    /**
-     * delete an alarm with the uid from
-     * the alarm server
-     */
-    void delAlarm( int uid );
-
     int m_cat;
     OTodoAccessBackend* m_todoBackEnd;
     class OTodoAccessPrivate;

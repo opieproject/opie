@@ -32,6 +32,11 @@ public:
 
 
 protected slots:
+    /*
+     * called when a setDocument
+     * couldn't be handled by this window
+     */
+    virtual void doSetDocument( const QString& );
     /* for syncing */
     virtual void flush()  = 0;
     virtual void reload() = 0;
@@ -51,6 +56,24 @@ protected slots:
     /** make a copy of it! */
     virtual void add( const OPimRecord& ) = 0;
 
+
+    QCopChannel* channel();
+
+private slots:
+    void appMessage( const QCString&, const QByteArray& );
+    void setDocument( const QString& );
+
+
+private:
+    class Private;
+    Private* d;
+
+    int m_rtti;
+    QCopChannel* m_channel;
+    QString m_service;
+    QCString m_str;
+    OPimRecord* m_fallBack;
+
     /* I would love to do this as a template
      * but can't think of a right way
      * because I need signal and slots -zecke
@@ -58,21 +81,8 @@ protected slots:
     /*
      * the only pointer in the whole PIM API :(
      */
-    virtual OPimRecord* record( int rtti, const QByteArray& ) = 0;
-    QCopChannel* channel();
-
-private slots:
-    void appMessage( const QCString&, const QByteArray& );
-
-
-private:
-    class Private;
-    Private* d;
-
-    QCopChannel* m_channel;
-    QString m_service;
-    QCString m_str;
-    OPimRecord* m_fallBack;
+    virtual OPimRecord* record( int rtti, const QByteArray& ) ;
+    int service();
 };
 
 

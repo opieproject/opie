@@ -1,6 +1,7 @@
 #ifndef OPIE_PIM_RECORD_H
 #define OPIE_PIM_RECORD_H
 
+#include <qdatastream.h>
 #include <qmap.h>
 #include <qstring.h>
 #include <qstringlist.h>
@@ -105,6 +106,14 @@ public:
      */
     static int rtti();
 
+    /**
+     * some marshalling and de marshalling code
+     * saves the OPimRecord
+     * to and from a DataStream
+     */
+    virtual bool loadFromStream(QDataStream& );
+    virtual bool saveToStream( QDataStream& stream )const;
+
 protected:
     Qtopia::UidGen &uidGen();
 //    QString crossToString()const;
@@ -115,6 +124,9 @@ private:
     OPimXRefManager m_xrefman;
     static Qtopia::UidGen m_uidGen;
 
+private:
+    void flush( const OPimXRefPartner&, QDataStream& stream )const;
+    OPimXRefPartner partner( QDataStream& );
 };
 
 

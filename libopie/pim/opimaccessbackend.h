@@ -19,7 +19,9 @@ template <class T = OPimRecord>
 class OPimAccessBackend {
 public:
     typedef OTemplateBase<T> Frontend;
-    OPimAccessBackend();
+
+    /** The access hint from the frontend */
+    OPimAccessBackend(int access = 0);
     virtual ~OPimAccessBackend();
 
     /**
@@ -88,6 +90,7 @@ public:
      */
     void setReadAhead( uint count );
 protected:
+    int access()const;
     void cache( const T& t )const;
 
     /**
@@ -98,13 +101,18 @@ protected:
     uint readAhead()const;
 
 private:
+    class Private;
+    Private* d;
     Frontend* m_front;
     uint m_read;
+    int m_acc;
 
 };
 
 template <class T>
-OPimAccessBackend<T>::OPimAccessBackend() {
+OPimAccessBackend<T>::OPimAccessBackend(int acc)
+    : m_acc( acc )
+{
     m_front = 0l;
 }
 template <class T>
@@ -137,5 +145,9 @@ void OPimAccessBackend<T>::setReadAhead( uint count ) {
 template <class T>
 uint OPimAccessBackend<T>::readAhead()const {
     return m_read;
+}
+template <class T>
+int OPimAccessBackend<T>::access()const {
+    return m_acc;
 }
 #endif

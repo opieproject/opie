@@ -22,20 +22,26 @@
 template <class T = OPimRecord >
 class OPimAccessTemplate : public OTemplateBase<T> {
 public:
+    enum Access {
+        Random = 0,
+        SortedAccess
+    };
     typedef ORecordList<T> List;
     typedef OPimAccessBackend<T> BackEnd;
     typedef OPimCache<T> Cache;
 
     /**
      * c'tor BackEnd
+     * enum Access a small hint on how to handle the backend
      */
     OPimAccessTemplate( BackEnd* end);
+
     virtual ~OPimAccessTemplate();
 
     /**
      * load from the backend
      */
-    virtual bool load();
+    bool load();
 
     /** Reload database.
      * You should execute this function if the external database
@@ -49,7 +55,7 @@ public:
      * Save is more a "commit". After calling this function, all changes are public available.
      * @return true if successful
      */
-    virtual bool save();
+    bool save();
 
     /**
      * if the resource was changed externally
@@ -85,7 +91,7 @@ public:
     /**
      * clears the backend and invalidates the backend
      */
-    virtual void clear() ;
+    void clear() ;
 
     /**
      * add T to the backend
@@ -108,7 +114,8 @@ public:
      * @param uid The ID of the item to remove
      * @return <i>true</i> if successful.
      */
-    virtual bool remove( int uid );
+    bool remove( int uid );
+    bool remove( const OPimRecord& );
 
     /**
      * replace T from backend
@@ -123,6 +130,8 @@ public:
      */
     void cache( const T& )const;
     void setSaneCacheSize( int );
+
+    QArray<int> records()const;
 protected:
     /**
      * invalidate the cache
@@ -170,6 +179,10 @@ typename OPimAccessTemplate<T>::List OPimAccessTemplate<T>::allRecords()const {
     QArray<int> ints = m_backEnd->allRecords();
     List lis(ints, this );
     return lis;
+}
+template <class T>
+QArray<int> OPimAccessTemplate<T>::records()const {
+    return m_backEnd->allRecords();
 }
 template <class T>
 typename OPimAccessTemplate<T>::List
@@ -229,6 +242,10 @@ template <class T>
 bool OPimAccessTemplate<T>::remove( int uid ) {
     m_cache.remove( uid );
     return m_backEnd->remove( uid );
+}
+template <class T>
+bool OPimAccessTemplate<T>::remove( const OPimRecord& rec) {
+    return remove( rec.uid() );
 }
 template <class T>
 bool OPimAccessTemplate<T>::replace( const T& t ) {

@@ -16,6 +16,7 @@
 #include "orecur.h"
 #include "opimmaintainer.h"
 #include "opimnotifymanager.h"
+#include "opimresolver.h"
 
 #include "otodo.h"
 
@@ -417,5 +418,5 @@ QString OTodo::recordField(int /*id*/ )const {
 }
 
 int OTodo::rtti(){
-    return 1;
+    return OPimResolver::TodoList;
 }

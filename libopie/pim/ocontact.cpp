@@ -22,6 +22,7 @@
 #define QTOPIA_INTERNAL_CONTACT_MRE
 
 #include "ocontact.h"
+#include "opimresolver.h"
 
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
@@ -829,7 +830,7 @@ void OContact::save( QString &buf ) const
   \internal
   Returns the list of fields belonging to a contact
   Never change order of this list ! It has to be regarding
-  enum AddressBookFields !! 
+  enum AddressBookFields !!
 */
 QStringList OContact::fields()
 {
@@ -1100,10 +1101,10 @@ void OContact::insertEmails( const QStringList &v )
 	insertEmail( *it );
 }
 int OContact::rtti() {
-    return 2;
+    return OPimResolver::AddressBook;
 }
 void OContact::setUid( int i )
-{ 
-	OPimRecord::setUid(i); 
-	replace( Qtopia::AddressUid , QString::number(i)); 
+{
+	OPimRecord::setUid(i);
+	replace( Qtopia::AddressUid , QString::number(i));
 }

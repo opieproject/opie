@@ -1,3 +1,5 @@
+#include <qarray.h>
+
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
 
@@ -81,4 +83,84 @@ OPimXRefManager &OPimRecord::xrefmanager() {
 }
 int OPimRecord::rtti(){
     return 0;
+}
+
+/**
+ * now let's put our data into the stream
+ */
+/*
+ * First read UID
+ *            Categories
+ *            XRef
+ */
+bool OPimRecord::loadFromStream( QDataStream& stream ) {
+    int Int;
+    uint UInt;
+    stream >> Int;
+    setUid(Int);
+
+    /** Categories */
+    stream >> UInt;
+    QArray<int> array(UInt);
+    for (uint i = 0; i < UInt; i++ ) {
+        stream >> array[i];
+    }
+    setCategories( array );
+
+    /*
+     * now we do the X-Ref stuff
+     */
+    OPimXRef xref;
+    stream >> UInt;
+    for ( uint i = 0; i < UInt; i++ ) {
+        xref.setPartner( OPimXRef::One, partner( stream ) );
+        xref.setPartner( OPimXRef::Two, partner( stream ) );
+        m_xrefman.add( xref );
+    }
+
+    return true;
+}
+bool OPimRecord::saveToStream( QDataStream& stream )const {
+    /** UIDs */
+
+    stream << uid();
+
+    /** Categories  */
+    stream << categories().count();
+    for ( uint i = 0; i < categories().count(); i++ ) {
+        stream << categories()[i];
+    }
+
+    /*
+     * first the XRef count
+     * then the xrefs
+     */
+    stream << m_xrefman.list().count();
+    for ( OPimXRef::ValueList::ConstIterator it = m_xrefman.list().begin();
+          it != m_xrefman.list().end(); ++it ) {
+        flush( (*it).partner( OPimXRef::One),  stream  );
+        flush( (*it).partner( OPimXRef::Two),  stream  );
+    }
+    return true;
+}
+void OPimRecord::flush( const OPimXRefPartner& par, QDataStream& str ) const{
+    str << par.service();
+    str << par.uid();
+    str << par.field();
+}
+OPimXRefPartner OPimRecord::partner( QDataStream& stream ) {
+    OPimXRefPartner par;
+    QString str;
+    int i;
+
+    stream >> str;
+    par.setService( str );
+
+    stream >> i;
+    par.setUid( i );
+
+    stream >> i ;
+    par.setField( i );
+
+    return par;
 }
