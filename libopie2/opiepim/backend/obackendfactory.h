@@ -85,35 +85,41 @@ class OBackendFactory
          */
 	static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle database, 
 			  const QString& appName ){
-		qWarning("Selected backend for %d is: %d", type, database ); 
+		qWarning("Selected backend for %d is: %d", type, database );
+		// If we should use the dafult database style, we have to request it
+		OPimGlobal::DatabaseStyle used_database = database;
+		if ( database == OPimGlobal::DEFAULT ){
+			used_database = defaultDB( type );
+		}
+ 
 
 		switch ( type ){
 		case OPimGlobal::TODOLIST:
 #ifdef __USE_SQL
-			if ( database == OPimGlobal::SQL )
+			if ( used_database == OPimGlobal::SQL )
 				return (T*) new OPimTodoAccessBackendSQL("");
 #else
-			if ( database == OPimGlobal::SQL )
+			if ( used_database == OPimGlobal::SQL )
 				qWarning ("OBackendFactory:: sql Backend for TODO not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OPimTodoAccessXML( appName );
 		case OPimGlobal::CONTACTLIST:
 #ifdef __USE_SQL
-			if ( database == OPimGlobal::SQL )
+			if ( used_database == OPimGlobal::SQL )
 				return (T*) new OPimContactAccessBackend_SQL("");
 #else
-			if ( database == OPimGlobal::SQL )
+			if ( used_database == OPimGlobal::SQL )
 				qWarning ("OBackendFactory:: sql Backend for CONTACT not implemented! Using XML instead!");
 #endif
 
 			return (T*) new OPimContactAccessBackend_XML( appName );
 		case OPimGlobal::DATEBOOK:
 #ifdef __USE_SQL
-			if ( database == OPimGlobal::SQL )
+			if ( used_database == OPimGlobal::SQL )
 				return (T*) new ODateBookAccessBackend_SQL("");
 #else
-			if ( database == OPimGlobal::SQL )
+			if ( used_database == OPimGlobal::SQL )
                             qWarning("OBackendFactory:: sql Backend for DATEBOOK not implemented! Using XML instead!");
 #endif
 
@@ -125,10 +131,14 @@ class OBackendFactory
 
 	}
 
-
-	static OPimGlobal::DatabaseStyle defaultDB( OPimGlobal::PimType backend ){
+	/**
+	 * Returns the style of the default database which is used to contact PIM data.
+         * @param type the type of the backend
+	 * @see OPimGlobal
+	 */
+	static OPimGlobal::DatabaseStyle defaultDB( OPimGlobal::PimType type ){
 		QString group_name;
-		switch ( backend ){
+		switch ( type ){
 		case OPimGlobal::TODOLIST:
 			group_name = "todo";
 			break;

@@ -92,6 +92,24 @@ class OPimAccessFactory
 			
 		}
 	}
+
+
+	/**
+	 * Returns the selected PIM access-object, using the default database style
+	 * Which style is selected is defined in the configfile "pimaccess.conf" in 
+	 * the directory "Settings"
+	 * @param type Type of the selected database (addressbook, todolist or datebook)
+	 * @param appName "Name" of your application. This should be any constant string which is used
+	 *                by some backends for creating special files (i.e.journal files). Please keep the
+	 *                string unique for your application !
+	 * @see OPimGlobal
+	 * 
+	 */
+	static T* default( OPimGlobal::PimType type, const QString& appName ){
+
+		return create( type, OPimGlobal::DEFAULT, appName )
+
+	}
 };
 
 }
