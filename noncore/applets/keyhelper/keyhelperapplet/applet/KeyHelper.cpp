@@ -1,5 +1,6 @@
 #include "KeyHelper.h"
 #include <opie2/okeyfilter.h>
+#include <opie2/odebug.h>
 
 KeyHelper::KeyHelper()
 {
@@ -22,6 +23,7 @@ KeyHelper::~KeyHelper()
 bool KeyHelper::filter(int unicode, int keycode, int modifiers,
         bool isPress, bool autoRepeat)
 {
+    odebug << "KeyHelper <<< "<<unicode<<" - "<<keycode<<" - "<<modifiers<<"\n";
     m_oAction.setAction(unicode, keycode, modifiers,
         isPress, autoRepeat);
     return(m_oAction.doAction());

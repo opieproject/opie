@@ -20,7 +20,7 @@ bool KeycfgReader::load()
 	file = cfg.readEntry("XmlFile");
 	if(file.length() == 0 || !QFile::exists(file)){
 		/* default */
-		file = QDir::homeDirPath() + "/Settings/keyhelper.xml";
+		file = QString(getenv( "HOME" )) + QString("/Settings/keyhelper.xml");
 	}
 	return(load(file));
 }
