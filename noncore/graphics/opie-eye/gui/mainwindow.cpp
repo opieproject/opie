@@ -8,9 +8,8 @@
 #include "filesystem.h"
 #include "imageinfoui.h"
 #include "imageview.h"
-#if 0
 #include "viewmodebutton.h"
-#endif
+
 #include <iface/ifaceinfo.h>
 #include <iface/dirview.h>
 
@@ -91,11 +90,11 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     connect( btn, SIGNAL(clicked() ),
              m_view, SLOT(slotTrash() ) );
 
-#if 0             
+
     btn = new ViewModeButton( bar );
     connect( btn, SIGNAL(changeMode(int)),
              m_view, SLOT(slotChangeMode(int)));
-#endif
+
     btn = new QToolButton( bar );
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );
     connect( btn, SIGNAL(clicked() ),
@@ -104,7 +103,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     rotateButton = new QToolButton(bar);
     rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
     rotateButton->setToggleButton(true);
-    
+
     odebug << "Mode = " << m_stack->mode() << oendl;
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         rotateButton->setOn(true);
