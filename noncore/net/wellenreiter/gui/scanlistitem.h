@@ -16,11 +16,11 @@
 #ifndef SCANLISTITEM_H
 #define SCANLISTITEM_H
 
-#include <qlistview.h>
+#include <cornucopia/olistview.h>
 
 class QString;
 
-class MScanListItem: public QListViewItem
+class MScanListItem: public OListViewItem
 {
   public:
 
@@ -46,11 +46,11 @@ class MScanListItem: public QListViewItem
     virtual void decorateItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
 
   public:
-  
+
     QString type;
-    
+
   public:
-    
+
     //const QString& type() { return _type; };
     const QString& essid() { return _essid; };
     const QString& macaddr() { return _macaddr; };
@@ -58,12 +58,12 @@ class MScanListItem: public QListViewItem
     int channel() { return _channel; };
     int signal() { return _signal; };
     int beacons() { return _beacons; };
-    
+
     void setSignal( int signal ) { /* TODO */ };
     void receivedBeacon();
-    
+
     void setManufacturer( const QString& manufacturer );
-      
+
   private:
     QString _type;
     QString _essid;
@@ -72,7 +72,7 @@ class MScanListItem: public QListViewItem
     int _channel;
     int _signal;
     int _beacons;
-    
+
 };
 
 #endif

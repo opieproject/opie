@@ -1,7 +1,7 @@
-Files: bin/wellenreiter bin/wellenreiterd share/wellenreiter pics/wellenreiter apps/Applications/wellenreiter.desktop $OPIEDIR/lib/libwellenreiter.*
+Files: bin/wellenreiter bin/wellenreiterd share/wellenreiter pics/wellenreiter apps/Applications/wellenreiter.desktop $OPIEDIR/lib/libwellenreiter.* $OPIEDIR/lib/libcornucopia.*
 Priority: optional
 Section: opie/applications
-Maintainer: Michael Lauer <mickeyl@handhelds.org> 
+Maintainer: Michael 'Mickey' Lauer <mickeyl@handhelds.org> 
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base, libpcap

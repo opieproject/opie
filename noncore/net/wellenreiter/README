@@ -1,111 +1,87 @@
-/*************************************************************************/
-/*                W e l l e n r e i t e r   I I                          */
-/*               ===============================                         */
-/*                                                                       */
- /*                                          Version: Opie-ALPHA-January */
-/*************************************************************************/
+/************************************************************************/
+/*                W e l l e n r e i t e r   I I                         */
+/*               ===============================                        */
+/*                                                                      */
+/*                                        Version: Opie-ALPHA-February  */
+/************************************************************************/
 
---------------------------------------------------
-Release Notes for Opie-ALPHA Version January 2002
---------------------------------------------------
-
-=====================
-= Supported Devices =
-=====================
-
-* low-level orinoco_cs-based (including prism2 and spectrum_cs)
+----------------------------------------------------
+Release Notes for Opie-ALPHA Version February 2002
+----------------------------------------------------
 
 =====================
-=      Build        =
+=  Supported Devices  =
+=====================
+
+- HERMES chipset [ orinoco ], e.g. Lucent/Agere cards
+- PRISM2 chipset [ orinoco or hostap ], e.g. D-Link, Buffallo
+- SYMBOL/SPECTRUM chipset* [ orinoco ], e.g. Symbol Spectrum 24, Socket Lowpower CF
+- CISCO chipset
+
+* Warning: Current Symbol/Spectrum CF drivers have bugs - they freeze the system in monitor mode.
+           This has nothing todo with Wellenreiter as its a driver problem.
+
+=====================
+=        Build        =
 =====================
 
 (I) Opie Build Environment
 
-To compile Wellenreiter within the Opie build environment, add the
-following directories to $OPIEDIR/Makefile, e.g. to 'NONAPPS='
+To compile Wellenreiter within the Opie build environment, do
+'make menuconfig' and check Wellenreiter in the subsection
+"Communications and Networking"
 
-noncore/net/wellenreiter/libwellenreiter \
-noncore/net/wellenreiter/daemon \
-noncore/net/wellenreiter/contrib/orinoco_hopper \
-noncore/net/wellenreiter/gui
-
-./configure and rebuild. Note that you need libpcap in your toolchain.
+do 'make SUBDIRS=noncore/net/wellenreiter' or 'make' (to build everything)
+Note that you need to have libpcap in your toolchain.
 
 (II) OpenZaurus Build Environment
 
-To compile Wellenreiter within the OZ build environment, add the
-following lines to $OPIEDIR/packages:
-CONFIG_WELLENREITER noncore/net/wellenreiter/libwellenreiter libwellenreiter.pro
-CONFIG_WELLENREITER noncore/net/wellenreiter/daemon daemon.pro
-CONFIG_WELLENREITER noncore/net/wellenreiter/gui gui.pro
-CONFIG_WELLENREITER noncore/net/wellenreiter/contrib/orinoco_hopper orinoco_hopper.pro
-
-make -f Makefile.test clean-configs
-cd <BUILDROOT>
-make SUBDIRS=packages/opie package
+See (I), but do 'make SUBDIRS=packages/opie'
 
 (III) To compile a standalone Wellenreiter for X11, you need Qt3 and the development
 packages for Qt3, e.g. libqt3-devel. Assuming, $QTDIR is set to your Qt-Director
 (e.g. /usr/lib/qt3), set $OPIEDIR to your installation prefix, e.g. /usr/local, then
-export QMAKESPEC=$QTDIR/mkspecs/linux-g++
-qmake "platform=x11" wellenreiter.pro
-make
-make install
+'export QMAKESPEC=$QTDIR/mkspecs/linux-g++'
+'qmake "platform=x11" wellenreiter.pro'
+'make'
+'make install'
 
 =====================
 =     Install       =
 =====================
 
 Alternatively, you can use our precompiled ipk. Get it from
-http://opie.net.wox.org/wellenreiter/. This also includes a recent libpcap.
+http://opie.net.wox.org/wellenreiter/. There is also a recent libpcap available.
 
 =====================
 =       Run         =
 =====================
 
 There are two possible modes: <Manual> and <Automatic>. I suggest, you
-start with the <Automatic> Mode. This works just using the "Start"
-and "Stop" Pushbuttons in the Wellenreiter GUI. If this doesn't work,
-then use the following strategy:
+start with the <Automatic> Mode. This works just using the Start/Stop
+Toolbutton in the Wellenreiter Menubar. Note that you need to configure
+your card before the Start/Stop-Toolbutton can be clicked.
 
-1. Place card in monitor mode. This is device dependent.
-
-   Caution: Don't do this while you're logged in via ssh
-   or otherwise using the wireless interface - your connection
-   will freeze: The card can't be used normally when sniffing!
-
-   For most orinoco-based cards this can be done using either
-   'iwpriv <interface> 2' or 'iwpriv <interface> 2 1'.  
-   
-   You can check if this works, by calling 'ifconfig <interface>'.
-   If you see 'Protocol: UNSPEC' and an unusual long MAC-Address,
-   then your card has been successfully set to the monitor mode.
-
-2. Start a channel hopper. A wireless card has several channels
-   (e.g. radio frequencies) here it can listen for beacons.
-   Beacons are management data frames from other stations.
-   Remember, this is radio transmission, so the card has to be
-   "tuned" to a certain channel to be able to receive the beacons.
-   
-   In order to scan the complete frequency spectrum and thus be able
-   to detect all available stations, you have to 'hop' through the
-   channels frequently. You can do this manually (e.g. with 'iwconfig')
-   [hahaha] or you can use a channel hopper.  
-   
-   For convenience, the current Wellenreiter Alpha comes with a 
-   channel hopper for Orinoco-based cards. Start this via 
-   orinoco_hopper <interface>.
-
-3. Start the Wellenreiter sniffing daemon: wellenreiterd.
-
-4. Start the Wellenreiter GUI and sniff like hell. Don't press the button
-   "Start Scan" yet, because it enables the demo mode and will crash the
-   wellenreiterd daemon if running.
+If this doesn't work, then try calling the wellenreiter daemon
+[wellenreiterd] manually. It has a command line interface. You can
+start the GUI before or after the daemon.
 
 =====================
 =     Credits       =
 =====================
 
-Sniffer: Max Moser <max@remote-exploit.org>
+Wellenreiter/Opie is (C) 2002-2003 M-M-M
+
+Sniffer Engine:             Max Moser        <max@remote-exploit.org>
 Communication and Protocol: Martin J. Muench <mjm@remote-exploit.org>
-GUI: Michael Lauer <mickeyl@handhelds.org>
+GUI and Packaging:          Michael Lauer    <mickeyl@handhelds.org>
+
+=====================
+=      Links        =
+=====================
+
+Opie Project:               http://opie.handhelds.org
+OpenZaurus Project:         http://openzaurus.org
+Wellenreiter:               http://www.remote-exploit.org
+Wellenreiter/Opie:          http://opie.net.wox.org/wellenreiter
+

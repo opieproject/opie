@@ -31,7 +31,7 @@ SOURCES         = main.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include ../
 DEPENDPATH      += $(OPIEDIR)/include ../
-LIBS            += -L. -lwellenreiter
+LIBS            += -L. -lwellenreiter -lcornucopia
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
 

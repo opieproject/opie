@@ -16,13 +16,13 @@
 #ifndef SCANLIST_H
 #define SCANLIST_H
 
-#include <qlistview.h>
+#include <cornucopia/olistview.h>
 
 class QString;
 
 class ManufacturerDB;
 
-class MScanListView: public QListView
+class MScanListView: public OListView
 {
   Q_OBJECT
   

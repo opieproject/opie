@@ -21,7 +21,7 @@
 #include "manufacturers.h"
 
 MScanListView::MScanListView( QWidget* parent, const char* name )
-              :QListView( parent, name ), _manufacturerdb( 0 )
+              :OListView( parent, name ), _manufacturerdb( 0 )
 {
 
     setFrameShape( QListView::StyledPanel );

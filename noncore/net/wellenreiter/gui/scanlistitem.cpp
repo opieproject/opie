@@ -37,7 +37,7 @@ const int col_lastseen = 8;
 
 MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )
-               :QListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
+               :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null ),
                 _type( type ), _essid( essid ), _macaddr( macaddr ), _wep( wep ),
                 _channel( channel ), _signal( signal ), _beacons( 0 )
 {
@@ -47,7 +47,7 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
 
 MScanListItem::MScanListItem( QListViewItem* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )
-               :QListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
+               :OListViewItem( parent, essid, QString::null, macaddr, QString::null, QString::null )
 {
     qDebug( "creating scanlist item" );
     decorateItem( type, essid, macaddr, wep, channel, signal );
