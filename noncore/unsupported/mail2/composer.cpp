@@ -20,7 +20,7 @@
 AttachViewItem::AttachViewItem(QListView *parent, Attachment &attachment)
 	: QListViewItem(parent), _attachment(attachment)
 {
-	setPixmap(0, _attachment.docLnk()->pixmap().isNull() ? Resource::loadPixmap("UnknownDocument-14") : _attachment.docLnk()->pixmap());
+	setPixmap(0, _attachment.docLnk().pixmap().isNull() ? Resource::loadPixmap("UnknownDocument-14") : _attachment.docLnk().pixmap());
 	setText(0, _attachment.newName().isEmpty() ? _attachment.fileName() : _attachment.newName());
 	setText(1, _attachment.description());
 }
@@ -231,7 +231,7 @@ void Composer::slotAddAttach()
 	Attachment attachment;
 	attachment.setFileName(lnk.file());
 	attachment.setNewName(lnk.name());
-	attachment.setDocLnk(&lnk);
+	attachment.setDocLnk(lnk);
 	
 	(void) new AttachViewItem(attachView, attachment);
 }

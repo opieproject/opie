@@ -13,16 +13,16 @@ public:
 	void setFileName(QString fileName) { _fileName = fileName; }
 	void setNewName(QString newName) { _newName = newName; }
 	void setDescription(QString description) { _description = description; }
-	void setDocLnk(DocLnk *docLnk) { _docLnk = docLnk; }
+	void setDocLnk(DocLnk docLnk) { _docLnk = docLnk; }
 
 	QString fileName() { return _fileName; }
 	QString newName() { return _newName; }
 	QString description() { return _description; }
-	DocLnk *docLnk() { return _docLnk; }
+	DocLnk docLnk() { return _docLnk; }
 
 protected:
 	QString _fileName, _newName, _description;
-	DocLnk *_docLnk;
+	DocLnk _docLnk;
 
 };
 

@@ -3,6 +3,7 @@
 #include <qlistbox.h>
 #include <qlayout.h>
 
+#include <qpe/applnk.h>
 #include <qpe/fileselector.h>
 #include <qpe/resource.h>
 
@@ -19,11 +20,11 @@ AttachDiag::AttachDiag(QWidget* parent = 0, const char* name = 0, bool modal, WF
 	layout->setSpacing(3);
 	layout->setMargin(4);
 
-	FileSelector *fileSelector = new FileSelector("*", this, "FileSelector");
-	fileSelector->setCloseVisible(false);
-	fileSelector->setNewVisible(false);
+	_fileSelector = new FileSelector("*", this, "FileSelector");
+	_fileSelector->setCloseVisible(false);
+	_fileSelector->setNewVisible(false);
 
-	layout->addMultiCellWidget(fileSelector, 0, 0, 0, 1);
+	layout->addMultiCellWidget(_fileSelector, 0, 0, 0, 1);
 
 	QPushButton *attachButton = new QPushButton(this);
 	attachButton->setText(tr("Ok"));
@@ -37,22 +38,18 @@ AttachDiag::AttachDiag(QWidget* parent = 0, const char* name = 0, bool modal, WF
 
 	layout->addWidget(cancelButton, 1, 1);
 
-	connect(fileSelector, SIGNAL(fileSelected(const DocLnk &)), SLOT(fileSelected(const DocLnk &)));
 	connect(attachButton, SIGNAL(clicked()), SLOT(accept()));
 	connect(cancelButton, SIGNAL(clicked()), SLOT(close()));
 
-	if (fileSelector->selected() != NULL)
-		currentFile = *fileSelector->selected();
-
-	if (fileSelector->fileCount() == 0) {
+	if (_fileSelector->fileCount() == 0) {
 		attachButton->setEnabled(false);
-		fileSelector->setEnabled(false);
+		_fileSelector->setEnabled(false);
 	}
 }
 
-void AttachDiag::fileSelected(const DocLnk &file)
+DocLnk AttachDiag::selectedFile()
 {
-	currentFile = file;
+	return *_fileSelector->selected();
 }
 
 DocLnk AttachDiag::getFile(QWidget *parent)
@@ -62,7 +59,7 @@ DocLnk AttachDiag::getFile(QWidget *parent)
 	attach.show();
 
 	if (QDialog::Accepted == attach.exec()) {
-		return attach.currentFile;
+		return attach.selectedFile();
 	}
 
 	return DocLnk();
