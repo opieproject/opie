@@ -34,7 +34,6 @@
 #include <qpe/resource.h>
 
 #include <qaction.h>
-#include <qcursor.h>
 #include <qimage.h>
 #include <qfile.h>
 #include <qdir.h>
@@ -51,6 +50,7 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 #include <qregexp.h>
+#include <qtextstream.h>
 
 //#include <qtimer.h>
 
@@ -249,6 +249,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
     
+    connect( audioView, SIGNAL( returnPressed( QListViewItem *)),
+             this,SLOT( playIt( QListViewItem *)) );
 
 //    audioView
      populateAudioView();
@@ -269,8 +271,11 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView->setSelectionMode( QListView::Extended);
 
     QPEApplication::setStylusOperation( videoView->viewport(),QPEApplication::RightOnHold);
+
     connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
              this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
+    connect( videoView, SIGNAL( returnPressed( QListViewItem *)),
+             this,SLOT( playIt( QListViewItem *)) );
 
     tabWidget->insertTab( vTab,tr("Video"));
 populateVideoView();
@@ -834,6 +839,7 @@ void PlayListWidget::btnPlay(bool b) {
       break;
       case 1:
       {
+//           if(audioView->selectedItem()) {
           addToSelection( audioView->selectedItem() );
           mediaPlayerState->setPlaying(b);
           d->selectedFiles->removeSelected( );
@@ -841,10 +847,12 @@ void PlayListWidget::btnPlay(bool b) {
           d->selectedFiles->unSelect();
           insanityBool=FALSE;         
 //          audioView->clearSelection();
+//           }
       }
       break;
       case 2:
       {
+//           if(videoView->selectedItem() ) {
           addToSelection( videoView->selectedItem() );
           mediaPlayerState->setPlaying(b);
           qApp->processEvents();
@@ -853,6 +861,7 @@ void PlayListWidget::btnPlay(bool b) {
           d->selectedFiles->unSelect();
           insanityBool=FALSE;
 //          videoView->clearSelection();
+//           }
       }
       break;
     };
@@ -883,7 +892,9 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *item, const QPoint& 
     m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
     m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
     m.insertSeparator();
+    if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() ) 
     m.insertItem( tr( "Properties" ), this, SLOT( listDelete() ));
+    
     m.exec( QCursor::pos() );
       }
     break;
@@ -906,7 +917,8 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *item, const 
     QPopupMenu  m;
     m.insertItem( tr( "Play Selected" ), this, SLOT( playSelected() ));
     m.insertItem( tr( "Remove" ), this, SLOT( removeSelected() ));
-//      m.insertSeparator();
+//       m.insertSeparator();
+//     m.insertItem( tr( "Properties" ), this, SLOT( listDelete() ));
     m.exec( QCursor::pos() );
       }
     break;
@@ -921,7 +933,7 @@ void PlayListWidget::listDelete() {
       QString file;
       int noOfFiles = cfg.readNumEntry("NumberOfFiles", 0 );
     switch ( tabWidget->currentPageIndex()) {
-      case 0:
+      case 0: 
           break;
       case 1:
       {
@@ -985,6 +997,7 @@ void PlayListWidget::populateAudioView() {
             newItem->setPixmap(0, Resource::loadPixmap( "opieplayer/musicfile" ));
         }
     }
+
 }
 
 void PlayListWidget::populateVideoView() {
@@ -1018,9 +1031,9 @@ void PlayListWidget::openFile() {
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
         filename = fileDlg->LineEdit1->text();
-//http://205.188.234.129:8030
+// http://205.188.234.129:8030
 // http://66.28.68.70:8000
-        qDebug(filename);
+        qDebug("Selected filename is "+filename);
         if(filename.right(3) == "m3u")
             readm3u( filename);
         else if(filename.right(3) == "pls")
@@ -1068,8 +1081,57 @@ void PlayListWidget::keyReleaseEvent( QKeyEvent *e)
       case Key_F13: //mail
 //           doUnblank();
           break;
-        
+      case Key_Q: //add to playlist
+          qDebug("Add");
+          addSelected();
+          break;
+      case Key_R: //remove from playlist
+          removeSelected();
+          break;
+//       case Key_P: //play
+//           qDebug("Play");
+//           playSelected();
+//           break;
+      case Key_Space:
+          qDebug("Play");
+          playSelected();
+          break;
+      case Key_1:
+          tabWidget->setCurrentPage(0);
+          break;
+      case Key_2:
+          tabWidget->setCurrentPage(1);
+          break;
+      case Key_3:
+          tabWidget->setCurrentPage(2);
+          break;
+      case Key_4:
+          tabWidget->setCurrentPage(3);         
+          break;
     }
+}
+
+void PlayListWidget::keyPressEvent( QKeyEvent *e)
+{
+//    qDebug("Key press");
+//     switch ( e->key() ) {
+// ////////////////////////////// Zaurus keys
+//       case Key_A: //add to playlist
+//           qDebug("Add");
+//           addSelected();
+//           break;
+//       case Key_R: //remove from playlist
+//           removeSelected();
+//           break;
+//       case Key_P: //play
+//           qDebug("Play");
+//           playSelected();
+//           break;
+//       case Key_Space:
+//           qDebug("Play");
+//           playSelected();
+//           break;
+//     }
 }
 
 void PlayListWidget::doBlank() {
@@ -1096,6 +1158,48 @@ void PlayListWidget::doUnblank() {
 
 void PlayListWidget::readm3u(const QString &filename) {
 
+    qDebug("playlist filename is "+filename);
+    QFile f(filename);
+
+    if(f.open(IO_ReadOnly)) {
+        QTextStream t(&f);
+        QString s;//, first, second;
+        int i=0;
+        while ( !t.atEnd()) {
+//        Lview->insertLine(t.readLine(),-1);
+            s=t.readLine();
+            if(s.find("#",0,TRUE) == -1) {
+                 if(s.find(" ",0,TRUE) == -1)  { // not sure if this is neede since cf uses vfat
+                    if(s.left(2) == "E:" || s.left(2) == "P:") {
+                        s=s.right(s.length()-2);
+                        DocLnk lnk( s );
+                        QFileInfo f(s);
+                        QString name = f.baseName();
+                        name = name.right(name.length()-name.findRev("\\",-1,TRUE)-1);
+                        lnk.setName( name);
+                        s=s.replace( QRegExp("\\"),"/");
+                        lnk.setFile( s);
+//                         lnk.setIcon(opieplayer/MPEGPlayer);
+                        qDebug("add "+name);
+                         d->selectedFiles->addToSelection( lnk);
+                    } else { // is url
+                         DocLnk lnk( s);
+                         QString name = s.right( s.length() - 7);
+//                         name = name.right(name.length()-name.findRev("\\",-1,TRUE)-1);
+                         lnk.setName(name);
+                         lnk.setFile( s+"/");
+//                         lnk.setFile( filename);
+//                         lnk.setComment( s+"/");
+                         lnk.setType("audio/x-mpegurl");
+//                          lnk.setIcon( "opieplayer/MPEGPlayer");
+//                          qDebug("add "+s);
+                       d->selectedFiles->addToSelection( lnk);
+                    }
+                    i++;
+                 }
+            }
+        }
+    }
 }
 
 void PlayListWidget::writem3u(const QString &filename) {
@@ -1104,4 +1208,27 @@ void PlayListWidget::writem3u(const QString &filename) {
 
 void PlayListWidget::readPls(const QString &filename) {
 
+    qDebug("playlist filename is "+filename);
+    QFile f(filename);
+
+    if(f.open(IO_ReadOnly)) {
+        QTextStream t(&f);
+        QString s;//, first, second;
+        int i=0;
+        while ( !t.atEnd()) {
+//        Lview->insertLine(t.readLine(),-1);
+//             s=t.readLine();
+//             s=s.right(s.length()-2);
+//             DocLnk lnk( s );
+//             QFileInfo f(s);
+//             QString name = f.baseName();
+// //                          name = name.left(name.length()-4);
+//             name = name.right(name.findRev("/",0,TRUE));
+//             lnk.setName( name);
+//             lnk.setFile( s);
+//             qDebug("add "+name);
+//                         d->selectedFiles->addToSelection( lnk);
+        }
+        i++;
+    }
 }
