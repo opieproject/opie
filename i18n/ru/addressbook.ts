@@ -18,7 +18,7 @@
     <name>AbView</name>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Без категории</translation>
+        <translation>Без категории</translation>
     </message>
 </context>
 <context>
@@ -190,7 +190,7 @@ Quit anyway?</source>
     </message>
     <message>
         <source>Edit Contact</source>
-        <translation type="unfinished"></translation>
+        <translation>Правка контакта</translation>
     </message>
 </context>
 <context>
@@ -1360,35 +1360,35 @@ Opie-Mail - свободная программа!</translation>
     <name>Opie</name>
     <message>
         <source>Contact</source>
-        <translation type="unfinished">Контакт</translation>
+        <translation>Контакт</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation type="unfinished">Контакты</translation>
+        <translation>Контакты</translation>
     </message>
     <message>
         <source>Start Search</source>
-        <translation type="unfinished">Начать поиск</translation>
+        <translation>Начать поиск</translation>
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation type="unfinished">Написать письмо</translation>
+        <translation>Написать письмо</translation>
     </message>
     <message>
         <source>Import vCard</source>
-        <translation type="unfinished">Импорт vCard</translation>
+        <translation>Импорт vCard</translation>
     </message>
     <message>
         <source>Export vCard</source>
-        <translation type="unfinished">Экспорт vCard</translation>
+        <translation>Экспорт vCard</translation>
     </message>
     <message>
         <source>My Personal Details</source>
-        <translation type="unfinished">Сведения обо мне</translation>
+        <translation>Сведения обо мне</translation>
     </message>
     <message>
         <source>Show quick search bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать панель поиска</translation>
     </message>
 </context>
 <context>

@@ -103,7 +103,7 @@ or select an ftp site?
     </message>
     <message>
         <source>Downloading Gutenberg Index....</source>
-        <translation type="unfinished">Скачиваю Гутенберг индекс...</translation>
+        <translation>Скачиваю индекс Гутенберга...</translation>
     </message>
 </context>
 <context>
@@ -319,11 +319,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>   </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ошибка открытия файла индекса библиотеки. Пожалуйста скачайте новый.&lt;/P&gt; </translation>
     </message>
 </context>
 <context>
@@ -430,7 +426,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source>ftpSiteDlg</source>
-        <translation type="unfinished"></translation>
+        <translation>фтпСайтДлг</translation>
     </message>
     <message>
         <source>List File not opened sucessfully.</source>

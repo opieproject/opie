@@ -22,7 +22,7 @@
     <name>PinDialogBase</name>
     <message>
         <source>PinDialogBase</source>
-        <translation type="unfinished"></translation>
+        <translation>ПинДиалогОснова</translation>
     </message>
     <message>
         <source>4</source>

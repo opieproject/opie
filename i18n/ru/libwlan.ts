@@ -3,7 +3,7 @@
     <name>AWLan</name>
     <message>
         <source>&lt;UseHostName&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ИспИмяХоста&gt;</translation>
     </message>
 </context>
 <context>
@@ -109,150 +109,150 @@
     <name>WLanGUI</name>
     <message>
         <source>General</source>
-        <translation type="unfinished">Общие</translation>
+        <translation>Общие</translation>
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished">Авто</translation>
+        <translation>Авто</translation>
     </message>
     <message>
         <source>Managed</source>
-        <translation type="unfinished">Управляемый</translation>
+        <translation>Управляемый</translation>
     </message>
     <message>
         <source>Ad-Hoc</source>
-        <translation type="unfinished">Равноправный</translation>
+        <translation>Равноправный</translation>
     </message>
     <message>
         <source>Mode</source>
-        <translation type="unfinished">Режим</translation>
+        <translation>Режим</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished">MAC</translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>Encryption</source>
-        <translation type="unfinished">Шифрование</translation>
+        <translation>Шифрование</translation>
     </message>
     <message>
         <source>&amp;Enable Encryption</source>
-        <translation type="unfinished">&amp;Включить шифрование</translation>
+        <translation>&amp;Включить шифрование</translation>
     </message>
     <message>
         <source>&amp;Key Setting</source>
-        <translation type="unfinished">&amp;Настройка ключей</translation>
+        <translation>&amp;Настройка ключей</translation>
     </message>
     <message>
         <source>Key &amp;1</source>
-        <translation type="unfinished">Ключ &amp;1</translation>
+        <translation>Ключ &amp;1</translation>
     </message>
     <message>
         <source>Key &amp;4</source>
-        <translation type="unfinished">Ключ &amp;4</translation>
+        <translation>Ключ &amp;4</translation>
     </message>
     <message>
         <source>Key &amp;2</source>
-        <translation type="unfinished">Ключ &amp;2</translation>
+        <translation>Ключ &amp;2</translation>
     </message>
     <message>
         <source>Key &amp;3</source>
-        <translation type="unfinished">Ключ &amp;3</translation>
+        <translation>Ключ &amp;3</translation>
     </message>
     <message>
         <source>AP</source>
-        <translation type="unfinished">Точка доступа</translation>
+        <translation>Точка доступа</translation>
     </message>
     <message>
         <source>Rate</source>
-        <translation type="unfinished">Скорость</translation>
+        <translation>Скорость</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished">Канал</translation>
+        <translation>Канал</translation>
     </message>
     <message>
         <source>Station</source>
-        <translation type="unfinished">Станция</translation>
+        <translation>Станция</translation>
     </message>
     <message>
         <source>ESSID</source>
-        <translation type="unfinished">ESSID</translation>
+        <translation>ESSID</translation>
     </message>
     <message>
         <source>Noise</source>
-        <translation type="unfinished">Шум</translation>
+        <translation>Шум</translation>
     </message>
     <message>
         <source>Quality</source>
-        <translation type="unfinished">Качество</translation>
+        <translation>Качество</translation>
     </message>
     <message>
         <source>Signal</source>
-        <translation type="unfinished">Сигнал</translation>
+        <translation>Сигнал</translation>
     </message>
     <message>
         <source>SSID</source>
-        <translation type="unfinished">SSID</translation>
+        <translation>SSID</translation>
     </message>
     <message>
         <source>Chn</source>
-        <translation type="unfinished">Кнл</translation>
+        <translation>Кнл</translation>
     </message>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма1</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя</translation>
     </message>
     <message>
         <source>ESS-ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ESS-ID</translation>
     </message>
     <message>
         <source>&lt;UseHostName&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;ИспИмяХоста&gt;</translation>
     </message>
     <message>
         <source>Specify Access Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Указать точку доступа</translation>
     </message>
     <message>
         <source>Scan</source>
-        <translation type="unfinished"></translation>
+        <translation>Сканировать</translation>
     </message>
     <message>
         <source>Accept Non-Encrypted packets</source>
-        <translation type="unfinished"></translation>
+        <translation>Принимать незашифрованные пакеты</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Положение</translation>
     </message>
     <message>
         <source>Freq</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота</translation>
     </message>
     <message>
         <source>Link Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Качество связи</translation>
     </message>
     <message>
         <source>Live feed </source>
-        <translation type="unfinished"></translation>
+        <translation>В эфире </translation>
     </message>
 </context>
 <context>
     <name>WLanNetNode</name>
     <message>
         <source>WLan Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство WLan</translation>
     </message>
     <message>
         <source>&lt;p&gt;Configure Wi/Fi or WLan network cards.&lt;/p&gt;&lt;p&gt;Defines Wireless options for those cards&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Настройка сетевых карт WiFi или WLAN .&lt;/p&gt;&lt;p&gt;Задает опции для этих карт.&lt;/p&gt;</translation>
     </message>
 </context>
 <context>

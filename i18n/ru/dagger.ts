@@ -166,11 +166,11 @@
     </message>
     <message>
         <source>Morphological Tags</source>
-        <translation type="unfinished">Морфологические теги</translation>
+        <translation>Морфологические теги</translation>
     </message>
     <message>
         <source>Morphological tag cross-referencing not implemented yet.</source>
-        <translation type="unfinished">Перекрестные ссылки на морфологические теги еще не осуществлены.</translation>
+        <translation>Перекрестные ссылки на морфологические теги еще не осуществлены.</translation>
     </message>
 </context>
 <context>

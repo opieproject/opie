@@ -376,19 +376,19 @@ Quit anyway?</source>
     <name>DateBookWeekLstEvent</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Редактировать</translation>
+        <translation>Правка</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished">Сдублировать</translation>
+        <translation>Сдублировать</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished">Отправить</translation>
+        <translation>Отправить</translation>
     </message>
 </context>
 <context>

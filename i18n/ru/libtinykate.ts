@@ -455,7 +455,7 @@
     <message>
         <source>May short</source>
         <comment>May</comment>
-        <translation type="unfinished">Май</translation>
+        <translation>Май</translation>
     </message>
     <message>
         <source>June</source>
@@ -511,7 +511,7 @@
     <message>
         <source>May long</source>
         <comment>May</comment>
-        <translation type="unfinished">Май</translation>
+        <translation>Май</translation>
     </message>
     <message>
         <source>June</source>

@@ -114,7 +114,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>Retrieving time from network...</source>
-        <translation type="unfinished"></translation>
+        <translation>Получаю сетевое время...</translation>
     </message>
 </context>
 <context>

@@ -269,11 +269,11 @@
     </message>
     <message>
         <source>Enable static background pixmap</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить статический фоновый рисунок</translation>
     </message>
     <message>
         <source>Activate this, if you want the background pixmap not to scroll with the icons.</source>
-        <translation type="unfinished"></translation>
+        <translation>Включите, если вы хотите, чтобы фон не перемещался вместе с иконками при прокрутке.</translation>
     </message>
 </context>
 <context>

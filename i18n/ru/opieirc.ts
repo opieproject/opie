@@ -3,59 +3,60 @@
     <name>DCCProgress</name>
     <message>
         <source>Receiving file %1 from %2...</source>
-        <translation type="unfinished"></translation>
+        <translation>Принимаю файл %1 от %2...</translation>
     </message>
     <message>
         <source>Successfully received %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Успешно принял %1</translation>
     </message>
     <message>
         <source>Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменено</translation>
     </message>
     <message>
         <source>Peer Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Отменено</translation>
     </message>
     <message>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation>Таймаут</translation>
     </message>
 </context>
 <context>
     <name>DCCTransferTab</name>
     <message>
         <source>DCC Transfers in Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Идет передача DCC</translation>
     </message>
     <message>
         <source>There are transfers in progress. &lt;br&gt;If you close this tab, they will be canceled.&lt;br&gt;Do you want to close it anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Есть незавершенные передачи. &lt;br&gt;Если вы закроете эту вкладку, они будут отменены.&lt;br&gt;Вы все равно хотите закрыть?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Закрыть</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Не закрывать</translation>
     </message>
     <message>
         <source>DCC Transfer from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>DCC передача от %1</translation>
     </message>
     <message>
         <source>%1 is trying to send you the file %2
 (%3 bytes)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 пытается послать вам файл %2
+(%3 байт)</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Принять</translation>
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Отказаться</translation>
     </message>
 </context>
 <context>
@@ -393,19 +394,19 @@ Real name: %4</source>
     </message>
     <message>
         <source>Received a CTCP PING reply from %1: %2 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Принят CTCP PING ответ от %1: %2 секунд</translation>
     </message>
     <message>
         <source>Received a CTCP PING request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Принят CTCP PING запрос от %1</translation>
     </message>
     <message>
         <source>Malformed DCC request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Неверный DCC запрос от %1</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить как</translation>
     </message>
 </context>
 <context>

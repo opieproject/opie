@@ -1033,19 +1033,19 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>Information level:</source>
-        <translation type="unfinished"></translation>
+        <translation>Уровень информации:</translation>
     </message>
     <message>
         <source>Package source lists directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Каталог для списков пакетов:</translation>
     </message>
     <message>
         <source>Enter the directory where package source feed information is stored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите каталог, в котором хранится информация о списках пакетов.</translation>
     </message>
     <message>
         <source>Tap here to select the directory where package source feed information is stored.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите, чтобы выбрать каталог, в котором хранится информация о списках пакетов.</translation>
     </message>
 </context>
 <context>

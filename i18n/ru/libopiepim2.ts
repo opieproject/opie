@@ -233,15 +233,15 @@
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Перем1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Перем2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>НедПерем</translation>
     </message>
 </context>
 <context>
@@ -608,7 +608,7 @@ and </source>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished">Не сохранен</translation>
+        <translation>Без категории</translation>
     </message>
     <message>
         <source>Click here to view all unfiled items.</source>
@@ -692,7 +692,7 @@ and </source>
     </message>
     <message>
         <source>Click here to filter items by category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Щелкните, чтобы отфильтровать записи по категории.</translation>
     </message>
 </context>
 <context>

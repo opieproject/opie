@@ -140,7 +140,7 @@ You can only select an actually configured user.</source>
     </message>
     <message>
         <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-securityplugin-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Чтобы защитить ваш КПК одним или более плагином аутентификации (например, простой ввод ПИН), вы должны установить хотя бы один &lt;em&gt;opie-securityplugin-*&lt;/em&gt; пакет! Как только вы это сделаете, здесь вы сможете настроить защиту вашего КПК.</translation>
     </message>
 </context>
 <context>
@@ -578,19 +578,11 @@ Beware that all manually entered net ranges will be lost!</source>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
-        <translation type="obsolete">Изменить протокол синхронизации для разных устройств.
-    IntelliSync запретит пароль но будет каждый раз спрашивать разрешение для соединения.
-    Opie1.0 совместим с QtopiaDesktop, MultiSync и KitchenSync
-    Qtopia1.7 изменит способ отправки данных и несовместим со старыми клиентами.
-    </translation>
-    </message>
-    <message>
-        <source>Alter the Sync Protocol to tweak for the different devices.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить протокол синхронизации для разных устройств.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync запретит пароль но будет каждый раз спрашивать разрешение для соединения.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 совместим с QtopiaDesktop, MultiSync и KitchenSync
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 изменит способ отправки данных и несовместим со старыми клиентами.
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></translation>
     </message>
 </context>
 </TS>

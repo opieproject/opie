@@ -190,7 +190,7 @@ the selected file?</source>
     </message>
     <message>
         <source>Please select file to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожалуйста выберите файл</translation>
     </message>
 </context>
 </TS>
