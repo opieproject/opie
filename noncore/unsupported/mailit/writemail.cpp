@@ -283,7 +283,7 @@ void WriteMail::reply(Email replyMail, bool replyAll)
 	while (pos != -1) {
 		pos = mail.body.find('\n', pos);
 		if (pos != -1)
-			mail.body.insert(++pos, ">>");
+			mail.body.insert(++pos, ">");
 	}
 	mail.body.insert(0,citation);	
 	emailInput->setText(mail.body);
