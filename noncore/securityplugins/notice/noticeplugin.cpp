@@ -5,6 +5,7 @@
 #include <qmessagebox.h>
 #include <qregexp.h>
 
+
 /// creates and initializes the m_config Config object
 NoticePlugin::NoticePlugin() : MultiauthPluginObject(), noticeW(0) {
     m_config = new Config("Security");
@@ -59,7 +60,7 @@ int NoticePlugin::authenticate() {
                             true,
                             Qt::WStyle_NoBorder | Qt::WStyle_Customize | Qt::WStyle_StaysOnTop);
 
-    noticeDialog.setButtonText(QMessageBox::Yes, "I accept");
+    noticeDialog.setButtonText(QMessageBox::Yes, tr("I accept"));
     
     QRect desk = oApp->desktop()->geometry();
     noticeDialog.setGeometry( 0, 0, desk.width(), desk.height() );

@@ -43,7 +43,9 @@
 /** 
  * The plugin itself, implementing the main authenticate() function.
  */
-class NoticePlugin : public MultiauthPluginObject {
+class NoticePlugin : public QObject, public MultiauthPluginObject {
+
+    Q_OBJECT;
 
 public:
     NoticePlugin();
