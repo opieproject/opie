@@ -3,7 +3,6 @@
 
 export LOGNAME=root
 export HOME=/$LOGNAME
-#export QWS_DISPLAY=Transformed:Rot270:0
 export QTDIR=/opt/QtPalmtop
 export OPIEDIR=/opt/QtPalmtop
 export QPEDIR=/opt/QtPalmtop
@@ -47,6 +46,8 @@ case $1 in
     		"3800" ) export QWS_DISPLAY=Transformed:Rot90:0 ;;
     		*) echo "Unknown processor type -`module_id`-!" ;;
    	    esac
+	 else
+    	    export QWS_DISPLAY=Transformed:Rot270:0
 	 fi
 
 	
