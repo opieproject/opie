@@ -40,7 +40,7 @@ public:
     QString pixmapNameConfig() const;
     TodayConfigWidget* configWidget(QWidget *);
     QString appName() const;
-
+    bool excludeFromRefresh() const;
 
 };
 

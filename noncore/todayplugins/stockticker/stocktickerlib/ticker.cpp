@@ -55,13 +55,17 @@ Ticker::~Ticker() {
 }
 
 void Ticker::setText( const QString& text ) {
-
+    Config cfg("qpe");
+    cfg.setGroup("Appearance");
+    
     pos = 0; // reset it everytime the text is changed
     scrollText = text;
 
     int pixelLen = fontMetrics().width( text );
     QPixmap pm( pixelLen, contentsRect().height() );
-    pm.fill( QColor( 167, 212, 167 ) );
+//    pm.fill( QColor( 167, 212, 167 ));
+ 
+    pm.fill( QColor( cfg.readEntry( "Background", "#E5E1D5" ) ));
     QPainter pmp( &pm );
     pmp.setPen( Qt::black );
     pmp.drawText( 0, 0, pixelLen, contentsRect().height(), AlignVCenter, scrollText );
