@@ -132,6 +132,7 @@ mrproper : clean-configs
 	find lib -name "lib*.*"|xargs rm -f
 	find plugins -name "lib*.*"|xargs rm -f
 	find . -name "*.pro"|xargs touch
+	rm stamp-headers
 
 include $(TOPDIR)/Rules.make
 
