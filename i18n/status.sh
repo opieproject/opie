@@ -19,7 +19,7 @@ unfi=`find $arg -name "*.ts" -exec cat {} \; | grep translation | grep type=\"un
 echo $unfi", that means" `expr \( $strs - $unfi \) \* 100 / $strs`% "are done"
 echo "obsolete: "
 obso=`find $arg -name "*.ts" -exec cat {} \; | grep translation | grep type=\"obsolete\" | wc -l`
-echo $obso `expr \( $strs - $obso \) \* 100 / $strs`%
+echo $obso `expr $obso \* 100 / $strs`%
 
 #if [ "foo" = "all" ]
 #then
