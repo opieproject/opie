@@ -6,6 +6,7 @@ HEADERS   = memory.h \
       processinfo.h \
       modulesinfo.h \
       detail.h \
+      benchmarkinfo.h \
       versioninfo.h \
       sysinfo.h
 SOURCES   = main.cpp \
@@ -16,12 +17,13 @@ SOURCES   = main.cpp \
       processinfo.cpp \
       modulesinfo.cpp \
       detail.cpp \
+      benchmarkinfo.cpp fft.c \
       versioninfo.cpp \
       sysinfo.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2 -lopieui2
+LIBS        += -lqpe -lopiecore2 -lopieui2
 
 TARGET    = sysinfo
 
