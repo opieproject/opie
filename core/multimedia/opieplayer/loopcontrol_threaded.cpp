@@ -19,28 +19,34 @@
 **********************************************************************/
 #define _REENTRANT
 
-#include <qpe/qpeapplication.h>
-#include <qpe/custom.h>
-#include <qimage.h>
-#include <qpainter.h>
-#if !defined(QT_NO_COP)
-#include <qpe/qcopenvelope_qws.h>
-#endif
 #include "mediaplayerplugininterface.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <unistd.h>
-#include <pthread.h>
 #include "loopcontrol.h"
 #include "audiodevice.h"
 #include "videowidget.h"
 #include "audiowidget.h"
 #include "mediaplayerstate.h"
 
+/* OPIE */
+#include <qpe/qpeapplication.h>
+#include <qpe/custom.h>
 
+#if !defined(QT_NO_COP)
+#include <qpe/qcopenvelope_qws.h>
+#endif
 
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qimage.h>
+#include <qpainter.h>
+
+/* STD */
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include <unistd.h>
+#include <pthread.h>
 
 
 extern VideoWidget *videoUI; // now only needed to tell it to play a frame
@@ -191,7 +197,7 @@ void LoopControl::setPosition( long pos ) {
     if ( hasVideoChannel && hasAudioChannel ) {
   videoMutex->lock();
   audioMutex->lock();
-  //qDebug("setting position");
+  //odebug << "setting position" << oendl;
   playtime.restart();
   playtime = playtime.addMSecs( -pos * 1000 / framerate );
   //begin = clock() - (double)pos * CLOCKS_PER_SEC / framerate;
@@ -292,7 +298,7 @@ void LoopControl::startVideo() {
 
     } while ( !done );
 
-//    qDebug("elapsed: %i %i (%f)", int( playtime.elapsed() ), current_frame, framerate );
+//    odebug << "elapsed: " << int( playtime.elapsed() ) << " " << current_frame << " (" << framerate << ")" << oendl;
 
       } else {
     videoMutex->lock();
@@ -307,7 +313,7 @@ void LoopControl::startVideo() {
       if ( check ) {
     videoMutex->lock();
     if ( current_frame > prev_frame + 1 ) {
-       //       qDebug("skipped a frame");
+       //       odebug << "skipped a frame" << oendl;
         mediaPlayerState->curDecoder()->videoSetFrame( current_frame, stream );
     }
     prev_frame = current_frame;
@@ -341,7 +347,7 @@ void LoopControl::startAudio() {
     currentSample = audioSampleCounter + 1;
 
 //        if ( currentSample != audioSampleCounter + 1 )
-//      qDebug("out of sync with decoder %i %i", currentSample, audioSampleCounter);
+//      odebug << "out of sync with decoder " << currentSample << " " << audioSampleCounter << "" << oendl;
       audioMutex->unlock();
 
 /*
@@ -365,12 +371,12 @@ void LoopControl::startAudio() {
       audioMutex->unlock();
 
       if ( sampleWaitTime >= 0 && sampleWaitTime <= 2000 ) {
-    //qDebug("sampleWaitTime: %i", sampleWaitTime);
+    //odebug << "sampleWaitTime: " << sampleWaitTime << "" << oendl;
     usleep( ( sampleWaitTime * 1000000 ) / ( freq ) );
       } else {
     audioMutex->lock();
     if ( sampleWaitTime <= -2000 ) {
-       //        qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+       //        odebug << "need to catch up by: " << -sampleWaitTime << " (" << currentSample << "," << sampleWeShouldBeAt << ")" << oendl;
         mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
         currentSample = sampleWeShouldBeAt;
     }
@@ -387,8 +393,8 @@ void LoopControl::startAudio() {
       if ( !hasVideoChannel )
     emitChangePos = TRUE;
 
-      //qDebug("currentSample: %i audioSampleCounter: %i total_audio_samples: %i", currentSample, audioSampleCounter, total_audio_samples);
-//      qDebug("current: %i counter: %i total: %i", currentSample, audioSampleCounter, (int)total_audio_samples);
+      //odebug << "currentSample: " << currentSample << " audioSampleCounter: " << audioSampleCounter << " total_audio_samples: " << total_audio_samples << "" << oendl;
+//      odebug << "current: " << currentSample << " counter: " << audioSampleCounter << " total: " << (int)total_audio_samples << "" << oendl;
       moreAudio = audioSampleCounter <= total_audio_samples;
 
   } else {
@@ -401,7 +407,7 @@ void LoopControl::startAudio() {
   }
     }
 
-    //    qDebug( "End of file" );
+    //    odebug << "End of file" << oendl;
 
     if ( !moreVideo && !moreAudio )
   emitPlayFinished = TRUE;
@@ -415,7 +421,7 @@ void LoopControl::killTimers() {
       if ( pthread_cancel(video_tid) == 0 ) {
     void *thread_result = 0;
     if ( pthread_join(video_tid,&thread_result) != 0 )
-       //        qDebug("thread join error 1");
+       //        odebug << "thread join error 1" << oendl;
     pthread_attr_destroy(&video_attr);
       }
   }
@@ -425,7 +431,7 @@ void LoopControl::killTimers() {
       if ( pthread_cancel(audio_tid) == 0 ) {
     void *thread_result = 0;
     if ( pthread_join(audio_tid,&thread_result) != 0 )
-       //        qDebug("thread join error 2");
+       //        odebug << "thread join error 2" << oendl;
     pthread_attr_destroy(&audio_attr);
       }
   }
@@ -447,7 +453,7 @@ void LoopControl::startTimers() {
   pthread_attr_init(&audio_attr);
 #ifdef USE_REALTIME_AUDIO_THREAD
   pthread_attr_setschedpolicy(&audio_attr,SCHED_RR); // Real-time round robin
-  //qDebug("min: %i, max: %i", sched_get_priority_min( SCHED_RR ), sched_get_priority_max( SCHED_RR ) );
+  //odebug << "min: " << sched_get_priority_min( SCHED_RR ) << ", max: " << sched_get_priority_max( SCHED_RR ) << "" << oendl;
   sched_param params;
   params.sched_priority = 50;
   pthread_attr_setschedparam(&audio_attr,&params);
@@ -512,7 +518,7 @@ bool LoopControl::init( const QString& filename ) {
     stream = 0; // only play stream 0 for now
     current_frame = total_video_frames = total_audio_samples = 0;
 
-    //    qDebug( "Using the %s decoder", mediaPlayerState->curDecoder()->pluginName() );
+    //    odebug << "Using the " << mediaPlayerState->curDecoder()->pluginName() << " decoder" << oendl;
 
     // ### Hack to use libmpeg3plugin to get the number of audio samples if we are using the libmad plugin
     if ( mediaPlayerState->curDecoder()->pluginName() == QString("LibMadPlugin") ) {

@@ -19,6 +19,15 @@
 ****************************************************************************/
 // fixed and adapted for opieplayer 2003 ljp <llornkcor@handhelds.org>
 
+#include "libtremorplugin.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qmap.h>
+
+/* STD */
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -32,10 +41,6 @@
 #include <locale.h>
 #include <math.h>
 #include <assert.h>
-
-#include <qmap.h>
-
-#include "libtremorplugin.h"
 
 
 extern "C" {
@@ -62,7 +67,7 @@ public:
 
 
 LibTremorPlugin::LibTremorPlugin() {
-qDebug("<<<<<<<<<<<<<TREMOR!!!!!>>>>>>>>>>>>>>>>>>");
+odebug << "<<<<<<<<<<<<<TREMOR!!!!!>>>>>>>>>>>>>>>>>>" << oendl;
  d = new LibTremorPluginData;
   d->f = 0;
   d->vi = 0;
@@ -105,12 +110,12 @@ bool LibTremorPlugin::open( const QString& path ) {
   d->filename = (char*) path.latin1();
   d->f = fopen( d->filename, "r" );
   if (d->f == 0) {
-    qDebug("error opening %s", d->filename );
+    odebug << "error opening " << d->filename << "" << oendl;
     return FALSE;
   }
 
   if (ov_open(d->f, &d->vf, NULL, 0) < 0) {
-    qDebug("error opening %s", d->filename);
+    odebug << "error opening " << d->filename << "" << oendl;
     return FALSE;
   }
 
@@ -153,7 +158,7 @@ bool LibTremorPlugin::open( const QString& path ) {
     }
   }
 
-  qDebug("finfo: " + d->finfo);
+  odebug << "finfo: " + d->finfo << oendl;
 
   return TRUE;
 }
@@ -165,7 +170,7 @@ bool LibTremorPlugin::close() {
     int result = TRUE;
 
     if (fclose(d->f) == -1) {
-        qDebug("error closing file %s", d->filename);
+        odebug << "error closing file " << d->filename << "" << oendl;
   result = FALSE;
     }
 
@@ -193,13 +198,13 @@ int LibTremorPlugin::audioStreams() {
 
 
 int LibTremorPlugin::audioChannels( int ) {
-  qDebug( "LibTremorPlugin::audioChannels: %i", d->vi->channels );
+  odebug << "LibTremorPlugin::audioChannels: " << d->vi->channels << "" << oendl;
   return d->vi->channels;
 }
 
 
 int LibTremorPlugin::audioFrequency( int ) {
-  qDebug( "LibTremorPlugin::audioFrequency: %ld", d->vi->rate );
+  odebug << "LibTremorPlugin::audioFrequency: " << d->vi->rate << "" << oendl;
   return d->vi->rate;
 }
 
@@ -223,7 +228,7 @@ long LibTremorPlugin::audioGetSample( int ) {
 
 
 bool LibTremorPlugin::audioReadSamples( short *output, int, long samples, long& samplesMade, int ) {
-//  qDebug( "<<<<<<<<<<<<LibTremorPlugin::audioReadStereoSamples %d", samples );
+//  odebug << "<<<<<<<<<<<<LibTremorPlugin::audioReadStereoSamples " << samples << "" << oendl;
 
   int old_section = d->csection;
 
@@ -245,7 +250,7 @@ bool LibTremorPlugin::audioReadSamples( short *output, int, long samples, long& 
     }
 
     long ret = ov_read(&d->vf, buf, n, &d->csection);
-//    qDebug("%d", ret);
+//    odebug << "" << ret << "" << oendl;
     if (ret == 0) {
       break;
     } else if (ret < 0) {

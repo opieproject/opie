@@ -31,6 +31,8 @@
 
 #include "om3u.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 
 
 static inline QString fullBaseName ( const QFileInfo &fi )
@@ -44,7 +46,7 @@ static inline QString fullBaseName ( const QFileInfo &fi )
 
 Om3u::Om3u( const QString &filePath, int mode)
       : QStringList (){
-//qDebug("<<<<<<<new m3u "+filePath);
+//odebug << "<<<<<<<new m3u "+filePath << oendl;
   f.setName(filePath);
   f.open(mode);
 }
@@ -52,13 +54,13 @@ Om3u::Om3u( const QString &filePath, int mode)
 Om3u::~Om3u(){}
 
 void Om3u::readM3u() {
-//    qDebug("<<<<<<reading m3u "+f.name());
+//    odebug << "<<<<<<reading m3u "+f.name() << oendl;
    QTextStream t(&f);
-	 t.setEncoding(QTextStream::UnicodeUTF8);
+     t.setEncoding(QTextStream::UnicodeUTF8);
    QString s;
    while ( !t.atEnd() ) {
       s=t.readLine();
-      //                qDebug(s);
+      //                odebug << s << oendl;
       if( s.find( "#", 0, TRUE) == -1 ) {
          if( s.left(2) == "E:" || s.left(2) == "P:" ) {
             s = s.right( s.length() -2 );
@@ -67,7 +69,7 @@ void Om3u::readM3u() {
             name = name.right( name.length() - name.findRev( "\\", -1, TRUE )  -1 );
             s=s.replace( QRegExp( "\\" ), "/" );
             append(s);
-            //                    qDebug(s);
+            //                    odebug << s << oendl;
          } else { // is url
             s.replace( QRegExp( "%20" )," " );
             QString name;
@@ -77,7 +79,7 @@ void Om3u::readM3u() {
             name = s;
             //                     }
             append(name);
-            //                    qDebug(name);
+            //                    odebug << name << oendl;
          }
       }
    }
@@ -85,14 +87,14 @@ void Om3u::readM3u() {
 
 void Om3u::readPls() { //it's a pls file
         QTextStream t( &f );
-				t.setEncoding(QTextStream::UnicodeUTF8);
+                t.setEncoding(QTextStream::UnicodeUTF8);
         QString s;
         while ( !t.atEnd() ) {
             s = t.readLine();
             if( s.left(4)  == "File" ) {
                 s = s.right( s.length() - 6 );
                 s.replace( QRegExp( "%20" )," ");
-//                qDebug( "adding " + s + " to playlist" );
+//                odebug << "adding " + s + " to playlist" << oendl;
                 // numberofentries=2
                 // File1=http
                 // Title
@@ -122,12 +124,12 @@ void Om3u::readPls() { //it's a pls file
 
 void Om3u::write() { //writes list to m3u file
   QString list;
-	QTextStream t(&f);
+    QTextStream t(&f);
   t.setEncoding(QTextStream::UnicodeUTF8);
   if(count()>0) {
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
-       //      qDebug(*it);
-				t << *it << "\n";
+       //      odebug << *it << oendl;
+                t << *it << "\n";
     }
   }
 //    f.close();
@@ -142,8 +144,8 @@ void Om3u::remove(const QString &filePath) { //removes from m3u list
   if(count()>0) {
     for ( QStringList::ConstIterator it = begin(); it != end(); ++it ) {
       currentFile=*it;
-      //        qDebug(*it);
-        
+      //        odebug << *it << oendl;
+
       if( filePath != currentFile)
         list += currentFile+"\n";
     }

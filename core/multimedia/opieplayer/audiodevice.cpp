@@ -20,20 +20,24 @@
 // L.J.Potter added better error code Fri 02-15-2002 14:37:47
 
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
-#include <qmessagebox.h>
-
 #include "audiodevice.h"
 
-
-#include <errno.h>
+/* OPIE */
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
+#include <opie2/odebug.h>
 
 #if !defined(QT_NO_COP)
 #include <qpe/qcopenvelope_qws.h>
 #endif
+
+/* QT */
+#include <qmessagebox.h>
+
+/* STD */
+#include <stdlib.h>
+#include <stdio.h>
+#include <errno.h>
 
 #if defined(Q_WS_X11) || defined(Q_WS_QWS)
 #include <fcntl.h>
@@ -145,7 +149,7 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 # endif
 
 //#endif
-//    qDebug( "setting volume to: 0x%x", volume );
+//    odebug << "setting volume to: 0x" << volume << "" << oendl;
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
       // Send notification that the volume has changed
     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << muted;
@@ -155,18 +159,18 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 
 
 AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
-   //    qDebug("creating new audio device");
+   //    odebug << "creating new audio device" << oendl;
 //     QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
     d = new AudioDevicePrivate;
     d->frequency = f;
     d->channels = chs;
     d->bytesPerSample = bps;
-    //    qDebug("%d",bps);
+    //    odebug << "" << bps << "" << oendl;
     int format=0;
     if( bps == 8)  format  = AFMT_U8;
     else if( bps <= 0) format = AFMT_S16_LE;
     else format = AFMT_S16_LE;
-    //    qDebug("AD- freq %d, channels %d, b/sample %d, bitrate %d",f,chs,bps,format);
+    //    odebug << "AD- freq " << f << ", channels " << chs << ", b/sample " << bps << ", bitrate " << format << "" << oendl;
     connect( qApp, SIGNAL( volumeChanged(bool) ), this, SLOT( volumeChanged(bool) ) );
 
     int fragments = 0x10000 * 8 + sound_fragment_shift;
@@ -200,10 +204,10 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
         perror("ioctl(\"SNDCTL_DSP_SETFRAGMENT\")");
     if(ioctl( d->handle, SNDCTL_DSP_SETFMT, & format )==-1)
         perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
-    //    qDebug("freq %d", d->frequency);
+    //    odebug << "freq " << d->frequency << "" << oendl;
     if(ioctl( d->handle, SNDCTL_DSP_SPEED, &d->frequency )==-1)
         perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-    //    qDebug("channels %d",d->channels);
+    //    odebug << "channels " << d->channels << "" << oendl;
     if ( ioctl( d->handle, SNDCTL_DSP_CHANNELS, &d->channels ) == -1 ) {
         d->channels = ( d->channels == 1 ) ? 2 : d->channels;
         if(ioctl( d->handle, SNDCTL_DSP_CHANNELS, &d->channels )==-1)
@@ -216,18 +220,18 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     d->unwritten = 0;
     d->can_GETOSPACE = TRUE; // until we find otherwise
 
-      //if ( chs != d->channels )       qDebug( "Wanted %d, got %d channels", chs, d->channels );
-      //if ( f != d->frequency )        qDebug( "wanted %dHz, got %dHz", f, d->frequency );
-      //if ( capabilities & DSP_CAP_BATCH )   qDebug( "Sound card has local buffer" );
-      //if ( capabilities & DSP_CAP_REALTIME )qDebug( "Sound card has realtime sync" );
-      //if ( capabilities & DSP_CAP_TRIGGER ) qDebug( "Sound card has precise trigger" );
-      //if ( capabilities & DSP_CAP_MMAP )    qDebug( "Sound card can mmap" );
+      //if ( chs != d->channels )       odebug << "Wanted " << chs << ", got " << d->channels << " channels" << oendl;
+      //if ( f != d->frequency )        odebug << "wanted " << f << "Hz, got " << d->frequency << "Hz" << oendl;
+      //if ( capabilities & DSP_CAP_BATCH )   odebug << "Sound card has local buffer" << oendl;
+      //if ( capabilities & DSP_CAP_REALTIME )odebug << "Sound card has realtime sync" << oendl;
+      //if ( capabilities & DSP_CAP_TRIGGER ) odebug << "Sound card has precise trigger" << oendl;
+      //if ( capabilities & DSP_CAP_MMAP )    odebug << "Sound card can mmap" << oendl;
 
 }
 
 
 AudioDevice::~AudioDevice() {
-   //    qDebug("destryo audiodevice");
+   //    odebug << "destryo audiodevice" << oendl;
 //    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE;
 
 # ifndef KEEP_DEVICE_OPEN
@@ -251,7 +255,7 @@ void AudioDevice::write( char *buffer, unsigned int length )
     int t = ::write( d->handle, buffer, length );
     if ( t<0 ) t = 0;
     if ( t != (int)length) {
-       //        qDebug("Ahhh!! memcpys 1");
+       //        odebug << "Ahhh!! memcpys 1" << oendl;
         memcpy(d->unwrittenBuffer,buffer+t,length-t);
         d->unwritten = length-t;
     }
@@ -314,7 +318,7 @@ unsigned int AudioDevice::canWrite() const
 int AudioDevice::bytesWritten() {
     int buffered = 0;
     if ( ioctl( d->handle, SNDCTL_DSP_GETODELAY, &buffered ) ) {
-       //        qDebug( "failed to get audio device position" );
+       //        odebug << "failed to get audio device position" << oendl;
         return -1;
     }
     return buffered;

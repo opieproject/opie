@@ -19,13 +19,21 @@
 **********************************************************************/
 // L.J.Potter added changes Fri 02-15-2002
 
+
+#include "wavplugin.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qfile.h>
+
+/* STD */
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <unistd.h>
-#include <qfile.h>
-#include "wavplugin.h"
 
 //#define debugMsg(a)     qDebug(a)
 #define debugMsg(a)
@@ -76,14 +84,14 @@ public:
   done = 0;
 
   if ( input == 0 ) {
-      qDebug("no input");
+      odebug << "no input" << oendl;
       return FALSE;
   }
 
         while ( count ) {
             int l,r;
             if ( getSample(l, r) == FALSE ) {
-                qDebug("didn't get sample");
+                odebug << "didn't get sample" << oendl;
                 return FALSE;
             }
               samples_due += chunkdata.samplesPerSec;
@@ -135,7 +143,7 @@ public:
     }
 #define WAVE_FORMAT_PCM 1
     if ( chunkdata.formatTag != WAVE_FORMAT_PCM ) {
-        qDebug("WAV file: UNSUPPORTED FORMAT %d",chunkdata.formatTag);
+        odebug << "WAV file: UNSUPPORTED FORMAT " << chunkdata.formatTag << "" << oendl;
         return FALSE;
     }
       } else {
@@ -145,7 +153,7 @@ public:
     }
       }
   } // while
-  qDebug("bits %d", chunkdata.wBitsPerSample);
+  odebug << "bits " << chunkdata.wBitsPerSample << "" << oendl;
   return TRUE;
     }
 
@@ -207,7 +215,7 @@ WavPlugin::~WavPlugin() {
 
 
 bool WavPlugin::isFileSupported( const QString& path ) {
-//    qDebug( "WavPlugin::isFileSupported" );
+//    odebug << "WavPlugin::isFileSupported" << oendl;
 
     char *ext = strrchr( path.latin1(), '.' );
 
@@ -226,7 +234,7 @@ bool WavPlugin::isFileSupported( const QString& path ) {
 
 
 bool WavPlugin::open( const QString& path ) {
-//    qDebug( "WavPlugin::open" );
+//    odebug << "WavPlugin::open" << oendl;
 
     d->max = d->out = sound_buffer_size;
     d->wavedata_remaining = 0;
@@ -234,7 +242,7 @@ bool WavPlugin::open( const QString& path ) {
 
     d->input = new QFile( path );
     if ( d->input->open(IO_ReadOnly) == FALSE ) {
-  qDebug("couldn't open file");
+  odebug << "couldn't open file" << oendl;
   delete d->input;
   d->input = 0;
   return FALSE;
@@ -248,7 +256,7 @@ bool WavPlugin::open( const QString& path ) {
 
 
 bool WavPlugin::close() {
-//    qDebug( "WavPlugin::close" );
+//    odebug << "WavPlugin::close" << oendl;
 
     d->input->close();
     delete d->input;
@@ -258,44 +266,44 @@ bool WavPlugin::close() {
 
 
 bool WavPlugin::isOpen() {
-//    qDebug( "WavPlugin::isOpen" );
+//    odebug << "WavPlugin::isOpen" << oendl;
     return ( d->input != 0 );
 }
 
 
 int WavPlugin::audioStreams() {
-//    qDebug( "WavPlugin::audioStreams" );
+//    odebug << "WavPlugin::audioStreams" << oendl;
     return 1;
 }
 
 
 int WavPlugin::audioChannels( int ) {
-//    qDebug( "WavPlugin::audioChannels" );
+//    odebug << "WavPlugin::audioChannels" << oendl;
     return d->chunkdata.channels;// 2; // ### Always scale audio to stereo samples
 }
 
 
 int WavPlugin::audioFrequency( int ) {
-//    qDebug( "WavPlugin::audioFrequency %d", d->chunkdata.samplesPerSec );
+//    odebug << "WavPlugin::audioFrequency " << d->chunkdata.samplesPerSec << "" << oendl;
     return  d->chunkdata.samplesPerSec; //44100; // ### Always scale to frequency of 44100
 }
 
 
 int WavPlugin::audioSamples( int ) {
-//    qDebug( "WavPlugin::audioSamples" );
+//    odebug << "WavPlugin::audioSamples" << oendl;
     return d->samples / d->chunkdata.channels/2; // ### Scaled samples will be made stereo,
         // Therefore if source is mono we will double the number of samples
 }
 
 
 bool WavPlugin::audioSetSample( long, int ) {
-//    qDebug( "WavPlugin::audioSetSample" );
+//    odebug << "WavPlugin::audioSetSample" << oendl;
     return FALSE;
 }
 
 
 long WavPlugin::audioGetSample( int ) {
-//    qDebug( "WavPlugin::audioGetSample" );
+//    odebug << "WavPlugin::audioGetSample" << oendl;
     return 0;
 }
 
@@ -325,18 +333,18 @@ bool WavPlugin::audioReadStereoSamples( short *output, long samples, long& sampl
 */
 
 bool WavPlugin::audioReadSamples( short *output, int channels, long samples, long& samplesMade, int ) {
-//    qDebug( "WavPlugin::audioReadSamples" );
+//    odebug << "WavPlugin::audioReadSamples" << oendl;
     return d->add( output, samples, samplesMade, channels != 1 );
 }
 
 double WavPlugin::getTime() {
-//    qDebug( "WavPlugin::getTime" ); //this is a stupid hack here!!
+//    odebug << "WavPlugin::getTime" << oendl;  //this is a stupid hack here!!
   return d->chunkdata.wBitsPerSample; /*0.0*/;
 }
 
 // int WavPlugin::audioBitsPerSample( int ) {
-// //    qDebug( "WavPlugin::audioFormat %d", d->chunkdata.wBitsPerSample );
-//     return d->chunkdata.wBitsPerSample; // 
+// //    odebug << "WavPlugin::audioFormat " << d->chunkdata.wBitsPerSample << "" << oendl;
+//     return d->chunkdata.wBitsPerSample; //
 // }
 
 

@@ -17,14 +17,6 @@
  ** not clear to you.
  **
  **********************************************************************/
-#include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
-#include <qpe/config.h>
-#include <qdir.h>
-#include <qpe/mediaplayerplugininterface.h>
-#include "mediaplayerstate.h"
-
-
 
 #ifdef QT_NO_COMPONENT
 // Plugins which are compiled in when no plugin architecture available
@@ -32,6 +24,18 @@
 #include "libmpeg3/libmpeg3pluginimpl.h"
 #include "wavplugin/wavpluginimpl.h"
 #endif
+
+#include "mediaplayerstate.h"
+
+/* OPIE */
+#include <qpe/qpeapplication.h>
+#include <qpe/qlibrary.h>
+#include <qpe/config.h>
+#include <qpe/mediaplayerplugininterface.h>
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qdir.h>
 
 
 //#define MediaPlayerDebug(x) qDebug x
@@ -104,8 +108,8 @@ MediaPlayerDecoder *MediaPlayerState::newDecoder( const QString& file ) {
     if(file.left(4)=="http")
         isStreaming = TRUE;
     else
-        isStreaming = FALSE;  
-    return decoder = tmpDecoder; 
+        isStreaming = FALSE;
+    return decoder = tmpDecoder;
 }
 
 
@@ -125,7 +129,7 @@ MediaPlayerDecoder *MediaPlayerState::libMpeg3Decoder() {
 // }
 
 void MediaPlayerState::loadPlugins() {
-   //    qDebug("load plugins");
+   //    odebug << "load plugins" << oendl;
 #ifndef QT_NO_COMPONENT
     QValueList<MediaPlayerPlugin>::Iterator mit;
     for ( mit = pluginList.begin(); mit != pluginList.end(); ++mit ) {
@@ -142,11 +146,11 @@ void MediaPlayerState::loadPlugins() {
     for ( it = list.begin(); it != list.end(); ++it ) {
         MediaPlayerPluginInterface *iface = 0;
         QLibrary *lib = new QLibrary( path + "/" + *it );
-//   qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
+//   odebug << "querying: " << QString( path + "/" + *it ) << "" << oendl;
 
         if ( lib->queryInterface( IID_MediaPlayerPlugin, (QUnknownInterface**)&iface ) == QS_OK ) {
 
-//       qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
+//       odebug << "loading: " << QString( path + "/" + *it ) << "" << oendl;
 
             MediaPlayerPlugin plugin;
             plugin.library = lib;
@@ -165,7 +169,7 @@ void MediaPlayerState::loadPlugins() {
     }
 #else
     pluginList.clear();
-    
+
     MediaPlayerPlugin plugin0;
     plugin0.iface = new LibMpeg3PluginImpl;
     plugin0.decoder = plugin0.iface->decoder();
@@ -185,7 +189,7 @@ void MediaPlayerState::loadPlugins() {
     pluginList.append( plugin2 );
 #endif
 
-    if ( pluginList.count() ) 
+    if ( pluginList.count() )
         MediaPlayerDebug(( "%i decoders found", pluginList.count() ));
     else
         MediaPlayerDebug(( "No decoders found" ));

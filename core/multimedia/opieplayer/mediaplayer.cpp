@@ -19,16 +19,18 @@
 **********************************************************************/
 
 
-#include <qmessagebox.h>
-
 #include "mediaplayer.h"
 #include "playlistwidget.h"
 #include "audiowidget.h"
 #include "loopcontrol.h"
 #include "audiodevice.h"
-
 #include "mediaplayerstate.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qmessagebox.h>
 
 extern AudioWidget *audioUI;
 extern PlayListWidget *playList;
@@ -73,7 +75,7 @@ void MediaPlayer::play() {
 
 
 void MediaPlayer::setPlaying( bool play ) {
-   //    qDebug("MediaPlayer setPlaying %d", play);
+   //    odebug << "MediaPlayer setPlaying " << play << "" << oendl;
     if ( !play ) {
         mediaPlayerState->setPaused( FALSE );
         loopControl->stop( FALSE );
@@ -84,9 +86,9 @@ void MediaPlayer::setPlaying( bool play ) {
         mediaPlayerState->setPaused( FALSE );
         return;
     }
-    //    qDebug("about to ctrash");
+    //    odebug << "about to ctrash" << oendl;
     const DocLnk *playListCurrent = playList->current();
-    
+
     if ( playListCurrent != NULL ) {
         loopControl->stop( TRUE );
         currentFile = playListCurrent;
@@ -171,7 +173,7 @@ void MediaPlayer::startIncreasingVolume() {
     volumeDirection = +1;
     startTimer( 100 );
     AudioDevice::increaseVolume();
-    
+
 }
 
 bool drawnOnScreenDisplay = FALSE;
@@ -191,7 +193,7 @@ void MediaPlayer::stopChangingVolume() {
 
 
 void MediaPlayer::timerEvent( QTimerEvent * ) {
-//    qDebug("timer");
+//    odebug << "timer" << oendl;
     if ( volumeDirection == +1 )
         AudioDevice::increaseVolume();
     else if ( volumeDirection == -1 )
@@ -203,7 +205,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     v = ((l + r) * 11) / (2*0xFFFF);
 
     if ( drawnOnScreenDisplay && onScreenDisplayVolume == v ) {
-//        qDebug("returning %d, %d, %d, %d", v, l, r, m);
+//        odebug << "returning " << v << ", " << l << ", " << r << ", " << m << "" << oendl;
         return;
     }
 
@@ -230,9 +232,9 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
     p.drawText( (w - 200) / 2, h - yoff + 20, tr("Volume") );
 
     for ( unsigned int i = 0; i < 10; i++ ) {
-        if ( v > i ) 
+        if ( v > i )
             p.drawRect( (w - 200) / 2 + i * 20 + 0, h - yoff + 40, 9, 30 );
-        else 
+        else
             p.drawRect( (w - 200) / 2 + i * 20 + 3, h - yoff + 50, 3, 10 );
     }
 }
@@ -249,7 +251,7 @@ void MediaPlayer::keyReleaseEvent( QKeyEvent *e) {
       case Key_F11: //menu
           break;
       case Key_F12: //home
-         //          qDebug("Blank here");
+         //          odebug << "Blank here" << oendl;
           break;
       case Key_F13: //mail
           break;

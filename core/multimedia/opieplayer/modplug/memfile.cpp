@@ -19,6 +19,10 @@
 
 #include "memfile.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+/* STD */
 #include <unistd.h>
 #include <sys/mman.h>
 
@@ -47,8 +51,8 @@ void MemFile::unmap()
 #if defined(Q_WS_X11) || defined(Q_WS_QWS)
     if ( m_data.data() )
     {
-	munmap( m_data.data(), m_data.size() );
-	m_data.resetRawData( m_data.data(), m_data.size() );
+    munmap( m_data.data(), m_data.size() );
+    m_data.resetRawData( m_data.data(), m_data.size() );
     }
 #endif
 }
@@ -58,18 +62,18 @@ QByteArray &MemFile::data()
     if ( !m_data.data() )
     {
 #if defined(Q_WS_X11) || defined(Q_WS_QWS)
-	const char *rawData = (const char *)mmap( 0, size(), PROT_READ,
-		                                  MAP_SHARED, handle(), 0 );
-	if ( rawData )
-	{
-	    m_data.setRawData( rawData, size() );
-	    return m_data;
-	}
-	else
-	    qDebug( "MemFile: mmap() failed!" );
-	// fallback
+    const char *rawData = (const char *)mmap( 0, size(), PROT_READ,
+                                          MAP_SHARED, handle(), 0 );
+    if ( rawData )
+    {
+        m_data.setRawData( rawData, size() );
+        return m_data;
+    }
+    else
+        odebug << "MemFile: mmap() failed!" << oendl;
+    // fallback
 #endif
-	m_data = readAll();
+    m_data = readAll();
     }
     return m_data;
 }

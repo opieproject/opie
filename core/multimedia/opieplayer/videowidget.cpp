@@ -17,15 +17,20 @@
  ** not clear to you.
  **
  **********************************************************************/
+
+#include "videowidget.h"
+#include "mediaplayerstate.h"
+
+/* OPIE */
 #include <qpe/resource.h>
 #include <qpe/mediaplayerplugininterface.h>
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qdir.h>
 #include <qslider.h>
-#include "videowidget.h"
-#include "mediaplayerstate.h"
 
 
 #ifdef Q_WS_QWS
@@ -82,7 +87,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     if(!QDir(QString(getenv("OPIEDIR")) +"/pics/"+skinPath).exists())
       skinPath = "opieplayer2/skins/default";
 
-    //   qDebug("skin path " + skinPath);
+    //   odebug << "skin path " + skinPath << oendl;
 
 //     QString skinPath = "opieplayer2/skins/" + skin;
 
@@ -96,7 +101,7 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
    for ( int i = 0; i < 7; i++ ) {
       QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
                                   "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
-      //      qDebug("loading "+filename);
+      //      odebug << "loading "+filename << oendl;
       masks[i] = new QBitmap( filename );
 
       if ( !masks[i]->isNull() ) {
@@ -111,23 +116,23 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
          }
       }
    }
-   //   qDebug("finished loading first pics");
+   //   odebug << "finished loading first pics" << oendl;
    for ( int i = 0; i < 7; i++ ) {
       buttonPixUp[i] = NULL;
       buttonPixDown[i] = NULL;
    }
 
 
- 		QWidget *d = QApplication::desktop();
- 		int width = d->width();
- 		int height = d->height();
+        QWidget *d = QApplication::desktop();
+        int width = d->width();
+        int height = d->height();
 
     if( (width != pixBg->width() ) || (height != pixBg->height() ) ) {
-//				qDebug("<<<<<<<< scale image >>>>>>>>>>>>");
-				QImage img;
-				img = pixBg->convertToImage();
-				pixBg->convertFromImage( img.smoothScale( width, height));
-		}
+//              odebug << "<<<<<<<< scale image >>>>>>>>>>>>" << oendl;
+                QImage img;
+                img = pixBg->convertToImage();
+                pixBg->convertFromImage( img.smoothScale( width, height));
+        }
    setBackgroundPixmap( *pixBg );
 
    currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
@@ -353,7 +358,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                 switch(i) {
 
                 case VideoPlay: {
-                   //                   qDebug("play");
+                   //                   odebug << "play" << oendl;
                    if(  !mediaPlayerState->playing()) {
                       mediaPlayerState->setPlaying( true);
                       setToggleButton( i-1, false );
@@ -361,12 +366,12 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
                       return;
                    }
                    if( mediaPlayerState->isPaused ) {
-                      //                      qDebug("isPaused");
+                      //                      odebug << "isPaused" << oendl;
                       setToggleButton( i, FALSE );
                       mediaPlayerState->setPaused( FALSE );
                         return;
                     } else if( !mediaPlayerState->isPaused ) {
-                       //                       qDebug("is not paused");
+                       //                       odebug << "is not paused" << oendl;
                         setToggleButton( i, TRUE );
                         mediaPlayerState->setPaused( TRUE );
                         return;
@@ -458,7 +463,7 @@ void VideoWidget::closeEvent( QCloseEvent* ) {
 
 bool VideoWidget::playVideo() {
    bool result = FALSE;
-//   qDebug("<<<<<<<<<<<<<<<< play video");
+//   odebug << "<<<<<<<<<<<<<<<< play video" << oendl;
    int stream = 0;
 
    int sw = mediaPlayerState->curDecoder()->videoWidth( stream );
