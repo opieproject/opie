@@ -17,6 +17,22 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
                      const char* name, WFlags fl)
     : QWidget( parent, name, fl )
 {
+    childs.clear();
+    m_MainLayout = new QVBoxLayout( this );
+    setEvents(ev,d,onM);
+}
+
+void DateBookWeekLstView::setEvents(QValueList<EffectiveEvent> &ev, const QDate &d, bool onM)
+{
+    QValueList<QObject*>::Iterator wIter;
+    for (wIter=childs.begin();wIter!=childs.end();++wIter) {
+        QObject*w = (*wIter);
+        delete w;
+    }
+    childs.clear();
+
+    setUpdatesEnabled(false);
+//    m_MainLayout->deleteAllItems();
     Config config("DateBook");
     config.setGroup("Main");
     int weeklistviewconfig=config.readNumEntry("weeklistviewconfig", NORMAL);
@@ -25,8 +41,6 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
     bStartOnMonday=onM;
     setPalette(white);
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
-
-    QVBoxLayout *layout = new QVBoxLayout( this );
 
     qBubbleSort(ev);
     QValueListIterator<EffectiveEvent> it;
@@ -46,18 +60,23 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
     else if( dayoffset == 7 ) dayoffset = 0;
 
     for (int i=0; i<7; i++) {
+        QWidget*w = new QWidget(this);
+        w->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding));
+        w->setPalette(white);
+        QVBoxLayout * tlayout = new QVBoxLayout(w);
+        childs.append(w);
     // Header
-        DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i-dayoffset), bStartOnMonday,this);
+        DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i-dayoffset), bStartOnMonday,w);
         connect(hdr, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
         connect(hdr, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
             this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
-        layout->addWidget(hdr);
+        tlayout->addWidget(hdr);
 
         // Events
         while ( (*it).date().dayOfWeek() == dayOrder[i] && it!=ev.end() ) {
             if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {  // Skip events ending at 00:00 starting at another day.
-                DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,this);
-                layout->addWidget(l);
+                DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,w);
+                tlayout->addWidget(l);
                 connect (l, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
                 connect (l, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
                 connect (l, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
@@ -66,8 +85,20 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
             }
             it++;
         }
-        layout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
+        tlayout->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
+        m_MainLayout->addWidget(w);
+/*
+        QSpacerItem * tmp = new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        m_MainLayout->addItem(tmp);
+*/
     }
+    setUpdatesEnabled(true);
 }
-DateBookWeekLstView::~DateBookWeekLstView(){}
-void DateBookWeekLstView::keyPressEvent(QKeyEvent *e) {e->ignore();}
+
+DateBookWeekLstView::~DateBookWeekLstView()
+{}
+
+void DateBookWeekLstView::keyPressEvent(QKeyEvent *e)
+{
+    e->ignore();
+}

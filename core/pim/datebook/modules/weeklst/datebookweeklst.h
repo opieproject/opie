@@ -10,7 +10,7 @@ class DateBookDB;
 class DateBookDBHoliday;
 class DateBookWeekLstHeader;
 class DateBookWeekLstEvent;
-class DateBookWeekLstView;
+class DateBookWeekLstDblView;
 class QVBoxLayout;
 class QScrollView;
 
@@ -55,9 +55,10 @@ private:
     QDate bdate;
     int year, _week,dow;
     DateBookWeekLstHeader *header;
-    QWidget *view;
     QVBoxLayout *layout;
     QScrollView *scroll;
+    DateBookWeekLstDblView*m_CurrentView;
+    bool dateset:1;
 
     void getEvents();
 };

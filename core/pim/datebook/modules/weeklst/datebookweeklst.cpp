@@ -27,6 +27,7 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDBHoliday *newDB,
       bStartOnMonday(onM)
 {
     setFocusPolicy(StrongFocus);
+    dateset = false;
     layout = new QVBoxLayout( this );
     layout->setMargin(0);
 
@@ -39,12 +40,13 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDBHoliday *newDB,
     scroll->setResizePolicy(QScrollView::AutoOneFit);
     layout->addWidget(scroll);
 
-    view=NULL;
+    m_CurrentView=NULL;
     Config config("DateBook");
     config.setGroup("Main");
     dbl=config.readBoolEntry("weeklst_dbl", false);
     header->dbl->setOn(dbl);
 }
+
 DateBookWeekLst::~DateBookWeekLst(){
     Config config("DateBook");
     config.setGroup("Main");
@@ -58,8 +60,15 @@ void DateBookWeekLst::setDate(const QDate &d) {
 
 void DateBookWeekLst::setDbl(bool on) {
     dbl=on;
-    redraw();
+    bool displayed = false;
+    if (m_CurrentView) {
+        displayed = m_CurrentView->toggleDoubleView(on);
+    }
+    if (!displayed||dbl) {
+        getEvents();
+    }
 }
+
 void DateBookWeekLst::redraw() {getEvents();}
 
 QDate DateBookWeekLst::date() {
@@ -82,38 +91,50 @@ QDate DateBookWeekLst::weekDate() const
 }
 
 void DateBookWeekLst::getEvents() {
+    if (!dateset) return;
     QDate start = weekDate(); //date();
     QDate stop = start.addDays(6);
+    QDate start2;
+
+
     QValueList<EffectiveEvent> el = db->getEffectiveEvents(start, stop);
+    QValueList<EffectiveEvent> el2;
 
-    setUpdatesEnabled(false);
-    if (view) delete view;
     if (dbl) {
-        QDate start2=start.addDays(7);
-        stop=start2.addDays(6);
-        QValueList<EffectiveEvent> el2 = db->getEffectiveEvents(start2, stop);
-        view=new DateBookWeekLstDblView(el,el2,start,bStartOnMonday,scroll);
-    } else {
-        view=new DateBookWeekLstView(el,start,bStartOnMonday,scroll);
+        start2 = start.addDays(7);
+        stop = start2.addDays(6);
+        el2 = db->getEffectiveEvents(start2, stop);
     }
-
-    connect (view, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
-    connect (view, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
-    connect (view, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
-    connect (view, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
-    connect (view, SIGNAL(redraw()), this, SLOT(redraw()));
-    connect (view, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-    connect (view, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
-        this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
-
-    scroll->addChild(view);
-    view->show();
+    if (!m_CurrentView) {
+        if (dbl) {
+            m_CurrentView=new DateBookWeekLstDblView(el,el2,start,bStartOnMonday,scroll);
+        } else {
+            m_CurrentView=new DateBookWeekLstDblView(el,start,bStartOnMonday,scroll);
+        }
+        m_CurrentView->setSizePolicy(QSizePolicy(QSizePolicy::Expanding,QSizePolicy::Fixed));
+        connect (m_CurrentView, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
+        connect (m_CurrentView, SIGNAL(duplicateEvent(const Event &)), this, SIGNAL(duplicateEvent(const Event &)));
+        connect (m_CurrentView, SIGNAL(removeEvent(const Event &)), this, SIGNAL(removeEvent(const Event &)));
+        connect (m_CurrentView, SIGNAL(beamEvent(const Event &)), this, SIGNAL(beamEvent(const Event &)));
+        connect (m_CurrentView, SIGNAL(redraw()), this, SLOT(redraw()));
+        connect (m_CurrentView, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
+        connect (m_CurrentView, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
+            this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
+        scroll->addChild(m_CurrentView);
+    } else {
+        if (dbl) {
+            m_CurrentView->setEvents(el,el2,start,bStartOnMonday);
+        } else {
+            m_CurrentView->setEvents(el,start,bStartOnMonday);
+        }
+    }
     scroll->updateScrollBars();
-    setUpdatesEnabled(true);
 }
 
 void DateBookWeekLst::dateChanged(QDate &newdate) {
+    dateset = true;
     bdate=newdate;
+    odebug << "Date changed " << oendl;
     getEvents();
 }
 
