@@ -262,6 +262,7 @@ QPE_MEMALERTER_IMPL
 
 bool ServerApplication::doRestart = FALSE;
 bool ServerApplication::allowRestart = TRUE;
+bool ServerApplication::ms_is_starting  = TRUE;
 
 void ServerApplication::switchLCD( bool on ) {
     if ( !qApp )
@@ -284,7 +285,7 @@ void ServerApplication::switchLCD( bool on ) {
 ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     : QPEApplication( argc, argv, t )
 {
-
+    ms_is_starting = true;
 
     // We know we'll have lots of cached pixmaps due to App/DocLnks
     QPixmapCache::setCacheLimit(512);
@@ -846,5 +847,16 @@ ServerApplication *ServerApplication::me ( )
 	return static_cast<ServerApplication*>( qApp );
 }
 
+bool ServerApplication::isStarting()
+{
+    return ms_is_starting;
+}
+
+int ServerApplication::exec()
+{
+    ms_is_starting = true;
+    qDebug("Serverapp - exec");
+    return QPEApplication::exec();
+}
 
 #include "serverapp.moc"

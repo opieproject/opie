@@ -94,11 +94,14 @@ public:
     static bool allowRestart;
     static bool screenLocked();
     static void login(bool at_poweron);
+    
+    static bool isStarting();
 
     static void switchLCD ( bool on ); // only for togglePower in Desktop
     static void soundAlarm(); // only because QCop soundAlarm() is defined in QPE/TaskBar
 
     void restart();
+    int exec();
 
 signals:
     void menu();
@@ -155,6 +158,7 @@ private:
     bool m_keyclick_sound  : 1;
     bool m_screentap_sound : 1;
     bool m_alarm_sound     : 1;
+    static bool ms_is_starting;
 
 
     friend class KeyFilter;
