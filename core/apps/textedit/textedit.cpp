@@ -485,7 +485,9 @@ void TextEdit::setWordWrap(bool y)
 
 void TextEdit::fileNew()
 {
-    save();
+    if( !bFromDocView  ) {
+        save();
+    }
     newFile(DocLnk());
 }
 
@@ -512,27 +514,28 @@ void TextEdit::fileOpen()
     clearWState (WState_Reserved1 );
     editorStack->raiseWidget( fileSelector );
     fileSelector->reread();
-    updateCaption();
+    updateCaption(currentFileName);
 }
 
 void TextEdit::newFileOpen()
 {
     fileBrowser *browseForFiles;
     browseForFiles=new fileBrowser(this,"fileBrowser",TRUE,0, "*");
-    browseForFiles->exec();
-    QString selFile= browseForFiles->selectedFileName;
-    QStringList fileList=browseForFiles->fileList;
-    qDebug(selFile);
-    QStringList::ConstIterator f;
-    QString fileTemp;
-    for (  f = fileList.begin(); f != fileList.end(); f++ ) {
-        fileTemp = *f;
-        fileTemp.right( fileTemp.length()-5);
-        QString  fileName = fileTemp;
-        if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
-            currentFileName = fileName;
-            qDebug("please open "+currentFileName);
-            openFile(fileName );
+    if( browseForFiles->exec()!= 0 ) {
+        QString selFile= browseForFiles->selectedFileName;
+        QStringList fileList=browseForFiles->fileList;
+        qDebug(selFile);
+        QStringList::ConstIterator f;
+        QString fileTemp;
+        for (  f = fileList.begin(); f != fileList.end(); f++ ) {
+            fileTemp = *f;
+            fileTemp.right( fileTemp.length()-5);
+            QString  fileName = fileTemp;
+            if( fileName != "Unnamed" || fileName != "Empty Text"  ) {
+                currentFileName = fileName;
+//                qDebug("please open "+currentFileName);
+                openFile(fileName );
+            }
         }
     }
     delete browseForFiles;
@@ -619,7 +622,7 @@ void TextEdit::newFile( const DocLnk &f )
     setWState (WState_Reserved1 );
     editor->setFocus();
     doc = new DocLnk(nf);
-    updateCaption();
+//    updateCaption();
 }
 
 void TextEdit::openFile( const QString &f )
@@ -641,6 +644,7 @@ void TextEdit::openFile( const QString &f )
 void TextEdit::openFile( const DocLnk &f )
 {
 //    clear();
+    bFromDocView = TRUE;
     FileManager fm;
     QString txt;
     if ( !fm.loadFile( f, txt ) ) {
@@ -656,7 +660,7 @@ void TextEdit::openFile( const DocLnk &f )
     doc = new DocLnk(f);
     editor->setText(txt);
     editor->setEdited(FALSE);
-    updateCaption();
+    updateCaption(currentFileName);
 }
 
 void TextEdit::showEditTools()
@@ -669,7 +673,7 @@ void TextEdit::showEditTools()
     editBar->show();
     if ( searchVisible )
   searchBar->show();
-    updateCaption();
+//    updateCaption();
     editorStack->raiseWidget( editor );
     setWState (WState_Reserved1 );
 }
@@ -686,8 +690,9 @@ bool TextEdit::save()
     }
 
     QString rt = editor->text();
-
-    if(currentFileName.isEmpty() || currentFileName == "Unnamed") {
+    qDebug(currentFileName);
+    
+    if( currentFileName.isEmpty() || currentFileName == "Unnamed") {
 
         if ( doc->name().isEmpty() ) {
             QString pt = rt.simplifyWhiteSpace();
@@ -711,11 +716,12 @@ bool TextEdit::save()
 
     fileSaver *fileSaveDlg;
     fileSaveDlg=new fileSaver(this,"SaveFile",TRUE,0, currentFileName);
-    fileSaveDlg->exec();
+    if( fileSaveDlg->exec() != 0 ) {
     QString fileNm=fileSaveDlg->selectedFileName;
     qDebug("save filename "+fileNm);
     doc->setName(fileNm);
-    updateCaption();
+    updateCaption(fileNm);
+    }
     delete fileSaveDlg;
 
     FileManager fm;

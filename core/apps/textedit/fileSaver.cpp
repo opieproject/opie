@@ -29,7 +29,9 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
   setName( "fileSaver" );
     resize( 236, 280 );
     setCaption(tr( "Save file" ) );
-//    filterStr=currentFileName;
+    QFileInfo fi(currentFileName);
+    QString tmpFileName=fi.fileName();
+//    qDebug( tmpFileName);
 
     dirLabel = new QLabel(this, "DirLabel");
     dirLabel->setText(currentDir.canonicalPath());
@@ -49,11 +51,16 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
 
     fileEdit= new QLineEdit(this);
     fileEdit->setGeometry( QRect( 10, 230, 200, 25));
-    fileEdit->setText(currentFileName);
-    // signals and slots connections
+
+    fileEdit->setText( tmpFileName);
+
+      // signals and slots connections
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );
-    currentDir.setPath(QDir::currentDirPath() );
+    
+//      tmpFileName=fi.FilePath();
+//      qDebug( tmpFileName);
+    currentDir.setPath( QDir::currentDirPath() );
     populateList();
 }
 
@@ -160,5 +167,6 @@ void fileSaver::OnOK()
 void fileSaver::accept() {
     selectedFileName =  fileEdit->text();
     selectedFileName = currentDir.canonicalPath()+ selectedFileName;
+    qDebug("goint to save "+selectedFileName);
     reject();
 }

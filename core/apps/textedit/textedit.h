@@ -55,7 +55,7 @@ protected:
 
 private slots:
     void setDocument(const QString&);
- void changeFont();
+    void changeFont();
     void fileNew();
     void fileRevert();
     void fileOpen();
