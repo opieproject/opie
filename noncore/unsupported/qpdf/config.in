@@ -1,4 +1,4 @@
   config QPDF
-    boolean "qpdf"
+    boolean "opie-qpdf (a PDF viewer)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,4 @@
   config SHOWIMG
-    boolean "showimg"
+    boolean "opie-showimg (image viewer)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,5 +1,5 @@
   config CAMERA
-    boolean "opie-camera"
+    boolean "opie-camera (camera app to use with the Sharp CE-AG06)"
     default "n"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2CORE
     comment "opie-camera needs a libqpe, libopie and libopie2core"
