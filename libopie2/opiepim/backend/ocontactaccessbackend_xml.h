@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.1 2002-09-27 17:11:44 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.2 2002-10-07 17:34:24 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.1  2002-09-27 17:11:44  eilers
+ * Revision 1.2  2002-10-07 17:34:24  eilers
+ * added OBackendFactory for advanced backend access
+ *
+ * Revision 1.1  2002/09/27 17:11:44  eilers
  * Added API for accessing the Contact-Database ! It is compiling, but
  * please do not expect that anything is working !
  * I will debug that stuff in the next time ..
@@ -32,11 +35,18 @@
 #include <qasciidict.h>
 #include <qdatetime.h>
 #include <qfile.h>
+#include <qfileinfo.h>
 #include <qregexp.h>
 #include <qarray.h>
 
+#include <qpe/global.h>
+
 #include <opie/xmltree.h>
 #include "ocontactaccessbackend.h"
+#include "ocontactaccess.h"
+
+#include <stdlib.h>
+#include <errno.h>
 
 using namespace Opie;
 

@@ -15,11 +15,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.1 2002-09-27 17:11:44 eilers Exp $
+ * Version: $Id: ocontactaccessbackend.h,v 1.2 2002-10-07 17:34:24 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend.h,v $
- * Revision 1.1  2002-09-27 17:11:44  eilers
+ * Revision 1.2  2002-10-07 17:34:24  eilers
+ * added OBackendFactory for advanced backend access
+ *
+ * Revision 1.1  2002/09/27 17:11:44  eilers
  * Added API for accessing the Contact-Database ! It is compiling, but
  * please do not expect that anything is working !
  * I will debug that stuff in the next time ..
@@ -32,6 +35,7 @@
 #ifndef _OCONTACTACCESSBACKEND_H_
 #define _OCONTACTACCESSBACKEND_H_
 
+#include "ocontact.h"
 #include "opimaccessbackend.h"
 
 class OContactAccessBackend: public OPimAccessBackend<OContact> {

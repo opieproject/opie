@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.2 2002-10-02 16:18:11 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.3 2002-10-07 17:34:24 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.2  2002-10-02 16:18:11  eilers
+ * Revision 1.3  2002-10-07 17:34:24  eilers
+ * added OBackendFactory for advanced backend access
+ *
+ * Revision 1.2  2002/10/02 16:18:11  eilers
  * debugged and seems to work almost perfectly ..
  *
  * Revision 1.1  2002/09/27 17:11:44  eilers
@@ -34,6 +37,7 @@
  */
 
 #include "ocontactaccess.h"
+#include "obackendfactory.h"
 
 #include <qasciidict.h>
 #include <qdatetime.h>
@@ -53,7 +57,7 @@
 #include "ocontactaccessbackend_xml.h"
 
 
-OContactAccess::OContactAccess ( const QString appname, const QString filename,
+OContactAccess::OContactAccess ( const QString appname, const QString ,
 			 OContactAccessBackend* end, bool autosync ):
 	OPimAccessTemplate<OContact>( end ),
 	m_changed ( false )
@@ -62,7 +66,9 @@ OContactAccess::OContactAccess ( const QString appname, const QString filename,
 	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
 	 */
         if( end == 0 ) {
-		end = new OContactAccessBackend_XML( appname, filename );
+		// __asm__("int3");
+		qWarning ("Using BackendFactory !");
+		end = OBackendFactory<OContactAccessBackend>::Default( "contact", appname );
         }
 	// Set backend locally and in template
         m_backEnd = end;
