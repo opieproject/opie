@@ -1,6 +1,6 @@
 Files: bin/advancedfm apps/Applications/advancedfm.desktop
 Priority: optional
-Package: advancedfm
+Package: opie-advancedfm
 Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com> 
 Architecture: arm
