@@ -8,6 +8,7 @@
 #include <qstring.h>
 #include <qslider.h>
 #include <qframe.h>
+#include <qlineedit.h>
 
 
 class QPixmap;
