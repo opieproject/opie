@@ -55,6 +55,10 @@ bool MediumMountGui::check() {
   return checkagain;
 }
 
+QStringList MediumMountGui::dirs() {
+  QStringList list = QStringList::split(",", limittodirs );
+  return list;
+}
 
 void MediumMountGui::writeConfig() {
 
@@ -69,7 +73,22 @@ void MediumMountGui::writeConfig() {
   cfg.writeEntry("video",CheckBoxVideo->isChecked() );
 
   cfg.setGroup("dirs");
-  cfg.writeEntry("dirs", "/");  
+  cfg.writeEntry("dirs", "/"); 
+
+
+  if (checkmimeaudio) {
+    mimeTypeList += ("audio//*");
+  }
+  if (checkmimetext) {
+    mimeTypeList += ("text//*");
+  }
+  if (checkmimeaudio) {
+    mimeTypeList += ("video//*");
+  }
+  if (checkmimeaudio) {
+    mimeTypeList += ("image//*");
+  }
+ 
 }
 
 void MediumMountGui::startGui() {
@@ -155,6 +174,11 @@ void MediumMountGui::startGui() {
 void MediumMountGui::yesPressed() {
   writeConfig();
   // and do something
+}
+
+
+QStringList MediumMountGui::mimeTypes(){
+  return mimeTypeList;
 }
 
 void MediumMountGui::noPressed() {

@@ -38,7 +38,8 @@ protected:
 
 public:
     bool check();
-
+    QStringList mimeTypes();
+    QStringList dirs();
 private:
     void startGui();
     void readConfig();
@@ -56,7 +57,7 @@ private:
     bool checkmimetext;
     bool checkmimevideo;
 QString limittodirs;
-
+QStringList mimeTypeList;
 
 };
 
