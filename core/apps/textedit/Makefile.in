@@ -124,56 +124,56 @@ main.o: main.cpp \
 		textedit.h \
 		fileBrowser.h \
 		fileSaver.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/filemanager.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpeapplication.h \
-		/usr/src/oldsrc/Opie/opie/include/qpedecoration_qws.h \
-		/usr/src/oldsrc/Opie/opie/include/timestring.h
+		$(OPIEDIR)/include/qpe/filemanager.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h
 
 textedit.o: textedit.cpp \
 		textedit.h \
 		fileBrowser.h \
 		fileSaver.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/filemanager.h \
+		$(OPIEDIR)/include/qpe/filemanager.h \
 		filePermissions.h \
 		fontDialog.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fontdatabase.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fontfactoryinterface.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qcom.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/quuid.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/global.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fileselector.h \
-		/usr/src/oldsrc/Opie/opie/include/filemanager.h \
-		/usr/src/oldsrc/Opie/opie/include/applnk.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/applnk.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/resource.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/config.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpeapplication.h \
-		/usr/src/oldsrc/Opie/opie/include/qpedecoration_qws.h \
-		/usr/src/oldsrc/Opie/opie/include/timestring.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpemenubar.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpetoolbar.h
+		$(OPIEDIR)/include/qpe/fontdatabase.h \
+		$(OPIEDIR)/include/qpe/fontfactoryinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h \
+		$(OPIEDIR)/include/qpe/global.h \
+		$(OPIEDIR)/include/qpe/fileselector.h \
+		$(OPIEDIR)/include/filemanager.h \
+		$(OPIEDIR)/include/applnk.h \
+		$(OPIEDIR)/include/qpe/applnk.h \
+		$(OPIEDIR)/include/qpe/resource.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h \
+		$(OPIEDIR)/include/qpe/qpemenubar.h \
+		$(OPIEDIR)/include/qpe/qpetoolbar.h
 
 fileBrowser.o: fileBrowser.cpp \
 		fileBrowser.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/config.h
+		$(OPIEDIR)/include/qpe/config.h
 
 fontDialog.o: fontDialog.cpp \
 		fontDialog.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fontdatabase.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fontfactoryinterface.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qcom.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/quuid.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/config.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpeapplication.h \
-		/usr/src/oldsrc/Opie/opie/include/qpedecoration_qws.h \
-		/usr/src/oldsrc/Opie/opie/include/timestring.h
+		$(OPIEDIR)/include/qpe/fontdatabase.h \
+		$(OPIEDIR)/include/qpe/fontfactoryinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h \
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h
 
 fileSaver.o: fileSaver.cpp \
 		fileSaver.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/config.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qpeapplication.h \
-		/usr/src/oldsrc/Opie/opie/include/qpedecoration_qws.h \
-		/usr/src/oldsrc/Opie/opie/include/timestring.h
+		$(OPIEDIR)/include/qpe/config.h \
+		$(OPIEDIR)/include/qpe/qpeapplication.h \
+		$(OPIEDIR)/include/qpedecoration_qws.h \
+		$(OPIEDIR)/include/timestring.h
 
 filePermissions.o: filePermissions.cpp \
 		filePermissions.h
@@ -182,17 +182,17 @@ moc_textedit.o: moc_textedit.cpp \
 		textedit.h \
 		fileBrowser.h \
 		fileSaver.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/filemanager.h
+		$(OPIEDIR)/include/qpe/filemanager.h
 
 moc_fileBrowser.o: moc_fileBrowser.cpp \
 		fileBrowser.h
 
 moc_fontDialog.o: moc_fontDialog.cpp \
 		fontDialog.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fontdatabase.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/fontfactoryinterface.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/qcom.h \
-		/usr/src/oldsrc/Opie/opie/include/qpe/quuid.h
+		$(OPIEDIR)/include/qpe/fontdatabase.h \
+		$(OPIEDIR)/include/qpe/fontfactoryinterface.h \
+		$(OPIEDIR)/include/qpe/qcom.h \
+		$(OPIEDIR)/include/qpe/quuid.h
 
 moc_fileSaver.o: moc_fileSaver.cpp \
 		fileSaver.h
