@@ -1,0 +1,9 @@
+Files: bin/euroconv pics/euroconv/* apps/Applications/euroconv.desktop
+Priority: optional
+Section: opie/applications
+Maintainer: Eric Santonacci <Eric.Santonacci@talc.fr>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base
+Description: Euroconv
+ Converts currencies between different european formats
