@@ -7,3 +7,4 @@ MimeType=audio/mpeg;video/mpeg;audio/x-wav;application/x-shockwave-flash;playlis
 MimeTypeIcons=SoundPlayer;MPEGPlayer;Sound;Sound;mpegplayer/playlist2
 Name=Opie Player
 Name[pt]=Multimédia 
+Name[es]=Multimedia

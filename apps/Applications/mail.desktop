@@ -4,3 +4,4 @@ Exec=mail
 Type=Application
 Icon=mail/desktopicon
 Name[pt]=E-Mail
+Name[es]=Correo-e
