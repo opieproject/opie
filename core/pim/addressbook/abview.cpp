@@ -1,23 +1,40 @@
 #include "abview.h"
 
+#include <qlayout.h>
+
+#include <qpe/global.h>
+
+#include <opie/ocontactaccessbackend_vcard.h>
+
+
 // Is defined in LibQPE
 extern QString categoryFileName();
 
-#include <qlayout.h>
+QString addressbookPersonalVCardName()
+{
+	QString filename = Global::applicationFileName("addressbook",
+						       "businesscard.vcf");
+	return filename;
+}
+
 
 AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	QWidget(parent),
 	mCat(0),
 	m_inSearch( false ),
+	m_inPersonal( false ),
 	m_curr_category( 0 ),
 	m_curr_View( TableView ),
 	m_prev_View( TableView ),
 	m_curr_Contact ( 0 ),
-	m_contactdb ( "addressbook", 0l, 0l, false ), // Handle syncing myself.. !
+	m_contactdb ( 0l ),
+	m_storedDB ( 0l ),
 	m_viewStack( 0l ),
 	m_abTable( 0l ),
 	m_orderedFields( ordered )
 {
+	// Load default database and handle syncing myself.. !
+	m_contactdb = new OContactAccess ( "addressbook", 0l, 0l, false ),
 	mCat.load( categoryFileName() );
 
 	// Create Layout and put WidgetStack into it.
@@ -48,6 +65,18 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	load();
 }
 
+AbView::~AbView()
+{
+	m_contactdb -> save();
+	delete m_contactdb;
+
+	if ( m_storedDB ){
+		m_storedDB -> save();
+		delete m_storedDB;
+	}
+}
+
+
 void AbView::setView( Views view )
 {
 	qWarning("AbView::setView( Views view )");
@@ -58,21 +87,21 @@ void AbView::setView( Views view )
 void AbView::addEntry( const OContact &newContact )
 {
 	qWarning("abview:AddContact");
-	m_contactdb.add ( newContact );
+	m_contactdb->add ( newContact );
 	load();
 	
 }
 void AbView::removeEntry( const int UID )
 {
 	qWarning("abview:RemoveContact");
-	m_contactdb.remove( UID );
+	m_contactdb->remove( UID );
 	load();
 }
 
 void AbView::replaceEntry( const OContact &contact )
 {
 	qWarning("abview:ReplaceContact");
-	m_contactdb.replace( contact );
+	m_contactdb->replace( contact );
 	load();
 
 }
@@ -94,15 +123,18 @@ bool AbView::save()
 {
 	qWarning("abView:Save data");
 
-	return m_contactdb.save();
+	return m_contactdb->save();
 }
 
 void AbView::load()
 {
 	qWarning("abView:Load data");
 	
-	m_list = m_contactdb.allRecords();
+	m_list = m_contactdb->allRecords();
 	clearForCategory();
+
+	// Feed all views with new lists
+	updateListinViews();
 	
 	qWarning ("Number of contacts: %d", m_list.count());
 
@@ -112,7 +144,9 @@ void AbView::load()
 
 void AbView::reload()
 {
-	m_contactdb.reload();
+	qWarning( "void AbView::reload()" );
+
+	m_contactdb->reload();
 	load();
 }
 
@@ -124,6 +158,18 @@ void AbView::clear()
 void AbView::setShowByCategory( Views view, const QString& cat )
 {
 	qWarning("AbView::setShowCategory( Views view, const QString& cat )");
+
+// 	if ( view == PersonalView ){
+// 		if ( ! m_inPersonal )
+// 			showPersonal( true );
+		
+// 	}else{
+// 		if  ( m_inPersonal )
+// 			showPersonal( false );
+
+// 			m_curr_View = view;
+// 	}
+
 	m_curr_View = view;
 
 	emit signalClearLetterPicker();
@@ -147,7 +193,7 @@ void AbView::setShowByLetter( char c )
 		return;
 	}else{
 		query.setLastName( QString("%1*").arg(c) );
-		m_list = m_contactdb.queryByExample( query, OContactAccess::WildCards );
+		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards );
 		clearForCategory();
 		m_curr_Contact = 0;
 	}
@@ -166,10 +212,44 @@ QString AbView::showCategory() const
 	return mCat.label( "Contacts", m_curr_category );
 }
 
-void AbView::showContact( const OContact& cnt )
+void AbView::showPersonal( bool personal )
 {
-	qWarning ("void AbView::showContact( const OContact& cnt )");
-	// :SX
+	qWarning ("void AbView::showPersonal( %d )", personal);
+
+	if ( personal ){
+
+		if ( m_inPersonal )
+			return;
+
+		// Now switch to vCard Backend and load data.
+		// The current default backend will be stored
+		// to avoid unneeded load/stores.
+		m_storedDB = m_contactdb;
+
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+									  addressbookPersonalVCardName() );
+		m_contactdb = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+
+		m_inPersonal = true;
+		m_curr_View = CardView;
+		
+	}else{
+
+		if ( !m_inPersonal )
+			return;
+
+		// Remove vCard Backend and restore default
+		m_contactdb->save();
+		delete m_contactdb;
+
+		m_contactdb = m_storedDB;
+		m_storedDB = 0l;
+
+		m_curr_View = TableView;
+		m_inPersonal = false;
+		
+	}
+	load();
 }
 
 QStringList AbView::categories() 
@@ -201,7 +281,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	r.setWildcard( !useRegExp );
 	
 	// Get all matching entries out of the database
-	m_list = m_contactdb.matchRegexp( r );
+	m_list = m_contactdb->matchRegexp( r );
 
 	qWarning( "found: %d", m_list.count() );
 	if ( m_list.count() == 0 ){
@@ -259,6 +339,7 @@ void AbView::clearForCategory()
 			}
 		}
 	}
+
 }
 
 bool AbView::contactCompare( const OContact &cnt, int category )
@@ -288,6 +369,13 @@ bool AbView::contactCompare( const OContact &cnt, int category )
 	return returnMe;
 }
 
+// In Some rare cases we have to update all lists..
+void AbView::updateListinViews()
+{
+		m_abTable -> setContacts( m_list );
+		m_ablabel -> setContacts( m_list );
+}
+
 void  AbView::updateView()
 {
 	qWarning("AbView::updateView()");
@@ -297,7 +385,7 @@ void  AbView::updateView()
 	}
 
 	// If we switching the view, we have to store some information
-// 	if ( m_prev_View != m_curr_View ){
+	if ( m_list.count() ){
 		switch ( (int) m_prev_View ) {
 		case TableView:
 			m_curr_Contact = m_abTable -> currentEntry_UID();
@@ -306,7 +394,8 @@ void  AbView::updateView()
 			m_curr_Contact = m_ablabel -> currentEntry_UID();
 			break;
 		}
-// 	}
+	}else
+		m_curr_Contact = 0;
 	
 	m_prev_View = m_curr_View;
 

@@ -40,8 +40,10 @@ void AbLabel::setContacts( const OContactAccess::List& viewList )
 	if (m_viewList.count() != 0){
 		m_itCurContact = m_viewList.begin();
 		sync();
-	}else
+	}else{
+		// m_itCurContact.clear();
 		setText( "" );
+	}
 }
 
 int AbLabel::currentEntry_UID()

@@ -17,9 +17,10 @@ class AbView: public QWidget
     Q_OBJECT
 
 public:
-    enum Views{ TableView=0, CardView, PhoneBook, CompanyBook, EmailBook };
+    enum Views{ TableView=0, CardView, PersonalView };
 
     AbView( QWidget* parent, const QValueList<int>& ordered );
+    ~AbView();
 
     bool save();
     void load();
@@ -27,7 +28,7 @@ public:
     void clear();
 
     void setView( Views view );
-    void showContact( const OContact& cnt );
+    void showPersonal( bool personal );
     void setShowByCategory( Views view, const QString& cat );
     void setShowByLetter( char c );
     void setListOrder( const QValueList<int>& ordered );
@@ -55,6 +56,7 @@ public slots:
     void slotSwitch(); 
 
 private:
+    void updateListinViews();
     void updateView(); 
     void clearForCategory();
     bool contactCompare( const OContact &cnt, int category );
@@ -63,12 +65,14 @@ private:
 
     Categories mCat;
     bool m_inSearch;
+    bool m_inPersonal;
     int m_curr_category;
     Views m_curr_View;
     Views m_prev_View;
     int m_curr_Contact;
     
-    OContactAccess m_contactdb;
+    OContactAccess* m_contactdb;
+    OContactAccess* m_storedDB;
     OContactAccess::List m_list;
 
     QWidgetStack* m_viewStack;

@@ -31,8 +31,8 @@
 #include <opie/ofileselector.h>
 #include <opie/ofiledialog.h>
 #include <opie/ocontact.h>
+#include <opie/ocontactaccessbackend_vcard.h>
 
-#include <qpe/global.h>
 #include <qpe/resource.h>
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
@@ -66,13 +66,7 @@
 #include "picker.h"
 #include "configdlg.h"
 
-static QString addressbookPersonalVCardName()
-{
-	QString filename = Global::applicationFileName("addressbook",
-						       "businesscard.vcf");
-	return filename;
-}
-
+extern QString addressbookPersonalVCardName();
 
 AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 				      WFlags f )
@@ -231,6 +225,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	// Letter Picker
 	pLabel = new LetterPicker( listContainer );
 	connect(pLabel, SIGNAL(letterClicked(char)), this, SLOT(slotSetLetter(char)));
+	connect(m_abView, SIGNAL( signalClearLetterPicker() ), pLabel, SLOT( clear() ) );
+
 	vb->addWidget( pLabel );
 
 	// Category Menu
@@ -320,12 +316,18 @@ void AddressbookWindow::setDocument( const QString &filename )
 {
 	if ( filename.find(".vcf") != int(filename.length()) - 4 ) 
 		return;
+
+	OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+									 filename );
+	OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+	OContactAccess::List allList = access->allRecords();
+
+	OContactAccess::List::Iterator it;
+	for ( it = allList.begin(); it != allList.end(); ++it ){
+		m_abView->addEntry( *it );
+	}
 	
-// 	QValueList<OContact> cl = OContact::readVCard( filename );
-// 	for( QValueList<OContact>::Iterator it = cl.begin(); it != cl.end(); ++it ) {
-// 		m_abView->addEntry( *it );
-// 	}
-	
+	delete access;
 }
 
 void AddressbookWindow::resizeEvent( QResizeEvent *e )
@@ -479,14 +481,29 @@ void AddressbookWindow::slotBeam()
 		filename = addressbookPersonalVCardName();
 		if (!QFile::exists(filename))
 			return; // can't beam a non-existent file
-// 		c = OContact::readVCard( filename )[0];
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+											filename );
+		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		OContactAccess::List allList = access->allRecords();
+		OContactAccess::List::Iterator it = allList.begin();  // Just take first
+		c = *it;
+
+		delete access;
 	} else {
 		unlink( beamfile ); // delete if exists
-		c = m_abView -> currentEntry();
 		mkdir("/tmp/obex/", 0755);
-// 		OContact::writeVCard( beamfile, c );
+		c = m_abView -> currentEntry();
+		OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
+											beamfile );
+		OContactAccess* access = new OContactAccess ( "addressbook", QString::null , vcard_backend, true );
+		access->add( c );
+		access->save();
+		delete access;
+
 		filename = beamfile;
 	}
+
+
 	Ir *ir = new Ir( this );
 	connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
 	QString description = c.fullName();
@@ -630,40 +647,19 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 
 void AddressbookWindow::editPersonal()
 {
-	QString filename = addressbookPersonalVCardName();
-	OContact me;
-	if (QFile::exists(filename))
-// 		me = OContact::readVCard( filename )[0];
+	OContact entry;
 	if ( !abEditor ) {
-		qWarning("Editing personal data");
-		abEditor = new ContactEditor( me, this, "editor" );
-	} else{
-		abEditor->setEntry( me );
+		abEditor = new ContactEditor( entry, this, "editor" );
 	}
 
-	abEditor->setPersonalView( true );
-	
-	abEditor->setCaption(tr("Edit My Personal Details"));
-	abEditor->showMaximized();
-	
-	// fix the foxus...
-	abEditor->setNameFocus();
-	if ( abEditor->exec() ) {
-		setFocus();
-		OContact new_personal = abEditor->entry();
-		QString fname = addressbookPersonalVCardName();
-// 		OContact::writeVCard( fname, new_personal );
-		// Hier die persönliche Card zeigen..
-// 		m_abView  -> init(new_personal);
-// 		m_abView -> sync();
-	}
-	abEditor->setCaption( tr("Edit Address") );
-	abEditor->setPersonalView( false );
+ 	abEditor->setCaption(tr("Edit My Personal Details"));
+ 	abEditor->setPersonalView( true );
+	editEntry( EditEntry );
+ 	abEditor->setPersonalView( false );
+
 }
 
 
-// Die Funktion muß noch überarbeitet werden !
-// -> Soll AbLabel reaktiviert werden ? 
 void AddressbookWindow::slotPersonalView()
 {
 	if (!actionPersonal->isOn()) {
@@ -672,8 +668,11 @@ void AddressbookWindow::slotPersonalView()
 		actionNew->setEnabled(TRUE);
 		actionTrash->setEnabled(TRUE);
 		actionFind->setEnabled(TRUE);
-		slotUpdateToolbar(); // maybe some of the above could be moved there
-		// :SX		showList();
+		actionMail->setEnabled(TRUE);
+		// slotUpdateToolbar();
+
+		m_abView->showPersonal( false );
+		
 		return;
 	}
 	
@@ -683,22 +682,10 @@ void AddressbookWindow::slotPersonalView()
 	actionFind->setEnabled(FALSE);
 	actionMail->setEnabled(FALSE);
 	
-// 	setCaption( tr("Contacts - My Personal Details") );
-// 	QString filename = addressbookPersonalVCardName();
-// 	OContact me;
-// 	if (QFile::exists(filename))
-// 		me = OContact::readVCard( filename )[0];
-	
-// 	// m_abView -> showContact ( me );
-	
+	setCaption( tr("Contacts - My Personal Details") );
 
-	editPersonal();
-
-	// :SX
-// 	listContainer->hide();
-// 	m_abView() -> setCentralWidget( m_abView() );
-// 	m_abView -> setView( CardView );
-// 	m_abView ->setFocus();
+	m_abView->showPersonal( true );
+	
 }
 
 
@@ -771,129 +758,6 @@ void AddressbookWindow::slotSave()
 }
 #endif
 
-// void AddressbookWindow::slotSettings()
-// {
-// 	AddressSettings frmSettings( this );
-// #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-// 	frmSettings.showMaximized();
-// #endif
-	
-// 	if ( frmSettings.exec() ) {
-// 		allFields.clear();
-// 		orderedFields.clear();
-// 		slOrderedFields.clear();
-// 		initFields();
-// 		if ( abEditor )
-// 			abEditor->loadFields();
-// 		// abList->refresh();
-// 	}
-// }
-
-// This should be moved to the contact editor.. (se)
-//void AddressbookWindow::initFields()
-//{
-// 	// we really don't need the things from the configuration, anymore
-// 	// only thing that is important are the important categories.  So,
-// 	// Call the contact functions that correspond to these old functions...
-	
-// 	QStringList xmlFields = OContact::fields();
-// 	QStringList visibleFields = OContact::untrfields();
-// 	// QStringList trFields = OContact::trfields();
-
-// 	xmlFields.remove( "Title" );
-// 	visibleFields.remove( "Name Title" );
-// 	visibleFields.remove( "Notes" );
-	
-// 	int i;
-// 	Config cfg( "AddressBook" );
-// 	QString zn;
-	
-// 	// ### Write a function to keep this from happening again...
-// 	{
-// 	QStringList::ConstIterator it;
-// 	for ( i = 0, it = xmlFields.begin(); it != xmlFields.end(); ++it, i++ ) {
-// 		allFields.append( i + 3 );
-// 	}
-// 	}
-	
-// 	cfg.setGroup( "Version" );
-// 	version = cfg.readNumEntry( "version" );
-// 	i = 0;
-
-// 	if ( version >= ADDRESSVERSION ) {
-		
-// 		cfg.setGroup( "ImportantCategory" );
-		
-// 		zn = cfg.readEntry( "Category" + QString::number(i), QString::null );
-// 		while ( !zn.isNull() ) {
-// 			if ( zn.contains( "Work" ) || zn.contains( "Mb" ) ) {
-// 				slOrderedFields.clear();
-// 				break;
-// 			}
-// 			slOrderedFields.append( zn );
-// 			zn = cfg.readEntry( "Category" + QString::number(++i), QString::null );
-// 		}
-		
-		
-// 	} else {
-// 		QString str;
-// 		str = getenv("HOME");
-// 		str += "/Settings/AddressBook.conf";
-// 		QFile::remove( str );
-// 	}
-	
-// 	if ( slOrderedFields.count() > 0 ) {
-// 		for( QStringList::ConstIterator it = slOrderedFields.begin();
-// 		     it != slOrderedFields.end(); ++it ) {
-// 			QValueList<int>::ConstIterator itVl;
-// 			QStringList::ConstIterator itVis;
-// 			itVl = allFields.begin();
-// 			for ( itVis = visibleFields.begin();
-// 			      itVis != visibleFields.end() && itVl != allFields.end();
-// 			      ++itVis, ++itVl ) {
-// 				if ( *it == *itVis && itVl != allFields.end() ) {
-// 					orderedFields.append( *itVl );
-// 				}
-// 			}
-// 		}
-// 	} else {
-// 		QValueList<int>::ConstIterator it;
-// 		for ( it = allFields.begin(); it != allFields.end(); ++it )
-// 			orderedFields.append( *it );
-		
-// 		slOrderedFields = visibleFields;
-// 		orderedFields.remove( Qtopia::AddressUid );
-// 		orderedFields.remove( Qtopia::Title );
-// 		orderedFields.remove( Qtopia::Groups );
-// 		orderedFields.remove( Qtopia::AddressCategory );
-// 		orderedFields.remove( Qtopia::FirstName );
-// 		orderedFields.remove( Qtopia::LastName );
-// 		orderedFields.remove( Qtopia::DefaultEmail );
-// 		orderedFields.remove( Qtopia::FileAs );
-// 		orderedFields.remove( Qtopia::Notes );
-// 		orderedFields.remove( Qtopia::Gender );
-// 		slOrderedFields.remove( "Name Title" );
-// 		slOrderedFields.remove( "First Name" );
-// 		slOrderedFields.remove( "Last Name" );
-// 		slOrderedFields.remove( "File As" );
-// 		slOrderedFields.remove( "Default Email" );
-// 		slOrderedFields.remove( "Notes" );
-// 		slOrderedFields.remove( "Gender" );
-		
-// 	}
-//}
-
-
-// AbLabel* AddressbookWindow::abView()
-// {
-// 	if ( !mView ) {
-// 		mView = new AbLabel( this, "viewer" );
-// 		mView->init( OContact()  );
-// 		connect( mView, SIGNAL( okPressed() ), this, SLOT( slotListView() ) );
-// 	}
-// 	return mView;
-// }
-
 
 void AddressbookWindow::slotNotFound()
 {
@@ -937,18 +801,12 @@ void AddressbookWindow::slotSetCategory( int c )
 			if ( i == 1 ){ // default List view
 				book = QString::null;
 				view = AbView::TableView;
-// 			}else if ( i == 2 ){
-// 				book = "Phone";
-// 				view = AbView::PhoneBook;
-// 			}else if ( i == 3 ){
-// 				book = "Company";
-// 				view = AbView::CompanyBook;
-// 			}else if ( i == 4 ){
-// 				book = "Email";
-// 				view = AbView::EmailBook;
 			}else if ( i == 2 ){
-				book = "Cards";
+				book = tr( "Cards" );
 				view = AbView::CardView;
+// 			}else if ( i == 3 ){
+// 				book = tr( "Personal" );
+// 				view = AbView:: PersonalView;
 			}else if ( i == 3 ) // default All Categories
 				cat = QString::null;
 			else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
@@ -961,13 +819,13 @@ void AddressbookWindow::slotSetCategory( int c )
 	}
 	
 	m_abView -> setShowByCategory( view, cat );
-	
+
 	if ( book.isEmpty() )
 		book = "List";
 	if ( cat.isEmpty() )
 		cat = "All";
 	
-	setCaption( tr( "Contacts" ) + " - " + tr( book ) + " - " + tr( cat ) );
+	setCaption( tr( "Contacts" ) + " - " + book + " - " + tr( cat ) );
 }
 
 void AddressbookWindow::slotViewSwitched( int view )
@@ -978,8 +836,11 @@ void AddressbookWindow::slotViewSwitched( int view )
 	case AbView::TableView:
 		menu = 1;
 		break;
-// 	case AbView::PhoneBook:
-// 		menu = 2;
+	case AbView::CardView:
+		menu = 2;
+		break;
+// 	case AbView::PersonalView:
+// 		menu = 3;
 // 		break;
 // 	case AbView::CompanyBook:
 // 		menu = 3;
@@ -987,9 +848,6 @@ void AddressbookWindow::slotViewSwitched( int view )
 // 	case AbView::EmailBook:
 // 		menu = 4;
 // 		break;
-	case AbView::CardView:
-		menu = 2;
-		break;
 	}
 	for ( unsigned int i = 1; i < 3; i++ ){
 		if ( catMenu )
@@ -1013,10 +871,8 @@ void AddressbookWindow::populateCategories()
 	rememberId = 0;
 	
 	catMenu->insertItem( tr( "List" ), id++ );
-// 	catMenu->insertItem( tr( "Phone Book" ), id++ );
-// 	catMenu->insertItem( tr( "Company Book" ), id++ );
-// 	catMenu->insertItem( tr( "Email Book" ), id++ );
 	catMenu->insertItem( tr( "Cards" ), id++ );
+// 	catMenu->insertItem( tr( "Personal" ), id++ );
 	catMenu->insertSeparator();
 	
 	catMenu->insertItem( tr( "All" ), id++ );

@@ -9,12 +9,12 @@ Feature requests:
 - 3rd column for 2. Contact
 
 Known Bugs:
-- Personal Details not working
 - Contact-Editor is temporarely reanabled. Wait for replacement.
-- If category changed, the letterpicker should be resetted
-- OK-Key does not switch from Detailview to Listview
+- OK-Key does not switch from Detailview (ablable) to Listview
 
+Bugs but not in addressbook:
 - VCARD: Import of Anniversary does not work correctly (currently disabled)
+- VCARD: If umlaut (äöüß) in address, the parser gets confused..
 
 
 Urgent:
@@ -24,7 +24,6 @@ Important:
 - Smarter handling of "Cancel" and klicking on exit:
 	User of the old Addressbook always closing addressbook accidentely.. :(
 
-- When click in Table: Pullup Menu ?
 - Add "Do you really want to close app" Box.
 - Redesign of Contacteditor
 - Store last settings of combo-boxes
@@ -39,6 +38,7 @@ Less important:
 -  The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
 - Finishing of new View functions (List, Phonebook...)
+- Find a smart solution for activating/deactivating the "send email" event
 
 Should be Fixed (not absolute sure, need further validation):
 
@@ -69,3 +69,5 @@ Fixed:
 - Select of primary contact (see #274 on mantis)
 - Category-select does not work completely: "Unfiled" is always in listview ..
 - Return from Contacteditor: Category resettet to all
+- Personal Details not working
+- If category changed, the letterpicker should be resetted
