@@ -51,7 +51,7 @@ private:
     QPixmap receiveActivePixmap;
     int irdaactive; // bool and bitfields later bool irdaactive :1 ;
     int irdaDiscoveryActive;
-    bool receiveActive;
+    bool receiveActive : 1;
     bool receiveStateChanged;
 private slots:
 

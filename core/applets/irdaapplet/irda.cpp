@@ -177,8 +177,8 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
         break;
     case 4: { // enable receive
         qWarning("Enable receive" );
-        QCopEnvelope e("QPE/Obex", "receive(bool)" );
-        e << true;
+        QCopEnvelope e("QPE/Obex", "receive(int)" );
+        e << 1;
         receiveActive = true;
         receiveStateChanged = true;
         timerEvent(NULL);
@@ -186,8 +186,8 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
     }
     case 5: { // disable receive
         qWarning("Disable receive" );
-        QCopEnvelope e("QPE/Obex", "receive(bool)" );
-        e << false;
+        QCopEnvelope e("QPE/Obex", "receive(int)" );
+        e << 0;
         receiveActive = false;
         receiveStateChanged = true;
         timerEvent(NULL);
