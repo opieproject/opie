@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.7 2002-11-13 15:02:46 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.8 2002-11-14 17:04:24 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.7  2002-11-13 15:02:46  eilers
+ * Revision 1.8  2002-11-14 17:04:24  eilers
+ * Sorting will now work if fullname is identical on some entries
+ *
+ * Revision 1.7  2002/11/13 15:02:46  eilers
  * Small Bug in sorted fixed
  *
  * Revision 1.6  2002/11/13 14:14:51  eilers
@@ -319,8 +322,8 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 			// Afterwards sort namelist and use map to fill array to return..
 			QValueListConstIterator<OContact> it;
 			for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
-				names.append( (*it).fileAs() );
-				nameToUid.insert( (*it).fileAs(), (*it).uid() );
+				names.append( (*it).fileAs() + QString::number( (*it).uid() ) );
+				nameToUid.insert( (*it).fileAs() + QString::number( (*it).uid() ), (*it).uid() );
 			}
 			names.sort();
 
