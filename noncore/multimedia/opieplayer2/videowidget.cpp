@@ -99,8 +99,9 @@ VideoWidget::VideoWidget( PlayListWidget &playList, MediaPlayerState &mediaPlaye
     buttonMask = QImage( imgUp.width(), imgUp.height(), 8, 255 );
     buttonMask.fill( 0 );
 
-    for ( int i = 0; i < 7; i++ ) {
-        Button &button = buttons[ i ];
+    uint i = 0;
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it, ++i ) {
+        Button &button = *it;
 
         QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath + "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
         button.mask = QBitmap( filename );
@@ -175,8 +176,8 @@ void VideoWidget::resizeEvent( QResizeEvent * ) {
     QPixmap *pixUp = combineVImageWithBackground( imgUp, backgroundPixmap, p );
     QPixmap *pixDn = combineVImageWithBackground( imgDn, backgroundPixmap, p );
 
-    for ( int i = 0; i < 7; i++ ) {
-        Button &button = buttons[ i ];
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
+        Button &button = *it;
 
         if ( !button.mask.isNull() ) {
             button.pixUp = maskVPixToMask( *pixUp, button.mask );
