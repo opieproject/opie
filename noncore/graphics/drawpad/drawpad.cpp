@@ -486,7 +486,12 @@ void DrawPad::importPage()
     importDialog.showMaximized();
 
     if (importDialog.exec() == QDialog::Accepted) {
-        m_pDrawPadCanvas->importPage(importDialog.selected()->file());
+        const DocLnk* docLnk = importDialog.selected();
+
+        if (docLnk) {
+            m_pDrawPadCanvas->importPage(docLnk->file());
+            delete docLnk;
+        }
     }
 }
 
