@@ -26,13 +26,13 @@ class OTimePicker: public QWidget {
  public:
     OTimePicker(QWidget* parent = 0, const char* name = 0,
 	       WFlags fl = 0);
- 
- public slots:	      
+
+ public slots:
     void setHour(int h);
     void setMinute(int m);
     void setTime( const QTime& );
     void setTime( int h,  int m );
-    
+
  public:
     QTime time()const;
 
@@ -56,7 +56,7 @@ class OTimePicker: public QWidget {
 
 /**
  *
- * @short
+ * @short A small dialog to pick a time
  * @version 1.0
  * @author Stefan Eilers
  */

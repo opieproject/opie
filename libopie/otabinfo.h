@@ -77,13 +77,13 @@ public:
         : i( id ), c( control ), p( icon ), l( label ) {}
 
 /**
- * @fn id()
+ * @fn id()const
  * @brief Returns TabBar ID.
  */
     int            id()      const { return i; }
 
 /**
- * @fn label()
+ * @fn label()const
  * @brief Returns text label for widget.
  */
     const QString &label()   const { return l; }
@@ -97,13 +97,13 @@ public:
     void setLabel( const QString &label ) { l = label; }
 
 /**
- * @fn control()
+ * @fn control()const
  * @brief Returns pointer to widget.
  */
     QWidget       *control() const { return c; }
 
 /**
- * @fn icon()
+ * @fn icon()const
  * @brief Returns name of icon file.
  */
     const QString &icon()    const { return p; }

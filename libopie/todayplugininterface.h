@@ -100,6 +100,9 @@ public:
  * This is part of the QCOM works. See example plugins how to do it right
  */
 struct TodayPluginInterface : public QUnknownInterface {
+    /**
+     * return the TodayPluginObject implementation
+     */
     virtual TodayPluginObject *guiPart() = 0;
 };
 

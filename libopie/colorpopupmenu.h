@@ -68,7 +68,7 @@ public:
     OColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
 
 /**
- * @fn ~ColorPanelButton()
+ * @fn ~OColorPanelButton()
  * @brief Object destructor.
  */
     ~OColorPanelButton();
@@ -107,11 +107,11 @@ public:
     void leaveEvent(QEvent* e);
 
 /**
- * @fn paintEvent( QEvent* e )
+ * @fn paintEvent( QPaintEvent* e )
  * @brief Reimplemented for internal reasons.
  *
  * @param e Event currently being processed.
- *
+ * @reimp
  * Reimplemented to ensure correct display of button.
  */
     void paintEvent(QPaintEvent* e);

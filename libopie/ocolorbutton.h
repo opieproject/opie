@@ -50,12 +50,18 @@ public:
 	QColor color ( ) const;
 
 signals:
+    /**
+     * emitted when a color gets selected
+     */
 	void colorSelected ( const QColor & );
 
 public slots:
 	virtual void setColor ( const QColor & );
 
 protected slots:
+    /**
+     * @internal
+     */
 	virtual void updateColor ( const QColor & );
 
 private:

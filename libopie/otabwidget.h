@@ -127,7 +127,7 @@ public:
     void removePage( QWidget * );
 
 /**
- * @fn changeTab( QWidget *widget, const QIconSet &icon, const QString &label )
+ * @fn changeTab( QWidget *widget, const QString &icon, const QString &label )
  * @brief Change text and/or icon for existing tab
  *
  * @param child Widget control.
@@ -137,7 +137,7 @@ public:
     void changeTab( QWidget *, const QString &, const QString & );
 
 /**
- * @fn tabStyle()
+ * @fn tabStyle()const
  * @brief Returns current widget selection control style.
  */
     TabStyle tabStyle() const;
@@ -151,7 +151,7 @@ public:
     void setTabStyle( TabStyle );
 
 /**
- * @fn tabPosition()
+ * @fn tabPosition()const
  * @brief Returns current widget selection control position.
  */
     TabPosition tabPosition() const;
@@ -189,7 +189,7 @@ public:
     void setCurrentTab(int);
 
 /**
- * @fn sizeHint()
+ * @fn sizeHint()const
  * @brief Reimplemented for internal purposes.
  */
     QSize sizeHint() const;
@@ -244,7 +244,7 @@ private:
  */
     void    setUpLayout();
 
-    
+
 signals:
 /**
  * @fn currentChanegd( QWidget *widget )

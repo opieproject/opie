@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.h,v 1.4 2003-04-13 16:57:28 zecke Exp $
+** $Id: colordialog.h,v 1.5 2003-04-16 10:59:24 zecke Exp $
 **
 ** Definition of OColorDialog class
 **
@@ -44,7 +44,7 @@
 
 class OColorDialogPrivate;
 
-/**
+/*
  * @class OColorDialog
  * @brief The OColorDialog class is a copy of QColorDialog for use in Opie.
  *
@@ -61,7 +61,7 @@ class Q_EXPORT OColorDialog : public QDialog
     Q_OBJECT
 
 public:
-    static QColor getColor( const QColor&, QWidget *parent=0, const char* name=0 ); 
+    static QColor getColor( const QColor&, QWidget *parent=0, const char* name=0 );
     static QRgb getRgba( const QRgb&, bool* ok = 0,
 			 QWidget *parent=0, const char* name=0 );
 

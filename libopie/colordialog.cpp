@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.cpp,v 1.3 2003-04-13 16:57:28 zecke Exp $
+** $Id: colordialog.cpp,v 1.4 2003-04-16 10:59:24 zecke Exp $
 **
 ** Implementation of OColorDialog class
 **
@@ -692,7 +692,7 @@ OColorDialogPrivate::OColorDialogPrivate( OColorDialog *dialog ) :
 
 // BEING REVISED: jo
 /*!
-  \class OColorDialog OColorDialog.h
+  \class ColorDialog ColorDialog.h
   \brief The OColorDialog class provides a dialog widget for specifying colors.
   \ingroup dialogs
 

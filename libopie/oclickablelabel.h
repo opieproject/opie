@@ -32,14 +32,25 @@ public:
     void setToggleButton(bool t);
 
  protected:
+    /** @internal */
     void mousePressEvent( QMouseEvent *e );
+    /** @internal */
     void mouseReleaseEvent( QMouseEvent *e );
+    /** @internal */
     void mouseMoveEvent( QMouseEvent *e );
 
  public slots:
     void setOn(bool on);
  signals:
+    /**
+     * emitted when the labels gets clicked
+     */
     void clicked();
+
+    /**
+     * emitted when the labels gets toggled
+     * @param the new new state of the label
+     */
     void toggled(bool on);
  private:
     bool isToggle : 1;

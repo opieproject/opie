@@ -28,20 +28,20 @@ using namespace Opie;
 
 
 class OQCopMessageData {
-public:	
+public:
 	QCString m_channel;
 	QCString m_message;
 	QByteArray m_data;
 };
 
 
-OQCopMessage::OQCopMessage ( ) 
+OQCopMessage::OQCopMessage ( )
 	: d ( 0 )
 {
 	init ( QCString ( ), QCString ( ), QByteArray ( ));
 }
 
-OQCopMessage::OQCopMessage ( const OQCopMessage &copy ) 
+OQCopMessage::OQCopMessage ( const OQCopMessage &copy )
 	: d ( 0 )
 {
 	init ( copy. channel ( ), copy. message ( ), copy. data ( ));
@@ -53,7 +53,7 @@ OQCopMessage &OQCopMessage::operator = ( const OQCopMessage &assign )
 	return *this;
 }
 
-OQCopMessage::OQCopMessage ( const QCString &ch, const QCString &m, const QByteArray &arg ) 
+OQCopMessage::OQCopMessage ( const QCString &ch, const QCString &m, const QByteArray &arg )
 	: d ( 0 )
 {
 	init ( ch, m, arg );
@@ -74,7 +74,7 @@ bool OQCopMessage::send ( )
 		return false;
 
 	QCopEnvelope e ( d-> m_channel, d-> m_message );
-	
+
 	if ( d-> m_data. size ( ))
 		e. writeRawBytes ( d-> m_data. data ( ), d-> m_data. size ( ));
 
@@ -111,8 +111,8 @@ void OQCopMessage::setData ( const QByteArray &data )
 	d-> m_data = data;
 }
 
-/*! \class ODeviceButton
-    \brief The ODeviceButton class represents a physical user mappable button on a Qtopia device.
+/*! \class Opie::ODeviceButton
+    \brief The Opie::ODeviceButton class represents a physical user mappable button on a Qtopia device.
 
     This class represents a physical button on a Qtopia device.    A
     device may have "user programmable" buttons.

@@ -24,7 +24,7 @@ public:
      * gets deleted as in any Qt application
      *
      * @param parent The parent of the widget
-     * @paran name The name of the object
+     * @param name The name of the object
      */
     TodayConfigWidget( QWidget *parent,  const char *name ) : QWidget( parent,  name ) {} ;
     virtual ~TodayConfigWidget() {};

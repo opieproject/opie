@@ -29,15 +29,24 @@
 class OCheckItem : public QTableItem
 {
 public:
+    /** The size of a box currently unused */
     enum Size { BoxSize = 10 };
     OCheckItem( QTable *t, const QString &sortkey );
 
     virtual void setChecked( bool b );
     virtual void toggle();
     bool isChecked() const;
+    /**
+     * @short Set the sort key
+     * @reimp
+     */
     void setKey( const QString &key ) { m_sortKey = key; }
     virtual QString key() const;
 
+    /**
+     * foo
+     * @internal
+     */
     void paint( QPainter *p, const QColorGroup &cg, const QRect &cr, bool selected );
 
     //static const int BoxSize = 10;

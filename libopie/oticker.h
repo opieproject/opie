@@ -66,7 +66,7 @@ public:
  */
     ~OTicker();
 /*!
- * @fn setText()
+ * @fn setText(const QString& )
  * @brief sets text to be displayed
  * @param text QString text to be displayed.
  *
@@ -78,6 +78,7 @@ public:
  * @param color QColor color to be set.
  *
  */
+    //FIXME const QColor& please -zecke
     void setBackgroundColor(QColor color);
 /*!
  * @fn setForegroundColor(QColor color)

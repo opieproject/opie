@@ -44,13 +44,7 @@
 #include <qpe/applnk.h>
 #include <qlistview.h>
 
-/** This is OPIEs FileDialog Widget. You can use it
- *  as a dropin replacement of the fileselector and
- *  or use any of the new features.
- *  This is also a complete FileSave and FileLoad widget
- *  If you look for a Dialog check OFileDialog
- *
- */
+
 class DocLnk;
 class QCheckBox;
 class QComboBox;
@@ -69,6 +63,15 @@ class QHBox;
 
 typedef QMap< QString, QStringList> MimeTypes;
 
+/**
+ *  This is OPIEs FileDialog Widget. You can use it
+ *  as a dropin replacement of the fileselector and
+ *  or use any of the new features.
+ *  This is also a complete FileSave and FileLoad widget
+ *  If you look for a Dialog check OFileDialog
+ *
+ * NOTE THAT the API will change to be more extendable!
+ */
 class OFileSelector : public QWidget {
   Q_OBJECT
  public:

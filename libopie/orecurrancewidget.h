@@ -46,7 +46,13 @@ public:
 
 public slots:
     void slotSetRType( int );
+    /**
+     * set the new end date
+     */
     void endDateChanged( int, int, int );
+    /**
+     * enable/disable end date
+     */
     void slotNoEnd( bool unused );
     void setStartDate( const QDate& );
     void setRecurrence( const ORecur& recur, const QDate& start );

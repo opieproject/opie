@@ -46,7 +46,7 @@ class OProcessPrivate;
  *
  * @sect General usage and features
  *
- *This class allows a KDE application to start child processes without having
+ *This class allows a KDE and OPIE application to start child processes without having
  *to worry about UN*X signal handling issues and zombie process reaping.
  *
  *@see KProcIO
@@ -188,7 +188,13 @@ public:
    * Constructor
    */
   OProcess(QObject *parent = 0, const char *name = 0);
+  /**
+   * Constructor
+   */
   OProcess(const QString &arg0, QObject *parent = 0, const char *name = 0);
+  /**
+   * Constructor
+   */
   OProcess(const QStringList &args, QObject *parent = 0, const char *name = 0);
 
   /**
@@ -410,7 +416,7 @@ public:
    * setuid/segid privileges or whether it will keep them
    */
   bool runPrivileged() const;
-  
+
   /**
    * Modifies the environment of the process to be started.
    * This function must be called before starting the process.
@@ -418,7 +424,7 @@ public:
   void setEnvironment(const QString &name, const QString &value);
 
   /**
-   * Changes the current working directory (CWD) of the process 
+   * Changes the current working directory (CWD) of the process
    * to be started.
    * This function must be called before starting the process.
    */
@@ -452,7 +458,7 @@ public:
    * Note that the current process remains the parent process of the
    * child process.
    */
-  void detach(); 
+  void detach();
 
 
 
@@ -486,15 +492,15 @@ signals:
    * Emitted when output from the child process has
    * been received on stdout.
    *
-   * To actually get these signals, the respective communications link 
-   * (stdout/stderr) has to be turned on in @ref start() and the 
+   * To actually get these signals, the respective communications link
+   * (stdout/stderr) has to be turned on in @ref start() and the
    * @p NoRead flag should have been passed.
    *
    * You will need to explicitly call resume() after your call to start()
    * to begin processing data from the child process's stdout.  This is
    * to ensure that this signal is not emitted when no one is connected
    * to it, otherwise this signal will not be emitted.
-   * 
+   *
    * The data still has to be read from file descriptor @p fd.
    **/
   void receivedStdout(int fd, int &len);
@@ -550,7 +556,7 @@ protected slots:
 protected:
 
   /**
-   * Sets up the environment according to the data passed via 
+   * Sets up the environment according to the data passed via
    * setEnvironment(...)
    */
   void setupEnvironment();
@@ -712,7 +718,7 @@ protected:
 
 private:
   /**
-   * Searches for a valid shell. 
+   * Searches for a valid shell.
    * Here is the algorithm used for finding an executable shell:
    *
    *    @li Try the executable pointed to by the "SHELL" environment

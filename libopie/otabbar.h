@@ -62,7 +62,7 @@ public:
 
 protected:
 /**
- * @fn paintLabel( QPainter* p, const QRect& br, QTab* t, bool has_focus )
+ * @fn paintLabel( QPainter* p, const QRect& br , QTab* t, bool  has_focus)const
  * @brief Internal function to draw a tab's label.
  *
  * @param p Pointer to QPainter used for drawing.

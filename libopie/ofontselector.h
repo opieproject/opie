@@ -73,8 +73,11 @@ signals:
 	void fontSelected ( const QFont & );
 
 protected slots:
+    /** @internal */
     virtual void fontFamilyClicked ( int );
+    /** @internal */
     virtual void fontStyleClicked ( int );
+    /** @internal */
     virtual void fontSizeClicked ( int );
 
 protected:
