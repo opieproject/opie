@@ -5,6 +5,8 @@
 
 	Fixed Bugs
 	----------
+	* #1474 - Implement GUI for Scrollbars on the Left in Appearance
+	(zecke)
 	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
 	* #1482 - Fix double '/' in paths (zecke)
 	* #1536 - Autosave of custom locations in opie backup (ar)
