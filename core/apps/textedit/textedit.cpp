@@ -817,6 +817,7 @@ bool TextEdit::save() {
                 doc->setName( name);
                 FileManager fm;
                 if ( !fm.saveFile( *doc, rt ) ) {
+										QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
                     return false;
                 }
             } else {
@@ -827,7 +828,7 @@ bool TextEdit::save() {
                      f.writeBlock(crt,crt.length());
                  } else {
                      QMessageBox::message(tr("Text Edit"),tr("Write Failed"));
-                 return false;
+										 return false;
                  }
 
             }
@@ -909,14 +910,13 @@ bool TextEdit::saveAs() {
     if(dire==".")
         dire = QPEApplication::documentDir();
     QString str;
-    if( !featureAutoSave)
-      {
+    if( !featureAutoSave) {
           str = OFileDialog::getSaveFileName( 2,
                                               dire,
                                               filee, map);
-      }
-    else
+      } else
         str=currentFileName;
+
     if(!str.isEmpty()) {
         QString fileNm=str;
 
@@ -938,6 +938,7 @@ bool TextEdit::saveAs() {
 
             FileManager fm;
             if ( !fm.saveFile( *doc, rt ) ) {
+								QMessageBox::message(tr("Text Edit"),tr("Save Failed"));
                 return false;
             }
 
