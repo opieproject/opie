@@ -16,6 +16,7 @@
 #include <qtabwidget.h>
 #include <qpushbutton.h>
 #include <qcheckbox.h>
+#include <qlabel.h>
 
 #include <qpe/resource.h>
 
