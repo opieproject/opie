@@ -29,6 +29,7 @@
 
 #ifdef  QT_QWS_OPIE
 #include <opie2/ocolorpopupmenu.h>
+using namespace Opie;
 #endif
 
 #include <qpe/resource.h>
@@ -49,7 +50,6 @@
 #include "konsole.h"
 #include "commandeditdialog.h"
 
-using namespace Opie;
 class EKNumTabBar : public QTabBar
 {
 public:
@@ -513,8 +513,8 @@ void Konsole::init(const char* _pgm, QStrList & _args)
     setFont(cfont);
 
     configMenu = new QPopupMenu( this);
-    colorMenu = new QPopupMenu( this);
-    scrollMenu = new QPopupMenu( this);
+    colorMenu = new QPopupMenu( this); 
+   scrollMenu = new QPopupMenu( this);
     editCommandListMenu = new QPopupMenu( this);
 
     configMenu->insertItem(tr("Command List"), editCommandListMenu);
