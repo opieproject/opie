@@ -49,6 +49,7 @@
 #include "mediaplayerstate.h"
 #include "inputDialog.h"
 #include "om3u.h"
+#include "playlistfileview.h"
 
 //only needed for the random play
 #include <stdlib.h>
@@ -60,9 +61,6 @@
 extern MediaPlayerState *mediaPlayerState;
 // extern AudioWidget *audioUI;
 // extern VideoWidget *videoUI;
-
-QString audioMimes ="audio/mpeg;audio/x-wav;audio/x-ogg";
-// no m3u's here please
 
 PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
     : PlayListWidgetGui( mediaPlayerState, parent, name ) {
@@ -639,26 +637,13 @@ void PlayListWidget::playSelected() {
 
 
 void PlayListWidget::scanForAudio() {
-//  qDebug("scan for audio");
-  files.detachChildren();
-  QListIterator<DocLnk> sdit( files.children() );
-  for ( ; sdit.current(); ++sdit ) {
-    delete sdit.current();
-  }
-//  Global::findDocuments( &files, "audio/*");
-  Global::findDocuments( &files, audioMimes);
+  audioView->scanFiles();
   audioScan = true;
   populateAudioView();
 }
 
 void PlayListWidget::scanForVideo() {
-//  qDebug("scan for video");
-  vFiles.detachChildren();
-  QListIterator<DocLnk> sdit( vFiles.children() );
-  for ( ; sdit.current(); ++sdit ) {
-    delete sdit.current();
-  }
-  Global::findDocuments(&vFiles, "video/*");
+  videoView->scanFiles();
   videoScan = true;
   populateVideoView();  
 }
@@ -671,7 +656,7 @@ void PlayListWidget::populateAudioView() {
         scanForAudio();
     }
 
-    QListIterator<DocLnk> dit( files.children() );
+    QListIterator<DocLnk> dit( audioView->files().children() );
     //    QListIterator<FileSystem> it ( fs );
     audioView->clear();
 
@@ -714,7 +699,7 @@ void PlayListWidget::populateVideoView() {
         scanForVideo();
     }
 
-    QListIterator<DocLnk> Vdit( vFiles.children() );
+    QListIterator<DocLnk> Vdit( videoView->files().children() );
 //    QListIterator<FileSystem> it ( fs );
     videoView->clear();
     QString storage, pathName;

@@ -134,8 +134,6 @@ private slots:
     void playSelected();
 
 private:
-    DocLnkSet files;
-    DocLnkSet vFiles;
     bool fromSetDocument;
     bool insanityBool;
     QString setDocFileRef, currentPlayList;

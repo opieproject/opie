@@ -50,6 +50,7 @@
 class PlayListWidgetPrivate;
 class PlayListSelection;
 class MediaPlayerState;
+class PlayListFileView;
 
 class Config;
 class QPEToolBar;
@@ -101,7 +102,8 @@ public:
 
 protected:
     QTabWidget * tabWidget;
-    QListView *audioView, *videoView, *playlistView;
+    PlayListFileView *audioView, *videoView;
+    QListView *playlistView;
     QLabel *libString;
     QPopupMenu *pmView ;
     QPopupMenu *gammaMenu;

@@ -150,7 +150,8 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     QGridLayout *Alayout = new QGridLayout( aTab );
     Alayout->setSpacing( 2 );
     Alayout->setMargin( 2 );
-    audioView = new PlayListFileView( aTab, "Audioview" );
+    // no m3u's here please
+    audioView = new PlayListFileView( "audio/mpeg;audio/x-wav;audio/x-ogg", aTab, "Audioview" );
     Alayout->addMultiCellWidget( audioView, 0, 0, 0, 1 );
     tabWidget->insertTab( aTab, tr( "Audio" ) );
 
@@ -162,7 +163,7 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     QGridLayout *Vlayout = new QGridLayout( vTab );
     Vlayout->setSpacing( 2 );
     Vlayout->setMargin( 2 );
-    videoView = new PlayListFileView( vTab, "Videoview" );
+    videoView = new PlayListFileView( "video/*", vTab, "Videoview" );
     Vlayout->addMultiCellWidget( videoView, 0, 0, 0, 1 );
 
     QPEApplication::setStylusOperation( videoView->viewport(), QPEApplication::RightOnHold );
