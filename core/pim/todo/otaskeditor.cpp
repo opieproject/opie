@@ -1,23 +1,23 @@
 #include <qdatetime.h>
-#include <qlayout.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qmultilineedit.h>
 
 #include <opie/orecurrancewidget.h>
 
 #include "taskeditoroverview.h"
-#include "taskeditoradvanced.h"
+#include "taskeditorstatus.h"
 #include "taskeditoralarms.h"
 
 #include "otaskeditor.h"
 
 OTaskEditor::OTaskEditor(int cur)
-    : QDialog(0, 0, TRUE ) {
+    : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
     init();
     init( cur );
 }
 OTaskEditor::OTaskEditor( const OTodo& to)
-    : QDialog(0, 0, TRUE ) {
+    : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
     init();
     init( to );
 }
@@ -40,14 +40,14 @@ OTodo OTaskEditor::todo()const{
     OTodo to;
     to.setUid(m_uid );
     m_overView->save( to );
-    m_adv->save( to );
+    m_stat->save( to );
     to.setRecurrence( m_rec->recurrence() );
 
     return to;
 }
 void OTaskEditor::load(const OTodo& to) {
     m_overView->load( to );
-    m_adv->load( to );
+    m_stat->load( to );
     m_rec->setRecurrence( to.recurrence(), to.hasDueDate() ? to.dueDate() : QDate::currentDate() );
 }
 void OTaskEditor::init() {
@@ -61,10 +61,10 @@ void OTaskEditor::init() {
      * Add the Widgets
      */
     m_overView = new TaskEditorOverView( m_tab );
-    m_tab->addTab( m_overView, "TodoList", tr("Overview") );
+    m_tab->addTab( m_overView, "todo/info", tr("Information") );
 
-    m_adv = new TaskEditorAdvanced( m_tab );
-    m_tab->addTab( m_adv, "todo/advanced", tr("Advanced") );
+    m_stat = new TaskEditorStatus( m_tab );
+    m_tab->addTab( m_stat, "TodoList", tr("Status") );
 
     m_alarm = new TaskEditorAlarms( m_tab );
     m_tab->addTab( m_alarm, "todo/alarm", tr("Alarms") );
@@ -77,7 +77,7 @@ void OTaskEditor::init() {
     m_tab->addTab( lbl, "todo/xref", tr("X-Ref") );
 
     m_rec = new ORecurranceWidget( true, QDate::currentDate(), this );
-    m_tab->addTab( m_rec, "repeat", tr("Recurrance") );
+    m_tab->addTab( m_rec, "repeat", tr("Recurrence") );
 
 
     /* signal and slots */
@@ -85,7 +85,7 @@ void OTaskEditor::init() {
             m_rec, SLOT(setEnabled(bool) ) );
 
     /* connect due date changed to the recurrence tab */
-    connect(m_overView, SIGNAL(dueDateChanged(const QDate&) ),
+    connect(m_stat, SIGNAL(dueDateChanged(const QDate&) ),
             m_rec, SLOT(setStartDate(const QDate& ) ) );
 
 

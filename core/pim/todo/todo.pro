@@ -18,7 +18,7 @@ HEADERS	= smalltodo.h \
 	  quickeditimpl.h \
 	  otaskeditor.h \
 	  taskeditoroverview.h \
-	  taskeditoradvanced.h \
+	  taskeditorstatus.h \
 	  taskeditoralarms.h
 
 SOURCES	= smalltodo.cpp \
@@ -38,7 +38,7 @@ SOURCES	= smalltodo.cpp \
 	  quickedit.cpp \
 	  otaskeditor.cpp \
 	  taskeditoroverview.cpp \
-	  taskeditoradvanced.cpp \
+	  taskeditorstatus.cpp \
 	  taskeditoralarms.cpp
 
 TARGET		= todolist

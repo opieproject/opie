@@ -39,7 +39,7 @@
 #include <qcombobox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpushbutton.h>
+#include <qmultilineedit.h>
 #include <qwhatsthis.h>
 
 TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFlags fl )
@@ -55,10 +55,6 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
         m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
     }
 
-    QDate curDate = QDate::currentDate();
-    m_start = m_comp = m_due = curDate;
-    QString curDateStr = TimeString::longDateString( curDate );
-
     QVBoxLayout *vb = new QVBoxLayout( this );
 
     QScrollView *sv = new QScrollView( this );
@@ -69,108 +65,64 @@ TaskEditorOverView::TaskEditorOverView( QWidget* parent,  const char* name, WFla
     QWidget *container = new QWidget( sv->viewport() );
     sv->addChild( container );
 
-    QGridLayout *layout = new QGridLayout( container, 10, 2, 4, 4 ); 
+    QGridLayout *layout = new QGridLayout( container, 7, 2, 4, 4 ); 
 
-    // Summary
-    QLabel *label = new QLabel( tr( "Summary:" ), container );
+    // Description
+    QLabel *label = new QLabel( tr( "Description:" ), container );
     layout->addWidget( label, 0, 0 );
-    cmbSum = new QComboBox( TRUE, container );
-    cmbSum->insertItem( tr( "Complete " ) );
-    cmbSum->insertItem( tr( "Work on " ) );
-    cmbSum->insertItem( tr( "Buy " ) );
-    cmbSum->insertItem( tr( "Organize " ) );
-    cmbSum->insertItem( tr( "Get " ) );
-    cmbSum->insertItem( tr( "Update " ) );
-    cmbSum->insertItem( tr( "Create " ) );
-    cmbSum->insertItem( tr( "Plan " ) );
-    cmbSum->insertItem( tr( "Call " ) );
-    cmbSum->insertItem( tr( "Mail " ) );
-    cmbSum->clearEdit();
-    layout->addMultiCellWidget( cmbSum, 1, 1, 0, 1 );
+    QWhatsThis::add( label, tr( "Enter brief description of the task here." ) );
+    cmbDesc = new QComboBox( TRUE, container );
+    cmbDesc->insertItem( tr( "Complete " ) );
+    cmbDesc->insertItem( tr( "Work on " ) );
+    cmbDesc->insertItem( tr( "Buy " ) );
+    cmbDesc->insertItem( tr( "Organize " ) );
+    cmbDesc->insertItem( tr( "Get " ) );
+    cmbDesc->insertItem( tr( "Update " ) );
+    cmbDesc->insertItem( tr( "Create " ) );
+    cmbDesc->insertItem( tr( "Plan " ) );
+    cmbDesc->insertItem( tr( "Call " ) );
+    cmbDesc->insertItem( tr( "Mail " ) );
+    cmbDesc->clearEdit();
+    layout->addMultiCellWidget( cmbDesc, 1, 1, 0, 1 );
+    QWhatsThis::add( cmbDesc, tr( "Enter brief description of the task here." ) );
 
     // Priority
     label = new QLabel( tr( "Priority:" ), container );
     layout->addWidget( label, 2, 0 );
-    cmbPrio = new QComboBox( FALSE, container );
-    cmbPrio->setMinimumHeight( 26 );
-    cmbPrio->insertItem( m_pic_priority[ 0 ], tr( "Very High" ) );
-    cmbPrio->insertItem( m_pic_priority[ 1 ], tr( "High" ) );
-    cmbPrio->insertItem( m_pic_priority[ 2 ], tr( "Normal" ) );
-    cmbPrio->insertItem( m_pic_priority[ 3 ], tr( "Low" ) );
-    cmbPrio->insertItem( m_pic_priority[ 4 ], tr( "Very Low" ) );
-    cmbPrio->setCurrentItem( 2 );
-    layout->addWidget( cmbPrio, 2, 1 );
+    QWhatsThis::add( label, tr( "Select priority of task here." ) );
+    cmbPriority = new QComboBox( FALSE, container );
+    cmbPriority->setMinimumHeight( 26 );
+    cmbPriority->insertItem( m_pic_priority[ 0 ], tr( "Very High" ) );
+    cmbPriority->insertItem( m_pic_priority[ 1 ], tr( "High" ) );
+    cmbPriority->insertItem( m_pic_priority[ 2 ], tr( "Normal" ) );
+    cmbPriority->insertItem( m_pic_priority[ 3 ], tr( "Low" ) );
+    cmbPriority->insertItem( m_pic_priority[ 4 ], tr( "Very Low" ) );
+    cmbPriority->setCurrentItem( 2 );
+    layout->addWidget( cmbPriority, 2, 1 );
+    QWhatsThis::add( cmbPriority, tr( "Select priority of task here." ) );
 
     // Category
     label = new QLabel( tr( "Category:" ), container );
     layout->addWidget( label, 3, 0 );
-    comboCategory = new CategorySelect( container );
-    layout->addWidget( comboCategory, 3, 1 );
+    QWhatsThis::add( label, tr( "Select category to organize this task with." ) );
+    cmbCategory = new CategorySelect( container );
+    layout->addWidget( cmbCategory, 3, 1 );
+    QWhatsThis::add( cmbCategory, tr( "Select category to organize this task with." ) );
 
-    // Recurrance
-    CheckBox7 = new QCheckBox( tr( "Recurring task" ), container );
-    layout->addMultiCellWidget( CheckBox7, 4, 4, 0, 1 );
-    connect( CheckBox7, SIGNAL(clicked() ), this, SLOT( slotRecClicked() ) );
+    // Recurrence
+    ckbRecurrence = new QCheckBox( tr( "Recurring task" ), container );
+    layout->addMultiCellWidget( ckbRecurrence, 4, 4, 0, 1 );
+    QWhatsThis::add( ckbRecurrence, tr( "Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab." ) );
+    connect( ckbRecurrence, SIGNAL(clicked() ), this, SLOT( slotRecClicked() ) );
 
-    QSpacerItem *spacer = new QSpacerItem( 5, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding );
-    layout->addItem( spacer, 5, 0 );
-
-    // Start date
-    ckbStart = new QCheckBox( tr( "Start Date:" ), container );
-    layout->addWidget( ckbStart, 6, 0 );
-    connect( ckbStart, SIGNAL( clicked() ), this, SLOT( slotStartChecked() ) );
-    btnStart = new QPushButton( curDateStr, container );
-    btnStart->setEnabled( FALSE );
-    layout->addWidget( btnStart, 6, 1 );
-	
-    QPopupMenu *popup = new QPopupMenu( this );
-    m_startBook = new DateBookMonth( popup, 0, TRUE );
-    popup->insertItem( m_startBook );
-    btnStart->setPopup( popup );
-    connect( m_startBook, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( slotStartChanged( int, int, int ) ) );
-        
-    // Due date
-    ckbDue = new QCheckBox( tr( "Due Date:" ), container );
-    layout->addWidget( ckbDue, 7, 0 );
-    connect( ckbDue, SIGNAL( clicked() ), this, SLOT( slotDueChecked() ) );
-    btnDue = new QPushButton( curDateStr, container );
-    btnDue->setEnabled( FALSE );
-    layout->addWidget( btnDue, 7, 1 );
-
-    popup = new QPopupMenu( this );
-    m_dueBook = new DateBookMonth( popup, 0, TRUE );
-    popup->insertItem( m_dueBook );
-    btnDue->setPopup( popup );
-    connect( m_dueBook, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( slotDueChanged( int, int, int ) ) );
-    
-    // Progress
-    label = new QLabel( tr( "Progress:" ), container );
-    layout->addWidget( label, 8, 0 );
-    cmbProgress = new QComboBox( FALSE, container );
-    cmbProgress->insertItem( tr( "0 %" ) );
-    cmbProgress->insertItem( tr( "20 %" ) );
-    cmbProgress->insertItem( tr( "40 %" ) );
-    cmbProgress->insertItem( tr( "60 %" ) );
-    cmbProgress->insertItem( tr( "80 %" ) );
-    cmbProgress->insertItem( tr( "100 %" ) );
-    layout->addWidget( cmbProgress, 8, 1 );
-
-    // Completed
-    ckbComp = new QCheckBox( tr( "Completed:" ), container );
-    layout->addWidget( ckbComp, 9, 0 );
-    connect( ckbComp, SIGNAL( clicked() ), this, SLOT( slotCompChecked() ) );
-    btnComp = new QPushButton( curDateStr, container );
-    btnComp->setEnabled( FALSE );
-    layout->addWidget( btnComp, 9, 1 );
-
-    popup = new QPopupMenu( this );
-    m_compBook = new DateBookMonth( popup, 0, TRUE );
-    popup->insertItem( m_compBook );
-    btnComp->setPopup( popup );
-    connect( m_compBook, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( slotCompChanged( int, int, int ) ) );
+    // Notes
+    label = new QLabel( tr( "Notes:" ), container );
+    layout->addWidget( label, 5, 0 );
+    QWhatsThis::add( label, tr( "Enter any additional information about this task here." ) );
+    mleNotes = new QMultiLineEdit( this );
+    mleNotes->setWordWrap( QMultiLineEdit::WidgetWidth );
+    layout->addMultiCellWidget( mleNotes, 6, 6, 0, 1 );
+    QWhatsThis::add( mleNotes, tr( "Enter any additional information about this task here." ) );
 }
 
 TaskEditorOverView::~TaskEditorOverView()
@@ -179,136 +131,47 @@ TaskEditorOverView::~TaskEditorOverView()
 
 void TaskEditorOverView::load( const OTodo& todo )
 {
-    /*
-     * now that we're 'preloaded' we
-     * need to disable the buttons
-     * holding the dat
-     */
-    btnDue->setEnabled( FALSE );
-    btnComp->setEnabled( FALSE );
-    btnStart->setEnabled( FALSE );
+    // Description
+    cmbDesc->insertItem( todo.summary(), 0 );
+    cmbDesc->setCurrentItem( 0 );
 
-    /*
-     * get some basic dateinfos for now
-     */
-    QDate date = QDate::currentDate();
-    QString str = TimeString::longDateString( date );
+    // Priority
+    cmbPriority->setCurrentItem( todo.priority() - 1 );
 
-    CheckBox7->setChecked( todo.recurrence().doesRecur() );
+    // Category
+    cmbCategory->setCategories( todo.categories(), "Todo List", tr( "Todo List" ) );
+
+    // Recurrence
+    ckbRecurrence->setChecked( todo.recurrence().doesRecur() );
     emit recurranceEnabled( todo.recurrence().doesRecur() );
 
-    ckbStart->setChecked( todo.hasStartDate() );
-    btnStart->setEnabled( todo.hasStartDate() );
-    if ( todo.hasStartDate() )
-    {
-        m_start = todo.startDate();
-        btnStart->setText( TimeString::longDateString( m_start ) );
-    }
-    else
-        btnStart->setText( str );
+    // Notes
+    mleNotes->setText( todo.description() );
 
-    ckbComp->setChecked( todo.hasCompletedDate() );
-    btnComp->setEnabled( todo.hasCompletedDate() );
-    if ( todo.hasCompletedDate() )
-    {
-        m_comp = todo.completedDate();
-        btnComp->setText( TimeString::longDateString( m_comp ) );
-    }
-    else
-        btnComp->setText( str );
-
-    cmbProgress->setCurrentItem( todo.progress() / 20 );
-    cmbSum->insertItem( todo.summary(), 0 );
-    cmbSum->setCurrentItem( 0 );
-
-    ckbDue->setChecked( todo.hasDueDate() );
-    btnDue->setText( TimeString::longDateString( todo.dueDate() ) );
-    btnDue->setEnabled( todo.hasDueDate() );
-    m_due = todo.dueDate();
-
-    cmbPrio->setCurrentItem( todo.priority() - 1 );
-    ckbComp->setChecked( todo.isCompleted() );
-
-    comboCategory->setCategories( todo.categories(), "Todo List", tr( "Todo List" ) );
 }
 
-void TaskEditorOverView::save( OTodo &to )
+void TaskEditorOverView::save( OTodo &todo )
 {
-    /* a invalid date */
-    QDate inval;
-    /* save our info back */
+    // Description
+    todo.setSummary( cmbDesc->currentText() );
 
-    /* due date */
-    if ( ckbDue->isChecked() )
+    // Priority
+    todo.setPriority( cmbPriority->currentItem() + 1 );
+
+    // Category
+    if ( cmbCategory->currentCategory() != -1 )
     {
-        to.setDueDate( m_due );
-        to.setHasDueDate( true );
+        QArray<int> arr = cmbCategory->currentCategories();
+        todo.setCategories( arr );
     }
-    else
-        to.setHasDueDate( false );
 
-    /* start date */
-    if ( ckbStart->isChecked() )
-    {
-        to.setStartDate( m_start );
-    }
-    else
-        to.setStartDate( inval );
+    // Recurrence - don't need to save here...    
 
-    /* comp date */
-    if ( ckbComp->isChecked() )
-    {
-        to.setCompletedDate( m_comp );
-    }
-    else
-        to.setCompletedDate( inval );
-
-
-    if ( comboCategory->currentCategory() != -1 )
-    {
-        QArray<int> arr = comboCategory->currentCategories();
-        to.setCategories( arr );
-    }
-    to.setPriority( cmbPrio->currentItem() + 1 );
-    to.setCompleted( ckbComp->isChecked() );
-    to.setSummary( cmbSum->currentText() );
-    to.setProgress( cmbProgress->currentItem() * 20 );
+    // Notes
+    todo.setDescription( mleNotes->text() );
 }
 
 void TaskEditorOverView::slotRecClicked()
 {
-    emit recurranceEnabled( CheckBox7->isChecked() );
-}
-
-void TaskEditorOverView::slotStartChecked()
-{
-    btnStart->setEnabled( ckbStart->isChecked() );
-}
-
-void TaskEditorOverView::slotCompChecked()
-{
-    btnComp->setEnabled( ckbComp->isChecked() );
-}
-
-void TaskEditorOverView::slotDueChecked()
-{
-    btnDue->setEnabled( ckbDue->isChecked() );
-}
-
-void TaskEditorOverView::slotStartChanged(int y, int m, int d)
-{
-    m_start.setYMD( y, m, d );
-    btnStart->setText( TimeString::longDateString( m_start ) );
-}
-
-void TaskEditorOverView::slotCompChanged(int y, int m, int d)
-{
-    m_comp.setYMD( y, m, d );
-    btnComp->setText( TimeString::longDateString( m_comp ) );
-}
-
-void TaskEditorOverView::slotDueChanged(int y, int m, int d)
-{
-    m_due.setYMD( y, m, d );
-    btnDue->setText( TimeString::longDateString( m_due ) );
+    emit recurranceEnabled( ckbRecurrence->isChecked() );
 }
