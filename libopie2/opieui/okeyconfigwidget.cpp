@@ -504,6 +504,12 @@ void OKeyConfigManager::save() {
         if ( (*it).isEmpty() )
             continue;
         OKeyPair pair = (*it).keyPair();
+        OKeyPair deft = (*it).defaultKeyPair();
+        /* don't write if it is the default setting */
+        if (  (pair.keycode() == deft.keycode()) &&
+              (pair.modifier()== deft.modifier() ) )
+            return;
+
         m_conf->writeEntry((*it).configKey()+"key", pair.keycode()  );
         m_conf->writeEntry((*it).configKey()+"mod", pair.modifier() );
     }
@@ -518,14 +524,45 @@ void OKeyConfigManager::save() {
  * Make sure you call e->ignore if you don't want to handle this event
  */
 OKeyConfigItem OKeyConfigManager::handleKeyEvent( QKeyEvent* e ) {
-    OKeyConfigItem::List _keyList =  keyList( e->key() );
+   /*
+    * Fix Up issues with Qt/E, my keybard, and virtual input
+    * methods
+    * First my Keyboard delivers 256,512,1024 for shift/ctrl/alt instead of the button state
+    * Also key() on virtual inputmethods are zero and only ascii. We need to fix upper and lower
+    * case ascii
+    */
+    int key = e->key();
+    int mod = e->state();
+
+/*
+ * virtual keyboard
+ * else change the button mod only
+ */
+    qWarning( "handleKeyEvent...." );
+    if ( key == 0 ) {
+        key = e->ascii();
+        if (  key > 96 && key < 123)
+            key -=  32;
+    }else{
+        int new_mod = 0;
+        if ( mod & 256 )
+            new_mod |= Qt::ShiftButton;
+        else if ( mod & 512 )
+            new_mod |= Qt::AltButton;
+        else if ( mod & 1024 )
+            new_mod |= Qt::ControlButton;
+
+        mod = new_mod == 0? mod : new_mod;
+    }
+
+    OKeyConfigItem::List _keyList =  keyList( key );
     if ( _keyList.isEmpty() )
         return OKeyConfigItem();
 
     OKeyConfigItem item;
     for ( OKeyConfigItem::List::Iterator it = _keyList.begin(); it != _keyList.end();
           ++it ) {
-        if ( (*it).keyPair().modifier() == e->state() ) {
+        if ( (*it).keyPair().modifier() == mod ) {
             item = *it;
             break;
         }
