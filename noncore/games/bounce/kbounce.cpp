@@ -29,7 +29,7 @@
 
 KJezzball::KJezzball() : QMainWindow(0), m_gameWidget( 0 )
 {
-	setCaption(tr("ZBounce"));
+	setCaption(tr("Bounce"));
 	// setup variables
 	m_game.level = 1;
 	m_game.score = 0;
@@ -100,7 +100,7 @@ void KJezzball::newGame()
 		m_game.level = 1;
 		m_game.score = 0;
 
-		setCaption(tr("ZBounce Level %1").arg(m_game.level));
+		setCaption(tr("Bounce Level %1").arg(m_game.level));
 		ScoreLabel->setText( tr( "Score: %1" ).arg(m_game.score) );
 
 		// start new game
