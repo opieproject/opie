@@ -19,6 +19,7 @@ copyright Sun 02-17-2002 22:28:23 L. J. Potter ljp@llornkcor.com
 #include <qdialog.h>
 #include <qfile.h>
 #include <qdir.h>
+#include <qregexp.h>
 #include <qstringlist.h>
 #include <qlabel.h>
 #include <qstring.h>
