@@ -1,0 +1,9 @@
+Files: bin/buttonsettings apps/Settings/Button.desktop pics/buttonsettings/*.png
+Priority: optional
+Section: opie/settings
+Maintainer: Robert Griebl <sandman@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Device-buttons settings dialog
+ For the Opie environment.
