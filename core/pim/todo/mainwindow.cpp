@@ -274,7 +274,7 @@ void TodoWindow::slotNew()
     e.showMaximized();
 #endif
     int ret = e.exec();
-    qWarning("finished" );
+//    qWarning("finished" );
     if ( ret == QDialog::Accepted ) {
 	table->setPaintingEnabled( false );
         todo = e.todoEntry();

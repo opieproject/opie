@@ -352,7 +352,7 @@ ToDoEvent TodoTable::currentEntry() const
 void TodoTable::replaceCurrentEntry( const ToDoEvent &todo, bool fromTableItem )
 {
     int row = currentRow();
-    updateJournal( todo, ACTION_REPLACE, row );
+    updateJournal( todo, ACTION_REPLACE);
 
     if ( !fromTableItem ) {
 	journalFreeReplaceEntry( todo, row );
@@ -375,7 +375,7 @@ void TodoTable::removeCurrentEntry()
     oldTodo->setPriority( static_cast<ComboItem*>(item(row, 1))->text().toInt() );
     realignTable( row );
     updateVisible();
-    updateJournal( *oldTodo, ACTION_REMOVE, row );
+    updateJournal( *oldTodo, ACTION_REMOVE);
     delete oldTodo;
 }
 
@@ -411,11 +411,11 @@ bool TodoTable::save( const QString &fn )
 
 void TodoTable::load( const QString &fn )
 {
-    loadFile( fn, false );
-    if ( QFile::exists(journalFileName()) ) {
-	applyJournal(  );
-	save( fn );
-    }
+  if ( QFile::exists(journalFileName()) ) {
+    applyJournal();
+    QFile::remove(journalFileName() );
+  }
+    loadFile( fn );
 //     QTable::sortColumn(2,TRUE,TRUE);
 //     QTable::sortColumn(1,TRUE,TRUE);
     QTable::sortColumn(0,TRUE,TRUE);
@@ -501,8 +501,8 @@ void TodoTable::clear()
 {
     for ( QMap<CheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
 	  it != todoList.end(); ++it ) {
-	ToDoEvent *todo = *it;
-	updateJournal( todo, ACTION_REMOVE, 0 );
+	ToDoEvent *todo = it.data();
+	updateJournal( *todo, ACTION_REMOVE );
 	delete todo;
     }
     todoList.clear();
@@ -537,7 +537,7 @@ void TodoTable::slotCheckPriority(int row, int col )
 }
 
 
-void TodoTable::updateJournal( const ToDoEvent &todo, journal_action action, int row )
+void TodoTable::updateJournal( const ToDoEvent &todo, journal_action action )
 {
     QFile f( journalFileName() );
     if ( !f.open(IO_WriteOnly|IO_Append) )
@@ -577,7 +577,7 @@ void TodoTable::rowHeightChanged( int row )
 	QTable::rowHeightChanged( row );
 }
 
-void TodoTable::loadFile( const QString &strFile, bool fromJournal )
+void TodoTable::loadFile( const QString &/*we use the standard*/ )
 {
 
   QList<ToDoEvent> list;
@@ -754,15 +754,35 @@ void TodoTable::applyJournal()
     XMLElement *root = XMLElement::load(journalFileName()+ "_new");
     XMLElement *el = root->firstChild();
     el = el->firstChild();
+    ToDoDB tododb; // allready loaded ;)
+    bool ok;
+    int action;
+    QString dummy;
     while( el ){
-      qWarning("journal: %s %s", el->attribute("Uid" ).latin1(), el->tagName().latin1() );
-      doApply( el );
+      dummy = el->attribute("Action" );
+      action = dummy.toInt(&ok );
+      ToDoEvent ev = xmlToEvent( el );
+      if(ok ){
+	switch( action){
+	case ACTION_ADD:
+	  tododb.addEvent(ev );
+	  break;
+	case ACTION_REMOVE:
+	  tododb.removeEvent( ev );
+	  break;
+	case ACTION_REPLACE:
+	  tododb.replaceEvent( ev );
+	  break;
+	}
+      }
       el = el->nextChild();
     }
     QFile::remove(journalFileName()+ "_new" );
+    tododb.save();
   }
 }
 // check Action and decide
+/*
 void TodoTable::doApply(XMLElement *el )
 {
   QString dummy;
@@ -784,6 +804,7 @@ void TodoTable::doApply(XMLElement *el )
     }
   }
 }
+*/
 namespace {
 static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category )
 {
@@ -863,7 +884,6 @@ static ToDoEvent xmlToEvent( XMLElement *element )
   dummy = element->attribute("Uid" );
   dumInt = dummy.toInt(&ok );
   if(ok ) event.setUid( dumInt );
-  
   return event;
 }
 

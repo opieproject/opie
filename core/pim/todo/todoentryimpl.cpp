@@ -47,7 +47,6 @@ NewTaskDialog::NewTaskDialog( const ToDoEvent& task, QWidget *parent,
     : NewTaskDialogBase( parent, name, modal, fl ),
       todo( task )
 {
-    qWarning("setting category" );
     todo.setCategories( task.allCategories() );
     if ( todo.hasDate() )
 	date = todo.date();
@@ -104,7 +103,6 @@ void NewTaskDialog::init()
  */
 NewTaskDialog::~NewTaskDialog()
 {
-    qWarning("d'tor" );
     // no need to delete child widgets, Qt does it all for us
 }
 void NewTaskDialog::dateChanged( int y, int m, int d )
@@ -118,19 +116,16 @@ void NewTaskDialog::dateChanged( int y, int m, int d )
 
 ToDoEvent NewTaskDialog::todoEntry()
 {
-  qWarning("todoEntry()" );
   if( checkDate->isChecked() ){
     todo.setDate( date );
     todo.setHasDate( true );
   }else{
     todo.setHasDate( false );
   }
-  qWarning("todoEntry::category()" );
   if ( comboCategory->currentCategory() != -1 ) {
     QArray<int> arr = comboCategory->currentCategories();
     QStringList list;
     list = QStringList::split(";", Qtopia::Record::idsToString( arr )) ;
-    qWarning("saving category");
     todo.setCategories( list );
   }
   todo.setPriority( comboPriority->currentItem() + 1 );
@@ -148,7 +143,6 @@ ToDoEvent NewTaskDialog::todoEntry()
 
 void NewTaskDialog::accept()
 {
-    qWarning("accept" );
     QString strText = txtTodo->text();
     if ( strText.isEmpty() ) {
        // hmm... just decline it then, the user obviously didn't care about it

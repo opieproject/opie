@@ -1,4 +1,4 @@
--fix the journal
+-fix the journal (wip )
 -fix day wrapping update all DueDateItems
 -when checking the C. box update the deadline
 -TodoLabel : public TextView

@@ -151,13 +151,12 @@ private:
     void viewportPaintEvent( QPaintEvent * );
     void internalAddEntries( QList<ToDoEvent> &list);
     inline void insertIntoTable( ToDoEvent *todo, int row );
-    void updateJournal( const ToDoEvent &todo, journal_action action, int row = -1);
+    void updateJournal( const ToDoEvent &todo, journal_action action);
     void mergeJournal();
     void journalFreeReplaceEntry( const ToDoEvent &todo, int row );
     void journalFreeRemoveEntry( int row );
     inline void realignTable( int row );
-    void loadFile( const QString &strFile, bool fromJournal = false );
-    void doApply(XMLElement *el );
+    void loadFile( const QString &strFile);
 
 private slots:
     void slotClicked( int row, int col, int button, const QPoint &pos );
