@@ -1,5 +1,7 @@
 #include <qmessagebox.h>
 #include <qaction.h>
+#include <qapplication.h>
+
 #include <qpe/qcopenvelope_qws.h>
 
 #include "mailstatusbar.h"
@@ -37,9 +39,11 @@ MainWindow::MainWindow(QWidget *parent, const char *name, WFlags fl)
 
 	// Added by Stefan Eilers to allow starting by addressbook..
 #if !defined(QT_NO_COP) 
-	QCopChannel *addressChannel = new QCopChannel("QPE/Application/mail" , this );
-	connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
-		 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
+// 	QCopChannel *addressChannel = new QCopChannel("QPE/Application/mail" , this );
+// 	connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
+// 		 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
+	connect( qApp, SIGNAL( appMessage( const QCString&, const QByteArray& ) ),
+	         this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
 #endif
 }
 
