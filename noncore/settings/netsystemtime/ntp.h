@@ -11,10 +11,10 @@ class QCopChannel;
 
 class Ntp : public SetDateTime
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    Ntp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+  Ntp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Ntp();
 
 public slots:
@@ -45,6 +45,7 @@ private slots:
 	  void preditctTime();
 	  void slotCheckNtp(int);
 	  void setPredictTime();
+	  void showAdvancedFeatures(bool);
 	  void slotProbeNtpServer();
 	  void slotNtpDelayChanged(int);
 };

@@ -1,13 +1,14 @@
 /****************************************************************************
 ** Form implementation generated from reading ui file 'ntpbase.ui'
 **
-** Created: Mon Oct 21 21:06:08 2002
+** Created: Mon Oct 21 21:32:47 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
 ****************************************************************************/
 #include "ntpbase.h"
 
+#include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qframe.h>
 #include <qlabel.h>
@@ -182,9 +183,9 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     FrameSettings = new QFrame( TabSettings, "FrameSettings" );
     FrameSettings->setFrameShape( QFrame::StyledPanel );
     FrameSettings->setFrameShadow( QFrame::Raised );
-    FrameSettingsLayout = new QGridLayout( FrameSettings ); 
-    FrameSettingsLayout->setSpacing( 11 );
-    FrameSettingsLayout->setMargin( 3 );
+    FrameSettingsLayout = new QVBoxLayout( FrameSettings ); 
+    FrameSettingsLayout->setSpacing( 6 );
+    FrameSettingsLayout->setMargin( 11 );
 
     Layout6 = new QGridLayout; 
     Layout6->setSpacing( 6 );
@@ -210,38 +211,19 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     ComboNtpSrv->setEditable( TRUE );
 
     Layout6->addWidget( ComboNtpSrv, 0, 1 );
+    FrameSettingsLayout->addLayout( Layout6 );
+    QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum );
+    FrameSettingsLayout->addItem( spacer_2 );
 
-    FrameSettingsLayout->addLayout( Layout6, 0, 0 );
-    QSpacerItem* spacer_2 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
-    FrameSettingsLayout->addItem( spacer_2, 3, 0 );
+    CheckBoxAdvSettings = new QCheckBox( FrameSettings, "CheckBoxAdvSettings" );
+    CheckBoxAdvSettings->setText( tr( "Advanced features" ) );
+    FrameSettingsLayout->addWidget( CheckBoxAdvSettings );
+    QSpacerItem* spacer_3 = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
+    FrameSettingsLayout->addItem( spacer_3 );
 
-    Layout7 = new QGridLayout; 
-    Layout7->setSpacing( 6 );
-    Layout7->setMargin( 0 );
-
-    TextLabel1_2 = new QLabel( FrameSettings, "TextLabel1_2" );
-    TextLabel1_2->setText( tr( "Insure a delay of" ) );
-
-    Layout7->addWidget( TextLabel1_2, 0, 0 );
-
-    TextLabel2 = new QLabel( FrameSettings, "TextLabel2" );
-    TextLabel2->setText( tr( "minutes until" ) );
-
-    Layout7->addWidget( TextLabel2, 0, 2 );
-
-    TextLabel3_3 = new QLabel( FrameSettings, "TextLabel3_3" );
-    TextLabel3_3->setText( tr( "a new NTP lookup will be used to predict the time." ) );
-    TextLabel3_3->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft ) );
-
-    Layout7->addMultiCellWidget( TextLabel3_3, 1, 1, 0, 2 );
-
-    SpinBoxMinLookupDelay = new QSpinBox( FrameSettings, "SpinBoxMinLookupDelay" );
-    SpinBoxMinLookupDelay->setMaxValue( 9999999 );
-    SpinBoxMinLookupDelay->setMinValue( 42 );
-
-    Layout7->addWidget( SpinBoxMinLookupDelay, 0, 1 );
-
-    FrameSettingsLayout->addLayout( Layout7, 2, 0 );
+    Line1 = new QFrame( FrameSettings, "Line1" );
+    Line1->setFrameStyle( QFrame::HLine | QFrame::Sunken );
+    FrameSettingsLayout->addWidget( Line1 );
 
     Layout7_2 = new QGridLayout; 
     Layout7_2->setSpacing( 6 );
@@ -265,12 +247,42 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     Layout7_2->addMultiCellWidget( TextLabel3_3_2, 1, 1, 0, 2 );
 
     SpinBoxNtpDelay = new QSpinBox( FrameSettings, "SpinBoxNtpDelay" );
+    SpinBoxNtpDelay->setWrapping( TRUE );
     SpinBoxNtpDelay->setMaxValue( 9999999 );
-    SpinBoxNtpDelay->setMinValue( 0 );
+    SpinBoxNtpDelay->setMinValue( 1 );
+    SpinBoxNtpDelay->setValue( 1440 );
 
     Layout7_2->addWidget( SpinBoxNtpDelay, 0, 1 );
+    FrameSettingsLayout->addLayout( Layout7_2 );
 
-    FrameSettingsLayout->addLayout( Layout7_2, 1, 0 );
+    Layout7 = new QGridLayout; 
+    Layout7->setSpacing( 6 );
+    Layout7->setMargin( 0 );
+
+    TextLabel1_2 = new QLabel( FrameSettings, "TextLabel1_2" );
+    TextLabel1_2->setText( tr( "Insure a delay of" ) );
+
+    Layout7->addWidget( TextLabel1_2, 0, 0 );
+
+    TextLabel2 = new QLabel( FrameSettings, "TextLabel2" );
+    TextLabel2->setText( tr( "minutes until" ) );
+
+    Layout7->addWidget( TextLabel2, 0, 2 );
+
+    TextLabel3_3 = new QLabel( FrameSettings, "TextLabel3_3" );
+    TextLabel3_3->setText( tr( "a new NTP lookup will be used to predict the time." ) );
+    TextLabel3_3->setAlignment( int( QLabel::WordBreak | QLabel::AlignVCenter | QLabel::AlignLeft ) );
+
+    Layout7->addMultiCellWidget( TextLabel3_3, 1, 1, 0, 2 );
+
+    SpinBoxMinLookupDelay = new QSpinBox( FrameSettings, "SpinBoxMinLookupDelay" );
+    SpinBoxMinLookupDelay->setWrapping( TRUE );
+    SpinBoxMinLookupDelay->setMaxValue( 9999999 );
+    SpinBoxMinLookupDelay->setMinValue( 42 );
+    SpinBoxMinLookupDelay->setValue( 720 );
+
+    Layout7->addWidget( SpinBoxMinLookupDelay, 0, 1 );
+    FrameSettingsLayout->addLayout( Layout7 );
 
     TabSettingsLayout->addWidget( FrameSettings, 0, 0 );
 
@@ -288,14 +300,12 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     PushButtonSetManualTime->setText( tr( "Set time" ) );
     tabManualSetTimeLayout->addWidget( PushButtonSetManualTime );
 
+
     TabWidgetMain->insertTab( tabMain, tr( "Main" ) );
-
     TabWidgetMain->insertTab( tabManualSetTime, tr( "Manual" ) );
-
     TabWidgetMain->insertTab( TabSettings, tr( "Settings" ) );
-
-    TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
     TabWidgetMain->insertTab( tabPredict, tr( "Predict" ) );
+    TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
 
     NtpBaseLayout->addWidget( TabWidgetMain, 0, 0 );
 }

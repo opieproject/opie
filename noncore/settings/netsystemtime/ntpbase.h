@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form interface generated from reading ui file 'ntpbase.ui'
 **
-** Created: Mon Oct 21 21:05:47 2002
+** Created: Mon Oct 21 21:32:43 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -14,6 +14,7 @@
 class QVBoxLayout; 
 class QHBoxLayout; 
 class QGridLayout; 
+class QCheckBox;
 class QComboBox;
 class QFrame;
 class QLabel;
@@ -60,14 +61,16 @@ public:
     QLabel* TextLabel2_2;
     QLabel* TextLabel1_3;
     QComboBox* ComboNtpSrv;
-    QLabel* TextLabel1_2;
-    QLabel* TextLabel2;
-    QLabel* TextLabel3_3;
-    QSpinBox* SpinBoxMinLookupDelay;
+    QCheckBox* CheckBoxAdvSettings;
+    QFrame* Line1;
     QLabel* TextLabel1_2_2;
     QLabel* TextLabel2_3;
     QLabel* TextLabel3_3_2;
     QSpinBox* SpinBoxNtpDelay;
+    QLabel* TextLabel1_2;
+    QLabel* TextLabel2;
+    QLabel* TextLabel3_3;
+    QSpinBox* SpinBoxMinLookupDelay;
     QWidget* tabManualSetTime;
     QFrame* FrameSetTime;
     QPushButton* PushButtonSetManualTime;
@@ -82,10 +85,10 @@ protected:
     QGridLayout* Layout9;
     QHBoxLayout* Layout11;
     QGridLayout* TabSettingsLayout;
-    QGridLayout* FrameSettingsLayout;
+    QVBoxLayout* FrameSettingsLayout;
     QGridLayout* Layout6;
-    QGridLayout* Layout7;
     QGridLayout* Layout7_2;
+    QGridLayout* Layout7;
     QVBoxLayout* tabManualSetTimeLayout;
     bool event( QEvent* );
 };

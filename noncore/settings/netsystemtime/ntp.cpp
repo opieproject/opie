@@ -7,6 +7,9 @@
 #include <qsocket.h>
 #include <qlineedit.h>
 #include <qspinbox.h>
+#include <qcheckbox.h>
+#include <qtabwidget.h>
+#include <qlayout.h>
 #include <qmessagebox.h>
 #include <qmultilineedit.h>
 #include <opie/oprocess.h>
@@ -39,9 +42,15 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 
 	Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
-	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",41) );
-	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",42) );
+	SpinBoxMinLookupDelay->setValue( cfg.readNumEntry("minLookupDiff",720) );
+	SpinBoxNtpDelay->setValue( cfg.readNumEntry("ntpRefreshFreq",1440) );
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
+
+  bool advMode = cfg.readBoolEntry("advancedFeatures", false );
+  showAdvancedFeatures(advMode);
+  CheckBoxAdvSettings->setChecked( advMode );
+  connect( CheckBoxAdvSettings, SIGNAL( toggled( bool ) ),
+	   SLOT( showAdvancedFeatures( bool ) ) );
 
   makeChannel();
 
@@ -142,7 +151,7 @@ void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
 
 void  Ntp::ntpFinished(OProcess *p)
 {
-	qDebug("p->exitStatus() %i",p->exitStatus());
+  //	qDebug("p->exitStatus() %i",p->exitStatus());
 	if (p->exitStatus()!=0 || !p->normalExit())
  	{
     slotProbeNtpServer();
@@ -277,7 +286,7 @@ void Ntp::slotCheckNtp(int i)
     }
   }else{
 	  preditctTime();
-		ButtonSetTime->setText( tr("Set predicted time") );
+	  ButtonSetTime->setText( tr("Set predicted time: ")+predictedTime.toString() );
   	if (i>0)ntpOutPut(tr("Could not connect to server ")+getNtpServer());
   	connect( ButtonSetTime, SIGNAL(clicked()), SLOT(setPredictTime()) );
 	  connect( ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
@@ -286,7 +295,6 @@ void Ntp::slotCheckNtp(int i)
 
 void Ntp::slotProbeNtpServer()
 {
-	qDebug("Ntp::slotProbeNtpServer()");
 	ntpSock->connectToHost( getNtpServer() ,123);
 }
 
@@ -329,4 +337,31 @@ void Ntp::receive(const QCString &msg, const QByteArray &arg)
 void Ntp::setDocument(const QString &fileName)
 {
 
+}
+
+void Ntp::showAdvancedFeatures(bool advMode)
+{
+  if  (advMode) {
+    TabWidgetMain->addTab( tabPredict, tr( "Predict" ) );
+    TabWidgetMain->addTab( tabNtp, tr( "NTP" ) );
+    TextLabel1_2_2->show();
+    TextLabel2_3->show();
+    TextLabel3_3_2->show();
+    TextLabel1_2->show();
+    SpinBoxMinLookupDelay->show();
+    TextLabel2->show();
+    TextLabel3_3->show();
+    SpinBoxNtpDelay->show();
+  }else{
+    TabWidgetMain->removePage( tabPredict );
+    TabWidgetMain->removePage( tabNtp );
+    TextLabel1_2_2->hide();
+    TextLabel2_3->hide();
+    TextLabel3_3_2->hide();
+    TextLabel1_2->hide();
+    SpinBoxMinLookupDelay->hide();
+    TextLabel2->hide();
+    TextLabel3_3->hide();
+    SpinBoxNtpDelay->hide();
+  };
 }
