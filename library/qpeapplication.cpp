@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.44 2003-04-16 10:57:59 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.45 2003-04-19 22:19:11 harlekin Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -50,6 +50,7 @@
 #include <qevent.h>
 #include <qtooltip.h>
 #include <qsignal.h>
+#include <qmainwindow.h>
 #include "qpeapplication.h"
 #include "qpestyle.h"
 #include "styleinterface.h"
@@ -146,6 +147,12 @@ public:
 	}
 	static void show_mx(QWidget* mw, bool nomaximize)
 	{
+
+            // ugly hack, remove that later after finding a sane solution
+            if ( QPEApplication::desktop() ->width() >= 600 && ( mw->inherits("QMainWindow") || mw->isA("QMainWindow") ) )  {
+                ( (  QMainWindow* ) mw )->setUsesBigPixmaps( true );
+            }
+
 		if ( mw->layout() && mw->inherits("QDialog") ) {
 			QPEApplication::showDialog((QDialog*)mw, nomaximize);
 		}
@@ -508,7 +515,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	d = new QPEApplicationData;
 	d->loadTextCodecs();
 	d->loadImageCodecs();
-	int dw = desktop() ->width();
+       	int dw = desktop() ->width();
 
 	if ( dw < 200 ) {
 		setFont( QFont( "helvetica", 8 ) );
@@ -516,8 +523,8 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 		AppLnk::setBigIconSize( 28 );
 	}
 	else if ( dw > 600 ) {
-		setFont( QFont( "helvetica", 18 ) );
-		AppLnk::setSmallIconSize( 24 );
+                               setFont( QFont( "helvetica", 18 ) );
+                                AppLnk::setSmallIconSize( 24 );
 		AppLnk::setBigIconSize( 48 );
 	}
 	else if ( dw > 200 ) {
@@ -863,6 +870,8 @@ bool QPEApplication::qwsEventFilter( QWSEvent * e )
 				Global::showInputMethod();
 		}
 	}
+
+
 	return QApplication::qwsEventFilter( e );
 }
 #endif
@@ -1317,7 +1326,7 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 */
 void QPEApplication::showMainWidget( QWidget* mw, bool nomaximize )
 {
-	d->show(mw, nomaximize );
+            d->show(mw, nomaximize );
 }
 
 /*!
@@ -1335,6 +1344,7 @@ void QPEApplication::showMainDocumentWidget( QWidget* mw, bool nomaximize )
 {
 	if ( mw && argc() == 2 )
 		Global::setDocument( mw, QString::fromUtf8(argv()[1]) );
+
 
 	d->show(mw, nomaximize );
 }
