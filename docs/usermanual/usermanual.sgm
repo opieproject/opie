@@ -11,6 +11,7 @@
 <!ENTITY embeddedkonsole SYSTEM "embeddedkonsole.sgm">
 <!ENTITY software SYSTEM "software.sgm">
 <!ENTITY today SYSTEM "today.sgm">
+<!ENTITY irda SYSTEM "irda.sgm">
 ]>
 <book><title>Opie User Manual</title>
 <bookinfo><authorgroup><collab>
@@ -32,5 +33,8 @@
 </part>
 <part><title>Settings</title>
 &software;
+</part>
+<part><title>Applets</title>
+&irda;
 </part>
 </book>
