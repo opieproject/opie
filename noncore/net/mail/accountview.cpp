@@ -105,6 +105,27 @@ AbstractMail *IMAPviewItem::getWrapper()
     return wrapper;
 }
 
+IMAPfolderItem*IMAPviewItem::findSubItem(const QString&path,IMAPfolderItem*start)
+{
+    IMAPfolderItem*pitem,*sitem;
+    if (!start) pitem = (IMAPfolderItem*)firstChild();
+    else pitem = (IMAPfolderItem*)start->firstChild();
+    while (pitem) {
+        if (pitem->matchName(path)) {
+            break;
+        }
+        if (pitem->childCount()>0) {
+            sitem = findSubItem(path,pitem);
+            if (sitem) {
+                pitem = sitem;
+                break;
+            }
+        }
+        pitem=(IMAPfolderItem*)pitem->nextSibling();
+    }
+    return pitem;
+}
+
 void IMAPviewItem::refresh(QList<RecMail>&)
 {
     if (childCount()>0) return;
@@ -120,7 +141,6 @@ void IMAPviewItem::refresh(QList<RecMail>&)
     Folder *it;
     QListViewItem*item = 0;
     QListViewItem*titem = 0;
-    QListViewItem*inboxitem = 0;
     QString fname,del,search;
     int pos;
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -128,36 +148,28 @@ void IMAPviewItem::refresh(QList<RecMail>&)
     
     for ( it = folders->first(); it; it = folders->next() ) {
         if (it->getDisplayName().lower()=="inbox") {
-            inboxitem = new IMAPfolderItem( it, this , item );
+            item = new IMAPfolderItem( it, this , item );
             folders->remove(it);
             qDebug("inbox found");
             break;
         }
     }
-
     for ( it = folders->first(); it; it = folders->next() ) {
         fname = it->getDisplayName();
         pos = fname.findRev(it->Separator());
         if (pos != -1) {
             fname = fname.left(pos);
-            qDebug(fname);
         }
-        IMAPfolderItem*pitem = (IMAPfolderItem*)firstChild();
-        while (pitem) {
-            if (pitem->matchName(fname)) {
-                break;
-            }
-            pitem=(IMAPfolderItem*)pitem->nextSibling();
-        }
+        IMAPfolderItem*pitem = findSubItem(fname);
         if (pitem) {
             titem = item;
-            item = new IMAPfolderItem(it,pitem,item,this);
+            item = new IMAPfolderItem(it,pitem,pitem->firstChild(),this);
             item->setSelectable(it->may_select());
             /* setup the short name */
             item->setText(0,it->getDisplayName().right(it->getDisplayName().length()-pos-1));
             item = titem;
         } else {
-            item = new IMAPfolderItem( it, this , (inboxitem?inboxitem:item) );
+            item = new IMAPfolderItem( it, this , item );
             item->setSelectable(it->may_select());
         }
     }
@@ -175,7 +187,7 @@ IMAPfolderItem::~IMAPfolderItem()
 }
 
 IMAPfolderItem::IMAPfolderItem( Folder *folderInit, IMAPviewItem *parent , QListViewItem*after )
-    : AccountViewItem( parent )
+    : AccountViewItem( parent , after )
 {
     folder = folderInit;
     imap = parent;

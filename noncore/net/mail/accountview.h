@@ -51,6 +51,8 @@ private:
     POP3viewItem *pop3;
 };
 
+class IMAPfolderItem;
+
 class IMAPviewItem : public AccountViewItem
 {
 
@@ -60,6 +62,10 @@ public:
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
     AbstractMail *getWrapper();
+
+protected:
+    IMAPfolderItem*findSubItem(const QString&path,IMAPfolderItem*start=0);
+
 private:
     IMAPaccount *account;
     AbstractMail *wrapper;
