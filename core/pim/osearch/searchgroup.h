@@ -27,6 +27,7 @@ public:
     SearchGroup(QListView* parent, QString name);
 
     ~SearchGroup();
+	int _resultCount;
 
     virtual void expand();
     virtual void doSearch();
@@ -43,7 +44,6 @@ protected:
 private:
 	int realSearch();
 	bool loaded :1;
-	int _resultCount;
 };
 
 #endif
