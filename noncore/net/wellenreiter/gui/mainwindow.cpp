@@ -115,6 +115,8 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QPopupMenu* file = new QPopupMenu( mb );
     id = file->insertItem( "&Load", fileLoad );
     file->insertItem( "&Save", fileSave );
+    file->insertSeparator();
+    file->insertItem( "&Exit", qApp, SLOT( quit() ) );
 
     QPopupMenu* view = new QPopupMenu( mb );
     view->insertItem( "&Configure..." );
