@@ -8,8 +8,9 @@
 #include "filesystem.h"
 #include "imageinfoui.h"
 #include "imageview.h"
+#if 0
 #include "viewmodebutton.h"
-
+#endif
 #include <iface/ifaceinfo.h>
 #include <iface/dirview.h>
 
@@ -62,6 +63,8 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     connect(m_view, SIGNAL(sig_showInfo(const QString&)),
             this, SLOT(slotShowInfo(const QString&)) );
 
+    m_stack->forceMode(Opie::Ui::OWidgetStack::NoForce);
+
     QToolButton *btn = new QToolButton( bar );
     btn->setIconSet(  Resource::loadIconSet( "up" ) );
     connect( btn, SIGNAL(clicked()),
@@ -88,10 +91,11 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     connect( btn, SIGNAL(clicked() ),
              m_view, SLOT(slotTrash() ) );
 
+#if 0             
     btn = new ViewModeButton( bar );
     connect( btn, SIGNAL(changeMode(int)),
              m_view, SLOT(slotChangeMode(int)));
-
+#endif
     btn = new QToolButton( bar );
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );
     connect( btn, SIGNAL(clicked() ),
@@ -100,9 +104,17 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     rotateButton = new QToolButton(bar);
     rotateButton->setIconSet( Resource::loadIconSet( "rotate" ) );
     rotateButton->setToggleButton(true);
-    rotateButton->setOn(true);
+    
+    odebug << "Mode = " << m_stack->mode() << oendl;
+    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+        rotateButton->setOn(true);
+        autoRotate = true;
+    } else {
+        rotateButton->setOn(false);
+        autoRotate = false;
+    }
+
     connect(rotateButton,SIGNAL(toggled(bool)),this,SLOT(slotRotateToggled(bool)));
-    autoRotate = true;
 
     btn = new QToolButton(bar);
     btn->setIconSet( Resource::loadIconSet( "1to1" ) );
@@ -248,6 +260,9 @@ void PMainWindow::initInfo() {
 void PMainWindow::initDisp() {
     initT<ImageView>( "Image ScrollView", &m_disp, ImageDisplay );
     if (m_disp) {
+        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+            m_disp->setMinimumSize(QApplication::desktop()->size()/2);
+        }
         m_disp->setAutoScale(autoScale);
         m_disp->setAutoRotate(autoRotate);
         m_disp->setShowZoomer(zoomerOn);
