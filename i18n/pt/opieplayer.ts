@@ -6,253 +6,259 @@
 your sound device.
 open(&quot;/dev/dsp&quot;)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro ao
+aceder ao dispositivo de
+som. (/dev/dsp)
+</translation>
     </message>
     <message>
         <source>
 
 Closing player now.</source>
-        <translation type="unfinished"></translation>
+        <translation>
+
+A sair.</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Abortar</translation>
     </message>
 </context>
 <context>
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlayer</translation>
     </message>
 </context>
 <context>
     <name>MediaPlayer</name>
     <message>
         <source>No file</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum ficheiro</translation>
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro: nenhum ficheiro selecionado</translation>
     </message>
     <message>
         <source>File not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro não encontrado</translation>
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>O ficheiro não foi encontrado: &lt;i&gt;</translation>
     </message>
     <message>
         <source>No decoder found</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhum descodificador encontrado</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Não foi encontrado nenhum descodificador para este tipo de ficheiro: &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
-        <translation type="unfinished"></translation>
+        <translation>Erro ao abrir o ficheiro</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um erro ao tocar o ficheiro: &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro:</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Tamanho:</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecção da Lista</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlayer</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Operações</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar à Lista</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar da Lista</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Tocar</translation>
     </message>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Aleatório</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciclo</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Limpar Lista</translation>
     </message>
     <message>
         <source>Add all audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar todos os ficheiros de áudio</translation>
     </message>
     <message>
         <source>Add all video files</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar todos os ficheiros de vídeo</translation>
     </message>
     <message>
         <source>Add all files</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar todos os ficheiros</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Lista</translation>
     </message>
     <message>
         <source>Open File or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir Ficheiro ou URL</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Ficheiros Áudio</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar Ficheiros Vídeo</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Ecrâ Todo</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Escalar</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover Acima</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Mover Abaixo</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamanho</translation>
     </message>
     <message>
         <source>Media</source>
-        <translation type="unfinished"></translation>
+        <translation>Média</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Áudio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vídeo</translation>
     </message>
     <message>
         <source>Lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Listas</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlayer:</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro Inválido</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocorreu um problema ao aceder ao ficheiro.</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Remover Lista?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tem a certeza que quer 
+apagar esta lista?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriedades</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Tocas as Selecionadas</translation>
     </message>
     <message>
         <source>Open file or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir ficheiro ou URL</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Lista m3u</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>Temas</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Directoria</translation>
     </message>
 </context>
 <context>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpiePlayer</translation>
     </message>
 </context>
 </TS>

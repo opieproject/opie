@@ -3,47 +3,47 @@
     <name>Appearance</name>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações...</translation>
     </message>
     <message>
         <source>Current scheme</source>
-        <translation type="unfinished">Esquema actual</translation>
+        <translation>Esquema actual</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Apagar</translation>
+        <translation>Apagar</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Gravar</translation>
+        <translation>Gravar</translation>
     </message>
     <message>
         <source>Force styling for all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Forçar o estilo nas aplicações todas.</translation>
     </message>
     <message>
         <source>Disable styling for these applications ( &lt;b&gt;*&lt;/b&gt; can be used as a wildcard):</source>
-        <translation type="unfinished"></translation>
+        <translation>Desactivar estilo para as seguintes aplicações (pode usar &lt;b&gt;*&lt;/b&gt; para escolher várias):</translation>
     </message>
     <message>
         <source>Binary file(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheiro(s) Binário(s)</translation>
     </message>
     <message>
         <source>Tab style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo da Pasta:</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastas</translation>
     </message>
     <message>
         <source>Tabs w/icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Pastas c/icones</translation>
     </message>
     <message>
         <source>Drop down list</source>
@@ -55,71 +55,71 @@
     </message>
     <message>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Em Cima</translation>
     </message>
     <message>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Em Baixo</translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Estilo</translation>
+        <translation>Estilo</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished">Fonte</translation>
+        <translation>Fonte</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished">Cores</translation>
+        <translation>Cores</translation>
     </message>
     <message>
         <source>Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Janelas</translation>
     </message>
     <message>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avançadas</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished">Reiniciar</translation>
+        <translation>Reiniciar</translation>
     </message>
     <message>
         <source>Do you want to restart %1 now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Deseja reiniciar %1 agora?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished">Sim</translation>
+        <translation>Sim</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished">Não</translation>
+        <translation>Não</translation>
     </message>
     <message>
         <source>Save Scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar Esquema</translation>
     </message>
     <message>
         <source>Save scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Gravar esquema</translation>
     </message>
     <message>
         <source>Scheme does already exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>O esquema já existe.</translation>
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation type="unfinished">Apagar esquema</translation>
+        <translation>Apagar esquema</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation type="unfinished">O esquema actual não pode ser apagado.</translation>
+        <translation>O esquema actual não pode ser apagado.</translation>
     </message>
     <message>
         <source>&lt;new&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;novo&gt;</translation>
     </message>
     <message>
         <source>Styles control the way items such as buttons and scroll bars appear in all applications.
@@ -214,7 +214,7 @@ This area allows you to select an application and which settings you wish to dis
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sentido da rotação:</translation>
     </message>
 </context>
 <context>
@@ -232,31 +232,31 @@ This area allows you to select an application and which settings you wish to dis
     <name>SampleWindow</name>
     <message>
         <source>Sample</source>
-        <translation type="unfinished"></translation>
+        <translation>Exemplo</translation>
     </message>
     <message>
         <source>Normal Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Item Normal</translation>
     </message>
     <message>
         <source>Disabled Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Item Desabilitado</translation>
     </message>
     <message>
         <source>Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Normal Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto Normal</translation>
     </message>
     <message>
         <source>Highlighted Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto Escolhido</translation>
     </message>
     <message>
         <source>Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Botão</translation>
     </message>
     <message>
         <source>Check Box</source>

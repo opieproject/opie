@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Get Mail in</source>
-        <translation type="unfinished"></translation>
+        <translation>Obter Correio de</translation>
     </message>
     <message>
         <source>Edit account</source>
@@ -133,7 +133,7 @@
     </message>
     <message>
         <source>No account selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Nenhuma conta selecionada</translation>
     </message>
     <message>
         <source>You must create an account</source>

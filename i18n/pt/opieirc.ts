@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal de discussão</translation>
     </message>
     <message>
         <source>Type your message here to participate in the channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Escreva aqui as suas mensagens para participar na discussão deste canal</translation>
     </message>
     <message>
         <source>CTCP</source>
@@ -61,39 +61,39 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrou num canal não existente - de-sincronizado?</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Esta pessoa já tinha entrado no canal - de-sincronizado?</translation>
     </message>
     <message>
         <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Já tinha entrado neste canal - de-sincronizado?</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>A pessoa que saiu não foi encontrada - de-sincronizado?</translation>
     </message>
     <message>
         <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Saiu de um canal não existente - de-sincronizado?</translation>
     </message>
     <message>
         <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem no canal sem originador conhecido</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem privada de tipo desconhecido</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
+        <translation>Alteração de alcunha de um utilizador desconhecido</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Saiu um utilizador desconhecido - de-sincronizado?</translation>
     </message>
     <message>
         <source> changed topic to </source>
@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tópico de canal desconhecido - de-sincronizado?</translation>
     </message>
     <message>
         <source>Received a CTCP PING from </source>
@@ -113,35 +113,35 @@
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Acção CTCP de um utilizador desconhecido - de-sincronizado?</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Acção CTCP de um canal desconhecido - de-sincronizado?</translation>
     </message>
     <message>
         <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>Acção CTCP com destinatário inválido</translation>
     </message>
     <message>
         <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudança de modo de tipo desconhecido</translation>
     </message>
     <message>
         <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudança de modo de um utilizador desconhecido - de-sincronizado?</translation>
     </message>
     <message>
         <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudança de modo de &quot;flag&quot; desconhecida</translation>
     </message>
     <message>
         <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudança de modo com &quot;kannel&quot; desconhecido - de-sincronizado?</translation>
     </message>
     <message>
         <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Modos de utilizador ainda não suportados</translation>
     </message>
     <message>
         <source>You were kicked from </source>
@@ -157,15 +157,15 @@
     </message>
     <message>
         <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Expulsão de um utilizador desconhecido - de-sincronização?</translation>
     </message>
     <message>
         <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Expulsão de um canal desconhecido - de-sincronização?</translation>
     </message>
     <message>
         <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem do servidor de um canal desconhecido</translation>
     </message>
     <message>
         <source>You joined channel </source>
@@ -173,7 +173,7 @@
     </message>
     <message>
         <source>Nickname is in use, please reconnect with a different nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>A alcunha já está a ser usada. Escolha uma alcunha diferente e volte a ligar-se</translation>
     </message>
     <message>
         <source>No such nickname</source>
@@ -181,15 +181,15 @@
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recebido um comando numérico desconhecido: %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recebido um comando CTCP desconhecido: %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Recebido um comando literal desconhecido: %1</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>
@@ -205,7 +205,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagem de canal de um canal desconhecido %1</translation>
     </message>
     <message>
         <source>You are now known as %1</source>
@@ -232,7 +232,7 @@
     </message>
     <message>
         <source>Type your text here in order to send a message to the other person</source>
-        <translation type="unfinished"></translation>
+        <translation>Escreva aqui o texto a ser enviado ao outro utilizador</translation>
     </message>
     <message>
         <source>Disconnected</source>
@@ -247,7 +247,7 @@
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
-        <translation type="unfinished"></translation>
+        <translation>O nome do perfil do servidor a mostrar no resumo</translation>
     </message>
     <message>
         <source>Hostname :</source>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>O servidor a ligar - pode ser um nome ou um endereço IP</translation>
     </message>
     <message>
         <source>Port :</source>
@@ -263,7 +263,7 @@
     </message>
     <message>
         <source>The server port to connect to. Usually 6667</source>
-        <translation type="unfinished"></translation>
+        <translation>A porta do servidor a ligar. Geralmente a 6667</translation>
     </message>
     <message>
         <source>Nickname :</source>
@@ -271,7 +271,7 @@
     </message>
     <message>
         <source>Your nick name on the IRC network</source>
-        <translation type="unfinished"></translation>
+        <translation>A sua alcunha na rede do IRC</translation>
     </message>
     <message>
         <source>Realname :</source>
@@ -279,7 +279,7 @@
     </message>
     <message>
         <source>Your real name</source>
-        <translation type="unfinished"></translation>
+        <translation>O seu nome real</translation>
     </message>
     <message>
         <source>Password :</source>
@@ -287,7 +287,7 @@
     </message>
     <message>
         <source>Password to connect to the server (if required)</source>
-        <translation type="unfinished"></translation>
+        <translation>A password para ligar ao servidor (se necessário)</translation>
     </message>
     <message>
         <source>Channels :</source>
@@ -295,7 +295,7 @@
     </message>
     <message>
         <source>Comma-Separated list of all channels you would like to join automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista de canais a entrar automaticamente, separados por vírgulas</translation>
     </message>
     <message>
         <source>Edit server information</source>
@@ -307,44 +307,46 @@
     </message>
     <message>
         <source>Profile name required</source>
-        <translation type="unfinished"></translation>
+        <translation>É necessário um nome para o perfil</translation>
     </message>
     <message>
         <source>Host name required</source>
-        <translation type="unfinished"></translation>
+        <translation>É necessário um servidor</translation>
     </message>
     <message>
         <source>Port required</source>
-        <translation type="unfinished"></translation>
+        <translation>É necessária uma porta</translation>
     </message>
     <message>
         <source>Nickname required</source>
-        <translation type="unfinished"></translation>
+        <translation>É necessário uma alcunha</translation>
     </message>
     <message>
         <source>Realname required</source>
-        <translation type="unfinished"></translation>
+        <translation>É necessário um nome</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
 comma separated list of channel
  names which start with either &apos;#&apos; or &apos;+&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>A lista de canais deverá conter nomes
+de canais separados por vírgulas. Os 
+nomes começam por &quot;#&quot; ou &quot;+&quot;</translation>
     </message>
 </context>
 <context>
     <name>IRCServerList</name>
     <message>
         <source>Serverlist Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Servidores</translation>
     </message>
     <message>
         <source>Please choose a server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha um perfil de servidor</translation>
     </message>
     <message>
         <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Escolha um perfil de servidor desta lista e depois escolha Ok</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -360,41 +362,41 @@ comma separated list of channel
     </message>
     <message>
         <source>Delete the currently selected server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagar o perfil de servidor seleccionado actualmente</translation>
     </message>
     <message>
         <source>Edit the currently selected server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar o perfil de servidor seleccionado actualmente</translation>
     </message>
     <message>
         <source>Add a new server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Adicionar um perfil de servidor</translation>
     </message>
 </context>
 <context>
     <name>IRCServerTab</name>
     <message>
         <source>Connection to</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligação a</translation>
     </message>
     <message>
         <source>Server messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Mensagens do servidor</translation>
     </message>
     <message>
         <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
+        <translation>Escreva comandos aqui. A lista de comandos está disponível na ajuda do OpieIRC</translation>
     </message>
 </context>
 <context>
     <name>IRCSettings</name>
     <message>
         <source>Lines displayed :</source>
-        <translation type="unfinished"></translation>
+        <translation>Linhas mostradas:</translation>
     </message>
     <message>
         <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
-        <translation type="unfinished"></translation>
+        <translation>Quantidade de linhas a mostrar nas conversas antes que as linhas antigas sejam apagadas - isto é necessário para reduzir o consumo de memória. Escolha 0 se não necessitar esta funcionalidade</translation>
     </message>
     <message>
         <source>General</source>
@@ -406,7 +408,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Background color to be used in chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor de fundo a usar nas conversas</translation>
     </message>
     <message>
         <source>Normal text color :</source>
@@ -414,7 +416,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Text color to be used in chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto a usar nas conversas</translation>
     </message>
     <message>
         <source>Error color :</source>
@@ -422,31 +424,31 @@ comma separated list of channel
     </message>
     <message>
         <source>Text color to be used to display errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto a usar para erros</translation>
     </message>
     <message>
         <source>Text written by yourself :</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto escrito por si:</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by yourself</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto escrito a usar para identificar o texto escrito por si</translation>
     </message>
     <message>
         <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto escrito por outros:</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto escrito a usar para identificar o texto escrito por outros</translation>
     </message>
     <message>
         <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
+        <translation>Texto escrito pelo servidor:</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto escrito a usar para identificar o texto escrito pelo servidor</translation>
     </message>
     <message>
         <source>Notifications :</source>
@@ -454,7 +456,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Cor do texto a usar para notificações</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -469,15 +471,15 @@ comma separated list of channel
     <name>IRCTab</name>
     <message>
         <source>Missing description</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição em falta</translation>
     </message>
     <message>
         <source>Description of the tab&apos;s content</source>
-        <translation type="unfinished"></translation>
+        <translation>Descrição do conteúdo da pasta</translation>
     </message>
     <message>
         <source>Close this tab</source>
-        <translation type="unfinished">F</translation>
+        <translation>Fechar esta pasta</translation>
     </message>
 </context>
 <context>
@@ -488,7 +490,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation type="unfinished"></translation>
+        <translation>Ligações ao servidor, canais, perguntas e outras coisas estarão aqui</translation>
     </message>
     <message>
         <source>IRC</source>
@@ -500,7 +502,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Create a new connection to an IRC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Criar uma nova ligação a um servidor IRC</translation>
     </message>
     <message>
         <source>Settings</source>
@@ -508,7 +510,7 @@ comma separated list of channel
     </message>
     <message>
         <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar o comportamento e aparência do OpieIRC</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>CBarPrefs</name>
     <message>
         <source>Toolbar Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurações da Barra de Ferramentas</translation>
     </message>
     <message>
         <source>File</source>
@@ -62,11 +62,11 @@
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Aproximar</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Afastar</translation>
     </message>
     <message>
         <source>Back</source>
@@ -74,7 +74,7 @@
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo</translation>
     </message>
     <message>
         <source>Home</source>
@@ -106,15 +106,15 @@
     </message>
     <message>
         <source>Escape Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Botão de Escape</translation>
     </message>
     <message>
         <source>Space Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Botão de Espaço</translation>
     </message>
     <message>
         <source>Return Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Botão de Enter</translation>
     </message>
     <message>
         <source>Left Arrow</source>
@@ -137,7 +137,7 @@
     <name>CCloseDialog</name>
     <message>
         <source>Tidy-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrumar</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -169,7 +169,8 @@
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dois/Up
+Toque</translation>
     </message>
     <message>
         <source>Find</source>
@@ -200,7 +201,8 @@ Touch</source>
     <message>
         <source>Apply font
 to dialogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicar fontes
+aos diálogos</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -217,7 +219,8 @@ to dialogs</source>
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dois/Um
+Toque</translation>
     </message>
     <message>
         <source>Dictionary</source>
@@ -249,7 +252,7 @@ Actions</source>
     </message>
     <message>
         <source>Reparagraph</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Re-paragrafa</translation>
     </message>
     <message>
         <source>Double Space</source>
@@ -257,7 +260,7 @@ Actions</source>
     </message>
     <message>
         <source>Remap</source>
-        <translation type="unfinished"></translation>
+        <translation>Re-mapear</translation>
     </message>
     <message>
         <source>Embolden</source>
@@ -281,7 +284,8 @@ Actions</source>
     <message>
         <source>Page
 Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobrepor
+Páginas</translation>
     </message>
     <message>
         <source>Graphics
@@ -295,12 +299,14 @@ Zoom</source>
     <message>
         <source>Paragraph
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Identação
+do Parágrafo</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Identação
+da Linha</translation>
     </message>
     <message>
         <source>Markup</source>
@@ -343,7 +349,7 @@ Leading</source>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrumar</translation>
     </message>
     <message>
         <source>Mark Block</source>
@@ -394,7 +400,7 @@ Leading</source>
     </message>
     <message>
         <source>Movable</source>
-        <translation type="unfinished"></translation>
+        <translation>Amovível</translation>
     </message>
 </context>
 <context>
@@ -425,7 +431,7 @@ Leading</source>
     </message>
     <message>
         <source>Select Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccione Acção</translation>
     </message>
     <message>
         <source>Plucker</source>
@@ -448,7 +454,7 @@ Leading</source>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo</translation>
     </message>
     <message>
         <source>Page Up</source>
@@ -472,7 +478,7 @@ Leading</source>
     </message>
     <message>
         <source>Page/Line Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Página/Linha</translation>
     </message>
 </context>
 <context>
@@ -491,7 +497,7 @@ Leading</source>
     </message>
     <message>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Localização</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -584,7 +590,7 @@ Leading</source>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Dois/Um Toque</translation>
     </message>
     <message>
         <source>Annotation</source>
@@ -640,7 +646,7 @@ Leading</source>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrumar</translation>
     </message>
     <message>
         <source>Start Block</source>
@@ -708,7 +714,7 @@ Leading</source>
     </message>
     <message>
         <source>Export Links</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Exportar </translation>
     </message>
     <message>
         <source>Goto Start</source>
@@ -728,7 +734,7 @@ Leading</source>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Próximo</translation>
     </message>
     <message>
         <source>Scrolling</source>
@@ -744,7 +750,7 @@ Leading</source>
     </message>
     <message>
         <source>Set Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Mudar Codificação</translation>
     </message>
     <message>
         <source>Ideogram</source>
@@ -763,7 +769,7 @@ Leading</source>
     <name>fileBrowser</name>
     <message>
         <source>Browse for file</source>
-        <translation type="unfinished"></translation>
+        <translation>Procurar ficheiro</translation>
     </message>
     <message>
         <source>/</source>
