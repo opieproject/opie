@@ -1,5 +1,5 @@
-#include "SDL.h"
-#include "SDL_gfxPrimitives.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_gfxPrimitives.h>
 
 #include <stdlib.h>
 

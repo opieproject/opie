@@ -1,7 +1,7 @@
 #ifndef __GATES_GAME_H
 #define __GATES_GAME_H
 
-#include "SDL.h"
+#include <SDL/SDL.h>
 
 #include "rect.h"
 

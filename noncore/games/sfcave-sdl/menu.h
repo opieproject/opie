@@ -4,7 +4,7 @@
 #include <list>
 using namespace std;
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 class SFCave;
 class StarField;

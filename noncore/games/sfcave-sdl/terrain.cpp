@@ -1,6 +1,6 @@
-#include "SDL.h"
-#include "SDL_rotozoom.h"
-#include "SDL_gfxPrimitives.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_rotozoom.h>
+#include <SDL/SDL_gfxPrimitives.h>
 
 #include "constants.h"
 #include "terrain.h"

@@ -1,5 +1,4 @@
-
-#include "SDL_gfxPrimitives.h"
+#include <SDL/SDL_gfxPrimitives.h>
 
 #include "constants.h"
 #include "flyterrain.h"

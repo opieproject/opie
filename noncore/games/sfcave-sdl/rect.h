@@ -1,7 +1,7 @@
 #ifndef __RECT_H
 #define __RECT_H
 
-#include "SDL.h"
+#include <SDL/SDL.h>
 
 class Rect
 {

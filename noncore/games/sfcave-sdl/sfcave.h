@@ -1,7 +1,7 @@
 #ifndef __SFCAVE_H
 #define __SFCAVE_H
 
-#include "SDL.h"
+#include <SDL/SDL.h>
 
 #include "terrain.h"
 

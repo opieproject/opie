@@ -1,4 +1,4 @@
-#include "SDL_gfxPrimitives.h"
+#include <SDL/SDL_gfxPrimitives.h>
 
 #include "constants.h"
 #include "fly_game.h"

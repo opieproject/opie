@@ -1,7 +1,7 @@
 #ifndef __FLYTERRAIN_H
 #define __FLYTERRAIN_H
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 #include "terrain.h"
 

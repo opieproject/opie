@@ -1,7 +1,7 @@
 #ifndef __FONT_H
 #define __FONT_H
 
-#include "SDL.h"
+#include <SDL/SDL.h>
 #include "bfont.h"
 
 #define FONT_MENU_HIGHLIGHTED		1

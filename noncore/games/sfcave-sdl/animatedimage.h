@@ -1,7 +1,7 @@
 #ifndef __ANIMATED_IMAGE_H
 #define __ANIMATED_IMAGE_H
 
-#include "SDL.h"
+#include <SDL/SDL.h>
 
 class AnimatedImage
 {

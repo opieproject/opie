@@ -9,7 +9,7 @@
 #define __BFONT_HEADER_H__
 
 #include <iostream>
-#include "SDL.h"
+#include <SDL/SDL.h>
 
 class BFont
 {

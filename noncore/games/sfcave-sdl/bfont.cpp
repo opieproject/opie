@@ -9,7 +9,7 @@ using namespace std;
 #include "stdlib.h"
 #include "stdarg.h"
 
-#include "SDL_image.h"
+#include <SDL/SDL_image.h>
 #include "bfont.h"
 
 void BFont::InitFont()

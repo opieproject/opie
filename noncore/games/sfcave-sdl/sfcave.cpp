@@ -4,8 +4,8 @@
 #include <time.h>
 #include <sys/timeb.h>
 
-#include "SDL.h"
-#include "SDL_gfxPrimitives.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_gfxPrimitives.h>
 
 #include "constants.h"
 

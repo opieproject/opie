@@ -1,7 +1,7 @@
 #ifndef __TERRAIN_H
 #define __TERRAIN_H
 
-#include <SDL.h>
+#include <SDL/SDL.h>
 
 class StarField;
 class Terrain

@@ -5,7 +5,7 @@
 #include "flyterrain.h"
 #include "player.h"
 #include "game.h"
-#include "SDL.h"
+#include <SDL/SDL.h>
 
 class FlyGame : public Game
 {

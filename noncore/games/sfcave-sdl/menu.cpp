@@ -1,5 +1,5 @@
-#include <SDL_image.h>
-#include "SDL_rotozoom.h"
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_rotozoom.h>
 
 #include "constants.h"
 #include "sfcave.h"

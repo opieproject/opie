@@ -1,8 +1,8 @@
 #ifndef __SOUND_H
 #define __SOUND_H
 
-#include <SDL.h>
-#include "SDL_mixer.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_mixer.h>
 
 #define NR_SOUNDS 3
 
