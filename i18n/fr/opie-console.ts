@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>Init string </source>
-        <translation>Chaîne d&apos;initialisation</translation>
+        <translation>Initialisation</translation>
     </message>
     <message>
         <source>Reset string </source>
-        <translation>Chaîne de re-initialisation</translation>
+        <translation>Re-initialisation</translation>
     </message>
     <message>
         <source>Dialing prefix #1 </source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Dialing suffix #1 </source>
-        <translation>Sufixe d&apos;appel #1</translation>
+        <translation>Suffixe d&apos;appel #1</translation>
     </message>
     <message>
         <source>Dialing prefix #2 </source>
@@ -43,15 +43,15 @@
     </message>
     <message>
         <source>Dialing suffix #3 </source>
-        <translation>Sufixe d&apos;appel #3</translation>
+        <translation>Suffixe d&apos;appel #3</translation>
     </message>
     <message>
         <source>Connect string </source>
-        <translation>Chaîne de connexion</translation>
+        <translation>Connexion</translation>
     </message>
     <message>
         <source>Hang-up string </source>
-        <translation>Chaîne pour raccrocher</translation>
+        <translation>Raccrocher</translation>
     </message>
     <message>
         <source>Dial time </source>
@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Delay before redial </source>
-        <translation>Delai avant rappel</translation>
+        <translation>Délai avant rappel</translation>
     </message>
     <message>
         <source>Number of tries </source>
@@ -67,11 +67,12 @@
     </message>
     <message>
         <source>DTR drop time (0=no) </source>
-        <translation>Durée de tombé de DTR (0=non)</translation>
+        <translation>Temps de désactivation
+de DTR (0=non)</translation>
     </message>
     <message>
         <source>Auto bps detect </source>
-        <translation>Sélection automatique des bps</translation>
+        <translation>Détection auto. bps</translation>
     </message>
     <message>
         <source>No</source>
@@ -83,11 +84,11 @@
     </message>
     <message>
         <source>Modem has DCD line </source>
-        <translation>Le modem utilise DCD</translation>
+        <translation>Utiliser ligne DCD</translation>
     </message>
     <message>
         <source>Multi-line untag </source>
-        <translation>Multi-line untag</translation>
+        <translation>Etiquette Multi-ligne</translation>
     </message>
 </context>
 <context>
@@ -105,7 +106,7 @@
     <name>ConfigDialog</name>
     <message>
         <source>Edit Connection Profile</source>
-        <translation>Editer Profile Connexion</translation>
+        <translation>Editer Profil Connexion</translation>
     </message>
     <message>
         <source>New Connection</source>
@@ -120,7 +121,7 @@
     </message>
     <message>
         <source>Profile Name</source>
-        <translation>Nom du profile</translation>
+        <translation>Nom Profil</translation>
     </message>
     <message>
         <source>&amp;Add</source>
@@ -143,7 +144,7 @@
     </message>
     <message>
         <source>Environment Variables</source>
-        <translation>Variables d&apos;Environnement</translation>
+        <translation>Variables Environnement</translation>
     </message>
     <message>
         <source>Name</source>
@@ -174,7 +175,7 @@
     <name>DialDialog</name>
     <message>
         <source>Enter number</source>
-        <translation>Entrez un numéro</translation>
+        <translation>Entrer numéro</translation>
     </message>
     <message>
         <source>Enter the number you want to dial. When finished, press ok</source>
@@ -189,11 +190,11 @@
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation>Emulation de Terminal : </translation>
+        <translation>Emulateur de Terminal : </translation>
     </message>
     <message>
         <source>IO Layer:</source>
-        <translation>Gestionnaire d&apos;Entrée/Sortie : </translation>
+        <translation>Gestion E/S : </translation>
     </message>
     <message>
         <source>Look</source>
@@ -240,7 +241,7 @@
     <name>FileReceive</name>
     <message>
         <source>Could not start</source>
-        <translation>Ne peut commencer</translation>
+        <translation>Ne peut démarrer</translation>
     </message>
 </context>
 <context>
@@ -251,7 +252,7 @@
     </message>
     <message>
         <source>Could not start</source>
-        <translation>Ne peut commencer</translation>
+        <translation>Ne peut démarrer</translation>
     </message>
 </context>
 <context>
@@ -262,7 +263,7 @@
     </message>
     <message>
         <source>Edit Key</source>
-        <translation>Editer la clef</translation>
+        <translation>Editer Clé</translation>
     </message>
 </context>
 <context>
@@ -273,7 +274,7 @@
     </message>
     <message>
         <source>Flow control</source>
-        <translation>Control de flux</translation>
+        <translation>Contrôle de flux</translation>
     </message>
     <message>
         <source>Hardware</source>
@@ -285,7 +286,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Aucun</translation>
+        <translation>Aucune</translation>
     </message>
     <message>
         <source>Parity</source>
@@ -382,7 +383,7 @@
     <name>MainWindow</name>
     <message>
         <source>Configure Profiles</source>
-        <translation>Configurer les Profiles</translation>
+        <translation>Configurer Profils</translation>
     </message>
     <message>
         <source>New Connection</source>
@@ -390,7 +391,7 @@
     </message>
     <message>
         <source>Save Connection</source>
-        <translation>Sauver Connection</translation>
+        <translation>Enregistrer Connexion</translation>
     </message>
     <message>
         <source>Connect</source>
@@ -406,7 +407,7 @@
     </message>
     <message>
         <source>The shell button launches the &quot;default&quot; profile. If there is none default values are taken</source>
-        <translation>Le buton shell lance le profile par &quot;défaut&quot;. Si non présent, les valeurs sont demandées</translation>
+        <translation>Le buton shell lance le profil par &quot;défaut&quot;. Si non présent, les valeurs sont demandées</translation>
     </message>
     <message>
         <source>Transfer file...</source>
@@ -418,19 +419,19 @@
     </message>
     <message>
         <source>Full screen</source>
-        <translation>Plein écran</translation>
+        <translation>Plein Ecran</translation>
     </message>
     <message>
         <source>Save history</source>
-        <translation>Sauver l&apos;historique</translation>
+        <translation>Enregistrer Historique</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation>Terminer</translation>
+        <translation>Terminer Session</translation>
     </message>
     <message>
         <source>Close Window</source>
-        <translation>Fermer la Fenêtre</translation>
+        <translation>Fermer Fenêtre</translation>
     </message>
     <message>
         <source>Run Script</source>
@@ -438,19 +439,19 @@
     </message>
     <message>
         <source>Record Script</source>
-        <translation>Enregistrer Script</translation>
+        <translation>Début Enregistrement Script</translation>
     </message>
     <message>
         <source>Save Script</source>
-        <translation>Sauver Script</translation>
+        <translation>Enregistrer Script</translation>
     </message>
     <message>
         <source>Open Keyboard...</source>
-        <translation>Ouvrir le Clavier...</translation>
+        <translation>Ouvrir Clavier...</translation>
     </message>
     <message>
         <source>New from Profile</source>
-        <translation>Nouveau Profile Identique</translation>
+        <translation>Ouvrir Profil</translation>
     </message>
     <message>
         <source>Connection</source>
@@ -482,11 +483,11 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation>Nouveau Profile</translation>
+        <translation>Nouveau Profil</translation>
     </message>
     <message>
         <source>Save Profile</source>
-        <translation>Enregister Profile</translation>
+        <translation>Enregister Profil</translation>
     </message>
 </context>
 <context>
@@ -497,7 +498,7 @@
     </message>
     <message>
         <source>Enter telefon number here:</source>
-        <translation>Entrer le numéro de téléphone ici : </translation>
+        <translation>Numéro de téléphone : </translation>
     </message>
     <message>
         <source>AT commands</source>
@@ -505,7 +506,7 @@
     </message>
     <message>
         <source>Enter number</source>
-        <translation>Enter le numéro</translation>
+        <translation>Editer</translation>
     </message>
 </context>
 <context>
@@ -523,19 +524,19 @@
     </message>
     <message>
         <source>Terminal</source>
-        <translation>Terminale</translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Auto connect after load</source>
-        <translation>Connexion auto. après chargement</translation>
+        <translation>Connexion auto. au démarrage</translation>
     </message>
     <message>
         <source>Local Console</source>
-        <translation>Console locale</translation>
+        <translation>Console Locale</translation>
     </message>
     <message>
         <source>New Profile</source>
-        <translation>Nouveau Profile</translation>
+        <translation>Nouveau Profil</translation>
     </message>
 </context>
 <context>
@@ -674,11 +675,11 @@
     </message>
     <message>
         <source>Profile name</source>
-        <translation>Nom de profile</translation>
+        <translation>Nom de profil</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation>Profile</translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <source>Connection</source>
@@ -686,7 +687,7 @@
     </message>
     <message>
         <source>Terminal</source>
-        <translation>Terminale</translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Special Keys</source>
@@ -694,11 +695,11 @@
     </message>
     <message>
         <source>Invalid profile</source>
-        <translation>Profile invalide</translation>
+        <translation>Profil invalide</translation>
     </message>
     <message>
         <source>Please enter a profile name.</source>
-        <translation>Veuillez entrer un nom de profile.</translation>
+        <translation>Veuillez entrer un nom de profil.</translation>
     </message>
     <message>
         <source>Z-Modem</source>
@@ -726,7 +727,7 @@
     </message>
     <message>
         <source>Default Terminal</source>
-        <translation>Terminale par défaut</translation>
+        <translation>Terminal par défaut</translation>
     </message>
     <message>
         <source>Default Keyboard</source>
@@ -796,11 +797,11 @@
     <name>TerminalWidget</name>
     <message>
         <source>Terminal Type</source>
-        <translation>Type de Terminale</translation>
+        <translation>Type de Terminal</translation>
     </message>
     <message>
         <source>Color scheme</source>
-        <translation>Combinaison de couleur</translation>
+        <translation>Combinaison couleurs</translation>
     </message>
     <message>
         <source>Font size</source>
@@ -820,7 +821,7 @@
     </message>
     <message>
         <source>Line-break conversions</source>
-        <translation>Conversions des retours chariots</translation>
+        <translation>Conversions retours chariots</translation>
     </message>
     <message>
         <source>Inbound</source>
@@ -856,7 +857,7 @@
     </message>
     <message>
         <source>X-Terminal</source>
-        <translation>X-Terminale</translation>
+        <translation>X-Terminal</translation>
     </message>
     <message>
         <source>black on white</source>

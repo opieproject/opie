@@ -644,19 +644,19 @@ plusieurs jours</translation>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation> </translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation> </translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation> </translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>th</source>
-        <translation> </translation>
+        <translation>,</translation>
     </message>
 </context>
 </TS>
