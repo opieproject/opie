@@ -65,15 +65,15 @@ CardMonitor::~CardMonitor() {
     if( popupMenu ) { delete popupMenu; }
 }
 
-void CardMonitor::popUp(QString message, QString icon="") {
+void CardMonitor::popUp( QString message, QString icon = QString::null ) {
     if ( ! popupMenu ) {
 	popupMenu = new QPopupMenu();
     }
     popupMenu->clear();
-    if( icon == "" ) {
+    if( icon.isEmpty() ) {
 	popupMenu->insertItem( message, 0 );
     } else {
-	popupMenu->insertItem( QIconSet ( Resource::loadPixmap ( icon )), 
+	popupMenu->insertItem( QIconSet ( Resource::loadPixmap ( icon )),
 		message, 0 );
     }
 
@@ -100,12 +100,12 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
     }
 
     if ( cardInPcmcia0 ) {
-        menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia0Type )), 
+        menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia0Type )),
 		tr("Eject card 0: %1").arg(cardInPcmcia0Name), 1 );
     }
 
     if ( cardInPcmcia1 ) {
-        menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia1Type )), 
+        menu->insertItem( QIconSet ( Resource::loadPixmap ( "cardmon/" + cardInPcmcia1Type )),
 		tr("Eject card 1: %1").arg(cardInPcmcia1Name), 2 );
     }
 
@@ -122,21 +122,21 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 0'! err=%d", err);
 	    popUp( tr("CF/PCMCIA card eject failed!"));
-	} 
+	}
     } else if ( opt == 0 ) {
         cmd = "/etc/sdcontrol compeject";
         err = system( (const char *) cmd );
         if ( ( err != 0 ) ) {
             qDebug("Could not execute `/etc/sdcontrol comeject'! err=%d", err);
             popUp( tr("SD/MMC card eject failed!"));
-	} 
+	}
     } else if ( opt == 2 ) {
         cmd = "/sbin/cardctl eject 1";
         err = system( (const char *) cmd );
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 1'! err=%d", err);
 	    popUp( tr("CF/PCMCIA card eject failed!"));
-	} 
+	}
     }
 
     delete menu;
@@ -211,8 +211,8 @@ bool CardMonitor::getStatusPcmcia( int showPopUp ) {
         }
 	f.close();
 	if( !showPopUp && (cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1)) {
-	    QString text = "";
-	    QString what = "";
+	    QString text = QString::null;
+	    QString what = QString::null;
 	    if(cardWas0 != cardInPcmcia0) {
 		if(cardInPcmcia0) { text += tr("New card: "); what="on";}
 		else { text += tr("Ejected: "); what="off";}
@@ -258,7 +258,7 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
         endmntent( mntfp );
     }
     if(!showPopUp && cardWas != cardInSd) {
-	QString text = "";
+	QString text = QString::null;
 	if(cardInSd) { text += "SD Inserted"; }
 	else { text += "SD Removed"; }
 	popUp( text); // XX add SD pic
