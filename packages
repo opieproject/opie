@@ -53,6 +53,7 @@ CONFIG_FRESH	noncore/styles/fresh	fresh.pro
 CONFIG_FTPLIB	noncore/net/ftplib	ftplib.pro
 CONFIG_GO	noncore/games/go	go.pro
 CONFIG_GSMTOOL	noncore/unsupported/gsmtool	gsmtool.pro
+CONFIG_GUTENBROWSER	noncore/apps/opie-gutenbrowser	opie-gutenbrowser.pro
 CONFIG_HANDWRITING	inputmethods/handwriting	handwriting.pro
 CONFIG_HELPBROWSER	core/apps/helpbrowser	helpbrowser.pro
 CONFIG_HOMEAPPLET	core/applets/homeapplet	homeapplet.pro
