@@ -143,8 +143,6 @@ void KRFBCanvas::contentsMousePressEvent( QMouseEvent *e )
   } else if ( loggedIn_ )
     connection_->buffer()->mouseEvent( e );
 
-  qDebug("Press");
-  qDebug(QString::number(e->type()==QEvent::MouseButtonPress));
 }
 
 void KRFBCanvas::contentsMouseReleaseEvent( QMouseEvent *e )
@@ -155,8 +153,6 @@ void KRFBCanvas::contentsMouseReleaseEvent( QMouseEvent *e )
 
   nextRightClick=0;
   nextDoubleClick=0;
-  qDebug("Release");
-  qDebug(QString::number(e->button()));
 }
 
 void KRFBCanvas::contentsMouseMoveEvent( QMouseEvent *e )

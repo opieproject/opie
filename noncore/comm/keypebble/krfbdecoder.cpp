@@ -707,6 +707,7 @@ void KRFBDecoder::gotServerCutText()
   disconnect( con, SIGNAL( gotEnoughData() ),
               this, SLOT( gotServerCutText() ) );
 
+
   //
   // Warning: There is a bug in the RFB protocol because there is no way to find
   // out the codepage in use on the remote machine. This could be fixed by requiring
@@ -721,13 +722,15 @@ void KRFBDecoder::gotServerCutText()
   con->read( cutbuf, serverCutTextLen );
   cutbuf[ serverCutTextLen ] = '\0';
 
+  /* For some reason QApplication::clipboard()->setText() segfaults when called
+   * from within keypebble's mass of signals and slots 
   qWarning( "Server cut: %s", cutbuf );
 
   QString cutText( cutbuf ); // DANGER!!
   qApp->clipboard()->setText( cutText );
+  */
 
   delete cutbuf;
-
   // Now wait for the update (again)
   if ( oldState == AwaitingUpdate ) {
     currentState = AwaitingUpdate;

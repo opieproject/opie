@@ -159,7 +159,8 @@ void KVNC::openConnection( void )
 
 void KVNC::openConnection( QListBoxItem * item)
 {
-		openConnection(item->text());
+    if (item)
+  		openConnection(item->text());
 }
 
 void KVNC::setupActions()
