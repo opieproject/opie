@@ -49,3 +49,10 @@ DESTDIR      = $(OPIEDIR)/lib
 TARGET       = mailwrapper
 
 include ( $(OPIEDIR)/include.pro )
+
+!isEmpty( LIBETPAN_INC_DIR ) {
+	INCLUDEPATH += $$LIBETPAN_INC_DIR
+}
+!isEmpty( LIBETPAN_LIB_DIR ) {
+	LIBS += -L$$LIBETPAN_LIB_DIR
+}
