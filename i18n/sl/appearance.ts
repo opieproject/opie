@@ -229,7 +229,7 @@ Ta prostor vam omogoča, da izberete program in katere nastavitve želite onemog
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Orientacija smeri:</translation>
     </message>
 </context>
 <context>
@@ -275,7 +275,7 @@ Ta prostor vam omogoča, da izberete program in katere nastavitve želite onemog
     </message>
     <message>
         <source>Check Box</source>
-        <translation type="unfinished"></translation>
+        <translation>Označnik</translation>
     </message>
     <message>
         <source>Sample window using the selected settings.</source>

@@ -90,11 +90,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Podvojeni dogodek</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi...</translation>
     </message>
 </context>
 <context>
@@ -183,15 +183,15 @@ Izhod?</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Podvoji</translation>
     </message>
 </context>
 <context>
@@ -218,7 +218,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Koledar</translation>
+        <translation>Koledar</translation>
     </message>
 </context>
 <context>
@@ -273,67 +273,67 @@ Izhod?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Pogledi</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzet pogled:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Dan</translation>
+        <translation>Dan</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Teden</translation>
+        <translation>Teden</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Tedenski seznam</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Mesec</translation>
+        <translation>Mesec</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Skoči na trenutni čas</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaz časa</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished">Brez</translation>
+        <translation>Brez</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Začetek</translation>
+        <translation>Začetek</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetek-Konec</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzeto</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokacija:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Pisarna</translation>
+        <translation>Pisarna</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Dom</translation>
+        <translation>Dom</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorija:</translation>
     </message>
 </context>
 <context>
@@ -347,7 +347,7 @@ Izhod?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>t</translation>
     </message>
 </context>
 <context>
@@ -361,7 +361,7 @@ Izhod?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>t</translation>
     </message>
 </context>
 <context>
@@ -378,43 +378,43 @@ Izhod?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
+        <source>M</source>
+        <comment>Monday</comment>
+        <translation>P</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Tuesday</comment>
+        <translation>T</translation>
+    </message>
+    <message>
+        <source>W</source>
+        <comment>Wednesday</comment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Thursday</comment>
+        <translation>Č</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <comment>Friday</comment>
+        <translation>P</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Saturday</comment>
+        <translation>S</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Sunday</comment>
+        <translation>N</translation>
+    </message>
+    <message>
         <source>p</source>
         <translation>p</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -34,18 +34,18 @@
     </message>
     <message>
         <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberite referenčni znak iz seznama. Trenirajte v prostoru na desni.</translation>
     </message>
     <message>
         <source>No match</source>
-        <translation type="unfinished"></translation>
+        <translation>Ni zadetkov</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Handwriting</source>
-        <translation type="unfinished"></translation>
+        <translation>Ročna pisava</translation>
     </message>
 </context>
 <context>
@@ -72,18 +72,18 @@
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Vredu</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekliči</translation>
     </message>
 </context>
 <context>
     <name>QIMPenInput</name>
     <message>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Bljižnica</translation>
     </message>
 </context>
 <context>
@@ -94,7 +94,7 @@
     </message>
     <message>
         <source>Character:</source>
-        <translation type="unfinished"></translation>
+        <translation>Znak:</translation>
     </message>
 </context>
 <context>

@@ -3,50 +3,50 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj in restavriraj... delam...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj in restavriraj</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj in restavriraj</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiraj</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Programi</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation type="unfinished"></translation>
+        <translation>Shrani na</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kopiraj</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Restavriraj</translation>
     </message>
     <message>
         <source>Select Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi vir</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Stolpec 1</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Restavriraj</translation>
     </message>
 </context>
 </TS>

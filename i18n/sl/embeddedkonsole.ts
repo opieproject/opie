@@ -5,26 +5,6 @@
         <source>Command Selection</source>
         <translation>Izbira ukazov</translation>
     </message>
-    <message>
-        <source>new</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>down</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>CommandEditDialogBase</name>
@@ -205,15 +185,15 @@
     </message>
     <message>
         <source>Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Prelom vrstice</translation>
     </message>
     <message>
         <source>Use Beep</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi piskanje</translation>
     </message>
     <message>
         <source>Tabs on Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavihki zgoraj</translation>
     </message>
 </context>
 <context>
