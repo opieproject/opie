@@ -69,8 +69,6 @@ protected:
 
 private slots:
 		bool downloadFile( QString strUrl);
-		void connectionTimeSlot();
-		void timeSlot();
 		void doOk();
 
 	private:
