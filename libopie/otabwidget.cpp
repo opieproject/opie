@@ -67,7 +67,7 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
     }
 
     widgetStack = new QWidgetStack( this, "widgetstack" );
-    widgetStack->setFrameStyle( QFrame::StyledPanel | QFrame::Raised );
+    widgetStack->setFrameStyle( QFrame::NoFrame );
     widgetStack->setLineWidth( style().defaultFrameWidth() );
 
     tabBarStack = new QWidgetStack( this, "tabbarstack" );
@@ -132,6 +132,7 @@ void OTabWidget::addTab( QWidget *child, const QString &icon, const QString &lab
 
     widgetStack->addWidget( child, tabid );
     widgetStack->raiseWidget( child );
+    widgetStack->setFrameStyle( QFrame::StyledPanel | QFrame::Raised );
 
     OTabInfo *tabinfo = new OTabInfo( tabid, child, icon, label );
     tabs.append( tabinfo );
@@ -164,6 +165,11 @@ void OTabWidget::removePage( QWidget *childwidget )
             tabs.remove( tab );
             delete tab;
             currentTab = tabs.current();
+            if ( !currentTab )
+            {
+                widgetStack->setFrameStyle( QFrame::NoFrame );
+            }
+
             setUpLayout();
         }
     }
