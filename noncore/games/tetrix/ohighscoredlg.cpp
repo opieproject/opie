@@ -27,8 +27,9 @@
 
 #include "ohighscoredlg.h"
 
-OHighscore::OHighscore( int score )
+OHighscore::OHighscore( int score , int playerLevel )
 {
+	pLevel = playerLevel;
 	getList();
 	checkIfItIsANewhighscore( score );
 }
@@ -61,6 +62,7 @@ void OHighscore::getList()
 			t_playerData *pPlayerData = new t_playerData;
 			pPlayerData->sName = cfg.readEntry( "Name" );
 			pPlayerData->points = temp;
+			pPlayerData->level = cfg.readNumEntry( "Level" );
 
 			playerData.push_back( pPlayerData );
 
@@ -79,6 +81,7 @@ void OHighscore::getList()
 			t_playerData *pPlayerData = new t_playerData;
 			pPlayerData->sName = tr( "empty");
 			pPlayerData->points = 0;
+			pPlayerData->level = 0;
 
 			playerData.push_back( pPlayerData );
 		}
@@ -94,7 +97,7 @@ void OHighscore::checkIfItIsANewhighscore( int points)
 		isNewhighscore = false;
 }
 
-void OHighscore::insertData( QString name , int punkte )
+void OHighscore::insertData( QString name , int punkte , int playerLevel )
 {
 	Config cfg ( "tetrix" );
 	int entryNumber = 1;
@@ -106,6 +109,7 @@ void OHighscore::insertData( QString name , int punkte )
 			t_playerData* temp = new t_playerData;
 			temp->sName = name;
 			temp->points = punkte;
+			temp->level = playerLevel;
 			playerData.insert( insertIterator , temp );
 			
 			//now we have to delete the last entry
@@ -122,6 +126,7 @@ void OHighscore::insertData( QString name , int punkte )
 				cfg.setGroup( QString::number( entryNumber ) );
 				cfg.writeEntry( "Name" , ( *insertIterator )->sName );
 				cfg.writeEntry( "Points" , ( *insertIterator )->points );
+				cfg.writeEntry( "Level" , ( *insertIterator )->level );
 				entryNumber++;	
 				insertIterator++;
 			}
@@ -149,16 +154,17 @@ QString OHighscore::getName()
 	return name;
 }
 
-OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const char *name, bool modal) : QDialog(parent, name,modal)
+OHighscoreDialog::OHighscoreDialog(OHighscore *highscore, QWidget *parent, const char *name, bool modal) : QDialog(parent, name, modal)
 {
 	hs_ = highscore;
 	setCaption( tr( "Highscores" ) );
 	vbox_layout = new QVBoxLayout( this, 4 , 4 );
 	list = new QListView( this );
 	list->setSorting( -1 );
-	list->addColumn( tr( "Position" ));
+	list->addColumn( tr( "#" ));
 	list->addColumn( tr( "Name" ));
 	list->addColumn( tr( "Points" ));
+	list->addColumn( tr( "Level" ));
 
 	createHighscoreListView();
 	
@@ -170,6 +176,7 @@ void OHighscoreDialog::createHighscoreListView()
 {
 	int pos = 10;
 	int points_ = 0;
+	int level_ = 0;
 
 	std::list<t_playerData*>::reverse_iterator iListe = hs_->playerData.rbegin();
 	
@@ -181,7 +188,11 @@ void OHighscoreDialog::createHighscoreListView()
 		if ( (  *iListe )->points  == -1 )
 			points_ = 0;
 		else points_ =  ( *iListe )->points;
+		if ( (  *iListe )->level  == -1 )
+			level_ = 0;
+		else level_ =  ( *iListe )->level;
 		item->setText(  2 , QString::number( points_ ) );   //points
+		item->setText(  3 , QString::number( level_ ) );    //level
 		pos--;
 	}
 }

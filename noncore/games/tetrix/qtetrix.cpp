@@ -164,9 +164,9 @@ QTetrix::QTetrix( QWidget *parent, const char *name, WFlags f )
 
 void QTetrix::gameOver()
 {
-	OHighscore *hs = new OHighscore( showScore->text().toInt() );
+	OHighscore *hs = new OHighscore( showScore->text().toInt() , showLevel->text().toInt() );
 	if ( hs->isNewhighscore )
-		hs->insertData( hs->getName(), showScore->text().toInt() );
+		hs->insertData( hs->getName(), showScore->text().toInt() , showLevel->text().toInt() );
 	OHighscoreDialog hscdlg( hs, this, "OHighscoreDialog", true );
 	hscdlg.exec();
 }

@@ -11,10 +11,7 @@ class QWidget;
 class QVBoxLayout;
 class QListView;
 
-#include <qstringlist.h>
-#include <qvaluelist.h>
 #include <qdialog.h>
-#include <qmap.h>
 #include <list>
 
 using namespace std;
@@ -23,6 +20,7 @@ struct t_playerData
 {
 	QString sName;
 	int points;
+	int level;
 };
 
 class OHighscore : public QWidget
@@ -31,15 +29,11 @@ class OHighscore : public QWidget
 
 	public:
 		/*
-		 *An OHighscore-Object contains all Points and playernames sorted in a stl::vector
+		 *An OHighscore-Object contains all Points, level and playernames sorted in a stl::vector
 		 */
-		OHighscore( int );
+		OHighscore( int , int );
+	
 		~OHighscore();
-
-		/*
-		 * As Qt/e does not support QInputDialog I did that code myself
-		 */
-		QString getName();
 
 		/*
 		 * is true if the player did a new highscore
@@ -47,29 +41,39 @@ class OHighscore : public QWidget
 		bool isNewhighscore;
 
 		/*
-		 * sets the bool if the current score is in the top10
-		 */
-		void checkIfItIsANewhighscore( int );
-
-		list<t_playerData*> playerData;
-	    list<t_playerData*>::iterator iPlayerData;
-
-		/*
 		 * this inserts the new entry at the correct position
 		 */
-		void insertData( QString , int );
-		void writeList();
+		void insertData( QString , int , int );
 		
+		list<t_playerData*> playerData;
+		
+		/*
+		 * As Qt/e does not support QInputDialog I did that code myself
+		 */
+		QString getName();
 	private:
+
+		list<t_playerData*>::iterator iPlayerData;
+		
 		/*
 		 * the lowest score in the highscorelist
 		 */
 		int lowest;
+
+		/*
+		 * the level of the highscore
+		 */
+		int pLevel;
 		
 		/*
 		 * get all scores in a vector and give "lowest" a value
 		 */
 		void getList();
+		
+		/*
+		 * sets the bool if the current score is in the top10
+		 */
+		void checkIfItIsANewhighscore( int );
 };
 
 class OHighscoreDialog : public QDialog
@@ -79,14 +83,15 @@ class OHighscoreDialog : public QDialog
     public:
 		OHighscoreDialog(OHighscore *highscore, QWidget *parent, const char *name = 0, bool modal = true );
 
+	private:
 		OHighscore *hs_;
-		
+	
 		QVBoxLayout *vbox_layout;
 		
+		/*
+		 * this method creates the QListView with all data
+		 */
 		void createHighscoreListView();
 
-		QStringList namelist;
-		typedef QValueList<int> pointlist;
-		pointlist listofpoints;
 		QListView *list;
 };
