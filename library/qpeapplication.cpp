@@ -389,7 +389,7 @@ public:
 
     void loadTextCodecs()
     {
-        QString path = QPEApplication::qpeDir() + "/plugins/textcodecs";
+        QString path = QPEApplication::qpeDir() + "plugins/textcodecs";
 #ifdef Q_OS_MACX
         QDir dir( path, "lib*.dylib" );
 #else
@@ -418,7 +418,7 @@ public:
 
     void loadImageCodecs()
     {
-        QString path = QPEApplication::qpeDir() + "/plugins/imagecodecs";
+        QString path = QPEApplication::qpeDir() + "plugins/imagecodecs";
 #ifdef Q_OS_MACX
         QDir dir( path, "lib*.dylib" );
 #else
@@ -1187,11 +1187,24 @@ QPEApplication::~QPEApplication()
 */
 QString QPEApplication::qpeDir()
 {
-    const char * base = getenv( "OPIEDIR" );
-    if ( base )
-        return QString( base ) + "/";
+    QString base, dir;
 
-    return QString( "../" );
+    if (getenv( "OPIEDIR" ))
+        base = QString(getenv("OPIEDIR")).stripWhiteSpace();
+    if ( !base.isNull() && (base.length() > 0 )){
+#ifdef Q_OS_WIN32
+        QString temp(base);
+        if (temp[(int)temp.length()-1] != QDir::separator())
+            temp.append(QDir::separator());
+        dir = temp;
+#else
+        dir = QString( base ) + "/";
+#endif
+    }else{
+        dir = QString( ".." ) + QDir::separator();
+    }
+
+    return dir;
 }
 
 /*!
@@ -1835,7 +1848,7 @@ void QPEApplication::internalSetStyle( const QString &style )
 
     else {
         QStyle *sty = 0;
-        QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/";
+        QString path = QPEApplication::qpeDir ( ) + "plugins/styles/";
 
 #ifdef Q_OS_MACX
         if ( style. find ( ".dylib" ) > 0 )
