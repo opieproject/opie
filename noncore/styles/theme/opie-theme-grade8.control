@@ -1,0 +1,9 @@
+Package: opie-theme-grade8
+Files: plugins/styles/themes/GradE8.themerc plugins/styles/pixmaps/GradE8/*.png
+Priority: optional
+Section: opie/system
+Maintainer: Robert Griebl <sandman@handhelds.org>
+Architecture: arm
+Depends: opie-theme
+Description: GradE8 theme for Opie.
+Version: $QPE_VERSION$EXTRAVERSION

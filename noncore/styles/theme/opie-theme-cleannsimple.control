@@ -1,0 +1,9 @@
+Package: opie-theme-cleannsimple
+Files: plugins/styles/themes/cleannsimple.themerc plugins/styles/pixmaps/cleannsimple/*.png
+Priority: optional
+Section: opie/system
+Maintainer: Robert Griebl <sandman@handhelds.org>
+Architecture: arm
+Depends: opie-theme
+Description: Clean N Simple theme for Opie.
+Version: $QPE_VERSION$EXTRAVERSION

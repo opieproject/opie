@@ -1,0 +1,9 @@
+Package: opie-theme-ixpe
+Files: plugins/styles/themes/ixpe.themerc plugins/styles/pixmaps/ixpe/*.png
+Priority: optional
+Section: opie/system
+Maintainer: Robert Griebl <sandman@handhelds.org>
+Architecture: arm
+Depends: opie-theme
+Description: ixpe theme for Opie.
+Version: $QPE_VERSION$EXTRAVERSION

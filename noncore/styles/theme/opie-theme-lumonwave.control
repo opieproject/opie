@@ -1,0 +1,9 @@
+Package: opie-theme-lumonwave
+Files: plugins/styles/themes/lumonwave.themerc plugins/styles/pixmaps/lumon/arrowdown.png plugins/styles/pixmaps/lumon/arrowleft.png plugins/styles/pixmaps/lumon/arrowright.png plugins/styles/pixmaps/lumon/arrowup.png plugins/styles/pixmaps/lumon/backgroundwave.png plugins/styles/pixmaps/lumon/backgroundwaveblue.png plugins/styles/pixmaps/lumon/button.png plugins/styles/pixmaps/lumon/buttonborder.png plugins/styles/pixmaps/lumon/buttonborderdown.png plugins/styles/pixmaps/lumon/buttondown.png plugins/styles/pixmaps/lumon/checkbox.png plugins/styles/pixmaps/lumon/checkboxdown.png plugins/styles/pixmaps/lumon/hscrollgroove.png plugins/styles/pixmaps/lumon/menubar.png plugins/styles/pixmaps/lumon/menuitemdown.png plugins/styles/pixmaps/lumon/radio.png plugins/styles/pixmaps/lumon/radiodown.png plugins/styles/pixmaps/lumon/scrollbutton.png plugins/styles/pixmaps/lumon/splitter.png plugins/styles/pixmaps/lumon/sunkenarrowdown.png plugins/styles/pixmaps/lumon/sunkenarrowleft.png plugins/styles/pixmaps/lumon/sunkenarrowright.png plugins/styles/pixmaps/lumon/sunkenarrowup.png plugins/styles/pixmaps/lumon/tab.png plugins/styles/pixmaps/lumon/tabdown.png plugins/styles/pixmaps/lumon/vscrollgroove.png
+Priority: optional
+Section: opie/system
+Maintainer: Robert Griebl <sandman@handhelds.org>
+Architecture: arm
+Depends: opie-theme
+Description: Lumon Wave theme for Opie.
+Version: $QPE_VERSION$EXTRAVERSION
