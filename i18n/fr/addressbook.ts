@@ -97,7 +97,7 @@
     </message>
     <message>
         <source>Write Mail To</source>
-        <translation>Ecrire un mail</translation>
+        <translation>Ecrire un email à</translation>
     </message>
     <message>
         <source>Beam Entry</source>
@@ -113,7 +113,7 @@
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Plus d&apos;espace disponible</translation>
+        <translation>Plus de mémoire disponible</translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -124,8 +124,8 @@ entering data!</source>
         <translation>Pas assez d&apos;espace disponible 
 pour créer les fichiers de démarrage
 
-Libérer de la mémoire pour
-entrer des données !</translation>
+Libérer de la mémoire avant de pouvoir
+saisir des données !</translation>
     </message>
     <message>
         <source>View</source>
@@ -149,7 +149,7 @@ entrer des données !</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Plus d&apos;espace disponible</translation>
+        <translation>Plus de mémoire disponible</translation>
     </message>
     <message>
         <source>Unable to save information.
@@ -173,7 +173,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Travail</translation>
+        <translation>Bureau</translation>
     </message>
     <message>
         <source>Mb</source>
@@ -231,6 +231,30 @@ Quitter ?</translation>
 <context>
     <name>ContactEditor</name>
     <message>
+        <source>Fax</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>IM</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Mobile</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Page</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
         <source>Default Email</source>
         <translation>Email par défaut</translation>
     </message>
@@ -268,7 +292,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Titre</translation>
+        <translation>Fonction</translation>
     </message>
     <message>
         <source>Company</source>
@@ -283,12 +307,28 @@ Quitter ?</translation>
         <translation>Groupes</translation>
     </message>
     <message>
+        <source>Street</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Street 2</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>P.O. Box</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
         <source>City</source>
         <translation>Ville</translation>
     </message>
     <message>
         <source>State</source>
         <translation>Département</translation>
+    </message>
+    <message>
+        <source>Zip</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Country</source>
@@ -316,11 +356,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation>Travail</translation>
+        <translation>Bureau</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>Domicile</translation>
+        <translation>Maison</translation>
     </message>
     <message>
         <source>Address</source>
@@ -364,7 +404,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Feminin</translation>
+        <translation>Féminin</translation>
     </message>
     <message>
         <source>Details</source>
@@ -468,7 +508,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Benin</source>
-        <translation>Benin</translation>
+        <translation>Bénin</translation>
     </message>
     <message>
         <source>Bermuda</source>
@@ -488,7 +528,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Bouvet Island</source>
-        <translation>L&apos;île Bouvet</translation>
+        <translation>Ile Bouvet</translation>
     </message>
     <message>
         <source>Brazil</source>
@@ -768,7 +808,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Kenya</source>
-        <translation>Kenya</translation>
+        <translation>Kénya</translation>
     </message>
     <message>
         <source>Kribati</source>
@@ -804,7 +844,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Liberia</source>
-        <translation>Liberia</translation>
+        <translation>Libéria</translation>
     </message>
     <message>
         <source>Liechtenstein</source>
@@ -924,7 +964,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>New Zealand</source>
-        <translation>Nouvelle-Zélande</translation>
+        <translation>Nouvelle Zélande</translation>
     </message>
     <message>
         <source>Nicaragua</source>
@@ -936,7 +976,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Nigeria</source>
-        <translation>Nigeria</translation>
+        <translation>Nigéria</translation>
     </message>
     <message>
         <source>Niue</source>
@@ -1000,7 +1040,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Reunion</source>
-        <translation>Réunion</translation>
+        <translation>Ile de la Réunion</translation>
     </message>
     <message>
         <source>Romania</source>
@@ -1024,7 +1064,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>San Marino</source>
-        <translation>Saint-Marin</translation>
+        <translation>San Marin</translation>
     </message>
     <message>
         <source>Saudi Arabia</source>
@@ -1164,7 +1204,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Venezuela</source>
-        <translation>Venezuela</translation>
+        <translation>Vénézuela</translation>
     </message>
     <message>
         <source>Viet Nam</source>

@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>There was a problem setting timezone %1</source>
-        <translation>Il a eu un problème dans la mise en place de la zone de temps %l</translation>
+        <translation>Il a eu un problème dans la mise en place de la zone de temps %1</translation>
     </message>
     <message>
         <source>Restore Time Zone</source>
@@ -16,7 +16,7 @@
     </message>
     <message>
         <source>There was a problem setting your timezone.Your time may be wrong now...</source>
-        <translation>Il a eu un problème dans la mise en place de la zone de temps. Votre heure est sans doute mauvaise...</translation>
+        <translation>Il a eu un problème dans la mise en place de la zone de temps. Votre horloge n&apos;est sans doute pas bonne...</translation>
     </message>
 </context>
 <context>
@@ -82,19 +82,19 @@
     </message>
     <message>
         <source>Unable to Find Timezone Info</source>
-        <translation>Impossible de trouver les informations de zone de temps</translation>
+        <translation>Impossible de trouver les informations des zones de temps</translation>
     </message>
     <message>
         <source>&lt;p&gt;Unable to find any timezone information in %1</source>
-        <translation>&lt;p&gt;Impossible de trouver les informations de zone de temps dans %l</translation>
+        <translation>&lt;p&gt;Impossible de trouver les informations de zones de temps dans %1</translation>
     </message>
     <message>
         <source>Couldn&apos;t Find Map</source>
-        <translation>Impossible de toruver la carte</translation>
+        <translation>Impossible de trouver la carte</translation>
     </message>
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
-        <translation>&lt;p&gt;Impossible de charger la carte : %l, sortie de l&apos;application</translation>
+        <translation>&lt;p&gt;Impossible de charger la carte : %1, sortie de l&apos;application</translation>
     </message>
 </context>
 </TS>

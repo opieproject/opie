@@ -4,7 +4,7 @@
     <name>Calculator</name>
     <message>
         <source>Experimental Calculator</source>
-        <translation>Calculatrice expérimentale</translation>
+        <translation>Calculatrice</translation>
     </message>
     <message>
         <source>M+</source>
@@ -104,7 +104,7 @@
     </message>
     <message>
         <source>.</source>
-        <translation>.</translation>
+        <translation type="unfinished">,</translation>
     </message>
     <message>
         <source>5</source>

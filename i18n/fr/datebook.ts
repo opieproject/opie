@@ -4,7 +4,7 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Clendrier</translation>
+        <translation>Calendrier</translation>
     </message>
     <message>
         <source>View</source>
@@ -58,7 +58,7 @@ que l&apos;intervalle entre les répétitions.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Impossible d&apos;accéder au donnée, synchronisation en cours</translation>
+        <translation>Impossible d&apos;accéder aux données, synchronisation en cours</translation>
     </message>
     <message>
         <source>Edit Event</source>
@@ -74,7 +74,7 @@ que l&apos;intervalle entre les répétitions.</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Plus de mémoire libre</translation>
+        <translation>Plus de mémoire disponible</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -107,6 +107,10 @@ Quitter ?</translation>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="obsolete"></translation>
+    </message>
     <message>
         <source>M</source>
         <translation>L</translation>
@@ -278,6 +282,10 @@ Quitter ?</translation>
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
+        <source>Form1</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
         <source>Y: </source>
         <translation>Y :</translation>
     </message>
@@ -291,7 +299,18 @@ Quitter ?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdrBase</name>
+    <message>
+        <source>Form1</source>
+        <translation type="obsolete"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeaderBase</name>
+    <message>
+        <source>Form2</source>
+        <translation type="obsolete"></translation>
+    </message>
     <message>
         <source>W: 00,00</source>
         <translation>W: 00,00</translation>
@@ -359,11 +378,11 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation>Quotidin...</translation>
+        <translation>Quotidien...</translation>
     </message>
     <message>
         <source>Weekly...</source>
-        <translation>Hbdomadaire...</translation>
+        <translation>Hebdomadaire...</translation>
     </message>
     <message>
         <source>Monthly...</source>
@@ -417,12 +436,20 @@ Quitter ?</translation>
         <translation>Voyage</translation>
     </message>
     <message>
+        <source>Description</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
         <source>Office</source>
         <translation>Bureau</translation>
     </message>
     <message>
         <source>Home</source>
         <translation>Maison</translation>
+    </message>
+    <message>
+        <source>Start - End</source>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Jan 02 00</source>
@@ -643,7 +670,7 @@ et</translation>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation>Répétition des événements</translation>
+        <translation>Evénement qui se répète</translation>
     </message>
     <message>
         <source>None</source>
@@ -719,15 +746,15 @@ et</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>months</source>

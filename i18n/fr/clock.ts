@@ -27,12 +27,20 @@
         <translation>Définir l&apos;alarme</translation>
     </message>
     <message>
+        <source>Alarm On</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
+        <source>Alarm Off</source>
+        <translation type="obsolete"></translation>
+    </message>
+    <message>
         <source>Stop</source>
         <translation>Arréter</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation>PM</translation>
+        <translation>Après-midi</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
@@ -72,7 +80,8 @@
     <message>
         <source>Snooze Delay
 (minutes)</source>
-        <translation>Faire du bruit</translation>
+        <translation>Délai avant de faire du bruit
+(minutes)</translation>
     </message>
     <message>
         <source>mp3 alarm</source>

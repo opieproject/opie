@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Mail</source>
-        <translation>Courrier</translation>
+        <translation>Email</translation>
     </message>
 </context>
 </TS>

@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation>Dessiner un rectangle rempli</translation>
+        <translation>Dessiner un rectangle plein</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation>Desinner une ellipse remplie</translation>
+        <translation>Desinner une ellipse pleine</translation>
     </message>
     <message>
         <source>Fill Region</source>
@@ -119,11 +119,11 @@
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation>Vue d&apos;ensemble</translation>
+        <translation>Vue miniature</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation>Vue d&apos;ensemble...</translation>
+        <translation>Vue miniature...</translation>
     </message>
     <message>
         <source>Page Information</source>
@@ -318,7 +318,7 @@ toutes les pages ?</translation>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation>DrawPad - Vue d&apos;ensemble</translation>
+        <translation>DrawPad - Vue miniature</translation>
     </message>
     <message>
         <source>Clear Page</source>

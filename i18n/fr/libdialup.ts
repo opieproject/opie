@@ -1,235 +1,236 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>DialupBase</name>
     <message>
         <source>Dial-up </source>
-        <translation type="unfinished"></translation>
+        <translation>Connection par modem</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished"></translation>
+        <translation>Compte</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom d&apos;utilisateur :</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mot de passe :</translation>
     </message>
     <message>
         <source>Phone:</source>
-        <translation type="unfinished"></translation>
+        <translation>Numéro de téléphone :</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom : </translation>
     </message>
     <message>
         <source>Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem</translation>
     </message>
     <message>
         <source>AT-dial:</source>
-        <translation type="unfinished"></translation>
+        <translation>AT-dial :</translation>
     </message>
     <message>
         <source>ATDT</source>
-        <translation type="unfinished"></translation>
+        <translation>ATDT</translation>
     </message>
     <message>
         <source>ATDP</source>
-        <translation type="unfinished"></translation>
+        <translation>ATDP</translation>
     </message>
     <message>
         <source>Speed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vitesse de connection :</translation>
     </message>
     <message>
         <source>4800</source>
-        <translation type="unfinished"></translation>
+        <translation>4800</translation>
     </message>
     <message>
         <source>9600</source>
-        <translation type="unfinished"></translation>
+        <translation>9600</translation>
     </message>
     <message>
         <source>19200</source>
-        <translation type="unfinished"></translation>
+        <translation>19200</translation>
     </message>
     <message>
         <source>38400</source>
-        <translation type="unfinished"></translation>
+        <translation>38400</translation>
     </message>
     <message>
         <source>57600</source>
-        <translation type="unfinished"></translation>
+        <translation>57600</translation>
     </message>
     <message>
         <source>115200</source>
-        <translation type="unfinished"></translation>
+        <translation>115200</translation>
     </message>
     <message>
         <source>Wait time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Temps d&apos;attente :</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>Flow control:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle de flux :</translation>
     </message>
     <message>
         <source>Hardware flow control</source>
-        <translation type="unfinished"></translation>
+        <translation>Contrôle de flux matériel</translation>
     </message>
     <message>
         <source>Demand Dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Demande de numérotation</translation>
     </message>
     <message>
         <source>Manual connect and disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection et déconnection manuel </translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>secondes</translation>
     </message>
     <message>
         <source>Idle timeout:</source>
-        <translation type="unfinished"></translation>
+        <translation>Duré d&apos;attente sans activité :</translation>
     </message>
     <message>
         <source>Automatic connect and disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection et déconnection automatique</translation>
     </message>
     <message>
         <source>Manual connect, automatic disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection manuel, déconnection automatique</translation>
     </message>
     <message>
         <source>Network</source>
-        <translation type="unfinished"></translation>
+        <translation>Réseau</translation>
     </message>
     <message>
         <source>Auto-detect name servers</source>
-        <translation type="unfinished"></translation>
+        <translation>Détection automatique des serveurs de nom</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Passerelle</translation>
     </message>
     <message>
         <source>Auto-detect routing</source>
-        <translation type="unfinished"></translation>
+        <translation>Détection automatique du routage</translation>
     </message>
     <message>
         <source>First DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Premier DNS</translation>
     </message>
     <message>
         <source>Second DNS</source>
-        <translation type="unfinished"></translation>
+        <translation>Second DNS</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveurs relais (Proxies)</translation>
     </message>
 </context>
 <context>
     <name>PppMon</name>
     <message>
         <source>Waiting for activity</source>
-        <translation type="unfinished"></translation>
+        <translation>En attente de réponse</translation>
     </message>
     <message>
         <source>Initializing modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisation du modem</translation>
     </message>
     <message>
         <source>Connecting</source>
-        <translation type="unfinished"></translation>
+        <translation>Connection</translation>
     </message>
     <message>
         <source>Authenticating</source>
-        <translation type="unfinished"></translation>
+        <translation>Authentification</translation>
     </message>
     <message>
         <source>No dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de tonalité</translation>
     </message>
     <message>
         <source>No carrier</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de porteuse</translation>
     </message>
     <message>
         <source>Number is busy</source>
-        <translation type="unfinished"></translation>
+        <translation>Le numéro est occupé</translation>
     </message>
     <message>
         <source>Timed out</source>
-        <translation type="unfinished"></translation>
+        <translation>Durée maximale sans activité atteinte</translation>
     </message>
     <message>
         <source>Connection failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Echec de la connection</translation>
     </message>
     <message>
         <source>Authentication Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Echec de l&apos;authentification</translation>
     </message>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Connecté</translation>
     </message>
 </context>
 <context>
     <name>ProxiesPageBase</name>
     <message>
         <source>Proxy Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Paramètres des serveurs relais (proxies)</translation>
     </message>
     <message>
         <source>No proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de serveurs relais</translation>
     </message>
     <message>
         <source>Auto configure proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration automatique des serveurs relais</translation>
     </message>
     <message>
         <source>Set proxies</source>
-        <translation type="unfinished"></translation>
+        <translation>Définition des serveurs relais</translation>
     </message>
     <message>
         <source>Config:</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuration :</translation>
     </message>
     <message>
         <source>Port:</source>
-        <translation type="unfinished"></translation>
+        <translation>Port :</translation>
     </message>
     <message>
         <source>HTTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP :</translation>
     </message>
     <message>
         <source>FTP:</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP : </translation>
     </message>
     <message>
         <source>Host:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom d&apos;hôte :</translation>
     </message>
     <message>
         <source>No proxies for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pas de serveurs relais pour :</translation>
     </message>
 </context>
 </TS>

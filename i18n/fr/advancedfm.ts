@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation>Exécuter une commande ayant une sortie</translation>
+        <translation>Exécuter une commande avec une sortie</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>A traduire</translation>
     </message>
     <message>
         <source>Ir sent.</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source>Open as text</source>
-        <translation>Ouvrir comme text</translation>
+        <translation>Ouvrir comme texte</translation>
     </message>
     <message>
         <source>Make Symlink</source>
@@ -161,7 +161,7 @@
     </message>
     <message>
         <source>Beam File</source>
-        <translation type="unfinished"></translation>
+        <translation>A traduire</translation>
     </message>
     <message>
         <source> already exists
