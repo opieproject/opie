@@ -6,7 +6,7 @@ TARGET		= batteryapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH      += ../$(OPIEDIR)/include ..
-LIBS            += -lqpe
+LIBS            += -lqpe -lopie
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libbatteryapplet.ts \

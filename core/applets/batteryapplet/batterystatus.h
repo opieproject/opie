@@ -36,10 +36,22 @@ public:
 protected:
     void drawSegment( QPainter *p, const QRect &r, const QColor &topgrad, const QColor &botgrad, const QColor &highlight, int hightlight_height );
     void paintEvent( QPaintEvent *pe );
-
+    bool BatteryStatus::getProcApmStatusIpaq();
 private:
     const PowerStatus *ps;
     int percent;
+    int ipaqPercent;
+    int jackPercent;
+    int jackMinutes;
+    QString perc1;
+    QString sec1;
+    QString perc2;
+    QString sec2;
+    QString ipaqStatus;
+    QString jackStatus;
+    QString ipaqChem;
+    QString jackChem;
+    bool bat2;
 };
 
 #endif
