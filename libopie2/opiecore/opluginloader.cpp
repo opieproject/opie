@@ -4,6 +4,13 @@
  */
 
 #include "opluginloader.h"
+#include "oconfig.h"
+
+#include <qpe/qpeapplication.h>
+
+#include <qdir.h>
+#include <qdict.h>
+#include <qtl.h>
 
 #include <stdlib.h>
 
@@ -14,17 +21,84 @@ namespace Core {
 namespace Internal {
 struct OPluginLibraryHolder {
     static OPluginLibraryHolder *self();
-    QLibrary *getLibrary( const QString& );
-    void putLibrary( QLibrary* );
+    QLibrary *ref( const QString& );
+    void deref( QLibrary* );
 private:
+
     OPluginLibraryHolder();
     ~OPluginLibraryHolder();
-    OPluginLibraryHolder* m_self;
-
+    QDict<QLibrary> m_libs;
+    static OPluginLibraryHolder* m_self;
 };
+
+    OPluginLibraryHolder* OPluginLibraryHolder::m_self  = 0;
+    OPluginLibraryHolder* OPluginLibraryHolder::self() {
+        if ( !m_self )
+            m_self = new OPluginLibraryHolder;
+
+        return m_self;
+    }
+
+    OPluginLibraryHolder::OPluginLibraryHolder() {}
+    OPluginLibraryHolder::~OPluginLibraryHolder() {}
+
+    /*
+     * We do simple ref counting... We will add the QLibrary again
+     * and again to the dictionary and on deref we will pop and pop it
+     * until there are no more library and we will unload and delete the library
+     * luckily dlopen does some ref counting as well so we don't need
+     * to hack QPEApplication
+     */
+    QLibrary* OPluginLibraryHolder::ref(const QString& str) {
+        QLibrary *lib = m_libs[str];
+
+        /* if not in the dict try to load it */
+        if ( !lib ) {
+            lib = new QLibrary( str, QLibrary::Immediately );
+            if ( !lib->isLoaded() ) {
+                delete lib;
+                return 0l;
+            }
+        }
+
+        /* now refcount one up */
+        m_libs.insert( str, lib );
+        return lib;
+    }
+
+    /*
+     * 'unshadow' the items until we're the last then unload and delete
+     */
+    void OPluginLibraryHolder::deref( QLibrary* lib ) {
+        if ( !lib )
+            return;
+
+        QString str = lib->library();
+        /* no need to check if the lib was inserted or such */
+        (void) m_libs.take( str );
+        if ( !m_libs[str] ) {
+            lib->unload();
+            delete lib;
+        }
+    }
 }
 
-}}
+/**
+ * We want values with 30,29,28 at the beginning of the list
+ */
+
+bool operator<( const OPluginItem& l, const OPluginItem& r ) {
+    return l.position() > r.position();
+}
+
+bool operator>( const OPluginItem& l, const OPluginItem& r ) {
+    return l.position() < r.position();
+}
+
+bool operator<=( const OPluginItem& l, const OPluginItem& r ) {
+    return l.position() >=  r.position();
+}
+
 /**
  * \brief Creates an Empty OPluginItem
  *
@@ -41,14 +115,12 @@ OPluginItem::OPluginItem()
  * Create a Plugin Item with all information.
  *
  * @param name The if available translated Name
- * @param conf The name of the config group
  * @param path The path to the plugin
  * @param pos  The position of the plugin if used for sorting
  *
  */
-OPluginItem::OPluginItem( const QString& name, const QCString& conf,
-                          const QString& path, int pos = -1 )
-    : m_name( name ), m_conf( conf ), m_path( path ), m_pos( pos ) {
+OPluginItem::OPluginItem( const QString& name, const QString& path, int pos )
+    : m_name( name ), m_path( path ), m_pos( pos ) {
 }
 
 /**
@@ -63,12 +135,11 @@ OPluginItem::~OPluginItem() {
 bool OPluginItem::operator==( const OPluginItem& r )const{
     if ( m_pos  != r.m_pos  ) return false;
     if ( m_name != r.m_name ) return false;
-    if ( m_conf != r.m_conf ) return false;
     if ( m_path != r.m_path ) return false;
     return true;
 }
 
-bool OPluginItem::operator!=( const OPluginItem& r ) {
+bool OPluginItem::operator!=( const OPluginItem& r )const{
     return !( *this == r );
 }
 
@@ -77,13 +148,6 @@ bool OPluginItem::operator!=( const OPluginItem& r ) {
  */
 QString OPluginItem::name()const {
     return m_name;
-}
-
-/**
- * return the config key
- */
-QCString OPluginItem::configKey()const{
-    return m_conf;
 }
 
 /**
@@ -103,14 +167,6 @@ int OPluginItem::position()const{
  */
 void OPluginItem::setName(  const QString& name ) {
     m_name = name;
-}
-
-/**
- * Set the config key
- * @param key The config key/group of this plugin
- */
-void OPluginItem::setConfigKey( const QCString& conf ) {
-    m_conf = conf;
 }
 
 /**
@@ -160,9 +216,10 @@ void OPluginItem::setPosition( int pos ) {
  */
 OGenericPluginLoader::OGenericPluginLoader( const QString& name,  bool isSorted)
     : m_dir( name ), m_autoDelete( false ), m_isSafeMode( false ),
-      m_isSorted( isSorted ), m_readConfig( false )
+      m_isSorted( isSorted )
 {
     setPluginDir( QPEApplication::qpeDir() + "/plugins/"+name );
+    readConfig();
 }
 
 
@@ -213,7 +270,7 @@ void OGenericPluginLoader::unload( QUnknownInterface* iface ) {
         return;
 
     iface->release();
-    OPluginLibraryHolder::self()->deref( m_library.take( iface ) );
+    Internal::OPluginLibraryHolder::self()->deref( m_library.take( iface ) );
 }
 
 /**
@@ -224,19 +281,9 @@ void OGenericPluginLoader::unload( QUnknownInterface* iface ) {
  * @return true if prior loading failed
  */
 bool OGenericPluginLoader::isInSafeMode()const {
-    if ( !m_readConfig )
-        readConfig();
     return m_isSafeMode;
 }
 
-/**
- * return if the plugin list is sorted.
- */
-bool OGenericPluginLoader::isSorted()const {
-    if ( !m_readConfig )
-        readConfig();
-    return m_isSorted;
-}
 
 /**
  * Return the list of all available plugins. This will go through all plugin
@@ -285,8 +332,8 @@ QUnknownInterface* OGenericPluginLoader::load( const OPluginItem& item, const QU
      * See if we get a library
      * return if we've none
      */
-    setSafeMode( true );
-    QLibrary *lib = OPluginLibraryHolder::self()->getLibrary( pa );
+    setSafeMode( pa, true );
+    QLibrary *lib = Internal::OPluginLibraryHolder::self()->ref( pa );
     if ( !lib ) {
         setSafeMode();
         return 0l;
@@ -295,71 +342,159 @@ QUnknownInterface* OGenericPluginLoader::load( const OPluginItem& item, const QU
     /**
      * try to load the plugin and just in case initialize the pointer to a pointer again
      */
-    QUnknownInterface**  iface = 0;
-    if ( lib->queryInterface(  uuid,  iface ) == QS_OK ) {
+    QUnknownInterface*  iface=0;
+    if ( lib->queryInterface(  uuid,  &iface ) == QS_OK ) {
         installTranslators(pa.left( pa.find(".")));
-        m_library.insert( *iface, lib );
+        m_library.insert( iface, lib );
     }else
-        *iface = 0;
+        iface = 0;
 
     setSafeMode();
 
-    return *iface;
+    return iface;
 }
 
+/**
+ * @internal and reads in the safe mode
+ */
 void OGenericPluginLoader::readConfig() {
-    m_readConfig = true;
-
     /* read the config for SafeMode */
-    OConfig conf(  m_name + "-odpplugins" );
+    OConfig conf(  m_dir + "-odpplugins" );
     conf.setGroup( "General" );
     m_isSafeMode = conf.readBoolEntry( "SafeMode", false );
 }
 
-void OGenericPluginLoader::setSafeMode(bool b) {
-    OConfig conf(  m_name + "-odpplugins" );
+/**
+ * Enter or leave SafeMode
+ */
+void OGenericPluginLoader::setSafeMode(const QString& str, bool b) {
+    OConfig conf(  m_dir + "-odpplugins" );
     conf.setGroup( "General" );
     conf.writeEntry( "SafeMode", b );
+    conf.writeEntry( "CrashedPlugin", str );
 }
 
+/**
+ * @internal
+ *
+ * Set the List of Plugin Dirs to lst. Currently only QPEApplication::qpeDir()+"/plugins/"+mytype
+ * is used as plugin dir
+ */
 void OGenericPluginLoader::setPluginDirs( const QStringList& lst ) {
     m_plugDirs = lst;
 }
 
+/**
+ *
+ * @internal
+ * Set the Plugin Dir to str. Str will be the only element in the list of plugin dirs
+ */
 void OGenericPluginLoader::setPluginDir( const QString& str) {
     m_plugDirs.clear();
     m_plugDirs.append( str );
 }
 
-bool &OGenericPluginLoader::isSafeMode()const {
-    return m_isSafeMode;
-}
 
-bool &OGenericPluginLoader::isSorted()const {
+/**
+ * @internal
+ */
+bool OGenericPluginLoader::isSorted()const{
     return m_isSorted;
 }
 
-OPluginItem::List OGenericPluginLoader::plugins( const QString& dir, bool sorted, bool disabled ) {
+/*
+ * make libfoo.so.1.0.0 -> foo on UNIX
+ * make libfoo.dylib    -> foo on MAC OS X Unix
+ * windows is obviously missing
+ */
+/**
+ * @internal
+ */
+QString OGenericPluginLoader::unlibify( const QString& str ) {
+    QString st = str.mid( str.find( "lib" )+3 );
 #ifdef Q_OS_MACX
-    QDir dir( dir, "lib*.dylib" );
+    return st.left( st.findRev( ".dylib" ) );
 #else
-    QDir dir( dir, "lib*.so" );
+    return st.left( st.findRev( ".so" ) );
 #endif
-    /*
-     * get excluded list and then iterate over them
-     */
-    OConfig cfg( m_name+"odpplugins" );
-    cfg.setGroup( dir );
-    QStringList excludes = cfg.readListEntry( "Excluded" );
-
-    QStringList list = dir.entryList();
-//    for (
-
 }
 
+/**
+ * Return a List of Plugins for a dir and add positions and remove disabled.
+ * If a plugin is on the excluded list assign position -2
+ *
+ * @param dir The dir to look in
+ * @param sorted Should positions be read?
+ * @param disabled Remove excluded from the list
+ */
+OPluginItem::List OGenericPluginLoader::plugins( const QString& _dir, bool sorted, bool disabled )const {
+#ifdef Q_OS_MACX
+    QDir dir( _dir, "lib*.dylib" );
+#else
+    QDir dir( _dir, "lib*.so" );
+#endif
 
+    OPluginItem::List lst;
+
+    /*
+     * get excluded list and then iterate over them
+     * Excluded list contains the name
+     * Position is a list with 'name.pos.name.pos.name.pos'
+     *
+     * For the look up we will create two QMap<QString,pos>
+     */
+    QMap<QString, int> positionMap;
+    QMap<QString, int> excludedMap;
+
+
+    OConfig cfg( m_dir+"odpplugins" );
+    cfg.setGroup( _dir );
+
+
+    QStringList excludes = cfg.readListEntry( "Excluded", ',' );
+    for ( QStringList::Iterator it = excludes.begin(); it != excludes.end(); ++it )
+        excludedMap.insert( *it, -2 );
+
+    if ( m_isSorted ) {
+        QStringList pos =  cfg.readListEntry( "Positions", '.' );
+        QStringList::Iterator it = pos.begin();
+        while ( it != pos.end() )
+            positionMap.insert(  *it++, (*it++).toInt() );
+    }
+
+
+
+
+    QStringList list = dir.entryList();
+    QStringList::Iterator it;
+    for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
+        QString str = unlibify( *it );
+        OPluginItem item( str, _dir + "/" + *it );
+
+        bool ex = excludedMap.contains( str );
+        /*
+         * if disabled but we should show all assign a -2
+         * else continue because we don't want to add the item
+         * else if sorted we assign the right position
+         */
+        if ( ex && !disabled)
+            item.setPosition( -2 );
+        else if ( ex && disabled )
+            continue;
+        else if ( sorted )
+            item.setPosition( positionMap[str] );
+
+        lst.append( item );
+    }
+
+    return lst;
+}
+
+/**
+ * @internal generate a list of languages from $LANG
+ */
 QStringList OGenericPluginLoader::languageList() {
-    if ( languageList.isEmpty() ) {
+    if ( m_languages.isEmpty() ) {
         /*
          * be_BY.CP1251 We will add, be_BY.CP1251,be_BY,be
          * to our list of languages.
@@ -381,9 +516,18 @@ QStringList OGenericPluginLoader::languageList() {
 
 void OGenericPluginLoader::installTranslators(const QString& type) {
     QStringList lst = languageList();
+
+    /*
+     * for each language and maybe later for each language dir...
+     * try to load a Translator
+     */
     for ( QStringList::Iterator it = lst.begin(); it != lst.end(); ++it ) {
         QTranslator* trans = new QTranslator(  qApp );
-        QString tfn = QPEApplication::qpeDir()+"/i18n/" + lang + "/" + type + ".qm" ;
+        QString tfn = QPEApplication::qpeDir()+"/i18n/" + *it + "/" + type + ".qm" ;
+
+        /*
+         * If loaded then install else clean up and don't leak
+         */
         if ( trans->load( tfn ) )
             qApp->installTranslator( trans );
         else

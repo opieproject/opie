@@ -7,6 +7,7 @@
 
 #include <qpe/qlibrary.h>
 
+#include <qptrdict.h>
 #include <qstringlist.h>
 
 namespace Opie {
@@ -31,7 +32,7 @@ class OPluginItem {
 public:
     typedef QValueList<OPluginItem> List;
     OPluginItem();
-    OPluginItem( const QString& name, const QCString& confopt, const QString& path, int pos = -1 );
+    OPluginItem( const QString& name, const QString& path, int pos = -1 );
     ~OPluginItem();
 
     bool operator==( const OPluginItem& )const;
@@ -39,18 +40,15 @@ public:
 
 
     QString  name()const;
-    QCString configKey()const;
     QString  path()const;
     int position()const;
 
     void setName( const QString& );
-    void setConfigKey( const QCString& );
     void setPath( const QString& );
     void setPosition( int );
 
 private:
     QString m_name;
-    QCString m_conf;
     QString m_path;
     int m_pos;
     struct Private;
@@ -90,24 +88,22 @@ public:
     virtual void unload( QUnknownInterface* );
 
 protected:
-    virtual void readConfig();
+    void readConfig();
     virtual List plugins( const QString& dir, bool sorted, bool disabled )const;
     void setPluginDirs( const QStringList& );
     void setPluginDir( const QString& );
-    bool &isSafeMode()const;
-    bool &isSorted()const;
-    void readConfig()const;
-    void setSafeMode(bool b = false);
+    bool isSorted()const;
+    void setSafeMode(const QString& app = QString::null,  bool b = false);
+    static QString unlibify( const QString& str );
 
 private:
-    QString languageList();
+    QStringList languageList();
     void installTranslators(const QString& type);
     QString m_dir;
     QStringList m_plugDirs;
     QStringList m_languages;
     bool m_autoDelete : 1;
     bool m_isSafeMode : 1;
-    bool m_readConfig : 1;
     bool m_isSorted   : 1;
     QPtrDict<QLibrary> m_library;
 
@@ -139,9 +135,9 @@ public:
     OPluginLoader( const QString& name, bool sorted = false );
     ~OPluginLoader();
 
-    temlate<class IFace>
+    template<class IFace>
     IFace* load( const QString& name, const QUuid& );
-    temlate<class IFace>
+    template<class IFace>
     IFace* load( const OPluginItem& item, const QUuid& );
 };
 
