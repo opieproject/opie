@@ -80,7 +80,10 @@ void SSHKeysApp::doRefreshListButton()
 		log_text(tr("Error running ssh-add"));
 		return;
 	}
-
+	if (sshadd_process.exitStatus() == 2) {
+		log_text(tr("Connection to ssh-agent failed"));
+		setEnabled(FALSE);
+	}
 }
 
 void SSHKeysApp::get_list_keys_output(OProcess *proc, char *buffer, int buflen)
