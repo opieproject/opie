@@ -25,6 +25,8 @@ public:
 
 signals:
     void dispImageInfo(const QString&);
+    void dispNext();
+    void dispPrev();
 
 protected:
     Opie::Core::OConfig * m_cfg;
@@ -32,5 +34,8 @@ protected:
     void initKeys();
 protected slots:
     virtual void slotShowImageInfo();
+    virtual void slotDispNext();
+    virtual void slotDispPrev();
+    virtual void keyReleaseEvent(QKeyEvent * e);
 };
 #endif

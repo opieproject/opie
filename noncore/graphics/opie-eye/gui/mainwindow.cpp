@@ -266,6 +266,8 @@ void PMainWindow::initDisp() {
         m_disp->setAutoRotate(autoRotate);
         m_disp->setShowZoomer(zoomerOn);
         connect(m_disp,SIGNAL(dispImageInfo(const QString&)),this,SLOT(slotShowInfo(const QString&)));
+        connect(m_disp,SIGNAL(dispNext()),m_view,SLOT(slotShowNext()));
+        connect(m_disp,SIGNAL(dispPrev()),m_view,SLOT(slotShowPrev()));
     }
 }
 

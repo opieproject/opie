@@ -50,8 +50,33 @@ void ImageView::initKeys()
                                                 Resource::loadPixmap("1to1"), ViewInfo,
                                                 Opie::Core::OKeyPair(Qt::Key_I,Qt::ShiftButton),
                                                 this, SLOT(slotShowImageInfo())));
+#if 0
+   m_viewManager->addKeyConfig( Opie::Core::OKeyConfigItem(tr("Next image"), "nextimage",
+                                                Resource::loadPixmap("next"), ViewInfo,
+                                                Opie::Core::OKeyPair(Qt::Key_N,0),
+                                                this, SLOT(slotDispNext())));
+#endif
     m_viewManager->handleWidget( this );
     m_viewManager->load();
+}
+
+void ImageView::keyReleaseEvent(QKeyEvent * e)
+{
+    if (!e || e->state()!=0) {
+        return;
+    }
+    if (e->key()==Qt::Key_N) slotDispNext();
+    if (e->key()==Qt::Key_P) slotDispPrev();
+}
+
+void ImageView::slotDispNext()
+{
+    emit dispNext();
+}
+
+void ImageView::slotDispPrev()
+{
+    emit dispPrev();
 }
 
 void ImageView::slotShowImageInfo()
