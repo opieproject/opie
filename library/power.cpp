@@ -20,7 +20,7 @@
 
 #include "power.h"
 
-#ifdef QT_QWS_CUSTOM
+#if defined( QT_QWS_CUSTOM ) || defined( QT_QWS_IPAQ )
 #include "custom.h"
 #endif
 
