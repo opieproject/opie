@@ -1,5 +1,5 @@
 
-DESTDIR=../../bin
+DESTDIR=$(OPIEDIR)/bin
 
 CROSS:=arm-linux-
 CC   :=$(CROSS)gcc
