@@ -67,9 +67,9 @@ void MHwrapper::listMessages(const QString & mailbox, QList<RecMail> &target )
         return;
     }
     QString f = buildPath(mailbox);
-    int r = mailsession_select_folder(m_storage->sto_session,(char*)mailbox.latin1());
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)f.latin1());
     if (r!=MAIL_NO_ERROR) {
-        qDebug("error selecting folder!");
+        qDebug("listMessages: error selecting folder!");
         return;
     }
     parseList(target,m_storage->sto_session,f);
@@ -236,18 +236,21 @@ encodedString* MHwrapper::fetchRawBody(const RecMail&mail)
 
 void MHwrapper::deleteMails(const QString & mailbox,QList<RecMail> &target)
 {
-#if 0
-    QString p = MHPath+"/";
-    p+=mailbox;
-    mailmbox_folder*f = 0;
-    int r = mailmbox_init(p.latin1(),0,1,0,&f);
-    if (r != MAIL_NO_ERROR) {
-        qDebug("Error init folder");
+    QString f = buildPath(mailbox);
+    int r = mailsession_select_folder(m_storage->sto_session,(char*)f.latin1());
+    if (r!=MAIL_NO_ERROR) {
+        qDebug("deleteMails: error selecting folder!");
         return;
     }
-    deleteMails(f,target);
-    mailmbox_done(f);
-#endif
+    RecMail*c = 0;
+    for (unsigned int i=0; i < target.count();++i) {
+        c = target.at(i);
+        r = mailsession_remove_message(m_storage->sto_session,c->getNumber());
+        if (r != MAIL_NO_ERROR) {
+            qDebug("error deleting mail");
+            break;
+        }
+    }
 }
 
 int MHwrapper::deleteAllMail(const Folder*tfolder)
