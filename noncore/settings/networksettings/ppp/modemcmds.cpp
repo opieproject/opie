@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modemcmds.cpp,v 1.4 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: modemcmds.cpp,v 1.5 2005-03-01 20:04:21 zecke Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  * wuebben@math.cornell.edu
@@ -73,7 +73,7 @@ ModemCommands::ModemCommands(PPPData *pd, QWidget *parent, const char *name , bo
   lpreinitslider = new QLabel("MMMM", mainW);
   FORMATSLIDERLABEL(lpreinitslider);
 
-  QSlider *preinitslider = new QSlider(0, 300, 1, 0,
+  QSlider *preinitslider = new QSlider(0, 600, 1, 0,
                                        QSlider::Horizontal, mainW);
 //  preinitslider->setFixedHeight(preinitslider->sizeHint().height());
   connect(preinitslider, SIGNAL(valueChanged(int)),
