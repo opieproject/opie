@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.h,v 1.2 2003-04-21 23:58:24 llornkcor Exp $
+** $Id: helpwindow.h,v 1.3 2003-04-22 14:11:34 llornkcor Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -25,7 +25,7 @@ class HelpWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    HelpWindow( const QString& home_,  const QString& path, QWidget* parent, const char *name );
+    HelpWindow( const QString& home_=0,  const QString& path=0, QWidget* parent=0, const char *name=0 );
     ~HelpWindow();
 
 private slots:
