@@ -1,6 +1,7 @@
 0.3.1
 
-
+* better translation (thanks carsten and others)
+* fixes memory leaks
 * bugfixes in calendar part, now location and note are working again. 
 
 0.3.0
