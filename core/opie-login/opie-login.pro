@@ -17,8 +17,8 @@ DEPENDPATH  += $(OPIEDIR)/include ../launcher ../apps/calibrate
 
 LIBS        += -lqpe -lopie
 
-usepam:LIBS += -lpam
-usepam:DEFINES += USEPAM
+#usepam:LIBS += -lpam
+#usepam:DEFINES += USEPAM
 
 DESTDIR     = $(OPIEDIR)/bin
 TARGET      = opie-login

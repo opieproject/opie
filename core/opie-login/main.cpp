@@ -5,6 +5,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/qcopenvelope_qws.h>

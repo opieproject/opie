@@ -18,6 +18,8 @@
 **
 **********************************************************************/
 
+#include <math.h>
+
 #include "calibrate.h"
 
 #include <qpe/resource.h>
