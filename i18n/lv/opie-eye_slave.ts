@@ -320,68 +320,78 @@
     <message>
         <source>Manufacturer: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ražotājs: %1
+</translation>
     </message>
     <message>
         <source>Model: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Modelis: %1
+</translation>
     </message>
     <message>
         <source>Orientation: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Orientācija: %1
+</translation>
     </message>
     <message>
         <source>Flash used
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Pielietotais Flash
+</translation>
     </message>
     <message>
         <source>Focal length: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Fokāla garums: %1
+</translation>
     </message>
     <message>
         <source>35mm equivalent: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>35mm ekvivalents: %1
+</translation>
     </message>
     <message>
         <source>CCD width: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>CCD platums: %1</translation>
     </message>
     <message>
         <source>Exposure time: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Attīstīšanas laiks: %1
+</translation>
     </message>
     <message>
         <source>Aperture: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Atklāšana: %1
+</translation>
     </message>
     <message>
         <source>Distance: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Attālums: %1
+</translation>
     </message>
     <message>
         <source>Infinite</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienkārši</translation>
     </message>
     <message>
         <source>ISO equivalent: %1
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ISO ekvivalents: %1
+</translation>
     </message>
     <message>
         <source>EXIF comment: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>EXIF komentārs: %1</translation>
     </message>
     <message>
         <source>&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>
