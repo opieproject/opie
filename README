@@ -41,6 +41,13 @@ qte234-for-opie091-sigsegv.patch
 qte234-for-opie091-style.patch
 qte234-for-opie091-unpolish.patch
 
+cd $QTDIR; cat $OPIEDIR/qt/qte234*.patch | patch -p0
+
+OR just apply the one
+cd $QTDIR; cat $OPIEDIR/qt/patches qte237-all.patch | patch -p0
+
+
+
 *NOTE* You can skip the qte234-for-opie091-simpad.patch
 patch, unless you are compiling for simpad. 
 
