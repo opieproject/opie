@@ -1,14 +1,4 @@
-  source /home/ofels/projects/opie/noncore/apps/aqpkg/config.in
-  source /home/ofels/projects/opie/noncore/apps/checkbook/config.in
-  source /home/ofels/projects/opie/noncore/apps/confedit/config.in
-  source /home/ofels/projects/opie/noncore/apps/odict/config.in
-  source /home/ofels/projects/opie/noncore/apps/opie-console/config.in
-  source /home/ofels/projects/opie/noncore/apps/opie-reader/config.in
-  source /home/ofels/projects/opie/noncore/apps/opie-reader.old/config.in
-  source /home/ofels/projects/opie/noncore/apps/opie-sheet/config.in
-  source /home/ofels/projects/opie/noncore/apps/opie-write/config.in
-  source /home/ofels/projects/opie/noncore/apps/oxygen/config.in
-  source /home/ofels/projects/opie/noncore/apps/sysinfo/config.in
-  source /home/ofels/projects/opie/noncore/apps/tableviewer/config.in
-  source /home/ofels/projects/opie/noncore/apps/tinykate/config.in
-
+  config OPIE-READER
+    boolean "opie-reader"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
