@@ -862,6 +862,7 @@ void OpieFtp::showRemoteMenu(QListViewItem * item)
     else
     m->insertItem( tr( "Download" ), this, SLOT( remoteDownload() ));
     m->insertItem( tr( "Make Directory" ), this, SLOT( remoteMakDir() ));
+    m->insertItem( tr("Rescan"), this, SLOT( populateLocalView() ));
     m->insertItem( tr( "Rename" ), this, SLOT( remoteRename() ));
     m->insertSeparator();
     m->insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
@@ -881,6 +882,7 @@ void OpieFtp::showLocalMenu(QListViewItem * item)
     else
     m->insertItem( tr( "Upload" ), this, SLOT( localUpload() ));
     m->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
+    m->insertItem( tr("Rescan"), this, SLOT( populateRemoteView() ));
     m->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
     m->insertSeparator();
     m->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
