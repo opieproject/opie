@@ -183,7 +183,7 @@ bool Interfaces::copyInterface(QString interface, QString newInterface){
   QStringList::Iterator newIface = currentIface;
   newIface++;
   
-  for ( it; it != interfaces.end(); ++it ){
+  for ( ; it != interfaces.end(); ++it ){
     if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO)))
       break;
     newIface = interfaces.insert(newIface, *it);
@@ -556,7 +556,7 @@ bool Interfaces::removeAllOptions(QStringList::Iterator start){
   
   QStringList::Iterator it = start;
   it = ++it;
-  for (it; it != interfaces.end(); ++it ) {
+  for (; it != interfaces.end(); ++it ) {
     if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
       break;
     }
