@@ -11,11 +11,11 @@ FileTransferLayer::FileTransferLayer(IOLayer *layer)
 FileTransferLayer::~FileTransferLayer() {
 }
 
-void FileTransferLayer::sendFile(const QFile& file) {
+void FileTransferLayer::sendFile(const QFile&) {
 
 }
 
-void FileTransferLayer::sendFile(const QString& file) {
+void FileTransferLayer::sendFile(const QString&) {
 }
 
 IOLayer* FileTransferLayer::layer() {

@@ -110,7 +110,6 @@ void MyPty::setSize(int lines, int columns)
 void MyPty::donePty()
 {
     // This is code from the Qt DumbTerminal example
-    int status = 0;
 
     ::close(m_fd);
 
@@ -257,6 +256,7 @@ MyPty::MyPty(const Profile& prof) : m_cpid(0)
     m_sn_r = 0l;
   m_fd = openPty();
   ProcCtl* ctl = ProcCtl::self();
+  Q_UNUSED(ctl);
 }
 
 /*!

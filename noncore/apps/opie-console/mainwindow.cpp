@@ -89,6 +89,16 @@ void MainWindow::initUI() {
     connect(a, SIGNAL(activated() ),
             this, SLOT(slotNew() ) );
 
+    m_console->insertSeparator();
+    /* save icon is not available */
+    a = new QAction(tr("Save Connection"),
+                    Resource::loadPixmap("save"), QString::null,
+                    0, this, 0 );
+    a->addTo( m_console );
+    connect(a, SIGNAL(activated() ),
+            this, SLOT(slotSaveSession() ) );
+    m_console->insertSeparator();
+
     /*
      * connect action
      */
@@ -176,7 +186,7 @@ void MainWindow::initUI() {
 
     /*
      * action that open/closes the keyboard
- 
+
     m_openButtons = new QAction ( tr( "Open Buttons..." ),
                              Resource::loadPixmap( "" ),
                              QString::null, 0, this, 0 );
@@ -222,6 +232,20 @@ void MainWindow::initUI() {
     connect( m_qb, SIGNAL( keyPressed( ushort, ushort, bool, bool, bool) ),
             this, SLOT( slotKeyReceived( ushort, ushort, bool, bool, bool) ) );
     */
+    /* now add the copy and paste actions */
+    a = new QAction(tr("Copy"),
+                    Resource::loadPixmap("copy"), QString::null,
+                    0, this, 0 );
+    //a->addTo( m_icons );
+    connect( a, SIGNAL(activated() ),
+             this, SLOT(slotCopy() ) );
+
+    a = new QAction(tr("Paste"),
+                    Resource::loadPixmap("paste"), QString::null,
+                    0, this, 0 );
+    a->addTo( m_icons );
+    connect( a, SIGNAL(activated() ),
+             this, SLOT(slotPaste() ) );
 
 
     m_connect->setEnabled( false );
@@ -538,4 +562,27 @@ void MainWindow::slotKeyReceived(FKey k, ushort, ushort, bool pressed) {
         QApplication::sendEvent((QObject *)m_curSession->widget(), &ke);
         ke.ignore();
     }
+}
+void MainWindow::slotCopy() {
+    if (!currentSession() ) return;
+    currentSession()->emulationHandler()->copy();
+}
+void MainWindow::slotPaste() {
+    if (!currentSession() ) return;
+    currentSession()->emulationHandler()->paste();
+}
+
+/*
+ * Save the session
+ */
+
+void MainWindow::slotSaveSession() {
+    if (!currentSession() ) {
+      QMessageBox::information(this, tr("Save Connection"),
+                                          tr("<qt>There is no Connection.</qt>"), 1 );
+      return;
+    }
+    manager()->add( currentSession()->profile() );
+    manager()->save();
+    populateProfiles();
 }

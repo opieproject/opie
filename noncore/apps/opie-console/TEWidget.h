@@ -34,25 +34,7 @@ extern unsigned short vt100_graphics[32];
 
 
 
-static char * menu_xpm[] = {
-"12 12 5 1",
-" 	c None",
-".	c #000000",
-"+	c #FFFDAD",
-"@	c #FFFF00",
-"#	c #E5E100",
-"            ",
-"            ",
-"  ......... ",
-"  .+++++++. ",
-"  .+@@@@#.  ",
-"  .+@@@#.   ",
-"  .+@@#.    ",
-"  .+@#.     ",
-"  .+#.      ",
-"  .+.       ",
-"  ..        ",
-"            "};
+
 
 class TESession;
 

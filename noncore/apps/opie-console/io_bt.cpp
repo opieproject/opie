@@ -24,6 +24,7 @@ void IOBt::close() {
 }
 
 bool IOBt::open() {
+    bool ret = false;
 
     // only set up bt stuff if mac address was set, otherwise use the device set
     if ( !m_mac.isEmpty() ) {
@@ -39,7 +40,7 @@ bool IOBt::open() {
                  this, SLOT( slotExited( OProcess* ) ) );
 
         if ( m_attach->start() ) {
-            IOSerial::open();
+            ret = IOSerial::open();
         } else {
             qWarning("could not attach to device");
             delete m_attach;
@@ -49,8 +50,9 @@ bool IOBt::open() {
         // directly to the normal serial
         // TODO: look first if the connection really exists. ( is set up )
 
-        IOSerial::open();
+        ret =IOSerial::open();
     }
+    return ret;
 }
 
 void IOBt::reload( const Profile &config ) {
@@ -74,4 +76,5 @@ QString IOBt::name() const {
 
 void IOBt::slotExited( OProcess* proc ){
     close();
+    delete proc;
 }

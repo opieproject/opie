@@ -3,6 +3,8 @@
 
 #include <qwidgetstack.h>
 
+#include "profile.h"
+
 class IOLayer;
 class EmulationHandler;
 /**
@@ -42,6 +44,7 @@ public:
     IOLayer* layer();
 
     EmulationHandler* emulationHandler();
+    Profile profile()const;
 
     /*
      * connects the data flow from
@@ -59,13 +62,15 @@ public:
     void setEmulationHandler( EmulationHandler* lay );
     void setIOLayer( IOLayer*  );
     void setName( const QString& );
+    void setProfile( const Profile& );
 
 private:
     QString m_name;
     QWidgetStack* m_widget;
     IOLayer* m_layer;
     EmulationHandler* m_emu;
-    bool m_connected;
+    bool m_connected : 1;
+    Profile m_prof;
 
 };
 

@@ -21,6 +21,7 @@ void IOIrda::close() {
 }
 
 bool IOIrda::open() {
+    bool ret;
 
     // irdaattach here
     m_attach = new OProcess();
@@ -30,13 +31,14 @@ bool IOIrda::open() {
             this, SLOT( slotExited( OProcess* ) ) );
 
     if ( m_attach->start() ) {
-        IOSerial::open();
+        ret= IOSerial::open();
     } else {
     // emit error!!!
         qWarning("could not attach to device");
         delete m_attach;
 	m_attach = 0l;
     }
+    return ret;
 }
 
 void IOIrda::reload( const Profile &config ) {
@@ -59,4 +61,5 @@ QString IOIrda::name() const {
 
 void IOIrda::slotExited(OProcess* proc ){
     close();
+    delete proc;
 }

@@ -192,3 +192,9 @@ void EmulationHandler::runScript(const Script *script) {
     emit send(script->script());
 }
 
+void EmulationHandler::copy() {
+    m_teWid->emitSelection();
+}
+void EmulationHandler::paste() {
+    m_teWid->pasteClipboard();
+}

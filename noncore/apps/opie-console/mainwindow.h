@@ -70,6 +70,13 @@ private slots:
     void slotSessionChanged( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
 
+    /* what could these both slot do? */
+    void slotCopy();
+    void slotPaste();
+
+    /* save the currentSession() to Profiles */
+    void slotSaveSession();
+
 private:
     void initUI();
     void populateProfiles();

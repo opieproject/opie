@@ -1,4 +1,4 @@
-Files: bin/opie-console apps/Applications/opie-console.desktop pics/console/* etc/keytabs/default.Keytab
+Files: bin/opie-console apps/Applications/opie-console.desktop pics/console/* etc/keytabs/default.Keytab bin/sz bin/rz
 Priority: optional
 Section: opie/applications
 Maintainer: Opie team <opie@handhelds.org>

@@ -1,5 +1,6 @@
 #include <unistd.h>
 
+#include <qdir.h>
 #include <qstring.h>
 #include <qfile.h>
 
@@ -19,7 +20,7 @@ IOLayer* ReceiveLayer::layer() {
 }
 QString ReceiveLayer::currentDir()const{
     if (m_curDir.isEmpty() )
-        return QString::fromLocal8Bit( ::getwd(NULL) );
+        return QDir::currentDirPath();
     return m_curDir;
 }
 void ReceiveLayer::changeDir( const QString& str) {

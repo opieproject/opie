@@ -49,7 +49,7 @@ public:
     QWidget* widget();
     void setColor( const QColor& fore, const QColor& back );
     QPushButton* cornerButton();
-  
+
     /* Scripts */
     /* Create a new script and record all typed characters */
     void startRecording();
@@ -73,6 +73,8 @@ signals:
 
 public slots:
     void recv( const QByteArray& );
+    void paste();
+    void copy();
 
 private slots:
     void recvEmulation( const char*,  int len );

@@ -1,5 +1,6 @@
 
 
+#include "profile.h"
 #include "io_layer.h"
 #include "file_layer.h"
 #include "emulation_handler.h"
@@ -41,6 +42,9 @@ QWidget* Session::widget() {
         return 0l;
 
     return m_emu->widget();
+}
+Profile Session::profile()const {
+    return m_prof;
 }
 /*
 WidgetLayer* Session::emulationWidget() {
@@ -90,6 +94,9 @@ void Session::setIOLayer( IOLayer* lay ) {
 void Session::setEmulationHandler( EmulationHandler* lay ) {
     delete m_emu;
     m_emu = lay;
+}
+void Session::setProfile( const Profile& prof ) {
+    m_prof = prof;
 }
 /*
 void Session::setEmulationWidget( WidgetLayer* lay ) {

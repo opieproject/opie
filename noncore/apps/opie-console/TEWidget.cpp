@@ -95,6 +95,31 @@
 #define yMouseScroll 1
 // scroll increment used when dragging selection at top/bottom of window.
 
+/* Button XPM */
+namespace {
+static char * menu_xpm[] = {
+"12 12 5 1",
+" 	c None",
+".	c #000000",
+"+	c #FFFDAD",
+"@	c #FFFF00",
+"#	c #E5E100",
+"            ",
+"            ",
+"  ......... ",
+"  .+++++++. ",
+"  .+@@@@#.  ",
+"  .+@@@#.   ",
+"  .+@@#.    ",
+"  .+@#.     ",
+"  .+#.      ",
+"  .+.       ",
+"  ..        ",
+"            "};
+
+}
+
+
 /* ------------------------------------------------------------------------- */
 /*                                                                           */
 /*                                Colors                                     */
@@ -1241,7 +1266,7 @@ void TEWidget::dropEvent(QDropEvent* event)
 #endif
 
 
-void TEWidget::drop_menu_activated(int item)
+void TEWidget::drop_menu_activated(int)
 {
 #ifndef QT_NO_DRAGANDDROP
   switch (item)

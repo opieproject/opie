@@ -93,6 +93,7 @@ Session* ProfileManager::fromProfile( const Profile& prof,  QWidget* parent) {
     EmulationHandler* handler = new EmulationHandler(prof,dummy );
     session->setEmulationHandler( handler );
     session->connect();
+    session->setProfile( prof );
 
     return session;
 }
@@ -120,6 +121,9 @@ void ProfileManager::save(  ) {
         conf.writeEntry( "fore", (*it2).foreground() );
         conf.writeEntry( "terminal", (*it2).terminal() );
     }
+}
+void ProfileManager::add( const Profile& prof) {
+    m_list.append( prof );
 }
 void ProfileManager::setProfiles( const Profile::ValueList& list ) {
     m_list = list;
