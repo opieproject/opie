@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/ash 
 #
 #  script to remove and reinstall opie
 #
@@ -10,7 +10,6 @@ IPKG_INSTALL="ipkg install"
 echo "Upating opie"
 pack=`ipkg status | grep Package | grep -i opie | grep -v update | sed  "s/Package://"`
 
-
 echo "Stopping Opie"
 /etc/init.d/opie stop
 
@@ -18,11 +17,7 @@ echo "start" > /tmp/update.log
 
 for p in  $pack; do
 echo "rem.  $p" >> /tmp/update.log
-if [["$p"="opie-update"]]; then
-echo ""
-else
 $IPKG_REMOVE $p
-fi
 done
 
 #might help
@@ -34,11 +29,7 @@ echo "Updating"
 
 for p in  $pack; do
 echo "inst. $p" >> /tmp/update.log
-if [["$p"="opie-update"]]; then
-echo ""
-else
 $IPKG_INSTALL $p
-fi
 done
 
 ipkg remove opie-update
