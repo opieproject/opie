@@ -24,14 +24,21 @@ const char* SMTPwrapper::USER_AGENT="OpieMail v0.4";
 
 progressMailSend*SMTPwrapper::sendProgress = 0;
 
-SMTPwrapper::SMTPwrapper( Settings *s )
-: QObject() {
-    settings = s;
+SMTPwrapper::SMTPwrapper(SMTPaccount * aSmtp )
+    : QObject()
+{
+    m_SmtpAccount = aSmtp;
     Config cfg( "mail" );
     cfg.setGroup( "Status" );
     m_queuedMail =  cfg.readNumEntry( "outgoing", 0 );
     emit queuedMails( m_queuedMail );
     connect( this, SIGNAL( queuedMails( int ) ), this, SLOT( emitQCop( int ) )  );
+    m_smtp = 0;
+}
+
+SMTPwrapper::~SMTPwrapper()
+{
+    disc_server();
 }
 
 void SMTPwrapper::emitQCop( int queued ) {
@@ -510,14 +517,11 @@ void SMTPwrapper::storeMail(const char*mail, size_t length, const QString&box) {
     delete wrap;
 }
 
-void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp ) {
+void SMTPwrapper::smtpSend( mailmime *mail,bool later) {
     clist *rcpts = 0;
     char *from, *data;
     size_t size;
 
-    if ( smtp == NULL ) {
-        return;
-    }
     from = data = 0;
 
     mailmessage * msg = 0;
@@ -545,7 +549,7 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp ) {
     }
     from = getFrom( mail );
     rcpts = createRcptList( mail->mm_data.mm_message.mm_fields );
-    smtpSend(from,rcpts,data,size,smtp);
+    smtpSend(from,rcpts,data,size);
     if (data) {
         free(data);
     }
@@ -567,70 +571,68 @@ void SMTPwrapper::storeFailedMail(const char*data,unsigned int size, const char*
     }
 }
 
-int SMTPwrapper::start_smtp_tls(mailsmtp *session)
+int SMTPwrapper::start_smtp_tls()
 {
-    if (!session) {
+    if (!m_smtp) {
         return MAILSMTP_ERROR_IN_PROCESSING;
     }
-    int err = mailesmtp_starttls(session);
+    int err = mailesmtp_starttls(m_smtp);
     if (err != MAILSMTP_NO_ERROR) return err;
     mailstream_low * low;
     mailstream_low * new_low;
-    low = mailstream_get_low(session->stream);
+    low = mailstream_get_low(m_smtp->stream);
     if (!low) {
         return MAILSMTP_ERROR_IN_PROCESSING;
     }
     int fd = mailstream_low_get_fd(low);
     if (fd > -1 && (new_low = mailstream_low_ssl_open(fd))!=0) {
         mailstream_low_free(low);
-        mailstream_set_low(session->stream, new_low);
+        mailstream_set_low(m_smtp->stream, new_low);
     } else {
         return MAILSMTP_ERROR_IN_PROCESSING;
     }
     return err;
 }
 
-int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMTPaccount *smtp ) {
+void SMTPwrapper::connect_server()
+{
     const char *server, *user, *pass;
     bool ssl;
     uint16_t port;
-    mailsmtp *session;
-    int err,result;
-    QString failuretext = "";
-
-    result = 1;
-    server = user = pass = 0;
-    server = smtp->getServer().latin1();
-
-    // FIXME: currently only TLS and Plain work.
-
     ssl = false;
     bool try_tls = true;
     bool force_tls=false;
-
-    if  ( smtp->ConnectionType() == 2 ) {
+    server = user = pass = 0;
+    QString failuretext = "";
+    
+    if (m_smtp || !m_SmtpAccount) {
+        return;
+    }
+    server = m_SmtpAccount->getServer().latin1();
+    if  ( m_SmtpAccount->ConnectionType() == 2 ) {
         ssl = true;
         try_tls = false;
-    } else if (smtp->ConnectionType() == 1) {
+    } else if (m_SmtpAccount->ConnectionType() == 1) {
         force_tls = true;
     }
+    int result = 1;
+    port = m_SmtpAccount->getPort().toUInt();
 
-    port = smtp->getPort().toUInt();
-
-    session = mailsmtp_new( 20, &progress );
-    if ( session == NULL ) {
+    m_smtp = mailsmtp_new( 20, &progress );
+    if ( m_smtp == NULL ) {
         /* no failure message cause this happens when problems with memory - than we
            we can not display any messagebox */
-        return 0;
+        return;
     }
 
+    int err = MAILSMTP_NO_ERROR;
     qDebug( "Servername %s at port %i", server, port );
     if ( ssl ) {
         qDebug( "SSL session" );
-        err = mailsmtp_ssl_connect( session, server, port );
+        err = mailsmtp_ssl_connect( m_smtp, server, port );
     } else {
         qDebug( "No SSL session" );
-        err = mailsmtp_socket_connect( session, server, port );
+        err = mailsmtp_socket_connect( m_smtp, server, port );
     }
     if ( err != MAILSMTP_NO_ERROR ) {
         qDebug("Error init connection");
@@ -640,7 +642,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
 
     /* switch to tls after init 'cause there it will send the ehlo */
     if (result) {
-        err = mailsmtp_init( session );
+        err = mailsmtp_init( m_smtp );
         if (err != MAILSMTP_NO_ERROR) {
             result = 0;
             failuretext = tr("Error init SMTP connection: %1").arg(mailsmtpError(err));
@@ -648,11 +650,11 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     }
 
     if (try_tls) {
-        err = start_smtp_tls(session);
+        err = start_smtp_tls();
         if (err != MAILSMTP_NO_ERROR) {
             try_tls = false;
         } else {
-            err = mailesmtp_ehlo(session);
+            err = mailesmtp_ehlo(m_smtp);
         }
     }
 
@@ -661,11 +663,12 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         failuretext = tr("Error init SMTP tls: %1").arg(mailsmtpError(err));
     }
 
-    if (result==1 && smtp->getLogin() ) {
+    if (result==1 && m_SmtpAccount->getLogin() ) {
         qDebug("smtp with auth");
-        if ( smtp->getUser().isEmpty() || smtp->getPassword().isEmpty() ) {
+        if ( m_SmtpAccount->getUser().isEmpty() || m_SmtpAccount->getPassword().isEmpty() ) {
             // get'em
-            LoginDialog login( smtp->getUser(), smtp->getPassword(), NULL, 0, true );
+            LoginDialog login( m_SmtpAccount->getUser(), 
+                m_SmtpAccount->getPassword(), NULL, 0, true );
             login.show();
             if ( QDialog::Accepted == login.exec() ) {
                 // ok
@@ -676,12 +679,12 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
                 failuretext=tr("Login aborted - storing mail to localfolder");
             }
         } else {
-            user = smtp->getUser().latin1();
-            pass = smtp->getPassword().latin1();
+            user = m_SmtpAccount->getUser().latin1();
+            pass = m_SmtpAccount->getPassword().latin1();
         }
-        qDebug( "session->auth: %i", session->auth);
+        qDebug( "session->auth: %i", m_smtp->auth);
         if (result) {
-            err = mailsmtp_auth( session, (char*)user, (char*)pass );
+            err = mailsmtp_auth( m_smtp, (char*)user, (char*)pass );
             if ( err == MAILSMTP_NO_ERROR ) {
                 qDebug("auth ok");
             } else {
@@ -690,13 +693,33 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
             }
         }
     }
+}
 
-    if (result) {
-        err = mailsmtp_send( session, from, rcpts, data, size );
+void SMTPwrapper::disc_server()
+{
+    if (m_smtp) {
+        mailsmtp_quit( m_smtp );
+        mailsmtp_free( m_smtp );
+        m_smtp = 0;
+    }
+}
+
+int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size )
+{
+    int err,result;
+    QString failuretext = "";
+
+    connect_server();
+
+    result = 1;
+    if (m_smtp) {
+        err = mailsmtp_send( m_smtp, from, rcpts, data, size );
         if ( err != MAILSMTP_NO_ERROR ) {
             failuretext=tr("Error sending mail: %1").arg(mailsmtpError(err));
             result = 0;
         }
+    } else {
+        result = 0;
     }
 
     if (!result) {
@@ -705,22 +728,13 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
         qDebug( "Mail sent." );
         storeMail(data,size,"Sent");
     }
-    if (session) {
-        mailsmtp_quit( session );
-        mailsmtp_free( session );
-    }
     return result;
 }
 
-void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later ) {
+void SMTPwrapper::sendMail(const Mail&mail,bool later )
+{
     mailmime * mimeMail;
 
-    SMTPaccount *smtp = aSmtp;
-
-    if (!later && !smtp) {
-        qDebug("Didn't get any send method - giving up");
-        return;
-    }
     mimeMail = createMimeMail(mail );
     if ( mimeMail == NULL ) {
         qDebug( "sendMail: error creating mime mail" );
@@ -728,7 +742,7 @@ void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later ) {
         sendProgress = new progressMailSend();
         sendProgress->show();
         sendProgress->setMaxMails(1);
-        smtpSend( mimeMail,later,smtp);
+        smtpSend( mimeMail,later);
         qDebug("Clean up done");
         sendProgress->hide();
         delete sendProgress;
@@ -737,7 +751,7 @@ void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later ) {
     }
 }
 
-int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which) {
+int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,RecMail*which) {
     size_t curTok = 0;
     mailimf_fields *fields = 0;
     mailimf_field*ffrom = 0;
@@ -760,7 +774,7 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which
     from = getFrom(ffrom);
 
     if (rcpts && from) {
-        res = smtpSend(from,rcpts,data->Content(),data->Length(),smtp );
+        res = smtpSend(from,rcpts,data->Content(),data->Length());
     }
     if (fields) {
         mailimf_fields_free(fields);
@@ -779,11 +793,11 @@ int SMTPwrapper::sendQueuedMail(AbstractMail*wrap,SMTPaccount*smtp,RecMail*which
 }
 
 /* this is a special fun */
-bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
+bool SMTPwrapper::flushOutbox() {
     bool returnValue = true;
 
     qDebug("Sending the queue");
-    if (!smtp) {
+    if (!m_SmtpAccount) {
         qDebug("No smtp account given");
         return false;
     }
@@ -806,20 +820,20 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
         return false;
     }
 
-    oldPw = smtp->getPassword();
-    oldUser = smtp->getUser();
-    if (smtp->getLogin() && (smtp->getUser().isEmpty() || smtp->getPassword().isEmpty()) ) {
+    oldPw = m_SmtpAccount->getPassword();
+    oldUser = m_SmtpAccount->getUser();
+    if (m_SmtpAccount->getLogin() && (m_SmtpAccount->getUser().isEmpty() || m_SmtpAccount->getPassword().isEmpty()) ) {
         // get'em
         QString user,pass;
-        LoginDialog login( smtp->getUser(), smtp->getPassword(), NULL, 0, true );
+        LoginDialog login( m_SmtpAccount->getUser(), m_SmtpAccount->getPassword(), NULL, 0, true );
         login.show();
         if ( QDialog::Accepted == login.exec() ) {
             // ok
             user = login.getUser().latin1();
             pass = login.getPassword().latin1();
             reset_user_value = true;
-            smtp->setUser(user);
-            smtp->setPassword(pass);
+            m_SmtpAccount->setUser(user);
+            m_SmtpAccount->setPassword(pass);
         } else {
             return true;
         }
@@ -832,7 +846,7 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
     sendProgress->setMaxMails(mailsToSend.count());
 
     while (mailsToSend.count()>0) {
-        if (sendQueuedMail(wrap,smtp,mailsToSend.at(0))==0) {
+        if (sendQueuedMail(wrap,mailsToSend.at(0))==0) {
             QMessageBox::critical(0,tr("Error sending mail"),
                                   tr("Error sending queued mail - breaking"));
             returnValue = false;
@@ -843,8 +857,8 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
         sendProgress->setCurrentMails(mailsToRemove.count());
     }
     if (reset_user_value) {
-        smtp->setUser(oldUser);
-        smtp->setPassword(oldPw);
+        m_SmtpAccount->setUser(oldUser);
+        m_SmtpAccount->setPassword(oldPw);
     }
     Config cfg( "mail" );
     cfg.setGroup( "Status" );

@@ -220,8 +220,8 @@ void ComposeMail::accept()
         it = (AttachViewItem *) it->nextSibling();
     }
 
-    SMTPwrapper wrapper( settings );
-    wrapper.sendMail( *mail,smtp,checkBoxLater->isChecked() );
+    SMTPwrapper wrapper( smtp );
+    wrapper.sendMail( *mail,checkBoxLater->isChecked() );
 
     QDialog::accept();
 }
