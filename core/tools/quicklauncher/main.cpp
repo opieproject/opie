@@ -117,9 +117,12 @@ public:
             appName = appName.mid( sep+1 );
 
         appIface = 0;
-        if ( loader->queryInterface(appName, IID_QtopiaApplication, (QUnknownInterface**)&appIface) == QS_OK ) {
-            mainWindow = appIface->createMainWindow( appName );
+        if ( loader->queryInterface(appName, IID_QtopiaApplication, (QUnknownInterface**)&appIface) != QS_OK ) {
+            owarn << "Plugin does not support QuickLauncher interface" << oendl;
+            exit(-1);
         }
+
+        mainWindow = appIface->createMainWindow( appName );
 
         if ( mainWindow ) {
             if ( mainWindow->metaObject()->slotNames().contains("setDocument(const QString&)") ) {
