@@ -227,16 +227,15 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     tabWidget->insertTab( pTab,"Playlist");
 
 
-      // Add the playlist area
+    // Add the playlist area
   
     QVBox *vbox3 = new QVBox( pTab ); vbox3->setBackgroundMode( PaletteButton );
     d->playListFrame = vbox3;
 
     QGridLayout *layoutF = new QGridLayout( pTab );
-  layoutF->setSpacing( 2);
-  layoutF->setMargin( 2);
-  layoutF->addMultiCellWidget( d->playListFrame , 0, 0, 0, 1 );
-//    d->playListFrame ->setMinimumSize(235,260);
+    layoutF->setSpacing( 2);
+    layoutF->setMargin( 2);
+    layoutF->addMultiCellWidget( d->playListFrame , 0, 0, 0, 1 );
 
     QHBox *hbox2 = new QHBox( vbox3 ); hbox2->setBackgroundMode( PaletteButton );
 
@@ -258,14 +257,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     audioView = new QListView( aTab, "Audioview" );
 
     QGridLayout *layoutA = new QGridLayout( aTab );
-  layoutA->setSpacing( 2);
-  layoutA->setMargin( 2);
-  layoutA->addMultiCellWidget( audioView, 0, 0, 0, 1 );
+    layoutA->setSpacing( 2);
+    layoutA->setMargin( 2);
+    layoutA->addMultiCellWidget( audioView, 0, 0, 0, 1 );
 
-    audioView->addColumn( tr("Title"),140);
+    audioView->addColumn( tr("Title"),-1);
     audioView->addColumn(tr("Size"), -1);
     audioView->addColumn(tr("Media"),-1);
-    audioView->addColumn( tr( "Path" ), 0 );
+    audioView->addColumn( tr( "Path" ), -1 );
     
     audioView->setColumnAlignment(1, Qt::AlignRight);
     audioView->setColumnAlignment(2, Qt::AlignRight);
@@ -288,14 +287,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     videoView = new QListView( vTab, "Videoview" );
 
     QGridLayout *layoutV = new QGridLayout( vTab );
-  layoutV->setSpacing( 2);
-  layoutV->setMargin( 2);
-  layoutV->addMultiCellWidget( videoView, 0, 0, 0, 1 );
+    layoutV->setSpacing( 2);
+    layoutV->setMargin( 2);
+    layoutV->addMultiCellWidget( videoView, 0, 0, 0, 1 );
     
-    videoView->addColumn(tr("Title"),140);
+    videoView->addColumn(tr("Title"),-1);
     videoView->addColumn(tr("Size"),-1);
     videoView->addColumn(tr("Media"),-1);
-    videoView->addColumn(tr( "Path" ), 0 );
+    videoView->addColumn(tr( "Path" ), -1 );
     videoView->setColumnAlignment(1, Qt::AlignRight);
     videoView->setColumnAlignment(2, Qt::AlignRight);
     videoView->setAllColumnsShowFocus(TRUE);
@@ -311,9 +310,9 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     playLists = new FileSelector( "playlist/plain", LTab, "fileselector" , FALSE, FALSE); //buggy
 
     QGridLayout *layoutL = new QGridLayout( LTab );
-  layoutL->setSpacing( 2);
-  layoutL->setMargin( 2);
-  layoutL->addMultiCellWidget( playLists, 0, 0, 0, 1 );
+    layoutL->setSpacing( 2);
+    layoutL->setMargin( 2);
+    layoutL->addMultiCellWidget( playLists, 0, 0, 0, 1 );
 //    playLists->setMinimumSize(233,260);
 
     tabWidget->insertTab(LTab,tr("Lists"));
