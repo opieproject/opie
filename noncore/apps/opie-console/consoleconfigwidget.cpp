@@ -8,7 +8,7 @@
 
 #include <pwd.h>
 #include <sys/types.h>
-
+#include <unistd.h>
 
 #include "consoleconfigwidget.h"
 
@@ -71,12 +71,12 @@ void ConsoleConfigWidget::load( const Profile& prof ) {
      */
     struct passwd *ent = 0;
     char *shell = "/bin/sh";
+    int uid = getuid();
 
-    while ( (ent = getpwent()) != 0 ) {
+    ent = getpwuid(uid);
         if (ent->pw_shell != "")  {
             shell = ent->pw_shell;
         }
-    }
 
     m_cmd->setText(prof.readEntry("Command", shell ));
     int envcount = prof.readNumEntry("EnvVars", 0);

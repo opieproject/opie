@@ -23,6 +23,7 @@
 	* #1554 - Fixed Opie-Console name in .desktop file (mickeyl)
 	* #1556 - Start to look for sound files in /opt/QtPalmtop/sounds (zecke)
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
+	* #1560 - Fixed Opie-Console picking up the wrong shell (bluelightning)
 	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
 	* #1599 - Security - change recommendation for opie-multiauth to opie-securityplugin (gints)
 	* #1604 - Checkbook crashed on startup (drw)
