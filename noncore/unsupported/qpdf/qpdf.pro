@@ -13,7 +13,7 @@ SOURCES     =  xpdf/Array.cc \
                xpdf/Dict.cc \
                xpdf/Error.cc \
                xpdf/FontEncodingTables.cc \
-               xpdf/FormWidget.cc \
+               xpdf/Annot.cc \
                xpdf/Function.cc \
                xpdf/Gfx.cc \
                xpdf/GfxFont.cc \
@@ -27,6 +27,7 @@ SOURCES     =  xpdf/Array.cc \
                xpdf/PDFDoc.cc \
                xpdf/Page.cc \
                xpdf/Parser.cc \
+               xpdf/PSTokenizer.cc \
                xpdf/Stream.cc \
                xpdf/TextOutputDev.cc \
                xpdf/UnicodeMap.cc \
@@ -52,7 +53,7 @@ INCLUDEPATH += . \
                ../goo \ 
                goo
                
-LIBS        += -L $(OPIEDIR)/lib -lqpe
+LIBS        += -L $(OPIEDIR)/lib -lqpe -lopie
 
 DESTDIR      = $(OPIEDIR)/bin
 TARGET       = qpdf

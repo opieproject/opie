@@ -2,7 +2,7 @@
 //
 // OutputDev.cc
 //
-// Copyright 1996 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -57,6 +57,11 @@ void OutputDev::updateAll(GfxState *state) {
   updateFillColor(state);
   updateStrokeColor(state);
   updateFont(state);
+}
+
+GBool OutputDev::beginType3Char(GfxState *state,
+				CharCode code, Unicode *u, int uLen) {
+  return gFalse;
 }
 
 void OutputDev::drawImageMask(GfxState *state, Object *ref, Stream *str,

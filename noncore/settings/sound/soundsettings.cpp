@@ -17,8 +17,10 @@
 ** not clear to you.
 **
 **********************************************************************/
+
 #include "soundsettings.h"
 
+#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/storage.h>
@@ -33,27 +35,31 @@
 SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
     : SoundSettingsBase( parent, name, TRUE, fl )
 {
-    Config config( "Sound" );
-    config.setGroup( "System" );
-    volume->setValue(100-config.readNumEntry("Volume"));
+    Config config( "qpe");
+    config.setGroup( "Volume" );
+    volume->setValue(100-config.readNumEntry("VolumePercent"));
     mic->setValue(100-config.readNumEntry("Mic"));
-    touchsound->setChecked(config.readBoolEntry("Touch"));
-    keysound->setChecked(config.readBoolEntry("Key"));
-    AlertCheckBox->setChecked(config.readBoolEntry("Alert"));
+//     touchsound->setChecked(config.readBoolEntry("TouchSound"));
+//     keysound->setChecked(config.readBoolEntry("KeySound"));
+    Config cfg("Vmemo");
+    connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
+    AlertCheckBox->setChecked(cfg.readBoolEntry("Alert"));
     
-    config.setGroup("Record");
+    cfg.setGroup("Record");
     int rate=config.readNumEntry("SampleRate", 22050);
-    if(rate == 11025)
+    if(rate == 8000)
         sampleRate->setCurrentItem(0);
-    else if(rate == 22050)
+    else if(rate == 11025)
         sampleRate->setCurrentItem(1);
-    else if(rate == 32000)
+    else if(rate == 22050)
         sampleRate->setCurrentItem(2);
+    else if(rate == 33075)
+        sampleRate->setCurrentItem(3);
     else if(rate==44100)
-        sampleRate->setCurrentItem(2);
+        sampleRate->setCurrentItem(4);
 
-    stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
-    sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 1));
+    stereoCheckBox->setChecked(cfg.readNumEntry("Stereo", 0));
+    sixteenBitCheckBox->setChecked(cfg.readNumEntry("SixteenBit", 1));
 
     updateStorageCombo();
     connect(volume, SIGNAL(valueChanged(int)), this, SLOT(setVolume(int)));
@@ -64,55 +70,62 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
 //     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 }
 
-void SoundSettings::reject()
-{
-    Config config( "Sound" );
-    config.setGroup( "System" );
+// void SoundSettings::reject()
+// {
+//   qDebug("reject");
+//     Config config( "qpe");
+//     config.setGroup( "Volume");
 
-    setVolume(100-config.readNumEntry("Volume"));
-    setMic(100-config.readNumEntry("Mic"));
+//     setVolume(100-config.readNumEntry("VolumePercent"));
+//     setMic(100-config.readNumEntry("Mic"));
 
-//   config.setGroup("Record");
-//     int rate=config.readNumEntry("SampleRate", 11025);
-//     if(rate == 11025)
-//         sampleRate->setCurrentItem(0);
-//     else if(rate == 22050)
-//         sampleRate->setCurrentItem(1);
-//     else if(rate == 32000)
-//         sampleRate->setCurrentItem(2);
-//     else if(rate==44100)
-//         sampleRate->setCurrentItem(3);
-//   stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
-//   sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
+// //   config.setGroup("Record");
+// //     int rate=config.readNumEntry("SampleRate", 11025);
+// //     if(rate == 11025)
+// //         sampleRate->setCurrentItem(0);
+// //     else if(rate == 22050)
+// //         sampleRate->setCurrentItem(1);
+// //     else if(rate == 32000)
+// //         sampleRate->setCurrentItem(2);
+// //     else if(rate==44100)
+// //         sampleRate->setCurrentItem(3);
+// //   stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
+// //   sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
+//     qDebug("QDialog::reject();");
+//     ::exit(-1);
+// }
 
-    QDialog::reject();
-}
+// void SoundSettings::accept()
+// {
+//   qDebug("accept");
+//   Config config( "qpe" );
+//     config.setGroup( "Volume" );
+//     config.writeEntry("VolumePercent",100-volume->value());
+//     config.writeEntry("Mic",100-mic->value());
+// //     config.writeEntry("TouchSound",touchsound->isChecked());
+// //     config.writeEntry("KeySound",keysound->isChecked());
 
-void SoundSettings::accept()
-{
-    Config config( "Sound" );
-    config.setGroup( "System" );
-    config.writeEntry("Volume",100-volume->value());
-    config.writeEntry("Mic",100-mic->value());
-    config.writeEntry("Touch",touchsound->isChecked());
-    config.writeEntry("Key",keysound->isChecked());
-    config.writeEntry("Alert",AlertCheckBox->isChecked());
-    setVolume(volume->value());
-    setMic(mic->value());
+//     Config cfg("Vmemo");
+//     cfg.writeEntry("Alert",AlertCheckBox->isChecked());
+//     setVolume(volume->value());
+//     setMic(mic->value());
 
-    config.setGroup("Record");
-    config.writeEntry("SampleRate",sampleRate->currentText());
-    config.writeEntry("Stereo",stereoCheckBox->isChecked());
-    config.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
-  
-    QDialog::accept();
-}
+//     cfg.setGroup("Record");
+//     cfg.writeEntry("SampleRate",sampleRate->currentText());
+//     cfg.writeEntry("Stereo",stereoCheckBox->isChecked());
+//     cfg.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
+// //     Config cfg( "VMemo" );
+// //     cfg.setGroup( "Defaults" );
+// //     cfg.writeEntry( "hideIcon", HideIcon_CheckBox->isChecked());  
+//     qDebug("QDialog::accept();");
+//     ::exit(0);
+// }
 
 void SoundSettings::setVolume(int v)
 {
-    Config config( "Sound" );
-    config.setGroup( "System" );
-    config.writeEntry("Volume",100-v);
+    Config config( "qpe" );
+    config.setGroup( "Volume" );
+    config.writeEntry("VolumePercent",100-v);
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
   QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE;
 #endif
@@ -120,8 +133,8 @@ void SoundSettings::setVolume(int v)
 
 void SoundSettings::setMic(int m)
 {
-    Config config( "Sound" );
-    config.setGroup( "System" );
+    Config config( "qpe" );
+    config.setGroup( "Volume" );
     config.writeEntry("Mic",100-m);
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
     QCopEnvelope( "QPE/System", "micChange(bool)" ) << FALSE;
@@ -130,15 +143,15 @@ void SoundSettings::setMic(int m)
 
 void SoundSettings::volumeChanged( bool )
 {
-  Config config( "Sound" );
-  config.setGroup( "System" );
-  volume->setValue(100-config.readNumEntry("Volume"));
+    Config config( "qpe" );
+    config.setGroup( "Volume" );
+  volume->setValue(100-config.readNumEntry("VolumePercent"));
 }
 
 void SoundSettings::micChanged( bool )
 {
-  Config config( "Sound" );
-  config.setGroup( "System" );
+    Config config( "qpe" );
+    config.setGroup( "Volume" );
   mic->setValue(100-config.readNumEntry("Mic"));
 }
 
@@ -160,8 +173,28 @@ void SoundSettings::updateStorageCombo() {
 }
 
 void SoundSettings::setLocation(const QString & string) {
-   Config config( "Sound" );
+   Config config( "Vmemo" );
    config.setGroup( "System" );
    config.writeEntry("RecLocation",string);
 
+}
+
+void SoundSettings::cleanUp() {
+  qDebug("cleanup");
+  Config config( "qpe" );
+    config.setGroup( "Volume" );
+    config.writeEntry("VolumePercent",100-volume->value());
+    config.writeEntry("Mic",100-mic->value());
+//     config.writeEntry("TouchSound",touchsound->isChecked());
+//     config.writeEntry("KeySound",keysound->isChecked());
+
+    Config cfg("Vmemo");
+    cfg.writeEntry("Alert",AlertCheckBox->isChecked());
+    setVolume(volume->value());
+    setMic(mic->value());
+
+    cfg.setGroup("Record");
+    cfg.writeEntry("SampleRate",sampleRate->currentText());
+    cfg.writeEntry("Stereo",stereoCheckBox->isChecked());
+    cfg.writeEntry("SixteenBit",sixteenBitCheckBox->isChecked());
 }

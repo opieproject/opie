@@ -2,7 +2,7 @@
 //
 // TextOutputDev.h
 //
-// Copyright 1997 Derek B. Noonburg
+// Copyright 1997-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -20,6 +20,10 @@
 
 class GfxState;
 class GString;
+
+//------------------------------------------------------------------------
+
+typedef void (*TextOutputFunc)(void *stream, char *text, int len);
 
 //------------------------------------------------------------------------
 // TextString
@@ -97,7 +101,7 @@ public:
 		   fouble xMax, fouble yMax);
 
   // Dump contents of page to a file.
-  void dump(FILE *f);
+  void dump(void *outputStream, TextOutputFunc outputFunc);
 
   // Clear the page.
   void clear();
@@ -128,6 +132,10 @@ public:
   // <rawOrder> is true, the text is kept in content stream order.
   TextOutputDev(char *fileName, GBool rawOrderA, GBool append);
 
+  // Create a TextOutputDev which will write to a generic stream.  If
+  // <rawOrder> is true, the text is kept in content stream order.
+  TextOutputDev(TextOutputFunc func, void *stream, GBool rawOrderA);
+
   // Destructor.
   virtual ~TextOutputDev();
 
@@ -142,6 +150,10 @@ public:
 
   // Does this device use drawChar() or drawString()?
   virtual GBool useDrawChar() { return gTrue; }
+
+  // Does this device use beginType3Char/endType3Char?  Otherwise,
+  // text in Type 3 fonts will be drawn with drawChar/drawString.
+  virtual GBool interpretType3Chars() { return gFalse; }
 
   // Does this device need non-text content?
   virtual GBool needNonText() { return gFalse; }
@@ -179,8 +191,10 @@ public:
 
 private:
 
-  FILE *f;			// text file
-  GBool needClose;		// need to close the file?
+  TextOutputFunc outputFunc;	// output function
+  void *outputStream;		// output stream
+  GBool needClose;		// need to close the output file?
+				//   (only if outputStream is a FILE*)
   TextPage *text;		// text for the current page
   GBool rawOrder;		// keep text in content stream order
   GBool ok;			// set up ok?

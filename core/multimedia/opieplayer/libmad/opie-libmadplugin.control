@@ -4,7 +4,7 @@ Section: opie/plugins
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), opie-libmpeg3plugin ($QPE_VERSION)
 Description: MP3 file plugin using libmad
  Plugin to play MP3 files with the mediaplayer in the Opie environment.
  It also hast streaming support (Shoutcast/Icecast).

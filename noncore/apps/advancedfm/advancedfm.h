@@ -19,6 +19,7 @@
 #include <qstring.h>
 #include <qpoint.h>
 #include <qstringlist.h>
+#include <qpe/ir.h>
 
 class QVBoxLayout;
 class QHBoxLayout;
@@ -123,6 +124,8 @@ protected slots:
   void move();
   void fileStatus();
   void doAbout();
+  void doBeam();
+  void fileBeamFinished( Ir *ir);
 };
 
 #endif // ADVANCEDFM_H

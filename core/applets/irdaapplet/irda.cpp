@@ -59,6 +59,7 @@ IrdaApplet::IrdaApplet( QWidget *parent, const char *name )
 	sockfd = socket(PF_INET, SOCK_DGRAM, IPPROTO_IP);
 	irdaOnPixmap = Resource::loadPixmap( "irdaapplet/irdaon" );
 	irdaOffPixmap = Resource::loadPixmap( "irdaapplet/irdaoff" );
+	irdaDiscoveryOnPixmap = Resource::loadPixmap( "irdaapplet/magglass" );
 	startTimer(5000);
 	timerEvent(NULL);
 }
@@ -91,11 +92,39 @@ int IrdaApplet::setIrdaStatus(int c)
 
 	if (c)
 		ifr.ifr_flags |= IFF_UP;
-	else 
+	else
 		ifr.ifr_flags &= ~IFF_UP;
 
         if (ioctl(sockfd, SIOCSIFFLAGS, &ifr))
 		return -1;
+
+	return 0;
+}
+
+int IrdaApplet::checkIrdaDiscoveryStatus()
+{
+	QFile discovery("/proc/sys/net/irda/discovery");
+	char status;
+
+	discovery.open( IO_ReadOnly|IO_Raw );
+	discovery.readBlock (&status, 1);
+	discovery.close();
+
+	return atoi(&status);
+}
+
+int IrdaApplet::setIrdaDiscoveryStatus(int d)
+{
+	QFile discovery("/proc/sys/net/irda/discovery");
+
+	discovery.open( IO_WriteOnly|IO_Raw );
+
+	if (d)
+		discovery.putch('1');
+	else
+		discovery.putch('0');
+
+	discovery.close();
 
 	return 0;
 }
@@ -109,17 +138,22 @@ void IrdaApplet::mousePressEvent( QMouseEvent *)
 	/* Refresh active state */
 	timerEvent(NULL);
 
-//	menu->insertItem( tr("More..."), 2 );
+//	menu->insertItem( tr("More..."), 4 );
 	if (irdaactive)
 		menu->insertItem( tr("Disable IrDA"), 0 );
 	else
 		menu->insertItem( tr("Enable IrDA"), 1 );
 
+	if (irdaDiscoveryActive)
+		menu->insertItem( tr("Disable Discovery"), 2 );
+	else
+		menu->insertItem( tr("Enable Discovery"), 3 );
+
 	QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
-	ret = menu->exec(p, 1);
+	ret = menu->exec(p, 2);
 
 	qDebug("ret was %d\n", ret);
-	
+
 	switch(ret) {
 	case 0:
 		setIrdaStatus(0);
@@ -130,9 +164,16 @@ void IrdaApplet::mousePressEvent( QMouseEvent *)
 		timerEvent(NULL);
 		break;
 	case 2:
+		setIrdaDiscoveryStatus(0);
+		timerEvent(NULL);
+		break;
+	case 3:
+		setIrdaDiscoveryStatus(1);
+		timerEvent(NULL);
+		break;
+	case 4:
 		qDebug("FIXME: Bring up pretty menu...\n");
-		// With 'discovery' button to enable/disable,
-		// and table of currently-detected devices.
+		// With table of currently-detected devices.
 	}
 
 }
@@ -140,9 +181,12 @@ void IrdaApplet::mousePressEvent( QMouseEvent *)
 void IrdaApplet::timerEvent( QTimerEvent * )
 {
     int oldactive = irdaactive;
+    int olddiscovery = irdaDiscoveryActive;
 
     irdaactive = checkIrdaStatus();
-    if (irdaactive != oldactive) 
+    irdaDiscoveryActive = checkIrdaDiscoveryStatus();
+
+    if ((irdaactive != oldactive) || (irdaDiscoveryActive != olddiscovery))
 	    paintEvent(NULL);
     
 }
@@ -152,8 +196,12 @@ void IrdaApplet::paintEvent( QPaintEvent* )
 	QPainter p(this);
 	qDebug("paint irda pixmap");
 
+	p.eraseRect ( 0, 0, this->width(), this->height() );
 	if (irdaactive > 0)
 		p.drawPixmap( 0, 1,  irdaOnPixmap );
-	else 
+	else
 		p.drawPixmap( 0, 1,  irdaOffPixmap );
+
+	if (irdaDiscoveryActive > 0)
+		p.drawPixmap( 0, 1,  irdaDiscoveryOnPixmap );
 }

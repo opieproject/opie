@@ -2,7 +2,7 @@
 //
 // GfxState.h
 //
-// Copyright 1996 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -568,6 +568,40 @@ private:
 };
 
 //------------------------------------------------------------------------
+// GfxRadialShading
+//------------------------------------------------------------------------
+
+class GfxRadialShading: public GfxShading {
+public:
+
+  GfxRadialShading(fouble x0A, fouble y0A, fouble r0A,
+		   fouble x1A, fouble y1A, fouble r1A,
+		   fouble t0A, fouble t1A,
+		   Function **funcsA, int nFuncsA,
+		   GBool extend0A, GBool extend1A);
+  virtual ~GfxRadialShading();
+
+  static GfxRadialShading *parse(Dict *dict);
+
+  void getCoords(fouble *x0A, fouble *y0A, fouble *r0A,
+		 fouble *x1A, fouble *y1A, fouble *r1A)
+    { *x0A = x0; *y0A = y0; *r0A = r0; *x1A = x1; *y1A = y1; *r1A = r1; }
+  fouble getDomain0() { return t0; }
+  fouble getDomain1() { return t1; }
+  void getColor(fouble t, GfxColor *color);
+  GBool getExtend0() { return extend0; }
+  GBool getExtend1() { return extend1; }
+
+private:
+
+  fouble x0, y0, r0, x1, y1, r1;
+  fouble t0, t1;
+  Function *funcs[gfxColorMaxComps];
+  int nFuncs;
+  GBool extend0, extend1;
+};
+
+//------------------------------------------------------------------------
 // GfxImageColorMap
 //------------------------------------------------------------------------
 
@@ -783,6 +817,7 @@ public:
   fouble getCurY() { return curY; }
   void getClipBBox(fouble *xMin, fouble *yMin, fouble *xMax, fouble *yMax)
     { *xMin = clipXMin; *yMin = clipYMin; *xMax = clipXMax; *yMax = clipYMax; }
+  void getUserClipBBox(fouble *xMin, fouble *yMin, fouble *xMax, fouble *yMax);
   fouble getLineX() { return lineX; }
   fouble getLineY() { return lineY; }
 
@@ -865,7 +900,7 @@ public:
   // Text position.
   void textMoveTo(fouble tx, fouble ty)
     { lineX = tx; lineY = ty; textTransform(tx, ty, &curX, &curY); }
-  void textShift(fouble tx);
+  void textShift(fouble tx, fouble ty);
   void shift(fouble dx, fouble dy);
 
   // Push/pop GfxState on/off stack.

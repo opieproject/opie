@@ -3,8 +3,10 @@ Priority: required
 Section: opie/system
 Maintainer:  Project Opie <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
-Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-sounds, apmd, qpe2uschedule, qpe-pics, libopie
+Version: $QPE_VERSION-$SUB_VERSION.2
+Provides: qpe-base
+Conflicts: qpe-base
+Depends: qt-embedded (>=$QTE_VERSION), opie-qcop, opie-taskbar, opie-sounds, apmd, qpe-pics, libopie
 Description: Base Qtopia environment
  A complete GUI environment for handhelds.
  You will probably want to install one of the opie-i18n-* packages.

@@ -2,7 +2,7 @@
 //
 // GfxFont.h
 //
-// Copyright 1996-2001 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -113,8 +113,7 @@ public:
 
   // Get the PostScript font name for the embedded font.  Returns
   // NULL if there is no embedded font.
-  char *getEmbeddedFontName()
-    { return embFontName ? embFontName->getCString() : (char *)NULL; }
+  GString *getEmbeddedFontName() { return embFontName; }
 
   // Get the name of the external font file.  Returns NULL if there
   // is no external font file.
@@ -137,6 +136,9 @@ public:
   fouble getAscent() { return ascent; }
   fouble getDescent() { return descent; }
 
+  // Return the writing mode (0=horizontal, 1=vertical).
+  virtual int getWMode() { return 0; }
+
   // Read an external or embedded font file into a buffer.
   char *readExtFontFile(int *len);
   char *readEmbFontFile(XRef *xref, int *len);
@@ -155,7 +157,7 @@ protected:
 
   void readFontDescriptor(XRef *xref, Dict *fontDict);
   CharCodeToUnicode *readToUnicodeCMap(Dict *fontDict, int nBits);
-  void GfxFont::findExtFontFile();
+  void findExtFontFile();
 
   GString *tag;			// PDF font tag
   Ref id;			// reference (used as unique ID)
@@ -166,7 +168,7 @@ protected:
   Ref embFontID;		// ref to embedded font file stream
   GString *extFontFile;		// external font file name
   fouble fontMat[6];		// font matrix (Type 3 only)
-  fouble fontBBox[4];		// font bounding box
+  fouble fontBBox[4];		// font bounding box (Type 3 only)
   fouble missingWidth;		// "default" width
   fouble ascent;		// max height above baseline
   fouble descent;		// max depth below baseline
@@ -204,8 +206,14 @@ public:
   // Get width of a character or string.
   fouble getWidth(Guchar c) { return widths[c]; }
 
+  // Return the Type 3 CharProc dictionary, or NULL if none.
+  Dict *getCharProcs();
+
   // Return the Type 3 CharProc for the character associated with <code>.
   Object *getCharProc(int code, Object *proc);
+
+  // Return the Type 3 Resources dictionary, or NULL if none.
+  Dict *getResources();
 
 private:
 
@@ -215,7 +223,8 @@ private:
   CharCodeToUnicode *ctu;	// char code --> Unicode
   GBool hasEncoding;
   fouble widths[256];		// character widths
-  Object charProcs;		// Type3 CharProcs dictionary
+  Object charProcs;		// Type 3 CharProcs dictionary
+  Object resources;		// Type 3 Resources dictionary
 };
 
 //------------------------------------------------------------------------
@@ -235,6 +244,9 @@ public:
   virtual int getNextChar(char *s, int len, CharCode *code,
 			  Unicode *u, int uSize, int *uLen,
 			  fouble *dx, fouble *dy, fouble *ox, fouble *oy);
+
+  // Return the writing mode (0=horizontal, 1=vertical).
+  virtual int getWMode();
 
   // Return the Unicode map.
   CharCodeToUnicode *getToUnicode();

@@ -510,12 +510,12 @@ void TextEdit::fileOpen()
        if(cfg.readEntry("useOldFileDialog") == "TRUE")
     b=TRUE;
     if(!b) {
-        QString str = OFileDialog::getOpenFileName( 1,"/","", "text/plain", this );
+        QString str = OFileDialog::getOpenFileName( 1,"/","", "*", this );
         if(!str.isEmpty() )
             openFile( str );
     } else {
         QString str;
-        browseForFiles = new fileBrowser(this,tr("Open File"),TRUE,0, "text/*"); //
+        browseForFiles = new fileBrowser(this,tr("Open File"),TRUE,0, "*"); //
         browseForFiles->setFileView( viewSelection );
         browseForFiles->showMaximized();
 //    if( result != -1 )

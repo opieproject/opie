@@ -165,12 +165,11 @@ void DesktopApplication::receive( const QCString &msg, const QByteArray &data )
   {
     int k;
     QString c, m;
-
     stream >> k;
     stream >> c;
     stream >> m;
 
-    qWarning("KeyRegisterRecieved: %i, %s, %s", k, (const char*)c, (const char *)m);
+    qWarning("KeyRegisterReceived: %i, %s, %s", k, (const char*)c, (const char *)m );
     keyRegisterList.append(QCopKeyRegister(k,c,m));
   }
   else if (msg == "suspend()"){
@@ -191,14 +190,16 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
     if ( !loggedin && ke->simpleData.keycode != Key_F34 )
       return TRUE;
     bool press = ke->simpleData.is_press;
-
+    bool autoRepeat= ke->simpleData.is_auto_repeat;
     if (!keyRegisterList.isEmpty())
     {
       KeyRegisterList::Iterator it;
       for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
       {
-        if ((*it).getKeyCode() == ke->simpleData.keycode)
-        QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+          if ((*it).getKeyCode() == ke->simpleData.keycode &&  !autoRepeat) {
+                  if(press) qDebug("press"); else qDebug("release");
+                  QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+          }
       }
     }
 
@@ -738,10 +739,15 @@ void Desktop::terminateServers()
 
 void Desktop::rereadVolumes()
 {
-    Config cfg("Sound");
-    cfg.setGroup("System");
-    touchclick = cfg.readBoolEntry("Touch");
-    keyclick = cfg.readBoolEntry("Key");
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    touchclick = cfg.readBoolEntry("TouchSound");
+    keyclick = cfg.readBoolEntry("KeySound");
+    alarmsound = cfg.readBoolEntry("AlarmSound");
+//     Config cfg("Sound");
+//     cfg.setGroup("System");
+//     touchclick = cfg.readBoolEntry("Touch");
+//     keyclick = cfg.readBoolEntry("Key");
 }
 
 void Desktop::keyClick()
@@ -763,6 +769,7 @@ void Desktop::screenClick()
 void Desktop::soundAlarm()
 {
 #ifdef CUSTOM_SOUND_ALARM
+    if (alarmsound)
     CUSTOM_SOUND_ALARM;
 #endif
 }

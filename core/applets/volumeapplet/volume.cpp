@@ -52,8 +52,8 @@ VolumeControl::VolumeControl( bool showMic, QWidget *parent, const char *name )
 
 void VolumeControl::createView(bool showMic)
 {
-    Config cfg("Sound");
-    cfg.setGroup("System");
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
 //showMic = TRUE;
     QHBoxLayout *hboxLayout = new QHBoxLayout(this);
     hboxLayout->setMargin( 3 );
@@ -67,6 +67,9 @@ void VolumeControl::createView(bool showMic)
     downButton->setSizePolicy( QSizePolicy( QSizePolicy::Minimum, QSizePolicy::Expanding ) );
     downButton->setPixmap( Resource::loadPixmap( "down" ) );
     vboxButtons->setSpacing( 2 );
+
+    upButton->setFixedHeight(26);
+    downButton->setFixedHeight(26);
     
     vboxButtons->addWidget( upButton );
     vboxButtons->addWidget( downButton );
@@ -79,7 +82,7 @@ void VolumeControl::createView(bool showMic)
     slider->setTickmarks( QSlider::Both );
     slider->setTickInterval( 20 );
     slider->setFocusPolicy( QWidget::NoFocus );
-    slider->setValue(cfg.readNumEntry("Volume"));
+    slider->setValue(cfg.readNumEntry("VolumePercent"));
 
     QVBoxLayout *sbox = new QVBoxLayout(this);
     sbox->setMargin( 3 );
@@ -87,43 +90,71 @@ void VolumeControl::createView(bool showMic)
     sbox->addWidget( new QLabel("Vol", this) , 0, Qt::AlignVCenter | Qt::AlignHCenter );
     sbox->addWidget( slider, 0, Qt::AlignVCenter | Qt::AlignHCenter );
 
-    if (showMic == TRUE)  {
-        mic = new QSlider(this);
-        mic->setRange( 0, 100 );
-        mic->setTickmarks( QSlider::Both );
-        mic->setTickInterval( 20 );
-        mic->setFocusPolicy( QWidget::NoFocus );
-        mic->setValue(cfg.readNumEntry("Mic"));
+//    if (showMic == TRUE)  {
+    mic = new QSlider(this);
+    mic->setRange( 0, 100 );
+    mic->setTickmarks( QSlider::Both );
+    mic->setTickInterval( 20 );
+    mic->setFocusPolicy( QWidget::NoFocus );
+    mic->setValue(cfg.readNumEntry("Mic"));
     
-        QVBoxLayout *mbox = new QVBoxLayout(this);
-        mbox->setMargin( 3 );
-        mbox->setSpacing( 3 );
-        mbox->addWidget( new QLabel("Mic", this) , 0, Qt::AlignVCenter | Qt::AlignHCenter );
-        mbox->addWidget( mic, 0, Qt::AlignVCenter | Qt::AlignHCenter );
+    QVBoxLayout *mbox = new QVBoxLayout(this);
+    mbox->setMargin( 3 );
+    mbox->setSpacing( 3 );
+    mbox->addWidget( new QLabel("Mic", this) , 0, Qt::AlignVCenter | Qt::AlignHCenter );
+    mbox->addWidget( mic, 0, Qt::AlignVCenter | Qt::AlignHCenter );
 
-        hbox = new QHBoxLayout( this );
-        hbox->setMargin( 3 );
-        hbox->setSpacing( 3 );
-        hbox->addLayout( sbox, 1);
-        hbox->addLayout( mbox, 1);
-    }
+    hbox = new QHBoxLayout( this );
+    hbox->setMargin( 3 );
+    hbox->setSpacing( 3 );
+    hbox->addLayout( sbox, 1);
+    hbox->addLayout( mbox, 1);
+      //  }
   
     muteBox = new QCheckBox( tr("Mute"), this );
     muteBox->setFocusPolicy( QWidget::NoFocus );
-  
+
+    QVBoxLayout *klbox = new QVBoxLayout(this);
+
+    QLabel *Label1;
+    Label1 = new QLabel( this, "Label1" );
+    Label1->setText( tr( "Enable Sounds for:" ));
+ 
+    alarmSound = new QCheckBox( tr("Alarm Sound"), this );
+    alarmSound->setFocusPolicy( QWidget::NoFocus );
+
+    keyclicks = new QCheckBox( tr("Key Clicks"), this );
+    keyclicks->setFocusPolicy( QWidget::NoFocus );
+
+    screentaps = new QCheckBox( tr("Screen taps"), this );
+    screentaps->setFocusPolicy( QWidget::NoFocus );
+
+    
+    keyclicks->setChecked( cfg.readBoolEntry("KeySound",0));
+    screentaps->setChecked( cfg.readBoolEntry("TouchSound",0));
+    alarmSound->setChecked( cfg.readBoolEntry("AlarmSound",1));
+
+    klbox->setMargin( 3 );
+    klbox->setSpacing( 0 );
+    klbox->addWidget( Label1, 1);
+    klbox->addWidget( alarmSound, 1);
+    klbox->addWidget( keyclicks, 1);
+    klbox->addWidget( screentaps, 1);
     vbox->setMargin( 3 );
     vbox->setSpacing( 0 );
-    if (showMic == TRUE)
-        vbox->addLayout( hbox, 1 );
-    else
-        vbox->addLayout( sbox, 1);
+//    if (showMic == TRUE)
+    vbox->addLayout( hbox, 1 );
+//    else
+//        vbox->addLayout( sbox, 1);
     vbox->addWidget( muteBox, 0, Qt::AlignVCenter | Qt::AlignHCenter );
 
     hboxLayout->addLayout( vboxButtons );
-    hboxLayout->addLayout(vbox);
+    hboxLayout->addLayout( vbox);
+    hboxLayout->addLayout( klbox);
   
-    setFixedHeight( 120 );
-    setFixedWidth( sizeHint().width() );
+
+    setFixedHeight( 120);
+//     setFixedWidth( sizeHint().width() );
     setFocusPolicy(QWidget::NoFocus);
     connect( upButton, SIGNAL( pressed() ), this, SLOT( ButtonChanged() ) );
     connect( upButton, SIGNAL( released() ), this, SLOT( ButtonChanged() ) );
@@ -179,15 +210,15 @@ void VolumeControl::rateTimerDone()
 VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
-  Config cfg("Sound");
-  cfg.setGroup("System");
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
   
   setFixedHeight( 18 );
   setFixedWidth( 14 );
   
   volumePixmap = Resource::loadPixmap( "volume" );
   
-  volumePercent = cfg.readNumEntry("Volume",50);
+  volumePercent = cfg.readNumEntry("VolumePercent",50);
   micPercent = cfg.readNumEntry("Mic", 50);
   muted = FALSE; // ### read from pref
   micMuted = FALSE; // ### read from pref
@@ -229,26 +260,37 @@ void VolumeApplet::advVolControl()
 
 void VolumeApplet::showVolControl(bool showMic)
 {
-  Config cfg("Sound");
-  cfg.setGroup("System");
-  volumePercent = cfg.readNumEntry("Volume",50);
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
+  volumePercent = cfg.readNumEntry("VolumePercent",50);
   micPercent = cfg.readNumEntry("Mic", 50);
-  QString show = cfg.readEntry("ShowMic", "FALSE");
-  if(show == "TRUE") showMic = TRUE;
+  
   // Create a small volume control window to adjust the volume with
   VolumeControl *vc = new VolumeControl(showMic);
   vc->slider->setValue( 100 - volumePercent );
-  if (showMic)
-  {
+//   if (showMic)
+//   {
     vc->mic->setValue( 100 - micPercent );
     connect( vc->mic, SIGNAL( valueChanged( int ) ), this, SLOT( micMoved( int ) ) );
-  }
+//  }
 
   vc->muteBox->setChecked( muted );
   connect( vc->slider, SIGNAL( valueChanged( int ) ), this, SLOT( sliderMoved( int ) ) );
   connect( vc->muteBox, SIGNAL( toggled( bool ) ), this, SLOT( mute( bool ) ) );
+
+   Config config("qpe");
+   config.setGroup("Volume");
+
+   vc->keyclicks->setChecked( config.readBoolEntry("KeySound",0));
+   vc->screentaps->setChecked( config.readBoolEntry("TouchSound",0));
+   vc->alarmSound->setChecked( config.readBoolEntry("AlarmSound",1));
+
+  connect( vc->alarmSound, SIGNAL(toggled(bool)), this, SLOT( alarmSoundCheckToggled(bool)));
+  connect( vc->keyclicks, SIGNAL(toggled(bool)), this, SLOT( keyclicksCheckToggled(bool)));
+  connect( vc->screentaps, SIGNAL(toggled(bool)), this, SLOT( screentapsCheckToggled(bool)));
+
   QPoint curPos = mapToGlobal( rect().topLeft() );
-  vc->move( curPos.x()-(vc->sizeHint().width()-width())/2, curPos.y() - 120 );
+  vc->move( curPos.x()-(vc->sizeHint().width()/2+50), curPos.y() - 120 );
   vc->show();
 
   advancedTimer->stop();
@@ -302,15 +344,15 @@ void VolumeApplet::micMoved( int percent )
 
 void VolumeApplet::readSystemVolume()
 {
-    Config cfg("Sound");
-    cfg.setGroup("System");
-    volumePercent = cfg.readNumEntry("Volume");
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
+    volumePercent = cfg.readNumEntry("VolumePercent");
 }
 
 void VolumeApplet::readSystemMic()
 {
-    Config cfg("Sound");
-    cfg.setGroup("System");
+    Config cfg("qpe");
+    cfg.setGroup("Volume");
     micPercent = cfg.readNumEntry("Mic");
 }
 
@@ -333,9 +375,9 @@ void VolumeApplet::setMic( int percent )
 void VolumeApplet::writeSystemVolume()
 {
   {
-  Config cfg("Sound");
-  cfg.setGroup("System");
-  cfg.writeEntry("Volume",volumePercent);
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
+  cfg.writeEntry("VolumePercent",volumePercent);
   }
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
   // Send notification that the volume has changed
@@ -346,8 +388,8 @@ void VolumeApplet::writeSystemVolume()
 void VolumeApplet::writeSystemMic()
 {
   {
-  Config cfg("Sound");
-  cfg.setGroup("System");
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
   cfg.writeEntry("Mic",micPercent);
   }
 #if ( defined Q_WS_QWS || defined(_WS_QWS_) ) && !defined(QT_NO_COP)
@@ -378,3 +420,25 @@ void VolumeApplet::paintEvent( QPaintEvent* )
   p.drawLine( width() - 2, 3, 1, height() - 4 );
   }
 }
+
+void VolumeApplet::screentapsCheckToggled(bool b) {
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
+  cfg.writeEntry("TouchSound",b );
+  cfg.write();
+}
+
+void VolumeApplet::keyclicksCheckToggled(bool b) {
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
+  cfg.writeEntry("KeySound",b);
+  cfg.write();
+}
+
+void VolumeApplet::alarmSoundCheckToggled(bool b) {
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
+  cfg.writeEntry("AlarmSound",b);
+  cfg.write();
+}
+

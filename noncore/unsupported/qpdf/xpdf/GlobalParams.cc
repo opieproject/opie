@@ -2,7 +2,7 @@
 //
 // GlobalParams.cc
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -96,14 +96,20 @@ DisplayFontParam::~DisplayFontParam() {
 // PSFontParam
 //------------------------------------------------------------------------
 
-PSFontParam::PSFontParam(GString *pdfFontNameA, GString *psFontNameA) {
+PSFontParam::PSFontParam(GString *pdfFontNameA, int wModeA,
+			 GString *psFontNameA, GString *encodingA) {
   pdfFontName = pdfFontNameA;
+  wMode = wModeA;
   psFontName = psFontNameA;
+  encoding = encodingA;
 }
 
 PSFontParam::~PSFontParam() {
   delete pdfFontName;
   delete psFontName;
+  if (encoding) {
+    delete encoding;
+  }
 }
 
 //------------------------------------------------------------------------
@@ -115,17 +121,14 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   DisplayFontParam *dfp;
   GString *fileName;
   FILE *f;
-  char buf[512];
-  int line;
-  GList *tokens;
-  GString *cmd;
-  char *p1, *p2;
   int i;
 
   initBuiltinFontTables();
 
+  // scan the encoding in reverse because we want the lowest-numbered
+  // index for each char name ('space' is encoded twice)
   macRomanReverseMap = new NameToCharCode();
-  for (i = 0; i < 256; ++i) {
+  for (i = 255; i >= 0; --i) {
     if (macRomanEncoding[i]) {
       macRomanReverseMap->add(macRomanEncoding[i], (CharCode)i);
     }
@@ -139,6 +142,7 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   toUnicodeDirs = new GList();
   displayFonts = new GHash();
   displayCIDFonts = new GHash();
+  displayNamedCIDFonts = new GHash();
 #if HAVE_PAPER_H
   const struct paper *paperType;
   paperinit();
@@ -154,9 +158,14 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   psLevel = psLevel2;
   psFile = NULL;
   psFonts = new GHash();
+  psNamedFonts16 = new GList();
+  psFonts16 = new GList();
   psEmbedType1 = gTrue;
   psEmbedTrueType = gTrue;
+  psEmbedCIDPostScript = gTrue;
+  psEmbedCIDTrueType = gTrue;
   psOPI = gFalse;
+  psASCIIHex = gFalse;
   textEncoding = new GString("Latin1");
 #if defined(WIN32)
   textEOL = eolDOS;
@@ -166,6 +175,7 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   textEOL = eolUnix;
 #endif
   fontDirs = new GList();
+  initialZoom = new GString("1");
   t1libControl = fontRastAALow;
   freetypeControl = fontRastAALow;
   urlCommand = NULL;
@@ -193,6 +203,8 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   residentUnicodeMaps->add(map->getEncodingName(), map);
   map = new UnicodeMap("UTF-8", &mapUTF8);
   residentUnicodeMaps->add(map->getEncodingName(), map);
+  map = new UnicodeMap("UCS-2", &mapUCS2);
+  residentUnicodeMaps->add(map->getEncodingName(), map);
 
   // default displayFonts table
   for (i = 0; displayFontTab[i].name; ++i) {
@@ -219,6 +231,7 @@ GlobalParams::GlobalParams(char *cfgFileName) {
   }
   if (!f) {
 #if defined(WIN32) && !defined(__CYGWIN32__)
+    char buf[512];
     i = GetModuleFileName(NULL, buf, sizeof(buf));
     if (i <= 0 || i >= sizeof(buf)) {
       // error or path too long for buffer - just use the current dir
@@ -234,98 +247,141 @@ GlobalParams::GlobalParams(char *cfgFileName) {
     }
   }
   if (f) {
-    line = 1;
-    while (fgets(buf, sizeof(buf) - 1, f)) {
+    parseFile(fileName, f);
+    delete fileName;
+  }
+}
 
-      // break the line into tokens
-      tokens = new GList();
-      p1 = buf;
-      while (*p1) {
-	for (; *p1 && isspace(*p1); ++p1) ;
-	if (!*p1) {
-	  break;
-	}
-	if (*p1 == '"' || *p1 == '\'') {
-	  for (p2 = p1 + 1; *p2 && *p2 != *p1; ++p2) ;
-	  ++p1;
-	} else {
-	  for (p2 = p1 + 1; *p2 && !isspace(*p2); ++p2) ;
-	}
-	tokens->append(new GString(p1, p2 - p1));
-	p1 = p2 + 1;
+void GlobalParams::parseFile(GString *fileName, FILE *f) {
+  int line;
+  GList *tokens;
+  GString *cmd, *incFile;
+  char *p1, *p2;
+  char buf[512];
+  FILE *f2;
+
+  line = 1;
+  while (fgets(buf, sizeof(buf) - 1, f)) {
+
+    // break the line into tokens
+    tokens = new GList();
+    p1 = buf;
+    while (*p1) {
+      for (; *p1 && isspace(*p1); ++p1) ;
+      if (!*p1) {
+	break;
       }
-
-      if (tokens->getLength() > 0 &&
-	  ((GString *)tokens->get(0))->getChar(0) != '#') {
-	cmd = (GString *)tokens->get(0);
-	if (!cmd->cmp("nameToUnicode")) {
-	  parseNameToUnicode(tokens, fileName, line);
-	} else if (!cmd->cmp("cidToUnicode")) {
-	  parseCIDToUnicode(tokens, fileName, line);
-	} else if (!cmd->cmp("unicodeMap")) {
-	  parseUnicodeMap(tokens, fileName, line);
-	} else if (!cmd->cmp("cMapDir")) {
-	  parseCMapDir(tokens, fileName, line);
-	} else if (!cmd->cmp("toUnicodeDir")) {
-	  parseToUnicodeDir(tokens, fileName, line);
-	} else if (!cmd->cmp("displayFontX")) {
-	  parseDisplayFont(tokens, gFalse, displayFontX, fileName, line);
-	} else if (!cmd->cmp("displayFontT1")) {
-	  parseDisplayFont(tokens, gFalse, displayFontT1, fileName, line);
-	} else if (!cmd->cmp("displayFontTT")) {
-	  parseDisplayFont(tokens, gFalse, displayFontTT, fileName, line);
-	} else if (!cmd->cmp("displayCIDFontX")) {
-	  parseDisplayFont(tokens, gTrue, displayFontX, fileName, line);
-	} else if (!cmd->cmp("psFile")) {
-	  parsePSFile(tokens, fileName, line);
-	} else if (!cmd->cmp("psFont")) {
-	  parsePSFont(tokens, fileName, line);
-	} else if (!cmd->cmp("psPaperSize")) {
-	  parsePSPaperSize(tokens, fileName, line);
-	} else if (!cmd->cmp("psDuplex")) {
-	  parseYesNo("psDuplex", &psDuplex, tokens, fileName, line);
-	} else if (!cmd->cmp("psLevel")) {
-	  parsePSLevel(tokens, fileName, line);
-	} else if (!cmd->cmp("psEmbedType1")) {
-	  parseYesNo("psEmbedType1", &psEmbedType1, tokens, fileName, line);
-	} else if (!cmd->cmp("psEmbedTrueType")) {
-	  parseYesNo("psEmbedTrueType", &psEmbedTrueType,
-		     tokens, fileName, line);
-	} else if (!cmd->cmp("psOPI")) {
-	  parseYesNo("psOPI", &psOPI, tokens, fileName, line);
-	} else if (!cmd->cmp("textEncoding")) {
-	  parseTextEncoding(tokens, fileName, line);
-	} else if (!cmd->cmp("textEOL")) {
-	  parseTextEOL(tokens, fileName, line);
-	} else if (!cmd->cmp("fontDir")) {
-	  parseFontDir(tokens, fileName, line);
-	} else if (!cmd->cmp("t1libControl")) {
-	  parseFontRastControl("t1libControl", &t1libControl,
-			       tokens, fileName, line);
-	} else if (!cmd->cmp("freetypeControl")) {
-	  parseFontRastControl("freetypeControl", &freetypeControl,
-			       tokens, fileName, line);
-	} else if (!cmd->cmp("urlCommand")) {
-	  parseURLCommand(tokens, fileName, line);
-	} else if (!cmd->cmp("mapNumericCharNames")) {
-	  parseYesNo("mapNumericCharNames", &mapNumericCharNames,
-		     tokens, fileName, line);
-	} else if (!cmd->cmp("errQuiet")) {
-	  parseYesNo("errQuiet", &errQuiet, tokens, fileName, line);
-	} else if (!cmd->cmp("fontpath") || !cmd->cmp("fontmap")) {
-	  error(-1, "Unknown config file command");
-	  error(-1, "-- the config file format has changed since Xpdf 0.9x");
-	} else {
-	  error(-1, "Unknown config file command '%s' (%s:%d)",
-		cmd->getCString(), fileName->getCString(), line);
-	}
+      if (*p1 == '"' || *p1 == '\'') {
+	for (p2 = p1 + 1; *p2 && *p2 != *p1; ++p2) ;
+	++p1;
+      } else {
+	for (p2 = p1 + 1; *p2 && !isspace(*p2); ++p2) ;
       }
-
-      deleteGList(tokens, GString);
-      ++line;
+      tokens->append(new GString(p1, p2 - p1));
+      p1 = p2 + 1;
     }
 
-    delete fileName;
+    if (tokens->getLength() > 0 &&
+	((GString *)tokens->get(0))->getChar(0) != '#') {
+      cmd = (GString *)tokens->get(0);
+      if (!cmd->cmp("include")) {
+	if (tokens->getLength() == 2) {
+	  incFile = (GString *)tokens->get(1);
+	  if ((f2 = fopen(incFile->getCString(), "r"))) {
+	    parseFile(incFile, f2);
+	    fclose(f2);
+	  } else {
+	    error(-1, "Couldn't find included config file: '%s' (%s:%d)",
+		  incFile->getCString(), fileName->getCString(), line);
+	  }
+	} else {
+	  error(-1, "Bad 'include' config file command (%s:%d)",
+		fileName->getCString(), line);
+	}
+      } else if (!cmd->cmp("nameToUnicode")) {
+	parseNameToUnicode(tokens, fileName, line);
+      } else if (!cmd->cmp("cidToUnicode")) {
+	parseCIDToUnicode(tokens, fileName, line);
+      } else if (!cmd->cmp("unicodeMap")) {
+	parseUnicodeMap(tokens, fileName, line);
+      } else if (!cmd->cmp("cMapDir")) {
+	parseCMapDir(tokens, fileName, line);
+      } else if (!cmd->cmp("toUnicodeDir")) {
+	parseToUnicodeDir(tokens, fileName, line);
+      } else if (!cmd->cmp("displayFontX")) {
+	parseDisplayFont(tokens, displayFonts, displayFontX, fileName, line);
+      } else if (!cmd->cmp("displayFontT1")) {
+	parseDisplayFont(tokens, displayFonts, displayFontT1, fileName, line);
+      } else if (!cmd->cmp("displayFontTT")) {
+	parseDisplayFont(tokens, displayFonts, displayFontTT, fileName, line);
+      } else if (!cmd->cmp("displayCIDFontX")) {
+	parseDisplayFont(tokens, displayCIDFonts,
+			 displayFontX, fileName, line);
+      } else if (!cmd->cmp("displayNamedCIDFontX")) {
+	parseDisplayFont(tokens, displayNamedCIDFonts,
+			 displayFontX, fileName, line);
+      } else if (!cmd->cmp("psFile")) {
+	parsePSFile(tokens, fileName, line);
+      } else if (!cmd->cmp("psFont")) {
+	parsePSFont(tokens, fileName, line);
+      } else if (!cmd->cmp("psNamedFont16")) {
+	parsePSFont16("psNamedFont16", psNamedFonts16,
+		      tokens, fileName, line);
+      } else if (!cmd->cmp("psFont16")) {
+	parsePSFont16("psFont16", psFonts16, tokens, fileName, line);
+      } else if (!cmd->cmp("psPaperSize")) {
+	parsePSPaperSize(tokens, fileName, line);
+      } else if (!cmd->cmp("psDuplex")) {
+	parseYesNo("psDuplex", &psDuplex, tokens, fileName, line);
+      } else if (!cmd->cmp("psLevel")) {
+	parsePSLevel(tokens, fileName, line);
+      } else if (!cmd->cmp("psEmbedType1Fonts")) {
+	parseYesNo("psEmbedType1", &psEmbedType1, tokens, fileName, line);
+      } else if (!cmd->cmp("psEmbedTrueTypeFonts")) {
+	parseYesNo("psEmbedTrueType", &psEmbedTrueType,
+		   tokens, fileName, line);
+      } else if (!cmd->cmp("psEmbedCIDPostScriptFonts")) {
+	parseYesNo("psEmbedCIDPostScript", &psEmbedCIDPostScript,
+		   tokens, fileName, line);
+      } else if (!cmd->cmp("psEmbedCIDTrueTypeFonts")) {
+	parseYesNo("psEmbedCIDTrueType", &psEmbedCIDTrueType,
+		   tokens, fileName, line);
+      } else if (!cmd->cmp("psOPI")) {
+	parseYesNo("psOPI", &psOPI, tokens, fileName, line);
+      } else if (!cmd->cmp("psASCIIHex")) {
+	parseYesNo("psASCIIHex", &psASCIIHex, tokens, fileName, line);
+      } else if (!cmd->cmp("textEncoding")) {
+	parseTextEncoding(tokens, fileName, line);
+      } else if (!cmd->cmp("textEOL")) {
+	parseTextEOL(tokens, fileName, line);
+      } else if (!cmd->cmp("fontDir")) {
+	parseFontDir(tokens, fileName, line);
+      } else if (!cmd->cmp("initialZoom")) {
+	parseInitialZoom(tokens, fileName, line);
+      } else if (!cmd->cmp("t1libControl")) {
+	parseFontRastControl("t1libControl", &t1libControl,
+			     tokens, fileName, line);
+      } else if (!cmd->cmp("freetypeControl")) {
+	parseFontRastControl("freetypeControl", &freetypeControl,
+			     tokens, fileName, line);
+      } else if (!cmd->cmp("urlCommand")) {
+	parseURLCommand(tokens, fileName, line);
+      } else if (!cmd->cmp("mapNumericCharNames")) {
+	parseYesNo("mapNumericCharNames", &mapNumericCharNames,
+		   tokens, fileName, line);
+      } else if (!cmd->cmp("errQuiet")) {
+	parseYesNo("errQuiet", &errQuiet, tokens, fileName, line);
+      } else if (!cmd->cmp("fontpath") || !cmd->cmp("fontmap")) {
+	error(-1, "Unknown config file command");
+	error(-1, "-- the config file format has changed since Xpdf 0.9x");
+      } else {
+	error(-1, "Unknown config file command '%s' (%s:%d)",
+	      cmd->getCString(), fileName->getCString(), line);
+      }
+    }
+
+    deleteGList(tokens, GString);
+    ++line;
   }
 }
 
@@ -426,7 +482,7 @@ void GlobalParams::parseToUnicodeDir(GList *tokens, GString *fileName,
   toUnicodeDirs->append(((GString *)tokens->get(1))->copy());
 }
 
-void GlobalParams::parseDisplayFont(GList *tokens, GBool isCID,
+void GlobalParams::parseDisplayFont(GList *tokens, GHash *fontHash,
 				    DisplayFontParamKind kind,
 				    GString *fileName, int line) {
   DisplayFontParam *param, *old;
@@ -458,23 +514,16 @@ void GlobalParams::parseDisplayFont(GList *tokens, GBool isCID,
     break;
   }
 
-  if (isCID) {
-    if ((old = (DisplayFontParam *)displayCIDFonts->remove(param->name))) {
-      delete old;
-    }
-    displayCIDFonts->add(param->name, param);
-  } else {
-    if ((old = (DisplayFontParam *)displayFonts->remove(param->name))) {
-      delete old;
-    }
-    displayFonts->add(param->name, param);
+  if ((old = (DisplayFontParam *)fontHash->remove(param->name))) {
+    delete old;
   }
+  fontHash->add(param->name, param);
   return;
 
  err2:
   delete param;
  err1:
-  error(-1, "Bad 'displayFont...' config file command (%s:%d)",
+  error(-1, "Bad 'display*Font*' config file command (%s:%d)",
 	fileName->getCString(), line);
 }
 
@@ -516,6 +565,10 @@ void GlobalParams::parsePSLevel(GList *tokens, GString *fileName, int line) {
     psLevel = psLevel2;
   } else if (!tok->cmp("level2sep")) {
     psLevel = psLevel2Sep;
+  } else if (!tok->cmp("level3")) {
+    psLevel = psLevel3;
+  } else if (!tok->cmp("level3Sep")) {
+    psLevel = psLevel3Sep;
   } else {
     error(-1, "Bad 'psLevel' config file command (%s:%d)",
 	  fileName->getCString(), line);
@@ -542,9 +595,37 @@ void GlobalParams::parsePSFont(GList *tokens, GString *fileName, int line) {
 	  fileName->getCString(), line);
     return;
   }
-  param = new PSFontParam(((GString *)tokens->get(1))->copy(),
-			  ((GString *)tokens->get(2))->copy());
+  param = new PSFontParam(((GString *)tokens->get(1))->copy(), 0,
+			  ((GString *)tokens->get(2))->copy(), NULL);
   psFonts->add(param->pdfFontName, param);
+}
+
+void GlobalParams::parsePSFont16(char *cmdName, GList *fontList,
+				 GList *tokens, GString *fileName, int line) {
+  PSFontParam *param;
+  int wMode;
+  GString *tok;
+
+  if (tokens->getLength() != 5) {
+    error(-1, "Bad '%s' config file command (%s:%d)",
+	  cmdName, fileName->getCString(), line);
+    return;
+  }
+  tok = (GString *)tokens->get(2);
+  if (!tok->cmp("H")) {
+    wMode = 0;
+  } else if (!tok->cmp("V")) {
+    wMode = 1;
+  } else {
+    error(-1, "Bad '%s' config file command (%s:%d)",
+	  cmdName, fileName->getCString(), line);
+    return;
+  }
+  param = new PSFontParam(((GString *)tokens->get(1))->copy(),
+			  wMode,
+			  ((GString *)tokens->get(3))->copy(),
+			  ((GString *)tokens->get(4))->copy());
+  fontList->append(param);
 }
 
 void GlobalParams::parseTextEncoding(GList *tokens, GString *fileName,
@@ -588,17 +669,15 @@ void GlobalParams::parseFontDir(GList *tokens, GString *fileName, int line) {
   fontDirs->append(((GString *)tokens->get(1))->copy());
 }
 
-void GlobalParams::parseURLCommand(GList *tokens, GString *fileName,
-				   int line) {
+void GlobalParams::parseInitialZoom(GList *tokens,
+				    GString *fileName, int line) {
   if (tokens->getLength() != 2) {
-    error(-1, "Bad 'urlCommand' config file command (%s:%d)",
+    error(-1, "Bad 'initialZoom' config file command (%s:%d)",
 	  fileName->getCString(), line);
     return;
   }
-  if (urlCommand) {
-    delete urlCommand;
-  }
-  urlCommand = ((GString *)tokens->get(1))->copy();
+  delete initialZoom;
+  initialZoom = ((GString *)tokens->get(1))->copy();
 }
 
 void GlobalParams::parseFontRastControl(char *cmdName, FontRastControl *val,
@@ -616,6 +695,19 @@ void GlobalParams::parseFontRastControl(char *cmdName, FontRastControl *val,
     error(-1, "Bad '%s' config file command (%s:%d)",
 	  cmdName, fileName->getCString(), line);
   }
+}
+
+void GlobalParams::parseURLCommand(GList *tokens, GString *fileName,
+				   int line) {
+  if (tokens->getLength() != 2) {
+    error(-1, "Bad 'urlCommand' config file command (%s:%d)",
+	  fileName->getCString(), line);
+    return;
+  }
+  if (urlCommand) {
+    delete urlCommand;
+  }
+  urlCommand = ((GString *)tokens->get(1))->copy();
 }
 
 void GlobalParams::parseYesNo(char *cmdName, GBool *flag,
@@ -654,12 +746,16 @@ GlobalParams::~GlobalParams() {
   deleteGList(toUnicodeDirs, GString);
   deleteGHash(displayFonts, DisplayFontParam);
   deleteGHash(displayCIDFonts, DisplayFontParam);
+  deleteGHash(displayNamedCIDFonts, DisplayFontParam);
   if (psFile) {
     delete psFile;
   }
   deleteGHash(psFonts, PSFontParam);
+  deleteGList(psNamedFonts16, PSFontParam);
+  deleteGList(psFonts16, PSFontParam);
   delete textEncoding;
   deleteGList(fontDirs, GString);
+  delete initialZoom;
   if (urlCommand) {
     delete urlCommand;
   }
@@ -752,12 +848,48 @@ DisplayFontParam *GlobalParams::getDisplayFont(GString *fontName) {
   return (DisplayFontParam *)displayFonts->lookup(fontName);
 }
 
-DisplayFontParam *GlobalParams::getDisplayCIDFont(GString *collection) {
-  return (DisplayFontParam *)displayCIDFonts->lookup(collection);
+DisplayFontParam *GlobalParams::getDisplayCIDFont(GString *fontName,
+						  GString *collection) {
+  DisplayFontParam *dfp;
+
+  if (!fontName ||
+      !(dfp = (DisplayFontParam *)displayNamedCIDFonts->lookup(fontName))) {
+    dfp = (DisplayFontParam *)displayCIDFonts->lookup(collection);
+  }
+  return dfp;
 }
 
 PSFontParam *GlobalParams::getPSFont(GString *fontName) {
   return (PSFontParam *)psFonts->lookup(fontName);
+}
+
+PSFontParam *GlobalParams::getPSFont16(GString *fontName,
+				       GString *collection, int wMode) {
+  PSFontParam *p;
+  int i;
+
+  p = NULL;
+  if (fontName) {
+    for (i = 0; i < psNamedFonts16->getLength(); ++i) {
+      p = (PSFontParam *)psNamedFonts16->get(i);
+      if (!p->pdfFontName->cmp(fontName) &&
+	  p->wMode == wMode) {
+	break;
+      }
+      p = NULL;
+    }
+  }
+  if (!p && collection) {
+    for (i = 0; i < psFonts16->getLength(); ++i) {
+      p = (PSFontParam *)psFonts16->get(i);
+      if (!p->pdfFontName->cmp(collection) &&
+	  p->wMode == wMode) {
+	break;
+      }
+      p = NULL;
+    }
+  }
+  return p;
 }
 
 GString *GlobalParams::findFontFile(GString *fontName,
@@ -866,8 +998,20 @@ void GlobalParams::setPSEmbedTrueType(GBool embed) {
   psEmbedTrueType = embed;
 }
 
+void GlobalParams::setPSEmbedCIDPostScript(GBool embed) {
+  psEmbedCIDPostScript = embed;
+}
+
+void GlobalParams::setPSEmbedCIDTrueType(GBool embed) {
+  psEmbedCIDTrueType = embed;
+}
+
 void GlobalParams::setPSOPI(GBool opi) {
   psOPI = opi;
+}
+
+void GlobalParams::setPSASCIIHex(GBool hex) {
+  psASCIIHex = hex;
 }
 
 void GlobalParams::setTextEncoding(char *encodingName) {
@@ -886,6 +1030,11 @@ GBool GlobalParams::setTextEOL(char *s) {
     return gFalse;
   }
   return gTrue;
+}
+
+void GlobalParams::setInitialZoom(char *s) {
+  delete initialZoom;
+  initialZoom = new GString(s);
 }
 
 GBool GlobalParams::setT1libControl(char *s) {

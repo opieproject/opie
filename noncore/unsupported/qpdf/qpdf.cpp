@@ -16,12 +16,12 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
-#include <qpe/fileselector.h>
 #include <qpe/qcopenvelope_qws.h>
 
 
 #include <qclipboard.h>
 #include <qtoolbar.h>
+#include <qtoolbutton.h>
 #include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qwidgetstack.h>
@@ -36,6 +36,12 @@
 #include <qmessagebox.h>
 
 #include "qpdf.h"
+
+#ifdef QPDF_QPE_ONLY
+#include <qpe/fileselector.h>
+#else
+#include <opie/ofileselector.h>
+#endif
 
 
 int main ( int argc, char **argv ) 
@@ -81,7 +87,12 @@ QPdfDlg::QPdfDlg ( ) : QMainWindow ( )
 	m_outdev = new QPEOutputDev ( m_stack );
 	connect ( m_outdev, SIGNAL( selectionChanged ( const QRect & )), this, SLOT( copyToClipboard ( const QRect & )));
 
+#ifdef QPDF_QPE_ONLY
 	m_filesel = new FileSelector ( "application/pdf", m_stack, "fs", false, true );
+#else
+	m_filesel = new OFileSelector ( "application/pdf", m_stack, "fs", false, true );
+#endif
+
 	connect ( m_filesel, SIGNAL( closeMe ( )), this, SLOT( closeFileSelector ( )));
 	connect ( m_filesel, SIGNAL( fileSelected ( const DocLnk & )), this, SLOT( openFile ( const DocLnk & )));
 

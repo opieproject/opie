@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.7 2002-04-17 12:56:38 llornkcor Exp $
+** $Id: qpeapplication.cpp,v 1.8 2002-05-23 01:59:47 llornkcor Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -172,10 +172,10 @@ static void setVolume(int t=0, int percent=-1)
 {
   switch (t) {
   case 0: {
-  Config cfg("Sound");
-  cfg.setGroup("System");
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
   if ( percent < 0 )
-    percent = cfg.readNumEntry("Volume",50);
+    percent = cfg.readNumEntry("VolumePercent",50);
   int fd = 0;
   if ((fd = open("/dev/mixer", O_RDWR))>=0) {
     int vol = muted ? 0 : percent;
@@ -192,8 +192,8 @@ static void setMic(int t=0, int percent=-1)
 {
   switch (t) {
   case 0: {
-  Config cfg("Sound");
-  cfg.setGroup("System");
+  Config cfg("qpe");
+  cfg.setGroup("Volume");
   if ( percent < 0 )
     percent = cfg.readNumEntry("Mic",50);
   

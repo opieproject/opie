@@ -22,6 +22,7 @@
 #include <qpixmap.h>
 #include <qguardedptr.h>
 #include <qtimer.h>
+#include <qfile.h>
 
 
 class IrdaApplet : public QWidget
@@ -40,12 +41,16 @@ private:
     void paintEvent( QPaintEvent* );
     int checkIrdaStatus();
     int setIrdaStatus(int);
+    int checkIrdaDiscoveryStatus();
+    int setIrdaDiscoveryStatus(int);
     int sockfd;
 
 private:
     QPixmap irdaOnPixmap;
     QPixmap irdaOffPixmap;
+    QPixmap irdaDiscoveryOnPixmap;
     int irdaactive;
+    int irdaDiscoveryActive;
 
 private slots:
 

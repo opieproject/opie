@@ -2,7 +2,7 @@
 //
 // DisplayFontTable.h
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -11,7 +11,7 @@ static struct {
   char *xlfd;
   char *encoding;
 } displayFontTab[] = {
-#if _NO_USE_FOR_QPE
+#if 0
   {"Courier",               "-*-courier-medium-r-normal-*-%s-*-*-*-*-*-iso8859-1",         "Latin1"},
   {"Courier-Bold",          "-*-courier-bold-r-normal-*-%s-*-*-*-*-*-iso8859-1",           "Latin1"},
   {"Courier-BoldOblique",   "-*-courier-bold-o-normal-*-%s-*-*-*-*-*-iso8859-1",           "Latin1"},
@@ -27,5 +27,5 @@ static struct {
   {"Times-Roman",           "-*-times-medium-r-normal-*-%s-*-*-*-*-*-iso8859-1",           "Latin1"},
   {"ZapfDingbats",          "-*-zapfdingbats-medium-r-normal-*-%s-*-*-*-*-*-*-*",          "ZapfDingbats"},
 #endif
-  {NULL}
+  {NULL,0,0}
 };

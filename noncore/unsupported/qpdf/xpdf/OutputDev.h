@@ -2,7 +2,7 @@
 //
 // OutputDev.h
 //
-// Copyright 1996 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -45,6 +45,10 @@ public:
 
   // Does this device use drawChar() or drawString()?
   virtual GBool useDrawChar() = 0;
+
+  // Does this device use beginType3Char/endType3Char?  Otherwise,
+  // text in Type 3 fonts will be drawn with drawChar/drawString.
+  virtual GBool interpretType3Chars() = 0;
 
   // Does this device need non-text content?
   virtual GBool needNonText() { return gTrue; }
@@ -119,6 +123,9 @@ public:
 			fouble originX, fouble originY,
 			CharCode code, Unicode *u, int uLen) {}
   virtual void drawString(GfxState *state, GString *s) {}
+  virtual GBool beginType3Char(GfxState *state,
+			       CharCode code, Unicode *u, int uLen);
+  virtual void endType3Char(GfxState *state) {}
 
   //----- image drawing
   virtual void drawImageMask(GfxState *state, Object *ref, Stream *str,
@@ -133,6 +140,14 @@ public:
   virtual void opiBegin(GfxState *state, Dict *opiDict);
   virtual void opiEnd(GfxState *state, Dict *opiDict);
 #endif
+
+  //----- Type 3 font operators
+  virtual void type3D0(GfxState *state, fouble wx, fouble wy) {}
+  virtual void type3D1(GfxState *state, fouble wx, fouble wy,
+		       fouble llx, fouble lly, fouble urx, fouble ury) {}
+
+  //----- PostScript XObjects
+  virtual void psXObject(Stream *psStream, Stream *level1Stream) {}
 
 private:
 

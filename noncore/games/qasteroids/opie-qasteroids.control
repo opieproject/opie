@@ -1,9 +1,0 @@
-Files: bin/qasteroids apps/Games/qasteroids.desktop pics/qasteroids
-Priority: optional
-Section: opie/games
-Maintainer: Martin Jones <mjones@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Game: shoot the asteroids
- A game for the Opie environment.

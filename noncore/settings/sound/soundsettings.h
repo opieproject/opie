@@ -32,13 +32,13 @@ public:
  SoundSettings( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
   
 protected:
- void accept();
- void reject();
+/*  void accept(); */
+/*  void reject(); */
  void updateStorageCombo();
   
 private slots:
  void setLocation(const QString &);
-    
+ void cleanUp();    
  void setVolume(int);
  void setMic(int); 
 

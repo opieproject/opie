@@ -4,7 +4,7 @@
 //
 // Mapping from character codes to Unicode.
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -50,8 +50,7 @@ public:
 
 private:
 
-  void parseCMap1(char *(*getLineFunc)(char *, int, void *),
-		  void *data, int nBits);
+  void parseCMap1(int (*getCharFunc)(void *), void *data, int nBits);
   CharCodeToUnicode(GString *collectionA);
   CharCodeToUnicode(GString *collectionA, Unicode *mapA,
 		    CharCode mapLenA, GBool copyMap,

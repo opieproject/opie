@@ -23,7 +23,6 @@
 
 
 #include <qwidget.h>
-#include <qpushbutton.h>
 #include <qframe.h>
 #include <qpixmap.h>
 #include <qguardedptr.h>
@@ -42,6 +41,10 @@ public:
     QSlider *slider;
     QSlider *mic;
     QCheckBox *muteBox;
+    QCheckBox *alarmSound;
+    QCheckBox *screentaps;
+    QCheckBox *keyclicks;
+
 
 private:
     QPushButton *upButton;
@@ -94,6 +97,10 @@ private:
     void mouseReleaseEvent( QMouseEvent *);
     void writeSystemMic();
 
+protected slots:
+    void alarmSoundCheckToggled(bool);
+    void keyclicksCheckToggled(bool);
+    void screentapsCheckToggled(bool); 
 };
 
 

@@ -2,7 +2,7 @@
 //
 // GfxState.cc
 //
-// Copyright 1996 Derek B. Noonburg
+// Copyright 1996-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -408,9 +408,22 @@ void GfxDeviceCMYKColorSpace::getGray(GfxColor *color, fouble *gray) {
 }
 
 void GfxDeviceCMYKColorSpace::getRGB(GfxColor *color, GfxRGB *rgb) {
-  rgb->r = clip01(1 - (color->c[0] + color->c[3]));
-  rgb->g = clip01(1 - (color->c[1] + color->c[3]));
-  rgb->b = clip01(1 - (color->c[2] + color->c[3]));
+  fouble c, m, y, aw, ac, am, ay, ar, ag, ab;
+
+  c = clip01(color->c[0] + color->c[3]);
+  m = clip01(color->c[1] + color->c[3]);
+  y = clip01(color->c[2] + color->c[3]);
+  aw = (1-c) * (1-m) * (1-y);
+  ac = c * (1-m) * (1-y);
+  am = (1-c) * m * (1-y);
+  ay = (1-c) * (1-m) * y;
+  ar = (1-c) * m * y;
+  ag = c * (1-m) * y;
+  ab = c * m * (1-y);
+  rgb->r = clip01(aw + 0.9137*am + 0.9961*ay + 0.9882*ar);
+  rgb->g = clip01(aw + 0.6196*ac + ay + 0.5176*ag);
+  rgb->b = clip01(aw + 0.7804*ac + 0.5412*am + 0.0667*ar + 0.2118*ag +
+		  0.4863*ab);
 }
 
 void GfxDeviceCMYKColorSpace::getCMYK(GfxColor *color, GfxCMYK *cmyk) {
@@ -1268,10 +1281,6 @@ GfxShading *GfxShading::parse(Object *obj) {
     }
     typeA = obj1.getInt();
     obj1.free();
-    if (typeA != 2) {
-      error(-1, "Unimplemented shading type %d", typeA);
-      goto err1;
-    }
 
     obj->dictLookup("ColorSpace", &obj1);
     if (!(colorSpaceA = GfxColorSpace::parse(&obj1))) {
@@ -1317,7 +1326,17 @@ GfxShading *GfxShading::parse(Object *obj) {
     }
     obj1.free();
 
-    shading = GfxAxialShading::parse(obj->getDict());
+    switch (typeA) {
+    case 2:
+      shading = GfxAxialShading::parse(obj->getDict());
+      break;
+    case 3:
+      shading = GfxRadialShading::parse(obj->getDict());
+      break;
+    default:
+      error(-1, "Unimplemented shading type %d", typeA);
+      goto err1;
+    }
 
     if (shading) {
       shading->type = typeA;
@@ -1449,6 +1468,128 @@ GfxAxialShading *GfxAxialShading::parse(Dict *dict) {
 }
 
 void GfxAxialShading::getColor(fouble t, GfxColor *color) {
+  int i;
+
+  for (i = 0; i < nFuncs; ++i) {
+    funcs[i]->transform(&t, &color->c[i]);
+  }
+}
+
+//------------------------------------------------------------------------
+// GfxRadialShading
+//------------------------------------------------------------------------
+
+GfxRadialShading::GfxRadialShading(fouble x0A, fouble y0A, fouble r0A,
+				   fouble x1A, fouble y1A, fouble r1A,
+				   fouble t0A, fouble t1A,
+				   Function **funcsA, int nFuncsA,
+				   GBool extend0A, GBool extend1A) {
+  int i;
+
+  x0 = x0A;
+  y0 = y0A;
+  r0 = r0A;
+  x1 = x1A;
+  y1 = y1A;
+  r1 = r1A;
+  t0 = t0A;
+  t1 = t1A;
+  nFuncs = nFuncsA;
+  for (i = 0; i < nFuncs; ++i) {
+    funcs[i] = funcsA[i];
+  }
+  extend0 = extend0A;
+  extend1 = extend1A;
+}
+
+GfxRadialShading::~GfxRadialShading() {
+  int i;
+
+  for (i = 0; i < nFuncs; ++i) {
+    delete funcs[i];
+  }
+}
+
+GfxRadialShading *GfxRadialShading::parse(Dict *dict) {
+  fouble x0A, y0A, r0A, x1A, y1A, r1A;
+  fouble t0A, t1A;
+  Function *funcsA[gfxColorMaxComps];
+  int nFuncsA;
+  GBool extend0A, extend1A;
+  Object obj1, obj2;
+  int i;
+
+  x0A = y0A = r0A = x1A = y1A = r1A = 0;
+  if (dict->lookup("Coords", &obj1)->isArray() &&
+      obj1.arrayGetLength() == 6) {
+    x0A = obj1.arrayGet(0, &obj2)->getNum();
+    obj2.free();
+    y0A = obj1.arrayGet(1, &obj2)->getNum();
+    obj2.free();
+    r0A = obj1.arrayGet(2, &obj2)->getNum();
+    obj2.free();
+    x1A = obj1.arrayGet(3, &obj2)->getNum();
+    obj2.free();
+    y1A = obj1.arrayGet(4, &obj2)->getNum();
+    obj2.free();
+    r1A = obj1.arrayGet(5, &obj2)->getNum();
+    obj2.free();
+  } else {
+    error(-1, "Missing or invalid Coords in shading dictionary");
+    goto err1;
+  }
+  obj1.free();
+
+  t0A = 0;
+  t1A = 1;
+  if (dict->lookup("Domain", &obj1)->isArray() &&
+      obj1.arrayGetLength() == 2) {
+    t0A = obj1.arrayGet(0, &obj2)->getNum();
+    obj2.free();
+    t1A = obj1.arrayGet(1, &obj2)->getNum();
+    obj2.free();
+  }
+  obj1.free();
+
+  dict->lookup("Function", &obj1);
+  if (obj1.isArray()) {
+    nFuncsA = obj1.arrayGetLength();
+    for (i = 0; i < nFuncsA; ++i) {
+      obj1.arrayGet(i, &obj2);
+      if (!(funcsA[i] = Function::parse(&obj2))) {
+	obj1.free();
+	obj2.free();
+	goto err1;
+      }
+      obj2.free();
+    }
+  } else {
+    nFuncsA = 1;
+    if (!(funcsA[0] = Function::parse(&obj1))) {
+      obj1.free();
+      goto err1;
+    }
+  }
+  obj1.free();
+
+  extend0A = extend1A = gFalse;
+  if (dict->lookup("Extend", &obj1)->isArray() &&
+      obj1.arrayGetLength() == 2) {
+    extend0A = obj1.arrayGet(0, &obj2)->getBool();
+    obj2.free();
+    extend1A = obj1.arrayGet(1, &obj2)->getBool();
+    obj2.free();
+  }
+  obj1.free();
+
+  return new GfxRadialShading(x0A, y0A, r0A, x1A, y1A, r1A, t0A, t1A,
+			      funcsA, nFuncsA, extend0A, extend1A);
+
+ err1:
+  return NULL;
+}
+
+void GfxRadialShading::getColor(fouble t, GfxColor *color) {
   int i;
 
   for (i = 0; i < nFuncs; ++i) {
@@ -1918,6 +2059,67 @@ GfxState::GfxState(GfxState *state) {
   saved = NULL;
 }
 
+void GfxState::getUserClipBBox(fouble *xMin, fouble *yMin,
+			       fouble *xMax, fouble *yMax) {
+  fouble ictm[6];
+  fouble xMin1, yMin1, xMax1, yMax1, det, tx, ty;
+
+  // invert the CTM
+  det = 1 / (ctm[0] * ctm[3] - ctm[1] * ctm[2]);
+  ictm[0] = ctm[3] * det;
+  ictm[1] = -ctm[1] * det;
+  ictm[2] = -ctm[2] * det;
+  ictm[3] = ctm[0] * det;
+  ictm[4] = (ctm[2] * ctm[5] - ctm[3] * ctm[4]) * det;
+  ictm[5] = (ctm[1] * ctm[4] - ctm[0] * ctm[5]) * det;
+
+  // transform all four corners of the clip bbox; find the min and max
+  // x and y values
+  xMin1 = xMax1 = clipXMin * ictm[0] + clipYMin * ictm[2] + ictm[4];
+  yMin1 = yMax1 = clipXMin * ictm[1] + clipYMin * ictm[3] + ictm[5];
+  tx = clipXMin * ictm[0] + clipYMax * ictm[2] + ictm[4];
+  ty = clipXMin * ictm[1] + clipYMax * ictm[3] + ictm[5];
+  if (tx < xMin1) {
+    xMin1 = tx;
+  } else if (tx > xMax1) {
+    xMax1 = tx;
+  }
+  if (ty < yMin1) {
+    yMin1 = ty;
+  } else if (ty > yMax1) {
+    yMax1 = ty;
+  }
+  tx = clipXMax * ictm[0] + clipYMin * ictm[2] + ictm[4];
+  ty = clipXMax * ictm[1] + clipYMin * ictm[3] + ictm[5];
+  if (tx < xMin1) {
+    xMin1 = tx;
+  } else if (tx > xMax1) {
+    xMax1 = tx;
+  }
+  if (ty < yMin1) {
+    yMin1 = ty;
+  } else if (ty > yMax1) {
+    yMax1 = ty;
+  }
+  tx = clipXMax * ictm[0] + clipYMax * ictm[2] + ictm[4];
+  ty = clipXMax * ictm[1] + clipYMax * ictm[3] + ictm[5];
+  if (tx < xMin1) {
+    xMin1 = tx;
+  } else if (tx > xMax1) {
+    xMax1 = tx;
+  }
+  if (ty < yMin1) {
+    yMin1 = ty;
+  } else if (ty > yMax1) {
+    yMax1 = ty;
+  }
+
+  *xMin = xMin1;
+  *yMin = yMin1;
+  *xMax = xMax1;
+  *yMax = yMax1;
+}
+
 fouble GfxState::transformWidth(fouble w) {
   fouble x, y;
 
@@ -1946,12 +2148,23 @@ void GfxState::getFontTransMat(fouble *m11, fouble *m12,
 
 void GfxState::setCTM(fouble a, fouble b, fouble c,
 		      fouble d, fouble e, fouble f) {
+  int i;
+
   ctm[0] = a;
   ctm[1] = b;
   ctm[2] = c;
   ctm[3] = d;
   ctm[4] = e;
   ctm[5] = f;
+
+  // avoid FP exceptions on badly messed up PDF files
+  for (i = 0; i < 6; ++i) {
+    if (ctm[i] > fouble(1e3)) {
+      ctm[i] = fouble(1e3);
+    } else if (ctm[i] < -fouble(1e3)) {
+      ctm[i] = -fouble(1e3);
+    }
+  }
 }
 
 void GfxState::concatCTM(fouble a, fouble b, fouble c,
@@ -1960,6 +2173,7 @@ void GfxState::concatCTM(fouble a, fouble b, fouble c,
   fouble b1 = ctm[1];
   fouble c1 = ctm[2];
   fouble d1 = ctm[3];
+  int i;
 
   ctm[0] = a * a1 + b * c1;
   ctm[1] = a * b1 + b * d1;
@@ -1967,6 +2181,15 @@ void GfxState::concatCTM(fouble a, fouble b, fouble c,
   ctm[3] = c * b1 + d * d1;
   ctm[4] = e * a1 + f * c1 + ctm[4];
   ctm[5] = e * b1 + f * d1 + ctm[5];
+
+  // avoid FP exceptions on badly messed up PDF files
+  for (i = 0; i < 6; ++i) {
+    if (ctm[i] > fouble(1e3)) {
+      ctm[i] = fouble(1e3);
+    } else if (ctm[i] < -fouble(1e3)) {
+      ctm[i] = -fouble(1e3);
+    }
+  }
 }
 
 void GfxState::setFillColorSpace(GfxColorSpace *colorSpace) {
@@ -2051,10 +2274,10 @@ void GfxState::clip() {
   }
 }
 
-void GfxState::textShift(fouble tx) {
+void GfxState::textShift(fouble tx, fouble ty) {
   fouble dx, dy;
 
-  textTransformDelta(tx, 0, &dx, &dy);
+  textTransformDelta(tx, ty, &dx, &dy);
   curX += dx;
   curY += dy;
 }
@@ -2095,3 +2318,4 @@ GfxState *GfxState::restore() {
 
   return oldState;
 }
+

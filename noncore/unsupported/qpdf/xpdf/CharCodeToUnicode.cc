@@ -2,7 +2,7 @@
 //
 // CharCodeToUnicode.cc
 //
-// Copyright 2001 Derek B. Noonburg
+// Copyright 2001-2002 Glyph & Cog, LLC
 //
 //========================================================================
 
@@ -18,6 +18,7 @@
 #include "GString.h"
 #include "Error.h"
 #include "GlobalParams.h"
+#include "PSTokenizer.h"
 #include "CharCodeToUnicode.h"
 
 //------------------------------------------------------------------------
@@ -29,6 +30,26 @@ struct CharCodeToUnicodeString {
   Unicode u[maxUnicodeString];
   int len;
 };
+
+//------------------------------------------------------------------------
+
+static int getCharFromString(void *data) {
+  char *p;
+  int c;
+
+  p = *(char **)data;
+  if (*p) {
+    c = *p++;
+    *(char **)data = p;
+  } else {
+    c = EOF;
+  }
+  return c;
+}
+
+static int getCharFromFile(void *data) {
+  return fgetc((FILE *)data);
+}
 
 //------------------------------------------------------------------------
 
@@ -75,47 +96,20 @@ CharCodeToUnicode *CharCodeToUnicode::make8BitToUnicode(Unicode *toUnicode) {
   return new CharCodeToUnicode(NULL, toUnicode, 256, gTrue, NULL, 0);
 }
 
-static char *getLineFromString(char *buf, int size, char **s) {
-  char c;
-  int i;
-
-  i = 0;
-  while (i < size - 1 && **s) {
-    buf[i++] = c = *(*s)++;
-    if (c == '\x0a') {
-      break;
-    }
-    if (c == '\x0d') {
-      if (**s == '\x0a' && i < size - 1) {
-	buf[i++] = '\x0a';
-	++*s;
-      }
-      break;
-    }
-  }
-  buf[i] = '\0';
-  if (i == 0) {
-    return NULL;
-  }
-  return buf;
-}
-
 CharCodeToUnicode *CharCodeToUnicode::parseCMap(GString *buf, int nBits) {
   CharCodeToUnicode *ctu;
   char *p;
 
   ctu = new CharCodeToUnicode(NULL);
   p = buf->getCString();
-  ctu->parseCMap1((char *(*)(char *, int, void *))&getLineFromString,
-		  &p, nBits);
+  ctu->parseCMap1(&getCharFromString, &p, nBits);
   return ctu;
 }
 
-void CharCodeToUnicode::parseCMap1(char *(*getLineFunc)(char *, int, void *),
-				   void *data, int nBits) {
-  char buf[256];
-  GBool inBFChar, inBFRange;
-  char *tok1, *tok2, *tok3;
+void CharCodeToUnicode::parseCMap1(int (*getCharFunc)(void *), void *data,
+				   int nBits) {
+  PSTokenizer *pst;
+  char tok1[256], tok2[256], tok3[256];
   int nDigits, n1, n2, n3;
   CharCode oldLen, i;
   CharCode code1, code2;
@@ -126,28 +120,40 @@ void CharCodeToUnicode::parseCMap1(char *(*getLineFunc)(char *, int, void *),
   FILE *f;
 
   nDigits = nBits / 4;
-  inBFChar = inBFRange = gFalse;
-  while ((*getLineFunc)(buf, sizeof(buf), data)) {
-    tok1 = strtok(buf, " \t\r\n");
-    if (!tok1 || tok1[0] == '%') {
-      continue;
-    }
-    tok2 = strtok(NULL, " \t\r\n");
-    tok3 = strtok(NULL, " \t\r\n");
-    if (inBFChar) {
-      if (!strcmp(tok1, "endbfchar")) {
-	inBFChar = gFalse;
-      } else if (tok2) {
-	n1 = strlen(tok1);
-	n2 = strlen(tok2);
+  pst = new PSTokenizer(getCharFunc, data);
+  pst->getToken(tok1, sizeof(tok1), &n1);
+  while (pst->getToken(tok2, sizeof(tok2), &n2)) {
+    if (!strcmp(tok2, "usecmap")) {
+      if (tok1[0] == '/') {
+	name = new GString(tok1 + 1);
+	if ((f = globalParams->findToUnicodeFile(name))) {
+	  parseCMap1(&getCharFromFile, f, nBits);
+	  fclose(f);
+	} else {
+	  error(-1, "Couldn't find ToUnicode CMap file for '%s'",
+		name->getCString());
+	}
+	delete name;
+      }
+      pst->getToken(tok1, sizeof(tok1), &n1);
+    } else if (!strcmp(tok2, "beginbfchar")) {
+      while (pst->getToken(tok1, sizeof(tok1), &n1)) {
+	if (!strcmp(tok1, "endbfchar")) {
+	  break;
+	}
+	if (!pst->getToken(tok2, sizeof(tok2), &n2) ||
+	    !strcmp(tok2, "endbfchar")) {
+	  error(-1, "Illegal entry in bfchar block in ToUnicode CMap");
+	  break;
+	}
 	if (!(n1 == 2 + nDigits && tok1[0] == '<' && tok1[n1 - 1] == '>' &&
 	      tok2[0] == '<' && tok2[n2 - 1] == '>')) {
-	  error(-1, "Illegal line in bfchar block in ToUnicode CMap");
+	  error(-1, "Illegal entry in bfchar block in ToUnicode CMap");
 	  continue;
 	}
 	tok1[n1 - 1] = tok2[n2 - 1] = '\0';
 	if (sscanf(tok1 + 1, "%x", &code1) != 1) {
-	  error(-1, "Illegal line in bfchar block in ToUnicode CMap");
+	  error(-1, "Illegal entry in bfchar block in ToUnicode CMap");
 	  continue;
 	}
 	if (code1 >= mapLen) {
@@ -160,7 +166,7 @@ void CharCodeToUnicode::parseCMap1(char *(*getLineFunc)(char *, int, void *),
 	}
 	if (n2 == 6) {
 	  if (sscanf(tok2 + 1, "%x", &u) != 1) {
-	    error(-1, "Illegal line in bfchar block in ToUnicode CMap");
+	    error(-1, "Illegal entry in bfchar block in ToUnicode CMap");
 	    continue;
 	  }
 	  map[code1] = u;
@@ -177,31 +183,35 @@ void CharCodeToUnicode::parseCMap1(char *(*getLineFunc)(char *, int, void *),
 	    strncpy(uHex, tok2 + 1 + j*4, 4);
 	    uHex[4] = '\0';
 	    if (sscanf(uHex, "%x", &sMap[sMapLen].u[j]) != 1) {
-	      error(-1, "Illegal line in bfchar block in ToUnicode CMap");
+	      error(-1, "Illegal entry in bfchar block in ToUnicode CMap");
 	    }
 	  }
 	  ++sMapLen;
 	}
-      } else {
-	error(-1, "Illegal bfchar block in ToUnicode CMap");
       }
-    } else if (inBFRange) {
-      if (!strcmp(tok1, "endbfrange")) {
-	inBFRange = gFalse;
-      } else if (tok2 && tok3) {
-	n1 = strlen(tok1);
-	n2 = strlen(tok2);
-	n3 = strlen(tok3);
+      pst->getToken(tok1, sizeof(tok1), &n1);
+    } else if (!strcmp(tok2, "beginbfrange")) {
+      while (pst->getToken(tok1, sizeof(tok1), &n1)) {
+	if (!strcmp(tok1, "endbfrange")) {
+	  break;
+	}
+	if (!pst->getToken(tok2, sizeof(tok2), &n2) ||
+	    !strcmp(tok2, "endbfrange") ||
+	    !pst->getToken(tok3, sizeof(tok3), &n3) ||
+	    !strcmp(tok3, "endbfrange")) {
+	  error(-1, "Illegal entry in bfrange block in ToUnicode CMap");
+	  break;
+	}
 	if (!(n1 == 2 + nDigits && tok1[0] == '<' && tok1[n1 - 1] == '>' &&
 	      n2 == 2 + nDigits && tok2[0] == '<' && tok2[n2 - 1] == '>' &&
 	      tok3[0] == '<' && tok3[n3 - 1] == '>')) {
-	  error(-1, "Illegal line in bfrange block in ToUnicode CMap");
+	  error(-1, "Illegal entry in bfrange block in ToUnicode CMap");
 	  continue;
 	}
 	tok1[n1 - 1] = tok2[n2 - 1] = tok3[n3 - 1] = '\0';
 	if (sscanf(tok1 + 1, "%x", &code1) != 1 ||
 	    sscanf(tok2 + 1, "%x", &code2) != 1) {
-	  error(-1, "Illegal line in bfrange block in ToUnicode CMap");
+	  error(-1, "Illegal entry in bfrange block in ToUnicode CMap");
 	  continue;
 	}
 	if (code2 >= mapLen) {
@@ -214,7 +224,7 @@ void CharCodeToUnicode::parseCMap1(char *(*getLineFunc)(char *, int, void *),
 	}
 	if (n3 == 6) {
 	  if (sscanf(tok3 + 1, "%x", &u) != 1) {
-	    error(-1, "Illegal line in bfrange block in ToUnicode CMap");
+	    error(-1, "Illegal entry in bfrange block in ToUnicode CMap");
 	    continue;
 	  }
 	  for (; code1 <= code2; ++code1) {
@@ -234,34 +244,20 @@ void CharCodeToUnicode::parseCMap1(char *(*getLineFunc)(char *, int, void *),
 	      strncpy(uHex, tok3 + 1 + j*4, 4);
 	      uHex[4] = '\0';
 	      if (sscanf(uHex, "%x", &sMap[sMapLen].u[j]) != 1) {
-		error(-1, "Illegal line in bfrange block in ToUnicode CMap");
+		error(-1, "Illegal entry in bfrange block in ToUnicode CMap");
 	      }
 	    }
 	    sMap[sMapLen].u[sMap[sMapLen].len - 1] += i;
 	    ++sMapLen;
 	  }
 	}
-      } else {
-	error(-1, "Illegal bfrange block in ToUnicode CMap");
       }
-    } else if (tok2 && !strcmp(tok2, "usecmap")) {
-      if (tok1[0] == '/') {
-	name = new GString(tok1 + 1);
-	if ((f = globalParams->findToUnicodeFile(name))) {
-	  parseCMap1((char *(*)(char *, int, void *))&getLine, f, nBits);
-	  fclose(f);
-	} else {
-	  error(-1, "Couldn't find ToUnicode CMap file for '%s'",
-		name->getCString());
-	}
-	delete name;
-      }
-    } else if (tok2 && !strcmp(tok2, "beginbfchar")) {
-      inBFChar = gTrue;
-    } else if (tok2 && !strcmp(tok2, "beginbfrange")) {
-      inBFRange = gTrue;
+      pst->getToken(tok1, sizeof(tok1), &n1);
+    } else {
+      strcpy(tok1, tok2);
     }
   }
+  delete pst;
 }
 
 CharCodeToUnicode::CharCodeToUnicode(GString *collectionA) {

@@ -28,6 +28,7 @@
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
 #include <qpe/applnk.h>
+#include <qpe/ir.h>
 
 //#include <opie/ofileselector.h>
 #include <qmultilineedit.h>
@@ -92,7 +93,7 @@ AdvancedFm::AdvancedFm( )
     connect( qpeDirButton ,SIGNAL(released()),this,SLOT( QPEButtonPushed()) );
     qpeDirButton->setFlat(TRUE);
     layout->addMultiCellWidget( qpeDirButton , 0, 0, 2, 2);
- 
+
     cfButton = new QPushButton(Resource::loadIconSet("cardmon/pcmcia"),"",this,"CFButton");
     cfButton ->setFixedSize( QSize( 20, 20 ) );
     connect( cfButton ,SIGNAL(released()),this,SLOT( CFButtonPushed()) );
@@ -210,7 +211,7 @@ AdvancedFm::AdvancedFm( )
 //     OFileSelector *fileSelector;
 //     fileSelector = new OFileSelector(tab_3,0,0,"/","","*");
 //     tabLayout_3->addMultiCellWidget( fileSelector, 0, 0, 0, 3 );
-    
+
 //     TabWidget->insertTab( tab_3, tr( "Files" ) );
 
     currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
@@ -284,7 +285,7 @@ void AdvancedFm::populateLocalView()
 //     struct stat buf;
 //     mode_t mode;
     QString fs= getFileSystemType((const QString &) currentDir.canonicalPath());
-    setCaption("AdvancedFm :: "+fs);   
+    setCaption("AdvancedFm :: "+fs);
     bool isDir=FALSE;
     const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
@@ -310,9 +311,9 @@ void AdvancedFm::populateLocalView()
         QFileInfo fileInfo(  currentDir.canonicalPath()+"/"+fileL);
         if(fileL !="./" && fi->exists()) {
             item= new QListViewItem( Local_View, fileL, fileS , fileDate);
-            
+
             if(isDir || fileL.find("/",0,TRUE) != -1) {
-                
+
                 if( !QDir( fi->filePath() ).isReadable()) //is directory
                     pm = Resource::loadPixmap( "lockedfolder" );
                 else
@@ -328,7 +329,7 @@ void AdvancedFm::populateLocalView()
 //                  pm = Resource::loadPixmap( "exec");
 //                 }
 // //                 item->setPixmap( 0,pm);
-        } else if( !fi->isReadable() ) { 
+        } else if( !fi->isReadable() ) {
             pm = Resource::loadPixmap( "locked" );
 //                 item->setPixmap( 0,pm);
             } else { //everything else goes by mimetype
@@ -379,10 +380,10 @@ void AdvancedFm::populateLocalView()
                     item->setPixmap( 0,pm);
                 }
             }
-            
+
         closedir(dir);
     }
-    
+
     Local_View->setSorting( 3,FALSE);
     fillCombo( (const QString &) currentDir.canonicalPath());
 }
@@ -407,7 +408,7 @@ void AdvancedFm::populateRemoteView()
     QString fileL, fileS, fileDate;
 
     QString fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
-    setCaption("AdvancedFm :: "+fs);   
+    setCaption("AdvancedFm :: "+fs);
     bool isDir=FALSE;
     const QFileInfoList *list = currentRemoteDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
     QFileInfoListIterator it(*list);
@@ -497,7 +498,7 @@ void AdvancedFm::populateRemoteView()
                     item->setPixmap( 0,pm);
                 }
             }
-            
+
         closedir(dir);
     }
 
@@ -614,7 +615,7 @@ void AdvancedFm::showHidden()
     b=TRUE;
     }
     populateLocalView();
-        
+
 }
 
 void AdvancedFm::showRemoteHidden()
@@ -691,6 +692,8 @@ void AdvancedFm::showLocalMenu(QListViewItem * item)
             m.setItemChecked(m.idAt(0),TRUE);
         else
             m.setItemChecked(m.idAt(0),FALSE);
+        if(Ir::supported())
+        m.insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
         m.exec( QCursor::pos() );
     }
 }
@@ -728,13 +731,15 @@ void AdvancedFm::showRemoteMenu(QListViewItem * item)
             m.setItemChecked(m.idAt(0),TRUE);
         else
             m.setItemChecked(m.idAt(0),FALSE);
+        if(Ir::supported())
+        m.insertItem( tr( "Beam File" ), this, SLOT( doBeam() ));
         m.exec( QCursor::pos() );
-    }    
+    }
 }
 
 void AdvancedFm::runThis() {
 //    QFileInfo *fi;
-QString fs;    
+QString fs;
     if (TabWidget->currentPageIndex() == 0) {
         QString curFile = Local_View->currentItem()->text(0);
 
@@ -831,7 +836,7 @@ void AdvancedFm::localDelete()
         myFile = (*it);
         if( myFile.find(" -> ",0,TRUE) != -1)
             myFile = myFile.left( myFile.find(" -> ",0,TRUE));
-                    
+
         QString f = currentDir.canonicalPath();
         if(f.right(1).find("/",0,TRUE) == -1)
             f+="/";
@@ -937,7 +942,7 @@ void AdvancedFm::localRename()
 
 void AdvancedFm::remoteRename()
 {
-    QString curFile = Remote_View->currentItem()->text(0);
+    QString curFile = Local_View->currentItem()->text(0);
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Rename"),TRUE, 0);
     fileDlg->setInputText((const QString &)curFile);
@@ -1051,14 +1056,14 @@ void AdvancedFm::filePerms() {
         populateRemoteView();
     }
 
-    
+
 }
 
 void AdvancedFm::doProperties() {
     QStringList curFileList = getPath();
     QString filePath;
     if (TabWidget->currentPageIndex() == 0) {
-      
+
         filePath = currentDir.canonicalPath()+"/";
     } else {
         filePath= currentRemoteDir.canonicalPath()+"/";
@@ -1183,7 +1188,7 @@ void AdvancedFm::copy()
     if (TabWidget->currentPageIndex() == 0) {
         for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
 
-            QString destFile = currentRemoteDir.canonicalPath()+"/"+(*it); 
+            QString destFile = currentRemoteDir.canonicalPath()+"/"+(*it);
 //             if(destFile.right(1).find("/",0,TRUE) == -1)
 //                 destFile+="/";
 //             destFile +=(*it);
@@ -1252,7 +1257,7 @@ void AdvancedFm::copyAs()
                 }
             }
         }
-        
+
         populateRemoteView();
         TabWidget->setCurrentPage(1);
     } else {
@@ -1379,7 +1384,7 @@ void AdvancedFm::runCommand() {
          if(Remote_View->currentItem())
          curFile = currentRemoteDir.canonicalPath() + "/"+Remote_View->currentItem()->text(0);
      }
-    
+
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
     fileDlg->setInputText(curFile);
@@ -1399,11 +1404,11 @@ void AdvancedFm::runCommand() {
         sleep(1);
 //         if(command.find("2>",0,TRUE) != -1)
             command +=" 2>&1";
-        fp = popen(  (const char *) command, "r"); 
+        fp = popen(  (const char *) command, "r");
         if ( !fp ) {
-            qDebug("Could not execute '" + command + "'! err=%d", fp); 
+            qDebug("Could not execute '" + command + "'! err=%d", fp);
             QMessageBox::warning( this, tr("AdvancedFm"), tr("command failed!"), tr("&OK") );
-            pclose(fp);             
+            pclose(fp);
             return;
         } else {
             while ( fgets( line, sizeof line, fp)) {
@@ -1425,7 +1430,7 @@ void AdvancedFm::runCommandStd() {
         if(Remote_View->currentItem())
             curFile = currentRemoteDir.canonicalPath() +"/"+  Remote_View->currentItem()->text(0);
     }
-    
+
     InputDialog *fileDlg;
     fileDlg = new InputDialog(this,tr("Run Command"),TRUE, 0);
     fileDlg->setInputText(curFile);
@@ -1455,28 +1460,28 @@ void AdvancedFm::fileStatus() {
     FILE *fp;
     char line[130];
     sleep(1);
-    fp = popen(  (const char *) command, "r"); 
+    fp = popen(  (const char *) command, "r");
     if ( !fp ) {
-        qDebug("Could not execute '" + command + "'! err=%d", fp); 
+        qDebug("Could not execute '" + command + "'! err=%d", fp);
         QMessageBox::warning( this, tr("AdvancedFm"), tr("command failed!"), tr("&OK") );
-        pclose(fp);             
+        pclose(fp);
         return;
     } else {
         while ( fgets( line, sizeof line, fp)) {
             outDlg->OutputEdit->append(line);
             outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                  
+
         }
-              
+
     }
 }
 
 void AdvancedFm::mkDir() {
-    if (TabWidget->currentPageIndex() == 0) 
+    if (TabWidget->currentPageIndex() == 0)
         localMakDir();
     else
         remoteMakDir();
-        
+
 }
 
 void AdvancedFm::rn() {
@@ -1548,21 +1553,21 @@ void AdvancedFm::keyReleaseEvent( QKeyEvent *e)
           break;
       case Key_4:
           SDButtonPushed();
-          break;          
+          break;
       case Key_5:
           homeButtonPushed();
-          break;          
+          break;
       case Key_6:
           docButtonPushed();
-          break;          
+          break;
       case Key_7:
-          break;          
+          break;
       case Key_8:
-          break;          
+          break;
       case Key_9:
-          break;          
+          break;
       case Key_0:
-          break;          
+          break;
     }
 }
 
@@ -1654,6 +1659,43 @@ QString  AdvancedFm::getFileSystemType(const QString &currentText) {
         }
     }
     return baseFs;
+}
+
+
+void AdvancedFm::doBeam() {
+  Ir ir;
+  if(!ir.supported()){
+  } else {
+
+      QStringList curFileList = getPath();
+
+      if (TabWidget->currentPageIndex() == 0) {
+          for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+
+              QString curFile =  currentDir.canonicalPath()+"/"+(*it);
+              if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
+              Ir *file = new Ir(this, "IR");
+              connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
+              file->send( curFile, curFile );
+          }
+
+      } else {
+          for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+
+              QString curFile =  currentRemoteDir.canonicalPath()+"/"+(*it);
+              if( curFile.right(1) == "/") curFile = curFile.left( curFile.length() -1);
+              Ir *file = new Ir(this, "IR");
+              connect(file, SIGNAL(done(Ir*)), this, SLOT( fileBeamFinished( Ir * )));
+              file->send( curFile, curFile );
+
+          }
+      }
+  }
+}
+
+void AdvancedFm::fileBeamFinished( Ir *ir) {
+  QMessageBox::message( tr("Advancedfm Beam out"), tr("Ir sent.") ,tr("Ok") );
+
 }
 
 
