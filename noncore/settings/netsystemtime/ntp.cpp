@@ -78,21 +78,21 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
 
 Ntp::~Ntp()
 {
-	delete ntpProcess;
-	Config ntpSrvs("/etc/ntpservers",Config::File);
+  delete ntpProcess;
+  Config ntpSrvs("/etc/ntpservers",Config::File);
   ntpSrvs.setGroup("servers");
   int srvCount = ComboNtpSrv->count();
   ntpSrvs.writeEntry("count", srvCount);
-  for (int i = 0; i < srvCount; i++)
-  {
-	  ntpSrvs.setGroup(QString::number(i));
-   	ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i) );
+  for (int i = 0; i < srvCount; i++){
+    ntpSrvs.setGroup(QString::number(i));
+    ntpSrvs.writeEntry( "name", ComboNtpSrv->text(i) );
   }
-	Config cfg("ntp",Config::User);
+  Config cfg("ntp",Config::User);
   cfg.setGroup("settings");
   cfg.writeEntry("ntpServer", ComboNtpSrv->currentItem());
   cfg.writeEntry( "minLookupDiff", SpinBoxMinLookupDelay->value() );
- 	cfg.writeEntry( "ntpRefreshFreq", SpinBoxNtpDelay->value() );
+  cfg.writeEntry( "ntpRefreshFreq", SpinBoxNtpDelay->value() );
+  cfg.writeEntry( "advancedFeatures", CheckBoxAdvSettings->isChecked() );
 }
 
 bool Ntp::ntpDelayElapsed()
@@ -352,6 +352,7 @@ void Ntp::showAdvancedFeatures(bool advMode)
     TextLabel2->show();
     TextLabel3_3->show();
     SpinBoxNtpDelay->show();
+    Line1->show();
   }else{
     TabWidgetMain->removePage( tabPredict );
     TabWidgetMain->removePage( tabNtp );
@@ -363,5 +364,7 @@ void Ntp::showAdvancedFeatures(bool advMode)
     TextLabel2->hide();
     TextLabel3_3->hide();
     SpinBoxNtpDelay->hide();
+    Line1->hide();
   };
+  TabWidgetMain->show();
 }
