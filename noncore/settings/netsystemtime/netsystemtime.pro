@@ -8,7 +8,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 INTERFACES	= 
 DESTDIR         = $(OPIEDIR)/bin
-TARGET		= netsystemtime
+TARGET		= systemtime
 
 TRANSLATIONS = ../../../i18n/de/netsystemtime.ts \
 	 ../../../i18n/en/netsystemtime.ts \

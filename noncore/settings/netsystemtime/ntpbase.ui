@@ -113,7 +113,7 @@
                         </property>
                     </widget>
                     <widget row="0"  column="0" >
-                        <class>QFrame</class>
+                        <class>QWidget</class>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>FrameNtp</cstring>
@@ -458,7 +458,7 @@
                         <number>2</number>
                     </property>
                     <widget row="0"  column="0" >
-                        <class>QFrame</class>
+                        <class>QWidget</class>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>FrameSettings</cstring>
@@ -809,7 +809,7 @@
                         <number>2</number>
                     </property>
                     <widget>
-                        <class>QFrame</class>
+                        <class>QWidget</class>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>FrameSetTime</cstring>

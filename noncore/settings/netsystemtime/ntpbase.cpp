@@ -44,9 +44,9 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     tabMainLayout->setSpacing( 2 );
     tabMainLayout->setMargin( 2 );
 
-    FrameSystemTime = new QFrame( tabMain, "FrameSystemTime" );
-    FrameSystemTime->setFrameShape( QFrame::StyledPanel );
-    FrameSystemTime->setFrameShadow( QFrame::Raised );
+    FrameSystemTime = new QWidget( tabMain, "FrameSystemTime" );
+    //    FrameSystemTime->setFrameShape( QFrame::StyledPanel );
+    //FrameSystemTime->setFrameShadow( QFrame::Raised );
 
     tabMainLayout->addWidget( FrameSystemTime, 0, 0 );
 
@@ -60,9 +60,9 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
 
     tabNtpLayout->addWidget( runNtp, 1, 0 );
 
-    FrameNtp = new QFrame( tabNtp, "FrameNtp" );
-    FrameNtp->setFrameShape( QFrame::StyledPanel );
-    FrameNtp->setFrameShadow( QFrame::Raised );
+    FrameNtp = new QWidget( tabNtp, "FrameNtp" );
+    //    FrameNtp->setFrameShape( QFrame::StyledPanel );
+    //    FrameNtp->setFrameShadow( QFrame::Raised );
     FrameNtpLayout = new QGridLayout( FrameNtp ); 
     FrameNtpLayout->setSpacing( 2 );
     FrameNtpLayout->setMargin( 2 );
@@ -180,9 +180,9 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     TabSettingsLayout->setSpacing( 2 );
     TabSettingsLayout->setMargin( 2 );
 
-    FrameSettings = new QFrame( TabSettings, "FrameSettings" );
-    FrameSettings->setFrameShape( QFrame::StyledPanel );
-    FrameSettings->setFrameShadow( QFrame::Raised );
+    FrameSettings = new QWidget( TabSettings, "FrameSettings" );
+    //    FrameSettings->setFrameShape( QFrame::StyledPanel );
+    //    FrameSettings->setFrameShadow( QFrame::Raised );
     FrameSettingsLayout = new QVBoxLayout( FrameSettings ); 
     FrameSettingsLayout->setSpacing( 6 );
     FrameSettingsLayout->setMargin( 11 );
@@ -291,9 +291,9 @@ NtpBase::NtpBase( QWidget* parent,  const char* name, WFlags fl )
     tabManualSetTimeLayout->setSpacing( 2 );
     tabManualSetTimeLayout->setMargin( 2 );
 
-    FrameSetTime = new QFrame( tabManualSetTime, "FrameSetTime" );
-    FrameSetTime->setFrameShape( QFrame::StyledPanel );
-    FrameSetTime->setFrameShadow( QFrame::Raised );
+    FrameSetTime = new QWidget( tabManualSetTime, "FrameSetTime" );
+    //    FrameSetTime->setFrameShape( QFrame::StyledPanel );
+    //    FrameSetTime->setFrameShadow( QFrame::Raised );
     tabManualSetTimeLayout->addWidget( FrameSetTime );
 
     PushButtonSetManualTime = new QPushButton( tabManualSetTime, "PushButtonSetManualTime" );

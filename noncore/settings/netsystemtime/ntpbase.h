@@ -34,10 +34,10 @@ public:
 
     QTabWidget* TabWidgetMain;
     QWidget* tabMain;
-    QFrame* FrameSystemTime;
+    QWidget* FrameSystemTime;
     QWidget* tabNtp;
     QPushButton* runNtp;
-    QFrame* FrameNtp;
+    QWidget* FrameNtp;
     QLabel* TextLabel1;
     QLabel* TextLabelStartTime;
     QLabel* TextLabel3;
@@ -56,7 +56,7 @@ public:
     QPushButton* PushButtonSetPredTime;
     QPushButton* PushButtonPredict;
     QWidget* TabSettings;
-    QFrame* FrameSettings;
+    QWidget* FrameSettings;
     QLabel* TextLabel7_2;
     QLabel* TextLabel2_2;
     QLabel* TextLabel1_3;
@@ -72,7 +72,7 @@ public:
     QLabel* TextLabel3_3;
     QSpinBox* SpinBoxMinLookupDelay;
     QWidget* tabManualSetTime;
-    QFrame* FrameSetTime;
+    QWidget* FrameSetTime;
     QPushButton* PushButtonSetManualTime;
 
 protected:
