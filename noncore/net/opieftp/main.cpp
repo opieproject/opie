@@ -11,8 +11,10 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
-#include <opie2/oapplicationfactory.h>
 #include "opieftp.h"
-
+#include <opie2/oapplicationfactory.h>
+//#include <qtopia/qpeapplication.h>
 using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<OpieFtp> )
+
+		

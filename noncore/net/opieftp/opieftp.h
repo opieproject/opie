@@ -47,10 +47,10 @@ class OpieFtp : public QMainWindow
     Q_OBJECT
 
 public:
+    static QString appName() { return QString::fromLatin1("opieftp"); }
     OpieFtp( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~OpieFtp();
 
-    static QString appName() { return QString::fromLatin1("opieftp"); }
     QTabWidget *TabWidget;
     QWidget *tab, *tab_2, *tab_3;
     QListView *Local_View, *Remote_View;
@@ -65,11 +65,13 @@ public:
     QString currentRemoteDir;
     QString filterStr;
     QListViewItem * item;
-    QPushButton *connectServerBtn, *newServerButton;//
+    QPushButton *connectServerBtn, *newServerButton;
     QToolButton  *cdUpButton, *homeButton, *docButton;
     bool b;
+		
     int currentServerConfig;
 protected slots:
+		void initializeGui();
     void timerOut();
     void upDir();
     void homeButtonPushed();

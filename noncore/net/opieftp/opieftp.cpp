@@ -20,12 +20,13 @@ extern "C" {
 #include "inputDialog.h"
 
 /* OPIE */
-#include <opie2/odebug.h>
+//#include <opie2/odebug.h>
+//using namespace Opie::Core;
+
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/mimetype.h>
-using namespace Opie::Core;
 
 #include <qtextstream.h>
 #include <qpushbutton.h>
@@ -49,7 +50,7 @@ using namespace Opie::Core;
 #include <stdlib.h>
 
 QProgressBar *ProgressBar;
-static netbuf *conn=NULL;
+static netbuf *conn = NULL;
 
 static int log_progress(netbuf *, int xfered, void *)
 {
@@ -62,11 +63,16 @@ static int log_progress(netbuf *, int xfered, void *)
     return 1;
 }
 
-OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
-        : QMainWindow( parent,  name, fl )
+OpieFtp::OpieFtp( QWidget* , const char*, WFlags)
+        : QMainWindow( )
 {
-    odebug << "OpieFtp constructor" << oendl; 
+    qDebug("OpieFtp constructor");
     setCaption( tr( "OpieFtp" ) );
+//		initializeGui();
+	 QTimer::singleShot( 50, this, SLOT(initializeGui() ));
+}
+
+void OpieFtp::initializeGui() {
     fuckeduphack=FALSE;
 
     QVBox* wrapperBox = new QVBox( this );
@@ -94,9 +100,7 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
     remoteMenu  = new QPopupMenu( this );
     tabMenu = new QPopupMenu( this );
 
-//#if 0
     layout->addMultiCellWidget( menuBar, 0, 0, 0, 2 );
-//#endif
 
     menuBar->insertItem( tr( "Connection" ), connectionMenu);
 //      menuBar->insertItem( tr( "Local" ), localMenu);
@@ -316,7 +320,8 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     currentPathCombo = new QComboBox( FALSE, view, "currentPathCombo" );
     layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 4);
-   currentPathCombo ->setFixedWidth(220);
+
+		currentPathCombo ->setFixedWidth(220);
     currentPathCombo->setEditable(TRUE);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
 
@@ -325,9 +330,9 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 
     connect( currentPathCombo->lineEdit(),SIGNAL(returnPressed()),
              this,SLOT(currentPathComboChanged()));
-    ProgressBar = new QProgressBar( view, "ProgressBar" );
-    layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 4);
-    ProgressBar->setMaximumHeight(10);
+     ProgressBar = new QProgressBar( view, "ProgressBar" );
+     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 4);
+     ProgressBar->setMaximumHeight(10);
     filterStr="*";
     b=FALSE;
     populateLocalView();
@@ -336,7 +341,8 @@ OpieFtp::OpieFtp( QWidget* parent, const char* name, WFlags fl)
 //    ServerComboBox->setCurrentItem(currentServerConfig);
 
     TabWidget->setCurrentPage(2);
-	odebug << "Constructor done" << oendl; 
+		qDebug("XXXXXXXXXXXX Constructor done");
+
 }
 
 OpieFtp::~OpieFtp()
@@ -535,7 +541,7 @@ void OpieFtp::localUpload()
                 FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
                 FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
                 FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
-                odebug << "Put: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl; 
+//                odebug << "Put: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl; 
 
                 if( !FtpPut( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
                     QString msg;
@@ -596,7 +602,7 @@ void OpieFtp::remoteDownload()
             FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
             FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
             FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
-            odebug << "Get: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl; 
+//            odebug << "Get: " << localFile.latin1() << ", " << remoteFile.latin1() << "" << oendl; 
 
             if(!FtpGet( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
                 QString msg;
@@ -775,8 +781,8 @@ bool OpieFtp::populateRemoteView( )
         file.close();
         if( file.exists())
             file. remove();
-    } else
-        odebug << "temp file not opened successfully "+sfile << oendl; 
+    } 
+//        odebug << "temp file not opened successfully "+sfile << oendl; 
     Remote_View->setSorting( 4,TRUE);
     return true;
 }
@@ -1234,7 +1240,7 @@ void OpieFtp::readConfig()
 
 void OpieFtp::writeConfig()
 {
-    odebug << "write config" << oendl; 
+//    odebug << "write config" << oendl; 
     Config cfg("opieftp");
     cfg.setGroup("Server");
 
@@ -1265,7 +1271,7 @@ void OpieFtp::writeConfig()
         cfg.writeEntry("currentServer", numberOfEntries+1);
 
         currentServerConfig = numberOfEntries+1;
-        odebug << "setting currentserverconfig to " << currentServerConfig << "" << oendl; 
+//        odebug << "setting currentserverconfig to " << currentServerConfig << "" << oendl; 
 
         cfg.setGroup(temp);
         if(!newServerName.isEmpty())
@@ -1284,7 +1290,7 @@ void OpieFtp::writeConfig()
 }
 
 void OpieFtp::clearCombos() {
-    odebug << "clearing" << oendl; 
+//    odebug << "clearing" << oendl; 
     ServerComboBox->clear();
     UsernameComboBox->clear();
     PasswordEdit->clear();
@@ -1304,10 +1310,10 @@ void OpieFtp::fillCombos()
 
     for (int i = 1; i <= numberOfEntries; i++) {
         temp.setNum(i);
-        odebug << temp << oendl; 
+//        odebug << temp << oendl; 
         cfg.setGroup("Server");
         remoteServerStr = cfg.readEntry( temp,"");
-        odebug << remoteServerStr << oendl; 
+//        odebug << remoteServerStr << oendl; 
 
         int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
         port = remoteServerStr.right( divider - 1);
@@ -1315,7 +1321,7 @@ void OpieFtp::fillCombos()
         PortSpinBox->setValue( port.toInt(&ok,10));
 
         remoteServerStr = remoteServerStr.left(remoteServerStr.length()-divider);
-        odebug << "remote server string "+remoteServerStr << oendl; 
+//        odebug << "remote server string "+remoteServerStr << oendl; 
         ServerComboBox->insertItem( remoteServerStr );
 
         cfg.setGroup(temp);
@@ -1334,7 +1340,7 @@ void OpieFtp::serverComboSelected(int index)
 {
 		QString servername;
     currentServerConfig = index+1;
-    odebug << "server combo selected " << index + 1 << "" << oendl; 
+//    odebug << "server combo selected " << index + 1 << "" << oendl; 
     QString username, remoteServerStr, remotePathStr, password, port, temp;
     servername = remoteServerStr = ServerComboBox->text(index);
 		qDebug("server text "  + remoteServerStr);
@@ -1349,7 +1355,7 @@ void OpieFtp::serverComboSelected(int index)
     temp.setNum(index + 1);
     remoteServerStr = cfg.readEntry( temp,"");
 
-    odebug << "Group " +temp << oendl; 
+//    odebug << "Group " +temp << oendl; 
     cfg.setGroup(temp);
 
     int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
@@ -1365,7 +1371,7 @@ void OpieFtp::serverComboSelected(int index)
 
     username = cfg.readEntry("Username", "anonymous");
     UsernameComboBox->lineEdit()->setText(username);
-    odebug << username << oendl; 
+//    odebug << username << oendl; 
 //    odebug << "Password is "+cfg.readEntryCrypt(username << oendl; 
     PasswordEdit->setText(cfg.readEntryCrypt(username, "me@opieftp.org"));
 //   UsernameComboBox
@@ -1410,7 +1416,7 @@ void OpieFtp::deleteServer()
 
             serverListView->removeItem(i);
 
-            odebug << "OK DELETE "+tempname << oendl; 
+//            odebug << "OK DELETE "+tempname << oendl; 
             cfg.removeEntry(QString::number(i));
             for ( ; i <= numberOfEntries; i++) {
                 cfg.setGroup("Server");
@@ -1534,7 +1540,7 @@ void OpieFtp::NewServer() {
 void OpieFtp::serverListClicked( const QString &item) {
     if(item.isEmpty()) return;
     Config cfg("opieftp");
-    odebug << "highltined "+item << oendl; 
+//    odebug << "highltined "+item << oendl; 
     int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
         for (int i = 1; i <= numberOfEntries; i++) {
             cfg.setGroup(QString::number(i));
