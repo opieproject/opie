@@ -654,11 +654,11 @@ void Wellenreiter::doAction( const QString& action, const QString& protocol, OPa
 {
     #ifdef QWS
     if ( action == "TouchSound" )
-        ODevice::inst()->touchSound();
+        ODevice::inst()->playTouchSound();
     else if ( action == "AlarmSound" )
-        ODevice::inst()->alarmSound();
+        ODevice::inst()->playAlarmSound();
     else if ( action == "KeySound" )
-        ODevice::inst()->keySound();
+        ODevice::inst()->playKeySound();
     else if ( action == "LedOn" )
         ODevice::inst()->setLedState( Led_Mail, Led_On );
     else if ( action == "LedOff" )

@@ -319,8 +319,8 @@ void WellenreiterConfigWindow::performAction( const QString& type,
     switch( action )
     {
         case 0: /* Ignore */ return;
-        case 1: /* Play Alarm */ ODevice::inst()->alarmSound(); return;
-        case 2: /* Play Click */ ODevice::inst()->touchSound(); return;
+        case 1: /* Play Alarm */ ODevice::inst()->playAlarmSound(); return;
+        case 2: /* Play Click */ ODevice::inst()->playTouchSound(); return;
         case 3: /* Blink LED */ break; //FIXME: Implement this
         case 4: /* Run Script */
         {
