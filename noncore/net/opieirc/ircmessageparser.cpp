@@ -71,10 +71,10 @@ IRCNumericalMessageParserStruct IRCMessageParser::numericalParserProcTable[] = {
     { 409, "%1", "1", 0 },                                  // ERR_NOORIGIN
     { 411, "%1", "1", 0 },                                  // ERR_NORECIPIENT
     { 412, "%1", "1", 0 },                                  // ERR_NOTEXTTOSEND
-    { 421, QT_TR_NOOP("Unknown command: %1"), "1", 0 },                 // ERR_NOMOTD
-    { 422, QT_TR_NOOP("You're not on channel %1"), "1", 0},             // ERR_NOTONCHANNEL
+    { 421, QT_TR_NOOP("Unknown command: %1"), "1", 0 },     // ERR_ERR_UNKNOWNCOMMAND
     { 422, "%1", "1", 0 },                                  // ERR_NOMOTD
     { 433, QT_TR_NOOP("Can't change nick to %1: %2"), "1,2", FUNC(parseNumericalNicknameInUse) }, // ERR_NICKNAMEINUSE
+    { 442, QT_TR_NOOP("You're not on channel %1"), "1", 0}, // ERR_NOTONCHANNEL
     { 477, "%1", "1", 0 },                                  // ERR_NOCHANMODES || ERR_NEEDREGGEDNICK
     { 482, QT_TR_NOOP("[%1] Operation not permitted, you don't have enough channel privileges"), "1", 0 }, //ERR_CHANOPRIVSNEEDED
     { 0, 0, 0, 0 }
@@ -136,6 +136,10 @@ void IRCMessageParser::parseNumerical(IRCMessage *message, int position) {
 
 void IRCMessageParser::parseNumericalServerName(IRCMessage *message) {
     emit outputReady(IRCOutput(OUTPUT_TITLE, tr("Connected to")+" <b>" + message->prefix() + "</b>"));
+    /* Register EFFECTIVE nickname, some networks (as irc-hispano) uses nick:password
+     * for authentication and the parser gets confused */
+    m_session->m_server->setNick(message->param(0));
+
 }
 
 void IRCMessageParser::parseNumericalServerFeatures(IRCMessage *message) {
@@ -249,25 +253,29 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
         IRCOutput output(OUTPUT_QUERYPRIVMSG, message->param(1));
         output.addParam(person);
         emit outputReady(output);
-    } else if (message->param(0).at(0) == '#' || message->param(0).at(0) == '+') {
-        /* IRC Channel message detected, verify sender, channel and display it */
-        IRCChannel *channel = m_session->getChannel(message->param(0).lower());
-        if (channel) {
-            IRCPerson mask(message->prefix());
-            IRCChannelPerson *person = channel->getPerson(mask.nick());
-            if (person) {
-                IRCOutput output(OUTPUT_CHANPRIVMSG, message->param(1));
-                output.addParam(channel);
-                output.addParam(person);
-                emit outputReady(output);
-            } else {
-                emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown sender")));
+    } 
+    else 
+        if (message->param(0).at(0) == '#' || message->param(0).at(0) == '+') {
+            /* IRC Channel message detected, verify sender, channel and display it */
+            IRCChannel *channel = m_session->getChannel(message->param(0).lower());
+            if (channel) {
+                IRCPerson mask(message->prefix());
+                IRCChannelPerson *person = channel->getPerson(mask.nick());
+                if (person) {
+                    IRCOutput output(OUTPUT_CHANPRIVMSG, message->param(1));
+                    output.addParam(channel);
+                    output.addParam(person);
+                    emit outputReady(output);
+                } 
+                else {
+                    emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown sender")));
+                }
+            } 
+            else {
+                emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel %1").arg(message->param(0).lower()) ));
             }
-        } else {
-            emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Channel message with unknown channel %1").arg(message->param(0).lower()) ));
-        }
-    } else {
-        emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
+        } 
+        else {emit outputReady(IRCOutput(OUTPUT_ERROR, tr("Received PRIVMSG of unknown type")));
     }
 }
 
