@@ -56,8 +56,6 @@ using namespace Opie;
 
 class ODeviceData {
 public:
-	bool m_qwsserver : 1;
-
 	QString m_vendorstr;
 	OVendor m_vendor;
 
@@ -239,8 +237,10 @@ static QCString makeChannel ( const char *str )
 		return str;
 }
 
-
-
+static inline bool isQWS()
+{
+	return qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
+}
 
 ODevice *ODevice::inst ( )
 {
@@ -270,8 +270,6 @@ ODevice *ODevice::inst ( )
 ODevice::ODevice ( )
 {
 	d = new ODeviceData;
-
-	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
 
 	d-> m_modelstr = "Unknown";
 	d-> m_model = Model_Unknown;
@@ -305,8 +303,6 @@ void ODevice::initButtons ( )
 {
 	if ( d-> m_buttons )
 		return;
-
-	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
 
 	// Simulation uses iPAQ 3660 device buttons
 
@@ -359,7 +355,7 @@ bool ODevice::setSoftSuspend ( bool /*soft*/ )
  */
 bool ODevice::suspend ( )
 {
-	if ( !d-> m_qwsserver ) // only qwsserver is allowed to suspend
+	if ( !isQWS( ) ) // only qwsserver is allowed to suspend
 		return false;
 
 	if ( d-> m_model == Model_Unknown ) // better don't suspend in qvfb / on unkown devices
@@ -807,9 +803,7 @@ void iPAQ::initButtons ( )
 	if ( d-> m_buttons )
 		return;
 
-	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
-
-	if ( d-> m_qwsserver )
+	if ( isQWS( ) )
 		QWSServer::setKeyboardFilter ( this );
 
 	d-> m_buttons = new QValueList <ODeviceButton>;
@@ -1206,8 +1200,6 @@ void Zaurus::initButtons ( )
 {
 	if ( d-> m_buttons )
 		return;
-
-	d-> m_qwsserver = qApp ? ( qApp-> type ( ) == QApplication::GuiServer ) : false;
 
 	d-> m_buttons = new QValueList <ODeviceButton>;
 
