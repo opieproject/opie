@@ -502,9 +502,13 @@ QString OContact::toRichText() const
 
     // the others...
     QString str;
+    QString defEmail = defaultEmail();
+    if ( !defEmail.isEmpty() )
+	text += "<b>" + QObject::tr("Default Email: ") + "</b>"
+		+ Qtopia::escapeString(defEmail) + "<br>";
     str = emails();
-    if ( !str.isEmpty() )
-	text += "<b>" + QObject::tr("Email Addresses: ") + "</b>"
+    if ( !str.isEmpty() && ( str != defEmail ) )
+	text += "<b>" + QObject::tr("All Emails: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
     str = homePhone();
     if ( !str.isEmpty() )
