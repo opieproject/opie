@@ -30,10 +30,10 @@ void POP3viewItem::refresh( QList<RecMail> &target )
 }
 
 
-RecBody POP3viewItem::fetchBody( const RecMail & )
+RecBody POP3viewItem::fetchBody( const RecMail &mail )
 {
-    qDebug( "POP3 fetchBody: IMPLEMENT ME!!" );
-    return RecBody();
+    qDebug( "POP3 fetchBody" );
+    return wrapper->fetchBody( mail );
 }
 
 /**

@@ -29,7 +29,7 @@ public:
     POP3viewItem( POP3account *a, QListView *parent );
     ~POP3viewItem();
     virtual void refresh( QList<RecMail> &target );
-    virtual RecBody fetchBody(const RecMail & );
+    virtual RecBody fetchBody( const RecMail &mail );
 
 private:
     POP3account *account;
