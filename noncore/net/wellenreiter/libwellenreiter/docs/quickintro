@@ -1,0 +1,35 @@
+
+Name:   libwellenreiter
+Author: Martin J. Muench
+
+NOTE: This is just a very short summary of the functions included 
+in libwellenreiter, written because a lack of time. The whole 
+library will be rewritten with extended documentation and 
+test programs.
+
+Included functions:
+
+Log to syslog/info:
+void wl_loginfo(const char *, ...);
+
+Log to syslog/err:
+void wl_logerr(const char *, ...);
+
+Use like printf() function with format strings and so on.
+
+
+Setup udp socket for incoming commands:
+int commsock(const char *, int);
+
+Fist argument is the host where it should listen and second
+is the port.
+
+Return values: 
+
+Send command to udp socket:
+int sendcomm(const char *, int, const char *, ...);
+
+First two arguments are the host and port where the command should
+be send to, followed by buffer that should be send.
+
+Thats it for the moment.
