@@ -64,7 +64,7 @@ private:
     int m_position;
 
 signals:
-    void positionChanged( int position  );
+    void positionChanged( long position  );
 
 };
 

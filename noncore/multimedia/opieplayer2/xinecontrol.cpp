@@ -44,8 +44,8 @@ XineControl::XineControl( QObject *parent, const char *name )
     libXine = new XINE::Lib(videoUI->vidWidget() );
 
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pause(bool) ) );
-    connect( this, SIGNAL( positionChanged( int position ) ),  mediaPlayerState, SLOT( updatePosition( long p ) ) );
-    connect(this, SIGNAL( postitionChanged(int position) ), mediaPlayerState, SLOT( setPosition( long p ) ) );
+    connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( updatePosition( long ) ) );
+    connect( this, SIGNAL( positionChanged( long ) ), mediaPlayerState, SLOT( setPosition( long ) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( stop( bool ) ) );
     connect( mediaPlayerState, SIGNAL( fullscreenToggled( bool ) ), this, SLOT( setFullscreen( bool ) ) );
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ),  this,  SLOT( seekTo( long ) ) );
@@ -78,6 +78,8 @@ void XineControl::play( const QString& fileName ) {
     mediaPlayerState->setIsStreaming( libXine->isSeekable() );
     // which gui (video / audio)
     mediaPlayerState->setView( whichGui );
+    length();
+    position();
 
 }
 
@@ -107,11 +109,15 @@ void  XineControl::length() {
 }
 
 int XineControl::position() {
-    m_position = (m_currentTime/m_length*100);
+    length();
+    qDebug("M_LENGTH :" + m_length);
+    m_position = ( currentTime() /m_length*100);
     mediaPlayerState->setPosition( m_position  );
+    long emitPos = (long)m_position;
+    emit positionChanged( emitPos );
+    QTimer::singleShot( 1000, this, SLOT( position() ) );
+    qDebug("POSITION : " +  m_position);
     return m_position;
-    emit positionChanged( m_position );
-    QTimer::singleShot( 1000, this, SLOT( position ) );
 }
 
 void XineControl::setFullscreen( bool isSet ) {
