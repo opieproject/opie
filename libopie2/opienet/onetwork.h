@@ -34,6 +34,8 @@
 #ifndef ONETWORK_H
 #define ONETWORK_H
 
+#include "wireless.h"
+
 /* OPIE */
 
 #include <opie2/onetutils.h>
@@ -45,24 +47,6 @@
 #include <qmap.h>
 #include <qobject.h>
 #include <qhostaddress.h>
-
-// ML: Yeah, I hate to include kernel headers, but it's necessary here
-// ML: Here comes an ugly hack to prevent <linux/wireless.h> including <linux/if.h>
-// ML: which conflicts with the user header <net/if.h>
-// ML: We really need a user header for the Wireless Extensions, something like <net/wireless.h>
-// ML: I will drop Jean a mail on that subject
-
-#include <net/if.h>
-
-#ifndef IFNAMSIZ
-#define IFNAMSIZ 16
-#endif
-#ifndef IW_MAX_PRIV_DEF
-#define IW_MAX_PRIV_DEF        128
-#endif
-
-#define _LINUX_IF_H
-#include <linux/wireless.h>
 
 class ONetworkInterface;
 class OWirelessNetworkInterface;

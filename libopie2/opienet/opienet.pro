@@ -3,6 +3,7 @@ CONFIG      += qt warn_on debug
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = 802_11_user.h       \
               dhcp.h              \
+              wireless.h          \
               omanufacturerdb.cpp \
               onetutils.cpp       \
               onetwork.h          \
