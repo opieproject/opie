@@ -817,9 +817,9 @@ void AddressbookWindow::slotSetCategory( int c )
 // 			}else if ( i == 3 ){
 // 				book = tr( "Personal" );
 // 				view = AbView:: PersonalView;
-			}else if ( i == 3 ) // default All Categories
+			}else if ( i == 3 ){ // default All Categories
 				cat = QString::null;
-			else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
+			}else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
 				qWarning ("Unfiled selected!!!");
 			}else{
@@ -828,7 +828,7 @@ void AddressbookWindow::slotSetCategory( int c )
 		}
 	}
 	
-	slotViewSwitched( view );
+	// slotViewSwitched( view );
 
 	m_abView -> setShowByCategory( view, cat );
 

@@ -23,7 +23,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	mCat(0),
 	m_inSearch( false ),
 	m_inPersonal( false ),
-	m_curr_category( 0 ),
+	m_curr_category( -1 ),
 	m_curr_View( TableView ),
 	m_prev_View( TableView ),
 	m_curr_Contact ( 0 ),
@@ -174,18 +174,31 @@ void AbView::setShowByCategory( Views view, const QString& cat )
 // 			m_curr_View = view;
 // 	}
 
-	m_curr_View = view;
+	int intCat = 0;
 
-	emit signalClearLetterPicker();
-
-	if ( !cat.isNull() ) 
-		m_curr_category = mCat.id("Contacts", cat );
+	// All (cat == NULL) will be stored as -1
+	if ( cat.isNull() )
+		intCat = -1;
 	else
-		m_curr_category = -1; // Set to all
+		intCat = mCat.id("Contacts", cat );
 
-	qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
+	// If we just change the view, we don't have to reload any data..
+	// This speeds up a lot of things !
+	if ( intCat == m_curr_category ){
+		qWarning ("Just change the View (Category is: %d)", m_curr_category);
+		m_prev_View = m_curr_View;
+		m_curr_View = view;
 
-	load();
+		updateView();
+	}else{
+		qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
+
+		m_curr_View = view;
+		m_curr_category = intCat;
+		emit signalClearLetterPicker();
+		
+		load();
+	}
 
 }
 void AbView::setShowByLetter( char c )
@@ -399,6 +412,7 @@ void  AbView::updateView()
 			m_curr_Contact = m_ablabel -> currentEntry_UID();
 			break;
 		}
+		emit signalViewSwitched ( (int) m_curr_View );
 	}else
 		m_curr_Contact = 0;
 	
@@ -412,14 +426,12 @@ void  AbView::updateView()
 		if ( m_curr_Contact != 0 )
 			m_abTable -> selectContact ( m_curr_Contact );
 		m_abTable -> setFocus();
-		emit signalViewSwitched ( (int) m_curr_View );
 		break;
 	case CardView:
 		m_ablabel -> setContacts( m_list );
 		if ( m_curr_Contact != 0 )
 			m_ablabel -> selectContact( m_curr_Contact );
 		m_ablabel -> setFocus();
-		emit signalViewSwitched ( (int) m_curr_View );
 		break;
 	}
 	

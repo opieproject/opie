@@ -13,6 +13,7 @@ Feature requests:
 Known Bugs:
 -----------
 - OK-Key does not switch from Detailview (ablable) to Listview
+- Personal Details: Anniversary zeigt Fantasie-Werte
 
 Bugs but not in addressbook:
 -----------------------------
@@ -36,6 +37,8 @@ Important:
 - Searchwidget closed: Selected user is jumping
 - Wenn suchen beendet, dann dauert das Tabellenupdate (was überhaupt überflüssig ist)
 	zu lange..
+
+- Store position and state of toolbar
 
 - IRDA Receive: Contact is added, but start of editor with new entry expected..
 - "What's this" should be added (Deleyed after Feature Freeze)
