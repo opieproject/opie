@@ -1,5 +1,7 @@
 #include "tonleiterdatahelper.h"
 
+using namespace Data;
+
 int Note::getOctaveOfNote(int note)
 {
     int remain=note%12;

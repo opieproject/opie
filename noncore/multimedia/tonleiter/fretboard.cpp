@@ -2,7 +2,7 @@
 
 #include <qpainter.h>
 
-FretBoard::FretBoard(TonleiterData* data,QWidget* parent,const char* name,WFlags f)
+Graph::FretBoard::FretBoard(TonleiterData* data,QWidget* parent,const char* name,WFlags f)
 :QWidget(parent,name,f),data(data)
 {
     setBackgroundColor(QColor(0,0,0));
@@ -12,16 +12,16 @@ FretBoard::FretBoard(TonleiterData* data,QWidget* parent,const char* name,WFlags
     connect(data,SIGNAL(dataChange()),this,SLOT(dataChange()));
 }
 //****************************************************************************
-FretBoard::~FretBoard()
+Graph::FretBoard::~FretBoard()
 {
 }
 //****************************************************************************
-void FretBoard::dataChange()
+void Graph::FretBoard::dataChange()
 {
     repaint(true);
 }
 //****************************************************************************
-void FretBoard::paintEvent(QPaintEvent* pe)
+void Graph::FretBoard::paintEvent(QPaintEvent* pe)
 {
     Q_UNUSED(pe);
 
@@ -48,12 +48,12 @@ void FretBoard::paintEvent(QPaintEvent* pe)
     paintScale(&p);
 }
 //****************************************************************************
-void FretBoard::resizeEvent(QResizeEvent* re)
+void Graph::FretBoard::resizeEvent(QResizeEvent* re)
 {
     Q_UNUSED(re);
 }
 //****************************************************************************
-void FretBoard::paintBoard(QPainter* p)
+void Graph::FretBoard::paintBoard(QPainter* p)
 {
     //debug
     QColor bgc=QColor(142,138,120);
@@ -63,9 +63,9 @@ void FretBoard::paintBoard(QPainter* p)
 
 }
 //****************************************************************************
-void FretBoard::paintFrets(QPainter* p)
+void Graph::FretBoard::paintFrets(QPainter* p)
 {
-        //draw frets
+    //draw frets
     p->setPen(fretpen);
     p->setBrush(markerbrush);
     fretdist=(double)(xwidth)/(double)(inst.noOfFrets());
@@ -99,7 +99,7 @@ void FretBoard::paintFrets(QPainter* p)
     }
 }
 //****************************************************************************
-void FretBoard::paintStrings(QPainter* p)
+void Graph::FretBoard::paintStrings(QPainter* p)
 {
     //draw strings
     p->setPen(stringpen);
@@ -116,7 +116,7 @@ void FretBoard::paintStrings(QPainter* p)
     }
 }
 //****************************************************************************
-void FretBoard::paintScale(QPainter* p)
+void Graph::FretBoard::paintScale(QPainter* p)
 {
     int dotsize=10;
     int scaleid=data->getCurrentScaleID();

@@ -2,6 +2,9 @@
 
 #include <qpe/config.h>
 
+using namespace Data;
+
+
 TonleiterData::TonleiterData(QObject* parent)
 :QObject(parent)
 {
@@ -49,50 +52,30 @@ void TonleiterData::setDrawNames(bool dn)
 //****************************************************************************
 void TonleiterData::loadData()
 {
-/*
-    QValueList<int> strings1;
-    strings1.append(Note::getNoteFromName("B",0));
-    strings1.append(Note::getNoteFromName("E",1));
-    strings1.append(Note::getNoteFromName("A",1));
-    strings1.append(Note::getNoteFromName("D",2));
-    strings1.append(Note::getNoteFromName("G",2));
-    strings1.append(Note::getNoteFromName("C",3));
-    instruments.append(Instrument("Thumb6",26,strings1));
-
-    QValueList<int> strings2;
-    strings2.append(Note::getNoteFromName("E",1));
-    strings2.append(Note::getNoteFromName("A",1));
-    strings2.append(Note::getNoteFromName("D",2));
-    strings2.append(Note::getNoteFromName("G",2));
-    instruments.append(Instrument("Bass 4",12,strings2));
-
-    currentInstrumentID=1;
-
-    QValueList<int> scale1;
-    scale1.append(0);
-    scale1.append(2);
-    scale1.append(3);
-    scale1.append(5);
-    scale1.append(7);
-    scale1.append(8);
-    scale1.append(10);
-    scales.append(Scale("Minor",scale1));
-
-    QValueList<int> scale2;
-    scale2.append(0);
-    scale2.append(2);
-    scale2.append(4);
-    scale2.append(5);
-    scale2.append(7);
-    scale2.append(9);
-    scale2.append(10);
-    scales.append(Scale("Major",scale2));
-
-    currentScaleID=0;
-
-    currentNote=Note::getNoteFromName("A",0);
-*/
     Config load("Tonleiter");
+    if(!load.isValid())
+    {
+        //write some default values
+        load.setGroup("General");
+        load.writeEntry("currentInstrumentID",1);
+        load.writeEntry("currentNote",0);
+        load.writeEntry("currentScaleID",1);
+        load.writeEntry("drawnames",1);
+        load.setGroup("Instrument");
+        load.writeEntry("Inst0","Thumb6;26;11;16;21;26;31;36;");
+        load.writeEntry("Inst1","Bass 4;12;16;21;26;31;");
+        load.writeEntry("noOfInstruments",2);
+        load.setGroup("Scale");
+        load.writeEntry("Scale0","ionian;0;2;4;5;7;9;11;");
+        load.writeEntry("Scale1","aeolian;0;2;3;5;7;8;10;");
+        load.writeEntry("Scale2","dorian;0;2;3;5;7;9;10;");
+        load.writeEntry("Scale3","phrygian;0;1;3;5;7;8;10;");
+        load.writeEntry("Scale4","lydian;0;2;4;6;7;9;11;");
+        load.writeEntry("Scale5","mixolyd.;0;2;4;5;7;9;10;");
+        load.writeEntry("noOfScales",6);
+
+    }
+
     load.setGroup("General");
     currentNote=load.readNumEntry("currentNote");
     drawnames=load.readBoolEntry("drawnames");

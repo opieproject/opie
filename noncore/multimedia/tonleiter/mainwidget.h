@@ -11,9 +11,9 @@ class MainWidget : public QMainWindow
 {
     Q_OBJECT
 private:
-    TonleiterData* data;
-    MenuWidget* menuwidget;
-    FretBoard* fretboard;
+    Data::TonleiterData* data;
+    Menu::MenuWidget* menuwidget;
+    Graph::FretBoard* fretboard;
 public:
     MainWidget(QWidget* parent=0,const char* name="MainWidget",WFlags f=0);
     virtual ~MainWidget();

@@ -3,7 +3,10 @@
 #include <qlabel.h>
 #include <qlayout.h>
 
-MenuWidget::MenuWidget(TonleiterData* data,QWidget* parent,const char* name,WFlags f)
+#include "editinst.h"
+#include "editscale.h"
+
+Menu::MenuWidget::MenuWidget(TonleiterData* data,QWidget* parent,const char* name,WFlags f)
 :QWidget(parent,name,f),data(data)
 {
     QGridLayout* layout=new QGridLayout(this,3,3,10,-1,"menulayout");
@@ -14,6 +17,7 @@ MenuWidget::MenuWidget(TonleiterData* data,QWidget* parent,const char* name,WFla
     connect(boxInst,SIGNAL(activated(int)),data,SLOT(setCurrentInstrumetID(int)));
     layout->addWidget(boxInst,0,1);
     editInst=new QPushButton(tr("Edit"),this,"editInst");
+    connect(editInst,SIGNAL(pressed()),this,SLOT(editInstPressed()));
     layout->addWidget(editInst,0,2);
 
     QLabel* noteLabel=new QLabel(tr("Note"),this,"noteLabel");
@@ -35,17 +39,30 @@ MenuWidget::MenuWidget(TonleiterData* data,QWidget* parent,const char* name,WFla
     connect(boxScale,SIGNAL(activated(int)),data,SLOT(setCurrentScaleID(int)));
     layout->addWidget(boxScale,2,1);
     editScale=new QPushButton(tr("Edit"),this,"editScale");
+    connect(editScale,SIGNAL(pressed()),this,SLOT(editScalePressed()));
     layout->addWidget(editScale,2,2);
 
     updateBoxes();
 
 }
 //****************************************************************************
-MenuWidget::~MenuWidget()
+Menu::MenuWidget::~MenuWidget()
 {
 }
 //****************************************************************************
-void MenuWidget::updateBoxes()
+void Menu::MenuWidget::editInstPressed()
+{
+    InstEditDialog* instdialog=new InstEditDialog(data,this);
+    instdialog->exec();
+}
+//****************************************************************************
+void Menu::MenuWidget::editScalePressed()
+{
+    ScaleEditDialog* scaledialog=new ScaleEditDialog(data,this);
+    scaledialog->exec();
+}
+//****************************************************************************
+void Menu::MenuWidget::updateBoxes()
 {
     boxInst->clear();
 
