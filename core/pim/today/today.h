@@ -47,6 +47,7 @@ class Today : public TodayBase {
     void startDatebook();
     void startMail();
     void draw();
+    void editEvent(const Event &e);
  private:
     void init();
     void getDates();
@@ -58,6 +59,7 @@ class Today : public TodayBase {
  private:
     DateBookDB *db;
     todayconfig *conf;
+    QWidget* AllDateBookEvents;
     //Config cfg;
     int MAX_LINES_TASK;
     int MAX_CHAR_CLIP;

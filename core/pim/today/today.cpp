@@ -40,12 +40,11 @@
 #include <qpixmap.h>
 #include <qfileinfo.h>
 #include <qlayout.h>
+#include <qtl.h>
 
 //#include <iostream.h>
-//#include <unistd.h>
+#include <unistd.h>
 #include <stdlib.h>
-
-
 
 int MAX_LINES_TASK;
 int MAX_CHAR_CLIP;
@@ -62,7 +61,7 @@ int NEW_START=1;
  *  name 'name' and widget flags set to 'f' 
  */
 Today::Today( QWidget* parent,  const char* name, WFlags fl )
-  : TodayBase( parent, name, fl ) {
+  : TodayBase( parent, name, fl ), AllDateBookEvents(NULL) {
   QObject::connect( (QObject*)PushButton1, SIGNAL( clicked() ), this, SLOT(startConfig() ) );
   QObject::connect( (QObject*)TodoButton, SIGNAL( clicked() ), this, SLOT(startTodo() ) );
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
@@ -195,6 +194,7 @@ void Today::startConfig() {
   cfg.writeEntry("autostart", autostart);
   // sync it to "disk"
   cfg.write(); 
+  NEW_START=1;
   draw();
   autoStart();
 }
@@ -205,10 +205,15 @@ void Today::startConfig() {
  */
 void Today::getDates() {
   QDate date = QDate::currentDate();
-  QWidget* AllDateBookEvents = new QWidget( );
+
+  if (AllDateBookEvents) delete AllDateBookEvents;
+  AllDateBookEvents = new QWidget( );
   QVBoxLayout* layoutDates = new QVBoxLayout(AllDateBookEvents);
   
   QValueList<EffectiveEvent> list = db->getEffectiveEvents(date, date);
+
+  qBubbleSort(list);
+  // printf("Get dates\n");
 
   Config config( "qpe" );
   // if 24 h format
@@ -221,29 +226,32 @@ void Today::getDates() {
     for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin();
     it!=list.end(); ++it ) {
       
-      count++;
       
       if ( count <= MAX_LINES_MEET ) {
 
 	QTime time = QTime::currentTime();
 	
 	if (!ONLY_LATER) {
+	    count++;
 	  DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents);
 	  layoutDates->addWidget(l);
 	  connect (l, SIGNAL(editEvent(const Event &)),
-		   this, SIGNAL(editEvent(const Event &)));
+		   this, SLOT(editEvent(const Event &)));
 	} else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
+	    count++;
+
 	  // show only later appointments
 	  DateBookEventLater *l=new DateBookEventLater(*it, AllDateBookEvents);
 	  layoutDates->addWidget(l);
 	  connect (l, SIGNAL(editEvent(const Event &)),
-		   this, SIGNAL(editEvent(const Event &)));
-	} else {
-	  QLabel* noMoreEvents = new QLabel(AllDateBookEvents);
-	  noMoreEvents->setText("No more appointments today");
-	  layoutDates->addWidget(noMoreEvents);
-	}
+		   this, SLOT(editEvent(const Event &)));
+	} 
       }
+    }
+    if (ONLY_LATER && count==0) {
+	QLabel* noMoreEvents = new QLabel(AllDateBookEvents);
+	noMoreEvents->setText("No more appointments today");
+	layoutDates->addWidget(noMoreEvents);
     } 	
   } else {
     QLabel* noEvents = new QLabel(AllDateBookEvents);
@@ -253,6 +261,7 @@ void Today::getDates() {
   
   layoutDates->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
   sv1->addChild(AllDateBookEvents);
+  AllDateBookEvents->show();
     
   
 }
@@ -392,6 +401,16 @@ void Today::getTodo() {
 void Today::startDatebook() { 
   QCopEnvelope e("QPE/System", "execute(QString)");
   e << QString("datebook");
+}
+void Today::editEvent(const Event &e) {
+  startDatebook();
+  
+  //Dissabled for now as uid's not working properly
+  /*  
+    while(!QCopChannel::isRegistered("QPE/Datebook")) sleep(1);
+    QCopEnvelope env("QPE/Datebook", "editEvent(int)");
+    env << e.uid();
+  */
 }
 
 /*

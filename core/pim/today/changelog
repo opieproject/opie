@@ -1,3 +1,9 @@
+0.2.9
+
+* Many bugfixes.
+* Today now apparently sorts the dates _allways_ right, i would assume it 
+to be a qt bug
+
 0.2.8
 
 * Appointments are now clickable (connection to datebook still missing)
