@@ -26,6 +26,7 @@
 #include <qpe/resource.h>
 #include <qpe/contact.h>
 #include <qpe/global.h>
+#include <qpe/qpeapplication.h>
 
 #include <qdir.h>
 #include <qfile.h>
@@ -406,15 +407,15 @@ void Today::startDatebook() {
 /*
  * starts the edit dialog as known from datebook
  */ 
+
+extern QPEApplication *todayApp;
+
 void Today::editEvent(const Event &e) {
   startDatebook();
   
-  //Dissabled for now as uid's not working properly
-  /*  
-    while(!QCopChannel::isRegistered("QPE/Datebook")) sleep(1);
-    QCopEnvelope env("QPE/Datebook", "editEvent(int)");
-    env << e.uid();
-  */
+  while(!QCopChannel::isRegistered("QPE/Datebook")) todayApp->processEvents();
+  QCopEnvelope env("QPE/Datebook", "editEvent(int)");
+  env << e.uid();
 }
 
 /*

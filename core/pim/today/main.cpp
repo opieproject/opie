@@ -20,9 +20,12 @@
 #include "today.h"
 #include <qpe/qpeapplication.h>
 
+QPEApplication *todayApp;
+
 int main( int argc, char ** argv ) 
 {
   QPEApplication a(argc, argv);
+  todayApp=&a;
 
   Today t;
   
