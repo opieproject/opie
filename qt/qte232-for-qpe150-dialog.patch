@@ -1,5 +1,5 @@
---- kernel/qwidget.cpp.orig	Sat Jul  6 03:18:10 2002
-+++ kernel/qwidget.cpp	Sat Jul  6 03:31:18 2002
+--- src/kernel/qwidget.cpp.orig	Sat Jul  6 03:18:10 2002
++++ src/kernel/qwidget.cpp	Sat Jul  6 03:31:18 2002
 @@ -3198,12 +3198,14 @@
  static bool noMoreToplevels()
  {
