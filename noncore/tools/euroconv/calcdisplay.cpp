@@ -2,14 +2,14 @@
  *
  * File:        calcdisplay.cpp
  *
- * Description:  
- *              
- *               
+ * Description:
+ *
+ *
  * Authors:     Eric Santonacci <Eric.Santonacci@talc.fr>
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.cpp,v 1.4 2003-04-15 07:42:19 eric Exp $
+ * $Id: calcdisplay.cpp,v 1.5 2004-09-10 11:18:05 zecke Exp $
  *
  ***************************************************************************/
 
@@ -19,6 +19,34 @@
 
 #include "currency.h"
 #include "calcdisplay.h"
+
+/* XPM */
+static char *swap_xpm[] = {
+/* width height num_colors chars_per_pixel */
+"    13    18        2            1",
+/* colors */
+". c None",
+"# c #000000",
+/* pixels */
+"..#######....",
+"..#####......",
+"..######.....",
+"..#...###....",
+"........##...",
+".........##..",
+"..........##.",
+"...........##",
+"...........##",
+"...........##",
+"...........##",
+"..........##.",
+".........##..",
+"........##...",
+"..#...###....",
+"..######.....",
+"..#####......",
+"..#######....",
+};
 
 
 LCDDisplay::LCDDisplay( QWidget *parent, const char *name )
