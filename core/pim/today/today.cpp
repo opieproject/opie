@@ -473,7 +473,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     int SHOW_NOTES,
 			     const char* name,
 			     WFlags fl) :
-  ClickableLabel(parent,name,fl), event(ev) {
+  OClickableLabel(parent,name,fl), event(ev) {
 
   QString msg;
   //QTime time = QTime::currentTime();
@@ -540,7 +540,7 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
 				       int SHOW_NOTES,
 				       const char* name,
 				       WFlags fl) :
-  ClickableLabel(parent,name,fl), event(ev) {
+  OClickableLabel(parent,name,fl), event(ev) {
 
   QString msg;
   QTime time = QTime::currentTime();

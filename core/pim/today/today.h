@@ -25,13 +25,13 @@
 #include <qpe/event.h>
 
 #include <opie/tododb.h>
+#include <opie/oclickablelabel.h>
 
 #include <qdatetime.h>
 #include <qlist.h>
 
 #include "todayconfig.h"
 #include "todaybase.h"
-#include "clickablelabel.h"
 
 class QVBoxLayout;
 
@@ -74,7 +74,7 @@ class Today : public TodayBase {
     int SHOW_NOTES;
 };
 
-class DateBookEvent: public ClickableLabel {
+class DateBookEvent: public OClickableLabel {
   Q_OBJECT
 public:
   DateBookEvent(const EffectiveEvent &ev,
@@ -93,7 +93,7 @@ private:
     bool ampm;
 };
 
-class DateBookEventLater: public ClickableLabel {
+class DateBookEventLater: public OClickableLabel {
   Q_OBJECT
 public:
     DateBookEventLater(const EffectiveEvent &ev,

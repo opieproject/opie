@@ -1,3 +1,10 @@
+0.3.3
+
+* Changed the logo so it better scales to bigger display and also
+  made the "Today" string translatable.
+* some am/pm fixes
+* clickable labels now in libopie
+
 0.3.2
 
 * Autostart is now more configurable. You can decide how long
