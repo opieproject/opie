@@ -22,6 +22,7 @@ ifneq ($(CONFIG_QUICK_LAUNCH),)
 	echo contains\( CONFIG, quick-app \) \{ >> $@
 	echo CONFIG -= quick-app >> $@
 	echo CONFIG += quick-app-lib >> $@
+	echo QUICKLAUNCH_PATH = $(CONFIG_QUICKLAUNCH_PATH) >> $@
 	echo \} >> $@
 else
 	echo contains\( CONFIG, quick-app \) \{ >> $@

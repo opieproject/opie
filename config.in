@@ -48,6 +48,10 @@ config QUICK_LAUNCH
   boolean "Enable Quick Launch"
   default n
   
+config QUICKLAUNCH_PATH
+  string "Path to quicklauncher"
+  default "./quicklauncher" if TARGET_X86
+  default "/opt/QtPalmtop/bin/quicklauncher" if ! TARGET_X86
 
 config SPECFILE
   string
