@@ -108,7 +108,8 @@ void CardMonitor::popupTimeout() {
 
 void CardMonitor::mousePressEvent( QMouseEvent * ) {
     QPopupMenu * menu = new QPopupMenu( this );
-    QString cmd;
+    QStringList cmd;
+    bool execute = true;
 
     if ( cardInSd ) {
         menu->insertItem( QIconSet( Resource::loadPixmap( "cardmon/ide" ) ),
@@ -135,15 +136,20 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
                                   p.y() - s.height() ), 0 );
 
     if ( opt == 1 ) {
-        m_commandOrig = 1;
-        execCommand("/sbin/cardctl eject 0");
+        m_commandOrig = PCMCIA_Socket1;
+        cmd << "/sbin/cardctl" << "eject" << "0";
     } else if ( opt == 0 ) {
-        m_commandOrig = 2;
-        execCommand( QString("umount %1").arg(cardSdName));
+        m_commandOrig = MMC_Socket;
+        cmd << "umount" << cardSdName;
     } else if ( opt == 2 ) {
-        m_commandOrig = 3;
-        execCommand( "/sbin/cardctl eject 1" );
-    }
+        m_commandOrig = PCMCIA_Socket2;
+        cmd << "/sbin/cardctl" << "eject" <<  "1";
+    }else
+        execute = false;
+
+    if ( execute )
+        execCommand( cmd );
+
     delete menu;
 }
 
@@ -333,20 +339,20 @@ int CardMonitor::position() {
     return 7;
 }
 
-void CardMonitor::execCommand( const QString &command ) {
+void CardMonitor::execCommand( const QStringList &strList ) {
     delete m_process;
     m_process = 0;
 
     if ( m_process == 0 ) {
         m_process = new OProcess();
-	QStringList strList = QStringList::split( " ", command );
 
-   	for ( QStringList::Iterator it = strList.begin(); it != strList.end(); ++it ) {
-        	*m_process << *it;
-    	}
 
-        connect(m_process, SIGNAL( processExited(Opie::Core::OProcess*) ),
-                this, SLOT( slotExited(Opie::Core::OProcess* ) ) );
+        for ( QStringList::ConstIterator it = strList.begin(); it != strList.end(); ++it ) {
+            *m_process << *it;
+        }
+
+        connect(m_process, SIGNAL(processExited(Opie::Core::OProcess*)),
+                this, SLOT( slotExited(Opie::Core::OProcess*)));
 
         if(!m_process->start(OProcess::NotifyOnExit, OProcess::AllOutput ) ) {
             delete m_process;
@@ -358,17 +364,16 @@ void CardMonitor::execCommand( const QString &command ) {
 void CardMonitor::slotExited( OProcess*  ) {
 
    if( m_process->normalExit() ) {
-        int ret = m_process->exitStatus();
-        if( ret != 0 ) {
-            if ( m_commandOrig == 1 ) {
-                popUp( tr( "CF/PCMCIA card eject failed!" ) );
-            } else if ( m_commandOrig == 2 ) {
-                popUp( tr( "SD/MMC card eject failed!" ) );
-            } else if ( m_commandOrig == 3 ) {
-                popUp( tr( "CF/PCMCIA card eject failed!" ) );
-            }
-        }
-    }
+       int ret = m_process->exitStatus();
+       if( ret != 0 ) {
+           if ( m_commandOrig == PCMCIA_Socket1 ||
+                m_commandOrig == PCMCIA_Socket2 ) {
+               popUp( tr( "CF/PCMCIA card eject failed!" ) );
+           } else if ( m_commandOrig == MMC_Socket ) {
+               popUp( tr( "SD/MMC card eject failed!" ) );
+           }
+       }
+   }
 }
 
 EXPORT_OPIE_APPLET_v1( CardMonitor )

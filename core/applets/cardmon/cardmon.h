@@ -32,6 +32,12 @@ namespace Opie {
 class CardMonitor : public QWidget {
     Q_OBJECT
 public:
+    enum {
+	PCMCIA_Socket1,
+	PCMCIA_Socket2,
+	MMC_Socket
+    };
+
     CardMonitor( QWidget *parent = 0 );
     ~CardMonitor();
     bool getStatusPcmcia( int showPopUp = FALSE );
@@ -47,7 +53,7 @@ protected:
     void mousePressEvent( QMouseEvent * );
 
 private:
-    void execCommand( const QString &command );
+    void execCommand( const QStringList &command );
     int m_commandOrig;
     QPixmap pm;
     // pcmcia socket 0
