@@ -70,7 +70,8 @@ FontDialog::FontDialog( QWidget * parent,  const char* name , bool modal, WFlags
     populateLists();
 //     MultiLineEdit1
 //      connect();
-
+//    move(5,15);
+    showMaximized();
 }
 
 FontDialog::~FontDialog()
