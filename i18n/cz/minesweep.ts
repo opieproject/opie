@@ -1,37 +1,34 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>MineSweep</name>
     <message>
-        <source>You won!</source>
-        <translation>Vyhrál si!</translation>
+      <source>You won!</source>
+      <translation>Vyhrál si!</translation>
     </message>
     <message>
-        <source>You exploded!</source>
-        <translation>Explodoval si!</translation>
+      <source>You exploded!</source>
+      <translation>Explodoval si!</translation>
     </message>
     <message>
-        <source>Mine Hunt</source>
-        <translation type="obsolete">Hledání min</translation>
+      <source>Beginner</source>
+      <translation>Začátečník</translation>
     </message>
     <message>
-        <source>Beginner</source>
-        <translation>Začátečník</translation>
+      <source>Advanced</source>
+      <translation>Pokročilý</translation>
     </message>
     <message>
-        <source>Advanced</source>
-        <translation>Pokročilý</translation>
+      <source>Expert</source>
+      <translation>Expert</translation>
     </message>
     <message>
-        <source>Expert</source>
-        <translation>Expert</translation>
+      <source>Game</source>
+      <translation>Hra</translation>
     </message>
     <message>
-        <source>Game</source>
-        <translation>Hra</translation>
+      <source>Mine Sweep</source>
+      <translation>Hledání min</translation>
     </message>
-    <message>
-        <source>Mine Sweep</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
+  </context>
 </TS>

@@ -1,140 +1,141 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>ProfileGUI</name>
     <message>
-        <source>Profile</source>
-        <translation type="unfinished"></translation>
+      <source>Profile</source>
+      <translation>Profil</translation>
     </message>
     <message>
-        <source>Setup</source>
-        <translation type="unfinished"></translation>
+      <source>Setup</source>
+      <translation>Nastavení</translation>
     </message>
     <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
+      <source>Start</source>
+      <translation>Start</translation>
     </message>
     <message>
-        <source>Automatically</source>
-        <translation type="unfinished"></translation>
+      <source>Automatically</source>
+      <translation>Automaticky</translation>
     </message>
     <message>
-        <source>Ask</source>
-        <translation type="unfinished"></translation>
+      <source>Ask</source>
+      <translation>Na dotaz</translation>
     </message>
     <message>
-        <source>Disabled</source>
-        <translation type="unfinished"></translation>
+      <source>Disabled</source>
+      <translation>Vypnuto</translation>
     </message>
     <message>
-        <source>Trigger VPN</source>
-        <translation type="unfinished"></translation>
+      <source>Trigger VPN</source>
+      <translation>Spustit VPN</translation>
     </message>
     <message>
-        <source>Description</source>
-        <translation type="unfinished"></translation>
+      <source>Description</source>
+      <translation>Popis</translation>
     </message>
     <message>
-        <source>State</source>
-        <translation type="unfinished"></translation>
+      <source>State</source>
+      <translation>Stav</translation>
     </message>
     <message>
-        <source>eth0</source>
-        <translation type="unfinished"></translation>
+      <source>eth0</source>
+      <translation>eth0</translation>
     </message>
     <message>
-        <source>(Multicast, Up)</source>
-        <translation type="unfinished"></translation>
+      <source>(Multicast, Up)</source>
+      <translation>(Multicast, Up)</translation>
     </message>
     <message>
-        <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+      <source>Subnet Mask</source>
+      <translation>Síťová maska</translation>
     </message>
     <message>
-        <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+      <source>Broadcast</source>
+      <translation>Broadcast</translation>
     </message>
     <message>
-        <source>MAC</source>
-        <translation type="unfinished"></translation>
+      <source>MAC</source>
+      <translation>MAC</translation>
     </message>
     <message>
-        <source>P-t-P</source>
-        <translation type="unfinished"></translation>
+      <source>P-t-P</source>
+      <translation>P-t-P</translation>
     </message>
     <message>
-        <source>IP Address</source>
-        <translation type="unfinished"></translation>
+      <source>IP Address</source>
+      <translation>IP adresa</translation>
     </message>
     <message>
-        <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+      <source>0.0.0.0</source>
+      <translation>0.0.0.0</translation>
     </message>
     <message>
-        <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+      <source>00:00:00:00:00:00</source>
+      <translation>00:00:00:00:00:00</translation>
     </message>
     <message>
-        <source>DHCP</source>
-        <translation type="unfinished"></translation>
+      <source>DHCP</source>
+      <translation>DHCP</translation>
     </message>
     <message>
-        <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+      <source>Lease Expires</source>
+      <translation>Pronájem vyprší</translation>
     </message>
     <message>
-        <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+      <source>Lease Obtained</source>
+      <translation>Pronájem získán</translation>
     </message>
     <message>
-        <source>DHCP Server</source>
-        <translation type="unfinished"></translation>
+      <source>DHCP Server</source>
+      <translation>DHCP Server</translation>
     </message>
     <message>
-        <source>Traffic</source>
-        <translation type="unfinished"></translation>
+      <source>Traffic</source>
+      <translation>Provoz</translation>
     </message>
     <message>
-        <source>Receiving</source>
-        <translation type="unfinished"></translation>
+      <source>Receiving</source>
+      <translation>Příjem</translation>
     </message>
     <message>
-        <source>Errors</source>
-        <translation type="unfinished"></translation>
+      <source>Errors</source>
+      <translation>Chyby</translation>
     </message>
     <message>
-        <source>Dropped</source>
-        <translation type="unfinished"></translation>
+      <source>Dropped</source>
+      <translation>Zahozeno</translation>
     </message>
     <message>
-        <source>Bytes</source>
-        <translation type="unfinished"></translation>
+      <source>Bytes</source>
+      <translation>Bajtů</translation>
     </message>
     <message>
-        <source>Transmitting</source>
-        <translation type="unfinished"></translation>
+      <source>Transmitting</source>
+      <translation>Odesílání</translation>
     </message>
     <message>
-        <source>Others</source>
-        <translation type="unfinished"></translation>
+      <source>Others</source>
+      <translation>Ostatní</translation>
     </message>
     <message>
-        <source>Collisions</source>
-        <translation type="unfinished"></translation>
+      <source>Collisions</source>
+      <translation>Kolize</translation>
     </message>
     <message>
-        <source>Live feed </source>
-        <translation type="unfinished"></translation>
+      <source>Live feed </source>
+      <translation>Živý posun</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>ProfileNetNode</name>
     <message>
-        <source>Regular connection profile</source>
-        <translation type="unfinished"></translation>
+      <source>Regular connection profile</source>
+      <translation>Standardní profil připojení</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Define use of an IP connection.&lt;/p&gt;&lt;p&gt;Configure if and when this connection needs to be established&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+      <source>&lt;p>Define use of an IP connection.&lt;/p>&lt;p>Configure if and when this connection needs to be established&lt;/p></source>
+      <translation>&lt;p>Definuje použití IP připojení.&lt;/p>&lt;p>Nastavte jestliže budete potřebovat navázat spojení&lt;/p></translation>
     </message>
-</context>
+  </context>
 </TS>

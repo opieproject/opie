@@ -1,218 +1,219 @@
-<!DOCTYPE TS><TS>
-<context>
+<!DOCTYPE TS>
+<TS>
+  <context>
     <name>PPPAuthEdit</name>
     <message>
-        <source>Login send missing</source>
-        <translation type="unfinished"></translation>
+      <source>Login send missing</source>
+      <translation>Posílaný Login chybí</translation>
     </message>
     <message>
-        <source>Login expect missing</source>
-        <translation type="unfinished"></translation>
+      <source>Login expect missing</source>
+      <translation>Očekávaný Login chybí</translation>
     </message>
     <message>
-        <source>Password send missing</source>
-        <translation type="unfinished"></translation>
+      <source>Password send missing</source>
+      <translation>Posílané heslo chybí</translation>
     </message>
     <message>
-        <source>Password expect missing</source>
-        <translation type="unfinished"></translation>
+      <source>Password expect missing</source>
+      <translation>Očekávané heslo chybí</translation>
     </message>
     <message>
-        <source>Pap/Chap/EAP client id missing</source>
-        <translation type="unfinished"></translation>
+      <source>Pap/Chap/EAP client id missing</source>
+      <translation>Pap/Chap/EAP klient id chybí</translation>
     </message>
     <message>
-        <source>Pap/Chap/EAP server id missing</source>
-        <translation type="unfinished"></translation>
+      <source>Pap/Chap/EAP server id missing</source>
+      <translation>Pap/Chap/EAP server id chybí</translation>
     </message>
     <message>
-        <source>Pap/Chap/EAP secret id missing</source>
-        <translation type="unfinished"></translation>
+      <source>Pap/Chap/EAP secret id missing</source>
+      <translation>Pap/Chap/EAP secret id chybí</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPAuthGUI</name>
     <message>
-        <source>PPPAuth</source>
-        <translation type="unfinished"></translation>
+      <source>PPPAuth</source>
+      <translation>PPPAuth</translation>
     </message>
     <message>
-        <source>Login</source>
-        <translation type="unfinished"></translation>
+      <source>Login</source>
+      <translation>Login</translation>
     </message>
     <message>
-        <source>ogin:</source>
-        <translation type="unfinished"></translation>
+      <source>ogin:</source>
+      <translation>ogin:</translation>
     </message>
     <message>
-        <source>assword:</source>
-        <translation type="unfinished"></translation>
+      <source>assword:</source>
+      <translation>assword:</translation>
     </message>
     <message>
-        <source>Pap</source>
-        <translation type="unfinished"></translation>
+      <source>Pap</source>
+      <translation>Pap</translation>
     </message>
     <message>
-        <source>Chap</source>
-        <translation type="unfinished"></translation>
+      <source>Chap</source>
+      <translation>Chap</translation>
     </message>
     <message>
-        <source>EAP</source>
-        <translation type="unfinished"></translation>
+      <source>EAP</source>
+      <translation>EAP</translation>
     </message>
     <message>
-        <source>Server</source>
-        <translation type="unfinished"></translation>
+      <source>Server</source>
+      <translation>Server</translation>
     </message>
     <message>
-        <source>Secret</source>
-        <translation type="unfinished"></translation>
+      <source>Secret</source>
+      <translation>Secret</translation>
     </message>
     <message>
-        <source>*</source>
-        <translation type="unfinished"></translation>
+      <source>*</source>
+      <translation>*</translation>
     </message>
     <message>
-        <source>Client</source>
-        <translation type="unfinished"></translation>
+      <source>Client</source>
+      <translation>Klient</translation>
     </message>
     <message>
-        <source>Terminal</source>
-        <translation type="unfinished"></translation>
+      <source>Terminal</source>
+      <translation>Terminál</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPDNSEdit</name>
     <message>
-        <source>Domainname needed</source>
-        <translation type="unfinished"></translation>
+      <source>Domainname needed</source>
+      <translation>Jméno domény je vyžadováno</translation>
     </message>
     <message>
-        <source>DNS Servers needed</source>
-        <translation type="unfinished"></translation>
+      <source>DNS Servers needed</source>
+      <translation>DNS servery jsou vyžadovány</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPDNSGUI</name>
     <message>
-        <source>PPPDNS</source>
-        <translation type="unfinished"></translation>
+      <source>PPPDNS</source>
+      <translation>PPPDNS</translation>
     </message>
     <message>
-        <source>Server assigned</source>
-        <translation type="unfinished"></translation>
+      <source>Server assigned</source>
+      <translation>Přiděluje server</translation>
     </message>
     <message>
-        <source>Fixed</source>
-        <translation type="unfinished"></translation>
+      <source>Fixed</source>
+      <translation>Pevný</translation>
     </message>
     <message>
-        <source>DomainName</source>
-        <translation type="unfinished"></translation>
+      <source>DomainName</source>
+      <translation>Jméno domény</translation>
     </message>
     <message>
-        <source>Address</source>
-        <translation type="unfinished"></translation>
+      <source>Address</source>
+      <translation>Adresa</translation>
     </message>
     <message>
-        <source>...</source>
-        <translation type="unfinished"></translation>
+      <source>...</source>
+      <translation>...</translation>
     </message>
     <message>
-        <source>List</source>
-        <translation type="unfinished"></translation>
+      <source>List</source>
+      <translation>Seznam</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPGUI</name>
     <message>
-        <source>PPP</source>
-        <translation type="unfinished"></translation>
+      <source>PPP</source>
+      <translation>PPP</translation>
     </message>
     <message>
-        <source>Authentication</source>
-        <translation type="unfinished"></translation>
+      <source>Authentication</source>
+      <translation>Autentizace</translation>
     </message>
     <message>
-        <source>IP settings</source>
-        <translation type="unfinished"></translation>
+      <source>IP settings</source>
+      <translation>Nastavení IP</translation>
     </message>
     <message>
-        <source>DNS Settings</source>
-        <translation type="unfinished"></translation>
+      <source>DNS Settings</source>
+      <translation>Nastavení DNS</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPIPEdit</name>
     <message>
-        <source>IPAddress needed</source>
-        <translation type="unfinished"></translation>
+      <source>IPAddress needed</source>
+      <translation>IP adresa je vyžadována</translation>
     </message>
     <message>
-        <source>IPAddress not valid</source>
-        <translation type="unfinished"></translation>
+      <source>IPAddress not valid</source>
+      <translation>IP adresa je neplatná</translation>
     </message>
     <message>
-        <source>Subnet mask needed</source>
-        <translation type="unfinished"></translation>
+      <source>Subnet mask needed</source>
+      <translation>Síťová maska je vyžadována</translation>
     </message>
     <message>
-        <source>Subnet mask not valid</source>
-        <translation type="unfinished"></translation>
+      <source>Subnet mask not valid</source>
+      <translation>Síťová maska je neplatná</translation>
     </message>
     <message>
-        <source>Gateway address needed</source>
-        <translation type="unfinished"></translation>
+      <source>Gateway address needed</source>
+      <translation>Adresa brány je vyžadována</translation>
     </message>
     <message>
-        <source>Gateway address not valid</source>
-        <translation type="unfinished"></translation>
+      <source>Gateway address not valid</source>
+      <translation>Adresa brány je neplatná</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPIPGUI</name>
     <message>
-        <source>PPPIP</source>
-        <translation type="unfinished"></translation>
+      <source>PPPIP</source>
+      <translation>PPPIP</translation>
     </message>
     <message>
-        <source>IP</source>
-        <translation type="unfinished"></translation>
+      <source>IP</source>
+      <translation>IP</translation>
     </message>
     <message>
-        <source>Server assigned</source>
-        <translation type="unfinished"></translation>
+      <source>Server assigned</source>
+      <translation>Přiděluje server</translation>
     </message>
     <message>
-        <source>Fixed</source>
-        <translation type="unfinished"></translation>
+      <source>Fixed</source>
+      <translation>Pevná</translation>
     </message>
     <message>
-        <source>Subnetmask</source>
-        <translation type="unfinished"></translation>
+      <source>Subnetmask</source>
+      <translation>Síťová maska</translation>
     </message>
     <message>
-        <source>Address</source>
-        <translation type="unfinished"></translation>
+      <source>Address</source>
+      <translation>Adresa</translation>
     </message>
     <message>
-        <source>Gateway</source>
-        <translation type="unfinished"></translation>
+      <source>Gateway</source>
+      <translation>Brána</translation>
     </message>
     <message>
-        <source>Set as default</source>
-        <translation type="unfinished"></translation>
+      <source>Set as default</source>
+      <translation>Nastavit jako výchozí</translation>
     </message>
-</context>
-<context>
+  </context>
+  <context>
     <name>PPPNetNode</name>
     <message>
-        <source>PPP Connection</source>
-        <translation type="unfinished"></translation>
+      <source>PPP Connection</source>
+      <translation>PPP připojení</translation>
     </message>
     <message>
-        <source>&lt;p&gt;Sets up IP using PPP.&lt;/p&gt;&lt;p&gt;Use this for dialup devices or serial setups&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+      <source>&lt;p>Sets up IP using PPP.&lt;/p>&lt;p>Use this for dialup devices or serial setups&lt;/p></source>
+      <translation>&lt;p>Nastaví IP s použitím PPP.&lt;/p>&lt;p>Použijte pro vytáčené, nebo sériové připojení&lt;/p></translation>
     </message>
-</context>
+  </context>
 </TS>
