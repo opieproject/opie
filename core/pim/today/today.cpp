@@ -131,7 +131,7 @@ void Today::autoStart() {
     Config cfg("today");
     cfg.setGroup("Autostart");
     int AUTOSTART = cfg.readNumEntry("autostart",1);
-    qDebug(QString("%1").arg(AUTOSTART));
+//    qDebug(QString("%1").arg(AUTOSTART));
     if (AUTOSTART) {
         QCopEnvelope e("QPE/System", "autoStart(QString, QString, QString)");
         e << QString("add");
@@ -479,6 +479,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
   //QTime time = QTime::currentTime();
 
    Config config( "qpe" );
+   config.setGroup( "Time" );
   // if 24 h format
    ampm = config.readBoolEntry( "AMPM", TRUE );
 
@@ -545,6 +546,7 @@ DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev,
   QTime time = QTime::currentTime();
 
   Config config( "qpe" );
+  config.setGroup( "Time" );
   // if 24 h format
   ampm = config.readBoolEntry( "AMPM", TRUE );
 

@@ -44,15 +44,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   QPixmap todo = Resource::loadPixmap( "TodoList" );   // todo
   QPixmap config = Resource::loadPixmap( "today/config" );  // config icon
   QPixmap mail = Resource::loadPixmap( "today/mail" ); // mail icon
-
-  //QPalette pal = this->palette();
-  // QColor col = pal.color(QPalette::Active, QColorGroup::Background);
-  //pal.setColor(QPalette::Active, QColorGroup::Button, col);
-  //pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
-  //pal.setColor(QPalette::Normal, QColorGroup::Button, col);
-  //pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
-  //this->setPalette(pal);
-
+  QPixmap opiezilla = Resource::loadPixmap("today/opiezilla" ); //the opiezilla
 
   QWidget *d = QApplication::desktop();
   int w=d->width();
@@ -79,6 +71,23 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   Frame->setLineWidth( 0 );
   Frame->setMaximumHeight(50);
   Frame->setMinimumHeight(50);
+
+  // Today text
+  QLabel* TodayLabel = new QLabel( Frame, "TodayText" );
+  TodayLabel->setGeometry( QRect( 10, 0, 168, 40 ) );
+  QFont TodayLabel_font(  TodayLabel->font() );
+  TodayLabel_font.setBold( TRUE );
+  TodayLabel_font.setPointSize(40);
+  TodayLabel->setFont( TodayLabel_font );
+  TodayLabel->setBackgroundOrigin( QLabel::ParentOrigin );
+  TodayLabel->setText("<font color=#FFFFFF>" + tr("Today") +"</font>");
+
+  // Opiezilla
+  QLabel* Opiezilla = new QLabel( Frame, "OpieZilla");
+  Opiezilla->setPixmap( opiezilla );
+  Opiezilla->setGeometry( this->width()-50 ,1, 45, 47);
+  Opiezilla->setBackgroundOrigin( QLabel::ParentOrigin );
+
   // date
   TextLabel1 = new QLabel( Frame, "TextLabel1" );
   TextLabel1->setGeometry( QRect( 10, 35, 168, 12 ) );
