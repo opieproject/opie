@@ -14,10 +14,16 @@
 ***********************************************************************/
 
 #include "wellenreiter.h"
+#include "scanlistitem.h"
+
+#include <qpushbutton.h>
 
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     : WellenreiterBase( parent, name, fl )
 {
+
+    connect( button, SIGNAL( clicked() ), this, SLOT( buttonClicked() ) );
+
 }
 
 Wellenreiter::~Wellenreiter()
@@ -25,7 +31,16 @@ Wellenreiter::~Wellenreiter()
     // no need to delete child widgets, Qt does it all for us
 }
 
-void Wellenreiter::theButton()
+void Wellenreiter::buttonClicked()
 {
-    
+
+    // FIXME: communicate with daemon and set button text according to state
+
+    button->setText( "Stop Scanning" );
+
+    // add some icons, so that we can see if this works
+
+    new MScanListItem( netview, "managed", "MyNet", "04:00:20:EF:A6:43", true, 6, 80 );
+    new MScanListItem( netview, "adhoc", "YourNet", "40:03:A3:E7:56:22", false, 11, 30 );
+
 }

@@ -18,8 +18,22 @@
 
 #include <qlistview.h>
 
+class QString;
+
 class MScanListItem: public QListViewItem
 {
+  public:
+
+    MScanListItem::MScanListItem( QListView* parent,
+                                  QString type,
+                                  QString essid,
+                                  QString ap,
+                                  bool wep,
+                                  int channel,
+                                  int signal );
+
+
+
 
 };
 

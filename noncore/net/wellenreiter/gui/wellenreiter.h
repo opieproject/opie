@@ -29,8 +29,8 @@ public:
 protected:
 
 
-private slots:
-    void theButton();
+public slots:
+    void buttonClicked();
 
 private:
     //void readConfig();
