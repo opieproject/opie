@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.5 2002-10-16 10:52:40 eilers Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.6 2002-11-01 15:10:42 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.5  2002-10-16 10:52:40  eilers
+ * Revision 1.6  2002-11-01 15:10:42  eilers
+ * Added regExp-search in database for all fields in a contact.
+ *
+ * Revision 1.5  2002/10/16 10:52:40  eilers
  * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
  *
  * Revision 1.4  2002/10/14 16:21:54  eilers
@@ -118,6 +121,11 @@ bool OContactAccess::save ()
 	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
 
 	return true;
+}
+
+ORecordList<OContact> OContactAccess::matchRegexp(  const QRegExp &r ) const{
+	QArray<int> matchingContacts = m_backEnd -> matchRegexp( r );
+	return ( ORecordList<OContact>(matchingContacts, this) );
 }
 
 const uint OContactAccess::querySettings()

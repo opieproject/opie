@@ -13,11 +13,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.3 2002-10-16 10:52:40 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.4 2002-11-01 15:10:42 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.3  2002-10-16 10:52:40  eilers
+ * Revision 1.4  2002-11-01 15:10:42  eilers
+ * Added regExp-search in database for all fields in a contact.
+ *
+ * Revision 1.3  2002/10/16 10:52:40  eilers
  * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
  *
  * Revision 1.2  2002/10/14 16:21:54  eilers
@@ -48,6 +51,7 @@
 /** Class to access the contacts database.
  * This is just a frontend for the real database handling which is
  * done by the backend.
+ * @see OPimAccessTemplate
  */
 class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 {
@@ -81,7 +85,11 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 		IgnoreCase = 0x0002,
 		RegExp     = 0x0004,
 		ExactMatch = 0x0008,
+		MatchOne   = 0x0010  // Only one Entry must match
 	};
+
+	
+	ORecordList<OContact> matchRegexp(  const QRegExp &r )const;
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend

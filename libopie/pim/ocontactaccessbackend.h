@@ -15,11 +15,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.2 2002-10-07 17:34:24 eilers Exp $
+ * Version: $Id: ocontactaccessbackend.h,v 1.3 2002-11-01 15:10:42 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend.h,v $
- * Revision 1.2  2002-10-07 17:34:24  eilers
+ * Revision 1.3  2002-11-01 15:10:42  eilers
+ * Added regExp-search in database for all fields in a contact.
+ *
+ * Revision 1.2  2002/10/07 17:34:24  eilers
  * added OBackendFactory for advanced backend access
  *
  * Revision 1.1  2002/09/27 17:11:44  eilers
@@ -37,6 +40,8 @@
 
 #include "ocontact.h"
 #include "opimaccessbackend.h"
+
+#include "qregexp.h"
 
 class OContactAccessBackend: public OPimAccessBackend<OContact> {
  public:
@@ -57,6 +62,8 @@ class OContactAccessBackend: public OPimAccessBackend<OContact> {
 	 * in this situation.
 	 */
 	virtual bool wasChangedExternally() = 0;
+
+	virtual QArray<int> matchRegexp(  const QRegExp &r ) const = 0;
 
 	/** Return all possible settings.
 	 *  @return All settings provided by the current backend

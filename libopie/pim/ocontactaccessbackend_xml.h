@@ -13,11 +13,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.4 2002-10-16 10:52:40 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.5 2002-11-01 15:10:42 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.4  2002-10-16 10:52:40  eilers
+ * Revision 1.5  2002-11-01 15:10:42  eilers
+ * Added regExp-search in database for all fields in a contact.
+ *
+ * Revision 1.4  2002/10/16 10:52:40  eilers
  * Added some docu to the interface and now using the cache infrastucture by zecke.. :)
  *
  * Revision 1.3  2002/10/14 16:21:54  eilers
@@ -252,6 +255,23 @@ class OContactAccessBackend_XML : public OContactAccessBackend {
 		// Shrink to fit..
 		m_currentQuery.resize(arraycounter);
 	
+		return m_currentQuery;
+	}
+
+	QArray<int> matchRegexp(  const QRegExp &r ) const{
+		QArray<int> m_currentQuery( m_contactList.count() );
+		QValueListConstIterator<OContact> it;
+		uint arraycounter = 0;
+		
+		for( it = m_contactList.begin(); it != m_contactList.end(); ++it ){
+			if ( (*it).match( r ) ){
+				m_currentQuery[arraycounter++] = (*it).uid();
+			}
+			
+		}
+		// Shrink to fit..
+		m_currentQuery.resize(arraycounter);
+
 		return m_currentQuery;
 	}
 	
