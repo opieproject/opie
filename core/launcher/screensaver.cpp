@@ -196,7 +196,7 @@ void OpieScreenSaver::setMode ( int mode )
 /**
  * Set display brightness
  *
- * Get's default values for backlight and light sensor from config file.
+ * Get's default values for backlight, contrast and light sensor from config file.
  *
  * @param bright desired brighness (-1 to use automatic sensor data or value
  *               from config file, -2 to toggle backlight on and off, -3 to
@@ -208,6 +208,7 @@ void OpieScreenSaver::setBacklight ( int bright )
 	Config config ( "apm" );
 	config. setGroup ( m_on_ac ? "AC" : "Battery" );
 	m_backlight_normal = config. readNumEntry ( "Brightness", m_on_ac ? 255 : 127 );
+	int contrast = config. readNumEntry ( "Contrast", 127);
 	m_use_light_sensor = config. readBoolEntry ( "LightSensor", false );
 
 	//qDebug ( "setBacklight: %d (norm: %d) (ls: %d)", bright, m_backlight_normal, m_use_light_sensor ? 1 : 0 );
@@ -235,6 +236,7 @@ void OpieScreenSaver::setBacklight ( int bright )
 	}
 
 	setBacklightInternal ( bright );
+	ODevice::inst ( )-> setDisplayContrast(contrast);
 }
 
 
