@@ -56,7 +56,7 @@ void SerialConfigWidget::load( const Profile& prof ) {
     } else if (rad_flow == 2) {
         m_base->setFlow( IOLayerBase::Software );
     } else {
-         m_base->setFlow( IOLayerBase::None );
+        m_base->setFlow( IOLayerBase::None );
     }
 
     if (rad_parity == 1) {

@@ -2,6 +2,7 @@
 #define PROFILE_EDITOR_DIALOG
 
 #include <qdialog.h>
+#include <opie/otabwidget.h>
 
 #include "profile.h"
 
@@ -46,6 +47,7 @@ private:
     QWidget *m_tabCon, *m_tabTerm;
     ProfileDialogWidget* m_con, *m_term;
     QHBoxLayout *m_layCon, *m_layTerm;
+    OTabWidget *tabWidget;
 };
 
 #endif

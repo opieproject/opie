@@ -6,8 +6,6 @@
 #include <qcombobox.h>
 
 
-#include <opie/otabwidget.h>
-
 #include "profileeditorplugins.h"
 #include "metafactory.h"
 #include "profileeditordialog.h"
@@ -57,7 +55,7 @@ void ProfileEditorDialog::initUI()
     m_con = m_term = 0l;
 
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
-    OTabWidget *tabWidget = new OTabWidget( this );
+    tabWidget = new OTabWidget( this );
     tabWidget->setTabStyle(OTabWidget::TextTab);
     mainLayout->add(tabWidget);
 
@@ -173,9 +171,11 @@ void ProfileEditorDialog::slotConActivated( const QString& str ) {
     delete m_con;
     m_con = m_fact->newConnectionPlugin( str, m_tabCon );
 
-    if (m_con ) {
+    if ( m_con ) {
         m_con->load( m_prof );
         m_layCon->addWidget( m_con );
+    } else {
+        tabWidget->removePage( m_tabCon );
     }
 }
 /*
