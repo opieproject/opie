@@ -126,8 +126,8 @@ public:
 
     void drawBackground( QPainter *p, const QRect &r )
     {
-	//	int backgroundMode = QPixmap::defaultDepth() >= 12 ? 1 : 0;
-	int backgroundMode = 2;
+	int backgroundMode = QPixmap::defaultDepth() >= 12 ? 1 : 0;
+	//int backgroundMode = 2;
 
 	if ( backgroundMode == 1 ) {
 
@@ -142,10 +142,10 @@ public:
 		bgColor = colorGroup().button();
 		QPainter painter( bg );
 
-		painter.fillRect( QRect( 0, 0, width(), height() ), QBrush( white ) );
+		painter.fillRect( QRect( 0, 0, width(), height() ), colorGroup().background().light(110));
 
 		// Overlay the Qtopia logo in the center
-		QImage logo = Resource::loadImage( "qpe-logo" );
+		QImage logo = Resource::loadImage( "qpe-background" );
 		if ( !logo.isNull() )
 		    painter.drawImage( (width() - logo.width()) / 2,
 				       (height() - logo.height()) / 2, logo );
@@ -162,7 +162,7 @@ public:
 		bg = new QPixmap( width(), 9 );
 		QPainter painter( bg );
 		for ( int i = 0; i < 3; i++ ) {
-		    painter.setPen( white );
+		    painter.setPen( colorGroup().background().light(130) );
 		    painter.drawLine( 0, i*3, width()-1, i*3 );
 		    painter.drawLine( 0, i*3+1, width()-1, i*3+1 );
 		    painter.setPen( colorGroup().background().light(105) );
@@ -172,7 +172,7 @@ public:
 	    p->drawTiledPixmap( r, *bg, QPoint( (r.x() + contentsX()) % bg->width(),
 						(r.y() + contentsY()) % bg->height() ) );
 	} else {
-	    p->fillRect( r, QBrush( white ) );
+	    p->fillRect( r, QBrush( colorGroup().background().light(110) ) );
 	}
     }
 
