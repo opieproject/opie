@@ -2,6 +2,22 @@
  * GPLv2 zecke@handhelds.org
  * No WArranty...
  */
+#include "mainwindow.h"
+
+#include "iconview.h"
+#include "filesystem.h"
+
+#include <iface/ifaceinfo.h>
+#include <iface/dirview.h>
+
+#include <opie2/oapplicationfactory.h>
+#include <opie2/otabwidget.h>
+#include <opie2/okeyconfigwidget.h>
+
+
+#include <qpe/resource.h>
+#include <qpe/config.h>
+#include <qpe/ir.h>
 
 #include <qtoolbar.h>
 #include <qtoolbutton.h>
@@ -9,28 +25,20 @@
 #include <qdialog.h>
 #include <qmap.h>
 
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/ir.h>
 
-#include <opie2/oapplicationfactory.h>
-#include <opie2/otabwidget.h>
 
-#include <iface/ifaceinfo.h>
-#include <iface/dirview.h>
 
-#include "iconview.h"
-#include "filesystem.h"
-
-#include "mainwindow.h"
 
 OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<PMainWindow> )
 
 PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
-    : QMainWindow( wid, name, style ), m_cfg("phunkview")
+    : QMainWindow( wid, name, style )
 {
     setCaption( QObject::tr("Opie Eye Caramba" ) );
-    m_cfg.setGroup("Zecke_view" );
+    m_cfg = new Opie::Core::OConfig("phunkview");
+    m_cfg->setGroup("Zecke_view" );
+
+
     /*
      * Initialize ToolBar and IconView
      * And Connect Them
@@ -39,7 +47,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     bar->setHorizontalStretchable( true );
     setToolBarsMovable( false );
 
-    m_view = new PIconView( this, &m_cfg );
+    m_view = new PIconView( this, m_cfg );
     setCentralWidget( m_view );
 
     QToolButton *btn = new QToolButton( bar );
@@ -80,6 +88,11 @@ PMainWindow::~PMainWindow() {
 
 
 void PMainWindow::slotConfig() {
+/*
+ * have a tab with the possible views
+ * a tab for globals image cache size.. scaled loading
+ * and one tab for the  KeyConfigs
+ */
     QDialog dlg(this, 0, true);
     dlg.setCaption( tr("Phunk View - Config" ) );
 
@@ -91,24 +104,35 @@ void PMainWindow::slotConfig() {
     QMap<PDirView*, QWidget*> lst;
 
     for( ; _it != vM->end(); ++_it ) {
-        PDirView *view = (_it.data())(m_cfg);
+        PDirView *view = (_it.data())(*m_cfg);
         PInterfaceInfo *inf =  view->interfaceInfo();
-        QWidget *_wid = inf->configWidget( m_cfg );
+        QWidget *_wid = inf->configWidget( *m_cfg );
         _wid->reparent(wid, QPoint() );
         lst.insert( view, _wid );
         wid->addTab( _wid, QString::null, inf->name() );
     }
 
-    dlg.showMaximized();
-    bool act = ( dlg.exec() == QDialog::Accepted );
+/*
+ * Add the KeyConfigWidget
+ */
+    Opie::Ui::OKeyConfigWidget* keyWid = new Opie::Ui::OKeyConfigWidget( wid, "key config" );
+    keyWid->setChangeMode( Opie::Ui::OKeyConfigWidget::Queue );
+    keyWid->insert( tr("Browser Keyboard Actions"), m_view->manager() );
+    keyWid->load();
+    wid->addTab( keyWid, QString::fromLatin1("AppsIcon" ), tr("Keyboard Configuration") );
+
+
+    bool act = ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted );
 
     QMap<PDirView*, QWidget*>::Iterator it;
     for ( it = lst.begin(); it != lst.end(); ++it ) {
         if ( act )
-            it.key()->interfaceInfo()->writeConfig(it.data(),  m_cfg);
+            it.key()->interfaceInfo()->writeConfig(it.data(),  *m_cfg);
         delete it.key();
     }
 
-    if ( act )
+    if ( act ) {
         m_view->resetView();
+        keyWid->save();
+    }
 }

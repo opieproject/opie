@@ -8,7 +8,6 @@
 
 #include <qvbox.h>
 
-#include <qpe/config.h>
 
 class QIconView;
 class QIconViewItem;
@@ -16,15 +15,30 @@ class QComboBox;
 class PIconViewItem;
 class PDirLister;
 class Ir;
+
+namespace Opie {
+namespace Core{
+    class OConfig;
+}
+namespace Ui {
+    class OKeyConfigManager;
+}
+}
+
 class PIconView : public QVBox {
     Q_OBJECT
     friend class PIconViewItem;
+    enum ActionIds {
+        BeamItem, DeleteItem, ViewItem, InfoItem
+    };
 public:
-    PIconView( QWidget* wid, Config *cfg );
+    PIconView( QWidget* wid, Opie::Core::OConfig *cfg );
     ~PIconView();
     void resetView();
+    Opie::Ui::OKeyConfigManager* manager();
 
 private:
+    void initKeys();
     QString currentFileName(bool &isDir)const;
     void loadViews();
 
@@ -38,6 +52,11 @@ private slots:
     void slotBeam();
     void slotBeamDone( Ir* );
 
+    void slotShowImage();
+    void slotShowImage( const QString& );
+    void slotImageInfo();
+    void slotImageInfo( const QString& );
+
     void slotStart();
     void slotEnd();
 
@@ -50,7 +69,8 @@ private slots:
     void slotThumbInfo(const QString&, const QString&);
     void slotThumbNail(const QString&, const QPixmap&);
 private:
-    Config *m_cfg;
+    Opie::Ui::OKeyConfigManager *m_viewManager;
+    Opie::Core::OConfig *m_cfg;
     QComboBox* m_views;
     QIconView* m_view;
     QString m_path;

@@ -10,11 +10,14 @@
 #include <iface/dirview.h>
 #include <iface/dirlister.h>
 
-#include <qpe/config.h>
+#include <opie2/oconfig.h>
+#include <opie2/okeyconfigwidget.h>
+
 #include <qpe/resource.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/ir.h>
 #include <qpe/qcopenvelope_qws.h>
+
 
 #include <qiconview.h>
 #include <qlabel.h>
@@ -27,6 +30,7 @@
 #include <qstyle.h>
 
 
+using Opie::Ui::OKeyConfigItem;
 
 namespace {
     QPixmap* _dirPix = 0;
@@ -96,7 +100,7 @@ namespace {
 }
 
 
-PIconView::PIconView( QWidget* wid, Config* cfg )
+PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
     : QVBox( wid ), m_cfg( cfg )
 {
     {
@@ -124,6 +128,10 @@ PIconView::PIconView( QWidget* wid, Config* cfg )
     int viewerWidth = dw-style().scrollBarExtent().width();
     m_view->setGridX( viewerWidth-2*m_view->spacing() );
     m_view->setGridY( fontMetrics().height()*2+40 );
+
+
+    initKeys();
+
     loadViews();
     slotViewChanged(  m_views->currentItem() );
 }
@@ -132,6 +140,42 @@ PIconView::~PIconView() {
     {
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refDown()" );
     }
+    m_viewManager->save();
+    delete m_viewManager;
+}
+
+Opie::Ui::OKeyConfigManager* PIconView::manager() {
+    return m_viewManager;
+}
+
+void PIconView::initKeys() {
+    Opie::Ui::OKeyPair::List lst;
+    lst.append( Opie::Ui::OKeyPair::upArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::downArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::leftArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::rightArrowKey() );
+    lst.append( Opie::Ui::OKeyPair::returnKey() );
+
+    m_viewManager = new Opie::Ui::OKeyConfigManager(m_cfg, "View-KeyBoard-Config",
+                                                    lst, false,this, "keyconfig name" );
+    m_viewManager->addKeyConfig( OKeyConfigItem(tr("Beam Current Item") , "beam",
+                                                QString::fromLatin1("beam"), BeamItem,
+                                                Opie::Ui::OKeyPair(Qt::Key_B, Qt::ShiftButton),
+                                                this, SLOT(slotBeam())) );
+    m_viewManager->addKeyConfig( OKeyConfigItem(tr("Delete Current Item"), "delete",
+                                                QString::fromLatin1("trash"), DeleteItem,
+                                                Opie::Ui::OKeyPair(Qt::Key_D, Qt::ShiftButton),
+                                                this, SLOT(slotTrash())) );
+    m_viewManager->addKeyConfig( OKeyConfigItem(tr("View Current Item"), "view",
+                                                QString::fromLatin1("1to1"), ViewItem,
+                                                Opie::Ui::OKeyPair(Qt::Key_V, Qt::ShiftButton),
+                                                this, SLOT(slotShowImage())));
+    m_viewManager->addKeyConfig( OKeyConfigItem(tr("Show Image Info") , "info",
+                                                QString::fromLatin1("DocumentTypeWord"), InfoItem,
+                                                Opie::Ui::OKeyPair(Qt::Key_I, Qt::ShiftButton ),
+                                                this, SLOT(slotImageInfo()) ) );
+    m_viewManager->load();
+    m_viewManager->handleWidget( m_view );
 }
 
 void PIconView::slotDirUp() {
@@ -152,9 +196,11 @@ void PIconView::slotChangeDir(const QString& path) {
     lister->setStartPath(  path );
     m_path = lister->currentPath();
 
+    m_view->setUpdatesEnabled( false );
     m_view->clear();
     addFolders( lister->folders() );
     addFiles( lister->files() );
+    m_view->setUpdatesEnabled( true );
 
     // Also invalidate the cache. We can't cancel the operations anyway
     g_stringPix.clear();
@@ -316,4 +362,17 @@ void PIconView::slotStart() {
 
 void PIconView::slotEnd() {
     m_view->setUpdatesEnabled( true );
+}
+
+void PIconView::slotShowImage() {
+
+}
+void PIconView::slotShowImage( const QString& ) {
+
+}
+void PIconView::slotImageInfo() {
+
+}
+void PIconView::slotImageInfo( const QString& ) {
+
 }

@@ -6,9 +6,17 @@
 #ifndef PHUNK_MAIN_WINDOW_H
 #define PHUNK_MAIN_WINDOW_H
 
+#include <opie2/oconfig.h>
+
 #include <qmainwindow.h>
 
-#include <qpe/config.h>
+
+
+namespace Opie {
+namespace Ui{
+    class OKeyConfigManager;
+}
+}
 
 class PIconView;
 class PMainWindow : public QMainWindow {
@@ -19,8 +27,9 @@ public:
     ~PMainWindow();
 
 private:
-    Config m_cfg;
+    Opie::Core::OConfig *m_cfg;
     PIconView* m_view;
+
 
 private slots:
     void slotConfig();
