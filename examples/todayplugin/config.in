@@ -1,0 +1,5 @@
+  config TODAY_EXAMPLE
+    boolean "example"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    comment "opie today example plugin"
