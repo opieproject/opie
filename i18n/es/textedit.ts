@@ -1,58 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>@default</name>
-    <message>
-        <source>Text Edit</source>
-        <translation>Editor de Textos</translation>
-    </message>
-    <message>
-        <source>Write Failed</source>
-        <translation>Fallo al escribir</translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation>Sin nombre</translation>
-    </message>
-    <message>
-        <source>Text Editor</source>
-        <translation>Editor de Textos</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation>Todo</translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation>Texto</translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation>Permisos</translation>
-    </message>
-    <message>
-        <source>Choose font</source>
-        <translation>Elegir Letra</translation>
-    </message>
-    <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation>¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
-del disco?&lt;BR&gt;¡¡Es &lt;B&gt;irreversible&lt;/B&gt;!!</translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation>Sí</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation>No</translation>
-    </message>
-    <message>
-        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation>Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -105,10 +52,6 @@ del disco?&lt;BR&gt;¡¡Es &lt;B&gt;irreversible&lt;/B&gt;!!</translation>
     <message>
         <source>Start with new file</source>
         <translation>Empezar con Nuevo</translation>
-    </message>
-    <message>
-        <source>About</source>
-        <translation>Acerca de</translation>
     </message>
     <message>
         <source>File</source>
@@ -177,6 +120,79 @@ del disco?&lt;BR&gt;¡¡Es &lt;B&gt;irreversible&lt;/B&gt;!!</translation>
     <message>
         <source>Search Bar Open</source>
         <translation>Barra de búsqueda abierta</translation>
+    </message>
+    <message>
+        <source>Goto Line...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Save 5 min.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished">Editor de Textos</translation>
+    </message>
+    <message>
+        <source>Write Failed</source>
+        <translation type="unfinished">Fallo al escribir</translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation type="unfinished">Sin nombre</translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <translation type="unfinished">Permisos</translation>
+    </message>
+    <message>
+        <source>Choose font</source>
+        <translation type="unfinished">Elegir Letra</translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
+        <translation type="unfinished">¿Seguro que quiere&lt;BR&gt;&lt;B&gt;borrar&lt;/B&gt; el fichero actual
+del disco?&lt;BR&gt;¡¡Es &lt;B&gt;irreversible&lt;/B&gt;!!</translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Sí</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">No</translation>
+    </message>
+    <message>
+        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
+        <translation type="unfinished">Text Edit tiene copyright&lt;BR&gt;2000 Trolltech AS, y&lt;BR&gt;2002 &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;, y está bajo licencia GPL</translation>
+    </message>
+    <message>
+        <source>Textedit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Textedit detected
+you have unsaved changes
+Go ahead and save?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough lines</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

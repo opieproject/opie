@@ -1,57 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>@default</name>
-    <message>
-        <source>Text Edit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Write Failed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unnamed</source>
-        <translation type="unfinished">Nienazwany</translation>
-    </message>
-    <message>
-        <source>Text Editor</source>
-        <translation type="unfinished">Edytor tekstu</translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="unfinished">Uprawnienia</translation>
-    </message>
-    <message>
-        <source>Choose font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished">Tak</translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished">Nie</translation>
-    </message>
-    <message>
-        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>TextEdit</name>
     <message>
         <source>New</source>
@@ -134,10 +82,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation>Edytor tekstu</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>.desktop File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -175,6 +119,78 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     </message>
     <message>
         <source>Search Bar Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Goto Line...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto Save 5 min.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Write Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unnamed</source>
+        <translation type="unfinished">Nienazwany</translation>
+    </message>
+    <message>
+        <source>Permissions</source>
+        <translation type="unfinished">Uprawnienia</translation>
+    </message>
+    <message>
+        <source>Choose font</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
+from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished">Tak</translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished">Nie</translation>
+    </message>
+    <message>
+        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Textedit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Textedit detected
+you have unsaved changes
+Go ahead and save?
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Don&apos;t Save</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not enough lines</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
