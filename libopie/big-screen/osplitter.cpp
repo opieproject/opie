@@ -402,6 +402,8 @@ void OSplitter::removeFromTab( QWidget* wid ) {
 void OSplitter::changeTab() {
     /* if we're the owner of the tab widget */
     if (m_tabWidget ) {
+        raise();
+        show();
         m_tabWidget->setGeometry( frameRect() );
         return;
     }
@@ -414,6 +416,7 @@ void OSplitter::changeTab() {
      */
     OTabWidget *tab;
     if ( m_parentTab ) {
+        hide();
         tab = m_parentTab;
         /* expensive but needed cause we're called from setTabWidget and resizeEvent*/
         if (!m_container.isEmpty() ) {
@@ -545,10 +548,8 @@ void OSplitter::setTabWidget( OTabWidget* wid) {
         changeVBox();
 
     /* our own crap is added and children from change* */
-    if (m_parentTab ) {
-        delete tab;
-        delete box;
-    }
+    delete tab;
+    delete box;
 }
 
 
