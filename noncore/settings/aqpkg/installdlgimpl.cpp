@@ -394,11 +394,9 @@ void InstallDlgImpl :: displayAvailableSpace( const QString &text )
 
         if ( !mult ) mult = 1;
         if ( !div ) div = 1;
-//        long total = totalBlocks * mult / div;
         long avail = availBlocks * mult / div;
-//        long used = total - avail;
 
-        space.sprintf( "%ld Kb", avail );
+        space = tr( "%1 Kb" ).arg( avail );
     }
     else
         space = tr( "Unknown" );

@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -30,15 +30,18 @@
 #include "package.h"
 #include "global.h"
 
+#include <qobject.h>
+
 Package::Package( QString &name )
 {
     packageName = name;
 
-    version = "N/A";
-    description = "N/A";
-    packageSize = "N/A";
-    section = "N/A";
-    
+    QString tempstr = QObject::tr( "N/A" );
+    version = tempstr;
+    description = tempstr;
+    packageSize = tempstr;
+    section = tempstr;
+
     localPackage = 0;
     installed = false;
     packageStoredLocally = false;
@@ -51,11 +54,12 @@ Package::Package( char *name )
 {
     packageName = name;
 
-    version = "N/A";
-    description = "N/A";
-    packageSize = "N/A";
-    section = "N/A";
-    
+    QString tempstr = QObject::tr( "N/A" );
+    version = tempstr;
+    description = tempstr;
+    packageSize = tempstr;
+    section = tempstr;
+
     localPackage = 0;
     installed = false;
     packageStoredLocally = false;
@@ -71,11 +75,12 @@ Package::~Package()
 
 QString Package :: toString()
 {
-    QString ret = "Package - " + getPackageName() +
-           "\n              version - " + getVersion();
+    QString ret = QObject::tr( "Package - %1\n              version - %2" ).
+                    arg( getPackageName() ).
+                    arg( getVersion() );
 
     if ( localPackage )
-        ret += "\n              inst version - " + localPackage->getVersion();
+        ret.append( QObject::tr( "\n              inst version - %1" ).arg( localPackage->getVersion() ) );
 
 
     return ret;
@@ -87,7 +92,7 @@ void Package :: setStatus( const QString &s )
     int two, three;
 
     status = s.simplifyWhiteSpace( );
-    
+
     two = status.find( " " ); // find second column
     three = status.find( " ", two + 1 ); // find third column
 

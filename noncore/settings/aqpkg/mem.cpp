@@ -99,7 +99,7 @@ void DumpUnfreed()
       AllocList::iterator i;
       long totalSize = 0;
       char buf[1024];
-
+      // Debug output, okay to leave untranslated
       for(i = allocList.begin(); i != allocList.end(); i++) {
 	      sprintf(buf, "%-15s:  LINE %ld,  ADDRESS %ld %ld unfreed",
 		      (*i)->file, (*i)->line, (*i)->address, (*i)->size);
