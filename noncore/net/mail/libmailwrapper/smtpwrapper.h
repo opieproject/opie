@@ -18,6 +18,7 @@ struct mailimf_field;
 struct mailimf_mailbox;
 struct mailmime;
 struct mailimf_address_list;
+class progressMailSend;
 
 class SMTPwrapper : public QObject
 {
@@ -29,6 +30,7 @@ public:
     void sendMail(const Mail& mail,bool later=false );
     void flushOutbox(SMTPaccount*smtp);
 
+    static progressMailSend*sendProgress;
 protected:
     mailimf_mailbox *newMailbox(const QString&name,const QString&mail );
     mailimf_fields *createImfFields(const Mail &mail );
@@ -52,7 +54,7 @@ protected:
     static char *getFrom( mailmime *mail );
     static char *getFrom( mailimf_field *ffrom);
     static mailimf_field *getField( mailimf_fields *fields, int type );
-    static int smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccount *smtp );
+    int smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccount *smtp );
 
     void storeMail(mailmime*mail, const QString&box);
     Settings *settings;

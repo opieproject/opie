@@ -15,6 +15,9 @@
 #include "logindialog.h"
 #include "mailtypes.h"
 #include "defines.h"
+#include "sendmailprogress.h"
+
+progressMailSend*SMTPwrapper::sendProgress = 0;
 
 SMTPwrapper::SMTPwrapper( Settings *s )
     : QObject()
@@ -520,7 +523,10 @@ void SMTPwrapper::readFromFile(const QString&file, char **data, size_t *size )
 
 void SMTPwrapper::progress( size_t current, size_t maximum )
 {
-//    qDebug( "Current: %i of %i", current, maximum );
+    if (SMTPwrapper::sendProgress) {
+        SMTPwrapper::sendProgress->setSingleMail(current, maximum );
+        qDebug("%u of %u",current,maximum);
+    }
 }
 
 void SMTPwrapper::storeMail(char*mail, size_t length, const QString&box)
@@ -645,9 +651,16 @@ void SMTPwrapper::sendMail(const Mail&mail,bool later )
     if ( mimeMail == NULL ) {
         qDebug( "sendMail: error creating mime mail" );
     } else {
+        sendProgress = new progressMailSend();
+        sendProgress->showMaximized();
+        sendProgress->show();
+        qApp->processEvents(10);
         smtpSend( mimeMail,later,smtp);
         mailmime_free( mimeMail );
         qDebug("Clean up done");
+        sendProgress->hide();
+        delete sendProgress;
+        sendProgress = 0;
     }
 }
 
@@ -673,6 +686,7 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
     rcpts = createRcptList( fields );
     ffrom = getField(fields, MAILIMF_FIELD_FROM );
     from = getFrom(ffrom);
+    
     qDebug("Size: %i vs. %i",length,strlen(data));
     if (rcpts && from) {
         return smtpSend(from,rcpts,data,strlen(data),smtp );

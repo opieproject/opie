@@ -20,7 +20,8 @@ HEADERS         = defines.h \
         statuswidget.h \
         smtpwrapper.h \
         genericwrapper.h \
-         mboxwrapper.h
+         mboxwrapper.h \
+		sendmailprogress.h 
                
 SOURCES         = main.cpp \
                opiemail.cpp \
@@ -42,7 +43,8 @@ SOURCES         = main.cpp \
          statuswidget.cpp \
         smtpwrapper.cpp \
         genericwrapper.cpp \
-        mboxwrapper.cpp
+        mboxwrapper.cpp \
+		sendmailprogress.cpp
                
 INTERFACES     = editaccountsui.ui \
                selectmailtypeui.ui \
@@ -54,7 +56,8 @@ INTERFACES     = editaccountsui.ui \
                logindialogui.ui \
                composemailui.ui \
         settingsdialogui.ui \
-        statuswidgetui.ui
+        statuswidgetui.ui \
+	sendmailprogressui.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
 
