@@ -323,18 +323,21 @@ void Zaurus::buzzer ( int sound )
         || d->m_model == Model_Zaurus_SLB600 ){
 
         switch ( sound ){
-        case SHARP_BUZ_TOUCHSOUND:
+        case SHARP_BUZ_TOUCHSOUND: {
             static Sound touch_sound("touchsound");
             snd = &touch_sound;
+	}
             break;
-        case SHARP_BUZ_KEYSOUND:
+        case SHARP_BUZ_KEYSOUND: {
             static Sound key_sound( "keysound" );
             snd = &key_sound;
+	}
             break;
         case SHARP_BUZ_SCHEDULE_ALARM:
-        default:
+        default: {
             static Sound alarm_sound("alarm");
             snd = &alarm_sound;
+	}	    
             break;
         }
     }
