@@ -1,0 +1,9 @@
+Package: opie-networksettingsplugin2-usb
+Files: plugins/networksettings2/libusb.so*
+Priority: optional
+Section: opie/settings
+Maintainer: Wim Delvaux <wimpie@handhelds.org>
+Architecture: arm
+Depends: opie-networksettings2, libopiecore2, libopienet2
+Description: Network settings usb plugin.
+Version: $QPE_VERSION$EXTRAVERSION
