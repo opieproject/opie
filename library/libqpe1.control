@@ -4,6 +4,6 @@ Priority: required
 Section: opie/system
 Maintainer:  Project Opie <opie@handhelds.org>
 Architecture: arm
-Depends: libqte2 (>=2.3.4-beta4), qte-fonts (>=$QTE_VERSION), libpng2
+Depends: libqte2 (>=2.3.4-beta4), qte-fonts (>=$QTE_VERSION)
 Description: libqpe, base qtopia/opie library.
 Version: $QPE_VERSION$EXTRAVERSION
