@@ -58,15 +58,6 @@ MainWindow :: MainWindow()
 {
     setCaption( tr( "AQPkg - Package Manager" ) );
 
-#ifdef QWS
-    // read download directory from config file
-    Config cfg( "aqpkg" );
-    cfg.setGroup( "settings" );
-    currentlySelectedServer = cfg.readEntry( "selectedServer", "local" );
-    showJumpTo = cfg.readBoolEntry( "showJumpTo", "true" );
-
-#endif
-
     // Create UI widgets
     initMainWidget();
     initProgressWidget();
@@ -88,11 +79,45 @@ MainWindow :: MainWindow()
     QWhatsThis::add( findEdit, tr( "Type the text to search for here." ) );
     findBar->setStretchableWidget( findEdit );
     connect( findEdit, SIGNAL( textChanged( const QString & ) ), this, SLOT( findPackage( const QString & ) ) );
+
+    // Quick jump toolbar
+    jumpBar = new QPEToolBar( this );
+    addToolBar( jumpBar, QMainWindow::Top, true );
+    jumpBar->setHorizontalStretchable( true );
+    QWidget *w = new QWidget( jumpBar );
+    jumpBar->setStretchableWidget( w );
     
+    QGridLayout *layout = new QGridLayout( w );
+    //QVBoxLayout *vbox = new QVBoxLayout( w, 0, -1 );
+    //QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1 );
+    //QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1 );
+
+    char text[2];
+    text[1] = '\0';
+    for ( int i = 0 ; i < 26 ; ++i )
+    {
+        text[0] = 'A' + i;
+        LetterPushButton *b = new LetterPushButton( text, w );
+        connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
+        layout->addWidget( b, i / 13, i % 13);
+/*
+        if ( i < 13 )
+            hbox3->addWidget( b );
+        else
+            hbox4->addWidget( b );
+*/
+    }
+    
+    QAction *a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, w, 0 );
+    a->setWhatsThis( tr( "Click here to hide the Quick Jump toolbar." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( hideJumpBar() ) );
+    a->addTo( jumpBar );
+    jumpBar->hide();
+        
     // Packages menu
     QPopupMenu *popup = new QPopupMenu( this );
     
-    QAction *a = new QAction( tr( "Update lists" ), Resource::loadPixmap( "aqpkg/update" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Update lists" ), Resource::loadPixmap( "aqpkg/update" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to update package lists from servers." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( updateServer() ) );
     a->addTo( popup );
@@ -168,6 +193,14 @@ MainWindow :: MainWindow()
     actionFindNext->addTo( popup );
     actionFindNext->addTo( findBar );
 
+
+    popup->insertSeparator();
+
+    a = new QAction( tr( "Quick Jump keypad" ), Resource::loadPixmap( "aqpkg/keyboard" ),  QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Click here to display/hide keypad to allow quick movement through the package list." ) );
+    connect( a, SIGNAL( activated() ), this, SLOT( displayJumpBar() ) );
+    a->addTo( popup );
+    
     mb->insertItem( tr( "View" ), popup );
 
     
@@ -237,26 +270,6 @@ void MainWindow :: initMainWidget()
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
     hbox1->addWidget( l );
     hbox1->addWidget( serversList );
-
-
-    QHBoxLayout *hbox3 = new QHBoxLayout( vbox, -1 );
-    QHBoxLayout *hbox4 = new QHBoxLayout( vbox, -1 );
-
-    if ( showJumpTo )
-    {    
-        char text[2];
-        text[1] = '\0';
-        for ( int i = 0 ; i < 26 ; ++i )
-        {
-                text[0] = 'A' + i;
-                LetterPushButton *b = new LetterPushButton( text, networkPkgWindow );
-                connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
-                if ( i < 13 )
-                hbox3->addWidget( b );
-                else
-                hbox4->addWidget( b );
-        }
-    }
     
     vbox->addWidget( packagesList );
 
@@ -279,6 +292,15 @@ void MainWindow :: initProgressWidget()
 
 void MainWindow :: init()
 {
+#ifdef QWS
+    // read download directory from config file
+    Config cfg( "aqpkg" );
+    cfg.setGroup( "settings" );
+    currentlySelectedServer = cfg.readEntry( "selectedServer", "local" );
+//    showJumpTo = cfg.readBoolEntry( "showJumpTo", "true" );
+
+#endif
+
     stack->raiseWidget( progressWindow );
     
     mgr = new DataManager();
@@ -353,6 +375,11 @@ void MainWindow :: displayFindBar()
     findEdit->setFocus();
 }
 
+void MainWindow :: displayJumpBar()
+{
+    jumpBar->show();
+}
+
 void MainWindow :: repeatFind()
 {
     searchForPackage( findEdit->text() );
@@ -367,6 +394,11 @@ void MainWindow :: findPackage( const QString &text )
 void MainWindow :: hideFindBar()
 {
     findBar->hide();
+}
+
+void MainWindow :: hideJumpBar()
+{
+    jumpBar->hide();
 }
 
 void MainWindow :: displayAbout()

@@ -48,6 +48,7 @@ private:
     QWidgetStack *stack;
     
     QPEToolBar *findBar;
+    QPEToolBar *jumpBar;
     QLineEdit  *findEdit;
     QAction    *actionFindNext;
     QAction    *actionFilter;
@@ -104,9 +105,11 @@ public slots:
 //    void setDocument( const QString &doc );
     void displayHelp();
     void displayFindBar();
+    void displayJumpBar();
     void repeatFind();
     void findPackage( const QString & );
     void hideFindBar();
+    void hideJumpBar();
     void displayAbout();
     void displaySettings();
     void filterUninstalledPackages();
