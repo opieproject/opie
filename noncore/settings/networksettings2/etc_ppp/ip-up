@@ -1,0 +1,71 @@
+#!/bin/sh
+exec 2> /tmp/IPL
+set -x
+#
+# This script is run by the pppd after the link is established.
+# This script is run by the pppd _after_ the link is brought down.
+#
+# variable DIR determines if it is run after establish (up) or
+# after down (down)
+#
+# It uses run-parts to run scripts in /etc/ppp/ip-$DIR.d
+#
+# This script is called with the following arguments:
+#    Arg  Name                          Example
+#    $1   Interface name                ppp0
+#    $2   The tty                       ttyS1
+#    $3   The link speed                38400
+#    $4   Local IP number               12.34.56.78
+#    $5   Peer  IP number               12.34.56.99
+#    $6   Optional ``ipparam'' value    foo
+
+# The  environment is cleared before executing this script
+# so the path must be reset
+PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin
+export PATH
+
+case $0 in
+  *ip-up*)
+    DIR=up
+    ;;
+  *ip-down*)
+    DIR=down
+    ;;
+esac
+
+# These variables are for the use of the scripts run by run-parts
+PPP_IFACE="$1"
+PPP_TTY="$2"
+PPP_SPEED="$3"
+PPP_LOCAL="$4"
+PPP_REMOTE="$5"
+PPP_IPPARAM="$6"
+export PPP_IFACE PPP_TTY PPP_SPEED PPP_LOCAL PPP_REMOTE PPP_IPPARAM
+
+# as an additional convenience, $PPP_TTYNAME is set to the tty name,
+# stripped of /dev/ (if present) for easier matching.
+PPP_TTYNAME=`/usr/bin/basename "$2"`
+export PPP_TTYNAME 
+
+# If /var/log/ppp-ipupdown.log exists use it for logging.
+if [ -e /var/log/ppp-ipupdown.log ]; then
+  exec > /var/log/ppp-ipupdown.log 2>&1
+fi
+
+# This script can be used to override the .d files supplied by other packages.
+if [ -x /etc/ppp/ip-${DIR}.local ]; then
+  exec /etc/ppp/ip-${DIR}.local
+fi
+
+run-parts  -a "$1" -a "$2" -a "$3" -a "$4" -a "$5" -a "$6" \
+		/etc/ppp/ip-${DIR}.d
+
+if [ "$DIR" = "up" ]
+then
+  # if pon was called with the "quick" argument, stop pppd
+  if [ -e /var/run/ppp-quick ]; then
+    rm /var/run/ppp-quick
+    wait
+    kill $PPPD_PID
+  fi
+fi
