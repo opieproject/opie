@@ -417,7 +417,7 @@ void Clock::timerEvent( QTimerEvent *e )
         alarmOffBtn->setText( tr( "Alarm Is Off" ) );
         alarmBool=FALSE;
         snoozeBtn->hide();
-        setCaption("Clock: Alarm was missed.");
+        setCaption(tr("Clock: Alarm was missed."));
     }
 }
 
