@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.5 2002-12-14 19:13:32 mjm Exp $ */
+/* $Id: cardmode.hh,v 1.6 2002-12-16 17:57:51 mjm Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -6,9 +6,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
 
 extern "C"
 {

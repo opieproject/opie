@@ -1,4 +1,4 @@
-/* $Id: sniff.hh,v 1.3 2002-12-11 13:10:26 mickeyl Exp $ */
+/* $Id: sniff.hh,v 1.4 2002-12-16 17:57:51 mjm Exp $ */
 
 #ifndef SNIFF_HH
 #define SNIFF_HH
@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>

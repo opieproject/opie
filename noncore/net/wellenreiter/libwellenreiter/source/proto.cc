@@ -1,11 +1,12 @@
 /*
  * Communication protocol
  *
- * $Id: proto.cc,v 1.3 2002-12-14 19:13:32 mjm Exp $
+ * $Id: proto.cc,v 1.4 2002-12-16 17:57:51 mjm Exp $
  */
 
 #include "proto.hh"
 #include "sock.hh"
+#include "log.hh"
 
 /* Send found network to GUI */
 int send_network_found (const char *guihost, int guiport, void *structure)
