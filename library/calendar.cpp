@@ -20,6 +20,7 @@
 #include "calendar.h"
 
 #include <qdatetime.h>
+#include <qobject.h>
 
 /*! \class Calendar calendar.html
 
@@ -37,7 +38,7 @@
 QString Calendar::nameOfMonth( int m )
 {
     QDate d;
-    return d.monthName( m );
+    return QObject::tr( d.monthName( m ) );
 }
 
 /*!
@@ -47,7 +48,7 @@ QString Calendar::nameOfMonth( int m )
 QString Calendar::nameOfDay( int d )
 {
     QDate dt;
-    return dt.dayName( d );
+    return QObject::tr( dt.dayName( d ) );
 }
 
 /*! \obsolete */
