@@ -42,7 +42,7 @@ polaczenie.</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Blad protokolu: Id Wiadomosci %1 znalezione zamiast oczekiwanej wiadomosci o aktualizacji.</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
@@ -206,7 +206,7 @@ sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished"></translation>
+        <translation>Podnies z dzwonkiem</translation>
     </message>
     <message>
         <source>Request shared session</source>
@@ -226,7 +226,7 @@ sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Wspolczynnik Skali</translation>
     </message>
     <message>
         <source>Encodings</source>
@@ -246,7 +246,7 @@ sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiuj kodowanie prostokata</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
@@ -254,7 +254,7 @@ sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Przelacz maskowanie hasla</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
@@ -270,11 +270,11 @@ sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Opoznienie pomiedzy zadaniami aktualizacji z serwera</translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation type="unfinished"></translation>
+        <translation>Zadaj, zeby serwer VNC transferowal 8 bitowy kolor</translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
@@ -286,7 +286,7 @@ sprobuj pozniej.</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>Wlacz transmitowanie identycznych prostokatow jako odnosniki do istniejacych danych</translation>
     </message>
 </context>
 </TS>
