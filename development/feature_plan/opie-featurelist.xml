@@ -39,8 +39,12 @@ Cornelius Schumacher <schumacher@kde.org>.
 and with the right size for big screens.</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
-  <feature status="todo" target="1.2" >
+  <feature status="todo" target="1.4" >
    <summary>Icon Themes</summary>
+   <responsible email="opie-devel@handhelds.org" name="Open" />
+  </feature>
+  <feature status="todo" target="1.4" >
+   <summary>merge with Qtopia 1.7 if possible</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
  </category>
@@ -64,6 +68,14 @@ and with the right size for big screens.</summary>
 </summary>
    <responsible email="" name="" />
   </feature>
+  <feature status="todo" target="1.0.2" >
+   <summary>Fix indication of starting apps to have the same support as in 1.0.1</summary>
+   <responsible email="opie-devel@handhelds.org" name="Open" />
+  </feature>
+  <feature status="todo" target="1.0.2" >
+   <summary>Tune scanning of documents on resume. Hey no kidding I ( zecke ) don't care for this and I would ship Opie 1.0.2 without any tuning so some one need to stand up and do it</summary>
+   <responsible email="opie-devel@handhelds.org" name="Open" />
+  </feature>
  </category>
  <category name="Addressbook" />
  <category name="All" >
@@ -76,7 +88,7 @@ and with the right size for big screens.</summary>
 both X11 and BigScreen Qt/E to look and behave better on bigger screens</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
-  <feature status="todo" target="1.2" >
+  <feature status="todo" target="1.4" >
    <summary>security considerations and flaw search
 
 -Search for memcopies, printf, snprinft, strcat, and replace with their n functions
@@ -125,7 +137,7 @@ Still need to figure out how to the Child relation best
 </summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
-  <feature status="todo" target="1.2" >
+  <feature status="todo" target="1.4" >
    <summary>Rewrite ODevice
 
 Add a level inbetween ODevice public interface and implementation. ODevice is the only who will access ODevicePrivate and we will call into it. This way we can
@@ -133,18 +145,18 @@ add new 'virtual' functions without sacrifing BC and not using the ugly virtual 
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
   <category name="PIM" >
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Database switch.
 Rewrite Categories, AppLnk, DocLnk to use a database backend. </summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Create import and export application for PIM data
 
 Allow easy exporting of all contacts to mobile phone using obex/obexftp</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Implement a peer to peer backend locking and communication
 and export a QSignal* to the user of the api to inform for update.
 
@@ -154,18 +166,18 @@ QPE/PIM/xyz removed(backend-name, uid )
 QPE/PIM/xyz modified(backend-name, uid, optional data )</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>X-Ref and selection widgets for Database
 
 Connection between address book &amp; calendar, so you can set a calendar 
 event location as an address book entry.</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Datebook2 based on the ODatebookAccess</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Evaluate the Qtopia PIM like painting and attributes in Records. better have the
 attribute inside the access frontend
 
@@ -174,12 +186,12 @@ attribute inside the access frontend
 </summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Faster drawing and loading. Common XML mmaped loading
 Custom drawing and only if necessary</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Allow multiple backends and split private/public into the backends. Have app for configuring it. WHat is private and what public. Allow moving records between the
 backends</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
@@ -188,15 +200,15 @@ backends</summary>
     <summary>Opie Outliner based on the OTodoAccess backend</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>Notes API</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>better sync applications</summary>
     <responsible email="opie-devel@handhelds.org" name="Open" />
    </feature>
-   <feature status="todo" target="1.2" >
+   <feature status="todo" target="PIM" >
     <summary>more addressbook attributes
 
 Latitude &amp; longitude fields in addressbook entries. (Which could then be 
@@ -230,13 +242,13 @@ should go to the settings tab and access methods for them to libopie(2)</summary
   </feature>
  </category>
  <category name="Development" >
-  <feature status="todo" target="1.0.2" >
+  <feature status="todo" target="1.0.3" >
    <summary>Create a Knoppix development CD</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
-  <feature status="todo" target="1.0.2" >
+  <feature status="inprogress" target="1.0.2" >
    <summary>Create more example applications</summary>
-   <responsible email="" name="" />
+   <responsible email="zecke@handhelds.org" name="zecke" />
   </feature>
  </category>
  <category name="OpieOffice" >
@@ -276,7 +288,7 @@ Opie presentation maybe a svg capable viewer?</summary>
  </category>
  <category name="Todolist" />
  <category name="Datebook" >
-  <feature status="todo" target="1.0.2" >
+  <feature status="todo" target="1.2" >
    <summary>Fix problems with events prior to 1. January 1970 aka negative unix time. Don't interpret it as -1</summary>
    <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
@@ -290,7 +302,7 @@ Opie presentation maybe a svg capable viewer?</summary>
   </feature>
  </category>
  <category name="Applets" >
-  <feature status="todo" target="1.2" >
+  <feature status="todo" target="1.4" >
    <summary>Write a decent applet container which shows only &quot;modified&quot; applets (look e.g. at Windows here :)</summary>
    <responsible email="" name="" />
   </feature>
@@ -300,13 +312,13 @@ Opie presentation maybe a svg capable viewer?</summary>
   </feature>
  </category>
  <category name="OSearch" >
-  <feature status="todo" target="1.0.2" >
+  <feature status="todo" target="1.2" >
    <summary>Scale icons</summary>
-   <responsible email="" name="" />
+   <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
-  <feature status="todo" target="1.0.2" >
+  <feature status="todo" target="1.2" >
    <summary>Use less ui spacing in the upper half of the screen</summary>
-   <responsible email="" name="" />
+   <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
  </category>
  <category name="Opie-Console" >
@@ -319,6 +331,12 @@ Opie presentation maybe a svg capable viewer?</summary>
   <feature status="todo" target="BigScreen" >
    <summary>Make it less ugly</summary>
    <responsible email="" name="" />
+  </feature>
+ </category>
+ <category name="InputMethods" >
+  <feature status="inprogress" target="NewApps" >
+   <summary>Add dasher</summary>
+   <responsible email="opie-devel@handhelds.org" name="Open" />
   </feature>
  </category>
 </features>
