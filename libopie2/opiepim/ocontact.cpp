@@ -490,7 +490,9 @@ QString OContact::toRichText() const
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
 		    
-	    }
+	    } else
+		    text += "<br>";
+
 	    if ( !(value = businessCity()).isEmpty() ) {
 		    marker = true;
 		    text += Qtopia::escapeString(value);
@@ -509,6 +511,9 @@ QString OContact::toRichText() const
 		    text += "<br>" + Qtopia::escapeString(value);
 		    if ( state )
 			    text += ", " + Qtopia::escapeString(state);
+	    } else if ( !state.isEmpty() ){
+		    text += "<br>" + Qtopia::escapeString(state);
+		    marker = true;
 	    }
 	    if ( !(value = businessZip()).isEmpty() ){
 		    text += " " + Qtopia::escapeString(value);
@@ -579,7 +584,8 @@ QString OContact::toRichText() const
 	    if ( !(value = homeZip()).isEmpty() ){
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
-	    }
+	    } else
+		    text += "<br>";
 
 	    if ( !(value = homeCity()).isEmpty() ) {
 		    marker = true;
@@ -599,6 +605,9 @@ QString OContact::toRichText() const
 		    text += "<br>" + Qtopia::escapeString(value);
 		    if ( state )
 			    text += ", " + Qtopia::escapeString(state);
+	    } else if ( !state.isEmpty() ){
+		    text += "<br>" + Qtopia::escapeString(state);
+		    marker = true;
 	    }
 	    if ( !(value = homeZip()).isEmpty() ){
 		    text += " " + Qtopia::escapeString(value);
