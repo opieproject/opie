@@ -154,7 +154,7 @@ Der Player wird beendet.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ansicht</translation>
     </message>
     <message>
         <source>Full Screen</source>
@@ -248,7 +248,7 @@ wirklich löschen?</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>Skins</translation>
     </message>
     <message>
         <source>Path</source>

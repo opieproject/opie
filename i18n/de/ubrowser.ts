@@ -4,15 +4,15 @@
     <name>MainView</name>
     <message>
         <source>uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>uBrowser</translation>
     </message>
     <message>
         <source> - uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>- uBrowser</translation>
     </message>
     <message>
         <source>%1 - uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 - uBrowser</translation>
     </message>
 </context>
 <context>

@@ -24,7 +24,7 @@
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished">Nochmals tun</translation>
+        <translation>Wiederherstellen</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -48,7 +48,7 @@
     </message>
     <message>
         <source>&amp;Italic</source>
-        <translation type="unfinished">&amp;Schräg</translation>
+        <translation>&amp;Kursiv</translation>
     </message>
     <message>
         <source>Underline</source>
@@ -60,23 +60,23 @@
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished">Links</translation>
+        <translation>Links</translation>
     </message>
     <message>
         <source>Center</source>
-        <translation type="unfinished">Zentriert</translation>
+        <translation>Zentriert</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished">Rechts</translation>
+        <translation>Rechts</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished">Voll</translation>
+        <translation>Block</translation>
     </message>
     <message>
         <source>Rich Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Rich Text Editor</translation>
     </message>
     <message>
         <source>Unnamed</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>&amp;Redo</source>
-        <translation type="unfinished">&amp;Nochmal tun</translation>
+        <translation>&amp;Wiederherstellen</translation>
     </message>
     <message>
         <source>Cu&amp;t</source>
@@ -107,7 +107,7 @@
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished">Löschen</translation>
+        <translation>Löschen</translation>
     </message>
     <message>
         <source>Select All</source>

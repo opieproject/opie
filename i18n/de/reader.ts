@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>&lt;Nothing&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Nichts&gt;</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -170,8 +170,8 @@
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished">Zweifach/Einfach
-Tasten</translation>
+        <translation>Zweifach/Einfach
+tippen</translation>
     </message>
     <message>
         <source>Find</source>
@@ -219,8 +219,8 @@ to dialogs</source>
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished">Zweifach/Einfach
-Tasten</translation>
+        <translation>Zweifach/Einfach
+tippen</translation>
     </message>
     <message>
         <source>Dictionary</source>
@@ -229,7 +229,8 @@ Tasten</translation>
     <message>
         <source>Swap Tap
 Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Tippaktion
+vertauschen</translation>
     </message>
 </context>
 <context>
@@ -252,7 +253,7 @@ Actions</source>
     </message>
     <message>
         <source>Reparagraph</source>
-        <translation type="unfinished"></translation>
+        <translation>Absätze ermitteln</translation>
     </message>
     <message>
         <source>Double Space</source>
@@ -268,7 +269,7 @@ Actions</source>
     </message>
     <message>
         <source>Full Justify</source>
-        <translation type="unfinished"></translation>
+        <translation>Voll ausrichten</translation>
     </message>
     <message>
         <source>Text</source>
@@ -284,12 +285,14 @@ Actions</source>
     <message>
         <source>Page
 Overlap</source>
-        <translation type="unfinished"></translation>
+        <translation>Seiten
+Überschneidung</translation>
     </message>
     <message>
         <source>Graphics
 Zoom</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafik
+Zoom</translation>
     </message>
     <message>
         <source>Margin</source>
@@ -298,16 +301,18 @@ Zoom</source>
     <message>
         <source>Paragraph
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Absatz
+Abstand</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeilen-
+abstand</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished">Kodierung</translation>
+        <translation>Kodierung</translation>
     </message>
     <message>
         <source>Font</source>
@@ -365,7 +370,7 @@ Leading</source>
     </message>
     <message>
         <source>Single bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Einfache Leiste</translation>
     </message>
     <message>
         <source>Menu/tool bar</source>
@@ -373,7 +378,7 @@ Leading</source>
     </message>
     <message>
         <source>Multiple bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Mehrere Leisten</translation>
     </message>
     <message>
         <source>Top</source>
@@ -416,11 +421,11 @@ Leading</source>
     </message>
     <message>
         <source>Depluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Depluck</translation>
     </message>
     <message>
         <source>Dejpluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejpluck</translation>
     </message>
     <message>
         <source>Continuous</source>
@@ -432,7 +437,7 @@ Leading</source>
     </message>
     <message>
         <source>Plucker</source>
-        <translation type="unfinished"></translation>
+        <translation>Plucker</translation>
     </message>
 </context>
 <context>
@@ -494,7 +499,7 @@ Leading</source>
     </message>
     <message>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Locale</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -587,7 +592,7 @@ Leading</source>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation>Doppel/Singel Touch</translation>
+        <translation>Doppelt/Einfach tippen</translation>
     </message>
     <message>
         <source>Annotation</source>
@@ -743,7 +748,7 @@ Leading</source>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausiere Absatz</translation>
     </message>
     <message>
         <source>Set Encoding</source>
@@ -759,7 +764,7 @@ Leading</source>
     </message>
     <message>
         <source>Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Reader</translation>
     </message>
 </context>
 <context>

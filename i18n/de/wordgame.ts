@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>AI3: Smart AI player</source>
-        <translation type="unfinished"></translation>
+        <translation>KI3: Kluger KI Spieler</translation>
     </message>
     <message>
         <source>Rules</source>

@@ -57,7 +57,7 @@ wenn sie noch in der Gruppe ist.</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiter</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
@@ -65,14 +65,14 @@ wenn sie noch in der Gruppe ist.</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished">Programm</translation>
+        <translation>Programm</translation>
     </message>
 </context>
 <context>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiter Manager</translation>
     </message>
     <message>
         <source>Hierarchy</source>

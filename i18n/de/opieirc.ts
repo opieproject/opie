@@ -20,11 +20,11 @@
     </message>
     <message>
         <source>Query</source>
-        <translation type="unfinished"></translation>
+        <translation>Abfrage</translation>
     </message>
     <message>
         <source>Ping</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping</translation>
     </message>
     <message>
         <source>Version</source>
@@ -32,7 +32,7 @@
     </message>
     <message>
         <source>Whois</source>
-        <translation type="unfinished"></translation>
+        <translation>WerIst</translation>
     </message>
     <message>
         <source>Disconnected</source>
@@ -62,39 +62,39 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Beitritt zu nicht existierenden Kanal - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Person Kanal bereits beigetreten - unsynchronisiert?</translation>
     </message>
     <message>
         <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Du bist dem Kanal bereits beigetreten - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Scheidende Person nicht gefunden - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Zu verlassenden Kanal nicht gefunden - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanalnachricht mit unbekanntem Absender</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>PRIVMSG von unbekanntem Typ erhalten</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
+        <translation>Spitznamen Änderung einer unbekannten Person</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Person gegangen - unsynchronisiert?</translation>
     </message>
     <message>
         <source> changed topic to </source>
@@ -102,7 +102,7 @@
     </message>
     <message>
         <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekanntes Kanalthema - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Received a CTCP PING from </source>
@@ -114,11 +114,11 @@
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION mit unbekannter Person - unsynchronisiert?</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION mit unbekanntem Kanal - unsynchronisiert?</translation>
     </message>
     <message>
         <source>CTCP ACTION with bad recipient</source>
@@ -130,7 +130,7 @@
     </message>
     <message>
         <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moduswechsel mit unbekannter Person - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Mode change with unknown flag</source>
@@ -138,7 +138,7 @@
     </message>
     <message>
         <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Moduswechsel mit unbekanntem Kanal - unsynchronisiert?</translation>
     </message>
     <message>
         <source>User modes not supported yet</source>
@@ -158,11 +158,11 @@
     </message>
     <message>
         <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannte Person rausgeworfen - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Kanal rausgeworfen - unsynchronisiert?</translation>
     </message>
     <message>
         <source>Server message with unknown channel</source>
@@ -244,7 +244,7 @@
     <name>IRCServerEditor</name>
     <message>
         <source>Profile name :</source>
-        <translation>Profil Name:</translation>
+        <translation>Profilname:</translation>
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
@@ -339,7 +339,7 @@ enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
     <name>IRCServerList</name>
     <message>
         <source>Serverlist Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverliste</translation>
     </message>
     <message>
         <source>Please choose a server profile</source>
@@ -476,18 +476,18 @@ enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
     </message>
     <message>
         <source>Description of the tab&apos;s content</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhaltsbeschreibung dieses Reiters</translation>
     </message>
     <message>
         <source>Close this tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Reiter schließen</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>IRC Client</source>
-        <translation>IRC Klient</translation>
+        <translation>IRC Anwendung</translation>
     </message>
     <message>
         <source>Server connections, channels, queries and other things will be placed here</source>

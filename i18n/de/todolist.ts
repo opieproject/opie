@@ -34,7 +34,7 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgaben Editor</translation>
     </message>
 </context>
 <context>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Aufgaben</translation>
     </message>
 </context>
 <context>
@@ -84,7 +84,7 @@
     </message>
     <message>
         <source>View Task</source>
-        <translation>Aufgabe sehen</translation>
+        <translation>Aufgabe ansehen</translation>
     </message>
     <message>
         <source>Delete...</source>
@@ -333,11 +333,11 @@ Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann e
     </message>
     <message>
         <source>Data can not be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten können nicht bearbeitet werden, es wird synchronisiert</translation>
     </message>
     <message>
         <source>Data can&apos;t be edited, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Daten können nicht bearbeitet werden, es wird synchronisiert</translation>
     </message>
 </context>
 <context>

@@ -1,85 +1,86 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CellFormat</name>
     <message>
         <source>&amp;Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rahmen</translation>
     </message>
     <message>
         <source>Back&amp;ground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hintergrund</translation>
     </message>
     <message>
         <source>&amp;Font</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schrift</translation>
     </message>
     <message>
         <source>&amp;Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ausrichtung</translation>
     </message>
     <message>
         <source>&amp;Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Breite:</translation>
     </message>
     <message>
         <source>&amp;Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Farbe:</translation>
     </message>
     <message>
         <source>&amp;Default Borders</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard &amp;Rahmen</translation>
     </message>
     <message>
         <source>&amp;Style:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Muster:</translation>
     </message>
     <message>
         <source>&amp;Default Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard &amp;Hintergrund</translation>
     </message>
     <message>
         <source>&amp;Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schrift:</translation>
     </message>
     <message>
         <source>&amp;Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Größe:</translation>
     </message>
     <message>
         <source>&amp;Bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Fe&amp;tt</translation>
     </message>
     <message>
         <source>&amp;Italic</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Kursiv</translation>
     </message>
     <message>
         <source>&amp;Default Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Standar&amp;d Schrift</translation>
     </message>
     <message>
         <source>&amp;Vertical:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vertikal:</translation>
     </message>
     <message>
         <source>&amp;Horizontal:</source>
-        <translation type="unfinished"></translation>
+        <translation>H&amp;orizontal:</translation>
     </message>
     <message>
         <source>&amp;Word Wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeilenumbruch</translation>
     </message>
     <message>
         <source>&amp;Default Alignment</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard &amp;Ausrichtung</translation>
     </message>
     <message>
         <source>Format Cells</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen formatieren</translation>
     </message>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet</translation>
     </message>
 </context>
 <context>
@@ -98,7 +99,7 @@
     </message>
     <message>
         <source>&amp;Replace with:</source>
-        <translation>&amp;Ersetze mit:</translation>
+        <translation>Ersetze &amp;mit:</translation>
     </message>
     <message>
         <source>&amp;Type</source>
@@ -137,7 +138,7 @@
     <name>MainWindow</name>
     <message>
         <source>Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet</translation>
     </message>
     <message>
         <source>Error</source>
@@ -169,7 +170,7 @@
     </message>
     <message>
         <source>&amp;File Name:</source>
-        <translation type="unfinished">&amp;Dateiname:</translation>
+        <translation>&amp;Dateiname:</translation>
     </message>
     <message>
         <source>UnnamedFile</source>
@@ -189,7 +190,7 @@
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation>&amp;Oeffnen</translation>
+        <translation>&amp;Öffnen</translation>
     </message>
     <message>
         <source>&amp;Save</source>
@@ -209,7 +210,7 @@
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation>&amp;Akzeptieren</translation>
+        <translation>A&amp;kzeptieren</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -225,7 +226,7 @@
     </message>
     <message>
         <source>Cell &amp;Selector</source>
-        <translation>Zellen-&amp;Selektor</translation>
+        <translation>&amp;Zellen-Selektor</translation>
     </message>
     <message>
         <source>Cut Cells</source>
@@ -233,7 +234,7 @@
     </message>
     <message>
         <source>Cu&amp;t</source>
-        <translation>&amp;Ausschneiden</translation>
+        <translation>Au&amp;sschneiden</translation>
     </message>
     <message>
         <source>Copy Cells</source>
@@ -313,7 +314,7 @@
     </message>
     <message>
         <source>H&amp;eight</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Höhe</translation>
     </message>
     <message>
         <source>Adjust Row</source>
@@ -329,7 +330,7 @@
     </message>
     <message>
         <source>&amp;Show</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zeigen</translation>
     </message>
     <message>
         <source>Hide Row</source>
@@ -337,7 +338,7 @@
     </message>
     <message>
         <source>&amp;Hide</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verstecken</translation>
     </message>
     <message>
         <source>Column Width</source>
@@ -345,7 +346,7 @@
     </message>
     <message>
         <source>&amp;Width</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Breite</translation>
     </message>
     <message>
         <source>Adjust Column</source>
@@ -365,7 +366,7 @@
     </message>
     <message>
         <source>&amp;Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Umbenennen</translation>
     </message>
     <message>
         <source>Remove Sheet</source>
@@ -373,7 +374,7 @@
     </message>
     <message>
         <source>R&amp;emove</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Löschen</translation>
     </message>
     <message>
         <source>Sort Data</source>
@@ -393,11 +394,11 @@
     </message>
     <message>
         <source>Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>Gleich mit</translation>
     </message>
     <message>
         <source>&amp;Equal To</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gleich mit</translation>
     </message>
     <message>
         <source>Addition</source>
@@ -433,7 +434,7 @@
     </message>
     <message>
         <source>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</source>
-        <translation type="unfinished"></translation>
+        <translation>Open ParanthesistempCellData-&gt;row+row1, tempCellData-&gt;col+col1</translation>
     </message>
     <message>
         <source>&amp;Open Paranthesis</source>
@@ -585,15 +586,15 @@
     </message>
     <message>
         <source>Power</source>
-        <translation type="unfinished"></translation>
+        <translation>Potenz</translation>
     </message>
     <message>
         <source>&amp;Power</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Potenz</translation>
     </message>
     <message>
         <source>&amp;Mathematical</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mathematisch</translation>
     </message>
     <message>
         <source>Average</source>
@@ -601,7 +602,7 @@
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Durchschnitt</translation>
     </message>
     <message>
         <source>Maximum</source>
@@ -609,7 +610,7 @@
     </message>
     <message>
         <source>Ma&amp;ximum</source>
-        <translation type="unfinished"></translation>
+        <translation>Ma&amp;ximum</translation>
     </message>
     <message>
         <source>Minimum</source>
@@ -617,19 +618,19 @@
     </message>
     <message>
         <source>&amp;Minimum</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Minimum</translation>
     </message>
     <message>
         <source>Count</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl</translation>
     </message>
     <message>
         <source>&amp;Count</source>
-        <translation type="unfinished"></translation>
+        <translation>An&amp;zahl</translation>
     </message>
     <message>
         <source>&amp;Statistical</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Statistisch</translation>
     </message>
     <message>
         <source>Functions</source>
@@ -637,7 +638,7 @@
     </message>
     <message>
         <source>About Opie Sheet</source>
-        <translation type="unfinished"></translation>
+        <translation>Über Opie Sheet</translation>
     </message>
     <message>
         <source>Opie Sheet
@@ -651,19 +652,29 @@ Release Date: October 08, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie Sheet
+Tabellenkalkulation für Opie
+QWDC Beta Winner (als Sheet/Qt)
+
+Entwickelt von: Serdar Ozler
+Release 1.0.2
+Release Datum: 8. Oktober 2002
+
+Dieses Produkt ist lizensiert unter GPL. Es darf frei verteilt werden. Wenn sie die neueste Version und auch den Quelltext haben möchten, besuchen Sie bitte folgende Website
+
+http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Number of rows:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der &amp;Zeilen:</translation>
     </message>
     <message>
         <source>&amp;Number of columns:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der &amp;Spalten:</translation>
     </message>
     <message>
         <source>&amp;Number of sheets:</source>
-        <translation type="unfinished"></translation>
+        <translation>Anzahl der &amp;Blätter:</translation>
     </message>
     <message>
         <source>Sheet</source>
@@ -671,15 +682,15 @@ http://qtopia.sitebest.com</source>
     </message>
     <message>
         <source>&amp;Height of each row:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Höhe jeder Zeile:</translation>
     </message>
     <message>
         <source>&amp;Width of each column:</source>
-        <translation type="unfinished"></translation>
+        <translation>B&amp;reite jeder Spalte:</translation>
     </message>
     <message>
         <source>&amp;Sheet Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Blattname:</translation>
     </message>
     <message>
         <source>There is only one sheet!</source>
@@ -695,19 +706,19 @@ http://qtopia.sitebest.com</source>
     </message>
     <message>
         <source>Shift cells &amp;down</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen nach &amp;unten verschieben</translation>
     </message>
     <message>
         <source>Shift cells &amp;right</source>
-        <translation type="unfinished"></translation>
+        <translation>Zellen nach &amp;rechts verschieben</translation>
     </message>
     <message>
         <source>Entire ro&amp;w</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganze &amp;Zeile</translation>
     </message>
     <message>
         <source>Entire &amp;column</source>
-        <translation type="unfinished"></translation>
+        <translation>Ganze &amp;Spalte</translation>
     </message>
 </context>
 <context>
@@ -737,31 +748,31 @@ http://qtopia.sitebest.com</source>
     </message>
     <message>
         <source>&amp;Sort by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sortieren nach</translation>
     </message>
     <message>
         <source>&amp;Then by</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dann nach</translation>
     </message>
     <message>
         <source>Then &amp;by</source>
-        <translation type="unfinished"></translation>
+        <translation>Dann &amp;nach </translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Großschreibung beachten</translation>
     </message>
     <message>
         <source>&amp;Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Richtung</translation>
     </message>
     <message>
         <source>&amp;Top to bottom (rows)</source>
-        <translation type="unfinished"></translation>
+        <translation>Von &amp;oben nach unten (Zeilen)</translation>
     </message>
     <message>
         <source>&amp;Left to right (columns)</source>
-        <translation type="unfinished"></translation>
+        <translation>Von &amp;links nach rechts (Spalten)</translation>
     </message>
     <message>
         <source>Sort</source>
@@ -769,11 +780,11 @@ http://qtopia.sitebest.com</source>
     </message>
     <message>
         <source>&amp;Ascending</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Aufsteigend</translation>
     </message>
     <message>
         <source>&amp;Descending</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;bsteigend</translation>
     </message>
     <message>
         <source>Error</source>
