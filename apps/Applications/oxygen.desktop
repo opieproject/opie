@@ -1,9 +1,9 @@
 [Desktop Entry]
 Comment=A chemistry Application
-Comment[es]=Una aplicación de química
+Comment[es]=Una aplicaciÃ³n de quÃ­mica
 Exec=oxygen
 Icon=oxygen/oxygen
 Type=Application
 Name=Oxygen
-Name[de]=Periodensystem
-Name[es]=Tabla Periódica
+Name[de]=Perioden system
+Name[es]=Tabla PeriÃ³dica
