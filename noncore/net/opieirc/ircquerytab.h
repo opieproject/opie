@@ -37,6 +37,7 @@ public:
     IRCPerson *person();
     void appendText(QString text);
 public slots:
+    void scrolling();
     void remove();
     void processCommand();
     void display(IRCOutput output);

@@ -47,6 +47,7 @@ public:
 public slots:
     void remove();
     void settingsChanged();
+    void scrolling();
 protected slots:
     void processCommand();
     void toggleList();

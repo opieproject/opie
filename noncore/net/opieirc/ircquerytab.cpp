@@ -22,8 +22,14 @@ IRCQueryTab::IRCQueryTab(IRCPerson *person, IRCServerTab *parentTab, MainWindow 
     m_layout->add(m_field);
     m_field->setFocus();
     connect(m_field, SIGNAL(returnPressed()), this, SLOT(processCommand()));
+    connect(m_mainWindow, SIGNAL(updateScroll()), this, SLOT(scrolling()));
     settingsChanged();
 }
+
+void IRCQueryTab::scrolling(){
+  m_textview->ensureVisible(0, m_textview->contentsHeight());
+}
+
 
 void IRCQueryTab::appendText(QString text) {
     /* not using append because it creates layout problems */
