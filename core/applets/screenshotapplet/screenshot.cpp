@@ -281,7 +281,7 @@ ScreenshotApplet::ScreenshotApplet( QWidget *parent, const char *name )
 //    qDebug("beginning  applet");
     setFixedHeight( 18 );
     setFixedWidth( 14 );
-    vc = new ScreenshotControl;
+    vc = new ScreenshotControl(this,"ScreenshotApplet");;
 //    qDebug("new screenshotapplet");
 }
 
