@@ -148,6 +148,8 @@ void StorageInfo::update()
     humanname = tr("Hard Disk") + " " + humanname.mid(7);
       else if ( disk.left(7) == "/dev/sd" )
     humanname = tr("SCSI Hard Disk") + " " + humanname.mid(7);
+      else if ( disk.left(15) == "/dev/mtdblock6/" ) //openzaurus ramfs
+    humanname = tr("Ram FS") + " " + humanname.mid(15);
       else if ( disk == "/dev/mtdblock1" || humanname == "/dev/mtdblock/1" )
     humanname = tr("Internal Storage");
       else if ( disk.left(14) == "/dev/mtdblock/" )
