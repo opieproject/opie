@@ -3,4 +3,4 @@
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && SYSINFO
   comment "opie-memoryapplet needs a libqpe, libopie2ui and sysinfo"
-    depends ! ( LIBOPIE && SYSINFO )
+    depends ! (( LIBQPE || LIBQPE-X11 ) && LIBOPIE2UI && SYSINFO)
