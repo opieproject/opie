@@ -54,7 +54,10 @@ Channel::Channel( OMixerInterface* mixer, QWidget* parent, const char* name )
         :QVBox( parent, name )
 {
     _name = new QLabel( name, this );
-    _volume = new QSlider( 0, 100, 10, mixer->volume( name ), QSlider::Vertical, this );
+    _name->setFont( QFont( "Vera", 8 ) );
+    _volume = new QSlider( 0, 100, 10, mixer->volume( name ) & 0xff, QSlider::Vertical, this );
+    _volume->setTickmarks( QSlider::Both );
+    _volume->setTickInterval( 20 );
     _mute = new OLedBox( green, this );
     _mute->setFocusPolicy( QWidget::NoFocus );
     _mute->setFixedSize( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
@@ -74,6 +77,7 @@ VolumeAppletControl::VolumeAppletControl( OTaskbarApplet* parent, const char* na
 {
     setFrameStyle( QFrame::PopupPanel | QFrame::Raised );
     l = new QGridLayout( this );
+    build();
 }
 
 
@@ -95,7 +99,7 @@ void VolumeAppletControl::build()
         odebug << "OSSDEMO:              +--- volume " << ( mixer->volume( *it ) & 0xff )
                << " (left) | " << ( mixer->volume( *it ) >> 8 ) << " (right)" << oendl;
 
-        l->addWidget( new Channel( mixer, this, *it ), x++, y );
+        l->addWidget( new Channel( mixer, this, *it ), 0, x++, AlignCenter );
     }
 
 }
@@ -109,7 +113,6 @@ VolumeAppletControl::~VolumeAppletControl()
 void VolumeAppletControl::showEvent( QShowEvent* e )
 {
     odebug << "showEvent" << oendl;
-    build();
     QWidget::showEvent( e );
 }
 
@@ -123,7 +126,7 @@ void VolumeAppletControl::hideEvent( QHideEvent* e )
 
 QSize VolumeAppletControl::sizeHint() const
 {
-    return QFrame::sizeHint();
+    return QSize( 200, 200 ); //QFrame::sizeHint();
 }
 
 
