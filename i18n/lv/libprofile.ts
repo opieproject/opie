@@ -3,138 +3,138 @@
     <name>ProfileGUI</name>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profails</translation>
     </message>
     <message>
         <source>Setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādījumi</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Sākt</translation>
     </message>
     <message>
         <source>Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Aautomātiski</translation>
     </message>
     <message>
         <source>Ask</source>
-        <translation type="unfinished"></translation>
+        <translation>Jautāt</translation>
     </message>
     <message>
         <source>Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Aizliegts</translation>
     </message>
     <message>
         <source>Trigger VPN</source>
-        <translation type="unfinished"></translation>
+        <translation>VPN trigeris</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Apraksts</translation>
     </message>
     <message>
         <source>State</source>
-        <translation type="unfinished"></translation>
+        <translation>Statuss</translation>
     </message>
     <message>
         <source>eth0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>(Multicast, Up)</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Subnet Mask</source>
-        <translation type="unfinished"></translation>
+        <translation>Tīkla Maska</translation>
     </message>
     <message>
         <source>Broadcast</source>
-        <translation type="unfinished"></translation>
+        <translation>Raidīšana</translation>
     </message>
     <message>
         <source>MAC</source>
-        <translation type="unfinished"></translation>
+        <translation>MAC</translation>
     </message>
     <message>
         <source>P-t-P</source>
-        <translation type="unfinished"></translation>
+        <translation>P-t-P</translation>
     </message>
     <message>
         <source>IP Address</source>
-        <translation type="unfinished"></translation>
+        <translation>IP Adrese</translation>
     </message>
     <message>
         <source>0.0.0.0</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>00:00:00:00:00:00</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>DHCP</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP</translation>
     </message>
     <message>
         <source>Lease Expires</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaudē Spēku</translation>
     </message>
     <message>
         <source>Lease Obtained</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemtais</translation>
     </message>
     <message>
         <source>DHCP Server</source>
-        <translation type="unfinished"></translation>
+        <translation>DHCP Serveris</translation>
     </message>
     <message>
         <source>Traffic</source>
-        <translation type="unfinished"></translation>
+        <translation>Trafiks</translation>
     </message>
     <message>
         <source>Receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Saņemšana</translation>
     </message>
     <message>
         <source>Errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūdas</translation>
     </message>
     <message>
         <source>Dropped</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmests</translation>
     </message>
     <message>
         <source>Bytes</source>
-        <translation type="unfinished"></translation>
+        <translation>Baiti</translation>
     </message>
     <message>
         <source>Transmitting</source>
-        <translation type="unfinished"></translation>
+        <translation>Pāraide</translation>
     </message>
     <message>
         <source>Others</source>
-        <translation type="unfinished"></translation>
+        <translation>Citi</translation>
     </message>
     <message>
         <source>Collisions</source>
-        <translation type="unfinished"></translation>
+        <translation>Kolīzijas</translation>
     </message>
     <message>
         <source>Live feed </source>
-        <translation type="unfinished"></translation>
+        <translation>Dzīvā barotne</translation>
     </message>
 </context>
 <context>
     <name>ProfileNetNode</name>
     <message>
         <source>Regular connection profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Regulārā pieslēguma profails</translation>
     </message>
     <message>
         <source>&lt;p&gt;Define use of an IP connection.&lt;/p&gt;&lt;p&gt;Configure if and when this connection needs to be established&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Definētais IP konekcijas pielietojums.&lt;/p&gt;&lt;p&gt;Konfigurējiet ja nepieciešams savienojums&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

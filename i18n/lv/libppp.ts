@@ -3,216 +3,216 @@
     <name>PPPAuthEdit</name>
     <message>
         <source>Login send missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst lietotāja nosūtīšana</translation>
     </message>
     <message>
         <source>Login expect missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst lietotāja sagaidīšana</translation>
     </message>
     <message>
         <source>Password send missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst paroles nosūtīšana</translation>
     </message>
     <message>
         <source>Password expect missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst paroles sagaidīšana</translation>
     </message>
     <message>
         <source>Pap/Chap/EAP client id missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst Pap/Chap/EAP klienta id</translation>
     </message>
     <message>
         <source>Pap/Chap/EAP server id missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst Pap/Chap/EAP servera id</translation>
     </message>
     <message>
         <source>Pap/Chap/EAP secret id missing</source>
-        <translation type="unfinished"></translation>
+        <translation>Trūkst Pap/Chap/EAP drošības id</translation>
     </message>
 </context>
 <context>
     <name>PPPAuthGUI</name>
     <message>
         <source>PPPAuth</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPAuth</translation>
     </message>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Pieslēgums</translation>
     </message>
     <message>
         <source>ogin:</source>
-        <translation type="unfinished"></translation>
+        <translation>ieslēgums:</translation>
     </message>
     <message>
         <source>assword:</source>
-        <translation type="unfinished"></translation>
+        <translation>arole:</translation>
     </message>
     <message>
         <source>Pap</source>
-        <translation type="unfinished"></translation>
+        <translation>Pap</translation>
     </message>
     <message>
         <source>Chap</source>
-        <translation type="unfinished"></translation>
+        <translation>Chap</translation>
     </message>
     <message>
         <source>EAP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Serveris</translation>
     </message>
     <message>
         <source>Secret</source>
-        <translation type="unfinished"></translation>
+        <translation>Drošība</translation>
     </message>
     <message>
         <source>*</source>
-        <translation type="unfinished"></translation>
+        <translation>*</translation>
     </message>
     <message>
         <source>Client</source>
-        <translation type="unfinished"></translation>
+        <translation>Klients</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Termināls</translation>
     </message>
 </context>
 <context>
     <name>PPPDNSEdit</name>
     <message>
         <source>Domainname needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepieciešams domaina vārds</translation>
     </message>
     <message>
         <source>DNS Servers needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepieciešams DNS serveris</translation>
     </message>
 </context>
 <context>
     <name>PPPDNSGUI</name>
     <message>
         <source>PPPDNS</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPDNS</translation>
     </message>
     <message>
         <source>Server assigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzrādītais serveris</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiksēts</translation>
     </message>
     <message>
         <source>DomainName</source>
-        <translation type="unfinished"></translation>
+        <translation>DomainaVārds</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adrese</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>List</source>
-        <translation type="unfinished"></translation>
+        <translation>Saraksts</translation>
     </message>
 </context>
 <context>
     <name>PPPGUI</name>
     <message>
         <source>PPP</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP</translation>
     </message>
     <message>
         <source>Authentication</source>
-        <translation type="unfinished"></translation>
+        <translation>Autentifikācija</translation>
     </message>
     <message>
         <source>IP settings</source>
-        <translation type="unfinished"></translation>
+        <translation>IP uzstādījumi</translation>
     </message>
     <message>
         <source>DNS Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>DNS Uzstādījumi</translation>
     </message>
 </context>
 <context>
     <name>PPPIPEdit</name>
     <message>
         <source>IPAddress needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepieciešama IPAdrese</translation>
     </message>
     <message>
         <source>IPAddress not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>IPAdrese nav pareiza</translation>
     </message>
     <message>
         <source>Subnet mask needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepieciešama Subnet maska</translation>
     </message>
     <message>
         <source>Subnet mask not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pareiza Subnet maska</translation>
     </message>
     <message>
         <source>Gateway address needed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nepieciešama Vārtejas adrese</translation>
     </message>
     <message>
         <source>Gateway address not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav pareiza vārtejas adrese</translation>
     </message>
 </context>
 <context>
     <name>PPPIPGUI</name>
     <message>
         <source>PPPIP</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPIP</translation>
     </message>
     <message>
         <source>IP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Server assigned</source>
-        <translation type="unfinished"></translation>
+        <translation>Norādīts serveris</translation>
     </message>
     <message>
         <source>Fixed</source>
-        <translation type="unfinished"></translation>
+        <translation>Fiksēts</translation>
     </message>
     <message>
         <source>Subnetmask</source>
-        <translation type="unfinished"></translation>
+        <translation>Tīkla maska</translation>
     </message>
     <message>
         <source>Address</source>
-        <translation type="unfinished"></translation>
+        <translation>Adrese</translation>
     </message>
     <message>
         <source>Gateway</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārteja</translation>
     </message>
     <message>
         <source>Set as default</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzstādīt kā noklusēto</translation>
     </message>
 </context>
 <context>
     <name>PPPNetNode</name>
     <message>
         <source>PPP Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP Konekcija</translation>
     </message>
     <message>
         <source>&lt;p&gt;Sets up IP using PPP.&lt;/p&gt;&lt;p&gt;Use this for dialup devices or serial setups&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Uzstāda IP lietojot PPP.&lt;/p&gt;&lt;p&gt;Lietojiet šo iezvanpieejas vai seriāliem uzstādījumiem&lt;/p&gt;</translation>
     </message>
 </context>
 </TS>

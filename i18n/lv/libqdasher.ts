@@ -3,7 +3,7 @@
     <name>InputMethods</name>
     <message>
         <source>Dasher</source>
-        <translation type="unfinished"></translation>
+        <translation>Zīmētājs</translation>
     </message>
 </context>
 </TS>
