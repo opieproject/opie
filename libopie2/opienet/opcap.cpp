@@ -864,6 +864,17 @@ bool OPacketCapturer::blocking() const
 }
 
 
+void OPacketCapturer::closeDumpFile()
+{
+    if ( _pcd )
+    {
+        pcap_dump_close( _pcd );
+        _pcd = 0;
+    }
+    pcap_close( _pch );
+}
+
+
 void OPacketCapturer::close()
 {
     if ( _open )
@@ -873,13 +884,8 @@ void OPacketCapturer::close()
             _sn->disconnect( SIGNAL( activated(int) ), this, SLOT( readyToReceive() ) );
             delete _sn;
         }
-        if ( _pcd )
-        {
-            pcap_dump_close( _pcd );
-            _pcd = 0;
-        }
-        pcap_close( _pch );
-        _open = false;
+        closeDumpFile();
+    _open = false;
     }
 
     qDebug( "OPacketCapturer::close() --- dumping capturing statistics..." );
@@ -894,6 +900,17 @@ void OPacketCapturer::close()
 int OPacketCapturer::dataLink() const
 {
     return pcap_datalink( _pch );
+}
+
+
+void OPacketCapturer::dump( OPacket* p )
+{
+    if ( !_pcd )
+    {
+        qWarning( "OPacketCapturer::dump() - cannot dump without open capture file!" );
+        return;
+    }
+    pcap_dump( (u_char*) _pcd, &p->_hdr, p->_data );
 }
 
 
@@ -915,8 +932,6 @@ OPacket* OPacketCapturer::next()
     qDebug( "==> OPacketCapturer::next()" );
     const unsigned char* pdata = pcap_next( _pch, &header );
     qDebug( "<== OPacketCapturer::next()" );
-    if ( _pcd )
-        pcap_dump( (u_char*) _pcd, &header, pdata );
 
     if ( pdata && header.len )
     {
@@ -938,7 +953,7 @@ OPacket* OPacketCapturer::next()
 }
 
 
-bool OPacketCapturer::open( const QString& name, const QString& filename )
+bool OPacketCapturer::open( const QString& name )
 {
     if ( _open )
     {
@@ -975,7 +990,12 @@ bool OPacketCapturer::open( const QString& name, const QString& filename )
         connect( _sn, SIGNAL( activated(int) ), this, SLOT( readyToReceive() ) );
     }
 
-    // if requested, open a dump
+    return true;
+}
+
+
+bool OPacketCapturer::openDumpFile( const QString& filename )
+{
     pcap_dumper_t* dump = pcap_dump_open( _pch, const_cast<char*>( (const char*) filename ) );
     if ( !dump )
     {

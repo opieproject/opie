@@ -115,6 +115,8 @@ class OPacket : public QObject
 {
   Q_OBJECT
 
+  friend class OPacketCapturer;
+
   public:
     OPacket( int datalink, packetheaderstruct, const unsigned char*, QObject* parent );
     virtual ~OPacket();
@@ -524,7 +526,7 @@ class OPacketCapturer : public QObject
      */
     ~OPacketCapturer();
     /**
-     * Setting the packet capturer to use blocking IO calls can be useful when
+     * Set the packet capturer to use blocking or non-blocking IO. This can be useful when
      * not using the socket notifier, e.g. without an application object.
      */
     void setBlocking( bool );
@@ -533,14 +535,22 @@ class OPacketCapturer : public QObject
      */
     bool blocking() const;
     /**
-     * Closes the packet capturer. This is automatically done in the destructor.
+     * Close the packet capturer. This is automatically done in the destructor.
      */
     void close();
+    /**
+     * Close the output capture file.
+     */
+    void closeDumpFile();
     /**
      * @returns the data link type.
      * @see <pcap.h> for possible values.
      */
     int dataLink() const;
+    /**
+     * Dump a packet to the output capture file.
+     */
+    void dump( OPacket* );
     /**
      * @returns the file descriptor of the packet capturer. This is only useful, if
      * not using the socket notifier, e.g. without an application object.
@@ -553,13 +563,16 @@ class OPacketCapturer : public QObject
     OPacket* next();
     /**
      * Open the packet capturer to capture packets in live-mode from @a interface.
-     * If a @a filename is given, all captured packets are output to a tcpdump-compatible capture file.
      */
-    bool open( const QString& interface, const QString& filename = QString::null );
+    bool open( const QString& interface );
     /**
      * Open the packet capturer to capture packets in offline-mode from @a file.
      */
     bool open( const QFile& file );
+    /**
+     * Open a prerecorded tcpdump compatible capture file for use with @ref dump()
+     */
+    bool openDumpFile( const QString& filename );
     /**
      * @returns true if the packet capturer is open
      */
