@@ -10,6 +10,7 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libqunikeyboard.ts \
+	 ../../i18n/nl/libqunikeyboard.ts \
 	 ../../i18n/da/libqunikeyboard.ts \
 	 ../../i18n/xx/libqunikeyboard.ts \
 	 ../../i18n/en/libqunikeyboard.ts \

@@ -10,6 +10,7 @@ INTERFACES	=
 TARGET		= qcop
 
 TRANSLATIONS = ../../../i18n/de/qcop.ts \
+	 ../../../i18n/nl/qcop.ts \
 	 ../../../i18n/da/qcop.ts \
 	 ../../../i18n/xx/qcop.ts \
 	 ../../../i18n/en/qcop.ts \

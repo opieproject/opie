@@ -10,6 +10,7 @@ LIBS         += -lqpe
 VERSION       = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libhomeapplet.ts \
+	 ../../../i18n/nl/libhomeapplet.ts \
 	 ../../../i18n/da/libhomeapplet.ts \
 	 ../../../i18n/xx/libhomeapplet.ts \
 	 ../../../i18n/en/libhomeapplet.ts \

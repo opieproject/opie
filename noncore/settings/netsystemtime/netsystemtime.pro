@@ -22,6 +22,7 @@ DESTDIR		= $(OPIEDIR)/bin
 TARGET		= systemtime
 
 TRANSLATIONS = ../../../i18n/de/systemtime.ts \
+	 ../../../i18n/nl/systemtime.ts \
 	 ../../../i18n/da/systemtime.ts \
 	 ../../../i18n/xx/systemtime.ts \
 	 ../../../i18n/en/systemtime.ts \

@@ -26,6 +26,7 @@ TARGET    = checkbook
 DESTDIR   = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/checkbook.ts \
+	 ../../../i18n/nl/checkbook.ts \
 	 ../../../i18n/da/checkbook.ts \
 	 ../../../i18n/xx/checkbook.ts \
    ../../../i18n/en/checkbook.ts    \

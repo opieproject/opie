@@ -12,6 +12,7 @@ DESTDIR		= $(OPIEDIR)/bin
 TARGET          = bluepin
 
 TRANSLATIONS = ../../../../i18n/de/bluepin.ts \
+	 ../../../../i18n/nl/bluepin.ts \
 	 ../../../../i18n/da/bluepin.ts \
 	 ../../../../i18n/xx/bluepin.ts \
 	 ../../../../i18n/en/bluepin.ts \

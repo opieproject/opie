@@ -19,6 +19,7 @@ DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todayaddressbookplugin
 
 TRANSLATIONS = ../../../../../i18n/de/libtodayaddressbookplugin.ts \
+	 ../../../../../i18n/nl/libtodayaddressbookplugin.ts \
          ../../../../../i18n/xx/libtodayaddressbookplugin.ts \
          ../../../../../i18n/en/libtodayaddressbookplugin.ts \
          ../../../../../i18n/es/libtodayaddressbookplugin.ts \

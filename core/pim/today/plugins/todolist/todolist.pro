@@ -19,6 +19,7 @@ DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaytodolistplugin
 
 TRANSLATIONS = ../../../../../i18n/de/libtodaytodolistplugin.ts \
+	 ../../../../../i18n/nl/libtodaytodolistplugin.ts \
          ../../../../../i18n/xx/libtodaytodolistplugin.ts \
          ../../../../../i18n/en/libtodaytodolistplugin.ts \
          ../../../../../i18n/es/libtodaytodolistplugin.ts \

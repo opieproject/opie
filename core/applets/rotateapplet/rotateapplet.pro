@@ -10,6 +10,7 @@ LIBS         += -lqpe
 VERSION       = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/librotateapplet.ts \
+	 ../../../i18n/nl/librotateapplet.ts \
          ../../../i18n/da/librotateapplet.ts \
          ../../../i18n/xx/librotateapplet.ts \
          ../../../i18n/en/librotateapplet.ts \

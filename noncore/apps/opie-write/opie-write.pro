@@ -25,6 +25,7 @@ LIBS            += -lqpe
 TARGET		= opie-write
 
 TRANSLATIONS = ../../../i18n/de/opie-write.ts \
+	 ../../../i18n/nl/opie-write.ts \
          ../../../i18n/da/opie-write.ts \
          ../../../i18n/xx/opie-write.ts \
    ../../../i18n/en/opie-write.ts \

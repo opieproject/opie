@@ -27,6 +27,7 @@ DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaystocktickerplugin
 
 TRANSLATIONS = ../../../../i18n/de/libtodaystocktickerplugin.ts \
+	 ../../../../i18n/nl/libtodaystocktickerplugin.ts \
          ../../../../i18n/xx/libtodaystocktickerplugin.ts \
          ../../../../i18n/en/libtodaystocktickerplugin.ts \
          ../../../../i18n/es/libtodaystocktickerplugin.ts \

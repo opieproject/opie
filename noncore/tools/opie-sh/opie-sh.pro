@@ -9,6 +9,7 @@ LIBS						+=-lqpe
 TARGET                   = opie-sh
 
 TRANSLATIONS = ../../../i18n/de/opie-sh.ts \
+	 ../../../i18n/nl/opie-sh.ts \
 	 ../../../i18n/da/opie-sh.ts \
 	 ../../../i18n/xx/opie-sh.ts \
 	 ../../../i18n/en/opie-sh.ts \

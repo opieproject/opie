@@ -10,6 +10,7 @@ TARGET       = metal
 VERSION      = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libmetal.ts \
+	 ../../../i18n/nl/libmetal.ts \
 	 ../../../i18n/da/libmetal.ts \
 	 ../../../i18n/xx/libmetal.ts \
 	 ../../../i18n/en/libmetal.ts \

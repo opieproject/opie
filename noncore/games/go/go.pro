@@ -17,6 +17,7 @@ LIBS            += -lqpe
 TARGET		= go
 
 TRANSLATIONS = ../../../i18n/de/go.ts \
+	 ../../../i18n/nl/go.ts \
 	 ../../../i18n/da/go.ts \
 	 ../../../i18n/xx/go.ts \
 	 ../../../i18n/en/go.ts \

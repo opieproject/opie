@@ -18,6 +18,7 @@ LIBS        += -lqpe -lopie
 TARGET       = buttonsettings
 
 TRANSLATIONS = ../../../i18n/de/buttonsettings.ts \
+	 ../../../i18n/nl/buttonsettings.ts \
 	 ../../../i18n/xx/buttonsettings.ts \
 	 ../../../i18n/en/buttonsettings.ts \
 	 ../../../i18n/es/buttonsettings.ts \

@@ -10,6 +10,7 @@ LIBS            += -lqpe -lopie
 VERSION		= 0.0.2
 
 TRANSLATIONS = ../../../i18n/de/libopieobex.ts \
+	 ../../../i18n/nl/libopieobex.ts \
 	 ../../../i18n/da/libopieobex.ts \
 	 ../../../i18n/xx/libopieobex.ts \
 	 ../../../i18n/en/libopieobex.ts \

@@ -23,6 +23,7 @@ DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todayweatherplugin
 
 TRANSLATIONS = ../../../i18n/de/libtodayweatherplugin.ts \
+	 ../../../i18n/nl/libtodayweatherplugin.ts \
          ../../../i18n/xx/libtodayweatherplugin.ts \
          ../../../i18n/en/libtodayweatherplugin.ts \
          ../../../i18n/es/libtodayweatherplugin.ts \

@@ -15,6 +15,7 @@ QMAKE_LFLAGS	+= -Wl,-rpath,/opt/QtPalmtop/plugins/inputmethods
 VERSION		= 1.0.0
 
 TRANSLATIONS    = ../../i18n/pt_BR/libqmultikey.ts \
+	 ../../i18n/nl/libqmultikey.ts \
  ../../i18n/de/libqmultikey.ts \
  ../../i18n/xx/libqmultikey.ts \
  ../../i18n/en/libqmultikey.ts \

@@ -27,6 +27,7 @@ LIBS            += -lqpe -lopie
 TARGET    = sysinfo
 
 TRANSLATIONS = ../../../i18n/de/sysinfo.ts \
+	 ../../../i18n/nl/sysinfo.ts \
 	 ../../../i18n/xx/sysinfo.ts \
 	 ../../../i18n/en/sysinfo.ts \
 	 ../../../i18n/es/sysinfo.ts \

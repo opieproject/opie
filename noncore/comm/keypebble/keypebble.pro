@@ -34,6 +34,7 @@ DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/keypebble.ts \
+	 ../../../i18n/nl/keypebble.ts \
 	 ../../../i18n/da/keypebble.ts \
 	 ../../../i18n/xx/keypebble.ts \
 	 ../../../i18n/en/keypebble.ts \

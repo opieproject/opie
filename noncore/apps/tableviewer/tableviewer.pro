@@ -36,6 +36,7 @@ DEPENDPATH     += $(OPIEDIR)/include
 LIBS	       += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/tableviewer.ts \
+	 ../../../i18n/nl/tableviewer.ts \
 	 ../../../i18n/da/tableviewer.ts \
 	 ../../../i18n/xx/tableviewer.ts \
 	 ../../../i18n/en/tableviewer.ts \

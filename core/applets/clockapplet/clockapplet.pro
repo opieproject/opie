@@ -10,6 +10,7 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libclockapplet.ts \
+	 ../../../i18n/nl/libclockapplet.ts \
 	 ../../../i18n/da/libclockapplet.ts \
 	 ../../../i18n/xx/libclockapplet.ts \
 	 ../../../i18n/en/libclockapplet.ts \

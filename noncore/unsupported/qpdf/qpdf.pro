@@ -54,6 +54,7 @@ DESTDIR      = $(OPIEDIR)/bin
 TARGET       = qpdf
 
 TRANSLATIONS = ../../../i18n/de/qpdf.ts \
+	 ../../../i18n/nl/qpdf.ts \
 	 ../../../i18n/da/qpdf.ts \
 	 ../../../i18n/xx/qpdf.ts \
 	 ../../../i18n/en/qpdf.ts \

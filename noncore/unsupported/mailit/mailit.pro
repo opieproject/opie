@@ -41,6 +41,7 @@ OBJECTS_DIR=qpeobj
 DESTDIR=$(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/mailit.ts \
+	 ../../../i18n/nl/mailit.ts \
 	 ../../../i18n/da/mailit.ts \
 	 ../../../i18n/xx/mailit.ts \
          ../../../i18n/it/mailit.ts \

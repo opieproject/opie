@@ -11,6 +11,7 @@ LIBS        += -lqpe
 VERSION      = 0.1.0
 
 TRANSLATIONS = ../../../i18n/de/libwirelessapplet.ts \
+	 ../../../i18n/nl/libwirelessapplet.ts \
 	 ../../../i18n/da/libwirelessapplet.ts \
 	 ../../../i18n/xx/libwirelessapplet.ts \
 	 ../../../i18n/en/libwirelessapplet.ts \

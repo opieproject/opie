@@ -10,6 +10,7 @@ LIBS += -lqpe -lopie
 DESTDIR = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/sshkeys.ts \
+	 ../../../i18n/nl/sshkeys.ts \
 	../../../i18n/xx/sshkeys.ts \
 	../../../i18n/en/sshkeys.ts \
 	../../../i18n/es/sshkeys.ts \

@@ -12,6 +12,7 @@ LIBS           += -lqpe
 VERSION         = 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libqjumpx.ts \
+	 ../../i18n/nl/libqjumpx.ts \
 	 ../../i18n/da/libqjumpx.ts \
 	 ../../i18n/xx/libqjumpx.ts \
 	 ../../i18n/en/libqjumpx.ts \

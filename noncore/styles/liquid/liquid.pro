@@ -17,6 +17,7 @@ TARGET       = liquid
 VERSION      = 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libliquid.ts \
+	 ../../../i18n/nl/libliquid.ts \
 	 ../../../i18n/da/libliquid.ts \
 	 ../../../i18n/xx/libliquid.ts \
 	 ../../../i18n/en/libliquid.ts \

@@ -27,6 +27,7 @@ OBJECTS_DIR = qpeobj
 
 
 TRANSLATIONS = ../../../i18n/de/opieplayer2.ts \
+	 ../../../i18n/nl/opieplayer2.ts \
         ../../../i18n/da/opieplayer2.ts \
         ../../../i18n/xx/opieplayer2.ts \
         ../../../i18n/en/opieplayer2.ts \

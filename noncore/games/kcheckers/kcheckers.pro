@@ -18,6 +18,7 @@ DESTDIR		= $(OPIEDIR)/bin
 TARGET		= kcheckers
 
 TRANSLATIONS = ../../../i18n/de/kcheckers.ts \
+	 ../../../i18n/nl/kcheckers.ts \
 	 ../../../i18n/da/kcheckers.ts \
 	 ../../../i18n/xx/kcheckers.ts \
 	 ../../../i18n/en/kcheckers.ts \

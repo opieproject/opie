@@ -9,6 +9,7 @@ LIBS            += -lqpe
 INTERFACES	=
 
 TRANSLATIONS = ../../../i18n/de/filebrowser.ts \
+	 ../../../i18n/nl/filebrowser.ts \
 	 ../../../i18n/da/filebrowser.ts \
 	 ../../../i18n/xx/filebrowser.ts \
 	 ../../../i18n/en/filebrowser.ts \

@@ -9,6 +9,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/parashoot.ts \
+	 ../../../i18n/nl/parashoot.ts \
 	 ../../../i18n/da/parashoot.ts \
 	 ../../../i18n/xx/parashoot.ts \
 	 ../../../i18n/en/parashoot.ts \

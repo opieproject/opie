@@ -11,6 +11,7 @@ DESTDIR		= $(OPIEDIR)/bin
 INTERFACES	= mobilemsgbase.ui
 
 TRANSLATIONS = ../../../i18n/de/mobilemsg.ts \
+	 ../../../i18n/nl/mobilemsg.ts \
 	 ../../../i18n/da/mobilemsg.ts \
 	 ../../../i18n/xx/mobilemsg.ts \
 	 ../../../i18n/en/mobilemsg.ts \

@@ -24,6 +24,7 @@ TARGET		=	mail
 DESTDIR      = $(OPIEDIR)/lib
 
 TRANSLATIONS = ../../../i18n/de/libmail.ts \
+	 ../../../i18n/nl/libmail.ts \
 	 ../../../i18n/da/libmail.ts \
 	 ../../../i18n/xx/libmail.ts \
 	 ../../../i18n/en/libmail.ts \

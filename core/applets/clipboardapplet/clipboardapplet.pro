@@ -10,6 +10,7 @@ LIBS            += -lqpe
 VERSION		= 1.0.0
 
 TRANSLATIONS = ../../../i18n/de/libclipboardapplet.ts \
+	 ../../../i18n/nl/libclipboardapplet.ts \
 	 ../../../i18n/da/libclipboardapplet.ts \
 	 ../../../i18n/xx/libclipboardapplet.ts \
 	 ../../../i18n/en/libclipboardapplet.ts \

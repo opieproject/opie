@@ -38,6 +38,7 @@ LIBS            += -lqpe -lopie
 TARGET		= datebook
 
 TRANSLATIONS = ../../../i18n/de/datebook.ts \
+	 ../../../i18n/nl/datebook.ts \
 	 ../../../i18n/xx/datebook.ts \
 	 ../../../i18n/en/datebook.ts \
 	 ../../../i18n/es/datebook.ts \

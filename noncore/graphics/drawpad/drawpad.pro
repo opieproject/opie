@@ -46,6 +46,7 @@ DESTDIR		= $(OPIEDIR)/bin
 TARGET		= drawpad
 
 TRANSLATIONS = ../../../i18n/de/drawpad.ts \
+	 ../../../i18n/nl/drawpad.ts \
 	 ../../../i18n/da/drawpad.ts \
 	 ../../../i18n/xx/drawpad.ts \
 	 ../../../i18n/en/drawpad.ts \

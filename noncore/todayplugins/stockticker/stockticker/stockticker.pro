@@ -10,6 +10,7 @@ LIBS+= -lqpe -lopie
 DESTDIR = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../../i18n/de/stockticker.ts \
+	 ../../../../i18n/nl/stockticker.ts \
          ../../../../i18n/xx/stockticker.ts \
          ../../../../i18n/en/stockticker.ts \
          ../../../../i18n/es/stockticker.ts \

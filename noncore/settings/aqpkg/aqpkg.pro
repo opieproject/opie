@@ -38,6 +38,7 @@ LIBS        += -lqpe -lopie -lstdc++
 DESTDIR = $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/aqpkg.ts \
+	 ../../../i18n/nl/aqpkg.ts \
          ../../../i18n/xx/aqpkg.ts \
          ../../../i18n/en/aqpkg.ts \
          ../../../i18n/es/aqpkg.ts \

@@ -9,6 +9,7 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/formatter.ts \
+	 ../../../i18n/nl/formatter.ts \
 	 ../../../i18n/da/formatter.ts \
 	 ../../../i18n/xx/formatter.ts \
 	 ../../../i18n/en/formatter.ts \

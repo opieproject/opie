@@ -98,6 +98,7 @@ TARGET		= qpe
 LIBS		+= -lqpe -lcrypt -lopie 
 
 TRANSLATIONS = ../../i18n/de/qpe.ts \
+	 ../../i18n/nl/qpe.ts \
 	 ../../i18n/xx/qpe.ts \
 	 ../../i18n/en/qpe.ts \
 	 ../../i18n/es/qpe.ts \

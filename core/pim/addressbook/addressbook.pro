@@ -30,6 +30,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../../../i18n/de/addressbook.ts \
+	 ../../../i18n/nl/addressbook.ts \
 	 ../../../i18n/da/addressbook.ts \
 	 ../../../i18n/xx/addressbook.ts \
 	 ../../../i18n/en/addressbook.ts \

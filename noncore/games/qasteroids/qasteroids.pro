@@ -9,6 +9,7 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../../../i18n/de/qasteroids.ts \
+	 ../../../i18n/nl/qasteroids.ts \
 	 ../../../i18n/da/qasteroids.ts \
 	 ../../../i18n/xx/qasteroids.ts \
 	 ../../../i18n/en/qasteroids.ts \

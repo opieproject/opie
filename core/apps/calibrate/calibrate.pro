@@ -9,6 +9,7 @@ TARGET		= calibrate
 LIBS		+= -lqpe 
 
 TRANSLATIONS = ../../../i18n/de/calibrate.pro.in.ts \
+	 ../../../i18n/nl/calibrate.pro.in.ts \
 	 ../../../i18n/da/calibrate.pro.in.ts \
 	 ../../../i18n/xx/calibrate.pro.in.ts \
 	 ../../../i18n/en/calibrate.pro.in.ts \

@@ -73,6 +73,7 @@ LIBS		+= -lqpe
 
 
 TRANSLATIONS = ../../../i18n/de/reader.ts \
+	 ../../../i18n/nl/reader.ts \
          ../../../i18n/da/reader.ts \
          ../../../i18n/xx/reader.ts \
    ../../../i18n/en/reader.ts \

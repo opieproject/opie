@@ -7,6 +7,7 @@ LIBS += -ldl -lqpe
 TARGET		= quickexec
 
 TRANSLATIONS = ../i18n/de/quickexec.ts \
+	 ../i18n/nl/quickexec.ts \
 	 ../i18n/da/quickexec.ts \
 	 ../i18n/xx/quickexec.ts \
 	 ../i18n/en/quickexec.ts \

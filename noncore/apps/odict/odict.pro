@@ -20,6 +20,7 @@ TARGET 		= odict
 DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/odict.ts \
+	 ../../../i18n/nl/odict.ts \
 	 ../../../i18n/xx/odict.ts \
 	 ../../../i18n/en/odict.ts \
 	 ../../../i18n/es/odict.ts \

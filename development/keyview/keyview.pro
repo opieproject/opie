@@ -11,6 +11,7 @@ TARGET		= keyview
 DESTDIR     = $(OPIEDIR)/plugins/inputmethods
 
 TRANSLATIONS = ../i18n/de/keyview.ts \
+	 ../i18n/nl/keyview.ts \
 	 ../i18n/da/keyview.ts \
 	 ../i18n/xx/keyview.ts \
 	 ../i18n/en/keyview.ts \

@@ -11,6 +11,7 @@ LIBS          += -lqpe -lopietooth
 VERSION       = 0.0.3
 
 TRANSLATIONS = ../../../../i18n/de/libbluetoothapplet.ts \
+	 ../../../../i18n/nl/libbluetoothapplet.ts \
 	 ../../../../i18n/da/libbluetoothapplet.ts \
 	 ../../../../i18n/xx/libbluetoothapplet.ts \
 	 ../../../../i18n/en/libbluetoothapplet.ts \
