@@ -40,6 +40,8 @@ class CameraMainWindow: public QMainWindow
     void changeZoom( int );
     void systemMessage( const QCString&, const QByteArray& );
 
+    void showContextMenu();
+
   protected:
 
   private:

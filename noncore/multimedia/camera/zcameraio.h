@@ -38,8 +38,8 @@ class ZCameraIO
     bool isAvailable() const;
     bool isCapturing() const;
     bool isFinderReversed() const;
-
     bool isOpen() const;
+
     bool snapshot( QImage* );
     bool snapshot( unsigned char* );
     static ZCameraIO* instance();

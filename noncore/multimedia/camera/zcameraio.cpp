@@ -75,32 +75,32 @@ ZCameraIO::~ZCameraIO()
 }
 
 
-inline bool ZCameraIO::isOpen() const
+bool ZCameraIO::isOpen() const
 {
     return _driver != -1;
 }
 
 
-inline bool ZCameraIO::isShutterPressed()
+bool ZCameraIO::isShutterPressed()
 {
     return _status[0] == 'S';
     clearShutterLatch();
 }
 
 
-inline bool ZCameraIO::isFinderReversed() const
+bool ZCameraIO::isFinderReversed() const
 {
     return _status[1] == 'M';
 }
 
 
-inline bool ZCameraIO::isCapturing() const
+bool ZCameraIO::isCapturing() const
 {
     return _status[2] == 'C';
 }
 
 
-inline bool ZCameraIO::isAvailable() const
+bool ZCameraIO::isAvailable() const
 {
     return _status[3] == 'A';
 }
