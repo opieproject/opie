@@ -1,0 +1,8 @@
+Files: bin/networksetup apps/Settings/networksetup.desktop pics/Network plugins/networksetup/*
+Priority: optional
+Section: opie/settings
+Maintainer: Ben Meyer <meyerb@sharpsec.com> 
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Opie network setup tool

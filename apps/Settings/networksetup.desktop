@@ -1,0 +1,12 @@
+[Desktop Entry]
+Exec=networksetup
+Icon=Network/PPPConnect
+Type=Application
+Name=Network
+Name[pt_BR]=Rede
+Name[de]=Netzwerk
+Name[it]=PPP
+Name[pt]=Rede
+Name[es]=Red
+Name[zh_TW]=網絡
+Name[ko]=네트워크 설정
