@@ -180,7 +180,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Transmettre</translation>
+        <translation>Emettre</translation>
     </message>
     <message>
         <source>This is an all day event.</source>
@@ -200,7 +200,7 @@ Quitter ?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation>Emettre cet élément</translation>
+        <translation>Emettre cette occurence</translation>
     </message>
 </context>
 <context>
@@ -447,7 +447,7 @@ dans : </translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation>Quotidien...</translation>
+        <translation>Quotidienne...</translation>
     </message>
     <message>
         <source>Weekly...</source>
@@ -455,11 +455,11 @@ dans : </translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation>Mensuel...</translation>
+        <translation>Mensuelle...</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation>Annuel...</translation>
+        <translation>Annuelle...</translation>
     </message>
     <message>
         <source>No Repeat...</source>
@@ -568,7 +568,7 @@ Horaire
     </message>
     <message>
         <source>Note...</source>
-        <translation>Notes...</translation>
+        <translation>Note...</translation>
     </message>
 </context>
 <context>
@@ -582,7 +582,7 @@ Horaire
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation>Notes</translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
@@ -652,19 +652,19 @@ Horaire
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
     <message>
         <source>th</source>
-        <translation></translation>
+        <translation>,</translation>
     </message>
 </context>
 <context>
