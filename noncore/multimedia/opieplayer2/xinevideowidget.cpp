@@ -46,39 +46,67 @@
 
 // 180 deg rot: copy a line from src to dst reversed
 
-static inline void memcpy_rev ( void *dst, void *src, size_t len )
+/*
+ * This code relies the len be a multiply of 16bit
+ */
+static inline void memcpy_rev ( void *_dst, void *_src, size_t len )
 {
-	len >>= 1;
+    /*
+     * move the source to the end
+     */
+    char *src_c = static_cast<char*>(_src) + len;
 
-	((char *) src ) += ( len << 1 );
+    /*
+     * as we copy by 16bit and not 8bit
+     * devide the length by two
+     */
+    len >>= 1;
 
-	while ( len-- )
-		*((short int *) dst )++ = *--((short int *) src );
+    short int* dst = static_cast<short int*>( _dst );
+    short int* src = reinterpret_cast<short int*>( src_c );
+
+    /*
+     * Increment dst after assigning
+     * Decrement src before  assigning becase we move backwards
+     */
+    while ( len-- )
+        *dst++ = *--src;
+
 }
 
 // 90 deg rot: copy a column from src to dst
 
-static inline void memcpy_step ( void *dst, void *src, size_t len, size_t step )
+static inline void memcpy_step ( void *_dst, void *_src, size_t len, size_t step )
 {
-	len >>= 1;
-	while ( len-- ) {
-		*((short int *) dst )++ = *((short int *) src );
-		((char *) src ) += step;
-	}
+    short int *dst = static_cast<short int*>( _dst );
+    short int *src = static_cast<short int*>( _src );
+
+    len >>= 1;
+
+    /*
+     * Copy 16bit from src to dst and move to the next address
+     */
+    while ( len-- ) {
+        *dst++ = *src;
+        src = reinterpret_cast<short int*>(reinterpret_cast<char*>(src)+step);
+    }
 }
 
 // 270 deg rot: copy a column from src to dst reversed
 
-static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t step )
+static inline void memcpy_step_rev ( void *_dst, void *_src, size_t len, size_t step )
 {
-	len >>= 1;
+    len >>= 1;
 
-	((char *) src ) += ( len * step );
+    char *src_c = static_cast<char*>( _src ) + (len*step);
+    short int* dst = static_cast<short int*>( _dst );
+    short int* src = reinterpret_cast<short int*>( src_c );
 
-	while ( len-- ) {
-		((char *) src ) -= step;
-		*((short int *) dst )++ = *((short int *) src );
-	}
+    while ( len-- ) {
+        src_c -= step;
+        src = reinterpret_cast<short int*>( src_c );
+        *dst++ = *src;
+    }
 }
 
 
