@@ -1,11 +1,10 @@
 2004-??-??	The Opie Team <opie@handhelds.org>
 
-	* Added daemonizing capabilities to QWS Server [via Qt/Embedded] (mickeyl)
-	* Integrated the new security framework into libopie2 (zecke)
-	* Converted the launcher to use the new security framework (zecke)
-
 	New Features
 	------------
+        * Added daemonizing capabilities to QWS Server [via Qt/Embedded] (mickeyl)
+        * Integrated the new security framework into libopie2 (zecke)
+        * Converted the launcher to use the new security framework (zecke)
 
 	Fixed Bugs
 	--------
