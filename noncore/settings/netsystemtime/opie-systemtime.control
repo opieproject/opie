@@ -5,7 +5,7 @@ Section: opie/settings
 Provides: opie-netsystemtime
 Maintainer: Patrick S. Vogt <tille@handhelds.org>, Dan Williams <drw@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal, ntpdate, libopie1
+Depends: task-opie-minimal, ntpdate, libopiecore2, libopieui2
 Description: System time
  This utility allows the system time to be set manually
  or synced with a timerserver via Internet.

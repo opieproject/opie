@@ -31,66 +31,69 @@
 
 #include <qdialog.h>
 
+#include <opie2/oprocess.h>
+#include <opie2/otabwidget.h>
+
 class TimeTabWidget;
 class FormatTabWidget;
 class SettingsTabWidget;
 class NTPTabWidget;
 class PredictTabWidget;
 
-class OProcess;
-class OTabWidget;
+using Opie::OTabWidget;
+
 class QDateTime;
 class QSocket;
 class QTimer;
 
 class MainWindow : public QDialog
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	MainWindow( QWidget *parent = 0, const char *name = 0,  bool modal = FALSE,WFlags f = 0);
-	~MainWindow();
-	static QString appName() { return QString::fromLatin1("systemtime"); }
+    MainWindow( QWidget *parent = 0, const char *name = 0,  bool modal = FALSE,WFlags f = 0);
+    ~MainWindow();
+    static QString appName() { return QString::fromLatin1("systemtime"); }
 
 protected:
-	void accept();
-	void reject();
+    void accept();
+    void reject();
 
 private:
-	OTabWidget *mainWidget;
+    OTabWidget *mainWidget;
 
-	TimeTabWidget     *timeTab;
-	FormatTabWidget   *formatTab;
-	SettingsTabWidget *settingsTab;
-	NTPTabWidget      *ntpTab;
-	PredictTabWidget  *predictTab;
+    TimeTabWidget     *timeTab;
+    FormatTabWidget   *formatTab;
+    SettingsTabWidget *settingsTab;
+    NTPTabWidget      *ntpTab;
+    PredictTabWidget  *predictTab;
 
-	bool ntpTabEnabled;
-	bool predictTabEnabled;
+    bool ntpTabEnabled;
+    bool predictTabEnabled;
 
-	OProcess *ntpProcess;
-	QTimer   *ntpTimer;
-	QSocket  *ntpSock;
-	int       ntpDelay;
-	bool      ntpInteractive;
-	QString   ntpOutput;
-	int       _lookupDiff;
+    OProcess *ntpProcess;
+    QTimer   *ntpTimer;
+    QSocket  *ntpSock;
+    int       ntpDelay;
+    bool      ntpInteractive;
+    QString   ntpOutput;
+    int       _lookupDiff;
 
-	void runNTP();
-	bool ntpDelayElapsed();
+    void runNTP();
+    bool ntpDelayElapsed();
 
 private slots:
-	void slotSetTime( const QDateTime & );
-	void slotQCopReceive( const QCString &, const QByteArray & );
-	void slotDisplayNTPTab( bool );
-	void slotDisplayPredictTab( bool );
-	void slotGetNTPTime();
-	void slotTimerGetNTPTime();
-	void slotProbeNTPServer();
-	void slotNtpOutput( OProcess *, char *, int );
-	void slotNtpFinished( OProcess* );
-	void slotNTPDelayChanged( int );
-	void slotCheckNtp( int );
+    void slotSetTime( const QDateTime & );
+    void slotQCopReceive( const QCString &, const QByteArray & );
+    void slotDisplayNTPTab( bool );
+    void slotDisplayPredictTab( bool );
+    void slotGetNTPTime();
+    void slotTimerGetNTPTime();
+    void slotProbeNTPServer();
+    void slotNtpOutput( OProcess *, char *, int );
+    void slotNtpFinished( OProcess* );
+    void slotNTPDelayChanged( int );
+    void slotCheckNtp( int );
 };
 
 #endif
