@@ -153,16 +153,8 @@ void ContactEditor::init() {
 	gl->addWidget( labCat, 7, 0 );
 	cmbCat = new CategorySelect( container );
 	gl->addWidget( cmbCat, 7, 1 );
-
-	// We don't need categories for the personal view
-	if ( m_personalView ){
-		qWarning("Disable Category..");
-		labCat->hide();
-		cmbCat->hide();
-	} else {
-		labCat->show();
-		cmbCat->show();
-	}
+	labCat->show();
+	cmbCat->show();
 
 	btnNote = new QPushButton( tr( "Notes..." ), container );
 	gl->addWidget( btnNote, 8, 1 );
@@ -606,6 +598,8 @@ void ContactEditor::init() {
                  this, SLOT(slotAddressTypeChange(int)) );
 
 	new QPEDialogListener(this);
+
+	setPersonalView ( m_personalView );
 }
 
 void ContactEditor::slotChooser1Change( const QString &textChanged ) {
