@@ -964,6 +964,14 @@ OStationList* OWirelessNetworkInterface::scanNetwork()
 }
 
 
+int OWirelessNetworkInterface::signalStrength() const
+{
+    int max = _range.max_qual.level;
+    odebug << "signalStrength(): max quality seems to be " << max << "dBM" << oendl;
+    return 50;
+}
+
+
 bool OWirelessNetworkInterface::wioctl( int call, struct iwreq& iwreq ) const
 {
     #ifndef NODEBUG

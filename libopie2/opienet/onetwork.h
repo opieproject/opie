@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) 2003 by Michael 'Mickey' Lauer <mickey@Vanille.de>
-              =.
+                             Copyright (C) 2003-2004 by Michael 'Mickey' Lauer
+              =.             <mickey@Vanille.de>
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -60,13 +60,13 @@ class OMonitoringInterface;
  *
  * This class provides access to all available network interfaces of your computer.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class ONetwork : public QObject
 {
   Q_OBJECT
 
- public:
+  public:
     typedef QDict<ONetworkInterface> InterfaceMap;
     typedef QDictIterator<ONetworkInterface> InterfaceIterator;
 
@@ -124,7 +124,7 @@ class ONetwork : public QObject
  * @warning Most of the setting methods contained in this class require the appropriate
  * process permissions to work.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class ONetworkInterface : public QObject
 {
@@ -234,7 +234,7 @@ class ONetworkInterface : public QObject
  * This is necessary when in monitoring mode and scanning for other devices, because
  * the radio frequency hardware can only detect packets sent on the same frequency.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class OChannelHopper : public QObject
 {
@@ -294,7 +294,7 @@ class OChannelHopper : public QObject
  *
  * This class provides a high-level encapsulation of the Linux wireless extension API.
  *
- * @author Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
  */
 class OWirelessNetworkInterface : public ONetworkInterface
 {
@@ -414,6 +414,12 @@ class OWirelessNetworkInterface : public ONetworkInterface
      * @note: UNSTABLE API - UNDER CONSTRUCTION - DON'T USE!
      */
     virtual OStationList* scanNetwork();
+    /**
+     * @return signal strength to associated neighbour (in percent).
+     * In infrastructure mode, this is the signal strength of the Access Point.
+     * In other modes the result is driver dependent.
+     */
+    virtual int signalStrength() const;
     /** @internal commit pending changes to the driver
      *
      */
