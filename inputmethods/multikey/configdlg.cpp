@@ -245,6 +245,9 @@ void ConfigDlg::setMap(int index) {
 void ConfigDlg::addMap() {
 
     QString map = OFileDialog::getOpenFileName(1, QDir::home().absPath());
+
+    if (map.isNull()) return;
+
     Config config ("multikey");
     config.setGroup("keymaps");
     QStringList maps = config.readListEntry("maps", QChar('|'));
