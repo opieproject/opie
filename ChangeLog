@@ -8,6 +8,8 @@
 	* Support for Tuxpad 1 of Tradesquare.NL (mickeyl,zecke)
 	* Opie-Console use Custom Font and Size in a Profile (harlekin)
 	* Opie-Console transparently log the Output and Input to a file (harlekin)
+	* New O-menu icon to lock the PDA immediately: opie-lockapplet (clem)
+	* opie-security improvements: hide the plugin-based authentication tabs if no auth. plugin package is installed, and new 'test authentication' button (clem)
 
 	Fixed Bugs
 	----------
@@ -23,6 +25,8 @@
 	* #957  - Import of VCards/VTodos/VEvents with BASE64 encoding (ljp,zecke)
 	* n.a.  - Converted applications to not hardcode /opt/QtPalmtop but to use QPEApplication::qpeDir
 	* n.a.  - Converted usage of qpeDir() not to include a '/' as first charachter of the string
+	* n.a.  - Build system: enable distcc and ccache when crosscompiling too, and use them everywhere we can (clem)
+	* n.a.  - Build system: fix deps in several config.in (and fix scripts/deps.pl too) to stop breaking builds, especially with make -j highNumber (clem)
 
 2004-09-17	Opie 1.1.6
 
