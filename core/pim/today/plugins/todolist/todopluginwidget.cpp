@@ -19,6 +19,9 @@
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 
+using namespace Opie::Ui;
+using namespace Opie;
+
 TodolistPluginWidget::TodolistPluginWidget( QWidget *parent,  const char* name )
     : QWidget( parent, name ) {
 

@@ -21,9 +21,8 @@
 
 #include <qpe/datebookdb.h>
 
-using namespace Opie; 
 
-class DateBookEvent: public OClickableLabel {
+class DateBookEvent: public Opie::Ui::OClickableLabel {
 
      Q_OBJECT
 

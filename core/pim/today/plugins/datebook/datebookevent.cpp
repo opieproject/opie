@@ -22,7 +22,8 @@
 
 #include <opie2/odevice.h>
 
-using namespace Opie;
+using namespace Opie::Ui;
+using namespace Opie::Core;
 
 DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     QWidget* parent,

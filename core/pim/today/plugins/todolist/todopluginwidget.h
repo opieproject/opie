@@ -22,7 +22,6 @@
 #include <opie2/otodoaccess.h>
 #include <opie2/oclickablelabel.h>
 
-using namespace Opie; 
 
 class TodolistPluginWidget : public QWidget {
 
@@ -39,12 +38,12 @@ protected slots:
     void  startTodolist();
 
 private:
-    OClickableLabel *todoLabel;
+    Opie::Ui::OClickableLabel *todoLabel;
     QVBoxLayout* layoutTodo;
 
-    OPimTodoAccess *todo;
-    OPimTodoAccess::List m_list;
-    OPimTodoAccess::List::Iterator m_it;
+    Opie::OPimTodoAccess *todo;
+    Opie::OPimTodoAccess::List m_list;
+    Opie::OPimTodoAccess::List::Iterator m_it;
 
     void readConfig();
     void getTodo();
