@@ -41,15 +41,6 @@
 
 static bool contactCompare( const Contact &cnt, const QRegExp &r, int category );
 
-//### qtmail/addresslist.cpp hardcodes this filename as well
-static QString journalFileName()
-{
-    QString str = getenv("HOME");
-    str +="/.abjournal";
-    return str;
-}
-
-
 
 /*!
   \class AbTableItem abtable.h
@@ -135,7 +126,8 @@ AbTable::AbTable( const QValueList<int> *order, QWidget *parent, const char *nam
       asc( TRUE ),
       intFields( order ),
       currFindRow( -2 ),
-      mCat( 0 )
+      mCat( 0 ),
+      m_contactdb ("addressbook")
 {
     mCat.load( categoryFileName() );
     setSelectionMode( NoSelection );
@@ -202,20 +194,15 @@ Contact AbTable::currentEntry()
 void AbTable::replaceCurrentEntry( const Contact &newContact )
 {
     int row = currentRow();
-    updateJournal( newContact, Contact::ACTION_REPLACE, row );
     updateVisible();
 
     journalFreeReplace( newContact, row );
+
 }
 
 void AbTable::deleteCurrentEntry()
 {
     int row = currentRow();
-    AbTableItem *abItem;
-    abItem = static_cast<AbTableItem*>(item( row, 0 ));
-    Contact oldContact;
-    oldContact = contactList[abItem];
-    updateJournal( oldContact, Contact::ACTION_REMOVE, row );
 
     // a little wasteful, but it ensure's there is only one place
     // where we delete.
@@ -446,14 +433,18 @@ QString AbTable::findContactContact( const Contact &entry )
 void AbTable::addEntry( const Contact &newCnt )
 {
     int row = numRows();
+
     setNumRows( row + 1 );
-    updateJournal( newCnt, Contact::ACTION_ADD );
     insertIntoTable( newCnt, row );
+
+    qWarning("abtable:AddContact");
+    m_contactdb.addContact( newCnt );
+
     setCurrentCell( row, 0 );
     updateVisible();
 }
 
-void AbTable::resizeRows( int size ) {
+void AbTable::resizeRows( int /* size */) {
 /*
 	if (numRows()) {
 		for (int i = 0; i < numRows(); i++) {
@@ -463,284 +454,38 @@ void AbTable::resizeRows( int size ) {
 	updateVisible();
 }
 
-void AbTable::updateJournal( const Contact &cnt,
-			     Contact::journal_action action, int row )
-{
-    QFile f( journalFileName() );
-    if ( !f.open(IO_WriteOnly|IO_Append) )
-	 return;
-    QString buf;
-    QCString str;
-    buf = "<Contact ";
-    cnt.save( buf );
-    buf += " action=\"" + QString::number( (int)action ) + "\" ";
-    if ( action == Contact::ACTION_REMOVE || action == Contact::ACTION_REPLACE)
-	buf += " actionrow=\"" + QString::number(row) + "\" ";
-    buf += "/>\n";
-    QCString cstr = buf.utf8();
-    f.writeBlock( cstr.data(), cstr.length() );
-    QCopEnvelope( "QPE/PIM", "addressbookUpdated()" );
-}
 
-bool AbTable::save( const QString &fn )
+bool AbTable::save( const QString& /* fn */ )
 {
 //     QTime t;
 //     t.start();
+	qWarning("abtable:Save data");
+	m_contactdb.save();
 
-    QString strNewFile = fn + ".new";
-    QFile f( strNewFile );
-    if ( !f.open( IO_WriteOnly|IO_Raw ) )
-	return false;
-
-    int total_written;
-    QString out;
-    out = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE Addressbook ><AddressBook>\n"
-	  " <Groups>\n"
-	  " </Groups>\n"
-	  " <Contacts>\n";
-    QMapIterator<AbTableItem*, Contact> it;
-    for ( it = contactList.begin(); it != contactList.end(); ++it ) {
-	out += "<Contact ";
-	it.data().save( out );
-	out += "/>\n";
-	QCString cstr = out.utf8();
-	total_written = f.writeBlock( cstr.data(), cstr.length() );
-	if ( total_written != int(cstr.length()) ) {
-	    f.close();
-	    QFile::remove( strNewFile );
-	    return false;
-	}
-	out = "";
-    }
-    out += " </Contacts>\n</AddressBook>\n";
-
-    QCString cstr = out.utf8();
-    total_written = f.writeBlock( cstr.data(), cstr.length() );
-    if ( total_written != int(cstr.length()) ) {
-	f.close();
- 	QFile::remove( strNewFile );
- 	return false;
-    }
-    f.close();
-
-//     qDebug("saving: %d", t.elapsed() );
-
-    // move the file over, I'm just going to use the system call
-    // because, I don't feel like using QDir.
-    if ( ::rename( strNewFile.latin1(), fn.latin1() ) < 0 ) {
-	qWarning( "problem renaming file %s to %s, errno: %d",
-		  strNewFile.latin1(), fn.latin1(), errno );
-	// remove the tmp file...
-	QFile::remove( strNewFile );
-    }
-    // remove the journal...
-    QFile::remove( journalFileName() );
     return true;
 }
 
-void AbTable::load( const QString &fn )
+void AbTable::load( const QString& /* fn */ )
 {
     setSorting( false );
-    loadFile( fn, false );
-    // merge in the journal
-    if ( QFile::exists( journalFileName() ) ) {
-	loadFile( journalFileName(), true );
-	save( fn );
-    }
+    setUpdatesEnabled( FALSE );
+
+    qWarning("abtable:Load data");
+
+    OContactDB::Iterator it = m_contactdb.allContacts();
+    setNumRows( it.count() );
+    int row = 0;
+    for ( it = it.begin(); it != it.end(); ++it )
+	insertIntoTable( *it, row++ );
+
+    resort();
+
+    setUpdatesEnabled( TRUE );
+
     setSorting( true );
     resort();
 }
 
-void AbTable::loadFile( const QString &strFile, bool journalFile )
-{
-//     QTime t;
-//     t.start();
-    QFile f( strFile );
-    if ( !f.open(IO_ReadOnly) )
-	return;
-    QList<Contact> list;
-    list.setAutoDelete( TRUE );
-    QByteArray ba = f.readAll();
-    f.close();
-   if (ba.isEmpty() )
-       return;
-    char *uc = ba.data();//(QChar *)data.unicode();
-    int len = ba.size();//data.length();
-    bool foundAction = false;
-    Contact::journal_action action;
-    bool foundKey = false;
-    int journalKey = 0;
-
-    const int JOURNALACTION = Qtopia::Notes + 1;
-    const int JOURNALROW = JOURNALACTION + 1;
-
-    // **********************************
-    // CHANGE THE SIZE OF THE DICT IF YOU ADD ANY MORE FIELDS!!!!
-    // **********************************
-    QAsciiDict<int> dict( 47 );
-    dict.setAutoDelete( TRUE );
-    dict.insert( "Uid", new int(Qtopia::AddressUid) );
-    dict.insert( "Title", new int(Qtopia::Title) );
-    dict.insert( "FirstName", new int(Qtopia::FirstName) );
-    dict.insert( "MiddleName", new int(Qtopia::MiddleName) );
-    dict.insert( "LastName", new int(Qtopia::LastName) );
-    dict.insert( "Suffix", new int(Qtopia::Suffix) );
-    dict.insert( "FileAs", new int(Qtopia::FileAs) );
-    dict.insert( "Categories", new int(Qtopia::AddressCategory) );
-    dict.insert( "DefaultEmail", new int(Qtopia::DefaultEmail) );
-    dict.insert( "Emails", new int(Qtopia::Emails) );
-    dict.insert( "HomeStreet", new int(Qtopia::HomeStreet) );
-    dict.insert( "HomeCity", new int(Qtopia::HomeCity) );
-    dict.insert( "HomeState", new int(Qtopia::HomeState) );
-    dict.insert( "HomeZip", new int(Qtopia::HomeZip) );
-    dict.insert( "HomeCountry", new int(Qtopia::HomeCountry) );
-    dict.insert( "HomePhone", new int(Qtopia::HomePhone) );
-    dict.insert( "HomeFax", new int(Qtopia::HomeFax) );
-    dict.insert( "HomeMobile", new int(Qtopia::HomeMobile) );
-    dict.insert( "HomeWebPage", new int(Qtopia::HomeWebPage) );
-    dict.insert( "Company", new int(Qtopia::Company) );
-    dict.insert( "BusinessStreet", new int(Qtopia::BusinessStreet) );
-    dict.insert( "BusinessCity", new int(Qtopia::BusinessCity) );
-    dict.insert( "BusinessState", new int(Qtopia::BusinessState) );
-    dict.insert( "BusinessZip", new int(Qtopia::BusinessZip) );
-    dict.insert( "BusinessCountry", new int(Qtopia::BusinessCountry) );
-    dict.insert( "BusinessWebPage", new int(Qtopia::BusinessWebPage) );
-    dict.insert( "JobTitle", new int(Qtopia::JobTitle) );
-    dict.insert( "Department", new int(Qtopia::Department) );
-    dict.insert( "Office", new int(Qtopia::Office) );
-    dict.insert( "BusinessPhone", new int(Qtopia::BusinessPhone) );
-    dict.insert( "BusinessFax", new int(Qtopia::BusinessFax) );
-    dict.insert( "BusinessMobile", new int(Qtopia::BusinessMobile) );
-    dict.insert( "BusinessPager", new int(Qtopia::BusinessPager) );
-    dict.insert( "Profession", new int(Qtopia::Profession) );
-    dict.insert( "Assistant", new int(Qtopia::Assistant) );
-    dict.insert( "Manager", new int(Qtopia::Manager) );
-    dict.insert( "Spouse", new int(Qtopia::Spouse) );
-    dict.insert( "Children", new int(Qtopia::Children) );
-    dict.insert( "Gender", new int(Qtopia::Gender) );
-    dict.insert( "Birthday", new int(Qtopia::Birthday) );
-    dict.insert( "Anniversary", new int(Qtopia::Anniversary) );
-    dict.insert( "Nickname", new int(Qtopia::Nickname) );
-    dict.insert( "Notes", new int(Qtopia::Notes) );
-    dict.insert( "action", new int(JOURNALACTION) );
-    dict.insert( "actionrow", new int(JOURNALROW) );
-
-    int i = 0;
-    int num = 0;
-    char *point;
-    while ( (point = strstr( uc+i, "<Contact " ) ) != NULL ) {
-	i = point - uc;
-	// if we are reading the standard file, we just need to
-	// insert info, so just say we'll do an insert...
-	action = Contact::ACTION_ADD;
-	// new Contact
-	Contact *cnt = new Contact;
-	i += 9;
-	while ( 1 ) {
-	    while ( i < len && (uc[i] == ' ' || uc[i] == '\n' || uc[i] == '\r') )
-		i++;
-	    if ( i >= len-2 || (uc[i] == '/' && uc[i+1] == '>') )
-		break;
-	    // we have another attribute read it.
-	    int j = i;
-	    while ( j < len && uc[j] != '=' )
-		j++;
-	    char *attr = uc+i;
-	    uc[j] = '\0';
-	    //qDebug("attr=%s", attr.latin1() );
-	    i = ++j; // skip =
-	    while ( i < len && uc[i] != '"' )
-		i++;
-	    j = ++i;
-	    bool haveEnt = FALSE;
-	    bool haveUtf = FALSE;
-	    while ( j < len && uc[j] != '"' ) {
-		if ( uc[j] == '&' )
-		    haveEnt = TRUE;
-		if ( ((unsigned char)uc[j]) > 0x7f )
-		    haveUtf = TRUE;
-		j++;
-	    }
-
-	    if ( j == i ) {
-		// empty value
-		i = j + 1;
-		continue;
-	    }
-
-	    QString value = haveUtf ? QString::fromUtf8( uc+i, j-i )
-			    : QString::fromLatin1( uc+i, j-i );
-	    if ( haveEnt )
-		value = Qtopia::plainString( value );
-	    i = j + 1;
-
-	    int *find = dict[ attr ];
-	    if ( !find ) {
-		cnt->setCustomField(attr, value);
-		continue;
-	    }
-#if 1
-	    switch( *find ) {
-	    case Qtopia::AddressUid:
-		cnt->setUid( value.toInt() );
-		break;
-	    case Qtopia::AddressCategory:
-		cnt->setCategories( Qtopia::Record::idsFromString( value ));
-		break;
-	    case JOURNALACTION:
-		action = Contact::journal_action(value.toInt());
-		break;
-	    case JOURNALROW:
-		journalKey = value.toInt();
-		break;
-
-	    default:
-		cnt->insert( *find, value );
-		break;
-	    }
-#endif
-	}
-
-	// sadly we can't delay adding of items from the journal to get
-	// the proper effect, but then, the journal should _never_ be
-	// that huge, and recovering from a crash is not necessarily
-	// a *fast* thing.
-	switch ( action ) {
-	case Contact::ACTION_ADD:
-	    if ( journalFile ) {
-		int myrows = numRows();
-		setNumRows( myrows + 1 );
-		insertIntoTable( *cnt, myrows );
-		delete cnt;
-	    }
-	    else
-		list.append( cnt );
-	    break;
-	case Contact::ACTION_REMOVE:
-	    // yup, we don't use the entry to remove the object...
-	    journalFreeRemove( journalKey  );
-	    delete cnt;
-	    break;
-	case Contact::ACTION_REPLACE:
-	    journalFreeReplace( *cnt, journalKey );
-	    delete cnt;
-	    break;
-	default:
-	    break;
-	}
-	num++;
-	foundAction = false;
-	foundKey = false;
-// 	if ( num % 100 == 0 ) {
-// 	    qDebug("loading file, num=%d, t=%d", num, t.elapsed() );
-// 	}
-    }
-    if ( list.count() > 0 ) {
-	internalAddEntries( list );
-    }
-//    qDebug("done loading %d, t=%d", num, t.elapsed() );
-
-}
 
 void AbTable::realignTable( int row )
 {
@@ -761,6 +506,7 @@ void AbTable::realignTable( int row )
     resort();
 }
 
+// Add contact into table.
 void AbTable::insertIntoTable( const Contact &cnt, int row )
 {
     QString strName,
@@ -782,19 +528,8 @@ void AbTable::insertIntoTable( const Contact &cnt, int row )
     // resort at some point?
 }
 
-void AbTable::internalAddEntries( QList<Contact> &list )
-{
-    setUpdatesEnabled( FALSE );
-    setNumRows( list.count() );
-    int row = 0;
-    Contact *it;
-    for ( it = list.first(); it; it = list.next() )
-	insertIntoTable( *it, row++ );
-    resort();
-    setUpdatesEnabled( TRUE );
-}
 
-
+// Replace or add an entry
 void AbTable::journalFreeReplace( const Contact &cnt, int row )
 {
     QString strName,
@@ -804,28 +539,46 @@ void AbTable::journalFreeReplace( const Contact &cnt, int row )
     strName = findContactName( cnt );
     strContact = findContactContact( cnt );
     ati = static_cast<AbTableItem*>(item(row, 0));
-    if ( ati != 0 ) {
+
+    // Replace element if found in row "row"
+    // or add this element if not.
+    if ( ati != 0 ) { // replace
+	// :SX db access -> replace
+	qWarning ("Replace Contact in DB ! UID: %d", contactList[ati].uid() );
+	m_contactdb.replaceContact( contactList[ati].uid(), cnt );
+
         contactList.remove( ati );
         ati->setItem( strName, strContact );
         contactList.insert( ati, cnt );
 
         ati = static_cast<AbTableItem*>(item(row, 1));
         ati->setItem( strContact, strName );
-    }else{
+
+    }else{ // add
         int myrows = numRows();
         setNumRows( myrows + 1 );
         insertIntoTable( cnt, myrows );
-        // gets deleted when returning
+        // gets deleted when returning -- Why ? (se)
+	// :SX db access -> add
+	qWarning ("Are you sure to add to database ? -> Currently disabled !!");
+	// m_contactdb.addContact( cnt );
     }
 }
 
+// Remove entry
 void AbTable::journalFreeRemove( int row )
 {
     AbTableItem *ati;
     ati = static_cast<AbTableItem*>(item(row, 0));
     if ( !ati )
 	return;
-    contactList.remove( ati );
+
+    // :SX db access -> remove
+    qWarning ("Remove Contact from DB ! UID: %d",contactList[ati].uid() );
+    m_contactdb.removeContact( contactList[ati].uid() );
+
+    contactList.remove( ati ); 
+
     realignTable( row );
 }
 

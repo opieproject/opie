@@ -29,6 +29,8 @@
 #include <qstringlist.h>
 #include <qcombobox.h>
 
+#include <opie/ocontactdb.h>
+
 class AbTableItem : public QTableItem
 {
 public:
@@ -122,7 +124,6 @@ private:
     void updateJournal( const Contact &contact, Contact::journal_action action,
 			int row = -1 );
     void insertIntoTable( const Contact &contact, int row );
-    void internalAddEntries( QList<Contact> &list );
     QString findContactName( const Contact &entry );
     QString findContactContact( const Contact &entry );
     void journalFreeReplace( const Contact &cnt, int row );
@@ -139,5 +140,8 @@ private:
     QStringList choicenames;
     bool enablePainting;
     Categories mCat;
+
+    OContactDB m_contactdb;
+
 };
 #endif // ABTABLE_H
