@@ -12,10 +12,7 @@
 
 #include <qwidget.h>
 
-class QTable;
-class QComboBox;
-class QLabel;
-
+class QGridLayout;
 
 class PSEWidget : public QWidget
 {
@@ -23,6 +20,9 @@ class PSEWidget : public QWidget
 	
     public:
 		PSEWidget();
+
+    private:
+        QGridLayout *maingrid;
 
 };
 

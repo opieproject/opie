@@ -7,26 +7,20 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
+#ifndef _OXYFRAME_H
+#define _OXYFRAME_H
 
-#ifndef _DATATABLE_H
-#define _DATATABLE_H
 
-#include <qtable.h>
+#include <qframe.h>
 
-class OxydataTable : public QTable
+class OxyFrame : public QFrame
 {
 	Q_OBJECT
 	
     public:
-        OxydataTable( int numRows, int numCols,
-                            QWidget *parent = 0, const char *name = 0 );
+        OxyFrame(  QWidget *parent=0, const char *name=0);
+        
 
-    protected:
-        /*
-         * This method is reimplemented form QTable. It implements the colourisation
-         * of every second row.
-         */
-        virtual void paintCell(  QPainter *p, int row, int col, const QRect &cr, bool selected );
 };
 
 #endif

@@ -6,10 +6,8 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "oxygen.h"
 
 #include "dataTable.h"
-#include <qtable.h>
 
 OxydataTable::OxydataTable(int numRows, int numCols, QWidget *parent,
         const char *name) : QTable(numRows, numRows, parent, name)
@@ -21,9 +19,6 @@ void OxydataTable::paintCell(  QPainter *p, int row, int col, const QRect &cr, b
     if ( cr.width() == 0 || cr.height() == 0 )
         return;
     selected = FALSE;
-
-    int w = cr.width();
-    int h = cr.height();
 
     QTableItem *itm = item( row, col );
     QColorGroup colgrp = colorGroup();

@@ -6,6 +6,7 @@ HEADERS		= oxygen.h \
             calcdlgui.h \
             dataTable.h \
             psewidget.h \
+            oxyframe.h \
             datawidgetui.h
 
 SOURCES		= main.cpp \
@@ -15,6 +16,7 @@ SOURCES		= main.cpp \
           kmolelements.cpp \
           dataTable.cpp \
           psewidget.cpp \
+          oxyframe.cpp \
           datawidgetui.cpp
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include

@@ -6,11 +6,14 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "oxygen.h"
 
 #include <qpe/config.h>
+#include <qlayout.h>
 #include "psewidget.h"
+#include "oxyframe.h"
 
 PSEWidget::PSEWidget() : QWidget()
 {
+    maingrid = new QGridLayout(  18 , 10 , -1 , "maingridlayout" );
+    OxyFrame *test = new OxyFrame(this);
 }
