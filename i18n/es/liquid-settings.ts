@@ -3,47 +3,47 @@
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Estilo de Liquid</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin transparencias</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Punteado, color de fondo</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Punteado, color de botón</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Punteado translúcido, color de fondo</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Punteado translúcido, color de botón</translation>
     </message>
     <message>
         <source>Custom translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Transparencia propia</translation>
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color del menú</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Color del texto</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacidad</translation>
     </message>
     <message>
         <source>Use shadowed text</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar texto sombreado</translation>
     </message>
 </context>
 </TS>

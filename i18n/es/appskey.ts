@@ -3,27 +3,27 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar tecla aplicación</translation>
     </message>
     <message>
         <source>Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Calendario</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation type="unfinished"></translation>
+        <translation>Contactos</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicio</translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menú emergente</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo</translation>
     </message>
 </context>
 </TS>

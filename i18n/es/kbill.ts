@@ -3,7 +3,7 @@
     <name>HelpDialog</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impreso1</translation>
     </message>
 </context>
 </TS>

@@ -3,51 +3,51 @@
     <name>LibMadPlugin</name>
     <message>
         <source>No Song Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin canciones</translation>
     </message>
     <message>
         <source>Info: </source>
-        <translation type="unfinished"></translation>
+        <translation>Info:</translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Genre: </source>
-        <translation type="unfinished"></translation>
+        <translation>Género:</translation>
     </message>
     <message>
         <source>Bitrate: </source>
-        <translation type="unfinished"></translation>
+        <translation>Muestreo:</translation>
     </message>
     <message>
         <source>URL: </source>
-        <translation type="unfinished"></translation>
+        <translation>URL:</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <source>Artist</source>
-        <translation type="unfinished"></translation>
+        <translation>Artista</translation>
     </message>
     <message>
         <source>Album</source>
-        <translation type="unfinished"></translation>
+        <translation>Álbum</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Año</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario</translation>
     </message>
     <message>
         <source>, Track: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Pista: </translation>
     </message>
 </context>
 </TS>

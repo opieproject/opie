@@ -3,330 +3,331 @@
     <name>Categories</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>No rellenado</translation>
     </message>
     <message>
         <source> (multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(multi.)</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>Negocios</translation>
     </message>
     <message>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Personal</translation>
     </message>
 </context>
 <context>
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Multi.)</translation>
     </message>
 </context>
 <context>
     <name>CategoryEdit</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva categoría</translation>
     </message>
     <message>
         <source>New Category </source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva categoría</translation>
     </message>
 </context>
 <context>
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar categoría</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Categorías</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplicación</translation>
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation type="unfinished"></translation>
+        <translation>Aquí van las categorías</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
 </context>
 <context>
     <name>CategoryMenu</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>No rellenado</translation>
     </message>
 </context>
 <context>
     <name>CategorySelect</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Sorry, another application is
 editing categories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lo siento, otra aplicación está
+editando categorías.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar categorías</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todas</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver</translation>
     </message>
     <message>
         <source>Create a new Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Crear nuevo documento</translation>
     </message>
     <message>
         <source>Close the File Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar selección fichero</translation>
     </message>
 </context>
 <context>
     <name>FileSelectorView</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>There are no files in this directory.</source>
-        <translation type="unfinished"></translation>
+        <translation>No hay ficheros en este directorio.</translation>
     </message>
 </context>
 <context>
     <name>FindWidget</name>
     <message>
         <source>String Not Found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena no encontrada.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Final alcanzado, empezando por el principio</translation>
     </message>
 </context>
 <context>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>Qué buscar:</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Buscar</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoría:</translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar búsqueda el:</translation>
     </message>
     <message>
         <source>Dec 02 01</source>
-        <translation type="unfinished"></translation>
+        <translation>Dic 02 01</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Distinguir may/min</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar hacia atrás</translation>
     </message>
 </context>
 <context>
     <name>LnkProperties</name>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ver documento</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>File deletion failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló al borrar fichero.</translation>
     </message>
     <message>
         <source>Delete Icon and leave file</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar icono y dejar fichero</translation>
     </message>
     <message>
         <source>Icon deletion failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al borrar icono.</translation>
     </message>
     <message>
         <source>Copy of </source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar de</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplicar</translation>
     </message>
     <message>
         <source>File copy failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al copiar fichero.</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalles</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo al mover documento.</translation>
     </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Detalles</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Comentario:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Localización:</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation type="unfinished"></translation>
+        <translation>Carga rápida (consume memoria)</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Del Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar icono</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Emitir</translation>
     </message>
 </context>
 <context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Información del propietario</translation>
     </message>
 </context>
 <context>
     <name>PasswordBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Impreso1</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca código</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin espacio</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -335,386 +336,396 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hubo un problema creando
+la información de configuración
+de este programa.
+
+Por favor, libere espacio e
+inténtelo de nuevo.</translation>
     </message>
     <message>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de crear ficheros de inicio.
+Por favor, libere espacio antes
+de introducir datos</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de programar alarma.
+Libere memoria e intételo de nuevo.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>A</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>día</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>mes</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>año</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Lun</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Mar</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Mie</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Jue</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Vie</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Sáb</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Dom</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Está seguro que quiere borrar
+%1?</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>No rellenado</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Dirección trabajo:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Dirección casa:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation type="unfinished"></translation>
+        <translation>Correo-e:</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>Teléfono casa:</translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fax casa:</translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil personal:</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>Página web personal:</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>Página web empresa:</translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation type="unfinished"></translation>
+        <translation>Oficina:</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>Teléfono empresa:</translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fax empresa:</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil empresa:</translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="unfinished"></translation>
+        <translation>Busca empresa:</translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="unfinished"></translation>
+        <translation>Profesión:</translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ayudante:</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation type="unfinished"></translation>
+        <translation>Gerente:</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Varón</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Hembra</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation type="unfinished"></translation>
+        <translation>Género:</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>Esposa:</translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation type="unfinished"></translation>
+        <translation>Cumpleaños:</translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
+        <translation>Aniversario:</translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation type="unfinished"></translation>
+        <translation>Apodo:</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>2º nombre</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Apellidos</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Archivar como</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Título profesional</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Departamento</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Compañía</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Teléfono empresa</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax empresa</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil empresa</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Correo-e predefinido</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Correos-e</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Teléfono casa</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Fax casa</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Móvil personal</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Calle empresa</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciudade empresa</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Provincia empresa</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Zip empresa</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>País empresa</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Busca empresa</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Página web empresa</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Oficina</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Profesión</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Ayudante</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Gerente</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Calle casa</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Ciudad casa</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Provincia casa</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Zip casa</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>País casa</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Página web personal</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Esposa</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Género</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Cumpleaños</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Aniversario</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Apodo</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Niños</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Notas</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupos</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarjeta CF</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco duro</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Tarjeta SD</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Disco duro SCSI</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Almacenamiento interno</translation>
     </message>
 </context>
 <context>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin espacio</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Please free up space and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de programar alarma.
+Libere memoria e intételo de nuevo</translation>
     </message>
 </context>
 </TS>

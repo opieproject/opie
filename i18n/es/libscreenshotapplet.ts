@@ -3,7 +3,7 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantallazo</translation>
     </message>
 </context>
 </TS>

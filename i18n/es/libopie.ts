@@ -3,171 +3,172 @@
     <name>ColorPopupMenu</name>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Más</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Más...</translation>
     </message>
 </context>
 <context>
     <name>OColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tono:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sat:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation type="unfinished"></translation>
+        <translation>Val:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rojo:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>Verde:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Azul:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Canal alpha:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleccionar color</translation>
     </message>
 </context>
 <context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished"></translation>
+        <translation>DiálogoFichero</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar</translation>
     </message>
 </context>
 <context>
     <name>OFileSelector</name>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Documentos</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheros</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Todos ficheros</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Todo</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre:</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Salvar</translation>
     </message>
     <message>
         <source>C&amp;ancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancelar</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo mime</translation>
     </message>
     <message>
         <source>Ser Permission</source>
-        <translation type="unfinished"></translation>
+        <translation>Fijar permisos</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Seguro que quiere borrar
+</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
 </context>
 <context>
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Grande</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediano</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Pequeño</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sumario:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Descripción:</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Prioridad:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Progreso:</translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fecha tope:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Categoría:</translation>
     </message>
 </context>
 </TS>

@@ -3,34 +3,34 @@
     <name>NetMonitor</name>
     <message>
         <source>Network Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Red desconectada</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectar</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
 </context>
 <context>
     <name>NetPassword</name>
     <message>
         <source>Network Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña de red</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
     <message>
         <source>Enter password for %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Contraseña para %1:</translation>
     </message>
 </context>
 </TS>

@@ -3,47 +3,48 @@
     <name>ObexDlg</name>
     <message>
         <source>OBEX Sending</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX enviando</translation>
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviando:</translation>
     </message>
     <message>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>fichero</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cancelar</translation>
     </message>
 </context>
 <context>
     <name>ObexInc</name>
     <message>
         <source>OBEX Receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX reciviendo</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>EtiquetaTexto1</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero</translation>
     </message>
     <message>
         <source>A file was beamed 
 to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Se emitió un
+fichero para ti.</translation>
     </message>
     <message>
         <source>Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>Insertar</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>Rechazar</translation>
     </message>
 </context>
 </TS>
