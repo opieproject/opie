@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (c) 2002 Stefan Eilers (eilers.stefan@epost.de)
 **
 ** This file is part of Qt Palmtop Environment.
 **
@@ -18,7 +19,6 @@
 **
 **********************************************************************/
 
-#define QTOPIA_INTERNAL_CONTACT_MRE
 
 #include <qpe/categoryselect.h>
 #include <qpe/config.h>
@@ -42,9 +42,6 @@
 #include <stdlib.h>
 
 #include <ctype.h> //toupper() for key hack
-
-static bool contactCompare( const OContact &cnt, const QRegExp &r, int category );
-
 
 /*!
   \class AbTableItem abtable.h
@@ -121,25 +118,23 @@ void AbPickItem::setContentFromEditor( QWidget *w )
 */
 
 AbTable::AbTable( const QValueList<int> *order, QWidget *parent, const char *name )
-	// #ifdef QT_QTABLE_NOHEADER_CONSTRUCTOR
-	//     : QTable( 0, 0, parent, name, TRUE ),
-	// #else
 	: QTable( parent, name ),
-		 // #endif
-		 lastSortCol( -1 ),
-		 asc( TRUE ),
-		 intFields( order ),
-		 currFindRow( -1 ),
-		 mCat( 0 ),
-		 m_inSearch (false),
-		 m_contactdb ("addressbook", 0l, 0l, false) // Handle syncing myself.. !
+	  lastSortCol( -1 ),
+	  asc( TRUE ),
+	  intFields( order ),
+	  enablePainting( true ),
+	  columnVisible( true )
 {
-	mCat.load( categoryFileName() );
+	qWarning("C'tor start");
+
 	setSelectionMode( NoSelection );
 	init();
 	setSorting( TRUE );
 	connect( this, SIGNAL(clicked(int,int,int,const QPoint &)),
 		 this, SLOT(itemClicked(int,int)) );
+
+	contactList.clear();
+	qWarning("C'tor end");
 }
 
 AbTable::~AbTable()
@@ -148,7 +143,7 @@ AbTable::~AbTable()
 
 void AbTable::init()
 {
-	showChar = '\0';
+	// :SX showChar = '\0';
 	setNumRows( 0 );
 	setNumCols( 2 );
 	
@@ -158,6 +153,81 @@ void AbTable::init()
 	verticalHeader()->hide();
 	columnVisible = true;
 }
+
+void AbTable::setContacts( const OContactAccess::List& viewList )
+{
+	qWarning("AbTable::setContacts()");
+
+	clear();
+	m_viewList = viewList;
+
+	setSorting( false );
+	setUpdatesEnabled( FALSE );
+	
+	OContactAccess::List::Iterator it;
+	setNumRows( m_viewList.count() );
+	int row = 0;
+	for ( it = m_viewList.begin(); it != m_viewList.end(); ++it )
+		insertIntoTable( *it, row++ );
+	
+	setUpdatesEnabled( TRUE );
+
+	setSorting( true );
+
+	resort();
+
+	updateVisible();
+
+}
+
+bool AbTable::selectContact( int UID )
+{
+	qWarning( "AbTable::selectContact( %d )", UID );
+	int rows = numRows();
+	AbTableItem *abi;
+	OContact* foundContact = 0l;
+	bool found = false;
+
+	for ( int r = 0; r < rows; ++r ) {
+		abi = static_cast<AbTableItem*>( item(r, 0) );
+		foundContact = &contactList[abi];
+		if ( foundContact -> uid() == UID ){
+			ensureCellVisible( r, 0 );
+			setCurrentCell( r, 0 );
+			found = true;
+			break;
+		}
+	}
+
+	if ( !found ){
+		ensureCellVisible( 0,0 );
+		setCurrentCell( 0, 0 );
+	}
+
+	return true;
+}
+
+void AbTable::insertIntoTable( const OContact& cnt, int row )
+{
+	QString strName,
+		strContact;
+	
+	strName = findContactName( cnt );
+	strContact = findContactContact( cnt, row );
+	
+	AbTableItem *ati;
+	ati = new AbTableItem( this, QTableItem::Never, strName, strContact);
+	contactList.insert( ati, cnt );
+	setItem( row, 0, ati );
+	ati = new AbTableItem( this, QTableItem::Never, strContact, strName);
+	setItem( row, 1, ati );
+	
+	//### cannot do this; table only has two columns at this point
+	//    setItem( row, 2, new AbPickItem( this ) );
+	
+}
+
+
 
 void AbTable::columnClicked( int col )
 {
@@ -200,31 +270,14 @@ OContact AbTable::currentEntry()
 	return cnt;
 }
 
-void AbTable::replaceCurrentEntry( const OContact &newContact )
+int AbTable::currentEntry_UID()
 {
-	int row = currentRow();
-	updateVisible();
-	
-	journalFreeReplace( newContact, row );
-	
-}
-
-void AbTable::deleteCurrentEntry()
-{
-	int row = currentRow();
-	
-	// a little wasteful, but it ensure's there is only one place
-	// where we delete.
-	journalFreeRemove( row );
-	updateVisible();
-	
-	if ( numRows() == 0 )
-		emit empty( TRUE );
-
+	return ( currentEntry().uid() );
 }
 
 void AbTable::clear()
 {
+	qWarning( "void AbTable::clear()" );
 	contactList.clear();
 	for ( int r = 0; r < numRows(); ++r ) {
 		for ( int c = 0; c < numCols(); ++c ) {
@@ -236,17 +289,13 @@ void AbTable::clear()
 	setNumRows( 0 );
 }
 
+// Refresh updates column 2 if the contactsettings changed
 void AbTable::refresh()
 {
 	int rows = numRows();
 	QString value;
 	AbTableItem *abi;
-	
-	// hide columns so no flashing ?
-	if ( showBk == "Cards" ) {
-		hideColumn(0);
-		hideColumn(1);
-	}
+
 	for ( int r = 0; r < rows; ++r ) {
 		abi = static_cast<AbTableItem*>( item(r, 0) );
 		value = findContactContact( contactList[abi], r );
@@ -262,41 +311,25 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 	if ( key >= 'A' && key <= 'Z' )
 		moveTo( key );
 	
-	if ( m_inSearch ) {
-		// Running in seach-mode, therefore we will interprete
-		// some key differently
-		qWarning("Received key in search mode");
-		switch( e->key() ) {
-		case Qt::Key_Space:
-		case Qt::Key_Return:
-		case Qt::Key_Enter:
-			emit details();
-			break;
-		case Qt::Key_Up:
-			qWarning("a");
-			emit signalSearchBackward();
-			break;
-		case Qt::Key_Down:
-			qWarning("b");
-			emit signalSearchNext();
-			break;
-		default:
-			QTable::keyPressEvent( e );
-		}
-		
-	} else {
-		qWarning("Received key in NON search mode");
-
-		switch( e->key() ) {
-		case Qt::Key_Space:
-		case Qt::Key_Return:
-		case Qt::Key_Enter:
-			emit details();
-			break;
-		default:
-			QTable::keyPressEvent( e );
-		}
+	qWarning("Received key ..");
+	switch( e->key() ) {
+	case Qt::Key_Space:
+	case Qt::Key_Return:
+	case Qt::Key_Enter:
+		emit signalSwitch();
+		break;
+// 	case Qt::Key_Up:
+// 		qWarning("a");
+// 		emit signalKeyUp();
+// 		break;
+// 	case Qt::Key_Down:
+// 		qWarning("b");
+// 		emit signalKeyDown();
+// 		break;
+	default:
+		QTable::keyPressEvent( e );
 	}
+		
 }
 
 void AbTable::moveTo( char c )
@@ -346,6 +379,219 @@ QString AbTable::findContactName( const OContact &entry )
 	return str;
 }
 
+
+
+void AbTable::resizeRows() {
+	/*
+	  if (numRows()) {
+	  for (int i = 0; i < numRows(); i++) {
+	  setRowHeight( i, size );
+	  }
+	  }
+	  updateVisible();
+	*/
+}
+
+
+void AbTable::realignTable()
+{
+
+	setPaintingEnabled( FALSE );
+
+	resizeRows();
+	fitColumns();
+
+	setPaintingEnabled( TRUE );
+
+}
+
+
+
+
+#if QT_VERSION <= 230
+#ifndef SINGLE_APP
+void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
+{
+	// Region of the rect we should draw
+	QRegion reg( QRect( cx, cy, cw, ch ) );
+	// Subtract the table from it
+	reg = reg.subtract( QRect( QPoint( 0, 0 ), tableSize() ) );
+	// And draw the rectangles (transformed as needed)
+	QArray<QRect> r = reg.rects();
+	for (unsigned int i=0; i<r.count(); i++)
+		p->fillRect( r[i], colorGroup().brush( QColorGroup::Base ) );
+}
+#endif
+#endif
+
+
+// int AbTable::rowHeight( int ) const
+// {
+//     return 18;
+// }
+
+// int AbTable::rowPos( int row ) const
+// {
+//     return 18*row;
+// }
+
+// int AbTable::rowAt( int pos ) const
+// {
+//     return QMIN( pos/18, numRows()-1 );
+// }
+
+
+
+void AbTable::fitColumns()
+{
+	int contentsWidth = visibleWidth() / 2; // :SX Why too low
+	// Fix to better value
+	contentsWidth = 100; 
+	
+	if ( columnVisible == false ){
+		showColumn(0);
+		columnVisible = true;
+	}
+	
+	qWarning("Width: %d", contentsWidth);
+
+	setColumnWidth( 0, contentsWidth );
+	adjustColumn(1);
+	if ( columnWidth(1) < contentsWidth )
+		setColumnWidth( 1, contentsWidth );
+}
+
+void AbTable::show()
+{
+	realignTable();
+	QTable::show();
+}
+
+void AbTable::setChoiceNames( const QStringList& list)
+{
+	choicenames = list;
+	if ( choicenames.isEmpty() ) {
+		// hide pick column
+		setNumCols( 2 );
+	} else {
+		// show pick column
+		setNumCols( 3 );
+		setColumnWidth( 2, fontMetrics().width(tr( "Pick" ))+8 );
+		horizontalHeader()->setLabel( 2, tr( "Pick" ));
+	}
+	fitColumns();
+}
+
+void AbTable::itemClicked(int,int col)
+{
+	qWarning( "AbTable::itemClicked(int, col:%d)", col);
+	if ( col == 2 ) {
+		return;
+	} else {
+		qWarning ("Emitting signalSwitch()");
+		emit signalSwitch();
+	}
+}
+
+QStringList AbTable::choiceNames() const
+{
+	return choicenames;
+}
+
+void AbTable::setChoiceSelection(int /*index*/, const QStringList& /*list*/)
+{
+	/* ######
+	   
+	QString selname = choicenames.at(index);
+	for (each row) {
+	OContact *c = contactForRow(row);
+	if ( list.contains(c->email) ) {
+	list.remove(c->email);
+	setText(row, 2, selname);
+	}
+	}
+	for (remaining list items) {
+	OContact *c = new contact(item);
+	setText(newrow, 2, selname);
+	}
+	
+	*/
+}
+
+QStringList AbTable::choiceSelection(int /*index*/) const
+{
+	QStringList r;
+	/* ######
+	   
+	QString selname = choicenames.at(index);
+	for (each row) {
+	OContact *c = contactForRow(row);
+	if ( text(row,2) == selname ) {
+	r.append(c->email);
+	}
+	}
+	
+	*/
+	return r;
+}
+
+
+
+
+void AbTable::updateVisible()
+{
+	int visible,
+		totalRows,
+		row,
+		selectedRow = 0;
+		
+	visible = 0;
+	
+	realignTable();
+
+	setPaintingEnabled( FALSE );
+
+	totalRows = numRows();
+	for ( row = 0; row < totalRows; row++ ) {
+		if ( rowHeight(row) == 0 ) {
+			showRow( row );
+			adjustRow( row );
+			if ( isSelected( row,0 ) || isSelected( row,1 ) )
+				selectedRow = row;
+		}
+		visible++;
+	}
+
+	if ( selectedRow )
+		setCurrentCell( selectedRow, 0 );
+
+	if ( !visible )
+		setCurrentCell( -1, 0 );
+	
+	setPaintingEnabled( TRUE );
+
+
+}
+
+
+void AbTable::setPaintingEnabled( bool e )
+{
+	if ( e != enablePainting ) {
+		if ( !enablePainting ) {
+			enablePainting = true;
+			rowHeightChanged( 0 );
+			viewport()->update();
+		} else {
+			enablePainting = false;
+		}
+	}
+}
+
+void AbTable::rowHeightChanged( int row )
+{
+	if ( enablePainting )
+		QTable::rowHeightChanged( row );
+}
 QString AbTable::findContactContact( const OContact &entry, int /* row */ )
 {
 	QString value;
@@ -470,587 +716,4 @@ QString AbTable::findContactContact( const OContact &entry, int /* row */ )
 			break;
 	}
 	return value;
-}
-
-void AbTable::addEntry( const OContact &newCnt )
-{
-	int row = numRows();
-	
-	setNumRows( row + 1 );
-	insertIntoTable( newCnt, row );
-	
-	qWarning("abtable:AddContact");
-	m_contactdb.add ( newCnt );
-	
-	setCurrentCell( row, 0 );
-	// updateVisible();
-}
-
-void AbTable::resizeRows() {
-	/*
-	  if (numRows()) {
-	  for (int i = 0; i < numRows(); i++) {
-	  setRowHeight( i, size );
-	  }
-	  }
-	  updateVisible();
-	*/
-}
-
-
-bool AbTable::save()
-{
-	//     QTime t;
-	//     t.start();
-	qWarning("abtable:Save data");
-
-	return m_contactdb.save();
-}
-
-void AbTable::load()
-{
-	setSorting( false );
-	setUpdatesEnabled( FALSE );
-	
-	qWarning("abtable:Load data");
-	
-	OContactAccess::List list  = m_contactdb.allRecords();
-	OContactAccess::List::Iterator it;
-	setNumRows( list.count() );
-	int row = 0;
-	for ( it = list.begin(); it != list.end(); ++it )
-		insertIntoTable( *it, row++ );
-	
-	setUpdatesEnabled( TRUE );
-
-	setSorting( true );
-	resort();
-}
-
-
-void AbTable::reload()
-{
-	m_contactdb.reload();
-	load();
-}
-
-void AbTable::realignTable( int row )
-{
-	QTableItem *ti1,
-		*ti2;
-	int totalRows = numRows();
-	for ( int curr = row; curr < totalRows - 1; curr++ ) {
-		// the same info from the todo list still applies, but I
-		// don't think it is _too_ bad.
-		ti1 = item( curr + 1, 0 );
-		ti2 = item( curr + 1, 1 );
-		takeItem( ti1 );
-		takeItem( ti2 );
-		setItem( curr, 0, ti1 );
-		setItem( curr, 1, ti2 );
-	}
-	setNumRows( totalRows - 1 );
-	resort();
-}
-
-// Add contact into table.
-void AbTable::insertIntoTable( const OContact &cnt, int row )
-{
-	QString strName,
-		strContact;
-	
-	strName = findContactName( cnt );
-	strContact = findContactContact( cnt, row );
-	
-	AbTableItem *ati;
-	ati = new AbTableItem( this, QTableItem::Never, strName, strContact);
-	contactList.insert( ati, cnt );
-	setItem( row, 0, ati );
-	ati = new AbTableItem( this, QTableItem::Never, strContact, strName);
-	setItem( row, 1, ati );
-	
-	//### cannot do this; table only has two columns at this point
-	//    setItem( row, 2, new AbPickItem( this ) );
-	
-	// resort at some point?
-}
-
-
-// Replace or add an entry
-void AbTable::journalFreeReplace( const OContact &cnt, int row )
-{
-	QString strName,
-		strContact;
-	AbTableItem *ati = 0l;
-	
-	strName = findContactName( cnt );
-	strContact = findContactContact( cnt, row );
-	ati = static_cast<AbTableItem*>(item(row, 0));
-	
-	// Replace element if found in row "row"
-	// or add this element if not.
-	if ( ati != 0 ) { // replace
-		// :SX db access -> replace
-		qWarning ("Replace Contact in DB ! UID: %d", contactList[ati].uid() );
-		m_contactdb.replace ( cnt );
-		
-		contactList.remove( ati );
-		ati->setItem( strName, strContact );
-		contactList.insert( ati, cnt );
-		
-		ati = static_cast<AbTableItem*>(item(row, 1));
-		ati->setItem( strContact, strName );
-		
-	}else{ // add
-		int myrows = numRows();
-		setNumRows( myrows + 1 );
-		insertIntoTable( cnt, myrows );
-		// gets deleted when returning -- Why ? (se)
-		// :SX db access -> add
-		qWarning ("Are you sure to add to database ? -> Currently disabled !!");
-		// m_contactdb.add( cnt );
-	}
-}
-
-// Remove entry
-void AbTable::journalFreeRemove( int row )
-{
-	AbTableItem *ati;
-	ati = static_cast<AbTableItem*>(item(row, 0));
-	if ( !ati )
-		return;
-	
-	// :SX db access -> remove
-	qWarning ("Remove Contact from DB ! UID: %d",contactList[ati].uid() );
-	m_contactdb.remove( contactList[ati].uid() );
-	
-	contactList.remove( ati ); 
-	
-	realignTable( row );
-
-}
-
-#if QT_VERSION <= 230
-#ifndef SINGLE_APP
-void QTable::paintEmptyArea( QPainter *p, int cx, int cy, int cw, int ch )
-{
-	// Region of the rect we should draw
-	QRegion reg( QRect( cx, cy, cw, ch ) );
-	// Subtract the table from it
-	reg = reg.subtract( QRect( QPoint( 0, 0 ), tableSize() ) );
-	// And draw the rectangles (transformed as needed)
-	QArray<QRect> r = reg.rects();
-	for (unsigned int i=0; i<r.count(); i++)
-		p->fillRect( r[i], colorGroup().brush( QColorGroup::Base ) );
-}
-#endif
-#endif
-
-
-// int AbTable::rowHeight( int ) const
-// {
-//     return 18;
-// }
-
-// int AbTable::rowPos( int row ) const
-// {
-//     return 18*row;
-// }
-
-// int AbTable::rowAt( int pos ) const
-// {
-//     return QMIN( pos/18, numRows()-1 );
-// }
-
-void AbTable::slotDoFind( const QString &findString, bool caseSensitive, bool useRegExp,
-                          bool backwards, QString cat /* int category */ )
-{
-	int category = 0;
-
-	// Use the current Category if nothing else selected
-	if ( cat.isEmpty() )
-		category = mCat.id( "Contacts", showCat );
-	else{
-		category = mCat.id("Contacts", cat );
-	}
-
-	qWarning ("Found in Category %d", category);
-
-	if ( currFindRow < -1 )
-		currFindRow = - 1;
-
-	clearSelection( TRUE );
-	int rows, row;
-	AbTableItem *ati;
-	QRegExp r( findString );
-	r.setCaseSensitive( caseSensitive );
-	r.setWildcard( !useRegExp );
-	rows = numRows();
-	static bool wrapAround = true;
-	bool try_again = false;
-	
-	// We will loop until we found an entry or found nothing.
-	do {
-		if ( !backwards ) {
-			for ( row = currFindRow + 1; row < rows; row++ ) {
-				ati = static_cast<AbTableItem*>( item(row, 0) );
-				if ( contactCompare( contactList[ati], r, category ) ){
-					try_again = false;
-					break;
-				}
-			}
-		} else {
-			for ( row = currFindRow - 1; row > -1; row-- ) {
-				ati = static_cast<AbTableItem*>( item(row, 0) );
-				if ( contactCompare( contactList[ati], r, category ) ){
-					try_again = false;
-					break;
-				}
-			}
-		}
-		if ( row >= rows || row < 0 ) {
-			if ( row < 0 )
-				currFindRow = rows;
-			else
-				currFindRow = -1;
-			
-			if ( wrapAround ){
-				emit signalWrapAround();
-				try_again = true;
-			}else{
-				emit signalNotFound();
-				try_again = false;
-			}
-			
-			wrapAround = !wrapAround;
-		} else {
-			currFindRow = row;
-			QTableSelection foundSelection;
-			foundSelection.init( currFindRow, 0 );
-			foundSelection.expandTo( currFindRow, numCols() - 1 );
-			addSelection( foundSelection );
-			setCurrentCell( currFindRow, 0 /* numCols() - 1 */ );
-			wrapAround = true;
-			try_again = false;
-		}
-	} while ( try_again );
-}
-
-static bool contactCompare( const OContact &cnt, const QRegExp &r, int category )
-{
-	bool returnMe;
-	QArray<int> cats;
-	cats = cnt.categories();
-	
-	returnMe = false;
-	if ( (cats.count() == 0) || (category == 0) )
-		returnMe = cnt.match( r );
-	else {
-		int i;
-		for ( i = 0; i < int(cats.count()); i++ ) {
-			if ( cats[i] == category ) {
-				returnMe = cnt.match( r );
-				break;
-			}
-		}
-	}
-	
-	return returnMe;
-}
-
-void AbTable::fitColumns()
-{
-	int contentsWidth = visibleWidth() / 2;
-	
-	if ( showBk == "Cards" ) {
-		showColumn(1);
-		//adjustColumn(1);
-		setColumnWidth( 1, visibleWidth() );
-		columnVisible = false;
-	} else {
-		if ( columnVisible == false ){
-			showColumn(0);
-			columnVisible = true;
-		}
-		setColumnWidth( 0, contentsWidth );
-		adjustColumn(1);
-		if ( columnWidth(1) < contentsWidth )
-			setColumnWidth( 1, contentsWidth );
-	}
-}
-
-void AbTable::show()
-{
-	fitColumns();
-	QTable::show();
-}
-
-void AbTable::setChoiceNames( const QStringList& list)
-{
-	choicenames = list;
-	if ( choicenames.isEmpty() ) {
-		// hide pick column
-		setNumCols( 2 );
-	} else {
-		// show pick column
-		setNumCols( 3 );
-		setColumnWidth( 2, fontMetrics().width(tr( "Pick" ))+8 );
-		horizontalHeader()->setLabel( 2, tr( "Pick" ));
-	}
-	fitColumns();
-}
-
-void AbTable::itemClicked(int,int col)
-{
-	if ( col == 2 ) {
-		return;
-	} else {
-		emit details();
-	}
-}
-
-QStringList AbTable::choiceNames() const
-{
-	return choicenames;
-}
-
-void AbTable::setChoiceSelection(int /*index*/, const QStringList& /*list*/)
-{
-	/* ######
-	   
-	QString selname = choicenames.at(index);
-	for (each row) {
-	OContact *c = contactForRow(row);
-	if ( list.contains(c->email) ) {
-	list.remove(c->email);
-	setText(row, 2, selname);
-	}
-	}
-	for (remaining list items) {
-	OContact *c = new contact(item);
-	setText(newrow, 2, selname);
-	}
-	
-	*/
-}
-
-QStringList AbTable::choiceSelection(int /*index*/) const
-{
-	QStringList r;
-	/* ######
-	   
-	QString selname = choicenames.at(index);
-	for (each row) {
-	OContact *c = contactForRow(row);
-	if ( text(row,2) == selname ) {
-	r.append(c->email);
-	}
-	}
-	
-	*/
-	return r;
-}
-
-void AbTable::setShowCategory( const QString &b,  const QString &c )
-{
-	showBk = b;
-	showCat = c;
-	//QMessageBox::information( this, "setShowCategory", "setShowCategory" );
-	//updateVisible();
-	refresh();
-	ensureCellVisible( currentRow(), 0 );
-	updateVisible(); // :SX
-}
-
-void AbTable::setShowByLetter( char c )
-{
-	showChar = tolower(c);
-	updateVisible();
-}
-
-QString AbTable::showCategory() const
-{
-	return showCat;
-}
-
-QString AbTable::showBook() const
-{
-	return showBk;
-}
-
-QStringList AbTable::categories()
-{
-	mCat.load( categoryFileName() );
-	QStringList categoryList = mCat.labels( "Contacts" );
-	return categoryList;
-}
-
-void AbTable::updateVisible()
-{
-	int visible,
-		totalRows,
-		id,
-		totalCats,
-		it,
-		row;
-	bool hide;
-	AbTableItem *ati;
-	OContact *cnt;
-	QString fileAsName;
-	QString tmpStr;
-	visible = 0;
-	
-	setPaintingEnabled( FALSE );
-	
-	totalRows = numRows();
-	id = mCat.id( "Contacts", showCat );
-	QArray<int> cats;
-	for ( row = 0; row < totalRows; row++ ) {
-		ati = static_cast<AbTableItem*>( item(row, 0) );
-		cnt = &contactList[ati];
-		cats = cnt->categories();
-		fileAsName = cnt->fileAs();
-		hide = false;
-		if ( !showCat.isEmpty() ) {
-			if ( showCat == tr( "Unfiled" ) ) {
-				if ( cats.count() > 0 )
-					hide = true;
-			} else {
-				// do some comparing
-				if ( !hide ) {
-					hide = true;
-					totalCats = int(cats.count());
-					for ( it = 0; it < totalCats; it++ ) {
-						if ( cats[it] == id ) {
-							hide = false;
-							break;
-						}
-					}
-				}
-			}
-		}
-		if ( showChar != '\0' ) {
-			tmpStr = fileAsName.left(1);
-			tmpStr = tmpStr.lower();
-			if ( tmpStr != QString(QChar(showChar)) && showChar != '#' ) {
-				hide = true;
-			}
-			if ( showChar == '#' ) {
-				if (tmpStr == "a")
-					hide = true;
-				
-				if (tmpStr == "b")
-					hide = true;
-				
-				if (tmpStr == "c")
-					hide = true;
-				
-				if (tmpStr == "d")
-					hide = true;
-				
-				if (tmpStr == "e")
-					hide = true;
-				
-				if (tmpStr == "f")
-					hide = true;
-				
-				if (tmpStr == "g")
-					hide = true;
-				
-				if (tmpStr == "h")
-					hide = true;
-				
-				if (tmpStr == "i")
-					hide = true;
-				
-				if (tmpStr == "j")
-					hide = true;
-				
-				if (tmpStr == "k")
-					hide = true;
-				
-				if (tmpStr == "l")
-					hide = true;
-				
-				if (tmpStr == "m")
-					hide = true;
-				
-				if (tmpStr == "n")
-					hide = true;
-				
-				if (tmpStr == "o")
-					hide = true;
-				
-				if (tmpStr == "p")
-					hide = true;
-				
-				if (tmpStr == "q")
-					hide = true;
-				
-				if (tmpStr == "r")
-					hide = true;
-				
-				if (tmpStr == "s")
-					hide = true;
-				
-				if (tmpStr == "t")
-					hide = true;
-				
-				if (tmpStr == "u")
-					hide = true;
-				
-				if (tmpStr == "v")
-					hide = true;
-				
-				if (tmpStr == "w")
-					hide = true;
-				
-				if (tmpStr == "x")
-					hide = true;
-				
-				if (tmpStr == "y")
-					hide = true;
-				
-				if (tmpStr == "z")
-					hide = true;
-			}
-			
-		}
-		if ( hide ) {
-			if ( currentRow() == row )
-				setCurrentCell( -1, 0 );
-			if ( rowHeight(row) > 0 )
-				hideRow( row );
-		} else {
-			if ( rowHeight(row) == 0 ) {
-				showRow( row );
-				adjustRow( row );
-			}
-			visible++;
-		}
-	}
-	if ( !visible )
-		setCurrentCell( -1, 0 );
-	
-	setPaintingEnabled( TRUE );
-}
-
-
-void AbTable::setPaintingEnabled( bool e )
-{
-	if ( e != enablePainting ) {
-		if ( !enablePainting ) {
-			enablePainting = true;
-			rowHeightChanged( 0 );
-			viewport()->update();
-		} else {
-			enablePainting = false;
-		}
-	}
-}
-
-void AbTable::rowHeightChanged( int row )
-{
-	if ( enablePainting )
-		QTable::rowHeightChanged( row );
 }

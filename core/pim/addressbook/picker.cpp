@@ -218,6 +218,11 @@ LetterPicker::~LetterPicker()
 {
 }
 
+QSizePolicy LetterPicker::sizePolicy () const
+{
+	return QSizePolicy( QSizePolicy::Expanding, QSizePolicy::Maximum);
+}
+
 void LetterPicker::clear()
 {
 	lblABC->clearLetter();

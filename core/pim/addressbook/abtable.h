@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (c) 2002 Stefan Eilers (eilers.stefan@epost.de)
 **
 ** This file is part of Qt Palmtop Environment.
 **
@@ -23,13 +24,12 @@
 
 #include <qpe/categories.h>
 #include <opie/ocontact.h>
+#include <opie/ocontactaccess.h>
 
 #include <qmap.h>
 #include <qtable.h>
 #include <qstringlist.h>
 #include <qcombobox.h>
-
-#include <opie/ocontactaccess.h>
 
 class AbTableItem : public QTableItem
 {
@@ -65,52 +65,38 @@ class AbTable : public QTable
 public:
     AbTable( const QValueList<int> *ordered, QWidget *parent, const char *name=0 );
     ~AbTable();
-    // NEW
-    void addEntry( const OContact &newContact );
+
+    // Set the contacts shown in the table
+    void setContacts( const OContactAccess::List& viewList );
+    // Selects a contact of a specific UID
+    bool selectContact( int UID );
+    
+    // Get the current selected entry
     OContact currentEntry();
-    void replaceCurrentEntry( const OContact &newContact );
+
+    // Get the UID of the current selected Entry
+    int currentEntry_UID();
+
+    QString findContactName( const OContact &entry );
 
     void init();
-
-    void deleteCurrentEntry();
     void clear();
-    void clearFindRow() { currFindRow = -1; }
-    void loadFields();
     void refresh();
-    bool save();
-    void load();
-    void reload();
-
-    // addresspicker mode
-    void setChoiceNames( const QStringList& list);
-    QStringList choiceNames() const;
-    void setChoiceSelection(int index, const QStringList& list);
-    QStringList choiceSelection(int index) const;
-    void setShowCategory( const QString &b, const QString &c );
-    void setShowByLetter( char c );
-    QString showCategory() const;
-    QStringList categories();
-
-    void resizeRows();
 
     void show();
     void setPaintingEnabled( bool e );
 
-    QString showBook() const;
+    // addresspicker mode (What's that ? se)
+    void setChoiceNames( const QStringList& list);
+    QStringList choiceNames() const;
+    void setChoiceSelection(int index, const QStringList& list);
+    QStringList choiceSelection(int index) const;
 
-    void inSearch()  { m_inSearch = true; }
-    void offSearch() { m_inSearch = false; }
-
-public slots:
-    void slotDoFind( const QString &str, bool caseSensitive, bool useRegExp, bool backwards,
-                     QString category = QString::null );
 signals:
-    void empty( bool );
-    void details();
-    void signalNotFound();
-    void signalWrapAround();
-    void signalSearchBackward(); // Signalled if backward search is requested
-    void signalSearchNext();    // Singalled if forward search is requested
+    void signalSwitch();
+    void signalEditor();
+    void signalKeyDown();
+    void signalKeyUp();
 
 protected:
     virtual void keyPressEvent( QKeyEvent *e );
@@ -127,35 +113,24 @@ protected slots:
     void rowHeightChanged( int row );
 
 private:
-    void loadFile( const QString &strFile, bool journalFile );
-    void fitColumns();
-    void resort();
-    void updateJournal( const OContact &contact, OContact::journal_action action,
-			int row = -1 );
-    void insertIntoTable( const OContact &contact, int row );
-    QString findContactName( const OContact &entry );
+    void insertIntoTable( const OContact &cnt, int row );
     QString findContactContact( const OContact &entry, int row );
-    void journalFreeReplace( const OContact &cnt, int row );
-    void journalFreeRemove( int row );
-    void realignTable( int );
+    void fitColumns();
+    void resizeRows();
+    void realignTable();
+    void resort();
     void updateVisible();
+
     int lastSortCol;
     bool asc;
-    char showChar;
     QMap<AbTableItem*, OContact> contactList;
-    const QValueList<int> *intFields;
-    int currFindRow;
-    QString showCat;
+    const QValueList<int>* intFields;
     QStringList choicenames;
     bool enablePainting;
-    Categories mCat;
 
-    QString showBk;
     bool columnVisible;
 
-    bool m_inSearch;
-
-    OContactAccess m_contactdb;
+    OContactAccess::List m_viewList;
 
 };
 #endif // ABTABLE_H

@@ -23,6 +23,8 @@
 #include <opie/ocontact.h>
 #include <qtextview.h>
 
+#include <opie/ocontactaccess.h>
+
 class AbLabel : public QTextView
 {
     Q_OBJECT
@@ -31,18 +33,28 @@ public:
     AbLabel( QWidget *parent, const char *name = 0 );
     ~AbLabel();
 
-public slots:
-    void init( const OContact &entry );
-    void sync();
+    // Set the contacts 
+    void setContacts( const OContactAccess::List& viewList );
+
+    // Selects a contact 
+    bool selectContact( int UID );
+
+    // Get the UID of the current selected Entry
+    int currentEntry_UID();
+
+    //
+    OContact currentEntry();
 
 signals:
-    void okPressed();
+    void signalOkPressed();
     
 protected:
+    void sync();
     void keyPressEvent( QKeyEvent * );
     
 private:
-    OContact ent;
+    OContactAccess::List m_viewList;
+    OContactAccess::List::Iterator m_itCurContact;
 
 };
 

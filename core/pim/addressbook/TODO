@@ -1,15 +1,22 @@
 Stuff todo until OPIE 1.0 :
 
-Pending bugfixes from previous work:
+Feature requests:
+
+- Dial by mobile phone by tapping the number.. 
+  (Maybe using gsmtool. And we may
+	add a library class for this)
+- Select of primary contact (see #274 on mantis)
+
 
 Urgent:
-
+- View -> unfiled shows everything (as "all" does)
 
 Important:
 
 - Redesign of the structure of abtable into abview, abtableview, ... 
 - Redesign of Contacteditor
 
+- What should happen if the import of birthday/anniversary fails ?
 - Name order selected in "contacteditor" not used in list view.
 - Overview window cleanup needed..
 - Cursor keys should work in detail-view (ablabel)

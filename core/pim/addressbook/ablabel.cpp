@@ -25,8 +25,8 @@
 #include <qregexp.h>
 #include <qstylesheet.h>
 
-AbLabel::AbLabel( QWidget *parent, const char *name )
-  : QTextView( parent, name )
+AbLabel::AbLabel( QWidget *parent, const char *name ): 
+	QTextView( parent, name )
 {
 }
 
@@ -34,14 +34,44 @@ AbLabel::~AbLabel()
 {
 }
 
-void AbLabel::init( const OContact &entry )
+void AbLabel::setContacts( const OContactAccess::List& viewList )
 {
-    ent = entry;
+	m_viewList = viewList;
+	if (m_viewList.count() != 0){
+		m_itCurContact = m_viewList.begin();
+		sync();
+	}else
+		setText( "" );
 }
+
+int AbLabel::currentEntry_UID()
+{
+	return ( (*m_itCurContact).uid() );
+}
+
+OContact AbLabel::currentEntry()
+{
+	return ( *m_itCurContact );
+}
+
+
+bool AbLabel::selectContact( int UID )
+{
+	
+	for ( m_itCurContact = m_viewList.begin(); m_itCurContact != m_viewList.end(); ++m_itCurContact){
+		if ( (*m_itCurContact).uid() == UID )
+			break;
+	}
+	sync();
+
+	return true;
+}
+
+
 
 void AbLabel::sync()
 {
-    QString text = ent.toRichText();
+    QString text = (*m_itCurContact).toRichText();
     setText( text );
 }
 
@@ -51,40 +81,29 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 	switch( e->key() ) {
 	case Qt::Key_Left:
 		qWarning( "Left..");
+	case Qt::Key_Right:
+		qWarning( "Right..");
 	case Qt::Key_F33:
 		qWarning( "OK..");
-		emit okPressed();
+		emit signalOkPressed();
+		break;
+	case Qt::Key_Up:
+		qWarning( "UP..");
+		--m_itCurContact;
+		if ( *m_itCurContact != OContact() )
+			sync();
+		else
+			m_itCurContact = m_viewList.end();
+		
+		break;
+	case Qt::Key_Down:
+		qWarning( "DOWN..");
+		++m_itCurContact;
+		if ( *m_itCurContact != OContact() )
+			sync();
+		else
+			m_itCurContact = m_viewList.begin();
 		break;
 	}
 
-
-	if ( /* m_inSearch */ false ) {
-		// Running in seach-mode, therefore we will interprete
-		// some key differently
-		qWarning("Received key in search mode");
-		switch( e->key() ) {
-		case Qt::Key_Up:
-			qWarning("a");
-			// emit signalSearchBackward();
-			break;
-		case Qt::Key_Down:
-			qWarning("b");
-			// emit signalSearchNext();
-			break;
-		}
-		
-	} else {
-		qWarning("Received key in NON search mode");
-		
-		switch( e->key() ) {
-		case Qt::Key_Up:
-			qWarning("a");
-			// emit signalSearchBackward();
-			break;
-		case Qt::Key_Down:
-			qWarning("b");
-			// emit signalSearchNext();
-			break;
-		}
-	}
 }

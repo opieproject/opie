@@ -13,6 +13,7 @@
 #include <qlabel.h>
 #include <qframe.h>
 #include <qevent.h>
+#include <qsizepolicy.h> 
 
 class PickerLabel: public QLabel {
 Q_OBJECT
@@ -49,7 +50,8 @@ Q_OBJECT
 	public:
 		LetterPicker( QWidget *parent = 0, const char *name = 0 );
 		~LetterPicker();
-		
+
+		QSizePolicy sizePolicy () const;
 
 	public slots:
 		void clear();
