@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,7 +21,9 @@
 #include "clock.h"
 
 #include <qpe/qpeapplication.h>
+#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
+#endif
 #include <qpe/config.h>
 #include <qpe/timestring.h>
 
@@ -41,8 +43,10 @@ const int sw_prec = 2;
 
 static void toggleScreenSaver( bool on )
 {
+#ifndef QT_NO_COP
     QCopEnvelope e("QPE/System", "setScreenSaverMode(int)" );
     e << (on ? QPEApplication::Enable: QPEApplication::DisableSuspend );
+#endif
 }
 
 Clock::Clock( QWidget * parent, const char * name, WFlags f )
