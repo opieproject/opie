@@ -37,7 +37,15 @@
 
 // DNS header files are not fully covered by X/Open specifications.
 // In particular nothing is said about res_* :/
+// #ifdef __cplusplus
+// extern "C" {
+// #endif
+// getres() is mangled because of missing extern "C" on
+// HP-UX 11.x systems missing PHCO_23963
 #include <resolv.h>
+// #ifdef __cplusplus
+// }
+// #endif
 // Undeclared - at least on HP-UX 10.20.
 extern "C" int res_init();
 
@@ -82,5 +90,6 @@ extern "C" int res_init();
 // HP-UX 9's select() didn't accept fd_set, yet.
 #define select(a,b,c,d,e) select((a), (int *)(b), (int *)(c), (int *)(d), (e))
 #endif
+
 
 #endif // QPLATFORMDEFS_H

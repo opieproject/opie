@@ -26,7 +26,7 @@
 #include <windows.h>
 
 #define Q_FS_FAT
-#ifdef QT_LARGE_FILE_SUPPORT
+#ifdef QT_LARGEFILE_SUPPORT
 #define QT_STATBUF		struct _stati64		// non-ANSI defs
 #define QT_STATBUF4TSTAT	struct _stati64		// non-ANSI defs
 #define QT_STAT			::_stati64
@@ -46,7 +46,7 @@
 #define QT_FILENO		_fileno
 #define QT_OPEN			::_open
 #define QT_CLOSE		::_close
-#ifdef QT_LARGE_FILE_SUPPORT
+#ifdef QT_LARGEFILE_SUPPORT
 #define QT_LSEEK		::_lseeki64
 #define QT_TSTAT		::_tstati64
 #else

@@ -95,7 +95,7 @@
 #define QT_SOCKOPTLEN_T		int
 #endif
 
-#if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE >= 500)
+#if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE-0 >= 500)
 // AIX 4.3 and better only
 #define QT_SNPRINTF		::snprintf
 #define QT_VSNPRINTF		::vsnprintf

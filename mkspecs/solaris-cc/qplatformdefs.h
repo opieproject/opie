@@ -6,6 +6,7 @@
 #include "qglobal.h"
 
 // Set any POSIX/XOPEN defines at the top of this file to turn on specific APIs
+#define _POSIX_PTHREAD_SEMANTICS
 
 #include <unistd.h>
 
@@ -77,13 +78,16 @@
 #define QT_SIGNAL_IGNORE	SIG_IGN
 
 #if !defined(_XOPEN_UNIX)
-// Function usleep() is in C library but not in header files on Solaris 2.5.1.
-// Not really a surprise, usleep() is specified by XPG4v2 and XPG4v2 is only
-// supported by Solaris 2.6 and better.
+// Function usleep() is defined in C library but not declared in header files
+// on Solaris 2.5.1. Not really a surprise, usleep() is specified by XPG4v2
+// and XPG4v2 is only supported by Solaris 2.6 and better.
+// Function gethostname() is defined in C library but not declared in <unistd.h>
+// on Solaris 2.5.1.
 // So we are trying to detect Solaris 2.5.1 using macro _XOPEN_UNIX which is
 // not defined by <unistd.h> when XPG4v2 is not supported.
 typedef unsigned int useconds_t;
 extern "C" int usleep(useconds_t);
+extern "C" int gethostname(char *, int);
 #endif
 
 #if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE-0 >= 500) && (_XOPEN_VERSION-0 >= 500)

@@ -79,7 +79,11 @@
 #endif
 #define QT_SIGNAL_IGNORE	SIG_IGN
 
-#define QT_SOCKLEN_T		int	
+#if defined(_XOPEN_SOURCE) && (_XOPEN_SOURCE-0 >= 500)
+#define QT_SOCKLEN_T		size_t
+#else
+#define QT_SOCKLEN_T		int
+#endif
 
 #if 0
 // on Irix 6.5 and better only - but how to check for it?

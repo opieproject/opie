@@ -6,6 +6,9 @@
 #include "qglobal.h"
 
 // Set any POSIX/XOPEN defines at the top of this file to turn on specific APIs
+#ifndef _POSIX_PTHREAD_SEMANTICS
+#define _POSIX_PTHREAD_SEMANTICS
+#endif
 
 #include <unistd.h>
 
@@ -14,7 +17,7 @@
 
 
 #ifdef QT_THREAD_SUPPORT
-#include <thread.h>
+#include <pthread.h>
 #endif
 
 #include <dirent.h>
@@ -22,6 +25,7 @@
 #include <grp.h>
 #include <pwd.h>
 #include <signal.h>
+#include <dlfcn.h>
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
@@ -43,6 +47,7 @@
 #include <resolv.h>
 
 
+#if !defined(QT_NO_COMPAT)
 #define QT_STATBUF		struct stat
 #define QT_STATBUF4TSTAT	struct stat
 #define QT_STAT			::stat
@@ -68,6 +73,7 @@
 #define QT_OPEN_CREAT		O_CREAT
 #define QT_OPEN_TRUNC		O_TRUNC
 #define QT_OPEN_APPEND		O_APPEND
+#endif
 
 #define QT_SIGNAL_RETTYPE	void
 #define QT_SIGNAL_ARGS		int

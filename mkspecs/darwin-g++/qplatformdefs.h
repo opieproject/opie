@@ -79,5 +79,7 @@
 #define QT_SNPRINTF		::snprintf
 #define QT_VSNPRINTF		::vsnprintf
 
+#define QT_AOUT_UNDERSCORE
+
 
 #endif // QPLATFORMDEFS_H

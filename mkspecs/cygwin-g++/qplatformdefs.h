@@ -42,12 +42,14 @@
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
-#include <sys/ipc.h>
+// Cygwin does not provide <sys/ipc.h> and <sys/shm.h> because it
+// doesn't support SysV IPC or shared memory. See for example:
+// 	http://afni.nimh.nih.gov/afni/afniboard/messages/1725.html
 #include <sys/time.h>
-#include <sys/shm.h>
 #include <sys/socket.h>
 #include <sys/stat.h>
 #include <sys/wait.h>
+#include <windows.h>
 
 // Resolver functions are not implemented in Cygwin, headers
 // <arpa/nameser.h> and <resolv.h> are missing:

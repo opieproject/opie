@@ -87,5 +87,9 @@
 #define QT_SNPRINTF		::snprintf
 #define QT_VSNPRINTF		::vsnprintf
 
+// SCO OpenServer redefines raise -> kill
+#if defined(raise)
+# undef raise
+#endif
 
 #endif // QPLATFORMDEFS_H
