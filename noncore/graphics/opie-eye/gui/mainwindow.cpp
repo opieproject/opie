@@ -67,8 +67,6 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
             this, SLOT(slotShowInfo(const QString&)) );
     connect(this,SIGNAL(changeListMode(int)),m_view,SLOT(slotChangeMode(int)));
 
-    m_stack->forceMode(Opie::Ui::OWidgetStack::NoForce);
-
     listviewMenu = 0;
     /* setup menu and toolbar */
     setupActions();
