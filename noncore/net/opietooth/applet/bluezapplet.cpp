@@ -62,11 +62,15 @@ namespace OpieTooth {
     }
 
     int BluezApplet::checkBluezStatus() {
-        if (btDevice->isLoaded() ) {
-            return 1;
+      if (btDevice) {
+	if (btDevice->isLoaded() ) {
+	  return 1;
         } else {
             return 0;
         }
+      } else {
+	return 0;
+      }
     }
 
     int BluezApplet::setBluezStatus(int c) {
