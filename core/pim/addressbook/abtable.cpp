@@ -1013,7 +1013,6 @@ void AbTable::setShowCategory( const QString &c )
 void AbTable::setShowByLetter( char c )
 {
     showChar = tolower(c);
-    qDebug( "AbTable::setShowByLetter %c", showChar);
     updateVisible();
 }
 
@@ -1077,12 +1076,89 @@ void AbTable::updateVisible()
 	if ( showChar != '\0' ) {
 	    tmpStr = fileAsName.left(1);
 	    tmpStr = tmpStr.lower();
-	    qDebug( "updateVisible ");
-	    qDebug( tmpStr );
-	    qDebug( "updateVisible2 %c", showChar );
-	    if ( tmpStr != QString(QChar(showChar)) ) {
+	    if ( tmpStr != QString(QChar(showChar)) && showChar != '#' ) {
 		    hide = true;
 	    }
+	    if ( showChar == '#' ) {
+		    if (tmpStr == "a")
+			    hide = true;
+		    
+		    if (tmpStr == "b")
+			    hide = true;
+
+		    if (tmpStr == "c")
+			    hide = true;
+
+		    if (tmpStr == "d")
+			    hide = true;
+
+		    if (tmpStr == "e")
+			    hide = true;
+
+		    if (tmpStr == "f")
+			    hide = true;
+
+		    if (tmpStr == "g")
+			    hide = true;
+
+		    if (tmpStr == "h")
+			    hide = true;
+
+		    if (tmpStr == "i")
+			    hide = true;
+
+		    if (tmpStr == "j")
+			    hide = true;
+
+		    if (tmpStr == "k")
+			    hide = true;
+
+		    if (tmpStr == "l")
+			    hide = true;
+
+		    if (tmpStr == "m")
+			    hide = true;
+
+		    if (tmpStr == "n")
+			    hide = true;
+
+		    if (tmpStr == "o")
+			    hide = true;
+
+		    if (tmpStr == "p")
+			    hide = true;
+
+		    if (tmpStr == "q")
+			    hide = true;
+
+		    if (tmpStr == "r")
+			    hide = true;
+
+		    if (tmpStr == "s")
+			    hide = true;
+
+		    if (tmpStr == "t")
+			    hide = true;
+
+		    if (tmpStr == "u")
+			    hide = true;
+
+		    if (tmpStr == "v")
+			    hide = true;
+
+		    if (tmpStr == "w")
+			    hide = true;
+
+		    if (tmpStr == "x")
+			    hide = true;
+
+		    if (tmpStr == "y")
+			    hide = true;
+
+		    if (tmpStr == "z")
+			    hide = true;
+	    }
+
 	}
 	if ( hide ) {
 	    if ( currentRow() == row )

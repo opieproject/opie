@@ -79,10 +79,9 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 {
 	QString tmpStr;
 
-	if (lastLetter != letter1 && lastLetter != letter2 && lastLetter != letter3)
+	if (lastLetter != letter1 && lastLetter != letter2 && lastLetter != letter3 && lastLetter != '\0')
 		QTimer::singleShot( 0, this, SLOT(emitClearSignal()) );
 	
-	qDebug( "a" );
 	switch (currentLetter) {
 		case 0:
 			tmpStr = "<qt><font color=\"#7F0000\">";
@@ -97,7 +96,6 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 			currentLetter++;
 			lastLetter = letter1;
 			emit selectedLetter( letter1 );
-			qDebug( "PickerLabel::mouseReleaseEvent %c", letter1 );
 			break;
 
 		case 1:
@@ -114,7 +112,6 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 			currentLetter++;
 			lastLetter = letter2;
 			emit selectedLetter( letter2 );
-			qDebug( "PickerLabel::mouseReleaseEvent %c", letter2 );
 			break;
 			
 		case 2:
@@ -130,7 +127,6 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent *e )
 			currentLetter++;
 			lastLetter = letter3;
 			emit selectedLetter( letter3 );
-			qDebug( "PickerLabel::mouseReleaseEvent %c", letter3 );
 			break;
 
 		default:
@@ -228,7 +224,6 @@ void LetterPicker::clear()
 
 void LetterPicker::newLetter( char letter )
 {
-	qDebug( "LetterPicker::newLetter %c", letter );
 	emit letterClicked( letter );
 
 }

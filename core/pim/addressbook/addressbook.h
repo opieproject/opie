@@ -89,6 +89,7 @@ private:
     AbLabel *mView;
     LetterPicker *pLabel;
     AbTable *abList;
+    QWidget *listContainer;
 
     QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, 
 	*actionPersonal, *actionMail;

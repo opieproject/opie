@@ -99,7 +99,6 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
     setToolBarsMovable( FALSE );
 
-    QBoxLayout *vb = new QVBoxLayout( this, 0, 0 );
     // Create Toolbars
 
     QPEToolBar *bar = new QPEToolBar( this );
@@ -190,8 +189,12 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 			      );
     }
 
-    abList = new AbTable( &orderedFields, this, "table" );
-    vb->insertWidget(0,abList);
+    listContainer = new QWidget( this );
+    
+    QVBoxLayout *vb = new QVBoxLayout( listContainer );
+    
+    abList = new AbTable( &orderedFields, listContainer, "table" );
+    vb->addWidget(abList);
     abList->setHScrollBarMode( QScrollView::AlwaysOff );
     connect( abList, SIGNAL( empty( bool ) ),
 	     this, SLOT( listIsEmpty( bool ) ) );
@@ -208,16 +211,16 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	QFile::remove(addressbookOldXMLFilename());
     }
 
-    pLabel = new LetterPicker( abList );
+    pLabel = new LetterPicker( listContainer );
     connect(pLabel, SIGNAL(letterClicked(char)), this, SLOT(slotSetLetter(char)));
-    vb->insertWidget(1,pLabel);
+    vb->addWidget(pLabel);
     catMenu = new QPopupMenu( this );
     catMenu->setCheckable( TRUE );
     connect( catMenu, SIGNAL(activated(int)), this, SLOT(slotSetCategory(int)) );
     populateCategories();
 
     mbList->insertItem( tr("View"), catMenu );
-    setCentralWidget( abList );
+    setCentralWidget( listContainer );
 
     fontMenu = new QPopupMenu(this);
     fontMenu->setCheckable( true );
@@ -232,7 +235,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     slotSetFont(startFontSize);
 		    
     mbList->insertItem( tr("Font"), fontMenu);
-    setCentralWidget(abList);
+    setCentralWidget(listContainer);
 
     //    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 }
@@ -294,7 +297,7 @@ void AddressbookWindow::resizeEvent( QResizeEvent *e )
 {
   QMainWindow::resizeEvent( e );
 
-  if ( centralWidget() == abList  )
+  if ( centralWidget() == listContainer  )
       showList();
   else if ( centralWidget() == mView )
       showView();
@@ -316,8 +319,8 @@ void AddressbookWindow::slotUpdateToolbar()
 void AddressbookWindow::showList()
 {
     if ( mView ) mView->hide();
-    setCentralWidget( abList );
-    abList->show();
+    setCentralWidget( listContainer );
+    listContainer->show();
     // update our focues... (or use a stack widget!);
     abList->setFocus();
 }
@@ -325,7 +328,7 @@ void AddressbookWindow::showList()
 void AddressbookWindow::showView()
 {
     if ( abList->numRows() > 0 ) {
-	abList->hide();
+	listContainer->hide();
 	setCentralWidget( abView() );
 	mView->show();
 	mView->setFocus();
@@ -601,7 +604,7 @@ void AddressbookWindow::slotPersonalView()
 
     abView()->init( me );
     abView()->sync();
-    abList->hide();
+    listContainer->hide();
     setCentralWidget( abView() );
     mView->show();
     mView->setFocus();
