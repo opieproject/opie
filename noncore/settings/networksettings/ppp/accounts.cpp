@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.6 2003-06-02 14:10:31 tille Exp $
+ * $Id: accounts.cpp,v 1.7 2003-06-03 14:08:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -37,15 +37,17 @@
 #include <qmessagebox.h>
 #include <qvgroupbox.h>
 
-#include "pppdata.h"
 #include "accounts.h"
+#include "authwidget.h"
+#include "pppdata.h"
 #include "edit.h"
 
 void parseargs(char* buf, char** args);
 
 AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
-    : QWidget( parent, name ), _pppdata(pd)
+    : QWidget( parent, name )//, _pppdata(pd)
 {
+    _pppdata = pd;
   QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
   accountlist_l = new QListBox(this);
 
@@ -86,6 +88,9 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
   l1->addStretch(1);
   l1->addLayout(l12);
 
+  int currAccId = _pppdata->currentAccountID();
+  qDebug("currentAccountID %i", currAccId);
+
   //load up account list from gppdata to the list box
   if(_pppdata->count() > 0) {
     for(int i=0; i <= _pppdata->count()-1; i++) {
@@ -93,11 +98,11 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
       accountlist_l->insertItem(_pppdata->accname());
     }
   }
-
+  _pppdata->setAccountbyIndex( currAccId );
 
   qDebug("setting listview index to %i",_pppdata->currentAccountID() );
   accountlist_l->setCurrentItem( _pppdata->currentAccountID() );
-  slotListBoxSelect( _pppdata->currentAccountID());
+  slotListBoxSelect( _pppdata->currentAccountID() );
 
   l1->activate();
 }
@@ -112,41 +117,8 @@ void AccountWidget::slotListBoxSelect(int idx) {
       qDebug("setting account to %i", idx);
     QString account = _pppdata->accname();
     _pppdata->setAccountbyIndex(accountlist_l->currentItem());
-    //   _pppdata->setAccount(account);
  }
 }
-
-
-// void AccountWidget::viewLogClicked(){
-
-//     QApplication::flushX();
-//     if(fork() == 0) {
-//       setgid(getgid());
-//       setuid(getuid());
-//       system("kppplogview -kppp");
-//       _exit(0);
-//     }
-// }
-
-
-// void AccountWidget::resetClicked(){
-//   if(accountlist_l->currentItem() == -1)
-//     return;
-
-// //   QueryReset dlg(this);
-// //   int what = dlg.exec();
-
-// //   if(what && QueryReset::COSTS) {
-// //     emit resetCosts(accountlist_l->text(accountlist_l->currentItem()));
-// //     costedit->setText("0");
-// //   }
-
-// //   if(what && QueryReset::VOLUME) {
-// //     emit resetVolume(accountlist_l->text(accountlist_l->currentItem()));
-// //     voledit->setText(prettyPrintVolume(0));
-// //   }
-// }
-
 
 void AccountWidget::editaccount() {
   _pppdata->setAccount(accountlist_l->text(accountlist_l->currentItem()));
@@ -249,6 +221,10 @@ int AccountWidget::doTab(){
     dial_w = new DialWidget( _pppdata, tabWindow, isnewaccount, "Dial Setup");
     tabWindow->addTab( dial_w, tr("Dial") );
 
+//   // AUTH WIDGET
+   auth_w = new AuthWidget( _pppdata, tabWindow, isnewaccount, tr("Edit Login Script"));
+   tabWindow->addTab( auth_w, tr("Authentication") );
+
 //   // IP WIDGET
     ip_w = new IPWidget( _pppdata, tabWindow, isnewaccount, tr("IP Setup"));
     tabWindow->addTab( ip_w, tr("IP") );
@@ -260,10 +236,6 @@ int AccountWidget::doTab(){
 //   // DNS WIDGET
     dns_w = new DNSWidget( _pppdata, tabWindow, isnewaccount, tr("DNS Servers") );
     tabWindow->addTab( dns_w, tr("DNS") );
-
-//   // SCRIPT WIDGET
-   script_w = new ScriptWidget( _pppdata, tabWindow, isnewaccount, tr("Edit Login Script"));
-   tabWindow->addTab( script_w, tr("Login Script") );
 
 //   // EXECUTE WIDGET
    ExecWidget *exec_w = new ExecWidget( _pppdata, tabWindow, isnewaccount, tr("Execute Programs"));
@@ -278,8 +250,7 @@ int AccountWidget::doTab(){
         ok = true;
 
         if(result == QDialog::Accepted) {
-            if (!script_w->check()){
-                QMessageBox::critical(this, "error", tr("<qt>Login script has unbalanced loop Start/End<qt>"));
+            if (!auth_w->check()){
                 ok = false;
             } else if(!dial_w->save()) {
                 QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
@@ -288,7 +259,7 @@ int AccountWidget::doTab(){
                 ip_w->save();
                 dns_w->save();
                 gateway_w->save();
-                script_w->save();
+                auth_w->save();
                 exec_w->save();
             }
         }

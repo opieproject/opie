@@ -45,12 +45,10 @@ bool InterfacePPP::refresh()
 void InterfacePPP::start()
 {
     qDebug("InterfacePPP::start");
-    if (data()->storedPassword() != "" ){
-        data()->setPassword(data()->storedPassword());
-    }else{
-        //FIXME:
+    if (data()->password().isEmpty() ){
+//FIXME: ask for password
         qDebug("using dummy password");
-        data()->setPassword( "dummy" );
+        QMessageBox::critical( 0, "no password", "you should be prompted for a password, but you are not! ;-)");
     }
 
 
@@ -96,7 +94,7 @@ void InterfacePPP::start()
   if(data()->authMethod() == AUTH_PAP ||
      data()->authMethod() == AUTH_CHAP ||
      data()->authMethod() == AUTH_PAPCHAP ) {
-      if(false){ //ID_Edit->text().isEmpty()) {
+      if(false){ //FIXME: ID_Edit->text().isEmpty()) {
         QMessageBox::warning(0,tr("Error"),
 			   i18n("<qt>You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!</qt>"));
 // FIXME:      return;
@@ -120,13 +118,9 @@ void InterfacePPP::start()
     return;
   }
 
-//  this->hide();
-
-  QString tit = i18n("Connecting to: %1").arg(data()->accname());
-//   con->setCaption(tit);
-
-//   con->show();
-
+  // SEGFAULTS:
+//   setStatus( true );
+//   emit updateInterface((Interface*) this);
 
   emit begin_connect();
 
@@ -139,3 +133,8 @@ void InterfacePPP::stop()
 
 }
 
+void InterfacePPP::save()
+{
+    data()->save();
+    emit updateInterface((Interface*) this);
+}

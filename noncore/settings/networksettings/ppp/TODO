@@ -1,7 +1,9 @@
-- add possibility to input username and password ;)
-- impl. PPPData::copyaccount & PPPData::deleteAccount
-- update modem attribute inputs when modem has changed
-- fix layout of edit account, i.e. get it shown maximised
-- popup configure modem with the correct account prselected
-	not quite shure why it does not work... IMHO it should work
+- ask for password is non is set
 
+- stop pppd, i.e. fix interfaceinformationppp
+
+- update modem attribute inputs when modem has changed
+- impl. PPPData::copyaccount & PPPData::deleteAccount
+
+- check if the same interface device combination allready exists
+- fix layout of edit account, i.e. get it shown maximised

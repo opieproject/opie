@@ -23,6 +23,7 @@ public slots:
   virtual bool refresh();
   virtual void start();
   virtual void stop();
+  void save();
 
  private:
   Modem *_modemPtr;

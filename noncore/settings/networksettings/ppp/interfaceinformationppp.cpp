@@ -5,6 +5,7 @@
 #include <qlabel.h>
 //#include <qgroupbox.h>
 #include <qmessagebox.h>
+#include <qabstractlayout.h>
 
 #include "connect.h"
 #include "conwindow.h"
@@ -23,8 +24,12 @@ InterfaceInformationPPP::InterfaceInformationPPP(QWidget *parent, const char *na
 {
     qDebug("InterfaceInformationPPP::InterfaceInformationPPP");
     con = new ConnectWidget( (InterfacePPP*)i, this, "con" );
-    //   InterfaceInformationLayout->addMultiCellWidget( con, 7, 7, 0, 1 );
-    InterfaceInformationLayout->addWidget( con, 7, 0 );
+    con->setSizePolicy( QSizePolicy(QSizePolicy::MinimumExpanding,
+                                    QSizePolicy::Fixed) );
+    QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
+    InterfaceInformationLayout->addItem( spacer, 7, 0 );
+    InterfaceInformationLayout->addMultiCellWidget( con, 8, 8, 0, 1 );
+    // InterfaceInformationLayout->addWidget( con, 7, 0 );
      connect(i, SIGNAL(begin_connect()),con, SLOT(preinit()));
 }
 

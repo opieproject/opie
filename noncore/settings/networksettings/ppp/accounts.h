@@ -1,7 +1,7 @@
 /* -*- C++ -*-
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.h,v 1.3 2003-06-02 14:10:31 tille Exp $
+ * $Id: accounts.h,v 1.4 2003-06-03 14:08:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -38,7 +38,7 @@ class QCheckBox;
 class QLineEdit;
 class QTabWidget;
 class DialWidget;
-class ScriptWidget;
+class AuthWidget;
 class IPWidget;
 class DNSWidget;
 class GatewayWidget;
@@ -72,7 +72,7 @@ private:
     IPWidget *ip_w;
     DNSWidget *dns_w;
     GatewayWidget *gateway_w;
-    ScriptWidget *script_w;
+    AuthWidget *auth_w;
 
     QListBox *accountlist_l;
     QPushButton *edit_b;
@@ -81,20 +81,6 @@ private:
     QPushButton *delete_b;
 };
 
-
-// class QueryReset : public QDialog {
-//   Q_OBJECT
-// public:
-//   QueryReset(QWidget *parent);
-
-//   enum {COSTS=1, VOLUME=2};
-
-// private slots:
-//   void accepted();
-
-// private:
-//   QCheckBox *costs, *volume;
-// };
 
 #endif
 

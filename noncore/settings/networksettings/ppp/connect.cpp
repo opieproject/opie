@@ -124,6 +124,7 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
 
   debug = new QPushButton(i18n("Log"), this);
   debug->setToggleButton(true);
+  debug->setEnabled( false ); // FIXME: disable the log button
   connect(debug, SIGNAL(clicked()), SIGNAL(toggleDebugWindow()));
 
   cancel = new QPushButton(i18n("Cancel"), this);

@@ -80,10 +80,8 @@ QWidget *PPPModule::configure(Interface *i){
 QWidget *PPPModule::information(Interface *i){
   // We don't have any advanced pppd information widget yet :-D
   // TODO ^
-    qDebug("return PPPModule::information");
-//  InterfaceInformationImp *information = new InterfaceInformationImp( 0, "InterfaceSetupImp", i);
-   InterfaceInformationPPP *information = new InterfaceInformationPPP( 0, "InterfaceInformationPPP", i );
-  return information;
+
+   return new InterfaceInformationPPP( 0, "InterfaceInformationPPP", i );
 }
 
 /**

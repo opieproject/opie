@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.7 2003-06-02 11:57:59 tille Exp $
+ * $Id: pppdata.h,v 1.8 2003-06-03 14:08:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -181,10 +181,10 @@ public:
     QString modemGroup();
 
   // functions to set/get general kppp info
-  QString password() const;
+  QString password();
   void setPassword(const QString &);
 
-    int currentAccountID() { return caccount; };
+  int currentAccountID() { return caccount; };
   const QString defaultAccount();
   void setDefaultAccount(const QString &);
 

@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.6 2003-06-02 14:25:18 tille Exp $
+ * $Id: edit.cpp,v 1.7 2003-06-03 14:08:04 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -34,6 +34,7 @@
 #include <qvgroupbox.h>
 #include <qhbox.h>
 #include <qdialog.h>
+#include <qpe/resource.h>
 
 #include "edit.h"
 #include "pppdata.h"
@@ -46,7 +47,7 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
 {
   const int GRIDROWS = 6;
 
-  QGridLayout *tl = new QGridLayout(this, GRIDROWS, 2, 0 );//, KDialog::spacingHint());
+  QGridLayout *tl = new QGridLayout(this, GRIDROWS, 2, 0 );
 
   connect_label = new QLabel(tr("Connection name:"), this);
   tl->addWidget(connect_label, 0, 0);
@@ -75,11 +76,9 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   del = new QPushButton(tr("&Remove"), this);
 
   up = new QPushButton(this);
-//FIXME:  QPixmap pm = BarIcon("up");
-//  up->setPixmap(pm);
+  up->setPixmap( Resource::loadPixmap("inline/up") );
   down = new QPushButton(this);
-//FIXME:  pm = BarIcon("down");
-//  down->setPixmap(pm);
+  down->setPixmap( Resource::loadPixmap("inline/down") );
   lpn1->addWidget(add);
   lpn1->addWidget(del);
   lpn1->addStretch(1);
@@ -108,42 +107,6 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   QWhatsThis::add(number_label,tmp);
   QWhatsThis::add(numbers,tmp);
 
-  auth_l = new QLabel(tr("Authentication:"), this);
-  tl->addWidget(auth_l, 3, 0);
-
-  auth = new QComboBox(this);
-  auth->insertItem(tr("Script-based"));
-  auth->insertItem(tr("PAP"));
-  auth->insertItem(tr("Terminal-based"));
-  auth->insertItem(tr("CHAP"));
-  auth->insertItem(tr("PAP/CHAP"));
-  tl->addWidget(auth, 3, 1);
-  tmp = tr("<p>Specifies the method used to identify yourself to\n"
-	     "the PPP server. Most universities still use\n"
-	     "<b>Terminal</b>- or <b>Script</b>-based authentication,\n"
-	     "while most ISP use <b>PAP</b> and/or <b>CHAP</b>. If\n"
-	     "unsure, contact your ISP.\n"
-	     "\n"
-	     "If you can choose between PAP and CHAP,\n"
-	     "choose CHAP, because it's much safer. If you don't know\n"
-	     "whether PAP or CHAP is right, choose PAP/CHAP.");
-
-  QWhatsThis::add(auth_l,tmp);
-  QWhatsThis::add(auth,tmp);
-
-  store_password = new QCheckBox(tr("Store password"), this);
-  store_password->setChecked(true);
-  tl->addMultiCellWidget(store_password, 4, 4, 0, 1, AlignRight);
-  QWhatsThis::add(store_password,
-		  tr("<p>When this is turned on, your ISP password\n"
-		       "will be saved in <i>kppp</i>'s config file, so\n"
-		       "you do not need to type it in every time.\n"
-		       "\n"
-		       "<b><font color=\"red\">Warning:</font> your password will be stored as\n"
-		       "plain text in the config file, which is\n"
-		       "readable only to you. Make sure nobody\n"
-		       "gains access to this file!"));
-
   pppdargs = new QPushButton(tr("Customize pppd Arguments..."), this);
   connect(pppdargs, SIGNAL(clicked()), SLOT(pppdargsbutton()));
   tl->addMultiCellWidget(pppdargs, 5, 5, 0, 1, AlignCenter);
@@ -168,11 +131,6 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
     if(tmp.length() > 0)
       numbers->insertItem(tmp);
 
-    auth->setCurrentItem(_pppdata->authMethod());
-    store_password->setChecked(_pppdata->storePassword());
-  } else {
-    // select PAP/CHAP as default
-    auth->setCurrentItem(AUTH_PAPCHAP);
   }
 
   numbersChanged();
@@ -195,8 +153,6 @@ bool DialWidget::save() {
     }
 
     _pppdata->setPhonenumber(number);
-    _pppdata->setAuthMethod(auth->currentItem());
-    _pppdata->setStorePassword(store_password->isChecked());
     return true;
   }
 }

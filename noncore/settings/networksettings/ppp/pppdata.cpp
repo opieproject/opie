@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.9 2003-06-02 15:12:10 tille Exp $
+ * $Id: pppdata.cpp,v 1.10 2003-06-03 14:08:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -43,11 +43,12 @@
 
 PPPData::PPPData()
     : modemDeviceGroup(-1),
-     highcount(-1),        // start out with no entries
-     caccount(-1),         // set the current account index also
-     suidprocessid(-1),    // process ID of setuid child
-     pppdisrunning(false),
-     pppderror(0)
+      passwd(""),
+      highcount(-1),        // start out with no entries
+      caccount(-1),         // set the current account index also
+      suidprocessid(-1),    // process ID of setuid child
+      pppdisrunning(false),
+      pppderror(0)
 {
     highcount = readNumConfig(GENERAL_GRP, NUMACCOUNTS_KEY, 0) - 1;
 
@@ -217,8 +218,9 @@ void PPPData::writeListConfig(const QString &group, const QString &key,
 //
 // functions to set/return general information
 //
-QString PPPData::password() const {
-  return passwd;
+QString PPPData::password(){
+    if ( storePassword() ) return storedPassword();
+    else return passwd;
 }
 
 
@@ -753,7 +755,7 @@ bool PPPData::isUniqueAccname(const QString &n) {
 
 
 bool PPPData::deleteAccount() {
-    //FIXME:
+    //FIXME: PPPData::deleteAccount
 //   if(caccount < 0)
      return false;
 
@@ -826,7 +828,7 @@ int PPPData::newaccount() {
 }
 
 int PPPData::copyaccount(int i) {
-// FIXME
+// FIXME: PPPData::copyaccount
 //  if(highcount >= MAX_ACCOUNTS)
     return -1;
 
@@ -1276,12 +1278,14 @@ void PPPData::setConfiguredInterfaces( QMap<QString,QString> ifaces )
     QMap<QString,QString>::Iterator it;
     int i = 0;
     Config cfg = config();
-    for( it = ifaces.begin(); it != ifaces.end(); ++it, ++i ){
-        cfg.setGroup(QString("%1_%1").arg(ACCLIST_GRP).arg(i));
+    for( it = ifaces.begin(); it != ifaces.end(); ++it ){
+        cfg.setGroup(QString("%1_%1").arg(ACCLIST_GRP).arg(i++));
         cfg.writeEntry( ACOUNTS_DEV, it.key() );
         cfg.writeEntry( ACOUNTS_ACC, it.data() );
+        qDebug("I %i",i);
     }
     cfg.setGroup( ACCLIST_GRP );
+    qDebug("saved %i account settings", i);
     cfg.writeEntry( ACCOUNTS_COUNT, i );
 
 }

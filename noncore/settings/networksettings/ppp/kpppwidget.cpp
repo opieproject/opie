@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
+ * $Id: kpppwidget.cpp,v 1.5 2003-06-03 14:08:04 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -600,7 +600,7 @@ void KPPPWidget::beginConnect() {
     if(ID_Edit->text().isEmpty()) {
         QMessageBox::warning(this,"error",
 			   i18n("You have selected the authentication method PAP or CHAP. This requires that you supply a username and a password!"));
-// FIXME:      return;
+      return;
     } else {
       if(!Modem::modem->setSecret(_pppdata->authMethod(),
 				   encodeWord(_pppdata->storedUsername()),

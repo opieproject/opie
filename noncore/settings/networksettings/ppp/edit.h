@@ -2,7 +2,7 @@
  *
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.h,v 1.2 2003-05-30 15:06:17 tille Exp $
+ * $Id: edit.h,v 1.3 2003-06-03 14:08:04 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -70,9 +70,6 @@ private:
   QLabel *connect_label;
   QLabel *number_label;
   QPushButton *pppdargs;
-  QComboBox *auth;
-  QLabel *auth_l;
-  QCheckBox *store_password;
 
   // for the phonenumber selection
   QPushButton *add, *del, *up, *down;

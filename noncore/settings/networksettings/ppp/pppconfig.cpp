@@ -42,8 +42,6 @@ PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
   tabWindow->addTab( modem1, tr("&Device") );
   modem2 = new ModemWidget2( interface, tabWindow, "modem2" );
   tabWindow->addTab( modem2, tr("&Modem") );
-//    graph = new GraphSetup( tabWindow->addPage( tr("&Graph"), tr("Throughput Graph" ) ) );
-//    general = new GeneralWidget( tabWindow->addPage( tr("M&isc"), tr("Miscellaneous Settings") ) );
 
 }
 
@@ -60,7 +58,7 @@ void PPPConfigWidget::accept()
     qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
     interface->setInterfaceName( interface->data()->modemDevice() );
     interface->setHardwareName( interface->data()->accname() );
-    interface->data()->save();
+    interface->save();
     QDialog::accept();
 }
 
