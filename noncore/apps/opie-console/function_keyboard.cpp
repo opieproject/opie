@@ -13,10 +13,13 @@
 #include <qcombobox.h>
 #include <qdir.h>
 
+#define DEFAULT_ROWS 2
+#define DEFAULT_COLS 11
+
 /* FunctionKeyboard {{{1 */
 
 FunctionKeyboard::FunctionKeyboard(QWidget *parent) :
-    QFrame(parent), numRows(2), numCols(11),
+    QFrame(parent), numRows(DEFAULT_ROWS), numCols(DEFAULT_COLS),
     pressedRow(0), pressedCol(0) {
 
     setSizePolicy(QSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed));
@@ -222,6 +225,10 @@ QSize FunctionKeyboard::sizeHint() const {
 }
 
 void FunctionKeyboard::loadDefaults() {
+
+    numRows = DEFAULT_ROWS;
+    numCols = DEFAULT_COLS;
+    keyWidth = (double)width()/numCols; // have to reset this thing too
 
     keys.insert( "r0c0", FKey ("Enter", "enter", Qt::Key_Enter, 0));
     keys.insert( "r0c1", FKey ("Space", "space", Qt::Key_Space, Qt::Key_Space));
