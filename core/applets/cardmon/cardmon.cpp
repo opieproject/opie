@@ -46,6 +46,9 @@
 
 using namespace Opie;
 
+using namespace Opie::Ui;
+using namespace Opie::Core;
+
 CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent ),
         pm( Resource::loadPixmap( "cardmon/pcmcia" ) )
 {
@@ -418,6 +421,6 @@ int CardMonitor::position()
 
 Q_EXPORT_INTERFACE()
 {
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<CardMonitor> );
+    Q_CREATE_INSTANCE( Opie::Ui::Private::OTaskbarAppletWrapper<CardMonitor> );
 }
 
