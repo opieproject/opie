@@ -65,9 +65,7 @@ void FixIt::fixIt() {
     #else
     
     OProcess m_kill;
-    m_kill << "sh";
-    m_kill << "-c";
-    m_kill << QString(QPEApplication::qpeDir() + "/share/opie-console/sl6000_embedix_kill_0_1.sh");
+    m_kill << QPEApplication::qpeDir() + "/share/opie-console/sl6000_embedix_kill_0_1.sh";
     
     
     if ( !m_kill.start(OProcess::DontCare,OProcess::NoCommunication) ) {
@@ -82,12 +80,10 @@ void FixIt::fixIt() {
 void FixIt::breakIt() {
 	#ifdef EAST
 	 OProcess m_restart;
-         m_restart << "sh";
-         m_restart << "-c";
-         m_restart << QString(QPEApplication::qpeDir() + "/share/opie-console/sl6000_embedix_restart_0_1.sh");
+         m_restart << QPEApplication::qpeDir() + "/share/opie-console/sl6000_embedix_restart_0_1.sh";
          
     
-     if ( !m_restart.start() ) {
+     if ( !m_restart.start(OProcess::DontCare,OProcess::NoCommunication) ) {
             owarn << "could not execute restart script" << oendl; 
      }
   
