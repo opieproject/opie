@@ -36,6 +36,7 @@
 
 /* OPIE */
 #include <opie2/ofileselector.h>
+#include <opie2/odebug.h>
 
 #include <qpe/qpeapplication.h>
 #include <qpe/mimetype.h>
@@ -546,7 +547,7 @@ void OFileViewFileListView::slotCurrentChanged( QListViewItem* item)
         // if in fileselector mode we will emit selected
         if ( selector()->mode() == OFileSelector::FileSelector )
         {
-            qWarning("slot Current Changed");
+            owarn << "slot Current Changed" << oendl;
             QStringList str = QStringList::split("->", sel->text(1) );
             QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
             emit selector()->fileSelected( path );
@@ -574,7 +575,7 @@ void OFileViewFileListView::slotClicked(int button , QListViewItem* item, const 
         }
         else
         { // file
-            qWarning("slot Clicked");
+            owarn << "slot Clicked" << oendl;
             selector()->m_lneEdit->setText( str[0].stripWhiteSpace() );
             QString path = sel->directory() + "/" + str[0].stripWhiteSpace();
             emit selector()->fileSelected( path );

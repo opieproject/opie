@@ -32,9 +32,13 @@
 #ifndef OTASKBARAPPLET_H
 #define OTASKBARAPPLET_H
 
+/* OPIE */
+#include <opie2/odebug.h>
+
 #include <qpe/taskbarappletinterface.h>
 #include <qpe/qcom.h>
 
+/* QT */
 #include <qwidget.h>
 
 class QMouseEvent;
@@ -61,14 +65,14 @@ template<class T> class OTaskbarAppletWrapper : public TaskbarAppletInterface
 
     QRESULT queryInterface( const QUuid& uuid, QUnknownInterface** iface )
     {
-        qDebug( "OTaskbarAppletWrapper::queryInterface()" );
+        odebug << "OTaskbarAppletWrapper::queryInterface()" << oendl;
         *iface = 0;
         if ( uuid == IID_QUnknown )
             *iface = this;
         else if ( uuid == IID_TaskbarApplet )
             *iface = this;
-	else
-	    return QS_FALSE;
+    else
+        return QS_FALSE;
 
         if ( *iface ) (*iface)->addRef();
         return QS_OK;

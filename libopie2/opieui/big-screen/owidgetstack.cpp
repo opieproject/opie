@@ -28,6 +28,9 @@
 
 #include "owidgetstack.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
 /* QT */
 #include <qapplication.h>
 #include <qwidgetstack.h>
@@ -307,7 +310,7 @@ void OWidgetStack::hideWidget( QWidget* wid) {
 
 
 bool OWidgetStack::eventFilter( QObject* obj, QEvent* e) {
-    qWarning(" %s %s", obj->name(), obj->className() );
+    owarn << " " << obj->name() << " " << obj->className() << "" << oendl;
     if ( e->type() == QEvent::Resize ) {
         QResizeEvent *res = static_cast<QResizeEvent*>( e );
         QSize size = res->size();

@@ -31,6 +31,8 @@
 #include "oticker.h"
 
 /* OPIE */
+#include <opie2/odebug.h>
+
 #include <qpe/config.h>
 
 using namespace Opie::Ui;
@@ -72,14 +74,14 @@ void OTicker::setText( const QString& text )
 {
     pos = 0; // reset it everytime the text is changed
     scrollText = text;
-    qDebug( scrollText );
+    odebug << scrollText << oendl;
 
     int pixelLen = 0;
     bool bigger = false;
     int contWidth = contentsRect().width();
     int contHeight = contentsRect().height();
     int pixelTextLen = fontMetrics().width( text );
-    qDebug( "<<<<<<<height %d, width %d, text width %d %d\n", contHeight, contWidth, pixelTextLen, scrollText.length() );
+    odebug << "<<<<<<<height " << contHeight << ", width " << contWidth << ", text width " << pixelTextLen << " " << scrollText.length() << "\n" << oendl;
     if ( pixelTextLen < contWidth )
     {
         pixelLen = contWidth;
@@ -100,7 +102,7 @@ void OTicker::setText( const QString& text )
     scrollTextPixmap = pm;
 
     killTimers();
-    //    qDebug("Scrollupdate %d", updateTimerTime);
+    //    odebug << "Scrollupdate " << updateTimerTime << "" << oendl;
     if ( bigger /*pixelTextLen > contWidth*/ )
         startTimer( updateTimerTime );
     update();
@@ -123,7 +125,7 @@ void OTicker::drawContents( QPainter *p )
 
 void OTicker::mouseReleaseEvent( QMouseEvent * )
 {
-    //    qDebug("<<<<<<<>>>>>>>>>");
+    //    odebug << "<<<<<<<>>>>>>>>>" << oendl;
     emit mousePressed();
 }
 

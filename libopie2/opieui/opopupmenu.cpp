@@ -17,15 +17,15 @@
    Boston, MA 02111-1307, USA.
 */
 
-/* QT */
+/* OPIE */
+#include <opie2/opopupmenu.h>
+#include <opie2/oconfig.h>
+#include <opie2/odebug.h>
 
+/* QT */
 #include <qdrawutil.h>
 #include <qtimer.h>
 
-/* OPIE */
-
-#include <opie2/opopupmenu.h>
-#include <opie2/oconfig.h>
 
 using namespace Opie::Core;
 using namespace Opie::Ui;
@@ -132,7 +132,7 @@ public:
         , lastHitIndex(-1)
         , m_ctxMenu(0)
     {}
-    
+
     ~OPopupMenuPrivate ()
     {
         delete m_ctxMenu;
@@ -178,7 +178,7 @@ OPopupMenu::~OPopupMenu()
         OPopupMenuPrivate::s_contextedMenu = 0;
         OPopupMenuPrivate::s_highlightedItem = -1;
     }
-    
+
     delete d;
 }
 
@@ -209,12 +209,12 @@ void OPopupMenu::changeTitle(int id, const QString &text)
             ((OPopupTitle *)item->widget())->setTitle(text);
 #ifndef NDEBUG
         else
-            qWarning( "KPopupMenu: changeTitle() called with non-title id %d", id );
+            owarn << "KPopupMenu: changeTitle() called with non-title id " << id << "" << oendl;
 #endif
     }
 #ifndef NDEBUG
     else
-        qWarning( "KPopupMenu: changeTitle() called with invalid id %d", id );
+        owarn << "KPopupMenu: changeTitle() called with invalid id " << id << "" << oendl;
 #endif
 }
 
@@ -226,12 +226,12 @@ void OPopupMenu::changeTitle(int id, const QPixmap &icon, const QString &text)
             ((OPopupTitle *)item->widget())->setTitle(text, &icon);
 #ifndef NDEBUG
         else
-            qWarning( "KPopupMenu: changeTitle() called with non-title id %d", id );
+            owarn << "KPopupMenu: changeTitle() called with non-title id " << id << "" << oendl;
 #endif
     }
 #ifndef NDEBUG
     else
-        qWarning( "KPopupMenu: changeTitle() called with invalid id %d", id );
+        owarn << "KPopupMenu: changeTitle() called with invalid id " << id << "" << oendl;
 #endif
 }
 
@@ -244,10 +244,10 @@ QString OPopupMenu::title(int id) const
         if(item->widget())
             return(((OPopupTitle *)item->widget())->title());
         else
-            qWarning("OPopupMenu: title() called with non-title id %d.", id);
+            owarn << "OPopupMenu: title() called with non-title id " << id << "." << oendl;
     }
     else
-        qWarning("OPopupMenu: title() called with invalid id %d.", id);
+        owarn << "OPopupMenu: title() called with invalid id " << id << "." << oendl;
     return(QString::null);
 }
 
@@ -258,10 +258,10 @@ QPixmap OPopupMenu::titlePixmap(int id) const
         if(item->widget())
             return(((OPopupTitle *)item->widget())->icon());
         else
-            qWarning("KPopupMenu: titlePixmap() called with non-title id %d.", id);
+            owarn << "KPopupMenu: titlePixmap() called with non-title id " << id << "." << oendl;
     }
     else
-        qWarning("KPopupMenu: titlePixmap() called with invalid id %d.", id);
+        owarn << "KPopupMenu: titlePixmap() called with invalid id " << id << "." << oendl;
     QPixmap tmp;
     return(tmp);
 }
