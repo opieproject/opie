@@ -1,0 +1,10 @@
+Files: bin/bluepin apps/Settings/bluetooth-manager.desktop 
+Priority: optional
+Section: opie/applications
+Maintainer: Holger Freyther <zecke@handhelds.org>
+Architecture: arm
+Version: 0.3.4-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+License: GPL
+Description: Bluetooth pin application
+
