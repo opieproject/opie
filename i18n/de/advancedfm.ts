@@ -144,11 +144,11 @@
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished">Als</translation>
+        <translation>Als</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
