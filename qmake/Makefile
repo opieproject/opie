@@ -1,7 +1,7 @@
 QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
-CC		= gcc
-CXX		= g++
+CC		= $(shell which ccache) gcc
+CXX		= $(shell which ccache) g++
 
 #qmake code
 OBJS=project.o property.o main.o makefile.o unixmake2.o unixmake.o msvc_nmake.o \
