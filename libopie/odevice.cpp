@@ -2504,7 +2504,18 @@ void Jornada::init ( )
 	d-> m_systemstr = "Familiar";
 	d-> m_system = System_Familiar;
 	d-> m_rotation = Rot0;
+
+	QFile f ( "/etc/familiar-version" );
+	f. setName ( "/etc/familiar-version" );
+	if ( f. open ( IO_ReadOnly )) {
+
+		QTextStream ts ( &f );
+		d-> m_sysverstr = ts. readLine ( ). mid ( 10 );
+
+		f. close ( );
+	}
 }
+
 
 void Jornada::initButtons ( )
 {
