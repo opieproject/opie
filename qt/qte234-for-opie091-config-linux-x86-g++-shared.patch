@@ -1,0 +1,29 @@
+--- configs/linux-x86-g++-shared.orig	2002-12-14 12:20:03.000000000 +0100
++++ configs/linux-x86-g++-shared	2002-12-14 13:12:11.000000000 +0100
+@@ -1,7 +1,7 @@
+ # Compiling
+ INTERFACE_DECL_PATH 	= .
+ SYSCONF_CXX		= g++
+-SYSCONF_CC		= gcc
++SYSCONF_CC		= g++
+ DASHCROSS		= 
+ 
+ # Compiling with support libraries
+@@ -36,7 +36,7 @@
+ SYSCONF_LIBS_YACC	= 
+ 
+ # Linking applications
+-SYSCONF_LINK		= gcc
++SYSCONF_LINK		= g++
+ SYSCONF_LFLAGS		= 
+ SYSCONF_LIBS		= -lm
+ 
+@@ -60,7 +60,7 @@
+ #   - Place target in $(DESTDIR) - which has a trailing /
+ #   - Usually needs to incorporate $(VER_MAJ), $(VER_MIN) and $(VER_PATCH)
+ #
+-SYSCONF_LINK_SHLIB	= gcc
++SYSCONF_LINK_SHLIB	= g++
+ SYSCONF_LINK_TARGET_SHARED	= lib$(TARGET).so.$(VER_MAJ).$(VER_MIN).$(VER_PATCH)
+ SYSCONF_LINK_LIB_SHARED	=  $(SYSCONF_LINK_SHLIB) -shared -Wl,-soname,lib$(TARGET).so.$(VER_MAJ) \
+ 				     $(LFLAGS) -o $(SYSCONF_LINK_TARGET_SHARED) \
