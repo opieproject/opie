@@ -46,3 +46,26 @@ encodedString* AbstractMail::decode_String(const encodedString*text,const QStrin
     qDebug("Decode string finished");
     return result;
 }
+
+QString AbstractMail::convert_String(const char*text)
+{
+#if 0
+    size_t index = 0;
+    char*res = 0;
+   
+	qDebug("encode start %s",text); 
+	/* attention - doesn't work with arm systems! */
+    int err = mailmime_encoded_phrase_parse("iso-8859-1",
+        text, strlen(text),&index, "iso-8859-1",&res);
+	qDebug("encode end"); 
+    if (err != MAILIMF_NO_ERROR) {
+        if (res) free(res);
+        return QString(text);
+    }
+    QString result(res);
+    free(res);
+    return result;
+#else
+	return QString(text);
+#endif
+}

@@ -3,7 +3,11 @@
 #include "mailtypes.h"
 #include <libetpan/mailpop3.h>
 #include <libetpan/mailmime.h>
+#include <libetpan/data_message_driver.h>
 #include <qfile.h>
+
+/* we don't fetch messages larger than 5 MB */
+#define HARD_MSG_SIZE_LIMIT 5242880
 
 POP3wrapper::POP3wrapper( POP3account *a )
 {
@@ -37,10 +41,15 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
     if ( !m_pop3 ) {
         return RecBody();
     }
+
     RecBody body;
     
     QFile msg_cache(msgTempName);
 
+    if (mail.Msgsize()>HARD_MSG_SIZE_LIMIT) {
+        qDebug("Message to large: %i",mail.Msgsize());
+        return body;
+    }
     if (mail.getNumber()!=last_msg_id) {
         if (msg_cache.exists()) {
             msg_cache.remove();
@@ -79,6 +88,10 @@ RecBody POP3wrapper::parseMail( char *message )
     /* these vars are used recurcive! set it to 0!!!!!!!!!!!!!!!!! */
     size_t curTok = 0;
     mailimf_message *result = 0;
+    mailmessage * msg=0;
+    struct mailmime * mime=0;
+    struct mailmime_single_fields fields;
+
     RecBody body;
 
 
@@ -87,11 +100,31 @@ RecBody POP3wrapper::parseMail( char *message )
         if (result) mailimf_message_free(result);
         return body;
     }
-    
-    struct mailimf_body * b = 0;
-    struct mailimf_fields * f = 0;
-    
-    
+
+#if 0
+    char*body_msg = message;
+    if ( result && result->msg_body && result->msg_body->bd_text ) {
+        body_msg = (char*)result->msg_body->bd_text;
+        result->msg_body->bd_text = 0;
+    }
+
+    msg = mailmessage_new();
+    mailmessage_init(msg, NULL, data_message_driver, 0, strlen(body_msg));
+    generic_message_t * msg_data;
+    msg_data = (generic_message_t *)msg->msg_data;
+    msg_data->msg_fetched = 1;
+    msg_data->msg_message = body_msg;
+    msg_data->msg_length = strlen(body_msg);
+    memset(&fields, 0, sizeof(struct mailmime_single_fields));
+    err = mailmessage_get_bodystructure(msg,&mime);
+
+    if (mime->mm_mime_fields != NULL) {
+        mailmime_single_fields_init(&fields, mime->mm_mime_fields,
+            mime->mm_content_type);
+    }
+#endif
+
+#if 1
     if ( result && result->msg_body && result->msg_body->bd_text ) {
         qDebug( "POP3: bodytext found" );
         // when curTok isn't set to 0 this line will fault! 'cause upper line faults!
@@ -108,6 +141,7 @@ RecBody POP3wrapper::parseMail( char *message )
 #endif
         mailimf_message_free(result);
     }
+#endif
     return body;
 }
 
@@ -172,7 +206,7 @@ RecMail *POP3wrapper::parseHeader( const char *header )
                 mail->setBcc( parseAddressList( field->fld_data.fld_bcc->bcc_addr_list ) );
                 break;
             case MAILIMF_FIELD_SUBJECT:
-                mail->setSubject( QString( field->fld_data.fld_subject->sbj_value ) );
+                mail->setSubject(convert_String( field->fld_data.fld_subject->sbj_value ) );
                 break;
             case MAILIMF_FIELD_ORIG_DATE:
                 mail->setDate( parseDateTime( field->fld_data.fld_orig_date->dt_date_time ) );
@@ -203,7 +237,6 @@ RecMail *POP3wrapper::parseHeader( const char *header )
                 } else if (status.lower()=="x-status") {
                     qDebug("X-Status: %s",value.latin1());
                     if (value.lower()=="a") {
-                        
                         mFlags.setBit(FLAG_ANSWERED);
                     }
                 } else {
@@ -284,7 +317,7 @@ QString POP3wrapper::parseMailbox( mailimf_mailbox *box )
     if ( box->mb_display_name == NULL ) {
         result.append( box->mb_addr_spec );
     } else {
-        result.append( box->mb_display_name );
+        result.append( convert_String(box->mb_display_name).latin1() );
         result.append( " <" );
         result.append( box->mb_addr_spec );
         result.append( ">" );

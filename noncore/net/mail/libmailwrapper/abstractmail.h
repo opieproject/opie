@@ -31,5 +31,6 @@ public:
     static AbstractMail* getWrapper(IMAPaccount *a);
     static AbstractMail* getWrapper(POP3account *a);
     static encodedString*decode_String(const encodedString*text,const QString&enc);
+    static QString convert_String(const char*text);
 };
 #endif
