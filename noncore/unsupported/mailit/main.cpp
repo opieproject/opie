@@ -22,5 +22,5 @@
 
 #include <opie/oapplicationfactory.h>
 
-using namespace Opie::Core;
+using namespace Opie;
 OPIE_EXPORT_APP( OApplicationFactory<MailItWindow> )
