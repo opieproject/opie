@@ -2,4 +2,7 @@
 Type=Application
 Exec=sfcave_sdl
 Icon=sfcave-sdl
+Comment=Fly the dot though the cave avoiding the walls
+Comment[es]=Haga saltar la pulga en la cueva evitanto las paredes
 Name=SFCave-SDL
+Name[es]=La Pulga

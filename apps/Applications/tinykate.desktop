@@ -1,9 +1,11 @@
 [Desktop Entry]
-Categories = 
+Categories =
 Comment = A texteditor with syntax highlighting
+Comment[es]=Un editor de textos con resaltado sintáctico
 Exec = tinykate
-File = 
+File =
 Icon = tinykate/tinykate
 Name = TinyKATE
 MimeType = text/*
 Type = Applications
+Name[es]=MiniKate

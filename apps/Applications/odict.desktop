@@ -1,7 +1,9 @@
 [Desktop Entry]
 Comment=A dictionary lookup application
+Comment[es]=Una aplicación de búsqueda en diccionario
 Exec=odict
 Icon=odict/odict
 Type=Application
 Name=ODict
 Name[de]=Wörterbuch
+Name[es]=Diccionario
