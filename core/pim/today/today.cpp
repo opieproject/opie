@@ -258,7 +258,6 @@ void Today::startConfig() {
                               Resource::loadPixmap( plugin.guiPart->pixmapNameWidget() ) );
     }
 
-    conf.exec();
     if ( conf.exec() == QDialog::Accepted ) {
         conf.writeConfig();
         ConfigWidget *confWidget;
@@ -266,18 +265,18 @@ void Today::startConfig() {
               confWidget = configWidgetList.next() ) {
             confWidget->writeConfig();
         }
-        init();
 
+        init();
 
         TodayPlugin plugin;
         for ( uint i = 0; i < pluginList.count(); i++ ) {
             plugin = pluginList[i];
 
             if ( m_excludeApplets.grep( plugin.name ).isEmpty() ) {
-                qDebug("CONFIG" + plugin.name + "ACTIVE");
+                qDebug("CONFIG " + plugin.name + " ACTIVE");
                 plugin.active = true;
             } else {
-                qDebug("CONFIG" + plugin.name + "INACTIVE");
+                qDebug("CONFIG " + plugin.name + " INACTIVE");
 
                 plugin.active = false;
             }
