@@ -104,13 +104,11 @@ class ONetwork : public QObject
     /**
      * @returns true, if the @a interface supports the wireless extension protocol.
      */
-     // FIXME QString? -zecke
     bool isWirelessInterface( const char* interface ) const;
     /**
-     * @returns a pointer to the @ref ONetworkInterface object for the specified @a interface or 0, if not found
+     * @returns a pointer to the @ref ONetworkInterface object for the specified @a interface or 0, if not found.
      * @see ONetworkInterface
      */
-     // FIXME: const QString& is prefered over QString!!! -zecke
     ONetworkInterface* interface( const QString& interface ) const;
     /**
      * @internal Rebuild the internal interface database
@@ -118,6 +116,10 @@ class ONetwork : public QObject
      * e.g. after issuing a cardctl insert
      */
     void synchronize();
+    /**
+     * @returns the wireless extension version used at compile time.
+     **/
+    static short wirelessExtensionVersion();
 
   protected:
     ONetwork();

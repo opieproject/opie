@@ -67,6 +67,7 @@ ONetwork* ONetwork::_instance = 0;
 ONetwork::ONetwork()
 {
     qDebug( "ONetwork::ONetwork()" );
+    qDebug( "ONetwork: This code has been compiled against Wireless Extensions V%d", WIRELESS_EXT );
     synchronize();
 }
 
@@ -106,6 +107,12 @@ void ONetwork::synchronize()
         _interfaces.insert( str, iface );
         s.readLine();
     }
+}
+
+
+short ONetwork::wirelessExtensionVersion()
+{
+    return WIRELESS_EXT;
 }
 
 
@@ -949,11 +956,13 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
     // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
 
-    //TODO: check wireless extensions version on runtime and use
-    //TODO: SIOCSIWMODE( IW_MODE_MONITOR ) if running on WE >= 15
-
+    #if WIRELESS_EXT > 14
+    if ( b )
+        _if->setMode( "monitor" );  // IW_MODE_MONITOR doesn't support prism header
+    else
+        _if->setMode( "managed" );
+    #else
     int monitorCode = _prismHeader ? 1 : 2;
-
     if ( b )
     {
         _if->setPrivate( "monitor", 1, monitorCode );
@@ -962,6 +971,7 @@ void OHostAPMonitoringInterface::setEnabled( bool b )
     {
         _if->setPrivate( "monitor", 1, 0 );
     }
+    #endif
 }
 
 
@@ -996,6 +1006,15 @@ void OOrinocoMonitoringInterface::setChannel( int c )
 
 void OOrinocoMonitoringInterface::setEnabled( bool b )
 {
+    // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
+    // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
+
+    #if WIRELESS_EXT > 14
+    if ( b )
+        _if->setMode( "monitor" );  // IW_MODE_MONITOR doesn't support prism header
+    else
+        _if->setMode( "managed" );
+    #else
     if ( b )
     {
         setChannel( 1 );
@@ -1004,6 +1023,7 @@ void OOrinocoMonitoringInterface::setEnabled( bool b )
     {
         _if->setPrivate( "monitor", 2, 0, 0 );
     }
+    #endif
 }
 
 
