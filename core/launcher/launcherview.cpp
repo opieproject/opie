@@ -456,10 +456,12 @@ void LauncherView::setToolsEnabled(bool y)
 	    // Type filter
 	    typemb = new MenuButton(tools);
 	    typemb->setLabel(tr("Type: %1"));
-
+	    typemb->setFixedHeight ( 20 );
+	   	    
 	    // Category filter
 	    catmb = new CategorySelect(tools);
-
+	    catmb->setFixedHeight ( 20 );
+	    
 	    updateTools();
 	    tools->show();
 	} else {
