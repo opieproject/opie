@@ -66,20 +66,17 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setNumCols(4);
 
     horizontalHeader()->setLabel( 0, tr("C.") );
-    horizontalHeader()->setLabel( 1, tr("Prior.") );
+    horizontalHeader()->setLabel( 1, tr("Priority") );
     horizontalHeader()->setLabel( 2, tr("Description" ) );
     horizontalHeader()->setLabel( 3, tr("Deadline") );
 
+    setShowDeadline( todoWindow()->showDeadline() );
+    
     setSorting( TRUE );
     setSelectionMode( NoSelection );
     
     setLeftMargin( 0 );
     verticalHeader()->hide();
-
-    if ( todoWindow()->showDeadline() )
-        showColumn( 3 );
-    else
-        hideColumn( 3 );
 
     connect((QTable*)this, SIGNAL( clicked( int, int, int, const QPoint& ) ),
             this, SLOT( slotClicked(int, int, int, const QPoint& ) ) );
@@ -111,19 +108,6 @@ TableView::TableView( MainWindow* window, QWidget* wid )
         namestr.append( QString::number( i ) );
         m_pic_priority[ i - 1 ] = Resource::loadPixmap( namestr );
     }
-
-    // Try to intelligently size columns
-    int col2width = 240;
-    int width = m_pic_completed.width();
-    setColumnWidth( 0, width );
-    col2width -= width;
-    width = fontMetrics().boundingRect( horizontalHeader()->label( 1 ) ).width()+8;
-    setColumnWidth( 1, width );
-    col2width -= width;
-    width = fontMetrics().boundingRect( horizontalHeader()->label( 3 ) ).width()+8;
-    setColumnWidth( 3, width );
-    col2width -= width;
-    setColumnWidth( 2, col2width - 2 );
 
     /* now let's init the config */
     initConfig();
@@ -225,12 +209,28 @@ void TableView::setShowCompleted( bool b) {
     qWarning("Show Completed %d" + b );
     updateView();
 }
-void TableView::setShowDeadline( bool b) {
-    qWarning("Show DeadLine %d" + b );
-    if (b)
-        showColumn(3 );
+void TableView::setShowDeadline( bool b ) {
+    qWarning( "Show DeadLine %d" + b );
+    if ( b )
+        showColumn( 3 );
     else
-        hideColumn(3 );
+        hideColumn( 3 );
+
+    // Try to intelligently size columns
+    // TODO - would use width() below, but doesn't have valid value at time of c'tor
+    int col2width = 238;
+    int width = m_pic_completed.width();
+    setColumnWidth( 0, width );
+    col2width -= width;
+    width = fontMetrics().boundingRect( horizontalHeader()->label( 1 ) ).width() + 8;
+    setColumnWidth( 1, width );
+    col2width -= width;
+    if ( b ) {
+        width = fontMetrics().boundingRect( horizontalHeader()->label( 3 ) ).width() + 8;
+        setColumnWidth( 3, width );
+        col2width -= width;
+    }
+    setColumnWidth( 2, col2width );
 }
 void TableView::setShowCategory( const QString& str) {
     qWarning("setShowCategory");
@@ -336,9 +336,11 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
     // Paint alternating background bars
     if (  (row % 2 ) == 0 ) {
         p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
+        p->setPen( QPen( cg.text() ) );
     }
     else {
         p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Background ) );
+        p->setPen( QPen( cg.buttonText() ) );
     }
 
     // Paint grid
