@@ -39,7 +39,7 @@
 
 #include <stdio.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 #define RATE_TIMER_INTERVAL 100
 // Ten times per second is fine (RATE_TIMER_INTERVAL 100).  A shorter time
@@ -47,6 +47,7 @@ using namespace Opie;
 
 
 /* XPM */
+using namespace Opie::Ui;
 static const char * vol_xpm[] = {
 "20 20 3 1",
 "   c None",
@@ -777,7 +778,4 @@ void VolumeApplet::paintEvent ( QPaintEvent * )
 }
 
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<VolumeApplet> );
-}
+EXPORT_OPIE_APPLET_v1( VolumeApplet )

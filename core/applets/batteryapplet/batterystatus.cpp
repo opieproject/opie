@@ -13,7 +13,7 @@
 #include <qtextstream.h>
 #include <qmessagebox.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 BatteryStatus::BatteryStatus( const PowerStatus *p, QWidget *parent )
   : QWidget( parent, 0, WDestructiveClose), ps(p), bat2(false) {

@@ -193,6 +193,7 @@ static char * vmemo_xpm[] = {
   "      n n n n n n n n n         "};
 
 
+using namespace Opie::Ui;
 VMemo::VMemo( QWidget *parent, const char *_name )
   : QWidget( parent, _name ) {
   setFixedHeight( 18 );
@@ -638,8 +639,6 @@ void VMemo::timerBreak() {
   QMessageBox::message("Vmemo","Vmemo recording has ended");
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<VMemo> );
-}
+
+EXPORT_OPIE_APPLET_v1( VMemo )
 

@@ -1,4 +1,4 @@
   config VTAPPLET
     boolean "VT (switch to another virtual terminal)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) 

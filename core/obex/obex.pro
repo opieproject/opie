@@ -1,7 +1,7 @@
 TEMPLATE	= lib
 CONFIG		+= qt warn_on release
-HEADERS	=   obex.h obexhandler.h obexsend.h receiver.h
-SOURCES	=   obex.cc obexsend.cpp obexhandler.cpp receiver.cpp
+HEADERS	=   obex.h obexhandler.h obexsend.h receiver.h obeximpl.h
+SOURCES	=   obex.cc obexsend.cpp obexhandler.cpp receiver.cpp obeximpl.cpp
 TARGET		= opieobex
 DESTDIR		= $(OPIEDIR)/plugins/obex
 INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/core/launcher

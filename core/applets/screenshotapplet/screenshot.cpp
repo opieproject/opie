@@ -39,6 +39,7 @@
 #include <unistd.h>
 
 /* XPM */
+using namespace Opie::Ui;
 static char * snapshot_xpm[] = {
 "32 32 177 2",
 "  	c None",
@@ -536,8 +537,6 @@ void ScreenshotApplet::paintEvent( QPaintEvent* )
 	p.drawPixmap( 0,0, m_icon );
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<ScreenshotApplet> );
-}
+
+EXPORT_OPIE_APPLET_v1( ScreenshotApplet )
 

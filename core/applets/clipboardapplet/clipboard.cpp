@@ -34,6 +34,7 @@
 //===========================================================================
 
 
+using namespace Opie::Ui;
 ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
         setFixedWidth ( AppLnk::smallIconSize()  );
@@ -183,7 +184,5 @@ void ClipboardApplet::newData ( )
 	excllock = false;
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<ClipboardApplet> );
-}
+EXPORT_OPIE_APPLET_v1( ClipboardApplet )
+

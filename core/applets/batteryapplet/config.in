@@ -1,4 +1,4 @@
   config BATTERYAPPLET
     boolean "opie-batteryapplet (Applet to monitor battery status)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE 
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2

@@ -2,11 +2,12 @@
 #include <qfileinfo.h>
 
 
-#include <opie/oprocess.h>
+#include <opie2/oprocess.h>
 #include "obex.h"
 
 using namespace  OpieObex;
 
+using namespace Opie::Core;
 /* TRANSLATOR OpieObex::Obex */
 
 Obex::Obex( QObject *parent, const char* name )
@@ -32,11 +33,11 @@ void Obex::receive()  {
     m_rec = new OProcess();
     *m_rec << "irobex_palm3";
     // connect to the necessary slots
-    connect(m_rec,  SIGNAL(processExited(OProcess*) ),
-            this,  SLOT(slotExited(OProcess*) ) );
+    connect(m_rec,  SIGNAL(processExited(Opie::Core::OProcess*) ),
+            this,  SLOT(slotExited(Opie::Core::OProcess*) ) );
 
-    connect(m_rec,  SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
-            this,  SLOT(slotStdOut(OProcess*, char*, int) ) );
+    connect(m_rec,  SIGNAL(receivedStdout(Opie::Core::OProcess*, char*,  int ) ),
+            this,  SLOT(slotStdOut(Opie::Core::OProcess*, char*, int) ) );
 
     if(!m_rec->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
         qWarning("could not start :(");
@@ -80,10 +81,10 @@ void Obex::sendNow(){
     *m_send << QFile::encodeName(m_file);
 
     // connect to slots Exited and and StdOut
-    connect(m_send,  SIGNAL(processExited(OProcess*) ),
-            this, SLOT(slotExited(OProcess*)) );
-    connect(m_send,  SIGNAL(receivedStdout(OProcess*, char*,  int )),
-            this, SLOT(slotStdOut(OProcess*, char*, int) ) );
+    connect(m_send,  SIGNAL(processExited(Opie::Core::OProcess*) ),
+            this, SLOT(slotExited(Opie::Core::OProcess*)) );
+    connect(m_send,  SIGNAL(receivedStdout(Opie::Core::OProcess*, char*,  int )),
+            this, SLOT(slotStdOut(Opie::Core::OProcess*, char*, int) ) );
 
     // now start it
     if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {

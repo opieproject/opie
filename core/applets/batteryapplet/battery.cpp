@@ -22,6 +22,8 @@
 
 /* OPIE */
 #include <opie2/otaskbarapplet.h>
+
+#include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
@@ -31,6 +33,7 @@
 #include <qtimer.h>
 
 
+using namespace Opie::Ui;
 BatteryMeter::BatteryMeter( QWidget *parent )
     : QWidget( parent ), charging(false)
 {
@@ -175,8 +178,5 @@ int BatteryMeter::position()
     return 8;
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<BatteryMeter> );
-}
+EXPORT_OPIE_APPLET_v1( BatteryMeter )
 

@@ -47,6 +47,7 @@
 using namespace Opie;
 
 using namespace Opie::Ui;
+using namespace Opie::Ui;
 using namespace Opie::Core;
 
 CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent ),

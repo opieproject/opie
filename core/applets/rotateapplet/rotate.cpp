@@ -31,12 +31,12 @@
 #include "rotate.h"
 
 /* OPIE */
-#include <opie/odevice.h>
+#include <opie2/odevice.h>
 #include <qpe/config.h>
 #include <qpe/power.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
-using namespace Opie;
+using namespace Opie::Core;
 
 /* QT */
 

@@ -1,4 +1,4 @@
   config OBEX
     boolean "libopieobex0 (library needed for beaming in Opie)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2

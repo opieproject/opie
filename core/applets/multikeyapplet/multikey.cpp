@@ -17,10 +17,12 @@
 /* OPIE */
 #include <opie2/otaskbarapplet.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/qpeapplication.h>
 
 /* QT */
 #include <qdir.h>
 
+using namespace Opie::Ui;
 Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("EN")
 {
     QCopChannel* swChannel = new QCopChannel("MultiKey/Switcher", this);
@@ -137,7 +139,4 @@ int Multikey::position()
     return 10;
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<Multikey> );
-}
+EXPORT_OPIE_APPLET_v1( Multikey )

@@ -5,7 +5,7 @@
 
 #include <qobject.h>
 
-class OProcess;
+namespace Opie {namespace Core {class OProcess;}}
 class QCopChannel;
 namespace OpieObex {
   class Obex : public QObject {
@@ -53,8 +53,8 @@ namespace OpieObex {
       uint m_count;
       QString m_file;
       QString m_outp;
-      OProcess *m_send;
-      OProcess *m_rec;
+      Opie::Core::OProcess *m_send;
+      Opie::Core::OProcess *m_rec;
       bool m_receive : 1;
       void shutDownReceive();
 
@@ -67,8 +67,8 @@ private slots:
       //void send(const QString&);
 
       // the process exited
-      void slotExited(OProcess* proc) ;
-      void slotStdOut(OProcess*, char*, int);
+      void slotExited(Opie::Core::OProcess* proc) ;
+      void slotStdOut(Opie::Core::OProcess*, char*, int);
       void slotError();
 
   private:

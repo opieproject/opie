@@ -37,6 +37,7 @@
 
 //===========================================================================
 
+using namespace Opie::Ui;
 IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
 		: QWidget ( parent, name )
 {
@@ -359,7 +360,4 @@ void IrdaApplet::slotMessage( const QCString& str, const QByteArray& ar ) {
     }
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<IrdaApplet> );
-}
+EXPORT_OPIE_APPLET_v1( IrdaApplet )

@@ -25,6 +25,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
+using namespace Opie::Ui;
 LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
 {
     // If you want a sunken border around the clock do this:
@@ -114,8 +115,6 @@ void LauncherClock::slotClockChanged( bool pm )
     updateTime();
 }
 
-Q_EXPORT_INTERFACE()
-{
-    Q_CREATE_INSTANCE( OTaskbarAppletWrapper<LauncherClock> );
-}
+
+EXPORT_OPIE_APPLET_v1( LauncherClock )
 

@@ -15,6 +15,7 @@
 #include <qlineedit.h>
 #include <qpushbutton.h>
 
+using namespace Opie::Ui;
 InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl )
 {
@@ -58,7 +59,7 @@ void InputDialog::browse() {
     types.insert("Audio",  audio );
     types.insert("Video", video );
 
-    QString str = Opie::OFileDialog::getOpenFileName( 1,"/","", types, 0 );
+    QString str = Opie::Ui::OFileDialog::getOpenFileName( 1,"/","", types, 0 );
     LineEdit1->setText(str);
 }
 

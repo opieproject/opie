@@ -1,4 +1,4 @@
   config CLOCKAPPLET
     boolean "opie-clockapplet (Digital clock applet)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) 

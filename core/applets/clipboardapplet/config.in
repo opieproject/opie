@@ -1,4 +1,4 @@
   config CLIPBOARDAPPLET
     boolean "opie-clipboardapplet (copy/cut/paste applet)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 )
