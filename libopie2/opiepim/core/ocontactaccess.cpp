@@ -73,12 +73,12 @@ OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
 
 	/* Connect signal of external db change to function */
 	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
-	connect( dbchannel, SIGNAL(received(const QCString &, const QByteArray &)),
-               this, SLOT(copMessage( const QCString &, const QByteArray &)) );
+	connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+               this, SLOT(copMessage(const QCString&,const QByteArray&)) );
 	if ( autosync ){
 		QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
-		connect( syncchannel, SIGNAL(received(const QCString &, const QByteArray &)),
-			 this, SLOT(copMessage( const QCString &, const QByteArray &)) );
+		connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+			 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
 	}
 
 

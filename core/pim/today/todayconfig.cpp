@@ -85,7 +85,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
 
     m_applets_changed = false;
 
-    connect ( m_appletListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( appletChanged ( ) ) );
+    connect ( m_appletListView , SIGNAL( clicked(QListViewItem*) ), this, SLOT( appletChanged() ) );
 
     readConfig();
     QPEApplication::showDialog( this );

@@ -201,7 +201,7 @@ void MainWindow::makeMenu()
   ClearSearchText->setText( tr( "" ) );
   ClearSearchText->setPixmap( image1 );
 
-  connect( searchEdit, SIGNAL( textChanged( const QString & ) ),this, SLOT( setSearch( const QString & ) ) );
+  connect( searchEdit, SIGNAL( textChanged(const QString&) ),this, SLOT( setSearch(const QString&) ) );
   connect( ClearSearchText, SIGNAL( clicked() ), searchEdit, SLOT( clear() ) );
 
 }

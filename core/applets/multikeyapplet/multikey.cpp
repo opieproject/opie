@@ -24,8 +24,8 @@
 Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("EN")
 {
     QCopChannel* swChannel = new QCopChannel("MultiKey/Switcher", this);
-    connect( swChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	     this, SLOT(message(const QCString &, const QByteArray &)));
+    connect( swChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+	     this, SLOT(message(const QCString&,const QByteArray&)));
 
     setFont( QFont( "Helvetica", 10, QFont::Normal ) );
     QPEApplication::setStylusOperation(this, QPEApplication::RightOnHold);

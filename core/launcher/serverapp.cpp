@@ -301,18 +301,18 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     reloadPowerWarnSettings();
 
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
-    connect(channel, SIGNAL(received( const QCString&, const QByteArray& ) ),
-            this, SLOT(systemMessage(const QCString&, const QByteArray& ) ) );
+    connect(channel, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(systemMessage(const QCString&,const QByteArray&) ) );
 
     channel = new QCopChannel("QPE/Launcher", this );
-    connect(channel, SIGNAL(received( const QCString&, const QByteArray& ) ),
-            this, SLOT(launcherMessage( const QCString&, const QByteArray& ) ) );
+    connect(channel, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(launcherMessage(const QCString&,const QByteArray&) ) );
 
     m_screensaver = new OpieScreenSaver();
     m_screensaver->setInterval( -1 );
     QWSServer::setScreenSaver( m_screensaver );
 
-    connect( qApp, SIGNAL( volumeChanged( bool ) ),
+    connect( qApp, SIGNAL( volumeChanged(bool) ),
              this, SLOT( rereadVolumes() ) );
 
 

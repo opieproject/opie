@@ -25,8 +25,8 @@ ListViews::ListViews( QWidget* p, const char* name, WFlags fl )
 
     m_splitter = new OSplitter( Horizontal, this, "SPlitter 1" );
     lay->addWidget( m_splitter );
-    connect(m_splitter, SIGNAL(sizeChange(bool, const QSize& ) ),
-            this, SLOT(slotSizeChange(bool, const QSize& ) ) );
+    connect(m_splitter, SIGNAL(sizeChange(bool,const QSize&) ),
+            this, SLOT(slotSizeChange(bool,const QSize&) ) );
 
     m_overview = new QListView( m_splitter );
     m_overview->header()->setClickEnabled( FALSE );

@@ -73,11 +73,11 @@ Sensor::Sensor ( QStringList &params, QWidget *parent, const char *name )
 	interval-> setValue ( inter );
 	linesteps-> setValue ( steps );
 	
-	connect ( interval, SIGNAL( valueChanged ( int )), m_calib, SLOT( setInterval ( int )));
-	connect ( linesteps, SIGNAL( valueChanged ( int )), m_calib, SLOT( setLineSteps ( int )));
+	connect ( interval, SIGNAL( valueChanged(int)), m_calib, SLOT( setInterval(int)));
+	connect ( linesteps, SIGNAL( valueChanged(int)), m_calib, SLOT( setLineSteps(int)));
 	
-	connect ( m_calib, SIGNAL( startPointChanged ( const QPoint & )), this, SLOT( pointDrag ( const QPoint & )));
-	connect ( m_calib, SIGNAL( endPointChanged ( const QPoint & )), this, SLOT( pointDrag ( const QPoint & )));
+	connect ( m_calib, SIGNAL( startPointChanged(const QPoint&)), this, SLOT( pointDrag(const QPoint&)));
+	connect ( m_calib, SIGNAL( endPointChanged(const QPoint&)), this, SLOT( pointDrag(const QPoint&)));
 }                
 
 void Sensor::accept ( )

@@ -208,7 +208,7 @@ void DateBookDayViewQuickLineEdit::slotReturnPressed()
 {
 	if(active && (!this->text().isEmpty())) {	// Fix to avoid having this event beeing added multiple times.
 		quickEvent.setDescription(this->text());
-		connect(this,SIGNAL(insertEvent(const Event &)),this->topLevelWidget(),SLOT(insertEvent(const Event &)));
+		connect(this,SIGNAL(insertEvent(const Event&)),this->topLevelWidget(),SLOT(insertEvent(const Event&)));
 		emit(insertEvent(quickEvent));
 		active=0;
 	}
@@ -238,11 +238,11 @@ DateBookDay::DateBookDay( bool ampm, bool startOnMonday, DateBookDB *newDb, QWid
 
 	view = new DateBookDayView( ampm, this, "day view" );
 
-	connect( header, SIGNAL( dateChanged( int, int, int ) ), this, SLOT( dateChanged( int, int, int ) ) );
-	connect( header, SIGNAL( dateChanged( int, int, int ) ), view, SLOT( slotDateChanged( int, int, int ) ) );
+	connect( header, SIGNAL( dateChanged(int,int,int) ), this, SLOT( dateChanged(int,int,int) ) );
+	connect( header, SIGNAL( dateChanged(int,int,int) ), view, SLOT( slotDateChanged(int,int,int) ) );
 	connect( view, SIGNAL( sigColWidthChanged() ), this, SLOT( slotColWidthChanged() ) );
 	connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(slotWeekChanged(bool)) );
-	connect( view, SIGNAL(sigCapturedKey(const QString &)), this, SIGNAL(sigNewEvent(const QString&)) );
+	connect( view, SIGNAL(sigCapturedKey(const QString&)), this, SIGNAL(sigNewEvent(const QString&)) );
 
 	QTimer *timer = new QTimer( this );
 
@@ -373,10 +373,10 @@ void DateBookDay::getEvents()
                         object = w;
                     }
 
-                    connect( object, SIGNAL( deleteMe( const Event & ) ), this, SIGNAL( removeEvent( const Event & ) ) );
-                    connect( object, SIGNAL( duplicateMe( const Event & ) ), this, SIGNAL( duplicateEvent( const Event & ) ) );
-                    connect( object, SIGNAL( editMe( const Event & ) ), this, SIGNAL( editEvent( const Event & ) ) );
-                    connect( object, SIGNAL( beamMe( const Event & ) ), this, SIGNAL( beamEvent( const Event & ) ) );
+                    connect( object, SIGNAL( deleteMe(const Event&) ), this, SIGNAL( removeEvent(const Event&) ) );
+                    connect( object, SIGNAL( duplicateMe(const Event&) ), this, SIGNAL( duplicateEvent(const Event&) ) );
+                    connect( object, SIGNAL( editMe(const Event&) ), this, SIGNAL( editEvent(const Event&) ) );
+                    connect( object, SIGNAL( beamMe(const Event&) ), this, SIGNAL( beamEvent(const Event&) ) );
 
 		}
 	}

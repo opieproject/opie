@@ -581,8 +581,8 @@ bool LoopControl::init( const QString& filename ) {
     prev_frame = -1;
     videoMutex->unlock();
 
-    connect( mediaPlayerState, SIGNAL( positionChanged( long ) ), this, SLOT( setPosition( long ) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ), this, SLOT( setPaused( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( positionChanged(long) ), this, SLOT( setPosition(long) ) );
+    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ), this, SLOT( setPaused(bool) ) );
 
     //setBackgroundColor( black );
     return TRUE;

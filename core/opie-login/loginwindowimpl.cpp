@@ -57,16 +57,16 @@ using namespace Opie;
 LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_Customize | WStyle_NoBorder | WDestructiveClose )
 {
 	QPopupMenu *pop = new QPopupMenu ( this );
-	pop-> insertItem ( tr( "Restart" ), this, SLOT( restart ( )));
-	pop-> insertItem ( tr( "Quit" ), this, SLOT( quit ( )));
+	pop-> insertItem ( tr( "Restart" ), this, SLOT( restart()));
+	pop-> insertItem ( tr( "Quit" ), this, SLOT( quit()));
 	m_menu-> setPopup ( pop );
 
 	QCopChannel *channel = new QCopChannel ( "QPE/TaskBar", this );
-	connect ( channel, SIGNAL( received ( const QCString &, const QByteArray & )), this, SLOT( receive ( const QCString &, const QByteArray & )));	         
+	connect ( channel, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( receive(const QCString&,const QByteArray&)));	         
 
 	QHBoxLayout *lay = new QHBoxLayout ( m_taskbar, 4, 4 );
 	m_input = new InputMethods ( m_taskbar );
- 	connect ( m_input, SIGNAL( inputToggled ( bool )), this, SLOT( calcMaxWindowRect ( )));
+ 	connect ( m_input, SIGNAL( inputToggled(bool)), this, SLOT( calcMaxWindowRect()));
 	lay-> addWidget ( m_input );
 	lay-> addStretch ( 10 );
 
@@ -77,7 +77,7 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 	
 	//there is no point in displaying the IM for a zaurus
 	if (ODevice::inst ( )-> series ( ) != Model_Zaurus){	
-		QTimer::singleShot ( 0, this, SLOT( showIM ( )));
+		QTimer::singleShot ( 0, this, SLOT( showIM()));
 	}	
 
 	QString opiedir = ::getenv ( "OPIEDIR" );

@@ -189,7 +189,7 @@ void MainWindow::initActions() {
                                         0, this, 0, TRUE );
     m_showDeadLineAction->addTo( m_options );
     m_showDeadLineAction->setOn( showDeadline() );
-    connect(m_showDeadLineAction, SIGNAL(toggled(bool) ), this, SLOT( slotShowDeadLine( bool ) ) );
+    connect(m_showDeadLineAction, SIGNAL(toggled(bool) ), this, SLOT( slotShowDeadLine(bool) ) );
 
     m_showQuickTaskAction = new QAction( QString::null, QWidget::tr("Show quick task bar"),
                                      0, this, 0, TRUE );

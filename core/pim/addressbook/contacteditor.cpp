@@ -535,8 +535,8 @@ void ContactEditor::init() {
 
 	gl->addWidget( hBox, counter , 1  );
 
-	connect( birthdayPicker, SIGNAL( dateClicked( int, int, int ) ),
-		 this, SLOT( slotBirthdayDateChanged( int, int, int ) ) );
+	connect( birthdayPicker, SIGNAL( dateClicked(int,int,int) ),
+		 this, SLOT( slotBirthdayDateChanged(int,int,int) ) );
 	connect( deleteButton, SIGNAL( clicked() ), this, SLOT( slotRemoveBirthday() ) );
 
 	++counter;
@@ -559,8 +559,8 @@ void ContactEditor::init() {
 						     hBox, 0 );
 	gl->addWidget( hBox, counter , 1  );
 
-	connect( anniversaryPicker, SIGNAL( dateClicked( int, int, int ) ),
-		 this, SLOT( slotAnniversaryDateChanged( int, int, int ) ) );
+	connect( anniversaryPicker, SIGNAL( dateClicked(int,int,int) ),
+		 this, SLOT( slotAnniversaryDateChanged(int,int,int) ) );
 	connect( deleteButton, SIGNAL( clicked() ), this, SLOT( slotRemoveAnniversary() ) );
 
 	++counter;
@@ -644,32 +644,32 @@ void ContactEditor::init() {
 
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 
-	connect( txtFullName, SIGNAL(textChanged(const QString &)), 
-		 this, SLOT(slotFullNameChange(const QString &)) );
-	connect( txtSuffix, SIGNAL(textChanged(const QString &)), 
-		 this, SLOT(slotSuffixChange(const QString &)) );
- 	connect( txtOrganization, SIGNAL(textChanged(const QString &)), 
- 		 this, SLOT(slotOrganizationChange(const QString &)) );
-	connect( txtChooserField1, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotChooser1Change(const QString &)) );
-	connect( txtChooserField2, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotChooser2Change(const QString &)) );
-	connect( txtChooserField3, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotChooser3Change(const QString &)) );
-	connect( txtChooserField4, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotChooser4Change(const QString &)) );
-	connect( txtAddress, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotAddressChange(const QString &)) );
-	connect( txtCity, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotCityChange(const QString &)) );
-	connect( txtState, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotStateChange(const QString &)) );
-	connect( txtZip, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotZipChange(const QString &)) );
-	connect( cmbCountry, SIGNAL(textChanged(const QString &)),
-                 this, SLOT(slotCountryChange(const QString &)) );
-	connect( cmbCountry, SIGNAL(activated(const QString &)),
-                 this, SLOT(slotCountryChange(const QString &)) );
+	connect( txtFullName, SIGNAL(textChanged(const QString&)), 
+		 this, SLOT(slotFullNameChange(const QString&)) );
+	connect( txtSuffix, SIGNAL(textChanged(const QString&)), 
+		 this, SLOT(slotSuffixChange(const QString&)) );
+ 	connect( txtOrganization, SIGNAL(textChanged(const QString&)), 
+ 		 this, SLOT(slotOrganizationChange(const QString&)) );
+	connect( txtChooserField1, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotChooser1Change(const QString&)) );
+	connect( txtChooserField2, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotChooser2Change(const QString&)) );
+	connect( txtChooserField3, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotChooser3Change(const QString&)) );
+	connect( txtChooserField4, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotChooser4Change(const QString&)) );
+	connect( txtAddress, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotAddressChange(const QString&)) );
+	connect( txtCity, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotCityChange(const QString&)) );
+	connect( txtState, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotStateChange(const QString&)) );
+	connect( txtZip, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotZipChange(const QString&)) );
+	connect( cmbCountry, SIGNAL(textChanged(const QString&)),
+                 this, SLOT(slotCountryChange(const QString&)) );
+	connect( cmbCountry, SIGNAL(activated(const QString&)),
+                 this, SLOT(slotCountryChange(const QString&)) );
 	connect( cmbChooserField1, SIGNAL(activated(int)),
                  this, SLOT(slotCmbChooser1Change(int)) );
 	connect( cmbChooserField2, SIGNAL(activated(int)),

@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: colordialog.cpp,v 1.5 2004-03-01 15:44:36 chicken Exp $
+** $Id: colordialog.cpp,v 1.6 2004-03-02 12:14:21 alwin Exp $
 **
 ** Implementation of OColorDialog class
 **
@@ -472,10 +472,10 @@ QColorShower::QColorShower( QWidget *parent, const char *name )
     lab = new QColorShowLabel( this );
     lab->setMinimumWidth( 60 ); //###
     gl->addMultiCellWidget(lab, 0,-1,0,0);
-    connect( lab, SIGNAL( colorDropped( QRgb ) ),
-	     this, SIGNAL( newCol( QRgb ) ) );
-    connect( lab, SIGNAL( colorDropped( QRgb ) ),
-	     this, SLOT( setRgb( QRgb ) ) );
+    connect( lab, SIGNAL( colorDropped(QRgb) ),
+	     this, SIGNAL( newCol(QRgb) ) );
+    connect( lab, SIGNAL( colorDropped(QRgb) ),
+	     this, SLOT( setRgb(QRgb) ) );
 
     hEd = new QColNumLineEdit( this );
     hEd->setValidator( val360 );

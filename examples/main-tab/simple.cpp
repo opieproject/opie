@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
      */
     OTabWidget *tab = new OTabWidget(this);
     connect(tab, SIGNAL(currentChanged(QWidget*) ),
-            this, SLOT( slotCurrentChanged( QWidget* ) ) );
+            this, SLOT( slotCurrentChanged(QWidget*) ) );
     setCentralWidget( tab );
 
     Simple1 *simple1 = new Simple1( this );

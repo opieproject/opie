@@ -408,27 +408,27 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
   setFocusPolicy ( QWidget::NoFocus );
 
   rateTimer = new QTimer( this );
-  connect ( rateTimer, SIGNAL( timeout ( )), this, SLOT( rateTimerDone ( )));
+  connect ( rateTimer, SIGNAL( timeout()), this, SLOT( rateTimerDone()));
 
-  connect ( upButton,   SIGNAL( pressed ( )),  this, SLOT( buttonChanged ( )));
-  connect ( upButton,   SIGNAL( released ( )), this, SLOT( buttonChanged ( )));
-  connect ( downButton, SIGNAL( pressed ( )),  this, SLOT( buttonChanged ( )));
-  connect ( downButton, SIGNAL( released ( )), this, SLOT( buttonChanged ( )));
+  connect ( upButton,   SIGNAL( pressed()),  this, SLOT( buttonChanged()));
+  connect ( upButton,   SIGNAL( released()), this, SLOT( buttonChanged()));
+  connect ( downButton, SIGNAL( pressed()),  this, SLOT( buttonChanged()));
+  connect ( downButton, SIGNAL( released()), this, SLOT( buttonChanged()));
 
-  connect ( micSlider, SIGNAL( valueChanged ( int )), this, SLOT( micMoved( int )));
-  connect ( volSlider, SIGNAL( valueChanged ( int )), this, SLOT( volMoved( int )));
-  connect ( alarmSlider, SIGNAL( valueChanged ( int )), this, SLOT( alarmMoved( int )));
-  connect ( bassSlider, SIGNAL( valueChanged ( int )), this, SLOT( bassMoved( int )));
-  connect ( trebleSlider, SIGNAL( valueChanged ( int )), this, SLOT( trebleMoved( int )));
+  connect ( micSlider, SIGNAL( valueChanged(int)), this, SLOT( micMoved(int)));
+  connect ( volSlider, SIGNAL( valueChanged(int)), this, SLOT( volMoved(int)));
+  connect ( alarmSlider, SIGNAL( valueChanged(int)), this, SLOT( alarmMoved(int)));
+  connect ( bassSlider, SIGNAL( valueChanged(int)), this, SLOT( bassMoved(int)));
+  connect ( trebleSlider, SIGNAL( valueChanged(int)), this, SLOT( trebleMoved(int)));
 
 
-  connect ( volLed,   SIGNAL( toggled ( bool )), this, SLOT( volMuteToggled ( bool )));
-  connect ( micLed,   SIGNAL( toggled ( bool )), this, SLOT( micMuteToggled ( bool )));
-  connect ( alarmLed, SIGNAL( toggled ( bool )), this, SLOT( alarmSoundToggled ( bool )));
+  connect ( volLed,   SIGNAL( toggled(bool)), this, SLOT( volMuteToggled(bool)));
+  connect ( micLed,   SIGNAL( toggled(bool)), this, SLOT( micMuteToggled(bool)));
+  connect ( alarmLed, SIGNAL( toggled(bool)), this, SLOT( alarmSoundToggled(bool)));
 
-  connect ( alarmBox, SIGNAL( toggled ( bool )), this, SLOT( alarmSoundToggled ( bool )));
-  connect ( keyBox,   SIGNAL( toggled ( bool )), this, SLOT( keyClickToggled ( bool )));
-  connect ( tapBox,   SIGNAL( toggled ( bool )), this, SLOT( screenTapToggled ( bool )));
+  connect ( alarmBox, SIGNAL( toggled(bool)), this, SLOT( alarmSoundToggled(bool)));
+  connect ( keyBox,   SIGNAL( toggled(bool)), this, SLOT( keyClickToggled(bool)));
+  connect ( tapBox,   SIGNAL( toggled(bool)), this, SLOT( screenTapToggled(bool)));
 
   // initialize variables
 
@@ -724,8 +724,8 @@ VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
   m_pixmap = new QPixmap ( Resource::loadPixmap ( "volume" ));
   m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
 
-  connect ( qApp, SIGNAL( volumeChanged ( bool )), m_dialog, SLOT( volumeChanged( bool )));
-  connect ( qApp, SIGNAL( micChanged ( bool )), m_dialog, SLOT ( micChanged( bool )));
+  connect ( qApp, SIGNAL( volumeChanged(bool)), m_dialog, SLOT( volumeChanged(bool)));
+  connect ( qApp, SIGNAL( micChanged(bool)), m_dialog, SLOT ( micChanged(bool)));
 }
 
 VolumeApplet::~VolumeApplet()

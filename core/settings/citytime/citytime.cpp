@@ -109,8 +109,8 @@ CityTime::CityTime( QWidget *parent, const char* name,
     bAdded = true;
     readInTimes();
     changed = FALSE;
-    QObject::connect( qApp, SIGNAL( clockChanged( bool ) ),
-                      this, SLOT( changeClock( bool ) ) );
+    QObject::connect( qApp, SIGNAL( clockChanged(bool) ),
+                      this, SLOT( changeClock(bool) ) );
     // now start the timer so we can update the time quickly every second
     timerEvent( 0 );
 }

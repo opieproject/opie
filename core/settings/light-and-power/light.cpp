@@ -172,7 +172,7 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 	criticalSpinBox-> setValue ( config. readNumEntry ( "powercritical", 5 ) );
 
 	m_resettimer = new QTimer ( this );
-	connect ( m_resettimer, SIGNAL( timeout ( )), this, SLOT( resetBacklight ( )));
+	connect ( m_resettimer, SIGNAL( timeout()), this, SLOT( resetBacklight()));
 
 	if ( PowerStatusManager::readStatus ( ). acStatus ( ) != PowerStatus::Online ) {
 		tabs-> setCurrentPage ( 0 );
@@ -181,11 +181,11 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags )
 		tabs-> setCurrentPage ( 1 );
 	}
 
-	connect ( brightness, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
-	connect ( brightness_ac, SIGNAL( valueChanged ( int )), this, SLOT( setBacklight ( int )));
+	connect ( brightness, SIGNAL( valueChanged(int)), this, SLOT( setBacklight(int)));
+	connect ( brightness_ac, SIGNAL( valueChanged(int)), this, SLOT( setBacklight(int)));
 	if (m_cres) {
-		connect ( contrast,    SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
-		connect ( contrast_ac, SIGNAL( valueChanged ( int )), this, SLOT( setContrast ( int )));
+		connect ( contrast,    SIGNAL( valueChanged(int)), this, SLOT( setContrast(int)));
+		connect ( contrast_ac, SIGNAL( valueChanged(int)), this, SLOT( setContrast(int)));
 	}
 	connect( frequency, SIGNAL( activated(int) ), this, SLOT( setFrequency(int) ) );
 	connect( frequency_ac, SIGNAL( activated(int) ), this, SLOT( setFrequency(int) ) );
@@ -200,7 +200,7 @@ LightSettings::~LightSettings ( )
 void LightSettings::calibrateSensor ( )
 {
 	Sensor *s = new Sensor ( m_sensordata, this );
-	connect ( s, SIGNAL( viewBacklight ( int )), this, SLOT( setBacklight ( int )));
+	connect ( s, SIGNAL( viewBacklight(int)), this, SLOT( setBacklight(int)));
 	QPEApplication::execDialog( s );
 	delete s;
 }
@@ -208,7 +208,7 @@ void LightSettings::calibrateSensor ( )
 void LightSettings::calibrateSensorAC ( )
 {
 	Sensor *s = new Sensor ( m_sensordata_ac, this );
-	connect ( s, SIGNAL( viewBacklight ( int )), this, SLOT( setBacklight ( int )));
+	connect ( s, SIGNAL( viewBacklight(int)), this, SLOT( setBacklight(int)));
 	QPEApplication::execDialog ( s );
 	delete s;
 }

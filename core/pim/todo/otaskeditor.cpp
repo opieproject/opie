@@ -83,7 +83,7 @@ void OTaskEditor::init() {
 
     /* connect due date changed to the recurrence tab */
     connect(m_stat, SIGNAL(dueDateChanged(const QDate&) ),
-            m_rec, SLOT(setStartDate(const QDate& ) ) );
+            m_rec, SLOT(setStartDate(const QDate&) ) );
 
 
     m_tab->setCurrentTab( m_overView );

@@ -111,8 +111,8 @@ OFileDialog::OFileDialog(const QString &caption,
     connect(file, SIGNAL(dirSelected(const QString&) ), this, SLOT(slotDirSelected(const QString&) ) );
 
 #if 0
-    connect(file, SIGNAL(dirSelected(const QString &) ),
-            this, SLOT(slotDirSelected(const QString &) ) );
+    connect(file, SIGNAL(dirSelected(const QString&) ),
+            this, SLOT(slotDirSelected(const QString&) ) );
 #endif
 }
 /**

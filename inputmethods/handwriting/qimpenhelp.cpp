@@ -163,8 +163,8 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
     matcher = new QIMPenMatch( this );
     matcher->setCharSet( currentSet );
     connect( matcher, SIGNAL(noMatch()), this, SLOT(noMatch()) );
-    connect( matcher, SIGNAL(matchedCharacters(const QIMPenCharMatchList &)),
-	     this, SLOT(matched(const QIMPenCharMatchList &)) );
+    connect( matcher, SIGNAL(matchedCharacters(const QIMPenCharMatchList&)),
+	     this, SLOT(matched(const QIMPenCharMatchList&)) );
 
     QHBoxLayout *hb = new QHBoxLayout();
     gl->addLayout( hb, 2, 0 );
@@ -186,12 +186,12 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
     connect( matcher, SIGNAL(removeStroke()), pracPw, SLOT(removeStroke()) );
     connect( pracPw, SIGNAL(beginStroke()),
 	     this, SLOT(beginStroke()) );
-    connect( pracPw, SIGNAL(stroke( QIMPenStroke * )),
-	     this, SLOT(strokeEntered( QIMPenStroke * )) );
+    connect( pracPw, SIGNAL(stroke(QIMPenStroke*)),
+	     this, SLOT(strokeEntered(QIMPenStroke*)) );
     connect( pracPw, SIGNAL(beginStroke()),
 	     matcher, SLOT(beginStroke()) );
-    connect( pracPw, SIGNAL(stroke( QIMPenStroke * )),
-	     matcher, SLOT(strokeEntered( QIMPenStroke * )) );
+    connect( pracPw, SIGNAL(stroke(QIMPenStroke*)),
+	     matcher, SLOT(strokeEntered(QIMPenStroke*)) );
     gl->addWidget( pracPw, 3, 1 );
 
     redrawTimer = new QTimer( this );

@@ -26,16 +26,16 @@ void SendWidget::initUI() {
             this, SLOT(slotIrError(int) ) );
     connect(m_obex, SIGNAL(sent(bool) ),
             this, SLOT(slotIrSent(bool) ) );
-    connect(m_obex, SIGNAL(currentTry(unsigned int ) ),
-            this, SLOT(slotIrTry(unsigned int ) ) );
+    connect(m_obex, SIGNAL(currentTry(unsigned int) ),
+            this, SLOT(slotIrTry(unsigned int) ) );
 
     QCopChannel* chan = new QCopChannel("QPE/IrDaAppletBack", this );
-    connect(chan, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT(dispatchIrda(const QCString&, const QByteArray& ) ) );
+    connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(dispatchIrda(const QCString&,const QByteArray&) ) );
 
     chan = new QCopChannel("QPE/BluetoothBack", this );
-    connect(chan, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT(dispatchBt(const QCString&, const QByteArray& ) ) );
+    connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(dispatchBt(const QCString&,const QByteArray&) ) );
 
     QVBoxLayout* lay = new QVBoxLayout(this);
 
@@ -58,8 +58,8 @@ void SendWidget::initUI() {
 
     m_devBox = new DeviceBox(this);
     lay->addWidget( m_devBox, 50 );
-    connect(m_devBox, SIGNAL(selectedDevice(int, int ) ),
-            this, SLOT(slotSelectedDevice(int, int) ) );
+    connect(m_devBox, SIGNAL(selectedDevice(int,int) ),
+            this, SLOT(slotSelectedDevice(int,int) ) );
 
     QPushButton *but = new QPushButton(this);
     but->setText(tr("Done") );

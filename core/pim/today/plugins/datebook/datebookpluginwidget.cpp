@@ -99,7 +99,7 @@ void DatebookPluginWidget::getDates() {
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
                     m_eventsList.append( l );
                     l->show();
-                    QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
+                    QObject::connect ( l, SIGNAL( editEvent(const Event&) ), l, SLOT( editEventSlot(const Event&) ) );
                 } else {
 			if ( ( QDateTime::currentDateTime()  <=  (*it).event().end() )
 			     // Show events which span over many days and are not elapsed.
@@ -118,7 +118,7 @@ void DatebookPluginWidget::getDates() {
 				DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
 				m_eventsList.append( l );
 				l->show();
-				QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
+				QObject::connect ( l, SIGNAL( editEvent(const Event&) ), l, SLOT( editEventSlot(const Event&) ) );
 			     }
 		}
             }

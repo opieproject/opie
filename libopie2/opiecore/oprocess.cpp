@@ -672,8 +672,8 @@ int OProcess::commSetupDoneP()
             innot = new QSocketNotifier( in[ 1 ], QSocketNotifier::Write, this );
             CHECK_PTR( innot );
             innot->setEnabled( false ); // will be enabled when data has to be sent
-            QObject::connect( innot, SIGNAL( activated( int ) ),
-                              this, SLOT( slotSendData( int ) ) );
+            QObject::connect( innot, SIGNAL( activated(int) ),
+                              this, SLOT( slotSendData(int) ) );
         }
 
         if ( communication & Stdout )
@@ -681,8 +681,8 @@ int OProcess::commSetupDoneP()
             //        ok &= (-1 != fcntl(out[0], F_SETFL, O_NONBLOCK));
             outnot = new QSocketNotifier( out[ 0 ], QSocketNotifier::Read, this );
             CHECK_PTR( outnot );
-            QObject::connect( outnot, SIGNAL( activated( int ) ),
-                              this, SLOT( slotChildOutput( int ) ) );
+            QObject::connect( outnot, SIGNAL( activated(int) ),
+                              this, SLOT( slotChildOutput(int) ) );
             if ( communication & NoRead )
                 suspend();
         }
@@ -692,8 +692,8 @@ int OProcess::commSetupDoneP()
             //        ok &= (-1 != fcntl(err[0], F_SETFL, O_NONBLOCK));
             errnot = new QSocketNotifier( err[ 0 ], QSocketNotifier::Read, this );
             CHECK_PTR( errnot );
-            QObject::connect( errnot, SIGNAL( activated( int ) ),
-                              this, SLOT( slotChildError( int ) ) );
+            QObject::connect( errnot, SIGNAL( activated(int) ),
+                              this, SLOT( slotChildError(int) ) );
         }
     }
     return ok;

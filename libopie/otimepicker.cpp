@@ -173,12 +173,12 @@ OTimePickerDialog::OTimePickerDialog ( QWidget* parent, const char* name, WFlags
 	: OTimePickerDialogBase (parent , name, true , fl)
 {
 
-	connect ( m_timePicker, SIGNAL( timeChanged( const QTime& ) ),
-		  this, SLOT( setTime ( const QTime& ) ) );
-	connect ( minuteField, SIGNAL( textChanged ( const QString& ) ),
-		  this, SLOT ( setMinute ( const QString& ) ) );
-	connect ( hourField, SIGNAL( textChanged ( const QString& ) ),
-		  this, SLOT ( setHour ( const QString& ) ) );
+	connect ( m_timePicker, SIGNAL( timeChanged(const QTime&) ),
+		  this, SLOT( setTime(const QTime&) ) );
+	connect ( minuteField, SIGNAL( textChanged(const QString&) ),
+		  this, SLOT ( setMinute(const QString&) ) );
+	connect ( hourField, SIGNAL( textChanged(const QString&) ),
+		  this, SLOT ( setHour(const QString&) ) );
 
 }
 

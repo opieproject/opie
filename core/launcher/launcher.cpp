@@ -98,10 +98,10 @@ LauncherTabWidget::LauncherTabWidget( Launcher* parent ) :
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/Launcher", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-             this, SLOT(launcherMessage(const QCString&, const QByteArray&)) );
-    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-	     this, SLOT(appMessage(const QCString&, const QByteArray&)));
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(launcherMessage(const QCString&,const QByteArray&)) );
+    connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&)),
+	     this, SLOT(appMessage(const QCString&,const QByteArray&)));
 #endif
 
     createDocLoadingWidget();
@@ -477,8 +477,8 @@ void Launcher::createGUI()
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     QCopChannel* sysChannel = new QCopChannel( "QPE/System", this );
-    connect( sysChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-             this, SLOT(systemMessage( const QCString &, const QByteArray &)) );
+    connect( sysChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(systemMessage(const QCString&,const QByteArray&)) );
 #endif
 
     // all documents

@@ -77,10 +77,10 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	m_viewStack -> addWidget( cardBox , CardView );
 
 	// Connect views to me
-	connect ( m_abTable, SIGNAL( signalSwitch( void ) ),
-		  this, SLOT( slotSwitch( void ) ) );
-	connect ( m_ablabel, SIGNAL( signalOkPressed( void ) ),
-		  this, SLOT( slotSwitch( void ) ) );
+	connect ( m_abTable, SIGNAL( signalSwitch(void) ),
+		  this, SLOT( slotSwitch(void) ) );
+	connect ( m_ablabel, SIGNAL( signalOkPressed(void) ),
+		  this, SLOT( slotSwitch(void) ) );
 
 	load();
 }

@@ -42,8 +42,8 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
 //    QPEApplication::grabKeyboard();
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( pauseCheck(bool) ) );
     connect( mediaPlayerState, SIGNAL( next() ),     this, SLOT( next() ) );
     connect( mediaPlayerState, SIGNAL( prev() ),     this, SLOT( prev() ) );
 

@@ -110,7 +110,7 @@ void OpieUIDemo::demoOCompletionBox()
     box->insertItem( "Additional Items" );
     box->insertItem( "Complete Completion Box" );
 
-    connect( box, SIGNAL( activated( const QString& ) ), this, SLOT( messageBox( const QString& ) ) );
+    connect( box, SIGNAL( activated(const QString&) ), this, SLOT( messageBox(const QString&) ) );
     box->popup();
 
 }

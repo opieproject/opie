@@ -53,8 +53,8 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *todayChannel = new QCopChannel( "QPE/Today" , this );
-    connect ( todayChannel, SIGNAL( received( const QCString &, const QByteArray &) ),
-              this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
+    connect ( todayChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+              this, SLOT ( channelReceived(const QCString&,const QByteArray&) ) );
 #endif
 #endif
 

@@ -52,13 +52,13 @@ CardMonitor::CardMonitor( QWidget * parent ) : QWidget( parent ),
 
     QCopChannel * pcmciaChannel = new QCopChannel( "QPE/Card", this );
     connect( pcmciaChannel,
-             SIGNAL( received( const QCString &, const QByteArray & ) ), this,
-             SLOT( cardMessage( const QCString &, const QByteArray & ) ) );
+             SIGNAL( received(const QCString&,const QByteArray&) ), this,
+             SLOT( cardMessage(const QCString&,const QByteArray&) ) );
 
     QCopChannel *sdChannel = new QCopChannel( "QPE/Card", this );
     connect( sdChannel,
-             SIGNAL( received( const QCString &, const QByteArray & ) ), this,
-             SLOT( cardMessage( const QCString &, const QByteArray & ) ) );
+             SIGNAL( received(const QCString&,const QByteArray&) ), this,
+             SLOT( cardMessage(const QCString&,const QByteArray&) ) );
 
     cardInPcmcia0 = FALSE;
     cardInPcmcia1 = FALSE;

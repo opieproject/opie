@@ -294,7 +294,7 @@ ServerPI::ServerPI( int socket, QObject *parent , const char* name )
 		dtp = new ServerDTP( this );
 		connect( dtp, SIGNAL( completed() ), SLOT( dtpCompleted() ) );
 		connect( dtp, SIGNAL( failed() ), SLOT( dtpFailed() ) );
-		connect( dtp, SIGNAL( error( int ) ), SLOT( dtpError( int ) ) );
+		connect( dtp, SIGNAL( error(int) ), SLOT( dtpError(int) ) );
 
 
 		directory = QDir::currentDirPath();
@@ -305,8 +305,8 @@ ServerPI::ServerPI( int socket, QObject *parent , const char* name )
 			delete serversocket;
 			serversocket = new ServerSocket( ++p, this );
 		}
-		connect( serversocket, SIGNAL( newIncomming( int ) ),
-		         SLOT( newConnection( int ) ) );
+		connect( serversocket, SIGNAL( newIncomming(int) ),
+		         SLOT( newConnection(int) ) );
 	}
 }
 
@@ -1046,22 +1046,22 @@ ServerDTP::ServerDTP( QObject *parent, const char* name)
 
 	connect( this, SIGNAL( connected() ), SLOT( connected() ) );
 	connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
-	connect( this, SIGNAL( bytesWritten( int ) ), SLOT( bytesWritten( int ) ) );
+	connect( this, SIGNAL( bytesWritten(int) ), SLOT( bytesWritten(int) ) );
 	connect( this, SIGNAL( readyRead() ), SLOT( readyRead() ) );
 
 	gzipProc = new OProcess( this, "gzipProc" );
 
 	createTargzProc = new OProcess( QString("tar"), this, "createTargzProc");
 	createTargzProc->setWorkingDirectory( QDir::rootDirPath() );
-	connect( createTargzProc, SIGNAL( processExited(OProcess *) ), SLOT( targzDone() ) );
+	connect( createTargzProc, SIGNAL( processExited(OProcess*) ), SLOT( targzDone() ) );
 
 	QStringList args = "tar";
 	args += "-xv";
 	retrieveTargzProc = new OProcess( args, this, "retrieveTargzProc" );
 	retrieveTargzProc->setWorkingDirectory( QDir::rootDirPath() );
-	connect( retrieveTargzProc, SIGNAL( processExited(OProcess *) ),
+	connect( retrieveTargzProc, SIGNAL( processExited(OProcess*) ),
 	         SIGNAL( completed() ) );
-	connect( retrieveTargzProc, SIGNAL( processExited(OProcess *) ),
+	connect( retrieveTargzProc, SIGNAL( processExited(OProcess*) ),
 	         SLOT( extractTarDone() ) );
 }
 
@@ -1281,16 +1281,16 @@ void ServerDTP::writeTargzBlock(OProcess *, char *buffer, int buflen)
 		qDebug("tar and gzip done");
 		emit completed();
 		mode = Idle;
-		disconnect( gzipProc, SIGNAL( receivedStdout(OProcess *, char *, int ) ),
-		            this, SLOT( writeTargzBlock(OProcess *, char *, int) ) );
+		disconnect( gzipProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+		            this, SLOT( writeTargzBlock(OProcess*,char*,int) ) );
 	}
 }
 
 void ServerDTP::targzDone()
 {
 	//qDebug("targz done");
-	disconnect( createTargzProc, SIGNAL( receivedStdout(OProcess *, char *, int) ),
-	            this, SLOT( gzipTarBlock(OProcess *, char *, int) ) );
+	disconnect( createTargzProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+	            this, SLOT( gzipTarBlock(OProcess*,char*,int) ) );
 	gzipProc->closeStdin();
 }
 
@@ -1338,12 +1338,12 @@ void ServerDTP::sendGzipFile( const QString &fn,
 	createTargzProc->clearArguments( );
 	*createTargzProc << args;
 	connect( createTargzProc,
-	         SIGNAL( receivedStdout(OProcess *, char *, int) ), SLOT( gzipTarBlock(OProcess *, char *, int) ) );
+	         SIGNAL( receivedStdout(OProcess*,char*,int) ), SLOT( gzipTarBlock(OProcess*,char*,int) ) );
 
 	gzipProc->clearArguments( );
 	*gzipProc << "gzip";
-	connect( gzipProc, SIGNAL( receivedStdout(OProcess *, char *, int) ),
-	         SLOT( writeTargzBlock(OProcess *, char *, int) ) );
+	connect( gzipProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+	         SLOT( writeTargzBlock(OProcess*,char*,int) ) );
 }
 
 void ServerDTP::gunzipDone()
@@ -1352,8 +1352,8 @@ void ServerDTP::gunzipDone()
 	disconnect( gzipProc, SIGNAL( processExited() ),
 	            this, SLOT( gunzipDone() ) );
 	retrieveTargzProc->closeStdin();
-	disconnect( gzipProc, SIGNAL( receivedStdout(OProcess *, char *, int) ),
-	            this, SLOT( tarExtractBlock(OProcess *, char *, int) ) );
+	disconnect( gzipProc, SIGNAL( receivedStdout(OProcess*,char*,int) ),
+	            this, SLOT( tarExtractBlock(OProcess*,char*,int) ) );
 }
 
 void ServerDTP::tarExtractBlock(OProcess *, char *buffer, int buflen)

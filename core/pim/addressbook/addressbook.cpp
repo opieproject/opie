@@ -135,8 +135,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	//#if defined(Q_WS_QWS) // Why this ? (se)
 #if !defined(QT_NO_COP)
 	QCopChannel *addressChannel = new QCopChannel("QPE/Addressbook" , this );
-	connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
-		 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
+	connect (addressChannel, SIGNAL( received(const QCString&,const QByteArray&)),
+		 this, SLOT ( appMessage(const QCString&,const QByteArray&) ) );
 #endif
 	// #endif
 	a = new QAction( tr( "Find" ), Resource::loadPixmap( "mag" ),
@@ -156,8 +156,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 // 	searchEdit->setFont( f );
 
 	searchBar->setStretchableWidget( searchEdit );
-	connect( searchEdit, SIGNAL( returnPressed( ) ),
-		 this, SLOT( slotFind( ) ) );
+	connect( searchEdit, SIGNAL( returnPressed() ),
+		 this, SLOT( slotFind() ) );
 
 	a = new QAction( tr( "Start Search" ), Resource::loadPixmap( "enter" ), QString::null, 0, this, 0 );
 	connect( a, SIGNAL( activated() ), this, SLOT( slotFind() ) );
@@ -226,8 +226,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
  	m_abView = new AbView( listContainer, m_config.orderList() );
  	vb->addWidget( m_abView );
 	// abList->setHScrollBarMode( QScrollView::AlwaysOff );
-	connect( m_abView, SIGNAL( signalViewSwitched ( int ) ),
-		 this, SLOT( slotViewSwitched( int ) ) );
+	connect( m_abView, SIGNAL( signalViewSwitched(int) ),
+		 this, SLOT( slotViewSwitched(int) ) );
 
 
 	QObject::connect( m_abView, SIGNAL(signalNotFound()), this, SLOT(slotNotFound()) );
@@ -254,8 +254,8 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
 	connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
 	connect( qApp, SIGNAL( reload() ), this, SLOT( reload() ) );
-	connect( qApp, SIGNAL( appMessage(const QCString &, const QByteArray &) ),
-	this, SLOT( appMessage(const QCString &, const QByteArray &) ) );
+	connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
+	this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
 
 
 	isLoading = false;
@@ -595,7 +595,7 @@ void AddressbookWindow::slotBeam()
 	qWarning("Beaming: %s", beamFilename.latin1() );
 
 	Ir *ir = new Ir( this );
-	connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
+	connect( ir, SIGNAL( done(Ir*) ), this, SLOT( beamDone(Ir*) ) );
 	QString description = c.fullName();
 	ir->send( beamFilename, description, "text/x-vCard" );
 }
@@ -673,7 +673,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 			return; // can't beam a non-existent file
 
 		Ir *ir = new Ir( this );
-		connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
+		connect( ir, SIGNAL( done(Ir*) ), this, SLOT( beamDone(Ir*) ) );
 		QString description = "mycard.vcf";
 		ir->send( beamFilename, description, "text/x-vCard" );
 	} else if ( msg == "show(int)" ) {

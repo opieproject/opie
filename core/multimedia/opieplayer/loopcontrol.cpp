@@ -441,8 +441,8 @@ bool LoopControl::init( const QString& filename ) {
     current_frame = 0;
     prev_frame = -1;
 
-    connect( mediaPlayerState, SIGNAL( positionChanged( long ) ), this, SLOT( setPosition( long ) ) );
-    connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ), this, SLOT( setPaused( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( positionChanged(long) ), this, SLOT( setPosition(long) ) );
+    connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ), this, SLOT( setPaused(bool) ) );
 
     audioMutex->unlock();
 

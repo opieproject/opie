@@ -51,8 +51,8 @@ TESession::TESession(QMainWindow* main, TEWidget* _te, const char* _pgm, QStrLis
 
   
 
-  QObject::connect( em,SIGNAL(changeTitle(int, const QString&)),
-                    this,SLOT(changeTitle(int, const QString&)) );
+  QObject::connect( em,SIGNAL(changeTitle(int,const QString&)),
+                    this,SLOT(changeTitle(int,const QString&)) );
 
   QObject::connect( sh,SIGNAL(done(int)), this,SLOT(done(int)) );
 }
@@ -72,8 +72,8 @@ void TESession::kill(int ) // signal)
 
 TESession::~TESession()
 {
- QObject::disconnect( sh, SIGNAL( done( int ) ),
-		      this, SLOT( done( int ) ) );
+ QObject::disconnect( sh, SIGNAL( done(int) ),
+		      this, SLOT( done(int) ) );
   delete em;
   delete sh;
 }

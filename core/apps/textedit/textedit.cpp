@@ -163,8 +163,8 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     channel = new QCopChannel( "QPE/Application/textedit", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-        this, SLOT(receive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+        this, SLOT(receive(const QCString&,const QByteArray&)) );
 
     setIcon( Resource::loadPixmap( "TextEditor" ) );
 
@@ -325,7 +325,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
     searchEdit = new QLineEdit( searchBar, "searchEdit" );
     searchBar->setStretchableWidget( searchEdit );
-    connect( searchEdit, SIGNAL( textChanged( const QString & ) ),
+    connect( searchEdit, SIGNAL( textChanged(const QString&) ),
        this, SLOT( search() ) );
 
     a = new QAction( tr( "Find Next" ), Resource::loadPixmap( "next" ),
@@ -583,8 +583,8 @@ void TextEdit::doSearchBar() {
 #if 0
 void TextEdit::slotFind() {
     FindDialog frmFind( tr("Text Editor"), this );
-    connect( &frmFind, SIGNAL(signalFindClicked(const QString &, bool, bool, int)),
-       editor, SLOT(slotDoFind( const QString&,bool,bool)));
+    connect( &frmFind, SIGNAL(signalFindClicked(const QString&,bool,bool,int)),
+       editor, SLOT(slotDoFind(const QString&,bool,bool)));
 
     //case sensitive, backwards, [category]
 

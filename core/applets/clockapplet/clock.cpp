@@ -30,9 +30,9 @@ LauncherClock::LauncherClock( QWidget *parent ) : QLabel( parent )
     // If you want a sunken border around the clock do this:
     // setFrameStyle( QFrame::Panel | QFrame::Sunken );
     //setFont( QFont( "Helvetica", , QFont::Normal ) );
-    connect( qApp, SIGNAL( timeChanged() ), this, SLOT( updateTime( ) ) );
-    connect( qApp, SIGNAL( clockChanged( bool ) ),
-       this, SLOT( slotClockChanged( bool ) ) );
+    connect( qApp, SIGNAL( timeChanged() ), this, SLOT( updateTime() ) );
+    connect( qApp, SIGNAL( clockChanged(bool) ),
+       this, SLOT( slotClockChanged(bool) ) );
     readConfig();
     timerId = 0;
     timerEvent( 0 );

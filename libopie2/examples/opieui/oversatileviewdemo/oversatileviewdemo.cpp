@@ -74,23 +74,23 @@ OVersatileViewDemo::OVersatileViewDemo( QWidget* parent, const char* name, WFlag
     }
    
     connect( vv, SIGNAL( selectionChanged() ), this, SLOT( selectionChanged() ) );
-    connect( vv, SIGNAL( selectionChanged( OVersatileViewItem * ) ), this, SLOT( selectionChanged( OVersatileViewItem * ) ) );
-    connect( vv, SIGNAL( currentChanged( OVersatileViewItem * ) ), this, SLOT( currentChanged( OVersatileViewItem * ) ) );
-    connect( vv, SIGNAL( clicked( OVersatileViewItem * ) ), this, SLOT( clicked( OVersatileViewItem * ) ) );
-    connect( vv, SIGNAL( pressed( OVersatileViewItem * ) ), this, SLOT( pressed( OVersatileViewItem * ) ) );
+    connect( vv, SIGNAL( selectionChanged(OVersatileViewItem*) ), this, SLOT( selectionChanged(OVersatileViewItem*) ) );
+    connect( vv, SIGNAL( currentChanged(OVersatileViewItem*) ), this, SLOT( currentChanged(OVersatileViewItem*) ) );
+    connect( vv, SIGNAL( clicked(OVersatileViewItem*) ), this, SLOT( clicked(OVersatileViewItem*) ) );
+    connect( vv, SIGNAL( pressed(OVersatileViewItem*) ), this, SLOT( pressed(OVersatileViewItem*) ) );
 
-    connect( vv, SIGNAL( doubleClicked( OVersatileViewItem * ) ), this, SLOT( doubleClicked( OVersatileViewItem * ) ) );
-    connect( vv, SIGNAL( returnPressed( OVersatileViewItem * ) ), this, SLOT( returnPressed( OVersatileViewItem * ) ) );
+    connect( vv, SIGNAL( doubleClicked(OVersatileViewItem*) ), this, SLOT( doubleClicked(OVersatileViewItem*) ) );
+    connect( vv, SIGNAL( returnPressed(OVersatileViewItem*) ), this, SLOT( returnPressed(OVersatileViewItem*) ) );
   
-    connect( vv, SIGNAL( onItem( OVersatileViewItem * ) ), this, SLOT( onItem( OVersatileViewItem * ) ) );
+    connect( vv, SIGNAL( onItem(OVersatileViewItem*) ), this, SLOT( onItem(OVersatileViewItem*) ) );
     connect( vv, SIGNAL( onViewport() ), this, SLOT( onViewport() ) );
     
-    connect( vv, SIGNAL( expanded( OVersatileViewItem * ) ), this, SLOT( expanded( OVersatileViewItem * ) ) );
-    connect( vv, SIGNAL( collapsed( OVersatileViewItem * ) ), this, SLOT( collapsed( OVersatileViewItem * ) ) );
+    connect( vv, SIGNAL( expanded(OVersatileViewItem*) ), this, SLOT( expanded(OVersatileViewItem*) ) );
+    connect( vv, SIGNAL( collapsed(OVersatileViewItem*) ), this, SLOT( collapsed(OVersatileViewItem*) ) );
 
     connect( vv, SIGNAL( moved() ), this, SLOT( moved() ) );
 
-    connect( vv, SIGNAL( contextMenuRequested( OVersatileViewItem *, const QPoint&, int ) ), this, SLOT( contextMenuRequested( OVersatileViewItem *, const QPoint&, int ) ) );
+    connect( vv, SIGNAL( contextMenuRequested(OVersatileViewItem*,const QPoint&,int) ), this, SLOT( contextMenuRequested(OVersatileViewItem*,const QPoint&,int) ) );
     
 }
 

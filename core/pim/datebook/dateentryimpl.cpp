@@ -190,14 +190,14 @@ void DateEntry::init()
     startPicker = new DateBookMonth( m1, 0, TRUE );
     m1->insertItem( startPicker );
     buttonStart->setPopup( m1 );
-    connect( startPicker, SIGNAL( dateClicked( int, int, int ) ),
-	     this, SLOT( startDateChanged( int, int, int ) ) );
+    connect( startPicker, SIGNAL( dateClicked(int,int,int) ),
+	     this, SLOT( startDateChanged(int,int,int) ) );
 
     //Let start button change both start and end dates
-    connect( startPicker, SIGNAL( dateClicked( int, int, int ) ),
-	     this, SLOT( endDateChanged( int, int, int ) ) );
-    connect( qApp, SIGNAL( clockChanged( bool ) ),
-	     this, SLOT( slotChangeClock( bool ) ) );
+    connect( startPicker, SIGNAL( dateClicked(int,int,int) ),
+	     this, SLOT( endDateChanged(int,int,int) ) );
+    connect( qApp, SIGNAL( clockChanged(bool) ),
+	     this, SLOT( slotChangeClock(bool) ) );
     connect( qApp, SIGNAL(weekChanged(bool)),
 	     this, SLOT(slotChangeStartOfWeek(bool)) );
 
@@ -208,11 +208,11 @@ void DateEntry::init()
     endPicker = new DateBookMonth( m2, 0, TRUE );
     m2->insertItem( endPicker );
     buttonEnd->setPopup( m2 );
-    connect( endPicker, SIGNAL( dateClicked( int, int, int ) ),
-	     this, SLOT( endDateChanged( int, int, int ) ) );
+    connect( endPicker, SIGNAL( dateClicked(int,int,int) ),
+	     this, SLOT( endDateChanged(int,int,int) ) );
 
-    connect(timePickerStart, SIGNAL( timeChanged(const QTime &) ),
-	    this, SLOT( startTimePicked(const QTime &) ));
+    connect(timePickerStart, SIGNAL( timeChanged(const QTime&) ),
+	    this, SLOT( startTimePicked(const QTime&) ));
     // install eventFilters
     comboEnd->installEventFilter( this );
     comboStart->installEventFilter( this );

@@ -79,7 +79,7 @@ RemapDlg::RemapDlg ( const Opie::ODeviceButton *b, bool hold, QWidget *parent, c
   
   w_list-> setCurrentItem ( m_current );
   
-  QTimer::singleShot ( 0, this, SLOT( delayedInit ( )));
+  QTimer::singleShot ( 0, this, SLOT( delayedInit()));
 }
 
 RemapDlg::~RemapDlg ( )

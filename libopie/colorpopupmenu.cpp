@@ -152,7 +152,7 @@ OColorPopupMenu::~OColorPopupMenu()
 void OColorPopupMenu::addColor( const QColor& color, int row, int col )
 {
     OColorPanelButton* panelButton = new OColorPanelButton( color, colorPanel );
-    connect( panelButton, SIGNAL( selected( const QColor& ) ), this, SLOT( buttonSelected( const QColor& ) ) );
+    connect( panelButton, SIGNAL( selected(const QColor&) ), this, SLOT( buttonSelected(const QColor&) ) );
     colorLayout->addWidget( panelButton, row, col );
 }
 

@@ -34,8 +34,8 @@ RunningAppBar::RunningAppBar(QWidget* parent)
   : QFrame(parent), selectedAppIndex(-1)
 {
     QCopChannel* channel = new QCopChannel( "QPE/System", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	     this, SLOT(received(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	     this, SLOT(received(const QCString&,const QByteArray&)) );
 
     spacing = AppLnk::smallIconSize()+3;
 }

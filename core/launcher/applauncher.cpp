@@ -86,12 +86,12 @@ AppLauncher::AppLauncher(QObject *parent, const char *name)
     connect(qwsServer, SIGNAL(newChannel(const QString&)), this, SLOT(newQcopChannel(const QString&)));
     connect(qwsServer, SIGNAL(removedChannel(const QString&)), this, SLOT(removedQcopChannel(const QString&)));
     QCopChannel* channel = new QCopChannel( "QPE/System", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	     this, SLOT(received(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	     this, SLOT(received(const QCString&,const QByteArray&)) );
 
     channel = new QCopChannel( "QPE/Server", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	     this, SLOT(received(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	     this, SLOT(received(const QCString&,const QByteArray&)) );
 
 #ifndef Q_OS_WIN32
     signal(SIGCHLD, signalHandler);

@@ -299,9 +299,9 @@ ScreenshotControl::ScreenshotControl( QWidget *parent, const char *name )
 
   grabTimer = new QTimer ( this, "grab timer");
   
-  connect ( grabTimer, SIGNAL( timeout ( )), this, SLOT( performGrab ( )));
-  connect ( grabItButton, SIGNAL( clicked ( )), SLOT( slotGrab ( )));
-  connect ( scapButton, SIGNAL( clicked ( )), SLOT( slotScap ( )));
+  connect ( grabTimer, SIGNAL( timeout()), this, SLOT( performGrab()));
+  connect ( grabItButton, SIGNAL( clicked()), SLOT( slotGrab()));
+  connect ( scapButton, SIGNAL( clicked()), SLOT( slotScap()));
 }
 
 void ScreenshotControl::slotGrab()

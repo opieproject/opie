@@ -116,14 +116,14 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     setLeftMargin( 0 );
     verticalHeader()->hide();
 
-    connect((QTable*)this, SIGNAL( clicked( int, int, int, const QPoint& ) ),
-            this, SLOT( slotClicked(int, int, int, const QPoint& ) ) );
-    connect((QTable*)this, SIGNAL( pressed( int, int, int, const QPoint& ) ),
-            this, SLOT( slotPressed(int, int, int, const QPoint& ) ) );
-    connect((QTable*)this, SIGNAL(valueChanged(int, int) ),
-            this, SLOT( slotValueChanged(int, int) ) );
-    connect((QTable*)this, SIGNAL(currentChanged(int, int) ),
-            this, SLOT( slotCurrentChanged(int, int) ) );
+    connect((QTable*)this, SIGNAL( clicked(int,int,int,const QPoint&) ),
+            this, SLOT( slotClicked(int,int,int,const QPoint&) ) );
+    connect((QTable*)this, SIGNAL( pressed(int,int,int,const QPoint&) ),
+            this, SLOT( slotPressed(int,int,int,const QPoint&) ) );
+    connect((QTable*)this, SIGNAL(valueChanged(int,int) ),
+            this, SLOT( slotValueChanged(int,int) ) );
+    connect((QTable*)this, SIGNAL(currentChanged(int,int) ),
+            this, SLOT( slotCurrentChanged(int,int) ) );
 
     m_menuTimer = new QTimer( this );
     connect( m_menuTimer, SIGNAL(timeout()),

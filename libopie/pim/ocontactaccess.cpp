@@ -17,11 +17,16 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccess.cpp,v 1.8 2003-05-08 13:55:09 tille Exp $
+ * Version: $Id: ocontactaccess.cpp,v 1.9 2004-03-02 12:14:22 alwin Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.cpp,v $
- * Revision 1.8  2003-05-08 13:55:09  tille
+ * Revision 1.9  2004-03-02 12:14:22  alwin
+ * run the optimize_connect script
+ * the whole cvs is tagged with "before_optimize_connect" if there are problems you
+ * can check the diff (but it had compiled and run here)
+ *
+ * Revision 1.8  2003/05/08 13:55:09  tille
  * search stuff
  * and match, toRichText & toShortText in oevent
  *
@@ -91,12 +96,12 @@ OContactAccess::OContactAccess ( const QString appname, const QString ,
 
 	/* Connect signal of external db change to function */
 	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
-	connect( dbchannel, SIGNAL(received(const QCString &, const QByteArray &)),
-               this, SLOT(copMessage( const QCString &, const QByteArray &)) );
+	connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+               this, SLOT(copMessage(const QCString&,const QByteArray&)) );
 	if ( autosync ){
 		QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
-		connect( syncchannel, SIGNAL(received(const QCString &, const QByteArray &)),
-			 this, SLOT(copMessage( const QCString &, const QByteArray &)) );
+		connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+			 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
 	}
 
 

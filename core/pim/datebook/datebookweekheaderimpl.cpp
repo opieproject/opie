@@ -56,7 +56,7 @@ void DateBookWeekHeader::pickDate()
 		m1 = new QPopupMenu( this );
 		picker = new DateBookMonth( m1, 0, TRUE );
 		m1->insertItem( picker );
-		connect( picker, SIGNAL( dateClicked( int, int, int ) ), this, SLOT( setDate( int, int, int ) ) );
+		connect( picker, SIGNAL( dateClicked(int,int,int) ), this, SLOT( setDate(int,int,int) ) );
 //		connect( m1, SIGNAL( aboutToHide() ), this, SLOT( gotHide() ) );
 	}
 	picker->setDate( date.year(), date.month(), date.day() );

@@ -40,8 +40,8 @@ MailPluginWidget::MailPluginWidget( QWidget *parent,  const char* name)
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *qCopChannel = new QCopChannel( "QPE/Pim" , this );
-    connect ( qCopChannel, SIGNAL( received( const QCString &, const QByteArray &) ),
-              this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
+    connect ( qCopChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+              this, SLOT ( channelReceived(const QCString&,const QByteArray&) ) );
 #endif
 #endif
 

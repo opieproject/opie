@@ -147,9 +147,9 @@ Server::Server() :
 
     docList = new DocumentList( serverGui );
     appLauncher = new AppLauncher(this);
-    connect(appLauncher, SIGNAL(launched(int, const QString &)), this, SLOT(applicationLaunched(int, const QString &)) );
-    connect(appLauncher, SIGNAL(terminated(int, const QString &)), this, SLOT(applicationTerminated(int, const QString &)) );
-    connect(appLauncher, SIGNAL(connected(const QString &)), this, SLOT(applicationConnected(const QString &)) );
+    connect(appLauncher, SIGNAL(launched(int,const QString&)), this, SLOT(applicationLaunched(int,const QString&)) );
+    connect(appLauncher, SIGNAL(terminated(int,const QString&)), this, SLOT(applicationTerminated(int,const QString&)) );
+    connect(appLauncher, SIGNAL(connected(const QString&)), this, SLOT(applicationConnected(const QString&)) );
 
     storage = new StorageInfo( this );
     connect( storage, SIGNAL(disksChanged()), this, SLOT(storageChanged()) );
@@ -165,12 +165,12 @@ Server::Server() :
     setGeometry( -10, -10, 9, 9 );
 
     QCopChannel *channel = new QCopChannel("QPE/System", this);
-    connect(channel, SIGNAL(received(const QCString &, const QByteArray &)),
-	    this, SLOT(systemMsg(const QCString &, const QByteArray &)) );
+    connect(channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(systemMsg(const QCString&,const QByteArray&)) );
 
     QCopChannel *tbChannel = new QCopChannel( "QPE/TaskBar", this );
-    connect( tbChannel, SIGNAL(received(const QCString&, const QByteArray&)),
-	    this, SLOT(receiveTaskBar(const QCString&, const QByteArray&)) );
+    connect( tbChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(receiveTaskBar(const QCString&,const QByteArray&)) );
 
     connect( qApp, SIGNAL(prepareForRestart()), this, SLOT(terminateServers()) );
     connect( qApp, SIGNAL(timeChanged()), this, SLOT(pokeTimeMonitors()) );
@@ -613,8 +613,8 @@ void Server::startTransferServer()
 	qcopBridge = new QCopBridge( 4243 );
 	if ( qcopBridge->ok() ) {
 	    // ... OK
-	    connect( qcopBridge, SIGNAL(connectionClosed(const QHostAddress &)),
-		    this, SLOT(syncConnectionClosed(const QHostAddress &)) );
+	    connect( qcopBridge, SIGNAL(connectionClosed(const QHostAddress&)),
+		    this, SLOT(syncConnectionClosed(const QHostAddress&)) );
 	} else {
 	    delete qcopBridge;
 	    qcopBridge = 0;

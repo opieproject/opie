@@ -359,8 +359,8 @@ void RepeatEntry::init()
     cmdEnd->setPopup( m1 );
     cmdEnd->setPopupDelay( 0 );
 
-    QObject::connect( repeatPicker, SIGNAL(dateClicked(int, int, int)),
-                      this, SLOT(endDateChanged(int, int, int)) );
+    QObject::connect( repeatPicker, SIGNAL(dateClicked(int,int,int)),
+                      this, SLOT(endDateChanged(int,int,int)) );
     QObject::connect( qApp, SIGNAL(weekChanged(bool)),
 		      this, SLOT(slotChangeStartOfWeek(bool)) );
 

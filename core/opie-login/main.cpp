@@ -171,7 +171,7 @@ int main ( int argc, char **argv )
 				l-> move ( 0, 0 );
 				l-> resize ( app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
 				l-> show ( );
-				QTimer::singleShot ( 3000, app, SLOT( quit ( )));
+				QTimer::singleShot ( 3000, app, SLOT( quit()));
 				app-> exec ( );
 				delete app;
 				qApp = 0;

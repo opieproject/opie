@@ -34,12 +34,12 @@ MainWindow::MainWindow()
     QTimer::singleShot(0, this, SLOT(populate() ) );
 
     QCopChannel* chan = new QCopChannel( "QPE/System", this );
-    connect( chan, SIGNAL( received(const QCString&, const QByteArray& ) ),
-             this, SLOT( slotReceive( const QCString&, const QByteArray& ) ) );
+    connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
+             this, SLOT( slotReceive(const QCString&,const QByteArray&) ) );
 
     chan  = new QCopChannel( "QPE/Datebook", this );
-    connect( chan, SIGNAL( received(const QCString&, const QByteArray& ) ),
-             this, SLOT( slotReceive( const QCString&, const QByteArray& ) ) );
+    connect( chan, SIGNAL( received(const QCString&,const QByteArray&) ),
+             this, SLOT( slotReceive(const QCString&,const QByteArray&) ) );
 }
 MainWindow::~MainWindow() {
     m_tempMan.save();
@@ -150,8 +150,8 @@ void MainWindow::initUI() {
     connect( qApp, SIGNAL(weekChanged(bool) ),
              this, SLOT(slotWeekChanged(bool) ) );
 
-    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray& ) ),
-             this, SLOT(slotAppMessage( const QCString&, const QByteArray& ) ) );
+    connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&) ),
+             this, SLOT(slotAppMessage(const QCString&,const QByteArray&) ) );
 }
 void MainWindow::initConfig() {
 

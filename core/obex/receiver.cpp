@@ -24,8 +24,8 @@ using namespace OpieObex;
 
 Receiver::Receiver() {
     m_obex = new Obex(this, "Receiver");
-    connect(m_obex, SIGNAL(receivedFile(const QString& ) ),
-            this, SLOT(slotReceived(const QString& ) ) );
+    connect(m_obex, SIGNAL(receivedFile(const QString&) ),
+            this, SLOT(slotReceived(const QString&) ) );
     m_obex->receive();
 }
 Receiver::~Receiver() {

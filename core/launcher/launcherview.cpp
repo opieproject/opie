@@ -615,14 +615,14 @@ LauncherView::LauncherView( QWidget* parent, const char* name, WFlags fl )
     vmode = (ViewMode)-1;
     setViewMode( Icon );
 
-    connect( icons, SIGNAL(mouseButtonClicked(int, QIconViewItem *, const QPoint&)),
-		   SLOT(itemClicked(int, QIconViewItem *)) );
+    connect( icons, SIGNAL(mouseButtonClicked(int,QIconViewItem*,const QPoint&)),
+		   SLOT(itemClicked(int,QIconViewItem*)) );
     connect( icons, SIGNAL(selectionChanged()),
 		   SLOT(selectionChanged()) );
-    connect( icons, SIGNAL(returnPressed(QIconViewItem *)),
-		   SLOT(returnPressed(QIconViewItem *)) );
-    connect( icons, SIGNAL(mouseButtonPressed(int, QIconViewItem *, const QPoint&)),
-		   SLOT(itemPressed(int, QIconViewItem *)) );
+    connect( icons, SIGNAL(returnPressed(QIconViewItem*)),
+		   SLOT(returnPressed(QIconViewItem*)) );
+    connect( icons, SIGNAL(mouseButtonPressed(int,QIconViewItem*,const QPoint&)),
+		   SLOT(itemPressed(int,QIconViewItem*)) );
 
     tools = 0;
     setBackgroundType( Ruled, QString::null );

@@ -54,11 +54,11 @@ QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent ,
     else {
 #ifndef QT_NO_COP
 	desktopChannel = new QCopChannel( "QPE/Desktop", this );
-	connect( desktopChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-		 this, SLOT(desktopMessage( const QCString &, const QByteArray &)) );
+	connect( desktopChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+		 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
 	cardChannel = new QCopChannel( "QPE/Card", this );
-	connect( cardChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-		 this, SLOT(desktopMessage( const QCString &, const QByteArray &)) );
+	connect( cardChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+		 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
 #endif
     }
     sendSync = FALSE;
@@ -75,7 +75,7 @@ void QCopBridge::newConnection( int socket )
 {
     QCopBridgePI *pi = new QCopBridgePI( socket, this );
     openConnections.append( pi );
-    connect ( pi, SIGNAL( connectionClosed( QCopBridgePI *) ), this, SLOT( connectionClosed( QCopBridgePI *) ) );
+    connect ( pi, SIGNAL( connectionClosed(QCopBridgePI*) ), this, SLOT( connectionClosed(QCopBridgePI*) ) );
 #ifndef QT_NO_COP
     QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 #endif

@@ -73,7 +73,7 @@ void TransferServer::authorizeConnections()
     QListIterator<ServerPI> it(connections);
     while ( it.current() ) {
 	if ( !it.current()->verifyAuthorised() ) {
-	    disconnect( it.current(), SIGNAL(connectionClosed(ServerPI *)), this, SLOT( closed(ServerPI *)) );
+	    disconnect( it.current(), SIGNAL(connectionClosed(ServerPI*)), this, SLOT( closed(ServerPI*)) );
 	    connections.removeRef( it.current() );
 	} else
 	    ++it;
@@ -92,7 +92,7 @@ TransferServer::~TransferServer()
 void TransferServer::newConnection( int socket )
 {
     ServerPI *ptr = new ServerPI( socket, this );
-    connect( ptr, SIGNAL(connectionClosed(ServerPI *)), this, SLOT( closed(ServerPI *)) );
+    connect( ptr, SIGNAL(connectionClosed(ServerPI*)), this, SLOT( closed(ServerPI*)) );
     connections.append( ptr );
 }
 
@@ -333,7 +333,7 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 	dtp = new ServerDTP( this );
 	connect( dtp, SIGNAL( completed() ), SLOT( dtpCompleted() ) );
 	connect( dtp, SIGNAL( failed() ), SLOT( dtpFailed() ) );
-	connect( dtp, SIGNAL( error( int ) ), SLOT( dtpError( int ) ) );
+	connect( dtp, SIGNAL( error(int) ), SLOT( dtpError(int) ) );
 
 
 	directory = QDir::currentDirPath();
@@ -344,8 +344,8 @@ ServerPI::ServerPI( int socket, QObject *parent, const char* name )
 	    delete serversocket;
 	    serversocket = new ServerSocket( ++p, this );
 	}
-	connect( serversocket, SIGNAL( newIncomming( int ) ),
-		 SLOT( newConnection( int ) ) );
+	connect( serversocket, SIGNAL( newIncomming(int) ),
+		 SLOT( newConnection(int) ) );
     }
 }
 
@@ -1086,7 +1086,7 @@ ServerDTP::ServerDTP( QObject *parent, const char* name)
 
   connect( this, SIGNAL( connected() ), SLOT( connected() ) );
   connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
-  connect( this, SIGNAL( bytesWritten( int ) ), SLOT( bytesWritten( int ) ) );
+  connect( this, SIGNAL( bytesWritten(int) ), SLOT( bytesWritten(int) ) );
   connect( this, SIGNAL( readyRead() ), SLOT( readyRead() ) );
 
   createTargzProc = new QProcess( QString("tar"), this, "createTargzProc"); // No tr

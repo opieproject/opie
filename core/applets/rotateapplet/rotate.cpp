@@ -48,8 +48,8 @@ RotateApplet::RotateApplet()
 
 #if !defined(QT_NO_COP)
     QCopChannel *rotateChannel = new QCopChannel( "QPE/Rotation" , this );
-    connect ( rotateChannel, SIGNAL( received( const QCString &, const QByteArray &) ),
-              this, SLOT ( channelReceived( const QCString &, const QByteArray &) ) );
+    connect ( rotateChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+              this, SLOT ( channelReceived(const QCString&,const QByteArray&) ) );
 #endif
 
 }

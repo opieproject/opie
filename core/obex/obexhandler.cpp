@@ -15,8 +15,8 @@ ObexHandler::ObexHandler() {
     m_sender = 0l;
     m_receiver = 0l;
     QCopChannel* chan = new QCopChannel("QPE/Obex");
-    connect(chan, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT(irdaMessage(const QCString&, const QByteArray& ) ) );
+    connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(irdaMessage(const QCString&,const QByteArray&) ) );
 }
 ObexHandler::~ObexHandler() {
     delete m_sender;

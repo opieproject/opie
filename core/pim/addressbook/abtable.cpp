@@ -127,7 +127,7 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 	setSelectionMode( NoSelection );
 	init();
 	setSorting( TRUE );
-	connect( this, SIGNAL(clicked(int,int,int,const QPoint &)),
+	connect( this, SIGNAL(clicked(int,int,int,const QPoint&)),
 		 this, SLOT(itemClicked(int,int)) );
 
 	// contactList.clear();

@@ -106,10 +106,10 @@ ShutdownImpl::ShutdownImpl( QWidget* parent, const char *name, WFlags fl )
 	vbox-> addWidget ( cancel );
 
 	m_timer = new QTimer ( this );
-	connect ( m_timer, SIGNAL( timeout ( ) ), this, SLOT( timeout ( ) ) );
+	connect ( m_timer, SIGNAL( timeout() ), this, SLOT( timeout() ) );
 
-	connect ( btngrp, SIGNAL( clicked ( int ) ), this, SLOT( buttonClicked ( int ) ) );
-	connect ( cancel, SIGNAL( clicked ( ) ), this, SLOT( cancelClicked ( ) ) );
+	connect ( btngrp, SIGNAL( clicked(int) ), this, SLOT( buttonClicked(int) ) );
+	connect ( cancel, SIGNAL( clicked() ), this, SLOT( cancelClicked() ) );
 
 	m_progress-> hide ( );
 	Global::hideInputMethod ( );

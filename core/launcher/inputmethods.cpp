@@ -145,8 +145,8 @@ InputMethods::InputMethods( QWidget *parent ) :
     loadInputMethods();
 
     QCopChannel *channel = new QCopChannel( "QPE/IME", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	     this, SLOT(qcopReceive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	     this, SLOT(qcopReceive(const QCString&,const QByteArray&)) );
 }
 
 InputMethods::~InputMethods()

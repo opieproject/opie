@@ -37,8 +37,8 @@ AddressBookPluginWidget::AddressBookPluginWidget( QWidget *parent,  const char* 
 
     m_contactdb = new OContactAccess("addressplugin");
     
-    connect( m_contactdb, SIGNAL( signalChanged( const OContactAccess * ) ),
-	     this, SLOT( refresh( const OContactAccess * ) ) );
+    connect( m_contactdb, SIGNAL( signalChanged(const OContactAccess*) ),
+	     this, SLOT( refresh(const OContactAccess*) ) );
 
 
     readConfig();

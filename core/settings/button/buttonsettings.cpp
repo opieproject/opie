@@ -136,7 +136,7 @@ ButtonSettings::ButtonSettings ( QWidget *parent , const char *name,  bool modal
 	m_lock = false;
 
 	m_timer = new QTimer ( this );
-	connect ( m_timer, SIGNAL( timeout ( )), this, SLOT( keyTimeout ( )));
+	connect ( m_timer, SIGNAL( timeout()), this, SLOT( keyTimeout()));
 
 	updateLabels ( );
 

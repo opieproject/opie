@@ -532,7 +532,7 @@ void ODevice::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+	connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( systemMessage(const QCString&,const QByteArray&)));
 }
 
 ODevice::~ODevice ( )
@@ -1112,8 +1112,8 @@ void Yopy::initButtons ( )
   reloadButtonMapping ( );
 
   QCopChannel *sysch = new QCopChannel("QPE/System", this);
-  connect(sysch, SIGNAL(received(const QCString &, const QByteArray & )),
-	  this, SLOT(systemMessage(const QCString &, const QByteArray & )));
+  connect(sysch, SIGNAL(received(const QCString&,const QByteArray&)),
+	  this, SLOT(systemMessage(const QCString&,const QByteArray&)));
 }
 
 bool Yopy::suspend()
@@ -1261,7 +1261,7 @@ void iPAQ::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+	connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( systemMessage(const QCString&,const QByteArray&)));
 }
 
 
@@ -1747,8 +1747,8 @@ void Zaurus::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )),
-		  this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+	connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)),
+		  this, SLOT( systemMessage(const QCString&,const QByteArray&)));
 }
 
 #include <unistd.h>
@@ -2298,7 +2298,7 @@ void SIMpad::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+	connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( systemMessage(const QCString&,const QByteArray&)));
 }
 
 // SIMpad boardcontrol register CS3
@@ -2798,7 +2798,7 @@ void Jornada::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
+	connect ( sysch, SIGNAL( received(const QCString&,const QByteArray&)), this, SLOT( systemMessage(const QCString&,const QByteArray&)));
 }
 #endif
 int Jornada::displayBrightnessResolution ( ) const

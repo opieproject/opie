@@ -95,8 +95,8 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
 
     QCopChannel* kbdChannel = new QCopChannel("MultiKey/Keyboard", this);
-    connect(kbdChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	    this, SLOT(receive(const QCString &, const QByteArray &)));
+    connect(kbdChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(receive(const QCString&,const QByteArray&)));
 }
 
 Keyboard::~Keyboard() {

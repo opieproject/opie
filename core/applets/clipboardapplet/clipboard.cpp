@@ -46,9 +46,9 @@ ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget(
 
 	m_timer = new QTimer ( this );
 
-	connect ( QApplication::clipboard ( ), SIGNAL( dataChanged ( )), this, SLOT( newData ( )));
-	connect ( m_timer, SIGNAL( timeout ( )), this, SLOT( newData ( )));
-	connect ( qApp, SIGNAL( aboutToQuit ( )), this, SLOT( shutdown ( )));
+	connect ( QApplication::clipboard ( ), SIGNAL( dataChanged()), this, SLOT( newData()));
+	connect ( m_timer, SIGNAL( timeout()), this, SLOT( newData()));
+	connect ( qApp, SIGNAL( aboutToQuit()), this, SLOT( shutdown()));
 
 	m_menu = 0;
 	m_dirty = true;
@@ -99,7 +99,7 @@ void ClipboardApplet::mousePressEvent ( QMouseEvent *)
 		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "copy" )), tr( "Copy" ), 101 );
 		m_menu-> insertItem ( QIconSet ( Resource::loadPixmap ( "paste" )), tr( "Paste" ), 102 );
 
-		connect ( m_menu, SIGNAL( activated ( int )), this, SLOT( action ( int )));
+		connect ( m_menu, SIGNAL( activated(int)), this, SLOT( action(int)));
 
 		m_dirty = false;
 	}

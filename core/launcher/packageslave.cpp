@@ -52,8 +52,8 @@ PackageHandler::PackageHandler( QObject *parent, char* name )
     // setup qcop channel
 #ifndef QT_NO_COP
     packageChannel = new QCopChannel( "QPE/Package", this );
-    connect( packageChannel, SIGNAL( received(const QCString &, const QByteArray &) ),
-	     this, SLOT( qcopMessage( const QCString &, const QByteArray &) ) );
+    connect( packageChannel, SIGNAL( received(const QCString&,const QByteArray&) ),
+	     this, SLOT( qcopMessage(const QCString&,const QByteArray&) ) );
 #endif
 }
 

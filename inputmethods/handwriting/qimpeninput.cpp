@@ -149,10 +149,10 @@ QIMPenInput::QIMPenInput( QWidget *parent, const char *name, WFlags wf )
     gl->setColStretch( 0, 1 );
 
     wordPicker = new QIMPenWordPick( this );
-    connect( wordPicker, SIGNAL(wordClicked(const QString &)),
-	     this, SLOT(wordPicked(const QString &)) );
-    connect( matcher, SIGNAL(matchedCharacters(const QIMPenCharMatchList &)),
-	     this, SLOT(matchedCharacters(const QIMPenCharMatchList &)) );
+    connect( wordPicker, SIGNAL(wordClicked(const QString&)),
+	     this, SLOT(wordPicked(const QString&)) );
+    connect( matcher, SIGNAL(matchedCharacters(const QIMPenCharMatchList&)),
+	     this, SLOT(matchedCharacters(const QIMPenCharMatchList&)) );
     connect( matcher, SIGNAL(matchedWords(const QIMPenMatch::MatchWordList&)),
 	     wordPicker, SLOT(setWords(const QIMPenMatch::MatchWordList&)) );
     QFont f("smallsmooth",9);
@@ -200,16 +200,16 @@ QIMPenInput::QIMPenInput( QWidget *parent, const char *name, WFlags wf )
     connect( setupBtn, SIGNAL(clicked()), SLOT(setup()));
 
     connect( matcher, SIGNAL(removeStroke()), pw, SLOT(removeStroke()) );
-    connect( pw, SIGNAL(changeCharSet( QIMPenCharSet * )),
-             matcher, SLOT(setCharSet( QIMPenCharSet * )) );
-    connect( pw, SIGNAL(changeCharSet( int )),
-             this, SLOT(selectCharSet( int )) );
+    connect( pw, SIGNAL(changeCharSet(QIMPenCharSet*)),
+             matcher, SLOT(setCharSet(QIMPenCharSet*)) );
+    connect( pw, SIGNAL(changeCharSet(int)),
+             this, SLOT(selectCharSet(int)) );
     connect( pw, SIGNAL(beginStroke()),
 	     matcher, SLOT(beginStroke()) );
-    connect( pw, SIGNAL(stroke( QIMPenStroke * )),
-             this, SLOT(strokeEntered( QIMPenStroke * )) );
-    connect( pw, SIGNAL(stroke( QIMPenStroke * )),
-             matcher, SLOT(strokeEntered( QIMPenStroke * )) );
+    connect( pw, SIGNAL(stroke(QIMPenStroke*)),
+             this, SLOT(strokeEntered(QIMPenStroke*)) );
+    connect( pw, SIGNAL(stroke(QIMPenStroke*)),
+             matcher, SLOT(strokeEntered(QIMPenStroke*)) );
 
     shortcutCharSet = 0;
     currCharSet = 0;

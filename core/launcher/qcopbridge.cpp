@@ -65,11 +65,11 @@ QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
     else {
 #ifndef QT_NO_COP
 	desktopChannel = new QCopChannel( "QPE/Desktop", this );
-	connect( desktopChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-		 this, SLOT(desktopMessage( const QCString &, const QByteArray &)) );
+	connect( desktopChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+		 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
 	cardChannel = new QCopChannel( "QPE/Card", this );
-	connect( cardChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-		 this, SLOT(desktopMessage( const QCString &, const QByteArray &)) );
+	connect( cardChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+		 this, SLOT(desktopMessage(const QCString&,const QByteArray&)) );
 #endif
     }
     sendSync = FALSE;
@@ -92,7 +92,7 @@ void QCopBridge::authorizeConnections()
     QListIterator<QCopBridgePI> it(openConnections);
     while ( it.current() ) {
 	if ( !it.current()->verifyAuthorised() ) {
-	    disconnect ( it.current(), SIGNAL( connectionClosed( QCopBridgePI *) ), this, SLOT( closed( QCopBridgePI *) ) );
+	    disconnect ( it.current(), SIGNAL( connectionClosed(QCopBridgePI*) ), this, SLOT( closed(QCopBridgePI*) ) );
 	    openConnections.removeRef( it.current() );
 	} else
 	    ++it;
@@ -103,7 +103,7 @@ void QCopBridge::newConnection( int socket )
 {
     QCopBridgePI *pi = new QCopBridgePI( socket, this );
     openConnections.append( pi );
-    connect ( pi, SIGNAL( connectionClosed( QCopBridgePI *) ), this, SLOT( closed( QCopBridgePI *) ) );
+    connect ( pi, SIGNAL( connectionClosed(QCopBridgePI*) ), this, SLOT( closed(QCopBridgePI*) ) );
 
     /* ### libqtopia merge FIXME */
 #if 0

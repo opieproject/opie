@@ -119,21 +119,21 @@ OFontSelector::OFontSelector ( bool withpreview, QWidget *parent, const char *na
 
 	d-> m_font_family_list = new QListBox( this, "FontListBox" );
 	gridLayout->addMultiCellWidget( d-> m_font_family_list, 0, 4, 0, 0 );
-	connect( d-> m_font_family_list, SIGNAL( highlighted( int ) ), this, SLOT( fontFamilyClicked( int ) ) );
+	connect( d-> m_font_family_list, SIGNAL( highlighted(int) ), this, SLOT( fontFamilyClicked(int) ) );
 
 	QLabel *label = new QLabel( tr( "Style" ), this );
 	gridLayout->addWidget( label, 0, 1 );
 
 	d-> m_font_style_list = new QComboBox( this, "StyleListBox" );
-	connect( d-> m_font_style_list, SIGNAL(  activated( int ) ), this, SLOT( fontStyleClicked( int ) ) );
+	connect( d-> m_font_style_list, SIGNAL(  activated(int) ), this, SLOT( fontStyleClicked(int) ) );
 	gridLayout->addWidget( d-> m_font_style_list, 1, 1 );
 
 	label = new QLabel( tr( "Size" ), this );
 	gridLayout->addWidget( label, 2, 1 );
 
 	d-> m_font_size_list = new QComboBox( this, "SizeListBox" );
-	connect( d-> m_font_size_list, SIGNAL(  activated( int ) ),
-			 this, SLOT( fontSizeClicked( int ) ) );
+	connect( d-> m_font_size_list, SIGNAL(  activated(int) ),
+			 this, SLOT( fontSizeClicked(int) ) );
 	gridLayout->addWidget( d-> m_font_size_list, 3, 1 );
 
 	d-> m_pointbug = ( qt_version ( ) <= 233 );

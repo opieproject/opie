@@ -213,8 +213,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
       systemZaurus=FALSE;
       
     myChannel = new QCopChannel( "QPE/VMemo", this );
-    connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
-             this, SLOT(receive(const QCString&, const QByteArray&)) );
+    connect( myChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(receive(const QCString&,const QByteArray&)) );
 
     if( toggleKey != -1 ) {
       // keyRegister(key, channel, message)

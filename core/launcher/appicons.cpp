@@ -36,8 +36,8 @@ AppIcons::AppIcons( QWidget *parent ) :
 
 #ifndef QT_NO_COP
     QCopChannel* channel = new QCopChannel("Qt/Tray", this);
-    connect(channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	    this, SLOT(receive(const QCString&, const QByteArray&)));
+    connect(channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(receive(const QCString&,const QByteArray&)));
 #endif
 }
 
@@ -70,7 +70,7 @@ QLabel* AppIcons::button(int id)
     QLabel* f = buttons.find(id);
     if ( !f ) {
 	buttons.insert(id,f=new FlatButton(this));
-	connect(f,SIGNAL(clicked(const QPoint&, int, bool)),this,SLOT(clicked(const QPoint&, int, bool)));
+	connect(f,SIGNAL(clicked(const QPoint&,int,bool)),this,SLOT(clicked(const QPoint&,int,bool)));
 	f->show();
     }
     return f;

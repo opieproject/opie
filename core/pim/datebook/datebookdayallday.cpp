@@ -60,7 +60,7 @@ DatebookAlldayDisp* DatebookdayAllday::addEvent(const EffectiveEvent&ev)
     datebookdayalldayLayout->addWidget(lb);
     subWidgets.append(lb);
 
-    connect(lb,SIGNAL(displayMe(const Event &)),lblDesc,SLOT(disp_event(const Event&)));
+    connect(lb,SIGNAL(displayMe(const Event&)),lblDesc,SLOT(disp_event(const Event&)));
     ++item_count;
 
     return lb;

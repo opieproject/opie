@@ -119,8 +119,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 //    menuTimer = new QTimer( this ,"menu timer"),
 //     connect( menuTimer, SIGNAL( timeout() ), SLOT( addSelected() ) );
     channel = new QCopChannel( "QPE/Application/opieplayer", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-        this, SLOT( qcopReceive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+        this, SLOT( qcopReceive(const QCString&,const QByteArray&)) );
 
     setBackgroundMode( PaletteButton );
 
@@ -150,7 +150,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
                                       this , SLOT(addSelected()) );
     d->tbRemoveFromList = new ToolButton( bar, tr( "Remove from Playlist" ), "opieplayer/remove_from_playlist",
                                           this , SLOT(removeSelected()) );
-//    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer/play", /*this */mediaPlayerState , SLOT(setPlaying(bool) /* btnPlay() */), TRUE );
+//    d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer/play", /*this */mediaPlayerState , SLOT(setPlaying(bool)/*btnPlay()*/), TRUE );
     d->tbPlay    = new ToolButton( bar, tr( "Play" ), "opieplayer/play",
                                    this , SLOT( btnPlay(bool) ), TRUE );
     d->tbShuffle = new ToolButton( bar, tr( "Randomize" ),"opieplayer/shuffle",
@@ -184,8 +184,8 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     skinsMenu = new QPopupMenu( this );
     menu->insertItem( tr( "Skins" ), skinsMenu );
     skinsMenu->isCheckable();
-    connect( skinsMenu, SIGNAL( activated( int ) ) ,
-             this, SLOT( skinsMenuActivated( int ) ) );
+    connect( skinsMenu, SIGNAL( activated(int) ) ,
+             this, SLOT( skinsMenuActivated(int) ) );
     populateSkinsMenu();
 
     QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
@@ -296,38 +296,38 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     connect( fullScreenButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleFullscreen()) );
     connect( scaleButton, SIGNAL(activated()), mediaPlayerState, SLOT(toggleScaled()) );
 
-    connect( d->selectedFiles, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( playlistViewPressed(int, QListViewItem *, const QPoint&, int)) );
+    connect( d->selectedFiles, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+             this,SLOT( playlistViewPressed(int,QListViewItem*,const QPoint&,int)) );
 
 
 ///audioView
-    connect( audioView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
+    connect( audioView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+             this,SLOT( viewPressed(int,QListViewItem*,const QPoint&,int)) );
     
-    connect( audioView, SIGNAL( returnPressed( QListViewItem *)),
-             this,SLOT( playIt( QListViewItem *)) );
-    connect( audioView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+    connect( audioView, SIGNAL( returnPressed(QListViewItem*)),
+             this,SLOT( playIt(QListViewItem*)) );
+    connect( audioView, SIGNAL( doubleClicked(QListViewItem*) ), this, SLOT( addToSelection(QListViewItem*) ) );
 
 
 //videoView
-    connect( videoView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
-             this,SLOT( viewPressed(int, QListViewItem *, const QPoint&, int)) );
-    connect( videoView, SIGNAL( returnPressed( QListViewItem *)),
-             this,SLOT( playIt( QListViewItem *)) );
-    connect( videoView, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( addToSelection( QListViewItem *) ) );
+    connect( videoView, SIGNAL( mouseButtonPressed(int,QListViewItem*,const QPoint&,int)),
+             this,SLOT( viewPressed(int,QListViewItem*,const QPoint&,int)) );
+    connect( videoView, SIGNAL( returnPressed(QListViewItem*)),
+             this,SLOT( playIt(QListViewItem*)) );
+    connect( videoView, SIGNAL( doubleClicked(QListViewItem*) ), this, SLOT( addToSelection(QListViewItem*) ) );
 
 //playlists
-    connect( playLists, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( loadList( const DocLnk & ) ) );
+    connect( playLists, SIGNAL( fileSelected(const DocLnk&) ), this, SLOT( loadList(const DocLnk&) ) );
 
     connect( tabWidget, SIGNAL (currentChanged(QWidget*)),this,SLOT(tabChanged(QWidget*)));
 
-    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),    d->tbPlay,    SLOT( setOn( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled(bool) ),    d->tbPlay,    SLOT( setOn(bool) ) );
 
-    connect( mediaPlayerState, SIGNAL( loopingToggled( bool ) ),    d->tbLoop,    SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( shuffledToggled( bool ) ),   d->tbShuffle, SLOT( setOn( bool ) ) );
-    connect( mediaPlayerState, SIGNAL( playlistToggled( bool ) ),   this,         SLOT( setPlaylist( bool ) ) );
+    connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ),    d->tbLoop,    SLOT( setOn(bool) ) );
+    connect( mediaPlayerState, SIGNAL( shuffledToggled(bool) ),   d->tbShuffle, SLOT( setOn(bool) ) );
+    connect( mediaPlayerState, SIGNAL( playlistToggled(bool) ),   this,         SLOT( setPlaylist(bool) ) );
 
-    connect( d->selectedFiles, SIGNAL( doubleClicked( QListViewItem *) ), this, SLOT( playIt( QListViewItem *) ) );
+    connect( d->selectedFiles, SIGNAL( doubleClicked(QListViewItem*) ), this, SLOT( playIt(QListViewItem*) ) );
 
     setCentralWidget( vbox5 );
 
@@ -940,7 +940,7 @@ void PlayListWidget::listDelete() {
       //                   AppLnk lnk( AppLnk(linkFile));
       //               if( lnk.name() == file ) {
       //                   LnkProperties prop( &lnk);
-      // //  connect(&prop, SIGNAL(select(const AppLnk *)), this, SLOT(externalSelected(const AppLnk *)));
+      // //  connect(&prop, SIGNAL(select(const AppLnk*)), this, SLOT(externalSelected(const AppLnk*)));
       //                   prop.showMaximized();
       //                   prop.exec();
       //               }

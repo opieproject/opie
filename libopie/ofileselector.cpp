@@ -123,12 +123,12 @@ DocLnk ODocumentFileView::selectedDocument()const {
 QWidget* ODocumentFileView::widget( QWidget* parent ) {
     if (!m_selector ) {
         m_selector = new FileSelector(currentMimeType().join(";"), parent, "fileselector", showNew(), showClose() );
-        QObject::connect(m_selector, SIGNAL(fileSelected( const DocLnk& ) ),
+        QObject::connect(m_selector, SIGNAL(fileSelected(const DocLnk&) ),
                          selector(), SLOT(slotDocLnkBridge(const DocLnk&) ) );
         QObject::connect(m_selector, SIGNAL(closeMe() ),
                          selector(), SIGNAL(closeMe() ) );
-        QObject::connect(m_selector, SIGNAL(newSelected(const DocLnk& ) ),
-                         selector(), SIGNAL(newSelected(const DocLnk& ) ) );
+        QObject::connect(m_selector, SIGNAL(newSelected(const DocLnk&) ),
+                         selector(), SIGNAL(newSelected(const DocLnk&) ) );
     }
 
     return m_selector;
@@ -388,8 +388,8 @@ bool OFileViewFileListView::eventFilter (QObject *o, QEvent *e) {
 void OFileViewFileListView::connectSlots() {
     connect(m_view, SIGNAL(clicked(QListViewItem*) ),
             this, SLOT(slotCurrentChanged(QListViewItem*) ) );
-    connect(m_view, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint&, int ) ),
-            this, SLOT(slotClicked(int, QListViewItem*, const QPoint&, int ) ) );
+    connect(m_view, SIGNAL(mouseButtonClicked(int,QListViewItem*,const QPoint&,int) ),
+            this, SLOT(slotClicked(int,QListViewItem*,const QPoint&,int) ) );
 }
 void OFileViewFileListView::slotCurrentChanged( QListViewItem* item) {
     if (!item)
@@ -780,8 +780,8 @@ void OFileSelector::initViews() {
     m_cmbView->insertItem( QObject::tr("Documents") );
     m_cmbView->insertItem( QObject::tr("Files") );
     m_cmbView->insertItem( QObject::tr("All Files") );
-    connect(m_cmbView, SIGNAL(activated( const QString& ) ),
-            this, SLOT(slotViewChange( const QString& ) ) );
+    connect(m_cmbView, SIGNAL(activated(const QString&) ),
+            this, SLOT(slotViewChange(const QString&) ) );
 
 
     m_views.insert( QObject::tr("Documents"), new ODocumentFileView(this) );

@@ -98,8 +98,8 @@ FirstUse::FirstUse(QWidget* parent, const char * name, WFlags wf) :
     // Create a DocumentList so appLauncher has appLnkSet to search
     docList = new DocumentList( 0, FALSE );
     appLauncher = new AppLauncher( this );
-    connect( appLauncher, SIGNAL(terminated(int, const QString&)),
-	    this, SLOT(terminated(int, const QString&)) );
+    connect( appLauncher, SIGNAL(terminated(int,const QString&)),
+	    this, SLOT(terminated(int,const QString&)) );
 
     // more hackery
     // I will be run as either the main server or as part of the main server
@@ -157,8 +157,8 @@ FirstUse::FirstUse(QWidget* parent, const char * name, WFlags wf) :
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
     qDebug("Setting up QCop to QPE/System");
     QCopChannel* sysChannel = new QCopChannel( "QPE/System", this );
-    connect(sysChannel, SIGNAL(received(const QCString &, const QByteArray &)),
-	    this, SLOT(message(const QCString &, const QByteArray &)) );
+    connect(sysChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+	    this, SLOT(message(const QCString&,const QByteArray&)) );
 #endif
     calcMaxWindowRect();
 

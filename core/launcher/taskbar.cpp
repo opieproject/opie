@@ -213,8 +213,8 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/TaskBar", this );
-    connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
-	this, SLOT(receive(const QCString&, const QByteArray&)) );
+    connect( channel, SIGNAL(received(const QCString&,const QByteArray&)),
+	this, SLOT(receive(const QCString&,const QByteArray&)) );
 #endif
 #endif
     waitTimer = new QTimer( this );

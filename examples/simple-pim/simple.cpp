@@ -79,10 +79,10 @@ MainWindow::MainWindow(QWidget *parent,  const char* name, WFlags fl )
      * connect the show signal of the PIMListView
      * to a slot to show a dialog
      */
-    connect(m_todoView, SIGNAL(showRecord(const OPimRecord& ) ),
-            this, SLOT(slotShowRecord(const OPimRecord& ) ) );
-    connect(m_dateView, SIGNAL(showRecord(const OPimRecord& ) ),
-            this, SLOT(slotShowRecord(const OPimRecord& ) ) );
+    connect(m_todoView, SIGNAL(showRecord(const OPimRecord&) ),
+            this, SLOT(slotShowRecord(const OPimRecord&) ) );
+    connect(m_dateView, SIGNAL(showRecord(const OPimRecord&) ),
+            this, SLOT(slotShowRecord(const OPimRecord&) ) );
 
     /*
      * Now comes the important lines of code for this example
@@ -189,8 +189,8 @@ void MainWindow::slotLoad() {
      * the flush is done it emits a signal on receive
      */
     m_desktopChannel = new QCopChannel("QPE/Desktop");
-    connect(m_desktopChannel, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT(slotDesktopReceive(const QCString&, const QByteArray& ) ) );
+    connect(m_desktopChannel, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT(slotDesktopReceive(const QCString&,const QByteArray&) ) );
     /* the numberof synced channels will be set to zero */
     m_synced = 0;
 
@@ -307,8 +307,8 @@ void MainWindow::slotDate() {
     QPopupMenu *menu = new QPopupMenu();
     /* A Month to select a date from TRUE for auto close */
     DateBookMonth *month = new DateBookMonth(menu, 0, true );
-    connect(month, SIGNAL(dateClicked(int, int, int) ),
-            this, SLOT(slotLoadForDay(int, int, int) ) );
+    connect(month, SIGNAL(dateClicked(int,int,int) ),
+            this, SLOT(slotLoadForDay(int,int,int) ) );
 
     menu->insertItem( month );
 

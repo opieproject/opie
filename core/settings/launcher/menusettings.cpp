@@ -70,7 +70,7 @@ MenuSettings::MenuSettings ( QWidget *parent, const char *name )
 	QWhatsThis::add ( m_list, tr( "Check the applets that you want to have included in the O-Menu." ));
 	QWhatsThis::add ( m_menutabs, tr( "Adds the contents of the Launcher Tabs as menus in the O-Menu." ));
 
-	connect ( m_list, SIGNAL( clicked ( QListViewItem * )), this, SLOT( appletChanged ( )));
+	connect ( m_list, SIGNAL( clicked(QListViewItem*)), this, SLOT( appletChanged()));
 
 	init ( );
 }
@@ -124,7 +124,7 @@ void MenuSettings::init ( )
         m_menutabs->setChecked( cfg.readBoolEntry( "LauncherTabs", true ) );
         m_menusubpopup->setChecked( cfg.readBoolEntry( "LauncherSubPopup", true ) );
         m_menusubpopup->setEnabled( m_menutabs->isChecked() );
-        connect( m_menutabs, SIGNAL( stateChanged( int ) ), m_menusubpopup, SLOT( setEnabled( bool ) ) );
+        connect( m_menutabs, SIGNAL( stateChanged(int) ), m_menusubpopup, SLOT( setEnabled(bool) ) );
 
 }
 

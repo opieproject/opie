@@ -319,9 +319,9 @@ QWidget *TabDialog::createFontTab ( QWidget *parent )
     m_fontselect = new OFontSelector ( false, tab, "fontsel" );
     vertLayout-> addWidget ( m_fontselect );
 
-	connect ( m_fontuse, SIGNAL( toggled ( bool )), m_fontselect, SLOT( setEnabled ( bool )));
-    connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
-             this, SLOT( fontClicked ( const QFont & )));
+	connect ( m_fontuse, SIGNAL( toggled(bool)), m_fontselect, SLOT( setEnabled(bool)));
+    connect( m_fontselect, SIGNAL( fontSelected(const QFont&)),
+             this, SLOT( fontClicked(const QFont&)));
 
     return tab;
 }
@@ -354,7 +354,7 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
 	hb-> addSpacing ( 10 );
 
 	m_solidcolor = new OColorButton ( tab, QColor ( m_tc. m_bg_color ) );
-	connect ( m_solidcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( bgColorClicked ( const QColor & )));
+	connect ( m_solidcolor, SIGNAL( colorSelected(const QColor&)), this, SLOT( bgColorClicked(const QColor&)));
 	hb-> addWidget ( m_solidcolor );
 	hb-> addStretch ( 10 );
 
@@ -369,17 +369,17 @@ QWidget *TabDialog::createBgTab ( QWidget *parent )
     hb-> addSpacing ( 10 );
 
 	m_imagebrowse = new QPushButton ( tr( "Select..." ), tab );
-	connect ( m_imagebrowse, SIGNAL( clicked ( )), this, SLOT( bgImageClicked ( )));
+	connect ( m_imagebrowse, SIGNAL( clicked()), this, SLOT( bgImageClicked()));
 	hb-> addWidget ( m_imagebrowse );
 	hb-> addStretch ( 10 );
 
     gridLayout-> addLayout ( hb, 2, 1 );
 
 	QPushButton *p = new QPushButton ( tr( "Default" ), tab );
-	connect ( p, SIGNAL( clicked ( )), this, SLOT( bgDefaultClicked ( )));
+	connect ( p, SIGNAL( clicked()), this, SLOT( bgDefaultClicked()));
 	gridLayout-> addWidget ( p, 3, 1 );
 
-	connect ( m_bgtype, SIGNAL( clicked ( int )), this, SLOT( bgTypeClicked ( int )));
+	connect ( m_bgtype, SIGNAL( clicked(int)), this, SLOT( bgTypeClicked(int)));
 
 	vertLayout-> addStretch ( 10 );
 
@@ -409,7 +409,7 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
     m_iconsize-> insert ( rb, TabConfig::Icon );
     gridLayout-> addWidget( rb, 1, 1 );
 
-	connect ( m_iconsize, SIGNAL( clicked ( int )), this, SLOT( iconSizeClicked ( int )));
+	connect ( m_iconsize, SIGNAL( clicked(int)), this, SLOT( iconSizeClicked(int)));
 
 //	vertLayout-> addSpacing ( 8 );
 
@@ -420,7 +420,7 @@ QWidget *TabDialog::createIconTab ( QWidget *parent )
 	gridLayout-> addWidget ( label, 3, 0 );
 
 	m_iconcolor = new OColorButton ( tab, QColor ( m_tc. m_text_color ) );
-	connect ( m_iconcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( iconColorClicked ( const QColor & )));
+	connect ( m_iconcolor, SIGNAL( colorSelected(const QColor&)), this, SLOT( iconColorClicked(const QColor&)));
 	gridLayout-> addWidget ( m_iconcolor, 3, 1, AlignLeft );
 
 	vertLayout-> addStretch ( 10 );

@@ -66,15 +66,15 @@ TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 	QPushButton *p1, *p2, *p3;
 	p1 = new QPushButton ( tr( "New" ), this );
 	lay-> addWidget ( p1, 1, 1 );
-	connect ( p1, SIGNAL( clicked ( )), this, SLOT( newClicked ( )));
+	connect ( p1, SIGNAL( clicked()), this, SLOT( newClicked()));
 
 	p2 = new QPushButton ( tr( "Edit" ), this );
 	lay-> addWidget ( p2, 2, 1 );
-	connect ( p2, SIGNAL( clicked ( )), this, SLOT( editClicked ( )));
+	connect ( p2, SIGNAL( clicked()), this, SLOT( editClicked()));
 
 	p3 = new QPushButton ( tr( "Delete" ), this );
 	lay-> addWidget ( p3, 3, 1 );
-	connect ( p3, SIGNAL( clicked ( )), this, SLOT( deleteClicked ( )));
+	connect ( p3, SIGNAL( clicked()), this, SLOT( deleteClicked()));
 
 	lay-> setRowStretch ( 4, 10 );
 

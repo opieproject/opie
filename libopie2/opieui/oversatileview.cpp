@@ -170,11 +170,11 @@ OVersatileView::OVersatileView( QWidget* parent, const char* name, int mode )
     connect( a2, SIGNAL( activated() ), this, SLOT( setTreeViewMode() ) );
     
     #if (QT_VERSION >= 0x030000)
-    connect( _listview, SIGNAL( contextMenuRequested( QListViewItem*, const QPoint&, int ) ), this, SLOT( contextMenuRequested( QListViewItem*, const QPoint&, int ) ) );
-    connect( _iconview, SIGNAL( contextMenuRequested( QIconViewItem*, const QPoint& ) ), this, SLOT( contextMenuRequested( QIconViewItem*, const QPoint& ) ) );
+    connect( _listview, SIGNAL( contextMenuRequested(QListViewItem*,const QPoint&,int) ), this, SLOT( contextMenuRequested(QListViewItem*,const QPoint&,int) ) );
+    connect( _iconview, SIGNAL( contextMenuRequested(QIconViewItem*,const QPoint&) ), this, SLOT( contextMenuRequested(QIconViewItem*,const QPoint&) ) );
     #else
-    connect( _listview, SIGNAL( rightButtonPressed( QListViewItem*, const QPoint&, int ) ), this, SLOT( contextMenuRequested( QListViewItem*, const QPoint&, int ) ) );
-    connect( _iconview, SIGNAL( rightButtonPressed( QIconViewItem*, const QPoint& ) ), this, SLOT( contextMenuRequested( QIconViewItem*, const QPoint& ) ) );
+    connect( _listview, SIGNAL( rightButtonPressed(QListViewItem*,const QPoint&,int) ), this, SLOT( contextMenuRequested(QListViewItem*,const QPoint&,int) ) );
+    connect( _iconview, SIGNAL( rightButtonPressed(QIconViewItem*,const QPoint&) ), this, SLOT( contextMenuRequested(QIconViewItem*,const QPoint&) ) );
     #endif
         
     //
@@ -187,35 +187,35 @@ OVersatileView::OVersatileView( QWidget* parent, const char* name, int mode )
     // common signals for listview
     
     connect( _listview, SIGNAL( selectionChanged() ), this, SIGNAL( selectionChanged() ) );
-    connect( _listview, SIGNAL( selectionChanged( QListViewItem * ) ), this, SLOT( selectionChanged( QListViewItem * ) ) );
-    connect( _listview, SIGNAL( currentChanged( QListViewItem * ) ), this, SLOT( currentChanged( QListViewItem * ) ) );   
-    connect( _listview, SIGNAL( clicked( QListViewItem * ) ), this, SLOT( clicked( QListViewItem * ) ) );
-    connect( _listview, SIGNAL( pressed( QListViewItem * ) ), this, SLOT( pressed( QListViewItem * ) ) );
+    connect( _listview, SIGNAL( selectionChanged(QListViewItem*) ), this, SLOT( selectionChanged(QListViewItem*) ) );
+    connect( _listview, SIGNAL( currentChanged(QListViewItem*) ), this, SLOT( currentChanged(QListViewItem*) ) );   
+    connect( _listview, SIGNAL( clicked(QListViewItem*) ), this, SLOT( clicked(QListViewItem*) ) );
+    connect( _listview, SIGNAL( pressed(QListViewItem*) ), this, SLOT( pressed(QListViewItem*) ) );
     
-    connect( _listview, SIGNAL( doubleClicked( QListViewItem * ) ), this, SLOT( doubleClicked( QListViewItem * ) ) );
-    connect( _listview, SIGNAL( returnPressed( QListViewItem * ) ), this, SLOT( returnPressed( QListViewItem * ) ) );
+    connect( _listview, SIGNAL( doubleClicked(QListViewItem*) ), this, SLOT( doubleClicked(QListViewItem*) ) );
+    connect( _listview, SIGNAL( returnPressed(QListViewItem*) ), this, SLOT( returnPressed(QListViewItem*) ) );
     
-    connect( _listview, SIGNAL( onItem( QListViewItem * ) ), this, SLOT( onItem( QListViewItem * ) ) );
+    connect( _listview, SIGNAL( onItem(QListViewItem*) ), this, SLOT( onItem(QListViewItem*) ) );
     connect( _listview, SIGNAL( onViewport() ), this, SIGNAL( onViewport() ) );
 
     // common signals for iconview
     
     connect( _iconview, SIGNAL( selectionChanged() ), this, SIGNAL( selectionChanged() ) );
-    connect( _iconview, SIGNAL( selectionChanged( QIconViewItem * ) ), this, SLOT( selectionChanged( QIconViewItem * ) ) );
-    connect( _iconview, SIGNAL( currentChanged( QIconViewItem * ) ), this, SLOT( currentChanged( QIconViewItem * ) ) );   
-    connect( _iconview, SIGNAL( clicked( QIconViewItem * ) ), this, SLOT( clicked( QIconViewItem * ) ) );
-    connect( _iconview, SIGNAL( pressed( QIconViewItem * ) ), this, SLOT( pressed( QIconViewItem * ) ) );
+    connect( _iconview, SIGNAL( selectionChanged(QIconViewItem*) ), this, SLOT( selectionChanged(QIconViewItem*) ) );
+    connect( _iconview, SIGNAL( currentChanged(QIconViewItem*) ), this, SLOT( currentChanged(QIconViewItem*) ) );   
+    connect( _iconview, SIGNAL( clicked(QIconViewItem*) ), this, SLOT( clicked(QIconViewItem*) ) );
+    connect( _iconview, SIGNAL( pressed(QIconViewItem*) ), this, SLOT( pressed(QIconViewItem*) ) );
     
-    connect( _iconview, SIGNAL( doubleClicked( QIconViewItem * ) ), this, SLOT( doubleClicked( QIconViewItem * ) ) );
-    connect( _iconview, SIGNAL( returnPressed( QIconViewItem * ) ), this, SLOT( returnPressed( QIconViewItem * ) ) );
+    connect( _iconview, SIGNAL( doubleClicked(QIconViewItem*) ), this, SLOT( doubleClicked(QIconViewItem*) ) );
+    connect( _iconview, SIGNAL( returnPressed(QIconViewItem*) ), this, SLOT( returnPressed(QIconViewItem*) ) );
     
-    connect( _iconview, SIGNAL( onItem( QIconViewItem * ) ), this, SLOT( onItem( QIconViewItem * ) ) );
+    connect( _iconview, SIGNAL( onItem(QIconViewItem*) ), this, SLOT( onItem(QIconViewItem*) ) );
     connect( _iconview, SIGNAL( onViewport() ), this, SIGNAL( onViewport() ) );
     
     // listview only signals
     
-    connect( _listview, SIGNAL( expanded( QListViewItem * ) ), this, SLOT( expanded( QListViewItem * ) ) );
-    connect( _listview, SIGNAL( collapsed( QListViewItem * ) ), this, SLOT( collapsed( QListViewItem * ) ) );
+    connect( _listview, SIGNAL( expanded(QListViewItem*) ), this, SLOT( expanded(QListViewItem*) ) );
+    connect( _listview, SIGNAL( collapsed(QListViewItem*) ), this, SLOT( collapsed(QListViewItem*) ) );
     
     // iconview only signals
     

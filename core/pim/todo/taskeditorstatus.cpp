@@ -100,8 +100,8 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     m_startBook = new DateBookMonth( popup, 0, TRUE );
     popup->insertItem( m_startBook );
     btnStart->setPopup( popup );
-    connect( m_startBook, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( slotStartChanged( int, int, int ) ) );
+    connect( m_startBook, SIGNAL( dateClicked(int,int,int) ),
+             this, SLOT( slotStartChanged(int,int,int) ) );
 
     // Due date
     ckbDue = new QCheckBox( tr( "Due Date:" ), container );
@@ -116,8 +116,8 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     m_dueBook = new DateBookMonth( popup, 0, TRUE );
     popup->insertItem( m_dueBook );
     btnDue->setPopup( popup );
-    connect( m_dueBook, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( slotDueChanged( int, int, int ) ) );
+    connect( m_dueBook, SIGNAL( dateClicked(int,int,int) ),
+             this, SLOT( slotDueChanged(int,int,int) ) );
 
     // Completed
     ckbComp = new QCheckBox( tr( "Completed:" ), container );
@@ -132,8 +132,8 @@ TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags f
     m_compBook = new DateBookMonth( popup, 0, TRUE );
     popup->insertItem( m_compBook );
     btnComp->setPopup( popup );
-    connect( m_compBook, SIGNAL( dateClicked( int, int, int ) ),
-             this, SLOT( slotCompChanged( int, int, int ) ) );
+    connect( m_compBook, SIGNAL( dateClicked(int,int,int) ),
+             this, SLOT( slotCompChanged(int,int,int) ) );
 
     QSpacerItem *spacer = new QSpacerItem( 5, 5, QSizePolicy::Minimum, QSizePolicy::MinimumExpanding );
     layout->addItem( spacer, 5, 0 );

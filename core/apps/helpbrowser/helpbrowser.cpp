@@ -70,16 +70,16 @@ void HelpBrowser::init( const QString& _home )
     QPopupMenu* go = new QPopupMenu( this );
     backAction = new QAction( tr( "Backward" ), Resource::loadIconSet( "back" ), QString::null, 0, this, 0 );
     connect( backAction, SIGNAL( activated() ), browser, SLOT( backward() ) );
-    connect( browser, SIGNAL( backwardAvailable( bool ) ),
-	     backAction, SLOT( setEnabled( bool ) ) );
+    connect( browser, SIGNAL( backwardAvailable(bool) ),
+	     backAction, SLOT( setEnabled(bool) ) );
     backAction->addTo( go );
     backAction->addTo( toolbar );
     backAction->setEnabled( FALSE );
 
     forwardAction = new QAction( tr( "Forward" ), Resource::loadIconSet( "forward" ), QString::null, 0, this, 0 );
     connect( forwardAction, SIGNAL( activated() ), browser, SLOT( forward() ) );
-    connect( browser, SIGNAL( forwardAvailable( bool ) ),
-	     forwardAction, SLOT( setEnabled( bool ) ) );
+    connect( browser, SIGNAL( forwardAvailable(bool) ),
+	     forwardAction, SLOT( setEnabled(bool) ) );
     forwardAction->addTo( go );
     forwardAction->addTo( toolbar );
     forwardAction->setEnabled( FALSE );
@@ -93,8 +93,8 @@ void HelpBrowser::init( const QString& _home )
     bookm->insertItem( tr( "Add Bookmark" ), this, SLOT( addBookmark() ) );
     bookm->insertItem( tr( "Remove from Bookmarks" ), this, SLOT( removeBookmark() ) );
     bookm->insertSeparator();
-    connect( bookm, SIGNAL( activated( int ) ),
-	     this, SLOT( bookmChosen( int ) ) );
+    connect( bookm, SIGNAL( activated(int) ),
+	     this, SLOT( bookmChosen(int) ) );
 
     readBookmarks();
 
@@ -107,12 +107,12 @@ void HelpBrowser::init( const QString& _home )
 
 #if !defined(QT_NO_COP)
         QCopChannel *addressChannel = new QCopChannel("QPE/HelpBrowser" , this );
-        connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
-                 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
+        connect (addressChannel, SIGNAL( received(const QCString&,const QByteArray&)),
+                 this, SLOT ( appMessage(const QCString&,const QByteArray&) ) );
 #endif
 
-    connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
-	     this, SLOT(appMessage(const QCString&, const QByteArray&)) );
+    connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&)),
+	     this, SLOT(appMessage(const QCString&,const QByteArray&)) );
 }
 
 void HelpBrowser::appMessage(const QCString& msg, const QByteArray& data)

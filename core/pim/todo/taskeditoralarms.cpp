@@ -79,8 +79,8 @@ TaskEditorAlarms::TaskEditorAlarms( QWidget* parent,  int, const char* name, WFl
     lstAlarms->addColumn( tr("Time") );
     lstAlarms->addColumn( tr("Type") );
 
-    connect( lstAlarms, SIGNAL(clicked ( QListViewItem *, const QPoint &, int  ) ),
-             this, SLOT(inlineEdit(QListViewItem*, const QPoint&, int  ) ) );
+    connect( lstAlarms, SIGNAL(clicked(QListViewItem*,const QPoint&,int) ),
+             this, SLOT(inlineEdit(QListViewItem*,const QPoint&,int) ) );
 
     layout->addMultiCellWidget( lstAlarms, 0, 0, 0, 2 );
 

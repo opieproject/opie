@@ -31,7 +31,7 @@ DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
       ampm( whichClock )
 {
 	init();
-	QObject::connect( qApp, SIGNAL( clockChanged( bool ) ), this, SLOT( slotChangeClock( bool ) ) );
+	QObject::connect( qApp, SIGNAL( clockChanged(bool) ), this, SLOT( slotChangeClock(bool) ) );
 	QArray<int> categories;
 	comboCategory->setCategories( categories, "Calendar", tr("Calendar") );
 }

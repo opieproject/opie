@@ -70,11 +70,11 @@ OTabWidget::OTabWidget( QWidget *parent, const char *name, TabStyle s, TabPositi
 
     tabBar = new OTabBar( tabBarStack, "tabbar" );
     tabBarStack->addWidget( tabBar, 0 );
-    connect( tabBar, SIGNAL( selected( int ) ), this, SLOT( slotTabBarSelected( int ) ) );
+    connect( tabBar, SIGNAL( selected(int) ), this, SLOT( slotTabBarSelected(int) ) );
 
     tabList = new QComboBox( false, tabBarStack, "tablist" );
     tabBarStack->addWidget( tabList, 1 );
-    connect( tabList, SIGNAL( activated( int ) ), this, SLOT( slotTabListSelected( int ) ) );
+    connect( tabList, SIGNAL( activated(int) ), this, SLOT( slotTabListSelected(int) ) );
 
     tabBarPosition = p;
     setTabStyle( s );

@@ -101,8 +101,8 @@ QIMPenSetup::QIMPenSetup( QIMPenProfile *p, QWidget *parent,
     QLabel *l = new QLabel( tr("Character Profile:"), this );
     hb->addWidget( l );
     profileCombo = new QComboBox( this );
-    connect( profileCombo, SIGNAL(activated(const QString &)),
-	     this, SLOT(selectProfile(const QString &)) );
+    connect( profileCombo, SIGNAL(activated(const QString&)),
+	     this, SLOT(selectProfile(const QString&)) );
     hb->addWidget( profileCombo );
 #else
     profileList.append( profile );
@@ -247,8 +247,8 @@ QIMPenInputCharDlg::QIMPenInputCharDlg( QWidget *parent, const char *name,
 
     QComboBox *cb = new QComboBox( TRUE, this );
     connect( cb, SIGNAL(activated(int)), SLOT(setSpecial(int)) );
-    connect( cb, SIGNAL(textChanged(const QString &)),
-	    SLOT(setCharacter(const QString &)) );
+    connect( cb, SIGNAL(textChanged(const QString&)),
+	    SLOT(setCharacter(const QString&)) );
     addSpecial( cb );
     cb->setEditText( "" );
     hb->addWidget( cb );
@@ -340,8 +340,8 @@ QIMPenEdit::QIMPenEdit( QIMPenProfile *p, QWidget *parent,
     pw = new QIMPenWidget( this );
     pw->setFixedHeight( 75 );
     gl->addMultiCellWidget( pw, 2, 3, 0, 0 );
-    connect( pw, SIGNAL(stroke(QIMPenStroke *)),
-                 SLOT(newStroke(QIMPenStroke *)) );
+    connect( pw, SIGNAL(stroke(QIMPenStroke*)),
+                 SLOT(newStroke(QIMPenStroke*)) );
 
     QVBoxLayout *vb = new QVBoxLayout();
     gl->addLayout( vb, 1, 1 );

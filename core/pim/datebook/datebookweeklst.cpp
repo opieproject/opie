@@ -72,7 +72,7 @@ void DateBookWeekLstHeader::pickDate() {
 		m1 = new QPopupMenu( this );
 		picker = new DateBookMonth( m1, 0, TRUE );
 		m1->insertItem( picker );
-		connect( picker, SIGNAL( dateClicked( int, int, int ) ),this, SLOT( setDate( int, int, int ) ) );
+		connect( picker, SIGNAL( dateClicked(int,int,int) ),this, SLOT( setDate(int,int,int) ) );
 		//connect( m1, SIGNAL( aboutToHide() ),
 		//this, SLOT( gotHide() ) );
 	}
@@ -235,8 +235,8 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 	// Header
 		DateBookWeekLstDayHdr *hdr=new DateBookWeekLstDayHdr(d.addDays(i-dayoffset), bStartOnMonday,this);
 		connect(hdr, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-		connect(hdr, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
-			this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
+		connect(hdr, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
+			this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
 		layout->addWidget(hdr);
 
 		// Events
@@ -244,7 +244,7 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 			if(!(((*it).end().hour()==0) && ((*it).end().minute()==0) && ((*it).startDate()!=(*it).date()))) {	// Skip events ending at 00:00 starting at another day.
 				DateBookWeekLstEvent *l=new DateBookWeekLstEvent(*it,weeklistviewconfig,this);
 				layout->addWidget(l);
-				connect (l, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+				connect (l, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
 			}
 			it++;
 		}
@@ -265,18 +265,18 @@ DateBookWeekLstDblView::DateBookWeekLstDblView(QValueList<EffectiveEvent> &ev1,
 
 	DateBookWeekLstView *w=new DateBookWeekLstView(ev1,d,onM,this);
 	layout->addWidget(w);
-	connect (w, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+	connect (w, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
 	connect (w, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-	connect (w, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &,const QString &)),
-		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
+	connect (w, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
+		this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
 
 
 	w=new DateBookWeekLstView(ev2,d.addDays(7),onM,this);
 	layout->addWidget(w);
-	connect (w, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+	connect (w, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
 	connect (w, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-	connect (w, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
-		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
+	connect (w, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
+		this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
 }
 
 DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
@@ -294,7 +294,7 @@ DateBookWeekLst::DateBookWeekLst( bool ap, bool onM, DateBookDB *newDB,
 
 	header=new DateBookWeekLstHeader(onM, this);
 	layout->addWidget( header );
-	connect(header, SIGNAL(dateChanged(QDate &)), this, SLOT(dateChanged(QDate &)));
+	connect(header, SIGNAL(dateChanged(QDate&)), this, SLOT(dateChanged(QDate&)));
 	connect(header, SIGNAL(setDbl(bool)), this, SLOT(setDbl(bool)));
 
 	scroll=new QScrollView(this);
@@ -358,10 +358,10 @@ void DateBookWeekLst::getEvents() {
 		view=new DateBookWeekLstView(el,start,bStartOnMonday,scroll);
 	}
 
-	connect (view, SIGNAL(editEvent(const Event &)), this, SIGNAL(editEvent(const Event &)));
+	connect (view, SIGNAL(editEvent(const Event&)), this, SIGNAL(editEvent(const Event&)));
 	connect (view, SIGNAL(showDate(int,int,int)), this, SIGNAL(showDate(int,int,int)));
-	connect (view, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)),
-		this, SIGNAL(addEvent(const QDateTime &, const QDateTime &, const QString &, const QString &)));
+	connect (view, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)),
+		this, SIGNAL(addEvent(const QDateTime&,const QDateTime&,const QString&,const QString&)));
 
 	scroll->addChild(view);
 	view->show();

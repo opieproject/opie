@@ -230,7 +230,7 @@ CityTimeBase::CityTimeBase( QWidget* parent,  const char* name, WFlags  )
     CityTimeBaseLayout->addWidget( buttonWidget );
 
     // signals and slots connections
-    connect( frmMap, SIGNAL( signalTz(const QString &, const QString &) ), this, SLOT( slotNewTz(const QString &, const QString &) ) );
+    connect( frmMap, SIGNAL( signalTz(const QString&,const QString&) ), this, SLOT( slotNewTz(const QString&,const QString&) ) );
     connect( cmdCity1, SIGNAL( toggled(bool) ), cmdCity2, SLOT( setDisabled(bool) ) );
     connect( cmdCity1, SIGNAL( toggled(bool) ), cmdCity3, SLOT( setDisabled(bool) ) );
     connect( cmdCity1, SIGNAL( toggled(bool) ), cmdCity4, SLOT( setDisabled(bool) ) );

@@ -187,12 +187,12 @@ ZoneMap::ZoneMap( QWidget *parent, const char* name )
                       this, SLOT( slotUpdate() ) );
     QObject::connect( qApp, SIGNAL( timeChanged() ),
                       this, SLOT( slotUpdate() ) );
-    QObject::connect( cmdZoom, SIGNAL( toggled( bool ) ),
-                      this, SLOT( slotZoom( bool ) ) );
-    QObject::connect( &norm, SIGNAL( signalNewPoint( const QPoint& ) ),
-                      this, SLOT( slotFindCity( const QPoint& ) ) );
-    QObject::connect( qApp, SIGNAL( clockChanged( bool ) ),
-                      this, SLOT( changeClock( bool ) ) );
+    QObject::connect( cmdZoom, SIGNAL( toggled(bool) ),
+                      this, SLOT( slotZoom(bool) ) );
+    QObject::connect( &norm, SIGNAL( signalNewPoint(const QPoint&) ),
+                      this, SLOT( slotFindCity(const QPoint&) ) );
+    QObject::connect( qApp, SIGNAL( clockChanged(bool) ),
+                      this, SLOT( changeClock(bool) ) );
     // update the sun's movement every 5 minutes
     tUpdate->start( 5 * 60 * 1000 );
     // May as well read in the timezone information too...
@@ -466,7 +466,7 @@ QWidget* ZoneMap::selectionWidget( QWidget *parent) {
     QListView *continentView = new QListView( hBox );
     continentView->addColumn( tr("Continent") );
     QWhatsThis::add( continentView, tr("Select a continent/country here, then select a city") );
-    connect ( continentView, SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( slotGetCities(  QListViewItem * ) ) );
+    connect ( continentView, SIGNAL( clicked(QListViewItem*) ), this, SLOT( slotGetCities(QListViewItem*) ) );
 
     QStringList continentList;
     QListIterator<ZoneField> itZone( zones );
@@ -502,7 +502,7 @@ void ZoneMap::slotGetCities( QListViewItem * contItem) {
         if ( pZone->country() == contItem->text( 1 ) ) {
             QListViewItem *item;
             item = new QListViewItem( cityView, pZone->city() );
-            connect ( cityView, SIGNAL( clicked ( QListViewItem* ) ), this, SLOT( slotCitySelected( QListViewItem* ) ) );
+            connect ( cityView, SIGNAL( clicked(QListViewItem*) ), this, SLOT( slotCitySelected(QListViewItem*) ) );
         }
     }
 }

@@ -62,7 +62,7 @@ TaskbarSettings::TaskbarSettings ( QWidget *parent, const char *name )
 
 	QWhatsThis::add ( m_list, tr( "Check the applets that you want displayed in the Taskbar." ));
 
-	connect ( m_list, SIGNAL( clicked ( QListViewItem * )), this, SLOT( appletChanged ( )));
+	connect ( m_list, SIGNAL( clicked(QListViewItem*)), this, SLOT( appletChanged()));
 
 	init ( );
 }

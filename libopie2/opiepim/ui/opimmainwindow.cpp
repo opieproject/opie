@@ -47,10 +47,10 @@ OPimMainWindow::OPimMainWindow( const QString& service, QWidget* parent,
      */
     m_str = QString("QPE/"+m_service).local8Bit();
     m_channel= new QCopChannel(m_str, this );
-    connect(m_channel, SIGNAL(received(const QCString&, const QByteArray& ) ),
-            this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
-    connect(qApp, SIGNAL(appMessage(const QCString&, const QByteArray& ) ),
-            this, SLOT( appMessage( const QCString&, const QByteArray& ) ) );
+    connect(m_channel, SIGNAL(received(const QCString&,const QByteArray&) ),
+            this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
+    connect(qApp, SIGNAL(appMessage(const QCString&,const QByteArray&) ),
+            this, SLOT( appMessage(const QCString&,const QByteArray&) ) );
 
     /* connect flush and reload */
     connect(qApp, SIGNAL(flush() ),

@@ -60,7 +60,7 @@ IrdaApplet::IrdaApplet ( QWidget *parent, const char *name )
 
         QCopChannel* chan = new QCopChannel("QPE/IrDaApplet", this );
         connect(chan, SIGNAL(received(const QCString&,const QByteArray&) ),
-                this, SLOT(slotMessage(const QCString&, const QByteArray& ) ) );
+                this, SLOT(slotMessage(const QCString&,const QByteArray&) ) );
 }
 
 int IrdaApplet::position()
@@ -97,7 +97,7 @@ void IrdaApplet::popup ( QString message, QString icon )
 	m_popup-> popup ( QPoint ( p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
 	                           p. y ( ) - s. height ( )));
 
-	QTimer::singleShot ( 2000, this, SLOT( popupTimeout ( )));
+	QTimer::singleShot ( 2000, this, SLOT( popupTimeout()));
 }
 
 void IrdaApplet::popupTimeout ( )

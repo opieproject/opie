@@ -362,10 +362,10 @@ DateBookWeek::DateBookWeek( bool ap, bool startOnMonday, DateBookDB *newDB,
 
 	tHide = new QTimer( this );
 
-	connect( view, SIGNAL( showDay( int ) ), this, SLOT( showDay( int ) ) );
+	connect( view, SIGNAL( showDay(int) ), this, SLOT( showDay(int) ) );
 	connect( view, SIGNAL(signalShowEvent(const EffectiveEvent&)), this, SLOT(slotShowEvent(const EffectiveEvent&)) );
 	connect( view, SIGNAL(signalHideEvent()), this, SLOT(slotHideEvent()) );
-	connect( header, SIGNAL( dateChanged( QDate &) ), this, SLOT( dateChanged( QDate &) ) );
+	connect( header, SIGNAL( dateChanged(QDate&) ), this, SLOT( dateChanged(QDate&) ) );
 	connect( tHide, SIGNAL( timeout() ), lblDesc, SLOT( hide() ) );
 	connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(slotWeekChanged(bool)) );
 	connect( qApp, SIGNAL(clockChanged(bool)), this, SLOT(slotClockChanged(bool)));

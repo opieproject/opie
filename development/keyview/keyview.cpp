@@ -41,8 +41,8 @@ Keyview::Keyview( QWidget* parent,  const char* name, WFlags fl )
     KeyFilter *filter = new KeyFilter(this);
     QWSServer::setKeyboardFilter(filter);
 
-    connect(filter, SIGNAL(keyPressed(int, int, int, bool, bool)), 
-                           this, SLOT(updateItems(int, int, int, bool, bool)));
+    connect(filter, SIGNAL(keyPressed(int,int,int,bool,bool)), 
+                           this, SLOT(updateItems(int,int,int,bool,bool)));
 }
 
 Keyview::~Keyview() { }

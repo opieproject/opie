@@ -86,8 +86,8 @@ public:
 	QCString ch("QPE/QuickLauncher-");
 	ch += QString::number(getpid());
 	qlChannel = new QCopChannel( ch, this);
-	connect( qlChannel, SIGNAL(received(const QCString&, const QByteArray&)),
-		 this, SLOT(message(const QCString&, const QByteArray&)) );
+	connect( qlChannel, SIGNAL(received(const QCString&,const QByteArray&)),
+		 this, SLOT(message(const QCString&,const QByteArray&)) );
     }
 
     static void exec( int /*argc*/, char **argv )

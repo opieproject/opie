@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.33 2004-03-01 17:39:51 chicken Exp $
+** $Id: datebook.cpp,v 1.34 2004-03-02 12:14:19 alwin Exp $
 **
 **********************************************************************/
 
@@ -161,16 +161,16 @@ DateBook::DateBook( QWidget *parent, const char *, WFlags f )
 	connect( qApp, SIGNAL(weekChanged(bool)), this, SLOT(changeWeek(bool)) );
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-	connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)), this, SLOT(appMessage(const QCString&, const QByteArray&)) );
+	connect( qApp, SIGNAL(appMessage(const QCString&,const QByteArray&)), this, SLOT(appMessage(const QCString&,const QByteArray&)) );
 #endif
 
     // listen on QPE/System
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
 	QCopChannel *channel = new QCopChannel( "QPE/System", this );
-	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
+	connect( channel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(receive(const QCString&,const QByteArray&)) );
 	channel = new QCopChannel( "QPE/Datebook", this );
-	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)), this, SLOT(receive(const QCString&, const QByteArray&)) );
+	connect( channel, SIGNAL(received(const QCString&,const QByteArray&)), this, SLOT(receive(const QCString&,const QByteArray&)) );
 #endif
 #endif
 
@@ -517,11 +517,11 @@ void DateBook::initDay()
 		dayView->setRowStyle( rowStyle );
 		connect( this, SIGNAL( newEvent() ), dayView, SLOT( redraw() ) );
 		connect( dayView, SIGNAL( newEvent() ), 	this, SLOT( fileNew() ) );
-		connect( dayView, SIGNAL( removeEvent( const Event & ) ), this, SLOT( removeEvent( const Event & ) ) );
-		connect( dayView, SIGNAL( editEvent( const Event & ) ), this, SLOT( editEvent( const Event & ) ) );
-		connect( dayView, SIGNAL( duplicateEvent( const Event & ) ), this, SLOT( duplicateEvent( const Event & ) ) );
-		connect( dayView, SIGNAL( beamEvent( const Event & ) ), this, SLOT( beamEvent( const Event & ) ) );
-		connect( dayView, SIGNAL(sigNewEvent(const QString &)), this, SLOT(slotNewEventFromKey(const QString &)) );
+		connect( dayView, SIGNAL( removeEvent(const Event&) ), this, SLOT( removeEvent(const Event&) ) );
+		connect( dayView, SIGNAL( editEvent(const Event&) ), this, SLOT( editEvent(const Event&) ) );
+		connect( dayView, SIGNAL( duplicateEvent(const Event&) ), this, SLOT( duplicateEvent(const Event&) ) );
+		connect( dayView, SIGNAL( beamEvent(const Event&) ), this, SLOT( beamEvent(const Event&) ) );
+		connect( dayView, SIGNAL(sigNewEvent(const QString&)), this, SLOT(slotNewEventFromKey(const QString&)) );
 	}
 }
 
@@ -531,7 +531,7 @@ void DateBook::initWeek()
 		weekView = new DateBookWeek( ampm, onMonday, db, views, "week view" );
 		weekView->setStartViewTime( startTime );
 		views->addWidget( weekView, WEEK );
-		connect( weekView, SIGNAL( showDate( int, int, int ) ), this, SLOT( showDay( int, int, int ) ) );
+		connect( weekView, SIGNAL( showDate(int,int,int) ), this, SLOT( showDay(int,int,int) ) );
 		connect( this, SIGNAL( newEvent() ), weekView, SLOT( redraw() ) );
 	}
 
@@ -556,11 +556,11 @@ void DateBook::initWeekLst() {
 		views->addWidget( weekLstView, WEEKLST );
 
 		//weekLstView->setStartViewTime( startTime );
-		connect( weekLstView, SIGNAL( showDate( int, int, int ) ), this, SLOT( showDay( int, int, int ) ) );
-		connect( weekLstView, SIGNAL( addEvent( const QDateTime &, const QDateTime &, const QString & , const QString &) ),
-			this, SLOT( slotNewEntry( const QDateTime &, const QDateTime &, const QString & , const QString &) ) );
+		connect( weekLstView, SIGNAL( showDate(int,int,int) ), this, SLOT( showDay(int,int,int) ) );
+		connect( weekLstView, SIGNAL( addEvent(const QDateTime&,const QDateTime&,const QString&, const QString&) ),
+			this, SLOT( slotNewEntry(const QDateTime&,const QDateTime&,const QString&, const QString&) ) );
 		connect( this, SIGNAL( newEvent() ), weekLstView, SLOT( redraw() ) );
-		connect( weekLstView, SIGNAL( editEvent( const Event & ) ), this, SLOT( editEvent( const Event & ) ) );
+		connect( weekLstView, SIGNAL( editEvent(const Event&) ), this, SLOT( editEvent(const Event&) ) );
 	}
 }
 
@@ -570,7 +570,7 @@ void DateBook::initMonth()
 	if ( !monthView ) {
 		monthView = new DateBookMonth( views, "month view", FALSE, db );
 		views->addWidget( monthView, MONTH );
-		connect( monthView, SIGNAL( dateClicked( int, int, int ) ), this, SLOT( showDay( int, int, int ) ) );
+		connect( monthView, SIGNAL( dateClicked(int,int,int) ), this, SLOT( showDay(int,int,int) ) );
 		connect( this, SIGNAL( newEvent() ), monthView, SLOT( redraw() ) );
 		qApp->processEvents();
 	}
@@ -905,7 +905,7 @@ void DateBook::beamEvent( const Event &e )
     mkdir("/tmp/obex/", 0755);
     Event::writeVCalendar( beamfile, e );
     Ir *ir = new Ir( this );
-    connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
+    connect( ir, SIGNAL( done(Ir*) ), this, SLOT( beamDone(Ir*) ) );
     QString description = e.description();
     ir->send( beamfile, description, "text/x-vCalendar" );
 }
@@ -924,11 +924,9 @@ void DateBook::slotFind()
     frmFind.setUseDate( true );
     frmFind.setDate( currentDate() );
     QObject::connect( &frmFind,
-                      SIGNAL(signalFindClicked(const QString&, const QDate&,
-					       bool, bool, int)),
+                      SIGNAL(signalFindClicked(const QString&,const QDate&,bool,bool,int)),
 		      this,
-		      SLOT(slotDoFind(const QString&, const QDate&,
-				      bool, bool, int)) );
+		      SLOT(slotDoFind(const QString&,const QDate&,bool,bool,int)) );
     QObject::connect( this,
 		      SIGNAL(signalNotFound()),
 		      &frmFind,

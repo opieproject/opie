@@ -51,7 +51,7 @@ CommandEditDialog::CommandEditDialog(QWidget *parent, const char* name, WFlags f
   m_SuggestedCommandList->setSelected(m_SuggestedCommandList->firstChild(),TRUE);
   m_SuggestedCommandList->sort();
 
-  connect( m_SuggestedCommandList, SIGNAL( clicked( QListViewItem * ) ), m_PlayListSelection, SLOT( addToSelection( QListViewItem *) ) );
+  connect( m_SuggestedCommandList, SIGNAL( clicked(QListViewItem*) ), m_PlayListSelection, SLOT( addToSelection(QListViewItem*) ) );
 
 
 
