@@ -118,9 +118,3 @@ public:
 };
 
 #endif // FILEBROWSER_H
- QString inputText;
-    QLineEdit* LineEdit1;
-    void setTextEdit(const QString &);
-};
-
-#endif // FILEBROWSER_H
