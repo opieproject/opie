@@ -395,6 +395,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     setCentralWidget( editor );
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
+    QPEApplication::setStylusOperation( editor, QPEApplication::RightOnHold);
 
     Config cfg("TextEdit");
     cfg. setGroup ( "Font" );
