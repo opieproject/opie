@@ -89,9 +89,9 @@ protected slots:
     void remoteRename();
     void localRename();
     void currentPathEditChanged();
-	void switchToLocalTab();
-	void switchToRemoteTab();
-	void switchToConfigTab();
+  void switchToLocalTab();
+  void switchToRemoteTab();
+  void switchToConfigTab();
 protected:
     void nullifyCallBack();
     QGridLayout* tabLayout;
