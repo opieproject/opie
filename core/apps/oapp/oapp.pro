@@ -4,7 +4,7 @@ CONFIG		= qt warn_on
 TARGET		= oapp
 VERSION		= 1.0.0
 
-LIBS		+= -lqpe -lopie
+LIBS		+= -lqpe
 HEADERS		= \
 		  oappplugin.h \
 		  oappinterface.h
@@ -14,8 +14,5 @@ SOURCES		= \
 DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 INCLUDEPATH	+= $(OPIEDIR)/include 
 DEPENDPATH	+= $(OPIEDIR)/include .
-MOC_DIR		= .build
-OBJECTS_DIR	= .build
-UI_DIR		= .build
 
 include ( $(OPIEDIR)/include.pro )

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/plugins
 Maintainer: Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
-Depends: libqte2, opie-today
+Depends: libopiecore2, libopieui2, libopiepim2, opie-today
 Description: Todo list plugin for Today
  Displays todo list items.
 Version: $QPE_VERSION$EXTRAVERSION
