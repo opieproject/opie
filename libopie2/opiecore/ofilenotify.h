@@ -75,7 +75,8 @@ class OFileNotification : public QObject
     void triggered();
 
   protected:
-    void activate();
+    bool activate();
+    bool hasChanged();
     static bool registerSignalHandler();
     static void unregisterSignalHandler();
     static void __signalHandler( int sig, siginfo_t *si, void *data );
@@ -86,6 +87,7 @@ class OFileNotification : public QObject
     QSignal _signal;
     int _fd;
     bool _active;
+    struct stat _stat;
 };
 
 }

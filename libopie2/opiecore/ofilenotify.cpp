@@ -40,6 +40,7 @@ using namespace Opie::Core;
 /* STD */
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <assert.h>
 #include <fcntl.h>
 #include <string.h>
 #include <errno.h>
@@ -74,37 +75,69 @@ int OFileNotification::start( const QString& path, bool sshot, OFileNotification
     _path = QString::null;
     _fd = 0;
     if ( _active ) stop();
+    QString dirpath;
 
-    int fd = ::open( (const char*) path, O_RDONLY );
+    // check if path exists and whether it is a file or a directory, if it exists at all
+    int result = ::stat( (const char*) path, &_stat );
+    if ( result == -1 )
+    {
+        qWarning( "OFileNotification::start(): Can't stat '%s': %s.", (const char*) path, strerror( errno ) );
+        return -1;
+    }
+
+    // if it is not a directory, we need to find out in which directory the file is
+    bool isDirectory = S_ISDIR( _stat.st_mode );
+    if ( !isDirectory )
+    {
+        int slashpos;
+        slashpos = path.findRev( '/' );
+        if ( slashpos > 0 )
+        {
+            _path = path;
+            dirpath = path.left( slashpos );
+        }
+    }
+    else /* isDirectory */
+    {
+        qWarning( "FIXME FIXME FIXME = Directory Notification Not Yet Implemented!" );
+        _path = path;
+        dirpath = path;
+        assert( 0 );
+    }
+
+    int fd = ::open( (const char*) dirpath, O_RDONLY );
     if ( fd != -1 )
     {
         if ( notification_list.isEmpty() )
         {
             OFileNotification::registerSignalHandler();
         }
-        int result = ::fcntl( fd, F_SETSIG, SIGRTMIN );
+
+        result = ::fcntl( fd, F_SETSIG, SIGRTMIN );
         if ( result == -1 )
         {
-            qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) path, strerror( errno ) );
+            qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) dirpath, strerror( errno ) );
             return -1;
         }
         if ( !sshot ) (int) type |= (int) Multi;
         result = ::fcntl( fd, F_NOTIFY, type );
         if ( result == -1 )
         {
-            qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) path, strerror( errno ) );
+            qWarning( "OFileNotification::start(): Can't subscribe to '%s': %s.", (const char*) dirpath, strerror( errno ) );
             return -1;
         }
-        qDebug( "OFileNotification::start(): Subscribed for changes to %s (fd = %d, mask = 0x%0x)", (const char*) path, fd, type );
+        qDebug( "OFileNotification::start(): Subscribed for changes to %s (fd = %d, mask = 0x%0x)", (const char*) dirpath, fd, type );
         notification_list.insert( fd, this );
         _type = type;
-        _path = path;
         _fd = fd;
+        _active = true;
+        ::memset( &_stat, 0, sizeof _stat );
+        ::stat( _path, &_stat );
         return fd;
     }
     else
     {
-        qWarning( "OFileNotification::start(): Error with path '%s': %s.", (const char*) path, strerror( errno ) );
+        qWarning( "OFileNotification::start(): Error with path '%s': %s.", (const char*) dirpath, strerror( errno ) );
         return -1;
     }
 }
@@ -141,15 +174,48 @@ QString OFileNotification::path() const
     return _path;
 }
 
+
 int OFileNotification::fileno() const
 {
     return _fd;
 }
 
-void OFileNotification::activate()
+
+bool OFileNotification::activate()
 {
-    emit triggered();
-    _signal.activate();
+    if ( hasChanged() )
+    {
+        emit triggered();
+        _signal.activate();
+        return true;
+    }
+    else
+        return false;
+}
+
+
+bool OFileNotification::hasChanged()
+{
+    bool c = false;
+
+    struct stat newstat;
+    ::memset( &newstat, 0, sizeof newstat );
+    ::stat( _path, &newstat );
+
+    qDebug( "stat.atime = %0lx, newstat.atime = %0lx", (long)_stat.st_atime, (long)newstat.st_atime );
+    qDebug( "stat.mtime = %0lx, newstat.mtime = %0lx", (long)_stat.st_mtime, (long)newstat.st_mtime );
+    if ( !c && (_type & Access) && (long)_stat.st_atime < (long)newstat.st_atime )
+    {
+        qDebug( "OFileNotification::hasChanged(): atime changed" );
+        c = true;
+    }
+    if ( !c && (_type & Modify) && (long)_stat.st_mtime < (long)newstat.st_mtime )
+    {
+        qDebug( "OFileNotification::hasChanged(): mtime changed" );
+        c = true;
+    }
+
+    return c;
 }
 
 
@@ -168,7 +234,20 @@ void OFileNotification::__signalHandler( int sig, siginfo_t *si, void *data )
     OFileNotification* fn = notification_list[fd];
     if ( fn )
     {
-        fn->activate();
+        // check if it really was the file (dnotify triggers on directory granularity, not file granularity)
+        if ( !fn->activate() )
+        {
+            qDebug( "OFileNotification::__signalHandler(): false alarm ;) Restarting the trigger (if it was single)..." );
+            if ( !(fn->type() & Multi ) )
+            {
+                int result = ::fcntl( fn->fileno(), F_NOTIFY, fn->type() );
+                if ( result == -1 )
+                {
+                    qWarning( "OFileNotification::__signalHandler(): Can't restart the trigger: %s.", strerror( errno ) );
+                }
+            }
+            return;
+        }
         #if 1
         if ( !(fn->type() & Multi) )
         {
@@ -208,7 +287,6 @@ void OFileNotification::unregisterSignalHandler()
     struct sigaction act;
     act.sa_sigaction = ( void (*)(int, siginfo_t*, void*) ) SIG_DFL;
     ::sigemptyset( &act.sa_mask );
-    if ( ::sigaction( SIGRTMIN, &act, NULL ) == -1 )
     if ( ::sigaction( SIGRTMIN, &act, NULL ) == -1 )
     {
         qWarning( "OFileNotification::unregisterSignalHandler(): couldn't deregister signal handler: %s", strerror( errno ) );
