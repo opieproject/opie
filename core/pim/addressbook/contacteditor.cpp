@@ -84,6 +84,8 @@ void ContactEditor::init() {
 */
 	//*slDynamicEntries = *slOrdered;
 
+	QStringList trlChooserNames;
+
 	for (i = 0; i <= 6; i++) {
 		slHomeAddress.append( "" );
 		slBusinessAddress.append( "" );
@@ -103,17 +105,20 @@ void ContactEditor::init() {
 		hasCountry = FALSE;
 
 		QStringList::ConstIterator it = slOrdered.begin();
+
 		for ( i = 0; it != slOrdered.end(); i++, ++it ) {
 
 			if ( (*it) == "Business Fax" ) {
-				slChooserNames.append( tr( "Business Fax" ) );
+				trlChooserNames.append( tr( "Business Fax" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append("" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( (*it) == "Home Fax" ) {
-				slChooserNames.append( tr( "Home Fax" ) );
+				trlChooserNames.append( tr( "Home Fax" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append("" );
 				//slDynamicEntries->remove( it );
 				continue;
@@ -121,14 +126,16 @@ void ContactEditor::init() {
 
 
 			if ( (*it) == "Business Phone" ) {
-				slChooserNames.append( tr( "Business Phone" ) );
+				trlChooserNames.append( tr( "Business Phone" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( (*it) == "Home Phone" ) {
-				slChooserNames.append( tr( "Home Phone" ) );
+				trlChooserNames.append( tr( "Home Phone" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
@@ -143,14 +150,16 @@ void ContactEditor::init() {
 			} */
 
 			if ( (*it) == "Business Mobile" ) {
-				slChooserNames.append( tr( "Business Mobile" ) );
+				trlChooserNames.append( tr( "Business Mobile" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( (*it) == "Home Mobile" ) {
-				slChooserNames.append( tr( "Home Mobile" ) );
+				trlChooserNames.append( tr( "Home Mobile" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
@@ -158,35 +167,40 @@ void ContactEditor::init() {
 
 
 			if ( (*it) == "Business WebPage" ) {
-				slChooserNames.append( tr( "Business WebPage" ) );
+				trlChooserNames.append( tr( "Business WebPage" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( (*it) == "Home Web Page" ) {
-				slChooserNames.append( tr( "Home Web Page" ) );
+				trlChooserNames.append( tr( "Home Web Page" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( (*it) == "Business Pager" ) {
-				slChooserNames.append( tr( "Business Pager" ) );
+				trlChooserNames.append( tr( "Business Pager" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( *it == "Default Email" ) {
-				slChooserNames.append( tr( "Default Email" ) );
+				trlChooserNames.append( tr( "Default Email" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
 			}
 
 			if ( *it == "Emails" ) {
-				slChooserNames.append( tr( "Emails" ) );
+				trlChooserNames.append( tr( "Emails" ) );
+				slChooserNames.append( *it );
 				slChooserValues.append( "" );
 				//slDynamicEntries->remove( it );
 				continue;
@@ -749,10 +763,10 @@ void ContactEditor::init() {
                                 QSizePolicy::MinimumExpanding );
         gl->addItem( space, 4,  0 );
 
-	cmbChooserField1->insertStringList( slChooserNames );
-	cmbChooserField2->insertStringList( slChooserNames );
-	cmbChooserField3->insertStringList( slChooserNames );
-	cmbChooserField4->insertStringList( slChooserNames );
+	cmbChooserField1->insertStringList( trlChooserNames );
+	cmbChooserField2->insertStringList( trlChooserNames );
+	cmbChooserField3->insertStringList( trlChooserNames );
+	cmbChooserField4->insertStringList( trlChooserNames );
 
 	cmbChooserField1->setCurrentItem( 0 );
 	cmbChooserField2->setCurrentItem( 1 );
@@ -1360,37 +1374,37 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); it != slDynamicEntries.end(); ++it, ++itLE) {
-		if ( *it =="Department" )
+		if ( *it == tr( "Department" ) )
 			(*itLE)->setText( ent.department() );
 
-		if ( *it == "Company" )
+		if ( *it ==  tr( "Company" ) )
 			(*itLE)->setText( ent.company() );
 
-		if ( *it == "Office" )
+		if ( *it ==  tr( "Office" ) )
 			(*itLE)->setText( ent.office() );
 
-		if ( *it == "Profession" )
+		if ( *it == tr( "Profession" ) )
 			(*itLE)->setText( ent.profession() );
 
-		if ( *it == "Assistant" )
+		if ( *it == tr( "Assistant" ) )
 			(*itLE)->setText( ent.assistant() );
 
-		if ( *it == "Manager" )
+		if ( *it == tr( "Manager" ) )
 			(*itLE)->setText( ent.manager() );
 
-		if ( *it == "Spouse" )
+		if ( *it == tr( "Spouse" ) )
 			(*itLE)->setText( ent.spouse() );
 
-		if ( *it == "Birthday" )
+		if ( *it == tr( "Birthday" ) )
 			(*itLE)->setText( ent.birthday() );
 
-		if ( *it == "Anniversary" )
+		if ( *it == tr( "Anniversary" ) )
 			(*itLE)->setText( ent.anniversary() );
 
-		if ( *it == "Nickname" )
+		if ( *it == tr( "Nickname" ) )
 			(*itLE)->setText( ent.nickname() );
 
-		if ( *it == "Children" )
+		if ( *it == tr( "Children" ) )
 			(*itLE)->setText( ent.children() );
 
 	}
@@ -1558,37 +1572,37 @@ void ContactEditor::saveEntry() {
 	QStringList::ConstIterator it;
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); it != slDynamicEntries.end(); ++it, ++itLE) {
-		if ( *it == "Department" )
+		if ( *it == tr( "Department" ) )
 			ent.setDepartment( (*itLE)->text() );
 
-		if ( *it == "Company" )
+		if ( *it == tr( "Company" ) )
 			ent.setCompany( (*itLE)->text() );
 
-		if ( *it == "Office" )
+		if ( *it == tr( "Office" ) )
 			ent.setOffice( (*itLE)->text() );
 
-		if ( *it == "Profession" )
+		if ( *it == tr( "Profession" ) )
 			ent.setProfession( (*itLE)->text() );
 
-		if ( *it == "Assistant" )
+		if ( *it == tr( "Assistant" ) )
 			ent.setAssistant( (*itLE)->text() );
 
-		if ( *it == "Manager" )
+		if ( *it == tr( "Manager" ) )
 			ent.setManager( (*itLE)->text() );
 
-		if ( *it == "Spouse" )
+		if ( *it == tr( "Spouse" ) )
 			ent.setSpouse( (*itLE)->text() );
 
-		if ( *it == "Birthday" )
+		if ( *it == tr( "Birthday" ) )
 			ent.setBirthday( (*itLE)->text() );
 
-		if ( *it == "Anniversary" )
+		if ( *it == tr( "Anniversary" ) )
 			ent.setAnniversary( (*itLE)->text() );
 
-		if ( *it == "Nickname" )
+		if ( *it == tr( "Nickname" ) )
 			ent.setNickname( (*itLE)->text() );
 
-		if ( *it == "Children" )
+		if ( *it == tr( "Children" ) )
 			ent.setChildren( (*itLE)->text() );
 
 	}

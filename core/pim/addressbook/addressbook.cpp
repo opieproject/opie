@@ -31,7 +31,7 @@
 #include <opie/ofiledialog.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qpe/contact.h>
+#include <opie/ocontact.h>
 
 #ifndef MAKE_FOR_SHARP_ROM
 #include <qpe/finddialog.h>
@@ -857,6 +857,7 @@ void AddressbookWindow::initFields()
 		str += "/Settings/AddressBook.conf";
 		QFile::remove( str );
 	}
+	
 	if ( slOrderedFields.count() > 0 ) {
 		for( QStringList::ConstIterator it = slOrderedFields.begin();
 		     it != slOrderedFields.end(); ++it ) {
