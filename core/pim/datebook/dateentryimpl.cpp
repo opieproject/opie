@@ -41,6 +41,7 @@
 #include <qtoolbutton.h>
 
 #include "timepicker.h"
+#include "onoteedit.h"
 
 #include <stdlib.h>
 #include <stdio.h>

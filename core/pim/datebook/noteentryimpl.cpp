@@ -2,6 +2,7 @@
 #include "qstring.h"
 #include "qmultilinedit.h"
 #include "qlabel.h"
+#include "onoteedit.h"
 
 NoteEntry::NoteEntry(const QString &title, const QString &noteStr,
 		     QWidget* parent, const char* name, bool modal,
