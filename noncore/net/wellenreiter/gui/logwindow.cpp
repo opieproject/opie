@@ -24,7 +24,7 @@ MLogWindow::MLogWindow( QWidget * parent, const char * name, WFlags f )
     
     // FIXME: Set properties( font, read-only, etc...)
     
-};
+}
 
 void MLogWindow::log( QString text )
 {
@@ -34,6 +34,9 @@ void MLogWindow::log( QString text )
     ledit->append( line );
     qDebug( line );
 
-};
+}
 
-
+const QString MLogWindow::getLog() const
+{
+    return ledit->text();
+}

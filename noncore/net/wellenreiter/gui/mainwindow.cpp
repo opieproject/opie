@@ -14,16 +14,19 @@
 **********************************************************************/
 
 #include "configwindow.h"
+#include "logwindow.h"
 #include "mainwindow.h"
 #include "wellenreiter.h"
 
 #include "scanlist.h"
 
 #include <qcombobox.h>
+#include <qfile.h>
 #include <qiconset.h>
 #include <qmenubar.h>
 #include <qpopupmenu.h>
 #include <qstatusbar.h>
+#include <qtextstream.h>
 #include <qtoolbutton.h>
 
 #ifdef QWS
@@ -79,11 +82,17 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     // setup menu bar
 
+    int id;
+
     QMenuBar* mb = menuBar();
 
+    QPopupMenu* fileSave = new QPopupMenu( mb );
+    fileSave->insertItem( "&Log", this, SLOT( fileSaveLog() ) );
+
     QPopupMenu* file = new QPopupMenu( mb );
-    file->insertItem( "&Load..." );
-    file->insertItem( "&Save..." );
+    id = file->insertItem( "&Load" );
+    file->setItemEnabled( id, false );
+    file->insertItem( "&Save", fileSave );
 
     QPopupMenu* view = new QPopupMenu( mb );
     view->insertItem( "&Configure..." );
@@ -95,9 +104,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QPopupMenu* demo = new QPopupMenu( mb );
     demo->insertItem( "&Add something", this, SLOT( demoAddStations() ) );
 
-    int id;
     id = mb->insertItem( "&File", file );
-    mb->setItemEnabled( id, false );
     id = mb->insertItem( "&View", view );
     mb->setItemEnabled( id, false );
     id = mb->insertItem( "&Sniffer", sniffer );
@@ -172,3 +179,20 @@ void WellenreiterMainWindow::demoAddStations()
     mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
 }
 
+void WellenreiterMainWindow::fileSaveLog()
+{
+    const QString fname( "/tmp/log.txt" );
+    QFile f( fname );
+    if ( f.open(IO_WriteOnly) )
+    {
+        QTextStream t( &f );
+        t << mw->logWindow()->getLog();
+        f.close();
+        qDebug( "saved log in file '%s'", (const char*) fname );
+    }
+    else
+    {
+        qDebug( "Problem saving log in file '%s'", (const char*) fname );
+    }
+
+}

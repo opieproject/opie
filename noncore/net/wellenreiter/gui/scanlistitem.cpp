@@ -15,6 +15,7 @@
 
 #include "scanlistitem.h"
 #include <assert.h>
+#include <qdatetime.h>
 #include <qpixmap.h>
 
 #ifdef QWS
@@ -31,6 +32,8 @@ const int col_channel = 3;
 const int col_wep = 4;
 const int col_traffic = 5;
 const int col_manuf = 6;
+const int col_firstseen = 7;
+const int col_lastseen = 8;
 
 MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QString macaddr,
                               bool wep, int channel, int signal )
@@ -65,17 +68,20 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
 
     // set icon for wep (wireless encryption protocol)
     if ( wep )
-        setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); // rename the pixmap!
+        setPixmap( col_wep, Resource::loadPixmap( "wellenreiter/cracked" ) ); //FIXME: rename the pixmap!
 
     // set channel and signal text
-    
+
     if ( signal != -1 )
         setText( col_sig, QString::number( signal ) );
     if ( channel != -1 )
         setText( col_channel, QString::number( channel ) );
 
+    setText( col_firstseen, QTime::currentTime().toString() );
+    //setText( col_lastseen, QTime::currentTime().toString() );
+
     listView()->triggerUpdate();
-    
+
     this->type = type;
 
 }
@@ -92,5 +98,5 @@ void MScanListItem::receivedBeacon()
     qDebug( "MScanListItem %s: received beacon #%d", (const char*) _macaddr, _beacons );
     #endif
     setText( col_sig, QString::number( _beacons ) );
+    setText( col_lastseen, QTime::currentTime().toString() );
 }
-    

@@ -41,6 +41,10 @@ MScanListView::MScanListView( QWidget* parent, const char* name )
     setColumnAlignment( 5, AlignCenter );
     addColumn( tr( "Manufacturer" ) );
     setColumnAlignment( 6, AlignCenter );
+    addColumn( tr( "First Seen" ) );
+    setColumnAlignment( 7, AlignCenter );
+    addColumn( tr( "Last Seen" ) );
+    setColumnAlignment( 8, AlignCenter );
     setRootIsDecorated( true );
     setAllColumnsShowFocus( true );
 };

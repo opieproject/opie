@@ -26,9 +26,10 @@ class MLogWindow: public QVBox
 
   public:
     MLogWindow( QWidget * parent = 0, const char * name = "MLogWindow", WFlags f = 0 );
-  
+
     void log( QString text );
-    
+    const QString getLog() const;
+
   protected:
     QMultiLineEdit* ledit;
 

@@ -46,6 +46,7 @@ class WellenreiterMainWindow: public QMainWindow
   public slots:
     void showConfigure();
     void demoAddStations();
+    void fileSaveLog();
 };
 
 #endif
