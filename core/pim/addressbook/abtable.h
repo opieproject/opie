@@ -96,6 +96,7 @@ public:
     void show();
     void setPaintingEnabled( bool e );
     void viewportPaintEvent( QPaintEvent* e);
+    void paintCell(QPainter* p, int row, int col,  const QRect&, bool );
 
     // addresspicker mode (What's that ? se)
     void setChoiceNames( const QStringList& list);

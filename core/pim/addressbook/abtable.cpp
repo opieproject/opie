@@ -586,8 +586,6 @@ void AbTable::updateVisible()
 		setCurrentCell( -1, 0 );
 	
 	setPaintingEnabled( TRUE );
-
-
 }
 
 
@@ -618,7 +616,41 @@ void AbTable::viewportPaintEvent( QPaintEvent* e ) {
 		QTable::viewportPaintEvent( e );
 }
 
+void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) {
+    const QColorGroup &cg = colorGroup();
 
+    p->save();
+
+    // Paint alternating background bars
+    if (  (row % 2 ) == 0 ) {
+        p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
+        p->setPen( QPen( cg.text() ) );
+    }
+    else {
+        p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Background ) );
+        p->setPen( QPen( cg.buttonText() ) );
+    }
+
+    QFont f = p->font();
+    QFontMetrics fm(f);
+
+    int marg = 2;
+    int x = 0;
+    int y = ( cr.height() - 14 ) / 2;
+
+    QPixmap pic = pixmap( row, col );
+    if ( !pic.isNull() )
+    {
+        p->drawPixmap( x + marg, y, pixmap( row, col ) );
+        p->drawText( x + marg + pixmap( row, col ).width() + 4,2 + fm.ascent(), text( row, col ) );
+    }
+    else
+    {
+        p->drawText( x + marg,2 + fm.ascent(), text( row, col ) );
+    }
+
+    p->restore();
+}
 
 void AbTable::rowHeightChanged( int row )
 {
