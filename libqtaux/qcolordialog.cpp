@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcolordialog.cpp,v 1.4 2004-03-01 17:56:47 chicken Exp $
+** $Id: qcolordialog.cpp,v 1.5 2004-03-31 13:23:53 mouse Exp $
 **
 ** Implementation of QColorDialog class
 **
@@ -51,6 +51,10 @@
 //////////// QWellArray BEGIN
 
 #include "qobjectdict.h"
+
+#ifndef QT_NO_DRAGANDDROP
+#include "qdragobject.h"
+#endif
 
 //
 //  W A R N I N G
