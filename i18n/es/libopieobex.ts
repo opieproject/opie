@@ -3,48 +3,122 @@
     <name>ObexDlg</name>
     <message>
         <source>OBEX Sending</source>
-        <translation>OBEX Enviando</translation>
+        <translation type="obsolete">OBEX Enviando</translation>
     </message>
     <message>
         <source>Sending:</source>
-        <translation>Enviando:</translation>
+        <translation type="obsolete">Enviando:</translation>
     </message>
     <message>
         <source>filename</source>
-        <translation>fichero</translation>
+        <translation type="obsolete">fichero</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="obsolete">&amp;Cancelar</translation>
     </message>
 </context>
 <context>
     <name>ObexInc</name>
     <message>
         <source>OBEX Receiving</source>
-        <translation>OBEX Reciviendo</translation>
+        <translation type="obsolete">OBEX Reciviendo</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation>EtiquetaTexto1</translation>
+        <translation type="obsolete">EtiquetaTexto1</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation>Fichero</translation>
+        <translation type="obsolete">Fichero</translation>
     </message>
     <message>
         <source>A file was beamed 
 to you.</source>
-        <translation>Se emitió un fichero
+        <translation type="obsolete">Se emitió un fichero
 para usted.</translation>
     </message>
     <message>
         <source>Insert</source>
-        <translation>Insertar</translation>
+        <translation type="obsolete">Insertar</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation>Rechazar</translation>
+        <translation type="obsolete">Rechazar</translation>
+    </message>
+</context>
+<context>
+    <name>OtherHandler</name>
+    <message>
+        <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Deny</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SendWidget</name>
+    <message>
+        <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IrDa is not enabled!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Searching for IrDa Devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bluetooth is not available</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Searching for bluetooth Devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scheduling for beam.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search again for IrDa.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start sending</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

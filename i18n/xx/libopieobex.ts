@@ -1,11 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>ObexDlg</name>
-</context>
-<context>
-    <name>ObexInc</name>
-</context>
-<context>
     <name>OtherHandler</name>
     <message>
         <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>

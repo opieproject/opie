@@ -221,10 +221,6 @@ It must be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rescan</source>
         <translation type="unfinished"></translation>
     </message>

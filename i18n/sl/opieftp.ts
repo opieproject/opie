@@ -222,7 +222,7 @@ Mora biti prazen</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>O</translation>
+        <translation type="obsolete">O</translation>
     </message>
     <message>
         <source>Rescan</source>

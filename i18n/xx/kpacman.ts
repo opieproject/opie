@@ -212,7 +212,7 @@ or is of an unknown format.</source>
     </message>
     <message>
         <source>                          </source>
-        <translation>FOO</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

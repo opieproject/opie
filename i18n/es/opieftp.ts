@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>Sobre</translation>
+        <translation type="obsolete">Sobre</translation>
     </message>
     <message>
         <source>File</source>

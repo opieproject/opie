@@ -330,31 +330,31 @@ Klik inde i boksen til venstre for at vælge en pakke.</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
-        <translation>Installeret på - %1</translation>
+        <translation type="obsolete">Installeret på - %1</translation>
     </message>
     <message>
         <source>Description - %1</source>
-        <translation>Beskrivelse - %1</translation>
+        <translation type="obsolete">Beskrivelse - %1</translation>
     </message>
     <message>
         <source>Size - %1</source>
-        <translation>Størrelse - %1</translation>
+        <translation type="obsolete">Størrelse - %1</translation>
     </message>
     <message>
         <source>Section - %1</source>
-        <translation>Sektion - %1</translation>
+        <translation type="obsolete">Sektion - %1</translation>
     </message>
     <message>
         <source>Filename - %1</source>
-        <translation>Filnavn - %1</translation>
+        <translation type="obsolete">Filnavn - %1</translation>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation>V. installeret - %1</translation>
+        <translation type="obsolete">V. installeret - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation>V. tilgængelig - %1</translation>
+        <translation type="obsolete">V. tilgængelig - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
@@ -463,6 +463,49 @@ Er du sikker?
     <message>
         <source>Updating Launcher...</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackageWindow</name>
+    <message>
+        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package information is unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Luk</translation>
     </message>
 </context>
 <context>

@@ -194,15 +194,15 @@
     </message>
     <message>
         <source>Install to</source>
-        <translation>Installa su</translation>
+        <translation type="obsolete">Installa su</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Rimuovi</translation>
+        <translation type="obsolete">Rimuovi</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation>Rinstalla</translation>
+        <translation type="obsolete">Rinstalla</translation>
     </message>
 </context>
 <context>
@@ -349,6 +349,14 @@ Fatto.</translation>
     <message>
         <source>Status: </source>
         <translation>Stato: </translation>
+    </message>
+    <message>
+        <source>Install to</source>
+        <translation type="unfinished">Installa su</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Rimuovi</translation>
     </message>
 </context>
 <context>

@@ -11,10 +11,6 @@
         <translation>Effacer</translation>
     </message>
     <message>
-        <source>Form1</source>
-        <translation></translation>
-    </message>
-    <message>
         <source>Molecular Weight</source>
         <translation>poids moléculaire</translation>
     </message>
@@ -35,7 +31,7 @@
     <name>OxydataWidget</name>
     <message>
         <source>Weight:</source>
-        <translation>Poids:</translation>
+        <translation type="obsolete">Poids:</translation>
     </message>
     <message>
         <source>Block</source>
@@ -89,6 +85,10 @@
         <source>%1 g/cm^3</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Weight</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Oxygen</name>
@@ -107,28 +107,6 @@
     <message>
         <source>Calculations</source>
         <translation>Calculs</translation>
-    </message>
-</context>
-<context>
-    <name>PSEWidget</name>
-    <message>
-        <source>Periodic System</source>
-        <translation>Système Périodique</translation>
-    </message>
-</context>
-<context>
-    <name>calcDlgUI</name>
-    <message>
-        <source>ERROR: 
-</source>
-        <translation>ERREUR: </translation>
-    </message>
-</context>
-<context>
-    <name>dataWidgetUI</name>
-    <message>
-        <source>Chemical Data</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Hydrogen</source>
@@ -156,10 +134,6 @@
     </message>
     <message>
         <source>Nitrogen</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Oxygen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -564,6 +538,28 @@
     </message>
     <message>
         <source>Meitnerium</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PSEWidget</name>
+    <message>
+        <source>Periodic System</source>
+        <translation>Système Périodique</translation>
+    </message>
+</context>
+<context>
+    <name>calcDlgUI</name>
+    <message>
+        <source>ERROR: 
+</source>
+        <translation>ERREUR: </translation>
+    </message>
+</context>
+<context>
+    <name>dataWidgetUI</name>
+    <message>
+        <source>Chemical Data</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

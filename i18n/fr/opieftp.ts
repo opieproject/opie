@@ -233,7 +233,7 @@ Il doit être vide</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>A propos</translation>
+        <translation type="obsolete">A propos</translation>
     </message>
     <message>
         <source>Rescan</source>

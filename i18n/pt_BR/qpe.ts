@@ -97,6 +97,14 @@ Please charge the back-up battery.</source>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Finding documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Searching documents</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>LauncherView</name>

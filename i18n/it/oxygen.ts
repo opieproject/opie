@@ -31,7 +31,7 @@
     <name>OxydataWidget</name>
     <message>
         <source>Weight:</source>
-        <translation>Peso</translation>
+        <translation type="obsolete">Peso</translation>
     </message>
     <message>
         <source>Block</source>
@@ -84,6 +84,10 @@
     <message>
         <source>%1 g/cm^3</source>
         <translation>%1 g/cm^3</translation>
+    </message>
+    <message>
+        <source>Weight</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

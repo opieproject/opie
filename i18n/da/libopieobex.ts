@@ -1,48 +1,75 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>ObexDlg</name>
+    <name>OtherHandler</name>
     <message>
-        <source>OBEX Sending</source>
+        <source>&lt;qt&gt;&lt;b&gt;Received:&lt;/b&gt;&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sending:</source>
+        <source>Accept</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>filename</source>
+        <source>Deny</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Cancel</source>
+        <source>&lt;p&gt;You received a file of type %1 (&lt;img src=&quot;%2&quot;&gt; )What do you want to do?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ObexInc</name>
+    <name>SendWidget</name>
     <message>
-        <source>OBEX Receiving</source>
+        <source>&lt;qt&gt;&lt;h1&gt;Sending:&lt;/h1&gt;&lt;/qt&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>TextLabel1</source>
+        <source>Done</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Filename</source>
+        <source>IrDa is not enabled!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>A file was beamed 
-to you.</source>
+        <source>Searching for IrDa Devices.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Insert</source>
+        <source>Bluetooth is not available</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Reject</source>
+        <source>Searching for bluetooth Devices.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scheduling for beam.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Failure</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Try %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search again for IrDa.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start sending</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

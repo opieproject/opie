@@ -1,13 +1,28 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>LanguageSettings</name>
+    <message>
+        <source>English</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LanguageSettingsBase</name>
     <message>
         <source>Language</source>
-        <translation>Lingua</translation>
+        <translation type="obsolete">Lingua</translation>
     </message>
     <message>
         <source>Select language</source>
         <translation>Seleziona lingua</translation>
+    </message>
+    <message>
+        <source>Language Settings</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -99,5 +99,9 @@ Accesso negato</translation>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation>&lt;P&gt;La protezione mediante password fornisce un minimo livello di protezione dall&apos;accesso illegale del dispositivo.</translation>
     </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="unfinished">1.0.0.0/8</translation>
+    </message>
 </context>
 </TS>

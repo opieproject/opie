@@ -22,7 +22,7 @@
     <name>HandwritingTrainer</name>
     <message>
         <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation>Seleziona un carattere dall&apos;elenco.  L&apos;area per scrivere sulla sinistra mostra un carattere di riferimento.  Fai pratica scrivendo nell&apos;area sulla destra.</translation>
+        <translation type="obsolete">Seleziona un carattere dall&apos;elenco.  L&apos;area per scrivere sulla sinistra mostra un carattere di riferimento.  Fai pratica scrivendo nell&apos;area sulla destra.</translation>
     </message>
     <message>
         <source>Matched: </source>
@@ -35,6 +35,21 @@
     <message>
         <source>%1%</source>
         <translation>%1%</translation>
+    </message>
+    <message>
+        <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No match</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Handwriting</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -59,6 +74,21 @@
         <source>Clear</source>
         <translation>Cancella</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIMPenInput</name>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
@@ -66,12 +96,16 @@
         <source>Enter new character</source>
         <translation>Inserisci un nuovo carattere</translation>
     </message>
+    <message>
+        <source>Character:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QIMPenPrefBase</name>
     <message>
         <source>Form1</source>
-        <translation>Form1</translation>
+        <translation type="obsolete">Form1</translation>
     </message>
     <message>
         <source>Multi-stroke character timeout:</source>

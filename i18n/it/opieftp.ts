@@ -72,7 +72,7 @@
     </message>
     <message>
         <source>About</source>
-        <translation>Informazioni</translation>
+        <translation type="obsolete">Informazioni</translation>
     </message>
     <message>
         <source>File</source>

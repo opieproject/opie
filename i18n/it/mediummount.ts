@@ -5,12 +5,16 @@
         <source>Global</source>
         <translation>Globale</translation>
     </message>
+    <message>
+        <source>Medium Mount Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MediumGlobalWidget</name>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Dcouments. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation>Se un supporto viene inserito in questo dispositivo, Opie vi cercherà dei Documenti. Su supporti molto grandi la ricerca impiegherà più tempo. Puoi scegliere se Opie deve cercare i Documenti in modo globale o in base al supporto. Potrai inoltre riconfigurare ogni supporto.</translation>
+        <translation type="obsolete">Se un supporto viene inserito in questo dispositivo, Opie vi cercherà dei Documenti. Su supporti molto grandi la ricerca impiegherà più tempo. Puoi scegliere se Opie deve cercare i Documenti in modo globale o in base al supporto. Potrai inoltre riconfigurare ogni supporto.</translation>
     </message>
     <message>
         <source>Enable medium checking</source>
@@ -43,6 +47,10 @@
     <message>
         <source>Video</source>
         <translation>Video</translation>
+    </message>
+    <message>
+        <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -82,6 +90,10 @@
     <message>
         <source>Always check this medium</source>
         <translation>Controlla sempre questo supporto</translation>
+    </message>
+    <message>
+        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

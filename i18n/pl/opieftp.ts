@@ -234,10 +234,6 @@ To musi byc puste</translation>
         <translation>Ten katalog nie istnieje</translation>
     </message>
     <message>
-        <source>About</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Rescan</source>
         <translation type="unfinished"></translation>
     </message>

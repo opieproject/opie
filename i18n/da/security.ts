@@ -98,5 +98,9 @@ Adgang nægtet</translation>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation>&lt;P&gt;Beskyttelse med kode giver en minimal sikkerhed mod almindelig adgang til denne enhed.</translation>
     </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

@@ -143,12 +143,6 @@ ntpdate </source>
     </message>
 </context>
 <context>
-    <name>Ntp</name>
-</context>
-<context>
-    <name>NtpBase</name>
-</context>
-<context>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
@@ -194,12 +188,6 @@ ntpdate </source>
         <source> seconds</source>
         <translation>FOO</translation>
     </message>
-</context>
-<context>
-    <name>SetDateTime</name>
-</context>
-<context>
-    <name>SetTime</name>
 </context>
 <context>
     <name>SettingsTabWidget</name>

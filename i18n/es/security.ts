@@ -98,5 +98,9 @@ Acceso denegado</translation>
         <source>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</source>
         <translation>&lt;P&gt;Elegir un código proporciona un mínimo nivel de protección contra accesos ocasionales al dispositivo.</translation>
     </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="unfinished">1.0.0.0/8</translation>
+    </message>
 </context>
 </TS>

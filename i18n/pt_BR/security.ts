@@ -99,5 +99,9 @@ Acesso negado</translation>
         <source>192.168.1.0/24</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>

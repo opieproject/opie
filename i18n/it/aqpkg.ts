@@ -331,31 +331,31 @@ Clicca dentro il box sulla sinistra per selezionare un pacchetto.</translation>
     </message>
     <message>
         <source>Installed To - %1</source>
-        <translation>Installato Su - %1</translation>
+        <translation type="obsolete">Installato Su - %1</translation>
     </message>
     <message>
         <source>Description - %1</source>
-        <translation>Descrizione - %1</translation>
+        <translation type="obsolete">Descrizione - %1</translation>
     </message>
     <message>
         <source>Size - %1</source>
-        <translation>Dimensione - %1</translation>
+        <translation type="obsolete">Dimensione - %1</translation>
     </message>
     <message>
         <source>Section - %1</source>
-        <translation>Sezione - %1</translation>
+        <translation type="obsolete">Sezione - %1</translation>
     </message>
     <message>
         <source>Filename - %1</source>
-        <translation>Nome File - %1</translation>
+        <translation type="obsolete">Nome File - %1</translation>
     </message>
     <message>
         <source>V. Installed - %1</source>
-        <translation>V. Installata - %1</translation>
+        <translation type="obsolete">V. Installata - %1</translation>
     </message>
     <message>
         <source>V. Available - %1</source>
-        <translation>V. Disponibile - %1</translation>
+        <translation type="obsolete">V. Disponibile - %1</translation>
     </message>
     <message>
         <source>Refreshing server package lists</source>
@@ -464,6 +464,49 @@ Sei sicuro?
     <message>
         <source>Updating Launcher...</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PackageWindow</name>
+    <message>
+        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package information is unavailable</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished">Chiudi</translation>
     </message>
 </context>
 <context>

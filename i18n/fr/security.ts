@@ -98,5 +98,9 @@ Accès refusé</translation>
         <source>192.168.1.0/24</source>
         <translation>192.168.1.0/24</translation>
     </message>
+    <message>
+        <source>1.0.0.0/8</source>
+        <translation type="unfinished">1.0.0.0/8</translation>
+    </message>
 </context>
 </TS>

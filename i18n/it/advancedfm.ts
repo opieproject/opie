@@ -14,7 +14,7 @@
 is copyright 2002 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation>Advanced FileManager
+        <translation type="obsolete">Advanced FileManager
 copyright 2002 di
 L.J.Potter &lt;llornkcor@handhelds.org&gt;
 sotto licenza GPL</translation>
@@ -117,7 +117,7 @@ sotto licenza GPL</translation>
     </message>
     <message>
         <source>About</source>
-        <translation>Informazioni</translation>
+        <translation type="obsolete">Informazioni</translation>
     </message>
     <message>
         <source>Size</source>
@@ -138,7 +138,7 @@ sotto licenza GPL</translation>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Vuoi veramente cancellare
+        <translation type="obsolete">Vuoi veramente cancellare
 </translation>
     </message>
     <message>
@@ -156,7 +156,7 @@ sotto licenza GPL</translation>
     <message>
         <source> already exists
 Do you really want to delete it?</source>
-        <translation> già esiste
+        <translation type="obsolete"> già esiste
 Vuoi veramente cancellarlo?</translation>
     </message>
     <message>
@@ -191,11 +191,11 @@ Vuoi veramente cancellarlo?</translation>
     </message>
     <message>
         <source>command failed!</source>
-        <translation>commando fallito!</translation>
+        <translation type="obsolete">commando fallito!</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="obsolete">&amp;OK</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
@@ -209,12 +209,93 @@ Vuoi veramente cancellarlo?</translation>
         <source>Ok</source>
         <translation>Ok</translation>
     </message>
+    <message>
+        <source>Advanced FileManager
+is copyright 2002-2003 by
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+and is licensed by the GPL</source>
+        <translation type="unfinished">Advanced FileManager
+copyright 2002-2003 di
+L.J.Potter &lt;llornkcor@handhelds.org&gt;
+sotto licenza GPL</translation>
+    </message>
+    <message>
+        <source>Change Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bookmark Directory</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove Current Directory from Bookmarks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1 files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete Directory?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really copy
+%1 files?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Exists!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 exists. Ok to overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Could not copy %1 to %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+exists. Ok to overwrite?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> already exists.
+Do you really want to delete it?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Salva output su file (solo nome)</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
