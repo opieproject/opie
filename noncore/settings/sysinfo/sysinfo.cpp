@@ -54,7 +54,7 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags )
     lay->addWidget( tab );
     tab->addTab( new MemoryInfo( tab ), "sysinfo/memorytabicon", tr("Memory") );
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
-    tab->addTab( new StorageInfo( tab ), "sysinfo/storagetabicon", tr("Storage") );
+    tab->addTab( new FileSysInfo( tab ), "sysinfo/storagetabicon", tr("Storage") );
 #endif
     tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon", tr("CPU") );
     if ( advanced )

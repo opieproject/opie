@@ -27,6 +27,7 @@
 #include <qlayout.h>
 #include <qpixmap.h>
 #include <qpainter.h>
+#include <qscrollview.h>
 #include <qtextstream.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
@@ -42,7 +43,15 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
 {
     setMinimumSize( 200, 150 );
 
-    QVBoxLayout *vb = new QVBoxLayout( this, 4 );
+    QVBoxLayout *tmpvb = new QVBoxLayout( this );
+    QScrollView *sv = new QScrollView( this );
+    tmpvb->addWidget( sv, 0, 0 );
+    sv->setResizePolicy( QScrollView::AutoOneFit );
+    sv->setFrameStyle( QFrame::NoFrame );
+    QWidget *container = new QWidget( sv->viewport() );
+    sv->addChild( container );
+    
+    QVBoxLayout *vb = new QVBoxLayout( container, 4 );
 
     QString kernelVersionString;
     QFile file( "/proc/version" );
@@ -78,7 +87,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QHBoxLayout *hb1 = new QHBoxLayout( vb );
     hb1->setSpacing( 2 );
 
-    QLabel *palmtopLogo = new QLabel( this );
+    QLabel *palmtopLogo = new QLabel( container );
     QImage logo1 = Resource::loadImage( "logo/opielogo" );
     logo1 = logo1.smoothScale( 50, 55 );
     QPixmap logo1Pixmap;
@@ -87,7 +96,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     palmtopLogo->setFixedSize( 60, 60 );
     hb1->addWidget( palmtopLogo, 0, Qt::AlignTop + Qt::AlignLeft );
 
-    QLabel *palmtopVersion = new QLabel( this );
+    QLabel *palmtopVersion = new QLabel( container );
     palmtopVersion->setText( palmtopVersionString  );
     hb1->addWidget( palmtopVersion, 1, Qt::AlignTop + Qt::AlignLeft );
 
@@ -95,7 +104,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QHBoxLayout *hb2 = new QHBoxLayout( vb );
     hb1->setSpacing( 2 );
 
-    QLabel *linuxLogo = new QLabel( this );
+    QLabel *linuxLogo = new QLabel( container );
     QImage logo2 = Resource::loadImage( "logo/tux-logo" );
     logo2 = logo2.smoothScale( 55, 60 );
     QPixmap logo2Pixmap;
@@ -104,7 +113,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     linuxLogo->setFixedSize( 60, 60 );
     hb2->addWidget( linuxLogo, 0, Qt::AlignTop + Qt::AlignLeft );
 
-    QLabel *kernelVersion = new QLabel( this );
+    QLabel *kernelVersion = new QLabel( container );
     kernelVersion->setText( kernelVersionString );
     hb2->addWidget( kernelVersion, 1, Qt::AlignTop + Qt::AlignLeft );
 
@@ -112,7 +121,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     QHBoxLayout *hb3 = new QHBoxLayout( vb );
     hb3->setSpacing( 2 );
 
-    QLabel *palmtopLogo3 = new QLabel( this );
+    QLabel *palmtopLogo3 = new QLabel( container );
     QImage logo3 = Resource::loadImage( "sysinfo/pda" );
     logo3 = logo3.smoothScale( 50, 55 );
     QPixmap logo3Pixmap;
@@ -131,7 +140,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     systemString.append( tr( "<p>Vendor: " ) );
     systemString.append( ODevice::inst()->vendorString() );
 
-    QLabel *systemVersion = new QLabel( this );
+    QLabel *systemVersion = new QLabel( container );
     systemVersion->setText( systemString );
     hb3->addWidget( systemVersion, 1, Qt::AlignTop + Qt::AlignLeft );
 

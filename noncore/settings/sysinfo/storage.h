@@ -30,60 +30,50 @@ class FileSystem;
 class MountInfo;
 class QVBoxLayout;
 class QWidget;
+class StorageInfo;
 
 
-class StorageInfo : public QWidget
+class FileSysInfo : public QWidget
 {
     Q_OBJECT
 public:
-    StorageInfo( QWidget *parent=0, const char *name=0 );
+    FileSysInfo( QWidget *parent=0, const char *name=0 );
 
 protected:
     void timerEvent(QTimerEvent*);
 
 private:
     void updateMounts();
-    QDict<MountInfo> disks;
-    QList<QFrame> lines;
+
+    QWidget     *container;
     QVBoxLayout *vb;
-    QWidget *container;
+    
+    StorageInfo     *storage;
+    QDict<MountInfo> disks;
+    QList<QFrame>    lines;
+
+    bool rebuildDisks;
+    
+private slots:
+    void disksChanged();
 };
 
 class MountInfo : public QWidget
 {
     Q_OBJECT
 public:
-    MountInfo( const QString &path, const QString &ttl, QWidget *parent=0, const char *name=0 );
+    MountInfo( FileSystem *filesys=0, QWidget *parent=0, const char *name=0 );
     ~MountInfo();
 
     void updateData();
+    
+    FileSystem *fs;
 
 private:
     QString title;
-    FileSystem *fs;
     QLabel *totalSize;
     GraphData *data;
     Graph *graph;
     GraphLegend *legend;
 };
-
-class FileSystem
-{
-public:
-    FileSystem( const QString &p );
-
-    void update();
-
-    const QString &path() const { return fspath; }
-    long blockSize() const { return blkSize; }
-    long totalBlocks() const { return totalBlks; }
-    long availBlocks() const { return availBlks; }
-
-private:
-    QString fspath;
-    long blkSize;
-    long totalBlks;
-    long availBlks;
-};
-
 
