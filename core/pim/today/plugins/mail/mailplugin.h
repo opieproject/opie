@@ -23,11 +23,6 @@
 #include <opie2/todayplugininterface.h>
 #include <opie2/todayconfigwidget.h>
 
-#include <qwidget.h>
-#include <qguardedptr.h>
-
-
-
 
 class MailPlugin : public TodayPluginObject {
 
@@ -47,7 +42,7 @@ public:
     void reinitialize();
 
  private:
-   QGuardedPtr<MailPluginWidget> m_widget;
+   MailPluginWidget* m_widget;
 };
 
 #endif

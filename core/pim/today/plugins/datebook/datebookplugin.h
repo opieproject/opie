@@ -22,8 +22,6 @@
 #include <opie2/oclickablelabel.h>
 #include <opie2/todayplugininterface.h>
 
-#include <qguardedptr.h>
-
 class DatebookPlugin : public TodayPluginObject {
 
 public:
@@ -42,7 +40,7 @@ public:
     void reinitialize();
 
  private:
-    QGuardedPtr<DatebookPluginWidget> m_widget;
+    DatebookPluginWidget *m_widget;
 };
 
 

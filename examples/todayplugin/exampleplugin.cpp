@@ -6,12 +6,12 @@
  */
 #include "exampleplugin.h"
 
-ExamplePlugin::ExamplePlugin() {
-    m_widget = 0l;
+ExamplePlugin::ExamplePlugin() 
+    : m_widget(0l)
+{
 }
 
 ExamplePlugin::~ExamplePlugin() {
-    delete (ExamplePluginWidget*)m_widget;
 }
 
 QString ExamplePlugin::pluginName() const {
@@ -28,9 +28,7 @@ QString ExamplePlugin::pixmapNameWidget() const {
 }
 
 QWidget* ExamplePlugin::widget( QWidget * wid ) {
-    if(!m_widget) {
-        m_widget = new ExamplePluginWidget( wid,  "Example" );
-    }
+    m_widget = new ExamplePluginWidget( wid,  "Example" );
     return m_widget;
 }
 

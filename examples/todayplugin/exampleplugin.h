@@ -9,9 +9,6 @@
 #ifndef EXAMPLE_PLUGIN_H
 #define EXAMPLE_PLUGIN_H
 
-#include <qwidget.h>
-#include <qguardedptr.h>
-
 #include <opie2/todayplugininterface.h>
 #include <opie2/todayconfigwidget.h>
 
@@ -34,9 +31,8 @@ public:
     bool excludeFromRefresh() const;
     void refresh();
     void reinitialize();
-
- private:
-   QGuardedPtr<ExamplePluginWidget> m_widget;
+private:    
+    ExamplePluginWidget *m_widget;
 };
 
 #endif

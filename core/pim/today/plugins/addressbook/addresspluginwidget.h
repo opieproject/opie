@@ -34,8 +34,8 @@ public:
     AddressBookPluginWidget( QWidget *parent,  const char *name );
     ~AddressBookPluginWidget();
 
-    void reinitialize();
 public slots:
+    void reinitialize();
     void refresh( const Opie::OPimContactAccess* db );
 
 protected slots:

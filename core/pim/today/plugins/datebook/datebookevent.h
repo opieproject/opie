@@ -23,7 +23,6 @@
 
 
 class DateBookEvent: public Opie::Ui::OClickableLabel {
-
      Q_OBJECT
 
 public:

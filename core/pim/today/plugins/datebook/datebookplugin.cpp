@@ -18,11 +18,10 @@
 #include "datebookpluginconfig.h"
 
 
-DatebookPlugin::DatebookPlugin()  {
+DatebookPlugin::DatebookPlugin() {
 }
 
 DatebookPlugin::~DatebookPlugin() {
-    delete (DatebookPluginWidget*)m_widget;
 }
 
 QString DatebookPlugin::pluginName() const {
@@ -38,9 +37,7 @@ QString DatebookPlugin::pixmapNameWidget() const {
 }
 
 QWidget* DatebookPlugin::widget( QWidget* wid ) {
-    if(!m_widget) {
-        m_widget = new DatebookPluginWidget( wid,  "Datebook" );
-    }
+    m_widget = new DatebookPluginWidget( wid,  "Datebook" );
     return m_widget;
 }
 

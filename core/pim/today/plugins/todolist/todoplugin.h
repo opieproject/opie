@@ -46,7 +46,7 @@ public:
     void reinitialize();
 
  private:
-    QGuardedPtr<TodolistPluginWidget> m_widget;
+    TodolistPluginWidget* m_widget;
 };
 
 #endif

@@ -22,7 +22,6 @@ MailPlugin::MailPlugin() {
 }
 
 MailPlugin::~MailPlugin() {
-    delete (MailPluginWidget*)m_widget;
 }
 
 QString MailPlugin::pluginName() const {
@@ -38,9 +37,7 @@ QString MailPlugin::pixmapNameWidget() const {
 }
 
 QWidget* MailPlugin::widget( QWidget * wid ) {
-    if(!m_widget) {
-        m_widget = new MailPluginWidget( wid,  "Datebook" );
-    }
+    m_widget = new MailPluginWidget( wid,  "Datebook" );
     return m_widget;
 }
 

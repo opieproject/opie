@@ -56,7 +56,7 @@ QString FortunePlugin::pixmapNameConfig() const
 TodayConfigWidget* FortunePlugin::configWidget( QWidget* /*wid*/ )
 {
 //    return new FortunePluginConfig( wid , "Fortune" );
-	return NULL;
+	return 0l;
 }
 
 QString FortunePlugin::appName() const

@@ -20,9 +20,6 @@
 #include <opie2/oclickablelabel.h>
 #include <opie2/todayplugininterface.h>
 
-#include <qstring.h>
-#include <qwidget.h>
-
 class FortunePlugin : public TodayPluginObject
 {
 

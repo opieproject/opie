@@ -17,11 +17,12 @@
 #include "todoplugin.h"
 #include "todopluginconfig.h"
 
-TodolistPlugin::TodolistPlugin() {
+TodolistPlugin::TodolistPlugin() 
+    : m_widget(0l)
+{
 }
 
 TodolistPlugin::~TodolistPlugin() {
-    delete (TodolistPluginWidget*)m_widget;
 }
 
 QString TodolistPlugin::pluginName() const {
@@ -37,9 +38,7 @@ QString TodolistPlugin::pixmapNameWidget() const {
 }
 
 QWidget* TodolistPlugin::widget( QWidget *wid ) {
-       if(!m_widget) {
-        m_widget = new TodolistPluginWidget( wid, "Todolist" );
-       }
+    m_widget = new TodolistPluginWidget( wid, "Todolist" );
     return m_widget;
 }
 

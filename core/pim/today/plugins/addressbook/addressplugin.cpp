@@ -65,10 +65,12 @@ bool AddressBookPlugin::excludeFromRefresh() const {
 
 void AddressBookPlugin::refresh()
 {
-    m_abWidget->refresh( NULL );
+    if(m_abWidget)
+        m_abWidget->refresh( 0l );
 }
 
 void AddressBookPlugin::reinitialize()
 {
-    m_abWidget->reinitialize();
+    if(m_abWidget)
+        m_abWidget->reinitialize();
 }
