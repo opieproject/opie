@@ -15,12 +15,20 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 #include <qmime.h>
-#include <qsocket.h>
+//#include <qsocket.h>
 #include <qstring.h>
 #include <qdragobject.h>
 #include <qtextbrowser.h>
+#include <qmessagebox.h>
 
 #include <stdio.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <unistd.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <arpa/inet.h>
 
 #include "httpcomm.h"
 
@@ -31,9 +39,13 @@ public:
 	const QMimeSource * data(const QString &abs_name) const;
 	const QMimeSource * data(const QString &abs_or_rel_name, const QString & context) const;
 private:
-	QSocket *socket;
+//	QSocket *socket;
 	HttpComm *comm;
 	QTextDrag *text;
 	QImageDrag *image;
 	QTextBrowser *browser;
+	
+	const QByteArray processResponse( int sockfd, bool &isText) const;
+	const QByteArray recieveNormal( int sockfd, int dataLen ) const;
+	const QByteArray recieveChunked( int sockfd ) const;
 };
