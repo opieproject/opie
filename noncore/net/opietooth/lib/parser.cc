@@ -13,20 +13,29 @@ namespace {
     // @eturn 13398
     // tactic find " (
 int convert( const QString& line, QString& ret ) {
+//    qWarning("called");
     ret = QString::null;
     int i = 0;
     int pos = line.findRev("\" (");
     if ( pos > 0 ) { // it shouldn't be at pos 0
-        ret = line.left(pos-1 ).stripWhiteSpace();
-        qWarning("ret: %s",  ret.latin1() );
+        ret = line.left(pos ).stripWhiteSpace();
+        //      qWarning("ret: %s",  ret.latin1() );
         ret = ret.replace(QRegExp("[\"]"), "");
-        qWarning("ret: %s", ret.latin1() );
-        QString dummy = line.mid(pos + 4 );
-        qWarning("dummy: %s",  dummy.latin1() );
-        dummy = dummy.remove( dummy.length() -1, 1 ); // remove the (
+        //qWarning("ret: %s", ret.latin1() );
+        QString dummy = line.mid(pos + 5 );
+        //qWarning("dummy: %s",  dummy.latin1() );
+        dummy = dummy.replace(QRegExp("[)]"), "");
+        //qWarning("dummy: %s", dummy.latin1() );
+//        dummy = dummy.remove( dummy.length() -2, 1 ); // remove the )
         bool ok;
         i = dummy.toInt(&ok, 16 );
+        //if (ok ) {
+        //     qWarning("converted %d",  i);
+        //}else qWarning("failed" );
+        //qWarning("exiting");
+        return i;
     }
+    //qWarning("output %d", i );
     return i;
 }
 
@@ -45,15 +54,18 @@ Services::ValueList Parser::services() const {
 void Parser::parse( const QString& string) {
     m_list.clear();
     m_complete = true;
-    QStringList list = QStringList::split('\n', string );
+    QStringList list = QStringList::split('\n', string,TRUE );
     QStringList::Iterator it;
     for (it = list.begin(); it != list.end(); ++it ) {
+        qWarning("line:%s:line", (*it).latin1() );
         if ( (*it).startsWith("Browsing") ) continue;
 
-        if ( (*it).isEmpty() ) { // line is empty because a new Service begins
-        // now see if complete and add
+        if ( (*it).stripWhiteSpace().isEmpty() ) { // line is empty because a new Service begins
+            qWarning("could add");
+            // now see if complete and add
             if (m_complete ) {
-                m_list.append( m_item );
+                if (!m_item.serviceName().isEmpty() )
+                    m_list.append( m_item );
                 Services serv;
                 m_item = serv;
                 m_complete = true;
@@ -68,7 +80,16 @@ void Parser::parse( const QString& string) {
     }
     // missed the last one
     if (m_complete) {
-        m_list.append(m_item );
+        qWarning("adding");
+        if (!m_item.serviceName().isEmpty() )
+            m_list.append(m_item );
+    }
+    QValueList<Services>::Iterator it2;
+
+    if (m_list.isEmpty() )
+        qWarning("m_list is empty");
+    for (it2 = m_list.begin(); it2 != m_list.end(); ++it2 ) {
+        qWarning("name %s", (*it2).serviceName().latin1() );
     }
 }
 bool Parser::parseName( const QString& str) {
@@ -83,13 +104,15 @@ bool Parser::parseRecHandle( const QString& str) {
     if (str.startsWith("Service RecHandle:" ) ) {
         QString out = str.mid(18 ).stripWhiteSpace();
         qWarning("out %s", out.latin1() );
-        int value = out.toInt(&m_ok, 16 );
+        int value = out.mid(2).toInt(&m_ok, 16 );
         if (m_ok && (value != -1) )
             m_complete = true;
         else
             m_complete = false;
-        return true;
+        qWarning("rec handle %d",  value);
         m_item.setRecHandle( value );
+        return true;
+
     }
     return false;
 }

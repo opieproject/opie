@@ -106,11 +106,13 @@ void Manager::searchServices( const QString& remDevice ){
     OProcess *m_sdp =new OProcess();
     *m_sdp << "sdptool" << "browse" << remDevice;
     m_sdp->setName( remDevice.latin1() );
+    qWarning("search Services for %s", remDevice.latin1() );
     connect(m_sdp, SIGNAL(processExited(OProcess*) ),
             this, SLOT(slotSDPExited(OProcess* ) ) );
     connect(m_sdp, SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
             this, SLOT(slotSDPOut(OProcess*, char*, int) ) );
     if (!m_sdp->start(OProcess::NotifyOnExit,  OProcess::AllOutput) ) {
+        qWarning("could not start sdptool" );
         delete m_sdp;
         Services::ValueList list;
         emit foundServices( remDevice, list );
@@ -137,21 +139,25 @@ void Manager::slotProcessExited(OProcess* proc ) {
 void Manager::slotSDPOut(OProcess* proc, char* ch, int len)
 {
     QCString str(ch,  len+1 );
+    qWarning("SDP:%s", str.data() );
     QMap<QString, QString>::Iterator it;
     it = m_out.find(proc->name() );
+    QString string;
     if ( it != m_out.end() ) {
-        QString string = it.data();
-        string.append( str );
-        m_out.replace( proc->name(), string );
+        string = it.data();
     }
+    string.append( str );
+    m_out.replace( proc->name(), string );
 
 }
 void Manager::slotSDPExited( OProcess* proc)
 {
+    qWarning("proc name %s", proc->name() );
     Services::ValueList  list;
     if (proc->normalExit()  ) {
         QMap<QString, QString>::Iterator it = m_out.find( proc->name() );
         if ( it != m_out.end() ) {
+	    qWarning("found process" );
             list = parseSDPOutput( it.data() );
             m_out.remove( it );
         }
@@ -161,6 +167,7 @@ void Manager::slotSDPExited( OProcess* proc)
 }
 Services::ValueList Manager::parseSDPOutput( const QString& out ) {
     Services::ValueList list;
+    qWarning("parsing output" );
     Parser parser( out );
     list = parser.services();
     return list;
