@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment=Mobile Messaging
 Exec=mobilemsg
-Icon=Mobilemsg
+Icon=mobilemsg/mobilemsg
 Type=Application
 Name=Mobile Messaging
 Name[pt_BR]=Mensagens Móveis
