@@ -9,6 +9,20 @@ Types:
 -Bluetooth
 -IPChains?
 
+When entering the wep keys, I think we should be able to see what we are typing, but not to show the keys when the field is not in focus.   Otherwise, it's real hard to know if you typed the right wep key, and you have to look in the actual wireless.opts file to really know if you did it right.
+
+When Zaurus is in cradle, USB interface is connected and reported as UP by the Network Setting application, clicking on Information button does not popup a window. It used to work before, but now it's broken in the latest feed...
+
+-30-second pause closing NetSetting's Configure screen   
+
+-Default Network Type for 802.11b should be Infrastructure     
+
+-After configuring NetworkSettings for the first time, the WEP key fails to
+be iwconfig'd to the eth0 interface (Symbol 802.11b card on my Z).  
+
+-Z hangs on PCMCIA-eject of Symbol 802.11b card (card seems to be in an odd
+state after first boot following reflash; see Additional Info)
+
 test WEP
 Add WEP transimtion rate
 1 or 2
