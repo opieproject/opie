@@ -38,6 +38,9 @@ void ProfileManager::load() {
     }
 
 }
+void ProfileManager::clear() {
+    m_list.clear();
+}
 Profile::ValueList ProfileManager::all()const {
     return m_list;
 }
@@ -55,8 +58,8 @@ Session* ProfileManager::fromProfile( const Profile& prof) {
     return session;
 }
 void ProfileManager::save(  ) {
-    m_list.clear();
     ProfileConfig conf("opie-console-profiles");
+    conf.clearAll();
     Session* se= 0l;
     // FIXME save
 }

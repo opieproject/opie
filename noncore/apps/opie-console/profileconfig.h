@@ -10,6 +10,10 @@ public:
     ProfileConfig( const QString& prof );
     ~ProfileConfig();
     QStringList groups()const;
+    /**
+     * return the items in the group
+     */
+    QMap<QString, QString> items(const QString& group)const;
     void clearGroup( const QString& );
     void clearAll();
 

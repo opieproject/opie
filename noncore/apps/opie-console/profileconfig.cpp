@@ -33,3 +33,13 @@ void ProfileConfig::clearGroup( const QString& str ) {
     Config::clearGroup();
     setGroup( cur );
 }
+QMap<QString, QString> ProfileConfig::items( const QString& group )const {
+    QMap<QString, QString> map;
+    QMap<QString, ConfigGroup>::ConstIterator it;
+    it = Config::groups.find( group );
+
+    if (it != Config::groups.end() )
+        map = it.data();
+
+    return map;
+}
