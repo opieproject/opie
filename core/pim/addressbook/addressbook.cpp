@@ -676,6 +676,9 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 void AddressbookWindow::editEntry( EntryMode entryMode )
 {
 	OContact entry;
+
+	//  __asm__("int3");
+
 	if ( !abEditor ) {
 		abEditor = new ContactEditor( entry, this, "editor" );
 	}
