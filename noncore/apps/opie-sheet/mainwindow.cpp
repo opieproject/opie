@@ -537,7 +537,7 @@ void MainWindow::slotHelpAbout()
   dialogAbout.resize(width()-40, height()-80);
   dialogAbout.setCaption(tr("About Opie Sheet"));
 
-  QLabel label(tr("Opie Sheet\nSpreadsheet Software for Opie\nQWDC Beta Winner (as Sheet/Qt)\n\nDeveloped by: Serdar Ozler\nVersion: 1.0.1 (Final)\nRelease Date: July 4, 2002\n\nThis product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.\n\nhttp://qtopia.sitebest.com"), &dialogAbout);
+  QLabel label(tr("Opie Sheet\nSpreadsheet Software for Opie\nQWDC Beta Winner (as Sheet/Qt)\n\nDeveloped by: Serdar Ozler\nRelease 1.0.1\nRelease Date: July 04, 2002\n\nThis product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.\n\nhttp://qtopia.sitebest.com"), &dialogAbout);
   label.setGeometry(dialogAbout.rect());
   label.setAlignment(Qt::AlignCenter | Qt::WordBreak);
 
