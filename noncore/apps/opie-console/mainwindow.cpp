@@ -450,7 +450,14 @@ void MainWindow::slotConnect() {
         else {
             m_connect->setEnabled( false );
             m_disconnect->setEnabled( true );
-            m_transfer->setEnabled( true );
+
+            // if it does not support file transfer, disable the menu entry
+            if ( ( m_curSession->layer() )->supports()[1] == 0 ) {
+                m_transfer->setEnabled( false );
+            } else {
+                m_transfer->setEnabled( true );
+            }
+
             m_recordScript->setEnabled( true );
             m_scripts->setItemEnabled(m_runScript_id, true);
         }
@@ -569,7 +576,6 @@ void MainWindow::create( const Profile& prof ) {
     if (prof.autoConnect()) {
         slotConnect();
     }
-
 
 
     QWidget *w = currentSession()->widget();
