@@ -1,13 +1,14 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>VolumeControl</name>
     <message>
         <source>Enable Sounds for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Authoriser le sond pour:</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Son de l&apos;alarme</translation>
     </message>
     <message>
         <source>Key Clicks</source>

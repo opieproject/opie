@@ -1,21 +1,22 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AddressBookPluginConfig</name>
     <message>
         <source>Max Lines: </source>
-        <translation type="unfinished"></translation>
+        <translation>Lignes Max:</translation>
     </message>
     <message>
         <source>Set the maximum number of lines that should be shown for each anniversaries/birthdays</source>
-        <translation type="unfinished"></translation>
+        <translation>Définit le maximum de ligne qui devront être affichées pour chaque Date de naissance/Anniversaire</translation>
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation type="unfinished"></translation>
+        <translation>Couper la ligne après X caractères:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished"></translation>
+        <translation>Après combien de caractères doit-être coupé l&apos;inforamtion sur la tâche</translation>
     </message>
     <message>
         <source>Days look ahead: </source>
@@ -27,15 +28,15 @@
     </message>
     <message>
         <source>To activate settings: Restart application !</source>
-        <translation type="unfinished"></translation>
+        <translation>Pour activer les changement: Redémarrer l&apos;application!</translation>
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation type="unfinished"></translation>
+        <translation>Définition des couleurs des titres:</translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs pour les titres!</translation>
     </message>
     <message>
         <source>Set Entry Color: </source>
@@ -43,16 +44,16 @@
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
-        <translation type="unfinished"></translation>
+        <translation>Cette couleur sera utilisée pour afficher les dates de Naissances/Anniversaire!</translation>
     </message>
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Définir </translation>
     </message>
     <message>
         <source> days: </source>
-        <translation type="unfinished"></translation>
+        <translation>jours:</translation>
     </message>
     <message>
         <source>This urgent color will be used if we are close to the event !</source>

@@ -1,13 +1,14 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>SuspendApplet</name>
     <message>
         <source>Suspend shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspendre les raccoucis</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspendre</translation>
     </message>
 </context>
 </TS>
