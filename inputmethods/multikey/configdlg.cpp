@@ -253,6 +253,7 @@ void ConfigDlg::keyColorButtonClicked() {
     color[2].setNum(newcolor.blue());
 
     config.writeEntry("keycolor", color, QChar(','));
+    config.write();
     
     key_color_button->setBackgroundColor(newcolor);
     emit reloadKeyboard();

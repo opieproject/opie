@@ -548,7 +548,7 @@ void Keyboard::setMapToFile(QString map) {
 
 }
 
-/* Keybaord::setColor {{{1 */
+/* Keybaord::reloadKeyboard {{{1 */
 void Keyboard::reloadKeyboard() {
 
     // reload colors and redraw
