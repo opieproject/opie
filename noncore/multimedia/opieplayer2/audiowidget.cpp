@@ -576,7 +576,9 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
           //            toggleButton(4);
           break;
       case Key_Escape: {
-#if defined(QT_QWS_IPAQ)
+/*
+ * author pleas tell me where the i come from .-)
+   #if defined(QT_QWS_IPAQ)
           if( mediaPlayerState->isPaused ) {
               setToggleButton( i, FALSE );
               mediaPlayerState->setPaused( FALSE );
@@ -585,6 +587,7 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
               mediaPlayerState->setPaused( TRUE );
           }
 #endif
+*/
       }
           break;
 
