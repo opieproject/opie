@@ -7,7 +7,7 @@
 #include <kstddirs.h>
 #elif defined( QPE_PORT )
 #include <qpe/qpeapplication.h>
-#include "config.h"
+#include <qpe/config.h>
 #endif
 
 #include <qcolor.h>

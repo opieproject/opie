@@ -13,7 +13,7 @@
 #elif defined( QPE_PORT )
 #include <qaccel.h>
 #include <qpe/qpeapplication.h>
-#include "config.h"
+#include <qpe/config.h>
 #include "keys.h"
 #endif
 
@@ -193,11 +193,13 @@ void Keys::init()
 
 void Keys::ok()
 {
+  /*
     APP_CONFIG_BEGIN( cfg );
     cfg->writeEntry("upKey",   (const char*) labels[0]->text() );
     cfg->writeEntry("downKey", (const char*) labels[1]->text() );
     cfg->writeEntry("leftKey", (const char*) labels[2]->text() );
     cfg->writeEntry("rightKey",(const char*) labels[3]->text() );
     APP_CONFIG_END( cfg );
+  */
     accept();
 }
