@@ -1,8 +1,8 @@
 /****************************************************************************
 ** HttpComm meta object code from reading C++ file 'httpcomm.h'
 **
-** Created: Thu Jun 27 17:57:53 2002
-**      by: The Qt MOC ($Id: moc_httpcomm.cpp,v 1.1 2002-07-19 18:37:09 spiralman Exp $)
+** Created: Fri Jul 19 21:08:51 2002
+**      by: The Qt MOC ($Id: moc_httpcomm.cpp,v 1.2 2002-07-20 03:10:26 llornkcor Exp $)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/

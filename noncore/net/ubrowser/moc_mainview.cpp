@@ -1,8 +1,8 @@
 /****************************************************************************
 ** MainView meta object code from reading C++ file 'mainview.h'
 **
-** Created: Mon Jun 10 19:05:57 2002
-**      by: The Qt MOC ($Id: moc_mainview.cpp,v 1.1 2002-07-19 18:37:09 spiralman Exp $)
+** Created: Fri Jul 19 21:08:51 2002
+**      by: The Qt MOC ($Id: moc_mainview.cpp,v 1.2 2002-07-20 03:10:26 llornkcor Exp $)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
