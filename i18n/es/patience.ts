@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>&amp;Change Card Backs</source>
-        <translation>&amp;Cambiar reverso cartas</translation>
+        <translation>Cambiar &amp;reverso cartas</translation>
     </message>
     <message>
         <source>&amp;Snap To Position</source>
-        <translation>&amp;Agregar a la posición</translation>
+        <translation>&amp;Saltar a la posición</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Snap To Position</source>
-        <translation>Agregar a la posición</translation>
+        <translation>Saltar a la posición</translation>
     </message>
     <message>
         <source>Turn One Card</source>
@@ -59,11 +59,11 @@
     </message>
     <message>
         <source>Chicane</source>
-        <translation type="unfinished"></translation>
+        <translation>Trampa</translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation type="unfinished"></translation>
+        <translation>Arpa</translation>
     </message>
 </context>
 </TS>

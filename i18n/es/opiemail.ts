@@ -18,7 +18,7 @@
     <name>Composer</name>
     <message>
         <source>Form1</source>
-        <translation>Form1</translation>
+        <translation>Impreso1</translation>
     </message>
     <message>
         <source>CC</source>
@@ -339,7 +339,7 @@ Su correos se borrarán.</translation>
     <name>SplitterWidgetBase</name>
     <message>
         <source>Form1</source>
-        <translation>Form1</translation>
+        <translation>Impreso1</translation>
     </message>
 </context>
 </TS>

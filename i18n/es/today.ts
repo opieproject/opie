@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Owned by </source>
-        <translation>Perteneciente a</translation>
+        <translation>Pertenece a </translation>
     </message>
     <message>
         <source>Please fill out the business card</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
-        <translation>&lt;b&gt;%1&lt;/b&gt; nuevo(s) correo(s), &lt;b&gt;%2&lt;/b&gt; correo(s) para enviar</translation>
+        <translation>&lt;b&gt;%1&lt;/b&gt; correos nuevos, &lt;b&gt;%2&lt;/b&gt; salientes</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
@@ -59,15 +59,14 @@
         <source>Should the 
 location 
 be shown?</source>
-        <translation>¿Mostrar 
-el lugar 
-de las citas?</translation>
+        <translation>¿Debo mostrar el
+lugar de las citas?</translation>
     </message>
     <message>
         <source>Should the notes 
 be shown?</source>
-        <translation>¿Mostrar las notas 
-de las citas?</translation>
+        <translation>¿Debo mostrar las
+notas de las citas?</translation>
     </message>
     <message>
         <source>Show only later
@@ -109,8 +108,8 @@ cuántas letras</translation>
 autostarted on
 resume? (Opie only)</source>
         <translation>¿Arrancar Hoy
-automáticamente
-al encender? (sólo Opie)</translation>
+al encender?
+(sólo Opie)</translation>
     </message>
     <message>
         <source>Activate the  

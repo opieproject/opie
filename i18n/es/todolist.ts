@@ -58,31 +58,31 @@
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Progreso:</translation>
     </message>
     <message>
         <source>0%</source>
-        <translation type="unfinished"></translation>
+        <translation>0%</translation>
     </message>
     <message>
         <source>20%</source>
-        <translation type="unfinished"></translation>
+        <translation>20%</translation>
     </message>
     <message>
         <source>40%</source>
-        <translation type="unfinished"></translation>
+        <translation>40%</translation>
     </message>
     <message>
         <source>60%</source>
-        <translation type="unfinished"></translation>
+        <translation>60%</translation>
     </message>
     <message>
         <source>80%</source>
-        <translation type="unfinished"></translation>
+        <translation>80%</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
 </context>
 <context>
