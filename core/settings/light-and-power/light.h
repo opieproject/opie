@@ -56,7 +56,7 @@ protected slots:
 private:
     int m_bres;
     int m_cres;
-    int m_havecontrast;
+    int m_oldcontrast;
     QTimer *m_resettimer;
     QStringList m_sensordata;
     QStringList m_sensordata_ac;
