@@ -283,6 +283,7 @@ void MediaPlayer::timerEvent( QTimerEvent * ) {
 
 
 void MediaPlayer::blank( bool b ) {
+// ### FIXME use   ODevice::inst()->setDisplayStatus( b );
     fd=open("/dev/fb0",O_RDWR);
 #ifdef QT_QWS_SL5XXX
     fl= open( "/dev/fl", O_RDWR );
