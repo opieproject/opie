@@ -4,7 +4,7 @@ SOURCES		= ledmeter.cpp  toplevel.cpp  view.cpp main.cpp
 TARGET		= qasteroids
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 
 
 
