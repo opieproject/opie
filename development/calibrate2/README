@@ -1,0 +1,13 @@
+I had problems with a swapped x/y axis when I moved to libts and calibrated
+using opie-calibrate.
+
+When I uses ts_calibrate from tslib-tools, the x/y-axis were correct.
+
+So I used tslib-tools' ts_calibate.c as a template to write a newer opie-calibrate
+tools. It works for me so far, now it would be helpful to find out if it works
+for other devices equally well.
+
+CAVEAT: in Qt/E src/kernel/qwsmouse_qws.cpp there is no direct access to
+the a,b,c d,e,f and s variables, not even via readCalibration() because their're
+protected. So you basically have to restart Opie after calibrating, which I'm
+doing (yet).
