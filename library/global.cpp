@@ -50,26 +50,6 @@
 
 #include <qfile.h>
 
-namespace {
-  // checks if the storage should be searched
-  bool checkStorage(const QString &path ){ // this is a small Config replacement cause config is too limited -zecke
-    QFile file(path );
-    if(!file.open(IO_ReadOnly ) )
-       return true;
-
-    QByteArray array = file.readAll();
-    QStringList list = QStringList::split('\n', QString( array ) );
-    for(QStringList::Iterator it = list.begin(); it != list.end(); ++it ){
-      if( (*it).startsWith("check = 0" ) ){
-	return false;
-      }else if( (*it).startsWith("check = 1" ) ){
-	return true;
-      }
-    }
-    return true;
-  }
-}
-
 //#include "quickexec_p.h"
 
 class Emitter : public QObject {
@@ -77,11 +57,11 @@ class Emitter : public QObject {
 public:
     Emitter( QWidget* receiver, const QString& document )
     {
-	connect(this, SIGNAL(setDocument(const QString&)),
-	    receiver, SLOT(setDocument(const QString&)));
-	emit setDocument(document);
-	disconnect(this, SIGNAL(setDocument(const QString&)),
-	       receiver, SLOT(setDocument(const QString&)));
+    connect(this, SIGNAL(setDocument(const QString&)),
+        receiver, SLOT(setDocument(const QString&)));
+    emit setDocument(document);
+    disconnect(this, SIGNAL(setDocument(const QString&)),
+           receiver, SLOT(setDocument(const QString&)));
     }
 
 signals:
@@ -110,7 +90,7 @@ StartingAppList::StartingAppList( QObject *parent, const char* name )
 {
 #if QT_VERSION >= 232 && defined(QWS)
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
-	     this, SLOT( handleNewChannel(const QString&)) );
+         this, SLOT( handleNewChannel(const QString&)) );
 #endif
     dict.setAutoDelete( TRUE );
 }
@@ -119,7 +99,7 @@ void StartingAppList::add( const QString& name )
 {
 #if QT_VERSION >= 232  && !defined(QT_NO_COP)
     if ( !appl )
-	appl = new StartingAppList;
+    appl = new StartingAppList;
     QTime *t = new QTime;
     t->start();
     appl->dict.insert( "QPE/Application/" + name, t );
@@ -130,15 +110,15 @@ bool StartingAppList::isStarting( const QString name )
 {
 #if QT_VERSION >= 232  && !defined(QT_NO_COP)
     if ( appl ) {
-	QTime *t  = appl->dict.find( "QPE/Application/" + name );
-	if ( !t )
-	    return FALSE;
-	if ( t->elapsed() > 10000 ) {
-	    // timeout in case of crash or something
-	    appl->dict.remove( "QPE/Application/" + name );
-	    return FALSE;
-	}
-	return TRUE;
+    QTime *t  = appl->dict.find( "QPE/Application/" + name );
+    if ( !t )
+        return FALSE;
+    if ( t->elapsed() > 10000 ) {
+        // timeout in case of crash or something
+        appl->dict.remove( "QPE/Application/" + name );
+        return FALSE;
+    }
+    return TRUE;
     }
 #endif
     return FALSE;
@@ -238,39 +218,39 @@ Global::Global()
 const QDawg& Global::fixedDawg()
 {
     if ( !fixed_dawg ) {
-	if ( !docDirCreated )
-	    createDocDir();
+    if ( !docDirCreated )
+        createDocDir();
 
-	fixed_dawg = new QDawg;
-	QString dawgfilename = dictDir() + "/dawg";
-	QString words_lang;
-	QStringList langs = Global::languageList();
-	for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
-	    QString lang = *it;
-	    words_lang = dictDir() + "/words." + lang;
-	    QString dawgfilename_lang = dawgfilename + "." + lang;
-	    if ( QFile::exists(dawgfilename_lang) ||
-		 QFile::exists(words_lang) ) {
-		dawgfilename = dawgfilename_lang;
-		break;
-	    }
-	}
-	QFile dawgfile(dawgfilename);
+    fixed_dawg = new QDawg;
+    QString dawgfilename = dictDir() + "/dawg";
+    QString words_lang;
+    QStringList langs = Global::languageList();
+    for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
+        QString lang = *it;
+        words_lang = dictDir() + "/words." + lang;
+        QString dawgfilename_lang = dawgfilename + "." + lang;
+        if ( QFile::exists(dawgfilename_lang) ||
+         QFile::exists(words_lang) ) {
+        dawgfilename = dawgfilename_lang;
+        break;
+        }
+    }
+    QFile dawgfile(dawgfilename);
 
-	if ( !dawgfile.exists() ) {
-	    QString fn = dictDir() + "/words";
-	    if ( QFile::exists(words_lang) )
-		fn = words_lang;
-	    QFile in(fn);
-	    if ( in.open(IO_ReadOnly) ) {
-		fixed_dawg->createFromWords(&in);
-		dawgfile.open(IO_WriteOnly);
-		fixed_dawg->write(&dawgfile);
-		dawgfile.close();
-	    }
-	} else {
-	    fixed_dawg->readFile(dawgfilename);
-	}
+    if ( !dawgfile.exists() ) {
+        QString fn = dictDir() + "/words";
+        if ( QFile::exists(words_lang) )
+        fn = words_lang;
+        QFile in(fn);
+        if ( in.open(IO_ReadOnly) ) {
+        fixed_dawg->createFromWords(&in);
+        dawgfile.open(IO_WriteOnly);
+        fixed_dawg->write(&dawgfile);
+        dawgfile.close();
+        }
+    } else {
+        fixed_dawg->readFile(dawgfilename);
+    }
     }
 
     return *fixed_dawg;
@@ -297,15 +277,15 @@ const QDawg& Global::dawg(const QString& name)
 {
     createDocDir();
     if ( !named_dawg )
-	named_dawg = new QDict<QDawg>;
+    named_dawg = new QDict<QDawg>;
     QDawg* r = named_dawg->find(name);
     if ( !r ) {
-	r = new QDawg;
-	named_dawg->insert(name,r);
-	QString dawgfilename = applicationFileName("Dictionary", name ) + ".dawg";
-	QFile dawgfile(dawgfilename);
-	if ( dawgfile.open(IO_ReadOnly) )
-	    r->readFile(dawgfilename);
+    r = new QDawg;
+    named_dawg->insert(name,r);
+    QString dawgfilename = applicationFileName("Dictionary", name ) + ".dawg";
+    QFile dawgfile(dawgfilename);
+    if ( dawgfile.open(IO_ReadOnly) )
+        r->readFile(dawgfilename);
     }
     return *r;
 }
@@ -340,8 +320,8 @@ void Global::addWords(const QString& dictname, const QStringList& wordlist)
     QString dawgfilename = applicationFileName("Dictionary", dictname) + ".dawg";
     QFile dawgfile(dawgfilename);
     if ( dawgfile.open(IO_WriteOnly) ) {
-	d.write(&dawgfile);
-	dawgfile.close();
+    d.write(&dawgfile);
+    dawgfile.close();
     }
 
     // #### Re-read the dawg here if we use mmap().
@@ -363,12 +343,12 @@ QString Global::applicationFileName(const QString& appname, const QString& filen
     QString r = getenv("HOME");
     r += "/Applications/";
     if ( !QFile::exists( r ) )
-	if ( d.mkdir(r) == false )
-	    return QString::null;
+    if ( d.mkdir(r) == false )
+        return QString::null;
     r += appname;
     if ( !QFile::exists( r ) )
-	if ( d.mkdir(r) == false )
-	    return QString::null;
+    if ( d.mkdir(r) == false )
+        return QString::null;
     r += "/"; r += filename;
     return r;
 }
@@ -379,8 +359,8 @@ QString Global::applicationFileName(const QString& appname, const QString& filen
 void Global::createDocDir()
 {
     if ( !docDirCreated ) {
-	docDirCreated = TRUE;
-	mkdir( QPEApplication::documentDir().latin1(), 0755 );
+    docDirCreated = TRUE;
+    mkdir( QPEApplication::documentDir().latin1(), 0755 );
     }
 }
 
@@ -470,11 +450,11 @@ void Global::hideInputMethod()
 bool Global::isBuiltinCommand( const QString &name )
 {
     if(!builtin)
-	return FALSE; // yes, it can happen
+    return FALSE; // yes, it can happen
     for (int i = 0; builtin[i].file; i++) {
-	if ( builtin[i].file == name ) {
-	    return TRUE;
-	}
+    if ( builtin[i].file == name ) {
+        return TRUE;
+    }
     }
     return FALSE;
 }
@@ -494,14 +474,14 @@ QGuardedPtr<QWidget> *Global::running=0;
 void Global::setBuiltinCommands( Command* list )
 {
     if ( running )
-	delete [] running;
+    delete [] running;
 
     builtin = list;
     int count = 0;
     if (!builtin)
-	return;
+    return;
     while ( builtin[count].file )
-	count++;
+    count++;
 
     running = new QGuardedPtr<QWidget> [ count ];
 }
@@ -520,12 +500,12 @@ void Global::setDocument( QWidget* receiver, const QString& document )
 bool Global::terminateBuiltin( const QString& n )
 {
     if (!builtin)
-	return FALSE;
+    return FALSE;
     for (int i = 0; builtin[i].file; i++) {
-	if ( builtin[i].file == n ) {
-	    delete running[i];
-	    return TRUE;
-	}
+    if ( builtin[i].file == n ) {
+        delete running[i];
+        return TRUE;
+    }
     }
     return FALSE;
 }
@@ -540,7 +520,7 @@ void Global::terminate( const AppLnk* app )
 #ifndef QT_NO_COP
     QCString channel = "QPE/Application/" + app->exec().utf8();
     if ( QCopChannel::isRegistered(channel) ) {
-	QCopEnvelope e(channel, "quit()");
+    QCopEnvelope e(channel, "quit()");
     }
 #endif
 }
@@ -562,12 +542,12 @@ void Global::invoke(const QString &c)
     // see if the application is already running
     // XXX should lock file /tmp/qcop-msg-ap
     if ( QCopChannel::isRegistered( ("QPE/Application/" + ap).latin1() ) ) {
-	// If the channel is already register, the app is already running, so show it.
-	{ QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
+    // If the channel is already register, the app is already running, so show it.
+    { QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
 
-	//QCopEnvelope e("QPE/System", "notBusy(QString)" );
-	//e << ap;
-	return;
+    //QCopEnvelope e("QPE/System", "notBusy(QString)" );
+    //e << ap;
+    return;
     }
     // XXX should unlock file /tmp/qcop-msg-ap
     //see if it is being started
@@ -577,9 +557,9 @@ void Global::invoke(const QString &c)
         // Real cause is that ::execute is called twice for document tab. But it would need some larger changes
         // to fix that, and with future syncs with qtopia 1.6 it will change anyway big time since somebody there
         // had the idea that an apploader belongs to the launcher ...
-	//QCopEnvelope e("QPE/System", "notBusy(QString)" );
-	//e << ap;
-	return;
+    //QCopEnvelope e("QPE/System", "notBusy(QString)" );
+    //e << ap;
+    return;
     }
 
 #endif
@@ -591,11 +571,11 @@ void Global::invoke(const QString &c)
     QStrList slist;
     unsigned int j;
     for ( j = 0; j < list.count(); j++ )
-	slist.append( list[j].utf8() );
+    slist.append( list[j].utf8() );
 
     const char **args = new (const char *)[slist.count() + 1];
     for ( j = 0; j < slist.count(); j++ )
-	args[j] = slist.at(j);
+    args[j] = slist.at(j);
     args[j] = NULL;
 
 #if !defined(QT_NO_COP)
@@ -612,8 +592,8 @@ void Global::invoke(const QString &c)
 #endif
     qDebug("libfile = %s", libexe.latin1() );
     if ( QFile::exists( libexe ) ) {
-	qDebug("calling quickexec %s", libexe.latin1() );
-	quickexecv( libexe.utf8().data(), (const char **)args );
+    qDebug("calling quickexec %s", libexe.latin1() );
+    quickexecv( libexe.utf8().data(), (const char **)args );
     } else
 #endif
     {
@@ -683,7 +663,7 @@ void Global::invoke(const QString &c)
 */
 void Global::execute( const QString &c, const QString& document )
 {
-	// ask the server to do the work
+    // ask the server to do the work
 #if !defined(QT_NO_COP)
     if ( document.isNull() ) {
         QCopEnvelope e( "QPE/System", "execute(QString)" );
@@ -706,12 +686,12 @@ QString Global::shellQuote(const QString& s)
 {
     QString r="\"";
     for (int i=0; i<(int)s.length(); i++) {
-	char c = s[i].latin1();
-	switch (c) {
-	    case '\\': case '"': case '$':
-		r+="\\";
-	}
-	r += s[i];
+    char c = s[i].latin1();
+    switch (c) {
+        case '\\': case '"': case '$':
+        r+="\\";
+    }
+    r += s[i];
     }
     r += "\"";
     return r;
@@ -727,12 +707,12 @@ QString Global::stringQuote(const QString& s)
 {
     QString r="\"";
     for (int i=0; i<(int)s.length(); i++) {
-	char c = s[i].latin1();
-	switch (c) {
-	    case '\\': case '"':
-		r+="\\";
-	}
-	r += s[i];
+    char c = s[i].latin1();
+    switch (c) {
+        case '\\': case '"':
+        r+="\\";
+    }
+    r += s[i];
     }
     r += "\"";
     return r;
@@ -769,9 +749,11 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
       if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
         // this is a candidate look at the cf and see if we should search on it
         QString path = (*it)->path();
-        if( !checkStorage((*it)->path() + "/.opiestorage.cf" ) )
-          continue;
         Config conf((*it)->path() + "/.opiestorage.cf", Config::File );
+        conf.setGroup("main");
+        if (!conf.readBoolEntry("check",true)) {
+            continue;
+        }
         conf.setGroup("subdirs");
         if (conf.readBoolEntry("wholemedia",true)) {
             DocLnkSet ide( path,mimefilter);
@@ -787,9 +769,9 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
             }
         }
       } else if ( (*it)->disk() == "/dev/mtdblock6" || (*it)->disk() == "tmpfs" ) {
-	QString path = (*it)->path() + "/Documents";
-	DocLnkSet ide( path, mimefilter );
-	folder->appendFrom(ide);
+    QString path = (*it)->path() + "/Documents";
+    DocLnkSet ide( path, mimefilter );
+    folder->appendFrom(ide);
       }
     }
 }
@@ -801,10 +783,10 @@ QStringList Global::languageList()
     langs.append(lang);
     int i  = lang.find(".");
     if ( i > 0 )
-	lang = lang.left( i );
+    lang = lang.left( i );
     i = lang.find( "_" );
     if ( i > 0 )
-	langs.append(lang.left(i));
+    langs.append(lang.left(i));
     return langs;
 }
 
@@ -814,9 +796,9 @@ QStringList Global::helpPath()
     QStringList path;
     QStringList langs = Global::languageList();
     for (QStringList::ConstIterator it = langs.fromLast(); it!=langs.end(); --it) {
-	QString lang = *it;
-	if ( !lang.isEmpty() )
-	    path += qpeDir + "/help/" + lang + "/html";
+    QString lang = *it;
+    if ( !lang.isEmpty() )
+        path += qpeDir + "/help/" + lang + "/html";
     }
     path += qpeDir + "/pics";
     path += qpeDir + "/help/html";
