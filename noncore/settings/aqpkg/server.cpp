@@ -110,7 +110,8 @@ void Server :: readLocalIpks( Server *local )
         // for these are packagename_version_arm.ipk
         QString file = (*it)->file();
 
-        QString packageName = Utils::getPackageNameFromIpkFilename( file );
+        // Changed to display the filename (excluding the path)
+        QString packageName = Utils::getFilenameFromIpkFilename( file );
         QString ver = Utils::getPackageVersionFromIpkFilename( file );
         packageList.push_back( Package( packageName ) );
         packageList.back().setVersion( ver );
@@ -227,6 +228,11 @@ void Server :: buildLocalPackages( Server *local )
     for ( unsigned int i = 0 ; i < packageList.size() ; ++i )
     {
 		QString name = packageList[i].getPackageName();
+
+        // If the package name is an ipk name, then convert the filename to a package name
+        if ( name.find( ".ipk" ) != -1 )
+            name = Utils::getPackageNameFromIpkFilename( packageList[i].getFilename() );
+
         if ( local )
             packageList[i].setLocalPackage( local->getPackage( name ) );
         else

@@ -514,9 +514,10 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
     Server *s = dataMgr->getServer( serversList->currentText() );
     Package *p = s->getPackage( name );
 
-	// If the package has a filename then it is a local file
-	if ( p->isPackageStoredLocally() )
-		name = p->getFilename();
+    // If the package has a filename then it is a local file
+    if ( p->isPackageStoredLocally() )
+        name = p->getFilename();
+
     QString option;
     QString dest = "root";
     if ( !p->isInstalled() )
@@ -524,13 +525,17 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
         InstallData item;
         item.option = "I";
         item.packageName = name;
-    	return item;
+        return item;
     }
     else
     {
         InstallData item;
         item.option = "D";
-        item.packageName = p->getInstalledPackageName();
+        if ( !p->isPackageStoredLocally() )
+            item.packageName = p->getInstalledPackageName();
+        else
+            item.packageName = name;
+        
         if ( p->getInstalledTo() )
         {
             item.destination = p->getInstalledTo();
@@ -544,6 +549,11 @@ InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
 
         // Now see if version is newer or not
         int val = compareVersions( p->getInstalledVersion(), p->getVersion() );
+
+        // If the version requested is older and user selected a local ipk file, then reinstall the file
+        if ( p->isPackageStoredLocally() && val == -1 )
+            val = 0;
+            
         if ( val == -2 )
         {
             // Error - should handle
