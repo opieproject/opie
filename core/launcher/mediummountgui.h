@@ -2,7 +2,7 @@
 #define MEDIUMMOUNTGUI_H
 
 #include <qvariant.h>
-#include <qwidget.h>
+#include <qdialog.h>
 class QVBoxLayout; 
 class QHBoxLayout; 
 class QGridLayout; 
@@ -12,12 +12,12 @@ class QLabel;
 class QLineEdit;
 class QPushButton;
 
-class MediumMountGui : public QWidget
+class MediumMountGui : public QDialog
 { 
     Q_OBJECT
 
 public:
-    MediumMountGui( const QString &path = "/tmp/", QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    MediumMountGui( const QString &path = "/tmp/", QWidget* parent = 0, const char* name = 0, bool modal = FALSE    ,WFlags fl = 0 );
     ~MediumMountGui();
 
 protected:    

@@ -20,8 +20,9 @@
 #include <qapplication.h>
 
 
-MediumMountGui::MediumMountGui( const QString &path ,QWidget* parent,  const char* name, WFlags fl )
-    : QWidget( parent, name, fl ) {
+MediumMountGui::MediumMountGui( const QString &path ,QWidget* parent,  const char* name, bool modal, WFlags fl )
+  : QDialog( parent, name, modal, fl ) {
+ 
 
   QWidget *d = QApplication::desktop();
   int w=d->width();
