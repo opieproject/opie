@@ -10,87 +10,116 @@ using namespace  OpieObex;
 Obex::Obex( QObject *parent, const char* name )
   : QObject(parent, name )
 {
-  m_rec = 0;
-  m_send=0;
-  m_count = 0;
+    m_rec = 0;
+    m_send=0;
+    m_count = 0;
+    m_receive = false;
+    connect( this, SIGNAL(error(int) ), // for recovering to receive
+             SLOT(slotError() ) );
+    connect( this, SIGNAL(sent() ),
+             SLOT(slotError() ) );
 };
 Obex::~Obex() {
-  delete m_rec;
-  delete m_send;
+    delete m_rec;
+    delete m_send;
 }
 void Obex::receive()  {
-  qWarning("Receive" );
-   m_rec = new OProcess();
-   *m_rec << "irobex_palm3";
-   // connect to the necessary slots
-   connect(m_rec,  SIGNAL(processExited(OProcess*) ),
-	   this,  SLOT(slotExited(OProcess*) ) );
+    m_receive = true;
+    qWarning("Receive" );
+    m_rec = new OProcess();
+    *m_rec << "irobex_palm3";
+    // connect to the necessary slots
+    connect(m_rec,  SIGNAL(processExited(OProcess*) ),
+            this,  SLOT(slotExited(OProcess*) ) );
 
-   connect(m_rec,  SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
-	   this,  SLOT(slotStdOut(OProcess*, char*, int) ) );
+    connect(m_rec,  SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
+            this,  SLOT(slotStdOut(OProcess*, char*, int) ) );
 
-   if(!m_rec->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-     qWarning("could not start :(");
-     emit done( false );
-   }
-   emit currentTry(m_count );
+    if(!m_rec->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
+        qWarning("could not start :(");
+        emit done( false );
+        delete m_rec;
+        m_rec = 0;
+    }
+//    emit currentTry(m_count );
 
 }
-void Obex::send( const QString& fileName) {
-  m_count = 0;
-  m_file = fileName;
-  sendNow();
+void Obex::send( const QString& fileName) { // if currently receiving stop it send receive
+    m_count = 0;
+    m_file = fileName;
+    qWarning("send");
+    if (m_rec != 0 ) {
+        qWarning("running");
+        if (m_rec->isRunning() ) {
+            emit error(-1 );
+            qWarning("is running");
+            delete m_rec;
+            m_rec = 0;
+
+        }else{
+            qWarning("is not running");
+            emit error( -1 ); // we did not delete yet but it's not running slotExited is pending
+            return;
+        }
+    }
+    sendNow();
 }
 void Obex::sendNow(){
-  if ( m_count >= 25 ) { // could not send
-    emit error(-1 );
-    return;
-  }
-  // OProcess inititialisation
-  m_send = new OProcess();
-  *m_send << "irobex_palm3";
-  *m_send << m_file;
+    qWarning("sendNow");
+    if ( m_count >= 25 ) { // could not send
+        emit error(-1 );
+        return;
+    }
+    // OProcess inititialisation
+    m_send = new OProcess();
+    *m_send << "irobex_palm3";
+    *m_send << m_file;
 
-  // connect to slots Exited and and StdOut
-  connect(m_send,  SIGNAL(processExited(OProcess*) ),
-	  this, SLOT(slotExited(OProcess*)) );
-  connect(m_send,  SIGNAL(receivedStdout(OProcess*, char*,  int )),
-	  this, SLOT(slotStdOut(OProcess*, char*, int) ) );
-  // now start it
-  if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {
-    qWarning("could not send" );
-    m_count = 25;
-    emit error(-1 );
-  }
-  // end
-  m_count++;
-  emit currentTry( m_count );
+    // connect to slots Exited and and StdOut
+    connect(m_send,  SIGNAL(processExited(OProcess*) ),
+            this, SLOT(slotExited(OProcess*)) );
+    connect(m_send,  SIGNAL(receivedStdout(OProcess*, char*,  int )),
+            this, SLOT(slotStdOut(OProcess*, char*, int) ) );
+
+    // now start it
+    if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {
+        qWarning("could not send" );
+        m_count = 25;
+        emit error(-1 );
+        delete m_send;
+        m_send=0;
+    }
+    // end
+    m_count++;
+    emit currentTry( m_count );
 }
 
 void Obex::slotExited(OProcess* proc ){
-   if (proc == m_rec ) { // recieve process
+    if (proc == m_rec ) { // recieve process
         recieved();
     }else if ( proc == m_send ) {
         sendEnd();
     }
 }
 void Obex::slotStdOut(OProcess* proc, char* buf, int len){
-  if ( proc == m_rec ) { // only recieve
-    QCString cstring( buf,  len );
-    m_outp.append( cstring.data() );
-  }
+    if ( proc == m_rec ) { // only recieve
+        QCString cstring( buf,  len );
+        m_outp.append( cstring.data() );
+    }
 }
 
 void Obex::recieved() {
   if (m_rec->normalExit() ) {
-    if ( m_rec->exitStatus() == 0 ) { // we got one
-      QString filename = parseOut();
-      emit receivedFile( filename );
-    }
+      if ( m_rec->exitStatus() == 0 ) { // we got one
+          QString filename = parseOut();
+          emit receivedFile( filename );
+      }
   }else{
-    emit error(-1);
+      emit done(false);
   };
   delete m_rec;
+  m_rec = 0;
+  receive();
 }
 
 void Obex::sendEnd() {
@@ -125,4 +154,31 @@ QString Obex::parseOut(     ){
     }
   }
   return path;
+}
+/**
+ * when sent is done slotError is called we  will start receive again
+ */
+void Obex::slotError() {
+    qWarning("slotError");
+    if ( m_receive )
+        receive();
+};
+void Obex::setReceiveEnabled( bool receive ) {
+    if ( !receive ) { //
+        m_receive = false;
+        shutDownReceive();
+    }
+}
+
+void Obex::shutDownReceive() {
+    if (m_rec != 0 ) {
+        qWarning("running");
+        if (m_rec->isRunning() ) {
+            emit error(-1 );
+            qWarning("is running");
+            delete m_rec;
+            m_rec = 0;
+        }
+    }
+
 }

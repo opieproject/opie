@@ -49,6 +49,7 @@ void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
     stream >> desc;
     QString filename;
     stream >> filename;
+    m_sendgui->raise(); // should be on top
     m_sendgui->showMaximized();
     m_sendgui->lblPath->setText(filename);
     connect( (QObject*)m_sendgui->PushButton2, SIGNAL(clicked()),
@@ -56,9 +57,14 @@ void ObexImpl::slotMessage( const QCString& msg, const QByteArray&data ) {
     m_obex->send(filename );
     connect( (QObject*)m_obex, SIGNAL( sent() ), this,
              SLOT( slotSent() ) );
-  }else if(msg == "receive(bool)" ) { // open a GUI
+  }else if(msg == "receive(int)" ) { // open a GUI
       m_recvgui->showMaximized();
-      m_obex->receive();
+      int receiveD = 0;
+      stream >> receiveD;
+      if ( receiveD == 1)
+          m_obex->receive();
+      else
+          m_obex->setReceiveEnabled( false );
 
   } else if (msg =="done(QString)") {
       QString text;
@@ -87,7 +93,7 @@ void ObexImpl::slotSent() {
 void ObexImpl::slotError( int errorCode) {
 
     QString errorString = "";
-    if (errorCode = -1) {
+    if (errorCode == -1) {
         errorString = "test";
     }
     qDebug("Error: " + errorString);
