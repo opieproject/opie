@@ -38,10 +38,12 @@
 
 // _IO and friends are only defined in kernel headers ...
 
-#define OD_IO(type,area,number,args)    (( type << 30 ) | ( area << 8 ) | ( number ) | ( sizeof( args ) << 16 ))
-#define OD_IOW(area,number,args)        OD_IO(1,area,number,args)
-#define OD_IOR(area,number,args)        OD_IO(2,area,number,args)
-#define OD_IORW(area,number,args)       OD_IO(3,area,number,args)
+#define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
+
+#define OD_IO(type,number)              OD_IOC(0,type,number,0)
+#define OD_IOW(type,number,size)        OD_IOC(1,type,number,sizeof(size))
+#define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
+#define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
 
 
 class ODeviceData {
@@ -156,7 +158,7 @@ bool ODevice::setPowerButtonHandler ( ODevice::PowerButtonHandler )
 
 //#include <linux/apm_bios.h>
 
-#define APM_IOC_SUSPEND          OD_IO( 0, 'A', 2, 0 )
+#define APM_IOC_SUSPEND          OD_IO( 'A', 2 )
 
 
 bool ODevice::suspend ( )
@@ -198,7 +200,7 @@ bool ODevice::suspend ( )
 
 //#include <linux/fb.h> better not rely on kernel headers in userspace ...
 
-#define FBIOBLANK             OD_IO( 0, 'F', 0x11, 0 ) // 0x4611
+#define FBIOBLANK             OD_IO( 'F', 0x11 ) // 0x4611
 
 /* VESA Blanking Levels */
 #define VESA_NO_BLANKING      0
