@@ -28,9 +28,7 @@
 #include <qfile.h>
 #include <stdlib.h>
 
-#ifdef Q_WS_QWS
 #include <qcopchannel_qws.h>
-#endif
 
 class TimeZoneSelectorPrivate
 {
@@ -68,12 +66,10 @@ TZCombo::TZCombo( QWidget *p, const char* n )
 
 
     // listen on QPE/System
-#if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
     QCopChannel *channel = new QCopChannel( "QPE/System", this );
     connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
   this, SLOT(handleSystemChannel(const QCString&, const QByteArray&)) );
-#endif
 #endif
 
 

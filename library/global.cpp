@@ -25,9 +25,7 @@
 #include <qpe/resource.h>
 #include <qpe/storage.h>
 #include <qpe/applnk.h>
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-#include "qpe/qcopenvelope_qws.h"
-#endif
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qfile.h>
 #include <qlabel.h>
@@ -45,9 +43,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#ifdef QWS
 #include <qwindowsystem_qws.h> // for qwsServer
-#endif
 #include <qdatetime.h>
 
 #include <qfile.h>
@@ -110,12 +106,10 @@ StartingAppList* StartingAppList::appl = 0;
 StartingAppList::StartingAppList( QObject *parent, const char* name )
     :QObject( parent, name )
 {
-#ifdef QWS
 #if QT_VERSION >= 232 && !defined(QT_NO_COP)
     connect( qwsServer, SIGNAL( newChannel(const QString&)),
 	     this, SLOT( handleNewChannel(const QString&)) );
     dict.setAutoDelete( TRUE );
-#endif
 #endif
 }
 
@@ -393,7 +387,7 @@ void Global::createDocDir()
 */
 void Global::statusMessage(const QString& message)
 {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if!defined(QT_NO_COP)
     QCopEnvelope e( "QPE/TaskBar", "message(QString)" );
     e << message;
 #endif
@@ -404,7 +398,7 @@ void Global::statusMessage(const QString& message)
 */
 void Global::applyStyle()
 {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopChannel::send( "QPE/System", "applyStyle()" );
 #else
     ((QPEApplication *)qApp)->applyStyle(); // apply without needing QCop for floppy version
@@ -416,7 +410,7 @@ void Global::applyStyle()
 */
 QWidget *Global::shutdown( bool )
 {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopChannel::send( "QPE/System", "shutdown()" );
 #endif
     return 0;
@@ -427,7 +421,7 @@ QWidget *Global::shutdown( bool )
 */
 QWidget *Global::restart( bool )
 {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopChannel::send( "QPE/System", "restart()" );
 #endif
     return 0;
@@ -445,7 +439,7 @@ QWidget *Global::restart( bool )
 */
 void Global::showInputMethod()
 {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopChannel::send( "QPE/TaskBar", "showInputMethod()" );
 #endif
 }
@@ -460,7 +454,7 @@ void Global::showInputMethod()
 */
 void Global::hideInputMethod()
 {
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QCopChannel::send( "QPE/TaskBar", "hideInputMethod()" );
 #endif
 }
@@ -559,7 +553,7 @@ void Global::invoke(const QString &c)
     // Convert the command line in to a list of arguments
     QStringList list = QStringList::split(QRegExp("  *"),c);
 
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QString ap=list[0];
     // see if the application is already running
     // XXX should lock file /tmp/qcop-msg-ap
@@ -595,7 +589,7 @@ void Global::invoke(const QString &c)
 	args[j] = slist.at(j);
     args[j] = NULL;
 
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     // an attempt to show a wait...
     // more logic should be used, but this will be fine for the moment...
     QCopEnvelope ( "QPE/System", "busy()" );
@@ -636,7 +630,7 @@ void Global::execute( const QString &c, const QString& document )
 {
     if ( qApp->type() != QApplication::GuiServer ) {
 	// ask the server to do the work
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
 	if ( document.isNull() ) {
 	    QCopEnvelope e( "QPE/System", "execute(QString)" );
 	    e << c;
@@ -676,7 +670,7 @@ void Global::execute( const QString &c, const QString& document )
     // Convert the command line in to a list of arguments
     QStringList list = QStringList::split(QRegExp("  *"),c);
 
-#if defined(Q_WS_QWS) && !defined(QT_NO_COP)
+#if !defined(QT_NO_COP)
     QString ap=list[0];
 
     qDebug("executing %s", ap.latin1() );

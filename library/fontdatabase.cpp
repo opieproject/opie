@@ -24,9 +24,7 @@
 
 #include <qpe/qlibrary.h>
 
-#ifdef QWS
 #include <qfontmanager_qws.h>
-#endif
 #include <qdir.h>
 #include <qdict.h>
 #include <stdio.h>

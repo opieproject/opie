@@ -18,7 +18,6 @@
 **
 **********************************************************************/
 
-#ifdef QWS
 #include "fontmanager.h"
 #include <qfile.h>
 #include <stdlib.h>
@@ -100,4 +99,3 @@ QFont FontManager::unicodeFont( Spacing sp )
     }
     return QFont(fontName,size);
 }
-#endif

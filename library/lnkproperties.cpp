@@ -30,9 +30,7 @@
 #include <qpe/applnk.h>
 #include <qpe/global.h>
 #include <qpe/categorywidget.h>
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 #include <qpe/filemanager.h>
 #include <qpe/config.h>
 #include <qpe/storage.h>

@@ -30,9 +30,7 @@
 #include "applnk.h"
 #include "storage.h"
 #include "qpemenubar.h"
-#ifdef QWS
 #include <qcopchannel_qws.h>
-#endif
 #include "lnkproperties.h"
 #include "applnk.h"
 #include <qpe/qpeapplication.h>

@@ -27,9 +27,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/config.h>
@@ -40,9 +38,7 @@
 #include <qdir.h>
 #include <qregexp.h>
 
-#ifdef Q_WS_QWS
 #include <qgfx_qws.h>
-#endif
 
 #include <stdlib.h>
 

@@ -45,9 +45,7 @@ bool NetworkInterface::isActive( Config& cfg ) const
 	    {
 		if ( devname == dev || devname == dev0 ) {
 		    fclose(f);
-#ifdef QWS
 		    Network::writeProxySettings( cfg );
-#endif
 		    return TRUE;
 		}
 	    }

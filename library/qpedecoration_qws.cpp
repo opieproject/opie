@@ -17,7 +17,6 @@
 ** not clear to you.
 **
 **********************************************************************/
-#ifdef QWS
 #define QTOPIA_INTERNAL_LANGLIST
 #include <qapplication.h>
 #include <qstyle.h>
@@ -911,4 +910,3 @@ QPopupMenu *QPEDecoration::menu(QWSManager*, const QWidget*, const QPoint&)
 
 
 #endif // QT_NO_QWS_QPE_WM_STYLE
-#endif

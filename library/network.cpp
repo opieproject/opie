@@ -25,9 +25,7 @@
 #include "qpe/config.h"
 #include "qpe/resource.h"
 #include "qpe/qpeapplication.h"
-#ifdef QWS
 #include <qpe/qcopenvelope_qws.h>
-#endif
 #include <qpe/qlibrary.h>
 
 #include <qlistbox.h>

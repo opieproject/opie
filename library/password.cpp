@@ -27,9 +27,7 @@
 #include <qstring.h>
 #include <qapplication.h>
 #include <qfile.h>
-#ifdef QWS
 #include <qwindowsystem_qws.h>
-#endif
 
 #include <qdialog.h>
 

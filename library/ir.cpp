@@ -21,10 +21,8 @@
 #include "ir.h"
 
 #include <qstring.h>
-#ifdef QWS
 #include "qcopenvelope_qws.h"
 #include <qcopchannel_qws.h>
-#endif
 #include "applnk.h"
 
 /*!
