@@ -74,92 +74,89 @@ const char *skinV_mask_file_names[7] = {
 static const int numVButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
-   QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 )
+				QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 )
 {
-   setCaption( tr("OpiePlayer") );
-   Config cfg("OpiePlayer");
+		setCaption( tr("OpiePlayer") );
+		Config cfg("OpiePlayer");
 
-   cfg.setGroup("Options");
-   skin = cfg.readEntry("Skin","default");
+		cfg.setGroup("Options");
+		skin = cfg.readEntry("Skin","default");
 
-   QString skinPath;
-   skinPath = "opieplayer2/skins/" + skin;
+		QString skinPath;
+		skinPath = "opieplayer2/skins/" + skin;
     if(!QDir(QString(getenv("OPIEDIR")) +"/pics/"+skinPath).exists())
-      skinPath = "opieplayer2/skins/default";
+				skinPath = "opieplayer2/skins/default";
 
-    //   odebug << "skin path " + skinPath << oendl;
 
 //     QString skinPath = "opieplayer2/skins/" + skin;
 
-   pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
-   imgUp = new QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
-   imgDn = new QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
+		pixBg = new QPixmap( Resource::loadPixmap( QString("%1/background").arg(skinPath) ) );
+		imgUp = new QImage( Resource::loadImage( QString("%1/skinV_up").arg(skinPath) ) );
+		imgDn = new QImage( Resource::loadImage( QString("%1/skinV_down").arg(skinPath) ) );
 
-   imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
-   imgButtonMask->fill( 0 );
+		imgButtonMask = new QImage( imgUp->width(), imgUp->height(), 8, 255 );
+		imgButtonMask->fill( 0 );
 
-   for ( int i = 0; i < 7; i++ ) {
-      QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
-                                  "/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
-      //      odebug << "loading "+filename << oendl;
-      masks[i] = new QBitmap( filename );
+		for ( int i = 0; i < 7; i++ ) {
+				QString filename = QString( QPEApplication::qpeDir() + "/pics/" + skinPath +
+																		"/skinV_mask_" + skinV_mask_file_names[i] + ".png" );
+					//      odebug << "loading "+filename << oendl;
+				masks[i] = new QBitmap( filename );
 
-      if ( !masks[i]->isNull() ) {
-         QImage imgMask = masks[i]->convertToImage();
-         uchar **dest = imgButtonMask->jumpTable();
-         for ( int y = 0; y < imgUp->height(); y++ ) {
-            uchar *line = dest[y];
-            for ( int x = 0; x < imgUp->width(); x++ ) {
-               if ( !qRed( imgMask.pixel( x, y ) ) )
-                  line[x] = i + 1;
-            }
-         }
-      }
-   }
-   //   odebug << "finished loading first pics" << oendl;
-   for ( int i = 0; i < 7; i++ ) {
-      buttonPixUp[i] = NULL;
-      buttonPixDown[i] = NULL;
-   }
+				if ( !masks[i]->isNull() ) {
+						QImage imgMask = masks[i]->convertToImage();
+						uchar **dest = imgButtonMask->jumpTable();
+						for ( int y = 0; y < imgUp->height(); y++ ) {
+								uchar *line = dest[y];
+								for ( int x = 0; x < imgUp->width(); x++ ) {
+										if ( !qRed( imgMask.pixel( x, y ) ) )
+												line[x] = i + 1;
+								}
+						}
+				}
+		}
+		for ( int i = 0; i < 7; i++ ) {
+				buttonPixUp[i] = NULL;
+				buttonPixDown[i] = NULL;
+		}
 
+		QWidget *d = QApplication::desktop();
+		int width = d->width();
+		int height = d->height();
 
-        QWidget *d = QApplication::desktop();
-        int width = d->width();
-        int height = d->height();
+		if( (width != pixBg->width() ) || (height != pixBg->height() ) ) {
+				QImage img;
+				img = pixBg->convertToImage();
+				pixBg->convertFromImage( img.smoothScale( width, height));
+		}
+				
+		setBackgroundPixmap( *pixBg );
+		currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
+		slider = new QSlider( Qt::Horizontal, this );
+		slider->setMinValue( 0 );
+		slider->setMaxValue( 1 );
 
-    if( (width != pixBg->width() ) || (height != pixBg->height() ) ) {
-//              odebug << "<<<<<<<< scale image >>>>>>>>>>>>" << oendl;
-                QImage img;
-                img = pixBg->convertToImage();
-                pixBg->convertFromImage( img.smoothScale( width, height));
-        }
-   setBackgroundPixmap( *pixBg );
-
-   currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
-
-   slider = new QSlider( Qt::Horizontal, this );
-   slider->setMinValue( 0 );
-   slider->setMaxValue( 1 );
-   slider->setBackgroundPixmap( Resource::loadPixmap( backgroundPix ) );
-   slider->setFocusPolicy( QWidget::NoFocus );
+		slider->setBackgroundPixmap( *pixBg );
+		slider->setFocusPolicy( QWidget::NoFocus );
 //    slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
-   connect( slider,         SIGNAL( sliderPressed() ),      this, SLOT( sliderPressed() ) );
-   connect( slider,         SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
+		connect(slider,SIGNAL(sliderPressed()),this,SLOT(sliderPressed()));
+		connect(slider,SIGNAL(sliderReleased()),this,SLOT(sliderReleased()));
 
-   connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-   connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-   connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
-   connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
+		connect(mediaPlayerState,SIGNAL(lengthChanged(long)),this,SLOT(setLength(long)));
+		connect(mediaPlayerState,SIGNAL(positionChanged(long)),this,SLOT(setPosition(long)));
+		connect(mediaPlayerState,SIGNAL(positionUpdated(long)),this,SLOT(setPosition(long)));
+		connect(mediaPlayerState,SIGNAL(viewChanged(char)),this,SLOT(setView(char)));
 //   connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
-   connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
+		connect(mediaPlayerState,SIGNAL(playingToggled(bool)),this,SLOT(setPlaying(bool)));
 
-   // Intialise state
-   setLength( mediaPlayerState->length() );
-   setPosition( mediaPlayerState->position() );
-   setFullscreen( mediaPlayerState->fullscreen() );
-//   setPaused( mediaPlayerState->paused() );
-   setPlaying( mediaPlayerState->playing() );
+			// Intialise state
+		setLength( mediaPlayerState->length() );
+		setPosition( mediaPlayerState->position() );
+		setFullscreen( mediaPlayerState->fullscreen() );
+//   setPlaying( mediaPlayerState->playing() );
+// 		if(this->x() < 0 || this->y() < 0)
+// 			this->move(0,0);
 }
 
 
@@ -472,6 +469,10 @@ bool VideoWidget::playVideo() {
    int w = height();
    int h = width();
 
+	 QWidget *d = QApplication::desktop();
+    int d_width = d->width();
+    int d_height = d->height();
+
    ColorFormat format = (dd == 16) ? RGB565 : BGRA8888;
 
    if ( mediaPlayerState->fullscreen() )
@@ -483,8 +484,8 @@ bool VideoWidget::playVideo() {
            ( ( dd == 16 ) || ( dd == 32 ) ) && ( p.numRects() == 1 ) )
       {
 
-         w = 320;
-         h = 240;
+				w = d_width; //320;
+				h = d_height; //240;
 
          if ( mediaPlayerState->scaled() )
          {
@@ -525,9 +526,8 @@ bool VideoWidget::playVideo() {
       {
 #endif
          QPainter p(this);
-
-         w = 320;
-         h = 240;
+				 w = d_width; //320;
+				h = d_height; //240;
 
          if ( mediaPlayerState->scaled() )
          {
