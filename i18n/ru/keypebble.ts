@@ -50,7 +50,7 @@ connection.</source>
     </message>
     <message>
         <source>Waiting for server initialization...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ожидаю инициализации сервера...</translation>
     </message>
 </context>
 <context>

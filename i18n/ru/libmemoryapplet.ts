@@ -160,7 +160,7 @@ Memory is categorized as follows:
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

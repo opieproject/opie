@@ -32,7 +32,10 @@ slow and annyoing...)</source>
 (Note that such a tab scans &lt;i&gt;all&lt;/i&gt; documents
 on &lt;i&gt;all&lt;/i&gt; external media, which can be quite
 slow and annoying...)</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вы хотите иметь вкладку Документы?&lt;/b&gt;&lt;p&gt;
+(Заметьте что для этого требуется сканировать
+&lt;i&gt;все&lt;/i&gt; документы на &lt;i&gt;всех&lt;/i&gt; внешних устройствах,
+что может быть очень медленно и надоедливо...)</translation>
     </message>
 </context>
 </TS>

@@ -76,7 +76,7 @@
     <name>TodayConfigMiscBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма1</translation>
     </message>
     <message>
         <source>Check this if today should be autostarted on resume.</source>

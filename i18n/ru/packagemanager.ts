@@ -21,43 +21,43 @@
     <name>FilterDlg</name>
     <message>
         <source>All</source>
-        <translation type="unfinished">Все</translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Установлен</translation>
     </message>
     <message>
         <source>Not installed</source>
-        <translation type="unfinished"></translation>
+        <translation>Не установлен</translation>
     </message>
     <message>
         <source>Updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновлен</translation>
     </message>
     <message>
         <source>Filter packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр пакетов</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категория:</translation>
     </message>
     <message>
         <source>Names containing:</source>
-        <translation type="unfinished"></translation>
+        <translation>Имена содержат:</translation>
     </message>
     <message>
         <source>With the status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Со статусом:</translation>
     </message>
     <message>
         <source>Available from the following server:</source>
-        <translation type="unfinished"></translation>
+        <translation>Доступны со следующего сервера:</translation>
     </message>
     <message>
         <source>Installed on device at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Установлены на устройстве:</translation>
     </message>
 </context>
 <context>
@@ -75,76 +75,77 @@
     <name>InstallDlg</name>
     <message>
         <source>Destination</source>
-        <translation type="unfinished"></translation>
+        <translation>Место назначения</translation>
     </message>
     <message>
         <source>Space Avail</source>
-        <translation type="unfinished">Место доступно</translation>
+        <translation>Место доступно</translation>
     </message>
     <message>
         <source>Output</source>
-        <translation type="unfinished">Вывод</translation>
+        <translation>Вывод</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished">Начать</translation>
+        <translation>Начать</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Опции</translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Packages to </source>
-        <translation type="unfinished"></translation>
+        <translation>Пакеты которые будут</translation>
     </message>
     <message>
         <source>install</source>
-        <translation type="unfinished"></translation>
+        <translation>установлены</translation>
     </message>
     <message>
         <source>remove</source>
-        <translation type="unfinished"></translation>
+        <translation>убраны</translation>
     </message>
     <message>
         <source>upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>обновлены</translation>
     </message>
     <message>
         <source>download</source>
-        <translation type="unfinished"></translation>
+        <translation>скачаны</translation>
     </message>
     <message>
         <source>Press the start button to begin.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите кнопку &quot;старт&quot; чтобы начать.
+</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished">Неизвестный</translation>
+        <translation>Неизвестный</translation>
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished">%1 кбайт</translation>
+        <translation>%1 кбайт</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <source>Save output</source>
-        <translation type="unfinished">Сохранить вывод</translation>
+        <translation>Сохранить вывод</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Все</translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
 </context>
 <context>
@@ -644,185 +645,191 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Click inside the box at the left to select a package.</source>
-        <translation type="unfinished"></translation>
+        <translation>Это список всех пакетов.
+
+Синяя точка рядом с названием пакета означает, что пакет уже установлен.
+
+Синяя точка со звездочкой означает, что доступна более свежая версия этого пакета.
+
+Поставьте галочку слева от пакета чтобы его выбрать.</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Фильтр</translation>
     </message>
     <message>
         <source>Click here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите чтобы применить текущий фильтр.</translation>
     </message>
     <message>
         <source>Filter settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки фильтра</translation>
     </message>
     <message>
         <source>Click here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите чтобы изменить критерии фильтра пакетов.</translation>
     </message>
     <message>
         <source>Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Менеджер пакетов</translation>
     </message>
     <message>
         <source>Update package information</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить информацию о пакетах</translation>
     </message>
     <message>
         <source>Upgrade installed packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Обновить установленные пакеты</translation>
     </message>
     <message>
         <source>Enter path to download package to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите путь, куда нужно скачать пакеты:</translation>
     </message>
     <message>
         <source>Download packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Скачать пакеты</translation>
     </message>
     <message>
         <source>Remove or upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Убрать или обновить</translation>
     </message>
     <message>
         <source>Remove or reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Убрать или переустановить</translation>
     </message>
     <message>
         <source>Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Переустановить</translation>
     </message>
     <message>
         <source>Config updated</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация обновлена</translation>
     </message>
     <message>
         <source>The configuration has been updated.  Do you want to update server and package information now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурация была обновлена.  Вы хотите обновить информацию о сервере и пакетах?</translation>
     </message>
 </context>
 <context>
     <name>OIpkg</name>
     <message>
         <source>OIpkg</source>
-        <translation type="unfinished"></translation>
+        <translation>OIpkg</translation>
     </message>
     <message>
         <source>Error initialing libipkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка инициализации libipkg</translation>
     </message>
     <message>
         <source>Error freeing libipkg</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка освобождения libipkg</translation>
     </message>
 </context>
 <context>
     <name>OIpkgConfigDlg</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished">Конфигурация</translation>
+        <translation>Конфигурация</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished">Сервера</translation>
+        <translation>Сервера</translation>
     </message>
     <message>
         <source>Destinations</source>
-        <translation type="unfinished">Места назначения</translation>
+        <translation>Места назначения</translation>
     </message>
     <message>
         <source>Proxies</source>
-        <translation type="unfinished">Прокси</translation>
+        <translation>Прокси</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished">Опции</translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished">Новый</translation>
+        <translation>Новый</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Удалить</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Сервер</translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished">Имя:</translation>
+        <translation>Имя:</translation>
     </message>
     <message>
         <source>Address:</source>
-        <translation type="unfinished">Адрес:</translation>
+        <translation>Адрес:</translation>
     </message>
     <message>
         <source>Active Server</source>
-        <translation type="unfinished">Активный сервер</translation>
+        <translation>Активный сервер</translation>
     </message>
     <message>
         <source>Update</source>
-        <translation type="unfinished">Обновить</translation>
+        <translation>Обновить</translation>
     </message>
     <message>
         <source>HTTP Proxy</source>
-        <translation type="unfinished">HTTP прокси</translation>
+        <translation>HTTP прокси</translation>
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished">Разрешен</translation>
+        <translation>Разрешен</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
-        <translation type="unfinished">FTP прокси</translation>
+        <translation>FTP прокси</translation>
     </message>
     <message>
         <source>Username:</source>
-        <translation type="unfinished">Имя польз.:</translation>
+        <translation>Имя пользователя:</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished">Пароль:</translation>
+        <translation>Пароль:</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished">Игнор. зависимости</translation>
+        <translation>Игнорировать зависимости</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished">Вынужд. переустановка</translation>
+        <translation>Вынужденная переустановка</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished">Вынужд. удаление</translation>
+        <translation>Вынужденное удаление</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished">Вынужд. перезапись</translation>
+        <translation>Вынужденная перезапись</translation>
     </message>
     <message>
         <source>Information Level</source>
-        <translation type="unfinished">Уровень информации</translation>
+        <translation>Уровень информации</translation>
     </message>
     <message>
         <source>Errors only</source>
-        <translation type="unfinished">Только ошибки</translation>
+        <translation>Только ошибки</translation>
     </message>
     <message>
         <source>Normal messages</source>
-        <translation type="unfinished">Обычные сообщения</translation>
+        <translation>Обычные сообщения</translation>
     </message>
     <message>
         <source>Informative messages</source>
-        <translation type="unfinished">Полезные сообщения</translation>
+        <translation>Полезные сообщения</translation>
     </message>
     <message>
         <source>Troubleshooting output</source>
-        <translation type="unfinished">Выявление неисправностей</translation>
+        <translation>Выявление неисправностей</translation>
     </message>
 </context>
 <context>
@@ -830,31 +837,33 @@ Click inside the box at the left to select a package.</source>
     <message>
         <source>Reading available packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Читаю доступные пакеты:
+<byte value="x9"/></translation>
     </message>
     <message>
         <source>Reading installed packages:
 <byte value="x9"/></source>
-        <translation type="unfinished"></translation>
+        <translation>Читаю установленные пакеты:
+<byte value="x9"/></translation>
     </message>
 </context>
 <context>
     <name>PackageInfoDlg</name>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информация</translation>
     </message>
     <message>
         <source>Unable to retrieve package information.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу получить информацию о пакете.</translation>
     </message>
     <message>
         <source>Retrieve file list</source>
-        <translation type="unfinished"></translation>
+        <translation>Получить список файлов</translation>
     </message>
     <message>
         <source>File list</source>
-        <translation type="unfinished"></translation>
+        <translation>Список файлов</translation>
     </message>
 </context>
 <context>

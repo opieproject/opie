@@ -3,7 +3,7 @@
     <name>Decoration</name>
     <message>
         <source>Liquid</source>
-        <translation type="unfinished">Жидкость</translation>
+        <translation>Жидкость</translation>
     </message>
 </context>
 <context>

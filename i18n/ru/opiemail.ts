@@ -555,11 +555,11 @@
     <name>StatusWidgetUI</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>Форма1</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>ТекстМетка1</translation>
     </message>
 </context>
 <context>

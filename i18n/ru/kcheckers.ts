@@ -127,7 +127,7 @@
     </message>
     <message>
         <source>KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>KШашки</translation>
     </message>
 </context>
 </TS>

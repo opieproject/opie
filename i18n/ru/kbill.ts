@@ -51,7 +51,7 @@
     </message>
     <message>
         <source>&lt;b&gt;The Story&lt;/b&gt;&lt;p&gt;Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle &apos;Bill&apos;, has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) &apos;Bill&apos; has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly disguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;История&lt;/b&gt;&lt;p&gt;И снова судьба мира в ваших руках!  Злобный кракер, известный только по его кличке &apos;Билл&apos;, создал идеальный компьютерный вирус.  Вирус, который может запросто превратить обычный компьютер в тостер.  (ооо!) &apos;Билл&apos; склонировал себя в миллион-зиллион микро-Биллов.  Их единственная цель - занести этот мерзкий вирус, который был искусно замаскирован под популярную операционную системы. Ваша задача как Системного Администратора и Истребителя - предотвратить Билла от успешного завершения его черного дела.</translation>
     </message>
 </context>
 <context>

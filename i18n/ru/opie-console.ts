@@ -7,11 +7,11 @@
     </message>
     <message>
         <source>Settings1</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки1</translation>
     </message>
     <message>
         <source>Settings2</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки2</translation>
     </message>
     <message>
         <source>Init string </source>
@@ -820,7 +820,7 @@
     </message>
     <message>
         <source>Line-break conversions</source>
-        <translation type="unfinished">Преобразование конца строки</translation>
+        <translation>Преобразование конца строки</translation>
     </message>
     <message>
         <source>Inbound</source>
