@@ -63,30 +63,30 @@
 namespace Opie {
 
 OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
-             OPimContactAccessBackend* end, bool autosync ):
-    OPimAccessTemplate<OPimContact>( end )
+				       OPimContactAccessBackend* end, bool autosync ):
+	OPimAccessTemplate<OPimContact>( end )
 {
         /* take care of the backend. If there is no one defined, we
-     * will use the XML-Backend as default (until we have a cute SQL-Backend..).
-     */
+	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
+	 */
         if( end == 0 ) {
-        owarn << "Using BackendFactory !" << oendl;
-        end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
+		owarn << "Using BackendFactory !" << oendl;
+		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
         }
-    // Set backend locally and in template
+	// Set backend locally and in template
         m_backEnd = end;
-    OPimAccessTemplate<OPimContact>::setBackEnd (end);
+	OPimAccessTemplate<OPimContact>::setBackEnd (end);
 
 
-    /* Connect signal of external db change to function */
-    QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
-    connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
-               this, SLOT(copMessage(const QCString&,const QByteArray&)) );
-    if ( autosync ){
-        QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
-        connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
-             this, SLOT(copMessage(const QCString&,const QByteArray&)) );
-    }
+	/* Connect signal of external db change to function */
+	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
+	connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+		 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
+	if ( autosync ){
+		QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
+		connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+			 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
+	}
 
 
 }
