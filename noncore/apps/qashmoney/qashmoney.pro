@@ -37,5 +37,13 @@ SOURCES =	qashmoney.cpp \
                         budget.cpp \
                         budgetdisplay.cpp \
                         currency.cpp
+INCLUDEPATH = $(OPIEDIR)/include
+DEPENDPATH = $(OPIEDIR)/include
+
+DESTDIR = $(OPIEDIR)/bin
+
 unix:LIBS += -lm
 LIBS += -lqpe -lqte -lstdc++ -lsqlite
+
+include ( $(OPIEDIR)/include.pro )
+

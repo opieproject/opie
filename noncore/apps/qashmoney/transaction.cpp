@@ -25,14 +25,14 @@ Transaction::~Transaction ()
 
 void Transaction::addTransaction ( QString description, QString payee, int accountid, int parentid, int number, int day, int month, int year, float amount, int cleared, int budgetid, int lineitemid )
   {
-    sqlite_exec_printf ( tdb, "insert into transactions values ( '%q', %i, %i, %i, %i, %i, %i, %.2f, %i, %i, 0, 0, 0, 0, 0, 0, %i, '%q', 0,
-    0, 0, 0, NULL );", 0, 0, 0, ( const char * ) payee, accountid, parentid, number, day, month, year, amount, cleared, budgetid, lineitemid, ( const char * ) description );
+    sqlite_exec_printf ( tdb, "insert into transactions values ( '%q', %i, %i, %i, %i, %i, %i, %.2f, %i, %i, 0, 0, 0, 0, 0, 0, %i, '%q', 0, "
+    "0, 0, 0, NULL );", 0, 0, 0, ( const char * ) payee, accountid, parentid, number, day, month, year, amount, cleared, budgetid, lineitemid, ( const char * ) description );
   }
 
 void Transaction::updateTransaction ( QString description, QString payee, int number, int day, int month, int year, float amount, int cleared, int budgetid, int lineitemid, int transactionid )
   {
-    sqlite_exec_printf ( tdb, "update transactions set reservedtwo = '%q', payee = '%q', number = %i, day = %i, month = %i, year = %i, amount = %.2f,
-      cleared = %i, budgetid = %i, reservedone = %i where transid = %i;", 0, 0, 0, ( const char * ) description, ( const char * ) payee, number, day, month, year,
+    sqlite_exec_printf ( tdb, "update transactions set reservedtwo = '%q', payee = '%q', number = %i, day = %i, month = %i, year = %i, amount = %.2f,"
+      "cleared = %i, budgetid = %i, reservedone = %i where transid = %i;", 0, 0, 0, ( const char * ) description, ( const char * ) payee, number, day, month, year,
       amount, cleared, budgetid, lineitemid, transactionid );
   }
 

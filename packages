@@ -120,6 +120,7 @@ CONFIG_OXYGEN	noncore/apps/oxygen	oxygen.pro
 CONFIG_PARASHOOT	noncore/games/parashoot	parashoot.pro
 CONFIG_PICKBOARD	inputmethods/pickboard	pickboard.pro
 CONFIG_QASTEROIDS	noncore/games/qasteroids	qasteroids.pro
+CONFIG_QASHMONEY	noncore/apps/qashmoney	qashmoney.pro
 CONFIG_QCOP	core/apps/qcop	qcop.pro
 CONFIG_QPDF	noncore/graphics/qpdf	qpdf.pro
 CONFIG_QPDF2	noncore/graphics/qpdf2	qpdf2.pro

@@ -33,8 +33,8 @@ void Transfer::addTransfer ( int fromaccount, int fromparent, int toaccount, int
 
 void Transfer::updateTransfer ( int fromaccount, int fromparent, int toaccount, int toparent, int day, int month, int year, float amount, int cleared, int transferid )
   {
-    sqlite_exec_printf ( db, "update transfers set fromaccount = %i, fromparent = %i, toaccount = %i, toparent = %i, day = %i, month = %i, year = %i,
-      amount = %.2f, cleared = %i where transferid = %i;", 0, 0, 0, fromaccount, fromparent, toaccount, toparent, day, month, year, amount, cleared, transferid );
+    sqlite_exec_printf ( db, "update transfers set fromaccount = %i, fromparent = %i, toaccount = %i, toparent = %i, day = %i, month = %i, year = %i,"
+     "amount = %.2f, cleared = %i where transferid = %i;", 0, 0, 0, fromaccount, fromparent, toaccount, toparent, day, month, year, amount, cleared, transferid );
   }
 
 void Transfer::deleteTransfer ( int transferid )
