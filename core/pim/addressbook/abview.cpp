@@ -51,6 +51,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	m_abTable( 0l ),
 	m_orderedFields( ordered )
 {
+	qWarning("AbView::c'tor");
 	// Load default database and handle syncing myself.. !
 	m_contactdb = new OContactAccess ( "addressbook", 0l, 0l, false ),
 	mCat.load( categoryFileName() );
@@ -97,28 +98,28 @@ AbView::~AbView()
 
 void AbView::setView( Views view )
 {
-	//	qWarning("AbView::setView( Views view )");
+	qWarning("AbView::setView( Views view )");
  	m_curr_View = view;
  	load();
 }
 
 void AbView::addEntry( const OContact &newContact )
 {
-	//	qWarning("abview:AddContact");
+	qWarning("abview:AddContact");
 	m_contactdb->add ( newContact );
 	load();
 
 }
 void AbView::removeEntry( const int UID )
 {
-	//	qWarning("abview:RemoveContact");
+	qWarning("abview:RemoveContact");
 	m_contactdb->remove( UID );
 	load();
 }
 
 void AbView::replaceEntry( const OContact &contact )
 {
-	//	qWarning("abview:ReplaceContact");
+	qWarning("abview:ReplaceContact");
 	m_contactdb->replace( contact );
 	load();
 
@@ -149,7 +150,7 @@ bool AbView::save()
 
 void AbView::load()
 {
-	//	qWarning("abView:Load data");
+	qWarning("abView:Load data");
 
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
@@ -159,7 +160,8 @@ void AbView::load()
 		m_list = m_contactdb->allRecords();
 	else{
 		m_list = m_contactdb->sorted( true, 0, 0, 0 );
-		clearForCategory();
+		if ( m_curr_category != -1 )
+			clearForCategory();
 	}
 
 	qWarning ("Number of contacts: %d", m_list.count());
@@ -170,7 +172,7 @@ void AbView::load()
 
 void AbView::reload()
 {
-	//	qWarning( "void AbView::reload()" );
+        qWarning( "void AbView::reload()" );
 
 	m_contactdb->reload();
 	load();
@@ -183,7 +185,7 @@ void AbView::clear()
 
 void AbView::setShowByCategory( const QString& cat )
 {
-	//	qWarning("AbView::setShowCategory( const QString& cat )");
+	qWarning("AbView::setShowCategory( const QString& cat )");
 
 	int intCat = 0;
 
@@ -207,11 +209,10 @@ void AbView::setShowByCategory( const QString& cat )
 
 void AbView::setShowToView( Views view )
 {
-	//	qWarning("void AbView::setShowToView( View %d )", view);
-
-	//	qWarning ("Change the View (Category is: %d)", m_curr_category);
+       	qWarning("void AbView::setShowToView( View %d )", view);
 
 	if ( m_curr_View != view ){
+		qWarning ("Change the View (Category is: %d)", m_curr_category);
 		m_prev_View = m_curr_View;
 		m_curr_View = view;
 
@@ -250,7 +251,8 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 			return;
 		}
 		m_list = m_contactdb->queryByExample( query, OContactAccess::WildCards | OContactAccess::IgnoreCase );
-		clearForCategory();
+		if ( m_curr_category != -1 )
+			clearForCategory();
 		m_curr_Contact = 0;
 	}
 	updateView( true );
@@ -274,7 +276,7 @@ QString AbView::showCategory() const
 
 void AbView::showPersonal( bool personal )
 {
-	//	qWarning ("void AbView::showPersonal( %d )", personal);
+	qWarning ("void AbView::showPersonal( %d )", personal);
 
 	if ( personal ){
 
@@ -362,7 +364,8 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	// Now remove all contacts with wrong category (if any selected)
 	// This algorithm is a litte bit ineffective, but
 	// we will not have a lot of matching entries..
-	clearForCategory();
+	if ( m_curr_category != -1 )
+		clearForCategory();
 
 	// Now show all found entries
 	updateView( true );

@@ -32,6 +32,7 @@
 #include <qcombobox.h>
 #include <qpixmap.h> 
 
+#if 0
 class AbTableItem : public QTableItem
 {
 public:
@@ -47,6 +48,8 @@ private:
     QString sortKey;
 };
 
+#endif
+
 // This is a simple container, storing all contact
 // information
 class ContactItem
@@ -56,6 +59,7 @@ class ContactItem
 	QString value;
 };
 
+#if 0
 class AbPickItem : public QTableItem
 {
 public:
@@ -67,6 +71,8 @@ public:
 private:
     QGuardedPtr<QComboBox> cb;
 };
+
+#endif
 
 class AbTable : public QTable
 {
@@ -91,7 +97,7 @@ public:
     // Get the UID of the current selected Entry
     int currentEntry_UID();
 
-    QString findContactName( const OContact &entry );
+    // QString findContactName( const OContact &entry );
 
     void init();
     void clear();
@@ -103,8 +109,8 @@ public:
     void paintCell(QPainter* p, int row, int col,  const QRect&, bool );
 
     // addresspicker mode (What's that ? se)
-    void setChoiceNames( const QStringList& list);
-    QStringList choiceNames() const;
+    // void setChoiceNames( const QStringList& list);
+    // QStringList choiceNames() const;
     void setChoiceSelection( const QValueList<int>& list );
     QStringList choiceSelection(int index) const;
 
@@ -129,7 +135,7 @@ protected slots:
     void rowHeightChanged( int row );
 
 private:
-    void insertIntoTable( const OContact &cnt, int row );
+    // void insertIntoTable( const OContact &cnt, int row );
     ContactItem findContactContact( const OContact &entry, int row );
     void fitColumns();
     void resizeRows();
@@ -139,7 +145,7 @@ private:
 
     int lastSortCol;
     bool asc;
-    QMap<AbTableItem*, OContact> contactList;
+    // QMap<AbTableItem*, OContact> contactList;
     QValueList<int> intFields;
     QStringList choicenames;
     bool enablePainting;

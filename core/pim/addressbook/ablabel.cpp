@@ -71,10 +71,13 @@ OContact AbLabel::currentEntry()
 bool AbLabel::selectContact( int UID )
 {
 
-	for ( m_itCurContact = m_viewList.begin(); m_itCurContact != m_viewList.end(); ++m_itCurContact){
-		if ( (*m_itCurContact).uid() == UID )
+	for ( int r = 0; r < m_viewList.count(); ++r ) {
+		if ( m_viewList.uidAt( r ) == UID ){
+			m_itCurContact.setCurrent( r );
 			break;
+		}
 	}
+
 	sync();
 
 	return true;

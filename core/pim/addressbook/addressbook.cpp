@@ -248,7 +248,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	QObject::connect( m_abView, SIGNAL(signalNotFound()), this, SLOT(slotNotFound()) );
 
-	m_abView->load();
+	// m_abView->load(); // Already done by c'tor .
 
 	// Letter Picker
 	pLabel = new LetterPicker( listContainer );

@@ -44,6 +44,8 @@
 
 #include <ctype.h> //toupper() for key hack
 
+#if 0
+
 /*!
   \class AbTableItem abtable.h
   
@@ -112,6 +114,8 @@ void AbPickItem::setContentFromEditor( QWidget *w )
 		QTableItem::setContentFromEditor( w );
 }
 
+#endif
+
 /*!
   \class AbTable abtable.h
   
@@ -135,7 +139,7 @@ AbTable::AbTable( const QValueList<int> order, QWidget *parent, const char *name
 	connect( this, SIGNAL(clicked(int,int,int,const QPoint &)),
 		 this, SLOT(itemClicked(int,int)) );
 
-	contactList.clear();
+	// contactList.clear();
 	//	qWarning("C'tor end");
 }
 
@@ -158,7 +162,7 @@ void AbTable::init()
 
 void AbTable::setContacts( const OContactAccess::List& viewList )
 {
-	//	qWarning("AbTable::setContacts()");
+	qWarning("AbTable::setContacts()");
 
 	clear();
 	m_viewList = viewList;
@@ -168,13 +172,13 @@ void AbTable::setContacts( const OContactAccess::List& viewList )
 	
 	OContactAccess::List::Iterator it;
 	setNumRows( m_viewList.count() );
-	int row = 0;
-	for ( it = m_viewList.begin(); it != m_viewList.end(); ++it )
-		insertIntoTable( *it, row++ );
+//	int row = 0;
+// 	for ( it = m_viewList.begin(); it != m_viewList.end(); ++it )
+// 		insertIntoTable( *it, row++ );
 	
-	setSorting( true );
+// 	setSorting( true );
 
-	resort();
+// 	resort();
 
 	updateVisible();
 
@@ -190,23 +194,22 @@ void AbTable::setOrderedList( const QValueList<int> ordered )
 
 bool AbTable::selectContact( int UID )
 {
-	//	qWarning( "AbTable::selectContact( %d )", UID );
+	qWarning( "AbTable::selectContact( %d )", UID );
 	int rows = numRows();
-	AbTableItem *abi;
 	OContact* foundContact = 0l;
 	bool found = false;
 
 	setPaintingEnabled( FALSE );
+	qWarning( "search start" );
 	for ( int r = 0; r < rows; ++r ) {
-		abi = static_cast<AbTableItem*>( item(r, 0) );
-		foundContact = &contactList[abi];
-		if ( foundContact -> uid() == UID ){
+		if ( m_viewList.uidAt( r ) == UID ){
 			ensureCellVisible( r, 0 );
 			setCurrentCell( r, 0 );
 			found = true;
 			break;
 		}
 	}
+	qWarning( "search end" );
 
 	if ( !found ){
 		ensureCellVisible( 0,0 );
@@ -218,9 +221,10 @@ bool AbTable::selectContact( int UID )
 	return true;
 }
 
+#if 0
 void AbTable::insertIntoTable( const OContact& cnt, int row )
 {
-	//	qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
+	qWarning( "void AbTable::insertIntoTable( const OContact& cnt, %d )", row );
 	QString strName;
 	ContactItem contactItem;
 	
@@ -240,7 +244,7 @@ void AbTable::insertIntoTable( const OContact& cnt, int row )
 	//    setItem( row, 2, new AbPickItem( this ) );
 	
 }
-
+#endif
 
 
 void AbTable::columnClicked( int col )
@@ -263,7 +267,8 @@ void AbTable::columnClicked( int col )
 
 void AbTable::resort()
 {
-	//	qWarning( "void AbTable::resort()" );
+	qWarning( "void AbTable::resort() NOT POSSIBLE !!" );
+#if 0
 	setPaintingEnabled( FALSE );
 	if ( sorting() ) {
 		if ( lastSortCol == -1 )
@@ -273,19 +278,12 @@ void AbTable::resort()
 		updateVisible();
 	}
 	setPaintingEnabled( TRUE );
+#endif
 }
 
 OContact AbTable::currentEntry()
-{
-	//	qWarning( "OContact AbTable::currentEntry()" );
-	OContact cnt;
-	AbTableItem *abItem;
-	abItem = static_cast<AbTableItem*>(item( currentRow(), 0 ));
-	if ( abItem ) {
-		cnt = contactList[abItem];
-		//cnt = contactList[currentRow()];
-	}
-	return cnt;
+{	
+	return m_viewList[currentRow()];
 }
 
 int AbTable::currentEntry_UID()
@@ -295,8 +293,8 @@ int AbTable::currentEntry_UID()
 
 void AbTable::clear()
 {
-	//	qWarning( "void AbTable::clear()" );
-	contactList.clear();
+	qWarning( "void AbTable::clear()" );
+	// contactList.clear();
 
 	setPaintingEnabled( FALSE );
 	for ( int r = 0; r < numRows(); ++r ) {
@@ -313,7 +311,9 @@ void AbTable::clear()
 // Refresh updates column 2 if the contactsettings changed
 void AbTable::refresh()
 {
-	//	qWarning( "void AbTable::refresh()" );
+	qWarning( "void AbTable::refresh() NOT IMPLEMENTED !!" );
+
+#if 0
 	int rows = numRows();
 	AbTableItem *abi;
 	ContactItem contactItem;
@@ -333,6 +333,8 @@ void AbTable::refresh()
 	}
 	resort();
 	setPaintingEnabled( TRUE );
+
+#endif
 }
 
 void AbTable::keyPressEvent( QKeyEvent *e )
@@ -365,8 +367,9 @@ void AbTable::keyPressEvent( QKeyEvent *e )
 
 void AbTable::moveTo( char c )
 {
-	qWarning( "void AbTable::moveTo( char c )" );
+	qWarning( "void AbTable::moveTo( char c ) NOT IMPLEMENTED !!" );
 	
+#if 0
 	int rows = numRows();
 	QString value;
 	AbTableItem *abi;
@@ -394,9 +397,12 @@ void AbTable::moveTo( char c )
 		}
 	}
 	setCurrentCell( r, currentColumn() );
+
+#endif
 }
 
-
+#if 0
+// Useless.. Nobody uses it .. (se)
 QString AbTable::findContactName( const OContact &entry )
 {
 	// We use the fileAs, then company, defaultEmail
@@ -410,7 +416,7 @@ QString AbTable::findContactName( const OContact &entry )
 	}
 	return str;
 }
-
+#endif
 
 
 void AbTable::resizeRows() {
@@ -506,6 +512,7 @@ void AbTable::show()
 	QTable::show();
 }
 
+#if 0
 void AbTable::setChoiceNames( const QStringList& list)
 {
 	choicenames = list;
@@ -520,6 +527,7 @@ void AbTable::setChoiceNames( const QStringList& list)
 	}
 	fitColumns();
 }
+#endif
 
 void AbTable::itemClicked(int,int col)
 {
@@ -532,11 +540,13 @@ void AbTable::itemClicked(int,int col)
 	}
 }
 
+#if 0
 QStringList AbTable::choiceNames() const
 {
 	return choicenames;
 }
 
+#endif
 void AbTable::setChoiceSelection( const QValueList<int>& list )
 {
 	intFields = list;
@@ -558,8 +568,6 @@ QStringList AbTable::choiceSelection(int /*index*/) const
 	*/
 	return r;
 }
-
-
 
 
 void AbTable::updateVisible()
@@ -630,6 +638,10 @@ void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) 
 
     p->save();
 
+    //qWarning( "Paint row: %d", row );
+
+    OContact act_contact = m_viewList[row];
+
     // Paint alternating background bars
     if (  (row % 2 ) == 0 ) {
         p->fillRect( 0, 0, cr.width(), cr.height(), cg.brush( QColorGroup::Base ) );
@@ -647,17 +659,32 @@ void AbTable::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool ) 
     int x = 0;
     int y = ( cr.height() - 14 ) / 2;
 
-    QPixmap pic = pixmap( row, col );
-    if ( !pic.isNull() )
-    {
-        p->drawPixmap( x + marg, y, pixmap( row, col ) );
-        p->drawText( x + marg + pixmap( row, col ).width() + 4,2 + fm.ascent(), text( row, col ) );
-    }
-    else
-    {
-        p->drawText( x + marg,2 + fm.ascent(), text( row, col ) );
-    }
+    QString nameText    = act_contact.fileAs();
 
+    switch( col ){
+	    case 0: 
+		    p->drawText( x + marg,2 + fm.ascent(), nameText );
+	    break;
+	    case 1:{
+
+		    ContactItem contactItem = findContactContact( act_contact, 0 );
+		    QPixmap contactPic  = contactItem.icon; /* pixmap( row, col ); */
+		    QString contactText = contactItem.value;
+			    
+		    if ( !contactPic.isNull() )
+			    {
+				    p->drawPixmap( x + marg, y, contactPic );
+				    p->drawText( x + marg + contactPic.width() 
+						 + 4,2 + fm.ascent(), contactText );
+			    }
+		    else
+			    {
+				    p->drawText( x + marg,2 + fm.ascent(), contactText );
+			    }
+	    }
+	    break;
+
+    }
     p->restore();
 }
 
