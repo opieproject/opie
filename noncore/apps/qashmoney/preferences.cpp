@@ -22,7 +22,7 @@ void Preferences::addPreferences ()
     char **results;
 
     sqlite_get_table ( db, "select count() from preferences;", &results, 0, 0, 0 );
-    if ( atoi ( results [ 1 ] ) != 6 )
+    if ( atoi ( results [ 1 ] ) != 7 )
     {
       // dateformat preference 1 = yyyymmdd 2 = yymmdd 3 = mmddyyyy 4 = mmddyy
       // 5 = yyyyddmm 6 = yyddmm 7 = ddmmyyyy 8 = ddmmyy
@@ -59,6 +59,12 @@ void Preferences::addPreferences ()
       sqlite_get_table ( db, "select preference from preferences where id = 6;", &results, &rows, &columns, 0 );
       if ( rows == 0 )
         sqlite_exec ( db, "insert into preferences values ( 0, 'excludetransfersfromlimit', 0, 0, 0, NULL );", 0, 0, 0 );
+
+      // limit number of transactions to 0 = 14 days 1 = 30 days, 2 = 60 days, 3 = 90 days, 4 = 180 days, 5 = 365 days, 6 = all
+      rows = 0;
+      sqlite_get_table ( db, "select preference from preferences where id = 7;", &results, &rows, &columns, 0 );
+      if ( rows == 0 )
+        sqlite_exec ( db, "insert into preferences values ( 0, 'limittransactions', 0, 0, 0, NULL );", 0, 0, 0 );
     }
   }
 

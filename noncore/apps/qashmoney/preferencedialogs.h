@@ -6,6 +6,8 @@
 #include <qhbuttongroup.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
+#include <qlabel.h>
+#include <qhbox.h>
 
 #ifndef DATEPREFERENCES_H
 #define DATEPREFERENCES_H
@@ -44,7 +46,8 @@ class TransactionPreferences : public QDialog
 
     QCheckBox *showclearedtransactions;
     QCheckBox *excludetransfers;
-    QString *limittransactionslabel;
+    QHBox *limittransactionsbox;
+    QLabel *limittransactionslabel;
     QComboBox *limittransactions;
     QPushButton *defaults;
     QBoxLayout *layout;
@@ -53,6 +56,7 @@ class TransactionPreferences : public QDialog
     void changeShowClearedPreference ( bool );
     void changeExcludeTranfersPreference ( bool );
     void setDefaultTransactionPreferences ();
+    void changeLimitTransactionsPreference ( int );
 };
 
 #endif

@@ -79,6 +79,18 @@ TransactionPreferences::TransactionPreferences ( QWidget* parent ) : QDialog ( p
     excludetransfers = new QCheckBox ( this );
     excludetransfers->setText ( "Include Transfers In Limit View" );
 
+    limittransactionsbox = new QHBox ( this );
+    limittransactionsbox->setSpacing ( 2 );
+    limittransactionslabel = new QLabel ( "Limit All Transactions To", limittransactionsbox );
+    limittransactions = new QComboBox ( limittransactionsbox );
+    limittransactions->insertItem ( "14 days" );
+    limittransactions->insertItem ( "30 days" );
+    limittransactions->insertItem ( "60 days" );
+    limittransactions->insertItem ( "90 days" );
+    limittransactions->insertItem ( "180 days" );
+    limittransactions->insertItem ( "365 days" );
+    limittransactions->insertItem ( "All" );
+
     if ( preferences->getPreference ( 3 ) == 1 )
       showclearedtransactions->setChecked ( TRUE );
     else
@@ -95,15 +107,22 @@ TransactionPreferences::TransactionPreferences ( QWidget* parent ) : QDialog ( p
     layout = new QVBoxLayout ( this, 2, 2 );
     layout->addWidget ( showclearedtransactions );
     layout->addWidget ( excludetransfers );
-    layout->insertSpacing ( 2, 5 );
+    layout->addWidget ( limittransactionsbox );
+    layout->insertSpacing ( 3, 5 );
     layout->addWidget ( defaults );
 
     connect ( showclearedtransactions, SIGNAL ( toggled ( bool ) ), this, SLOT ( changeShowClearedPreference ( bool ) ) );
     connect ( excludetransfers, SIGNAL ( toggled ( bool ) ), this, SLOT ( changeExcludeTranfersPreference ( bool ) ) );
+    connect ( limittransactions, SIGNAL ( activated ( int ) ), this, SLOT ( changeLimitTransactionsPreference ( int ) ) );
 }
 
 TransactionPreferences::~TransactionPreferences ()
   {
+  }
+
+void TransactionPreferences::changeLimitTransactionsPreference ( int pref )
+  {
+    preferences->changePreference ( 7, pref );
   }
 
 void TransactionPreferences::changeShowClearedPreference ( bool state )
@@ -126,7 +145,9 @@ void TransactionPreferences::setDefaultTransactionPreferences ()
   {
     preferences->changePreference ( 3, 0 );
     preferences->changePreference ( 6, 0 );
+    preferences->changePreference ( 7, 0 );
     showclearedtransactions->setChecked ( FALSE );
+    limittransactions->setCurrentItem ( 0 );
   }
 
 // START ACCOUNT PREFERNCES
