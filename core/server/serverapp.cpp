@@ -333,7 +333,6 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     connect( kf, SIGNAL(activate(const Opie::ODeviceButton*,bool)),
 	    this,SIGNAL(activate(const Opie::ODeviceButton*,bool)));
 
-    connect( kf, SIGNAL(power()), this, SLOT(togglePower()) );
     connect( kf, SIGNAL(backlight()), this, SLOT(toggleLight()) );
     connect( this, SIGNAL( power() ), SLOT( togglePower() ) );
 
