@@ -36,6 +36,7 @@
 #include <qstring.h>
 #include <qtoolbutton.h>
 #include <qlineedit.h>
+#include <qpixmap.h>
 
 class ONetworkInterface;
 class QShowEvent;
@@ -106,6 +107,7 @@ class NetworkApplet : public OTaskbarApplet
 
   private:
     NetworkAppletControl* _control;
+    QPixmap _pixmap;
 };
 
 #endif
