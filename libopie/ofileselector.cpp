@@ -318,6 +318,10 @@ void OFileViewFileListView::reread( bool all ) {
 
     // now go through all files
     const QFileInfoList *list = dir.entryInfoList();
+    if (!list) {
+        cdUP();
+        return;
+    }
     QFileInfoListIterator it( *list );
     QFileInfo *fi;
     while( (fi=it.current() ) ){
@@ -470,9 +474,10 @@ void OFileViewFileListView::cdUP() {
     dir.cdUp();
 
     if (!dir.exists() )
-        return;
+        m_currentDir = "/";
+    else
+        m_currentDir = dir.absPath();
 
-    m_currentDir = dir.absPath();
     reread( m_all );
 }
 void OFileViewFileListView::cdHome() {
