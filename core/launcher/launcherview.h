@@ -34,6 +34,13 @@ class QWidgetStack;
 class MenuButton;
 class QComboBox;
 
+
+
+enum BusyIndicatorType {
+	BIT_Normal = 0,
+	BIT_Animated
+};
+
 class LauncherView : public QVBox
 {
     Q_OBJECT
@@ -106,7 +113,7 @@ private:
     QColor textCol;
 
     QImage loadBackgroundImage(QString &fname);
-    int m_busyType;
+
 };
 
 #endif // LAUNCHERVIEW_H
