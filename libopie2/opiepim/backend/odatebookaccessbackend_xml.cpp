@@ -308,7 +308,7 @@ bool ODateBookAccessBackend_XML::add( const OPimEvent& ev ) {
 }
 bool ODateBookAccessBackend_XML::remove( int uid ) {
     m_changed = true;
-    m_rep.remove( uid );
+    m_raw.remove( uid );
     m_rep.remove( uid );
 
     return true;
