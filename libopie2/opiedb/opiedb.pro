@@ -10,6 +10,7 @@ HEADERS     = osqlbackend.h    \
               osqltable.h      \
               osqlbackendmanager.h \
               osqlitedriver.h
+
 SOURCES     = osqlbackend.cpp   \
               osqldriver.cpp   \
               osqlerror.cpp    \
@@ -19,7 +20,7 @@ SOURCES     = osqlbackend.cpp   \
               osqltable.cpp    \
               osqlbackendmanager.cpp \
               osqlitedriver.cpp
-INTERFACES  =
+
 TARGET      = opiedb2
 VERSION     = 1.9.0
 INCLUDEPATH = $(OPIEDIR)/include

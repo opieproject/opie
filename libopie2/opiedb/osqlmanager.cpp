@@ -5,7 +5,8 @@
 #include "osqlbackendmanager.h"
 #include "osqlitedriver.h"
 
-using namespace Opie::DB;
+namespace Opie {
+namespace DB {
 
 OSQLManager::OSQLManager() {
 }
@@ -80,4 +81,8 @@ OSQLBackEnd::ValueList OSQLManager::builtIn()const {
     back.setPreference( 50 );
     list.append( back );
     return list;
+}
+
+
+}
 }

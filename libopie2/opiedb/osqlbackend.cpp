@@ -1,7 +1,8 @@
 
 #include "osqlbackend.h"
 
-using namespace Opie::DB;
+namespace Opie {
+namespace DB   {
 
 
 OSQLBackEnd::OSQLBackEnd( const QString& name,
@@ -72,4 +73,8 @@ void OSQLBackEnd::setDefault( bool def) {
 }
 void OSQLBackEnd::setPreference( int pref ) {
     m_pref = pref;
+}
+
+
+}
 }
