@@ -48,7 +48,6 @@ void ContactItem::setIcon()
 		icon = Resource::loadPixmap( "addressbook/email" );
 		break;
 	case Qtopia::HomePhone:
-		qDebug("homephone");
 		icon = Resource::loadPixmap( "addressbook/phonehome" );
 		break;
 	case Qtopia::HomeFax:
@@ -64,6 +63,7 @@ void ContactItem::setIcon()
 		icon = Resource::loadPixmap( "addressbook/webpagework" );
 		break;
 	case Qtopia::Title:
+ 	case Qtopia::JobTitle:
 	case Qtopia::FirstName:
 	case Qtopia::MiddleName:
 	case Qtopia::LastName:
@@ -84,7 +84,6 @@ void ContactItem::setIcon()
  	case Qtopia::BusinessStreet:
  	case Qtopia::BusinessZip:
  	case Qtopia::BusinessCountry:
- 	case Qtopia::JobTitle:
  	case Qtopia::Department:
  	case Qtopia::Office:
  	case Qtopia::Manager:
@@ -102,6 +101,7 @@ void ContactItem::setIcon()
 		icon = Resource::loadPixmap( "osearch/clock" );
  		break;
  	case Qtopia::Notes:
+		icon = Resource::loadPixmap( "txt" );
  		break;
 	default:
 		icon = Resource::loadPixmap( "DocsIcon" );

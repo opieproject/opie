@@ -64,8 +64,10 @@ void EventItem::setIcon()
 		icon = Resource::loadPixmap( "reset" );
 		break;
 	case Qtopia::DatebookDescription:
+		icon = Resource::loadPixmap( "osearch/summary" );
+ 		break;
  	case Qtopia::Notes:
-		icon = Resource::loadPixmap( "osearch/personal" );
+		icon = Resource::loadPixmap( "txt" );
  		break;
 	case Qtopia::Location:
 		icon = Resource::loadPixmap( "home" );

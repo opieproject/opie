@@ -62,8 +62,10 @@ void TodoItem::setIcon()
 		icon = Resource::loadPixmap( "reset" );
 		break;
 	case OTodo::Description:
+		icon = Resource::loadPixmap( "txt" );
+		break;
  	case OTodo::Summary:
-		icon = Resource::loadPixmap( "osearch/personal" );
+		icon = Resource::loadPixmap( "osearch/summary" );
  		break;
 	case OTodo::Priority:
 		icon = Resource::loadPixmap( "todo/priority1" );
