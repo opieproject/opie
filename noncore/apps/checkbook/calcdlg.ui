@@ -1,0 +1,243 @@
+<!DOCTYPE UI><UI>
+<class>CalcDlg</class>
+<widget>
+    <class>QWidget</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>CalcDlg</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>222</width>
+            <height>274</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Network Time</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <widget>
+        <class>QTabWidget</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>TabWidgetMain</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>10</x>
+                <y>0</y>
+                <width>200</width>
+                <height>260</height>
+            </rect>
+        </property>
+        <property>
+            <name>layoutMargin</name>
+        </property>
+        <property>
+            <name>layoutSpacing</name>
+        </property>
+        <widget>
+            <class>QWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tabMain</cstring>
+            </property>
+            <attribute>
+                <name>title</name>
+                <string>Molweight</string>
+            </attribute>
+            <widget>
+                <class>QFrame</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>FrameSystemTime</cstring>
+                </property>
+                <property stdset="1">
+                    <name>geometry</name>
+                    <rect>
+                        <x>2</x>
+                        <y>2</y>
+                        <width>180</width>
+                        <height>220</height>
+                    </rect>
+                </property>
+                <property stdset="1">
+                    <name>frameShape</name>
+                    <enum>StyledPanel</enum>
+                </property>
+                <property stdset="1">
+                    <name>frameShadow</name>
+                    <enum>Raised</enum>
+                </property>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1_4</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>1</x>
+                            <y>1</y>
+                            <width>298</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Formula:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel2_4</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>1</x>
+                            <y>86</y>
+                            <width>298</width>
+                            <height>16</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Result:</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLayoutWidget</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>Layout7</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>0</x>
+                            <y>50</y>
+                            <width>175</width>
+                            <height>30</height>
+                        </rect>
+                    </property>
+                    <hbox>
+                        <property stdset="1">
+                            <name>margin</name>
+                            <number>0</number>
+                        </property>
+                        <property stdset="1">
+                            <name>spacing</name>
+                            <number>6</number>
+                        </property>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>calculate</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Calculate</string>
+                            </property>
+                        </widget>
+                        <widget>
+                            <class>QPushButton</class>
+                            <property stdset="1">
+                                <name>name</name>
+                                <cstring>clear_fields</cstring>
+                            </property>
+                            <property stdset="1">
+                                <name>text</name>
+                                <string>Clear</string>
+                            </property>
+                        </widget>
+                    </hbox>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>formula</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>0</x>
+                            <y>20</y>
+                            <width>170</width>
+                            <height>22</height>
+                        </rect>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QMultiLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>anal_display</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>0</x>
+                            <y>130</y>
+                            <width>170</width>
+                            <height>80</height>
+                        </rect>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>LineEdit2</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>0</x>
+                            <y>100</y>
+                            <width>170</width>
+                            <height>22</height>
+                        </rect>
+                    </property>
+                </widget>
+            </widget>
+        </widget>
+        <widget>
+            <class>QWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>tabNtp</cstring>
+            </property>
+            <attribute>
+                <name>title</name>
+                <string>Nernst</string>
+            </attribute>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>1</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>2</number>
+                </property>
+            </grid>
+        </widget>
+    </widget>
+</widget>
+</UI>
