@@ -26,10 +26,11 @@
  */
 #include "textedit.h"
 #include "filePermissions.h"
-#include "fontDialog.h"
+//#include "fontDialog.h"
 
 #include <opie/ofileselector.h>
 #include <opie/ofiledialog.h>
+#include <opie/ofontselector.h>
 
 #include <qpe/fontdatabase.h>
 #include <qpe/global.h>
@@ -57,6 +58,7 @@
 #include <qwidgetstack.h>
 #include <qcheckbox.h>
 #include <qcombo.h>
+#include <qlayout.h>
 
 #include <unistd.h>
 #include <sys/stat.h>
@@ -312,15 +314,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( bar );
     a->addTo( edit );
 
-    int defsize;
-    bool defb, defi, wrap;
-
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    defsize = cfg.readNumEntry("FontSize",10);
-    defb = cfg.readBoolEntry("Bold",FALSE);
-    defi = cfg.readBoolEntry("Italic",FALSE);
-    wrap = cfg.readBoolEntry("Wrap",TRUE);
 
     zin = new QAction( tr("Zoom in"), QString::null, 0, this, 0 );
     connect( zin, SIGNAL( activated() ), this, SLOT( zoomIn() ) );
@@ -331,23 +324,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     zout->addTo( font );
 
     font->insertSeparator();
-
-#if 0
-    QAction *ba = new QAction( tr("Bold"), QString::null, 0, this, 0 );
-    connect( ba, SIGNAL( toggled(bool) ), this, SLOT( setBold(bool) ) );
-    ba->setToggleAction(TRUE);
-    ba->addTo( font );
-
-    QAction *ia = new QAction( tr("Italic"), QString::null, 0, this, 0 );
-    connect( ia, SIGNAL( toggled(bool) ), this, SLOT( setItalic(bool) ) );
-    ia->setToggleAction(TRUE);
-    ia->addTo( font );
-
-    ba->setOn(defb);
-    ia->setOn(defi);
-
-    font->insertSeparator();
-#endif
 
     QAction *wa = new QAction( tr("Wrap lines"), QString::null, 0, this, 0 );
     connect( wa, SIGNAL( toggled(bool) ), this, SLOT( setWordWrap(bool) ) );
@@ -369,12 +345,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     nAdvanced->setToggleAction(TRUE);
     nAdvanced->addTo( font );
 
-    if(cfg.readBoolEntry("AdvancedFeatures")) {
-        qDebug("using advanced features");
-        useAdvancedFeatures = true;
-        nAdvanced->setOn(TRUE);
-    } else
-        useAdvancedFeatures = false;
 
     font->insertSeparator();
 
@@ -415,26 +385,33 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( editor, SIGNAL( textChanged() ), this, SLOT( editorChanged() ) );
 
-//    resize( 200, 300 );
+    Config cfg("TextEdit");
 
-//    setFontSize(defsize,TRUE);
-    FontDatabase fdb;
-    QFont defaultFont=editor->font();
-    QFontInfo fontInfo(defaultFont);
+	cfg. setGroup ( "Font" );
 
-    cfg.setGroup("Font");
-    QString family = cfg.readEntry("Family", fontInfo.family());
-    QString style = cfg.readEntry("Style", fdb.styleString(defaultFont));
-    int i_size = cfg.readNumEntry("Size", fontInfo.pointSize()/10);
-    QString charSet = cfg.readEntry("CharSet", QFont::encodingName( fontInfo.charSet()) );
+    QFont defaultFont = editor-> font ( );
 
-    defaultFont = fdb.font(family,style,i_size,charSet);
-    editor->setFont( defaultFont);
+    QString family = cfg. readEntry     ( "Family", defaultFont. family ( ));
+    int size       = cfg. readNumEntry  ( "Size",   defaultFont. pointSize ( ));
+    int weight     = cfg. readNumEntry  ( "Weight", defaultFont. weight ( ));
+    bool italic    = cfg. readBoolEntry ( "Italic", defaultFont. italic ( ));
 
-    wa->setOn(wrap);
+    defaultFont = QFont ( family, size, weight, italic );
+    editor-> setFont ( defaultFont );
+
     updateCaption();
 
-     cfg.setGroup("View");
+    cfg.setGroup ( "View" );
+
+    useAdvancedFeatures = cfg. readBoolEntry ( "AdvancedFeatures", false ); 
+    
+    if ( useAdvancedFeatures )
+        nAdvanced-> setOn ( true );
+  
+  	bool wrap = cfg. readBoolEntry ( "Wrap", true );
+  	wa-> setOn ( wrap );
+    setWordWrap ( wrap );
+
      if(cfg.readEntry("startNew","TRUE") == "TRUE") {
          nStart->setOn(TRUE);
          fileNew();
@@ -451,15 +428,20 @@ TextEdit::~TextEdit() {
 }
 
 void TextEdit::cleanUp() {
-qDebug("cleanUp");//    save();
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
+	qDebug("cleanUp");//    save();
+	
+    Config cfg ( "TextEdit" );
+    cfg. setGroup ( "Font" );
     QFont f = editor->font();
-    cfg.writeEntry("FontSize",f.pointSize());
-    cfg.writeEntry("Bold",f.bold());
-    cfg.writeEntry("Italic",f.italic());
-    cfg.writeEntry("Wrap",editor->wordWrap() == QMultiLineEdit::WidgetWidth);
-    cfg.writeEntry( "FileView", viewSelection );
+    cfg. writeEntry ( "Family", f. family ( ));
+    cfg. writeEntry ( "Size",   f. pointSize ( ));
+    cfg. writeEntry ( "Weight", f. weight ( ));
+    cfg. writeEntry ( "Italic", f. italic ( ));
+    
+    cfg. setGroup ( "View" );
+    cfg. writeEntry ( "Wrap",     editor-> wordWrap ( ) == QMultiLineEdit::WidgetWidth );
+    cfg. writeEntry ( "FileView", viewSelection );
+	cfg. writeEntry ( "AdvancedFeatures", useAdvancedFeatures );
 }
 
 
@@ -900,26 +882,17 @@ void TextEdit::closeEvent( QCloseEvent *e ) {
 }
 
 void TextEdit::changeFont() {
-    FontDatabase fdb;
-    QFont defaultFont=editor->font();
-    QFontInfo fontInfo(defaultFont);
-    Config cfg("TextEdit");
-    cfg.setGroup("Font");
-    QString family = cfg.readEntry("Family", fontInfo.family());
-    QString style = cfg.readEntry("Style", fdb.styleString(defaultFont));
-    int i_size = cfg.readNumEntry("Size", fontInfo.pointSize()/10);
-    QString charSet = cfg.readEntry("CharSet", QFont::encodingName( fontInfo.charSet()) );
+	QDialog *d = new QDialog ( this, "FontDialog", true );
+	d-> setCaption ( tr( "Choose font" ));
+	QBoxLayout *lay = new QVBoxLayout ( d );
+	OFontSelector *ofs = new OFontSelector ( true, d );
+	lay-> addWidget ( ofs );
+	ofs-> setSelectedFont ( editor-> font ( ));
 
-    defaultFont = fdb.font(family,style,i_size,charSet);
-
-    FontDialog *fontDlg;
-    fontDlg=new FontDialog(this,tr("FontDialog"),TRUE);
-
-    fontDlg->exec();
-
-    QFont myFont=fontDlg->selectedFont;
-    editor->setFont( myFont);
-    delete fontDlg;
+	d-> showMaximized ( );
+    if ( d-> exec ( ) == QDialog::Accepted )
+	    editor-> setFont ( ofs-> selectedFont ( ));
+    delete d;
 
 }
 
@@ -975,9 +948,6 @@ void TextEdit::doAbout() {
 
 void TextEdit::doAdvanced(bool b) {
   useAdvancedFeatures=b;
-    Config cfg("TextEdit");
-    cfg.setGroup("View");
-    cfg.writeEntry("AdvancedFeatures",b);
 }
 
 void TextEdit::editPasteTimeDate() {

@@ -1,8 +1,8 @@
 TEMPLATE  = app
 CONFIG    += qt warn_on release
 DESTDIR   = $(OPIEDIR)/bin
-HEADERS = textedit.h fontDialog.h filePermissions.h 
-SOURCES = main.cpp textedit.cpp fontDialog.cpp filePermissions.cpp
+HEADERS = textedit.h filePermissions.h 
+SOURCES = main.cpp textedit.cpp filePermissions.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
