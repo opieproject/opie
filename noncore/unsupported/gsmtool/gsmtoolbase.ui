@@ -427,7 +427,7 @@
                 <vbox>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>0</number>
+                        <number>2</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
@@ -746,17 +746,20 @@
                 <grid>
                     <property stdset="1">
                         <name>margin</name>
-                        <number>11</number>
+                        <number>-1</number>
                     </property>
                     <property stdset="1">
                         <name>spacing</name>
-                        <number>6</number>
+                        <number>-1</number>
                     </property>
                     <widget row="0"  column="0" >
                         <class>QLayoutWidget</class>
                         <property stdset="1">
                             <name>name</name>
                             <cstring>Layout6</cstring>
+                        </property>
+                        <property>
+                            <name>layoutSpacing</name>
                         </property>
                         <hbox>
                             <property stdset="1">
@@ -932,6 +935,10 @@
                         <property stdset="1">
                             <name>enabled</name>
                             <bool>false</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>hMargin</name>
+                            <number>1</number>
                         </property>
                         <property stdset="1">
                             <name>wordWrap</name>
