@@ -55,13 +55,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "audiowidget.h"
-#include "videowidget.h"
-
-extern MediaPlayerState *mediaPlayerState;
-// extern AudioWidget *audioUI;
-// extern VideoWidget *videoUI;
-
 PlayListWidget::PlayListWidget( MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name )
     : PlayListWidgetGui( mediaPlayerState, parent, name ) {
 
