@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation>Schliessen</translation>
     </message>
     <message>
         <source>Charging</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbleibende Laufzeit</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -43,15 +43,15 @@
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Ersatzversorgung</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzversorung</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation>Externe Stromzufurh wurde entfernt</translation>
+        <translation>Externe Stromzufuhr wurde entfernt</translation>
     </message>
     <message>
         <source>Battery time remaining</source>

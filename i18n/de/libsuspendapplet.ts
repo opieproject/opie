@@ -3,11 +3,11 @@
     <name>SuspendApplet</name>
     <message>
         <source>Suspend shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspend Schnellbutton</translation>
     </message>
     <message>
         <source>Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Suspend</translation>
     </message>
 </context>
 </TS>

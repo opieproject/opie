@@ -88,7 +88,7 @@ automatisch laden?
     </message>
     <message>
         <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Wieviele Minuten war der PDA ausgeschaltet bevor Autostart nach dem Einschalten aktiv wird</translation>
     </message>
     <message>
         <source>Icon size</source>
@@ -116,7 +116,7 @@ automatisch laden?
     </message>
     <message>
         <source>Check a checkbox to activate/deactivate a plugin or use the arrow buttons on the right to change the appearance order</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie eine Checkbox um ein Plugin zu aktivieren und deaktivieren oder verwenden Sie die Pfeile rechts um die Reihenfolge der Anzeige festzulegen</translation>
     </message>
 </context>
 </TS>

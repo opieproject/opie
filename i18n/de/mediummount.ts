@@ -4,11 +4,11 @@
     <name>MainWindow</name>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Global</translation>
     </message>
     <message>
         <source>Medium Mount Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediummount-Einstellungen</translation>
     </message>
 </context>
 <context>
@@ -47,7 +47,7 @@
     </message>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sobald ein Medium in das Gerät eingelegt wird versucht OPIE das Medium nach Dokumenten abzuscannen. Auf grossen Medien kann das durchaus einige Zeit in Anspruch nehmen. Sie können wählen, ob OPIE generell nach Dokumenten suchen soll oder abhängig vom eingelegten Medium. Jedes Medium kann zudem nachkonfiguriert werden.</translation>
     </message>
 </context>
 <context>
@@ -90,7 +90,7 @@
     </message>
     <message>
         <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Medienkonfiguration. Die Änderungen werden aktiv, wenn die Anwengung geschlossen wird. Um den Dokumentenordner zu aktualisieren muss das Medium entfernt und wieder eingelegt werden.</translation>
     </message>
 </context>
 </TS>

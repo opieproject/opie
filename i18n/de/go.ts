@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Resign</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgeben</translation>
     </message>
     <message>
         <source>Two player option</source>

@@ -104,39 +104,39 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Anueigen der erledigten Aufgabe</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur überfällige Aufgaben anzeigen</translation>
     </message>
     <message>
         <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
+        <translation>Fälligkeitsdatum anzeigen</translation>
     </message>
     <message>
         <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnelleiongabe anzeigen</translation>
     </message>
     <message>
         <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
+        <translation>Schnelleingabe</translation>
     </message>
     <message>
         <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um eine neue Aufgabe zu erzeugen</translation>
     </message>
     <message>
         <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die aktuelle Aufgabe zu ändern</translation>
     </message>
     <message>
         <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken, um die aktuelle Aufgabe zu löschen</translation>
     </message>
     <message>
         <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Hier klicken um die aktuelle Aufgabe an ein anderes Gerät zu senden.</translation>
     </message>
     <message>
         <source>This is a listing of all current tasks.
@@ -146,7 +146,13 @@ The list displays the following information:
 2. Priority - a graphical representation of task priority.  Double-click here to modify.
 3. Description - description of task.  Click here to select the task.
 4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist eine Liste aller Aufgaben.
+
+Die Liste zeigt folgende Informationen:
+1. Erledigt- Ein grüner Haken zeigt die Erledigung der Aufgabe. Clicken Sie hier um die Aufgabe zu erledigen.
+2. Priorität- Eine graphische Repräsentation der Aufgabenpriorität. Hier Doppelklicken um sie zu ändern.
+3. Beschreibung- Die Aufgabenbeschreibung. Hier Klicken um die Aufgabe auszuwählen.
+4. Fälligkeit- Zeigt wann die Aufgabe fällig ist. Diese Anzeige kann wahlweise ein- und ausgeschaltet werden, indem man im Menü Optionen-&gt;&quot;Fälligkeitsanzeige&quot; wählt.</translation>
     </message>
 </context>
 <context>
@@ -165,15 +171,15 @@ The list displays the following information:
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Status</translation>
     </message>
     <message>
         <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederholung</translation>
     </message>
 </context>
 <context>
@@ -211,260 +217,260 @@ The list displays the following information:
     </message>
     <message>
         <source>%1 day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Tag(e)</translation>
     </message>
     <message>
         <source>Priority</source>
-        <translation type="unfinished">Priorität</translation>
+        <translation>Priorität</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished">Editieren</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Löschen</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>Enter brief description of the task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie hier eine detaillierte Bschreibung der Aufgabe ein.</translation>
     </message>
     <message>
         <source>Complete </source>
-        <translation type="unfinished"></translation>
+        <translation>Erledige</translation>
     </message>
     <message>
         <source>Work on </source>
-        <translation type="unfinished"></translation>
+        <translation>Arbeite an </translation>
     </message>
     <message>
         <source>Buy </source>
-        <translation type="unfinished"></translation>
+        <translation>Kaufe</translation>
     </message>
     <message>
         <source>Organize </source>
-        <translation type="unfinished"></translation>
+        <translation>Organiziere</translation>
     </message>
     <message>
         <source>Get </source>
-        <translation type="unfinished"></translation>
+        <translation>Hole</translation>
     </message>
     <message>
         <source>Update </source>
-        <translation type="unfinished"></translation>
+        <translation>Aktualisiere</translation>
     </message>
     <message>
         <source>Create </source>
-        <translation type="unfinished"></translation>
+        <translation>Erstelle</translation>
     </message>
     <message>
         <source>Plan </source>
-        <translation type="unfinished"></translation>
+        <translation>Plane</translation>
     </message>
     <message>
         <source>Call </source>
-        <translation type="unfinished"></translation>
+        <translation>Anruf</translation>
     </message>
     <message>
         <source>Mail </source>
-        <translation type="unfinished"></translation>
+        <translation>Maile</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation type="unfinished"></translation>
+        <translation>Priorität:</translation>
     </message>
     <message>
         <source>Select priority of task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie hier die Priorität der Aufgabe.</translation>
     </message>
     <message>
         <source>Very High</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr hoch</translation>
     </message>
     <message>
         <source>High</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoch</translation>
     </message>
     <message>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrig</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr niedrig</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie</translation>
     </message>
     <message>
         <source>Select category to organize this task with.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie die Kategorie der Aufgabe</translation>
     </message>
     <message>
         <source>Recurring task</source>
-        <translation type="unfinished"></translation>
+        <translation>Wiederkehrende Aufgabe</translation>
     </message>
     <message>
         <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, wenn die Aufgaben auf einer wiederkehrenden Basis anstehen. Bei Auswahl kann die Häufigkeit des Wiederkehrens über den &lt;b&gt;Wiederholung&lt;/b&gt;-Reiter gesetzt werden.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Notizen:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie hier zusätzliche Informationen zu der Aufgabe an.</translation>
     </message>
     <message>
         <source>Todo List</source>
-        <translation type="unfinished"></translation>
+        <translation>Aufgabenliste</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorStatus</name>
     <message>
         <source>Status:</source>
-        <translation type="unfinished"></translation>
+        <translation>Status:</translation>
     </message>
     <message>
         <source>Click here to set the current status of this task.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um den aktuellen Status des Tasks zu setzen.</translation>
     </message>
     <message>
         <source>Started</source>
-        <translation type="unfinished">Begonnen</translation>
+        <translation>Begonnen</translation>
     </message>
     <message>
         <source>Postponed</source>
-        <translation type="unfinished">Verschoben</translation>
+        <translation>Verschoben</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished">Beended</translation>
+        <translation>Beendet</translation>
     </message>
     <message>
         <source>Not started</source>
-        <translation type="unfinished">Nicht begonnen</translation>
+        <translation>Nicht begonnen</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fortschritt</translation>
     </message>
     <message>
         <source>Select progress made on this task here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wählen Sie hier den aktuellen Fortschritt der Aufgabe aus.</translation>
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished"></translation>
+        <translation>0 %</translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished"></translation>
+        <translation>20 %</translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished"></translation>
+        <translation>40 %</translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished"></translation>
+        <translation>60 %</translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished"></translation>
+        <translation>80 %</translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished"></translation>
+        <translation>100 %</translation>
     </message>
     <message>
         <source>Start Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Startdatum</translation>
     </message>
     <message>
         <source>Click here to set the date this task was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um das Startdatum der aktuellen Aufgabe zu setzen.</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fälligkeitsdatum:</translation>
     </message>
     <message>
         <source>Click here to set the date this task needs to be completed by.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um das aktuelle Fälligkeitsdatum der Aufgabe zu setzen.</translation>
     </message>
     <message>
         <source>Completed:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erledigt:</translation>
     </message>
     <message>
         <source>Click here to mark this task as completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um diese Aufgabe als erledigt zu markieren</translation>
     </message>
     <message>
         <source>Click here to set the date this task was completed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier. um das Datum der Erledigung zu setzen.</translation>
     </message>
     <message>
         <source>Maintainer Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführungsmodus</translation>
     </message>
     <message>
         <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier um die Rolle des Ausführenden zu definieren.</translation>
     </message>
     <message>
         <source>Nothing</source>
-        <translation type="unfinished">Nichts</translation>
+        <translation>Nichts</translation>
     </message>
     <message>
         <source>Responsible</source>
-        <translation type="unfinished">Verantwortlich</translation>
+        <translation>Verantwortlich</translation>
     </message>
     <message>
         <source>Done By</source>
-        <translation type="unfinished">Erledigt von</translation>
+        <translation>Erledigt von</translation>
     </message>
     <message>
         <source>Coordinating</source>
-        <translation type="unfinished">Koordinatin</translation>
+        <translation>Koordiert durch</translation>
     </message>
     <message>
         <source>Maintainer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ausführender:</translation>
     </message>
     <message>
         <source>This is the name of the current task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dies ist der Name des Ausführenden</translation>
     </message>
     <message>
         <source>test</source>
-        <translation type="unfinished">test</translation>
+        <translation>test</translation>
     </message>
     <message>
         <source>Click here to select the task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie  hier, um den Ausführenden der Aufgabe festzulegen.</translation>
     </message>
 </context>
 <context>
@@ -508,15 +514,15 @@ The list displays the following information:
     <name>Todo</name>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation>Weiteres...</translation>
     </message>
     <message>
         <source>Enter</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Click here to set the priority of new task.
@@ -524,7 +530,10 @@ The list displays the following information:
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um die Priorität der neuen Aufgabe zu setzen.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Enter description of new task here.
@@ -532,7 +541,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie hier die Beschreibung der neuen Aufgabe an.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Click here to enter additional information for new task.
@@ -540,7 +552,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie hier zusätzliche Informationen für Ihre Aufgabe an.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Click here to add new task.
@@ -548,7 +563,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um eine neue Aufgabe hinzuzufügen.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Click here to reset new task information.
@@ -556,7 +574,10 @@ It allows you to quickly add a new task to your list.  This area can be shown or
 This area is called the quick task bar.
 
 It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klicken Sie hier, um die Aufgabeninformationen zurück zu setzen.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
     </message>
 </context>
 </TS>

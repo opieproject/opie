@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Keymap File</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastaturdatei</translation>
     </message>
     <message>
         <source>Current Language</source>
@@ -27,11 +27,11 @@
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pickboard</translation>
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Taskenwiederholung</translation>
     </message>
     <message>
         <source>Colors</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Farbe gedrückter Tasten</translation>
     </message>
     <message>
         <source>Line Color</source>

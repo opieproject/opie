@@ -36,7 +36,7 @@ Sie haben gewonnen!</translation>
     </message>
     <message>
         <source>&amp;Reset Pieces</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Teile zurücksetzen</translation>
     </message>
 </context>
 </TS>

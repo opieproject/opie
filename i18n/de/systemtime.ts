@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Ntp</name>
     <message>
@@ -11,7 +12,7 @@
     </message>
     <message>
         <source>Running:</source>
-        <translation>führe aus:</translation>
+        <translation>fe aus:</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
@@ -23,27 +24,27 @@
     </message>
     <message>
         <source>last [h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzte [Std]</translation>
     </message>
     <message>
         <source>offset [s]</source>
-        <translation type="unfinished"></translation>
+        <translation>Abweichung</translation>
     </message>
     <message>
         <source>shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Verschiebung [s/h]</translation>
     </message>
     <message>
         <source> s/h</source>
-        <translation type="unfinished"></translation>
+        <translation>s/h</translation>
     </message>
     <message>
         <source>Get time from network</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit vom Netzwerk holen</translation>
     </message>
     <message>
         <source>Set predicted time: </source>
-        <translation>Setz berechnete Zeit:</translation>
+        <translation>Berechnete Zeit:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
@@ -51,7 +52,7 @@
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished"></translation>
+        <translation>Voraussagung</translation>
     </message>
     <message>
         <source>NTP</source>
@@ -71,17 +72,15 @@
     </message>
     <message>
         <source>Error while getting time form network!</source>
-        <translation>Das Netz wollte mir die Zeit nicht verraten!</translation>
+        <translation>Fehler, Zeitabgleich vom Netzwerk nicht möglich !</translation>
     </message>
     <message>
-        <source>Error while getting time form
- server</source>
-        <translation>Fehler beim Nachsehen der
-Zeit auf dem Server</translation>
+        <source>Error while getting time from server </source>
+        <translation>Fehler beim Abgleich mit dem Zeitserver</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup. &lt;br&gt; Rerun NTP?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie haben eine Differenz von %1 Minuten eingestellt, es sind aber lediglich %2 seit dem letzten Abgleich vergangen. Zeit dennoch abgleichen ?</translation>
     </message>
 </context>
 <context>
@@ -92,43 +91,43 @@ Zeit auf dem Server</translation>
     </message>
     <message>
         <source>Get time from network</source>
-        <translation type="unfinished"></translation>
+        <translation>Mit Netz abgleichen</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Startzeit:</translation>
     </message>
     <message>
         <source>nan</source>
-        <translation type="unfinished"></translation>
+        <translation>nan</translation>
     </message>
     <message>
         <source>Time Shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitverschiebung:</translation>
     </message>
     <message>
         <source>New Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Neue Zeit:</translation>
     </message>
     <message>
         <source>Esimated Shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Erwartete Versch.:</translation>
     </message>
     <message>
         <source>Predicted Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitvoraussage:</translation>
     </message>
     <message>
         <source>Mean shift:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mittl. Versch.</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Setze Voraussagung</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeitvoraussage</translation>
     </message>
     <message>
         <source>Use</source>
@@ -140,56 +139,55 @@ Zeit auf dem Server</translation>
     </message>
     <message>
         <source>NTP server to get the time from the network.</source>
-        <translation>NTP Server um die Zeit vom Netz zu holen.</translation>
+        <translation>NTP Server für Zeitabgleich.</translation>
     </message>
     <message>
         <source>Wait for </source>
-        <translation type="unfinished">Hehe, also advanced features und Deutsche Sprache?
-wo kämen wir da hin...</translation>
+        <translation>Warte auf </translation>
     </message>
     <message>
         <source>minutes until</source>
-        <translation type="unfinished"></translation>
+        <translation>Minuten bis</translation>
     </message>
     <message>
         <source>NTP tries to syncronises the clock with the network.</source>
-        <translation type="unfinished"></translation>
+        <translation>NTP versucht die Uhr mit dem Netz abzugleichen.</translation>
     </message>
     <message>
         <source>Insure a delay of</source>
-        <translation type="unfinished"></translation>
+        <translation>Gewährleiste Verzögerung von</translation>
     </message>
     <message>
         <source>a new NTP lookup will be used to predict the time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Neuer NTP-Abgleich wird zur Voraussage verwendent</translation>
     </message>
     <message>
         <source>Set time</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit setzen</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished">Main</translation>
+        <translation>Haupt</translation>
     </message>
     <message>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Manuell</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Predict</source>
-        <translation type="unfinished"></translation>
+        <translation>Voraussage</translation>
     </message>
     <message>
         <source>NTP</source>
-        <translation type="unfinished">NTP</translation>
+        <translation>NTP</translation>
     </message>
     <message>
         <source>Advanced settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweitert</translation>
     </message>
 </context>
 <context>

@@ -1,17 +1,18 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AppMonitor</name>
     <message>
         <source>Application Problem</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwendungsproblem</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 is not responding.&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%q antwortet nicht.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Would you like to force the application to exit?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Möchten Sie die Anwendung abbrechen ?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -19,26 +20,26 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Berühren Sie mit dem Stift die Kreuze auf dem Schirm so, wie Sie normalerweise Ihr Gerät bedienen um den Schirm zu kalibrieren.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Willkommen bei OPIE</translation>
     </message>
 </context>
 <context>
     <name>CategoryTabWidget</name>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumente</translation>
     </message>
     <message>
         <source>Icon View</source>
-        <translation type="unfinished"></translation>
+        <translation>Icon-Ansicht</translation>
     </message>
     <message>
         <source>List View</source>
-        <translation type="unfinished"></translation>
+        <translation>Listenansicht</translation>
     </message>
 </context>
 <context>
@@ -46,199 +47,203 @@ accurately to calibrate your screen.</source>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Batteriestatus ist kritisch!
+Schliessen Sie das Gerät schnellst möglich an die Stromversorgung an!</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
-        <translation type="unfinished"></translation>
+        <translation>Der Batteristatus ist sehr niedrig.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Ersatzbatterie ist schwach.
+Bitte laden Sie sie auf.</translation>
     </message>
     <message>
         <source>business card</source>
-        <translation type="unfinished"></translation>
+        <translation>Visitenkarte</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&lt;Das Systemdatum scheint nicht gültig zu sein.
+(%1)&lt;/p&gt;&lt;p&gt;Möchten Sie es anpassen ?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Batteriestatus</translation>
     </message>
 </context>
 <context>
     <name>Launcher</name>
     <message>
         <source>Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>Starter</translation>
     </message>
     <message>
         <source> - Launcher</source>
-        <translation type="unfinished"></translation>
+        <translation>- Starter</translation>
     </message>
     <message>
         <source>No application</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Anwendung</translation>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Es ist keine Anwendung für dieses Dokument des Typs %1 definiert&lt;/p&gt;.</translation>
     </message>
 </context>
 <context>
     <name>LauncherView</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Dateien</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien dieses Typs</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentenansicht</translation>
     </message>
 </context>
 <context>
     <name>MediumMountGui</name>
     <message>
         <source>Medium inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Neues Medium eingelegt</translation>
     </message>
     <message>
         <source>A &lt;b&gt;storage medium&lt;/b&gt; was inserted. Should it be scanned for media files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein &lt;b&gt;neues Medium&lt;/b&gt; wurde eingelegt. 
+Soll es nach neuen Dokumenten durchsucht werden ?</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumentenauswahl</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Texte</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Videos</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles</translation>
     </message>
     <message>
         <source>Link apps</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwendungen verlinken</translation>
     </message>
     <message>
         <source>Limit search to dir: (not used yet)</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf folgendes Verzeichnis begrenzen: (unbenutzt)</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Neu</translation>
     </message>
     <message>
         <source>Your decision will be stored on the medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl auf dem Medium speichern</translation>
     </message>
     <message>
         <source>Do not ask again for this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Dieses Medium nie mehr nachfragen</translation>
     </message>
 </context>
 <context>
     <name>ShutdownImpl</name>
     <message>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunerfahren</translation>
     </message>
     <message>
         <source>Terminate Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE beenden </translation>
     </message>
     <message>
         <source>Reboot</source>
-        <translation type="unfinished"></translation>
+        <translation>Neustart</translation>
     </message>
     <message>
         <source>Restart Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE neu starten</translation>
     </message>
     <message>
         <source>Shutdown</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterfahren</translation>
     </message>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Optionen zum Herunterfahren sind ausschliesslich zur Entwicklung und fr Tests des OPIE-Systems gedacht. Unter normalen Bedingungen sind sie nicht notwendig.</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Shutdown...</source>
-        <translation type="unfinished"></translation>
+        <translation>Herunterfahren ...</translation>
     </message>
 </context>
 <context>
     <name>SyncAuthentication</name>
     <message>
         <source>Sync Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Snychronisationsverbindung</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ein nicht authorisiertes System fordert eine Verbindung zu diesem Gerät an.&lt;p&gt;Wenn Sie eine Version von Qtopia Desktop verwenden die älter ist als 1.5.1 sollten Sie ein Upgrade in Betracht ziehen.</translation>
     </message>
     <message>
         <source>Deny</source>
-        <translation type="unfinished"></translation>
+        <translation>Verweigern</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Ein nicht erkanntes System fordert eine Verbindung zu diesem Gerät an.&lt;p&gt;Wenn Sie gerade eben zum ersten Mal eine Synchronisation gestartet haben, ist diese Meldung normal.</translation>
     </message>
     <message>
         <source>Allow</source>
-        <translation type="unfinished"></translation>
+        <translation>Erlauben</translation>
     </message>
 </context>
 <context>
     <name>SyncDialog</name>
     <message>
         <source>Syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Synchronisieren</translation>
     </message>
     <message>
         <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Adressen&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 </TS>

@@ -300,7 +300,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Full Name...</source>
-        <translation>Vollständiger Name...</translation>
+        <translation>Voller Name...</translation>
     </message>
     <message>
         <source>Category</source>
@@ -1227,15 +1227,15 @@ ist frei erhältlich !</translation>
     <name>QObject</name>
     <message>
         <source>Business Phone</source>
-        <translation>Telefon, geschäftlich</translation>
+        <translation>Tel. gesch.</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax, geschäftlich</translation>
+        <translation>Fax gesch.</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Handy, geschäftlich</translation>
+        <translation>Handy gesch.</translation>
     </message>
     <message>
         <source>Default Email</source>
@@ -1251,11 +1251,11 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax, privat</translation>
+        <translation>Fax privat</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Handy, privat</translation>
+        <translation>Handy privat</translation>
     </message>
     <message>
         <source>Office</source>
@@ -1335,31 +1335,31 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Straße, geschäftlich</translation>
+        <translation>Straße, gesch.</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Stadt, geschäftlich</translation>
+        <translation>Stadt, gesch.</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Staat, geschäftlich</translation>
+        <translation>Staat, gesch.</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Postleitzahl, geschäftlich</translation>
+        <translation>Postleitzahl, gesch.</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Land, geschäftlich</translation>
+        <translation>Land, gesch.</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Pager, geschäftlich</translation>
+        <translation>Pager, gesch.</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Internetseite, geschäftlich</translation>
+        <translation>Web, gesch.</translation>
     </message>
     <message>
         <source>Home Street</source>
@@ -1383,7 +1383,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Internetseite, privat</translation>
+        <translation>Web, privat</translation>
     </message>
     <message>
         <source>Notes</source>

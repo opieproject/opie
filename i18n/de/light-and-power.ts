@@ -1,16 +1,17 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Calibration</name>
     <message>
         <source>%1 Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Schritte</translation>
     </message>
 </context>
 <context>
     <name>LightSettingsBase</name>
     <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
-        <translation type="unfinished"></translation>
+        <translation>Durch Messen des Umgebungslichts in Ihrer direkten Umgebung kann die Hintergrundbeleuchtung automatisch angepasst werden. Die Helligkeitseinstellung betrifft nach wie vor die mittlere Helligkeit.</translation>
     </message>
     <message>
         <source>Light off after</source>
@@ -34,118 +35,118 @@
     </message>
     <message>
         <source>on Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>Batteriebetrieb</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Allgemeine Einst.</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> Sek.</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>niemals</translation>
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur LCD ausschalten (kein Suspend)</translation>
     </message>
     <message>
         <source>Backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Hintergrundbeleuchtung</translation>
     </message>
     <message>
         <source>set a fix value for backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Fixer Wert für Hintergrundbeleuchtung</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Voll</translation>
     </message>
     <message>
         <source>Use Light Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Lichtsensor verwenden</translation>
     </message>
     <message>
         <source>Calibrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalibrieren</translation>
     </message>
     <message>
         <source>Advanced settings for light sensor handling</source>
-        <translation type="unfinished"></translation>
+        <translation>Erweiterte Einstellungen für Lichtsensor</translation>
     </message>
     <message>
         <source>on AC</source>
-        <translation type="unfinished"></translation>
+        <translation>Netzbetrieb</translation>
     </message>
     <message>
         <source>Warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Warnungen</translation>
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Niedrigspannung Warnungsintervall</translation>
     </message>
     <message>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation> %</translation>
     </message>
     <message>
         <source>At what battery level should the low power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterielevel für Warnungshinweis</translation>
     </message>
     <message>
         <source>how often should be checked for low power. This determines the rate popups occure in low power situations</source>
-        <translation type="unfinished"></translation>
+        <translation>Wie oft soll die Spannung geprüft werden ? Definiert die Anzahl der Warnmeldungen</translation>
     </message>
     <message>
         <source>At what battery level should the critical power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterielevel für Warnhinweis über kritischen Zustand</translation>
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>Sehr geringer Batterielevel</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>kritischer Batterielevel</translation>
     </message>
 </context>
 <context>
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>Sensorkalibrierung</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Voll</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished">Aus</translation>
+        <translation>Aus</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>Dunkel</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Licht</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Schrittweite</translation>
     </message>
     <message>
         <source>Check interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Prfintervall</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation> Sek.</translation>
     </message>
 </context>
 </TS>
