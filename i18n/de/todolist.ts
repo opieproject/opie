@@ -1,17 +1,21 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Ok</source>
+        <translation>Ok</translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;Alarm at %0&lt;/h1&gt;&lt;br&gt;</source>
+        <translation>Alarm um</translation>
+    </message>
+</context>
 <context>
     <name>OTaskEditor</name>
     <message>
         <source>Alarms</source>
         <translation>Alarme</translation>
-    </message>
-    <message>
-        <source>Reminders</source>
-        <translation>Erinnerungen</translation>
-    </message>
-    <message>
-        <source>X-Ref</source>
-        <translation>X-Ref</translation>
     </message>
     <message>
         <source>Information</source>
@@ -35,6 +39,14 @@
     <message>
         <source>Edit Task</source>
         <translation>Aufgabe editieren</translation>
+    </message>
+    <message>
+        <source>silent</source>
+        <translation>leise</translation>
+    </message>
+    <message>
+        <source>loud</source>
+        <translation>laut</translation>
     </message>
 </context>
 <context>
@@ -217,6 +229,97 @@ Es wird gerade synchronisiert</translation>
         <source>Priority:</source>
         <translation>Priorität:</translation>
     </message>
+    <message>
+        <source>Click here to set the priority of new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Klicken Sie hier, um die Priorität der neuen Aufgabe zu setzen.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Enter description of new task here.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Geben Sie hier die Beschreibung der neuen Aufgabe an.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation>Weiteres</translation>
+    </message>
+    <message>
+        <source>Click here to enter additional information for new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Geben Sie hier zusätzliche Informationen für Ihre Aufgabe an.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Enter</source>
+        <translation>Eingabe</translation>
+    </message>
+    <message>
+        <source>Click here to add new task.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Klicken Sie hier, um eine neue Aufgabe hinzuzufügen.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>Abbrechen</translation>
+    </message>
+    <message>
+        <source>Click here to reset new task information.
+
+This area is called the quick task bar.
+
+It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
+        <translation>Klicken Sie hier, um die Aufgabeninformationen zurück zu setzen.
+Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
+
+Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
+    </message>
+    <message>
+        <source>Template Editor</source>
+        <translation>Vorlageneditor</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>Hinzufügen</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>Bearbeiten</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>Entfernen</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>Name</translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation>Neu von Vorlage</translation>
+    </message>
 </context>
 <context>
     <name>TableView</name>
@@ -246,6 +349,18 @@ Es wird gerade synchronisiert</translation>
     <message>
         <source>Delete</source>
         <translation>Löschen</translation>
+    </message>
+    <message>
+        <source>Date</source>
+        <translation>Datum</translation>
+    </message>
+    <message>
+        <source>Time</source>
+        <translation>Zeit</translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation>Art</translation>
     </message>
 </context>
 <context>
@@ -476,106 +591,6 @@ Es wird gerade synchronisiert</translation>
     <message>
         <source>Click here to select the task maintainer.</source>
         <translation>Klicken Sie  hier, um den Ausführenden der Aufgabe festzulegen.</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialog</name>
-    <message>
-        <source>Template Editor</source>
-        <translation>Vorlageneditor</translation>
-    </message>
-    <message>
-        <source>Add</source>
-        <translation>Hinzufügen</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation>Editieren</translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation>Entfernen</translation>
-    </message>
-</context>
-<context>
-    <name>TemplateDialogImpl</name>
-    <message>
-        <source>Name</source>
-        <translation>Name</translation>
-    </message>
-    <message>
-        <source>New Template %1</source>
-        <translation>Neue Vorlage %1</translation>
-    </message>
-</context>
-<context>
-    <name>Todo</name>
-    <message>
-        <source>More</source>
-        <translation>Weiteres...</translation>
-    </message>
-    <message>
-        <source>Enter</source>
-        <translation>OK</translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation>Abbrechen</translation>
-    </message>
-    <message>
-        <source>Click here to set the priority of new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Klicken Sie hier, um die Priorität der neuen Aufgabe zu setzen.
-Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
-
-Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Enter description of new task here.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Geben Sie hier die Beschreibung der neuen Aufgabe an.
-Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
-
-Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Click here to enter additional information for new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Geben Sie hier zusätzliche Informationen für Ihre Aufgabe an.
-Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
-
-Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Click here to add new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Klicken Sie hier, um eine neue Aufgabe hinzuzufügen.
-Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
-
-Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Click here to reset new task information.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation>Klicken Sie hier, um die Aufgabeninformationen zurück zu setzen.
-Dieser Bereich wird &lt;i&gt;Schnelleingabe&lt;/i&gt; genannt.
-
-Er ermöglicht die schnelle Erfassung einer neuen Aufgabe. Dieser Bereich kann ein- und ausgeschaltet werden durch Verwenden des Menüpunkts &lt;b&gt;Optionen-&gt;Schnelleingabe&lt;/b&gt;.</translation>
     </message>
 </context>
 </TS>
