@@ -3,30 +3,30 @@
     <name>DateBookEvent</name>
     <message>
         <source>[with alarm]</source>
-        <translation type="unfinished"></translation>
+        <translation>[со аларм]</translation>
     </message>
     <message>
         <source>note</source>
-        <translation type="unfinished"></translation>
+        <translation>Забелешка</translation>
     </message>
 </context>
 <context>
     <name>DatebookPluginConfig</name>
     <message>
         <source>Show location</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи локација</translation>
     </message>
     <message>
         <source>Check this if the location of an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Провери дали оваа локација на состанмок треба да се прикаже за секој</translation>
     </message>
     <message>
         <source>Show notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Прилажи забелешки</translation>
     </message>
     <message>
         <source>Check this if the note attached to an appointment should be shown for each one</source>
-        <translation type="unfinished"></translation>
+        <translation>Одблежи ако забелешката прикаченма за некој состаноок треба да биде прикажана за секој од нив</translation>
     </message>
     <message>
         <source>Show only later

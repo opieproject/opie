@@ -3,62 +3,62 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Основи</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Откажи</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Смени копчиња за насока</translation>
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished"></translation>
+        <translation>Недефинирано копче</translation>
     </message>
 </context>
 <context>
     <name>Kpacman</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ново</translation>
     </message>
     <message>
         <source>&amp;Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Пауза</translation>
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Хала на славни</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Исклучи</translation>
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Скриј курсор</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Избери графичка шема</translation>
     </message>
     <message>
         <source>&amp;Pause in Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Паузирај во позадина</translation>
     </message>
     <message>
         <source>&amp;Continue in Foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Продолжи</translation>
     </message>
     <message>
         <source>Change &amp;keys...</source>
-        <translation type="unfinished"></translation>
+        <translation>Промени &amp;копчиња...</translation>
     </message>
     <message>
         <source>@PACKAGE@ - @VERSION@
@@ -75,11 +75,21 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>
+Овој програм е базиран на изворниот код на кЗмија
+од Michel Fillipi.
+
+
+
+
+
+
+
+</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Помош</translation>
     </message>
 </context>
 <context>
@@ -89,121 +99,120 @@ the last 10 years of her friendship.
 
 The file &apos;@FONTNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се вчита фонтот.
+
+Датотеката &apos;@FONTNAME@&apos; не постои
+или е во непознат формат.</translation>
     </message>
 </context>
 <context>
     <name>Referee</name>
     <message>
         <source>GAME  OVER</source>
-        <translation type="unfinished"></translation>
+        <translation>Крај на Игра</translation>
     </message>
     <message>
         <source>PLAYER ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>Прв Играч</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation type="unfinished"></translation>
+        <translation>Спремно!</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>Паузирано</translation>
     </message>
     <message>
         <source>CHARACTER</source>
-        <translation type="unfinished"></translation>
+        <translation>Карактер</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation type="unfinished"></translation>
+        <translation>Надимак</translation>
     </message>
     <message>
         <source>-SHADOW</source>
-        <translation type="unfinished"></translation>
+        <translation>-СЕНКА</translation>
     </message>
     <message>
         <source>&quot;BLINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>„ТРЕПКО“</translation>
     </message>
     <message>
         <source>-SPEEDY</source>
-        <translation type="unfinished"></translation>
+        <translation>-БРЗИ</translation>
     </message>
     <message>
         <source>&quot;PINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>„ПИНКИ“</translation>
     </message>
     <message>
         <source>-BASHFUL</source>
-        <translation type="unfinished"></translation>
+        <translation>-СРАМЕЖЛИВ</translation>
     </message>
     <message>
         <source>&quot;INKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>„ИНКИ“</translation>
     </message>
     <message>
         <source>-POKEY</source>
-        <translation type="unfinished"></translation>
+        <translation>-ПОКИ</translation>
     </message>
     <message>
         <source>&quot;CLYDE&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>„КЛАЈД“</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation type="unfinished"></translation>
+        <translation>Портирано на qtopia: Caltin Climov</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation type="unfinished"></translation>
+        <translation>ПРИТИСНИ НА КУРСОР ЗА СТАРТ</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1НАГОРЕ</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation type="unfinished"></translation>
+        <translation>РЕЗУЛТАТИ</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2НАГОРЕ</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
-        <translation type="unfinished"></translation>
+        <translation>ЧЕСТИТКИ</translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation type="unfinished"></translation>
+        <translation>УСПЕАВЕТ</translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>РЕЗУЛТАТОТ Е ВО ВРВНИТЕ 10.</translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>НИВО  БОДОВИ  ИМЕ  ДАТУМ</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>ПАУЗИРАНО</translation>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
+        <translation>@@YY@/@MM@/@DD@</translation>
     </message>
 </context>
 <context>
@@ -213,11 +222,14 @@ or is of an unknown format.</source>
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сликата неможеше да се вчита
+
+Датотеката &apos;@PIXMAPNAME@&apos; не постои
+или е во невалиден формат.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation type="unfinished"></translation>
+        <translation>грешка при иницијализација</translation>
     </message>
 </context>
 </TS>

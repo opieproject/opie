@@ -3,22 +3,22 @@
     <name>QObject</name>
     <message>
         <source>StockTicker plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток за берза</translation>
     </message>
 </context>
 <context>
     <name>StockTickerPluginWidget</name>
     <message>
         <source>Connection refused.</source>
-        <translation type="unfinished"></translation>
+        <translation>Поврзувањето е одбиено.</translation>
     </message>
     <message>
         <source>Could not find server.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се пронајде серверот.</translation>
     </message>
     <message>
         <source>Socket read error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка во сокетот.</translation>
     </message>
 </context>
 <context>

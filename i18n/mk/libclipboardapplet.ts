@@ -3,15 +3,15 @@
     <name>ClipboardApplet</name>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Исечи</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Залепи</translation>
     </message>
 </context>
 </TS>

@@ -3,68 +3,69 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Календар</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов</translation>
     </message>
     <message>
         <source>Today</source>
-        <translation type="unfinished"></translation>
+        <translation>Денес</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Ден</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Недела</translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation type="unfinished"></translation>
+        <translation>Листа на недели</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Месец</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Пронајди</translation>
     </message>
     <message>
         <source>Edit...</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди...</translation>
     </message>
     <message>
         <source>Event duration is potentially longer
 than interval between repeats.</source>
-        <translation type="unfinished"></translation>
+        <translation>ТЅраењето на настанот е подолго околку 
+интервалот помежу повторувањата.</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се менуваат податоците, во моментов се синхронизира</translation>
     </message>
     <message>
         <source>Duplicate Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Дупликат на настан</translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди настан</translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation type="unfinished"></translation>
+        <translation>Минути)</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Нема доволно простор</translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -72,301 +73,306 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Календарот неможеше 
+да ги зачува промените
+Ослободи простор и овиди се повторно
+
+Прекини?
+</translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Непознато)</translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка!</translation>
     </message>
     <message>
         <source>Fix it</source>
-        <translation type="unfinished"></translation>
+        <translation>Поправи</translation>
     </message>
     <message>
         <source>Continue</source>
-        <translation type="unfinished"></translation>
+        <translation>Продолжи</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>П</translation>
     </message>
     <message>
         <source>T</source>
-        <translation type="unfinished"></translation>
+        <translation>В</translation>
     </message>
     <message>
         <source>W</source>
-        <translation type="unfinished"></translation>
+        <translation>С</translation>
     </message>
     <message>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>П</translation>
     </message>
     <message>
         <source>S</source>
-        <translation type="unfinished"></translation>
+        <translation>С</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Понеделник</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторник</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Среда</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Четврток</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Петок</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Сабота</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Недела</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayView</name>
     <message>
         <source>:00p</source>
-        <translation type="unfinished"></translation>
+        <translation>:00р</translation>
     </message>
 </context>
 <context>
     <name>DateBookDayWidget</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е настан кој трае цел ден.</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Почеток</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Крај</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Време</translation>
     </message>
     <message>
         <source> - </source>
-        <translation type="unfinished"></translation>
+        <translation>-</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Дуплирај</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Испрати</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettings</name>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Календар</translation>
     </message>
     <message>
         <source>:00 PM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 РМ</translation>
     </message>
     <message>
         <source>:00 AM</source>
-        <translation type="unfinished"></translation>
+        <translation>:00 АМ</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>РМ</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>АМ</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
 </context>
 <context>
     <name>DateBookSettingsBase</name>
     <message>
         <source>Preferences</source>
-        <translation type="unfinished"></translation>
+        <translation>Особини</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation type="unfinished"></translation>
+        <translation>Прегледи</translation>
     </message>
     <message>
         <source>Default view:</source>
-        <translation type="unfinished"></translation>
+        <translation>Основен преглед:</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Ден</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Недела</translation>
     </message>
     <message>
         <source>Week List</source>
-        <translation type="unfinished"></translation>
+        <translation>Листа на недели</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>1Месец</translation>
     </message>
     <message>
         <source>Jump to current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Скокни на моментално време</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Стил на редови:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Основен</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Среден</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Голем</translation>
     </message>
     <message>
         <source>Time display</source>
-        <translation type="unfinished"></translation>
+        <translation>Приказ на време</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ништо</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Почеток</translation>
     </message>
     <message>
         <source>Start-End</source>
-        <translation type="unfinished"></translation>
+        <translation>Почеток-Крај</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Општо</translation>
     </message>
     <message>
         <source>Alarm Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања за аларм</translation>
     </message>
     <message>
         <source>Alarm Preset</source>
-        <translation type="unfinished"></translation>
+        <translation>Претпоставки за Аларм</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>минути</translation>
     </message>
     <message>
         <source>Start viewing events</source>
-        <translation type="unfinished"></translation>
+        <translation>Почни преглед на настани</translation>
     </message>
     <message>
         <source>Start Time:</source>
-        <translation type="unfinished"></translation>
+        <translation>Време на Почеток:</translation>
     </message>
     <message>
         <source>:00</source>
-        <translation type="unfinished"></translation>
+        <translation>:00</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Основни</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Локација:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Канцеларија</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Дома</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категорија:</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е настан кој трае цел ден.</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>С</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekHeaderBase</name>
     <message>
         <source>00. Jan-00. Jan</source>
-        <translation type="unfinished"></translation>
+        <translation>00. Јан-00. Јан</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>С</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeekLstHeaderBase</name>
     <message>
         <source>W: 00,00</source>
-        <translation type="unfinished"></translation>
+        <translation>С: 00,00</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
 </context>
 <context>
@@ -374,431 +380,438 @@ Quit anyway?</source>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Пон.
+Понеделник</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Втор.
+Вторник</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Сред,
+Среда</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Чет.
+Четврток</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Пет.
+Петок</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Саб.
+Сабота</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Нед.
+Недела</translation>
     </message>
     <message>
         <source>p</source>
-        <translation type="unfinished"></translation>
+        <translation>п</translation>
     </message>
 </context>
 <context>
     <name>DateEntry</name>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Време на почеток</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Време на завршување</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Календар</translation>
     </message>
     <message>
         <source>Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторување...</translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation type="unfinished"></translation>
+        <translation>Дневен...</translation>
     </message>
     <message>
         <source>Weekly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Неделно...</translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Месечно...</translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation type="unfinished"></translation>
+        <translation>Годишно...</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Без Повторување...</translation>
     </message>
 </context>
 <context>
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов настан</translation>
     </message>
     <message>
         <source>Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Локација</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Категорија</translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation type="unfinished"></translation>
+        <translation>Состанок</translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>Ручек</translation>
     </message>
     <message>
         <source>Dinner</source>
-        <translation type="unfinished"></translation>
+        <translation>Ручек</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Патување</translation>
     </message>
     <message>
         <source>Description </source>
-        <translation type="unfinished"></translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Канцеларија</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Дома</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation type="unfinished"></translation>
+        <translation>Почеток-Крај</translation>
     </message>
     <message>
         <source>Jan 02 00</source>
-        <translation type="unfinished"></translation>
+        <translation>Јан 02 00</translation>
     </message>
     <message>
         <source>Start time</source>
-        <translation type="unfinished"></translation>
+        <translation>Време на почеток</translation>
     </message>
     <message>
         <source>All day</source>
-        <translation type="unfinished"></translation>
+        <translation>Цел Ден</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Временска зона</translation>
     </message>
     <message>
         <source>&amp;Alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Аларм</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>минути</translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation type="unfinished"></translation>
+        <translation>Тивок</translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation type="unfinished"></translation>
+        <translation>Гласно</translation>
     </message>
     <message>
         <source>Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторување</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation type="unfinished"></translation>
+        <translation>Без Повторување...</translation>
     </message>
     <message>
         <source>Note...</source>
-        <translation type="unfinished"></translation>
+        <translation>Забелешка...</translation>
     </message>
 </context>
 <context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди забелешка</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;1/10&lt;/b&gt; Ручек</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Почеток</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Крај</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Секој</translation>
     </message>
     <message>
         <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2 секој</translation>
     </message>
     <message>
         <source>The %1 every </source>
-        <translation type="unfinished"></translation>
+        <translation>%1 секој</translation>
     </message>
     <message>
         <source>The %1 %1 of every</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 %1 од секој</translation>
     </message>
     <message>
         <source>Every </source>
-        <translation type="unfinished"></translation>
+        <translation>Секој</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation type="unfinished"></translation>
+        <translation>Понеделник</translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Вторник</translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation type="unfinished"></translation>
+        <translation>Среда</translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation type="unfinished"></translation>
+        <translation>Четврток</translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation type="unfinished"></translation>
+        <translation>Петок</translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation type="unfinished"></translation>
+        <translation>Сабота</translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation type="unfinished"></translation>
+        <translation>Недела</translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
         <source>st</source>
-        <translation type="unfinished"></translation>
+        <translation>ст</translation>
     </message>
     <message>
         <source>nd</source>
-        <translation type="unfinished"></translation>
+        <translation>нд</translation>
     </message>
     <message>
         <source>rd</source>
-        <translation type="unfinished"></translation>
+        <translation>рд</translation>
     </message>
     <message>
         <source>th</source>
-        <translation type="unfinished"></translation>
+        <translation>тх</translation>
     </message>
 </context>
 <context>
     <name>RepeatEntry</name>
     <message>
         <source>No Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Без Повторување</translation>
     </message>
     <message>
         <source>day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>денови</translation>
     </message>
     <message>
         <source>week(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>недели</translation>
     </message>
     <message>
         <source>Repeat By</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторување по</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Ден</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Датум</translation>
     </message>
     <message>
         <source>month(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>месеци</translation>
     </message>
     <message>
         <source>year(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>години</translation>
     </message>
     <message>
         <source>days</source>
-        <translation type="unfinished"></translation>
+        <translation>денови</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>ден</translation>
     </message>
     <message>
         <source>weeks</source>
-        <translation type="unfinished"></translation>
+        <translation>недели</translation>
     </message>
     <message>
         <source>week</source>
-        <translation type="unfinished"></translation>
+        <translation>недела</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>месец</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>година</translation>
     </message>
     <message>
         <source> and </source>
-        <translation type="unfinished"></translation>
+        <translation>и</translation>
     </message>
     <message>
         <source>,
 and </source>
-        <translation type="unfinished"></translation>
+        <translation>, и</translation>
     </message>
     <message>
         <source>, and </source>
-        <translation type="unfinished"></translation>
+        <translation>, и</translation>
     </message>
 </context>
 <context>
     <name>RepeatEntryBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation>Повторувачки настан</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ништо</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation>Ден</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation>Недела</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation>Месец</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Година</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Секој:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Фреквенција</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation>Крај на:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Без краен датум</translation>
     </message>
     <message>
         <source>Repeat On</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи повторување</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Пон</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Втор</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Сред</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Чет</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Пет</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Саб</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Нед</translation>
     </message>
     <message>
         <source>Every</source>
-        <translation type="unfinished"></translation>
+        <translation>Секој</translation>
     </message>
     <message>
         <source>Var1</source>
-        <translation type="unfinished"></translation>
+        <translation>Вар1</translation>
     </message>
     <message>
         <source>Var 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Вар 2</translation>
     </message>
     <message>
         <source>WeekVar</source>
-        <translation type="unfinished"></translation>
+        <translation>Недела Вар</translation>
     </message>
     <message>
         <source>months</source>
-        <translation type="unfinished"></translation>
+        <translation>месеци</translation>
     </message>
     <message>
         <source>years</source>
-        <translation type="unfinished"></translation>
+        <translation>години</translation>
     </message>
 </context>
 </TS>

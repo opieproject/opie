@@ -3,76 +3,76 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на Датотека:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Група:</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Клуч:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вредност:</translation>
     </message>
 </context>
 <context>
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотеки</translation>
     </message>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се отвори</translation>
     </message>
     <message>
         <source>The directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Директориум</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се отвори.</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се отвори</translation>
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се отвори.</translation>
     </message>
     <message>
         <source>no group</source>
-        <translation type="unfinished"></translation>
+        <translation>нема група</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Едитор на конфигурациски датотеки</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Повторно отвори</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
 </context>
 </TS>

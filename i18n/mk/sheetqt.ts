@@ -136,10 +136,6 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <source>Sheets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Opie Sheet</source>
         <translation type="unfinished"></translation>
     </message>

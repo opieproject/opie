@@ -3,206 +3,206 @@
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања на мени</translation>
     </message>
     <message>
         <source>Taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Палета</translation>
     </message>
     <message>
         <source>O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>О-мени</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Табови</translation>
     </message>
 </context>
 <context>
     <name>MenuSettings</name>
     <message>
         <source>Load applets in O-Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вчитај аплети во О-мени:</translation>
     </message>
     <message>
         <source>Show Launcher tabs in O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи ги јазичињата од главното во О-менито</translation>
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Одбележи ги аплетите кои ќе бидат во О-менито.</translation>
     </message>
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Додава содржини од главното мени во О-менито.</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Sample 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Пример 1</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Пример 2</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Пример 3</translation>
     </message>
 </context>
 <context>
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди Јазиче</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Позадина</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Фонт</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Икони</translation>
     </message>
     <message>
         <source>Previewing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на %1</translation>
     </message>
     <message>
         <source>This is a rough preview of what the currently selected Tab will look like.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е груб преглед на  избраното јазиче.</translation>
     </message>
     <message>
         <source>Use a custom font</source>
-        <translation type="unfinished"></translation>
+        <translation>Користи свој фонт</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <source>Ruled</source>
-        <translation type="unfinished"></translation>
+        <translation>Подредено</translation>
     </message>
     <message>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Полна боја</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Слика</translation>
     </message>
     <message>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери...</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Основни</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Големина:</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Мало</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Големо</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Боја:</translation>
     </message>
 </context>
 <context>
     <name>TabsSettings</name>
     <message>
         <source>Launcher Tabs:</source>
-        <translation type="unfinished"></translation>
+        <translation>Јазичиња на главно мени:</translation>
     </message>
     <message>
         <source>foobar</source>
-        <translation type="unfinished"></translation>
+        <translation>панел</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Ново</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи голем индикатор за зафатеност</translation>
     </message>
     <message>
         <source>Enable blinking busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи трепкачки индикатор за зафатеност</translation>
     </message>
     <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери го јазичето што треба да се уредува или брише.</translation>
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Додава ново јазиче на главното мени.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвара нов дијалок за подесување на избраното јазиче.</translation>
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Брише јазиче од главното мени.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Активирај го ова ако сакаш да видиш голем индикатор за зафатеност на средината на екранот наместо тој во панелот.</translation>
     </message>
     <message>
         <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Активирај го ова ако сакаш трепкачки индикатор на зафатеност за време на вчитвуањето на апликациите во главното мени.</translation>
     </message>
     <message>
         <source>All Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите јазичиња</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Документи</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <source>Not implemented yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е имплементирано</translation>
     </message>
 </context>
 <context>
     <name>TaskbarSettings</name>
     <message>
         <source>Load applets in Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Вчитај аплети во панелот:</translation>
     </message>
     <message>
         <source>Check the applets that you want displayed in the Taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Одбери ги аплетите што треба да се прикажат во панелот.</translation>
     </message>
 </context>
 </TS>

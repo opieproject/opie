@@ -3,39 +3,39 @@
     <name>IrdaApplet</name>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Најдено:</translation>
     </message>
     <message>
         <source>Lost:</source>
-        <translation type="unfinished"></translation>
+        <translation>Изгубено:</translation>
     </message>
     <message>
         <source>Discovered Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Откриен Уред:</translation>
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Исклучи IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Исклучи откривање</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи Откривање</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Исклучи Примање</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи Примање</translation>
     </message>
 </context>
 </TS>

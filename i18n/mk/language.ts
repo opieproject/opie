@@ -3,22 +3,22 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Англиски</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>основен</translation>
     </message>
 </context>
 <context>
     <name>LanguageSettingsBase</name>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања за јазик</translation>
     </message>
     <message>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери јазик</translation>
     </message>
 </context>
 </TS>

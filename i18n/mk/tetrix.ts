@@ -3,61 +3,61 @@
     <name>OHighscore</name>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>празно</translation>
     </message>
     <message>
         <source>Enter your name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Весеи го името!</translation>
     </message>
 </context>
 <context>
     <name>OHighscoreDialog</name>
     <message>
         <source>Highscores</source>
-        <translation type="unfinished"></translation>
+        <translation>Резултати</translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>Поени</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Ниво</translation>
     </message>
 </context>
 <context>
     <name>QTetrix</name>
     <message>
         <source>Tetrix</source>
-        <translation type="unfinished"></translation>
+        <translation>Терих</translation>
     </message>
     <message>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Следно</translation>
     </message>
     <message>
         <source>Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Поени</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished"></translation>
+        <translation>Ниво</translation>
     </message>
     <message>
         <source>Removed</source>
-        <translation type="unfinished"></translation>
+        <translation>Отстрането</translation>
     </message>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation>Старт</translation>
     </message>
 </context>
 </TS>

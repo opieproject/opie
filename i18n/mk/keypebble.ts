@@ -3,286 +3,290 @@
     <name>KRFBConnection</name>
     <message>
         <source>Connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Поврзано</translation>
     </message>
     <message>
         <source>Connection Refused</source>
-        <translation type="unfinished"></translation>
+        <translation>ПОврзувањето е одбиено</translation>
     </message>
     <message>
         <source>Host not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е пронајден серверот</translation>
     </message>
     <message>
         <source>Read Error: QSocket reported an error reading
 data, the remote host has probably dropped the
 connection.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при читање: QSocket пријав грешка при читање
+на податоците, поврзаниот компјутер највероватно ја
+прекинал врската.</translation>
     </message>
     <message>
         <source>QSocket reported an invalid error code</source>
-        <translation type="unfinished"></translation>
+        <translation>QSocket пријави непозната грешка</translation>
     </message>
 </context>
 <context>
     <name>KRFBDecoder</name>
     <message>
         <source>Waiting for server initialisation...</source>
-        <translation type="unfinished"></translation>
+        <translation>Чекам иницијализаија на серверот...</translation>
     </message>
     <message>
         <source>Waiting for desktop name...</source>
-        <translation type="unfinished"></translation>
+        <translation>Чекам име на компјутер...</translation>
     </message>
     <message>
         <source>Connected to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Поврзано со %1</translation>
     </message>
     <message>
         <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка на протокол: Добиена е порака бр. %1,а се очекува порака за освежување.</translation>
     </message>
     <message>
         <source>Protocol Error: An unknown encoding was used by the server %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка на протокол: Серверот %1 користеше непозната кодна табела </translation>
     </message>
 </context>
 <context>
     <name>KRFBLogin</name>
     <message>
         <source>Waiting for server version...</source>
-        <translation type="unfinished"></translation>
+        <translation>Чекам верзија на серверот...</translation>
     </message>
     <message>
         <source>Error: Invalid server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: Невалидна верзија на сервер, %1</translation>
     </message>
     <message>
         <source>Error: Unsupported server version, %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: Неподрана верзија на сервер, %1</translation>
     </message>
     <message>
         <source>Logged in</source>
-        <translation type="unfinished"></translation>
+        <translation>Логирано</translation>
     </message>
     <message>
         <source>Error: This server requires a password, but none has been specified.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: Серверот бара лозинка, лозинката не е специфицирана.
+</translation>
     </message>
     <message>
         <source>Error: The password you specified was incorrect.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: Внесената лозинка не е валидна.</translation>
     </message>
     <message>
         <source>Error: Too many invalid login attempts have been made
 to this account, please try later.</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка: Премногу невалидни обиди за логирање
+на овој корисник, обидете се подоцна.</translation>
     </message>
     <message>
         <source>Login Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Неуспешно логирање</translation>
     </message>
     <message>
         <source>Too many failures</source>
-        <translation type="unfinished"></translation>
+        <translation>Премногу грешки</translation>
     </message>
 </context>
 <context>
     <name>KVNC</name>
     <message>
         <source>VNC Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>VNC прегледувач</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Ново поврзување</translation>
     </message>
     <message>
         <source>Open Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори линк</translation>
     </message>
     <message>
         <source>Delete Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши линк</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Цел екран</translation>
     </message>
     <message>
         <source>Send Contrl-Alt-Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Прати Ctrl-ALt-Del</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Откачи врска</translation>
     </message>
     <message>
         <source>Next Click is Double Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Следнити кликање е двојно кликање</translation>
     </message>
     <message>
         <source>Next Click is Right Click</source>
-        <translation type="unfinished"></translation>
+        <translation>Следното кликаже е клик со десно копче</translation>
     </message>
     <message>
         <source>Stop Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Затвори цел екран</translation>
     </message>
     <message>
         <source>Connected to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Поврзи се со сервер</translation>
     </message>
     <message>
         <source>Logged in to remote host</source>
-        <translation type="unfinished"></translation>
+        <translation>Логиран на сервер</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Прекината врска</translation>
     </message>
 </context>
 <context>
     <name>KVNCBookmarkDlgBase</name>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Листа на линкови</translation>
     </message>
     <message>
         <source>Choose a bookmark that you would like to open</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери линк кој треба да се отвори</translation>
     </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
     <message>
         <source>VNC Viewer Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>VNC поврзување</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервер</translation>
     </message>
     <message>
         <source>The password of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Лозинката на VNC серверот</translation>
     </message>
     <message>
         <source>Show Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи лозинка</translation>
     </message>
     <message>
         <source>Toggle obscuring the password</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи прикривање на лозинката</translation>
     </message>
     <message>
         <source>Password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Лозинка:</translation>
     </message>
     <message>
         <source>The name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на VNC серверот</translation>
     </message>
     <message>
         <source>Bookmark Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на линк:</translation>
     </message>
     <message>
         <source>The host name of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на компјутерот со VNC сервер</translation>
     </message>
     <message>
         <source>Host Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на сервер:</translation>
     </message>
     <message>
         <source>Display Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Број на приказ:</translation>
     </message>
     <message>
         <source>The display number of the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Број на приказ на VNC серверот</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Request shared session</source>
-        <translation type="unfinished"></translation>
+        <translation>Барај сесија која се дели</translation>
     </message>
     <message>
         <source>Allow other users to connect to the VNC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Дозволи и други корисници да се поврзуваат со VNC серверот</translation>
     </message>
     <message>
         <source>Request 8-bit session</source>
-        <translation type="unfinished"></translation>
+        <translation>Барај 8-битна сесија</translation>
     </message>
     <message>
         <source>Request that the VNC server transfer 8 bit color</source>
-        <translation type="unfinished"></translation>
+        <translation>Барај пренос на 8-битна боја од VNC серверот</translation>
     </message>
     <message>
         <source>Delay between requesting updates from the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Време помеѓу освежувања од серверот</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>Scale the remote display to fit on the PDA (Slow)</source>
-        <translation type="unfinished"></translation>
+        <translation>Намалиго екранот на серверот за да го собере на PDA-то (споро)</translation>
     </message>
     <message>
         <source>Scale Factor</source>
-        <translation type="unfinished"></translation>
+        <translation>Фактор на намалување</translation>
     </message>
     <message>
         <source>Milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Милисекунди</translation>
     </message>
     <message>
         <source>Raise on bell</source>
-        <translation type="unfinished"></translation>
+        <translation>Крени на повик</translation>
     </message>
     <message>
         <source>Check for screen updates every:</source>
-        <translation type="unfinished"></translation>
+        <translation>Провери освежувања на екран секои:</translation>
     </message>
     <message>
         <source>Encodings</source>
-        <translation type="unfinished"></translation>
+        <translation>Кодни табели</translation>
     </message>
     <message>
         <source>Hextile encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Хекса кодни табели</translation>
     </message>
     <message>
         <source>CoRRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>CoRRE кодна табела</translation>
     </message>
     <message>
         <source>RRE encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>REE кодна табела</translation>
     </message>
     <message>
         <source>Copy rectangle encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај правоаголник</translation>
     </message>
     <message>
         <source>Enable transmiting identical rectangles as references to existing data</source>
-        <translation type="unfinished"></translation>
+        <translation>Вклучи емитирање на идентични правоаголници како рефернеци за постоечки податоци</translation>
     </message>
 </context>
 </TS>

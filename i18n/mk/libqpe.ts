@@ -3,436 +3,437 @@
     <name>Categories</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е внесено</translation>
     </message>
     <message>
         <source> (multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(повеќе)</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>Бизнис</translation>
     </message>
     <message>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>Лични</translation>
     </message>
 </context>
 <context>
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation>(Повеќе)</translation>
     </message>
 </context>
 <context>
     <name>CategoryEdit</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова категорија</translation>
     </message>
     <message>
         <source>New Category </source>
-        <translation type="unfinished"></translation>
+        <translation>Нова категорија</translation>
     </message>
 </context>
 <context>
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди Категорија</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Категории</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Апликација</translation>
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation type="unfinished"></translation>
+        <translation>Овде идат категориите</translation>
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>Види во кои категории спаѓа документов.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси нова категорија. Притисни &lt;b&gt;Додај&lt;/b&gt; за да се додаде на листата.</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Додај</translation>
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси нова категорија лево и притисни додај за да се додаде на листата.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>Притисни за да сеизбрише избраната категорија.</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Глобална</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери за ова својство да биде достапно на сите апликации.</translation>
     </message>
 </context>
 <context>
     <name>CategoryMenu</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е внесено</translation>
     </message>
 </context>
 <context>
     <name>CategorySelect</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <source>Sorry, another application is
 editing categories.</source>
-        <translation type="unfinished"></translation>
+        <translation>Друга апликација ги 
+уредува категориите.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди категории</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите</translation>
     </message>
 </context>
 <context>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи го Јануари во избраната година</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи го претходниот месец</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи го следниот месец</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикаѓи го Декември во избраната година</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>Затвори го избирачот на датотеки</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи ги документите од овој тип</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на документи</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи ги документите во оваа категорија</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни за да избереш документ од листата</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>, или избери &lt;b&gt;Нов Документ&lt;/b&gt; за да се креира нов документ.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;Кликни и држи за својства на докуументот.</translation>
     </message>
 </context>
 <context>
     <name>FileSelectorView</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Пронајди</translation>
     </message>
 </context>
 <context>
     <name>FindWidget</name>
     <message>
         <source>String Not Found.</source>
-        <translation type="unfinished"></translation>
+        <translation>Стригот не е пронајден.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Стигнав до крајк, повторно почнувам од почеток</translation>
     </message>
 </context>
 <context>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Пронајди</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>Барај:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категрија:</translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation type="unfinished"></translation>
+        <translation>Почни со пребарување на:</translation>
     </message>
     <message>
         <source>Dec 02 01</source>
-        <translation type="unfinished"></translation>
+        <translation>Дек 02 01</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Внимавај на големина на карактери</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>Барај наназад</translation>
     </message>
 </context>
 <context>
     <name>LnkProperties</name>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Својства</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед на документи</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>File deletion failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Бришењето на датотеката неуспеа.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Тврд Диск</translation>
     </message>
     <message>
         <source>Copy of </source>
-        <translation type="unfinished"></translation>
+        <translation>Копија на</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Дупликат</translation>
     </message>
     <message>
         <source>File copy failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неуспешно копирање.</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Детали</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Поместувањето на документот неуспеа.</translation>
     </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>Детали</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>Користи сопствена ротација</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation type="unfinished"></translation>
+        <translation>Однапред вчитај ја апликацијава, за да биде веднаш достапна.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Името на овој документ.</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
-        <translation type="unfinished"></translation>
+        <translation>Медимуот на кој е сместен документот.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Локација:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Име:</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation type="unfinished"></translation>
+        <translation>Брззо вчитување (одзема меморија)</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Коментар:</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши го документов.</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>Направи копија на документов.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Пренеси</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Пренеси го документов на друг уред.</translation>
     </message>
 </context>
 <context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Информации за сопственикот</translation>
     </message>
 </context>
 <context>
     <name>PasswordBase</name>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси лозинка</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>New Document</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов Документ</translation>
     </message>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни за да го затвориш овој прозорец, занемарувајќи ги промените.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни за да го затвориш овој прозорец.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни за да го затвориш овој прозорец, памтејќи ги промените.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни за да можеш да го поместуваш прозорецов.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни за проорецот да ја покрие целата површина на екранот.</translation>
     </message>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Ot&gt;Нема детална  помош за оваа апликација&lt;p&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished"></translation>
+        <translation>Што е ова...</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Нема доволно простор</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -441,440 +442,451 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Имаше проблем при креирањето на 
+конфигурациските информации
+за овој програм.
+
+Ослободете простор и
+обидете се повторно.</translation>
     </message>
     <message>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се креираат стартните датотеки
+Ослободете простор 
+пред да внесувате податоци</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се намести алармот.
+Ослободете меморија и обидете се повторно.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>Д</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>М</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Г</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>ден</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>месец</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>година</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>ПМ</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>АМ</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>Пон</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>Втор</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>Сред</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>Чет</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>Пет</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>Саб</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>Нед</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Дали сакате да го избришете 
+%1?</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е внесено</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Работна Адреса:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Домашна Адреса:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation type="unfinished"></translation>
+        <translation>E-mail адреса:</translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>Домашен Телефон:</translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Домашен Факс:</translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>Приватен Мовилен:</translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>Приватна интернет страна:</translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>Службена интернет страна:</translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation type="unfinished"></translation>
+        <translation>Канцеларија:</translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>Службен телефон:</translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>Службен факс:</translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>Службен мобилен:</translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="unfinished"></translation>
+        <translation>Службен Пејџер:</translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="unfinished"></translation>
+        <translation>Професија:</translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="unfinished"></translation>
+        <translation>Асистент:</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation type="unfinished"></translation>
+        <translation>Раководител:</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Маж</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Жена</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation type="unfinished"></translation>
+        <translation>Пол:</translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>Споруг/Сопруга:</translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation type="unfinished"></translation>
+        <translation>Роденден:</translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
+        <translation>Годишнина:</translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation type="unfinished"></translation>
+        <translation>Надимак:</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Титула</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Средно Име</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Презиме</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>Суфикс</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними како</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Работно место</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>Одделение</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>Фирма</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Службен телефон</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Службен факс</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Службен мобилен</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>Основна E-mail адреса</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>Е-mail адреси</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашен Телефон</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашен Факс</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Приватен Мовилен</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Улица на фирмата</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>Град на фирмата</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>Држава на фирмата</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Поштенски код на фирмата</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Држава на фирмата</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>Службен пејџер</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>Службена интернет страна</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>Канцеларија</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>Професија</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>Асистент</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Раководител</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашна улица</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашен град</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашна држава</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>Домашен поштенски број</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>Домажна држава</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Приватна интернет страна</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>Споруг/Сопруга</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Пол</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>Роденден</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>Годишнина</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Надимак</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>Деца</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>Забелешки</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>Групи</translation>
     </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 документ</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation>CF картичка</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>Тврд диск</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>SD картичка</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>MMC картичка</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>SCSI тврд диск</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>Внатрешна меморија</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Внатрешен медиум</translation>
     </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ништо</translation>
     </message>
 </context>
 <context>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Извршната датотека „време на град“ не е пронајдена</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>За да ги одберете временските зони,
+инсталирајте го „време на град“.</translation>
     </message>
 </context>
 <context>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Нема доволно простор</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Please free up space and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се намести алармот.
+Ослободете меморија и обидете се повторно</translation>
     </message>
 </context>
 <context>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 датотеки</translation>
     </message>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите %1 датотеки</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>Сите датотеки</translation>
     </message>
 </context>
 </TS>

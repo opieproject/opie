@@ -3,54 +3,54 @@
     <name>GoMainWidget</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова Игра</translation>
     </message>
     <message>
         <source>Pass</source>
-        <translation type="unfinished"></translation>
+        <translation>Обид</translation>
     </message>
     <message>
         <source>Resign</source>
-        <translation type="unfinished"></translation>
+        <translation>Повлечи се</translation>
     </message>
     <message>
         <source>Two player option</source>
-        <translation type="unfinished"></translation>
+        <translation>Оции за два играчи</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Игра</translation>
     </message>
 </context>
 <context>
     <name>GoWidget</name>
     <message>
         <source>White %1, Black %2. </source>
-        <translation type="unfinished"></translation>
+        <translation>Бели %1, Црни %2.</translation>
     </message>
     <message>
         <source>White wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Белиот победи.</translation>
     </message>
     <message>
         <source>Black wins.</source>
-        <translation type="unfinished"></translation>
+        <translation>Црниот победи.</translation>
     </message>
     <message>
         <source>A draw.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нерешено.</translation>
     </message>
     <message>
         <source>I pass</source>
-        <translation type="unfinished"></translation>
+        <translation>1 обид</translation>
     </message>
     <message>
         <source>Prisoners: black %1, white %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Заробеници: црн %1, бел %2</translation>
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди</translation>
     </message>
 </context>
 </TS>

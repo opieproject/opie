@@ -3,127 +3,127 @@
     <name>KCheckers</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Нова</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Врати потег</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Крај</translation>
     </message>
     <message>
         <source>&amp;Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Почетничко</translation>
     </message>
     <message>
         <source>&amp;Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Слабо</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Просечно</translation>
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Добро</translation>
     </message>
     <message>
         <source>&amp;Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Еџпертско</translation>
     </message>
     <message>
         <source>&amp;Master</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Мајсторско</translation>
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Прикажи нумерации</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Англиски правила</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Руски правила</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Зелена Табла</translation>
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Мермерна Табла</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Дрвена Табла</translation>
     </message>
     <message>
         <source>What&apos;s This</source>
-        <translation type="unfinished"></translation>
+        <translation>Што е ова</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Правила на игра</translation>
     </message>
     <message>
         <source>&amp;About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;За кДама</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation type="unfinished"></translation>
+        <translation>за &amp;QT</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Игра</translation>
     </message>
     <message>
         <source>&amp;Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ниво</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Опции</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Помош</translation>
     </message>
     <message>
         <source> New Game </source>
-        <translation type="unfinished"></translation>
+        <translation>Нова игра</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation type="unfinished"></translation>
+        <translation>Врати потег</translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation type="unfinished"></translation>
+        <translation>Правила на игра</translation>
     </message>
     <message>
         <source>Go!</source>
-        <translation type="unfinished"></translation>
+        <translation>Старт!</translation>
     </message>
     <message>
         <source>Congratulation! You have won!</source>
-        <translation type="unfinished"></translation>
+        <translation>Победивте!</translation>
     </message>
     <message>
         <source>Please wait...</source>
-        <translation type="unfinished"></translation>
+        <translation>Почекајте...</translation>
     </message>
     <message>
         <source>You have lost. Game over.</source>
-        <translation type="unfinished"></translation>
+        <translation>Изгубивте.</translation>
     </message>
     <message>
         <source>Incorrect course.</source>
-        <translation type="unfinished"></translation>
+        <translation>Неправилна патека.</translation>
     </message>
 </context>
 </TS>

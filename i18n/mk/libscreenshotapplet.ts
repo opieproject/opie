@@ -3,47 +3,47 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Доцнење</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>секунди</translation>
     </message>
     <message>
         <source>Save named</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними именувано</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними слика како...</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека</translation>
     </message>
     <message>
         <source>Scap</source>
-        <translation type="unfinished"></translation>
+        <translation>Намали</translation>
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Име на слика</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Успех</translation>
     </message>
     <message>
         <source>Screenshot was uploaded to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Сликата е снимена на %1</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <source>Connection to %1 failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Поврзувањето со %1 неуспеа.</translation>
     </message>
 </context>
 </TS>

@@ -3,62 +3,62 @@
     <name>ConfigDlg</name>
     <message>
         <source>Multikey Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>конфигурација на тастатура</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Основни подесувања</translation>
     </message>
     <message>
         <source>Keymap File</source>
-        <translation type="unfinished"></translation>
+        <translation>датотека на мапирање на копчиња</translation>
     </message>
     <message>
         <source>Current Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Јазик</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Додади</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Одстрани</translation>
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Тастатура на избор</translation>
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>повторување</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Бои</translation>
     </message>
     <message>
         <source>Key Color</source>
-        <translation type="unfinished"></translation>
+        <translation>боја на копчиња</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation type="unfinished"></translation>
+        <translation>боја на притиснато копче</translation>
     </message>
     <message>
         <source>Line Color</source>
-        <translation type="unfinished"></translation>
+        <translation>боја на линија</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Боја н текст</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation type="unfinished"></translation>
+        <translation>Тастатура</translation>
     </message>
 </context>
 </TS>

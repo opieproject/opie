@@ -3,31 +3,31 @@
     <name>CardMonitor</name>
     <message>
         <source>Eject SD/MMC card</source>
-        <translation type="unfinished"></translation>
+        <translation>Осфрли SD/MMC картичка</translation>
     </message>
     <message>
         <source>Eject card 0: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Исфрли картичка 0: %1</translation>
     </message>
     <message>
         <source>Eject card 1: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Исфрли картичка 1: %1</translation>
     </message>
     <message>
         <source>CF/PCMCIA card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка при исфрлањето на CF/PCMCIA картичката!</translation>
     </message>
     <message>
         <source>SD/MMC card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>грешка при исфрлање на SD/MMC картичка!</translation>
     </message>
     <message>
         <source>New card: </source>
-        <translation type="unfinished"></translation>
+        <translation>Нова картичка:</translation>
     </message>
     <message>
         <source>Ejected: </source>
-        <translation type="unfinished"></translation>
+        <translation>Исфрлена:</translation>
     </message>
 </context>
 </TS>

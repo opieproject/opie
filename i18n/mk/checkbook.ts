@@ -3,503 +3,518 @@
     <name>Checkbook</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Сметка</translation>
     </message>
     <message>
         <source>New checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова сметка</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Информации</translation>
     </message>
     <message>
         <source>Transactions</source>
-        <translation type="unfinished"></translation>
+        <translation>Трансакции</translation>
     </message>
     <message>
         <source>Charts</source>
-        <translation type="unfinished"></translation>
+        <translation>Графикони</translation>
     </message>
     <message>
         <source>Password protect</source>
-        <translation type="unfinished"></translation>
+        <translation>Заштита со лозинка</translation>
     </message>
     <message>
         <source>Click here to enable/disable password protection of this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за да се заштити со лозинка оваа сметка.</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Име:</translation>
     </message>
     <message>
         <source>Enter name of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овде внеси име на смтеката.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <source>Select type of checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избети тип на сметка овде.</translation>
     </message>
     <message>
         <source>Savings</source>
-        <translation type="unfinished"></translation>
+        <translation>Штедна</translation>
     </message>
     <message>
         <source>Checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Тековна</translation>
     </message>
     <message>
         <source>CD</source>
-        <translation type="unfinished"></translation>
+        <translation>Кредитна</translation>
     </message>
     <message>
         <source>Money market</source>
-        <translation type="unfinished"></translation>
+        <translation>Пазар на пари</translation>
     </message>
     <message>
         <source>Mutual fund</source>
-        <translation type="unfinished"></translation>
+        <translation>Заеднички фонд</translation>
     </message>
     <message>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation>Останато</translation>
     </message>
     <message>
         <source>Bank:</source>
-        <translation type="unfinished"></translation>
+        <translation>Банка:</translation>
     </message>
     <message>
         <source>Enter name of the bank for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси име на банката за оваа сметка. </translation>
     </message>
     <message>
         <source>Account number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Број на сметка:</translation>
     </message>
     <message>
         <source>Enter account number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси го бројот на сметката овде.</translation>
     </message>
     <message>
         <source>PIN number:</source>
-        <translation type="unfinished"></translation>
+        <translation>PIN број:</translation>
     </message>
     <message>
         <source>Enter PIN number for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси PIN број за оваа сметка.</translation>
     </message>
     <message>
         <source>Starting balance:</source>
-        <translation type="unfinished"></translation>
+        <translation>Почетна состојба:</translation>
     </message>
     <message>
         <source>Enter the initial balance for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси ја почетната состојба на оваа сметка.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Забелешки:</translation>
     </message>
     <message>
         <source>Enter any additional information for this checkbook here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси додатни информации за сметката.</translation>
     </message>
     <message>
         <source>Current balance: %10.00</source>
-        <translation type="unfinished"></translation>
+        <translation>Моментална состојба: %10.00</translation>
     </message>
     <message>
         <source>This area shows the current balance in this checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овде е прикажана моменталната состојба на оваа сметка.</translation>
     </message>
     <message>
         <source>This is a listing of all transactions entered for this checkbook.
 
 To sort entries by a specific field, click on the column name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е лита на сите трансакции внесени за оваа сметка.
+
+За да се подреди по полиња, кликни на името на колоната.</translation>
     </message>
     <message>
         <source>Num</source>
-        <translation type="unfinished"></translation>
+        <translation>Број</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Дата</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished"></translation>
+        <translation>Опис</translation>
     </message>
     <message>
         <source>Amount</source>
-        <translation type="unfinished"></translation>
+        <translation>Сума</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова</translation>
     </message>
     <message>
         <source>Click here to add a new transaction.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за внесување на нова трансакција.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди</translation>
     </message>
     <message>
         <source>Select a transaction and then click here to edit it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Одбери трансакција и потоа кликни овде за да се измени.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to delete it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери сметка и потоа кликни овде зада се избрише.</translation>
     </message>
     <message>
         <source>Select the desired chart below and then click on the Draw button.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери го саканиот графикон и потоа кликни на Нацртај копчето.</translation>
     </message>
     <message>
         <source>Click here to select the desired chart type.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни на саканиот тип на графикон.</translation>
     </message>
     <message>
         <source>Account balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Состојба на сметка</translation>
     </message>
     <message>
         <source>Withdrawals by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Повлекувања на средства по категорија</translation>
     </message>
     <message>
         <source>Deposits by category</source>
-        <translation type="unfinished"></translation>
+        <translation>Депозити по категорија</translation>
     </message>
     <message>
         <source>Draw</source>
-        <translation type="unfinished"></translation>
+        <translation>Нацртај</translation>
     </message>
     <message>
         <source>Click here to draw the selected chart.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за да се нацрта избраниот графикон.</translation>
     </message>
     <message>
         <source>Current balance: %1%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Моментална состојба: %1 %2</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси лозинка</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Внесете лозинка:</translation>
     </message>
     <message>
         <source>Confirm password</source>
-        <translation type="unfinished"></translation>
+        <translation>Потврдете лозинка</translation>
     </message>
     <message>
         <source>Please confirm your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Потврдете лозинка:</translation>
     </message>
     <message>
         <source>Please enter your password to confirm removal of password protection:</source>
-        <translation type="unfinished"></translation>
+        <translation>Внесете лозинка за да го потврдите бришењето на заштитата со лозинка:</translation>
     </message>
     <message>
         <source>Delete transaction</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши трансакција</translation>
     </message>
 </context>
 <context>
     <name>Configuration</name>
     <message>
         <source>Configure Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурирај Сметка</translation>
     </message>
     <message>
         <source>Enter currency symbol:</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси симбол за валута:</translation>
     </message>
     <message>
         <source>Enter your local currency symbol here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси ги симболот на локалната валута овде.</translation>
     </message>
     <message>
         <source>Show whether checkbook is password
 protected</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи дали сметката е заштитена 
+со лозинка</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display that the checkbook is protected with a password.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за да се избере дали на главниот прозорец да се покажува дали сметката е заштитена или не со лозинка.</translation>
     </message>
     <message>
         <source>Show checkbook balances</source>
-        <translation type="unfinished"></translation>
+        <translation>Покажи состојби на сметки</translation>
     </message>
     <message>
         <source>Click here to select whether or not the main window will display the current balance for each checkbook.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликно овде за да се избере дали главниот прозорец ќе ги прикажува моменталните состојби за секоја сметка.</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Сметка</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова</translation>
     </message>
     <message>
         <source>Click here to create a new checkbook.
 
 You also can select New from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за да се креира нова сметка.
+
+Може исто така да изберете Ново од менито на Сметка.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here to edit it.
 
 You also can select Edit from the Checkbook menu, or click and hold on a checkbook name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери сметка и потоа кликни овде за да се уредува.
+
+Може исто да се одбере Уреди од менито Сметка, или да се кликне и да се задржи на името на сметката.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Select a checkbook and then click here delete it.
 
 You also can select Delete from the Checkbook menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери сметка и потоа кликни овде за да се избрише.
+
+Исто така можете да изберете Избриши од менито Сметка.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурација</translation>
     </message>
     <message>
         <source>Click here to configure this app.</source>
-        <translation type="unfinished"></translation>
+        <translation>Кликни овде за да конфигурира апликацијава.</translation>
     </message>
     <message>
         <source>This is a listing of all checkbooks currently available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ова е листа на моментално достапните сметки.</translation>
     </message>
     <message>
         <source>Checkbook Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Име на сметка</translation>
     </message>
     <message>
         <source>Balance</source>
-        <translation type="unfinished"></translation>
+        <translation>Состојба</translation>
     </message>
     <message>
         <source>Enter password</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси лозинка</translation>
     </message>
     <message>
         <source>Please enter your password:</source>
-        <translation type="unfinished"></translation>
+        <translation>Внесете лозинка:</translation>
     </message>
     <message>
         <source>Delete checkbook</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши сметка</translation>
     </message>
 </context>
 <context>
     <name>Transaction</name>
     <message>
         <source>Transaction for </source>
-        <translation type="unfinished"></translation>
+        <translation>Трансакција за</translation>
     </message>
     <message>
         <source>Withdrawal</source>
-        <translation type="unfinished"></translation>
+        <translation>Повлекување средства</translation>
     </message>
     <message>
         <source>Select whether the transaction is a withdrawal or deposit here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Овде се избира дали трансакцијата е повлекување на средства или депозит.</translation>
     </message>
     <message>
         <source>Deposit</source>
-        <translation type="unfinished"></translation>
+        <translation>Депозит</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Датум:</translation>
     </message>
     <message>
         <source>Select date of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери датум на трансакцијата.</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Број:</translation>
     </message>
     <message>
         <source>Enter check number here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси број на чек.</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <translation>Опис:</translation>
     </message>
     <message>
         <source>Enter description of transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси опис на трансакцијата.</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Категорија:</translation>
     </message>
     <message>
         <source>Select transaction category here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери категорија на трансакцијата.</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <source>Select transaction type here.
 
 The options available vary based on whether the transaction is a deposit or withdrawal.</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери тип на трансакција.
+
+Опциите варираат во зависност од тоа дали трансакцијата е депозит или повлекување на средства.</translation>
     </message>
     <message>
         <source>Amount:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сума:</translation>
     </message>
     <message>
         <source>Enter the amount of transaction here.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси сума на трансакцијата.
+
+Внесената вредност треба секогаш да е позитивна.</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation type="unfinished"></translation>
+        <translation>Такса:</translation>
     </message>
     <message>
         <source>Enter any fee amount assoiciated with this transaction.
 
 The value entered should always be positive.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси ја сумата на таксата поврзана со трансакцијата.
+
+Вредноста секогаш теба да биде позитивна.</translation>
     </message>
     <message>
         <source>Notes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Забелешки:</translation>
     </message>
     <message>
         <source>Enter any additional information for this transaction here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси додатни информации за трансакцијата.</translation>
     </message>
     <message>
         <source>Automobile</source>
-        <translation type="unfinished"></translation>
+        <translation>Автомобил</translation>
     </message>
     <message>
         <source>Bills</source>
-        <translation type="unfinished"></translation>
+        <translation>Сметки</translation>
     </message>
     <message>
         <source>CDs</source>
-        <translation type="unfinished"></translation>
+        <translation>ЦД-а</translation>
     </message>
     <message>
         <source>Clothing</source>
-        <translation type="unfinished"></translation>
+        <translation>Облека</translation>
     </message>
     <message>
         <source>Computer</source>
-        <translation type="unfinished"></translation>
+        <translation>Компјутер</translation>
     </message>
     <message>
         <source>DVDs</source>
-        <translation type="unfinished"></translation>
+        <translation>DVD-а</translation>
     </message>
     <message>
         <source>Eletronics</source>
-        <translation type="unfinished"></translation>
+        <translation>Електроника</translation>
     </message>
     <message>
         <source>Entertainment</source>
-        <translation type="unfinished"></translation>
+        <translation>Забава</translation>
     </message>
     <message>
         <source>Food</source>
-        <translation type="unfinished"></translation>
+        <translation>Храна</translation>
     </message>
     <message>
         <source>Gasoline</source>
-        <translation type="unfinished"></translation>
+        <translation>Гориво</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Општо</translation>
     </message>
     <message>
         <source>Movies</source>
-        <translation type="unfinished"></translation>
+        <translation>Филмпви</translation>
     </message>
     <message>
         <source>Rent</source>
-        <translation type="unfinished"></translation>
+        <translation>Кирија</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation type="unfinished"></translation>
+        <translation>Патувања</translation>
     </message>
     <message>
         <source>Debit Charge</source>
-        <translation type="unfinished"></translation>
+        <translation>Камата на долг</translation>
     </message>
     <message>
         <source>Written Check</source>
-        <translation type="unfinished"></translation>
+        <translation>Напишан чек</translation>
     </message>
     <message>
         <source>Transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Трансфер</translation>
     </message>
     <message>
         <source>Credit Card</source>
-        <translation type="unfinished"></translation>
+        <translation>Кредитна Картичка</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation type="unfinished"></translation>
+        <translation>Работа</translation>
     </message>
     <message>
         <source>Family Member</source>
-        <translation type="unfinished"></translation>
+        <translation>Член на фамилија</translation>
     </message>
     <message>
         <source>Misc. Credit</source>
-        <translation type="unfinished"></translation>
+        <translation>Општо Кредит</translation>
     </message>
     <message>
         <source>Automatic Payment</source>
-        <translation type="unfinished"></translation>
+        <translation>Автоматско Плаќање</translation>
     </message>
     <message>
         <source>Cash</source>
-        <translation type="unfinished"></translation>
+        <translation>Кеш</translation>
     </message>
 </context>
 </TS>

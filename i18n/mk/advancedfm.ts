@@ -3,311 +3,323 @@
     <name>AdvancedFm</name>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Забелешка</translation>
     </message>
     <message>
         <source>That directory does not exist</source>
-        <translation type="unfinished"></translation>
+        <translation>Директориумот не постои</translation>
     </message>
     <message>
         <source>Advanced FileManager
 is copyright 2002-2003 by
 L.J.Potter&lt;llornkcor@handhelds.org&gt;
 and is licensed by the GPL</source>
-        <translation type="unfinished"></translation>
+        <translation>Менаџер на Датотеки 
+copyright 2002-2003 од 
+L.J.Potter&lt;llornkcor@handhelds.org&gt;
+ и лиценциран под GPL лиценца</translation>
     </message>
     <message>
         <source>Show Hidden Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи сокриени датотеки</translation>
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Промени директориум</translation>
     </message>
     <message>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Изврши</translation>
     </message>
     <message>
         <source>Open as text</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори како текст</translation>
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Акции</translation>
     </message>
     <message>
         <source>Make Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Креирај Директориум</translation>
     </message>
     <message>
         <source>Make Symlink</source>
-        <translation type="unfinished"></translation>
+        <translation>Мреирај Симболичка врска</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Преименувај</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source>Copy As</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај како</translation>
     </message>
     <message>
         <source>Copy Same Dir</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај ист директориум</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Премести</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
     <message>
         <source>Add To Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Додај во документи</translation>
     </message>
     <message>
         <source>Run Command</source>
-        <translation type="unfinished"></translation>
+        <translation>Изврши команда</translation>
     </message>
     <message>
         <source>File Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Податоци за датотека</translation>
     </message>
     <message>
         <source>Set Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Постави правила</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Својства</translation>
     </message>
     <message>
         <source>Beam File</source>
-        <translation type="unfinished"></translation>
+        <translation>Пренеси датотека</translation>
     </message>
     <message>
         <source>AdvancedFm</source>
-        <translation type="unfinished"></translation>
+        <translation>Напреден Фајл Менаџер</translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се пренесе 
+тековниот директориум од листата на линкови
+Директорумот не е во листата на линкови!</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Преглед</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Преберување на датотеки</translation>
     </message>
     <message>
         <source>Run Command with Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Извеши команда со излезни податоци</translation>
     </message>
     <message>
         <source>Select All</source>
-        <translation type="unfinished"></translation>
+        <translation>Избери се</translation>
     </message>
     <message>
         <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Префрлисе на локална листа</translation>
     </message>
     <message>
         <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Префрли се на Далечинска листа
+</translation>
     </message>
     <message>
         <source>Bookmark Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Стави директориум во листа на линкови</translation>
     </message>
     <message>
         <source>Remove Current Directory from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Отстрани го тековниот директориум од листа на линкови</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Големина</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished"></translation>
+        <translation>Датум</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>Really delete
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Да избришам
+%1 датотеки?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Не</translation>
     </message>
     <message>
         <source>Delete Directory?</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши директориум?</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши %1
+и неговата содржина?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши 
+%1?</translation>
     </message>
     <message>
         <source>Really copy
 %1 files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај 
+%1 датотеки?</translation>
     </message>
     <message>
         <source>File Exists!</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотеката постои!</translation>
     </message>
     <message>
         <source>%1 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 посоти. Да ја препишам?</translation>
     </message>
     <message>
         <source>Could not copy %1 to %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се копира %1 во %2</translation>
     </message>
     <message>
         <source>
 exists. Ok to overwrite?</source>
-        <translation type="unfinished"></translation>
+        <translation>
+посоти. Да ја препишам?</translation>
     </message>
     <message>
         <source>Could not copy
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се копиа
+</translation>
     </message>
     <message>
         <source>to
 </source>
-        <translation type="unfinished"></translation>
+        <translation>во</translation>
     </message>
     <message>
         <source>Copy </source>
-        <translation type="unfinished"></translation>
+        <translation>Копирај</translation>
     </message>
     <message>
         <source> As</source>
-        <translation type="unfinished"></translation>
+        <translation>Како</translation>
     </message>
     <message>
         <source> already exists.
 Do you really want to delete it?</source>
-        <translation type="unfinished"></translation>
+        <translation>веќе постои.Да ја избришам?</translation>
     </message>
     <message>
         <source>Could not move
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Не може да се премести</translation>
     </message>
     <message>
         <source>AdvancedFm Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Испис на Напреден Фајл менаџер</translation>
     </message>
     <message>
         <source>Advancedfm Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Пренос од Напреден Фајл Менаџер</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>пратено.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ок</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Грешка</translation>
     </message>
     <message>
         <source>Could not rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Неможе да се преименува</translation>
     </message>
 </context>
 <context>
     <name>Output</name>
     <message>
         <source>Output</source>
-        <translation type="unfinished"></translation>
+        <translation>Излез</translation>
     </message>
     <message>
         <source>Save output to file (name only)</source>
-        <translation type="unfinished"></translation>
+        <translation>Сними го излезот во датотека (само име)</translation>
     </message>
 </context>
 <context>
     <name>filePermissions</name>
     <message>
         <source>Set File Permissions</source>
-        <translation type="unfinished"></translation>
+        <translation>Постави дозволи на датотека</translation>
     </message>
     <message>
         <source>Set file permissions for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Постави дозволи на датотека за:</translation>
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Сопственик</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation>Група</translation>
     </message>
     <message>
         <source>others</source>
-        <translation type="unfinished"></translation>
+        <translation>останати</translation>
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation>Сопственик</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Група</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation>чиање</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation>запишување</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>извршување</translation>
     </message>
 </context>
 </TS>

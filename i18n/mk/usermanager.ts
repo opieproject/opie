@@ -3,29 +3,29 @@
     <name>GroupDialog</name>
     <message>
         <source>Add Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Додади група</translation>
     </message>
     <message>
         <source>Edit Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Уреди група</translation>
     </message>
 </context>
 <context>
     <name>UserConfig</name>
     <message>
         <source>OPIE User Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE менаџер на корисници</translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation type="unfinished"></translation>
+        <translation>Додади корисник</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation type="unfinished"></translation>
+        <translation>уреди Корисник</translation>
     </message>
 </context>
 </TS>

@@ -3,7 +3,7 @@
     <name>Decoration</name>
     <message>
         <source>Polished</source>
-        <translation type="unfinished"></translation>
+        <translation>Сјајна</translation>
     </message>
 </context>
 </TS>

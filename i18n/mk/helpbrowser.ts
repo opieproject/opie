@@ -3,31 +3,31 @@
     <name>HelpBrowser</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Напред</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Дома</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Додали врска </translation>
     </message>
     <message>
         <source>Remove from Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Извади од листа на врски</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Листа на врски</translation>
     </message>
     <message>
         <source>Help Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Прегледувач на помош</translation>
     </message>
 </context>
 </TS>
