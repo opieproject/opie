@@ -1,5 +1,7 @@
 moc_*
 *.moc
+bin
+plugins
 Makefile
 appearancesettingsbase.h
 soundsettingsbase.h

@@ -1,3 +1,4 @@
 Makefile*
 moc_*
 *.moc
+bin

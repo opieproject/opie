@@ -1,6 +1,6 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on debug
-DESTDIR		= ../bin
+DESTDIR		= $(OPIEDIR)/bin
 SUBDIRS		= db ui
 HEADERS		= tableviewer.h \
 		  ui/commonwidgets.h \

@@ -1,7 +1,7 @@
 TEMPLATE        = app
 
 CONFIG          += qt warn_on release
-DESTDIR         = ../bin
+DESTDIR         = $(OPIEDIR)/bin
 
 HEADERS		= d3des.h \
 		  krfbbuffer.h \

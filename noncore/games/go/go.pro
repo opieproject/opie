@@ -1,4 +1,4 @@
-DESTDIR		= ../bin
+DESTDIR		= $(OPIEDIR)/bin
 TEMPLATE	= app
 CONFIG		= qt warn_on release
 HEADERS		= amigo.h \

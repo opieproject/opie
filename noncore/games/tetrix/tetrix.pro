@@ -1,6 +1,6 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on release
-DESTDIR		= ../bin
+DESTDIR		= $(OPIEDIR)/bin
 HEADERS		= minefield.h \
 		    gtetrix.h \
 		    qtetrix.h \

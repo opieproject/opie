@@ -1,6 +1,6 @@
 TEMPLATE	= app
 CONFIG		+= qt warn_on release
-DESTDIR		= ../bin
+DESTDIR		= $(OPIEDIR)/bin
 
 HEADERS	= dicttool.h
 SOURCES	= dicttool.cpp main.cpp
