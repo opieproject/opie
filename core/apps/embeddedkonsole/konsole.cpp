@@ -256,7 +256,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   scrollMenu = new QPopupMenu( this);
   editCommandListMenu = new QPopupMenu( this);
 
-  configMenu->insertItem("Command List",editCommandListMenu);
+  configMenu->insertItem(tr("Command List"), editCommandListMenu);
 
   bool listHidden;
   cfg.setGroup("Menubar");
@@ -621,7 +621,7 @@ void Konsole::switchSession(QWidget* w) {
 
 void Konsole::colorMenuIsSelected(int iD) {
     fromMenu = TRUE;
-    colorMenuSelected(iD); 
+    colorMenuSelected(iD);
 }
 
 /// -------------------------------   some new stuff by L.J. Potter
@@ -753,7 +753,7 @@ void Konsole::colorMenuSelected(int iD)
     lastSelectedMenu = iD;
     te->setColorTable(m_table);
     update();
-    
+
 }
 
 void Konsole::configMenuSelected(int iD)
@@ -929,7 +929,7 @@ qDebug("do other dialog");
     connect(penColorPopupMenu2, SIGNAL(colorSelected(const QColor&)), this,
             SLOT(changeBackgroundColor(const QColor&)));
    penColorPopupMenu2->exec();
-    
+
 }
 
 void Konsole::changeBackgroundColor(const QColor &color) {
