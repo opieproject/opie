@@ -37,8 +37,7 @@ void AdvancedFm::init() {
     layout->setSpacing( 2);
     layout->setMargin( 2);
 
-
-  QMenuBar *menuBar = new QMenuBar(this);
+ QMenuBar *menuBar = new QMenuBar(this);
   fileMenu = new QPopupMenu( this );
   viewMenu  = new QPopupMenu( this );
 //  customDirMenu  = new QPopupMenu( this );
@@ -110,8 +109,6 @@ void AdvancedFm::init() {
 //     customDirMenu->insertItem(tr("Remove This Directory"));
 //     customDirMenu->insertSeparator();
 
-    customDirsToMenu();
-
   menuButton = new MenuButton( lineBox );
 
   menuButton->setUseLabel(false);
@@ -119,6 +116,8 @@ void AdvancedFm::init() {
   menuButton->insertItem( s_addBookmark);
   menuButton->insertItem( s_removeBookmark);
   menuButton->insertSeparator();
+
+  customDirsToMenu();
 
   currentPathCombo = new QComboBox( FALSE, lineBox, "currentPathCombo" );
   currentPathCombo->setEditable(TRUE);
