@@ -203,7 +203,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   n_render = 0;
 
   setCaption( tr("Terminal") );
-  setIcon( Resource::loadPixmap( "konsole" ) );
+  setIcon( Resource::loadPixmap( "embeddedkonsole/konsole" ) );
 
   Config cfg("Konsole");
   cfg.setGroup("Konsole");
@@ -299,17 +299,17 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   QAction *a;
 
   // Button Commands
-  a = new QAction( tr("New"), Resource::loadPixmap( "konsole" ), QString::null, 0, this, 0 );
+  a = new QAction( tr("New"), Resource::loadPixmap( "embeddedkonsole/konsole" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( newSession() ) ); a->addTo( toolbar );
-  a = new QAction( tr("Enter"), Resource::loadPixmap( "konsole/enter" ), QString::null, 0, this, 0 );
+  a = new QAction( tr("Enter"), Resource::loadPixmap( "embeddedkonsole/enter" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitEnter() ) ); a->addTo( toolbar );
-  a = new QAction( tr("Space"), Resource::loadPixmap( "konsole/space" ), QString::null, 0, this, 0 );
+  a = new QAction( tr("Space"), Resource::loadPixmap( "embeddedkonsole/space" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitSpace() ) ); a->addTo( toolbar );
-  a = new QAction( tr("Tab"), Resource::loadPixmap( "konsole/tab" ), QString::null, 0, this, 0 );
+  a = new QAction( tr("Tab"), Resource::loadPixmap( "embeddedkonsole/tab" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitTab() ) ); a->addTo( toolbar );
-  a = new QAction( tr("Up"), Resource::loadPixmap( "konsole/up" ), QString::null, 0, this, 0 );
+  a = new QAction( tr("Up"), Resource::loadPixmap( "up" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitUp() ) ); a->addTo( toolbar );
-  a = new QAction( tr("Down"), Resource::loadPixmap( "konsole/down" ), QString::null, 0, this, 0 );
+  a = new QAction( tr("Down"), Resource::loadPixmap( "down" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitDown() ) ); a->addTo( toolbar );
   a = new QAction( tr("Paste"), Resource::loadPixmap( "paste" ), QString::null, 0, this, 0 );
   connect( a, SIGNAL( activated() ), this, SLOT( hitPaste() ) ); a->addTo( toolbar );
