@@ -32,6 +32,7 @@ OImageScrollView::OImageScrollView( QWidget* parent, const char* name,  WFlags f
     m_states[IMAGE_IS_JPEG]=false;
     m_states[IMAGE_SCALED_LOADED]=false;
     m_states[SHOW_ZOOMER]=true;
+    _newImage = true;
     init();
 }
 
@@ -48,6 +49,7 @@ OImageScrollView::OImageScrollView (const QImage&img, QWidget * parent, const ch
     m_states[SHOW_ZOOMER]=true;
     _original_data.convertDepth(QPixmap::defaultDepth());
     _original_data.setAlphaBuffer(false);
+    _newImage = true;
     init();
 }
 
@@ -62,6 +64,7 @@ OImageScrollView::OImageScrollView (const QString&img, QWidget * parent, const c
     m_states[IMAGE_IS_JPEG]=false;
     m_states[IMAGE_SCALED_LOADED]=false;
     m_states[SHOW_ZOOMER]=true;
+    _newImage = true;
     init();
     setImage(img);
 }
@@ -75,6 +78,7 @@ void OImageScrollView::setImage(const QImage&img)
     m_lastName = "";
     setImageIsJpeg(false);
     setImageScaledLoaded(false);
+    _newImage = true;
     if (FirstResizeDone()) {
         generateImage();
     }
@@ -86,6 +90,7 @@ void OImageScrollView::loadJpeg(bool interncall)
     QImageIO iio( m_lastName, 0l );
     QString param;
     bool real_load = false;
+    _newImage = true;
     if (AutoScale()) {
         if (!interncall) {
             ExifData xf;
@@ -123,6 +128,7 @@ void OImageScrollView::setImage( const QString& path ) {
     odebug << "load new image " << oendl;
     if (m_lastName == path) return;
     m_lastName = path;
+    _newImage = true;
     _original_data = QImage();
     QString itype = QImage::imageFormat(m_lastName);
     odebug << "Image type = " << itype << oendl;
@@ -174,6 +180,7 @@ void OImageScrollView::init()
         if (image_fit_into(_original_data.size()) || !ShowZoomer()) _zoomer->hide();
         resizeContents(_original_data.width(),_original_data.height());
     }
+    _intensity = 0;
 }
 
 void OImageScrollView::setAutoRotate(bool how)
@@ -340,7 +347,100 @@ void OImageScrollView::rotate_into_data(Rotation r)
         }
 
     }
+    _newImage = true;
     _image_data = dest;
+}
+
+void OImageScrollView::apply_gamma(int aValue)
+{
+    if (!_image_data.size().isValid()) return;
+    float percent = ((float)aValue/100);
+    odebug << "Apply gamma " << percent << oendl;
+    int pixels = _image_data.depth()>8?_image_data.width()*_image_data.height() : _image_data.numColors();
+    int segColors = _image_data.depth() > 8 ? 256 : _image_data.numColors();
+    unsigned char *segTbl = new unsigned char[segColors];
+    bool brighten = (percent >= 0);
+    if ( percent < 0 )
+        percent = -percent;
+
+    unsigned int *data = _image_data.depth() > 8 ? (unsigned int *)_image_data.bits() :
+                         (unsigned int *)_image_data.colorTable();
+
+
+    if (brighten) {
+        for ( int i=0; i < segColors; ++i )
+        {
+            int tmp = (int)(i*percent);
+            if ( tmp > 255 )
+                tmp = 255;
+            segTbl[i] = tmp;
+        }
+    } else {
+        for ( int i=0; i < segColors; ++i )
+        {
+            int tmp = (int)(i*percent);
+            if ( tmp < 0 )
+                tmp = 0;
+            segTbl[i] = tmp;
+        }
+    }
+    if (brighten) {
+        for ( int i=0; i < pixels; ++i )
+        {
+            int r = qRed(data[i]);
+            int g = qGreen(data[i]);
+            int b = qBlue(data[i]);
+            int a = qAlpha(data[i]);
+            r = r + segTbl[r] > 255 ? 255 : r + segTbl[r];
+            g = g + segTbl[g] > 255 ? 255 : g + segTbl[g];
+            b = b + segTbl[b] > 255 ? 255 : b + segTbl[b];
+            data[i] = qRgba(r, g, b,a);
+        }
+    } else {
+        for ( int i=0; i < pixels; ++i )
+        {
+            int r = qRed(data[i]);
+            int g = qGreen(data[i]);
+            int b = qBlue(data[i]);
+            int a = qAlpha(data[i]);
+            r = r - segTbl[r] < 0 ? 0 : r - segTbl[r];
+            g = g - segTbl[g] < 0 ? 0 : g - segTbl[g];
+            b = b - segTbl[b] < 0 ? 0 : b - segTbl[b];
+            data[i] = qRgba(r, g, b, a);
+        }
+    }
+    delete [] segTbl;
+}
+
+const int OImageScrollView::Intensity()const
+{
+    return _intensity;
+}
+
+int OImageScrollView::setIntensity(int value,bool reload)
+{
+    int oldi = _intensity;
+    _intensity = value;
+    if (!_pdata.size().isValid()) {
+        return _intensity;
+    }
+
+    if (!reload) {
+        _image_data = _pdata.convertToImage();
+        apply_gamma(_intensity-oldi);
+        _pdata.convertFromImage(_image_data);
+        /*
+        * invalidate
+        */
+        _image_data=QImage();
+        if (isVisible()) {
+            updateContents(contentsX(),contentsY(),width(),height());
+        }
+    } else {
+        _newImage = true;
+        generateImage();
+    }
+    return _intensity;
 }
 
 void OImageScrollView::generateImage()
@@ -367,6 +467,7 @@ void OImageScrollView::generateImage()
             } else {
                 rotate_into_data(r);
             }
+            _newImage = true;
         }
         rescaleImage(width(),height());
     }  else if (!FirstResizeDone()||r!=m_last_rot||_image_data.width()==0) {
@@ -377,6 +478,12 @@ void OImageScrollView::generateImage()
         }
         m_last_rot = r;
     }
+
+    if (_newImage) {
+        apply_gamma(_intensity);
+        _newImage = false;
+    }
+
     _pdata.convertFromImage(_image_data);
     twidth = _image_data.width();
     theight = _image_data.height();

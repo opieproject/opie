@@ -121,6 +121,19 @@ public:
      */
     virtual bool ShowZoomer()const;
 
+    /**
+     * set a display intensity
+     * @param value the intensity value, will calcuated to a percent value (value/100)
+     * @param reload should the real image recalculated complete or just work on current display.
+     * @return the new intensity
+     */
+    virtual int setIntensity(int value,bool reload=false);
+    /**
+     * return the current display intensity
+     */
+    virtual const int Intensity()const;
+
+
 public slots:
     /**
      * Displays a new image, calculations will made immediately.
@@ -157,6 +170,8 @@ protected:
     QImage _image_data;
     QImage _original_data;
     QPixmap _pdata;
+    int _intensity;
+    bool _newImage;
 
     int _mouseStartPosX,_mouseStartPosY;
 
@@ -179,6 +194,7 @@ protected:
     virtual void setImageScaledLoaded(bool how);
     virtual bool FirstResizeDone()const;
     virtual void setFirstResizeDone(bool how);
+    virtual void apply_gamma(int aValue);
 
 protected slots:
     virtual void viewportMouseMoveEvent(QMouseEvent* e);
