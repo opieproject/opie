@@ -463,9 +463,9 @@ void Config::write( const QString &fn )
 	git = groups.end();
 	return;
     }
-    
+
     QString str;
-    QCString cstr;    
+    QCString cstr;
     QMap< QString, ConfigGroup >::Iterator g_it = groups.begin();
 
     for ( ; g_it != groups.end(); ++g_it ) {
@@ -475,7 +475,7 @@ void Config::write( const QString &fn )
  	    str += e_it.key() + " = " + *e_it + "\n";
     }
     cstr = str.utf8();
-    
+
     int total_length;
     total_length = f.writeBlock( cstr.data(), cstr.length() );
     if ( total_length != int(cstr.length()) ) {
@@ -485,14 +485,14 @@ void Config::write( const QString &fn )
 	QFile::remove( strNewFile );
 	return;
     }
-    
+
     f.close();
     // now rename the file...
     if ( rename( strNewFile, filename ) < 0 ) {
-	qWarning( "problem renaming the file %s to %s", strNewFile.latin1(), 
+	qWarning( "problem renaming the file %s to %s", strNewFile.latin1(),
 		  filename.latin1() );
 	QFile::remove( strNewFile );
-    }	
+    }
 }
 
 /*!
@@ -521,6 +521,16 @@ void Config::read()
 	return;
     }
 
+
+    // hack to avoid problems if big files are passed to test
+    // if they are valid configs ( like passing a mp3 ... )
+    // I just hope that there are no conf files > 100000 byte
+    // not the best solution, find something else later
+    if ( f.size() > 100000 )  {
+        return;
+    }
+
+
     QTextStream s( &f );
 #if QT_VERSION <= 230 && defined(QT_NO_CODECS)
     // The below should work, but doesn't in Qt 2.3.0
@@ -546,10 +556,10 @@ void Config::read()
 bool Config::parse( const QString &l )
 {
     QString line = l.stripWhiteSpace();
-    
+
     if ( line [0] == QChar ( '#' ))
     	return true; // ignore comments
-    
+
     if ( line[ 0 ] == QChar( '[' ) ) {
 	QString gname = line;
 	gname = gname.remove( 0, 1 );
