@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25.4.5 2003-06-06 16:37:10 zecke Exp $
+** $Id: datebook.cpp,v 1.25.4.6 2003-06-09 18:39:23 zecke Exp $
 **
 **********************************************************************/
 
@@ -440,7 +440,7 @@ void DateBook::duplicateEvent( const Event &e )
 		Event newEv = entry->event();
 		QString error = checkEvent(newEv);
 		if (!error.isNull()) {
-			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0)
+			if (QMessageBox::warning(this, tr("error box"), error, tr("Fix it"), tr("Continue"), 0, 0, 1) == 0)
 				continue;
 		}
                 /*
@@ -490,7 +490,7 @@ void DateBook::editEvent( const Event &e )
 		newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
 		QString error = checkEvent(newEv);
 		if (!error.isNull()) {
-			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0) continue;
+			if (QMessageBox::warning(this, tr("error box"), error, tr("Fix it"), tr("Continue"), 0, 0, 1) == 0) continue;
 	}
 	db->editEvent(e, newEv);
 	emit newEvent();
@@ -947,7 +947,7 @@ void DateBook::slotFind()
 {
     // move it to the day view...
     viewDay();
-    FindDialog frmFind( "Calendar", this );
+    FindDialog frmFind( "Calendar", this ); // no tr needed
     frmFind.setUseDate( true );
     frmFind.setDate( currentDate() );
     QObject::connect( &frmFind,
