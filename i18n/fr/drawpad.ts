@@ -169,7 +169,7 @@ toutes les pages ?</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Anti-crénelage</translation>
     </message>
 </context>
 <context>
