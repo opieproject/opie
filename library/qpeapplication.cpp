@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.16 2002-08-15 18:34:42 harlekin Exp $
+** $Id: qpeapplication.cpp,v 1.17 2002-09-06 19:27:17 sandman Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -48,20 +48,6 @@
 #include <qevent.h>
 #include <qtooltip.h>
 #include <qsignal.h>
-
-
-//#include <linux/fb.h> better not rely on kernel headers in userspace ...
-
-/* VESA Blanking Levels */
-#define VESA_NO_BLANKING      0
-#define VESA_VSYNC_SUSPEND    1
-#define VESA_HSYNC_SUSPEND    2
-#define VESA_POWERDOWN        3
-
-#define FBIOBLANK             0x4611
-
-
-#include <qsignal.h>
 #include "qpeapplication.h"
 #include "qpestyle.h"
 #include "styleinterface.h"
@@ -78,15 +64,10 @@
 #endif
 #include "global.h"
 #include "resource.h"
-#if QT_VERSION <= 230 && defined(QT_NO_CODECS)
-#include "qutfcodec.h"
-#endif
 #include "config.h"
-#include "network.h"
 #include "fontmanager.h"
 #include "fontdatabase.h"
 
-#include "power.h"
 #include "alarmserver.h"
 #include "applnk.h"
 #include "qpemenubar.h"
@@ -95,14 +76,6 @@
 #include <sys/file.h>
 #include <sys/ioctl.h>
 #include <sys/soundcard.h>
-
-// for setBacklight()
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
-#include <linux/fb.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#endif
-#include <stdlib.h>
 
 
 class QPEApplicationData
@@ -230,258 +203,6 @@ static void setMic( int t = 0, int percent = -1 )
 	}
 }
 
-int qpe_sysBrightnessSteps()
-{
-#if defined(QT_QWS_IPAQ)
-	return 255;
-#elif defined(QT_QWS_EBX)
-
-	return 4;
-#else
-
-	return 255; // ?
-#endif
-}
-
-
-static int& hack( int& i )
-{
-#if QT_VERSION <= 230 && defined(QT_NO_CODECS)
-	// These should be created, but aren't in Qt 2.3.0
-	( void ) new QUtf8Codec;
-	( void ) new QUtf16Codec;
-#endif
-
-	return i;
-}
-
-static bool forced_off = FALSE;
-static int curbl = -1;
-
-static int backlight()
-{
-	if ( curbl == -1 ) {
-		// Read from config
-		Config config( "qpe" );
-		config.setGroup( "Screensaver" );
-		curbl = config.readNumEntry( "Brightness", 255 );
-	}
-	return curbl;
-}
-
-static void setBacklight( int bright )
-{
-	if ( bright == -3 ) {
-		// Forced on
-		forced_off = FALSE;
-		bright = -1;
-	}
-	if ( forced_off && bright != -2 )
-		return ;
-	if ( bright == -2 ) {
-		// Toggle between off and on
-		bright = curbl ? 0 : -1;
-		forced_off = !bright;
-	}
-	if ( bright == -1 ) {
-		// Read from config
-		Config config( "qpe" );
-		config.setGroup( "Screensaver" );
-		bright = config.readNumEntry( "Brightness", 255 );
-	}
-#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
-	if ( QFile::exists( "/usr/bin/bl" ) ) {
-		QString cmd = "/usr/bin/bl 1 ";
-		cmd += bright <= 0 ? "0 " : "1 ";
-		cmd += QString::number( bright );
-		system( cmd.latin1() );
-#if defined(QT_QWS_EBX)
-
-	}
-	else if ( QFile::exists( "/dev/fl" ) ) {
-#define FL_IOCTL_STEP_CONTRAST    100
-		int fd = open( "/dev/fl", O_WRONLY );
-		if ( fd >= 0 ) {
-			int steps = qpe_sysBrightnessSteps();
-			int bl = ( bright * steps + 127 ) / 255;
-			if ( bright && !bl )
-				bl = 1;
-			bl = ioctl( fd, FL_IOCTL_STEP_CONTRAST, bl );
-			close( fd );
-		}
-	}
-#elif defined(QT_QWS_IPAQ)
-
-	}
-	else if ( QFile::exists( "/dev/ts" ) || QFile::exists( "/dev/h3600_ts" ) )
-	{
-		typedef struct {
-			unsigned char mode;
-			unsigned char pwr;
-			unsigned char brightness;
-		}
-		FLITE_IN;
-# ifndef FLITE_ON
-#  ifndef _LINUX_IOCTL_H
-#   include <linux/ioctl.h>
-#  endif
-#  define FLITE_ON                _IOW('f', 7, FLITE_IN)
-# endif
-
-		int fd;
-		if ( QFile::exists( "/dev/ts" ) )
-			fd = open( "/dev/ts", O_WRONLY );
-		else
-			fd = open( "/dev/h3600_ts", O_WRONLY );
-		if ( fd >= 0 ) {
-			FLITE_IN bl;
-			bl.mode = 1;
-			bl.pwr = bright ? 1 : 0;
-			bl.brightness = bright;
-			ioctl( fd, FLITE_ON, &bl );
-			close( fd );
-		}
-	}
-#endif
-#endif
-	curbl = bright;
-}
-
-void qpe_setBacklight( int bright ) {
-	setBacklight( bright );
-}
-
-static bool dim_on = FALSE;
-static bool lightoff_on = FALSE;
-static int disable_suspend = 100;
-
-static bool powerOnline()
-{
-	return PowerStatusManager::readStatus().acStatus() == PowerStatus::Online;
-}
-
-static bool networkOnline()
-{
-	return Network::networkOnline();
-}
-
-class QPEScreenSaver : public QWSScreenSaver
-{
-private:
-	int LcdOn;
-
-public:
-	QPEScreenSaver()
-	{
-		int fd;
-
-		LcdOn = TRUE;
-		// Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
-		fd = open( "/dev/fb0", O_RDWR );
-		if ( fd != -1 ) {
-			ioctl( fd, FBIOBLANK, VESA_NO_BLANKING );
-			close( fd );
-		}
-	}
-	void restore()
-	{
-		if ( !LcdOn )   // We must have turned it off
-		{
-			int fd;
-			fd = open( "/dev/fb0", O_RDWR );
-			if ( fd != -1 )
-			{
-				ioctl( fd, FBIOBLANK, VESA_NO_BLANKING );
-				close( fd );
-			}
-		}
-		setBacklight( -1 );
-	}
-	bool save( int level )
-	{
-		int fd;
-
-		switch ( level ) {
-			case 0:
-				if ( disable_suspend > 0 && dim_on ) {
-					if ( backlight() > 1 )
-						setBacklight( 1 ); // lowest non-off
-				}
-				return TRUE;
-				break;
-			case 1:
-				if ( disable_suspend > 1 && lightoff_on ) {
-					setBacklight( 0 ); // off
-				}
-				return TRUE;
-				break;
-			case 2:
-				Config config( "qpe" );
-				config.setGroup( "Screensaver" );
-				if ( config.readNumEntry( "LcdOffOnly", 0 ) != 0 )    // We're only turning off the LCD
-				{
-					fd = open( "/dev/fb0", O_RDWR );
-					if ( fd != -1 )
-					{
-						ioctl( fd, FBIOBLANK, VESA_POWERDOWN );
-						close( fd );
-					}
-					LcdOn = FALSE;
-				}
-				else // We're going to suspend the whole machine
-				{
-					if ( disable_suspend > 2 && !powerOnline() && !networkOnline() ) {
-						QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-						return TRUE;
-					}
-				}
-				break;
-		}
-		return FALSE;
-	}
-};
-
-static int ssi( int interval, Config & config, const QString & enable, const QString & value, int def )
-{
-	if ( !enable.isEmpty() && config.readNumEntry( enable, 0 ) == 0 )
-		return 0;
-
-	if ( interval < 0 ) {
-		// Restore screen blanking and power saving state
-		interval = config.readNumEntry( value, def );
-	}
-	return interval;
-}
-
-static void setScreenSaverIntervals( int i1, int i2, int i3 )
-{
-	Config config( "qpe" );
-	config.setGroup( "Screensaver" );
-
-	int v[ 4 ];
-	i1 = ssi( i1, config, "Dim", "Interval_Dim", 30 );
-	i2 = ssi( i2, config, "LightOff", "Interval_LightOff", 20 );
-	i3 = ssi( i3, config, "", "Interval", 60 );
-
-	//qDebug("screen saver intervals: %d %d %d", i1, i2, i3);
-
-	v[ 0 ] = QMAX( 1000 * i1, 100 );
-	v[ 1 ] = QMAX( 1000 * i2, 100 );
-	v[ 2 ] = QMAX( 1000 * i3, 100 );
-	v[ 3 ] = 0;
-	dim_on = ( ( i1 != 0 ) ? config.readNumEntry( "Dim", 1 ) : FALSE );
-	lightoff_on = ( ( i2 != 0 ) ? config.readNumEntry( "LightOff", 1 ) : FALSE );
-	if ( !i1 && !i2 && !i3 )
-		QWSServer::setScreenSaverInterval( 0 );
-	else
-		QWSServer::setScreenSaverIntervals( v );
-}
-
-static void setScreenSaverInterval( int interval )
-{
-	setScreenSaverIntervals( -1, -1, interval );
-}
-
 
 /*!
   \class QPEApplication qpeapplication.h
@@ -547,7 +268,7 @@ static void setScreenSaverInterval( int interval )
   a QApplication, passing \a argc, \a argv, and \a t.
 */
 QPEApplication::QPEApplication( int & argc, char **argv, Type t )
-		: QApplication( hack( argc ), argv, t )
+		: QApplication( argc, argv, t )
 {
 	int dw = desktop() ->width();
 	if ( dw < 200 ) {
@@ -674,9 +395,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
 	applyStyle();
 
 	if ( type() == GuiServer ) {
-		setScreenSaverInterval( -1 );
 		setVolume();
-		QWSServer::setScreenSaver( new QPEScreenSaver );
 	}
 
 	installEventFilter( this );
@@ -1012,27 +731,6 @@ void QPEApplication::systemMessage( const QCString & msg, const QByteArray & dat
 	if ( msg == "applyStyle()" ) {
 		applyStyle();
 	}
-	else if ( msg == "setScreenSaverInterval(int)" ) {
-		if ( type() == GuiServer ) {
-			int time;
-			stream >> time;
-			setScreenSaverInterval( time );
-		}
-	}
-	else if ( msg == "setScreenSaverIntervals(int,int,int)" ) {
-		if ( type() == GuiServer ) {
-			int t1, t2, t3;
-			stream >> t1 >> t2 >> t3;
-			setScreenSaverIntervals( t1, t2, t3 );
-		}
-	}
-	else if ( msg == "setBacklight(int)" ) {
-		if ( type() == GuiServer ) {
-			int bright;
-			stream >> bright;
-			setBacklight( bright );
-		}
-	}
 	else if ( msg == "setDefaultRotation(int)" ) {
 		if ( type() == GuiServer ) {
 			int r;
@@ -1065,6 +763,8 @@ void QPEApplication::systemMessage( const QCString & msg, const QByteArray & dat
 			d->kbgrabber = 1;
 		else
 			d->kbgrabber = 2;
+			
+		printf( "'%s' received grabKeyboard ( '%s' ) -> kbgrabber = %d\n", d-> appName.latin1(), who.latin1(), d-> kbgrabber );
 	}
 	else if ( msg == "language(QString)" ) {
 		if ( type() == GuiServer ) {
@@ -1158,15 +858,6 @@ void QPEApplication::systemMessage( const QCString & msg, const QByteArray & dat
 		stream >> micMuted;
 		setMic();
 		emit micChanged( micMuted );
-	}
-	else if ( msg == "setScreenSaverMode(int)" ) {
-		if ( type() == GuiServer ) {
-			int old = disable_suspend;
-			stream >> disable_suspend;
-			//qDebug("setScreenSaverMode(%d)", disable_suspend );
-			if ( disable_suspend > old )
-				setScreenSaverInterval( -1 );
-		}
 	}
 #endif
 }
@@ -1436,7 +1127,6 @@ void QPEApplication::internalSetStyle( const QString &style )
 	}
 #endif
 
-	// HACK for Qt2 only
 	else {
 		QStyle *sty = 0;
 		QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/lib" + style. lower ( ) + ".so";
@@ -1453,12 +1143,9 @@ void QPEApplication::internalSetStyle( const QString &style )
 		if ( sty ) {
 			setStyle ( sty );
 
-			qDebug ( "Got Style: %p -- iface: %p, lib: %p\n", sty, iface, lib );
-
 			if ( lastiface )
 				lastiface-> release ( );
 			lastiface = iface;
-
 
 			if ( lastlib ) {
 				lastlib-> unload ( );
@@ -1473,48 +1160,6 @@ void QPEApplication::internalSetStyle( const QString &style )
 
 			setStyle ( new QPEStyle ( ));
 		}
-
-#if 0
-		// style == "Liquid Style (libliquid.so)" (or "Windows XP (libxp.so)"
-
-		int p2 = style. findRev ( ']' );
-		int p1 = style. findRev ( '[' );
-		QString style2;
-
-		if ( ( p1 > 0 ) && ( p2 > 0 ) && ( ( p1 + 1 ) < p2 ) )
-			style2 = "lib" + style. mid ( p1 + 1, p2 - p1 - 1 ). lower ( ) + ".so";
-		else
-			style2 = "lib" + style. lower ( ) + ".so";
-
-		static QLibrary *currentlib = 0;
-
-		QString path = QPEApplication::qpeDir ( ) + "/plugins/styles/" + style2;
-
-		do { // try/catch simulation
-			QLibrary *lib = new QLibrary ( path, QLibrary::Immediately );
-
-			if ( lib ) {
-				QStyle * ( *fpa ) ( ) = ( QStyle * ( * ) ( ) ) lib-> resolve ( "allocate" );
-
-				if ( fpa ) {
-					QStyle * sty = ( *fpa ) ( );
-
-					if ( sty ) {
-						setStyle ( sty );
-
-						if ( currentlib )
-							delete currentlib;
-						currentlib = lib;
-
-						break;
-					}
-				}
-				delete lib;
-			}
-		}
-		while ( false );
-	// HACK for Qt2 only
-#endif
 	}
 #endif
 }
