@@ -1,17 +1,17 @@
-# $Id: Makefile,v 1.4 2002-11-27 22:34:42 mjm Exp $
+# $Id: Makefile,v 1.5 2002-12-27 16:35:28 mjm Exp $
 
-INCLUDES = 
-LIBRARIES =
-LIBOBJ = proto.o sock.o log.o cardmode.o sniff.o
-CXX = g++ -Wall -pedantic -g  $(INCLUDES) -DDEBUG
+OBJ = wl_proto.o wl_sock.o wl_log.o cardmode.o sniff.o
+CPP = g++
+CPPFLAGS = -Wall -pedantic -g -DDEBUG
 
 static:	libwellenreiter.a
-libwellenreiter.a: $(LIBOBJ)
-	ar -cr libwellenreiter.a $(LIBOBJ)
+libwellenreiter.a: $(OBJ)
+	ar -cr libwellenreiter.a $(OBJ)
 
 shared:	libwellenreiter.so
-libwellenreiter.so: $(LIBOBJ)
-	$(CXX) -shared -o libwellenreiter.so $(LIBOBJ)
+libwellenreiter.so: $(OBJ)
+	$(CPP) $(CPPFLAGS) -shared -o libwellenreiter.so $(OBJ)
 
 clean:
 	rm -f *.o *.a *.so *~
+

@@ -1,14 +1,14 @@
 /*
  * Socket operations for wellenreiter
  *
- * $Id: sock.cc,v 1.2 2002-11-27 21:16:52 mjm Exp $
+ * $Id: wl_sock.cc,v 1.1 2002-12-27 16:35:28 mjm Exp $
  */
 
-#include "sock.hh"
-#include "log.hh"
+#include "wl_sock.hh"
+#include "wl_log.hh"
 
 /* Setup UDP Socket for incoming commands */
-int commsock(const char *host, int port)
+int wl_setupsock(const char *host, int port)
 {
   struct sockaddr_in saddr;
   int sock;
@@ -35,7 +35,7 @@ int commsock(const char *host, int port)
 }
 
 /* Send a string to commsock */
-int sendcomm(const char *host, int port, const char *string, ...) 
+int wl_send(const char *host, int port, const char *string, ...) 
 {
   int sock;
   char buffer[4096];
@@ -63,29 +63,27 @@ int sendcomm(const char *host, int port, const char *string, ...)
   {
     wl_logerr("Cannot write to socket: %s", strerror(errno));
     close(sock);
-    return 0;
+    return -1;
   }
 
   if(close(sock) < 0)
     wl_logerr("Cannot close socket: %s", strerror(errno));
 
-  return 1;
+  return 0;
 }
 
 /* Check for new messages on commsock */
-int recvcomm(int *sock, char *out, int maxlen)
+int wl_recv(int *sock, char *out, int maxlen)
 {
   struct sockaddr_in *cliaddr;
   socklen_t len=sizeof(struct sockaddr);
-  char buffer[128], retval[3];
-
-  memset(buffer, 0, sizeof(buffer));
-  if(recvfrom(*sock, buffer, sizeof(buffer)-1, 0, (struct sockaddr *)cliaddr, &len) < 0)
-    return -1;
+  char retval[3];
 
   memset(out, 0, maxlen);
-  memcpy(out, buffer, maxlen - 1);
+  if(recvfrom(*sock, out, maxlen - 1, 0, (struct sockaddr *)cliaddr, &len) < 0)
+    return -1;
 
+  /* Get packet type and return it */
   memset(retval, 0, sizeof(retval));
   memcpy(retval, out, 2);
 

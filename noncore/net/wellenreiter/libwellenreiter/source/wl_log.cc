@@ -1,10 +1,10 @@
 /*
  * Small functions to log to syslog
  *
- * $Id: log.cc,v 1.1 2002-11-22 23:39:26 mjm Exp $
+ * $Id: wl_log.cc,v 1.1 2002-12-27 16:35:28 mjm Exp $
  */
 
-#include "log.hh"
+#include "wl_log.hh"
 
 /* Log to syslog INFO */
 void wl_loginfo(const char *fmt,...) 

@@ -1,18 +1,17 @@
 /* 
  * Set card modes for sniffing
  *
- * $Id: cardmode.cc,v 1.5 2002-12-14 19:13:32 mjm Exp $
+ * $Id: cardmode.cc,v 1.6 2002-12-27 16:35:28 mjm Exp $
  */
 
 #include "cardmode.hh"
-#include "log.hh"
+#include "wl_log.hh"
 
 /* main card into monitor function */
 int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
 {
   char CiscoRFMON[35] = "/proc/driver/aironet/";
   FILE *CISCO_CONFIG_FILE;
-  pcap_t *handle = (pcap_t*)orighandle;
 
   /* Checks if we have a device to sniff on */
   if(device == NULL)
@@ -33,7 +32,7 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   if (cardtype == CARD_TYPE_CISCO)
   {
       /* bring the sniffer into rfmon  mode */
-      snprintf(CiscoRFMON, sizeof(CiscoRFMON), DEFAULT_PATH, device);
+      snprintf(CiscoRFMON, sizeof(CiscoRFMON) - 1, DEFAULT_PATH, device);
       if((CISCO_CONFIG_FILE = fopen(CiscoRFMON,"w")) == NULL)
       {
 	  wl_logerr("Cannot open config file: %s", strerror(errno));
@@ -47,7 +46,7 @@ int card_into_monitormode (pcap_t **orighandle, char *device, int cardtype)
   else if (cardtype == CARD_TYPE_NG)
   {
       char wlanngcmd[62];
-      snprintf(wlanngcmd, sizeof(wlanngcmd), "%s %s lnxreq_wlansniff channel=1 enable=true", WLANCTL_PATH, device);
+      snprintf(wlanngcmd, sizeof(wlanngcmd) - 1, "%s %s lnxreq_wlansniff channel=1 enable=true", WLANCTL_PATH, device);
       if (system(wlanngcmd) != 0)
       {
 	  wl_logerr("Could not set %s in raw mode, check cardtype", device);
@@ -68,7 +67,7 @@ int card_set_promisc_up (const char *device)
   char ifconfigcmd[32];
   int retval=0;
 
-  snprintf(ifconfigcmd, sizeof(ifconfigcmd), SBIN_PATH, device);
+  snprintf(ifconfigcmd, sizeof(ifconfigcmd) - 1, SBIN_PATH, device);
   retval = system(ifconfigcmd);
 
   if(retval != 0)

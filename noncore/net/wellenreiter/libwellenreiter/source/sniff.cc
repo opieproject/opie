@@ -1,14 +1,14 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.7 2002-12-14 19:13:32 mjm Exp $
+ *  $Id: sniff.cc,v 1.8 2002-12-27 16:35:28 mjm Exp $
  */
 
 #include "sniff.hh"
 #include "ieee802_11.hh"
 #include "extract.hh"
-#include "log.hh"
-#include "proto.hh"
+#include "wl_log.hh"
+#include "wl_proto.hh"
 
 /* Main function, checks packets */
 void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *packet, char *guihost, int guiport)

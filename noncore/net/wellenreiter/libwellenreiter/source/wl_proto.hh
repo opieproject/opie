@@ -1,7 +1,7 @@
-/* $Id: proto.hh,v 1.1 2002-11-27 21:17:27 mjm Exp $ */
+/* $Id: wl_proto.hh,v 1.1 2002-12-27 16:35:28 mjm Exp $ */
 
-#ifndef PROTO_HH
-#define PROTO_HH
+#ifndef WLPROTO_HH
+#define WLPROTO_HH
 
 #include <stdio.h>
 #include <string.h>
@@ -25,4 +25,4 @@ typedef struct {
   char bssid[128]; /* BSSID of Accesspoint           */
 } wl_network_t;
 
-#endif /* PROTO_HH */
+#endif /* WLPROTO_HH */

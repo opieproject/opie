@@ -1,4 +1,4 @@
-/* $Id: log.hh,v 1.1 2002-11-22 23:39:26 mjm Exp $ */
+/* $Id: wl_log.hh,v 1.1 2002-12-27 16:35:28 mjm Exp $ */
 
 #ifndef WLLOG_HH
 #define WLLOG_HH

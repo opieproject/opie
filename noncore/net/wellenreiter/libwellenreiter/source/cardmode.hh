@@ -1,4 +1,4 @@
-/* $Id: cardmode.hh,v 1.6 2002-12-16 17:57:51 mjm Exp $ */
+/* $Id: cardmode.hh,v 1.7 2002-12-27 16:35:28 mjm Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
@@ -10,12 +10,8 @@
 #include <sys/time.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-
-extern "C"
-{
 #include <net/bpf.h>
 #include <pcap.h>  
-}
 
 /* Defines, used for the card setup */
 #define   DEFAULT_PATH       "/proc/driver/aironet/%s/Config"

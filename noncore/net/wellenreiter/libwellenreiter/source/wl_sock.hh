@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <errno.h>
 
-int commsock(const char *, int);
-int sendcomm(const char *, int, const char *, ...);
-int recvcomm(int *, char *, int);
+int wl_setupsock(const char *, int);
+int wl_send(const char *, int, const char *, ...);
+int wl_recv(int *, char *, int);
 
 #endif /* WLSOCK_HH */
