@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=zbounce
-Icon=zbounce/zbounce
+Exec=bounce
+Icon=bounce/bounce
 Comment=A JezzGame 
-Name=ZBounce
+Name=Bounce
