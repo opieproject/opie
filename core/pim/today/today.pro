@@ -1,0 +1,10 @@
+TEMPLATE	= app
+#CONFIG		= qt warn_on debug
+CONFIG		= qt warn_on release
+HEADERS		= today.h TodoItem.h minidom.h todaybase.h todayconfig.h
+SOURCES		= main.cpp today.cpp todaybase.cpp todayconfig.cpp minidom.c TodoItem.cpp
+INCLUDEPATH	+= $(QPEDIR)/include
+DEPENDPATH	+= $(QPEDIR)/include
+LIBS            += -lqpe
+INTERFACES	= 
+TARGET		= today

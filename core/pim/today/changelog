@@ -1,0 +1,22 @@
+0.2.3
+
+* the 4 am release
+* several bugfixes
+
+
+0.2.2 
+
+* started working on calling other apps
+* and finished it
+
+0.2.1
+
+* images no more inline
+* config dialog
+
+0.1.1
+
+* started changelog.
+* fixed segfault on empty/nonexistant todolist.xml
+* better handling for file location 
+
