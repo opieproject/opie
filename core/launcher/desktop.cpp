@@ -199,7 +199,7 @@ public:
           if ( m_disable_suspend_ac > 0 && m_enable_dim_ac && onAC ) {
               if ( m_backlight_current > 1 )
                   setBacklight( 1 ); // lowest non-off
-          } else  if ( m_disable_suspend > 0 && m_enable_dim ) {
+          } else  if ( !onAC && m_disable_suspend > 0 && m_enable_dim ) {
               if ( m_backlight_current > 1 )
                   setBacklightInternal( 1 ); // lowest non-off
           }
@@ -209,7 +209,7 @@ public:
 
           if ( m_disable_suspend_ac > 1 && m_enable_lightoff_ac && onAC ) {
               setBacklightInternal( 0 ); // off
-          } else if ( m_disable_suspend > 1 && m_enable_lightoff ) {
+          } else if ( !onAC && m_disable_suspend > 1 && m_enable_lightoff ) {
               setBacklightInternal( 0 ); // off
           }
           return true;
@@ -224,7 +224,7 @@ public:
               m_lcd_status = false;
               return true;
           }
-          else if ( m_enable_onlylcdoff ) {
+          else if ( !onAC && m_enable_onlylcdoff ) {
               ODevice::inst ( ) -> setDisplayStatus ( false );
               m_lcd_status = false;
               return true;
@@ -235,7 +235,7 @@ public:
                   QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
                   return true;
               }
-              if ( ( m_disable_suspend > 2 ) && ( !Network::networkOnline ( ) ) ) {
+              if ( !onAC && ( m_disable_suspend > 2 ) && ( !Network::networkOnline ( ) ) ) {
                   QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
                   return true;
               }
@@ -645,7 +645,7 @@ void DesktopApplication::psTimeout( int batRemaining )
   // maybe now since its triggered by apm change there might be to few warnings
   // if ( ( ps->batteryStatus() == PowerStatus::VeryLow ) ) {
   if ( ( batRemaining == m_powerVeryLow ) ) {
-       pa->alert( tr( "Battery is running very low." ), 6 );
+       pa->alert( tr( "Battery is running very low." ), 2 );
   }
 
    // if ( ps->batteryStatus() == PowerStatus::Critical ) {
@@ -655,7 +655,7 @@ void DesktopApplication::psTimeout( int batRemaining )
   }
 
   if ( ps->backupBatteryStatus() == PowerStatus::VeryLow ) {
-    pa->alert( tr( "The Back-up battery is very low.\nPlease charge the back-up battery." ), 3 );
+    pa->alert( tr( "The Back-up battery is very low.\nPlease charge the back-up battery." ), 2 );
   }
 }
 
