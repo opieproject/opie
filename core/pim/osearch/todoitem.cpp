@@ -18,6 +18,7 @@
 
 
 
+using namespace Opie;
 TodoItem::TodoItem(OListViewItem* parent, OPimTodo *todo)
 : ResultItem(parent)
 {
