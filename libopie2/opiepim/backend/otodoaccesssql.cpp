@@ -241,7 +241,7 @@ namespace {
 };
 
 OTodoAccessBackendSQL::OTodoAccessBackendSQL( const QString& file )
-    : OTodoAccessBackend(), m_dict(15)
+    : OTodoAccessBackend(), m_dict(15), m_dirty(true)
 {
     QString fi = file;
     if ( fi.isEmpty() )
@@ -261,8 +261,7 @@ bool OTodoAccessBackendSQL::load(){
     CreateQuery creat;
     OSQLResult res = m_driver->query(&creat );
 
-    update();
-    qWarning("loaded %d", m_uids.count() );
+    m_dirty = true;
     return true;
 }
 bool OTodoAccessBackendSQL::reload(){
@@ -273,6 +272,9 @@ bool OTodoAccessBackendSQL::save(){
     return m_driver->close();
 }
 QArray<int> OTodoAccessBackendSQL::allRecords()const {
+    if (m_dirty )
+        update();
+
     return m_uids;
 }
 QArray<int> OTodoAccessBackendSQL::queryByExample( const OTodo& , int  ){
@@ -303,7 +305,7 @@ OTodo OTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
         break;
         /* reverse */
     case 1:
-        for (uint i = cur; i >= 0 && size <  8; i-- ) {
+        for (uint i = cur; i != 0 && size <  8; i-- ) {
             search[size] = ints[i];
             size++;
         }
@@ -342,7 +344,7 @@ bool OTodoAccessBackendSQL::remove( int uid ) {
     if ( res.state() == OSQLResult::Failure )
         return false;
 
-    update();
+    m_dirty = true;
     return true;
 }
 /*
@@ -352,7 +354,9 @@ bool OTodoAccessBackendSQL::remove( int uid ) {
  */
 bool OTodoAccessBackendSQL::replace( const OTodo& t) {
     remove( t.uid() );
-    return add(t);
+    bool b= add(t);
+    m_dirty = false; // we changed some stuff but the UID stayed the same
+    return b;
 }
 QArray<int> OTodoAccessBackendSQL::overDue() {
     OverDueQuery qu;
@@ -369,6 +373,7 @@ QArray<int> OTodoAccessBackendSQL::effectiveToDos( const QDate& s,
  */
 QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
                                            int sortFilter, int cat ) {
+    qWarning("sorted %d, %d", asc, sortOrder );
     QString query;
     query = "select uid from todolist WHERE ";
 
@@ -421,8 +426,11 @@ QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
         query += "DueDate";
         break;
     }
-    if ( !asc )
+
+    if ( !asc ) {
+        qWarning("not ascending!");
         query += " DESC";
+    }
 
     qWarning( query );
     OSQLRawQuery raw(query );
@@ -501,13 +509,18 @@ void OTodoAccessBackendSQL::fillDict() {
     m_dict.insert("HasAlarmDateTime",new int(OTodo::HasAlarmDateTime) );
     m_dict.insert("AlarmDateTime",   new int(OTodo::AlarmDateTime)    );
 }
-void OTodoAccessBackendSQL::update() {
+/*
+ * need to be const so let's fool the
+ * compiler :(
+ */
+void OTodoAccessBackendSQL::update()const {
+    ((OTodoAccessBackendSQL*)this)->m_dirty = false;
     LoadQuery lo;
     OSQLResult res = m_driver->query(&lo);
     if ( res.state() != OSQLResult::Success )
         return;
 
-    m_uids = uids( res );
+    ((OTodoAccessBackendSQL*)this)->m_uids = uids( res );
 }
 QArray<int> OTodoAccessBackendSQL::uids( const OSQLResult& res) const{
 

@@ -32,7 +32,7 @@ public:
     QArray<int> sorted(bool asc, int sortOrder, int sortFilter, int cat );
 
 private:
-    void update();
+    void update()const;
     void fillDict();
     inline bool date( QDate& date, const QString& )const;
     inline OTodo todo( const OSQLResult& )const;
@@ -43,6 +43,7 @@ private:
     QAsciiDict<int> m_dict;
     OSQLDriver* m_driver;
     QArray<int> m_uids;
+    bool m_dirty : 1;
 };
 
 

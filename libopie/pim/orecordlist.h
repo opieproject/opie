@@ -109,6 +109,7 @@ public:
      uint count()const;
 
     T operator[]( uint i );
+    int uidAt(uint i );
      // FIXME implemenent remove
     /*
       ConstIterator begin()const;
@@ -261,5 +262,9 @@ template <class T>
 T ORecordList<T>::operator[]( uint i ) {
     /* forward */
     return m_acc->find( m_ids[i], m_ids, i );
+}
+template <class T>
+int ORecordList<T>::uidAt( uint i ) {
+    return m_ids[i];
 }
 #endif

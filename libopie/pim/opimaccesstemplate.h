@@ -184,12 +184,10 @@ T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
      */
     // qWarning("find it now %d", uid );
     if (m_cache.contains( uid ) ) {
-        qWarning("m cache contains %d", uid);
         return m_cache.find( uid );
     }
 
     T t = m_backEnd->find( uid, ar, current, dir );
-    qWarning("found it and cache it now %d", uid);
     cache( t );
     return t;
 }
