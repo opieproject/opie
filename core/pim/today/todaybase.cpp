@@ -23,7 +23,6 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 #include <qvariant.h>
-#include <qtooltip.h>
 #include <qwhatsthis.h>
 #include <qimage.h>
 #include <qpixmap.h>

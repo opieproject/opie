@@ -315,12 +315,12 @@ void Today::getDates() {
     }
     if (ONLY_LATER && count==0) {
 	QLabel* noMoreEvents = new QLabel(AllDateBookEvents);
-	noMoreEvents->setText("No more appointments today");
+	noMoreEvents->setText(tr("No more appointments today"));
 	layoutDates->addWidget(noMoreEvents);
     } 	
   } else {
     QLabel* noEvents = new QLabel(AllDateBookEvents);
-    noEvents->setText("No appointments today");
+    noEvents->setText(tr("No appointments today"));
     layoutDates->addWidget(noEvents);
   }
   

@@ -16,7 +16,6 @@
 #include <qwidget.h>
 #include <qlayout.h>
 #include <qvariant.h>
-#include <qtooltip.h>
 #include <qwhatsthis.h>
 
 /* 
