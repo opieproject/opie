@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.52 2002-09-21 22:26:31 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.53 2002-09-25 00:58:17 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -602,7 +602,7 @@ int VMemo::setToggleButton(int tog) {
       return 0; 
       break; 
     case 2:
-      return Key_Escape;
+        return Key_F24; //was Escape
       break; 
     case 3:
       return Key_Space;
