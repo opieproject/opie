@@ -3,408 +3,409 @@
     <name>Categories</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>未歸檔</translation>
     </message>
     <message>
         <source> (multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation> (多個.)</translation>
     </message>
     <message>
         <source>Business</source>
-        <translation type="unfinished"></translation>
+        <translation>商務</translation>
     </message>
     <message>
         <source>Personal</source>
-        <translation type="unfinished"></translation>
+        <translation>個人</translation>
     </message>
 </context>
 <context>
     <name>CategoryCombo</name>
     <message>
         <source> (Multi.)</source>
-        <translation type="unfinished"></translation>
+        <translation> (多個.)</translation>
     </message>
 </context>
 <context>
     <name>CategoryEdit</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
     <message>
         <source>New Category</source>
-        <translation type="unfinished"></translation>
+        <translation>新增類別</translation>
     </message>
     <message>
         <source>New Category </source>
-        <translation type="unfinished"></translation>
+        <translation>新類別</translation>
     </message>
 </context>
 <context>
     <name>CategoryEditBase</name>
     <message>
         <source>Category Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>類別編輯</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>類別</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>應用程式</translation>
     </message>
     <message>
         <source>Categories Go Here</source>
-        <translation type="unfinished"></translation>
+        <translation>類別到這裡</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>新增</translation>
     </message>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>全域</translation>
     </message>
     <message>
         <source>Check the categories this document belongs to.</source>
-        <translation type="unfinished"></translation>
+        <translation>核取這個文件所屬的類別.</translation>
     </message>
     <message>
         <source>Enter a new category here.  Press &lt;b&gt;Add&lt;/b&gt; to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>在這裡輸入新的類別. 按 &lt;b&gt;新增&lt;/b&gt; 來把它加到清單中.</translation>
     </message>
     <message>
         <source>Enter a new category to the left and press to add it to the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>在左邊輸入新類別並按下以便將它加入清單.</translation>
     </message>
     <message>
         <source>Press to delete the highlighted category.</source>
-        <translation type="unfinished"></translation>
+        <translation>按下以刪除反白的類別.</translation>
     </message>
     <message>
         <source>Check to make this property available to all applications.</source>
-        <translation type="unfinished"></translation>
+        <translation>核取以便讓所有的應用程式可以使用這個內容.</translation>
     </message>
 </context>
 <context>
     <name>CategoryMenu</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>未歸檔</translation>
     </message>
 </context>
 <context>
     <name>CategorySelect</name>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>錯誤</translation>
     </message>
     <message>
         <source>Sorry, another application is
 editing categories.</source>
-        <translation type="unfinished"></translation>
+        <translation>對不起, 另一個應用程式正在
+編輯類別.</translation>
     </message>
     <message>
         <source>Edit Categories</source>
-        <translation type="unfinished"></translation>
+        <translation>編輯類別</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
 </context>
 <context>
     <name>DateBookMonthHeader</name>
     <message>
         <source>Show January in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示所選年份中的一月</translation>
     </message>
     <message>
         <source>Show the previous month</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示上個月</translation>
     </message>
     <message>
         <source>Show the next month</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示下個月</translation>
     </message>
     <message>
         <source>Show December in the selected year</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示所選年份中的十二月</translation>
     </message>
 </context>
 <context>
     <name>FileSelector</name>
     <message>
         <source>Close the File Selector</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉檔案選擇器</translation>
     </message>
     <message>
         <source>Show documents of this type</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示這個類型的文件</translation>
     </message>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>文件檢視</translation>
     </message>
     <message>
         <source>Show documents in this category</source>
-        <translation type="unfinished"></translation>
+        <translation>顯示這個類別中的文件</translation>
     </message>
     <message>
         <source>Click to select a document from the list</source>
-        <translation type="unfinished"></translation>
+        <translation>按一下以便自清單中選擇文件</translation>
     </message>
     <message>
         <source>, or select &lt;b&gt;New Document&lt;/b&gt; to create a new document.</source>
-        <translation type="unfinished"></translation>
+        <translation>, 或選 &lt;b&gt;新增文件&lt;/b&gt; 來建立一個新文件.</translation>
     </message>
     <message>
         <source>&lt;br&gt;&lt;br&gt;Click and hold for document properties.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;br&gt;&lt;br&gt;按住並停留以獲知文件內容.</translation>
     </message>
 </context>
 <context>
     <name>FileSelectorView</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱</translation>
     </message>
 </context>
 <context>
     <name>FindDialog</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找</translation>
     </message>
 </context>
 <context>
     <name>FindWidget</name>
     <message>
         <source>String Not Found.</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到字串.</translation>
     </message>
     <message>
         <source>End reached, starting at beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>到達結尾, 從開頭處找起</translation>
     </message>
 </context>
 <context>
     <name>FindWidgetBase</name>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找</translation>
     </message>
     <message>
         <source>Find what:</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找什麼:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>類別:</translation>
     </message>
     <message>
         <source>Start Search at:</source>
-        <translation type="unfinished"></translation>
+        <translation>開始搜尋於:</translation>
     </message>
     <message>
         <source>Dec 02 01</source>
-        <translation type="unfinished"></translation>
+        <translation>Dec 02 01</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>區分大小寫</translation>
     </message>
     <message>
         <source>Search Backwards</source>
-        <translation type="unfinished"></translation>
+        <translation>向後搜尋</translation>
     </message>
 </context>
 <context>
     <name>LnkProperties</name>
     <message>
         <source>Document View</source>
-        <translation type="unfinished"></translation>
+        <translation>文件檢視</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <source>File deletion failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案偵測失敗.</translation>
     </message>
     <message>
         <source>Copy of </source>
-        <translation type="unfinished"></translation>
+        <translation>複製於 </translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>重製</translation>
     </message>
     <message>
         <source>File copy failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案複製失敗.</translation>
     </message>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>詳細資料</translation>
     </message>
     <message>
         <source>Moving Document failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>移動文件失敗.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>硬碟</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>內容</translation>
     </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
     <message>
         <source>Details</source>
-        <translation type="unfinished"></translation>
+        <translation>詳細資料</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>註解:</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>類型:</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱:</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>位置</translation>
     </message>
     <message>
         <source>Fast load (consumes memory)</source>
-        <translation type="unfinished"></translation>
+        <translation>快速載入 (消耗記憶體)</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>複製</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>紅外線</translation>
     </message>
     <message>
         <source>The media the document resides on.</source>
-        <translation type="unfinished"></translation>
+        <translation>存放此文件的媒體.</translation>
     </message>
     <message>
         <source>The name of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>這個文件的名稱.</translation>
     </message>
     <message>
         <source>Preload this application so that it is available instantly.</source>
-        <translation type="unfinished"></translation>
+        <translation>預先載入此應用程式以便能馬上使用它.</translation>
     </message>
     <message>
         <source>Delete this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除這個文件.</translation>
     </message>
     <message>
         <source>Make a copy of this document.</source>
-        <translation type="unfinished"></translation>
+        <translation>製作這個文件的副本.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
-        <translation type="unfinished"></translation>
+        <translation>將這個文件傳輸到另一個裝置.</translation>
     </message>
     <message>
         <source>Use custom rotation</source>
-        <translation type="unfinished"></translation>
+        <translation>使用自訂旋轉</translation>
     </message>
 </context>
 <context>
     <name>OwnerDlg</name>
     <message>
         <source>Owner Information</source>
-        <translation type="unfinished"></translation>
+        <translation>擁有者資訊</translation>
     </message>
 </context>
 <context>
     <name>PasswordBase</name>
     <message>
         <source>Form1</source>
-        <translation type="unfinished"></translation>
+        <translation>表單1</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>3</source>
-        <translation type="unfinished"></translation>
+        <translation>3</translation>
     </message>
     <message>
         <source>4</source>
-        <translation type="unfinished"></translation>
+        <translation>4</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>9</source>
-        <translation type="unfinished"></translation>
+        <translation>9</translation>
     </message>
     <message>
         <source>0</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>確定</translation>
     </message>
     <message>
         <source>Enter passcode</source>
-        <translation type="unfinished"></translation>
+        <translation>輸入通行碼</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>空間不足</translation>
     </message>
     <message>
         <source>There was a problem creating
@@ -413,478 +414,489 @@ for this program.
 
 Please free up some space and
 try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>在為這個程式建立
+組態資訊
+時發生問題.
+
+請釋放一些空間並
+再試一次.</translation>
     </message>
     <message>
         <source>Unable to create start up files
 Please free up some space
 before entering data</source>
-        <translation type="unfinished"></translation>
+        <translation>無法建立啟動檔案
+在開始輸入資料之前
+請先釋放一些空間</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Free some memory and try again.</source>
-        <translation type="unfinished"></translation>
+        <translation>無法排程警示.
+請釋放一些記憶體並再試一次.</translation>
     </message>
     <message>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>D</translation>
     </message>
     <message>
         <source>M</source>
-        <translation type="unfinished"></translation>
+        <translation>M</translation>
     </message>
     <message>
         <source>Y</source>
-        <translation type="unfinished"></translation>
+        <translation>Y</translation>
     </message>
     <message>
         <source>day</source>
-        <translation type="unfinished"></translation>
+        <translation>日</translation>
     </message>
     <message>
         <source>month</source>
-        <translation type="unfinished"></translation>
+        <translation>月</translation>
     </message>
     <message>
         <source>year</source>
-        <translation type="unfinished"></translation>
+        <translation>年</translation>
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished"></translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>AM</source>
-        <translation type="unfinished"></translation>
+        <translation>AM</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished"></translation>
+        <translation>一</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished"></translation>
+        <translation>二</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished"></translation>
+        <translation>三</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished"></translation>
+        <translation>四</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished"></translation>
+        <translation>五</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished"></translation>
+        <translation>六</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished"></translation>
+        <translation>日</translation>
     </message>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>您確定要刪除
+ %1?</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>未歸檔</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;工作地址:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;住家地阯:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation type="unfinished"></translation>
+        <translation>電子郵件位址: </translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>住家電話: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>住家傳真: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>住家行動電話: </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>個人網頁: </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation type="unfinished"></translation>
+        <translation>商務網頁: </translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation type="unfinished"></translation>
+        <translation>辦公室: </translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation type="unfinished"></translation>
+        <translation>商務電話: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation type="unfinished"></translation>
+        <translation>商務傳真: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation type="unfinished"></translation>
+        <translation>商務行動電話: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation type="unfinished"></translation>
+        <translation>商務呼叫器: </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation type="unfinished"></translation>
+        <translation>職業: </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation type="unfinished"></translation>
+        <translation>助理:</translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation type="unfinished"></translation>
+        <translation>經理: </translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>男性</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>女性</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation type="unfinished"></translation>
+        <translation>性別: </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation type="unfinished"></translation>
+        <translation>配偶: </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation type="unfinished"></translation>
+        <translation>生日: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
+        <translation>周年紀念日: </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation type="unfinished"></translation>
+        <translation>暱稱: </translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱 頭銜</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation type="unfinished"></translation>
+        <translation>名</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation type="unfinished"></translation>
+        <translation>中名</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation type="unfinished"></translation>
+        <translation>姓</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation type="unfinished"></translation>
+        <translation>稱呼</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation type="unfinished"></translation>
+        <translation>歸檔為</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>職稱</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation type="unfinished"></translation>
+        <translation>部門</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation type="unfinished"></translation>
+        <translation>公司</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>商務電話</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>商務傳真</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>商務行動電話</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation type="unfinished"></translation>
+        <translation>預設電子郵件</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation type="unfinished"></translation>
+        <translation>電子郵件</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation type="unfinished"></translation>
+        <translation>住家電話</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation type="unfinished"></translation>
+        <translation>住家傳真</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation type="unfinished"></translation>
+        <translation>住家行動電話</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation type="unfinished"></translation>
+        <translation>辦公處 街道</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation type="unfinished"></translation>
+        <translation>辦公處 城市</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation type="unfinished"></translation>
+        <translation>辦公處 州</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>辦公處 郵遞區號</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation type="unfinished"></translation>
+        <translation>辦公處 國家</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation type="unfinished"></translation>
+        <translation>商務呼叫器</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation type="unfinished"></translation>
+        <translation>商務網址</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished"></translation>
+        <translation>辦公室</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation type="unfinished"></translation>
+        <translation>職業</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation type="unfinished"></translation>
+        <translation>助理</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>經理</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation type="unfinished"></translation>
+        <translation>住家 街道</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation type="unfinished"></translation>
+        <translation>住家 城市</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation type="unfinished"></translation>
+        <translation>住家 州</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation type="unfinished"></translation>
+        <translation>住家 郵遞區號</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation type="unfinished"></translation>
+        <translation>住家 國家</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation type="unfinished"></translation>
+        <translation>個人網頁</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation type="unfinished"></translation>
+        <translation>配偶</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>性別</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation type="unfinished"></translation>
+        <translation>生日</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation type="unfinished"></translation>
+        <translation>周年紀念日</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>暱稱</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation type="unfinished"></translation>
+        <translation>子女</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation type="unfinished"></translation>
+        <translation>備註</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished"></translation>
+        <translation>群組</translation>
     </message>
     <message>
         <source>New Document</source>
-        <translation type="unfinished"></translation>
+        <translation>新增文件</translation>
     </message>
 </context>
 <context>
     <name>QPEApplication</name>
     <message>
         <source>%1 document</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 文件</translation>
     </message>
 </context>
 <context>
     <name>QPEDecoration</name>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;QT&gt;泛用說明無法用於這個應用程式, 不過還有內容感應式說明.&lt;p&gt;要使用內容感應式說明:&lt;p&gt;&lt;ol&gt;&lt;li&gt;按住並停留在說明按鈕上.&lt;li&gt;當標題列顯示 &lt;b&gt;這是什麼...&lt;/b&gt; 時, 按一下任何控制元.&lt;/ol&gt;&lt;/Qt&gt;</translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation type="unfinished"></translation>
+        <translation>這是什麼...</translation>
     </message>
 </context>
 <context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>按這裡關閉這個視窗, 放棄所做的變更.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished"></translation>
+        <translation>按這裡關閉視窗.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished"></translation>
+        <translation>按這裡關閉視窗並接受所有的變更.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation type="unfinished"></translation>
+        <translation>按這裡讓這個視窗可以移動.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished"></translation>
+        <translation>按這裡讓這個視窗使用所有可用的螢幕區域.</translation>
     </message>
 </context>
 <context>
     <name>StorageInfo</name>
     <message>
         <source>CF Card</source>
-        <translation type="unfinished"></translation>
+        <translation>CF 卡</translation>
     </message>
     <message>
         <source>Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>硬碟</translation>
     </message>
     <message>
         <source>SD Card</source>
-        <translation type="unfinished"></translation>
+        <translation>SD 卡</translation>
     </message>
     <message>
         <source>SCSI Hard Disk</source>
-        <translation type="unfinished"></translation>
+        <translation>SCSI 硬碟</translation>
     </message>
     <message>
         <source>Internal Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>內部儲存空間</translation>
     </message>
     <message>
         <source>Internal Memory</source>
-        <translation type="unfinished"></translation>
+        <translation>內部記憶體</translation>
     </message>
     <message>
         <source>MMC Card</source>
-        <translation type="unfinished"></translation>
+        <translation>MMC 卡</translation>
     </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>無</translation>
     </message>
 </context>
 <context>
     <name>TimeZoneSelector</name>
     <message>
         <source>citytime executable not found</source>
-        <translation type="unfinished"></translation>
+        <translation>找不到 城市時間 可執行檔</translation>
     </message>
     <message>
         <source>In order to choose the time zones,
 please install citytime.</source>
-        <translation type="unfinished"></translation>
+        <translation>為了選擇時區,
+請安裝城市時間.</translation>
     </message>
 </context>
 <context>
     <name>TimerReceiverObject</name>
     <message>
         <source>Out of Space</source>
-        <translation type="unfinished"></translation>
+        <translation>空間不足</translation>
     </message>
     <message>
         <source>Unable to schedule alarm.
 Please free up space and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>無法排程警示.
+請釋放空間後再試一次</translation>
     </message>
 </context>
 <context>
     <name>TypeCombo</name>
     <message>
         <source>%1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 檔案</translation>
     </message>
     <message>
         <source>%1 %2</source>
         <comment>minor mimetype / major mimetype</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 %2</translation>
     </message>
     <message>
         <source>All %1 files</source>
-        <translation type="unfinished"></translation>
+        <translation>全部 %1 個檔案</translation>
     </message>
     <message>
         <source>All files</source>
-        <translation type="unfinished"></translation>
+        <translation>所有檔案</translation>
     </message>
 </context>
 </TS>

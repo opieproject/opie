@@ -18,11 +18,11 @@
     </message>
     <message>
         <source>22050</source>
-        <translation >22050</translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation >44100</translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>Stereo</source>
@@ -38,15 +38,15 @@
     </message>
     <message>
         <source>8000</source>
-        <translation >8000</translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>33075</source>
-        <translation >33075</translation>
+        <translation>33075</translation>
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Visual Alerts</translation>
     </message>
     <message>
         <source>Taskbar Icon</source>
@@ -78,23 +78,23 @@
     </message>
     <message>
         <source>30</source>
-        <translation >30</translation>
+        <translation>30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation >20</translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation >15</translation>
+        <translation>15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation >10</translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation >5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>Sample Rate:</source>
