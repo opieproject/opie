@@ -17,13 +17,14 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 
 #include "configuredlg.h"
 
-#include <qvbuttongroup.h>
 #include <qlabel.h>
 #include <qlayout.h>
+#include <qvbuttongroup.h>
+#include <qwhatsthis.h>
 
 ConfigureDlg::ConfigureDlg( QWidget *parent, const QString &swordPath, bool alwaysOpenNew, int numVerses,
                             bool disableBlanking, int copyFormat, const QFont *font )
-    : QDialog( parent, QString::null, true )
+    : QDialog( parent, QString::null, true, WStyle_ContextHelp )
     , m_tabs( this )
 {
     setCaption( tr( "Configure Dagger" ) );
@@ -38,40 +39,48 @@ ConfigureDlg::ConfigureDlg( QWidget *parent, const QString &swordPath, bool alwa
     grid->setRowStretch( 9, 5 );
     grid->setColStretch( 0, 2 );
 
-    QLabel *label = new QLabel( tr( "Path where Sword modules are located:" ), widget );
+    QLabel *label = new QLabel( tr( "Path where Sword texts are located:" ), widget );
     label->setAlignment( Qt::AlignLeft | Qt::AlignTop | Qt::WordBreak );
+    QWhatsThis::add( label, tr( "Enter the path where the Sword modules (Bible texts, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
     grid->addMultiCellWidget( label, 0, 0, 0, 1 );
     m_swordPath = new QLineEdit( swordPath, widget );
+    QWhatsThis::add( m_swordPath, tr( "Enter the path where the Sword texts (Bibles, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
     grid->addMultiCellWidget( m_swordPath, 1, 1, 0, 1 );
     label = new QLabel( tr( "(Note: Dagger must be restarted for this option to take affect.)" ), widget );
     label->setAlignment( Qt::AlignHCenter | Qt::AlignTop | Qt::WordBreak );
+    QWhatsThis::add( label, tr( "Enter the path where the Sword modules (Bible texts, commentaries, etc.) can be found.  This path should contain either the 'mods.conf' file or 'mods.d' sub-directory." ) );
     grid->addMultiCellWidget( label, 2, 2, 0, 1 );
 
     grid->addRowSpacing( 3, 15 );
 
     m_alwaysOpenNew = new QCheckBox( tr( "Always open texts in new window?" ), widget );
     m_alwaysOpenNew->setChecked( alwaysOpenNew );
+    QWhatsThis::add( m_alwaysOpenNew, tr( "Tap here to always open texts in a new window.  If this option is not selected, only one copy of a Sword text will be opened." ) );
     grid->addMultiCellWidget( m_alwaysOpenNew, 4, 4, 0, 1 );
 
     grid->addRowSpacing( 5, 15 );
 
     label = new QLabel( tr( "Number of verses to display at a time:" ), widget );
     label->setAlignment( Qt::AlignLeft | Qt::AlignTop | Qt::WordBreak );
+    QWhatsThis::add( label, tr( "Enter the number of verses to display at a time.  This also affects how far the scroll to previous/next page buttons on the Navigation bar scroll." ) );
     grid->addWidget( label, 6, 0 );
     m_numVerses = new QSpinBox( 1, 20, 1, widget );
     m_numVerses->setValue( numVerses );
+    QWhatsThis::add( m_numVerses, tr( "Enter the number of verses to display at a time.  This also affects how far the scroll to previous/next page buttons on the Navigation bar scroll." ) );
     grid->addWidget( m_numVerses, 6, 1 );
 
     grid->addRowSpacing( 7, 15 );
 
     m_disableScreenBlank = new QCheckBox( tr( "Disable automatic screen power-down?" ), widget );
     m_disableScreenBlank->setChecked( disableBlanking );
+    QWhatsThis::add( m_disableScreenBlank, tr( "Tap here to disable Opie's automatic power management feature which will dim and turn off the screen after a specified time.  This will only be effective while Dagger is running." ) );
     grid->addMultiCellWidget( m_disableScreenBlank, 8, 8, 0, 1 );
 
     m_tabs.addTab( widget, "SettingsIcon", tr( "General" ) );
 
     // Copy tab
     widget = new QWidget( this );
+    QWhatsThis::add( widget, tr( "Select the format used when copying the current verse to the clipboard." ) );
     layout = new QVBoxLayout( widget );
     layout->setMargin( 4 );
 
@@ -115,6 +124,8 @@ ConfigureDlg::ConfigureDlg( QWidget *parent, const QString &swordPath, bool alwa
     m_font = new Opie::Ui::OFontSelector( true, this );
     if ( font )
         m_font->setSelectedFont( *font );
+    QWhatsThis::add( m_font, tr( "Select the font, style and size used for displaying texts." ) );
+
     m_tabs.addTab( m_font, "font", tr( "Font" ) );
 
     m_tabs.setCurrentTab( tr( "General" ) );

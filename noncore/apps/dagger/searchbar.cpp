@@ -26,6 +26,7 @@ file; see the file COPYING. If not, write to the Free Software Foundation, Inc.,
 #include <qaction.h>
 #include <qcombobox.h>
 #include <qlineedit.h>
+#include <qwhatsthis.h>
 
 #include <listkey.h>
 #include <regex.h>
@@ -43,6 +44,7 @@ SearchBar::SearchBar( QMainWindow *parent )
     // Initialize UI
     m_searchText = new QLineEdit( this );
     setStretchableWidget( m_searchText );
+    QWhatsThis::add( m_searchText, tr( "Enter text to search for here." ) );
     connect(m_searchText, SIGNAL(textChanged(const QString &)),
             this, SLOT(slotTextChanged(const QString &)) );
 
@@ -50,6 +52,7 @@ SearchBar::SearchBar( QMainWindow *parent )
                                 0, this, 0 );
     m_actionFind->setEnabled( false );
     m_actionFind->addTo( this );
+    m_actionFind->setWhatsThis( tr( "Tap here search the current module for the text entered to the left." ) );
     connect( m_actionFind, SIGNAL(activated()), this, SLOT(slotFind()) );
 
     addSeparator();
@@ -58,16 +61,19 @@ SearchBar::SearchBar( QMainWindow *parent )
                                      QString::null, 0, this, 0 );
     m_actionPrev->setEnabled( false );
     m_actionPrev->addTo( this );
+    m_actionPrev->setWhatsThis( tr( "Tap here to view the previous search result." ) );
     connect( m_actionPrev, SIGNAL(activated()), this, SLOT(slotPrev()) );
 
     m_resultList = new QComboBox( this );
     m_resultList->setEnabled( false );
+    QWhatsThis::add( m_resultList, tr( "Select the desired search result here." ) );
     connect( m_resultList, SIGNAL(activated(const QString &)), this, SIGNAL(sigResultClicked(const QString &)) );
 
     m_actionNext = new QAction( tr( "Next result" ), Resource::loadPixmap( "forward" ),
                                      QString::null, 0, this, 0 );
     m_actionNext->setEnabled( false );
     m_actionNext->addTo( this );
+    m_actionNext->setWhatsThis( tr( "Tap here to view the next search result." ) );
     connect( m_actionNext, SIGNAL(activated()), this, SLOT(slotNext()) );
 
     if ( parent )
