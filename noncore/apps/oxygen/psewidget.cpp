@@ -58,7 +58,7 @@ PSEWidget::PSEWidget(const QStringList &list) : QWidget()
     vlay->addWidget( oxyDW );
 }
 
-QColor PSEWidget::PSEColor( QString block )
+QColor PSEWidget::PSEColor( QString block ) const
 {
     QColor c;
     if ( block == "s" ) c.setRgb( 213 , 233 , 231 );

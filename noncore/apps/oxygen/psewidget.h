@@ -44,7 +44,7 @@ class PSEWidget : public QWidget
         QGridLayout *maingrid;
         
         void position( int, int&, int& );
-        QColor PSEColor( QString );
+        QColor PSEColor( QString ) const;
 		QStringList names;
 
     public slots:
