@@ -3,47 +3,47 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Имя снимка</translation>
     </message>
     <message>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Задержка</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>сек</translation>
     </message>
     <message>
         <source>Save named</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить под именем</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить снимок как...</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>Scap</source>
-        <translation type="unfinished"></translation>
+        <translation>Снять</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Успех</translation>
     </message>
     <message>
         <source>Screenshot was uploaded to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Снимок загружен на %1</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка</translation>
     </message>
     <message>
         <source>Connection to %1 failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединение с %1 неудалось.</translation>
     </message>
 </context>
 </TS>
