@@ -82,7 +82,7 @@
 	<para>
 		In the next paragraph you see an example of how the XML looks like.
 	</para>
-
+<!--
 	<programlisting>
 		<message> 
 			<source>New</source> 
@@ -97,8 +97,7 @@
 			<translation type="unfinished"></translation> 
 		</message>
 	</programlisting>
-
-	</para> 
+-->
 	<para>
 		As you can see the markup is very simple.  The part between two source-tags is
 		the english text which appears if there is no translation yet. In the first
@@ -152,7 +151,7 @@
 <section>
 	<title>Do's and don'ts</title> 
 	There are certain things that should only be done be the
-	translationcoordinator or one of the core developers.  
+	translationcoordinator or one of the core developers.
 	<itemizedlist mark='opencircle'>
 		<listitem>
 		<para>
