@@ -67,19 +67,19 @@
     </message>
     <message>
         <source>Vmemo Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Vmemo nastavitve</translation>
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished">8000</translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>33075</source>
-        <translation type="unfinished">33075</translation>
+        <translation>33075</translation>
     </message>
     <message>
         <source>Visual Alerts</source>
-        <translation type="unfinished"></translation>
+        <translation>Vizualni alarmi</translation>
     </message>
     <message>
         <source>Location</source>
@@ -95,35 +95,35 @@
     </message>
     <message>
         <source>Taskbar Icon</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona opravilne vrstice</translation>
     </message>
     <message>
         <source>Key_Escape</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_escape</translation>
     </message>
     <message>
         <source>Key_Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_presledek</translation>
     </message>
     <message>
         <source>Key_Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_dom</translation>
     </message>
     <message>
         <source>Key_Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_koledar</translation>
     </message>
     <message>
         <source>Key_Contacts</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_Kontakti</translation>
     </message>
     <message>
         <source>Key_Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_menu</translation>
     </message>
     <message>
         <source>Key_Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipka_pošta</translation>
     </message>
     <message>
         <source>Recording Limit:</source>
@@ -131,23 +131,23 @@
     </message>
     <message>
         <source>30</source>
-        <translation type="unfinished">30</translation>
+        <translation>30</translation>
     </message>
     <message>
         <source>20</source>
-        <translation type="unfinished">20</translation>
+        <translation>20</translation>
     </message>
     <message>
         <source>15</source>
-        <translation type="unfinished">15</translation>
+        <translation>15</translation>
     </message>
     <message>
         <source>10</source>
-        <translation type="unfinished">10</translation>
+        <translation>10</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished">5</translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>seconds</source>
@@ -155,23 +155,23 @@
     </message>
     <message>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzorčna stopnja:</translation>
     </message>
     <message>
         <source>Recording Directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Snemalni imenik:</translation>
     </message>
     <message>
         <source>Recording Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Snemalna tipka:</translation>
     </message>
     <message>
         <source>Recording Limit in seconds:</source>
-        <translation type="unfinished"></translation>
+        <translation>Omejitev snemanja v sekundah:</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Neomejeno</translation>
     </message>
 </context>
 </TS>

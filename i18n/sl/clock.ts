@@ -39,19 +39,19 @@
     </message>
     <message>
         <source>PM</source>
-        <translation type="unfinished">PM</translation>
+        <translation>PM</translation>
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm je vključen</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Alarm je izključen</translation>
     </message>
     <message>
         <source>Set date and time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi datum in uro.</translation>
     </message>
 </context>
 <context>
@@ -84,15 +84,15 @@
     </message>
     <message>
         <source>mp3 alarm</source>
-        <translation type="unfinished"></translation>
+        <translation>mp3 alarm</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vse</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
 </context>
 </TS>

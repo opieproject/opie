@@ -3,15 +3,15 @@
     <name>MainView</name>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Daljinec</translation>
     </message>
     <message>
         <source>Learn</source>
-        <translation type="unfinished"></translation>
+        <translation>Uči</translation>
     </message>
     <message>
         <source>Config</source>
-        <translation type="unfinished"></translation>
+        <translation>nastavi</translation>
     </message>
 </context>
 </TS>

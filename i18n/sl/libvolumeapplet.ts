@@ -7,15 +7,15 @@
     </message>
     <message>
         <source>Enable Sounds for:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi zvoke za:</translation>
     </message>
     <message>
         <source>Alarm Sound</source>
-        <translation type="unfinished"></translation>
+        <translation>Zvok alarma</translation>
     </message>
     <message>
         <source>Key Clicks</source>
-        <translation type="unfinished"></translation>
+        <translation>Kliki tipe</translation>
     </message>
     <message>
         <source>Screen taps</source>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Screen Taps</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaslonske tipke</translation>
     </message>
 </context>
 </TS>

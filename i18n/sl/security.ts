@@ -88,11 +88,11 @@ Dostop zavrnjen</translation>
     </message>
     <message>
         <source>192.168.129.0/24 (default)</source>
-        <translation type="unfinished">192.168.129.0/24 (privzeto)</translation>
+        <translation>192.168.129.0/24 (privzeto)</translation>
     </message>
     <message>
         <source>192.168.1.0/24</source>
-        <translation type="unfinished">192.168.1.0/24</translation>
+        <translation>192.168.1.0/24</translation>
     </message>
 </context>
 </TS>

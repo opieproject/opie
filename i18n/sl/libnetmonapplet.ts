@@ -3,34 +3,34 @@
     <name>NetMonitor</name>
     <message>
         <source>Network Offline</source>
-        <translation type="unfinished"></translation>
+        <translation>Mreža ne deluje</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Odklopi</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Priklopi</translation>
     </message>
 </context>
 <context>
     <name>NetPassword</name>
     <message>
         <source>Network Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Mrežno geslo</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Priklopi</translation>
     </message>
     <message>
         <source>Enter password for %1:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vpiši geslo za %1:</translation>
     </message>
 </context>
 </TS>

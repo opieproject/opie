@@ -3,27 +3,27 @@
     <name>LiquidSettings</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil Liquid</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez translucence</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Črtasto, barva ozadja</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Črtasto, barva gumba</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Transculentno črtasto, barva ozadja</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Transculentno črtasto, barva gumba</translation>
     </message>
     <message>
         <source>Custom translucency</source>
@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva menujev</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva besedila</translation>
     </message>
     <message>
         <source>Opacity</source>
@@ -43,19 +43,19 @@
     </message>
     <message>
         <source>Use shadowed menu text</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi senčeno besedilo v menujih</translation>
     </message>
     <message>
         <source>Draw liquid window title bars</source>
-        <translation type="unfinished"></translation>
+        <translation>Riši tekoče naslovne letve</translation>
     </message>
     <message>
         <source>Make toolbar buttons appear flat</source>
-        <translation type="unfinished"></translation>
+        <translation>Naj se orodni gumb pojavi ploščat</translation>
     </message>
     <message>
         <source>Stipple contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Črtast kontrast</translation>
     </message>
 </context>
 <context>
@@ -63,12 +63,12 @@
     <message>
         <source>Liquid</source>
         <comment>name</comment>
-        <translation type="unfinished"></translation>
+        <translation>Liquid</translation>
     </message>
     <message>
         <source>High Performance Liquid style by Mosfet</source>
         <comment>description</comment>
-        <translation type="unfinished"></translation>
+        <translation>High Performance Liquid stil od Mosfeta</translation>
     </message>
 </context>
 </TS>

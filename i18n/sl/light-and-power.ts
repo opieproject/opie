@@ -3,51 +3,51 @@
     <name>LightSettingsBase</name>
     <message>
         <source>Light Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve osvetlitve</translation>
     </message>
     <message>
         <source>Adjust to environment</source>
-        <translation type="unfinished"></translation>
+        <translation>Prilagodi okolju</translation>
     </message>
     <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
-        <translation type="unfinished"></translation>
+        <translation>S tipanjem svetlobe kjer uporabljate napravo, lahko nastavite avtomatično nastavljanje osvetlitve. Svetlobne nastavitve vplivajo na povprečno osvetlitev.</translation>
     </message>
     <message>
         <source>Power saving</source>
-        <translation type="unfinished"></translation>
+        <translation>Varčevanje energije</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>sekundah</translation>
     </message>
     <message>
         <source>Dim light after</source>
-        <translation type="unfinished"></translation>
+        <translation>Zatemni po</translation>
     </message>
     <message>
         <source>Suspend after</source>
-        <translation type="unfinished"></translation>
+        <translation>Izključi po</translation>
     </message>
     <message>
         <source>Only deactivate LCD during Suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugasni LCS samo pri izključitvi</translation>
     </message>
     <message>
         <source>Light off after</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugasni po</translation>
     </message>
     <message>
         <source>Bright</source>
-        <translation type="unfinished"></translation>
+        <translation>Svetlo</translation>
     </message>
     <message>
         <source>&lt;blockquote&gt;The brighter the screen light, the more battery power is used.&lt;/blockquote&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;blockquote&gt;Svetlejši je zaslon, več baterije je porabljeno.&lt;/blockquote&gt;</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Ugasnjeno</translation>
     </message>
 </context>
 </TS>

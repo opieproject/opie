@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>To remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstrani</translation>
     </message>
     <message>
         <source>To install</source>

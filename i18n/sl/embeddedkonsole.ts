@@ -84,107 +84,107 @@
     </message>
     <message>
         <source>Show command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži seznam ukazov</translation>
     </message>
     <message>
         <source>Hide command list</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrij seznam ukazov</translation>
     </message>
     <message>
         <source>Tabs on Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Jezički na dnu</translation>
     </message>
     <message>
         <source>Green on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelena na črni</translation>
     </message>
     <message>
         <source>Black on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Črna na beli</translation>
     </message>
     <message>
         <source>White on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Bela na črni</translation>
     </message>
     <message>
         <source>Black on Transparent</source>
-        <translation type="unfinished"></translation>
+        <translation>Črna na prozorni</translation>
     </message>
     <message>
         <source>Black on Red</source>
-        <translation type="unfinished"></translation>
+        <translation>Črna na rdeči</translation>
     </message>
     <message>
         <source>Red on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Rdeča na črni</translation>
     </message>
     <message>
         <source>Green on Yellow</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelena na rumeni</translation>
     </message>
     <message>
         <source>Blue on Magenta</source>
-        <translation type="unfinished"></translation>
+        <translation>Modra na Vijolčni</translation>
     </message>
     <message>
         <source>Magenta on Blue</source>
-        <translation type="unfinished"></translation>
+        <translation>Vijolčna na modri</translation>
     </message>
     <message>
         <source>Cyan on White</source>
-        <translation type="unfinished"></translation>
+        <translation>Svetlo modra na beli</translation>
     </message>
     <message>
         <source>White on Cyan</source>
-        <translation type="unfinished"></translation>
+        <translation>Bela na svetlo modri</translation>
     </message>
     <message>
         <source>Blue on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Modra na črni</translation>
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Amber na črni</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Barve</translation>
     </message>
     <message>
         <source>Quick Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitro uredi</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez</translation>
     </message>
     <message>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Levo</translation>
     </message>
     <message>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Desno</translation>
     </message>
     <message>
         <source>ScrollBar</source>
-        <translation type="unfinished"></translation>
+        <translation>Drsnik</translation>
     </message>
     <message>
         <source>Show Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Prikaži seznam ukazov</translation>
     </message>
     <message>
         <source>Hide Command List</source>
-        <translation type="unfinished"></translation>
+        <translation>Skrij seznam ukazov</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Po izbiri</translation>
     </message>
 </context>
 <context>

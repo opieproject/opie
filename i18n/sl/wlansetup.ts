@@ -3,7 +3,7 @@
     <name>WLAN</name>
     <message>
         <source>Wireless LAN Setting</source>
-        <translation type="unfinished"></translation>
+        <translation>Brežične LAN nastavitve</translation>
     </message>
     <message>
         <source>Config</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Specific ESSID</source>
-        <translation type="unfinished"></translation>
+        <translation>Specifičen ESSID</translation>
     </message>
     <message>
         <source>Network Type</source>
@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>Wep</source>
-        <translation type="unfinished"></translation>
+        <translation>Wep</translation>
     </message>
     <message>
         <source>Key Setting</source>
@@ -47,23 +47,23 @@
     </message>
     <message>
         <source>Key 1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Key 2</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Key 3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Key 4</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Key Length</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>40 Bits</source>
@@ -83,7 +83,7 @@
     </message>
     <message>
         <source>Shared Key</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Enable Wep</source>

@@ -41,26 +41,26 @@
     <name>ModulesDetail</name>
     <message>
         <source>Send</source>
-        <translation type="unfinished">Pošlji</translation>
+        <translation>Pošlji</translation>
     </message>
 </context>
 <context>
     <name>ModulesInfo</name>
     <message>
         <source>Module</source>
-        <translation type="unfinished"></translation>
+        <translation>Modul</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Use#</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi#</translation>
     </message>
     <message>
         <source>Used By</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporablja ga</translation>
     </message>
 </context>
 <context>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source> : %1 kB</source>
-        <translation type="unfinished"></translation>
+        <translation>: %1 kB</translation>
     </message>
 </context>
 <context>
@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Int. Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Notranji pomnilnik</translation>
     </message>
 </context>
 <context>
@@ -163,7 +163,7 @@
     </message>
     <message>
         <source>Modules</source>
-        <translation type="unfinished"></translation>
+        <translation>Moduli</translation>
     </message>
 </context>
 <context>

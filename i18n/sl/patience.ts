@@ -59,15 +59,15 @@
     </message>
     <message>
         <source>Chicane</source>
-        <translation type="unfinished"></translation>
+        <translation>Chicane</translation>
     </message>
     <message>
         <source>Harp</source>
-        <translation type="unfinished"></translation>
+        <translation>Harp</translation>
     </message>
     <message>
         <source>Teeclub</source>
-        <translation type="unfinished"></translation>
+        <translation>Teeclub</translation>
     </message>
 </context>
 </TS>

@@ -183,15 +183,15 @@ These termination options are provided primarily for use while developing and te
     <name>SyncDialog</name>
     <message>
         <source>Syncing</source>
-        <translation type="unfinished"></translation>
+        <translation>Sinhroniziram</translation>
     </message>
     <message>
         <source>&lt;b&gt;Contacts&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Kontakti&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Prekliči</translation>
     </message>
 </context>
 </TS>

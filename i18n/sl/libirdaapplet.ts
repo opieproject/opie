@@ -3,7 +3,7 @@
     <name>IrdaApplet</name>
     <message>
         <source>Discovered Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Najdena naprava:</translation>
     </message>
     <message>
         <source>None</source>
@@ -11,35 +11,35 @@
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Izklopi IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Izklopi raziskovanje</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi raziskovanje</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Izklopi sprejem</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi sprejem</translation>
     </message>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Najdeno:</translation>
     </message>
     <message>
         <source>Lost:</source>
-        <translation type="unfinished"></translation>
+        <translation>Izgubljeno:</translation>
     </message>
 </context>
 </TS>

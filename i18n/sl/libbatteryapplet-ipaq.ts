@@ -3,83 +3,83 @@
     <name>BatteryStatus</name>
     <message>
         <source>Battery status for Ipaq</source>
-        <translation type="unfinished"></translation>
+        <translation>Baterija za Ipaq</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Napaka</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation type="unfinished"></translation>
+        <translation>ne morem odpreti datoteke</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation type="unfinished"></translation>
+        <translation>Polnim obe napravi</translation>
     </message>
     <message>
         <source>Charging</source>
-        <translation type="unfinished"></translation>
+        <translation>Polnim</translation>
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Odstotkov baterije do konca</translation>
     </message>
     <message>
         <source>Battery status: </source>
-        <translation type="unfinished"></translation>
+        <translation>Status baterije:</translation>
     </message>
     <message>
         <source>Good</source>
-        <translation type="unfinished"></translation>
+        <translation>Dober</translation>
     </message>
     <message>
         <source>Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Nizek</translation>
     </message>
     <message>
         <source>Very Low</source>
-        <translation type="unfinished"></translation>
+        <translation>Zelo nizek</translation>
     </message>
     <message>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Kritičen</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznan</translation>
     </message>
     <message>
         <source>On backup power</source>
-        <translation type="unfinished"></translation>
+        <translation>Na pomožnem napajanju</translation>
     </message>
     <message>
         <source>Power on-line</source>
-        <translation type="unfinished"></translation>
+        <translation>Napajanje vklopljeno</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Zunanje napajanje nepriklopjeno</translation>
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation type="unfinished"></translation>
+        <translation>Čas baterije do konca</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Odstotek baterije do konca:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation type="unfinished"></translation>
+        <translation>Čas baterije do konca:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation type="unfinished"></translation>
+        <translation>Nobena baterija ni vstavljena</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapri</translation>
     </message>
 </context>
 </TS>

@@ -3,47 +3,48 @@
     <name>ObexDlg</name>
     <message>
         <source>OBEX Sending</source>
-        <translation type="unfinished"></translation>
+        <translation>OBEX pošilja</translation>
     </message>
     <message>
         <source>Sending:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošiljam:</translation>
     </message>
     <message>
         <source>filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime datoteke</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Prekliči</translation>
     </message>
 </context>
 <context>
     <name>ObexInc</name>
     <message>
         <source>OBEX Receiving</source>
-        <translation type="unfinished"></translation>
+        <translation>Obex sprejema</translation>
     </message>
     <message>
         <source>TextLabel1</source>
-        <translation type="unfinished"></translation>
+        <translation>TextLabel1</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime datoteke</translation>
     </message>
     <message>
         <source>A file was beamed 
 to you.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka je bila prežarčena
+k vam.</translation>
     </message>
     <message>
         <source>Insert</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi</translation>
     </message>
     <message>
         <source>Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavrni</translation>
     </message>
 </context>
 </TS>

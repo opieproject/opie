@@ -31,31 +31,31 @@
     </message>
     <message>
         <source>CF/PCMCIA card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem izvreči CF/PCMCIA kartice!</translation>
     </message>
     <message>
         <source>SD/MMC card eject failed!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem izvreči SD/MMC kartice!</translation>
     </message>
     <message>
         <source>New card: </source>
-        <translation type="unfinished"></translation>
+        <translation>Nova kartica:</translation>
     </message>
     <message>
         <source>Ejected: </source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavljeno:</translation>
     </message>
     <message>
         <source>Eject SD/MMC card</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi SD/MMC kartico</translation>
     </message>
     <message>
         <source>Eject card 0: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi kartico 0: %1</translation>
     </message>
     <message>
         <source>Eject card 1: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi kartico 1: %1</translation>
     </message>
 </context>
 </TS>

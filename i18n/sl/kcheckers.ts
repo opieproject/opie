@@ -99,99 +99,99 @@
     </message>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nov</translation>
     </message>
     <message>
         <source>&amp;Undo Move</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Poteza nazaj</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Izhod</translation>
     </message>
     <message>
         <source>&amp;Beginner</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Začetnik</translation>
     </message>
     <message>
         <source>&amp;Novice</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Novinec</translation>
     </message>
     <message>
         <source>&amp;Average</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Povprečnež</translation>
     </message>
     <message>
         <source>&amp;Good</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Dober</translation>
     </message>
     <message>
         <source>&amp;Expert</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Strokovnjak</translation>
     </message>
     <message>
         <source>&amp;Master</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Mojster</translation>
     </message>
     <message>
         <source>&amp;Show Numeration</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Prikaži oznake</translation>
     </message>
     <message>
         <source>&amp;English Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Angleška pravila</translation>
     </message>
     <message>
         <source>&amp;Russian Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ruska pravila</translation>
     </message>
     <message>
         <source>&amp;Green Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Zelena plošča</translation>
     </message>
     <message>
         <source>&amp;Marble Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Marmornata plošča</translation>
     </message>
     <message>
         <source>&amp;Wooden Board</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Lesena plošča</translation>
     </message>
     <message>
         <source>&amp;Rules of Play</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pravila igre</translation>
     </message>
     <message>
         <source>&amp;About KCheckers</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O KCheckers</translation>
     </message>
     <message>
         <source>&amp;Game</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Igra</translation>
     </message>
     <message>
         <source>&amp;Skill</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Znanje</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Opcije</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pomoč</translation>
     </message>
     <message>
         <source> New Game </source>
-        <translation type="unfinished"></translation>
+        <translation>Nova igra</translation>
     </message>
     <message>
         <source> Undo Move </source>
-        <translation type="unfinished"></translation>
+        <translation>Poteza nazaj</translation>
     </message>
     <message>
         <source> Rules of Play </source>
-        <translation type="unfinished"></translation>
+        <translation>Pravila igre</translation>
     </message>
 </context>
 </TS>

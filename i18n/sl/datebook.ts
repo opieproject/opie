@@ -191,7 +191,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>To je celodnevni dogodek.</translation>
     </message>
 </context>
 <context>
@@ -249,34 +249,34 @@ Izhod?</translation>
     </message>
     <message>
         <source>Misc</source>
-        <translation type="unfinished"></translation>
+        <translation>Različno</translation>
     </message>
     <message>
         <source>Row style:</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil vrstice:</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzet</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Srednji</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Velik</translation>
     </message>
     <message>
         <source>Jump to current time (dayview)</source>
-        <translation type="unfinished"></translation>
+        <translation>Skoči na trenuten čas (dnvenipogled)</translation>
     </message>
 </context>
 <context>
     <name>DateBookWeek</name>
     <message>
         <source>This is an all day event.</source>
-        <translation type="unfinished"></translation>
+        <translation>To je celodnevni dogodek.</translation>
     </message>
 </context>
 <context>
@@ -398,11 +398,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Start Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Začetni čas</translation>
     </message>
     <message>
         <source>End Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Končni čas</translation>
     </message>
 </context>
 <context>
@@ -701,26 +701,26 @@ Izhod?</translation>
     </message>
     <message>
         <source>Description </source>
-        <translation type="unfinished"></translation>
+        <translation>Opis</translation>
     </message>
     <message>
         <source>Start - End </source>
-        <translation type="unfinished"></translation>
+        <translation>Začetek - Konec</translation>
     </message>
     <message>
         <source>Note...</source>
-        <translation type="unfinished"></translation>
+        <translation>Opombe...</translation>
     </message>
 </context>
 <context>
     <name>NoteEntryBase</name>
     <message>
         <source>Edit Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi opombo</translation>
     </message>
     <message>
         <source>&lt;b&gt;1/10&lt;/b&gt; Lunch</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;1/10&lt;/b&gt; Kosilo</translation>
     </message>
 </context>
 <context>

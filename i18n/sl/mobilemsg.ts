@@ -3,70 +3,70 @@
     <name>MobileMsg</name>
     <message>
         <source>Messages: </source>
-        <translation type="unfinished"></translation>
+        <translation>Sporočila:</translation>
     </message>
 </context>
 <context>
     <name>MobileMsgBase</name>
     <message>
         <source>Mobile Messaging</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobilno sporočanje</translation>
     </message>
     <message>
         <source>Number:</source>
-        <translation type="unfinished"></translation>
+        <translation>Število:</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošlji</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Besedilo</translation>
     </message>
     <message>
         <source>Flash</source>
-        <translation type="unfinished"></translation>
+        <translation>Flash</translation>
     </message>
     <message>
         <source>Unicode</source>
-        <translation type="unfinished"></translation>
+        <translation>Unicode</translation>
     </message>
     <message>
         <source>SMS: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>SMS: %1</translation>
     </message>
     <message>
         <source>Nokia</source>
-        <translation type="unfinished"></translation>
+        <translation>Nokia</translation>
     </message>
     <message>
         <source>Country:</source>
-        <translation type="unfinished"></translation>
+        <translation>Država:</translation>
     </message>
     <message>
         <source>Logo</source>
-        <translation type="unfinished"></translation>
+        <translation>Logo</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Skupina</translation>
     </message>
     <message>
         <source>Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Slika</translation>
     </message>
     <message>
         <source>Message:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sporočilo:</translation>
     </message>
     <message>
         <source>EMS</source>
-        <translation type="unfinished"></translation>
+        <translation>EMS</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavihek</translation>
     </message>
 </context>
 </TS>

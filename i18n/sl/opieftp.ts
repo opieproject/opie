@@ -222,11 +222,11 @@ Mora biti prazen</translation>
     </message>
     <message>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>O</translation>
     </message>
     <message>
         <source>Rescan</source>
-        <translation type="unfinished"></translation>
+        <translation>Preglej</translation>
     </message>
 </context>
 </TS>

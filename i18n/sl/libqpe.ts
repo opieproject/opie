@@ -219,7 +219,7 @@ ureja kategorije.</translation>
     </message>
     <message>
         <source>File does not exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datoteka ne obstaja.</translation>
     </message>
 </context>
 <context>
@@ -720,7 +720,7 @@ Sprostite nekaj spomina in poizkusite ponovno.</translation>
     </message>
     <message>
         <source>Ram FS</source>
-        <translation type="unfinished"></translation>
+        <translation>Ran FS</translation>
     </message>
 </context>
 <context>

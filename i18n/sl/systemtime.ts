@@ -55,7 +55,7 @@
     </message>
     <message>
         <source>M/D hh:mm</source>
-        <translation type="unfinished"></translation>
+        <translation>M/D hh:mm</translation>
     </message>
 </context>
 <context>

@@ -3,85 +3,85 @@
     <name>MainWindow</name>
     <message>
         <source>Global</source>
-        <translation type="unfinished"></translation>
+        <translation>Globalno</translation>
     </message>
 </context>
 <context>
     <name>MediumGlobalWidget</name>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Dcouments. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>Če vstavite medij Opie poizkusi najti dokumente na tem mediju. Na velikih medijih to lahko poteka nekaj časa. Lahko nastavite, če naj Opie pregleda dokumente globalno ali na stopnji medija. Lahko pa tudi nastavite vsak medij posebej.</translation>
     </message>
     <message>
         <source>Enable medium checking</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi preverjanje medija</translation>
     </message>
     <message>
         <source>Use global settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi globalne nastavitve</translation>
     </message>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Katere medijske datoteke</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vse</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Slika</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Besedilo</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
 </context>
 <context>
     <name>MediumMountWidget</name>
     <message>
         <source>Which media files</source>
-        <translation type="unfinished"></translation>
+        <translation>Katere medijske datoteke</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vse</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Slika</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Besedilo</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Limit search to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Omeji iskanje na:</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Dodaj</translation>
     </message>
     <message>
         <source>Always check this medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Vedno preveri ta medij</translation>
     </message>
 </context>
 </TS>

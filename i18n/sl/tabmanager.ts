@@ -3,7 +3,7 @@
     <name>AppEdit</name>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Program</translation>
     </message>
     <message>
         <source>Exec</source>
@@ -23,51 +23,52 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikona:</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaženi:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Komentar:</translation>
     </message>
 </context>
 <context>
     <name>TabManager</name>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>Sporočilo</translation>
     </message>
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem odstraniti z programi
+še vedno v skupini.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ste prepričani da bi radi izbrisali?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Prekliči</translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem odstraniti.</translation>
     </message>
     <message>
         <source>Application edit</source>
@@ -75,7 +76,7 @@ still in the group.</source>
     </message>
     <message>
         <source>Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavihek</translation>
     </message>
     <message>
         <source>Can&apos;t save.</source>
@@ -87,11 +88,11 @@ still in the group.</source>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished"></translation>
+        <translation>Zbiram ikone...</translation>
     </message>
     <message>
         <source>Application</source>
-        <translation type="unfinished"></translation>
+        <translation>Program</translation>
     </message>
 </context>
 <context>
@@ -110,18 +111,18 @@ still in the group.</source>
     </message>
     <message>
         <source>Tab Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravljalnik zavihkov</translation>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation type="unfinished"></translation>
+        <translation>Hirerhija</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Prosim počakajte...</translation>
     </message>
 </context>
 </TS>

@@ -31,23 +31,23 @@
     </message>
     <message>
         <source>Info: </source>
-        <translation type="unfinished"></translation>
+        <translation>Podatki:</translation>
     </message>
     <message>
         <source>Name: </source>
-        <translation type="unfinished"></translation>
+        <translation>Ime:</translation>
     </message>
     <message>
         <source>Genre: </source>
-        <translation type="unfinished"></translation>
+        <translation>Žanr:</translation>
     </message>
     <message>
         <source>Bitrate: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bitna hitrost:</translation>
     </message>
     <message>
         <source>URL: </source>
-        <translation type="unfinished"></translation>
+        <translation>URL:</translation>
     </message>
 </context>
 </TS>

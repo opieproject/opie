@@ -47,32 +47,33 @@
     </message>
     <message>
         <source>Edit current scheme...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi trenutno shemo...</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished">Zbriši</translation>
+        <translation>Izbriši</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Ali res želite izbrisati
+</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Delete scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Izbriši shemo</translation>
     </message>
     <message>
         <source>Unable to delete current scheme.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne morem izbrisati trenutne sheme.</translation>
     </message>
     <message>
         <source>Do you want to apply your changes?
@@ -85,50 +86,50 @@
     </message>
     <message>
         <source>Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Izberi</translation>
     </message>
     <message>
         <source>Enable background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Vklopi sliko ozadja</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Privzeto</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Pisava</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>Hitra lisica skoči čez lenega psa</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Uveljavi</translation>
     </message>
     <message>
         <source>Restart</source>
-        <translation type="unfinished"></translation>
+        <translation>Ponovno zaženi</translation>
     </message>
     <message>
         <source>Do you want to restart Opie now?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali želite zdaj ponovno zagnati Opie?</translation>
     </message>
     <message>
         <source>Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavitve...</translation>
     </message>
 </context>
 <context>
     <name>EditScheme</name>
     <message>
         <source>Edit scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Uredi shemo</translation>
     </message>
     <message>
         <source>More</source>

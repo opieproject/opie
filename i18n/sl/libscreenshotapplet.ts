@@ -3,15 +3,15 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Snapshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Posnetek</translation>
     </message>
     <message>
         <source>scap</source>
-        <translation type="unfinished"></translation>
+        <translation>zgrabi</translation>
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Ime posnetka</translation>
     </message>
 </context>
 </TS>

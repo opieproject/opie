@@ -3,27 +3,27 @@
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Stil Liquid</translation>
     </message>
     <message>
         <source>No translucency</source>
-        <translation type="unfinished"></translation>
+        <translation>Brez transculence</translation>
     </message>
     <message>
         <source>Stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Črtasto, barva ozadja</translation>
     </message>
     <message>
         <source>Stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Črtasto. barva gumba</translation>
     </message>
     <message>
         <source>Translucent stippled, background color</source>
-        <translation type="unfinished"></translation>
+        <translation>Transculentno črtasto, barva ozadja</translation>
     </message>
     <message>
         <source>Translucent stippled, button color</source>
-        <translation type="unfinished"></translation>
+        <translation>Transculentno črtasto, barva gumba</translation>
     </message>
     <message>
         <source>Custom translucency</source>
@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva menuja</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva besedila</translation>
     </message>
     <message>
         <source>Opacity</source>
@@ -43,7 +43,7 @@
     </message>
     <message>
         <source>Use shadowed text</source>
-        <translation type="unfinished"></translation>
+        <translation>Uporabi osenčeno besedilo</translation>
     </message>
 </context>
 </TS>

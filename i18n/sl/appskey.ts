@@ -3,27 +3,27 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavi programsko tipko</translation>
     </message>
     <message>
         <source>Calender</source>
-        <translation type="unfinished"></translation>
+        <translation>Koledar</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation type="unfinished"></translation>
+        <translation>Knjiga naslovov</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Dom</translation>
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Lista</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Pošta</translation>
     </message>
 </context>
 </TS>

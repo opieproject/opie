@@ -123,53 +123,53 @@
     </message>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi besedilo</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikoniziran pogled</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikoniziran pogled...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacije o strani</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacije o strani...</translation>
     </message>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation type="unfinished">Ali želite pobrisati
+        <translation>Ali želite pobrisati
 trenutno stran?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation type="unfinished">Ali želite izbrisati
+        <translation>Ali želite izbrisati
 trenutno stran?</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished">Ali želite izbrisati
+        <translation>Ali želite izbrisati
 vse strani?</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
+        <translation>Antialiasing</translation>
     </message>
 </context>
 <context>
@@ -253,7 +253,7 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Izvoz</translation>
     </message>
 </context>
 <context>
@@ -264,15 +264,15 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Automatic preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Avtomatičen predogled</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Predogled</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Uvoz</translation>
     </message>
 </context>
 <context>
@@ -311,11 +311,11 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Ozadje</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished">Barva svinčnika</translation>
+        <translation>Barva svinčnika</translation>
     </message>
     <message>
         <source>Brush Color</source>
@@ -323,58 +323,58 @@ trenutno stran?</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished">Barva polnila</translation>
+        <translation>Barva polnila</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Splošno</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslov:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Višina:</translation>
     </message>
 </context>
 <context>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>Informacije o strani</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Splošno</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslov:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>Širina:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>Višina:</translation>
     </message>
 </context>
 <context>
@@ -416,55 +416,57 @@ trenutno stran?</translation>
     <name>QObject</name>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Naslov:</translation>
     </message>
     <message>
         <source>Dimension:</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimenzija:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datum:</translation>
     </message>
 </context>
 <context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Vstavi besedilo</translation>
     </message>
 </context>
 <context>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>DrawPad - Ikoniziran pogled</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished">Pobriši stran</translation>
+        <translation>Pobriši stran</translation>
     </message>
     <message>
         <source>Do you want to clear
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali želite pobrisati
+izbrano stran?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Ne</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished">Izbriši stran</translation>
+        <translation>Izbriši stran</translation>
     </message>
     <message>
         <source>Do you want to delete
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ali želite izbrisati
+izbrano stran?</translation>
     </message>
 </context>
 </TS>

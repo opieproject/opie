@@ -75,7 +75,7 @@
     </message>
     <message>
         <source>Thumbnails</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonce</translation>
     </message>
 </context>
 <context>
