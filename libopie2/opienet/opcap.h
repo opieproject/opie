@@ -68,7 +68,49 @@ class QSocketNotifier;
 /*======================================================================================
  * OPacket - A frame on the wire
  *======================================================================================*/
-// FIXME how many OPackets do we've at a time? QObject seams to be a big for that usage
+
+/** @brief A class representing a data frame on the wire.
+ *
+ * The whole family of the packet classes are used when capturing frames from a network.
+ * Most standard network protocols in use share a common architecture, which mostly is
+ * a packet header and then the packet payload. In layered architectures, each lower layer
+ * encapsulates data from its upper layer - that is it
+ * treats the data from its upper layer as payload and prepends an own header to the packet,
+ * which - again - is treated as the payload for the layer below. The figure below is an
+ * example for how such a data frame is composed out of packets, e.g. when sending a mail.
+ *
+ * <pre>
+ *                                                       | User Data |     == Mail Data
+ *                                         | SMTP Header | User Data |     == SMTP
+ *                           | TCP Header  | SMTP Header | User Data |     == TCP
+ *               | IP Header | TCP Header  | SMTP Header | User Data |     == IP
+ *  | MAC Header | IP Header | TCP Header  | SMTP Header | User Data |     == MAC
+ *
+ * </pre>
+ *
+ * The example is trimmed for simplicity, because the MAC (Medium Access Control) layer
+ * also contains a few more levels of encapsulation.
+ * Since the type of the payload is more or less independent from the encapsulating protocol,
+ * the header must be inspected before attempting to decode the payload. Hence, the
+ * encapsulation level varies and can't be deduced without actually looking into the packets.
+ *
+ * For actually working with captured frames, it's useful to identify the packets via names and
+ * insert them into a parent/child - relationship based on the encapsulation. This is why
+ * all packet classes derive from QObject. The amount of overhead caused by the QObject is
+ * not a problem in this case, because we're talking about a theoratical maximum of about
+ * 10 packets per captured frame. We need to stuff them into a searchable list anyway and the
+ * QObject also cares about destroying the sub-, (child-) packets.
+ *
+ * This enables us to perform a simple look for packets of a certain type:
+ * @code
+ * OPacketCapturer* pcap = new OPacketCapturer();
+ * pcap->open( "eth0" );
+ * OPacket* p = pcap->next();
+ * OIPPacket* ip = (OIPPacket*) p->child( "IP" ); // returns 0, if no such child exists
+ * odebug << "got ip packet from " << ip->fromIPAddress().toString() << " to " << ip->toIPAddress().toString() << oendl;
+ *
+ */
+
 class OPacket : public QObject
 {
   Q_OBJECT
@@ -95,7 +137,6 @@ class OPacket : public QObject
  * OEthernetPacket - DLT_EN10MB frame
  *======================================================================================*/
 
-//FIXME same critic as above -zecke
 class OEthernetPacket : public QObject
 {
   Q_OBJECT
@@ -116,7 +157,7 @@ class OEthernetPacket : public QObject
 /*======================================================================================
  * OWaveLanPacket - DLT_IEEE802_11 frame
  *======================================================================================*/
-//FIXME same
+
 class OWaveLanPacket : public QObject
 {
   Q_OBJECT
@@ -146,7 +187,7 @@ class OWaveLanPacket : public QObject
 /*======================================================================================
  * OWaveLanManagementPacket - type: management (T_MGMT)
  *======================================================================================*/
-//FIXME same as above -zecke
+
 class OWaveLanManagementPacket : public QObject
 {
   Q_OBJECT
@@ -175,7 +216,7 @@ class OWaveLanManagementPacket : public QObject
 /*======================================================================================
  * OWaveLanManagementSSID
  *======================================================================================*/
-//FIXME is QObject necessary? -zecke
+
 class OWaveLanManagementSSID : public QObject
 {
   Q_OBJECT
@@ -193,7 +234,7 @@ class OWaveLanManagementSSID : public QObject
 /*======================================================================================
  * OWaveLanManagementRates
  *======================================================================================*/
-// FIXME same as above -zecke
+
 class OWaveLanManagementRates : public QObject
 {
   Q_OBJECT
@@ -210,7 +251,6 @@ class OWaveLanManagementRates : public QObject
  * OWaveLanManagementCF
  *======================================================================================*/
 
-//FIXME same....
 class OWaveLanManagementCF : public QObject
 {
   Q_OBJECT
@@ -227,7 +267,6 @@ class OWaveLanManagementCF : public QObject
  * OWaveLanManagementFH
  *======================================================================================*/
 
-//FIXME same
 class OWaveLanManagementFH : public QObject
 {
   Q_OBJECT
@@ -243,7 +282,7 @@ class OWaveLanManagementFH : public QObject
 /*======================================================================================
  * OWaveLanManagementDS
  *======================================================================================*/
-//FIXME same
+
 class OWaveLanManagementDS : public QObject
 {
   Q_OBJECT
@@ -262,7 +301,6 @@ class OWaveLanManagementDS : public QObject
  * OWaveLanManagementTim
  *======================================================================================*/
 
-//FIXME guess what?
 class OWaveLanManagementTim : public QObject
 {
   Q_OBJECT
@@ -279,7 +317,6 @@ class OWaveLanManagementTim : public QObject
  * OWaveLanManagementIBSS
  *======================================================================================*/
 
-//FIXME same as above ( Qobject )
 class OWaveLanManagementIBSS : public QObject
 {
   Q_OBJECT
@@ -328,7 +365,7 @@ class OWaveLanDataPacket : public QObject
 /*======================================================================================
  * OWaveLanControlPacket - type: control (T_CTRL)
  *======================================================================================*/
-// Qobject needed?
+
 class OWaveLanControlPacket : public QObject
 {
   Q_OBJECT
@@ -345,7 +382,6 @@ class OWaveLanControlPacket : public QObject
  * OLLCPacket - IEEE 802.2 Link Level Control
  *======================================================================================*/
 
-// QObject needed?
 class OLLCPacket : public QObject
 {
   Q_OBJECT
@@ -355,7 +391,6 @@ class OLLCPacket : public QObject
     virtual ~OLLCPacket();
 
   private:
-  //FIXME how to get that header?
     const struct ieee_802_11_802_2_header* _header;
 };
 
@@ -363,7 +398,6 @@ class OLLCPacket : public QObject
  * OIPPacket
  *======================================================================================*/
 
-// Qobject as baseclass?
 class OIPPacket : public QObject
 {
   Q_OBJECT
@@ -390,7 +424,7 @@ class OIPPacket : public QObject
 /*======================================================================================
  * OUDPPacket
  *======================================================================================*/
-// QObject?
+
 class OUDPPacket : public QObject
 {
   Q_OBJECT
@@ -410,7 +444,6 @@ class OUDPPacket : public QObject
  * OTCPPacket
  *======================================================================================*/
 
-// Qobect needed?
 class OTCPPacket : public QObject
 {
   Q_OBJECT
