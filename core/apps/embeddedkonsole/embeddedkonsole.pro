@@ -1,4 +1,4 @@
-CONFIG    += qt warn_on  quick-app
+CONFIG    += qt warn_on quick-app
 HEADERS   = TEWidget.h \
       TEScreen.h \
       TECommon.h \
@@ -29,7 +29,11 @@ INTERFACES =  commandeditdialogbase.ui smallcommandeditdialogbase.ui
 TARGET    = embeddedkonsole
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
-LIBS            += -lqpe -lopiecore2 -lqtaux2 -lutil
-DEFINES += QT_QWS_OPIE HAVE_OPENPTY
+
+DEFINES     += QT_QWS_OPIE HAVE_OPENPTY
+LIBS        += -lqpe -lopiecore2 -lqtaux2 -lutil
+
+#DEFINES     += HAVE_OPENPTY
+#LIBS        += -lqpe -lutil
 
 include ( $(OPIEDIR)/include.pro )
