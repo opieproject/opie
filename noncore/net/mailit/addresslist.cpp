@@ -121,7 +121,7 @@ void AddressList::read()
 	QString lineEmail, lineName, email, name;
 	OContactAccess m_contactdb("mailit");
 	OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
-	//OContact* oc;
+	//OContact* oc;(*it).defaultEmail()
 	
 	for ( it = m_list.begin(); it != m_list.end(); ++it )
 	{

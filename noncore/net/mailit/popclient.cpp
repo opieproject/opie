@@ -119,7 +119,6 @@ void PopClient::incomingData()
 //    return;
   
   response = socket->readLine();
-  //qDebug(response +" %d", status);
   
   switch(status) {
     //logging in
@@ -131,18 +130,8 @@ void PopClient::incomingData()
        {
           timeStamp = response.mid( start , end - start + 1);
           md5Source = timeStamp + popPassword;
-          //qDebug( md5Source);
-//           for( int i = 0; i < md5Source.length(); i++) {
-//              buff[i] = (QChar)md5Source[i];
-//           }
           
           md5_buffer( (char const *)md5Source, md5Source.length(),&md5Digest[0]);
-//          md5_buffer(char const *buffer, unsigned int len, char *digest);
- 
-//           MD5_Init( &ctx);
-//           MD5_Update( &ctx, buff, sizeof( buff) );
-//           MD5_Final( md5Digest, &ctx);
-//          MD5( buff, md5Source.length(), md5Digest);
 
            for(int j =0;j < MD5_DIGEST_LENGTH ;j++)
            {
@@ -164,7 +153,7 @@ void PopClient::incomingData()
           
           break;
         }
-    //password shhh. don't tell anyone (implement APOP...)
+    
     case Pass:  {
           *stream << "PASS " << popPassword << "\r\n";
           status = Stat;
@@ -248,10 +237,11 @@ void PopClient::incomingData()
     //Read message number x, count upwards to messageCount
     case Retr:  {
           if (status != Quit) {
-            if (!preview || mailSize <= headerLimit) {
+            if (mailSize <= headerLimit) 
+	    {
               *stream << "RETR " << messageCount << "\r\n";
             } else {        //only header
-              *stream << "TOP " << messageCount << " 0\r\n";
+	     *stream << "TOP " << messageCount << " 0\r\n";
             }
             messageCount++;
             status = Ignore;
@@ -283,8 +273,10 @@ void PopClient::incomingData()
               break;
             } else {  //message reach entire size
               //complete mail downloaded
-              if ( (!preview ) || ((preview) && (mailSize <= headerLimit)) ){
-                emit newMessage(message, messageCount-1, mailSize, TRUE);
+		//if ( (!preview ) || ((preview) && (mailSize <= headerLimit)) ){
+	      if ( mailSize <= headerLimit)
+	      {
+	    	emit newMessage(message, messageCount-1, mailSize, TRUE);
               } else {  //incomplete mail downloaded
 		emit newMessage(message, messageCount-1, mailSize, FALSE);
               }

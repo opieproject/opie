@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 #include <qmessagebox.h>
+#include <qwhatsthis.h>
 #include "writemail.h"
 #include <qpe/resource.h>
 
@@ -27,7 +28,7 @@ WriteMail::WriteMail( QWidget* parent,  const char* name, WFlags fl )
 	showingAddressList = FALSE;
 	init();
 	
-	addAtt = new AddAtt(0, "Add Attatchments");
+	addAtt = new AddAtt(0, "Add Attachments");
 }
 
 WriteMail::~WriteMail()
@@ -64,20 +65,23 @@ void WriteMail::init()
 	menu->insertItem( tr( "&Add" ), addMenu);
 	
 	bar = new QToolBar(this);
-	attatchButton = new QAction(tr("Attatchment"), Resource::loadPixmap("mailit/attach"), QString::null, 0, this, 0);
-	attatchButton->addTo(bar);
-	attatchButton->addTo(addMenu);
-	connect( attatchButton, SIGNAL( activated() ), this, SLOT( attatchFile() ) );
-	
+	attachButton = new QAction(tr("Attachment"), Resource::loadPixmap("mailit/attach"), QString::null, 0, this, 0);
+	attachButton->addTo(bar);
+	attachButton->addTo(addMenu);
+	connect( attachButton, SIGNAL( activated() ), this, SLOT( attachFile() ) );
+	attachButton->setWhatsThis(tr("Click here to attach files to your mail"));
+		
 	confirmButton = new QAction(tr("Enque mail"), Resource::loadPixmap("OKButton"), QString::null, 0, this, 0);
 	confirmButton->addTo(bar);
 	confirmButton->addTo(mailMenu);
 	connect( confirmButton, SIGNAL( activated() ), this, SLOT( accept() ) );
+	confirmButton->setWhatsThis(tr("This button puts your mail in the send queue"));
 	
 	newButton = new QAction(tr("New mail"), Resource::loadPixmap("new"), QString::null, 0, this, 0);
 	newButton->addTo(mailMenu);
 	connect( newButton, SIGNAL( activated() ), this, SLOT( newMail() ) );
-	
+	newButton->setWhatsThis(tr("Click here to create a new mail"));
+
 	widget = new QWidget(this, "widget");
 	grid = new QGridLayout( widget );
 
@@ -87,7 +91,6 @@ void WriteMail::init()
 	recipientsBox->setCurrentItem(0);
 	grid->addWidget( recipientsBox, 0, 0 );
 	connect(recipientsBox,SIGNAL(activated(int)),this, SLOT(changeRecipients(int)));
-	
 	
 	subjetLabel = new QLabel( widget, "subjetLabel" );
 	subjetLabel->setText( tr( "Subject:"  ) );
@@ -100,25 +103,28 @@ void WriteMail::init()
 
 	subjectInput = new QLineEdit( widget, "subjectInput" );
 	grid->addWidget( subjectInput, 1, 1 );
+	QWhatsThis::add(subjectInput,QWidget::tr("The mail subject should be entered here"));
 
 	toInput = new QLineEdit( widget, "toInput" );
 	grid->addWidget( toInput, 0, 1 );
+	QWhatsThis::add(recipientsBox,QWidget::tr("Recipients can be entered here"));
 
 	ccInput = new QLineEdit( widget, "ccInput" );
 	ccInput->hide();
 	grid->addWidget( ccInput, 0, 1 );
+	QWhatsThis::add(ccInput,QWidget::tr("If you would like to send copies of your mail they can be entered here"));
 
-	
 	addressButton = new QToolButton( widget, "addressButton" );
 	addressButton->setPixmap( Resource::loadPixmap("AddressBook") );
 	addressButton->setToggleButton(TRUE);
 	grid->addWidget( addressButton, 0, 2 );
 	connect(addressButton, SIGNAL(clicked()), this, SLOT(getAddress()) );
+	QWhatsThis::add(addressButton,QWidget::tr("This button opens the address selector with all mail adresses from your OPIE addressbook"));
 
 	emailInput = new QMultiLineEdit( widget, "emailInput" );
 	grid->addMultiCellWidget( emailInput, 2, 2, 0, 2);
+	QWhatsThis::add(recipientsBox,QWidget::tr("Enter your mail text here"));
 
-	
 	addressView = new QListView( widget, "addressView");
 	addressView->addColumn("Name");
 	addressView->addColumn("EMail");
@@ -126,11 +132,13 @@ void WriteMail::init()
 	addressView->setMultiSelection(TRUE);
 	addressView->hide();
 	grid->addMultiCellWidget( addressView, 3, 3, 0, 2);
-	
+	QWhatsThis::add(recipientsBox,QWidget::tr("Chose the recipients from this list"));
+
 	okButton = new QToolButton(bar, "ok");
 	okButton->setPixmap( Resource::loadPixmap("enter") );
 	okButton->hide();
 	connect(okButton, SIGNAL(clicked()), this, SLOT(addRecipients()) );
+	QWhatsThis::add(okButton,QWidget::tr("Queue your mail by clicking here"));
 	
 	setCentralWidget(widget);
 }
@@ -143,7 +151,7 @@ void WriteMail::reject()
 // need to insert date
 void WriteMail::accept()
 {
-	QStringList attatchedFiles, attatchmentsType;
+	QStringList attachedFiles, attachmentsType;
 	int idCount = 0;
 	
 	if (toInput->text() == "") 
@@ -196,13 +204,13 @@ void WriteMail::accept()
 	mail.rawMail += mail.subject;
 	mail.rawMail += "\n\n";
 	
-	attatchedFiles = addAtt->returnAttatchedFiles();
-	attatchmentsType = addAtt->returnFileTypes();
+	attachedFiles = addAtt->returnattachedFiles();
+	attachmentsType = addAtt->returnFileTypes();
 
-	QStringList::Iterator itType = attatchmentsType.begin();
+	QStringList::Iterator itType = attachmentsType.begin();
 	
 	Enclosure e;
-	for ( QStringList::Iterator it = attatchedFiles.begin(); it != attatchedFiles.end(); ++it ) {
+	for ( QStringList::Iterator it = attachedFiles.begin(); it != attachedFiles.end(); ++it ) {
 		e.id = idCount;
 		e.originalName = (*it).latin1();
 		e.contentType = (*itType).latin1();
@@ -236,7 +244,7 @@ void WriteMail::getAddress()
 	}
 }
 
-void WriteMail::attatchFile()
+void WriteMail::attachFile()
 {
 	addAtt->showMaximized();
 }
@@ -256,7 +264,7 @@ void WriteMail::reply(Email replyMail, bool replyAll)
 	subjectInput->setText(tr("Re: ") + mail.subject);
 	
 	pos = 0;
-	mail.body.insert(pos, ">>");
+	mail.body.insert(pos, ">");
 	while (pos != -1) {
 		pos = mail.body.find('\n', pos);
 		if (pos != -1)

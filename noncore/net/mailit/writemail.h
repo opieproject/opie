@@ -55,7 +55,7 @@ signals:
 	
 public slots:
 	void getAddress();
-	void attatchFile();
+	void attachFile();
 	void addRecipients();
 	void newMail();
 	void accept();
@@ -79,7 +79,7 @@ private:
 	
 	QToolButton *okButton;
 	QWidget *widget;
-	QAction *attatchButton;
+	QAction *attachButton;
 	QAction *confirmButton;
 	QAction *newButton;
 	QLabel* subjetLabel;

@@ -17,17 +17,18 @@
 ** not clear to you.
 **
 **********************************************************************/
+#include <qwhatsthis.h>
 #include "mailitwindow.h"
 
 MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
-  : QMainWindow(parent, name, fl)
+  : QMainWindow(parent, name, WStyle_ContextHelp)
 {
   currentCaption = "Mailit";
   setCaption(tr(currentCaption));
   views = new QWidgetStack(this);
   setCentralWidget(views);
-  
- emailClient = new EmailClient(views, "client");
+  QWhatsThis::add(views,tr("Central view area"));
+  emailClient = new EmailClient(views, "client");
   writeMail = new WriteMail(views, "writing");
   readMail = new ReadMail(views, "reading");
 
@@ -140,26 +141,3 @@ void MailItWindow::setDocument(const QString &_address)
     compose();
     writeMail->setRecipient(address);
 }
-
-/*void MailItWindow::reply(Email& mail)
-{
-	qDebug("####EmailClient: 0 reached");
-	composeReply(mail,(bool&)FALSE);
-}
-
-void MailItWindow::replyAll(Email& mail)
-{
-	qDebug("####EmailClient: 1 reached");
-	composeReply(mail,(bool&)TRUE);
-}
-
-void MailItWindow::forward(Email& mail)
-{
-	qDebug("####EmailClient: 2 reached");
-}
-
-void MailItWindow::remove(Email&)
-{
-	qDebug("####EmailClient: 3 reached");
-	//emit removeItem(eli,(bool&)TRUE);
-} */

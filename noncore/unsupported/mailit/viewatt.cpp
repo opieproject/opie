@@ -19,6 +19,7 @@
 **********************************************************************/
 #include "resource.h"
 #include "viewatt.h"
+#include <qwhatsthis.h>
 #include <qpe/applnk.h>
 #include <qpe/mimetype.h>
 
@@ -31,12 +32,14 @@ ViewAtt::ViewAtt(QWidget *parent, const char *name, WFlags f)
 	bar = new QToolBar(this);
 	installButton = new QAction( tr( "Install" ), Resource::loadPixmap( "exec" ), QString::null, CTRL + Key_C, this, 0 );
 	connect(installButton, SIGNAL(activated()), this, SLOT(install()) );
+	installButton->setWhatsThis(tr("Click here to install the attachment to your Documents"));
 	
 	listView = new QListView(this, "AttView");
 	listView->addColumn( "Attatchment" );
 	listView->addColumn( "Type" );
 	listView->addColumn( "Installed" );
 	setCentralWidget(listView);
+	QWhatsThis::add(listView,QWidget::tr("This is an overview about all attachments in the mail"));
 }
 
 void ViewAtt::update(Email *mailIn, bool inbox)

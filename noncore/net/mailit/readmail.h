@@ -57,7 +57,7 @@ public slots:
 	void previous();
 	void deleteItem();
 	void shiftText();
-	void viewAttatchments();
+	void viewAttachments();
 	void reply();
 	void forward();
 	
@@ -80,7 +80,7 @@ private:
 	QAction *plainTextButton;
 	QAction *nextButton;
 	QTextView *emailView;
-	QAction *attatchmentsButton;
+	QAction *attachmentButton;
 	QAction *previousButton;
 	QAction *replyButton;
 	QAction *forwardButton;

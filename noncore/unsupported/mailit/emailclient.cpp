@@ -23,6 +23,7 @@
 #include <qcheckbox.h>
 #include <qmenubar.h>
 #include <qaction.h>
+#include <qwhatsthis.h>
 #include <qpe/resource.h>
 #include "emailclient.h"
 
@@ -82,6 +83,7 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   readMail();
   lineShift = "\r\n";
   
+  mailboxView->setCurrentTab(0);  //ensure that inbox has focus
 }
 
 
@@ -113,6 +115,7 @@ void EmailClient::init()
     status2Label, SLOT(setText(const QString &)) );
   
   progressBar = new QProgressBar(statusBar);
+
   connect(emailHandler, SIGNAL(mailboxSize(int)),
     this, SLOT(setTotalSize(int)) );
   connect(emailHandler, SIGNAL(currentMailSize(int)),
@@ -127,6 +130,7 @@ void EmailClient::init()
   setToolBarsMovable(FALSE);
   
   bar = new QToolBar(this);
+  QWhatsThis::add(bar,tr("Main operation toolbar"));
   bar->setHorizontalStretchable( TRUE );
 
   mb = new QMenuBar( bar );
@@ -148,45 +152,34 @@ void EmailClient::init()
   bar = new QToolBar(this);
 
   getMailButton = new QToolButton(Resource::loadPixmap("mailit/getmail"),tr("getMail"),tr("select account"), this,SLOT(getAllNewMail()),bar);
-  //connect(setAccountlButton, SIGNAL(activated()), this, SLOT(setCurrentAccount()) );
- // setAccountButton->addTo(bar);
-  //setAccountButton->addTo(mail);
-  
-  /*idCount = 0;
-  
-  for (MailAccount* accountPtr = accountList.first(); accountPtr != 0;
-      accountPtr = accountList.next()) {
-    
-    selectAccountMenu->insertItem(accountPtr->accountName,this, SLOT(selectAccount(int)), 0, idCount);
-    idCount++;
-  }*/
+  QWhatsThis::add(getMailButton,tr("Click to download mail via all available accounts.\n Press and hold to select the desired account."));
+
   getMailButton->setPopup(selectAccountMenu);
-    
-  
-  /*getMailButton = new QAction(tr("Get all mail"), Resource::loadPixmap("mailit/getmail"), QString::null, 0, this, 0);
-  connect(getMailButton, SIGNAL(activated()), this, SLOT(getAllNewMail()) );
-  getMailButton->addTo(bar);*/
-  //getMailButton->addTo(mail);
-  
+      
   sendMailButton = new QAction(tr("Send mail"), Resource::loadPixmap("mailit/sendqueue"), QString::null, 0, this, 0);
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
   sendMailButton->addTo(bar);
   sendMailButton->addTo(mail);
+  sendMailButton->setWhatsThis("Send mail queued in the outbox");
     
   composeButton = new QAction(tr("Compose"), Resource::loadPixmap("new"), QString::null, 0, this, 0);
   connect(composeButton, SIGNAL(activated()), this, SLOT(compose()) );
   composeButton->addTo(bar);
   composeButton->addTo(mail);
+  composeButton->setWhatsThis("Compose a new mail");
   
   cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("close"), QString::null, 0, this, 0);
   connect(cancelButton, SIGNAL(activated()), this, SLOT(cancel()) );
   cancelButton->addTo(mail);
   cancelButton->addTo(bar);
   cancelButton->setEnabled(FALSE);
+  cancelButton->setWhatsThis("Stop the currently active mail transfer");
+  
   
   deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
   connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
   deleteButton->addTo(bar);
+  deleteButton->setWhatsThis("Remove the currently selected eMail(s)");
   
   mailboxView = new OTabWidget( this, "mailboxView" );
 
@@ -201,6 +194,8 @@ void EmailClient::init()
   inboxView->addColumn( tr( "Date" ) );
   inboxView->setMinimumSize( QSize( 0, 0 ) );
   inboxView->setAllColumnsShowFocus(TRUE);
+  QWhatsThis::add(inboxView,QWidget::tr("This is the inbox view.\n It keeps the fetched mail which can be viewed by double clicking the entry.\n"
+  "					A blue attachment icon shows whether this mail has attachments."));
 
   grid_2->addWidget( inboxView, 2, 0 );
   mailboxView->addTab( widget, "mailit/inbox", tr( "Inbox" ) );
@@ -215,12 +210,12 @@ void EmailClient::init()
   outboxView->addColumn( tr( "Subject" ) );
   outboxView->setAllColumnsShowFocus(TRUE);
 
+  QWhatsThis::add(outboxView,QWidget::tr("This is the oubox view.\n It keeps the queued mails to send which can be reviewed by double clicking the entry."));
   grid_3->addWidget( outboxView, 0, 0 );
   mailboxView->addTab( widget_2,"mailit/outbox", tr( "Outbox" ) );
   
   setCentralWidget(mailboxView);
   
-  mailboxView->setCurrentTab(0);
 }
 
 void EmailClient::compose()
@@ -324,7 +319,7 @@ void EmailClient::getNewMail() {
   progressBar->reset();
     
   //get any previous mails not downloaded and add to queue
-/*  mailDownloadList.clear();
+  mailDownloadList.clear();
   Email *mailPtr;
   item = (EmailListItem *) inboxView->firstChild();
   while (item != NULL) {
@@ -333,9 +328,10 @@ void EmailClient::getNewMail() {
       mailDownloadList.sizeInsert(mailPtr->serverId, mailPtr->size);
     }
     item = (EmailListItem *) item->nextSibling();
-  }*/
+  }
   
   emailHandler->getMailHeaders();
+  
 }
 
 void EmailClient::getAllNewMail()
@@ -351,15 +347,17 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
   Email newMail;
   int thisMailId;
   emailHandler->parse(mail.rawMail, lineShift, &newMail);
-  
   mailconf->setGroup(newMail.id);
-  
-  if (fromDisk) {
+    
+  if (fromDisk) 
+  {
     newMail.downloaded = mailconf->readBoolEntry("downloaded");
     newMail.size = mailconf->readNumEntry("size");
     newMail.serverId = mailconf->readNumEntry("serverid");
     newMail.fromAccountId = mailconf->readNumEntry("fromaccountid");
-  } else {  //mail arrived from server
+  } 
+  else 
+  {  //mail arrived from server
     newMail.serverId = mail.serverId;
     newMail.size = mail.size;
     newMail.downloaded = mail.downloaded;
@@ -378,7 +376,7 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
     
     //set server count, so that if the user aborts, the new
     //header is not reloaded
-    if (currentAccount->synchronize)
+    if ((currentAccount)&&(currentAccount->synchronize))
       currentAccount->lastServerMailCount++;
     
     mailconf->writeEntry("internalmailid", thisMailId);
@@ -386,13 +384,15 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
     mailconf->writeEntry("size", (int) newMail.size);
     mailconf->writeEntry("serverid", newMail.serverId);
     
-    addressList->addContact(newMail.fromMail, newMail.from);
-  } else if (!fromDisk) {   //body to header arrived
-    mailconf->writeEntry("downloaded", TRUE);
+    //addressList->addContact(newMail.fromMail, newMail.from);
   }
+  
+  mailconf->writeEntry("downloaded", newMail.downloaded);
+  
   QString stringMailId;
   stringMailId.setNum(thisMailId);
-  //se if any attatchments needs to be stored
+  //see if any attatchments needs to be stored
+  
   for ( ePtr=newMail.files.first(); ePtr != 0; ePtr=newMail.files.next() ) {
     QString stringId;
     stringId.setNum(ePtr->id);
@@ -426,22 +426,29 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
       }   
     }
   }
-  if (!previewingMail && !fromDisk) {
+
+  bool found=false;
+  
+  if (!fromDisk) 
+  {
+    
     Email *mailPtr;
     item = (EmailListItem *) inboxView->firstChild();
-    while (item != NULL) {
+    while ((item != NULL)&&(!found)) 
+    {
       mailPtr = item->getMail();
       if (mailPtr->id == newMail.id) {
         item->setMail(newMail);
         emit mailUpdated(item->getMail());
+      	found = true;
       }
       item = (EmailListItem *) item->nextSibling();
     }
-  } else {
-    item = new EmailListItem(inboxView, newMail, TRUE);
-    if (!newMail.downloaded)
-      mailDownloadList.sizeInsert(newMail.serverId, newMail.size);
   }
+  if ((!found)||(fromDisk)) item = new EmailListItem(inboxView, newMail, TRUE);
+    
+    /*if (!newMail.downloaded)
+      mailDownloadList.sizeInsert(newMail.serverId, newMail.size);*/
   
   mailboxView->setCurrentTab(0);
   
@@ -450,7 +457,7 @@ void EmailClient::mailArrived(const Email &mail, bool fromDisk)
 void EmailClient::allMailArrived(int count)
 {
   // not previewing means all mailtransfer has been done
-  if (!previewingMail) {
+  /*if (!previewingMail) {*/
     if ( (allAccounts) && ( (currentAccount = accountList.next()) !=0 ) ) {
       emit newCaption("Mailit - " + currentAccount->accountName);
       getNewMail();
@@ -466,14 +473,14 @@ void EmailClient::allMailArrived(int count)
       progressBar->reset();
       return;
     }
-  }
+  //}
   
   // all headers downloaded from server, start downloading remaining mails
   previewingMail = FALSE;
   status1Label->setText(currentAccount->accountName);
   progressBar->reset();
 
-  emailHandler->getMailByList(&mailDownloadList);
+  //emailHandler->getMailByList(&mailDownloadList);
   
   mailboxView->setCurrentTab(0);
 }
@@ -541,7 +548,7 @@ void EmailClient::popError(int code)
 
 void EmailClient::inboxItemSelected()
 {
-  killTimer(timerID);
+  //killTimer(timerID);
   
   item = (EmailListItem*) inboxView->selectedItem();
   if (item != NULL) {
@@ -551,7 +558,7 @@ void EmailClient::inboxItemSelected()
 
 void EmailClient::outboxItemSelected()
 {
-  killTimer(timerID);
+  //killTimer(timerID);
   
   item = (EmailListItem*) outboxView->selectedItem();
   if (item != NULL) {
@@ -567,9 +574,7 @@ void EmailClient::readMail()
   QString s, del;
 
   QFile f(getPath(FALSE) + "inbox.txt");
-//  QFileInfo fi(f);
-  //qDebug( f.name());
-
+  
   if ( f.open(IO_ReadOnly) ) {    // file opened successfully
     QTextStream t( &f );        // use a text stream
     s = t.read();
@@ -622,12 +627,9 @@ void EmailClient::saveMail(QString fileName, QListView *view)
     return;
   }
   item = (EmailListItem *) view->firstChild();
-  //qDebug (QString("Write : ") );
   QTextStream t(&f);
   while (item != NULL) {
     mail = item->getMail();
-    //qDebug(mail->rawMail);
-    //qDebug(mail->recipients.first());
     t << mail->rawMail;
     
     mailconf->setGroup(mail->id);
@@ -662,110 +664,85 @@ QString EmailClient::getPath(bool enclosurePath)
 
 void EmailClient::readSettings()
 {
-  TextParser *p;
-  QString s;
-  int pos, accountPos, y;
-  QFile f( getPath(FALSE) + "settings.txt");
-  
-  if ( f.open(IO_ReadOnly) ) {    // file opened successfully
-    QTextStream t( &f );        // use a text stream
-    s = t.read();
-    f.close();
+  int y,acc_count, accountPos=0;
     
-    p = new TextParser(s, "\n");
+    mailconf->setGroup("mailitglobal");
+    acc_count=mailconf->readNumEntry("Accounts",0);
     
-    accountPos = 0;
-    while ( (accountPos = p->find("ACCOUNTSTART",';', accountPos, TRUE)) != -1 ) {
-      accountPos++;
-      if ( (pos = p->find("ACCOUNTNAME",':', accountPos, TRUE)) != -1 )
-        account.accountName = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("NAME",':', accountPos, TRUE)) != -1)
-        account.name = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("EMAIL",':', accountPos, TRUE)) != -1)
-        account.emailAddress = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("POPUSER",':', accountPos, TRUE)) != -1)
-        account.popUserName = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("POPPASSWORD",':', accountPos, TRUE)) != -1)
-        account.popPasswd = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("POPSERVER",':', accountPos, TRUE)) != -1)
-        account.popServer = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("SMTPSERVER",':', accountPos, TRUE)) != -1)
-        account.smtpServer = p->getString(& ++pos, 'z', TRUE);
-      if ( (pos = p->find("ACCOUNTID",':', accountPos, TRUE)) != -1) {
-        s = p->getString(& ++pos, 'z', TRUE);
-        account.id = s.toInt();
-      }
-    
+    for (int accountPos = 0;accountPos<acc_count ; accountPos++) 
+    {
+      mailconf->setGroup("Account_"+QString::number(accountPos+1));    //Account numbers start at 1 ...      
+      account.accountName = mailconf->readEntry("AccName","");
+      account.name = mailconf->readEntry("UserName","");
+      account.emailAddress = mailconf->readEntry("Email","");
+      account.popUserName = mailconf->readEntry("POPUser","");
+      account.popPasswd = mailconf->readEntryCrypt("POPPassword","");
+      account.popServer = mailconf->readEntry("POPServer","");
+      account.smtpServer = mailconf->readEntry("SMTPServer","");
+      account.id = mailconf->readNumEntry("AccountId",0);
+      account.syncLimit = mailconf->readNumEntry("HeaderLimit",0);
       account.lastServerMailCount = 0;
       account.synchronize = FALSE;
-      if ( (pos = p->find("SYNCHRONIZE",':', accountPos, TRUE)) != -1) {
-        if (p->getString(& ++pos, 'z', TRUE).upper() == "YES") {
-          account.synchronize = TRUE;
-          if ( (pos = p->find("LASTSERVERMAILCOUNT",':', accountPos, TRUE)) != -1) {
-            s = p->getString(& ++pos, 'z', TRUE);
-            account.lastServerMailCount = s.toInt();
-          }
-        }
+    
+      account.synchronize = (mailconf->readEntry("Synchronize","No")=="Yes");
+      if (account.synchronize)
+      {
+    	mailconf->readNumEntry("LASTSERVERMAILCOUNT",0); 
       }
-      
-      if ( (pos = p->find("SYNCLIMIT",':', accountPos, TRUE)) != -1) {
-      	account.syncLimit = p->getString(& ++pos, 'z', TRUE).toInt();
-      }
-
       
       accountList.append(&account);
     }
-    delete p;
-  }
+  
   mailconf->setGroup("mailitglobal");
-  if ( (y = mailconf->readNumEntry("mailidcount", -1)) != -1) {
+  
+  if ( (y = mailconf->readNumEntry("mailidcount", -1)) != -1) 
+  {
     mailIdCount = y;
   }
-  if ( (y = mailconf->readNumEntry("accountidcount", -1)) != -1) {
+  if ( (y = mailconf->readNumEntry("accountidcount", -1)) != -1) 
+  {
     accountIdCount = y;
   }
 }
 
 void EmailClient::saveSettings()
 {
-
-  QString temp;
-  QFile f( getPath(FALSE) + "settings.txt");
+  int acc_count=0;
   MailAccount *accountPtr;
-  
-  if (! f.open(IO_WriteOnly) ) {
-    qWarning("could not save settings file");
+
+    
+  if (!mailconf) 
+  {
+    qWarning("could not save settings");
     return;
   }
-  QTextStream t(&f);
-  t << "#Settings for OPIE Mailit program\n";
   
   for (accountPtr = accountList.first(); accountPtr != 0;
-      accountPtr = accountList.next()) {
-
-    t << "accountStart;\n";
-    t << "AccountName: " + accountPtr->accountName + "\n";
-    t << "Name: " + accountPtr->name + "\n";
-    t << "Email: " + accountPtr->emailAddress + "\n";
-    t << "POPUser: " + accountPtr->popUserName + "\n";
-    t << "POPPAssword: " + accountPtr->popPasswd + "\n";
-    t << "POPServer: " + accountPtr->popServer + "\n";
-    t << "SMTPServer: " + accountPtr->smtpServer + "\n";
-    t << "AccountId: " << accountPtr->id << "\n";
-    if (accountPtr->synchronize) {
-      t << "Synchronize: Yes\n";
-      t << "LastServerMailCount: ";
-      t << accountPtr->lastServerMailCount << "\n";
-    } else {
-      t << "Synchronize: No\n";
+      accountPtr = accountList.next()) 
+  {
+    mailconf->setGroup("Account_"+QString::number(++acc_count));
+    mailconf->writeEntry("AccName",accountPtr->accountName );
+    mailconf->writeEntry("UserName",accountPtr->name);
+    mailconf->writeEntry("Email",accountPtr->emailAddress);
+    mailconf->writeEntry("POPUser",accountPtr->popUserName);
+    mailconf->writeEntryCrypt("POPPassword",accountPtr->popPasswd);
+    mailconf->writeEntry("POPServer",accountPtr->popServer);
+    mailconf->writeEntry("SMTPServer",accountPtr->smtpServer);
+    mailconf->writeEntry("AccountId",accountPtr->id);
+    if (accountPtr->synchronize) 
+    {
+      mailconf->writeEntry("Synchronize","Yes");
+      mailconf->writeEntry("HeaderLimit",accountPtr->syncLimit);
+      mailconf->writeEntry("LastServerMailCount",accountPtr->lastServerMailCount);
+    } 
+    else 
+    {
+      mailconf->writeEntry("Synchronize", "No");
     }
-    t << "SyncLimit: ";
-    t << accountPtr->syncLimit << "\n";
-    t << "accountEnd;\n";
   }
-  f.close();
   
   mailconf->setGroup("mailitglobal");
+  mailconf->writeEntry("Accounts",acc_count);
   mailconf->writeEntry("mailidcount", mailIdCount);
   mailconf->writeEntry("accountidcount", accountIdCount);
 }

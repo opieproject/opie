@@ -38,11 +38,13 @@ EmailListItem::EmailListItem(QListView *parent, Email mailIn, bool inbox)
 		setText(0, temp);
 	}
 	setText(1, mail.subject);
+	setText(2,mail.date);
 	
 	if (mailIn.files.count()>0)
 	{
 		setPixmap(0, Resource::loadPixmap("mailit/attach"));
 	}
+	
 	selected = FALSE;
 }
 

@@ -104,18 +104,14 @@ void EmailHandler::getMail()
   }
   
   headers = FALSE;
-  popClient->headersOnly(headers, 0);
+  //popClient->headersOnly(headers, 0);
   popClient->newConnection(mailAccount.popServer, 110);
 }
 
 void EmailHandler::getMailHeaders()
 {
   popClient->setAccount(mailAccount.popUserName, mailAccount.popPasswd);
-  if (mailAccount.synchronize) {
-    popClient->setSynchronize(mailAccount.lastServerMailCount);
-  } else {
-    popClient->removeSynchronize();
-  }
+  mailAccount.synchronize ? popClient->setSynchronize(mailAccount.lastServerMailCount): popClient->removeSynchronize();
   
   headers = TRUE;
   popClient->headersOnly(headers, mailAccount.syncLimit);  //less than requested syncLimit, download all
@@ -135,14 +131,14 @@ void EmailHandler::getMailByList(MailList *mailList)
   popClient->setSelectedMails(mailList);
 }
 
-void EmailHandler::messageArrived(const QString &message, int id, uint size, bool complete)
+void EmailHandler::messageArrived(const QString &message, int id, uint size, bool incomplete)
 {
   Email mail;
   
   mail.rawMail = message;
   mail.serverId = id;
   mail.size = size;
-  mail.downloaded = complete;
+  mail.downloaded = incomplete;
   
   emit mailArrived(mail, FALSE);
 }
@@ -185,7 +181,8 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
         mail->from = mail->from.left(mail->from.length() - 1);
         mail->from = mail->from.right(mail->from.length() - 1);
       }
-      pos++;
+      pos++;                 
+
       mail->fromMail = p.getString(&pos, '>', false);
     } else {
       if ((p.separatorAt(pos) == '<')
@@ -199,28 +196,47 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
     }
   }
   
-  //@@@ToDo: Rewrite the parser as To: stops at the first occurence- which is Delivered-To:
-  if ((pos = p.find("TO",':', 0, TRUE)) != -1)
+  pos=0;
+  
+  //Search for To: after the FROM: attribute to prevent hitting the Delivered-To:
+  while((pos = p.find("TO",':', pos+1, TRUE))!=-1)
   {
-    	pos++;
-    	mail->recipients.append (p.getString(&pos, 'z', TRUE) );
+  	QString rec;
+	
+  	if (p.separatorAt(pos-1)!='-')	
+	{
+		pos++;
+		mail->recipients.append(p.getString(&pos, '\r', TRUE));
+      	} 
+	/*else {
+      		if ((p.separatorAt(pos) == '<')|| (p.separatorAt(pos) == ' '))       //No name.. nasty
+          		pos++;
+          		pos++;
+      			mail->fromMail = p.getString(&pos, 'z', TRUE);
+      			if (mail->fromMail.at(mail->fromMail.length()-1) == '>')
+      			mail->fromMail.truncate(mail->fromMail.length() - 1);
+      			mail->from=mail->fromMail;
+    		}
+		mail->recipients.append (p.getString(&pos, 'z', TRUE) );
+	}*/
   }
- 
-  //@@@ToDo: Rewrite the parser as To: stops at the first occurence- which is Delivered-To:
+  //
+  //if (pos==-1) mail->recipients.append (tr("undisclosed recipients") ); 
+  
   if ((pos = p.find("CC",':', 0, TRUE)) != -1)
   {
     	pos++;
     	mail->carbonCopies.append (p.getString(&pos, 'z', TRUE) );
   }
  
-  
   if ((pos = p.find("SUBJECT",':', 0, TRUE)) != -1) {
     pos++;
     mail->subject = p.getString(&pos, 'z', TRUE);
   }
+  
   if ((pos = p.find("DATE",':', 0, TRUE)) != -1) {
     pos++;
-    mail->date = p.getString(&pos, 'z', true);
+    mail->date = p.getString(&pos, 'z', TRUE);
   }
   
   

@@ -56,13 +56,13 @@ FileItem::~FileItem()
 AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	: QDialog(parent, name, f)
 {
-	setCaption("Adding attatchments");
+	setCaption("Adding attachments");
 
 	QGridLayout *top = new QGridLayout(this, 1,1 );
 	
 	QHBox *buttons=new QHBox(this);
 	/*fileCategoryButton = new QPushButton(this);*/
-	attatchButton = new QPushButton(tr("Attatch..."), buttons);
+	attachButton = new QPushButton(tr("attach..."), buttons);
 	removeButton = new QPushButton(tr("Remove"), buttons);
 
 	/*fileCategories = new QPopupMenu(fileCategoryButton);
@@ -78,27 +78,27 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	
 
 	top->addWidget(buttons,1,0);
-	//buttons->addWidget(attatchButton,0,0);
+	//buttons->addWidget(attachButton,0,0);
 	//buttons->addWidget(removeButton,0,1);
 
 	//connect(fileCategories, SIGNAL(activated(int)), this,
     	//	SLOT(fileCategorySelected(int)) );*/
-	connect(attatchButton, SIGNAL(clicked()), this,
-		SLOT(addAttatchment()) );
+	connect(attachButton, SIGNAL(clicked()), this,
+		SLOT(addattachment()) );
 	connect(removeButton, SIGNAL(clicked()), this,
-		SLOT(removeAttatchment()) );
+		SLOT(removeattachment()) );
 	
 	/*listView = new QListView(this, "AttView");
 	listView->addColumn("Documents");*
 	connect(listView, SIGNAL(doubleClicked(QListViewItem *)), this,
-		SLOT(addAttatchment()) );*/
+		SLOT(addattachment()) );*/
 	
 	
 	attView = new QListView(this, "Selected");
 	attView->addColumn(tr("Attached"));
 	attView->addColumn(tr("File type"));
 	connect(attView, SIGNAL(doubleClicked(QListViewItem *)), this,
-		SLOT(removeAttatchment()) );
+		SLOT(removeattachment()) );
 
 	//top->addWidget(ofs, 0,0);
 	top->addWidget(attView, 0,0);
@@ -121,7 +121,7 @@ void AddAtt::clear()
 	getFiles();
 }*/
 
-void AddAtt::addAttatchment()
+void AddAtt::addattachment()
 {	
 	OFileDialog ofs("Attachments",this,0,0,"/root/Documents");
 	
@@ -138,7 +138,7 @@ void AddAtt::addAttatchment()
 	}
 }
 
-void AddAtt::removeAttatchment()
+void AddAtt::removeattachment()
 {
 	if (attView->selectedItem() != NULL) 
 	{
@@ -192,7 +192,7 @@ void AddAtt::getFiles()
 	}*/
 }
 
-QStringList AddAtt::returnAttatchedFiles()
+QStringList AddAtt::returnattachedFiles()
 {
 	QFileInfo info;
 	QStringList list;

@@ -62,27 +62,37 @@ void TextParser::createSeparators()
 /*	Returns pos of given search criteria, -1 if not found */
 int TextParser::find(QString target, QChar sep, int pos, bool upperCase)
 {
+	
+	t_splitElm parsstr;
+	QString pString;
+	
 	int atLine = 0, atPosElm = 0;
 	
-	for (int x = 0; x < totalElmCount; x++) {
-		if (x >= pos) {
-			if (upperCase) {
-				if ((splitDone[atLine].elm[atPosElm].str.upper() == target) &&
-					(splitDone[atLine].elm[atPosElm].separator == sep))
-						return x;
-			} else {
-				if ((splitDone[atLine].elm[atPosElm].str == target) &&
-					(splitDone[atLine].elm[atPosElm].separator == sep))
-						return x;
-			}
-		}
-		atPosElm++;
-		if (atPosElm >= splitDone[atLine].elmCount) {  //new Line
+	getLineReference(pos,&atLine,&atPosElm);
+	
+	for (int x = pos; x < totalElmCount; x++) 
+	{
+		parsstr=splitDone[atLine].elm[atPosElm++];
+	
+		if (upperCase)
+		{
+		 	pString=parsstr.str.upper();
+			target=target.upper();
+		}	
+		else
+		{
+			pString=parsstr.str;
+		}				
+		if ((pString == target) && (parsstr.separator == sep))
+		{
+			return x;
+		}	
+		if (atPosElm >= splitDone[atLine].elmCount) 
+		{  //new Line
 			atLine++;
 			atPosElm = 0;
 		}
 	}
-	
 	return -1;
 }
 

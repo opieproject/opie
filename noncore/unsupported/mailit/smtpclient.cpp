@@ -87,7 +87,6 @@ void SmtpClient::incomingData()
     return;
   
   response = socket->readLine();
-  //qDebug(response);
 
   switch(status) {
     case Init:  {
@@ -95,7 +94,6 @@ void SmtpClient::incomingData()
             status = From;
             mailPtr = mailList.first();
             *stream << "HELO there\r\n";
-            //qDebug("HELO");
           } else errorHandling(ErrUnknownResponse);
           break;
         } 
@@ -103,7 +101,6 @@ void SmtpClient::incomingData()
           if (response[0] == '2') {
             *stream << "MAIL FROM: " << mailPtr->from << "\r\n";
             status = Recv;
-            //qDebug("MAIL FROM: "+mailPtr->from);
           } else errorHandling(ErrUnknownResponse);
           break;
         } 
@@ -113,7 +110,6 @@ void SmtpClient::incomingData()
             if (it == NULL)
               errorHandling(ErrUnknownResponse);
             *stream << "RCPT TO: " << *it << ">\r\n";
-            //qDebug("RCPT TO: "+ *it);
             status = MRcv;
           } else errorHandling(ErrUnknownResponse);
           break;
@@ -123,7 +119,6 @@ void SmtpClient::incomingData()
             it++;
             if ( it != mailPtr->to.end() ) {
               *stream << "RCPT TO: <" << *it << ">\r\n";
-            //qDebug("RCPT TO: "+ *it);
               break;
             } else  {
               status = Data;
@@ -134,7 +129,6 @@ void SmtpClient::incomingData()
           if (response[0] == '2') {
             *stream << "DATA\r\n";
             status = Body;
-            //qDebug("DATA");
             emit updateStatus(tr("Sending: ") + mailPtr->subject);
           } else errorHandling(ErrUnknownResponse);
           break;
@@ -148,7 +142,6 @@ void SmtpClient::incomingData()
             } else {
               status = Quit;
             }
-            //qDebug("BODY");
           } else errorHandling(ErrUnknownResponse);
           break;
         } 
@@ -163,7 +156,6 @@ void SmtpClient::incomingData()
             mailList.clear();
             sending = FALSE;
             socket->close();
-            //qDebug("QUIT");
           } else errorHandling(ErrUnknownResponse);
           break;
         }

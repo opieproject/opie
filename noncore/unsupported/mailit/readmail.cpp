@@ -59,36 +59,46 @@ void ReadMail::init()
 	replyButton = new QAction( tr( "Reply" ), Resource::loadPixmap( "mailit/reply" ),
 		QString::null, 0, this, 0 );
 	connect(replyButton, SIGNAL(activated()), this, SLOT(reply()) );
-	
+  	replyButton->setWhatsThis(tr("Click here to reply to the selected mail"));
+		
 	forwardButton = new QAction( tr( "Forward" ), Resource::loadPixmap( "mailit/forward" ),
 	QString::null, 0, this, 0 );
 	connect(forwardButton, SIGNAL(activated()), this, SLOT(forward()) );
+	forwardButton->setWhatsThis(tr("Click here to forward the selected mail"));
 	
 	previousButton = new QAction( tr( "Previous" ), Resource::loadPixmap( "back" ), QString::null, 0, this, 0 );
 	connect( previousButton, SIGNAL( activated() ), this, SLOT( previous() ) );
 	previousButton->addTo(bar);
 	previousButton->addTo(viewMenu);
+	previousButton->setWhatsThis(tr("Read the previous mail in the list"));
 
 	nextButton = new QAction( tr( "Next" ), Resource::loadPixmap( "forward" ), QString::null, 0, this, 0 );
 	connect( nextButton, SIGNAL( activated() ), this, SLOT( next() ) );
 	nextButton->addTo(bar);
 	nextButton->addTo(viewMenu);
+	previousButton->setWhatsThis(tr("Read the next mail in the list"));
 
-	attatchmentsButton = new QAction( tr( "Attatchments" ), Resource::loadPixmap( "mailit/attach" ), QString::null, 0, this, 0 );
-	connect( attatchmentsButton, SIGNAL( activated() ), this,
-		SLOT( viewAttatchments() ) );
-	attatchmentsButton->addTo(bar);
-	attatchmentsButton->addTo(viewMenu);
+	attachmentButton = new QAction( tr( "Attatchments" ), Resource::loadPixmap( "mailit/attach" ), QString::null, 0, this, 0 );
+	connect( attachmentButton, SIGNAL( activated() ), this,
+		SLOT( viewAttachments() ) );
+	attachmentButton->addTo(bar);
+	attachmentButton->addTo(viewMenu);
+	attachmentButton->setWhatsThis(tr("Click here to add attachments to your mail"));
 	
 	plainTextButton = new QAction( tr( "Text Format" ), Resource::loadPixmap( "DocsIcon" ), QString::null, 0, this, 0, TRUE);
 	connect( plainTextButton, SIGNAL( activated() ), this, SLOT( shiftText() ) );
 	plainTextButton->addTo(bar);
 	plainTextButton->addTo(viewMenu);
+	plainTextButton->setWhatsThis(tr("The mail view has 2 modes:\n"
+	"<LI><B>RichText</B> shows the mail as HTML with reach features (no standard line breaks)</LI>"
+	"<LI><B>Plain</B> shows the mail as standard plain text</LI>"
+	"Click here to switch between those view modes" ));
 
 	deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
 	connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
 	deleteButton->addTo(bar);
 	deleteButton->addTo(mailMenu);
+	deleteButton->setWhatsThis(tr("Click here to remove the selected mail"));
 
 	viewMenu->insertItem(Resource::loadPixmap("close"), "Close", this, SLOT(close()));
 		
@@ -248,8 +258,8 @@ void ReadMail::updateView()
 	}
 	
 	if (mail->files.count() == 0)
-		attatchmentsButton->setEnabled(FALSE);
-	else attatchmentsButton->setEnabled(TRUE);
+		attachmentButton->setEnabled(FALSE);
+	else attachmentButton->setEnabled(TRUE);
 	
 	setCaption("Examining mail: " + mail->subject);
 }
@@ -339,7 +349,7 @@ void ReadMail::shiftText()
 	updateView();
 }
 
-void ReadMail::viewAttatchments()
+void ReadMail::viewAttachments()
 {
 	viewAtt->update(mail, inbox);
 	viewAtt->showMaximized();

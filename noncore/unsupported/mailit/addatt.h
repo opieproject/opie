@@ -49,7 +49,7 @@ class AddAtt : public QDialog
 
 public:
 	AddAtt(QWidget *parent = 0, const char *name = 0, WFlags f = 0);
-	QStringList returnAttatchedFiles();	
+	QStringList returnattachedFiles();	
 	QStringList returnFileTypes();
 	void getFiles();
 	void clear();
@@ -57,15 +57,15 @@ public:
 	
 public slots:
 	//void fileCategorySelected(int);
-	void addAttatchment();
-	void removeAttatchment();
+	void addattachment();
+	void removeattachment();
 	void reject();
 	void accept();
 	
 private:
 	FileItem* item;
 	QListView *attView;
-	QPushButton *attatchButton, *removeButton;
+	QPushButton *attachButton, *removeButton;
 	QPopupMenu *fileCategories;
 	bool modified;
 	//QFileInfo *fi;
