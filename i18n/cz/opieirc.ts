@@ -3,512 +3,514 @@
     <name>IRCChannelTab</name>
     <message>
         <source>Talking on channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Konverzace na kanálu</translation>
     </message>
     <message>
         <source>Channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Diskuse na kanálu</translation>
     </message>
     <message>
         <source>Type your message here to participate in the channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem pište zprávu pro přispění do diskuse na kanálu</translation>
     </message>
     <message>
         <source>CTCP</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP</translation>
     </message>
     <message>
         <source>Query</source>
-        <translation type="unfinished"></translation>
+        <translation>Query</translation>
     </message>
     <message>
         <source>Ping</source>
-        <translation type="unfinished"></translation>
+        <translation>Ping</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Verze</translation>
     </message>
     <message>
         <source>Whois</source>
-        <translation type="unfinished"></translation>
+        <translation>Whois</translation>
     </message>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpojeno</translation>
     </message>
 </context>
 <context>
     <name>IRCConnection</name>
     <message>
         <source>Connected, logging in ..</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojeno, přihlašování ..</translation>
     </message>
     <message>
         <source>Successfully logged in.</source>
-        <translation type="unfinished"></translation>
+        <translation>Přihlášení úspěšné.</translation>
     </message>
     <message>
         <source>Socket error : </source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba soketu :</translation>
     </message>
     <message>
         <source>Connection closed</source>
-        <translation type="unfinished"></translation>
+        <translation>Spojení ukončeno</translation>
     </message>
 </context>
 <context>
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijatý neošetřený numerický příkaz: %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijatý neošetřený ctcp příkaz: %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijatý neošetřený znakový příkaz: %1</translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Neexistující spojení kanálů - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 se připojil do kanálu %2</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Osoba je již na kanále připojena - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Už jste přihlášen na kanále -  rozsynchronizováno?</translation>
     </message>
     <message>
         <source>You left channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Opustil jste kanál %1</translation>
     </message>
     <message>
         <source>%1 left channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 opustil kanál %2</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Protější osoba zmizela - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanál pro diskuzi nebyl nalezen - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanálová zpráva s neznámým odesílatelem</translation>
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanálová zpráva s neznámým kanálem %1</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Přijata PRIVMSG neznámého typu</translation>
     </message>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Přejmenoval jste se na %1</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 se přejmenoval na %2</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna přezdívky neznámé osoby</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 odešel (%2)</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámý odchod osoby - rozsynchronizováno?</translation>
     </message>
     <message>
         <source> changed topic to </source>
-        <translation type="unfinished"></translation>
+        <translation>Změněno téma na</translation>
     </message>
     <message>
         <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámé téma kanálu - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>Received a CTCP PING from </source>
-        <translation type="unfinished"></translation>
+        <translation>Přijatý CTCP PING od</translation>
     </message>
     <message>
         <source>Received a CTCP VERSION from </source>
-        <translation type="unfinished"></translation>
+        <translation>Přijato CTCP VERSION od</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION s neznámou osobou - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION s neznámým kanálem - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION se špatným příjemcem</translation>
     </message>
     <message>
         <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna režimu je neznámého typu</translation>
     </message>
     <message>
         <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna režimu s neznámou osobou - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna režimu s neznámým příznakem</translation>
     </message>
     <message>
         <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Změna režimu s neznámým kanálem - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Uživatelské režimy ještě nejsou podporovány</translation>
     </message>
     <message>
         <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>Byl jste vykopnut z</translation>
     </message>
     <message>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation>od</translation>
     </message>
     <message>
         <source> was kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>vykopnut z</translation>
     </message>
     <message>
         <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Vykopnutí neznámé osoby - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Neznámé kanálové vykopnutí - rozsynchronizováno?</translation>
     </message>
     <message>
         <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverová zpráva s neznámým kanálem</translation>
     </message>
     <message>
         <source>You joined channel </source>
-        <translation type="unfinished"></translation>
+        <translation>Připojil jste se ke kanálu</translation>
     </message>
     <message>
         <source>Nickname is in use, please reconnect with a different nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka se již používá, prosím připojte se znovu s jinou</translation>
     </message>
     <message>
         <source>No such nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka nezadána</translation>
     </message>
 </context>
 <context>
     <name>IRCQueryTab</name>
     <message>
         <source>Talking to </source>
-        <translation type="unfinished"></translation>
+        <translation>Rozhovor s</translation>
     </message>
     <message>
         <source>Private discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Privátní diskuse</translation>
     </message>
     <message>
         <source>Type your text here in order to send a message to the other person</source>
-        <translation type="unfinished"></translation>
+        <translation>Sem pište text, který chcete odeslat druhé osobě</translation>
     </message>
     <message>
         <source>Disconnected</source>
-        <translation type="unfinished"></translation>
+        <translation>Odpojeno</translation>
     </message>
 </context>
 <context>
     <name>IRCServerEditor</name>
     <message>
         <source>Profile name :</source>
-        <translation type="unfinished"></translation>
+        <translation>Název profilu :</translation>
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Název tohoto profilu serveru ve zkratce</translation>
     </message>
     <message>
         <source>Hostname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Hostitel :</translation>
     </message>
     <message>
         <source>The server to connect to - can be any valid host name or IP address</source>
-        <translation type="unfinished"></translation>
+        <translation>Server pro připojení - může to být platné jméno, nebo IP adresa</translation>
     </message>
     <message>
         <source>Port :</source>
-        <translation type="unfinished"></translation>
+        <translation>Port :</translation>
     </message>
     <message>
         <source>The server port to connect to. Usually 6667</source>
-        <translation type="unfinished"></translation>
+        <translation>Port serveru pro připojení. Obvykle 6667</translation>
     </message>
     <message>
         <source>Nickname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka :</translation>
     </message>
     <message>
         <source>Your nick name on the IRC network</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše přezdívka na IRC síti</translation>
     </message>
     <message>
         <source>Realname :</source>
-        <translation type="unfinished"></translation>
+        <translation>Skutečné jméno: </translation>
     </message>
     <message>
         <source>Your real name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vaše skutečné jméno</translation>
     </message>
     <message>
         <source>Password :</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo :</translation>
     </message>
     <message>
         <source>Password to connect to the server (if required)</source>
-        <translation type="unfinished"></translation>
+        <translation>Heslo pro připojení k serveru (pokud je vyžadováno)</translation>
     </message>
     <message>
         <source>Channels :</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanály :</translation>
     </message>
     <message>
         <source>Comma-Separated list of all channels you would like to join automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam kanálů, které chcete automaticky připojit, oddělených čárkami</translation>
     </message>
     <message>
         <source>Edit server information</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit informace o serveru</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Chyba</translation>
     </message>
     <message>
         <source>Profile name required</source>
-        <translation type="unfinished"></translation>
+        <translation>Název profilu je vyžadován</translation>
     </message>
     <message>
         <source>Host name required</source>
-        <translation type="unfinished"></translation>
+        <translation>Název hostitele je vyžadován</translation>
     </message>
     <message>
         <source>Port required</source>
-        <translation type="unfinished"></translation>
+        <translation>Port je vyžadován</translation>
     </message>
     <message>
         <source>Nickname required</source>
-        <translation type="unfinished"></translation>
+        <translation>Přezdívka se vyžaduje</translation>
     </message>
     <message>
         <source>Realname required</source>
-        <translation type="unfinished"></translation>
+        <translation>Skutečné jméno se vyžaduje</translation>
     </message>
     <message>
         <source>The channel list needs to contain a
 comma separated list of channel
  names which start with either &apos;#&apos; or &apos;+&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Seznam kanálů musí obsahovat
+jejich názvy oddělené čárkami
+a nezačínající na &apos;#&apos; nebo &apos;+&apos;</translation>
     </message>
 </context>
 <context>
     <name>IRCServerList</name>
     <message>
         <source>Serverlist Browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Prohlížeč seznamu serverů</translation>
     </message>
     <message>
         <source>Please choose a server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím vyberte profil serveru</translation>
     </message>
     <message>
         <source>Select a server profile from this list and then tap on OK in the upper-right corner</source>
-        <translation type="unfinished"></translation>
+        <translation>Vyberte profil serveru a potom klikněte na OK v pravém horním rohu</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat</translation>
     </message>
     <message>
         <source>Delete the currently selected server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat označený profil serveru</translation>
     </message>
     <message>
         <source>Edit the currently selected server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit označený profil serveru</translation>
     </message>
     <message>
         <source>Add a new server profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Přidat nový profil serveru</translation>
     </message>
 </context>
 <context>
     <name>IRCServerTab</name>
     <message>
         <source>Connection to</source>
-        <translation type="unfinished"></translation>
+        <translation>Připojení k</translation>
     </message>
     <message>
         <source>Server messages</source>
-        <translation type="unfinished"></translation>
+        <translation>Zprávy serveru</translation>
     </message>
     <message>
         <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished"></translation>
+        <translation>Zde pište příkazy. Seznam příkazů je v nápovědě k OpieIRC</translation>
     </message>
 </context>
 <context>
     <name>IRCSettings</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Lines displayed :</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazeno řádek :</translation>
     </message>
     <message>
         <source>Amount of lines to be displayed in chats before old lines get deleted - this is necessary to restrain memory consumption. Set to 0 if you don&apos;t need this</source>
-        <translation type="unfinished"></translation>
+        <translation>Počet řádek, které se mají zobrazit, než se staré řádky smažou - toto je nutné pro omezení spotřeby paměti. Nastavte na 0, pokud to nepotřebujete</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>Hlavní</translation>
     </message>
     <message>
         <source>Background color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva pozadí :</translation>
     </message>
     <message>
         <source>Background color to be used in chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva pozadí použitá při diskuzích</translation>
     </message>
     <message>
         <source>Normal text color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva normálního textu :</translation>
     </message>
     <message>
         <source>Text color to be used in chats</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu použitá při diskuzích</translation>
     </message>
     <message>
         <source>Error color :</source>
-        <translation type="unfinished"></translation>
+        <translation>Chybová barva :</translation>
     </message>
     <message>
         <source>Text color to be used to display errors</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu použitá při zobrazování chyb</translation>
     </message>
     <message>
         <source>Text written by yourself :</source>
-        <translation type="unfinished"></translation>
+        <translation>Text napsaný vámi :</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by yourself</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu, která se používá pro identifikaci vašeho textu</translation>
     </message>
     <message>
         <source>Text written by others :</source>
-        <translation type="unfinished"></translation>
+        <translation>Text napsaný ostatními :</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by others</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu použitá pro identifikaci textu napsaného ostatními</translation>
     </message>
     <message>
         <source>Text written by the server :</source>
-        <translation type="unfinished"></translation>
+        <translation>Text napsaný serverem :</translation>
     </message>
     <message>
         <source>Text color to be used to identify text written by the server</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu použitá pro identifikaci textu napsaného serverem</translation>
     </message>
     <message>
         <source>Notifications :</source>
-        <translation type="unfinished"></translation>
+        <translation>Sdělení :</translation>
     </message>
     <message>
         <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Barva textu použitá při zobrazování sdělení</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Barvy</translation>
     </message>
 </context>
 <context>
     <name>IRCTab</name>
     <message>
         <source>Missing description</source>
-        <translation type="unfinished"></translation>
+        <translation>Bez popisu</translation>
     </message>
     <message>
         <source>Description of the tab&apos;s content</source>
-        <translation type="unfinished"></translation>
+        <translation>Popis obsahu záložky</translation>
     </message>
     <message>
         <source>Close this tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Zavřít tuto záložku</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>IRC Client</source>
-        <translation type="unfinished"></translation>
+        <translation>IRC klient</translation>
     </message>
     <message>
         <source>Server connections, channels, queries and other things will be placed here</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverová připojení, kanály, dotazy a další věci budou umístěny zde</translation>
     </message>
     <message>
         <source>IRC</source>
-        <translation type="unfinished"></translation>
+        <translation>IRC</translation>
     </message>
     <message>
         <source>New connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nové připojení</translation>
     </message>
     <message>
         <source>Create a new connection to an IRC server</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytvořit nové připojení k IRC serveru</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení</translation>
     </message>
     <message>
         <source>Configure OpieIRC&apos;s behavior and appearance</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurujte vzhled a chování OpieIRC</translation>
     </message>
 </context>
 </TS>
