@@ -173,7 +173,7 @@ void FolderWidget::slotMenuActivated(int itemid)
 		Folder folder = (((FolderWidgetItem *)currentItem())->folder());
 		_rescanAccount = folder.topFolder().account();
 
-		folder.topFolder().handler()->iList(".", "*");
+		folder.topFolder().handler()->iList("", "*");
 		connect(folder.topFolder().handler(), SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPList(IMAPResponse &)));
 	}
 }
