@@ -1,6 +1,5 @@
   config LIBTREMORPLUGIN
-    boolean "libtremorplugin"
+    boolean "opieplayer1-libtremorplugin (play OGG vorbis files)"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && OPIEPLAYER
-    comment "tremor is ogg vorbis!!"
     
