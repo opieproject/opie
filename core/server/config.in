@@ -1,0 +1,16 @@
+  config SERVER
+    boolean "Server"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+
+if SERVER
+  config PRELOAD
+    boolean
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && SERVER
+
+  config SERVER
+    boolean
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && SERVER && PRELOAD
+endif
