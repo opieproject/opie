@@ -4,7 +4,7 @@ Priority: required
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Depends: libqte2 (>=$QTE_VERSION), qte-fonts (>=$QTE_VERSION), opie-common, libqpe1, libopie1, opie-qcop, opie-sounds, apmd, opie-pics, timezones, opie-aqpkg, opie-taskbar, opie-opiealarm, opie-login 
+Depends: libqte2 (>=$QTE_VERSION), qte-fonts (>=$QTE_VERSION), opie-common, libqpe1, libopie1, opie-qcop, opie-sounds, apmd, opie-pics, timezones, opie-aqpkg, opie-quicklauncher, opie-taskbar, opie-opiealarm, opie-login 
 Provides: opie-base, qpe-base
 Replaces: opie-base, qpe-base
 Description: Bootstrap Opie environment(minimal)
