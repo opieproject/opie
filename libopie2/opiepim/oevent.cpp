@@ -213,23 +213,23 @@ QString OEvent::timeZone()const {
 }
 bool OEvent::match( const QRegExp& re )const {
     if ( re.match( data->description ) != -1 ){
-        setLastHitField( DatebookDescription );
+        setLastHitField( Qtopia::DatebookDescription );
         return true;
     }
     if ( re.match( data->note ) != -1 ){
-        setLastHitField( Note );
+        setLastHitField( Qtopia::Note );
         return true;
     }
     if ( re.match( data->location ) != -1 ){
-        setLastHitField( Location );
+        setLastHitField( Qtopia::Location );
         return true;
     }
     if ( re.match( data->start.toString() ) != -1 ){
-        setLastHitField( StartDateTime );
+        setLastHitField( Qtopia::StartDateTime );
         return true;
     }
     if ( re.match( data->end.toString() ) != -1 ){
-        setLastHitField( EndDateTime );
+        setLastHitField( Qtopia::EndDateTime );
         return true;
     }
     return false;
