@@ -13,6 +13,8 @@
 
 #include "drawpad.h"
 
+#include "colordialog.h"
+#include "colorpanel.h"
 #include "drawpadcanvas.h"
 #include "ellipsedrawmode.h"
 #include "erasedrawmode.h"
@@ -52,16 +54,6 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     }
 
     setCentralWidget(m_pDrawPadCanvas);
-
-    m_colors.resize(8);
-    m_colors.at(0) = Qt::black;
-    m_colors.at(1) = Qt::white;
-    m_colors.at(2) = Qt::red;
-    m_colors.at(3) = Qt::green;
-    m_colors.at(4) = Qt::blue;
-    m_colors.at(5) = Qt::cyan;
-    m_colors.at(6) = Qt::magenta;
-    m_colors.at(7) = Qt::yellow;
 
     // init menu
 
@@ -188,14 +180,16 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor.png"));
 
     QPopupMenu* penColorPopupMenu = new QPopupMenu(m_pPenColorToolButton);
-    connect(penColorPopupMenu, SIGNAL(activated(int)), this, SLOT(changePenColor(int)));
 
-    QPixmap penColorPixmap(14, 14);
+    ColorPanel* penColorPanel = new ColorPanel(penColorPopupMenu);
+    connect(penColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
+    penColorPopupMenu->insertItem(penColorPanel);
 
-    for (uint i = 0; i < m_colors.size(); i++) {
-        penColorPixmap.fill(m_colors.at(i));
-        penColorPopupMenu->insertItem(penColorPixmap, i);
-    }
+    penColorPopupMenu->insertSeparator();
+
+    QAction* choosePenColorAction = new QAction(tr("More"), tr("More..."), 0, this);
+    connect(choosePenColorAction, SIGNAL(activated()), this, SLOT(choosePenColor()));
+    choosePenColorAction->addTo(penColorPopupMenu);
 
     QToolTip::add(m_pPenColorToolButton, tr("Pen Color"));
     m_pPenColorToolButton->setPopup(penColorPopupMenu);
@@ -207,14 +201,16 @@ DrawPad::DrawPad(QWidget* parent, const char* name, WFlags f)
     m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor.png"));
 
     QPopupMenu* brushColorPopupMenu = new QPopupMenu(m_pBrushColorToolButton);
-    connect(brushColorPopupMenu, SIGNAL(activated(int)), this, SLOT(changeBrushColor(int)));
 
-    QPixmap brushColorPixmap(14, 14);
+    ColorPanel* brushColorPanel = new ColorPanel(brushColorPopupMenu);
+    connect(brushColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
+    brushColorPopupMenu->insertItem(brushColorPanel);
 
-    for (uint i = 0; i < m_colors.size(); i++) {
-        brushColorPixmap.fill(m_colors.at(i));
-        brushColorPopupMenu->insertItem(brushColorPixmap, i);
-    }
+    brushColorPopupMenu->insertSeparator();
+
+    QAction* chooseBrushColorAction = new QAction(tr("More"), tr("More..."), 0, this);
+    connect(chooseBrushColorAction, SIGNAL(activated()), this, SLOT(chooseBrushColor()));
+    chooseBrushColorAction->addTo(brushColorPopupMenu);
 
     QToolTip::add(m_pBrushColorToolButton, tr("Fill Color"));
     m_pBrushColorToolButton->setPopup(brushColorPopupMenu);
@@ -334,24 +330,40 @@ void DrawPad::changePenWidth(int value)
     m_pen.setWidth(value);
 }
 
-void DrawPad::changePenColor(int index)
+void DrawPad::changePenColor(const QColor& color)
 {
-    m_pen.setColor(m_colors.at(index));
+    m_pen.setColor(color);
 
     QPainter painter;
     painter.begin(m_pPenColorToolButton->pixmap());
     painter.fillRect(QRect(0, 12, 14, 2), m_pen.color());
     painter.end();
+
+    m_pPenColorToolButton->popup()->hide();
 }
 
-void DrawPad::changeBrushColor(int index)
+void DrawPad::changeBrushColor(const QColor& color)
 {
-    m_brush = QBrush(m_colors.at(index));
+    m_brush = QBrush(color);
 
     QPainter painter;
     painter.begin(m_pBrushColorToolButton->pixmap());
     painter.fillRect(QRect(0, 12, 14, 2), m_brush.color());
     painter.end();
+ 
+    m_pBrushColorToolButton->popup()->hide();
+}
+
+void DrawPad::choosePenColor()
+{
+    QColor newPenColor = QColorDialog::getColor(m_pen.color());
+    changePenColor(newPenColor);
+}
+
+void DrawPad::chooseBrushColor()
+{
+    QColor newBrushColor = QColorDialog::getColor(m_brush.color());
+    changeBrushColor(newBrushColor);
 }
 
 void DrawPad::updateUndoRedoToolButtons()

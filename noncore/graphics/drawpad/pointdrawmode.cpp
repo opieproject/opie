@@ -38,7 +38,7 @@ void PointDrawMode::mousePressEvent(QMouseEvent* e)
 
 void PointDrawMode::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 
     m_mousePressed = false;
 }

@@ -38,7 +38,7 @@ void RectangleDrawMode::mousePressEvent(QMouseEvent* e)
 
 void RectangleDrawMode::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 
     QPainter painter;
     painter.begin(m_pDrawPadCanvas->currentPage());

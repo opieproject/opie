@@ -51,12 +51,12 @@ void FillDrawMode::mousePressEvent(QMouseEvent* e)
 
 void FillDrawMode::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 }
 
 void FillDrawMode::mouseMoveEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 }
 
 void FillDrawMode::fillEast(int x, int y)

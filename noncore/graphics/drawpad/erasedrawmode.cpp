@@ -38,7 +38,7 @@ void EraseDrawMode::mousePressEvent(QMouseEvent* e)
 
 void EraseDrawMode::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 
     m_mousePressed = false;
 }

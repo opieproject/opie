@@ -47,15 +47,16 @@ private slots:
     void setEraseDrawMode();
 
     void changePenWidth(int value);
-    void changePenColor(int index);
-    void changeBrushColor(int index);
+    void changePenColor(const QColor& color);
+    void changeBrushColor(const QColor& color);
+    void choosePenColor();
+    void chooseBrushColor();
 
     void updateUndoRedoToolButtons();
     void updateNavigationToolButtons();
 
 private:
     DrawPadCanvas* m_pDrawPadCanvas;
-    QArray<QColor> m_colors;
 
     DrawMode* m_pDrawMode;
     QPen m_pen;

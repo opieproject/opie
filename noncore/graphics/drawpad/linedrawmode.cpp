@@ -38,7 +38,7 @@ void LineDrawMode::mousePressEvent(QMouseEvent* e)
 
 void LineDrawMode::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 
     QPainter painter;
     painter.begin(m_pDrawPadCanvas->currentPage());

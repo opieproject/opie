@@ -38,7 +38,7 @@ void EllipseDrawMode::mousePressEvent(QMouseEvent* e)
 
 void EllipseDrawMode::mouseReleaseEvent(QMouseEvent* e)
 {
-    Q_UNUSED(e);
+    Q_UNUSED(e)
 
     QPainter painter;
     painter.begin(m_pDrawPadCanvas->currentPage());

@@ -11,29 +11,55 @@
  *                                                                         *
  ***************************************************************************/
 
-#ifndef DRAWMODE_H
-#define DRAWMODE_H
+#ifndef COLORPANEL_H
+#define COLORPANEL_H
 
-#include <qobject.h>
+#include <qframe.h>
+#include <qwidget.h>
 
-class DrawPad;
-class DrawPadCanvas;
+class QGridLayout;
 
-class DrawMode : public QObject
-{ 
-protected:
-    DrawMode(DrawPad* drawPad, DrawPadCanvas* drawPadCanvas);
+class ColorPanelButton : public QFrame
+{
+    Q_OBJECT
 
 public:
-    virtual ~DrawMode();
+    ColorPanelButton(const QColor& color, QWidget* parent = 0, const char* name = 0);
+    ~ColorPanelButton();
 
-    virtual void mousePressEvent(QMouseEvent* e) = 0;
-    virtual void mouseReleaseEvent(QMouseEvent* e) = 0;
-    virtual void mouseMoveEvent(QMouseEvent* e) = 0;
+    void setActive(bool active);
 
-protected:
-    DrawPad* m_pDrawPad;
-    DrawPadCanvas* m_pDrawPadCanvas;
+    void enterEvent(QEvent* e);
+    void leaveEvent(QEvent* e);
+    void paintEvent(QPaintEvent* e);
+    void mouseReleaseEvent(QMouseEvent* e);
+
+signals:
+    void selected(const QColor&);
+
+private:
+    QColor m_color;
+    bool m_active;
 };
 
-#endif // DRAWMODE_H
+class ColorPanel : public QWidget
+{ 
+    Q_OBJECT
+
+public:
+    ColorPanel(QWidget* parent = 0, const char* name = 0);
+    ~ColorPanel();
+
+    void addColor(const QColor& color, int row, int col);
+
+public slots:
+    void buttonSelected(const QColor& color);
+
+signals:
+    void colorSelected(const QColor&);
+
+private:
+    QGridLayout* m_pGridLayout;
+};
+
+#endif // COLORPANEL_H
