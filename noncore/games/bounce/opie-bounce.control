@@ -9,7 +9,7 @@ Files: bin/bounce apps/Games/bounce.desktop pics/bounce/bounce.png \
  pics/bounce/ball0005.png pics/bounce/ball0015.png pics/bounce/tiles.png \
  pics/bounce/ball0006.png pics/bounce/ball0016.png \
  pics/bounce/ball0007.png pics/bounce/ball0017.png
-Version: 0.6 
+Version: 0.6-$SUB_VERSION 
 Depends: opie-base ($QPE_VERSION)
 Priority: optional
 Section: opie/games
