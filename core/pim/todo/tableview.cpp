@@ -170,13 +170,13 @@ void TableView::updateView( ) {
     if ( it.count() == 0 )
         killTimer(id);
 
-    int elc = time.elapsed();
+//    int elc = time.elapsed();
     setUpdatesEnabled( true );
     viewport()->setUpdatesEnabled( true );
     viewport()->update();
 
     m_enablePaint = true;
-    int el = time.elapsed();
+//    int el = time.elapsed();
 }
 void TableView::setTodo( int, const OTodo&) {
     sort();

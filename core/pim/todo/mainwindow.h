@@ -196,7 +196,6 @@ private slots:
         void show( int uid );
         void edit( int uid );
         void add( const OPimRecord& );
-        OPimRecord* record( int rtti, const QByteArray& );
     };
 };
 

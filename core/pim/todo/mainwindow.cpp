@@ -61,7 +61,7 @@ using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
                         const char* name )
-    : OPimMainWindow("Todolist")
+    : OPimMainWindow("Todolist", parent, name)
 {
 
     m_syncing = false;
@@ -252,7 +252,7 @@ void MainWindow::initShow() {
 MainWindow::~MainWindow() {
     delete templateManager();
 }
-void MainWindow::connectBase( ViewBase* base) {
+void MainWindow::connectBase( ViewBase* ) {
     // once templates and signals mix we'll use it again
 }
 QPopupMenu* MainWindow::contextMenu( int , bool recur ) {
@@ -796,10 +796,4 @@ void MainWindow::add( const OPimRecord& rec) {
     // spend expensive time comparing all these strings...
     // but only call if we changed something -zecke
     populateCategories();
-}
-/* todo does not have the QDataStream<< and >> operators implemented :(
- * FIXME
- */
-OPimRecord* MainWindow::record( int rtti, const QByteArray& ) {
-    return 0l;
 }

@@ -37,7 +37,7 @@ OTodo Editor::newTodo( int cur,
 
     return ev;
 }
-OTodo Editor::edit( QWidget *wid,
+OTodo Editor::edit( QWidget *,
                         const OTodo& todo ) {
     OTaskEditor *e = self();
     e->init( todo );
