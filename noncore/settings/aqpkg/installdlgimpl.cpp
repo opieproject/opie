@@ -145,8 +145,19 @@ void InstallDlgImpl :: optionsSelected()
 
 void InstallDlgImpl :: installSelected()
 {
-    
-    if ( btnInstall->text() == "Close" )
+    if ( btnInstall->text() == "Abort" )
+    {
+        if ( pIpkg )
+        {
+            displayText( "\n**** User Clicked ABORT ***" );
+            pIpkg->abort();
+            displayText( "**** Process Aborted ****" );
+        }
+        
+        btnInstall->setText( tr( "Close" ) );
+        return;
+    }
+    else if ( btnInstall->text() == "Close" )
     {
         done( 1 );
         return;
@@ -154,7 +165,9 @@ void InstallDlgImpl :: installSelected()
 
     // Disable buttons
     btnOptions->setEnabled( false );
-    btnInstall->setEnabled( false );
+//    btnInstall->setEnabled( false );
+
+    btnInstall->setText( "Abort" );
 
     if ( pIpkg )
     {
@@ -232,9 +245,10 @@ void InstallDlgImpl :: installSelected()
     }
 
     btnOptions->setEnabled( true );
-    btnInstall->setEnabled( true );
+//    btnInstall->setEnabled( true );
     btnInstall->setText( tr( "Close" ) );
 }
+
 
 void InstallDlgImpl :: displayText(const QString &text )
 {
