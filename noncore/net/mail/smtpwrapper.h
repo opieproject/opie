@@ -28,7 +28,7 @@ public:
     SMTPwrapper( Settings *s ); 
     virtual ~SMTPwrapper(){}
     void sendMail(const Mail& mail,bool later=false );
-    void flushOutbox(SMTPaccount*smtp);
+    bool flushOutbox(SMTPaccount*smtp);
 
     static progressMailSend*sendProgress;
 protected:

@@ -68,8 +68,9 @@ void OpieMail::slotSendQueued()
 //    }
     if (smtp) {
         SMTPwrapper * wrap = new SMTPwrapper(settings);
-        wrap->flushOutbox(smtp);
-        QMessageBox::information(0,tr("Info"),tr("Mail queue flushed"));
+        if ( wrap->flushOutbox(smtp) ) {
+            QMessageBox::information(0,tr("Info"),tr("Mail queue flushed"));
+        }
     }
 }
 

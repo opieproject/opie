@@ -218,7 +218,7 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
     int err;
 
     int pos = filename.findRev( '/' );
-    
+
     if (filename.length()>0) {
         QString tmp = filename.right( filename.length() - ( pos + 1 ) );
         name = strdup( tmp.latin1() );        // just filename
@@ -228,10 +228,10 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
 
     int disptype = MAILMIME_DISPOSITION_TYPE_ATTACHMENT;
     int mechanism = MAILMIME_MECHANISM_BASE64;
-    
+
     if ( mimetype.startsWith( "text/" ) ) {
         param = mailmime_parameter_new( strdup( "charset" ),
-                                        strdup( "iso-8859-1" ) );                                   
+                                        strdup( "iso-8859-1" ) );
         disptype = MAILMIME_DISPOSITION_TYPE_INLINE;
         mechanism = MAILMIME_MECHANISM_QUOTED_PRINTABLE;
     }
@@ -250,7 +250,7 @@ mailmime *SMTPwrapper::buildFilePart(const QString&filename,const QString&mimety
             param = mailmime_parameter_new(strdup("name"),strdup(f.fileName().latin1()));
             clist_append(content->ct_parameters,param);
             param = 0;
-        }            
+        }
         filePart = mailmime_new_empty( content, fields );
     }
     if (filePart) {
@@ -548,13 +548,13 @@ void SMTPwrapper::smtpSend( mailmime *mail,bool later, SMTPaccount *smtp )
         return;
     }
     from = data = 0;
-    
+
     QString file = getTmpFile();
     writeToFile( file, mail );
     readFromFile( file, &data, &size );
     QFile f( file );
     f.remove();
-    
+
     if (later) {
         storeMail(data,size,"Outgoing");
         if (data) free( data );
@@ -572,13 +572,13 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,char*data,size_t size, SMTPaccou
     uint16_t port;
     mailsmtp *session;
     int err,result;
-    
+
     result = 1;
     server = user = pass = 0;
     server = strdup( smtp->getServer().latin1() );
     ssl = smtp->getSSL();
     port = smtp->getPort().toUInt();
-    
+
     session = mailsmtp_new( 20, &progress );
     if ( session == NULL ) goto free_mem;
 
@@ -644,15 +644,15 @@ free_mem:
 void SMTPwrapper::sendMail(const Mail&mail,bool later )
 {
     mailmime * mimeMail;
-    
+
     SMTPaccount *smtp = getAccount(mail.getName());
-    
+
     mimeMail = createMimeMail(mail );
     if ( mimeMail == NULL ) {
         qDebug( "sendMail: error creating mime mail" );
     } else {
         sendProgress = new progressMailSend();
-//        sendProgress->showMaximized(); 
+//        sendProgress->showMaximized();
         sendProgress->show();
         sendProgress->setMaxMails(1);
         smtpSend( mimeMail,later,smtp);
@@ -676,17 +676,17 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
 
     wrap->fetchRawBody(*which,&data,&length);
     if (!data) return 0;
-    int err = mailimf_fields_parse( data, length, &curTok, &fields );    
+    int err = mailimf_fields_parse( data, length, &curTok, &fields );
     if (err != MAILIMF_NO_ERROR) {
         free(data);
         delete wrap;
         return 0;
     }
-    
+
     rcpts = createRcptList( fields );
     ffrom = getField(fields, MAILIMF_FIELD_FROM );
     from = getFrom(ffrom);
-    
+
     qDebug("Size: %i vs. %i",length,strlen(data));
     if (rcpts && from) {
         return smtpSend(from,rcpts,data,strlen(data),smtp );
@@ -695,14 +695,17 @@ int SMTPwrapper::sendQueuedMail(MBOXwrapper*wrap,SMTPaccount*smtp,RecMail*which)
 }
 
 /* this is a special fun */
-void SMTPwrapper::flushOutbox(SMTPaccount*smtp)
+bool SMTPwrapper::flushOutbox(SMTPaccount*smtp)
 {
-    if (!smtp) return;
-    QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
+    bool returnValue = true;
+
+    if (!smtp) return false;
+
+   QString localfolders = (QString) getenv( "HOME" ) + QString("/Applications/opiemail/localmail/");
     MBOXwrapper*wrap = new MBOXwrapper(localfolders);
     if (!wrap) {
         qDebug("memory error");
-        return;
+        return false;
     }
     QList<RecMail> mailsToSend;
     QList<RecMail> mailsToRemove;
@@ -710,11 +713,11 @@ void SMTPwrapper::flushOutbox(SMTPaccount*smtp)
     wrap->listMessages(mbox,mailsToSend);
     if (mailsToSend.count()==0) {
         delete wrap;
-        return;
+        return false;
     }
     mailsToSend.setAutoDelete(false);
     sendProgress = new progressMailSend();
-//        sendProgress->showMaximized(); 
+//        sendProgress->showMaximized();
    sendProgress->show();
    sendProgress->setMaxMails(mailsToSend.count());
 
@@ -722,6 +725,8 @@ void SMTPwrapper::flushOutbox(SMTPaccount*smtp)
         if (sendQueuedMail(wrap,smtp,mailsToSend.at(0))==0) {
             QMessageBox::critical(0,tr("Error sending mail"),
                 tr("Error sending queued mail - breaking"));
+
+            returnValue = false;
             break;
         }
         mailsToRemove.append(mailsToSend.at(0));
@@ -734,4 +739,6 @@ void SMTPwrapper::flushOutbox(SMTPaccount*smtp)
     wrap->deleteMails(mbox,mailsToRemove);
     mailsToSend.setAutoDelete(true);
     delete wrap;
+    return returnValue;
+
 }
