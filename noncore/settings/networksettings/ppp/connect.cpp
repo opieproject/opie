@@ -113,7 +113,10 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
 //   int messw = (messg->sizeHint().width() * 12) / 10;
 //   messw = QMAX(messw,280);
 //   messg->setMinimumWidth(messw);
-  messg->setText(i18n("Offline"));
+  if (_ifaceppp->getStatus())
+	  messg->setText(i18n("Online"));
+  else
+	  messg->setText(i18n("Offline"));
   l0->addSpacing(10);
   l0->addWidget(messg);
   l0->addSpacing(10);
@@ -1131,6 +1134,9 @@ void ConnectWidget::if_waiting_slot() {
 //  p_kppp->con_win->setConnectionSpeed(p_kppp->con_speed);
   this->hide();
   messg->setText("");
+
+  _ifaceppp->setStatus( true );
+  //  emit _ifaceppp->updateInterface(_ifaceppp);
 
   // prepare the con_win so as to have the right size for
   // accounting / non-accounting mode
