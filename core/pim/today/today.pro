@@ -23,4 +23,5 @@ TRANSLATIONS = ../../../i18n/de/today.ts \
 	 ../../../i18n/pt_BR/today.ts \
 	 ../../../i18n/sl/today.ts \
 	 ../../../i18n/zh_CN/today.ts \
-	 ../../../i18n/zh_TW/today.ts
+	 ../../../i18n/zh_TW/today.ts \
+   	 ../../../i18n/it/today.ts
