@@ -7,7 +7,7 @@ SOURCES		= main.cpp
 INTERFACES	= 
 
 INCLUDEPATH	+= $(OPIEDIR)/include
-LIBS       	+= -lqpe -lopie
+LIBS       	+= -lqpe -lopiecore2 -lopieui2
 
 TARGET		= quicklauncher
 

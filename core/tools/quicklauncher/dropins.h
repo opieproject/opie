@@ -5,12 +5,12 @@
 #include <qtopia/applicationinterface.h>
 #include <qtopia/resource.h>
 
-#include <opie/owait.h>
+#include <opie2/owait.h>
 
 #include <qmetaobject.h>
 #include <qmap.h>
 
-namespace Opie {
+namespace QuickPrivate {
 
     struct PluginLoader {
         PluginLoader( const char* ) {
@@ -66,5 +66,3 @@ namespace Opie {
 
 }
 
-/* small hack ;) */
-using namespace Opie;

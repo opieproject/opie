@@ -1,4 +1,4 @@
   config QUICKLAUNCHER
     boolean "The Quick Launcher Loader"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 && LIBOPIECORE2

@@ -39,6 +39,8 @@
 
 #include "dropins.h"
 
+using QuickPrivate::PluginLoader;
+
 static QPEApplication *app = 0;
 static PluginLoader *loader = 0;
 static ApplicationInterface *appIface = 0;
@@ -52,6 +54,7 @@ extern char **environ;
 #define SPT_BUFSIZE     2048
 #endif
 #include <stdarg.h>
+using namespace Opie::Ui;
 void setproctitle (const char *fmt,...) {
     int        i;
     char       buf[SPT_BUFSIZE];
