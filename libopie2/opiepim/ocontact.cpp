@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
+                             Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -27,41 +27,25 @@
                              Boston, MA 02111-1307, USA.
 */
 
-/**********************************************************************
-** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
-** Copyright (C) 2002-2003 by Stefan Eilers (eilers.stefan@epost.de)
-**
-** This file may be distributed and/or modified under the terms of the
-** GNU General Public License version 2 as published by the Free Software
-** Foundation and appearing in the file LICENSE.GPL included in the
-** packaging of this file.
-**
-** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-**
-** See http://www.trolltech.com/gpl/ for GPL licensing information.
-**
-** Contact info@trolltech.com if any conditions of this licensing are
-** not clear to you.
-**
-**********************************************************************/
-
 #define QTOPIA_INTERNAL_CONTACT_MRE
 
-#include <opie2/ocontact.h>
+#include "ocontact.h"
+
+/* OPIE */
 #include <opie2/opimresolver.h>
 #include <opie2/oconversion.h>
-
 #include <qpe/stringutil.h>
 #include <qpe/timestring.h>
 #include <qpe/config.h>
 
+/* QT */
 #include <qobject.h>
 #include <qregexp.h>
 #include <qstylesheet.h>
 #include <qfileinfo.h>
 #include <qmap.h>
 
+/* STD */
 #include <stdio.h>
 
 /*!
@@ -76,45 +60,44 @@
 */
 
 
-namespace Opie {
+namespace Opie
+{
 /*!
   Creates a new, empty contact.
 */
-OContact::OContact()
-    : OPimRecord(), mMap(), d( 0 )
-{
-}
+OContact::OContact():OPimRecord(), mMap(), d( 0 )
+{}
 
 /*!
   \internal
   Creates a new contact.  The properties of the contact are
   set from \a fromMap.
 */
-OContact::OContact( const QMap<int, QString> &fromMap ) :
-    OPimRecord(), mMap( fromMap ), d( 0 )
+OContact::OContact( const QMap<int, QString> &fromMap ):OPimRecord(), mMap( fromMap ), d( 0 )
 {
     QString cats = mMap[ Qtopia::AddressCategory ];
     if ( !cats.isEmpty() )
-	setCategories( idsFromString( cats ) );
+        setCategories( idsFromString( cats ) );
 
     QString uidStr = find( Qtopia::AddressUid );
 
-    if ( uidStr.isEmpty() || (uidStr.toInt() == 0) ){
-	    qWarning( "Invalid UID found. Generate new one.." );
-	setUid( uidGen().generate() );
-    }else
-	setUid( uidStr.toInt() );
+    if ( uidStr.isEmpty() || ( uidStr.toInt() == 0 ) )
+    {
+        qWarning( "Invalid UID found. Generate new one.." );
+        setUid( uidGen().generate() );
+    }
+    else
+        setUid( uidStr.toInt() );
 
-//     if ( !uidStr.isEmpty() )
-// 	setUid( uidStr.toInt() );
+    //     if ( !uidStr.isEmpty() )
+    // 	setUid( uidStr.toInt() );
 }
 
 /*!
   Destroys a contact.
 */
 OContact::~OContact()
-{
-}
+{}
 
 /*! \fn void OContact::setTitle( const QString &str )
   Sets the title of the contact to \a str.
@@ -455,7 +438,7 @@ QMap<int, QString> OContact::toMap() const
     QMap<int, QString> map = mMap;
     QString cats = idsToString( categories() );
     if ( !cats.isEmpty() )
-	map.insert( Qtopia::AddressCategory, cats );
+        map.insert( Qtopia::AddressCategory, cats );
     return map;
 }
 
@@ -469,281 +452,327 @@ QString OContact::toRichText() const
     QString str;
     bool marker = false;
 
-    Config cfg("qpe");
-    cfg.setGroup("Appearance");
+    Config cfg( "qpe" );
+    cfg.setGroup( "Appearance" );
     int addressformat = cfg.readNumEntry( "AddressFormat", Zip_City_State );
 
     // name, jobtitle and company
-    if ( !(value = fullName()).isEmpty() )
-	text += "<b><h3><img src=\"addressbook/AddressBook\"> " + Qtopia::escapeString(value) + "</h3></b>";
-    
-    if ( !(value = jobTitle()).isEmpty() )
-	text += Qtopia::escapeString(value) + " ";
+    if ( !( value = fullName() ).isEmpty() )
+        text += "<b><h3><img src=\"addressbook/AddressBook\"> " + Qtopia::escapeString( value ) + "</h3></b>";
+
+    if ( !( value = jobTitle() ).isEmpty() )
+        text += Qtopia::escapeString( value ) + " ";
 
     comp = company();
-    if ( !(value = department()).isEmpty() ) {
-	text += Qtopia::escapeString(value);
-	if ( comp )
-		text += ", " + Qtopia::escapeString(comp);
-    }else if ( comp )
-	    text += "<br>" + Qtopia::escapeString(comp);
+    if ( !( value = department() ).isEmpty() )
+    {
+        text += Qtopia::escapeString( value );
+        if ( comp )
+            text += ", " + Qtopia::escapeString( comp );
+    }
+    else if ( comp )
+        text += "<br>" + Qtopia::escapeString( comp );
     text += "<br><hr>";
 
     // defailt email
     QString defEmail = defaultEmail();
-    if ( !defEmail.isEmpty() ){
-	text += "<b><img src=\"addressbook/email\"> " + QObject::tr("Default Email: ") + "</b>"
-		+ Qtopia::escapeString(defEmail);
-	marker = true;
+    if ( !defEmail.isEmpty() )
+    {
+        text += "<b><img src=\"addressbook/email\"> " + QObject::tr( "Default Email: " ) + "</b>"
+                + Qtopia::escapeString( defEmail );
+        marker = true;
     }
 
     // business address
     if ( !businessStreet().isEmpty() || !businessCity().isEmpty() ||
-	 !businessZip().isEmpty() || !businessCountry().isEmpty() ) {
-	text += QObject::tr( "<br><b>Work Address:</b>" );
-	marker = true;
+            !businessZip().isEmpty() || !businessCountry().isEmpty() )
+    {
+        text += QObject::tr( "<br><b>Work Address:</b>" );
+        marker = true;
     }
 
-    if ( !(value = businessStreet()).isEmpty() ){
-	    text += "<br>" + Qtopia::escapeString(value);
-	    marker = true;
+    if ( !( value = businessStreet() ).isEmpty() )
+    {
+        text += "<br>" + Qtopia::escapeString( value );
+        marker = true;
     }
 
-    switch( addressformat ){
-    case Zip_City_State:{ //  Zip_Code City, State
-	    state =  businessState();
-	    if ( !(value = businessZip()).isEmpty() ){
-		    text += "<br>" + Qtopia::escapeString(value) + " ";
-		    marker = true;
-		    
-	    }
-	    if ( !(value = businessCity()).isEmpty() ) {
-		    marker = true;
-		    if ( businessZip().isEmpty() && !businessStreet().isEmpty() )
-			    text += "<br>";
-		    text += Qtopia::escapeString(value);
-		    if ( state )
-			    text += ", " + Qtopia::escapeString(state);
-	    } else if ( !state.isEmpty() ){
-		    text += "<br>" + Qtopia::escapeString(state);
-		    marker = true;
-	    }
-	    break;
-    }
-    case City_State_Zip:{ // City, State Zip_Code 
-	    state =  businessState();
-	    if ( !(value = businessCity()).isEmpty() ) {
-		    marker = true;
-		    text += "<br>" + Qtopia::escapeString(value);
-		    if ( state )
-			    text += ", " + Qtopia::escapeString(state);
-	    } else if ( !state.isEmpty() ){
-		    text += "<br>" + Qtopia::escapeString(state);
-		    marker = true;
-	    }
-	    if ( !(value = businessZip()).isEmpty() ){
-		    text += " " + Qtopia::escapeString(value);
-		    marker = true;
-	    }
-	    break;
-    }
+    switch ( addressformat )
+    {
+    case Zip_City_State:
+        { //  Zip_Code City, State
+            state = businessState();
+            if ( !( value = businessZip() ).isEmpty() )
+            {
+                text += "<br>" + Qtopia::escapeString( value ) + " ";
+                marker = true;
+
+            }
+            if ( !( value = businessCity() ).isEmpty() )
+            {
+                marker = true;
+                if ( businessZip().isEmpty() && !businessStreet().isEmpty() )
+                    text += "<br>";
+                text += Qtopia::escapeString( value );
+                if ( state )
+                    text += ", " + Qtopia::escapeString( state );
+            }
+            else if ( !state.isEmpty() )
+            {
+                text += "<br>" + Qtopia::escapeString( state );
+                marker = true;
+            }
+            break;
+        }
+    case City_State_Zip:
+        { // City, State Zip_Code
+            state = businessState();
+            if ( !( value = businessCity() ).isEmpty() )
+            {
+                marker = true;
+                text += "<br>" + Qtopia::escapeString( value );
+                if ( state )
+                    text += ", " + Qtopia::escapeString( state );
+            }
+            else if ( !state.isEmpty() )
+            {
+                text += "<br>" + Qtopia::escapeString( state );
+                marker = true;
+            }
+            if ( !( value = businessZip() ).isEmpty() )
+            {
+                text += " " + Qtopia::escapeString( value );
+                marker = true;
+            }
+            break;
+        }
     }
 
-    if ( !(value = businessCountry()).isEmpty() ){
-	text += "<br>" + Qtopia::escapeString(value);
-	marker = true;
+    if ( !( value = businessCountry() ).isEmpty() )
+    {
+        text += "<br>" + Qtopia::escapeString( value );
+        marker = true;
     }
 
     // rest of Business data
     str = office();
-    if ( !str.isEmpty() ){
-	text += "<br><b>" + QObject::tr("Office: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b>" + QObject::tr( "Office: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = businessWebpage();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/webpagework\"> " + QObject::tr("Business Web Page: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/webpagework\"> " + QObject::tr( "Business Web Page: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = businessPhone();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/phonework\"> " + QObject::tr("Business Phone: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/phonework\"> " + QObject::tr( "Business Phone: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = businessFax();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/faxwork\"> " + QObject::tr("Business Fax: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/faxwork\"> " + QObject::tr( "Business Fax: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = businessMobile();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/mobilework\"> " + QObject::tr("Business Mobile: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/mobilework\"> " + QObject::tr( "Business Mobile: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = businessPager();
-    if ( !str.isEmpty() ){
-	text += "<br><b>" + QObject::tr("Business Pager: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b>" + QObject::tr( "Business Pager: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
 
     // text += "<br>";
 
     // home address
     if ( !homeStreet().isEmpty() || !homeCity().isEmpty() ||
-	 !homeZip().isEmpty() || !homeCountry().isEmpty() ) {
-	text += QObject::tr( "<br><b>Home Address:</b>" );
-	marker = true;
+            !homeZip().isEmpty() || !homeCountry().isEmpty() )
+    {
+        text += QObject::tr( "<br><b>Home Address:</b>" );
+        marker = true;
     }
 
-    if ( !(value = homeStreet()).isEmpty() ){
-	text += "<br>" + Qtopia::escapeString(value);
-	marker = true;
+    if ( !( value = homeStreet() ).isEmpty() )
+    {
+        text += "<br>" + Qtopia::escapeString( value );
+        marker = true;
     }
 
-    switch( addressformat ){
-    case Zip_City_State:{ //  Zip_Code City, State
-	    state =  homeState();
-	    if ( !(value = homeZip()).isEmpty() ){
-		    text += "<br>" + Qtopia::escapeString(value) + " ";
-		    marker = true;
-	    }
-	    if ( !(value = homeCity()).isEmpty() ) {
-		    marker = true;
-		    if ( homeZip().isEmpty() && !homeStreet().isEmpty() )
-			    text += "<br>";
-		    text += Qtopia::escapeString(value);
-		    if ( !state.isEmpty() )
-			    text += ", " + Qtopia::escapeString(state);
-	    } else if (!state.isEmpty()) {
-		    text += "<br>" + Qtopia::escapeString(state);
-		    marker = true;
-	    }
-	    break;
+    switch ( addressformat )
+    {
+    case Zip_City_State:
+        { //  Zip_Code City, State
+            state = homeState();
+            if ( !( value = homeZip() ).isEmpty() )
+            {
+                text += "<br>" + Qtopia::escapeString( value ) + " ";
+                marker = true;
+            }
+            if ( !( value = homeCity() ).isEmpty() )
+            {
+                marker = true;
+                if ( homeZip().isEmpty() && !homeStreet().isEmpty() )
+                    text += "<br>";
+                text += Qtopia::escapeString( value );
+                if ( !state.isEmpty() )
+                    text += ", " + Qtopia::escapeString( state );
+            }
+            else if ( !state.isEmpty() )
+            {
+                text += "<br>" + Qtopia::escapeString( state );
+                marker = true;
+            }
+            break;
+        }
+    case City_State_Zip:
+        { // City, State Zip_Code
+            state = homeState();
+            if ( !( value = homeCity() ).isEmpty() )
+            {
+                marker = true;
+                text += "<br>" + Qtopia::escapeString( value );
+                if ( state )
+                    text += ", " + Qtopia::escapeString( state );
+            }
+            else if ( !state.isEmpty() )
+            {
+                text += "<br>" + Qtopia::escapeString( state );
+                marker = true;
+            }
+            if ( !( value = homeZip() ).isEmpty() )
+            {
+                text += " " + Qtopia::escapeString( value );
+                marker = true;
+            }
+            break;
+        }
     }
-    case City_State_Zip:{ // City, State Zip_Code 
-	    state =  homeState();
-	    if ( !(value = homeCity()).isEmpty() ) {
-		    marker = true;
-		    text += "<br>" + Qtopia::escapeString(value);
-		    if ( state )
-			    text += ", " + Qtopia::escapeString(state);
-	    } else if ( !state.isEmpty() ){
-		    text += "<br>" + Qtopia::escapeString(state);
-		    marker = true;
-	    }
-	    if ( !(value = homeZip()).isEmpty() ){
-		    text += " " + Qtopia::escapeString(value);
-		    marker = true;
-	    }
-	    break;
-    }
-    }
-	    
-    if ( !(value = homeCountry()).isEmpty() ){
-	text += "<br>" + Qtopia::escapeString(value);
-	marker = true;
+
+    if ( !( value = homeCountry() ).isEmpty() )
+    {
+        text += "<br>" + Qtopia::escapeString( value );
+        marker = true;
     }
 
     // rest of Home data
     str = homeWebpage();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/webpagehome\"> " + QObject::tr("Home Web Page: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/webpagehome\"> " + QObject::tr( "Home Web Page: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = homePhone();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/phonehome\"> " + QObject::tr("Home Phone: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/phonehome\"> " + QObject::tr( "Home Phone: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = homeFax();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/faxhome\"> " + QObject::tr("Home Fax: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/faxhome\"> " + QObject::tr( "Home Fax: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
     str = homeMobile();
-    if ( !str.isEmpty() ){
-	text += "<br><b><img src=\"addressbook/mobilehome\"> " + QObject::tr("Home Mobile: ") + "</b>"
-		+ Qtopia::escapeString(str);
-	marker = true;
+    if ( !str.isEmpty() )
+    {
+        text += "<br><b><img src=\"addressbook/mobilehome\"> " + QObject::tr( "Home Mobile: " ) + "</b>"
+                + Qtopia::escapeString( str );
+        marker = true;
     }
 
     if ( marker )
-	    text += "<br><hr>";
+        text += "<br><hr>";
 
     // the rest...
     str = emails();
     if ( !str.isEmpty() && ( str != defEmail ) )
-	text += "<br><b>" + QObject::tr("All Emails: ") + "</b>"
-		+ Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "All Emails: " ) + "</b>"
+                + Qtopia::escapeString( str );
     str = profession();
     if ( !str.isEmpty() )
-	text += "<br><b>" + QObject::tr("Profession: ") + "</b>"
-		+ Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "Profession: " ) + "</b>"
+                + Qtopia::escapeString( str );
     str = assistant();
     if ( !str.isEmpty() )
-	text += "<br><b>" + QObject::tr("Assistant: ") + "</b>"
-		+ Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "Assistant: " ) + "</b>"
+                + Qtopia::escapeString( str );
     str = manager();
     if ( !str.isEmpty() )
-	text += "<br><b>" + QObject::tr("Manager: ") + "</b>"
-		+ Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "Manager: " ) + "</b>"
+                + Qtopia::escapeString( str );
     str = gender();
-    if ( !str.isEmpty() && str.toInt() != 0 ) {
-	    text += "<br>";
-	    if ( str.toInt() == 1 )
-		    str = QObject::tr( "Male" );
-	    else if ( str.toInt() == 2 )
-		    str = QObject::tr( "Female" );
-	    text += "<b>" + QObject::tr("Gender: ") + "</b>" + str;
+    if ( !str.isEmpty() && str.toInt() != 0 )
+    {
+        text += "<br>";
+        if ( str.toInt() == 1 )
+            str = QObject::tr( "Male" );
+        else if ( str.toInt() == 2 )
+            str = QObject::tr( "Female" );
+        text += "<b>" + QObject::tr( "Gender: " ) + "</b>" + str;
     }
     str = spouse();
     if ( !str.isEmpty() )
-	text += "<br><b>" + QObject::tr("Spouse: ") + "</b>"
-		+ Qtopia::escapeString(str);
-    if ( birthday().isValid() ){
-	    str = TimeString::numberDateString( birthday() );
-	    text += "<br><b>" + QObject::tr("Birthday: ") + "</b>"
-		    + Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "Spouse: " ) + "</b>"
+                + Qtopia::escapeString( str );
+    if ( birthday().isValid() )
+    {
+        str = TimeString::numberDateString( birthday() );
+        text += "<br><b>" + QObject::tr( "Birthday: " ) + "</b>"
+                + Qtopia::escapeString( str );
     }
-    if ( anniversary().isValid() ){
-	    str = TimeString::numberDateString( anniversary() );
-	    text += "<br><b>" + QObject::tr("Anniversary: ") + "</b>"
-		    + Qtopia::escapeString(str);
+    if ( anniversary().isValid() )
+    {
+        str = TimeString::numberDateString( anniversary() );
+        text += "<br><b>" + QObject::tr( "Anniversary: " ) + "</b>"
+                + Qtopia::escapeString( str );
     }
     str = children();
     if ( !str.isEmpty() )
-	text += "<br><b>" + QObject::tr("Children: ") + "</b>"
-		+ Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "Children: " ) + "</b>"
+                + Qtopia::escapeString( str );
 
     str = nickname();
     if ( !str.isEmpty() )
-	text += "<br><b>" + QObject::tr("Nickname: ") + "</b>"
-		+ Qtopia::escapeString(str);
+        text += "<br><b>" + QObject::tr( "Nickname: " ) + "</b>"
+                + Qtopia::escapeString( str );
 
     // categories
-    if ( categoryNames("Contacts").count() ){
-	    text += "<br><b>" + QObject::tr( "Category:") + "</b> ";
-	    text += categoryNames("Contacts").join(", ");
+    if ( categoryNames( "Contacts" ).count() )
+    {
+        text += "<br><b>" + QObject::tr( "Category:" ) + "</b> ";
+        text += categoryNames( "Contacts" ).join( ", " );
     }
 
     // notes last
-    if ( !(value = notes()).isEmpty() ) {
-	    text += "<br><hr><b>" + QObject::tr( "Notes:") + "</b> ";
-	    QRegExp reg("\n");
+    if ( !( value = notes() ).isEmpty() )
+    {
+        text += "<br><hr><b>" + QObject::tr( "Notes:" ) + "</b> ";
+        QRegExp reg( "\n" );
 
-	    //QString tmp = Qtopia::escapeString(value);
-	    QString tmp = QStyleSheet::convertFromPlainText(value);
-	    //tmp.replace( reg, "<br>" );
-	    text += "<br>" + tmp + "<br>";
+        //QString tmp = Qtopia::escapeString(value);
+        QString tmp = QStyleSheet::convertFromPlainText( value );
+        //tmp.replace( reg, "<br>" );
+        text += "<br>" + tmp + "<br>";
     }
     return text;
 }
@@ -755,9 +784,9 @@ void OContact::insert( int key, const QString &v )
 {
     QString value = v.stripWhiteSpace();
     if ( value.isEmpty() )
-	mMap.remove( key );
+        mMap.remove( key );
     else
-	mMap.insert( key, value );
+        mMap.insert( key, value );
 }
 
 /*!
@@ -767,9 +796,9 @@ void OContact::replace( int key, const QString & v )
 {
     QString value = v.stripWhiteSpace();
     if ( value.isEmpty() )
-	mMap.remove( key );
+        mMap.remove( key );
     else
-	mMap.replace( key, value );
+        mMap.replace( key, value );
 }
 
 /*!
@@ -777,30 +806,30 @@ void OContact::replace( int key, const QString & v )
 */
 QString OContact::find( int key ) const
 {
-    return mMap[key];
+    return mMap[ key ];
 }
 
 /*!
   \internal
 */
 QString OContact::displayAddress( const QString &street,
-				 const QString &city,
-				 const QString &state,
-				 const QString &zip,
-				 const QString &country ) const
+                                  const QString &city,
+                                  const QString &state,
+                                  const QString &zip,
+                                  const QString &country ) const
 {
     QString s = street;
     if ( !street.isEmpty() )
-	s+= "\n";
+        s += "\n";
     s += city;
     if ( !city.isEmpty() && !state.isEmpty() )
-	s += ", ";
+        s += ", ";
     s += state;
     if ( !state.isEmpty() && !zip.isEmpty() )
-	s += "  ";
+        s += "  ";
     s += zip;
     if ( !country.isEmpty() && !s.isEmpty() )
-	s += "\n";
+        s += "\n";
     s += country;
     return s;
 }
@@ -811,8 +840,8 @@ QString OContact::displayAddress( const QString &street,
 QString OContact::displayBusinessAddress() const
 {
     return displayAddress( businessStreet(), businessCity(),
-			   businessState(), businessZip(),
-			   businessCountry() );
+                           businessState(), businessZip(),
+                           businessCountry() );
 }
 
 /*!
@@ -821,8 +850,8 @@ QString OContact::displayBusinessAddress() const
 QString OContact::displayHomeAddress() const
 {
     return displayAddress( homeStreet(), homeCity(),
-			   homeState(), homeZip(),
-			   homeCountry() );
+                           homeState(), homeZip(),
+                           homeCountry() );
 }
 
 /*!
@@ -837,25 +866,29 @@ QString OContact::fullName() const
     QString suffix = find( Qtopia::Suffix );
 
     QString name = title;
-    if ( !firstName.isEmpty() ) {
-	if ( !name.isEmpty() )
-	    name += " ";
-	name += firstName;
+    if ( !firstName.isEmpty() )
+    {
+        if ( !name.isEmpty() )
+            name += " ";
+        name += firstName;
     }
-    if ( !middleName.isEmpty() ) {
-	if ( !name.isEmpty() )
-	    name += " ";
-	name += middleName;
+    if ( !middleName.isEmpty() )
+    {
+        if ( !name.isEmpty() )
+            name += " ";
+        name += middleName;
     }
-    if ( !lastName.isEmpty() ) {
-	if ( !name.isEmpty() )
-	    name += " ";
-	name += lastName;
+    if ( !lastName.isEmpty() )
+    {
+        if ( !name.isEmpty() )
+            name += " ";
+        name += lastName;
     }
-    if ( !suffix.isEmpty() ) {
-	if ( !name.isEmpty() )
-	    name += " ";
-	name += suffix;
+    if ( !suffix.isEmpty() )
+    {
+        if ( !name.isEmpty() )
+            name += " ";
+        name += suffix;
     }
     return name.simplifyWhiteSpace();
 }
@@ -900,11 +933,12 @@ QStringList OContact::emailList() const
     QString emailStr = emails();
 
     QStringList r;
-    if ( !emailStr.isEmpty() ) {
-	qDebug(" emailstr ");
-	QStringList l = QStringList::split( emailSeparator(), emailStr );
-	for ( QStringList::ConstIterator it = l.begin();it != l.end();++it )
-	    r += (*it).simplifyWhiteSpace();
+    if ( !emailStr.isEmpty() )
+    {
+        qDebug( " emailstr " );
+        QStringList l = QStringList::split( emailSeparator(), emailStr );
+        for ( QStringList::ConstIterator it = l.begin();it != l.end();++it )
+            r += ( *it ).simplifyWhiteSpace();
     }
 
     return r;
@@ -924,15 +958,15 @@ void OContact::setFileAs()
     firstName = find( Qtopia::FirstName );
     middleName = find( Qtopia::MiddleName );
     if ( !lastName.isEmpty() && !firstName.isEmpty()
-	 && !middleName.isEmpty() )
-	fileas = lastName + ", " + firstName + " " + middleName;
+            && !middleName.isEmpty() )
+        fileas = lastName + ", " + firstName + " " + middleName;
     else if ( !lastName.isEmpty() && !firstName.isEmpty() )
-	fileas = lastName + ", " + firstName;
+        fileas = lastName + ", " + firstName;
     else if ( !lastName.isEmpty() || !firstName.isEmpty() ||
-	      !middleName.isEmpty() )
-	fileas = firstName + ( firstName.isEmpty() ? "" : " " )
-		 + middleName + ( middleName.isEmpty() ? "" : " " )
-		 + lastName;
+              !middleName.isEmpty() )
+        fileas = firstName + ( firstName.isEmpty() ? "" : " " )
+                 + middleName + ( middleName.isEmpty() ? "" : " " )
+                 + lastName;
 
     replace( Qtopia::FileAs, fileas );
 }
@@ -946,21 +980,23 @@ void OContact::save( QString &buf ) const
     static const QStringList SLFIELDS = fields();
     // I'm expecting "<Contact " in front of this...
     for ( QMap<int, QString>::ConstIterator it = mMap.begin();
-	  it != mMap.end(); ++it ) {
-	const QString &value = it.data();
-	int key = it.key();
-	if ( !value.isEmpty() ) {
-	    if ( key == Qtopia::AddressCategory || key == Qtopia::AddressUid)
-		continue;
+            it != mMap.end(); ++it )
+    {
+        const QString &value = it.data();
+        int key = it.key();
+        if ( !value.isEmpty() )
+        {
+            if ( key == Qtopia::AddressCategory || key == Qtopia::AddressUid )
+                continue;
 
-	    key -= Qtopia::AddressCategory+1;
-	    buf += SLFIELDS[key];
-	    buf += "=\"" + Qtopia::escapeString(value) + "\" ";
-	}
+            key -= Qtopia::AddressCategory + 1;
+            buf += SLFIELDS[ key ];
+            buf += "=\"" + Qtopia::escapeString( value ) + "\" ";
+        }
     }
     buf += customToXml();
     if ( categories().count() > 0 )
-	buf += "Categories=\"" + idsToString( categories() ) + "\" ";
+        buf += "Categories=\"" + idsToString( categories() ) + "\" ";
     buf += "Uid=\"" + QString::number( uid() ) + "\" ";
     // You need to close this yourself
 }
@@ -1061,12 +1097,14 @@ bool OContact::match( const QRegExp &r ) const
     bool match;
     match = false;
     QMap<int, QString>::ConstIterator it;
-    for ( it = mMap.begin(); it != mMap.end(); ++it ) {
-	if ( (*it).find( r ) > -1 ) {
+    for ( it = mMap.begin(); it != mMap.end(); ++it )
+    {
+        if ( ( *it ).find( r ) > -1 )
+        {
             setLastHitField( it.key() );
-	    match = true;
-	    break;
-	}
+            match = true;
+            break;
+        }
     }
     return match;
 }
@@ -1074,19 +1112,20 @@ bool OContact::match( const QRegExp &r ) const
 
 QString OContact::toShortText() const
 {
-	return ( fullName() );
-}
-QString OContact::type() const
-{
-	return QString::fromLatin1( "OContact" );
+    return ( fullName() );
 }
 
+
+QString OContact::type() const
+{
+    return QString::fromLatin1( "OContact" );
+}
 
 
 class QString OContact::recordField( int pos ) const
 {
-	QStringList SLFIELDS = fields(); // ?? why this ? (se)
-	return SLFIELDS[pos];
+    QStringList SLFIELDS = fields(); // ?? why this ? (se)
+    return SLFIELDS[ pos ];
 }
 
 // In future releases, we should store birthday and anniversary
@@ -1099,14 +1138,15 @@ class QString OContact::recordField( int pos ) const
 */
 void OContact::setBirthday( const QDate &v )
 {
-	if ( v.isNull() ){
-		qWarning( "Remove Birthday");
-		replace( Qtopia::Birthday, QString::null );
-		return;
-	}
+    if ( v.isNull() )
+    {
+        qWarning( "Remove Birthday" );
+        replace( Qtopia::Birthday, QString::null );
+        return ;
+    }
 
-	if ( v.isValid() )
-		replace( Qtopia::Birthday, OConversion::dateToString( v ) );
+    if ( v.isValid() )
+        replace( Qtopia::Birthday, OConversion::dateToString( v ) );
 
 }
 
@@ -1117,27 +1157,29 @@ void OContact::setBirthday( const QDate &v )
 */
 void OContact::setAnniversary( const QDate &v )
 {
-	if ( v.isNull() ){
-		qWarning( "Remove Anniversary");
-		replace( Qtopia::Anniversary, QString::null );
-		return;
-	}
+    if ( v.isNull() )
+    {
+        qWarning( "Remove Anniversary" );
+        replace( Qtopia::Anniversary, QString::null );
+        return ;
+    }
 
-	if ( v.isValid() )
-		replace( Qtopia::Anniversary, OConversion::dateToString( v ) );
+    if ( v.isValid() )
+        replace( Qtopia::Anniversary, OConversion::dateToString( v ) );
 }
+
 
 /*! \fn QDate OContact::birthday() const
   Returns the birthday of the contact.
 */
 QDate OContact::birthday() const
 {
-	QString str = find( Qtopia::Birthday );
-	// qWarning ("Birthday %s", str.latin1() );
-	if ( !str.isEmpty() )
-		return  OConversion::dateFromString ( str );
-	else
-		return QDate();
+    QString str = find( Qtopia::Birthday );
+    // qWarning ("Birthday %s", str.latin1() );
+    if ( !str.isEmpty() )
+        return OConversion::dateFromString ( str );
+    else
+        return QDate();
 }
 
 
@@ -1146,13 +1188,13 @@ QDate OContact::birthday() const
 */
 QDate OContact::anniversary() const
 {
-	QDate empty;
-	QString str = find( Qtopia::Anniversary );
-	// qWarning ("Anniversary %s", str.latin1() );
-	if ( !str.isEmpty() )
-		return OConversion::dateFromString ( str );
-	else
-		return empty;
+    QDate empty;
+    QString str = find( Qtopia::Anniversary );
+    // qWarning ("Anniversary %s", str.latin1() );
+    if ( !str.isEmpty() )
+        return OConversion::dateFromString ( str );
+    else
+        return empty;
 }
 
 
@@ -1163,22 +1205,24 @@ void OContact::insertEmail( const QString &v )
     QString def = defaultEmail();
 
     // if no default, set it as the default email and don't insert
-    if ( def.isEmpty() ) {
-	setDefaultEmail( e ); // will insert into the list for us
-	return;
+    if ( def.isEmpty() )
+    {
+        setDefaultEmail( e ); // will insert into the list for us
+        return ;
     }
 
     // otherwise, insert assuming doesn't already exist
     QString emailsStr = find( Qtopia::Emails );
-    if ( emailsStr.contains( e ))
-	return;
+    if ( emailsStr.contains( e ) )
+        return ;
     if ( !emailsStr.isEmpty() )
-	emailsStr += emailSeparator();
+        emailsStr += emailSeparator();
     emailsStr += e;
     replace( Qtopia::Emails, emailsStr );
 }
 
-void OContact::removeEmail( const QString &v )
+
+        void OContact::removeEmail( const QString &v )
 {
     QString e = v.simplifyWhiteSpace();
     QString def = defaultEmail();
@@ -1187,29 +1231,34 @@ void OContact::removeEmail( const QString &v )
 
     // otherwise, must first contain it
     if ( !emailsStr.contains( e ) )
-	return;
+        return ;
 
     // remove it
     //qDebug(" removing email from list %s", e.latin1());
     emails.remove( e );
     // reset the string
-    emailsStr = emails.join(emailSeparator()); // Sharp's brain dead separator
+    emailsStr = emails.join( emailSeparator() ); // Sharp's brain dead separator
     replace( Qtopia::Emails, emailsStr );
 
     // if default, then replace the default email with the first one
-    if ( def == e ) {
-	//qDebug("removeEmail is default; setting new default");
-	if ( !emails.count() )
-	    clearEmails();
-	else // setDefaultEmail will remove e from the list
-	    setDefaultEmail( emails.first() );
+    if ( def == e )
+    {
+        //qDebug("removeEmail is default; setting new default");
+        if ( !emails.count() )
+            clearEmails();
+        else // setDefaultEmail will remove e from the list
+            setDefaultEmail( emails.first() );
     }
 }
+
+
 void OContact::clearEmails()
 {
     mMap.remove( Qtopia::DefaultEmail );
     mMap.remove( Qtopia::Emails );
 }
+
+
 void OContact::setDefaultEmail( const QString &v )
 {
     QString e = v.simplifyWhiteSpace();
@@ -1218,21 +1267,27 @@ void OContact::setDefaultEmail( const QString &v )
     replace( Qtopia::DefaultEmail, e );
 
     if ( !e.isEmpty() )
-	insertEmail( e );
+        insertEmail( e );
 
 }
+
 
 void OContact::insertEmails( const QStringList &v )
 {
     for ( QStringList::ConstIterator it = v.begin(); it != v.end(); ++it )
-	insertEmail( *it );
+        insertEmail( *it );
 }
-int OContact::rtti() {
+
+
+int OContact::rtti()
+{
     return OPimResolver::AddressBook;
 }
+
+
 void OContact::setUid( int i )
 {
-	OPimRecord::setUid(i);
-	replace( Qtopia::AddressUid , QString::number(i));
+    OPimRecord::setUid( i );
+    replace( Qtopia::AddressUid , QString::number( i ) );
 }
 }

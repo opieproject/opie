@@ -26,12 +26,15 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef __OCONTACT_H__
-#define __OCONTACT_H__
 
+#ifndef OCONTACT_H
+#define OCONTACT_H
+
+/* OPIE */
 #include <opie2/opimrecord.h>
 #include <qpe/recordfields.h>
 
+/* QT */
 #include <qdatetime.h>
 #include <qstringlist.h>
 
@@ -41,7 +44,8 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 // MOC_SKIP_END
 #endif
 
-namespace Opie {
+namespace Opie
+{
 class OContactPrivate;
 
 /**
@@ -54,14 +58,15 @@ class OContactPrivate;
 class QPC_EXPORT OContact : public OPimRecord
 {
     friend class DataSet;
-public:
+
+  public:
     OContact();
     OContact( const QMap<int, QString> &fromMap );
     virtual ~OContact();
 
     enum DateFormat{
-	    Zip_City_State = 0,
-	    City_State_Zip
+        Zip_City_State = 0,
+        City_State_Zip
     };
 
     /*
@@ -124,13 +129,13 @@ public:
     void setChildren( const QString &v );
 
     // other
-    void setNotes( const QString &v ) { replace( Qtopia::Notes, v); }
+    void setNotes( const QString &v ) { replace( Qtopia::Notes, v ); }
 
     virtual bool match( const QRegExp &regexp ) const;
 
-//     // custom
-//     void setCustomField( const QString &key, const QString &v )
-//         { replace(Custom- + key, v ); }
+    //     // custom
+    //     void setCustomField( const QString &key, const QString &v )
+    //         { replace(Custom- + key, v ); }
 
     // name
     QString fullName() const;
@@ -185,7 +190,7 @@ public:
     QString profession() const { return find( Qtopia::Profession ); }
     QString assistant() const { return find( Qtopia::Assistant ); }
     QString manager() const { return find( Qtopia::Manager ); }
-     /** Multi line string containing all non-empty address info in the form
+    /** Multi line string containing all non-empty address info in the form
     * Street
     * City, State Zip
     * Country
@@ -213,9 +218,9 @@ public:
 
     void setUid( int i );
 
-    QString toShortText()const;
-    QString type()const;
-    class QString recordField(int) const;
+    QString toShortText() const;
+    QString type() const;
+    class QString recordField( int ) const;
 
     // Why private ? (eilers,se)
     QString emailSeparator() const { return " "; }
@@ -225,7 +230,7 @@ public:
     QString emails() const { return find( Qtopia::Emails ); }
     static int rtti();
 
-private:
+  private:
     // The XML Backend needs some access to the private functions
     friend class OContactAccessBackend_XML;
 
@@ -237,10 +242,10 @@ private:
     void save( QString &buf ) const;
 
     QString displayAddress( const QString &street,
-			    const QString &city,
-			    const QString &state,
-			    const QString &zip,
-			    const QString &country ) const;
+                            const QString &city,
+                            const QString &state,
+                            const QString &zip,
+                            const QString &country ) const;
 
     QMap<int, QString> mMap;
     OContactPrivate *d;

@@ -26,21 +26,25 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_PIM_NOTIFY_MANAGER_H
-#define OPIE_PIM_NOTIFY_MANAGER_H
+#ifndef OPIMNOTIFYMANAGER_H
+#define OPIMNOTIFYMANAGER_H
 
-#include <qvaluelist.h>
-
+/* OPIE */
 #include <opie2/opimnotify.h>
 
-namespace Opie {
+/* QT */
+#include <qvaluelist.h>
+
+namespace Opie
+{
 /**
  * The notify manager keeps track of the Notifiers....
  */
-class OPimNotifyManager {
-public:
+class OPimNotifyManager
+{
+  public:
     typedef QValueList<OPimReminder> Reminders;
-    typedef QValueList<OPimAlarm>    Alarms;
+    typedef QValueList<OPimAlarm> Alarms;
     OPimNotifyManager( const Reminders& rems = Reminders(), const Alarms& alarms = Alarms() );
     ~OPimNotifyManager();
 
@@ -50,12 +54,12 @@ public:
     /* replaces all with this one! */
     void replace( const OPimNotify& );
 
-    Reminders reminders()const;
+    Reminders reminders() const;
 
     /**
-     * Return 
+     * Return
      */
-    Alarms    alarms()const;
+    Alarms alarms() const;
 
     /**
      * Return alarm at DateTime "when". If more than one is registered at this
@@ -63,7 +67,7 @@ public:
      * If none was found, an empty Alarm is returned.
      * @param when The date and time of the returned alarm
      * @param found Returns true if anything was found.
-     * @return Returns the found alarm at given DateTime. It is empty if found is false 
+     * @return Returns the found alarm at given DateTime. It is empty if found is false
      * (nothing could be found at given date and time)
      */
     OPimAlarm alarmAtDateTime( const QDateTime& when, bool& found ) const;
@@ -83,19 +87,19 @@ public:
      */
     void deregister( const OPimNotify& );
 
-    bool isEmpty()const;
+    bool isEmpty() const;
 
-    /** 
+    /**
      * Return all alarms as string
      */
     QString alarmsToString() const;
-    /** 
+    /**
      * Return all notifiers as string
      */
     QString remindersToString() const;
 
     /**
-     * Convert string to alarms 
+     * Convert string to alarms
      * @param str String created by alarmsToString()
      */
     void alarmsFromString( const QString& str );
@@ -106,9 +110,7 @@ public:
      */
     void remindersFromString( const QString& str );
 
-
-
-private:
+  private:
     Reminders m_rem;
     Alarms m_al;
 

@@ -26,22 +26,28 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_CONTACTS_FIELDS
-#define OPIE_CONTACTS_FIELDS
+
+#ifndef OCONTACTFIELDS_H
+#define OCONTACTFIELDS_H
 
 class QStringList;
 
+/* OPIE */
+#include <opie2/ocontact.h>
+
+/* QT */
 #include <qmap.h>
 #include <qstring.h>
-#include <opie2/ocontact.h>
 
 #define CONTACT_FIELD_ORDER_NAME "opie-contactfield-order"
 #define DEFAULT_FIELD_ORDER "__________"
- 
-namespace Opie {
-class OContactFields{
 
- public:
+namespace Opie
+{
+class OContactFields
+{
+
+  public:
     OContactFields();
     ~OContactFields();
     /** Set the index for combo boxes.
@@ -55,28 +61,28 @@ class OContactFields{
      * Returns the index of combo <b>num</b> or defindex
      * if none was defined..
      * @param num Selects the number of the combo
-     * @param defIndex will be returned if none was defined (either 
-     * globally in the config file, nor by the contact which was used 
+     * @param defIndex will be returned if none was defined (either
+     * globally in the config file, nor by the contact which was used
      * by loadFromRecord() )
      */
-    int getFieldOrder( int num, int defIndex);
+    int getFieldOrder( int num, int defIndex );
 
     /** Store fieldorder to contact. */
     void saveToRecord( OContact& );
     /** Get Fieldorder from contact. */
     void loadFromRecord( const OContact& );
 
- private:
+  private:
     QString fieldOrder;
     QString globalFieldOrder;
     bool changedFieldOrder;
 
- public:
+  public:
     static QStringList personalfields( bool sorted = true, bool translated = false );
     static QStringList phonefields( bool sorted = true, bool translated = false );
     static QStringList detailsfields( bool sorted = true, bool translated = false );
     static QStringList fields( bool sorted = true, bool translated = false );
-    
+
     static QStringList trpersonalfields( bool sorted = true );
     static QStringList untrpersonalfields( bool sorted = true );
     static QStringList trphonefields( bool sorted = true );

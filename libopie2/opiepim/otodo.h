@@ -1,35 +1,41 @@
 /*
-                             This file is part of the Opie Project
-                             Copyright (C) The Main Author <main-author@whereever.org>
-              =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
-            .=l.
-           .>+-=
- _;:,     .>    :=|.         This program is free software; you can
+                            This file is part of the Opie Project
+                            Copyright (C) The Main Author <main-author@whereever.org>
+             =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
+           .=l.
+          .>+-=
+_;:,     .>    :=|.         This program is free software; you can
 .> <`_,   >  .   <=          redistribute it and/or  modify it under
 :`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
 .="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This program is distributed in the hope that
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+- .   .-<_>     .<>         Foundation; either version 2 of the License,
+    ._= =}       :          or (at your option) any later version.
+   .%`+i>       _;_.
+   .i_,=:_.      -<s.       This program is distributed in the hope that
+    +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+   : ..    .:,     . . .    without even the implied warranty of
+   =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
 ..}^=.=       =       ;      Library General Public License for more
 ++=   -.     .`     .:       details.
- :     =  ...= . :.=-
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB.
-                             If not, write to the Free Software Foundation,
-                             Inc., 59 Temple Place - Suite 330,
-                             Boston, MA 02111-1307, USA.
+:     =  ...= . :.=-
+-.   .:....=;==+<;          You should have received a copy of the GNU
+ -_. . .   )=.  =           Library General Public License along with
+   --        :-=`           this library; see the file COPYING.LIB.
+                            If not, write to the Free Software Foundation,
+                            Inc., 59 Temple Place - Suite 330,
+                            Boston, MA 02111-1307, USA.
 */
-#ifndef OPIE_TODO_EVENT_H
-#define OPIE_TODO_EVENT_H
 
+#ifndef OTODOEVENT_H
+#define OTODOEVENT_H
 
+/* OPIE */
+#include <opie2/opimrecord.h>
+#include <qpe/recordfields.h>
+#include <qpe/palmtopuidgen.h>
+
+/* QT */
 #include <qarray.h>
 #include <qmap.h>
 #include <qregexp.h>
@@ -37,20 +43,16 @@
 #include <qdatetime.h>
 #include <qvaluelist.h>
 
-#include <qpe/recordfields.h>
-#include <qpe/palmtopuidgen.h>
-
-#include <opie2/opimrecord.h>
-
-
-namespace Opie {
+namespace Opie
+{
 
 class OPimState;
 class ORecur;
 class OPimMaintainer;
 class OPimNotifyManager;
-class OTodo : public  OPimRecord  {
-public:
+class OTodo : public OPimRecord
+{
+  public:
     typedef QValueList<OTodo> ValueList;
     enum RecordFields {
         Uid = Qtopia::UID_ID,
@@ -74,9 +76,9 @@ public:
         StartDate,
         CompletedDate
     };
- public:
+  public:
     // priorities from Very low to very high
-    enum TaskPriority { VeryHigh=1,  High,  Normal,  Low, VeryLow };
+    enum TaskPriority { VeryHigh = 1, High, Normal, Low, VeryLow };
 
     /* Constructs a new ToDoEvent
        @param completed Is the TodoEvent completed
@@ -101,13 +103,13 @@ public:
            const QString& summary = QString::null,
            const QString& description = QString::null,
            ushort progress = 0,
-           bool hasDate = false,  QDate date = QDate::currentDate(),
+           bool hasDate = false, QDate date = QDate::currentDate(),
            int uid = 0 /* empty */ );
 
     /** Copy c'tor
      *
      */
-    OTodo(const OTodo & );
+    OTodo( const OTodo & );
 
     /**
      *destructor
@@ -123,13 +125,13 @@ public:
      * Does this Event have a deadline
      */
     bool hasDueDate() const;
-    bool hasStartDate()const;
-    bool hasCompletedDate()const;
+    bool hasStartDate() const;
+    bool hasCompletedDate() const;
 
     /**
      * What is the priority?
      */
-    int priority()const ;
+    int priority() const ;
 
     /**
      * progress as ushort 0, 20, 40, 60, 80 or 100%
@@ -139,52 +141,52 @@ public:
     /**
      * The due Date
      */
-    QDate dueDate()const;
+    QDate dueDate() const;
 
     /**
      * When did it start?
      */
-    QDate startDate()const;
+    QDate startDate() const;
 
     /**
      * When was it completed?
      */
-    QDate completedDate()const;
+    QDate completedDate() const;
 
     /**
      * does it have a state?
      */
-    bool hasState()const;
+    bool hasState() const;
 
     /**
      * What is the state of this OTodo?
      */
-    OPimState state()const;
+    OPimState state() const;
 
     /**
      * has recurrence?
      */
-    bool hasRecurrence()const;
+    bool hasRecurrence() const;
 
     /**
      * the recurrance of this
      */
-    ORecur recurrence()const;
+    ORecur recurrence() const;
 
     /**
      * does this OTodo have a maintainer?
      */
-    bool hasMaintainer()const;
+    bool hasMaintainer() const;
 
     /**
      * the Maintainer of this OTodo
      */
-    OPimMaintainer maintainer()const;
+    OPimMaintainer maintainer() const;
 
     /**
      * The description of the todo
      */
-    QString description()const;
+    QString description() const;
 
     /**
      * A small summary of the todo
@@ -197,7 +199,7 @@ public:
      */
     QString toRichText() const;
 
-    bool hasNotifiers()const;
+    bool hasNotifiers() const;
     /*
      * FIXME check if the sharing is still fine!! -zecke
      * ### CHECK If API is fine
@@ -210,25 +212,25 @@ public:
     /**
      *
      */
-    const OPimNotifyManager &notifiers()const;
+    const OPimNotifyManager &notifiers() const;
 
     /**
      * reimplementations
      */
-    QString type()const;
-    QString toShortText()const;
-    QString recordField(int id )const;
+    QString type() const;
+    QString toShortText() const;
+    QString recordField( int id ) const;
 
     /**
      * toMap puts all data into the map. int relates
      * to ToDoEvent RecordFields enum
      */
-    QMap<int, QString> toMap()const;
+    QMap<int, QString> toMap() const;
 
     /**
      * Set if this Todo is completed
      */
-    void setCompleted(bool completed );
+    void setCompleted( bool completed );
 
     /**
      * set if this todo got an end data
@@ -242,7 +244,7 @@ public:
     /**
      * Set the priority of the Todo
      */
-    void setPriority(int priority );
+    void setPriority( int priority );
 
     /**
      * Set the progress.
@@ -266,14 +268,14 @@ public:
 
     void setRecurrence( const ORecur& );
 
-    void setDescription(const QString& );
-    void setSummary(const QString& );
+    void setDescription( const QString& );
+    void setSummary( const QString& );
 
     /**
      * set the state of a Todo
      * @param state State what the todo should take
      */
-    void setState( const OPimState& state);
+    void setState( const OPimState& state );
 
     /**
      * set the Maintainer Mode
@@ -283,19 +285,19 @@ public:
     bool isOverdue();
 
 
-    virtual bool match( const QRegExp &r )const;
+    virtual bool match( const QRegExp &r ) const;
 
-    bool operator<(const OTodo &toDoEvent )const;
-    bool operator<=(const OTodo &toDoEvent )const;
-    bool operator!=(const OTodo &toDoEvent )const;
-    bool operator>(const OTodo &toDoEvent )const;
-    bool operator>=(const OTodo &toDoEvent)const;
-    bool operator==(const OTodo &toDoEvent )const;
-    OTodo &operator=(const OTodo &toDoEvent );
+    bool operator<( const OTodo &toDoEvent ) const;
+    bool operator<=( const OTodo &toDoEvent ) const;
+    bool operator!=( const OTodo &toDoEvent ) const;
+    bool operator>( const OTodo &toDoEvent ) const;
+    bool operator>=( const OTodo &toDoEvent ) const;
+    bool operator==( const OTodo &toDoEvent ) const;
+    OTodo &operator=( const OTodo &toDoEvent );
 
     static int rtti();
 
- private:
+  private:
     class OTodoPrivate;
     struct OTodoData;
 
@@ -306,8 +308,11 @@ public:
     OTodoData *data;
 
 };
-inline bool OTodo::operator!=(const OTodo &toDoEvent )const {
-    return !(*this == toDoEvent);
+
+
+inline bool OTodo::operator!=( const OTodo &toDoEvent ) const
+{
+    return !( *this == toDoEvent );
 }
 
 }

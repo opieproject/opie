@@ -27,15 +27,18 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OPIE_RECORD_LIST_H
-#define OPIE_RECORD_LIST_H
+#ifndef ORECORDLIST_H
+#define ORECORDLIST_H
 
-#include <qarray.h>
-
+/* OPIE */
 #include <opie2/otemplatebase.h>
 #include <opie2/opimrecord.h>
 
-namespace Opie {
+/* QT */
+#include <qarray.h>
+
+namespace Opie
+{
 
 class ORecordListIteratorPrivate;
 /**
@@ -47,9 +50,11 @@ class ORecordListIteratorPrivate;
  */
 template <class T> class ORecordList;
 template <class T = OPimRecord>
-class ORecordListIterator {
+class ORecordListIterator
+{
     friend class ORecordList<T>;
-public:
+
+  public:
     typedef OTemplateBase<T> Base;
 
     /**
@@ -65,7 +70,7 @@ public:
     ~ORecordListIterator();
 
     ORecordListIterator( const ORecordListIterator& );
-    ORecordListIterator &operator=(const ORecordListIterator& );
+    ORecordListIterator &operator=( const ORecordListIterator& );
 
     /**
      * a * operator ;)
@@ -81,29 +86,30 @@ public:
     /**
      * the current item
      */
-    uint current()const;
+    uint current() const;
 
     /**
      * the number of items
      */
-    uint count()const;
+    uint count() const;
 
     /**
      * sets the current item
      */
     void setCurrent( uint cur );
 
-private:
+  private:
     QArray<int> m_uids;
     uint m_current;
     const Base* m_temp;
     bool m_end : 1;
     T m_record;
-    bool m_direction :1;
+    bool m_direction : 1;
 
     /* d pointer for future versions */
     ORecordListIteratorPrivate *d;
 };
+
 
 class ORecordListPrivate;
 /**
@@ -111,17 +117,18 @@ class ORecordListPrivate;
  * from OPimAccessTemplate
  */
 template <class T = OPimRecord >
-class ORecordList {
-public:
+class ORecordList
+{
+  public:
     typedef OTemplateBase<T> Base;
     typedef ORecordListIterator<T> Iterator;
 
     /**
      * c'tor
      */
-    ORecordList () {
-    }
-ORecordList( const QArray<int>& ids,
+    ORecordList ()
+    {}
+    ORecordList( const QArray<int>& ids,
                  const Base* );
     ~ORecordList();
 
@@ -138,29 +145,31 @@ ORecordList( const QArray<int>& ids,
     /**
      * the number of items in the list
      */
-     uint count()const;
+    uint count() const;
 
-    T operator[]( uint i );
-    int uidAt(uint i );
+    T operator[] ( uint i );
+    int uidAt( uint i );
 
-   /**
-    * Remove the contact with given uid
-    */
+    /**
+     * Remove the contact with given uid
+     */
     bool remove( int uid );
 
     /*
       ConstIterator begin()const;
       ConstIterator end()const;
     */
-private:
+  private:
     QArray<int> m_ids;
     const Base* m_acc;
     ORecordListPrivate *d;
 };
 
+
 /* ok now implement it  */
 template <class T>
-ORecordListIterator<T>::ORecordListIterator() {
+ORecordListIterator<T>::ORecordListIterator()
+{
     m_current = 0;
     m_temp = 0l;
     m_end = true;
@@ -168,14 +177,19 @@ ORecordListIterator<T>::ORecordListIterator() {
     /* forward */
     m_direction = TRUE;
 }
-template <class T>
-ORecordListIterator<T>::~ORecordListIterator() {
-/* nothing to delete */
-}
+
 
 template <class T>
-ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it) {
-//    qWarning("ORecordListIterator copy c'tor");
+ORecordListIterator<T>::~ORecordListIterator()
+{
+    /* nothing to delete */
+}
+
+
+template <class T>
+ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it )
+{
+    //    qWarning("ORecordListIterator copy c'tor");
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -184,8 +198,10 @@ ORecordListIterator<T>::ORecordListIterator( const ORecordListIterator<T>& it) {
     m_direction = it.m_direction;
 }
 
+
 template <class T>
-ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIterator<T>& it) {
+ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIterator<T>& it )
+{
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -195,44 +211,57 @@ ORecordListIterator<T> &ORecordListIterator<T>::operator=( const ORecordListIter
     return *this;
 }
 
+
 template <class T>
-T ORecordListIterator<T>::operator*() {
-	//qWarning("operator* %d %d", m_current,  m_uids[m_current] );
-    if (!m_end )
-        m_record = m_temp->find( m_uids[m_current], m_uids, m_current,
+T ORecordListIterator<T>::operator*()
+{
+    //qWarning("operator* %d %d", m_current,  m_uids[m_current] );
+    if ( !m_end )
+        m_record = m_temp->find( m_uids[ m_current ], m_uids, m_current,
                                  m_direction ? Base::Forward :
-                                 Base::Reverse  );
+                                 Base::Reverse );
     else
         m_record = T();
 
     return m_record;
 }
 
+
 template <class T>
-ORecordListIterator<T> &ORecordListIterator<T>::operator++() {
+ORecordListIterator<T> &ORecordListIterator<T>::operator++()
+{
     m_direction = true;
-    if (m_current < m_uids.count() ) {
+    if ( m_current < m_uids.count() )
+    {
         m_end = false;
         ++m_current;
-    }else
+    }
+    else
         m_end = true;
 
     return *this;
 }
+
+
 template <class T>
-ORecordListIterator<T> &ORecordListIterator<T>::operator--() {
+ORecordListIterator<T> &ORecordListIterator<T>::operator--()
+{
     m_direction = false;
-    if ( m_current > 0 ) {
+    if ( m_current > 0 )
+    {
         --m_current;
         m_end = false;
-    }  else
+    }
+    else
         m_end = true;
 
     return *this;
 }
 
+
 template <class T>
-bool ORecordListIterator<T>::operator==( const ORecordListIterator<T>& it ) {
+bool ORecordListIterator<T>::operator==( const ORecordListIterator<T>& it )
+{
 
     /* if both are at we're the same.... */
     if ( m_end == it.m_end ) return true;
@@ -243,93 +272,130 @@ bool ORecordListIterator<T>::operator==( const ORecordListIterator<T>& it ) {
 
     return true;
 }
+
+
 template <class T>
-bool ORecordListIterator<T>::operator!=( const ORecordListIterator<T>& it ) {
-    return !(*this == it );
+bool ORecordListIterator<T>::operator!=( const ORecordListIterator<T>& it )
+{
+    return !( *this == it );
 }
+
+
 template <class T>
 ORecordListIterator<T>::ORecordListIterator( const QArray<int> uids,
-                                  const Base* t )
-    : m_uids( uids ), m_current( 0 ),  m_temp( t ), m_end( false ),
-      m_direction( false )
+        const Base* t )
+        : m_uids( uids ), m_current( 0 ), m_temp( t ), m_end( false ),
+        m_direction( false )
 {
     /* if the list is empty we're already at the end of the list */
-    if (uids.count() == 0 )
+    if ( uids.count() == 0 )
         m_end = true;
 }
+
+
 template <class T>
-uint ORecordListIterator<T>::current()const {
+uint ORecordListIterator<T>::current() const
+{
     return m_current;
 }
+
+
 template <class T>
-void ORecordListIterator<T>::setCurrent( uint cur ) {
-    if( cur < m_uids.count() ) {
-	m_end = false;
-	m_current= cur;
+void ORecordListIterator<T>::setCurrent( uint cur )
+{
+    if ( cur < m_uids.count() )
+    {
+        m_end = false;
+        m_current = cur;
     }
 }
 template <class T>
-uint ORecordListIterator<T>::count()const {
+uint ORecordListIterator<T>::count() const
+{
     return m_uids.count();
 }
+
+
 template <class T>
 ORecordList<T>::ORecordList( const QArray<int>& ids,
                              const Base* acc )
-    : m_ids( ids ), m_acc( acc )
+        : m_ids( ids ), m_acc( acc )
+{}
+
+
+template <class T>
+ORecordList<T>::~ORecordList()
 {
+    /* nothing to do here */
 }
+
+
 template <class T>
-ORecordList<T>::~ORecordList() {
-/* nothing to do here */
-}
-template <class T>
-typename ORecordList<T>::Iterator ORecordList<T>::begin() {
+typename ORecordList<T>::Iterator ORecordList<T>::begin()
+{
     Iterator it( m_ids, m_acc );
     return it;
 }
+
+
 template <class T>
-typename ORecordList<T>::Iterator ORecordList<T>::end() {
+typename ORecordList<T>::Iterator ORecordList<T>::end()
+{
     Iterator it( m_ids, m_acc );
     it.m_end = true;
     it.m_current = m_ids.count();
 
     return it;
 }
+
+
 template <class T>
-uint ORecordList<T>::count()const {
-return m_ids.count();
+uint ORecordList<T>::count() const
+{
+    return m_ids.count();
 }
+
+
 template <class T>
-T ORecordList<T>::operator[]( uint i ) {
+T ORecordList<T>::operator[] ( uint i )
+{
     if ( i >= m_ids.count() )
         return T();
     /* forward */
-    return m_acc->find( m_ids[i], m_ids, i );
-}
-template <class T>
-int ORecordList<T>::uidAt( uint i ) {
-    return m_ids[i];
+    return m_acc->find( m_ids[ i ], m_ids, i );
 }
 
+
 template <class T>
-bool ORecordList<T>::remove( int uid ) {
-	QArray<int> copy( m_ids.count() );
-	int counter = 0;
-	bool ret_val = false;
-
-	for (uint i = 0; i < m_ids.count(); i++){
-		if ( m_ids[i] != uid ){
-			copy[counter++] = m_ids[i];
-
-		}else
-			ret_val = true;
-	}
-
-	copy.resize( counter );
-	m_ids = copy;
+int ORecordList<T>::uidAt( uint i )
+{
+    return m_ids[ i ];
+}
 
 
-	return ret_val;
+template <class T>
+bool ORecordList<T>::remove( int uid )
+{
+    QArray<int> copy( m_ids.count() );
+    int counter = 0;
+    bool ret_val = false;
+
+    for ( uint i = 0; i < m_ids.count(); i++ )
+    {
+        if ( m_ids[ i ] != uid )
+        {
+            copy[ counter++ ] = m_ids[ i ];
+
+        }
+        else
+            ret_val = true;
+    }
+
+    copy.resize( counter );
+    m_ids = copy;
+
+
+    return ret_val;
 }
 
 }

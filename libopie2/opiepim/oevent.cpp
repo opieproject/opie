@@ -1,6 +1,6 @@
 /*
                              This file is part of the Opie Project
-                             Copyright (C) Stefan Eilers (Eilers.Stefan@epost.de)
+                             Copyright (C) Stefan Eilers <Eilers.Stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -26,22 +26,26 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#include <qshared.h>
-#include <qarray.h>
 
-#include <qpe/palmtopuidgen.h>
-#include <qpe/categories.h>
-#include <qpe/stringutil.h>
+#include "oevent.h"
 
+/* OPIE */
 #include <opie2/orecur.h>
 #include <opie2/opimresolver.h>
 #include <opie2/opimnotifymanager.h>
+#include <qpe/categories.h>
+#include <qpe/palmtopuidgen.h>
+#include <qpe/stringutil.h>
 
-#include <opie2/oevent.h>
+/* QT */
+#include <qshared.h>
+#include <qarray.h>
 
-namespace Opie {
+namespace Opie
+{
 
-int OCalendarHelper::week( const QDate& date) {
+int OCalendarHelper::week( const QDate& date )
+{
     // Calculates the week this date is in within that
     // month. Equals the "row" is is in in the month view
     int week = 1;
@@ -53,34 +57,48 @@ int OCalendarHelper::week( const QDate& date) {
 
     return week;
 }
-int OCalendarHelper::ocurrence( const QDate& date) {
+
+
+int OCalendarHelper::ocurrence( const QDate& date )
+{
     // calculates the number of occurrances of this day of the
     // week till the given date (e.g 3rd Wednesday of the month)
     return ( date.day() - 1 ) / 7 + 1;
 }
-int OCalendarHelper::dayOfWeek( char day ) {
+
+
+int OCalendarHelper::dayOfWeek( char day )
+{
     int dayOfWeek = 1;
     char i = ORecur::MON;
-    while ( !( i & day ) && i <= ORecur::SUN ) {
+    while ( !( i & day ) && i <= ORecur::SUN )
+    {
         i <<= 1;
         ++dayOfWeek;
     }
     return dayOfWeek;
 }
-int OCalendarHelper::monthDiff( const QDate& first, const QDate& second ) {
+
+
+int OCalendarHelper::monthDiff( const QDate& first, const QDate& second )
+{
     return ( second.year() - first.year() ) * 12 +
-        second.month() - first.month();
+           second.month() - first.month();
 }
 
-struct OEvent::Data : public QShared {
-    Data() : QShared() {
+
+struct OEvent::Data : public QShared
+{
+    Data() : QShared()
+    {
         child = 0;
         recur = 0;
         manager = 0;
         isAllDay = false;
         parent = 0;
     }
-    ~Data() {
+    ~Data()
+    {
         delete manager;
         delete recur;
     }
@@ -92,38 +110,49 @@ struct OEvent::Data : public QShared {
     QDateTime created;
     QDateTime start;
     QDateTime end;
-    bool isAllDay : 1;
+bool isAllDay : 1;
     QString timezone;
     QArray<int>* child;
     int parent;
 };
 
+
 OEvent::OEvent( int uid )
-    : OPimRecord( uid ) {
+        : OPimRecord( uid )
+{
     data = new Data;
 }
-OEvent::OEvent( const OEvent& ev)
-    : OPimRecord( ev ), data( ev.data )
+
+
+OEvent::OEvent( const OEvent& ev )
+        : OPimRecord( ev ), data( ev.data )
 {
     data->ref();
 }
 
-OEvent::OEvent( const QMap<int, QString> map )
-    : OPimRecord( 0 )
-{
-	data = new Data;
 
-	fromMap( map );
+OEvent::OEvent( const QMap<int, QString> map )
+        : OPimRecord( 0 )
+{
+    data = new Data;
+
+    fromMap( map );
 }
 
-OEvent::~OEvent() {
-    if ( data->deref() ) {
+
+OEvent::~OEvent()
+{
+    if ( data->deref() )
+    {
         delete data;
         data = 0;
     }
 }
-OEvent& OEvent::operator=( const OEvent& ev) {
-    if ( this == &ev ) return  *this;
+
+
+OEvent& OEvent::operator=( const OEvent& ev )
+{
+    if ( this == &ev ) return * this;
 
     OPimRecord::operator=( ev );
     ev.data->ref();
@@ -133,205 +162,300 @@ OEvent& OEvent::operator=( const OEvent& ev) {
 
     return *this;
 }
-QString OEvent::description()const {
+
+
+QString OEvent::description() const
+{
     return data->description;
 }
-void OEvent::setDescription( const QString& description ) {
+
+
+void OEvent::setDescription( const QString& description )
+{
     changeOrModify();
     data->description = description;
 }
-void OEvent::setLocation( const QString& loc ) {
+
+
+void OEvent::setLocation( const QString& loc )
+{
     changeOrModify();
     data->location = loc;
 }
-QString OEvent::location()const {
+
+
+QString OEvent::location() const
+{
     return data->location;
 }
-OPimNotifyManager &OEvent::notifiers()const {
+
+
+OPimNotifyManager &OEvent::notifiers() const
+{
     // I hope we can skip the changeOrModify here
     // the notifier should take care of it
     // and OPimNotify is shared too
-    if (!data->manager )
+    if ( !data->manager )
         data->manager = new OPimNotifyManager;
 
     return *data->manager;
 }
-bool OEvent::hasNotifiers()const {
-    if (!data->manager )
+
+
+bool OEvent::hasNotifiers() const
+{
+    if ( !data->manager )
         return false;
-    if (data->manager->reminders().isEmpty() &&
-        data->manager->alarms().isEmpty() )
+    if ( data->manager->reminders().isEmpty() &&
+            data->manager->alarms().isEmpty() )
         return false;
 
     return true;
 }
-ORecur OEvent::recurrence()const {
-    if (!data->recur)
+
+
+ORecur OEvent::recurrence() const
+{
+    if ( !data->recur )
         data->recur = new ORecur;
 
     return *data->recur;
 }
-void OEvent::setRecurrence( const ORecur& rec) {
+
+
+void OEvent::setRecurrence( const ORecur& rec )
+{
     changeOrModify();
-    if (data->recur )
-        (*data->recur) = rec;
+    if ( data->recur )
+        ( *data->recur ) = rec;
     else
         data->recur = new ORecur( rec );
 }
-bool OEvent::hasRecurrence()const {
-    if (!data->recur ) return false;
+
+
+bool OEvent::hasRecurrence() const
+{
+    if ( !data->recur ) return false;
     return data->recur->doesRecur();
 }
-QString OEvent::note()const {
+
+
+QString OEvent::note() const
+{
     return data->note;
 }
-void OEvent::setNote( const QString& note ) {
+
+
+void OEvent::setNote( const QString& note )
+{
     changeOrModify();
     data->note = note;
 }
-QDateTime OEvent::createdDateTime()const {
+
+
+QDateTime OEvent::createdDateTime() const
+{
     return data->created;
 }
-void OEvent::setCreatedDateTime( const QDateTime& time ) {
+
+
+void OEvent::setCreatedDateTime( const QDateTime& time )
+{
     changeOrModify();
     data->created = time;
 }
-QDateTime OEvent::startDateTime()const {
+
+
+QDateTime OEvent::startDateTime() const
+{
     if ( data->isAllDay )
-        return QDateTime( data->start.date(), QTime(0, 0, 0 ) );
+        return QDateTime( data->start.date(), QTime( 0, 0, 0 ) );
     return data->start;
 }
-QDateTime OEvent::startDateTimeInZone()const {
-    /* if no timezone, or all day event or if the current and this timeZone match... */
-    if (data->timezone.isEmpty() || data->isAllDay || data->timezone == OTimeZone::current().timeZone() ) return startDateTime();
 
-    OTimeZone zone(data->timezone  );
+
+QDateTime OEvent::startDateTimeInZone() const
+{
+    /* if no timezone, or all day event or if the current and this timeZone match... */
+    if ( data->timezone.isEmpty() || data->isAllDay || data->timezone == OTimeZone::current().timeZone() ) return startDateTime();
+
+    OTimeZone zone( data->timezone );
     return zone.toDateTime( data->start, OTimeZone::current() );
 }
-void OEvent::setStartDateTime( const QDateTime& dt ) {
+
+
+void OEvent::setStartDateTime( const QDateTime& dt )
+{
     changeOrModify();
     data->start = dt;
 }
-QDateTime OEvent::endDateTime()const {
+
+
+QDateTime OEvent::endDateTime() const
+{
     /*
      * if all Day event the end time needs
      * to be on the same day as the start
      */
     if ( data->isAllDay )
-        return QDateTime( data->start.date(), QTime(23, 59, 59 ) );
+        return QDateTime( data->start.date(), QTime( 23, 59, 59 ) );
     return data->end;
 }
-QDateTime OEvent::endDateTimeInZone()const {
-    /* if no timezone, or all day event or if the current and this timeZone match... */
-    if (data->timezone.isEmpty() || data->isAllDay || data->timezone == OTimeZone::current().timeZone() ) return endDateTime();
 
-    OTimeZone zone(data->timezone  );
+
+QDateTime OEvent::endDateTimeInZone() const
+{
+    /* if no timezone, or all day event or if the current and this timeZone match... */
+    if ( data->timezone.isEmpty() || data->isAllDay || data->timezone == OTimeZone::current().timeZone() ) return endDateTime();
+
+    OTimeZone zone( data->timezone );
     return zone.toDateTime( data->end, OTimeZone::current() );
 }
-void OEvent::setEndDateTime( const QDateTime& dt ) {
+
+
+void OEvent::setEndDateTime( const QDateTime& dt )
+{
     changeOrModify();
-    data->end =    dt;
+    data->end = dt;
 }
-bool OEvent::isMultipleDay()const {
+
+
+bool OEvent::isMultipleDay() const
+{
     return data->end.date().day() - data->start.date().day();
 }
-bool OEvent::isAllDay()const {
+
+
+bool OEvent::isAllDay() const
+{
     return data->isAllDay;
 }
-void OEvent::setAllDay( bool allDay ) {
+
+
+void OEvent::setAllDay( bool allDay )
+{
     changeOrModify();
     data->isAllDay = allDay;
-    if (allDay ) data->timezone = "UTC";
+    if ( allDay ) data->timezone = "UTC";
 }
-void OEvent::setTimeZone( const QString& tz ) {
+
+
+void OEvent::setTimeZone( const QString& tz )
+{
     changeOrModify();
     data->timezone = tz;
 }
-QString OEvent::timeZone()const {
-    if (data->isAllDay ) return QString::fromLatin1("UTC");
+
+
+QString OEvent::timeZone() const
+{
+    if ( data->isAllDay ) return QString::fromLatin1( "UTC" );
     return data->timezone;
 }
-bool OEvent::match( const QRegExp& re )const {
-    if ( re.match( data->description ) != -1 ){
+
+
+bool OEvent::match( const QRegExp& re ) const
+{
+    if ( re.match( data->description ) != -1 )
+    {
         setLastHitField( Qtopia::DatebookDescription );
         return true;
     }
-    if ( re.match( data->note ) != -1 ){
+    if ( re.match( data->note ) != -1 )
+    {
         setLastHitField( Qtopia::Note );
         return true;
     }
-    if ( re.match( data->location ) != -1 ){
+    if ( re.match( data->location ) != -1 )
+    {
         setLastHitField( Qtopia::Location );
         return true;
     }
-    if ( re.match( data->start.toString() ) != -1 ){
+    if ( re.match( data->start.toString() ) != -1 )
+    {
         setLastHitField( Qtopia::StartDateTime );
         return true;
     }
-    if ( re.match( data->end.toString() ) != -1 ){
+    if ( re.match( data->end.toString() ) != -1 )
+    {
         setLastHitField( Qtopia::EndDateTime );
         return true;
     }
     return false;
 }
-QString OEvent::toRichText()const {
+
+
+QString OEvent::toRichText() const
+{
     QString text, value;
 
     // description
     text += "<b><h3><img src=\"datebook/DateBook\">";
-    if ( !description().isEmpty() ) {
-        text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"),  "" );
+    if ( !description().isEmpty() )
+    {
+        text += Qtopia::escapeString( description() ).replace( QRegExp( "[\n]" ), "" );
     }
     text += "</h3></b><br><hr><br>";
 
     // location
-    if ( !(value = location()).isEmpty() ) {
+    if ( !( value = location() ).isEmpty() )
+    {
         text += "<b>" + QObject::tr( "Location:" ) + "</b> ";
-        text += Qtopia::escapeString(value) + "<br>";
+        text += Qtopia::escapeString( value ) + "<br>";
     }
 
     // all day event
-    if ( isAllDay() ) {
+    if ( isAllDay() )
+    {
         text += "<b><i>" + QObject::tr( "This is an all day event" ) + "</i></b><br>";
     }
     // multiple day event
-    else if ( isMultipleDay () ) {
+    else if ( isMultipleDay () )
+    {
         text += "<b><i>" + QObject::tr( "This is a multiple day event" ) + "</i></b><br>";
     }
     // start & end times
-    else {
+    else
+    {
         // start time
-        if ( startDateTime().isValid() ) {
-            text += "<b>" + QObject::tr( "Start:") + "</b> ";
-            text += Qtopia::escapeString(startDateTime().toString() ).
-                    replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+        if ( startDateTime().isValid() )
+        {
+            text += "<b>" + QObject::tr( "Start:" ) + "</b> ";
+            text += Qtopia::escapeString( startDateTime().toString() ).
+                    replace( QRegExp( "[\n]" ), "<br>" ) + "<br>";
         }
 
         // end time
-        if ( endDateTime().isValid() ) {
-            text += "<b>" + QObject::tr( "End:") + "</b> ";
-            text += Qtopia::escapeString(endDateTime().toString() ).
-                    replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+        if ( endDateTime().isValid() )
+        {
+            text += "<b>" + QObject::tr( "End:" ) + "</b> ";
+            text += Qtopia::escapeString( endDateTime().toString() ).
+                    replace( QRegExp( "[\n]" ), "<br>" ) + "<br>";
         }
     }
 
     // categories
-    if ( categoryNames("Calendar").count() ){
-	    text += "<b>" + QObject::tr( "Category:") + "</b> ";
-	    text += categoryNames("Calendar").join(", ");
-	    text += "<br>";
+    if ( categoryNames( "Calendar" ).count() )
+    {
+        text += "<b>" + QObject::tr( "Category:" ) + "</b> ";
+        text += categoryNames( "Calendar" ).join( ", " );
+        text += "<br>";
     }
 
     //notes
-    if ( !note().isEmpty() ) {
-        text += "<b>" + QObject::tr( "Note:") + "</b><br>";
+    if ( !note().isEmpty() )
+    {
+        text += "<b>" + QObject::tr( "Note:" ) + "</b><br>";
         text += note();
-//         text += Qtopia::escapeString(note() ).
-//                 replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+        //         text += Qtopia::escapeString(note() ).
+        //                 replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
     }
     return text;
 }
-QString OEvent::toShortText()const {
+
+
+QString OEvent::toShortText() const
+{
     QString text;
     text += QString::number( startDateTime().date().day() );
     text += ".";
@@ -346,29 +470,48 @@ QString OEvent::toShortText()const {
     text += description();
     return text;
 }
-QString OEvent::type()const {
-    return QString::fromLatin1("OEvent");
+
+
+QString OEvent::type() const
+{
+    return QString::fromLatin1( "OEvent" );
 }
-QString OEvent::recordField( int /*id */ )const {
+
+
+QString OEvent::recordField( int /*id */ ) const
+{
     return QString::null;
 }
-int OEvent::rtti() {
+
+
+int OEvent::rtti()
+{
     return OPimResolver::DateBook;
 }
-bool OEvent::loadFromStream( QDataStream& ) {
+
+
+bool OEvent::loadFromStream( QDataStream& )
+{
     return true;
 }
-bool OEvent::saveToStream( QDataStream& )const {
+
+
+bool OEvent::saveToStream( QDataStream& ) const
+{
     return true;
 }
-void OEvent::changeOrModify() {
-    if ( data->count != 1 ) {
+
+
+void OEvent::changeOrModify()
+{
+    if ( data->count != 1 )
+    {
         data->deref();
         Data* d2 = new Data;
         d2->description = data->description;
         d2->location = data->location;
 
-        if (data->manager )
+        if ( data->manager )
             d2->manager = new OPimNotifyManager( *data->manager );
 
         if ( data->recur )
@@ -382,7 +525,8 @@ void OEvent::changeOrModify() {
         d2->timezone = data->timezone;
         d2->parent = data->parent;
 
-        if ( data->child ) {
+        if ( data->child )
+        {
             d2->child = new QArray<int>( *data->child );
             d2->child->detach();
         }
@@ -390,8 +534,12 @@ void OEvent::changeOrModify() {
         data = d2;
     }
 }
-void OEvent::deref() {
-    if ( data->deref() ) {
+
+
+void OEvent::deref()
+{
+    if ( data->deref() )
+    {
         delete data;
         data = 0;
     }
@@ -401,197 +549,241 @@ void OEvent::deref() {
 // Thus, we could remove the stuff there and use this
 // for it and for all other places..
 // Encoding should happen at one place, only ! (eilers)
-QMap<int, QString> OEvent::toMap()const {
+QMap<int, QString> OEvent::toMap() const
+{
     QMap<int, QString> retMap;
 
     retMap.insert( OEvent::FUid, QString::number( uid() ) );
-    retMap.insert( OEvent::FCategories, Qtopia::escapeString( Qtopia::Record::idsToString( categories() ) ));
+    retMap.insert( OEvent::FCategories, Qtopia::escapeString( Qtopia::Record::idsToString( categories() ) ) );
     retMap.insert( OEvent::FDescription, Qtopia::escapeString( description() ) );
     retMap.insert( OEvent::FLocation, Qtopia::escapeString( location() ) );
     retMap.insert( OEvent::FType, isAllDay() ? "AllDay" : "" );
-    OPimAlarm alarm = notifiers().alarms()[0];
-    retMap.insert( OEvent::FAlarm, QString::number( alarm.dateTime().secsTo(  startDateTime() ) / 60 ) );
-    retMap.insert( OEvent::FSound, (alarm.sound() == OPimAlarm::Loud) ? "loud" : "silent" );
+    OPimAlarm alarm = notifiers().alarms() [ 0 ];
+    retMap.insert( OEvent::FAlarm, QString::number( alarm.dateTime().secsTo( startDateTime() ) / 60 ) );
+    retMap.insert( OEvent::FSound, ( alarm.sound() == OPimAlarm::Loud ) ? "loud" : "silent" );
 
-    OTimeZone zone(  timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
-    retMap.insert( OEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime(  startDateTime(), OTimeZone::utc() ) ) ) );
-    retMap.insert( OEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime(  endDateTime(), OTimeZone::utc() ) ) ) );
+    OTimeZone zone( timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
+    retMap.insert( OEvent::FStart, QString::number( zone.fromUTCDateTime( zone.toDateTime( startDateTime(), OTimeZone::utc() ) ) ) );
+    retMap.insert( OEvent::FEnd, QString::number( zone.fromUTCDateTime( zone.toDateTime( endDateTime(), OTimeZone::utc() ) ) ) );
     retMap.insert( OEvent::FNote, Qtopia::escapeString( note() ) );
     retMap.insert( OEvent::FTimeZone, timeZone().isEmpty() ? QString( "None" ) : timeZone() );
-    if( parent() )
-	    retMap.insert( OEvent::FRecParent, QString::number( parent() ) );
-    if( children().count() ){
-            QArray<int> childr = children();
-	    QString buf;
-            for ( uint i = 0; i < childr.count(); i++ ) {
-		    if ( i != 0 ) buf += " ";
-		    buf += QString::number( childr[i] );
-            }	    
-	    retMap.insert( OEvent::FRecChildren, buf );
+    if ( parent() )
+        retMap.insert( OEvent::FRecParent, QString::number( parent() ) );
+    if ( children().count() )
+    {
+        QArray<int> childr = children();
+        QString buf;
+        for ( uint i = 0; i < childr.count(); i++ )
+        {
+            if ( i != 0 ) buf += " ";
+            buf += QString::number( childr[ i ] );
+        }
+        retMap.insert( OEvent::FRecChildren, buf );
     }
-    
+
     // Add recurrence stuff
-    if( hasRecurrence() ){
-	    ORecur recur = recurrence();
-	    QMap<int, QString> recFields = recur.toMap();
-	    retMap.insert( OEvent::FRType, recFields[ORecur::RType] );
-	    retMap.insert( OEvent::FRWeekdays, recFields[ORecur::RWeekdays] );
-	    retMap.insert( OEvent::FRPosition, recFields[ORecur::RPosition] );
-	    retMap.insert( OEvent::FRFreq, recFields[ORecur::RFreq] );
-	    retMap.insert( OEvent::FRHasEndDate, recFields[ORecur::RHasEndDate] );
-	    retMap.insert( OEvent::FREndDate, recFields[ORecur::EndDate] );
-	    retMap.insert( OEvent::FRCreated, recFields[ORecur::Created] );
-	    retMap.insert( OEvent::FRExceptions, recFields[ORecur::Exceptions] );
-    } else {
-	    ORecur recur = recurrence();
-	    QMap<int, QString> recFields = recur.toMap();
-	    retMap.insert( OEvent::FRType, recFields[ORecur::RType] );
+    if ( hasRecurrence() )
+    {
+        ORecur recur = recurrence();
+        QMap<int, QString> recFields = recur.toMap();
+        retMap.insert( OEvent::FRType, recFields[ ORecur::RType ] );
+        retMap.insert( OEvent::FRWeekdays, recFields[ ORecur::RWeekdays ] );
+        retMap.insert( OEvent::FRPosition, recFields[ ORecur::RPosition ] );
+        retMap.insert( OEvent::FRFreq, recFields[ ORecur::RFreq ] );
+        retMap.insert( OEvent::FRHasEndDate, recFields[ ORecur::RHasEndDate ] );
+        retMap.insert( OEvent::FREndDate, recFields[ ORecur::EndDate ] );
+        retMap.insert( OEvent::FRCreated, recFields[ ORecur::Created ] );
+        retMap.insert( OEvent::FRExceptions, recFields[ ORecur::Exceptions ] );
     }
-   
+    else
+    {
+        ORecur recur = recurrence();
+        QMap<int, QString> recFields = recur.toMap();
+        retMap.insert( OEvent::FRType, recFields[ ORecur::RType ] );
+    }
+
     return retMap;
 }
+
 
 void OEvent::fromMap( const QMap<int, QString>& map )
 {
 
-	// We just want to set the UID if it is really stored.
-	if ( !map[OEvent::FUid].isEmpty() )
-		setUid( map[OEvent::FUid].toInt() );
+    // We just want to set the UID if it is really stored.
+    if ( !map[ OEvent::FUid ].isEmpty() )
+        setUid( map[ OEvent::FUid ].toInt() );
 
-	setCategories( idsFromString( map[OEvent::FCategories] ) );
-	setDescription( map[OEvent::FDescription] );
-	setLocation( map[OEvent::FLocation] );
+    setCategories( idsFromString( map[ OEvent::FCategories ] ) );
+    setDescription( map[ OEvent::FDescription ] );
+    setLocation( map[ OEvent::FLocation ] );
 
-	if ( map[OEvent::FType] == "AllDay" )
-		setAllDay( true );
-	else
-		setAllDay( false );
-	
-	int alarmTime = -1;
-	if( !map[OEvent::FAlarm].isEmpty() )
-		alarmTime = map[OEvent::FAlarm].toInt();
+    if ( map[ OEvent::FType ] == "AllDay" )
+        setAllDay( true );
+    else
+        setAllDay( false );
 
-	int sound = ( ( map[OEvent::FSound] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
-	if ( ( alarmTime != -1 )  ){
-		QDateTime dt = startDateTime().addSecs( -1*alarmTime*60 );
-		OPimAlarm al( sound ,  dt  );
-		notifiers().add( al );
-	}
-	if ( !map[OEvent::FTimeZone].isEmpty() && ( map[OEvent::FTimeZone] != "None" ) ){
-		setTimeZone( map[OEvent::FTimeZone] );
-	}
-	
-	time_t start = (time_t) map[OEvent::FStart].toLong();
-	time_t end   = (time_t) map[OEvent::FEnd].toLong();
+    int alarmTime = -1;
+    if ( !map[ OEvent::FAlarm ].isEmpty() )
+        alarmTime = map[ OEvent::FAlarm ].toInt();
 
-	/* AllDay is always in UTC */
-	if ( isAllDay() ) {
-		OTimeZone utc = OTimeZone::utc();
-		setStartDateTime( utc.fromUTCDateTime( start ) );
-		setEndDateTime  ( utc.fromUTCDateTime( end   ) );
-		setTimeZone( "UTC"); // make sure it is really utc
-	}else {
-		/* to current date time */
-		// qWarning(" Start is %d", start );
-		OTimeZone zone( timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
-		QDateTime date = zone.toDateTime( start );
-		qWarning(" Start is %s", date.toString().latin1() );
-		setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
+    int sound = ( ( map[ OEvent::FSound ] == "loud" ) ? OPimAlarm::Loud : OPimAlarm::Silent );
+    if ( ( alarmTime != -1 ) )
+    {
+        QDateTime dt = startDateTime().addSecs( -1 * alarmTime * 60 );
+        OPimAlarm al( sound , dt );
+        notifiers().add( al );
+    }
+    if ( !map[ OEvent::FTimeZone ].isEmpty() && ( map[ OEvent::FTimeZone ] != "None" ) )
+    {
+        setTimeZone( map[ OEvent::FTimeZone ] );
+    }
 
-		date = zone.toDateTime( end );
-		setEndDateTime  ( zone.toDateTime( date, OTimeZone::current() ) );
-	}
-	
-	if ( !map[OEvent::FRecParent].isEmpty() )
-		setParent( map[OEvent::FRecParent].toInt() );
+    time_t start = ( time_t ) map[ OEvent::FStart ].toLong();
+    time_t end = ( time_t ) map[ OEvent::FEnd ].toLong();
 
-	if ( !map[OEvent::FRecChildren].isEmpty() ){
-		QStringList list = QStringList::split(' ', map[OEvent::FRecChildren] );
-		for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
-			addChild( (*it).toInt() );
-		}
-	}
-	
-	// Fill recurrence stuff and put it directly into the ORecur-Object using fromMap..
-	if( !map[OEvent::FRType].isEmpty() ){
-		QMap<int, QString> recFields;
-		recFields.insert( ORecur::RType, map[OEvent::FRType] );
-		recFields.insert( ORecur::RWeekdays, map[OEvent::FRWeekdays] );
-		recFields.insert( ORecur::RPosition, map[OEvent::FRPosition] );
-		recFields.insert( ORecur::RFreq, map[OEvent::FRFreq] );
-		recFields.insert( ORecur::RHasEndDate, map[OEvent::FRHasEndDate] );
-		recFields.insert( ORecur::EndDate, map[OEvent::FREndDate] );
-		recFields.insert( ORecur::Created, map[OEvent::FRCreated] );
-		recFields.insert( ORecur::Exceptions, map[OEvent::FRExceptions] );
-		ORecur recur( recFields );
-		setRecurrence( recur );
-	}
-	
+    /* AllDay is always in UTC */
+    if ( isAllDay() )
+    {
+        OTimeZone utc = OTimeZone::utc();
+        setStartDateTime( utc.fromUTCDateTime( start ) );
+        setEndDateTime ( utc.fromUTCDateTime( end ) );
+        setTimeZone( "UTC" ); // make sure it is really utc
+    }
+    else
+    {
+        /* to current date time */
+        // qWarning(" Start is %d", start );
+        OTimeZone zone( timeZone().isEmpty() ? OTimeZone::current() : timeZone() );
+        QDateTime date = zone.toDateTime( start );
+        qWarning( " Start is %s", date.toString().latin1() );
+        setStartDateTime( zone.toDateTime( date, OTimeZone::current() ) );
+
+        date = zone.toDateTime( end );
+        setEndDateTime ( zone.toDateTime( date, OTimeZone::current() ) );
+    }
+
+    if ( !map[ OEvent::FRecParent ].isEmpty() )
+        setParent( map[ OEvent::FRecParent ].toInt() );
+
+    if ( !map[ OEvent::FRecChildren ].isEmpty() )
+    {
+        QStringList list = QStringList::split( ' ', map[ OEvent::FRecChildren ] );
+        for ( QStringList::Iterator it = list.begin(); it != list.end(); ++it )
+        {
+            addChild( ( *it ).toInt() );
+        }
+    }
+
+    // Fill recurrence stuff and put it directly into the ORecur-Object using fromMap..
+    if ( !map[ OEvent::FRType ].isEmpty() )
+    {
+        QMap<int, QString> recFields;
+        recFields.insert( ORecur::RType, map[ OEvent::FRType ] );
+        recFields.insert( ORecur::RWeekdays, map[ OEvent::FRWeekdays ] );
+        recFields.insert( ORecur::RPosition, map[ OEvent::FRPosition ] );
+        recFields.insert( ORecur::RFreq, map[ OEvent::FRFreq ] );
+        recFields.insert( ORecur::RHasEndDate, map[ OEvent::FRHasEndDate ] );
+        recFields.insert( ORecur::EndDate, map[ OEvent::FREndDate ] );
+        recFields.insert( ORecur::Created, map[ OEvent::FRCreated ] );
+        recFields.insert( ORecur::Exceptions, map[ OEvent::FRExceptions ] );
+        ORecur recur( recFields );
+        setRecurrence( recur );
+    }
+
 }
 
 
-int OEvent::parent()const {
+int OEvent::parent() const
+{
     return data->parent;
 }
-void OEvent::setParent( int uid ) {
+
+
+void OEvent::setParent( int uid )
+{
     changeOrModify();
     data->parent = uid;
 }
-QArray<int> OEvent::children() const{
-    if (!data->child) return QArray<int>();
+
+
+QArray<int> OEvent::children() const
+{
+    if ( !data->child ) return QArray<int>();
     else
         return data->child->copy();
 }
-void OEvent::setChildren( const QArray<int>& arr ) {
+
+
+void OEvent::setChildren( const QArray<int>& arr )
+{
     changeOrModify();
-    if (data->child) delete data->child;
+    if ( data->child ) delete data->child;
 
     data->child = new QArray<int>( arr );
     data->child->detach();
 }
-void OEvent::addChild( int uid ) {
+
+
+void OEvent::addChild( int uid )
+{
     changeOrModify();
-    if (!data->child ) {
-        data->child = new QArray<int>(1);
-        (*data->child)[0] = uid;
-    }else{
+    if ( !data->child )
+    {
+        data->child = new QArray<int>( 1 );
+        ( *data->child ) [ 0 ] = uid;
+    }
+    else
+    {
         int count = data->child->count();
         data->child->resize( count + 1 );
-        (*data->child)[count] = uid;
+        ( *data->child ) [ count ] = uid;
     }
 }
-void OEvent::removeChild( int uid ) {
-    if (!data->child || !data->child->contains( uid ) ) return;
+
+
+void OEvent::removeChild( int uid )
+{
+    if ( !data->child || !data->child->contains( uid ) ) return ;
     changeOrModify();
     QArray<int> newAr( data->child->count() - 1 );
     int j = 0;
     uint count = data->child->count();
-    for ( uint i = 0; i < count; i++ ) {
-        if ( (*data->child)[i] != uid ) {
-            newAr[j] = (*data->child)[i];
+    for ( uint i = 0; i < count; i++ )
+    {
+        if ( ( *data->child ) [ i ] != uid )
+        {
+            newAr[ j ] = ( *data->child ) [ i ];
             j++;
         }
     }
-    (*data->child) = newAr;
+    ( *data->child ) = newAr;
 }
-struct OEffectiveEvent::Data : public QShared {
-    Data() : QShared() {
-    }
+
+
+struct OEffectiveEvent::Data : public QShared
+{
+    Data() : QShared()
+    {}
     OEvent event;
     QDate date;
     QTime start, end;
     QDate startDate, endDate;
-    bool dates : 1;
+bool dates : 1;
 };
 
-OEffectiveEvent::OEffectiveEvent() {
+
+OEffectiveEvent::OEffectiveEvent()
+{
     data = new Data;
     data->date = QDate::currentDate();
     data->start = data->end = QTime::currentTime();
     data->dates = false;
 }
+
+
 OEffectiveEvent::OEffectiveEvent( const OEvent& ev, const QDate& startDate,
-                                  Position pos ) {
+                                  Position pos )
+{
     data = new Data;
     data->event = ev;
     data->date = startDate;
@@ -607,18 +799,28 @@ OEffectiveEvent::OEffectiveEvent( const OEvent& ev, const QDate& startDate,
 
     data->dates = false;
 }
-OEffectiveEvent::OEffectiveEvent( const OEffectiveEvent& ev) {
+
+
+OEffectiveEvent::OEffectiveEvent( const OEffectiveEvent& ev )
+{
     data = ev.data;
     data->ref();
 }
-OEffectiveEvent::~OEffectiveEvent() {
-    if ( data->deref() ) {
+
+
+OEffectiveEvent::~OEffectiveEvent()
+{
+    if ( data->deref() )
+    {
         delete data;
         data = 0;
     }
 }
-OEffectiveEvent& OEffectiveEvent::operator=( const OEffectiveEvent& ev ) {
-    if ( *this == ev ) return  *this;
+
+
+OEffectiveEvent& OEffectiveEvent::operator=( const OEffectiveEvent& ev )
+{
+    if ( *this == ev ) return * this;
 
     ev.data->ref();
     deref();
@@ -627,71 +829,119 @@ OEffectiveEvent& OEffectiveEvent::operator=( const OEffectiveEvent& ev ) {
     return *this;
 }
 
-void OEffectiveEvent::setStartTime( const QTime& ti) {
+
+void OEffectiveEvent::setStartTime( const QTime& ti )
+{
     changeOrModify();
     data->start = ti;
 }
-void OEffectiveEvent::setEndTime( const QTime& en) {
+
+
+void OEffectiveEvent::setEndTime( const QTime& en )
+{
     changeOrModify();
     data->end = en;
 }
-void OEffectiveEvent::setEvent( const OEvent& ev) {
+
+
+void OEffectiveEvent::setEvent( const OEvent& ev )
+{
     changeOrModify();
     data->event = ev;
 }
-void OEffectiveEvent::setDate( const QDate& da) {
+
+
+void OEffectiveEvent::setDate( const QDate& da )
+{
     changeOrModify();
     data->date = da;
 }
+
+
 void OEffectiveEvent::setEffectiveDates( const QDate& from,
-                                         const QDate& to ) {
-    if (!from.isValid() ) {
+        const QDate& to )
+{
+    if ( !from.isValid() )
+    {
         data->dates = false;
-        return;
+        return ;
     }
 
     data->startDate = from;
     data->endDate = to;
 }
-QString OEffectiveEvent::description()const {
+
+
+QString OEffectiveEvent::description() const
+{
     return data->event.description();
 }
-QString OEffectiveEvent::location()const {
+
+
+QString OEffectiveEvent::location() const
+{
     return data->event.location();
 }
-QString OEffectiveEvent::note()const {
+
+
+QString OEffectiveEvent::note() const
+{
     return data->event.note();
 }
-OEvent OEffectiveEvent::event()const {
+
+
+OEvent OEffectiveEvent::event() const
+{
     return data->event;
 }
-QTime OEffectiveEvent::startTime()const {
+
+
+QTime OEffectiveEvent::startTime() const
+{
     return data->start;
 }
-QTime OEffectiveEvent::endTime()const {
+
+
+QTime OEffectiveEvent::endTime() const
+{
     return data->end;
 }
-QDate OEffectiveEvent::date()const {
+
+
+QDate OEffectiveEvent::date() const
+{
     return data->date;
 }
-int OEffectiveEvent::length()const {
-    return (data->end.hour() * 60 - data->start.hour() * 60)
-        + QABS(data->start.minute() - data->end.minute() );
+
+
+int OEffectiveEvent::length() const
+{
+    return ( data->end.hour() * 60 - data->start.hour() * 60 )
+           + QABS( data->start.minute() - data->end.minute() );
 }
-int OEffectiveEvent::size()const {
+
+
+int OEffectiveEvent::size() const
+{
     return ( data->end.hour() - data->start.hour() ) * 3600
-        + (data->end.minute() - data->start.minute() * 60
-        + data->end.second() - data->start.second() );
+           + ( data->end.minute() - data->start.minute() * 60
+               + data->end.second() - data->start.second() );
 }
-QDate OEffectiveEvent::startDate()const {
+
+
+QDate OEffectiveEvent::startDate() const
+{
     if ( data->dates )
         return data->startDate;
-    else if ( data->event.hasRecurrence() )  // single day, since multi-day should have a d pointer
+    else if ( data->event.hasRecurrence() )   // single day, since multi-day should have a d pointer
         return data->date;
     else
         return data->event.startDateTime().date();
 }
-QDate OEffectiveEvent::endDate()const {
+
+
+QDate OEffectiveEvent::endDate() const
+{
     if ( data->dates )
         return data->endDate;
     else if ( data->event.hasRecurrence() )
@@ -699,14 +949,22 @@ QDate OEffectiveEvent::endDate()const {
     else
         return data->event.endDateTime().date();
 }
-void OEffectiveEvent::deref() {
-    if ( data->deref() ) {
+
+
+void OEffectiveEvent::deref()
+{
+    if ( data->deref() )
+    {
         delete data;
         data = 0;
     }
 }
-void OEffectiveEvent::changeOrModify() {
-    if ( data->count != 1 ) {
+
+
+void OEffectiveEvent::changeOrModify()
+{
+    if ( data->count != 1 )
+    {
         data->deref();
         Data* d2 = new Data;
         d2->event = data->event;
@@ -719,31 +977,49 @@ void OEffectiveEvent::changeOrModify() {
         data = d2;
     }
 }
-bool OEffectiveEvent::operator<( const OEffectiveEvent &e ) const{
+
+
+bool OEffectiveEvent::operator<( const OEffectiveEvent &e ) const
+{
     if ( data->date < e.date() )
-	return TRUE;
+        return TRUE;
     if ( data->date == e.date() )
-	return ( startTime() < e.startTime() );
+        return ( startTime() < e.startTime() );
     else
-	return FALSE;
+        return FALSE;
 }
-bool OEffectiveEvent::operator<=( const OEffectiveEvent &e ) const{
-    return (data->date <= e.date() );
+
+
+bool OEffectiveEvent::operator<=( const OEffectiveEvent &e ) const
+{
+    return ( data->date <= e.date() );
 }
-bool OEffectiveEvent::operator==( const OEffectiveEvent &e ) const {
+
+
+bool OEffectiveEvent::operator==( const OEffectiveEvent &e ) const
+{
     return ( date() == e.date()
-	     && startTime() == e.startTime()
-	     && endTime()== e.endTime()
-	     && event() == e.event() );
+             && startTime() == e.startTime()
+             && endTime() == e.endTime()
+             && event() == e.event() );
 }
-bool OEffectiveEvent::operator!=( const OEffectiveEvent &e ) const {
-    return !(*this == e );
+
+
+bool OEffectiveEvent::operator!=( const OEffectiveEvent &e ) const
+{
+    return !( *this == e );
 }
-bool OEffectiveEvent::operator>( const OEffectiveEvent &e ) const {
-    return !(*this <= e );
+
+
+bool OEffectiveEvent::operator>( const OEffectiveEvent &e ) const
+{
+    return !( *this <= e );
 }
-bool OEffectiveEvent::operator>= ( const OEffectiveEvent &e ) const {
-    return !(*this < e);
+
+
+bool OEffectiveEvent::operator>= ( const OEffectiveEvent &e ) const
+{
+    return !( *this < e );
 }
 
 }
