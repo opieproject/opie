@@ -265,6 +265,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             w += keys->width(row,col) * defaultKeyWidth;
         else break;
 
+    if (col <= 0) return;
+
     col --; // rewind one...
 
     qkeycode = keys->qcode(row, col);
