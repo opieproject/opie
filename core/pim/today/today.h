@@ -47,6 +47,7 @@ class Today : public TodayBase {
     void startTodo();
     void startDatebook();
     void startMail();
+    void editCard();
     void draw();
     void editEvent(const Event &e);
  private:

@@ -57,7 +57,6 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   QVBoxLayout * layout = new QVBoxLayout(this);
 
-
   QPalette pal = this->palette();
   QColor col = pal.color(QPalette::Active, QColorGroup::Background);
   pal.setColor(QPalette::Active, QColorGroup::Button, col);
@@ -106,7 +105,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   TextLabel1->setBackgroundOrigin( QLabel::ParentOrigin );
   TextLabel1->setTextFormat( RichText );
 
-  OwnerField = new QLabel(this , "Owner" );
+  OwnerField = new OClickableLabel(this , "Owner" );
   OwnerField->setGeometry(QRect(0,0, this->width(), 12 ));
   OwnerField->setAlignment(int (QLabel::AlignTop | QLabel::AlignLeft ) );
   OwnerField->setMaximumHeight(12);

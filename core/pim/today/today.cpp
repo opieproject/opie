@@ -68,6 +68,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QObject::connect( (QObject*)TodoButton, SIGNAL( clicked() ), this, SLOT(startTodo() ) );
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
   QObject::connect( (QObject*)MailButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
+  QObject::connect( (QObject*)OwnerField, SIGNAL( clicked() ), this,  SLOT(editCard() ) );
 
 #if defined(Q_WS_QWS)
 #if !defined(QT_NO_COP)
@@ -417,6 +418,15 @@ void Today::getTodo() {
   }
 
   TodoField->setText(tr(output));
+}
+
+
+/*
+ * launch addressbook
+ */
+void Today::editCard() {
+  QCopEnvelope e("QPE/System", "execute(QString)");
+  e << QString("addressbook");
 }
 
 /*

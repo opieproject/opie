@@ -13,16 +13,17 @@
 #include <qwidget.h>
 #include <qscrollview.h>
 #include <qsplitter.h>
+#include <opie/oclickablelabel.h>
 
-class QVBox; 
-class QHBoxLayout; 
-class QGridLayout; 
+class QVBox;
+class QHBoxLayout;
+class QGridLayout;
 class QFrame;
 class QLabel;
 class QPushButton;
 
 class TodayBase : public QWidget
-{ 
+{
     Q_OBJECT
 
 public:
@@ -32,7 +33,7 @@ public:
     //QScrollView* Frame4;
     QFrame* Frame4;
     QPushButton* DatesButton;
-    QLabel* OwnerField;
+    OClickableLabel* OwnerField;
     QLabel* Frame;
     QFrame* MailFrame;
     QLabel* TextLabel1;
