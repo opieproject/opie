@@ -240,8 +240,10 @@ public:
 	 * of buttons will vary depending on the device.  Button numbers will be assigned
 	 * by the device manufacturer and will be from most preferred button to least preffered
 	 * button.  Note that this list only contains "user mappable" buttons.
+	 *
+	 * @todo ### make const
 	 */
-       const QValueList<ODeviceButton> &buttons ( ) /* ### make const */;
+       const QValueList<ODeviceButton> &buttons ( ) /** /todo ### make const */;
 
 	/**
 	 * Returns the DeviceButton for the \a keyCode.  If \a keyCode is not found, it

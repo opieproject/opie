@@ -66,6 +66,9 @@ class OTimePickerDialog: public OTimePickerDialogBase {
 
  public:
 	OTimePickerDialog ( QWidget* parent = 0, const char* name = NULL, WFlags fl = 0 );
+	/**
+	 * @todo make it non line! See KDE guide for BC
+	 */
 	~OTimePickerDialog() { };
 
 	QTime time()const;

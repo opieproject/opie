@@ -15,11 +15,14 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.6 2003-08-01 12:30:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend.h,v 1.7 2004-02-19 02:05:37 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend.h,v $
- * Revision 1.6  2003-08-01 12:30:16  eilers
+ * Revision 1.7  2004-02-19 02:05:37  zecke
+ * Add notes for API fixes and BC stuff
+ *
+ * Revision 1.6  2003/08/01 12:30:16  eilers
  * Merging changes from BRANCH_1_0 to HEAD
  *
  * Revision 1.5.4.1  2003/06/30 14:34:19  eilers
@@ -71,7 +74,13 @@
  */
 class OContactAccessBackend: public OPimAccessBackend<OContact> {
  public:
+	/**
+	 * @todo make non line in regard to BC guide of KDE
+	 */
 	OContactAccessBackend() {}
+	/**
+	 * @todo make non inline in regard to the BC guide of KDE
+	 */
 	virtual ~OContactAccessBackend() {}
 
 
