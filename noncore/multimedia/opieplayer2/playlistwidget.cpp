@@ -114,7 +114,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
                           d->selectedFiles, SLOT(removeSelected() ) );
     (void)new ToolButton( vbox1, tr( "Move Down" ), "opieplayer2/down",
                           d->selectedFiles, SLOT(moveSelectedDown() ) );
-    QVBox *stretch2 = new QVBox( vbox1 );
+    //    QVBox *stretch2 = new QVBox( vbox1 );
 
     connect( tbDeletePlaylist, ( SIGNAL( released() ) ),
              SLOT( deletePlaylist() ) );
@@ -298,21 +298,21 @@ void PlayListWidget::addAllToList() {
       //        lst->append( audioIt.current() );
   //    }
     
-    /*
-      if(!audioScan)
-      scanForAudio();
-    if(!videoScan) 
-      scanForVideo();
 
-     DocLnkSet filesAll;
-     Global::findDocuments(&filesAll, "video/*;"+audioMimes);
-     QListIterator<DocLnk> Adit( filesAll.children() );
-     for ( ; Adit.current(); ++Adit ) {
-         if( QFileInfo( Adit.current()->file() ).exists() ) {
-             d->selectedFiles->addToSelection( **Adit );
-         }
-     }
-*/
+//       if(!audioScan)
+//       scanForAudio();
+//     if(!videoScan) 
+//       scanForVideo();
+
+//      DocLnkSet filesAll;
+//      Global::findDocuments(&filesAll, "video/*;"+audioMimes);
+//      QListIterator<DocLnk> Adit( filesAll.children() );
+//      for ( ; Adit.current(); ++Adit ) {
+//          if( QFileInfo( Adit.current()->file() ).exists() ) {
+//              d->selectedFiles->addToSelection( **Adit );
+//          }
+//      }
+
   //     qDebug("elapsed time %d", t.elapsed() );
 
     tabWidget->setCurrentPage(0);
@@ -720,7 +720,7 @@ void PlayListWidget::scanForVideo() {
 void PlayListWidget::populateAudioView() {
     audioView->clear();
     StorageInfo storageInfo;
-    const QList<FileSystem> &fs = storageInfo.fileSystems();
+    //    const QList<FileSystem> &fs = storageInfo.fileSystems();
     if(!audioScan) {
         scanForAudio();
     }
@@ -762,7 +762,7 @@ void PlayListWidget::populateAudioView() {
 void PlayListWidget::populateVideoView() {
     videoView->clear();
     StorageInfo storageInfo;
-    const QList<FileSystem> &fs = storageInfo.fileSystems();
+    //    const QList<FileSystem> &fs = storageInfo.fileSystems();
 
     if(!videoScan ) {
         scanForVideo();
@@ -804,7 +804,7 @@ void PlayListWidget::openFile() {
     if( fileDlg->result() == 1 ) {
         filename = fileDlg->text();
         qDebug( "Selected filename is " + filename );
-            Om3u *m3uList;
+        //            Om3u *m3uList;
             DocLnk lnk;
             Config cfg( "OpiePlayer" );
             cfg.setGroup("PlayList");
@@ -1129,7 +1129,7 @@ void PlayListWidget::populateSkinsMenu() {
 }
 
 void PlayListWidget::skinsMenuActivated( int item ) {
-    for( int i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i-- ) {
+    for(unsigned int i = defaultSkinIndex; i > defaultSkinIndex - skinsMenu->count(); i-- ) {
         skinsMenu->setItemChecked( i, FALSE );
     }
     skinsMenu->setItemChecked( item, TRUE );
