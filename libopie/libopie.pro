@@ -9,7 +9,7 @@ HEADERS   = ofontmenu.h ofileselector.h \
     oprocess.h odevice.h \
     otimepicker.h otabwidget.h \
     otabbar.h otabinfo.h \
-    ofontselector.h
+    ofontselector.h ocolorbutton.h
 SOURCES   = ofontmenu.cc ofileselector.cc \
 	    ofiledialog.cc xmltree.cc \
 	    tododb.cpp todoevent.cpp \
@@ -18,7 +18,7 @@ SOURCES   = ofontmenu.cc ofileselector.cc \
 	    oprocctrl.cpp oprocess.cpp \
 	    odevice.cpp otimepicker.cpp \
 	     otabwidget.cpp otabbar.cpp \
-	     ofontselector.cpp
+	     ofontselector.cpp ocolorbutton.cpp
 TARGET    = opie
 INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(QTDIR)/lib$(PROJMAK)
