@@ -23,7 +23,7 @@ class QString;
 class QSpinBox;
 class QLabel;
 class QTextView;
-namespace Opie {namespace Net {class Opie::Net::OPacket;}}
+namespace Opie {namespace Net {class OPacket;}}
 
 class PacketView: public QFrame
 {

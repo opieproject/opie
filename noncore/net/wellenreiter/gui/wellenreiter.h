@@ -22,17 +22,17 @@
 
 class QTimerEvent;
 class QPixmap;
-namespace Opie {namespace Net {class Opie::Net::OPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OWaveLanManagementPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OWaveLanControlPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OWaveLanDataPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OEthernetPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OARPPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OMacAddress;}}
-namespace Opie {namespace Net {class Opie::Net::OIPPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OPacket;}}
-namespace Opie {namespace Net {class Opie::Net::OWirelessNetworkInterface;}}
-namespace Opie {namespace Net {class Opie::Net::OPacketCapturer;}}
+namespace Opie {namespace Net {class OPacket;}}
+namespace Opie {namespace Net {class OWaveLanManagementPacket;}}
+namespace Opie {namespace Net {class OWaveLanControlPacket;}}
+namespace Opie {namespace Net {class OWaveLanDataPacket;}}
+namespace Opie {namespace Net {class OEthernetPacket;}}
+namespace Opie {namespace Net {class OARPPacket;}}
+namespace Opie {namespace Net {class OMacAddress;}}
+namespace Opie {namespace Net {class OIPPacket;}}
+namespace Opie {namespace Net {class OPacket;}}
+namespace Opie {namespace Net {class OWirelessNetworkInterface;}}
+namespace Opie {namespace Net {class OPacketCapturer;}}
 class PacketView;
 class WellenreiterConfigWindow;
 class MLogWindow;

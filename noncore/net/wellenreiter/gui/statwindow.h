@@ -19,7 +19,7 @@
 #include <qvbox.h>
 
 class QString;
-namespace Opie {namespace Ui {class Opie::Ui::OListView;}}
+namespace Opie {namespace Ui {class OListView;}}
 
 class MStatWindow: public QVBox
 {

@@ -26,8 +26,6 @@
 #include <qlist.h>
 
 using namespace Opie::Net;
-using namespace Opie::Net;
-using namespace Opie::Net;
 PacketView::PacketView( QWidget * parent, const char * name, WFlags f )
            :QFrame( parent, name, f )
 {
