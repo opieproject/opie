@@ -1,6 +1,4 @@
   config DATEBOOK_DUMMY_HOLIDAY
-    boolean "opie-datebook-dummyholidayplugin"
+    boolean "opie-datebook-dummy-holidays"
     default "n"
-    comment "opie-datebook-dummyholidayplugin requires libopie2core, libopie2pim"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2PIM
-
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2PIM
