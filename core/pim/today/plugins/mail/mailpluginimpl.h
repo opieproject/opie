@@ -17,7 +17,7 @@
 #ifndef MAIL_PLUGIN_IMPL_H
 #define MAIL_PLUGIN_IMPL_H
 
-#include "../../todayplugininterface.h"
+#include <opie/todayplugininterface.h>
 
 class MailPlugin;
 

@@ -17,7 +17,7 @@
 #ifndef DATEBOOK_PLUGIN_IMPL_H
 #define DATEBOOK_PLUGIN_IMPL_H
 
-#include "../../todayplugininterface.h"
+#include <opie/todayplugininterface.h>
 
 class DatebookPlugin;
 

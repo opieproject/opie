@@ -29,7 +29,7 @@
 
 #include "todayconfig.h"
 #include "todaybase.h"
-#include "todayplugininterface.h"
+#include <opie/todayplugininterface.h>
 
 class QVBoxLayout;
 

@@ -21,8 +21,7 @@
 #include <qwidget.h>
 
 #include <opie/oclickablelabel.h>
-
-#include "../../todayplugininterface.h"
+#include <opie/todayplugininterface.h>
 
 class DatebookPlugin : public TodayPluginObject {
 

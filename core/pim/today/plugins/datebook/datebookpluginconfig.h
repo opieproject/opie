@@ -6,7 +6,7 @@
 #include <qcheckbox.h>
 #include <qspinbox.h>
 
-#include "../../todayconfigwidget.h"
+#include <opie/todayconfigwidget.h>
 
 class DatebookPluginConfig : public TodayConfigWidget {
 

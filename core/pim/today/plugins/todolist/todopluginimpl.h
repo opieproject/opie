@@ -17,7 +17,7 @@
 #ifndef TODOLIST_PLUGIN_IMPL_H
 #define TODOLIST_PLUGIN_IMPL_H
 
-#include "../../todayplugininterface.h"
+#include <opie/todayplugininterface.h>
 
 class TodolistPlugin;
 

@@ -16,7 +16,7 @@
 
 
 #include "today.h"
-#include "todayconfigwidget.h"
+#include <opie/todayconfigwidget.h>
 
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>

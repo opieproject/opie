@@ -20,7 +20,7 @@
 #include <qwidget.h>
 #include <qspinbox.h>
 
-#include "../../todayconfigwidget.h"
+#include <opie/todayconfigwidget.h>
 
 class TodolistPluginConfig : public TodayConfigWidget {
 

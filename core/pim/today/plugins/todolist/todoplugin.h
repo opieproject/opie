@@ -22,8 +22,7 @@
 
 #include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
-
-#include "../../todayplugininterface.h"
+#include <opie/todayplugininterface.h>
 
 class TodolistPlugin : public TodayPluginObject {
 

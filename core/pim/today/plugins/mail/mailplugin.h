@@ -24,8 +24,8 @@
 #include <opie/tododb.h>
 #include <opie/oclickablelabel.h>
 
-#include "../../todayplugininterface.h"
-#include "../../todayconfigwidget.h"
+#include <opie/todayplugininterface.h>
+#include <opie/todayconfigwidget.h>
 
 class MailPlugin : public TodayPluginObject {
 
