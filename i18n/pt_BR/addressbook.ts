@@ -1,50 +1,50 @@
 <!DOCTYPE TS><TS>
-<codec>iso8859-1</codec>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AbEditor</name>
     <message>
         <source>Male</source>
-        <translation>Masculino</translation>
+        <translation type="obsolete">Masculino</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notas</translation>
+        <translation type="obsolete">Notas</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>Nome do Meio</translation>
+        <translation type="obsolete">Nome do Meio</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Feminino</translation>
+        <translation type="obsolete">Feminino</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Sexo</translation>
+        <translation type="obsolete">Sexo</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation>Contatos</translation>
+        <translation type="obsolete">Contatos</translation>
     </message>
     <message>
         <source>Notes...</source>
-        <translation>Notas...</translation>
+        <translation type="obsolete">Notas...</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Nome</translation>
+        <translation type="obsolete">Nome</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Sobrenome</translation>
+        <translation type="obsolete">Sobrenome</translation>
     </message>
     <message>
         <source>Categories</source>
-        <translation>Categorias</translation>
+        <translation type="obsolete">Categorias</translation>
     </message>
     <message>
         <source>Enter Note</source>
-        <translation>Escrever Nota</translation>
+        <translation type="obsolete">Escrever Nota</translation>
     </message>
 </context>
 <context>
@@ -101,19 +101,19 @@
     <name>AddressSettingsBase</name>
     <message>
         <source>Up</source>
-        <translation type='obsolete'>P/ Cima</translation>
+        <translation type="unfinished">P/ Cima</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type='obsolete'>P/ Baixo</translation>
+        <translation type="unfinished">P/ Baixo</translation>
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation type='obsolete'>Organizar Campos de Edição</translation>
+        <translation type="unfinished">Organizar Campos de Edição</translation>
     </message>
     <message>
         <source>Select the field order:</source>
-        <translation type='obsolete'>Selecione a ordem dos campos:</translation>
+        <translation type="unfinished">Selecione a ordem dos campos:</translation>
     </message>
 </context>
 <context>
@@ -252,6 +252,201 @@ Sair assim mesmo?</translation>
     <message>
         <source>Contacts - My Personal Details</source>
         <translation>Contatos - Meus Detalhes Pessoais</translation>
+    </message>
+</context>
+<context>
+    <name>ContactEditor</name>
+    <message>
+        <source>Fax</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IM</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mobile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Default Email</source>
+        <translation type="unfinished">E-mail Padrão</translation>
+    </message>
+    <message>
+        <source>Emails</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name Title</source>
+        <translation type="unfinished">Título</translation>
+    </message>
+    <message>
+        <source>First Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Middle Name</source>
+        <translation type="unfinished">Nome do Meio</translation>
+    </message>
+    <message>
+        <source>Last Name</source>
+        <translation type="unfinished">Sobrenome</translation>
+    </message>
+    <message>
+        <source>Suffix</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File As</source>
+        <translation type="unfinished">Arquivar Como</translation>
+    </message>
+    <message>
+        <source>Gender</source>
+        <translation type="unfinished">Sexo</translation>
+    </message>
+    <message>
+        <source>Job Title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes</source>
+        <translation type="unfinished">Notas</translation>
+    </message>
+    <message>
+        <source>Groups</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Street 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>P.O. Box</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zip</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Name...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Organization</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notes...</source>
+        <translation type="unfinished">Notas...</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Business</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Home</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Zip Code</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>United States</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>United Kingdom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Japan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>France</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Germany</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Norway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Canada</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Male</source>
+        <translation type="unfinished">Masculino</translation>
+    </message>
+    <message>
+        <source>Female</source>
+        <translation type="unfinished">Feminino</translation>
+    </message>
+    <message>
+        <source>Details</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter Note</source>
+        <translation type="unfinished">Escrever Nota</translation>
+    </message>
+    <message>
+        <source>Edit Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished">Contatos</translation>
     </message>
 </context>
 </TS>

@@ -197,6 +197,14 @@ the current page?</source>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Automatic preview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Preview</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewPageDialog</name>

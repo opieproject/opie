@@ -169,11 +169,11 @@ Trozdem beenden?</translation>
     <name>DateBookDayWidget</name>
     <message>
         <source>Start</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Beginn</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ende</translation>
     </message>
     <message>
         <source>Edit</source>

@@ -29,6 +29,14 @@
         <source>&lt;b&gt;%1&lt;/b&gt; new mail(s), &lt;b&gt;%2&lt;/b&gt; outgoing</source>
         <translation>&lt;b&gt;%1&lt;/b&gt; novih sporočil, &lt;b&gt;%2&lt;/b&gt; izhodnih</translation>
     </message>
+    <message>
+        <source>No more appointments today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No appointments today</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TodayBase</name>

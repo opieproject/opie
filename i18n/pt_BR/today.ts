@@ -26,6 +26,14 @@
         <source>&lt;b&gt;Please fill out the business card &lt;/b&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>No more appointments today</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No appointments today</source>
+        <translation type="unfinished">Nenhum compromisso hoje</translation>
+    </message>
 </context>
 <context>
     <name>TodayBase</name>

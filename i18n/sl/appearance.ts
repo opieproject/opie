@@ -15,11 +15,11 @@
     </message>
     <message>
         <source>More</source>
-        <translation>Več</translation>
+        <translation type="obsolete">Več</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Več...</translation>
+        <translation type="obsolete">Več...</translation>
     </message>
     <message>
         <source>Load</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Remove</source>
-        <translation>Odstrani</translation>
+        <translation type="obsolete">Odstrani</translation>
     </message>
     <message>
         <source>Save</source>
@@ -44,6 +44,50 @@
     <message>
         <source>Background</source>
         <translation>Ozadje</translation>
+    </message>
+    <message>
+        <source>Edit current scheme...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished">Zbriši</translation>
+    </message>
+    <message>
+        <source>Do you really want to delete
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete scheme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to delete current scheme.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>EditScheme</name>
+    <message>
+        <source>Edit scheme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>More</source>
+        <translation type="unfinished">Več</translation>
+    </message>
+    <message>
+        <source>More...</source>
+        <translation type="unfinished">Več...</translation>
     </message>
 </context>
 <context>
