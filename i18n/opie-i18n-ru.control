@@ -1,0 +1,10 @@
+Package: opie-i18n-ru
+Files: i18n/ru/.directory i18n/ru/*.qm 
+Priority: optional
+Section: opie/i18n
+Maintainer: Sergei Klink <sklink@yandex.ru>
+Architecture: arm
+Depends: task-opie-minimal, opie-language
+Description: i18n: Russian
+ Russian UI texts for OPIE environment.
+Version: $QPE_VERSION$EXTRAVERSION
