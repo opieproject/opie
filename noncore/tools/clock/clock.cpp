@@ -433,7 +433,8 @@ void Clock::alarmOn()
   AlarmServer::addAlarm( when,
                          "QPE/Application/clock",
                          "alarm(QDateTime,int)", warn );
-  setCaption( "Alarm set: " + whenl.toString() );
+//  setCaption( "Alarm set: " + whenl.toString() );
+  setCaption( tr("Alarm set: %1".arg(whenl.toString())) );
 }
 
 void Clock::alarmOff()
@@ -444,7 +445,7 @@ void Clock::alarmOff()
                             "QPE/Application/clock",
                             "alarm(QDateTime,int)", warn );
   qDebug( "Alarm Off " + when.toString() );
-  setCaption( "Clock" );
+  setCaption( tr("Clock") );
 }
 
 void Clock::clearTimer()
@@ -452,7 +453,7 @@ void Clock::clearTimer()
   alarmOffBtn->setText( tr( "Alarm Is Off" ) );
   alarmBool = FALSE;
   snoozeBtn->hide();
-  setCaption( "Clock" );
+  setCaption( tr("Clock") );
 }
 
 void Clock::appMessage( const QCString& msg, const QByteArray& /*data*/ )
