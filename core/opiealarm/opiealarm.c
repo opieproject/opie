@@ -258,7 +258,7 @@ int suspend ( int fix_rtc )
 			break; //  ( 1, TIMEFILE );
 
 		fclose ( fp );
-		fp = 0;
+		fp = NULL;
 	
 		alrt = atoi ( buf ); // get the alarm time
 
