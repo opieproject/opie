@@ -11,18 +11,18 @@ DESTDIR         = $(OPIEDIR)/bin
 TARGET		= netsystemtime
 
 
-TRANSLATIONS = ../../../i18n/de/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/en/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/es/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/fr/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/hu/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/ja/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/ko/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/no/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/pl/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/pt/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/pt_BR/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/sl/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/zh_CN/../../bin/netsystemtime.ts
-TRANSLATIONS += ../../../i18n/zh_TW/../../bin/netsystemtime.ts
+TRANSLATIONS = ../../../i18n/de/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/en/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/es/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/fr/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/hu/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/ja/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/ko/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/no//netsystemtime.ts
+TRANSLATIONS += ../../../i18n/pl/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/pt/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/pt_BR/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/sl/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/zh_CN/netsystemtime.ts
+TRANSLATIONS += ../../../i18n/zh_TW/netsystemtime.ts
 

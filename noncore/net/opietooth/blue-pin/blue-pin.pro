@@ -8,22 +8,23 @@ INCLUDEPATH   += $(OPIEDIR)/noncore/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe 
 INTERFACES      = pindlgbase.ui
-TARGET          = $(OPIEDIR)/bin/bluepin
+DESTDIR		= $(OPIEDIR)/bin
+TARGET          = bluepin
 
 
 
-TRANSLATIONS = ../../../../i18n/de/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/en/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/es/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/fr/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/hu/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/ja/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/ko/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/no/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/pl/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/pt/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/pt_BR/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/sl/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/zh_CN/$(OPIEDIR)/bin/bluepin.ts
-TRANSLATIONS += ../../../../i18n/zh_TW/$(OPIEDIR)/bin/bluepin.ts
+TRANSLATIONS = ../../../../i18n/de/bluepin.ts
+TRANSLATIONS += ../../../../i18n/en/bluepin.ts
+TRANSLATIONS += ../../../../i18n/es/bluepin.ts
+TRANSLATIONS += ../../../../i18n/fr/bluepin.ts
+TRANSLATIONS += ../../../../i18n/hu/bluepin.ts
+TRANSLATIONS += ../../../../i18n/ja/bluepin.ts
+TRANSLATIONS += ../../../../i18n/ko/bluepin.ts
+TRANSLATIONS += ../../../../i18n/no/bluepin.ts
+TRANSLATIONS += ../../../../i18n/pl/bluepin.ts
+TRANSLATIONS += ../../../../i18n/pt/bluepin.ts
+TRANSLATIONS += ../../../../i18n/pt_BR/bluepin.ts
+TRANSLATIONS += ../../../../i18n/sl/bluepin.ts
+TRANSLATIONS += ../../../../i18n/zh_CN/bluepin.ts
+TRANSLATIONS += ../../../../i18n/zh_TW/bluepin.ts
 

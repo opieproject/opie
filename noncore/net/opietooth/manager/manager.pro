@@ -8,22 +8,23 @@ INCLUDEPATH     += $(OPIEDIR)/noncore/net/opietooth/lib
 DEPENDPATH      += $(OPIEDIR)/include
 LIBS            += -lqpe -lopietooth -lopie
 INTERFACES      = bluetoothbase.ui  devicedialog.ui  
-TARGET          = $(OPIEDIR)/bin/bluetooth-manager
+DESTDIR         = $(OPIEDIR)/bin
+TARGET          = bluetooth-manager
 
 
 
-TRANSLATIONS = ../../../../i18n/de/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/en/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/es/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/fr/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/hu/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/ja/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/ko/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/no/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/pl/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/pt/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/pt_BR/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/sl/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/zh_CN/$(OPIEDIR)/bin/bluetooth-manager.ts
-TRANSLATIONS += ../../../../i18n/zh_TW/$(OPIEDIR)/bin/bluetooth-manager.ts
+TRANSLATIONS = ../../../../i18n/de/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/en/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/es/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/fr/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/hu/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/ja/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/ko/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/no/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/pl/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/pt/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/pt_BR/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/sl/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/zh_CN/bluetooth-manager.ts
+TRANSLATIONS += ../../../../i18n/zh_TW/bluetooth-manager.ts
 
