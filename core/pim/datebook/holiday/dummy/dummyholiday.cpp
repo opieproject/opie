@@ -18,3 +18,11 @@ QStringList DummyHoliday::entries(unsigned year, unsigned month, unsigned day)
     if (day%2==0) ret.append(QObject::tr("You have a holiday!","dummyholiday"));
     return ret;
 }
+
+QMap<QDate,QStringList> DummyHoliday::entries(const QDate&,const QDate&)
+{
+    QMap<QDate,QStringList> ret;
+    return ret;
+}
+
+EXPORT_HOLIDAY_PLUGIN(DummyHoliday);

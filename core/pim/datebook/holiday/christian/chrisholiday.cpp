@@ -85,3 +85,11 @@ void ChrisHoliday::calc_easter()
   _days[d.addDays(-46)].append(QObject::tr("Ash Wednesday","holidays"));
   _days[d.addDays(60)].append(QObject::tr("Corpus Christi","holidays"));
 }
+
+QMap<QDate,QStringList> ChrisHoliday::entries(const QDate&,const QDate&)
+{
+    QMap<QDate,QStringList> ret;
+    return ret;
+}
+
+EXPORT_HOLIDAY_PLUGIN(ChrisHoliday);

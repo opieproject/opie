@@ -13,7 +13,7 @@ public:
     virtual QString description();
     virtual QStringList entries(const QDate&);
     virtual QStringList entries(unsigned year, unsigned month, unsigned day);
+    virtual QMap<QDate,QStringList> entries(const QDate&,const QDate&);
 };
 
-EXPORT_HOLIDAY_PLUGIN(DummyHoliday);
 #endif
