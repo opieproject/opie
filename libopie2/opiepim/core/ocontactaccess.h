@@ -13,11 +13,16 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccess.h,v 1.6 2003-01-02 14:27:12 eilers Exp $
+ * Version: $Id: ocontactaccess.h,v 1.7 2003-04-13 18:07:10 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccess.h,v $
- * Revision 1.6  2003-01-02 14:27:12  eilers
+ * Revision 1.7  2003-04-13 18:07:10  zecke
+ * More API doc
+ * QString -> const QString&
+ * QString = 0l -> QString::null
+ *
+ * Revision 1.6  2003/01/02 14:27:12  eilers
  * Improved query by example: Search by date is possible.. First step
  * for a today plugin for birthdays..
  *
@@ -55,9 +60,13 @@
 #include "ocontactaccessbackend.h"
 #include "opimaccesstemplate.h"
 
-/** Class to access the contacts database.
+/**
+ * Class to access the contacts database.
  * This is just a frontend for the real database handling which is
  * done by the backend.
+ * This class is used to access the Contacts on a system. This class as any OPIE PIM
+ * class is backend independent.
+
  * @see OPimAccessTemplate
  */
 class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
@@ -65,7 +74,8 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
     Q_OBJECT
 
  public:
-	/** Create Database with contacts (addressbook).
+	/**
+         * Create Database with contacts (addressbook).
 	 * @param appname Name of application which wants access to the database
 	 * (i.e. "todolist")
 	 * @param filename The name of the database file. If not set, the default one
@@ -99,7 +109,7 @@ class OContactAccess: public QObject, public OPimAccessTemplate<OContact>
 		DateDay    = 0x0100, // The day matches
 	};
 
-	
+
 	ORecordList<OContact> matchRegexp(  const QRegExp &r )const;
 
 	/** Return all Contacts in a sorted manner.

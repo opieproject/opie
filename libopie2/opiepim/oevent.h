@@ -30,9 +30,18 @@ struct OCalendarHelper {
 
 class OPimNotifyManager;
 class ORecur;
+
+/**
+ * This is the container for all Events. It encapsules all
+ * available information for a single Event
+ * @short container for events.
+ */
 class OEvent : public OPimRecord {
 public:
     typedef QValueList<OEvent> ValueList;
+    /**
+     * RecordFields contain possible attributes
+     */
     enum RecordFields {
         Uid = Qtopia::UID_ID,
         Category = Qtopia::CATEGORY_ID,
@@ -49,7 +58,14 @@ public:
         TimeZone
     };
 
+    /**
+     * Start with an Empty OEvent. UID == 0 means that it is empty
+     */
     OEvent(int uid = 0);
+
+    /**
+     * copy c'tor
+     */
     OEvent( const OEvent& );
     ~OEvent();
     OEvent &operator=( const OEvent& );
@@ -144,7 +160,6 @@ private:
 /**
  * AN Event can span through multiple days. We split up a multiday eve
  */
-
 class OEffectiveEvent {
 public:
     typedef QValueList<OEffectiveEvent> ValueList;

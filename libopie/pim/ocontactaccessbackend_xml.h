@@ -13,11 +13,16 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_xml.h,v 1.13 2003-03-21 10:33:09 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_xml.h,v 1.14 2003-04-13 18:07:10 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_xml.h,v $
- * Revision 1.13  2003-03-21 10:33:09  eilers
+ * Revision 1.14  2003-04-13 18:07:10  zecke
+ * More API doc
+ * QString -> const QString&
+ * QString = 0l -> QString::null
+ *
+ * Revision 1.13  2003/03/21 10:33:09  eilers
  * Merged speed optimized xml backend for contacts to main.
  * Added QDateTime to querybyexample. For instance, it is now possible to get
  * all Birthdays/Anniversaries between two dates. This should be used
@@ -84,52 +89,57 @@
 #include <qdict.h>
 
 /* the default xml implementation */
+/**
+ * This class is the XML implementation of a Contact backend
+ * it does implement everything available for OContact.
+ * @see OPimAccessBackend for more information of available methods
+ */
 class OContactAccessBackend_XML : public OContactAccessBackend {
  public:
-	OContactAccessBackend_XML ( QString appname, QString filename = 0l );
-	
+	OContactAccessBackend_XML ( const QString& appname, const QString& filename = QString::null );
+
 	bool save();
-	
+
 	bool load ();
 
 	void clear ();
-	
+
 	bool wasChangedExternally();
-	
+
 	QArray<int> allRecords() const;
-	
+
 	OContact find ( int uid ) const;
-	
+
 	QArray<int> queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() );
 
 	QArray<int> matchRegexp(  const QRegExp &r ) const;
-	
+
 	const uint querySettings();
-	
+
 	bool hasQuerySettings (uint querySettings) const;
-	
-	// Currently only asc implemented.. 
+
+	// Currently only asc implemented..
 	QArray<int> sorted( bool asc,  int , int ,  int );
 	bool add ( const OContact &newcontact );
-	
+
 	bool replace ( const OContact &contact );
-	
+
 	bool remove ( int uid );
 	bool reload();
-	
+
  private:
 
 	enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
 
 	void addContact_p( const OContact &newcontact );
-	
+
 	/* This function loads the xml-database and the journalfile */
 	bool load( const QString filename, bool isJournal );
-	
-	
+
+
 	void updateJournal( const OContact& cnt, journal_action action );
 	void removeJournal();
-	
+
  protected:
 	bool m_changed;
 	QString m_journalName;

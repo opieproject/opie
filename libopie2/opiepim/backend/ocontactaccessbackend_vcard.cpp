@@ -13,11 +13,16 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.9 2003-03-21 10:33:09 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.10 2003-04-13 18:07:10 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.9  2003-03-21 10:33:09  eilers
+ * Revision 1.10  2003-04-13 18:07:10  zecke
+ * More API doc
+ * QString -> const QString&
+ * QString = 0l -> QString::null
+ *
+ * Revision 1.9  2003/03/21 10:33:09  eilers
  * Merged speed optimized xml backend for contacts to main.
  * Added QDateTime to querybyexample. For instance, it is now possible to get
  * all Birthdays/Anniversaries between two dates. This should be used
@@ -76,7 +81,7 @@
 
 #include <qfile.h>
 
-OContactAccessBackend_VCard::OContactAccessBackend_VCard ( QString , QString filename ):
+OContactAccessBackend_VCard::OContactAccessBackend_VCard ( const QString& , const QString& filename ):
 	m_dirty( false ),
 	m_file( filename )
 {

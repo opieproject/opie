@@ -5,6 +5,12 @@
 
 #include "odatebookaccessbackend.h"
 
+/**
+ * This is the default XML implementation for DateBoook XML storage
+ * It fully implements the interface
+ * @see ODateBookAccessBackend
+ * @see OPimAccessBackend
+ */
 class ODateBookAccessBackend_XML : public ODateBookAccessBackend {
 public:
     ODateBookAccessBackend_XML( const QString& appName,

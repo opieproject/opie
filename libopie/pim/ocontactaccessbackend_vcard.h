@@ -13,11 +13,16 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.h,v 1.5 2003-03-21 10:33:09 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.h,v 1.6 2003-04-13 18:07:10 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.h,v $
- * Revision 1.5  2003-03-21 10:33:09  eilers
+ * Revision 1.6  2003-04-13 18:07:10  zecke
+ * More API doc
+ * QString -> const QString&
+ * QString = 0l -> QString::null
+ *
+ * Revision 1.5  2003/03/21 10:33:09  eilers
  * Merged speed optimized xml backend for contacts to main.
  * Added QDateTime to querybyexample. For instance, it is now possible to get
  * all Birthdays/Anniversaries between two dates. This should be used
@@ -47,9 +52,14 @@
 
 class VObject;
 
+/**
+ * This is the vCard 2.1 implementation of the Contact Storage
+ * @see OContactAccessBackend_XML
+ * @see OPimAccessBackend
+ */
 class OContactAccessBackend_VCard : public OContactAccessBackend {
  public:
-	OContactAccessBackend_VCard ( QString appname, QString filename = 0l );
+	OContactAccessBackend_VCard ( const QString& appname, const QString& filename = QString::null );
 
 	bool load ();
 	bool reload();
@@ -59,7 +69,7 @@ class OContactAccessBackend_VCard : public OContactAccessBackend {
 	bool add ( const OContact& newcontact );
 	bool remove ( int uid );
 	bool replace ( const OContact& contact );
-	
+
 	OContact find ( int uid ) const;
 	QArray<int> allRecords() const;
 	QArray<int> queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() );
@@ -69,7 +79,7 @@ class OContactAccessBackend_VCard : public OContactAccessBackend {
 	bool hasQuerySettings (uint querySettings) const;
 	QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat );
 	bool wasChangedExternally();
-	
+
 private:
 	OContact parseVObject( VObject* obj );
 	VObject* createVObject( const OContact& c );
@@ -77,7 +87,7 @@ private:
 	QDate convVCardDateToDate( const QString& datestr );
 	VObject *safeAddPropValue( VObject *o, const char* prop, const QString& value );
 	VObject *safeAddProp( VObject* o, const char* prop);
-	
+
 	bool m_dirty : 1;
 	QString m_file;
 	QMap<int, OContact> m_map;

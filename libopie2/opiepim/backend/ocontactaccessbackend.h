@@ -15,11 +15,16 @@
  * =====================================================================
  * ToDo: Define enum for query settings
  * =====================================================================
- * Version: $Id: ocontactaccessbackend.h,v 1.4 2002-11-13 14:14:51 eilers Exp $
+ * Version: $Id: ocontactaccessbackend.h,v 1.5 2003-04-13 18:07:10 zecke Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend.h,v $
- * Revision 1.4  2002-11-13 14:14:51  eilers
+ * Revision 1.5  2003-04-13 18:07:10  zecke
+ * More API doc
+ * QString -> const QString&
+ * QString = 0l -> QString::null
+ *
+ * Revision 1.4  2002/11/13 14:14:51  eilers
  * Added sorted for Contacts..
  *
  * Revision 1.3  2002/11/01 15:10:42  eilers
@@ -44,15 +49,26 @@
 #include "ocontact.h"
 #include "opimaccessbackend.h"
 
-#include "qregexp.h"
+#include <qregexp.h>
 
+/**
+ * This class represents the interface of all Contact Backends.
+ * Derivates of this class will be used to access the contacts.
+ * As implementation currently XML and vCard exist. This class needs to be implemented
+ * if you want to provide your own storage.
+ * In all queries a list of uids is passed on instead of loading the actual record!
+ *
+ * @see OContactAccessBackend_VCard
+ * @see OContactAccessBackend_XML
+ */
 class OContactAccessBackend: public OPimAccessBackend<OContact> {
  public:
 	OContactAccessBackend() {}
 	virtual ~OContactAccessBackend() {}
 
 
-	/** Return if database was changed externally.
+	/**
+         * Return if database was changed externally.
 	 * This may just make sense on file based databases like a XML-File.
 	 * It is used to prevent to overwrite the current database content
 	 * if the file was already changed by something else !
@@ -68,18 +84,24 @@ class OContactAccessBackend: public OPimAccessBackend<OContact> {
 
 	virtual QArray<int> matchRegexp(  const QRegExp &r ) const = 0;
 
-	/** Return all possible settings.
+	/**
+         *  Return all possible settings.
 	 *  @return All settings provided by the current backend
 	 * (i.e.: query_WildCards & query_IgnoreCase)
 	 */
 	virtual const uint querySettings() = 0;
 
-	/** Check whether settings are correct.
+	/**
+         * Check whether settings are correct.
 	 * @return <i>true</i> if the given settings are correct and possible.
 	 */
 	virtual bool hasQuerySettings (uint querySettings) const = 0;
 
-	virtual QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat ) = 0;
+        /**
+         * FIXME!!!
+         * Returns a sorted list of records either ascendinf or descending for a giving criteria and category
+         */
+        virtual QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat ) = 0;
 
 };
 #endif

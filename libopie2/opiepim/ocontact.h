@@ -34,8 +34,15 @@ QPC_TEMPLATEEXTERN template class QPC_EXPORT QMap<int, QString>;
 // MOC_SKIP_END
 #endif
 
-class ContactPrivate; 
+class ContactPrivate;
 
+/**
+ * OContact class represents a specialised PIM Record for contacts.
+ * It does store all kind of persopn related information.
+ *
+ * @short Contact Container
+ * @author TT, Stefan Eiler, Holger Freyther
+ */
 class QPC_EXPORT OContact : public OPimRecord
 {
     friend class DataSet;

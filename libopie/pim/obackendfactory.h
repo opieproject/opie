@@ -12,11 +12,16 @@
  * =====================================================================
  * ToDo: Use plugins
  * =====================================================================
- * Version: $Id: obackendfactory.h,v 1.5 2003-02-21 23:31:52 zecke Exp $
+ * Version: $Id: obackendfactory.h,v 1.6 2003-04-13 18:07:10 zecke Exp $
  * =====================================================================
  * History:
  * $Log: obackendfactory.h,v $
- * Revision 1.5  2003-02-21 23:31:52  zecke
+ * Revision 1.6  2003-04-13 18:07:10  zecke
+ * More API doc
+ * QString -> const QString&
+ * QString = 0l -> QString::null
+ *
+ * Revision 1.5  2003/02/21 23:31:52  zecke
  * Add XML datebookresource
  * -clean up todoaccessxml header
  * -implement some more stuff in the oeven tester
@@ -63,7 +68,21 @@
 #include "otodoaccesssql.h"
 #endif
 
-
+/**
+ * This class is our factory. It will give us the default implementations
+ * of at least Todolist, Contacts and Datebook. In the future this class will
+ * allow users to switch the backend with ( XML->SQLite ) without the need
+ * to recompile.#
+ * This class as the whole PIM Api is making use of templates
+ *
+ * <pre>
+ *   OTodoAccessBackend* backend = OBackEndFactory<OTodoAccessBackend>::Default("todo", QString::null );
+ *   backend->load();
+ * </pre>
+ *
+ * @author Stefan Eilers
+ * @version 0.1
+ */
 template<class T>
 class OBackendFactory
 {
@@ -76,6 +95,11 @@ class OBackendFactory
 		DATE
 	};
 
+        /**
+         * Returns a backend implementation for backendName
+         * @param backendName the type of the backend
+         * @param appName will be passed on to the backend
+         */
 	static T* Default( const QString backendName, const QString& appName ){
 
 		// __asm__("int3");
