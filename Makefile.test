@@ -86,5 +86,8 @@ ifeq ($(if $(filter clean%,$(MAKECMDGOALS)),clean,notclean),notclean)
 endif
 
 all : $(subdir-y)
-	
+
+$(subdir-y) : $(TOPDIR)/stamp-headers
+
+
 include $(TOPDIR)/Rules.make

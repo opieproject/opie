@@ -24,8 +24,28 @@ $(TOPDIR)/.depends.cfgs:
 	@cat dirs | ( for i in `cat`; do if [ "`cat dirs|grep $$i 2>/dev/null|wc -l`" -ne "1" ]; then deps=`cat dirs|grep $$i| grep -v "^$$i$$"|for i in \`cat|sed -e's,^$(TOPDIR)/,$$(TOPDIR)/,g'\`; do echo $$i/config.in; done`; echo `echo $$i/config.in|sed -e 's,^$(TOPDIR)/,$$(TOPDIR)/,'` : $$deps; fi; done ) >> $@
 	@-rm -f dirs
 
+$(TOPDIR)/stamp-headers :
+	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
+		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
+	( cd include/qpe &&  rm -f *.h; ln -s ../../library/*.h .; ln -s ../../library/backend/*.h .; rm -f *_p.h; )
+	( cd include/qtopia && rm -f *.h; ln -s ../../library/*.h .; )
+	( cd include/qtopia/private && rm -f *.h; ln -s ../../../library/backend/*.h .; )
+	( cd include/opie &&  rm -f *.h; ln -s ../../libopie/*.h .; rm -f *_p.h; )
+	( cd include/opie &&  ln -s ../../libsql/*.h .; )
+	( cd include/opie &&  ln -s ../../libopie/pim/*.h .; )
+	( cd include/opie; for generatedHeader in `cd ../../libopie; ls *.ui | sed -e "s,\.ui,\.h,g"`; do \
+	ln -s ../../libopie/$$generatedHeader $$generatedHeader; done )
+	touch $@
+	
+	
+
 $(TOPDIR)/scripts/lxdialog/lxdialog $(TOPDIR)/scripts/kconfig/conf scripts/kconfig/conf $(TOPDIR)/scripts/kconfig/mconf scripts/kconfig/mconf $(TOPDIR)/scripts/kconfig/qconf scripts/kconfig/qconf $(TOPDIR)/qmake/qmake :
 	$(call descend,$(shell dirname $@),$(shell basename $@))
+
+$(TOPDIR)/qmake/qmake : $(TOPDIR)/mkspecs/default
+
+$(TOPDIR)/mkspecs/default :
+	ln -sf linux-g++ $@
 
 ## general rules ##
 
