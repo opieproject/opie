@@ -119,19 +119,21 @@ void Dialer::dial(const QString& number)
 
 	if(usercancel)
 	{
+		// modem hangup
+		trydial(QString::null);
 		reject();
 	}
 }
 
 void Dialer::trydial(const QString& number)
 {
-	if(state != state_cancel)
-	{
-		switchState(state_preinit);
+	//if(state != state_cancel)
+	//{
+		if(state != state_cancel) switchState(state_preinit);
 		send("+++ATH");
 		send("");
 		//QString response = receive();
-	}
+	//}
 
 	if(state != state_cancel)
 	{
@@ -147,7 +149,7 @@ void Dialer::trydial(const QString& number)
 	{
 		switchState(state_options);
 
-		send("ATM0L0");
+		send("ATM3L3");
 		QString response3 = receive();
 		if(!response3.contains("\nOK\r"))
 			reset();
@@ -170,12 +172,17 @@ void Dialer::trydial(const QString& number)
 		send(QString("ATDT %1").arg(number));
 		//send(QString("%1 %2").arg(m_profile.readEntry("DialPrefix1")).arg(number));
 		QString response5 = receive();
-		if(!response5.contains("\nOK\r"))
+		if(!response5.contains("\nCONNECT"))
 		{
-			QMessageBox::warning(this,
-				QObject::tr("Failure"),
-				QObject::tr("Dialing the number failed."));
-			slotCancel();
+			if(response5.contains("BUSY"))
+				switchState(state_dialing);
+			else
+			{
+				QMessageBox::warning(this,
+					QObject::tr("Failure"),
+					QObject::tr("Dialing the number failed."));
+				slotCancel();
+			}
 		}
 	}
 	
@@ -208,8 +215,11 @@ qWarning("Sending: '%s'", m.latin1());
 
 QString Dialer::receive()
 {
+	QString buf;
 	char buffer[1024];
 	int ret;
+
+	qApp->processEvents();
 
 	while(1)
 	{
@@ -220,8 +230,13 @@ QString Dialer::receive()
 			for(int i = 0; i < ret; i++)
 				buffer[i] = buffer[i] & 0x7F;
 			buffer[ret] = 0;
-			qWarning("Receiving: '%s'", buffer);
-			return QString(buffer);
+qWarning("Got: '%s'", buffer);
+			buf.append(QString(buffer));
+			if(buf.contains("OK") || buf.contains("ERROR") || buf.contains("CONNECT") || (buf.contains("BUSY")))
+{
+qWarning("Receiving: '%s'", buf.latin1());
+				return buf;
+}
 		}
 		else if(ret < 0)
 		{
@@ -229,8 +244,6 @@ QString Dialer::receive()
 		}
 	}
 
-	//for(int i = 0; i < 200000;i++)
-	//	qApp->processEvents();
 	return QString::null;
 }
 
