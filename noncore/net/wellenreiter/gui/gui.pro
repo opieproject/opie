@@ -31,10 +31,19 @@ SOURCES         = main.cpp \
 
 INCLUDEPATH     += $(OPIEDIR)/include ../
 DEPENDPATH      += $(OPIEDIR)/include ../
-LIBS            += -lqpe -lopie -L. -lwellenreiter
+LIBS            += -L. -lwellenreiter
 INTERFACES      = configbase.ui
 TARGET          = wellenreiter
 
+!contains( platform, x11 ) {
+  message( qws )
+  include ( $(OPIEDIR)/include.pro )
+  LIBS += -lqpe -lopie
+}
 
+contains( platform, x11 ) {
+  LIBS += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
+  SOURCES += resource.cpp
+  HEADERS += resource.h
+}
 
-include ( $(OPIEDIR)/include.pro )

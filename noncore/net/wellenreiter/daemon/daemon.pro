@@ -11,6 +11,6 @@ INTERFACES      =
 TARGET          = wellenreiterd
 DEFINES         += DEBUG
 
-
-
-include ( $(OPIEDIR)/include.pro )
+!contains( platform, x11 ) {
+  include ( $(OPIEDIR)/include.pro )
+}

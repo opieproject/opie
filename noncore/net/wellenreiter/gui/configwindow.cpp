@@ -16,7 +16,9 @@
 #include "configwindow.h"
 #include <qmap.h>
 #include <qcombobox.h>
+#include <qpushbutton.h>
 #include <qspinbox.h>
+#include <qlayout.h>
 
 WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char * name, WFlags f )
            :WellenreiterConfigBase( parent, name, true, f )
@@ -26,6 +28,13 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     _devicetype[ "hostap" ] = 3;
     _devicetype[ "orinoco" ] = 4;
     _devicetype[ "<manual>" ] = 5;
+
+    #ifdef Q_WS_X11 // We're on X11: adding an Ok-Button for the Dialog here
+    QPushButton* okButton = new QPushButton( "ok", this );
+    okButton->show();
+    Layout5_2->addWidget( okButton ); //FIXME: rename this in configbase.ui
+    connect( okButton, SIGNAL( clicked() ), this, SLOT( accept() ) );
+    #endif
 };
 
 int WellenreiterConfigWindow::daemonDeviceType()

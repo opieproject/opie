@@ -40,17 +40,27 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     // setup icon sets
 
-    searchIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SearchIcon" ) );
     infoIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/InfoIcon" ) );
     settingsIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SettingsIcon" ) );
+    #ifdef QWS
+    searchIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/SearchIcon" ) );
     cancelIconSet = new QIconSet( Resource::loadPixmap( "wellenreiter/CancelIcon" ) );
+    #else
+    startStopIconSet = new QIconSet();
+    startStopIconSet->setPixmap( Resource::loadPixmap( "wellenreiter/SearchIcon" ), QIconSet::Automatic, QIconSet::Normal, QIconSet::Off );
+    startStopIconSet->setPixmap( Resource::loadPixmap( "wellenreiter/CancelIcon" ), QIconSet::Automatic, QIconSet::Normal, QIconSet::On );
+    #endif
 
     // setup tool buttons
 
     startStopButton = new QToolButton( 0 );
     startStopButton->setAutoRaise( true );
+    #ifdef QWS
     startStopButton->setOnIconSet( *cancelIconSet );
     startStopButton->setOffIconSet( *searchIconSet );
+    #else
+    startStopButton->setIconSet( *startStopIconSet );
+    #endif
     startStopButton->setToggleButton( true );
     connect( startStopButton, SIGNAL( clicked() ), mw, SLOT( startStopClicked() ) );
     startStopButton->setEnabled( false );
@@ -89,9 +99,15 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     id = mb->insertItem( "&Sniffer", sniffer );
     mb->setItemEnabled( id, false );
 
+    #ifdef QWS
     mb->insertItem( startStopButton );
     mb->insertItem( c );
     mb->insertItem( d );
+    #else // Qt3 changed the insertion order. It's now totally random :(
+    mb->insertItem( d );
+    mb->insertItem( c );
+    mb->insertItem( startStopButton );
+    #endif
 
     // setup status bar (for now only on X11)
 
@@ -105,7 +121,9 @@ void WellenreiterMainWindow::showConfigure()
 {
     qDebug( "show configure..." );
     cw->setCaption( tr( "Configure" ) );
+    #ifdef QWS
     cw->showMaximized();
+    #endif
     int result = cw->exec();
 
     if ( result )
@@ -128,11 +146,14 @@ void WellenreiterMainWindow::showConfigure()
 WellenreiterMainWindow::~WellenreiterMainWindow()
 {
 
-    delete searchIconSet;
     delete infoIconSet;
     delete settingsIconSet;
+    #ifdef QWS
+    delete searchIconSet;
     delete cancelIconSet;
-
+    #else
+    delete startStopIconSet;
+    #endif
 
 };
 

@@ -74,7 +74,7 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     #ifdef QWS
     manufile.sprintf( "%s/share/wellenreiter/manufacturers.dat", (const char*) QPEApplication::qpeDir() );
     #else
-    manufile.sprintf( "/home/mickey/work/opie/share/wellenreiter/manufacturers.dat" );
+    manufile.sprintf( "/usr/local/share/wellenreiter/manufacturers.dat" );
     #endif
     manufacturerdb = new ManufacturerDB( manufile );
 

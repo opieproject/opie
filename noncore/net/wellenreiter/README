@@ -45,13 +45,12 @@ cd <BUILDROOT>
 make SUBDIRS=packages/opie package
 
 (III) To compile a standalone Wellenreiter for X11, you need Qt3 and the development
-packages for Qt3, e.g. libqt3-devel. Assuming, $OPIEDIR and $QTDIR is set to Opie resp.
-Qt (e.g. /usr/lib/qt3), do the following:
-export QMAKESPEC=$OPIEDIR/mkspecs/linux-g++
-cd $OPIEDIR/noncore/net/wellenreiter
-qmake -makefile wellenreiter.pro
-make qmake
+packages for Qt3, e.g. libqt3-devel. Assuming, $QTDIR is set to your Qt-Director
+(e.g. /usr/lib/qt3), set $OPIEDIR to your installation prefix, e.g. /usr/local, then
+export QMAKESPEC=$QTDIR/mkspecs/linux-g++
+qmake "platform=x11" wellenreiter.pro
 make
+make install
 
 =====================
 =     Install       =

@@ -1,3 +1,4 @@
+DESTDIR = $(OPIEDIR)/lib
 TEMPLATE = lib
 CONFIG = warn_on debug
 VERSION = 0.2
@@ -7,9 +8,9 @@ SOURCES = source/cardmode.cc source/wl_log.cc source/wl_proto.cc source/sniff.cc
 LIBS = -lpcap
 TMAKE_CFLAGS += -D__UNIX__
 DEFINES += DEBUG
-DESTDIR = $(OPIEDIR)/lib
 TARGET = wellenreiter
 
+!contains( platform, x11 ) {
+  include ( $(OPIEDIR)/include.pro )
+}
 
-
-include ( $(OPIEDIR)/include.pro )

@@ -35,6 +35,7 @@ class WellenreiterMainWindow: public QMainWindow
     Wellenreiter* mw;
     WellenreiterConfigWindow* cw;
 
+    QIconSet* startStopIconSet;
     const QIconSet* searchIconSet;
     const QIconSet* infoIconSet;
     const QIconSet* settingsIconSet;
