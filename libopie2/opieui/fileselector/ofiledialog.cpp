@@ -196,8 +196,7 @@ QString OFileDialog::getSaveFileName(int selector,
      * if the user just clicked on it
      * #1522
      */
-    dlg.disconnect( dlg.file, SIGNAL(fileSelected(const QString&)) );
-    dlg.disconnect( dlg.file, SIGNAL(ok()) );
+    dlg.file->disconnect( &dlg );
 
     if( QPEApplication::execDialog(&dlg) )
     {
