@@ -217,7 +217,7 @@ Toch afsluiten?</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished">Kalender</translation>
+        <translation>Kalender</translation>
     </message>
 </context>
 <context>
@@ -316,23 +316,23 @@ Toch afsluiten?</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardinst.</translation>
     </message>
     <message>
         <source>Location:</source>
-        <translation type="unfinished"></translation>
+        <translation>Locatie:</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation type="unfinished">Kantoor</translation>
+        <translation>Kantoor</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Thuis</translation>
+        <translation>Thuis</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation type="unfinished"></translation>
+        <translation>Kategorie:</translation>
     </message>
 </context>
 <context>
@@ -346,7 +346,7 @@ Toch afsluiten?</translation>
     <name>DateBookWeekHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@ Toch afsluiten?</translation>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
-        <translation type="unfinished"></translation>
+        <translation>w</translation>
     </message>
 </context>
 <context>
@@ -377,43 +377,57 @@ Toch afsluiten?</translation>
 <context>
     <name>DateBookWeekView</name>
     <message>
+        <source>M</source>
+        <comment>Monday</comment>
+        <translation>M
+
+Maandag</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Tuesday</comment>
+        <translation>D
+
+Dinsdag</translation>
+    </message>
+    <message>
+        <source>W</source>
+        <comment>Wednesday</comment>
+        <translation>W
+
+Woensdag</translation>
+    </message>
+    <message>
+        <source>T</source>
+        <comment>Thursday</comment>
+        <translation>D
+
+Donderdag</translation>
+    </message>
+    <message>
+        <source>F</source>
+        <comment>Friday</comment>
+        <translation>V
+
+Vrijdag</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Saturday</comment>
+        <translation>Z
+
+Zaterdag</translation>
+    </message>
+    <message>
+        <source>S</source>
+        <comment>Sunday</comment>
+        <translation>Z
+
+Zondag</translation>
+    </message>
+    <message>
         <source>p</source>
         <translation>p</translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <comment>Monday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tu</source>
-        <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>We</source>
-        <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Th</source>
-        <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Fr</source>
-        <comment>Friday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sa</source>
-        <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Su</source>
-        <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

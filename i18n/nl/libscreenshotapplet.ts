@@ -3,47 +3,47 @@
     <name>ScreenshotControl</name>
     <message>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>Vertraging</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>Save named</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla op als</translation>
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla screenshot op als...</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <source>Scap</source>
-        <translation type="unfinished"></translation>
+        <translation>Scap</translation>
     </message>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Naam van Screenshot</translation>
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelukt</translation>
     </message>
     <message>
         <source>Screenshot was uploaded to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Screenshot is weggeschreven naar %1</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout</translation>
     </message>
     <message>
         <source>Connection to %1 failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinding met %1 mislukt.</translation>
     </message>
 </context>
 </TS>

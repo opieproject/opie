@@ -29,5 +29,9 @@
         <source>Help Browser</source>
         <translation>Hulp bij Hulp</translation>
     </message>
+    <message>
+        <source>HelpBrowser</source>
+        <translation>Helppagina&apos;s</translation>
+    </message>
 </context>
 </TS>

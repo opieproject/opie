@@ -3,11 +3,11 @@
     <name>RotateApplet</name>
     <message>
         <source>Rotate shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Rotatiesneltoets</translation>
     </message>
     <message>
         <source>Rotate</source>
-        <translation type="unfinished"></translation>
+        <translation>Roteer</translation>
     </message>
 </context>
 </TS>

@@ -3,62 +3,62 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardinstell</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancel</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander richtingtoetsen</translation>
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongedefinieerde toets</translation>
     </message>
 </context>
 <context>
     <name>Kpacman</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nieuw</translation>
     </message>
     <message>
         <source>&amp;Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pause</translation>
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Highscore</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Stop</translation>
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Verberg Muiscursor</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Selecteer grafiche elementen</translation>
     </message>
     <message>
         <source>&amp;Pause in Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Pauzeer in de achtergrond</translation>
     </message>
     <message>
         <source>&amp;Continue in Foreground</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ga door op de voorgrond</translation>
     </message>
     <message>
         <source>Change &amp;keys...</source>
-        <translation type="unfinished"></translation>
+        <translation>Verander &amp;toetsen...</translation>
     </message>
     <message>
         <source>@PACKAGE@ - @VERSION@
@@ -75,11 +75,32 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>@PACKAGE@ - @VERSION@
+
+Joerg Thoenissen (joe@dsite.de)
+
+Een pacman spel voor de KDE Desktop
+Dit programma is gebaseerd op de bron van ksnake
+door Michel Filippi (mfilippi@sade.rhein-main.de).
+Het design is sterk beinvloed door Pacman (c)
+1980 MIDWAY MFG.CO.
+
+Ik wil hierbij mijn vriendin Elke Krueers bedanken
+voor de laatste 10 jaar van haar vriendschap.</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Help</translation>
+    </message>
+    <message>
+        <source>Configuration Error</source>
+        <translation>Canfiguratiefout</translation>
+    </message>
+    <message>
+        <source>There are no schemes defined,
+or no scheme is selected.</source>
+        <translation>Er zijn geen schema&apos;s gedefinieerd,
+of er is geen schema geselecteerd.</translation>
     </message>
 </context>
 <context>
@@ -89,121 +110,120 @@ the last 10 years of her friendship.
 
 The file &apos;@FONTNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Het bitfont kan niet worden geconstrueerd
+
+Het bestand &apos;@FONTNAME@&apos; bestaat niet,
+of is in een onbekend formaat.</translation>
     </message>
 </context>
 <context>
     <name>Referee</name>
     <message>
         <source>GAME  OVER</source>
-        <translation type="unfinished"></translation>
+        <translation>GAME OVER</translation>
     </message>
     <message>
         <source>PLAYER ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>SPELER EEN</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation type="unfinished"></translation>
+        <translation>KLAAR!</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUZE</translation>
     </message>
     <message>
         <source>CHARACTER</source>
-        <translation type="unfinished"></translation>
+        <translation>KARAKTER</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation type="unfinished"></translation>
+        <translation>SCHUILNAAM</translation>
     </message>
     <message>
         <source>-SHADOW</source>
-        <translation type="unfinished"></translation>
+        <translation>-SCHADUW</translation>
     </message>
     <message>
         <source>&quot;BLINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;BLINKY&quot;</translation>
     </message>
     <message>
         <source>-SPEEDY</source>
-        <translation type="unfinished"></translation>
+        <translation>-SPEEDY</translation>
     </message>
     <message>
         <source>&quot;PINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;PINKY&quot;</translation>
     </message>
     <message>
         <source>-BASHFUL</source>
-        <translation type="unfinished"></translation>
+        <translation>-MEPPER</translation>
     </message>
     <message>
         <source>&quot;INKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;INKY&quot;</translation>
     </message>
     <message>
         <source>-POKEY</source>
-        <translation type="unfinished"></translation>
+        <translation>-PRIKKER</translation>
     </message>
     <message>
         <source>&quot;CLYDE&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;CLYDE&quot;</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation type="unfinished"></translation>
+        <translation>QTOPIA AANPASSING: CATALIN CLIMOV</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation type="unfinished"></translation>
+        <translation>DRUK OP CURSOR OM TE STARTEN</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>1UP</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation type="unfinished"></translation>
+        <translation>HIGH SCORE</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>2UP</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
-        <translation type="unfinished"></translation>
+        <translation>    GEFELICITEERD</translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation type="unfinished"></translation>
+        <translation>   U EEN TOP 10 SCORE</translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
-        <translation type="unfinished"></translation>
+        <translation>BEHAALD.</translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>RNK   SCORE  NAAM  DATUM</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>PAUSED</translation>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <translation>@YY@/@MM@/@DD@</translation>
     </message>
 </context>
 <context>
@@ -213,11 +233,14 @@ or is of an unknown format.</source>
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>De pixelmap kan niet worden gemaakt.
+
+Het bestand &apos;@PIXMAPNAME@&apos; bestaat niet,
+of is in een onbekend formaat.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Initialisatiefout</translation>
     </message>
 </context>
 </TS>

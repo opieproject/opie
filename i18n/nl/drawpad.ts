@@ -270,10 +270,6 @@ verwijderen?</translation>
         <source>Format:</source>
         <translation>Formaat:</translation>
     </message>
-    <message>
-        <source>All Images</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ImportDialog</name>
@@ -288,10 +284,6 @@ verwijderen?</translation>
     <message>
         <source>Preview</source>
         <translation>Voorbeeld</translation>
-    </message>
-    <message>
-        <source>All images</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

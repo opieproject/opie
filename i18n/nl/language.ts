@@ -3,22 +3,22 @@
     <name>LanguageSettings</name>
     <message>
         <source>English</source>
-        <translation type="unfinished"></translation>
+        <translation>Engels</translation>
     </message>
     <message>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
 </context>
 <context>
     <name>LanguageSettingsBase</name>
     <message>
         <source>Language Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Taalinstellingen</translation>
     </message>
     <message>
         <source>Select language</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer taal</translation>
     </message>
 </context>
 </TS>
