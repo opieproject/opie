@@ -8,17 +8,17 @@
 // lists of elements
 
 #include <stdio.h>
-#include "kmolelements.h" 
+#include "kmolelements.h"
 
 /**
- * A generic chemical entity. Can be an element or a group. 
+ * A generic chemical entity. Can be an element or a group.
  */
 SubUnit::SubUnit () {}
 
 SubUnit::~SubUnit () {}
 
 /**
- * Construct a subunit and return a pointer to it. The syntax of LINE is 
+ * Construct a subunit and return a pointer to it. The syntax of LINE is
  * the one used in the element definition file.
  */
 SubUnit* SubUnit::makeSubUnit(QString line) {
@@ -28,7 +28,7 @@ SubUnit* SubUnit::makeSubUnit(QString line) {
   if (name != "-group") { // not a group - must be represented as Element
     str >> weight >> ws;
     return new Element(name, weight.toDouble());
-  } 
+  }
   else {
     str >> grpname;
     ElementList* els = new ElementList(grpname); // group - make an ElementList
@@ -48,12 +48,12 @@ QString SubUnit::getName() const {
 /**
  * Get the molecular weight of THIS, based on the data from ELSTABLE.
  */
-double SubUnit::getWeight(QDict<SubUnit>* elstable) const {
+double SubUnit::getWeight(QDict<SubUnit>* ) const {
   return -1;
 }
 
 /**
- * A group of elements. 
+ * A group of elements.
  */
 ElementList::ElementList () {
   elements = new QList<ElementCoef>;
@@ -65,7 +65,7 @@ ElementList::~ElementList () {
 
 
 /**
- * A group of elements. 
+ * A group of elements.
  */
 ElementList::ElementList (QString name) {
   this->name = name;
@@ -80,7 +80,7 @@ void ElementList::writeOut(QString& line) {
   line = "-group " + name;
   ElementCoef* current = elements->first();
   while (current != 0) {
-    line += " " + current->name + " " + coef.setNum(current->coef, 'g', 10); 
+    line += " " + current->name + " " + coef.setNum(current->coef, 'g', 10);
     // precision set to 10 digits
     current = elements->next();
   }
@@ -103,7 +103,7 @@ double ElementList::getWeight(QDict<SubUnit>* elstable) const {
 }
 
 /**
- * Return a string representing the elemental composition of THIS, as 
+ * Return a string representing the elemental composition of THIS, as
  * a tab-separated element - percentage pairs, separated by newlines.
  */
 QString ElementList::getEA(QDict<SubUnit>* elstable, double mw) const {
@@ -114,17 +114,17 @@ QString ElementList::getEA(QDict<SubUnit>* elstable, double mw) const {
   while (current != 0) {
     SubUnit* e = elstable->find(current->name);
     if (e != 0) {
-      double current_percent = 100 * (current->coef) * 
-	(e->getWeight(elstable)) 
+      double current_percent = 100 * (current->coef) *
+	(e->getWeight(elstable))
 	/ mw;
-      ea += current->name + "\t" + 
+      ea += current->name + "\t" +
 	temp.setNum(current_percent) + "\n";
     } else return QString("ERROR!\n"); //ERROR
     current = elements->next();
   }
   return ea;
 }
-      
+
 /**
  * Return a string representing THIS as an empirical chemical formula.
  */
@@ -162,7 +162,7 @@ void ElementList::addTo(ElementList& els, double coef) {
 }
 
 /**
- * Add an element to THIS, with a coefficient COEF. If THIS already contains 
+ * Add an element to THIS, with a coefficient COEF. If THIS already contains
  * an element with the same name, adjust its coefficient only; if not, create
  * a new ElementCoef pair and add to THIS.
  */
@@ -184,7 +184,7 @@ void ElementList::addElement(const QString& name, double coef) {
 bool ElementList::contains(const QString& name) {
   ElementCoef* current = elements->first();
   while (current != 0) {
-    if (current->name == name) 
+    if (current->name == name)
       return true;
     current = elements->next();
   }
@@ -202,7 +202,7 @@ QString ElementList::getName() const {
 /**
  * A chemical element.
  */
-Element::Element(const QString& n, double w) 
+Element::Element(const QString& n, double w)
   : weight(w), name(n) { }
 
 
@@ -218,7 +218,7 @@ void Element::writeOut(QString& line) {
   line = name + " " + line;
 }
 
-double Element::getWeight(QDict<SubUnit>* elstable) const {
+double Element::getWeight(QDict<SubUnit>* ) const {
   return weight;
 }
 
@@ -231,7 +231,7 @@ QString Element::getName() const {
 }
 
 /**
- * An element - coefficient pair. Used to represent elements within an 
+ * An element - coefficient pair. Used to represent elements within an
  * element list.
  */
 ElementCoef::ElementCoef(const QString& n, double c) : name(n), coef(c) {}

@@ -134,7 +134,6 @@ void BacDialog::calculate()
 {
 
         float weight,genderDiff, bac, typeDrink=0, drinkOz=0, bodyWater, milliliters, oz, gram, gramsMil, alc, metab, bac1;
-        float weightunitDifference, massunitdiff;
         QString estBac;
 
         if( GenderComboBox->currentItem()==0)

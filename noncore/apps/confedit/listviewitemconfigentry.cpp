@@ -136,9 +136,9 @@ void ListViewItemConfigEntry::save(QTextStream *t)
 
 void ListViewItemConfigEntry::revert()
 {
-	_group = _groupOrig;	
-	_key = _keyOrig;	
-	_value = _valueOrig;	
+	_group = _groupOrig;
+	_key = _keyOrig;
+	_value = _valueOrig;
 	_changed=false;
  	displayText();
 }

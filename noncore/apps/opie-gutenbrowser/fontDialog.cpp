@@ -55,14 +55,14 @@ FontDialog::FontDialog( QWidget * parent,  const char* name /*, bool modal, WFla
     FontTextLabel4 = new QLabel( this, "TextLabel4" );
     FontTextLabel4->setText( tr( "Size" ) );
     hbox->addWidget( FontTextLabel4,0);
-    
+
     sizeComboBox = new QComboBox( FALSE, this, "SizeCombo");
 //    sizeComboBox->setMaximumWidth(60);
     hbox->addWidget( sizeComboBox, 0);
 
     vbox->addLayout(hbox,0);
     layout->addLayout( vbox,0,3);
-    
+
     MultiLineEdit1 = new QMultiLineEdit( this, "MultiLineEdit1" );
     MultiLineEdit1->setText( tr( "The Quick Brown Fox Jumps Over The Lazy Dog" ) );
     MultiLineEdit1->setWordWrap( QMultiLineEdit::WidgetWidth);
@@ -90,17 +90,17 @@ void FontDialog::familyListBoxSlot(const QString & text)
     styleListBox->clear();
 //  clearListBoxes();
   family = text;
-//  odebug << family << oendl; 
+//  odebug << family << oendl;
   QStringList styles = fdb.styles( family ); // string list of styles of our current font family
   styleListBox->insertStringList( styles);
   QString dstyle;// = "\t" + style + " (";
 
-#ifdef BUGGY_SHARP_ZAURUS   
+#ifdef BUGGY_SHARP_ZAURUS
 
 QValueList<int> smoothies = fdb.smoothSizes( family, styleListBox->text(0) );
    for ( QValueList<int>::Iterator points = smoothies.begin(); points != smoothies.end(); ++points ) {
        dstyle = QString::number( *points );
-       odebug << dstyle << oendl; 
+       odebug << dstyle << oendl;
       sizeComboBox->insertItem(  dstyle.left( dstyle.length() - 1 ));
   }
 #else
@@ -113,7 +113,7 @@ QValueList<int> smoothies = fdb.smoothSizes( family, styleListBox->text(0) );
    }
 #endif
 
-  if(styleInt == -1 || styleInt > styleListBox->count() )
+  if(styleInt == -1 || styleInt > static_cast<int>(styleListBox->count()) )
       styleListBox->setCurrentItem(0);
   else
       styleListBox->setCurrentItem(styleInt);
@@ -121,12 +121,12 @@ QValueList<int> smoothies = fdb.smoothSizes( family, styleListBox->text(0) );
   changeText();
 }
 
-void FontDialog::styleListBoxSlot(const QString &text)
+void FontDialog::styleListBoxSlot(const QString &)
 {
     changeText();
 }
 
-void FontDialog::sizeComboBoxSlot(const QString & text)
+void FontDialog::sizeComboBoxSlot(const QString &)
 {
     changeText();
 }
@@ -151,7 +151,7 @@ void FontDialog::populateLists()
   for ( QStringList::Iterator f = families.begin(); f != families.end();++f ) {
       QString family = *f;
 //      if(family == defaultFont.family())
-//          odebug << family << oendl; 
+//          odebug << family << oendl;
       familyListBox->insertItem( family);
 
       if( familyListBox->text(0) == family) {
@@ -174,12 +174,12 @@ void FontDialog::populateLists()
           } // styles
       }
   }
-  for(int i=0;i < familyListBox->count();i++) {
+  for(uint i=0;i < familyListBox->count();i++) {
       if( familyListBox->text(i) == familyStr)
           familyListBox->setSelected( i, TRUE);
   }
 
-  for(int i=0;i < styleListBox->count();i++) {
+  for(uint i=0;i < styleListBox->count();i++) {
       if( styleListBox->text(i) == styleStr)
           styleListBox->setSelected( i, TRUE);
   }
@@ -189,7 +189,7 @@ void FontDialog::populateLists()
 #ifdef BUGGY_SHARP_ZAURUS
        if(sizeComboBox->text(i) == sizeStr)
 #else
-       if(fontsize[i] == i_size) 
+       if(fontsize[i] == i_size)
 #endif
            sizeComboBox->setCurrentItem(i);
    }
@@ -209,13 +209,13 @@ void FontDialog::changeText()
     else {
         family = familyListBox->currentText();
     }
-//          odebug << "Font family is "+family << oendl; 
+//          odebug << "Font family is "+family << oendl;
     if( styleListBox->currentItem() == -1)
         style=styleListBox->text(0);
     else {
         style = styleListBox->currentText();
     }
-//          odebug << "font style is "+style << oendl; 
+//          odebug << "font style is "+style << oendl;
 
     if( sizeComboBox->currentItem() == -1 )
         size = sizeComboBox->text(0);
@@ -223,7 +223,7 @@ void FontDialog::changeText()
      size = sizeComboBox->currentText();
     }
 
-//       odebug << "Font size is "+size << oendl; 
+//       odebug << "Font size is "+size << oendl;
     bool ok;
     int i_size = size.toInt(&ok,10);
     QStringList charSetList = fdb.charSets(family);
@@ -231,13 +231,13 @@ void FontDialog::changeText()
     QString charSet;
           for ( QStringList::Iterator s = charSetList.begin(); s != charSetList.end();++s ) { // for each font style
             charSet = *s;
-//            odebug << charSet << oendl; 
+//            odebug << charSet << oendl;
           }
     selectedFont = fdb.font(family,style,i_size,charSet);
     QFontInfo fontInfo( selectedFont);
-//      if(fontInfo.italic() ) odebug << "italic" << oendl; 
-    selectedFont.setWeight(fontInfo.weight() );    
-//      odebug << "Style are "+style+" " << fontInfo.weight() << " " << oendl; 
+//      if(fontInfo.italic() ) odebug << "italic" << oendl;
+    selectedFont.setWeight(fontInfo.weight() );
+//      odebug << "Style are "+style+" " << fontInfo.weight() << " " << oendl;
     Config cfg("Gutenbrowser");
     cfg.setGroup("Font");
     cfg.writeEntry("Family",family);
@@ -249,7 +249,7 @@ void FontDialog::changeText()
           selectedFont = fdb.font(family,"Regular",i_size,charSet);
           selectedFont.setItalic(TRUE); //ya right
           cfg.writeEntry("Italic","TRUE");
-//            odebug << "Style is "+styleListBox->currentText() << oendl; 
+//            odebug << "Style is "+styleListBox->currentText() << oendl;
       } else
           cfg.writeEntry("Italic","FALSE");
 

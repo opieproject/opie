@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: helpwindow.cpp,v 1.1 2004-04-07 13:07:42 llornkcor Exp $
+** $Id: helpwindow.cpp,v 1.2 2004-09-10 11:11:25 zecke Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -20,7 +20,7 @@
 
 #include <ctype.h>
 
-HelpWindow::HelpWindow( const QString& home_, const QString& _path, QWidget* parent, const char *name )
+HelpWindow::HelpWindow( const QString& home_, const QString&, QWidget* parent, const char *name )
     : QMainWindow( parent, name, WDestructiveClose ), pathCombo( 0 ), selectedURL()
 {
    QString local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";

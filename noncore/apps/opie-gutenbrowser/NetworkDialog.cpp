@@ -40,7 +40,7 @@ QProgressBar* ProgressBar1;
 QPushButton* buttonCancel;
 static netbuf *conn = NULL;
 
-static int log_progress(netbuf *ctl, int xfered, void *arg) {
+static int log_progress(netbuf *, int xfered, void *arg) {
 	int fsz = *(int *)arg;
 	int pct = (xfered * 100) / fsz;
 	printf("%3d%%\r", pct);

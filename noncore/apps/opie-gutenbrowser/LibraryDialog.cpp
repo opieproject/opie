@@ -35,7 +35,7 @@
 /*
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog. */
-LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool modal, WFlags fl )
+LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool /*modal*/, WFlags fl )
                 : QDialog( parent, name, true/* modal*/, fl )
 {
         if ( !name )

@@ -51,9 +51,9 @@ void ListViewConfDir::readConfFiles()
 
 	while ( (fi=it.current()) )
  	{
-    odebug << "opening: >" << fi->fileName().data() << "<" << oendl; 
+    odebug << "opening: >" << fi->fileName().data() << "<" << oendl;
   	fileEntry = new ListViewItemConfFile( fi, this );
-    QListViewItem *dummy = new QListViewItem(fileEntry, "dummy");
+        (void)new QListViewItem(fileEntry, "dummy");
   	++it;
   }
 }
