@@ -985,7 +985,7 @@ void TEScreen::setSelExtentXY(const int x, const int y)
 
 QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 {
-  if (sel_begin == -1) 
+  if (sel_begin == -1)
      return QString::null; // Selection got clear while selecting.
 
   int *m;			// buffer to fill.
@@ -1015,7 +1015,7 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
 	    {
 	      eol = sel_BR % columns + 1;
 	    }
-	  
+
 	  while (hX < eol)
 	    {
 	      m[d++] = hist.getCell(hY, hX++).c;
@@ -1112,13 +1112,24 @@ QString TEScreen::getSelText(const BOOL preserve_line_breaks)
     {
       qc[i] = m[i];
     }
-  
+
   QString res(qc, d);
 
   delete m;
   delete qc;
 
   return res;
+}
+QString TEScreen::getHistory() {
+    sel_begin = 0;
+    sel_BR = sel_begin;
+    sel_TL = sel_begin;
+    setSelExtentXY(columns-1,lines-1);
+    QString tmp=getSelText(true);
+    while (tmp.at(tmp.length()-2).unicode()==10 && tmp.at(tmp.length()-1).unicode()==10)
+        tmp.truncate(tmp.length()-1);
+
+    return tmp;
 }
 /* above ... end of line processing for selection -- psilva
 cases:

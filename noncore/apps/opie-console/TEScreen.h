@@ -162,6 +162,8 @@ public: // these are all `Screen' operations
 
     void checkSelection(int from, int to);
 
+    QString getHistory();
+
 private: // helper
 
     void clearImage(int loca, int loce, char c);

@@ -70,6 +70,7 @@ private slots:
     void slotWrap();
     void slotSessionChanged( Session* );
     void slotKeyReceived(FKey, ushort, ushort, bool);
+    void slotSaveHistory();
 
     /* what could these both slot do? */
     void slotCopy();

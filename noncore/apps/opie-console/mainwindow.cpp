@@ -9,6 +9,7 @@
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include <qfileinfo.h>
+#include <qtextstream.h>
 
 #include <qpe/resource.h>
 #include <qpe/qpeapplication.h>
@@ -17,6 +18,7 @@
 
 #include <opie/ofiledialog.h>
 
+#include "TEmulation.h"
 #include "keytrans.h"
 #include "profileeditordialog.h"
 #include "configdialog.h"
@@ -241,6 +243,12 @@ void MainWindow::initUI() {
              this,  SLOT( slotFullscreen() ) );
 
     m_console->insertSeparator();
+
+    QAction *a = new QAction();
+    a->setText( tr("Save history") );
+    a->addTo( m_console );
+    connect(a, SIGNAL(activated() ),
+            this, SLOT(slotSaveHistory() ) );
     /*
      * terminate action
      */
@@ -302,7 +310,7 @@ void MainWindow::initUI() {
             this, SLOT(slotKeyReceived(FKey, ushort, ushort, bool)));
 
 
-    QAction *a = new QAction(tr("Copy"),
+    a = new QAction(tr("Copy"),
                     Resource::loadPixmap("copy"), QString::null,
                     0, this, 0 );
     //a->addTo( m_icons );
@@ -767,4 +775,29 @@ void MainWindow::slotSaveSession() {
     manager()->add( currentSession()->profile() );
     manager()->save();
     populateProfiles();
+}
+void MainWindow::slotSaveHistory() {
+    QMap<QString, QStringList> map;
+    QStringList text;
+    text << "text/plain";
+    map.insert(tr("History"), text );
+    QString filename = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+    if (filename.isEmpty() ) return;
+
+    QFileInfo info(filename);
+
+    DocLnk nf;
+    nf.setType("text/plain");
+    nf.setFile(filename);
+    nf.setName(info.fileName());
+
+
+    QFile file(filename);
+    file.open(IO_WriteOnly );
+    QTextStream str(&file );
+    if ( currentSession() )
+        currentSession()->emulationHandler()->emulation()->streamHistory(&str);
+
+    file.close();
+    nf.writeLink();
 }

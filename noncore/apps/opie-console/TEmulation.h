@@ -24,6 +24,8 @@
 #include <qtimer.h>
 #include <stdio.h>
 #include <qtextcodec.h>
+#include <qtextstream.h>
+
 #include "keytrans.h"
 
 class TEmulation : public QObject
@@ -37,13 +39,14 @@ public:
 public:
   virtual void setHistory(bool on);
   virtual bool history();
+    virtual void streamHistory( QTextStream* );
 
 public slots: // signals incoming from TEWidget
 
   virtual void onImageSizeChange(int lines, int columns);
   virtual void onHistoryCursorChange(int cursor);
   virtual void onKeyPress(QKeyEvent*);
- 
+
   virtual void clearSelection();
   virtual void onSelectionBegin(const int x, const int y);
   virtual void onSelectionExtend(const int x, const int y);
@@ -74,6 +77,8 @@ public:
 
   void setKeytrans(int no);
   void setKeytrans(const char * no);
+
+
 
 protected:
 

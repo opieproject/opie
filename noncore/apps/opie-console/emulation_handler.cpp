@@ -31,6 +31,9 @@ EmulationHandler::EmulationHandler( const Profile& prof, QWidget* parent,const c
 
 
 }
+TEmulation* EmulationHandler::emulation() {
+    return m_teEmu;
+}
 EmulationHandler::~EmulationHandler() {
     if (isRecording())
         clearScript();

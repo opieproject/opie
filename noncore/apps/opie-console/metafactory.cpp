@@ -43,12 +43,6 @@ void MetaFactory::addReceiveLayer( const QCString& name,
     m_strings.insert(str, name );
     m_receiveFact.insert( str, lay );
 }
-void MetaFactory::addEmulationLayer( const QCString& name,
-                                     const QString& str,
-                                     emulationLayer em) {
-    m_strings.insert(str, name );
-    m_emu.insert( str, em );
-}
 QStringList MetaFactory::ioLayers()const {
     QStringList list;
     QMap<QString, iolayer>::ConstIterator it;
@@ -85,14 +79,6 @@ QStringList MetaFactory::receiveLayers()const {
     QStringList list;
     QMap<QString, receivelayer>::ConstIterator it;
     for ( it = m_receiveFact.begin(); it != m_receiveFact.end(); ++it ) {
-        list << it.key();
-    }
-    return list;
-}
-QStringList MetaFactory::emulationLayers()const {
-    QStringList list;
-    QMap<QString, emulationLayer>::ConstIterator it;
-    for ( it = m_emu.begin(); it != m_emu.end(); ++it ) {
         list << it.key();
     }
     return list;
@@ -147,17 +133,6 @@ ProfileDialogWidget *MetaFactory::newKeyboardPlugin( const QString& str, QWidget
         wid = (*(it.data() ) )(str,parent);
     }
     return wid;
-}
-EmulationLayer* MetaFactory::newEmulationLayer( const QString& str, WidgetLayer* wid) {
-    EmulationLayer* lay = 0l;
-
-    QMap<QString, emulationLayer>::Iterator it;
-    it = m_emu.find( str );
-    if ( it != m_emu.end() ) {
-        lay = (*(it.data() ) )(wid);
-    }
-
-    return lay;
 }
 FileTransferLayer* MetaFactory::newFileTransfer(const QString& str, IOLayer* lay ) {
     FileTransferLayer* file = 0l;

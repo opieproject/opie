@@ -47,6 +47,7 @@ public:
 
     void load( const Profile& );
     QWidget* widget();
+    TEmulation *emulation();
     void setColor( const QColor& fore, const QColor& back );
     QPushButton* cornerButton();
 

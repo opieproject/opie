@@ -16,7 +16,6 @@
 #include "receive_layer.h"
 #include "profile.h"
 #include "profiledialogwidget.h"
-#include "emulation_layer.h"
 
 class WidgetLayer;
 class MetaFactory {
@@ -25,7 +24,6 @@ public:
     typedef IOLayer* (*iolayer)(const Profile& );
     typedef FileTransferLayer* (*filelayer)(IOLayer*);
     typedef ReceiveLayer* (*receivelayer)(IOLayer*);
-    typedef EmulationLayer* (*emulationLayer)(WidgetLayer* );
 
     MetaFactory();
     ~MetaFactory();
@@ -61,12 +59,6 @@ public:
                           const QString&,
                           receivelayer);
 
-    /**
-     * adds a Factory for Emulation to the Layer..
-     */
-    void addEmulationLayer ( const QCString& name,
-                              const QString& uiString,
-                              emulationLayer );
 
     /* translated UI Strings */
     QStringList ioLayers()const;
@@ -78,7 +70,6 @@ public:
     QStringList terminalWidgets()const;
     QStringList fileTransferLayers()const;
     QStringList receiveLayers()const;
-    QStringList emulationLayers()const;
 
     /**
      * the generation...
@@ -87,7 +78,6 @@ public:
     ProfileDialogWidget *newConnectionPlugin ( const QString&, QWidget* );
     ProfileDialogWidget* newTerminalPlugin( const QString&, QWidget* );
     ProfileDialogWidget* newKeyboardPlugin( const QString&, QWidget* );
-    EmulationLayer* newEmulationLayer(const QString&, WidgetLayer* );
     FileTransferLayer* newFileTransfer(const QString&, IOLayer* );
     ReceiveLayer* newReceive(const QString&, IOLayer* );
 
@@ -113,7 +103,6 @@ private:
     QMap<QString, iolayer> m_layerFact;
     QMap<QString, filelayer> m_fileFact;
     QMap<QString, receivelayer> m_receiveFact;
-    QMap<QString, emulationLayer> m_emu;
 };
 
 
