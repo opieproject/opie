@@ -3,76 +3,76 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei Name:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Gruppe:</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Schlüssel:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Wert:</translation>
     </message>
 </context>
 <context>
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Dateien:</translation>
     </message>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte nicht öffnen</translation>
     </message>
     <message>
         <source>The directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Das Verzeichnis</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>konnte nicht geöffnet werden.</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Konnte nicht öffnen</translation>
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Die Datei</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>no group</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Gruppe</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Conf Datei Editor</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichere</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückgängig</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Lösche</translation>
     </message>
 </context>
 </TS>
