@@ -1,6 +1,7 @@
 #include "QtDasherPlugin.h"
 
 #include <qpe/global.h>
+#include <qpe/qpeapplication.h>
  
 #include <qpainter.h>
 #include <qlist.h>
@@ -8,6 +9,7 @@
 #include <qlayout.h>
 #include <qvbox.h>
 #include <qdialog.h>
+#include <qfile.h>
 #include <qscrollview.h>
 #include <qpopupmenu.h>
 #include <qhbuttongroup.h>
@@ -19,7 +21,7 @@ QtDasherPlugin::QtDasherPlugin(QWidget* parent, const char* name, WFlags f) : QF
 {
   (new QHBoxLayout(this))->setAutoAdd(TRUE);
   interface = new CDasherInterface;
-  interface->SetSystemLocation("/opt/QtPalmtop/share/dasher/");
+  interface->SetSystemLocation( QFile::encodeName(QPEApplication::qpeDir()+"share/dasher/").data() );
   interface->Unpause(0);
   interface->Start();  
   d = new QtDasherScreen(240,100,interface,this,this);

@@ -265,11 +265,11 @@ bool UserDialog::addUser(int uid, int gid)
     if(!(adduserDialog->userImage.isNull()))
     {
         QDir d;
-        if(!(d.exists("/opt/QtPalmtop/pics/users")))
+        if(!(d.exists(QPEApplication::qpeDir() + "pics/users")))
         {
-            d.mkdir("/opt/QtPalmtop/pics/users");
+            d.mkdir(QPEApplication::qpeDir() + "pics/users");
         }
-        QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
+        QString filename= QPEApplication::qpeDir()+"pics/users/"+accounts->pw_name+".png";
         //        adduserDialog->userImage=adduserDialog->userImage.smoothScale(48,48);
         adduserDialog->userImage.save(filename,"PNG");
     }
@@ -436,11 +436,11 @@ bool UserDialog::editUser(const char *username)
     if(!(edituserDialog->userImage.isNull()))
     {
         QDir d;
-        if(!(d.exists("/opt/QtPalmtop/pics/users")))
+        if(!(d.exists(QPEApplication::qpeDir()+"pics/users")))
         {
-            d.mkdir("/opt/QtPalmtop/pics/users");
+            d.mkdir(QPEApplication::qpeDir()+"pics/users");
         }
-        QString filename="/opt/QtPalmtop/pics/users/"+accounts->pw_name+".png";
+        QString filename=QPEApplication::qpeDir()+"pics/users/"+accounts->pw_name+".png";
         //        edituserDialog->userImage=edituserDialog->userImage.smoothScale(48,48);
         edituserDialog->userImage.save(filename,"PNG");
     }
