@@ -295,13 +295,13 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   secondToolBar->setHorizontalStretchable( TRUE );
 
   commonCombo = new QComboBox( secondToolBar );
-
+  commonCombo->setMaximumWidth(236);
   configMenu->insertItem( "Edit Command List");
   if( listHidden) {
       secondToolBar->hide();
       configMenu->setItemEnabled(-20 ,FALSE);
   }
-  
+
   cfg.setGroup("Commands");
   commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
 
@@ -385,7 +385,7 @@ void Konsole::enterCommand(int c)
             QString text = commonCombo->text(c); //commonCmds[c];
             te->emitText(text);
         } else {
-            changeCommand( commonCombo->text(c), c);            
+            changeCommand( commonCombo->text(c), c);
         }
     }
 }
@@ -577,8 +577,7 @@ void Konsole::switchSession(QWidget* w) {
 void Konsole::colorMenuSelected(int iD)
 { // this is NOT pretty, elegant or anything else besides functional
 //        QString temp;
-//        temp.sprintf("%d", iD);
-//      qDebug(temp);
+//        qDebug( temp.sprintf("%d", iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Colors");
@@ -685,9 +684,8 @@ void Konsole::colorMenuSelected(int iD)
 
 void Konsole::configMenuSelected(int iD)
 {
-//      QString temp;
-//      temp.sprintf("%d",iD);
-//      qDebug(temp);
+    QString temp;
+    qDebug( temp.sprintf("%d",iD));
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("Menubar");
@@ -751,7 +749,7 @@ void Konsole::changeCommand(const QString &text, int c)
     if(commonCmds[c] != text) {
         cfg.writeEntry(QString::number(c),text);
         commonCombo->clearEdit();
-        commonCombo->setCurrentItem(c);        
+        commonCombo->setCurrentItem(c);
     }
 }
 
@@ -759,7 +757,7 @@ void Konsole::setColor()
 {
     Config cfg("Konsole");
     cfg.setGroup("Colors");
-    int scheme = cfg.readNumEntry("Schema",1); 
-    if(scheme != 1) colorMenuSelected( -scheme); 
+    int scheme = cfg.readNumEntry("Schema",1);
+    if(scheme != 1) colorMenuSelected( -scheme);
 
 }
