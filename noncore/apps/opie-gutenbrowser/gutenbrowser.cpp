@@ -134,10 +134,10 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
 				config.setGroup( "Titles" );
 				QString tempTitle = config.readEntry( ramble, "");
 				config.setGroup( tempTitle);
-				int index=config.readNumEntry( "LineNumber", -1 );
+				int index = config.readNumEntry( "LineNumber", -1 );
 				if( index != -1) {
 						odebug << tempTitle << oendl;
-						bookmarksMenu->insertItem( tempTitle);
+						if(!tempTitle.isEmpty()) bookmarksMenu->insertItem( tempTitle);
 				}
 		}
 
@@ -561,7 +561,7 @@ void Gutenbrowser::BeginBtn() {
 
 		QString LeftText;// = Lview->text();
 
-		int linesPerPage = Lview->lastRow() - Lview->topRow();
+//		int linesPerPage = Lview->lastRow() - Lview->topRow();
 			//    int pages = (( linesPerPage / Lview->editSize() ) ) +1;
 			//    int pageN = 0;
 		i_pageNum = 1;
