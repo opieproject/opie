@@ -1,0 +1,10 @@
+Package: opie-pimconverter
+Files: bin/opimconverter pics/opimconverter/* apps/1Pim/opimconverter.desktop
+Priority: optional
+Section: opie/pim
+Maintainer: Stefan Eilers <eilers.stefan@epost.de>
+Architecture: arm
+Depends: task-opie-minimal
+Description: Opie PIM database converter
+Moves PIM-data betwenn different databases
+Version: $QPE_VERSION$EXTRAVERSION

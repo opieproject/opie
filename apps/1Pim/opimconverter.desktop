@@ -1,0 +1,8 @@
+[Desktop Entry]
+Exec=opimconverter
+Icon=opimconverter/opimconverter
+Type=1Pim
+Name=PimConverter
+Comment=Converts pim data between different databases
+Name[de]=PimConverter
+Comment[de]=Convertiert Pimdaten zwischen verschiedenen Datenbanken
