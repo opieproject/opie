@@ -17,11 +17,14 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.22 2002-09-14 16:14:21 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.23 2002-09-21 13:37:39 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.22  2002-09-14 16:14:21  eilers
+ * Revision 1.1.2.23  2002-09-21 13:37:39  eilers
+ * Rechanged no save if nothing changed..
+ *
+ * Revision 1.1.2.22  2002/09/14 16:14:21  eilers
  * Some bugfixes.
  *
  * Revision 1.1.2.21  2002/09/13 11:32:59  eilers
@@ -234,7 +237,8 @@ OContactDB::~OContactDB ()
 	/* The user may forget to save the changed database, therefore try to
 	 * do it for him..
 	 */
-	save();
+	if ( m_changed ) 
+		save();
 	delete m_backEnd;
 }
 
@@ -247,10 +251,10 @@ bool OContactDB::save ()
 	if ( m_backEnd->isChangedExternally() )
 		reload();
 
-	bool status = m_backEnd->save();
-	if ( !status ) return false;
+	if ( m_changed ){ 
+		bool status = m_backEnd->save();
+		if ( !status ) return false;
 
-	if ( m_changed ) {
 		m_changed = false;
 		/* Now tell everyone that new data is available.
 		 */
