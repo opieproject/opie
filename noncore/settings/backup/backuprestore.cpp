@@ -27,6 +27,7 @@ using namespace Opie::Core;
 #include <qtextstream.h>
 #include <qtextview.h>
 #include <qlineedit.h>
+#include <qstringlist.h>
 
 /* STD */
 #include <errno.h>
@@ -66,33 +67,13 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name,  WFlags f
     selectItem(documents);
 
     scanForApplicationSettings();
-    refreshBackupLocations();
     refreshLocations();
-
-    Config config("BackupAndRestore");
-    //read last locations
-    config.setGroup("LastLocation");
-    QString lastStoreLocation   = config.readEntry( "LastStoreLocation", "" );
-    QString lastRestoreLocation = config.readEntry( "LastRestoreLocation", "" );
-    int locationIndex    = 0;
-
-    QMap<QString, QString>::Iterator it;
-    for( it = backupLocations.begin(); it != backupLocations.end(); ++it )
-    {
-        storeToLocation->insertItem(it.key());
-        restoreSource->insertItem(it.key());
-
-        //check for last locations
-        if ( it.key() == lastStoreLocation )
-            storeToLocation->setCurrentItem( locationIndex );
-        if ( it.key() == lastRestoreLocation )
-            restoreSource->setCurrentItem( locationIndex );
-        locationIndex++;
-    }
+    refreshBackupLocations();
 
     // Read the list of items to ignore.
     QList<QString> dontBackupList;
     dontBackupList.setAutoDelete(true);
+    Config config("BackupAndRestore");
     config.setGroup("DontBackup");
     int total = config.readNumEntry("Total", 0);
     for(int i = 0; i < total; i++)
@@ -165,8 +146,36 @@ void BackupAndRestore::refreshBackupLocations()
         odebug << "Mmc Path: " + storage.mmcPath() << oendl;
     }
 
-    // Add own locations from locationList
-    // todo implementation
+    for ( QListViewItemIterator it( locationList ); it.current(); ++it )
+    {
+        backupLocations.insert( it.current()->text( 0 ), it.current()->text( 0 ) );
+    }
+
+    //update QComboBox
+    storeToLocation->clear();
+    restoreSource->clear();
+
+    //read last locations
+    Config config("BackupAndRestore");
+    config.setGroup("LastLocation");
+    QString lastStoreLocation   = config.readEntry( "LastStoreLocation", "" );
+    QString lastRestoreLocation = config.readEntry( "LastRestoreLocation", "" );
+    int locationIndex    = 0;
+
+    //fill QComboBox
+    QMap<QString, QString>::Iterator it;
+    for( it = backupLocations.begin(); it != backupLocations.end(); ++it )
+    {
+        storeToLocation->insertItem(it.key());
+        restoreSource->insertItem(it.key());
+
+        //check for last locations
+        if ( it.key() == lastStoreLocation )
+            storeToLocation->setCurrentItem( locationIndex );
+        if ( it.key() == lastRestoreLocation )
+            restoreSource->setCurrentItem( locationIndex );
+        locationIndex++;
+    }
 }
 
 QList<QListViewItem> BackupAndRestore::getAllItems(QListViewItem *item, QList<QListViewItem> &list)
@@ -310,7 +319,6 @@ void BackupAndRestore::backup()
     else
     {
         QMessageBox::information(this, tr( "Message" ), tr( "Backup Successful." ), QString(tr( "Ok" ) ) );
-
     }
 
     //write store-location
@@ -536,8 +544,16 @@ QString BackupAndRestore::getExcludeFile()
 void BackupAndRestore::refreshLocations()
 {
     locationList->clear();
+
     //todo: implement add locations
-    odebug << "not implemented yet" << oendl;
+    Config config( "BackupAndRestore" );
+    config.setGroup( "Locations" );
+
+    QStringList locations( config.readListEntry( "locations", '|' ) );
+
+    for ( QStringList::Iterator it = locations.begin(); it != locations.end(); ++it ) {
+         (void) new QListViewItem( locationList, *it );
+    }
 }
 
 void BackupAndRestore::addLocation()
@@ -558,12 +574,20 @@ void BackupAndRestore::removeLocation()
     }
 }
 
-void BackupAndRestore::saveLocation()
+void BackupAndRestore::saveLocations()
 {
-    //todo: implement
-    odebug << "not implemented yet" << oendl;
-}
+    Config config("BackupAndRestore");
+    config.setGroup("Locations");
 
+    QStringList locations;
+    for ( QListViewItemIterator it( locationList ); it.current(); ++it )
+    {
+        locations.append( it.current()->text( 0 ) );
+    }
+    config.writeEntry( "locations", locations, '|' );
+
+    refreshBackupLocations();
+}
 
 // backuprestore.cpp
 

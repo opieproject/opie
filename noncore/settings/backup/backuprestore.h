@@ -7,6 +7,7 @@
 #include <qlist.h>
 
 class QListViewItem;
+class QStringList;
 
 class BackupAndRestore : public BackupAndRestoreBase
 {
@@ -30,7 +31,7 @@ private slots:
 
     void addLocation();
     void removeLocation();
-    void saveLocation();
+    void saveLocations();
 
 private:
     void scanForApplicationSettings();
@@ -44,7 +45,6 @@ private:
     QListViewItem *systemSettings;
     QListViewItem *applicationSettings;
     QListViewItem *documents;
-
 };
 
 #endif
