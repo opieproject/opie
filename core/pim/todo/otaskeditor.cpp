@@ -53,7 +53,7 @@ void OTaskEditor::load(const OTodo& to) {
     m_alarm->load( to );
 }
 void OTaskEditor::init() {
-    setCaption("Task Editor");
+    setCaption(tr("Task Editor") );
 
     QVBoxLayout* layo = new QVBoxLayout( this );
     m_tab = new OTabWidget( this );
