@@ -23,6 +23,7 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/applnk.h>
 #include <qpe/qpedebug.h>
+#include <qpe/config.h>
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
 #include <qpe/menubutton.h>
@@ -126,6 +127,11 @@ public:
 
     void drawBackground( QPainter *p, const QRect &r )
     {
+	Config config("qpe");
+	config.setGroup("Appearance");
+	QString backgroundImage = config.readEntry("BackgroundImage");
+
+	if (backgroundImage.isNull()) backgroundImage="qpe-background";
 	int backgroundMode = QPixmap::defaultDepth() >= 12 ? 1 : 0;
 	//int backgroundMode = 2;
 
@@ -143,9 +149,13 @@ public:
 		QPainter painter( bg );
 
 		painter.fillRect( QRect( 0, 0, width(), height() ), colorGroup().background().light(110));
-
-		// Overlay the Qtopia logo in the center
-		QImage logo = Resource::loadImage( "qpe-background" );
+                // Overlay the Qtopia logo in the center
+                QImage logo;
+		if (QFile::exists(backgroundImage)) {
+                logo = QImage(backgroundImage);
+		} else {
+		logo = Resource::loadImage(backgroundImage );
+		}
 		if ( !logo.isNull() )
 		    painter.drawImage( (width() - logo.width()) / 2,
 				       (height() - logo.height()) / 2, logo );
