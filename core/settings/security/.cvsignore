@@ -1,5 +1,5 @@
+*.moc
 Makefile*
 moc_*
-*.moc
 securitybase.cpp
 securitybase.h

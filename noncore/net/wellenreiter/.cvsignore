@@ -1,5 +1,5 @@
-Makefile*
 *.o
 *~
-wellenreiterbase.h
+Makefile*
 moc_*
+wellenreiterbase.h

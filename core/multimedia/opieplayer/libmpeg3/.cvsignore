@@ -1,5 +1,5 @@
-global_config
-dump
-mpeg3toc
-mpeg3cat
 Makefile*
+dump
+global_config
+mpeg3cat
+mpeg3toc

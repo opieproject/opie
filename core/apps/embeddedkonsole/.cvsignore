@@ -1,6 +1,6 @@
-moc_*
 Makefile*
 commandeditdialogbase.cpp
 commandeditdialogbase.h
+moc_*
 smallcommandeditdialogbase.cpp
 smallcommandeditdialogbase.h

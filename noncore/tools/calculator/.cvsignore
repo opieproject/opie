@@ -1,4 +1,4 @@
-moc_*
 Makefile*
-calculator.h
 calculator.cpp
+calculator.h
+moc_*

@@ -1,6 +1,7 @@
-moc_*
+
 *.moc
 Makefile*
+moc_*
 qcheckdetailsbase.cpp
 qcheckdetailsbase.h
 qcheckentrybase.cpp
@@ -13,4 +14,3 @@ qchecknamebase.cpp
 qchecknamebase.h
 qcheckviewbase.cpp
 qcheckviewbase.h
-

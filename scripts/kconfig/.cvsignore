@@ -1,0 +1,12 @@
+
+.cvsignore
+conf
+depends.c
+lex.backup
+lex.zconf.c
+lkc_defs.h
+mconf
+qconf.moc
+zconf.output
+zconf.tab.c
+zconf.tab.h

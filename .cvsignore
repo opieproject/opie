@@ -1,11 +1,11 @@
-moc_*
-include
 *.ipk
-Packages
 ..config.cmd
 .config
 .config.old
 .depends
 .depends.cfgs
 .tmpconfig.h
+Packages
 config.in
+include
+moc_*

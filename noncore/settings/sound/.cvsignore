@@ -1,5 +1,5 @@
+*.moc
 Makefile*
 moc_*
-*.moc
 soundsettingsbase.cpp
 soundsettingsbase.h

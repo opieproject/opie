@@ -1,5 +1,6 @@
-moc_*
 *.moc
-Makefile*
 *.~
-opieobj
+Makefile*
+config.in
+moc_*
+opieobjconfig.in

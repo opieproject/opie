@@ -1,7 +1,7 @@
-Makefile*
+*.o
 .deps
 .libs
-*.o
-moc_*
+Makefile*
 helpdialog.cpp
 helpdialog.h
+moc_*

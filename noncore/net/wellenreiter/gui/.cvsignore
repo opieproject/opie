@@ -1,6 +1,6 @@
-Makefile*
 *.o
 *~
+Makefile*
+moc_*
 wellenreiterbase.cpp
 wellenreiterbase.h
-moc_*

@@ -1,4 +1,4 @@
-moc_*
 Makefile*
-languagesettingsbase.h
 languagesettingsbase.cpp
+languagesettingsbase.h
+moc_*

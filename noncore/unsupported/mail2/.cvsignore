@@ -1,4 +1,3 @@
-moc_*
 *.moc
 Makefile*
 accounteditorbase.cpp
@@ -7,6 +6,7 @@ addresspickerbase.cpp
 addresspickerbase.h
 configdiagbase.cpp
 configdiagbase.h
+moc_*
 opendiagbase.cpp
 opendiagbase.h
 passdiagbase.cpp

@@ -1,7 +1,7 @@
-moc_*
 *.moc
 Makefile*
-netbase.h
+moc_*
 netbase.cpp
+netbase.h
 ntpbase.cpp
 ntpbase.h

@@ -1,4 +1,11 @@
-Makefile
-moc*
-lib*.so*
 
+Makefile
+Makefile.in
+interfaceadvanced.cpp
+interfaceadvanced.h
+interfaceinformation.cpp
+interfaceinformation.h
+interfacesetup.cpp
+interfacesetup.h
+lib*.so*
+moc*

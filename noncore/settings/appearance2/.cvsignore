@@ -1,1 +1,4 @@
 Makefile*
+moc_appearance.cpp
+moc_editScheme.cpp
+moc_sample.cpp

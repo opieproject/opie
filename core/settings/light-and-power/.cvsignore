@@ -1,4 +1,6 @@
-moc_*
 Makefile*
-lightsettingsbase.h
 lightsettingsbase.cpp
+lightsettingsbase.h
+moc_*
+sensorbase.cpp
+sensorbase.h

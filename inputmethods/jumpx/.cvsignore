@@ -1,4 +1,4 @@
-moc_*
-*.o
 *.moc
+*.o
 Makefile*
+moc_*

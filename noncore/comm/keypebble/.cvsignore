@@ -1,9 +1,9 @@
-moc_*
 *.moc
 Makefile*
-vncoptionsbase.cpp
-vncoptionsbase.h
 kvncbookmarkdlgbase.cpp
 kvncbookmarkdlgbase.h
 kvncconndlgbase.cpp
 kvncconndlgbase.h
+moc_*
+vncoptionsbase.cpp
+vncoptionsbase.h

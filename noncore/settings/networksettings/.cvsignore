@@ -1,14 +1,12 @@
-.moc.cpp
 *.moc
 *.moc.o
 *.o
-moc_*.cpp
-.libs
 .deps
+.libs
+.moc.cpp
 .moc.o
 .o
 Makefile*
-networksetup
 addconnection.cpp
 addconnection.h
 interfaceadvanced.cpp
@@ -19,5 +17,7 @@ interfacesetup.cpp
 interfacesetup.h
 mainwindow.cpp
 mainwindow.h
+moc_*.cpp
+networksetup
 systemadvanced.cpp
 systemadvanced.h
