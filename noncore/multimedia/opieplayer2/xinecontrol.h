@@ -39,10 +39,12 @@
 
 #include "mediaplayerstate.h"
 
+class VideoWidget;
+
 class XineControl : public QObject  {
     Q_OBJECT
 public:
-    XineControl( MediaPlayerState &_mediaPlayerState, QObject *parent = 0, const char *name =0 );
+    XineControl( VideoWidget *videoWidget, MediaPlayerState &_mediaPlayerState, QObject *parent = 0, const char *name =0 );
     ~XineControl();
 
     bool hasVideo() const { return hasVideoChannel; }
@@ -113,6 +115,8 @@ private:
 signals:
     void positionChanged( long );
 
+private:
+    VideoWidget *videoUI;
 };
 
 

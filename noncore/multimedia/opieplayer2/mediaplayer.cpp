@@ -24,7 +24,6 @@
 #include <sys/ioctl.h>
 
 
-extern AudioWidget *audioUI;
 extern VideoWidget *videoUI;
 extern PlayListWidget *playList;
 
@@ -33,6 +32,11 @@ extern PlayListWidget *playList;
 
 MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
     : QObject( parent, name ), volumeDirection( 0 ), mediaPlayerState( _mediaPlayerState ) {
+
+    audioUI = 0;
+    videoUI = 0;
+    xineControl = 0;
+    recreateAudioAndVideoWidgets();
 
     fd=-1;fl=-1;
     playList->setCaption( tr( "OpiePlayer: Initializating" ) );
@@ -49,18 +53,7 @@ MediaPlayer::MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, 
     connect( &mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
     connect( &mediaPlayerState, SIGNAL( blankToggled( bool ) ), this, SLOT ( blank( bool ) ) );
 
-    connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
-    connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
-    connect( audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
-    connect( audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
-
-    connect( videoUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
-    connect( videoUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
-    connect( videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
-    connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
-
     volControl = new VolumeControl;
-    xineControl = new XineControl( mediaPlayerState );
     Config cfg( "OpiePlayer" );
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
@@ -351,3 +344,25 @@ void MediaPlayer::cleanUp() {// this happens on closing
 //     QPEApplication::grabKeyboard();
 //     QPEApplication::ungrabKeyboard();
 }
+
+void MediaPlayer::recreateAudioAndVideoWidgets()
+{
+    delete xineControl;
+    delete audioUI;
+    delete videoUI;
+    audioUI = new AudioWidget( mediaPlayerState, 0, "audioUI" );
+    videoUI = new VideoWidget( mediaPlayerState, 0, "videoUI" );
+
+    connect( audioUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
+    connect( audioUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
+    connect( audioUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( audioUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
+
+    connect( videoUI,  SIGNAL( moreClicked() ), this, SLOT( startIncreasingVolume() ) );
+    connect( videoUI,  SIGNAL( lessClicked() ),  this, SLOT( startDecreasingVolume() ) );
+    connect( videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
+    connect( videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
+
+    xineControl = new XineControl( videoUI, mediaPlayerState );
+}
+

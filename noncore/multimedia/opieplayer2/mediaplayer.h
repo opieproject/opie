@@ -42,12 +42,18 @@
 class DocLnk;
 class VolumeControl;
 class MediaPlayerState;
+class AudioWidget;
+class VideoWidget;
 
 class MediaPlayer : public QObject {
     Q_OBJECT
 public:
     MediaPlayer( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name );
     ~MediaPlayer();
+
+public slots:
+    void recreateAudioAndVideoWidgets();
+
 private slots:
     void setPlaying( bool );
     void pauseCheck( bool );
@@ -64,12 +70,15 @@ protected:
     void timerEvent( QTimerEvent *e );
     void keyReleaseEvent( QKeyEvent *e);
 private:
+
     bool isBlanked, l, r;
     int fd, fl;
     int     volumeDirection;
     XineControl *xineControl;
     VolumeControl *volControl;
     MediaPlayerState &mediaPlayerState;
+    AudioWidget *audioUI;
+    VideoWidget *videoUI;
 };
 
 

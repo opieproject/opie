@@ -94,6 +94,9 @@ public slots:
 protected:
     void keyReleaseEvent( QKeyEvent *e);
 
+signals:
+    void skinSelected();
+
 private:
     int defaultSkinIndex;
     bool audioScan, videoScan, audioPopulated, videoPopulated;

@@ -1095,12 +1095,14 @@ void PlayListWidget::skinsMenuActivated( int item ) {
     }
     skinsMenu->setItemChecked( item, TRUE );
 
-    Config cfg( "OpiePlayer" );
-    cfg.setGroup("Options");
-    cfg.writeEntry("Skin", skinsMenu->text( item ) );
-    QMessageBox::warning( this, tr( "OpiePlayer" ),
-                               tr( "You must <b>restart</b> Opieplayer<br>to see your changes." ) );
-} 
+    {
+        Config cfg( "OpiePlayer" );
+        cfg.setGroup("Options");
+        cfg.writeEntry("Skin", skinsMenu->text( item ) );
+    }
+
+    emit skinSelected();
+}
 
 PlayListWidget::TabType PlayListWidget::currentTab() const
 {

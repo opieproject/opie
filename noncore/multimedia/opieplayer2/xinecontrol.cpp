@@ -40,9 +40,8 @@
 #include "mediaplayerstate.h"
 #include "videowidget.h"
 
-extern VideoWidget *videoUI;
-XineControl::XineControl( MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
-    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ) {
+XineControl::XineControl( VideoWidget *videoWidget, MediaPlayerState &_mediaPlayerState, QObject *parent, const char *name )
+    : QObject( parent, name ), mediaPlayerState( _mediaPlayerState ), videoUI( videoWidget ) {
 
     libXine = new XINE::Lib( videoUI->vidWidget() );
 
