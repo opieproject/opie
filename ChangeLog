@@ -1,4 +1,15 @@
-2004-??-??	Opie
+2005-??-??	Opie 1.2.0
+
+	New Features
+	------------
+
+	Fixed Bugs
+	----------
+
+	Internal
+	--------
+
+2004-11-26	Opie 1.1.8
 
 	New Features
 	------------
@@ -13,10 +24,10 @@
 	* #1017 - Tetrix doesn't display correctly for high resolution screens (drw)
 	* #1269 - VCards were imported into personal area if it was activated (eilers)
 	* #1464 - Packagemanager dont set active filter after install a package (drw)
+	* #1479 - Improved VCard-Parser to import VCards created by Evolution 2 and Apple Addressbook (eilers)
 	* n.a. - PackageManager - (Minor UI tweak) in filter dialog, when option is enabled, set focus to widget that corresponds to that option (drw)
 	* n.a. - PackageManager - (Minor UI tweak) fix double entry in source feed configuration when adding a new feed (drw)
-	* #1479 - Improved VCard-Parser to import VCards created by Evolution 2 and Apple Addressbook (eilers)
-	* n.a. - Battery Applet - fix sizing of battery info popup
+	* n.a. - Battery Applet - fix sizing of battery info popup (drw)
 
 	Internal
 	--------
