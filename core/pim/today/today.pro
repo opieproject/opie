@@ -1,14 +1,13 @@
-TEMPLATE	= app
 CONFIG		= qt warn_on 
 #CONFIG		= qt warn_on release
+
 HEADERS		= today.h todaybase.h todayconfig.h
-SOURCES		= main.cpp today.cpp todaybase.cpp todayconfig.cpp
+SOURCES		= today.cpp todaybase.cpp todayconfig.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 INTERFACES	=
 TARGET		= today
-DESTDIR		= $(OPIEDIR)/bin
 
 TRANSLATIONS = ../../../i18n/de/today.ts \
 	 ../../../i18n/nl/today.ts \
@@ -29,6 +28,19 @@ TRANSLATIONS = ../../../i18n/de/today.ts \
    	 ../../../i18n/it/today.ts \
    	 ../../../i18n/da/today.ts
 
-
-
 include ( $(OPIEDIR)/include.pro )
+
+oapp {
+	TEMPLATE	= lib
+	SOURCES		+= plugin.cpp
+	LIBS		+= -loapp
+
+	DESTDIR		= $(OPIEDIR)/plugins/app
+	INCLUDEPATH	+= $(OPIEDIR)/core/apps/oapp
+	DEPENDPATH	+= $(OPIEDIR)/core/apps/oapp
+}
+else {
+	TEMPLATE	= app
+	SOURCES		+= main.cpp
+	DESTDIR		= $(OPIEDIR)/bin
+}
