@@ -1,0 +1,7 @@
+Priority: optional
+Section: opie/applications
+Maintainer: Opie Team <opie@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base, opie-tinykate, opie-tinykate-syntax-commondev, opie-tinykate-syntax-documentation, opie-tinykate-syntax-misc, opie-tinykate-syntax-miscdev, opie-tinykate-syntax-unix, opie-tinykate-syntax-web
+Description: Syntax Highlighting Patterns virtual package, which installs all available syntax patterns.
