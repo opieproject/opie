@@ -1,5 +1,5 @@
 Package: tonleiter
-Files: bin/tonlieter pics/tonleiter apps/Applications/tonleiter.desktop
+Files: bin/tonleiter pics/tonleiter apps/Applications/tonleiter.desktop
 Priority: optional
 Section: multimedia/applications
 Maintainer: Ralf Waspe <rwaspe@web.de>
