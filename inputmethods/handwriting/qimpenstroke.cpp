@@ -24,6 +24,7 @@
 #include <limits.h>
 #include <qdatastream.h>
 #include "qimpenstroke.h"
+#include "opie2/odebug.h"
 
 #define QIMPEN_CORRELATION_POINTS   25
 //#define DEBUG_QIMPEN
@@ -49,7 +50,7 @@ QIMPenStroke::QIMPenStroke( const QIMPenStroke &st )
 QIMPenStroke &QIMPenStroke::operator=( const QIMPenStroke &s )
 {
     clear();
-    //qDebug( "copy strokes %d", s.links.count() );
+    //odebug << "copy strokes " << s.links.count() << oendl;
     startPoint = s.startPoint;
     lastPoint = s.lastPoint;
     links = s.links.copy();
@@ -149,7 +150,7 @@ void QIMPenStroke::endInput()
 	links[0] = gl;
     }
 
-    //qDebug("Points: %d", links.count() );
+    //odebug << "Points: " << links.count() << oendl; 
 }
 
 /*!
@@ -169,7 +170,7 @@ unsigned int QIMPenStroke::match( QIMPenStroke *pen )
 
     if ( lratio > 2.0 ) {
 #ifdef DEBUG_QIMPEN
-	qDebug( "stroke length too different" );
+	odebug << "stroke length too different" << oendl;
 #endif
 	return 400000;
     }
@@ -215,7 +216,7 @@ unsigned int QIMPenStroke::match( QIMPenStroke *pen )
     }
     if ( err1 > 40 ) {  // no need for more matching
 #ifdef DEBUG_QIMPEN
-	qDebug( "tsig too great: %d", err1 );
+	odebug << "tsig too great: " << err1 << oendl;
 #endif
         return 400000;
     }
@@ -224,7 +225,7 @@ unsigned int QIMPenStroke::match( QIMPenStroke *pen )
     err2 = calcError( dsig, pen->dsig, 0, FALSE );
     if ( err2 > 100 ) {
 #ifdef DEBUG_QIMPEN
-	qDebug( "dsig too great: %d", err2 );
+	odebug << "dsig too great: " <<  err2 << oendl;
 #endif
 	return 400000;
     }
@@ -232,7 +233,7 @@ unsigned int QIMPenStroke::match( QIMPenStroke *pen )
     err3 = calcError( asig, pen->asig, 0, TRUE );
     if ( err3 > 60 ) {
 #ifdef DEBUG_QIMPEN
-	qDebug( "asig too great: %d", err3 );
+	odebug << "asig too great: " << err3 << oendl;
 #endif
 	return 400000;
     }
@@ -247,7 +248,7 @@ unsigned int QIMPenStroke::match( QIMPenStroke *pen )
 			(unsigned int)(lratio * 5000.0);
 
 #ifdef DEBUG_QIMPEN
-    qDebug( "err %d   ( %d, %d, %d, %d)", err, err1, err2, err3, vdiff );
+    odebug << "err " << err << "( " << err1 << ", " << err2 << ", " << err3 << ", " << vdiff << oendl;
 #endif
 
     return err;

@@ -25,6 +25,7 @@
 
 #include <qapplication.h>
 #include <qtimer.h>
+#include <opie2/odebug.h>
 
 #include <limits.h>
 
@@ -68,7 +69,7 @@ void QIMPenMatch::beginStroke()
 void QIMPenMatch::strokeEntered( QIMPenStroke *st )
 {
 #ifdef DEBUG_QIMPEN
-    qDebug( "---------- new stroke -------------" );
+    odebug << "---------- new stroke -------------" << oendl;
 #endif
     strokes.append( new QIMPenStroke( *st ) );
 
@@ -81,12 +82,12 @@ void QIMPenMatch::strokeEntered( QIMPenStroke *st )
     QIMPenCharMatchList ml;
     if ( strokes.count() > 1 && multiCharSet ) {
 #ifdef DEBUG_QIMPEN
-	qDebug( "Matching against multi set" );
+	odebug << "Matching against multi set" << oendl;
 #endif
 	ml = multiCharSet->match( &testChar );
     } else {
 #ifdef DEBUG_QIMPEN
-	qDebug( "Matching against single set" );
+	odebug << "Matching against single set" << oendl;
 #endif
 	ml = charSet->match( &testChar );
     }
@@ -97,7 +98,7 @@ void QIMPenMatch::strokeEntered( QIMPenStroke *st )
 void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 {
 #ifdef DEBUG_QIMPEN
-    qDebug( "Entering strokes.count() = %d", strokes.count() );
+    odebug << "Entering strokes.count() = " <<  strokes.count() << oendl;
 #endif
     QIMPenCharMatch candidate1 = { INT_MAX, 0 };
     QIMPenCharMatch candidate2 = { INT_MAX, 0 };
@@ -107,7 +108,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 //	 ml.first().penChar->penStrokes().count() == strokes.count() ) {
 	candidate1 = ml.first();
 #ifdef DEBUG_QIMPEN
-	qDebug( QString("Candidate1 = %1").arg(QChar(candidate1.penChar->character())) );
+	odebug << "Candidate1 = " << candidate1.penChar->character() << oendl;
 #endif
     }
 
@@ -120,7 +121,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 	if ( ml2.count() ) {
 	    candidate2 = ml2.first();
 #ifdef DEBUG_QIMPEN
-	    qDebug( QString("Candidate2 = %1").arg(QChar(candidate2.penChar->character())) );
+	    odebug << "Candidate2 = " << candidate2.penChar->character() << oendl;
 #endif
 	}
     }
@@ -142,7 +143,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 	    multiCharSet = charSet;
 	    ml = ml2;
 #ifdef DEBUG_QIMPEN
-	    qDebug( "** Using Candidate2" );
+	    odebug << "** Using Candidate2" << oendl;
 #endif
 	} else {
 	    if ( (prevMatchChar->character() >> 16) != Qt::Key_Backspace &&
@@ -151,7 +152,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 	    prevMatchChar = candidate1.penChar;
 	    prevMatchError = candidate1.error;
 #ifdef DEBUG_QIMPEN
-	    qDebug( "** Using Candidate1, with erase" );
+	    odebug << "** Using Candidate1, with erase" << oendl;
 #endif
 	}
     } else if ( candidate1.penChar ) {
@@ -162,7 +163,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 	prevMatchChar = candidate1.penChar;
 	prevMatchError = candidate1.error;
 #ifdef DEBUG_QIMPEN
-	qDebug( "** Using Candidate1" );
+	odebug << "** Using Candidate1" << oendl;
 #endif
     } else if ( candidate2.penChar ) {
 	int i = strokes.count()-1;
@@ -175,17 +176,17 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 	multiCharSet = charSet;
 	ml = ml2;
 #ifdef DEBUG_QIMPEN
-	qDebug( "** Using Candidate2" );
+	odebug << "** Using Candidate2" << oendl;
 #endif
     } else {
 	if ( !ml.count() ) {
 #ifdef DEBUG_QIMPEN
-	    qDebug( "** Failed" );
+	    odebug << "** Failed" << oendl; 
 #endif
 	    canErase = FALSE;
 	} else {
 #ifdef DEBUG_QIMPEN
-	    qDebug( "Need more strokes" );
+	    odebug << "Need more strokes" << oendl;
 #endif
 	    if ( strokes.count() == 1 )
 		canErase = FALSE;
@@ -197,7 +198,7 @@ void QIMPenMatch::processMatches( QIMPenCharMatchList &ml )
 
     if ( eraseLast && canErase ) {
 #ifdef DEBUG_QIMPEN
-	qDebug( "deleting last" );
+	odebug << "deleting last" << oendl;
 #endif
 	emit erase();
 	wordChars.removeLast();
@@ -228,12 +229,12 @@ void QIMPenMatch::updateWordMatch( QIMPenCharMatchList &ml )
     if ( qch.isPunct() || qch.isSpace() ||
 	 code == Qt::Key_Enter || code == Qt::Key_Return ||
 	 code == Qt::Key_Tab || code == Qt::Key_Escape ) {
-//	qDebug( "Word Matching: Clearing word" );
+//	odebug << "Word Matching: Clearing word" << oendl;
 	wordChars.clear();
 	wordMatches.clear();
 	wordEntered = QString();
     } else if ( code == Qt::Key_Backspace ) {
-	//qDebug( "Word Matching: Handle backspace" );
+	//odebug << "Word Matching: Handle backspace" << oendl;
 	wordChars.removeLast();
 	wordEntered.truncate( wordEntered.length() - 1 );
 	matchWords();
@@ -281,11 +282,11 @@ void QIMPenMatch::matchWords()
 /*
 	QListIterator<MatchWord> it( wordMatches);
 	for ( ; it.current(); ++it ) {
-	    qDebug( QString("Match word: %1").arg(it.current()->word) );
+	    odebug << "Match word: " << it.current()->word << oendl;
 	}
 */
     }
-    //qDebug( "Possibles: Good %d, total %d", goodMatches, wordMatches.count() );
+    //odebug << "Possibles: Good " << goodMatches << ", total " << wordMatches.count() << oendl;
     wordMatches.sort();
 }
 

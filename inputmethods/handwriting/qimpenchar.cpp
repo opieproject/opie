@@ -26,6 +26,7 @@
 #include <qdatastream.h>
 #include "qimpencombining.h"
 #include "qimpenchar.h"
+#include "opie2/odebug.h"
 
 #define QIMPEN_MATCH_THRESHOLD	    200000
 
@@ -167,7 +168,7 @@ int QIMPenChar::match( QIMPenChar *pen )
 			ydiff = 0;
 		if ( xdiff > 10 || ydiff > 10 ) { // not a chance
 #ifdef DEBUG_QIMPEN
-			qDebug( "char %c, stroke starting pt diff excessive", pen->ch );
+			odebug << "char " << pen->ch <<", stroke starting pt diff excessive" << oendl;
 #endif
 			return INT_MAX;
 		}
@@ -182,7 +183,7 @@ int QIMPenChar::match( QIMPenChar *pen )
 	maxErr += diff * diff * 6; // magic weighting :)
 
 #ifdef DEBUG_QIMPEN
-	qDebug( "char: %c, maxErr %d, diff %d, (%d)", pen->ch, maxErr, diff, strokes.count() );
+	odebug << "char: " << pen->ch << ", maxErr " << maxErr << ", diff " << diff << ", "  << strokes.count() << oendl;
 #endif
 	return maxErr;
 }
@@ -458,8 +459,8 @@ QIMPenCharMatchList QIMPenCharSet::match( QIMPenChar *ch )
 	/*
 	   QIMPenCharMatchList::Iterator it;
 	   for ( it = matches.begin(); it != matches.end(); ++it ) {
-	   qDebug( "Match: \'%c\', error %d, strokes %d", (*it).penChar->character(),
-	   (*it).error, (*it).penChar->penStrokes().count() );
+	
+	   odebug << "Match: \'" << (*it).penChar->character() "\', error " << (*it).error ", strokes " <<(*it).penChar->penStrokes().count() << oendl;
 	   }
 	   */
 	return matches;

@@ -104,7 +104,7 @@ void QIMPenWordPick::mouseReleaseEvent( QMouseEvent *e )
 {
     int wordIdx = onWord( e->pos() );
     if ( wordIdx >= 0 && wordIdx == clickWord ) {
-	//qDebug( "Clicked %s", words[wordIdx].latin1() );
+	//odebug << "Clicked " <<  words[wordIdx].latin1() << oendl;
 	emit wordClicked( words[wordIdx] );
     }
     clickWord = -1;

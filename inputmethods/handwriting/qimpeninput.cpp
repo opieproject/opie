@@ -36,6 +36,7 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qdir.h>
+#include <opie2/odebug.h>
 
 #include <limits.h>
 
@@ -319,7 +320,7 @@ void QIMPenInput::wordPicked( const QString &w )
 void QIMPenInput::selectCharSet( int idx )
 {
     if ( mode == Switch ) {
-	//qDebug( "Switch back to normal" );
+	//odebug << "Switch back to normal" << oendl;
 	pw->changeCharSet( baseSets.at(currCharSet), currCharSet );
 	mode = Normal;
     }
@@ -353,13 +354,14 @@ void QIMPenInput::matchedCharacters( const QIMPenCharMatchList &cl )
     switch ( scan ) {
 	case QIMPenChar::Caps:
 	    if ( profile->style() == QIMPenProfile::ToggleCases ) {
-//		qDebug( "Caps" );
+//		odebug << "Caps" << oendl;
+//		
 		if ( mode == SwitchLock ) {
-//		    qDebug( "Switch to normal" );
+//		    odebug << "Switch to normal" << oendl;
 		    pw->changeCharSet( profile->lowercase(), currCharSet );
 		    mode = Switch;
 		} else {
-//		    qDebug( "Switch to upper" );
+//		    odebug << "Switch to upper" << oendl;
 		    pw->changeCharSet( profile->uppercase(), currCharSet );
 		    mode = Switch;
 		}
@@ -367,17 +369,17 @@ void QIMPenInput::matchedCharacters( const QIMPenCharMatchList &cl )
 	    break;
 	case QIMPenChar::CapsLock:
 	    if ( profile->style() == QIMPenProfile::ToggleCases ) {
-//		qDebug( "CapsLock" );
+//		odebug << "CapsLock" << oendl;
 		if ( mode == Switch &&
 		     baseSets.at(currCharSet) == profile->uppercase() ) {
-//		    qDebug( "Switch to normal" );
+//		    odebug << "Switch to normal" << oendl;
 		    pw->changeCharSet( profile->lowercase(), currCharSet );
 		    // change our base set back to lower.
 		    baseSets.remove( currCharSet );
 		    baseSets.insert( currCharSet, profile->lowercase() );
 		    mode = Normal;
 		} else {		
-//		    qDebug( "Switch to caps lock" );
+//		    odebug << "Switch to caps lock" << oendl;
 		    pw->changeCharSet( profile->uppercase(), currCharSet );
 		    // change our base set to upper.
 		    baseSets.remove( currCharSet );
@@ -388,14 +390,14 @@ void QIMPenInput::matchedCharacters( const QIMPenCharMatchList &cl )
 	    break;
 	case QIMPenChar::Punctuation:
 	    if ( profile->punctuation() ) {
-		//qDebug( "Switch to punctuation" );
+		//odebug << "Switch to punctuation" << oendl;
 		pw->changeCharSet( profile->punctuation(), currCharSet );
 		mode = Switch;
 	    }
 	    break;
 	case QIMPenChar::Symbol:
 	    if ( profile->symbol() ) {
-		//qDebug( "Switch to symbol" );
+		//odebug << "Switch to symbol" << oendl ;
 		pw->changeCharSet( profile->symbol(), currCharSet );
 		mode = Switch;
 	    }
@@ -443,7 +445,7 @@ void QIMPenInput::keypress( uint scan_uni )
     }
 
     if ( mode == Switch ) {
-//	qDebug( "Switch back to normal" );
+//	odebug << "Switch back to normal" << oendl ;
 	pw->changeCharSet( baseSets.at(currCharSet), currCharSet );
 	if ( baseSets.at(currCharSet) == profile->uppercase() )
 	    mode = SwitchLock;
@@ -459,7 +461,7 @@ void QIMPenInput::handleExtended( const QString &ex )
 {
     if ( ex.find( "Select" ) == 0 ) {
 	QString set = ex.mid( 7 );
-	qDebug( "Select new profile: %s", set.latin1() );
+	odebug << "Select new profile: " << set.latin1() << oendl;
 	selectProfile( set );
     }
 }
