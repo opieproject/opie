@@ -1,4 +1,4 @@
-Files: bin/advancedfm pics/opie/symlink.png apps/Applications/advancedfm.desktop
+Files: bin/advancedfm apps/Applications/advancedfm.desktop
 Priority: optional
 Package: advancedfm
 Section: opie/applications
