@@ -26,6 +26,7 @@ HEADERS   = ofontmenu.h \
     pim/opimcache.h \ 
     pim/otodoaccessvcal.h \
     pim/orecur.h \
+    pim/opimstate.h \
     orecurrancewidget.h
 #    pim/otodoaccesssql.h \
 
@@ -49,6 +50,7 @@ SOURCES   = ofontmenu.cc  \
              pim/ocontactaccess.cpp \
 	     pim/otodoaccessvcal.cpp \
 	     pim/orecur.cpp \
+	     pim/opimstate.cpp \
 	     orecurrancewidget.cpp
 #             pim/otodoaccesssql.cpp \
 
