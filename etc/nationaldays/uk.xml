@@ -6,6 +6,7 @@
 <entry name="Christmas Day" date="12-25"/>
 <entry name="Boxing Day" date="12-26"/>
 <entry name="St Patrick's Day (Northern Ireland)" date="03-17"/>
+<entry name="Bank Holiday (Scotland)" date="01-02"/>	    
 <entry name="Good Friday" type="floating">
   <calculation>
     <date value="easter"/>
@@ -15,6 +16,12 @@
 <entry name="Easter Sunday" type="floating">
   <calculation>
     <date value="easter"/>
+  </calculation>
+</entry>
+<entry name="Easter Monday" type="floating">
+  <calculation>
+    <date value="easter"/>
+    <offset value="+1"/>
   </calculation>
 </entry>
 <entry name="Early May Bank Holiday" type="floating">
