@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Form interface generated from reading ui file 'soundsettingsbase.ui'
 **
-** Created: Sun May 19 12:11:23 2002
+** Created: Thu May 23 11:23:38 2002
 **      by:  The User Interface Compiler (uic)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -45,8 +45,8 @@ public:
     QCheckBox* AlertCheckBox;
     QLabel* TextLabel1;
     QComboBox* LocationComboBox;
-/*     QCheckBox* touchsound; */
-/*     QCheckBox* keysound; */
+    QCheckBox* touchsound;
+    QCheckBox* keysound;
 
 protected:
     QGridLayout* SoundSettingsBaseLayout;

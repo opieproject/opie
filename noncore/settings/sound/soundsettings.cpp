@@ -70,6 +70,7 @@ SoundSettings::SoundSettings( QWidget* parent,  const char* name, WFlags fl )
 
 void SoundSettings::reject()
 {
+  qDebug("here");
     Config config( "qpe");
     config.setGroup( "Volume");
 
@@ -88,8 +89,8 @@ void SoundSettings::reject()
 //         sampleRate->setCurrentItem(3);
 //   stereoCheckBox->setChecked(config.readNumEntry("Stereo", 0));
 //   sixteenBitCheckBox->setChecked(config.readNumEntry("SixteenBit", 0));
-
-    QDialog::reject();
+    ::exit(-1);
+//    QDialog::reject();
 }
 
 void SoundSettings::accept()
@@ -113,7 +114,8 @@ void SoundSettings::accept()
 //     Config cfg( "VMemo" );
 //     cfg.setGroup( "Defaults" );
 //     cfg.writeEntry( "hideIcon", HideIcon_CheckBox->isChecked());  
-    QDialog::accept();
+//    QDialog::accept();
+    ::exit(0);
 }
 
 void SoundSettings::setVolume(int v)
