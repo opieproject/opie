@@ -44,6 +44,8 @@ class TransactionPreferences : public QDialog
 
     QCheckBox *showclearedtransactions;
     QCheckBox *excludetransfers;
+    QString *limittransactionslabel;
+    QComboBox *limittransactions;
     QPushButton *defaults;
     QBoxLayout *layout;
 
