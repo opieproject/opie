@@ -56,7 +56,7 @@ ProcessInfo::ProcessInfo( QWidget* parent,  const char* name, WFlags fl )
     layout->addMultiCellWidget( ProcessView, 0, 0, 0, 1 );
     QWhatsThis::add( ProcessView, tr( "This is a list of all the processes on this handheld device.\n\nClick and hold on a process to see additional information about the process, or to send a signal to it." ) );
     
-	SignalCB = new QComboBox( FALSE, this, "SignalCB" );
+    SignalCB = new QComboBox( FALSE, this, "SignalCB" );
     SignalCB->insertItem( " 1: SIGHUP" );
     SignalCB->insertItem( " 2: SIGINT" );
     SignalCB->insertItem( " 3: SIGQUIT" );
@@ -164,7 +164,7 @@ void ProcessInfo::slotSendClicked()
 		return;
 	}
 	
-	QString capstr = tr( "You really want to send %1 to this process?" ).arg( SignalCB->currentText() );
+	QString capstr = tr( "Really want to send %1\nto this process?" ).arg( SignalCB->currentText() );
 
 	
 	if ( QMessageBox::warning( this, currprocess->text( 1 ), capstr,
