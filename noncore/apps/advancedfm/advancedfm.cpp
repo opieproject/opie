@@ -684,6 +684,7 @@ void AdvancedFm::showLocalMenu(QListViewItem * item)
         m.insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
         m.insertSeparator();
         m.insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
+        if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
         m.insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
         m.setCheckable(TRUE);
         if (!b)
@@ -720,6 +721,7 @@ void AdvancedFm::showRemoteMenu(QListViewItem * item)
         m.insertItem( tr( "Delete" ), this, SLOT( remoteDelete() ));
         m.insertSeparator();
         m.insertItem( tr( "Set Permissions" ), this, SLOT( filePerms() ));
+    if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() )  //bad hack for Sharp zaurus failings
         m.insertItem( tr( "Properties" ), this, SLOT( doProperties() ));
         m.setCheckable(TRUE);
         if (!b)
@@ -1056,11 +1058,14 @@ void AdvancedFm::doProperties() {
     QStringList curFileList = getPath();
     QString filePath;
     if (TabWidget->currentPageIndex() == 0) {
+      
         filePath = currentDir.canonicalPath()+"/";
     } else {
         filePath= currentRemoteDir.canonicalPath()+"/";
     }
+    //    qDebug("%d",curFileList.count());
     for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
+      qDebug((filePath+*it));
         DocLnk lnk( (filePath+*it));
         LnkProperties prop( &lnk );
 //  connect(&prop, SIGNAL(select(const AppLnk *)), this, SLOT(externalSelected(const AppLnk *)));
