@@ -420,14 +420,14 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
 
     OTabWidget* tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
 	QWidget *styletab;
-	
+
 	m_color_list = 0;
-	
+
  	tw-> addTab ( styletab = createStyleTab ( tw, config ), "appearance/style", tr( "Style" ));
     tw-> addTab ( createFontTab ( tw, config ), "appearance/font", tr( "Font" ));
     tw-> addTab ( createColorTab ( tw, config ), "appearance/color", tr( "Colors" ) );
     tw-> addTab ( createDecoTab ( tw, config ), "appearance/deco", tr( "Windows" ) );
-	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "appearance/advanced", tr( "Advanced" ) );
+	tw-> addTab ( m_advtab = createAdvancedTab ( tw, config ), "SettingsIcon", tr( "Advanced" ) );
 
 	top-> addWidget ( tw, 10 );
 	top-> addWidget ( m_sample, 1 );
@@ -530,13 +530,13 @@ void Appearance::styleClicked ( int index )
 {
     StyleListItem *sli = (StyleListItem *) m_style_list-> item ( index );
 	m_style_settings-> setEnabled ( sli ? sli-> hasSettings ( ) : false );
-	
+
 	if ( m_sample && sli && sli-> style ( )) {
 		int ci = m_color_list ? m_color_list-> currentItem ( ) : -1;
-	
-		m_sample-> setStyle2 ( sli-> style ( ), ci < 0 ? palette ( ) : ((ColorListItem *) m_color_list-> item ( ci ))-> palette ( ));	
+
+		m_sample-> setStyle2 ( sli-> style ( ), ci < 0 ? palette ( ) : ((ColorListItem *) m_color_list-> item ( ci ))-> palette ( ));
 	}
-		
+
 	m_style_changed |= ( index != m_original_style );
 }
 
@@ -568,10 +568,10 @@ void Appearance::styleSettingsClicked ( )
 void Appearance::decoClicked ( int index )
 {
     DecoListItem *dli = (DecoListItem *) m_deco_list-> item ( index );
-	
+
 	if ( m_sample ) {
 		if ( dli && dli-> interface ( ))
-			m_sample-> setDecoration ( dli-> interface ( ));		
+			m_sample-> setDecoration ( dli-> interface ( ));
 		else
 			m_sample-> setDecoration ( new DefaultWindowDecoration ( ));
 		m_sample-> repaint ( );
@@ -581,7 +581,7 @@ void Appearance::decoClicked ( int index )
 
 void Appearance::fontClicked ( const QFont &f )
 {
-	m_font_changed |= ( f != m_sample-> font ( ));	
+	m_font_changed |= ( f != m_sample-> font ( ));
 	m_sample-> setFont ( f );
 }
 
@@ -603,14 +603,14 @@ void Appearance::editSchemeClicked ( )
 	int cnt = 0;
 	QString labels [QColorGroup::NColorRoles];
 	QColor colors [QColorGroup::NColorRoles];
-	
+
 	for ( QColorGroup::ColorRole role = (QColorGroup::ColorRole) 0; role != QColorGroup::NColorRoles; ((int) role )++ ) {
 		QColor col = item-> color ( role );
-		
+
 		if ( col. isValid ( )) {
 			labels [cnt] = item-> label ( role );
 			colors [cnt] = col;
-		
+
 			cnt++;
 		}
 	}
@@ -620,17 +620,17 @@ void Appearance::editSchemeClicked ( )
     if ( editdlg-> exec ( ) == QDialog::Accepted ) {
     	ColorListItem *citem = (ColorListItem *) m_color_list-> item ( 0 );
 		cnt = 0;
-		    
+
 		for ( QColorGroup::ColorRole role = (QColorGroup::ColorRole) 0; role != QColorGroup::NColorRoles; ((int) role )++ ) {
 			if ( item-> color ( role ). isValid ( )) {
         		citem-> setColor ( role, colors [cnt] );
         		cnt++;
         	}
         }
-        
+
         m_color_list-> setCurrentItem ( 0 );
         colorClicked ( 0 );
-        
+
         m_color_changed = true;
     }
     delete editdlg;
@@ -658,16 +658,16 @@ void Appearance::saveSchemeClicked()
 		filestr.append( ".scheme" );
         QFile file ( filestr );
         if ( !file. exists ( ))
-        { 
+        {
         	QPalette p = item-> palette ( );
-        
+
             Config config ( file.name(), Config::File );
             config. setGroup( "Colors" );
 
 			item-> save ( config );
-			                
+
             config. write ( ); // need to flush the config info first
-            
+
             m_color_list-> insertItem ( new ColorListItem ( schemename, config ));
         }
         else
@@ -722,7 +722,7 @@ void Appearance::delExcept ( )
 void Appearance::upExcept ( )
 {
 	ExceptListItem *it = (ExceptListItem *) m_except-> selectedItem ( );
-	
+
 	if ( it && it-> itemAbove ( ))
 		it-> itemAbove ( )-> moveItem ( it );
 }
@@ -730,46 +730,46 @@ void Appearance::upExcept ( )
 void Appearance::downExcept ( )
 {
 	ExceptListItem *it = (ExceptListItem *) m_except-> selectedItem ( );
-	
+
 	if ( it && it-> itemBelow ( ))
 		it-> moveItem ( it-> itemBelow ( ));
 }
 
 class ExEdit : public QLineEdit {
 public:
-	ExEdit ( ExceptListItem *item ) 
+	ExEdit ( ExceptListItem *item )
 		: QLineEdit ( item-> listView ( )-> viewport ( ), "exedit" ), it ( item )
-	{ 
+	{
 		setFrame ( false );
-		
+
 		QRect r = it-> listView ( )-> itemRect ( it );
-		
+
 		int x = it-> listView ( )-> header ( )-> cellPos ( 3 ) - 1;
 		int y = r. y ( );
 		int w = it-> listView ( )-> viewport ( )-> width ( ) - x;
 		int h = r. height ( ); // + 2;
-		
-		setText ( it-> pattern ( ));		
+
+		setText ( it-> pattern ( ));
 		setGeometry ( x, y, w, h );
-		
-		qDebug ( "ExEdit: [%s] at %d,%d %d,%d", it->text(2).latin1(),x,y,w,h);	
-		
+
+		qDebug ( "ExEdit: [%s] at %d,%d %d,%d", it->text(2).latin1(),x,y,w,h);
+
 		m_out = true;
-		
+
 		show ( );
 		setFocus ( );
 		selectAll ( );
 		end ( true );
 	}
-	
-	virtual void focusOutEvent ( QFocusEvent * ) 
+
+	virtual void focusOutEvent ( QFocusEvent * )
 	{
 		hide ( );
 		if ( m_out )
 			it-> setPattern ( text ( ));
 		delete this;
 	}
-	
+
 	virtual void keyPressEvent ( QKeyEvent *e )
 	{
 		if ( e-> key ( ) == Key_Return )
@@ -781,7 +781,7 @@ public:
 		else
 			QLineEdit::keyPressEvent ( e );
 	}
-	
+
 private:
 	ExceptListItem *it;
 	bool m_out;
