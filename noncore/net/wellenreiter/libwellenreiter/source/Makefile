@@ -1,8 +1,11 @@
-# $Id: Makefile,v 1.6 2003-01-05 11:18:27 mjm Exp $
+# $Id: Makefile,v 1.7 2003-02-12 18:53:34 mjm Exp $
 
 OBJ = wl_proto.o wl_sock.o wl_log.o wl_conf.o cardmode.o sniff.o 
 CPP = g++
 CPPFLAGS = -Wall -pedantic -g -DDEBUG
+
+%.o : %.cc
+	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 static:	libwellenreiter.a
 libwellenreiter.a: $(OBJ)
