@@ -69,7 +69,7 @@ void MainWindow::initUI() {
     m_terminate = new QAction();
     m_terminate->setText( tr("Terminate") );
     m_terminate->addTo( m_console );
-    connect(m_disconnect, SIGNAL(activated() ),
+    connect(m_terminate, SIGNAL(activated() ),
             this, SLOT(slotTerminate() ) );
 
     a = new QAction();
@@ -188,14 +188,15 @@ void MainWindow::slotConfigure() {
  * and set the currentSession()
  */
 void MainWindow::slotClose() {
+    qWarning("close");
     if (!currentSession() )
         return;
 
     tabWidget()->remove( currentSession() );
-    tabWidget()->setCurrent( m_sessions.first() );
+    /*it's autodelete */
     m_sessions.remove( m_curSession );
-    delete m_curSession;
     m_curSession = m_sessions.first();
+    tabWidget()->setCurrent( m_curSession );
 }
 
 /*

@@ -5,6 +5,8 @@
 #include "io_serial.h"
 
 IOSerial::IOSerial(const Profile &config) : IOLayer(config) {
+    m_read = 0l;
+    m_error = 0l;
     m_fd = 0;
     reload(config);
 }
@@ -112,6 +114,7 @@ bool IOSerial::open() {
         return TRUE;
     } else {
         emit error(Refuse, tr("Device is already connected"));
+        m_fd = 0;
         return FALSE;
     }
 }
