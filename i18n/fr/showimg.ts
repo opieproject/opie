@@ -125,31 +125,28 @@
     <name>InfoDialog</name>
     <message>
         <source>File Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom Fichier</translation>
     </message>
     <message>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <source>File Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille Fichier</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs</translation>
     </message>
     <message>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Alpha</translation>
     </message>
-</context>
-<context>
-    <name>QObject</name>
 </context>
 <context>
     <name>SettingsDialogBase</name>
