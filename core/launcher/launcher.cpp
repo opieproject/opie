@@ -165,13 +165,13 @@ void CategoryTabWidget::showTab(const QString& id)
 
 void CategoryTabWidget::addItem( const QString& linkfile )
 {
-   int i=0;
-   AppLnk *app = new AppLnk(linkfile);
-   if ( !app->isValid() ) {
-      delete app;
-      app=0;
-   }
-   if ( !app || !app->file().isEmpty() ) {
+//     int i=0;
+//     AppLnk *app = new AppLnk(linkfile);
+//     if ( !app->isValid() ) {
+//        delete app;
+//        app=0;
+//     }
+//     if ( !app || !app->file().isEmpty() ) {
       // A document
 //        delete app;
 //        app = new DocLnk(linkfile);
@@ -181,19 +181,19 @@ void CategoryTabWidget::addItem( const QString& linkfile )
 //           ((LauncherView*)(stack->widget(ids.count()-1)))->sort();
 //           delete app;
 //        }
-      return;
-   }
+//        return;
+//     }
    // An application
-   for ( QStringList::Iterator it=ids.begin(); it!=ids.end(); ++it) {
-      if ( !(*it).isEmpty() ) {
-         QRegExp tf(*it,FALSE,TRUE);
-         if ( tf.match(app->type()) >= 0 ) {
-            ((LauncherView*)stack->widget(i))->addItem(app);
-            return;
-         }
-         i++;
-      }
-   }
+//     for ( QStringList::Iterator it=ids.begin(); it!=ids.end(); ++it) {
+//        if ( !(*it).isEmpty() ) {
+//           QRegExp tf(*it,FALSE,TRUE);
+//           if ( tf.match(app->type()) >= 0 ) {
+//              ((LauncherView*)stack->widget(i))->addItem(app);
+//              return;
+//           }
+//           i++;
+   //        }
+   //  }
 
    QCopEnvelope e("QPE/TaskBar","reloadApps()");
 }
@@ -1342,7 +1342,7 @@ DocumentTab::DocumentTab( QWidget *parent, int mode, int selector, const QString
    : OFileSelector(parent,mode,selector,dirName,fileName)
 {
    setYesCancelVisible(false);
-   setToolbarVisible(true);
+   setToolbarVisible(false);
    setPermissionBarVisible(false);
    setLineEditVisible(false) ;
   //setChooserVisible( bool chooser );
