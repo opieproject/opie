@@ -48,6 +48,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     readConfig();
     m_setDocCalled = false;
     m_polishDone = false;
+    m_SmallWindow = QApplication::desktop()->size().width()<330;
 
     m_storage = new StorageInfo();
     connect(m_storage, SIGNAL(disksChanged() ),
@@ -75,6 +76,9 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setupMenu();
     m_aHideToolbar->setOn(m_cfg->readBoolEntry("showtoolbar",true));
     m_aAutoRotate->setEnabled(!m_aUnscaled->isOn());
+    if (m_aForceSmall) {
+        m_aForceSmall->setOn(m_cfg->readBoolEntry("dontshowseperate",true));
+    }
     odebug << "mainwindow constructor done" << oendl;
 }
 
@@ -254,9 +258,9 @@ void PMainWindow::initInfo() {
 void PMainWindow::initDisp() {
     initT<ImageView>( "Image ScrollView", &m_disp, ImageDisplay );
     if (m_disp) {
-        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+//        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
             //m_disp->setMinimumSize(QApplication::desktop()->size()/2);
-        }
+//        }
         m_disp->setMenuActions(m_hGroup,m_gPrevNext,m_gDisplayType);
         m_disp->setAutoScale(!m_aUnscaled->isOn());
         m_disp->setAutoRotate(m_aAutoRotate->isOn());
@@ -306,17 +310,14 @@ void PMainWindow::setupViewWindow(bool current, bool forceDisplay)
         m_disp->setFullScreen(current,forceDisplay);
     } else {
         setUpdatesEnabled(false);
+#if 0
         if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
 
             //m_disp->setMinimumSize(QApplication::desktop()->size()/2);
         } else {
             //m_disp->setMinimumSize(10,10);
         }
-        if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
-            m_disp->reparent(0,QPoint(10,10));
-        } else {
-            m_disp->reparent(0,QPoint(0,0));
-        }
+#endif
         m_disp->setBackgroundColor(white);
         m_stack->addWidget(m_disp,ImageDisplay);
         m_disp->setVScrollBarMode(QScrollView::Auto);
@@ -354,17 +355,17 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
         initInfo();
     }
     m_info->setPath( inf );
-    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+    if (m_SmallWindow) {
         m_aNext->removeFrom(toolBar);
         m_aPrevious->removeFrom(toolBar);
-        m_aNext->setEnabled(false);
-        m_aPrevious->setEnabled(false);
-        m_aDirUp->setEnabled(false);
-        m_aShowInfo->setEnabled(false);
-        m_aViewfile->setEnabled(true);
-        m_aStartSlide->setEnabled(false);
         fsButton->hide();
     }
+    m_aNext->setEnabled(false);
+    m_aPrevious->setEnabled(false);
+    m_aDirUp->setEnabled(false);
+    m_aShowInfo->setEnabled(false);
+    m_aViewfile->setEnabled(true);
+    m_aStartSlide->setEnabled(false);
     m_stack->raiseWidget( ImageInfo );
 }
 
@@ -375,18 +376,18 @@ void PMainWindow::slotDisplay( const QString& inf ) {
         initDisp();
     }
     m_disp->setImage( inf );
-    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+    if (m_SmallWindow) {
         if (m_gPrevNext->isEnabled()==false) {
             m_gPrevNext->addTo(toolBar);
-            m_gPrevNext->setEnabled(true);
-
-            m_aDirUp->setEnabled(false);
-            m_aShowInfo->setEnabled(true);
-            m_aViewfile->setEnabled(false);
-            m_aStartSlide->setEnabled(false);
             fsButton->hide();
         }
     }
+    m_gPrevNext->setEnabled(true);
+    m_aDirUp->setEnabled(false);
+    m_aShowInfo->setEnabled(true);
+    m_aViewfile->setEnabled(false);
+    m_aStartSlide->setEnabled(false);
+
     if (!nwindow && m_disp->fullScreen()!=m_aFullScreen->isOn()) {
         slotFullScreenToggled(m_aFullScreen->isOn());
     }
@@ -399,15 +400,16 @@ void PMainWindow::slotDisplay( const QString& inf ) {
 
 void PMainWindow::raiseIconView() {
     setUpdatesEnabled(false);
-    if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
+    if (m_SmallWindow) {
         m_gPrevNext->removeFrom(toolBar);
-        m_gPrevNext->setEnabled(false);
-        m_aDirUp->setEnabled(true);
-        m_aShowInfo->setEnabled(true);
-        m_aViewfile->setEnabled(true);
-        m_aStartSlide->setEnabled(true);
         fsButton->show();
     }
+    m_gPrevNext->setEnabled(false);
+    m_aDirUp->setEnabled(true);
+    m_aShowInfo->setEnabled(true);
+    m_aViewfile->setEnabled(true);
+    m_aStartSlide->setEnabled(true);
+
     if (m_disp && m_disp->fullScreen() && m_disp->isVisible()) {
         m_disp->stopSlide();
         m_disp->hide();
@@ -622,6 +624,14 @@ void PMainWindow::setupActions()
 
     m_hGroup = new QActionGroup(this,"actioncollection",false);
     m_hGroup->insert(m_aFullScreen);
+
+    if (!m_SmallWindow) {
+        m_aForceSmall = new QAction(tr("Dont show seperate windows"),Resource::loadIconSet( "AppsIcon" ), 0, 0, this, 0, true);
+        m_aForceSmall->setToggleAction(true);
+        connect(m_aForceSmall,SIGNAL(toggled(bool)),this,SLOT(slotForceSmall(bool)));
+    } else {
+        m_aForceSmall = 0;
+    }
 }
 
 void PMainWindow::setupToolbar()
@@ -647,7 +657,7 @@ void PMainWindow::setupToolbar()
 
     m_gDisplayType->addTo(toolBar);
 
-    if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
+    if (!m_SmallWindow) {
         m_gPrevNext->addTo(toolBar);
     } else {
         m_gPrevNext->setEnabled(false);
@@ -690,6 +700,10 @@ void PMainWindow::setupMenu()
     m_gDisplayType->addTo(dispMenu);
     dispMenu->insertSeparator();
     m_gPrevNext->addTo(dispMenu);
+    if (m_aForceSmall) {
+        dispMenu->insertSeparator();
+        m_aForceSmall->addTo(dispMenu);
+    }
 
     m_aSetup->addTo(settingsMenu);
     m_aHideToolbar->addTo(settingsMenu);
@@ -735,5 +749,20 @@ void PMainWindow::polish()
             QTimer::singleShot(0,this,SLOT(check_view_fullscreen()));
         } else if (m_stack->mode() != Opie::Ui::OWidgetStack::SmallScreen) {
         }
+    }
+}
+
+void PMainWindow::slotForceSmall(bool how)
+{
+    odebug << "Disable separate windows: " << how << oendl;
+    if (m_stack) {
+        if (how) {
+            m_stack->forceMode(Opie::Ui::OWidgetStack::SmallScreen);
+        } else {
+            m_stack->forceMode(Opie::Ui::OWidgetStack::NoForce);
+        }
+    }
+    if (autoSave) {
+        m_cfg->writeEntry("dontshowseperate",how);
     }
 }

@@ -80,9 +80,10 @@ private:
     PIconView* m_view;
     imageinfo *m_info;
     ImageView *m_disp;
-    bool autoSave;
+    bool autoSave:1;
     bool m_setDocCalled:1;
     bool m_polishDone:1;
+    bool m_SmallWindow:1;
     QToolButton*fsButton;
     QToolBar *toolBar;
     QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu,*settingsMenu;
@@ -90,7 +91,7 @@ private:
     QAction*m_aHideToolbar,*m_aSetup,*m_aDirName,*m_aDirShort,*m_aDirLong;
     QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup;
     QAction *m_aNext,*m_aPrevious,*m_aFullScreen;
-    QAction *m_aAutoRotate,*m_aUnscaled,*m_aZoomer;
+    QAction *m_aAutoRotate,*m_aUnscaled,*m_aZoomer,*m_aForceSmall;
 
     /* init funs */
     void readConfig();
@@ -105,6 +106,7 @@ private slots:
     void slotConfig();
     void slotSelectDir(int);
     void dirChanged();
+    void slotForceSmall(bool);
 };
 
 #endif
