@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Backup and Restore Utility
+Exec=backupandrestore
+Icon=backupandrestore/backupandrestore
+Type=Settings
+Name=Backup And Restore
