@@ -176,7 +176,7 @@ void PhaseStyle::drawPushButton(QPushButton *btn, QPainter *painter) {
     static int bd = 2;
 
     if (btn->isDefault() && !depress) {
-        drawPanel(painter, x, y, h, w, group,
+        drawPanel(painter, x, y, w, h, group,
                   &group.brush(QColorGroup::Mid), true);
         drawBevelButton(painter, x+bd, y+bd, w-bd*2, h-bd*2, group,
                         false, &brush  );
