@@ -2,7 +2,7 @@
    application:             : Oxygen
 
    begin                    : September 2002
-   copyright                : ( C ) 2002 by Carsten Niehaus
+   copyright                : ( C ) 2002, 2003 by Carsten Niehaus
    email                    : cniehaus@handhelds.org
  **************************************************************************/
 
@@ -94,105 +94,105 @@ void PSEWidget::slotShowElement(QString number)
 
 void PSEWidget::position(int n, int& h, int& v)
 {
-    //Hydrogen
-    if (n == 1)
-    {
-	h=0; v=0;
-    }
-
-
-    //Helium
-    if (n == 2)
-    {
-	h=680; v=0;
-    }
-
-
-    //Lithium
-    if (n == 3)
-    {
-	h=0; v=40;
-    }
-
-
-    //Beryllium
-    if (n == 4)
-    {
-	h=40; v=40;
-    }
-
-
-    //Boron-->Neon or Aluminum --> Argon
-    if ((n >= 5 && n <= 10) || (n >= 13 && n <= 18))
-	for (int i = 1; i <= (6-(10-n)); i++)
+	//Hydrogen
+	if (n == 1)
 	{
-	    h=((i*40)+440);
-	    v = 40;
-	    if (n >= 13)
-	    {
-	    	v=80;
-    		h=(h-320);
-	    }
+		h=0; v=0;
 	}
 
 
-    //Sodium
-    if (n == 11)
-    {
-	h=0; v=80;
-    }
-
-
-    //Magnesium
-    if (n == 12)
-    {
-	h=40; v=80;
-    }
-
-
-    //Potassium --> Uuo without La and Ac
-    if ((n >= 19 && n <= 56) || (n >= 72 && n <= 88) || n >= 104)
-	for (int i = 1; i <= 18; i++)
+	//Helium
+	if (n == 2)
 	{
-	    int f = n;
-	    if (n > 18)
-		    f = n-18;
-	    if (n > 36)
-		    f = n-36;
-	    if (n > 54)
-		    f = n-54;
-	    if (n > 71)
-		    f = n-68;
-	    if (n > 86)
-		    f = n-86;
-	    if (n > 103)
-		    f = n-100;
-
-	    h=((f*40)-40);
-
-	    v = 120;
-	    if (n >= 37)
-		    v=160;
-	    if (n >= 55)
-		    v=200;
-	    if (n >= 87)
-		    v=240;
+		h=680; v=0;
 	}
 
 
-    //Lanthanum --> Lutetium and Actinum --> Lawrencium
-    if ((n >= 57 && n <= 71) || (n >= 89 && n <= 103))
-	for (int i = 1; i <= 14; i++)
+	//Lithium
+	if (n == 3)
 	{
-	    int f = n;
-	    if (n > 56)
-		    f = n-55;
-	    if (n > 88)
-		    f = n-87;
-	    h=(f*40);
-	    v = 290;
-	    if (n >= 89)
-		    v=330;
+		h=0; v=40;
 	}
-    v += 10;
+
+
+	//Beryllium
+	if (n == 4)
+	{
+		h=40; v=40;
+	}
+
+
+	//Boron-->Neon or Aluminum --> Argon
+	if ((n >= 5 && n <= 10) || (n >= 13 && n <= 18))
+		for (int i = 1; i <= (6-(10-n)); i++)
+		{
+			h=((i*40)+440);
+			v = 40;
+			if (n >= 13)
+			{
+				v=80;
+				h=(h-320);
+			}
+		}
+
+
+	//Sodium
+	if (n == 11)
+	{
+		h=0; v=80;
+	}
+
+
+	//Magnesium
+	if (n == 12)
+	{
+		h=40; v=80;
+	}
+
+
+	//Potassium --> Uuo without La and Ac
+	if ((n >= 19 && n <= 57) || (n >= 72 && n <= 89) || n >= 104)
+		for (int i = 1; i <= 18; i++)
+		{
+			int f = n;
+			if (n > 18)
+				f = n-18;
+			if (n > 36)
+				f = n-36;
+			if (n > 54)
+				f = n-54;
+			if (n > 71)
+				f = n-68;
+			if (n > 86)
+				f = n-86;
+			if (n > 103)
+				f = n-100;
+
+			h=((f*40)-40);
+
+			v = 120;
+			if (n >= 37)
+				v=160;
+			if (n >= 55)
+				v=200;
+			if (n >= 87)
+				v=240;
+		}
+
+
+	//Lanthanum --> Lutetium and Actinum --> Lawrencium
+	if ((n >= 58 && n <= 71) || (n >= 90 && n <= 103))
+		for (int i = 1; i <= 14; i++)
+		{
+			int f = n;
+			if (n > 57)
+				f = n-55;
+			if (n > 88)
+				f = n-87;
+			h=(f*40);
+			v = 290;
+			if (n >= 90)
+				v=330;
+		}
+	v += 10;
 }
