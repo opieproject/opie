@@ -139,4 +139,5 @@ TRANSLATIONS = ../i18n/de/libqpe.ts \
 	 ../i18n/sl/libqpe.ts \
 	 ../i18n/zh_CN/libqpe.ts \
 	 ../i18n/it/libqpe.ts \
-	 ../i18n/zh_TW/libqpe.ts
+	 ../i18n/zh_TW/libqpe.ts \
+	 ../i18n/da/libqpe.ts
