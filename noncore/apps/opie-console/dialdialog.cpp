@@ -22,27 +22,21 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
     QLabel *textLabel = new QLabel( this );
     textLabel->setText( tr("Enter the number you want to dial. When finished, press ok") );
 
-    LCD1 = new QLCDNumber( this, "LCD" );
-    QFont LCD_font1(  LCD1->font() );
-    LCD_font1.setPointSize( 7 );
-    LCD1->setFont( LCD_font1 );
-    LCD1->setNumDigits( 8 );
-    LCD1->setSegmentStyle( QLCDNumber::Flat );
-    LCD1->setMaximumHeight( 30 );
+    m_dialLine = new QLineEdit( this );
+    m_dialLine->setReadOnly( true );
+    m_dialLine->setFrame( false );
+    m_dialLine->setAlignment( Qt::AlignLeft );
+    QFont dialLine_font( m_dialLine->font() );
+    dialLine_font.setBold( TRUE );
+    dialLine_font.setPointSize( 18 );
+    m_dialLine->setFont( dialLine_font );
 
-    LCD2 = new QLCDNumber( this, "LCD" );
-    QFont LCD_font2(  LCD2->font() );
-    LCD_font2.setPointSize( 7 );
-    LCD2->setFont( LCD_font2 );
-    LCD2->setNumDigits( 8 );
-    LCD2->setSegmentStyle( QLCDNumber::Flat );
-    LCD2->setMaximumHeight( 30 );
-
-    QGridLayout *layout = new QGridLayout( this , 4, 3 );
+    QWidget* dialWidget = new QWidget( this );
+    QGridLayout *layout = new QGridLayout( dialWidget , 4, 3 );
 
     QButtonGroup *dialButtons = new QButtonGroup( );
 
-    QPushButton *number0 = new QPushButton( this );
+    QPushButton *number0 = new QPushButton( dialWidget );
     number0->setText( QString( "0" ) );
     QFont number0_font( number0->font() );
     number0_font.setBold( TRUE );
@@ -52,7 +46,7 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
 
     int x = 0, y = 0;
     for ( int i = 0 ; i < 9;  i++ ) {
-        QPushButton *number = new QPushButton( this );
+        QPushButton *number = new QPushButton( dialWidget );
         number->setText( QString( "%1" ).arg( i + 1 ) );
         QFont number_font( number->font() );
         number_font.setBold( TRUE );
@@ -72,14 +66,13 @@ DialDialog::DialDialog(  QWidget* parent, const char* name, bool modal, WFlags f
 
     connect( dialButtons, SIGNAL( clicked( int ) ), this, SLOT( slotEnterNumber( int ) ) );
 
-    mainLayout->addStretch( 0 );
+    mainLayout->addStretch( 2 );
     mainLayout->addWidget( textLabel );
-	QHBoxLayout *lcdLayout = new QHBoxLayout(mainLayout);
-    lcdLayout->addWidget( LCD1 );
-    lcdLayout->addWidget( LCD2 );
-    mainLayout->addStretch( 0 );
-    mainLayout->addLayout( layout );
-    mainLayout->addStretch( 0 );
+    mainLayout->addStretch( 1 );
+    mainLayout->addWidget( m_dialLine );
+    mainLayout->addStretch( 2 );
+    mainLayout->addWidget( dialWidget );
+    mainLayout->addStretch( 4 );
 }
 
 
@@ -102,10 +95,6 @@ QString DialDialog::number() {
 
 void DialDialog::setNumber( QString number )
 {
-	QString n1;
-	if(number.length() > 8) n1 = number.left(number.length() - 8);
-	QString n2 = number.right(8);
-    LCD1->display( n1.toInt() );
-	LCD2->display( n2.toInt() );
+    m_dialLine->setText( QString("%1").arg( number ) );
 }
 

@@ -4,7 +4,8 @@
 
 #include <qdialog.h>
 #include <qstring.h>
-#include <qlcdnumber.h>
+#include <qlineedit.h>
+
 
 class DialDialog : public QDialog {
 
@@ -20,8 +21,8 @@ public:
     void setNumber( QString number );
 
 private:
-	QString m_number;
-    QLCDNumber *LCD1, *LCD2;
+    QString m_number;
+    QLineEdit *m_dialLine;
 
 private slots:
     void slotEnterNumber( int );
