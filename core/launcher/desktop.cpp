@@ -38,9 +38,7 @@
 #include <qpe/timeconversion.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
-#ifdef QT_QWS_CUSTOM
-#include "qpe/custom.h"
-#endif
+#include <qpe/custom.h>
 
 #include <qgfx_qws.h>
 #include <qmainwindow.h>
@@ -769,7 +767,7 @@ void Desktop::screenClick()
 void Desktop::soundAlarm()
 {
 #ifdef CUSTOM_SOUND_ALARM
-    if (alarmsound)
+    if (qpedesktop->alarmsound)
     CUSTOM_SOUND_ALARM;
 #endif
 }
