@@ -116,7 +116,7 @@ private slots:
     void slotUpgrade();
     void slotDownload();
     void slotApply();
-    void slotCloseInstallDlg();
+    void slotCloseDlg();
     void slotConfigure();
 
     // View menu action slots
@@ -131,6 +131,9 @@ private slots:
     void slotFindHideToolbar();
     void slotFindChanged( const QString &findText );
     void slotFindNext();
+
+    // Other slots
+    void slotDisplayPackageInfo( QListViewItem * );
 };
 
 #endif

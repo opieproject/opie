@@ -52,7 +52,14 @@ private:
     OPackageManager *m_packman;     // Pointer to application instance of package manager
 
     // UI controls
-    QMultiLineEdit   m_output;      // Multi-line edit to display package information
+    QMultiLineEdit   m_information; // Multi-line edit to display package information
+    QMultiLineEdit   m_files;       // Multi-line edit to display package file list
+
+private slots:
+    void slotBtnClose();
+
+signals:
+    void closeInfoDlg();
 };
 
 #endif

@@ -47,6 +47,7 @@
 #include "filterdlg.h"
 #include "promptdlg.h"
 #include "entrydlg.h"
+#include "packageinfodlg.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags fl )
     : QMainWindow( parent, name, fl || WStyle_ContextHelp )
@@ -117,6 +118,8 @@ void MainWindow::initPackageList()
     m_packageList.addColumn( tr( "Packages" ) );
     QWhatsThis::add( &m_packageList, tr( "This is a listing of all packages.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
     QPEApplication::setStylusOperation( m_packageList.viewport(), QPEApplication::RightOnHold );
+    connect( &m_packageList, SIGNAL(rightButtonPressed(QListViewItem *,const QPoint &,int)),
+             this, SLOT(slotDisplayPackageInfo(QListViewItem *)) );
 }
 
 void MainWindow::initStatusWidget()
@@ -352,7 +355,7 @@ void MainWindow::slotUpdate()
     // Create package manager output widget
     InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Update package information" ), false,
                                       OPackage::Update );
-    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseInstallDlg()) );
+    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
     // Display widget
     m_widgetStack.addWidget( dlg, 3 );
@@ -364,7 +367,7 @@ void MainWindow::slotUpgrade()
     // Create package manager output widget
     InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Upgrade installed packages" ), false,
                                       OPackage::Upgrade );
-    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseInstallDlg()) );
+    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
     // Display widget
     m_widgetStack.addWidget( dlg, 3 );
@@ -411,7 +414,7 @@ void MainWindow::slotDownload()
         // Create package manager output widget
         InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Download packages" ), false,
                                         OPackage::Download, workingPackages );
-        connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseInstallDlg()) );
+        connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
         // Display widget
         m_widgetStack.addWidget( dlg, 3 );
@@ -509,14 +512,14 @@ void MainWindow::slotApply()
                                       removeCmd, removeList,
                                       installCmd, installList,
                                       upgradeCmd, upgradeList );
-    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseInstallDlg()) );
+    connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
 
     // Display widget
     m_widgetStack.addWidget( dlg, 3 );
     m_widgetStack.raiseWidget( dlg );
 }
 
-void MainWindow::slotCloseInstallDlg()
+void MainWindow::slotCloseDlg()
 {
     // Close install dialog
     delete m_widgetStack.visibleWidget();
@@ -664,4 +667,17 @@ void MainWindow::slotFindChanged( const QString &findText )
 void MainWindow::slotFindNext()
 {
     searchForPackage( m_findEdit->text() );
+}
+
+void MainWindow::slotDisplayPackageInfo( QListViewItem *packageItem )
+{
+    QString packageName( ( static_cast<QCheckListItem*>( packageItem ) )->text() );
+
+    // Create package manager output widget
+    PackageInfoDlg *dlg = new PackageInfoDlg( this, &m_packman, packageName );
+    connect( dlg, SIGNAL(closeInfoDlg()), this, SLOT(slotCloseDlg()) );
+
+    // Display widget
+    m_widgetStack.addWidget( dlg, 3 );
+    m_widgetStack.raiseWidget( dlg );
 }
