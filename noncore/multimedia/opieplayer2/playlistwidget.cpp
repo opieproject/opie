@@ -441,8 +441,8 @@ void PlayListWidget::saveList() {
 
 void PlayListWidget::loadList( const DocLnk & lnk) {
     QString name= lnk.name();
-    // qDebug("currentList is "+name);
-    if( name.length()>1) {
+// qDebug("currentList is "+name);
+    if( name.length()>0) {
         setCaption("OpiePlayer: "+name);
         // qDebug("load list "+ name+".playlist");
         clearList();
