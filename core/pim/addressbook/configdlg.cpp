@@ -2,9 +2,8 @@
 
 #include <opie2/odebug.h>
 #include <opie2/opimcontact.h>
-#include "opie2/opimcontactfields.h"
-
-#include <qpe/resource.h>
+#include <opie2/opimcontactfields.h>
+#include <opie2/oresource.h>
 
 #include <qcheckbox.h>
 #include <qradiobutton.h>
@@ -25,10 +24,10 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 	setWFlags ( WStyle_ContextHelp );
 
 	// Set Pics to Buttons and Tabs
-	m_upButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/up" ) ) );
-	m_downButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/down" ) ) );
-	m_addButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/add" ) ) );
-	m_removeButton->setIconSet( QIconSet( Resource::loadPixmap( "addressbook/sub" ) ) );
+	m_upButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/up" ) ) );
+	m_downButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/down" ) ) );
+	m_addButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/add" ) ) );
+	m_removeButton->setIconSet( QIconSet( Opie::Core::OResource::loadPixmap( "addressbook/sub" ) ) );
 
 
 	// Get the translation maps between Field ID and translated strings

@@ -24,11 +24,11 @@
 
 #include <opie2/odebug.h>
 #include <opie2/opimcontact.h>
+#include <opie2/oresource.h>
 
 #include <qpe/categoryselect.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/qpedialog.h>
-#include <qpe/resource.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
@@ -217,7 +217,8 @@ void ContactEditor::init() {
 	labCat->show();
 	cmbCat->show();
 
-	btnNote = new QPushButton( Resource::loadPixmap( "edit" ), tr( "Notes..." ), container );
+	btnNote = new QPushButton( Opie::Core::OResource::loadPixmap( "edit", Opie::Core::OResource::SmallIcon ),
+                               tr( "Notes..." ), container );
 	gl->addWidget( btnNote, 9, 1 );
 
 	tabMain->addTab( m_generalWidget, "addressbook/AddressBookSmall", tr( "General" ) );
@@ -530,7 +531,7 @@ void ContactEditor::init() {
  	birthdayButton->setPopup( m1 );
 	birthdayButton->setPopupDelay(0);
 
-	QPushButton* deleteButton = new QPushButton( QIconSet( Resource::loadPixmap( "trash" ) ),
+	QPushButton* deleteButton = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
 						     tr( "Delete" ),
 						     hBox, 0 );
 
@@ -555,7 +556,7 @@ void ContactEditor::init() {
  	anniversaryButton->setPopup( m1 );
 	anniversaryButton->setPopupDelay(0);
 
-	deleteButton = new QPushButton( QIconSet( Resource::loadPixmap( "trash" ) ),
+	deleteButton = new QPushButton( Opie::Core::OResource::loadPixmap( "trash", Opie::Core::OResource::SmallIcon ),
 						     tr( "Delete" ),
 						     hBox, 0 );
 	gl->addWidget( hBox, counter , 1  );

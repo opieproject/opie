@@ -27,13 +27,11 @@
 #include <opie2/ofiledialog.h>
 #include <opie2/opimcontact.h>
 #include <opie2/ocontactaccessbackend_vcard.h>
+#include <opie2/oresource.h>
 
-#include <qpe/resource.h>
 #include <qpe/ir.h>
 #include <qpe/qpemessagebox.h>
 #include <qmenubar.h>
-// #include <qtoolbar.h>
-// #include <qmenubar.h>
 #include <qpe/qpeapplication.h>
 
 #include <qaction.h>
@@ -93,27 +91,33 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
     m_searchBar->setStretchableWidget( m_searchEdit );
     connect( m_searchEdit, SIGNAL(returnPressed()), this, SLOT(slotFind()) );
 
-    QAction *a = new QAction( tr( "Start Search" ), Resource::loadPixmap( "find" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Start Search" ),
+                              Opie::Core::OResource::loadPixmap( "find", Opie::Core::OResource::SmallIcon ),
+                              QString::null, 0, this, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotFind()) );
     a->addTo( m_searchBar );
 
     // Insert Contact menu items
     QActionGroup *items = new QActionGroup( this, QString::null, false );
 
-    m_actionMail = new QAction( tr( "Write Mail To" ), Resource::loadPixmap( "addressbook/sendmail" ),
-                              QString::null, 0, items, 0 );
+    m_actionMail = new QAction( tr( "Write Mail To" ),
+                                Opie::Core::OResource::loadPixmap( "addressbook/sendmail" ),
+                                QString::null, 0, items, 0 );
     connect( m_actionMail, SIGNAL(activated()), this, SLOT(writeMail()) );
 
-    a = new QAction( tr("Import vCard"), Resource::loadPixmap( "addressbook/fileimport"),
-                              QString::null, 0, items, 0 );
+    a = new QAction( tr("Import vCard"),
+                     Opie::Core::OResource::loadPixmap( "addressbook/fileimport" ),
+                     QString::null, 0, items, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(importvCard()) );
 
-    a = new QAction( tr("Export vCard"), Resource::loadPixmap( "addressbook/fileexport"),
+    a = new QAction( tr("Export vCard"),
+                     Opie::Core::OResource::loadPixmap( "addressbook/fileexport" ),
                      QString::null, 0, items, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(exportvCard()) );
 
-    m_actionPersonal = new QAction( tr("My Personal Details"), Resource::loadPixmap( "addressbook/identity" ),
-                                  QString::null, 0, items, 0 , true );
+    m_actionPersonal = new QAction( tr("My Personal Details"),
+                                    Opie::Core::OResource::loadPixmap( "addressbook/identity" ),
+                                    QString::null, 0, items, 0 , true );
     connect( m_actionPersonal, SIGNAL(activated()), this, SLOT(slotPersonalView()) );
 
     insertItemMenuItems( items );
