@@ -21,7 +21,8 @@ public :
         { IsModified = m; }
 
       QList<NodeCollection> collectPossible( const char * Interface );
-      void canStart( const char * Interface );
+      // return TRUE if we need gui to decide
+      bool canStart( const char * Interface );
       bool regenerate( void );
 
       void forceGeneration( bool m ) 

@@ -59,7 +59,12 @@ public :
       InterfaceInfo * interface( const QString& N ) 
         { return ProbedInterfaces[N]; }
 
-      int execute( const QString & S );
+      // exec command as root
+      int runAsRoot( const QString & S );
+
+      // exec command as user
+      void execAsUser( QString & Cmd, char * argv[] );
+
       // refresh stats for this interface
       void refreshStatistics( InterfaceInfo & );
 

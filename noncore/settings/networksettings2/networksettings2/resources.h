@@ -22,6 +22,18 @@ typedef struct NetNode_S {
         long NodeCountInLib;
 } NetNode_t;
 
+class CurrentQPEUser {
+
+public :
+        CurrentQPEUser() : UserName(), HomeDir(), EnvList() {}
+
+        QString        UserName;
+        QString        HomeDir;
+        int            Uid;
+        int            Gid;
+        QArray<char *> EnvList;
+};
+
 typedef QDict<NetNode_t> Name2NetNode_t;
 typedef QDict<ANetNodeInstance > Name2Instance_t;
 typedef QDict<NodeCollection> Name2Connection_t;
@@ -83,8 +95,12 @@ public :
     Name2Connection_t & connections( void )
       { return ConnectionsMap; }
 
+    CurrentQPEUser & currentUser( void )
+      { return CurrentUser; }
+
 private :
 
+    void detectCurrentUser( void );
     QString tr( const char * path );
     void findAvailableNetNodes( const QString &path );
     bool loadNetNode(
@@ -102,6 +118,8 @@ private :
 
     // all nodes
     Name2Instance_t     AllNodes;
+
+    CurrentQPEUser    CurrentUser;
 };
 
 extern TheNSResources * _NSResources;

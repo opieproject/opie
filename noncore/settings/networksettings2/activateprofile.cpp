@@ -1,4 +1,5 @@
 #include <qlistbox.h>
+#include <qlabel.h>
 #include "activateprofile.h"
 
 ActivateProfile::ActivateProfile( const char * Interface ) :
@@ -6,6 +7,7 @@ ActivateProfile::ActivateProfile( const char * Interface ) :
 
     Possible = NSD.collectPossible( Interface );
 
+    DeviceName_LBL->setText( Interface );
     Profiles_LB->clear();
     for( NodeCollection * NC = Possible.first();
          NC;

@@ -109,23 +109,44 @@ bool ANetwork::generateDataForCommonFile( SystemFile & S, long DevNr ) {
     if( S.name() == "interfaces" ) {
       // we can safely call from here since device item is deeper
       if( Data.UseDHCP ) {
-        S << "iface " << NIC << "-c" << connection()->number() << 
-              "-allowed inet dhcp" << endl;
-        S << "  up echo \"" << NIC << "\" > /tmp/profile-" << connection()->number() << 
-            ".up" << Data.IPAddress << endl;
+        S << "iface " 
+          << NIC 
+          << "-c" 
+          << connection()->number() 
+          << "-allowed inet dhcp" 
+          << endl;
+        S << "  up echo \"" 
+          << NIC 
+          << "\" > /tmp/profile-" 
+          << connection()->number() 
+          << ".up" 
+          << endl;
         if( Data.SendHostname ) {
-          S << "  hostname "<< Data.Hostname  << endl;
+          S << "  hostname "
+            << Data.Hostname  
+            << endl;
         }
 
-        S << "  down rm -f /tmp/profile-" << connection()->number() << 
-            ".up" << Data.IPAddress << endl;
+        S << "  down rm -f /tmp/profile-" 
+          << connection()->number() 
+          << ".up"
+          << endl;
       } else {
-        S << "iface " << NIC << "-c" << connection()->number() << 
-              "-allowed inet static" << endl;
-        S << "  up echo \"" << NIC << "\" > /tmp/profile-" << connection()->number() << 
-            ".up" << Data.IPAddress << endl;
-        S << "  down rm -f /tmp/profile-" << connection()->number() << 
-            ".up" << Data.IPAddress << endl;
+        S << "iface " 
+          << NIC << "-c" 
+          << connection()->number() 
+          << "-allowed inet static" 
+          << endl;
+        S << "  up echo \"" 
+          << NIC 
+          << "\" > /tmp/profile-" 
+          << connection()->number() 
+          << ".up" 
+          << endl;
+        S << "  down rm -f /tmp/profile-" 
+          << connection()->number() 
+          << ".up" 
+          << endl;
         S << "  address   " << Data.IPAddress << endl;
         S << "  broadcast " << Data.Broadcast << endl;
         S << "  netmask   " << Data.NetMask << endl;

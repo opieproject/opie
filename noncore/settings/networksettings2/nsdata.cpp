@@ -15,7 +15,9 @@ NetworkSettingsData::NetworkSettingsData( void ) {
     // init global resources structure
     new TheNSResources();
 
-    CfgFile.sprintf( "%s/NETCONFIG", getenv("HOME") );
+    CfgFile.sprintf( "%s/NETCONFIG", 
+          NSResources->currentUser().HomeDir.latin1() );
+    fprintf( stderr, "Cfg from %s\n", CfgFile.latin1() );
 
     // load settings
     Force = 0;
@@ -353,10 +355,12 @@ QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interfa
          ++it ) {
       NC = it.current();
       // check if this profile handles the requested interface
+      fprintf( stderr, "check %s\n", NC->name().latin1() );
       if( NC->handlesInterface( Interface ) && // if different Intf.
           NC->state() != Disabled && // if not enabled
           NC->state() != IsUp  // if already used
         ) {
+        fprintf( stderr, "Append %s\n", NC->name().latin1() );
         PossibleConnections.append( NC );
       }
     }
@@ -370,13 +374,15 @@ QList<NodeCollection> NetworkSettingsData::collectPossible( const char * Interfa
     if allowed, echo Interface-allowed else Interface-disallowed
 */
 
-void NetworkSettingsData::canStart( const char * Interface ) {
+bool NetworkSettingsData::canStart( const char * Interface ) {
     // load situation
     NodeCollection * NC = 0;
     QList<NodeCollection> PossibleConnections;
 
     PossibleConnections = collectPossible( Interface );
 
+    fprintf( stderr, "Possiblilies %d\n", 
+      PossibleConnections.count() );
     switch( PossibleConnections.count() ) {
       case 0 : // no connections
         break;
@@ -384,10 +390,7 @@ void NetworkSettingsData::canStart( const char * Interface ) {
         NC = PossibleConnections.first();
         break;
       default : // need to ask user ?
-        // are we connected to a server
-        // system( "su %d networksettings2 --prompt %s\n", 
-        //    "", Interface );
-        break;
+        return 1;
     }
 
     if( NC ) {
@@ -410,12 +413,13 @@ void NetworkSettingsData::canStart( const char * Interface ) {
         case IsUp : // also called for 'ifdown'
           // device is ready -> done
           printf( "%s-c%d-allowed\n", Interface, NC->number() );
-          return;
+          return 0;
       }
-    } else {
-      // if we come here no alternatives are possible
-      printf( "%s-cnn-disallowed\n", Interface );
-    }
+    } 
+
+    // if we come here no alternatives are possible
+    printf( "%s-cnn-disallowed\n", Interface );
+    return 0;
 }
 
 /*

@@ -30,7 +30,7 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A ) {
         S.sprintf( "ifup %s=%s-c%d-allowed", 
             II->Name.latin1(), II->Name.latin1(),
             connection()->number() );
-        NSResources->system().execute( S );
+        NSResources->system().runAsRoot( S );
       }
       return 1;
     } else if( A == Down ) {
@@ -39,7 +39,7 @@ bool NetworkRun::setState( NodeCollection * NC, Action_t A ) {
         S.sprintf( "ifdown %s=%s-c%d-allowed", 
             II->Name.latin1(), II->Name.latin1(),
             connection()->number() );
-        NSResources->system().execute( S );
+        NSResources->system().runAsRoot( S );
       }
       return 1;
     } 

@@ -1,7 +1,11 @@
+#include <unistd.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <pwd.h>
 #include <qpixmap.h>
+#include <qdir.h>
 #include <qpe/qlibrary.h>
 #include <qpe/qpeapplication.h>
-#include <qdir.h>
 #include <opie2/odebug.h>
 #include <qtopia/resource.h>
 
@@ -75,6 +79,8 @@ TheNSResources::TheNSResources( void ) : NodeTypeNameMap(),
 
     // get access to the system
     TheSystem = new System();
+
+    detectCurrentUser();
 }
 
 TheNSResources::~TheNSResources( void ) {
@@ -231,4 +237,133 @@ void TheNSResources::renumberConnections( void ) {
         NC->setNumber( NC->maxConnectionNumber()+1 );
         NC->setModified( 1 );
       }
+}
+
+typedef struct EnvVars {
+      char * Name;
+      int Len;
+} EnvVar_t;
+
+#define AnEV(x) x, sizeof(x)-1
+
+static EnvVar_t EV[] = {
+    // AnEV( "HOME=" ), -> SPECIAL
+    // AnEV( "LOGNAME=" ), -> SPECIAL
+    AnEV( "USER=" ),
+    AnEV( "LD_LIBRARY_PATH=" ),
+    AnEV( "PATH=" ),
+    AnEV( "QTDIR=" ),
+    AnEV( "OPIEDIR=" ),
+    AnEV( "SHELL=" ),
+    { NULL, 0 }
+};
+
+void TheNSResources::detectCurrentUser( void ) {
+    // find current running qpe
+    QString QPEEnvFile = "";
+
+    // open proc dir and find all dirs in it
+    { QRegExp R("[0-9]+");
+      QDir ProcDir( "/proc" );
+      QString QPELoc = QPEApplication::qpeDir() + "bin/qpe";
+      QFileInfo FI;
+      QStringList EL = ProcDir.entryList( QDir::Dirs );
+
+      // print it out
+      for ( QStringList::Iterator it = EL.begin(); 
+            it != EL.end(); 
+            ++it ) {
+        if( R.match( (*it) ) >= 0 ) {
+          QString S = ProcDir.path()+"/"+ (*it);
+          S.append( "/exe" );
+          FI.setFile( S );
+          // get the linke
+          S = FI.readLink();
+          if( S == QPELoc ) {
+            // found running qpe
+            QPEEnvFile.sprintf( ProcDir.path()+ "/" + (*it) + "/environ" );
+            break;
+          }
+        }
+      }
+    }
+
+    if( QPEEnvFile.isEmpty() ) {
+      // could not find qpe
+      fprintf( stderr, "Could not find qpe\n" );
+      return;
+    }
+
+    // FI now contains path ProcDir to the cmd dir
+    { char * Buf = 0;
+      char TB[1024];
+      long BufSize = 0;
+      int fd;
+      int rd;
+
+      fd = open( QPEEnvFile.latin1(), O_RDONLY );
+      if( fd < 0 ) {
+        fprintf( stderr, "Could not open %s : %d\n", 
+            QPEEnvFile.latin1(), errno );
+        return;
+      }
+
+      while( (rd = read( fd, TB, sizeof(TB) ) ) > 0 ) {
+        Buf = (char *)realloc( Buf, BufSize+rd );
+        memcpy( Buf+BufSize, TB, rd );
+        BufSize += rd;
+      }
+
+      char * Data = Buf;
+      char * DataEnd = Data+BufSize-1;
+
+      // get env items out of list
+      while( Data < DataEnd ) {
+        if( strncmp( Data, "LOGNAME=", 8 ) == 0 ) {
+          CurrentUser.UserName = Data+8;
+          CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+              strdup( Data );
+        } else if( strncmp( Data, "HOME=", 5 ) == 0 ) {
+          CurrentUser.HomeDir = Data+5;
+          CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+          CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+              strdup( Data );
+        } else {
+          EnvVar_t * Run = EV;
+          while( Run->Name ) {
+            if( strncmp( Data, Run->Name, Run->Len ) == 0 ) {
+              CurrentUser.EnvList.resize( CurrentUser.EnvList.size()+1 );
+              CurrentUser.EnvList[CurrentUser.EnvList.size()-1] = 
+                  strdup( Data );
+              break;
+            }
+            Run ++;
+          }
+        }
+
+        Data += strlen( Data )+1;
+      }
+
+      free( Buf );
+
+      if( ! CurrentUser.UserName.isEmpty() ) {
+        // find user info
+        struct passwd pwd;
+        struct passwd * pwdres;
+
+        if( getpwnam_r( CurrentUser.UserName.latin1(), 
+                        &pwd, TB, sizeof(TB), &pwdres ) ||
+            pwdres == 0 ) {
+          fprintf( stderr, "Could not determine user %s : %d\n", 
+              CurrentUser.UserName.latin1(), errno );
+          return;
+        }
+        CurrentUser.Uid = pwd.pw_uid;
+        CurrentUser.Gid = pwd.pw_gid;
+      } else{
+        CurrentUser.Uid = 
+          CurrentUser.Gid = -1;
+      }
+    }
 }

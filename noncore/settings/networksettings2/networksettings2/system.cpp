@@ -1,14 +1,22 @@
-#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <qfile.h>
-#include <qtextstream.h>
+
 #include <net/if.h>
 #include <net/if_arp.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <unistd.h>
+
+#include <qdir.h>
+#include <qregexp.h>
+#include <qstringlist.h>
+#include <qfile.h>
+#include <qtextstream.h>
 
 #include "resources.h"
 #include "system.h"
@@ -36,7 +44,7 @@ System::~System( void ) {
       delete ProcDevNet;
 }
 
-int System::execute( const QString & S ) {
+int System::runAsRoot( const QString & S ) {
     QString MyS = S;
     char * usr = getenv("USER");
     int rv;
@@ -317,4 +325,31 @@ void System::probeInterfaces( void ) {
       }
       fprintf( stderr, "NIC %s UP %d\n", NicName.latin1(), IFI->IsUp );
     }
+}
+
+void System::execAsUser( QString & Cmd, char * argv[] ) {
+      CurrentQPEUser CU = NSResources->currentUser();
+
+      if( CU.UserName.isEmpty() ) {
+        // if we come here, the exec was not successfull
+        fprintf( stderr, "User not known \n" );
+        return;
+      }
+
+      // now we are ready to exec the requested command
+      setuid( CU.Uid );
+      setgid( CU.Gid );
+
+      char ** envp = (char **)alloca( sizeof( char *) *
+            (CU.EnvList.count()+1) );
+
+      for( unsigned int i = 0 ; i < CU.EnvList.count() ; i ++ ) {
+        *(envp+i) = CU.EnvList[i];
+      }
+      envp[CU.EnvList.count()]=NULL;
+
+      execve( Cmd.latin1(), argv, envp );
+
+      // if we come here, the exec was not successfull
+      fprintf( stderr, "Could not exec : %d\n", errno );
 }

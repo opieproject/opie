@@ -17,7 +17,7 @@
     </property>
     <property stdset="1">
         <name>caption</name>
-        <string>Activate Profile</string>
+        <string>Activate Network</string>
     </property>
     <property>
         <name>layoutMargin</name>
@@ -57,7 +57,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Select profile for device :</string>
+                        <string>Select profile to activate for </string>
                     </property>
                 </widget>
                 <widget>

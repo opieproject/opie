@@ -1,6 +1,7 @@
 #include "nsdata.h"
 #include "activateprofile.h"
 #include "networksettings.h"
+
 #include <qpe/qpeapplication.h>
 
 #include <opie/oapplicationfactory.h>
@@ -76,7 +77,19 @@ int main( int argc, char * argv[] ) {
         switch( Action ) {
           case ACT_REQUEST :
             { NetworkSettingsData NS;
-              NS.canStart( argv[1] );
+              if( NS.canStart( argv[1] ) ) {
+                QString S;
+                S.sprintf( QPEApplication::qpeDir()+
+                           "/bin/networksettings2" );
+                char * MyArgv[4];
+                MyArgv[0] = "networksettings2";
+                MyArgv[1] = "--prompt";
+                MyArgv[2] = argv[1];
+                MyArgv[3] = NULL;
+                NSResources->system().execAsUser( S, MyArgv );
+                // if we come here , failed
+                printf( "%s-cNN-disallowed", argv[1] );
+              }
             }
             break;
           case ACT_REGEN :
