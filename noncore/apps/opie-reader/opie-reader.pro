@@ -72,6 +72,22 @@ TARGET		=  reader
 LIBS		+= -lqpe
 
 
+TRANSLATIONS = ../../../i18n/de/reader.ts \
+         ../../../i18n/da/reader.ts \
+         ../../../i18n/xx/reader.ts \
+   ../../../i18n/en/reader.ts \
+   ../../../i18n/es/reader.ts \
+   ../../../i18n/fr/reader.ts \
+   ../../../i18n/hu/reader.ts \
+   ../../../i18n/ja/reader.ts \
+   ../../../i18n/ko/reader.ts \
+   ../../../i18n/no/reader.ts \
+   ../../../i18n/pl/reader.ts \
+   ../../../i18n/pt/reader.ts \
+   ../../../i18n/pt_BR/reader.ts \
+   ../../../i18n/sl/reader.ts \
+   ../../../i18n/zh_CN/reader.ts \
+   ../../../i18n/zh_TW/reader.ts
 
 
 include ( $(OPIEDIR)/include.pro )
