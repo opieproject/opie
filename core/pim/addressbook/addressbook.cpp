@@ -353,6 +353,12 @@ void AddressbookWindow::setDocument( const QString &filename )
 	OContactAccess::List allList = access->allRecords();
 	qWarning( "Found number of contacts in File: %d", allList.count() );
 
+	if ( !allList.count() ) {
+		QMessageBox::information( this, "Import VCard",
+					  "It was impossible to import the VCard.\n"
+					  "The VCard may be corrupted !" );
+	}
+
 	bool doAsk = true;
 	OContactAccess::List::Iterator it;
 	for ( it = allList.begin(); it != allList.end(); ++it ){
