@@ -30,6 +30,8 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     WFlags fl) :
     OClickableLabel(parent,name,fl), event(ev) {
 
+    setAlignment( AlignTop );
+
     QString msg;
 
     Config config( "qpe" );
@@ -89,8 +91,6 @@ QString DateBookEvent::ampmTime( QTime tm ) {
 
 }
 
-
-//extern QPEApplication *todayApp;
 
 /*
  * starts the edit dialog as known from datebook

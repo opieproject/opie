@@ -59,6 +59,8 @@ void DatebookPluginWidget::getDates() {
     QDate date = QDate::currentDate();
 
      QVBoxLayout* layoutDates = new QVBoxLayout( this );
+     layoutDates->setSpacing( 1 );
+     layoutDates->setMargin( 1 );
 
     if ( db ) {
         delete db;
@@ -105,8 +107,8 @@ void DatebookPluginWidget::getDates() {
         noEvents->setText( QObject::tr( "No appointments today" ) );
         layoutDates->addWidget( noEvents );
     }
-
-    layoutDates->addItem( new QSpacerItem( 1,1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
+    //layoutDates->addStretch(0);
+//     layoutDates->addItem( new QSpacerItem( 1,1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
 
     // how often refresh - later have qcop update calls in *db
     //QTimer::singleShot( 20*1000, this  , SLOT( getDates() ) );

@@ -34,6 +34,8 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   layout = new QVBoxLayout( this );
 
+  QVBoxLayout *mainLayout = new QVBoxLayout( this );
+
   QPalette pal = this->palette();
   QColor col = pal.color( QPalette::Active, QColorGroup::Background );
   pal.setColor( QPalette::Active, QColorGroup::Button, col );
@@ -77,26 +79,22 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
   DateLabel->setTextFormat( RichText );
 
   // Opiezilla
-  QLabel* Opiezilla = new QLabel( Frame, "OpieZilla");
+  QLabel* Opiezilla = new QLabel( Frame, "OpieZilla" );
   Opiezilla->setPixmap( opiezilla );
-  Opiezilla->setGeometry( QApplication::desktop()->width()-50 ,1, 45, 47);
+  Opiezilla->setGeometry( QApplication::desktop()->width()-50 ,1, 45, 47 );
   Opiezilla->setBackgroundOrigin( QLabel::ParentOrigin );
 
   // Ownerfield
   OwnerField = new OClickableLabel( this , "Owner" );
-  OwnerField->setGeometry( QRect( 0,0, this->width(), 12 ));
+  OwnerField->setGeometry( QRect( 0, 0, this->width(), 12 ) );
   OwnerField->setAlignment( int (QLabel::AlignTop | QLabel::AlignLeft ) );
   OwnerField->setMaximumHeight(12);
 
   // config
   ConfigButton = new OClickableLabel ( Frame, "PushButton1" );
-  ConfigButton->setGeometry( QRect(  QApplication::desktop()->width()-80, 30, 25, 21 ) );
-  ConfigButton->setPixmap( config  );
+  ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 30, 25, 21 ) );
+  ConfigButton->setPixmap( config );
   ConfigButton->setBackgroundOrigin( QLabel::ParentOrigin );
-
-  // -- layout --
-  layout->addWidget( Frame );
-  layout->addWidget( OwnerField );
 }
 
 /**

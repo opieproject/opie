@@ -57,8 +57,6 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     TabWidget3 = new QTabWidget( this, "TabWidget3" );
-    // TabWidget3->setFrameShape( QFrame::NoFrame );
-    //TabWidget3->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, TabWidget3->sizePolicy().hasHeightForWidth() ) );
     TabWidget3->setAutoMask( FALSE );
     TabWidget3->setTabShape( QTabWidget::Rounded );
     layout->addWidget( TabWidget3 );
@@ -122,7 +120,7 @@ void TodayConfig::setAutoStart() {
         e << m_autoStartTimer;
     } else {
         QCopEnvelope e( "QPE/System", "autoStart(QString,QString)" );
-        e << QString( "remove");
+        e << QString( "remove" );
         e << QString( "today" );
     }
 }

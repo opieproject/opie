@@ -42,18 +42,19 @@ class Today : public TodayBase {
     Today( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Today();
 
-  private slots:
+private slots:
     void startConfig();
     void startAddressbook();
-    void launchApp( QString appName );
     void editCard();
-    void draw();
+    void refresh();
 
 private:
     void init();
     void setOwnerField();
     void setOwnerField(QString &string);
     void loadPlugins();
+    void draw();
+
 
 private slots:
     void channelReceived(const QCString &msg, const QByteArray & data);
@@ -61,8 +62,6 @@ private slots:
  private:
     TodayConfig *conf;
     QStringList m_excludeApplets;
-
-    QVBoxLayout *pluginLayout;
 
     // QString m_autoStartTimer;
     int m_newStart;

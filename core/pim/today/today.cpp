@@ -64,9 +64,7 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 #endif
 
     setOwnerField();
-    init();
-    loadPlugins();
-    draw();
+    refresh();
     showMaximized();
 }
 
@@ -118,7 +116,6 @@ void Today::init() {
 
     // read config
     Config cfg( "today" );
-
     cfg.setGroup( "Applets" );
     m_excludeApplets = cfg.readListEntry( "ExcludeApplets", ',' );
 }
@@ -136,13 +133,13 @@ void Today::loadPlugins() {
     }
     pluginList.clear();
 
+
     QString path = QPEApplication::qpeDir() + "/plugins/today";
     QDir dir( path, "lib*.so" );
 
     QStringList list = dir.entryList();
     QStringList::Iterator it;
 
-    uint count = 0;
     for ( it = list.begin(); it != list.end(); ++it ) {
 	TodayPluginInterface *iface = 0;
 	QLibrary *lib = new QLibrary( path + "/" + *it );
@@ -156,6 +153,7 @@ void Today::loadPlugins() {
             plugin.iface = iface;
             plugin.name = QString(*it);
 
+            // find out if plugins should be shown
             if ( m_excludeApplets.grep( *it ).isEmpty() ) {
                 plugin.active = true;
             } else {
@@ -176,7 +174,6 @@ void Today::loadPlugins() {
             QScrollView* sv = new QScrollView( plugin.guiBox );
             QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
             sv->setMinimumHeight( plugin.guiPart->minHeight() );
-            //sv->setMaximumHeight( plugin.guiPart->maxHeight() );
             sv->setResizePolicy( QScrollView::AutoOneFit );
             sv->setHScrollBarMode( QScrollView::AlwaysOff );
             sv->setFrameShape( QFrame::NoFrame );
@@ -190,7 +187,6 @@ void Today::loadPlugins() {
             layout->addWidget( plugin.guiBox );
 
             pluginList.append( plugin );
-            count++;
         } else {
             qDebug( "could not recognize %s", QString( path + "/" + *it ).latin1() );
             delete lib;
@@ -231,8 +227,8 @@ void Today::draw() {
         noPluginsActive->setText( tr( "No plugins activated" ) );
         layout->addWidget( noPluginsActive );
     }
-
-    layout->addItem( new QSpacerItem( 1,1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
+    //layout->addStretch(0);
+    //layout->addItem( new QSpacerItem( 1,1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
 }
 
 
@@ -244,7 +240,6 @@ void Today::startConfig() {
     TodayConfig conf( this, "dialog", true );
 
     TodayPlugin plugin;
-
     QList<ConfigWidget> configWidgetList;
     for ( uint i = 0; i < pluginList.count(); i++ ) {
         plugin = pluginList[i];
@@ -267,29 +262,28 @@ void Today::startConfig() {
               confWidget = configWidgetList.next() ) {
             confWidget->writeConfig();
         }
-
-        init();
-
-        TodayPlugin plugin;
-        QValueList<TodayPlugin> plugList;
-        for ( uint i = 0; i < pluginList.count(); i++ ) {
-            plugin = pluginList[i];
-
-            if ( m_excludeApplets.grep( plugin.name ).isEmpty() ) {
-                qDebug("CONFIG " + plugin.name + " ACTIVE");
-                plugin.active = true;
-            } else {
-                qDebug("CONFIG " + plugin.name + " INACTIVE");
-                plugin.active = false;
-            }
-            plugList.append( plugin );
-        }
-        pluginList = plugList;
-
-        draw();
+        refresh();
     }
 }
 
+
+/**
+ * Refresh for the view. Reload all applets
+ *
+ */
+void Today::refresh() {
+    init();
+
+    if ( layout ) {
+        delete layout;
+    }
+    layout = new QVBoxLayout( this );
+    layout->addWidget( Frame );
+    layout->addWidget( OwnerField );
+
+    loadPlugins();
+    draw();
+}
 
 void Today::startAddressbook() {
     QCopEnvelope e( "QPE/System", "execute(QString)" );
@@ -306,14 +300,6 @@ void Today::editCard() {
         qApp->processEvents();
     }
     QCopEnvelope v( "QPE/Addressbook", "editPersonalAndClose()" );
-}
-
-/*
- * launches an App
- */
-void Today::launchApp( QString appName ) {
-    QCopEnvelope e( "QPE/System", "execute(QString)" );
-    e << QString( appName );
 }
 
 Today::~Today() {
