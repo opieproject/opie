@@ -158,7 +158,12 @@ void Jornada::initButtons()
 
 int Jornada::displayBrightnessResolution() const
 {
-    return 255;
+    if ( d->m_model == Model_Jornada_56x )
+        return 190;
+    else if (d->m_model == Model_Jornada_720 )
+        return 255;
+    else
+    	return 0;
 }
 
 
