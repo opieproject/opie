@@ -36,6 +36,11 @@ void FillTool::mousePressEvent(QMouseEvent* e)
     int y = e->y();
 
     m_image = m_pDrawPadCanvas->currentPage()->pixmap()->convertToImage();
+
+    if (m_image.depth() <= 8) {
+        m_image = m_image.convertDepth(32);
+    }
+
     m_fillRgb = m_pDrawPad->brush().color().rgb();
     m_oldRgb = m_image.pixel(x, y);
 
