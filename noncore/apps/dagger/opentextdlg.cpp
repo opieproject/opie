@@ -61,24 +61,27 @@ OpenTextDlg::OpenTextDlg( QWidget *parent, sword::SWMgr *swordMgr, QPixmap *bibl
 
         for ( it = swordMgr->Modules.begin(); it != swordMgr->Modules.end(); it++ )
         {
-            type = it->second->Type();
-            if ( type == "Biblical Texts" )
+            if ( it->second )
             {
-                icon = bibleIcon;
-                parent = m_bibles;
+                type = it->second->Type();
+                if ( type == "Biblical Texts" )
+                {
+                    icon = bibleIcon;
+                    parent = m_bibles;
+                }
+                else if ( type == "Commentaries" )
+                {
+                    icon = commentaryIcon;
+                    parent = m_commentaries;
+                }
+                else if ( type == "Lexicons / Dictionaries" )
+                {
+                    icon = lexiconIcon;
+                    parent = m_lexicons;
+                }
+    
+                parent->insertItem( new QListViewItem( parent, QString::null, it->first.c_str() ) );
             }
-            else if ( type == "Commentaries" )
-            {
-                icon = commentaryIcon;
-                parent = m_commentaries;
-            }
-            else if ( type == "Lexicons / Dictionaries" )
-            {
-                icon = lexiconIcon;
-                parent = m_lexicons;
-            }
-
-            parent->insertItem( new QListViewItem( parent, QString::null, it->first.c_str() ) );
         }
     }
 
