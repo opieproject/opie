@@ -5,6 +5,7 @@ MimeType=application/sheet-qt
 Type=Application
 Name=Opie Sheet
 Comment=Spreadsheet Application
+Name[da]=Opie Regneark
 Name[de]=Tabellenkalkulation
 Name[es]=Hoja Cálculo
 Comment[es]=Aplicación de hoja de cálculo

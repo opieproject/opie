@@ -4,6 +4,7 @@ Icon=sysinfo/SystemInfo
 Type=Application
 Name=System Info
 Comment=System Information
+Name[da]=Systeminfo
 Name[de]=Systeminfos
 Name[es]=Info Sistema
 Comment[es]=Info Sistema

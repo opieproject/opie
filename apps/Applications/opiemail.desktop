@@ -4,6 +4,7 @@ Icon=opiemail/opiemail
 Type=Application
 Name=EMail
 Comment=An EMail Client
+Name[da]=E-mail
 Name[de]=EMail
 Name[es]=Correo-e
 Comment[es]=Cliente de correo electrónico

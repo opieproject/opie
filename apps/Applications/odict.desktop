@@ -4,6 +4,7 @@ Icon=odict/odict
 Type=Application
 Name=ODict
 Comment=A dictionary lookup application
+Name[da]=Ordbog
 Name[de]=Wörterbuch
 Name[es]=Diccionario
 Comment[es]=Una aplicación de búsqueda en diccionario

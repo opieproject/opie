@@ -4,6 +4,7 @@ Icon=cards/Solitaire
 Type=Application
 Name=Patience
 Comment=A Game of Patience
+Name[da]=Kabale
 Name[de]=Patience
 Name[es]=Paciencia
 Comment[es]=Juego de paciencia

@@ -4,6 +4,7 @@ Icon=Sound
 Type=Application
 Name=Vmemo Settings
 Comment=Sound settings dialog
+Name[da]=Diktafon indstillinger
 Name[de]=Audio
 Name[es]=Grabadora
 Comment[es]=Configuración de la grabadora de voz

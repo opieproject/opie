@@ -5,6 +5,7 @@ MimeType=image/*
 Type=Applications
 Name=Image Viewer
 Comment=An Image Viewer
+Name[da]=Billedefremviser
 Name[de]=Bildbetrachter
 Name[es]=Visor Imágenes
 Comment[es]=Un visor de imágenes

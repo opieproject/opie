@@ -4,6 +4,7 @@ Icon=usermanager/usermanager
 Type=Setting
 Name=User Manager
 Comment=User Manager
+Name[da]=Brugerhåndtering
 Name[es]=Gestor Usuarios
 Comment[es]=Gestor de usuarios
 Name[fr]=Utilisateurs

@@ -4,6 +4,7 @@ Icon=checkbook/checkbook
 Type=Application
 Name=Checkbook
 Comment=A Checkbook Program
+Name[da]=Checkhæfte
 Name[es]=Chequera
 Comment[es]=Programa que gestiona el talonario de cheques
 Name[it]=Nota Spese
