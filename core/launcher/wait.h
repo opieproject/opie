@@ -29,7 +29,6 @@
 #include <qlabel.h>
 #include <qpixmap.h>
 #include <qpainter.h>
-#include "waitpopup.h"
 
 class Wait : public QWidget
 {
