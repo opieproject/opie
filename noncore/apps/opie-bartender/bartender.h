@@ -11,6 +11,7 @@
 #ifndef BARTENDER_H
 #define BARTENDER_H
 #include "newdrinks.h"
+#include "drinkdata.h"
 
 #include <qvariant.h>
 #include <qwidget.h>
@@ -36,7 +37,7 @@ public:
 
     QToolBar* ToolBar1;
     QListView* DrinkView;
-    QFile dbFile;
+    DrinkData drinkDB;
 public slots:
     void doEdit();
     
@@ -51,7 +52,7 @@ protected slots:
     void showDrink(int, QListViewItem *, const QPoint&, int);
     void initDrinkDb();
     void doSearchByName();
-    void doSearchByDrink();
+    void doSearchByIngredient();
     void showSearchResult(QStringList &);
     void doBac();
     void openCurrentDrink();

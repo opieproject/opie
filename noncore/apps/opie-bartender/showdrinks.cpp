@@ -36,6 +36,7 @@ Show_Drink::Show_Drink( QWidget* parent,  const char* name, bool modal, WFlags f
             
     MultiLineEdit1 = new QMultiLineEdit( this, "MultiLineEdit1" );
     MultiLineEdit1->setWordWrap(QMultiLineEdit::WidgetWidth);
+    MultiLineEdit1->setReadOnly(true);
     Layout5->addMultiCellWidget(  MultiLineEdit1, 1, 3, 0, 3 );
 }
 

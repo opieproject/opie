@@ -46,6 +46,7 @@ New_Drink::New_Drink( QWidget* parent,  const char* name, bool modal, WFlags fl 
     Layout5->addMultiCellWidget( TextLabel2, 1, 1, 0, 0);
 
     MultiLineEdit1 = new QMultiLineEdit( this, "MultiLineEdit1" );
+    MultiLineEdit1->setWordWrap(QMultiLineEdit::WidgetWidth);
 
     Layout5->addMultiCellWidget( MultiLineEdit1, 2, 2, 0, 2);
 }

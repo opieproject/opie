@@ -15,6 +15,7 @@
 #include "inputDialog.h"
 #include "searchresults.h"
 #include "bac.h"
+#include "drinkdata.h"
 
 /* OPIE */
 #include <opie2/odebug.h>
@@ -55,6 +56,8 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
 
     setCaption( tr( "Bartender" ) );
 
+    setToolBarsMovable( FALSE );
+        
     ToolBar1 = new QToolBar( this, "ToolBar1" );
     ToolBar1->setFixedHeight(22);
     layout->addMultiCellWidget( ToolBar1, 0, 0, 0, 4 );
@@ -67,12 +70,12 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
     fileMenu->insertItem(tr("New Drink"));
     fileMenu->insertItem(tr("Open Drink"));
     fileMenu->insertItem(tr("Find by Drink Name"));
-    fileMenu->insertItem(tr("Find by Alcohol"));
+    fileMenu->insertItem(tr("Find by Ingredient"));
 
     QPopupMenu *editMenu;
     editMenu = new QPopupMenu( this);
     menuBar->insertItem( tr("Edit"), editMenu );
-    editMenu->insertItem(tr("edit"));
+    editMenu->insertItem(tr("Edit Drink"));
 
     connect( fileMenu, SIGNAL( activated(int) ), this, SLOT( fileMenuActivated(int) ));
     connect( editMenu, SIGNAL( activated(int) ), this, SLOT( editMenuActivated(int) ));
@@ -110,11 +113,14 @@ Bartender::Bartender( QWidget* parent,  const char* name, WFlags fl )
             this,SLOT( showDrink(int,QListViewItem*,const QPoint&,int)));
 
     layout->addMultiCellWidget( DrinkView, 1, 2, 0, 4 );
-    if(QDir("db").exists()) {
-        dbFile.setName( "db/drinkdb.txt");
-    } else
-        dbFile.setName( QPEApplication::qpeDir()+"etc/bartender/drinkdb.txt");
+    if(QDir("db").exists())
+        drinkDB.setFile("db/drinkdb.txt");
+    else
+        drinkDB.setFile(QPEApplication::qpeDir()+"etc/bartender/drinkdb.txt");
+    
     initDrinkDb();
+
+    DrinkView->setFocus();
 }
 
 Bartender::~Bartender() {
@@ -123,63 +129,66 @@ Bartender::~Bartender() {
 /*
 this happens right before exit  */
 void Bartender::cleanUp() {
-   dbFile.close();
 
 }
 
 void Bartender::initDrinkDb() {
-
-    if(!dbFile.isOpen())
-    if ( !dbFile.open( IO_ReadOnly)) {
+    if(drinkDB.read())
+        fillList();
+    else
         QMessageBox::message( (tr("Note")), (tr("Drink database not opened sucessfully.\n")) );
-        return;
-    }
-    fillList();
 }
 
 void Bartender::fillList() {
-    dbFile.at(1);
+    QString lastName;
+    if( DrinkView->currentItem() != NULL )
+        lastName = DrinkView->currentItem()->text(0);
+    else
+        lastName = "";
+
     DrinkView->clear();
     int i=0;
     QListViewItem * item ;
-    QTextStream t( &dbFile);
     QString s;
-    while ( !t.eof()) {
-        s = t.readLine();
-        if(s.find("#",0,TRUE) != -1) {
-//            odebug << s.right(s.length()-2) << oendl; 
-            item= new QListViewItem( DrinkView, 0 );
-            item->setText( 0, s.right(s.length()-2));
-            i++;
+    
+    DrinkList::Iterator it = drinkDB.getBegin();
+    while ( it != drinkDB.getEnd() ) {
+        item= new QListViewItem( DrinkView, 0 );
+        item->setText( 0, (*it).getName());
+        i++;
+        ++it;
+    }
+    
+    if( lastName != "" ) {
+        QListViewItemIterator it( DrinkView );
+        for ( ; it.current(); ++it ) {
+            if ( it.current()->text(0) == lastName ) {
+                DrinkView->setCurrentItem(it.current());
+                break;
+            }
         }
     }
+    else if( DrinkView->childCount() > 0)
+        DrinkView->setCurrentItem(DrinkView->firstChild());
+    
     odebug << "there are currently " << i << " of drinks" << oendl; 
 }
 
 void Bartender::fileNew() {
 
     New_Drink *newDrinks;
-    newDrinks = new New_Drink(this,"New Drink....", TRUE);
+    newDrinks = new New_Drink(this,"New Drink", TRUE);
     QString newName, newIng;
     QPEApplication::execDialog( newDrinks );
     newName = newDrinks->LineEdit1->text();
     newIng= newDrinks->MultiLineEdit1->text();
 
-    if(dbFile.isOpen())
-        dbFile.close();
-    if ( !dbFile.open( IO_WriteOnly| IO_Append)) {
-        QMessageBox::message( (tr("Note")), (tr("Drink database not opened sucessfully.\n")) );
-        return;
-    }
     if(newDrinks ->result() == 1 ) {
-        QString newDrink="\n# "+newName+"\n";
-        newDrink.append(newIng+"\n");
-        odebug << "writing "+newDrink << oendl; 
-        dbFile.writeBlock( newDrink.latin1(), newDrink.length());
-        clearList();
-        dbFile.close();
-
-        initDrinkDb();
+        drinkDB.addDrink(newName, newIng);
+        if(!drinkDB.writeChanges()) {
+            QMessageBox::message( (tr("Note")), (tr("Failed to write to drink database!\n")) );
+        }
+        fillList();
     }
     delete newDrinks;
 }
@@ -197,43 +206,30 @@ void Bartender::showDrink(int mouse, QListViewItem * item, const QPoint&, int) {
 
 void Bartender::showDrink( QListViewItem *item) {
     if(item==NULL) return;
-    dbFile.at(0);
     Show_Drink *showDrinks;
     QString myDrink=item->text(0);
     showDrinks = new Show_Drink(this, myDrink, TRUE);
-    QTextStream t( &dbFile);
 
-    QString s, s2;
-    while ( !t.eof()) {
-        s = t.readLine();
-        if(s.find( myDrink, 0, TRUE) != -1) {
-            for(int i=0;s2.find( "#", 0, TRUE) == -1;i++) {
-                s2 = t.readLine();
-                if(s2.find("#",0,TRUE) == -1 || dbFile.atEnd() ) {
-//                    odebug << s2 << oendl; 
-                    showDrinks->MultiLineEdit1->append(s2);
-                }
-                if( dbFile.atEnd() ) break;
-            }
-        }
+    DrinkList::Iterator it = drinkDB.findDrink(myDrink);
+    if(it != drinkDB.getEnd()) {
+        showDrinks->MultiLineEdit1->setText((*it).getIngredients());
+    
+        connect(showDrinks->editDrinkButton, SIGNAL(clicked()), this, SLOT(doEdit()));
+        QPEApplication::execDialog( showDrinks );
     }
-    QPEApplication::execDialog( showDrinks );
 
-    if(showDrinks ->result() ==0) {
-       doEdit();
-    }
     delete showDrinks;
 }
 
 void Bartender::askSearch() {
     switch ( QMessageBox::warning(this,tr("Find"),tr("Search by drink name\n")+
-                                  "\nor alcohol ?"
-                                  ,tr("Drink Name"),tr("Alcohol"),0,0,1) ) {
+                                  "\nor ingredient ?"
+                                  ,tr("Drink Name"),tr("Ingredient"),0,0,1) ) {
       case 0:
           doSearchByName();
           break;
       case 1:
-          doSearchByDrink();
+          doSearchByIngredient();
           break;
     };
 }
@@ -250,7 +246,7 @@ void Bartender::doSearchByName() {
         searchForDrinkName = fileDlg->LineEdit1->text();
         QListViewItemIterator it( DrinkView );
         for ( ; it.current(); ++it ) {
-            if ( it.current()->text(0).find( searchForDrinkName, 0, TRUE) != -1 ) {
+            if ( it.current()->text(0).find( searchForDrinkName, 0, FALSE) != -1 ) {
 //                 odebug << it.current()->text(0) << oendl; 
                 searchList.append(it.current()->text(0));
             }
@@ -263,39 +259,32 @@ void Bartender::doSearchByName() {
     delete fileDlg;
 }
 
-void Bartender::doSearchByDrink() {
+void Bartender::doSearchByIngredient() {
 //    if( DrinkView->currentItem() == NULL) return;
     QStringList searchList;
-    QString searchForDrinkName, lastDrinkName, tempName;
+    QString searchForIngredient, lastDrinkName, lastDrinkIngredients;
 
     InputDialog *fileDlg;
-    fileDlg = new InputDialog(this,tr("Find by Alcohol"),TRUE, 0);
+    fileDlg = new InputDialog(this,tr("Find by Ingredient"),TRUE, 0);
     fileDlg->exec();
     if( fileDlg->result() == 1 ) {
-        searchForDrinkName = fileDlg->LineEdit1->text();
+        searchForIngredient = fileDlg->LineEdit1->text();
 
-        dbFile.at(0);
-        QTextStream t( &dbFile);
-
-        QString s, s2;
-        while ( !t.eof()) {
-            s = t.readLine();
-            if(s.find("#",0,TRUE) != -1) {
-                lastDrinkName=s.right(s.length()-2);
-//                odebug << "last drink name "+lastDrinkName << oendl; 
-            }
-            else if( s.find( searchForDrinkName ,0, FALSE) != -1 && lastDrinkName != tempName ) {
-//                odebug << "appending "+lastDrinkName << oendl; 
-                searchList.append( lastDrinkName);
-                tempName=lastDrinkName;
-            }
-//            if( dbFile.atEnd() ) break;
-
-        } //oef
+        DrinkList::Iterator it = drinkDB.getBegin();
+        while ( it != drinkDB.getEnd() ) {
+            lastDrinkName = (*it).getName();
+            lastDrinkIngredients = (*it).getIngredients();
+            
+            if( lastDrinkIngredients.find( searchForIngredient ,0, FALSE) != -1 )
+                searchList.append( lastDrinkName );
+            
+            ++it;
+        }
+        
         if(searchList.count() >0)
             showSearchResult(searchList);
         else
-            QMessageBox::message(tr("Search"),tr("Sorry no results for\n")+ searchForDrinkName);
+            QMessageBox::message(tr("Search"),tr("Sorry no results for\n")+ searchForIngredient);
     }
     delete fileDlg;
 }
@@ -324,63 +313,39 @@ delete  searchDlg;
 }
 
 void Bartender::doEdit() {
-   if(DrinkView->currentItem() == NULL) {
-    fileNew();
-   }
+    if(DrinkView->currentItem() == NULL) {
+      fileNew();
+      return;
+    }
 
-   QString myDrink;
+    QString myDrink;
     myDrink= DrinkView->currentItem()->text(0);
-    dbFile.at(0);
-    int foundAt=0;
+    
     New_Drink *newDrinks;
-    newDrinks = new New_Drink(this,"Edit Drink....", TRUE);
+    newDrinks = new New_Drink(this,"Edit Drink", TRUE);
     QString newName, newIng;
     QPEApplication::showDialog( newDrinks );
-    QTextStream t( &dbFile);
 
-    QString s, s2;
-    while ( !t.eof()) {
-        s = t.readLine();
-        if(s.find( myDrink, 0, TRUE) != -1) {
-            foundAt = dbFile.at() - (s.length()+1);
-            for(int i=0;s2.find( "#", 0, TRUE) == -1;i++) {
-                s2 = t.readLine();
-                if(s2.find("#",0,TRUE) == -1 || dbFile.atEnd() ) {
-//                    odebug << s2 << oendl; 
-                    newDrinks->MultiLineEdit1->append(s2);
-                    newDrinks->LineEdit1->setText(myDrink);
-                }
-                if( dbFile.atEnd() ) break;
+    DrinkList::Iterator drinkItem = drinkDB.findDrink(myDrink);
+    if(drinkItem != drinkDB.getEnd()) {
+        newDrinks->LineEdit1->setText((*drinkItem).getName());
+        newDrinks->MultiLineEdit1->setText((*drinkItem).getIngredients());
+        
+        newDrinks->exec();
+        newName = newDrinks->LineEdit1->text();
+        newIng= newDrinks->MultiLineEdit1->text();
+    
+        if( newDrinks ->result() == 1 ) {
+            (*drinkItem).setName(newName);
+            (*drinkItem).setIngredients(newIng);
+            if(!drinkDB.writeChanges()) {
+                QMessageBox::message( (tr("Note")), (tr("Failed to write to drink database!\n")) );
             }
+            fillList();
         }
     }
-    newDrinks->exec();
-    newName = newDrinks->LineEdit1->text();
-    newIng= newDrinks->MultiLineEdit1->text();
-
-    if( newDrinks ->result() == 1 ) {
-        if(dbFile.isOpen())
-            dbFile.close();
-        if ( !dbFile.open( IO_ReadWrite )) {
-            QMessageBox::message( (tr("Note")), (tr("Drink database not opened sucessfully.\n")) );
-            return;
-        }
-        int fd = dbFile.handle();
-        lseek( fd, foundAt, SEEK_SET);
-
-//        dbFile.at( foundAt);
-#warning FIXME problems with editing drinks db
-        ////////// FIXME write to user file
-        QString newDrink="# "+newName+"\n";
-        newDrink.append(newIng+"\n");
-        odebug << "writing "+newDrink << oendl; 
-        dbFile.writeBlock( newDrink.latin1(), newDrink.length());
-        clearList();
-
-        dbFile.flush();
-
-        initDrinkDb();
-    }
+    
+    delete newDrinks;
 }
 
 void Bartender::clearList() {
@@ -413,7 +378,7 @@ void Bartender::fileMenuActivated( int item) {
 
           break;
       case -6://        alcohol -6
-          doSearchByDrink();
+          doSearchByIngredient();
 
           break;
 

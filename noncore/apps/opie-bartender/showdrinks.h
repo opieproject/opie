@@ -33,12 +33,12 @@ public:
     ~Show_Drink();
 
     QMultiLineEdit* MultiLineEdit1;
+    QPushButton *editDrinkButton;
 public slots:
     void slotEditDrink();
 protected:
     QGridLayout* Layout5;
     QString drinkName;
-    QPushButton *editDrinkButton;
 };
 
 #endif // SHOW_DRINK_H
