@@ -4,6 +4,7 @@ HEADERS         = defines.h \
                editaccounts.h \
                composemail.h \
                accountview.h \
+               accountitem.h \
                mainwindow.h \
                viewmail.h \
                viewmailbase.h \
@@ -18,6 +19,7 @@ SOURCES         = main.cpp \
                opiemail.cpp \
                mainwindow.cpp \
                accountview.cpp \
+               accountitem.cpp \
                composemail.cpp \
                addresspicker.cpp \
                editaccounts.cpp \

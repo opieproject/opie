@@ -9,6 +9,7 @@
 #include <qaction.h>
 #include <qapplication.h>
 #include <libmailwrapper/mailtypes.h>
+#include <libmailwrapper/abstractmail.h>
 #include "mailistviewitem.h"
 #include "viewmail.h"
 #include "selectstore.h"
