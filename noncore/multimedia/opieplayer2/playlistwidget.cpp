@@ -795,17 +795,16 @@ void PlayListWidget::writeCurrentM3u() {
   m3uList = new Om3u( currentPlaylist, IO_ReadWrite | IO_Truncate );
   if( d->selectedFiles->first()) {
 
-  do {
-    //      qDebug( "add writeCurrentM3u " +d->selectedFiles->current()->file());
-    m3uList->add( d->selectedFiles->current()->file() );
+      do {
+          //      qDebug( "add writeCurrentM3u " +d->selectedFiles->current()->file());
+          m3uList->add( d->selectedFiles->current()->file() );
+      }
+      while ( d->selectedFiles->next() );
+      //    qDebug( "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" );
+      m3uList->write();
+      m3uList->close();
   }
-  while ( d->selectedFiles->next() );
-  //    qDebug( "<<<<<<<<<<<<>>>>>>>>>>>>>>>>>" );
-  m3uList->write();
-  m3uList->close();
-
   delete m3uList;
-  }
   
 }
 
