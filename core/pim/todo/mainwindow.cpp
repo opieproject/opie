@@ -296,7 +296,6 @@ QPopupMenu* MainWindow::contextMenu( int , bool recur ) {
     return menu;
 }
 QPopupMenu* MainWindow::options() {
-    owarn << "Options" << oendl;
     return m_options;
 }
 QPopupMenu* MainWindow::edit() {
@@ -315,14 +314,12 @@ OPimTodoAccess::List MainWindow::sorted( bool asc, int sortOrder ) {
     if ( m_curCat == QWidget::tr("Unfiled") )
         cat = -1;
 
-    owarn << " Category " << cat << " " << m_curCat << oendl;
-
-    int filter = 1;
+    int filter = OPimTodoAccess::FilterCategory;
 
     if (!m_completed )
-        filter |= 4;
+        filter |= OPimTodoAccess::DoNotShowCompleted;
     if (m_overdue)
-        filter |= 2;
+        filter |= OPimTodoAccess::OnlyOverDue;
 
     return m_todoMgr.sorted( asc, sortOrder, filter, cat );
 }
@@ -374,7 +371,6 @@ void MainWindow::closeEvent( QCloseEvent* e ) {
     }
     bool quit = false;
     if ( m_todoMgr.saveAll() ){
-        owarn << "saved" << oendl;
         quit = true;
     }else {
 	if ( QMessageBox::critical( this, QWidget::tr("Out of space"),
@@ -537,7 +533,6 @@ void MainWindow::setCategory( int c) {
     if ( c <= 0 ) return;
 
 
-    owarn << "Iterating over cats " << c << oendl;
     for ( unsigned int i = 1; i < m_catMenu->count(); i++ )
         m_catMenu->setItemChecked(i, c == (int)i );
 
@@ -683,7 +678,6 @@ void MainWindow::slotShow( int uid ) {
     if ( uid == 0 ) return;
 
 
-    owarn << "slotShow" << oendl;
     currentShow()->slotShow( event( uid ) );
     m_stack->raiseWidget( currentShow()->widget() );
 }
@@ -742,7 +736,6 @@ void MainWindow::setReadAhead( uint count ) {
         m_todoMgr.todoDB()->setReadAhead( count );
 }
 void MainWindow::slotQuickEntered() {
-    owarn << "entered" << oendl;
     OPimTodo todo = quickEditor()->todo();
     if (todo.isEmpty() )
         return;
@@ -789,7 +782,6 @@ void MainWindow::slotComplete( const OPimTodo& todo ) {
         QDate date;
         if ( to2.recurrence().nextOcurrence( to2.dueDate().addDays(1), date ) ) {
             int dayDiff = to.dueDate().daysTo( date );
-            owarn << "day diff is " << dayDiff << oendl;
             QDate inval;
             /* generate a new uid for the old record */
             to.setUid( 1 );
@@ -953,7 +945,6 @@ namespace {
     void addAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
         OPimNotifyManager::Alarms::ConstIterator it;
         for ( it = als.begin(); it != als.end(); ++it ) {
-            owarn << "Adding alarm for " << (*it).dateTime().toString() << oendl;
             AlarmServer::addAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
         }
 
@@ -961,7 +952,6 @@ namespace {
     void removeAlarms( const OPimNotifyManager::Alarms& als, int uid ) {
         OPimNotifyManager::Alarms::ConstIterator it;
         for ( it = als.begin(); it != als.end(); ++it ) {
-            owarn << "Removinf alarm for " << (*it).dateTime().toString() << oendl;
             AlarmServer::deleteAlarm( (*it).dateTime(), "QPE/Application/todolist", "alarm(QDateTime,int)", uid );
         }
     }

@@ -37,10 +37,6 @@ using namespace Todo;
 TodoManager::TodoManager( QObject *obj )
     : QObject( obj ) {
     m_db = 0l;
-    QTime time;
-    time.start();
-    int el = time.elapsed();
-    owarn << "QTimer for loading " << el/1000 << oendl;
 }
 TodoManager::~TodoManager() {
     delete m_db;
@@ -49,7 +45,6 @@ OPimTodo TodoManager::event(int uid ) {
     return m_db->find( uid );
 }
 void TodoManager::updateList() {
-    owarn << "update lists" << oendl;
     m_list = m_db->allRecords();
 }
 OPimTodoAccess::List TodoManager::list() const{
@@ -59,7 +54,7 @@ OPimTodoAccess::List TodoManager::sorted( bool asc, int so, int f, int cat ) {
     return m_db->sorted( asc, so, f, cat );
 }
 OPimTodoAccess::List::Iterator TodoManager::overDue() {
-    int filter = 2 | 1;
+    int filter = Opie::OPimTodoAccess::FilterCategory | Opie::OPimTodoAccess::OnlyOverDue;
     m_list = m_db->sorted(m_asc, m_sortOrder, filter,  m_ca );
     m_it = m_list.begin();
     return m_it;
