@@ -146,6 +146,10 @@ sous ce compte, essayez plus tard.</translation>
         <source>Bookmarks</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Choose a bookmark that you would like to open</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>KVNCConnDlgBase</name>
@@ -236,6 +240,46 @@ sous ce compte, essayez plus tard.</translation>
     <message>
         <source>Copy rectangle encoding</source>
         <translation type="unfinished">Copier l&apos;encodage rectangle</translation>
+    </message>
+    <message>
+        <source>The password of the VNC server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Toggle obscuring the password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The name of the VNC server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The host name of the VNC server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The display number of the VNC server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay between requesting updates from the server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Request that the VNC server transfer 8 bit color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Allow other users to connect to the VNC server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Scale the remote display to fit on the PDA (Slow)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable transmiting identical rectangles as references to existing data</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

@@ -112,11 +112,11 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Ordina Contatti</translation>
+        <translation type="obsolete">Ordina Contatti</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Spazio Esaurito</translation>
+        <translation type="obsolete">Spazio Esaurito</translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -124,7 +124,7 @@ neccessary startup files.
 
 Free up some space before
 entering data!</source>
-        <translation>Non c&apos;è abbastanza spazio per creare
+        <translation type="obsolete">Non c&apos;è abbastanza spazio per creare
 i necessari file di avvio.
 
 Liberare dello spazio prima di
@@ -249,6 +249,100 @@ Uscire comunque?</translation>
     <message>
         <source>Cards</source>
         <translation>Cartellini</translation>
+    </message>
+    <message>
+        <source>Find Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search pattern !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list. Wrap around now.. !</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigDlg_Base</name>
+    <message>
+        <source>MyDialog1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Regular Expressions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Wildcards (*,?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case Sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signal Wrap Around</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer QT-Mail </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer Opie-Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notice: QT-Mail is just 
+provided in the SHARP 
+default ROM. Opie-Mail 
+is provided free !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1356,6 +1450,10 @@ Uscire comunque?</translation>
     <message>
         <source>Kyrgystan</source>
         <translation>Kyrgystan</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

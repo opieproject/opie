@@ -73,6 +73,10 @@ Zapiram predvajalnik.</translation>
         <source>, Length: </source>
         <translation>, dolžina:</translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>
@@ -137,7 +141,7 @@ Zapiram predvajalnik.</translation>
     </message>
     <message>
         <source>Export playlist to m3u</source>
-        <translation>Izvozi seznam v m3u</translation>
+        <translation type="obsolete">Izvozi seznam v m3u</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -225,7 +229,7 @@ naslednjič, ko poženete program.</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation>Shrani seznam</translation>
+        <translation type="obsolete">Shrani seznam</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
@@ -260,6 +264,10 @@ ta seznam?</translation>
     <message>
         <source>Save m3u Playlist </source>
         <translation>Shrani m3u seznam</translation>
+    </message>
+    <message>
+        <source>Skins</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

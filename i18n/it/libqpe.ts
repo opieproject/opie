@@ -873,12 +873,28 @@ riprovare.</translation>
         <source>Internal Memory</source>
         <translation>Memoria Interna</translation>
     </message>
+    <message>
+        <source>MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
         <translation>Nessuna</translation>
+    </message>
+</context>
+<context>
+    <name>TimeZoneSelector</name>
+    <message>
+        <source>citytime executable not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to choose the time zones,
+please install citytime.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

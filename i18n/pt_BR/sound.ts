@@ -54,10 +54,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Key_Escape</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Key_Space</source>
         <translation type="unfinished"></translation>
     </message>

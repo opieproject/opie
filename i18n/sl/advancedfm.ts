@@ -122,7 +122,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="obsolete">Zamenjaj imenik</translation>
+        <translation type="unfinished">Zamenjaj imenik</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -208,6 +208,10 @@ in je licencirano pod GPL</translation>
     <message>
         <source>Add To Documents</source>
         <translation>Dodaj med dokumente</translation>
+    </message>
+    <message>
+        <source>Actions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

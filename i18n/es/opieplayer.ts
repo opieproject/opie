@@ -73,6 +73,10 @@ Cerrando reproductor.</translation>
         <source>, Length: </source>
         <translation>, Longitud: </translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>
@@ -137,7 +141,7 @@ Cerrando reproductor.</translation>
     </message>
     <message>
         <source>Export playlist to m3u</source>
-        <translation>Exportar lista a m3u</translation>
+        <translation type="obsolete">Exportar lista a m3u</translation>
     </message>
     <message>
         <source>Open File or URL</source>
@@ -225,7 +229,7 @@ la próxima vez que la inicie.</translation>
     </message>
     <message>
         <source>Save Playlist</source>
-        <translation>Guardar lista</translation>
+        <translation type="obsolete">Guardar lista</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
@@ -260,6 +264,10 @@ borrar esta lista?</translation>
     <message>
         <source>Save m3u Playlist </source>
         <translation>Guardar lista m3u</translation>
+    </message>
+    <message>
+        <source>Skins</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -68,6 +68,10 @@ Closing player now.</source>
         <source>, Length: </source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Volume</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>
@@ -128,10 +132,6 @@ Closing player now.</source>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Export playlist to m3u</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -217,10 +217,6 @@ the next time you start it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save Playlist</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Remove Playlist?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -251,6 +247,10 @@ this playlist?</source>
     </message>
     <message>
         <source>Save m3u Playlist </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Skins</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -679,7 +679,7 @@ Release Date: July 04, 2002
 This product is licensed under GPL. It is freely distributable. If you want to get the latest version and also the source code, please visit the web site.
 
 http://qtopia.sitebest.com</source>
-        <translation>Opie Sheet
+        <translation type="obsolete">Opie Sheet
 Hoja de Cálculo de Opie
 QWDC Beta Winner (as Sheet/Qt)
 

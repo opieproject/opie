@@ -132,6 +132,22 @@ resume?(new line)
         <source>Set the icon size in pixel</source>
         <translation>Imposta la dimensione dell&apos;icona in pixel</translation>
     </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>todayconfig</name>

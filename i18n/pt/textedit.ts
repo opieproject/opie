@@ -53,30 +53,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
 </context>
 <context>
     <name>FontDialog</name>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Font Dialog</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Font Style</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="obsolete"></translation>
-    </message>
 </context>
 <context>
     <name>TextEdit</name>
@@ -119,14 +95,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
     <message>
         <source>Zoom out</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bold</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Italic</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Wrap lines</source>
@@ -181,26 +149,6 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unnamed</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Permissions</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>FontDialog</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -213,29 +161,20 @@ from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Advanced features</source>
+        <source>Advanced Features</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt; file.&lt;BR&gt;Open &lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="obsolete"></translation>
+        <source>Prompt on Exit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Text Edit</source>
-        <translation type="obsolete"></translation>
+        <source>Always open linked file</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Write Failed</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Do you really want&lt;BR&gt;to &lt;B&gt;delete&lt;/B&gt; the current file
-from the disk?&lt;BR&gt;This is &lt;B&gt;irreversable!!&lt;/B&gt;</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Text Edit is copyright&lt;BR&gt;2000 Trolltech AS, and&lt;BR&gt;2002 by &lt;B&gt;L. J. Potter &lt;BR&gt;llornkcor@handhelds.org&lt;/B&gt;&lt;BR&gt;and is licensed under the GPL</source>
-        <translation type="obsolete"></translation>
+        <source>File Permissions</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

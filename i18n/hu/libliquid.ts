@@ -46,10 +46,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Draw liquid window title bars</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Make toolbar buttons appear flat</source>
         <translation type="unfinished"></translation>
     </message>
@@ -60,16 +56,6 @@
 </context>
 <context>
     <name>QObject</name>
-    <message>
-        <source>Liquid</source>
-        <comment>name</comment>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>High Performance Liquid style by Mosfet</source>
-        <comment>description</comment>
-        <translation type="obsolete"></translation>
-    </message>
 </context>
 <context>
     <name>Styles</name>

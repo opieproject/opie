@@ -121,7 +121,7 @@
     </message>
     <message>
         <source>Change Directory</source>
-        <translation type="obsolete">Changer de répertoire</translation>
+        <translation type="unfinished">Changer de répertoire</translation>
     </message>
     <message>
         <source>Execute</source>
@@ -201,6 +201,10 @@ and is licensed by the GPL</source>
     </message>
     <message>
         <source>Add To Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Actions</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -288,10 +288,6 @@ edytuje kategorie.</translation>
         <translation>Blad przenoszenia dokumentu.</translation>
     </message>
     <message>
-        <source>File does not exist.</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Hard Disk</source>
         <translation type="unfinished"></translation>
     </message>
@@ -364,6 +360,10 @@ edytuje kategorie.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use custom rotation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -869,11 +869,27 @@ Zwolnij wiecej pamieci</translation>
         <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeZoneSelector</name>
+    <message>
+        <source>citytime executable not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to choose the time zones,
+please install citytime.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

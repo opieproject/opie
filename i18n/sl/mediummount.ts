@@ -10,7 +10,7 @@
     <name>MediumGlobalWidget</name>
     <message>
         <source>If a medium gets inserted into this device Opie tries to search the medium for Dcouments. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation>Če vstavite medij Opie poizkusi najti dokumente na tem mediju. Na velikih medijih to lahko poteka nekaj časa. Lahko nastavite, če naj Opie pregleda dokumente globalno ali na stopnji medija. Lahko pa tudi nastavite vsak medij posebej.</translation>
+        <translation type="obsolete">Če vstavite medij Opie poizkusi najti dokumente na tem mediju. Na velikih medijih to lahko poteka nekaj časa. Lahko nastavite, če naj Opie pregleda dokumente globalno ali na stopnji medija. Lahko pa tudi nastavite vsak medij posebej.</translation>
     </message>
     <message>
         <source>Enable medium checking</source>
@@ -82,6 +82,10 @@
     <message>
         <source>Always check this medium</source>
         <translation>Vedno preveri ta medij</translation>
+    </message>
+    <message>
+        <source>Configure this medium. The changes will go into effect when the application get&apos;s closed. To update the Document Tab you need to removeand insert this medium.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

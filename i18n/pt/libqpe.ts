@@ -149,10 +149,6 @@ as categorias.</translation>
         <translation type="obsolete">Ver</translation>
     </message>
     <message>
-        <source>Create a new Document</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Close the File Selector</source>
         <translation type="unfinished"></translation>
     </message>
@@ -186,10 +182,6 @@ as categorias.</translation>
     <message>
         <source>Name</source>
         <translation>Nome</translation>
-    </message>
-    <message>
-        <source>There are no files in this directory.</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 <context>
@@ -260,14 +252,6 @@ as categorias.</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete Icon and leave file</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Icon deletion failed.</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Copy of </source>
         <translation>Copia de</translation>
     </message>
@@ -286,10 +270,6 @@ as categorias.</translation>
     <message>
         <source>Moving Document failed.</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>File does not exist.</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -331,10 +311,6 @@ as categorias.</translation>
         <translation>Apagar</translation>
     </message>
     <message>
-        <source>Del Icon</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Copy</source>
         <translation>Copia</translation>
     </message>
@@ -364,6 +340,10 @@ as categorias.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use custom rotation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -860,11 +840,27 @@ Free some memory and try again.</source>
         <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeZoneSelector</name>
+    <message>
+        <source>citytime executable not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to choose the time zones,
+please install citytime.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

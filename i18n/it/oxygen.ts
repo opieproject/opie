@@ -3,36 +3,12 @@
 <context>
     <name>CalcDlg</name>
     <message>
-        <source>Calculations</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Molweight</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Formula:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Calculate</source>
         <translation>Calcola</translation>
     </message>
     <message>
         <source>Clear</source>
         <translation>Cancella</translation>
-    </message>
-    <message>
-        <source>Result:</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Elemental composition (%):</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Nernst</source>
-        <translation type="obsolete"></translation>
     </message>
     <message>
         <source>Form1</source>

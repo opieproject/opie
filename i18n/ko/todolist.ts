@@ -1,20 +1,299 @@
 <!DOCTYPE TS><TS>
 <defaultcodec>iso8859-1</defaultcodec>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <source>New Task</source>
+        <translation type="unfinished">새 할일</translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">할일 편집</translation>
+    </message>
+    <message>
+        <source>View Task</source>
+        <translation type="unfinished">할일 보기</translation>
+    </message>
+    <message>
+        <source>Delete...</source>
+        <translation type="unfinished">지우기...</translation>
+    </message>
+    <message>
+        <source>Delete all...</source>
+        <translation type="unfinished">모두 지우기...</translation>
+    </message>
+    <message>
+        <source>Delete completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Duplicate</source>
+        <translation type="unfinished">복사 하기</translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">무선 전송</translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished">찾기</translation>
+    </message>
+    <message>
+        <source>Completed tasks</source>
+        <translation type="unfinished">성취한 일들을 표시</translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation type="unfinished">마감일을 표시</translation>
+    </message>
+    <message>
+        <source>Data</source>
+        <translation type="unfinished">데이타</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">분류</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation type="unfinished">옵션들</translation>
+    </message>
+    <message>
+        <source>Show only over due</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New from template</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished">모든 분류</translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished">자리 부족</translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
+        <translation type="unfinished">수정된 데이타를 저장할수 
+없었습니다.
+자리를 비우시고 
+다시 해보시기 바랍니다.
+
+그래도 끝낼까요?</translation>
+    </message>
+    <message>
+        <source>Todo</source>
+        <translation type="unfinished">할일</translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished">현제 싱크 중이므로 데이타 편집 불가</translation>
+    </message>
+    <message>
+        <source>all tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>all completed tasks?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;%1 new tasks arrived.&lt;p&gt;Would you like to add them to your Todolist?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>NewTaskDialog</name>
     <message>
         <source>Todo List</source>
-        <translation>할일 목록</translation>
+        <translation type="obsolete">할일 목록</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation type="unfinished">새 할일</translation>
+        <translation type="obsolete">새 할일</translation>
+    </message>
+</context>
+<context>
+    <name>OTaskEditor</name>
+    <message>
+        <source>Overview</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Priority:</source>
+        <source>Description</source>
+        <translation type="unfinished">설명</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reminders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X-Ref</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurrance</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Enter Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished">할일 편집</translation>
+    </message>
+</context>
+<context>
+    <name>TableView</name>
+    <message>
+        <source>C.</source>
+        <translation type="unfinished">成</translation>
+    </message>
+    <message>
+        <source>Prior.</source>
+        <translation type="unfinished">우선순위</translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">설명</translation>
+    </message>
+    <message>
+        <source>Deadline</source>
+        <translation type="unfinished">마감</translation>
+    </message>
+    <message>
+        <source>Table View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> day(s)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAdvanced</name>
+    <message>
+        <source>Form2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postponed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintainer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintain Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Responsible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Done By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coordinating</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAlarms</name>
+    <message>
+        <source>Form3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorOverView</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -38,51 +317,151 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Category:</source>
+        <source>Progress</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>&amp;Completed</source>
+        <source>0 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>D&amp;ue</source>
+        <source>20 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>1 Jan 2001</source>
+        <source>40 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Summary:</source>
+        <source>60 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Progress:</source>
+        <source>80 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>0%</source>
+        <source>100 %</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>20%</source>
+        <source>Due Date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>40%</source>
+        <source>1 Januar 2002</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>60%</source>
+        <source>Start Date:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>80%</source>
+        <source>1 Januar 2001</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>100%</source>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>work on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>buy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>organize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>get</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished">분류</translation>
+    </message>
+    <message>
+        <source>Enable Recurrance</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorOverViewImpl</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">할일 목록</translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialog</name>
+    <message>
+        <source>Template Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateDialogImpl</name>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New Template %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TemplateEditor</name>
+    <message>
+        <source>Configure Templates</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -90,82 +469,82 @@
     <name>TodoTable</name>
     <message>
         <source>C.</source>
-        <translation>成</translation>
+        <translation type="obsolete">成</translation>
     </message>
     <message>
         <source>Prior.</source>
-        <translation>우선순위</translation>
+        <translation type="obsolete">우선순위</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>설명</translation>
+        <translation type="obsolete">설명</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>정렬 안됨</translation>
+        <translation type="obsolete">정렬 안됨</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>모두</translation>
+        <translation type="obsolete">모두</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation>마감</translation>
+        <translation type="obsolete">마감</translation>
     </message>
 </context>
 <context>
     <name>TodoWindow</name>
     <message>
         <source>Todo</source>
-        <translation>할일</translation>
+        <translation type="obsolete">할일</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>자리 부족</translation>
+        <translation type="obsolete">자리 부족</translation>
     </message>
     <message>
         <source>Unable to create startup files
 Free up some space
 before you enter any data</source>
-        <translation>시작 파일들을 만들수 없습니다.
+        <translation type="obsolete">시작 파일들을 만들수 없습니다.
 정보를 입력하기 전에 
 자리를 비워두시기 바랍니다.</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>새 할일</translation>
+        <translation type="obsolete">새 할일</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>무선 전송</translation>
+        <translation type="obsolete">무선 전송</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>찾기</translation>
+        <translation type="obsolete">찾기</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation>성취한 일들을 표시</translation>
+        <translation type="obsolete">성취한 일들을 표시</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>현제 싱크 중이므로 데이타 편집 불가</translation>
+        <translation type="obsolete">현제 싱크 중이므로 데이타 편집 불가</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>할일 편집</translation>
+        <translation type="obsolete">할일 편집</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation>모든 분류</translation>
+        <translation type="obsolete">모든 분류</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>정리 안된것들</translation>
+        <translation type="obsolete">정리 안된것들</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>자리 부족</translation>
+        <translation type="obsolete">자리 부족</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -174,7 +553,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation>수정된 데이타를 저장할수 
+        <translation type="obsolete">수정된 데이타를 저장할수 
 없었습니다.
 자리를 비우시고 
 다시 해보시기 바랍니다.
@@ -183,43 +562,43 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation>마감일을 표시</translation>
+        <translation type="obsolete">마감일을 표시</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation>데이타</translation>
+        <translation type="obsolete">데이타</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation>글꼴</translation>
+        <translation type="obsolete">글꼴</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>할일 보기</translation>
+        <translation type="obsolete">할일 보기</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>지우기...</translation>
+        <translation type="obsolete">지우기...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>모두 지우기...</translation>
+        <translation type="obsolete">모두 지우기...</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>복사 하기</translation>
+        <translation type="obsolete">복사 하기</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>분류</translation>
+        <translation type="obsolete">분류</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>옵션들</translation>
+        <translation type="obsolete">옵션들</translation>
     </message>
     <message>
         <source>all tasks</source>
-        <translation>모든 할일</translation>
+        <translation type="obsolete">모든 할일</translation>
     </message>
 </context>
 </TS>

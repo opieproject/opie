@@ -232,7 +232,7 @@ To grant access to the other users, set the appropriate rights (a+w)
 on that file or ask your systemadministator for that favor.
 
 To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation>Va a generar el archivo de puntuaciones
+        <translation type="obsolete">Va a generar el archivo de puntuaciones
 &apos;%1&apos;
 para su máquina, que debería usarse por todo el sistema.
 
@@ -250,7 +250,7 @@ Ask your systemadministrator for granting you access to that file,
 by setting the appropriate rights (a+w) on it.
 
 To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation>Esta usando un archivo de puntuación privado, lo que suele ocurrir
+        <translation type="obsolete">Esta usando un archivo de puntuación privado, lo que suele ocurrir
 porque no tiene permiso de escritura en el archivo de puntuación global.
 
 Pida a su administrador de sistema que le dé acceso a ese archivo,
@@ -264,7 +264,7 @@ Para usar un directorio o archivo diferente para las puntuaciones, especifíquel
     </message>
     <message>
         <source>                          </source>
-        <translation>                          </translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

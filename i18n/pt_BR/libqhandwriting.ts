@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation>Selecione um caractere da lista. A área de escrita na esquerda mostra o caractere de referência. Pratique a escrita na área da direita.</translation>
+        <translation type="obsolete">Selecione um caractere da lista. A área de escrita na esquerda mostra o caractere de referência. Pratique a escrita na área da direita.</translation>
     </message>
     <message>
         <source>Matched: </source>
@@ -36,6 +36,21 @@
     <message>
         <source>Similar to: </source>
         <translation>Semelhante a: </translation>
+    </message>
+    <message>
+        <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No match</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Handwriting</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -60,12 +75,31 @@
         <source>Default</source>
         <translation>Padrão</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIMPenInput</name>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
         <translation>Entre o novo caractere</translation>
+    </message>
+    <message>
+        <source>Character:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

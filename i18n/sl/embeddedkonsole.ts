@@ -190,6 +190,14 @@
         <source>Command List</source>
         <translation>Seznam ukazov</translation>
     </message>
+    <message>
+        <source>Wrap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Beep</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PlayListSelection</name>

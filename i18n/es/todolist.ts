@@ -59,7 +59,7 @@
     </message>
     <message>
         <source>Show over due</source>
-        <translation>Mostrar fuera de plazo</translation>
+        <translation type="obsolete">Mostrar fuera de plazo</translation>
     </message>
     <message>
         <source>View</source>
@@ -119,91 +119,126 @@ e inténtelo de nuevo.
         <source>New Tasks</source>
         <translation>Nuevas tareas</translation>
     </message>
+    <message>
+        <source>Show only over due</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NewTaskDialog</name>
     <message>
         <source>Todo List</source>
-        <translation>Lista tareas</translation>
+        <translation type="obsolete">Lista tareas</translation>
     </message>
 </context>
 <context>
     <name>NewTaskDialogBase</name>
     <message>
         <source>New Task</source>
-        <translation>Nueva Tarea</translation>
+        <translation type="obsolete">Nueva Tarea</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Categoría:</translation>
+        <translation type="obsolete">Categoría:</translation>
     </message>
     <message>
         <source>Summary:</source>
-        <translation>Sumario:</translation>
+        <translation type="obsolete">Sumario:</translation>
     </message>
     <message>
         <source>&amp;Completed</source>
-        <translation>&amp;Completada</translation>
+        <translation type="obsolete">&amp;Completada</translation>
     </message>
     <message>
         <source>D&amp;ue</source>
-        <translation>&amp;Límite</translation>
+        <translation type="obsolete">&amp;Límite</translation>
     </message>
     <message>
         <source>1 Jan 2001</source>
-        <translation>1 Ene 2001</translation>
+        <translation type="obsolete">1 Ene 2001</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Prioridad:</translation>
+        <translation type="obsolete">Prioridad:</translation>
     </message>
     <message>
         <source>1 - Very High</source>
-        <translation>1 - Muy alta</translation>
+        <translation type="obsolete">1 - Muy alta</translation>
     </message>
     <message>
         <source>2 - High</source>
-        <translation>2 - Alta</translation>
+        <translation type="obsolete">2 - Alta</translation>
     </message>
     <message>
         <source>3 - Normal</source>
-        <translation>3 - Normal</translation>
+        <translation type="obsolete">3 - Normal</translation>
     </message>
     <message>
         <source>4 - Low</source>
-        <translation>4 - Baja</translation>
+        <translation type="obsolete">4 - Baja</translation>
     </message>
     <message>
         <source>5 - Very Low</source>
-        <translation>5 - Muy baja</translation>
+        <translation type="obsolete">5 - Muy baja</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Progreso:</translation>
+        <translation type="obsolete">Progreso:</translation>
     </message>
     <message>
         <source>0%</source>
-        <translation>0%</translation>
+        <translation type="obsolete">0%</translation>
     </message>
     <message>
         <source>20%</source>
-        <translation>20%</translation>
+        <translation type="obsolete">20%</translation>
     </message>
     <message>
         <source>40%</source>
-        <translation>40%</translation>
+        <translation type="obsolete">40%</translation>
     </message>
     <message>
         <source>60%</source>
-        <translation>60%</translation>
+        <translation type="obsolete">60%</translation>
     </message>
     <message>
         <source>80%</source>
-        <translation>80%</translation>
+        <translation type="obsolete">80%</translation>
     </message>
     <message>
         <source>100%</source>
-        <translation>100%</translation>
+        <translation type="obsolete">100%</translation>
+    </message>
+</context>
+<context>
+    <name>OTaskEditor</name>
+    <message>
+        <source>Overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
+        <translation type="unfinished">Descripción</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alarms</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reminders</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>X-Ref</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recurrance</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -211,6 +246,10 @@ e inténtelo de nuevo.
     <message>
         <source>Edit Task</source>
         <translation>Editar Tarea</translation>
+    </message>
+    <message>
+        <source>Enter Task</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -242,6 +281,226 @@ e inténtelo de nuevo.
     <message>
         <source>None</source>
         <translation>Ninguna</translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAdvanced</name>
+    <message>
+        <source>Form2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>State:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Postponed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not started</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintainer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>test</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maintain Mode:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Responsible</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Done By</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Coordinating</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAlarms</name>
+    <message>
+        <source>Form3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>empty</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorOverView</name>
+    <message>
+        <source>Form1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Priority</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 - Very High</source>
+        <translation type="unfinished">1 - Muy alta</translation>
+    </message>
+    <message>
+        <source>2 - High</source>
+        <translation type="unfinished">2 - Alta</translation>
+    </message>
+    <message>
+        <source>3 - Normal</source>
+        <translation type="unfinished">3 - Normal</translation>
+    </message>
+    <message>
+        <source>4 - Low</source>
+        <translation type="unfinished">4 - Baja</translation>
+    </message>
+    <message>
+        <source>5 - Very Low</source>
+        <translation type="unfinished">5 - Muy baja</translation>
+    </message>
+    <message>
+        <source>Progress</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>0 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>20 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>40 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>60 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>80 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>100 %</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Due Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 Januar 2002</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Start Date:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 Januar 2001</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Summary</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Complete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>work on</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>buy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>organize</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>get</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Plan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Call</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Recurrance</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorOverViewImpl</name>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished">Lista tareas</translation>
     </message>
 </context>
 <context>
@@ -285,118 +544,118 @@ e inténtelo de nuevo.
     <name>TodoTable</name>
     <message>
         <source>C.</source>
-        <translation>C.</translation>
+        <translation type="obsolete">C.</translation>
     </message>
     <message>
         <source>Prior.</source>
-        <translation>Prior.</translation>
+        <translation type="obsolete">Prior.</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Descripción</translation>
+        <translation type="obsolete">Descripción</translation>
     </message>
     <message>
         <source>Deadline</source>
-        <translation>Fecha límite</translation>
+        <translation type="obsolete">Fecha límite</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>En blanco</translation>
+        <translation type="obsolete">En blanco</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Todas</translation>
+        <translation type="obsolete">Todas</translation>
     </message>
 </context>
 <context>
     <name>TodoWindow</name>
     <message>
         <source>Todo</source>
-        <translation>Tareas</translation>
+        <translation type="obsolete">Tareas</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Sin espacio</translation>
+        <translation type="obsolete">Sin espacio</translation>
     </message>
     <message>
         <source>Unable to create startup files
 Free up some space
 before you enter any data</source>
-        <translation>Incapaz de crear ficheros
+        <translation type="obsolete">Incapaz de crear ficheros
 iniciales. Libere espacio antes
 de introducir algún dato</translation>
     </message>
     <message>
         <source>New Task</source>
-        <translation>Nueva tarea</translation>
+        <translation type="obsolete">Nueva tarea</translation>
     </message>
     <message>
         <source>Edit Task</source>
-        <translation>Editar tarea</translation>
+        <translation type="obsolete">Editar tarea</translation>
     </message>
     <message>
         <source>View Task</source>
-        <translation>Ver tarea</translation>
+        <translation type="obsolete">Ver tarea</translation>
     </message>
     <message>
         <source>Delete...</source>
-        <translation>Borrar...</translation>
+        <translation type="obsolete">Borrar...</translation>
     </message>
     <message>
         <source>Delete all...</source>
-        <translation>Borrar todo...</translation>
+        <translation type="obsolete">Borrar todo...</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation>Duplicar</translation>
+        <translation type="obsolete">Duplicar</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation>Emitir</translation>
+        <translation type="obsolete">Emitir</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Buscar</translation>
+        <translation type="obsolete">Buscar</translation>
     </message>
     <message>
         <source>Completed tasks</source>
-        <translation>Tareas completadas</translation>
+        <translation type="obsolete">Tareas completadas</translation>
     </message>
     <message>
         <source>Show Deadline</source>
-        <translation>Mostrar fecha límite</translation>
+        <translation type="obsolete">Mostrar fecha límite</translation>
     </message>
     <message>
         <source>Fonts</source>
-        <translation>Letra</translation>
+        <translation type="obsolete">Letra</translation>
     </message>
     <message>
         <source>Data</source>
-        <translation>Datos</translation>
+        <translation type="obsolete">Datos</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Categoría</translation>
+        <translation type="obsolete">Categoría</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation>Opciones</translation>
+        <translation type="obsolete">Opciones</translation>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>No puedo editar datos, estoy sincronizando</translation>
+        <translation type="obsolete">No puedo editar datos, estoy sincronizando</translation>
     </message>
     <message>
         <source>All Categories</source>
-        <translation>Todas</translation>
+        <translation type="obsolete">Todas</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation>En blanco</translation>
+        <translation type="obsolete">En blanco</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Sin espacio</translation>
+        <translation type="obsolete">Sin espacio</translation>
     </message>
     <message>
         <source>Todo was unable
@@ -405,7 +664,7 @@ Free up some space
 and try again.
 
 Quit Anyway?</source>
-        <translation>Incapaz de salvar sus
+        <translation type="obsolete">Incapaz de salvar sus
 datos. Libere algo de
 espacio e inténtelo
 de nuevo.
@@ -414,7 +673,7 @@ de nuevo.
     </message>
     <message>
         <source>all tasks</source>
-        <translation>todas las tareas</translation>
+        <translation type="obsolete">todas las tareas</translation>
     </message>
 </context>
 </TS>

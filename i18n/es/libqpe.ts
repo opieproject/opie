@@ -146,11 +146,11 @@ editando las categorías.</translation>
     <name>FileSelector</name>
     <message>
         <source>View</source>
-        <translation>Ver</translation>
+        <translation type="obsolete">Ver</translation>
     </message>
     <message>
         <source>Create a new Document</source>
-        <translation>Crear nuevo documento</translation>
+        <translation type="obsolete">Crear nuevo documento</translation>
     </message>
     <message>
         <source>Close the File Selector</source>
@@ -189,7 +189,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>There are no files in this directory.</source>
-        <translation>No hay ficheros en este directorio.</translation>
+        <translation type="obsolete">No hay ficheros en este directorio.</translation>
     </message>
 </context>
 <context>
@@ -222,7 +222,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>&amp;Find</source>
-        <translation>&amp;Buscar</translation>
+        <translation type="obsolete">&amp;Buscar</translation>
     </message>
     <message>
         <source>Category:</source>
@@ -261,11 +261,11 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Delete Icon and leave file</source>
-        <translation>Borrar icono y dejar fichero</translation>
+        <translation type="obsolete">Borrar icono y dejar fichero</translation>
     </message>
     <message>
         <source>Icon deletion failed.</source>
-        <translation>Fallo al borrar icono.</translation>
+        <translation type="obsolete">Fallo al borrar icono.</translation>
     </message>
     <message>
         <source>Copy of </source>
@@ -289,7 +289,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>File does not exist.</source>
-        <translation>El fichero no existe.</translation>
+        <translation type="obsolete">El fichero no existe.</translation>
     </message>
     <message>
         <source>Hard Disk</source>
@@ -332,7 +332,7 @@ editando las categorías.</translation>
     </message>
     <message>
         <source>Del Icon</source>
-        <translation>Borrar icono</translation>
+        <translation type="obsolete">Borrar icono</translation>
     </message>
     <message>
         <source>Copy</source>
@@ -365,6 +365,10 @@ editando las categorías.</translation>
     <message>
         <source>Beam this document to another device.</source>
         <translation>Emitir este documento a otro dispositivo.</translation>
+    </message>
+    <message>
+        <source>Use custom rotation</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -869,12 +873,28 @@ Libere memoria e intételo de nuevo.</translation>
         <source>Internal Memory</source>
         <translation>Memoria interna</translation>
     </message>
+    <message>
+        <source>MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
         <translation>Ninguno</translation>
+    </message>
+</context>
+<context>
+    <name>TimeZoneSelector</name>
+    <message>
+        <source>citytime executable not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to choose the time zones,
+please install citytime.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

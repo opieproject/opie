@@ -224,30 +224,12 @@ ali pa je v neznani obliki.</translation>
         <translation>USTAVLJENA</translation>
     </message>
     <message>
-        <source>You&apos;re going to create the highscore-file
-&apos;%1&apos;
-for your maschine, that should be used systemwide.
-
-To grant access to the other users, set the appropriate rights (a+w)
-on that file or ask your systemadministator for that favor.
-
-To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>You&apos;re using a private highscore-file, that&apos;s mostly because of
-missing write-access to the systemwide file
-&apos;%1&apos; .
-
-Ask your systemadministrator for granting you access to that file,
-by setting the appropriate rights (a+w) on it.
-
-To use a different directory or filename for the highscores,specify them in the configfile (kpacmanrc:highscoreFilePath).</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>@YY@/@MM@/@DD@</source>
         <translation>@DD@.@MM@.@YY@</translation>
+    </message>
+    <message>
+        <source>                          </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -332,10 +332,6 @@ est en train d&apos;éditer les catégories.</translation>
         <translation type="unfinished">Effacer</translation>
     </message>
     <message>
-        <source>Del Icon</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
@@ -365,6 +361,10 @@ est en train d&apos;éditer les catégories.</translation>
     </message>
     <message>
         <source>Beam this document to another device.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use custom rotation</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -861,11 +861,27 @@ Free some memory and try again.</source>
         <source>Internal Memory</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MMC Card</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TZCombo</name>
     <message>
         <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeZoneSelector</name>
+    <message>
+        <source>citytime executable not found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>In order to choose the time zones,
+please install citytime.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

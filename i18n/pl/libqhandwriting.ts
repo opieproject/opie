@@ -21,10 +21,6 @@
 <context>
     <name>HandwritingTrainer</name>
     <message>
-        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Matched: </source>
         <translation>Rozpoznano: </translation>
     </message>
@@ -34,6 +30,21 @@
     </message>
     <message>
         <source>%1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No match</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Handwriting</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -59,12 +70,31 @@
         <source>Clear</source>
         <translation>Wyczysc</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIMPenInput</name>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
         <translation>Wprowadz nowy znak</translation>
+    </message>
+    <message>
+        <source>Character:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

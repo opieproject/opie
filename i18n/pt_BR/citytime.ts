@@ -25,6 +25,10 @@
         <source>City Time</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Click on one of the set cities to replace it</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ZoneMap</name>
@@ -47,6 +51,18 @@
     <message>
         <source>&lt;p&gt;Couldn&apos;t load map: %1, exiting</source>
         <translation>&lt;p&gt;Não pude carregar o mapa: %1, saindo</translation>
+    </message>
+    <message>
+        <source>Continent</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select a continent/country here, then select a city</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>City</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

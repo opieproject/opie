@@ -3,160 +3,251 @@
     <name>ColorPopupMenu</name>
     <message>
         <source>More</source>
-        <translation>Več</translation>
+        <translation type="obsolete">Več</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Več...</translation>
+        <translation type="obsolete">Več...</translation>
     </message>
 </context>
 <context>
     <name>OColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation>Hue:</translation>
+        <translation type="obsolete">Hue:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation>Sat:</translation>
+        <translation type="obsolete">Sat:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation>Val:</translation>
+        <translation type="obsolete">Val:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rdeča:</translation>
+        <translation type="obsolete">Rdeča:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Zelena:</translation>
+        <translation type="obsolete">Zelena:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Modra:</translation>
+        <translation type="obsolete">Modra:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Alfa kanal:</translation>
+        <translation type="obsolete">Alfa kanal:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Izberi barvo</translation>
+        <translation type="obsolete">Izberi barvo</translation>
     </message>
 </context>
 <context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>DatotečniDialog</translation>
+        <translation type="obsolete">DatotečniDialog</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Odpri</translation>
+        <translation type="obsolete">Odpri</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Shrani</translation>
+        <translation type="obsolete">Shrani</translation>
     </message>
 </context>
 <context>
     <name>OFileSelector</name>
     <message>
         <source>Documents</source>
-        <translation>Dokumenti</translation>
+        <translation type="obsolete">Dokumenti</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation>Datoteke</translation>
+        <translation type="obsolete">Datoteke</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation>Vse datoteke</translation>
+        <translation type="obsolete">Vse datoteke</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Vse</translation>
+        <translation type="obsolete">Vse</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Ime:</translation>
+        <translation type="obsolete">Ime:</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Shrani</translation>
+        <translation type="obsolete">&amp;Shrani</translation>
     </message>
     <message>
         <source>C&amp;ancel</source>
-        <translation>P&amp;rekliči</translation>
+        <translation type="obsolete">P&amp;rekliči</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="obsolete">Velikost</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Datum</translation>
+        <translation type="obsolete">Datum</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Mime tip</translation>
+        <translation type="obsolete">Mime tip</translation>
     </message>
     <message>
         <source>Ser Permission</source>
-        <translation>Pravice uporabnika</translation>
+        <translation type="obsolete">Pravice uporabnika</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Izbriši</translation>
+        <translation type="obsolete">Izbriši</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Ali res želite izbrisati
+        <translation type="obsolete">Ali res želite izbrisati
 </translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Da</translation>
+        <translation type="obsolete">Da</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>Ne</translation>
+        <translation type="obsolete">Ne</translation>
     </message>
 </context>
 <context>
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation>Velika</translation>
+        <translation type="obsolete">Velika</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Srednja</translation>
+        <translation type="obsolete">Srednja</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Majhna</translation>
+        <translation type="obsolete">Majhna</translation>
     </message>
 </context>
 <context>
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Stil</translation>
+        <translation type="obsolete">Stil</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Velikost</translation>
+        <translation type="obsolete">Velikost</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Hitra rjava lisica skoči čez lenega psa</translation>
+        <translation type="obsolete">Hitra rjava lisica skoči čez lenega psa</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceBase</name>
+    <message>
+        <source>Repeating Event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -182,27 +273,27 @@
     <name>QObject</name>
     <message>
         <source>Summary:</source>
-        <translation>Povzetek:</translation>
+        <translation type="obsolete">Povzetek:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation>Opis:</translation>
+        <translation type="obsolete">Opis:</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Prednost:</translation>
+        <translation type="obsolete">Prednost:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Napredovanje:</translation>
+        <translation type="obsolete">Napredovanje:</translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation>Rok:</translation>
+        <translation type="obsolete">Rok:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Kategorija:</translation>
+        <translation type="obsolete">Kategorija:</translation>
     </message>
 </context>
 </TS>

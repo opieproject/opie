@@ -108,11 +108,11 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Uredi urejevalna polja</translation>
+        <translation type="obsolete">Uredi urejevalna polja</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Zmanjkalo je prostora</translation>
+        <translation type="obsolete">Zmanjkalo je prostora</translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -120,7 +120,7 @@ neccessary startup files.
 
 Free up some space before
 entering data!</source>
-        <translation>Ni dovolj prostora za potrebne
+        <translation type="obsolete">Ni dovolj prostora za potrebne
 zagonske datoteke.
 
 Sprostite nekaj prostora preden
@@ -164,39 +164,39 @@ Izhod?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Naziv</translation>
+        <translation type="obsolete">Naziv</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Zapiski</translation>
+        <translation type="obsolete">Zapiski</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Služba</translation>
+        <translation type="obsolete">Služba</translation>
     </message>
     <message>
         <source>Mb</source>
-        <translation>Mobitel</translation>
+        <translation type="obsolete">Mobitel</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Ime</translation>
+        <translation type="obsolete">Ime</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Priimek</translation>
+        <translation type="obsolete">Priimek</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Datoteka kot</translation>
+        <translation type="obsolete">Datoteka kot</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Privzeta epošta</translation>
+        <translation type="obsolete">Privzeta epošta</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Spol</translation>
+        <translation type="obsolete">Spol</translation>
     </message>
     <message>
         <source>All</source>
@@ -226,6 +226,124 @@ Izhod?</translation>
         <source>Import vCard</source>
         <translation>Uvozi vCard</translation>
     </message>
+    <message>
+        <source>Find Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Save all Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OContacts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Not Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search pattern !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list. Wrap around now.. !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Phone Book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Company Book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Email Book</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cards</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigDlg_Base</name>
+    <message>
+        <source>MyDialog1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Regular Expressions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Wildcards (*,?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case Sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signal Wrap Around</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer QT-Mail </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer Opie-Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notice: QT-Mail is just 
+provided in the SHARP 
+default ROM. Opie-Mail 
+is provided free !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
@@ -239,7 +357,7 @@ Izhod?</translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Naziv</translation>
+        <translation type="obsolete">Naziv</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -275,11 +393,11 @@ Izhod?</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Zapiski</translation>
+        <translation type="obsolete">Zapiski</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Skupine</translation>
+        <translation type="obsolete">Skupine</translation>
     </message>
     <message>
         <source>City</source>
@@ -1223,43 +1341,43 @@ Izhod?</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Ulica podjetja</translation>
+        <translation type="obsolete">Ulica podjetja</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Domača ulica</translation>
+        <translation type="obsolete">Domača ulica</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Mesto podjetja</translation>
+        <translation type="obsolete">Mesto podjetja</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Okrožje podjetja</translation>
+        <translation type="obsolete">Okrožje podjetja</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Poštna št. podjetja</translation>
+        <translation type="obsolete">Poštna št. podjetja</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>Država podjetja</translation>
+        <translation type="obsolete">Država podjetja</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Domače mesto</translation>
+        <translation type="obsolete">Domače mesto</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Domače okrožje</translation>
+        <translation type="obsolete">Domače okrožje</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Domača poštna številka</translation>
+        <translation type="obsolete">Domača poštna številka</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>Domača država</translation>
+        <translation type="obsolete">Domača država</translation>
     </message>
     <message>
         <source>Department</source>
@@ -1303,27 +1421,27 @@ Izhod?</translation>
     </message>
     <message>
         <source>Work Phone</source>
-        <translation>Službeni telefon</translation>
+        <translation type="obsolete">Službeni telefon</translation>
     </message>
     <message>
         <source>Work Fax</source>
-        <translation>Službeni faks</translation>
+        <translation type="obsolete">Službeni faks</translation>
     </message>
     <message>
         <source>work Mobile</source>
-        <translation>službeni mobitel</translation>
+        <translation type="obsolete">službeni mobitel</translation>
     </message>
     <message>
         <source>Work Pager</source>
-        <translation>Službeni pozivnik</translation>
+        <translation type="obsolete">Službeni pozivnik</translation>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation>Službena spletna stran</translation>
+        <translation type="obsolete">Službena spletna stran</translation>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation>Službeni mobitel</translation>
+        <translation type="obsolete">Službeni mobitel</translation>
     </message>
     <message>
         <source>Kuwait</source>
@@ -1332,6 +1450,10 @@ Izhod?</translation>
     <message>
         <source>Kyrgystan</source>
         <translation>Kyrgystan</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

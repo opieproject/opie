@@ -23,7 +23,7 @@
     <name>HandwritingTrainer</name>
     <message>
         <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
-        <translation>Sélectionner un caractère dans la liste. La one d&apos;écriture à gauche présente les caractères de référence. Entrainez-vous à écrire sur la zone à droite.</translation>
+        <translation type="obsolete">Sélectionner un caractère dans la liste. La one d&apos;écriture à gauche présente les caractères de référence. Entrainez-vous à écrire sur la zone à droite.</translation>
     </message>
     <message>
         <source>Matched: </source>
@@ -36,6 +36,21 @@
     <message>
         <source>%1%</source>
         <translation>%1%</translation>
+    </message>
+    <message>
+        <source>Select a reference character from the list.  Practice writing in the area on the right.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No match</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Handwriting</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -60,12 +75,31 @@
         <source>Clear</source>
         <translation>Effacer</translation>
     </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIMPenInput</name>
+    <message>
+        <source>Shortcut</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QIMPenInputCharDlg</name>
     <message>
         <source>Enter new character</source>
         <translation>Entrée un nouveau caractère</translation>
+    </message>
+    <message>
+        <source>Character:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

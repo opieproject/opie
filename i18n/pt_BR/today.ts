@@ -35,15 +35,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No more appointments today</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
         <source>No plugins found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No plugins activated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to launch the associated app</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -55,10 +55,14 @@
     </message>
     <message>
         <source>Today</source>
-        <translation type="obsolete">Hoje</translation>
+        <translation type="unfinished">Hoje</translation>
     </message>
     <message>
-        <source>Today&#xb2;</source>
+        <source>Today by Maximilian Rei&#xdf;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to get to the config dialog</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -97,6 +101,42 @@ resume?
     <message>
         <source>Misc</source>
         <translation type="unfinished">Misc</translation>
+    </message>
+    <message>
+        <source>Check a checkbox to activate/deactivate a plugin ore use the arrow buttons on the right to change the appearance order</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check this if today should be autostarted on resume.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How many minutes has the PDA been suspended before the autostart feature kicks in on resume</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Icon size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Set the icon size in pixel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>How often should Today refresh itself</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> sec</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>never</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -150,25 +190,6 @@ quantas letras</translation>
     <message>
         <source>Misc</source>
         <translation type="obsolete">Misc</translation>
-    </message>
-    <message>
-        <source>How many 
-appointment
-should
-be shown?</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Should today be
-autostarted on
-resume? (Opie only)</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Activate the  
-autostart after how
-many minutes?</source>
-        <translation type="obsolete"></translation>
     </message>
 </context>
 </TS>

@@ -108,11 +108,11 @@
     </message>
     <message>
         <source>Arrange Edit Fields</source>
-        <translation>Organizar campos</translation>
+        <translation type="obsolete">Organizar campos</translation>
     </message>
     <message>
         <source>Out of Space</source>
-        <translation>Sin espacio</translation>
+        <translation type="obsolete">Sin espacio</translation>
     </message>
     <message>
         <source>There is not enough space to create
@@ -120,7 +120,7 @@ neccessary startup files.
 
 Free up some space before
 entering data!</source>
-        <translation>No hay suficiente espacio para crear
+        <translation type="obsolete">No hay suficiente espacio para crear
 los ficheros iniciales.
 
 ¡Libere algo de espacio antes de
@@ -164,39 +164,39 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Título</translation>
+        <translation type="obsolete">Título</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notas</translation>
+        <translation type="obsolete">Notas</translation>
     </message>
     <message>
         <source>Work</source>
-        <translation>Trabajo</translation>
+        <translation type="obsolete">Trabajo</translation>
     </message>
     <message>
         <source>Mb</source>
-        <translation>MB</translation>
+        <translation type="obsolete">MB</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Nombre</translation>
+        <translation type="obsolete">Nombre</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>Apellidos</translation>
+        <translation type="obsolete">Apellidos</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Archivar como</translation>
+        <translation type="obsolete">Archivar como</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Correo-e por omisión</translation>
+        <translation type="obsolete">Correo-e por omisión</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Género</translation>
+        <translation type="obsolete">Género</translation>
     </message>
     <message>
         <source>All</source>
@@ -266,6 +266,84 @@ inténtelo de nuevo.
         <source>Cards</source>
         <translation>Tarjetas</translation>
     </message>
+    <message>
+        <source>Not Found</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>search pattern !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End of list. Wrap around now.. !</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ConfigDlg_Base</name>
+    <message>
+        <source>MyDialog1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Query Style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Regular Expressions</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use Wildcards (*,?)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Case Sensitive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Signal Wrap Around</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer QT-Mail </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Prefer Opie-Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Notice: QT-Mail is just 
+provided in the SHARP 
+default ROM. Opie-Mail 
+is provided free !</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>ContactEditor</name>
@@ -279,7 +357,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Título</translation>
+        <translation type="obsolete">Título</translation>
     </message>
     <message>
         <source>First Name</source>
@@ -315,11 +393,11 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notas</translation>
+        <translation type="obsolete">Notas</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Grupos</translation>
+        <translation type="obsolete">Grupos</translation>
     </message>
     <message>
         <source>City</source>
@@ -1263,43 +1341,43 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Calle negocio</translation>
+        <translation type="obsolete">Calle negocio</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Calle casa</translation>
+        <translation type="obsolete">Calle casa</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Ciudad trabajo</translation>
+        <translation type="obsolete">Ciudad trabajo</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Provincia trabajo</translation>
+        <translation type="obsolete">Provincia trabajo</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Cód.postal trabajo</translation>
+        <translation type="obsolete">Cód.postal trabajo</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>País trabajo</translation>
+        <translation type="obsolete">País trabajo</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Ciudad casa</translation>
+        <translation type="obsolete">Ciudad casa</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Provincia casa</translation>
+        <translation type="obsolete">Provincia casa</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Cód.postal casa</translation>
+        <translation type="obsolete">Cód.postal casa</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>País casa</translation>
+        <translation type="obsolete">País casa</translation>
     </message>
     <message>
         <source>Department</source>
@@ -1343,27 +1421,27 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>Work Phone</source>
-        <translation>Tfno. trabajo</translation>
+        <translation type="obsolete">Tfno. trabajo</translation>
     </message>
     <message>
         <source>Work Fax</source>
-        <translation>Fax trabajo</translation>
+        <translation type="obsolete">Fax trabajo</translation>
     </message>
     <message>
         <source>work Mobile</source>
-        <translation>Móvil trabajo</translation>
+        <translation type="obsolete">Móvil trabajo</translation>
     </message>
     <message>
         <source>Work Pager</source>
-        <translation>Busca trabajo</translation>
+        <translation type="obsolete">Busca trabajo</translation>
     </message>
     <message>
         <source>Work Web Page</source>
-        <translation>Web trabajo</translation>
+        <translation type="obsolete">Web trabajo</translation>
     </message>
     <message>
         <source>Work Mobile</source>
-        <translation>Móvil trabajo</translation>
+        <translation type="obsolete">Móvil trabajo</translation>
     </message>
     <message>
         <source>Kuwait</source>
@@ -1372,6 +1450,10 @@ inténtelo de nuevo.
     <message>
         <source>Kyrgystan</source>
         <translation>Kyrgystan</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

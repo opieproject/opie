@@ -3,160 +3,251 @@
     <name>ColorPopupMenu</name>
     <message>
         <source>More</source>
-        <translation>Más</translation>
+        <translation type="obsolete">Más</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation>Más...</translation>
+        <translation type="obsolete">Más...</translation>
     </message>
 </context>
 <context>
     <name>OColorDialog</name>
     <message>
         <source>Hue:</source>
-        <translation>Tono:</translation>
+        <translation type="obsolete">Tono:</translation>
     </message>
     <message>
         <source>Sat:</source>
-        <translation>Sat:</translation>
+        <translation type="obsolete">Sat:</translation>
     </message>
     <message>
         <source>Val:</source>
-        <translation>Val:</translation>
+        <translation type="obsolete">Val:</translation>
     </message>
     <message>
         <source>Red:</source>
-        <translation>Rojo:</translation>
+        <translation type="obsolete">Rojo:</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation>Verde:</translation>
+        <translation type="obsolete">Verde:</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation>Azul:</translation>
+        <translation type="obsolete">Azul:</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
-        <translation>Canal alpha:</translation>
+        <translation type="obsolete">Canal alpha:</translation>
     </message>
     <message>
         <source>Select color</source>
-        <translation>Seleccionar color</translation>
+        <translation type="obsolete">Seleccionar color</translation>
     </message>
 </context>
 <context>
     <name>OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation>DiálogoFichero</translation>
+        <translation type="obsolete">DiálogoFichero</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation>Abrir</translation>
+        <translation type="obsolete">Abrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation>Salvar</translation>
+        <translation type="obsolete">Salvar</translation>
     </message>
 </context>
 <context>
     <name>OFileSelector</name>
     <message>
         <source>Documents</source>
-        <translation>Documentos</translation>
+        <translation type="obsolete">Documentos</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation>Ficheros</translation>
+        <translation type="obsolete">Ficheros</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation>Todos ficheros</translation>
+        <translation type="obsolete">Todos ficheros</translation>
     </message>
     <message>
         <source>All</source>
-        <translation>Todo</translation>
+        <translation type="obsolete">Todo</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation>Nombre:</translation>
+        <translation type="obsolete">Nombre:</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation>&amp;Salvar</translation>
+        <translation type="obsolete">&amp;Salvar</translation>
     </message>
     <message>
         <source>C&amp;ancel</source>
-        <translation>&amp;Cancelar</translation>
+        <translation type="obsolete">&amp;Cancelar</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Nombre</translation>
+        <translation type="obsolete">Nombre</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation type="obsolete">Tamaño</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation>Fecha</translation>
+        <translation type="obsolete">Fecha</translation>
     </message>
     <message>
         <source>Mime Type</source>
-        <translation>Tipo mime</translation>
+        <translation type="obsolete">Tipo mime</translation>
     </message>
     <message>
         <source>Ser Permission</source>
-        <translation>Fijar permisos</translation>
+        <translation type="obsolete">Fijar permisos</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation>Borrar</translation>
+        <translation type="obsolete">Borrar</translation>
     </message>
     <message>
         <source>Do you really want to delete
 </source>
-        <translation>Seguro que quiere borrar
+        <translation type="obsolete">Seguro que quiere borrar
 </translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation>Sí</translation>
+        <translation type="obsolete">Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation>No</translation>
+        <translation type="obsolete">No</translation>
     </message>
 </context>
 <context>
     <name>OFontMenu</name>
     <message>
         <source>Large</source>
-        <translation>Grande</translation>
+        <translation type="obsolete">Grande</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation>Mediano</translation>
+        <translation type="obsolete">Mediano</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation>Pequeño</translation>
+        <translation type="obsolete">Pequeño</translation>
     </message>
 </context>
 <context>
     <name>OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation>Estilo</translation>
+        <translation type="obsolete">Estilo</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation>Tamaño</translation>
+        <translation type="obsolete">Tamaño</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>El Rápido Zorro Marrón Saltó Por Encima Del Perro Perezoso</translation>
+        <translation type="obsolete">El Rápido Zorro Marrón Saltó Por Encima Del Perro Perezoso</translation>
+    </message>
+</context>
+<context>
+    <name>ORecurranceBase</name>
+    <message>
+        <source>Repeating Event </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>None</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Week</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Month</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Year</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Frequency</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End On:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No End Date</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat On</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Wed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Thu</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fri</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sun</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Every</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -182,291 +273,291 @@
     <name>QObject</name>
     <message>
         <source>Summary:</source>
-        <translation>Sumario:</translation>
+        <translation type="obsolete">Sumario:</translation>
     </message>
     <message>
         <source>Description:</source>
-        <translation>Descripción:</translation>
+        <translation type="obsolete">Descripción:</translation>
     </message>
     <message>
         <source>Priority:</source>
-        <translation>Prioridad:</translation>
+        <translation type="obsolete">Prioridad:</translation>
     </message>
     <message>
         <source>Progress:</source>
-        <translation>Progreso:</translation>
+        <translation type="obsolete">Progreso:</translation>
     </message>
     <message>
         <source>Deadline:</source>
-        <translation>Fecha tope:</translation>
+        <translation type="obsolete">Fecha tope:</translation>
     </message>
     <message>
         <source>Category:</source>
-        <translation>Categoría:</translation>
+        <translation type="obsolete">Categoría:</translation>
     </message>
     <message>
         <source>Alarmed Notification:</source>
-        <translation>Notificación de alarma:</translation>
+        <translation type="obsolete">Notificación de alarma:</translation>
     </message>
     <message>
         <source>&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Dirección trabajo:&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Dirección trabajo:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation>&lt;b&gt;Dirección casa:&lt;/b&gt;</translation>
+        <translation type="obsolete">&lt;b&gt;Dirección casa:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Email Addresses: </source>
-        <translation>Correo-e: </translation>
+        <translation type="obsolete">Correo-e: </translation>
     </message>
     <message>
         <source>Home Phone: </source>
-        <translation>Teléfono casa: </translation>
+        <translation type="obsolete">Teléfono casa: </translation>
     </message>
     <message>
         <source>Home Fax: </source>
-        <translation>Fax casa: </translation>
+        <translation type="obsolete">Fax casa: </translation>
     </message>
     <message>
         <source>Home Mobile: </source>
-        <translation>Móvil personal: </translation>
+        <translation type="obsolete">Móvil personal: </translation>
     </message>
     <message>
         <source>Home Web Page: </source>
-        <translation>Web personal: </translation>
+        <translation type="obsolete">Web personal: </translation>
     </message>
     <message>
         <source>Business Web Page: </source>
-        <translation>Web negocio: </translation>
+        <translation type="obsolete">Web negocio: </translation>
     </message>
     <message>
         <source>Office: </source>
-        <translation>Oficina: </translation>
+        <translation type="obsolete">Oficina: </translation>
     </message>
     <message>
         <source>Business Phone: </source>
-        <translation>Teléfono negocio: </translation>
+        <translation type="obsolete">Teléfono negocio: </translation>
     </message>
     <message>
         <source>Business Fax: </source>
-        <translation>Fax negocio: </translation>
+        <translation type="obsolete">Fax negocio: </translation>
     </message>
     <message>
         <source>Business Mobile: </source>
-        <translation>Móvil negocio: </translation>
+        <translation type="obsolete">Móvil negocio: </translation>
     </message>
     <message>
         <source>Business Pager: </source>
-        <translation>Busca negocio: </translation>
+        <translation type="obsolete">Busca negocio: </translation>
     </message>
     <message>
         <source>Profession: </source>
-        <translation>Profesión: </translation>
+        <translation type="obsolete">Profesión: </translation>
     </message>
     <message>
         <source>Assistant: </source>
-        <translation>Ayudante: </translation>
+        <translation type="obsolete">Ayudante: </translation>
     </message>
     <message>
         <source>Manager: </source>
-        <translation>Superior: </translation>
+        <translation type="obsolete">Superior: </translation>
     </message>
     <message>
         <source>Male</source>
-        <translation>Hombre</translation>
+        <translation type="obsolete">Hombre</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation>Mujer</translation>
+        <translation type="obsolete">Mujer</translation>
     </message>
     <message>
         <source>Gender: </source>
-        <translation>Género: </translation>
+        <translation type="obsolete">Género: </translation>
     </message>
     <message>
         <source>Spouse: </source>
-        <translation>Cónyuge: </translation>
+        <translation type="obsolete">Cónyuge: </translation>
     </message>
     <message>
         <source>Birthday: </source>
-        <translation>Cumpleaños: </translation>
+        <translation type="obsolete">Cumpleaños: </translation>
     </message>
     <message>
         <source>Anniversary: </source>
-        <translation>Aniversario: </translation>
+        <translation type="obsolete">Aniversario: </translation>
     </message>
     <message>
         <source>Nickname: </source>
-        <translation>Apodo: </translation>
+        <translation type="obsolete">Apodo: </translation>
     </message>
     <message>
         <source>Name Title</source>
-        <translation>Título</translation>
+        <translation type="obsolete">Título</translation>
     </message>
     <message>
         <source>First Name</source>
-        <translation>Nombre</translation>
+        <translation type="obsolete">Nombre</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>1º apellido</translation>
+        <translation type="obsolete">1º apellido</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>2º apellido</translation>
+        <translation type="obsolete">2º apellido</translation>
     </message>
     <message>
         <source>Suffix</source>
-        <translation>Sufijo</translation>
+        <translation type="obsolete">Sufijo</translation>
     </message>
     <message>
         <source>File As</source>
-        <translation>Guardar como</translation>
+        <translation type="obsolete">Guardar como</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation>Cargo</translation>
+        <translation type="obsolete">Cargo</translation>
     </message>
     <message>
         <source>Department</source>
-        <translation>Departamento</translation>
+        <translation type="obsolete">Departamento</translation>
     </message>
     <message>
         <source>Company</source>
-        <translation>Compañía</translation>
+        <translation type="obsolete">Compañía</translation>
     </message>
     <message>
         <source>Business Phone</source>
-        <translation>Teléfono negocio</translation>
+        <translation type="obsolete">Teléfono negocio</translation>
     </message>
     <message>
         <source>Business Fax</source>
-        <translation>Fax negocio</translation>
+        <translation type="obsolete">Fax negocio</translation>
     </message>
     <message>
         <source>Business Mobile</source>
-        <translation>Móvil negocio</translation>
+        <translation type="obsolete">Móvil negocio</translation>
     </message>
     <message>
         <source>Default Email</source>
-        <translation>Correo-e preferido</translation>
+        <translation type="obsolete">Correo-e preferido</translation>
     </message>
     <message>
         <source>Emails</source>
-        <translation>Correos-e</translation>
+        <translation type="obsolete">Correos-e</translation>
     </message>
     <message>
         <source>Home Phone</source>
-        <translation>Teléfono casa</translation>
+        <translation type="obsolete">Teléfono casa</translation>
     </message>
     <message>
         <source>Home Fax</source>
-        <translation>Fax casa</translation>
+        <translation type="obsolete">Fax casa</translation>
     </message>
     <message>
         <source>Home Mobile</source>
-        <translation>Móvil casa</translation>
+        <translation type="obsolete">Móvil casa</translation>
     </message>
     <message>
         <source>Business Street</source>
-        <translation>Calle negocio</translation>
+        <translation type="obsolete">Calle negocio</translation>
     </message>
     <message>
         <source>Business City</source>
-        <translation>Ciudad negocio</translation>
+        <translation type="obsolete">Ciudad negocio</translation>
     </message>
     <message>
         <source>Business State</source>
-        <translation>Provincia negocio</translation>
+        <translation type="obsolete">Provincia negocio</translation>
     </message>
     <message>
         <source>Business Zip</source>
-        <translation>Cód.postal negocio</translation>
+        <translation type="obsolete">Cód.postal negocio</translation>
     </message>
     <message>
         <source>Business Country</source>
-        <translation>País negocio</translation>
+        <translation type="obsolete">País negocio</translation>
     </message>
     <message>
         <source>Business Pager</source>
-        <translation>Busca negocio</translation>
+        <translation type="obsolete">Busca negocio</translation>
     </message>
     <message>
         <source>Business WebPage</source>
-        <translation>Web negocio</translation>
+        <translation type="obsolete">Web negocio</translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Oficina</translation>
+        <translation type="obsolete">Oficina</translation>
     </message>
     <message>
         <source>Profession</source>
-        <translation>Profesión</translation>
+        <translation type="obsolete">Profesión</translation>
     </message>
     <message>
         <source>Assistant</source>
-        <translation>Ayudante</translation>
+        <translation type="obsolete">Ayudante</translation>
     </message>
     <message>
         <source>Manager</source>
-        <translation>Superior</translation>
+        <translation type="obsolete">Superior</translation>
     </message>
     <message>
         <source>Home Street</source>
-        <translation>Calle casa</translation>
+        <translation type="obsolete">Calle casa</translation>
     </message>
     <message>
         <source>Home City</source>
-        <translation>Ciudad casa</translation>
+        <translation type="obsolete">Ciudad casa</translation>
     </message>
     <message>
         <source>Home State</source>
-        <translation>Provincia casa</translation>
+        <translation type="obsolete">Provincia casa</translation>
     </message>
     <message>
         <source>Home Zip</source>
-        <translation>Cód.postal casa</translation>
+        <translation type="obsolete">Cód.postal casa</translation>
     </message>
     <message>
         <source>Home Country</source>
-        <translation>País casa</translation>
+        <translation type="obsolete">País casa</translation>
     </message>
     <message>
         <source>Home Web Page</source>
-        <translation>Web personal</translation>
+        <translation type="obsolete">Web personal</translation>
     </message>
     <message>
         <source>Spouse</source>
-        <translation>Cónyuge</translation>
+        <translation type="obsolete">Cónyuge</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation>Género</translation>
+        <translation type="obsolete">Género</translation>
     </message>
     <message>
         <source>Birthday</source>
-        <translation>Cumpleaños</translation>
+        <translation type="obsolete">Cumpleaños</translation>
     </message>
     <message>
         <source>Anniversary</source>
-        <translation>Aniversario</translation>
+        <translation type="obsolete">Aniversario</translation>
     </message>
     <message>
         <source>Nickname</source>
-        <translation>Apodo</translation>
+        <translation type="obsolete">Apodo</translation>
     </message>
     <message>
         <source>Children</source>
-        <translation>Hijos</translation>
+        <translation type="obsolete">Hijos</translation>
     </message>
     <message>
         <source>Notes</source>
-        <translation>Notas</translation>
+        <translation type="obsolete">Notas</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation>Grupos</translation>
+        <translation type="obsolete">Grupos</translation>
     </message>
 </context>
 </TS>

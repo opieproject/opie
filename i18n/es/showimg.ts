@@ -65,7 +65,7 @@
     </message>
     <message>
         <source>Slideshow</source>
-        <translation>Diapositivas</translation>
+        <translation type="obsolete">Diapositivas</translation>
     </message>
     <message>
         <source>Preferences..</source>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Help</source>
-        <translation>Ayuda</translation>
+        <translation type="obsolete">Ayuda</translation>
     </message>
     <message>
         <source>Image Info ...</source>
@@ -118,6 +118,49 @@
     <message>
         <source>8-bit alpha channel</source>
         <translation>canal alpha de 8 bits</translation>
+    </message>
+    <message>
+        <source>Slide show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stop Slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialogBase</name>
+    <message>
+        <source>Preferences</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Slide Show</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delay between pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Repeat slideshow</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show pictures in reverse</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Load pictures rotated 90 degrees</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fast load pictures</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
