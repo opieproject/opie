@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/plugins
 Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
-Depends: libqte2, opie-today, libopiecore2, libopieui2, libopiepim2, libopiedb2, libqtaux2
+Depends: libqte2, opie-today, libopiecore2, libopieui2, libopiepim2, libqtaux2
 Description: Addressbook plugin for Today
  Displays upcoming Birthdays and Anniversaries
 Version: $QPE_VERSION$EXTRAVERSION

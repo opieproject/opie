@@ -18,7 +18,7 @@
 
 #include "addresspluginwidget.h"
 
-
+#include <opie2/odebug.h>
 #include <opie2/opimcontact.h>
 
 #include <qpe/config.h>
@@ -51,7 +51,7 @@ AddressBookPluginWidget::~AddressBookPluginWidget() {
 
 void AddressBookPluginWidget::refresh( const Opie::OPimContactAccess* )
 {
-	qWarning(" AddressBookPluginWidget::Database was changed externally ! ");
+	Opie::Core::owarn << " AddressBookPluginWidget::Database was changed externally ! " << oendl;
 	m_contactdb->reload();
 	getAddress();
 }
@@ -105,9 +105,8 @@ void AddressBookPluginWidget::getAddress() {
 	QDate lookAheadDate = QDate::currentDate().addDays( m_daysLookAhead );
 	int ammount = 0;
 	if ( m_showBirthdays ){
-		qWarning("Searching from now (%s) until %s ! ",
-			 QDate::currentDate().toString().latin1(),
-			 lookAheadDate.toString().latin1() );
+		Opie::Core::owarn << "Searching from now (" << QDate::currentDate().toString() << ") until "
+						<< lookAheadDate.toString() << " ! " << oendl;
     }
 
     if ( m_contactdb->hasQuerySettings( Opie::OPimContactAccess::DateDiff ) ){
