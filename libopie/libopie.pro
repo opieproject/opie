@@ -80,6 +80,8 @@ INCLUDEPATH += $(OPIEDIR)/include
 DESTDIR      = $(QTDIR)/lib$(PROJMAK)
 #VERSION = 1.0.0
 
+LIBS += -lqpe
+
 # LIBS            += -lopiesql
 
 INTERFACES      = otimepickerbase.ui orecurrancebase.ui
