@@ -118,12 +118,13 @@ void Today::init() {
  * Load the plugins
  */
 void Today::loadPlugins() {
-
+    qWarning("pluginList count %d", pluginList.count() );
     QValueList<TodayPlugin>::Iterator tit;
     for ( tit = pluginList.begin(); tit != pluginList.end(); ++tit ) {
 	(*tit).library->unload();
 	delete (*tit).library;
     }
+    pluginList.clear();
 
     QString path = QPEApplication::qpeDir() + "/plugins/today";
     QDir dir( path, "lib*.so" );
@@ -158,6 +159,7 @@ void Today::loadPlugins() {
             delete lib;
         }
     }
+    qWarning("pluginList count end %d", pluginList.count() );
 }
 
 
