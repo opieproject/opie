@@ -806,7 +806,7 @@ void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
             }
         }
         // case the autostart feature should be delayed
-    } else if ( msg == "autoStart(QString, QString, QString)") {
+    } else if ( msg == "autoStart(QString,QString,QString)") {
          QString modifier, appName, delay;
          stream >> modifier >> appName >> delay;
         Config cfg( "autostart" );
