@@ -535,7 +535,7 @@ void ImageViewer::openFile() {
     
     QString str = OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
     DocLnk link(str);
-    if ( link.isValid() )
+//    if ( link.isValid() )
         openFile(link);
 
 }
