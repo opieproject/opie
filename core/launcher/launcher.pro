@@ -14,7 +14,6 @@ HEADERS		= background.h \
 		  inputmethods.h \
 		  systray.h \
 		  wait.h \
-		  waitpopup.h \
 		  shutdownimpl.h \
 		  launcher.h \
 		  launcherview.h \
@@ -56,7 +55,6 @@ SOURCES		= background.cpp \
 		  inputmethods.cpp \
 		  systray.cpp \
 		  wait.cpp \
-		  waitpopup.cpp \
 		  shutdownimpl.cpp \
 		  launcher.cpp \
 		  launcherview.cpp \

@@ -21,6 +21,8 @@
 #ifndef __WAIT_H__
 #define __WAIT_H__
 
+#include <opie/owait.h>
+
 #include <qpe/resource.h>
 
 #include <qwidget.h>
@@ -37,7 +39,7 @@ public:
     void paintEvent( QPaintEvent * );
     static Wait *getWaitObject();
 private:
-    WaitPopup* centralWait;
+    OWait* centralWait;
     QPixmap pm;
     bool waiting;
 };

@@ -36,7 +36,7 @@ Wait::Wait( QWidget *parent ) : QWidget( parent ),
 {
     setFixedSize( pm.size() );
     lastWaitObject = this;
-    centralWait = new WaitPopup( 0L );
+    centralWait = new OWait( 0L );
     centralWait->hide();
     hide();
 }
