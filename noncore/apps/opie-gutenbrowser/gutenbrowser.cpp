@@ -105,7 +105,7 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
         initStatusBar();
         initView();
         initSlots();
-
+				qDebug("init finished");
         QPEApplication::setStylusOperation( mainList->viewport(),QPEApplication::RightOnHold);
 
         connect( mainList, SIGNAL( mouseButtonPressed( int, QListBoxItem *, const QPoint &)),
@@ -136,14 +136,14 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
                 config.setGroup( tempTitle);
                 int index=config.readNumEntry( "LineNumber", -1 );
                 if( index != -1) {
-                            //        odebug << tempTitle << oendl;
+                                    odebug << tempTitle << oendl;
                         bookmarksMenu->insertItem( tempTitle);
                 }
         }
 
             //    QString gutenIndex= local_library + "GUTINDEX.ALL";
-        QString gutenIndex= QPEApplication::qpeDir()+ "/etc/gutenbrowser/GUTINDEX.ALL";
-
+        QString gutenIndex = QPEApplication::qpeDir()+ "/etc/gutenbrowser/GUTINDEX.ALL";
+				qDebug("gutenindex "+gutenIndex );
         if( QFile( gutenIndex).exists() ) {
                 indexLib.setName( gutenIndex);
         } else {
@@ -151,15 +151,16 @@ Gutenbrowser::Gutenbrowser(QWidget *,const char*, WFlags )
                     //        QString localLibIndexFile= local_library + "PGWHOLE.TXT";
                 newindexLib.setName( localLibIndexFile);
         }
+				qDebug("attempting new library");
         LibraryDlg = new LibraryDialog( this, "Library Index" /*, TRUE */);
-        loadCheck=false;
+        loadCheck = false;
         chdir(local_library);
         if(!showMainList) {
                 Lview->setFocus();
                     //          if(firstTime)
                     //              Bookmark();
                 for (int i=1;i< qApp->argc();i++) {
-                        odebug << "Suppose we open somethin" << oendl;
+									qDebug("Suppose we open somethin");
                         load(qApp->argv()[i]);
                 }
         } else {
@@ -228,11 +229,11 @@ void Gutenbrowser::goGetit( const QString &url, bool showMsg) {
                 outDlg->OutputEdit->append( tr("Running wget") );
                 sleep(1);
                 fp = popen(  (const char *) cmd, "r");
-                    //                 odebug << "Issuing the command\n"+cmd << oendl;
+                                     odebug << "Issuing the command\n"+cmd << oendl;
                     //                 system(cmd);
                 while ( fgets( line, sizeof line, fp)) {
                         outDlg->OutputEdit->append(line);
-                        outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+//                        outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
                 }
                 pclose(fp);
                 outDlg->close();
@@ -409,7 +410,7 @@ void Gutenbrowser::ForwardBtn() {
                                 s.replace(QRegExp("\n"),"");
                         insertString+=s;
                         Lview->insertLine( s, -1);
-                            //            odebug << s << oendl;
+                                        odebug << s << oendl;
                         currentLine++;
                 }
                     //        Lview->insertAt( insertString,0,0, FALSE);
@@ -421,15 +422,15 @@ void Gutenbrowser::ForwardBtn() {
                     //          int length = Lview->length();
 
                 pageStopArray[i_pageNum ] = currentFilePos;
-                    //         odebug << currentFilePos << " current page is number " << i_pageNum
-                    //                << ", pagesize " << pageSize << ", length " << Lview->length()
-                    //                << ", current " << pageStopArray[i_pageNum] << oendl;
+                             odebug << currentFilePos << " current page is number " << i_pageNum
+                                    << ", pagesize " << pageSize << ", length " << Lview->length()
+                                    << ", current " << pageStopArray[i_pageNum] << oendl;
                 setStatus();
-                Lview->setCursorPosition( 0, 0, FALSE);
+//                Lview->setCursorPosition( 0, 0, FALSE);
                     //        }
 
         } else {
-                    //         odebug << "bal" << oendl;
+                             odebug << "bal" << oendl;
                     //         if( i_pageNum != pages) {
 
                     // //          int newTop = Lview->Top();
@@ -444,7 +445,7 @@ void Gutenbrowser::ForwardBtn() {
         }
         Lview->setFocus();
 
-            //    odebug << "page number " << i_pageNum << " line number " << currentLine << "" << oendl;
+               odebug << "page number " << i_pageNum << " line number " << currentLine << "" << oendl;
 }
 
 
@@ -456,9 +457,9 @@ void Gutenbrowser::BackBtn() {
                 i_pageNum--;
                 currentFilePos = f.at();
 
-                    //         odebug << currentFilePos << " move back to " << pageStopArray[i_pageNum - 1 ]
-                    //                << ", current page number " << i_pageNum
-                    //                << ", " << pageSize << ", length " << Lview->length() << oendl;
+                             odebug << currentFilePos << " move back to " << pageStopArray[i_pageNum - 1 ]
+                                    << ", current page number " << i_pageNum
+                                    << ", " << pageSize << ", length " << Lview->length() << oendl;
 
                 if(  i_pageNum < 2) {
                         f.at( 0);
@@ -501,7 +502,7 @@ void Gutenbrowser::BackBtn() {
                         if( i_pageNum < 1)
                                 i_pageNum = 1;
                         setStatus();
-                        Lview->setCursorPosition( Lview->Top(), 0, FALSE);
+//                        Lview->setCursorPosition( Lview->Top(), 0, FALSE);
 
                 }
         }
@@ -535,7 +536,7 @@ void Gutenbrowser::TopBtn() {
                                 Lview->insertLine(s ,-1);
                                 currentLine++;
                         }
-                        Lview->setCursorPosition( 0,0, FALSE);
+//                        Lview->setCursorPosition( 0,0, FALSE);
                         i_pageNum=1;
                         setStatus();
                 }
@@ -578,7 +579,7 @@ void Gutenbrowser::BeginBtn() {
                 if(lastPage < i_pageNum) {
                         pageStopArray.resize(i_pageNum + 1);
                         pageStopArray[i_pageNum ] = currentFilePos;
-                            //             odebug << "new page number " << i_pageNum << ", found at " << currentFilePos << "" << oendl;
+                                        odebug << "new page number " << i_pageNum << ", found at " << currentFilePos << "" << oendl;
                 }
                     //         lastPage =  i_pageNum;
                 if(  LeftText.find( s_pattern, 0 , TRUE) != -1 || LeftText.find( sPattern2, 0 , TRUE) != -1 ) {
@@ -604,9 +605,9 @@ void Gutenbrowser::BeginBtn() {
         qApp->processEvents();
 
         if( pos > i_topRow ) {
-                Lview->setCursorPosition( pos+linesPerPage+2/* - i_topRow+3 */,0, FALSE);
+//                Lview->setCursorPosition( pos+linesPerPage+2/* - i_topRow+3 */,0, FALSE);
         } else {
-                Lview->setCursorPosition( pos+2 , 0, FALSE );
+//                Lview->setCursorPosition( pos+2 , 0, FALSE );
         }
 
         Lview->deselect();
@@ -661,7 +662,7 @@ void Gutenbrowser::Bookmark( int itemId) {
         Config config("Gutenbrowser");
         config.setGroup( "Bookmarks" );
 
-            //     odebug << "<<<<<< " << Lview->PageSize() << ", " << Lview->lastRow() - Lview->topRow() << "" << oendl;
+                 odebug << "<<<<<< " << Lview->PageSize() << ", " << Lview->lastRow() - Lview->topRow() << "" << oendl;
 
         QString itemString;
 
@@ -707,7 +708,7 @@ void Gutenbrowser::Bookmark( int itemId) {
                 if(lastPage < i_pageNum) {
                         pageStopArray.resize(i_pageNum + 1);
                         pageStopArray[i_pageNum ] = currentFilePos;
-                            //             odebug << "new page number " << i_pageNum << ", found at " << currentFilePos << "" << oendl;
+                                        odebug << "new page number " << i_pageNum << ", found at " << currentFilePos << "" << oendl;
                 }
                 if(currentFilePos == bookmarkPosition)
                         break;
@@ -744,7 +745,7 @@ void Gutenbrowser::Bookmark( int itemId) {
 bool Gutenbrowser::load( const char *fileName) {
 
             //    QCopEnvelope ( "QPE/System", "busy()" );
-            //    odebug << "Title is already set as "+title << oendl;
+               odebug << "Title is already set as "+title << oendl;
         odebug << "sizeHint " << sizeHint().height() << " pageSize " << Lview->PageSize() << "" << oendl;
         if( Lview->PageSize() < 4) {
 
@@ -810,7 +811,7 @@ bool Gutenbrowser::load( const char *fileName) {
         setCaption(title);
         Lview->setAutoUpdate( TRUE);
 
-        Lview->setCursorPosition(0,0,FALSE);
+//        Lview->setCursorPosition(0,0,FALSE);
 
             //    pages = (int)(( Lview->numLines() / Lview->editSize() ) / 2 ) +1;
             //odebug << "number of pages " << pages << "" << oendl;
@@ -901,21 +902,21 @@ int Gutenbrowser::doSearch( const QString &s_pattern , bool case_sensitive,  boo
                                 int top = Lview->Top();
                                 length = s_pattern.length();
                                 if( i > Lview->lastRow() ) {
-                                        Lview->setCursorPosition(i,pos,FALSE);
+//                                        Lview->setCursorPosition(i,pos,FALSE);
                                         for(int l = 0 ; l < length; l++) {
                                                 Lview->cursorRight(TRUE);
                                         }
-                                        Lview->setCursorPosition( i , pos + length, TRUE );
+//                                        Lview->setCursorPosition( i , pos + length, TRUE );
                                         int newTop = Lview->Top();
                                         if(Lview->lastRow() > i)
                                                 Lview->ScrollUp( newTop - top);
                                             //                    AdjustStatus();
                                 } else {
-                                        Lview->setCursorPosition(i,pos,FALSE);
+//                                        Lview->setCursorPosition(i,pos,FALSE);
                                         for(int l = 0 ; l < length; l++) {
                                                 Lview->cursorRight(TRUE);
                                         }
-                                        Lview->setCursorPosition( i , pos + length, TRUE );
+//                                        Lview->setCursorPosition( i , pos + length, TRUE );
                                             //                    AdjustStatus();
                                 }
                                 pattern = s_pattern;
@@ -936,21 +937,21 @@ int Gutenbrowser::doSearch( const QString &s_pattern , bool case_sensitive,  boo
                                         Lview->ScrollDown( Lview->PageSize() );
                                         Lview->MultiLine_Ex::pageUp( FALSE );
                                         if( ! (line == i && pos > col ) ) {
-                                                Lview->setCursorPosition( i ,pos ,FALSE );
+//                                                Lview->setCursorPosition( i ,pos ,FALSE );
                                                 for(int l = 0 ; l < length; l++) {
                                                         Lview->cursorRight(TRUE);
                                                 }
-                                                Lview->setCursorPosition(i ,pos + length ,TRUE );
+//                                                Lview->setCursorPosition(i ,pos + length ,TRUE );
                                                     //                        int newTop = Lview->Top();
                                                     /*                        if(useSplitter) Rview->ScrollUp( newTop - top);
                                                      */                    }
                                 } else {
                                         if( ! (line == i && pos > col ) ) {
-                                                Lview->setCursorPosition( i, pos, FALSE );
+//                                                Lview->setCursorPosition( i, pos, FALSE );
                                                 for( int l = 0 ; l < length; l++) {
                                                         Lview->cursorRight( TRUE);
                                                 }
-                                                Lview->setCursorPosition( i, pos + length, TRUE );
+//                                                Lview->setCursorPosition( i, pos + length, TRUE );
                                         }
                                         pattern = s_pattern;
                                         last_search = -1;
@@ -980,12 +981,7 @@ void Gutenbrowser::LibraryBtn() {
         LibraryDlg->setCaption( tr( "Gutenberg Library"));
         Config config("Gutenbrowser");
         config.setGroup("General");
-        QString tmp=config.readEntry("RunBefore","FALSE");
-        if(tmp=="FALSE") {
-                QMessageBox::message( "Note",
-                                                            "<P>Your first time running gutenbrowser. You'll need to click the \"load library\" button to load the gutenberg index.</P>");
-                config.writeEntry("RunBefore","TRUE");
-        }
+
         if(useSplitter)
                 LibraryDlg->useSmallInterface=FALSE;
 
@@ -1790,12 +1786,12 @@ void Gutenbrowser::listClickedSlot( QListBoxItem * index) {
                 int Bmrkrow = config.readNumEntry("LineNumber", -1);
                 if(Bmrkrow > -1) {
                         if( Bmrkrow >  Lview->topRow() ) {
-                                Lview->setCursorPosition(  Bmrkrow /* - Lview->topRow() */,0, FALSE );
+//                                Lview->setCursorPosition(  Bmrkrow /* - Lview->topRow() */,0, FALSE );
                                 Lview->ScrollUp( Bmrkrow  -  Lview->topRow() );
                                     //                AdjustStatus();
                         }
                         else if( Bmrkrow <  Lview->topRow() ) {
-                                Lview->setCursorPosition(  Lview->topRow() - Bmrkrow ,0, FALSE );
+//                                Lview->setCursorPosition(  Lview->topRow() - Bmrkrow ,0, FALSE );
                                 Lview->ScrollDown( Lview->topRow() - Bmrkrow );
                                     //                AdjustStatus();
                         }

@@ -86,6 +86,8 @@ LibraryDialog::LibraryDialog( QWidget* parent,  const char* name , bool modal, W
         indexLib.setName( old_index);
 
         new QPEDialogListener(this);
+				QTimer::singleShot( 1000, this, SLOT( FindLibrary()) );
+
 }
 
 LibraryDialog::~LibraryDialog()
@@ -255,7 +257,7 @@ void LibraryDialog::Library()
                 indexLib.close();
         } else {
                 QString sMsg;
-                sMsg = ( tr("Error opening local library index:\n "))+local_index;
+                sMsg = ( tr("<p>Error opening local library index:</P> "))+local_index;
                 QMessageBox::message( "Error",sMsg);
         }
 
@@ -511,7 +513,7 @@ bool  LibraryDialog::download_Etext()
                                 } else {
                                 }
                         } else
-                                QMessageBox::message("Note","There was an error\nwith the file");
+                                QMessageBox::message("Note","<p>There was an error with the file</p>");
                 }
         }
         return true;
@@ -939,7 +941,7 @@ void LibraryDialog::newList()
                         QString cmd="wget -O " + gutenindex1 + " http://sailor.gutenberg.org/GUTINDEX.ALL 2>&1";
 
                         int result = QMessageBox::warning( this,"Download"
-                                                                                             ,"Ok to use /'wget/' to download\na new library list?\n"
+                                                                                             ,"<p>Ok to use /'wget/' to download a new library list?</P>"
                                                                                              ,"Yes","No",0,0,1);
                         qApp->processEvents();
                         if(result == 0) {
@@ -1037,7 +1039,7 @@ bool LibraryDialog::moreInfo()
                 cmd="opera "+cmd;
                 system(cmd);
         } else
-                QMessageBox::message( "Note","If you select a title, this will\nsearch google.com for that title.");
+                QMessageBox::message( "Note","<p>If you select a title, this will search google.com for that title.</p>");
         return true;
 
 }

@@ -236,12 +236,13 @@ void  LibraryDialog::initDialog(){
     moreInfoButton->setText("Info");
     moreInfoButton->setDisabled(TRUE);
     buttonSearch->setDisabled(TRUE);
+    buttonSearch->setDefault(TRUE);
 
     buttonSearch->setText(tr("Search"));
 
     buttonCancel->setText(tr("Close"));
     buttonLibrary->setText("Load");
-    buttonLibrary->setDefault(TRUE);
+//    buttonLibrary->setDefault(TRUE);
     buttonNewList->setText("New List");
 
     QStrList sortingList;
