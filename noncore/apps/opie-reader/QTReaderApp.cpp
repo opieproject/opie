@@ -133,8 +133,8 @@ void QTReaderApp::listBkmkFiles()
     }
 
 
-  
-		
+
+
         d.setFilter( QDir::Files | QDir::NoSymLinks );
 //        d.setSorting( QDir::Size | QDir::Reversed );
 
@@ -143,14 +143,14 @@ void QTReaderApp::listBkmkFiles()
         QFileInfo *fi;                          // pointer for traversing
 
         while ( (fi=it.current()) ) {           // for each file...
-  
+
 		    bkmkselector->insertItem(fi->fileName());
 		    cnt++;
-			
+
 			//qDebug( "%10li %s", fi->size(), fi->fileName().data() );
             ++it;                               // goto next list element
         }
- 
+
 #else /* USEQPE */
     int cnt = 0;
     DIR *d;

@@ -16,10 +16,11 @@
  **************************************************************************/
 #include "searchmethoddlg.h"
 
-#include <qdialog.h>
 #include <qpe/config.h>
-#include <qlayout.h>
+#include <qpe/qpeapplication.h>
 
+#include <qdialog.h>
+#include <qlayout.h>
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
@@ -55,7 +56,7 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 	lang2 = new QLineEdit( dummywidget );
 	trenner = new QLineEdit( dummywidget );
 		trenner->setText( "::" );
-	
+
 	QGridLayout *grid = new QGridLayout( dummywidget, 2,3 );
 	grid->addWidget( lag1, 0,0 );
 	grid->addWidget( devider, 0,1 );
@@ -63,14 +64,14 @@ SearchMethodDlg::SearchMethodDlg(QWidget *parent, const char *name, bool modal, 
 	grid->addWidget( lang1, 1,0 );
 	grid->addWidget( trenner, 1,1 );
 	grid->addWidget( lang2, 1,2 );
-	
+
 	vbox_layout->addWidget( vbox );
 
-	showMaximized();
-	
+	QPEApplication::execDialog ( this );
+
 	if( !itemname )
 		setCaption( tr( "New Searchmethod" ) );
-	else 
+	else
 	{
 		setCaption( tr( "Change Searchmethod" ) );
 		itemName = itemname;

@@ -483,8 +483,7 @@ void Checkbook::slotNewTran()
 	Transaction *currtran = new Transaction( this, true, info->name(),
 											 traninfo,
 											 _pCfg );
-	currtran->showMaximized();
-	if ( currtran->exec() == QDialog::Accepted )
+	if ( QPEApplication::execDialog( currtran ) == QDialog::Accepted )
 	{
 		// Add to transaction list
 		info->addTransaction( traninfo );
@@ -530,8 +529,7 @@ void Checkbook::slotEditTran()
 	Transaction *currtran = new Transaction( this, false, info->name(),
 											 traninfo,
 											 _pCfg );
-	currtran->showMaximized();
-	if ( currtran->exec() == QDialog::Accepted )
+	if ( QPEApplication::execDialog( currtran ) == QDialog::Accepted )
 	{
 		curritem->setText( COL_NUM, traninfo->number() );
         curritem->setText( COL_SORTDATE, traninfo->datestr(false) );

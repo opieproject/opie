@@ -40,14 +40,16 @@
 #include <qscrollview.h>
 #include <qsignalmapper.h>
 
-TVEditView::TVEditView(TableState *s, DataElem *d, QWidget* parent, 
+#include <qpe/qpeapplication.h>
+
+TVEditView::TVEditView(TableState *s, DataElem *d, QWidget* parent,
         const char *name, WFlags fl ) : QDialog(parent, name, true, fl)
 {
     if (!name)
         setName("TVEditView");
 
     QVBoxLayout *layout = new QVBoxLayout(this, 0); /* only so that will resize
-                                                       correctly in other 
+                                                       correctly in other
                                                        widgets */
 
     toggles = new QSignalMapper(this);
@@ -64,7 +66,7 @@ TVEditView::TVEditView(TableState *s, DataElem *d, QWidget* parent,
 
     setData(s, d);
 #ifdef Q_WS_QWS
-    showMaximized();
+    QPEApplication::showDialog( this );
 #endif
 }
 

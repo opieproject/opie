@@ -36,11 +36,11 @@
 #include <qpe/config.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
-#include <qmenubar.h>
 #include <qpe/qpemessagebox.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
 
+#include <qmenubar.h>
 #include <qaction.h>
 #include <qcheckbox.h>
 #include <qdir.h>
@@ -214,8 +214,7 @@ void MainWindow::slotNew()
     CBInfo *cb = new CBInfo();
 
     Checkbook *currcb = new Checkbook( this, cb, &_cfg );
-    currcb->showMaximized();
-    if ( currcb->exec() == QDialog::Accepted )
+    if ( QPEApplication::execDialog( currcb ) == QDialog::Accepted )
     {
         // Save new checkbook
         buildFilename( cb->name() );
@@ -272,8 +271,7 @@ void MainWindow::openBook(QListViewItem *curritem)
 
     _cfg.setLastBook( currname );
     Checkbook *currcb = new Checkbook( this, cb, &_cfg );
-    currcb->showMaximized();
-    if ( currcb->exec() == QDialog::Accepted )
+    if ( QPEApplication::execDialog( currcb ) == QDialog::Accepted )
     {
         QString newname = cb->name();
         if ( currname != newname )
@@ -345,8 +343,7 @@ void MainWindow::slotDelete()
 void MainWindow::slotConfigure()
 {
     Configuration *cfgdlg = new Configuration( this, _cfg );
-    cfgdlg->showMaximized();
-    if ( cfgdlg->exec() == QDialog::Accepted )
+    if ( QPEApplication::execDialog( cfgdlg ) == QDialog::Accepted )
     {
         // read data from config dialog & save it
         cfgdlg->saveConfig( _cfg );

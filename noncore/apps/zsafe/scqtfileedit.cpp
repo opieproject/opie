@@ -6,7 +6,7 @@
     email                : sc@schulte-ac.de
  ***************************************************************************/
 
-/* $Id: scqtfileedit.cpp,v 1.1 2003-07-22 19:23:16 zcarsten Exp $ */
+/* $Id: scqtfileedit.cpp,v 1.2 2004-02-08 19:14:56 ar Exp $ */
 
 /***************************************************************************
  *                                                                         *
@@ -27,6 +27,8 @@
 #include "qtoolbutton.h"
 
 #include "scqtfileedit.h"
+
+#include <qpe/qpeapplication.h>
 
 // #define DEBUGFILEEDIT
 
@@ -158,7 +160,7 @@ ScQtFileEditDlg::ScQtFileEditDlg( QWidget *parent, const char *name,
   cdToParentIcon = new QPixmap( (const char **)cdtoparent_xpm);
 
 #ifdef QWS
-  showMaximized();
+  QPEApplication::execDialog( this );
 #endif
 
   mkdirflag = false;

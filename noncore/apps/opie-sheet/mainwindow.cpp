@@ -17,10 +17,13 @@
 #include <qpe/filemanager.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
+#include <qpe/qpeapplication.h>
+
 #include <qmessagebox.h>
 #include <qfile.h>
 #include <qtranslator.h>
 #include <qradiobutton.h>
+
 #include "cellformat.h"
 #include "numberdlg.h"
 #include "textdlg.h"
@@ -747,7 +750,7 @@ void MainWindow::addFlyAction(const QString &text, const QString &menuText, cons
 void MainWindow::slotFormatCells()
 {
   CellFormat dialogCellFormat(this);
-  dialogCellFormat.showMaximized();
+  QPEApplication::showDialog( &dialogCellFormat );
   dialogCellFormat.exec(sheet);
 }
 
@@ -967,7 +970,7 @@ void MainWindow::slotSheetRemove()
 void MainWindow::slotDataSort()
 {
   SortDialog dialogSort(this);
-  dialogSort.showMaximized();
+  QPEApplication::showDialog( &dialogSort );
   dialogSort.exec(sheet);
 }
 
@@ -1003,6 +1006,6 @@ void MainWindow::slotInsertCells()
 void MainWindow::slotDataFindReplace()
 {
   FindDialog dialogFind(this);
-  dialogFind.showMaximized();
+  QPEApplication::showDialog( &dialogFind );
   dialogFind.exec(sheet);
 }

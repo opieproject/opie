@@ -23,6 +23,7 @@
 #ifdef USEQPE
 #include <qpe/menubutton.h>
 #endif
+#include <qpe/qpeapplication.h>
 
 CBarPrefs::CBarPrefs(const QString& appdir, bool fs, QWidget* parent, const char* name) : QDialog(parent, name, true), config( appdir )
 {
@@ -43,7 +44,8 @@ CBarPrefs::CBarPrefs(const QString& appdir, bool fs, QWidget* parent, const char
     QVBoxLayout* v = new QVBoxLayout(this);
     v->addWidget(td);
 
-    if (fs) showMaximized();
+    if (fs)
+        QPEApplication::showDialog( this );
 }
 
 /*

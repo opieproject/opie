@@ -1,3 +1,6 @@
+
+#include <qpe/qpeapplication.h>
+
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qcombobox.h>
@@ -237,8 +240,7 @@ void ModemConfigWidget::slotAT() {
     // but making it a TopLevel Dialog and ignoring
     // cancel is not fun either...
     // what to do? FIXME!!! -zecke
-    atConf->showMaximized();
-    if ( atConf->exec() != QDialog::Accepted ) {
+    if ( QPEApplication::execDialog( atConf ) != QDialog::Accepted ) {
         // reload old settings
     }
 }
@@ -248,8 +250,7 @@ void ModemConfigWidget::slotDial() {
     if(!m_telNumber->text().isEmpty()) {
         dial.setNumber(m_telNumber->text().replace(QRegExp("[\\-\\/\\ \\.\\,]"), ""));
     }
-    dial.showMaximized();
-    if ( dial.exec() == QDialog::Accepted ) {
+    if ( QPEApplication::execDialog( &dial ) == QDialog::Accepted ) {
         m_telNumber->setText( dial.number() );
     }
 }

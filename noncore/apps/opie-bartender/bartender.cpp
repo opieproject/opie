@@ -169,8 +169,7 @@ void Bartender::fileNew() {
     New_Drink *newDrinks;
     newDrinks = new New_Drink(this,"New Drink....", TRUE);
     QString newName, newIng;
-    newDrinks->showMaximized();
-    newDrinks->exec();
+    QPEApplication::execDialog( newDrinks );
     newName = newDrinks->LineEdit1->text();
     newIng= newDrinks->MultiLineEdit1->text();
 
@@ -226,8 +225,7 @@ void Bartender::showDrink( QListViewItem *item) {
             }
         }
     }
-    showDrinks->showMaximized();
-    showDrinks->exec();
+    QPEApplication::execDialog( showDrinks );
 
     if(showDrinks ->result() ==0) {
        doEdit();
@@ -317,9 +315,8 @@ void Bartender::showSearchResult(QStringList &searchList) {
     searchList.sort();
         
     searchDlg = new Search_Results(this, "Search Results", TRUE);
-    searchDlg->showMaximized();
     searchDlg->ListBox1->insertStringList( searchList,-1);
-    searchDlg->exec();
+    QPEApplication::execDialog( searchDlg );
 
     if( searchDlg->result() == 1 ) {
         result= searchDlg->ListBox1->currentText();
@@ -346,9 +343,9 @@ void Bartender::doEdit() {
     New_Drink *newDrinks;
     newDrinks = new New_Drink(this,"Edit Drink....", TRUE);
     QString newName, newIng;
-    newDrinks->showMaximized();
+    QPEApplication::showDialog( newDrinks );
     QTextStream t( &dbFile);
-    
+
     QString s, s2;
     while ( !t.eof()) {
         s = t.readLine();
@@ -401,8 +398,7 @@ void Bartender::clearList() {
 void Bartender::doBac() {
     BacDialog *bacDlg;
     bacDlg = new BacDialog(this,"BAC",TRUE);
-    bacDlg->showMaximized();
-    bacDlg->exec();
+    QPEApplication::execDialog( bacDlg );
     delete bacDlg;
 }
 

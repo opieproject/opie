@@ -26,6 +26,8 @@
 #include <stdlib.h>
 #include <qpushbutton.h>
 
+#include <qpe/qpeapplication.h>
+
 /* QList view item... ?? that can store and update the values that I will
  * be changing */
 
@@ -135,19 +137,19 @@ TVKeyEdit::TVKeyEdit(TableState *t, QWidget* parent, const char *name,
 
     display->setSorting(0);
 #ifdef Q_WS_QWS
-    showMaximized();
+    QPEApplication::showDialog( this );
 #endif
 }
 
 /*!
-    Destroys the TVKeyEdit widget 
+    Destroys the TVKeyEdit widget
 */
 TVKeyEdit::~TVKeyEdit()
 {
 }
 
 /* SLOTS */
-void TVKeyEdit::newTerm() 
+void TVKeyEdit::newTerm()
 {
     /* new item, make current Item */
     int i;

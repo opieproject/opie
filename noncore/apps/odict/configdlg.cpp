@@ -17,10 +17,11 @@
 #include "configdlg.h"
 #include "searchmethoddlg.h"
 
-#include <qdialog.h>
+#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
-#include <qlayout.h>
 
+#include <qdialog.h>
+#include <qlayout.h>
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlabel.h>
@@ -35,7 +36,7 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 	QVBoxLayout *vbox_layout = new QVBoxLayout( this );
 	search_tab = new QWidget( this , "search_tab" );
 	QVBoxLayout *vbox_layout_searchtab = new QVBoxLayout( search_tab, 4 , 4 ,"blah" );
-	
+
 	QHBox *hbox = new QHBox( search_tab );
 	list = new QListView( hbox );
 	list->addColumn( tr( "Searchmethod" ) );
@@ -53,7 +54,7 @@ ConfigDlg::ConfigDlg(QWidget *parent, const char *name, bool modal) : QDialog(pa
 
 	vbox_layout->addWidget( search_tab );
 
-	showMaximized();
+	QPEApplication::execDialog( this );
 }
 
 void ConfigDlg::slotNewMethod()

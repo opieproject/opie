@@ -1,6 +1,8 @@
 #include "CloseDialog.h"
 #include "qlayout.h"
 
+#include <qpe/qpeapplication.h>
+
 CCloseDialog::CCloseDialog(const QString& fname, bool fs, QWidget* parent, const char* name) : QDialog(parent, name, true)
 {
     setCaption(tr("Tidy-up"));
@@ -14,5 +16,6 @@ CCloseDialog::CCloseDialog(const QString& fname, bool fs, QWidget* parent, const
     file->setChecked(false);
     marks->setChecked(true);
     config->setChecked(true);
-    if (fs) showMaximized();
+    if (fs)
+        QPEApplication::showDialog( this );
 }

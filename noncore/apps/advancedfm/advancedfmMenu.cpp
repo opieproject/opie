@@ -240,9 +240,8 @@ void AdvancedFm::filePerms() {
    for ( QStringList::Iterator it = curFileList.begin(); it != curFileList.end(); ++it ) {
       filePermissions *filePerm;
       filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)(filePath+*it));
-      filePerm->showMaximized();
-      filePerm->exec();
-      if( filePerm)
+      QPEApplication::execDialog( filePerm );
+      if( filePerm )
          delete  filePerm;
    }
 	populateView();
@@ -262,8 +261,7 @@ void AdvancedFm::doProperties() {
 //      qDebug((filePath+*it));
       DocLnk lnk( (filePath+*it));
       LnkProperties prop( &lnk );
-      prop.showMaximized();
-      prop.exec();
+      QPEApplication::execDialog( &prop );
    }
 #endif
 
@@ -601,8 +599,7 @@ void AdvancedFm::runCommand() {
       command <<  fileDlg->LineEdit1->text();
       Output *outDlg;
       outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
-      outDlg->showMaximized();
-      outDlg->exec();
+      QPEApplication::execDialog( outDlg );
       qApp->processEvents();
 
    }
@@ -639,8 +636,7 @@ void AdvancedFm::fileStatus() {
 
    Output *outDlg;
    outDlg = new Output( command, this, tr("AdvancedFm Output"), true);
-   outDlg->showMaximized();
-   outDlg->exec();
+   QPEApplication::execDialog( outDlg );
    qApp->processEvents();
 }
 

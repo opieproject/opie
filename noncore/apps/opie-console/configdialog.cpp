@@ -1,5 +1,7 @@
-#include <qlistview.h>
 
+#include <qpe/qpeapplication.h>
+
+#include <qlistview.h>
 
 #include "configdialog.h"
 #include "profileeditordialog.h"
@@ -73,8 +75,7 @@ void ConfigDialog::slotEdit() {
 	ProfileEditorDialog dlg(m_fact, p);
 
 	dlg.setCaption(tr("Edit Connection Profile"));
-	dlg.showMaximized();
-	int ret = dlg.exec();
+	int ret = QPEApplication::execDialog( &dlg );
 
 	if(ret == QDialog::Accepted)
 	{
@@ -92,8 +93,7 @@ void ConfigDialog::slotAdd() {
 	ProfileEditorDialog dlg(m_fact);
 
 	dlg.setCaption(tr("New Connection"));
-	dlg.showMaximized();
-	int ret = dlg.exec();
+	int ret = QPEApplication::execDialog( &dlg );
 
 	if(ret == QDialog::Accepted)
 	{

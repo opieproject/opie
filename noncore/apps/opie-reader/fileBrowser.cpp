@@ -22,6 +22,8 @@ Extensive modification by Tim Wentford to allow it to work in rotated mode
 #include <direct.h>
 #endif
 
+#include <qpe/qpeapplication.h>
+
 #include "opie.h"
 
 fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, bool modal, WFlags fl , const QString filter, const QString iPath )
@@ -115,7 +117,8 @@ fileBrowser::fileBrowser( bool allownew, QWidget* parent,  const char* name, boo
 
     populateList();
 
-    if (modal) showMaximized();
+    if (modal)
+        QPEApplication::showDialog( this );
 }
 
 void fileBrowser::resizeEvent(QResizeEvent* e)

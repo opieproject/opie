@@ -84,6 +84,7 @@
 #include "kateviewdialog.h"
 #include "kateundohistory.h"
 #include <qlayout.h>
+#include <qpe/qpeapplication.h>
 
 KateViewInternal::KateViewInternal(KateView *view, KateDocument *doc) : QWidget(view)
 {
@@ -2327,8 +2328,7 @@ void KateView::configDialog()
   (new QVBoxLayout(page))->setAutoAdd(true);
 
   hlPage = new HighlightDialogPage(hlManager, &defaultStyleList, &hlDataList, 0, page);
-  kd->showMaximized();
- if (kd->exec()) {
+ if ( QPEApplication::execDialog( kd )) {
     // color options
     colorConfig->getColors(colors);
     myDoc->setFont (fontConfig->getFont());

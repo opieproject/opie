@@ -127,8 +127,7 @@ void KVNC::newConnection()
     curServer=new KRFBServer;
 
 		KVNCConnDlg dlg( curServer,this);
-		dlg.showMaximized();
-		if (	dlg.exec()) {
+		if ( QPEApplication::execDialog( &dlg )) {
 				if (!curServer->name.isEmpty())
 						bookmarkSelector->addBookmark(curServer);
 				canvas->openConnection(*curServer);
@@ -142,9 +141,7 @@ void KVNC::openConnection( QString name)
 
 		if (curServer) {
 				KVNCConnDlg dlg( curServer,this);
-			dlg.showMaximized();
-
-			if ( dlg.exec() ) {
+			if ( QPEApplication::execDialog( &dlg ) ) {
 					canvas->openConnection(*curServer);
 					bookmarkSelector->writeBookmarks();
 			} else

@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "tvfilterview.h"
 #include <qtoolbutton.h>
 #include <qcombobox.h>
@@ -26,7 +26,9 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 
-TVFilterView::TVFilterView(TableState *t, QWidget* parent, 
+#include <qpe/qpeapplication.h>
+
+TVFilterView::TVFilterView(TableState *t, QWidget* parent,
                            const char *name, WFlags fl ) : QDialog(parent, name, TRUE, fl)
 {
     if ( !name ) 
@@ -95,7 +97,7 @@ TVFilterView::TVFilterView(TableState *t, QWidget* parent,
     do_filter = false;
 
 #ifdef Q_WS_QWS
-    showMaximized();
+    QPEApplication::showDialog( this );
 #endif
 }
 

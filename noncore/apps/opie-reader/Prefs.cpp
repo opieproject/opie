@@ -27,6 +27,8 @@
 #include <qfontdatabase.h>
 #endif
 
+#include <qpe/qpeapplication.h>
+
 CLayoutPrefs::CLayoutPrefs( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
@@ -427,7 +429,8 @@ CPrefs::CPrefs(bool fs, QWidget* parent, const char* name) : QDialog(parent, nam
     QVBoxLayout* v = new QVBoxLayout(this);
     v->addWidget(td);
 
-    if (fs) showMaximized();
+    if (fs)
+        QPEApplication::showDialog( this );
 }
 
 

@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.8 2003-08-20 16:57:52 zcarsten Exp $
+** $Id: zsafe.cpp,v 1.9 2004-02-08 19:14:56 ar Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -775,14 +775,8 @@ void ZSafe::editPwd()
        dialog->Field6->setText(selectedItem->text (5));
        dialog->CommentField->insertLine(comment);
        dialog->CommentField->setCursorPosition(0,0);
-#ifdef DESKTOP
-#ifndef WIN32
-       dialog->show();
-#endif
-#else
-       dialog->showMaximized();
-#endif
-       DialogCode result = (DialogCode) dialog->exec();
+
+       DialogCode result = (DialogCode) QPEApplication::execDialog( dialog );
 
 #ifdef DESKTOP
        result = Accepted;
@@ -840,21 +834,15 @@ void ZSafe::newPwd()
        dialog->Field5Label->setText(getFieldLabel (selectedItem,"5", tr("Field 4")));
        dialog->Field6Label->setText(getFieldLabel (selectedItem,"6", tr("Field 5")));
 retype:
-#ifdef DESKTOP
-#ifndef WIN32
-       dialog->show();
-#endif
-#else
-       dialog->showMaximized();
-#endif
-       DialogCode result = (DialogCode) dialog->exec();
+
+       DialogCode result = (DialogCode) QPEApplication::execDialog( dialog );
 #ifdef DESKTOP
        result = Accepted;
 #endif
 
        if (result == Accepted)
        {
-        
+
           QString name = dialog->NameField->text(); 
           if (cat == name)
           {
@@ -1188,12 +1176,7 @@ void ZSafe::showInfo( QListViewItem *_item)
 
       infoForm->InfoText->setText(text);
       infoForm->hide();
-#ifdef DESKTOP
-      infoForm->show();
-#else
-      infoForm->showMaximized();
-#endif
-
+      QPEApplication::showDialog( infoForm );
    }
 }
 
@@ -1203,7 +1186,7 @@ void ZSafe::listViewSelected( QListViewItem *_item)
       return;
    if (selectedItem != NULL)
       selectedItem->setSelected(FALSE);
-   
+
    selectedItem = _item;
 
 #ifndef DESKTOP

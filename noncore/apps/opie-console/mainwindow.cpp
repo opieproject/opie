@@ -8,6 +8,7 @@
 #include <qfileinfo.h>
 
 #include <qpe/filemanager.h>
+#include <qpe/qpeapplication.h>
 
 #include <opie/ofiledialog.h>
 
@@ -310,9 +311,8 @@ QList<Session> MainWindow::sessions() {
 
 void MainWindow::slotNew() {
     ProfileEditorDialog dlg(factory() );
-    dlg.showMaximized();
     dlg.setCaption( tr("New Connection") );
-    int ret = dlg.exec();
+    int ret = QPEApplication::execDialog( &dlg );
 
     if ( ret == QDialog::Accepted ) {
         create( dlg.profile() );
@@ -425,9 +425,8 @@ void MainWindow::slotQuickLaunch()  {
 
 void MainWindow::slotConfigure() {
     ConfigDialog conf( manager()->all(), factory() );
-    conf.showMaximized();
 
-    int ret = conf.exec();
+    int ret = QPEApplication::execDialog( &conf );
 
     if ( QDialog::Accepted == ret ) {
         manager()->setProfiles( conf.list() );
