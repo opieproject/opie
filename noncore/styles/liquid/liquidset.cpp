@@ -27,17 +27,15 @@
 #include <qpe/global.h>
 
 #include <qslider.h>
-#include <qtoolbutton.h>
 #include <qcombobox.h>
 #include <qradiobutton.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpalette.h>
 
 #include <qpe/config.h>
 
-#include <opie/colorpopupmenu.h>
+#include <opie/ocolorbutton.h>
 
 
 static void changeButtonColor ( QWidget *btn, const QColor &col )
@@ -66,8 +64,8 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
     config. setGroup ( "Liquid-Style" );
 
 	m_type       = config. readNumEntry ( "Type", TransStippleBg );
-	m_menucol    = QColor ( config. readEntry ( "Color",  QApplication::palette ( ). active ( ). button ( ). name ( )));
-	m_textcol    = QColor ( config. readEntry ( "TextColor", QApplication::palette ( ). active ( ). text ( ). name ( )));
+	QColor mcol  = QColor ( config. readEntry ( "Color",  QApplication::palette ( ). active ( ). button ( ). name ( )));
+	QColor tcol  = QColor ( config. readEntry ( "TextColor", QApplication::palette ( ). active ( ). text ( ). name ( )));
 	int opacity  = config. readNumEntry ( "Opacity", 10 );
 	m_shadow     = config. readBoolEntry ( "ShadowText", true );
 	m_deco       = config. readBoolEntry ( "WinDecoration", true );
@@ -98,25 +96,13 @@ LiquidSettings::LiquidSettings ( QWidget* parent, const char *name, WFlags fl )
 	grid-> addWidget ( m_textlbl = new QLabel ( tr( "Text color" ), this ), 0, 4 );
 	grid-> addWidget ( m_opaclbl = new QLabel ( tr( "Opacity" ), this ), 1, 1 );
 
-	m_menubtn = new QToolButton ( this );
+	m_menubtn = new OColorButton ( this );
+	m_menubtn-> setColor ( mcol );
 	grid-> addWidget ( m_menubtn, 0, 2 );
 
-	QPopupMenu *popup;
-
-	popup = new ColorPopupMenu ( m_menucol, 0 );
-	m_menubtn-> setPopup ( popup );
-	m_menubtn-> setPopupDelay ( 0 );
-	connect ( popup, SIGNAL( colorSelected ( const QColor & )), this, SLOT( changeMenuColor ( const QColor & )));
-	changeMenuColor ( m_menucol );
-
-	m_textbtn = new QToolButton ( this );
+	m_textbtn = new OColorButton ( this );
+	m_textbtn-> setColor ( tcol );
 	grid-> addWidget ( m_textbtn, 0, 5 );
-
-	popup = new ColorPopupMenu ( m_textcol, 0 );
-	m_textbtn-> setPopup ( popup );
-	m_textbtn-> setPopupDelay ( 0 );
-	connect ( popup, SIGNAL( colorSelected ( const QColor & )), this, SLOT( changeTextColor ( const QColor & )));
-	changeTextColor ( m_textcol );
 
 	m_opacsld = new QSlider ( Horizontal, this );
 	m_opacsld-> setRange ( -20, 20 );
@@ -178,18 +164,6 @@ void LiquidSettings::changeType ( int t )
 	m_type = t;
 }
 
-void LiquidSettings::changeMenuColor ( const QColor &col )
-{
-	changeButtonColor ( m_menubtn, col );
-	m_menucol = col;
-}
-
-void LiquidSettings::changeTextColor ( const QColor &col )
-{
-	changeButtonColor ( m_textbtn, col );
-	m_textcol = col;
-}
-
 void LiquidSettings::changeShadow ( bool b )
 {
 	m_shadow = b;
@@ -212,8 +186,8 @@ bool LiquidSettings::writeConfig ( )
     config. setGroup ( "Liquid-Style" );
 
 	config. writeEntry ( "Type", m_type  );
-	config. writeEntry ( "Color",  m_menucol. name ( ));
-	config. writeEntry ( "TextColor", m_textcol. name ( ));
+	config. writeEntry ( "Color",  m_menubtn-> color ( ). name ( ));
+	config. writeEntry ( "TextColor", m_textbtn-> color ( ). name ( ));
 	config. writeEntry ( "Opacity", m_opacsld-> value ( ));
 	config. writeEntry ( "ShadowText", m_shadow );	
 	config. writeEntry ( "WinDecoration", m_deco );

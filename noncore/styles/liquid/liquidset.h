@@ -5,7 +5,7 @@
 #include <qcolor.h>
 
 class QLabel;
-class QToolButton;
+class OColorButton;
 class QSlider;
 
 class LiquidSettings : public QWidget {
@@ -16,8 +16,6 @@ public:
 
 public slots:
 	void changeType ( int t );
-	void changeMenuColor ( const QColor &col );
-	void changeTextColor ( const QColor &col );
 	void changeShadow ( bool b );
 	void changeDeco ( bool b );
 	void changeFlat ( bool b );
@@ -25,19 +23,17 @@ public slots:
 	virtual bool writeConfig ( );
 	
 private:
-	QColor m_menucol;
-	QColor m_textcol;
 	int    m_type;
 	bool   m_shadow;
 	bool   m_deco;
 	bool   m_flat;
 	
-	QSlider *    m_opacsld;
-	QSlider *    m_contsld;
-	QLabel *     m_menulbl;
-	QLabel *     m_textlbl;
-	QLabel *     m_opaclbl;
-	QToolButton *m_menubtn;
-	QToolButton *m_textbtn;
+	QSlider *     m_opacsld;
+	QSlider *     m_contsld;
+	QLabel *      m_menulbl;
+	QLabel *      m_textlbl;
+	QLabel *      m_opaclbl;
+	OColorButton *m_menubtn;
+	OColorButton *m_textbtn;
 };
 #endif
