@@ -184,6 +184,8 @@ session.o: session.cpp \
 keytrans.o: keytrans.cpp \
 		keytrans.h \
 		$(QPEDIR)/include/qpe/qpeapplication.h \
+		$(QPEDIR)/include/qpedecoration_qws.h \
+		$(QPEDIR)/include/timestring.h \
 		default.keytab.h
 
 konsole.o: konsole.cpp \
@@ -204,6 +206,7 @@ konsole.o: konsole.cpp \
 
 main.o: main.cpp \
 		konsole.h \
+		$(QPEDIR)/include/qpe/qpetoolbar.h \
 		MyPty.h \
 		TEWidget.h \
 		TECommon.h \
@@ -213,7 +216,9 @@ main.o: main.cpp \
 		TEmulation.h \
 		keytrans.h \
 		session.h \
-		$(QPEDIR)/include/qpe/qpeapplication.h
+		$(QPEDIR)/include/qpe/qpeapplication.h \
+		$(QPEDIR)/include/qpedecoration_qws.h \
+		$(QPEDIR)/include/timestring.h
 
 MyPty.o: MyPty.cpp \
 		MyPty.h
@@ -252,6 +257,7 @@ moc_session.o: moc_session.cpp \
 
 moc_konsole.o: moc_konsole.cpp \
 		konsole.h \
+		$(QPEDIR)/include/qpe/qpetoolbar.h \
 		MyPty.h \
 		TEWidget.h \
 		TECommon.h \

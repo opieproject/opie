@@ -17,6 +17,7 @@
 ** not clear to you.
 **
 **********************************************************************/
+#define QTOPIA_INTERNAL_LANGLIST
 #include <qpe/qpedebug.h>
 #include <qpe/global.h>
 #include <qpe/qdawg.h>
@@ -170,12 +171,18 @@ const QDawg& Global::fixedDawg()
 
 	fixed_dawg = new QDawg;
 	QString dawgfilename = dictDir() + "/dawg";
-	QString lang = getenv( "LANG" );
-	QString dawgfilename_lang = dawgfilename + "." + lang;
-	QString words_lang = dictDir() + "/words." + lang;
-	if ( QFile::exists(dawgfilename_lang) ||
-	     QFile::exists(words_lang) )
-	    dawgfilename = dawgfilename_lang;
+	QString words_lang;
+	QStringList langs = Global::languageList();
+	for (QStringList::ConstIterator it = langs.begin(); it!=langs.end(); ++it) {
+	    QString lang = *it;
+	    words_lang = dictDir() + "/words." + lang;
+	    QString dawgfilename_lang = dawgfilename + "." + lang;
+	    if ( QFile::exists(dawgfilename_lang) ||
+		 QFile::exists(words_lang) ) {
+		dawgfilename = dawgfilename_lang;
+		break;
+	    }
+	}
 	QFile dawgfile(dawgfilename);
 
 	if ( !dawgfile.exists() ) {
@@ -639,6 +646,42 @@ void Global::findDocuments(DocLnkSet* folder, const QString &mimefilter)
     }
 }
 
+QStringList Global::languageList()
+{
+    QString lang = getenv("LANG");
+    QStringList langs;
+    langs.append(lang);
+    int i  = lang.find(".");
+    if ( i > 0 )
+	lang = lang.left( i );
+    i = lang.find( "_" );
+    if ( i > 0 )
+	langs.append(lang.left(i));
+    return langs;
+}
+
+QStringList Global::helpPath()
+{
+    QStringList path;
+    QStringList langs = Global::languageList();
+    for (QStringList::ConstIterator it = langs.fromLast(); it!=langs.end(); --it) {
+	QString lang = *it;
+	if ( !lang.isEmpty() )
+	    path += QPEApplication::qpeDir() + "/help/" + lang + "/html";
+    }
+    path += QPEApplication::qpeDir() + "/pics";
+    path += QPEApplication::qpeDir() + "/help/en/html";
+    path += QPEApplication::qpeDir() + "/docs";
+    QString dir = QDir::current().canonicalPath();
+    if ( dir == "/" )
+	dir += "/docs";
+    else {
+	path += dir + "/../pics";
+	dir += "/../docs";
+	path += dir;
+    }
+    return path;
+}
 
 
 #include "global.moc"

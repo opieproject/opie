@@ -67,7 +67,13 @@ static const char *pix_mine[]={
 "......#......",
 "......#......"};
 
-class Mine : public QTableItem
+
+static const int maxGrid = 28;
+static const int minGrid = 9;
+
+
+
+class Mine : public Qt
 {
 public:
     enum MineState {
@@ -82,10 +88,10 @@ public:
 	Wrong
     };
 
-    Mine( QTable* );
-    void paint( QPainter * p, const QColorGroup & cg, const QRect & cr, bool selected );
-    EditType editType() const { return Never; }
-    QSize sizeHint() const { return QSize( 12, 12 ); }
+    Mine( MineField* );
+    void paint( QPainter * p, const QColorGroup & cg, const QRect & cr );
+
+    QSize sizeHint() const { return QSize( maxGrid, maxGrid ); }
 
     void activate( bool sure = TRUE );
     void setHint( int );
@@ -103,7 +109,8 @@ private:
     int hint;
 
     MineState st;
-
+    MineField *field;
+    
     static QPixmap* knownField;
     static QPixmap* unknownField;
     static QPixmap* flag_pix;
@@ -115,12 +122,12 @@ QPixmap* Mine::unknownField = 0;
 QPixmap* Mine::flag_pix = 0;
 QPixmap* Mine::mine_pix = 0;
 
-Mine::Mine( QTable *t )
-: QTableItem( t, Never, QString::null )
+Mine::Mine( MineField *f )
 {
     mined = FALSE;
     st = Hidden;
     hint = 0;
+    field = f;
 }
 
 void Mine::activate( bool sure )
@@ -173,13 +180,15 @@ void Mine::paletteChange()
     flag_pix = 0;
 }
 
-void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr, bool )
+void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr )
 {
+    int x = cr.x();
+    int y = cr.y();
     if ( !knownField ) {
 	knownField = new QPixmap( cr.width(), cr.height() );
 	QPainter pp( knownField );
 	QBrush br( cg.button().dark(115) );
-	qDrawWinButton( &pp, QRect(0,0,cr.width(), cr.height())/*cr*/, cg, TRUE, &br );
+	qDrawWinButton( &pp, cr, cg, TRUE, &br );
     }
 
     const int pmmarg=cr.width()/5;
@@ -188,7 +197,7 @@ void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr, bool )
 	unknownField = new QPixmap( cr.width(), cr.height() );
 	QPainter pp( unknownField );
 	QBrush br( cg.button() );
-	qDrawWinButton( &pp, QRect(0,0,cr.width(), cr.height())/*cr*/, cg, FALSE, &br );
+	qDrawWinButton( &pp, cr, cg, FALSE, &br );
     }
 
     if ( !flag_pix ) {
@@ -205,52 +214,62 @@ void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr, bool )
 
     switch(st) {
     case Hidden:
-	p->drawPixmap( 0, 0, *unknownField );
+	p->drawPixmap( x, y, *unknownField );
 	break;
     case Empty:
-	p->drawPixmap( 0, 0, *knownField );
+	p->drawPixmap( x, y, *knownField );
 	if ( hint > 0 ) {
 	    switch( hint ) {
 	    case 1:
 		p->setPen( blue );
 		break;
 	    case 2:
-		p->setPen( green );
+		p->setPen( green.dark() );
+		break;
 	    case 3:
 		p->setPen( red );
 		break;
-	    default:
+	    case 4:
+		p->setPen( darkYellow.dark() );
+		break;
+	    case 5:
 		p->setPen( darkMagenta );
 		break;
+	    case 6:
+		p->setPen( darkRed );
+		break;
+	    default:
+		p->setPen( black );
+		break;
 	    }
-	    p->drawText( QRect( 0, 0, cr.width(), cr.height() ), AlignHCenter | AlignVCenter, QString().setNum( hint ) );
+	    p->drawText( cr, AlignHCenter | AlignVCenter, QString::number( hint ) );
 	}
 	break;
     case Mined:
-	p->drawPixmap( 0, 0, *knownField );
-	p->drawPixmap( pmmarg, pmmarg, *mine_pix );
+	p->drawPixmap( x, y, *knownField );
+	p->drawPixmap( x+pmmarg, y+pmmarg, *mine_pix );
 	break;
     case Exploded:
-	p->drawPixmap( 0, 0, *knownField );
-	p->drawPixmap( pmmarg, pmmarg, *mine_pix );
+	p->drawPixmap( x, y, *knownField );
+	p->drawPixmap( x+pmmarg, y+pmmarg, *mine_pix );
 	p->setPen( red );
-	p->drawText( QRect( 0, 0, cr.width(), cr.height() ), AlignHCenter | AlignVCenter, "X" );
+	p->drawText( cr, AlignHCenter | AlignVCenter, "X" );
 	break;
     case Flagged:
-	p->drawPixmap( 0, 0, *unknownField );
-	p->drawPixmap( pmmarg, pmmarg, *flag_pix );
+	p->drawPixmap( x, y, *unknownField );
+	p->drawPixmap( x+pmmarg, y+pmmarg, *flag_pix );
 	break;
 #ifdef MARK_UNSURE
     case Unsure:
-	p->drawPixmap( 0, 0, *unknownField );
-	p->drawText( QRect( 0, 0, cr.width(), cr.height() ), AlignHCenter | AlignVCenter, "?" );
+	p->drawPixmap( x, y, *unknownField );
+	p->drawText( cr, AlignHCenter | AlignVCenter, "?" );
 	break;
 #endif
     case Wrong:
-	p->drawPixmap( 0, 0, *unknownField );
-	p->drawPixmap( pmmarg, pmmarg, *flag_pix );
+	p->drawPixmap( x, y, *unknownField );
+	p->drawPixmap( x+pmmarg, y+pmmarg, *flag_pix );
 	p->setPen( red );
-	p->drawText( QRect( 0, 0, cr.width(), cr.height() ), AlignHCenter | AlignVCenter, "X" );
+	p->drawText( cr, AlignHCenter | AlignVCenter, "X" );
 	break;
     }
 
@@ -262,38 +281,31 @@ void Mine::paint( QPainter* p, const QColorGroup &cg, const QRect& cr, bool )
 */
 
 MineField::MineField( QWidget* parent, const char* name )
-: QTable( parent, name )
+: QScrollView( parent, name )
 {
     setState( GameOver );
-    setShowGrid( FALSE );
-    horizontalHeader()->hide();
-    verticalHeader()->hide();
-    setTopMargin( 0 );
-    setLeftMargin( 0 );
 
     setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Maximum ) );
     
-    setSelectionMode( QTable::NoSelection );
     setFocusPolicy( QWidget::NoFocus );
-
-    setCurrentCell( -1, -1 );
-
-    connect( this, SIGNAL( pressed( int, int, int, const QPoint& ) ), this, SLOT( cellPressed( int, int ) ) );
-    connect( this, SIGNAL( clicked( int, int, int, const QPoint& ) ), this, SLOT( cellClicked( int, int ) ) );
 
     holdTimer = new QTimer( this );
     connect( holdTimer, SIGNAL( timeout() ), this, SLOT( held() ) );
 
     flagAction = NoAction;
     ignoreClick = FALSE;
-    currRow = currCol = 0;
+    currRow = currCol = -1;
     minecount=0;
     mineguess=0;
     nonminecount=0;
+    cellSize = -1;
 }
 
 MineField::~MineField()
 {
+    for ( int i = 0; i < numCols*numRows; i++ )
+	delete mines[i];
+    delete[] mines;
 }
 
 void MineField::setState( State st )
@@ -301,57 +313,114 @@ void MineField::setState( State st )
     stat = st;
 }
 
-
 void MineField::setup( int level )
 {
     lev = level;
     setState( Waiting );
-    viewport()->setUpdatesEnabled( FALSE );
+    //viewport()->setUpdatesEnabled( FALSE );
 
-    int cellsize;
-
-    int x; 
-    int y;
-    for ( x = 0; x < numCols(); x++ )
-	for ( y = 0; y < numRows(); y++ )
-	    clearCell( y, x );
+    int i;
+    for ( i = 0; i < numCols*numRows; i++ )
+	delete mines[i];
+    delete[] mines;
 
     switch( lev ) {
     case 1:
-	setNumRows( 9 );
-	setNumCols( 9 );
+	numRows = 9 ;
+	numCols = 9 ;
 	minecount = 12;
-	cellsize = 21;
 	break;
     case 2:
-	setNumRows( 16 );
-	setNumCols( 16 );
+	numRows = 16;
+	numCols = 16;
 	minecount = 45;
-	cellsize = 14;
 	break;
     case 3:
-	setNumRows( 18 );
-	setNumCols( 18 );
+	numCols = 18;
+	numRows = 18;
 	minecount = 66 ;
-	cellsize = 12;
 	break;
     }
-    nonminecount = numRows()*numCols() - minecount;
+    mines = new (Mine*)[numRows*numCols];
+    for ( i = 0; i < numCols*numRows; i++ )
+	mines[i] = new Mine( this );
+
+    
+    nonminecount = numRows*numCols - minecount;
     mineguess = minecount;
     emit mineCount( mineguess );
     Mine::paletteChange();
 
-    for ( y = 0; y < numRows(); y++ )
-	setRowHeight( y, cellsize );
-    for ( x = 0; x < numCols(); x++ )
-	setColumnWidth( x, cellsize );
-    for ( x = 0; x < numCols(); x++ )
-	for ( y = 0; y < numRows(); y++ )
-	    setItem( y, x, new Mine( this ) );
-
+    if ( availableRect.isValid() )
+	setCellSize(findCellSize());
+    //    viewport()->setUpdatesEnabled( TRUE );
+    //viewport()->repaint( TRUE );
+    updateContents( 0, 0, numCols*cellSize, numRows*cellSize );
     updateGeometry();
-    viewport()->setUpdatesEnabled( TRUE );
-    viewport()->repaint( TRUE );
+}
+
+void MineField::drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph ) 
+{
+    int c1 = clipx / cellSize;
+    int c2 = ( clipx + clipw - 1 ) / cellSize;
+    int r1 = clipy / cellSize;
+    int r2 = ( clipy + cliph - 1 ) / cellSize;
+    
+    for ( int c = c1; c <= c2 ; c++ ) {
+	for ( int r = r1; r <= r2 ; r++ ) {
+	    int x = c * cellSize;
+	    int y = r * cellSize;
+	    Mine *m = mine( r, c );
+	    if ( m )
+		m->paint( p, colorGroup(), QRect(x, y, cellSize, cellSize ) );
+	}
+    }
+}
+
+
+// Chicken and egg problem: We need to know how big the parent is
+// before we can decide how big to make the table.
+
+void MineField::setAvailableRect( const QRect &r )
+{
+    availableRect = r;
+    int newCellSize = findCellSize();
+    if ( newCellSize != cellSize ) {
+	viewport()->setUpdatesEnabled( FALSE );
+	setCellSize( newCellSize );
+	viewport()->setUpdatesEnabled( TRUE );
+	viewport()->repaint( TRUE );
+    }
+}
+
+int MineField::findCellSize()
+{
+    int w = availableRect.width() - 1;
+    int h = availableRect.height() - 1;
+    int cellsize;
+    
+    cellsize = QMIN( w/numCols, h/numRows );
+    cellsize = QMIN( QMAX( cellsize, minGrid ), maxGrid );
+    return cellsize;
+}
+
+
+void MineField::setCellSize( int cellsize )
+{
+    cellSize = cellsize;
+    
+    int w = availableRect.width();
+    int h = availableRect.height();
+    
+    int w2 = cellsize*numCols;
+    int h2 = cellsize*numRows;
+    
+    resizeContents( w2, h2 );
+    
+    int b = 2;
+    
+    setGeometry( availableRect.x() + (w-w2)/2, availableRect.y() + (h-h2)/2,
+		 QMIN(w,w2+b), QMIN(h,h2+b) );
 }
 
 
@@ -359,87 +428,49 @@ void MineField::placeMines()
 {
     int mines = minecount;
     while ( mines ) {
-	int col = int((double(rand()) / double(RAND_MAX)) * numCols());
-	int row = int((double(rand()) / double(RAND_MAX)) * numRows());
+	int col = int((double(rand()) / double(RAND_MAX)) * numCols);
+	int row = int((double(rand()) / double(RAND_MAX)) * numRows);
 
-	Mine* mine = (Mine*)item( row, col );
+	Mine* m = mine( row, col );
 
-	if ( mine && !mine->isMined() && mine->state() == Mine::Hidden ) {
-	    mine->setMined( TRUE );
+	if ( m && !m->isMined() && m->state() == Mine::Hidden ) {
+	    m->setMined( TRUE );
 	    mines--;
 	}
     }
 }
 
-void MineField::paintFocus( QPainter*, const QRect& )
+
+void MineField::updateCell( int r, int c )
 {
+    updateContents( c*cellSize, r*cellSize, cellSize, cellSize );
 }
 
-void MineField::viewportMousePressEvent( QMouseEvent* e )
+
+void MineField::contentsMousePressEvent( QMouseEvent* e )
 {
-    QTable::viewportMousePressEvent( e );
+    int c = e->pos().x() / cellSize;
+    int r = e->pos().y() / cellSize;
+    if ( onBoard( r, c ) )
+	cellPressed( r, c );
+    else
+	currCol = currRow = -1;
 }
 
-void MineField::viewportMouseReleaseEvent( QMouseEvent* e )
+void MineField::contentsMouseReleaseEvent( QMouseEvent* e )
 {
-    QTable::viewportMouseReleaseEvent( e );
+    int c = e->pos().x() / cellSize;
+    int r = e->pos().y() / cellSize;
+    if ( onBoard( r, c ) && c == currCol && r == currRow )
+	cellClicked( r, c );
+    
+    
     if ( flagAction == FlagNext ) {
 	flagAction = NoAction;
     }
 }
 
-void MineField::keyPressEvent( QKeyEvent* e )
-{
-#if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    flagAction = ( e->key() == Key_Up ) ? FlagOn : NoAction;
-#else
-    flagAction = ( ( e->state() & ShiftButton ) ==  ShiftButton ) ? FlagOn : NoAction;
-#endif
-}
 
-void MineField::keyReleaseEvent( QKeyEvent* )
-{
-    flagAction = NoAction;
-}
-
-int MineField::getHint( int row, int col )
-{
-    int hint = 0;
-    for ( int c = col-1; c <= col+1; c++ )
-	for ( int r = row-1; r <= row+1; r++ ) {
-	    Mine* mine = (Mine*)item( r, c );
-	    if ( mine && mine->isMined() )
-		hint++;
-	}
-
-    return hint;
-}
-
-void MineField::setHint( Mine* mine )
-{
-    if ( !mine )
-	return;
-
-    int row = mine->row();
-    int col = mine->col();
-    int hint = getHint( row, col );
-
-    if ( !hint ) {
-	for ( int c = col-1; c <= col+1; c++ )
-	    for ( int r = row-1; r <= row+1; r++ ) {
-		Mine* mine = (Mine*)item( r, c );
-		if ( mine && mine->state() == Mine::Hidden ) {
-		    mine->activate( TRUE );
-		    nonminecount--;
-		    setHint( mine );
-		    updateCell( r, c );
-		}
-	    }
-    }
-
-    mine->setHint( hint );
-    updateCell( row, col );
-}
 
 /*
  state == Waiting means no "hold"
@@ -463,6 +494,61 @@ void MineField::held()
     ignoreClick = TRUE;
 }
 
+
+
+
+void MineField::keyPressEvent( QKeyEvent* e )
+{
+#if defined(Q_WS_QWS) || defined(_WS_QWS_)
+    flagAction = ( e->key() == Key_Up ) ? FlagOn : NoAction;
+#else
+    flagAction = ( ( e->state() & ShiftButton ) ==  ShiftButton ) ? FlagOn : NoAction;
+#endif
+}
+
+void MineField::keyReleaseEvent( QKeyEvent* )
+{
+    flagAction = NoAction;
+}
+
+int MineField::getHint( int row, int col )
+{
+    int hint = 0;
+    for ( int c = col-1; c <= col+1; c++ )
+	for ( int r = row-1; r <= row+1; r++ ) {
+	    Mine* m = mine( r, c );
+	    if ( m && m->isMined() )
+		hint++;
+	}
+
+    return hint;
+}
+
+void MineField::setHint( int row, int col )
+{
+    Mine *m = mine( row, col );
+    if ( !m )
+	return;
+
+    int hint = getHint( row, col );
+
+    if ( !hint ) {
+	for ( int c = col-1; c <= col+1; c++ )
+	    for ( int r = row-1; r <= row+1; r++ ) {
+		Mine* m = mine( r, c );
+		if ( m && m->state() == Mine::Hidden ) {
+		    m->activate( TRUE );
+		    nonminecount--;
+		    setHint( r, c );
+		    updateCell( r, c );
+		}
+	    }
+    }
+
+    m->setHint( hint );
+    updateCell( row, col );
+}
+
 /*
   Only place mines after first click, since it is pointless to
   kill the player before the game has started.
@@ -473,10 +559,10 @@ void MineField::cellClicked( int row, int col )
     if ( state() == GameOver )
 	return;
     if ( state() == Waiting ) {
-	Mine* mine = (Mine*)item( row, col );
-	if ( !mine )
+	Mine* m = mine( row, col );
+	if ( !m )
 	    return;
-	mine->setState( Mine::Empty );
+	m->setState( Mine::Empty );
 	nonminecount--;
 	placeMines();
 	setState( Playing );
@@ -493,35 +579,35 @@ void MineField::cellClicked( int row, int col )
 
 void MineField::updateMine( int row, int col )
 {
-    Mine* mine = (Mine*)item( row, col );
-    if ( !mine )
+    Mine* m = mine( row, col );
+    if ( !m )
 	return;
 
-    bool wasFlagged = mine->state() == Mine::Flagged;
-    bool wasEmpty =  mine->state() == Mine::Empty;
+    bool wasFlagged = m->state() == Mine::Flagged;
+    bool wasEmpty =  m->state() == Mine::Empty;
     
-    mine->activate( flagAction == NoAction );
+    m->activate( flagAction == NoAction );
 
-    if ( mine->state() == Mine::Exploded ) {
+    if ( m->state() == Mine::Exploded ) {
 	emit gameOver( FALSE );
 	setState( GameOver );
 	return;
-    } else if ( mine->state() == Mine::Empty ) {
-	setHint( mine );
+    } else if ( m->state() == Mine::Empty ) {
+	setHint( row, col );
 	if ( !wasEmpty )
 	    nonminecount--;
     }
 
     if ( flagAction != NoAction ) {
-	if ( mine->state() == Mine::Flagged ) {
+	if ( m->state() == Mine::Flagged ) {
 	    --mineguess;
 	    emit mineCount( mineguess );
-	    if ( mine->isMined() )
+	    if ( m->isMined() )
 		--minecount;
 	} else if ( wasFlagged ) {
 	    ++mineguess;
 	    emit mineCount( mineguess );
-	    if ( mine->isMined() )
+	    if ( m->isMined() )
 		++minecount;
 	}
     }
@@ -536,15 +622,15 @@ void MineField::updateMine( int row, int col )
 
 void MineField::showMines()
 {
-    for ( int c = 0; c < numCols(); c++ )
-	for ( int r = 0; r < numRows(); r++ ) {
-	    Mine* mine = (Mine*)item( r, c );
-	    if ( !mine )
+    for ( int c = 0; c < numCols; c++ )
+	for ( int r = 0; r < numRows; r++ ) {
+	    Mine* m = mine( r, c );
+	    if ( !m )
 		continue;
-	    if ( mine->isMined() && mine->state() == Mine::Hidden )
-		mine->setState( Mine::Mined );
-	    if ( !mine->isMined() && mine->state() == Mine::Flagged )
-		mine->setState( Mine::Wrong );
+	    if ( m->isMined() && m->state() == Mine::Hidden )
+		m->setState( Mine::Mined );
+	    if ( !m->isMined() && m->state() == Mine::Flagged )
+		m->setState( Mine::Wrong );
 
 	    updateCell( r, c );
 	}
@@ -553,7 +639,7 @@ void MineField::showMines()
 void MineField::paletteChange( const QPalette &o )
 {
     Mine::paletteChange();
-    QTable::paletteChange( o );
+    QScrollView::paletteChange( o );
 }
 
 void MineField::writeConfig(Config& cfg) const
@@ -562,11 +648,11 @@ void MineField::writeConfig(Config& cfg) const
     cfg.writeEntry("Level",lev);
     QString grid="";
     if ( stat == Playing ) {
-	for ( int x = 0; x < numCols(); x++ )
-	    for ( int y = 0; y < numRows(); y++ ) {
+	for ( int x = 0; x < numCols; x++ )
+	    for ( int y = 0; y < numRows; y++ ) {
 		char code='A'+(x*17+y*101)%21; // Reduce the urge to cheat
-		Mine* mine = (Mine*)item( y, x );
-		int st = (int)mine->state(); if ( mine->isMined() ) st+=5;
+		const Mine* m = mine( y, x );
+		int st = (int)m->state(); if ( m->isMined() ) st+=5;
 		grid += code + st;
 	    }
     }
@@ -586,34 +672,37 @@ void MineField::readConfig(Config& cfg)
 	int i=0;
 	minecount=0;
 	mineguess=0;
-	for ( int x = 0; x < numCols(); x++ ) {
-	    for ( int y = 0; y < numRows(); y++ ) {
+	for ( int x = 0; x < numCols; x++ ) {
+	    for ( int y = 0; y < numRows; y++ ) {
 		char code='A'+(x*17+y*101)%21; // Reduce the urge to cheat
 		int st = (char)(QChar)grid[i++]-code;
-		Mine* mine = (Mine*)item( y, x );
+		Mine* m = mine( y, x );
 		if ( st >= 5 ) {
 		    st-=5;
-		    mine->setMined(TRUE);
+		    m->setMined(TRUE);
 		    minecount++;
 		    mineguess++;
 		}
-		mine->setState((Mine::MineState)st);
-		switch ( mine->state() ) {
+		m->setState((Mine::MineState)st);
+		switch ( m->state() ) {
 		  case Mine::Flagged:
-		    if (mine->isMined())
+		    if (m->isMined())
 			minecount--;
 		    mineguess--;
 		    break;
 		  case Mine::Empty:
 		    --nonminecount;
+		    break;
+		default:
+		    break;
 		}
 	    }
 	}
-	for ( int x = 0; x < numCols(); x++ ) {
-	    for ( int y = 0; y < numRows(); y++ ) {
-		Mine* mine = (Mine*)item( y, x );
-		if ( mine->state() == Mine::Empty )
-		    mine->setHint(getHint(y,x));
+	for ( int x = 0; x < numCols; x++ ) {
+	    for ( int y = 0; y < numRows; y++ ) {
+		Mine* m = mine( y, x );
+		if ( m->state() == Mine::Empty )
+		    m->setHint(getHint(y,x));
 	    }
 	}
     }

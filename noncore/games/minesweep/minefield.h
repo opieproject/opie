@@ -20,12 +20,12 @@
 #ifndef MINEFIELD_H
 #define MINEFIELD_H
 
-#include <qtable.h>
+#include <qscrollview.h>
 
 class Mine;
 class Config;
 
-class MineField : public QTable
+class MineField : public QScrollView
 {
     Q_OBJECT
 public:
@@ -41,6 +41,7 @@ public:
 
     int level() const { return lev; }
 
+    void setAvailableRect( const QRect & );
 public slots:
     void setup( int level );
 
@@ -52,23 +53,31 @@ signals:
     void mineCount( int );
     
 protected:
-    void paintFocus( QPainter*, const QRect& );
-    void viewportMousePressEvent( QMouseEvent* );
-    void viewportMouseReleaseEvent( QMouseEvent* );
+
+    void contentsMousePressEvent( QMouseEvent* );
+    void contentsMouseReleaseEvent( QMouseEvent* );
     void keyPressEvent( QKeyEvent* );
     void keyReleaseEvent( QKeyEvent* );
-
+    void drawContents( QPainter * p, int clipx, int clipy, int clipw, int cliph );
+    
     int getHint( int row, int col );
-    void setHint( Mine* );
+    void setHint( int r, int c );
     void updateMine( int row, int col );
     void paletteChange( const QPalette & );
-
+    void updateCell( int r, int c );
+    bool onBoard( int r, int c ) const { return r >= 0 && r < numRows && c >= 0 && c < numCols; }
+    Mine *mine( int row, int col ) { return onBoard(row, col ) ? mines[row+numCols*col] : 0; }
+    const Mine *mine( int row, int col ) const { return onBoard(row, col ) ? mines[row+numCols*col] : 0; }
+    
 protected slots:
     void cellPressed( int row, int col );
     void cellClicked( int row, int col );
     void held();
 
 private:
+    int findCellSize();
+    void setCellSize( int );
+    
     State stat;
     void MineField::setState( State st );
     void MineField::placeMines();
@@ -77,11 +86,16 @@ private:
     bool ignoreClick;
     int currRow;
     int currCol;
+    int numRows, numCols;
+    
     int minecount;
     int mineguess;
     int nonminecount;
     int lev;
+    QRect availableRect;
+    int cellSize;
     QTimer *holdTimer;
+    Mine **mines;
 };
 
 #endif // MINEFIELD_H

@@ -388,45 +388,49 @@ QStringList Contact::fields()
     list.append( "Suffix" );
     list.append( "FileAs" );
 
+    list.append( "JobTitle" );
+    list.append( "Department" );
+    list.append( "Company" );
+    list.append( "BusinessPhone" );
+    list.append( "BusinessFax" );
+    list.append( "BusinessMobile" );
+
     list.append( "DefaultEmail" );
     list.append( "Emails" );
+
+    list.append( "HomePhone" );
+    list.append( "HomeFax" );
+    list.append( "HomeMobile" );
+
+    list.append( "BusinessStreet" );
+    list.append( "BusinessCity" );
+    list.append( "BusinessState" );
+    list.append( "BusinessZip" );
+    list.append( "BusinessCountry" );
+    list.append( "BusinessPager" );
+    list.append( "BusinessWebPage" );
+
+    list.append( "Office" );
+    list.append( "Profession" );
+    list.append( "Assistant" );
+    list.append( "Manager" );
 
     list.append( "HomeStreet" );
     list.append( "HomeCity" );
     list.append( "HomeState" );
     list.append( "HomeZip" );
     list.append( "HomeCountry" );
-    list.append( "HomePhone" );
-    list.append( "HomeFax" );
-    list.append( "HomeMobile" );
     list.append( "HomeWebPage" );
-
-    list.append( "Company" );
-    list.append( "BusinessStreet" );
-    list.append( "BusinessCity" );
-    list.append( "BusinessState" );
-    list.append( "BusinessZip" );
-    list.append( "BusinessCountry" );
-    list.append( "BusinessWebPage" );
-    list.append( "JobTitle" );
-    list.append( "Department" );
-    list.append( "Office" );
-    list.append( "BusinessPhone" );
-    list.append( "BusinessFax" );
-    list.append( "BusinessMobile" );
-    list.append( "BusinessPager" );
-    list.append( "Profession" );
-    list.append( "Assistant" );
-    list.append( "Manager" );
 
     list.append( "Spouse" );
     list.append( "Gender" );
     list.append( "Birthday" );
     list.append( "Anniversary" );
     list.append( "Nickname" );
-
     list.append( "Children" );
+
     list.append( "Notes" );
+    list.append( "Groups" );
 
     return list;
 }
@@ -442,45 +446,49 @@ QStringList Contact::trfields()
     list.append( QObject::tr( "Suffix" ) );
     list.append( QObject::tr( "File As" ) );
 
+    list.append( QObject::tr( "Job Title" ) );
+    list.append( QObject::tr( "Department" ) );
+    list.append( QObject::tr( "Company" ) );
+    list.append( QObject::tr( "Business Phone" ) );
+    list.append( QObject::tr( "Business Fax" ) );
+    list.append( QObject::tr( "Business Mobile" ) );
+
     list.append( QObject::tr( "Default Email" ) );
     list.append( QObject::tr( "Emails" ) );
+
+    list.append( QObject::tr( "Home Phone" ) );
+    list.append( QObject::tr( "Home Fax" ) );
+    list.append( QObject::tr( "Home Mobile" ) );
+
+    list.append( QObject::tr( "Business Street" ) );
+    list.append( QObject::tr( "Business City" ) );
+    list.append( QObject::tr( "Business State" ) );
+    list.append( QObject::tr( "Business Zip" ) );
+    list.append( QObject::tr( "Business Country" ) );
+    list.append( QObject::tr( "Business Pager" ) );
+    list.append( QObject::tr( "Business WebPage" ) );
+
+    list.append( QObject::tr( "Office" ) );
+    list.append( QObject::tr( "Profession" ) );
+    list.append( QObject::tr( "Assistant" ) );
+    list.append( QObject::tr( "Manager" ) );
 
     list.append( QObject::tr( "Home Street" ) );
     list.append( QObject::tr( "Home City" ) );
     list.append( QObject::tr( "Home State" ) );
     list.append( QObject::tr( "Home Zip" ) );
     list.append( QObject::tr( "Home Country" ) );
-    list.append( QObject::tr( "Home Phone" ) );
-    list.append( QObject::tr( "Home Fax" ) );
-    list.append( QObject::tr( "Home Mobile" ) );
     list.append( QObject::tr( "Home Web Page" ) );
-
-    list.append( QObject::tr( "Company" ) );
-    list.append( QObject::tr( "Business Street" ) );
-    list.append( QObject::tr( "Business City" ) );
-    list.append( QObject::tr( "Business State" ) );
-    list.append( QObject::tr( "Business Zip" ) );
-    list.append( QObject::tr( "Business Country" ) );
-    list.append( QObject::tr( "Business WebPage" ) );
-    list.append( QObject::tr( "Job Title" ) );
-    list.append( QObject::tr( "Department" ) );
-    list.append( QObject::tr( "Office" ) );
-    list.append( QObject::tr( "Business Phone" ) );
-    list.append( QObject::tr( "Business Fax" ) );
-    list.append( QObject::tr( "Business Mobile" ) );
-    list.append( QObject::tr( "Business Pager" ) );
-    list.append( QObject::tr( "Profession" ) );
-    list.append( QObject::tr( "Assistant" ) );
-    list.append( QObject::tr( "Manager" ) );
 
     list.append( QObject::tr( "Spouse" ) );
     list.append( QObject::tr( "Gender" ) );
     list.append( QObject::tr( "Birthday" ) );
     list.append( QObject::tr( "Anniversary" ) );
     list.append( QObject::tr( "Nickname" ) );
-
     list.append( QObject::tr( "Children" ) );
+
     list.append( QObject::tr( "Notes" ) );
+    list.append( QObject::tr( "Groups" ) );
 
     return list;
 }
@@ -631,7 +639,7 @@ static Contact parseVObject( VObject *obj )
 	    initPropIterator( &nit, o );
 	    while( moreIteration( &nit ) ) {
 		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
+		QCString name = vObjectTypeInfo( o );
 		QString value = vObjectStringZValue( o );
 		if ( name == VCNamePrefixesProp )
 		    c.setTitle( value );
@@ -704,7 +712,7 @@ static Contact parseVObject( VObject *obj )
 	    initPropIterator( &nit, o );
 	    while( moreIteration( &nit ) ) {
 		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
+		QCString name = vObjectTypeInfo( o );
 		if ( name == VCHomeProp )
 		    type |= HOME;
 		else if ( name == VCWorkProp )
@@ -751,7 +759,7 @@ static Contact parseVObject( VObject *obj )
 	    initPropIterator( &nit, o );
 	    while( moreIteration( &nit ) ) {
 		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
+		QCString name = vObjectTypeInfo( o );
 		if ( name != VCInternetProp && name != VCHomeProp &&
 		     name != VCWorkProp &&
 		     name != VCPreferredProp )
@@ -774,7 +782,7 @@ static Contact parseVObject( VObject *obj )
 	    initPropIterator( &nit, o );
 	    while( moreIteration( &nit ) ) {
 		VObject *o = nextVObject( &nit );
-		QCString name = vObjectName( o );
+		QCString name = vObjectTypeInfo( o );
 		if ( name == VCHomeProp )
 		    c.setHomeWebpage( value );
 		else if ( name == VCWorkProp )

@@ -12,11 +12,11 @@
 /* kvt, which is copyright (c) 1996 by Matthias Ettrich <ettrich@kde.org>     */
 /*                                                                            */
 /* -------------------------------------------------------------------------- */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
 
 #ifndef KONSOLE_H
@@ -30,6 +30,8 @@
 #include <qintdict.h>
 #include <qptrdict.h>
 #include <qtabwidget.h>
+#include <qpe/qpetoolbar.h>
+#include <qcombobox.h>
 
 #include "MyPty.h"
 #include "TEWidget.h"
@@ -48,13 +50,16 @@ public:
   Konsole(const char * name, const char* pgm, QStrList & _args, int histon);
   ~Konsole();
   void setColLin(int columns, int lines);
-
+  QPEToolBar *secondToolBar; 
   void show();
-
+  void setColor();
+  int lastSelectedMenu;
 private slots:
   void doneSession(TESession*,int);
   void changeColumns(int);
   void fontChanged(int);
+  void configMenuSelected(int );
+  void colorMenuSelected(int);
   void enterCommand(int);
   void hitEnter();
   void hitSpace();
@@ -64,6 +69,7 @@ private slots:
   void hitDown();
   void switchSession(QWidget *);
   void newSession();
+  void changeCommand(const QString &, int);
 
 private:
   void init(const char* _pgm, QStrList & _args);
@@ -106,9 +112,9 @@ private:
   QCString se_pgm;
   QStrList se_args;
 
-    QPopupMenu* fontList;
-
-  // history scrolling I think
+  QPopupMenu* fontList,*configMenu,*colorMenu;
+  QComboBox *commonCombo;
+    // history scrolling I think
   bool        b_scroll;
 
   int         n_keytab;

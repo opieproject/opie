@@ -148,6 +148,8 @@ public:
     void setComputerization(int level) { cpu=level; }
     bool computerized() const { return cpu>0; }
 
+    QSize sizeHint() const;
+
 protected:
     void resizeEvent(QResizeEvent*e);
     void contentsMousePressEvent(QMouseEvent*);
@@ -210,6 +212,8 @@ public:
     bool isStart(const QPoint& at) const;
 
     int turnScore() const { return turn_score; }
+
+    QSize sizeHint() const;
 
 signals:
     void temporaryScore(int);
@@ -331,7 +335,7 @@ private:
 
     QWidgetStack *racks;
     QToolBar* toolbar;
-    QVBox *vbox;
+    QWidget *vbox;
     Board *board;
     Bag *bag;
     ScoreInfo *scoreinfo;

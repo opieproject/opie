@@ -51,7 +51,11 @@ class QpeEditor : public QMultiLineEdit
     //    Q_OBJECT
 public:
     QpeEditor( QWidget *parent, const char * name = 0 )
-	: QMultiLineEdit( parent, name ) {}
+	: QMultiLineEdit( parent, name )
+        {
+            clearTableFlags();
+            setTableFlags( Tbl_vScrollBar | Tbl_autoHScrollBar );
+        }
 
     //public slots:
     void find( const QString &txt, bool caseSensitive,
@@ -128,8 +132,6 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     : QMainWindow( parent, name, f ), bFromDocView( FALSE )
 {
     doc = 0;
-
-    QString lang = getenv( "LANG" );
 
     setToolBarsMovable( FALSE );
 
@@ -259,6 +261,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     fileOpen();
 
     editor = new QpeEditor( editorStack );
+    editor->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     editorStack->addWidget( editor, get_unique_id() );
 
     resize( 200, 300 );
@@ -333,7 +336,9 @@ void TextEdit::setItalic(bool y)
 
 void TextEdit::setWordWrap(bool y)
 {
+    bool state = editor->edited();
     editor->setWordWrap(y ? QMultiLineEdit::WidgetWidth : QMultiLineEdit::NoWrap );
+    editor->setEdited( state );
 }
 
 void TextEdit::fileNew()

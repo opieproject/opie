@@ -175,7 +175,7 @@ do
 	    echo >>$SPEC "%files"
 	    echo >>$SPEC "%defattr(-,root,root)"
 	    /bin/ls $RPMFILES >>$SPEC
-	    rpm -bb $SPEC --target $ARCH-unknown-linux
+	    rpm -bb --target $ARCH-unknown-linux $SPEC
 	    # rm $SPEC
 	elif [ -z "$IMAGEDIR" ]
 	then

@@ -9,13 +9,12 @@
 /* This file is part of Konsole - an X terminal for KDE                     */
 /*                                                                          */
 /* ------------------------------------------------------------------------ */
-/*									      */
+/*                        */
 /* Ported Konsole to Qt/Embedded                                              */
-/*									      */
+/*                        */
 /* Copyright (C) 2000 by John Ryland <jryland@trolltech.com>                  */
-/*									      */
+/*                        */
 /* -------------------------------------------------------------------------- */
-
 /*! \class TEWidget
 
     \brief Visible screen contents
@@ -115,7 +114,7 @@ static const ColorEntry base_color_table[TABLE_COLORS] =
   ColorEntry(QColor(0x00,0x00,0x00), 0, 1 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 1, 0 ),
   ColorEntry(QColor(0x68,0x68,0x68), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0x54), 0, 0 ),
   ColorEntry(QColor(0x54,0xFF,0x54), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0x54), 0, 0 ),
-  ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0x54,0xFF), 0, 0 ),
+  ColorEntry(QColor(0x54,0x54,0xFF), 0, 0 ), ColorEntry( QColor(0xB2,0x18,0xB2), 0, 0 ),
   ColorEntry(QColor(0x54,0xFF,0xFF), 0, 0 ), ColorEntry( QColor(0xFF,0xFF,0xFF), 0, 0 )
 };
 
@@ -136,6 +135,12 @@ const ColorEntry* TEWidget::getColorTable() const
 {
   return color_table;
 }
+
+const ColorEntry* TEWidget::getdefaultColorTable() const
+{
+  return base_color_table;
+}
+
 
 const QPixmap *TEWidget::backgroundPixmap()
 {
@@ -240,11 +245,11 @@ void TEWidget::fontChange(const QFont &)
 //printf("rawname: %s\n",font().rawName().ascii());
   fontMap =
 #if QT_VERSION < 300
-	strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
+  strcmp(QFont::encodingName(font().charSet()).ascii(),"iso10646")
           ? vt100extended
           :
 #endif
-	identicalMap;
+  identicalMap;
   propagateSize();
   update();
 }
@@ -254,8 +259,7 @@ void TEWidget::setVTFont(const QFont& f)
   QFrame::setFont(f);
 }
 
-QFont TEWidget::getVTFont() 
-{
+QFont TEWidget::getVTFont() {
   return font();
 }
 
@@ -647,7 +651,7 @@ void TEWidget::mousePressEvent(QMouseEvent* ev)
       emit clearSelectionSignal();
       iPntSel = pntSel = pos;
       actSel = 1; // left mouse button pressed but nothing selected yet.
-      grabMouse(   /*crossCursor*/  ); // handle with care!	
+      grabMouse(   /*crossCursor*/  ); // handle with care! 
     }
     else
     {
@@ -713,9 +717,9 @@ void TEWidget::mouseMoveEvent(QMouseEvent* ev)
     int selClass;
 
     bool left_not_right = ( here.y() < iPntSel.y() ||
-	   here.y() == iPntSel.y() && here.x() < iPntSel.x() );
+     here.y() == iPntSel.y() && here.x() < iPntSel.x() );
     bool old_left_not_right = ( pntSel.y() < iPntSel.y() ||
-	   pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
+     pntSel.y() == iPntSel.y() && pntSel.x() < iPntSel.x() );
     swapping = left_not_right != old_left_not_right;
 
     // Find left (left_not_right ? from here : from start)
@@ -975,34 +979,34 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
     // Has a keyboard with no CTRL and ALT keys, but we fake it:
     bool dele=FALSE;
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
-	QKeyEvent* ke = (QKeyEvent*)e;
-	bool keydown = e->type() == QEvent::KeyPress || ke->isAutoRepeat();
-	switch (ke->key()) {
-	    case Key_F9: // let this be "Control"
-		control = keydown;
-		e = new QKeyEvent(QEvent::KeyPress, Key_Control, 0, ke->state());
-		dele=TRUE;
-		break;
-	    case Key_F13: // let this be "Alt"
-		alt = keydown;
-		e = new QKeyEvent(QEvent::KeyPress, Key_Alt, 0, ke->state());
-		dele=TRUE;
-		break;
-	    default:
-		if ( control ) {
-		    int a = toupper(ke->ascii())-64;
-		    if ( a >= 0 && a < ' ' ) {
-			e = new QKeyEvent(e->type(), ke->key(),
-				a, ke->state()|ControlButton, QChar(a,0));
-			dele=TRUE;
-		    }
-		}
-		if ( alt ) {
-		    e = new QKeyEvent(e->type(), ke->key(),
-				ke->ascii(), ke->state()|AltButton, ke->text());
-		    dele=TRUE;
-		}
-	}
+  QKeyEvent* ke = (QKeyEvent*)e;
+  bool keydown = e->type() == QEvent::KeyPress || ke->isAutoRepeat();
+  switch (ke->key()) {
+      case Key_F9: // let this be "Control"
+    control = keydown;
+    e = new QKeyEvent(QEvent::KeyPress, Key_Control, 0, ke->state());
+    dele=TRUE;
+    break;
+      case Key_F13: // let this be "Alt"
+    alt = keydown;
+    e = new QKeyEvent(QEvent::KeyPress, Key_Alt, 0, ke->state());
+    dele=TRUE;
+    break;
+      default:
+    if ( control ) {
+        int a = toupper(ke->ascii())-64;
+        if ( a >= 0 && a < ' ' ) {
+      e = new QKeyEvent(e->type(), ke->key(),
+        a, ke->state()|ControlButton, QChar(a,0));
+      dele=TRUE;
+        }
+    }
+    if ( alt ) {
+        e = new QKeyEvent(e->type(), ke->key(),
+        ke->ascii(), ke->state()|AltButton, ke->text());
+        dele=TRUE;
+    }
+  }
     }
 #endif
 
@@ -1188,14 +1192,14 @@ void TEWidget::dropEvent(QDropEvent* event)
 
       if (bPopup)
         // m_drop->popup(pos() + event->pos());
-	m_drop->popup(mapToGlobal(event->pos()));
+  m_drop->popup(mapToGlobal(event->pos()));
       else
-	{
-	  if (currentSession) {
-	    currentSession->getEmulation()->sendString(dropText.local8Bit());
-	  }
-//	  kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
-	}
+  {
+    if (currentSession) {
+      currentSession->getEmulation()->sendString(dropText.local8Bit());
+    }
+//    kdDebug() << "Drop:" << dropText.local8Bit() << "\n";
+  }
     }
   }
   else if(QTextDrag::decode(event, dropText)) {

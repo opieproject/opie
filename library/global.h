@@ -77,6 +77,11 @@ public:
     static QString shellQuote(const QString& s);
     static QString stringQuote(const QString& s);
 
+#ifdef QTOPIA_INTERNAL_LANGLIST
+    static QStringList languageList();
+    static QStringList helpPath();
+#endif
+
 private:
     static Command* builtin;
     static QGuardedPtr<QWidget> *running;

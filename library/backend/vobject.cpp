@@ -1207,4 +1207,13 @@ DLLEXPORT(void) writeVObjectsToFile(char *fname, VObject *list)
 	    }
 }
 
+DLLEXPORT(const char *) vObjectTypeInfo(VObject *o)
+{
+    const char *type = vObjectName( o );
+    if ( strcmp( type, "TYPE" ) == 0 )
+	type = vObjectStringZValue( o );
+    return type;
+}
+
+
 // end of source file vobject.c
