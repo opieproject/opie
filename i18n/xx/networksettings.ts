@@ -1,0 +1,88 @@
+<!DOCTYPE TS><TS>
+<context>
+    <name>AddConnection</name>
+    <message>
+        <source>Add Network Connection</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Services</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+<context>
+    <name>MainWindow</name>
+    <message>
+        <source>Network Settings</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Connections</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>s</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>t</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>in</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>IP</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Information</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Configure</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Profiles</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>All</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>&amp;Set Current</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>Current Profile</source>
+        <translation>FOO</translation>
+    </message>
+    <message>
+        <source>New Profile</source>
+        <translation>FOO</translation>
+    </message>
+</context>
+</TS>
