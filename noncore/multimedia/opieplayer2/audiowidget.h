@@ -110,6 +110,8 @@ private:
     QLineEdit time;
     int xoff, yoff;
     bool isStreaming : 1;
+
+    ButtonVector audioButtons;
 };
 
 

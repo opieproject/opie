@@ -61,6 +61,7 @@ struct MediaButton {
 };
 
 //Layout information for the audioButtons (and if it is a toggle button or not)
+/*
 MediaWidget::Button audioButtons[] = {
    { TRUE,  FALSE, FALSE }, // play
    { FALSE, FALSE, FALSE }, // stop
@@ -73,6 +74,7 @@ MediaWidget::Button audioButtons[] = {
    { FALSE, FALSE, FALSE }, // forward
    { FALSE, FALSE, FALSE }  // back
 };
+*/
 
 const char * const skin_mask_file_names[10] = {
    "play", "stop", "next", "prev", "up",
@@ -86,13 +88,31 @@ void changeTextColor( QWidget * w) {
    w->setPalette( p );
 }
 
-const int numButtons = (sizeof(audioButtons)/sizeof(MediaWidget::Button));
+//const int numButtons = (sizeof(audioButtons)/sizeof(MediaWidget::Button));
 
 }
 
 AudioWidget::AudioWidget( PlayListWidget &playList, MediaPlayerState &mediaPlayerState, QWidget* parent, const char* name) :
 
     MediaWidget( playList, mediaPlayerState, parent, name ), songInfo( this ), slider( Qt::Horizontal, this ),  time( this ) {
+
+    Button defaultButton; 
+    defaultButton.isToggle = defaultButton.isHeld = defaultButton.isDown = false;
+    Button toggleButton;
+    toggleButton.isToggle = true;
+    toggleButton.isHeld = toggleButton.isDown = false;
+
+    audioButtons.reserve( 10 );
+    audioButtons.push_back( toggleButton ); // play
+    audioButtons.push_back( defaultButton ); // stop
+    audioButtons.push_back( defaultButton ); // next
+    audioButtons.push_back( defaultButton ); // previous
+    audioButtons.push_back( defaultButton ); // volume up
+    audioButtons.push_back( defaultButton ); // volume down
+    audioButtons.push_back( toggleButton ); // repeat/loop
+    audioButtons.push_back( defaultButton ); // playlist
+    audioButtons.push_back( defaultButton ); // forward
+    audioButtons.push_back( defaultButton ); // back
 
     setCaption( tr("OpiePlayer") );
 
@@ -380,7 +400,7 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
 
 
 void AudioWidget::mouseMoveEvent( QMouseEvent *event ) {
-    for ( int i = 0; i < numButtons; i++ ) {
+    for ( unsigned int i = 0; i < audioButtons.size(); i++ ) {
         if ( event->state() == QMouseEvent::LeftButton ) {
             // The test to see if the mouse click is inside the button or not
             int x = event->pos().x() - xoff;
@@ -448,13 +468,13 @@ void AudioWidget::paintEvent( QPaintEvent * pe ) {
         QPainter p( &pix );
         p.translate( -pe->rect().topLeft().x(), -pe->rect().topLeft().y() );
         p.drawTiledPixmap( pe->rect(), pixBg, pe->rect().topLeft() );
-        for ( int i = 0; i < numButtons; i++ )
+        for ( unsigned int i = 0; i < audioButtons.size(); i++ )
             paintButton( &p, i );
         QPainter p2( this );
         p2.drawPixmap( pe->rect().topLeft(), pix );
     } else {
         QPainter p( this );
-        for ( int i = 0; i < numButtons; i++ )
+        for ( unsigned int i = 0; i < audioButtons.size(); i++ )
             paintButton( &p, i );
     }
 }
