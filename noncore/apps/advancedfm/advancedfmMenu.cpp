@@ -741,7 +741,6 @@ void AdvancedFm::oprocessStderr(OProcess*, char *buffer, int ) {
 
 bool AdvancedFm::eventFilter( QObject * o, QEvent * e ) {
 		if ( o->inherits( "QLineEdit" ) )  {
-				qDebug("QLineEdit event");
 				if ( e->type() == QEvent::KeyPress ) {
 						QKeyEvent *ke = (QKeyEvent*)e;
 						if ( ke->key() == Key_Return ||
