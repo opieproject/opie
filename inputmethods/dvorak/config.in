@@ -1,4 +1,4 @@
   config DVORAK
     boolean "dvorak"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && PICKBOARD
