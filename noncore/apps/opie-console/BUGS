@@ -5,3 +5,20 @@ and we need to work around some compiler bugs!! -zecke
 
 Send/receive: lrzsz behaves strange when trying to use
 --overwrite or --rename.
+
+- console should autoconnect by default
+
+- keys and buttonbar merge
+
+- keys really working
+
+- scripting with "direct subpopup"
+
+- kill more compiler warnings.
+
+- more colorshemes ( "orange is ugly" )
+
+- irda and bluetooth out ( can be done with normal serial as long as the
+connection is allready up, and extended stuff is a lot of work; maybe later
+in again ).
+

@@ -23,15 +23,11 @@ the future
   Profile->Session and MainWidget
   FilesendingLayer ( Z/Y Modem tested X does not work at all )
   Fullscreen
+  Modem - Josef
+  Keys - hash 
 
 TASKS in progress:
-  Irda  ConfigWidget - Harlekin
-  BT ConfigWidget - Harlekin
-  IRDA-Layer - Harlekin
-  Bluetooth-Layer - Harlekin
-  Modem - Josef
   Keys - hash
-  TE - ibotty
   Scripting - wazlaf 
    
   Session->Profile - hash => why is this needed? you can not change any settings
@@ -48,4 +44,10 @@ TASKS in progress:
 
 OPEN tasks:
   Receiving ( copy &n paste from filetransfer.cpp )
-    
+
+POSTPONED UNTIL LATER:    
+  Irda  ConfigWidget 
+  BT ConfigWidget 
+  IRDA-Layer 
+  Bluetooth-Layer 
+
