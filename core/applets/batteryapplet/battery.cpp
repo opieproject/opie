@@ -34,7 +34,10 @@ BatteryMeter::BatteryMeter( QWidget *parent )
 {
     ps = new PowerStatus;
     startTimer( 10000 );
+
+    setFixedWidth(  QMAX(AppLnk::smallIconSize()*3/4, 6) );
     setFixedHeight( AppLnk::smallIconSize() );
+
     chargeTimer = new QTimer( this );
     connect( chargeTimer, SIGNAL(timeout()), this, SLOT(chargeTimeout()) );
     timerEvent(0);
@@ -51,7 +54,7 @@ BatteryMeter::~BatteryMeter()
 
 QSize BatteryMeter::sizeHint() const
 {
-    return QSize(10, height() );
+    return QSize(QMAX(AppLnk::smallIconSize()*3/4, 6), height() );
 }
 
 void BatteryMeter::mousePressEvent( QMouseEvent* e )
@@ -116,14 +119,15 @@ void BatteryMeter::chargeTimeout()
 
 void BatteryMeter::paintEvent( QPaintEvent* )
 {
+    qWarning("paint");
     if ( style == 1 )
     {
         QPainter p(this);
         QFont f( "Fixed", AppLnk::smallIconSize()/2 );
         QFontMetrics fm( f );
         p.setFont( f );
-        p.drawText( 0, AppLnk::smallIconSize()/2, QString::number( percent ) );
-        p.drawText( AppLnk::smallIconSize()/4, AppLnk::smallIconSize(), "%" );
+        p.drawText( 0, height()/2, QString::number( percent ) );
+        p.drawText( width()/4, height(), "%" );
         return;
     }
 

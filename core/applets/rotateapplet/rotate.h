@@ -34,6 +34,8 @@
 #include <qpe/menuappletinterface.h>
 #include <qobject.h>
 
+#include <qobject.h>
+
 class RotateApplet : public QObject, public MenuAppletInterface
 {
 

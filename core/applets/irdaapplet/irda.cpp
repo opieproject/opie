@@ -315,7 +315,7 @@ void IrdaApplet::paintEvent ( QPaintEvent * )
 	p. drawPixmap ( 0, 1, m_irda_active ? m_irdaOnPixmap : m_irdaOffPixmap );
 
 	if ( m_irda_discovery_active )
-                                p. drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
+    	        p. drawPixmap( 0, 1, m_irdaDiscoveryOnPixmap );
 
 	if ( m_receive_active )
 		p. drawPixmap( 0, 1, m_receiveActivePixmap );

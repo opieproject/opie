@@ -20,6 +20,8 @@
 #ifndef IRDAAPPLETIMPL_H
 #define IRDAAPPLETIMPL_H
 
+#include <qwidget.h>
+
 #include <qpe/taskbarappletinterface.h>
 
 class IrdaApplet;

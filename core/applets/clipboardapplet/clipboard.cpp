@@ -35,9 +35,13 @@
 
 ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
-                setFixedWidth ( AppLnk::smallIconSize()  );
-                setFixedHeight ( AppLnk::smallIconSize()  );
-	m_clipboardPixmap = QPixmap ( Resource::loadPixmap( "paste" ) );
+        setFixedWidth ( AppLnk::smallIconSize()  );
+        setFixedHeight ( AppLnk::smallIconSize()  );
+
+	QImage img = Resource::loadImage( "paste");
+	img = img.smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() );
+
+	m_clipboardPixmap.convertFromImage( img );
 
 	m_timer = new QTimer ( this );
 
@@ -140,7 +144,9 @@ void ClipboardApplet::action(int id)
 void ClipboardApplet::paintEvent ( QPaintEvent* )
 {
 	QPainter p ( this );
-      	p. drawPixmap( 0, 1,  m_clipboardPixmap );
+        /* center the height but our pixmap is as big as the height ;)*/
+      	p. drawPixmap( 0, 0,
+                       m_clipboardPixmap );
 }
 
 void ClipboardApplet::newData ( )

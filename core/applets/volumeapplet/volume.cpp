@@ -763,7 +763,7 @@ void VolumeApplet::paintEvent ( QPaintEvent * )
 {
   QPainter p ( this );
 
-  p. drawPixmap ( 0, 1, *m_pixmap );
+  p. drawPixmap ( (width()- m_pixmap->width())/2, QMAX( (height()-4-m_pixmap->height() )/2, 1), *m_pixmap );
   p. setPen ( darkGray );
   p. drawRect ( 1, height() - 4, width() - 2, 4 );
 
