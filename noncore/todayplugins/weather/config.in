@@ -1,5 +1,4 @@
   config TODAY_WEATHER
     boolean "weather"
     default "y"
-    depends TODAY
-
+    depends (LIBQPE || LIBQPE-X11) && LIBOPIE
