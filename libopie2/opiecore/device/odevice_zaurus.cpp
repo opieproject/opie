@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "odevice.h"
+#include "odevice_zaurus.h"
 
 /* QT */
 #include <qapplication.h>
@@ -53,68 +53,9 @@
 #include <linux/soundcard.h>
 #endif
 
-#ifndef ARRAY_SIZE
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-#endif
-
-// _IO and friends are only defined in kernel headers ...
-
-#define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
-
-#define OD_IO(type,number)              OD_IOC(0,type,number,0)
-#define OD_IOW(type,number,size)        OD_IOC(1,type,number,sizeof(size))
-#define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
-#define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
-
 using namespace Opie;
 
-class Zaurus : public ODevice
-{
-
-  protected:
-    virtual void init();
-    virtual void initButtons();
-
-  public:
-    virtual bool setSoftSuspend ( bool soft );
-
-    virtual bool setDisplayBrightness ( int b );
-    virtual int displayBrightnessResolution() const;
-
-    virtual void alarmSound();
-    virtual void keySound();
-    virtual void touchSound();
-
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList ( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
-    virtual bool hasHingeSensor() const;
-    virtual OHingeStatus readHingeSensor();
-
-    static bool isZaurus();
-
-    virtual bool suspend();
-    virtual Transformation rotation() const;
-    virtual ODirection direction() const;
-
-  protected:
-    virtual void buzzer ( int snd );
-
-    OLedState m_leds [1];
-    bool m_embedix;
-};
-
-struct z_button {
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
-} z_buttons [] = {
+struct z_button z_buttons [] = {
     { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
     "devicebuttons/z_calendar",
     "datebook", "nextView()",
@@ -160,7 +101,6 @@ struct z_button z_buttons_c700 [] = {
     "QPE/Dummy", "doNothing()" },
 };
 
-// Check whether this device is the sharp zaurus..
 // FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
 //       class up into individual classes. We need three classes
 //
@@ -173,45 +113,6 @@ struct z_button z_buttons_c700 [] = {
 //       Zaurus models (concerning apm, backlight, buttons, etc.)
 //
 //       Comments? - mickeyl.
-
-bool Zaurus::isZaurus()
-{
-
-    // If the special devices by embedix exist, it is quite simple: it is a Zaurus !
-    if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ) ){
-        return true;
-    }	
-
-    // On non-embedix kernels, we have to look closer.
-    bool is_zaurus = false;
-    QFile f ( "/proc/cpuinfo" );
-    if ( f. open ( IO_ReadOnly ) ) {
-        QString model;
-        QFile f ( "/proc/cpuinfo" );
-
-        QTextStream ts ( &f );
-        QString line;
-        while( line = ts. readLine() ) {
-            if ( line. left ( 8 ) == "Hardware" )
-                break;
-        }
-        int loc = line. find ( ":" );
-        if ( loc != -1 )
-            model = line. mid ( loc + 2 ). simplifyWhiteSpace( );
-
-        if ( model == "Sharp-Collie"
-            || model == "Collie"
-            || model == "SHARP Corgi"
-            || model == "SHARP Shepherd"
-            || model == "SHARP Poodle"
-                    || model == "SHARP Husky"
-        )
-            is_zaurus = true;
-
-    }
-    return is_zaurus;
-}
-
 
 void Zaurus::init()
 {

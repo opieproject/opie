@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "odevice.h"
+#include "odevice_simpad.h"
 
 /* QT */
 #include <qapplication.h>
@@ -53,61 +53,9 @@
 #include <linux/soundcard.h>
 #endif
 
-#ifndef ARRAY_SIZE
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-#endif
-
-// _IO and friends are only defined in kernel headers ...
-
-#define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
-
-#define OD_IO(type,number)              OD_IOC(0,type,number,0)
-#define OD_IOW(type,number,size)        OD_IOC(1,type,number,sizeof(size))
-#define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
-#define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
-
 using namespace Opie;
 
-class SIMpad : public ODevice, public QWSServer::KeyboardFilter
-{
-  protected:
-    virtual void init();
-    virtual void initButtons();
-
-  public:
-    virtual bool setSoftSuspend( bool soft );
-    virtual bool suspend();
-
-    virtual bool setDisplayStatus( bool on );
-    virtual bool setDisplayBrightness( int b );
-    virtual int displayBrightnessResolution() const;
-
-    virtual void alarmSound();
-
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
-  protected:
-    virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
-    virtual void timerEvent( QTimerEvent *te );
-
-    int m_power_timer;
-
-    OLedState m_leds [1];
-};
-
-struct s_button {
-    uint model;
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
-} simpad_buttons [] = {
+struct s_button simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Lower+Up"),
     "devicebuttons/simpad_lower_up",

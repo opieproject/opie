@@ -6,6 +6,12 @@ HEADERS     = oapplication.h            \
               odebug.h                  \
               odevice.h                 \
               odevicebutton.h           \
+              odevice_ipaq.h            \
+              odevice_jornada.h         \
+              odevice_ramses.h          \
+              odevice_simpad.h          \
+              odevice_zaurus.h          \
+              odevice_yopy.h            \
               oglobal.h                 \
               oglobalsettings.h         \
               oprocess.h                \

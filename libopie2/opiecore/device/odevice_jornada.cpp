@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "odevice.h"
+#include "odevice_jornada.h"
 
 /* QT */
 #include <qapplication.h>
@@ -53,12 +53,7 @@
 #include <linux/soundcard.h>
 #endif
 
-#ifndef ARRAY_SIZE
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-#endif
-
-// _IO and friends are only defined in kernel headers ...
-
+/* KERNEL */
 #define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
 
 #define OD_IO(type,number)              OD_IOC(0,type,number,0)
@@ -84,39 +79,6 @@ typedef struct {
 
 using namespace Opie;
 
-class Jornada : public ODevice
-{
-
-  protected:
-    virtual void init();
-
-  public:
-    virtual bool setSoftSuspend ( bool soft );
-    virtual bool setDisplayBrightness ( int b );
-    virtual int displayBrightnessResolution() const;
-    static bool isJornada();
-};
-
-
-bool Jornada::isJornada()
-{
-    QFile f( "/proc/cpuinfo" );
-    if ( f. open ( IO_ReadOnly ) ) {
-        QTextStream ts ( &f );
-        QString line;
-        while( line = ts. readLine() ) {
-            if ( line. left ( 8 ) == "Hardware" ) {
-                int loc = line. find ( ":" );
-                if ( loc != -1 ) {
-                    QString model = line.mid( loc + 2 ).simplifyWhiteSpace( );
-                return ( model == "HP Jornada 56x" );
-                }
-            }
-        }
-    }
-    return false;
-}
-
 void Jornada::init()
 {
     d->m_vendorstr = "HP";
@@ -128,50 +90,22 @@ void Jornada::init()
     d->m_rotation = Rot0;
 
     QFile f ( "/etc/familiar-version" );
-    f. setName ( "/etc/familiar-version" );
-    if ( f. open ( IO_ReadOnly )) {
+    f.setName ( "/etc/familiar-version" );
+    if ( f.open ( IO_ReadOnly )) {
 
         QTextStream ts ( &f );
-        d->m_sysverstr = ts. readLine(). mid ( 10 );
+        d->m_sysverstr = ts.readLine().mid( 10 );
 
         f. close();
     }
 }
 
-#if 0
-void Jornada::initButtons()
-{
-    if ( d->m_buttons )
-        return;
-
-    // Simulation uses iPAQ 3660 device buttons
-
-    qDebug ( "init Buttons" );
-    d->m_buttons = new QValueList <ODeviceButton>;
-
-    for ( uint i = 0; i < ( sizeof( ipaq_buttons ) / sizeof( i_button )); i++ ) {
-        i_button *ib = ipaq_buttons + i;
-        ODeviceButton b;
-
-        if (( ib->model & Model_iPAQ_H36xx ) == Model_iPAQ_H36xx ) {
-            b. setKeycode ( ib->code );
-            b. setUserText ( QObject::tr ( "Button", ib->utext ));
-            b. setPixmap ( Resource::loadPixmap ( ib->pix ));
-            b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( ib->fpressedservice ), ib->fpressedaction ));
-            b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( ib->fheldservice ), ib->fheldaction ));
-            d->m_buttons->append ( b );
-        }
-    }
-    reloadButtonMapping();
-
-    QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-    connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
-}
-#endif
 
 int Jornada::displayBrightnessResolution() const
 {
+    return 0;
 }
+
 
 bool Jornada::setDisplayBrightness( int bright )
 {
@@ -194,6 +128,7 @@ bool Jornada::setDisplayBrightness( int bright )
     return res;
 }
 
+
 bool Jornada::setSoftSuspend( bool soft )
 {
     bool res = false;
@@ -212,3 +147,4 @@ bool Jornada::setSoftSuspend( bool soft )
 
     return res;
 }
+

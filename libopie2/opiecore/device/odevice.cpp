@@ -27,7 +27,12 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "odevice.h"
+#include "odevice_ipaq.h"
+#include "odevice_jornada.h"
+#include "odevice_ramses.h"
+#include "odevice_simpad.h"
+#include "odevice_yopy.h"
+#include "odevice_zaurus.h"
 
 /* QT */
 #include <qapplication.h>
@@ -53,52 +58,46 @@
 #include <linux/soundcard.h>
 #endif
 
-#ifndef ARRAY_SIZE
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-#endif
-
-// _IO and friends are only defined in kernel headers ...
-
-#define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
-
-#define OD_IO(type,number)              OD_IOC(0,type,number,0)
-#define OD_IOW(type,number,size)        OD_IOC(1,type,number,sizeof(size))
-#define OD_IOR(type,number,size)        OD_IOC(2,type,number,sizeof(size))
-#define OD_IORW(type,number,size)       OD_IOC(3,type,number,sizeof(size))
+const char* PATH_PROC_CPUINFO = "/proc/cpuinfo";
 
 using namespace Opie;
-
-class iPAQ;
-class Zaurus;
-class SIMpad;
-class Ramses;
-class Jornada;
 
 ODevice *ODevice::inst()
 {
     static ODevice *dev = 0;
 
-    // rewrite this to only use /proc/devinfo or so
+    // rewrite this to only use /proc/cpuinfo or so
 
-    /*
-    if ( !dev ) {
-        if ( QFile::exists ( "/proc/hal/model" ))
-            dev = new iPAQ();
-        else if ( Zaurus::isZaurus() )
-            dev = new Zaurus();
-        else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/cs3" ))
-            dev = new SIMpad();
-        else if ( QFile::exists ( "/proc/sys/board/name" ))
-            dev = new Ramses();
-        else if ( Yopy::isYopy() )
-                dev = new Yopy();
-        else if ( Jornada::isJornada() )
-            dev = new Jornada();
+    if ( !dev )
+    {
+        QFile f( PATH_PROC_CPUINFO );
+        if ( f.open( IO_ReadOnly ) )
+        {
+            QTextStream s( &f );
+            while ( !s.atEnd() )
+            {
+                QString line;
+                line = s.readLine();
+                if ( line.startsWith( "Hardware" ) )
+                {
+                    qDebug( "ODevice() - found '%s'", (const char*) line );
+                    if ( line.contains( "sharp", false ) ) dev = new Zaurus();
+                    else if ( line.contains( "ipaq", false ) ) dev = new iPAQ();
+                    else if ( line.contains( "simpad", false ) ) dev = new SIMpad();
+                    else if ( line.contains( "jornada", false ) ) dev = new Jornada();
+                    else if ( line.contains( "ramses", false ) ) dev = new Ramses();
+                    else qWarning( "ODevice() - unknown hardware - using default." );
+                    break;
+                }
+            }
+        }
         else
-            dev = new ODevice();
+        {
+            qWarning( "ODevice() - can't open '%s' - unknown hardware - using default." );
+        }
+        if ( !dev ) dev = new ODevice();
         dev->init();
     }
-    */
     return dev;
 }
 

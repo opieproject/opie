@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include "odevice.h"
+#include "odevice_ipaq.h"
 
 /* QT */
 #include <qapplication.h>
@@ -53,12 +53,7 @@
 #include <linux/soundcard.h>
 #endif
 
-#ifndef ARRAY_SIZE
-#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
-#endif
-
-// _IO and friends are only defined in kernel headers ...
-
+/* KERNEL */
 #define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))
 
 #define OD_IO(type,number)              OD_IOC(0,type,number,0)
@@ -82,51 +77,7 @@ typedef struct {
 #define LED_ON    OD_IOW( 'f', 5, LED_IN )
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
-using namespace Opie;
-
-class iPAQ : public ODevice, public QWSServer::KeyboardFilter
-{
-
-  protected:
-    virtual void init();
-    virtual void initButtons();
-
-  public:
-    virtual bool setSoftSuspend( bool soft );
-
-    virtual bool setDisplayBrightness( int b );
-    virtual int displayBrightnessResolution() const;
-
-    virtual void alarmSound();
-
-    virtual QValueList <OLed> ledList() const;
-    virtual QValueList <OLedState> ledStateList( OLed led ) const;
-    virtual OLedState ledState( OLed led ) const;
-    virtual bool setLedState( OLed led, OLedState st );
-
-    virtual bool hasLightSensor() const;
-    virtual int readLightSensor();
-    virtual int lightSensorResolution() const;
-
-  protected:
-    virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
-    virtual void timerEvent( QTimerEvent *te );
-
-    int m_power_timer;
-
-    OLedState m_leds [2];
-};
-
-struct i_button {
-    uint model;
-    Qt::Key code;
-    char *utext;
-    char *pix;
-    char *fpressedservice;
-    char *fpressedaction;
-    char *fheldservice;
-    char *fheldaction;
-} ipaq_buttons [] = {
+struct i_button ipaq_buttons [] = {
     { Model_iPAQ_H31xx | Model_iPAQ_H36xx | Model_iPAQ_H37xx | Model_iPAQ_H38xx | Model_iPAQ_H39xx | Model_iPAQ_H5xxx,
     Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
     "devicebuttons/ipaq_calendar",

@@ -30,15 +30,15 @@
 #ifndef ODEVICE_H_
 #define ODEVICE_H_
 
+/* OPIE */
 #include <opie2/odevicebutton.h>
+#include <qpe/qpeapplication.h> /* for Transformation enum.. */
 
 /* QT */
 #include <qnamespace.h>
 #include <qobject.h>
 #include <qstring.h>
 #include <qstrlist.h>
-
-#include <qpe/qpeapplication.h> /* for Transformation enum.. */
 
 namespace Opie
 {
