@@ -88,6 +88,9 @@ QString AbstractMail::convert_String(const char*text)
     char*res = 0;
     int err = MAILIMF_NO_ERROR;
 
+    if (!text) {
+        return QString("");
+    }
     QString result(text);
 
     err = mailmime_encoded_phrase_parse("iso-8859-1",
