@@ -1,4 +1,5 @@
 
+#include <qapplication.h>
 
 #include <opie/oprocess.h>
 #include "obex.h"
@@ -17,6 +18,7 @@ Obex::~Obex() {
   delete m_send;
 }
 void Obex::receive()  {
+  qWarning("Receive" );
    m_rec = new OProcess();
    *m_rec << "irobex_palm3";
    // connect to the necessary slots
@@ -39,8 +41,9 @@ void Obex::send( const QString& fileName) {
   sendNow();
 }
 void Obex::sendNow(){
-  if ( m_count >= 15 ) { // could not send
+  if ( m_count >= 25 ) { // could not send
     emit error(-1 );
+    return;
   }
   // OProcess inititialisation
   m_send = new OProcess();
@@ -54,7 +57,8 @@ void Obex::sendNow(){
 	  this, SLOT(slotStdOut(OProcess*, char*, int) ) );
   // now start it
   if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {
-    m_count = 15;
+    qWarning("could not send" );
+    m_count = 25;
     emit error(-1 );
   }
   // end
@@ -92,11 +96,13 @@ void Obex::sendEnd() {
     if ( m_send->exitStatus() == 0 ) {
       delete m_send;
       m_send=0;
+      qWarning("done" );
       emit sent();
     }else if (m_send->exitStatus() == 255 ) { // it failed maybe the other side wasn't ready
       // let's try it again
       delete m_send;
       m_send = 0;
+      qWarning("try sending again" );
       sendNow();
     }
   }else {
@@ -113,6 +119,7 @@ QString Obex::parseOut(     ){
     if ( (*it).startsWith("Wrote"  ) ) {
       QStringList pathes = QStringList::split(' ', (*it) );
       path = pathes[1];
+      qWarning("path %s", path.latin1() );
     }
   }
   return path;
