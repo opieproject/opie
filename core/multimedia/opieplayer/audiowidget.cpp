@@ -87,7 +87,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 //    QString skinPath = "opieplayer/skins/" + skin;
     QString skinPath;
     skinPath = "opieplayer2/skins/" + skin;
-    if(!QDir(skinPath).exists())
+    if(!QDir(QString(getenv("OPIEDIR")) +"/pics/"+skinPath).exists())
        skinPath = "opieplayer2/skins/default";
        
     qDebug("skin path " + skinPath);
