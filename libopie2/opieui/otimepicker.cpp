@@ -28,7 +28,7 @@
 */
 
 /* OPIE */
-#include <opie2/otimepicker.h>
+#include "otimepicker.h"
 
 /* QT */
 #include <qgroupbox.h>
