@@ -105,11 +105,11 @@
     <name>ConfigDialog</name>
     <message>
         <source>Edit Connection Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Wijzig Connectieprofiel</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished">Nieuwe verbinding</translation>
+        <translation>Nieuwe verbinding</translation>
     </message>
 </context>
 <context>
@@ -527,7 +527,7 @@
     </message>
     <message>
         <source>New Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw Profiel</translation>
     </message>
 </context>
 <context>

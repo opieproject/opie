@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Go</source>
-        <translation type="unfinished"></translation>
+        <translation>Ga</translation>
     </message>
 </context>
 </TS>

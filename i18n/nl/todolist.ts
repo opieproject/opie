@@ -30,7 +30,7 @@
     </message>
     <message>
         <source>Task Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Taakeditor</translation>
     </message>
 </context>
 <context>
@@ -53,7 +53,7 @@
     </message>
     <message>
         <source>Opie Todolist</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie TeDoen lijst</translation>
     </message>
 </context>
 <context>
@@ -479,7 +479,7 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     </message>
     <message>
         <source>Summary:</source>
-        <translation type="unfinished"></translation>
+        <translation>Overzicht:</translation>
     </message>
 </context>
 <context>

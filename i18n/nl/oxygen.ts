@@ -429,7 +429,7 @@
     </message>
     <message>
         <source>Bismuth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bismuth</translation>
     </message>
     <message>
         <source>Polonium</source>
@@ -473,7 +473,7 @@
     </message>
     <message>
         <source>Plutonium</source>
-        <translation type="unfinished"></translation>
+        <translation>Plutonium</translation>
     </message>
     <message>
         <source>Americium</source>

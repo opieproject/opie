@@ -221,43 +221,43 @@
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongebruikt nummeriek commando ontvangen: %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongebruikt CTCP commando ontvangen: %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ongebruikt Tekstueel commando ontvangen: %1</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 opent kanaal %2</translation>
     </message>
     <message>
         <source>You left channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>U verlaat kanaal %1</translation>
     </message>
     <message>
         <source>%1 left channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 verlaat kanaal %2</translation>
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Kanaalbericht voor onbekend kanaal %1</translation>
     </message>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished"></translation>
+        <translation>U staat nu bekend als %1</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 staat nu bekend als %2</translation>
     </message>
     <message>
         <source>%1 has quit (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 is weggegaan (%2)</translation>
     </message>
 </context>
 <context>
@@ -504,7 +504,7 @@ bevatten die beginnen met &apos;#&apos; of &apos;+&apos;</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Instellingen</translation>
+        <translation>Instellingen</translation>
     </message>
 </context>
 <context>

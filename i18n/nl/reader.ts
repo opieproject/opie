@@ -38,99 +38,99 @@
     </message>
     <message>
         <source>&lt;Nothing&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;Niets&gt;</translation>
     </message>
     <message>
         <source>Open file</source>
-        <translation type="unfinished"></translation>
+        <translation>Open bestand</translation>
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto scrollen</translation>
     </message>
     <message>
         <source>Bookmark</source>
-        <translation type="unfinished">Favoriet</translation>
+        <translation>Favoriet</translation>
     </message>
     <message>
         <source>Annotate</source>
-        <translation type="unfinished">Bijschrift</translation>
+        <translation>Bijschrift</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished">Volledig scherm</translation>
+        <translation>Volledig scherm</translation>
     </message>
     <message>
         <source>Zoom in</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom in</translation>
     </message>
     <message>
         <source>Zoom out</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoom uit</translation>
     </message>
     <message>
         <source>Back</source>
-        <translation type="unfinished">Terug</translation>
+        <translation>Terug</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Vooruit</translation>
+        <translation>Vooruit</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished">Thuis</translation>
+        <translation>Thuis</translation>
     </message>
     <message>
         <source>Page up</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina omhoog</translation>
     </message>
     <message>
         <source>Page down</source>
-        <translation type="unfinished"></translation>
+        <translation>Pagina omlaag</translation>
     </message>
     <message>
         <source>Line up</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel omhoog</translation>
     </message>
     <message>
         <source>Line down</source>
-        <translation type="unfinished"></translation>
+        <translation>Regel omlaag</translation>
     </message>
     <message>
         <source>Beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Begin</translation>
     </message>
     <message>
         <source>End</source>
-        <translation type="unfinished"></translation>
+        <translation>Einde</translation>
     </message>
     <message>
         <source>Escape Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Escapeknop</translation>
     </message>
     <message>
         <source>Space Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Spatieknop</translation>
     </message>
     <message>
         <source>Return Button</source>
-        <translation type="unfinished"></translation>
+        <translation>Return knop</translation>
     </message>
     <message>
         <source>Left Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijl naar links</translation>
     </message>
     <message>
         <source>Right Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijl naar rechts</translation>
     </message>
     <message>
         <source>Down Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijl naar beneden</translation>
     </message>
     <message>
         <source>Up Arrow</source>
-        <translation type="unfinished"></translation>
+        <translation>Pijl omhoog</translation>
     </message>
 </context>
 <context>
@@ -224,12 +224,13 @@ Aanraking</translation>
     </message>
     <message>
         <source>Dictionary</source>
-        <translation type="unfinished">Woordenboek</translation>
+        <translation>Woordenboek</translation>
     </message>
     <message>
         <source>Swap Tap
 Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Wissel aanraak
+actie</translation>
     </message>
 </context>
 <context>
@@ -272,7 +273,7 @@ Actions</source>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Tekst</translation>
     </message>
 </context>
 <context>
@@ -432,11 +433,11 @@ instelling</translation>
     </message>
     <message>
         <source>Select Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Selecteer aktie</translation>
     </message>
     <message>
         <source>Plucker</source>
-        <translation type="unfinished"></translation>
+        <translation>Plucker</translation>
     </message>
 </context>
 <context>
@@ -763,7 +764,7 @@ instelling</translation>
     </message>
     <message>
         <source>Reader</source>
-        <translation type="unfinished"></translation>
+        <translation>Lezer</translation>
     </message>
 </context>
 <context>

@@ -50,7 +50,7 @@
     </message>
     <message>
         <source>Update Filelist</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestandenlijst vernieuwen</translation>
     </message>
 </context>
 </TS>

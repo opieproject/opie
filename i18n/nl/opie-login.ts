@@ -84,11 +84,14 @@ by an uncaught signal
 by an uncaught signal
 (%1)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Opie werd afgebroken
+door een onbruikbaar
+signaal (%1)
+</translation>
     </message>
     <message>
         <source>Could not start Opie.</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan Opie niet starten.</translation>
     </message>
 </context>
 </TS>

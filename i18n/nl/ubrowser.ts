@@ -3,30 +3,30 @@
     <name>MainView</name>
     <message>
         <source>uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>uBrowser</translation>
     </message>
     <message>
         <source> - uBrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>- uBrowser</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Error!</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout!</translation>
     </message>
     <message>
         <source>couldnt find ip address</source>
-        <translation type="unfinished"></translation>
+        <translation>kan IP adres niet vinden</translation>
     </message>
     <message>
         <source>couldnt create socket</source>
-        <translation type="unfinished"></translation>
+        <translation>kan socket niet aanmaken</translation>
     </message>
     <message>
         <source>couldnt connect to socket</source>
-        <translation type="unfinished"></translation>
+        <translation>kan niet verbinden met socket</translation>
     </message>
 </context>
 </TS>

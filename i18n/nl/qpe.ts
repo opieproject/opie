@@ -183,7 +183,7 @@ Reservebatterij opladen aub.</translation>
     <name>QObject</name>
     <message>
         <source>Battery Status</source>
-        <translation type="unfinished">Batterijstatus</translation>
+        <translation>Batterijstatus</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>AI_Dialog</name>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>&lt;b&gt;Rescue&lt;/b&gt;</source>
@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>?</source>
-        <translation type="unfinished"></translation>
+        <translation>?</translation>
     </message>
     <message>
         <source>&lt;b&gt;Eliminate&lt;/b&gt;</source>
@@ -35,11 +35,11 @@
     </message>
     <message>
         <source>Default Values</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaardwaarden</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="unfinished"></translation>
+        <translation>Help</translation>
     </message>
     <message>
         <source>Bring the pieces out of the endzone</source>
@@ -78,89 +78,89 @@ next to a field for help</source>
     <name>BackGammon</name>
     <message>
         <source>Backgammon</source>
-        <translation type="unfinished"></translation>
+        <translation>Backgammon</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nieuw</translation>
     </message>
     <message>
         <source>Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla op</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Spel</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Standaard</translation>
     </message>
     <message>
         <source>Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Thema</translation>
     </message>
     <message>
         <source>Player</source>
-        <translation type="unfinished"></translation>
+        <translation>Speler</translation>
     </message>
     <message>
         <source>AI</source>
-        <translation type="unfinished"></translation>
+        <translation>AI</translation>
     </message>
     <message>
         <source>Rules</source>
-        <translation type="unfinished"></translation>
+        <translation>Regels</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>deleted theme %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>thema %1 is verwijderd?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuleer</translation>
     </message>
     <message>
         <source>Load Theme</source>
-        <translation type="unfinished"></translation>
+        <translation>Laad thema</translation>
     </message>
     <message>
         <source>&lt;b&gt;no move&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;geen zet&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Player 1 wins. Click on board for new game.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Speler 1 wint. Klik op het bord voor een nieuw spel.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Player 2 wins. Click on board for new game.&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Speler 2 wint. Klik op het bord voor een nieuw spel.&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;P2 turn&lt;/b&gt;</source>
         <comment>P means player</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sp2 aan de beurt</translation>
     </message>
     <message>
         <source>&lt;b&gt;P1 turn&lt;/b&gt;</source>
         <comment>P means player</comment>
-        <translation type="unfinished"></translation>
+        <translation>Sp1 aan de beurt</translation>
     </message>
 </context>
 </TS>

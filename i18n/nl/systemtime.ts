@@ -122,11 +122,11 @@ server:</translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>U vroeg om een vertraging van %1 minuten, maar slechts %2 minuten zijn verstreken sinds de laatste controle. &lt;br&gt; Doorgaan?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 seconden</translation>
     </message>
 </context>
 <context>

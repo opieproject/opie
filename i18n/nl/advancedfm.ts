@@ -259,35 +259,39 @@ Wilt u het echt verwijderen?</translation>
     </message>
     <message>
         <source>AdvancedFm :: </source>
-        <translation type="unfinished"></translation>
+        <translation>AdvancedFM ::</translation>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished"></translation>
+        <translation>kB vrij</translation>
     </message>
     <message>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!</source>
-        <translation type="unfinished"></translation>
+        <translation>Kan huidige map niet verwijderen
+van favorietenlijst.
+Er is geen favoriet van!</translation>
     </message>
     <message>
         <source>File Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand zoeken</translation>
     </message>
     <message>
         <source>Really delete %1
 and all it&apos;s contents ?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 en alle inhoud
+echt verwijderen?</translation>
     </message>
     <message>
         <source>Really delete
 %1?</source>
-        <translation type="unfinished"></translation>
+        <translation>%1
+echt verwijderen?</translation>
     </message>
     <message>
         <source>Copy &apos;%1&apos; As</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiëer &apos;%1&apos; als</translation>
     </message>
 </context>
 <context>
@@ -379,7 +383,7 @@ Klaar
     </message>
     <message>
         <source>Error setting mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij instellen modus</translation>
     </message>
 </context>
 </TS>

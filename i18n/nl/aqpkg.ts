@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>%1 Kb</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 kB</translation>
     </message>
 </context>
 <context>
@@ -161,24 +161,25 @@
     <name>Ipkg</name>
     <message>
         <source>Dealing with package %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwerken van pakket %1</translation>
     </message>
     <message>
         <source>Removing symbolic links...
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderen van symbolysche links...
+</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak symbolische links aan voor %1.</translation>
     </message>
     <message>
         <source>Creating symbolic links for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Maak symbolische links aan voor %1</translation>
     </message>
     <message>
         <source>Finished</source>
-        <translation type="unfinished"></translation>
+        <translation>Klaar</translation>
     </message>
     <message>
         <source>Removing status entry...</source>
@@ -186,11 +187,11 @@
     </message>
     <message>
         <source>status file - </source>
-        <translation type="unfinished"></translation>
+        <translation>statusbestand - </translation>
     </message>
     <message>
         <source>package - </source>
-        <translation type="unfinished"></translation>
+        <translation>pakket - </translation>
     </message>
     <message>
         <source>Couldn&apos;t open status file - </source>
@@ -222,7 +223,7 @@
     </message>
     <message>
         <source>Removed %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderd %1</translation>
     </message>
     <message>
         <source>Failed to remove %1</source>
@@ -230,7 +231,7 @@
     </message>
     <message>
         <source>Removed </source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijderd</translation>
     </message>
     <message>
         <source>Failed to remove </source>
@@ -608,7 +609,7 @@ pakket %1?</translation>
     <name>QuestionDlg</name>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Verwijder</translation>
+        <translation>Verwijder</translation>
     </message>
 </context>
 <context>

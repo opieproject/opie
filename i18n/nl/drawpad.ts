@@ -272,7 +272,7 @@ verwijderen?</translation>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle plaatjes</translation>
     </message>
 </context>
 <context>
@@ -291,7 +291,7 @@ verwijderen?</translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle plaatjes</translation>
     </message>
 </context>
 <context>

@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>TicTac</source>
-        <translation type="unfinished"></translation>
+        <translation>Boter, Kaas en Eieren</translation>
     </message>
 </context>
 <context>

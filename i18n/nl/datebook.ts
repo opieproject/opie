@@ -97,7 +97,7 @@ Toch afsluiten?</translation>
     </message>
     <message>
         <source>error box</source>
-        <translation type="unfinished"></translation>
+        <translation>foutenscherm</translation>
     </message>
 </context>
 <context>
@@ -198,7 +198,7 @@ Toch afsluiten?</translation>
     </message>
     <message>
         <source>Beam this occurence</source>
-        <translation type="unfinished"></translation>
+        <translation>Verzend deze gebeurtenis</translation>
     </message>
 </context>
 <context>
@@ -369,7 +369,9 @@ Toch afsluiten?</translation>
     <message>
         <source>MTWTFSSM</source>
         <comment>Week days</comment>
-        <translation type="unfinished"></translation>
+        <translation>MDWDVZZM
+
+Weekdagen</translation>
     </message>
 </context>
 <context>
@@ -448,37 +450,37 @@ Zondag</translation>
     <message>
         <source>Mo</source>
         <comment>Monday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Tu</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Di</translation>
     </message>
     <message>
         <source>We</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Wo</translation>
     </message>
     <message>
         <source>Th</source>
         <comment>Thursday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Do</translation>
     </message>
     <message>
         <source>Fr</source>
         <comment>Friday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Vr</translation>
     </message>
     <message>
         <source>Sa</source>
         <comment>Saturday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Za</translation>
     </message>
     <message>
         <source>Su</source>
         <comment>Sunday</comment>
-        <translation type="unfinished"></translation>
+        <translation>Zo</translation>
     </message>
 </context>
 <context>
@@ -615,7 +617,7 @@ Zondag</translation>
     <name>DatebookAlldayDisp</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Info</translation>
     </message>
 </context>
 <context>
@@ -781,7 +783,7 @@ en</translation>
     </message>
     <message>
         <source>on </source>
-        <translation type="unfinished"></translation>
+        <translation>om</translation>
     </message>
 </context>
 <context>
