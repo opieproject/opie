@@ -3,115 +3,115 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer Tout</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer</translation>
     </message>
     <message>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer...</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter</translation>
     </message>
     <message>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter...</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>Outils</translation>
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle Page</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer Page</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer Page</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>Annuler</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>Refaire</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Premiere Page</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Page Précédente</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Page Suivante</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Dernière Page</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner Point</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner Ligne</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner Rectangle</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner Rectangle Rempli</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>Dessiner Ellipse</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>Desinner Ellipse Remplie</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation type="unfinished"></translation>
+        <translation>Remplir Région</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer Point</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur Pinceau</translation>
     </message>
     <message>
         <source>More</source>
-        <translation type="unfinished"></translation>
+        <translation">Plus</translation>
     </message>
     <message>
         <source>More...</source>
-        <translation type="unfinished"></translation>
+        <translation>Plus...</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur Pinceau</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur Remplissage</translation>
     </message>
     <message>
         <source>DrawPad</source>
@@ -119,14 +119,14 @@
     </message>
     <message>
         <source>Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Page</translation>
     </message>
 </context>
 <context>
     <name>DrawPadCanvas</name>
     <message>
         <source>Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer Tout</translation>
     </message>
     <message>
         <source>Do you want to delete
@@ -135,7 +135,7 @@ all the pages?</source>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Effacer Page</translation>
     </message>
     <message>
         <source>Do you want to clear
@@ -144,7 +144,7 @@ the current page?</source>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer Page</translation>
     </message>
     <message>
         <source>Do you want to delete
@@ -156,19 +156,19 @@ the current page?</source>
     <name>ExportDialog</name>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter</translation>
     </message>
     <message>
         <source>Page Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélection Pages</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation">Toutes</translation>
     </message>
     <message>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>En cours</translation>
     </message>
     <message>
         <source>Range</source>
@@ -176,61 +176,61 @@ the current page?</source>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>A:</translation>
     </message>
     <message>
         <source>Export As</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporter Sous</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom:</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>Format:</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer</translation>
     </message>
 </context>
 <context>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouvelle Page</translation>
     </message>
     <message>
         <source>Page Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimension Page</translation>
     </message>
     <message>
         <source>Width :</source>
-        <translation type="unfinished"></translation>
+        <translation>Largeur:</translation>
     </message>
     <message>
         <source>Height :</source>
-        <translation type="unfinished"></translation>
+        <translation>Hauteur</translation>
     </message>
     <message>
         <source>Contents</source>
-        <translation type="unfinished"></translation>
+        <translation>Contenu</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanc</translation>
     </message>
     <message>
         <source>Foreground Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur Avant Plan</translation>
     </message>
     <message>
         <source>Background Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur Arrière Plan</translation>
     </message>
 </context>
 <context>
@@ -249,15 +249,15 @@ the current page?</source>
     </message>
     <message>
         <source>Red:</source>
-        <translation type="unfinished"></translation>
+        <translation>Rouge</translation>
     </message>
     <message>
         <source>Green:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vert</translation>
     </message>
     <message>
         <source>Blue:</source>
-        <translation type="unfinished"></translation>
+        <translation>Bleu</translation>
     </message>
     <message>
         <source>Alpha channel:</source>
