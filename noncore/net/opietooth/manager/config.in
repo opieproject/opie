@@ -1,4 +1,4 @@
   config OPIETOOTH-MANAGER
     boolean "opie-bluetoothmanager (Bluetooth manager)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH && LIBOPIETOOTH
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIECORE2 && OPIETOOTH && LIBOPIETOOTH

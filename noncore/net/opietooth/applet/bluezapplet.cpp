@@ -47,7 +47,7 @@
 
 #include <device.h>
 
-using namespace Opie;
+using namespace Opie::Core;
 
 namespace OpieTooth {
 
