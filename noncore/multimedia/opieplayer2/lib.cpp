@@ -1,8 +1,40 @@
+/*
+                            This file is part of the Opie Project
+
+                             Copyright (c)  2002 Max Reiss <harlekin@handhelds.org>
+                             Copyright (c)  2002 LJP <>
+                             Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
-//#include <qpe/qpeapplication.h>
 #include <qimage.h>
+#include <qtextstream.h>
 #include <qpe/resource.h>
 
 #include <qfile.h>
@@ -40,6 +72,16 @@ Lib::Lib(XineVideoWidget* widget) {
     QCString str( getenv("HOME") );
     str += "/Settings/opiexine.cf";
     // get the configuration
+
+    // not really OO, should be an extra class, later
+    if ( !QFile(str).exists() ) {
+        QFile f(str);
+        f.open(IO_WriteOnly);
+        QTextStream ts( &f );
+        ts << "misc.memcpy_method:glibc";
+        f.close();
+    }
+
     m_config = xine_config_file_init( str.data() );
 
     // allocate oss for sound
