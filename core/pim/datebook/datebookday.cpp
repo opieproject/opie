@@ -514,9 +514,11 @@ void DateBookDay::relayoutPage( bool fromResize )
 
 	timeMarker->setTime( QTime::currentTime() );	//display timeMarker
 	timeMarker->raise();				//on top of all widgets
-	if (this->date() == QDate::currentDate())		//only show timeMarker on current day
-		timeMarker->show(); else timeMarker->hide();
-
+	if (this->date() == QDate::currentDate()) {		//only show timeMarker on current day
+		timeMarker->show();
+	} else {
+		timeMarker->hide();
+	}
 	setUpdatesEnabled( TRUE );
 	return;
 }
