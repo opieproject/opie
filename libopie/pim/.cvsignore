@@ -1,4 +1,2 @@
 config.in
-moc*config.in
-moc_ocontactaccess.cpp
-moc_otodoaccess.cpp
+moc*
