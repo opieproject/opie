@@ -15,3 +15,51 @@
 
 #include "gps.h"
 
+GPS::GPS( QObject* parent, const char * name )
+    :QObject( parent, name )
+{
+    qDebug( "GPS::GPS()" );
+    _socket = new QSocket( this, "gpsd commsock" );
+}
+
+
+GPS::~GPS()
+{
+    qDebug( "GPS::~GPS()" );
+}
+
+
+bool GPS::open( const QString& host, int port )
+{
+    _socket->connectToHost( host, port );
+}
+
+
+float GPS::latitude() const
+{
+    char buf[256];
+
+    int result = _socket->writeBlock( "p\r\n", 3 );
+    if ( result )
+    {
+        qDebug( "GPS write succeeded" );
+        _socket->waitForMore( 20 );
+        if ( _socket->canReadLine() )
+        {
+
+            int num = _socket->readLine( &buf[0], sizeof buf );
+            if ( num )
+            {
+                qDebug( "GPS got line: %s", &buf );
+                return 0.0;
+            }
+        }
+    }
+    return -1.0;
+}
+
+
+float GPS::longitute() const
+{
+}
+

@@ -46,6 +46,10 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
     bool usePrismHeader() const;
     bool isChannelChecked( int ) const;
 
+    bool useGPS() const;
+    const QString gpsHost() const;
+    int gpsPort() const;
+
   public slots:
     void changedDeviceType(int);
     void getCaptureFileNameClicked();

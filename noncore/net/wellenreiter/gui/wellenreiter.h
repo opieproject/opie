@@ -33,6 +33,7 @@ class OWirelessNetworkInterface;
 class WellenreiterConfigWindow;
 class MLogWindow;
 class MHexWindow;
+class GPS;
 
 class Wellenreiter : public WellenreiterBase {
     Q_OBJECT
@@ -81,6 +82,7 @@ class Wellenreiter : public WellenreiterBase {
     OWirelessNetworkInterface* iface;
     OPacketCapturer* pcap;
     WellenreiterConfigWindow* configwindow;
+    GPS* gps;
 
     //void readConfig();
     //void writeConfig();

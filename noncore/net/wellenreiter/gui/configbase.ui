@@ -312,6 +312,10 @@
                             <name>enabled</name>
                             <bool>true</bool>
                         </property>
+                        <property stdset="1">
+                            <name>editable</name>
+                            <bool>false</bool>
+                        </property>
                         <property>
                             <name>whatsThis</name>
                             <string>Choose the interface used for sniffing.</string>
@@ -1020,7 +1024,7 @@
                             </item>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>ComboBox8</cstring>
+                                <cstring>gpsdHost</cstring>
                             </property>
                             <property stdset="1">
                                 <name>enabled</name>
@@ -1050,7 +1054,7 @@
                             <class>QSpinBox</class>
                             <property stdset="1">
                                 <name>name</name>
-                                <cstring>SpinBox2</cstring>
+                                <cstring>gpsdPort</cstring>
                             </property>
                             <property stdset="1">
                                 <name>enabled</name>
@@ -1070,6 +1074,30 @@
                             </property>
                         </widget>
                     </hbox>
+                </widget>
+                <widget>
+                    <class>QLineEdit</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>commandGPS</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>false</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>10</x>
+                            <y>110</y>
+                            <width>210</width>
+                            <height>22</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>gpsd -p /dev/ttyS3 -s 57600</string>
+                    </property>
                 </widget>
                 <widget>
                     <class>QCheckBox</class>
@@ -1109,30 +1137,6 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Start gpsd on localhost</string>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QLineEdit</class>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>commandGPS</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>false</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>10</x>
-                            <y>110</y>
-                            <width>210</width>
-                            <height>22</height>
-                        </rect>
-                    </property>
-                    <property stdset="1">
-                        <name>text</name>
-                        <string>gpsd -p /dev/ttyS3 -s 57600</string>
                     </property>
                 </widget>
             </widget>
@@ -1207,13 +1211,13 @@
     <connection>
         <sender>enableGPS</sender>
         <signal>toggled(bool)</signal>
-        <receiver>ComboBox8</receiver>
+        <receiver>gpsdHost</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>
         <sender>enableGPS</sender>
         <signal>toggled(bool)</signal>
-        <receiver>SpinBox2</receiver>
+        <receiver>gpsdPort</receiver>
         <slot>setEnabled(bool)</slot>
     </connection>
     <connection>

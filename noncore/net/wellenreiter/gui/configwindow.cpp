@@ -187,6 +187,24 @@ void WellenreiterConfigWindow::channelAllClicked(int state)
     channel11->setChecked( b );
     channel12->setChecked( b );
     channel13->setChecked( b );
-    channel14->setChecked( b );    
+    channel14->setChecked( b );
 }
 
+
+bool WellenreiterConfigWindow::useGPS() const
+{
+    return enableGPS->isChecked();
+}
+
+
+const QString WellenreiterConfigWindow::gpsHost() const
+{
+    return useGPS() ? gpsdHost->currentText() : QString::null;
+}
+
+
+int WellenreiterConfigWindow::gpsPort() const
+{
+    bool ok;
+    return useGPS() ? gpsdPort->value() : -1;
+}

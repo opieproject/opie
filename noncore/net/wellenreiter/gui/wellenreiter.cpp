@@ -15,6 +15,7 @@
 
 // Local
 
+#include "gps.h"
 #include "wellenreiter.h"
 #include "scanlist.h"
 #include "logwindow.h"
@@ -85,6 +86,8 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     connect( netview, SIGNAL( joinNetwork(const QString&,const QString&,int,const QString&) ),
              this, SLOT( joinNetwork(const QString&,const QString&,int,const QString&) ) );
     pcap = new OPacketCapturer();
+
+    gps = new GPS( this );
 }
 
 
@@ -167,6 +170,14 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
     int channel = ds ? ds->channel() : -1;
 
     OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+
+    if ( configwindow->enableGPS->isChecked() )
+    {
+        qDebug( "Wellenreiter::gathering GPS data..." );
+        float lat = gps->latitude();
+        qDebug( "Wellenreiter::GPS data received is ( %f , %f )", lat, 0.0 );
+    }
+
     netView()->addNewItem( type, essid, header->macAddress2(), beacon->canPrivacy(), channel, 0 );
 
     // update graph window
@@ -238,7 +249,7 @@ bool Wellenreiter::checkDumpPacket( OPacket* p )
 {
     // go through all child packets and see if one is inside the child hierarchy for p
     // if so, do what the user requested (protocolAction), e.g. pass or discard
-    if ( !configwindow->writeCaptureFile->isOn() )
+    if ( !configwindow->writeCaptureFile->isChecked() )
         return false;
 
     QObjectList* l = p->queryList();
@@ -357,7 +368,10 @@ void Wellenreiter::startClicked()
 
     // configure device
     ONetwork* net = ONetwork::instance();
-    iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface ));
+
+    // TODO: check if interface is wireless and support sniffing for non-wireless interfaces
+
+    iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface )); // fails if network is not wireless!
 
     // bring device UP
     iface->setUp( true );
@@ -389,10 +403,18 @@ void Wellenreiter::startClicked()
             iface->setMonitorMode( true );
         if ( !iface->monitorMode() )
         {
-            QMessageBox::warning( this, "Wellenreiter II",
-                                  tr( "Can't set interface '%1'\ninto monitor mode:\n" ).arg( iface->name() ) + strerror( errno ) );
-            return;
+            if ( QMessageBox::warning( this, "Wellenreiter II",
+                                  tr( "Can't set interface '%1'\ninto monitor mode:\n" ).arg( iface->name() ) + strerror( errno ) +
+                                  tr( "\nContinue with limited functionality?" ), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::No )
+                return;
         }
+    }
+
+    // open GPS device
+    if ( configwindow->enableGPS->isChecked() )
+    {
+        qDebug( "Wellenreiter:GPS enabled @ %s:%d", (const char*) configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
+        gps->open( configwindow->gpsdHost->currentText(), configwindow->gpsdPort->value() );
     }
 
     // open pcap and start sniffing
@@ -400,9 +422,10 @@ void Wellenreiter::startClicked()
     {
         pcap->open( interface );
 
-        if ( configwindow->writeCaptureFile->isOn() )
+        if ( configwindow->writeCaptureFile->isChecked() )
         {
             QString dumpname( configwindow->captureFileName->text() );
+            if ( dumpname.isEmpty() ) dumpname = "captureFile";
             dumpname.append( '-' );
             dumpname.append( QTime::currentTime().toString().replace( QRegExp( ":" ), "-" ) );
             dumpname.append( ".wellenreiter" );
@@ -430,7 +453,10 @@ void Wellenreiter::startClicked()
 
     // start channel hopper
     if ( cardtype != DEVTYPE_FILE )
-        iface->setChannelHopping( 1000 ); //use interval from config window
+    {
+        logwindow->log( QString().sprintf( "(i) Starting channel hopper (d=%d ms)", configwindow->hopInterval->value() ) );
+        iface->setChannelHopping( configwindow->hopInterval->value() ); //use interval from config window
+    }
 
     if ( cardtype != DEVTYPE_FILE )
     {

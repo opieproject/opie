@@ -16,4 +16,23 @@
 #ifndef GPS_H
 #define GPS_H
 
+#include <qobject.h>
+#include <qsocket.h>
+
+class GPS : public QObject
+{
+  Q_OBJECT
+
+  public:
+    GPS( QObject* parent = 0, const char * name = "GPS" );
+    ~GPS();
+
+    bool open( const QString& host = "localhost", int port = 2947 );
+    float latitude() const;
+    float longitute() const;
+
+  private:
+    QSocket* _socket;
+};
+
 #endif // GPS_H
