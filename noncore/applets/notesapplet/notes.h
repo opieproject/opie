@@ -41,7 +41,7 @@ public:
     QListBox *box;
     QPushButton *saveButton, *deleteButton, *newButton;
     QString FileNamePath;
-    bool loaded, edited, doPopulate;
+    bool loaded, edited, doPopulate, isNew;
     void save();
     void populateBox();
     void load();
