@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.38 2002-06-28 23:37:17 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.39 2002-06-29 01:11:48 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -305,6 +305,9 @@ bool VMemo::startRecording() {
     //        QMessageBox::critical(0, "vmemo", "Could not open dsp device.\n"+errorMsg, "Abort");
     //      delete msgLabel;       
     recording = FALSE;
+    msgLabel=0;
+    delete msgLabel;
+    
     return FALSE;
   }
   
