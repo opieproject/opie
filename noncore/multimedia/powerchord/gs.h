@@ -8,7 +8,6 @@
 
 #define BUFSIZE 256
 #define NUMCHANS 7
-#define ACGUITAR_PATH_S "/usr/local/projects/opie-head/noncore/multimedia/powerchord/acguitar.raw"
 
 class gs : public QObject {
 

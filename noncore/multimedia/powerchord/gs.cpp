@@ -18,6 +18,7 @@
 
 //#include <qpainter.h>
 #include <qmessagebox.h>
+#include <qstring.h>
 
 
 gs::gs()
@@ -66,15 +67,19 @@ gs::gs()
   reverb_ptr = 0;
   reverb_max = 1024;
 
-  // load sampled 'E' string  
+  // load sampled 'E' string
   int samplen = 25000;
 
   signed short *dsp_buf = (signed short *)malloc(samplen * sizeof(signed short));
   signed short *dsp_buf_ptr = dsp_buf;
 
   int raw_fd;
-  raw_fd = open(ACGUITAR_PATH_S, O_RDONLY);
-  
+
+  QString path = getenv( "OPIEDIR" );
+  path.append( "/share/powerchord/acguitar.raw" );
+
+  raw_fd = open( (const char*) path, O_RDONLY);
+
   if (raw_fd < 0){
       fprintf(stderr, "Failed to open raw file (%s)\n", strerror(errno));
       exit(-1);
@@ -82,7 +87,7 @@ gs::gs()
 
   int totread = 0;
   int i;
-  
+
   while (totread < samplen*2){
       int want = samplen*2 - totread;
 
@@ -90,10 +95,10 @@ gs::gs()
       fprintf(stderr, "read %d bytes\n", numread);
       totread += numread;
       dsp_buf_ptr += numread/2;
-      
+
       if (numread == 0){
 	  fprintf(stderr, "failed to read bytes\n");
-	  exit(-1);  
+	  exit(-1);
       }    
   }
 
