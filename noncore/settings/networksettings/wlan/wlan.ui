@@ -644,7 +644,7 @@
 <customwidgets>
     <customwidget>
         <class>KeyEdit</class>
-        <header location="global">/usr/src/opie/noncore/net/networksettings/wlan/keyedit.h</header>
+        <header location="local">keyedit.h</header>
         <sizehint>
             <width>-1</width>
             <height>-1</height>
