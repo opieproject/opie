@@ -1,4 +1,5 @@
 
+#include <opie/otabwidget.h>
 #include "profileeditordialog.h"
 
 #include "qlayout.h"
@@ -13,7 +14,7 @@
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
                                           const Profile& prof )
-    : QTabDialog(0, 0, TRUE), m_fact( fact ), m_prof( prof )
+    : QDialog(0, 0, TRUE), m_fact( fact ), m_prof( prof )
 {
     initUI();
 
@@ -23,7 +24,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact,
 }
 
 ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
-    : QTabDialog(0, 0, TRUE), m_fact( fact )
+    : QDialog(0, 0, TRUE), m_fact( fact )
 {
 	// Default profile
 	m_prof = Profile(QString::null, "serial", Profile::Black, Profile::White, Profile::VT102);
@@ -41,14 +42,19 @@ Profile ProfileEditorDialog::profile() const
 
 void ProfileEditorDialog::initUI()
 {
-	QWidget *tabterm, *tabconn, *tabprof;
+
+    QVBoxLayout *mainLayout = new QVBoxLayout( this );
+    OTabWidget *tabWidget = new OTabWidget( this );
+    mainLayout->add(tabWidget);
+
+    QWidget *tabterm, *tabconn, *tabprof;
 
 	tabprof = new QWidget(this);
 	tabterm = new QWidget(this);
 	tabconn = new QWidget(this);
 
 	// for the time being: fake factory
-	
+
 	m_fact->addConfigWidgetFactory("serial", QObject::tr("Serial cable"), factory_serial);
 	m_fact->addConfigWidgetFactory("irda", QObject::tr("IrDA port"), factory_irda);
 	m_fact->addConfigWidgetFactory("modem", QObject::tr("Serial via modem"), factory_modem);
@@ -98,19 +104,19 @@ void ProfileEditorDialog::initUI()
 	vbox->add(device_box);
 	vbox->add(plugin_base);
 	vbox->add(conn_widget);
+        vbox->setStretchFactor(device, 1);
+        vbox->setStretchFactor(device_box, 1);
+        vbox->setStretchFactor(plugin_base, 1);
+        vbox->setStretchFactor(conn_widget, 7);
 
 	QVBoxLayout *vbox2 = new QVBoxLayout(tabterm, 2);
 	vbox2->add(term_widget);
 
-	addTab(tabprof, QObject::tr("Profile"));
-	addTab(tabconn, QObject::tr("Connection"));
-	addTab(tabterm, QObject::tr("Terminal"));
-
-	setOkButton(QObject::tr("OK"));
-	setCancelButton(QObject::tr("Cancel"));
+	tabWidget->addTab(tabprof, "", QObject::tr("Profile"));
+	tabWidget->addTab(tabconn, "", QObject::tr("Connection"));
+	tabWidget->addTab(tabterm, "", QObject::tr("Terminal"));
 
 	// load profile values
-
 	name_line->setText(m_prof.name());
 	for(int i = 0; i < device_box->count(); i++)
 	{
@@ -123,9 +129,7 @@ void ProfileEditorDialog::initUI()
 	}
 
 	// signals
-
-	connect(this, SIGNAL(cancelButtonPressed()), SLOT(slotCancel()));
-	connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
+         connect(device_box, SIGNAL(activated(int)), SLOT(slotDevice(int)));
 }
 
 ProfileEditorDialog::~ProfileEditorDialog() {
@@ -166,10 +170,6 @@ void ProfileEditorDialog::accept()
 	QDialog::accept();
 }
 
-void ProfileEditorDialog::slotCancel()
-{
-	reject();
-}
 
 QString ProfileEditorDialog::prof_name()
 {

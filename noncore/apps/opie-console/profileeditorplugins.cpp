@@ -10,6 +10,8 @@
 #include "qradiobutton.h"
 #include "qcheckbox.h"
 #include "qbuttongroup.h"
+#include "qhgroupbox.h"
+#include "qvbox.h"
 
 #include "io_serial.h"
 
@@ -36,6 +38,7 @@ QWidget *ProfileEditorPlugin::connection_widget()
 	root = new QWidget();
 
 	// Build GUI
+	QLabel *speedlabel = new QLabel(QObject::tr("Speed"), root);
 
 	QComboBox *speed_box = new QComboBox(root);
 	speed_box->insertItem("115200 baud", id_baud_115200);
@@ -44,38 +47,33 @@ QWidget *ProfileEditorPlugin::connection_widget()
 	speed_box->insertItem("19200 baud", id_baud_19200);
 	speed_box->insertItem("9600 baud", id_baud_9600);
 
-	QLabel *speedlabel = new QLabel(QObject::tr("Speed"), root);
-	QLabel *flow = new QLabel(QObject::tr("Flow control"), root);
-	QLabel *parity = new QLabel(QObject::tr("Parity"), root);
+	QButtonGroup *group_flow = new QButtonGroup(QObject::tr("Flow control"), root);
 
-	QButtonGroup *group_flow = new QButtonGroup(root);
-	group_flow->hide();
-	QRadioButton *flow_hw = new QRadioButton(QObject::tr("Hardware"), root);
-	QRadioButton *flow_sw = new QRadioButton(QObject::tr("Software"), root);
-	group_flow->insert(flow_hw, id_flow_hw);
-	group_flow->insert(flow_sw, id_flow_sw);
+	QRadioButton *flow_hw = new QRadioButton(QObject::tr("Hardware"), group_flow);
+	QRadioButton *flow_sw = new QRadioButton(QObject::tr("Software"), group_flow);
 
-	QButtonGroup *group_parity = new QButtonGroup(root);
-	group_parity->hide();
-	QRadioButton *parity_odd = new QRadioButton(QObject::tr("Odd"), root);
-	QRadioButton *parity_even = new QRadioButton(QObject::tr("Even"), root);
-	group_parity->insert(parity_odd, id_parity_odd);
-	group_parity->insert(parity_even, id_parity_even);
+	QButtonGroup *group_parity = new QButtonGroup(QObject::tr("Parity"), root);
+	QRadioButton *parity_odd = new QRadioButton(QObject::tr("Odd"), group_parity);
+	QRadioButton *parity_even = new QRadioButton(QObject::tr("Even"), group_parity);
 
 	// Build Layout
-
 	lroot = new QVBoxLayout(root);
 	lroot->add(speedlabel);
 	lroot->add(speed_box);
-	lroot->add(flow);
-	QHBoxLayout *hbox = new QHBoxLayout(lroot, 2);
+        lroot->setStretchFactor(speedlabel, 1);
+        lroot->setStretchFactor(speed_box, 1);
+
+	QHBoxLayout *hbox = new QHBoxLayout(group_flow, 2);
 	hbox->add(flow_hw);
 	hbox->add(flow_sw);
-	lroot->add(parity);
-	QHBoxLayout *hbox2 = new QHBoxLayout(lroot, 2);
-	hbox2->add(parity_odd);
-	hbox2->add(parity_even);
+        lroot->add(group_flow);
+        lroot->setStretchFactor(group_flow, 2);
 
+        QHBoxLayout *hboxPar = new QHBoxLayout( group_parity, 2);
+	hboxPar->add(parity_odd);
+        hboxPar->add(parity_even);
+        lroot->add(group_parity);
+        lroot->setStretchFactor(group_parity, 2);
 	// Apply profile settings
 
 	int rad_flow = m_profile->readNumEntry("Flow");
@@ -110,56 +108,51 @@ QWidget *ProfileEditorPlugin::terminal_widget()
 
 	// Build GUI
 
+
+	QLabel *terminal = new QLabel(QObject::tr("Terminal type"), root);
+
 	QComboBox *terminal_box = new QComboBox(root);
 	terminal_box->insertItem("VT 100", id_term_vt100);
 	terminal_box->insertItem("VT 220", id_term_vt220);
 	terminal_box->insertItem("ANSI", id_term_ansi);
 
-	QLabel *terminal = new QLabel(QObject::tr("Terminal type"), root);
-	QLabel *colourlabel = new QLabel(QObject::tr("Colour scheme"), root);
-	QLabel *sizelabel = new QLabel(QObject::tr("Font size"), root);
-	QLabel *options = new QLabel(QObject::tr("Options"), root);
-	QLabel *conversions = new QLabel(QObject::tr("Line-break conversions"), root);
-
+        QLabel *colourlabel = new QLabel(QObject::tr("Colour scheme"), root);
 	QComboBox *colour_box = new QComboBox(root);
 	colour_box->insertItem(QObject::tr("black on white"), id_term_black);
 	colour_box->insertItem(QObject::tr("white on black"), id_term_white);
 
-	QButtonGroup *group_size = new QButtonGroup(root);
-	group_size->hide();
-	QRadioButton *size_small = new QRadioButton(QObject::tr("small"), root);
-	QRadioButton *size_medium = new QRadioButton(QObject::tr("medium"), root);
-	QRadioButton *size_large = new QRadioButton(QObject::tr("large"), root);
-	group_size->insert(size_small);
-	group_size->insert(size_medium);
-	group_size->insert(size_large);
+	QButtonGroup *group_size = new QButtonGroup( QObject::tr("Font size"), root );
+	QRadioButton *size_small = new QRadioButton(QObject::tr("small"), group_size );
+	QRadioButton *size_medium = new QRadioButton(QObject::tr("medium"), group_size );
+	QRadioButton *size_large = new QRadioButton(QObject::tr("large"), group_size );
 
-	QCheckBox *option_echo = new QCheckBox(QObject::tr("Local echo"), root);
-	QCheckBox *option_wrap = new QCheckBox(QObject::tr("Line wrap"), root);
+        QHGroupBox *group_conv = new QHGroupBox( QObject::tr("Line-break conversions"), root );
+	QCheckBox *conv_inbound = new QCheckBox(QObject::tr("Inbound"), group_conv);
+	QCheckBox *conv_outbound = new QCheckBox(QObject::tr("Outbound"), group_conv);
 
-	QCheckBox *conv_inbound = new QCheckBox(QObject::tr("Inbound"), root);
-	QCheckBox *conv_outbound = new QCheckBox(QObject::tr("Outbound"), root);
+        QHGroupBox *group_options = new QHGroupBox( QObject::tr("Options"), root );
+ 	QCheckBox *option_echo = new QCheckBox(QObject::tr("Local echo"), group_options);
+	QCheckBox *option_wrap = new QCheckBox(QObject::tr("Line wrap"), group_options);
 
 	// Build Layout
-
 	lroot = new QVBoxLayout(root, 2);
-	lroot->add(terminal);
-	lroot->add(terminal_box);
-	lroot->add(sizelabel);
-	QHBoxLayout *hbox = new QHBoxLayout(lroot, 2);
+
+        QVBoxLayout *typeBox = new QVBoxLayout( lroot );
+        typeBox->add(terminal);
+        typeBox->add(terminal_box);
+
+	QHBoxLayout *hbox = new QHBoxLayout( group_size, 2);
 	hbox->add(size_small);
 	hbox->add(size_medium);
 	hbox->add(size_large);
-	lroot->add(colourlabel);
-	lroot->add(colour_box);
-	lroot->add(conversions);
-	QHBoxLayout *hbox2 = new QHBoxLayout(lroot, 2);
-	hbox2->add(conv_inbound);
-	hbox2->add(conv_outbound);
-	lroot->add(options);
-	QHBoxLayout *hbox3 = new QHBoxLayout(lroot, 2);
-	hbox3->add(option_wrap);
-	hbox3->add(option_echo);
+        lroot->add( group_size );
+
+        QVBoxLayout *colourBox = new QVBoxLayout( lroot );
+        colourBox->add(colourlabel);
+        colourBox->add(colour_box);
+
+        lroot->add(group_conv);
+        lroot->add(group_options);
 
 	// Apply profile settings
 
@@ -318,7 +311,7 @@ void ProfileEditorPlugin::slotTermOutbound(bool on)
 class ProfileEditorPluginSerial : public ProfileEditorPlugin
 {
 	public:
-	
+
 	ProfileEditorPluginSerial(QWidget *parent, Profile *p)
 	: ProfileEditorPlugin(parent, p)
 	{
@@ -332,23 +325,22 @@ class ProfileEditorPluginSerial : public ProfileEditorPlugin
 	{
 		if(!m_widget)
 		{
-			QFrame *device_frame = new QFrame(m_parent);
-			device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
 
-			QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
+                    QWidget *device_frame = new QWidget( m_parent );
+                    QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
 
-			device_line = new QLineEdit("/dev/ttyS0", device_frame);
+                    device_line = new QLineEdit("/dev/ttyS0", device_frame);
 
-			QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
-			vbox_frame->add(frame_device);
-			vbox_frame->add(device_line);
+                    QVBoxLayout *vbox_frame = new QVBoxLayout(device_frame, 2);
+                    vbox_frame->add(frame_device);
+                    vbox_frame->add(device_line);
 
-			m_widget = device_frame;
+                    m_widget = device_frame;
 
-			// Load special settings
+                    // Load special settings
 
-			QString dev = m_profile->readEntry("Device");
-			if(!dev.isNull()) device_line->setText(dev);
+                    QString dev = m_profile->readEntry("Device");
+                    if(!dev.isNull()) device_line->setText(dev);
 		}
 
 		return m_widget;
@@ -381,8 +373,8 @@ class ProfileEditorPluginIrda : public ProfileEditorPlugin
 	{
 		if(!m_widget)
 		{
-			QFrame *device_frame = new QFrame(m_parent);
-			device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+			QWidget *device_frame = new QWidget(m_parent);
+
 
 			QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
 
@@ -429,8 +421,7 @@ class ProfileEditorPluginModem : public ProfileEditorPlugin
 	{
 		if(!m_widget)
 		{
-			QFrame *device_frame = new QFrame(m_parent);
-			device_frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
+			QWidget *device_frame = new QWidget(m_parent);
 
 			QLabel *frame_device = new QLabel(QObject::tr("Device"), device_frame);
 			QLabel *frame_number = new QLabel(QObject::tr("Phone number"), device_frame);

@@ -15,7 +15,7 @@ MainWindow::MainWindow() {
     m_factory = new MetaFactory();
     m_sessions.setAutoDelete( TRUE );
     m_curSession = 0;
-    m_manager = new ProfileManager(m_factory);
+    m_manager = new ProfileManager( m_factory );
     m_manager->load();
 
     initUI();
@@ -96,8 +96,8 @@ void MainWindow::initUI() {
     /*
      * connect to the menu activation
      */
-    connect( m_sessionsPop, SIGNAL(activated(int) ),
-             this, SLOT(slotProfile(int) ) );
+    connect( m_sessionsPop, SIGNAL(activated( int ) ),
+             this, SLOT(slotProfile( int ) ) );
 
     m_consoleWindow = new TabWidget( this, "blah");
     setCentralWidget( m_consoleWindow );
@@ -168,9 +168,9 @@ void MainWindow::slotConfigure() {
 }
 
 void MainWindow::slotClose() {
-
 }
 
-void MainWindow::slotProfile(int) {
+void MainWindow::slotProfile( int ) {
+
 
 }

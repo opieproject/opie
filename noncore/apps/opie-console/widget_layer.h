@@ -7,7 +7,7 @@
 // proposal of a widget Layer in opie-console
 //
 // fellow devels:
-//   just mail me (ibotty@web.de), what you additionally need from the main widget 
+//   just mail me (ibotty@web.de), what you additionally need from the main widget
 //   (or say in chat)
 
 #ifndef WIDGET_LAYER_H
@@ -54,7 +54,7 @@ public:
 	/**
 	 * sets the image
 	 */
-	virtual void setImage( QArray<Character> const newimg, int lines, int colums );
+	virtual void setImage( QArray<Character> const newimg, int lines, int colums ) = 0;
 
 	/**
 	 * annoy the user
@@ -65,7 +65,7 @@ public:
 	 * return the lines count
 	 */
 	int lines()	{ return m_lines; }
-	
+
 	/**
 	 * return the columns count
 	 */
@@ -120,7 +120,7 @@ signals:
 	 * selection should be cleared
 	 */
 	void selectionCleared();
-	
+
 	/**
 	 * selection begin
 	 */
@@ -142,7 +142,7 @@ signals:
 
 // protected methods
 protected:
-	
+
 	// image operations
 
 	/**
@@ -165,9 +165,9 @@ protected:
 	 * clears the image
 	 */
 	void clearImage();
-	
+
 protected slots:
-	
+
 	/**
 	 * clear selection
 	 */
@@ -176,7 +176,7 @@ protected slots:
 
 // protected vars
 protected:
-	
+
 	/**
 	 * current Session
 	 */
@@ -184,11 +184,11 @@ protected:
 
 	/**
 	 * current character image
-	 * 
+	 *
 	 * a Character at loc( column, line )
 	 * has the actual index:
 	 *  ix = line * m_columns + column;
-	 * 
+	 *
 	 * use loc( x, y ) macro to access.
 	 */
 	QArray<Character> m_image;
@@ -209,7 +209,7 @@ protected:
 	QClipboard* m_clipboard;
 
 	/**
-	 * whether widget is resizing 
+	 * whether widget is resizing
 	 */
 	bool m_resizing;
 };

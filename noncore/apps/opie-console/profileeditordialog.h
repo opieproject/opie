@@ -1,7 +1,7 @@
 #ifndef PROFILE_EDITOR_DIALOG
 #define PROFILE_EDITOR_DIALOG
 
-#include <qtabdialog.h>
+#include <qdialog.h>
 
 #include "profile.h"
 
@@ -14,7 +14,7 @@ class QComboBox;
 class QLabel;
 class ProfileEditorPlugin;
 
-class ProfileEditorDialog : public QTabDialog {
+class ProfileEditorDialog : public QDialog {
     Q_OBJECT
 public:
     ProfileEditorDialog(MetaFactory* fact,
@@ -23,15 +23,12 @@ public:
 	~ProfileEditorDialog();
     Profile profile()const;
 
-	QString prof_name();
-	QString prof_type();
+    QString prof_name();
+    QString prof_type();
 
 public slots:
-	void accept();
-	//void slotOk();
-	void slotCancel();
-
-	void slotDevice(int id);
+    void accept();
+    void slotDevice(int id);
 
 private:
     void initUI();
@@ -42,12 +39,12 @@ private:
     QHBoxLayout* m_lay;
     Profile m_prof;
 
-	QLineEdit *name_line;
-	QComboBox *device_box;
+    QLineEdit *name_line;
+    QComboBox *device_box;
 
-	QWidget *plugin_base;
-	ProfileEditorPlugin *plugin_plugin;
-	QHBoxLayout *plugin_layout;
+    QWidget *plugin_base;
+    ProfileEditorPlugin *plugin_plugin;
+    QHBoxLayout *plugin_layout;
 };
 
 #endif
