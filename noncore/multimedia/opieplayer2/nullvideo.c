@@ -24,7 +24,23 @@ struct opie_frame_s {
     int version;
     int m_width;
     int m_height;
+    int m_ratio_code;
+    int format;
+    int flags;
+    int user_ratio;
+
+    int ideal_width;
+    int ideal_height;
+    int output_width, output_height;
     uint8_t *chunk[3];
+    uint8_t *rgb_dst;
+    int yuv_stride;
+    int stripe_height, stripe_inc;
+  
+    int bytes_per_line;
+    uint8_t *data;
+
+
     null_driver_t *output;
 };
 
@@ -216,3 +232,9 @@ void null_set_scaling( vo_driver_t* self, int scale ){
     ((null_driver_t*)self)->m_is_scaling = scale;
 }
      
+void null_set_gui_width( vo_driver_t* self, int width ){
+
+}
+void null_set_gui_height( vo_driver_t* self, int height ){
+
+}

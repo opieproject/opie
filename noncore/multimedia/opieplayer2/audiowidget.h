@@ -13,7 +13,7 @@
 class QPixmap;
 
 enum AudioButtons {
-    AudioPlay,
+    AudioPlay=0,
     AudioStop,
     AudioPause,
     AudioNext,
