@@ -57,9 +57,10 @@ int ONLY_LATER;
 int AUTOSTART;
 int NEW_START=1;
 QString AUTOSTART_TIMER;
+int NEXTDAYS=1;
 
-/*
- *  Constructs a Example which is a child of 'parent', with the
+
+/*  Constructs a Example which is a child of 'parent', with the
  *  name 'name' and widget flags set to 'f'
  */
 Today::Today( QWidget* parent,  const char* name, WFlags fl )
@@ -422,11 +423,13 @@ void Today::getTodo() {
 
 
 /*
- * launch addressbook
+ * launch addressbook (personal card)
  */
 void Today::editCard() {
-  QCopEnvelope e("QPE/System", "execute(QString)");
-  e << QString("addressbook");
+    QCopEnvelope w("QPE/System", "execute(QString)");
+    w << QString("addressbook");
+
+    QCopEnvelope v("QPE/Addressbook", "editPersonalAndClose()");
 }
 
 /*
@@ -440,6 +443,7 @@ void Today::startDatebook() {
 /*
  * starts the edit dialog as known from datebook
  */
+
 
 extern QPEApplication *todayApp;
 
