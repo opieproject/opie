@@ -235,22 +235,54 @@ bool OEvent::match( const QRegExp& re )const {
     return false;
 }
 QString OEvent::toRichText()const {
-    QString text;
+    QString text, value;
+    
+    // description
+    text += "<b><h3><img src=\"datebook/DateBook\">";
     if ( !description().isEmpty() ) {
-        text += "<b>" + QObject::tr( "Description:") + "</b><br>";
-        text += Qtopia::escapeString(description() ).
-                replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+        text += Qtopia::escapeString(description() ).replace(QRegExp( "[\n]"),  "" );
     }
-    if ( startDateTime().isValid() ) {
-        text += "<b>" + QObject::tr( "Start:") + "</b> ";
-        text += Qtopia::escapeString(startDateTime().toString() ).
-                replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+    text += "</h3></b><br><hr><br>";
+    
+    // location
+    if ( !(value = location()).isEmpty() ) {
+        text += "<b>" + QObject::tr( "Location:" ) + "</b> ";
+        text += Qtopia::escapeString(value) + "<br>";
     }
-    if ( endDateTime().isValid() ) {
-        text += "<b>" + QObject::tr( "End:") + "</b> ";
-        text += Qtopia::escapeString(endDateTime().toString() ).
-                replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+
+    // all day event
+    if ( isAllDay() ) {
+        text += "<b><i>" + QObject::tr( "This is an all day event" ) + "</i></b><br>";
     }
+    // multiple day event
+    else if ( isMultipleDay () ) {
+        text += "<b><i>" + QObject::tr( "This is a multiple day event" ) + "</i></b><br>";
+    }
+    // start & end times
+    else {
+        // start time
+        if ( startDateTime().isValid() ) {
+            text += "<b>" + QObject::tr( "Start:") + "</b> ";
+            text += Qtopia::escapeString(startDateTime().toString() ).
+                    replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+        }
+
+        // end time
+        if ( endDateTime().isValid() ) {
+            text += "<b>" + QObject::tr( "End:") + "</b> ";
+            text += Qtopia::escapeString(endDateTime().toString() ).
+                    replace(QRegExp( "[\n]"),  "<br>" ) + "<br>";
+        }
+    }
+    
+    // categories
+    if ( categoryNames("Calendar").count() ){
+	    text += "<b>" + QObject::tr( "Category:") + "</b> ";
+	    text += categoryNames("Calendar").join(", ");
+	    text += "<br>";
+    }
+    
+    //notes
     if ( !note().isEmpty() ) {
         text += "<b>" + QObject::tr( "Note:") + "</b><br>";
         text += note();
