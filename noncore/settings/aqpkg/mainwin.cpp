@@ -19,9 +19,9 @@
 #include <unistd.h>
 
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/qpemenubar.h>
+#include <qmenubar.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/qpetoolbar.h>
+#include <qtoolbar.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
 
@@ -61,18 +61,18 @@ MainWindow :: MainWindow()
     // Create UI widgets
     initMainWidget();
     initProgressWidget();
-    
+
     // Build menu and tool bars
     setToolBarsMovable( FALSE );
 
-    QPEToolBar *bar = new QPEToolBar( this );
+    QToolBar *bar = new QToolBar( this );
     bar->setHorizontalStretchable( TRUE );
-    QPEMenuBar *mb = new QPEMenuBar( bar );
+    QMenuBar *mb = new QMenuBar( bar );
     mb->setMargin( 0 );
-    bar = new QPEToolBar( this );
+    bar = new QToolBar( this );
 
     // Find toolbar
-    findBar = new QPEToolBar( this );
+    findBar = new QToolBar( this );
     addToolBar( findBar, QMainWindow::Top, true );
     findBar->setHorizontalStretchable( true );
     findEdit = new QLineEdit( findBar );
@@ -81,12 +81,12 @@ MainWindow :: MainWindow()
     connect( findEdit, SIGNAL( textChanged( const QString & ) ), this, SLOT( findPackage( const QString & ) ) );
 
     // Quick jump toolbar
-    jumpBar = new QPEToolBar( this );
+    jumpBar = new QToolBar( this );
     addToolBar( jumpBar, QMainWindow::Top, true );
     jumpBar->setHorizontalStretchable( true );
     QWidget *w = new QWidget( jumpBar );
     jumpBar->setStretchableWidget( w );
-    
+
     QGridLayout *layout = new QGridLayout( w );
 
     char text[2];
@@ -98,16 +98,16 @@ MainWindow :: MainWindow()
         connect( b, SIGNAL( released( QString ) ), this, SLOT( letterPushed( QString ) ) );
         layout->addWidget( b, i / 13, i % 13);
     }
-    
+
     QAction *a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, w, 0 );
     a->setWhatsThis( tr( "Click here to hide the Quick Jump toolbar." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( hideJumpBar() ) );
     a->addTo( jumpBar );
     jumpBar->hide();
-        
+
     // Packages menu
     QPopupMenu *popup = new QPopupMenu( this );
-    
+
     a = new QAction( tr( "Update lists" ), Resource::loadPixmap( "aqpkg/update" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to update package lists from servers." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( updateServer() ) );
@@ -144,7 +144,7 @@ MainWindow :: MainWindow()
 
     // View menu
     popup = new QPopupMenu( this );
-    
+
     actionUninstalled = new QAction( tr( "Show packages not installed" ), QString::null, 0, this, 0 );
     actionUninstalled->setToggleAction( TRUE );
     actionUninstalled->setWhatsThis( tr( "Click here to show packages available which have not been installed." ) );
@@ -197,9 +197,9 @@ MainWindow :: MainWindow()
     a->setWhatsThis( tr( "Click here to display/hide keypad to allow quick movement through the package list." ) );
     connect( a, SIGNAL( activated() ), this, SLOT( displayJumpBar() ) );
     a->addTo( popup );
-    
+
     mb->insertItem( tr( "View" ), popup );
-    
+
     // Finish find toolbar creation
     a = new QAction( QString::null, Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
     a->setWhatsThis( tr( "Click here to hide the find toolbar." ) );
@@ -213,7 +213,7 @@ MainWindow :: MainWindow()
     stack->addWidget( networkPkgWindow, 1 );
     setCentralWidget( stack );
     stack->raiseWidget( progressWindow );
-    
+
     // Delayed call to finish initialization
     QTimer::singleShot( 100, this, SLOT( init() ) );
 }
@@ -226,16 +226,16 @@ MainWindow :: ~MainWindow()
 void MainWindow :: initMainWidget()
 {
     networkPkgWindow = new QWidget( this );
-    
+
     QLabel *l = new QLabel( tr( "Servers:" ), networkPkgWindow );
-    
+
     serversList = new QComboBox( networkPkgWindow );
     connect( serversList, SIGNAL( activated( int ) ), this, SLOT( serverSelected( int ) ) );
     QWhatsThis::add( serversList, tr( "Click here to select a package feed." ) );
-    
+
     installedIcon = Resource::loadPixmap( "installed" );
     updatedIcon = Resource::loadPixmap( "aqpkg/updated" );
-    
+
     packagesList = new QListView( networkPkgWindow );
     packagesList->addColumn( tr( "Packages" ), 225 );
     QWhatsThis::add( packagesList, tr( "This is a listing of all packages for the server feed selected above.\n\nA blue dot next to the package name indicates that the package is currently installed.\n\nA blue dot with a star indicates that a newer version of the package is available from the server feed.\n\nClick inside the box at the left to select a package." ) );
@@ -244,7 +244,7 @@ void MainWindow :: initMainWidget()
     QHBoxLayout *hbox1 = new QHBoxLayout( vbox, -1 );
     hbox1->addWidget( l );
     hbox1->addWidget( serversList );
-    
+
     vbox->addWidget( packagesList );
 
     downloadEnabled = TRUE;
@@ -253,7 +253,7 @@ void MainWindow :: initMainWidget()
 void MainWindow :: initProgressWidget()
 {
     progressWindow = new QWidget( this );
-    
+
     QVBoxLayout *layout = new QVBoxLayout( progressWindow, 4, 4 );
 
     m_status = new QLabel( progressWindow );
@@ -276,21 +276,21 @@ void MainWindow :: init()
 #endif
 
     stack->raiseWidget( progressWindow );
-    
+
     mgr = new DataManager();
     connect( mgr, SIGNAL( progressSetSteps( int ) ), this, SLOT( setProgressSteps( int ) ) );
     connect( mgr, SIGNAL( progressSetMessage( const QString & ) ),
              this, SLOT( setProgressMessage( const QString & ) ) );
     connect( mgr, SIGNAL( progressUpdate( int ) ), this, SLOT( updateProgress( int ) ) );
     mgr->loadServers();
-    
+
     showUninstalledPkgs = false;
     showInstalledPkgs = false;
     showUpgradedPkgs = false;
     categoryFilterEnabled = false;
 
     updateData();
-    
+
     stack->raiseWidget( networkPkgWindow );
 }
 /*
@@ -299,7 +299,7 @@ void MainWindow :: setDocument( const QString &doc )
     // Remove path from package
     QString package = Utils::getPackageNameFromIpkFilename( doc );
 //    std::cout << "Selecting package " << package << std::endl;
-    
+
     // First select local server
     for ( int i = 0 ; i < serversList->count() ; ++i )
     {
@@ -352,7 +352,7 @@ void MainWindow :: closeEvent( QCloseEvent *e )
         e->accept();
     }
 }
-    
+
 void MainWindow :: displayFindBar()
 {
     findBar->show();
@@ -394,7 +394,7 @@ void MainWindow :: filterUninstalledPackages()
         showUpgradedPkgs = FALSE;
     }
     serverSelected( -1 );
-    
+
     actionInstalled->setOn( FALSE );
     actionUpdated->setOn( FALSE );
 }
@@ -408,7 +408,7 @@ void MainWindow :: filterInstalledPackages()
         showUpgradedPkgs = FALSE;
     }
     serverSelected( -1 );
-    
+
     actionUninstalled->setOn( FALSE );
     actionUpdated->setOn( FALSE );
 }
@@ -422,7 +422,7 @@ void MainWindow :: filterUpgradedPackages()
         showInstalledPkgs = FALSE;
     }
     serverSelected( -1 );
-    
+
     actionUninstalled->setOn( FALSE );
     actionInstalled->setOn( FALSE );
 }
@@ -437,7 +437,7 @@ bool MainWindow :: setFilterCategory()
 
         if ( categoryFilter == "" )
             return false;
-            
+
         categoryFilterEnabled = true;
         serverSelected( -1 );
         actionFilter->setOn( TRUE );
@@ -468,7 +468,7 @@ bool MainWindow :: filterByCategory( bool val )
             if ( !setFilterCategory() )
                 return false;
         }
-            
+
         categoryFilterEnabled = true;
         serverSelected( -1 );
         return true;
@@ -531,17 +531,17 @@ void MainWindow :: updateProgress( int progress )
 void MainWindow :: updateData()
 {
     m_progress->setTotalSteps( mgr->getServerList().count() );
-    
+
     serversList->clear();
     packagesList->clear();
 
     int activeItem = -1;
     int i = 0;
     QString serverName;
-    
+
     QListIterator<Server> it( mgr->getServerList() );
     Server *server;
-    
+
     for ( ; it.current(); ++it, ++i )
     {
         server = it.current();
@@ -549,7 +549,7 @@ void MainWindow :: updateData()
         m_status->setText( tr( "Building server list:\n\t%1" ).arg( serverName ) );
         m_progress->setProgress( i );
         qApp->processEvents();
-        
+
 //        cout << "Adding " << it->getServerName() << " to combobox" << endl;
         if ( !server->isServerActive() )
         {
@@ -557,7 +557,7 @@ void MainWindow :: updateData()
             i--;
             continue;
         }
-        
+
         serversList->insertItem( serverName );
         if ( serverName == currentlySelectedServer )
         	activeItem = i;
@@ -578,7 +578,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
 {
     QPixmap nullIcon( installedIcon.size() );
     nullIcon.fill( colorGroup().base() );
-    
+
     // display packages
     QString serverName = serversList->currentText();
     currentlySelectedServer = serverName;
@@ -587,7 +587,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
 
     QList<Package> &list = s->getPackageList();
     QListIterator<Package> it( list );
-    
+
     // Display progress widget while loading list
     bool doProgress = ( list.count() > 200 );
     if ( doProgress )
@@ -623,9 +623,9 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
             }
             qApp->processEvents();
         }
-        
+
         QString text = "";
-        
+
         package = it.current();
 
         // Apply show only uninstalled packages filter
@@ -658,7 +658,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
 
         QCheckListItem *item = new QCheckListItem( packagesList, package->getPackageName(),
                                                    QCheckListItem::CheckBox );
-        
+
         if ( package->isInstalled() )
         {
             // If a different version of package is available, show update available icon
@@ -673,7 +673,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
             {
                 item->setPixmap( 0, installedIcon );
             }
-            
+
             QString destName = "";
             if ( package->getLocalPackage() )
             {
@@ -692,7 +692,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
         {
             item->setPixmap( 0, nullIcon );
         }
-        
+
         if ( !package->isPackageStoredLocally() )
         {
             new QCheckListItem( item, QString( tr( "Description - %1" ).arg( package->getDescription() ) ) );
@@ -701,7 +701,7 @@ void MainWindow :: serverSelected( int, bool raiseProgress )
                     }
         else
             new QCheckListItem( item, QString( tr( "Filename - %1" ).arg( package->getFilename() ) ) );
-        
+
 		if ( serverName == LOCAL_SERVER )
 		{
         	new QCheckListItem( item, QString( tr( "V. Installed - %1" ).arg( package->getVersion() ) ) );
@@ -754,10 +754,10 @@ void MainWindow :: searchForPackage( const QString &text )
         QCheckListItem *start = (QCheckListItem *)packagesList->currentItem();
 //        if ( start != 0 )
 //            start = (QCheckListItem *)start->nextSibling();
-        
+
         if ( start == 0 )
             start = (QCheckListItem *)packagesList->firstChild();
-        
+
         for ( QCheckListItem *item = start; item != 0 ;
               item = (QCheckListItem *)item->nextSibling() )
         {
@@ -769,7 +769,7 @@ void MainWindow :: searchForPackage( const QString &text )
                 packagesList->setCurrentItem( item );
                 break;
             }
-        }   
+        }
     }
 }
 
@@ -793,7 +793,7 @@ void MainWindow :: updateServer()
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
     stack->addWidget( dlg, 3 );
     stack->raiseWidget( dlg );
-    
+
 //  delete progDlg;
 }
 
@@ -808,7 +808,7 @@ void MainWindow :: upgradePackages()
                         QMessageBox::No | QMessageBox::Escape | QMessageBox::Default ,
                         0, this );
     warn.adjustSize();
-                        
+
     if ( warn.exec() == QMessageBox::Yes )
     {
         // First, write out ipkg_conf file so that ipkg can use it
@@ -843,7 +843,7 @@ void MainWindow :: downloadPackage()
                     found = true;
             }
         }
-        
+
         // If user selected some packages then download the and store the locally
         // otherwise, display dialog asking user what package to download from an http server
         // and whether to install it
@@ -851,7 +851,7 @@ void MainWindow :: downloadPackage()
             downloadSelectedPackages();
         else
             downloadRemotePackage();
-        
+
     }
     else
     {
@@ -870,7 +870,7 @@ void MainWindow :: downloadPackage()
                 pos = name.find( "(installed)" );
                 if ( pos > 0 )
                     name.truncate( pos - 1 );
-               
+
                 Package *p = mgr->getServer( serversList->currentText() )->getPackage( name );
 
                 QString msgtext;
@@ -971,7 +971,7 @@ void MainWindow :: downloadRemotePackage()
 void MainWindow :: applyChanges()
 {
     stickyOption = "";
-    
+
     // First, write out ipkg_conf file so that ipkg can use it
     mgr->writeOutIpkgConf();
 
@@ -995,10 +995,10 @@ void MainWindow :: applyChanges()
         // Nothing to do
         QMessageBox::information( this, tr( "Nothing to do" ),
                              tr( "No packages selected" ), tr( "OK" ) );
-        
+
         return;
     }
-    
+
     // do the stuff
     InstallDlgImpl *dlg = new InstallDlgImpl( workingPackages, mgr, tr( "Apply changes" ) );
     connect( dlg, SIGNAL( reloadData( InstallDlgImpl * ) ), this, SLOT( reloadData( InstallDlgImpl * ) ) );
@@ -1040,7 +1040,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
             newitem->packageName = p->getInstalledPackageName();
         else
             newitem->packageName = name;
-        
+
         if ( p->getInstalledTo() )
         {
             newitem->destination = p->getInstalledTo();
@@ -1058,7 +1058,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
         // If the version requested is older and user selected a local ipk file, then reinstall the file
         if ( p->isPackageStoredLocally() && val == -1 )
             val = 0;
-            
+
         if ( val == -2 )
         {
             // Error - should handle
@@ -1115,7 +1115,7 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
             }
         }
 
-        
+
         // Check if we are reinstalling the same version
         if ( newitem->option != "R" )
            newitem->recreateLinks = true;
@@ -1130,25 +1130,25 @@ InstallData *MainWindow :: dealWithItem( QCheckListItem *item )
 void MainWindow :: reloadData( InstallDlgImpl *dlg )
 {
     stack->raiseWidget( progressWindow );
-    
+
     if ( dlg )
     {
         dlg->close();
         delete dlg;
     }
-    
+
     mgr->reloadServerData();
     serverSelected( -1, FALSE );
-    
+
 #ifdef QWS
     m_status->setText( tr( "Updating Launcher..." ) );
-    
+
     // Finally let the main system update itself
     QCopEnvelope e("QPE/System", "linkChanged(QString)");
     QString lf = QString::null;
     e << lf;
 #endif
-    
+
     stack->raiseWidget( networkPkgWindow );
 }
 
@@ -1181,6 +1181,6 @@ void MainWindow :: letterPushed( QString t )
 
         item = (QCheckListItem *)item->nextSibling();
         if ( !item )
-            item = (QCheckListItem *)packagesList->firstChild();        
+            item = (QCheckListItem *)packagesList->firstChild();
     } while ( item != start);
 }

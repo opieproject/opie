@@ -31,7 +31,7 @@ class QComboBox;
 class QLabel;
 class QLineEdit;
 class QListView;
-class QPEToolBar;
+class QToolBar;
 class QProgressBar;
 class QWidgetStack;
 
@@ -51,8 +51,8 @@ private:
 
     QWidgetStack *stack;
     
-    QPEToolBar *findBar;
-    QPEToolBar *jumpBar;
+    QToolBar *findBar;
+    QToolBar *jumpBar;
     QLineEdit  *findEdit;
     QAction    *actionFindNext;
     QAction    *actionFilter;
