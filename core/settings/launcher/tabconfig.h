@@ -58,6 +58,7 @@ struct TabConfig {
 		       ( m_bg_type == tc. m_bg_type ) &&
 		       ( m_bg_image == tc. m_bg_image ) &&
 		       ( m_bg_color == tc. m_bg_color ) &&
+		       ( m_iconcolumns == tc. m_iconcolumns ) &&
 		       ( m_text_color == tc. m_text_color ) &&
 		       ( m_font_use == tc. m_font_use ) &&
 		       ( m_font_use ? (

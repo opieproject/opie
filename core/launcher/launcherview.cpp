@@ -639,7 +639,7 @@ void LauncherIconView::calculateGrid( ItemTextPos pos )
                 if ( viewerWidth < 150 ) numColumns = 1;
                 else if ( viewerWidth >= 400 ) numColumns = viewerWidth/150;
                 else numColumns = 2;
-            }          
+            }
             setSpacing( 2 );
             setGridX( (viewerWidth-(numColumns+1)*spacing())/numColumns );
             setGridY( fontMetrics().height()+2 );

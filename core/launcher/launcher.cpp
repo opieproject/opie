@@ -415,6 +415,13 @@ void LauncherTabWidget::launcherMessage( const QCString &msg, const QByteArray &
             view(id)->setTextColor( QColor(color) );
         if ( id == "Documents" )
             docLoadingWidget->setTextColor( QColor(color) );
+    } else if ( msg == "setIconColumns(QString,int)" ) {
+        QString id;
+        stream >> id;
+        int number;
+        stream >> number;
+        if ( view(id ) )
+            view(id)->setColNumber( number );
     } else if ( msg == "setFont(QString,QString,int,int,int)" ) {
         QString id;
         stream >> id;

@@ -170,6 +170,7 @@ void TabsSettings::readTabSettings ( Config &cfg )
 		tc. m_last_directory = cfg2.readEntry( "DefaultDir", "" );
 		tc. m_bg_color = cfg. readEntry ( "BackgroundColor", tc. m_bg_color );
 		tc. m_iconcolumns = cfg. readNumEntry ( "Columns", tc. m_iconcolumns );
+        qDebug( "m_iconcolumns for %s = %d", (const char*) *it, tc.m_iconcolumns );
 		tc. m_text_color = cfg. readEntry ( "TextColor", tc. m_text_color );
 		QStringList f = cfg. readListEntry ( "Font", ',' );
 		if ( f. count ( ) == 4 ) {
@@ -263,7 +264,10 @@ void TabsSettings::accept ( )
 		QCopEnvelope te( "QPE/Launcher", "setTextColor(QString,QString)" );
 		te << *it << tc. m_text_color;
 
-		QCopEnvelope fe ( "QPE/Launcher", "setFont(QString,QString,int,int,int)" );
+		QCopEnvelope ic( "QPE/Launcher", "setIconColumns(QString,int)" );
+		ic << *it << tc. m_iconcolumns;
+
+        QCopEnvelope fe ( "QPE/Launcher", "setFont(QString,QString,int,int,int)" );
 		fe << *it;
 		fe << ( tc. m_font_use ? tc. m_font_family : QString::null );
 		fe << tc. m_font_size;

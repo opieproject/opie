@@ -305,6 +305,7 @@ TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig
     iconColorClicked ( m_iconcolor-> color ( ));
     m_bgtype-> setButton ( tc. m_bg_type );
     //m_solidcolor-> setColor ( QColor ( tc. m_bg_color ));
+    m_iconcolumns->setValue( tc. m_iconcolumns );
     m_bgimage = tc. m_bg_image;
     bgTypeClicked ( tc. m_bg_type );
     m_fontuse-> setChecked ( tc. m_font_use );
