@@ -42,6 +42,7 @@
 #include <qcursor.h>
 #include <qmultilineedit.h>
 #include <qfont.h>
+#include <qpainter.h>
 
 #include <unistd.h>
 #include <stdlib.h>
