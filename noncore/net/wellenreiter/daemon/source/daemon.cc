@@ -1,7 +1,7 @@
 /*
  * Startup functions of wellenreiter
  *
- * $Id: daemon.cc,v 1.23 2003-02-12 01:05:29 max Exp $
+ * $Id: daemon.cc,v 1.24 2003-02-26 22:17:26 mjm Exp $
  */
 
 #include "config.hh"
@@ -120,13 +120,17 @@ int main(int argc, char **argv)
 	/* check type of packet and start function according to it */
 	switch(retval)
 	{
-	  case 98:
-	   wl_loginfo("Received STARTSNIFF command");
-	   break;
-	  case 99:
-	    wl_loginfo("Received STOPSNIFF command");
-	    break;
-	  default:
+	case STARTSNIFF:
+	  wl_loginfo("Received STARTSNIFF command");
+	  if(!send_ok(GUIADDR, GUIPORT, STARTSNIFF))
+	    wl_logerr("Cannot set OK_CMD to GUI");
+	  break;
+	case STOPSNIFF:
+	  wl_loginfo("Received STOPSNIFF command");
+	  if(!send_ok(GUIADDR, GUIPORT, STOPSNIFF))
+	    wl_logerr("Cannot set FAIL_CMD to GUI");
+	  break;
+	default:
 	    wl_logerr("Received unknown command: %d", retval);
 	    break;
 	}
