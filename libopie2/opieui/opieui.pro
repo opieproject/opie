@@ -15,6 +15,7 @@ HEADERS     = oclickablelabel.h      \
               otabinfo.h             \
               otabbar.h              \
               otabwidget.h           \
+              oledbox.h              \
               otaskbarapplet.h       \
               otimepicker.h          \
               oversatileview.h       \
@@ -34,6 +35,7 @@ SOURCES     = oclickablelabel.cpp    \
               oseparator.cpp         \
               otabbar.cpp            \
               otabwidget.cpp         \
+              oledbox.cpp            \
               otaskbarapplet.cpp     \
               otimepicker.cpp        \
               oversatileview.cpp     \
