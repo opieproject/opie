@@ -91,7 +91,7 @@ void FixIt::fixIt() {
 
 
 int main(int argc, char **argv) {
-    argv[0]="embeddedkonsole";
+// too bad this gives us trouble the taskbar...    argv[0]="embeddedkonsole";
     QPEApplication app( argc, argv );
 
 #ifdef   FSCKED_DISTRIBUTION
