@@ -28,6 +28,7 @@
 
 #include "otabwidget.h"
 
+#include <qpe/config.h>
 #include <qpe/resource.h>
 
 #include <qlayout.h>
@@ -37,19 +38,28 @@ SystemInfo::SystemInfo( QWidget *parent, const char *name, WFlags f )
 {
     setIcon( Resource::loadPixmap( "system_icon" ) );
     setCaption( tr("System Info") );
+
+    resize( 220, 180 );
+
+    Config config( "qpe" );
+    config.setGroup( "Appearance" );
+    bool advanced = config.readBoolEntry( "Advanced", TRUE );
+
     QVBoxLayout *lay = new QVBoxLayout( this );
-    OTabWidget *tab = new OTabWidget( this, "tabwidget" );
+    OTabWidget *tab = new OTabWidget( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
     lay->addWidget( tab );
     tab->addTab( new MemoryInfo( tab ), "sysinfo/memorytabicon.png", tr("Memory") );
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
     tab->addTab( new StorageInfo( tab ), "sysinfo/storagetabicon.png", tr("Storage") );
 #endif
     tab->addTab( new LoadInfo( tab ), "sysinfo/cputabicon.png", tr("CPU") );
-    tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon.png", tr("Process") );
-    tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon.png", tr("Modules") );
+    if ( advanced )
+    {
+        tab->addTab( new ProcessInfo( tab ), "sysinfo/processtabicon.png", tr("Process") );
+        tab->addTab( new ModulesInfo( tab ), "sysinfo/moduletabicon.png", tr("Modules") );
+    }
     tab->addTab( new VersionInfo( tab ), "sysinfo/versiontabicon.png", tr("Version") );
 
-    resize( 220, 180 );
 }
 
 

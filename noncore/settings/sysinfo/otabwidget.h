@@ -20,43 +20,75 @@
 #ifndef OTABWIDGET_H
 #define OTABWIDGET_H
 
-#include <qtabwidget.h>
+#include <qwidget.h>
+
+class QComboBox;
+class QPixmap;
+class QTabBar;
+class QWidgetStack;
 
 class TabInfo
 {
 public:
-    TabInfo() : c( 0 ), i( 0 ), l( QString::null ) {}
-    TabInfo( QWidget *control, const QString &icon, const QString &label )
-        : c( control ), i( icon ), l( label ) {}
+    TabInfo() : i( -1 ), c( 0 ), p( 0 ), l( QString::null ) {}
+    TabInfo( int id, QWidget *control, const QString &icon, const QString &label )
+        : i( id ), c( control ), p( icon ), l( label ) {}
+    int      id()      const { return i; }
     QString  label()   const { return l; }
     QWidget *control() const { return c; }
-    QString  icon()    const { return i; }
+    QString  icon()    const { return p; }
 
 private:
+    int      i;
     QWidget *c;
-    QString  i;
+    QString  p;
     QString  l;
 };
 
 typedef QValueList<TabInfo> TabInfoList;
 
-class OTabWidget : public QTabWidget
+class OTabWidget : public QWidget
 {
     Q_OBJECT
 public:
-    OTabWidget( QWidget *, const char * );
+    enum TabStyle { Global, TextTab, IconTab, TextList, IconList };
+    TabStyle tabStyle() const;
+    void setTabStyle( TabStyle );
+
+    enum TabPosition { Top, Bottom };
+    TabPosition tabPosition() const;
+    void setTabPosition( TabPosition );
+
+    OTabWidget( QWidget *, const char *, TabStyle, TabPosition );
     ~OTabWidget();
 
     void addTab( QWidget *, const QString &, const QString & );
+    QSize sizeHint() const;
+
+
+protected:
+    void resizeEvent( QResizeEvent * );
 
 private:
-    TabInfoList Tabs;
-    TabInfoList::Iterator CurrentTab;
+    TabInfoList tabs;
+    TabInfoList::Iterator currentTab;
+
+    TabStyle    tabBarStyle;
+    TabPosition tabBarPosition;
+
+    QWidgetStack *tabBarStack;
+    QTabBar      *tabBar;
+    QComboBox    *tabList;
+
+    QWidgetStack *widgetStack;
 
     QPixmap loadSmooth( const QString & );
+    void    selectTab( TabInfoList::Iterator );
+    void    setUpLayout( bool );
 
 private slots:
-    void tabChangedSlot( QWidget * );
+    void slotTabBarSelected( int );
+    void slotTabListSelected( int );
 };
 
 #endif
