@@ -12,11 +12,15 @@
  *
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.h,v 1.1 2003-09-22 14:31:16 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.h,v 1.1.2.1 2003-10-20 15:52:23 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.h,v $
- * Revision 1.1  2003-09-22 14:31:16  eilers
+ * Revision 1.1.2.1  2003-10-20 15:52:23  eilers
+ * This sqlite-stuff drives me crazy !! This is a much better database
+ * structure, but much too slow.. I think I use the stupid, but fast structure..
+ *
+ * Revision 1.1  2003/09/22 14:31:16  eilers
  * Added first experimental incarnation of sql-backend for addressbook.
  * Some modifications to be able to compile the todo sql-backend.
  * A lot of changes fill follow...
@@ -45,6 +49,11 @@ class OSQLResultItem;
  */
 class OContactAccessBackend_SQL : public OContactAccessBackend {
  public:
+	enum contactTypes{
+		Home = 0,
+		Business
+	};
+
 	OContactAccessBackend_SQL ( const QString& appname, const QString& filename = QString::null );
 
 	bool save();
@@ -80,10 +89,34 @@ class OContactAccessBackend_SQL : public OContactAccessBackend {
 	bool reload();
 
  private:
+	QMap<int, QString> idToContactFieldName;
+	QMap<QString,int> contactFieldNameToId;
+
+	bool createTable();
+
+	// Helper functions for creating SQL strings for inserting data into table
+	QString createPersonalString( const OContact& contact );
+	QString createCustomString( const OContact& contact );
+	QString createContactString( int id, int type, const OContact& contact );
+	QString createHasContactString( int uid, int id, contactTypes type );
+
+	// Creates string to create Table schema
+	QString createCreateTableString( const QMap<int, QString>& idToContactFieldName );
+
+	// Reads the query and extracts all uid's (used by update())
 	QArray<int> extractUids( OSQLResult& res ) const;
-	QMap<int, QString>  requestNonCustom( int uid ) const;
+
+	// Request personal information from table and return as map
+	QMap<int, QString> requestPersonal( int uid ) const;
+
+	// Request contact information from table for given type and uid
+	// and add it to the given map
+	void requestContact( contactTypes type, int uid, QMap<int,QString>* map ) const; 
+
+	// Request custom information from table and return as map
 	QMap<QString, QString>  requestCustom( int uid ) const;
 	void update();
+	void initFields();
 
  protected:
 	bool m_changed;

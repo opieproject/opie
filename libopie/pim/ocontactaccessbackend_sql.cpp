@@ -10,11 +10,15 @@
  *      version 2 of the License, or (at your option) any later version.
  * =====================================================================
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.2 2003-09-29 07:44:26 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_sql.cpp,v 1.2.2.1 2003-10-20 15:52:23 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_sql.cpp,v $
- * Revision 1.2  2003-09-29 07:44:26  eilers
+ * Revision 1.2.2.1  2003-10-20 15:52:23  eilers
+ * This sqlite-stuff drives me crazy !! This is a much better database
+ * structure, but much too slow.. I think I use the stupid, but fast structure..
+ *
+ * Revision 1.2  2003/09/29 07:44:26  eilers
  * Improvement of PIM-SQL Databases, but search queries are still limited.
  * Addressbook: Changed table layout. Now, we just need 1/3 of disk-space.
  * Todo: Started to add new attributes. Some type conversions missing.
@@ -43,21 +47,6 @@
 #include <opie2/osqlquery.h>
 
 
-
-
-// If defined, we use a horizontal table ( uid, attr1, attr2, attr3, ..., attrn ) instead
-// vertical like "uid, type, value".
-// DON'T DEACTIVATE THIS DEFINE IN PRODUCTIVE ENVIRONMENTS !!
-#define __STORE_HORIZONTAL_
-
-// Distinct loading is not very fast. If I expect that every person has just
-// one (and always one) 'Last Name', I can request all uid's for existing lastnames, 
-// which is faster..
-// But this may not be true for all entries, like company contacts..
-// The current AddressBook application handles this problem, but other may not.. (eilers)
-#define __USE_SUPERFAST_LOADQUERY
-
-
 /*
  * Implementation of used query types
  * CREATE query
@@ -67,16 +56,28 @@
  * CLEAR
  */
 namespace {
-	/**
-	 * CreateQuery for the Todolist Table
-	 */
-	class CreateQuery : public OSQLQuery {
-	public:
-		CreateQuery();
-		~CreateQuery();
-		QString query()const;
+	// Maybe this should be added to OContactFields ?
+	// These are the fields containing the information, how
+	// to contact a person
+	enum contactFields{
+		DefaultEmail = 0,
+		Emails,
+		WebPage,
+
+		Phone,
+		Fax,
+		Mobile,
+		Pager,
+		
+		Street,
+		City,
+		State,
+		Zip,
+		Country,
+
+		lastContactField
 	};
-	
+
 	/**
 	 * Clears (delete) a Table
 	 */
@@ -98,18 +99,6 @@ namespace {
 		LoadQuery();
 		~LoadQuery();
 		QString query()const;
-	};
-	
-	/**
-	 * inserts/adds a OContact to the table
-	 */
-	class InsertQuery : public OSQLQuery {
-	public:
-		InsertQuery(const OContact& );
-		~InsertQuery();
-		QString query()const;
-	private:
-		OContact m_contact;
 	};
 	
 
@@ -158,45 +147,15 @@ namespace {
 	};
 	
 
-
-	// We using three tables to store the information:
-	// 1. addressbook  : It contains General information about the contact (non custom)
-	// 2. custom_data  : Not official supported entries
-	// All tables are connected by the uid of the contact.
-	// Maybe I should add a table for meta-information ? 
-	CreateQuery::CreateQuery() : OSQLQuery() {}
-	CreateQuery::~CreateQuery() {}
-	QString CreateQuery::query()const {
-		QString qu;
-#ifdef __STORE_HORIZONTAL_
-
-		qu += "create table addressbook( uid PRIMARY KEY ";
-
-		QStringList fieldList = OContactFields::untrfields( false );
-		for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
-			qu += QString( ",\"%1\" VARCHAR(10)" ).arg( *it );
-		}
-		qu += " );";
-		
-		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
-
-#else
-
-		qu += "create table addressbook( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id));";
-		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR, priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
-// 		qu += "create table dates( uid PRIMARY KEY, type, day, month, year, hour, minute, second );";
-
-#endif // __STORE_HORIZONTAL_
-		return qu;
-	}
 	
 	ClearQuery::ClearQuery()
 		: OSQLQuery() {}
 	ClearQuery::~ClearQuery() {}
 	QString ClearQuery::query()const {
-		QString qu = "drop table addressbook;";
+		QString qu = "drop table personal;";
 		qu += "drop table custom_data;";
-// 		qu += "drop table dates;";
+		qu += "drop table contact;";
+		qu += "drop table hasContact;";
 		return qu;
 	}
 
@@ -205,183 +164,26 @@ namespace {
 	LoadQuery::~LoadQuery() {}
 	QString LoadQuery::query()const {
 		QString qu;
-#ifdef __STORE_HORIZONTAL_
-		qu += "select uid from addressbook";
-#else
-#  ifndef __USE_SUPERFAST_LOADQUERY 
-		qu += "select distinct uid from addressbook";
-#  else
-		qu += "select uid from addressbook where type = 'Last Name'";
-#  endif // __USE_SUPERFAST_LOADQUERY 
-#endif // __STORE_HORIZONTAL_
+		qu += "select personal.uid from personal";
 		
 		return qu;
 	}
-	
-
-	InsertQuery::InsertQuery( const OContact& contact )
-		: OSQLQuery(), m_contact( contact ) {
-	}
-
-	InsertQuery::~InsertQuery() {
-	}
-
-	/*
-	 * converts from a OContact to a query
-	 */
-	QString InsertQuery::query()const{
-
-#ifdef __STORE_HORIZONTAL_
-		QString qu;
-		qu  += "insert into addressbook VALUES( " + 
-			QString::number( m_contact.uid() );
-
-		// Get all information out of the contact-class
-		// Remember: The category is stored in contactMap, too ! 
-		QMap<int, QString> contactMap = m_contact.toMap();
 		
-		QStringList fieldList = OContactFields::untrfields( false );
-		QMap<QString, int> translate = OContactFields::untrFieldsToId();
-		for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
-			// Convert Column-String to Id and get value for this id..
-			// Hmmm.. Maybe not very cute solution..
-			int id = translate[*it];
-			switch ( id ){
-			case Qtopia::Birthday:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.birthday();
-				if ( day.isValid() ){
-					qu += QString(",\"%1-%2-%3\"")
-						.arg( day.year() )
-						.arg( day.month() )
-						.arg( day.day() );
-				} else {
-					qu += ",\"\"";
-				}
-			}
-				break;
-			case Qtopia::Anniversary:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.anniversary();
-				if ( day.isValid() ){
-					qu += QString(",\"%1-%2-%3\"")
-						.arg( day.year() )
-						.arg( day.month() )
-						.arg( day.day() );
-				} else {
-					qu += ",\"\"";
-				}
-			}
-				break;
-
-			default:
-				qu += QString( ",\"%1\"" ).arg( contactMap[id] );
-			}
-		}
-		qu += " );";
-
-			
-#else
-		// Get all information out of the contact-class
-		// Remember: The category is stored in contactMap, too ! 
-		QMap<int, QString> contactMap = m_contact.toMap();
-		
-		QMap<QString, QString> addressbook_db;
-		
-		// Get the translation from the ID to the String
-		QMap<int, QString> transMap = OContactFields::idToUntrFields();
-		
-		for( QMap<int, QString>::Iterator it = contactMap.begin(); 
-		     it != contactMap.end(); ++it ){
-			switch ( it.key() ){
-			case Qtopia::Birthday:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.birthday();
-				addressbook_db.insert( transMap[it.key()], 
-						       QString("%1-%2-%3")
-						       .arg( day.year() )
-						       .arg( day.month() )
-						       .arg( day.day() ) );
-			}
-				break;
-			case Qtopia::Anniversary:{
-				// These entries should stored in a special format
-				// year-month-day
-				QDate day = m_contact.anniversary();
-				addressbook_db.insert( transMap[it.key()], 
-						       QString("%1-%2-%3")
-						       .arg( day.year() )
-						       .arg( day.month() )
-						       .arg( day.day() ) );
-			}
-				break;
-			case Qtopia::AddressUid: // Ignore UID
-				break;
-			default: // Translate id to String
-				addressbook_db.insert( transMap[it.key()], it.data() );
-				break;
-			}
-		
-		}
-		
-		// Now convert this whole stuff into a SQL String, beginning with
-		// the addressbook table..
-		QString qu;
-		// qu  += "begin transaction;";
-		int id = 0;
-		for( QMap<QString, QString>::Iterator it = addressbook_db.begin(); 
-		     it != addressbook_db.end(); ++it ){
-			qu  += "insert into addressbook VALUES(" 
-				+  QString::number( m_contact.uid() )
-				+ ","
-				+  QString::number( id++ ) 
-				+ ",'" 
-				+ it.key() //.latin1()
-				+ "',"
-				+ "0"  // Priority for future enhancements
-				+ ",'" 
-				+ it.data()  //.latin1()
-				+ "');";
-		}
-
-#endif 	//__STORE_HORIZONTAL_	
-		// Now add custom data..
-#ifdef __STORE_HORIZONTAL_
-		int id = 0;
-#endif
-		id = 0;
-		QMap<QString, QString> customMap = m_contact.toExtraMap();
-		for( QMap<QString, QString>::Iterator it = customMap.begin(); 
-		     it != customMap.end(); ++it ){
-			qu  += "insert into custom_data VALUES(" 
-				+  QString::number( m_contact.uid() )
-				+ ","
-				+  QString::number( id++ ) 
-				+ ",'" 
-				+ it.key() //.latin1()
-				+ "',"
-				+ "0" // Priority for future enhancements
-				+ ",'" 
-				+ it.data() //.latin1()
-				+ "');";
-		}		
-		// qu  += "commit;";
-		qWarning("add %s", qu.latin1() );
-		return qu;
-	}
-	
 
 	RemoveQuery::RemoveQuery(int uid )
 		: OSQLQuery(), m_uid( uid ) {}
 	RemoveQuery::~RemoveQuery() {}
 	QString RemoveQuery::query()const {
-		QString qu = "DELETE from addressbook where uid = " 
+		QString qu = "DELETE from personal where uid = " 
 			+ QString::number(m_uid) + ";";
-		qu += "DELETE from custom_data where uid = " 
+		qu += "DELETE from hasContact where uid = "
 			+ QString::number(m_uid) + ";";
+
+		// Removes all entries from the contact table, which are not referenced
+		// by the hasContact-table. 
+		// This isn't the fastest solution, but protects us against lost
+		// entries which just consumes memory..
+		qu += "delete from contact where contact.id not in (select id from hasContact);";
 		return qu;
 	}
 	
@@ -413,21 +215,13 @@ namespace {
 		return qu;
 	}
 	*/
-#ifdef __STORE_HORIZONTAL_
 	QString FindQuery::single()const{
 		QString qu = "select *";
-		qu += " from addressbook where uid = " + QString::number(m_uid);
+		qu += " from personal where uid = " + QString::number(m_uid);
 
 		// qWarning("find query: %s", qu.latin1() );
 		return qu;
 	}
-#else
-	QString FindQuery::single()const{
-		QString qu = "select uid, type, value from addressbook where uid = ";
-		qu += QString::number(m_uid);
-		return qu;
-	}
-#endif
 
 
 	FindCustomQuery::FindCustomQuery(int uid)
@@ -447,6 +241,8 @@ namespace {
 		qu += QString::number(m_uid);
 		return qu;
 	}
+
+
 
 };
 
@@ -471,11 +267,42 @@ OContactAccessBackend_SQL::OContactAccessBackend_SQL ( const QString& /* appname
 	m_driver = man.standard();
 	m_driver->setUrl( m_fileName );	
 
+	initFields();
+
 	load();
 
 	qWarning("C'tor OContactAccessBackend_SQL ends: %d ms", t.elapsed() );
 }
 
+void OContactAccessBackend_SQL::initFields()
+{
+	idToContactFieldName.insert( DefaultEmail, QString("DefaultEmail") );
+	idToContactFieldName.insert( Emails, QString("Emails") );
+	idToContactFieldName.insert( WebPage, QString("BusinessWebPage") );
+	idToContactFieldName.insert( Phone, QString("Phone") );
+	idToContactFieldName.insert( Fax, QString("Fax") );
+	idToContactFieldName.insert( Mobile, QString("Mobile") );
+	idToContactFieldName.insert( Pager, QString("Pager") );
+	idToContactFieldName.insert( Street, QString("Street") );
+	idToContactFieldName.insert( City, QString("City") );
+	idToContactFieldName.insert( State, QString("State") );
+	idToContactFieldName.insert( Zip, QString("Zip") );
+	idToContactFieldName.insert( Country, QString("Country") );
+
+	contactFieldNameToId.insert( QString("DefaultEmail"), DefaultEmail );
+	contactFieldNameToId.insert( QString("Emails"), Emails);
+	contactFieldNameToId.insert( QString("BusinessWebPage"), WebPage);
+	contactFieldNameToId.insert( QString("Phone"), Phone);
+	contactFieldNameToId.insert( QString("Fax"), Fax);
+	contactFieldNameToId.insert( QString("Mobile"), Mobile);
+	contactFieldNameToId.insert( QString("Pager"), Pager);
+	contactFieldNameToId.insert( QString("Street"), Street);
+	contactFieldNameToId.insert( QString("City"), City);
+	contactFieldNameToId.insert( QString("State"), State);
+	contactFieldNameToId.insert( QString("Zip"), Zip);
+	contactFieldNameToId.insert( QString("Country"), Country);
+
+}
 
 bool OContactAccessBackend_SQL::load ()
 {
@@ -485,8 +312,8 @@ bool OContactAccessBackend_SQL::load ()
 	// Don't expect that the database exists.
 	// It is save here to create the table, even if it
 	// do exist. ( Is that correct for all databases ?? )
-	CreateQuery creat;
-	OSQLResult res = m_driver->query( &creat );
+	if ( !createTable() )
+		return false;
 
 	update();
 
@@ -509,8 +336,8 @@ void OContactAccessBackend_SQL::clear ()
 {
 	ClearQuery cle;
 	OSQLResult res = m_driver->query( &cle );
-	CreateQuery qu;
-	res = m_driver->query(&qu);
+	
+	createTable();
 }
 
 bool OContactAccessBackend_SQL::wasChangedExternally()
@@ -523,27 +350,69 @@ QArray<int> OContactAccessBackend_SQL::allRecords() const
 
 	// FIXME: Think about cute handling of changed tables..
 	// Thus, we don't have to call update here...
+	// Or we should update always to receive changed from
+	// other clients..
  	if ( m_changed )  
 		((OContactAccessBackend_SQL*)this)->update();
 	
 	return m_uids;
 }
 
-bool OContactAccessBackend_SQL::add ( const OContact &newcontact )
+bool OContactAccessBackend_SQL::add ( const OContact& newcontact )
 {
-	InsertQuery ins( newcontact );
-	OSQLResult res = m_driver->query( &ins );
+	QString qu;
 
-	if ( res.state() == OSQLResult::Failure )
+	qu = createPersonalString( newcontact );
+	qu += createCustomString( newcontact );
+
+	// qu  += "commit;";
+	qWarning("add %s", qu.latin1() );
+
+	// We need a unique id from the contact-table. Thus we take
+	// the largest used number and increment it once..
+	QString idQuery = "Select max(id) FROM contact";
+	OSQLRawQuery rawQuery( idQuery );
+	OSQLResult res = m_driver->query( &rawQuery );
+	
+	bool ok;
+	int contactId = res.first().data("max(id)").toInt( &ok );
+	if ( !ok )
+		contactId = 0;
+	else
+		contactId++;
+
+	// Create insert strings for contact table and connect it with the 
+	// personal table via hasContact
+	QString insertString = createContactString( contactId, Home, newcontact );
+	if ( !insertString.isNull() ){
+		qu += insertString;
+		qu += createHasContactString( newcontact.uid(), contactId, Home );
+		contactId++;
+	}
+	insertString = createContactString( contactId, Business, newcontact );
+	if ( !insertString.isNull() ){
+		qu += insertString;
+		qu += createHasContactString( newcontact.uid(), contactId, Business );
+	}
+
+
+	qWarning("Insert into Tabel:\n%s", qu.latin1() );
+
+	OSQLRawQuery rawInsertQuery( qu );
+	OSQLResult resInsertQuery = m_driver->query( &rawInsertQuery );
+	if ( resInsertQuery.state() != OSQLResult::Success ){
 		return false;
+	}
 
+	// If everything went ok, we add the new uid to our internal list
 	int c = m_uids.count();
 	m_uids.resize( c+1 );
 	m_uids[c] = newcontact.uid();
+
+
 	
 	return true;
 }
-
 
 bool OContactAccessBackend_SQL::remove ( int uid )
 {
@@ -572,11 +441,19 @@ OContact OContactAccessBackend_SQL::find ( int uid ) const
 	qWarning("OContactAccessBackend_SQL::find()");
 	QTime t;
 	t.start();
+	int tneeded;
 
-	OContact retContact( requestNonCustom( uid ) );
-	retContact.setExtraMap( requestCustom( uid ) );
+ 	QMap< int, QString > contactDataMap = requestPersonal( uid );
+ 	requestContact( Home, uid, &contactDataMap );
+  	requestContact( Business, uid, &contactDataMap );
 
-	qWarning("OContactAccessBackend_SQL::find() needed: %d ms", t.elapsed() );
+	OContact retContact( contactDataMap );
+       	retContact.setExtraMap( requestCustom( uid ) );
+
+	tneeded = t.elapsed();
+
+	qWarning("OContactAccessBackend_SQL::find() needed: %d ms", tneeded );
+
 	return retContact;
 }
 
@@ -584,33 +461,53 @@ OContact OContactAccessBackend_SQL::find ( int uid ) const
 
 QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, int settings, const QDateTime& d = QDateTime() )
 {
-	QString qu = "SELECT uid FROM addressbook WHERE";
+	QTime t;
+	t.start();
+
+	QString qu = "SELECT DISTINCT personal.uid FROM personal, contact, hasContact WHERE hasContact.uid = personal.uid AND hasContact.id = contact.id AND ";
+	// 	QString qu = "SELECT personal.uid FROM personal WHERE ";
 
 	QMap<int, QString> queryFields = query.toMap();
-	QStringList fieldList = OContactFields::untrfields( false );
-	QMap<QString, int> translate = OContactFields::untrFieldsToId();
+	QStringList fieldList = OContactFields::untrpersonalfields( false );
+	fieldList += OContactFields::untrdetailsfields( false ); 
+	QMap<int, QString> translate = OContactFields::idToUntrFields();
 
-	// Convert every filled field to a SQL-Query
+	// Convert every filled field to a SQL-Query which belongs to the 
+	// personal table
 	bool isAnyFieldSelected = false;
-	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
-		int id = translate[*it];
-		QString queryStr = queryFields[id];
-		if ( !queryStr.isEmpty() ){
-			isAnyFieldSelected = true;
-			switch( id ){
-			default:
-				// Switching between case sensitive and insensitive...
-				// LIKE is not case sensitive, GLOB is case sensitive
-				// Do exist a better solution to switch this ?
-				if ( settings & OContactAccess::IgnoreCase )
-					qu += "(\"" + *it + "\"" + " LIKE " + "'" 
-						+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ") AND "; 
-				else
-					qu += "(\"" + *it + "\"" + " GLOB " + "'" 
-						+ queryStr + "'" + ") AND "; 
-					
-			}
+	for ( QMap<int, QString>::Iterator it = queryFields.begin(); it != queryFields.end(); ++it ){
+		int fieldId = it.key(); 
+		QString fieldName = translate[ fieldId ];
+
+		// This "if" is highly dangerous due to the fact that it is
+		// dependent to the enum in "recordfields.h"
+		if ( (fieldId >= Qtopia::AddressCategory) && (fieldId <= Qtopia::Company) 
+		     || ( (fieldId >= Qtopia::DefaultEmail) && (fieldId <= Qtopia::Emails) )
+		     || ( (fieldId >= Qtopia::Office) && (fieldId <= Qtopia::Manager) )
+		     || ( (fieldId >= Qtopia::Spouse) && (fieldId <= Qtopia::Notes) ) )
+		{
+			// Fields in personal table
+		isAnyFieldSelected = true;
+		switch( fieldId ){
+		default:
+			QString queryStr = it.data();
+			// Switching between case sensitive and insensitive...
+			// LIKE is not case sensitive, GLOB is case sensitive
+			// Do exist a better solution to switch this ?
+			if ( settings & OContactAccess::IgnoreCase )
+				qu += "(\"" + fieldName + "\"" + " LIKE " + "'" 
+					+ queryStr.replace(QRegExp("\\*"),"%") + "'" + ") AND "; 
+			else
+				qu += "(\"" + fieldName + "\"" + " GLOB " + "'" 
+					+ queryStr + "'" + ") AND "; 
+			
+			
 		}
+		} else {
+			// Fields in contact table
+		}
+
+
 	}
 	// Skip trailing "AND"
 	if ( isAnyFieldSelected )
@@ -627,6 +524,8 @@ QArray<int> OContactAccessBackend_SQL::queryByExample ( const OContact &query, i
 	}
 
 	QArray<int> list = extractUids( res );
+
+	qWarning("QueryByExample needs: %d ms", t.elapsed() );
 
 	return list;		
 }
@@ -696,13 +595,8 @@ QArray<int> OContactAccessBackend_SQL::sorted( bool asc,  int , int ,  int )
 	QTime t;
 	t.start();
 
-#ifdef __STORE_HORIZONTAL_
-	QString query = "SELECT uid FROM addressbook ";
+	QString query = "SELECT personal.uid FROM personal ";
 	query += "ORDER BY \"Last Name\" ";
-#else
-	QString query = "SELECT uid FROM addressbook WHERE type = 'Last Name' ";
-	query += "ORDER BY upper( value )";
-#endif
 
 	if ( !asc )
 		query += "DESC";
@@ -744,6 +638,293 @@ void OContactAccessBackend_SQL::update()
 	qWarning("Update ends %d ms", t.elapsed() );
 }
 
+/* --- All private stuff below this line ---------------------------------------- */
+
+QString OContactAccessBackend_SQL::createPersonalString( const OContact& contact )
+{
+	QString qu;
+	qu  += "insert into personal VALUES( " + 
+		QString::number( contact.uid() );
+
+	// Get personal information out of the contact-class
+	// Remember: The category is stored in contactMap, too ! 
+	QMap<int, QString> contactMap = contact.toMap();
+	
+	QStringList fieldList = OContactFields::untrpersonalfields( false );
+	fieldList += OContactFields::untrdetailsfields( false );
+	QMap<QString, int> translate = OContactFields::untrFieldsToId();
+	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
+		// Convert Column-String to Id and get value for this id..
+		// Hmmm.. Maybe not very cute solution..
+		int id = translate[*it];
+		switch ( id ){
+		case Qtopia::Birthday:{
+			// These entries should stored in a special format
+			// year-month-day
+			QDate day = contact.birthday();
+			if ( day.isValid() ){
+				qu += QString(",\"%1-%2-%3\"")
+					.arg( day.year() )
+					.arg( day.month() )
+					.arg( day.day() );
+			} else {
+				qu += ",\"\"";
+			}
+		}
+			break;
+		case Qtopia::Anniversary:{
+			// These entries should stored in a special format
+			// year-month-day
+			QDate day = contact.anniversary();
+			if ( day.isValid() ){
+				qu += QString(",\"%1-%2-%3\"")
+					.arg( day.year() )
+					.arg( day.month() )
+					.arg( day.day() );
+			} else {
+				qu += ",\"\"";
+			}
+		}
+			break;
+			
+		default:
+			qu += QString( ",\"%1\"" ).arg( contactMap[id] );
+		}
+	}
+	qu += " );";
+
+	return qu;
+}
+
+QString OContactAccessBackend_SQL::createCustomString( const OContact& contact )
+{
+	// Now add custom data..
+	QString qu;
+	int id = 0;
+	id = 0;
+	QMap<QString, QString> customMap = contact.toExtraMap();
+	if ( customMap.count() ){
+		for( QMap<QString, QString>::Iterator it = customMap.begin(); 
+		     it != customMap.end(); ++it ){
+			qu  += "insert into custom_data VALUES(" 
+				+  QString::number( contact.uid() )
+				+ ","
+				+  QString::number( id++ ) 
+				+ ",'" 
+				+ it.key() //.latin1()
+				+ "',"
+				+ "0" // Priority for future enhancements
+				+ ",'" 
+				+ it.data() //.latin1()
+				+ "');";
+		}		
+	}
+	return qu;
+}
+
+QString OContactAccessBackend_SQL::createContactString( int id, int type, const OContact& contact )
+{
+	QString qu;
+	QMap<int, QString> contactMap = contact.toMap();
+	bool hasContent = false;
+
+	qu = "INSERT INTO contact VALUES( " + QString::number( id );
+	for( int field = DefaultEmail; field < lastContactField; ++field ){
+		QString insertString = "";
+		switch( field ){
+			// FIXME: We should seperate between business and home
+			//        emails !!
+		case DefaultEmail:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::DefaultEmail];
+				break;
+			case Business:
+				break;
+			}
+			break;
+		case Emails:
+			switch( type ){
+			case Home:
+				// insertString = contactMap[Qtopia::HomePager];
+				insertString = contactMap[Qtopia::Emails];
+				break;
+			case Business:
+				break;
+			}
+			break;
+		case WebPage:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeWebPage];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessWebPage];
+				break;
+			}
+			break;
+		case Phone:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomePhone];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessPhone];
+				break;
+			}
+			break;
+		case Fax:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeFax];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessFax];
+				break;
+			}
+			break;
+		case Mobile:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeMobile];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessMobile];
+				break;
+			}
+			break;
+		case Pager:
+			switch( type ){
+			case Home:
+				// insertString = contactMap[Qtopia::HomePager];
+				qWarning("Homepager is currently not supported !");
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessPager];
+				break;
+			}
+			break;
+		case Street:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeStreet];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessStreet];
+				break;
+			}
+			break;
+		case City:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeCity];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessCity];
+				break;
+			}
+			break;
+		case State:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeState];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessState];
+				break;
+			}
+			break;
+		case Zip:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeZip];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessZip];
+				break;
+			}
+			break;
+		case Country:
+			switch( type ){
+			case Home:
+				insertString = contactMap[Qtopia::HomeCountry];
+				break;
+			case Business:
+				insertString = contactMap[Qtopia::BusinessCountry];
+				break;
+			}
+			break;
+		default:
+			qWarning("OContactAccessBackend_SQL::createContactString():Unknown Field selected");
+		}
+		if ( !insertString.isEmpty() ){
+			qu += ",'" + insertString + "'";
+			hasContent = true;
+		}else 
+			qu += ",''";
+	}
+	qu += ");";
+
+	// Only if we really have to store something, we will return a nonempty string
+	if ( hasContent )
+		return qu;
+	else
+		return QString::null;
+}
+
+QString OContactAccessBackend_SQL::createHasContactString( int uid, int id, contactTypes type )
+{
+	QString qu;
+	
+	qu = "INSERT INTO hasContact VALUES( " 
+		+ QString::number( uid ) + ", " 
+		+ QString::number( id )  + ", "
+		+ QString::number( type )+ " );";
+
+	return qu;
+}
+
+bool OContactAccessBackend_SQL::createTable()
+{
+	QString qu = createCreateTableString ( idToContactFieldName );
+	OSQLRawQuery rawCreateQuery( qu );
+	OSQLResult resCreateQuery = m_driver->query( &rawCreateQuery );
+	if ( resCreateQuery.state() != OSQLResult::Success ){
+		return false;
+	}
+
+	return true;
+}
+
+QString OContactAccessBackend_SQL::createCreateTableString( const QMap<int, QString>& idToContactFieldName )
+{
+		QString qu;
+
+		qu += "create table personal( uid INTEGER PRIMARY KEY ";
+
+		QStringList personalList = OContactFields::untrpersonalfields( false );
+		personalList += OContactFields::untrdetailsfields( false );
+		for ( QStringList::Iterator it = ++personalList.begin(); it != personalList.end(); ++it ){
+			qu += QString( ",\"%1\" VARCHAR(10)" ).arg( *it );
+		}
+		qu += " );";
+
+		qu += "create table contact( id INTEGER PRIMARY KEY ";
+		for ( int i = DefaultEmail; 
+		      i < lastContactField; ++i ){
+			qu += QString( ",\"%1\" VARCHAR(10)" ).arg( idToContactFieldName[i] );
+		}
+		qu += " );";
+		
+		qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR, PRIMARY KEY /* identifier */ (uid, id) );";
+
+		qu += "create table hasContact( uid INTEGER, id INTEGER, type INTEGER, PRIMARY KEY /* bez */ (uid, id) );";
+		qWarning("create ->: %s",qu.latin1());
+
+		return qu;
+}
+
+
 QArray<int> OContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 {
 	qWarning("extractUids");
@@ -756,7 +937,7 @@ QArray<int> OContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 
 	int i = 0;
 	for (it = list.begin(); it != list.end(); ++it ) {
-		ints[i] =  (*it).data("uid").toInt();
+		ints[i] =  (*it).data("personal.uid").toInt();
 		i++;
 	}
 	qWarning("extractUids ready: count2 = %d needs %d ms", i, t.elapsed() );
@@ -765,8 +946,7 @@ QArray<int> OContactAccessBackend_SQL::extractUids( OSQLResult& res ) const
 
 }
 
-#ifdef __STORE_HORIZONTAL_
-QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
+QMap<int, QString>  OContactAccessBackend_SQL::requestPersonal( int uid ) const
 {
 	QTime t;
 	t.start();
@@ -786,7 +966,8 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	QTime t3;
 	t3.start();
 	// Now loop through all columns
-	QStringList fieldList = OContactFields::untrfields( false );
+	QStringList fieldList = OContactFields::untrpersonalfields( false );
+	fieldList += OContactFields::untrdetailsfields( false );
 	QMap<QString, int> translate = OContactFields::untrFieldsToId();
 	for ( QStringList::Iterator it = ++fieldList.begin(); it != fieldList.end(); ++it ){
 		// Get data for the selected column and store it with the
@@ -794,6 +975,9 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 
 		int id =  translate[*it];
 		QString value = resItem.data( (*it) );
+
+		if ( value.isEmpty() )
+			continue;
 		
 		// qWarning("Reading %s... found: %s", (*it).latin1(), value.latin1() );
 
@@ -824,75 +1008,179 @@ QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
 	t3needed = t3.elapsed();
 
 	// qWarning("Adding UID: %s", resItem.data( "uid" ).latin1() );
-	qWarning("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms", 
+	qWarning("RequestPersonal needed: insg.:%d ms ( query: %d ms, mapping: %d ms)", 
 		 t.elapsed(), t2needed, t3needed  );
 
 	return nonCustomMap;
 }
-#else
 
-QMap<int, QString>  OContactAccessBackend_SQL::requestNonCustom( int uid ) const
+void OContactAccessBackend_SQL::requestContact( contactTypes type, int uid, 
+						QMap<int,QString>* contactMap ) const
 {
 	QTime t;
 	t.start();
 
-	QMap<int, QString> nonCustomMap;
-	
-	int t2needed = 0;
 	QTime t2;
 	t2.start();
-	FindQuery query( uid );
-	OSQLResult res_noncustom = m_driver->query( &query );
-	t2needed = t2.elapsed();
+	// Step 1: Request all information from table contact
+	QString qu = QString( "SELECT contact.* FROM contact, hasContact WHERE " )
+		+ QString( "hasContact.id = contact.id" )
+		+ QString( " AND hasContact.uid = " )
+		+ QString::number( uid )
+		+ QString( " AND hasContact.type = " ) 
+		+ QString::number( type );
 
-	if ( res_noncustom.state() == OSQLResult::Failure ) {
-		qWarning("OSQLResult::Failure in find query !!");
-		QMap<int, QString> empty;
-		return empty;
-	}	
+	OSQLRawQuery raw( qu );
+	OSQLResult res = m_driver->query( &raw );
+	if ( ( res.state() != OSQLResult::Success ) && ( res.results().count() == 0 ) ){
+		return;
+	}
 
-	int t3needed = 0;
+	int querytime = t2.elapsed();
+
 	QTime t3;
 	t3.start();
-	QMap<QString, int> translateMap = OContactFields::untrFieldsToId();
+	// Step 2: Now put all information into map
+	for( int field = DefaultEmail; field < lastContactField; ++field ){
 
-	OSQLResultItem::ValueList list = res_noncustom.results();
-	OSQLResultItem::ValueList::Iterator it = list.begin();
-	for ( ; it != list.end(); ++it ) {
-		if ( (*it).data("type") != "" ){
-			int typeId = translateMap[(*it).data( "type" )];
-			switch( typeId ){
-			case Qtopia::Birthday:
-			case Qtopia::Anniversary:{
-				// Birthday and Anniversary are encoded special ( yyyy-mm-dd )
-				QStringList list = QStringList::split( '-', (*it).data( "value" ) );
-				QStringList::Iterator lit = list.begin();
-				int year  = (*lit).toInt();
-				qWarning("1. %s", (*lit).latin1());
-				int month = (*(++lit)).toInt();
-				qWarning("2. %s", (*lit).latin1());
-				int day   = (*(++lit)).toInt();
-				qWarning("3. %s", (*lit).latin1());
-				qWarning( "RequestNonCustom->Converting:%s to Year: %d, Month: %d, Day: %d ", (*it).data( "value" ).latin1(), year, month, day );
-				QDate date( year, month, day );
-				nonCustomMap.insert( typeId, OConversion::dateToString( date ) );
-			}
+		// Req. content of field. Skip insertion if field was empty
+		QString insertString = res.first().data( "contact." + idToContactFieldName[field] ) ;
+		if ( insertString.isEmpty() )
+			continue;
+
+		// Insert data into map
+		switch( field ){
+			// FIXME: We should seperate between business and home
+			//        emails !!
+		case DefaultEmail:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::DefaultEmail, insertString );
 				break;
-			default:
-				nonCustomMap.insert( typeId, 
-						     (*it).data( "value" ) );
+			case Business:
+				break;
 			}
+			break;
+		case Emails:
+			switch( type ){
+			case Home:
+				// insertString = contactMap[Qtopia::HomePager];
+				contactMap->insert( Qtopia::Emails, insertString );
+				break;
+			case Business:
+				break;
+			}
+			break;
+		case WebPage:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeWebPage, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessWebPage, insertString );
+				break;
+			}
+			break;
+		case Phone:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomePhone, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessPhone, insertString );
+				break;
+			}
+			break;
+		case Fax:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeFax, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessFax, insertString );
+				break;
+			}
+			break;
+		case Mobile:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeMobile, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessMobile, insertString );
+				break;
+			}
+			break;
+		case Pager:
+			switch( type ){
+			case Home:
+				// insertString = contactMap[Qtopia::HomePager];
+				qWarning("Homepager is currently not supported !");
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessPager, insertString );
+				break;
+			}
+			break;
+		case Street:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeStreet, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessStreet, insertString );
+				break;
+			}
+			break;
+		case City:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeCity, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessCity, insertString );
+				break;
+			}
+			break;
+		case State:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeState, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessState, insertString );
+				break;
+			}
+			break;
+		case Zip:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeZip, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessZip, insertString );
+				break;
+			}
+			break;
+		case Country:
+			switch( type ){
+			case Home:
+				contactMap->insert( Qtopia::HomeCountry, insertString );
+				break;
+			case Business:
+				contactMap->insert( Qtopia::BusinessCountry, insertString );
+				break;
+			}
+			break;
+		default:
+			qWarning("OContactAccessBackend_SQL::createContactString():Unknown Field selected");
+
 		}
 	}
-	// Add UID to Map..
-	nonCustomMap.insert( Qtopia::AddressUid, QString::number( uid ) );
-	t3needed = t3.elapsed();
-
-	qWarning("RequestNonCustom needed: insg.:%d ms, query: %d ms, mapping: %d ms", t.elapsed(), t2needed, t3needed  );
-	return nonCustomMap;
+	int mappingtime = t3.elapsed();
+	qWarning("requestContact needs %d ms (query: %d ms, mapping: %d ms)", t.elapsed(), querytime, mappingtime );
 }
 
-#endif // __STORE_HORIZONTAL_
 
 QMap<QString, QString>  OContactAccessBackend_SQL::requestCustom( int uid ) const
 {
