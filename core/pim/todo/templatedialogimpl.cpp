@@ -77,7 +77,10 @@ void TemplateDialogImpl::slotAdd() {
     new TemplateListItem( listView(), str, ev );
 }
 void TemplateDialogImpl::slotRemove() {
-    TemplateListItem* item = (TemplateListItem*) listView()->currentItem();
+    if (!listView()->currentItem() )
+        return;
+
+    TemplateListItem* item = static_cast<TemplateListItem*>(  listView()->currentItem() );
     listView()->takeItem( item );
 
     m_man->removeEvent( item->text() );
@@ -85,7 +88,10 @@ void TemplateDialogImpl::slotRemove() {
     delete item;
 }
 void TemplateDialogImpl::slotEdit() {
-    TemplateListItem* item = (TemplateListItem*)listView()->currentItem();
+    if ( !listView()->currentItem() )
+        return;
+
+    TemplateListItem* item = static_cast<TemplateListItem*>( listView()->currentItem() );
     OTodo ev = m_win->currentEditor()->edit( m_win, item->event() );
     if ( m_win->currentEditor()->accepted() ) {
         item->setEvent( ev );
@@ -99,7 +105,10 @@ void TemplateDialogImpl::slotEdit() {
  */
 
 void TemplateDialogImpl::slotReturn() {
-    TemplateListItem* tbl = (TemplateListItem*)listView()->currentItem();
+    if ( !listView()->currentItem() )
+        return;
+
+    TemplateListItem* tbl = static_cast<TemplateListItem*>( listView()->currentItem() );
 
     if (tbl->text() != edit()->text() ) {
         m_man->removeEvent( tbl->text() );
