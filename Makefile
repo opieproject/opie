@@ -30,7 +30,7 @@ APPS=$(LOCALAPPS) addressbook calculator clock datebook \
     solitaire spreadsheet tetrix textedit \
     todo tux wordgame embeddedkonsole taskbar sysinfo \
     parashoot snake citytime showimg netsetup \
-    qipkg mindbreaker go qasteroids qcop fifteen keypebble
+    qipkg mindbreaker go qasteroids qcop fifteen keypebble opiemail/lib opiemail
 
 single: mpegplayer/libmpeg3
 
