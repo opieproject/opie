@@ -4,9 +4,9 @@ Priority: optional
 Section: opie/system
 Maintainer: holger Freyther <zecke@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION.1
 Depends: task-opie-minimal ($QPE_VERSION), openobex | libopenobex1
 Provides: libopieobex1
 Replaces: libopieobex1
 Description: Irda obex lib
  
+Version: $QPE_VERSION$EXTRAVERSION

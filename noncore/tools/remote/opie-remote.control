@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>
 Architecture: arm
-Version: 0.3-$SUB_VERSION
+Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal, lirc
 License: GPL
 Description: a remote control

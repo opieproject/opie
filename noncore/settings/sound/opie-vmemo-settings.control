@@ -5,8 +5,8 @@ Section: opie/settings
 Maintainer: L.J. Potter
 Architecture: arm
 Arch: iPAQ
-Version: $QPE_VERSION-$SUB_VERSION
 Conflicts: opie-sound
 Depends: task-opie-minimal
-Description: Settings for voice memos
+Description: Sound settings dialog
  For the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

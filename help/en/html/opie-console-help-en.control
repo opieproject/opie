@@ -4,8 +4,8 @@ Priority: optional
 Section: opie/onlinedoc
 Maintainer: Opie team <opie@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-console
 License: GPL
 Description: Opie terminal app help files (english)
  
+Version: $QPE_VERSION$EXTRAVERSION

@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libopie1, opie-keytabs
 Description: KDE's konsole (shell terminal)
  Ported to the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

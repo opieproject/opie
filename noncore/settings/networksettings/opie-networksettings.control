@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Network settings.
 Replaces: opie-networksetup
+Version: $QPE_VERSION$EXTRAVERSION
