@@ -14,13 +14,14 @@
 #include "fileSaver.h"
 #include <qpe/config.h>
 #include <qpe/qpeapplication.h>
-
 #include <qlistview.h>
 #include <qpushbutton.h>
 #include <qfile.h>
 #include <qmessagebox.h>
-#include <unistd.h>
 #include <qlineedit.h>
+#include <qcheckbox.h>
+
+#include <unistd.h>
 
 fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl , const QString currentFileName )
     : QDialog( parent, name, modal, fl )
@@ -56,6 +57,9 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
 
     fileEdit->setText( tmpFileName);
 
+    filePermCheck = new QCheckBox( this, "SetFilePerms" );
+    filePermCheck->setText("set file permissions");
+    filePermCheck->setGeometry(10, 220, 150,22);
       // signals and slots connections
     connect( ListView, SIGNAL(doubleClicked( QListViewItem*)), SLOT(listDoubleClicked(QListViewItem *)) );
     connect( ListView, SIGNAL(pressed( QListViewItem*)), SLOT(listClicked(QListViewItem *)) );

@@ -31,6 +31,7 @@ class QListView;
 class QListViewItem;
 class QPushButton;
 class QLineEdit;
+class QCheckBox;
 
 class fileSaver : public QDialog
 { 
@@ -50,6 +51,7 @@ public:
     QDir currentDir;
     QFile file;
     QStringList fileList;
+    QCheckBox *filePermCheck;
  
 QListViewItem * item;
 public slots:

@@ -22,6 +22,7 @@
 #include "textedit.h"
 #include "fileBrowser.h"
 #include "fileSaver.h"
+#include "filePermissions.h"
 
 #include "fontDialog.h"
 
@@ -47,6 +48,9 @@
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 #include <qwidgetstack.h>
+#include <qcheckbox.h>
+#include <unistd.h>
+#include <sys/stat.h>
 
 #include <stdlib.h> //getenv
 /* XPM */
@@ -415,7 +419,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
 
 TextEdit::~TextEdit()
 {
-//    saveAs();
+//    save();
 
     Config cfg("TextEdit");
     cfg.setGroup("View");
@@ -694,19 +698,24 @@ bool TextEdit::save()
 {
     QString file = doc->file();
     QString name= doc->name();
+
     QString rt = editor->text();
     currentFileName= name ;
     qDebug("saveFile "+currentFileName);
+
+    struct stat buf;
+    mode_t mode;
+    lstat(file.latin1(), &buf);
+    mode = buf.st_mode;
 
     doc->setName( name);
     FileManager fm;
     if ( !fm.saveFile( *doc, rt ) ) {
         return false;
     }
-//  if(doc)
-//      delete doc;
-//      doc = 0;
     editor->setEdited( false );
+
+    chmod( file.latin1(), mode);
     return true;
 }
 
@@ -714,7 +723,7 @@ bool TextEdit::save()
   prompted save */
 bool TextEdit::saveAs()
 {
-        qDebug("saveAsFile "+currentFileName);
+//        qDebug("saveAsFile "+currentFileName);
 
       // case of nothing to save... /// there's always something to save
 //          if ( !doc )//|| !bFromDocView)
@@ -753,39 +762,46 @@ bool TextEdit::saveAs()
         }
     }
 
+    
     fileSaveDlg=new fileSaver(this,"SaveFile",TRUE,0, currentFileName);
     qDebug("wanna save filename "+currentFileName);
     fileSaveDlg->exec();
     if( fileSaveDlg->result() == 1 ) {
-    QString fileNm=fileSaveDlg->selectedFileName;
-    qDebug("saving filename "+fileNm);
-    QFileInfo fi(fileNm);
-    currentFileName=fi.fileName();
-    if(doc) {
-        qDebug("doclnk exists");
+        QString fileNm=fileSaveDlg->selectedFileName;
+        qDebug("saving filename "+fileNm);
+        QFileInfo fi(fileNm);
+        currentFileName=fi.fileName();
+        if(doc) {
+            qDebug("doclnk exists");
 //        QString file = doc->file();
 //        doc->removeFiles();
-        delete doc;
-        DocLnk nf;
-        nf.setType("text/plain");
-        nf.setFile( fileNm);
-        doc = new DocLnk(nf);
+            delete doc;
+            DocLnk nf;
+            nf.setType("text/plain");
+            nf.setFile( fileNm);
+            doc = new DocLnk(nf);
 //        editor->setText(rt);
-        qDebug("openFile doclnk "+currentFileName);
+            qDebug("openFile doclnk "+currentFileName);
+            doc->setName( currentFileName);
+            updateCaption( currentFileName);
+
+            FileManager fm;
+            if ( !fm.saveFile( *doc, rt ) ) {
+                return false;
+            }
+            if( fileSaveDlg->filePermCheck->isChecked() ) {
+                filePermissions *filePerm;
+                filePerm = new filePermissions(this, "Permissions",true,0,(const QString &)fileNm);
+                filePerm->exec();
+                editor->setEdited( false );
+                if( filePerm)
+                    delete  filePerm;
+            }
+        }
     }
-    doc->setName( currentFileName);
-    updateCaption( currentFileName);
-    
-    FileManager fm;
-    if ( !fm.saveFile( *doc, rt ) ) {
-        return false;
-    }
-//      delete doc;
-//      doc = 0;
-    editor->setEdited( false );
-    }
+
     if(fileSaveDlg)
-    delete fileSaveDlg;
+        delete fileSaveDlg;
     return true;
 }
 
@@ -835,6 +851,7 @@ void TextEdit::closeEvent( QCloseEvent *e )
 
 void TextEdit::accept()
 {
+    save();
     close();
 //    fileOpen(); //godamn thats obnoxious! lemme out!!!
 }

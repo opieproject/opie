@@ -3,9 +3,9 @@ CONFIG    += qt warn_on release
 
 DESTDIR   = $(OPIEDIR)/bin
 
-HEADERS = textedit.h fileBrowser.h fontDialog.h fileSaver.h
+HEADERS = textedit.h fileBrowser.h fontDialog.h fileSaver.h filePermissions.h
 
-SOURCES = main.cpp textedit.cpp fileBrowser.cpp fontDialog.cpp fileSaver.cpp
+SOURCES = main.cpp textedit.cpp fileBrowser.cpp fontDialog.cpp fileSaver.cpp filePermissions.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
