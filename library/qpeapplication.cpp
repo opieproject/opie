@@ -1949,24 +1949,15 @@ void QPEApplication::internalSetStyle( const QString &style )
 void QPEApplication::prepareForTermination( bool willrestart )
 {
     if ( willrestart ) {
-        // Draw a big wait icon, the image can be altered in later revisions
-        //  QWidget *d = QApplication::desktop();
-        QImage img = Resource::loadImage( "launcher/new_wait" );
-        QPixmap pix;
-        pix.convertFromImage( img.smoothScale( 1 * img.width(), 1 * img.height() ) );
-        QLabel *lblWait = new QLabel( 0, "wait hack!", QWidget::WStyle_Customize |
+        QLabel *lblWait = new QLabel( tr( "Please wait..." ), 0, "wait hack", QWidget::WStyle_Customize |
                                       QWidget::WStyle_NoBorder | QWidget::WStyle_Tool );
-        lblWait->setPixmap( pix );
         lblWait->setAlignment( QWidget::AlignCenter );
         lblWait->show();
         lblWait->showMaximized();
     }
-#ifndef SINGLE_APP
     { QCopEnvelope envelope( "QPE/System", "forceQuit()" );
     }
     processEvents(); // ensure the message goes out.
-    sleep( 1 ); // You have 1 second to comply.
-#endif
 }
 
 /*!
