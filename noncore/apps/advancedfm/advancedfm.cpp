@@ -70,6 +70,8 @@
 #include <mntent.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/vfs.h>
+#include <mntent.h>
 
 AdvancedFm::AdvancedFm( )
   : QMainWindow( )
@@ -304,7 +306,7 @@ void AdvancedFm::populateLocalView()
   currentDir.setNameFilter(filterStr);
   QString fileL, fileS, fileDate;
   QString fs= getFileSystemType((const QString &) currentDir.canonicalPath());
-  setCaption("AdvancedFm :: "+fs);
+  setCaption("AdvancedFm :: "+fs+" :: "+checkDiskSpace((const QString &) currentDir.canonicalPath())+" kB free" );
   bool isDir=FALSE;
   const QFileInfoList *list = currentDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
   QFileInfoListIterator it(*list);
@@ -402,7 +404,7 @@ void AdvancedFm::populateRemoteView()
   QString fileL, fileS, fileDate;
 
   QString fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
-  setCaption("AdvancedFm :: "+fs);
+  setCaption("AdvancedFm :: "+fs+" :: "+checkDiskSpace((const QString &) currentRemoteDir.canonicalPath())+" kB free" );
   bool isDir=FALSE;
   const QFileInfoList *list = currentRemoteDir.entryInfoList( /*QDir::All*/ /*, QDir::SortByMask*/);
   QFileInfoListIterator it(*list);
@@ -1466,6 +1468,8 @@ void AdvancedFm::runCommand() {
         outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
       }
     }
+    pclose(fp);
+
   }
 }
 
@@ -1521,6 +1525,7 @@ void AdvancedFm::fileStatus() {
     }
 
   }
+  pclose(fp);
 }
 
 void AdvancedFm::mkDir() {
@@ -1836,10 +1841,29 @@ void AdvancedFm::showFileMenu() {
 }
 
 
-void AdvancedFm::cancelMenuTimer()
-{
+void AdvancedFm::cancelMenuTimer() {
 
   qDebug("selectionChanged: cancel menu timer");
   if( menuTimer.isActive() )
     menuTimer.stop();
 }
+
+QString AdvancedFm::checkDiskSpace(const QString &path) {
+
+  struct statfs fss;
+  if ( !statfs( path.latin1(), &fss ) ) {
+    int blkSize = fss.f_bsize;
+//    int totalBlks = fs.f_blocks;
+    int availBlks = fss.f_bavail;
+
+    long mult = blkSize / 1024;
+    long div = 1024 / blkSize;
+    if ( !mult ) mult = 1;
+    if ( !div ) div = 1;
+
+
+    return QString::number(availBlks * mult / div);
+  }
+  return "";
+}
+

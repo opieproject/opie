@@ -113,7 +113,7 @@ protected:
   QString getDiskSpace(const QString &);
 
   void parsetab(const QString &fileName);
-  
+QString checkDiskSpace(const QString &);  
 protected slots:
   void showFileMenu();
   void cancelMenuTimer();
