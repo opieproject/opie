@@ -23,9 +23,9 @@
 #include <opie/otabwidget.h>
 #include <ktexteditor.h>
 
-class QToolButton;
 class QAction;
 class QPopupMenu;
+class CGotoLine;
 
 class TinyKate : public QMainWindow
 {
@@ -36,7 +36,6 @@ public:
 
 public slots:
     void slotNew();
- void setDocument(const QString& fileref);
 
 protected slots:
     void slotOpen();
@@ -44,19 +43,32 @@ protected slots:
     void slotCurrentChanged(QWidget *);
     void slotSave();
     void slotSaveAs();
+    void slotGoTo();
+    void slotCursorMoved();
+    void setDocument(const QString &doc);
+    
 protected:
     void open(const QString&);
 private:
     QString currentFileName;
     OTabWidget *tabwidget;
     KTextEditor::View *currentView;
-
-    QToolButton *editCopy, *editCut, *editPaste, *editUndo, *editRedo,  *editFindReplace;
-    QAction *viewIncFontSizes, *viewDecFontSizes, *utilSettings;
-
+  
+    QAction *editCopy;
+    QAction *editCut;
+    QAction *editPaste;
+    QAction *editUndo;
+    QAction *editRedo;
+    QAction *editFind;
+    QAction *editFindReplace;
+    QAction *viewIncFontSizes;
+    QAction *viewDecFontSizes;
+    QAction *utilSettings;
+    
     QPopupMenu *hlmenu;
     uint nextUnnamed;
     uint viewCount;
+    int curLine,curCol;
 };
 
 

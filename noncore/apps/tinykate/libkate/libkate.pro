@@ -25,10 +25,10 @@ HEADERS		= microkde/kapplication.h \
                   microkde/klistview.h \
                   microkde/kglobalsettings.h \
 		  microkde/kcolorbtn.h \
-		  \
-	          \
+		  microkde/xmltree.h \
+		  microkde/qcolordialog.h \
 		  qt3back/qregexp3.h \
-		  kde/ksharedptr.h \
+		  microkde/ksharedptr.h \
 		  document/katebuffer.h  document/katedialogs.h \
 		  document/katetextline.h \
 		  document/katecmd.h \
@@ -51,15 +51,15 @@ SOURCES		= microkde/kapplication.cpp \
                   microkde/kstandarddirs.cpp \
                   microkde/ktempfile.cpp \
                   microkde/kurlrequester.cpp \
-                  microkde/kcolordialog.cpp \
+#                  microkde/kcolordialog.cpp \
                   microkde/kfontdialog.cpp \
                   microkde/krun.cpp \
                   microkde/knumvalidator.cpp \
                   microkde/kglobal.cpp \
                   microkde/kglobalsettings.cpp \
 		  microkde/kcolorbtn.cpp \
-		  \
-		  \
+		  microkde/xmltree.cc \
+		  microkde/qcolordialog.cpp \
 		  qt3back/qregexp3.cpp \
 		  ktexteditor/ktexteditor.cpp \
 		  document/katebuffer.cpp  document/katedialogs.cpp \

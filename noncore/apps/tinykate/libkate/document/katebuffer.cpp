@@ -3,7 +3,7 @@
    Copyright (c) 2000 Waldo Bastian <bastian@kde.org>
    Copyright (c) 2002 Joseph Wenninger <jowenn@kde.org>
 
-   $Id: katebuffer.cpp,v 1.1 2002-11-10 21:10:14 jowenn Exp $
+   $Id: katebuffer.cpp,v 1.2 2003-06-14 17:39:27 llornkcor Exp $
 
    This library is free software; you can redistribute it and/or
    modify it under the terms of the GNU Library General Public
@@ -121,7 +121,7 @@ KWBuffer::slotLoadFile()
 int
 KWBuffer::count()
 {
-  qDebug("m_stringList.count %d",m_stringList.count());
+//  qDebug("m_stringList.count %d",m_stringList.count());
   return m_lineCount;
 //	return m_stringList.count();
 //   return m_totalLines;
