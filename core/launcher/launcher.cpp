@@ -876,12 +876,22 @@ void Launcher::properties( AppLnk *appLnk )
 
 void Launcher::updateLink(const QString& link)
 {
-    if (link.isNull())
+    bool notify_sm = false;
+
+    if (link.isNull()) {
 	updateTabs();
-    else if (link.isEmpty())
+	notify_sm = true;
+    }
+    else if (link.isEmpty()) {
 	updateDocs();
-    else
+    }
+    else {
 	tabs->updateLink(link);
+	notify_sm = true;
+    }
+    
+    if ( notify_sm )
+    	QCopEnvelope e ( "QPE/TaskBar", "reloadApps()" );
 }
 
 void Launcher::systemMessage( const QCString &msg, const QByteArray &data)
