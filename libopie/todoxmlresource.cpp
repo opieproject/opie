@@ -311,11 +311,12 @@ ToDoEvent ToDoXMLResource::todo( QAsciiDict<int>* dict, XMLElement* element )con
 QString ToDoXMLResource::toString( const QArray<int>& ints ) const{
     QString str;
 
+    qWarning("ints == %d", ints.size() );
     for (uint i = 0; i < ints.size(); i++ ) {
-        str += QString::number( i ) + ";";
+        str += QString::number( ints[i] ) + ";";
     }
     str.remove( str.length() -1, 1 );
-//    qWarning("Categories: " + str);
+    qWarning("XML Categories: " + str);
     return str;
 }
 QString ToDoXMLResource::toString( const ToDoEvent& ev )const {

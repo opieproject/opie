@@ -40,11 +40,11 @@ ToDoEvent::ToDoEvent(const ToDoEvent &event )
     : data( event.data )
 {
     data->ref();
-    qWarning("ref up");
+    //qWarning("ref up");
 }
 ToDoEvent::~ToDoEvent() {
     if ( data->deref() ) {
-        qWarning("ToDoEvent::dereffing");
+        //qWarning("ToDoEvent::dereffing");
         delete data;
         data = 0l;
     }
@@ -57,7 +57,7 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
                      ushort progress,
                      bool hasDate, QDate date, int uid )
 {
-    qWarning("ToDoEventData");
+    //qWarning("ToDoEventData");
     data = new ToDoEventData;
     data->date = date;
     data->isCompleted = completed;
@@ -79,6 +79,7 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
 }
 QArray<int> ToDoEvent::categories()const
 {
+  qWarning( "ToDoEvent:cats" + data->category.join(";") );
   QArray<int> array(data->category.count() ); // currently the datebook can be only in one category
     array = Qtopia::Record::idsFromString( data->category.join(";") );
   return array;
@@ -147,6 +148,7 @@ QArray<int> ToDoEvent::relations( const QString& app)const
 void ToDoEvent::insertCategory(const QString &str )
 {
     changeOrModify();
+    qWarning("insert category;" + str );
     data->category.append( str );
 }
 void ToDoEvent::clearCategories()
@@ -157,6 +159,7 @@ void ToDoEvent::clearCategories()
 void ToDoEvent::setCategories(const QStringList &list )
 {
     changeOrModify();
+    qWarning("set categories" + list.join(";") );
     data->category = list;
 }
 QDate ToDoEvent::dueDate()const
@@ -205,7 +208,7 @@ void ToDoEvent::setSummary( const QString& sum )
 void ToDoEvent::setCategory( const QString &cat )
 {
     changeOrModify();
-    qWarning("setCategory %s", cat.latin1() );
+    //qWarning("setCategory %s", cat.latin1() );
     data->category.clear();
     data->category << cat;
 }
@@ -403,16 +406,16 @@ bool ToDoEvent::operator==(const ToDoEvent &toDoEvent )const
 }
 void ToDoEvent::deref() {
 
-    qWarning("deref in ToDoEvent");
+    //qWarning("deref in ToDoEvent");
     if ( data->deref() ) {
-        qWarning("deleting");
+        //qWarning("deleting");
         delete data;
         d= 0;
     }
 }
 ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
 {
-    qWarning("operator= ref ");
+    //qWarning("operator= ref ");
     item.data->ref();
     deref();
 
@@ -454,7 +457,7 @@ QString ToDoEvent::crossToString()const {
         }
     }
     str = str.remove( str.length()-1, 1); // strip the ;
-    qWarning("IDS " + str );
+    //qWarning("IDS " + str );
 
     return str;
 }
@@ -478,13 +481,12 @@ QMap<QString, QString> ToDoEvent::extras()const {
  */
 void ToDoEvent::changeOrModify() {
     if ( data->count != 1 ) {
-        qWarning("changeOrModify");
+        //qWarning("changeOrModify");
         data->deref();
         ToDoEventData* d2 = new ToDoEventData();
         copy(data, d2 );
         data = d2;
-    }/*for testing */ else
-        qWarning("not changed");
+    }
 }
 void ToDoEvent::copy( ToDoEventData* src, ToDoEventData* dest ) {
     dest->date = src->date;
