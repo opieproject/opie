@@ -3,11 +3,11 @@
     <name>AppsKeyApp</name>
     <message>
         <source>Set Application Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw przycisk aplikacji</translation>
     </message>
     <message>
         <source>Address Book</source>
-        <translation type="unfinished"></translation>
+        <translation>Ksiazka adresowa</translation>
     </message>
     <message>
         <source>Home</source>
@@ -15,15 +15,15 @@
     </message>
     <message>
         <source>Popup Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu</translation>
     </message>
     <message>
         <source>Mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Poczta</translation>
     </message>
     <message>
         <source>Calendar</source>
-        <translation type="unfinished"></translation>
+        <translation>Kalendarz</translation>
     </message>
 </context>
 </TS>
