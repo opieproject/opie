@@ -1,7 +1,7 @@
 TEMPLATE = app
-CONFIG = qt warn_on 
-HEADERS =	qashmoney.h \
-			accountdisplay.h \
+CONFIG = qt warn_on
+HEADERS =   qashmoney.h \
+            accountdisplay.h \
                         account.h \
                         transaction.h \
                         transactiondisplay.h \
@@ -18,8 +18,8 @@ HEADERS =	qashmoney.h \
                         budget.h \
                         budgetdisplay.h \
                         currency.h
-SOURCES =	qashmoney.cpp \
-			accountdisplay.cpp \
+SOURCES =   qashmoney.cpp \
+            accountdisplay.cpp \
                         account.cpp \
                         transaction.cpp \
                         transactiondisplay.cpp \
@@ -33,7 +33,7 @@ SOURCES =	qashmoney.cpp \
                         newaccount.cpp \
                         calculator.cpp \
                         datepicker.cpp \
-			main.cpp \
+            main.cpp \
                         budget.cpp \
                         budgetdisplay.cpp \
                         currency.cpp
@@ -47,3 +47,9 @@ LIBS += -lqpe -lopiecore2 -lsqlite
 
 include ( $(OPIEDIR)/include.pro )
 
+!isEmpty( LIBSQLITE_INC_DIR ) {
+    INCLUDEPATH = $$LIBSQLITE_INC_DIR $$INCLUDEPATH
+}
+!isEmpty( LIBSQLITE_LIB_DIR ) {
+    LIBS = -L$$LIBSQLITE_LIB_DIR $$LIBS
+}
