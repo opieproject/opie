@@ -49,8 +49,8 @@ namespace Security {
  */
 class MultiauthPassword {
 public:
-    static bool needToAuthenticate( bool atpoweron=FALSE );
-    static void authenticate(bool atpoweron = FALSE );
+    static bool needToAuthenticate( bool atpoweron = false );
+    static void authenticate(bool atpoweron = false);
 };
 
 
