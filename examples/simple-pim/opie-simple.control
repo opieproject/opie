@@ -1,4 +1,4 @@
-Package: opie-main-tab-example
+Package: opie-simple-pim-example
 Files: bin/main-tab apps/Examples/main-tab.desktop
 Priority: optional
 Section: opie/examples
