@@ -15,5 +15,5 @@
 PSEWidget::PSEWidget() : QWidget()
 {
     maingrid = new QGridLayout(  18 , 10 , -1 , "maingridlayout" );
-    OxyFrame *test = new OxyFrame(this);
+    OxyFrame *configobj = new OxyFrame(this);
 }

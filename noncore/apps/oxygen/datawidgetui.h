@@ -8,22 +8,18 @@
  *                                                                         *
  **************************************************************************/
 #include "dataTable.h"
-#include <qdialog.h>
 
 class QComboBox;
 
-class dataWidgetUI : public QDialog
+class dataWidgetUI : public QWidget
 {
 	Q_OBJECT
 	
     public:
 		dataWidgetUI();
-        OxydataWidget *oxyDW;
 
     private:
         OxydataTable *DataTable;
         QComboBox *dataCombo;
-
-    private slots:
-        void slotShowData(int);
+        OxydataWidget *oxyDW;
 };

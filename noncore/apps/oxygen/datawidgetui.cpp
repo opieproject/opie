@@ -6,18 +6,17 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "oxygen.h"
+
 #include "datawidgetui.h"
 
 #include <qpe/config.h>
 #include <qstring.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qtable.h>
 #include <qhbox.h>
 #include <qlabel.h>
 
-dataWidgetUI::dataWidgetUI() : QDialog()
+dataWidgetUI::dataWidgetUI() : QWidget()
 {
     this->setCaption("Chemical Data");
     
@@ -30,19 +29,14 @@ dataWidgetUI::dataWidgetUI() : QDialog()
     qgrid->addWidget(  oxyDW , 1,0 );
     
     connect ( dataCombo, SIGNAL( activated(int) ), oxyDW, SLOT( setElement(int) ) );
-    Config test( "/home/opie/Settings/oxygendata", Config::File );
+    Config configobj( "oxygendata" );
     
     //read in all names of the 118 elements
     for ( int i = 1 ; i < 119 ; i++ )
     {
-        test.setGroup( QString::number( i ) );
-        QString foo = test.readEntry( "Name" );
+        configobj.setGroup( QString::number( i ) );
+        QString foo = configobj.readEntry( "Name" );
         dataCombo->insertItem( foo );
     }
 }
 
-
-
-void dataWidgetUI::slotShowData(int number){
-    oxyDW->setElement( 6 );
-}

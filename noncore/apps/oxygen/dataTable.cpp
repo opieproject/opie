@@ -12,7 +12,6 @@
 #include "dataTable.h"
 #include <qwidget.h>
 #include <qhbox.h>
-#include <qvbox.h>
 #include <qlabel.h>
 #include <qfont.h>
 #include <qlayout.h>
@@ -40,30 +39,30 @@ OxydataWidget::OxydataWidget(QWidget *parent) : QWidget(parent)
 
 void OxydataWidget::setElement( int el )
 {
-    Config test( "/home/opie/Settings/oxygendata", Config::File );
-    test.setGroup( QString::number( el+1 ));
+    Config configobj( "oxygendata" );
+    configobj.setGroup( QString::number( el+1 ));
     
-    left->setText( test.readEntry( "Symbol" ) );
-    middle->setText( test.readEntry( "Name" ) );
+    left->setText( configobj.readEntry( "Symbol" ) );
+    middle->setText( configobj.readEntry( "Name" ) );
     right->setText( QString::number( el+1 ) );
 
-    QString weight = test.readEntry( "Weight" );
+    QString weight = configobj.readEntry( "Weight" );
     DataTable->setText( 0,1,weight ); 
-    QString block = test.readEntry( "Block" );
+    QString block = configobj.readEntry( "Block" );
     DataTable->setText( 1,1,block ); 
-    QString grp = test.readEntry( "Group" );
+    QString grp = configobj.readEntry( "Group" );
     DataTable->setText( 2,1,grp ); 
-    QString en = test.readEntry( "EN" );
+    QString en = configobj.readEntry( "EN" );
     DataTable->setText( 3,1,en ); 
-    QString ar = test.readEntry( "AR" );
+    QString ar = configobj.readEntry( "AR" );
     DataTable->setText( 4,1,ar ) ; 
-    QString ion = test.readEntry( "IE" );
+    QString ion = configobj.readEntry( "IE" );
     DataTable->setText( 5,1,ion ); 
-    QString dens = test.readEntry( "Density" );
+    QString dens = configobj.readEntry( "Density" );
     DataTable->setText( 6,1,dens ); 
-    QString bp = test.readEntry( "BP" );
+    QString bp = configobj.readEntry( "BP" );
     DataTable->setText( 7,1,bp ); 
-    QString mp = test.readEntry( "MP" );
+    QString mp = configobj.readEntry( "MP" );
     DataTable->setText( 8,1,mp ); 
 }
 
