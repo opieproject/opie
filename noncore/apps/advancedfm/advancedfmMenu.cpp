@@ -103,13 +103,21 @@ void AdvancedFm::showRemoteHidden() {
   populateRemoteView();
 }
 
+QString AdvancedFm::dealWithSymName(const QString &fileName) {
+        QString strItem = fileName;
+        return  strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
+}
+
 void AdvancedFm::runThis() {
   QString fs;
   if (TabWidget->getCurrentTab() == 0) {
     QString curFile = Local_View->currentItem()->text(0);
+    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+        curFile = dealWithSymName((const QString&)curFile);
+
     if(curFile != "../") {
 
-      fs= getFileSystemType((const QString &) currentDir.canonicalPath());
+      fs = getFileSystemType((const QString &) currentDir.canonicalPath());
       QFileInfo fileInfo( currentDir.canonicalPath()+"/"+curFile);
       qDebug( fileInfo.owner());
       if( (fileInfo.permission( QFileInfo::ExeUser)
@@ -132,6 +140,8 @@ void AdvancedFm::runThis() {
   } else {
     QString curFile = Remote_View->currentItem()->text(0);
     if(curFile != "../") {
+    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+        curFile = dealWithSymName((const QString&)curFile);
 
       fs= getFileSystemType((const QString &) currentRemoteDir.canonicalPath());
       qDebug("Filesystemtype is "+fs);
@@ -160,6 +170,8 @@ void AdvancedFm::runText() {
   if (TabWidget->getCurrentTab() == 0) {
     QString curFile = Local_View->currentItem()->text(0);
     if(curFile != "../") {
+    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+        curFile = dealWithSymName((const QString&)curFile);
       curFile =  currentDir.canonicalPath()+"/"+curFile;
       QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
       e << curFile;
@@ -168,6 +180,8 @@ void AdvancedFm::runText() {
     QString curFile = Remote_View->currentItem()->text(0);
     if(curFile != "../") {
       curFile =  currentRemoteDir.canonicalPath()+"/"+curFile;
+    if( curFile.find("@",0,TRUE) !=-1 || curFile.find("->",0,TRUE) !=-1 )  //if symlink
+        curFile = dealWithSymName((const QString&)curFile);
       DocLnk nf(curFile);
       QCopEnvelope e("QPE/Application/textedit", "setDocument(QString)" );
       e << curFile;
@@ -482,7 +496,7 @@ void AdvancedFm::copy() {
               }
               f.remove();                 
           }
-          if(!copyFile(destFile, curFile) ) {
+          if(!copyFile( curFile, destFile) ) {
               QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
           return;
         }
@@ -513,7 +527,7 @@ void AdvancedFm::copy() {
           };
             f.remove();
         }
-        if(!copyFile(destFile, curFile) ) {
+        if(!copyFile( curFile, destFile) ) {
           QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                +curFile +tr("to\n")+destFile);
           return;
@@ -561,7 +575,7 @@ void AdvancedFm::copyAs() {
             break;
           };
         }
-        if(!copyFile(destFile, curFile) ) {
+        if(!copyFile( curFile,destFile) ) {
           QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                +curFile +tr("to\n")+destFile);
           return;
@@ -601,7 +615,7 @@ void AdvancedFm::copyAs() {
             break;
           };
         }
-        if(!copyFile(destFile, curFile) ) {
+        if(!copyFile( curFile,destFile) ) {
           QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                +curFile +tr("to\n")+destFile);
           return;
@@ -651,7 +665,7 @@ void AdvancedFm::copySameDir() {
             break;
           };
         }
-        if(!copyFile(destFile, curFile) ) {
+        if(!copyFile( curFile,destFile) ) {
           QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                +curFile +tr("to\n")+destFile);
           return;
@@ -689,7 +703,7 @@ void AdvancedFm::copySameDir() {
             break;
           };
         }
-        if(!copyFile(destFile, curFile) ) {
+        if(!copyFile( curFile,destFile) ) {
           QMessageBox::message("AdvancedFm",tr("Could not copy\n")
                                +curFile +tr("to\n")+destFile);
           return;
@@ -730,7 +744,7 @@ void AdvancedFm::move() {
 
         QFile f( curFile);
         if( f.exists()) {
-          if(!copyFile( destFile, curFile) ) {
+          if(!copyFile(  curFile,destFile) ) {
             QMessageBox::message(tr("Note"),tr("Could not move\n")+curFile);
             return;
           } else
@@ -762,7 +776,7 @@ void AdvancedFm::move() {
 
         QFile f( curFile);
         if( f.exists()) {
-          if(!copyFile( destFile, curFile) ) {
+          if(!copyFile( curFile, destFile) ) {
             QMessageBox::message(tr("Note"),tr("Could not move\n") + curFile);
             return;
           } else
@@ -776,7 +790,7 @@ void AdvancedFm::move() {
   }
 }
 
-bool AdvancedFm::copyFile( const QString & dest, const QString & src ) {
+bool AdvancedFm::copyFile( const QString & src, const QString & dest ) {
   char bf[ 50000 ];
   int  bytesRead;
   bool success = TRUE;

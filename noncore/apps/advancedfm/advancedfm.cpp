@@ -315,7 +315,8 @@ void AdvancedFm::localListClicked(QListViewItem *selectedItem) {
     QString strSize=selectedItem->text(1);
     strSize=strSize.stripWhiteSpace();
     if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
-      QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
+        QString strItem2 = dealWithSymName((const QString&)strItem);
+//      QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
       if(QDir(strItem2).exists() ) {
         currentDir.cd(strItem2, TRUE);
         populateLocalView();
@@ -361,7 +362,8 @@ void AdvancedFm::remoteListClicked(QListViewItem *selectedItem) {
     QString strSize=selectedItem->text(1);
     strSize=strSize.stripWhiteSpace();
     if(strItem.find("@",0,TRUE) !=-1 || strItem.find("->",0,TRUE) !=-1 ) { //if symlink
-      QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
+        QString strItem2 = dealWithSymName((const QString&)strItem);
+//      QString strItem2 = strItem.right( (strItem.length() - strItem.find("->",0,TRUE)) - 4);
         currentRemoteDir.cd(strItem2, TRUE);
         populateRemoteView();
     } else { // not a symlink
@@ -461,7 +463,7 @@ void  AdvancedFm::currentPathComboChanged() {
 }
 
 void  AdvancedFm::fillCombo(const QString &currentPath) {
-
+    qDebug("%d",TabWidget->getCurrentTab());
   if (TabWidget->getCurrentTab() == 0) {
 //  if (TabWidget->currentPageIndex() == 0) {
     currentPathCombo->lineEdit()->setText( currentPath);

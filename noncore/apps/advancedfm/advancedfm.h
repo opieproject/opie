@@ -124,6 +124,7 @@ protected:
   QString getDiskSpace(const QString &);
   void parsetab(const QString &fileName);
   QString checkDiskSpace(const QString &);
+  QString dealWithSymName(const QString &);
   
 protected slots:
   void showFileMenu();
