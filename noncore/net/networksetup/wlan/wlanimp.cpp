@@ -16,33 +16,34 @@
 #include <qcheckbox.h>
 #include <qregexp.h>
 
-WLANImp::WLANImp( Config &cfg, QWidget* parent, const char* name):WLAN(parent, name),config(cfg){
+WLANImp::WLANImp( QWidget* parent, const char* name):WLAN(parent, name){
+  config = new Config("wireless");
   readConfig();
 }
 
 void WLANImp::readConfig()
 {
     qWarning( "WLANImp::readConfig() called." );
-    config.setGroup( "Properties" );
-    QString ssid = config.readEntry( "SSID", "any" );
+    config->setGroup( "Properties" );
+    QString ssid = config->readEntry( "SSID", "any" );
     if( ssid == "any" || ssid == "ANY" ){
         essNon->setChecked( true );
     } else {
         essSpecific->setChecked( true );
         essSpecificLineEdit->setText( ssid );
     }
-    QString mode = config.readEntry( "Mode", "Managed" );
+    QString mode = config->readEntry( "Mode", "Managed" );
     if( mode == "adhoc" ) {
         network802->setChecked( true );
     } else {
         networkInfrastructure->setChecked( true );
     }
-    networkChannel->setValue( config.readNumEntry( "CHANNEL", 1 ) );
-//    config.readEntry( "RATE", "auto" );
-    config.readEntry( "dot11PrivacyInvoked" ) == "true" ? wepEnabled->setChecked( true ) : wepEnabled->setChecked( false );
-    config.readEntry( "AuthType", "opensystem" );
-    config.readEntry( "PRIV_KEY128", "false" ) == "false" ? key40->setChecked( true ) : key128->setChecked( true );
-    int defaultkey = config.readNumEntry( "dot11WEPDefaultKeyID", 0 );
+    networkChannel->setValue( config->readNumEntry( "CHANNEL", 1 ) );
+//    config->readEntry( "RATE", "auto" );
+    config->readEntry( "dot11PrivacyInvoked" ) == "true" ? wepEnabled->setChecked( true ) : wepEnabled->setChecked( false );
+    config->readEntry( "AuthType", "opensystem" );
+    config->readEntry( "PRIV_KEY128", "false" ) == "false" ? key40->setChecked( true ) : key128->setChecked( true );
+    int defaultkey = config->readNumEntry( "dot11WEPDefaultKeyID", 0 );
     switch( defaultkey ){
     case 0:
         keyRadio0->setChecked( true );
@@ -57,46 +58,46 @@ void WLANImp::readConfig()
         keyRadio3->setChecked( true );
 	break;
     }
-    keyLineEdit0->setText(config.readEntry( "dot11WEPDefaultKey0" ));
-    keyLineEdit1->setText(config.readEntry( "dot11WEPDefaultKey1" ));
-    keyLineEdit2->setText(config.readEntry( "dot11WEPDefaultKey2" ));
-    keyLineEdit3->setText(config.readEntry( "dot11WEPDefaultKey3" ));
+    keyLineEdit0->setText(config->readEntry( "dot11WEPDefaultKey0" ));
+    keyLineEdit1->setText(config->readEntry( "dot11WEPDefaultKey1" ));
+    keyLineEdit2->setText(config->readEntry( "dot11WEPDefaultKey2" ));
+    keyLineEdit3->setText(config->readEntry( "dot11WEPDefaultKey3" ));
     return;
 }
 
 bool WLANImp::writeConfig()
 {
     qWarning( "WLANImp::writeConfig() called." );
-    config.setGroup( "Properties" );
+    config->setGroup( "Properties" );
     if( essNon->isChecked() ) {
-        config.writeEntry( "SSID", "any" );
+        config->writeEntry( "SSID", "any" );
     } else {
-        config.writeEntry( "SSID", essSpecificLineEdit->text() );
+        config->writeEntry( "SSID", essSpecificLineEdit->text() );
     }
     if( networkInfrastructure->isChecked() ){
-        config.writeEntry( "Mode", "Managed" );
+        config->writeEntry( "Mode", "Managed" );
     } else if( network802->isChecked() ){
-        config.writeEntry( "Mode", "adhoc" );
+        config->writeEntry( "Mode", "adhoc" );
     }
-    config.writeEntry( "CHANNEL", networkChannel->value() );
-//    config.readEntry( "RATE", "auto" );
-    wepEnabled->isChecked() ? config.writeEntry( "dot11PrivacyInvoked", "true" ) : config.writeEntry( "dot11PrivacyInvoked", "false" );
-    authOpen->isChecked() ? config.writeEntry( "AuthType", "opensystem" ) : config.writeEntry( "AuthType", "sharedkey" );
-    key40->isChecked() ? config.writeEntry( "PRIV_KEY128", "false" ) : config.writeEntry( "PRIV_KEY128", "true" );
+    config->writeEntry( "CHANNEL", networkChannel->value() );
+//    config->readEntry( "RATE", "auto" );
+    wepEnabled->isChecked() ? config->writeEntry( "dot11PrivacyInvoked", "true" ) : config->writeEntry( "dot11PrivacyInvoked", "false" );
+    authOpen->isChecked() ? config->writeEntry( "AuthType", "opensystem" ) : config->writeEntry( "AuthType", "sharedkey" );
+    key40->isChecked() ? config->writeEntry( "PRIV_KEY128", "false" ) : config->writeEntry( "PRIV_KEY128", "true" );
     if( keyRadio0->isChecked() ){
-        config.writeEntry( "dot11WEPDefaultKeyID", 0 );
+        config->writeEntry( "dot11WEPDefaultKeyID", 0 );
     } else if( keyRadio1->isChecked() ){
-        config.writeEntry( "dot11WEPDefaultKeyID", 1 );
+        config->writeEntry( "dot11WEPDefaultKeyID", 1 );
     } else if( keyRadio2->isChecked() ){
-        config.writeEntry( "dot11WEPDefaultKeyID", 2 );
+        config->writeEntry( "dot11WEPDefaultKeyID", 2 );
     } else if( keyRadio3->isChecked() ){
-        config.writeEntry( "dot11WEPDefaultKeyID", 3 );
+        config->writeEntry( "dot11WEPDefaultKeyID", 3 );
     }
-    config.writeEntry( "dot11WEPDefaultKey0", keyLineEdit0->text() );
-    config.writeEntry( "dot11WEPDefaultKey1", keyLineEdit1->text() );
-    config.writeEntry( "dot11WEPDefaultKey2", keyLineEdit2->text() );
-    config.writeEntry( "dot11WEPDefaultKey3", keyLineEdit3->text() );
-    return writeWirelessOpts( config );
+    config->writeEntry( "dot11WEPDefaultKey0", keyLineEdit0->text() );
+    config->writeEntry( "dot11WEPDefaultKey1", keyLineEdit1->text() );
+    config->writeEntry( "dot11WEPDefaultKey2", keyLineEdit2->text() );
+    config->writeEntry( "dot11WEPDefaultKey3", keyLineEdit3->text() );
+    return writeWirelessOpts( );
 }
 
 /**
@@ -113,7 +114,7 @@ void WLANImp::done ( int r )
 	close ( );
 }
 
-bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
+bool WLANImp::writeWirelessOpts( QString scheme )
 {
     qWarning( "WLANImp::writeWirelessOpts entered." );
     QString prev = "/etc/pcmcia/wireless.opts";
@@ -131,7 +132,7 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
     QTextStream in( &prevFile );
     QTextStream out( &tmpFile );
 
-    config.setGroup("Properties");
+    config->setGroup("Properties");
     
     QString line;
     bool found=false;
@@ -159,7 +160,7 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
 		    static const char* txtfields[] = {
 			0
 		    };
-		    QString readmode = config.readEntry( "Mode", "Managed" );
+		    QString readmode = config->readEntry( "Mode", "Managed" );
 		    QString mode;
 		    if( readmode == "Managed" ){
 			mode = readmode;
@@ -168,7 +169,7 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
 		    }
 		    QString key;
 		    if( wepEnabled->isChecked() ){
-			int defaultkey = config.readNumEntry( "dot11WEPDefaultKeyID", 0 );
+			int defaultkey = config->readNumEntry( "dot11WEPDefaultKeyID", 0 );
 			switch( defaultkey ){
 			    case 0:
 				key += keyLineEdit0->text();
@@ -183,20 +184,20 @@ bool WLANImp::writeWirelessOpts( Config &config, QString scheme )
 				key += keyLineEdit3->text();
 				break;
 			}
-		        if( config.readEntry( "AuthType", "opensystem" ) == "opensystem")
+		        if( config->readEntry( "AuthType", "opensystem" ) == "opensystem")
 			    key += " open";
 		    }
 		    out << scheme << ",*,*,*)" << "\n"
-			<< "    ESSID=" << Global::shellQuote( config.readEntry( "SSID", "any" ) ) << "\n"
+			<< "    ESSID=" << Global::shellQuote( config->readEntry( "SSID", "any" ) ) << "\n"
 			<< "    MODE=" << mode << "\n"
 			<< "    KEY=" << Global::shellQuote( key ) << "\n"
 			<< "    RATE=" << "auto" << "\n"
 			;
 			if( mode != "Managed"  )
-				out << "    CHANNEL=" << config.readNumEntry( "CHANNEL", 1 ) << "\n";
+				out << "    CHANNEL=" << config->readNumEntry( "CHANNEL", 1 ) << "\n";
 		    const char** f = txtfields;
 		    while (*f) {
-			out << "    " << *f << "=" << config.readEntry(*f,"") << "\n";
+			out << "    " << *f << "=" << config->readEntry(*f,"") << "\n";
 			++f;
 		    }
 		    out << "    ;;\n";
