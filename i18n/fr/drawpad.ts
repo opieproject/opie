@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>DrawPad</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Page</source>
@@ -131,7 +131,8 @@
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous supprimer
+toutes les pages ?</translation>
     </message>
     <message>
         <source>Clear Page</source>
@@ -140,7 +141,8 @@ all the pages?</source>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous effacer
+la page actuelle ?</translation>
     </message>
     <message>
         <source>Delete Page</source>
@@ -149,7 +151,8 @@ the current page?</source>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous supprimer
+la page actuelle ?</translation>
     </message>
 </context>
 <context>
@@ -172,7 +175,7 @@ the current page?</source>
     </message>
     <message>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation>Plage</translation>
     </message>
     <message>
         <source>To:</source>
