@@ -13,11 +13,14 @@
  * ToDo:
  *
  * =====================================================================
- * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.5 2002-12-07 13:26:22 eilers Exp $
+ * Version: $Id: ocontactaccessbackend_vcard.cpp,v 1.6 2003-01-13 15:49:31 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactaccessbackend_vcard.cpp,v $
- * Revision 1.5  2002-12-07 13:26:22  eilers
+ * Revision 1.6  2003-01-13 15:49:31  eilers
+ * Fixing crash when businesscard.vcf is missing..
+ *
+ * Revision 1.5  2002/12/07 13:26:22  eilers
  * Fixing bug in storing anniversary..
  *
  * Revision 1.4  2002/11/13 14:14:51  eilers
@@ -55,9 +58,15 @@ bool OContactAccessBackend_VCard::load ()
 	m_dirty = false;
 	
 	VObject* obj = 0l;
-	obj = Parse_MIME_FromFileName( QFile::encodeName(m_file).data() );
-	if ( !obj )
+
+	if ( QFile( m_file ).exists() ){
+		obj = Parse_MIME_FromFileName( QFile::encodeName(m_file).data() );
+		if ( !obj )
+			return false;
+	}else{
+		qWarning("File \"%s\" not found !", m_file.latin1() );
 		return false;
+	}
 
 	while ( obj ) {
 		OContact con = parseVObject( obj );
