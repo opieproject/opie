@@ -62,16 +62,13 @@ class OPimContactAccessBackend_XML : public OPimContactAccessBackend {
 
 	OPimContact find ( int uid ) const;
 
-	QArray<int> queryByExample ( const OPimContact &query, int settings, const QDateTime& d = QDateTime() );
-
+	QArray<int> queryByExample ( const OPimContact &query, int settings, const QDateTime& d )const;
 	QArray<int> matchRegexp(  const QRegExp &r ) const;
 
 	const uint querySettings();
 
 	bool hasQuerySettings (uint querySettings) const;
 
-	// Currently only asc implemented..
-	QArray<int> sorted( bool asc,  int , int ,  int );
 	bool add ( const OPimContact &newcontact );
 
 	bool replace ( const OPimContact &contact );

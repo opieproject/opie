@@ -108,7 +108,6 @@ bool OPimContactAccessBackend_XML::save()
     // Write all contacts
     QListIterator<OPimContact> it( m_contactList );
     for ( ; it.current(); ++it ) {
-        // owarn << " Uid " << (*it)->uid() << " at Offset: " << idx_offset << "" << oendl;
         out += "<Contact ";
         (*it)->save( out );
         out += "/>\n";
@@ -137,8 +136,6 @@ bool OPimContactAccessBackend_XML::save()
     // move the file over, I'm just going to use the system call
     // because, I don't feel like using QDir.
     if ( ::rename( strNewFile.latin1(), m_fileName.latin1() ) < 0 ) {
-        owarn << "problem renaming file " << strNewFile << " to " << m_journalName
-              << ", errno: " << errno << oendl;
         // remove the tmp file...
         QFile::remove( strNewFile );
     }
@@ -213,9 +210,8 @@ OPimContact OPimContactAccessBackend_XML::find ( int uid ) const
 }
 
 QArray<int> OPimContactAccessBackend_XML::queryByExample ( const OPimContact &query, int settings,
-                            const QDateTime& d )
+                            const QDateTime& d )const
 {
-
     QArray<int> m_currentQuery( m_contactList.count() );
     QListIterator<OPimContact> it( m_contactList );
     uint arraycounter = 0;
@@ -278,13 +274,10 @@ QArray<int> OPimContactAccessBackend_XML::queryByExample ( const OPimContact &qu
                             // Check whether the birthday/anniversary date is between
                             // the current/given date and the maximum date
                             // ( maximum time range ) !
-                            owarn << "Checking if " << checkDate->toString() << " is between " << current.toString()
-                                  << " and " << queryDate->toString() << " ! " << oendl;
                             if ( current.daysTo( *queryDate ) >= 0 ){
                                 if ( !( ( *checkDate >= current ) &&
                                     ( *checkDate <= *queryDate ) ) ){
                                     allcorrect = false;
-                                    owarn << " Nope!.." << oendl;
                                 }
                             }
                         }
@@ -430,6 +423,7 @@ bool OPimContactAccessBackend_XML::hasQuerySettings (uint querySettings) const
     }
 }
 
+#if 0
 // Currently only asc implemented..
 QArray<int> OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
 {
@@ -458,10 +452,11 @@ QArray<int> OPimContactAccessBackend_XML::sorted( bool asc,  int , int ,  int )
     return m_currentQuery;
 
 }
+#endif
+
 
 bool OPimContactAccessBackend_XML::add ( const OPimContact &newcontact )
 {
-    //owarn << "odefaultbackend: ACTION::ADD" << oendl;
     updateJournal (newcontact, ACTION_ADD);
     addContact_p( newcontact );
 
@@ -484,8 +479,6 @@ bool OPimContactAccessBackend_XML::replace ( const OPimContact &contact )
         m_contactList.append ( newCont );
         m_uidToContact.remove( QString().setNum( contact.uid() ) );
         m_uidToContact.insert( QString().setNum( newCont->uid() ), newCont );
-
-        owarn << "Nur zur Sicherheit: " << contact.uid() << " == " << newCont->uid() << " ?" << oendl;
 
         return true;
     } else
@@ -591,22 +584,17 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
     dict.insert( "action", new int(JOURNALACTION) );
     dict.insert( "actionrow", new int(JOURNALROW) );
 
-    //owarn << "OPimContactDefaultBackEnd::loading " << filename << "" << oendl;
-
     XMLElement *root = XMLElement::load( filename );
     if(root != 0l ){ // start parsing
         /* Parse all XML-Elements and put the data into the
          * Contact-Class
          */
         XMLElement *element = root->firstChild();
-        //owarn << "OPimContactAccess::load tagName(): " << root->tagName() << "" << oendl;
         element = element ? element->firstChild() : 0;
 
         /* Search Tag "Contacts" which is the parent of all Contacts */
         while( element && !isJournal ){
             if( element->tagName() != QString::fromLatin1("Contacts") ){
-                //owarn << "OPimContactDefBack::Searching for Tag \"Contacts\"! Found: "
-                //      << element->tagName() << oendl;
                 element = element->nextChild();
             } else {
                 element = element->firstChild();
@@ -616,16 +604,12 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
         /* Parse all Contacts and ignore unknown tags */
         while( element ){
             if( element->tagName() != QString::fromLatin1("Contact") ){
-                //owarn << "OPimContactDefBack::Searching for Tag \"Contact\"! Found: "
-                //      << element->tagName() << oendl;
                 element = element->nextChild();
                 continue;
             }
             /* Found alement with tagname "contact", now parse and store all
              * attributes contained
              */
-            //owarn << "OPimContactDefBack::load element tagName() : "
-            //      << element->tagName() << oendl;
             QString dummy;
             foundAction = false;
 
@@ -634,12 +618,9 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
             contactMap.clear();
             customMap.clear();
             for( it = aMap.begin(); it != aMap.end(); ++it ){
-                // owarn << "Read Attribute: " << it.key() << "=" << it.data() << oendl;
-
                 int *find = dict[ it.key() ];
                 /* Unknown attributes will be stored as "Custom" elements */
                 if ( !find ) {
-                    // owarn << "Attribute " << it.key() << " not known." << oendl;
                     //contact.setCustomField(it.key(), it.data());
                     customMap.insert( it.key(),  it.data() );
                     continue;
@@ -704,10 +685,8 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
             element = element->nextChild();
         }
     }else {
-        owarn << "ODefBack::could not load" << oendl;
     }
     delete root;
-    owarn << "returning from loading" << oendl;
     return true;
 }
 

@@ -59,12 +59,9 @@ class OPimContactAccessBackend_VCard : public OPimContactAccessBackend {
 
 	OPimContact find ( int uid ) const;
 	QArray<int> allRecords() const;
-	QArray<int> queryByExample ( const OPimContact &query, int settings, const QDateTime& d = QDateTime() );
-	QArray<int> matchRegexp(  const QRegExp &r ) const;
 
 	const uint querySettings();
 	bool hasQuerySettings (uint querySettings) const;
-	QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat );
 	bool wasChangedExternally();
 
 private:

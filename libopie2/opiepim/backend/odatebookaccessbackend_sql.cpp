@@ -167,8 +167,6 @@ bool ODateBookAccessBackend_SQL::load()
 
     qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), priority INTEGER, value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
 
-    owarn << "command: " << qu << "" << oendl;
-
     OSQLRawQuery raw( qu );
     OSQLResult res = m_driver->query( &raw );
     if ( res.state() != OSQLResult::Success )
@@ -288,7 +286,6 @@ bool ODateBookAccessBackend_SQL::add( const OPimEvent& ev )
             + it.data() //.latin1()
             + "');";
     }
-    owarn << "add " << qu << "" << oendl;
 
     OSQLRawQuery raw( qu );
     OSQLResult res = m_driver->query( &raw );
@@ -328,10 +325,6 @@ bool ODateBookAccessBackend_SQL::replace( const OPimEvent& ev )
     return add( ev );
 }
 
-QArray<int> ODateBookAccessBackend_SQL::rawEvents()const
-{
-    return allRecords();
-}
 
 QArray<int> ODateBookAccessBackend_SQL::rawRepeats()const
 {
@@ -359,7 +352,7 @@ QArray<int> ODateBookAccessBackend_SQL::nonRepeats()const
     return extractUids( res );
 }
 
-OPimEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()
+OPimEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()const
 {
     QArray<int> nonRepUids = nonRepeats();
     OPimEvent::ValueList list;
@@ -371,7 +364,7 @@ OPimEvent::ValueList ODateBookAccessBackend_SQL::directNonRepeats()
     return list;
 
 }
-OPimEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats()
+OPimEvent::ValueList ODateBookAccessBackend_SQL::directRawRepeats()const
 {
     QArray<int> rawRepUids = rawRepeats();
     OPimEvent::ValueList list;
@@ -410,20 +403,17 @@ QArray<int> ODateBookAccessBackend_SQL::matchRegexp(  const QRegExp &r ) const
 
 QArray<int> ODateBookAccessBackend_SQL::extractUids( OSQLResult& res ) const
 {
-    owarn << "extractUids" << oendl;
     QTime t;
     t.start();
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it;
     QArray<int> ints(list.count() );
-    owarn << " count = " << list.count() << "" << oendl;
 
     int i = 0;
     for (it = list.begin(); it != list.end(); ++it ) {
         ints[i] =  (*it).data("uid").toInt();
         i++;
     }
-    owarn << "extractUids ready: count2 = " << i << " needs " << t.elapsed() << " ms" << oendl;
 
     return ints;
 
@@ -440,7 +430,6 @@ QMap<QString, QString> ODateBookAccessBackend_SQL::requestCustom( int uid ) cons
     OSQLResult res_custom = m_driver->query( &query );
 
     if ( res_custom.state() == OSQLResult::Failure ) {
-        owarn << "OSQLResult::Failure in find query !!" << oendl;
         QMap<QString, QString> empty;
         return empty;
     }

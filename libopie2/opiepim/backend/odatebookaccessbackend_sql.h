@@ -66,12 +66,11 @@ public:
     bool remove( int uid );
     bool replace( const OPimEvent& ev );
 
-    QArray<UID> rawEvents()const;
     QArray<UID> rawRepeats()const;
     QArray<UID> nonRepeats()const;
 
-    OPimEvent::ValueList directNonRepeats();
-    OPimEvent::ValueList directRawRepeats();
+    OPimEvent::ValueList directNonRepeats()const;
+    OPimEvent::ValueList directRawRepeats()const;
 
 private:
     bool loadFile();

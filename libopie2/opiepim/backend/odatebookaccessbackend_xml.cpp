@@ -122,7 +122,6 @@ namespace {
 
     // FIXME: Use OPimEvent::toMap() here !! (eilers)
     static void save( const OPimEvent& ev, QString& buf ) {
-        owarn << "Saving " << ev.uid() << " " << ev.description() << "" << oendl;
         buf += " description=\"" + Qtopia::escapeString(ev.description() ) + "\"";
         if (!ev.location().isEmpty() )
             buf += " location=\"" + Qtopia::escapeString(ev.location() ) + "\"";
@@ -326,9 +325,7 @@ bool ODateBookAccessBackend_XML::replace( const OPimEvent& ev ) {
     replace( ev.uid() ); // ??? Shouldn't this be "remove( ev.uid() ) ??? (eilers)
     return add( ev );
 }
-QArray<int> ODateBookAccessBackend_XML::rawEvents()const {
-    return allRecords();
-}
+
 QArray<int> ODateBookAccessBackend_XML::rawRepeats()const {
     QArray<int> ints( m_rep.count() );
     uint i = 0;
@@ -353,7 +350,7 @@ QArray<int> ODateBookAccessBackend_XML::nonRepeats()const {
 
     return ints;
 }
-OPimEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats() {
+OPimEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats()const {
     OPimEvent::ValueList list;
     QMap<int, OPimEvent>::ConstIterator it;
     for (it = m_raw.begin(); it != m_raw.end(); ++it )
@@ -361,7 +358,7 @@ OPimEvent::ValueList ODateBookAccessBackend_XML::directNonRepeats() {
 
     return list;
 }
-OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats() {
+OPimEvent::ValueList ODateBookAccessBackend_XML::directRawRepeats()const {
     OPimEvent::ValueList list;
     QMap<int, OPimEvent>::ConstIterator it;
     for (it = m_rep.begin(); it != m_rep.end(); ++it )
@@ -539,7 +536,6 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
         ev.notifiers().add( al );
     }
     if ( m_raw.contains( ev.uid() ) || m_rep.contains( ev.uid() ) ) {
-        owarn << "already contains assign uid" << oendl;
         ev.setUid( 1 );
     }
 
@@ -550,7 +546,6 @@ void ODateBookAccessBackend_XML::finalizeRecord( OPimEvent& ev ) {
 
 }
 void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& value) {
-//    owarn << " setting " << value << "" << oendl;
     switch( id ) {
     case FDescription:
         e.setDescription( value );
@@ -634,7 +629,6 @@ void ODateBookAccessBackend_XML::setField( OPimEvent& e, int id, const QString& 
         QStringList list = QStringList::split(' ', value );
         for (QStringList::Iterator it = list.begin(); it != list.end(); ++it ) {
             QDate date( (*it).left(4).toInt(), (*it).mid(4, 2).toInt(), (*it).right(2).toInt() );
-            owarn << "adding exception " << date.toString() << "" << oendl;
             recur()->exceptions().append( date );
         }
     }

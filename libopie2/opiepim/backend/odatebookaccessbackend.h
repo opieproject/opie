@@ -42,8 +42,6 @@ namespace Opie {
  */
 class ODateBookAccessBackend : public OPimAccessBackend<OPimEvent> {
 public:
-    typedef int UID;
-
     /**
      * c'tor without parameter
      */
@@ -52,36 +50,29 @@ public:
 
     /**
      * This method should return a list of UIDs containing
-     * all events. No filter should be applied
-     * @return list of events
-     */
-    virtual QArray<UID> rawEvents()const = 0;
-
-    /**
-     * This method should return a list of UIDs containing
      * all repeating events. No filter should be applied
      * @return list of repeating events
      */
-    virtual QArray<UID> rawRepeats()const = 0;
+    virtual UIDArray rawRepeats()const = 0;
 
     /**
      * This mthod should return a list of UIDs containing all non
      * repeating events. No filter should be applied
      * @return list of nonrepeating events
      */
-    virtual QArray<UID> nonRepeats() const = 0;
+    virtual UIDArray nonRepeats() const = 0;
 
     /**
      * If you do not want to implement the effectiveEvents methods below
      * you need to supply it with directNonRepeats.
      * This method can return empty lists if effectiveEvents is implememted
      */
-    virtual OPimEvent::ValueList directNonRepeats() = 0;
+    virtual OPimEvent::ValueList directNonRepeats()const = 0;
 
     /**
      * Same as above but return raw repeats!
      */
-    virtual OPimEvent::ValueList directRawRepeats() = 0;
+    virtual OPimEvent::ValueList directRawRepeats()const = 0;
 
     /* is implemented by default but you can reimplement it*/
     /**
@@ -89,27 +80,29 @@ public:
      * EffectiveEvents bases on the directNonRepeats and directRawRepeats. You may implement this method
      * yourself
      */
-    virtual OEffectiveEvent::ValueList effectiveEvents( const QDate& from, const QDate& to );
-
-    /**
-     * this is an overloaded member function
-     * @see effectiveEvents( const QDate& from, const QDate& to )
-     */
-    virtual OEffectiveEvent::ValueList effectiveEvents( const QDateTime& start );
-
-    /**
-     * Effective Events are special event occuring during a time frame. This method does calcualte
-     * EffectiveEvents bases on the directNonRepeats and directRawRepeats. You may implement this method
-     * yourself
-     */
-    virtual OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDate& from, const QDate& to );
+    virtual OPimBackendOccurrence::List effectiveNonRepeatingEvents( const QDate& from, const QDate& to )const;
 
     /**
      * this is an overloaded member function
      * @see effectiveNonRepeatingEvents( const QDate& from, const QDate& to )
      */
-    virtual OEffectiveEvent::ValueList effectiveNonRepeatingEvents( const QDateTime& start );
+    virtual OPimBackendOccurrence::List effectiveNonRepeatingEvents( const QDateTime& start )const;
 
+    /**
+     * Common and probably inefficent implementation
+     * for queryByExample, sorted
+     * and occurrences
+     */
+//@{
+    UIDArray queryByExample( const OPimEvent&, int settings, const QDateTime& d = QDateTime() )const;
+    UIDArray sorted( const UIDArray&, bool asc, int, int, const QArray<int>& )const;
+    OPimBackendOccurrence::List occurrences( const QDate&, const QDate& end )const;
+    OPimBackendOccurrence::List occurrences( const QDateTime& )const;
+//@}
+
+protected:
+    static OPimBackendOccurrence::List filterOccurrences(const OPimBackendOccurrence::List,
+                                                         const QDateTime& time );
 private:
     class Private;
     Private *d;

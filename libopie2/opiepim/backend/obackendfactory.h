@@ -62,9 +62,9 @@ using namespace Opie;
 using namespace Opie::Pim;
 
 namespace Opie {
-	
+
 class OBackendPrivate;
-	
+
 /**
  * This class is our factory. It will give us the default implementations
  * of at least Todolist, Contacts and Datebook. In the future this class will
@@ -84,8 +84,8 @@ class OBackendPrivate;
 	 class OBackendFactory
 	 {
 	 public:
-		 OBackendFactory() {};
-		 
+             OBackendFactory() {};
+
 		 /**
 		  * Returns a selected backend implementation
 		  * @param type the type of the backend
@@ -96,16 +96,18 @@ class OBackendPrivate;
 		  */
 		 static T* create( OPimGlobal::PimType type, OPimGlobal::DatabaseStyle database,
 				   const QString& appName, const QString& filename = QString::null ){
-			 owarn << "Selected backend for " << type << " is: " << database << oendl;
-			 // If we should use the dafult database style, we have to request it
+			owarn << "Selected backend for " << type << " is: " <<
+database << oendl;
+
+                        // If we should use the dafult database style, we have to request it
 			 OPimGlobal::DatabaseStyle use_database = database;
 			 if ( use_database == OPimGlobal::DEFAULT ){
 				 use_database = defaultDB( type );
 			 }
-			 
+
 			 switch ( type ){
 			 case OPimGlobal::TODOLIST:
-				 
+
 				 switch ( use_database ){
 				 default: // Use SQL if something weird is given.
 					 // Fall through !!
@@ -166,9 +168,9 @@ class OBackendPrivate;
 			 default:
 				 return (T*) NULL;
 			 }
-			 
+
 		 }
-		 
+
 		 /**
 		  * Returns the style of the default database which is used to contact PIM data.
 		  * @param type the type of the backend
@@ -189,27 +191,27 @@ class OBackendPrivate;
 			 default:
 				 group_name = "unknown";
 			 }
-			 
+
 			 Config config( "pimaccess" );
 			 config.setGroup ( group_name );
 			 QString db_String = config.readEntry( "usebackend", "xml" );
-			 
+
 			 QAsciiDict<int> dictDbTypes( OPimGlobal::_END_DatabaseStyle );
 			 dictDbTypes.setAutoDelete( TRUE );
-			 
+
 			 dictDbTypes.insert( "xml", new int (OPimGlobal::XML) );
 			 dictDbTypes.insert( "sql", new int (OPimGlobal::SQL) );
 			 dictDbTypes.insert( "vcard", new int (OPimGlobal::VCARD) );
-			 
+
 			 int* db_find = dictDbTypes[ db_String ];
-			 
+
 			 if ( !db_find )
 				 return OPimGlobal::UNKNOWN;
-			 
+
 			 return (OPimGlobal::DatabaseStyle) *db_find;
 		 }
-		 
-		 
+
+
 		 /**
 		  * Returns the default backend implementation for backendName. Which one is used, is defined
 		  * by the configfile "pimaccess.conf".
@@ -222,9 +224,9 @@ class OBackendPrivate;
 		 }
 	 private:
 		 OBackendPrivate* d;
-		 
+
 	 };
- 
+
 }
 
 #endif

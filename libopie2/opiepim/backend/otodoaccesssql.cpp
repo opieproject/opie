@@ -455,7 +455,6 @@ QArray<int> OPimTodoAccessBackendSQL::queryByExample( const OPimTodo& , int, con
 OPimTodo OPimTodoAccessBackendSQL::find(int uid ) const{
     FindQuery query( uid );
     return parseResultAndCache( uid, m_driver->query(&query) );
-
 }
 
 // Remember: uid is already in the list of uids, called ints !
@@ -465,20 +464,18 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
     odebug << "searching for " << uid << "" << oendl;
     QArray<int> search( CACHE );
     uint size =0;
-    OPimTodo to;
 
     // we try to cache CACHE items
     switch( dir ) {
-        /* forward */
+    /* forward */
     case Frontend::Forward:
         for (uint i = cur; i < ints.count() && size < CACHE; i++ ) {
-            odebug << "size " << size << " " << ints[i] << "" << oendl;
             search[size] = ints[i];
             size++;
         }
         break;
-        /* reverse */
-    case Frontend::Reverse: 
+    /* reverse */
+    case Frontend::Reverse:
         for (uint i = cur; i != 0 && size <  CACHE; i-- ) {
             search[size] = ints[i];
             size++;
@@ -490,7 +487,7 @@ OPimTodo OPimTodoAccessBackendSQL::find( int uid, const QArray<int>& ints,
     FindQuery query( search );
     OSQLResult res = m_driver->query( &query  );
     if ( res.state() != OSQLResult::Success )
-        return to;
+        return OPimTodo();
 
     return parseResultAndCache( uid, res );
 }
@@ -507,6 +504,7 @@ bool OPimTodoAccessBackendSQL::add( const OPimTodo& t) {
 
     if ( res.state() == OSQLResult::Failure )
         return false;
+
     int c = m_uids.count();
     m_uids.resize( c+1 );
     m_uids[c] = t.uid();
@@ -534,16 +532,18 @@ bool OPimTodoAccessBackendSQL::replace( const OPimTodo& t) {
     m_dirty = false; // we changed some stuff but the UID stayed the same
     return b;
 }
-QArray<int> OPimTodoAccessBackendSQL::overDue() {
+QArray<int> OPimTodoAccessBackendSQL::overDue()const {
     OverDueQuery qu;
     return uids( m_driver->query(&qu ) );
 }
 QArray<int> OPimTodoAccessBackendSQL::effectiveToDos( const QDate& s,
                                                    const QDate& t,
-                                                   bool u) {
+                                                   bool u)const {
     EffQuery ef(s, t, u );
     return uids (m_driver->query(&ef) );
 }
+
+#if 0
 /*
  *
  */
@@ -560,13 +560,13 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
      *
      */
     /* Category */
-    if ( sortFilter & 1 ) {
+    if ( sortFilter & OPimTodoAccess::FilterCategory ) {
         QString str;
         if (cat != 0 ) str = QString::number( cat );
         query += " categories like '%" +str+"%' AND";
     }
     /* Show only overdue */
-    if ( sortFilter & 2 ) {
+    if ( sortFilter & OPimTodoAccess::OnlyOverDue ) {
         QDate date = QDate::currentDate();
         QString due;
         QString base;
@@ -577,7 +577,7 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
         query += " " + base + " AND";
     }
     /* not show completed */
-    if ( sortFilter & 4 ) {
+    if ( sortFilter & OPimTodoAccess::DoNotShowCompleted ) {
         query += " completed = 0 AND";
     }else{
        query += " ( completed = 1 OR  completed = 0) AND";
@@ -593,29 +593,31 @@ QArray<int> OPimTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
     query += "ORDER BY ";
     switch( sortOrder ) {
         /* completed */
-    case 0:
+    case OPimTodoAccess::Completed:
         query += "completed";
         break;
-    case 1:
+    case OPimTodoAccess::Priority:
         query += "priority";
         break;
-    case 2:
+    case OPimTodoAccess::SortSummary:
         query += "summary";
         break;
-    case 3:
+    case OPimTodoAccess::Deadline:
         query += "DueDate";
         break;
     }
 
-    if ( !asc ) {
-        odebug << "not ascending!" << oendl;
+    if ( !asc )
         query += " DESC";
-    }
+
 
     odebug << query << oendl;
     OSQLRawQuery raw(query );
     return uids( m_driver->query(&raw) );
 }
+#endif
+
+
 bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
     if ( str == "0-0-0" )
         return false;
@@ -629,6 +631,8 @@ bool OPimTodoAccessBackendSQL::date( QDate& da, const QString& str ) const{
         return true;
     }
 }
+
+
 OPimTodo OPimTodoAccessBackendSQL::parseResultAndCache( int uid, const OSQLResult& res ) const{
     if ( res.state() == OSQLResult::Failure ) {
         OPimTodo to;
@@ -639,30 +643,23 @@ OPimTodo OPimTodoAccessBackendSQL::parseResultAndCache( int uid, const OSQLResul
 
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it = list.begin();
-    odebug << "todo1" << oendl;
-    OPimTodo to = todo( (*it) );
-    cache( to );
-    ++it;
+    OPimTodo to, tmp;
 
     for ( ; it != list.end(); ++it ) {
-        odebug << "caching" << oendl;
-	OPimTodo newTodo = todo( (*it) );
+        OPimTodo newTodo = parse( (*it) );
         cache( newTodo );
 	if ( newTodo.uid() == uid )
 		retTodo = newTodo;
     }
     return retTodo;
 }
-OPimTodo OPimTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
-    odebug << "todo(ResultItem)" << oendl;
+OPimTodo OPimTodoAccessBackendSQL::parse( OSQLResultItem& item )const {
 
     // Request information from addressbook table and create the OPimTodo-object.
 
     bool hasDueDate = false; QDate dueDate = QDate::currentDate();
     hasDueDate = date( dueDate, item.data("DueDate") );
     QStringList cats = QStringList::split(";", item.data("categories") );
-
-    odebug << "Item is completed: " << item.data("completed").toInt() << "" << oendl;
 
     OPimTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
               cats, item.data("summary"), item.data("description"),
@@ -717,36 +714,8 @@ OPimTodo OPimTodoAccessBackendSQL::todo( int uid )const {
     FindQuery find( uid );
     return parseResultAndCache( uid, m_driver->query(&find) );
 }
-/*
- * update the dict
- */
-void OPimTodoAccessBackendSQL::fillDict() {
 
-#if 0
-    /* initialize dict */
-    /*
-     * UPDATE dict if you change anything!!!
-     * FIXME: Isn't this dict obsolete ? (eilers)
-     */
-    m_dict.setAutoDelete( TRUE );
-    m_dict.insert("Categories" ,     new int(OPimTodo::Category)         );
-    m_dict.insert("Uid" ,            new int(OPimTodo::Uid)              );
-    m_dict.insert("HasDate" ,        new int(OPimTodo::HasDate)          );
-    m_dict.insert("Completed" ,      new int(OPimTodo::Completed)        );
-    m_dict.insert("Description" ,    new int(OPimTodo::Description)      );
-    m_dict.insert("Summary" ,        new int(OPimTodo::Summary)          );
-    m_dict.insert("Priority" ,       new int(OPimTodo::Priority)         );
-    m_dict.insert("DateDay" ,        new int(OPimTodo::DateDay)          );
-    m_dict.insert("DateMonth" ,      new int(OPimTodo::DateMonth)        );
-    m_dict.insert("DateYear" ,       new int(OPimTodo::DateYear)         );
-    m_dict.insert("Progress" ,       new int(OPimTodo::Progress)         );
-    m_dict.insert("Completed",       new int(OPimTodo::Completed)        ); // Why twice ? (eilers)
-    m_dict.insert("CrossReference",  new int(OPimTodo::CrossReference)   );
-//    m_dict.insert("HasAlarmDateTime",new int(OPimTodo::HasAlarmDateTime) ); // old stuff (eilers)
-//    m_dict.insert("AlarmDateTime",   new int(OPimTodo::AlarmDateTime)    ); // old stuff (eilers)
 
-#endif
-}
 /*
  * need to be const so let's fool the
  * compiler :(
@@ -765,7 +734,6 @@ QArray<int> OPimTodoAccessBackendSQL::uids( const OSQLResult& res) const{
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it;
     QArray<int> ints(list.count() );
-    odebug << " count = " << list.count() << "" << oendl;
 
     int i = 0;
     for (it = list.begin(); it != list.end(); ++it ) {
@@ -777,47 +745,18 @@ QArray<int> OPimTodoAccessBackendSQL::uids( const OSQLResult& res) const{
 
 QArray<int> OPimTodoAccessBackendSQL::matchRegexp(  const QRegExp &r ) const
 {
-
-#if 0
-    QArray<int> empty;
-    return empty;
-
-#else
     QString qu = "SELECT uid FROM todolist WHERE (";
 
-    // Do it make sense to search other fields, too ?
+    // Does it make sense to search other fields, too ?
     qu += " rlike(\""+ r.pattern() + "\",\"description\") OR";
     qu += " rlike(\""+ r.pattern() + "\",\"summary\")";
 
     qu += ")";
 
-    odebug << "query: " << qu << "" << oendl;
-
     OSQLRawQuery raw( qu );
     OSQLResult res = m_driver->query( &raw );
 
     return uids( res );
-
-
-#endif
-
-}
-QBitArray OPimTodoAccessBackendSQL::supports()const {
-
-    return sup();
-}
-
-QBitArray OPimTodoAccessBackendSQL::sup() const{
-
-    QBitArray ar( OPimTodo::CompletedDate + 1 );
-    ar.fill( true );
-    ar[OPimTodo::CrossReference] = false;
-    ar[OPimTodo::State ] = false;
-    ar[OPimTodo::Reminders] = false;
-    ar[OPimTodo::Notifiers] = false;
-    ar[OPimTodo::Maintainer] = false;
-
-    return ar;
 }
 
 void OPimTodoAccessBackendSQL::removeAllCompleted(){
@@ -831,15 +770,13 @@ void OPimTodoAccessBackendSQL::removeAllCompleted(){
 
     QArray<int> completed_uids = uids( res );
 
-    odebug << "Number of completed: " << completed_uids.size() << "" << oendl;
-
     if ( completed_uids.size() == 0 )
         return;
 
     qu = "DELETE FROM todolist WHERE (";
     QString query;
 
-    for ( int i = 0; i < completed_uids.size(); i++ ){
+    for ( uint i = 0; i < completed_uids.size(); i++ ){
         if ( !query.isEmpty() )
             query += " OR ";
         query += QString( "uid = %1" ).arg( completed_uids[i] );
@@ -850,20 +787,19 @@ void OPimTodoAccessBackendSQL::removeAllCompleted(){
     qu += "DELETE FORM custom_data WHERE (";
     query = "";
 
-    for ( int i = 0; i < completed_uids.size(); i++ ){
+    for ( uint i = 0; i < completed_uids.size(); i++ ){
         if ( !query.isEmpty() )
             query += " OR ";
         query += QString( "uid = %1" ).arg( completed_uids[i] );
     }
     qu += query + " );";
 
-    odebug << "query: " << qu << "" << oendl;
-
     OSQLRawQuery raw2( qu );
     res = m_driver->query( &raw2 );
-    if ( res.state() == OSQLResult::Failure ) {
+
+    if ( res.state() == OSQLResult::Failure )
         owarn << "OPimTodoAccessBackendSQL::removeAllCompleted():Failure in query: " << qu << "" << oendl;
-    }
+
 }
 
 
@@ -876,15 +812,14 @@ QMap<QString, QString>  OPimTodoAccessBackendSQL::requestCustom( int uid ) const
 
     if ( res_custom.state() == OSQLResult::Failure ) {
         owarn << "OSQLResult::Failure in find query !!" << oendl;
-        QMap<QString, QString> empty;
-        return empty;
+        return QMap<QString, QString>();
     }
 
     OSQLResultItem::ValueList list = res_custom.results();
     OSQLResultItem::ValueList::Iterator it = list.begin();
-    for ( ; it != list.end(); ++it ) {
+    for ( ; it != list.end(); ++it )
         customMap.insert( (*it).data( "type" ), (*it).data( "value" ) );
-    }
+
 
     return customMap;
 }

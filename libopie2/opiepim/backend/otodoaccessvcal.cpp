@@ -92,7 +92,6 @@ namespace {
         // categories
         if((ob = isAPropertyOf( obj, VCCategoriesProp )) != 0 ){
             name = vObjectStringZValue( ob );
-            owarn << "Categories:" << name.data() << "" << oendl;
         }
 
         event.setUid( 1 );
@@ -233,10 +232,7 @@ bool OPimTodoAccessVCal::replace( const OPimTodo& to ) {
 OPimTodo OPimTodoAccessVCal::find(int uid )const {
     return m_map[uid];
 }
-QArray<int> OPimTodoAccessVCal::sorted( bool, int, int, int ) {
-    QArray<int> ar(0);
-    return ar;
-}
+
 QArray<int> OPimTodoAccessVCal::allRecords()const {
     QArray<int> ar( m_map.count() );
     QMap<int, OPimTodo>::ConstIterator it;
@@ -247,42 +243,16 @@ QArray<int> OPimTodoAccessVCal::allRecords()const {
     }
     return ar;
 }
-QArray<int> OPimTodoAccessVCal::matchRegexp(const QRegExp& /* r */)const {
-    QArray<int> ar(0);
-    return ar;
-}
-QArray<int> OPimTodoAccessVCal::queryByExample( const OPimTodo&, int, const QDateTime& ) {
-    QArray<int> ar(0);
-    return ar;
-}
+
 QArray<int> OPimTodoAccessVCal::effectiveToDos( const QDate& ,
                                              const QDate& ,
-                                             bool  ) {
+                                             bool  )const {
     QArray<int> ar(0);
     return ar;
 }
-QArray<int> OPimTodoAccessVCal::overDue() {
+
+QArray<int> OPimTodoAccessVCal::overDue()const {
     QArray<int> ar(0);
-    return ar;
-}
-QBitArray OPimTodoAccessVCal::supports()const {
-    static QBitArray ar = sup();
-
-    return ar;
-}
-QBitArray OPimTodoAccessVCal::sup() {
-    QBitArray ar ( OPimTodo::CompletedDate +1 );
-    ar.fill( true );
-
-    ar[OPimTodo::CrossReference] = false;
-    ar[OPimTodo::State ] = false;
-    ar[OPimTodo::Reminders] = false;
-    ar[OPimTodo::Notifiers] = false;
-    ar[OPimTodo::Maintainer] = false;
-    ar[OPimTodo::Progress] = false;
-    ar[OPimTodo::Alarms ] = false;
-    ar[OPimTodo::Recurrence] = false;
-
     return ar;
 }
 

@@ -63,8 +63,8 @@ public:
     QArray<UID> rawRepeats()const;
     QArray<UID> nonRepeats()const;
 
-    OPimEvent::ValueList directNonRepeats();
-    OPimEvent::ValueList directRawRepeats();
+    OPimEvent::ValueList directNonRepeats()const;
+    OPimEvent::ValueList directRawRepeats()const;
 
 private:
     bool m_changed :1 ;

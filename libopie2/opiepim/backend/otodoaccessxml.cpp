@@ -34,7 +34,10 @@
 #include <opie2/opimnotifymanager.h>
 #include <opie2/opimrecurrence.h>
 #include <opie2/otodoaccessxml.h>
+#include <opie2/otodoaccess.h>
 #include <opie2/odebug.h>
+
+#include <opie2/private/opimtodosortvector.h>
 
 #include <qpe/global.h>
 #include <qpe/stringutil.h>
@@ -142,7 +145,6 @@ bool OPimTodoAccessXML::load() {
     dict.insert("State",           new int(OPimTodo::State)            );
     dict.insert("Alarms",          new int(OPimTodo::Alarms)           );
     dict.insert("Reminders",       new int(OPimTodo::Reminders)        );
-    dict.insert("Notifiers",       new int(OPimTodo::Notifiers)        );
     dict.insert("Maintainer",      new int(OPimTodo::Maintainer)       );
     dict.insert("rtype",           new int(FRType)                  );
     dict.insert("rweekdays",       new int(FRWeekdays)              );
@@ -182,7 +184,6 @@ bool OPimTodoAccessXML::load() {
     while ( ( point = strstrlen( dt+i, len -i, collectionString, strLen ) ) != 0l ) {
         i = point -dt;
         i+= strLen;
-        owarn << "Found a start at " << i << " " << (point-dt) << "" << oendl;
 
         OPimTodo ev;
         m_year = m_month = m_day = 0;
@@ -238,7 +239,6 @@ bool OPimTodoAccessXML::load() {
         /*
          * now add it
          */
-        owarn << "End at " << i << "" << oendl;
         if (m_events.contains( ev.uid() ) || ev.uid() == 0) {
             ev.setUid( 1 );
             m_changed = true;
@@ -261,7 +261,6 @@ bool OPimTodoAccessXML::load() {
 
     munmap(map_addr, attribut.st_size );
 
-    owarn << "counts " << m_events.count() << " records loaded!" << oendl;
     return true;
 }
 bool OPimTodoAccessXML::reload() {
@@ -269,9 +268,7 @@ bool OPimTodoAccessXML::reload() {
     return load();
 }
 bool OPimTodoAccessXML::save() {
-//    owarn << "saving" << oendl;
     if (!m_opened || !m_changed ) {
-//        owarn << "not saving" << oendl;
         return true;
     }
     QString strNewFile = m_file + ".new";
@@ -312,7 +309,6 @@ bool OPimTodoAccessXML::save() {
     f.close();
 
     if( ::rename( strNewFile.latin1(),  m_file.latin1() ) < 0 ) {
-//        owarn << "error renaming" << oendl;
         QFile::remove( strNewFile );
     }
 
@@ -324,10 +320,10 @@ QArray<int> OPimTodoAccessXML::allRecords()const {
     QMap<int, OPimTodo>::ConstIterator it;
     int i = 0;
 
-    for ( it = m_events.begin(); it != m_events.end(); ++it ) {
-        ids[i] = it.key();
-        i++;
-    }
+    for ( it = m_events.begin(); it != m_events.end(); ++it )
+        ids[i++] = it.key();
+
+
     return ids;
 }
 QArray<int> OPimTodoAccessXML::queryByExample( const OPimTodo&, int, const QDateTime& ) {
@@ -350,7 +346,6 @@ void OPimTodoAccessXML::clear() {
     m_events.clear();
 }
 bool OPimTodoAccessXML::add( const OPimTodo& todo ) {
-//    owarn << "add" << oendl;
     m_changed = true;
     m_events.insert( todo.uid(), todo );
 
@@ -370,31 +365,27 @@ bool OPimTodoAccessXML::replace( const OPimTodo& todo) {
 }
 QArray<int> OPimTodoAccessXML::effectiveToDos( const QDate& start,
                                             const QDate& end,
-                                            bool includeNoDates ) {
+                                            bool includeNoDates )const {
     QArray<int> ids( m_events.count() );
-    QMap<int, OPimTodo>::Iterator it;
+    QMap<int, OPimTodo>::ConstIterator it;
 
     int i = 0;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
-        if ( !it.data().hasDueDate() ) {
-            if ( includeNoDates ) {
-                ids[i] = it.key();
-                i++;
-            }
+        if ( !it.data().hasDueDate() && includeNoDates) {
+                ids[i++] = it.key();
         }else if ( it.data().dueDate() >= start &&
                    it.data().dueDate() <= end ) {
-            ids[i] = it.key();
-            i++;
+            ids[i++] = it.key();
         }
     }
     ids.resize( i );
     return ids;
 }
-QArray<int> OPimTodoAccessXML::overDue() {
+QArray<int> OPimTodoAccessXML::overDue()const {
     QArray<int> ids( m_events.count() );
     int i = 0;
 
-    QMap<int, OPimTodo>::Iterator it;
+    QMap<int, OPimTodo>::ConstIterator it;
     for ( it = m_events.begin(); it != m_events.end(); ++it ) {
         if ( it.data().isOverdue() ) {
             ids[i] = it.key();
@@ -409,13 +400,11 @@ QArray<int> OPimTodoAccessXML::overDue() {
 /* private */
 void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
                             const QCString& attr, const QString& val) {
-//    owarn << "parse to do from XMLElement" << oendl;
 
     int *find=0;
 
     find = (*dict)[ attr.data() ];
     if (!find ) {
-//            owarn << "Unknown option" + it.key() << oendl;
         ev.setCustomField( attr, val );
         return;
     }
@@ -468,8 +457,6 @@ void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
         QStringList als = QStringList::split(";", val );
         for (QStringList::Iterator it = als.begin(); it != als.end(); ++it ) {
             QStringList alarm = QStringList::split(":", (*it), TRUE ); // allow empty
-            owarn << "alarm: " << alarm.join("___") << "" << oendl;
-            owarn << "alarm[0]: " << alarm[0] << " " << OPimDateConversion::dateTimeFromString( alarm[0] ).toString() << "" << oendl;
             OPimAlarm al( alarm[2].toInt(), OPimDateConversion::dateTimeFromString( alarm[0] ), alarm[1].toInt() );
             manager.add( al );
         }
@@ -542,11 +529,9 @@ void OPimTodoAccessXML::todo( QAsciiDict<int>* dict, OPimTodo& ev,
 namespace {
 QString customToXml(const QMap<QString, QString>& customMap )
 {
-    //owarn << QString("writing custom %1").arg(customMap.count()) << oendl;
     QString buf(" ");
     for ( QMap<QString, QString>::ConstIterator cit = customMap.begin();
         cit != customMap.end(); ++cit) {
-//  owarn << ".ITEM." << oendl;
     buf += cit.key();
     buf += "=\"";
     buf += Qtopia::escapeString(cit.data());
@@ -575,7 +560,6 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
         str += "DateMonth=\"" + QString::number( ev.dueDate().month() ) + "\" ";
         str += "DateDay=\"" + QString::number( ev.dueDate().day() ) + "\" ";
     }
-//    owarn << "Uid " << ev.uid() << "" << oendl;
     str += "Uid=\"" + QString::number( ev.uid() ) + "\" ";
 
 // append the extra options
@@ -622,7 +606,6 @@ QString OPimTodoAccessXML::toString( const OPimTodo& ev )const {
                 }
             }
             // now write the list
-            owarn << "als: " << als.join("____________") << "" << oendl;
             str += "Alarms=\""+als.join(";") +"\" ";
         }
 
@@ -648,229 +631,66 @@ QString OPimTodoAccessXML::toString( const QArray<int>& ints ) const {
     return Qtopia::Record::idsToString( ints );
 }
 
-/* internal class for sorting
- *
- * Inspired by todoxmlio.cpp from TT
- */
 
-struct OPimTodoXMLContainer {
-    OPimTodo todo;
-};
-
-namespace {
-    inline QString string( const OPimTodo& todo) {
-        return  todo.summary().isEmpty() ?
-            todo.description().left(20 ) :
-            todo.summary();
-    }
-    inline int completed( const OPimTodo& todo1, const OPimTodo& todo2) {
-        int ret = 0;
-        if ( todo1.isCompleted() ) ret++;
-        if ( todo2.isCompleted() ) ret--;
-        return ret;
-    }
-    inline int priority( const OPimTodo& t1, const OPimTodo& t2) {
-        return ( t1.priority() - t2.priority() );
-    }
-    inline int description( const OPimTodo& t1, const OPimTodo& t2) {
-        return QString::compare( string(t1), string(t2) );
-    }
-    inline int deadline( const OPimTodo& t1, const OPimTodo& t2) {
-        int ret = 0;
-        if ( t1.hasDueDate() &&
-             t2.hasDueDate() )
-            ret = t2.dueDate().daysTo( t1.dueDate() );
-        else if ( t1.hasDueDate() )
-            ret = -1;
-        else if ( t2.hasDueDate() )
-            ret = 1;
-        else
-            ret = 0;
-
-        return ret;
-    }
-
-};
-
-/*
-   * Returns:
-   *       0 if item1 == item2
-   *
-   *   non-zero if item1 != item2
-   *
-   *   This function returns int rather than bool so that reimplementations
-   *   can return one of three values and use it to sort by:
-   *
-   *   0 if item1 == item2
-   *
-   *   > 0 (positive integer) if item1 > item2
-   *
-   *   < 0 (negative integer) if item1 < item2
-   *
-   */
-class OPimTodoXMLVector : public QVector<OPimTodoXMLContainer> {
-public:
-    OPimTodoXMLVector(int size, bool asc,  int sort)
-        : QVector<OPimTodoXMLContainer>( size )
-        {
-            setAutoDelete( true );
-            m_asc = asc;
-            m_sort = sort;
-        }
-        /* return the summary/description */
-    QString string( const OPimTodo& todo) {
-        return  todo.summary().isEmpty() ?
-            todo.description().left(20 ) :
-            todo.summary();
-    }
-    /**
-     * we take the sortorder( switch on it )
-     *
-     */
-    int compareItems( Item d1, Item d2 ) {
-        bool seComp, sePrio, seDesc, seDeadline;
-        seComp = sePrio = seDeadline = seDesc = false;
-        int ret =0;
-        OPimTodoXMLContainer* con1 = (OPimTodoXMLContainer*)d1;
-        OPimTodoXMLContainer* con2 = (OPimTodoXMLContainer*)d2;
-
-        /* same item */
-        if ( con1->todo.uid() == con2->todo.uid() )
-            return 0;
-
-        switch ( m_sort ) {
-            /* completed */
-        case 0: {
-            ret = completed( con1->todo, con2->todo );
-            seComp = TRUE;
-            break;
-        }
-            /* priority */
-        case 1: {
-            ret = priority( con1->todo, con2->todo );
-            sePrio = TRUE;
-            break;
-        }
-            /* description */
-        case 2: {
-            ret  = description( con1->todo, con2->todo );
-            seDesc = TRUE;
-            break;
-        }
-            /* deadline */
-        case 3: {
-            ret = deadline( con1->todo, con2->todo );
-            seDeadline = TRUE;
-            break;
-        }
-        default:
-            ret = 0;
-            break;
-        };
-        /*
-         * FIXME do better sorting if the first sort criteria
-         * ret equals 0 start with complete and so on...
-         */
-
-        /* twist it we're not ascending*/
-        if (!m_asc)
-            ret = ret * -1;
-
-        if ( ret )
-            return ret;
-
-        // default did not gave difference let's try it other way around
-        /*
-         * General try if already checked if not test
-         * and return
-         * 1.Completed
-         * 2.Priority
-         * 3.Description
-         * 4.DueDate
-         */
-        if (!seComp ) {
-            if ( (ret = completed( con1->todo, con2->todo ) ) ) {
-                if (!m_asc ) ret *= -1;
-                return ret;
-            }
-        }
-        if (!sePrio ) {
-            if ( (ret = priority( con1->todo, con2->todo ) ) ) {
-                if (!m_asc ) ret *= -1;
-                return ret;
-            }
-        }
-        if (!seDesc ) {
-            if ( (ret = description(con1->todo, con2->todo ) ) ) {
-                if (!m_asc) ret *= -1;
-                return ret;
-            }
-        }
-        if (!seDeadline) {
-            if ( (ret = deadline( con1->todo, con2->todo ) ) ) {
-                if (!m_asc) ret *= -1;
-                return ret;
-            }
-        }
-
-        return 0;
-    }
- private:
-    bool m_asc;
-    int m_sort;
-
-};
-
-QArray<int> OPimTodoAccessXML::sorted( bool asc,  int sortOrder,
-                                    int sortFilter,  int cat ) {
-    OPimTodoXMLVector vector(m_events.count(), asc,sortOrder );
-    QMap<int, OPimTodo>::Iterator it;
+QArray<int> OPimTodoAccessXML::sorted( const UIDArray& events, bool asc,
+                                       int sortOrder,int sortFilter,
+                                       const QArray<int>& categories )const {
+    Internal::OPimTodoSortVector vector(events.count(), asc,sortOrder );
     int item = 0;
 
-    bool bCat = sortFilter & 1 ? true : false;
-    bool bOnly = sortFilter & 2 ? true : false;
-    bool comp = sortFilter & 4 ? true : false;
-    for ( it = m_events.begin(); it != m_events.end(); ++it ) {
+    bool bCat = sortFilter  & OPimTodoAccess::FilterCategory ? true : false;
+    bool bOnly = sortFilter & OPimTodoAccess::OnlyOverDue ? true : false;
+    bool comp = sortFilter  & OPimTodoAccess::DoNotShowCompleted ? true : false;
+    bool catPassed = false;
+    int cat;
+
+    for ( uint i = 0; i < events.count(); ++i ) {
+        /* Guard against creating a new item... */
+        if ( !m_events.contains( events[i] ) )
+            continue;
+
+        OPimTodo todo = m_events[events[i]];
 
         /* show category */
         /* -1 == unfiled */
-        if ( bCat && cat == -1 ) {
-            if(!(*it).categories().isEmpty() )
-                continue;
-        }else if ( bCat && cat != 0)
-            if (!(*it).categories().contains( cat ) ) {
-                continue;
-            }
-        /* isOverdue but we should not show overdue - why?*/
-/*        if ( (*it).isOverdue() &&  !bOnly  ) {
-            owarn << "item is overdue but !bOnly" << oendl;
-            continue;
-        }
-*/
-        if ( !(*it).isOverdue() && bOnly ) {
-            continue;
+        catPassed = false;
+        for ( uint cat_nu = 0; cat_nu < categories.count(); ++cat_nu ) {
+            cat = categories[cat_nu];
+            if ( bCat && cat == -1 ) {
+                if(!todo.categories().isEmpty() )
+                    continue;
+            } else if ( bCat && cat != 0)
+                if (!todo.categories().contains( cat ) )
+                    continue;
+            catPassed = true;
+            break;
         }
 
-        if ((*it).isCompleted() && comp ) {
+        /*
+         * If none of the Categories matched
+         * continue
+         */
+        if ( !catPassed )
             continue;
-        }
+        if ( !todo.isOverdue() && bOnly )
+            continue;
+        if (todo.isCompleted() && comp )
+            continue;
 
-
-        OPimTodoXMLContainer* con = new OPimTodoXMLContainer();
-        con->todo = (*it);
-        vector.insert(item, con );
-        item++;
+        vector.insert(item++, todo );
     }
+
     vector.resize( item );
     /* sort it now */
     vector.sort();
     /* now get the uids */
-    QArray<int> array( vector.count() );
-    for (uint i= 0; i < vector.count(); i++ ) {
-        array[i] = ( vector.at(i) )->todo.uid();
-    }
+    UIDArray array( vector.count() );
+    for (uint i= 0; i < vector.count(); i++ )
+        array[i] = vector.uidAt( i );
+
     return array;
-};
+}
+
 void OPimTodoAccessXML::removeAllCompleted() {
     QMap<int, OPimTodo> events = m_events;
     for ( QMap<int, OPimTodo>::Iterator it = m_events.begin(); it != m_events.end(); ++it ) {
@@ -879,36 +699,22 @@ void OPimTodoAccessXML::removeAllCompleted() {
     }
     m_events = events;
 }
-QBitArray OPimTodoAccessXML::supports()const {
-    static QBitArray ar = sup();
-    return ar;
-}
-QBitArray OPimTodoAccessXML::sup() {
-    QBitArray ar( OPimTodo::CompletedDate +1 );
-    ar.fill( true );
-    ar[OPimTodo::CrossReference] = false;
-    ar[OPimTodo::State ] = false;
-    ar[OPimTodo::Reminders] = false;
-    ar[OPimTodo::Notifiers] = false;
-    ar[OPimTodo::Maintainer] = false;
 
-    return ar;
-}
 QArray<int> OPimTodoAccessXML::matchRegexp(  const QRegExp &r ) const
 {
-    QArray<int> m_currentQuery( m_events.count() );
+    QArray<int> currentQuery( m_events.count() );
     uint arraycounter = 0;
 
-        QMap<int, OPimTodo>::ConstIterator it;
-        for (it = m_events.begin(); it != m_events.end(); ++it ) {
+    QMap<int, OPimTodo>::ConstIterator it;
+    for (it = m_events.begin(); it != m_events.end(); ++it ) {
         if ( it.data().match( r ) )
-            m_currentQuery[arraycounter++] = it.data().uid();
+            currentQuery[arraycounter++] = it.data().uid();
 
     }
     // Shrink to fit..
-    m_currentQuery.resize(arraycounter);
+    currentQuery.resize(arraycounter);
 
-    return m_currentQuery;
+    return currentQuery;
 }
 
 }

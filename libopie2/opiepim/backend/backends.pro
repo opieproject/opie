@@ -1,8 +1,10 @@
 SOURCES += \
+	backend/ocontactaccessbackend.cpp       \
         backend/ocontactaccessbackend_vcard.cpp \
         backend/ocontactaccessbackend_xml.cpp   \
         backend/odatebookaccessbackend.cpp      \
         backend/odatebookaccessbackend_xml.cpp  \
+	backend/opimbackendoccurrence.cpp       \
         backend/otodoaccessbackend.cpp          \
         backend/otodoaccessvcal.cpp             \
         backend/otodoaccessxml.cpp              
@@ -14,7 +16,8 @@ HEADERS += \
         backend/ocontactaccessbackend_xml.h    \
         backend/odatebookaccessbackend.h       \
         backend/odatebookaccessbackend_xml.h   \
-        backend/opimaccessbackend.h            \        
+        backend/opimaccessbackend.h            \ 
+	backend/opimbackendoccurrence.h        \       
         backend/otodoaccessbackend.h           \
         backend/otodoaccessvcal.h              \
         backend/otodoaccessxml.h               

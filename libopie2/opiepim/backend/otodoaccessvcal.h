@@ -43,14 +43,10 @@ public:
     bool save();
 
     QArray<int> allRecords()const;
-    QArray<int> matchRegexp(const QRegExp &r) const;
-    QArray<int> queryByExample( const OPimTodo& t, int sort, const QDateTime& d = QDateTime() );
     QArray<int> effectiveToDos( const QDate& start,
                                 const QDate& end,
-                                bool includeNoDates );
-    QArray<int> overDue();
-    QArray<int> sorted( bool asc, int sortOrder, int sortFilter,
-                        int cat );
+                                bool includeNoDates )const;
+    QArray<int> overDue()const;
     OPimTodo find(int uid)const;
     void clear();
     bool add( const OPimTodo& );
@@ -58,10 +54,8 @@ public:
     bool replace( const OPimTodo& );
 
     void removeAllCompleted();
-    virtual QBitArray supports()const;
 
 private:
-    static QBitArray sup();
     bool m_dirty : 1;
     QString m_file;
     QMap<int, OPimTodo> m_map;

@@ -57,56 +57,50 @@ namespace Opie {
  */
 class OPimContactAccessBackend: public OPimAccessBackend<OPimContact> {
  public:
-	/**
-	 * @todo make non line in regard to BC guide of KDE
-	 */
-	OPimContactAccessBackend() {}
-	/**
-	 * @todo make non inline in regard to the BC guide of KDE
-	 */
-	virtual ~OPimContactAccessBackend() {}
+    OPimContactAccessBackend();
 
 
-	/**
-         * Return if database was changed externally.
-	 * This may just make sense on file based databases like a XML-File.
-	 * It is used to prevent to overwrite the current database content
-	 * if the file was already changed by something else !
-	 * If this happens, we have to reload before save our data.
-	 * If we use real databases, this should be handled by the database
-	 * management system themselve, therefore this function should always return false in
-	 * this case. It is not our problem to handle this conflict ...
-	 * @return <i>true</i> if the database was changed and if save without reload will
-	 * be dangerous. <i>false</i> if the database was not changed or it is save to write
-	 * in this situation.
-	 */
-	virtual bool wasChangedExternally() = 0;
+    /**
+     * Return if database was changed externally.
+     * This may just make sense on file based databases like a XML-File.
+     * It is used to prevent to overwrite the current database content
+     * if the file was already changed by something else !
+     * If this happens, we have to reload before save our data.
+     * If we use real databases, this should be handled by the database
+     * management system themselve, therefore this function should always return false in
+     * this case. It is not our problem to handle this conflict ...
+     * @return <i>true</i> if the database was changed and if save without reload will
+     * be dangerous. <i>false</i> if the database was not changed or it is save to write
+     * in this situation.
+     */
+    virtual bool wasChangedExternally() = 0;
 
-	virtual QArray<int> matchRegexp(  const QRegExp &r ) const = 0;
+    /**
+     *  Return all possible settings.
+     *  @return All settings provided by the current backend
+     * (i.e.: query_WildCards & query_IgnoreCase)
+     */
+    virtual const uint querySettings() = 0;
 
-	/**
-         *  Return all possible settings.
-	 *  @return All settings provided by the current backend
-	 * (i.e.: query_WildCards & query_IgnoreCase)
-	 */
-	virtual const uint querySettings() = 0;
+    /**
+     * Check whether settings are correct.
+     * @return <i>true</i> if the given settings are correct and possible.
+     */
+    virtual bool hasQuerySettings (uint querySettings) const = 0;
 
-	/**
-         * Check whether settings are correct.
-	 * @return <i>true</i> if the given settings are correct and possible.
-	 */
-	virtual bool hasQuerySettings (uint querySettings) const = 0;
+    /**
+     * Slow and inefficent default implementation
+     */
+//@{
+    UIDArray queryByExample( const OPimContact&, int settings, const QDateTime& d = QDateTime() )const;
+    UIDArray sorted( const UIDArray&, bool asc, int, int, const QArray<int>& )const;
+    OPimBackendOccurrence::List occurrences( const QDate&, const QDate& )const;
+//@}
 
-        /**
-         * FIXME!!!
-         * Returns a sorted list of records either ascendinf or descending for a giving criteria and category
-         */
-        virtual QArray<int> sorted( bool ascending, int sortOrder, int sortFilter, int cat ) = 0;
-	
-	
+
 private:
-	class Private;
-	Private *d;
+    class Private;
+    Private *d;
 };
 
 }

@@ -167,20 +167,6 @@ QArray<int> OPimContactAccessBackend_VCard::allRecords() const
     return ar;
 }
 
-// Not implemented
-QArray<int> OPimContactAccessBackend_VCard::queryByExample ( const OPimContact&, int, const QDateTime& )
-{
-    QArray<int> ar(0);
-    return ar;
-}
-
-// Not implemented
-QArray<int> OPimContactAccessBackend_VCard::matchRegexp(  const QRegExp&  ) const
-{
-    QArray<int> ar(0);
-    return ar;
-}
-
 const uint OPimContactAccessBackend_VCard::querySettings()
 {
     return 0; // No search possible
@@ -196,16 +182,7 @@ bool OPimContactAccessBackend_VCard::wasChangedExternally()
     return false; // Don't expect concurrent access
 }
 
-// Not implemented
-QArray<int> OPimContactAccessBackend_VCard::sorted( bool , int, int, int )
-{
-    QArray<int> ar(0);
-    return ar;
-}
-
 // *** Private stuff ***
-
-
 OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 {
     OPimContact c;
@@ -320,7 +297,6 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 			    if ( ( type & (VOICE|CELL|FAX|PAGER) ) == 0 ) // default
 				    type |= VOICE;
 			    
-			    owarn << "value %s %d" << value.data() << type << oendl;
 			    if ( (type & (VOICE|HOME) ) == (VOICE|HOME) && (type & (CELL|HOME) ) != (CELL|HOME) )
 				    c.setHomePhone( value );
 			    if ( ( type & (FAX|HOME) ) == (FAX|HOME) )
@@ -525,7 +501,6 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
 
     // Exporting Birthday regarding RFC 2425 (5.8.4)
     if ( c.birthday().isValid() ){
-        owarn << "Exporting birthday as: " << convDateToVCardDate( c.birthday() ) << "" << oendl;
         safeAddPropValue( vcard, VCBirthDateProp, convDateToVCardDate( c.birthday() ) );
     }
 
@@ -544,7 +519,6 @@ VObject* OPimContactAccessBackend_VCard::createVObject( const OPimContact &c )
     safeAddPropValue( vcard, "X-Qtopia-Spouse", c.spouse() );
     safeAddPropValue( vcard, "X-Qtopia-Gender", c.gender() );
     if ( c.anniversary().isValid() ){
-        owarn << "Exporting anniversary as: " << convDateToVCardDate( c.anniversary() ) << "" << oendl;
         safeAddPropValue( vcard, "X-Qtopia-Anniversary", convDateToVCardDate( c.anniversary() ) );
     }
     safeAddPropValue( vcard, "X-Qtopia-Nickname", c.nickname() );

@@ -63,13 +63,13 @@ public:
     /* our functions */
     QArray<int> effectiveToDos( const QDate& start,
                                 const QDate& end,
-                                bool includeNoDates );
-    QArray<int> overDue();
-    QArray<int> sorted( bool asc,  int sortOrder,
-                        int sortFilter, int cat );
-    QBitArray supports()const;
+                                bool includeNoDates )const;
+    QArray<int> overDue()const;
+
+//@{
+    UIDArray sorted( const UIDArray&, bool, int, int, const QArray<int>& )const;
+//@}
 private:
-    static QBitArray sup();
     void todo( QAsciiDict<int>*, OPimTodo&,const QCString&,const QString& );
     QString toString( const OPimTodo& )const;
     QString toString( const QArray<int>& ints ) const;
@@ -81,7 +81,6 @@ private:
     class OPimTodoAccessXMLPrivate;
     OPimTodoAccessXMLPrivate* d;
     int m_year, m_month, m_day;
-
 };
 
 };

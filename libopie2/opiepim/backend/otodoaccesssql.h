@@ -51,40 +51,35 @@ public:
     bool load();
     bool reload();
     bool save();
-    QArray<int> allRecords()const;
+    QArray<UID> allRecords()const;
 
-    QArray<int> queryByExample( const OPimTodo& t, int settings, const QDateTime& d = QDateTime() );
-    OPimTodo find(int uid)const;
-    OPimTodo find(int uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
+    QArray<UID> queryByExample( const OPimTodo& t, int settings, const QDateTime& d = QDateTime() );
+    OPimTodo find(UID uid)const;
+    OPimTodo find(UID uid, const QArray<int>&, uint cur, Frontend::CacheDirection )const;
     void clear();
     bool add( const OPimTodo& t );
-    bool remove( int uid );
+    bool remove( UID uid );
     bool replace( const OPimTodo& t );
 
-    QArray<int> overDue();
-    QArray<int> effectiveToDos( const QDate& start,
-                                const QDate& end, bool includeNoDates );
-    QArray<int> sorted(bool asc, int sortOrder, int sortFilter, int cat );
-
-    QBitArray supports()const;
-    QArray<int> matchRegexp(  const QRegExp &r ) const;
+    QArray<UID> overDue()const;
+    QArray<UID> effectiveToDos( const QDate& start,
+                                const QDate& end, bool includeNoDates )const;
+    QArray<UID> matchRegexp(  const QRegExp &r ) const;
     void removeAllCompleted();
-    
+
 
 private:
     void update()const;
-    void fillDict();
     inline bool date( QDate& date, const QString& )const;
-    inline OPimTodo parseResultAndCache( int uid, const Opie::DB::OSQLResult& )const;
-    inline OPimTodo todo( Opie::DB::OSQLResultItem& )const;
-    inline QArray<int> uids( const Opie::DB::OSQLResult& )const;
-    OPimTodo todo( int uid )const;
-    QBitArray sup() const;
-    QMap<QString, QString>  requestCustom( int uid ) const;
+    inline OPimTodo parseResultAndCache( UID uid, const Opie::DB::OSQLResult& )const;
+    inline OPimTodo parse( Opie::DB::OSQLResultItem& )const;
+    inline QArray<UID> uids( const Opie::DB::OSQLResult& )const;
+    OPimTodo todo( UID uid )const;
+    QMap<QString, QString>  requestCustom( UID uid ) const;
 
     // QAsciiDict<int> m_dict;
     Opie::DB::OSQLDriver* m_driver;
-    QArray<int> m_uids;
+    QArray<UID> m_uids;
     bool m_dirty : 1;
 };
 
