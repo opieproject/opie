@@ -32,7 +32,7 @@
 #include "installdlgimpl.h"
 #include "global.h"
 
-InstallDlgImpl::InstallDlgImpl( vector<QString> &packageList, DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
+InstallDlgImpl::InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, QWidget * parent, const char* name, bool modal, WFlags fl )
     : InstallDlg( parent, name, modal, fl )
 {
     upgradePackages = false;
@@ -46,7 +46,8 @@ InstallDlgImpl::InstallDlgImpl( vector<QString> &packageList, DataManager *dataM
     defaultDest = cfg.readEntry( "dest", "root" );
 
     // Grab flags - Turn MAKE_LINKS on by default (if no flags found)
-    flags = cfg.readNumEntry( "installFlags", MAKE_LINKS );
+//    flags = cfg.readNumEntry( "installFlags", MAKE_LINKS );
+    flags = 0;
 #else
 	flags = 0;
 #endif
@@ -70,28 +71,28 @@ InstallDlgImpl::InstallDlgImpl( vector<QString> &packageList, DataManager *dataM
 
     destination->setCurrentItem( defIndex );
 
-	vector<QString>::iterator it;
+	vector<InstallData>::iterator it;
 	// setup package data
 	QString remove = "Remove\n";
 	QString install = "\nInstall\n";
 	QString upgrade = "\nUpgrade\n";
 	for ( it = packageList.begin() ; it != packageList.end() ; ++it )
 	{
-		QString name = *it;
-		if ( name.startsWith( "I" ) )
+		InstallData item = *it;
+		if ( item.option == "I" )
 		{
-			installList.push_back( name.mid(1) );
-			install += "   " + name.mid(1) + "\n";
+			installList.push_back( item );
+			install += "   " + item.packageName + "\n";
 		}
-		else if ( name.startsWith( "D" ) )
+		else if ( item.option == "D" )
 		{
-			removeList.push_back( name.mid(1) );
-			remove += "   " + name.mid(1) + "\n";
+			removeList.push_back( item );
+			remove += "   " + item.packageName + "\n";
 		}
-		else if ( name.startsWith( "U" ) )
+		else if ( item.option == "U" )
 		{
-			updateList.push_back( name.mid(1) );
-			upgrade += "   " + name.mid(1) + "\n";
+			updateList.push_back( item );
+			upgrade += "   " + item.packageName + "\n";
 		}
 	}
 
@@ -136,8 +137,6 @@ void InstallDlgImpl :: optionsSelected()
         flags |= FORCE_REMOVE;
     if ( opt.forceOverwrite->isChecked() )
         flags |= FORCE_OVERWRITE;
-    if ( opt.makeLinks->isChecked() )
-        flags |= MAKE_LINKS;
 
 #ifdef QWS
     Config cfg( "aqpkg" );
@@ -171,6 +170,9 @@ void InstallDlgImpl :: installSelected()
         Destination *d = dataMgr->getDestination( destination->currentText() );
         QString dest = d->getDestinationName();
         QString destDir = d->getDestinationPath();
+        int instFlags = 0;
+        if ( d->linkToRoot() )
+            instFlags = MAKE_LINKS;
     
 #ifdef QWS
         // Save settings
@@ -180,29 +182,48 @@ void InstallDlgImpl :: installSelected()
 #endif
 
         // First run through the remove list, then the install list then the upgrade list
-    	vector<QString>::iterator it;
+    	vector<InstallData>::iterator it;
         ipkg.setOption( "remove" );
-        ipkg.setDestination( dest );
-        ipkg.setDestinationDir( destDir );
-        ipkg.setFlags( flags );
         for ( it = removeList.begin() ; it != removeList.end() ; ++it )
         {
-            ipkg.setPackage( *it );
+            ipkg.setDestination( it->destination->getDestinationName() );
+            ipkg.setDestinationDir( it->destination->getDestinationPath() );
+            ipkg.setPackage( it->packageName );
+
+            int tmpFlags = flags;
+            if ( it->destination->linkToRoot() )
+                tmpFlags |= MAKE_LINKS;
+            else
+                tmpFlags ^= MAKE_LINKS;
+            
+            ipkg.setFlags( tmpFlags );
             ipkg.runIpkg();
         }
 
         ipkg.setOption( "install" );
+        ipkg.setDestination( dest );
+        ipkg.setDestinationDir( destDir );
+        ipkg.setFlags( instFlags );
         for ( it = installList.begin() ; it != installList.end() ; ++it )
         {
-            ipkg.setPackage( *it );
+            ipkg.setPackage( it->packageName );
             ipkg.runIpkg();
         }
 
         flags |= FORCE_REINSTALL;
-        ipkg.setFlags( flags );
+        ipkg.setOption( "reinstall" );
         for ( it = updateList.begin() ; it != updateList.end() ; ++it )
         {
-            ipkg.setPackage( *it );
+            ipkg.setDestination( it->destination->getDestinationName() );
+            ipkg.setDestinationDir( it->destination->getDestinationPath() );
+            ipkg.setPackage( it->packageName );
+
+            int tmpFlags = flags;
+            if ( it->destination->linkToRoot() && it->recreateLinks )
+                tmpFlags |= MAKE_LINKS;
+            else
+                tmpFlags ^= MAKE_LINKS;
+            ipkg.setFlags( tmpFlags );
             ipkg.runIpkg();
         }
     }

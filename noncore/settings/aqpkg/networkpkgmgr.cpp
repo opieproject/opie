@@ -204,6 +204,24 @@ void NetworkPackageManager :: serverSelected( int )
         }
 
         QCheckListItem *item = new QCheckListItem( packagesList, text, QCheckListItem::CheckBox );
+
+        if ( it->isInstalled() )
+        {
+            QString destName = "";
+            if ( it->getLocalPackage() )
+            {
+                if ( it->getLocalPackage()->getInstalledTo() )
+                    destName = it->getLocalPackage()->getInstalledTo()->getDestinationName();
+            }
+            else
+            {
+                if ( it->getInstalledTo() )
+                    destName = it->getInstalledTo()->getDestinationName();
+            }
+            if ( destName != "" )
+                new QCheckListItem( item, QString( "Installed To - " ) + destName );
+        }
+        
         if ( !it->isPackageStoredLocally() )
             new QCheckListItem( item, QString( "Description - " ) + it->getDescription() );
         else
@@ -255,20 +273,13 @@ void NetworkPackageManager :: updateServer()
     // First, write out ipkg_conf file so that ipkg can use it
     dataMgr->writeOutIpkgConf();
 
-//    if ( serverName == LOCAL_SERVER )
-//        ;
-//    else if ( serverName == LOCAL_IPKGS )
-//        ;
-//    else
-    {
-        QString option = "update";
-        QString dummy = "";
-        Ipkg ipkg;
-        connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
-        ipkg.setOption( option );
-        
-        ipkg.runIpkg( );
-    }
+    QString option = "update";
+    QString dummy = "";
+    Ipkg ipkg;
+    connect( &ipkg, SIGNAL(outputText(const QString &)), this, SLOT(displayText(const QString &)));
+    ipkg.setOption( option );
+
+    ipkg.runIpkg( );
 
     // Reload data
     dataMgr->reloadServerData( serversList->currentText() );
@@ -394,7 +405,7 @@ void NetworkPackageManager :: downloadPackage()
 
 void NetworkPackageManager :: applyChanges()
 {
-    // Disable buttons to stop silly people clicking lots on them :)
+    stickyOption = "";
     
     // First, write out ipkg_conf file so that ipkg can use it
     dataMgr->writeOutIpkgConf();
@@ -402,15 +413,15 @@ void NetworkPackageManager :: applyChanges()
     // Now for each selected item
     // deal with it
 
-	vector<QString> workingPackages;
+	vector<InstallData> workingPackages;
     for ( QCheckListItem *item = (QCheckListItem *)packagesList->firstChild();
           item != 0 ;
           item = (QCheckListItem *)item->nextSibling() )
     {
         if ( item->isOn() )
         {
-            QString p = dealWithItem( item );
-            workingPackages.push_back( p );
+            InstallData data = dealWithItem( item );
+            workingPackages.push_back( data );
 		}
     }
 
@@ -437,7 +448,7 @@ void NetworkPackageManager :: applyChanges()
 //    If not installed - install
 //    If installed and different version available - upgrade
 //    If installed and version up to date - remove
-QString NetworkPackageManager :: dealWithItem( QCheckListItem *item )
+InstallData NetworkPackageManager :: dealWithItem( QCheckListItem *item )
 {
     QString name = item->text();
     int pos = name.find( "*" );
@@ -458,10 +469,25 @@ QString NetworkPackageManager :: dealWithItem( QCheckListItem *item )
     QString option;
     QString dest = "root";
     if ( !p->isInstalled() )
-    	return QString( "I" ) + name;
+    {
+        InstallData item;
+        item.option = "I";
+        item.packageName = name;
+    	return item;
+    }
     else
     {
-        if ( p->getVersion() == p->getInstalledVersion() )
+        InstallData item;
+        item.option = "D";
+        item.packageName = name;
+        if ( p->getInstalledTo() )
+            item.destination = p->getInstalledTo();
+        else
+            item.destination = p->getLocalPackage()->getInstalledTo();
+
+        // Sticky option not implemented yet, but will eventually allow
+        // the user to say something like 'remove all'
+        if ( stickyOption == "" )
         {
             QString msgtext;
             msgtext.sprintf( "Do you wish to remove or reinstall\n%s?", (const char *)name );
@@ -469,18 +495,26 @@ QString NetworkPackageManager :: dealWithItem( QCheckListItem *item )
                                 msgtext, "Remove", "ReInstall" ) )
             {
                 case 0: // Try again or Enter
-                    return QString( "D" ) + name;
+                    item.option = "D";
                     break;
                 case 1: // Quit or Escape
-                    return QString( "U" ) + name;
+                    item.option = "U";
                     break;
             }
-
-            // User hit cancel (on dlg - assume remove)
-            return QString( "D" ) + name;
         }
         else
-        	return QString( "U" ) + name;
+        {
+//            item.option = stickyOption;
+        }
+        
+        // Check if we are reinstalling the same version
+        if ( p->getVersion() != p->getInstalledVersion() )
+           item.recreateLinks = true;
+        else
+           item.recreateLinks = false;
+
+        // User hit cancel (on dlg - assume remove)
+        return item;
     }
 }
 

@@ -25,10 +25,19 @@ using namespace std;
 #include "ipkg.h"
 #include "install.h"
 
+class InstallData
+{
+public:
+    QString option;            // I - install, D - delete, U - upgrade
+    QString packageName;
+    Destination *destination;
+    bool recreateLinks;
+};
+
 class InstallDlgImpl : public InstallDlg
 {
 public:
-    InstallDlgImpl( vector<QString> &packageList, DataManager *dataManager, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
+    InstallDlgImpl( vector<InstallData> &packageList, DataManager *dataManager, QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
     InstallDlgImpl( QWidget * parent = 0, const char* name = 0, bool modal = false, WFlags fl = 0 );
     ~InstallDlgImpl();
 
@@ -39,9 +48,9 @@ protected:
 
 private:
     DataManager *dataMgr;
-	vector<QString> installList;
-	vector<QString> removeList;
-	vector<QString> updateList;
+	vector<InstallData> installList;
+	vector<InstallData> removeList;
+	vector<InstallData> updateList;
     int flags;
     Ipkg ipkg;
     bool upgradePackages;

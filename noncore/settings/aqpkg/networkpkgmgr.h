@@ -26,6 +26,7 @@
 
 #include "datamgr.h"
 #include "progressdlg.h"
+class InstallData;
 
 /** NetworkPackageManager is the base class of the project */
 class NetworkPackageManager : public QWidget
@@ -59,7 +60,8 @@ private:
     void initGui();
     void setupConnections();
     void showProgressDialog( char *initialText );
-    QString dealWithItem( QCheckListItem *item );
+    InstallData dealWithItem( QCheckListItem *item );
+    QString stickyOption;
 
 public slots:
     void serverSelected( int index );

@@ -41,7 +41,7 @@ Ipkg :: ~Ipkg()
 {
 }
 
-// Option is what we are going to do - install, upgrade, download
+// Option is what we are going to do - install, upgrade, download, reinstall
 // package is the package name to install - either a fully qualified path and ipk
 //   file (if stored locally) or just the name of the package (for a network package)
 // packageName is the package name - (for a network package this will be the same as
@@ -89,7 +89,6 @@ bool Ipkg :: runIpkg( )
             if ( destDir == "/" )
                 flags ^= MAKE_LINKS;
         }
-
     }
     
 #ifdef X86
@@ -97,16 +96,23 @@ bool Ipkg :: runIpkg( )
     cmd += IPKG_CONF;
 #endif
 
-    cmd += " " + option;
+
+    if ( option == "reinstall" )
+        cmd += " install";
+    else
+        cmd += " " + option;
     if ( option != "upgrade" )
         cmd += " " + package;
     cmd += " 2>&1";
+
+    
+    emit outputText( QString( "Dealing with package " ) + package );
 
     qApp->processEvents();
 
     // If we are removing packages and make links option is selected
     // create the links
-    if ( option == "remove" )
+    if ( option == "remove" || option == "reinstall" )
     {
         createLinks = false;
         if ( flags & MAKE_LINKS )
@@ -125,7 +131,7 @@ bool Ipkg :: runIpkg( )
 
     ret = executeIpkgCommand( cmd, option );
 
-    if ( option == "install" )
+    if ( option == "install" || option == "reinstall" )
     {
         // If we are not removing packages and make links option is selected
         // create the links
@@ -153,6 +159,7 @@ bool Ipkg :: runIpkg( )
     delete dependantPackages;
     
     emit outputText( QString( "Finished - status=" ) + (ret ? "success" : "failure") );
+    emit outputText( "" );
     return ret;
 }
 
@@ -182,7 +189,7 @@ int Ipkg :: executeIpkgCommand( QString &cmd, const QString option )
             if ( lineStr != lineStrOld )
             {
                 //See if we're finished
-                if ( option == "install" )
+                if ( option == "install" || option == "reinstall" )
                 {
                     // Need to keep track of any dependant packages that get installed
                     // so that we can create links to them as necessary
@@ -242,11 +249,11 @@ QStringList* Ipkg :: getList( const QString &packageFilename, const QString &des
     QString packageFileDir = destDir+"/usr/lib/ipkg/info/"+packageFilename+".list";
     QFile f( packageFileDir );
 
-    cout << "Try to open " << packageFileDir.latin1() << endl;
+    cout << "Try to open " << packageFileDir << endl;
     if ( !f.open(IO_ReadOnly) )
     {
         // Couldn't open from dest, try from /
-//        cout << "Could not open:" << packageFileDir << endl;
+        cout << "Could not open:" << packageFileDir << endl;
         f.close();
         
         packageFileDir = "/usr/lib/ipkg/info/"+packageFilename+".list";
