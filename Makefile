@@ -13,6 +13,7 @@ COMPONENTS=$(LOCALCOMPONENTS) inputmethods/keyboard \
 	taskbar/volumeapplet \
 	taskbar/clockapplet \
 	taskbar/netmonapplet \
+	taskbar/screenshotapplet \
 	netsetup/dialup \
 	netsetup/lan \
 	mpegplayer/libmpeg3 \
