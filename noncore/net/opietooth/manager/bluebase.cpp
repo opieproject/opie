@@ -261,11 +261,12 @@ void BlueBase::addSearchedDevices( const QValueList<RemoteDevice> &newDevices ) 
         deviceItem->setPixmap( 1, m_findPix );
         deviceItem->setExpandable ( true );
 
-        // look if device is avail. atm, async
+         // look if device is avail. atm, async
         deviceActive( (*it) );
 
-        // ggf auch hier?
+	// ggf auch hier?
         addServicesToDevice( deviceItem );
+
     }
 }
 
@@ -538,12 +539,18 @@ void BlueBase::deviceActive( const RemoteDevice &device ) {
  */
 void BlueBase::deviceActive( const QString& device, bool connected  ) {
     qDebug("deviceActive slot");
+    qWarning("BlueBase::deviceActive %s -> %s", device.latin1(), connected ? "TRUE" : "FALSE" );
 
     QMap<QString,BTDeviceItem*>::Iterator it;
 
     it = m_deviceList.find( device );
-    if( it == m_deviceList.end() )
-        return;
+    if( it == m_deviceList.end() ){
+	    qWarning("BlueBase::deviceActive: Could not find device ..." );
+	    QMap<QString,BTDeviceItem*>::Iterator it = m_deviceList.begin();
+	    for (; it != m_deviceList.end(); ++it )
+		    qWarning( "Have: %s", it.key().latin1() );
+	    return;
+    }
 
     BTDeviceItem* deviceItem = it.data();
 

@@ -1,4 +1,5 @@
 
+
 #include "pppdialog.h"
 #include <qpushbutton.h>
 #include <qmultilineedit.h>
@@ -11,6 +12,8 @@ using namespace OpieTooth;
 
 PPPDialog::PPPDialog( QWidget* parent,  const char* name, bool modal, WFlags fl, const QString& device )
     : QDialog( parent, name, modal, fl ) {
+
+	qWarning(" PPPDialog c'tor: Connect to device: %s", device.latin1() );
 
     if ( !name )
 	setName( "PPPDialog" );
