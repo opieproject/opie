@@ -68,9 +68,8 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
   QObject::connect( (QObject*)DatesButton, SIGNAL( clicked() ), this, SLOT(startDatebook() ) );
   QObject::connect( (QObject*)MailButton, SIGNAL( clicked() ), this, SLOT(startMail() ) );
  
-  
-  autoStart();
   draw();
+  autoStart();
 }
 
 void Today::autoStart() {
@@ -94,7 +93,7 @@ void Today::draw() {
   getMail();
   getTodo(); 
   // how often refresh
-  QTimer::singleShot( 30*1000, this, SLOT(draw()) );
+  QTimer::singleShot( 10*1000, this, SLOT(draw() ) );
 }
 
 
@@ -196,8 +195,8 @@ void Today::startConfig() {
   cfg.writeEntry("autostart", autostart);
   // sync it to "disk"
   cfg.write(); 
-  autoStart();
   draw();
+  autoStart();
 }
 
 
@@ -208,7 +207,6 @@ void Today::getDates() {
   QDate date = QDate::currentDate();
   QWidget* AllDateBookEvents = new QWidget( );
   QVBoxLayout* layoutDates = new QVBoxLayout(AllDateBookEvents);
-  //QTime time = QTime::currentTime();
   
   QValueList<EffectiveEvent> list = db->getEffectiveEvents(date, date);
 
@@ -219,31 +217,44 @@ void Today::getDates() {
   int count=0;
   
   if ( list.count() > 0 ) {
-    QString msg;
-    
+       
     for ( QValueList<EffectiveEvent>::ConstIterator it=list.begin();
     it!=list.end(); ++it ) {
       
       count++;
       
       if ( count <= MAX_LINES_MEET ) {
+
+	QTime time = QTime::currentTime();
 	
-	
-	DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents);
-	layoutDates->addWidget(l);
-	connect (l, SIGNAL(editEvent(const Event &)),
-		 this, SIGNAL(editEvent(const Event &)));
+	if (!ONLY_LATER) {
+	  DateBookEvent *l=new DateBookEvent(*it, AllDateBookEvents);
+	  layoutDates->addWidget(l);
+	  connect (l, SIGNAL(editEvent(const Event &)),
+		   this, SIGNAL(editEvent(const Event &)));
+	} else if ((time.toString() <= TimeString::dateString((*it).event().end())) ) {
+	  // show only later appointments
+	  DateBookEventLater *l=new DateBookEventLater(*it, AllDateBookEvents);
+	  layoutDates->addWidget(l);
+	  connect (l, SIGNAL(editEvent(const Event &)),
+		   this, SIGNAL(editEvent(const Event &)));
+	} else {
+	  QLabel* noMoreEvents = new QLabel(AllDateBookEvents);
+	  noMoreEvents->setText("No more appointments today");
+	  layoutDates->addWidget(noMoreEvents);
+	}
       }
- 
-   }	
-    layoutDates->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
-    sv1->addChild(AllDateBookEvents);
-    
-    //if (msg.isEmpty()) {
-    //    msg = tr("No more appointments today");
-    //}
-    //DatesField->setText(msg);
+    } 	
+  } else {
+    QLabel* noEvents = new QLabel(AllDateBookEvents);
+    noEvents->setText("No appointments today");
+    layoutDates->addWidget(noEvents);
   }
+  
+  layoutDates->addItem(new QSpacerItem(1,1, QSizePolicy::Minimum, QSizePolicy::Expanding));
+  sv1->addChild(AllDateBookEvents);
+    
+  
 }
   
 /*
@@ -439,7 +450,24 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     if (SHOW_NOTES == 1) {
       msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
     }
-  } else if ((time.toString() <= TimeString::dateString((ev).event().end())) ) {
+  }
+  setText(msg);
+  connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
+  setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
+}
+
+
+DateBookEventLater::DateBookEventLater(const EffectiveEvent &ev, 
+				       QWidget* parent = 0, 
+				       const char* name = 0, 
+				       WFlags fl = 0) :
+  ClickableLabel(parent,name,fl), event(ev) {
+  
+  QString msg;
+  QTime time = QTime::currentTime();
+  
+  if ((time.toString() <= TimeString::dateString((ev).event().end())) ) {
+    // show only later appointments
     msg += "<B>" + (ev).description() + "</B>";
     if ( (ev).event().hasAlarm() ) {
       msg += " <b>[with alarm]</b>";
@@ -462,8 +490,11 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
     if (SHOW_NOTES == 1) {
       msg += "<br> <i>note</i>:" +((ev).notes()).mid(0, MAX_CHAR_CLIP) + "<br>";
     }
-  }
-
+  } 
+  
+  // if (msg.isEmpty()) {
+  //  msg = tr("No more appointments today");
+  // }
   setText(msg);
   connect(this, SIGNAL(clicked()), this, SLOT(editMe()));
   setAlignment( int( QLabel::WordBreak | QLabel::AlignLeft ) );
@@ -473,5 +504,8 @@ void DateBookEvent::editMe() {
   emit editEvent(event.event());
 }
 
+void DateBookEventLater::editMe() {
+  emit editEvent(event.event());
+}
 
 
