@@ -71,7 +71,7 @@ OPimRecurrence::OPimRecurrence() {
 
 OPimRecurrence::OPimRecurrence( const QMap<int, QString>& map )
 {
-    OPimRecurrence();
+    data = new Data;
     fromMap( map );
 }
 
