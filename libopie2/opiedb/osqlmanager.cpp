@@ -33,7 +33,7 @@ OSQLDriver* OSQLManager::load( const QString& name ) {
     OSQLDriver* driver = 0l;
 
     if ( name == "SQLite" ) {
-        driver = new Opie::DB::Private::OSQLiteDriver;
+        driver = new Opie::DB::Internal::OSQLiteDriver;
     }
     return driver;
 }
@@ -44,7 +44,7 @@ OSQLDriver* OSQLManager::load( const OSQLBackEnd& end) {
     OSQLDriver *driver = 0l;
     if ( end.library() == "builtin" &&
          end.name() == "SQLite" )
-        driver = new Opie::DB::Private::OSQLiteDriver;
+        driver = new Opie::DB::Internal::OSQLiteDriver;
 
     return driver;
 }

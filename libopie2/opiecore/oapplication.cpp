@@ -45,7 +45,7 @@ OApplication* OApplication::_instance = 0;
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 class OApplicationPrivate
 {
   public:
@@ -91,7 +91,7 @@ OConfig* OApplication::config()
 
 void OApplication::init()
 {
-    d = new Private::OApplicationPrivate();
+    d = new Internal::OApplicationPrivate();
     if ( !OApplication::_instance )
     {
         OApplication::_instance = this;

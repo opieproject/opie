@@ -36,7 +36,7 @@
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 
 class Ramses : public ODevice, public QWSServer::KeyboardFilter
 {

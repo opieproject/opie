@@ -54,7 +54,7 @@ _;:,   .>  :=|.         This program is free software; you can
 #endif
 
 using namespace Opie::Core;
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 struct s_button simpad_buttons [] = {
     { Model_SIMpad_CL4 | Model_SIMpad_SL4 | Model_SIMpad_SLC | Model_SIMpad_TSinus,

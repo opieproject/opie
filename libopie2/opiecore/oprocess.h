@@ -46,7 +46,7 @@ class QSocketNotifier;
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 class OProcessController;
 class OProcessPrivate;
 }
@@ -723,7 +723,7 @@ protected:
      * @ref OProcessController is a friend of OProcess because it has to have
      * access to various data members.
      */
-    friend class Private::OProcessController;
+    friend class Internal::OProcessController;
 
 private:
     /**
@@ -752,7 +752,7 @@ private:
 
 private:
     void init ( );
-    Private::OProcessPrivate *d;
+    Internal::OProcessPrivate *d;
 };
 }
 }

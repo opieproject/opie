@@ -36,7 +36,7 @@
 #include <qvbox.h>
 
 using namespace Opie::Ui;
-using namespace Opie::Ui::Private;
+using namespace Opie::Ui::Internal;
 
 /**
  *
@@ -397,7 +397,7 @@ void OSplitter::resizeEvent( QResizeEvent* res )
  * Adds a container to a tab either the parent tab
  * or our own
  */
-void OSplitter::addToTab( const Opie::Ui::Private::OSplitterContainer& con )
+void OSplitter::addToTab( const Opie::Ui::Internal::OSplitterContainer& con )
 {
     QWidget *wid = con.widget;
     // not needed widgetstack will reparent as well    wid.reparent(m_tabWidget, wid->getWFlags(), QPoint(0, 0) );
@@ -411,7 +411,7 @@ void OSplitter::addToTab( const Opie::Ui::Private::OSplitterContainer& con )
 /*
  * adds a container to the box
  */
-void OSplitter::addToBox( const Opie::Ui::Private::OSplitterContainer& con )
+void OSplitter::addToBox( const Opie::Ui::Internal::OSplitterContainer& con )
 {
     QWidget* wid = con.widget;
     wid->reparent(m_hbox, 0,  QPoint(0, 0) );

@@ -61,11 +61,11 @@ _;:,     .>    :=|.         This program is free software; you can
 #include <grp.h>
 #endif
 
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 class OProcessPrivate
 {
 public:

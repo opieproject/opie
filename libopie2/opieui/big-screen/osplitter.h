@@ -73,7 +73,7 @@ class OSplitter : public QFrame
 {
     Q_OBJECT
 public:
-    typedef QValueList<Opie::Ui::Private::OSplitterContainer> ContainerList;
+    typedef QValueList<Opie::Ui::Internal::OSplitterContainer> ContainerList;
     OSplitter( Qt::Orientation = Horizontal,  QWidget *parent = 0,
                const char* name = 0, WFlags fl = 0 );
     ~OSplitter();
@@ -124,8 +124,8 @@ private:
     bool layoutMode()const;
     //    void reparentAll();
     void setTabWidget( OTabWidget*);
-    void addToTab( const Opie::Ui::Private::OSplitterContainer& );
-    void addToBox( const Opie::Ui::Private::OSplitterContainer& );
+    void addToTab( const Opie::Ui::Internal::OSplitterContainer& );
+    void addToBox( const Opie::Ui::Internal::OSplitterContainer& );
     void removeFromTab( QWidget* );
     void changeTab();
     void changeHBox();

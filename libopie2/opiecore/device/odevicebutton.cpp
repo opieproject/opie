@@ -36,7 +36,7 @@
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 
 class OQCopMessageData
 {
@@ -48,7 +48,7 @@ class OQCopMessageData
 }
 
 using namespace Opie::Core;
-using namespace Opie::Core::Private;
+using Opie::Core::Internal::OQCopMessageData;
 
 OQCopMessage::OQCopMessage()
         : d ( 0 )
@@ -132,13 +132,13 @@ void OQCopMessage::setData ( const QByteArray &data )
 
 /*! \class Opie::Core::ODeviceButton
     \brief The Opie::Core::ODeviceButton class represents a physical user mappable button on a Qtopia device.
- 
+
     This class represents a physical button on a Qtopia device.    A
     device may have "user programmable" buttons.
     The location and number of buttons will vary from device to
     device.    userText() and pixmap() may be used to describe this button
     to the user in help documentation.
- 
+
     \ingroup qtopiaemb
     \internal
 */

@@ -26,7 +26,7 @@
 
 namespace Opie{
 namespace Core{
-namespace Private {
+namespace Internal {
 class OQCopMessageData;
 }
 
@@ -54,7 +54,7 @@ public:
 private:
     void init ( const QCString &m_channel, const QCString &message, const QByteArray &args );
 
-    Private::OQCopMessageData *d;
+    Internal::OQCopMessageData *d;
     class Private;
     Private* m_data;
 };

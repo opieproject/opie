@@ -41,7 +41,7 @@
 
 namespace Opie {
 namespace Ui   {
-namespace Private {
+namespace Internal {
 
 class OFontSelectorPrivate
 {
@@ -96,7 +96,7 @@ private:
 
 
 using namespace Opie::Ui;
-using namespace Opie::Ui::Private;
+using namespace Opie::Ui::Internal;
 
 static int findItemCB( QComboBox *box, const QString &str )
 {

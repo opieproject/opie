@@ -67,6 +67,15 @@
 
 namespace Opie {
 namespace Core {
+namespace Internal {
+class  DebugBackend {
+};
+
+static  DebugBackend *backEnd = 0;
+}
+static void clean_up_routine() {
+    delete Internal::backEnd;
+}
 /*======================================================================================
  * debug levels
  *======================================================================================*/

@@ -77,7 +77,7 @@ typedef struct {
 #define LED_ON    OD_IOW( 'f', 5, LED_IN )
 #define FLITE_ON  OD_IOW( 'f', 7, FLITE_IN )
 
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 void Jornada::init()
 {

@@ -6,7 +6,7 @@
 
 namespace Opie {
 namespace Ui {
-namespace Private {
+namespace Internal {
     static QString keyToString( const OKeyPair& );
     static void fixupKeys( int&, int&, QKeyEvent* );
     class OKeyListViewItem : public Opie::Ui::OListViewItem {

@@ -41,7 +41,7 @@ class QMouseEvent;
 
 namespace Opie {
 namespace Ui   {
-namespace Private {
+namespace Internal {
 /*======================================================================================
  * OTaskbarAppletWrapper
  *======================================================================================*/
@@ -122,7 +122,7 @@ private:
 
 #define EXPORT_OPIE_APPLET_v1(  AppLet ) \
     Q_EXPORT_INTERFACE() { \
-    Q_CREATE_INSTANCE(  Opie::Ui::Private::OTaskbarAppletWrapper<AppLet> ) \
+    Q_CREATE_INSTANCE(  Opie::Ui::Internal::OTaskbarAppletWrapper<AppLet> ) \
     }
 
 #endif

@@ -1,3 +1,4 @@
+
 /*
                =.            This file is part of the OPIE Project
              .=l.            Copyright (C) 2002,2003 Holger Freyther <zecke@handhelds.org>
@@ -55,11 +56,11 @@
 #include <qregexp.h>
 #include <qobjectlist.h>
 
-using namespace Opie::Ui::Private;
+using namespace Opie::Ui::Internal;
 
 namespace Opie {
 namespace Ui   {
-namespace Private {
+namespace Internal {
 OFileViewInterface::OFileViewInterface( OFileSelector* selector )
         : m_selector( selector )
 {}

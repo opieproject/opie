@@ -48,7 +48,7 @@
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 class Zaurus : public ODevice
 {
 

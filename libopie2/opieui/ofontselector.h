@@ -37,7 +37,7 @@ class QListBox;
 
 namespace Opie {
 namespace Ui   {
-namespace Private {
+namespace Internal {
 class OFontSelectorPrivate;
 }
 
@@ -96,7 +96,7 @@ private:
     void changeFont ( );
 
 private:
-    Private::OFontSelectorPrivate *d;
+    Internal::OFontSelectorPrivate *d;
 };
 
 }

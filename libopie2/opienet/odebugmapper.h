@@ -11,7 +11,7 @@
 
 namespace Opie {
 namespace Net  {
-namespace Private {
+namespace Internal {
 
 typedef QIntDict<QString> IntStringMap;
 

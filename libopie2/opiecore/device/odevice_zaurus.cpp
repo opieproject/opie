@@ -54,7 +54,7 @@ _;:,   .>  :=|.         This program is free software; you can
 #endif
 
 using namespace Opie::Core;
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 struct z_button z_buttons [] = {
     { Qt::Key_F9, QT_TRANSLATE_NOOP("Button", "Calendar Button"),
@@ -387,7 +387,7 @@ void Zaurus::buzzer ( int sound )
                 ::ioctl ( fd, MIXER_WRITE( 0 ), &vol );
             ::close ( fd );
         }
-    } else {		
+    } else {
         int fd = ::open ( "/dev/sharp_buz", O_WRONLY|O_NONBLOCK );
 
         if ( fd >= 0 ) {
@@ -395,7 +395,7 @@ void Zaurus::buzzer ( int sound )
             ::close ( fd );
         }
 
-    } 
+    }
 #endif
 }
 
@@ -606,9 +606,9 @@ Transformation Zaurus::rotation() const
                 retval = ::ioctl(handle, SHARP_IOCTL_GET_ROTATION);
                 ::close (handle);
 
-                if (retval == 2 ) 
+                if (retval == 2 )
                     rot = Rot0;
-                else 
+                else
                     rot = Rot270;
             }
             break;

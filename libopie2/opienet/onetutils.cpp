@@ -190,7 +190,7 @@ void OPrivateIOCTL::setParameter( int num, u_int32_t value )
 
 
 
-namespace Private {
+namespace Internal {
 /*======================================================================================
  * assorted functions
  *======================================================================================*/

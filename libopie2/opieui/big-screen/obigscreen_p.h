@@ -8,7 +8,7 @@ class QWidget;
 
 namespace Opie {
 namespace Ui  {
-namespace Private{
+namespace Internal{
 
 struct OSplitterContainer
 {

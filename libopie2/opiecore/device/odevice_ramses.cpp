@@ -54,7 +54,7 @@
 #endif
 
 using namespace Opie::Core;
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 struct r_button ramses_buttons [] = {
     { Model_Ramses_MNCI,

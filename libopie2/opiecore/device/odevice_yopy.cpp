@@ -54,7 +54,7 @@ _;:,     .>    :=|.         This program is free software; you can
 #endif
 
 using namespace Opie::Core;
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 struct yopy_button yopy_buttons [] = {
     { Qt::Key_F10, QT_TRANSLATE_NOOP( "Button", "Action Button" ),

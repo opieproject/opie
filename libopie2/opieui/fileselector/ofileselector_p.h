@@ -59,7 +59,7 @@ class QToolButton;
 namespace Opie{
 namespace Ui{
 class OFileSelector;
-namespace Private {
+namespace Internal {
 
 class OFileViewInterface
 {

@@ -11,7 +11,7 @@ using namespace Opie::Core;
 
 namespace Opie {
 namespace Net  {
-namespace Private {
+namespace Internal {
 
 DebugMapper::DebugMapper()
 {

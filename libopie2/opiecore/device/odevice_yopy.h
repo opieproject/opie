@@ -34,7 +34,7 @@ _;:,     .>    :=|.         This program is free software; you can
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 class Yopy : public ODevice
 {
   protected:

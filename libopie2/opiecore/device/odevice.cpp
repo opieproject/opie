@@ -81,11 +81,11 @@ ODevice *ODevice::inst()
                 if ( line.startsWith( "Hardware" ) )
                 {
                     qDebug( "ODevice() - found '%s'", (const char*) line );
-                    if ( line.contains( "sharp", false ) ) dev = new Private::Zaurus();
-                    else if ( line.contains( "ipaq", false ) ) dev = new Private::iPAQ();
-                    else if ( line.contains( "simpad", false ) ) dev = new Private::SIMpad();
-                    else if ( line.contains( "jornada", false ) ) dev = new Private::Jornada();
-                    else if ( line.contains( "ramses", false ) ) dev = new Private::Ramses();
+                    if ( line.contains( "sharp", false ) ) dev = new Internal::Zaurus();
+                    else if ( line.contains( "ipaq", false ) ) dev = new Internal::iPAQ();
+                    else if ( line.contains( "simpad", false ) ) dev = new Internal::SIMpad();
+                    else if ( line.contains( "jornada", false ) ) dev = new Internal::Jornada();
+                    else if ( line.contains( "ramses", false ) ) dev = new Internal::Ramses();
                     else qWarning( "ODevice() - unknown hardware - using default." );
                     break;
                 }

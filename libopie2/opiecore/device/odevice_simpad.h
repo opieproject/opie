@@ -37,7 +37,7 @@
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 
 class SIMpad : public ODevice, public QWSServer::KeyboardFilter
 {

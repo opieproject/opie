@@ -60,7 +60,7 @@
 
 
 using namespace Opie::Core;
-using namespace Opie::Net::Private;
+using namespace Opie::Net::Internal;
 DebugMapper* debugmapper = new DebugMapper();
 #endif
 
@@ -103,7 +103,7 @@ void ONetwork::synchronize()
         s >> str;
         str.truncate( str.find( ':' ) );
         odebug << "ONetwork: found interface '" << str << "'" << oendl;
-        ONetworkInterface* iface;
+        ONetworkInterface* iface = 0;
         if ( isWirelessInterface( str ) )
         {
             iface = new OWirelessNetworkInterface( this, (const char*) str );

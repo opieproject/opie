@@ -55,7 +55,7 @@
 
 
 using namespace Opie::Core;
-using namespace Opie::Core::Private;
+using namespace Opie::Core::Internal;
 
 /* KERNEL */
 #define OD_IOC(dir,type,number,size)    (( dir << 30 ) | ( type << 8 ) | ( number ) | ( size << 16 ))

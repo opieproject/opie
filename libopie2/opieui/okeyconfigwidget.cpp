@@ -474,12 +474,12 @@ OKeyConfigManager::~OKeyConfigManager() {
  * Load the Configuration  from the OConfig
  * If a Key is restricted but was in the config we will
  * make it be the empty key paur
- * We will change the group of the OConfig Item!
+ * We will change the group but restore to the previous.
  *
  * @see OKeyPair::emptyKey
  */
 void OKeyConfigManager::load() {
-    m_conf->setGroup( m_group );
+    Opie::Core::OConfigGroupSaver( m_conf, m_group );
 
     /*
      * Read each item
@@ -500,10 +500,11 @@ void OKeyConfigManager::load() {
 
 /**
  * We will save the current configuration
- * to the OConfig. We will change the group.
+ * to the OConfig. We will change the group but restore
+ * to the previous
  */
 void OKeyConfigManager::save() {
-    m_conf->setGroup( m_group );
+    Opie::Core::OConfigGroupSaver( m_conf, m_group );
 
     /*
      * Write each item
@@ -544,7 +545,7 @@ OKeyConfigItem OKeyConfigManager::handleKeyEvent( QKeyEvent* e ) {
     * case ascii
     */
     int key, mod;
-    Opie::Ui::Private::fixupKeys( key, mod, e );
+    Opie::Ui::Internal::fixupKeys( key, mod, e );
 
     OKeyConfigItem::List _keyList =  keyList( key );
     if ( _keyList.isEmpty() )
@@ -716,7 +717,7 @@ OKeyConfigItem::List OKeyConfigManager::keyList( int keycode) {
 
 namespace Opie {
 namespace Ui {
-namespace Private {
+namespace Internal {
 
     OKeyListViewItem::OKeyListViewItem( const OKeyConfigItem& item, OKeyConfigManager* man, OListViewItem* parent)
         : Opie::Ui::OListViewItem( parent ), m_manager( man )  {
@@ -938,7 +939,7 @@ OKeyConfigWidget::ChangeMode OKeyConfigWidget::changeMode()const {
  * insert these items before calling load
  */
 void OKeyConfigWidget::insert( const QString& str, OKeyConfigManager* man ) {
-    Opie::Ui::Private::OKeyConfigWidgetPrivate root( str, man );
+    Opie::Ui::Internal::OKeyConfigWidgetPrivate root( str, man );
     m_list.append(root);
 }
 
@@ -947,12 +948,12 @@ void OKeyConfigWidget::insert( const QString& str, OKeyConfigManager* man ) {
  * loads the items and allows editing them
  */
 void OKeyConfigWidget::load() {
-    Opie::Ui::Private::OKeyConfigWidgetPrivateList::Iterator it;
+    Opie::Ui::Internal::OKeyConfigWidgetPrivateList::Iterator it;
     for ( it = m_list.begin(); it != m_list.end(); ++it ) {
         OListViewItem *item = new OListViewItem( m_view, (*it).name );
         OKeyConfigItem::List list = (*it).manager->keyConfigList();
         for (OKeyConfigItem::List::Iterator keyIt = list.begin(); keyIt != list.end();++keyIt )
-            (void )new  Opie::Ui::Private::OKeyListViewItem(*keyIt, (*it).manager, item );
+            (void )new  Opie::Ui::Internal::OKeyListViewItem(*keyIt, (*it).manager, item );
 
     }
 }
@@ -969,7 +970,7 @@ void OKeyConfigWidget::save() {
     QListViewItemIterator it( m_view );
     while ( it.current() ) {
         if (it.current()->parent() ) {
-            Opie::Ui::Private::OKeyListViewItem *item = static_cast<Opie::Ui::Private::OKeyListViewItem*>( it.current() );
+            Opie::Ui::Internal::OKeyListViewItem *item = static_cast<Opie::Ui::Internal::OKeyListViewItem*>( it.current() );
             OKeyConfigManager *man = item->manager();
             man->removeKeyConfig( item->origItem() );
             man->addKeyConfig( item->item() );
@@ -993,7 +994,7 @@ void OKeyConfigWidget::slotListViewItem( QListViewItem* _item) {
         m_cus ->setChecked( false );
     }else{
         m_box->setEnabled( true );
-        Opie::Ui::Private::OKeyListViewItem *item = static_cast<Opie::Ui::Private::OKeyListViewItem*>( _item );
+        Opie::Ui::Internal::OKeyListViewItem *item = static_cast<Opie::Ui::Internal::OKeyListViewItem*>( _item );
         OKeyConfigItem keyItem= item->item();
         m_lbl->setText(  tr("Default: " )+ item->text( 3 ) );
         if ( keyItem.keyPair().isEmpty() ) {
@@ -1024,7 +1025,7 @@ void OKeyConfigWidget::slotNoKey() {
     /*
      * If immediate we need to remove and readd the key
      */
-    Opie::Ui::Private::OKeyListViewItem *item =  static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
+    Opie::Ui::Internal::OKeyListViewItem *item =  static_cast<Opie::Ui::Internal::OKeyListViewItem*>(m_view->currentItem());
     updateItem( item, OKeyPair::emptyKey() );
 }
 
@@ -1037,7 +1038,7 @@ void OKeyConfigWidget::slotDefaultKey() {
     if ( !m_view->currentItem() || !m_view->currentItem()->parent() )
         return;
 
-    Opie::Ui::Private::OKeyListViewItem *item =  static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
+    Opie::Ui::Internal::OKeyListViewItem *item =  static_cast<Opie::Ui::Internal::OKeyListViewItem*>(m_view->currentItem());
     updateItem( item, item->item().defaultKeyPair() );
 }
 
@@ -1063,14 +1064,14 @@ void OKeyConfigWidget::slotConfigure() {
     connect(&dlg, SIGNAL(keyCaptured()), &dlg, SLOT(accept()) );
 
     if ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted ) {
-        Opie::Ui::Private::OKeyListViewItem *item = static_cast<Opie::Ui::Private::OKeyListViewItem*>(m_view->currentItem());
+        Opie::Ui::Internal::OKeyListViewItem *item = static_cast<Opie::Ui::Internal::OKeyListViewItem*>(m_view->currentItem());
         updateItem( item, dlg.keyPair() );
     }
 
 
 }
 
-bool OKeyConfigWidget::sanityCheck(  Opie::Ui::Private::OKeyListViewItem* item,
+bool OKeyConfigWidget::sanityCheck(  Opie::Ui::Internal::OKeyListViewItem* item,
                                      const OKeyPair& newItem ) {
     OKeyPair::List bList = item->manager()->blackList();
     for ( OKeyPair::List::Iterator it = bList.begin(); it != bList.end(); ++it ) {
@@ -1089,7 +1090,7 @@ bool OKeyConfigWidget::sanityCheck(  Opie::Ui::Private::OKeyListViewItem* item,
         /* if not our parent and not us */
         if (it.current()->parent() &&  it.current() != item) {
             /* damn already given away*/
-            if ( newItem == static_cast<Opie::Ui::Private::OKeyListViewItem*>(it.current() )->item().keyPair() ) {
+            if ( newItem == static_cast<Opie::Ui::Internal::OKeyListViewItem*>(it.current() )->item().keyPair() ) {
                 QMessageBox::warning( 0, tr("Key is already assigned" ),
                                       tr("<qt>The Key you choose is already taken by "
                                          "a different Item of your config. Please try"
@@ -1103,7 +1104,7 @@ bool OKeyConfigWidget::sanityCheck(  Opie::Ui::Private::OKeyListViewItem* item,
     return true;
 }
 
-void OKeyConfigWidget::updateItem( Opie::Ui::Private::OKeyListViewItem *item,
+void OKeyConfigWidget::updateItem( Opie::Ui::Internal::OKeyListViewItem *item,
                                    const OKeyPair& newItem) {
     /* sanity check
      * check against the blacklist of the manager
@@ -1165,7 +1166,7 @@ void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
         return;
 
     int mod, key;
-    Opie::Ui::Private::fixupKeys( key,mod, ev );
+    Opie::Ui::Internal::fixupKeys( key,mod, ev );
 
     /* either we used software keyboard
      * or we've true support
@@ -1200,7 +1201,7 @@ void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
         m_keyPair = OKeyPair( m_key, m_mod );
     }
 
-    m_lbl->setText( Opie::Ui::Private::keyToString( m_keyPair ) );
+    m_lbl->setText( Opie::Ui::Internal::keyToString( m_keyPair ) );
 
 }
 
@@ -1236,7 +1237,7 @@ void OKeyChooserConfigDialog::keyReleaseEvent( QKeyEvent* ev ) {
         else
             m_key = key;
        m_keyPair = OKeyPair( m_key, m_mod );
-       m_lbl->setText( Opie::Ui::Private::keyToString( m_keyPair ) );
+       m_lbl->setText( Opie::Ui::Internal::keyToString( m_keyPair ) );
     }
 }
 

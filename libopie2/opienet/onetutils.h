@@ -132,7 +132,7 @@ class OPrivateIOCTL : public QObject
  * Miscellaneous
  *======================================================================================*/
 
-namespace Private {
+namespace Internal {
 void dumpBytes( const unsigned char* data, int num );
 QString modeToString( int );
 int stringToMode( const QString& );

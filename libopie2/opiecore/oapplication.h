@@ -37,7 +37,7 @@
 
 namespace Opie {
 namespace Core {
-namespace Private {
+namespace Internal {
 class OApplicationPrivate;
 } // private class
 
@@ -102,7 +102,7 @@ class OApplication : public QPEApplication
     const QCString _appname;
     static OApplication* _instance;
     OConfig* _config;
-    Private::OApplicationPrivate* d;
+    Internal::OApplicationPrivate* d;
 };
 
 } // Core

@@ -67,7 +67,7 @@ class OConfig : public Config
      * The current group is used for searching keys and accessing entries.
      * @todo make const
      */
-    const QString& group() { return git.key(); };
+    const QString& group()const { return git.key(); };
     /**
      * @returns a @ref QColor entry or a @a default value if the key is not found.
      */
@@ -76,7 +76,7 @@ class OConfig : public Config
      * @returns a @ref QFont value or a @a default value if the key is not found.
      */
     QFont readFontEntry( const QString& key, const QFont* pDefault ) const;
-    
+
 private:
     class Private;
     Private *d;
@@ -109,7 +109,7 @@ private:
  * in one block.
  *
  * @author Matthias Kalle Dalheimer <Kalle@kde.org>
- * @version $Id: oconfig.h,v 1.7 2004-03-13 19:51:47 zecke Exp $
+ * @version $Id: oconfig.h,v 1.8 2004-04-04 21:27:42 zecke Exp $
  * @see OConfig
  */
 
@@ -144,7 +144,7 @@ class OConfigGroupSaver
 
     OConfigGroupSaver( const OConfigGroupSaver& );
     OConfigGroupSaver& operator=( const OConfigGroupSaver& );
-    
+
     class Private;
     Private *d;
 };

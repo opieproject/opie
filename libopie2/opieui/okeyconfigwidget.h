@@ -25,7 +25,7 @@ class QTimer;
 
 namespace Opie {
 namespace Ui {
-namespace Private {
+namespace Internal {
     class OKeyConfigWidgetPrivate;
     typedef QValueList<OKeyConfigWidgetPrivate> OKeyConfigWidgetPrivateList;
     class OKeyListViewItem;
@@ -253,13 +253,13 @@ private slots:
     void slotConfigure();
 
 private:
-    static bool sanityCheck(  Opie::Ui::Private::OKeyListViewItem* man,
+    static bool sanityCheck(  Opie::Ui::Internal::OKeyListViewItem* man,
                               const OKeyPair& newItem );
-    void updateItem( Opie::Ui::Private::OKeyListViewItem* man,
+    void updateItem( Opie::Ui::Internal::OKeyListViewItem* man,
                      const OKeyPair& newItem);
     void initUi();
     Opie::Ui::OListView *m_view;
-    Opie::Ui::Private::OKeyConfigWidgetPrivateList m_list;
+    Opie::Ui::Internal::OKeyConfigWidgetPrivateList m_list;
     QLabel *m_lbl;
     QPushButton *m_btn;
     QRadioButton *m_def, *m_cus, *m_none;

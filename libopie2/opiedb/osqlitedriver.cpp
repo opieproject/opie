@@ -41,7 +41,7 @@
 
 
 using namespace Opie::DB;
-using namespace Opie::DB::Private;
+using namespace Opie::DB::Internal;
 
 namespace {
     struct Query {

@@ -9,7 +9,7 @@
 
 namespace Opie {
 namespace DB {
-namespace Private {
+namespace Internal {
 
 class OSQLiteDriver : public OSQLDriver {
     Q_OBJECT
