@@ -1,9 +1,0 @@
-Package: opie-simple-icon-example
-Files: bin/simple-icon apps/Examples/simple-icon.desktop
-Priority: optional
-Section: opie/applications
-Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
-Architecture: arm
-Depends: task-opie-minimal,  opie-pics
-Description:  A simple icon example
-Version: $QPE_VERSION$EXTRAVERSION

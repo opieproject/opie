@@ -1,9 +1,0 @@
-Package: opie-keypebble-help-en
-Files: help/en/html/keypebble.html help/en/html/keypebble
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-keypebble
-License: GPL
-Description: keypebble help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

@@ -1,4 +1,0 @@
-  config EMBEDDEDKONSOLE
-    boolean "opie-embeddedkonsole (konsole from KDE adapted for Qt/Embedded)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

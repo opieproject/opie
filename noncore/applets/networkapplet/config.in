@@ -1,6 +1,0 @@
-  config NETWORKAPPLET
-    boolean "opie-networkapplet (control network interfaces on-the-fly)"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2NET
-    comment "Network applet needs a libqpe and libopie2 (core, ui, net)"
-    depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE && LIBOPIE2UI && LIBOPIE2NET)

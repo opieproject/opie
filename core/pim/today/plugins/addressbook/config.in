@@ -1,4 +1,0 @@
-  config TODAY_ADDRESSBOOK
-    boolean "opie-today-addressbookplugin (shows Birthdays and Anniversaries)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config OIPKG
-    boolean "opie-oipkg (manager for *.ipk software packages)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,2 +1,0 @@
-After running qdoc in the directory above, the html directory created here should
-be renamed to "qtopia" and moved to $QTDIR/doc/html/

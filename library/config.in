@@ -1,2 +1,0 @@
-config LIBQPE
-  boolean "Qpe Library (Qt/Embedded version)"

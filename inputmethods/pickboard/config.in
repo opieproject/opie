@@ -1,4 +1,0 @@
-  config PICKBOARD
-    boolean "opie-pickboard (lets you dictionary-based pick whole words based on partial input)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

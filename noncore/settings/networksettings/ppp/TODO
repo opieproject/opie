@@ -1,3 +1,0 @@
-- impl. PPPData::copyaccount 
-- check if the same interface device combination allready exists
-- check if a deleted account or device exists in a config and ask the user

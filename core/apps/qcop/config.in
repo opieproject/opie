@@ -1,4 +1,0 @@
-  config QCOP
-    boolean "opie-qcop (inter-application communication daemon)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

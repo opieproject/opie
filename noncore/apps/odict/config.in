@@ -1,4 +1,0 @@
-  config ODICT
-    boolean "opie-odict (electronic dictionary)"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

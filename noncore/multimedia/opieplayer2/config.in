@@ -1,6 +1,0 @@
-  config OPIEPLAYER2
-    boolean "opie-mediaplayer2 (streaming capable media player for mp3, mpeg, wav, ogg, quicktime, divx and more)"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-  comment "opie-mediaplayer2-skin-default-landscape automatically selected"
-    depends OPIEPLAYER2

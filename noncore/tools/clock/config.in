@@ -1,4 +1,0 @@
-  config CLOCK
-    boolean "opie-clock (clock and stop-watch)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config TODAY_FORTUNE
-    boolean "opie-today-fortuneplugin (a joke a day keeps the doctor away)"
-    default "y"
-    depends TODAY

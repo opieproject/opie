@@ -1,9 +1,0 @@
-Package: opie-mindbreaker-help-en
-Files: help/en/html/mindbreaker.html help/en/html/mindbreaker
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-mindbreaker
-License: GPL
-Description: mindbreaker help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

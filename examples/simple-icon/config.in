@@ -1,4 +1,0 @@
-  config SIMPLE_ICON
-    boolean "Simples Widget which loads Pixmaps and plays sound"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES

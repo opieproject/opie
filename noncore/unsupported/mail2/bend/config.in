@@ -1,4 +1,0 @@
-config BEND
-   boolean "opie-mailapplet (a biff-like mailchecker)"
-   default "y" if MAIL
-   depends ( LIBQPE || LIBQPE-X11 ) && LIBMAIL && LIBOPIE && MAIL

@@ -1,4 +1,0 @@
-  config SCREENSHOTAPPLET
-    boolean "opie-screenshotapplet (create images from your current display)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

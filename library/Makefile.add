@@ -1,4 +1,0 @@
-backend/vcc_yacc.cpp: backend/vcc.y
-	$(YACC) $(YACCFLAGS) -p vcc backend/vcc.y
-	-rm backend/vcc_yacc.cpp
-	mv y.tab.c backend/vcc_yacc.cpp

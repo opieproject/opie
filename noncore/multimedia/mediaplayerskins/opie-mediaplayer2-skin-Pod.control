@@ -1,8 +1,0 @@
-Package: opie-mediaplayer2-skin-Pod
-Files: pics/mediaplayer/skins/Pod
-Priority: optional
-Section: opie/applications
-Maintainer: ljp <llornkcor@handhelds.org>
-Description: Opie Mediaplayer's skin. 
-
-Version: $QPE_VERSION$EXTRAVERSION

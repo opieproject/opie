@@ -1,4 +1,0 @@
-  config REMOTE
-    boolean "opie-remote (remote control using irda, frontent to lirc)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

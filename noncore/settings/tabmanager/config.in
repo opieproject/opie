@@ -1,4 +1,0 @@
-  config TABMANAGER
-    boolean "opie-tabmanager (menu editor for the Opie taskbar)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

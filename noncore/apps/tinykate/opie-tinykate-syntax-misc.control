@@ -1,9 +1,0 @@
-Package: opie-tinykate-syntax-misc
-Files: share/tinykate/syntax/idconsole.xml share/tinykate/syntax/matlab.xml share/tinykate/syntax/verilog.xml share/tinykate/syntax/vhdl.xml
-Priority: optional
-Section: opie/applications
-Maintainer: Opie Team <opie@handhelds.org>
-Architecture: arm
-Depends: task-opie-minimal, opie-tinykate
-Description: Syntax Highlighting Patterns for  misc languages for TinyKate
-Version: $QPE_VERSION$EXTRAVERSION

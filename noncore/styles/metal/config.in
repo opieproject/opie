@@ -1,4 +1,0 @@
-  config METAL
-    boolean "opie-metal (Metal style)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

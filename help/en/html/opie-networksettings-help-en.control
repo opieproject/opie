@@ -1,9 +1,0 @@
-Package: opie-networksettings-help-en
-Files: help/en/html/networksettings.html help/en/html/networksettings
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-networksettings
-License: GPL
-Description: networksettings help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

@@ -1,4 +1,0 @@
-  config MAIN_TAB_EXAMPLE
-    boolean "Mainwindow with OTabWidget example"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES && LIBOPIE

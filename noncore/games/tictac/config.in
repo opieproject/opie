@@ -1,4 +1,0 @@
-  config TICTAC
-    boolean "opie-tictac (Tic Tac Toe, I have three in a row)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

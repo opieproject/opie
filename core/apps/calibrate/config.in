@@ -1,4 +1,0 @@
-  config CALIBRATE
-    boolean "opie-calibrate (standalone calibration utility)"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 )

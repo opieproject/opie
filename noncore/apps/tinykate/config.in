@@ -1,6 +1,0 @@
-  config TINYKATE
-    boolean "opie-tinykate (programmers editor Kate from KDE)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBKATE
-
-source "noncore/apps/tinykate/libkate/config.in"

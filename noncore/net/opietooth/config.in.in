@@ -1,7 +1,0 @@
-config OPIETOOTH
-  bool "Bluetooth support"
-  depends (LIBQPE || LIBQPE-X11) && LIBOPIE
-
-if OPIETOOTH
-@sources@
-endif

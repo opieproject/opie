@@ -1,9 +1,0 @@
-Package: opie-sound-help-en
-Files: help/en/html/sound.html help/en/html/sound
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-sound
-License: GPL
-Description: sound help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

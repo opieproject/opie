@@ -1,9 +1,0 @@
-Package: opie-wordgame-help-en
-Files: help/en/html/wordgame.html help/en/html/wordgame
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-wordgame
-License: GPL
-Description: wordgame help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

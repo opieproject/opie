@@ -1,9 +1,0 @@
-Package: opie-wlansetup-help-en
-Files: help/en/html/wlansetup.html help/en/html/wlansetup
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-wlansetup
-License: GPL
-Description: wlansetup help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

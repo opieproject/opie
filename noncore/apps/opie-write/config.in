@@ -1,4 +1,0 @@
-  config OPIE-WRITE
-    boolean "opie-write (rich text editor)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

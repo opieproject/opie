@@ -1,8 +1,0 @@
-  config HANDWRITING
-    boolean "opie-handwriting (Handwriting recognition)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
-  comment "opie-handwriting-classicset automatically selected"
-    depends HANDWRITING
-  comment "opie-handwriting-graffitiset automatically selected"
-    depends HANDWRITING

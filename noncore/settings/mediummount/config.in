@@ -1,4 +1,0 @@
-  config MEDIUMMOUNT
-    boolean "opie-mediummount (configuration app for medium mounter)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config FLAT
-    boolean "opie-style-flat (Simple, flat widget style)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

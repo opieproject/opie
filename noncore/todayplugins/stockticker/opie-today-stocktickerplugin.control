@@ -1,9 +1,0 @@
-Package: opie-today-stocktickerplugin
-Files: plugins/application/libstockticker.so* plugins/today/libtodaystocktickerplugin.so* bin/stockticker pics/stockticker/stockticker.png
-Priority: optional
-Section: opie/applications
-Maintainer: ljp <llornkcor@handhelds.org>
-Architecture: arm
-Depends: libqte2, opie-today
-Description: stockticker plugin for today
-Version: $QPE_VERSION$EXTRAVERSION

@@ -1,4 +1,0 @@
-  config LIBMPEG3
-    boolean "opieplayer1-libmpeg3plugin (play MPEG3 video files)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIEPLAYER

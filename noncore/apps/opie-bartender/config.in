@@ -1,4 +1,0 @@
-  config BARTENDER
-    boolean "bartender - bar receipe and blood alcohol estimator"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 )

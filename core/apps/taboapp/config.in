@@ -1,4 +1,0 @@
-  config TABOAPP
-    boolean "taboapp"
-    default "n"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OAPP && EXPERIMENTAL

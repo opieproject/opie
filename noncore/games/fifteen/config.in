@@ -1,4 +1,0 @@
-  config FIFTEEN
-    boolean "opie-fifteen (sort fifteen pieces game)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

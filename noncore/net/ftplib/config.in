@@ -1,3 +1,0 @@
-config FTPLIB
-  boolean "ftplib (FTP library)"
-  default "y"

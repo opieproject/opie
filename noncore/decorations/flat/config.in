@@ -1,4 +1,0 @@
-  config DECO_FLAT
-    boolean "opie-deco-flat (Flat window decoration style)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

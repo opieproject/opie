@@ -1,9 +1,0 @@
-Package: opie-mediaplayer2-skin-default-landscape
-Files: pics/opieplayer2/skins/default_landscape
-Priority: optional
-Section: opie/playerskins
-Maintainer: L.J.Potter <ljp@llornkcor.com>
-Architecture: arm
-Depends: task-opie-minimal
-Description: Landscape skin for opie mediaplayer's
-Version: $QPE_VERSION$EXTRAVERSION

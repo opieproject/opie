@@ -1,4 +1,0 @@
-  config SIMPLE_EXAMPLE
-    boolean "Simple widget with a button"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES

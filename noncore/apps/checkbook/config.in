@@ -1,4 +1,0 @@
-  config CHECKBOOK
-    boolean "opie-checkbook (keep track of issued cheques)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-[ "$1" = "configure" ] || exit 1
-
-ldconfig

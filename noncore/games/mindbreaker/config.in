@@ -1,4 +1,0 @@
-  config MINDBREAKER
-    boolean "opie-mindbreaker (crack the coloured code)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,9 +1,0 @@
-Package: opie-kcheckers-help-en
-Files: help/en/html/kcheckers.html help/en/html/kcheckers
-Priority: optional
-Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
-Depends: opie-kcheckers
-License: GPL
-Description: kcheckers help files (en)
-Version: $QPE_VERSION$EXTRAVERSION

@@ -1,4 +1,0 @@
-  config IRDAAPPLET
-    boolean "opie-irdaapplet (applet for IR beaming/discovery)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config SIMPLE_MAIN
-    boolean "Simple Mainwindow with Actions buttons and iconsets"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && EXAMPLES

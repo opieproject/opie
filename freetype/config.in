@@ -1,4 +1,0 @@
-  config FREETYPE
-    boolean "opie-freetype (support for fonts used via the freetype library)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,4 +1,0 @@
-  config FORMATTER
-    boolean "opie-formatter (filesystem formatting and mount app)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

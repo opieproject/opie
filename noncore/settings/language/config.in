@@ -1,4 +1,0 @@
-  config LANGUAGE
-    boolean "opie-language (select language for Opie)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

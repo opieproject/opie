@@ -1,4 +1,0 @@
-  config USERMANAGER
-    boolean "opie-usermanager (User/Group manager)"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
