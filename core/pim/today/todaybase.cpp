@@ -1,7 +1,7 @@
 /*
  * todaybase.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -16,10 +16,8 @@
 
 #include "todaybase.h"
 
+#include <qvbox.h>
 #include <qlabel.h>
-#include <qimage.h>
-#include <qpixmap.h>
-#include <qapplication.h>
 #include <qwhatsthis.h>
 
 #include <qpe/resource.h>
@@ -48,18 +46,18 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   cg.setColor( QColorGroup::Text, white );
   cg.setBrush( QColorGroup::Background, QBrush( QColor( 238, 238, 230 ), logo ) );
   pal2.setActive( cg );
-  // today logo
+
+// today logo
   Frame = new QLabel( this, "Frame" );
   Frame->setPalette( pal2 );
   Frame->setFrameShape( QFrame::StyledPanel );
   Frame->setFrameShadow( QFrame::Raised );
   Frame->setLineWidth( 0 );
-  Frame->setMaximumHeight( 50 );
-  Frame->setMinimumHeight( 50 );
 
+  QHBoxLayout *frameLayout = new QHBoxLayout( Frame );
+  QVBox *box1 = new QVBox( Frame );
   // Today text
-  TodayLabel = new QLabel( Frame, "TodayText" );
-  TodayLabel->setGeometry( QRect( 10, 1, 168, 40 ) );
+  TodayLabel = new QLabel( box1, "TodayText" );
   QFont TodayLabel_font(  TodayLabel->font() );
   TodayLabel_font.setBold( TRUE );
   TodayLabel_font.setPointSize( 40 );
@@ -68,8 +66,7 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   TodayLabel->setText( "<font color=#FFFFFF>" + tr("Today") +"</font>" );
 
   // date
-  DateLabel = new QLabel( Frame, "TextLabel1" );
-  DateLabel->setGeometry( QRect( 10, 35, 168, 12 ) );
+  DateLabel = new QLabel( box1, "TextLabel1" );
   QFont DateLabel_font( DateLabel->font() );
   DateLabel_font.setBold( TRUE );
   DateLabel->setFont( DateLabel_font );
@@ -79,9 +76,9 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
   // Opiezilla
   Opiezilla = new QLabel( Frame, "OpieZilla" );
   Opiezilla->setPixmap( opiezilla );
-  Opiezilla->setGeometry( QApplication::desktop()->width()-50 ,1, 45, 47 );
   QWhatsThis::add( Opiezilla , tr( "Today by Maximilian Reiﬂ" ) );
   Opiezilla->setBackgroundOrigin( QLabel::ParentOrigin );
+
 
   // Ownerfield
   OwnerField = new OClickableLabel( this , "Owner" );
@@ -91,11 +88,16 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
 
   // config
   ConfigButton = new OClickableLabel ( Frame, "PushButton1" );
-  ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 29, 25, 20 ) );
   ConfigButton->setPixmap( config );
   QWhatsThis::add( ConfigButton, tr( "Click here to get to the config dialog" ) );
   ConfigButton->setBackgroundOrigin( QLabel::ParentOrigin );
+
+  frameLayout->addWidget( box1 );
+  frameLayout->addStretch( 2 );
+  frameLayout->addWidget( ConfigButton,  0, AlignBottom );
+  frameLayout->addWidget( Opiezilla );
 }
+
 
 /**
  *  D' tor

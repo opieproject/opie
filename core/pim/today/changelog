@@ -1,7 +1,12 @@
+0.6.2
+
+* header can now be made smaller
+* changed header to different layout mode to play nicer with life rotation
+
 0.6.1 
 
 * datebook plugin now can now also show following days
-+ changed refresh 
+* changed refresh 
 * fixed one mem leak
 
 0.6

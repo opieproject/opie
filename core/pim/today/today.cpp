@@ -145,17 +145,9 @@ void Today::init() {
     if ( m_hideBanner )  {
         Opiezilla->hide();
         TodayLabel->hide();
-        Frame->setMaximumHeight( 18 );
-        Frame->setMinimumHeight( 18 );
-        DateLabel->setGeometry( QRect( 10, 2, 168, 12 ) );
-        ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-20, 0, 25, 20 ) );
     } else {
         Opiezilla->show();
         TodayLabel->show();
-        Frame->setMaximumHeight( 50 );
-        Frame->setMinimumHeight( 50 );
-        DateLabel->setGeometry( QRect( 10, 35, 168, 12 ) );
-        ConfigButton->setGeometry( QRect( QApplication::desktop()->width()-80, 29, 25, 20 ) );
     }
 
     layout = new QVBoxLayout( this );
