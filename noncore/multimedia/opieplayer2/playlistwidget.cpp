@@ -171,7 +171,7 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     mediaPlayerState->setFullscreen(  b );
     pmView->setItemChecked( -16, b );
 
-    pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), mediaPlayerState, SLOT(toggleScaled() ) );
+    //    pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), mediaPlayerState, SLOT(toggleScaled() ) );
 
     pmView->insertSeparator(-1);
 
