@@ -3,260 +3,260 @@
     <name>DocTabSettings</name>
     <message>
         <source>Enable the Documents Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut Dokumentu Logu</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Piezīme:&lt;/b&gt; Šo uzstādījumu maiņai ir jāpārstartē Opie.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atķeksējiet, ja vēlaties padarīt redzamu Dokumentu sadaļu.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Mērogot aplikāciju Atverot</translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut peldēšanu un mērogošanu</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Piezīme:&lt;/b&gt; Šo uzstādījumu maiņai ir jāpārstartē Opie.</translation>
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atķeksējiet, ja vēlaties lai aplikācija automātiski mērogotos kad parādās ievada logi.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Atķeksējiet, ja vēlaties pārvietot vai mērogot ievada metodes</translation>
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Norādiet ievada metožu aizņemto ekrānu procentos</translation>
     </message>
 </context>
 <context>
     <name>LauncherSettings</name>
     <message>
         <source>Launcher Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaidēja Uzstādījumi</translation>
     </message>
     <message>
         <source>Taskbar</source>
-        <translation type="unfinished"></translation>
+        <translation>Uzdevumujosla</translation>
     </message>
     <message>
         <source>O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>O-Izvēlne</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Tabi</translation>
     </message>
     <message>
         <source>InputMethods</source>
-        <translation type="unfinished"></translation>
+        <translation>IevadaMetodes</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>DocTabs</translation>
     </message>
 </context>
 <context>
     <name>MenuSettings</name>
     <message>
         <source>Load applets in O-Menu:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ielādēt apletus O-Izvēlnē:</translation>
     </message>
     <message>
         <source>Show Launcher tabs in O-Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Rādīt Palaidēja tabus O-Izvēlnē</translation>
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atzīmējiet kurus apletus iekļaut O-Izvēlnē.</translation>
     </message>
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievieno Palaidēja Taba saturu O-Izvēlnei.</translation>
     </message>
     <message>
         <source>Show Applications in Subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Parādīt Aplikācijas ar Apakšlogiem</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Sample 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Piemērs 1</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Piemērs 2</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Piemērs 3</translation>
     </message>
 </context>
 <context>
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot Tabu</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>Fons</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonts</translation>
     </message>
     <message>
         <source>Icons</source>
-        <translation type="unfinished"></translation>
+        <translation>Ikonas</translation>
     </message>
     <message>
         <source>Previewing %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Pirmsapskate %1</translation>
     </message>
     <message>
         <source>This is a rough preview of what the currently selected Tab will look like.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šeit var aplūkot kāds izskatīsies iezīmētais tabs.</translation>
     </message>
     <message>
         <source>Use a custom font</source>
-        <translation type="unfinished"></translation>
+        <translation>Lietot norādītu fontu</translation>
     </message>
     <message>
         <source>Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Tips:</translation>
     </message>
     <message>
         <source>Ruled</source>
-        <translation type="unfinished"></translation>
+        <translation>Rulēts</translation>
     </message>
     <message>
         <source>Solid color</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienlaidus krāsa</translation>
     </message>
     <message>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Atēls</translation>
     </message>
     <message>
         <source>Select...</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlēties...</translation>
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Noklusēts</translation>
     </message>
     <message>
         <source>Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Izmērs:</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Mazs</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation type="unfinished"></translation>
+        <translation>Liels</translation>
     </message>
     <message>
         <source>Color:</source>
-        <translation type="unfinished"></translation>
+        <translation>Krāsa:</translation>
     </message>
 </context>
 <context>
     <name>TabsSettings</name>
     <message>
         <source>Launcher Tabs:</source>
-        <translation type="unfinished"></translation>
+        <translation>Palaidēja Tabi:</translation>
     </message>
     <message>
         <source>foobar</source>
-        <translation type="unfinished"></translation>
+        <translation>foobar</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut lielo aizņemts indikatoru</translation>
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Atļaut animēto aizņemts indikatoru</translation>
     </message>
     <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
-        <translation type="unfinished"></translation>
+        <translation>Izvēlaties kuru Palaidēja Tabu vēlaties labot vai dzēst.</translation>
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Pievieno jaunu Tabu Palaidējam.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atver jaunu dialogu lai izmainītu iezīmēto Tabu.</translation>
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēš Tabu no Palaidēja.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizējiet šo, ja vēlaties lai aizņemtības indikators parādītos ekrāna vidū nevis uz palaidēja.</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivizējiet šo, ja vēlaties redzēt animētu aizņemtības indikatoru startējot aplikācijas.</translation>
     </message>
     <message>
         <source>All Tabs</source>
-        <translation type="unfinished"></translation>
+        <translation>Visiem Tabiem</translation>
     </message>
     <message>
         <source>Documents</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenti</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Kļūda</translation>
     </message>
     <message>
         <source>Not implemented yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Nav vēl realizēts</translation>
     </message>
 </context>
 <context>
     <name>TaskbarSettings</name>
     <message>
         <source>Load applets in Taskbar:</source>
-        <translation type="unfinished"></translation>
+        <translation>Ielādēt apletus Uzdevumjoslā:</translation>
     </message>
     <message>
         <source>Check the applets that you want displayed in the Taskbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Atzīmējiet kurus apletus iekļāut Uzdevumjoslā.</translation>
     </message>
 </context>
 </TS>

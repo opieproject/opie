@@ -3,76 +3,76 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Faila Vārds:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>Grupa:</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>Atslēga:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="unfinished"></translation>
+        <translation>Vērtība:</translation>
     </message>
 </context>
 <context>
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Faili</translation>
     </message>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar atvērt</translation>
     </message>
     <message>
         <source>The directory </source>
-        <translation type="unfinished"></translation>
+        <translation>Direktoriju</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>nevar atvērt.</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>Nevar atvērt</translation>
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished"></translation>
+        <translation>Failu</translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation>nevar atvērt.</translation>
     </message>
     <message>
         <source>no group</source>
-        <translation type="unfinished"></translation>
+        <translation>nav grupas</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Conf Faila Redaktors</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Saglabāt</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>Atjaunot</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēst</translation>
     </message>
 </context>
 </TS>

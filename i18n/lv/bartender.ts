@@ -3,167 +3,170 @@
     <name>BacDialog</name>
     <message>
         <source>Blood Alcohol Estimator</source>
-        <translation type="unfinished"></translation>
+        <translation>Alkahola Promiļu Aprēķins</translation>
     </message>
     <message>
         <source># Drinks Consumed</source>
-        <translation type="unfinished"></translation>
+        <translation>Cik Dzērienu Izlietots</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Svars</translation>
     </message>
     <message>
         <source>Kilos</source>
-        <translation type="unfinished"></translation>
+        <translation>Kg</translation>
     </message>
     <message>
         <source>Pounds</source>
-        <translation type="unfinished"></translation>
+        <translation>Mārciņas</translation>
     </message>
     <message>
         <source>Units</source>
-        <translation type="unfinished"></translation>
+        <translation>Vienības</translation>
     </message>
     <message>
         <source>Period of Time (hours)</source>
-        <translation type="unfinished"></translation>
+        <translation>Laika perjods (stundas)</translation>
     </message>
     <message>
         <source>Male</source>
-        <translation type="unfinished"></translation>
+        <translation>Vīrietis</translation>
     </message>
     <message>
         <source>Female</source>
-        <translation type="unfinished"></translation>
+        <translation>Sieviete</translation>
     </message>
     <message>
         <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezināms</translation>
     </message>
     <message>
         <source>Gender</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzimums</translation>
     </message>
     <message>
         <source>Beer</source>
-        <translation type="unfinished"></translation>
+        <translation>Alus</translation>
     </message>
     <message>
         <source>Wine</source>
-        <translation type="unfinished"></translation>
+        <translation>Vīns</translation>
     </message>
     <message>
         <source>Shot</source>
-        <translation type="unfinished"></translation>
+        <translation>Šāviens</translation>
     </message>
     <message>
         <source>Type of drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēriena tips</translation>
     </message>
     <message>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Aprēķināt</translation>
     </message>
 </context>
 <context>
     <name>Bartender</name>
     <message>
         <source>Bartender</source>
-        <translation type="unfinished"></translation>
+        <translation>Bārmenis</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fails</translation>
     </message>
     <message>
         <source>New Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Cits Dzēriens</translation>
     </message>
     <message>
         <source>Open Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvērt Dzērienu</translation>
     </message>
     <message>
         <source>Find by Drink Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt pēc nosaukuma</translation>
     </message>
     <message>
         <source>Find by Alcohol</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt pēc Alkohola</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>labot</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Jauns</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Atvērt</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <source>Name of Drink</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēriena Nosaukums</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Piezīme</translation>
     </message>
     <message>
         <source>Drink database not opened sucessfully.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Dzērienu datubāzi neizdevās atvērt.
+</translation>
     </message>
     <message>
         <source>Search by drink name
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt pēc dzēriena nosaukuma
+</translation>
     </message>
     <message>
         <source>Drink Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Dzēriena Nosaukums</translation>
     </message>
     <message>
         <source>Alcohol</source>
-        <translation type="unfinished"></translation>
+        <translation>Alkohols</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Meklēt</translation>
     </message>
     <message>
         <source>Sorry no results for
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Atvainojiet nav rezultātu priekš
+</translation>
     </message>
 </context>
 <context>
     <name>New_Drink</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Vārds</translation>
     </message>
     <message>
         <source>Ingredients</source>
-        <translation type="unfinished"></translation>
+        <translation>Sastāvdaļas</translation>
     </message>
 </context>
 <context>
     <name>Show_Drink</name>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
 </context>
 </TS>

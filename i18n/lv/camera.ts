@@ -3,11 +3,11 @@
     <name>CameraMainWindow</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Visi</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Teksts</translation>
     </message>
 </context>
 </TS>
