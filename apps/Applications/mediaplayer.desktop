@@ -1,7 +1,7 @@
 [Desktop Entry]
 Exec=opieplayer2
 Icon=opieplayer2/MPEGPlayer
-MimeType=audio/mpeg;audio/x-wav;audio/x-mpegurl;application/x-ogg;video/x-ogm;video/x-ms-asf;video/quicktime;video/mpeg;video/x-msvideo;playlist/plain;
+MimeType=audio/mpeg;audio/x-wav;audio/x-mpegurl;audio/x-ogg;video/x-ogm;video/x-ms-asf;video/quicktime;video/mpeg;video/x-msvideo;playlist/plain;
 MimeTypeIcons=Sound;Sound;Sound;Sound;MPEGPlayer;MPEGPlayer;MPEGPlayer;MPEGPlayer;MPEGPlayer;opieplayer2/playlist2
 Type=Application
 Name=Opie Media Player
