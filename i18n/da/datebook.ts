@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Indstillinger</translation>
+        <translation>Opsætning</translation>
     </message>
     <message>
         <source>New</source>
