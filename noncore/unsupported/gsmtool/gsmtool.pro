@@ -4,7 +4,8 @@ CONFIG		= qt warn_on release
 DESTDIR         = $(OPIEDIR)/bin
 HEADERS		= gsmtool.h
 SOURCES		= main.cpp gsmtool.cpp
-CXXFLAGS  += -fexceptions
+# This doesn't actually work...
+TMAKE_CXXFLAGS  += -fexceptions
 INCLUDEPATH	+= $(OPIEDIR)/include
 INCLUDEPATH	+= $(GSMLIBDIR)
 DEPENDPATH	+= $(OPIEDIR)/include
