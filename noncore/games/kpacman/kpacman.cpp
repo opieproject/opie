@@ -87,13 +87,13 @@ void Kpacman::menu()
 {
     gamePopup = new QPopupMenu();
     CHECK_PTR( gamePopup );
-    newID = gamePopup->insertItem(i18n("&New"), this, SLOT(newKpacman()),Key_F2);
-    pauseID = gamePopup->insertItem(i18n("&Pause"),
+    newID = gamePopup->insertItem(tr("&New"), this, SLOT(newKpacman()),Key_F2);
+    pauseID = gamePopup->insertItem(tr("&Pause"),
                                     this, SLOT(pauseKpacman()), Key_F3);
-    hofID = gamePopup->insertItem(i18n("&Hall of fame"),
+    hofID = gamePopup->insertItem(tr("&Hall of fame"),
                                     this, SLOT(toggleHallOfFame()), Key_F4);
     gamePopup->insertSeparator();
-    gamePopup->insertItem(i18n("&Quit"), this, SLOT(quitKpacman()), CTRL+Key_Q);
+    gamePopup->insertItem(tr("&Quit"), this, SLOT(quitKpacman()), CTRL+Key_Q);
     gamePopup->setCheckable(TRUE);
 
     optionsPopup = new QPopupMenu();
@@ -102,26 +102,26 @@ void Kpacman::menu()
     modesPopup = new QPopupMenu();
     CHECK_PTR(modesPopup);
 
-    hideMouseCursorID = optionsPopup->insertItem(i18n("&Hide Mousecursor"),
+    hideMouseCursorID = optionsPopup->insertItem(tr("&Hide Mousecursor"),
                                                  this, SLOT(toggleHideMouseCursor()),
                                                  CTRL+Key_H);
     optionsPopup->insertSeparator();
 
     if (lookupSchemes() > 0) {
-        optionsPopup->insertItem(i18n("&Select graphic scheme"),  modesPopup);
+        optionsPopup->insertItem(tr("&Select graphic scheme"),  modesPopup);
         optionsPopup->insertSeparator();
     }
 
-    focusOutPauseID = optionsPopup->insertItem(i18n("&Pause in Background"),
+    focusOutPauseID = optionsPopup->insertItem(tr("&Pause in Background"),
                                                this, SLOT(toggleFocusOutPause()));
-    focusInContinueID = optionsPopup->insertItem(i18n("&Continue in Foreground"),
+    focusInContinueID = optionsPopup->insertItem(tr("&Continue in Foreground"),
                                               this, SLOT(toggleFocusInContinue()));
     optionsPopup->insertSeparator();
 
-    optionsPopup->insertItem(i18n("Change &keys..."), this, SLOT(confKeys()));
+    optionsPopup->insertItem(tr("Change &keys..."), this, SLOT(confKeys()));
 
 #ifndef QWS
-    QString aboutText = i18n("@PACKAGE@ - @VERSION@\n\n"
+    QString aboutText = tr("@PACKAGE@ - @VERSION@\n\n"
                              "Joerg Thoennissen (joe@dsite.de)\n\n"
                              "A pacman game for the KDE Desktop\n\n"
                              "The program based on the source of ksnake\n"
@@ -137,11 +137,11 @@ void Kpacman::menu()
 
     //_menuBar = new KMenuBar(this);
     //CHECK_PTR( _menuBar );
-    //_menuBar->insertItem(i18n("&Game"), gamePopup);
-    //_menuBar->insertItem(i18n("&Options"), optionsPopup);
+    //_menuBar->insertItem(tr("&Game"), gamePopup);
+    //_menuBar->insertItem(tr("&Options"), optionsPopup);
     //_menuBar->insertSeparator();
 #ifndef QWS
-    _menuBar->insertItem(i18n("&Help"), helpPopup);
+    _menuBar->insertItem(tr("&Help"), helpPopup);
 #endif
 }
 
@@ -154,8 +154,8 @@ int Kpacman::lookupSchemes()
     int Scheme = cfg->readNumEntry("Scheme", -1);
 
     if (SchemeCount == 0 || Scheme == -1) {
-        QMessageBox::warning(this, i18n("Configuration Error"),
-                                   i18n("There are no schemes defined,\n"
+        QMessageBox::warning(this, tr("Configuration Error"),
+                                   tr("There are no schemes defined,\n"
                                         "or no scheme is selected."));
         APP_CONFIG_END( cfg );
         return 0;

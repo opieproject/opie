@@ -75,26 +75,26 @@ Score::~Score()
 
 void Score::paintEvent( QPaintEvent *e)
 {
-    if (rect(1, 0, i18n("  1UP ")).intersects(e->rect())) {
+    if (rect(1, 0, tr("  1UP ")).intersects(e->rect())) {
         QPixmap pix;
         QColor fg = BLACK;
         if (cursor.on || paused || lastPlayer != 0)
             fg = WHITE;
-        pix = bitfont->text(i18n("  1UP "), fg, BLACK);
+        pix = bitfont->text(tr("  1UP "), fg, BLACK);
         bitBlt(this, x(1), y(0), &pix);
     }
 
-    if (rect(8, 0, i18n(" HIGH SCORE ")).intersects(e->rect())) {
-            QPixmap pix = bitfont->text(i18n(" HIGH SCORE "), WHITE, BLACK);
+    if (rect(8, 0, tr(" HIGH SCORE ")).intersects(e->rect())) {
+            QPixmap pix = bitfont->text(tr(" HIGH SCORE "), WHITE, BLACK);
         bitBlt(this, x(8), y(0), &pix);
     }
 
-    if (maxPlayer > 1 && rect(21, 0, i18n("  2UP ")).intersects(e->rect())) {
+    if (maxPlayer > 1 && rect(21, 0, tr("  2UP ")).intersects(e->rect())) {
         QPixmap pix;
         QColor fg = BLACK;
         if (cursor.on || paused || lastPlayer != 1)
             fg = WHITE;
-        pix = bitfont->text(i18n("  2UP "), fg, BLACK);
+        pix = bitfont->text(tr("  2UP "), fg, BLACK);
         bitBlt(this, x(21), y(0), &pix);
     }
 
@@ -113,26 +113,26 @@ void Score::paintEvent( QPaintEvent *e)
     }
 
     if (lastScore >= 0) {
-        if (rect(1, 4*1.25, i18n("     CONGRATULATIONS      ")).intersects(e->rect())) {
-            QPixmap pix = bitfont->text(i18n("     CONGRATULATIONS      "), YELLOW, BLACK);
+        if (rect(1, 4*1.25, tr("     CONGRATULATIONS      ")).intersects(e->rect())) {
+            QPixmap pix = bitfont->text(tr("     CONGRATULATIONS      "), YELLOW, BLACK);
             bitBlt(this, x(1), y(4*1.25), &pix);
         }
-        if (rect(1, 6*1.25, i18n("    YOU HAVE ARCHIEVED    ")).intersects(e->rect())) {
-            QPixmap pix = bitfont->text(i18n("    YOU HAVE ARCHIEVED    "), CYAN, BLACK);
+        if (rect(1, 6*1.25, tr("    YOU HAVE ARCHIEVED    ")).intersects(e->rect())) {
+            QPixmap pix = bitfont->text(tr("    YOU HAVE ARCHIEVED    "), CYAN, BLACK);
             bitBlt(this, x(1), y(6*1.25), &pix);
         }
-        if (rect(1, 7*1.25, i18n("  A SCORE IN THE TOP 10.  ")).intersects(e->rect())) {
-            QPixmap pix = bitfont->text(i18n("  A SCORE IN THE TOP 10.  "), CYAN, BLACK);
+        if (rect(1, 7*1.25, tr("  A SCORE IN THE TOP 10.  ")).intersects(e->rect())) {
+            QPixmap pix = bitfont->text(tr("  A SCORE IN THE TOP 10.  "), CYAN, BLACK);
             bitBlt(this, x(1), y(7*1.25), &pix);
         }
-        if (rect(1, 8*1.25, i18n("                          ")).intersects(e->rect())) {
-            QPixmap pix = bitfont->text(i18n("                          "), CYAN, BLACK);
+        if (rect(1, 8*1.25, tr("                          ")).intersects(e->rect())) {
+            QPixmap pix = bitfont->text(tr("                          "), CYAN, BLACK);
             bitBlt(this, x(1), y(8*1.25), &pix);
         }
     }
 
-    if (rect(1, 9.5*1.25, i18n("RNK   SCORE  NAME   DATE")).intersects(e->rect())) {
-            QPixmap pix = bitfont->text(i18n("RNK   SCORE  NAME   DATE"), WHITE, BLACK);
+    if (rect(1, 9.5*1.25, tr("RNK   SCORE  NAME   DATE")).intersects(e->rect())) {
+            QPixmap pix = bitfont->text(tr("RNK   SCORE  NAME   DATE"), WHITE, BLACK);
         bitBlt(this, x(1), y(9.5*1.25), &pix);
     }
 
@@ -155,8 +155,8 @@ void Score::paintEvent( QPaintEvent *e)
 
     if (paused) {
 
-        QPixmap pix = bitfont->text(i18n("PAUSED"), RED, BLACK);
-        QRect r = bitfont->rect(i18n("PAUSED"));
+        QPixmap pix = bitfont->text(tr("PAUSED"), RED, BLACK);
+        QRect r = bitfont->rect(tr("PAUSED"));
         r.moveCenter(QPoint(this->width()/2, this->height()/2));
 
         bitBlt(this, r.x(), r.y(), &pix);
@@ -175,10 +175,10 @@ void Score::timerEvent(QTimerEvent*)
     scrollRepeat = FALSE;
 
     if (lastPlayer == 0)
-        repaint(rect(1, 0, i18n("  1UP ")), FALSE);
+        repaint(rect(1, 0, tr("  1UP ")), FALSE);
 
     if (lastPlayer == 1)
-        repaint(rect(21, 0, i18n("  2UP ")), FALSE);
+        repaint(rect(21, 0, tr("  2UP ")), FALSE);
 }
 
 void Score::keyPressEvent(QKeyEvent *k)
@@ -481,7 +481,7 @@ void Score::write()
 #ifndef QWS
     if (!highscoreFile.exists() && highscoreFile.name() == systemHighscoreFileInfo.filePath())
         KMessageBox::information(0,
-                                 i18n("You're going to create the highscore-file\n"
+                                 tr("You're going to create the highscore-file\n"
                                  "'%1'\n"
 																 "for your maschine, that should be used systemwide.\n"
 																 "\n"
@@ -494,7 +494,7 @@ void Score::write()
 
     if (highscoreFile.name() == privateHighscoreFileInfo.filePath())
         KMessageBox::information(0,
-                                 i18n("You're using a private highscore-file, that's mostly because of\n"
+                                 tr("You're using a private highscore-file, that's mostly because of\n"
                                  "missing write-access to the systemwide file\n"
                                  "'%1' .\n"
                                  "\n"
@@ -519,7 +519,7 @@ void Score::setPause(bool Paused)
 {
     paused = Paused;
 
-    QRect r = bitfont->rect(i18n("PAUSED"));
+    QRect r = bitfont->rect(tr("PAUSED"));
     r.moveCenter(QPoint(this->width()/2, this->height()/2));
     repaint(r, TRUE);
 
@@ -547,7 +547,7 @@ void Score::end()
  */
 QString Score::formatDate(QDate date)
 {
-    QString s = i18n("@YY@/@MM@/@DD@");
+    QString s = tr("@YY@/@MM@/@DD@");
 
     QString dd;
     dd.sprintf("%02d", date.isValid() ? date.year() % 100 : 0);

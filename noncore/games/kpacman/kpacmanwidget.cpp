@@ -114,11 +114,11 @@ void KpacmanWidget::confScheme()
 
         bitfont = new Bitfont(fontName, bitfontFirstChar, bitfontLastChar);
         if (bitfont->width() == 0 || bitfont->height() == 0) {
-            QString msg = i18n("The bitfont could not be contructed.\n\n"
+            QString msg = tr("The bitfont could not be contructed.\n\n"
                                "The file '@FONTNAME@' does not exist,\n"
                                "or is of an unknown format.");
             msg.replace(QRegExp("@FONTNAME@"), fontName);
-            // QMessageBox::critical(this, i18n("Initialization Error"), msg);
+            // QMessageBox::critical(this, tr("Initialization Error"), msg);
             printf("%s\n", msg.data());
         }
     }

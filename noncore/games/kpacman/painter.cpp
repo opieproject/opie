@@ -74,11 +74,11 @@ QList<QPixmap> *Painter::loadPixmap(QWidget*, QString pixmapName,
 
     QPixmap PIXMAP(pixmapName);
     if (PIXMAP.isNull() || PIXMAP.mask() == NULL) {
-        QString msg = i18n("The pixmap could not be contructed.\n\n"
+        QString msg = "The pixmap could not be contructed.\n\n"
                            "The file '@PIXMAPNAME@' does not exist,\n"
-                           "or is of an unknown format.");
+                           "or is of an unknown format.";
         msg.replace(QRegExp("@PIXMAPNAME@"), pixmapName);
-        // QMessageBox::critical(parent, i18n("Initialization Error"), msg);
+        // QMessageBox::critical(parent, tr("Initialization Error"), msg);
         printf("%s\n", msg.data());
         return 0;
     }

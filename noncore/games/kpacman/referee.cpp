@@ -95,8 +95,8 @@ void Referee::paintEvent( QPaintEvent *e)
     }
 
     if ((gameState.testBit(GameOver) || gameState.testBit(Demonstration)) &&
-        rect.intersects(pix->rect(board->position(fruithome), i18n("GAME  OVER"))))
-        pix->draw(board->position(fruithome), Widget, i18n("GAME  OVER"), RED);
+        rect.intersects(pix->rect(board->position(fruithome), tr("GAME  OVER"))))
+        pix->draw(board->position(fruithome), Widget, tr("GAME  OVER"), RED);
 
     for (Energizer *e = energizers->first(); e != 0; e = energizers->next()) {
         if (e && e->state() == on &&
@@ -157,16 +157,16 @@ void Referee::paintEvent( QPaintEvent *e)
         pix->draw(pacman->position(), Widget, PacmanPix, pacman->pix());
 
     if (gameState.testBit(Player) &&
-        rect.intersects(pix->rect(board->position(monsterhome, 0), i18n("PLAYER ONE"))))
-        pix->draw(board->position(monsterhome, 0), Widget, i18n("PLAYER ONE"), CYAN);
+        rect.intersects(pix->rect(board->position(monsterhome, 0), tr("PLAYER ONE"))))
+        pix->draw(board->position(monsterhome, 0), Widget, tr("PLAYER ONE"), CYAN);
 
     if (gameState.testBit(Ready) &&
-        rect.intersects(pix->rect(board->position(fruithome), i18n("READY!"))))
-        pix->draw(board->position(fruithome), Widget, i18n("READY!"), YELLOW);
+        rect.intersects(pix->rect(board->position(fruithome), tr("READY!"))))
+        pix->draw(board->position(fruithome), Widget, tr("READY!"), YELLOW);
 
     if (gameState.testBit(Paused) &&
-        rect.intersects(pix->rect((BoardWidth*BoardHeight)/2-BoardWidth, i18n("PAUSED"))))
-        pix->draw((BoardWidth*BoardHeight)/2-BoardWidth, Widget, i18n("PAUSED"), RED, BLACK);
+        rect.intersects(pix->rect((BoardWidth*BoardHeight)/2-BoardWidth, tr("PAUSED"))))
+        pix->draw((BoardWidth*BoardHeight)/2-BoardWidth, Widget, tr("PAUSED"), RED, BLACK);
 }
 
 void Referee::timerEvent( QTimerEvent *e )
@@ -840,10 +840,10 @@ void Referee::pause()
         stop();
         stopEnergizer();
         gameState.setBit(Paused);
-        repaint(pix->rect((BoardWidth*BoardHeight)/2-BoardWidth, i18n("PAUSED")), FALSE);
+        repaint(pix->rect((BoardWidth*BoardHeight)/2-BoardWidth, tr("PAUSED")), FALSE);
     } else {
         gameState.clearBit(Paused);
-        repaint(pix->rect((BoardWidth*BoardHeight)/2-BoardWidth, i18n("PAUSED")), FALSE);
+        repaint(pix->rect((BoardWidth*BoardHeight)/2-BoardWidth, tr("PAUSED")), FALSE);
         if (pausedTimer) {
             pausedTimer = 0;
             start();
@@ -906,33 +906,33 @@ void Referee::introPaint(int t)
     QString pts;
 
     switch (t) {
-        case  0 : repaint(pix->draw(16, 6, RoomPix, i18n("CHARACTER"), WHITE, QColor(), AlignLeft), FALSE);
-                  repaint(pix->draw(36, 6, RoomPix, i18n("/"), WHITE, QColor(), AlignLeft), FALSE);
-                  repaint(pix->draw(40, 6, RoomPix, i18n("NICKNAME"), WHITE, QColor(), AlignLeft), FALSE);
+        case  0 : repaint(pix->draw(16, 6, RoomPix, tr("CHARACTER"), WHITE, QColor(), AlignLeft), FALSE);
+                  repaint(pix->draw(36, 6, RoomPix, tr("/"), WHITE, QColor(), AlignLeft), FALSE);
+                  repaint(pix->draw(40, 6, RoomPix, tr("NICKNAME"), WHITE, QColor(), AlignLeft), FALSE);
                   break;
         case  1 : introMonster(0);
                   break;
-        case  2 : repaint(pix->draw(16, 10, RoomPix, i18n("-SHADOW"), RED, QColor(), AlignLeft), FALSE);
+        case  2 : repaint(pix->draw(16, 10, RoomPix, tr("-SHADOW"), RED, QColor(), AlignLeft), FALSE);
                   break;
-        case  3 : repaint(pix->draw(38, 10, RoomPix, i18n("\"BLINKY\""), RED, QColor(), AlignLeft), FALSE);
+        case  3 : repaint(pix->draw(38, 10, RoomPix, tr("\"BLINKY\""), RED, QColor(), AlignLeft), FALSE);
                   break;
         case  4 : introMonster(1);
                   break;
-        case  5 : repaint(pix->draw(16, 16, RoomPix, i18n("-SPEEDY"), PINK, QColor(), AlignLeft), FALSE);
+        case  5 : repaint(pix->draw(16, 16, RoomPix, tr("-SPEEDY"), PINK, QColor(), AlignLeft), FALSE);
                   break;
-        case  6 : repaint(pix->draw(38, 16, RoomPix, i18n("\"PINKY\""), PINK, QColor(), AlignLeft), FALSE);
+        case  6 : repaint(pix->draw(38, 16, RoomPix, tr("\"PINKY\""), PINK, QColor(), AlignLeft), FALSE);
                   break;
         case  7 : introMonster(2);
                   break;
-        case  8 : repaint(pix->draw(16, 22, RoomPix, i18n("-BASHFUL"), CYAN, QColor(), AlignLeft), FALSE);
+        case  8 : repaint(pix->draw(16, 22, RoomPix, tr("-BASHFUL"), CYAN, QColor(), AlignLeft), FALSE);
                   break;
-        case  9 : repaint(pix->draw(38, 22, RoomPix, i18n("\"INKY\""), CYAN, QColor(), AlignLeft), FALSE);
+        case  9 : repaint(pix->draw(38, 22, RoomPix, tr("\"INKY\""), CYAN, QColor(), AlignLeft), FALSE);
                   break;
         case 10 : introMonster(3);
                   break;
-        case 11 : repaint(pix->draw(16, 28, RoomPix, i18n("-POKEY"), ORANGE, QColor(), AlignLeft), FALSE);
+        case 11 : repaint(pix->draw(16, 28, RoomPix, tr("-POKEY"), ORANGE, QColor(), AlignLeft), FALSE);
                   break;
-        case 12 : repaint(pix->draw(38, 28, RoomPix, i18n("\"CLYDE\""), ORANGE, QColor(), AlignLeft), FALSE);
+        case 12 : repaint(pix->draw(38, 28, RoomPix, tr("\"CLYDE\""), ORANGE, QColor(), AlignLeft), FALSE);
                   break;
         case 13 : pts.sprintf("%d", pointScore);
                   repaint(pix->draw(28, 44, RoomPix, pts.data(), WHITE, QColor(), AlignRight), FALSE);
@@ -1096,8 +1096,8 @@ void Referee::play()
     emit setLevel(level);
     emit setPoints(points);
 
-    repaint(pix->rect(board->position(monsterhome, 0), i18n("PLAYER ONE")), FALSE);
-    repaint(pix->rect(board->position(fruithome), i18n("READY!")), FALSE);
+    repaint(pix->rect(board->position(monsterhome, 0), tr("PLAYER ONE")), FALSE);
+    repaint(pix->rect(board->position(fruithome), tr("READY!")), FALSE);
 
     timerCount = 0;
     QTimer::singleShot(playerDurMS, this, SLOT(ready()));
@@ -1114,7 +1114,7 @@ void Referee::ready()
         emit setLifes(--lifes);
         gameState.clearBit(Player);
         gameState.clearBit(Init);
-        repaint(pix->rect(board->position(monsterhome, 0), i18n("PLAYER ONE")), FALSE);
+        repaint(pix->rect(board->position(monsterhome, 0), tr("PLAYER ONE")), FALSE);
         repaintFigures();
         QTimer::singleShot(playerDurMS, this, SLOT(ready()));
         return;
@@ -1122,12 +1122,12 @@ void Referee::ready()
 
     if (gameState.testBit(Ready)) {
         gameState.clearBit(Ready);
-        repaint(pix->rect(board->position(fruithome), i18n("READY!")), FALSE);
+        repaint(pix->rect(board->position(fruithome), tr("READY!")), FALSE);
         start();
     } else {
         gameState.setBit(Ready);
         gameState.clearBit(Init);
-        repaint(pix->rect(board->position(fruithome), i18n("READY!")), FALSE);
+        repaint(pix->rect(board->position(fruithome), tr("READY!")), FALSE);
         QTimer::singleShot(readyDurMS, this, SLOT(ready()));
     }
 }
@@ -1294,7 +1294,7 @@ void Referee::killedPlay()
                 energizers->at(e)->setOff();
                 repaint(pix->rect(board->position(energizer, e), EnergizerPix), FALSE);
             }
-            repaint(pix->rect(board->position(fruithome), i18n("GAME  OVER")), FALSE);
+            repaint(pix->rect(board->position(fruithome), tr("GAME  OVER")), FALSE);
             QTimer::singleShot(gameOverDurMS, this, SLOT(hallOfFame()));
         } else {
             gameState.clearBit(Init);

@@ -30,19 +30,19 @@ Keys::Keys( QWidget *parent, const char *name)
     //KStandardDirs *dirs = KGlobal::dirs();
 
     QPushButton *okButton  = new QPushButton(this);
-    okButton->setText(i18n("Ok"));
+    okButton->setText(tr("Ok"));
     okButton->setFixedSize(okButton->size());
     connect( okButton, SIGNAL(clicked()),this, SLOT(ok()) );
     okButton->move(20,210);
 
     QPushButton *defaultButton  = new QPushButton(this);
-    defaultButton->setText(i18n("Defaults"));
+    defaultButton->setText(tr("Defaults"));
     defaultButton->setFixedSize(defaultButton->size());
     connect( defaultButton, SIGNAL(clicked()),this, SLOT(defaults()) );
     defaultButton->move(140,210);
 
     QPushButton *cancelButton  = new QPushButton(this);
-    cancelButton->setText(i18n("Cancel"));
+    cancelButton->setText(tr("Cancel"));
     cancelButton->setFixedSize(cancelButton->size());
     connect( cancelButton, SIGNAL(clicked()),this, SLOT(reject()) );
     cancelButton->move(260,210);
@@ -93,7 +93,7 @@ Keys::Keys( QWidget *parent, const char *name)
     right->move(220, 90);
 
 
-    setCaption(i18n("Change Direction Keys"));
+    setCaption(tr("Change Direction Keys"));
     setFixedSize(380, 260);
     lab = 0;
     init();
@@ -106,7 +106,7 @@ void Keys::keyPressEvent( QKeyEvent *e )
 
         if (lab != 0) {
             if ( string.isNull() )
-                    lab->setText(i18n("Undefined key"));
+                    lab->setText(tr("Undefined key"));
             else
                 lab->setText(string);
         }

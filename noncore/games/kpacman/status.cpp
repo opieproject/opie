@@ -48,11 +48,11 @@ QList<QPixmap> *Status::loadPixmap(QWidget *parent, QString pixmapName,
 
     QPixmap PIXMAP(pixmapName);
     if (PIXMAP.isNull() || PIXMAP.mask() == NULL) {
-        QString msg = i18n("The pixmap could not be contructed.\n\n"
+        QString msg = tr("The pixmap could not be contructed.\n\n"
                            "The file '@PIXMAPNAME@' does not exist,\n"
                            "or is of an unknown format.");
         msg.replace(QRegExp("@PIXMAPNAME@"), pixmapName);
-        QMessageBox::information(parent, i18n("Initialization Error"),
+        QMessageBox::information(parent, tr("Initialization Error"),
                                  (const char *) msg);
         return 0;
     }

@@ -57,11 +57,11 @@ void Board::init(Image image, QString levelName)
             QFile levelFile(levelName);
             if (!levelFile.open(IO_ReadOnly)) {
 
-                QString msg = i18n("The levelmap could not be constructed.\n\n"
+                QString msg = "The levelmap could not be constructed.\n\n"
                                    "The file '@LEVELNAME@' does not exist,\n"
-                                   "or could not be opened for reading.");
+                                   "or could not be opened for reading.";
                 msg.replace(QRegExp("@LEVELNAME@"), levelName);
-                // QMessageBox::information(0, i18n("Initialization Error"), msg);
+                // QMessageBox::information(0, tr("Initialization Error"), msg);
                 printf("%s\n", msg.data());
             } else {
                 map.fill(' ', BoardHeight*BoardWidth);
