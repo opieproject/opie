@@ -352,11 +352,11 @@ Fatto.</translation>
     </message>
     <message>
         <source>Install to</source>
-        <translation type="unfinished">Installa su</translation>
+        <translation>Installa su</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished">Rimuovi</translation>
+        <translation>Rimuovi</translation>
     </message>
 </context>
 <context>

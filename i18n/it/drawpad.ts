@@ -272,7 +272,7 @@ le pagine?</translation>
     </message>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutte le immagini</translation>
     </message>
 </context>
 <context>
@@ -292,7 +292,7 @@ automatica</translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Tutte le immagini</translation>
     </message>
 </context>
 <context>
