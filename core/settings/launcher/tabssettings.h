@@ -4,7 +4,9 @@
 #include <qwidget.h>
 #include <qmap.h>
 
-class QListView;
+#include "tabconfig.h"
+
+class QListBox;
 
 
 class TabsSettings : public QWidget {
@@ -15,35 +17,20 @@ public:
 
 	void accept ( );
 
-	enum ViewMode {
-		Icon,
-		List
-	};
-	enum BackgroundType {
-		Ruled,
-		SolidColor,
-		Image
-	};
-	struct TabSettings {
-		ViewMode       m_view;
-		BackgroundType m_bg_type;
-		QString        m_bg_image;
-		QString        m_bg_color;
-		QString        m_text_color;
-		QString        m_font_family;
-		int            m_font_size;
-		bool           m_changed;
-	};
+protected slots:
+	void newClicked ( );
+	void deleteClicked ( );
+	void editClicked ( );
 
 protected:
 	void init ( );
 	void readTabSettings ( );
 
 private:
-	QListView *m_list;
+	QListBox *m_list;
 //	QString currentTab;
 	QStringList m_ids;
-	QMap <QString, TabSettings> m_tabs;
+	QMap <QString, TabConfig> m_tabs;
 };
 
 

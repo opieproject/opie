@@ -22,6 +22,8 @@ LauncherSettings::LauncherSettings ( ) : QDialog ( 0, "LauncherSettings", false 
 
 	tw-> addTab ( m_taskbar, "appearance/styletabicon.png", tr( "Taskbar" ));
 	tw-> addTab ( m_tabs, "appearance/styletabicon.png", tr( "Tabs" ));
+	
+	tw-> setCurrentTab ( m_taskbar );
 }
 
 void LauncherSettings::accept ( )

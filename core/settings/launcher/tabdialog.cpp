@@ -1,0 +1,381 @@
+
+#include <qpe/resource.h>
+#include <qpe/config.h>
+
+#include <qlayout.h>
+#include <qvbox.h>
+#include <qtabbar.h>
+#include <qiconview.h>
+#include <qapplication.h>
+#include <qlabel.h>
+#include <qradiobutton.h>
+#include <qbuttongroup.h>
+
+#include <opie/ofontselector.h>
+#include <opie/otabwidget.h>
+#include <opie/ocolorbutton.h>
+
+#include "tabdialog.h"
+
+
+class SampleItem : public QIconViewItem {
+public:
+	SampleItem ( QIconView *v, const QString &text, const QPixmap &pix ) : QIconViewItem ( v, text )
+	{	
+		m_large = pix;
+		m_small. convertFromImage ( pix. convertToImage ( ). smoothScale ( pix. width ( ) / 2, pix. height ( ) / 2 ));
+	}
+	
+	void sizeChange ( )
+	{
+		calcRect ( );
+		repaint ( );
+	}
+	
+	QPixmap *pixmap ( ) const 
+	{
+		if ( iconView ( )-> itemTextPos ( ) == QIconView::Right ) 
+			return (QPixmap *) &m_small;
+		else
+			return (QPixmap *) &m_large;
+	}	
+private:
+	QPixmap m_large, m_small;
+};
+
+class SampleView : public QIconView {
+public:
+	SampleView ( QWidget *parent = 0, const char *name = 0 ) : QIconView ( parent, name )
+	{
+		setItemsMovable ( false );
+		setAutoArrange ( true );
+		setSorting ( true );
+		setFrameStyle ( QFrame::NoFrame );
+		setSpacing ( 4 );
+		setMargin ( 0 );
+		setSelectionMode ( QIconView::NoSelection );
+		setBackgroundMode ( PaletteBase );
+		setViewMode ( TabConfig::Icon );
+		calculateGrid ( Bottom );
+
+
+		new SampleItem ( this, tr( "Sample 1" ), Resource::loadPixmap ( "DateBook" ));
+		new SampleItem ( this, tr( "Sample 2" ), Resource::loadPixmap ( "Calibrate" ));
+		new SampleItem ( this, tr( "Sample 3" ), Resource::loadPixmap ( "UnknownDocument" ));
+		
+		setBackgroundType ( TabConfig::Ruled, QString::null );
+		
+		setMaximumHeight ( firstItem ( )-> height ( ) + 16 );
+	}           
+
+	void setViewMode ( TabConfig::ViewMode m )
+	{
+		viewport ( )-> setUpdatesEnabled ( false );
+		
+		switch ( m ) {
+			case TabConfig::List:				
+				setItemTextPos( QIconView::Right );
+				break;
+			case TabConfig::Icon:
+				setItemTextPos( QIconView::Bottom );
+				break;
+		}
+//		hideOrShowItems ( false );
+
+		for ( QIconViewItem *it = firstItem ( ); it; it = it-> nextItem ( ))
+			((SampleItem *) it )-> sizeChange ( );
+		arrangeItemsInGrid ( true );
+		viewport ( )-> setUpdatesEnabled ( true );
+		update ( );
+	} 
+
+
+	void setBackgroundType( TabConfig::BackgroundType t, const QString &val )
+	{
+		switch ( t ) {
+			case TabConfig::Ruled: {
+				QPixmap bg ( width ( ), 9 );
+				QPainter painter ( &bg );
+				for ( int i = 0; i < 3; i++ ) {
+					painter. setPen ( white );
+					painter. drawLine ( 0, i*3, width()-1, i*3 );
+					painter. drawLine ( 0, i*3+1, width()-1, i*3+1 );
+					painter. setPen ( colorGroup().background().light(105) );
+					painter. drawLine ( 0, i*3+2, width()-1, i*3+2 );
+				}
+				painter.end ( );
+				setBackgroundPixmap ( bg );
+				break;
+			}
+
+			case TabConfig::SolidColor: {
+				setBackgroundPixmap ( QPixmap ( ));
+				if ( val. isEmpty ( ))
+					setBackgroundColor ( colorGroup ( ). base ( ));
+				else
+					setBackgroundColor ( val );
+				break;
+			}
+
+			case TabConfig::Image: {
+				qDebug( "Loading image: %s", val.latin1() );
+				QPixmap bg ( Resource::loadPixmap ( "wallpaper/" + val ));
+				if ( bg. isNull ( )) {
+					QImageIO imgio;
+					imgio. setFileName ( val );
+					QSize ds = qApp-> desktop ( )-> size ( );
+					QString param ( "Scale( %1, %2, ScaleMin )" ); // No tr
+					imgio. setParameters ( param. arg ( ds. width ( )). arg ( ds. height ( )). latin1 ( ));
+					imgio. read ( );
+					bg = imgio. image ( );
+				}
+				setBackgroundPixmap ( bg );
+				break;
+			}
+		}
+		m_bgtype = t;
+		viewport ( )-> update ( );
+	}
+
+	void setTextColor ( const QColor &tc )
+	{
+		m_textcolor = tc;
+		QColorGroup cg = colorGroup ( );
+		cg. setColor ( QColorGroup::Text, tc );
+		setPalette ( QPalette ( cg, cg, cg ));
+		viewport ( )-> update ( );
+	}
+
+	void setViewFont ( const QFont &f )
+	{
+		setFont ( f );
+	}
+	
+	void setItemTextPos ( ItemTextPos pos )
+	{
+		calculateGrid ( pos );
+		QIconView::setItemTextPos( pos );
+	}
+	                    
+	void calculateGrid ( ItemTextPos pos )
+	{
+		int dw = QApplication::desktop ( )-> width ( );
+		int viewerWidth = dw - style ( ).scrollBarExtent ( ). width ( );
+		if ( pos == Bottom ) {
+			int cols = 3;
+			if ( viewerWidth <= 200 )
+				cols = 2;
+			else if ( viewerWidth >= 400 )
+				cols = viewerWidth/96;
+			setSpacing ( 4 );
+			setGridX (( viewerWidth - ( cols + 1 ) * spacing ( )) / cols );
+			setGridY ( fontMetrics ( ). height ( ) * 2 + 24 );
+		} 
+		else {
+			int cols = 2;
+			if ( viewerWidth < 150 )
+				cols = 1;
+			else if ( viewerWidth >= 400 )
+				cols = viewerWidth / 150;
+			setSpacing ( 2 );
+			setGridX (( viewerWidth - ( cols + 1 ) * spacing ( )) / cols );
+			setGridY ( fontMetrics ( ). height ( ) + 2 );
+		}
+	}
+                                                                                                                                                                  
+	void paletteChange( const QPalette &p )
+	{
+		unsetPalette ( );
+		QIconView::paletteChange ( p );
+		if ( m_bgtype == TabConfig::Ruled )
+			setBackgroundType ( TabConfig::Ruled, QString::null );
+		QColorGroup cg = colorGroup ( );
+		cg.setColor ( QColorGroup::Text, m_textcolor );
+		setPalette ( QPalette ( cg, cg, cg ));
+	}
+                            
+	void setBackgroundPixmap ( const QPixmap &pm ) 
+	{
+		m_bgpix = pm;
+	}
+	
+	void setBackgroundColor ( const QColor &c ) 
+	{
+		m_bgcolor = c;
+	}
+	
+	void drawBackground ( QPainter *p, const QRect &r )
+	{
+		if ( !m_bgpix. isNull ( )) {
+			p-> drawTiledPixmap ( r, m_bgpix, QPoint (( r. x ( ) + contentsX ( )) % m_bgpix. width ( ), 
+ 			                                          ( r. y ( ) + contentsY ( )) % m_bgpix. height ( )));
+		} 
+		else
+			p-> fillRect ( r, m_bgcolor );
+	}                                                                                                                
+	
+private:
+	QColor m_textcolor;
+	QColor m_bgcolor;
+	QPixmap m_bgpix;
+	TabConfig::BackgroundType m_bgtype;
+};
+
+
+
+TabDialog::TabDialog ( const QPixmap *tabicon, const QString &tabname, TabConfig &tc, QWidget *parent, const char *name, bool modal, WFlags fl ) 
+	: QDialog ( parent, name, modal, fl )
+{
+	setCaption ( tr( "Edit Tab" ));
+	
+	QVBoxLayout *lay = new QVBoxLayout ( this, 4, 4 );
+	
+	OTabWidget *tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );
+	QWidget *bgtab;
+	       
+	tw-> addTab ( bgtab = createBgTab ( tw ), "appearance/backgroundtabicon.png", tr( "Background" ));
+	tw-> addTab ( createFontTab ( tw ), "appearance/fonttabicon.png", tr( "Font" ));
+	tw-> addTab ( createIconTab ( tw ), "appearance/colorstabicon.png", tr( "Icons" ) );	                           
+	
+	tw-> setCurrentTab ( bgtab );                                       
+	
+	QWidget *sample = new QVBox ( this );	
+	QTabBar *tb = new QTabBar ( sample );
+	QString name ( tr( "Previewing %1" ). arg ( tabname ));
+	
+	tb-> addTab ( tabicon ? new QTab ( *tabicon, name ) : new QTab ( name ));
+	
+	m_sample = new SampleView ( sample );
+			
+	lay-> addWidget ( tw, 10 );
+	lay-> addWidget ( sample, 1 );
+}
+
+
+TabDialog::~TabDialog ( )
+{
+}
+
+QWidget *TabDialog::createFontTab ( QWidget *parent )
+{
+	Config config ( "qpe" );
+	config. setGroup ( "Appearance" );
+
+    QString familyStr = config.readEntry( "FontFamily", "Helvetica" );
+    QString styleStr = config.readEntry( "FontStyle", "Regular" );
+    int size = config.readNumEntry( "FontSize", 10 );
+
+    m_fontselect = new OFontSelector ( parent, "FontTab" );    
+    m_fontselect-> setSelectedFont ( familyStr, styleStr, size );
+    
+    connect( m_fontselect, SIGNAL( fontSelected ( const QFont & )),
+             this, SLOT( fontClicked ( const QFont & )));
+
+    return m_fontselect; 
+}
+
+QWidget *TabDialog::createBgTab ( QWidget *parent )
+{
+    QWidget *tab = new QWidget( parent, "AdvancedTab" );
+    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 4, 4 );
+        
+    QGridLayout* gridLayout = new QGridLayout ( vertLayout );
+    gridLayout-> setColStretch ( 1, 10 );
+
+    QLabel* label = new QLabel( tr( "Type:" ), tab );
+    gridLayout-> addWidget ( label, 0, 0 );
+    m_bgtype = new QButtonGroup( tab, "buttongroup" );
+    m_bgtype-> hide ( );
+    m_bgtype-> setExclusive ( true );
+
+	QRadioButton *rb;
+    rb = new QRadioButton( tr( "Ruled" ), tab, "ruled" );
+    m_bgtype-> insert ( rb, TabConfig::Ruled );
+    gridLayout-> addWidget( rb, 0, 1 );
+
+	QHBoxLayout *hb = new QHBoxLayout ( );
+	hb-> setSpacing ( 4 );
+
+    rb = new QRadioButton( tr( "Solid color" ), tab, "solid" );
+    m_bgtype-> insert ( rb, TabConfig::SolidColor ); 
+    hb-> addWidget ( rb );
+    
+	m_solidcolor = new OColorButton ( tab );
+	connect ( m_solidcolor, SIGNAL( colorSelected ( const QColor & )), this, SLOT( colorClicked ( const QColor & )));
+	hb-> addWidget ( m_solidcolor );
+	hb-> addStretch ( 10 );
+
+    gridLayout-> addLayout ( hb, 1, 1 );
+
+    rb = new QRadioButton( tr( "Image" ), tab, "image" );
+    m_bgtype-> insert ( rb, TabConfig::Image );
+    gridLayout-> addWidget( rb, 3, 1 );
+
+	QPushButton *p;
+
+	connect ( m_bgtype, SIGNAL( clicked ( int )), this, SLOT( bgTypeClicked ( int )));
+
+	vertLayout-> addStretch ( 10 );
+
+	return tab;
+}
+
+QWidget *TabDialog::createIconTab ( QWidget *parent )
+{
+    QWidget *tab = new QWidget( parent, "AdvancedTab" );
+    QVBoxLayout *vertLayout = new QVBoxLayout( tab, 4, 4 );
+        
+    QGridLayout* gridLayout = new QGridLayout ( vertLayout );
+    gridLayout-> setColStretch ( 1, 10 );
+
+    QLabel* label = new QLabel( tr( "Size:" ), tab );
+    gridLayout-> addWidget ( label, 0, 0 );
+    m_iconsize = new QButtonGroup( tab, "buttongroup" );
+    m_iconsize-> hide ( );
+    m_iconsize-> setExclusive ( true );
+
+	QRadioButton *rb;
+    rb = new QRadioButton( tr( "Small" ), tab, "iconsmall" );
+    m_iconsize-> insert ( rb, TabConfig::List );
+    gridLayout-> addWidget( rb, 0, 1 );
+    
+    rb = new QRadioButton( tr( "Large" ), tab, "iconlarge" );
+    m_iconsize-> insert ( rb, TabConfig::Icon );
+    gridLayout-> addWidget( rb, 1, 1 );
+
+	connect ( m_iconsize, SIGNAL( clicked ( int )), this, SLOT( iconSizeClicked ( int )));
+
+	vertLayout-> addStretch ( 10 );
+
+	return tab;
+}
+
+
+void TabDialog::iconSizeClicked ( int s )
+{
+	m_sample-> setViewMode ((TabConfig::ViewMode) s );
+}
+
+void TabDialog::fontClicked ( const QFont &f )
+{
+	m_sample-> setViewFont ( f );
+}
+
+void TabDialog::bgTypeClicked ( int t )
+{
+	QString s;
+
+	m_solidcolor-> setEnabled ( t == TabConfig::SolidColor );
+//	m_imagebrowse-> setEnabled ( t == TabConfig::Image );
+//	m_imagedefault-> setEnabled ( t == TabConfig::Image );
+
+	if ( t == TabConfig::SolidColor )
+		s = m_solidcolor-> color ( ). name ( );
+		
+	m_sample-> setBackgroundType ((TabConfig::BackgroundType) t, s );
+}
+
+void TabDialog::colorClicked ( const QColor &col )
+{
+	m_sample-> setBackgroundType ( TabConfig::SolidColor, col. name ( ));
+}

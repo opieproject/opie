@@ -27,49 +27,63 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
-#include <qlistview.h>
-#include <qheader.h>
+#include <qlistbox.h>
+#include <qpushbutton.h>
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qwhatsthis.h>
 
+#include "tabdialog.h"
+
 #include <stdlib.h>
+#include <qmessagebox.h>
+
+
 
 TabsSettings::TabsSettings ( QWidget *parent, const char *name )
 	: QWidget ( parent, name )
 {
-	QBoxLayout *lay = new QVBoxLayout ( this, 4, 4 );
+	QGridLayout *lay = new QGridLayout ( this, 0, 0, 4, 4 );
 
 	QLabel *l = new QLabel ( tr( "Launcher Tabs:" ), this );
-	lay-> addWidget ( l );
+	lay-> addMultiCellWidget ( l, 0, 0, 0, 1 );
 
-	m_list = new QListView ( this );
-	m_list-> addColumn ( "foobar" );
-	m_list-> header ( )-> hide ( );
-
-	lay-> addWidget ( m_list );
+	m_list = new QListBox ( this );
+	lay-> addMultiCellWidget ( m_list, 1, 4, 0, 0 );
 
 	QWhatsThis::add ( m_list, tr( "foobar" ));
+	
+	QPushButton *p;
+	p = new QPushButton ( tr( "New" ), this );
+	lay-> addWidget ( p, 1, 1 );
+	connect ( p, SIGNAL( clicked ( )), this, SLOT( newClicked ( )));
+
+	p = new QPushButton ( tr( "Edit" ), this );
+	lay-> addWidget ( p, 2, 1 );
+	connect ( p, SIGNAL( clicked ( )), this, SLOT( editClicked ( )));
+
+	p = new QPushButton ( tr( "Delete" ), this );
+	lay-> addWidget ( p, 3, 1 );
+	connect ( p, SIGNAL( clicked ( )), this, SLOT( deleteClicked ( )));
+
+	lay-> setRowStretch ( 4, 10 );
 
 	init ( );
 }
 
 void TabsSettings::init ( )
 {
-	QListViewItem *lvi;
-
 	AppLnkSet rootFolder( MimeType::appsFolderName ( ));
 	QStringList types = rootFolder. types ( );
+	
 	for ( QStringList::Iterator it = types. begin ( ); it != types. end ( ); ++it ) {
-		lvi = new QListViewItem ( m_list, rootFolder. typeName ( *it ));
-		lvi-> setPixmap ( 0, rootFolder. typePixmap ( *it ));
+		m_list-> insertItem ( rootFolder. typePixmap ( *it ), rootFolder. typeName ( *it ));
 		m_ids << *it;
 	}
 	QImage img ( Resource::loadImage ( "DocsIcon" ));
 	QPixmap pix;
 	pix = img. smoothScale ( AppLnk::smallIconSize ( ), AppLnk::smallIconSize ( ));
-	lvi = new QListViewItem ( m_list, tr( "Documents" ));
-	lvi-> setPixmap ( 0, pix );
+	m_list-> insertItem ( pix, tr( "Documents" ));
 	m_ids += "Documents"; // No tr
 
 	readTabSettings ( );
@@ -82,35 +96,35 @@ void TabsSettings::readTabSettings ( )
 	m_tabs. clear ( );
 
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
-		TabSettings ts;
-		ts. m_view    = Icon;
-		ts. m_bg_type = Ruled;
-		ts. m_changed = false;
+		TabConfig tc;
+		tc. m_view    = TabConfig::Icon;
+		tc. m_bg_type = TabConfig::Ruled;
+		tc. m_changed = false;
 
 		cfg. setGroup ( grp. arg ( *it ));
 
 		QString view = cfg. readEntry ( "View", "Icon" );
 		if ( view == "List" ) // No tr
-			ts. m_view = List;
+			tc. m_view = TabConfig::List;
 
 		QString bgType = cfg. readEntry ( "BackgroundType", "Ruled" );
 		if ( bgType == "SolidColor" )
-			ts. m_bg_type = SolidColor;
+			tc. m_bg_type = TabConfig::SolidColor;
 		else if ( bgType == "Image" ) // No tr
-			ts. m_bg_type = Image;
+			tc. m_bg_type = TabConfig::Image;
 
-		ts. m_bg_image = cfg. readEntry ( "BackgroundImage", "wallpaper/opie" );
-		ts. m_bg_color = cfg. readEntry ( "BackgroundColor" );
-		ts. m_text_color = cfg. readEntry ( "TextColor" );
+		tc. m_bg_image = cfg. readEntry ( "BackgroundImage", "wallpaper/opie" );
+		tc. m_bg_color = cfg. readEntry ( "BackgroundColor" );
+		tc. m_text_color = cfg. readEntry ( "TextColor" );
 		QStringList f = cfg. readListEntry ( "Font", ',' );
 		if ( f. count ( ) == 4 ) {
-			ts. m_font_family = f [0];
-			ts. m_font_size = f [1]. toInt ( );
+			tc. m_font_family = f [0];
+			tc. m_font_size = f [1]. toInt ( );
 		} else {
-			ts. m_font_family = font ( ). family ( );
-			ts. m_font_size = font ( ). pointSize ( );
+			tc. m_font_family = font ( ). family ( );
+			tc. m_font_size = font ( ). pointSize ( );
 		}
-		m_tabs [*it] = ts;
+		m_tabs [*it] = tc;
 	}
 }
 
@@ -123,55 +137,89 @@ void TabsSettings::accept ( )
 	QString grp ( "Tab %1" ); // No tr
 
 	for ( QStringList::Iterator it = m_ids. begin ( ); it != m_ids. end ( ); ++it ) {
-		TabSettings &tab = m_tabs [*it];
+		TabConfig &tc = m_tabs [*it];
 
 		cfg. setGroup ( grp. arg ( *it ));
-		if ( !tab. m_changed )
+		if ( !tc. m_changed )
 			continue;
-		switch ( tab. m_view ) {
-		case Icon:
-			cfg.writeEntry ( "View", "Icon" );
-			break;
-		case List:
-			cfg.writeEntry ( "View", "List" );
-			break;
+		switch ( tc. m_view ) {
+			case TabConfig::Icon:
+				cfg.writeEntry ( "View", "Icon" );
+				break;
+			case TabConfig::List:
+				cfg.writeEntry ( "View", "List" );
+				break;
 		}
 
 		QCopEnvelope e ( "QPE/Launcher", "setTabView(QString,int)" );
-		e << *it << tab. m_view;
+		e << *it << tc. m_view;
 
-		cfg. writeEntry ( "BackgroundImage", tab. m_bg_image );
-		cfg. writeEntry ( "BackgroundColor", tab. m_bg_color );
-		cfg. writeEntry ( "TextColor", tab. m_text_color );
+		cfg. writeEntry ( "BackgroundImage", tc. m_bg_image );
+		cfg. writeEntry ( "BackgroundColor", tc. m_bg_color );
+		cfg. writeEntry ( "TextColor", tc. m_text_color );
 
-		QString f = tab. m_font_family + "," + QString::number ( tab. m_font_size ) + ",50,0";
+		QString f = tc. m_font_family + "," + QString::number ( tc. m_font_size ) + ",50,0";
 		cfg. writeEntry ( "Font", f );
 		QCopEnvelope be ( "QPE/Launcher", "setTabBackground(QString,int,QString)" );
 
-		switch ( tab. m_bg_type ) {
-		case Ruled:
-			cfg.writeEntry( "BackgroundType", "Ruled" );
-			be << *it << tab. m_bg_type << QString("");
-			break;
-		case SolidColor:
-			cfg.writeEntry( "BackgroundType", "SolidColor" );
-			be << *it << tab. m_bg_type << tab. m_bg_color;
-			break;
-		case Image:
-			cfg.writeEntry( "BackgroundType", "Image" );
-			be << *it << tab. m_bg_type << tab. m_bg_image;
-			break;
+		switch ( tc. m_bg_type ) {
+			case TabConfig::Ruled:
+				cfg.writeEntry( "BackgroundType", "Ruled" );
+				be << *it << tc. m_bg_type << QString("");
+				break;
+			case TabConfig::SolidColor:
+				cfg.writeEntry( "BackgroundType", "SolidColor" );
+				be << *it << tc. m_bg_type << tc. m_bg_color;
+				break;
+			case TabConfig::Image:
+				cfg.writeEntry( "BackgroundType", "Image" );
+				be << *it << tc. m_bg_type << tc. m_bg_image;
+				break;
 		}
 
 		QCopEnvelope te( "QPE/Launcher", "setTextColor(QString,QString)" );
-		te << *it << tab. m_text_color;
+		te << *it << tc. m_text_color;
 
 		QCopEnvelope fe ( "QPE/Launcher", "setFont(QString,QString,int,int,int)" );
-		fe << *it << tab. m_font_family;
-		fe << tab. m_font_size;
+		fe << *it << tc. m_font_family;
+		fe << tc. m_font_size;
 		fe << 50 << 0;
 
-		tab. m_changed = false;
+		tc. m_changed = false;
 	}
 }
 
+void TabsSettings::newClicked ( )
+{
+	QMessageBox::information ( this, tr( "Error" ), tr( "Not implemented yet" ));
+}
+
+void TabsSettings::deleteClicked ( )
+{
+	int ind = m_list-> currentItem ( );
+	
+	if ( ind < 0 )
+		return;
+
+	QMessageBox::information ( this, tr( "Error" ), tr( "Not implemented yet" ));
+}
+
+void TabsSettings::editClicked ( )
+{
+	int ind = m_list-> currentItem ( );
+	
+	if ( ind < 0 )
+		return;
+
+	TabConfig tc = m_tabs [m_ids [ind]];
+		
+	TabDialog *d = new TabDialog ( m_list-> pixmap ( ind ), m_list-> text ( ind ), tc, this, "TabDialog", true );
+
+	d-> showMaximized ( );	
+	if ( d-> exec ( ) == QDialog::Accepted ) {
+		tc. m_changed = true;
+		m_tabs [m_ids [ind]] = tc;
+	}
+	
+	delete d;
+}
