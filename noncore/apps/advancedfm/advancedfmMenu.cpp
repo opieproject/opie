@@ -816,7 +816,7 @@ void AdvancedFm::renameIt() {
 }
 
 void AdvancedFm::okRename() {
-   if( !CurrentView()->currentItem()) return;
+   if( !renameBox) return;
 
    QString newName = renameBox->text();
      cancelRename();

@@ -36,9 +36,10 @@ void AdvancedFm::init() {
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     layout->setSpacing( 2);
-    layout->setMargin( 2);
+    layout->setMargin( 0); // squeeze
 
  QMenuBar *menuBar = new QMenuBar(this);
+ menuBar->setMargin( 0 ); // squeeze
   fileMenu = new QPopupMenu( this );
   viewMenu  = new QPopupMenu( this );
 //  customDirMenu  = new QPopupMenu( this );
@@ -54,7 +55,6 @@ void AdvancedFm::init() {
   menuBar->insertItem( cdUpButton );
 
 
-  QHBox *lineBox = new QHBox( this );
 
   qpeDirButton= new QToolButton( 0,"QPEButton");
   qpeDirButton->setPixmap( Resource::loadPixmap("launcher/opielogo16x16"));//,"",this,"QPEButton");
@@ -114,7 +114,11 @@ void AdvancedFm::init() {
 //     customDirMenu->insertItem(tr("Remove This Directory"));
 //     customDirMenu->insertSeparator();
 
-  menuButton = new MenuButton( lineBox );
+  QHBoxLayout *CBHB = new QHBoxLayout(); // parent layout will be set later
+  CBHB->setMargin( 0 );
+  CBHB->setSpacing( 1 );
+
+  menuButton = new MenuButton( this );
 
   menuButton->setUseLabel(false);
   menuButton->setMaximumWidth( 20 );
@@ -122,15 +126,17 @@ void AdvancedFm::init() {
   menuButton->insertItem( s_removeBookmark);
   menuButton->insertSeparator();
   menuButton->setFocusPolicy(NoFocus);
+  CBHB->addWidget( menuButton );
 
   customDirsToMenu();
 
-  currentPathCombo = new QComboBox( FALSE, lineBox, "currentPathCombo" );
+  currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
   currentPathCombo->setEditable(TRUE);
   currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
   currentPathCombo->setFocusPolicy(NoFocus);
-  layout->addWidget( lineBox );
+  CBHB->addWidget( currentPathCombo );
 
+  layout->addLayout( CBHB );
 
   TabWidget = new OSplitter( Horizontal, this, "TabWidget" );
 //  TabWidget = new QTabWidget( this, "TabWidget" );
