@@ -4,3 +4,4 @@ Section: opie/system
 Priority: optional
 Version: 0.9.1
 Description: Remove qtopia -- Use at own risc -- will remove qtopia and /opt/QtPalmtop/
+Files:
