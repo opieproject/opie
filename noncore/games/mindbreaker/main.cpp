@@ -20,16 +20,7 @@
 
 #include "mindbreaker.h"
 
-#include <qtopia/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 
-int main( int argc, char **argv )
-{
-    QPEApplication a( argc, argv );
-
-    MindBreaker w;
-    w.setCaption(MindBreaker::tr("Mind Breaker"));
-    QPEApplication::setInputMethodHint( &w, QPEApplication::AlwaysOff );
-    a.showMainWidget(&w);
-
-    return a.exec();
-}
+using namespace Opie::Core;
+OPIE_EXPORT_APP( OApplicationFactory<MindBreaker> )
