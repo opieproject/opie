@@ -5,7 +5,7 @@ CONFIG += qt debug
 
 # Input
 HEADERS = todoplugin.h todopluginimpl.h todopluginconfig.h  \
-	todopluginwidget.h ../../configwidget.h
+	todopluginwidget.h
 SOURCES = todoplugin.cpp todopluginimpl.cpp todopluginconfig.cpp \
 	todopluginwidget.cpp
 
