@@ -59,7 +59,7 @@ public:
     bool isUsingPlaylist() const { return usePlaylist; }
     bool isPaused() const { return paused; }
     bool isPlaying() const { return playing; }
-    bool isStop() const { return stoped; }
+    bool isStopped() const { return stopped; }
     long position() const { return curPosition; }
     long length() const { return curLength; }
     char view() const { return curView; }
@@ -74,7 +74,7 @@ public slots:
     void setPlaylist( bool b );
     void setPaused( bool b );
     void setPlaying( bool b );
-    void setStop( bool b );
+    void setStopped( bool b );
     void setPosition( long p );
     void updatePosition( long p );
     void setLength( long l );
@@ -129,7 +129,7 @@ private:
     bool usePlaylist;
     bool paused;
     bool playing;
-    bool stoped;
+    bool stopped;
     long curPosition;
     long curLength;
     char curView;

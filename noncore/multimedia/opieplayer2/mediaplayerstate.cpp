@@ -172,15 +172,15 @@ void MediaPlayerState::setPlaying( bool b ) {
         return;
     }
     playing = b;
-    stoped = !b;
+    stopped = !b;
     emit playingToggled(b);
 }
 
-void MediaPlayerState::setStop( bool b ) {
-    if ( stoped  == b ) {
+void MediaPlayerState::setStopped( bool b ) {
+    if ( stopped  == b ) {
         return;
     }
-    stoped = b;
+    stopped = b;
     emit stopToggled(b);
 }
 
