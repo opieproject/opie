@@ -206,9 +206,6 @@ void POP3wrapper::logout()
 
 QList<Folder>* POP3wrapper::listFolders()
 {
-    /* TODO: integrate MH directories 
-       but not before version 0.1 ;)
-    */
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
     Folder*inb=new Folder("INBOX","/");
@@ -222,10 +219,36 @@ void POP3wrapper::deleteMail(const RecMail&mail)
     if (!m_pop3) return;
     int err = mailpop3_dele(m_pop3,mail.getNumber());
     if (err != MAILPOP3_NO_ERROR) {
-        qDebug("error deleting mail");
+        Global::statusMessage(tr("error deleting mail"));
     }
 }
 
 void POP3wrapper::answeredMail(const RecMail&)
 {
+}
+
+int POP3wrapper::deleteAllMail(const Folder*)
+{
+    login();
+    if (!m_pop3) return 0;
+    carray * messages = 0;
+    
+    /* if connected this info is cached! */
+    int err = 0;
+    mailpop3_list( m_pop3, &messages );
+    
+    int res = 1;
+    for (unsigned int i = 0; messages!=0 && i < carray_count(messages);++i) {
+        mailpop3_msg_info *info;
+        err = mailpop3_get_msg_info(m_pop3,i+1,&info);
+        if (info->msg_deleted)
+            continue;
+        err = mailpop3_dele(m_pop3,i+1);
+        if (err != MAILPOP3_NO_ERROR) {
+            Global::statusMessage(tr("Error deleting mail %1").arg(i+1));
+            res = 0;
+            break;
+        }
+    }
+    return res;
 }

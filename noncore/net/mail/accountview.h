@@ -25,6 +25,7 @@ public:
     virtual QPopupMenu * getContextMenu(){return 0;};
     virtual void contextMenuSelected(int){}
 protected:
+    virtual void deleteAllMail(AbstractMail*wrapper,Folder*f);
     static const QString contextName;
 };
 
@@ -51,6 +52,9 @@ public:
     ~POP3folderItem();
     virtual void refresh(QList<RecMail>&);
     virtual RecBody fetchBody(const RecMail&);
+    virtual QPopupMenu * getContextMenu();
+    virtual void contextMenuSelected(int);
+
 private:
     Folder *folder;
     POP3viewItem *pop3;
@@ -96,7 +100,6 @@ public:
 protected:
     virtual void createNewFolder();
     virtual void deleteFolder();
-    virtual void deleteAllMails();    
     
 private:
     Folder *folder;
@@ -140,7 +143,6 @@ public:
     virtual void contextMenuSelected(int);
 
 protected:
-    virtual void deleteAllMails();
     virtual void deleteFolder();
 private:
     Folder *folder;

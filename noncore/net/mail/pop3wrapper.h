@@ -19,6 +19,7 @@ public:
 
     virtual void deleteMail(const RecMail&mail);
     virtual void answeredMail(const RecMail&mail);
+    virtual int deleteAllMail(const Folder*);
 
     virtual RecBody fetchBody( const RecMail &mail );
     static void pop3_progress( size_t current, size_t maximum );
