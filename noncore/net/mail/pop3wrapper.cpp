@@ -279,12 +279,11 @@ QList<Folder>* POP3wrapper::listFolders()
     return folders;
 }
 
-QString POP3wrapper::fetchPart(const RecMail&,const QValueList<int>&,bool)
+QString POP3wrapper::fetchPart(const RecMail&,const RecPart&)
 {
     return "";
 }
 
-QString POP3wrapper::fetchPart(const RecMail&,const RecPart&)
+void POP3wrapper::deleteMail(const RecMail&)
 {
-    return "";
 }

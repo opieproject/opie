@@ -18,8 +18,8 @@ public:
     /* mailbox will be ignored */
     virtual void listMessages(const QString & mailbox, QList<RecMail> &target );
     virtual QList<Folder>* listFolders();
-    virtual QString fetchPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false);
     virtual QString fetchPart(const RecMail&mail,const RecPart&part);
+    virtual void deleteMail(const RecMail&mail);
 
     RecBody fetchBody( const RecMail &mail );
     static void pop3_progress( size_t current, size_t maximum );

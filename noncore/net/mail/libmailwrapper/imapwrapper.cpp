@@ -696,3 +696,35 @@ QString IMAPwrapper::fetchPart(const RecMail&mail,const RecPart&part)
 {
     return fetchPart(mail,part.Positionlist(),false);
 }
+
+void IMAPwrapper::deleteMail(const RecMail&mail)
+{
+    mailimap_flag_list*flist;
+    mailimap_set *set;
+    mailimap_store_att_flags * store_flags;
+    int err;
+    login();
+    if (!m_imap) {
+        return;
+    }
+    const char *mb = mail.getMbox().latin1();
+    err = mailimap_select( m_imap, (char*)mb);
+    if ( err != MAILIMAP_NO_ERROR ) {
+        qDebug("error selecting mailbox for delete: %s",m_imap->imap_response);
+        return;
+    }
+    flist = mailimap_flag_list_new_empty();
+    mailimap_flag_list_add(flist,mailimap_flag_new_deleted());
+    store_flags = mailimap_store_att_flags_new_set_flags(flist);
+    set = mailimap_set_new_single(mail.getNumber());
+    err = mailimap_store(m_imap,set,store_flags);
+    if (err != MAILIMAP_NO_ERROR) {
+        qDebug("error deleting mail: %s",m_imap->imap_response);
+        return;
+    }
+    err = mailimap_expunge(m_imap);
+    if (err != MAILIMAP_NO_ERROR) {
+        qDebug("error deleting mail: %s",m_imap->imap_response);
+    }
+    qDebug("Delete successfull");
+}
