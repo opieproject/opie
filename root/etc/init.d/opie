@@ -51,21 +51,27 @@ case $1 in
 	 fi
 
 	
+	 if [ -x /usr/bin/ssh-agent ]; then
+               SSHAGENT=/usr/bin/ssh-agent
+         else
+               SSHAGENT=""
+         fi
+
 	if [ -x $OPIEDIR/bin/opie-login ]; then
 	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
     		echo Starting Opie-login....
-		$OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
+		$SSHAGENT $OPIEDIR/bin/opie-login 2>/dev/null >/dev/null &
 	    else
 		echo Starting Opie-login with syslog logging.....
-		($OPIEDIR/bin/opie-login  2>&1 | logger ) &
+		($SSHAGENT $OPIEDIR/bin/opie-login  2>&1 | logger ) &
 	    fi
 	else
 	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
     		echo Starting Opie....
-		$OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
+		$SSHAGENT $OPIEDIR/bin/qpe 2>/dev/null >/dev/null &
 	    else
 		echo Starting Opie with syslog logging.....
-		($OPIEDIR/bin/qpe 2>&1 | logger ) &
+		($SSHAGENT $OPIEDIR/bin/qpe 2>&1 | logger ) &
 	    fi
 	fi
 
