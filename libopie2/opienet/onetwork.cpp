@@ -1006,7 +1006,8 @@ int OWirelessNetworkInterface::signalStrength() const
     int lev = stat.qual.level; //FIXME: Do something with them?
     int noi = stat.qual.noise; //FIXME: Do something with them?
 
-    return cur*100/max;
+
+    return max != 0 ? cur*100/max: -1;
 }
 
 
