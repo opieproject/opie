@@ -250,10 +250,10 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   configMenu = new QPopupMenu( this);
   colorMenu = new QPopupMenu( this);
   scrollMenu = new QPopupMenu( this);
-  editCommandListMenu = new QPopupMenu( this);  
-  
+  editCommandListMenu = new QPopupMenu( this);
+
   configMenu->insertItem("Command List",editCommandListMenu);
-  
+
   bool listHidden;
   cfg.setGroup("Menubar");
   if( cfg.readEntry("Hidden","FALSE") == "TRUE")  {
@@ -339,7 +339,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
 
   cfg.setGroup("Commands");
   commonCombo->setInsertionPolicy(QComboBox::AtCurrent);
-  
+
   initCommandList();
 //   for (int i = 0; commonCmds[i] != NULL; i++) {
 //        commonCombo->insertItem( commonCmds[i], i );
@@ -354,7 +354,7 @@ void Konsole::init(const char* _pgm, QStrList & _args)
   scrollMenu->insertItem(tr( "Left" ));
   scrollMenu->insertItem(tr( "Right" ));
   configMenu->insertItem(tr( "ScrollBar" ),scrollMenu);
-  
+
       // create applications /////////////////////////////////////////////////////
   setCentralWidget(tab);
 
@@ -777,7 +777,7 @@ void Konsole::scrollMenuSelected(int index)
 //      qDebug( temp.sprintf("scrollbar menu %d",index));
     TEWidget* te = getTe();
     Config cfg("Konsole");
-    cfg.setGroup("Scrollbar");
+    cfg.setGroup("ScrollBar");
     switch( index){
     case -24:
         te->setScrollbarLocation(0);
@@ -792,7 +792,7 @@ void Konsole::scrollMenuSelected(int index)
         cfg.writeEntry("Position",2);
         break;
     };
-   
+
 }
 
 void Konsole::editCommandListMenuSelected(int iD)
