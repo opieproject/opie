@@ -272,14 +272,17 @@ VolumeControl::VolumeControl ( VolumeApplet *icon, bool /*showMic*/, QWidget *pa
 
   upButton = new QPushButton ( this );
   upButton-> setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
-  upButton-> setPixmap ( Resource::loadPixmap ( "up" ));
+  QPixmap pic;
+  pic.convertFromImage( Resource::loadImage( "up" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+  upButton-> setPixmap ( pic );
   upButton-> setFocusPolicy ( QWidget::NoFocus );
 
   vbox-> addWidget ( upButton );
 
   downButton = new QPushButton ( this );
   downButton-> setSizePolicy ( QSizePolicy ( QSizePolicy::Minimum, QSizePolicy::Expanding ));
-  downButton-> setPixmap ( Resource::loadPixmap ( "down" ));
+  pic.convertFromImage( Resource::loadImage( "down" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+  downButton-> setPixmap ( pic );
   downButton-> setFocusPolicy ( QWidget::NoFocus );
 
   vbox-> addWidget ( downButton );
@@ -724,7 +727,9 @@ VolumeApplet::VolumeApplet( QWidget *parent, const char *name )
   setFixedWidth ( AppLnk::smallIconSize()  );
   setFixedHeight ( AppLnk::smallIconSize()+4 );
 
-  m_pixmap = new QPixmap ( Resource::loadPixmap ( "volume" ));
+  QPixmap pic;
+  pic.convertFromImage( Resource::loadImage( "volume" ).smoothScale( AppLnk::smallIconSize(), AppLnk::smallIconSize() ) );
+  m_pixmap = new QPixmap ( pic );
   m_dialog = new VolumeControl ( this, true, this, "volumecontrol" );
 
   connect ( qApp, SIGNAL( volumeChanged(bool)), m_dialog, SLOT( volumeChanged(bool)));
