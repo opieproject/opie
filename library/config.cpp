@@ -524,9 +524,11 @@ void Config::read()
     // if they are valid configs ( like passing a mp3 ... )
     // I just hope that there are no conf files > 100000 byte
     // not the best solution, find something else later
-    if ( f.size() > 100000 )  {
+    if ( f.getch()!='[' ||f.size() > 100000 )  {
+        git = groups.end();
         return;
     }
+    f.ungetch('[');
 
 
     QTextStream s( &f );
