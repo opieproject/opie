@@ -88,7 +88,13 @@ namespace {
     struct UidGen {
         QString uuid();
     };
-#if defined(_OS_LINUX_)
+#if !defined(_OS_LINUX_)
+    QString UidGen::uuid() {
+        uuid_t uuid;
+        uuid_generate( uuid );
+        return QUUid( uuid ).toString();
+    }
+#else
     /*
      * linux got a /proc/sys/kernel/random/uuid file
      * it'll generate the uuids for us
@@ -101,12 +107,6 @@ namespace {
         QTextStream stream(&file);
 
         return "{" + stream.read().stripWhiteSpace() + "}";
-    }
-#else
-    QString UidGen::uuid() {
-        uuid_t uuid;
-        uuid_generate( uuid );
-        return QUUid( uuid ).toString();
     }
 #endif
 }
