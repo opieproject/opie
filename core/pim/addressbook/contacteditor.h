@@ -75,6 +75,7 @@ class ContactEditor : public QDialog {
 
 	private:
 		void init();
+		void makeFieldOrder();
 		void saveEntry();
 		bool isEmpty();
 		void cleanupFields();

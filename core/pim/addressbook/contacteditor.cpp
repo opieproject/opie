@@ -71,11 +71,9 @@ ContactEditor::ContactEditor(	const OContact &entry,
 	defaultEmailChooserPosition = -1;
 	contactfields = new OContactFields();
 
-	qDebug("load fields order");
-	contactfields->loadFromRecord( ent );
-
 	init();
 	setEntry( entry );
+
 }
 
 ContactEditor::~ContactEditor() {
@@ -585,11 +583,6 @@ void ContactEditor::init() {
 	cmbChooserField3->insertStringList( trlChooserNames );
 	cmbChooserField4->insertStringList( trlChooserNames );
 
-	qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
-	cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(0) );
-	cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(1) );
-	cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(2) );
-
 	connect( btnFullName, SIGNAL(clicked()), this, SLOT(slotName()) );
 
 	connect( txtFullName, SIGNAL(textChanged(const QString &)), this, SLOT(slotFullNameChange(const QString &)) );
@@ -628,6 +621,12 @@ void ContactEditor::init() {
 	new QPEDialogListener(this);
 
 	setPersonalView ( m_personalView );
+	show();
+	qDebug("fieldoder %i %i %i",contactfields->getFieldOrder(0),contactfields->getFieldOrder(1), contactfields->getFieldOrder(2) );
+	cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(0) );
+	cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(1) );
+	cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(2) );
+
 }
 
 void ContactEditor::defaultEmailChanged(int i){
@@ -653,16 +652,19 @@ void ContactEditor::chooserChange( const QString &textChanged, int index, QLineE
 	QString type = slChooserNames[index];
 	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",type.latin1(),textChanged.latin1(), index,  widgetPos );
 	contactfields->setFieldOrder( widgetPos, index );
-        if ( type == "Default Email"){         
-	  defaultEmail = textChanged;
-	  if (cmbDefaultEmail) delete cmbDefaultEmail;
-	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
-	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); 
-	  cmbDefaultEmail->show();
-	  populateDefaultEmailCmb();
- 	  connect(cmbDefaultEmail,SIGNAL(activated(int)),
-		  SLOT(defaultEmailChanged(int))); 
-	  defaultEmailChooserPosition = widgetPos;
+        if ( type == "Default Email"){
+	  QRect screenPos = inputWid->frameGeometry();  
+	  if ((screenPos.x() != 0) && (screenPos.y() != 0)) {         
+	    defaultEmail = textChanged;
+	    if (cmbDefaultEmail) delete cmbDefaultEmail;
+	    cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
+	    cmbDefaultEmail->setGeometry(screenPos); 
+	    cmbDefaultEmail->show();
+	    populateDefaultEmailCmb();
+	    connect(cmbDefaultEmail,SIGNAL(activated(int)),
+		    SLOT(defaultEmailChanged(int))); 
+	    defaultEmailChooserPosition = widgetPos;
+	  }
         }else if (defaultEmailChooserPosition == widgetPos){
 	qDebug("cmbDefaultEmail->hide()");
 	  if (cmbDefaultEmail) cmbDefaultEmail->hide();
@@ -675,8 +677,6 @@ void ContactEditor::chooserChange( const QString &textChanged, int index, QLineE
 	  populateDefaultEmailCmb();
 	}
 	
-
-
 	slChooserValues[index] = textChanged;
 
 }
@@ -1124,12 +1124,22 @@ void ContactEditor::cleanupFields() {
 
 }
 
+void ContactEditor::makeFieldOrder(){
+  qDebug("ContactEditor::makeFieldOrder");
+  cmbChooserField1->setCurrentItem( contactfields->getFieldOrder(1) );
+  cmbChooserField2->setCurrentItem( contactfields->getFieldOrder(2) );
+  cmbChooserField3->setCurrentItem( contactfields->getFieldOrder(3) );
+  qDebug("ContactEditor::makeFieldOrder");
+}
+
 void ContactEditor::setEntry( const OContact &entry ) {
 
 	cleanupFields();
 
 	ent = entry;
 
+	contactfields->loadFromRecord( ent );
+	makeFieldOrder();
 
 	emails = QStringList(ent.emailList());
 	defaultEmail = ent.defaultEmail();

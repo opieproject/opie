@@ -1,4 +1,4 @@
-
+ 
 #include "ocontactfields.h"
 
 #include <qstringlist.h>
@@ -293,13 +293,14 @@ OContactFields::~OContactFields(){
 
 
  
-void OContactFields::saveToRecord( OContact& cnt ){
+void OContactFields::saveToRecord( OContact &cnt ){
   qDebug("ocontactfields saveToRecord: >%s<",fieldOrder.latin1());
   cnt.setCustomField( CONTACT_FIELD_ORDER_NAME, fieldOrder );
 }
 
-void OContactFields::loadFromRecord( OContact& cnt ){
+void OContactFields::loadFromRecord( OContact &cnt ){
   qDebug("ocontactfields loadFromRecord");
+  qDebug("loading >%s<",cnt.fullName().latin1());
   fieldOrder = cnt.customField( CONTACT_FIELD_ORDER_NAME );
   qDebug("loaded fieldOrder >%s<",fieldOrder.latin1());
   if (fieldOrder.isEmpty()) fieldOrder = DEFAULT_FIELD_ORDER;
@@ -334,4 +335,5 @@ int OContactFields::getFieldOrder( int pos ){
   if ( !ok ) ret = pos;
   qDebug("returning >%i<",ret);
   return ret;
+
 }
