@@ -1,0 +1,5 @@
+  config DASHER
+    boolean "opie-dasher (zooming predictive text input)"
+    default "y"
+    depends ( LIBQPE || LIBQPE-X11 )
+

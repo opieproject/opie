@@ -147,7 +147,7 @@ endmenu
 
 menu "Development"
   source development/keyview/config.in
-  source development/debugviewer/config.in
+  #source development/debugviewer/config.in
 endmenu
 
 menu "Examples"
