@@ -4,6 +4,6 @@ Priority: optional
 Section: opie/games
 Maintainer: ljp <ljp@llornkcor.com>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Tic Tac Toe game.
 Version: $QPE_VERSION$EXTRAVERSION

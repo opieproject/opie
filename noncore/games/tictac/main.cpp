@@ -6,7 +6,8 @@
 **
 *****************************************************************************/
 
-#include <opie/oapplicationfactory.h>
 #include "tictac.h"
+
+#include <opie2/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<TicTacToe> )
