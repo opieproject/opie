@@ -81,6 +81,12 @@ class TranInfo
 		QString n;
 };
 
-typedef QList<TranInfo> TranInfoList;
+class TranInfoList : public QList<TranInfo>
+{
+	protected:
+		int compareItems( QCollection::Item, QCollection::Item );
+};
+
+//typedef TranList<TranInfo> TranInfoList;
 
 #endif

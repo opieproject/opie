@@ -173,3 +173,18 @@ void TranInfo::write( Config *config, int entry )
 
 	config->writeEntry( "Comments", n );
 }
+
+int TranInfoList::compareItems( QCollection::Item item1, QCollection::Item item2 )
+{
+	QDate d1 = ((TranInfo *)item1)->date();
+	QDate d2 = ((TranInfo *)item2)->date();
+	int r = -1;
+
+	if ( d1 < d2 )
+		r = -1;
+	else if ( d1 == d2 )
+		r = 0;
+	else if ( d1 > d2 )
+		r = 1;
+	return( r );
+}

@@ -311,7 +311,7 @@ void Checkbook::loadCheckbook()
 			stramount.sprintf( "%c%.2f", currencySymbol, amount );
 
 			// Add to transaction list
-			transactions.append( tran );
+			transactions.inSort( tran );
 
 			// Add to transaction table
 			( void ) new QListViewItem( tranTable, QString::number( i ), tran->datestr(),
@@ -415,7 +415,7 @@ void Checkbook::slotNewTran()
 		stramount.sprintf( "%c%.2f", currencySymbol, amount );
 
 		// Add to transaction list
-		transactions.append( traninfo );
+		transactions.inSort( traninfo );
 
 		// Add to transaction table
 		( void ) new QListViewItem( tranTable, QString::number( highTranNum ),
@@ -562,7 +562,7 @@ void Checkbook::drawCategoryChart( bool withdrawals )
 	DataPointList *list = new DataPointList();
 
 	TranInfo *tran = transactions.first();
-	if ( tran->withdrawal() == withdrawals )
+	if ( tran && tran->withdrawal() == withdrawals )
 	{
 		list->append( new DataPointInfo( tran->category(), tran->amount() ) );
 	}
