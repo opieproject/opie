@@ -1,4 +1,4 @@
-Package: opie-modplugin
+Package: opieplayer1-modplugin
 Files: plugins/codecs/libmodplugin.so*
 Priority: optional
 Section: opie/plugins

@@ -1,4 +1,4 @@
-Package: opie-wavplugin
+Package: opieplayer1-wavplugin
 Files: plugins/codecs/libwavplugin*
 Priority: optional
 Section: opie/plugins
