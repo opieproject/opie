@@ -42,7 +42,7 @@ class DataPointInfo
 
 		const QString &label() { return l; }
 		float          value() { return v; }
-		
+
 		void addToValue( float value ) { v += value; }
 
 	private:
@@ -71,6 +71,7 @@ class GraphInfo
 		int            numberDataPoints();
 
 		float maxValue();
+		float minValue();
 		float totalValue();
 
 		void setGraphTitle( const QString & );

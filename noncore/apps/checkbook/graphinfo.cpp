@@ -97,6 +97,19 @@ float GraphInfo::maxValue()
 	return max;
 }
 
+float GraphInfo::minValue()
+{
+	float min = 0.0;
+	for ( DataPointInfo *data = d->first(); data; data = d->next() )
+	{
+		if ( data->value() < min )
+		{
+			min = data->value();
+		}
+	}
+	return min;
+}
+
 float GraphInfo::totalValue()
 {
 	float sum = 0.0;

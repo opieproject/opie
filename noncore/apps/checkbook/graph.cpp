@@ -82,7 +82,7 @@ void Graph::initGraph()
 	{
 		case GraphInfo::BarChart :
 		{
-			drawBarChart( width(), height(), data->maxValue() );
+			drawBarChart( width(), height(), data->maxValue(), data->minValue() );
 		}
 		break;
 		case GraphInfo::PieChart :
@@ -92,7 +92,7 @@ void Graph::initGraph()
 	};
 }
 
-void Graph::drawBarChart( int width, int height, float max )
+void Graph::drawBarChart( int width, int height, float max, float min )
 {
 	QPainter p( &graph );
 
@@ -111,15 +111,18 @@ void Graph::drawBarChart( int width, int height, float max )
 	QColor c( 0, 0, 255);
 	p.setBrush( c );
 
+    if ( min > 0 )
+        min = 0.0;
+
+	int bw = ( width - width / 4 ) / n;
+    int hoffset =  int( ( height - height / 4 - 1 ) * ( min * -1 ) / ( max - min ) );
 	for (DataPointInfo *dp = data->firstDataPoint(); dp; dp = data->nextDataPoint() )
 	{
-		int bw = ( width - width / 4 - x ) / ( n - i );
-		int bh = int( ( height - height / 4 - 1 ) * dp->value() / max );
-		p.drawRect( width / 8 + x, height - height / 8 - 1 - bh, bw, bh );
+        int bh = int( ( height - height / 4 - 1 ) * dp->value() / ( max - min ) );
+		p.drawRect( width / 8 + x, height - height / 8 - 1 - hoffset - bh, bw, bh );
 		fw = fm.width( dp->label() );
-		p.drawText( width / 8 + x - fw / 2 + bw / 2, height - height / 8, fw,
+		p.drawText( width / 8 + x - fw / 2 + bw / 2, height - height / 8 - hoffset, fw,
 					fh + height / 8, AlignTop | AlignHCenter, dp->label() );
-//					WordBreak | AlignTop | AlignHCenter, dp->label() );
 		i++;
 		x += bw;
 	}

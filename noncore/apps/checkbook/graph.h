@@ -56,7 +56,7 @@ class Graph : public QWidget
 		QPixmap graph;
 
 		void initGraph();
-		void drawBarChart( int, int, float );
+		void drawBarChart( int, int, float, float );
 		void drawPieChart( int, int, float );
 };
 
