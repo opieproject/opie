@@ -57,7 +57,7 @@ public:
 /*     QTimer    * menuTimer; */
     FileSelector*  playLists;
     QPushButton *tbDeletePlaylist;
-    int fd;
+    int fd, selected;
 public slots:
     bool first();
     bool last();

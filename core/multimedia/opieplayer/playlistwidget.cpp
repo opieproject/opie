@@ -840,21 +840,18 @@ void PlayListWidget::btnPlay(bool b) {
       break;
       case 1:
       {
-//           if(audioView->selectedItem()) {
-          addToSelection( audioView->selectedItem() );
+          addToSelection( audioView->currentItem() );
           mediaPlayerState->setPlaying(b);
           d->selectedFiles->removeSelected( );
           tabWidget->setCurrentPage(1);
           d->selectedFiles->unSelect();
           insanityBool=FALSE;         
 //          audioView->clearSelection();
-//           }
       }
       break;
       case 2:
       {
-//           if(videoView->selectedItem() ) {
-          addToSelection( videoView->selectedItem() );
+          addToSelection( videoView->currentItem() );
           mediaPlayerState->setPlaying(b);
           qApp->processEvents();
           d->selectedFiles->removeSelected( );
@@ -862,7 +859,6 @@ void PlayListWidget::btnPlay(bool b) {
           d->selectedFiles->unSelect();
           insanityBool=FALSE;
 //          videoView->clearSelection();
-//           }
       }
       break;
     };
@@ -888,16 +884,17 @@ void PlayListWidget::viewPressed( int mouse, QListViewItem *item, const QPoint& 
       case 1:
           break;
       case 2:{
-    QPopupMenu  m;
-    m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
-    m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
-    m.insertSeparator();
-    if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() ) 
-    m.insertItem( tr( "Properties" ), this, SLOT( listDelete() ));
+
+          QPopupMenu  m;
+          m.insertItem( tr( "Play" ), this, SLOT( playSelected() ));
+          m.insertItem( tr( "Add to Playlist" ), this, SLOT( addSelected() ));
+          m.insertSeparator();
+          if( QFile(QPEApplication::qpeDir()+"lib/libopie.so").exists() ) 
+              m.insertItem( tr( "Properties" ), this, SLOT( listDelete() ));
     
-    m.exec( QCursor::pos() );
+          m.exec( QCursor::pos() );
       }
-    break;
+          break;
     };
 }
 

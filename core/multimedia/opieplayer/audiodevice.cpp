@@ -19,6 +19,7 @@
 **********************************************************************/
 // L.J.Potter added better error code Fri 02-15-2002 14:37:47
 
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <qpe/qpeapplication.h>
@@ -188,6 +189,7 @@ void AudioDevice::setVolume( unsigned int leftVolume, unsigned int rightVolume, 
 
 AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
   qDebug("creating new audio device");
+    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
   d = new AudioDevicePrivate;
     d->frequency = f;
     d->channels = chs;
@@ -203,7 +205,6 @@ AudioDevice::AudioDevice( unsigned int f, unsigned int chs, unsigned int bps ) {
     int fragments = 0x10000 * 8 + sound_fragment_shift;
     int capabilities = 0;
 
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << TRUE; 
     
 #ifdef KEEP_DEVICE_OPEN
     if ( AudioDevicePrivate::dspFd == 0 ) {
@@ -264,7 +265,6 @@ AudioDevice::~AudioDevice() {
     delete d->unwrittenBuffer;
     delete d;
 #endif
-    QCopEnvelope( "QPE/System", "volumeChange(bool)" ) << FALSE; 
     
 }
 
