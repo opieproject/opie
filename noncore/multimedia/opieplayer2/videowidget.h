@@ -76,7 +76,6 @@ protected:
 
     void resizeEvent( QResizeEvent * );
     void showEvent( QShowEvent *se );
-    void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
     void keyReleaseEvent( QKeyEvent *e);
 

@@ -241,16 +241,12 @@ void VideoWidget::updateSlider( long i, long max ) {
     }
 }
 
-void VideoWidget::mousePressEvent( QMouseEvent *event ) {
-    mouseMoveEvent( event );
-}
-
 void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     if ( mediaPlayerState.isFullscreen() ) {
         mediaPlayerState.setFullscreen( FALSE );
         makeVisible();
     }
-    mouseMoveEvent( event );
+    MediaWidget::mouseReleaseEvent( event );
 }
 
 void VideoWidget::showEvent( QShowEvent* ) {

@@ -76,8 +76,6 @@ protected:
     void doUnblank();
     void showEvent( QShowEvent *se );
     void resizeEvent( QResizeEvent *re );
-    void mousePressEvent( QMouseEvent *event );
-    void mouseReleaseEvent( QMouseEvent *event );
     void timerEvent( QTimerEvent *event );
     void keyReleaseEvent( QKeyEvent *e);
 private slots:

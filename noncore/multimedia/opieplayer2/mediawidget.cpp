@@ -113,6 +113,16 @@ void MediaWidget::mouseMoveEvent( QMouseEvent *event )
     }
 }
 
+void MediaWidget::mousePressEvent( QMouseEvent *event )
+{
+    mouseMoveEvent( event );
+}
+
+void MediaWidget::mouseReleaseEvent( QMouseEvent *event )
+{
+    mouseMoveEvent( event );
+}
+
 void MediaWidget::makeVisible()
 {
 }

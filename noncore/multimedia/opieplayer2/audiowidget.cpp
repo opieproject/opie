@@ -333,16 +333,6 @@ void AudioWidget::timerEvent( QTimerEvent * ) {
     }
 }
 
-void AudioWidget::mousePressEvent( QMouseEvent *event ) {
-    mouseMoveEvent( event );
-}
-
-
-void AudioWidget::mouseReleaseEvent( QMouseEvent *event ) {
-    mouseMoveEvent( event );
-}
-
-
 void AudioWidget::showEvent( QShowEvent* ) {
     QMouseEvent event( QEvent::MouseMove, QPoint( 0, 0 ), 0, 0 );
     mouseMoveEvent( &event );
