@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.25 2003-05-05 21:44:39 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.26 2003-08-01 14:19:44 eilers Exp $
 **
 **********************************************************************/
 
@@ -228,7 +228,11 @@ void DateBook::receive( const QCString &msg, const QByteArray &data )
 	stream >> uid;
 	Event e=db->eventByUID(uid);
 	editEvent(e);
-    }
+    }else if (msg == "viewDefault(QDate)"){
+         QDate day;
+         stream >> day;
+         viewDefault(day);
+     }
 }
 
 DateBook::~DateBook()
@@ -436,9 +440,19 @@ void DateBook::duplicateEvent( const Event &e )
 		Event newEv = entry->event();
 		QString error = checkEvent(newEv);
 		if (!error.isNull()) {
-			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0)
+			if (QMessageBox::warning(this, tr("error box"), error, tr("Fix it"), tr("Continue"), 0, 0, 1) == 0)
 				continue;
 		}
+                /*
+                 * The problem:
+                 * DateBookDB does remove repeating events not by uid but by the time
+                 * the recurrence was created
+                 * so we need to update that time as well
+                 */
+                Event::RepeatPattern rp = newEv.repeatPattern();
+                rp.createTime = ::time( NULL );
+                newEv.setRepeat( TRUE, rp ); // has repeat and repeatPattern...
+
 		db->addEvent(newEv);
 		emit newEvent();
 		break;
@@ -476,7 +490,7 @@ void DateBook::editEvent( const Event &e )
 		newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
 		QString error = checkEvent(newEv);
 		if (!error.isNull()) {
-			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0) continue;
+			if (QMessageBox::warning(this, tr("error box"), error, tr("Fix it"), tr("Continue"), 0, 0, 1) == 0) continue;
 	}
 	db->editEvent(e, newEv);
 	emit newEvent();
@@ -519,8 +533,8 @@ void DateBook::initDay()
 	if ( !dayView ) {
 		dayView = new DateBookDay( ampm, onMonday, db, views, "day view" );
 		views->addWidget( dayView, DAY );
+                dayView->setJumpToCurTime( bJumpToCurTime );
 		dayView->setStartViewTime( startTime );
-		dayView->setJumpToCurTime( bJumpToCurTime );
 		dayView->setRowStyle( rowStyle );
 		connect( this, SIGNAL( newEvent() ), dayView, SLOT( redraw() ) );
 		connect( dayView, SIGNAL( newEvent() ), 	this, SLOT( fileNew() ) );
@@ -697,6 +711,7 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 				}
 			}
 		} else if ( msg == "nextView()" ) {
+                    needShow = true;
 			if ( !qApp-> activeWindow ( )) {
 				needShow = TRUE;
 			} else {
@@ -713,16 +728,31 @@ void DateBook::appMessage(const QCString& msg, const QByteArray& data)
 				needShow = TRUE;
 			}
 		}
-    }
+    }   else if (msg == "editEvent(int)") {
+        /* simple copy from receive */
+        QDataStream stream(data,IO_ReadOnly);
+	int uid;
+	stream >> uid;
+	Event e=db->eventByUID(uid);
+	editEvent(e);
+    } else if (msg == "viewDefault(QDate)"){
+        /* simple copy from receive */
+        QDataStream stream(data,IO_ReadOnly);
+        QDate day;
+        stream >> day;
+        viewDefault(day);
+        needShow = true;
+     }
+
     if ( needShow ) {
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-		showMaximized();
+//		showMaximized();
 #else
-		show();
+//		show();
 #endif
-		raise();
+//		raise();
 		QPEApplication::setKeepRunning();
-		setActiveWindow();
+//		setActiveWindow();
 	}
 }
 
@@ -917,7 +947,7 @@ void DateBook::slotFind()
 {
     // move it to the day view...
     viewDay();
-    FindDialog frmFind( "Calendar", this );
+    FindDialog frmFind( "Calendar", this ); // no tr needed
     frmFind.setUseDate( true );
     frmFind.setDate( currentDate() );
     QObject::connect( &frmFind,

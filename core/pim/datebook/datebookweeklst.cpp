@@ -61,7 +61,12 @@ void DateBookWeekLstHeader::setDate(const QDate &d) {
 	int year,week,dayofweek;
 	date=d;
 	dayofweek=d.dayOfWeek();
-	if(bStartOnMonday) dayofweek--;
+	if(bStartOnMonday)
+	    dayofweek--;
+	else if( dayofweek == 7 )
+	    /* we already have the right day -7 would lead to the same week */
+	    dayofweek = 0;
+
 	date=date.addDays(-dayofweek);
 
 	calcWeek(date,week,year,bStartOnMonday);
@@ -117,7 +122,7 @@ DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /* onM */,
 
 	date=d;
 
-	static const char *wdays={"MTWTFSSM"};
+	static const QString wdays=tr("MTWTFSSM",  "Week days");
 	char day=wdays[d.dayOfWeek()-1];
 
 	label->setText( QString(QObject::tr(QString(QChar(day)))) + " " +QString::number(d.day()) );
@@ -237,6 +242,7 @@ DateBookWeekLstView::DateBookWeekLstView(QValueList<EffectiveEvent> &ev,
 	// Calculate offset to first day of week.
 	int dayoffset=d.dayOfWeek();
 	if(bStartOnMonday) dayoffset--;
+	else if( dayoffset == 7 ) dayoffset = 0;
 
 	for (int i=0; i<7; i++) {
 	// Header

@@ -1,11 +1,11 @@
 Package: opie-datebook
-Files: bin/datebook apps/1Pim/datebook.desktop pics/datebook
+Files: bin/datebook apps/1Pim/datebook.desktop
 Priority: optional
 Section: opie/applications
 Conflicts: qpe-tkccalendar
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie-minimal, libopie1
+Depends: task-opie-minimal, libopie1, opie-pics
 Description: A datebook/appointment manager
  A datebook/appointment manager for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION

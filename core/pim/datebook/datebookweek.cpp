@@ -20,21 +20,14 @@
 #include "datebookweek.h"
 #include "datebookweekheaderimpl.h"
 
-#include <qpe/calendar.h>
 #include <qpe/datebookdb.h>
-#include <qpe/event.h>
 #include <qpe/qpeapplication.h>
-#include <qpe/timestring.h>
+#include <qpe/calendar.h>
 
-#include <qdatetime.h>
 #include <qheader.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpainter.h>
-#include <qpopupmenu.h>
 #include <qtimer.h>
-#include <qspinbox.h>
-#include <qstyle.h>
 
 //-----------------------------------------------------------------
 
@@ -89,44 +82,37 @@ DateBookWeekView::DateBookWeekView( bool ap, bool startOnMonday,
 
 void DateBookWeekView::initNames()
 {
+#warning Please review this ! (eilers)
+
+    // Ok, I am Mr. Pedantic, but shouldn't we count until 6 instead of 7, if bOnMonday is false ? (eilers)
+
     static bool bFirst = true;
     if ( bFirst ) {
 	if ( bOnMonday ) {
-	    header->addLabel( tr("Mo", "Monday" ) );
-	    header->addLabel( tr("Tu", "Tuesday") );
-	    header->addLabel( tr("We", "Wednesday" ) );
-	    header->addLabel( tr("Th", "Thursday" ) );
-	    header->addLabel( tr("Fr", "Friday" ) );
-	    header->addLabel( tr("Sa", "Saturday" ) );
-	    header->addLabel( tr("Su", "Sunday" ) );
+                    for ( int i = 1; i<=7; i++  )  {
+                         header->addLabel( Calendar::nameOfDay( i ) );
+                    }
+
 	} else {
-	    header->addLabel( tr("Su", "Sunday" ) );
-	    header->addLabel( tr("Mo", "Monday") );
-	    header->addLabel( tr("Tu", "Tuesday") );
-	    header->addLabel( tr("We", "Wednesday" ) );
-	    header->addLabel( tr("Th", "Thursday" ) );
-	    header->addLabel( tr("Fr", "Friday" ) );
-	    header->addLabel( tr("Sa", "Saturday" ) );
-	}
+                    header->addLabel( Calendar::nameOfDay( 7 ) );
+                    for ( int i = 1; i<7; i++  )  {
+                         header->addLabel( Calendar::nameOfDay( i ) );
+                    }
+                }
 	bFirst = false;
     } else {
 	// we are change things...
 	if ( bOnMonday ) {
-	    header->setLabel( 1, tr("Mo", "Monday") );
-	    header->setLabel( 2, tr("Tu", "Tuesday") );
-	    header->setLabel( 3, tr("We", "Wednesday" ) );
-	    header->setLabel( 4, tr("Th", "Thursday" ) );
-	    header->setLabel( 5, tr("Fr", "Friday" ) );
-	    header->setLabel( 6, tr("Sa", "Saturday" ) );
-	    header->setLabel( 7, tr("Su", "Sunday" ) );
+                    for ( int i = 1; i<=7; i++  )  {
+                        header->setLabel( i, Calendar::nameOfDay( i ) );
+                    }
+
 	} else {
-	    header->setLabel( 1, tr("Su", "Sunday" ) );
-	    header->setLabel( 2, tr("Mo", "Monday") );
-	    header->setLabel( 3, tr("Tu", "Tuesday") );
-	    header->setLabel( 4, tr("We", "Wednesday" ) );
-	    header->setLabel( 5, tr("Th", "Thursday" ) );
-	    header->setLabel( 6, tr("Fr", "Friday" ) );
-	    header->setLabel( 7, tr("Sa", "Saturday" ) );
+                    header->setLabel( 1, Calendar::nameOfDay( 7 ) );
+                    for ( int i = 1; i<7; i++  )  {
+                        header->setLabel( i+1, Calendar::nameOfDay( i ) );
+                    }
+
 	}
     }
 }
@@ -402,7 +388,8 @@ void DateBookWeek::showDay( int day )
 	QDate d=bdate;
 
 	// Calculate offset to first day of week.
-	int dayoffset=d.dayOfWeek();
+	int dayoffset=d.dayOfWeek() % 7;
+
 	if(bStartOnMonday) dayoffset--;
 
 	day--;
@@ -575,6 +562,8 @@ QDate DateBookWeek::weekDate() const
 	// Calculate offset to first day of week.
 	int dayoffset=d.dayOfWeek();
 	if(bStartOnMonday) dayoffset--;
+	else if( dayoffset == 7 )
+	    dayoffset = 0;
 
 	return d.addDays(-dayoffset);
 }
