@@ -87,7 +87,7 @@ NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
  	noncore/apps/opie-console 
 	
 NONNET = noncore/net/networksetup \
-	noncore/net/opieftp \
+	noncore/net/ftplib noncore/net/opieftp \
 	noncore/mail
 
 NONMULT = noncore/multimedia/showimg noncore/graphics/drawpad \
