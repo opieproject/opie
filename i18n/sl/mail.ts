@@ -755,7 +755,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zadeva</translation>
     </message>
     <message>
         <source>From</source>
@@ -900,7 +900,7 @@ Obiščite http://www.lisa.de/ za informacije.
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Izbriši pošto</translation>
     </message>
 </context>
 </TS>
