@@ -70,7 +70,7 @@ public:
     /**
      * @param tableName the Name of the Table
      */
-    OSQLTable(const QString& tableName);
+    OSQLTable(const QString& tableName = QString::null);
 
     /**
      * d'tor

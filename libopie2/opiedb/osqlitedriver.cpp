@@ -36,8 +36,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-namespace Opie { 
-namespace DB { 
+namespace Opie {
+namespace DB {
 namespace Internal {
 
 namespace {
@@ -104,7 +104,7 @@ int sqliteRlikeCompare(const char *zPattern, const char *zString, sqregex *reg){
 }
 
 void rlikeFunc(sqlite_func *context, int arg, const char **argv){
-    if( argv[0]==0 || argv[1]==0 ){
+    if( arg < 2 || argv[0]==0 || argv[1]==0 ){
         printf("One of arguments Null!!\n");
         return;
     }
@@ -120,7 +120,7 @@ void rlikeFunc(sqlite_func *context, int arg, const char **argv){
 bool OSQLiteDriver::open() {
     char *error;
 
-    odebug << "OSQLiteDriver::open: about to open" << oendl; 
+    odebug << "OSQLiteDriver::open: about to open" << oendl;
     m_sqlite = sqlite_open(m_url.local8Bit(),
                            0,
                            &error );
@@ -128,7 +128,7 @@ bool OSQLiteDriver::open() {
     /* failed to open */
     if (m_sqlite == 0l ) {
         // FIXME set the last error
-        owarn << "OSQLiteDriver::open: " << error << "" << oendl; 
+        owarn << "OSQLiteDriver::open: " << error << "" << oendl;
         free( error );
         return false;
     }
@@ -183,7 +183,7 @@ OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
 
 
 OSQLTable::ValueList OSQLiteDriver::tables() const {
-
+    return OSQLTable::ValueList();
 }
 
 

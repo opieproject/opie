@@ -71,10 +71,12 @@ QDate OSQLResultItem::dataToDate( int column,  bool *ok ) {
 
 }
 QDateTime OSQLResultItem::dataToDateTime( const QString& column, bool *ok ) {
+//    #FIXME xxx
     QDateTime time = QDateTime::currentDateTime();
     return time;
 }
 QDateTime OSQLResultItem::dataToDateTime( int column, bool *ok ) {
+//   #FIXME xxx
     QDateTime time = QDateTime::currentDateTime();
     return time;
 }
