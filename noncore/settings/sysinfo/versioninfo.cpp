@@ -136,6 +136,8 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
         modelPixmap += "simpad";
     else if ( model == Model_Jornada_56x )
         modelPixmap += "jornada56x";
+    else if ( model == Model_Jornada_720 )
+        modelPixmap += "jornada720";
     else
         modelPixmap += "pda";
 
