@@ -67,6 +67,7 @@ public:
 	sortmeth = Name;
 	hidden.setAutoDelete(TRUE);
 	ike = FALSE;
+	busytimer = 0;
 	calculateGrid( Bottom );
     }
 
@@ -97,8 +98,25 @@ public:
     {
 	QIconViewItem *c = on ? currentItem() : 0;
 	if ( bsy != c ) {
-	    if ( c ) {
-		QPixmap *src = c->pixmap();
+	    if ( bsy )
+		bsy-> repaint ( );
+	    bsy = c;
+	
+	    if ( bsy ) {
+	    	busytimer = startTimer ( 150 );
+	    	busystate = 50;
+	    	startTimer ( 0 );
+	    }
+	    else
+		killTimer ( busytimer );
+	}
+    }
+
+    virtual void timerEvent ( QTimerEvent *te )
+    {
+	if ( !te || ( te-> timerId ( ) == busytimer )) {
+	    if ( bsy ) {
+		QPixmap *src = bsy-> QIconViewItem::pixmap();
 		QImage img = src->convertToImage();
 		QRgb* rgb;
 		int count;
@@ -110,22 +128,28 @@ public:
 		    count = img.numColors();
 		}
 		int rc, gc, bc;
+		int bs = ::abs ( busystate ) + 25;
 		colorGroup().highlight().rgb( &rc, &gc, &bc );
-		int ri, gi, bi;
+		rc = rc * bs / 100;
+		gc = gc * bs / 100;
+		bc = bc * bs / 100;
+		
 		for ( int r = 0; r < count; r++, rgb++ ) {
-		    int ri = (rc+qRed(*rgb))/2;
-		    int gi = (gc+qGreen(*rgb))/2;
-		    int bi = (bc+qBlue(*rgb))/2;
-		    int ai = qAlpha(*rgb);
-		    *rgb = qRgba(ri,gi,bi,ai);
+		    int ri = rc + qRed   ( *rgb ) * ( 100 - bs ) / 100;
+		    int gi = gc + qGreen ( *rgb ) * ( 100 - bs ) / 100;
+		    int bi = bc + qBlue  ( *rgb ) * ( 100 - bs ) / 100;
+		    int ai = qAlpha ( *rgb );
+		    *rgb = qRgba ( ri, gi, bi, ai );
 		}
 
 		bpm.convertFromImage( img );
+		
+		bsy-> repaint ( );
+
+		busystate += 10;
+		if ( busystate > 50 )
+			busystate = -40;
 	    }
-	    QIconViewItem* o = bsy;
-	    bsy = c;
-	    if ( o ) o->repaint();
-	    if ( c ) c->repaint();
 	}
     }
 
@@ -287,6 +311,8 @@ private:
     QPixmap bgPixmap;
     QPixmap bpm;
     QColor bgColor;
+    int busytimer;
+    int busystate;
 };
 
 
