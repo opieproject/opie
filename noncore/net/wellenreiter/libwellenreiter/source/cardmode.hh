@@ -1,16 +1,20 @@
-/* $Id: cardmode.hh,v 1.2 2002-11-28 00:00:52 mjm Exp $ */
+/* $Id: cardmode.hh,v 1.3 2002-12-11 13:10:26 mickeyl Exp $ */
 
 #ifndef CARDMODE_HH
 #define CARDMODE_HH
 
 #include <string.h>
 #include <stdlib.h>
-#include <pcap.h>  
 #include <errno.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
+
+extern "C"
+{
 #include <net/bpf.h>
+#include <pcap.h>  
+}
 
 #include "../../libwellenreiter/source/log.hh"
 
