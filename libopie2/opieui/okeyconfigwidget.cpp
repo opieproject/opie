@@ -6,10 +6,12 @@
 #include <qradiobutton.h>
 #include <qpushbutton.h>
 #include <qbuttongroup.h>
-
+#include <qmessagebox.h>
 #include <qaccel.h>
 #include <qlayout.h>
 #include <qlabel.h>
+
+/* non gui */
 #include <qtimer.h>
 
 
@@ -159,7 +161,7 @@ OKeyPair::List OKeyPair::hardwareKeys() {
  * Equals operator. Check if two OKeyPairs have the same key and modifier
  * @see operator!=
  */
-bool OKeyPair::operator==( const OKeyPair& pair) {
+bool OKeyPair::operator==( const OKeyPair& pair)const {
     if ( m_key != pair.m_key ) return false;
     if ( m_mod != pair.m_mod ) return false;
 
@@ -169,7 +171,7 @@ bool OKeyPair::operator==( const OKeyPair& pair) {
 /**
  * Not equal operator. calls the equal operator internally
  */
-bool OKeyPair::operator!=( const OKeyPair& pair) {
+bool OKeyPair::operator!=( const OKeyPair& pair)const  {
     return !(*this == pair);
 }
 
@@ -371,7 +373,7 @@ bool OKeyConfigItem::isEmpty()const {
 /**
  * Check if the KeyPairs are the same
  */
-bool OKeyConfigItem::operator==( const OKeyConfigItem& conf ) {
+bool OKeyConfigItem::operator==( const OKeyConfigItem& conf )const {
 /*    if ( isEmpty() == conf.isEmpty() ) return true;
     else if ( isEmpty() != conf.isEmpty() ) return false;
     else if ( !isEmpty()!= conf.isEmpty() ) return false;
@@ -389,7 +391,7 @@ bool OKeyConfigItem::operator==( const OKeyConfigItem& conf ) {
 
 }
 
-bool OKeyConfigItem::operator!=( const OKeyConfigItem& conf ) {
+bool OKeyConfigItem::operator!=( const OKeyConfigItem& conf )const {
     return !( *this == conf );
 }
 
@@ -483,11 +485,11 @@ void OKeyConfigManager::load() {
      * Read each item
      */
     int key, mod;
-    for( OKeyConfigItem::List::Iterator it = m_keys.begin();
-         it != m_keys.end(); ++it ) {
+    for( OKeyConfigItem::List::Iterator it = m_keys.begin(); it != m_keys.end(); ++it ) {
         key = m_conf->readNumEntry( (*it).configKey()+"key", (*it).defaultKeyPair().keycode()  );
         mod = m_conf->readNumEntry( (*it).configKey()+"mod", (*it).defaultKeyPair().modifier() );
         OKeyPair okey( key, mod );
+
         if (  !m_blackKeys.contains( okey ) && key != -1  && mod != -1 )
             (*it).setKeyPair( OKeyPair(key, mod) );
         else
@@ -506,15 +508,15 @@ void OKeyConfigManager::save() {
     /*
      * Write each item
      */
-    for( OKeyConfigItem::List::Iterator it = m_keys.begin();
-         it != m_keys.end(); ++it ) {
+    for( OKeyConfigItem::List::Iterator it = m_keys.begin();it != m_keys.end(); ++it ) {
+        /* skip empty items */
         if ( (*it).isEmpty() )
             continue;
         OKeyPair pair = (*it).keyPair();
         OKeyPair deft = (*it).defaultKeyPair();
         /*
          * don't write if it is the default setting
-         * FIXME allow to remove Keys
+         * FIXME allow to remove Keys from config
         if (  (pair.keycode() == deft.keycode()) &&
               (pair.modifier()== deft.modifier() ) )
             return;
@@ -576,7 +578,6 @@ int OKeyConfigManager::handleKeyEventId( QKeyEvent* ev) {
  */
 void OKeyConfigManager::addKeyConfig( const OKeyConfigItem& item ) {
     m_keys.append( item );
-    qWarning( "m_keys count is now %d", m_keys.count() );
     delete m_map; m_map = 0;
 }
 
@@ -586,7 +587,6 @@ void OKeyConfigManager::addKeyConfig( const OKeyConfigItem& item ) {
  */
 void OKeyConfigManager::removeKeyConfig( const OKeyConfigItem& item ) {
     m_keys.remove( item );
-    qWarning( "m_keys count is now %d", m_keys.count() );
     delete m_map; m_map = 0;
 }
 
@@ -760,6 +760,9 @@ namespace Private {
         return QAccel::keyToString( mod + pair.keycode() );
     }
 
+    /*
+     * the virtual and hardware key events have both issues...
+     */
     void fixupKeys( int& key, int &mod, QKeyEvent* e ) {
         key = e->key();
         mod = e->state();
@@ -1008,7 +1011,6 @@ void OKeyConfigWidget::slotListViewItem( QListViewItem* _item) {
 }
 
 void OKeyConfigWidget::slotNoKey() {
-    qWarning( "No Key" );
     m_none->setChecked( true );
     m_cus ->setChecked( false );
     m_btn ->setEnabled( false );
@@ -1068,15 +1070,49 @@ void OKeyConfigWidget::slotConfigure() {
 
 }
 
+bool OKeyConfigWidget::sanityCheck(  Opie::Ui::Private::OKeyListViewItem* item,
+                                     const OKeyPair& newItem ) {
+    OKeyPair::List bList = item->manager()->blackList();
+    for ( OKeyPair::List::Iterator it = bList.begin(); it != bList.end(); ++it ) {
+        /* black list matched */
+        if ( *it == newItem ) {
+            QMessageBox::warning( 0, tr("Key is on BlackList" ),
+                                  tr("<qt>The Key you choose is on the black list "
+                                     "and may not be used with this manager. Please "
+                                     "use a different key.</qt>" ) );
+            return false;
+        }
+    }
+    /* no we need to check the other items which is dog slow */
+    QListViewItemIterator it( item->parent() );
+    while ( it.current() ) {
+        /* if not our parent and not us */
+        if (it.current()->parent() &&  it.current() != item) {
+            /* damn already given away*/
+            if ( newItem == static_cast<Opie::Ui::Private::OKeyListViewItem*>(it.current() )->item().keyPair() ) {
+                QMessageBox::warning( 0, tr("Key is already assigned" ),
+                                      tr("<qt>The Key you choose is already taken by "
+                                         "a different Item of your config. Please try"
+                                         "using a different key.</qt>" ) );
+                return false;
+            }
+        }
+        ++it;
+    }
+
+    return true;
+}
+
 void OKeyConfigWidget::updateItem( Opie::Ui::Private::OKeyListViewItem *item,
                                    const OKeyPair& newItem) {
     /* sanity check
      * check against the blacklist of the manager
      * check if another item uses this key which is o(n) at least
      */
-    if ( !newItem.isEmpty() ) {
+    if ( !newItem.isEmpty() && !sanityCheck(item, newItem ))
+        return;
 
-    }
+
 
     /*
     * If immediate we need to remove and readd the key
@@ -1128,7 +1164,6 @@ void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
     if ( ev->isAutoRepeat() )
         return;
 
-    qWarning( "Key Press Event" );
     int mod, key;
     Opie::Ui::Private::fixupKeys( key,mod, ev );
 
@@ -1153,13 +1188,13 @@ void OKeyChooserConfigDialog::keyPressEvent( QKeyEvent* ev ) {
         default:
             break;
         }
-        if (mod ) {
+        if (mod )
             m_mod |= mod;
-        }else
+        else
             m_key = key;
 
         if ( ( !mod || m_key ) && !m_timer->isActive() )
-            m_timer->start( 50, true );
+            m_timer->start( 150, true );
 
         m_keyPair = OKeyPair( m_key, m_mod );
     }

@@ -49,8 +49,8 @@ public:
     OKeyPair( int key = -1, int modifier = -1);
     ~OKeyPair();
 
-    bool operator==( const OKeyPair& );
-    bool operator!=( const OKeyPair& );
+    bool operator==( const OKeyPair& )const;
+    bool operator!=( const OKeyPair& )const;
 
     bool isEmpty()const;
 
@@ -95,8 +95,8 @@ public:
     OKeyConfigItem( const Opie::Core::ODeviceButton& );
     ~OKeyConfigItem();
 
-    bool operator==( const OKeyConfigItem& );
-    bool operator!=( const OKeyConfigItem& );
+    bool operator==( const OKeyConfigItem& )const;
+    bool operator!=( const OKeyConfigItem& )const;
 
     QString text()const;
     QPixmap pixmap()const;
@@ -253,8 +253,10 @@ private slots:
     void slotConfigure();
 
 private:
+    static bool sanityCheck(  Opie::Ui::Private::OKeyListViewItem* man,
+                              const OKeyPair& newItem );
     void updateItem( Opie::Ui::Private::OKeyListViewItem* man,
-                            const OKeyPair& newItem);
+                     const OKeyPair& newItem);
     void initUi();
     Opie::Ui::OListView *m_view;
     Opie::Ui::Private::OKeyConfigWidgetPrivateList m_list;
