@@ -36,6 +36,7 @@
 #include <qmessagebox.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
+
 #include "xinecontrol.h"
 #include "mediaplayerstate.h"
 #include "xinevideowidget.h"

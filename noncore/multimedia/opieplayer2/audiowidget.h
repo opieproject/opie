@@ -34,14 +34,7 @@
 #ifndef AUDIO_WIDGET_H
 #define AUDIO_WIDGET_H
 
-#include <qpainter.h>
-#include <qdrawutil.h>
-#include <qpixmap.h>
-#include <qstring.h>
-#include <qslider.h>
-#include <qframe.h>
 #include <qlineedit.h>
-#include <qimage.h>
 
 #include <opie/oticker.h>
 

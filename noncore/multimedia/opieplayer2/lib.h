@@ -34,12 +34,7 @@
 #ifndef ZECKEXINELIB_H
 #define ZECKEXINELIB_H
 
-#include <qcstring.h>
-#include <qstring.h>
-#include <qobject.h>
-
 #include <xine.h>
-//#include "xine.h"
 
 #include "threadutil.h"
 

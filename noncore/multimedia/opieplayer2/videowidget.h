@@ -34,11 +34,7 @@
 #ifndef VIDEO_WIDGET_H
 #define VIDEO_WIDGET_H
 
-#include <qwidget.h>
-#include <qimage.h>
-#include <qpixmap.h>
 #include "xinevideowidget.h"
-
 #include "mediawidget.h"
 
 class QPixmap;

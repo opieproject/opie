@@ -34,18 +34,13 @@
 #ifndef PLAY_LIST_WIDGET_H
 #define PLAY_LIST_WIDGET_H
 
-#include <qmainwindow.h>
-#include <qpe/applnk.h>
-#include <qtabwidget.h>
-#include <qpe/fileselector.h>
+
 #include <qpushbutton.h>
 #include <qpopupmenu.h>
 #include <qpe/qcopenvelope_qws.h>
 
 #include "playlistwidgetgui.h"
 
-
-//class PlayListWidgetPrivate;
 class Config;
 class QListViewItem;
 class QListView;

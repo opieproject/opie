@@ -34,9 +34,6 @@
 #ifndef MEDIA_PLAYER_H
 #define MEDIA_PLAYER_H
 
-#include <qmainwindow.h>
-#include <qframe.h>
-
 #include "xinecontrol.h"
 
 #include "playlistwidget.h"

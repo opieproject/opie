@@ -35,15 +35,12 @@
 #define PLAY_LIST_WIDGET_GUI_H
 
 #include <qmainwindow.h>
-#include <qpe/applnk.h>
 #include <qpe/resource.h>
-#include <qpe/qpemenubar.h>
 
 #include <qtabwidget.h>
 #include <qpe/fileselector.h>
-#include <qpushbutton.h>
-#include <qpopupmenu.h>
 #include <qaction.h>
+#include <qtoolbutton.h>
 #include <qslider.h>
 #include <qlcdnumber.h>
 
@@ -53,7 +50,7 @@ class MediaPlayerState;
 class PlayListFileView;
 
 class Config;
-class QPEToolBar;
+class QToolBar;
 class QListViewItem;
 class QListView;
 class QPoint;
@@ -80,7 +77,6 @@ public:
         setFocusPolicy( QWidget::NoFocus );
         setToggleButton( t );
         connect( this, t ? SIGNAL( toggled(bool) ) : SIGNAL( clicked() ), handler, slot );
-        QPEMenuToolFocusManager::manager()->addWidget( this );
     }
 };
 
@@ -121,7 +117,7 @@ protected:
     PlayListWidgetPrivate *d; // Private implementation data
     QVBox *vbox1;
     QVBox *vbox5;
-    QPEToolBar *bar;
+    QToolBar *bar;
     QWidget *playListTab;
     void setActiveWindow(); // need to handle this to show the right view
     void setView( char );

@@ -35,7 +35,6 @@
 #define XINECONTROL_H
 
 #include "lib.h"
-#include <qobject.h>
 
 #include "mediaplayerstate.h"
 

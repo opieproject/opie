@@ -31,13 +31,9 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <qimage.h>
-#include <qtextstream.h>
-#include <qpe/resource.h>
 
-#include <qfile.h>
+#include <qtextstream.h>
+
 #include <qdir.h>
 
 #include <qgfx_qws.h>

@@ -1,14 +1,7 @@
 #include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
-#include <qpe/resource.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qfileinfo.h>
-
-#include <qmainwindow.h>
-#include <qmessagebox.h>
-#include <qwidgetstack.h>
-#include <qfile.h>
 
 #include "mediaplayer.h"
 #include "playlistwidget.h"
@@ -19,7 +12,7 @@
 
 #include "mediaplayerstate.h"
 
-// for setBacklight()
+ // for setBacklight()
 #include <linux/fb.h>
 #include <sys/file.h>
 #include <sys/ioctl.h>
@@ -154,11 +147,9 @@ void MediaPlayer::next() {
 
     if(playList.currentTab() == PlayListWidget::CurrentPlayList) { //if using the playlist
         if ( playList.next() ) {
-            qDebug( "NEXT TRIGGERED" );
             play();
         } else if ( mediaPlayerState.isLooping() ) {
             if ( playList.first() ) {
-                qDebug( "FIRST TRIGGERED" );
                 play();
             }
         } else {
