@@ -20,6 +20,7 @@
 #include <qstring.h>
 #include <qwidget.h>
 #include <qlayout.h>
+#include <qguardedptr.h>
 #include <qlist.h>
 
 #include <qpe/datebookdb.h>
@@ -38,8 +39,8 @@ public:
 
 private:
     DateBookDB* db;
-    QVBoxLayout* m_layoutDates;
-    QList<DateBookEvent> m_eventsList;
+    QGuardedPtr<QVBoxLayout> m_layoutDates;
+    QList<QWidget> m_eventsList;
     void readConfig();
     void getDates();
 

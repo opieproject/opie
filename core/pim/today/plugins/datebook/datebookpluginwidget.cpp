@@ -38,7 +38,6 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent,  const char* name)
     }
     db = new DateBookDB;
 
-
     if ( m_layoutDates )  {
         delete m_layoutDates;
     }
@@ -68,10 +67,6 @@ void DatebookPluginWidget::readConfig() {
 }
 
 void DatebookPluginWidget::refresh()  {
-    DateBookEvent* ev;
-    for ( ev = m_eventsList.first(); ev != 0; ev = m_eventsList.next() )  {
-        delete ev;
-    }
     m_eventsList.clear();
     getDates();
 }
@@ -86,7 +81,6 @@ void DatebookPluginWidget::getDates() {
     qBubbleSort( list );
     int count = 0;
 
-    qDebug( QString("List count %1" ).arg(list.count() ) );
     if ( list.count() > 0 ) {
 
         for ( QValueList<EffectiveEvent>::ConstIterator it = list.begin(); it  != list.end(); ++it ) {
@@ -96,22 +90,28 @@ void DatebookPluginWidget::getDates() {
                     count++;
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
                     m_eventsList.append( l );
+                    l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
                 } else if ( QDateTime::currentDateTime()  <= (*it).event().end() ) {
                     count++;
                     // show only later appointments
                     DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
                     m_eventsList.append( l );
+                    l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
                 }
             }
         }
         if ( m_onlyLater && count == 0 ) {
             QLabel* noMoreEvents = new QLabel( this );
+            m_eventsList.append(  noMoreEvents );
+            noMoreEvents->show();
             noMoreEvents->setText( QObject::tr( "No more appointments today" ) );
         }
     } else {
         QLabel* noEvents = new QLabel( this );
+        m_eventsList.append( noEvents );
+        noEvents->show();
         noEvents->setText( QObject::tr( "No appointments today" ) );
     }
 }
