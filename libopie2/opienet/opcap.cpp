@@ -828,7 +828,6 @@ OPacket* OPacketCapturer::next()
         // because due to memory constraints they will be deleted as soon
         // as possible - that is right after they have been processed
         // by emit() [ see below ]
-
         //TODO: make gathering statistics optional, because it takes time
         p->updateStats( _stats, const_cast<QObjectList*>( p->children() ) );
 
@@ -877,7 +876,52 @@ bool OPacketCapturer::open( const QString& name )
     }
     else
     {
-        qDebug( "OPacketCapturer::open(): can't open libpcap: %s", _errbuf );
+        qDebug( "OPacketCapturer::open(): can't open libpcap with '%s': %s", (const char*) name, _errbuf );
+        return false;
+    }
+
+}
+
+
+bool OPacketCapturer::open( const QFile& file )
+{
+    QString name = file.name();
+
+    if ( _open )
+    {
+        close();
+        if ( name == _name )    // ignore opening an already openend device
+        {
+            return true;
+        }
+        else                    // close the last opened device
+        {
+            close();
+        }
+    }
+
+    _name = name;
+
+    pcap_t* handle = pcap_open_offline( const_cast<char*>( (const char*) name ), &_errbuf[0] );
+
+    if ( handle )
+    {
+        qDebug( "OPacketCapturer::open(): libpcap opened successfully." );
+        _pch = handle;
+        _open = true;
+
+        // in case we have an application object, create a socket notifier
+        if ( qApp )
+        {
+            _sn = new QSocketNotifier( fileno(), QSocketNotifier::Read );
+            connect( _sn, SIGNAL( activated(int) ), this, SLOT( readyToReceive() ) );
+        }
+
+        return true;
+    }
+    else
+    {
+        qDebug( "OPacketCapturer::open(): can't open libpcap with '%s': %s", (const char*) name, _errbuf );
         return false;
     }
 

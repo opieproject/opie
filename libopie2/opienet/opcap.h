@@ -47,6 +47,7 @@ extern "C"  // work around a bpf/pcap conflict in recent headers
 
 /* QT */
 #include <qevent.h>
+#include <qfile.h>
 #include <qhostaddress.h>
 #include <qobject.h>
 #include <qstring.h>
@@ -420,39 +421,84 @@ class OTCPPacket : public QObject
  * OPacketCapturer
  *======================================================================================*/
 
+/**
+ * @brief A class based wrapper for network packet capturing.
+ *
+ * This class is the base of a high-level interface to the well known packet capturing
+ * library libpcap. ...
+ */
 class OPacketCapturer : public QObject
 {
   Q_OBJECT
 
   public:
+    /**
+     * Constructor.
+     */
     OPacketCapturer( QObject* parent = 0, const char* name = 0 );
+    /**
+     * Destructor.
+     */
     ~OPacketCapturer();
-
+    /**
+     * Setting the packet capturer to use blocking IO calls can be useful when
+     * not using the socket notifier, e.g. without an application object.
+     */
     void setBlocking( bool );
+    /**
+     * @returns true if the packet capturer uses blocking IO calls.
+     */
     bool blocking() const;
-
+    /**
+     * Closes the packet capturer. This is automatically done in the destructor.
+     */
     void close();
+    /**
+     * @returns the data link type.
+     * @see <pcap.h> for possible values.
+     */
     int dataLink() const;
+    /**
+     * @returns the filedescriptor of the packet capturer. This is only useful, if
+     * not using the socket notifier, e.g. without an application object.
+     */
     int fileno() const;
+    /**
+     * @returns the next @ref OPacket from the packet capturer.
+     * @note If blocking mode is true then this call might block.
+     */
     OPacket* next();
-    bool open( const QString& name );
+    /**
+     * Open the packet capturer to capture packets in live-mode from @a interface.
+     */
+    bool open( const QString& interface );
+    /**
+     * Open the packet capturer to capture packets in offline-mode from @a file.
+     */
+    bool open( const QFile& file );
+    /**
+     * @returns true if the packet capturer is open
+     */
     bool isOpen() const;
 
     const QMap<QString,int>& statistics() const;
 
   signals:
+    /**
+     * This signal is emitted, when a packet has been received.
+     */
     void receivedPacket( OPacket* );
 
   protected slots:
     void readyToReceive();
 
   protected:
-    QString _name;          // devicename
-    bool _open;             // check this before doing pcap calls
-    pcap_t* _pch;           // pcap library handle
-    QSocketNotifier* _sn;   // socket notifier for main loop
-    mutable char _errbuf[PCAP_ERRBUF_SIZE];
-    QMap<QString, int> _stats; // statistics;
+    QString _name;                                  // devicename
+    bool _open;                                     // check this before doing pcap calls
+    pcap_t* _pch;                                   // pcap library handle
+    QSocketNotifier* _sn;                           // socket notifier for main loop
+    mutable char _errbuf[PCAP_ERRBUF_SIZE];         // holds error strings from libpcap
+    QMap<QString, int> _stats;                      // statistics;
 };
 
 #endif // OPCAP_H
