@@ -12,6 +12,7 @@
 #include <qlayout.h>
 #include <qlabel.h>
 #include <qmessagebox.h>
+#include <qfile.h>
 
 #include <stdlib.h>
 
@@ -187,6 +188,9 @@ void UserDialog::setupTab2() {
  *
  */
 bool UserDialog::addUser(int uid, int gid) {
+	QCheckListItem *temp;
+	QFile ozTest;
+	int oz=ozTest.exists("/etc/oz_version");
 	UserDialog *adduserDialog=new UserDialog();
 	adduserDialog->setCaption(tr("Add User"));
 	adduserDialog->userID=uid;	// Set next available UID as default uid.
@@ -194,6 +198,20 @@ bool UserDialog::addUser(int uid, int gid) {
 	// Insert default group into groupComboBox
 	adduserDialog->groupComboBox->insertItem("<create new group>",0);
 	adduserDialog->uidLineEdit->setText(QString::number(uid));
+	// If we're running on OZ, add new users to some default groups.
+	if(oz) {
+		QListViewItemIterator iter( adduserDialog->groupsListView );
+		for ( ; iter.current(); ++iter ) {
+			temp=(QCheckListItem*)iter.current();
+			if (temp->text()=="video") temp->setOn(true);
+			if (temp->text()=="audio") temp->setOn(true);
+			if (temp->text()=="time") temp->setOn(true);
+			if (temp->text()=="power") temp->setOn(true);
+			if (temp->text()=="input") temp->setOn(true);
+			if (temp->text()=="sharp") temp->setOn(true);
+			if (temp->text()=="tty") temp->setOn(true);
+		}
+	}
 	// Show the dialog! 
 	if(!(adduserDialog->exec())) return false;
 	if((adduserDialog->groupComboBox->currentItem()!=0)) {
@@ -209,11 +227,10 @@ bool UserDialog::addUser(int uid, int gid) {
 	}
     
 	// Add User to additional groups.
-	QCheckListItem *temp;
 	QListViewItemIterator it( adduserDialog->groupsListView );
 	for ( ; it.current(); ++it ) {
-	temp=(QCheckListItem*)it.current();
-	if (temp->isOn() )
+		temp=(QCheckListItem*)it.current();
+		if (temp->isOn() )
 		accounts->addGroupMember(it.current()->text(0),adduserDialog->loginLineEdit->text());
 	}
 	// Copy image to pics/users/
