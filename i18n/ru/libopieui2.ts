@@ -910,7 +910,4 @@ and </source>
         <translation type="unfinished">Нет</translation>
     </message>
 </context>
-<context>
-    <name>QWidget</name>
-</context>
 </TS>

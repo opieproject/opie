@@ -910,7 +910,4 @@ i</translation>
         <translation type="unfinished">Brak</translation>
     </message>
 </context>
-<context>
-    <name>QWidget</name>
-</context>
 </TS>

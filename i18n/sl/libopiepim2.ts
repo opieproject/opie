@@ -1,29 +1,5 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Button</name>
-</context>
-<context>
-    <name>OColorDialog</name>
-</context>
-<context>
-    <name>OColorPopupMenu</name>
-</context>
-<context>
-    <name>OFileDialog</name>
-</context>
-<context>
-    <name>OFileSelector</name>
-</context>
-<context>
-    <name>OFileViewFileListView</name>
-</context>
-<context>
-    <name>OFontMenu</name>
-</context>
-<context>
-    <name>OFontSelector</name>
-</context>
-<context>
     <name>OPimRecurrenceBase</name>
     <message>
         <source>Repeating Event </source>

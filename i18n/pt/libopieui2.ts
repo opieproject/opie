@@ -754,7 +754,4 @@ e</translation>
         <translation type="unfinished">Nenhum</translation>
     </message>
 </context>
-<context>
-    <name>QWidget</name>
-</context>
 </TS>
