@@ -244,9 +244,9 @@ ODevice::ODevice ( )
 
 	d-> m_modelstr = "Unknown";
 	d-> m_model = Model_Unknown;
-	d-> m_vendorstr = "Unkown";
+	d-> m_vendorstr = "Unknown";
 	d-> m_vendor = Vendor_Unknown;
-	d-> m_systemstr = "Unkown";
+	d-> m_systemstr = "Unknown";
 	d-> m_system = System_Unknown;
 	d-> m_sysverstr = "0.0";
 	
