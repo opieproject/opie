@@ -26,13 +26,16 @@
                              Inc., 59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 */
-#include <qfile.h>
 
-#include <qtopia/private/vobject_p.h>
-#include <qtopia/timeconversion.h>
-#include <qtopia/private/qfiledirect_p.h>
-
+/* OPIE */
+#include "vobject_p.h"
+#include <qpe/timeconversion.h>
 #include <opie2/otodoaccessvcal.h>
+
+//FIXME: Hack to allow direct access to FILE* fh. Rewrite this!
+#define protected public
+#include <qfile.h>
+#undef protected
 
 using namespace Opie;
 
@@ -179,7 +182,7 @@ bool OPimTodoAccessVCal::save() {
     if (!m_dirty )
         return true;
 
-    QFileDirect file( m_file );
+    QFile file( m_file );
     if (!file.open(IO_WriteOnly ) )
         return false;
 
@@ -191,7 +194,7 @@ bool OPimTodoAccessVCal::save() {
         vo = vobjByEvent( it.data() );
         addVObjectProp(obj, vo );
     }
-    writeVObject( file.directHandle(), obj );
+    writeVObject( file.fh, obj ); //FIXME: HACK!!!
     cleanVObject( obj );
     cleanStrTbl();
 

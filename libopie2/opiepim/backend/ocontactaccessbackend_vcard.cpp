@@ -29,13 +29,18 @@
 /*
  * VCard Backend for the OPIE-Contact Database.
  */
-#include <opie2/ocontactaccessbackend_vcard.h>
-#include "../../../../library/backend/vobject_p.h"
-#include "../../../../library/backend/qfiledirect_p.h"
 
+
+#include "vobject_p.h"
+
+/* OPIE */
+#include <opie2/ocontactaccessbackend_vcard.h>
 #include <qpe/timeconversion.h>
 
+//FIXME: Hack to allow direct access to FILE* fh. Rewrite this!
+#define protected public
 #include <qfile.h>
+#undef protected
 
 namespace Opie {
 
@@ -94,7 +99,7 @@ bool OPimContactAccessBackend_VCard::save()
 	if (!m_dirty )
 		return true;
 
-	QFileDirect file( m_file );
+	QFile file( m_file );
 	if (!file.open(IO_WriteOnly ) )
 		return false;
 
@@ -105,7 +110,7 @@ bool OPimContactAccessBackend_VCard::save()
 	VObject *vo;
 	for(QMap<int, OPimContact>::ConstIterator it=m_map.begin(); it !=m_map.end(); ++it ){
 		vo = createVObject( *it );
-		writeVObject( file.directHandle() , vo );
+		writeVObject( file.fh, vo ); //FIXME: HACK!!!
 		cleanVObject( vo );
 	}
 	cleanStrTbl();
