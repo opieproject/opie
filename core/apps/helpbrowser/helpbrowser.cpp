@@ -1,4 +1,4 @@
-/**********************************************************************
+#/**********************************************************************
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
@@ -97,7 +97,8 @@ void HelpBrowser::init( const QString& _home )
     forwardAction->addTo( toolbar );
     forwardAction->setEnabled( FALSE );
 
-    QAction *a = new QAction( tr( "Home" ), Resource::loadPixmap( "home" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Home" ), Resource::loadPixmap(
+"helpbrowser/home" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( home() ) );
     //a->addTo( go );
     a->addTo( toolbar );
