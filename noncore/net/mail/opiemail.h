@@ -13,14 +13,14 @@ public:
     static QString appName() { return QString::fromLatin1("opiemail"); }
 
 public slots:
-    void slotwriteMail(const QString&name,const QString&email);
-    void slotComposeMail();
-    void appMessage(const QCString &msg, const QByteArray &data);
+    virtual void slotwriteMail(const QString&name,const QString&email);
+    virtual void slotComposeMail();
+    virtual void appMessage(const QCString &msg, const QByteArray &data);
 protected slots:
-    void slotSendQueued();
-    void slotSearchMails();
-    void slotEditSettings();
-    void slotEditAccounts();
+    virtual void slotSendQueued();
+    virtual void slotSearchMails();
+    virtual void slotEditSettings();
+    virtual void slotEditAccounts();
 private:
     Settings *settings;
 

@@ -21,7 +21,7 @@ public:
     MainWindow( QWidget *parent = 0, const char *name = 0, WFlags flags = 0 );
 
 public slots:
-    void slotAdjustColumns();
+    virtual void slotAdjustColumns();
     
 protected slots:
     virtual void slotShowFolders( bool show );

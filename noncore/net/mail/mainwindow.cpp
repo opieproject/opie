@@ -11,7 +11,6 @@
 
 #include "defines.h"
 #include "mainwindow.h"
-#include "settingsdialog.h"
 #include "viewmail.h"
 #include "mailtypes.h"
 #include "mailistviewitem.h"
@@ -80,7 +79,6 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     editSettings->addTo( settingsMenu );
     connect( editSettings, SIGNAL( activated() ),
              SLOT( slotEditSettings() ) );
-
     editAccounts = new QAction( tr( "Configure accounts" ), ICON_EDITACCOUNTS,
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
@@ -157,10 +155,8 @@ void MainWindow::slotAdjustColumns()
     mailView->setColumnWidth( 4, 50 );
 }
 
-void MainWindow::slotEditSettings() {
-    SettingsDialog settingsDialog( this,  0, true );
-    settingsDialog.showMaximized();
-    settingsDialog.exec();
+void MainWindow::slotEditSettings()
+{
 }
 
 void MainWindow::slotShowFolders( bool show )
