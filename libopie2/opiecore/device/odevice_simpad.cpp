@@ -215,34 +215,31 @@ void SIMpad::initButtons()
  * write it.
  */
 static bool setCS3Bit(  bool bitset, int bit ) {
-    int cs3_fd = ::open( SIMPAD_BOARDCONTROL, O_RDONLY );
-
-    if ( cs3_fd < 0 )
+    QFile file( SIMPAD_BOARDCONTROL );
+    if ( !file.open( IO_ReadOnly ) )
         return false;
 
-    static char line[32];
-    int  val = 0;
-    bool ok  = false;
+    unsigned int val = 0;
+    bool ok = false;
+    QTextStream stream( &file );
 
     /*
-     * try to read and parse the Chipselect3 status
-     * be paranoid and make sure line[31] is null
-     * terminated
+     * Use QFile and QTextStream for parsing to be more
+     * robust
      */
-    while( !ok && ::read(cs3_fd, &line, sizeof(line)) > 0 ) {
-        line[31] = '\0';
-        if (::sscanf(line, "Chipselect3 : %x", &val ))
+    while ( !stream.atEnd() ) {
+        QString line = stream.readLine();
+        if ( line.startsWith( "Chipselect3 : " ) ) {
+            val = line.mid( 15 ).toUInt( 0, 16 );
             ok = true;
+            break;
+        }
     }
 
-    ::close(cs3_fd);
-
-    /*
-     * we were not able to find the current value
-     * and as a result we won't set it
-     */
     if ( !ok )
         return false;
+
+    file.close();
 
     /*
      * change the value
@@ -252,10 +249,11 @@ static bool setCS3Bit(  bool bitset, int bit ) {
     /*
      * write it back
      */
-    cs3_fd = ::open( SIMPAD_BOARDCONTROL, O_WRONLY );
+    int cs3_fd = ::open( SIMPAD_BOARDCONTROL, O_WRONLY );
     if ( cs3_fd < 0 )
         return false;
 
+    char line[32];
     ::snprintf(line, sizeof(line), "0x%04x\n", val);
     ::write(cs3_fd, line, strlen(line));
     ::close(cs3_fd);
