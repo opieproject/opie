@@ -100,6 +100,8 @@ namespace ThreadUtil
 
         bool wait();
 
+        bool isRunning() const;
+
         static void exit();
     protected:
         virtual void run() = 0;

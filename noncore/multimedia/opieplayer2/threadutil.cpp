@@ -216,6 +216,12 @@ bool Thread::wait()
     return d->finishCondition.wait( d->guard );
 }
 
+bool Thread::isRunning() const
+{
+    AutoLock lock( d->guard );
+    return d->isRunning;
+}
+
 void Thread::exit()
 {
     pthread_exit( 0 );
