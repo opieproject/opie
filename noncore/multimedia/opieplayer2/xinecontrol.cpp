@@ -57,6 +57,8 @@ XineControl::XineControl( XINE::Lib *xine, XineVideoWidget *xineWidget,
 {
     xine->ensureInitialized();
 
+    xine->setWidget( xineWidget );
+
     init();
 }
 

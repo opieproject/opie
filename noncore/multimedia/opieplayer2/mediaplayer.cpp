@@ -15,6 +15,7 @@
 #include "audiowidget.h"
 #include "videowidget.h"
 #include "volumecontrol.h"
+#include "lib.h"
 
 #include "mediaplayerstate.h"
 
@@ -370,7 +371,8 @@ void MediaPlayer::recreateAudioAndVideoWidgets() const
     connect( m_videoUI,  SIGNAL( moreReleased() ), this, SLOT( stopChangingVolume() ) );
     connect( m_videoUI,  SIGNAL( lessReleased() ), this, SLOT( stopChangingVolume() ) );
 
-    m_xineControl = new XineControl( m_videoUI->vidWidget(), mediaPlayerState );
+    XINE::Lib *xine = new XINE::Lib( XINE::Lib::InitializeImmediately );
+    m_xineControl = new XineControl( xine, m_videoUI->vidWidget(), mediaPlayerState );
 }
 
 AudioWidget *MediaPlayer::audioUI() const

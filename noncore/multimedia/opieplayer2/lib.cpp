@@ -128,10 +128,7 @@ void Lib::initialize()
 
     if (m_wid != 0 ) {
         printf( "!0\n" );
-        resize ( m_wid-> size ( ) );
-        ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
-
-//        m_wid->repaint();
+        setWidget( m_wid );
     }
 
     m_queue = xine_event_new_queue (m_stream);
@@ -294,6 +291,14 @@ void Lib::ensureInitialized()
     qDebug( "initialization thread finished!" );
 }
 
+void Lib::setWidget( XineVideoWidget *widget )
+{
+    m_wid = widget;
+    resize ( m_wid-> size ( ) );
+    ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
+    m_wid->repaint();
+}
+
 void Lib::receiveMessage( ThreadUtil::ChannelMessage *msg, SendType sendType )
 {
     assert( sendType == ThreadUtil::Channel::OneWay );
@@ -381,5 +386,8 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
         qWarning("not showing video now");
         return;
     }
+
+    assert( m_wid );
+
     m_wid-> setVideoFrame ( frame, width, height, bytes );
 }

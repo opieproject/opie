@@ -179,6 +179,8 @@ namespace XINE {
 
         void ensureInitialized();
 
+        void setWidget( XineVideoWidget *widget );
+
     signals:
 
         void stopped();
