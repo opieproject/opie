@@ -1,5 +1,5 @@
 /*
-** $Id: qsettings.h,v 1.1 2003-07-22 19:23:20 zcarsten Exp $
+** $Id: qsettings.h,v 1.2 2004-07-10 03:24:45 llornkcor Exp $
 */
 
 #ifndef _QSETTINGS_H_
@@ -28,7 +28,7 @@ public:
 		Global
 	};
 	
-	QSettings(const QString &);
+	QSettings(const QString &file=0);
 	~QSettings();
 
 	void insertSearchPath (System, const QString &);
