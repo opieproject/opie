@@ -3,9 +3,9 @@
                              -------------------
     begin                : Mon Jan 15 2001
     copyright            : (C) 2001 by Christoph "Crossfire" Cullmann
-			   (C) 2002 by Joseph Wenninger
+         (C) 2002 by Joseph Wenninger
     email                : crossfire@babylon2k.de
-			   jowenn@kde.org
+         jowenn@kde.org
  ***************************************************************************/
 
 /***************************************************************************
@@ -1773,7 +1773,7 @@ bool KateView::canDiscard() {
         if (isModified()) {
             query = KMessageBox::warningContinueCancel(this,
                i18n("Could not save the document.\nDiscard it and continue?"),
-	       QString::null, i18n("&Discard"));
+         QString::null, i18n("&Discard"));
           if (query == KMessageBox::Cancel) return false;
         }
         break;
@@ -2197,7 +2197,7 @@ bool KateView::askReplaceEnd() {
                "End of document reached.\n"
                "Continue from the beginning?").arg(replaces);
     query = KMessageBox::questionYesNo(this, str, i18n("Replace"),
-		i18n("Continue"), i18n("Stop"));
+    i18n("Continue"), i18n("Stop"));
   } else {
     // backward search
     str = i18n("%1 replacement(s) made.\n"
@@ -2327,7 +2327,7 @@ void KateView::configDialog()
   (new QVBoxLayout(page))->setAutoAdd(true);
 
   hlPage = new HighlightDialogPage(hlManager, &defaultStyleList, &hlDataList, 0, page);
-
+  kd->showMaximized();
  if (kd->exec()) {
     // color options
     colorConfig->getColors(colors);
@@ -2837,7 +2837,7 @@ void KateIconBorder::paintEvent(QPaintEvent* e)
     int h = doc->fontHeight;
     int yPos = myInternalView->yPos;
     if (h) {
-  	lineStart = (yPos + updateR.y()) / h;
+    lineStart = (yPos + updateR.y()) / h;
         lineEnd = QMAX((yPos + updateR.y() + updateR.height()) / h, (int)doc->numLines());
     }
 
