@@ -31,7 +31,6 @@
 
 #include <qdatetime.h>
 #include <qlist.h>
-#include <qstring.h>
 
 class Config;
 
