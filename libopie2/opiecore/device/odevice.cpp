@@ -344,9 +344,14 @@ bool ODevice::setDisplayBrightness ( int p)
 }
 
 /**
-* @return returns the number of steppings on the brightness slider
-* in the Light-'n-Power settings.
-*/
+ * 
+ * @return Returns the number of steppings on the brightness slider
+ * in the Light-'n-Power settings. Values smaller zero and bigger
+ * than 255 do not make sense.
+ *
+ * \sa QSlider::setLineStep
+ * \sa QSlider::setPageStep
+ */
 int ODevice::displayBrightnessResolution() const
 {
     return 16;
@@ -711,14 +716,24 @@ void ODevice::remapHeldAction ( int button, const OQCopMessage &action )
 
     QCopEnvelope ( "QPE/System", "deviceButtonMappingChanged()" );
 }
+
+/**
+ * @internal
+ */
 void ODevice::virtual_hook(int, void* ){
 
 }
 
 /**
+ * \brief Send a QCOP Message before suspending
+ *
  * Sends a QCOP message to channel QPE/System
  * with the message "aboutToSuspend()" if this
- * is the windowing server
+ * is the windowing server.
+ * 
+ * Call this in your custom \sa suspend() Method
+ * before going to suspend.
+ * 
  */
 void ODevice::sendSuspendmsg()
 {
@@ -758,6 +773,12 @@ void ODevice::remPreHandler(QWSServer::KeyboardFilter*aFilter)
     Opie::Core::OKeyFilter::inst()->remPreHandler(aFilter);
 }
 
+
+/**
+ * @internal
+ * 
+ * @see changeMixerForAlarm
+ */
 void ODevice::playingStopped() {
     const_cast<QObject*>(sender())->disconnect( this );
 #ifndef QT_NO_SOUND
@@ -768,6 +789,41 @@ void ODevice::playingStopped() {
 #endif
 }
 
+
+/**
+ * \brief Change the Volume for the Alarm and set it back after playing is finished
+ *
+ * If you play an Alarm Sound you might want to change the Mixer to
+ * full volume and ignore the user setting. After it \sa Sound::isFinished
+ * you would turn the volume back to the user preference.
+ * The problem is that we used to enter the event loop while waiting
+ * for the sound to be finished triggering all kind of reentrance
+ * problems what a library shouldn't introduce.
+ * Instead of manually waiting for the sound to be finished use
+ * this Method and it will automatically restore the Mixer to
+ * the user configuration after the sound finished playing.
+ *
+ * Note: The onwership of \param snd is not transfered and playing
+ * is not started in this method. If 'snd' gets deleted before
+ * playing is finished the volume doesn't get set back to
+ * the user preference!
+ *
+ * \code
+ * static Sound snd("alarm");
+ * if(!snd.isFinished())
+ *    return;
+ *
+ * changeMixerForAlarm( my_channel, "/dev/mixer", &snd );
+ * snd.play()
+ * \endcode
+ * 
+ * 
+ *
+ * @param mixer The mixer number/channel to use
+ * @param file  The file name. If you convert from QString use QFile::encodeName
+ * @param snd   The sound to wait for finishing
+ * 
+ */
 void ODevice::changeMixerForAlarm( int mixer, const char* file, Sound *snd ) {
 #ifndef QT_NO_SOUND
     if (( d->m_sound = ::open ( file, O_RDWR )) >= 0 ) {
