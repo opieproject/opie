@@ -1,5 +1,5 @@
 Package: opie-eye
-Files: plugins/application/libopie-eye.so* bin/opie-eye bin/opie-eye_slave apps/Applications/opie-eye.desktop
+Files: plugins/application/libopie-eye.so* bin/opie-eye bin/opie-eye_slave apps/Applications/opie-eye.desktop pics/opie-eye/*.png
 Priority: optional
 Section: opie/applications
 Maintainer: Holger Freyther <zecke@handhelds.org>

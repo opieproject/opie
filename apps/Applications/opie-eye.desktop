@@ -1,7 +1,7 @@
 [Desktop Entry]
 Exec=opie-eye
 File=Unknown
-Icon=Unknown
+Icon=opie-eye/opie-eye
 Type=Application
 Name=Eye of Zilla
 Comment=An advanced image viewer
