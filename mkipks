@@ -222,7 +222,6 @@ do
 		    fi
 	    fi
 	    echo "Architecture: $ARCH" >>$CTRLDIR/control 
-	    echo "Filename: ./$package.ipk" >>$CTRLDIR/control
 	    echo "Version: $version" >>$CTRLDIR/control
 	    [ ! -z "$depends" ] && echo "Depends: $depends" >>$CTRLDIR/control
 	    [ ! -z "$provides" ] && echo "Provides: $provides" >>$CTRLDIR/control
