@@ -1,11 +1,32 @@
-/****************************************************************************
-** Form implementation generated from reading ui file 'commandeditwidget.ui'
-**
-** Created: Sat Feb 2 11:08:25 2002
-**      by:  The User Interface Compiler (uic)
-**
-** WARNING! All changes made in this file will be lost!
-****************************************************************************/
+/*
+                            This file is part of the Opie Project
+                             Copyright (c)  2002 L. Potter <ljp@llornkcor.com>
+              =.
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
+
+*/
 #include "commandeditwidget.h"
 
 #include <qpushbutton.h>
@@ -23,7 +44,7 @@ Form1::Form1( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
     if ( !name )
-	setName( "Form1" );
+  setName( tr("Form1"));
     resize( 596, 480 ); 
     setCaption( tr( "Form1" ) );
     Form1Layout = new QGridLayout( this ); 
