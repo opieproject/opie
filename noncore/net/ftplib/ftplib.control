@@ -1,8 +1,8 @@
 Package: ftplib
-Files: $OPIEDIR/lib/libftplib.*
+Files: lib/libftplib.*
 Priority: optional
-Section: Communications
-Maintainer: L.J. Potter <ljp@llornkcor.com> 
+Section: libs
+Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Libftp

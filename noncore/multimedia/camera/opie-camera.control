@@ -1,8 +1,8 @@
 Package: opie-camera
 Files: lib/libopiecam.* bin/opiecam bin/capture pics/camera apps/Applications/camera.desktop
 Priority: optional
-Section: opie/applications
-Maintainer: Michael 'Mickey' Lauer <mickeyl@Vanille.de> 
+Section: opie/multimedia
+Maintainer: Michael 'Mickey' Lauer <mickeyl@Vanille.de>
 Architecture: arm
 Version: 1.0.1
 Depends: libqpe1, libopiecore2

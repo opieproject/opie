@@ -2,7 +2,7 @@ Package: opie-embeddedkonsole-help-en
 Files: help/en/html/embeddedkonsole.html
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-embeddedkonsole
 License: GPL
 Description: embeddedkonsole help files (en)

@@ -1,7 +1,7 @@
 Package: tonleiter
 Files: bin/tonleiter pics/tonleiter apps/Applications/tonleiter.desktop
 Priority: optional
-Section: multimedia/applications
+Section: opie/multimedia
 Maintainer: Ralf Waspe <rwaspe@web.de>
 Architecture: arm
 Depends: task-opie-minimal

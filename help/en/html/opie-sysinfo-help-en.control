@@ -2,7 +2,7 @@ Package: opie-sysinfo-help-en
 Files: help/en/html/sysinfo.html help/en/html/sysinfo
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-sysinfo
 License: GPL
 Description: sysinfo help files (en)

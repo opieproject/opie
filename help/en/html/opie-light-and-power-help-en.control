@@ -2,7 +2,7 @@ Package: opie-light-and-power-help-en
 Files: help/en/html/light-and-power.html help/en/html/light-and-power
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-light-and-power
 License: GPL
 Description: light-and-power help files (en)

@@ -1,7 +1,7 @@
 Package: opie-todo
 Files: plugins/application/libtodolist.so* bin/todolist apps/1Pim/todo.desktop
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, libopie1, opie-pics

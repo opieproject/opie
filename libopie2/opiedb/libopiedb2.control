@@ -1,5 +1,5 @@
 Package: libopiedb2
-Files: $OPIEDIR/lib/libopiedb2.so*
+Files: lib/libopiedb2.so*
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

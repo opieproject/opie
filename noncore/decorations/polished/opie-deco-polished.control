@@ -1,7 +1,7 @@
 Package: opie-deco-polished
 Files: plugins/decorations/libpolished.so*
 Priority: optional
-Section: opie/decorations
+Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal

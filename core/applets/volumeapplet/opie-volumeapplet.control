@@ -1,7 +1,7 @@
 Package: opie-volumeapplet
 Files: plugins/applets/libvolumeapplet.so*
 Priority: optional
-Section: opie/taskbar
+Section: opie/applets
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal

@@ -2,7 +2,7 @@ Package: opie-mobilemsg-help-en
 Files: help/en/html/mobilemsg.html help/en/html/mobilemsg
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-mobilemsg
 License: GPL
 Description: mobilemsg help files (en)

@@ -2,7 +2,7 @@ Package: opie-tictac-help-en
 Files: help/en/html/tictac.html help/en/html/tictac
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-tictac
 License: GPL
 Description: tictac help files (en)

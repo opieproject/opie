@@ -1,7 +1,7 @@
 Package: opie-clipboardapplet
 Files: plugins/applets/libclipboardapplet.so*
 Priority: optional
-Section: opie/taskbar
+Section: opie/applets
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal

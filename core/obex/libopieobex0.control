@@ -1,12 +1,12 @@
 Package: libopieobex0
 Files: plugins/obex/libopieobex.so* pics/obex/*
 Priority: optional
-Section: opie/system
+Section: libs
 Maintainer: holger Freyther <zecke@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal ($QPE_VERSION), openobex | libopenobex1
 Provides: libopieobex1
 Replaces: libopieobex1
 Description: Irda obex lib
- 
+
 Version: $QPE_VERSION$EXTRAVERSION

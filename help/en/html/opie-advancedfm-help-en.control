@@ -1,5 +1,5 @@
 Package: opie-advancedfm-help-en
-Files: help/en/html/advancedfm.html 
+Files: help/en/html/advancedfm.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: ljp <llornkcor@handhelds.org>
@@ -7,5 +7,5 @@ Architecture: arm
 Depends: opie-advancedfm
 License: GPL
 Description: Opie Advanced file manager help files (english)
- 
+
 Version: $QPE_VERSION$EXTRAVERSION

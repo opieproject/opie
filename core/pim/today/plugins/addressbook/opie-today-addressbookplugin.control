@@ -1,7 +1,7 @@
 Package: opie-today-addressbookplugin
 Files: plugins/today/libtodayaddressbookplugin.so*
 Priority: optional
-Section: opie/applications
+Section: opie/plugins
 Maintainer: Stefan Eilers <eilers.stefan@epost.de>
 Architecture: arm
 Depends: libqte2, opie-today

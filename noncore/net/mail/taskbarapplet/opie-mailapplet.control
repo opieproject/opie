@@ -1,7 +1,7 @@
 Package: opie-mailapplet
 Files: plugins/applets/libmailapplet.so*
 Priority: optional
-Section: opie/applications
+Section: opie/applets
 Maintainer: Rajko Albrecht <alwin@handhelds.org>, Juergen Graf <jgf@handhelds.org>, Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
 Version: 0.3-$SUB_VERSION

@@ -1,7 +1,7 @@
 Package: opie-mail2
-Files: plugins/application/libmail.so* bin/mail $OPIEDIR/lib/libmail.so* apps/1Pim/mail.desktop pics/mail/*.png sounds/mail/*.wav
+Files: plugins/application/libmail.so* bin/mail lib/libmail.so* apps/1Pim/mail.desktop pics/mail/*.png sounds/mail/*.wav
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: Constantin Bergemann <cbergemann@lisa.de>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION

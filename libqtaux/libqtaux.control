@@ -1,5 +1,5 @@
 Package: libqtaux2
-Files: $OPIEDIR/lib/libqtaux2.so.*
+Files: lib/libqtaux2.so.*
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

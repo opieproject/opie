@@ -1,7 +1,7 @@
 Package: opie-drawpad
 Files: plugins/application/libdrawpad.so* bin/drawpad apps/1Pim/drawpad.desktop pics/drawpad
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: Sébastien Prud'homme <prudhomme@laposte.net>
 Architecture: arm
 Depends: task-opie-minimal, libopie1

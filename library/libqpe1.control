@@ -1,8 +1,8 @@
 Package: libqpe1
-Files: $OPIEDIR/lib/libqpe.so.1 $OPIEDIR/lib/libqpe.so.1.5 $OPIEDIR/lib/libqpe.so.1.5.0
+Files: lib/libqpe.so.1 lib/libqpe.so.1.5 lib/libqpe.so.1.5.0
 Priority: required
 Section: opie/system
-Maintainer:  Project Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: libqte2 (>=2.3.4-beta4), qte-fonts (>=$QTE_VERSION)
 Description: libqpe, base qtopia/opie library.

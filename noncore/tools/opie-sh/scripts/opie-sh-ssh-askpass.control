@@ -1,9 +1,9 @@
 Package: opie-sh-ssh-askpass
 Files: bin/opie-sh-ssh-askpass.sh
-Installed-Size:  0 
+Installed-Size:  0
 Depends: task-opie-minimal (1.5.0+), opie-sh (0.5-20020919+)
 Priority: optional
-Section: opie/system
+Section: opie/sh
 Maintainer: David Woodhouse <dwmw2@infradead.org>
 Architecture: arm
 License: GPL

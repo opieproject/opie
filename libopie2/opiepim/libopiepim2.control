@@ -1,5 +1,5 @@
 Package: libopiepim2
-Files: $OPIEDIR/lib/libopiepim2.so.*
+Files: lib/libopiepim2.so.*
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

@@ -1,6 +1,6 @@
 Files: bin/powerchord apps/Applications/powerchord.desktop pics/powerchord share/powerchord
 Priority: optional
-Section: Applications
+Section: opie/multimedia
 Maintainer: Camilo Mesias <camilo@mesias.co.uk>
 Architecture: arm
 Version: 0.0.8

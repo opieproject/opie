@@ -1,7 +1,7 @@
 Package: opie-main-tab-example
 Files: bin/main-tab apps/Examples/main-tab.desktop
 Priority: optional
-Section: opie/applications
+Section: opie/examples
 Maintainer: Holger 'zecke' Freyther <zecke@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal,  opie-pics

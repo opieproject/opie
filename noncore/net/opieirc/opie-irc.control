@@ -1,7 +1,7 @@
 Package: opie-irc
 Files: plugins/application/libopieirc.so* bin/opieirc pics/opieirc apps/Applications/opieirc.desktop help/en/html/opieirc.html help/en/html/opieirc
 Priority: optional
-Section: Communications
+Section: opie/applications
 Maintainer: Wenzel Jakob <root@wazlaf.de>
 Architecture: arm
 Depends: task-opie-minimal, libopie1

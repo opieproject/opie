@@ -1,7 +1,7 @@
 Package: opie-confeditor
 Files: bin/confedit apps/Settings/confedit.desktop pics/confedit/confedit.png
 Priority: optional
-Section: opie/
+Section: opie/settings
 Maintainer: Patrick S. Vogt <tille@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION

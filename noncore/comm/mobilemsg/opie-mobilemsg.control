@@ -1,7 +1,7 @@
 Package: opie-mobilemsg
-Files: plugins/application/libmobilemsg.so* bin/mobilemsg apps/Applications/mobilemsg.desktop pics/mobilemsg 
+Files: plugins/application/libmobilemsg.so* bin/mobilemsg apps/Applications/mobilemsg.desktop pics/mobilemsg
 Priority: optional
-Section: opie/comm
+Section: opie/applications
 Maintainer: Bruno Rodrigues <bruno.rodrigues@litux.org>
 Architecture: arm
 Depends: task-opie-minimal

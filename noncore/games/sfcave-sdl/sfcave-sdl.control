@@ -1,7 +1,7 @@
 Files: plugins/application/libsfcave-sdl.so* bin/sfcave-sdl apps/Games/sfcave-sdl.desktop pics/sfcave-sdl sounds/sfcave-sdl
 Package: sfcave-sdl
 Priority: optional
-Section: Games
+Section: libs
 Architecture: arm
 Maintainer: Andy Qua (andy.qua@blueyonder.co.uk)
 Depends:  libSDL,libSDL_-mixer,libSDL-image,libSDL-gfx

@@ -1,7 +1,7 @@
 Package: opie-bluetoothmanager
 Files: plugins/application/libbluetooth-manager.so* bin/bluetooth-manager apps/Settings/bluetooth-manager.desktop pics/opietooth/*
 Priority: optional
-Section: opie/applications
+Section: opie/settings
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
 Version: 0.5.4-$SUB_VERSION

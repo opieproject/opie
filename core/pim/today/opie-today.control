@@ -1,14 +1,14 @@
 Package: opie-today
 Files: plugins/application/libtoday.so* bin/today apps/1Pim/today.desktop pics/today/*
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION$EXTRAVERSION
 Depends: task-opie-minimal, libopie1
 License: GPL
 Description: today screen
- This today screen app gives an overview of appointments 
+ This today screen app gives an overview of appointments
  and todos.
  It also shows incoming and outgoing mails from opiemail.
  When using Opie (opie.handhelds.org) today can be autostarted

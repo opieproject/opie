@@ -3,7 +3,7 @@ Files: bin/service_manager.sh apps/Opie-SH/service_manager.desktop pics/opie-sh-
 Installed-Size:  0
 Depends: task-opie-minimal, opie-sh
 Priority: optional
-Section: opie/settings
+Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL

@@ -4,6 +4,6 @@ Priority: optional
 Depends: task-opie-minimal
 Architecture: arm
 Maintainer: Stefan Eilers <Eilers.Stefan@epost.de>
-Section: opie/Settings
+Section: opie/settings
 Description: Backup and Restore utility.
 Version: $QPE_VERSION$EXTRAVERSION

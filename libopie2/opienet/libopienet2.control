@@ -1,5 +1,5 @@
 Package: libopienet2
-Files: $OPIEDIR/lib/libopienet2.so.* $OPIEDIR/etc/manufacturers
+Files: lib/libopienet2.so.* etc/manufacturers
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

@@ -1,7 +1,7 @@
 Package: opie-wavplugin
 Files: plugins/codecs/libwavplugin*
 Priority: optional
-Section: opie/plugins
+Section: libs
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal

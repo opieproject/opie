@@ -1,7 +1,7 @@
 Package: opie-mediaplayer2
 Files: plugins/application/libopieplayer2.so* bin/opieplayer2  apps/Applications/mediaplayer.desktop pics/opieplayer2/add_to_playlist.png pics/opieplayer2/cut.png pics/opieplayer2/delete.png  pics/opieplayer2/down.png  pics/opieplayer2/loop.png pics/opieplayer2/MPEGPlayer.png pics/opieplayer2/musicfile.png pics/opieplayer2/playlist2.png pics/opieplayer2/play.png pics/opieplayer2/remove_from_playlist.png pics/opieplayer2/shuffle.png  pics/opieplayer2/up.png pics/opieplayer2/videofile.png
 Priority: optional
-Section: opie/applications
+Section: opie/multimedia
 Maintainer: L.J.Potter <ljp@llornkcor.com>, Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal, libopie1, zlib1g, opie-mediaplayer2-skin-default | opie-mediaplayer2-skin-default-landscape , libxine1 | opie-mediaplayer2-codecs

@@ -1,7 +1,7 @@
 Package: opie-textedit
 Files: plugins/application/libtextedit.so* bin/textedit apps/1Pim/textedit.desktop pics/textedit
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal, libopie1

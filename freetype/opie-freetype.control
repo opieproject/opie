@@ -1,8 +1,8 @@
 Package: opie-freetype
 Files: plugins/fontfactories/libfreetypefactory*
 Priority: optional
-Section: opie/plugins
-Maintainer: Opie <opie@llornkcor.com> 
+Section: libs
+Maintainer: Opie <opie@llornkcor.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal, libfreetype6

@@ -1,7 +1,7 @@
 Package: opie-libtremorplugin
 Files: plugins/codecs/libtremorplugin.so.1.0.0 plugins/codecs/libtremorplugin.so.1.0 plugins/codecs/libtremorplugin.so.1 plugins/codecs/libtremorplugin.so
 Priority: optional
-Section: opie/plugins
+Section: libs
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal, libtremor

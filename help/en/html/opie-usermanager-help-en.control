@@ -2,7 +2,7 @@ Package: opie-usermanager-help-en
 Files: help/en/html/usermanager.html help/en/html/usermanager
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-usermanager
 License: GPL
 Description: usermanager help files (en)

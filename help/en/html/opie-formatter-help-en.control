@@ -2,7 +2,7 @@ Package: opie-formatter-help-en
 Files: help/en/html/formatter.html
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-formatter
 License: GPL
 Description: formatter help files (en)

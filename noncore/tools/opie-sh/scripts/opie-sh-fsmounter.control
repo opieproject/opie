@@ -1,9 +1,9 @@
 Package: opie-sh-fsmounter
 Files: bin/filesystem_mounter.sh pics/opie-sh-scripts/fsmounter.png apps/Opie-SH/filesystem_mounter.desktop
-Installed-Size:  0 
+Installed-Size:  0
 Depends: task-opie-minimal, opie-sh
 Priority: optional
-Section: opie/settings
+Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL

@@ -7,5 +7,5 @@ Architecture: arm
 Depends: opie-wellenreiter
 License: GPL
 Description: Opie Wellenreiter help files (english)
- 
+
 Version: $QPE_VERSION$EXTRAVERSION

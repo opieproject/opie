@@ -1,9 +1,9 @@
 Package: opie-sh-logviewer
 Files: bin/logviewer.sh apps/Opie-SH/logviewer.desktop pics/opie-sh-scripts/logviewer.png
-Installed-Size:  0 
+Installed-Size:  0
 Depends: task-opie-minimal, opie-sh
 Priority: optional
-Section: opie/settings
+Section: opie/sh
 Maintainer: gonz <gonz@directbox.com>
 Architecture: arm
 License: GPL

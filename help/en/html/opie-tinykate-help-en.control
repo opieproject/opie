@@ -2,7 +2,7 @@ Package: opie-tinykate-help-en
 Files: help/en/html/tinykate.html help/en/html/tinykate
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-tinykate
 License: GPL
 Description: tinykate help files (en)

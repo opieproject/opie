@@ -2,7 +2,7 @@ Package: opie-language-help-en
 Files: help/en/html/language.html help/en/html/language
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-language
 License: GPL
 Description: language help files (en)

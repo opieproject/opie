@@ -2,7 +2,7 @@ Package: opie-checkbook-help-en
 Files: help/en/html/checkbook.html help/en/html/checkbook
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-checkbook
 License: GPL
 Description: checkbook help files (en)

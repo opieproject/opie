@@ -1,7 +1,7 @@
 Package: opie-sysinfo
 Files: plugins/application/libsysinfo.so* bin/sysinfo apps/Settings/sysinfo.desktop pics/sysinfo
 Priority: optional
-Section: opie/applications
+Section: opie/settings
 Maintainer: Dan Williams <williamsdr@acm.org>
 Architecture: arm
 Depends: task-opie-minimal, libopie1

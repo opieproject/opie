@@ -1,7 +1,7 @@
 Package: opie-today-datebookplugin
 Files: plugins/today/libtodaydatebookplugin.so*
 Priority: optional
-Section: opie/applications
+Section: opie/plugins
 Maintainer: Maximilian Reiss <harlekin@handhelds.org>
 Architecture: arm
 Depends: libqte2, opie-today

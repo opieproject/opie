@@ -1,7 +1,7 @@
 Package: opie-cardmon
 Files: plugins/applets/libcardmonapplet.so* pics/cardmon/*.png sounds/cardmon/*.wav
 Priority: optional
-Section: opie/taskbar
+Section: opie/applets
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
 Depends: task-opie-minimal, libopie1

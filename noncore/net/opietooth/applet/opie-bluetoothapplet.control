@@ -1,7 +1,7 @@
 Package: opie-bluetoothapplet
 Files: plugins/applets/libbluetoothapplet.so* pics/bluetoothapplet/*
 Priority: optional
-Section: opie/system
+Section: opie/applets
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Depends: task-opie-minimal, libopietooth1

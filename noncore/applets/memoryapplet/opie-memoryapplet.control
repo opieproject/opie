@@ -1,7 +1,7 @@
 Package: opie-memoryapplet
-Files: plugins/applets/libmemoryapplet.so* $OPIEDIR/pics/memory
+Files: plugins/applets/libmemoryapplet.so* pics/memory
 Priority: optional
-Section: opie/system
+Section: opie/applets
 Maintainer: Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
 Architecture: arm
 Depends: task-opie-minimal

@@ -1,7 +1,7 @@
 Package: opie-deco-flat
 Files: plugins/decorations/libflat.so*
 Priority: optional
-Section: opie/decorations
+Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal

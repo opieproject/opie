@@ -1,7 +1,7 @@
 Package: opie-mediaplayer2-skin-techno
 Files: pics/mediaplayer/skins/techno
 Priority: optional
-Section: opie/applications
+Section: opie/playerskins
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Description: Techno Opie Mediaplayer's skin. Adapted from Qtopia
 

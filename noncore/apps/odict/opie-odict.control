@@ -1,7 +1,7 @@
 Package: opie-odict
 Files: plugins/application/libodict.so* bin/odict apps/Applications/odict.desktop pics/odict/odict.png
 Priority: optional
-Section: applications
+Section: opie/applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal

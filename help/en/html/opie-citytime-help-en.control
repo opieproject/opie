@@ -2,7 +2,7 @@ Package: opie-citytime-help-en
 Files: help/en/html/citytime.html help/en/html/citytime
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-citytime
 License: GPL
 Description: citytime help files (en)

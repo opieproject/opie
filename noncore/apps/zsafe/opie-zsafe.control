@@ -1,7 +1,7 @@
 Package: opie-zsafe
 Files: bin/zsafe apps/Applications/zsafe.desktop pics/zsafe/*.png
 Priority: optional
-Section: applications
+Section: opie/applications
 Version: $QPE_VERSION$EXTRAVERSION
 Architecture: arm
 Depends: task-opie-minimal

@@ -1,5 +1,5 @@
 Package: libopie1
-Files: $OPIEDIR/lib/libopie.so.1.0.0 $OPIEDIR/lib/libopie.so.1.0 $OPIEDIR/lib/libopie.so.1
+Files: lib/libopie.so.1.0.0 lib/libopie.so.1.0 lib/libopie.so.1
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

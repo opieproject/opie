@@ -2,7 +2,7 @@ Package: opie-today-weatherplugin
 Files: plugins/today/libtodayweatherplugin.so* pics/todayweatherplugin
 Priority: optional
 Section: opie/applications
-Maintainer: Dan Williams <williamsdr@acm.org>
+Maintainer: Dan Williams <drw@handhelds.org>
 Architecture: arm
 Depends: libqte2, opie-today
 Description: Current weather plugin for today.

@@ -7,5 +7,5 @@ Architecture: arm
 Depends: opie-aqpkg
 License: GPL
 Description: AQPkg Opie package manager help files (english)
- 
+
 Version: $QPE_VERSION$EXTRAVERSION

@@ -2,7 +2,7 @@ Package: opie-security-help-en
 Files: help/en/html/security.html help/en/html/security
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-security
 License: GPL
 Description: security help files (en)

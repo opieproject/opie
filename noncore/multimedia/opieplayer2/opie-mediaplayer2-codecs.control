@@ -1,6 +1,6 @@
 Package:        opie-mediaplayer2-codecs
-Files: 		root/usr/lib/libao.so* root/usr/lib/libogg* root/usr/lib/libvorbisidec.so* root/usr/lib/libxine.so* root/usr/lib/xine/*
-Section:        opie/multimedia
+Files:         root/usr/lib/libao.so* root/usr/lib/libogg* root/usr/lib/libvorbisidec.so* root/usr/lib/libxine.so* root/usr/lib/xine/*
+Section:        ;ibs
 Essential:      no
 Priority:       optional
 Version:        0.7-$SUB_VERSION.3

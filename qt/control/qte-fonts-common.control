@@ -1,5 +1,5 @@
 Package: qte-fonts-common
-Files: $OPIEDIR/root/usr/sbin/update-qtfontdir
+Files: root/usr/sbin/update-qtfontdir
 Priority: required
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

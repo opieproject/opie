@@ -2,10 +2,10 @@ Package: opie-console-help-en
 Files: help/en/html/opie-console.html help/en/html/opie-console/*
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Opie team <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: opie-console
 License: GPL
 Description: Opie terminal app help files (english)
- 
+
 Version: $QPE_VERSION$EXTRAVERSION

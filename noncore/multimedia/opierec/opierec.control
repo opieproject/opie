@@ -1,7 +1,7 @@
 Package: opierec
-Files: bin/opierec pics/opierec apps/Applications/opierec.desktop 
+Files: bin/opierec pics/opierec apps/Applications/opierec.desktop
 Priority: optional
-Section: multimedia/applications
+Section: opie/multimedia
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal

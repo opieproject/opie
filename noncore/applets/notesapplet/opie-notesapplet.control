@@ -1,7 +1,7 @@
 Package: opie-notesapplet
-Files: plugins/applets/libnotesapplet.so* 
+Files: plugins/applets/libnotesapplet.so*
 Priority: optional
-Section: opie/system
+Section: opie/applets
 Maintainer: L. J. Potter <ljp@llornkcor.com>
 Architecture: arm
 Depends: task-opie-minimal

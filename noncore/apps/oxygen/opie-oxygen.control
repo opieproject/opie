@@ -1,10 +1,10 @@
 Package: opie-oxygen
 Files: plugins/application/liboxygen.so* bin/oxygen apps/Applications/oxygen.desktop pics/oxygen/oxygen.png share/oxygen/*
 Priority: optional
-Section: applications
+Section: opie/applications
 Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
-Description: Periodic System of the Elements 
+Description: Periodic System of the Elements
  The chemistry application for the Opie-environment
 Version: $QPE_VERSION$EXTRAVERSION

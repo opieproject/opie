@@ -1,5 +1,5 @@
 Package: libopiecore2
-Files: $OPIEDIR/lib/libopiecore2.so.*
+Files: lib/libopiecore2.so.*
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

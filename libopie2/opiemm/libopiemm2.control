@@ -1,5 +1,5 @@
 Package: libopiemm2
-Files: $OPIEDIR/lib/libopiemm2.so.*
+Files: lib/libopiemm2.so.*
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

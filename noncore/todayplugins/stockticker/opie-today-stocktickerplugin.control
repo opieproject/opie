@@ -1,7 +1,7 @@
 Package: opie-today-stocktickerplugin
 Files: plugins/today/libtodaystocktickerplugin.so* bin/stockticker pics/stockticker/stockticker.png
 Priority: optional
-Section: opie/applications
+Section: opie/plugins
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: libqte2, opie-today

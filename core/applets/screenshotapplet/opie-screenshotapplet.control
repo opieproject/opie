@@ -1,7 +1,7 @@
 Package: opie-screenshotapplet
-Files: plugins/applets/libscreenshotapplet.so* 
+Files: plugins/applets/libscreenshotapplet.so*
 Priority: optional
-Section: opie/system
+Section: opie/applets
 Maintainer: L. J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Depends: task-opie-minimal

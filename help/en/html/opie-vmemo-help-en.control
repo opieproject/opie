@@ -7,5 +7,5 @@ Architecture: arm
 Depends: opie-vmemo
 License: GPL
 Description: Opie Vmemo voice recording help files (english)
- 
+
 Version: $QPE_VERSION$EXTRAVERSION

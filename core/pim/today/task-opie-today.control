@@ -1,6 +1,6 @@
 Package: task-opie-today
 Priority: optional
-Section: opie/applications
+Section: opie/pim
 Maintainer: Maximilian Reiﬂ <harlekin@handhelds.org>
 Architecture: arm
 Version: 0.5-$SUB_VERSION

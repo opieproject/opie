@@ -1,7 +1,7 @@
 Package: opie-style-fresh
 Files: plugins/styles/libfreshstyle.so*
 Priority: optional
-Section: opie/styles
+Section: opie/system
 Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal

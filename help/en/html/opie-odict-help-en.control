@@ -2,7 +2,7 @@ Package: opie-odict-help-en
 Files: help/en/html/odict.html help/en/html/odict
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-odict
 License: GPL
 Description: odict help files (en)

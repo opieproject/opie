@@ -1,7 +1,7 @@
 Package: opie-restartapplet
-Files: plugins/applets/librestartapplet.so* 
+Files: plugins/applets/librestartapplet.so*
 Priority: optional
-Section: opie/system
+Section: opie/applets
 Maintainer: L.J. Potter <lpotter@trolltech.com>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION.1

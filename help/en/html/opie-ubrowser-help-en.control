@@ -2,7 +2,7 @@ Package: opie-ubrowser-help-en
 Files: help/en/html/ubrowser.html help/en/html/ubrowser
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-ubrowser
 License: GPL
 Description: ubrowser help files (en)

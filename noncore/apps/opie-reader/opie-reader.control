@@ -1,7 +1,7 @@
 Package: opie-reader
 Files: bin/reader bin/reader apps/Applications/opie-reader.desktop pics/opie-reader/*
 Priority: optional
-Section: applications
+Section: opie/applications
 Maintainer: Tim Wentford <timwentford@hotmail.com>
 Architecture: arm
 Depends: task-opie-minimal

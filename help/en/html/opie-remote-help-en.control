@@ -2,7 +2,7 @@ Package: opie-remote-help-en
 Files: help/en/html/remote.html help/en/html/remote
 Priority: optional
 Section: opie/onlinedoc
-Maintainer: Team Opie <opie@handhelds.org>
+Maintainer: Opie Team <opie@handhelds.org>
 Depends: opie-remote
 License: GPL
 Description: remote help files (en)

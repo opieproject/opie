@@ -1,5 +1,5 @@
 Package: libopieui2
-Files: $OPIEDIR/lib/libopieui2.so.*
+Files: lib/libopieui2.so.*
 Priority: optional
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>

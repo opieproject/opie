@@ -1,7 +1,7 @@
 Package: libopietooth1
-Files: $OPIEDIR/lib/libopietooth.so.1.0.0 $OPIEDIR/lib/libopietooth.so.1.0 $OPIEDIR/lib/libopietooth.so.1 
+Files: lib/libopietooth.so.1.0.0 lib/libopietooth.so.1.0 lib/libopietooth.so.1
 Priority: optional
-Section: opie/system
+Section: libs
 Maintainer: Maximilian Reiﬂ <max.reiss@gmx.de>
 Architecture: arm
 Replaces: libopietooth

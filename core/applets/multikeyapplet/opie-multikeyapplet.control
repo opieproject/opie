@@ -1,7 +1,7 @@
 Package: opie-multikeyapplet
 Files: plugins/applets/libmultikeyapplet.so*
 Priority: optional
-Section: opie/taskbar
+Section: opie/applets
 Maintainer: Anton Kachalov <mouse@altlinux.ru>
 Architecture: arm
 Depends: task-opie-minimal
