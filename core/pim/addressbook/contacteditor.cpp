@@ -264,7 +264,7 @@ void ContactEditor::init() {
 	QWidget *container = new QWidget( svGeneral->viewport() );
 	svGeneral->addChild( container );
 
-	QGridLayout *gl = new QGridLayout( container );
+	QGridLayout *gl = new QGridLayout( container, 1, 1, 2, 3 );
 	gl->setResizeMode( QLayout::FreeResize );
 
 	btnFullName = new QPushButton( tr( "Full Name..." ), container );
@@ -327,7 +327,7 @@ void ContactEditor::init() {
 	container = new QWidget( svAddress->viewport() );
 	svAddress->addChild( container );
 
-	gl = new QGridLayout( container, 5, 3, 0, 1 );
+	gl = new QGridLayout( container, 5, 3, 2, 3 );
 
 	cmbAddress = new QComboBox( FALSE, container );
 	cmbAddress->insertItem( tr( "Business" ) );
@@ -392,7 +392,7 @@ void ContactEditor::init() {
 	container = new QWidget( svDetails->viewport() );
 	svDetails->addChild( container );
 
-	gl = new QGridLayout( container, 1, 2, 0, 1 );
+	gl = new QGridLayout( container, 1, 2, 2, 3 );
 
 	QStringList::ConstIterator it = slDynamicEntries->begin();
 	for (i = 0; it != slDynamicEntries->end(); i++, ++it) {
@@ -423,7 +423,7 @@ void ContactEditor::init() {
 
 	dlgName = new QDialog( this, "Name Dialog", TRUE );
 	dlgName->setCaption( tr("Edit Name") );
-	gl = new QGridLayout( dlgName, 4, 2, 0, 1 );
+	gl = new QGridLayout( dlgName, 4, 2, 2, 3 );
 
 	l = new QLabel( tr("First Name"), dlgName );
 	gl->addWidget( l, 0, 0 );
