@@ -53,18 +53,18 @@ class Ticker : public QFrame {
     Q_OBJECT
 public:
     Ticker( QWidget* parent=0 ) : QFrame( parent ) {
-  setFrameStyle( WinPanel | Sunken );
-  setText( "No Song" );
+        setFrameStyle( WinPanel | Sunken );
+        setText( "No Song" );
     }
     ~Ticker() { }
     void setText( const QString& text ) {
-  pos = 0; // reset it everytime the text is changed
-  scrollText = text;
-  pixelLen = fontMetrics().width( scrollText );
-  killTimers();
-  if ( pixelLen > width() )
-      startTimer( 50 );
-  update();
+        pos = 0; // reset it everytime the text is changed
+        scrollText = text;
+        pixelLen = fontMetrics().width( scrollText );
+        killTimers();
+        if ( pixelLen > width() )
+            startTimer( 50 );
+        update();
     }
 protected:
     void timerEvent( QTimerEvent * ) {
@@ -102,7 +102,7 @@ public:
     AudioWidget( QWidget* parent=0, const char* name=0, WFlags f=0 );
     ~AudioWidget();
     void setTickerText( const QString &text ) { songInfo->setText( text ); }
-
+    bool isStreaming;
 public slots:
     void updateSlider( long, long );
     void sliderPressed( );

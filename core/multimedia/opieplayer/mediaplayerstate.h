@@ -34,7 +34,7 @@ public:
     MediaPlayerState( QObject *parent, const char *name );
     ~MediaPlayerState();
 
-    
+    bool isStreaming;    
     bool fullscreen()    { return isFullscreen; }
     bool scaled()    { return isScaled; }
     bool looping()     { return isLooping; }

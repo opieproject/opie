@@ -88,13 +88,16 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     connect( slider,           SIGNAL( sliderReleased() ),     this, SLOT( sliderReleased() ) );
 
     connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
-    connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
     connect( mediaPlayerState, SIGNAL( viewChanged(char) ),    this, SLOT( setView(char) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled(bool) ),  this, SLOT( setPaused(bool) ) );
     connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
 
+    if( !mediaPlayerState->isStreaming) { // this stops the slider from being moved, thus
+          // does not stop stream when it reaches the end
+    connect( mediaPlayerState, SIGNAL( positionChanged(long) ),this, SLOT( setPosition(long) ) );
+    connect( mediaPlayerState, SIGNAL( positionUpdated(long) ),this, SLOT( setPosition(long) ) );
+    }
     // Intialise state
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );

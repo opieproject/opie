@@ -993,6 +993,7 @@ void PlayListWidget::openFile() {
 //             name = fileDlg2->LineEdit1->text();
 //         }
 //http://205.188.234.129:8030
+// http://66.28.68.70:8000
         qDebug(filename);
         DocLnk lnk;
 //     if(filename.left(7) == "http://")

@@ -236,14 +236,15 @@ void LoopControl::startAudio() {
       long sampleWeShouldBeAt = long( playtime.elapsed() ) * freq / 1000;
       long sampleWaitTime = currentSample - sampleWeShouldBeAt;
 
-//         if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
-//       usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+// this causes drop outs not sure why its even here
+//          if ( ( sampleWaitTime > 2000 ) && ( sampleWaitTime < 20000 ) ) {
+//        usleep( (long)((double)sampleWaitTime * 1000000.0 / freq) );
+//          }
+//        else if ( sampleWaitTime <= -5000 ) {
+//       qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
+//       //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
+//       currentSample = sampleWeShouldBeAt;
 //         }
-//       else if ( sampleWaitTime <= -5000 ) {
-//      qDebug("need to catch up by: %li (%i,%li)", -sampleWaitTime, currentSample, sampleWeShouldBeAt );
-//      //mediaPlayerState->curDecoder()->audioSetSample( sampleWeShouldBeAt, stream );
-//      currentSample = sampleWeShouldBeAt;
-//        }
 
       audioDevice->write( audioBuffer, samplesRead * 2 * channels );
       audioSampleCounter = currentSample + samplesRead - 1;
@@ -431,6 +432,9 @@ bool LoopControl::init( const QString& filename ) {
 
     current_frame = 0;
     prev_frame = -1;
+
+    if( fileName.left(7) == "http://")
+        mediaPlayerState->isStreaming = TRUE;
 
     connect( mediaPlayerState, SIGNAL( positionChanged( long ) ), this, SLOT( setPosition( long ) ) );
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ), this, SLOT( setPaused( bool ) ) );
