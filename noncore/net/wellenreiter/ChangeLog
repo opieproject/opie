@@ -1,5 +1,7 @@
 2004-??-??	Michael Lauer		<mickey@Vanille.de>
 
+	* Added sanity check isPresent(interface) before starting the engine.
+	* Added a View submenu. Added actions to expand and collapse all items.
 	* Switched to a (hopefully) more reliable method reading from gpsd.
 	* Added parsing of named ProbeRequests. Display only-probed-yet SSIDs in a different network color.
 	* Rewrote the simple actions on new {Network, Client, Station}. Besides playing a sound or
@@ -9,7 +11,7 @@
 	* Hided the 'Parse' Tab in the configuration window. Not functional now and may come later
 	* Added parsing of control frames. Display stations sending them SSID "<unknown>" for now.
 	* Added command line option "-nocheck" to skip non-root and dhcp tests.
-	* Improved the speed reading the manufacturer list.
+	* Improved the speed of and user feedback during reading the manufacturer list.
 	* GPS coordinates are now presented in the DMS (as opposed to decimal) format.
 
 2003-12-18	Michael Lauer		<mickey@Vanille.de>

@@ -11,6 +11,7 @@ HEADERS         = wellenreiterbase.h \
                   statwindow.h \
                   configwindow.h \
                   graphwindow.h \
+                  packetview.h \
                   protolistview.h \
                   gps.h
 
@@ -24,6 +25,7 @@ SOURCES         = main.cpp \
                   statwindow.cpp \
                   configwindow.cpp \
                   graphwindow.cpp \
+                  packetview.cpp \
                   protolistview.cpp \
                   gps.cpp
 

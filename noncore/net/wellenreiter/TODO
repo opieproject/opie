@@ -40,8 +40,6 @@ ENGINE
 
 - distinguish wireless bridges (WDS traffic)
 
-- expand/collapse all
-
 - add configuration for scrollback buffer in hex window and log window
 
 - revamp hex window, make it more sophisticated than just a QMultiLineEdit

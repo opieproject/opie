@@ -1,7 +1,7 @@
 /**********************************************************************
 ** Copyright (C) 2002-2004 Michael 'Mickey' Lauer.  All rights reserved.
 **
-** This file is part of Opie Environment.
+** This file is part of Wellenreiter II.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software

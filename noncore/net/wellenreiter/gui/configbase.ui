@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>250</width>
+            <width>246</width>
             <height>371</height>
         </rect>
     </property>
@@ -45,6 +45,10 @@
             </property>
             <property>
                 <name>layoutSpacing</name>
+            </property>
+            <property>
+                <name>whatsThis</name>
+                <string></string>
             </property>
             <widget>
                 <class>QWidget</class>
@@ -227,6 +231,10 @@
                                     <name>text</name>
                                     <string>Perform Autodetection</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Retrigger the autodetection algorithm</string>
+                                </property>
                             </widget>
                         </hbox>
                     </widget>
@@ -239,6 +247,10 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Use additional PRISM header</string>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Use additional PRISM headers, if available.</string>
                         </property>
                     </widget>
                     <spacer>
@@ -290,6 +302,10 @@
                                 <property stdset="1">
                                     <name>checked</name>
                                     <bool>true</bool>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Check this, if you want to start a channel hopper.</string>
                                 </property>
                             </widget>
                             <widget>
@@ -354,6 +370,10 @@
                             <name>text</name>
                             <string>Use Adaptive(TM) Hop Scheme</string>
                         </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>An adaptive hopping interval dynamically changes the channel hopping parameters to listen longer on channels where traffic comes in.</string>
+                        </property>
                     </widget>
                     <widget>
                         <class>QGroupBox</class>
@@ -374,6 +394,10 @@
                         </property>
                         <property>
                             <name>layoutSpacing</name>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Check the channels which should be included in the channel hopping scheme. Note that due to the 802.11 channel overlay scheme you may receive data on neighbour channels of channels, even if they're not checked here.</string>
                         </property>
                         <grid>
                             <property stdset="1">
@@ -604,6 +628,10 @@
                             <name>text</name>
                             <string>/tmp/capture</string>
                         </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Configure the name of the capture file.</string>
+                        </property>
                     </widget>
                     <widget row="0"  column="2" >
                         <class>QToolButton</class>
@@ -618,6 +646,10 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Browse</string>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Click to open a file requester to choose a capture file name.</string>
                         </property>
                     </widget>
                     <spacer row="0"  column="1" >
@@ -654,6 +686,10 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Write Capture Files To</string>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Check this to write an ethereal compatible capture file.</string>
                         </property>
                     </widget>
                 </grid>
@@ -722,6 +758,10 @@
                             <name>text</name>
                             <string>Lookup MAC vendor names</string>
                         </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Check this to lookup MAC vendor names.</string>
+                        </property>
                     </widget>
                     <widget>
                         <class>QCheckBox</class>
@@ -733,6 +773,10 @@
                             <name>text</name>
                             <string>Open Tree On New Station</string>
                         </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Check this to automatically make a tree visible when a new station is detected.</string>
+                        </property>
                     </widget>
                     <widget>
                         <class>QCheckBox</class>
@@ -743,6 +787,10 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Disable Power Management</string>
+                        </property>
+                        <property>
+                            <name>whatsThis</name>
+                            <string>Check this to disable power management while scanning.</string>
                         </property>
                     </widget>
                     <spacer>
@@ -881,6 +929,10 @@
                                                 <vsizetype>0</vsizetype>
                                             </sizepolicy>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Choose an action to perform when a new wireless station is detected.</string>
+                                        </property>
                                     </widget>
                                     <widget row="3"  column="0"  rowspan="1"  colspan="2" >
                                         <class>QLineEdit</class>
@@ -891,6 +943,10 @@
                                         <property stdset="1">
                                             <name>enabled</name>
                                             <bool>true</bool>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>The command line to execute when a script action is performed.</string>
                                         </property>
                                     </widget>
                                     <widget row="2"  column="0" >
@@ -947,6 +1003,10 @@
                                                 <vsizetype>0</vsizetype>
                                             </sizepolicy>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Choose the action to perform when a new wired station is detected.</string>
+                                        </property>
                                     </widget>
                                     <widget row="0"  column="1" >
                                         <class>QComboBox</class>
@@ -995,6 +1055,10 @@
                                             <name>editable</name>
                                             <bool>false</bool>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Choose an action to perform when a new network is detected.</string>
+                                        </property>
                                     </widget>
                                     <widget row="1"  column="0"  rowspan="1"  colspan="2" >
                                         <class>QLineEdit</class>
@@ -1006,6 +1070,10 @@
                                             <name>enabled</name>
                                             <bool>true</bool>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>The command line to execute when a script action is performed.</string>
+                                        </property>
                                     </widget>
                                     <widget row="5"  column="0"  rowspan="1"  colspan="2" >
                                         <class>QLineEdit</class>
@@ -1016,6 +1084,10 @@
                                         <property stdset="1">
                                             <name>enabled</name>
                                             <bool>true</bool>
+                                        </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Choose an action to perform when a new wireless station is detected.</string>
                                         </property>
                                     </widget>
                                 </grid>
@@ -1281,6 +1353,10 @@
                                     <name>text</name>
                                     <string>Enable GPS logging w/ gpsd</string>
                                 </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Check this to log GPS coordinates.</string>
+                                </property>
                             </widget>
                             <widget>
                                 <class>QLayoutWidget</class>
@@ -1332,6 +1408,10 @@
                                             <name>currentItem</name>
                                             <number>0</number>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Hostadress where the gps daemon listens on.</string>
+                                        </property>
                                     </widget>
                                     <widget>
                                         <class>QLabel</class>
@@ -1366,6 +1446,10 @@
                                             <name>value</name>
                                             <number>2947</number>
                                         </property>
+                                        <property>
+                                            <name>whatsThis</name>
+                                            <string>Port number where the gps daemon listens on.</string>
+                                        </property>
                                     </widget>
                                 </hbox>
                             </widget>
@@ -1378,6 +1462,10 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>Start gpsd on localhost</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Check to start the GPS daemon on localhost.</string>
                                 </property>
                             </widget>
                             <widget>
@@ -1393,6 +1481,10 @@
                                 <property stdset="1">
                                     <name>text</name>
                                     <string>gpsd -p /dev/ttyS3 -s 4800</string>
+                                </property>
+                                <property>
+                                    <name>whatsThis</name>
+                                    <string>Command line to start the gps daemon.</string>
                                 </property>
                             </widget>
                             <spacer>

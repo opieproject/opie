@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2002 Michael 'Mickey' Lauer.  All rights reserved.
+** Copyright (C) 2002-2004 Michael 'Mickey' Lauer.  All rights reserved.
 **
-** This file is part of Opie Environment.
+** This file is part of Wellenreiter II.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -37,6 +37,7 @@
 #include <qspinbox.h>
 #include <qtextstream.h>
 #include <qtoolbutton.h>
+#include <qwhatsthis.h>
 
 #ifdef QWS
 #include <qpe/resource.h>
@@ -60,14 +61,15 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
 
     // setup application icon
 
-    #ifndef QWS
     setIcon( Resource::loadPixmap( "wellenreiter/appicon-trans" ) );
+    #ifndef QWS
     setIconText( "Wellenreiter/X11" );
     #endif
 
     // setup tool buttons
 
     startButton = new QToolButton( 0 );
+    QWhatsThis::add( startButton, tr( "Click here to start scanning." ) );
     #ifdef QWS
     startButton->setAutoRaise( true );
     #endif
@@ -76,6 +78,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     connect( startButton, SIGNAL( clicked() ), mw, SLOT( startClicked() ) );
 
     stopButton = new QToolButton( 0 );
+    QWhatsThis::add( stopButton, tr( "Click here to stop scanning." ) );
     #ifdef QWS
     stopButton->setAutoRaise( true );
     #endif
@@ -84,6 +87,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     connect( stopButton, SIGNAL( clicked() ), mw, SLOT( stopClicked() ) );
 
     QToolButton* d = new QToolButton( 0 );
+    QWhatsThis::add( d, tr( "Click here to open the configure dialog." ) ),
     #ifdef QWS
     d->setAutoRaise( true );
     #endif
@@ -91,6 +95,7 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     connect( d, SIGNAL( clicked() ), this, SLOT( showConfigure() ) );
 
     uploadButton = new QToolButton( 0 );
+    QWhatsThis::add( uploadButton, tr( "Click here to upload a capture session." ) );
     #ifdef QWS
     uploadButton->setAutoRaise( true );
     #endif
@@ -123,9 +128,6 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     file->insertSeparator();
     file->insertItem( tr( "&Exit" ), qApp, SLOT( quit() ) );
 
-    QPopupMenu* view = new QPopupMenu( mb );
-    view->insertItem( tr( "&Configure..." ) );
-
     QPopupMenu* sniffer = new QPopupMenu( mb );
     sniffer->insertItem( tr( "&Configure..." ), this, SLOT( showConfigure() ) );
     sniffer->insertSeparator();
@@ -134,13 +136,19 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     stopID = sniffer->insertItem( tr( "Sto&p" ), mw, SLOT( stopClicked() ) );
     sniffer->setItemEnabled( stopID, false );
 
+    QPopupMenu* view = new QPopupMenu( mb );
+    view->insertItem( tr( "&Expand All" ), this, SLOT( viewExpandAll() ) );
+    view->insertItem( tr( "&Collapse All" ), this, SLOT( viewCollapseAll() ) );
+
     QPopupMenu* demo = new QPopupMenu( mb );
     demo->insertItem( tr( "&Add something" ), this, SLOT( demoAddStations() ) );
     //demo->insertItem( tr( "&Read from GPSd" ), this, SLOT( demoReadFromGps() ) );
 
     id = mb->insertItem( tr( "&File" ), file );
-    //id = mb->insertItem( tr( "&View" ), view );
+
+    id = mb->insertItem( tr( "&View" ), view );
     //mb->setItemEnabled( id, false );
+
     id = mb->insertItem( tr( "&Sniffer" ), sniffer );
 
     id = mb->insertItem( tr( "&Demo" ), demo );
@@ -553,3 +561,13 @@ void WellenreiterMainWindow::uploadSession()
                           QString ( "<p>%1</p>" ).arg ( tr( "Connection to %1 failed" ) ).arg( CAP_hostname ) );
 }
 
+
+void WellenreiterMainWindow::viewExpandAll()
+{
+    mw->netView()->expand();
+}
+
+void WellenreiterMainWindow::viewCollapseAll()
+{
+    mw->netView()->collapse();
+}

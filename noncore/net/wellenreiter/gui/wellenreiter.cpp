@@ -512,7 +512,15 @@ void Wellenreiter::startClicked()
 
     // TODO: check if interface is wireless and support sniffing for non-wireless interfaces
 
+    if ( !net->isPresent( interface ) )
+    {
+        QMessageBox::information( this, "Wellenreiter II",
+                                  tr( "The configured device (%1)\nis not available on this system\n. Please reconfigure!" ).arg( interface ) );
+        return;
+    }
+
     iface = static_cast<OWirelessNetworkInterface*>(net->interface( interface )); // fails if network is not wireless!
+    assert( iface );
 
     // bring device UP
     if ( cardtype != DEVTYPE_FILE )
