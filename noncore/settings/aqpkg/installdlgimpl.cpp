@@ -157,7 +157,7 @@ void InstallDlgImpl :: installSelected()
         btnInstall->setText( tr( "Close" ) );
         return;
     }
-    else if ( btnInstall->text() == "Close" )
+    else if ( btnInstall->text() == tr( "Close" ) )
     {
         done( 1 );
         return;
