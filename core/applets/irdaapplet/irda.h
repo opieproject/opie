@@ -47,6 +47,9 @@ private:
     void showDiscovered();
     int sockfd;
 
+public slots:
+    void show();
+
 private slots:
     void popupTimeout();
 

@@ -44,6 +44,7 @@
 #include <qtimer.h>
 #include <qtextstream.h>
 #include <qpopupmenu.h>
+#include <qsound.h>
 
 #include <net/if.h>
 #include <netinet/in.h>
@@ -64,10 +65,13 @@ IrdaApplet::IrdaApplet( QWidget *parent, const char *name )
     irdaDiscoveryOnPixmap = Resource::loadPixmap( "irdaapplet/magglass" );
     receiveActivePixmap = Resource::loadPixmap("irdaapplet/receive");
     receiveActive = false;
-    startTimer(5000);
-    timerEvent(NULL);
     popupMenu = 0;
     devicesAvailable.setAutoDelete(TRUE);
+}
+
+void IrdaApplet::show() {
+    QWidget::show();
+    startTimer(2000);
 }
 
 IrdaApplet::~IrdaApplet() {
@@ -206,29 +210,31 @@ void IrdaApplet::showDiscovered() {
 	}
 
         for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
-	    qDebug( (*line) );
+	    // qDebug( (*line) );
             if( (*line).startsWith("nickname:") ){
                 discoveredDevice  = (*line).mid(((*line).find(':'))+2,(*line).find(',')-(*line).find(':')-2);
                 deviceAddr = (*line).mid( (*line).find( "daddr:" )+9, 8 );
 
-                qDebug(discoveredDevice + "(" + deviceAddr + ")");
+                // qDebug(discoveredDevice + "(" + deviceAddr + ")");
 
 		if( ! devicesAvailable.find(deviceAddr) ) {
 		    popup( tr("Found:") + " " + discoveredDevice );
+		    QSound::play(Resource::findSound("irdaapplet/irdaon"));
 		    qcopsend = TRUE;
 		}
 		devicesAvailable.replace( deviceAddr, new QString(discoveredDevice) );
-		//qDebug("IrdaMon: " + deviceAddr + "=" + *devicesAvailable[deviceAddr] );
+		// qDebug("IrdaMon: " + deviceAddr + "=" + *devicesAvailable[deviceAddr] );
             }
         }
 
 	it.toFirst();
 	while ( it.current() ) {
-	    qDebug("IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?");
+	    // qDebug("IrdaMon: delete " + it.currentKey() + "=" + *devicesAvailable[it.currentKey()] + "?");
 	    if ( (*it.current()).left(3) == "+++" ) {
 		popup( tr("Lost:") + " " + (*devicesAvailable[it.currentKey()]).mid(3) );
+		QSound::play(Resource::findSound("irdaapplet/irdaoff"));
 		devicesAvailable.remove( it.currentKey() );
-	        qDebug("IrdaMon: delete " + it.currentKey() + "!");
+	        // qDebug("IrdaMon: delete " + it.currentKey() + "!");
 		qcopsend = TRUE;
 	    }
 	    ++it;
@@ -251,8 +257,7 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
 //	menu->insertItem( tr("More..."), 4 );
 
     if (irdaactive && devicesAvailable.count() > 0) {
-	menu->insertItem( tr("Discovered Device:"),  9);
-
+	menu->insertItem( tr("Discovered Device:"), 9);
 	QDictIterator<QString> it( devicesAvailable );
 	while ( it.current() ) {
 	    menu->insertItem( *devicesAvailable[it.currentKey()]);
@@ -316,9 +321,6 @@ void IrdaApplet::mousePressEvent( QMouseEvent *) {
         timerEvent(NULL);
         break;
     }
-    case 6:
-        qDebug("FIXME: Bring up pretty menu...\n");
-        // With table of currently-detected devices.
     }
     delete menu; // Can somebody explain why use a QPopupMenu* and not QPopupMenu nor QAction. with out delete we will leak cause QPopupMenu doesn't have a parent in this case
 }
@@ -349,7 +351,7 @@ void IrdaApplet::timerEvent( QTimerEvent * ) {
 
 void IrdaApplet::paintEvent( QPaintEvent* ) {
     QPainter p(this);
-    qDebug("paint irda pixmap");
+    // qDebug("paint irda pixmap");
 
     p.eraseRect ( 0, 0, this->width(), this->height() );
     if (irdaactive > 0) {
