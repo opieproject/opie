@@ -67,3 +67,6 @@ void MailPlugin::refresh()  {
         m_widget->refresh();
     }
 }
+
+void MailPlugin::reinitialize()  {
+}
