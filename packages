@@ -160,4 +160,3 @@ CONFIG_WIRELESSAPPLET	noncore/applets/wirelessapplet	wirelessapplet.pro
 CONFIG_WLAN	noncore/net/networksetup/wlan	wlan.pro
 CONFIG_WORDGAME	noncore/games/wordgame	wordgame.pro
 CONFIG_OPIEALARM	core/opiealarm
-CONFIG_PRELOAD		core/launcher/libpreload	libpreload.pro
