@@ -48,7 +48,7 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
   //make tab order
-                                     
+
   TabWidgetMain->removePage( tabMain );
   TabWidgetMain->removePage( tabManualSetTime );
   TabWidgetMain->removePage( TabSettings );
@@ -61,7 +61,7 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   TabWidgetMain->insertTab( tabNtp, tr( "NTP" ) );
   NtpBaseLayout->addWidget( TabWidgetMain, 0, 0 );
 
-  
+
 
   bool advMode = cfg.readBoolEntry("advancedFeatures", false );
   showAdvancedFeatures(advMode);
@@ -100,7 +100,7 @@ Ntp::~Ntp()
 void Ntp::saveConfig(){
   int srvCount = ComboNtpSrv->count();
   bool serversChanged = true;
-  int curSrv = ComboNtpSrv->currentItem(); 
+  int curSrv = ComboNtpSrv->currentItem();
   QString edit = ComboNtpSrv->currentText();
   for (int i = 0; i < srvCount; i++){
        if ( edit ==  ComboNtpSrv->text(i)) serversChanged = false;
@@ -109,7 +109,7 @@ void Ntp::saveConfig(){
     Config ntpSrvs(QPEApplication::qpeDir()+"etc/ntpservers",Config::File);
     ntpSrvs.setGroup("servers");
     ntpSrvs.writeEntry("count", ++srvCount);
-    ntpSrvs.setGroup("0");    
+    ntpSrvs.setGroup("0");
     ntpSrvs.writeEntry( "name", edit );
     curSrv = 0;
     for (int i = 1; i < srvCount; i++){
@@ -131,7 +131,7 @@ bool Ntp::ntpDelayElapsed()
   Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
   _lookupDiff = TimeConversion::toUTC(QDateTime::currentDateTime()) - cfg.readNumEntry("time",0);
-  if (_lookupDiff < 0) return true; 
+  if (_lookupDiff < 0) return true;
   int i =_lookupDiff - (SpinBoxNtpDelay->value()*60);
   return i > -60;
 }
@@ -172,7 +172,7 @@ void Ntp::slotRunNtp()
     }
   TextLabelStartTime->setText(QDateTime::currentDateTime().toString());
   ntpOutPut( tr("Running:")+"\nntpdate "+getNtpServer() );
- 	
+
   ntpProcess->clearArguments();
   *ntpProcess << "ntpdate" << getNtpServer();
   bool ret = ntpProcess->start(OProcess::NotifyOnExit,OProcess::AllOutput);
@@ -202,14 +202,14 @@ void  Ntp::ntpFinished(OProcess *p)
 {
   qDebug("p->exitStatus() %i",p->exitStatus());
   if (p->exitStatus()!=0 || !p->normalExit())
-    {      
+    {
       if ( isVisible() && _interactive ){
         QMessageBox::critical(this, tr("ntp error"),tr("Error while getting time form\n server")+getNtpServer()+"\n"+_ntpOutput );
       }
 //      slotCheckNtp(-1);
       return;
     }
-  
+
   Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
   int lastLookup = cfg.readNumEntry("time",0);
@@ -217,7 +217,7 @@ void  Ntp::ntpFinished(OProcess *p)
   bool lastNtp = cfg.readBoolEntry("lastNtp",false);
   int time = TimeConversion::toUTC( QDateTime::currentDateTime() );
   cfg.writeEntry("time", time);
- 	
+
   float timeShift = getTimeShift();
   if (timeShift == 0.0) return;
   int secsSinceLast = time - lastLookup;
@@ -329,7 +329,7 @@ void Ntp::slotCheckNtp(int i)
         disconnect(ntpTimer, SIGNAL( timeout() ), this, SLOT(slotTimerRunNtp()) );
         connect(ntpTimer, SIGNAL( timeout() ), SLOT(slotProbeNtpServer()) );
       }
-    }else{              
+    }else{
       preditctTime();
       ButtonSetTime->setText( tr("Set predicted time: ")+predictedTime.toString() );
       if (i>0)ntpOutPut(tr("Could not connect to server ")+getNtpServer());
@@ -350,14 +350,14 @@ void Ntp::slotNtpDelayChanged(int delay)
 
 void Ntp::ntpOutPut(QString out)
 {
-  
+
   MultiLineEditntpOutPut->append(out);
   MultiLineEditntpOutPut->setCursorPosition(MultiLineEditntpOutPut->numLines() + 1,0,FALSE);
 }
 
 
 void Ntp::makeChannel()
-{   	
+{
   channel = new QCopChannel( "QPE/Application/netsystemtime", this );
   connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
 	   this, SLOT(receive(const QCString&, const QByteArray&)) );
@@ -389,9 +389,11 @@ void Ntp::setDocument(const QString &fileName)
 void Ntp::showAdvancedFeatures(bool advMode)
 {
   if  (advMode) {
-    
-    TabWidgetMain->addTab( tabPredict, tr( "Predict" ) );
-    TabWidgetMain->addTab( tabNtp, tr( "NTP" ) );
+
+    if ( tabNtp->isVisible() ) {
+        TabWidgetMain->addTab( tabPredict, tr( "Predict" ) );
+        TabWidgetMain->addTab( tabNtp, tr( "NTP" ) );
+    }
     TextLabel1_2_2->show();
     TextLabel2_3->show();
     TextLabel3_3_2->show();
@@ -422,10 +424,10 @@ void Ntp::accept( ){
     qDebug("saving");
     //SetTimeDate
     commitTime();
-  	writeSettings(); 
+  	writeSettings();
     updateSystem();
     // Ntp
-    saveConfig();    
+    saveConfig();
     qApp->quit();
 }
 
