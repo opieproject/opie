@@ -23,33 +23,38 @@ AttachItem::AttachItem(QListViewItem *parent, AttachItemStore &attachItemStore)
 	setText(2, _attachItemStore.description());
 }
 
-void ViewMail::setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc, const QString & date, const QString & bodytext, const QString & messageID ) {
 
-m_mail[0] = from;
-m_mail2[0] = to;
-m_mail[1] = subject;
-m_mail2[1] = cc;
-m_mail2[2] = bcc;
-m_mail[2] = bodytext;
-m_mail[3] = date;
-m_mail[4] = messageID;
+void ViewMail::setBody( RecBody body ) {
+
+m_mail[2] = body.Bodytext();
+
+}
+
+void ViewMail::setMail( RecMail mail ) {
+
+m_mail[0] = mail.getFrom();
+m_mail[1] = mail.getSubject();
+m_mail[3] = mail.getDate();
+m_mail[4] = mail.Msgid();
+
+m_mail2[0] = mail.To();
+m_mail2[1] = mail.CC();
+m_mail2[2] = mail.Bcc();
 
 setText();
 }
 
 
+
 ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 	: ViewMailBase(parent, name, fl), _inLoop(false)
 {
-	_gotBody = false;
+	m_gotBody = false;
 
 	connect(reply, SIGNAL(activated()), SLOT(slotReply()));
 	connect(forward, SIGNAL(activated()), SLOT(slotForward()));
 
-	attachments->setEnabled(_gotBody);
-
-//	_handler->iUid("FETCH", QString("%1 (BODY[1])").arg(mail.uid()));
-//	connect(_handler, SIGNAL(gotResponse(IMAPResponse &)), SLOT(slotIMAPUid(IMAPResponse &)));
+	attachments->setEnabled(m_gotBody);
 }
 
 void ViewMail::setText()
@@ -71,24 +76,20 @@ void ViewMail::setText()
 
  setCaption( caption().arg( m_mail[0] ) );
 
-     _mailHtml = tr(
-		"<html><body>"
-		"<div align=center><b><font color=#0000FF>%1</b></font></div>"
-		"<b>From:</b><font color=#6C86C0> %2</font><br>"
-		"<b>To:</b><font color=#6C86C0> %3</font><br>"
-		"%4"
-            	"<b>Date:</b> %5<hr>"
-		"<font face=fixed>")
-		.arg( deHtml( m_mail[1] ) )
-		.arg( deHtml( m_mail[0] ) )
-		.arg( deHtml( toString ) )
-		.arg( tr("<b>Cc:</b> %1<br>").arg( deHtml( ccString ) ) )
-		.arg( m_mail[3] );
-	browser->setText( QString(_mailHtml) + deHtml( m_mail[2] ) + "</font>" );
-        // remove later in favor of a real handling
-	_gotBody = true;
-}
+     m_mailHtml = "<html><body>"
+                  "<table width=\"100%\" border=\"0\"><tr bgcolor=\"#FFDD76\"><td>"
+                  "<div align=left><b>" + deHtml( m_mail[1] ) + "</b></div>"
+                  "</td></tr><tr bgcolor=\"#EEEEE6\"><td>"
+               	  "<b>" + tr( "From" ) + ": </b><font color=#6C86C0>" + deHtml( m_mail[0] ) + "</font><br>"
+		  "<b>" + tr(  "To" ) + ": </b><font color=#6C86C0>" + deHtml( toString ) + "</font><br><b>" +
+		  tr( "Cc" ) + ": </b>" + deHtml( ccString ) + "<br>"
+            	  "<b>" + tr( "Date" ) + ": </b> " +  m_mail[3] +
+                  "</td></tr></table><font face=fixed>";
 
+	browser->setText( QString( m_mailHtml) + deHtml( m_mail[2] ) + "</font></html>" );
+        // remove later in favor of a real handling
+	m_gotBody = true;
+}
 
 
 ViewMail::~ViewMail()
@@ -128,7 +129,7 @@ QString ViewMail::deHtml(const QString &string)
 
 void ViewMail::slotReply()
 {
-	if (!_gotBody) {
+	if (!m_gotBody) {
 		QMessageBox::information(this, tr("Error"), tr("<p>The mail body is not yet downloaded, so you cannot reply yet."), tr("Ok"));
 		return;
 	}
@@ -158,12 +159,11 @@ void ViewMail::slotReply()
 	composer.showMaximized();
 	composer.exec();
 
-      qDebug ( rtext );
 }
 
 void ViewMail::slotForward()
 {
-	if (!_gotBody) {
+	if (!m_gotBody) {
 		QMessageBox::information(this, tr("Error"), tr("<p>The mail body is not yet downloaded, so you cannot forward yet."), tr("Ok"));
 		return;
 	}
@@ -177,12 +177,6 @@ void ViewMail::slotForward()
 	if (!m_mail[0].isNull())
 	 	ftext += QString("From: %1\n")
 		 	.arg( m_mail[0] );
-	//if (!_mail.envelope().to().toString().isNull())
-	//	ftext += QString("To: %1\n")
-	//		.arg(_mail.envelope().to().toString());
-	//if (!_mail.envelope().cc().toString().isNull())
-	//	ftext += QString("Cc: %1\n")
-	//		.arg(_mail.envelope().cc().toString());
 	if (!m_mail[1].isNull())
 	 	ftext += QString("Subject: %1\n")
 		 	.arg( m_mail[1] );
@@ -192,9 +186,6 @@ void ViewMail::slotForward()
 
 	ftext += QString("----- End forwarded message -----\n");
 
-        qDebug( ftext );
-
-
         Settings *settings = new Settings();
         ComposeMail composer( settings ,this, 0, true);
         composer.setSubject( "Fwd: " + m_mail[1] );
@@ -203,23 +194,3 @@ void ViewMail::slotForward()
 	composer.exec();
 }
 
-/*
-void ViewMail::slotIMAPUid(IMAPResponse &response)
-{
-	disconnect(_handler, SIGNAL(gotResponse(IMAPResponse &)), this, SLOT(slotIMAPUid(IMAPResponse &)));
-
-	if (response.statusResponse().status() == IMAPResponseEnums::OK) {
-		QValueList<IMAPResponseBodyPart> bodyParts;
-		bodyParts.append(response.FETCH()[0].bodyPart(0));
-		_mail.setBodyParts(bodyParts);
-
-		browser->setText(QString(_mailHtml).arg(deHtml(response.FETCH()[0].bodyPart(0).data())));
-
-//		fillList(response.FETCH()[0].bodyStructure());
-
-		_gotBody = true;
-	} else {
-		QMessageBox::warning(this, tr("Error"), tr("<p>I was unable to retrieve the mail from the server. You can try again later or give up.</p>"), tr("Ok"));
-	}
-}
-*/

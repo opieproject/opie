@@ -6,8 +6,7 @@
 #include <qstringlist.h>
 
 #include "viewmailbase.h"
-//#include "imapresponse.h"
-//#include "mailtable.h"
+#include "mailtypes.h"
 
 class AttachItemStore 
 {
@@ -49,11 +48,10 @@ public:
 
 	void hide();
 	void exec();
-    static QString appName() { return QString::fromLatin1("mail"); }
-        void setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc,const QString & date, const QString & bodytext, const QString & messageID );
+        void setMail( RecMail mail );
+        void setBody( RecBody body );
 
 protected:
-//	void fillList(IMAPResponseBODYSTRUCTURE &structure);
 	QString deHtml(const QString &string);
 
 protected slots:
@@ -61,23 +59,14 @@ protected slots:
 	void slotForward();
         void setText();
 
-//	void slotIMAPUid(IMAPResponse &response);
-
 private:
 	bool _inLoop;
-//	IMAPResponseFETCH _mail;
-//	IMAPHandler *_handler;
-	QString _mailHtml;
-	bool _gotBody;
+	QString m_mailHtml;
+	bool m_gotBody;
 
-        // 0 from
-        // 1 subject
-        // 2 bodytext
-        // 3 date
+        // 0 from  1 subject  2 bodytext 3 date
         QMap <int,QString>  m_mail;
-        // 0 to
-        // 1 cc
-        // 2 bcc
+        // 0 to 1 cc 2 bcc
         QMap <int,QStringList> m_mail2;
 
 };

@@ -151,13 +151,12 @@ void MainWindow::refreshMailView(QList<RecMail>*list)
 void MainWindow::displayMail(QListViewItem*item)
 {
     if (!item) return;
-    qDebug("View mail");
     RecMail mail = ((MailListViewItem*)item)->data();
     RecBody body = folderView->fetchBody(mail);
 
     ViewMail readMail( this );
-
-    readMail.setMailInfo( mail.getFrom(), mail.To(), mail.getSubject(), mail.CC(), mail.Bcc(), mail.getDate(),  body.Bodytext(), mail.Msgid() );
+    readMail.setBody( body );
+    readMail.setMail( mail );
     readMail.showMaximized();
     readMail.exec();
 }
