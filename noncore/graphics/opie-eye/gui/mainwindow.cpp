@@ -165,10 +165,13 @@ void PMainWindow::slotRotateToggled(bool how)
 void PMainWindow::slotScaleToggled(bool how)
 {
     autoScale = !how;
-    if (m_disp) {
-        m_disp->setAutoScale(autoScale);
+    if (!how) {
+        autoRotate = how;
     }
-    if (!autoScale && autoRotate) {
+    if (m_disp) {
+        m_disp->setAutoScaleRotate(autoScale,autoRotate);
+    }
+    if (!autoScale) {
         rotateButton->setOn(false);
     }
     rotateButton->setEnabled(!how);
