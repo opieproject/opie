@@ -193,7 +193,7 @@
                     </property>
                     <property stdset="1">
                         <name>text</name>
-                        <string>Only deactivate LCD during Suspend</string>
+                        <string>Deactivate LCD only (does not suspend)</string>
                     </property>
                 </widget>
                 <widget row="1"  column="0" >
