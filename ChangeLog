@@ -6,8 +6,8 @@
 	* LauncherSettings: Choose whether to have a static background pixmap (mickeyl)
 	* PackageManager supports the 'lists_dir' ipkg configuration option (drw)
 	* Added hi-res inline images for large resolution devices (drw)
-	* Datebook: Added plugin system to datebook so holidays and birthdays from
-	  contacts may displayed in datebook. (alwin)
+	* Improved launcher icons for consistency (ar)
+	* Datebook: Added plugin system to datebook so holidays and birthdays from contacts may displayed in datebook. (alwin)
 
 	Fixed Bugs
 	----------
@@ -18,30 +18,30 @@
 	* #1536 - Autosave of custom locations in opie backup (ar)
 	* #1539 - Fixed displaying too long path in the delete dialog in opie-eye (zecke)
 	* #1540 - Implemented deletion of DocLnks in opie-eye (zecke)
-	* #1542 - Fix Todo crash when priority < 1 or > 5 (drw)
+	* #1542 - Fixed Todo crash when priority < 1 or > 5 (drw)
 	* #1550 - Browse for alarm sound start in QPEDIR/sounds/ (zecke)
 	* #1554 - Fixed Opie-Console name in .desktop file (mickeyl)
 	* #1556 - Start to look for sound files in /opt/QtPalmtop/sounds (zecke)
 	* #1558 - Fixed opie-login breaking opie startup (mickeyl)
 	* #1570 - Confirmation needed befor Restore a backup and overwrite local data (ar)
 	* #1599 - Security - change recommendation for opie-multiauth to opie-securityplugin (gints)
-	* #1604 - Checkbook crashes on startup (drw)
+	* #1604 - Checkbook crashed on startup (drw)
+	* n.a.  - Netsystemtime - fixed UI to prevent error dialog from displaying when it shouldn't, get rid of some compiler warnings (drw)
 	* n.a.  - PackageManager - fixed where last package in status file was not shown as installed when it should be (drw)
-	* n.a.  - Netsystemtime - fixed UI to prevent error dialog from displaying when it shouldn't, get rid of some compiler warnings
-	* n.a.  - PackageManager - fix bug where lists_dir was not being honored at startup (drw)
-	* n.a.  - PackageManager - provide default value for lists_dir when none is entered in configuration dialog (drw)
-	* n.a.  - Launcher Settings - fix default settings for background in Edit tab dialog (drw)
-	* n.a.  - OTabWidget - fix scroll buttons, fix display position of tabs (drw)
-	* n.a.  - AddressBook - fix sorting by 'File As' name (drw)
-	* n.a.  - AddressBook - fix category handling for 'All' and 'Unfiled' (drw)
-	* n.a.  - AddressBook - fix letter picker record selection and sort records afterwards (drw)
+	* n.a.  - PackageManager - fixed bug where lists_dir was not being honored at startup (drw)
+	* n.a.  - PackageManager - provided default value for lists_dir when none is entered in configuration dialog (drw)
+	* n.a.  - Launcher Settings - fixed default settings for background in Edit tab dialog (drw)
+	* n.a.  - OTabWidget - fixed scroll buttons, fix display position of tabs (drw)
+	* n.a.  - AddressBook - fixed sorting by 'File As' name (drw)
+	* n.a.  - AddressBook - fixed category handling for 'All' and 'Unfiled' (drw)
+	* n.a.  - AddressBook - fixed letter picker record selection and sort records afterwards (drw)
 
 	Internal
 	--------
 	* Worked around bug in Qt/Embedded 2.3.10: qt_version() returns 231 (mickeyl)
 	* Killed the need for weak symbols in QtE (zecke)
 	* Added optional building libqpe without inline images (mickeyl)
-	* OColorButton - fix so does not emit a colorSelected signal inside of resizeEvent (drw)
+	* OColorButton - fixed so does not emit a colorSelected signal inside of resizeEvent (drw)
 
 2005-02-03	Opie 1.1.9
 
