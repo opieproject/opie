@@ -1197,17 +1197,20 @@ OOrinocoMonitoringInterface::~OOrinocoMonitoringInterface()
 
 void OOrinocoMonitoringInterface::setChannel( int c )
 {
-    int monitorCode = _prismHeader ? 1 : 2;
-    _if->setPrivate( "monitor", 2, monitorCode, c );
+    if ( !_if->hasPrivate( "monitor" ) )
+    {
+        this->OMonitoringInterface::setChannel( c );
+    }
+    else
+    {
+        int monitorCode = _prismHeader ? 1 : 2;
+        _if->setPrivate( "monitor", 2, monitorCode, c );
+    }
 }
 
 
 void OOrinocoMonitoringInterface::setEnabled( bool b )
 {
-    // IW_MODE_MONITOR was introduced in Wireless Extensions Version 15
-    // Wireless Extensions < Version 15 need iwpriv commandos for monitoring
-    // However, as of recent orinoco drivers, IW_MODE_MONITOR is still not supported
-
     if ( b )
     {
         setChannel( 1 );
