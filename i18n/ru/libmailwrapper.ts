@@ -3,244 +3,244 @@
     <name>IMAPwrapper</name>
     <message>
         <source>error connecting imap server: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка при подключении к серверу IMAP: %1</translation>
     </message>
     <message>
         <source>error logging in imap server: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка при регистрации на сервере IMAP: %1</translation>
     </message>
     <message>
         <source>Mailbox has no mails</source>
-        <translation type="unfinished"></translation>
+        <translation>В ящике нет сообщений</translation>
     </message>
     <message>
         <source>Mailbox has %1 mails</source>
-        <translation type="unfinished"></translation>
+        <translation>В ящике есть %1 сообщений</translation>
     </message>
     <message>
         <source>Error fetching headers: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при получении заголовков: %1</translation>
     </message>
     <message>
         <source>Mailbox has no mails!</source>
-        <translation type="unfinished"></translation>
+        <translation>В ящике нет сообщений!</translation>
     </message>
     <message>
         <source>error deleting mail: %s</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка при удалении сообщения: %s</translation>
     </message>
     <message>
         <source>Cannot create folder %1 for holding subfolders</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу создать папку %1 для содержания подпапок</translation>
     </message>
     <message>
         <source>%1</source>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
     <message>
         <source>error copy mails: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка копирования сообщения: %1</translation>
     </message>
     <message>
         <source>error copy mail: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка копирования сообщений: %1</translation>
     </message>
 </context>
 <context>
     <name>LoginDialogUI</name>
     <message>
         <source>Login</source>
-        <translation type="unfinished"></translation>
+        <translation>Регистрация</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation>Пароль</translation>
     </message>
 </context>
 <context>
     <name>MBOXwrapper</name>
     <message>
         <source>Mailbox has %1 mail(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>В ящике есть %1 сообщение(й)</translation>
     </message>
     <message>
         <source>Mailbox exists.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ящик существует.</translation>
     </message>
     <message>
         <source>Error init folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка иниц. папки</translation>
     </message>
     <message>
         <source>Error writing to message folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка записи в папку сообщения</translation>
     </message>
     <message>
         <source>Error initializing mbox</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка иниц. ящика</translation>
     </message>
     <message>
         <source>Error fetching mail %i</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка получения почты: %i</translation>
     </message>
     <message>
         <source>Error deleting mail %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка удаления почты: %1</translation>
     </message>
     <message>
         <source>Mailbox doesn&apos;t exist.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ящик не существует.</translation>
     </message>
     <message>
         <source>Error deleting Mailbox.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка удаления ящика.</translation>
     </message>
 </context>
 <context>
     <name>MHwrapper</name>
     <message>
         <source>Mailbox has %1 mail(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>В ящике есть %1 сообщение(й)</translation>
     </message>
     <message>
         <source>Error fetching mail %i</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка получения почты %i</translation>
     </message>
     <message>
         <source>Error deleting mail %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка удаления почты %1</translation>
     </message>
     <message>
         <source>Error retrieving status</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка получения статуса</translation>
     </message>
 </context>
 <context>
     <name>POP3wrapper</name>
     <message>
         <source>Mailbox contains %1 mail(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Ящик содержит %1 сообщение(й)</translation>
     </message>
     <message>
         <source>Error initializing folder</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка иниц. папки</translation>
     </message>
     <message>
         <source>error deleting mail</source>
-        <translation type="unfinished"></translation>
+        <translation>ошибка удаления почты</translation>
     </message>
     <message>
         <source>Error getting folder info</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка получения информ. о папке</translation>
     </message>
     <message>
         <source>Error deleting mail %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка удаления почты %1</translation>
     </message>
 </context>
 <context>
     <name>SMTPwrapper</name>
     <message>
         <source>No error</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет ошибок</translation>
     </message>
     <message>
         <source>Unexpected error code</source>
-        <translation type="unfinished"></translation>
+        <translation>Неожиданный код ошибки</translation>
     </message>
     <message>
         <source>Service not available</source>
-        <translation type="unfinished"></translation>
+        <translation>Сервис недоступен</translation>
     </message>
     <message>
         <source>Stream error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка потока</translation>
     </message>
     <message>
         <source>gethostname() failed</source>
-        <translation type="unfinished"></translation>
+        <translation>gethostname() не удался</translation>
     </message>
     <message>
         <source>Not implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Еще не осуществлено</translation>
     </message>
     <message>
         <source>Error, action not taken</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка, действие не выполнено</translation>
     </message>
     <message>
         <source>Data exceeds storage allocation</source>
-        <translation type="unfinished"></translation>
+        <translation>Данные превышают отведенное место</translation>
     </message>
     <message>
         <source>Error in processing</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка при обработке</translation>
     </message>
     <message>
         <source>Mailbox unavailable</source>
-        <translation type="unfinished"></translation>
+        <translation>Ящик недоступен</translation>
     </message>
     <message>
         <source>Mailbox name not allowed</source>
-        <translation type="unfinished"></translation>
+        <translation>Имя ящика не разрешено</translation>
     </message>
     <message>
         <source>Bad command sequence</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестная последовательность команд</translation>
     </message>
     <message>
         <source>User not local</source>
-        <translation type="unfinished"></translation>
+        <translation>Пользователь не местный</translation>
     </message>
     <message>
         <source>Transaction failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Транзакция неудалась</translation>
     </message>
     <message>
         <source>Memory error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка памяти</translation>
     </message>
     <message>
         <source>Connection refused</source>
-        <translation type="unfinished"></translation>
+        <translation>Соединение отвергнуто</translation>
     </message>
     <message>
         <source>Unknown error code</source>
-        <translation type="unfinished"></translation>
+        <translation>Неизвестный код ошибки</translation>
     </message>
     <message>
         <source>Error sending mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка отправки почты</translation>
     </message>
     <message>
         <source>Error sending queued mail - breaking</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка отправки почты - отключаю</translation>
     </message>
 </context>
 <context>
     <name>progressMailSend</name>
     <message>
         <source>%1 of %2 bytes send</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 из %2 байтов отправлено</translation>
     </message>
     <message>
         <source>Sending mail %1 of %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправляю сообщение %1 из %2</translation>
     </message>
 </context>
 <context>
     <name>progressMailSendUI</name>
     <message>
         <source>Sending mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Отправляю почту</translation>
     </message>
     <message>
         <source>Progress of mail</source>
-        <translation type="unfinished"></translation>
+        <translation>Продвижение почты</translation>
     </message>
 </context>
 </TS>
