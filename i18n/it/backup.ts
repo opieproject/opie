@@ -3,50 +3,50 @@
     <name>BackupAndRestore</name>
     <message>
         <source>Backup and Restore... working...</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup e Restore... in corso...</translation>
     </message>
     <message>
         <source>Backup and Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup e Restore</translation>
     </message>
 </context>
 <context>
     <name>BackupAndRestoreBase</name>
     <message>
         <source>Backup And Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup E Restore</translation>
     </message>
     <message>
         <source>Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>Backup</translation>
     </message>
     <message>
         <source>Applications</source>
-        <translation type="unfinished"></translation>
+        <translation>Applicazioni</translation>
     </message>
     <message>
         <source>Save To</source>
-        <translation type="unfinished"></translation>
+        <translation>Salva Su</translation>
     </message>
     <message>
         <source>&amp;Backup</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Backup</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Restore</translation>
     </message>
     <message>
         <source>Select Source</source>
-        <translation type="unfinished"></translation>
+        <translation>Seleziona Sorgente</translation>
     </message>
     <message>
         <source>Column 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Colonna 1</translation>
     </message>
     <message>
         <source>&amp;Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Restore</translation>
     </message>
 </context>
 </TS>
