@@ -1091,6 +1091,40 @@ static inline VObject *safeAddProp( VObject *o, const char *prop)
     return ret;
 }
 
+/*
+ * Until we support vCal/iCal right
+ * we will make DTSTART and other things
+ * be floating in the sense of
+ * RFC 2445
+ */
+namespace {
+/*
+ * Convert QDateTime to iso8601 but take
+ * local time and do not use the Z at the end
+ *
+ */
+    QCString toISOLocal( const QDateTime& dt ) {
+        QCString str;
+        /*
+         * year month day T Hour Minute Second
+         *  4    2     2     2    2       2    digits
+         */
+        str.sprintf("%04d%02d%02dT%02d%02d%02d",
+                    dt.date().year(),
+                    dt.date().month(),
+                    dt.date().year(),
+                    dt.time().hour(),
+                    dt.time().minute(),
+                    dt.time().second() );
+
+
+
+        return str;
+    }
+
+
+};
+
 static VObject *createVObject( const Event &e )
 {
     VObject *vcal = newVObject( VCCalProp );
