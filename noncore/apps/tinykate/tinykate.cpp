@@ -151,8 +151,9 @@ TinyKate::TinyKate( QWidget *parent, const char *name, WFlags f) :
 
 void TinyKate::slotOpen( )
 {
-  QString filename=OFileDialog::getOpenFileName(OFileSelector::EXTENDED_ALL);
-  if (!filename.isEmpty()) {  
+    QString filename = OFileDialog::getOpenFileName( OFileSelector::EXTENDED_ALL,
+                                                QPEApplication::documentDir());
+  if (!filename.isEmpty()) {
     open(filename);
   }
 }
@@ -167,7 +168,7 @@ void TinyKate::open(const QString & filename)
     qDebug(filename);
 
     kd->setDocName( filenamed);
-    kd->open(filename);
+    kd->open( filename );
     viewCount++;
 }
 
@@ -240,7 +241,8 @@ void TinyKate::slotSaveAs() {
   if (currentView==0) return;
   KateDocument *kd = (KateDocument*) currentView->document();
 
-  QString filename=OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL);
+  QString filename=OFileDialog::getSaveFileName(OFileSelector::EXTENDED_ALL,
+                                                QPEApplication::documentDir());
   if (!filename.isEmpty()) {
     qDebug("saving file "+filename);
     QFileInfo fi(filename);
