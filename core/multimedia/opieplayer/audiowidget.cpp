@@ -65,11 +65,11 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
 {
 //    QPEApplication::grabKeyboard();
     setCaption( tr("OpiePlayer") );
-    setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButtonsAll" ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButtonsBig" ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaControls" ) );
-    pixmaps[3] = new QPixmap( Resource::loadPixmap( "mpegplayer/animatedButton" ) );
+    setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
+    pixmaps[0] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButtonsAll" ) );
+    pixmaps[1] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButtonsBig" ) );
+    pixmaps[2] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaControls" ) );
+    pixmaps[3] = new QPixmap( Resource::loadPixmap( "opieplayer/animatedButton" ) );
 
     songInfo = new Ticker( this );
     songInfo->setFocusPolicy( QWidget::NoFocus );
@@ -80,7 +80,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     slider->setFixedHeight( 20 );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
+    slider->setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 262, 220, 20 ) );
 
@@ -153,7 +153,7 @@ void AudioWidget::updateSlider( long i, long max ) {
     if ( max == 0 )
   return;
     // Will flicker too much if we don't do this
-    // Scale to something reasonable 
+    // Scale to something reasonable
     int width = slider->width();
     int val = int((double)i * width / max);
     if ( !audioSliderBeingMoved ) {
@@ -333,6 +333,6 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e)
           break;
       case Key_Escape:
           break;
-        
+
     };
 }

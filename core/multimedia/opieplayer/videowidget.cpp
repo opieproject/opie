@@ -67,16 +67,16 @@ static const int numButtons = (sizeof(videoButtons)/sizeof(MediaButton));
 VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     QWidget( parent, name, f ), scaledWidth( 0 ), scaledHeight( 0 ) {
     setCaption( tr("OpiePlayer") );
-    setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
-    pixmaps[0] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButton0a" ) );
-    pixmaps[1] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaButton0b" ) );
-    pixmaps[2] = new QPixmap( Resource::loadPixmap( "mpegplayer/mediaControls0" ) );
+    setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
+    pixmaps[0] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButton0a" ) );
+    pixmaps[1] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaButton0b" ) );
+    pixmaps[2] = new QPixmap( Resource::loadPixmap( "opieplayer/mediaControls0" ) );
     currentFrame = new QImage( 220 + 2, 160, (QPixmap::defaultDepth() == 16) ? 16 : 32 );
 
     slider = new QSlider( Qt::Horizontal, this );
     slider->setMinValue( 0 );
     slider->setMaxValue( 1 );
-    slider->setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
+    slider->setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
@@ -201,7 +201,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
         } else {
             if ( videoButtons[i].isHeld ) {
                 videoButtons[i].isHeld = FALSE;
-                if ( !videoButtons[i].isToggle ) 
+                if ( !videoButtons[i].isToggle )
                     setToggleButton( i, FALSE );
             }
         }
@@ -214,7 +214,7 @@ void VideoWidget::mouseMoveEvent( QMouseEvent *event ) {
           case VideoPlayList:   mediaPlayerState->setList(); return;
           case VideoFullscreen: mediaPlayerState->setFullscreen( TRUE ); makeVisible(); return;
         }
-        
+
     }
 }
 
@@ -228,7 +228,7 @@ void VideoWidget::mouseReleaseEvent( QMouseEvent *event ) {
     if ( mediaPlayerState->fullscreen() ) {
   mediaPlayerState->setFullscreen( FALSE );
   makeVisible();
- 
+
   mouseMoveEvent( event );
     }
 }
@@ -241,7 +241,7 @@ void VideoWidget::makeVisible() {
   resize( qApp->desktop()->size() );
   slider->hide();
     } else {
-  setBackgroundPixmap( Resource::loadPixmap( "mpegplayer/metalFinish" ) );
+  setBackgroundPixmap( Resource::loadPixmap( "opieplayer/metalFinish" ) );
   showNormal();
   showMaximized();
   slider->show();
@@ -253,7 +253,7 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
     QPainter p( this );
 
     if ( mediaPlayerState->fullscreen() ) {
-  // Clear the background 
+  // Clear the background
   p.setBrush( QBrush( Qt::black ) );
   p.drawRect( rect() );
 
@@ -288,7 +288,7 @@ void VideoWidget::closeEvent( QCloseEvent* ) {
 bool VideoWidget::playVideo() {
     bool result = FALSE;
 
-    int stream = 0; 
+    int stream = 0;
 
     int sw = mediaPlayerState->curDecoder()->videoWidth( stream );
     int sh = mediaPlayerState->curDecoder()->videoHeight( stream );
@@ -310,18 +310,18 @@ bool VideoWidget::playVideo() {
 
       if ( mediaPlayerState->scaled() ) {
     // maintain aspect ratio
-    if ( w * sh > sw * h ) 
+    if ( w * sh > sw * h )
         w = sw * h / sh;
     else
         h = sh * w / sw;
       } else  {
     w = sw;
-    h = sh;     
+    h = sh;
       }
 
       w--; // we can't allow libmpeg to overwrite.
       QPoint roff = qt_screen->mapToDevice( p.offset(), QSize( qt_screen->width(), qt_screen->height() ) );
-      
+
       int ox = roff.x() - height() + 2 + (height() - w) / 2;
       int oy = roff.y() + (width() - h) / 2;
       int sx = 0, sy = 0;
@@ -346,13 +346,13 @@ bool VideoWidget::playVideo() {
 
       if ( mediaPlayerState->scaled() ) {
     // maintain aspect ratio
-    if ( w * sh > sw * h ) 
+    if ( w * sh > sw * h )
         w = sw * h / sh;
     else
         h = sh * w / sw;
       } else  {
     w = sw;
-    h = sh;     
+    h = sh;
       }
 
       int bytes = ( dd == 16 ) ? 2 : 4;
@@ -394,7 +394,7 @@ bool VideoWidget::playVideo() {
   h = 160;
 
   // maintain aspect ratio
-  if ( w * sh > sw * h ) 
+  if ( w * sh > sw * h )
       w = sw * h / sh;
   else
       h = sh * w / sw;
@@ -467,6 +467,6 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e)
           break;
       case Key_Escape:
           break;
-        
+
     };
 }
