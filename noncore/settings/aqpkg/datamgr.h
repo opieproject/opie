@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -40,8 +40,10 @@ using namespace std;
 #include "server.h"
 #include "destination.h"
 
-#define LOCAL_SERVER			"Installed Pkgs"
-#define LOCAL_IPKGS				"local IPKG"
+//#define LOCAL_SERVER			"Installed Pkgs"
+//#define LOCAL_IPKGS				"local IPKG"
+extern QString LOCAL_SERVER;
+extern QString LOCAL_IPKGS;
 
 /**
   *@author Andy Qua

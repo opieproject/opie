@@ -147,26 +147,26 @@ void EmailClient::init()
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
   sendMailButton->addTo(bar);
   sendMailButton->addTo(mail);
-  sendMailButton->setWhatsThis("Send mail queued in the outbox");
+  sendMailButton->setWhatsThis(tr("Send mail queued in the outbox") );
     
   composeButton = new QAction(tr("Compose"), Resource::loadPixmap("new"), QString::null, 0, this, 0);
   connect(composeButton, SIGNAL(activated()), this, SLOT(compose()) );
   composeButton->addTo(bar);
   composeButton->addTo(mail);
-  composeButton->setWhatsThis("Compose a new mail");
+  composeButton->setWhatsThis(tr("Compose a new mail"));
   
   cancelButton = new QAction(tr("Cancel transfer"), Resource::loadPixmap("close"), QString::null, 0, this, 0);
   connect(cancelButton, SIGNAL(activated()), this, SLOT(cancel()) );
   cancelButton->addTo(mail);
   cancelButton->addTo(bar);
   cancelButton->setEnabled(FALSE);
-  cancelButton->setWhatsThis("Stop the currently active mail transfer");
+  cancelButton->setWhatsThis(tr("Stop the currently active mail transfer"));
   
   
   deleteButton = new QAction( tr( "Delete" ), Resource::loadPixmap( "trash" ), QString::null, 0, this, 0 );
   connect( deleteButton, SIGNAL( activated() ), this, SLOT( deleteItem() ) );
   deleteButton->addTo(bar);
-  deleteButton->setWhatsThis("Remove the currently selected eMail(s)");
+  deleteButton->setWhatsThis(tr("Remove the currently selected eMail(s)"));
   
   mailboxView = new OTabWidget( this, "mailboxView" );
 
@@ -257,7 +257,7 @@ void EmailClient::enqueMail(const Email &mail)
 {
  if (accountList.count() == 0) {
     QMessageBox::warning(qApp->activeWindow(),
-      tr("No account selected"), tr("You must create an account"), "OK\n");
+      tr("No account selected"), tr("You must create an account"), tr("OK\n") );
     return;
   }
    
@@ -281,7 +281,7 @@ void EmailClient::sendQuedMail()
   int count = 0;
 
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(), "No account selected", "You must create an account", "OK\n");
+    QMessageBox::warning(qApp->activeWindow(), tr("No account selected"), tr("You must create an account"), tr("OK\n") );
     return;
   }
   //traverse listview, find messages to send
@@ -321,8 +321,8 @@ void EmailClient::mailSent()
 void EmailClient::getNewMail() {
   
   if (accountList.count() == 0) {
-    QMessageBox::warning(qApp->activeWindow(),"No account selected",
-      "You must create an account", "OK\n");
+    QMessageBox::warning(qApp->activeWindow(),tr("No account selected"),
+      tr("You must create an account"), tr("OK\n") );
     return;
   }
   
@@ -485,7 +485,7 @@ void EmailClient::allMailArrived(int count)
   // not previewing means all mailtransfer has been done
   /*if (!previewingMail) {*/
     if ( (allAccounts) && ( (currentAccount = accountList.next()) !=0 ) ) {
-      emit newCaption("Mailit - " + currentAccount->accountName);
+      emit newCaption(tr("Mailit - ") + currentAccount->accountName);
       getNewMail();
       return;
     } else {
@@ -494,7 +494,7 @@ void EmailClient::allMailArrived(int count)
       getMailButton->setEnabled(TRUE);
       cancelButton->setEnabled(FALSE);
       selectAccountMenu->setEnabled(TRUE);
-      status1Label->setText("Idle");
+      status1Label->setText(tr("Idle"));
   
       progressBar->reset();
       return;
@@ -523,19 +523,19 @@ void EmailClient::smtpError(int code)
   QString temp;
   
   if (code == ErrUnknownResponse)
-    temp = "Unknown response from server";
+    temp = tr("<qt>Unknown response from server</qt>");
   
   if (code == QSocket::ErrHostNotFound)
-    temp = "host not found";
+    temp = tr("<qt>host not found</qt>");
   if (code == QSocket::ErrConnectionRefused)
-    temp = "connection refused";
+    temp = tr("<qt>connection refused</qt>");
   if (code == QSocket::ErrSocketRead)
-    temp = "socket packet error";
+    temp = tr("<qt>socket packet error</qt>");
   
   if (code != ErrCancel) {
-    QMessageBox::warning(qApp->activeWindow(), "Sending error", temp, "OK\n");
+    QMessageBox::warning(qApp->activeWindow(), tr("Sending error"), temp, tr("OK\n"));
   } else {
-    status2Label->setText("Aborted by user");
+    status2Label->setText(tr("Aborted by user"));
   }
   
   sending = FALSE;
@@ -549,21 +549,21 @@ void EmailClient::popError(int code)
   QString temp;
   
   if (code == ErrUnknownResponse)
-    temp = "Unknown response from server";
+    temp = tr("<qt>Unknown response from server</qt>");
   if (code == ErrLoginFailed)
-    temp = "Login failed\nCheck user name and password";
+    temp = tr("<qt>Login failed\nCheck user name and password</qt>");
   
   if (code == QSocket::ErrHostNotFound)
-    temp = "host not found";
+    temp = tr("<qt>host not found</qt>");
   if (code == QSocket::ErrConnectionRefused)
-    temp = "connection refused";
+    temp = tr("<qt>connection refused</qt>");
   if (code == QSocket::ErrSocketRead)
-    temp = "socket packet error";
+    temp = tr("<qt>socket packet error</qt>");
     
   if (code != ErrCancel) {
-    QMessageBox::warning(qApp->activeWindow(), "Receiving error", temp, "OK\n");
+    QMessageBox::warning(qApp->activeWindow(), tr("Receiving error"), temp, tr("OK\n"));
   } else {
-    status2Label->setText("Aborted by user");
+    status2Label->setText(tr("Aborted by user"));
   }
   
   receiving = FALSE;
@@ -777,10 +777,10 @@ void EmailClient::selectAccount(int id)
 {
   if (accountList.count() > 0) {
     currentAccount = accountList.at(id);
-    emit newCaption("Mailit - " + currentAccount->accountName);
+    emit newCaption(tr("Mailit - ") + currentAccount->accountName);
     getNewMail();
   } else {
-    emit newCaption("Mailit ! No account defined");
+    emit newCaption(tr("Mailit ! No account defined"));
   }
 }
 
@@ -820,9 +820,9 @@ void EmailClient::deleteAccount(int id)
   QString message;
   
   newAccount = accountList.at(id);
-  message = "Delete account:\n" + newAccount->accountName;
-  switch( QMessageBox::warning( this, "Mailit", message,
-      "Yes", "No", 0, 0, 1 ) ) {
+  message = tr("Delete account:\n") + newAccount->accountName;
+  switch( QMessageBox::warning( this, tr("Mailit"), message,
+      tr("Yes"), tr("No"), 0, 0, 1 ) ) {
     
     case 0: accountList.remove(id);
         updateAccounts();
@@ -841,7 +841,7 @@ void EmailClient::updateAccounts()
   selectAccountMenu->clear();
   deleteAccountMenu->clear();
 
-  newAccountId = editAccountMenu->insertItem("New", this,
+  newAccountId = editAccountMenu->insertItem(tr("New"), this,
       SLOT(editAccount(int)) );
   editAccountMenu->insertSeparator();
   

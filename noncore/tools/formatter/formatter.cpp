@@ -400,7 +400,8 @@ void FormatterApp::deviceComboSelected(int index) {
     }
     fsType = getFileSystemType((const QString &)selectedText);
 
-    TextLabel5->setText(tr("Type: %1\nFormatted with %1\n%1, %1, %1").arg( nameS).arg( fsType).arg(totalS).arg( usedS).arg( avS )); 
+    TextLabel5->setText(tr("Type: %1\nFormatted with %2\n%3, %4, %5").arg( nameS).arg( fsType).arg(totalS).arg( usedS).arg( avS )); 
+    TextLabel5->setTextFormat( Qt::RichText );
 //     storageComboSelected(0);
 }
 

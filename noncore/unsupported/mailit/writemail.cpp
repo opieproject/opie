@@ -125,8 +125,8 @@ void WriteMail::init()
 	QWhatsThis::add(emailInput,QWidget::tr("Enter your mail text here"));
 
 	addressView = new QListView( widget, "addressView");
-	addressView->addColumn("Name");
-	addressView->addColumn("EMail");
+	addressView->addColumn(tr("Name"));
+	addressView->addColumn(tr("EMail") );
 	addressView->setAllColumnsShowFocus(TRUE);
 	addressView->setMultiSelection(TRUE);
 	addressView->hide();

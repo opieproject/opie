@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -40,6 +40,9 @@
 #include "datamgr.h"
 #include "global.h"
 
+QString LOCAL_SERVER;
+QString LOCAL_IPKGS;
+
 
 QString DataManager::availableCategories = "";
 DataManager::DataManager()
@@ -47,7 +50,7 @@ DataManager::DataManager()
 {
     activeServer = "";
     availableCategories = "#";
-    
+
     serverList.setAutoDelete( TRUE );
     destList.setAutoDelete( TRUE );
 }
@@ -137,7 +140,7 @@ void DataManager :: loadServers()
                 linkToRoot = cfg.readBoolEntry( key, true );
 #endif
                 d->linkToRoot( linkToRoot );
-                
+
                 destList.append( d );
             }
             else if ( lineStr.startsWith( "option" ) || lineStr.startsWith( "#option" ) )
@@ -180,7 +183,7 @@ void DataManager :: reloadServerData( )
 
     QString serverName;
     int i = 0;
-    
+
     Server *server;
     QListIterator<Server> it( serverList );
     for ( ; it.current(); ++it )
@@ -190,7 +193,7 @@ void DataManager :: reloadServerData( )
         i++;
         emit progressUpdate( i );
         qApp->processEvents();
-        
+
     	// Now we've read the config file in we need to read the servers
     	// The local server is a special case. This holds the contents of the
     	// status files the number of which depends on how many destinations
@@ -201,7 +204,7 @@ void DataManager :: reloadServerData( )
     	else if ( serverName == LOCAL_IPKGS )
             server->readLocalIpks( getServer( LOCAL_SERVER ) );
     	else
-            server->readPackageFile( getServer( LOCAL_SERVER ) );     
+            server->readPackageFile( getServer( LOCAL_SERVER ) );
 	}
 }
 
@@ -212,7 +215,7 @@ void DataManager :: writeOutIpkgConf()
     {
         return;
     }
-    
+
     QTextStream t( &f );
 /*
     QString ipkg_conf = IPKG_CONF;
@@ -294,7 +297,7 @@ void DataManager :: writeOutIpkgConf()
 
     t << "# Offline mode (for use in constructing flash images offline)\n";
     t << "#option offline_root target\n";
-    
+
     f.close();
 }
 

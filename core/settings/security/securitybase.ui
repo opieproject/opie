@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>277</width>
+            <width>273</width>
             <height>328</height>
         </rect>
     </property>
@@ -122,6 +122,10 @@
                             <name>text</name>
                             <string>Accept sync from network:</string>
                         </property>
+                        <property stdset="1">
+                            <name>textFormat</name>
+                            <enum>RichText</enum>
+                        </property>
                     </widget>
                     <widget>
                         <class>QComboBox</class>
@@ -201,6 +205,10 @@
             <property stdset="1">
                 <name>text</name>
                 <string>&lt;P&gt;Pass code protection provides a minimal level of protection from casual access to this device.</string>
+            </property>
+            <property stdset="1">
+                <name>textFormat</name>
+                <enum>RichText</enum>
             </property>
             <property stdset="1">
                 <name>alignment</name>

@@ -9,7 +9,7 @@
 #include "ircmisc.h"
 
 IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) : QDialog(parent, name, modal, WStyle_ContextHelp) {
-    setCaption("Settings");
+    setCaption(tr("Settings") );
     m_config = new Config("OpieIRC");
     m_config->setGroup("OpieIRC");
     QHBoxLayout *l = new QHBoxLayout(this, 2, 2);

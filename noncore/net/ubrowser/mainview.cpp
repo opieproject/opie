@@ -20,7 +20,7 @@ Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 MainView::MainView(QWidget *parent, const char *name) : QMainWindow(parent, name)
 {
 	setIcon( Resource::loadPixmap( "remote" ) );
-	setCaption("uBrowser");
+	setCaption(tr("uBrowser"));
 	
 	setToolBarsMovable( false );
 
@@ -102,11 +102,11 @@ void MainView::textChanged()
 {
 	if(browser->documentTitle().isNull())
 	{
-		setCaption(browser->source() + " - uBrowser");
+		setCaption(browser->source() + tr(" - uBrowser") );
 	}
 	else
 	{
-		setCaption(browser->documentTitle() + " - uBrowser");
+		setCaption(browser->documentTitle() + tr(" - uBrowser"));
 	}
 
 	location->setEditText(browser->source());

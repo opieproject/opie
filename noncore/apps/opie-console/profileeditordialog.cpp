@@ -35,7 +35,7 @@ ProfileEditorDialog::ProfileEditorDialog( MetaFactory* fact )
     : QDialog(0, 0, TRUE), m_fact( fact )
 {
 	// Default profile
-	m_prof = Profile("New Profile", "serial", "default", Profile::Black, Profile::White, Profile::VT102);
+	m_prof = Profile(tr("New Profile"), "serial", "default", Profile::Black, Profile::White, Profile::VT102);
 
 	initUI();
 

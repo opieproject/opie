@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: main.cpp,v 1.1 2002-03-05 03:48:46 bipolar Exp $
+** $Id: main.cpp,v 1.1.8.1 2003-06-01 13:45:31 zecke Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -25,7 +25,7 @@ int main( int argc, char **argv )
     }
     TicTacToe ttt( n );				// create game
     a.setMainWidget( &ttt );
-    ttt.setCaption("TicTac");
+    ttt.setCaption( QObject::tr("TicTac") );
     ttt.show();					// show widget
     return a.exec();				// go
 }

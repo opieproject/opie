@@ -87,7 +87,7 @@ void AdvancedFm::tabChanged(QWidget *w)
 
   QString fs= getFileSystemType( (const QString &)  path);
 
-  setCaption("AdvancedFm :: "+fs+" :: "
+  setCaption( tr("AdvancedFm :: ")+fs+" :: "
              +checkDiskSpace( (const QString &) path )+ " kB free" );
   chdir( path.latin1());
 }

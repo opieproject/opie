@@ -1,6 +1,6 @@
 /*
                              This file is part of the OPIE Project
-                             
+
                =.            Copyright (c)  2002 Andy Qua <andy.qua@blueyonder.co.uk>
              .=l.                                Dan Williams <drw@handhelds.org>
            .>+-=
@@ -42,6 +42,10 @@
 #include "global.h"
 
 
+/* be less intrusive for translation -zecke */
+extern QString LOCAL_SERVER;
+extern QString LOCAL_IPKGS;
+
 int main(int argc, char *argv[])
 {
 #ifdef QWS
@@ -54,6 +58,9 @@ int main(int argc, char *argv[])
   // Disable suspend mode
   QCopEnvelope( "QPE/System", "setScreenSaverMode(int)" ) << QPEApplication::DisableSuspend;
 #endif
+
+  LOCAL_SERVER = QObject::tr("Installed Pkgs");
+  LOCAL_IPKGS = QObject::tr("local IPKG");
 
   MainWindow *win = new MainWindow();
   a.setMainWidget(win);

@@ -63,7 +63,7 @@ void PopClient::newConnection(const QString &target, int port)
   receiving = TRUE;
   //selected = FALSE;
     
-  emit updateStatus("DNS lookup");
+  emit updateStatus(tr("DNS lookup"));
 }
 
 void PopClient::setAccount(const QString &popUser, const QString &popPasswd)

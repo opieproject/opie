@@ -1,4 +1,5 @@
 TEMPLATE  = app
+TARGET = mailit
 CONFIG    = qt warn_on release
 HEADERS   = emailclient.h \
       emailhandler.h \

@@ -8,19 +8,36 @@
 #include "orecurrancewidget.h"
 
 // Global Templates for use in setting up the repeat label...
-const QString strDayTemplate = QObject::tr("Every");
-const QString strYearTemplate = QObject::tr("%1 %2 every ");
-const QString strMonthDateTemplate = QObject::tr("The %1 every ");
-const QString strMonthDayTemplate = QObject::tr("The %1 %2 of every");
-const QString strWeekTemplate = QObject::tr("Every ");
-const QString dayLabel[] = { QObject::tr("Monday"),
-                             QObject::tr("Tuesday"),
-			     QObject::tr("Wednesday"),
-			     QObject::tr("Thursday"),
-			     QObject::tr("Friday"),
-			     QObject::tr("Saturday"),
-			     QObject::tr("Sunday") };
+// the problem is these strings get initialized before QPEApplication can install the translator -zecke
+namespace {
+QString strDayTemplate;
+QString strYearTemplate;
+QString strMonthDateTemplate;
+QString strMonthDayTemplate;
+QString strWeekTemplate;
+QString dayLabel[7];
+}
 
+/*
+ * static linkage to not polute the symbol table...
+ * The problem is that const and static linkage are resolved prior to installing a translator
+ * leading to that the above strings are translted but to the original we delay the init of these strings...
+ * -zecke
+ */
+static void fillStrings() {
+    strDayTemplate = QObject::tr("Every");
+    strYearTemplate = QObject::tr("%1 %2 every ");
+    strMonthDateTemplate = QObject::tr("The %1 every ");
+    strMonthDayTemplate = QObject::tr("The %1 %2 of every");
+    strWeekTemplate = QObject::tr("Every ");
+    dayLabel[0] = QObject::tr("Monday");
+    dayLabel[1] = QObject::tr("Tuesday");
+    dayLabel[2] = QObject::tr("Wednesday");
+    dayLabel[3] = QObject::tr("Thursday");
+    dayLabel[4] = QObject::tr("Friday");
+    dayLabel[5] = QObject::tr("Saturday");
+    dayLabel[6] = QObject::tr("Sunday");
+}
 
 static QString numberPlacing( int x );	// return the proper word format for
                                         // x (1st, 2nd, etc)
@@ -46,6 +63,9 @@ ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
       currInterval( None ),
       startWeekOnMonday( startOnMonday )
 {
+     if (strDayTemplate.isEmpty() )
+        fillStrings();
+
     init();
     fraType->setButton( currInterval );
     chkNoEnd->setChecked( TRUE );
@@ -71,6 +91,8 @@ ORecurranceWidget::ORecurranceWidget( bool startOnMonday,
       end( rp.endDate() ),
       startWeekOnMonday( startOnMonday )
 {
+     if (strDayTemplate.isEmpty() )
+        fillStrings();
     // do some stuff with the repeat pattern
     init();
     setRecurrence( rp );
@@ -84,7 +106,6 @@ ORecurranceWidget::~ORecurranceWidget() {
  * @param date the new start date
  */
 void ORecurranceWidget::setStartDate( const QDate& date ) {
-    qWarning("ORecurranceWidget::setStartDate");
     setRecurrence( recurrence(), date );
 }
 /**
@@ -367,12 +388,8 @@ void ORecurranceWidget::slotWeekLabel() {
 		str += ", " + *itStr;
 	}
     }
-    str = str.prepend( "on " );
-	
-	//FIXME: this is not translatable for a lot languages (beside
-	//the fact that the "on" is missing a tr(). But I am not sure
-	//if I can simple add it here, thus I let it as it is... (Carsten)
-	
+    str = str.prepend( tr("on ") );
+
     lblWeekVar->setText( str );
 }
 void ORecurranceWidget::slotMonthLabel(int type) {

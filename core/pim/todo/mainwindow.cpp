@@ -431,11 +431,13 @@ void MainWindow::slotNewFromTemplate( int id ) {
     if ( currentEditor()->accepted() ) {
         /* assign new todo */
         event.setUid( 1 );
-        currentView()->addEvent( event );
+        handleAlarms( OTodo(), event );
         m_todoMgr.add( event );
+        currentView()->addEvent( event );
 
         populateCategories();
     }
+    raiseCurrentView();
 }
 void MainWindow::slotNew() {
     create();

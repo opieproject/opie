@@ -34,7 +34,7 @@ Kpacman::Kpacman(QWidget *parent, const char *name)
 	view = new KpacmanWidget( this, QString(name)+"widget");
 	m_layout->addWidget( view, 0, 0 );
 
-    setCaption( "KPacman" );
+    setCaption( tr("KPacman") );
 
     view->referee->setFocus();
 

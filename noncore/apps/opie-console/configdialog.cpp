@@ -75,7 +75,7 @@ void ConfigDialog::slotEdit() {
 
 	ProfileEditorDialog dlg(m_fact, p);
 
-	dlg.setCaption("Edit Connection Profile");
+	dlg.setCaption(tr("Edit Connection Profile"));
 	dlg.showMaximized();
 	int ret = dlg.exec();
 
@@ -94,7 +94,7 @@ void ConfigDialog::slotEdit() {
 void ConfigDialog::slotAdd() {
 	ProfileEditorDialog dlg(m_fact);
 
-	dlg.setCaption("New Connection");
+	dlg.setCaption(tr("New Connection"));
 	dlg.showMaximized();
 	int ret = dlg.exec();
 

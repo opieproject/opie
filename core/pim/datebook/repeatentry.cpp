@@ -33,19 +33,36 @@
 #include <time.h>
 
 // Global Templates for use in setting up the repeat label...
-const QString strDayTemplate = QObject::tr("Every");
-const QString strYearTemplate = QObject::tr("%1 %2 every ");
-const QString strMonthDateTemplate = QObject::tr("The %1 every ");
-const QString strMonthDayTemplate = QObject::tr("The %1 %1 of every");
-const QString strWeekTemplate = QObject::tr("Every ");
-const QString dayLabel[] = { QObject::tr("Monday"),
-                             QObject::tr("Tuesday"),
-			     QObject::tr("Wednesday"),
-			     QObject::tr("Thursday"),
-			     QObject::tr("Friday"),
-			     QObject::tr("Saturday"),
-			     QObject::tr("Sunday") };
+// the problem is these strings get initialized before QPEApplication can install the translator -zecke
+namespace {
+QString strDayTemplate;
+QString strYearTemplate;
+QString strMonthDateTemplate;
+QString strMonthDayTemplate;
+QString strWeekTemplate;
+QString dayLabel[7];
+}
 
+/*
+ * static linkage to not polute the symbol table...
+ * The problem is that const and static linkage are resolved prior to installing a translator
+ * leading to that the above strings are translted but to the original we delay the init of these strings...
+ * -zecke
+ */
+static void fillStrings() {
+    strDayTemplate = QObject::tr("Every");
+    strYearTemplate = QObject::tr("%1 %2 every ");
+    strMonthDateTemplate = QObject::tr("The %1 every ");
+    strMonthDayTemplate = QObject::tr("The %1 %1 of every");
+    strWeekTemplate = QObject::tr("Every ");
+    dayLabel[0] = QObject::tr("Monday");
+    dayLabel[1] = QObject::tr("Tuesday");
+    dayLabel[2] = QObject::tr("Wednesday");
+    dayLabel[3] = QObject::tr("Thursday");
+    dayLabel[4] = QObject::tr("Friday");
+    dayLabel[5] = QObject::tr("Saturday");
+    dayLabel[6] = QObject::tr("Sunday");
+}
 
 static QString numberPlacing( int x );	// return the proper word format for
                                         // x (1st, 2nd, etc)
@@ -59,6 +76,9 @@ RepeatEntry::RepeatEntry( bool startOnMonday,
       currInterval( NONE ),
       startWeekOnMonday( startOnMonday )
 {
+    if (strDayTemplate.isEmpty() )
+        fillStrings();
+
     init();
     fraType->setButton( currInterval );
     chkNoEnd->setChecked( TRUE );
@@ -74,6 +94,8 @@ RepeatEntry::RepeatEntry( bool startOnMonday, const Event::RepeatPattern &rp,
       end( rp.endDate() ),
       startWeekOnMonday( startOnMonday )
 {
+    if (strDayTemplate.isEmpty() )
+        fillStrings();
     // do some stuff with the repeat pattern
     init();
     switch ( rp.type ) {
@@ -406,7 +428,7 @@ void RepeatEntry::setupRepeatLabel( int x )
 	    if ( x > 1 )
 		strVar2 = tr( "days" );
 	    else
-		strVar2 = tr( "day" );	
+		strVar2 = tr( "day" );
 	    break;
 	case WEEK:
 	    if ( x > 1 )
@@ -500,7 +522,7 @@ void RepeatEntry::slotWeekLabel()
 		str += ", " + *itStr;
 	}
     }
-    str = str.prepend( "on " );
+    str = str.prepend( tr("on ") );
     lblWeekVar->setText( str );
 }
 

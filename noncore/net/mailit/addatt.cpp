@@ -56,7 +56,7 @@ FileItem::~FileItem()
 AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	: QDialog(parent, name, f)
 {
-	setCaption("Adding attachments");
+	setCaption(tr("Adding attachments") );
 
 	QGridLayout *top = new QGridLayout(this, 1,1 );
 	
@@ -122,7 +122,7 @@ void AddAtt::clear()
 }*/
 
 void AddAtt::addattachment()
-{	
+{	// ### FIXME wrong use -zecke
 	OFileDialog ofs("Attachments",this,0,0,"/root/Documents");
 	
 	ofs.showMaximized();

@@ -26,7 +26,7 @@
 ViewAtt::ViewAtt(QWidget *parent, const char *name, WFlags f)
 	: QMainWindow(parent, name, f)
 {
-	setCaption("Exploring attatchments");
+	setCaption(tr("Exploring attatchments"));
 
 	setToolBarsMovable( FALSE );
 	bar = new QToolBar(this);
@@ -35,9 +35,9 @@ ViewAtt::ViewAtt(QWidget *parent, const char *name, WFlags f)
 	installButton->setWhatsThis(tr("Click here to install the attachment to your Documents"));
 	
 	listView = new QListView(this, "AttView");
-	listView->addColumn( "Attatchment" );
-	listView->addColumn( "Type" );
-	listView->addColumn( "Installed" );
+	listView->addColumn( tr("Attatchment") );
+	listView->addColumn( tr("Type") );
+	listView->addColumn( tr("Installed") );
 	setCentralWidget(listView);
 	QWhatsThis::add(listView,QWidget::tr("This is an overview about all attachments in the mail"));
 }
@@ -61,9 +61,9 @@ void ViewAtt::update(Email *mailIn, bool inbox)
 	mail = mailIn;
 	for ( ePtr=mail->files.first(); ePtr != 0; ePtr=mail->files.next() ) {
 		
-		QString isInstalled = "No";
+		QString isInstalled = tr("No");
 		if (ePtr->installed)
-			isInstalled = "Yes";
+			isInstalled = tr("Yes");
 		item = new QListViewItem(listView, ePtr->originalName, ePtr->contentType, isInstalled);
 		
 		const QString& mtypeDef=(const QString&) ePtr->contentType+"/"+ePtr->contentAttribute;
@@ -116,6 +116,6 @@ void ViewAtt::install()
 		d.setType(selPtr->contentType + "/" + selPtr->contentAttribute);
 		d.writeLink();
 		selPtr->installed = TRUE;
-		item->setText(2, "Yes");
+		item->setText(2, tr("Yes"));
 	}
 }

@@ -449,7 +449,7 @@ void QtRec::init() {
    layout1->addMultiCellWidget( timeLabel, 0, 0, 0, 3);
 
    playLabel2 = new QLabel(tab, "PlayLabel2" );
-   playLabel2->setText("Play");
+   playLabel2->setText(tr("Play") );
    playLabel2->setFixedHeight(18);
    layout1->addMultiCellWidget( playLabel2, 0, 0, 4, 4);
 
@@ -470,7 +470,7 @@ void QtRec::init() {
 
    QLabel *recLabel2;
    recLabel2 = new QLabel( tab, "recLabel2" );
-   recLabel2->setText("Rec");
+   recLabel2->setText(tr("Rec"));
    recLabel2->setFixedHeight(18);
    layout1->addMultiCellWidget( recLabel2, 0, 0, 7, 7);
 
@@ -500,9 +500,9 @@ void QtRec::init() {
    ListView1->setSorting( 1, false);
    ListView1->addColumn( tr( "Time" ) ); //in seconds
    ListView1->setColumnWidth(1,50);
-   ListView1->addColumn( "Location");
+   ListView1->addColumn( tr("Location") );
    ListView1->setColumnWidth(2,50);
-   ListView1->addColumn( "Date");
+   ListView1->addColumn( tr("Date") );
    ListView1->setColumnWidth(3,63);
 
    ListView1->setColumnWidthMode(0,QListView::Manual);
@@ -594,10 +594,10 @@ void QtRec::init() {
 
    Layout18->addWidget( bitGroup );
 
-   compressionCheckBox = new QCheckBox ( "Wave Compression (smaller files)", tab_3 );
+   compressionCheckBox = new QCheckBox ( tr("Wave Compression (smaller files)"), tab_3 );
    Layout18->addWidget( compressionCheckBox );
 
-   autoMuteCheckBox= new QCheckBox ( "auto Mute", tab_3 );
+   autoMuteCheckBox= new QCheckBox ( tr("auto Mute"), tab_3 );
    Layout18->addWidget( autoMuteCheckBox );
 
    Layout19->addLayout( Layout18 );
@@ -644,10 +644,10 @@ void QtRec::init() {
 
       Layout15b->addWidget( OutputSlider );
 
-      outMuteCheckBox = new QCheckBox ( "mute", tab_5 );
+      outMuteCheckBox = new QCheckBox ( tr("mute"), tab_5 );
       Layout15->addWidget( outMuteCheckBox );
 
-      inMuteCheckBox = new QCheckBox ( "mute", tab_5 );
+      inMuteCheckBox = new QCheckBox ( tr("mute"), tab_5 );
       inMuteCheckBox-> setFocusPolicy ( QWidget::NoFocus );
       Layout15b->addWidget( inMuteCheckBox );
 
@@ -691,10 +691,10 @@ void QtRec::init() {
 
       Layout15b->addWidget( OutputSlider );
 
-      outMuteCheckBox = new QCheckBox ( "mute", tab_3 );
+      outMuteCheckBox = new QCheckBox ( tr("mute"), tab_3 );
       Layout15->addWidget( outMuteCheckBox );
 
-      inMuteCheckBox = new QCheckBox ( "mute", tab_3 );
+      inMuteCheckBox = new QCheckBox ( tr("mute"), tab_3 );
       inMuteCheckBox-> setFocusPolicy ( QWidget::NoFocus );
       Layout15b->addWidget( inMuteCheckBox );
 
@@ -875,11 +875,11 @@ void QtRec::stop() {
 void QtRec::doPlayBtn() {
 
    if(!stopped) {
-      playLabel2->setText("Play");
+      playLabel2->setText(tr("Play"));
       stop();
    } else {
       if(ListView1->currentItem() == 0) return;
-      playLabel2->setText("Stop");
+      playLabel2->setText(tr("Stop"));
       currentFile = ListView1->currentItem()->text(0);
       start();
    }
@@ -910,7 +910,7 @@ bool QtRec::rec() { //record
    } else {
       qDebug("go ahead and record");
       secCount=1;
-      playLabel2->setText("Stop");
+      playLabel2->setText(tr("Stop"));
       monitoring=false;
       setRecordButton(true);
       stopped=false;
@@ -2159,7 +2159,7 @@ void QtRec::setRecordButton(bool b) {
       Stop_PushButton->setPixmap( image3 );
       if(Stop_PushButton->isDown())
          Stop_PushButton->setDown(true);
-      playLabel2->setText("Stop");
+      playLabel2->setText(tr("Stop") );
 
    } else { //about to stop
 
@@ -2167,7 +2167,7 @@ void QtRec::setRecordButton(bool b) {
       Stop_PushButton->setPixmap( image4);
       if(Stop_PushButton->isDown())
          Stop_PushButton->setDown(false);
-      playLabel2->setText("Play");
+      playLabel2->setText(tr("Play") );
       if(Rec_PushButton->isDown())
          Rec_PushButton->setDown( false);
    }
