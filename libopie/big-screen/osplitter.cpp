@@ -42,6 +42,9 @@
  * mark was crossed. OSplitter sets a default value.
  *
  * You cann add widget with addWidget to the OSplitter.
+ * OSplitter supports also grouping of Splitters where they
+ * can share one OTabBar in small screen mode. This can be used
+ * for email clients like vies but see the example.
  *
  * @param orient The orientation wether to layout horizontal or vertical
  * @param parent The parent of this widget
@@ -61,6 +64,7 @@ OSplitter::OSplitter( Orientation orient, QWidget* parent, const char* name, WFl
 
     /* start by default with the tab widget */
     m_tabWidget = 0;
+    m_parentTab = 0;
     changeTab();
 
 }
@@ -72,10 +76,51 @@ OSplitter::OSplitter( Orientation orient, QWidget* parent, const char* name, WFl
  * @see addWidget
  */
 OSplitter::~OSplitter() {
+    m_splitter.setAutoDelete( true );
+    m_splitter.clear();
+
     delete m_hbox;
     delete m_tabWidget;
 }
 
+
+/**
+ * Sets the label for the Splitter. This label will be used
+ * if a parent splitter is arranged as TabWidget but
+ * this splitter is in fullscreen mode. Then a tab with OSplitter::label()
+ * and iconName() gets added.
+ *
+ * @param name The name of the Label
+ */
+void OSplitter::setLabel( const QString& name ) {
+    m_name = name;
+}
+
+/**
+ * @see setLabel but this is for the icon retrieved by Resource
+ *
+ * @param name The name of the icon in example ( "zoom" )
+ */
+void OSplitter::setIconName( const QString& name ) {
+    m_icon = name;
+}
+
+
+/**
+ * returns the iconName
+ * @see setIconName
+ */
+QString OSplitter::iconName()const {
+    return m_icon;
+}
+
+/**
+ * returns the label set with setLabel
+ * @see setLabel
+ */
+QString OSplitter::label()const {
+    return m_name;
+}
 
 /**
  * This function sets the size change policy of the splitter.
@@ -95,6 +140,42 @@ void OSplitter::setSizeChange( int width_height ) {
     QSize sz(width(), height() );
     QResizeEvent ev(sz, sz );
     resizeEvent(&ev);
+}
+
+/**
+ * This functions allows to add another OSplitter and to share
+ * the OTabBar in small screen mode. The ownerships gets transfered.
+ * OSplitters are always added after normal widget items
+ */
+void OSplitter::addWidget( OSplitter* split ) {
+    m_splitter.append( split );
+
+    /*
+     * set tab widget
+     */
+    if (m_tabWidget )
+        split->setTabWidget( m_tabWidget );
+    else{
+        Opie::OSplitterContainer con;
+        con.widget =split;
+        addToBox( con );
+    }
+}
+
+/*
+ * If in a tab it should be removed
+ * and if in a hbox  the reparent kills it too
+ */
+/**
+ * This removes the splitter again. You currently need to call this
+ * before you delete or otherwise you can get mem corruption
+ * or other weird behaviour.
+ * Owner ship gets transfered back to you it's current parent
+ * is 0
+ */
+void OSplitter::removeWidget( OSplitter* split) {
+    split->setTabWidget( 0 );
+    split->reparent( 0, 0, QPoint(0, 0) );
 }
 
 /**
@@ -124,10 +205,17 @@ void OSplitter::addWidget( QWidget* wid, const QString& icon, const QString& lab
 
     m_container.append( cont );
 
-    if (m_hbox )
-        addToBox( cont );
-    else
-        addToTab( cont );
+    /*
+     *
+     */
+    if (!m_splitter.isEmpty() && (m_tabWidget || m_parentTab ) )
+        setTabWidget( m_parentTab );
+    else {
+        if (m_hbox )
+            addToBox( cont );
+        else
+            addToTab( cont );
+    }
 }
 
 
@@ -209,11 +297,13 @@ void OSplitter::setCurrentWidget( int tab ) {
  * return the currently activated widget if in tab widget mode
  * or null because all widgets are visible
  */
-QWidget* OSplitter::currentWidget() {
-    if ( m_hbox )
-        return 0l;
-    else
+QWidget* OSplitter::currentWidget() const{
+    if (m_tabWidget)
         return m_tabWidget->currentWidget();
+    else if (m_parentTab )
+        return m_parentTab->currentWidget();
+
+    return 0l;
 }
 
 #if 0
@@ -244,10 +334,12 @@ void OSplitter::resizeEvent( QResizeEvent* res ) {
      *
      */
 //    qWarning("Old size was width = %d height = %d", res->oldSize().width(), res->oldSize().height() );
+    bool mode = true;
     qWarning("New size is  width = %d height = %d", res->size().width(), res->size().height() );
     if ( res->size().width() > m_size_policy &&
          m_orient == Horizontal ) {
         changeHBox();
+        mode = false;
     }else if ( (res->size().width() <= m_size_policy &&
                m_orient == Horizontal ) ||
                (res->size().height() <= m_size_policy &&
@@ -256,26 +348,51 @@ void OSplitter::resizeEvent( QResizeEvent* res ) {
     }else if ( res->size().height() > m_size_policy &&
                m_size_policy == Vertical ) {
         changeVBox();
+        mode = false;
     }
+
+    emit sizeChanged(mode, m_orient );
 }
 
-
+/*
+ * Adds a container to a tab either the parent tab
+ * or our own
+ */
 void OSplitter::addToTab( const Opie::OSplitterContainer& con ) {
     QWidget *wid = con.widget;
 // not needed widgetstack will reparent as well    wid.reparent(m_tabWidget, wid->getWFlags(), QPoint(0, 0) );
-    m_tabWidget->addTab( wid, con.icon, con.name );
+    if (m_parentTab )
+        m_parentTab->addTab( wid, con.icon, con.name );
+    else
+        m_tabWidget->addTab( wid, con.icon, con.name );
 }
 
+
+/*
+ * adds a container to the box
+ */
 void OSplitter::addToBox( const Opie::OSplitterContainer& con ) {
     QWidget* wid = con.widget;
     wid->reparent(m_hbox, 0,  QPoint(0, 0) );
 }
 
+
+/*
+ * Removes a widget from the tab
+ */
 void OSplitter::removeFromTab( QWidget* wid ) {
-    m_tabWidget->removePage( wid );
+    if (m_parentTab )
+        m_parentTab->removePage( wid );
+    else
+        m_tabWidget->removePage( wid );
 }
 
+/*
+ * switches over to a OTabWidget layout
+ * it is recursive
+ */
 void OSplitter::changeTab() {
+    /* if we're the owner of the tab widget */
     if (m_tabWidget ) {
         m_tabWidget->setGeometry( frameRect() );
         return;
@@ -287,8 +404,14 @@ void OSplitter::changeTab() {
      * delete m_hbox set it to 0
      *
      */
-    m_tabWidget = new OTabWidget( this );
-    connect(m_tabWidget, SIGNAL(currentChanged(QWidget*) ),
+    OTabWidget *tab;
+    if ( m_parentTab ) {
+        tab = m_parentTab;
+        tab->removePage( this );
+    }else
+        tab = m_tabWidget = new OTabWidget( this );
+
+    connect(tab, SIGNAL(currentChanged(QWidget*) ),
             this, SIGNAL(currentChanged(QWidget*) ) );
 
     for ( ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it ) {
@@ -296,13 +419,24 @@ void OSplitter::changeTab() {
         addToTab( (*it) );
     }
 
+    for ( OSplitter* split = m_splitter.first(); split; split = m_splitter.next() )
+        split->setTabWidget( tab );
+
+
     delete m_hbox;
     m_hbox = 0;
+    if (!m_tabWidget )
+        return;
+
     m_tabWidget->setGeometry( frameRect() );
     m_tabWidget->show();
 
 }
 
+/*
+ * changes over to a box
+ * this is recursive as well
+ */
 void OSplitter::changeHBox() {
     if (m_hbox ) {
         m_hbox->setGeometry( frameRect() );
@@ -312,10 +446,6 @@ void OSplitter::changeHBox() {
     qWarning("new HBox");
     m_hbox = new QHBox( this );
     commonChangeBox();
-    delete m_tabWidget;
-    m_tabWidget = 0;
-    m_hbox->setGeometry( frameRect() );
-    m_hbox->show();
 }
 
 void OSplitter::changeVBox() {
@@ -328,18 +458,103 @@ void OSplitter::changeVBox() {
     m_hbox = new QVBox( this );
 
     commonChangeBox();
-    delete m_tabWidget;
-    m_tabWidget = 0;
-    m_hbox->setGeometry( frameRect() );
-    m_hbox->show();
+
 }
 
-
+/*
+ * common box code
+ * first remove and add children
+ * the other splitters
+ * it is recursive as well due the call to setTabWidget
+ */
 void OSplitter::commonChangeBox() {
+
     for (ContainerList::Iterator it = m_container.begin(); it != m_container.end(); ++it ) {
+        /* only if parent tab.. m_tabWidgets gets deleted and would do that as well */
+        if (m_parentTab )
+            removeFromTab( (*it).widget );
         qWarning("Adding to box %s", (*it).name.latin1() );
         addToBox( (*it) );
     }
-    delete m_tabWidget;
-    m_tabWidget = 0;
+    for ( OSplitter* split = m_splitter.first(); split; split = m_splitter.next() ) {
+        /* tell them the world had changed */
+        split->setTabWidget( 0 );
+        Opie::OSplitterContainer con;
+        con.widget = split;
+        addToBox( con );
+    }
+
+
+
+    if (m_parentTab )
+        m_parentTab->addTab(this, iconName(), label() );
+    else {
+        m_hbox->setGeometry( frameRect() );
+        m_hbox->show();
+        delete m_tabWidget;
+        m_tabWidget = 0;
+    }
+}
+
+/*
+ * sets the tabwidget, removes tabs, and relayouts the widget
+ */
+void OSplitter::setTabWidget( OTabWidget* wid) {
+    /* clean up cause m_parentTab will not be available for us */
+    if ( m_parentTab ) {
+        if (m_hbox )
+            m_parentTab->removePage( this );
+        else if (!m_container.isEmpty() ){
+            ContainerList::Iterator it = m_container.begin();
+            for ( ; it != m_container.end(); ++it )
+                m_parentTab->removePage( (*it).widget );
+        }
+    }
+    /* the parent Splitter changed so either make us indepent or dep */
+
+    m_parentTab = wid;
+
+    QWidget *tab =  m_tabWidget;
+    QWidget *box =  m_hbox;
+    m_hbox = 0; m_tabWidget = 0;
+
+    if ( layoutMode() )
+        changeTab();
+    else if (m_orient == Horizontal )
+        changeHBox();
+    else
+        changeVBox();
+
+    /* our own crap is added and children from change* */
+    delete tab;
+    delete box;
+}
+
+
+#if 0
+void OSplitter::reparentAll() {
+    if (m_container.isEmpty() )
+        return;
+
+    ContainerList::Iterator it = m_container.begin();
+    for ( ; it != m_container.end(); ++it )
+        (*it).wid->reparent(0, 0, QPoint(0, 0) );
+
+
+}
+#endif
+
+/**
+ *  @internal
+ */
+bool OSplitter::layoutMode()const {
+    if ( size().width() > m_size_policy &&
+         m_orient == Horizontal ) {
+        return false;
+    }else if ( size().height() > m_size_policy &&
+               m_size_policy == Vertical ) {
+        return false;
+    }
+
+    return true;
 }

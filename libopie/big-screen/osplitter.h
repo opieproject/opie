@@ -33,6 +33,7 @@
 
 #include <qframe.h>
 #include <qvaluelist.h>
+#include <qlist.h>
 
 #include "obigscreen_p.h"
 
@@ -67,15 +68,22 @@ public:
                const char* name = 0, WFlags fl = 0 );
     ~OSplitter();
 
+    void setLabel( const QString& name );
+    void setIconName( const QString& name );
+    QString label()const;
+    QString iconName()const;
+
     void setSizeChange( int width_height );
 
+    void addWidget( OSplitter* splitter );
     void addWidget( QWidget* wid, const QString& icon, const QString& label );
     void removeWidget( QWidget* );
+    void removeWidget( OSplitter* );
 
     void setCurrentWidget( QWidget* );
     void setCurrentWidget( const QString& label );
     void setCurrentWidget( int );
-    QWidget* currentWidget();
+    QWidget* currentWidget()const;
 
 signals:
     /**
@@ -83,6 +91,16 @@ signals:
      *
      */
     void currentChanged( QWidget* );
+
+    /**
+     * emitted whenever a border is crossed
+     * true if in small screen mode
+     * false if in bigscreen
+     * this signal is emitted after the layout switch
+     * @param b The layout mode
+     * @param ori The orientation
+     */
+    void sizeChanged( bool b, Orientation ori);
 public:
 //    QSize sizeHint()const;
 //    QSize minimumSizeHint()const;
@@ -91,6 +109,10 @@ protected:
     void resizeEvent( QResizeEvent* );
 
 private:
+    /* true if OTabMode */
+    bool layoutMode()const;
+//    void reparentAll();
+    void setTabWidget( OTabWidget*);
     void addToTab( const Opie::OSplitterContainer& );
     void addToBox( const Opie::OSplitterContainer& );
     void removeFromTab( QWidget* );
@@ -100,10 +122,14 @@ private:
     void commonChangeBox();
     QHBox *m_hbox;
     OTabWidget *m_tabWidget;
+    OTabWidget *m_parentTab;
     Orientation m_orient;
     int m_size_policy;
 
     ContainerList m_container;
+    QList<OSplitter> m_splitter;
+
+    QString m_icon, m_name;
 
     struct Private;
     Private *d;
