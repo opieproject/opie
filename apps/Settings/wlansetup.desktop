@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Wireless LAN Setup
+Exec=wlansetup
+Icon=wlansetup/wlan
+Type=Settings
+Name=Wireless LAN Setup
