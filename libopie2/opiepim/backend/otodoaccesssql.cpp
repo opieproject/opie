@@ -323,14 +323,16 @@ QArray<int> OTodoAccessBackendSQL::sorted( bool asc, int sortOrder,
      */
     /* Category */
     if ( sortFilter & 1 ) {
-        query += " categories like '%" +QString::number(cat)+"%' AND";
+        QString str;
+        if (cat != 0 ) str = QString::number( cat );
+        query += " categories like '%" +str+"%' AND";
     }
     /* Show only overdue */
     if ( sortFilter & 2 ) {
         QDate date = QDate::currentDate();
         QString due;
         QString base;
-        base = QString("DueDate <= '%1-%2-%3' AND WHERE completed = 0").arg( date.year() ).arg( date.month() ).arg( date.day() );
+        base = QString("DueDate <= '%1-%2-%3' AND completed = 0").arg( date.year() ).arg( date.month() ).arg( date.day() );
         query += " " + base + " AND";
     }
     /* not show completed */
@@ -443,6 +445,7 @@ QArray<int> OTodoAccessBackendSQL::uids( const OSQLResult& res) const{
     OSQLResultItem::ValueList list = res.results();
     OSQLResultItem::ValueList::Iterator it;
     QArray<int> ints(list.count() );
+    qWarning(" count = %d", list.count() );
 
     int i = 0;
     for (it = list.begin(); it != list.end(); ++it ) {
