@@ -194,20 +194,18 @@ void DateBookWeekView::positionItem( DateBookWeekItem *i )
     y += db_round30min( ev.start().minute() );
     int y2 = ev.end().hour() * 2;
     y2 += db_round30min( ev.end().minute() );
-    if ( y > 47 )
-	y = 47;
-    if ( y2 > 48 )
-        y2 = 48;
-    y = y * rowHeight / 2;
-    y2 = y2 * rowHeight / 2;
+    if ( y > 47 ) y = 47;
+    if ( y2 > 48 ) y2 = 48;
+    y = (y * rowHeight) / 2;
+    y2 = (y2 * rowHeight) / 2;
 
     int h;
     if ( ev.event().type() == Event::AllDay ) {
-	h = 48 * rowHeight / 2;
-	y = 0;
-    } else {
-	h=y2-y;
-	if ( h < 1 ) h = 1;
+		h = (48 * rowHeight) / 2;
+		y = 0;
+	} else {
+		h=y2-y;
+		if ( h < (1*rowHeight)/2 ) h = (1*rowHeight)/2;
     }
 
     int dow = ev.date().dayOfWeek();
