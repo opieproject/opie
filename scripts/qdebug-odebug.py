@@ -13,13 +13,15 @@ qDebugExpression = sre.compile( '(.*)(qDebug)\(\s*(.*)\s*\);(.*)' )
 qWarningExpression = sre.compile( '(.*)(qWarning)\(\s*(.*)\s*\);(.*)' )
 qErrorExpression = sre.compile( '(.*)(qError)\(\s*(.*)\s*\);(.*)' )
 qFatalExpression = sre.compile( '(.*)(qFatal)\(\s*(.*)\s*\);(.*)' )
+printfExpression = sre.compile( '(.*)(printf)\(\s*(.*)\s*\);(.*)' )
 
 debugTable = { "qDebug" : "odebug",
                "qWarning" : "owarn",
                "qError" : "oerr",
-               "qFatal" : "ofatal" }
+               "qFatal" : "ofatal",
+               "printf" : "odebug" }
 
-allExpressions = ( qDebugExpression, qWarningExpression, qErrorExpression, qFatalExpression )
+allExpressions = ( qDebugExpression, qWarningExpression, qErrorExpression, qFatalExpression, printfExpression )
 
 ####################################################################################################
 
@@ -36,16 +38,17 @@ def convert( fname ):
                 match = True
                 head, debug, content, tail = m.groups()
                 print >>sys.stderr, "<NOTE>: Groups = ", m.groups()
-                sys.stdout.write( head.strip() )
+                sys.stdout.write( head ) # don't strip() here, because we want to keep indentation
                 sys.stdout.write( debugTable[debug.strip()] )
                 sys.stdout.write( " << " )
                 sys.stdout.write( transform( content ).strip() )
                 sys.stdout.write( " << oendl; " )
-                sys.stdout.write( tail + "\n" )
+                sys.stdout.write( tail )
+                if not tail.endswith( "\n" ): sys.stdout.write( "\n" )
                 continue
         # nothing applies
         if not match:
-            sys.stdout.write( line + "\n" )
+            sys.stdout.write( line )
 
 ####################################################################################################
 
@@ -97,7 +100,7 @@ def transform( s ):
             if formatstring[i] == "%":
                 result += "%"
             else:
-                result += '" << %s << "' % substitutions[0]
+                result += '" << %s << "' % substitutions[0].replace( "(const char*)", "" ).replace( ".latin1()", "" )
                 del substitutions[0]
             indirective = False
             i += 1
