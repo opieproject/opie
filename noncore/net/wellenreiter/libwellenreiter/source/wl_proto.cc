@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.7 2003-01-05 11:18:27 mjm Exp $
+ * $Id: wl_proto.cc,v 1.8 2003-02-07 10:01:23 max Exp $
  */
 
 #include "wl_types.hh"
@@ -54,8 +54,7 @@ int send_network_found (const char *guihost, int guiport, void *structure)
 
   ptr = (wl_network_t *)structure;
 
-  memcpy(buffer, 0, sizeof(buffer));
-
+  memset(buffer,0,sizeof(buffer));
   /* Type = Found new net (without length field) */
   memset(temp, 0, sizeof(temp));
   snprintf(temp, sizeof(temp), "%.2d", WL_NETFOUND);
