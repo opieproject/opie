@@ -54,12 +54,9 @@ private:
 	QRect m_lastframe;
 	QRect m_thisframe;
 
-    int m_wid;
-    int m_height;
-    int m_yOff, m_xOff;
     uchar* m_buff;
-    int m_Width,  m_Height, linestep;
-    int m_bytes;
+    int m_bytes_per_line_fb;
+    int m_bytes_per_line_frame;
     int m_bytes_per_pixel;
     QImage* m_image;
 
