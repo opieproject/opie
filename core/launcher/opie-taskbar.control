@@ -1,5 +1,5 @@
 Package: opie-taskbar
-Files: bin/qpe apps/Settings/Calibrate.desktop pics/launcher pics/devicebuttons/*.png plugins/applets/libsuspendapplet.so* plugins/applets/libhomeapplet.so* plugins/applets/liblogoutapplet.so* plugins/applets/librotateapplet.so* root/etc/init.d/opie
+Files: bin/qpe apps/Settings/calibrate.desktop pics/launcher pics/devicebuttons/*.png plugins/applets/libsuspendapplet.so* plugins/applets/libhomeapplet.so* plugins/applets/liblogoutapplet.so* plugins/applets/librotateapplet.so* root/etc/init.d/opie
 Priority: required
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
