@@ -21,9 +21,8 @@
   * Roman Razilov 2000-05-21 qimgio
 */
 
-
-
-#include <opie/oapplicationfactory.h>
 #include "klines.h"
+
+#include <opie2/oapplicationfactory.h>
 
 OPIE_EXPORT_APP( OApplicationFactory<KLines> )
