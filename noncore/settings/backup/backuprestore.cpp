@@ -34,6 +34,7 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 #include <opie2/odebug.h>
+#include <opie2/odevice.h>
 #include <opie2/ostorageinfo.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/owait.h>
@@ -279,7 +280,91 @@ void BackupAndRestore::backup()
 
 void BackupAndRestore::backupRootFs()
 {
-    QMessageBox::critical(this, "Message", "Not Yet Implemented", "Ok" );
+//#define MDEBUG
+#ifndef MDEBUG
+    QMessageBox::critical( this, "Opie-Backup", "<qt>This feature is not yet implemented.</qt>", "Bummer!" );
+    return;
+#endif
+    // call 'mount' and parse its output to gather the device on which the root partition is mounted
+    FILE* mountp = popen( "mount", "r" );
+    QString device;
+    QString mountpoint;
+    {
+        QTextStream mounto( mountp, IO_ReadOnly );
+        QString on;
+        QString type;
+        QString filesystem;
+        QString options;
+        while ( !mounto.atEnd() )
+        {
+            mounto >> device >> on >> mountpoint >> type >> filesystem >> options;
+            if ( mountpoint == "/" ) break;
+        }
+        odebug << device << " is formatted w/ " << filesystem << " and mounted on " << mountpoint << oendl;
+
+        if ( !mountpoint.startsWith( "/dev/mtdblock" ) )
+        {
+            QMessageBox::critical( this, "Can't backup!", QString( "<qt>unsupported rootfs %1 - needs to be /dev/mtdblockN</qt>").arg( device ), "Ok" );
+#ifndef MDEBUG
+            return;
+#endif
+        }
+    } // at this point, the QTextStream has been destroy and we can close the FILE*
+    pclose( mountp );
+
+#ifndef MDEBUG
+    int rootmtd = device.right( 1 ).toInt();
+#else
+    int rootmtd = 0;
+#endif
+    odebug << "root mtdblock seems to be '" << rootmtd << "'" << oendl;
+
+    // scan /proc/mtd to gather the size and erasesize of the root mtdblock
+    QFile procmtdf( "/proc/mtd" );
+    if ( !procmtdf.open( IO_ReadOnly ) )
+    {
+        QMessageBox::critical( this, "Can't backup!", "<qt>Can't open /proc/mtd</qt>", "Ok" );
+    }
+
+    QTextStream procmtd( &procmtdf );
+    for ( int i = 0; i <= rootmtd; ++i ) procmtd.readLine(); // skip uninteresting things
+    QString dev;
+    QString size;
+    QString erasesize;
+    QString devname;
+    procmtd >> dev >> size >> erasesize >> devname;
+
+    odebug << "device " << dev << " size = " << size << ", erase size = " << erasesize << ", name = " << devname << "\"" << oendl;
+
+    // compute pad
+    QString pad = "--pad";
+    switch ( ODevice::inst()->model() )
+    {
+        case Model_Zaurus_SL5000: pad = "--pad=14680064"; break;
+        case Model_Zaurus_SL5500: pad = "--pad=14680064"; break;
+        // FIXME: Add Beagle and SIMpad
+    }
+
+    // compute eraseblock
+    QString eraseblock = "--eraseblock=0x" + erasesize;
+
+    // compute output
+    QString outputFile = "--output=" + backupLocations[storeToLocation->currentText()];
+    QDateTime datetime = QDateTime::currentDateTime();
+    QString dateString = QString::number( datetime.date().year() ) + QString::number( datetime.date().month() ).rightJustify(2, '0') +
+                         QString::number( datetime.date().day() ).rightJustify(2, '0');
+    outputFile += "/initrd.bin-" + dateString;
+
+    // call mkfs.jffs2 to create the backup
+    QString cmdline = QString( "mkfs.jffs2 --root=/ %1 --little-endian %2 %3 -n" ).arg( outputFile ).arg( pad ).arg( eraseblock );
+    owarn << "Calling '" << cmdline << "'" << oendl;
+
+#ifndef MDEBUG
+    ::system( cmdline );
+#endif
+
+    // FIXME: Add image postprocessing for C7x0 and C8x0, for Beagle, for SIMpad
+
 }
 
 void BackupAndRestore::backupUserData()
