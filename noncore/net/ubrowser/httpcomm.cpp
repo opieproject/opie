@@ -155,6 +155,7 @@ void HttpComm::incoming()
 					{
 						processBody();
 						done=true;
+						return;
 					}
 					//still more, but it hasnt been recieved yet
 					if(ba <= j)
@@ -194,7 +195,7 @@ void HttpComm::incoming()
 					else
 					{
 						body+=tempQString;
-						bRead+=ba;
+						bRead+=tempQString.length();
 						printf("HttpComm::incoming: start new body piece 2: \n");
 						printf("%s", tempQString.latin1() );
 						printf("HttpComm::incoming: end new body piece 2.\n");
@@ -224,7 +225,7 @@ void HttpComm::incoming()
 					else
 					{
 						body+=tempQString;
-						bRead+=ba;
+						bRead+=tempQString.length();
 						printf("HttpComm::incoming: start new body piece 4: \n");
 						printf("%s", tempQString.latin1() );
 						printf("HttpComm::incoming: end new body piece 4.\n");
@@ -279,6 +280,7 @@ void HttpComm::parseHeader()
 
 void HttpComm::processBody()
 {
+	printf("HttpComm::processBody: processing body\n");
 //	printf("HttpComm::processBody: start body\n\n");
 //	printf("%s", body.latin1());
 //	printf("HttpComm::processBody: end body\n");
@@ -286,10 +288,11 @@ void HttpComm::processBody()
 	int lastSlash = file.findRev('/');
 	
 	QString end = file;
-	end.truncate(lastSlash-1);
+	end.truncate(lastSlash+1);
 	QString context("http://"+host+':'+portS+end);
+	printf("HttpComm::processBody: context: %s\n", context.latin1() );
 
 	browser->setTextFormat(RichText);
+	browser->mimeSourceFactory()->setFilePath(context);
 	browser->setText(body, context);
-	printf("%s\n", context.latin1() );
 }
