@@ -203,8 +203,8 @@ OEthernetPacket::OEthernetPacket( const unsigned char* end, const struct ether_h
                 :QObject( parent, "Ethernet" ), _ether( data )
 {
 
-    odebug << "Source = " << sourceAddress().toString();
-    odebug << "Destination = " << destinationAddress().toString();
+    odebug << "Source = " << sourceAddress().toString() << oendl;
+    odebug << "Destination = " << destinationAddress().toString() << oendl;
 
     if ( sourceAddress() == OMacAddress::broadcast )
         odebug << "Source is broadcast address" << oendl;
