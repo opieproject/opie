@@ -736,11 +736,10 @@ void PhaseStyle::drawComboButton( QPainter * p, int x, int y,
     drawButton(p, x, y, w, h, g,
                sunken, &g.brush(QColorGroup::Button ));
 
+    for ( int n = 0; n < 2; ++n )
+        kColorBitmaps(p, g, w-16+(6*n), y+(h/2)-2,
+                      0, &doodad_mid, &doodad_light, 0, 0, 0 );
 
-    bool odd = (h % 2);
-    drawPanel(p, w-15 , y+(h/2)-3,  10, (odd ? 7 : 6 ),
-              g, true , 1, sunken ? &g.brush(QColorGroup::Midlight)
-              : &g.brush(QColorGroup::Mid) );
 
     if (editable ) {
         const int x2 = x+w-1; const int y2 = y+h-1;
