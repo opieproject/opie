@@ -150,6 +150,7 @@ void HttpComm::incoming()
 					sclength.truncate(j);
 					clength = sclength.toUInt(0, 16);
 					printf("HttpComm::Incoming: chunk length: %d\n", clength);
+					printf("HttpComm::Incoming: chunk length string: %s\n", sclength.latin1());
 					//end of data
 					if(clength==0)
 					{
@@ -160,7 +161,7 @@ void HttpComm::incoming()
 					//still more, but it hasnt been recieved yet
 					if(ba <= j)
 					{
-						status=1;
+						status=2;
 						done=true;
 						break;
 					}
@@ -187,15 +188,24 @@ void HttpComm::incoming()
 						printf("%s", newTQstring.latin1() );
 						printf("HttpComm::incoming: end new body piece 1.\n");
 						status=0;
-						j=clength-bRead;
+						tempQString = tempQString.remove(0, clength);
 						done=false;
 //						break;
 					}
 					//the chunk extends beyond the current data;
 					else
 					{
-						body+=tempQString;
-						bRead+=tempQString.length();
+						if(tempQString.length() <= ba)
+						{
+							body+=tempQString;
+							bRead+=tempQString.length();
+						}
+						else
+						{
+							tempQString.truncate(ba);
+							body+=tempQString;
+							bRead+=tempQString.length();
+						}
 						printf("HttpComm::incoming: start new body piece 2: \n");
 						printf("%s", tempQString.latin1() );
 						printf("HttpComm::incoming: end new body piece 2.\n");
@@ -217,15 +227,24 @@ void HttpComm::incoming()
 						printf("%s", newTQstring.latin1() );
 						printf("HttpComm::incoming: end new body piece 3.\n");
 						status=0;
-						j=clength-bRead;
+						tempQString = tempQString.remove(0, clength);
 						done=false;
 //						break;
 					}
 					//the chunk extends beyond the current data;
 					else
 					{
-						body+=tempQString;
-						bRead+=tempQString.length();
+						if(tempQString.length() <= ba)
+						{
+							body+=tempQString;
+							bRead+=tempQString.length();
+						}
+						else
+						{
+							tempQString.truncate(ba);
+							body+=tempQString;
+							bRead+=tempQString.length();
+						}
 						printf("HttpComm::incoming: start new body piece 4: \n");
 						printf("%s", tempQString.latin1() );
 						printf("HttpComm::incoming: end new body piece 4.\n");
