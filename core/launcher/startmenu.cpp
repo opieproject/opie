@@ -81,9 +81,9 @@ void StartMenu::loadOptions()
 #else
     // Basically just #include the .qpe_menu.conf file settings
     useWidePopupMenu = FALSE;
-    popupMenuSidePixmap = "sidebar";
+    popupMenuSidePixmap = "go";
     startButtonIsFlat = TRUE;
-    startButtonPixmap = "go";
+    startButtonPixmap = "start_button";
 #endif
 }
 
