@@ -21,6 +21,7 @@
 #include <qvbox.h>
 #include <qwhatsthis.h>
 
+using namespace Opie::Ui;
 TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp ) {
 

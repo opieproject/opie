@@ -38,7 +38,7 @@ public:
     TodayConfig( QWidget* parent = 0, const char* name = 0, bool modal = FALSE );
     ~TodayConfig();
 
-    OTabWidget* TabWidget3;
+    Opie::Ui::OTabWidget* TabWidget3;
 
     void writeConfig();
     void pluginManagement( QString libName, QString name, QPixmap icon );

@@ -30,6 +30,7 @@
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
+using namespace Opie::Ui;
 class ToolButton : public QToolButton {
 
 public:

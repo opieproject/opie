@@ -28,6 +28,7 @@
 #include <qtimer.h>
 #include <qwhatsthis.h>
 
+using namespace Opie::Ui;
 struct TodayPlugin {
     TodayPlugin() : library( 0 ), iface( 0 ), guiPart( 0 ), guiBox( 0 ) {}
     QLibrary *library;

@@ -28,7 +28,6 @@
 #include <qscrollview.h>
 #include <qvbox.h>
 
-using namespace Opie; 
  
 class QVBoxLayout;
 

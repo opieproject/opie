@@ -1,4 +1,4 @@
   config TODAY
     boolean "opie-today (today gives an overview of appointments and todos)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIEUI2 && LIBOPIEPIM2

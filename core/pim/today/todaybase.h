@@ -29,7 +29,6 @@ class QPushButton;
 class QBoxLayout;
 
 
-using namespace Opie;
 
 
 class TodayBase : public QWidget
@@ -43,13 +42,13 @@ public:
     QFrame* Frame4;
     QPushButton* DatesButton;
     QVBoxLayout* layout;
-    Opie::OClickableLabel* OwnerField;
+    Opie::Ui::OClickableLabel* OwnerField;
     QLabel* Frame;
     QLabel* DateLabel;
     QFrame* Frame15;
     QLabel* Opiezilla;
     QLabel* TodayLabel;
-    OClickableLabel* ConfigButton;
+    Opie::Ui::OClickableLabel* ConfigButton;
 
 };
 
