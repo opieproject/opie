@@ -1136,7 +1136,11 @@ void ConnectWidget::if_waiting_slot() {
   messg->setText("");
 
   _ifaceppp->setStatus( true );
-  _ifaceppp->refresh();
+
+  m_refreshTimer = new QTimer( this );
+  connect( m_refreshTimer, SIGNAL( timeout() ), this, SLOT( refresh() ) );
+  m_refreshTimer->start( 3000 );
+  //_ifaceppp->refresh();
   //  emit _ifaceppp->updateInterface(_ifaceppp);
 
   // prepare the con_win so as to have the right size for
@@ -1160,6 +1164,10 @@ void ConnectWidget::if_waiting_slot() {
 //  }
 
   _ifaceppp->modem()->closetty();
+}
+
+void ConnectWidget::refresh()  {
+    _ifaceppp->refresh();
 }
 
 

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: connect.h,v 1.2.2.1 2003-07-15 15:29:08 tille Exp $
+ * $Id: connect.h,v 1.2.2.2 2003-07-26 22:29:48 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -62,6 +62,7 @@ private slots:
   void readChar(unsigned char);
   void pause();
   void if_waiting_slot();
+  void refresh();
 
 public slots:
   void init();
@@ -127,6 +128,7 @@ private:
   QTimer *pausetimer;
   QTimer *if_timer;
   QTimer *if_timeout_timer;
+  QTimer *m_refreshTimer;
 
   QLabel *messg;
   QPushButton *cancel;
