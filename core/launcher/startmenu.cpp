@@ -247,8 +247,13 @@ void StartMenu::launch()
 
     if ( launchMenu->isVisible() ) 
         launchMenu->hide();
-    else
+    else {
+        QWidget *active = qApp->activeWindow();
+        if ( active && active->isPopup() )
+            active->close();
+            
         launchMenu->popup( QPoint( 1, y ) );
+    }
 }
 
 const AppLnk* StartMenu::execToLink(const QString& appname)
