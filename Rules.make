@@ -117,7 +117,9 @@ $(TOPDIR)/scripts/subst : FORCE
 $(TOPDIR)/scripts/filesubst : FORCE
 	@( \
 		echo 's,\$$OPIEDIR,$(prefix),g'; \
+		echo 's,$(OPIEDIR),$(prefix),g'; \
 		echo 's,\$$QTDIR,$(prefix),g'; \
+		echo 's,$(QTDIR),$(prefix),g'; \
 		echo 's,^root/,/,g'; \
 		echo 's,^etc/,/etc/,g'; \
 		echo 's,^lib/,$(prefix)/lib/,g'; \
