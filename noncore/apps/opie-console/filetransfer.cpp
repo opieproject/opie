@@ -57,8 +57,21 @@ void FileTransfer::sendFile( const QString& file ) {
         char* binray = "-b";
 
 
+        char* typus;
+        switch(m_type ) {
+        case SZ:
+            typus = "";
+            break;
+        case SX:
+            typus = "-X";
+            break;
+        case SY:
+            typus = "--ymodem";
+            break;
+        }
+
         /* we should never return from here */
-        execlp("sz", "sz", verbose, binray, file.latin1(), NULL );
+        execlp("sz", "sz", verbose,  binray, file.latin1(), typus, NULL );
 
         /* communication for error!*/
         char resultByte =1;
