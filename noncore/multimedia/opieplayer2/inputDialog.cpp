@@ -11,13 +11,13 @@
 #include <qwhatsthis.h>
 
 InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl )
-{
-    if ( !name )
-  setName( "InputDialog" );
+    : QDialog( parent, name, modal, fl ) {
+    if ( !name ) {
+        setName( "InputDialog" );
+    }
     resize( 234, 115);
     setMaximumSize( QSize( 240, 40));
-    setCaption( tr(name ) );
+    setCaption( tr( name ) );
 
     QPushButton *browserButton;
     browserButton = new QPushButton( Resource::loadIconSet("fileopen"),"",this,"BrowseButton");
@@ -30,10 +30,8 @@ InputDialog::InputDialog( QWidget* parent,  const char* name, bool modal, WFlags
 /*
  *  Destroys the object and frees any allocated resources
  */
-InputDialog::~InputDialog()
-{
+InputDialog::~InputDialog() {
     inputText= LineEdit1->text();
-
 }
 
 void InputDialog::browse() {

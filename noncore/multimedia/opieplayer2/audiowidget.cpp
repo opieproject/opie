@@ -55,15 +55,11 @@ void Ticker::drawContents( QPainter *p ) {
 }
 
 
-
-
 struct MediaButton {
     int  xPos, yPos;
     int  color;
     bool isToggle, isBig, isHeld, isDown;
 };
-
-
 
 
 // Layout information for the audioButtons (and if it is a toggle button or not)
@@ -83,8 +79,7 @@ static const int numButtons = (sizeof(audioButtons)/sizeof(MediaButton));
 
 
 AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
-    QWidget( parent, name, f )
-{
+    QWidget( parent, name, f ) {
     setCaption( tr("OpiePlayer - Audio") );
     Config cfg("OpiePlayer");
     cfg.setGroup("AudioWidget");
@@ -127,9 +122,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name, WFlags f) :
     setLooping( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-
 }
-
 
 AudioWidget::~AudioWidget() {
     mediaPlayerState->isStreaming = FALSE;
@@ -155,7 +148,6 @@ void AudioWidget::sliderReleased() {
     long val = long((double)slider->value() * mediaPlayerState->length() / slider->width());
     mediaPlayerState->setPosition( val );
 }
-
 
 void AudioWidget::setPosition( long i ) {
     //    qDebug("set position %d",i);

@@ -17,7 +17,7 @@
 
 
 MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
-        : QObject( parent, name ), decoder( NULL ) {
+        : QObject( parent, name ) {
     Config cfg( "OpiePlayer" );
     readConfig( cfg );
 }
@@ -55,16 +55,191 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 }
 
 
-struct MediaPlayerPlugin {
-#ifndef QT_NO_COMPONENT
-    QLibrary *library;
-#endif
-    MediaPlayerPluginInterface *iface;
-    MediaPlayerDecoder *decoder;
-    MediaPlayerEncoder *encoder;
-};
 
 
-static QValueList<MediaPlayerPlugin> pluginList;
+// public stuff
+bool MediaPlayerState::fullscreen() {
+    return isFullscreen;
+}
+
+bool MediaPlayerState::scaled() {
+    return isScaled;
+}
+
+bool MediaPlayerState::looping() {
+    return isLooping;
+}
+
+bool MediaPlayerState::shuffled() {
+    return isShuffled;
+}
+
+
+bool MediaPlayerState:: playlist() {
+    return usePlaylist;
+}
+
+bool MediaPlayerState::paused() {
+    return isPaused;
+}
+
+bool MediaPlayerState::playing() {
+    return isPlaying;
+}
+
+long MediaPlayerState::position() {
+    return curPosition;
+}
+
+long MediaPlayerState::length() {
+    return curLength;
+}
+
+char MediaPlayerState::view() {
+    return curView;
+}
+
+// slots
+void MediaPlayerState::setFullscreen( bool b ) {
+    if ( isFullscreen == b ) {
+        return;
+    }
+    isFullscreen = b;
+    emit fullscreenToggled(b);
+}
+
+
+void MediaPlayerState::setScaled( bool b ) {
+    if ( isScaled == b ) {
+        return;
+    }
+    isScaled = b;
+    emit scaledToggled(b);
+}
+
+void MediaPlayerState::setLooping( bool b ) {
+    if ( isLooping    == b ) {
+        return;
+    }
+    isLooping = b;
+    emit loopingToggled(b);
+}
+
+void MediaPlayerState::setShuffled( bool b ) {
+    if ( isShuffled   == b ) {
+        return;
+    }
+    isShuffled = b;
+    emit shuffledToggled(b);
+}
+
+void MediaPlayerState::setPlaylist( bool b ) {
+    if ( usePlaylist  == b ) {
+        return;
+    }
+    usePlaylist = b;
+    emit playlistToggled(b);
+}
+
+void MediaPlayerState::setPaused( bool b ) {
+    if ( isPaused  == b ) {
+        return;
+    }
+    isPaused = b;
+    emit pausedToggled(b);
+}
+
+void MediaPlayerState::setPlaying( bool b ) {
+    if ( isPlaying  == b ) {
+        return;
+    }
+    isPlaying = b;
+    emit playingToggled(b);
+}
+
+void MediaPlayerState::setPosition( long p ) {
+    if ( curPosition == p ) {
+        return;
+    }
+    curPosition = p;
+    emit positionChanged(p);
+}
+
+void MediaPlayerState::updatePosition( long p ){
+    if ( curPosition  == p ) {
+        return;
+    }
+    curPosition = p;
+    emit positionUpdated(p);
+}
+
+void MediaPlayerState::setLength( long l ) {
+    if ( curLength  == l ) {
+        return;
+    }
+    curLength = l;
+    emit lengthChanged(l);
+}
+
+void MediaPlayerState::setView( char v ) {
+    if ( curView  == v ) {
+        return;
+    }
+    curView = v;
+    emit viewChanged(v);
+}
+
+void MediaPlayerState::setPrev(){
+    emit prev();
+}
+
+void MediaPlayerState::setNext() {
+    emit next();
+}
+
+void MediaPlayerState::setList() {
+    setPlaying( FALSE );
+    setView('l');
+}
+
+void MediaPlayerState::setVideo() {
+    setView('v');
+}
+
+void MediaPlayerState::setAudio() {
+    setView('a');
+}
+
+
+
+void MediaPlayerState::toggleFullscreen() {
+    setFullscreen( !isFullscreen );
+}
+
+void MediaPlayerState::toggleScaled() {
+    setScaled( !isScaled);
+}
+
+void MediaPlayerState::toggleLooping() {
+    setLooping( !isLooping);
+}
+
+void MediaPlayerState::toggleShuffled() {
+    setShuffled( !isShuffled);
+}
+
+void MediaPlayerState::togglePlaylist() {
+    setPlaylist( !usePlaylist);
+}
+
+void MediaPlayerState::togglePaused() {
+    setPaused( !isPaused);
+}
+
+void MediaPlayerState::togglePlaying() {
+    setPlaying( !isPlaying);
+}
+
+
 
 

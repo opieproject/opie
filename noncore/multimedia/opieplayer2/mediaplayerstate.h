@@ -17,46 +17,43 @@ public:
     ~MediaPlayerState();
 
     bool isStreaming;
-    bool fullscreen()    { return isFullscreen; }
-    bool scaled()    { return isScaled; }
-    bool looping()     { return isLooping; }
-    bool shuffled()    { return isShuffled; }
-    bool playlist()    { return usePlaylist; }
-    bool paused()    { return isPaused; }
-    bool playing()     { return isPlaying; }
-    long position()    { return curPosition; }
-    long length()    { return curLength; }
-    char view()      { return curView; }
-
-    MediaPlayerDecoder *newDecoder( const QString& file );
-    MediaPlayerDecoder *curDecoder();
+    bool fullscreen();
+    bool scaled();
+    bool looping();
+    bool shuffled();
+    bool playlist();
+    bool paused();
+    bool playing();
+    long position();
+    long length();
+    char view();
 
 public slots:
-    void setFullscreen( bool b ) { if ( isFullscreen == b ) return; isFullscreen = b; emit fullscreenToggled(b); }
-    void setScaled( bool b )     { if ( isScaled     == b ) return; isScaled = b;     emit scaledToggled(b); }
-    void setLooping( bool b )    { if ( isLooping    == b ) return; isLooping = b;    emit loopingToggled(b); }
-    void setShuffled( bool b )   { if ( isShuffled   == b ) return; isShuffled = b;   emit shuffledToggled(b); }
-    void setPlaylist( bool b )   { if ( usePlaylist  == b ) return; usePlaylist = b;  emit playlistToggled(b); }
-    void setPaused( bool b )   { if ( isPaused     == b ) return; isPaused = b;     emit pausedToggled(b); }
-    void setPlaying( bool b )  { if ( isPlaying    == b ) return; isPlaying = b;    emit playingToggled(b); }
-    void setPosition( long p )   { if ( curPosition  == p ) return; curPosition = p;  emit positionChanged(p); }
-    void updatePosition( long p ){ if ( curPosition  == p ) return; curPosition = p;  emit positionUpdated(p); }
-    void setLength( long l )   { if ( curLength    == l ) return; curLength = l;    emit lengthChanged(l); }
-    void setView( char v )   { if ( curView      == v ) return; curView = v;      emit viewChanged(v); }
+    void setFullscreen( bool b );
+    void setScaled( bool b );
+    void setLooping( bool b );
+    void setShuffled( bool b );
+    void setPlaylist( bool b );
+    void setPaused( bool b );
+    void setPlaying( bool b );
+    void setPosition( long p );
+    void updatePosition( long p );
+    void setLength( long l );
+    void setView( char v );
 
-    void setPrev()     { emit prev(); }
-    void setNext()     { emit next(); }
-    void setList()     { setPlaying( FALSE ); setView('l'); }
-    void setVideo()    { setView('v'); }
-    void setAudio()    { setView('a'); }
+    void setPrev() ;
+    void setNext();
+    void setList();
+    void setVideo();
+    void setAudio();
 
-    void toggleFullscreen()  { setFullscreen( !isFullscreen ); }
-    void toggleScaled()    { setScaled( !isScaled); }
-    void toggleLooping()   { setLooping( !isLooping); }
-    void toggleShuffled()  { setShuffled( !isShuffled); }
-    void togglePlaylist()  { setPlaylist( !usePlaylist); }
-    void togglePaused()    { setPaused( !isPaused); }
-    void togglePlaying()   { setPlaying( !isPlaying); }
+    void toggleFullscreen();
+    void toggleScaled();
+    void toggleLooping();
+    void toggleShuffled();
+    void togglePlaylist();
+    void togglePaused();
+    void togglePlaying();
 
 signals:
     void fullscreenToggled( bool );
@@ -85,8 +82,6 @@ private:
     long curPosition;
     long curLength;
     char curView;
-
-    MediaPlayerDecoder *decoder;
 
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;
