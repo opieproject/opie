@@ -12,6 +12,7 @@
 
 #if QT_VERSION > 233
 
+#ifndef OPIE_NO_ERASE_RECT_HACKFIX
 struct color_fix_t {
 	char *m_app;
 	char *m_class;
@@ -20,7 +21,7 @@ struct color_fix_t {
 	QColorGroup::ColorRole m_get;
 };
 
-#ifndef OPIE_NO_OVERRIDE_QT
+
 
 static const color_fix_t apps_that_need_special_colors [] = {
 	{ "HancomMobileWord", "HTextEdit", 0, QColorGroup::Background, QColorGroup::Base },
@@ -28,6 +29,10 @@ static const color_fix_t apps_that_need_special_colors [] = {
 
 	{ 0, 0, 0, QColorGroup::Base, QColorGroup::Base }
 };
+
+#endif
+
+#ifndef OPIE_NO_OVERRIDE_QT
 
 static const char * const apps_that_need_pointsizes_times_10 [] = {
 	"HancomMobileWord",
@@ -89,6 +94,7 @@ extern void __gmon_start__ ( )
 }
 
 
+#ifndef OPIE_NO_ERASE_RECT_HACKFIX
 // Fix for apps, that use QPainter::eraseRect() which doesn't work with styles
 // that set a background pixmap (it would be easier to fix eraseRect(), but
 // TT made it an inline ...)
@@ -110,6 +116,7 @@ void QPEApplication::polish ( QWidget *w )
 #endif
 	QApplication::polish ( w );
 }
+#endif
 
 
 #ifndef OPIE_NO_OVERRIDE_QT

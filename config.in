@@ -106,6 +106,10 @@ config OPIE_NO_OVERRIDE_QT
   boolean "Build Opie against an unpatched version of Qt"
   default n
 
+config OPIE_NO_ERASERECT_FIX
+  boolean "Disable Fixup eraseRect for HancomMobileWord,neocal.. to make libopiecore work on Sharps libqpe"
+  default n
+
 config OPIE_NO_BUILTIN_SHUTDOWN
   boolean "Disable the built in shutdown application"
   default y

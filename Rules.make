@@ -48,6 +48,9 @@ endif
 ifeq ($(CONFIG_OPIE_NO_OVERRIDE_QT),y)
 	echo CONFIG += no-override >> $@
 endif
+ifeq ($(CONFIG_OPIE_NO_ERASERECT_FIX),y)
+	echo DEFINES += OPIE_NO_ERASE_RECT_HACKFIX >> $@
+endif
 ifeq ($(CONFIG_OPIE_NO_BUILTIN_SHUTDOWN),y)
 	echo DEFINES += OPIE_NO_BUILTIN_SHUTDOWN >> $@
 endif
