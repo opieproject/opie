@@ -277,7 +277,6 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
     return true;
 }
 
-
 //--------------------------------------------------------------------------
 // Discard read data.
 //--------------------------------------------------------------------------
@@ -1009,12 +1008,11 @@ static QImage rotate_270( const QImage& img ) {
         return rotate_270_8( img );
 }
 
-
-static QString color_mode_to_string( bool b ) {
+QString ExifData::color_mode_to_string( bool b ) {
     return b ? QObject::tr( "Colormode: Color\n" ) : QObject::tr( "Colormode: Black and white\n" );
 }
 
-static QString compression_to_string( int level ) {
+QString ExifData::compression_to_string( int level ) {
     QString str;
     switch( level ) {
     case 1:
@@ -1033,49 +1031,7 @@ static QString compression_to_string( int level ) {
     return QObject::tr("Quality: %1\n").arg(str);
 }
 
-
-static QDateTime parseDateTime( const QString& string )
-{
-    QDateTime dt;
-    if ( string.length() != 19 )
-        return dt;
-
-    QString year    = string.left( 4 );
-    QString month   = string.mid( 5, 2 );
-    QString day     = string.mid( 8, 2 );
-    QString hour    = string.mid( 11, 2 );
-    QString minute  = string.mid( 14, 2 );
-    QString seconds = string.mid( 18, 2 );
-
-    bool ok;
-    bool allOk = true;
-    int y  = year.toInt( &ok );
-    allOk &= ok;
-
-    int mo = month.toInt( &ok );
-    allOk &= ok;
-
-    int d  = day.toInt( &ok );
-    allOk &= ok;
-
-    int h  = hour.toInt( &ok );
-    allOk &= ok;
-
-    int mi = minute.toInt( &ok );
-    allOk &= ok;
-
-    int s  = seconds.toInt( &ok );
-    allOk &= ok;
-
-    if ( allOk ) {
-        dt.setDate( QDate( y, mo, d ) );
-        dt.setTime( QTime( h, mi, s ) );
-    }
-
-    return dt;
-}
-
-static QString white_balance_string( int i ) {
+QString ExifData::white_balance_string( int i ) {
     QString balance;
     switch ( i ) {
     case 0:
@@ -1119,7 +1075,7 @@ static QString white_balance_string( int i ) {
 }
 
 
-static QString metering_mode( int i) {
+QString ExifData::metering_mode( int i) {
     QString meter;
     switch( i ) {
     case 0:
@@ -1154,7 +1110,7 @@ static QString metering_mode( int i) {
 }
 
 
-static QString exposure_program( int i ) {
+QString ExifData::exposure_program( int i ) {
     QString exp;
     switch( i ) {
     case 0:

@@ -132,6 +132,13 @@ public:
     QImage getThumbnail();
     bool isThumbnailSane();
     bool isNullThumbnail() { return !isThumbnailSane(); }
+
+    // some helpers
+    static QString color_mode_to_string( bool b );
+    static QString compression_to_string( int level );
+    static QString white_balance_string( int i );
+    static QString metering_mode( int i);
+    static QString exposure_program( int i );
 };
 
 }
