@@ -102,6 +102,9 @@ static int WAVsoundDuration(const QString& filename)
 }
 
 class SoundData : public QSound {
+    Q_OBJECT
+signals:
+    void stopped();
 public:
 	SoundData ( const QString& name ) :
 		QSound ( Resource::findSound ( name )),
@@ -133,10 +136,19 @@ public:
 		play();
 	}
 
-	bool isFinished ( ) const
+    bool isFinished ( ) const
 	{
-		return ( loopsleft == 0 );
+            return ( loopsleft == 0 );
 	}
+
+    /*
+     * non virtual reimplementation
+     * @internal
+     */
+    void killTimers() {
+        QObject::killTimers();
+        emit stopped();
+    }
 
 private:
 	QString filename;
@@ -145,6 +157,21 @@ private:
 };
 
 #endif
+
+
+/*
+ * @internal
+ * Using sender() when the slot is called is unsafe!
+ *
+ * @param snd  instance
+ * @param obj  The QObject to be called
+ * @param slot connect SIGNAL(stopped()) to slot
+ */
+void register_qpe_sound_finished( Sound* snd, QObject* obj, const char* slot ) {
+#ifndef QT_NO_SOUND
+    QObject::connect(snd->d, SIGNAL(stopped()), obj, slot );
+#endif
+}
 
 /*! Opens a wave sound file \a name for playing
  * Resource is used for finding the file
@@ -168,6 +195,7 @@ Sound::~Sound()
 void Sound::play()
 {
 #ifndef QT_NO_SOUND
+    d->killTimers();
     d->playLoop(1);
 #endif
 }
@@ -220,3 +248,6 @@ void Sound::soundAlarm()
 
   \ingroup qtopiaemb
 */
+
+
+#include "sound.moc"

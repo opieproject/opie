@@ -22,8 +22,10 @@
 
 class QString;
 class SoundData;
+class QObject;
 
 class Sound {
+    /*INTERNAL*/ friend void register_qpe_sound_finished( Sound*, QObject *obj, const char* slot);
 public:
     Sound(const QString& name);
     ~Sound();
