@@ -30,9 +30,6 @@
 #ifndef DATAMGR_H
 #define DATAMGR_H
 
-#include <map>
-using namespace std;
-
 #include <qlist.h>
 #include <qobject.h>
 #include <qstring.h>

@@ -33,8 +33,6 @@
 #include <qlist.h>
 #include <qstring.h>
 
-using namespace std;
-
 #include "package.h"
 #include "destination.h"
 

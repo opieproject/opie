@@ -28,8 +28,10 @@
 */
 
 #include <stdio.h>
-#include <list>
-using namespace std;
+#include <stdlib.h>
+#include <string.h>
+
+#include <qvaluelist.h>
 
 #define __MEMFILE_C
 #include "global.h"
@@ -59,7 +61,7 @@ typedef struct {
       long	line;
 } ALLOC_INFO;
 
-typedef list<ALLOC_INFO*> AllocList;
+typedef QValueList<ALLOC_INFO*> AllocList;
 
 AllocList allocList;
 
@@ -80,7 +82,7 @@ void AddTrack(long addr,  long asize,  const char *fname, long lnum)
 
 void RemoveTrack(long addr)
 {
-      AllocList::iterator i;
+      AllocList::Iterator i;
 
       bool found = false;
       for(i = allocList.begin(); i != allocList.end(); i++)
@@ -96,7 +98,7 @@ void RemoveTrack(long addr)
 
 void DumpUnfreed()
 {
-      AllocList::iterator i;
+      AllocList::Iterator i;
       long totalSize = 0;
       char buf[1024];
       // Debug output, okay to leave untranslated

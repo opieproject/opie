@@ -38,10 +38,6 @@
 #include <qlistbox.h>
 #include <qstring.h>
 
-/* STD */
-#include <iostream>
-using namespace std;
-
 
 CategoryFilterImpl :: CategoryFilterImpl(const QString &categories, const QString &selectedCategories, QWidget *parent, const char *name )
         : QDialog( parent, name, true )

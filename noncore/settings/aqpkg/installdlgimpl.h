@@ -30,8 +30,6 @@
 #ifndef INSTALLDLGIMPL_H
 #define INSTALLDLGIMPL_H
 
-using namespace std;
-
 #include <qlist.h>
 #include <qstring.h>
 #include <qwidget.h>
