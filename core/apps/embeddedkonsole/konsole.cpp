@@ -806,15 +806,15 @@ void Konsole::scrollMenuSelected(int index)
     Config cfg("Konsole");
     cfg.setGroup("ScrollBar");
     switch( index){
-    case -24:
+    case -25:
         te->setScrollbarLocation(0);
         cfg.writeEntry("Position",0);
         break;
-    case -25:
+    case -26:
         te->setScrollbarLocation(1);
         cfg.writeEntry("Position",1);
         break;
-    case -26:
+    case -27:
         te->setScrollbarLocation(2);
         cfg.writeEntry("Position",2);
         break;
