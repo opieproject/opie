@@ -2,7 +2,7 @@ Package: opie-go
 Files: bin/go apps/Games/go.desktop pics/go
 Priority: optional
 Section: opie/games
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: The game of Go

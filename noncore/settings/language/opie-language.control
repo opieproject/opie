@@ -2,7 +2,7 @@ Package: opie-language
 Files: plugins/application/liblanguage.so* bin/language apps/Settings/Language.desktop
 Priority: optional
 Section: opie/settings
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Language settings dialog

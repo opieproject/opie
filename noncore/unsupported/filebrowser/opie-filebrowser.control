@@ -2,7 +2,7 @@ Package: opie-filebrowser
 Files: bin/filebrowser apps/Applications/filebrowser.desktop pics/filebrowser/
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal

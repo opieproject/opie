@@ -2,7 +2,7 @@ Package: opie-calculator
 Files: plugins/application/libcalculator.so* bin/calculator apps/Applications/calculator.desktop etc/unit_conversion.dat pics/calc
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Calculator

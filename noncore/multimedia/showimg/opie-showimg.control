@@ -2,7 +2,7 @@ Package: opie-showimg
 Files: plugins/application/libshowimg.so* bin/showimg apps/Applications/showimg.desktop pics/imageviewer
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Image Viewer

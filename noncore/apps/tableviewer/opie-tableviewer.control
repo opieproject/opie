@@ -2,7 +2,7 @@ Package: opie-tableviewer
 Files: plugins/application/libtableviewer.so* bin/tableviewer apps/Applications/tableviewer.desktop
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Arch: iPAQ
 Depends: task-opie-minimal

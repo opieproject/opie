@@ -2,7 +2,7 @@ Package: opie-security
 Files: plugins/application/libsecurity.so* bin/security apps/Settings/Security.desktop pics/security
 Priority: optional
 Section: opie/settings
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
 Description: Security settings dialog

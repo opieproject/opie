@@ -2,7 +2,7 @@ Package: opie-helpbrowser
 Files: plugins/application/libhelpbrowser.so* bin/helpbrowser apps/Applications/helpbrowser.desktop docs pics/helpbrowser
 Priority: optional
 Section: opie/applications
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Architecture: arm
 Arch: iPAQ
 Depends: task-opie-minimal

@@ -2,7 +2,7 @@ Package: ptydevs
 Files: root/dev
 Priority: optional
 Section: base
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Opie Project <opie@handhelds.org>
 Version: 1.0.0-5
 Architecture: arm
 Description: Pseudotty devices
