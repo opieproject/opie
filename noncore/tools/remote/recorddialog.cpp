@@ -72,7 +72,7 @@ void RecordDialog::retPressed()
 
 void RecordDialog::incoming(OProcess *proc, char *buffer, int len)
 {
-	output->setText(output->text() + QString(buffer).truncate(len-1));
+//	output->setText(output->text() + QString(buffer).truncate(len-1));
 	printf("RecordDialog::incoming: got text from irrecord\n");
 }
 
