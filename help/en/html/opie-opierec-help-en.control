@@ -1,5 +1,5 @@
 Package: opie-opierec-help-en
-Files: help/en/html/opierec.html help/en/html/opierec
+Files: help/en/html/opierec.html
 Priority: optional
 Section: opie/onlinedoc
 Maintainer: Team Opie <opie@handhelds.org>
