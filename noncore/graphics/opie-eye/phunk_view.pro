@@ -11,7 +11,8 @@ HEADERS = gui/iconview.h gui/filesystem.h gui/mainwindow.h \
 	  lib/slavemaster.h \
 	  iface/slaveiface.h \
           gui/imageinfoui.h gui/imagescrollview.h \
-          gui/imageview.h
+          gui/imageview.h \
+	  lib/oimagezoomer.h
 	
 # A list header files
 
@@ -22,7 +23,8 @@ SOURCES = gui/iconview.cpp gui/filesystem.cpp gui/mainwindow.cpp \
 	  iface/dirview.cpp impl/dir/dir_lister.cpp \
 	  impl/dir/dir_ifaceinfo.cpp lib/slavemaster.cpp \
           gui/imageinfoui.cpp gui/imagescrollview.cpp \
-          gui/imageview.cpp
+          gui/imageview.cpp \
+	  lib/oimagezoomer.cpp
 # A list of source files
 
 INTERFACES = 
