@@ -1,13 +1,14 @@
 [Desktop Entry]
 Comment=A Todo List Program
 Comment[es]=Un programa de lista de tareas
+Comment[de]=Ein Programm zur Verwaltung von Aufgaben
 Exec=todolist
 Icon=TodoList
 Type=Application
 Name=Todo List
 Name[pt_BR]=Afazeres
 Name[no]=Oppgaveliste
-Name[de]=Aufgabenliste
+Name[de]=Aufgaben
 Name[hu]=Feladatok
 Name[it]=Impegni
 Name[pt]=Tarefas

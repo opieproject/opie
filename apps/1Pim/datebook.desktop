@@ -2,13 +2,14 @@
 Comment=A Calendar and Scheduling Program
 Comment[es]=Un calendario y planificador
 Comment[da]=Et kalender og planl�gnings program
+Comment[de]=Ein Terminkalender
 Exec=datebook
 Icon=DateBook
 Type=Application
 Name=Calendar
 Name[pt_BR]=Calendário
 Name[no]=Avtalebok
-Name[de]=Termin kalender
+Name[de]=Termine
 Name[hu]=Naptár
 Name[it]=Agenda
 Name[pt]=Calendário
