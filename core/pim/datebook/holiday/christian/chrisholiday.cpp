@@ -80,7 +80,7 @@ void ChrisHoliday::calc_easter()
   }
   p++;
   QDate d(_lastyear,n,p);
-  _days[d].append(QObject::tr("Eastersunday","holidays"));
+  _days[d].append(QObject::tr("Easter Sunday","holidays"));
   _days[d.addDays(-2)].append(QObject::tr("Good Friday","holidays"));
   _days[d.addDays(49)].append(QObject::tr("Whitsunday","holidays"));
   _days[d.addDays(50)].append(QObject::tr("Whitmonday","holidays"));
