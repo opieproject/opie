@@ -89,10 +89,15 @@ public:
     virtual void read();
     virtual void save();
     virtual QString getFileName();
+    virtual bool getCheckMaxSize()const;
+    virtual void setCheckMaxSize(bool);
+    virtual int getMaxSize()const;
+    virtual void setMaxSize(int);
 
 private:
     QString file;
-
+    bool m_CheckSize;
+    int m_MaxSize;
 };
 
 class SMTPaccount : public Account

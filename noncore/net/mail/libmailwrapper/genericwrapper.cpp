@@ -3,6 +3,8 @@
 #include "mailtypes.h"
 
 #include <opie2/odebug.h>
+#include <qpe/timestring.h>
+#include <qdatetime.h>
 
 using namespace Opie::Core;
 Genericwrapper::Genericwrapper()
@@ -243,12 +245,11 @@ RecBodyP Genericwrapper::parseMail( mailmessage * msg )
 
 QString Genericwrapper::parseDateTime( mailimf_date_time *date )
 {
-    char tmp[23];
-
-    snprintf( tmp, 23,  "%02i.%02i.%04i %02i:%02i:%02i %+05i",
-        date->dt_day, date->dt_month, date->dt_year, date->dt_hour, date->dt_min, date->dt_sec, date->dt_zone );
-
-    return QString( tmp );
+    QDateTime da(QDate(date->dt_year,date->dt_month,date->dt_day),QTime(date->dt_hour,date->dt_min,date->dt_sec));
+    QString timestring = TimeString::numberDateString(QDate(date->dt_year,date->dt_month,date->dt_day))+" ";
+    timestring+=TimeString::timeString(QTime(date->dt_hour,date->dt_min,date->dt_sec))+" ";
+    timestring.sprintf(timestring+" %+05i",date->dt_zone);
+    return timestring;
 }
 
 QString Genericwrapper::parseAddressList( mailimf_address_list *list )

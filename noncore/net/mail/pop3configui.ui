@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>314</width>
+            <width>302</width>
             <height>410</height>
         </rect>
     </property>
@@ -28,11 +28,11 @@
     <vbox>
         <property stdset="1">
             <name>margin</name>
-            <number>3</number>
+            <number>11</number>
         </property>
         <property stdset="1">
             <name>spacing</name>
-            <number>3</number>
+            <number>6</number>
         </property>
         <widget>
             <class>QLayoutWidget</class>
@@ -319,6 +319,64 @@
                 </widget>
             </hbox>
         </widget>
+        <widget>
+            <class>QCheckBox</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>m_CheckSize</cstring>
+            </property>
+            <property stdset="1">
+                <name>text</name>
+                <string>ask before downloading large mails</string>
+            </property>
+        </widget>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout9</cstring>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget row="0"  column="0" >
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>m_MailLimitLabel</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Large mail size (kb):</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="1" >
+                    <class>QSpinBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>m_MailLimitBox</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>suffix</name>
+                        <string> kB</string>
+                    </property>
+                    <property stdset="1">
+                        <name>maxValue</name>
+                        <number>5120</number>
+                    </property>
+                    <property stdset="1">
+                        <name>minValue</name>
+                        <number>1</number>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
         <spacer>
             <property>
                 <name>name</name>
@@ -346,7 +404,11 @@
     <tabstop>accountLine</tabstop>
     <tabstop>serverLine</tabstop>
     <tabstop>portLine</tabstop>
+    <tabstop>ComboBox1</tabstop>
+    <tabstop>CommandEdit</tabstop>
     <tabstop>userLine</tabstop>
     <tabstop>passLine</tabstop>
+    <tabstop>m_CheckSize</tabstop>
+    <tabstop>m_MailLimitBox</tabstop>
 </tabstops>
 </UI>

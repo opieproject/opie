@@ -63,35 +63,30 @@ void AccountView::populate( QList<Account> list )
     mhAccounts.append(new MHviewItem(AbstractMail::defaultLocalfolder(),this));
 
     Account *it;
-    for ( it = list.first(); it; it = list.next() )
-    {
-        if ( it->getType() == MAILLIB::A_IMAP )
-        {
+    for ( it = list.first(); it; it = list.next() ) {
+        if ( it->getType() == MAILLIB::A_IMAP ) {
             IMAPaccount *imap = static_cast<IMAPaccount *>(it);
-            odebug << "added IMAP " + imap->getAccountName() << oendl; 
+            odebug << "added IMAP " + imap->getAccountName() << oendl;
             imapAccounts.append(new IMAPviewItem( imap, this ));
-        }
-        else if ( it->getType() == MAILLIB::A_POP3 )
-        {
+        } else if ( it->getType() == MAILLIB::A_POP3 ) {
             POP3account *pop3 = static_cast<POP3account *>(it);
-            odebug << "added POP3 " + pop3->getAccountName() << oendl; 
+            odebug << "added POP3 " + pop3->getAccountName() << oendl;
             /* must not be hold 'cause it isn't required */
             (void) new POP3viewItem( pop3, this );
-        }
-         else if ( it->getType() == MAILLIB::A_NNTP )
-        {
+        } else if ( it->getType() == MAILLIB::A_NNTP ) {
             NNTPaccount *nntp = static_cast<NNTPaccount *>(it);
-            odebug << "added NNTP " + nntp->getAccountName() << oendl; 
+            odebug << "added NNTP " + nntp->getAccountName() << oendl;
             /* must not be hold 'cause it isn't required */
             (void) new NNTPviewItem( nntp, this );
-       }
-     }
+        } else if ( it->getType() == MAILLIB::A_MH ) {
+        }
+    }
 }
 
 void AccountView::refresh(QListViewItem *item)
 {
 
-    odebug << "AccountView refresh..." << oendl; 
+    odebug << "AccountView refresh..." << oendl;
     if ( item )
     {
         m_currentItem = item;
@@ -164,8 +159,8 @@ void AccountView::downloadMails(const FolderP&fromFolder,AbstractMail*fromWrappe
                               tr("<center>Error while creating<br>new folder - breaking.</center>"));
         return;
     }
-    odebug << "Targetfolder: " << targetFolder.latin1() << "" << oendl; 
-    odebug << "Fromfolder: " << fromFolder->getName().latin1() << "" << oendl; 
+    odebug << "Targetfolder: " << targetFolder.latin1() << "" << oendl;
+    odebug << "Fromfolder: " << fromFolder->getName().latin1() << "" << oendl;
     fromWrapper->mvcpAllMails(fromFolder,targetFolder,targetMail,sels.moveMails());
     refreshCurrent();
 }

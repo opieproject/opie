@@ -37,6 +37,8 @@ protected:
     void login();
     POP3account *account;
     mailstorage*m_pop3;
+    int m_maxsize;
+    bool m_checksize;
 };
 
 #endif

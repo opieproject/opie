@@ -16,7 +16,6 @@
 #define NNTP_PORT           "119"
 #define NNTP_SSL_PORT       "563"
 
-
 Settings::Settings()
     : QObject()
 {
@@ -27,7 +26,7 @@ void Settings::checkDirectory()
 {
     if ( !QDir( (QString) getenv( "HOME" ) + "/Applications/opiemail/" ).exists() ) {
         system( "mkdir -p $HOME/Applications/opiemail" );
-        odebug << "$HOME/Applications/opiemail created" << oendl; 
+        odebug << "$HOME/Applications/opiemail created" << oendl;
     }
 }
 
@@ -55,28 +54,28 @@ void Settings::updateAccounts()
 
     QStringList imap = dir.entryList( "imap-*" );
     for ( it = imap.begin(); it != imap.end(); it++ ) {
-        odebug << "Added IMAP account" << oendl; 
+        odebug << "Added IMAP account" << oendl;
         IMAPaccount *account = new IMAPaccount( (*it).replace(0, 5, "") );
         accounts.append( account );
     }
 
     QStringList pop3 = dir.entryList( "pop3-*" );
     for ( it = pop3.begin(); it != pop3.end(); it++ ) {
-        odebug << "Added POP account" << oendl; 
+        odebug << "Added POP account" << oendl;
         POP3account *account = new POP3account( (*it).replace(0, 5, "") );
         accounts.append( account );
     }
 
     QStringList smtp = dir.entryList( "smtp-*" );
     for ( it = smtp.begin(); it != smtp.end(); it++ ) {
-        odebug << "Added SMTP account" << oendl; 
+        odebug << "Added SMTP account" << oendl;
         SMTPaccount *account = new SMTPaccount( (*it).replace(0, 5, "") );
         accounts.append( account );
     }
 
     QStringList nntp = dir.entryList( "nntp-*" );
     for ( it = nntp.begin(); it != nntp.end(); it++ ) {
-        odebug << "Added NNTP account" << oendl; 
+        odebug << "Added NNTP account" << oendl;
         NNTPaccount *account = new NNTPaccount( (*it).replace(0, 5, "") );
         accounts.append( account );
     }
@@ -180,7 +179,7 @@ void IMAPaccount::read()
 
 void IMAPaccount::save()
 {
-    odebug << "saving " + getFileName() << oendl; 
+    odebug << "saving " + getFileName() << oendl;
     Settings::checkDirectory();
 
     Config *conf = new Config( getFileName(), Config::File );
@@ -213,6 +212,8 @@ POP3account::POP3account()
     connectionType = 1;
     type = MAILLIB::A_POP3;
     port = POP3_PORT;
+    m_CheckSize = true;
+    m_MaxSize = 1024;
 }
 
 POP3account::POP3account( QString filename )
@@ -224,6 +225,8 @@ POP3account::POP3account( QString filename )
     connectionType = 1;
     type = MAILLIB::A_POP3;
     port = POP3_PORT;
+    m_CheckSize = true;
+    m_MaxSize = 1024;
 }
 
 QString POP3account::getUniqueFileName()
@@ -253,12 +256,14 @@ void POP3account::read()
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
     offline = conf->readBoolEntry("Offline",false);
+    m_CheckSize = conf->readBoolEntry("Checkmaxsize",true);
+    m_MaxSize = conf->readNumEntry("Maxsize",1024);
     delete conf;
 }
 
 void POP3account::save()
 {
-    odebug << "saving " + getFileName() << oendl; 
+    odebug << "saving " + getFileName() << oendl;
     Settings::checkDirectory();
 
     Config *conf = new Config( getFileName(), Config::File );
@@ -271,6 +276,8 @@ void POP3account::save()
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
     conf->writeEntry( "Offline",offline);
+    conf->writeEntry("Checkmaxsize",m_CheckSize);
+    conf->writeEntry("Maxsize",m_MaxSize);
     conf->write();
     delete conf;
 }
@@ -279,6 +286,26 @@ void POP3account::save()
 QString POP3account::getFileName()
 {
     return (QString) getenv( "HOME" ) + "/Applications/opiemail/pop3-" + file;
+}
+
+bool POP3account::getCheckMaxSize()const
+{
+    return m_CheckSize;
+}
+
+void POP3account::setCheckMaxSize(bool aValue)
+{
+    m_CheckSize = aValue;
+}
+
+int POP3account::getMaxSize()const
+{
+    return m_MaxSize;
+}
+
+void POP3account::setMaxSize(int aValue)
+{
+    m_MaxSize = aValue;
 }
 
 SMTPaccount::SMTPaccount()
@@ -340,7 +367,7 @@ void SMTPaccount::read()
 
 void SMTPaccount::save()
 {
-    odebug << "saving " + getFileName() << oendl; 
+    odebug << "saving " + getFileName() << oendl;
     Settings::checkDirectory();
 
     Config *conf = new Config( getFileName(), Config::File );
@@ -417,7 +444,7 @@ void NNTPaccount::read()
 
 void NNTPaccount::save()
 {
-    odebug << "saving " + getFileName() << oendl; 
+    odebug << "saving " + getFileName() << oendl;
     Settings::checkDirectory();
 
     Config *conf = new Config( getFileName(), Config::File );

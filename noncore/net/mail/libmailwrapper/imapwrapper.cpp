@@ -31,7 +31,7 @@ int IMAPwrapper::selectMbox(const QString&mbox)
     }
     int err = mailimap_select( m_imap, (char*)mbox.latin1());
     if ( err != MAILIMAP_NO_ERROR ) {
-        odebug << "error selecting mailbox: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error selecting mailbox: " << m_imap->imap_response << "" << oendl;
         m_Lastmbox = "";
         return err;
     }
@@ -42,7 +42,7 @@ int IMAPwrapper::selectMbox(const QString&mbox)
 void IMAPwrapper::imap_progress( size_t current, size_t maximum )
 {
     qApp->processEvents();
-    odebug << "IMAP: " << current << " of " << maximum << "" << oendl; 
+    odebug << "IMAP: " << current << " of " << maximum << "" << oendl;
 }
 
 bool IMAPwrapper::start_tls(bool force_tls)
@@ -54,7 +54,7 @@ bool IMAPwrapper::start_tls(bool force_tls)
     err = mailimap_capability(m_imap,&cap_data);
     if (err != MAILIMAP_NO_ERROR) {
         Global::statusMessage("error getting capabilities!");
-        odebug << "error getting capabilities!" << oendl; 
+        odebug << "error getting capabilities!" << oendl;
         return false;
     }
     clistiter * cur;
@@ -75,7 +75,7 @@ bool IMAPwrapper::start_tls(bool force_tls)
         err =  mailimap_starttls(m_imap);
         if (err != MAILIMAP_NO_ERROR && force_tls) {
             Global::statusMessage(tr("Server has no TLS support!"));
-            odebug << "Server has no TLS support!" << oendl; 
+            odebug << "Server has no TLS support!" << oendl;
             try_tls = false;
         } else {
             mailstream_low * low;
@@ -126,7 +126,7 @@ void IMAPwrapper::login()
         pass = login.getPassword().latin1();
       } else {
         // cancel
-        odebug << "IMAP: Login canceled" << oendl; 
+        odebug << "IMAP: Login canceled" << oendl;
         return;
       }
     } else {
@@ -149,7 +149,7 @@ void IMAPwrapper::login()
     }
 
     if ( ssl ) {
-        odebug << "using ssl" << oendl; 
+        odebug << "using ssl" << oendl;
         err = mailimap_ssl_connect( m_imap, (char*)server, port );
     } else {
         err = mailimap_socket_connect( m_imap, (char*)server, port );
@@ -177,7 +177,7 @@ void IMAPwrapper::login()
     bool ok = true;
     if (force_tls && !try_tls) {
         Global::statusMessage(tr("Server has no TLS support!"));
-        odebug << "Server has no TLS support!" << oendl; 
+        odebug << "Server has no TLS support!" << oendl;
         ok = false;
     }
 
@@ -237,12 +237,16 @@ void IMAPwrapper::listMessages(const QString&mailbox,QValueList<Opie::Core::OSma
 
     /* the range has to start at 1!!! not with 0!!!! */
     set = mailimap_set_new_interval( 1, last );
+
+
+    fetchType = mailimap_fetch_type_new_all();
+/*
     fetchType = mailimap_fetch_type_new_fetch_att_list_empty();
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_envelope());
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_flags());
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_internaldate());
     mailimap_fetch_type_new_fetch_att_list_add(fetchType,mailimap_fetch_att_new_rfc822_size());
-
+*/
     err = mailimap_fetch( m_imap, set, fetchType, &result );
     mailimap_set_free( set );
     mailimap_fetch_type_free( fetchType );
@@ -318,7 +322,7 @@ QValueList<Opie::Core::OSmartPointer<Folder> >* IMAPwrapper::listFolders()
             folders->append( new IMAPFolder(temp,del,selectable,no_inferiors,account->getPrefix()));
         }
     } else {
-        odebug << "error fetching folders: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error fetching folders: " << m_imap->imap_response << "" << oendl;
     }
     mailimap_list_result_free( result );
 
@@ -328,7 +332,7 @@ QValueList<Opie::Core::OSmartPointer<Folder> >* IMAPwrapper::listFolders()
     mask = "*" ;
     path = account->getPrefix().latin1();
     if (!path) path = "";
-    odebug << path << oendl; 
+    odebug << path << oendl;
     err = mailimap_list( m_imap, (char*)path, (char*)mask, &result );
     if ( err == MAILIMAP_NO_ERROR ) {
         current = result->first;
@@ -355,7 +359,7 @@ QValueList<Opie::Core::OSmartPointer<Folder> >* IMAPwrapper::listFolders()
             folders->append(new IMAPFolder(temp,del,selectable,no_inferiors,account->getPrefix()));
         }
     } else {
-        odebug << "error fetching folders " << m_imap->imap_response << "" << oendl; 
+        odebug << "error fetching folders " << m_imap->imap_response << "" << oendl;
     }
     if (result) mailimap_list_result_free( result );
     return folders;
@@ -375,10 +379,10 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     if (!m_att) {
         return m;
     }
+    size = 0;
     m = new RecMail();
     for (c = clist_begin(m_att->att_list); c!=NULL;c=clist_next(c) ) {
         current = c;
-        size = 0;
         item = (mailimap_msg_att_item*)current->data;
         if (item->att_type!=MAILIMAP_MSG_ATT_ITEM_STATIC) {
             flist = (mailimap_msg_att_dynamic*)item->att_data.att_dyn;
@@ -465,13 +469,20 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
             }
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_INTERNALDATE) {
 #if 0
-            mailimap_date_time*d = item->att_data.att_static->att_data.att_internal_date;
+            mailimap_date_time*date = item->att_data.att_static->att_data.att_internal_date;
+            if (date->dt_sec>60 || date->dt_sec<0) date->dt_sec=0;
+            //QDateTime da(QDate(d->dt_year,date->dt_month,date->dt_day),QTime(date->dt_hour,date->dt_min,date->dt_sec));
+            QString timestring = TimeString::numberDateString(QDate(date->dt_year,date->dt_month,date->dt_day))+" ";
+            timestring+=TimeString::timeString(QTime(date->dt_hour,date->dt_min,date->dt_sec))+" ";
+            timestring.sprintf(timestring+" %+05i",date->dt_zone);
+            m->setDate(timestring);
             QDateTime da(QDate(d->dt_year,d->dt_month,d->dt_day),QTime(d->dt_hour,d->dt_min,d->dt_sec));
-            odebug << "" << d->dt_year << " " << d->dt_month << " " << d->dt_day << " - " << d->dt_hour << " " << d->dt_min << " " << d->dt_sec << "" << oendl; 
-            odebug << da.toString() << oendl; 
+            odebug << "" << d->dt_year << " " << d->dt_month << " " << d->dt_day << " - " << d->dt_hour << " " << d->dt_min << " " << d->dt_sec << "" << oendl;
+            odebug << da.toString() << oendl;
 #endif
         } else if (item->att_data.att_static->att_type==MAILIMAP_MSG_ATT_RFC822_SIZE) {
-            size = item->att_data.att_static->att_data.att_rfc822_size;
+            //size = item->att_data.att_static->att_data.att_rfc822_size;
+            m->setMsgsize(item->att_data.att_static->att_data.att_rfc822_size);
         }
     }
     /* msg is already deleted */
@@ -481,7 +492,6 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
     }
     if (m) {
         m->setFlags(mFlags);
-        m->setMsgsize(size);
     }
     return m;
 }
@@ -525,7 +535,7 @@ RecBodyP IMAPwrapper::fetchBody(const RecMailP&mail)
         body_desc = item->att_data.att_static->att_data.att_body;
         traverseBody(mail,body_desc,body,0,path);
     } else {
-        odebug << "error fetching body: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error fetching body: " << m_imap->imap_response << "" << oendl;
     }
     if (result) mailimap_fetch_list_free(result);
     return body;
@@ -637,7 +647,7 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMailP&mail,const QValueList<int
             }
         }
     } else {
-        odebug << "error fetching text: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error fetching text: " << m_imap->imap_response << "" << oendl;
     }
     if (result) mailimap_fetch_list_free(result);
     return res;
@@ -664,7 +674,7 @@ void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBodyP&t
             id+=(j>0?" ":"");
             id+=QString("%1").arg(countlist[j]);
         }
-        odebug << "ID = " << id.latin1() << "" << oendl; 
+        odebug << "ID = " << id.latin1() << "" << oendl;
         currentPart->setIdentifier(id);
         fillSinglePart(currentPart,part1);
         /* important: Check for is NULL 'cause a body can be empty!
@@ -705,7 +715,7 @@ void IMAPwrapper::traverseBody(const RecMailP&mail,mailimap_body*body,RecBodyP&t
                     id+=(j>0?" ":"");
                     id+=QString("%1").arg(countlist[j]);
                 }
-                odebug << "ID(mpart) = " << id.latin1() << "" << oendl; 
+                odebug << "ID(mpart) = " << id.latin1() << "" << oendl;
             }
             traverseBody(mail,current_body,target_body,current_recursion+1,countlist,ccount);
             if (current_body->bd_type==MAILIMAP_BODY_MPART) {
@@ -749,7 +759,7 @@ void IMAPwrapper::fillSingleTextPart(RecPartP&target_part,mailimap_body_type_tex
     }
     QString sub;
     sub = which->bd_media_text;
-    odebug << "Type= text/" << which->bd_media_text << "" << oendl; 
+    odebug << "Type= text/" << which->bd_media_text << "" << oendl;
     target_part->setSubtype(sub.lower());
     target_part->setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);
@@ -761,7 +771,7 @@ void IMAPwrapper::fillSingleMsgPart(RecPartP&target_part,mailimap_body_type_msg*
         return;
     }
     target_part->setSubtype("rfc822");
-    odebug << "Message part" << oendl; 
+    odebug << "Message part" << oendl;
     /* we set this type to text/plain */
     target_part->setLines(which->bd_lines);
     fillBodyFields(target_part,which->bd_fields);
@@ -820,7 +830,7 @@ void IMAPwrapper::fillSingleBasicPart(RecPartP&target_part,mailimap_body_type_ba
     } else {
         sub = "";
     }
-    odebug << "Type = " << type.latin1() << "/" << sub.latin1() << "" << oendl; 
+    odebug << "Type = " << type.latin1() << "/" << sub.latin1() << "" << oendl;
     target_part->setType(type.lower());
     target_part->setSubtype(sub.lower());
     fillBodyFields(target_part,which->bd_fields);
@@ -896,16 +906,16 @@ void IMAPwrapper::deleteMail(const RecMailP&mail)
     mailimap_store_att_flags_free(store_flags);
 
     if (err != MAILIMAP_NO_ERROR) {
-        odebug << "error deleting mail: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error deleting mail: " << m_imap->imap_response << "" << oendl;
         return;
     }
-    odebug << "deleting mail: " << m_imap->imap_response << "" << oendl; 
+    odebug << "deleting mail: " << m_imap->imap_response << "" << oendl;
     /* should we realy do that at this moment? */
     err = mailimap_expunge(m_imap);
     if (err != MAILIMAP_NO_ERROR) {
-        odebug << "error deleting mail: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error deleting mail: " << m_imap->imap_response << "" << oendl;
     }
-    odebug << "Delete successfull " << m_imap->imap_response << "" << oendl; 
+    odebug << "Delete successfull " << m_imap->imap_response << "" << oendl;
 }
 
 void IMAPwrapper::answeredMail(const RecMailP&mail)
@@ -931,7 +941,7 @@ void IMAPwrapper::answeredMail(const RecMailP&mail)
     mailimap_store_att_flags_free(store_flags);
 
     if (err != MAILIMAP_NO_ERROR) {
-        odebug << "error marking mail: " << m_imap->imap_response << "" << oendl; 
+        odebug << "error marking mail: " << m_imap->imap_response << "" << oendl;
         return;
     }
 }
@@ -999,14 +1009,14 @@ int IMAPwrapper::deleteAllMail(const FolderP&folder)
         Global::statusMessage(tr("error deleting mail: %s").arg(m_imap->imap_response));
         return 0;
     }
-    odebug << "deleting mail: " << m_imap->imap_response << "" << oendl; 
+    odebug << "deleting mail: " << m_imap->imap_response << "" << oendl;
     /* should we realy do that at this moment? */
     err = mailimap_expunge(m_imap);
     if (err != MAILIMAP_NO_ERROR) {
         Global::statusMessage(tr("error deleting mail: %s").arg(m_imap->imap_response));
         return 0;
     }
-    odebug << "Delete successfull " << m_imap->imap_response << "" << oendl; 
+    odebug << "Delete successfull " << m_imap->imap_response << "" << oendl;
     return 1;
 }
 
@@ -1031,7 +1041,7 @@ int IMAPwrapper::createMbox(const QString&folder,const FolderP&parentfolder,cons
             return 0;
         }
     }
-    odebug << "Creating " << pre.latin1() << "" << oendl; 
+    odebug << "Creating " << pre.latin1() << "" << oendl;
     int res = mailimap_create(m_imap,pre.latin1());
     if (res != MAILIMAP_NO_ERROR) {
         Global::statusMessage(tr("%1").arg(m_imap->imap_response));
@@ -1090,7 +1100,7 @@ void IMAPwrapper::statusFolder(folderStat&target_stat,const QString & mailbox)
             }
         }
     } else {
-        odebug << "Error retrieving status" << oendl; 
+        odebug << "Error retrieving status" << oendl;
     }
     if (status) mailimap_mailbox_data_status_free(status);
     if (att_list) mailimap_status_att_list_free(att_list);
@@ -1114,7 +1124,7 @@ MAILLIB::ATYPE IMAPwrapper::getType()const
 
 const QString&IMAPwrapper::getName()const
 {
-    odebug << "Get name: " << account->getAccountName().latin1() << "" << oendl; 
+    odebug << "Get name: " << account->getAccountName().latin1() << "" << oendl;
     return account->getAccountName();
 }
 
@@ -1130,7 +1140,7 @@ void IMAPwrapper::mvcpAllMails(const FolderP&fromFolder,
 {
     if (targetWrapper != this) {
         AbstractMail::mvcpAllMails(fromFolder,targetFolder,targetWrapper,moveit);
-        odebug << "Using generic" << oendl; 
+        odebug << "Using generic" << oendl;
         return;
     }
     mailimap_set *set = 0;
@@ -1149,7 +1159,7 @@ void IMAPwrapper::mvcpAllMails(const FolderP&fromFolder,
     if ( err != MAILIMAP_NO_ERROR ) {
         QString error_msg = tr("error copy mails: %1").arg(m_imap->imap_response);
         Global::statusMessage(error_msg);
-        odebug << error_msg << oendl; 
+        odebug << error_msg << oendl;
         return;
     }
     if (moveit) {
@@ -1160,7 +1170,7 @@ void IMAPwrapper::mvcpAllMails(const FolderP&fromFolder,
 void IMAPwrapper::mvcpMail(const RecMailP&mail,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
     if (targetWrapper != this) {
-        odebug << "Using generic" << oendl; 
+        odebug << "Using generic" << oendl;
         AbstractMail::mvcpMail(mail,targetFolder,targetWrapper,moveit);
         return;
     }
@@ -1179,7 +1189,7 @@ void IMAPwrapper::mvcpMail(const RecMailP&mail,const QString&targetFolder,Abstra
     if ( err != MAILIMAP_NO_ERROR ) {
         QString error_msg = tr("error copy mail: %1").arg(m_imap->imap_response);
         Global::statusMessage(error_msg);
-        odebug << error_msg << oendl; 
+        odebug << error_msg << oendl;
         return;
     }
     if (moveit) {

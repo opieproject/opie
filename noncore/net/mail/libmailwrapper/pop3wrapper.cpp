@@ -7,6 +7,7 @@
 #include <opie2/odebug.h>
 #include <qpe/global.h>
 #include <qfile.h>
+#include <qmessagebox.h>
 
 /* we don't fetch messages larger than 5 MB */
 #define HARD_MSG_SIZE_LIMIT 5242880
@@ -18,6 +19,8 @@ POP3wrapper::POP3wrapper( POP3account *a )
     m_pop3 = NULL;
     msgTempName = a->getFileName()+"_msg_cache";
     last_msg_id = 0;
+    m_maxsize = account->getMaxSize();
+    m_checksize = account->getCheckMaxSize();
 }
 
 POP3wrapper::~POP3wrapper() {
@@ -29,7 +32,7 @@ POP3wrapper::~POP3wrapper() {
 }
 
 void POP3wrapper::pop3_progress( size_t current, size_t maximum ) {
-    odebug << "POP3: " << current << " of " << maximum << "" << oendl; 
+    odebug << "POP3: " << current << " of " << maximum << "" << oendl;
 }
 
 RecBodyP POP3wrapper::fetchBody( const RecMailP &mail ) {
@@ -45,9 +48,13 @@ RecBodyP POP3wrapper::fetchBody( const RecMailP &mail ) {
     }
 
     mailmessage * mailmsg;
-    if (mail->Msgsize()>HARD_MSG_SIZE_LIMIT) {
-        odebug << "Message to large: " << mail->Msgsize() << "" << oendl; 
-        return body;
+    if (mail->Msgsize()/1024>m_maxsize && m_checksize && mail->getNumber()!=last_msg_id) {
+        QString quest = QString(tr("Download mail?\nIt is %1 kByte but your limit is %2 kByte")).arg(mail->Msgsize()/1024).arg(m_maxsize);
+        int yesno = QMessageBox::warning(0,tr("Download message"),
+            quest,tr("Yes"),tr("No"),QString::null,0,1);
+        odebug << "Message to large: " << mail->Msgsize() << "" << oendl;
+        if (yesno==1)
+            return body;
     }
 
     QFile msg_cache(msgTempName);
@@ -131,7 +138,7 @@ void POP3wrapper::login()
             pass = login.getPassword().latin1();
         } else {
             // cancel
-            odebug << "POP3: Login canceled" << oendl; 
+            odebug << "POP3: Login canceled" << oendl;
             return;
         }
     } else {
@@ -163,7 +170,7 @@ void POP3wrapper::login()
 
     err = mailstorage_connect(m_pop3);
     if (err != MAIL_NO_ERROR) {
-        odebug << QString( "FEHLERNUMMER %1" ).arg(  err ) << oendl; 
+        odebug << QString( "FEHLERNUMMER %1" ).arg(  err ) << oendl;
         Global::statusMessage(tr("Error initializing folder"));
         mailstorage_free(m_pop3);
         m_pop3 = 0;
@@ -237,7 +244,7 @@ void POP3wrapper::statusFolder(folderStat&target_stat,const QString&) {
     int r = mailsession_status_folder(m_pop3->sto_session,0,&target_stat.message_count,
                                       &target_stat.message_recent,&target_stat.message_unseen);
     if (r != MAIL_NO_ERROR) {
-        odebug << "error getting folter status." << oendl; 
+        odebug << "error getting folter status." << oendl;
     }
 }
 
