@@ -114,7 +114,7 @@ int SortDialog::exec(Sheet *s)
   }
   if (QDialog::exec()==QDialog::Accepted)
   {
-    QString field1S=comboFieldA->currentText(), field2S=comboFieldA->currentText(), field3S=comboFieldA->currentText();
+    QString field1S=comboFieldA->currentText(), field2S=comboFieldB->currentText(), field3S=comboFieldC->currentText();
     field1S=field1S.mid(field1S.find(' ')+1);
     field2S=field2S.mid(field2S.find(' ')+1);
     field3S=field3S.mid(field3S.find(' ')+1);
@@ -133,11 +133,11 @@ int SortDialog::exec(Sheet *s)
           if (compareResult>0) swap=TRUE;
           else if (compareResult==0)
           {
-            compareResult=compareItems(s->item(field2, j-1), s->item(field2, j), groupOrderA->id(groupOrderB->selected()), checkCase->isChecked());
+            compareResult=compareItems(s->item(field2, j-1), s->item(field2, j), groupOrderB->id(groupOrderB->selected()), checkCase->isChecked());
             if (compareResult>0) swap=TRUE;
             else if (compareResult==0)
             {
-              compareResult=compareItems(s->item(field3, j-1), s->item(field3, j), groupOrderA->id(groupOrderC->selected()), checkCase->isChecked());
+              compareResult=compareItems(s->item(field3, j-1), s->item(field3, j), groupOrderC->id(groupOrderC->selected()), checkCase->isChecked());
               if (compareResult>0) swap=TRUE;
             }
           }
@@ -160,11 +160,11 @@ int SortDialog::exec(Sheet *s)
           if (compareResult>0) swap=TRUE;
           else if (compareResult==0)
           {
-            compareResult=compareItems(s->item(j-1, field2), s->item(j, field2), groupOrderA->id(groupOrderB->selected()), checkCase->isChecked());
+            compareResult=compareItems(s->item(j-1, field2), s->item(j, field2), groupOrderB->id(groupOrderB->selected()), checkCase->isChecked());
             if (compareResult>0) swap=TRUE;
             else if (compareResult==0)
             {
-              compareResult=compareItems(s->item(j-1, field3), s->item(j, field3), groupOrderA->id(groupOrderC->selected()), checkCase->isChecked());
+              compareResult=compareItems(s->item(j-1, field3), s->item(j, field3), groupOrderC->id(groupOrderC->selected()), checkCase->isChecked());
               if (compareResult>0) swap=TRUE;
             }
           }

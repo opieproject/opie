@@ -1,4 +1,4 @@
-Files: bin/sheetqt apps/Applications/opie-sheet.desktop help/html/sheetqt.html help/html/sheetqt/* pics/opie-sheet/sheetqt.png
+Files: bin/sheetqt apps/Applications/opie-sheet.desktop help/sheetqt.html help/sheetqt/* pics/opie-sheet/sheetqt.png
 Priority: optional
 Section: opie/applications
 Maintainer: Serdar Ozler <sozler@sitebest.com>
