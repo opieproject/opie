@@ -5,6 +5,7 @@
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
 
+#include "configdialog.h"
 #include "metafactory.h"
 #include "profilemanager.h"
 #include "mainwindow.h"
@@ -14,6 +15,7 @@ MainWindow::MainWindow() {
     m_sessions.setAutoDelete( TRUE );
     m_curSession = 0;
     m_manager = new ProfileManager(m_factory);
+    m_manager->load();
 
     initUI();
     populateProfiles();
@@ -104,7 +106,7 @@ ProfileManager* MainWindow::manager() {
     return m_manager;
 }
 void MainWindow::populateProfiles() {
-    manager()->load();
+    m_sessionsPop->clear();
     Profile::ValueList list = manager()->all();
     for (Profile::ValueList::Iterator it = list.begin(); it != list.end();
          ++it ) {
@@ -147,6 +149,15 @@ void MainWindow::slotTerminate() {
 }
 void MainWindow::slotConfigure() {
     qWarning("configure");
+    ConfigDialog  conf( manager()->all() );
+    conf.showMaximized();
+
+    int ret = conf.exec();
+
+    if ( QDialog::Accepted == ret ) {
+        manager()->setProfiles( conf.list() );
+        populateProfiles();
+    }
 }
 void MainWindow::slotClose() {
 

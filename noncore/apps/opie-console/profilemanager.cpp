@@ -76,5 +76,18 @@ void ProfileManager::save(  ) {
             conf.writeEntry( it.key(), it.data() );
         }
     }
-    // FIXME save
+}
+void ProfileManager::setProfiles( const Profile::ValueList& list ) {
+    m_list = list;
+};
+Profile ProfileManager::profile( const QString& name )const {
+    Profile prof;
+    Profile::ValueList::ConstIterator it;
+    for ( it = m_list.begin(); it != m_list.end(); ++it ) {
+        if ( name == (*it).name() ) {
+            prof = (*it);
+            break;
+        }
+    }
+    return prof;
 }

@@ -21,7 +21,9 @@ public:
      */
     void add( const Profile& prof );
     void remove( const Profile& prof );
+    Profile profile(const QString& name )const;
     Session* fromProfile( const Profile& );
+    void setProfiles( const Profile::ValueList& );
     void save();
 private:
     MetaFactory* m_fact;
