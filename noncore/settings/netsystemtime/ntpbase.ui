@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>328</width>
+            <width>324</width>
             <height>411</height>
         </rect>
     </property>
@@ -298,6 +298,12 @@
                         <property stdset="1">
                             <name>name</name>
                             <cstring>TableLookups</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>font</name>
+                            <font>
+                                <pointsize>8</pointsize>
+                            </font>
                         </property>
                         <property stdset="1">
                             <name>numRows</name>

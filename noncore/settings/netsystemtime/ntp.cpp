@@ -42,8 +42,6 @@ Ntp::Ntp( QWidget* parent,  const char* name, WFlags fl )
   ComboNtpSrv->setCurrentItem( cfg.readNumEntry("ntpServer", 0) );
 
   ntpTimer = new QTimer(this);
-  processTimer = new QTimer(this);
-	ntpTimer->start(SpinBoxNtpDelay->value()*1000*60);
 
  	ntpProcess = new OProcess( );
   connect( SpinBoxNtpDelay, SIGNAL( valueChanged(int) ),
@@ -115,8 +113,6 @@ void Ntp::slotRunNtp()
   }
 	TextLabelStartTime->setText(QDateTime::currentDateTime().toString());
   ntpOutPut( tr("Running:")+"\nntpdate "+getNtpServer() );
-  connect( processTimer, SIGNAL( timeout() ), SLOT(slotTimeoutNtpProcess()) );
-	processTimer->start(2*1000*60, true);
  	
 	ntpProcess->clearArguments();
 	*ntpProcess << "ntpdate" << getNtpServer();
@@ -142,16 +138,16 @@ void  Ntp::getNtpOutput(OProcess *proc, char *buffer, int buflen)
 
 void  Ntp::ntpFinished(OProcess *p)
 {
-	if (!p->normalExit())
+	qDebug("p->exitStatus() %i",p->exitStatus());
+	if (p->exitStatus()!=0 || !p->normalExit())
  	{
     slotProbeNtpServer();
    	return;
   }
-	processTimer->stop();
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
   int lastLookup = cfg.readNumEntry("time",0);
-  int lookupCount = cfg.readNumEntry("count",-1);
+  int lookupCount = cfg.readNumEntry("count",0);
   int time = TimeConversion::toUTC( QDateTime::currentDateTime() );
   cfg.writeEntry("time", time);
   cfg.setGroup("correction");
@@ -194,14 +190,14 @@ void Ntp::readLookups()
 {
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
-  int lookupCount = cfg.readNumEntry("count",-1);
+  int lookupCount = cfg.readNumEntry("count",0);
   float last, shift, shiftPerSec;
   qDebug("lookupCount = %i",lookupCount);
   TableLookups->setNumCols( 3 );
   TableLookups->setNumRows( lookupCount);
-  TableLookups->horizontalHeader()->setLabel(1,"secsSinceLast");
-  TableLookups->horizontalHeader()->setLabel(2,"timeShift");
-  TableLookups->horizontalHeader()->setLabel(0,"shift/s");
+  TableLookups->horizontalHeader()->setLabel(1,tr("last [h]"));
+  TableLookups->horizontalHeader()->setLabel(2,tr("offset [s]"));
+  TableLookups->horizontalHeader()->setLabel(0,tr("shift [s/h]"));
   int cw = 50;//TableLookups->width()/4;
   qDebug("column width %i",cw);
   TableLookups->setColumnWidth( 0, cw+30 );
@@ -218,9 +214,9 @@ void Ntp::readLookups()
 //   	qDebug("%i shift %f",i,shift);
     shiftPerSec =  shift / last;
     _shiftPerSec += shiftPerSec;
-		TableLookups->setText( i,0,QString::number(shiftPerSec));
+		TableLookups->setText( i,0,QString::number(shiftPerSec*60));
 		TableLookups->setText( i,2,QString::number(shift));
-	  TableLookups->setText( i,1,QString::number(last));
+	  TableLookups->setText( i,1,QString::number(last/60));
   }
   _shiftPerSec /= lookupCount+1;
   TextLabelShift->setText(QString::number(_shiftPerSec)+tr(" seconds"));
@@ -273,6 +269,7 @@ void Ntp::slotCheckNtp(int i)
 
 void Ntp::slotProbeNtpServer()
 {
+	qDebug("Ntp::slotProbeNtpServer()");
 	ntpSock->connectToHost( getNtpServer() ,123);
 }
 
@@ -287,8 +284,3 @@ void Ntp::ntpOutPut(QString out)
   MultiLineEditntpOutPut->setCursorPosition(MultiLineEditntpOutPut->numLines() + 1,0,FALSE);
 }
 
-void Ntp::slotTimeoutNtpProcess()
-{
-	ntpProcess->kill();
-	slotProbeNtpServer();
-}
