@@ -4,3 +4,4 @@ Exec=opiemail
 Icon=opiemail/opiemail
 Type=Application
 Name=EMail
+Name[pt]=E-Mail

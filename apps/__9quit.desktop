@@ -4,3 +4,4 @@ Exec=suspend
 Icon=Shutdown
 Name=Suspend
 Name[pt_BR]=Suspender
+Name[pt]=Suspender

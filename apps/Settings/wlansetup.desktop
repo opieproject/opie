@@ -4,3 +4,4 @@ Exec=wlansetup
 Icon=wlansetup/wlan
 Type=Settings
 Name=Wireless LAN Setup
+Name[pt]=Rede Wireless

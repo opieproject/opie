@@ -4,3 +4,4 @@ Exec=opie-sh-howto.sh
 Icon=opie-sh/opie-sh
 Type=Application
 Name=opie-sh HowTo
+Name[pt]=Opie Sh

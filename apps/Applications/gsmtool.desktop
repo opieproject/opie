@@ -4,3 +4,4 @@ Exec=gsmtool
 Icon=gsmtool/gsmtool
 Type=Application
 Name=GSM Tool
+Name[pt]=Utilitário GSM

@@ -4,3 +4,4 @@ Exec=remote
 Icon=remote/remote
 Type=Application
 Name=Remote
+Name[pt]=Aplicação Remota

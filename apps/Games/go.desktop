@@ -4,3 +4,4 @@ Exec=go
 Icon=Go
 Type=Application
 Name=Go
+Name[pt]=Go
