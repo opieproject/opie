@@ -1,0 +1,16 @@
+[Desktop Entry]
+Comment=Set Application Key
+Comment[es]=Aplicaciones que lanzan las teclas rápidas
+Comment[da]=Ændre program taster.
+Exec=buttonsettings
+Icon=buttonsettings/Button
+Type=Application
+Name=Button
+CanFastload=0
+Name[de]=Anwendungs tasten
+Name[pt]=Botões
+Name[es]=Botones
+Name[it]=Pulsanti
+Name[zh_TW]=程式鍵
+Name[ko]=실행단추
+Name[da]=Program Taster
