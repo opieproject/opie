@@ -1,0 +1,89 @@
+
+QPDF - a PDF viewer for the Qtopia environment
+
+This tool is based on xpdf (currently 1.00). It uses the (mostly unmodified -
+see below) xpdf PDF rendering engine. The Qtopia adaption was done with a new 
+OutputDev which renders directly to a QPixmap via QPainter calls.
+
+Changes in 20020406:
+ - Font substitution handling improved.
+ - Unknown characters are simply ignored now.
+ - Fullscreen view added.
+ 
+Changes in 20020407:
+ - Crash with FontName == 0 fixed
+ - Cleanup
+ - Prepare for CVS import
+
+Changes in 20020408:
+ - Progress indicator added
+ - Problems with type 3 fonts (not fully supported by XPDF) solved
+ - Heavy optimizations in the image rendering code
+
+Changed in 20020413:
+ - Fixed crash in find routine
+ - Stylus selection reworked
+ - Cursor-key navigation added
+ - Various crashes related to recursive calling of XPDF fixed 
+
+
+Changes to xpdf:
+ - xpdf calculates nearly everything with doubles. Since ARMs are not equipped
+   with a FPU, all doubles have been replaced with a C++ class "fouble" (fixed
+   double), which operates on 32bit integers with fixed point arithmetic.
+   This gave a speedup of up to 800% for image rendering.
+   
+ - No Font handling anymore - This means no embedded, no true-type, no type1-
+   fonts. The task to choose the right font is up to the Qt QFont class.
+   This works pretty well -- only Symbol fonts give problems.
+   
+ - Everything that should be rotated (fonts, images) is simply ignored, because
+   a) the Qtopia Qt/E config has QPainter transformations disabled
+   b) the transformation is awful slow
+   c) do you really need rotated images on your iPaq ? ;)
+
+   
+ToDo:
+ - Clipping has been deactivated, because Qt/E had problems with QPainter
+   save/restore's with active clipping regions. I need to investigate this
+   in detail.
+   
+ - Links are currently simply ignored.
+
+ 
+Install:
+ - xpdf-1.00
+   Get the tarball for xpdf, version 1.0, untar it and ./configure it.
+   (No special flags are needed for ./configure - it simply has to run)
+   
+ - qpdf
+   Make sure your QPEDIR / TMAKEPATH variables are correctly !
+ 
+   cd into the xpdf directory (xpdf-1.00) and untar the qpdf tarball. This 
+   should create a subdirectory qpdf.
+   cd into this directory and start the script "./setup-qpdf". This 
+   incorporates the above mentioned patches into xpdf.
+   
+   Now do a make.
+   
+   Copy the files qpdf, qpdf_icon.png and qpdf.desktop to the appropriate
+   directories on your iPaq or:
+   If you want a ipk, just run ./mkipkg
+
+ - compress / uncompress
+   If you run a normal familiar installation, it the standard gzip (I tested
+   1.2.4-33 ipkg)  can handle the compression format used in PDF files, when 
+   called as uncompress. The BusyBox version of gzip can _not_ handle this 
+   old format.
+   
+   If you do not have a working uncompress installed on your iPaq, you can 
+   simply use the one in the contrib directory of the tarball (make uncompress 
+   a link to compress).
+   [I could not find an official tarball for compress -- this is the SuSE
+   version cross-compiled for ARM]
+   
+   
+Have fun ;)
+
+Robert (griebl@gmx.de)
+   
