@@ -10,8 +10,8 @@
 
 #include <opie/ofiledialog.h>
 
-#include "filetransfer.h"
-#include "io_serial.h"
+#include "file_layer.h"
+#include "receive_layer.h"
 #include "metafactory.h"
 #include "mainwindow.h"
 
@@ -21,6 +21,7 @@ TransferDialog::TransferDialog(MainWindow *parent, const char *name)
 : QDialog(0l, 0l, true), m_win(parent)
 {
     m_lay = 0l;
+	m_recvlay = 0l;
 	QVBoxLayout *vbox, *vbox2;
 	QHBoxLayout *hbox, *hbox2, *hbox3;
 	QLabel *file, *mode, *progress, *status;
@@ -115,18 +116,26 @@ void TransferDialog::slotTransfer()
 	if(m_transfermode == id_send) statusbar->setText(QObject::tr("Sending..."));
 	else statusbar->setText(QObject::tr("Receiving..."));
 
-	m_lay = m_win->factory()->newFileTransfer(protocol->currentText(), m_win->currentSession()->layer());
 	if(m_transfermode == id_send)
 	{
+		m_lay = m_win->factory()->newFileTransfer(protocol->currentText(), m_win->currentSession()->layer());
 		m_lay->sendFile(filename->text());
+
+		connect(m_lay, SIGNAL(progress(const QString&, int, int, int, int, int)),
+			SLOT(slotProgress(const QString&, int, int, int, int, int)));
+		connect(m_lay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
+		connect(m_lay, SIGNAL(sent()), SLOT(slotSent()));
 	}
 	else
 	{
-	}
+		m_recvlay = m_win->factory()->newReceive(protocol->currentText(), m_win->currentSession()->layer());
+		m_recvlay->receive();
 
-	connect(m_lay, SIGNAL(progress(const QString&, int, int, int, int, int)), SLOT(slotProgress(const QString&, int, int, int, int, int)));
-	connect(m_lay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
-	connect(m_lay, SIGNAL(sent()), SLOT(slotSent()));
+		connect(m_recvlay, SIGNAL(progress(const QString&, int, int, int, int, int)),
+			SLOT(slotProgress(const QString&, int, int, int, int, int)));
+		connect(m_recvlay, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
+		connect(m_recvlay, SIGNAL(received(const QString&)), SLOT(slotReceived(const QString&)));
+	}
 }
 
 void TransferDialog::slotCancel()
@@ -134,11 +143,20 @@ void TransferDialog::slotCancel()
 	ok->setEnabled(true);
 	statusbar->setText(QObject::tr("Ready"));
 
-	if(m_lay)
+	if((m_lay) || (m_recvlay))
 	{
-		m_lay->cancel();
-		delete m_lay;
-		m_lay = 0l;
+		if(m_lay)
+		{
+			m_lay->cancel();
+			delete m_lay;
+			m_lay = 0l;
+		}
+		if(m_recvlay)
+		{
+			m_recvlay->cancel();
+			delete m_recvlay;
+			m_recvlay = 0l;
+		}
 		QMessageBox::information(this,
 			QObject::tr("Cancelled"),
 			QObject::tr("The file transfer has been cancelled."));
@@ -197,6 +215,13 @@ void TransferDialog::slotError(int error, const QString& message)
 void TransferDialog::slotSent()
 {
 	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been sent."));
+	ok->setEnabled(true);
+	statusbar->setText(QObject::tr("Ready"));
+}
+
+void TransferDialog::slotReceived(const QString& file)
+{
+	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been received as %1.").arg(file));
 	ok->setEnabled(true);
 	statusbar->setText(QObject::tr("Ready"));
 }

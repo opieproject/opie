@@ -10,6 +10,10 @@ extern "C" {
     FileTransferLayer* newSYTransfer(IOLayer*);
     FileTransferLayer* newSXTransfer(IOLayer*);
 
+    ReceiveLayer* newSZReceive(IOLayer*);
+    ReceiveLayer* newSYReceive(IOLayer*);
+    ReceiveLayer* newSXReceive(IOLayer*);
+
     IOLayer* newSerialLayer(const Profile&);
     IOLayer* newBTLayer(const Profile& );
     IOLayer* newIrDaLayer(const Profile& );

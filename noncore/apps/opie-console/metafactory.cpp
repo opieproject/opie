@@ -30,6 +30,12 @@ void MetaFactory::addFileTransferLayer( const QCString& name,
     m_strings.insert(str, name );
     m_fileFact.insert( str, lay );
 }
+void MetaFactory::addReceiveLayer( const QCString& name,
+                                   const QString& str,
+                                   receivelayer lay) {
+    m_strings.insert(str, name );
+    m_receiveFact.insert( str, lay );
+}
 void MetaFactory::addEmulationLayer( const QCString& name,
                                      const QString& str,
                                      emulationLayer em) {
@@ -64,6 +70,14 @@ QStringList MetaFactory::fileTransferLayers()const {
     QStringList list;
     QMap<QString, filelayer>::ConstIterator it;
     for ( it = m_fileFact.begin(); it != m_fileFact.end(); ++it ) {
+        list << it.key();
+    }
+    return list;
+}
+QStringList MetaFactory::receiveLayers()const {
+    QStringList list;
+    QMap<QString, receivelayer>::ConstIterator it;
+    for ( it = m_receiveFact.begin(); it != m_receiveFact.end(); ++it ) {
         list << it.key();
     }
     return list;
@@ -131,6 +145,15 @@ FileTransferLayer* MetaFactory::newFileTransfer(const QString& str, IOLayer* lay
     QMap<QString, filelayer>::Iterator it;
     it = m_fileFact.find( str );
     if ( it != m_fileFact.end() ) {
+        file = (*(it.data() ) )(lay);
+    }
+    return file;
+}
+ReceiveLayer* MetaFactory::newReceive(const QString& str, IOLayer* lay ) {
+    ReceiveLayer* file = 0l;
+    QMap<QString, receivelayer>::Iterator it;
+    it = m_receiveFact.find( str );
+    if ( it != m_receiveFact.end() ) {
         file = (*(it.data() ) )(lay);
     }
     return file;

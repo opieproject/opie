@@ -10,6 +10,7 @@ class QLabel;
 class QPushButton;
 class MainWindow;
 class FileTransferLayer;
+class ReceiveLayer;
 
 class TransferDialog : public QDialog
 {
@@ -25,6 +26,7 @@ class TransferDialog : public QDialog
 		void slotProgress(const QString&, int, int, int, int, int);
 		void slotError(int error, const QString& message);
 		void slotSent();
+		void slotReceived(const QString& file);
 		void slotMode(int id);
 
 	private:
@@ -41,6 +43,7 @@ class TransferDialog : public QDialog
 		QPushButton *ok, *cancel, *selector;
 		MainWindow* m_win;
 		FileTransferLayer* m_lay;
+		ReceiveLayer *m_recvlay;
 		int m_transfermode;
 };
 

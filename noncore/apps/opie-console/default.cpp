@@ -2,6 +2,7 @@
 #include "io_irda.h"
 #include "io_bt.h"
 #include "filetransfer.h"
+#include "filereceive.h"
 #include "serialconfigwidget.h"
 #include "irdaconfigwidget.h"
 #include "btconfigwidget.h"
@@ -21,6 +22,17 @@ extern "C" {
     }
     FileTransferLayer* newSXTransfer(IOLayer* lay) {
         return new FileTransfer(FileTransfer ::SX, lay );
+    }
+
+    // FILE Transfer Receive Stuff
+    ReceiveLayer* newSZReceive(IOLayer* lay) {
+        return new FileReceive( FileReceive::SZ, lay );
+    }
+    ReceiveLayer* newSYReceive(IOLayer* lay) {
+        return new FileReceive( FileReceive::SY, lay );
+    }
+    ReceiveLayer* newSXReceive(IOLayer* lay) {
+        return new FileReceive(FileReceive::SX, lay );
     }
 
     // Layer stuff
@@ -65,6 +77,10 @@ Default::Default( MetaFactory* fact ) {
     fact->addFileTransferLayer( "SZ", QObject::tr("Z-Modem"), newSZTransfer );
     fact->addFileTransferLayer( "SY", QObject::tr("Y-Modem"), newSYTransfer );
     fact->addFileTransferLayer( "SX", QObject::tr("X-Modem"), newSXTransfer );
+
+    fact->addReceiveLayer( "SZ", QObject::tr("Z-Modem"), newSZReceive );
+    fact->addReceiveLayer( "SY", QObject::tr("Y-Modem"), newSYReceive );
+    fact->addReceiveLayer( "SX", QObject::tr("X-Modem"), newSXReceive );
 
     fact->addIOLayerFactory( "serial", QObject::tr("Serial"), newSerialLayer );
     fact->addIOLayerFactory( "irda", QObject::tr("Infrared"), newIrDaLayer   );
