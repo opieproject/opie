@@ -41,6 +41,6 @@ INTERFACES	= 	accounteditorbase.ui \
 		  	renamebase.ui \
 		  	searchdiagbase.ui
 INCLUDEPATH    += 	$(OPIEDIR)/include libmail
-LIBS           += 	-lmail -lqpe
+LIBS           += 	-lmail -lqpe -lopie
 TARGET		= 	mail 
 DESTDIR		= 	$(OPIEDIR)/bin

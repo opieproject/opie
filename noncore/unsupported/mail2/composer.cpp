@@ -11,10 +11,12 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
+#include <opie/ofiledialog.h>
+//#include "attachdiag.h"
+
 #include "addresspicker.h"
 #include "listviewplus.h"
 #include "smtphandler.h"
-#include "attachdiag.h"
 #include "composer.h"
 #include "rename.h"
 
@@ -394,7 +396,8 @@ void Composer::slotOpenAddressPicker()
 
 void Composer::slotAddAttach()
 {
-	DocLnk lnk = AttachDiag::getFile(this);
+  DocLnk lnk = OFileDialog::getOpenFileName( 1,"/");
+//	DocLnk lnk = AttachDiag::getFile(this);
 	if (lnk.name().isEmpty()) return;
 
 	Attachment attachment;
