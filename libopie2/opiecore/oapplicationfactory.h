@@ -55,6 +55,7 @@
 #include <qtopia/applicationinterface.h>
 
 namespace Opie {
+namespace Core {
     struct NullType;
 
     template <class T, class U>
@@ -94,7 +95,6 @@ struct MakeTypelist<>
     typedef NullType Result;
 };
 
-}
 
 /**
  * To allow your application to be quick launched some one needs
@@ -163,7 +163,7 @@ struct OPrivate {
 };
 
 template <>
-struct OPrivate<Opie::NullType > {
+struct OPrivate<Opie::Core::NullType > {
     inline static QWidget* multiFactory ( const QString& , QWidget* ,
                             const char* , Qt::WFlags ) {
         return 0l;
@@ -188,7 +188,7 @@ struct OPrivate <Opie::NullType, Opie::NullType > {
 */
 
 template <class Product, class ProductListTail>
-struct OPrivate< Opie::Typelist<Product, ProductListTail> > {
+struct OPrivate< Opie::Core::Typelist<Product, ProductListTail> > {
     inline static QWidget* multiFactory( const QString& appName, QWidget* parent,
                            const char* name, Qt::WFlags fl) {
         QWidget* wid = OPrivate<Product>::multiFactory( appName, parent, name, fl );
@@ -228,7 +228,7 @@ struct OPrivate< Opie::Typelist<Product, ProductListTail> > {
  */
 
 template<class Product, class ProductListTail>
-struct OApplicationFactory< Opie::Typelist<Product, ProductListTail > >
+struct OApplicationFactory< Opie::Core::Typelist<Product, ProductListTail > >
     : ApplicationInterface {
     QRESULT queryInterface( const QUuid &uuid, QUnknownInterface **iface ) {
         *iface = 0;
@@ -242,17 +242,19 @@ struct OApplicationFactory< Opie::Typelist<Product, ProductListTail > >
     QWidget* createMainWindow ( const QString& appName, QWidget* parent,
                                 const char* name, Qt::WFlags fl ) {
         qWarning("StringList is %s", applications().join(":").latin1() );
-        return OPrivate< Opie::Typelist<Product, ProductListTail > >::multiFactory( appName, parent, name, fl );
+        return OPrivate< Opie::Core::Typelist<Product, ProductListTail > >::multiFactory( appName, parent, name, fl );
     }
 
     QStringList applications()const {
         QStringList _list;
-        return OPrivate< Opie::Typelist<Product, ProductListTail> >::multiString( _list );
+        return OPrivate< Opie::Core::Typelist<Product, ProductListTail> >::multiString( _list );
     }
 
     Q_REFCOUNT
 };
 
+}
+}
 
 /* If the library version should be build */
 #ifdef OPIE_APP_INTERFACE
