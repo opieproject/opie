@@ -1,7 +1,7 @@
 Files: bin/tetrix apps/Games/tetrix.desktop pics/tetrix/*
 Priority: optional
 Section: opie/games
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Arch: iPAQ
 Version: $QPE_VERSION-$SUB_VERSION

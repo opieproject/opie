@@ -1,7 +1,7 @@
 Files: bin/patience apps/Games/patience.desktop pics/cards 
 Priority: optional
 Section: opie/games
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Martin Imobersteg <imm@gmx.ch>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
