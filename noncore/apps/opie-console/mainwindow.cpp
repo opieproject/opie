@@ -184,7 +184,6 @@ void MainWindow::initUI() {
             this, SLOT(slotNew() ) );
 
     m_console->insertSeparator();
-    /* save icon is not available */
 
     QAction *saveCon = new QAction(tr("Save Connection"),
                     QPixmap( ( const char** ) filesave_xpm ) , QString::null,
@@ -197,8 +196,8 @@ void MainWindow::initUI() {
     /*
      * connect action
      */
-    m_connect = new QAction();
-    m_connect->setText( tr("Connect") );
+    m_connect = new QAction( tr("Connect"), Resource::loadPixmap("console/connected"),
+                             QString::null, 0, this, 0 );
     m_connect->addTo( m_console );
     connect(m_connect, SIGNAL(activated() ),
             this, SLOT(slotConnect() ) );
@@ -206,16 +205,16 @@ void MainWindow::initUI() {
     /*
      * disconnect action
      */
-    m_disconnect = new QAction();
-    m_disconnect->setText( tr("Disconnect") );
+    m_disconnect = new QAction( tr("Disconnect"), Resource::loadPixmap("console/notconnected"),
+                                QString::null, 0, this, 0 );
     m_disconnect->addTo( m_console );
     connect(m_disconnect, SIGNAL(activated() ),
             this, SLOT(slotDisconnect() ) );
 
     m_console->insertSeparator();
 
-    m_transfer = new QAction();
-    m_transfer->setText( tr("Transfer file...") );
+    m_transfer = new QAction( tr("Transfer file..."), Resource::loadPixmap("pass") , QString::null,
+                    0, this, 0  );
     m_transfer->addTo( m_console );
     connect(m_transfer, SIGNAL(activated() ),
             this, SLOT(slotTransfer() ) );
