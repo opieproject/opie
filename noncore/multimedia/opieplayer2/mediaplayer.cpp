@@ -33,7 +33,7 @@ extern MediaPlayerState *mediaPlayerState;
 #define FBIOBLANK             0x4611
 
 MediaPlayer::MediaPlayer( QObject *parent, const char *name )
-    : QObject( parent, name ), volumeDirection( 0 ), currentFile( NULL ) {
+    : QObject( parent, name ), volumeDirection( 0 ) {
 
     fd=-1;fl=-1;
     playList->setCaption( tr( "OpiePlayer: Initializating" ) );
@@ -95,18 +95,7 @@ void MediaPlayer::setPlaying( bool play ) {
     }
 
     QString tickerText, time, fileName;
-    if( playList->currentTab() == PlayListWidget::CurrentPlayList ) { //check for filelist
-        const DocLnk *playListCurrent = playList->current();
-        if ( playListCurrent != NULL ) {
-            currentFile = playListCurrent;
-        }
-        xineControl->play( currentFile->file() );
-        fileName = currentFile->name();
-        long seconds =  mediaPlayerState->length();//
-        time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
-        //qDebug(time);
-
-    } else {
+    if ( playList->currentTab() != PlayListWidget::CurrentPlayList ) {
         //if playing in file list.. play in a different way
         // random and looping settings enabled causes problems here,
         // since there is no selected file in the playlist, but a selected file in the file list,
@@ -117,19 +106,17 @@ void MediaPlayer::setPlaying( bool play ) {
         }
         r = mediaPlayerState->isShuffled();
         mediaPlayerState->setShuffled( false );
-
-        fileName = playList->currentFileListPathName();
-        xineControl->play( fileName );
-        long seconds =  mediaPlayerState->length();
-        time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
-        //qDebug(time);
-        if( fileName.left(4) != "http" ) {
-            fileName = QFileInfo( fileName ).baseName();
-        }
-
     }
 
+    PlayListWidget::Entry playListEntry = playList->currentEntry();
+    fileName = playListEntry.name;
+    xineControl->play( playListEntry.file );
+
+    long seconds = mediaPlayerState->length();
+    time.sprintf("%li:%02i", seconds/60, (int)seconds%60 );
+
     if( fileName.left(4) == "http" ) {
+        fileName = QFileInfo( fileName ).baseName();
        if ( xineControl->getMetaInfo().isEmpty() ) {
            tickerText = tr( " File: " ) + fileName;
        } else {

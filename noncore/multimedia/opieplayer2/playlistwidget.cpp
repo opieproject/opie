@@ -424,7 +424,7 @@ void PlayListWidget::useSelectedDocument() {
 }
 
 
-const DocLnk *PlayListWidget::current() { // this is fugly
+const DocLnk *PlayListWidget::current() const { // this is fugly
     assert( currentTab() == CurrentPlayList );
 
 //      qDebug("playlist");
@@ -1139,6 +1139,16 @@ PlayListWidget::TabType PlayListWidget::currentTab() const
     assert( index < TabTypeCount && index >= 0 );
 
     return indexToTabType[ index ];
+}
+
+PlayListWidget::Entry PlayListWidget::currentEntry() const
+{
+    if ( currentTab() == CurrentPlayList ) {
+        const DocLnk *lnk = current();
+        return Entry( lnk->name(), lnk->file() );
+    }
+
+    return Entry( currentFileListPathName() );
 }
 
 QString PlayListWidget::currentFileListPathName() const {

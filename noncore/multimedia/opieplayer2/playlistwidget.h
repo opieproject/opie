@@ -58,6 +58,17 @@ public:
     enum TabType { CurrentPlayList, AudioFiles, VideoFiles, PlayLists };
     enum { TabTypeCount = 4 };
 
+    struct Entry
+    {
+        Entry( const QString &_name, const QString &_fileName )
+            : name( _name ), file( _fileName ) {}
+        Entry( const QString &_fileName )
+            : name( _fileName ), file( _fileName ) {}
+
+        QString name;
+        QString file;
+    };
+
     PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
     ~PlayListWidget();
     DocLnkSet files;
@@ -66,10 +77,12 @@ public:
     bool insanityBool;
     QString setDocFileRef, currentPlayList;
     // retrieve the current playlist entry (media file link)
-    const DocLnk *current();
+    const DocLnk *current() const;
     void useSelectedDocument();
     int selected;
     TabType currentTab() const;
+
+    Entry currentEntry() const;
 
 public slots:
     bool first();

@@ -68,7 +68,6 @@ private:
     bool isBlanked, l, r;
     int fd, fl;
     int     volumeDirection;
-    const DocLnk  *currentFile;
     XineControl *xineControl;
     VolumeControl *volControl;
 };
