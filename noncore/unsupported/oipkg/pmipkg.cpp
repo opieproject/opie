@@ -340,8 +340,9 @@ void PmIpkg::removeLinks( const QString &dest )
 void PmIpkg::update()
 {
 	show();
-	runIpkg( "update" );
- 	runwindow->close();
+	if ( runIpkg( "update" ) )
+	 	runwindow->close();
+ 	else out("An error occurred!\nPlease check the log.");
 }
 
 void PmIpkg::out( QString o )

@@ -139,7 +139,6 @@ void MainWindow::makeMenu()
   sectionBar->setHorizontalStretchable( true );
   QLabel *label = new QLabel( tr("Section: "), sectionBar );
   label->setBackgroundColor( sectionBar->backgroundColor() );
- 	sectionBar->setStretchableWidget( label );
   section = new QComboBox( false, sectionBar );
   label = new QLabel( " / ", sectionBar );
   label->setBackgroundColor( sectionBar->backgroundColor() );
@@ -153,6 +152,7 @@ void MainWindow::makeMenu()
   connect( sectionAction, SIGNAL( toggled(bool) ), this, SLOT( sectionShow(bool) ) );
   sectionAction->setToggleAction( true );
   sectionAction->addTo( viewMenu );
+ 	sectionBar->setStretchableWidget( section );
 
   //FIND
   findBar = new QPEToolBar(this);

@@ -50,7 +50,7 @@ Package::Package( QString n, PackageManagerSettings *s )
   {
 	  _name = QString( n );
   }else{
-    pvDebug(2,"remote file: "+n);
+    pvDebug(4,"remote file: "+n);
    	parseIpkgFile( n );
     _useFileName = true;
     _fileName = QString( n );
