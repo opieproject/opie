@@ -12,10 +12,11 @@
 //
 #include "adresssearch.h"
 
-#include <opie/ocontactaccess.h>
 #include <qstring.h>
 #include <qiconset.h>
+#include <qwhatsthis.h>
 #include <qpe/resource.h>
+#include <opie/ocontactaccess.h>
 
 #include "contactitem.h"
 

@@ -42,8 +42,6 @@ void ContactItem::setIcon()
 		icon = Resource::loadPixmap( "addressbook/mobilework" );
 		break;
 	case Qtopia::DefaultEmail:
-		icon = Resource::loadPixmap( "addressbook/email" );
-		break;
 	case Qtopia::Emails:
 		icon = Resource::loadPixmap( "addressbook/email" );
 		break;

@@ -10,17 +10,7 @@
 // (c) 2002 Patrick S. Vogt <tille@handhelds.org>
 
 
-#include "mainwindow.h"
 
-#include <qpe/qpemenubar.h>
-#include <qpe/qpemessagebox.h>
-#include <qpe/resource.h>
-#include <qpe/config.h>
-#include <qpe/qpetoolbar.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
-#include <qpe/global.h>
-#include <opie/owait.h>
 #include <qaction.h>
 #include <qmessagebox.h>
 #include <qpopupmenu.h>
@@ -35,6 +25,16 @@
 #include <qlineedit.h>
 #include <qtextbrowser.h>
 #include <qregexp.h>
+#include <qwhatsthis.h>
+#include <qpe/qpemenubar.h>
+#include <qpe/qpemessagebox.h>
+#include <qpe/resource.h>
+#include <qpe/config.h>
+#include <qpe/qpetoolbar.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
+#include <qpe/global.h>
+#include <opie/owait.h>
 
 #include "olistview.h"
 #include "olistviewitem.h"
@@ -44,6 +44,7 @@
 #include "datebooksearch.h"
 #include "applnksearch.h"
 #include "doclnksearch.h"
+#include "mainwindow.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   QMainWindow( parent, name, f ), _currentItem(0)
@@ -66,6 +67,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   detailsFrame = new QFrame( mainFrame, "detailsFrame" );
   QVBoxLayout *detailsLayout = new QVBoxLayout( detailsFrame );
   richEdit = new QTextView( detailsFrame );
+  QWhatsThis::add( richEdit, tr("The details of the current result") );
   richEdit->setSizePolicy( QSizePolicy( QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding));
   detailsLayout->addWidget( richEdit );
 
@@ -134,6 +136,7 @@ void MainWindow::makeMenu()
   //SEARCH
   SearchAllAction = new QAction( tr("Search all"),QString::null,  0, this, 0 );
   SearchAllAction->setIconSet( Resource::loadIconSet( "find" ) );
+ // QWhatsThis::add( SearchAllAction, tr("Search everything...") );
   connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
   SearchAllAction->addTo( searchMenu );
   searchMenu->insertItem( tr( "Options" ), searchOptions );
@@ -149,6 +152,7 @@ void MainWindow::makeMenu()
   //SEARCH BAR
   addToolBar( searchBar, "Search", QMainWindow::Top, TRUE );
   QLineEdit *searchEdit = new QLineEdit( searchBar, "seachEdit" );
+  QWhatsThis::add( searchEdit, tr("Enter your search terms here") );
   searchEdit->setFocus();
   searchBar->setHorizontalStretchable( TRUE );
   searchBar->setStretchableWidget( searchEdit );
