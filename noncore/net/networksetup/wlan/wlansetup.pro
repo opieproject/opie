@@ -1,0 +1,12 @@
+TEMPLATE        = lib
+CONFIG          += qt warn_on release
+#CONFIG		+= qt warn_on debug
+#DESTDIR         = $(OPIEDIR)/bin
+HEADERS		= wlanimp.h wlanmodule.h
+SOURCES		= wlanimp.cpp wlanmodule.cpp
+INCLUDEPATH	+= $(OPIEDIR)/include ../
+DEPENDPATH	+= $(OPIEDIR)/include
+LIBS            += -lqpe
+INTERFACES	= wlan.ui
+TARGET		= wlanplugin
+VERSION		= 1.0.0
