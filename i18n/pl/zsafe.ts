@@ -423,10 +423,6 @@ shows the list of dirs and files</source>
 
 pokazuje listę katalogów i plików</translation>
     </message>
-    <message>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ScQtFileEditDlg</name>
@@ -603,159 +599,155 @@ ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
+        <translation>Czy usunąć?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished">&amp;Nicht löschen</translation>
+        <translation>&amp;Nie usuwaj</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Eintrag ändern</translation>
+        <translation>Edytuj wpis</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Benutzername</translation>
+        <translation>Użytkownik</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Hasło</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished">Neuer Eintrag</translation>
+        <translation>Nowy wpis</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished">Die Namen der Einträge
-müssen sich von der
-Kategorie unterscheiden.</translation>
+        <translation>Nazwa wpisu musi być inna
+niż nazwa kategorii.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation>Szukaj</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished">Eintrag nicht gefunden</translation>
+        <translation>Nie znaleziono wpisu</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;Ok</translation>
+        <translation>&amp;OK</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht löschen.</translation>
+        <translation>Nie można usunąć pliku tekstowego.</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht exportieren.</translation>
+        <translation>Nie można eksportować do pliku tekstowego.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht importieren.</translation>
+        <translation>Nie można importować z pliku tekstowego.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished">Passwort eingeben</translation>
+        <translation>Podaj hasło</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished">Falsches Passwort
+        <translation>Błędne hasło.
 
-ZSafe wird sich jetzt beenden.</translation>
+ZSafe zostanie zamknięty.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished">Falsches Passwort.
-Neu eingeben?</translation>
+        <translation>Błędne hasło.
+Wpisz ponownie?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Ja</translation>
+        <translation>&amp;Tak</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished">&amp;Nein.</translation>
+        <translation>&amp;Nie.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished">Leeres Dokument oder
-falsches Passwort.
-Fortfahren?</translation>
+        <translation>Pusty dokument albo
+błędne hasło.
+Kontynuować?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Nein</translation>
+        <translation>&amp;Nie</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished">&amp;Ja.</translation>
+        <translation>&amp;Tak.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished">Das Passwort ist leer.
-Bitte nochmals eingeben.</translation>
+        <translation>Hasło jest pusty.
+Podaj je ponownie.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished">Passwort nochmals eingeben</translation>
+        <translation>Wpisz ponownie hasło</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished">Die Passwörter müssen
-gleich sein. Bitte nochmals
-Passwort eingeben.</translation>
+        <translation>Hasła muszą być identyczne.
+Wpisz jeszcze raz.</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished">Passwort-Datei gesichert.</translation>
+        <translation>Plik z hasłami zapisany.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished">Wollen Sie vor dem Beenden
-die Daten speichern?</translation>
+        <translation>Czy chcesz zapisać dane
+przed wyjściem?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sichern</translation>
+        <translation>&amp;Zapisz</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished">Mit neuem
-&amp;Passwort
-sichern</translation>
+        <translation>Zapisz z nowym &amp;hasłem</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished">&amp;Nicht sichern</translation>
+        <translation>&amp;Nie zapisuj</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategorie</translation>
+        <translation>Kategoria</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished">Bitte warten</translation>
+        <translation>Proszę czekać</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished">Suche nach Symbolen...</translation>
+        <translation>Zbieram ikony...</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished">Zaurus Passwort Manager&lt;br&gt;</translation>
+        <translation>Menedżer haseł&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.0.1ern&lt;br&gt;</source>
@@ -763,11 +755,11 @@ sichern</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished">von Carsten Schneider&lt;br&gt;</translation>
+        <translation>autor: Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
+        <translation>Tłumaczenia Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>&amp;New document</source>
@@ -783,15 +775,15 @@ sichern</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished">Erzeuge neue ZSafe Datei</translation>
+        <translation>Twórz nowy dokument ZSafe</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished">Öffne ZSafe Datei</translation>
+        <translation>Otwórz dokument ZSafe</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished">Speichere ZSafe Datei als..</translation>
+        <translation>Zapisz dokument ZSafe jako..</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
@@ -830,60 +822,56 @@ ZSafe zostanie zamknięty.</translation>
         <translation>Znajdź wpis</translation>
     </message>
     <message>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>All</source>
-        <translation type="unfinished">Wszystkie</translation>
+        <translation>Wszystkie</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Tekst</translation>
+        <translation>Tekst</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished">Usuń plik tekstowy</translation>
+        <translation>Usuń plik tekstowy</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished">Brak dokumentu.
+        <translation>Brak dokumentu.
 Musisz stworzyć nowy dokument</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished">Eksportuj plik tekstowy</translation>
+        <translation>Eksportuj plik tekstowy</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished">Importuj plik tekstowy</translation>
+        <translation>Importuj plik tekstowy</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished">Czy chcesz zapisać</translation>
+        <translation>Czy chcesz zapisać</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished">
+        <translation>
 teraz?</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished">Teraz musisz dwukrotnie
+        <translation>Teraz musisz dwukrotnie
 podać hasło dla nowego
 dokumentu.</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished">ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation>ZSafe wersja 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="unfinished">ZSafe wersja 2.1.2&lt;br&gt;</translation>
+        <translation>ZSafe wersja 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>
