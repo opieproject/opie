@@ -23,7 +23,7 @@
 #include <qmainwindow.h>
 #include <qpe/applnk.h>
 #include <qtabwidget.h>
-#include <fileselector.h>
+#include <qpe/fileselector.h>
 #include <qpushbutton.h>
 
 /* #include <qtimer.h> */
