@@ -15,13 +15,13 @@
  ***************************************************************************/
 
 #include "stocktickerconfig.h"
-#include <qpe/config.h>
 #include <opie/todayconfigwidget.h>
 
+#include <qpe/config.h>
 
 #include <qapplication.h>
-#include <qlayout.h>
 
+#include <qlayout.h>
 #include <qspinbox.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
@@ -121,7 +121,7 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     timerDelaySpin->setMaxValue( 60);
 
     cfg.setGroup("Timer");
-    timerDelaySpin->setValue( cfg.readNumEntry("Delay",0));
+    timerDelaySpin->setValue( cfg.readNumEntry("Delay",15));
     layout->addMultiCellWidget( timerDelaySpin , 6, 6, 0, 0);
     
     QLabel *label2;
