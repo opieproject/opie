@@ -3,76 +3,76 @@
     <name>EditWidget</name>
     <message>
         <source>File Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案名稱:</translation>
     </message>
     <message>
         <source>Group:</source>
-        <translation type="unfinished"></translation>
+        <translation>群組:</translation>
     </message>
     <message>
         <source>Key:</source>
-        <translation type="unfinished"></translation>
+        <translation>機碼:</translation>
     </message>
     <message>
         <source>Value:</source>
-        <translation type="unfinished"></translation>
+        <translation>數值:</translation>
     </message>
 </context>
 <context>
     <name>ListViewConfDir</name>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案</translation>
     </message>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟</translation>
     </message>
     <message>
         <source>The directory </source>
-        <translation type="unfinished"></translation>
+        <translation>目錄 </translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation> 無法被開啟.</translation>
     </message>
 </context>
 <context>
     <name>ListViewItemConfFile</name>
     <message>
         <source>Could not open</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟</translation>
     </message>
     <message>
         <source>The file </source>
-        <translation type="unfinished"></translation>
+        <translation>檔案 </translation>
     </message>
     <message>
         <source> could not be opened.</source>
-        <translation type="unfinished"></translation>
+        <translation> 無法被開啟.</translation>
     </message>
     <message>
         <source>no group</source>
-        <translation type="unfinished"></translation>
+        <translation>沒有群組</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Conf File Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>設定檔編輯器</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>儲存</translation>
     </message>
     <message>
         <source>Revert</source>
-        <translation type="unfinished"></translation>
+        <translation>還原</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
 </context>
 </TS>

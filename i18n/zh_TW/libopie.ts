@@ -3,39 +3,39 @@
     <name>ORecurranceBase</name>
     <message>
         <source>Repeating Event </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Repeating Event</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">無</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">日</translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">星期</translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">月份</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">年份</translation>
     </message>
     <message>
         <source>Every:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">每:</translation>
     </message>
     <message>
         <source>Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">重復的</translation>
     </message>
     <message>
         <source>End On:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">End On:</translation>
     </message>
     <message>
         <source>No End Date</source>
@@ -77,20 +77,36 @@
         <source>Every</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Var1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Var 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>WeekVar</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>OTimePickerDialogBase</name>
     <message>
+        <source>TimePicker</source>
+        <translation type="unfinished">TimePicker</translation>
+    </message>
+    <message>
         <source>Time:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Time:</translation>
     </message>
     <message>
         <source>:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">:</translation>
     </message>
     <message>
         <source>Pick Time:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Pick Time:</translation>
     </message>
 </context>
 </TS>

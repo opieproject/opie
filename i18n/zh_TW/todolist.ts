@@ -38,6 +38,14 @@
         <translation>搜尋</translation>
     </message>
     <message>
+        <source>Completed tasks</source>
+        <translation>顯示已完成事項</translation>
+    </message>
+    <message>
+        <source>Show Deadline</source>
+        <translation>顯示到期日</translation>
+    </message>
+    <message>
         <source>Data</source>
         <translation>資料管理</translation>
     </message>
@@ -48,6 +56,10 @@
     <message>
         <source>Options</source>
         <translation>設定選項</translation>
+    </message>
+    <message>
+        <source>Show only over due</source>
+        <translation>只顯示已過期之待辦事項</translation>
     </message>
     <message>
         <source>New from template</source>
@@ -98,55 +110,17 @@ Quit Anyway?</source>
         <source>New Tasks</source>
         <translation>新增待辦事項</translation>
     </message>
-    <message>
-        <source>Click here to create a new task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to modify the current task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to remove the current task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to send the current task to another device.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show completed tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show only over-due tasks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show task deadlines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Show quick task bar</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>QuickEdit</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a listing of all current tasks.
-
-The list displays the following information:
-1. Completed - A green checkmark indicates task is completed.  Click here to complete a task.
-2. Priority - a graphical representation of task priority.  Double-click here to modify.
-3. Description - description of task.  Click here to select the task.
-4. Deadline - shows when task is due.  This column can be shown or hidden by selecting Options-&gt;&apos;Show task deadlines&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>OTaskEditor</name>
+    <message>
+        <source>Overview</source>
+        <translation>內容</translation>
+    </message>
+    <message>
+        <source>Advanced</source>
+        <translation>進階設定</translation>
+    </message>
     <message>
         <source>Alarms</source>
         <translation>鬧鈴</translation>
@@ -160,16 +134,8 @@ The list displays the following information:
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Status</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Recurrence</source>
-        <translation type="unfinished"></translation>
+        <source>Recurrance</source>
+        <translation>週期性</translation>
     </message>
 </context>
 <context>
@@ -188,6 +154,10 @@ The list displays the following information:
     <message>
         <source>C.</source>
         <translation>完成</translation>
+    </message>
+    <message>
+        <source>Prior.</source>
+        <translation>優先順序</translation>
     </message>
     <message>
         <source>Description</source>
@@ -209,258 +179,228 @@ The list displays the following information:
         <source>%1 day(s)</source>
         <translation>%1 天</translation>
     </message>
+</context>
+<context>
+    <name>TaskEditorAdvanced</name>
     <message>
-        <source>Priority</source>
-        <translation type="unfinished">優先順序</translation>
+        <source>State:</source>
+        <translation>狀態：</translation>
+    </message>
+    <message>
+        <source>Started</source>
+        <translation>已開始</translation>
+    </message>
+    <message>
+        <source>Postponed</source>
+        <translation>已延期</translation>
+    </message>
+    <message>
+        <source>Finished</source>
+        <translation>已完成</translation>
+    </message>
+    <message>
+        <source>Not started</source>
+        <translation>尚未開始</translation>
+    </message>
+    <message>
+        <source>Maintainer</source>
+        <translation>負責人</translation>
+    </message>
+    <message>
+        <source>test</source>
+        <translation>測試</translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <source>Maintain Mode:</source>
+        <translation>責任歸屬：</translation>
+    </message>
+    <message>
+        <source>Responsible</source>
+        <translation>由其負責</translation>
+    </message>
+    <message>
+        <source>Done By</source>
+        <translation>由其完成</translation>
+    </message>
+    <message>
+        <source>Coordinating</source>
+        <translation>由其協調</translation>
+    </message>
+    <message>
+        <source>Nothing</source>
+        <translation>無</translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorAdvancedImpl</name>
+    <message>
+        <source>Description</source>
+        <translation>細節說明</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorAlarms</name>
     <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
+        <source>empty</source>
+        <translation>無</translation>
     </message>
     <message>
-        <source>Edit</source>
-        <translation type="unfinished">編輯</translation>
+        <source>&amp;Add</source>
+        <translation>&amp;新增</translation>
     </message>
     <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;Edit</source>
+        <translation>&amp;編輯</translation>
+    </message>
+    <message>
+        <source>&amp;Remove</source>
+        <translation>&amp;移除</translation>
     </message>
 </context>
 <context>
     <name>TaskEditorOverView</name>
     <message>
-        <source>Description:</source>
-        <translation type="unfinished"></translation>
+        <source>Form1</source>
+        <translation>表格 1</translation>
     </message>
     <message>
-        <source>Enter brief description of the task here.</source>
-        <translation type="unfinished"></translation>
+        <source>Priority</source>
+        <translation>優先順序</translation>
     </message>
     <message>
-        <source>Complete </source>
-        <translation type="unfinished"></translation>
+        <source>1 - Very High</source>
+        <translation>1 - 非常高</translation>
     </message>
     <message>
-        <source>Work on </source>
-        <translation type="unfinished"></translation>
+        <source>2 - High</source>
+        <translation>2 - 高</translation>
     </message>
     <message>
-        <source>Buy </source>
-        <translation type="unfinished"></translation>
+        <source>3 - Normal</source>
+        <translation>3 - 普通</translation>
     </message>
     <message>
-        <source>Organize </source>
-        <translation type="unfinished"></translation>
+        <source>4 - Low</source>
+        <translation>4 - 低</translation>
     </message>
     <message>
-        <source>Get </source>
-        <translation type="unfinished"></translation>
+        <source>5 - Very Low</source>
+        <translation>5 - 非常低</translation>
     </message>
     <message>
-        <source>Update </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Plan </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Call </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mail </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select priority of task here.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very High</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very Low</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Category:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select category to organize this task with.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Recurring task</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here if task happens on a regular basis.  If selected, frequency can be set on the Recurrence tab.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter any additional information about this task here.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Todo List</source>
-        <translation type="unfinished">待辦事項清單</translation>
-    </message>
-</context>
-<context>
-    <name>TaskEditorStatus</name>
-    <message>
-        <source>Status:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to set the current status of this task.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Started</source>
-        <translation type="unfinished">已開始</translation>
-    </message>
-    <message>
-        <source>Postponed</source>
-        <translation type="unfinished">已延期</translation>
-    </message>
-    <message>
-        <source>Finished</source>
-        <translation type="unfinished">已完成</translation>
-    </message>
-    <message>
-        <source>Not started</source>
-        <translation type="unfinished">尚未開始</translation>
-    </message>
-    <message>
-        <source>Progress:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select progress made on this task here.</source>
-        <translation type="unfinished"></translation>
+        <source>Progress</source>
+        <translation>進度</translation>
     </message>
     <message>
         <source>0 %</source>
-        <translation type="unfinished">0 %</translation>
+        <translation>0 %</translation>
     </message>
     <message>
         <source>20 %</source>
-        <translation type="unfinished">20 %</translation>
+        <translation>20 %</translation>
     </message>
     <message>
         <source>40 %</source>
-        <translation type="unfinished">40 %</translation>
+        <translation>40 %</translation>
     </message>
     <message>
         <source>60 %</source>
-        <translation type="unfinished">60 %</translation>
+        <translation>60 %</translation>
     </message>
     <message>
         <source>80 %</source>
-        <translation type="unfinished">80 %</translation>
+        <translation>80 %</translation>
     </message>
     <message>
         <source>100 %</source>
-        <translation type="unfinished">100 %</translation>
-    </message>
-    <message>
-        <source>Start Date:</source>
-        <translation type="unfinished">開始日期：</translation>
-    </message>
-    <message>
-        <source>Click here to set the date this task was started.</source>
-        <translation type="unfinished"></translation>
+        <translation>100 %</translation>
     </message>
     <message>
         <source>Due Date:</source>
-        <translation type="unfinished">預定到期日：</translation>
+        <translation>預定到期日：</translation>
     </message>
     <message>
-        <source>Click here to set the date this task needs to be completed by.</source>
-        <translation type="unfinished"></translation>
+        <source>1 Januar 2002</source>
+        <translation>2002 年一月一日</translation>
     </message>
     <message>
-        <source>Completed:</source>
-        <translation type="unfinished"></translation>
+        <source>Start Date:</source>
+        <translation>開始日期：</translation>
     </message>
     <message>
-        <source>Click here to mark this task as completed.</source>
-        <translation type="unfinished"></translation>
+        <source>1 Januar 2001</source>
+        <translation>2001 年一月一日</translation>
     </message>
     <message>
-        <source>Click here to set the date this task was completed.</source>
-        <translation type="unfinished"></translation>
+        <source>Summary</source>
+        <translation>概要</translation>
     </message>
     <message>
-        <source>Maintainer Mode:</source>
-        <translation type="unfinished"></translation>
+        <source>Complete</source>
+        <translation>完成</translation>
     </message>
     <message>
-        <source>Click here to set the maintainer&apos;s role.</source>
-        <translation type="unfinished"></translation>
+        <source>work on</source>
+        <translation>進行中</translation>
     </message>
     <message>
-        <source>Nothing</source>
-        <translation type="unfinished">無</translation>
+        <source>buy</source>
+        <translation>購買</translation>
     </message>
     <message>
-        <source>Responsible</source>
-        <translation type="unfinished">由其負責</translation>
+        <source>organize</source>
+        <translation>組織</translation>
     </message>
     <message>
-        <source>Done By</source>
-        <translation type="unfinished">由其完成</translation>
+        <source>get</source>
+        <translation>取得</translation>
     </message>
     <message>
-        <source>Coordinating</source>
-        <translation type="unfinished">由其協調</translation>
+        <source>Update</source>
+        <translation>更新</translation>
     </message>
     <message>
-        <source>Maintainer:</source>
-        <translation type="unfinished"></translation>
+        <source>Create</source>
+        <translation>設計</translation>
     </message>
     <message>
-        <source>This is the name of the current task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <source>Plan</source>
+        <translation>計劃</translation>
     </message>
     <message>
-        <source>test</source>
-        <translation type="unfinished">測試</translation>
+        <source>Call</source>
+        <translation>打電話</translation>
     </message>
     <message>
-        <source>Click here to select the task maintainer.</source>
-        <translation type="unfinished"></translation>
+        <source>Mail</source>
+        <translation>寫信</translation>
+    </message>
+    <message>
+        <source>Completed Date</source>
+        <translation>完成日期：</translation>
+    </message>
+    <message>
+        <source>Completed</source>
+        <translation>已完成</translation>
+    </message>
+    <message>
+        <source>Category</source>
+        <translation>分類目錄</translation>
+    </message>
+    <message>
+        <source>Enable Recurrance</source>
+        <translation>啟動週期性設定</translation>
+    </message>
+</context>
+<context>
+    <name>TaskEditorOverViewImpl</name>
+    <message>
+        <source>Todo List</source>
+        <translation>待辦事項清單</translation>
     </message>
 </context>
 <context>
@@ -498,61 +438,6 @@ The list displays the following information:
     <message>
         <source>Configure Templates</source>
         <translation>樣板管理</translation>
-    </message>
-</context>
-<context>
-    <name>Todo</name>
-    <message>
-        <source>Click here to set the priority of new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter description of new task here.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to enter additional information for new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Enter</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to add new task.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cancel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to reset new task information.
-
-This area is called the quick task bar.
-
-It allows you to quickly add a new task to your list.  This area can be shown or hidden by selecting Options-&gt;&apos;Show quick task bar&apos; from the menu above.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

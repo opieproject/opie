@@ -7,19 +7,19 @@
     </message>
     <message>
         <source>Name:</source>
-        <translation>名稱：</translation>
+        <translation type="unfinished">名稱:</translation>
     </message>
     <message>
         <source>Icon:</source>
-        <translation>圖示：</translation>
+        <translation type="unfinished">圖示:</translation>
     </message>
     <message>
         <source>Exec:</source>
-        <translation>執行：</translation>
+        <translation type="unfinished">執行:</translation>
     </message>
     <message>
         <source>Comment:</source>
-        <translation>附註：</translation>
+        <translation type="unfinished">附註:</translation>
     </message>
 </context>
 <context>
@@ -39,7 +39,7 @@ still in the group.</source>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation>您確定要移除嗎？</translation>
+        <translation type="unfinished">您確定要移除嗎?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -74,7 +74,7 @@ still in the group.</source>
     </message>
     <message>
         <source>Hierarchy</source>
-        <translation>層級</translation>
+        <translation type="unfinished">層級</translation>
     </message>
 </context>
 <context>
