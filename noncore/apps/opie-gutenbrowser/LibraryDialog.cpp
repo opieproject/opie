@@ -575,37 +575,40 @@ void LibraryDialog::cancelIt()
 
 bool LibraryDialog::setTitle()
 {
-        Config config("Gutenbrowser");
-        odebug << "setting title" << oendl;
-        odebug << DlglistItemTitle << oendl;
+		Config config("Gutenbrowser");
+		odebug << "setting title" << oendl;
+		odebug << DlglistItemTitle << oendl;
 
-        if( DlglistItemTitle.find("[",0,TRUE) != -1)
-                DlglistItemTitle.replace(DlglistItemTitle.find("[",0,TRUE),1, "(" );
-        if( DlglistItemTitle.find("]",0,TRUE) !=-1)
-                DlglistItemTitle.replace(DlglistItemTitle.find("]",0,TRUE),1, ")" );
-        odebug << "Title being set is "+DlglistItemTitle << oendl;
-        int test = 0;
-        QString ramble, temp;
-        config.setGroup("Files");
-        QString s_numofFiles = config.readEntry("NumberOfFiles", "0" );
-        int  i_numofFiles = s_numofFiles.toInt();
-        for ( int i = 0; i <= i_numofFiles; i++){
-                temp.setNum( i);
-                ramble  = config.readEntry( temp, "" );
-                if( strcmp( ramble, File_Name) == 0){
-                        test = 1;
-                }
-        }
-        config.setGroup("Files");
-        config.writeEntry( "NumberOfFiles", i_numofFiles +1 );
-        QString interger;
-        interger.setNum( i_numofFiles +1);
-        config.writeEntry( interger, File_Name);
-        config.setGroup( "Titles" );
-        config.writeEntry( File_Name, DlglistItemTitle);
+		if( DlglistItemTitle.find("[",0,TRUE) != -1)
+				DlglistItemTitle.replace(DlglistItemTitle.find("[",0,TRUE),1, "(" );
+		if( DlglistItemTitle.find("]",0,TRUE) !=-1)
+				DlglistItemTitle.replace(DlglistItemTitle.find("]",0,TRUE),1, ")" );
+		odebug << "Title being set is "+DlglistItemTitle << oendl;
+		int test = 0;
+		QString ramble, temp;
+		config.setGroup("Files");
+		QString s_numofFiles = config.readEntry("NumberOfFiles", "0" );
+		int  i_numofFiles = s_numofFiles.toInt();
+		for ( int i = 0; i <= i_numofFiles; i++){
+				temp.setNum( i);
+				ramble  = config.readEntry( temp, "" );
+				if( strcmp( ramble, File_Name) == 0){
+						test = 1;
+				}
+		}
 
-        test = 0;
-        return true;
+		if(test == 0 ) {
+
+        config.setGroup("Files");
+				config.writeEntry( "NumberOfFiles", i_numofFiles +1 );
+				QString interger;
+				interger.setNum( i_numofFiles +1);
+				config.writeEntry( interger, File_Name);
+				config.setGroup( "Titles" );
+				config.writeEntry( File_Name, DlglistItemTitle);
+		}
+		test = 0;
+		return true;
 }
 
 
@@ -745,9 +748,11 @@ void LibraryDialog::onButtonSearch()
                 if( SearchResultsDialog->exec() != 0) {
                         texter = SearchResultsDialog->selText;
                             //           odebug << texter << oendl;
-                        resultLs= SearchResultsDialog->resultsList;
+                        resultLs = SearchResultsDialog->resultsList;
                         i_berger = 1;
-                }
+                } else {
+										resultLs.clear();
+								}
                 Searchlist.clear();
 
                     //        if(SearchResultsDialog)
@@ -928,64 +933,64 @@ void LibraryDialog::comboSelect(int index)
 
 void LibraryDialog::newList()
 {
-        if(indexLoaded) {
-                onButtonDownload();
-        } else {
-                Output *outDlg;
-                buttonNewList->setDown(TRUE);
-                QDir gutDir(QPEApplication::qpeDir()+"etc/gutenbrowser");
-                if(!gutDir.exists()) gutDir.mkdir(QPEApplication::qpeDir()+"etc/gutenbrowser",true);
-                if( chdir(QPEApplication::qpeDir()+"etc/gutenbrowser") == 0) {
-                        odebug << "changing dir "+QPEApplication::qpeDir()+"etc/gutenbrowser" << oendl;
-                        QString gutenindex1 = QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
-                        QString cmd="wget -O " + gutenindex1 + " http://sailor.gutenberg.org/GUTINDEX.ALL 2>&1";
+		if(indexLoaded) {
+				onButtonDownload();
+		} else {
+				Output *outDlg;
+				buttonNewList->setDown(TRUE);
+				QDir gutDir(QPEApplication::qpeDir()+"etc/gutenbrowser");
+				if(!gutDir.exists()) gutDir.mkdir(QPEApplication::qpeDir()+"etc/gutenbrowser",true);
+				if( chdir(QPEApplication::qpeDir()+"etc/gutenbrowser") == 0) {
+						odebug << "changing dir "+QPEApplication::qpeDir()+"etc/gutenbrowser" << oendl;
+						QString gutenindex1 = QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
+						QString cmd="wget -O " + gutenindex1 + " http://sailor.gutenberg.org/GUTINDEX.ALL 2>&1";
 
-                        int result = QMessageBox::warning( this,"Download"
-                                                                                             ,"<p>Ok to use /'wget/' to download a new library list?</P>"
-                                                                                             ,"Yes","No",0,0,1);
-                        qApp->processEvents();
-                        if(result == 0) {
-                                outDlg = new Output( 0, tr("Downloading Gutenberg Index...."),TRUE);
-                                outDlg->showMaximized();
-                                outDlg->show();
-                                qApp->processEvents();
-                                FILE *fp;
-                                char line[130];
-                                outDlg->OutputEdit->append( tr("Running wget") );
-                                outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                                sleep(1);
-                                fp = popen(  (const char *) cmd, "r");
-                                if ( !fp ) {
-                                } else {
-                                        odebug << "Issuing the command\n"+cmd << oendl;
-                                            //                 system(cmd);
-                                        while ( fgets( line, sizeof line, fp)) {
-                                                outDlg->OutputEdit->append(line);
-                                                outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                                        }
-                                        pclose(fp);
-                                        outDlg->OutputEdit->append("Finished downloading\n");
-                                        outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
-                                        qApp->processEvents();
+						int result = QMessageBox::warning( this,"Download"
+																							 ,"<p>Ok to use /'wget/' to download a new library list?</P>"
+																							 ,"Yes","No",0,0,1);
+						qApp->processEvents();
+						if(result == 0) {
+								outDlg = new Output( 0, tr("Downloading Gutenberg Index...."),TRUE);
+								outDlg->showMaximized();
+								outDlg->show();
+								qApp->processEvents();
+								FILE *fp;
+								char line[130];
+								outDlg->OutputEdit->append( tr("Running wget") );
+								outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+								sleep(1);
+								fp = popen(  (const char *) cmd, "r");
+								if ( !fp ) {
+								} else {
+										odebug << "Issuing the command\n"+cmd << oendl;
+											//                 system(cmd);
+										while ( fgets( line, sizeof line, fp)) {
+												outDlg->OutputEdit->append(line);
+												outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+										}
+										pclose(fp);
+										outDlg->OutputEdit->append("Finished downloading\n");
+										outDlg->OutputEdit->setCursorPosition(outDlg->OutputEdit->numLines() + 1,0,FALSE);
+										qApp->processEvents();
 
-                                            //                  if( QFile(gutenindex1).exists() ) {
-                                            //                      QString gutenindex=QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
-                                            //                      if( rename(gutenindex1.latin1(),gutenindex.latin1()) !=0)
-                                            //                          odebug << "renaming error" << oendl;
-                                            //                  }
+											//                  if( QFile(gutenindex1).exists() ) {
+											//                      QString gutenindex=QPEApplication::qpeDir()+"etc/gutenbrowser/GUTINDEX.ALL";
+											//                      if( rename(gutenindex1.latin1(),gutenindex.latin1()) !=0)
+											//                          odebug << "renaming error" << oendl;
+											//                  }
 
-                                }
-                                    //               outDlg->close();
-                                FindLibrary();
-                                if(outDlg) delete outDlg;
-                        }
-                        buttonNewList->setDown(FALSE);
-                } else {
-                        QMessageBox::message("Note","Could not change directories");
-                }
-                    //         if(outDlg)
-                    //             delete outDlg;
-        }
+								}
+									//               outDlg->close();
+								FindLibrary();
+								if(outDlg) delete outDlg;
+						}
+						buttonNewList->setDown(FALSE);
+				} else {
+						QMessageBox::message("Note","Could not change directories");
+				}
+					//         if(outDlg)
+					//             delete outDlg;
+		}
 }
 
 bool LibraryDialog::moreInfo()
