@@ -128,6 +128,13 @@ protected:
     void setViewCategory( const QString &category );
     void reloadCategories();
 
+    void setItemNewEnabled( bool enable );
+    void setItemEditEnabled( bool enable );
+    void setItemDuplicateEnabled( bool enable );
+    void setItemDeleteEnabled( bool enable );
+    void setItemBeamEnabled( bool enable );
+    void setConfigureEnabled( bool enable );
+
 private slots:
     void appMessage( const QCString&, const QByteArray& );
     void setDocument( const QString& );
@@ -156,9 +163,12 @@ private:
     QActionGroup *m_itemMenuGroup2;      // Action group containing default items in Item menu
     QActionGroup *m_viewMenuAppGroup;    // Action group containing application items in View menu
     QActionGroup *m_viewMenuGroup;       // Action group containing default items in View menu
+    QAction      *m_itemNewAction;       // Add new item action
     QAction      *m_itemEditAction;      // Edit current item action
     QAction      *m_itemDuplicateAction; // Duplicate current item action
     QAction      *m_itemDeleteAction;    // Delete current item action
+    QAction      *m_itemBeamAction;      // Beam current item action
+    QAction      *m_configureAction;     // Configure application dialog action
 
     QComboBox    *m_catSelect;           // Category selection combo box
 

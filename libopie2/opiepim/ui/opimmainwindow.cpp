@@ -270,6 +270,30 @@ void OPimMainWindow::reloadCategories() {
     m_catSelect->insertItem( tr( "Unfiled" ) );
 }
 
+void OPimMainWindow::setItemNewEnabled( bool enable ) {
+    m_itemNewAction->setEnabled( enable );
+}
+
+void OPimMainWindow::setItemEditEnabled( bool enable ) {
+    m_itemEditAction->setEnabled( enable );
+}
+
+void OPimMainWindow::setItemDuplicateEnabled( bool enable ) {
+    m_itemDuplicateAction->setEnabled( enable );
+}
+
+void OPimMainWindow::setItemDeleteEnabled( bool enable ) {
+    m_itemDeleteAction->setEnabled( enable );
+}
+
+void OPimMainWindow::setItemBeamEnabled( bool enable ) {
+    m_itemBeamAction->setEnabled( enable );
+}
+
+void OPimMainWindow::setConfigureEnabled( bool enable ) {
+    m_configureAction->setEnabled( enable );
+}
+
 void OPimMainWindow::initBars( const QString &itemName ) {
     QString itemStr = itemName.lower();
 
@@ -297,11 +321,11 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     // Item menu
     m_itemMenuGroup1 = new QActionGroup( this, QString::null, false );
 
-    QAction *a = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
+    m_itemNewAction = new QAction( tr( "New" ), Resource::loadPixmap( "new" ),
                               QString::null, 0, m_itemMenuGroup1, 0 );
-    connect( a, SIGNAL(activated()), this, SLOT(slotItemNew()) );
-    a->setWhatsThis( tr( "Click here to create a new item." ) );
-    a->addTo( toolbar );
+    connect( m_itemNewAction, SIGNAL(activated()), this, SLOT(slotItemNew()) );
+    m_itemNewAction->setWhatsThis( tr( "Click here to create a new item." ) );
+    m_itemNewAction->addTo( toolbar );
 
     m_itemEditAction = new QAction( tr( "Edit" ), Resource::loadPixmap( "edit" ),
                                     QString::null, 0, m_itemMenuGroup1, 0 );
@@ -321,12 +345,11 @@ void OPimMainWindow::initBars( const QString &itemName ) {
     m_itemDeleteAction->addTo( toolbar );
 
     if ( Ir::supported() ) {
-        a = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
-                         QString::null, 0, m_itemMenuGroup1, 0 );
-        connect( a, SIGNAL(activated()), this, SLOT(slotItemBeam()) );
-        a->setWhatsThis( tr( "Click here to transmit the selected item." ) );
-        //a->addTo( m_itemMenu );
-        a->addTo( toolbar );
+        m_itemBeamAction = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
+                                        QString::null, 0, m_itemMenuGroup1, 0 );
+        connect( m_itemBeamAction, SIGNAL(activated()), this, SLOT(slotItemBeam()) );
+        m_itemBeamAction->setWhatsThis( tr( "Click here to transmit the selected item." ) );
+        m_itemBeamAction->addTo( toolbar );
     }
 
     m_itemMenuGroup1->addTo( m_itemMenu );
@@ -341,17 +364,17 @@ void OPimMainWindow::initBars( const QString &itemName ) {
 //     a->setWhatsThis( tr( "Click here to search for an item." ) );
 //     a->addTo( toolbar );
 
-    a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ),
-                     QString::null, 0, m_itemMenuGroup2, 0 );
-    connect( a, SIGNAL(activated()), this, SLOT(slotConfigure()) );
-    a->setWhatsThis( tr( "Click here to set your preferences for this application." ) );
+    m_configureAction = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ),
+                                     QString::null, 0, m_itemMenuGroup2, 0 );
+    connect( m_configureAction, SIGNAL(activated()), this, SLOT(slotConfigure()) );
+    m_configureAction->setWhatsThis( tr( "Click here to set your preferences for this application." ) );
 
     m_itemMenuGroup2->addTo( m_itemMenu );
 
     // View menu
     m_viewMenuGroup = new QActionGroup( this, QString::null, false );
 
-    a = new QAction( tr( "Filter" ), QString::null, 0, m_viewMenuGroup, 0 );
+    QAction *a = new QAction( tr( "Filter" ), QString::null, 0, m_viewMenuGroup, 0 );
     connect( a, SIGNAL(activated()), this, SLOT(slotViewFilter()) );
     a->setWhatsThis( tr( "Click here to filter the items displayed." ) );
 
