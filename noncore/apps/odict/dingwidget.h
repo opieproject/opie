@@ -7,28 +7,41 @@
  *                                                                         *
  **************************************************************************/
 
-class QString;
-class QTextBrowser;
-class QStringList;
-
 #include <qstringlist.h>
-
 #include <qstring.h>
+
+struct BroswerContent
+{ 
+	QString top;
+	QString bottom;
+};
 
 class DingWidget
 {
     public:
-		DingWidget(QString word = 0, QTextBrowser* = 0, QTextBrowser* =0, QString activated_name=0);
+		DingWidget();
 
-		void setText();
+		BroswerContent setText( QString );
 		QStringList lines;
+		void setCaseSensitive( bool );
+		void setCompleteWord( bool );
+		void loadDict( QString );
+		QString loadedDict();
+		void setQueryWord( QString );
+		void setDict( QString );
+
 	private:
+		BroswerContent parseInfo();
+
+		BroswerContent s_strings;
+		bool isCompleteWord;
+		bool isCaseSensitive;
+
+		QString dictName;
+		
 		QString search_word;
-		void parseInfo( QStringList& , QString&, QString& );
-		QString queryword;
 		void loadValues();
+		QString queryword;
 		QString methodname;
 		QString trenner;
-		
-		QTextBrowser *topbrowser, *bottombrowser;
 };

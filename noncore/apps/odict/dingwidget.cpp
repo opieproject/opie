@@ -30,15 +30,33 @@
 #include <qtextbrowser.h>
 #include <stdlib.h> // for getenv
 
-DingWidget::DingWidget(QString word, QTextBrowser *browser_top, QTextBrowser *browser_bottom, QString activated_name)
+
+DingWidget::DingWidget( )
 {
-	methodname = activated_name;
-	queryword = word;
-	trenner = QString::null;
+	methodname = QString::null;
+	trenner = "::";//QString::null;
 	lines = 0L;
 	loadValues();
+
+//X 	qDebug( topbrowser );
+//X 	qDebug( top );
+//X 
+//X 	topbrowser = "blahbalh";
+//X 	
+//X 	qDebug( topbrowser );
+//X 	qDebug( top );
+}
+
+void DingWidget::loadDict( QString name )
+{
+	qDebug( "MUSS ich wirklich aufgerufen werder? schreit loadDict" );
+	qDebug( "Starte mit dem loadedDict(...)" );
+	dictName = name;
+	qDebug( "bin in loadedDict() und lade das Dict:" );
+	qDebug( dictName );
   	QString opie_dir = getenv("OPIEDIR");
 	QFile file( opie_dir+"/noncore/apps/odict/eng_ita.dic" );
+	//FIXME:this should of course be not hardcoded ;)
 	
 	if(  file.open(  IO_ReadOnly ) )
 	{
@@ -49,32 +67,54 @@ DingWidget::DingWidget(QString word, QTextBrowser *browser_top, QTextBrowser *br
 		}
 		file.close();
 	}
-
-	lines = lines.grep( queryword );
-
-	topbrowser = browser_top;
-	bottombrowser = browser_bottom;
+	qDebug( "loadedDict(...) ist beended" );
 }
 
-void DingWidget::setText()
+QString DingWidget::loadedDict()
+{ 
+	qDebug( dictName );
+	qDebug( "^ ^ ^ ^ ^ ^ ^ war der dictName" );
+	return dictName;
+}
+
+void DingWidget::setCaseSensitive( bool caseS )
 {
-	QString top, bottom;
-	QStringList test = lines;
-	parseInfo( test, top , bottom );
-	
-	topbrowser->setText( top );
-	bottombrowser->setText( bottom );
+	isCaseSensitive = caseS;
+}
+
+void DingWidget::setDict( QString dict )
+{
+	methodname = dict;
+}
+
+void DingWidget::setCompleteWord( bool cword )
+{
+	isCompleteWord = cword;
+}
+
+void DingWidget::setQueryWord( QString qword )
+{
+	queryword = qword;
+}
+
+BroswerContent DingWidget::setText( QString word )
+{
+	queryword = word;
+	qDebug( queryword );
+	qDebug( "^ ^ ^ ^ ^ ^ ^ war das gesuchte Word");
+	return parseInfo();
 }
 
 void DingWidget::loadValues()
 {
 	Config cfg(  "odict" );
 	cfg.setGroup( "Method_"+methodname );
-	trenner = cfg.readEntry( "Seperator" );
+	//trenner = cfg.readEntry( "Seperator" );
 }
 
-void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
+BroswerContent DingWidget::parseInfo()
 {
+	QStringList search = lines.grep( queryword );
 
  	QString current;
  	QString left;
@@ -86,9 +126,15 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 	QString html_table_right = "</td></tr>";
 	QRegExp reg_div( trenner );
 	QRegExp reg_word( queryword );
-	QString substitute = "<a href=''>"+queryword+"</a>";
 	QStringList toplist, bottomlist;
-	for( QStringList::Iterator it = lines.begin() ; it != lines.end() ; ++it )
+	QString substitute = "<strong>"+queryword+"</strong>";
+
+	/*             Dieser Block ist von Patrik. Ich versuche einen neuen
+	 *             Ansatz. Zum einen ist HTML scheiﬂe an dieser Stelle und 
+	 *             zum andern funktioniert der Code nicht so wie er sollte.
+	QString substitute = "<a href=''>"+queryword+"</a>";
+	 
+	for( QStringList::Iterator it = search.begin() ; it != search.end() ; ++it )
 	{
 		current = *it;
 		left = current.left( current.find(reg_div) );
@@ -106,6 +152,33 @@ void DingWidget::parseInfo( QStringList &lines, QString &top, QString &bottom )
 	}
 		
 	//thats it, the lists are rendered. Lets put them in one string
-	bottom = html_header + bottomlist.join( "<br>" ) + html_footer;
-	top    = html_header + toplist.join( "<br>" )    + html_footer;
+	s_strings.bottom = html_header + bottomlist.join( "<br>" ) + html_footer;
+	s_strings.top    = html_header + toplist.join( "<br>" )    + html_footer;
+	*/
+
+	for( QStringList::Iterator it = search.begin() ; it != search.end() ; ++it )
+	{
+		current = *it;
+		left = current.left( current.find( trenner ) );
+ 		
+		right = current.right( current.length() - current.find(trenner) -2 );
+
+ 		if ( left.contains( queryword ) )
+		{
+			left.replace( queryword, substitute );
+			left = left + "-->" + right;
+			toplist.append( left );
+		}
+		else
+		{
+			right.replace( queryword, substitute );
+			left = right + "-->" + left;
+			bottomlist.append( right );
+		}
+	}
+
+	s_strings.bottom = bottomlist.join( "\n" );
+	s_strings.top = toplist.join( "\n" );
+
+	return s_strings;
 }

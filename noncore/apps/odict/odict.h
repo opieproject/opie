@@ -21,6 +21,7 @@ class QActionGroup;
 class DingWidget;
 class QTextBrowser;
 class QComboBox;
+class DingWidget;
 
 class ODict : public QMainWindow
 {
@@ -31,6 +32,7 @@ class ODict : public QMainWindow
 		QVBox *vbox;
 		QTextBrowser *browser_top,
 					 *browser_bottom;
+		DingWidget *ding;
 
 	private:
 		QPopupMenu *help, *settings, *parameter, *error_tol_menu;
@@ -43,8 +45,6 @@ class ODict : public QMainWindow
 		QVBoxLayout *vbox_layout;
 
 		QAction *setting_a, *setting_b;
-
-		DingWidget *ding;
 		
 		void setupMenus();
 

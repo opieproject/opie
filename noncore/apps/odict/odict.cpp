@@ -39,11 +39,12 @@
 
 ODict::ODict() : QMainWindow()
 {
-
 	activated_name = QString::null;
+	
 	vbox = new QVBox( this );
 	setCaption( tr( "OPIE-Dictionary" ) );
 	setupMenus();
+	
 
 	QHBox *hbox = new QHBox( vbox );
 	QLabel* query_label = new QLabel( tr( "Query:" ) , hbox ); query_label->show();
@@ -54,6 +55,8 @@ ODict::ODict() : QMainWindow()
 	connect( ok_button, SIGNAL( released() ), this, SLOT( slotStartQuery() ) );
 	browser_top = new QTextBrowser( vbox );
 	browser_bottom = new QTextBrowser( vbox );
+
+	ding = new DingWidget();
 
 	loadConfig();
 	setCentralWidget( vbox );
@@ -75,6 +78,7 @@ void ODict::loadConfig()
 		cfg.setGroup( *it );
 		query_co->insertItem( cfg.readEntry( "Name" ) );
 	}
+	slotMethodChanged(1 );           //FIXME: this line should not contain a integer
 }
 
 
@@ -90,22 +94,47 @@ void ODict::saveConfig()
 
 void ODict::slotDisplayAbout()
 {
-	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030104" ) );
+	QMessageBox::about(  this, tr( "About ODict" ), tr( "OPIE-Dictionary ODict \n (c) 2002, 2003 Carsten  Niehaus \n cniehaus@handhelds.org \n Version 20030108" ) );
 }
 
 void ODict::slotStartQuery()
 {
 	QString querystring = query_le->text();
-	qDebug("opening dict >%s< for >%s<", activated_name.latin1(),querystring.latin1());
-	if (querystring.isEmpty()){
-		qWarning("empty querystring");
-		return;
-	}
-	if (!activated_name || activated_name.isEmpty())
-		QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
-	else
-		DingWidget *ding = new DingWidget( querystring , browser_top, browser_bottom, activated_name );
-		ding->setText();
+//X 	qDebug("opening dict >%s< for >%s<", activated_name.latin1(),querystring.latin1());
+//X 	if (querystring.isEmpty()){
+//X 		qWarning("empty querystring");
+//X 		return;
+//X 	}
+//X 	if (!activated_name || activated_name.isEmpty())
+//X 		QMessageBox::warning(this,tr("No Dictionary"),tr("Please choose a dictonary") );
+//X 	else
+//X 	{
+		
+		ding->setCaseSensitive( casesens ); 
+		ding->setCompleteWord( completewords ); 
+		ding->setDict( activated_name );
+		
+		qDebug( "            activated_name ist :" );
+		qDebug( activated_name );
+		
+		qDebug( "            loadedDict() ist :" );
+		qDebug( ding->loadedDict() );
+		if ( activated_name != ding->loadedDict() )
+		{
+			qDebug( "ComboBox geändert" );
+			ding->loadDict(activated_name);
+		}
+		else qDebug( "ComboBox war GLEICH" );
+		
+		BroswerContent test = ding->setText( querystring );
+
+		browser_top->setText( test.top );
+		browser_bottom->setText( test.bottom );
+		
+		qDebug( "Text sollte gesetzt sein..." );
+
+//X 	}
+
 }
 
 
@@ -152,7 +181,7 @@ void ODict::slotSetParameter( int count )
  	else qWarning( "ERROR" );
 }
 
-void ODict::slotMethodChanged( int methodnumber )
+void ODict::slotMethodChanged( int /*methodnumber*/ )
 {
 	activated_name = query_co->currentText();
 }
