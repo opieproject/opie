@@ -1,6 +1,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 
 #include "lib.h"
 
@@ -10,6 +11,6 @@ int main( int argc,  char *argv[] ) {
     XINE::Lib lib;
     QString str = QString::fromLatin1( argv[1] );
     lib.play( str );
-    for (;;);
+    for (;;) sleep( 60 );
     return 0;
 }
