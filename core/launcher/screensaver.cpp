@@ -11,6 +11,7 @@
 using namespace Opie;
 
 
+
 OpieScreenSaver::OpieScreenSaver ( )
 		: QObject ( 0, "screensaver" ), QWSScreenSaver ( )
 {
@@ -27,6 +28,7 @@ OpieScreenSaver::OpieScreenSaver ( )
 
 	m_use_light_sensor = false;
 	m_backlight_sensor = -1;
+	::memset ( m_sensordata, 0xff, LS_Count * sizeof( m_sensordata [0] ));
 
 	m_lcd_status = true;
 
@@ -173,8 +175,22 @@ void OpieScreenSaver::setBacklight ( int bright )
 
 	killTimers ( );
 	if ( m_use_light_sensor ) {
+		QStringList sl = config. readListEntry ( "LightSensorData", ';' );
+		
+		m_sensordata [LS_SensorMin] = 40;
+		m_sensordata [LS_SensorMax] = 215;
+		m_sensordata [LS_LightMin] = 1;
+		m_sensordata [LS_LightMax] = 255;
+		m_sensordata [LS_Steps] = 12;
+		m_sensordata [LS_Interval] = 2000;		
+		
+		for ( uint i = 0; i < LS_Count; i++ ) {
+			if ( i < sl. count ( ))
+				m_sensordata [i] = sl [i]. toInt ( );
+		}
+
 		timerEvent ( 0 );
-		startTimer ( 2000 );
+		startTimer ( m_sensordata [LS_Interval] );
 	}
 
 	setBacklightInternal ( bright );
@@ -207,7 +223,24 @@ void OpieScreenSaver::setBacklightInternal ( int bright )
 
 void OpieScreenSaver::timerEvent ( QTimerEvent * )
 {
-	m_backlight_sensor = (( 255 - ODevice::inst ( )-> readLightSensor ( )) * m_backlight_normal ) / 255;
+	int s = ODevice::inst ( )-> readLightSensor ( );
+	
+	if ( s < m_sensordata [LS_SensorMin] )
+		m_backlight_sensor = m_sensordata [LS_LightMax];
+	else if ( s >= m_sensordata [LS_SensorMax] )
+		m_backlight_sensor = m_sensordata [LS_LightMin];
+	else {
+		int dx = m_sensordata [LS_SensorMax] - m_sensordata [LS_SensorMin];
+		int dy = m_sensordata [LS_LightMax] - m_sensordata [LS_LightMin];
+		
+		int stepno = ( s - m_sensordata [LS_SensorMin] ) * m_sensordata [LS_Steps] / dx;
+		
+		m_backlight_sensor = m_sensordata [LS_LightMax] - dy * stepno / ( m_sensordata [LS_Steps] - 1 );
+	}
+	if ( !m_backlight_sensor )
+		m_backlight_sensor = 1;
+
+	// qDebug ( "f(%d) = %d [%d - %d] -> [%d - %d] / %d", s, m_backlight_sensor, m_sensordata [LS_SensorMin], m_sensordata [LS_SensorMax], m_sensordata [LS_LightMin], m_sensordata [LS_LightMax], m_sensordata [LS_Steps] );
 
 	if ( m_level <= 0 )
 		setBacklightInternal ( -1 );

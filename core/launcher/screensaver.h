@@ -47,6 +47,19 @@ private:
 	bool m_use_light_sensor;
 	int m_backlight_sensor;
 
+	enum {
+		LS_Interval = 0,
+		LS_Steps,
+		LS_SensorMin,
+		LS_SensorMax,
+		LS_LightMin,
+		LS_LightMax,
+	
+		LS_Count
+	};
+
+	int m_sensordata [LS_Count];
+
 	bool m_lcd_status;
 
 	int m_backlight_normal;
