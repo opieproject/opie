@@ -41,6 +41,7 @@ using Opie::Core::OKeyConfigItem;
 namespace {
     static QPixmap* _dirPix = 0;
     static QPixmap* _unkPix = 0;
+    static QPixmap* _picPix = 0;
     class IconViewItem : public QIconViewItem {
     public:
         IconViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false);
@@ -49,12 +50,23 @@ namespace {
         bool isDir()const { return m_isDir; }
         void setText( const QString& );
 
+    protected:
+        mutable QPixmap* m_pix;
 
     private:
-        mutable QPixmap* m_pix;
         QString m_path;
         bool m_isDir : 1;
         bool m_noInfo :1;
+    };
+    class TextViewItem : public IconViewItem {
+        TextViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false );
+        QPixmap *pixmap()const;
+        void setText( const QString& );
+    };
+    class ThumbViewItem : public IconViewItem {
+        ThumbViewItem( QIconView*, const QString& path, const QString& name, bool isDir = false );
+        QPixmap *pixmap()const;
+        void setText( const QString& );
     };
 
 
@@ -115,6 +127,7 @@ PIconView::PIconView( QWidget* wid, Opie::Core::OConfig* cfg )
         QCopEnvelope( "QPE/Application/opie-eye_slave", "refUp()" );
     }
     m_path = QDir::homeDirPath();
+    m_mode = 0;
 
     QHBox *hbox = new QHBox( this );
     QLabel* lbl = new QLabel( hbox );
@@ -454,4 +467,25 @@ void PIconView::slotImageInfo() {
 
 void PIconView::slotImageInfo( const QString& name) {
      emit sig_showInfo( name );
+}
+
+
+void PIconView::slotChangeMode( int mode ) {
+    if ( mode >= 0 && mode <= 3 )
+        m_mode = mode;
+
+    QIconView::ItemTextPos pos;
+    switch( m_mode ) {
+    case 1:
+        pos = QIconView::Bottom;
+        break;
+    case 2:
+    case 0:
+    default:
+        pos = QIconView::Right;
+        break;
+    }
+    m_view->setItemTextPos( pos );
+
+    slotReloadDir();
 }

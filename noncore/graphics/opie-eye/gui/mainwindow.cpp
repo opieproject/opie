@@ -8,6 +8,7 @@
 #include "filesystem.h"
 #include "imageinfoui.h"
 #include "imageview.h"
+#include "viewmodebutton.h"
 
 #include <iface/ifaceinfo.h>
 #include <iface/dirview.h>
@@ -86,6 +87,10 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     btn->setIconSet( Resource::loadIconSet( "trash" ) );
     connect( btn, SIGNAL(clicked() ),
              m_view, SLOT(slotTrash() ) );
+
+    btn = new ViewModeButton( bar );
+    connect( btn, SIGNAL(changeMode(int)),
+             m_view, SLOT(slotChangeMode(int)));
 
     btn = new QToolButton( bar );
     btn->setIconSet( Resource::loadIconSet( "SettingsIcon" ) );

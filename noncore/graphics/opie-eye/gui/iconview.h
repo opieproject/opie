@@ -70,6 +70,8 @@ private slots:
 /**/
     void slotThumbInfo(const QString&, const QString&);
     void slotThumbNail(const QString&, const QPixmap&);
+
+    void  slotChangeMode( int );
 private:
     Opie::Core::OKeyConfigManager *m_viewManager;
     Opie::Core::OConfig *m_cfg;
@@ -77,6 +79,7 @@ private:
     QIconView* m_view;
     QString m_path;
     bool m_updatet : 1;
+    int m_mode;
 };
 
 #endif
