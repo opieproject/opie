@@ -1,5 +1,5 @@
 Package: libqpe1
-Files: lib/libqpe.so.1 lib/libqpe.so.1.5 lib/libqpe.so.1.5.0
+Files: lib/libqpe.so.1 lib/libqpe.so.1.5 lib/libqpe.so.1.5.0 pics/RoH/star/*.png
 Priority: required
 Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
