@@ -1103,7 +1103,7 @@ static void writeEncString(OFile *fp, const char *s, bool nosemi)
     }
 }
 
-static bool includesUnprintable(VObject *o)
+static bool includesUnprintable(VObject *o, bool nosemi)
 {
     if (o) {
 	if (VALUE_TYPE(o) == VCVT_STRINGZ) {
@@ -1111,7 +1111,8 @@ static bool includesUnprintable(VObject *o)
 	    if (p) {
 		while (*p) {
 		    if (*p==' ' && (!p[1] || p[1]=='\n') // RFC 1521: spaces at ends need quoting
-			     || qpReplaceChar(*p) )
+			    || qpReplaceChar(*p)
+			    || *p==';' && nosemi )
 			return TRUE;
 		    p++;
 		}
@@ -1161,7 +1162,7 @@ static void writeAttrValue(OFile *fp, VObject *o)
 	struct PreDefProp *pi;
 	pi = lookupPropInfo(NAME_OF(o));
 	if (pi && ((pi->flags & PD_INTERNAL) != 0)) return;
-	if ( includesUnprintable(o) )
+	if ( includesUnprintable(o,TRUE) )
 	    appendsOFileEncCs(fp);
 	appendcOFile(fp,';');
 	appendsOFile(fp,NAME_OF(o));
@@ -1229,7 +1230,7 @@ static void writeProp(OFile *fp, VObject *o)
 	    bool printable = TRUE;
 	    while (*fields && printable) {
 		VObject *t = isAPropertyOf(o,*fields);
-		if (includesUnprintable(t))
+		if (includesUnprintable(t,TRUE))
 		    printable = FALSE;
 		fields++;
 	    }
@@ -1254,7 +1255,7 @@ static void writeProp(OFile *fp, VObject *o)
 
 	
     if (VALUE_TYPE(o)) {
-	    if ( includesUnprintable(o) )
+	    if ( includesUnprintable(o,FALSE) )
 			appendsOFileEncCs(fp);
 	unsigned long size = 0;
         VObject *p = isAPropertyOf(o,VCDataSizeProp);
