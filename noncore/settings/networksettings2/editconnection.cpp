@@ -121,7 +121,10 @@ NetworkSetup * EditNetworkSetup::getTmpCollection( void ) {
       }
 
       TmpCollection.clear();
-      TmpCollection.copyFrom( *SelectedNodes );
+      if( SelectedNodes ) {
+        // initialize like original
+        TmpCollection.copyFrom( *SelectedNodes );
+      }
 
       // update content
       QListViewItem * it = Nodes_LV->firstChild();
@@ -456,9 +459,15 @@ void EditNetworkSetup::SLOT_SelectNode( QListViewItem * it ) {
       return;
     }
 
-    if( ! ((QCheckListItem *)it)->isOn() ) {
-      // clicked on line but NOT on Check or Radio item
-      return;
+    ANetNode::NetNodeList & NNL = NN->alternatives();
+
+    if( NNL.size() != 1 ) {
+      if( NNL.size() == 0 ||
+        ! ((MyQCheckListItem *)it)->isOn() 
+      ) {
+        // not clicked on Check or Radio item
+        return;
+      }
     }
 
     // item has really changed -> update 

@@ -721,7 +721,7 @@ bool NetworkSettingsData::canStart( const QString & Interface ) {
         case IsUp : // also called for 'ifdown'
           // device is ready -> done
           Log(( "allow %ld for %s\n", NC->number(), Interface.latin1()));
-          printf( "A%ld%s\n", NC->number(), Interface.latin1() );
+          printf( "A%d%s\n", NC->number(), Interface.latin1() );
           return 0;
       }
     } 
