@@ -17,6 +17,8 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags )
   : QMainWindow( parent, name, WStyle_ContextHelp  )
 
 {
+	setCaption ( tr( "Medium Mount Settings" ));
+
   //  m_lay = new QVBoxLayout( this );
   m_tab = new QTabWidget( this );
   setCentralWidget( m_tab );

@@ -407,7 +407,7 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
     : QDialog ( parent, name, true, WStyle_ContextHelp )
 {
-    setCaption( tr( "Appearance" ) );
+    setCaption( tr( "Appearance Settings" ) );
 
     Config config( "qpe" );
     config.setGroup( "Appearance" );
