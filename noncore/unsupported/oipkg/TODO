@@ -1,3 +1,4 @@
+* setDocument function
 * Settings Class
 * tr() ;)
 * Dialog to display ipkg output live
@@ -6,3 +7,4 @@
 * qcop
 * error handling
 * manage links
+* dependency checking

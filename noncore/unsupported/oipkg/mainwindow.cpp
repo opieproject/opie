@@ -33,6 +33,10 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   listViewPackages->setSelectionMode(QListView::NoSelection);
   setCentralWidget( listViewPackages );
 
+	channel = new QCopChannel( "QPE/Application/oipkg", this );
+	connect( channel, SIGNAL(received(const QCString&, const QByteArray&)),
+		this, SLOT(receive(const QCString&, const QByteArray&)) );
+
   makeMenu();		
 #ifdef NEWLAYOUT
 	listViewPackages->addColumn( tr("Package") );
@@ -415,4 +419,18 @@ void MainWindow::stopTimer( QListViewItem* )
 {
 	pvDebug( 5, "stop timer" );
 	popupTimer->stop();
+}
+
+void MainWindow::setDocument(const QString &fileName)
+{
+	ipkg->installFile( fileName );
+}
+
+void MainWindow::receive(const QCString &msg, const QByteArray &arg)
+{
+	pvDebug(3, "QCop "+msg);
+	if ( msg == "setDocument(QString)" )
+ 	{
+  	setDocument( QString(arg) );
+	}
 }

@@ -16,6 +16,7 @@ class QPEToolBar;
 class QLineEdit;
 class QListView;
 class PackageListItem;
+class QCopChannel;
 
 class MainWindow : public QMainWindow
 {
@@ -25,6 +26,8 @@ class MainWindow : public QMainWindow
 public:
   MainWindow( QWidget *parent = 0, const char *name = 0, WFlags f = 0 );
   ~MainWindow();
+
+	QCopChannel *channel;
 
 protected slots:
   void runIpkg();
@@ -36,6 +39,7 @@ protected slots:
   void showSettings();
   void showSettingsSrv();
   void showSettingsDst();
+	void setDocument (const QString &);
 
 public slots:
   void showDetails();
@@ -49,6 +53,7 @@ public slots:
   void showPopup();
   void changePackageDest( int );
   void stopTimer( QListViewItem* );
+	void receive (const QCString &, const QByteArray &);
 
 private:
   void makeMenu();

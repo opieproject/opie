@@ -31,8 +31,10 @@ private:
   QList<Package> to_remove;
   QList<Package> to_install;
   bool runwindowopen;
+  QString fileNameToInstall;
 
   void makeLinks(Package*);
+  void linkPackage( QString, QString );
   void processLinkDir( QString, QString );
   int  runIpkg(const QString& args, const QString& dest="" );
   void out( QString );
@@ -40,7 +42,9 @@ private:
 public slots:
 	void doIt();
  	void install();
+  void installFileName();
   void remove();
+  void installFile(const QString &fileName);
   void linkDestination( const QString, const QByteArray );
 };
 

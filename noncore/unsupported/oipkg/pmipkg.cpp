@@ -111,10 +111,15 @@ void PmIpkg::makeLinks(Package *pack)
     QString statusDir = cfg.readEntry( "statusDir", "" );
 	}
  	QString fn = dest+"/"+statusDir+"/info/"+pack->name()+".list";
-  QFile f( fn );
-  if ( ! f.open(IO_ReadOnly) )
+  linkPackage( fn, dest );
+}
+
+void PmIpkg::linkPackage( QString packFileName, QString dest )
+{
+ QFile f( packFileName );
+ if ( ! f.open(IO_ReadOnly) )
   {
-  	out( "<b>Panik!</b> Could not open:<br>"+fn );
+  	out( "<b>Panik!</b> Could not open:<br>"+packFileName );
    	return;
   };
   QTextStream t( &f );
@@ -207,7 +212,7 @@ void PmIpkg::commit( PackageList pl )
   					runwindow, SLOT( close() ) );
 
 	runwindow->exec();
-  return;
+  out("<h1>"+tr("Its now save to close this window")+"<h1>");
 }
 
 void PmIpkg::doIt()
@@ -313,4 +318,31 @@ void PmIpkg::show(bool b)
  		runwindow->progress->hide();
   else
  		runwindow->progress->show();
+}
+
+void PmIpkg::installFile(const QString &fileName)
+{
+	pvDebug( 2,"PmIpkg::installFile "+ fileName);
+ 	show( false );
+  runwindow->outPut->setText("");
+  fileNameToInstall = fileName;
+ 	runwindow->doItButton->hide();
+	runwindow->removeButton->hide();
+  out("<b>"+tr("Install: ")+fileName);
+  connect( runwindow->installButton, SIGNAL( clicked() ),
+  					this, SLOT( installFileName() ) );
+  connect( runwindow->cancelButton, SIGNAL( clicked() ),
+  					runwindow, SLOT( close() ) );
+
+	runwindow->exec();
+}
+
+void PmIpkg::installFileName()
+{
+ 	if ( !QFile::exists( fileNameToInstall ) ) return;
+	out(tr("Installing pacakge ")+fileNameToInstall+"<br>"+tr("please wait")+"</b><br>");
+  runIpkg("install " + fileNameToInstall );
+  if ( settings->createLinks() )
+	  linkPackage( fileNameToInstall, settings->getDestinationUrl() );
+   out("<h1>"+tr("Its now save to close this window")+"<h1>");
 }
