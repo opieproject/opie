@@ -18,7 +18,7 @@ ifeq ($(filter 3.%,$(QTE_VERSION)),) # not qt3
 else
 	echo CONFIG += qt3 >> $@
 endif
-ifneq ($(CONFIG_QUICK_LAUNCH),)
+ifeq ($(CONFIG_QUICK_LAUNCH),)
 	echo contains\( CONFIG, quick-app \) \{ >> $@
 	echo CONFIG -= quick-app >> $@
 	echo CONFIG += quick-app-lib >> $@
@@ -76,6 +76,7 @@ $(OPIEDIR)/stamp-headers :
 	( cd include/qtopia/private && rm -f *.h; ln -sf ../../../library/backend/*.h .; )
 	( cd include/opie &&  rm -f *.h; ln -sf ../../libopie/*.h .; rm -f *_p.h; )
 	( cd include/opie &&  ln -sf ../../libopie/pim/*.h .; )
+	( cd include/opie &&  ln -sf ../../libopie/big-screen/*.h .;   )
 	( cd include/opie2 && ln -sf ../../libopie2/opiecore/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiemm/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiedb/*.h .; )
