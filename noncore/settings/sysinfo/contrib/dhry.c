@@ -497,7 +497,7 @@ int             Arr_2_Glob [50] [50];
 
 char Reg_Define[] = "Register option selected.";
 
-extern char     *malloc ();
+//extern char     *malloc ();
 Enumeration     Func_1 ();
   /*
   forward declaration necessary since Enumeration may not simply be int
