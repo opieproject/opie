@@ -1,9 +1,9 @@
 Files: bin/checkbook apps/Applications/checkbook.desktop pics/checkbook/checkbook.png
 Priority: optional
 Section: applications
-Maintainer: ljp <llornkcor@handhelds.org>
+Maintainer: drw <drw@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
+Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
 Description: Checkbook keeping program.
  The checkbook accounting program for the Opie environment.

@@ -26,17 +26,54 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef TRANSACTION_H
+#define TRANSACTION_H
 
-#include <qpe/qpeapplication.h>
+#include <qdialog.h>
 
-int main(int argc, char **argv)
+class DateBookMonth;
+class QComboBox;
+class QLineEdit;
+class QMultiLineEdit;
+class QPushButton;
+class QRadioButton;
+class QString;
+class QWidget;
+class TranInfo;
+
+class Transaction : public QDialog
 {
-	QPEApplication app(argc, argv);
+	Q_OBJECT
 
-	MainWindow *cb = new MainWindow();
-	app.setMainWidget(cb);
-	cb->showMaximized();
+	public:
+		Transaction( QWidget * = 0x0, const QString & = 0x0, TranInfo * = 0x0,
+					 char = '$' );
+		~Transaction();
 
-	return app.exec();
-}
+	private:
+		TranInfo *tran;
+
+		char currencySymbol;
+
+		QRadioButton   *withBtn;
+		QRadioButton   *depBtn;
+		QPushButton    *dateBtn;
+		DateBookMonth  *datePicker;
+		QLineEdit      *numEdit;
+		QLineEdit      *descEdit;
+		QComboBox      *catList;
+		QComboBox      *typeList;
+		QLineEdit      *amtEdit;
+		QLineEdit      *feeEdit;
+		QMultiLineEdit *noteEdit;
+
+	protected slots:
+		void accept();
+
+	private slots:
+		void slotWithdrawalClicked();
+		void slotDepositClicked();
+		void slotDateChanged( int, int, int );
+};
+
+#endif

@@ -26,17 +26,35 @@
 
 */
 
-#include "mainwindow.h"
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <qpe/qpeapplication.h>
+#include <qmainwindow.h>
 
-int main(int argc, char **argv)
+class QAction;
+class QListBox;
+class QListBoxItem;
+class QString;
+
+class MainWindow : public QMainWindow
 {
-	QPEApplication app(argc, argv);
+	Q_OBJECT
 
-	MainWindow *cb = new MainWindow();
-	app.setMainWidget(cb);
-	cb->showMaximized();
+	public:
+		MainWindow();
+		~MainWindow();
 
-	return app.exec();
-}
+	private:
+		QListBox *cbList;
+		QString   cbDir;
+		QAction  *actionOpen;
+		QAction  *actionDelete;
+		char      currencySymbol;
+
+	private slots:
+		void slotOpen();
+		void slotNew();
+		void slotDelete();
+};
+
+#endif
