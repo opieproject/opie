@@ -78,7 +78,7 @@ Lib::Lib(XineVideoWidget* widget) {
         QFile f(str);
         f.open(IO_WriteOnly);
         QTextStream ts( &f );
-        ts << "misc.memcpy_method:glibc \n";
+        ts << "misc.memcpy_method:glibc\n";
         f.close();
     }
 
