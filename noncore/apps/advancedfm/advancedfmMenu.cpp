@@ -486,9 +486,7 @@ void AdvancedFm::copy() {
           QFile f(destFile);
           if( f.exists()) {
               if(doMsg) {
-                  switch ( QMessageBox::warning(this,tr("File Exists!"),
-                            item+tr("\nexists. Ok to overwrite?"),
-                             tr("Yes"),tr("No"),0,0,1) ) {
+                  switch ( QMessageBox::warning(this,tr("File Exists!"), tr("%1 exists. Ok to overwrite?").arg( item ), tr("Yes"),tr("No"),0,0,1) ) {
                     case 1:
                         return;
                         break;
@@ -497,7 +495,7 @@ void AdvancedFm::copy() {
               f.remove();                 
           }
           if(!copyFile( curFile, destFile) ) {
-              QMessageBox::message("AdvancedFm","Could not copy\n"+curFile +"to\n"+destFile);
+              QMessageBox::message("AdvancedFm",tr( "Could not copy %1 to %2").arg( curFile ).arg( destFile ) );
           return;
         }
       }
