@@ -62,6 +62,8 @@ typedef fouble fp_t;
 //------------------------------------------------------------------------
 
 class QOutputDev : public QScrollView, public OutputDev {
+	Q_OBJECT
+
 public:
 
 	// Constructor.
