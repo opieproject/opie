@@ -7,6 +7,7 @@
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qlabel.h>
+#include <qlineedit.h>
 #include <qprogressbar.h>
 #include <qspinbox.h>
 #include <qtabwidget.h>
@@ -131,69 +132,72 @@ void WLANModule::receive(const QCString &param, const QByteArray &arg)
     QDataStream stream(arg,IO_ReadOnly);
     QString interface;
     QString action;
-
-    stream >> interface;
-    stream >> action;
-    qDebug("WLANModule got interface %s and acion %s", interface.latin1(), action.latin1());
-    // find interfaces
-    Interface *ifa=0;
-    for ( Interface *i=list.first(); i != 0; i=list.next() ){
-        if (i->getInterfaceName() == interface){
-            qDebug("WLANModule found interface %s",interface.latin1());
-            ifa = i;
+    while (! stream.atEnd() ){
+        stream >> interface;
+        stream >> action;
+        qDebug("WLANModule got interface %s and acion %s", interface.latin1(), action.latin1());
+        // find interfaces
+        Interface *ifa=0;
+        for ( Interface *i=list.first(); i != 0; i=list.next() ){
+            if (i->getInterfaceName() == interface){
+                qDebug("WLANModule found interface %s",interface.latin1());
+                ifa = i;
+            }
         }
-    }
 
-    if (ifa == 0){
-        qFatal("WLANModule Did not find %s",interface.latin1());
-    }
-
-    if (count == 2){
-        // those should call the interface directly
-        QWidget *info = getInfo( ifa );
-        info->showMaximized();
-
-        if ( action.contains("start" ) ){
-            ifa->start();
-        } else if ( action.contains("restart" ) ){
-            ifa->restart();
-        } else if ( action.contains("stop" ) ){
-            ifa->stop();
-        }else if ( action.contains("refresh" ) ){
-            ifa->refresh();
+        if (ifa == 0){
+            qFatal("WLANModule Did not find %s",interface.latin1());
         }
-    }else if (count == 3){
-        QString value;
-        if (!wlanconfigWiget){
-            //FIXME: what if it got closed meanwhile?
-            wlanconfigWiget = (WLANImp*) configure(ifa);
-        }
-        wlanconfigWiget->showMaximized();
-        stream >> value;
-        qDebug("WLANModule is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
-        if ( action.contains("ESSID") ){
-            QComboBox *combo = wlanconfigWiget->essid;
-            bool found = false;
-            for ( int i = 0; i < combo->count(); i++)
-                if ( combo->text( i ) == value ){
-                    combo->setCurrentItem( i );
-                    found = true;
+
+        if (count == 2){
+            // those should call the interface directly
+            QWidget *info = getInfo( ifa );
+            info->showMaximized();
+
+            if ( action.contains("start" ) ){
+                ifa->start();
+            } else if ( action.contains("restart" ) ){
+                ifa->restart();
+            } else if ( action.contains("stop" ) ){
+                ifa->stop();
+            }else if ( action.contains("refresh" ) ){
+                ifa->refresh();
+            }
+        }else if (count == 3){
+            QString value;
+            if (!wlanconfigWiget){
+                //FIXME: what if it got closed meanwhile?
+                wlanconfigWiget = (WLANImp*) configure(ifa);
+            }
+            wlanconfigWiget->showMaximized();
+            stream >> value;
+            qDebug("WLANModule is setting %s of %s to %s", action.latin1(), interface.latin1(), value.latin1() );
+            if ( action.contains("ESSID") ){
+                QComboBox *combo = wlanconfigWiget->essid;
+                bool found = false;
+                for ( int i = 0; i < combo->count(); i++)
+                    if ( combo->text( i ) == value ){
+                        combo->setCurrentItem( i );
+                        found = true;
                 }
-            if (!found) combo->insertItem( value, 0 );
-        }else if ( action.contains("Mode") ){
-            QComboBox *combo = wlanconfigWiget->mode;
-            for ( int i = 0; i < combo->count(); i++)
-                if ( combo->text( i ) == value ){
+                if (!found) combo->insertItem( value, 0 );
+            }else if ( action.contains("Mode") ){
+                QComboBox *combo = wlanconfigWiget->mode;
+                for ( int i = 0; i < combo->count(); i++)
+                    if ( combo->text( i ) == value ){
                     combo->setCurrentItem( i );
-                }
+                    }
 
-        }else if (action.contains("Channel")){
-            wlanconfigWiget->specifyChan->setChecked( true );
-            wlanconfigWiget->networkChannel->setValue( value.toInt() );
-        }else
-            qDebug("wlan plugin has no clue");
-    }
-
+            }else if (action.contains("Channel")){
+                wlanconfigWiget->specifyChan->setChecked( true );
+                wlanconfigWiget->networkChannel->setValue( value.toInt() );
+            }else if (action.contains("MacAddr")){
+                wlanconfigWiget->specifyAp->setChecked( true );
+                wlanconfigWiget->macEdit->setText( value );
+            }else
+                qDebug("wlan plugin has no clue");
+        }
+    }// while stream
 }
 
 QWidget *WLANModule::getInfo( Interface *i)

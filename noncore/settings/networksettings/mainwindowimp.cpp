@@ -645,13 +645,6 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
     param = param.left( param.length() - 1 );
     qDebug("dest >%s< param >"+param+"<",dest.latin1());
 
-//     if (param.contains("QString,QString,QString")) {
-//         QDataStream stream(arg,IO_ReadOnly);
-//         QString arg1, arg2, arg3;
-//         stream >> arg1 >> arg2 >> arg3 ;
-//         qDebug("args: >%s< >%s< >%s<",arg1.latin1(),arg2.latin1(),arg3.latin1());
-//     }
-
      QMap<Module*, QLibrary*>::Iterator it;
      for( it = libraries.begin(); it != libraries.end(); ++it ){
          qDebug("plugin >%s<", it.key()->type().latin1() );
