@@ -29,6 +29,7 @@ class ToDoEvent {
     void setDescription(const QString& );
     bool isOverdue();
 
+    void setUid(int id) {m_uid = id; };
     bool operator<(const ToDoEvent &toDoEvent )const;
     bool operator<=(const ToDoEvent &toDoEvent )const;
     bool operator!=(const ToDoEvent &toDoEvent )const { return !(*this == toDoEvent); };
