@@ -26,7 +26,6 @@
 #include "function_keyboard.h"
 #include "emulation_handler.h"
 #include "script.h"
-#include "quick_button.h"
 
 
 
@@ -174,7 +173,7 @@ void MainWindow::initUI() {
      * action that open/closes the keyboard
      */
     m_openKeys = new QAction (tr("Open Keyboard..."),
-                             Resource::loadPixmap( "down" ),
+                             Resource::loadPixmap( "console/keys/keyboard_icon" ),
                              QString::null, 0, this, 0);
 
     m_openKeys->setToggleAction(true);
@@ -227,12 +226,6 @@ void MainWindow::initUI() {
     m_buttonBar->setHorizontalStretchable( TRUE );
     m_buttonBar->hide();
 
-    /*
-    m_qb = new QuickButton( m_buttonBar );
-    connect( m_qb, SIGNAL( keyPressed( ushort, ushort, bool, bool, bool) ),
-            this, SLOT( slotKeyReceived( ushort, ushort, bool, bool, bool) ) );
-    */
-    /* now add the copy and paste actions */
     a = new QAction(tr("Copy"),
                     Resource::loadPixmap("copy"), QString::null,
                     0, this, 0 );
@@ -447,6 +440,7 @@ void MainWindow::create( const Profile& prof ) {
 
     m_sessions.append( ses );
     tabWidget()->add( ses );
+    tabWidget()->repaint();
     m_curSession = ses;
 
     // dicide if its a local term ( then no connction and no tranfer), maybe make a wrapper method out of it

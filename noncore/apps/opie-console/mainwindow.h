@@ -21,7 +21,7 @@ class ProfileManager;
 class Profile;
 class FunctionKeyboard;
 class FKey;
-class QuickButton;
+
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -121,7 +121,6 @@ private:
     QAction* m_closewindow;
 
     FunctionKeyboard *m_kb;
-    QuickButton *m_qb;
     bool m_isFullscreen;
 
     QWidget* savedParentFullscreen;
