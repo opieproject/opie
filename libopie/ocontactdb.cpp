@@ -14,11 +14,15 @@
  *       with our version of libqpe
  *
  * =====================================================================
- * Version: $Id: ocontactdb.cpp,v 1.1.2.14 2002-07-28 17:41:52 eilers Exp $
+ * Version: $Id: ocontactdb.cpp,v 1.1.2.15 2002-08-04 12:24:30 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.cpp,v $
- * Revision 1.1.2.14  2002-07-28 17:41:52  eilers
+ * Revision 1.1.2.15  2002-08-04 12:24:30  eilers
+ * It is now possible to ask the backend which kind of queries he support
+ * or if a query is correct...
+ *
+ * Revision 1.1.2.14  2002/07/28 17:41:52  eilers
  * oops..
  *
  * Revision 1.1.2.13  2002/07/28 15:35:22  eilers
@@ -271,6 +275,32 @@ namespace {
 			
 			m_queryValid = true;
 			return m_currentQuery.first();
+		}
+
+		const uint getQuerySettings()
+		{
+			return ( OContactDB::query_WildCards 
+				 & OContactDB::query_IgnoreCase 
+				 & OContactDB::query_RegExp 
+				 & OContactDB::query_ExactMatch );
+		}
+
+		bool hasQuerySettings (uint querySettings) const 
+		{
+			/* OContactDB::query_IgnoreCase may be added with one 
+			 * of the other settings, but never used alone.
+			 * The other settings are just valid alone...
+			 */
+			switch ( querySettings & ~OContactDB::query_IgnoreCase ){
+			case OContactDB::query_RegExp:
+				return ( true );
+			case OContactDB::query_WildCards:
+				return ( true );
+			case OContactDB::query_ExactMatch:
+				return ( true );
+			default:
+				return ( false );
+			}
 		}
 
 		const Contact *nextFound ()
@@ -621,6 +651,16 @@ QValueList<Contact> OContactDB::allContacts() const
 const Contact *OContactDB::queryByExample ( const Contact &query, const uint setting )
 {
 	return ( m_backEnd->queryByExample ( query, setting ) );
+}
+
+const uint OContactDB::getQuerySettings()
+{
+	return ( m_backEnd->getQuerySettings() );
+}
+
+bool OContactDB::hasQuerySettings (uint querySettings) const 
+{
+	return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
 
 const Contact *OContactDB::nextFound ()

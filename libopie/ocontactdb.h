@@ -13,11 +13,15 @@
  * =====================================================================
  * ToDo: ...
  * =====================================================================
- * Version: $Id: ocontactdb.h,v 1.1.2.12 2002-07-28 15:35:22 eilers Exp $
+ * Version: $Id: ocontactdb.h,v 1.1.2.13 2002-08-04 12:24:30 eilers Exp $
  * =====================================================================
  * History:
  * $Log: ocontactdb.h,v $
- * Revision 1.1.2.12  2002-07-28 15:35:22  eilers
+ * Revision 1.1.2.13  2002-08-04 12:24:30  eilers
+ * It is now possible to ask the backend which kind of queries he support
+ * or if a query is correct...
+ *
+ * Revision 1.1.2.12  2002/07/28 15:35:22  eilers
  * Example-By-Query Search interface debugged. It is working now.. :)
  *
  * Revision 1.1.2.11  2002/07/21 15:21:26  eilers
@@ -155,6 +159,17 @@ class OContactBackend {
 	 */
 	virtual const Contact *queryByExample ( const Contact &query, const uint settings ) = 0;
 
+	/** Return all possible settings.
+	 *  @return All settings provided by the current backend 
+	 * (i.e.: query_WildCards & query_IgnoreCase)
+	 */
+	const uint getQuerySettings();
+
+	/** Check whether settings are correct.
+	 * @return <i>true</i> if the given settings are correct and possible.
+	 */
+	bool hasQuerySettings (uint querySettings) const;
+
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
 	 * @return Pointer to next contact or <i>NULL</i> if list empty or no 
@@ -229,12 +244,24 @@ class OContactDB: public QObject
 	 * a new contact-object and start query with this function.
 	 * All information will be connected by an "AND".
 	 * @param query The query form.
-	 * @param settings The parameters how to perform the query (OContactBackend::query_*).
+	 * @param querysettings The parameters how to perform the query (OContactBackend::query_*).
 	 * @return <i>NULL</i> if nothing was found or the first contact.
 	 * @see nextFound(), OContactBackend::query_RegExp, OContactBackend::query_WildCards, 
 	 * OContactBackend::query_ExactMatch, OContactBackend::query_IgnoreCase
+	 * @see 
 	 */
-	const Contact *queryByExample ( const Contact &query, const uint settings ); 
+	const Contact *queryByExample ( const Contact &query, const uint querysettings ); 
+
+	/** Return all possible settings.
+	 *  @return All settings provided by the current backend 
+	 * (i.e.: query_WildCards & query_IgnoreCase)
+	 */
+	const uint getQuerySettings();
+
+	/** Check whether settings are correct.
+	 * @return <i>true</i> if the given settings are correct and possible.
+	 */
+	bool hasQuerySettings (uint querySettings) const;
 
 	/** Requests a contact which was selected by queryByExample().
 	 * Use this function to move through the list of selected contacts.
