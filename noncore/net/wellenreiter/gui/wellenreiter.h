@@ -27,6 +27,7 @@ class QTimerEvent;
 class QPixmap;
 class OPacket;
 class OWaveLanManagementPacket;
+class OWaveLanControlPacket;
 class OWaveLanDataPacket;
 class OEthernetPacket;
 class OARPPacket;
@@ -74,7 +75,8 @@ class Wellenreiter : public WellenreiterBase {
     void stoppedSniffing();
 
   private:
-    void handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon );
+    void handleManagementFrame( OPacket* p, OWaveLanManagementPacket* manage );
+    void handleControlFrame( OPacket* p, OWaveLanControlPacket* control );
     void handleWlanData( OPacket* p, OWaveLanDataPacket* data, OMacAddress& from, OMacAddress& to );
     void handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAddress& from, OMacAddress& to );
     void handleARPData( OPacket* p, OARPPacket* arp, OMacAddress& from, OMacAddress& to );

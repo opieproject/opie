@@ -159,8 +159,12 @@ void Wellenreiter::handleNotification( OPacket* p )
 }
 
 
-void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
+void Wellenreiter::handleManagementFrame( OPacket* p, OWaveLanManagementPacket* manage )
 {
+    if ( manage->managementType() != "Beacon" ) return; // only handling beacons at that time
+
+    OWaveLanManagementPacket* beacon = manage;
+
     QString type;
     if ( beacon->canIBSS() )
     {
@@ -183,7 +187,7 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
 
     OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
 
-    GpsLocation loc( 0, 0 );
+    GpsLocation loc( -111.111, -111.111 );
     if ( configwindow->enableGPS->isChecked() )
     {
         // TODO: add check if GPS is working!?
@@ -202,6 +206,21 @@ void Wellenreiter::handleBeacon( OPacket* p, OWaveLanManagementPacket* beacon )
             graphwindow->traffic( ds->channel(), prism->signalStrength() );
         else
             graphwindow->traffic( ds->channel(), 95 );
+    }
+}
+
+
+void Wellenreiter::handleControlFrame( OPacket* p, OWaveLanControlPacket* control )
+{
+    OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
+
+    if ( control->controlType() == "Acknowledge" )
+    {
+        netView()->addNewItem( "adhoc", "???", header->macAddress1(), false, -1, 0, GpsLocation( -111.111, -111.111 ) );
+    }
+    else
+    {
+        qDebug( "Wellenreiter::handleControlFrame - please handle %s in a future version! :D", (const char*) control->controlType()  );
     }
 }
 
@@ -241,7 +260,7 @@ void Wellenreiter::handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAd
     from = data->sourceAddress();
     to = data->destinationAddress();
 
-    netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( 0, 0 ) );
+    netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( -111.111, -111.111 ) );
 }
 
 
@@ -340,11 +359,19 @@ void Wellenreiter::receivePacket( OPacket* p )
         pcap->dump( p );
     }
 
-    // check if we received a beacon frame
-    OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( childIfToParse( p, "802.11 Management" ) );
-    if ( beacon && beacon->managementType() == "Beacon" )
+    // check for a management frame
+    OWaveLanManagementPacket* manage = static_cast<OWaveLanManagementPacket*>( childIfToParse( p, "802.11 Management" ) );
+    if ( manage )
     {
-        handleBeacon( p, beacon );
+        handleManagementFrame( p, manage );
+        return;
+    }
+
+    // check for a control frame
+    OWaveLanControlPacket* control = static_cast<OWaveLanControlPacket*>( childIfToParse( p, "802.11 Control" ) );
+    if ( control )
+    {
+        handleControlFrame( p, control );
         return;
     }
 
