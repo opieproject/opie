@@ -1,6 +1,6 @@
 menu "opie-console"
 
-  config #TEST
+  config #OPIE-CONSOLE
     boolean "opie-console"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

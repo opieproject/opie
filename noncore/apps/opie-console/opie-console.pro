@@ -1,4 +1,5 @@
 TEMPLATE     = app
+TMAKE_CXXFLAGS	=-DHAVE_OPENPTY
 #CONFIG       = qt warn_on release
 CONFIG 	     = qt debug
 DESTDIR      = $(OPIEDIR)/bin
