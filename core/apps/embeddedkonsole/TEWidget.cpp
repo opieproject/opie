@@ -989,7 +989,7 @@ bool TEWidget::eventFilter( QObject *obj, QEvent *e )
 #ifdef FAKE_CTRL_AND_ALT
     static bool control = FALSE;
     static bool alt = FALSE;
-    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
+//    qDebug(" Has a keyboard with no CTRL and ALT keys, but we fake it:");
     bool dele=FALSE;
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
         QKeyEvent* ke = (QKeyEvent*)e;
