@@ -100,6 +100,12 @@ public:
 	void pasteClipboard();
 
 
+	/**
+	 * reload configuration
+	 */
+	virtual void reloadConfig();
+
+
 signals:
 
 	/**
