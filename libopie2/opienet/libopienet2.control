@@ -5,6 +5,6 @@ Section: opie/libs
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: 1.8.4-$SUB_VERSION
-Depends: libopiecore2
+Depends: libopiecore2, libpcap0 (>=0.7.2)
 Provides: libopienet2
 Description: Opie library 2.0 NET
