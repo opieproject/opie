@@ -24,9 +24,9 @@ int main( int argc, char ** argv )
 {
     QPEApplication a( argc, argv );
 
-    TableViewerWindow * mw = new TableViewerWindow;
-    mw->setCaption( TableViewerWindow::tr("Table Viewer") );
-    a.showMainWidget(mw);
+    TableViewerWindow mw;
+    mw.setCaption( TableViewerWindow::tr("Table Viewer") );
+    a.showMainWidget(&mw);
 
     return a.exec();
 }

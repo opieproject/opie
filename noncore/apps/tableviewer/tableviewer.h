@@ -49,8 +49,11 @@ public slots:
 
     void newDocument();
     void saveDocument();
+    void setDocument(const QString &);
     void openDocument(const DocLnk &);
 
+    void firstItem();
+    void lastItem();
     void nextItem();
     void previousItem();
 

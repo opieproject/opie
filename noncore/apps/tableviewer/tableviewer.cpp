@@ -34,6 +34,7 @@
 
 /* QTE includes */
 #include <qpe/qpemenubar.h>
+#include <qpe/qpetoolbar.h>
 #include <qpopupmenu.h>
 #include <qapplication.h>
 #include <qwidgetstack.h>
@@ -234,6 +235,11 @@ void TableViewerWindow::newDocument()
   editKeysSlot();
 }
 
+void TableViewerWindow::setDocument(const QString &f)
+{
+    openDocument(DocLnk(f, TRUE));
+}
+
 void TableViewerWindow::openDocument(const DocLnk &f)
 {
 
@@ -286,6 +292,26 @@ void TableViewerWindow::openDocument(const DocLnk &f)
         qWarning(tr("could not load Document"));
     }
     dev->close();
+}
+
+/*! 
+    Moves to the first item of the current table 
+*/
+void TableViewerWindow::firstItem()
+{
+    listView->first();
+    ts.current_elem = listView->getCurrentData();
+    browseView->rebuildData();
+}
+
+/*! 
+    Moves to the lat item of the current table 
+*/
+void TableViewerWindow::lastItem()
+{
+    listView->last();
+    ts.current_elem = listView->getCurrentData();
+    browseView->rebuildData();
 }
 
 /*! 
