@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Weather plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>氣像plugin</translation>
     </message>
 </context>
 <context>

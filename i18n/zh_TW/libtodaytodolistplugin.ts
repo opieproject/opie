@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Todolist plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>待辦事項 plugin</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>

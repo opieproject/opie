@@ -5,10 +5,6 @@
         <source>Global</source>
         <translation>全域</translation>
     </message>
-    <message>
-        <source>Medium Mount Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>MediumGlobalWidget</name>
@@ -43,10 +39,6 @@
     <message>
         <source>Video</source>
         <translation>視訊</translation>
-    </message>
-    <message>
-        <source>If a medium gets inserted into this device Opie tries to search the medium for Documents. On large mediums this can take some time. You can choose if Opie should scan for Documents globally or on a per medium level. You&apos;re also able to reconfigure each medium.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -89,11 +81,7 @@
     </message>
     <message>
         <source>Configure this medium. The changes will go into effect when the application get&apos;s closed. To update the Document Tab you need to removeand insert this medium.</source>
-        <translation type="obsolete">設定這個媒體. 這些變更會在應用程式關閉之後產生效用. 要更新文件索引標籤, 您需要移除並重新插入這個媒體.</translation>
-    </message>
-    <message>
-        <source>Configure this medium. The changes will go into effect when the application gets closed. To update the Document Tab you need to remove and insert this medium.</source>
-        <translation type="unfinished"></translation>
+        <translation>設定這個媒體. 這些變更會在應用程式關閉之後產生效用. 要更新文件索引標籤, 您需要移除並重新插入這個媒體.</translation>
     </message>
 </context>
 </TS>

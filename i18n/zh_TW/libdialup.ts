@@ -127,7 +127,7 @@
     </message>
     <message>
         <source>Auto-detect routing</source>
-        <translation>自動偵測routing/translation>
+        <translation>自動偵測routing</translation>
     </message>
     <message>
         <source>First DNS</source>

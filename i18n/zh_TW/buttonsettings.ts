@@ -3,19 +3,19 @@
     <name>ButtonSettings</name>
     <message>
         <source>Button Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>按鍵設定</translation>
     </message>
     <message>
         <source>&lt;center&gt;Press or hold the button you want to remap.&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;center&gt;按下你想要重新定義的按鍵&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Press:</source>
-        <translation type="unfinished"></translation>
+        <translation>Press:</translation>
     </message>
     <message>
         <source>Hold:</source>
-        <translation type="unfinished"></translation>
+        <translation>Hold:</translation>
     </message>
     <message>
         <source>Beam VCard</source>
@@ -79,7 +79,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation type="unfinished"></translation>
+        <translation>預設</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -87,26 +87,26 @@
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>動作</translation>
     </message>
     <message>
         <source>Show</source>
-        <translation type="unfinished"></translation>
+        <translation>Show</translation>
     </message>
 </context>
 <context>
     <name>RemapDlgBase</name>
     <message>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>動作</translation>
     </message>
     <message>
         <source>Channel</source>
-        <translation type="unfinished"></translation>
+        <translation>頻道</translation>
     </message>
     <message>
         <source>Message</source>
-        <translation type="unfinished"></translation>
+        <translation>訊息</translation>
     </message>
 </context>
 </TS>

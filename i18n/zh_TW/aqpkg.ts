@@ -1,164 +1,115 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>CategoryFilterImpl</name>
+    <name>CategoryFilterDlg</name>
     <message>
         <source>Category Filter</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select one or more groups</source>
-        <translation type="unfinished"></translation>
+        <source>&amp;OK</source>
+        <translation>&amp;O確定</translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation>&amp;C取消</translation>
+    </message>
+    <message>
+        <source>Select groups to show</source>
+        <translation>選擇顯示群組</translation>
     </message>
 </context>
 <context>
     <name>DataManager</name>
     <message>
         <source>Reading configuration...</source>
-        <translation type="unfinished"></translation>
+        <translation>正在讀取設定...</translation>
     </message>
 </context>
 <context>
     <name>InputDialog</name>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;O確定</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;C取消</translation>
+    </message>
+</context>
+<context>
+    <name>InstallDlg</name>
+    <message>
+        <source>Install</source>
+        <translation>安裝</translation>
+    </message>
+    <message>
+        <source>Start</source>
+        <translation>開始</translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>選項</translation>
+    </message>
+    <message>
+        <source>Output</source>
+        <translation>輸出</translation>
+    </message>
+    <message>
+        <source>Destination</source>
+        <translation>目的檔</translation>
+    </message>
+    <message>
+        <source>Space Avail</source>
+        <translation>可使用空間</translation>
     </message>
 </context>
 <context>
     <name>InstallDlgImpl</name>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Install
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upgrade
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(ReInstall)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>(Upgrade)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Destination</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Space Avail</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Options</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Text</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Abort</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>
-**** User Clicked ABORT ***</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>**** Process Aborted ****</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save output</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unknown</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉</translation>
     </message>
 </context>
 <context>
-    <name>InstallOptionsDlgImpl</name>
+    <name>InstallOptionsDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>選項</translation>
     </message>
     <message>
         <source>Force Depends</source>
-        <translation type="unfinished"></translation>
+        <translation>Force Depends</translation>
     </message>
     <message>
         <source>Force Reinstall</source>
-        <translation type="unfinished"></translation>
+        <translation>Force Reinstall</translation>
     </message>
     <message>
         <source>Force Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Force Remove</translation>
     </message>
     <message>
         <source>Force Overwrite</source>
-        <translation type="unfinished"></translation>
+        <translation>Force Overwrite</translation>
     </message>
     <message>
-        <source>Information Level</source>
-        <translation type="unfinished"></translation>
+        <source>Verbose WGet</source>
+        <translation>Verbose WGet</translation>
     </message>
     <message>
-        <source>Errors only</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Informative messages</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Troubleshooting output</source>
-        <translation type="unfinished"></translation>
+        <source>OK</source>
+        <translation>確定</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>AQPkg - Package Manager</source>
-        <translation type="unfinished"></translation>
+        <translation>AQPkg - 套件管理者</translation>
     </message>
     <message>
         <source>Type the text to search for here.</source>
-        <translation type="unfinished"></translation>
+        <translation>在這裡輸入搜尋文字.</translation>
     </message>
     <message>
         <source>Click here to hide the Quick Jump toolbar.</source>
@@ -166,7 +117,7 @@
     </message>
     <message>
         <source>Update lists</source>
-        <translation type="unfinished"></translation>
+        <translation>更新  List</translation>
     </message>
     <message>
         <source>Click here to update package lists from servers.</source>
@@ -174,7 +125,7 @@
     </message>
     <message>
         <source>Upgrade</source>
-        <translation type="unfinished"></translation>
+        <translation>Upgrade</translation>
     </message>
     <message>
         <source>Click here to upgrade all installed packages if a newer version is available.</source>
@@ -182,7 +133,7 @@
     </message>
     <message>
         <source>Download</source>
-        <translation type="unfinished"></translation>
+        <translation>下載</translation>
     </message>
     <message>
         <source>Click here to download the currently selected package(s).</source>
@@ -190,7 +141,7 @@
     </message>
     <message>
         <source>Apply changes</source>
-        <translation type="unfinished"></translation>
+        <translation>執行變更</translation>
     </message>
     <message>
         <source>Click here to install, remove or upgrade currently selected package(s).</source>
@@ -198,7 +149,7 @@
     </message>
     <message>
         <source>Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>動作</translation>
     </message>
     <message>
         <source>Show packages not installed</source>
@@ -242,7 +193,7 @@
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找</translation>
     </message>
     <message>
         <source>Click here to search for text in package names.</source>
@@ -250,7 +201,7 @@
     </message>
     <message>
         <source>Find next</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找下一個</translation>
     </message>
     <message>
         <source>Click here to find the next package name containing the text you are searching for.</source>
@@ -266,15 +217,35 @@
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>瀏覽</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <source>Click here to configure this application.</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation>幫助</translation>
+    </message>
+    <message>
+        <source>Click here for help.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About</source>
+        <translation>關於</translation>
+    </message>
+    <message>
+        <source>Click here for software version information.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Options</source>
+        <translation>選項</translation>
     </message>
     <message>
         <source>Click here to hide the find toolbar.</source>
@@ -282,7 +253,7 @@
     </message>
     <message>
         <source>Servers:</source>
-        <translation type="unfinished"></translation>
+        <translation>伺服器:</translation>
     </message>
     <message>
         <source>Click here to select a package feed.</source>
@@ -290,7 +261,7 @@
     </message>
     <message>
         <source>Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>套件</translation>
     </message>
     <message>
         <source>This is a listing of all packages for the server feed selected above.
@@ -303,8 +274,12 @@ Click inside the box at the left to select a package.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>About AQPkg</source>
+        <translation type="unfinished">關於 AQPkg</translation>
+    </message>
+    <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <source>Click here to uninstall the currently selected package(s).</source>
@@ -318,6 +293,34 @@ Click inside the box at the left to select a package.</source>
     <message>
         <source>Building package list for:
 <byte value="x9"/>%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed To - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Section - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Filename - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V. Installed - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>V. Available - %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -335,7 +338,7 @@ Are you sure?
     </message>
     <message>
         <source>Warning</source>
-        <translation type="unfinished"></translation>
+        <translation>警告</translation>
     </message>
     <message>
         <source>Upgrading installed packages</source>
@@ -352,11 +355,11 @@ Are you sure?
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>不</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>是</translation>
     </message>
     <message>
         <source>Download to where</source>
@@ -384,7 +387,7 @@ Are you sure?
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>確定</translation>
     </message>
     <message>
         <source>Do you wish to remove or reinstall
@@ -393,11 +396,11 @@ Are you sure?
     </message>
     <message>
         <source>Remove or ReInstall</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除或重新安裝</translation>
     </message>
     <message>
         <source>ReInstall</source>
-        <translation type="unfinished"></translation>
+        <translation>重新安裝</translation>
     </message>
     <message>
         <source>R</source>
@@ -416,90 +419,15 @@ Are you sure?
         <source>U</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Updating Launcher...</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
-    <name>PackageWindow</name>
-    <message>
-        <source>&lt;b&gt;Description&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Installed To&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Size&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Section&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Filename&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Version Installed&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;&lt;b&gt;Version Available&lt;/b&gt; - </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Package Information</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Package information is unavailable</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SettingsImpl</name>
+    <name>SettingsBase</name>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>設定</translation>
     </message>
     <message>
         <source>Servers</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Destinations</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Proxies</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -507,19 +435,35 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update</source>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Destination</source>
+        <source>URL:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Location:</source>
+        <source>Change</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Link to root</source>
+        <source>Remove</source>
+        <translation>刪除</translation>
+    </message>
+    <message>
+        <source>New</source>
+        <translation>新的</translation>
+    </message>
+    <message>
+        <source>Destinations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Link To Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -527,19 +471,35 @@ Are you sure?
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <source>Password</source>
+        <translation>密碼</translation>
+    </message>
+    <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>啟動</translation>
     </message>
     <message>
         <source>FTP Proxy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username:</source>
+        <source>Username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password:</source>
+        <source>&amp;Apply</source>
+        <translation type="unfinished">&amp;A執行</translation>
+    </message>
+    <message>
+        <source>General</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(Will take effect on restart)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show Jump To Letters</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

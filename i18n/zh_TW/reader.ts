@@ -3,35 +3,35 @@
     <name>QTReaderApp</name>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>關閉</translation>
     </message>
     <message>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>資訊</translation>
     </message>
     <message>
         <source>On Action...</source>
-        <translation type="unfinished"></translation>
+        <translation>On Action...</translation>
     </message>
     <message>
         <source>Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>開啟檔案</translation>
     </message>
     <message>
         <source>Autoscroll</source>
-        <translation type="unfinished"></translation>
+        <translation>自動Scroll</translation>
     </message>
     <message>
         <source>Mark</source>
-        <translation type="unfinished"></translation>
+        <translation>Mark</translation>
     </message>
     <message>
         <source>Fullscreen</source>
-        <translation type="unfinished"></translation>
+        <translation>全瑩幕</translation>
     </message>
     <message>
         <source>Navigation</source>
@@ -39,11 +39,11 @@
     </message>
     <message>
         <source>Scroll</source>
-        <translation type="unfinished"></translation>
+        <translation>Scroll</translation>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>跳</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
@@ -55,11 +55,11 @@
     </message>
     <message>
         <source>Use Cursor</source>
-        <translation type="unfinished"></translation>
+        <translation>使用游標</translation>
     </message>
     <message>
         <source>Set Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>設定字典</translation>
     </message>
     <message>
         <source>Two/One Touch</source>
@@ -67,7 +67,7 @@
     </message>
     <message>
         <source>Target</source>
-        <translation type="unfinished"></translation>
+        <translation>目標</translation>
     </message>
     <message>
         <source>Annotation</source>
@@ -83,19 +83,19 @@
     </message>
     <message>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">上</translation>
     </message>
     <message>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">下</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation>尋找...</translation>
     </message>
     <message>
         <source>Continuous</source>
-        <translation type="unfinished"></translation>
+        <translation>繼續</translation>
     </message>
     <message>
         <source>Markup</source>
@@ -103,7 +103,7 @@
     </message>
     <message>
         <source>Auto</source>
-        <translation type="unfinished"></translation>
+        <translation>自動</translation>
     </message>
     <message>
         <source>None</source>
@@ -111,7 +111,7 @@
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>文字</translation>
     </message>
     <message>
         <source>HTML</source>
@@ -171,11 +171,11 @@
     </message>
     <message>
         <source>Zoom In</source>
-        <translation type="unfinished"></translation>
+        <translation>放大</translation>
     </message>
     <message>
         <source>Zoom Out</source>
-        <translation type="unfinished"></translation>
+        <translation>縮小</translation>
     </message>
     <message>
         <source>Ideogram/Word</source>
@@ -187,7 +187,7 @@
     </message>
     <message>
         <source>Encoding</source>
-        <translation type="unfinished"></translation>
+        <translation>編碼</translation>
     </message>
     <message>
         <source>Ascii</source>
@@ -215,7 +215,7 @@
     </message>
     <message>
         <source>Set Font</source>
-        <translation type="unfinished"></translation>
+        <translation>設定字型</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -227,15 +227,15 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除</translation>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>自動產生</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>清除</translation>
     </message>
     <message>
         <source>Save</source>
@@ -255,7 +255,7 @@
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>檔案</translation>
     </message>
     <message>
         <source>Format</source>
@@ -302,7 +302,7 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">大小</translation>
     </message>
 </context>
 </TS>

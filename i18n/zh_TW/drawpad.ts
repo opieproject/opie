@@ -3,433 +3,347 @@
     <name>DrawPad</name>
     <message>
         <source>Delete All</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除全部</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Import</translation>
     </message>
     <message>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Import...</translation>
     </message>
     <message>
         <source>Export</source>
-        <translation type="unfinished"></translation>
+        <translation>Export</translation>
     </message>
     <message>
         <source>Export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Export</translation>
     </message>
     <message>
         <source>Tools</source>
-        <translation type="unfinished"></translation>
+        <translation>工具列</translation>
     </message>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>新分頁</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>清除分頁</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除分頁</translation>
     </message>
     <message>
         <source>Undo</source>
-        <translation type="unfinished"></translation>
+        <translation>回復</translation>
     </message>
     <message>
         <source>Redo</source>
-        <translation type="unfinished"></translation>
+        <translation>重做</translation>
     </message>
     <message>
         <source>First Page</source>
-        <translation type="unfinished"></translation>
+        <translation>第一頁</translation>
     </message>
     <message>
         <source>Previous Page</source>
-        <translation type="unfinished"></translation>
+        <translation>前一頁</translation>
     </message>
     <message>
         <source>Next Page</source>
-        <translation type="unfinished"></translation>
+        <translation>下一頁</translation>
     </message>
     <message>
         <source>Last Page</source>
-        <translation type="unfinished"></translation>
+        <translation>最後一頁</translation>
     </message>
     <message>
         <source>Draw Point</source>
-        <translation type="unfinished"></translation>
+        <translation>點</translation>
     </message>
     <message>
         <source>Draw Line</source>
-        <translation type="unfinished"></translation>
+        <translation>線</translation>
     </message>
     <message>
         <source>Draw Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>三角形</translation>
     </message>
     <message>
         <source>Draw Filled Rectangle</source>
-        <translation type="unfinished"></translation>
+        <translation>填滿的三角形</translation>
     </message>
     <message>
         <source>Draw Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>橢圓形</translation>
     </message>
     <message>
         <source>Draw Filled Ellipse</source>
-        <translation type="unfinished"></translation>
+        <translation>填滿的橢圓形</translation>
     </message>
     <message>
         <source>Fill Region</source>
-        <translation type="unfinished"></translation>
+        <translation>填滿某區間</translation>
     </message>
     <message>
         <source>Erase Point</source>
-        <translation type="unfinished"></translation>
+        <translation>清除點</translation>
     </message>
     <message>
         <source>Pen Width</source>
-        <translation type="unfinished"></translation>
+        <translation>畫筆寬度</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>畫筆顏色</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>填滿顏色</translation>
+    </message>
+    <message>
+        <source>DrawPad</source>
+        <translation>DrawPad</translation>
+    </message>
+    <message>
+        <source>Page</source>
+        <translation>頁</translation>
     </message>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>插入文字</translation>
     </message>
     <message>
         <source>Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>投影片</translation>
     </message>
     <message>
         <source>Thumbnail View...</source>
-        <translation type="unfinished"></translation>
+        <translation>投影片...</translation>
     </message>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>分頁資訊</translation>
     </message>
     <message>
         <source>Page Information...</source>
-        <translation type="unfinished"></translation>
+        <translation>分頁資訊...</translation>
     </message>
     <message>
         <source>Do you want to clear
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>你想要清除
+此分頁嗎?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>是</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>否</translation>
     </message>
     <message>
         <source>Do you want to delete
 the current page?</source>
-        <translation type="unfinished"></translation>
+        <translation>你想要刪出此分頁嗎?</translation>
     </message>
     <message>
         <source>Do you want to delete
 all the pages?</source>
-        <translation type="unfinished"></translation>
+        <translation>你想要刪除
+全部的分頁嗎?</translation>
     </message>
     <message>
         <source>Anti-Aliasing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to undo the last action.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to re-perform the last action.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to view the first page.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to view the previous page.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to view the next page.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to view the last page.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select one of the available tools to draw lines.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select one of the available tools to draw rectangles.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select one of the available tools to draw ellipses.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select the text drawing tool.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select the fill tool.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select the eraser tool.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select the width of the drawing pen.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select the color used when drawing.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to select the color used when filling in areas.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>DrawPad - Page %1/%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Anti-Aliasing</translation>
     </message>
 </context>
 <context>
     <name>ExportDialog</name>
     <message>
         <source>Page Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇分頁</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>全部</translation>
     </message>
     <message>
         <source>Current</source>
-        <translation type="unfinished"></translation>
+        <translation>現在</translation>
     </message>
     <message>
         <source>Range</source>
-        <translation type="unfinished"></translation>
+        <translation>範圍</translation>
     </message>
     <message>
         <source>To:</source>
-        <translation type="unfinished"></translation>
+        <translation>To:</translation>
     </message>
     <message>
         <source>Export As</source>
-        <translation type="unfinished"></translation>
+        <translation>Export As</translation>
     </message>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>名稱:</translation>
     </message>
     <message>
         <source>Format:</source>
-        <translation type="unfinished"></translation>
+        <translation>格式:</translation>
     </message>
     <message>
         <source>DrawPad - Export</source>
-        <translation type="unfinished"></translation>
+        <translation>小畫家 - Export</translation>
     </message>
 </context>
 <context>
     <name>ImportDialog</name>
     <message>
         <source>Automatic preview</source>
-        <translation type="unfinished"></translation>
+        <translation>自動預覽</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>預覽</translation>
     </message>
     <message>
         <source>DrawPad - Import</source>
-        <translation type="unfinished"></translation>
+        <translation>小畫家 - Import</translation>
     </message>
 </context>
 <context>
     <name>NewPageDialog</name>
     <message>
         <source>New Page</source>
-        <translation type="unfinished"></translation>
+        <translation>新分頁</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>白</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation>背景</translation>
     </message>
     <message>
         <source>Pen Color</source>
-        <translation type="unfinished"></translation>
+        <translation>畫筆顏色</translation>
     </message>
     <message>
         <source>Fill Color</source>
-        <translation type="unfinished"></translation>
+        <translation>填充顏色</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>一般的</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>抬頭:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>尺寸</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>寬:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>高:</translation>
     </message>
 </context>
 <context>
     <name>PageInformationDialog</name>
     <message>
         <source>Page Information</source>
-        <translation type="unfinished"></translation>
+        <translation>分頁資訊</translation>
     </message>
     <message>
         <source>General</source>
-        <translation type="unfinished"></translation>
+        <translation>一般的</translation>
     </message>
     <message>
         <source>Title:</source>
-        <translation type="unfinished"></translation>
+        <translation>抬頭:</translation>
     </message>
     <message>
         <source>Date:</source>
-        <translation type="unfinished"></translation>
+        <translation>日期:</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>尺寸</translation>
     </message>
     <message>
         <source>Width:</source>
-        <translation type="unfinished"></translation>
+        <translation>寬:</translation>
     </message>
     <message>
         <source>Height:</source>
-        <translation type="unfinished"></translation>
+        <translation>高:</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
-        <source>Title: %1</source>
-        <translation type="unfinished"></translation>
+        <source>Title:</source>
+        <translation>抬頭:</translation>
     </message>
     <message>
-        <source>Dimension: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <source>Dimension:</source>
+        <translation>維度:</translation>
     </message>
     <message>
-        <source>Date: %1</source>
-        <translation type="unfinished"></translation>
+        <source>Date:</source>
+        <translation>日期:</translation>
     </message>
 </context>
 <context>
     <name>TextToolDialog</name>
     <message>
         <source>Insert Text</source>
-        <translation type="unfinished"></translation>
+        <translation>插入文字</translation>
     </message>
 </context>
 <context>
     <name>ThumbnailView</name>
     <message>
         <source>DrawPad - Thumbnail View</source>
-        <translation type="unfinished"></translation>
+        <translation>小畫家 - 投影片</translation>
     </message>
     <message>
         <source>Clear Page</source>
-        <translation type="unfinished"></translation>
+        <translation>清除分頁</translation>
     </message>
     <message>
         <source>Do you want to clear
 the selected page?</source>
-        <translation type="unfinished"></translation>
+        <translation>確定刪除所選分頁?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>是的</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>否</translation>
     </message>
     <message>
         <source>Delete Page</source>
-        <translation type="unfinished"></translation>
+        <translation>刪除分頁</translation>
     </message>
     <message>
         <source>Do you want to delete
 the selected page?</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to add a new sheet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to erase the current sheet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to remove the current sheet.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to move the current sheet up one position in the list.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Click here to move the current sheet down one position in the list.</source>
-        <translation type="unfinished"></translation>
+        <translation>確定刪除所選分頁?</translation>
     </message>
 </context>
 </TS>

@@ -235,7 +235,7 @@ It must be empty</source>
     </message>
     <message>
         <source>About</source>
-        <translation type="obsolete">關於</translation>
+        <translation>關於</translation>
     </message>
     <message>
         <source>Rescan</source>

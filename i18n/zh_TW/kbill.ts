@@ -1,5 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>HelpDialog</name>
+    <message>
+        <source>Form1</source>
+        <translation>表單1</translation>
+    </message>
+</context>
+<context>
     <name>KBill</name>
     <message>
         <source>kBill</source>
@@ -47,7 +54,7 @@
     </message>
     <message>
         <source>&lt;b&gt;The Rules&lt;/b&gt;&lt;p&gt;kBill has been painstakingly designed and researched in order to make it as easy to use for the whole family as it is for little Sally. Years - nay - days of beta testing and consulting with the cheapest of human interface designers have resulted in a game that is easy to use, yet nothing at all like a Macintosh.&lt;p&gt;&lt;UL&gt;&lt;LI&gt;Whack the Bills (click)&lt;/LI&gt;&lt;LI&gt;Restart the computer (click)&lt;/LI&gt;&lt;LI&gt;Pick up stolen OSes &amp; return (drag) them to their respective computers&lt;/LI&gt;&lt;LI&gt;Drag the bucket to extinguish sparks&lt;/LI&gt;&lt;LI&gt;Scoring is based on total uptime, with bonuses for killing Bills.&lt;/LI&gt;&lt;/UL&gt;&lt;P&gt;As for the rest, you can probably work it out for yourself.  We did, so it can&apos;t be too hard</source>
-        <translation>&lt;b&gt;規則&lt;/bK比爾經過辛勤的設計與研究使它變得很容易而適合全家人, 正如適合小 Sally 一樣. 日復一日的 beta 測試加上向廉價人工智慧設計師諮詢終於產生容易使用的遊戲, 不過一點也不像麥金塔.&lt;p&gt;&lt;UL&gt;&lt;LI&gt;敲打比爾(點一下)&lt;/LI&gt;&lt;LI&gt;重新啟動電腦(點一下)&lt;/LI&gt;&lt;LI&gt;撿起被偷的作業系統 &amp; 把它們交還(拖放)給各自的電腦&lt;/LI&gt;&lt;LI&gt;拖拉水桶去澆熄火花&lt;/LI&gt;&lt;LI&gt;分數是以花費的時間計算, 殺掉比爾還有紅利.&lt;/LI&gt;&lt;/UL&gt;&lt;P&gt;至於剩下的部份, 您應該可以靠自己解決. 我們做到了, 所以它應該不會太難.</translation>
+        <translation>&lt;b&gt;規則&lt;/b&lgt;K比爾經過辛勤的設計與研究使它變得很容易而適合全家人, 正如適合小 Sally 一樣. 日復一日的 beta 測試加上向廉價人工智慧設計師諮詢終於產生容易使用的遊戲, 不過一點也不像麥金塔.&lt;p&gt;&lt;UL&gt;&lt;LI&gt;敲打比爾(點一下)&lt;/LI&gt;&lt;LI&gt;重新啟動電腦(點一下)&lt;/LI&gt;&lt;LI&gt;撿起被偷的作業系統 &amp; 把它們交還(拖放)給各自的電腦&lt;/LI&gt;&lt;LI&gt;拖拉水桶去澆熄火花&lt;/LI&gt;&lt;LI&gt;分數是以花費的時間計算, 殺掉比爾還有紅利.&lt;/LI&gt;&lt;/UL&gt;&lt;P&gt;至於剩下的部份, 您應該可以靠自己解決. 我們做到了, 所以它應該不會太難.</translation>
     </message>
 </context>
 <context>
