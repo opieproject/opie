@@ -42,7 +42,7 @@ QString AboutApplet::tr( const char* s, const char* p ) const
 QIconSet AboutApplet::icon ( ) const
 {
     QPixmap pix;
-    QImage img = Resource::loadImage ( "about" );
+    QImage img = Resource::loadImage ( "logo/opielogo" );
 
     if ( !img. isNull ( ) )
         pix. convertFromImage ( img. smoothScale ( 14, 14 ) );
