@@ -1,0 +1,4 @@
+Makefile
+.moc
+lancardGUI.cpp
+lancardGUI.h

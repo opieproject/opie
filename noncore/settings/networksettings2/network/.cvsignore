@@ -1,0 +1,4 @@
+Makefile
+.moc
+networkGUI.cpp
+networkGUI.h

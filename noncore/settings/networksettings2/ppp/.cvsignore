@@ -1,0 +1,10 @@
+Makefile
+.moc
+PPPAuthGUI.cpp
+PPPAuthGUI.h
+PPPDNSGUI.cpp
+PPPDNSGUI.h
+PPPGUI.cpp
+PPPGUI.h
+PPPIPGUI.cpp
+PPPIPGUI.h
