@@ -1,0 +1,10 @@
+Files: bin/quicklauncher
+Priority: required
+Section: qpe/system
+Maintainer: Trolltech (www.trolltech.com)
+Architecture: $CPU_ARCH
+Arch: $DEVICE_ARCH
+Version: $QPE_VERSION-12
+Depends: qpe-libqtopia qpe-pim
+Description: Quick launcher stub
+ Launcher stub for quick launch enabled applications.
