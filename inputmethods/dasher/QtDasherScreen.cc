@@ -16,14 +16,17 @@
 #define MAXFONTSIZE 25
 #define MINFONTSIZE 8
 
+#include <iconv.h>
+#include <iostream>
+
 QtDasherScreen::QtDasherScreen (int _width, int _height,
 				CDasherInterface *_interface,
 				QWidget * _parent, Dasher::CDashEditbox *edit):
   QWidget(_parent), interface( _interface ),
-  fontname( "fixed" ), // fontsize(12),
+  fontname( "fixed" ), fontsize(12),
   Dasher::CDasherScreen(_width, _height)
 {
-  // font = new QFont (fontname, fontsize);
+  font = QFont (fontname.c_str(), fontsize);
   painter = new QPainter ();
 
   pixmap = new QPixmap (_width, _height);
@@ -34,15 +37,15 @@ QtDasherScreen::QtDasherScreen (int _width, int _height,
   interface->ChangeView(0);
   interface->ChangeEdit(edit);
 
-  interface->GetFontSizes(&FontSizes);
+/* interface->GetFontSizes(&FontSizes);
 
   for (int i=0; i<FontSizes.size(); i++) {
     if (FontSizes[i]>Fonts.size())
       Fonts.resize((FontSizes[i])+1);    
     Fonts[FontSizes[i]]= QFont (fontname.c_str(), FontSizes[i]);
-    Fonts[FontSizes[i]].setPixelSize(FontSizes[i]);
+//    Fonts[FontSizes[i]].setPixelSize(FontSizes[i]);
   }
-
+*/
   interface->ChangeScreen(this);
 
   paused=true;

@@ -21,6 +21,8 @@
 #include "DashEdit.h"
 #include "DasherInterface.h"
 
+#include <iconv.h>
+
 using namespace Dasher;
 
 class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
@@ -49,7 +51,7 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
   void TextSize(symbol Character, int* Width, int* Height, int Size) const
     { 
       // should probably use QPainter::boundingRect()
-      *Width = *Height = Fonts[Size].pixelSize();
+      *Width = *Height = font.pixelSize();
       
     }
   void DrawText(symbol Character, int x1, int y1, int Size) const
@@ -58,7 +60,7 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
       //      font.setPixelSize(Size);
       QPoint point = QPoint(x1, y1+Size/2);
   
-      painter->setFont (Fonts[Size]);
+      painter->setFont (font);
       painter->drawText (point,
 			 QString(interface->GetDisplayText(Character).c_str()));
     }
@@ -71,7 +73,8 @@ class QtDasherScreen : public QWidget, public Dasher::CDasherScreen
 
   std::vector<int> FontSizes;
   std::vector<QFont> Fonts;
-
+  QFont font;
+  int fontsize;
   void Blank() const {
     painter->begin(pixmap);
     painter->setPen (NoPen);
