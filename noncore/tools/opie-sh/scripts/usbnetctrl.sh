@@ -40,9 +40,13 @@ startup() {
 	  ( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/usbnetctrl.png>"
 	    echo "<h3>usbnet up</h3>"
 	    modprobe usb-eth
+	    ) 2>&1 | $OPIE_SH -t Output -f
+	    
+	    $OPIE_SH -m -I -t "Usbnet Control" -M "Please connect the<br>ipaq to the cradle<br>and press OK"
 
-	    ifconfig usbf 10.3.0.226 netmask 255.255.255.0 \
-	                    broadcast 10.3.0.255  
+	 ( echo "<img src=/opt/QtPalmtop/pics/opie-sh-scripts/usbnetctrl.png>"
+	    echo "<h3>usbnet up</h3>"
+	    ifconfig usbf up 192.168.0.1 netmask 255.255.255.0  
 
 	  ) 2>&1 | $OPIE_SH -t Output -f
 	  if [ -f /root/masq.sh ]
