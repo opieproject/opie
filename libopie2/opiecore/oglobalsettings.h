@@ -204,7 +204,7 @@ class OGlobalSettings
         */
         DebugNone=-1,
        /**
-        * Debug output is sent to files /var/log/***.
+        * Debug output is sent to files /var/log/.
         */
         DebugFiles=0,
        /**

@@ -100,7 +100,7 @@ CONFTEST = $$system( echo $CONFIG_SQL_PIM_BACKEND )
 contains( CONFTEST, y ){
 
 DEFINES += __USE_SQL
-LIBS    += -lopiedb2 -lsqlite
+LIBS    += -lopiedb2
 HEADERS += pim/otodoaccesssql.h pim/ocontactaccessbackend_sql.h
 SOURCES += pim/otodoaccesssql.cpp pim/ocontactaccessbackend_sql.cpp
 

@@ -29,11 +29,13 @@ DEPENDPATH  += $(OPIEDIR)/include
 MOC_DIR     = moc
 OBJECTS_DIR = obj
 
+LIBS += -lsqlite -lqpe
+
 !contains( platform, x11 ) {
   include ( $(OPIEDIR)/include.pro )
 }
 
 contains( platform, x11 ) {
-  LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
+  LIBS        += -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
 }
 

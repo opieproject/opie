@@ -123,7 +123,9 @@ namespace {
         QString qu;
         qu += "create table todolist( uid PRIMARY KEY, categories, completed, ";
         qu += "description, summary, priority, DueDate, progress ,  state, ";
-	qu += "Recurrence, reminders, alarms, maintainer, startdate, completeddate);";
+	// This is the recurrance-stuff .. Exceptions are currently not supported (see ORecur.cpp) ! (eilers)
+	qu += "RType, RWeekdays, RPosition, RFreq, RHasEndDate, EndDate, Created, Exceptions, "; 
+	qu += "reminders, alarms, maintainer, startdate, completeddate);";
 	qu += "create table custom_data( uid INTEGER, id INTEGER, type VARCHAR(10), value VARCHAR(10), PRIMARY KEY /* identifier */ (uid, id) );";
         return qu;
     }
@@ -174,6 +176,7 @@ namespace {
 		eDay  = eDate.day();
 	} 
         QString qu;
+	QMap<int, QString> recMap = m_todo.recurrence().toMap();
         qu  = "insert into todolist VALUES(" 
 		+  QString::number( m_todo.uid() ) + "," 
 		+ "'" + m_todo.idsToString( m_todo.categories() ) + "'" + ","
@@ -186,7 +189,14 @@ namespace {
 		+       "-" + QString::number( day )              + "'" + ","
 		+       QString::number( m_todo.progress() )            + ","
  		+       QString::number( m_todo.state().state() )       + ","
-		+ "'" + m_todo.recurrence().toString()            + "'"+ ",";
+		+ "'" + recMap[ ORecur::RType ]                   + "'" + ","
+		+ "'" + recMap[ ORecur::RWeekdays ]               + "'" + ","
+		+ "'" + recMap[ ORecur::RPosition ]               + "'" + ","
+		+ "'" + recMap[ ORecur::RFreq ]                   + "'" + ","
+		+ "'" + recMap[ ORecur::RHasEndDate ]             + "'" + ","
+		+ "'" + recMap[ ORecur::EndDate ]                 + "'" + ","
+		+ "'" + recMap[ ORecur::Created ]                 + "'" + ","
+		+ "'" + recMap[ ORecur::Exceptions ]              + "'" + ",";
 	
 	if ( m_todo.hasNotifiers() ) {
 		OPimNotifyManager manager = m_todo.notifiers();
@@ -524,6 +534,8 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     hasDueDate = date( dueDate, item.data("DueDate") );
     QStringList cats = QStringList::split(";", item.data("categories") );
 
+    qWarning("Item is completed: %d", item.data("completed").toInt() );
+
     OTodo to( (bool)item.data("completed").toInt(), item.data("priority").toInt(),
               cats, item.data("summary"), item.data("description"),
               item.data("progress").toUShort(), hasDueDate, dueDate,
@@ -552,8 +564,19 @@ OTodo OTodoAccessBackendSQL::todo( OSQLResultItem& item )const {
     pimState.setState( QString( item.data("state") ).toInt() );
     to.setState( pimState );
 
-    // Recurrence not supported yet
-    // to.setRecurrence( 
+    QMap<int, QString> recMap;
+    recMap.insert( ORecur::RType      , item.data("RType") );
+    recMap.insert( ORecur::RWeekdays  , item.data("RWeekdays") );
+    recMap.insert( ORecur::RPosition  , item.data("RPosition") );
+    recMap.insert( ORecur::RFreq      , item.data("RFreq") );
+    recMap.insert( ORecur::RHasEndDate, item.data("RHasEndDate") );
+    recMap.insert( ORecur::EndDate    , item.data("EndDate") );
+    recMap.insert( ORecur::Created    , item.data("Created") );
+    recMap.insert( ORecur::Exceptions , item.data("Exceptions") );
+    
+    ORecur recur;
+    recur.fromMap( recMap );
+    to.setRecurrence( recur );
 
     return to;
 }

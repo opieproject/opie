@@ -456,55 +456,130 @@ void ORecur::checkOrModify() {
 }
 QString ORecur::toString()const {
     QString buf;
+    QMap<int, QString> recMap = toMap();
 
     buf += " rtype=\"";
-    switch ( data->type ) {
-    case ORecur::Daily:
-        buf += "Daily";
-        break;
-    case ORecur::Weekly:
-        buf += "Weekly";
-        break;
-    case ORecur::MonthlyDay:
-        buf += "MonthlyDay";
-        break;
-    case ORecur::MonthlyDate:
-        buf += "MonthlyDate";
-        break;
-    case ORecur::Yearly:
-        buf += "Yearly";
-        break;
-    default:
-        buf += "NoRepeat";
-        break;
-    }
+    buf += recMap[ORecur::RType];
     buf += "\"";
     if (data->days > 0 )
-	buf += " rweekdays=\"" + QString::number( static_cast<int>( data->days ) ) + "\"";
+	buf += " rweekdays=\"" + recMap[ORecur::RWeekdays] + "\"";
     if ( data->pos != 0 )
-	buf += " rposition=\"" + QString::number(data->pos ) + "\"";
+	buf += " rposition=\"" + recMap[ORecur::RPosition] + "\"";
 
-    buf += " rfreq=\"" + QString::number( data->freq ) + "\"";
-    buf += " rhasenddate=\"" + QString::number( static_cast<int>( data->hasEnd ) ) + "\"";
+    buf += " rfreq=\"" + recMap[ORecur::RFreq] + "\"";
+    buf += " rhasenddate=\"" + recMap[ORecur::RHasEndDate]+ "\"";
     if ( data->hasEnd )
 	buf += " enddt=\""
-	       + QString::number( OTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) )
+	       + recMap[ORecur::EndDate]
 	       + "\"";
-    buf += " created=\"" + QString::number( OTimeZone::utc().fromUTCDateTime( data->create ) ) + "\"";
+    buf += " created=\"" + recMap[ORecur::Created] + "\"";
 
     if ( data->list.isEmpty() ) return buf;
-    // save exceptions list here!!
-    ExceptionList::ConstIterator it;
-    ExceptionList list = data->list;
     buf += " exceptions=\"";
-    QDate date;
-    for ( it = list.begin(); it != list.end(); ++it ) {
-        date = (*it);
-        if ( it != list.begin() ) buf += " ";
-
-        buf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
-    }
+    buf += recMap[ORecur::Exceptions];
     buf += "\" ";
 
     return buf;
+}
+
+QString ORecur::rTypeString() const
+{
+	QString retString;
+	switch ( data->type ) {
+	case ORecur::Daily:
+		retString = "Daily";
+		break;
+	case ORecur::Weekly:
+		retString = "Weekly";
+		break;
+	case ORecur::MonthlyDay:
+		retString = "MonthlyDay";
+		break;
+	case ORecur::MonthlyDate:
+		retString = "MonthlyDate";
+		break;
+	case ORecur::Yearly:
+		retString = "Yearly";
+		break;
+	default:
+		retString = "NoRepeat";
+		break;
+
+	}
+
+	return retString;
+}
+
+QMap<QString, ORecur::RepeatType> ORecur::rTypeValueConvertMap() const
+{
+	QMap<QString, RepeatType> convertMap;
+
+	convertMap.insert( QString( "Daily" ), ORecur::Daily );
+	convertMap.insert( QString( "Weekly" ), ORecur::Weekly );
+	convertMap.insert( QString( "MonthlyDay" ), ORecur::MonthlyDay );
+	convertMap.insert( QString( "MonthlyDate" ), ORecur::MonthlyDate );
+	convertMap.insert( QString( "Yearly" ), ORecur::Yearly );
+	convertMap.insert( QString( "NoRepeat" ), ORecur::NoRepeat );
+
+	return convertMap;
+}
+
+
+QMap<int, QString> ORecur::toMap() const
+{
+	QMap<int, QString> retMap;
+	
+	retMap.insert( ORecur::RType, rTypeString() );
+	retMap.insert( ORecur::RWeekdays, QString::number( static_cast<int>( data->days ) ) );
+	retMap.insert( ORecur::RPosition, QString::number(data->pos ) );
+	retMap.insert( ORecur::RFreq, QString::number( data->freq ) );
+	retMap.insert( ORecur::RHasEndDate, QString::number( static_cast<int>( data->hasEnd ) ) );
+	if( data -> hasEnd )
+		retMap.insert( ORecur::EndDate, QString::number( OTimeZone::utc().fromUTCDateTime( QDateTime( data->end, QTime(12,0,0) ) ) ) );
+	retMap.insert( ORecur::Created, QString::number( OTimeZone::utc().fromUTCDateTime( data->create ) ) );
+	
+	if ( data->list.isEmpty() ) return retMap;
+
+	// save exceptions list here!!
+	ExceptionList::ConstIterator it;
+	ExceptionList list = data->list;
+	QString exceptBuf;
+	QDate date;
+	for ( it = list.begin(); it != list.end(); ++it ) {
+		date = (*it);
+		if ( it != list.begin() ) exceptBuf += " ";
+		
+		exceptBuf += QCString().sprintf("%04d%02d%02d", date.year(), date.month(), date.day() );
+	}
+
+	retMap.insert( ORecur::Exceptions, exceptBuf );
+
+	return retMap;
+}
+
+void ORecur::fromMap( const QMap<int, QString>& map )
+{
+	QMap<QString, RepeatType> repTypeMap = rTypeValueConvertMap(); 
+
+	data -> type  = repTypeMap[ map [ORecur::RType] ];
+	data -> days  = (char) map[ ORecur::RWeekdays ].toInt();
+	data -> pos   = map[ ORecur::RPosition ].toInt();
+	data -> freq = map[ ORecur::RFreq ].toInt();
+	data -> hasEnd= map[ ORecur::RHasEndDate ].toInt() ? true : false;
+	OTimeZone utc = OTimeZone::utc();
+	if ( data -> hasEnd ){
+		data -> end = utc.fromUTCDateTime( (time_t) map[ ORecur::EndDate ].toLong() ).date();
+	}
+	data -> create = utc.fromUTCDateTime( (time_t) map[ ORecur::Created ].toLong() ).date();
+
+#if 0
+	// FIXME: Exceptions currently not supported...
+	// Convert the list of exceptions from QString into ExceptionList
+	data -> list.clear();
+	QString exceptStr = map[ ORecur::Exceptions ];
+	QStringList exceptList = QStringList::split( " ", exceptStr );
+	...
+#endif
+	
+	
 }
