@@ -48,7 +48,7 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
         showHtml->addTo( toolbar );
         showHtml->addTo( mailmenu );
 
-	deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
+	deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("trash")), 0, 0, this);
 	deleteMail->addTo(toolbar);
 	deleteMail->addTo(mailmenu);
 

@@ -49,6 +49,7 @@ void MailApplet::paintEvent( QPaintEvent* ) {
     QFont f( "vera", AppLnk::smallIconSize() );
     QFontMetrics fm( f );
     p.setFont( f );
+    p.setPen( Qt::blue );
     p.drawText( AppLnk::smallIconSize()/3, AppLnk::smallIconSize() - 2, QString::number( m_newMails ) );
     return;
 

@@ -81,7 +81,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     editSettings->addTo( settingsMenu );
     connect( editSettings, SIGNAL( activated() ),
              SLOT( slotEditSettings() ) );
-    editAccounts = new QAction( tr( "Configure accounts" ), QIconSet( Resource::loadPixmap("SettingsIcon") ) ,
+    editAccounts = new QAction( tr( "Configure accounts" ), QIconSet( Resource::loadPixmap("mail/editaccounts") ) ,
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 
