@@ -128,12 +128,15 @@ void OIpkgConfigDlg::accept()
             m_configs->append( new OConfItem( OConfItem::Option, "proxy_password",
                                m_proxyPassword->text() ) );
 
+        QString listsDir = m_optSourceLists->text();
+        if ( listsDir == QString::null || listsDir == "" )
+            listsDir = "/usr/lib/ipkg/lists"; // TODO - use proper libipkg define
         confItem = m_ipkg->findConfItem( OConfItem::Other, "lists_dir" );
         if ( confItem )
-            confItem->setValue( m_optSourceLists->text() );
+            confItem->setValue( listsDir );
         else
             m_configs->append( new OConfItem( OConfItem::Other, "lists_dir",
-                               m_optSourceLists->text(), "name" ) );
+                               listsDir, "name" ) );
 
         m_ipkg->setConfigItems( m_configs );
     }

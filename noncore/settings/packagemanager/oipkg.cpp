@@ -243,8 +243,16 @@ OPackageList *OIpkg::availablePackages( const QString &server )
     // Build new server list (caller is responsible for deleting)
     OPackageList *pl = new OPackageList;
 
+    // Get directory where server lists are located
+    QString listsDir;
+    OConfItem *confItem = findConfItem( OConfItem::Other, "lists_dir" );
+    if ( confItem )
+        listsDir = confItem->value();
+    else
+        listsDir = IPKG_PKG_PATH;
+
     // Open package list file
-    QFile f( IPKG_PKG_PATH + "/" + server );
+    QFile f( listsDir + "/" + server );
     if ( !f.open( IO_ReadOnly ) )
         return NULL;
     QTextStream t( &f );
@@ -607,6 +615,10 @@ void OIpkg::loadConfiguration()
                         type = OConfItem::Other;
                         features = name;
                         name = typeStr;
+
+                        // Default value when not defined
+                        if ( value == QString::null || value == "" )
+                            value = IPKG_PKG_PATH;
                     }
                     else
                         recognizedOption = false;
