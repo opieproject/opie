@@ -1,5 +1,5 @@
 #
-CONFIG   = qt warn_on debug quick-app
+CONFIG   = qt warn_on debug
 #CONFIG    = qt warn_on release
 HEADERS   = networksettings.h \
             activateprofile.h \
@@ -15,7 +15,7 @@ LIBS        += -lqpe -L$(OPIEDIR)/plugins/networksettings2 -lnetworksettings2 -l
 INTERFACES = networksettingsGUI.ui \
              editconnectionGUI.ui \
              activateprofileGUI.ui
-TARGET    = networksettings2
+TARGET    = $(OPIEDIR)/bin/networksettings2
 
 
 include ( $(OPIEDIR)/include.pro )
