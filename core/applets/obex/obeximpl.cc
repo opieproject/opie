@@ -126,7 +126,8 @@ void ObexImpl::slotReceivedFile( const QString &fileName ) {
     } // now prompt and then add it
 
     m_recvgui->PixmapLabel->setPixmap(lnk.pixmap());
-    m_recvgui->TextLabel1_2->setText(lnk.name());
+    m_recvgui->AppLabel->setText(lnk.name());
+    m_recvgui->FileLabel->setText(fileName);
     m_recvgui->showMaximized();
 
     QCString str= "QPE/Application/";
