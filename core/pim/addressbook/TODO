@@ -30,6 +30,8 @@ Important:
 - Implement a correct handling of Organizations. They are currently
   handled as normal persons.. :(
 
+- Make hidden Confguration visible: Group Editor, bool disableAutoCaps
+
 Less important:
 ---------------
 - Reload if contacts were changed externally
