@@ -11,3 +11,10 @@ VERSION		= 1.0.0
 
 TRANSLATIONS = ../../i18n/de/libbatteryapplet.ts
 TRANSLATIONS += ../../i18n/pt_BR/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/en/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/hu/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/ja/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/ko/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/no/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/zh_CN/libbatteryapplet.ts
+TRANSLATIONS   += ../../i18n/zh_TW/libbatteryapplet.ts

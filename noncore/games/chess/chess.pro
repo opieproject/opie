@@ -14,3 +14,11 @@ LANGUAGE	= C++
 CPP_ALWAYS_CREATE_SOURCE	= TRUE
 
 TRANSLATIONS = ../i18n/pt_BR/chess.ts
+TRANSLATIONS   += ../i18n/de/chess.ts
+TRANSLATIONS   += ../i18n/en/chess.ts
+TRANSLATIONS   += ../i18n/hu/chess.ts
+TRANSLATIONS   += ../i18n/ja/chess.ts
+TRANSLATIONS   += ../i18n/ko/chess.ts
+TRANSLATIONS   += ../i18n/no/chess.ts
+TRANSLATIONS   += ../i18n/zh_CN/chess.ts
+TRANSLATIONS   += ../i18n/zh_TW/chess.ts

@@ -18,3 +18,10 @@ LIBS            += -lqpe -lopie
 
 TRANSLATIONS = ../i18n/de/todolist.ts
 TRANSLATIONS += ../i18n/pt_BR/todolist.ts
+TRANSLATIONS   += ../i18n/en/todolist.ts
+TRANSLATIONS   += ../i18n/hu/todolist.ts
+TRANSLATIONS   += ../i18n/ja/todolist.ts
+TRANSLATIONS   += ../i18n/ko/todolist.ts
+TRANSLATIONS   += ../i18n/no/todolist.ts
+TRANSLATIONS   += ../i18n/zh_CN/todolist.ts
+TRANSLATIONS   += ../i18n/zh_TW/todolist.ts

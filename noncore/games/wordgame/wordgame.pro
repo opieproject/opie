@@ -12,3 +12,10 @@ LIBS            += -lqpe
 
 TRANSLATIONS = ../i18n/de/wordgame.ts
 TRANSLATIONS += ../i18n/pt_BR/wordgame.ts
+TRANSLATIONS   += ../i18n/en/wordgame.ts
+TRANSLATIONS   += ../i18n/hu/wordgame.ts
+TRANSLATIONS   += ../i18n/ja/wordgame.ts
+TRANSLATIONS   += ../i18n/ko/wordgame.ts
+TRANSLATIONS   += ../i18n/no/wordgame.ts
+TRANSLATIONS   += ../i18n/zh_CN/wordgame.ts
+TRANSLATIONS   += ../i18n/zh_TW/wordgame.ts

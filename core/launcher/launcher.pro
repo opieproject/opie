@@ -113,3 +113,10 @@ LIBS		+= -lqpe -lcrypt -lopie
 
 TRANSLATIONS = ../i18n/de/qpe.ts
 TRANSLATIONS += ../i18n/pt_BR/qpe.ts
+TRANSLATIONS   += ../i18n/en/qpe.ts
+TRANSLATIONS   += ../i18n/hu/qpe.ts
+TRANSLATIONS   += ../i18n/ja/qpe.ts
+TRANSLATIONS   += ../i18n/ko/qpe.ts
+TRANSLATIONS   += ../i18n/no/qpe.ts
+TRANSLATIONS   += ../i18n/zh_CN/qpe.ts
+TRANSLATIONS   += ../i18n/zh_TW/qpe.ts

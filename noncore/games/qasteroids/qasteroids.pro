@@ -10,3 +10,10 @@ LIBS            += -lqpe
 
 TRANSLATIONS = ../i18n/de/qasteroids.ts
 TRANSLATIONS += ../i18n/pt_BR/qasteroids.ts
+TRANSLATIONS   += ../i18n/en/qasteroids.ts
+TRANSLATIONS   += ../i18n/hu/qasteroids.ts
+TRANSLATIONS   += ../i18n/ja/qasteroids.ts
+TRANSLATIONS   += ../i18n/ko/qasteroids.ts
+TRANSLATIONS   += ../i18n/no/qasteroids.ts
+TRANSLATIONS   += ../i18n/zh_CN/qasteroids.ts
+TRANSLATIONS   += ../i18n/zh_TW/qasteroids.ts

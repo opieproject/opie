@@ -17,3 +17,10 @@ REQUIRES	= patience
 
 TRANSLATIONS = ../i18n/de/patience.ts
 TRANSLATIONS += ../i18n/pt_BR/patience.ts
+TRANSLATIONS   += ../i18n/en/patience.ts
+TRANSLATIONS   += ../i18n/hu/patience.ts
+TRANSLATIONS   += ../i18n/ja/patience.ts
+TRANSLATIONS   += ../i18n/ko/patience.ts
+TRANSLATIONS   += ../i18n/no/patience.ts
+TRANSLATIONS   += ../i18n/zh_CN/patience.ts
+TRANSLATIONS   += ../i18n/zh_TW/patience.ts

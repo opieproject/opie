@@ -18,3 +18,10 @@ TARGET		= go
 
 TRANSLATIONS = ../i18n/de/go.ts
 TRANSLATIONS += ../i18n/pt_BR/go.ts
+TRANSLATIONS   += ../i18n/en/go.ts
+TRANSLATIONS   += ../i18n/hu/go.ts
+TRANSLATIONS   += ../i18n/ja/go.ts
+TRANSLATIONS   += ../i18n/ko/go.ts
+TRANSLATIONS   += ../i18n/no/go.ts
+TRANSLATIONS   += ../i18n/zh_CN/go.ts
+TRANSLATIONS   += ../i18n/zh_TW/go.ts

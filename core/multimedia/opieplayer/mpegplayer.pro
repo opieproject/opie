@@ -24,3 +24,10 @@ DEPENDPATH  += $(OPIEDIR)/include
 
 TRANSLATIONS += ../i18n/de/mpegplayer.ts
 TRANSLATIONS += ../i18n/pt_BR/mpegplayer.ts
+TRANSLATIONS   += ../i18n/en/mpegplayer.ts
+TRANSLATIONS   += ../i18n/hu/mpegplayer.ts
+TRANSLATIONS   += ../i18n/ja/mpegplayer.ts
+TRANSLATIONS   += ../i18n/ko/mpegplayer.ts
+TRANSLATIONS   += ../i18n/no/mpegplayer.ts
+TRANSLATIONS   += ../i18n/zh_CN/mpegplayer.ts
+TRANSLATIONS   += ../i18n/zh_TW/mpegplayer.ts
