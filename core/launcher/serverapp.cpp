@@ -88,7 +88,7 @@ bool QCopKeyRegister::send()
 {
     if (m_channel.isNull() )
         return false;
-qDebug("Send Message: "+m_channel+" "+m_message);
+
     QCopEnvelope e( m_channel, m_message );
 
     return true;
