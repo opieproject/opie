@@ -335,6 +335,8 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
 
     connect( kf, SIGNAL(power()), this, SLOT(togglePower()) );
     connect( kf, SIGNAL(backlight()), this, SLOT(toggleLight()) );
+    connect( this, SIGNAL( power() ), SLOT( togglePower() ) );
+
 
     rereadVolumes();
 
