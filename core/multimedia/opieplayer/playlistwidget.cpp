@@ -497,6 +497,7 @@ void PlayListWidget::addAllVideoToList() {
 void PlayListWidget::setDocument(const QString& fileref) {
    fromSetDocument = true;
    d->setDocumentUsed = TRUE;
+   d->selectedFiles->setSelected(d->selectedFiles->firstChild(),true );
    mediaPlayerState->setPlaying( FALSE );
    qApp->processEvents();
    mediaPlayerState->setPlaying( TRUE );
