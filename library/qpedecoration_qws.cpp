@@ -305,46 +305,21 @@ void QPEManager::whatsThisTimeout()
 }
 
 //===========================================================================
-
-static QImage *okImage( int th )
-{
-    static QImage *i = 0;
-    if ( !i || ::abs( i->height()-th ) > 4 ) {
-	delete i;
-	i = new QImage(scaleButton(Resource::loadImage("OKButton"),th));
-    }
-    return i;
+#define IMAGE_METHOD( methodName, imageName )                             \
+static QImage* methodName( int th ) {                                     \
+    static QImage *i = 0;                                                 \
+     if ( !i || ::abs( i->height()-th ) > 4 ) {                           \
+         delete i;                                                        \
+         i = new QImage(scaleButton(Resource::loadImage(#imageName),th)); \
+     }                                                                    \
+                                                                          \
+     return i;                                                            \
 }
 
-static QImage *closeImage( int th )
-{
-    static QImage *i = 0;
-    if ( !i || ::abs( i->height()-th ) > 4 ) {
-	delete i;
-	i = new QImage(scaleButton(Resource::loadImage("CloseButton"),th));
-    }
-    return i;
-}
-
-static QImage *helpImage( int th )
-{
-    static QImage *i = 0;
-    if ( !i || ::abs( i->height()-th ) > 4 ) {
-	delete i;
-	i = new QImage(scaleButton(Resource::loadImage("HelpButton"),th));
-    }
-    return i;
-}
-
-static QImage *maximizeImage( int th )
-{
-    static QImage *i = 0;
-    if ( !i || ::abs( i->height()-th ) > 4 ) {
-	delete i;
-	i = new QImage(scaleButton(Resource::loadImage("MaximizeButton"),th));
-    }
-    return i;
-}
+IMAGE_METHOD(okImage,      OKButton       );
+IMAGE_METHOD(closeImage,   CloseButton    );
+IMAGE_METHOD(helpImage,    HelpButton     );
+IMAGE_METHOD(maximizeImage,MaximizeButton );
 
 int WindowDecorationInterface::metric( Metric m, const WindowData *wd ) const
 {
