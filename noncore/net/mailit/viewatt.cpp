@@ -20,6 +20,7 @@
 #include "resource.h"
 #include "viewatt.h"
 #include <qpe/applnk.h>
+#include <qpe/mimetype.h>
 
 ViewAtt::ViewAtt(QWidget *parent, const char *name, WFlags f)
 	: QMainWindow(parent, name, f)
@@ -43,6 +44,8 @@ void ViewAtt::update(Email *mailIn, bool inbox)
 	QListViewItem *item;
 	Enclosure *ePtr;
 	
+
+	
 	listView->clear();
 	if (inbox) {
 		bar->clear();
@@ -60,11 +63,17 @@ void ViewAtt::update(Email *mailIn, bool inbox)
 			isInstalled = "Yes";
 		item = new QListViewItem(listView, ePtr->originalName, ePtr->contentType, isInstalled);
 		
+		const QString& mtypeDef=(const QString&) ePtr->contentType+"/"+ePtr->contentAttribute;
+		
+		MimeType mt(mtypeDef);
+		
+		item->setPixmap(0, mt.pixmap());
+
+		/*
 		if (ePtr->contentType == "TEXT") {
 			actions = new QAction( tr("View"), Resource::loadPixmap("TextEditor"), QString::null, CTRL + Key_C, this, 0);
 			actions->addTo(bar);
-			item->setPixmap(0, Resource::loadPixmap("txt"));
-		}
+				}
 		if (ePtr->contentType == "AUDIO") {
 			actions = new QAction( tr("Play"), Resource::loadPixmap("SoundPlayer"), QString::null, CTRL + Key_C, this, 0);
 			actions->addTo(bar);
@@ -74,7 +83,7 @@ void ViewAtt::update(Email *mailIn, bool inbox)
 			actions = new QAction( tr("Show"), Resource::loadPixmap("pixmap"), QString::null, CTRL + Key_C, this, 0);
 			actions->addTo(bar);
 			item->setPixmap(0, Resource::loadPixmap("pixmap"));
-		}
+		}*/
 	}
 }
 

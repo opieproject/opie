@@ -148,7 +148,7 @@ void EmailClient::init()
   getMailButton->addTo(bar);
   getMailButton->addTo(mail);
   
-  sendMailButton = new QAction(tr("Send mail"), Resource::loadPixmap("mailit/sendmail"), QString::null, 0, this, 0);
+  sendMailButton = new QAction(tr("Send mail"), Resource::loadPixmap("mailit/sendqueue"), QString::null, 0, this, 0);
   connect(sendMailButton, SIGNAL(activated()), this, SLOT(sendQuedMail()) );
   sendMailButton->addTo(bar);
   sendMailButton->addTo(mail);

@@ -45,7 +45,7 @@ void WriteMail::setAddressList(AddressList *list)
 	QList<Contact> *cListPtr = addressList->getContactList();
 	QListViewItem *item;
 	for (cPtr = cListPtr->first(); cPtr != 0; cPtr = cListPtr->next() ) {
-		item = new QListViewItem(addressView, cPtr->email, cPtr->name);
+		item = new QListViewItem(addressView, cPtr->name, cPtr->email);
 	}
 }
 
@@ -110,10 +110,11 @@ void WriteMail::init()
 
 	emailInput = new QMultiLineEdit( widget, "emailInput" );
 	grid->addMultiCellWidget( emailInput, 2, 2, 0, 2);
+
 	
 	addressView = new QListView( widget, "addressView");
-	addressView->addColumn("Email");
 	addressView->addColumn("Name");
+	addressView->addColumn("EMail");
 	addressView->setAllColumnsShowFocus(TRUE);
 	addressView->setMultiSelection(TRUE);
 	addressView->hide();

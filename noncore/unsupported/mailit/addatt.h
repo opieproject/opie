@@ -27,7 +27,7 @@
 #include <qstring.h>
 #include <qfileinfo.h>
 #include <qstringlist.h>
-#include <opie/ofileselector.h>
+#include <opie/ofiledialog.h>
 #include <qpe/applnk.h>
 
 class FileItem : public QListViewItem
@@ -65,12 +65,12 @@ public slots:
 private:
 	FileItem* item;
 	QListView *attView;
-	QPushButton *fileCategoryButton, *attatchButton, *removeButton;
+	QPushButton *attatchButton, *removeButton;
 	QPopupMenu *fileCategories;
 	bool modified;
-	QFileInfo *fi;
+	//QFileInfo *fi;
 	
-	OFileSelector* ofs;
+	OFileDialog* ofs;
 };
 
 #endif

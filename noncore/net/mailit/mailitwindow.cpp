@@ -27,9 +27,11 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
   views = new QWidgetStack(this);
   setCentralWidget(views);
   
+  qWarning("***Starting writeMail");
  emailClient = new EmailClient(views, "client");
   writeMail = new WriteMail(views, "writing");
   readMail = new ReadMail(views, "reading");
+  qWarning("***Finished readMail");
 
   views->raiseWidget(emailClient);
                         
@@ -57,6 +59,8 @@ MailItWindow::MailItWindow(QWidget *parent, const char *name, WFlags fl)
   connect(emailClient, SIGNAL(newCaption(const QString &)),
     this, SLOT(updateCaption(const QString &)) );
   viewingMail = FALSE;
+  
+  qWarning("***Finished MailitWindow");
 }
 
 MailItWindow::~MailItWindow()

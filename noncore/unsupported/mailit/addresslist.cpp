@@ -19,6 +19,8 @@
 **********************************************************************/
 #include <qfile.h>
 #include <qtextstream.h>
+#include <opie/ocontactaccess.h>
+#include <opie/ocontact.h>
 
 #include "addresslist.h"
 
@@ -116,10 +118,22 @@ QList<Contact>* AddressList::getContactList()
 
 void AddressList::read()
 {
-	QFile f(filename);
-	QString lineEmail, lineName, email, name;
+	OContactAccess::List::Iterator it;
 	
-	if (! f.open(IO_ReadOnly) )
+	//QFile f(filename);
+	QString lineEmail, lineName, email, name;
+	OContactAccess m_contactdb("mailit");
+	OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
+	//OContact* oc;
+	
+	for ( it = m_list.begin(); it != m_list.end(); ++it )
+	{
+		//oc=(OContact*) it;
+		if ((*it).defaultEmail().length()!=0)
+			addContact((*it).defaultEmail(),(*it).fullName());
+	}
+	
+	/*if (! f.open(IO_ReadOnly) )
 		return;
 	
 	QTextStream stream(&f);
@@ -134,7 +148,7 @@ void AddressList::read()
 		name = getRightString(lineName);
 		addContact(email, name);
 	}
-	f.close();
+	f.close();*/
 }
 
 QString AddressList::getRightString(QString in)

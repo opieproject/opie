@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 #include <qlayout.h>
+#include <qhbox.h>
 #include <qdir.h>
 #include <qstringlist.h>
 #include "resource.h"
@@ -57,12 +58,12 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 {
 	setCaption("Adding attatchments");
 
-	QGridLayout *top = new QGridLayout(this, 3,1 );
+	QGridLayout *top = new QGridLayout(this, 1,1 );
 	
-
+	QHBox *buttons=new QHBox(this);
 	/*fileCategoryButton = new QPushButton(this);*/
-	attatchButton = new QPushButton("Attatch ->", this);
-	removeButton = new QPushButton("Remove", this);
+	attatchButton = new QPushButton("Attatch ->", buttons);
+	removeButton = new QPushButton("Remove", buttons);
 
 	/*fileCategories = new QPopupMenu(fileCategoryButton);
 	fileCategoryButton->setPopup(fileCategories);
@@ -75,14 +76,13 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	fileCategoryButton->setText("Document");
 	top->addWidget(fileCategoryButton, 0, 0);*/
 	
-	//ofs=new OFileSelector(this,2,0,"/root/Documents");
-	
-	
-	top->addWidget(attatchButton,1,0);
-	top->addWidget(removeButton,2,0);
 
-	/*connect(fileCategories, SIGNAL(activated(int)), this,
-    		SLOT(fileCategorySelected(int)) );*/
+	top->addWidget(buttons,1,0);
+	//buttons->addWidget(attatchButton,0,0);
+	//buttons->addWidget(removeButton,0,1);
+
+	//connect(fileCategories, SIGNAL(activated(int)), this,
+    	//	SLOT(fileCategorySelected(int)) );*/
 	connect(attatchButton, SIGNAL(clicked()), this,
 		SLOT(addAttatchment()) );
 	connect(removeButton, SIGNAL(clicked()), this,
@@ -123,17 +123,11 @@ void AddAtt::clear()
 
 void AddAtt::addAttatchment()
 {	
-	QDialog qd(this,tr("Select attachment"),true);
+	OFileDialog ofs("Attachments",this,0,0,"/root/Documents");
 	
-	QGridLayout top(&qd,1,1);
+	ofs.showMaximized();
 	
-	OFileSelector ofs(&qd,1,0,"/root/Documents");
-	
-	top.addWidget(&ofs,0,0);
-	
-	qd.showMaximized();
-	
-	if (qd.exec()==QDialog::Accepted)
+	if (ofs.exec()==QDialog::Accepted)
 	{
 		DocLnk* dl=new DocLnk(ofs.selectedDocument());
 		FileItem* fi=new FileItem(attView,dl);
