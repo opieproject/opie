@@ -164,7 +164,8 @@ int main ( int argc, char **argv )
 				app-> setFont ( QFont ( "Helvetica", 10 ));
 				app-> setStyle ( new QPEStyle ( ));
 
-				const char *sig = ::strsignal ( killedbysig );
+//				const char *sig = ::strsignal ( killedbysig );
+				const char *sig = ::sys_siglist[killedbysig];
 				QLabel *l = new QLabel ( 0, "sig", Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool );
 				l-> setText ( LoginWindowImpl::tr( "Opie was terminated\nby an uncaught signal\n(%1)\n" ). arg ( sig ));
 				l-> setAlignment ( Qt::AlignCenter );
