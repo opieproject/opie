@@ -282,7 +282,7 @@ Quitter tout de même ?</translation>
     </message>
     <message>
         <source>Views</source>
-        <translation>Affichage</translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Default view:</source>

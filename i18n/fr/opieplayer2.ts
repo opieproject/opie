@@ -181,7 +181,7 @@ la liste ?</translation>
     </message>
     <message>
         <source>View</source>
-        <translation>Affichage</translation>
+        <translation>Vue</translation>
     </message>
     <message>
         <source>Skins</source>
