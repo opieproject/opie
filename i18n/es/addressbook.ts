@@ -365,11 +365,11 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Middle Name</source>
-        <translation>1º apellido</translation>
+        <translation>Segundo</translation>
     </message>
     <message>
         <source>Last Name</source>
-        <translation>2º apellido</translation>
+        <translation>Apellidos</translation>
     </message>
     <message>
         <source>Suffix</source>
