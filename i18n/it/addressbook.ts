@@ -102,7 +102,7 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>OContacts</source>
-        <translation>OContatti</translation>
+        <translation type="obsolete">OContatti</translation>
     </message>
     <message>
         <source>List</source>
@@ -351,7 +351,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Afganistan</source>
-        <translation>Afganistan</translation>
+        <translation type="obsolete">Afganistan</translation>
     </message>
     <message>
         <source>Albania</source>
@@ -379,7 +379,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Antartica</source>
-        <translation>Antartica</translation>
+        <translation type="obsolete">Antartica</translation>
     </message>
     <message>
         <source>Argentina</source>
@@ -387,7 +387,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Armania</source>
-        <translation>Armania</translation>
+        <translation type="obsolete">Armania</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -447,7 +447,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Boliva</source>
-        <translation>Bolivia</translation>
+        <translation type="obsolete">Bolivia</translation>
     </message>
     <message>
         <source>Botswana</source>
@@ -483,7 +483,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Camaroon</source>
-        <translation>Camerun</translation>
+        <translation type="obsolete">Camerun</translation>
     </message>
     <message>
         <source>Canada</source>
@@ -647,7 +647,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Gahna</source>
-        <translation>Gahna</translation>
+        <translation type="obsolete">Gahna</translation>
     </message>
     <message>
         <source>Gibraltar</source>
@@ -667,7 +667,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Guadelupe</source>
-        <translation>Guadalupe</translation>
+        <translation type="obsolete">Guadalupe</translation>
     </message>
     <message>
         <source>Guam</source>
@@ -683,7 +683,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Guinea-bissau</source>
-        <translation>Guinea-bissau</translation>
+        <translation type="obsolete">Guinea-bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -735,7 +735,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Jamacia</source>
-        <translation>Giamaica</translation>
+        <translation type="obsolete">Giamaica</translation>
     </message>
     <message>
         <source>Japan</source>
@@ -755,7 +755,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Kribati</source>
-        <translation>Kribati</translation>
+        <translation type="obsolete">Kribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -935,7 +935,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Palestinian Territory</source>
-        <translation>Territorio Palestinese</translation>
+        <translation type="obsolete">Territorio Palestinese</translation>
     </message>
     <message>
         <source>Panama</source>
@@ -959,7 +959,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Pitcairn</source>
-        <translation>Pitcairn</translation>
+        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1147,7 +1147,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Viet Nam</source>
-        <translation>Viet Nam</translation>
+        <translation type="obsolete">Viet Nam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
@@ -1211,7 +1211,7 @@ is provided free !</source>
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation>Kyrgystan</translation>
+        <translation type="obsolete">Kyrgystan</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -1220,6 +1220,62 @@ is provided free !</source>
     <message>
         <source>Delete</source>
         <translation type="unfinished">Cancella Contatto</translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

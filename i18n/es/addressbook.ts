@@ -114,7 +114,7 @@ inténtelo de nuevo.
     </message>
     <message>
         <source>OContacts</source>
-        <translation>Contactos</translation>
+        <translation type="obsolete">Contactos</translation>
     </message>
     <message>
         <source>List</source>
@@ -402,7 +402,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Afganistan</source>
-        <translation>Afganistán</translation>
+        <translation type="obsolete">Afganistán</translation>
     </message>
     <message>
         <source>Albania</source>
@@ -430,7 +430,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Antartica</source>
-        <translation>Antártida</translation>
+        <translation type="obsolete">Antártida</translation>
     </message>
     <message>
         <source>Argentina</source>
@@ -438,7 +438,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Armania</source>
-        <translation>Armenia</translation>
+        <translation type="obsolete">Armenia</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -498,7 +498,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Boliva</source>
-        <translation>Boliva</translation>
+        <translation type="obsolete">Boliva</translation>
     </message>
     <message>
         <source>Botswana</source>
@@ -534,7 +534,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Camaroon</source>
-        <translation>Camerun</translation>
+        <translation type="obsolete">Camerun</translation>
     </message>
     <message>
         <source>Cape Verde</source>
@@ -686,7 +686,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Gahna</source>
-        <translation>Gahna</translation>
+        <translation type="obsolete">Gahna</translation>
     </message>
     <message>
         <source>Gibraltar</source>
@@ -706,7 +706,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Guadelupe</source>
-        <translation>Guadalupe</translation>
+        <translation type="obsolete">Guadalupe</translation>
     </message>
     <message>
         <source>Guam</source>
@@ -722,7 +722,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Guinea-bissau</source>
-        <translation>Guinea-bissau</translation>
+        <translation type="obsolete">Guinea-bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -774,7 +774,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Jamacia</source>
-        <translation>Jamaica</translation>
+        <translation type="obsolete">Jamaica</translation>
     </message>
     <message>
         <source>Jordan</source>
@@ -790,7 +790,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Kribati</source>
-        <translation>Kribati</translation>
+        <translation type="obsolete">Kribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -966,7 +966,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Palestinian Territory</source>
-        <translation>Palestina</translation>
+        <translation type="obsolete">Palestina</translation>
     </message>
     <message>
         <source>Panama</source>
@@ -990,7 +990,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Pitcairn</source>
-        <translation>Pitcairn</translation>
+        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1178,7 +1178,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Viet Nam</source>
-        <translation>Vietnam</translation>
+        <translation type="obsolete">Vietnam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
@@ -1218,7 +1218,7 @@ suministra gratis!</translation>
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation>Kyrgystan</translation>
+        <translation type="obsolete">Kyrgystan</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -1227,6 +1227,62 @@ suministra gratis!</translation>
     <message>
         <source>Delete</source>
         <translation>Borrar</translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -115,7 +115,7 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>OContacts</source>
-        <translation>OContacts</translation>
+        <translation type="obsolete">OContacts</translation>
     </message>
     <message>
         <source>Not Found</source>
@@ -356,7 +356,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Afganistan</source>
-        <translation>Afganistan</translation>
+        <translation type="obsolete">Afganistan</translation>
     </message>
     <message>
         <source>Albania</source>
@@ -384,7 +384,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Antartica</source>
-        <translation>Antarktis</translation>
+        <translation type="obsolete">Antarktis</translation>
     </message>
     <message>
         <source>Argentina</source>
@@ -392,7 +392,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Armania</source>
-        <translation>Armenien</translation>
+        <translation type="obsolete">Armenien</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -452,7 +452,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Boliva</source>
-        <translation>Bolivien</translation>
+        <translation type="obsolete">Bolivien</translation>
     </message>
     <message>
         <source>Botswana</source>
@@ -488,7 +488,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Camaroon</source>
-        <translation>Kamerun</translation>
+        <translation type="obsolete">Kamerun</translation>
     </message>
     <message>
         <source>Canada</source>
@@ -652,7 +652,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Gahna</source>
-        <translation>Ghana</translation>
+        <translation type="obsolete">Ghana</translation>
     </message>
     <message>
         <source>Gibraltar</source>
@@ -672,7 +672,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Guadelupe</source>
-        <translation>Guadeloupe</translation>
+        <translation type="obsolete">Guadeloupe</translation>
     </message>
     <message>
         <source>Guam</source>
@@ -688,7 +688,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Guinea-bissau</source>
-        <translation>Guinea-Bissau</translation>
+        <translation type="obsolete">Guinea-Bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -740,7 +740,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Jamacia</source>
-        <translation>Jamaica</translation>
+        <translation type="obsolete">Jamaica</translation>
     </message>
     <message>
         <source>Japan</source>
@@ -760,7 +760,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Kribati</source>
-        <translation>Kiribati</translation>
+        <translation type="obsolete">Kiribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -940,7 +940,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Palestinian Territory</source>
-        <translation>Palästina</translation>
+        <translation type="obsolete">Palästina</translation>
     </message>
     <message>
         <source>Panama</source>
@@ -964,7 +964,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Pitcairn</source>
-        <translation>Pitcairn</translation>
+        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1152,7 +1152,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Viet Nam</source>
-        <translation>Vietnam</translation>
+        <translation type="obsolete">Vietnam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
@@ -1216,7 +1216,7 @@ ist frei erhältlich !</translation>
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation>Kyrgystan</translation>
+        <translation type="obsolete">Kyrgystan</translation>
     </message>
     <message>
         <source>Unknown</source>
@@ -1225,6 +1225,62 @@ ist frei erhältlich !</translation>
     <message>
         <source>Delete</source>
         <translation>Löschen</translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation>Afghanistan</translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation>Antarktis</translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation>Armenien</translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation>Bolivien</translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation>Kamerun</translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation>Ghana</translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation>Guadeloupe</translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation>Guinea-Bissau</translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation>Jamaika</translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation>Kiribati</translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation>Kyrgyzstan</translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation>Palestina</translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation>Pitcairn Inseln</translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation>Vietnam</translation>
     </message>
 </context>
 <context>

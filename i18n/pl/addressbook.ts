@@ -113,10 +113,6 @@ Zakonczyc?</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>OContacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Not Found</source>
         <translation type="unfinished"></translation>
     </message>
@@ -350,10 +346,6 @@ is provided free !</source>
         <translation>Anglia</translation>
     </message>
     <message>
-        <source>Afganistan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Albania</source>
         <translation type="unfinished"></translation>
     </message>
@@ -378,15 +370,7 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Antartica</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Argentina</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Armania</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -446,10 +430,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Boliva</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Botswana</source>
         <translation type="unfinished"></translation>
     </message>
@@ -479,10 +459,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Cambodia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Camaroon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -646,10 +622,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Gahna</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Gibraltar</source>
         <translation type="unfinished"></translation>
     </message>
@@ -666,10 +638,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Guadelupe</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Guam</source>
         <translation type="unfinished"></translation>
     </message>
@@ -679,10 +647,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Guinea</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Guinea-bissau</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -734,10 +698,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Jamacia</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Japan</source>
         <translation type="unfinished"></translation>
     </message>
@@ -751,10 +711,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Kenya</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Kribati</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -934,10 +890,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Palestinian Territory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Panama</source>
         <translation type="unfinished"></translation>
     </message>
@@ -955,10 +907,6 @@ is provided free !</source>
     </message>
     <message>
         <source>Philippines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pitcairn</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1146,10 +1094,6 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Viet Nam</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Virgin Islands</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1210,16 +1154,68 @@ is provided free !</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Kyrgystan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Unknown</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Delete</source>
         <translation type="unfinished">Usun</translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -118,10 +118,6 @@
         <translation>&amp;Alle ja</translation>
     </message>
     <message>
-        <source>OContacts</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Can not edit data, currently syncing</source>
         <translation>Kan ikke redigere data da en synkronisering er igang</translation>
     </message>
@@ -337,7 +333,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Afganistan</source>
-        <translation>Afghanistan</translation>
+        <translation type="obsolete">Afghanistan</translation>
     </message>
     <message>
         <source>Albania</source>
@@ -365,7 +361,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Antartica</source>
-        <translation>Antarktis</translation>
+        <translation type="obsolete">Antarktis</translation>
     </message>
     <message>
         <source>Argentina</source>
@@ -373,7 +369,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Armania</source>
-        <translation>Armenien</translation>
+        <translation type="obsolete">Armenien</translation>
     </message>
     <message>
         <source>Aruba</source>
@@ -433,7 +429,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Boliva</source>
-        <translation>Bolivia</translation>
+        <translation type="obsolete">Bolivia</translation>
     </message>
     <message>
         <source>Botswana</source>
@@ -469,7 +465,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Camaroon</source>
-        <translation>Cameroun</translation>
+        <translation type="obsolete">Cameroun</translation>
     </message>
     <message>
         <source>Canada</source>
@@ -633,7 +629,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Gahna</source>
-        <translation>Ghana</translation>
+        <translation type="obsolete">Ghana</translation>
     </message>
     <message>
         <source>Gibraltar</source>
@@ -653,7 +649,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Guadelupe</source>
-        <translation>Guadeloupe</translation>
+        <translation type="obsolete">Guadeloupe</translation>
     </message>
     <message>
         <source>Guam</source>
@@ -669,7 +665,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Guinea-bissau</source>
-        <translation>Guinea-Bissau</translation>
+        <translation type="obsolete">Guinea-Bissau</translation>
     </message>
     <message>
         <source>Guyana</source>
@@ -721,7 +717,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Jamacia</source>
-        <translation>Jamaica</translation>
+        <translation type="obsolete">Jamaica</translation>
     </message>
     <message>
         <source>Japan</source>
@@ -741,7 +737,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Kribati</source>
-        <translation>Kiribati</translation>
+        <translation type="obsolete">Kiribati</translation>
     </message>
     <message>
         <source>Korea</source>
@@ -753,7 +749,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Kyrgystan</source>
-        <translation>Kurgistan</translation>
+        <translation type="obsolete">Kurgistan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -929,7 +925,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Palestinian Territory</source>
-        <translation>Palæstinensiske selvstyre områder</translation>
+        <translation type="obsolete">Palæstinensiske selvstyre områder</translation>
     </message>
     <message>
         <source>Panama</source>
@@ -953,7 +949,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Pitcairn</source>
-        <translation>Pitcairn</translation>
+        <translation type="obsolete">Pitcairn</translation>
     </message>
     <message>
         <source>Poland</source>
@@ -1141,7 +1137,7 @@ Opie-Mail fås gratis!</translation>
     </message>
     <message>
         <source>Viet Nam</source>
-        <translation>Vietnam</translation>
+        <translation type="obsolete">Vietnam</translation>
     </message>
     <message>
         <source>Virgin Islands</source>
@@ -1226,6 +1222,62 @@ Opie-Mail fås gratis!</translation>
     <message>
         <source>Unknown</source>
         <translation>Ukendt</translation>
+    </message>
+    <message>
+        <source>Afghanistan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Antarctica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Armenia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bolivia</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cameroon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ghana</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guadeloupe</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Guinea-Bissau</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Jamaica</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kiribati</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgyzstan</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Palestinian Sovereign Areas</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Pitcairn Islands</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Vietnam</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
