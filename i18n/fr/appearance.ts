@@ -230,7 +230,7 @@ Cette partie vous permet de selectionner une application et quelle préférence 
     </message>
     <message>
         <source>Rotation direction:</source>
-        <translation type="unfinished"></translation>
+        <translation>Sens de rotation:</translation>
     </message>
 </context>
 <context>

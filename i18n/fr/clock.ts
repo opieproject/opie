@@ -36,11 +36,11 @@
     </message>
     <message>
         <source>Alarm Is On</source>
-        <translation>L&apos;alarme est activée</translation>
+        <translation>Alarme active</translation>
     </message>
     <message>
         <source>Alarm Is Off</source>
-        <translation>L&apos;alarme est désactivée</translation>
+        <translation>Alarme inactive</translation>
     </message>
     <message>
         <source>Set date and time.</source>

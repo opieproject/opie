@@ -4,34 +4,34 @@
     <name>OHighscore</name>
     <message>
         <source>empty</source>
-        <translation type="unfinished"></translation>
+        <translation>vide</translation>
     </message>
     <message>
         <source>Enter your name!</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrez votre nom!</translation>
     </message>
 </context>
 <context>
     <name>OHighscoreDialog</name>
     <message>
         <source>Highscores</source>
-        <translation type="unfinished"></translation>
+        <translation>Meilleurs scores</translation>
     </message>
     <message>
         <source>#</source>
-        <translation type="unfinished"></translation>
+        <translation>#</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Points</source>
-        <translation type="unfinished"></translation>
+        <translation>points</translation>
     </message>
     <message>
         <source>Level</source>
-        <translation type="unfinished">Niveau</translation>
+        <translation>Niveau</translation>
     </message>
 </context>
 <context>
