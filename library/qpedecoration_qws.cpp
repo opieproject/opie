@@ -504,6 +504,11 @@ QPEDecoration::QPEDecoration()
     	qDebug ( "Checking %s/%s for help: %d", (*it).latin1(), helpFile.latin1(),helpExists);
    }
     qpeManager = new QPEManager( this );
+    
+    // for backward compatibility:
+    imageOk = *okImage ( 15 );
+    imageClose = *closeImage ( 15 );
+    imageHelp = *helpImage ( 15 );
 }
 
 QPEDecoration::QPEDecoration( const QString &plugin )
