@@ -56,10 +56,10 @@ QString WExtensions::station(){
   iwr.u.data.length = IW_ESSID_MAX_SIZE;
   iwr.u.data.flags = 0;
   if ( 0 == ioctl( fd, SIOCGIWNICKN, &iwr )){
-    iwr.u.data.pointer[(unsigned int) iwr.u.data.length-1] = '\0';
-    return QString(iwr.u.data.pointer);
+    buffer[(unsigned int) iwr.u.data.length-1] = '\0';
+    return (const char*) buffer;
   }
-  return QString();
+  return QString::null;
 }
 
 /**
@@ -68,11 +68,15 @@ QString WExtensions::station(){
 QString WExtensions::essid(){
   if(!hasWirelessExtensions)
     return QString();
+  const char* buffer[200];
+  iwr.u.data.pointer = (caddr_t) buffer;
+  iwr.u.data.length = IW_ESSID_MAX_SIZE;
+  iwr.u.data.flags = 0;
   if ( 0 == ioctl( fd, SIOCGIWESSID, &iwr )){
-    iwr.u.essid.pointer[(unsigned int) iwr.u.essid.length] = '\0';
-    return QString(iwr.u.essid.pointer);
+    buffer[(unsigned int) iwr.u.essid.length] = '\0';
+    return (const char*) buffer;
   }
-  return QString();
+  return QString::null;
 }
 
 /**
