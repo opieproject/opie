@@ -4,15 +4,12 @@
 #include "budget.h"
 #include "memory.h"
 #include "transfer.h"
-#include "preferences.h"
 #include "calculator.h"
 #include "datepicker.h"
 
-#include <qdatetime.h>
 #include <qmessagebox.h>
 #include <qheader.h>
 #include <qmultilineedit.h>
-#include <qdatetime.h>
 
 extern Transaction *transaction;
 extern Budget *budget;

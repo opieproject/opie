@@ -1,6 +1,5 @@
 #include "preferencedialogs.h"
 #include "preferences.h"
-#include <qlabel.h>
 
 extern Preferences *preferences;
 

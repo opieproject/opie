@@ -14,7 +14,6 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "oxygen.h"
 
 #include "calcdlgui.h"
 #include "kmolcalc.h"

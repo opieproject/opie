@@ -1,6 +1,4 @@
 #include "account.h"
-#include "transaction.h"
-#include "transfer.h"
 #include "preferences.h"
 
 #include <qpixmap.h>

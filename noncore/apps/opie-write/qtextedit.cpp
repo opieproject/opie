@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qtextedit.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
+** $Id: qtextedit.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
 **
 ** Implementation of the QTextEdit class
 **
@@ -38,28 +38,8 @@
 #include "qtextedit.h"
 
 #include "qrichtext_p.h"
-#include "qpainter.h"
-#include "qpen.h"
-#include "qbrush.h"
-#include "qpixmap.h"
-#include "qfont.h"
-#include "qcolor.h"
-#include "qstyle.h"
-#include "qsize.h"
-#include "qevent.h"
-#include "qtimer.h"
-#include "qapplication.h"
 #include "qlistbox.h"
-#include "qvbox.h"
-#include "qapplication.h"
 #include "qclipboard.h"
-#include "qcolordialog.h"
-#include "qfontdialog.h"
-#include "qstylesheet.h"
-#include "qdragobject.h"
-#include "qurl.h"
-#include "qcursor.h"
-#include "qregexp.h"
 #include "qpopupmenu.h"
 
 #define ACCEL_KEY(k) "\t" + QString("Ctrl+" #k)

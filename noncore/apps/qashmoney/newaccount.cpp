@@ -1,9 +1,6 @@
 #include "newaccount.h"
 #include "calculator.h"
 #include "datepicker.h"
-#include "transaction.h"
-#include "preferences.h"
-#include <qdatetime.h>
 #include <qmultilineedit.h>
 
 extern Preferences *preferences;

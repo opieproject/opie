@@ -1,13 +1,10 @@
 #include <qmessagebox.h>
 #include <qheader.h>
-#include <qfont.h>
 #include <sqlite.h>
 
 #include "budgetdisplay.h"
 #include "budget.h"
-#include "newaccount.h"
 #include "datepicker.h"
-#include "preferences.h"
 #include "transaction.h"
 
 extern Preferences *preferences;

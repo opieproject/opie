@@ -34,7 +34,6 @@
 
 /* QTE includes */
 #include <qmenubar.h>
-#include <qpe/qpetoolbar.h>
 #include <qpopupmenu.h>
 #include <qapplication.h>
 #include <qwidgetstack.h>

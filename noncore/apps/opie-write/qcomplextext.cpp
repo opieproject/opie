@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qcomplextext.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
+** $Id: qcomplextext.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
 **
 ** Implementation of some internal classes
 **
@@ -35,11 +35,8 @@
 **
 **********************************************************************/
 
-#include "qcomplextext_p.h"
 
 #include "qrichtext_p.h"
-#include "qfontmetrics.h"
-#include "qrect.h"
 
 #include <stdlib.h>
 

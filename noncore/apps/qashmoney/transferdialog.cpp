@@ -2,8 +2,6 @@
 #include "datepicker.h"
 #include "calculator.h"
 
-#include <qdatetime.h>
-#include <qfont.h>
 
 extern Preferences *preferences;
 extern Account *account;

@@ -1,10 +1,8 @@
 #include "newtransaction.h"
 #include "calculator.h"
 #include "datepicker.h"
-#include "memory.h"
 #include "budget.h"
 
-#include <qdatetime.h>
 #include <qmultilineedit.h>
 
 extern Budget *budget;

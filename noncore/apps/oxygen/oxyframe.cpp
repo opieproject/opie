@@ -14,9 +14,7 @@
  * ( at your option ) any later version.                                   *
  *                                                                         *
  **************************************************************************/
-#include "oxygen.h"
 
-#include <qpe/config.h>
 #include "oxyframe.h"
 
 OxyFrame::OxyFrame(QWidget *parent, const char *name, QString symbol ) 

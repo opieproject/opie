@@ -18,10 +18,8 @@
 #include <qpe/config.h>
 #include <qlayout.h>
 #include <qpe/qpeapplication.h>
-#include <qlist.h>
 #include "dataTable.h"
 #include "psewidget.h"
-#include "oxyframe.h"
 
 
 PSEWidget::PSEWidget(const QStringList &list) : QWidget()

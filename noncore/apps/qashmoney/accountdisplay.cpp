@@ -1,4 +1,3 @@
-#include <qdatetime.h>
 #include <qmessagebox.h>
 #include <qheader.h>
 
@@ -6,7 +5,6 @@
 #include "newaccount.h"
 #include "transaction.h"
 #include "transferdialog.h"
-#include "preferences.h"
 #include "transfer.h"
 
 extern Account *account;

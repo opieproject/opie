@@ -12,9 +12,6 @@
  */
 
 #include "kmolcalc.h"
-#include <qdict.h>
-#include <qdir.h>
-#include <qfile.h>
 #include <qpe/qpeapplication.h>
 
 

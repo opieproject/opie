@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qrichtext.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
+** $Id: qrichtext.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
 **
 ** Implementation of the internal Qt classes dealing with rich text
 **
@@ -37,24 +37,9 @@
 
 #include "qrichtext_p.h"
 
-#include "qstringlist.h"
-#include "qfont.h"
-#include "qtextstream.h"
-#include "qfile.h"
-#include "qapplication.h"
-#include "qmap.h"
-#include "qfileinfo.h"
-#include "qstylesheet.h"
-#include "qmime.h"
-#include "qimage.h"
 #include "qdragobject.h"
 #include "qpaintdevicemetrics.h"
-#include "qpainter.h"
 #include "qdrawutil.h"
-#include "qcursor.h"
-#include "qstack.h"
-#include "qstyle.h"
-#include "qcomplextext_p.h"
 #include "qcleanuphandler.h"
 
 #include <stdlib.h>

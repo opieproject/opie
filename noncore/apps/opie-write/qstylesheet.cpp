@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: qstylesheet.cpp,v 1.2 2002-07-15 23:22:50 leseb Exp $
+** $Id: qstylesheet.cpp,v 1.3 2004-03-01 19:44:43 chicken Exp $
 **
 ** Implementation of the QStyleSheet class
 **
@@ -38,8 +38,6 @@
 #include "qstylesheet.h"
 
 #include "qrichtext_p.h"
-#include "qlayout.h"
-#include "qpainter.h"
 #include "qcleanuphandler.h"
 
 #include <stdio.h>

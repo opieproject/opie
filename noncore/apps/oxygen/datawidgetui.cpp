@@ -18,13 +18,8 @@
 #include "datawidgetui.h"
 #include "dataTable.h"
 
-#include <qpe/config.h>
-#include <qstring.h>
 #include <qcombobox.h>
 #include <qlayout.h>
-#include <qhbox.h>
-#include <qlabel.h>
-#include <qpe/qpeapplication.h>
 
 dataWidgetUI::dataWidgetUI(const QStringList &list) : QWidget()
 {

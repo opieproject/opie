@@ -18,14 +18,11 @@
 #include <qpe/config.h>
 
 #include "dataTable.h"
-#include <qwidget.h>
 #include <qhbox.h>
 #include <qlabel.h>
-#include <qfont.h>
 #include <qlayout.h>
 #include <qpe/qpeapplication.h>
 
-#include <qstringlist.h>
 
 OxydataWidget::OxydataWidget(QWidget *parent, const char *name, const QStringList &list ) : QWidget( parent,name ), names( list )
 {

@@ -16,10 +16,8 @@
  **************************************************************************/
 #include "oxygen.h"
 
-#include <qapplication.h>
 #include <qtabwidget.h>
 
-#include "calcdlg.h"
 #include "calcdlgui.h"
 #include "datawidgetui.h"
 #include "psewidget.h"
