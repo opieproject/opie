@@ -239,7 +239,7 @@ void Security::setSyncNet(const QString& sn)
 void Security::applySecurity()
 {
     if ( valid ) {
-<<<<<<< security.cpp
+
         Config cfg("Security");
         cfg.setGroup("Passcode");
         cfg.writeEntry("passcode",passcode);
