@@ -7,7 +7,6 @@ HEADERS	= datebookday.h \
 	  dateentryimpl.h \
 	  datebookdayheaderimpl.h \
 	  datebooksettings.h \
-	  datebooksettingsbase.h \
 	  datebookweek.h \
 	  datebookweeklst.h \
 	  datebookweekheaderimpl.h \
@@ -21,7 +20,6 @@ SOURCES	= main.cpp \
 	  datebook.cpp \
 	  dateentryimpl.cpp \
 	  datebookdayheaderimpl.cpp \
-	  datebooksettingsbase.cpp \
 	  datebooksettings.cpp \
 	  datebookweek.cpp \
 	  datebookweeklst.cpp \

@@ -27,7 +27,7 @@
 bool calcWeek(const QDate &d, int &week, int &year,
 	      bool startOnMonday = false);
 
-DateBookWeekLstHeader::DateBookWeekLstHeader(bool /*onM*/, QWidget* parent,
+DateBookWeekLstHeader::DateBookWeekLstHeader(bool onM, QWidget* parent,
 					     const char* name, WFlags fl)
     : DateBookWeekLstHeaderBase(parent, name, fl)
 {
@@ -91,7 +91,7 @@ void DateBookWeekLstHeader::prevWeek() {
     setDate(date.addDays(-7));
 }
 
-DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool onM,
+DateBookWeekLstDayHdr::DateBookWeekLstDayHdr(const QDate &d, bool /*onM*/,
 					     QWidget* parent,
 					     const char* name,
 					     WFlags fl )
