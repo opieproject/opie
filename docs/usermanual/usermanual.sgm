@@ -34,6 +34,10 @@
 <!ENTITY language SYSTEM "language.sgm">
 <!ENTITY sshkeys SYSTEM "sshkeys.sgm">
 <!ENTITY appskey SYSTEM "appskey.sgm">
+<!ENTITY drawpad SYSTEM "drawpad.sgm">
+<!ENTITY qpdf SYSTEM "qpdf.sgm">
+<!ENTITY player2 SYSTEM "player2.sgm">
+<!ENTITY showimg SYSTEM "showimg.sgm">
 
 <!--Now the real entities-->
 <!ENTITY opie "OPIE">
@@ -67,6 +71,10 @@
 &write;
 &sysinfo;
 &tableviewer;
+&qpdf;
+&drawpad;
+&player2;
+&showimg;
 </part>
 <part><title>Settings</title>
 &software;
