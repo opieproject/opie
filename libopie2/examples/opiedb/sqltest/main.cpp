@@ -6,6 +6,7 @@
 #include <opie2/osqldriver.h>
 #include <opie2/osqlresult.h>
 
+using namespace Opie::DB;
 int main( int argc,  char* argv[] ) {
 
 QPEApplication app( argc, argv );
