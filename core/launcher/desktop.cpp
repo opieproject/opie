@@ -167,11 +167,13 @@ public:
 
     m_lcd_status = true;
 
-    m_backlight_bright = -1;
+	m_backlight_normal = -1;
+    m_backlight_current = -1;
     m_backlight_forcedoff = false;
 
     // Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
-    ODevice::inst ( ) -> setDisplayStatus ( true );
+    ODevice::inst ( )-> setDisplayStatus ( true );
+    setBacklight ( -1 );
   }
   void restore()
   {
@@ -180,27 +182,27 @@ public:
       m_lcd_status = true;
     }
 
-    setBacklight ( -1 );
+    setBacklightInternal ( -1 );
   }
   bool save( int level )
   {
     switch ( level ) {
       case 0:
         if ( m_disable_suspend > 0 && m_enable_dim ) {
-          if ( backlight() > 1 )
-            setBacklight( 1 ); // lowest non-off
+          if ( m_backlight_current > 1 )
+            setBacklightInternal ( 1 ); // lowest non-off
         }
         return true;
         break;
       case 1:
         if ( m_disable_suspend > 1 && m_enable_lightoff ) {
-          setBacklight( 0 ); // off
+          setBacklightInternal ( 0 ); // off
         }
         return true;
         break;
       case 2:
         if ( m_enable_onlylcdoff ) {
-          ODevice::inst ( ) -> setDisplayStatus ( false );
+          ODevice::inst ( )-> setDisplayStatus ( false );
           m_lcd_status = false;
           return true;
         }
@@ -269,19 +271,19 @@ public:
       setInterval( -1 );
     m_disable_suspend = mode;
   }
-
-  int backlight ( )
+  
+  void setBacklight ( int bright )
   {
-    if ( m_backlight_bright == -1 ) {
-      // Read from config
-      Config config ( "qpe" );
-      config. setGroup ( "Screensaver" );
-      m_backlight_bright = config. readNumEntry ( "Brightness", 255 );
-    }
-    return m_backlight_bright;
+    // Read from config
+    Config config ( "qpe" );
+    config. setGroup ( "Screensaver" );
+    m_backlight_normal = config. readNumEntry ( "Brightness", 255 );
+
+	setBacklightInternal ( bright );
   }
 
-  void setBacklight ( int bright )
+private:
+  void setBacklightInternal ( int bright )
   {
     if ( bright == -3 ) {
       // Forced on
@@ -292,18 +294,19 @@ public:
       return ;
     if ( bright == -2 ) {
       // Toggle between off and on
-      bright = m_backlight_bright ? 0 : -1;
+      bright = m_backlight_current ? 0 : -1;
       m_backlight_forcedoff = !bright;
     }
-
-    m_backlight_bright = bright;
-
-    bright = backlight ( );
-    ODevice::inst ( ) -> setDisplayBrightness ( bright );
-
-    m_backlight_bright = bright;
+	if ( bright == -1 )
+		bright = m_backlight_normal;
+	
+	if ( bright != m_backlight_current ) {
+      ODevice::inst ( )-> setDisplayBrightness ( bright );
+      m_backlight_current = bright;
+    }
   }
 
+public:
   void setDisplayState ( bool on )
   {
     if ( m_lcd_status != on ) {
@@ -320,7 +323,8 @@ private:
 
   bool m_lcd_status;
 
-  int m_backlight_bright;
+  int m_backlight_normal;
+  int m_backlight_current;
   bool m_backlight_forcedoff;
 };
 
