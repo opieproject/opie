@@ -46,6 +46,7 @@ protected:
     
     static void traverseBody(RecBody&target,mailmessage*message,mailmime*mime,unsigned int current_rek=0);
     static void fillSingleBody(RecPart&target,mailmessage*message,mailmime*mime);
+    static void fillParameters(RecPart&target,clist*parameters);
     static QString POP3wrapper::getencoding(mailmime_mechanism*aEnc);
 
     POP3account *account;

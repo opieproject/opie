@@ -446,19 +446,14 @@ void POP3wrapper::traverseBody(RecBody&target,mailmessage*message,mailmime*mime,
     char*data = 0;
     size_t len;
     clistiter * cur = 0;
-    mailmime_single_fields fields;
     int res;
     QString b;
-    memset(&fields, 0, sizeof(struct mailmime_single_fields));
     RecPart part;
     
-    if (mime->mm_mime_fields != NULL) {
-        mailmime_single_fields_init(&fields, mime->mm_mime_fields,
-            mime->mm_content_type);
-    }
     switch (mime->mm_type) {
     case MAILMIME_SINGLE:
         r = mailmessage_fetch_section(message,mime,&data,&len);
+        part.setSize(len);
         fillSingleBody(part,message,mime);
         if (part.Type()=="text" && target.Bodytext().isNull()) {
             encodedString*r = new encodedString();
@@ -523,8 +518,15 @@ void POP3wrapper::fillSingleBody(RecPart&target,mailmessage*,mailmime*mime)
     if (!mime) {
         return;
     }
-    mailmime_content*type = mime->mm_content_type;
     mailmime_field*field = 0;
+    mailmime_single_fields fields;
+    memset(&fields, 0, sizeof(struct mailmime_single_fields));
+    if (mime->mm_mime_fields != NULL) {
+        mailmime_single_fields_init(&fields, mime->mm_mime_fields,
+            mime->mm_content_type);
+    }
+    
+    mailmime_content*type = fields.fld_content;
     clistcell*current;
     if (!type) {
         target.setType("text");
@@ -554,6 +556,9 @@ void POP3wrapper::fillSingleBody(RecPart&target,mailmessage*,mailmime*mime)
             }
             break;
         }
+        if (type->ct_parameters) {
+            fillParameters(target,type->ct_parameters);
+        }
     }
     if (mime->mm_mime_fields && mime->mm_mime_fields->fld_list) {
         for (current=clist_begin(mime->mm_mime_fields->fld_list);current!=0;current=clist_next(current)) {
@@ -573,5 +578,17 @@ void POP3wrapper::fillSingleBody(RecPart&target,mailmessage*,mailmime*mime)
             }
         }
     }
-    // TODO search the parameter list for unique id and so on
+}
+
+void POP3wrapper::fillParameters(RecPart&target,clist*parameters)
+{
+    if (!parameters) {return;}
+    clistcell*current=0;
+    mailmime_parameter*param;
+    for (current=clist_begin(parameters);current!=0;current=clist_next(current)) {
+        param = (mailmime_parameter*)current->data;
+        if (param) {
+            target.addParameter(QString(param->pa_name).lower(),QString(param->pa_value));
+        }
+    }
 }
