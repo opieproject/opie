@@ -1,136 +1,113 @@
-hehindefault:  dynamic
+#!/usr/bin/make -f
+export OPIEDIR:=$(shell pwd)
+export TOPDIR:=$(OPIEDIR)
+export QMAKE:=$(OPIEDIR)/qmake/qmake
 
-all: default docs
+export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
-LIBS=library libopie
+noconfig_targets := xconfig menuconfig config oldconfig randconfig \
+		    defconfig allyesconfig allnoconfig allmodconfig \
+		    clean-configs
 
+configs += $(TOPDIR)/core/applets/config.in $(TOPDIR)/core/apps/config.in $(TOPDIR)/core/multimedia/config.in $(TOPDIR)/core/pim/config.in $(TOPDIR)/core/pim/today/plugins/config.in $(TOPDIR)/core/settings/config.in $(TOPDIR)/development/config.in $(TOPDIR)/inputmethods/config.in $(TOPDIR)/libopie/ofileselector/config.in $(TOPDIR)/libopie/pim/config.in $(TOPDIR)/libsql/config.in $(TOPDIR)/noncore/applets/config.in $(TOPDIR)/noncore/apps/opie-console/test/config.in $(TOPDIR)/noncore/apps/config.in $(TOPDIR)/noncore/comm/config.in $(TOPDIR)/noncore/decorations/config.in $(TOPDIR)/noncore/games/config.in $(TOPDIR)/noncore/graphics/config.in $(TOPDIR)/noncore/multimedia/config.in $(TOPDIR)/noncore/net/config.in $(TOPDIR)/noncore/net/opietooth/config.in $(TOPDIR)/noncore/settings/config.in $(TOPDIR)/noncore/styles/config.in $(TOPDIR)/noncore/tools/calc2/config.in $(TOPDIR)/noncore/tools/config.in $(TOPDIR)/noncore/unsupported/opiemail/ifaces/config.in $(TOPDIR)/noncore/unsupported/config.in $(TOPDIR)/noncore/todayplugins/config.in
 
-INPUTCOMPONENTS= inputmethods/keyboard inputmethods/pickboard \
-	inputmethods/handwriting  inputmethods/unikeyboard \
-	inputmethods/jumpx inputmethods/kjumpx \
-	inputmethods/dvorak  inputmethods/multikey \
+# $(TOPDIR)/.config depends on .depends.cfgs, as it depends on $(configs)
+# in order to have a full set of config.in files.
+# .depends depends on $(TOPDIR)/.config
+# everything else depends on .depends, to ensure the dependencies are
+# intact.
+#
+# NOTE: The order in which things happen in this makefile is
+# 	-critical-. Do not rearrange this!
+ 
+all : $(TOPDIR)/.config
 
-APPLETS= core/applets/batteryapplet \
-	core/applets/irdaapplet core/applets/volumeapplet \
-	core/applets/clockapplet \
-	core/applets/homeapplet core/applets/suspendapplet \
-	core/applets/logoutapplet \
-	core/applets/screenshotapplet core/applets/clipboardapplet \
-	core/applets/cardmon core/applets/obex \
-	core/applets/vmemo \
-	noncore/applets/wirelessapplet noncore/applets/notesapplet
+$(TOPDIR)/.config : $(TOPDIR)/.depends.cfgs
 
-MAIL= noncore/mail/libmail noncore/mail/bend 
+all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(TOPDIR)/.depends.cfgs
 
-PLAYER = core/multimedia/opieplayer/libmpeg3 \
-	core/multimedia/opieplayer/libmad \
-	core/multimedia/opieplayer/wavplugin \
-	core/multimedia/opieplayer/modplug
+clean-configs :
+	@echo "Wiping generated config.in files..."
+	@-rm -f $(configs)
 
-COMPONENTS=$(LOCALCOMPONENTS) $(INPUTCOMPONENTS) $(APPLETS) $(MAIL) $(PLAYER)	
+-include $(TOPDIR)/.depends.cfgs
 
+all menuconfig xconfig oldconfig config randconfig allyesconfig allnoconfig defconfig : $(configs)
 
-PIMAPPS = core/pim/addressbook core/pim/datebook \
-	 core/pim/today core/pim/todo 
+$(TOPDIR)/.config: $(TOPDIR)/.depends.cfgs $(configs)
+	$(call descend,scripts/kconfig,conf)
+	@if [ ! -e $@ ]; then \
+		cp $(TOPDIR)/def-configs/opie $@; \
+	fi;
+	@$(MAKE) -C scripts/kconfig conf;
+	./scripts/kconfig/conf -s ./config.in
 
-TODAYPLUGINS = core/pim/today/plugins/datebook \
-		core/pim/today/plugins/addressbook \
-		core/pim/today/plugins/todolist \
-		core/pim/today/plugins/mail \
-		noncore/todayplugins/stockticker/stockticker noncore/todayplugins/stockticker/stocktickerlib \
-		noncore/todayplugins/fortune \
-		noncore/todayplugins/weather
+# config rules must have the $(configs) var defined
+# at the time that they run. we must ensure that .depends.cfgs
+# is built and included by the time we reach this point.
 
+xconfig :
+	$(call descend,scripts/kconfig,qconf)
+	LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$(TOPDIR)/scripts/kconfig \
+		./scripts/kconfig/qconf ./config.in
 
-COREAPPS = core/apps/filebrowser core/apps/helpbrowser \
-	core/apps/textedit core/apps/embeddedkonsole \
-	core/launcher  \
-	core/opie-login \
-	core/apps/oipkg core/apps/qcop
+menuconfig : scripts/lxdialog/lxdialog
+	$(call descend,scripts/kconfig,mconf)
+	./scripts/kconfig/mconf ./config.in
 
-COREMULTIMEDIA = core/multimedia/opieplayer
-
-CORESETTINGS = core/settings/light-and-power core/settings/security \
-	noncore/settings/netsystemtime core/settings/citytime \
-	core/settings/launcher core/settings/button
-
-NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
-	noncore/settings/appearance2 noncore/settings/sound \
-	noncore/settings/mediummount \
-	noncore/settings/tabmanager \
-	noncore/settings/sshkeys noncore/settings/usermanager \
-	noncore/settings/backup
-
-NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
-	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm \
-	 noncore/tools/formatter
-
-NONCORESTYLES = noncore/styles/liquid noncore/styles/theme noncore/styles/metal \
-	noncore/styles/flat noncore/styles/fresh
-
-NONCOREDECOS = noncore/decorations/liquid noncore/decorations/flat \
-	noncore/decorations/polished
-
-GAMES = noncore/games/minesweep noncore/games/solitaire \
-	noncore/games/tetrix noncore/games/wordgame \
-	noncore/games/parashoot noncore/games/snake \
-	noncore/games/mindbreaker \
-	noncore/games/go noncore/games/qasteroids \
-	noncore/games/fifteen noncore/games/tictac \
-	noncore/games/kcheckers noncore/games/kpacman \
-	noncore/games/kbill noncore/games/buzzword \
-	noncore/games/bounce noncore/games/sfcave
-
-NONAPPS = noncore/apps/opie-sheet noncore/apps/tableviewer \
-	noncore/apps/opie-reader noncore/apps/checkbook noncore/apps/oxygen \
- 	noncore/apps/sysinfo noncore/net/opieirc noncore/apps/aqpkg \
- 	noncore/apps/opie-console noncore/apps/opie-write
-	
-NONNET = noncore/net/ftplib noncore/net/opieftp \
-	noncore/mail
-
-NONMULT = noncore/multimedia/showimg noncore/graphics/drawpad \
-	noncore/graphics/qpdf noncore/apps/confedit
+config :
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf ./config.in
+ 
+oldconfig :
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -o ./config.in
+ 
+randconfig :
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -r ./config.in
+ 
+allyesconfig :
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -y ./config.in
+ 
+allnoconfig :
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -n ./config.in
+ 
+defconfig :
+	$(call descend,scripts/kconfig,conf)
+	./scripts/kconfig/conf -d ./config.in
 
 
-NONCOMM = noncore/comm/keypebble
+export
 
-PLUGINS = freetype
+ifeq ($(filter $(noconfig_targets),$(MAKECMDGOALS)),)
 
-APPS=$(LOCALAPPS) $(PIMAPPS)  $(COREAPPS)     \
-	$(COREMULTIMEDIA) $(CORESETTINGS) \
-	$(NONCORESETTINGS) $(NONCORETOOLS) $(NONCORESTYLES) \
-	$(NONCOREDECOS) $(NONAPPS) $(NONNET) $(NONMULT) \
-	$(NONCOMM) $(GAMES) $(TODAYPLUGINS) $(PLUGINS)
-    
-    
+export include-config := 1
 
-NONTMAKEAPPS := core/opiealarm 
+-include $(TOPDIR)/.config
+-include $(TOPDIR)/.depends
 
-DOCS = docs/src/opie-policy
+endif
 
-dynamic: $(APPS) $(NONTMAKEAPPS)
+-include $(TOPDIR)/..config.cmd
 
-docs: $(DOCS)
+SUBDIRS = $(subdir-y)
 
-$(COMPONENTS): $(LIBS)
+export QMAKESPEC=$(QMAKESPECSDIR)/$(patsubst "%",%,$(CONFIG_SPECFILE))
 
-$(NONTMAKEAPPS) $(APPS): $(LIBS) $(COMPONENTS)
+ifdef CONFIG_OPTIMIZATIONS
+export CFLAGS_RELEASE=$(patsubst "%,%,$(CONFIG_OPTIMIZATIONS))
+export CFLAGS_RELEASE:=$(patsubst %",%,$(CFLAGS_RELEASE))
+endif
 
-$(LIBS) $(COMPONENTS) $(NONTMAKEAPPS) $(APPS) $(DOCS):
-	$(MAKE) -C $@ -f Makefile
+all clean lupdate lrelease install ipk: $(SUBDIRS) 
 
-showcomponents:
-	@echo $(LIBS) $(APPS) $(COMPONENTS)
+$(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers) \
+	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11) \
+	$(TOPDIR)/library/custom.h
 
-clean:
-	for dir in $(NONTMAKEAPPS) $(APPS) $(LIBS) $(COMPONENTS) $(DOCS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
+clean : $(TOPDIR)/.config
 
-lupdate:
-	for dir in $(APPS) $(LIBS) $(COMPONENTS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
-
-lrelease:
-	for dir in $(APPS) $(LIBS) $(COMPONENTS); do $(MAKE) -C $$dir -f Makefile $@ || exit 1; done
-
-
-.PHONY: default dynamic $(NONTMAKEAPPS) $(LIBS) $(APPS) $(COMPONENTS) $(DOCS) showcomponents clean
+include $(TOPDIR)/Rules.make
