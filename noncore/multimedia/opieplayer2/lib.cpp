@@ -131,6 +131,7 @@ void Lib::initialize()
     m_videoOutput = ::init_video_out_plugin( m_xine, NULL, xine_display_frame, this );
 
     m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
+    xine_set_param( m_stream, XINE_PARAM_AUDIO_CLOSE_DEVICE, 1);
 
     if (m_wid != 0 )
         setWidget( m_wid );
@@ -202,12 +203,20 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
 void Lib::stop() {
     assert( m_initialized );
     xine_stop( m_stream );
+    xine_set_param( m_stream, XINE_PARAM_AUDIO_CLOSE_DEVICE, 1);
 }
 
 void Lib::pause( bool toggle ) {
     assert( m_initialized );
 
-    xine_set_param( m_stream, XINE_PARAM_SPEED, toggle ? XINE_SPEED_PAUSE : XINE_SPEED_NORMAL );
+    if ( toggle ) {
+        xine_set_param( m_stream, XINE_PARAM_SPEED, XINE_SPEED_PAUSE );
+        xine_set_param( m_stream, XINE_PARAM_AUDIO_CLOSE_DEVICE, 1);
+    }
+    
+    else {
+        xine_set_param( m_stream, XINE_PARAM_SPEED, XINE_SPEED_NORMAL );
+    }
 }
 
 int Lib::speed() const {
@@ -282,7 +291,17 @@ bool Lib::isSeekable() const {
 void Lib::seekTo( int time ) {
     assert( m_initialized );
 
-    xine_play( m_stream, 0, time*1000 );
+    odebug << "Seeking to second " << time << oendl;
+    //Keep it paused if it was in that state
+    if ( xine_get_param( m_stream, XINE_PARAM_SPEED ) ) {
+        xine_play( m_stream, 0, time*1000 );
+    }
+
+    else {
+        xine_play( m_stream, 0, time*1000 );
+        xine_set_param( m_stream, XINE_PARAM_SPEED, XINE_SPEED_PAUSE );
+    }
+        
 }
 
 
