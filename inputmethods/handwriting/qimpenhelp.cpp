@@ -144,7 +144,8 @@ HandwritingTrainer::HandwritingTrainer( QIMPenProfile *p, QWidget *parent, const
     connect( charSetCombo, SIGNAL(activated(int)), SLOT(selectCharSet(int)));
     QIMPenCharSetIterator it( profile->charSets() );
     for ( ; it.current(); ++it ) {
-	charSetCombo->insertItem( it.current()->description() );
+        if ( ! it.current()->hidden() )
+	    charSetCombo->insertItem( it.current()->description() );
     }
 
     charList = new QListBox( this );
