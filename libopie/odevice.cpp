@@ -170,10 +170,10 @@ void ODevice::touchSound ( )
 #ifndef QT_QWS_EBX
 #ifndef QT_NO_SOUND
 	static Sound snd ( "touchsound" );
-qDebug("touchSound");
+//qDebug("touchSound");
 	if ( snd. isFinished ( )) {
 		snd. play ( );
-		qDebug("sound should play");
+//		qDebug("sound should play");
 		}
 #endif
 #endif
