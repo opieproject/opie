@@ -342,12 +342,21 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     font->insertItem(tr("Font"), this, SLOT(changeFont()) );
 
     font->insertSeparator();
+
     nStart = new QAction( tr("Start with new file"), QString::null, 0, this, 0 );
     connect( nStart, SIGNAL( toggled(bool) ), this, SLOT( changeStartConfig(bool) ) );
     nStart->setToggleAction(TRUE);
     nStart->addTo( font );
+
+    nAdvanced = new QAction( tr("Advanced features"), QString::null, 0, this, 0 );
+    connect( nAdvanced, SIGNAL( toggled(bool) ), this, SLOT( doAdvanced(bool) ) );
+    nAdvanced->setToggleAction(TRUE);
+    nAdvanced->addTo( font );
+    if(cfg.readBoolEntry("AdvancedFeatures"))
+      nAdvanced->setOn(TRUE);
     font->insertSeparator();
-   font->insertItem(tr("About"), this, SLOT( doAbout()) );
+
+    font->insertItem(tr("About"), this, SLOT( doAbout()) );
 
     mb->insertItem( tr( "File" ), file );
     mb->insertItem( tr( "Edit" ), edit );
@@ -623,7 +632,7 @@ void TextEdit::openFile( const QString &f )
     qDebug("filename is "+ f);
     QString filer;
 //    bFromDocView = TRUE;
-    if(f.find(".desktop",0,TRUE) != -1) {
+    if(f.find(".desktop",0,TRUE) != -1 && useAdvancedFeatures) {
         switch ( QMessageBox::warning(this,tr("Text Editor"),
         tr("Text Editor has detected\n you selected a .desktop file.\nOpen .desktop file or linked file?"),
         tr(".desktop File"),tr("Linked Document"),0,1,1) ) {
@@ -823,14 +832,14 @@ bool TextEdit::saveAs()
                 return false;
             }
 
-//            if( fileSaveDlg->filePermCheck->isChecked() ) {
+            if( useAdvancedFfeatures ) {
                 filePermissions *filePerm;
                 filePerm = new filePermissions(this, tr("Permissions"),true,0,(const QString &)fileNm);
                 filePerm->exec();
 
                  if( filePerm)
                      delete  filePerm;
-//            }
+            }
         }
     }
     editor->setEdited(TRUE);
@@ -965,4 +974,11 @@ void TextEdit::doAbout() {
                          "2000 Trolltech AS, and\n"
                          "2002 by L.J.Potter \nljp@llornkcor.com\n"
                          "and is licensed under the GPL");
+}
+
+void TextEdit::doAdvanced(bool b) {
+  useAdvancedFeatures=b;
+    Config cfg("TextEdit");
+    cfg.setGroup("View");
+    cfg.writeEntry("AdvancedFeatures",b);
 }

@@ -57,7 +57,7 @@ public:
     ~TextEdit();
 
     QPopupMenu *font;
-    QAction *nStart, *nFileDlgOpt;
+    QAction *nStart, *nFileDlgOpt, *nAdvanced;
     bool edited, edited1;
     void openFile( const QString & );
         QCopChannel * channel;
@@ -65,10 +65,11 @@ public slots:
     void editorChanged();
 void  receive(const QCString&, const QByteArray&);
 protected:
-    bool fileIs; 
+    bool fileIs, useAdvancedFeatures; 
     void closeEvent( QCloseEvent *e );
     void doSearchBar();
 private slots:
+    void doAdvanced(bool);
     void doAbout();
     void setDocument(const QString&);
     void changeFont();
