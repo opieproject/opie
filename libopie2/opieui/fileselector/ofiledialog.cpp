@@ -240,12 +240,12 @@ QString OFileDialog::getDirectory(int selector,
 
 void OFileDialog::slotFileSelected(const QString & )
 {
-//    accept();
+    accept();
 }
 
 void OFileDialog::slotSelectorOk( )
 {
-//    accept();
+    accept();
 }
 
 void OFileDialog::slotDirSelected(const QString &dir )
