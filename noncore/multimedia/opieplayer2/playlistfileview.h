@@ -14,7 +14,6 @@ public:
 
     // both temporarily accessible that way until the caller code has
     // been migrated into this class
-    DocLnkSet &files() { return m_files; }
     bool &scannedFiles() { return m_scannedFiles; }
 
 public slots:
