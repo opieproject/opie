@@ -14,6 +14,12 @@
 <!ENTITY irda SYSTEM "irda.sgm">
 <!ENTITY keypebble SYSTEM "keypebble.sgm">
 <!ENTITY i18n SYSTEM "i18n.sgm">
+<!ENTITY kjumpx SYSTEM "kjumpx.sgm">
+<!ENTITY handwriting SYSTEM "handwriting.sgm">
+<!ENTITY multikey SYSTEM "multikey.sgm">
+<!ENTITY pickboard SYSTEM "pickboard.sgm">
+
+<!--Now the real entities-->
 <!ENTITY opie "OPIE">
 <!ENTITY todayapp "Today">
 <!ENTITY qt "Qt">
@@ -42,6 +48,12 @@
 </part>
 <part><title>Applets</title>
 &irda;
+</part>
+<part><title>Inputmethods</title>
+&kjumpx;
+&handwriting;
+&multikey;
+&pickboard;
 </part>
 <part><title>Technical Details</title>
 &i18n;
