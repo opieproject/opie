@@ -10,7 +10,7 @@ $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)
 		awk '{print \
 			".PHONY : " $$2 "\n" \
 			"subdir-$$(" $$1 ") += " $$2 "\n\n"; \
-			print $$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@,$(filter-out $$@,$$(MAKECMDGOALS)))\n"; }' > $(TOPDIR)/.depends
+			print $$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@,$(filter-out $$@,$$(filter-out $$@,$$(MAKECMDGOALS))))\n"; }' > $(TOPDIR)/.depends
 	cat $(TOPDIR)/packages | grep -v '^#' | \
 		perl -ne '($$cfg, $$dir, $$pro) = $$_ =~ /^(\S+)\s+(\S+)\s+(\S+)/; if ( -e "$$dir/$$pro" ) { print "$$dir/Makefile : $$dir/$$pro \$$(TOPDIR)/qmake/qmake\n\t\$$(call makefilegen,\$$@)\n\n"; }' \
 			>> $(TOPDIR)/.depends
@@ -81,7 +81,8 @@ define descend
 endef
 
 define makefilegen
-	cd $(if $(1),$(shell dirname $(1))); $(TOPDIR)/qmake/qmake $(3) -o $(if $(1),$(shell basename $(1))) `echo $(1)|sed -e 's,/Makefile$$,,g' -e 's,.*/,,g'`.pro
+	cd $(if $(1),$(shell dirname $(1))); $(TOPDIR)/qmake/qmake $(3) -o $(if $(1),$(shell basename $(1))) `cat $(OPIEDIR)/packages | grep "	\`echo $(1)|sed -e 's,/Makefile$$,,'\`	" | \
+		head -1 | awk '{print $$3}'`
 endef
 
 define makecfg
