@@ -27,7 +27,7 @@
 #include <qpe/applnk.h>
 
 #include <qcopchannel_qws.h>
-#include <qcopenvelope_qws.h>
+#include <qpe/qcopenvelope_qws.h>
 
 #include <qmessagebox.h>
 #include <qdir.h>
