@@ -1,9 +1,7 @@
 #include "moveengine.h"
 
 #include <qmessagebox.h>
-
 #include <qtimer.h>
-
 #include <stdlib.h>
 
 MoveEngine::MoveEngine()

@@ -1,8 +1,8 @@
 #ifndef MOVEENGINE_H
 #define MOVEENGINE_H
 
-#include <qobject.h>
 #include "definition.h"
+#include <qobject.h>
 
 class MoveEngine : public QObject
 {

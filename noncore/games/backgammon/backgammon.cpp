@@ -1,7 +1,6 @@
 #include "backgammon.h"
 
 #include "aidialog.h"
-#include "displaydialog.h"
 #include "filedialog.h"
 #include "playerdialog.h"
 #include "rulesdialog.h"
@@ -9,9 +8,11 @@
 
 #include <qdatetime.h>
 #include <qfile.h>
+#include <qlayout.h>
 #include <qmessagebox.h>
 #include <qstring.h>
 #include <qtimer.h>
+#include <qmainwindow.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/qpemenubar.h>
@@ -19,30 +20,9 @@
 
 #include <stdlib.h>
 
-BackGammonView::BackGammonView(QCanvas* canvas,QWidget* parent)
-        :QCanvasView(canvas,parent)
-{
-  //do nothing  
-}
-
-
-
-BackGammonView::~BackGammonView()
-{
-  //do nothing  
-}
-
-
-
-void BackGammonView::contentsMousePressEvent(QMouseEvent* e)
-{
-    int x=e->x();
-    int y=e->y();
-    emit mouse(x,y);
-}
 
 BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
-        : QWidget(parent, name, fl)
+        : QMainWindow(parent, name, fl)
 {
     if (!name) setName("BackGammon");
     setCaption("Backgammon");
@@ -96,21 +76,6 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     ai.empty=conf.readNumEntry("empty",2);
     move->setAISettings(ai);
 
-    //non qte styles are smaller
-    conf.setGroup("display");
-    display.small=conf.readBoolEntry("small",false);
-    display.warning=conf.readBoolEntry("warning",true);
-    non_qte=display.small;
-    if(display.warning)
-    {
-      Config test("qpe");
-      test.setGroup("Appearance");
-      if(test.readEntry("Style")!="QPE")
-      {
-        displaySettings();
-      }
-    }
-    offset=(non_qte) ? 5 : 0;
 
     //get the theme component names
     Config theme(theme_file,Config::File);   
@@ -163,26 +128,21 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     optionmenu->insertSeparator();
     optionmenu->insertItem("AI",this,SLOT(modify_AI()));
     optionmenu->insertItem("Rules",this,SLOT(setrules()));
-    optionmenu->insertItem("Display",this,SLOT(displaySettings()));
     menuBar->insertItem("Options",optionmenu);
 
-    //status bar
-    message=new QLabel("<b>Backgammon</b>",this);
-    message->setGeometry(0,260,237,20);
-    message->setAlignment(AlignHCenter);
-    
+	QWidget* mainarea=new QWidget(this);
+	setCentralWidget(mainarea);
     //the main area
-    area=new QCanvas(235-2*offset,235-2*offset);
-    boardview=new BackGammonView(area,this);
+	QBoxLayout* layout=new QBoxLayout(mainarea,QBoxLayout::TopToBottom);
+    area=new QCanvas(235,235);
+    boardview=new BackGammonView(area,mainarea);
+    boardview->setMaximumHeight(240);
+	layout->addWidget(boardview);
     connect(boardview,SIGNAL(mouse(int,int)),this,SLOT(mouse(int,int)));
-    if(non_qte)
-    {
-        boardview->setGeometry(5,20,229,229);
-    }
-    else
-    {
-        boardview->setGeometry(1,20,237,237);
-    }
+    //status bar
+    message=new QLabel("<b>Backgammon</b>",mainarea);
+    message->setAlignment(AlignHCenter);
+    layout->addWidget(message);
 
     //the marker
     marker_current=new QCanvasRectangle(area);
@@ -248,25 +208,25 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
     {
         QImage dicebgA=dicebgA_all.copy(a*25,0,25,25);
         diceA1[a]=new CanvasImageItem(dicebgA,area);
-        diceA1[a]->setX(5-offset);
-        diceA1[a]->setY(205-2*offset);
+        diceA1[a]->setX(5);
+        diceA1[a]->setY(205-2);
         diceA1[a]->setZ(1);
         diceA1[a]->setSize(25,25);
         diceA2[a]=new CanvasImageItem(dicebgA,area);
-        diceA2[a]->setX(35-offset);
-        diceA2[a]->setY(205-2*offset);
+        diceA2[a]->setX(35);
+        diceA2[a]->setY(205-2);
         diceA2[a]->setZ(1);
         diceA2[a]->setSize(25,25);
 
         QImage dicebgB=dicebgB_all.copy(a*25,0,25,25);
         diceB1[a]=new CanvasImageItem(dicebgB,area);
-        diceB1[a]->setX(175-offset);
-        diceB1[a]->setY(205-2*offset);
+        diceB1[a]->setX(175);
+        diceB1[a]->setY(205-2);
         diceB1[a]->setZ(1);
         diceB1[a]->setSize(25,25);
         diceB2[a]=new CanvasImageItem(dicebgB,area);
-        diceB2[a]->setX(205-offset);
-        diceB2[a]->setY(205-2*offset);
+        diceB2[a]->setX(205);
+        diceB2[a]->setY(205-2);
         diceB2[a]->setZ(1);
         diceB2[a]->setSize(25,25);
 
@@ -275,8 +235,8 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
         {
             QImage oddsbg=oddsbg_all.copy(a*15,0,15,15);
             oddsDice[a]=new CanvasImageItem(oddsbg,area);
-            oddsDice[a]->setX(110-offset);
-            oddsDice[a]->setY(210-2*offset);
+            oddsDice[a]->setX(110);
+            oddsDice[a]->setY(210-2);
             oddsDice[a]->setZ(1);
             oddsDice[a]->setSize(15,15);
             oddsDice[a]->hide();
@@ -287,28 +247,20 @@ BackGammon::BackGammon(QWidget* parent, const char* name, WFlags fl)
 
     //set the board
     QImage boardbg(Resource::loadImage("backgammon/boards/"+board_name));
-    if(non_qte)
-    {
-      boardbg=boardbg.copy(offset,offset,235-2*offset,200-2*offset);
-    }
     board=new CanvasImageItem(boardbg,area);
     board->setX(0);
     board->setY(0);
     board->setZ(0);
-    board->setSize(235-2*offset,200-2*offset);
+    board->setSize(235-2,200-2);
     board->show();
 
     //the table
     QImage tablebg(Resource::loadImage("backgammon/table/"+table_name));
-    if(non_qte)
-    {
-      tablebg=tablebg.copy(offset,0,235-offset,200);
-    }
     table=new CanvasImageItem(tablebg,area);
     table->setX(0);
-    table->setY(200-2*offset);
+    table->setY(200-2);
     table->setZ(0);
-    table->setSize(235-2*offset,20);
+    table->setSize(235-2,20);
     table->show();
 
     //the no move marker
@@ -599,24 +551,11 @@ void BackGammon::setrules()
     move->setRules(rules);
 }
 
-void BackGammon::displaySettings()
-{
-   DisplayDialog* displaydialog=new DisplayDialog(this);
-   displaydialog->setDisplaySettings(display);
-   if(!displaydialog->exec())
-        return;
-   display=displaydialog->getDisplaySettings();
-   Config conf("backgammon");
-   conf.setGroup("display");
-   conf.writeEntry("small",display.small);
-   conf.writeEntry("warning",display.warning);
-   QMessageBox::warning(this,"Backgammon","changed display settings will\nonly take place after game has\nbeen restarted","OK");     
-}
 
 void BackGammon::draw()
 {
     Pieces pieces;
-    move->position(pieces,non_qte);
+    move->position(pieces);
     for(int a=0;a<15;a++)
     {
         if(!pieces.player1[a].side)
@@ -669,10 +608,10 @@ void BackGammon::mouse(int x,int y)
 
         Marker marker;
 
-        move->boardpressed(x,y,marker,non_qte);
+        move->boardpressed(x,y,marker);
         if(marker.visible_current)
         {
-            marker_current->setX(marker.x_current-offset);
+            marker_current->setX(marker.x_current);
             marker_current->setY(marker.y_current);
             marker_current->show();
         }
@@ -685,7 +624,7 @@ void BackGammon::mouse(int x,int y)
         {
             if(marker.visible_next[a])
             {
-                marker_next[a]->setX(marker.x_next[a]-offset);
+                marker_next[a]->setX(marker.x_next[a]);
                 marker_next[a]->setY(marker.y_next[a]);
                 marker_next[a]->show();
             }
@@ -985,17 +924,9 @@ void BackGammon::autoroll_dice2()
 void BackGammon::applytheme()
 {
     QImage boardbg(Resource::loadImage("backgammon/boards/"+board_name));
-    if(non_qte)
-    {
-      boardbg=boardbg.copy(offset,offset,235-2*offset,200-2*offset);
-    }
     board->setImage(boardbg);
 
     QImage tablebg(Resource::loadImage("backgammon/table/"+table_name));
-    if(non_qte)
-    {
-      tablebg=tablebg.copy(offset,0,235-offset,200);
-    }
     table->setImage(tablebg);
 
     QImage piece_1_all(Resource::loadImage("backgammon/pieces/"+piecesA_name));
