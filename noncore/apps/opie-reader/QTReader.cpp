@@ -1,5 +1,5 @@
 /****************************************************************************
-** $Id: QTReader.cpp,v 1.2 2002-07-08 23:23:40 llornkcor Exp $
+** $Id: QTReader.cpp,v 1.3 2002-07-16 23:46:36 llornkcor Exp $
 **
 ** Copyright (C) 1992-2000 Trolltech AS.  All rights reserved.
 **
@@ -673,6 +673,7 @@ unsigned int QTReader::screenlines()
 };
 
 bool QTReader::fillbuffer() {
+  if (buffdoc.empty()) return false;
   //printf("Fillbuffer\n");
     m_scrolldy = 0;
   int ch;
