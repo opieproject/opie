@@ -16,14 +16,14 @@ POP3wrapper::~POP3wrapper()
 
 void POP3wrapper::pop3_progress( size_t current, size_t maximum )
 {
-    qDebug( "POP3: %i of %i", current, maximum );
+    //qDebug( "POP3: %i of %i", current, maximum );
 }
 
 RecBody POP3wrapper::fetchBody( const RecMail &mail )
 {
     int err = MAILPOP3_NO_ERROR;
     char *message;
-    size_t length;
+    size_t length = 0;
 
     login();
     if ( !m_pop3 ) return RecBody();
@@ -31,12 +31,9 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
     err = mailpop3_retr( m_pop3, mail.getNumber(), &message, &length );
     if ( err != MAILPOP3_NO_ERROR ) {
         qDebug( "POP3: error retrieving body with index %i", mail.getNumber() );
-        logout();
         return RecBody();
     }
     
-    logout();
-
     return parseBody( message );
 }
 
@@ -75,24 +72,22 @@ void POP3wrapper::listMessages(const QString &, QList<RecMail> &target )
     if (!m_pop3) return;
     mailpop3_list( m_pop3, &messages );
 
-    //for ( int i = carray_count( messages ); i > 0; i-- ) {
     for (unsigned int i = 0; i < carray_count(messages);++i) {
         mailpop3_msg_info *info;
-        int r = mailpop3_get_msg_info(m_pop3,i+1,&info);
+        err = mailpop3_get_msg_info(m_pop3,i+1,&info);
         err = mailpop3_header( m_pop3, info->msg_index, &header, &length );
         if ( err != MAILPOP3_NO_ERROR ) {
             qDebug( "POP3: error retrieving header msgid: %i", info->msg_index );
             free(header);
-            logout();
             return;
         }
         RecMail *mail = parseHeader( header );
         mail->setNumber( info->msg_index );
         mail->setWrapper(this);
+        mail->setMsgsize(info->msg_size);
         target.append( mail );
         free(header);
     }
-    logout();
 }
 
 RecMail *POP3wrapper::parseHeader( const char *header )
@@ -103,6 +98,9 @@ RecMail *POP3wrapper::parseHeader( const char *header )
     mailimf_fields *fields;
     mailimf_references * refs;
     mailimf_keywords*keys;
+    QString status;
+    QString value;
+    QBitArray mFlags(7);
 
     err = mailimf_fields_parse( (char *) header, strlen( header ), &curTok, &fields );
     for ( clistiter *current = clist_begin( fields->fld_list ); current != NULL; current = current->next ) {
@@ -142,11 +140,31 @@ RecMail *POP3wrapper::parseHeader( const char *header )
                     qDebug("Keyword: %s",(char*)cur->data);
                 }
                 break;
+            case MAILIMF_FIELD_OPTIONAL_FIELD:
+                status = field->fld_data.fld_optional_field->fld_name;
+                value = field->fld_data.fld_optional_field->fld_value;
+                if (status.lower()=="status") {
+                    if (value.lower()=="ro") {
+                        mFlags.setBit(FLAG_SEEN);
+                    }
+                } else if (status.lower()=="x-status") {
+                    qDebug("X-Status: %s",value.latin1());
+                    if (value.lower()=="a") {
+                        
+                        mFlags.setBit(FLAG_ANSWERED);
+                    }
+                } else {
+//                    qDebug("Optionales feld: %s -> %s)",field->fld_data.fld_optional_field->fld_name,
+//                        field->fld_data.fld_optional_field->fld_value);
+                }
+                break;
             default:
+                qDebug("Non parsed field");
                 break;
         }
     }
     if (fields) mailimf_fields_free(fields);
+    mail->setFlags(mFlags);
     return mail;
 }
 
@@ -244,7 +262,8 @@ QString POP3wrapper::parseMailboxList( mailimf_mailbox_list *list )
 
 void POP3wrapper::login()
 {
-    if ( m_pop3 != NULL ) logout();
+    /* we'll hold the line */
+    if ( m_pop3 != NULL ) return;
 
     const char *server, *user, *pass;
     uint16_t port;
@@ -297,6 +316,9 @@ void POP3wrapper::logout()
 
 QList<Folder>* POP3wrapper::listFolders()
 {
+    /* TODO: integrate MH directories 
+       but not vor version 0.1 ;)
+    */
     QList<Folder> * folders = new QList<Folder>();
     folders->setAutoDelete( false );
     Folder*inb=new Folder("INBOX");
@@ -309,8 +331,14 @@ QString POP3wrapper::fetchPart(const RecMail&,const RecPart&)
     return "";
 }
 
-void POP3wrapper::deleteMail(const RecMail&)
+void POP3wrapper::deleteMail(const RecMail&mail)
 {
+    login();
+    if (!m_pop3) return;
+    int err = mailpop3_dele(m_pop3,mail.getNumber());
+    if (err != MAILPOP3_NO_ERROR) {
+        qDebug("error deleting mail");
+    }
 }
 
 void POP3wrapper::answeredMail(const RecMail&)
