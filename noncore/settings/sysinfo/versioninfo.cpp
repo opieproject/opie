@@ -112,10 +112,11 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     palmtopLogo3->setFixedSize( 60, 60 );
     hb3->addWidget( palmtopLogo3, 0, Qt::AlignTop + Qt::AlignLeft );
 
-    QString systemString = "<b>" + ODevice::inst()->systemString() + "</b>"
-        +tr("<p>Version: " ) + ODevice::inst()->vendorString()
+//    QString systemString = tr( "<b>System</b><p>System: ") + ODevice::inst()->systemString()
+    QString systemString = "<b>"+ ODevice::inst()->systemString()+"</b>"
+        +tr("<p>Version: " ) + ODevice::inst()->systemVersionString()
         +tr("<p>Model: ") + ODevice::inst()->modelString()
-        +tr("<p>Vendor: ") + ODevice::inst()->systemVersionString();
+        +tr("<p>Vendor: ") + ODevice::inst()->vendorString();
 
     QLabel *systemVersion = new QLabel( this );
     systemVersion->setText( systemString );
