@@ -9,6 +9,7 @@
 #include <qlabel.h>
 #include <qstringlist.h>
 #include <qhbox.h>
+#include <qcombobox.h>
 
 #include "transaction.h"
 #include "preferences.h"
