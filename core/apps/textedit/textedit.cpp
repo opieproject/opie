@@ -953,8 +953,8 @@ void TextEdit::updateCaption( const QString &name ) {
             s = tr( "Unnamed" );
             currentFileName=s;
         }
-        if(s.left(1) == "/")
-            s = s.right(s.length()-1);
+//         if(s.left(1) == "/")
+//             s = s.right(s.length()-1);
         setCaption( s + " - " + tr("Text Editor") );
     }
 }
