@@ -18,17 +18,24 @@
 **
 **********************************************************************/
 
-#define protected public
-#include <qdialog.h>
-#undef protected
-
 #include "qpedialog.h"
-#include <qpe/qpeapplication.h>
+
+#include <qdialog.h>
+
+#include "qpeapplication.h"
+
+
+// Allow access to nornally protected accept and reject functions
+class HackedPrivateQDialog : public QDialog{
+public:
+    void accept() { QDialog::accept();}
+    void reject() { QDialog::reject();}
+};
 
 
 /**
- * \brief This is the only c'tor. 
- * 
+ * \brief This is the only c'tor.
+ *
  * The parent of this Listener is the Dialog you pass. This means once
  * the dialog is deleted this listener will be deleted too.
  * This Listener listens on QPEApplication::appMessage signal and implements
@@ -41,7 +48,7 @@
 	    // do some stuff
 	}
 	delete dialog;
-	
+
  * \endcode
  *
  * @param di The dialog to handle
@@ -66,9 +73,12 @@ void QPEDialogListener::appMessage( const QCString &msg, const QByteArray & )
 {
     if (!dialog)
 	return;
+
+    HackedPrivateQDialog *hackedDialog = static_cast<HackedPrivateQDialog*>(dialog);
+
     if (msg == "accept()") {
-	dialog->accept();
+	hackedDialog->accept();
     } else if (msg == "reject()") {
-	dialog->reject();
+	hackedDialog->reject();
     }
 }
