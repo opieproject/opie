@@ -272,19 +272,19 @@ and all it&apos;s contents ?</source>
     </message>
     <message>
         <source> kB free</source>
-        <translation type="unfinished">kB frei</translation>
+        <translation>kB frei</translation>
     </message>
     <message>
         <source>Switch to View 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Ansicht 1 schalten</translation>
     </message>
     <message>
         <source>Switch to View 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Auf Ansicht 2 schalten</translation>
     </message>
     <message>
         <source>Not Yet Implemented</source>
-        <translation type="unfinished"></translation>
+        <translation>Noch nicht implementiert</translation>
     </message>
 </context>
 <context>
@@ -378,7 +378,7 @@ Fertig</translation>
     </message>
     <message>
         <source>filePermissions</source>
-        <translation type="unfinished"></translation>
+        <translation>dateiBerechtigungen</translation>
     </message>
 </context>
 </TS>
