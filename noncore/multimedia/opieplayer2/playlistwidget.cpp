@@ -574,11 +574,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
   d->setDocumentUsed = FALSE;
 
   if(it) {
-    switch ( whichList()) {
-    case 0: //playlist
-      return;
-      break;
-    };
+    if ( currentTab() == CurrentPlayList )
+        return;
     //      case 1: {
     DocLnk lnk;
     QString filename;
@@ -597,8 +594,8 @@ void PlayListWidget::addToSelection( QListViewItem *it) {
 
 void PlayListWidget::tabChanged(QWidget *) {
 
-    switch ( whichList()) {
-    case 0:
+    switch ( currentTab() ) {
+    case CurrentPlayList:
     {
         if( !tbDeletePlaylist->isHidden() )  {
             tbDeletePlaylist->hide();
@@ -607,7 +604,7 @@ void PlayListWidget::tabChanged(QWidget *) {
         d->tbAddToList->setEnabled(FALSE);
     }
     break;
-    case 1:
+    case AudioFiles:
     {
       //        audioView->clear();
         if(!audioPopulated) populateAudioView();
@@ -619,7 +616,7 @@ void PlayListWidget::tabChanged(QWidget *) {
         d->tbAddToList->setEnabled(TRUE);
     }
     break;
-    case 2:
+    case VideoFiles:
     {
       //        videoView->clear();
         if(!videoPopulated) populateVideoView();
@@ -630,7 +627,7 @@ void PlayListWidget::tabChanged(QWidget *) {
         d->tbAddToList->setEnabled(TRUE);
     }
     break;
-    case 3:
+    case PlayLists:
     {
         if( tbDeletePlaylist->isHidden() ) {
             tbDeletePlaylist->show();
@@ -1133,17 +1130,13 @@ void PlayListWidget::skinsMenuActivated( int item ) {
                                tr( "You must <b>restart</b> Opieplayer<br>to see your changes." ) );
 } 
 
-int PlayListWidget::whichList() const {
-    return tabWidget->currentPageIndex();
-}
-
 PlayListWidget::TabType PlayListWidget::currentTab() const
 {
-    static const TabType indexToTabType[ NumTabTypes ] =
+    static const TabType indexToTabType[ TabTypeCount ] =
     { CurrentPlayList, AudioFiles, VideoFiles, PlayLists };
 
     int index = tabWidget->currentPageIndex();
-    assert( index < NumTabTypes && index >= 0 );
+    assert( index < TabTypeCount && index >= 0 );
 
     return indexToTabType[ index ];
 }

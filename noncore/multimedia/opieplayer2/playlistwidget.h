@@ -55,7 +55,8 @@ class QLabel;
 class PlayListWidget : public PlayListWidgetGui {
     Q_OBJECT
 public:
-    enum TabType { CurrentPlayList, AudioFiles, VideoFiles, PlayLists, NumTabTypes = 4 };
+    enum TabType { CurrentPlayList, AudioFiles, VideoFiles, PlayLists };
+    enum { TabTypeCount = 4 };
 
     PlayListWidget( QWidget* parent=0, const char* name=0, WFlags fl=0 );
     ~PlayListWidget();
@@ -68,7 +69,6 @@ public:
     const DocLnk *current();
     void useSelectedDocument();
     int selected;
-    int whichList() const;
     TabType currentTab() const;
 
 public slots:
