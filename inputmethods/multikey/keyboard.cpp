@@ -40,8 +40,10 @@
 
 /* Keyboard::Keyboard {{{1 */
 Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
-    QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0), meta(0), 
-    useLargeKeys(TRUE), usePicks(0), useRepeat(0), pressedKeyRow(-1), pressedKeyCol(-1),
+    QFrame(parent, _name, f),  shift(0), lock(0), ctrl(0), alt(0), 
+    meta(0), circumflex(0), diaeresis(0),
+    useLargeKeys(TRUE), usePicks(0), useRepeat(0), 
+    pressedKeyRow(-1), pressedKeyCol(-1),
     unicode(-1), qkeycode(0), modifiers(0), schar(0), mchar(0), echar(0),
     configdlg(0)
 
@@ -95,7 +97,7 @@ void Keyboard::resizeEvent(QResizeEvent*)
 {
     int ph = picks->sizeHint().height();
     picks->setGeometry( 0, 0, width(), ph );
-    keyHeight = (height()-(usePicks ? ph : 0))/5;
+    keyHeight = (height()-(usePicks ? ph : 0))/keys->rows();
 
     int nk; // number of keys?
     if ( useLargeKeys ) {
@@ -182,12 +184,32 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
         p.setPen(textcolor);
         if (!pix) {
-            if (shift || lock) 
-                c = keys->shift(c);
-            if (meta) {
+            if ((shift || lock) && keys->shift(c)) 
 
+                if (circumflex && keys->circumflex(keys->shift(c)))
+                    c = keys->circumflex(keys->shift(c));
+                else if (diaeresis && keys->diaeresis(keys->shift(c)))
+                    c = keys->diaeresis(keys->shift(c));
+                else if (meta && keys->meta(keys->shift(c)))
+                    c = keys->meta(keys->shift(c));
+                else 
+                    c = keys->shift(c);
+
+            else if (meta && keys->meta(c)) 
                 c = keys->meta(c);
+            else if (circumflex && keys->circumflex(c)) 
+                c = keys->circumflex(c);
+            else if (diaeresis && (keys->diaeresis(c) || c == 0x2c6)) {
+
+                // the diaeresis key itself has to be in the diaeresisMap,
+                // or just do this to make it display the diaeresis char.
+                
+                if (c == 0x2c6)
+                    c = 0xa8;
+                else 
+                    c = keys->diaeresis(c);
             }
+            
             p.drawText(x, y, 
                defaultKeyWidth * keyWidth + 3, keyHeight,
                AlignCenter, (QChar)c);
@@ -208,7 +230,7 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
 
     p.fillRect(0, 0, width(), height(), keycolor);
 
-    for (row = 1; row <= 5; row++) {
+    for (row = 1; row <= keys->rows(); row++) {
 
         int x = 0;
         int y = (row - 1) * keyHeight + (usePicks ? picks->height() : 0);
@@ -233,9 +255,27 @@ void Keyboard::drawKeyboard(QPainter &p, int row, int col)
             p.setPen(textcolor);
             if (!pix) {
                 if ((shift || lock) && keys->shift(c)) 
-                    c = keys->shift(c);
+
+                    if (circumflex && keys->circumflex(keys->shift(c)))
+                        c = keys->circumflex(keys->shift(c));
+                    else if (diaeresis && keys->diaeresis(keys->shift(c)))
+                        c = keys->diaeresis(keys->shift(c));
+                    else if (meta && keys->meta(keys->shift(c)))
+                        c = keys->meta(keys->shift(c));
+                    else 
+                        c = keys->shift(c);
+
                 else if (meta && keys->meta(c)) 
                     c = keys->meta(c);
+                else if (circumflex && keys->circumflex(c))
+                    c = keys->circumflex(c);
+                else if (diaeresis && (keys->diaeresis(c) || c == 0x2c6)) {
+
+                    if (c == 0x2c6)
+                        c = 0xa8;
+                    else 
+                        c = keys->diaeresis(c);
+                }
 
                 p.drawText(x, y, 
                    keyWidthPix + 3, keyHeight,
@@ -289,11 +329,29 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
     // should be faster if just paint one key even though multiple keys exist.
     bool need_repaint = FALSE; 
 
+    // circumflex and diaeresis support
+    // messy to have this here, but too hard to implement any other method
+    if (unicode == 0x2c6) { 
+
+        unicode = 0; 
+        if (shift || lock) {
+
+            // diaeresis
+            qkeycode = 0x2001; 
+        }
+        else {
+            
+            // circumflex
+            qkeycode = 0x2000; 
+        }
+    }
+
     if (unicode == 0) { // either Qt char, or nothing
 
         if (qkeycode == Qt::Key_F1) { // toggle the pickboard
 
             if ( configdlg ) { 
+
                 delete (ConfigDlg *) configdlg; 
                 configdlg = 0;
             }
@@ -309,6 +367,8 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                        this, SLOT(toggleRepeat(bool)));
                connect(configdlg, SIGNAL(reloadKeyboard()),
                        this, SLOT(reloadKeyboard()));
+               connect(configdlg, SIGNAL(configDlgClosed()),
+                       this, SLOT(cleanupConfigDlg()));
                configdlg->showMaximized();
                configdlg->show();
                configdlg->raise();
@@ -359,11 +419,18 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
                     lock = 0;
                 }
             }
-            if (meta) {
 
-                *meta = 0;
-                meta = 0;
-            }
+
+            /* 
+             * want to be able to hit circumflex/diaeresis -> shift
+             * to type in shifted circumflex/diaeresis chars.
+             * same thing with meta
+
+            if (meta) { *meta = 0; meta = 0; }
+            if (circumflex) { *circumflex = 0; circumflex = 0; }
+            if (diaeresis) { *diaeresis = 0; diaeresis = 0; }
+
+             */
 
         } else if (qkeycode == Qt::Key_CapsLock) {
             need_repaint = TRUE;
@@ -374,17 +441,18 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             }
             else {
                 lock = keys->pressedPtr(row, col);;
-                *lock = 1;
+                *lock = true;;
                 if (shift) {
                     *shift = 0;
                     shift = 0;
                 }
             }
-            if (meta) {
 
-                *meta = 0;
-                meta = 0;
-            }
+            /*
+            if (meta) { *meta = 0; meta = 0; }
+            if (circumflex) { *circumflex = 0; circumflex = 0; }
+            if (diaeresis) { *diaeresis = 0; diaeresis = 0; }
+            */
 
         } else if (qkeycode == Qt::Key_Meta) {
             need_repaint = TRUE;
@@ -396,34 +464,120 @@ void Keyboard::mousePressEvent(QMouseEvent *e)
             } else {
 
                 meta = keys->pressedPtr(row, col);
-                need_repaint = TRUE;
-                *meta = !keys->pressed(row, col);
+                *meta = true;
             }
 
-            if (shift) {
-
-                *shift = 0;
-                shift = 0;
-
-            }
-            if (lock) {
-
-                *lock = 0;
-                lock = 0;
-
-            }
+            // reset all the other keys
+            if (shift) { *shift = 0; shift = 0; } 
+            if (lock) { *lock = 0; lock = 0; }
+            if (circumflex) { *circumflex = 0; circumflex = 0; }
+            if (diaeresis) { *diaeresis = 0; diaeresis = 0; }
 
             // dont need to emit this key... acts same as alt
+            qkeycode = 0;
+
+        // circumflex
+        } else if (qkeycode == 0x2000) {
+            need_repaint = TRUE;
+
+            if (circumflex) {
+
+                *circumflex = 0;
+                circumflex = 0;
+
+            } else {
+
+                circumflex = keys->pressedPtr(row, col);
+                *circumflex = true;
+            }
+
+            /* no need to turn off shift or lock if circumflex
+             * keys are pressed
+             
+            if (shift) { *shift = 0; shift = 0; }
+            if (lock) { *lock = 0; lock = 0; }
+
+             */
+            
+            // have to reset all the other keys
+            if (meta) { *meta = 0; meta = 0; }
+            if (diaeresis) { 
+                
+                // *diaeresis and *circumflex point to the same thing
+                // when diaeresis is enabled and you hit the circumflex
+                // since they are the same key, it should turn off the
+                // key
+                
+                *diaeresis = 0; 
+                diaeresis = 0; 
+                circumflex = 0;
+            }
+
+            qkeycode = 0;
+
+        // diaeresis
+        } else if (qkeycode == 0x2001) {
+            need_repaint = TRUE;
+
+            if (diaeresis) {
+
+                *diaeresis = 0;
+                diaeresis = 0;
+
+            } else {
+
+                diaeresis = keys->pressedPtr(row, col);
+                *diaeresis = true;
+            }
+
+             
+            if (shift) { *shift = 0; shift = 0; }
+
+            /*
+             *
+            if (lock) { *lock = 0; lock = 0; }
+             *
+             */
+
+            if (meta) { *meta = 0; meta = 0; }
+            if (circumflex) { 
+
+                // *circumflex = 0; 
+                //
+                // same thing the diaeresis pointer points too
+                
+                circumflex = 0; 
+            }
+
+
             qkeycode = 0;
         }
 
     }
     else { // normal char
         if ((shift || lock) && keys->shift(unicode)) {
-            unicode = keys->shift(unicode);
+
+            // make diaeresis/circumflex -> shift input shifted
+            // diaeresis/circumflex chars
+            
+            if (circumflex && keys->circumflex(keys->shift(unicode)))
+                unicode = keys->circumflex(keys->shift(unicode));
+            else if (diaeresis && keys->diaeresis(keys->shift(unicode)))
+                unicode = keys->diaeresis(keys->shift(unicode));
+            else if (meta && keys->meta(keys->shift(unicode)))
+                unicode = keys->meta(keys->shift(unicode));
+            else
+                unicode = keys->shift(unicode);
         }
-        if (meta && keys->meta(unicode)) {
+        else if (meta && keys->meta(unicode)) {
             unicode = keys->meta(unicode);
+        }
+        else if (circumflex && keys->circumflex(unicode)) {
+            unicode = keys->circumflex(unicode);
+        }
+        else if (diaeresis && keys->diaeresis(unicode)) {
+
+            unicode = keys->diaeresis(unicode);
         }
     }
 
@@ -504,15 +658,22 @@ void Keyboard::mouseReleaseEvent(QMouseEvent*)
         shift = 0;  // reset the shift pointer
         repaint(FALSE);
 
-    } else if (meta && unicode != 0) {
+    } 
+    
+    /*
+     * do not make the meta key release after being pressed
+     *
+
+    else if (meta && unicode != 0) {
 
         *meta = 0;
         meta = 0;
         repaint(FALSE);
     }
-    else 
 
-    clearHighlight();
+     */
+
+    else clearHighlight();
 }
 
 /* Keyboard::timerEvent {{{1 */
@@ -561,12 +722,18 @@ QSize Keyboard::sizeHint() const
     QFontMetrics fm=fontMetrics();
     int keyHeight = fm.lineSpacing() + 2;
 
-    return QSize( 240, keyHeight * 5 + (usePicks ? picks->sizeHint().height() : 0) + 1);
+    return QSize( 240, keyHeight * keys->rows() + (usePicks ? picks->sizeHint().height() : 0) + 1);
 }
 
 
 void Keyboard::resetState()
 {
+    if (shift) { *shift = 0; shift = 0; }
+    if (lock)  {*lock = 0;  lock = 0; }
+    if (meta)  { *meta = 0;  meta = 0; }
+    if (circumflex) { *circumflex = 0; circumflex = 0; }
+    if (diaeresis)  { *diaeresis = 0; diaeresis = 0; }
+
     schar = mchar = echar = 0;
     picks->resetState();
 }
@@ -604,6 +771,14 @@ void Keyboard::toggleRepeat(bool on) {
     //cout << "setting useRepeat to: " << useRepeat << "\n";
 }
 
+void Keyboard::cleanupConfigDlg() {
+
+    if ( configdlg ) { 
+        delete (ConfigDlg *) configdlg; 
+        configdlg = 0;
+    }
+}
+
 /* Keyboard::setMapTo ... {{{1 */
 void Keyboard::setMapToDefault() {
 
@@ -614,7 +789,7 @@ void Keyboard::setMapToDefault() {
     QString l = config->readEntry( "Language" , "en" );
     delete config;
 
-    QString key_map = QPEApplication::qpeDir() + "/share/multikey/" 
+    QString key_map = QPEApplication::qpeDir() + "share/multikey/" 
             + l + ".keymap";
 
     /* save change to multikey config file */
@@ -623,11 +798,20 @@ void Keyboard::setMapToDefault() {
     config->writeEntry ("current", key_map); // default closed
     delete config;
 
+    int prevRows = keys->rows();
+
     delete keys;
     keys = new Keys(key_map);
 
     // have to repaint the keyboard
-    repaint(FALSE);
+    if (prevRows != keys->rows()) {
+
+        QCopChannel::send ("QPE/TaskBar", "hideInputMethod()"); 
+        QCopChannel::send ("QPE/TaskBar", "showInputMethod()");
+
+    } else repaint(FALSE);
+
+    resetState();
 }
 
 void Keyboard::setMapToFile(QString map) {
@@ -639,14 +823,22 @@ void Keyboard::setMapToFile(QString map) {
 
     delete config;
 
+    int prevRows = keys->rows();
+
     delete keys;
     if (QFile(map).exists()) 
         keys = new Keys(map);
     else 
         keys = new Keys();
 
-    repaint(FALSE);
+    if (keys->rows() != prevRows) {
 
+        QCopChannel::send ("QPE/TaskBar", "hideInputMethod()");
+        QCopChannel::send ("QPE/TaskBar", "showInputMethod()");
+    }
+    else repaint(FALSE);
+
+    resetState();
 }
 
 /* Keybaord::reloadKeyboard {{{1 */
@@ -1124,6 +1316,31 @@ void Keys::setKeysFromFile(const char * filename) {
                 buf = t.readLine();
             }
 
+            // circumflex
+            else if (buf.contains(QRegExp("^\\s*c\\s+[0-9a-fx]+\\s+[0-9a-fx]+\\s*$", FALSE, FALSE))) {
+
+                QTextStream tmp (buf, IO_ReadOnly);
+                ushort lower, shift;
+                QChar c;
+                tmp >> c >> lower >> shift;
+
+                circumflexMap.insert(lower, shift);
+
+                buf = t.readLine();
+            }
+            // diaeresis
+            else if (buf.contains(QRegExp("^\\s*d\\s+[0-9a-fx]+\\s+[0-9a-fx]+\\s*$", FALSE, FALSE))) {
+
+                QTextStream tmp (buf, IO_ReadOnly);
+                ushort lower, shift;
+                QChar d;
+                tmp >> d >> lower >> shift;
+
+                diaeresisMap.insert(lower, shift);
+
+                buf = t.readLine();
+            }
+
             // other variables like lang & title
             else if (buf.contains(QRegExp("^\\s*[a-zA-Z]+\\s*=\\s*[a-zA-Z0-9/]+\\s*$", FALSE, FALSE))) {
 
@@ -1205,6 +1422,18 @@ int Keys::width(const int row, const int col) {
     return keys[row].at(col)->width;
 
 }
+
+int Keys::rows() {
+
+    for (int i = 1; i <= 5; i++) {
+
+        if (keys[i].count() == 0)
+            return i - 1;
+
+    }
+    return 5;
+}
+
 ushort Keys::uni(const int row, const int col) {
 
     return keys[row].at(col)->unicode;
@@ -1238,24 +1467,26 @@ void Keys::setPressed(const int row, const int col, const bool pressed) {
 
 ushort Keys::shift(const ushort uni) {
 
-    if (shiftMap[uni]) {
-
-        return shiftMap[uni];
-    }
-    else 
-        return 0;
-
+    if (shiftMap[uni]) return shiftMap[uni]; 
+    else return 0;
 }
 
 ushort Keys::meta(const ushort uni) {
 
-    if (metaMap[uni]) {
+    if (metaMap[uni]) return metaMap[uni]; 
+    else return 0;
+}
 
-        return metaMap[uni];
-    }
-    else 
-        return 0;
+ushort Keys::circumflex(const ushort uni) {
 
+    if (circumflexMap[uni]) return circumflexMap[uni]; 
+    else return 0;
+}
+
+ushort Keys::diaeresis(const ushort uni) {
+
+    if(diaeresisMap[uni]) return diaeresisMap[uni];
+    else return 0;
 }
 
 bool *Keys::pressedPtr(const int row, const int col) {

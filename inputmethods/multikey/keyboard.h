@@ -56,13 +56,16 @@ public:
     Keys();
     Keys(const char * filename);
     ~Keys();
+    int     width(const int row, const int col);
+    int     rows();
     ushort  uni(const int row, const int col);
     int     qcode(const int row, const int col);
-    int     width(const int row, const int col);
     bool    pressed(const int row, const int col);
     bool    *pressedPtr(const int row, const int col);
     ushort  shift(const ushort);
     ushort  meta(const ushort);
+    ushort  circumflex(const ushort);
+    ushort  diaeresis(const ushort);
     QImage *pix(const int row, const int col);
     int     numKeys(const int row);
     void    setKeysFromFile(const char *filename);
@@ -87,6 +90,8 @@ private:
     QList<Key> keys[6];
     QMap<ushort,ushort> shiftMap;
     QMap<ushort,ushort> metaMap;
+    QMap<ushort,ushort> circumflexMap;
+    QMap<ushort,ushort> diaeresisMap;
 
 };
 
@@ -117,6 +122,7 @@ private slots:
     void toggleRepeat(bool on_off);
     void setMapToDefault();
     void setMapToFile(QString map);
+    void cleanupConfigDlg();
 
     // used to redraw keyboard after edited colors
     void reloadKeyboard();
@@ -130,6 +136,9 @@ private:
     bool *ctrl;
     bool *alt;
     bool *meta;
+    bool *circumflex;
+    bool *diaeresis;
+
     uint useLargeKeys:1;
     uint usePicks:1;
     uint useRepeat:1;

@@ -20,6 +20,7 @@ signals:
     void setMapToDefault();
     void setMapToFile(QString map);
     void reloadKeyboard();
+    void configDlgClosed();
 
 private slots:
     void pickTog();
@@ -27,6 +28,8 @@ private slots:
     void setMap(int index);
     void addMap();
     void removeMap();
+    virtual void closeEvent ( QCloseEvent * );
+
 
     // all those required slots for the color push buttons
     void keyColorClicked();

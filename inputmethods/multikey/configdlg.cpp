@@ -1,8 +1,9 @@
 /*
  * TODO
  * make a font selection thing (size too)
- * make vertical keys possible
  * make a keymap editor
+ * make keys translucent
+ * make vertical keys possible
  *
  *
  */
@@ -248,6 +249,12 @@ void ConfigDlg::repeatTog() {
     emit repeatToggled(repeat_button->isChecked());
 }
 
+void ConfigDlg::closeEvent(QCloseEvent *) {
+
+    // tell the parent it was closed, so delete me
+    emit configDlgClosed();
+}
+
 // ConfigDlg::setMap {{{1
 
 /* 
@@ -267,7 +274,7 @@ void ConfigDlg::setMap(int index) {
     else if ((uint)index <= default_maps.count()) {
 
         remove_button->setDisabled(true);
-        emit setMapToFile(QPEApplication::qpeDir() + "/share/multikey/" + default_maps[index - 1]);
+        emit setMapToFile(QPEApplication::qpeDir() + "share/multikey/" + default_maps[index - 1]);
 
     } else {
 
