@@ -4,6 +4,6 @@ Section: opie/plugins
 Maintainer: Simon Hausmann <hausmann@kde.org>, L.J. Potter <llornkcor@handhelds.org>
 Architecture: arm
 Version: 2.0.2
-Depends: opie-base opie-player
+Depends: opie-base ($QPE_VERSION)
 Description: MOD/XM/S3M/IT plugin using libmodplug
  Plugin to play MOD/XM/S3M/IT amiga tracker modules with the mediaplayer in the Opie environment.
