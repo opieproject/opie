@@ -15,6 +15,7 @@
 #include <qpe/stringutil.h>
 #include <qpe/timeconversion.h>
 
+#include "orecur.h"
 #include "otodoaccessxml.h"
 
 namespace {
@@ -434,7 +435,8 @@ QString OTodoAccessXML::toString( const OTodo& ev )const {
         str += extIt.key() + "=\"" +  extIt.data() + "\" ";
     */
     // cross refernce
-
+    if ( ev.hasRecurrence() )
+        str += ev.recurrence().toString();
 
     return str;
 }
