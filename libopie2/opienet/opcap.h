@@ -470,8 +470,9 @@ class OPacketCapturer : public QObject
     OPacket* next();
     /**
      * Open the packet capturer to capture packets in live-mode from @a interface.
+     * If a @a filename is given, all captured packets are output to a tcpdump-compatible capture file.
      */
-    bool open( const QString& interface );
+    bool open( const QString& interface, const QString& filename = QString::null );
     /**
      * Open the packet capturer to capture packets in offline-mode from @a file.
      */
@@ -496,6 +497,7 @@ class OPacketCapturer : public QObject
     QString _name;                                  // devicename
     bool _open;                                     // check this before doing pcap calls
     pcap_t* _pch;                                   // pcap library handle
+    pcap_dumper_t* _pcd;                            // pcap dumper handle
     QSocketNotifier* _sn;                           // socket notifier for main loop
     mutable char _errbuf[PCAP_ERRBUF_SIZE];         // holds error strings from libpcap
     QMap<QString, int> _stats;                      // statistics;

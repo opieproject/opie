@@ -734,7 +734,7 @@ OWaveLanControlPacket::~OWaveLanControlPacket()
 
 OPacketCapturer::OPacketCapturer( QObject* parent, const char* name )
                  :QObject( parent, name ), _name( QString::null ), _open( false ),
-                 _pch( 0 ), _sn( 0 )
+                 _pch( 0 ), _pcd( 0 ), _sn( 0 )
 {
 }
 
@@ -783,6 +783,11 @@ void OPacketCapturer::close()
             _sn->disconnect( SIGNAL( activated(int) ), this, SLOT( readyToReceive() ) );
             delete _sn;
         }
+        if ( _pcd )
+        {
+            pcap_dump_close( _pcd );
+            _pcd = 0;
+        }
         pcap_close( _pch );
         _open = false;
     }
@@ -820,6 +825,8 @@ OPacket* OPacketCapturer::next()
     qDebug( "==> OPacketCapturer::next()" );
     const unsigned char* pdata = pcap_next( _pch, &header );
     qDebug( "<== OPacketCapturer::next()" );
+    if ( _pcd )
+        pcap_dump( (u_char*) _pcd, &header, pdata );
 
     if ( header.len )
     {
@@ -840,7 +847,7 @@ OPacket* OPacketCapturer::next()
 }
 
 
-bool OPacketCapturer::open( const QString& name )
+bool OPacketCapturer::open( const QString& name, const QString& filename )
 {
     if ( _open )
     {
@@ -856,30 +863,38 @@ bool OPacketCapturer::open( const QString& name )
 
     _name = name;
 
+    // open libpcap
     pcap_t* handle = pcap_open_live( const_cast<char*>( (const char*) name ), 1024, 0, 0, &_errbuf[0] );
 
-    if ( handle )
+    if ( !handle )
     {
-        qDebug( "OPacketCapturer::open(): libpcap opened successfully." );
-        _pch = handle;
-        _open = true;
-        _stats.clear();
-
-        // in case we have an application object, create a socket notifier
-        if ( qApp )
-        {
-            _sn = new QSocketNotifier( fileno(), QSocketNotifier::Read );
-            connect( _sn, SIGNAL( activated(int) ), this, SLOT( readyToReceive() ) );
-        }
-
-        return true;
-    }
-    else
-    {
-        qDebug( "OPacketCapturer::open(): can't open libpcap with '%s': %s", (const char*) name, _errbuf );
+        qWarning( "OPacketCapturer::open(): can't open libpcap with '%s': %s", (const char*) name, _errbuf );
         return false;
     }
 
+    qDebug( "OPacketCapturer::open(): libpcap [%s] opened successfully.", (const char*) name );
+    _pch = handle;
+    _open = true;
+    _stats.clear();
+
+    // in case we have an application object, create a socket notifier
+    if ( qApp ) //TODO: I don't like this here...
+    {
+        _sn = new QSocketNotifier( fileno(), QSocketNotifier::Read );
+        connect( _sn, SIGNAL( activated(int) ), this, SLOT( readyToReceive() ) );
+    }
+
+    // if requested, open a dump
+    pcap_dumper_t* dump = pcap_dump_open( _pch, const_cast<char*>( (const char*) filename ) );
+    if ( !dump )
+    {
+        qWarning( "OPacketCapturer::open(): can't open dump with '%s': %s", (const char*) filename, _errbuf );
+        return false;
+    }
+    qDebug( "OPacketCapturer::open(): dump [%s] opened successfully.", (const char*) filename );
+    _pcd = dump;
+
+    return true;
 }
 
 
