@@ -132,7 +132,7 @@ OpieFtp::OpieFtp( )
     Local_View->setColumnAlignment(2,QListView::AlignRight);
     Local_View->setAllColumnsShowFocus(TRUE);
     Local_View->setMultiSelection( TRUE );
-
+    Local_View->setSelectionMode(QlistView::Extended);
      QPEApplication::setStylusOperation( Local_View->viewport(),QPEApplication::RightOnHold);
 
     tabLayout->addWidget( Local_View, 0, 0 );
@@ -161,6 +161,7 @@ OpieFtp::OpieFtp( )
     Remote_View->setColumnAlignment(4,QListView::AlignRight);
     Remote_View->setAllColumnsShowFocus(TRUE);
     Remote_View->setMultiSelection( TRUE );
+    Remote_View->setSelectionMode(QlistView::Extended);
 
     QPEApplication::setStylusOperation( Remote_View->viewport(),QPEApplication::RightOnHold);
 
@@ -285,6 +286,7 @@ void OpieFtp::cleanUp()
     QFile file( sfile);
     if(file.exists())
         file.remove();
+    exit(0);
 }
 
 void OpieFtp::tabChanged(QWidget *w)
@@ -394,7 +396,6 @@ void OpieFtp::disConnector()
     Remote_View->clear();
     connectServerBtn->setText( tr("Connect"));
     connectServerBtn->setOn(FALSE);
-
 }
 
 void OpieFtp::localUpload()
@@ -403,40 +404,40 @@ void OpieFtp::localUpload()
     QCopEnvelope ( "QPE/System", "busy()" );
 //    qApp->processEvents();
     QList<QListViewItem> * getSelectedItems( QListView * Local_View );
-        QListViewItemIterator it( Local_View );
-        for ( ; it.current(); ++it ) {
-            if ( it.current()->isSelected() ) {
-                QString strItem = it.current()->text(0);
-                QString localFile = currentDir.canonicalPath()+"/"+strItem;
-                QString remoteFile= currentRemoteDir+strItem;
-                QFileInfo fi(localFile);
-                if( !fi.isDir()) {
-                    fsz=fi.size();
-                    ProgressBar->setTotalSteps(fsz);
+    QListViewItemIterator it( Local_View );
+    for ( ; it.current(); ++it ) {
+        if ( it.current()->isSelected() ) {
+            QString strItem = it.current()->text(0);
+            QString localFile = currentDir.canonicalPath()+"/"+strItem;
+            QString remoteFile= currentRemoteDir+strItem;
+            QFileInfo fi(localFile);
+            if( !fi.isDir()) {
+                fsz=fi.size();
+                ProgressBar->setTotalSteps(fsz);
 
-                    FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
-                    FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
-                    FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
-                    FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
-                    qDebug("Put: %s, %s",localFile.latin1(),remoteFile.latin1());
+                FtpOptions(FTPLIB_CALLBACK, (long) log_progress, conn);
+                FtpOptions(FTPLIB_IDLETIME, (long) 1000, conn);
+                FtpOptions(FTPLIB_CALLBACKARG, (long) &fsz, conn);
+                FtpOptions(FTPLIB_CALLBACKBYTES, (long) fsz/10, conn);
+                qDebug("Put: %s, %s",localFile.latin1(),remoteFile.latin1());
 
-                    if( !FtpPut( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
-                        QString msg;
-                        msg.sprintf(tr("Unable to upload\n")+"%s",FtpLastResponse(conn));
-                        msg.replace(QRegExp(":"),"\n");
-                        QMessageBox::message(tr("Note"),msg);
-                    }
-                } else {
-                    QMessageBox::message(tr("Note"),tr("Cannot upload directories"));
+                if( !FtpPut( localFile.latin1(), remoteFile.latin1(),FTPLIB_IMAGE, conn ) ) {
+                    QString msg;
+                    msg.sprintf(tr("Unable to upload\n")+"%s",FtpLastResponse(conn));
+                    msg.replace(QRegExp(":"),"\n");
+                    QMessageBox::message(tr("Note"),msg);
                 }
-                    ProgressBar->reset();
-                    nullifyCallBack();
-          it.current()->setSelected(FALSE);
-            } //end currentSelected
-        }
-        TabWidget->setCurrentPage(1);
-        remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
-        QCopEnvelope ( "QPE/System", "notBusy()" );
+            } else {
+                QMessageBox::message(tr("Note"),tr("Cannot upload directories"));
+            }
+            ProgressBar->reset();
+            nullifyCallBack();
+            it.current()->setSelected(FALSE);
+        } //end currentSelected
+    }
+    TabWidget->setCurrentPage(1);
+    remoteDirList( (const QString &)currentRemoteDir); //this also calls populate
+    QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
 void OpieFtp::nullifyCallBack()
@@ -485,7 +486,7 @@ void OpieFtp::remoteDownload()
             }
             ProgressBar->reset();
             nullifyCallBack();
-      it.current()->setSelected(FALSE);
+            it.current()->setSelected(FALSE);
         }
     }
     TabWidget->setCurrentPage(0);
@@ -522,7 +523,7 @@ bool OpieFtp::remoteChDir(const QString &dir)
         msg.sprintf(tr("Unable to change directories\n")+dir+"\n%s",FtpLastResponse(conn));
         msg.replace(QRegExp(":"),"\n");
         QMessageBox::message(tr("Note"),msg);
-            qDebug(msg);
+        qDebug(msg);
         QCopEnvelope ( "QPE/System", "notBusy()" );
         return FALSE;
     }
@@ -780,20 +781,16 @@ void OpieFtp::showHidden()
 void OpieFtp::ListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
 {
 // if(item)
-if (mouse == 2) {
-          showLocalMenu(item);
+    if (mouse == 2) {
+        showLocalMenu(item);
     }
 }
 
 void OpieFtp::RemoteListPressed( int mouse, QListViewItem *item, const QPoint &point, int i)
 {
- switch (mouse) {
-      case 1:
-          break;
-      case 2:
-          showRemoteMenu(item);
-    break;
-    };
+    if(mouse == 2) {
+        showRemoteMenu(item);
+    }
 }
 
 void OpieFtp::showRemoteMenu(QListViewItem * item)
