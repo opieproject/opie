@@ -361,3 +361,8 @@ void Package::setName(QString n)
 {
 	_displayName = n;
 }
+
+QDict<QString>* Package::getFields()
+{
+	return &_values;	
+}

@@ -29,10 +29,17 @@ void PackageListItem::init( Package *pi, PackageManagerSettings *s)
   setExpandable( true );
 	QCheckListItem *item;
 	nameItem = new QCheckListItem( this, "" );
-	item = new QCheckListItem( this, QObject::tr("Description: ")+pi->desc() );
 	item = new QCheckListItem( this, QObject::tr("Size: ")+pi->size() );
 	destItem = new QCheckListItem( this, "" );
 	linkItem = new QCheckListItem( this, "" );
+ 	QCheckListItem *otherItem = new QCheckListItem( this, QObject::tr("other") );
+	item = new QCheckListItem( otherItem, QObject::tr("Description: ")+pi->desc() );
+  QDict<QString> *fields = pi->getFields();
+  QDictIterator<QString> it( *fields );
+	while ( it.current() ) {
+   	item = new QCheckListItem( otherItem, QString(it.currentKey()+": "+*it.current()) );
+		++it;
+ 	}
   displayDetails();
 
   if (!pm_uninstalled)

@@ -49,6 +49,7 @@ class Package //: public QObject
   void parseIpkgFile( QString );
   void instalFromFile(bool iff=true);
   void setName(QString);
+  QDict<QString>* getFields();
 public slots:
   void toggleProcess();
 
