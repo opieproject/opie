@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.19 2003-03-24 10:10:47 umopapisdn Exp $
+** $Id: datebook.cpp,v 1.20 2003-04-12 00:22:57 umopapisdn Exp $
 **
 **********************************************************************/
 
@@ -407,108 +407,87 @@ void DateBook::duplicateEvent( const Event &e )
 	qWarning("Hmmm...");
     // Alot of code duplication, as this is almost like editEvent();
 	if (syncing) {
-	QMessageBox::warning( this, tr("Calendar"),
-	                      tr( "Can not edit data, currently syncing") );
-	return;
+		QMessageBox::warning( this, tr("Calendar"), tr( "Can not edit data, currently syncing") );
+		return;
     }
-	
-	Event dupevent;
-	dupevent.setStart(e.start());
-	dupevent.setEnd(e.end());
-	dupevent.setDescription(e.description());
-	dupevent.setLocation(e.location());
-//	dupevent.setCategory(e.category());	// how is this done??
-	dupevent.setNotes(e.notes());
-	dupevent.setAllDay(e.isAllDay());
-	dupevent.setTimeZone(e.timeZone());
-	if(e.hasAlarm()) dupevent.setAlarm(e.alarmDelay(),e.alarmSound());
-	if(e.hasRepeat()) dupevent.setRepeat(e.repeatPattern());
-	
+
+	Event dupevent(e);	// Make a duplicate.
+
 	// workaround added for text input.
-    QDialog editDlg( this, 0, TRUE );
-    DateEntry *entry;
-    editDlg.setCaption( tr("Duplicate Event") );
-    QVBoxLayout *vb = new QVBoxLayout( &editDlg );
-    QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
-    sv->setResizePolicy( QScrollView::AutoOneFit );
-    // KLUDGE!!!
-    sv->setHScrollBarMode( QScrollView::AlwaysOff );
-    vb->addWidget( sv );
-    entry = new DateEntry( onMonday, dupevent, ampm, &editDlg, "editor" );
-    entry->timezone->setEnabled( FALSE );
-    sv->addChild( entry );
+	QDialog editDlg( this, 0, TRUE );
+	DateEntry *entry;
+	editDlg.setCaption( tr("Duplicate Event") );
+	QVBoxLayout *vb = new QVBoxLayout( &editDlg );
+	QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
+	sv->setResizePolicy( QScrollView::AutoOneFit );
+	// KLUDGE!!!
+	sv->setHScrollBarMode( QScrollView::AlwaysOff );
+	vb->addWidget( sv );
+	entry = new DateEntry( onMonday, dupevent, ampm, &editDlg, "editor" );
+	entry->timezone->setEnabled( FALSE );
+	sv->addChild( entry );
 
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
     editDlg.showMaximized();
 #endif
-    while (editDlg.exec() ) {
-	Event newEv = entry->event();
-	if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
-	    break;
-	newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
-	QString error = checkEvent(newEv);
-	if (!error.isNull()) {
-	    if (QMessageBox::warning(this, "error box",
-				     error, "Fix it", "Continue",
-				     0, 0, 1) == 0)
-		continue;
+	while (editDlg.exec() ) {
+		Event newEv = entry->event();
+		QString error = checkEvent(newEv);
+		if (!error.isNull()) {
+			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0)
+				continue;
+		}
+		db->addEvent(newEv);
+		emit newEvent();
+		break;
 	}
-	db->addEvent(newEv);
-	emit newEvent();
-	break;
-    }
 }
 
 void DateBook::editEvent( const Event &e )
 {
-    if (syncing) {
-	QMessageBox::warning( this, tr("Calendar"),
-	                      tr( "Can not edit data, currently syncing") );
-	return;
-    }
+	if (syncing) {
+		QMessageBox::warning( this, tr("Calendar"), tr( "Can not edit data, currently syncing") );
+		return;
+	}
 
-    // workaround added for text input.
-    QDialog editDlg( this, 0, TRUE );
-    DateEntry *entry;
-    editDlg.setCaption( tr("Edit Event") );
-    QVBoxLayout *vb = new QVBoxLayout( &editDlg );
-    QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
-    sv->setResizePolicy( QScrollView::AutoOneFit );
-    // KLUDGE!!!
-    sv->setHScrollBarMode( QScrollView::AlwaysOff );
-    vb->addWidget( sv );
-    entry = new DateEntry( onMonday, e, ampm, &editDlg, "editor" );
-    entry->timezone->setEnabled( FALSE );
-    sv->addChild( entry );
+	// workaround added for text input.
+	QDialog editDlg( this, 0, TRUE );
+	DateEntry *entry;
+	editDlg.setCaption( tr("Edit Event") );
+	QVBoxLayout *vb = new QVBoxLayout( &editDlg );
+	QScrollView *sv = new QScrollView( &editDlg, "scrollview" );
+	sv->setResizePolicy( QScrollView::AutoOneFit );
+	// KLUDGE!!!
+	sv->setHScrollBarMode( QScrollView::AlwaysOff );
+	vb->addWidget( sv );
+	entry = new DateEntry( onMonday, e, ampm, &editDlg, "editor" );
+	entry->timezone->setEnabled( FALSE );
+	sv->addChild( entry );
 
 #if defined(Q_WS_QWS) || defined(_WS_QWS_)
-    editDlg.showMaximized();
+	editDlg.showMaximized();
 #endif
-    while (editDlg.exec() ) {
-	Event newEv = entry->event();
-	if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
-	    break;
-	newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
-	QString error = checkEvent(newEv);
-	if (!error.isNull()) {
-	    if (QMessageBox::warning(this, "error box",
-				     error, "Fix it", "Continue",
-				     0, 0, 1) == 0)
-		continue;
+	while (editDlg.exec() ) {
+		Event newEv = entry->event();
+		if(newEv.description().isEmpty() && newEv.notes().isEmpty() )
+			break;
+		newEv.setUid(e.uid()); // FIXME: Hack not to clear uid
+		QString error = checkEvent(newEv);
+		if (!error.isNull()) {
+			if (QMessageBox::warning(this, "error box", error, "Fix it", "Continue", 0, 0, 1) == 0) continue;
 	}
 	db->editEvent(e, newEv);
 	emit newEvent();
 	break;
-    }
+	}
 }
 
 void DateBook::removeEvent( const Event &e )
 {
-    if (syncing) {
-	QMessageBox::warning( this, tr("Calendar"),
-	                      tr( "Can not edit data, currently syncing") );
-	return;
-    }
+	if (syncing) {
+		QMessageBox::warning( this, tr("Calendar"), tr( "Can not edit data, currently syncing") );
+		return;
+	}
 
     QString strName = e.description();
 
