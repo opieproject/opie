@@ -37,7 +37,7 @@ INTERFACES	= settings.ui \
 		  install.ui \
 		  instoptions.ui
 TARGET		= aqpkg
-INCLUDEPATH += $(QPEDIR)/include
-DEPENDPATH  += $(QPEDIR)/include
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH  += $(OPIEDIR)/include
 LIBS        += -lqpe -lstdc++
 
