@@ -45,11 +45,11 @@ MailApplet::~MailApplet() {
 
 void MailApplet::paintEvent( QPaintEvent* ) {
     QPainter p( this );
-    p.drawPixmap( 0, 0, Resource::loadPixmap( "mail/mailchecker" ) );
-    QFont f( "Fixed", AppLnk::smallIconSize() );
+    p.drawPixmap( 0, 0, Resource::loadPixmap( "mail/inbox" ) );
+    QFont f( "vera", AppLnk::smallIconSize() );
     QFontMetrics fm( f );
     p.setFont( f );
-    p.drawText( AppLnk::smallIconSize()/2, AppLnk::smallIconSize()/2, QString::number( m_newMails ) );
+    p.drawText( AppLnk::smallIconSize()/3, AppLnk::smallIconSize() - 2, QString::number( m_newMails ) );
     return;
 
 }
@@ -128,5 +128,11 @@ void MailApplet::slotCheck() {
             OLed led = ( device->ledList().contains( Led_Mail ) ) ? Led_Mail : device->ledList()[0];
             device->setLedState( led, Led_Off );
         }
+
+        Config cfg( "mail" );
+        cfg.setGroup( "Status" );
+        cfg.writeEntry( "newMails", m_newMails );
+        QCopEnvelope env( "QPE/Pim", "newMails(int)" );
+        env <<  m_newMails;
     }
 }
