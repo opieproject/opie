@@ -6,16 +6,16 @@ $(configs) :
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules
-	@cat $(TOPDIR)/packages | \
-		awk '/^#/ { next }; {print \
+	cat $(TOPDIR)/packages | grep -v '^#' | \
+		awk '{print \
 			".PHONY : " $$2 "\n" \
-			"subdir-$$(" $$1 ") += " $$2 "\n\n" \
-			$$2 "/Makefile : " $$2 "/" $$3 " $$(TOPDIR)/qmake/qmake\n\t" \
-			"$$(call makefilegen,$$@)\n\n" \
-			$$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@)\n"}'\
-			> $(TOPDIR)/.depends
+			"subdir-$$(" $$1 ") += " $$2 "\n\n"; \
+			print $$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@)\n"; }' > $(TOPDIR)/.depends
+	cat $(TOPDIR)/packages | grep -v '^#' | \
+		perl -ne '($$cfg, $$dir, $$pro) = $$_ =~ /^(\S+)\s+(\S+)\s+(\S+)/; if ( -e "$$dir/$$pro" ) { print "$$dir/Makefile : $$dir/$$pro \$$(TOPDIR)/qmake/qmake\n\t\$$(call makefilegen,\$$@)\n\n"; }' \
+			>> $(TOPDIR)/.depends
 # interpackage dependency generation
-	@cat $(TOPDIR)/packages | \
+	cat $(TOPDIR)/packages | \
 		$(TOPDIR)/scripts/deps.pl >> $(TOPDIR)/.depends
 
 $(TOPDIR)/.depends.cfgs:
