@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -28,21 +28,21 @@ class QProgressBar;
 
 class ShutdownImpl : public QWidget
 {
-	Q_OBJECT
+    Q_OBJECT
 public:
-	ShutdownImpl( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+    ShutdownImpl( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
 
-	enum Type { ShutdownSystem, RebootSystem, RestartDesktop, TerminateDesktop };
+    enum Type { ShutdownSystem, RebootSystem, RestartDesktop, TerminateDesktop };
 
 	virtual void hide ( );
 
 signals:
-	void shutdown( ShutdownImpl::Type );
+    void shutdown( ShutdownImpl::Type );
 
 private slots:
-	void buttonClicked( int );
-	void cancelClicked();
-	void timeout();
+    void buttonClicked( int );
+    void cancelClicked();
+    void timeout();
 
 private:
 	QTimer *m_timer;
