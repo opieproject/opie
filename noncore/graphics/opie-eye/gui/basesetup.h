@@ -3,7 +3,7 @@
 
 #include <opie2/oconfig.h>
 
-#include <qwidget.h>
+#include <qframe.h>
 
 class QVBoxLayout;
 class QGridLayout;
@@ -12,7 +12,7 @@ class QLabel;
 class QCheckBox;
 class QSpacerItem;
 
-class BaseSetup:public QWidget
+class BaseSetup:public QFrame
 {
     Q_OBJECT
 public:
@@ -28,7 +28,7 @@ protected:
     QGridLayout * m_SlidetimeLayout;
     QSpinBox * m_SlideShowTime;
     QLabel * m_SlidetimeLabel;
-    QCheckBox *m_ShowToolBar;
+    QCheckBox *m_SaveStateAuto;
     QSpacerItem *spacer1;
 };
 

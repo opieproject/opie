@@ -45,6 +45,7 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setCaption( QObject::tr("Opie Eye Caramba" ) );
     m_cfg = new Opie::Core::OConfig("opie-eye");
     m_cfg->setGroup("main" );
+    readConfig();
 
     m_storage = new StorageInfo();
     connect(m_storage, SIGNAL(disksChanged() ),
@@ -70,7 +71,8 @@ PMainWindow::PMainWindow(QWidget* wid, const char* name, WFlags style)
     setupActions();
     setupToolbar();
     setupMenu();
-    m_aHideToolbar->setOn(m_cfg->readBoolEntry("base_showtoolbar",true));
+    m_aHideToolbar->setOn(m_cfg->readBoolEntry("showtoolbar",true));
+    m_aAutoRotate->setEnabled(!m_aUnscaled->isOn());
 }
 
 PMainWindow::~PMainWindow() {
@@ -78,55 +80,55 @@ PMainWindow::~PMainWindow() {
 
 void PMainWindow::slotToggleZoomer()
 {
-    if (!m_disp) return;
-    bool cur = m_aZoomer->isOn();
-    m_aZoomer->setOn(!cur);
+    m_aZoomer->setOn(!m_aZoomer->isOn());
 }
 
 void PMainWindow::slotZoomerToggled(bool how)
 {
-    zoomerOn = how;
     if (m_disp) {
-        m_disp->setShowZoomer(zoomerOn);
+        m_disp->setShowZoomer(how);
+    }
+    if (autoSave) {
+        m_cfg->writeEntry("zoomeron",how);
     }
 }
 
 void PMainWindow::slotToggleAutorotate()
 {
-    if (!m_disp) return;
     if (!m_aAutoRotate->isEnabled()) return;
-    bool cur = m_aAutoRotate->isOn();
-    m_aAutoRotate->setOn(!cur);
+    m_aAutoRotate->setOn(!m_aAutoRotate->isOn());
 }
 
 void PMainWindow::slotToggleAutoscale()
 {
-    if (!m_disp) return;
-    bool cur = m_aAutoScale->isOn();
-    m_aAutoScale->setOn(!cur);
+    m_aUnscaled->setOn(!m_aUnscaled->isOn());
 }
 
 void PMainWindow::slotRotateToggled(bool how)
 {
-    autoRotate = how;
+   if (autoSave) {
+        m_cfg->writeEntry("autorotate",how);
+    }
     if (m_disp) {
-        m_disp->setAutoScaleRotate(!m_aAutoScale->isOn(),m_aAutoRotate->isOn());
+        m_disp->setAutoScaleRotate(!m_aUnscaled->isOn(),how);
     }
 }
 
 void PMainWindow::slotScaleToggled(bool how)
 {
-    autoScale = !how;
-    if (!how) {
-        autoRotate = how;
+   if (autoSave) {
+        m_cfg->writeEntry("unscaled",how);
     }
-    if (!autoScale) {
+    odebug << "Unscaled: " << m_aUnscaled->isOn() << oendl;
+    odebug << "How: " << how << oendl;
+    if (how) {
         m_aAutoRotate->setOn(false);
     }
     if (m_disp) {
-        m_disp->setAutoScaleRotate(!m_aAutoScale->isOn(),m_aAutoRotate->isOn());
+        m_disp->setAutoScaleRotate(!m_aUnscaled->isOn(),m_aAutoRotate->isOn());
     }
     m_aAutoRotate->setEnabled(!how);
+    odebug << "Autorotate: " << m_aAutoRotate->isOn() << oendl;
 }
 
 void PMainWindow::slotConfig() {
@@ -136,7 +138,7 @@ void PMainWindow::slotConfig() {
     * and one tab for the  KeyConfigs
     */
     QDialog dlg(this, 0, true);
-    dlg.setCaption( tr("Phunk View - Config" ) );
+    dlg.setCaption( tr("Opie Eye - Config" ) );
 
     QHBoxLayout *lay = new QHBoxLayout(&dlg);
     Opie::Ui::OTabWidget *wid = new Opie::Ui::OTabWidget(&dlg );
@@ -165,21 +167,25 @@ void PMainWindow::slotConfig() {
     Opie::Ui::OKeyConfigWidget* keyWid = new Opie::Ui::OKeyConfigWidget( wid, "key config" );
     keyWid->setChangeMode( Opie::Ui::OKeyConfigWidget::Queue );
     keyWid->insert( tr("Browser Keyboard Actions"), m_view->manager() );
+    QWidget*w = m_stack->visibleWidget();
 
+    bool reminfo = false;
     if ( !m_info ) {
+        reminfo = true;
         initInfo();
     }
     keyWid->insert( tr("Imageinfo Keyboard Actions"), m_info->manager() );
 
+    bool remdisp = false;
     if ( !m_disp ) {
+        remdisp = true;
         initDisp();
     }
     keyWid->insert( tr("Imageview Keyboard Actions"), m_disp->manager() );
 
     keyWid->load();
     wid->addTab( keyWid, QString::fromLatin1("AppsIcon" ), tr("Keyboard Configuration") );
-
-
+    wid->setCurrentTab(0);
     bool act = ( QPEApplication::execDialog( &dlg ) == QDialog::Accepted );
 
 /*
@@ -202,8 +208,23 @@ void PMainWindow::slotConfig() {
         m_info->manager()->save();
         m_view->manager()->save();
         bSetup->save_values();
+        readConfig();
     }
     delete keyWid;
+
+    m_stack->raiseWidget(w);
+    if (remdisp) {
+        m_disp->disconnect(this, SLOT(slotReturn()));
+        m_disp->setDestructiveClose();
+        m_stack->removeWidget(m_disp);
+        m_disp = 0;
+    }
+    if (reminfo) {
+        m_info->disconnect(this, SLOT(slotReturn()));
+        m_info->setDestructiveClose();
+        m_stack->removeWidget(m_info);
+        m_info = 0;
+    }
 }
 
 /*
@@ -238,7 +259,7 @@ void PMainWindow::initDisp() {
             m_disp->setMinimumSize(QApplication::desktop()->size()/2);
         }
         m_disp->setMenuActions(m_hGroup,m_gPrevNext,m_gDisplayType);
-        m_disp->setAutoScale(!m_aAutoScale->isOn());
+        m_disp->setAutoScale(!m_aUnscaled->isOn());
         m_disp->setAutoRotate(m_aAutoRotate->isOn());
         m_disp->setShowZoomer(m_aZoomer->isOn());
         m_disp->setBackgroundColor(white);
@@ -263,19 +284,17 @@ void PMainWindow::slotToggleFullScreen()
 
 void PMainWindow::slotFullScreenButton(bool current)
 {
-    if (m_disp) odebug << "Disp fenster ist hidden: "<<m_disp->isHidden()<<oendl;
+    if (autoSave) {
+        m_cfg->writeEntry("fullscreen",current);
+    }
     if (!m_disp) return;
 
-    /* I can not solve this effects here - it seems that we require some
-       status variable, too. so we will live with some interesting effects
-       meanwhile */
-#if 0
-    bool th = m_disp->isHidden();
-    setupViewWindow(current, false);
-    /* realy - after setting up the fullscreenmode while the window is hidden
-       it is unvisibile not hidden!!!!! Hell. */
-    if (th) m_disp->hide();
-#endif
+    if (m_disp->isHidden()) {
+        /* it must get some setups for switch we can just do if the window is visible.
+           so we must delete the imageview window and re-create it when displaying new
+           image */
+        return;
+    }
     setupViewWindow(current, true);
 }
 
@@ -457,6 +476,9 @@ void PMainWindow::showToolbar(bool how)
 {
     if (!how) toolBar->hide();
     else toolBar->show();
+    if (autoSave) {
+        m_cfg->writeEntry("showtoolbar",how);
+    }
 }
 
 void PMainWindow::setupActions()
@@ -536,33 +558,46 @@ void PMainWindow::setupActions()
     m_aFullScreen = new QAction( tr( "Show images fullscreen" ),
         Resource::loadIconSet("fullscreen"), 0, 0, this, 0, true );
     m_aFullScreen->setToggleAction(true);
-    m_aFullScreen->setOn(false);
+    if (autoSave) {
+        m_aFullScreen->setOn(m_cfg->readBoolEntry("fullscreen",false));
+    } else {
+        m_aFullScreen->setOn(false);
+    }
     connect(m_aFullScreen,SIGNAL(toggled(bool)),this,SLOT(slotFullScreenButton(bool)));
 
     m_gDisplayType = new QActionGroup(this,"imagedisplaytype",false);
     m_aAutoRotate = new QAction( tr( "Auto rotate images" ), Resource::loadIconSet( "rotate" ), 0, 0, this, 0, true );
     m_aAutoRotate->setToggleAction(true);
+
     if (m_stack->mode() == Opie::Ui::OWidgetStack::SmallScreen) {
         m_aAutoRotate->setOn(true);
-        autoRotate = true;
     } else {
         m_aAutoRotate->setOn(false);
-        autoRotate = false;
+    }
+    if (autoSave) {
+        m_aAutoRotate->setOn(m_cfg->readBoolEntry("autorotate",m_aAutoRotate->isOn()));
     }
     connect(m_aAutoRotate,SIGNAL(toggled(bool)),this,SLOT(slotRotateToggled(bool)));
 
-    m_aAutoScale = new QAction( tr( "Show images unscaled" ), Resource::loadIconSet( "1to1" ), 0, 0, this, 0, true );
-    m_aAutoScale->setToggleAction(true);
-    m_aAutoScale->setOn (false);
-    connect(m_aAutoScale,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
+    m_aUnscaled = new QAction( tr( "Show images unscaled" ), Resource::loadIconSet( "1to1" ), 0, 0, this, 0, true );
+    m_aUnscaled->setToggleAction(true);
+    connect(m_aUnscaled,SIGNAL(toggled(bool)),this,SLOT(slotScaleToggled(bool)));
+    if (autoSave) {
+        m_aUnscaled->setOn(m_cfg->readBoolEntry("unscaled",false));
+    } else {
+        m_aUnscaled->setOn(false);
+    }
 
     m_aZoomer = new QAction( tr( "Show zoomer window when unscaled" ), Resource::loadIconSet( "mag" ), 0, 0, this, 0, true );
     m_aZoomer->setToggleAction(true);
-    m_aZoomer->setOn (true);
-    zoomerOn = true;
+    if (autoSave) {
+        m_aZoomer->setOn(m_cfg->readBoolEntry("zoomeron",true));
+    } else {
+        m_aZoomer->setOn (true);
+    }
     connect(m_aZoomer,SIGNAL(toggled(bool)),this,SLOT(slotZoomerToggled(bool)));
     m_gDisplayType->insert(m_aAutoRotate);
-    m_gDisplayType->insert(m_aAutoScale);
+    m_gDisplayType->insert(m_aUnscaled);
     m_gDisplayType->insert(m_aZoomer);
 
     m_hGroup = new QActionGroup(this,"actioncollection",false);
@@ -657,4 +692,9 @@ void PMainWindow::listviewselected(QAction*which)
 //        name = "opie-eye/opie-eye-thumb";
     }
     emit changeListMode(val);
+}
+
+void PMainWindow::readConfig()
+{
+    autoSave =m_cfg->readBoolEntry("base_savestatus",true);
 }

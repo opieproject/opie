@@ -38,7 +38,6 @@ void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, Q
 
 ImageView::~ImageView()
 {
-    odebug << "Delete Imageview" << oendl;
     delete m_viewManager;
 }
 
@@ -57,7 +56,10 @@ void ImageView::startSlide(int value)
     }
     m_slideValue=value;
     connect(m_slideTimer,SIGNAL(timeout()),SLOT(nextSlide()));
-    m_slideTimer->start(m_slideValue*1000,true);
+    /* this "+1" is one millisecond. with that we can setup a slideshowvalue
+       of 0. eg "as fast as possible".
+     */
+    m_slideTimer->start(m_slideValue*1000+1,true);
 }
 
 void ImageView::stopSlide()

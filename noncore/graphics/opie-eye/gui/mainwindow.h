@@ -78,9 +78,7 @@ private:
     PIconView* m_view;
     imageinfo *m_info;
     ImageView *m_disp;
-    bool autoRotate;
-    bool autoScale;
-    bool zoomerOn;
+    bool autoSave;
     QToolButton*fsButton;
     QToolBar *toolBar;
     QPopupMenu *fileMenu,*dispMenu,*fsMenu,*listviewMenu,*settingsMenu;
@@ -88,9 +86,10 @@ private:
     QAction*m_aHideToolbar,*m_aSetup,*m_aDirName,*m_aDirShort,*m_aDirLong;
     QActionGroup *m_gListViewMode,*m_gDisplayType,*m_gPrevNext,*m_hGroup;
     QAction *m_aNext,*m_aPrevious,*m_aFullScreen;
-    QAction *m_aAutoRotate,*m_aAutoScale,*m_aZoomer;
+    QAction *m_aAutoRotate,*m_aUnscaled,*m_aZoomer;
 
     /* init funs */
+    void readConfig();
     void setupActions();
     void setupToolbar();
     void setupMenu();

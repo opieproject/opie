@@ -12,14 +12,22 @@
 /* QT */
 #include <qwidget.h>
 #include <qcheckbox.h>
+#include <qframe.h>
 #include <qhbox.h>
 #include <qlabel.h>
+#include <qlayout.h>
 
 namespace {
-    class DirImageWidget : public QHBox {
+    class DirImageWidget : public QFrame {
     public:
-        DirImageWidget() {
+        DirImageWidget(): QFrame() {
+            setFrameStyle(Box|Raised);
+            QVBoxLayout *m_MainLayout = new QVBoxLayout( this, 6, 2, "m_MainLayout");
             chkbox = new QCheckBox( QObject::tr("Show all files"), this );
+            m_MainLayout->addWidget(chkbox);
+            QSpacerItem *spacer1 = new QSpacerItem( 20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding );
+            m_MainLayout->addItem( spacer1 );
+
         }
         ~DirImageWidget() {}
         QCheckBox* chkbox;
