@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,127 +18,264 @@
 **
 **********************************************************************/
 
-#include "desktop.h"
+#ifndef QTOPIA_INTERNAL_FILEOPERATIONS
+#define QTOPIA_INTERNAL_FILEOPERATIONS
+#endif
+#include "server.h"
+#include "serverapp.h"
 #include "taskbar.h"
 #include "stabmon.h"
+#include "launcher.h"
+#include "firstuse.h"
+#include "launcherglobal.h"
 
-#include <qpe/qpeapplication.h>
-#include <qpe/network.h>
-#include <qpe/config.h>
-#if defined( QT_QWS_SL5XXX ) || defined( QT_QWS_IPAQ ) || defined (QT_QWS_RAMSES)
-#include <qpe/custom.h>
-#endif
+#include <qtopia/qpeapplication.h>
+#include <qtopia/network.h>
+#include <qtopia/config.h>
+#include <qtopia/custom.h>
+#include <qtopia/global.h>
 
-#include <opie/odevice.h>
-
-#include <qmessagebox.h>
 #include <qfile.h>
-#include <qimage.h>
+#include <qdir.h>
+#ifdef QWS
 #include <qwindowsystem_qws.h>
-#include <qwsmouse_qws.h>
-#include <qpe/qcopenvelope_qws.h>
-#include <qpe/alarmserver.h>
+#include <qtopia/qcopenvelope_qws.h>
+#endif
+#include <qtopia/alarmserver.h>
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+#ifndef Q_OS_WIN32
 #include <unistd.h>
+#else
+#include <process.h>
+#endif
 
-#include "../calibrate/calibrate.h"
+#include "calibrate.h"
+
+
+#ifdef QT_QWS_LOGIN
+#include "../login/qdmdialogimpl.h"
+#endif
+
+#ifdef Q_WS_QWS
+#include <qkeyboard_qws.h>
+#endif
+
+#include <qmessagebox.h>
+#include <opie/odevice.h>
 
 using namespace Opie;
 
+
+static void cleanup()
+{
+    QDir dir( Opie::Global::tempDir(), "qcop-msg-*" );
+
+    QStringList stale = dir.entryList();
+    QStringList::Iterator it;
+    for ( it = stale.begin(); it != stale.end(); ++it ) {
+	dir.remove( *it );
+    }
+}
+
+static void refreshTimeZoneConfig()
+{
+    /* ### FIXME timezone handling */
+#if 0
+   // We need to help WorldTime in setting up its configuration for
+   //   the current translation
+    // BEGIN no tr
+    const char *defaultTz[] = {
+	"America/New_York",
+	"America/Los_Angeles",
+	"Europe/Oslo",
+	"Asia/Tokyo",
+	"Asia/Hong_Kong",
+	"Australia/Brisbane",
+	0
+    };
+    // END no tr
+
+    TimeZone curZone;
+    QString zoneID;
+    int zoneIndex;
+    Config cfg = Config( "WorldTime" );
+    cfg.setGroup( "TimeZones" );
+    if (!cfg.hasKey( "Zone0" )){
+	// We have no existing timezones use the defaults which are untranslated strings
+	QString currTz = TimeZone::current().id();
+	QStringList zoneDefaults;
+	zoneDefaults.append( currTz );
+	for ( int i = 0; defaultTz[i] && zoneDefaults.count() < 6; i++ ) {
+	    if ( defaultTz[i] != currTz )
+		zoneDefaults.append( defaultTz[i] );
+	}
+	zoneIndex = 0;
+	for (QStringList::Iterator it = zoneDefaults.begin(); it != zoneDefaults.end() ; ++it){
+	    cfg.writeEntry( "Zone" + QString::number( zoneIndex ) , *it);
+	    zoneIndex++;
+	}
+    }
+    // We have an existing list of timezones refresh the
+    //  translations of TimeZone name
+    zoneIndex = 0;
+    while (cfg.hasKey( "Zone"+ QString::number( zoneIndex ))){
+	zoneID = cfg.readEntry( "Zone" + QString::number( zoneIndex ));
+	curZone = TimeZone( zoneID );
+	if ( !curZone.isValid() ){
+	    qDebug( "initEnvironment() Invalid TimeZone %s", zoneID.latin1() );
+	    break;
+	}
+	cfg.writeEntry( "ZoneName" + QString::number( zoneIndex ), curZone.city() );
+	zoneIndex++;
+    }
+#endif
+}
+
 void initEnvironment()
 {
-    int rot;
+#ifdef Q_OS_WIN32
+    // Config file requires HOME dir which uses QDir which needs the winver
+    qt_init_winver();
+#endif
     Config config("locale");
-    
     config.setGroup( "Location" );
-    QString tz = config.readEntry( "Timezone", getenv("TZ") );
+    QString tz = config.readEntry( "Timezone", getenv("TZ") ).stripWhiteSpace();
 
-  // if not timezone set, pick New York
-    if (tz.isNull())
-        tz = "America/New_York";
+    // if not timezone set, pick New York
+    if (tz.isNull() || tz.isEmpty())
+	tz = "America/New_York";
 
     setenv( "TZ", tz, 1 );
     config.writeEntry( "Timezone", tz);
 
     config.setGroup( "Language" );
-    QString lang = config.readEntry( "Language", getenv("LANG") );
-    if ( !lang.isNull() )
-        setenv( "LANG", lang, 1 );
+    QString lang = config.readEntry( "Language", getenv("LANG") ).stripWhiteSpace();
+    if( lang.isNull() || lang.isEmpty())
+	lang = "en_US";
+
+    setenv( "LANG", lang, 1 );
+    config.writeEntry("Language", lang);
+    config.write();
 
 #if !defined(QT_QWS_CASSIOPEIA) && !defined(QT_QWS_IPAQ) && !defined(QT_QWS_SL5XXX)
-    setenv( "QWS_SIZE", "240x320", 0 );
+     setenv( "QWS_SIZE", "240x320", 0 );
 #endif
 
-    QString env(getenv("QWS_DISPLAY"));
-    if (env.contains("Transformed")) {
-        // transformed driver default rotation is controlled by the hardware.
-        Config config("qpe");
-        config.setGroup( "Rotation" );
-        if ( ( rot = config.readNumEntry( "Rot", -1 ) ) == -1 )
-            rot = ODevice::inst ( )-> rotation ( ) * 90;
 
-        setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
-        QPEApplication::defaultRotation ( ); /* to ensure deforient matches reality */
-    }
+
+     QString env(getenv("QWS_DISPLAY"));
+     if (env.contains("Transformed")) {
+         int rot;
+         // transformed driver default rotation is controlled by the hardware.
+         Config config("qpe");
+         config.setGroup( "Rotation" );
+         if ( ( rot = config.readNumEntry( "Rot", -1 ) ) == -1 )
+             rot = ODevice::inst ( )-> rotation ( ) * 90;
+
+         setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
+         QPEApplication::defaultRotation ( ); /* to ensure deforient matches reality */
+     }
 }
 
+static void initKeyboard()
+{
+    Config config("qpe");
+
+    config.setGroup( "Keyboard" );
+
+    int ard = config.readNumEntry( "RepeatDelay" );
+    int arp = config.readNumEntry( "RepeatPeriod" );
+    if ( ard > 0 && arp > 0 )
+	qwsSetKeyboardAutoRepeat( ard, arp );
+
+    QString layout = config.readEntry( "Layout", "us101" );
+    Server::setKeyboardLayout( layout );
+}
+
+static bool firstUse()
+{
+    bool needFirstUse = FALSE;
+    if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
+        if ( !QFile::exists( "/etc/pointercal" ) )
+            needFirstUse = TRUE;
+    }
+
+    {
+	Config config( "qpe" );
+	config.setGroup( "Startup" );
+	needFirstUse |= config.readBoolEntry( "FirstUse", TRUE );
+    }
+
+    if ( !needFirstUse )
+	return FALSE;
+
+    FirstUse *fu = new FirstUse();
+    fu->exec();
+    bool rs = fu->restartNeeded();
+    delete fu;
+    return rs;
+}
 
 int initApplication( int argc, char ** argv )
 {
+    cleanup();
+
+
     initEnvironment();
 
     //Don't flicker at startup:
+#ifdef QWS
     QWSServer::setDesktopBackground( QImage() );
+#endif
+    ServerApplication a( argc, argv, QApplication::GuiServer );
 
-    DesktopApplication a( argc, argv, QApplication::GuiServer );
+    refreshTimeZoneConfig();
+
+    initKeyboard();
+
+    // Don't use first use under Windows
+    if ( firstUse() ) {
+	a.restart();
+	return 0;
+    }
 
     ODevice::inst ( )-> setSoftSuspend ( true );
 
-    { // init backlight
+    {
         QCopEnvelope e("QPE/System", "setBacklight(int)" );
   	e << -3; // Forced on
     }
 
     AlarmServer::initialize();
 
-    Desktop *d = new Desktop();
 
-    QObject::connect( &a, SIGNAL(power()),   d, SLOT(togglePower()) );
-    QObject::connect( &a, SIGNAL(backlight()),   d, SLOT(toggleLight()) );
-    QObject::connect( &a, SIGNAL(symbol()),   d, SLOT(toggleSymbolInput()) );
-    QObject::connect( &a, SIGNAL(numLockStateToggle()),   d, SLOT(toggleNumLockState()) );
-    QObject::connect( &a, SIGNAL(capsLockStateToggle()),   d, SLOT(toggleCapsLockState()) );
-    QObject::connect( &a, SIGNAL(prepareForRestart()),   d, SLOT(terminateServers()) );
 
-    (void)new SysFileMonitor(d);
-    Network::createServer(d);
+    Server *s = new Server();
 
-    if ( QWSServer::mouseHandler() ->inherits("QCalibratedMouseHandler") ) {
-	if ( !QFile::exists( "/etc/pointercal" ) ) {
-	    // Make sure calibration widget starts on top.
-	    Calibrate *cal = new Calibrate;
-	    cal->exec();
-	    delete cal;
-	}
+    (void)new SysFileMonitor(s);
+#ifdef QWS
+    Network::createServer(s);
+#endif
+
+    s->show();
+
+    /* THE ARM rtc has problem holdings the time on reset */
+    if ( QDate::currentDate ( ). year ( ) < 2000 ) {
+        if ( QMessageBox::information ( 0, ServerApplication::tr( "Information" ), ServerApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+            QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
+            e << QString ( );
+        }
     }
-
-    d->show();
-
-	if ( QDate::currentDate ( ). year ( ) < 2000 ) {
-		if ( QMessageBox::information ( 0, DesktopApplication::tr( "Information" ), DesktopApplication::tr( "<p>The system date doesn't seem to be valid.\n(%1)</p><p>Do you want to correct the clock ?</p>" ). arg( TimeString::dateString ( QDate::currentDate ( ))), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
-			QCopEnvelope e ( "QPE/Application/systemtime", "setDocument(QString)" );
-			e << QString ( );		                              
-		}
-	}
 
     int rv =  a.exec();
 
-    delete d;
+    qDebug("exiting...");
+    delete s;
 
-	ODevice::inst ( )-> setSoftSuspend ( false );
+    ODevice::inst()->setSoftSuspend( false );
 
     return rv;
 }
@@ -166,20 +303,30 @@ void handle_sigterm ( int /* sig */ )
 		qApp-> quit ( );
 }
 
+#ifndef Q_OS_WIN32
 int main( int argc, char ** argv )
 {
+
     ::signal ( SIGCHLD, SIG_IGN );
 
-	::signal ( SIGTERM, handle_sigterm );
-	::signal ( SIGINT, handle_sigterm );
+    ::signal ( SIGTERM, handle_sigterm );
+    ::signal ( SIGINT, handle_sigterm );
 
-	::setsid ( );
-	::setpgid ( 0, 0 );
+    ::setsid ( );
+    ::setpgid ( 0, 0 );
 
-	::atexit ( remove_pidfile );
-	create_pidfile ( );
+    ::atexit ( remove_pidfile );
+    create_pidfile ( );
 
-    int retVal = initApplication ( argc, argv );
+    int retVal = initApplication( argc, argv );
+
+    // Have we been asked to restart?
+    if ( ServerApplication::doRestart ) {
+	for ( int fd = 3; fd < 100; fd++ )
+	    close( fd );
+
+	execl( (QPEApplication::qpeDir()+"bin/qpe").latin1(), "qpe", 0 );
+    }
 
     // Kill them. Kill them all.
     ::kill ( 0, SIGTERM );
@@ -188,4 +335,19 @@ int main( int argc, char ** argv )
 
     return retVal;
 }
+#else
+
+int main( int argc, char ** argv )
+{
+    int retVal = initApplication( argc, argv );
+
+    if ( DesktopApplication::doRestart ) {
+	qDebug("Trying to restart");
+	execl( (QPEApplication::qpeDir()+"bin\\qpe").latin1(), "qpe", 0 );
+    }
+
+    return retVal;
+}
+
+#endif
 
