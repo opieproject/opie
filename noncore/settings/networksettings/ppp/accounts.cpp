@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.5 2003-05-30 15:06:17 tille Exp $
+ * $Id: accounts.cpp,v 1.6 2003-06-02 14:10:31 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -35,17 +35,10 @@
 #include <qapplication.h>
 #include <qbuttongroup.h>
 #include <qmessagebox.h>
-//#include <klocale.h>
-#define i18n QObject::tr
-//#include <kglobal.h>
-//#include <kwin.h>
-//#include <kdialogbase.h>
 #include <qvgroupbox.h>
 
 #include "pppdata.h"
 #include "accounts.h"
-//#include "accounting.h"
-//#include "providerdb.h"
 #include "edit.h"
 
 void parseargs(char* buf, char** args);
@@ -62,94 +55,36 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
 	  this, SLOT(editaccount()));
   l1->addWidget(accountlist_l, 10);
 
-  edit_b = new QPushButton(i18n("&Edit..."), this);
+  edit_b = new QPushButton(tr("&Edit..."), this);
   connect(edit_b, SIGNAL(clicked()), SLOT(editaccount()));
-  QWhatsThis::add(edit_b, i18n("Allows you to modify the selected account"));
+  QWhatsThis::add(edit_b, tr("Allows you to modify the selected account"));
   l1->addWidget(edit_b);
 
-  new_b = new QPushButton(i18n("&New..."), this);
+  new_b = new QPushButton(tr("&New..."), this);
   connect(new_b, SIGNAL(clicked()), SLOT(newaccount()));
   l1->addWidget(new_b);
-  QWhatsThis::add(new_b, i18n("Create a new dialup connection\n"
+  QWhatsThis::add(new_b, tr("Create a new dialup connection\n"
   			      "to the Internet"));
 
-  copy_b = new QPushButton(i18n("Co&py"), this);
+  copy_b = new QPushButton(tr("Co&py"), this);
   connect(copy_b, SIGNAL(clicked()), SLOT(copyaccount()));
   l1->addWidget(copy_b);
   QWhatsThis::add(copy_b,
-		  i18n("Makes a copy of the selected account. All\n"
+		  tr("Makes a copy of the selected account. All\n"
 		       "settings of the selected account are copied\n"
 		       "to a new account, that you can modify to fit your\n"
 		       "needs"));
 
-  delete_b = new QPushButton(i18n("De&lete"), this);
+  delete_b = new QPushButton(tr("De&lete"), this);
   connect(delete_b, SIGNAL(clicked()), SLOT(deleteaccount()));
   l1->addWidget(delete_b);
   QWhatsThis::add(delete_b,
-		  i18n("<p>Deletes the selected account\n\n"
+		  tr("<p>Deletes the selected account\n\n"
 		       "<font color=\"red\"><b>Use with care!</b></font>"));
 
   QHBoxLayout *l12 = new QHBoxLayout;
   l1->addStretch(1);
   l1->addLayout(l12);
-
-//   QVBoxLayout *l121 = new QVBoxLayout;
-//   l12->addLayout(l121);
-//   l121->addStretch(1);
-  // costlabel = new QLabel(i18n("Phone costs:"), parent);
-//   costlabel->setEnabled(FALSE);
-//   l121->addWidget(costlabel);
-
-//   costedit = new QLineEdit(parent);
-//   costedit->setFocusPolicy(QWidget::NoFocus);
-//   costedit->setFixedHeight(costedit->sizeHint().height());
-//   costedit->setEnabled(FALSE);
-//   l121->addWidget(costedit);
-//   l121->addStretch(1);
-//   QString tmp = i18n("<p>This shows the accumulated phone costs\n"
-// 		     "for the selected account.\n"
-// 		     "\n"
-// 		     "<b>Important</b>: If you have more than one \n"
-// 		     "account - beware, this is <b>NOT</b> the sum \n"
-// 		     "of the phone costs of all your accounts!");
-//   QWhatsThis::add(costlabel, tmp);
-//   QWhatsThis::add(costedit, tmp);
-
-//   vollabel = new QLabel(i18n("Volume:"), parent);
-//   vollabel->setEnabled(FALSE);
-//   l121->addWidget(vollabel);
-
-//   voledit = new QLineEdit(parent,"voledit");
-//   voledit->setFocusPolicy(QWidget::NoFocus);
-//   voledit->setFixedHeight(voledit->sizeHint().height());
-//   voledit->setEnabled(FALSE);
-//   l121->addWidget(voledit);
-//   tmp = i18n("<p>This shows the number of bytes transferred\n"
-// 	     "for the selected account (not for all of your\n"
-// 	     "accounts. You can select what to display in\n"
-// 	     "the accounting dialog.\n"
-// 	     "\n"
-// 	     "<a href=\"#volaccounting\">More on volume accounting</a>");
-
-//   QWhatsThis::add(vollabel,tmp);
-//   QWhatsThis::add(voledit, tmp);
-
-//   QVBoxLayout *l122 = new QVBoxLayout;
-//   l12->addStretch(1);
-//   l12->addLayout(l122);
-
-//   l122->addStretch(1);
-//   reset = new QPushButton(i18n("&Reset..."), parent);
-//   reset->setEnabled(FALSE);
-//   connect(reset, SIGNAL(clicked()),
-// 	  this, SLOT(resetClicked()));
-//   l122->addWidget(reset);
-
-//   log = new QPushButton(i18n("&View Logs"), this);
-//   connect(log, SIGNAL(clicked()),
-// 	  this, SLOT(viewLogClicked()));
-//   l122->addWidget(log);
-//   l122->addStretch(1);
 
   //load up account list from gppdata to the list box
   if(_pppdata->count() > 0) {
@@ -159,10 +94,10 @@ AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
     }
   }
 
-//  slotListBoxSelect(accountlist_l->currentItem());
+
   qDebug("setting listview index to %i",_pppdata->currentAccountID() );
   accountlist_l->setCurrentItem( _pppdata->currentAccountID() );
-//  slotListBoxSelect( _pppdata->currentAccountID());
+  slotListBoxSelect( _pppdata->currentAccountID());
 
   l1->activate();
 }
@@ -227,60 +162,38 @@ void AccountWidget::editaccount() {
 
 
 void AccountWidget::newaccount() {
-  if(accountlist_l->count() == MAX_ACCOUNTS) {
-      QMessageBox::information(this, "sorry", i18n("Maximum number of accounts reached."));
-    return;
-  }
 
-  int result;
-//   int query = QMessageBox::information(this,
-//    i18n("Do you want to use the wizard to create the new account or the "
-// 	"standard, dialog-based setup?\n"
-// 	"The wizard is easier and sufficient in most cases. If you need "
-// 	"very special settings, you might want to try the standard, "
-// 		"dialog-based setup."),
-// 		i18n("Create New Account"),
-// 		i18n("Wizard"), i18n("Dialog Setup"), i18n("Cancel"));
+    if(accountlist_l->count() == MAX_ACCOUNTS) {
+        QMessageBox::information(this, "sorry",
+                                 tr("Maximum number of accounts reached."));
+        return;
+    }
 
-//   switch(query) {
-//   case QMessageBox::Yes:
-//     {
-//       if (_pppdata->newaccount() == -1)
-// 	return;
-// //       ProviderDB pdb(this);
-// //       result = pdb.exec();
-//       break;
-//     }
-//   case QMessageBox::No:
-  if (_pppdata->newaccount() == -1){
-      qDebug("_pppdata->newaccount() == -1");
-      return;
-  }
+    int result;
+    if (_pppdata->newaccount() == -1){
+        qDebug("_pppdata->newaccount() == -1");
+        return;
+    }
     result = doTab();
-//     break;
-//   default:
-//     return;
-//   }
 
-  if(result == QDialog::Accepted) {
-    accountlist_l->insertItem(_pppdata->accname());
-    accountlist_l->setSelected(accountlist_l->findItem(_pppdata->accname()),
-			       true);
-//    emit resetaccounts();
-    _pppdata->save();
-  } else
-    _pppdata->deleteAccount();
+    if(result == QDialog::Accepted) {
+        accountlist_l->insertItem(_pppdata->accname());
+        accountlist_l->setSelected(accountlist_l->findItem(_pppdata->accname()),true);
+
+        _pppdata->save();
+    } else
+        _pppdata->deleteAccount();
 }
 
 
 void AccountWidget::copyaccount() {
   if(accountlist_l->count() == MAX_ACCOUNTS) {
-    QMessageBox::information(this, "sorry", i18n("Maximum number of accounts reached."));
+    QMessageBox::information(this, "sorry", tr("Maximum number of accounts reached."));
     return;
   }
 
   if(accountlist_l->currentItem()<0) {
-    QMessageBox::information(this, "sorry", i18n("No account selected."));
+    QMessageBox::information(this, "sorry", tr("No account selected."));
     return;
   }
 
@@ -294,10 +207,10 @@ void AccountWidget::copyaccount() {
 
 void AccountWidget::deleteaccount() {
 
-  QString s = i18n("Are you sure you want to delete\nthe account \"%1\"?")
+  QString s = tr("Are you sure you want to delete\nthe account \"%1\"?")
     .arg(accountlist_l->text(accountlist_l->currentItem()));
 
-  if(QMessageBox::warning(this, s, i18n("Confirm")) != QMessageBox::Yes)
+  if(QMessageBox::warning(this, s, tr("Confirm")) != QMessageBox::Yes)
     return;
 
   if(_pppdata->deleteAccount(accountlist_l->text(accountlist_l->currentItem())))
@@ -312,81 +225,85 @@ void AccountWidget::deleteaccount() {
 
 
 int AccountWidget::doTab(){
-    QDialog *dlg = new QDialog( this, "newAccount", true );
+    QDialog *dlg = new QDialog( 0, "newAccount", true );
     QVBoxLayout *layout = new QVBoxLayout( dlg );
     layout->setSpacing( 0 );
     layout->setMargin( 1 );
 
     tabWindow = new QTabWidget( dlg, "tabWindow" );
-  layout->addWidget( tabWindow );
+    layout->addWidget( tabWindow );
 
     bool isnewaccount;
 
-  if(_pppdata->accname().isEmpty()) {
-      dlg->setCaption(i18n("New Account"));
-      isnewaccount = true;
-  } else {
-      QString tit = i18n("Edit Account: ");
-      tit += _pppdata->accname();
-      dlg->setCaption(tit);
-      isnewaccount = false;
-  }
-
-  dial_w = new DialWidget( _pppdata, tabWindow, isnewaccount, "Dial Setup");
-  tabWindow->addTab( dial_w, i18n("Dial") );
-  ip_w = new IPWidget( _pppdata, tabWindow, isnewaccount, i18n("IP Setup"));
-  tabWindow->addTab( ip_w, i18n("IP") );
-  gateway_w = new GatewayWidget( _pppdata, tabWindow, isnewaccount, i18n("Gateway Setup"));
-  tabWindow->addTab( gateway_w, i18n("Gateway") );
-  dns_w = new DNSWidget( _pppdata, tabWindow, isnewaccount, i18n("DNS Servers") );
-  tabWindow->addTab( dns_w, i18n("DNS") );
-  script_w = new ScriptWidget( _pppdata, tabWindow, isnewaccount, i18n("Edit Login Script"));
-  tabWindow->addTab( script_w, i18n("Login Script") );
-  ExecWidget *exec_w = new ExecWidget( _pppdata, tabWindow, isnewaccount, i18n("Execute Programs"));
-  tabWindow->addTab( exec_w, i18n("Execute") );
-//   acct = new AccountingSelector( tabWindow, isnewaccount );
-//   tabWindow->addTab( acct, i18n("Accounting"));
-
-  int result = 0;
-  bool ok = false;
-  qDebug("AccountWidget::doTab dlg->showMinimized");
-  dlg->showMinimized();
-  while (!ok){
-
-    result = dlg->exec();
-    ok = true;
-
-    if(result == QDialog::Accepted) {
-      if (script_w->check()) {
-          if(dial_w->save()) {
-		ip_w->save();
-		dns_w->save();
-		gateway_w->save();
-		script_w->save();
-		exec_w->save();
-//		acct->save();
-         } else {
-	     QMessageBox::critical(this, "error", i18n( "You must enter a unique\n"
-					    "account name"));
-		ok = false;
-	 }
-      } else {
-	      QMessageBox::critical(this, "error", i18n("Login script has unbalanced "
-					    "loop Start/End"));
-	      ok = false;
-      }
+    if(_pppdata->accname().isEmpty()) {
+        dlg->setCaption(tr("New Account"));
+        isnewaccount = true;
+    } else {
+        QString tit = tr("Edit Account: ");
+        tit += _pppdata->accname();
+        dlg->setCaption(tit);
+        isnewaccount = false;
     }
-  }
 
- delete tabWindow;
- return result;
+//   // DIAL WIDGET
+    dial_w = new DialWidget( _pppdata, tabWindow, isnewaccount, "Dial Setup");
+    tabWindow->addTab( dial_w, tr("Dial") );
+
+//   // IP WIDGET
+    ip_w = new IPWidget( _pppdata, tabWindow, isnewaccount, tr("IP Setup"));
+    tabWindow->addTab( ip_w, tr("IP") );
+
+//   // GATEWAY WIDGET
+    gateway_w = new GatewayWidget( _pppdata, tabWindow, isnewaccount, tr("Gateway Setup"));
+    tabWindow->addTab( gateway_w, tr("Gateway") );
+
+//   // DNS WIDGET
+    dns_w = new DNSWidget( _pppdata, tabWindow, isnewaccount, tr("DNS Servers") );
+    tabWindow->addTab( dns_w, tr("DNS") );
+
+//   // SCRIPT WIDGET
+   script_w = new ScriptWidget( _pppdata, tabWindow, isnewaccount, tr("Edit Login Script"));
+   tabWindow->addTab( script_w, tr("Login Script") );
+
+//   // EXECUTE WIDGET
+   ExecWidget *exec_w = new ExecWidget( _pppdata, tabWindow, isnewaccount, tr("Execute Programs"));
+   tabWindow->addTab( exec_w, tr("Execute") );
+
+    int result = 0;
+    bool ok = false;
+
+    while (!ok){
+        // dlg->showMinimized();
+        result = dlg->exec();
+        ok = true;
+
+        if(result == QDialog::Accepted) {
+            if (!script_w->check()){
+                QMessageBox::critical(this, "error", tr("<qt>Login script has unbalanced loop Start/End<qt>"));
+                ok = false;
+            } else if(!dial_w->save()) {
+                QMessageBox::critical(this, "error", tr( "You must enter a unique account name"));
+                ok = false;
+            }else{
+                ip_w->save();
+                dns_w->save();
+                gateway_w->save();
+                script_w->save();
+                exec_w->save();
+            }
+        }
+    }
+
+    delete dlg;
+
+    return result;
 }
 
 
 QString AccountWidget::prettyPrintVolume(unsigned int n) {
   int idx = 0;
-  const QString quant[] = {i18n("Byte"), i18n("KB"),
-		   i18n("MB"), i18n("GB"), QString::null};
+  const QString quant[] = {tr("Byte"), tr("KB"),
+		   tr("MB"), tr("GB"), QString::null};
 
   float n1 = n;
   while(n >= 1024 && quant[idx] != QString::null) {
@@ -409,61 +326,59 @@ QString AccountWidget::prettyPrintVolume(unsigned int n) {
 // Queries the user what to reset: costs, volume or both
 //
 /////////////////////////////////////////////////////////////////////////////
-QueryReset::QueryReset(QWidget *parent) : QDialog(parent, 0, true) {
-//  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
-  setCaption(i18n("Reset Accounting"));
+// QueryReset::QueryReset(QWidget *parent) : QDialog(parent, 0, true) {
+// //  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
+//   setCaption(tr("Reset Accounting"));
 
-  QVBoxLayout *tl = new QVBoxLayout(this, 10, 10);
-  QVGroupBox *f = new QVGroupBox(i18n("What to Reset"), this);
+//   QVBoxLayout *tl = new QVBoxLayout(this, 10, 10);
+//   QVGroupBox *f = new QVGroupBox(tr("What to Reset"), this);
 
-  QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
-//   costs = new QCheckBox(i18n("Reset the accumulated phone costs"), f);
-//   costs->setChecked(true);
-//   l1->addWidget(costs);
-//   QWhatsThis::add(costs, i18n("Check this to set the phone costs\n"
-// 			      "to zero. Typically you'll want to\n"
-// 			      "do this once a month."));
+//   QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
+// //   costs = new QCheckBox(tr("Reset the accumulated phone costs"), f);
+// //   costs->setChecked(true);
+// //   l1->addWidget(costs);
+// //   QWhatsThis::add(costs, tr("Check this to set the phone costs\n"
+// // 			      "to zero. Typically you'll want to\n"
+// // 			      "do this once a month."));
 
-//   volume = new QCheckBox(i18n("Reset volume accounting"), f);
-//   volume->setChecked(true);
-//   l1->addWidget(volume);
-//   QWhatsThis::add(volume, i18n("Check this to set the volume accounting\n"
-// 			       "to zero. Typically you'll want to do this\n"
-// 			       "once a month."));
+// //   volume = new QCheckBox(tr("Reset volume accounting"), f);
+// //   volume->setChecked(true);
+// //   l1->addWidget(volume);
+// //   QWhatsThis::add(volume, tr("Check this to set the volume accounting\n"
+// // 			       "to zero. Typically you'll want to do this\n"
+// // 			       "once a month."));
 
-  l1->activate();
+//   l1->activate();
 
-  // this activates the f-layout and sets minimumSize()
-  f->show();
+//   // this activates the f-layout and sets minimumSize()
+//   f->show();
 
-  tl->addWidget(f);
+//   tl->addWidget(f);
 
-  QButtonGroup *bbox = new QButtonGroup(this);
-//  bbox->addStretch(1);
-  QPushButton *ok = new QPushButton( bbox, i18n("OK") );
-  bbox->insert(ok);
-  ok->setDefault(true);
-  QPushButton *cancel = new QPushButton( bbox, i18n("Cancel") );
-  bbox->insert(cancel);
+//   QButtonGroup *bbox = new QButtonGroup(this);
+// //  bbox->addStretch(1);
+//   QPushButton *ok = new QPushButton( bbox, tr("OK") );
+//   bbox->insert(ok);
+//   ok->setDefault(true);
+//   QPushButton *cancel = new QPushButton( bbox, tr("Cancel") );
+//   bbox->insert(cancel);
 
-  connect(ok, SIGNAL(clicked()),
-	  this, SLOT(accepted()));
-  connect(cancel, SIGNAL(clicked()),
-	  this, SLOT(reject()));
+//   connect(ok, SIGNAL(clicked()),
+// 	  this, SLOT(accepted()));
+//   connect(cancel, SIGNAL(clicked()),
+// 	  this, SLOT(reject()));
 
-  bbox->layout();
-  tl->addWidget(bbox);
+//   bbox->layout();
+//   tl->addWidget(bbox);
 
-  // TODO: activate if KGroupBox is fixed
-  //  setFixedSize(sizeHint());
-}
+// }
 
 
-void QueryReset::accepted() {
-  int result = costs->isChecked() ? COSTS : 0;
-  result += volume->isChecked() ? VOLUME : 0;
+// void QueryReset::accepted() {
+//   int result = costs->isChecked() ? COSTS : 0;
+//   result += volume->isChecked() ? VOLUME : 0;
 
-  done(result);
-}
+//   done(result);
+// }
 
 

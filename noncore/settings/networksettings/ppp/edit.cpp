@@ -1,7 +1,7 @@
 /*
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: edit.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
+ * $Id: edit.cpp,v 1.5 2003-06-02 14:10:31 tille Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *
@@ -30,18 +30,13 @@
 #include <qwhatsthis.h>
 #include <qregexp.h>
 #include <qapplication.h>
-//#include <kiconloader.h>
 #include <qbuttongroup.h>
-//#include <klocale.h>
-#define i18n QObject::tr
 #include <qvgroupbox.h>
 #include <qhbox.h>
 #include <qdialog.h>
-//#include <kwin.h>
 
 #include "edit.h"
 #include "pppdata.h"
-//#include "newwidget.h"
 #include "iplined.h"
 #include "auth.h"
 
@@ -53,19 +48,19 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
 
   QGridLayout *tl = new QGridLayout(this, GRIDROWS, 2, 0 );//, KDialog::spacingHint());
 
-  connect_label = new QLabel(i18n("Connection name:"), this);
+  connect_label = new QLabel(tr("Connection name:"), this);
   tl->addWidget(connect_label, 0, 0);
 
   connectname_l = new QLineEdit(this);
 //  connectname_l->setMaxLength(ACCNAME_SIZE);
   tl->addWidget(connectname_l, 0, 1);
-  QString tmp = i18n("Type in a unique name for this connection");
+  QString tmp = tr("Type in a unique name for this connection");
 
   QWhatsThis::add(connect_label,tmp);
   QWhatsThis::add(connectname_l,tmp);
 
 
-  number_label = new QLabel(i18n("Phone number:"), this);
+  number_label = new QLabel(tr("Phone number:"), this);
   number_label->setAlignment(AlignTop|AlignLeft);
   tl->addWidget(number_label, 1, 0);
 
@@ -76,8 +71,8 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   lpn->addWidget(numbers);
   QVBoxLayout *lpn1 = new QVBoxLayout;
   lpn->addLayout(lpn1);
-  add = new QPushButton(i18n("&Add..."), this);
-  del = new QPushButton(i18n("&Remove"), this);
+  add = new QPushButton(tr("&Add..."), this);
+  del = new QPushButton(tr("&Remove"), this);
 
   up = new QPushButton(this);
 //FIXME:  QPixmap pm = BarIcon("up");
@@ -102,7 +97,7 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
 	  this, SLOT(selectionChanged(int)));
   numbersChanged();
 
-  tmp = i18n("<p>Specifies the phone numbers to dial. You\n"
+  tmp = tr("<p>Specifies the phone numbers to dial. You\n"
 	     "can supply multiple numbers here, simply\n"
 	     "click on \"Add\". You can arrange the\n"
 	     "order the numbers are tried by using the\n"
@@ -113,17 +108,17 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   QWhatsThis::add(number_label,tmp);
   QWhatsThis::add(numbers,tmp);
 
-  auth_l = new QLabel(i18n("Authentication:"), this);
+  auth_l = new QLabel(tr("Authentication:"), this);
   tl->addWidget(auth_l, 3, 0);
 
   auth = new QComboBox(this);
-  auth->insertItem(i18n("Script-based"));
-  auth->insertItem(i18n("PAP"));
-  auth->insertItem(i18n("Terminal-based"));
-  auth->insertItem(i18n("CHAP"));
-  auth->insertItem(i18n("PAP/CHAP"));
+  auth->insertItem(tr("Script-based"));
+  auth->insertItem(tr("PAP"));
+  auth->insertItem(tr("Terminal-based"));
+  auth->insertItem(tr("CHAP"));
+  auth->insertItem(tr("PAP/CHAP"));
   tl->addWidget(auth, 3, 1);
-  tmp = i18n("<p>Specifies the method used to identify yourself to\n"
+  tmp = tr("<p>Specifies the method used to identify yourself to\n"
 	     "the PPP server. Most universities still use\n"
 	     "<b>Terminal</b>- or <b>Script</b>-based authentication,\n"
 	     "while most ISP use <b>PAP</b> and/or <b>CHAP</b>. If\n"
@@ -136,11 +131,11 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
   QWhatsThis::add(auth_l,tmp);
   QWhatsThis::add(auth,tmp);
 
-  store_password = new QCheckBox(i18n("Store password"), this);
+  store_password = new QCheckBox(tr("Store password"), this);
   store_password->setChecked(true);
   tl->addMultiCellWidget(store_password, 4, 4, 0, 1, AlignRight);
   QWhatsThis::add(store_password,
-		  i18n("<p>When this is turned on, your ISP password\n"
+		  tr("<p>When this is turned on, your ISP password\n"
 		       "will be saved in <i>kppp</i>'s config file, so\n"
 		       "you do not need to type it in every time.\n"
 		       "\n"
@@ -149,7 +144,7 @@ DialWidget::DialWidget( PPPData *pd, QWidget *parent, bool isnewaccount
 		       "readable only to you. Make sure nobody\n"
 		       "gains access to this file!"));
 
-  pppdargs = new QPushButton(i18n("Customize pppd Arguments..."), this);
+  pppdargs = new QPushButton(tr("Customize pppd Arguments..."), this);
   connect(pppdargs, SIGNAL(clicked()), SLOT(pppdargsbutton()));
   tl->addMultiCellWidget(pppdargs, 5, 5, 0, 1, AlignCenter);
 
@@ -278,14 +273,8 @@ ExecWidget::ExecWidget(PPPData *pd, QWidget *parent, bool isnewaccount, const ch
 {
     QVBoxLayout *tl = new QVBoxLayout(this, 0 );//, KDialog::spacingHint());
 
-  QLabel *l = new QLabel(\
-i18n("Here you can select commands to run at certain stages of the\n"
-     "connection. The commands are run with your real user id, so\n"
-     "you cannot run any commands here requiring root permissions\n"
-     "(unless, of course, you are root).\n\n"
-     "Be sure to supply the whole path to the program otherwise\n"
-     "kppp might be unable to find it."), this);
-//  l->setMinimumHeight(l->sizeHint().height());
+  QLabel *l = new QLabel( tr("Here you can select commands to run at certain stages of the connection. The commands are run with your real user id, so you cannot run any commands here requiring root permissions (unless, of course, you are root).<br><br>Be sure to supply the whole path to the program otherwise we might be unable to find it."), this);
+
   tl->addWidget(l);
   tl->addStretch(1);
 
@@ -294,13 +283,13 @@ i18n("Here you can select commands to run at certain stages of the\n"
   l1->setColStretch(0, 0);
   l1->setColStretch(1, 1);
 
-  before_connect_l = new QLabel(i18n("Before connect:"), this);
+  before_connect_l = new QLabel(tr("Before connect:"), this);
   before_connect_l->setAlignment(AlignVCenter);
   l1->addWidget(before_connect_l, 0, 0);
   before_connect = new QLineEdit(this);
 //  before_connect->setMaxLength(COMMAND_SIZE);
   l1->addWidget(before_connect, 0, 1);
-  QString tmp = i18n("Allows you to run a program <b>before</b> a connection\n"
+  QString tmp = tr("Allows you to run a program <b>before</b> a connection\n"
 	     "is established. It is called immediately before\n"
 	     "dialing has begun.\n\n"
 	     "This might be useful, e.g. to stop HylaFAX blocking the\n"
@@ -309,13 +298,13 @@ i18n("Here you can select commands to run at certain stages of the\n"
   QWhatsThis::add(before_connect_l,tmp);
   QWhatsThis::add(before_connect,tmp);
 
-  command_label = new QLabel(i18n("Upon connect:"), this);
+  command_label = new QLabel(tr("Upon connect:"), this);
   command_label->setAlignment(AlignVCenter);
   l1->addWidget(command_label, 1, 0);
   command = new QLineEdit(this);
 //  command->setMaxLength(COMMAND_SIZE);
   l1->addWidget(command, 1, 1);
-  tmp = i18n("Allows you to run a program <b>after</b> a connection\n"
+  tmp = tr("Allows you to run a program <b>after</b> a connection\n"
 	     "is established. When your program is called, all\n"
 	     "preparations for an Internet connection are finished.\n"
 	     "\n"
@@ -324,21 +313,21 @@ i18n("Here you can select commands to run at certain stages of the\n"
   QWhatsThis::add(command_label,tmp);
   QWhatsThis::add(command,tmp);
 
-  predisconnect_label = new QLabel(i18n("Before disconnect:"),
+  predisconnect_label = new QLabel(tr("Before disconnect:"),
 				 this);
   predisconnect_label->setAlignment(AlignVCenter);
   l1->addWidget(predisconnect_label, 2, 0);
   predisconnect = new QLineEdit(this);
 //  predisconnect->setMaxLength(COMMAND_SIZE);
   l1->addWidget(predisconnect, 2, 1);
-  tmp = i18n("Allows you to run a program <b>before</b> a connection\n"
+  tmp = tr("Allows you to run a program <b>before</b> a connection\n"
 	     "is closed. The connection will stay open until\n"
 	     "the program exits.");
 
   QWhatsThis::add(predisconnect_label,tmp);
   QWhatsThis::add(predisconnect,tmp);
 
-  discommand_label = new QLabel(i18n("Upon disconnect:"),
+  discommand_label = new QLabel(tr("Upon disconnect:"),
 			      this);
   discommand_label->setAlignment(AlignVCenter);
   l1->addWidget(discommand_label, 3, 0);
@@ -346,7 +335,7 @@ i18n("Here you can select commands to run at certain stages of the\n"
   discommand = new QLineEdit(this);
 //  discommand->setMaxLength(COMMAND_SIZE);
   l1->addWidget(discommand, 3, 1);
-  tmp = i18n("Allows you to run a program <b>after</b> a connection\n"
+  tmp = tr("Allows you to run a program <b>after</b> a connection\n"
 	     "has been closed.");
 
   QWhatsThis::add(discommand_label,tmp);
@@ -390,7 +379,7 @@ IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char 
   QVBoxLayout *topLayout = new QVBoxLayout(this);
   topLayout->setSpacing( 3 );//KDialog::spacingHint());
 
-  box = new QVGroupBox(i18n("Configuration"), this);
+  box = new QVGroupBox(tr("Configuration"), this);
 //  box->setInsideSpacing( 1 );//KDialog::spacingHint());
 
   rb = new QButtonGroup(this);
@@ -399,9 +388,9 @@ IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char 
 	  SLOT(hitIPSelect(int)));
 
   dynamicadd_rb = new QRadioButton(box);
-  dynamicadd_rb->setText(i18n("Dynamic IP address"));
+  dynamicadd_rb->setText(tr("Dynamic IP address"));
   QWhatsThis::add(dynamicadd_rb,
-		  i18n("Select this option when your computer gets an\n"
+		  tr("Select this option when your computer gets an\n"
 		       "internet address (IP) every time a\n"
 		       "connection is made.\n"
 		       "\n"
@@ -409,11 +398,11 @@ IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char 
 		       "this method, so this should be turned on."));
 
   staticadd_rb = new QRadioButton(box);
-  staticadd_rb->setText(i18n("Static IP address"));
+  staticadd_rb->setText(tr("Static IP address"));
   rb->insert(dynamicadd_rb, 0);
   rb->insert(staticadd_rb, 1);
   QWhatsThis::add(staticadd_rb,
-		  i18n("Select this option when your computer has a\n"
+		  tr("Select this option when your computer has a\n"
 		       "fixed internet address (IP). Most computers\n"
 		       "don't have this, so you should probably select\n"
 		       "dynamic IP addressing unless you know what you\n"
@@ -423,8 +412,8 @@ IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char 
   QGridLayout *ipLayout = new QGridLayout(ipWidget, 2, 2);
   ipLayout->setSpacing( 2 );//KDialog::spacingHint());
 
-  ipaddress_label = new QLabel(i18n("IP address:"), ipWidget);
-  QString tmp = i18n("If your computer has a permanent internet\n"
+  ipaddress_label = new QLabel(tr("IP address:"), ipWidget);
+  QString tmp = tr("If your computer has a permanent internet\n"
 	     "address, you must supply your IP address here.");
   ipLayout->addWidget(ipaddress_label, 0, 0);
 
@@ -434,8 +423,8 @@ IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char 
   QWhatsThis::add(ipaddress_label,tmp);
   QWhatsThis::add(ipaddress_l,tmp);
 
-  sub_label = new QLabel(i18n("Subnet mask:"), ipWidget);
-  tmp = i18n("<p>If your computer has a static Internet address,\n"
+  sub_label = new QLabel(tr("Subnet mask:"), ipWidget);
+  tmp = tr("<p>If your computer has a static Internet address,\n"
 	     "you must supply a network mask here. In almost\n"
 	     "all cases this netmask will be <b>255.255.255.0</b>,\n"
 	     "but your mileage may vary.\n"
@@ -449,13 +438,13 @@ IPWidget::IPWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char 
   QWhatsThis::add(sub_label,tmp);
   QWhatsThis::add(subnetmask_l,tmp);
 
-  autoname = new QCheckBox(i18n("Auto-configure hostname from this IP"), this);
+  autoname = new QCheckBox(tr("Auto-configure hostname from this IP"), this);
   autoname->setChecked(_pppdata->autoname());
   connect(autoname,SIGNAL(toggled(bool)),
 	  this,SLOT(autoname_t(bool)));
 
   QWhatsThis::add(autoname,
-		  i18n("<p>Whenever you connect, this reconfigures\n"
+		  tr("<p>Whenever you connect, this reconfigures\n"
 		       "your hostname to match the IP address you\n"
 		       "got from the PPP server. This may be useful\n"
 		       "if you need to use a protocol which depends\n"
@@ -496,14 +485,14 @@ void IPWidget::autoname_t(bool on) {
   // big-fat warning when selecting the auto configure hostname option
   if(on && !was_warned) {
     QMessageBox::information(this,
-			 i18n("Selecting this option might cause some weird "
+			 tr("Selecting this option might cause some weird "
 			      "problems with the X-server and applications "
 			      "while kppp is connected. Don't use it until "
 			      "you know what you are doing!\n"
 			      "For more information take a look at the "
 			      "handbook (or help) in the section \"Frequently "
 			      "asked questions\"."),
-			 i18n("Warning"));
+			 tr("Warning"));
     was_warned = true;
   }
 }
@@ -541,16 +530,15 @@ void IPWidget::hitIPSelect( int i ) {
 DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const char *name )
     : QWidget(parent, name), _pppdata(pd)
 {
-  //  box = new QGroupBox(this);
-    QGridLayout *tl = new QGridLayout(this, 7, 2, 0 );//, KDialog::spacingHint());
+    QGridLayout *tl = new QGridLayout(this, 7, 2, 0 );
 
-  dnsdomain_label = new QLabel(i18n("Domain name:"), this);
+  dnsdomain_label = new QLabel(tr("Domain name:"), this);
   tl->addWidget(dnsdomain_label, 0, 0);
 
   dnsdomain = new QLineEdit(this);
-//  dnsdomain->setMaxLength(DOMAIN_SIZE);
+
   tl->addWidget(dnsdomain, 0, 1);
-  QString tmp = i18n("If you enter a domain name here, this domain\n"
+  QString tmp = tr("If you enter a domain name here, this domain\n"
 		     "name is used for your computer while you are\n"
 		     "connected. When the connection is closed, the\n"
 		     "original domain name of your computer is\n"
@@ -562,25 +550,24 @@ DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const cha
   QWhatsThis::add(dnsdomain_label,tmp);
   QWhatsThis::add(dnsdomain,tmp);
 
-  conf_label = new QLabel(i18n("Configuration:"), this);
+  conf_label = new QLabel(tr("Configuration:"), this);
   tl->addWidget(conf_label, 1, 0);
 
   bg = new QButtonGroup("Group", this);
   connect(bg, SIGNAL(clicked(int)), SLOT(DNS_Mode_Selected(int)));
   bg->hide();
 
-  autodns = new QRadioButton(i18n("Automatic"), this);
+  autodns = new QRadioButton(tr("Automatic"), this);
   bg->insert(autodns, 0);
   tl->addWidget(autodns, 1, 1);
-  // no automatic DNS detection for pppd < 2.3.7
   if(!_pppdata->pppdVersionMin(2, 3, 7))
     autodns->setEnabled(false);
 
-  mandns = new QRadioButton(i18n("Manual"), this);
+  mandns = new QRadioButton(tr("Manual"), this);
   bg->insert(mandns, 1);
   tl->addWidget(mandns, 2, 1);
 
-  dns_label = new QLabel(i18n("DNS IP address:"), this);
+  dns_label = new QLabel(tr("DNS IP address:"), this);
   tl->addWidget(dns_label, 3, 0);
 
   QHBoxLayout *l2 = new QHBoxLayout;
@@ -592,7 +579,7 @@ DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const cha
 	  SLOT(DNS_Edit_Changed(const QString &)));
   l2->addWidget(dnsipaddr, 1);
   l2->addStretch(1);
-  tmp = i18n("<p>Allows you to specify a new DNS server to be\n"
+  tmp = tr("<p>Allows you to specify a new DNS server to be\n"
 	     "used while you are connected. When the\n"
 	     "connection is closed, this DNS entry will be\n"
 	     "removed again.\n"
@@ -605,29 +592,23 @@ DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const cha
 
   QHBoxLayout *l1 = new QHBoxLayout;
   tl->addLayout(l1, 4, 1);
-  add = new QPushButton(i18n("Add"), this);
+  add = new QPushButton(tr("Add"), this);
   connect(add, SIGNAL(clicked()), SLOT(adddns()));
-//   int width = add->sizeHint().width();
-//   width = QMAX(width,60);
-//   add->setMinimumWidth(width);
   l1->addWidget(add);
-  l1->addStretch(1);
+//  l1->addStretch(1);
   QWhatsThis::add(add,
-		  i18n("Click this button to add the DNS server\n"
+		  tr("Click this button to add the DNS server\n"
 		       "specified in the field above. The entry\n"
 		       "will then be added to the list below"));
 
-  remove = new QPushButton(i18n("Remove"), this);
+  remove = new QPushButton(tr("Remove"), this);
   connect(remove, SIGNAL(clicked()), SLOT(removedns()));
-//   width = remove->sizeHint().width();
-//   width = QMAX(width,60);
-//   remove->setMinimumWidth(width);
   l1->addWidget(remove);
   QWhatsThis::add(remove,
-		  i18n("Click this button to remove the selected DNS\n"
+		  tr("Click this button to remove the selected DNS\n"
 		       "server entry from the list below"));
 
-  servers_label = new QLabel(i18n("DNS address list:"), this);
+  servers_label = new QLabel(tr("DNS address list:"), this);
   servers_label->setAlignment(AlignTop|AlignLeft);
   tl->addWidget(servers_label, 5, 0);
 
@@ -636,20 +617,19 @@ DNSWidget::DNSWidget( PPPData *pd, QWidget *parent, bool isnewaccount, const cha
   connect(dnsservers, SIGNAL(highlighted(int)),
 	  SLOT(DNS_Entry_Selected(int)));
   tl->addWidget(dnsservers, 5, 1);
-  tmp = i18n("<p>This shows all defined DNS servers to use\n"
+  tmp = tr("<p>This shows all defined DNS servers to use\n"
 	     "while you are connected. Use the <b>Add</b> and\n"
 	     "<b>Remove</b> buttons to modify the list");
 
   QWhatsThis::add(servers_label,tmp);
   QWhatsThis::add(dnsservers,tmp);
 
-  exdnsdisabled_toggle = new QCheckBox(i18n( \
-"Disable existing DNS servers during connection"),
-				     this);
+  exdnsdisabled_toggle = new QCheckBox(tr("Disable DNS servers during connection"), this);
+  // exdnsdisabled_toggle = new QCheckBox(tr("Disable existing DNS servers during connection"), this);
   exdnsdisabled_toggle->setChecked(_pppdata->exDNSDisabled());
   tl->addMultiCellWidget(exdnsdisabled_toggle, 6, 6, 0, 1, AlignCenter);
   QWhatsThis::add(exdnsdisabled_toggle,
-		  i18n("<p>When this option is selected, all DNS\n"
+		  tr("<p>When this option is selected, all DNS\n"
 		       "servers specified in <tt>/etc/resolv.conf</tt> are\n"
 		       "temporary disabled while the dialup connection\n"
 		       "is established. After the connection is\n"
@@ -737,20 +717,20 @@ GatewayWidget::GatewayWidget( PPPData *pd, QWidget *parent, bool isnewaccount, c
     : QWidget(parent, name), _pppdata(pd)
 {
   QVBoxLayout *topLayout = new QVBoxLayout(this);
-  topLayout->setSpacing( 2 );//KDialog::spacingHint());
+  topLayout->setSpacing( 2 );
+  topLayout->setMargin( 0 );
 
-  box = new QVGroupBox(i18n("Configuration"), this);
-//  box->setInsideSpacing( 2 );//KDialog::spacingHint());
+  box = new QVGroupBox(tr("Configuration"), this);
 
   rb = new QButtonGroup(this);
   rb->hide();
   connect(rb, SIGNAL(clicked(int)), SLOT(hitGatewaySelect(int)));
 
   defaultgateway = new QRadioButton(box);
-  defaultgateway->setText(i18n("Default gateway"));
+  defaultgateway->setText(tr("Default gateway"));
   rb->insert(defaultgateway, 0);
   QWhatsThis::add(defaultgateway,
-		  i18n("This makes the PPP peer computer (the computer\n"
+		  tr("This makes the PPP peer computer (the computer\n"
 		       "you are connected to with your modem) to act as\n"
 		       "a gateway. Your computer will send all packets not\n"
 		       "going to a computer inside your local net to this\n"
@@ -761,20 +741,20 @@ GatewayWidget::GatewayWidget( PPPData *pd, QWidget *parent, bool isnewaccount, c
 
 
   staticgateway = new QRadioButton(box);
-  staticgateway->setText(i18n("Static gateway"));
+  staticgateway->setText(tr("Static gateway"));
   rb->insert(staticgateway, 1);
   QWhatsThis::add(staticgateway,
-		  i18n("<p>Allows you to specify which computer you want\n"
+		  tr("<p>Allows you to specify which computer you want\n"
 		       "to use as gateway (see <i>Default Gateway</i> above)"));
 
   QHBox *gateBox = new QHBox(box);
-  gate_label = new QLabel(i18n("Gateway IP address:"), gateBox);
+  gate_label = new QLabel(tr("Gateway IP address:"), gateBox);
   gatewayaddr = new IPLineEdit(gateBox);
 
-  defaultroute = new QCheckBox(i18n("Assign the default route to this gateway"),
+  defaultroute = new QCheckBox(tr("Assign the default route to this gateway"),
 			     this);
   QWhatsThis::add(defaultroute,
-		  i18n("If this option is enabled, all packets not\n"
+		  tr("If this option is enabled, all packets not\n"
 		       "going to the local net are routed through\n"
 		       "the PPP connection.\n"
 		       "\n"
@@ -836,13 +816,13 @@ ScriptWidget::ScriptWidget( PPPData *pd, QWidget *parent, bool isnewaccount, con
   // insert equal-sized buttons
   QHBoxLayout *hl = new QHBoxLayout( this );
   tl->addLayout( hl );
-  add = new QPushButton( i18n("Add"), this );
+  add = new QPushButton( tr("Add"), this );
   hl->addWidget( add );
   connect(add, SIGNAL(clicked()), SLOT(addButton()));
-  insert = new QPushButton( i18n("Insert"), this );
+  insert = new QPushButton( tr("Insert"), this );
   hl->addWidget( insert );
   connect(insert, SIGNAL(clicked()), SLOT(insertButton()));
-  remove = new QPushButton( i18n("Remove"), this );
+  remove = new QPushButton( tr("Remove"), this );
   hl->addWidget( remove );
   connect(remove, SIGNAL(clicked()), SLOT(removeButton()));
 
@@ -1155,7 +1135,7 @@ void ScriptWidget::removeButton() {
 PhoneNumberDialog::PhoneNumberDialog(QWidget *parent)
     : QDialog(parent,"PhoneNumberDialog",true)
 {
-    setCaption( i18n("Add Phone Number") );
+    setCaption( tr("Add Phone Number") );
 
 
   QVBoxLayout *layout = new QVBoxLayout( this );

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.7 2003-06-02 11:57:59 tille Exp $
+ * $Id: pppdata.cpp,v 1.8 2003-06-02 14:10:31 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -130,7 +130,7 @@ void PPPData::cancel() {
 QString PPPData::readConfig(const QString &group, const QString &key,
                             const QString &defvalue = "")
 {
-    qDebug("PPPData::readConfig key >%s< group >%s<",key.latin1(), group.latin1());
+//    qDebug("PPPData::readConfig key >%s< group >%s<",key.latin1(), group.latin1());
     QString idx = SEP.arg(group).arg(key);
     if (stringEntries.find(idx) != stringEntries.end())
         return stringEntries[idx];
