@@ -1,9 +1,9 @@
 /*
-** Author: Carsten Schneider <zcarsten@gmx.net>
+** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: main.cpp,v 1.2 2003-07-24 16:54:29 zcarsten Exp $
+** $Id: main.cpp,v 1.3 2003-08-14 07:19:50 zcarsten Exp $
 **
-** Homepage: http://z-soft.z-portal.info/zsafe/index.html
+** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 */
 
 
@@ -78,6 +78,10 @@ int main( int argc, char ** argv )
     char buf[128];
     sprintf (buf, "Width: %d Height: %d\n", DeskW, DeskH);
     qWarning (buf);
+
+#ifdef JPATCH_HDE
+    // nothings
+#else
     if (DeskW > 240) 
     {
        DeskW -= 20;
@@ -85,6 +89,8 @@ int main( int argc, char ** argv )
        sprintf (buf, "Changed width: %d Height: %d\n", DeskW, DeskH);
        qWarning (buf);
     }
+#endif
+
 #endif
 
     ZSafe mw;
