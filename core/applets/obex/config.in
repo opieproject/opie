@@ -1,4 +1,0 @@
-  config OBEXAPPLET
-    boolean "Obex"
-    default "y"
-    depends ( LIBQPE || LIBQPE-X11 )
