@@ -259,12 +259,12 @@ Keymap::~Keymap() {
 bool Keymap::filter(int unicode, int keycode, int modifiers,
     bool isPress, bool autoRepeat) {
 
-    odebug << "filter: >>> unicode=" << unicode << ", keycode=" << keycode
-           << ", modifiers=" << modifiers << ", ispressed=" << isPress << oendl;
-
     if (!enabled) {
         return false;
     }
+
+    odebug << "filter: >>> unicode=" << unicode << ", keycode=" << keycode
+           << ", modifiers=" << modifiers << ", ispressed=" << isPress << oendl;
 
     // the second check is workaround to make suspend work if
     // the user pressed it right after he did resume. for some
@@ -278,7 +278,8 @@ bool Keymap::filter(int unicode, int keycode, int modifiers,
 
     Action* action = currentState->get(keycode, isPress, true);
     if (action==0 || !action->isDefined()) {
-        return true;
+        odebug << "no action defined for that"<<oendl;
+        return false;
     }
 
     if (action->hasEvent()) {
