@@ -7,11 +7,13 @@ Besides this requirement we would like to be able to execute 'scripts'
 in a session.
 A script would just write to the TEmulation and then be sent via
 an IOlayer.
-Then we would like to send keys? Do we want that?
-> what kind of keys would we send?
 
 We want a modular architecture which might support plugins in
 the future
+
+should we have a general opie-console setting dialog where you configure
+general things like where the tabs are, the profiles, and the default
+keyboard?
 
 
 (Almost) DONE:
