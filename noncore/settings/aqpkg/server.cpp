@@ -165,12 +165,14 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
     {
         in.getline( line, 1000 );
         if ( in.eof() )
-            continue;
+            break;
 
         k[0] = '\0';
         v[0] = '\0';
 
-        sscanf( line, "%[^:]: %[^\n]", k, v );
+        if ( sscanf( line, "%[^:]: %[^\n]", k, v ) < 2 )
+            break;
+        
         key = k;
         value = v;
         key = key.stripWhiteSpace();
