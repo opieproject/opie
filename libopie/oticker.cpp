@@ -44,7 +44,7 @@
 
 #include "oticker.h"
 
-OTicker::OTicker( QWidget* parent=0 )
+OTicker::OTicker( QWidget* parent )
         : QFrame( parent ) {
 
 //    setFrameStyle( NoFrame/*WinPanel | Sunken */);
