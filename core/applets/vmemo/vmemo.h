@@ -11,7 +11,7 @@
 *********************************************************************************************/
 
 /*
- * $Id: vmemo.h,v 1.7 2002-04-20 14:19:27 llornkcor Exp $
+ * $Id: vmemo.h,v 1.8 2002-05-19 17:00:41 llornkcor Exp $
  */
 
 #ifndef __VMEMO_H__
@@ -37,14 +37,15 @@ public slots:
   void mousePressEvent( QMouseEvent * );
   void mouseReleaseEvent( QMouseEvent * );
   void receive( const QCString &msg, const QByteArray &data );
-
+  bool startRecording();
+  void stopRecording();
 private:
   bool useAlerts;
   void paintEvent( QPaintEvent* );
 
   int openDSP();
   int openWAV(const char *filename);
-
+  bool fromToggle;
   QPixmap vmemoPixmap;
   QCopChannel *myChannel;
   bool systemZaurus;

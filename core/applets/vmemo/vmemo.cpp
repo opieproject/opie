@@ -11,7 +11,7 @@
 ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.24 2002-05-18 01:36:32 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.25 2002-05-19 17:00:41 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -197,29 +197,39 @@ static char * vmemo_xpm[] = {
 VMemo::VMemo( QWidget *parent, const char *_name )
     : QWidget( parent, _name )
 {
-  setFixedHeight( 18 );
-  setFixedWidth( 14 );
+    setFixedHeight( 18 );
+    setFixedWidth( 14 );
   
-  recording = FALSE;
+    recording = FALSE;
   
-  struct utsname name; /* check for embedix kernel running on the zaurus*/
-  if (uname(&name) != -1) {
-      QString release=name.release;
-      if(release.find("embedix",0,TRUE) !=-1)
-          systemZaurus=TRUE;
-      else {
-          systemZaurus=FALSE;
-          myChannel = new QCopChannel( "QPE/VMemo", this );
-          connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
-                   this, SLOT(receive(const QCString&, const QByteArray&)) );
+    struct utsname name; /* check for embedix kernel running on the zaurus*/
+    if (uname(&name) != -1) {
+        QString release=name.release;
+        Config vmCfg("VMemo");
+        vmCfg.setGroup("Defaults");
+  
+        if(release.find("embedix",0,TRUE) !=-1) {
+            int toggleKey = vmCfg.readNumEntry("toggleKey", -1);
+            systemZaurus=TRUE;
+        } else {
+            int toggleKey = vmCfg.readNumEntry("toggleKey", 4096);
+//default key for ipaq record button is Key_Escape = 4096
+            systemZaurus=FALSE;
+        }
+      
+        myChannel = new QCopChannel( "QPE/VMemo", this );
+        connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
+                 this, SLOT(receive(const QCString&, const QByteArray&)) );
 
-//              // Register the REC key press, for ipaq only
-          QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
-          e << 4096;
-          e << QString("QPE/VMemo");
-          e << QString("toggleRecord()");
-      }
-  }
+        if( toggleKey != -1 ) {
+            QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
+//           e << 4096; // Key_Escape
+//          e << Key_F5; //4148
+            e << toggleKey;
+            e << QString("QPE/VMemo");
+            e << QString("toggleRecord()");
+        }
+    }
 }
 
 VMemo::~VMemo()
@@ -228,13 +238,16 @@ VMemo::~VMemo()
 
 void VMemo::receive( const QCString &msg, const QByteArray &data )
 {
-  QDataStream stream( data, IO_ReadOnly );
-  if (msg == "toggleRecord()")  {
-    if (recording)
-    mouseReleaseEvent(NULL);
-    else
-    mousePressEvent(NULL);
-  }
+    QDataStream stream( data, IO_ReadOnly );
+    if (msg == "toggleRecord()")  {
+        if (recording) {
+            fromToggle = TRUE;
+            stopRecording();
+        }  else {
+            fromToggle = TRUE;
+            startRecording();
+        }
+    }
 }
 
 void VMemo::paintEvent( QPaintEvent* )
@@ -243,23 +256,20 @@ void VMemo::paintEvent( QPaintEvent* )
   p.drawPixmap( 0, 1,( const char** )  vmemo_xpm );
 }
 
-void VMemo::mousePressEvent( QMouseEvent *me )
+void VMemo::mousePressEvent( QMouseEvent * )
 {
-  // just to be safe
-    if (recording) {
-        recording = FALSE;
-        return;
-    }
+    startRecording();
+}
 
-      /* 
-         No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
-         mousePressEvent and mouseReleaseEvent with a NULL parameter.
-      */
-//  #if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
-//          if (!systemZaurus )
-//              return;
-//  #endif
-    
+void VMemo::mouseReleaseEvent( QMouseEvent * )
+{
+    stopRecording();
+}
+
+bool VMemo::startRecording() {
+
+    if ( recording)
+        return FALSE;;    
      Config config( "Sound" );
      config.setGroup( "System" );
      useAlerts = config.readBoolEntry("Alert");
@@ -276,7 +286,7 @@ void VMemo::mousePressEvent( QMouseEvent *me )
     if (openDSP() == -1)  {
         QMessageBox::critical(0, "VMemo", "Could not open dsp device.\n"+errorMsg, "Abort");
         recording = FALSE;
-        return;
+        return FALSE;
     }
   
   Config vmCfg("VMemo");
@@ -285,8 +295,8 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   QDateTime dt = QDateTime::currentDateTime();
 
   QString fName;
-  Config cfg( "Sound" );
-  cfg.setGroup( "System" );
+   Config cfg( "Sound" );
+   cfg.setGroup( "System" );
    fName = QPEApplication::documentDir() ;
   fileName = cfg.readEntry("RecLocation", fName);
 
@@ -297,12 +307,6 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   qDebug("filename will be "+fileName);   
    if( fileName.right(1).find('/') == -1)
            fileName+="/";
-
-//   if(systemZaurus) 
-//   fileName=vmCfg.readEntry("Dir", "/mnt/cf/"); // zaurus does not have /mnt/ramfs
-//   else
-//   fileName=vmCfg.readEntry("Dir", "/mnt/ramfs/");
-  
   fName = "vm_"+ dt.toString()+ ".wav";
   
   fileName+=fName;
@@ -318,7 +322,7 @@ void VMemo::mousePressEvent( QMouseEvent *me )
     err += fileName;
     QMessageBox::critical(0, "VMemo", err, "Abort");
     close(dsp);
-    return;
+    return FALSE;
   }
   
   QArray<int> cats(1);
@@ -334,10 +338,10 @@ void VMemo::mousePressEvent( QMouseEvent *me )
   l.writeLink();
   
   record();
+  return TRUE;
 }
 
-void VMemo::mouseReleaseEvent( QMouseEvent * )
-{
+void VMemo::stopRecording() {
   recording = FALSE;
 }
 
@@ -479,7 +483,7 @@ void VMemo::record(void)
             qApp->processEvents();
         }
 
-    } else {
+    } else { // this is specific for ipaqs that do not have 8 bit capabilities
 
         signed short sound[512], monoBuffer[512];
 
