@@ -5,10 +5,12 @@ DESTDIR = $(OPIEDIR)/bin
 
 HEADERS = gif_slave.h slaveiface.h slavereciever.h \
 	  thumbnailtool.h png_slave.h jpeg_slave.h \
-	  ../iface/slaveiface.h
+	  ../iface/slaveiface.h \
+      bmp_slave.h
 SOURCES = main.cpp gif_slave.cpp   slavereciever.cpp \
 	  slaveiface.cpp thumbnailtool.cpp png_slave.cpp \
-	  jpeg_slave.cpp
+	  jpeg_slave.cpp \
+      bmp_slave.cpp
 
 INCLUDEPATH += $(OPIEDIR)/include ../
 DEPENDSPATH += $(OPIEDIR)/include
