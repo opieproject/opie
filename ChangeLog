@@ -4,6 +4,14 @@
 	* Integrated the new security framework into libopie2 (zecke)
 	* Converted the launcher to use the new security framework (zecke)
 
+	New Features
+	------------
+
+	Fixed Bugs
+	--------
+	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers) 
+	* #1370 - Pimconverter now reacts on cancel key (eilers)
+
 2004-07-06	The Opie Team <opie@handhelds.org>
 
 	* Tagged as Version 1.1.4 (devel)
@@ -31,8 +39,6 @@
 	* #1345 - Networksettingsplugin wlan plugin dependency on libpcap0 (mickeyl)
 	* #1348 - Datebook dependency on libopiedb2 (chicken)
 	* #1328 - Switched SQLDatabase and VCards char encoding from latin1 to unicode (eilers)
-	* #1361 - Fixed auto upercase in Opie-Addressbook (eilers) 
-	* #1370 - Pimconverter now reacts on cancel key (eilers)
 
 2004-04-25	The Opie Team <opie@handhelds.org>
 
