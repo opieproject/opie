@@ -356,12 +356,12 @@ Use esta opção apenas se necessitar dela.</translation>
     <name>DevicesWidget</name>
     <message>
         <source>Allows you to modify the selected account</source>
-        <translation type="unfinished">Permite modificar a conta selecionada</translation>
+        <translation type="obsolete">Permite modificar a conta selecionada</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
-        <translation type="unfinished">Criar uma nova ligação à internet
+        <translation type="obsolete">Criar uma nova ligação à internet
 via modem</translation>
     </message>
     <message>
@@ -369,7 +369,7 @@ via modem</translation>
 settings of the selected account are copied
 to a new account, that you can modify to fit your
 needs</source>
-        <translation type="unfinished">Cria uma cópia da conta selecionada. 
+        <translation type="obsolete">Cria uma cópia da conta selecionada. 
 Serão copiados todos os valores da conta,
 que poderá modificar</translation>
     </message>
@@ -377,7 +377,7 @@ que poderá modificar</translation>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Apaga a conta selecionada&lt;/p&gt;</translation>
+        <translation type="obsolete">&lt;p&gt;Apaga a conta selecionada&lt;/p&gt;</translation>
     </message>
     <message>
         <source>No devices selected.</source>
@@ -410,7 +410,32 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>You must enter a unique account name</source>
-        <translation type="unfinished">O nome da conta tem de ser único</translation>
+        <translation type="obsolete">O nome da conta tem de ser único</translation>
+    </message>
+    <message>
+        <source>Allows you to modify the selected device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Makes a copy of the selected device. All
+settings of the selected device are copied
+to a new device, that you can modify to fit your
+needs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Deletes the selected device
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a unique device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

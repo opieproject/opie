@@ -282,28 +282,6 @@ some circumstances.</source>
 <context>
     <name>DevicesWidget</name>
     <message>
-        <source>Allows you to modify the selected account</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Create a new dialup connection
-to the Internet</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Makes a copy of the selected account. All
-settings of the selected account are copied
-to a new account, that you can modify to fit your
-needs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;p&gt;Deletes the selected account
-
-&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>No devices selected.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -333,7 +311,28 @@ the device &quot;%1&quot;?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>You must enter a unique account name</source>
+        <source>Allows you to modify the selected device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Makes a copy of the selected device. All
+settings of the selected device are copied
+to a new device, that you can modify to fit your
+needs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Deletes the selected device
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a unique device name</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1245,9 +1244,6 @@ Ask your system administrator to create this file (can be empty) with appropriat
         <source>You must specify a telephone number!</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>QObject::ModemWidget</name>
 </context>
 <context>
     <name>ScriptWidget</name>

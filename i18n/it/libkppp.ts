@@ -363,12 +363,12 @@ questa opzione, ma può tornare utile in certe circostanze.</translation>
     <name>DevicesWidget</name>
     <message>
         <source>Allows you to modify the selected account</source>
-        <translation type="unfinished">Permette di modificare l&apos;account selezionato</translation>
+        <translation type="obsolete">Permette di modificare l&apos;account selezionato</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
-        <translation type="unfinished">Crea una nuova connessione dialup
+        <translation type="obsolete">Crea una nuova connessione dialup
 verso Internet</translation>
     </message>
     <message>
@@ -376,7 +376,7 @@ verso Internet</translation>
 settings of the selected account are copied
 to a new account, that you can modify to fit your
 needs</source>
-        <translation type="unfinished">Crea una copia dell&apos;account selezionato. Tutte le
+        <translation type="obsolete">Crea una copia dell&apos;account selezionato. Tutte le
 impostazioni dell&apos;account selezionato saranno copiate
 nel nuovo account, che potrai modificare liberamente</translation>
     </message>
@@ -384,7 +384,7 @@ nel nuovo account, che potrai modificare liberamente</translation>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Cancella l&apos;account selezionato
+        <translation type="obsolete">&lt;p&gt;Cancella l&apos;account selezionato
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Usa con cautela!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
@@ -419,7 +419,32 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>You must enter a unique account name</source>
-        <translation type="unfinished">Devi inserire un nome account univoco</translation>
+        <translation type="obsolete">Devi inserire un nome account univoco</translation>
+    </message>
+    <message>
+        <source>Allows you to modify the selected device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Makes a copy of the selected device. All
+settings of the selected device are copied
+to a new device, that you can modify to fit your
+needs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Deletes the selected device
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a unique device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

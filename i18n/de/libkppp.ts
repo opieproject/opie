@@ -368,12 +368,12 @@ sinnvoll sein.</translation>
     <name>DevicesWidget</name>
     <message>
         <source>Allows you to modify the selected account</source>
-        <translation type="unfinished">Ermöglicht die Modifikation des Zugangs</translation>
+        <translation type="obsolete">Ermöglicht die Modifikation des Zugangs</translation>
     </message>
     <message>
         <source>Create a new dialup connection
 to the Internet</source>
-        <translation type="unfinished">Erstellung einer neuen Wählverbindung
+        <translation type="obsolete">Erstellung einer neuen Wählverbindung
 ins Internet</translation>
     </message>
     <message>
@@ -381,7 +381,7 @@ ins Internet</translation>
 settings of the selected account are copied
 to a new account, that you can modify to fit your
 needs</source>
-        <translation type="unfinished">Erstellt eine Kopie des gewählten Zugangs. Alle
+        <translation type="obsolete">Erstellt eine Kopie des gewählten Zugangs. Alle
 Einstellungen des selektierten Zugangs werden in einen
 neuen Zugang kopiert, der modifiziert werden kann</translation>
     </message>
@@ -389,7 +389,7 @@ neuen Zugang kopiert, der modifiziert werden kann</translation>
         <source>&lt;p&gt;Deletes the selected account
 
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Löscht den gewählten Zugang
+        <translation type="obsolete">&lt;p&gt;Löscht den gewählten Zugang
 &lt;font color=&quot;red&quot;&gt;&lt;b&gt;Vorsichtig verwenden !!!&lt;/b&gt;&lt;/font&gt;</translation>
     </message>
     <message>
@@ -423,7 +423,32 @@ the device &quot;%1&quot;?</source>
     </message>
     <message>
         <source>You must enter a unique account name</source>
-        <translation type="unfinished">Sie müssen einen eindeutigen Zugangsnamen angeben</translation>
+        <translation type="obsolete">Sie müssen einen eindeutigen Zugangsnamen angeben</translation>
+    </message>
+    <message>
+        <source>Allows you to modify the selected device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create a new device</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Makes a copy of the selected device. All
+settings of the selected device are copied
+to a new device, that you can modify to fit your
+needs</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;p&gt;Deletes the selected device
+
+&lt;font color=&quot;red&quot;&gt;&lt;b&gt;Use with care!&lt;/b&gt;&lt;/font&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must enter a unique device name</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1378,9 +1403,6 @@ Ask your system administrator to create this file (can be empty) with appropriat
         <source>You must specify a telephone number!</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>QObject::ModemWidget</name>
 </context>
 <context>
     <name>ScriptWidget</name>
