@@ -83,29 +83,6 @@ public:
     wiface = (OWirelessNetworkInterface*) iface;
     printf( "Using wireless interface '%s' for scanning (current SSID is '%s')...\n", (const char*) interface, (const char*) wiface->SSID() );
 
-    /*
-
-    // ifconfig down the interface - this enable more crash-proof
-    // scanning with drivers like spectrum_cs...
-    if ( wiface->isUp() )
-    {
-        printf( "Interface status is up... switching to down... " );
-        wiface->setUp( false );
-        if ( wiface->isUp() )
-        {
-            printf( "failed (%s). Exiting.\n", strerror( errno ) );
-            exit( -1 );
-        }
-        else
-        {
-            printf( "ok.\n" );
-        }
-    }
-    else
-        printf( "Interface status is already down - good.\n" );
-
-    */
-
     // ifconfig +promisc the interface to receive all packets
     if ( !wiface->promiscuousMode() )
     {
@@ -169,7 +146,6 @@ public slots:
     }
 
     OWaveLanManagementPacket* beacon = (OWaveLanManagementPacket*) p->child( "802.11 Management" );
-
     if ( beacon )
     {
         OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
@@ -183,6 +159,45 @@ public slots:
             stations.insert( essid, new Station( "unknown", wiface->channel(),
             ((OWaveLanPacket*) beacon->parent())->usesWep() ) );
         }
+        return;
+    }
+
+    OWaveLanDataPacket* data = (OWaveLanDataPacket*) p->child( "802.11 Data" );
+    if ( data )
+    {
+        OWaveLanPacket* wlan = (OWaveLanPacket*) p->child( "802.11" );
+        if ( wlan->fromDS() && !wlan->toDS() )
+        {
+            printf( "FromDS: '%s' -> '%s' via '%s'\n",
+                (const char*) wlan->macAddress3().toString(true),
+                (const char*) wlan->macAddress1().toString(true),
+                (const char*) wlan->macAddress2().toString(true) );
+        }
+        else
+        if ( !wlan->fromDS() && wlan->toDS() )
+        {
+            printf( "ToDS: '%s' -> '%s' via '%s'\n",
+                (const char*) wlan->macAddress2().toString(true),
+                (const char*) wlan->macAddress3().toString(true),
+                (const char*) wlan->macAddress1().toString(true) );
+        }
+        else
+        if ( wlan->fromDS() && wlan->toDS() )
+        {
+            printf( "WSD(bridge): '%s' -> '%s' via '%s' and '%s'\n",
+                (const char*) wlan->macAddress4().toString(true),
+                (const char*) wlan->macAddress3().toString(true),
+                (const char*) wlan->macAddress1().toString(true),
+                (const char*) wlan->macAddress2().toString(true) );
+        }
+        else
+        {
+            printf( "IBSS(AdHoc): '%s' -> '%s' (Cell: '%s')'\n",
+                (const char*) wlan->macAddress2().toString(true),
+                (const char*) wlan->macAddress1().toString(true),
+                (const char*) wlan->macAddress3().toString(true) );
+        }
+        return;
     }
   }
 private:

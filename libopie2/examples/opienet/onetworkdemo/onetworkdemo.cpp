@@ -12,6 +12,7 @@ int main( int argc, char** argv )
     {
         qDebug( "DEMO: ONetwork contains Interface '%s'", (const char*) it.current()->name() );
         qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString() );
+        qDebug( "DEMO: MAC Address is '%s'", (const char*) it.current()->macAddress().toString(true) );
         qDebug( "Demo: IPv4 Address is '%s'", (const char*) it.current()->ipV4Address() );
         if ( it.current()->isWireless() )
         {

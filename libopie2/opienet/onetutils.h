@@ -55,7 +55,8 @@ class OMacAddress
     OMacAddress( struct ifreq& );
     ~OMacAddress();
 
-    QString toString() const;
+    QString manufacturer() const;
+    QString toString( bool substitute = false ) const;
     const unsigned char* native() const;
 
     static OMacAddress fromString( const QString& );

@@ -639,11 +639,11 @@ OWaveLanManagementChallenge::~OWaveLanManagementChallenge()
 OWaveLanDataPacket::OWaveLanDataPacket( const unsigned char* end, const struct ieee_802_11_data_header* data, OWaveLanPacket* parent )
                 :QObject( parent, "802.11 Data" ), _header( data )
 {
-    //qDebug( "size of header = %d", sizeof( struct ieee_802_11_data_header ) );
-    //qDebug( "header: %0x", data );
-    const unsigned char* payload = (const unsigned char*) data + sizeof( struct ieee_802_11_data_header );
-    //qDebug( "payload: %0x", payload );
+    qDebug( "OWaveLanDataPacket::OWaveLanDataPacket(): decoding frame..." );
 
+    const unsigned char* payload = (const unsigned char*) data + sizeof( struct ieee_802_11_data_header );
+
+    #warning The next line works for most cases, but can not be correct generally!
     if (!( ( (OWaveLanPacket*) this->parent())->duration() )) payload -= 6; // compensation for missing last address
 
     new OLLCPacket( end, (const struct ieee_802_11_802_2_header*) payload, this );
@@ -660,7 +660,7 @@ OWaveLanDataPacket::~OWaveLanDataPacket()
  *======================================================================================*/
 
 OLLCPacket::OLLCPacket( const unsigned char* end, const struct ieee_802_11_802_2_header* data, QObject* parent )
-                :QObject( parent, "802.11 802_2" ), _header( data )
+                :QObject( parent, "802.11 LLC" ), _header( data )
 {
     qDebug( "OLLCPacket::OLLCPacket(): decoding frame..." );
 

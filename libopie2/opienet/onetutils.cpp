@@ -31,6 +31,7 @@
 
 #include <opie2/onetutils.h>
 #include <opie2/onetwork.h>
+#include <opie2/omanufacturerdb.h>
 
 #include <net/if.h>
 
@@ -109,15 +110,23 @@ OMacAddress OMacAddress::fromString( const QString& str )
 }
 
 
-QString OMacAddress::toString() const
+QString OMacAddress::toString( bool substitute ) const
 {
-    QString s;
-    s.sprintf( "%.2X:%.2X:%.2X:%.2X:%.2X:%.2X",
-      _bytes[0]&0xff, _bytes[1]&0xff, _bytes[2]&0xff,
-      _bytes[3]&0xff, _bytes[4]&0xff, _bytes[5]&0xff );
-    return s;
+    QString manu;
+    manu.sprintf( "%.2X:%.2X:%.2X", _bytes[0]&0xff, _bytes[1]&0xff, _bytes[2]&0xff );
+    QString serial;
+    serial.sprintf( ":%.2X:%.2X:%.2X", _bytes[3]&0xff, _bytes[4]&0xff, _bytes[5]&0xff );
+    if ( !substitute ) return manu+serial;
+    // fallback - if no vendor is found, just use the number
+    QString textmanu = OManufacturerDB::instance()->lookup( manu );
+    return textmanu.isNull() ? manu+serial : textmanu + serial;
 }
 
+
+QString OMacAddress::manufacturer() const
+{
+    return OManufacturerDB::instance()->lookup( toString() );
+}
 
 bool operator==( const OMacAddress &m1, const OMacAddress &m2 )
 {
