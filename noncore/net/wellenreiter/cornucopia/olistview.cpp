@@ -202,10 +202,10 @@ bool OListViewItem::isAlternate()
 
     // check if the item above is an OListViewItem
     OListViewItem *above = static_cast<OListViewItem*>( itemAbove() );
-    /*if (not itemAbove()->inherits( "OListViewItem" )) return false;*/
+    /*if (! itemAbove()->inherits( "OListViewItem" )) return false;*/
 
     // check if we have a valid alternate background color
-    if (not (lv && lv->alternateBackground().isValid())) return false;
+    if (!(lv && lv->alternateBackground().isValid())) return false;
 
     m_known = above ? above->m_known : true;
     if (m_known)
@@ -221,7 +221,7 @@ bool OListViewItem::isAlternate()
             item = static_cast<OListViewItem *>(parent());
             if ( item /*&& item->inherits( "OListViewItem" )*/ ) previous = item->m_odd;
             item = static_cast<OListViewItem *>(parent()->firstChild());
-            /* if !( item.inherits( "OListViewItem" ) item = 0; */
+            /* if ( !item.inherits( "OListViewItem" ) item = 0; */
         }
         else
         {
@@ -233,7 +233,7 @@ bool OListViewItem::isAlternate()
             item->m_odd = previous = !previous;
             item->m_known = true;
             item = static_cast<OListViewItem *>(item->nextSibling());
-            /* if !(item.inherits( "OListViewItem" ) ) break; */
+            /* if (!item.inherits( "OListViewItem" ) ) break; */
         }
     }
     return m_odd;

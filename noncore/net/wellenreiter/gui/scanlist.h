@@ -18,20 +18,22 @@
 
 #include <cornucopia/olistview.h>
 
-class QString;
+#include <qtextstream.h>
 
+class QString;
 class ManufacturerDB;
 
 class MScanListView: public OListView
 {
   Q_OBJECT
-  
+
   public:
     MScanListView( QWidget* parent = 0, const char* name = 0 );
     virtual ~MScanListView();
-  
+
     void setManufacturerDB( ManufacturerDB* manufacturerdb );
-  
+    void dump( QTextStream& t ) const;
+
   public slots:
     void addNewItem( QString type, QString essid, QString macaddr, bool wep, int channel, int signal );
     

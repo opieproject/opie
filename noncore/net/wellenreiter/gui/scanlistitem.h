@@ -18,6 +18,8 @@
 
 #include <cornucopia/olistview.h>
 
+#include <qtextstream.h>
+
 class QString;
 
 class MScanListItem: public OListViewItem
@@ -63,6 +65,8 @@ class MScanListItem: public OListViewItem
     void receivedBeacon();
 
     void setManufacturer( const QString& manufacturer );
+
+    void dump( QTextStream& t ) const;
 
   private:
     QString _type;

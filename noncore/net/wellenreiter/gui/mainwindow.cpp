@@ -24,6 +24,7 @@
 #include <qfile.h>
 #include <qiconset.h>
 #include <qmenubar.h>
+#include <qmessagebox.h>
 #include <qpopupmenu.h>
 #include <qstatusbar.h>
 #include <qtextstream.h>
@@ -59,7 +60,9 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     // setup tool buttons
 
     startStopButton = new QToolButton( 0 );
+    #ifdef QWS
     startStopButton->setAutoRaise( true );
+    #endif
     #ifdef QWS
     startStopButton->setOnIconSet( *cancelIconSet );
     startStopButton->setOffIconSet( *searchIconSet );
@@ -71,12 +74,16 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     startStopButton->setEnabled( false );
 
     QToolButton* c = new QToolButton( 0 );
+    #ifdef QWS
     c->setAutoRaise( true );
+    #endif
     c->setIconSet( *infoIconSet );
     c->setEnabled( false );
 
     QToolButton* d = new QToolButton( 0 );
+    #ifdef QWS
     d->setAutoRaise( true );
+    #endif
     d->setIconSet( *settingsIconSet );
     connect( d, SIGNAL( clicked() ), this, SLOT( showConfigure() ) );
 
@@ -87,10 +94,15 @@ WellenreiterMainWindow::WellenreiterMainWindow( QWidget * parent, const char * n
     QMenuBar* mb = menuBar();
 
     QPopupMenu* fileSave = new QPopupMenu( mb );
+    fileSave->insertItem( "&Session", this, SLOT( fileSaveSession() ) );
     fileSave->insertItem( "&Log", this, SLOT( fileSaveLog() ) );
 
+    QPopupMenu* fileLoad = new QPopupMenu( mb );
+    fileLoad->insertItem( "&Session", this, SLOT( fileLoadSession() ) );
+    fileLoad->insertItem( "&Log", this, SLOT( fileLoadLog() ) );
+
     QPopupMenu* file = new QPopupMenu( mb );
-    id = file->insertItem( "&Load" );
+    id = file->insertItem( "&Load", fileLoad );
     file->setItemEnabled( id, false );
     file->insertItem( "&Save", fileSave );
 
@@ -172,11 +184,11 @@ WellenreiterMainWindow::~WellenreiterMainWindow()
 
 void WellenreiterMainWindow::demoAddStations()
 {
-    mw->netView()->addNewItem( "managed", "Vanille", "04:00:20:EF:A6:43", true, 6, 80 );
-    mw->netView()->addNewItem( "managed", "Vanille", "04:00:20:EF:A6:23", true, 11, 10 );
-    mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:43:E7:16:22", false, 3, 10 );
-    mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:53:E7:56:62", false, 3, 15 );
-    mw->netView()->addNewItem( "adhoc", "ELAN", "40:03:63:E7:56:E2", false, 3, 20 );
+    mw->netView()->addNewItem( "managed", "Vanille", "00:00:20:EF:A6:43", true, 6, 80 );
+    mw->netView()->addNewItem( "managed", "Vanille", "00:00:1c:EF:A6:23", true, 11, 10 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", "00:A0:F8:E7:16:22", false, 3, 10 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", "00:AA:01:E7:56:62", false, 3, 15 );
+    mw->netView()->addNewItem( "adhoc", "ELAN", "00:B0:8E:E7:56:E2", false, 3, 20 );
 }
 
 void WellenreiterMainWindow::fileSaveLog()
@@ -188,11 +200,41 @@ void WellenreiterMainWindow::fileSaveLog()
         QTextStream t( &f );
         t << mw->logWindow()->getLog();
         f.close();
-        qDebug( "saved log in file '%s'", (const char*) fname );
+        qDebug( "Saved log to file '%s'", (const char*) fname );
     }
     else
     {
-        qDebug( "Problem saving log in file '%s'", (const char*) fname );
+        qDebug( "Problem saving log to file '%s'", (const char*) fname );
     }
 
+}
+
+void WellenreiterMainWindow::fileSaveSession()
+{
+    const QString fname( "/tmp/session.xml" );
+    QFile f( fname );
+    if ( f.open(IO_WriteOnly) )
+    {
+        QTextStream t( &f );
+        mw->netView()->dump( t );
+        f.close();
+        qDebug( "Saved session to file '%s'", (const char*) fname );
+    }
+    else
+    {
+        qDebug( "Problem saving session to file '%s'", (const char*) fname );
+    }
+}
+
+void WellenreiterMainWindow::closeEvent( QCloseEvent* e )
+{
+    if ( mw->isDaemonRunning() )
+    {
+        QMessageBox::warning( this, "Wellenreiter/Opie", "Sniffing in progress!\nPlease stop sniffing before closing." );
+        e->ignore();
+    }
+    else
+    {
+        QMainWindow::closeEvent( e );
+    }
 }

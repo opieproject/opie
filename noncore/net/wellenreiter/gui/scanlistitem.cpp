@@ -83,7 +83,12 @@ void MScanListItem::decorateItem( QString type, QString essid, QString macaddr, 
     listView()->triggerUpdate();
 
     this->type = type;
-
+    _type = type;
+    _essid = essid;
+    _macaddr = macaddr;
+    _channel = channel;
+    _beacons = 0;
+    _signal = 0;
 }
 
 void MScanListItem::setManufacturer( const QString& manufacturer )
@@ -100,3 +105,17 @@ void MScanListItem::receivedBeacon()
     setText( col_sig, QString::number( _beacons ) );
     setText( col_lastseen, QTime::currentTime().toString() );
 }
+
+void MScanListItem::dump( QTextStream& t ) const
+{
+    qDebug( "dumping scanlistitem at <%d>", this );
+    t << "<ITEM type=" << _type;
+    t << " ESSID='" << _essid;
+    t << "' MAC=" << _macaddr;
+    t << " WEP=" << _wep;
+    t << " CHANNEL=" << _channel;
+    t << " SIGNAL=" << _signal;
+    t << " BEACONS=" << _beacons;
+    t << ">\n";
+}
+

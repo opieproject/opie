@@ -43,10 +43,14 @@ class WellenreiterMainWindow: public QMainWindow
 
     QToolButton* startStopButton;
 
+  protected:
+    virtual void closeEvent( QCloseEvent* );
+
   public slots:
     void showConfigure();
     void demoAddStations();
     void fileSaveLog();
+    void fileSaveSession();
 };
 
 #endif

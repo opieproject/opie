@@ -123,6 +123,11 @@ Wellenreiter::~Wellenreiter()
     // no need to delete child widgets, Qt does it all for us
 
     delete manufacturerdb;
+    if ( daemon_fd != -1 )
+    {
+        qDebug( "closing comm socket" );
+        close( daemon_fd );
+    }
 }
 
 void Wellenreiter::setConfigWindow( WellenreiterConfigWindow* cw )

@@ -20,13 +20,15 @@
 
 #include "manufacturers.h"
 
+#include <qtextstream.h>
+
 MScanListView::MScanListView( QWidget* parent, const char* name )
               :OListView( parent, name ), _manufacturerdb( 0 )
 {
 
     setFrameShape( QListView::StyledPanel );
     setFrameShadow( QListView::Sunken );
-    
+
     addColumn( tr( "Net/Station" ) );
     setColumnAlignment( 0, AlignLeft || AlignVCenter );
     addColumn( tr( "B" ) );
@@ -125,17 +127,17 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     else
     {
         s.sprintf( "(i) new network: '%s'", (const char*) essid );
-        
+
         network = new MScanListItem( this, "networks", essid, QString::null, 0, 0, 0 );
-    }    
-        
-        
+    }
+
+
     // insert new station as child from network
-        
+
     // no essid to reduce clutter, maybe later we have a nick or stationname to display!?
-    
+
     qDebug( "inserting new station %s", (const char*) macaddr );
-    
+
     MScanListItem* station = new MScanListItem( network, type, "", macaddr, wep, channel, signal );
     if ( _manufacturerdb )
         station->setManufacturer( _manufacturerdb->lookup( macaddr ) );
@@ -148,6 +150,18 @@ void MScanListView::addNewItem( QString type, QString essid, QString macaddr, bo
     {
         s.sprintf( "(i) new adhoc station in '%s' [%d]", (const char*) essid, channel );
     }
-    
+
 }
 
+void MScanListView::dump( QTextStream& t ) const
+{
+    qDebug( "dumping scanlist..." );
+
+    QListViewItemIterator it( const_cast<MScanListView*>( this ) );
+    for ( ; it.current(); ++it )
+    {
+        static_cast<MScanListItem*>( it.current() )->dump( t );
+    }
+
+    qDebug( "dump finished." );
+}
