@@ -1555,11 +1555,11 @@ bool Zaurus::isZaurus()
   		if ( loc != -1 )
   			model = line. mid ( loc + 2 ). simplifyWhiteSpace( );
 
-		if ( model == "Sharp-Collie" 
-		     || model == "Collie" 
+		if ( model == "Sharp-Collie"
+		     || model == "Collie"
 		     || model == "SHARP Corgi"
-		     || model == "SHARP Shepherd" 
-		     || model == "SHARP Poodle" 
+		     || model == "SHARP Shepherd"
+		     || model == "SHARP Poodle"
                      || model == "SHARP Husky"
 		   )
 			is_zaurus = true;
@@ -1578,10 +1578,10 @@ void Zaurus::init ( )
 	// QFile f ( "/proc/filesystems" );
 	QString model;
 
-	// It isn't a good idea to check the system configuration to 
-	// detect the distribution ! 
+	// It isn't a good idea to check the system configuration to
+	// detect the distribution !
 	// Otherwise it may happen that any other distribution is detected as openzaurus, just
-	// because it uses a jffs2 filesystem..  
+	// because it uses a jffs2 filesystem..
 	// (eilers)
 	// if ( f. open ( IO_ReadOnly ) && ( QTextStream ( &f ). read ( ). find ( "\tjffs2\n" ) >= 0 )) {
 	QFile f ("/etc/oz_version");
@@ -1696,9 +1696,9 @@ void Zaurus::initButtons ( )
 		b. setKeycode ( zb-> code );
 		b. setUserText ( QObject::tr ( "Button", zb-> utext ));
 		b. setPixmap ( Resource::loadPixmap ( zb-> pix ));
-		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ), 
+		b. setFactoryPresetPressedAction ( OQCopMessage ( makeChannel ( zb-> fpressedservice ),
 								  zb-> fpressedaction ));
-		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ), 
+		b. setFactoryPresetHeldAction ( OQCopMessage ( makeChannel ( zb-> fheldservice ),
 							       zb-> fheldaction ));
 
 		d-> m_buttons-> append ( b );
@@ -1707,7 +1707,7 @@ void Zaurus::initButtons ( )
 	reloadButtonMapping ( );
 
 	QCopChannel *sysch = new QCopChannel ( "QPE/System", this );
-	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )), 
+	connect ( sysch, SIGNAL( received( const QCString &, const QByteArray & )),
 		  this, SLOT( systemMessage ( const QCString &, const QByteArray & )));
 }
 
@@ -1964,6 +1964,7 @@ bool Zaurus::setSoftSuspend ( bool soft )
 
 bool Zaurus::setDisplayBrightness ( int bright )
 {
+    //qDebug( "Zaurus::setDisplayBrightness( %d )", bright );
     bool res = false;
     int fd;
 
@@ -1974,12 +1975,13 @@ bool Zaurus::setDisplayBrightness ( int bright )
     {
         if ( d->m_model == Model_Zaurus_SLC7x0 )
         {
+            //qDebug( "using special treatment for devices with the corgi backlight interface" );
             // special treatment for devices with the corgi backlight interface
             if (( fd = ::open ( "/proc/driver/fl/corgi-bl", O_WRONLY )) >= 0 )
             {
-                if ( bright > 0x11 ) bright = 0x11;
+                int value = ( bright == 1 ) ? 1 : bright * ( 17.0 / 255.0 );
                 char writeCommand[100];
-                const int count = sprintf( writeCommand, "0x%x\n", bright );
+                const int count = sprintf( writeCommand, "0x%x\n", value );
                 res = ( ::write ( fd, writeCommand, count ) != -1 );
                 ::close ( fd );
             }
