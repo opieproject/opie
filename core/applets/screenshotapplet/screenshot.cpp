@@ -400,7 +400,7 @@ void ScreenshotControl::savePixmap()
 
 void ScreenshotControl::performGrab()
 {
-  snapshot = QPixmap::grabWindow( QPEApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width(), QApplication::desktop()->height() );
+  snapshot = QPixmap::grabWindow( QPEApplication::desktop()->winId(), 0, 0, QApplication::desktop()->width(),  QApplication::desktop()->height() );
 
   if (buttonPushed == 1) {
     qDebug("grabbing screen");
@@ -428,34 +428,23 @@ void ScreenshotControl::performGrab()
         if ( ::connect ( sock, (struct sockaddr *) & raddr, sizeof (struct sockaddr)) >= 0 ) {
           QString header;
 
+          QPixmap pix = ( snapshot.width() > snapshot.height() ) ? snapshot : snapshot.xForm( QWMatrix().rotate(90) );
+          QImage img = pix.convertToImage().convertDepth( 16 ); // could make that also depth independent, if hh.org/scap can handle it
+
           header = "POST /scap/capture.cgi?%1+%2 HTTP/1.1\n"  // 1: model / 2: user
-                   "Content-length: 153600\n"
+                   "Content-length: %3\n"                     // 3: content length
                    "Content-Type: image/gif\n"
-                   "Host: %4\n"                               // 3: scap host
+                   "Host: %4\n"                               // 4: scap host
                    "\n";
 
-          header = header. arg ( "" ). arg ( ::getenv ( "USER" )). arg ( SCAP_hostname );
+          header = header.arg( "" ).arg( ::getenv ( "USER" ) ).arg( img.numBytes() ).arg( SCAP_hostname );
 
-          QPixmap pix;
-
-          if ( snapshot. width ( ) == 320 && snapshot. height ( ) == 240 )
+          if ( !pix.isNull() )
           {
-            pix = snapshot;
-          }
-          else if ( snapshot. width ( ) == 240 && snapshot. height ( ) == 320 )
-          {
-            pix = snapshot. xForm ( QWMatrix ( ). rotate ( 90 ));
-          }
-
-          if ( !pix. isNull ( ))
-          {
-            const char *ascii = header. latin1 ( );
-            uint ascii_len = ::strlen ( ascii );
-
+            const char *ascii = header.latin1( );
+            uint ascii_len = ::strlen( ascii );
             ::write ( sock, ascii, ascii_len );
-
-            QImage img = pix. convertToImage ( ). convertDepth ( 16 );
-            ::write ( sock, img. bits ( ), img.numBytes ( ));
+            ::write ( sock, img.bits(), img.numBytes() );
 
             ok = true;
           }
@@ -464,9 +453,9 @@ void ScreenshotControl::performGrab()
       }
     }
     if ( ok )
-      QMessageBox::information ( 0, tr( "Success" ), QString ( "<p>%1</p>" ). arg ( tr( "Screenshot was uploaded to %1" )). arg ( SCAP_hostname ));
+      QMessageBox::information( 0, tr( "Success" ), QString( "<p>%1</p>" ).arg ( tr( "Screenshot was uploaded to %1" )).arg( SCAP_hostname ));
     else
-      QMessageBox::warning ( 0, tr( "Error" ), QString ( "<p>%1</p>" ). arg ( tr( "Connection to %1 failed." )). arg ( SCAP_hostname ));
+      QMessageBox::warning( 0, tr( "Error" ), QString( "<p>%1</p>" ).arg( tr( "Connection to %1 failed." )).arg( SCAP_hostname ));
   }
 
 }
@@ -479,7 +468,7 @@ ScreenshotApplet::ScreenshotApplet( QWidget *parent, const char *name )
     : QWidget( parent, name )
 {
 		setFixedWidth( AppLnk::smallIconSize());
-  
+
     QImage  img = (const char **)snapshot_xpm;
     img = img.smoothScale(AppLnk::smallIconSize(), AppLnk::smallIconSize());
     m_icon.convertFromImage(img);
