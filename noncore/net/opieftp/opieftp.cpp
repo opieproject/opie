@@ -9,6 +9,7 @@
  *   the Free Software Foundation; either version 2 of the License, or     *
  *   (at your option) any later version.                                   *
  ***************************************************************************/
+//#define DEVELOPER_VERSION
 
 #include "opieftp.h"
 #include "ftplib.h"
@@ -19,8 +20,10 @@
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
+#include <qpe/config.h>
 
 #include <qtextstream.h>
+#include <qpushbutton.h>
 #include <qtoolbutton.h>
 #include <qdatetime.h>
 #include <qdir.h>
@@ -171,9 +174,7 @@ OpieFtp::OpieFtp( )
 
     UsernameComboBox = new QComboBox( FALSE, tab_3, "UsernameComboBox" );
     UsernameComboBox->setEditable(TRUE);
-    UsernameComboBox->lineEdit()->setText("anonymous");
-//    UsernameComboBox->lineEdit()->setText("root");
-//    UsernameComboBox->lineEdit()->setText("llornkcor");
+//      UsernameComboBox->lineEdit()->setText("anonymous");
     tabLayout_3->addMultiCellWidget( UsernameComboBox, 1, 1, 0, 1 );
 
     TextLabel2 = new QLabel( tab_3, "TextLabel2" );
@@ -182,8 +183,7 @@ OpieFtp::OpieFtp( )
 
     PasswordEdit = new QLineEdit( "", tab_3, "PasswordComboBox" );
     PasswordEdit->setEchoMode(QLineEdit::Password);
-    PasswordEdit->setText( tr( "me@opieftp.org" ) );
-//    PasswordEdit->setText( tr( "" ) );
+//      PasswordEdit->setText( tr( "me@opieftp.org" ) );
     tabLayout_3->addMultiCellWidget( PasswordEdit, 1, 1, 2, 3 );
 
     TextLabel3 = new QLabel( tab_3, "TextLabel3" );
@@ -192,10 +192,10 @@ OpieFtp::OpieFtp( )
 
     ServerComboBox = new QComboBox( FALSE, tab_3, "ServerComboBox" );
     ServerComboBox->setEditable(TRUE);
-    ServerComboBox->lineEdit()->setText( tr( "" ) );
+//      ServerComboBox->lineEdit()->setText( tr( "" ) );
     tabLayout_3->addMultiCellWidget( ServerComboBox, 3, 3, 0, 1 );
-//    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
-//    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
+
+    connect(ServerComboBox,SIGNAL(activated(int)),this,SLOT(serverComboSelected(int ) ));
 
     QLabel *TextLabel5 = new QLabel( tab_3, "TextLabel5" );
     TextLabel5->setText( tr( "Remote path" ) );
@@ -203,7 +203,6 @@ OpieFtp::OpieFtp( )
 
     remotePath = new QLineEdit( "/", tab_3, "remotePath" );
     remotePath->setText( currentRemoteDir = "/");
-//    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
     tabLayout_3->addMultiCellWidget( remotePath, 3, 3, 2, 3 );
 
     TextLabel4 = new QLabel( tab_3, "TextLabel4" );
@@ -213,9 +212,20 @@ OpieFtp::OpieFtp( )
     PortSpinBox = new QSpinBox( tab_3, "PortSpinBox" );
     PortSpinBox->setButtonSymbols( QSpinBox::UpDownArrows );
     PortSpinBox->setMaxValue(32786);
-//    PortSpinBox->setValue( 4242);
     PortSpinBox->setValue( 21);
     tabLayout_3->addMultiCellWidget( PortSpinBox, 4, 4, 1, 1);
+
+    QPushButton *deleteServerBtn;
+    deleteServerBtn = new QPushButton( "Delete Server",this, "OpenButton" );
+    tabLayout_3->addMultiCellWidget( deleteServerBtn, 5, 5, 2, 3);
+
+    connect(deleteServerBtn,SIGNAL(clicked()),SLOT(deleteServer()));
+
+    QPushButton *connectServerBtn;
+    connectServerBtn = new QPushButton( "Connect",this, "ConnectButton" );
+    tabLayout_3->addMultiCellWidget( connectServerBtn, 5, 5, 0, 1);
+    connect(connectServerBtn,SIGNAL( clicked()),SLOT( connector() ));
+
 
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     tabLayout_3->addItem( spacer, 5, 0 );
@@ -237,9 +247,22 @@ OpieFtp::OpieFtp( )
     ProgressBar = new QProgressBar( this, "ProgressBar" );
     layout->addMultiCellWidget( ProgressBar, 4, 4, 0, 3 );
 
+    serverComboSelected(0);
+#ifdef DEVELOPER_VERSION
+//    ServerComboBox->lineEdit()->setText( tr( "llornkcor.com" ) );
+    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
+    UsernameComboBox->lineEdit()->setText("root");
+//    UsernameComboBox->lineEdit()->setText("llornkcor");
+    PortSpinBox->setValue( 4242);
+    remotePath->setText( currentRemoteDir = "/");
+    PasswordEdit->setText( tr( "" ) );
+  
+#endif    
+    fillCombos();
     filterStr="*";
     b=FALSE;
     populateLocalView();
+    TabWidget->setCurrentPage(2);
 }
 
 OpieFtp::~OpieFtp()
@@ -369,7 +392,13 @@ void OpieFtp::remoteDownload()
 
 void OpieFtp::newConnection()
 {
-    TabWidget->setCurrentPage(2);
+   UsernameComboBox->lineEdit()->setText("");
+   PasswordEdit->setText( "" );
+   ServerComboBox->lineEdit()->setText( "");
+   remotePath->setText( currentRemoteDir = "/");
+   PortSpinBox->setValue( 21);
+   TabWidget->setCurrentPage(2);
+
 }
 
 void OpieFtp::connector()
@@ -408,6 +437,7 @@ void OpieFtp::connector()
         }
         remoteDirList("/") ;
         setCaption(ftp_host);
+        writeConfig();
     QCopEnvelope ( "QPE/System", "notBusy()" );
 }
 
@@ -916,4 +946,127 @@ void OpieFtp::switchToRemoteTab()
 void OpieFtp::switchToConfigTab()
 {
     TabWidget->setCurrentPage(2);
+}
+
+void OpieFtp::readConfig() {
+
+    Config cfg("opieftp");
+    cfg.setGroup("Server");
+    QString username, remoteServer, remotePathStr, password, port, temp;
+    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
+    for (int i = 0; i <= numberOfEntries; i++) {
+        temp.setNum(i+1);
+        cfg.setGroup("Server");
+        remoteServer = cfg.readEntry( temp,"");
+        ServerComboBox->insertItem( remoteServer );
+        cfg.setGroup(temp);
+
+        remotePathStr = cfg.readEntry(remoteServer,"");
+        int divider = remoteServer.length() - remoteServer.find(":",0,TRUE);
+        port = remoteServer.right( divider+1);
+        bool ok;
+        PortSpinBox->setValue( port.toInt(&ok,10));
+
+        remoteServer = remoteServer.left(divider - 1);
+        remotePath->setText( remotePathStr);
+        username = cfg.readEntry(temp);
+        UsernameComboBox->insertItem(username);
+        password = cfg.readEntryCrypt(username,"");
+        PasswordEdit->setText(password);
+
+    }
+
+}
+
+void OpieFtp::writeConfig() {
+
+    Config cfg("opieftp");
+    cfg.setGroup("Server");
+    QString temp;
+    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
+        temp.setNum(numberOfEntries+1);
+        cfg.setGroup("Server");
+        cfg.writeEntry( temp, ServerComboBox->currentText() +":"+PortSpinBox->cleanText() );
+        cfg.setGroup(temp);
+        cfg.writeEntry("RemotePath", remotePath->text());
+        cfg.writeEntry("Username", UsernameComboBox->currentText());
+        cfg.writeEntryCrypt( UsernameComboBox->currentText(), PasswordEdit->text());
+        cfg.setGroup("Server");
+        cfg.writeEntry("numberOfEntries", QString::number(numberOfEntries + 1 ));
+ 
+}
+
+void OpieFtp::fillCombos() {
+   Config cfg("opieftp");
+    cfg.setGroup("Server");
+    QString username, remoteServerStr, remotePathStr, password, port, temp;
+    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
+    for (int i = 1; i <= numberOfEntries; i++) {
+        temp.setNum(i);
+        cfg.setGroup("Server");
+        remoteServerStr = cfg.readEntry( temp,"");
+        int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
+        port = remoteServerStr.right( divider - 1);
+        bool ok;
+        PortSpinBox->setValue( port.toInt(&ok,10));
+
+        remoteServerStr = remoteServerStr.left(remoteServerStr.length()-divider);
+        ServerComboBox->insertItem( remoteServerStr );
+//          cfg.setGroup(temp);
+
+//          remotePathStr = cfg.readEntry(remoteServer,"");
+//          int divider = remoteServer.length() - remoteServer.find(":",0,TRUE);
+//          port = remoteServer.right( divider+1);
+//          PortSpinBox->setValue( port);
+
+//          remoteServer = remoteServer.left(divider - 1);
+//          remotePath->setText( remotePathStr);
+
+//          username = cfg.readEntry(temp);
+//          UsernameComboBox->insertItem(username);
+//          password = cfg.readEntryCrypt(username,"");
+//          PasswordEdit->setText(password);
+
+    }
+
+}
+
+
+void OpieFtp::serverComboSelected(int index) {
+
+    QString username, remoteServerStr, remotePathStr, password, port, temp;
+//    remoteServerStr = ServerComboBox->text(index);
+    Config cfg("opieftp");
+    cfg.setGroup("Server");
+    int numberOfEntries = cfg.readNumEntry("numberOfEntries",0);
+
+//      for (int i = 0; i <= numberOfEntries; i++) {
+        temp.setNum(index+1);
+        remoteServerStr = cfg.readEntry( temp,"");
+          //    if( remoteServerStr.find( ServerComboBox->text(index),0,TRUE) != -1 ) {
+        cfg.setGroup(temp);
+        qDebug(temp);
+        int divider = remoteServerStr.length() - remoteServerStr.find(":",0,TRUE);
+        port = remoteServerStr.right( divider - 1);
+        bool ok;
+        PortSpinBox->setValue( port.toInt(&ok,10));
+
+        remotePath->setText(cfg.readEntry("RemotePath", ""));
+        username =  cfg.readEntry("Username", "");
+        UsernameComboBox->lineEdit()->setText(username);
+        PasswordEdit->setText(cfg.readEntryCrypt(username, ""));
+
+//          }
+
+          //   }
+    update();    
+}
+//    UsernameComboBox->lineEdit()->setText("root");
+//    PasswordEdit->setText( tr( "" ) );
+//    ServerComboBox->lineEdit()->setText( tr( "192.168.129.201" ) );
+//    remotePath->setText( currentRemoteDir = "/home/llornkcor/");
+//    PortSpinBox->setValue( 4242);
+
+void OpieFtp::deleteServer() {
+
 }

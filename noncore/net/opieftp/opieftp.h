@@ -73,7 +73,8 @@ protected slots:
     void populateLocalView();
     bool populateRemoteView();
     void showHidden();
-
+    void writeConfig();
+    void readConfig();
     void localListClicked(QListViewItem *);
     void remoteListClicked(QListViewItem *);
     void ListPressed( int, QListViewItem *, const QPoint&, int);
@@ -92,6 +93,10 @@ protected slots:
   void switchToLocalTab();
   void switchToRemoteTab();
   void switchToConfigTab();
+  void fillCombos();
+  void serverComboSelected(int);
+  void deleteServer();
+  
 protected:
     void nullifyCallBack();
     QGridLayout* tabLayout;
