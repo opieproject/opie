@@ -294,7 +294,7 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
             break;
         }
 
-        // Rotate cursor keys 180°
+        // Rotate cursor keys 180° or 270°
         case Key_Left :
         case Key_Right:
         case Key_Up   :
@@ -303,6 +303,12 @@ bool iPAQ::filter ( int /*unicode*/, int keycode, int modifiers, bool isPress, b
                 ( d->m_model == Model_iPAQ_H38xx )) {
                 newkeycode = Key_Left + ( keycode - Key_Left + 2 ) % 4;
             }
+            // Rotate the cursor keys by 270°
+            // keycode - Key_Left = position of the button starting from left clockwise
+            // add the rotation to it and modolo. No we've the original offset
+            // add the offset to the Key_Left key
+            if ( d-> m_model == Model_iPAQ_H5xxx )
+                newkeycode = Key_Left + ( keycode - Key_Left + 3 ) % 4;
             break;
         }
 
