@@ -850,6 +850,11 @@ void LauncherView::setViewFont( const QFont &f )
     icons->setFont( f );
 }
 
+void LauncherView::unsetViewFont( )
+{
+    icons->unsetFont( );
+}
+
 void LauncherView::resizeEvent(QResizeEvent *e)
 {
     QVBox::resizeEvent( e );

@@ -1171,7 +1171,10 @@ void Launcher::launcherMessage( const QCString &msg, const QByteArray &data)
 	int italic;
 	stream >> italic;
 	if ( tabs->view(id) )
-	    tabs->view(id)->setViewFont( QFont(fam, size, weight, italic!=0) );
+	    if ( !fam. isEmpty ( ))
+		tabs->view(id)->setViewFont( QFont(fam, size, weight, italic!=0) );
+	    else
+		tabs->view(id)->unsetViewFont();
 	qDebug( "setFont: %s, %d, %d, %d", fam.latin1(), size, weight, italic );
     }
     else if ( msg == "setBusyIndicatorType(QString)" ) {

@@ -64,6 +64,7 @@ public:
     QColor textColor() const { return textCol; }
 
     void setViewFont( const QFont & );
+    void unsetViewFont ( );
 
     void setBusyIndicatorType ( const QString &type );
 
