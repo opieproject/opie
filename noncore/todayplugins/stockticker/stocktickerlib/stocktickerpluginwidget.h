@@ -58,7 +58,7 @@ private:
     void init();
     void getStocks( const char *stock_liste);
     void DefProxy(void);
-    
+    int timerDelay;
 };
 
 #endif

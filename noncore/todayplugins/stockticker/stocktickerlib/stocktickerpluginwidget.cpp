@@ -54,6 +54,13 @@ void StockTickerPluginWidget::init() {
     connect( stocktickerTicker, SIGNAL( mousePressed()), this, SLOT( doStocks() ));
  
     layout->addWidget( stocktickerTicker);
+
+    Config cfg( "stockticker");
+    cfg.setGroup("Timer");
+    timerDelay= cfg.readNumEntry("Delay",0);
+    if(timerDelay > 0)
+        startTimer(timerDelay*60000);
+            
 }
 
 void StockTickerPluginWidget::doStocks() {
@@ -120,7 +127,7 @@ void StockTickerPluginWidget::getStocks( const char *blah) {
         
         if (stocks_tmp->Time) {
 //            printf("%s ", stocks_tmp->Time);
-            tempString.sprintf("||  %s  ", stocks_tmp->Time);
+            tempString.sprintf("|  %s  ", stocks_tmp->Time);
             tempString.replace(QRegExp("\""),"");
             if( dotimeCheck)
                 output +=tempString;
@@ -243,4 +250,6 @@ void StockTickerPluginWidget::DefProxy(void) {
 void  StockTickerPluginWidget::timerEvent( QTimerEvent *e ) {
     killTimer(e->timerId());    
     doStocks();
+    if(timerDelay > 0)
+        startTimer(timerDelay*1000);
 }

@@ -2,12 +2,12 @@ TEMPLATE = lib
 CONFIG -= moc
 CONFIG += qt debug
 
-HEADERS = stocktickerplugin.h stocktickeruginimpl.h stocktickerpluginwidget.h ticker.h \
+HEADERS = stocktickerplugin.h stocktickeruginimpl.h stocktickerpluginwidget.h ticker.h stocktickerconfig.h \
       ../libstocks/csv.h \
       ../libstocks/http.h \
       ../libstocks/lists.h \
       ../libstocks/stocks.h
-SOURCES = stocktickerplugin.cpp stocktickerpluginimpl.cpp stocktickerpluginwidget.cpp ticker.cpp \
+SOURCES = stocktickerplugin.cpp stocktickerpluginimpl.cpp stocktickerpluginwidget.cpp ticker.cpp stocktickerconfig.cpp \
       ../libstocks/csv.c \
       ../libstocks/currency.c \
       ../libstocks/history.c \

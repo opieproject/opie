@@ -17,7 +17,7 @@
 
 #include "stocktickerplugin.h"
 #include "stocktickerpluginwidget.h"
-
+#include "stocktickerconfig.h"
 
 StockTickerPlugin::StockTickerPlugin() {
 }
@@ -46,7 +46,7 @@ QString StockTickerPlugin::pixmapNameConfig() const {
 }
 
 TodayConfigWidget* StockTickerPlugin::configWidget( QWidget* wid ) {
-    return 0l;
+    return new StocktickerPluginConfig( wid , "Stockticker" );
 }
 
 QString StockTickerPlugin::appName() const {
@@ -54,6 +54,7 @@ QString StockTickerPlugin::appName() const {
 }
 
 bool StockTickerPlugin::excludeFromRefresh() const {
-//return false;
+
 return true;
 }
+
