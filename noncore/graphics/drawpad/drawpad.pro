@@ -1,8 +1,6 @@
 TEMPLATE	= app
 CONFIG		= qt warn_on release
-HEADERS		= colordialog.h \
-		  colorpanel.h \
-		  drawpad.h \
+HEADERS		= drawpad.h \
 		  drawpadcanvas.h \
 		  ellipsetool.h \
 		  erasetool.h \
@@ -18,9 +16,7 @@ HEADERS		= colordialog.h \
 		  shapetool.h \
 		  texttool.h \
 		  tool.h
-SOURCES		= colordialog.cpp \
-		  colorpanel.cpp \
-		  drawpad.cpp \
+SOURCES		= drawpad.cpp \
 		  drawpadcanvas.cpp \
 		  ellipsetool.cpp \
 		  erasetool.cpp \
@@ -40,7 +36,7 @@ SOURCES		= colordialog.cpp \
 INCLUDEPATH	+= $(OPIEDIR)/include \
 		  $(QTDIR)/src/3rdparty/zlib
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe
+LIBS		+= -lqpe -lopie
 DESTDIR		= $(OPIEDIR)/bin
 TARGET		= drawpad
 

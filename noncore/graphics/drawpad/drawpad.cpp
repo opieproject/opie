@@ -13,8 +13,8 @@
 
 #include "drawpad.h"
 
-#include "colordialog.h"
-#include "colorpanel.h"
+//#include "colordialog.h"
+//#include "colorpanel.h"
 #include "drawpadcanvas.h"
 #include "ellipsetool.h"
 #include "erasetool.h"
@@ -33,6 +33,8 @@
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/resource.h>
+#include <opie/colordialog.h>
+#include <opie/colorpopupmenu.h>
 
 #include <qaction.h>
 #include <qfile.h>
@@ -216,44 +218,55 @@ DrawPad::DrawPad(QWidget* parent, const char* name)
     m_pPenColorToolButton = new QToolButton(drawParametersToolBar);
     m_pPenColorToolButton->setPixmap(Resource::loadPixmap("drawpad/pencolor.png"));
 
-    QPopupMenu* penColorPopupMenu = new QPopupMenu(m_pPenColorToolButton);
-
-    ColorPanel* penColorPanel = new ColorPanel(penColorPopupMenu);
-    connect(penColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
-
-    penColorPopupMenu->insertItem(penColorPanel);
-    penColorPopupMenu->insertSeparator();
-
-    QAction* choosePenColorAction = new QAction(tr("More"), tr("More..."), 0, this);
-    connect(choosePenColorAction, SIGNAL(activated()), this, SLOT(choosePenColor()));
-    choosePenColorAction->addTo(penColorPopupMenu);
-
+    ColorPopupMenu* colorPopupMenu = new ColorPopupMenu( Qt::black, m_pPenColorToolButton );
+    m_pPenColorToolButton->setPopup( colorPopupMenu );
+    m_pPenColorToolButton->setPopupDelay( 0 );
     QToolTip::add(m_pPenColorToolButton, tr("Pen Color"));
-    m_pPenColorToolButton->setPopup(penColorPopupMenu);
-    m_pPenColorToolButton->setPopupDelay(0);
+    connect( colorPopupMenu, SIGNAL( colorSelected( const QColor& ) ), this, SLOT( changePenColor( const QColor& ) ) );
 
-    penColorPanel->buttonSelected(Qt::black);
+//    QPopupMenu* penColorPopupMenu = new QPopupMenu(m_pPenColorToolButton);
+
+//    ColorPanel* penColorPanel = new ColorPanel(penColorPopupMenu);
+//    connect(penColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changePenColor(const QColor&)));
+
+//    penColorPopupMenu->insertItem(penColorPanel);
+//    penColorPopupMenu->insertSeparator();
+
+//    QAction* choosePenColorAction = new QAction(tr("More"), tr("More..."), 0, this);
+//    connect(choosePenColorAction, SIGNAL(activated()), this, SLOT(choosePenColor()));
+//    choosePenColorAction->addTo(penColorPopupMenu);
+
+//    m_pPenColorToolButton->setPopup(colorPopupMenu);
+//    m_pPenColorToolButton->setPopupDelay(0);
+
+//    penColorPanel->buttonSelected(Qt::black);
 
     m_pBrushColorToolButton = new QToolButton(drawParametersToolBar);
     m_pBrushColorToolButton->setPixmap(Resource::loadPixmap("drawpad/brushcolor.png"));
 
-    QPopupMenu* brushColorPopupMenu = new QPopupMenu(m_pBrushColorToolButton);
 
-    ColorPanel* brushColorPanel = new ColorPanel(brushColorPopupMenu);
-    connect(brushColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
-
-    brushColorPopupMenu->insertItem(brushColorPanel);
-    brushColorPopupMenu->insertSeparator();
-
-    QAction* chooseBrushColorAction = new QAction(tr("More"), tr("More..."), 0, this);
-    connect(chooseBrushColorAction, SIGNAL(activated()), this, SLOT(chooseBrushColor()));
-    chooseBrushColorAction->addTo(brushColorPopupMenu);
-
+    colorPopupMenu = new ColorPopupMenu( Qt::white, m_pBrushColorToolButton );
+    m_pBrushColorToolButton->setPopup( colorPopupMenu );
+    m_pBrushColorToolButton->setPopupDelay( 0 );
     QToolTip::add(m_pBrushColorToolButton, tr("Fill Color"));
-    m_pBrushColorToolButton->setPopup(brushColorPopupMenu);
-    m_pBrushColorToolButton->setPopupDelay(0);
+    connect( colorPopupMenu, SIGNAL( colorSelected( const QColor& ) ), this, SLOT( changeeBrushColor( const QColor& ) ) );
 
-    brushColorPanel->buttonSelected(Qt::white);
+//    QPopupMenu* brushColorPopupMenu = new QPopupMenu(m_pBrushColorToolButton);
+
+//    ColorPanel* brushColorPanel = new ColorPanel(brushColorPopupMenu);
+//    connect(brushColorPanel, SIGNAL(colorSelected(const QColor&)), this, SLOT(changeBrushColor(const QColor&)));
+
+//    brushColorPopupMenu->insertItem(brushColorPanel);
+//    brushColorPopupMenu->insertSeparator();
+
+//    QAction* chooseBrushColorAction = new QAction(tr("More"), tr("More..."), 0, this);
+//    connect(chooseBrushColorAction, SIGNAL(activated()), this, SLOT(chooseBrushColor()));
+//    chooseBrushColorAction->addTo(brushColorPopupMenu);
+
+//    m_pBrushColorToolButton->setPopup(brushColorPopupMenu);
+//    m_pBrushColorToolButton->setPopupDelay(0);
+
+//    brushColorPanel->buttonSelected(Qt::white);
 
     // init pages
 
@@ -484,18 +497,6 @@ void DrawPad::changeBrushColor(const QColor& color)
     painter.end();
  
     m_pBrushColorToolButton->popup()->hide();
-}
-
-void DrawPad::choosePenColor()
-{
-    QColor newPenColor = QColorDialog::getColor(m_pen.color());
-    changePenColor(newPenColor);
-}
-
-void DrawPad::chooseBrushColor()
-{
-    QColor newBrushColor = QColorDialog::getColor(m_brush.color());
-    changeBrushColor(newBrushColor);
 }
 
 void DrawPad::updateUndoRedoToolButtons()

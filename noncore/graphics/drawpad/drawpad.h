@@ -27,7 +27,7 @@ class QToolButton;
 class QWidgetStack;
 
 class DrawPad : public QMainWindow
-{ 
+{
     Q_OBJECT
 
 public:
@@ -52,8 +52,6 @@ private slots:
     void changePenWidth(int value);
     void changePenColor(const QColor& color);
     void changeBrushColor(const QColor& color);
-    void choosePenColor();
-    void chooseBrushColor();
 
     void updateUndoRedoToolButtons();
     void updateNavigationToolButtons();
