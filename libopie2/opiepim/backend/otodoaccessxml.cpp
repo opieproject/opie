@@ -407,12 +407,51 @@ QString OTodoAccessXML::toString( const QArray<int>& ints ) const {
     return Qtopia::Record::idsToString( ints );
 }
 
-/* internal class for sorting */
+/* internal class for sorting
+ *
+ * Inspired by todoxmlio.cpp from TT
+ */
 
 struct OTodoXMLContainer {
     OTodo todo;
 };
-  /*
+
+namespace {
+    inline QString string( const OTodo& todo) {
+        return  todo.summary().isEmpty() ?
+            todo.description().left(20 ) :
+            todo.summary();
+    }
+    inline int completed( const OTodo& todo1, const OTodo& todo2) {
+        int ret = 0;
+        if ( todo1.isCompleted() ) ret++;
+        if ( todo2.isCompleted() ) ret--;
+        return ret;
+    }
+    inline int priority( const OTodo& t1, const OTodo& t2) {
+        return ( t1.priority() - t2.priority() );
+    }
+    inline int description( const OTodo& t1, const OTodo& t2) {
+        return QString::compare( string(t1), string(t2) );
+    }
+    inline int deadline( const OTodo& t1, const OTodo& t2) {
+        int ret = 0;
+        if ( t1.hasDueDate() &&
+             t2.hasDueDate() )
+            ret = t2.dueDate().daysTo( t1.dueDate() );
+        else if ( t1.hasDueDate() )
+            ret = -1;
+        else if ( t2.hasDueDate() )
+            ret = 1;
+        else
+            ret = 0;
+
+        return ret;
+    }
+
+};
+
+/*
    * Returns:
    *       0 if item1 == item2
    *
@@ -448,6 +487,8 @@ public:
      *
      */
     int compareItems( Item d1, Item d2 ) {
+        bool seComp, sePrio, seDesc, seDeadline;
+        seComp = sePrio = seDeadline = seDesc = false;
         int ret =0;
         OTodoXMLContainer* con1 = (OTodoXMLContainer*)d1;
         OTodoXMLContainer* con2 = (OTodoXMLContainer*)d2;
@@ -459,52 +500,79 @@ public:
         switch ( m_sort ) {
             /* completed */
         case 0: {
-            ret = 0;
-            if ( con1->todo.isCompleted() ) ret++;
-            if ( con2->todo.isCompleted() ) ret--;
+            ret = completed( con1->todo, con2->todo );
+            seComp = TRUE;
             break;
         }
             /* priority */
         case 1: {
-            ret = con1->todo.priority() - con2->todo.priority();
-            qWarning(" priority %d %d %d",  ret,
-                     con1->todo.priority(),
-                     con2->todo.priority()
-                     );
+            ret = priority( con1->todo, con2->todo );
+            sePrio = TRUE;
             break;
         }
             /* description */
         case 2: {
-            QString str1 = string( con1->todo );
-            QString str2 = string( con2->todo );
-            ret  = QString::compare( str1, str2 );
+            ret  = description( con1->todo, con2->todo );
+            seDesc = TRUE;
             break;
         }
             /* deadline */
         case 3: {
-            /* either bot got a dueDate
-             * or one of them got one
-             */
-            if ( con1->todo.hasDueDate() &&
-                 con2->todo.hasDueDate() )
-                ret = con1->todo.dueDate().daysTo( con2->todo.dueDate() );
-
-
-            else if ( con1->todo.hasDueDate() )
-                ret = -1;
-            else if ( con2->todo.hasDueDate() )
-                ret = 0;
+            ret = deadline( con1->todo, con2->todo );
+            seDeadline = TRUE;
             break;
         }
         default:
             ret = 0;
             break;
         };
+        /*
+         * FIXME do better sorting if the first sort criteria
+         * ret equals 0 start with complete and so on...
+         */
 
         /* twist it we're not ascending*/
         if (!m_asc)
             ret = ret * -1;
-        return ret;
+
+        if ( ret )
+            return ret;
+
+        // default did not gave difference let's try it other way around
+        /*
+         * General try if already checked if not test
+         * and return
+         * 1.Completed
+         * 2.Priority
+         * 3.Description
+         * 4.DueDate
+         */
+        if (!seComp ) {
+            if ( (ret = completed( con1->todo, con2->todo ) ) ) {
+                if (!m_asc ) ret *= -1;
+                return ret;
+            }
+        }
+        if (!sePrio ) {
+            if ( (ret = priority( con1->todo, con2->todo ) ) ) {
+                if (!m_asc ) ret *= -1;
+                return ret;
+            }
+        }
+        if (!seDesc ) {
+            if ( (ret = description(con1->todo, con2->todo ) ) ) {
+                if (!m_asc) ret *= -1;
+                return ret;
+            }
+        }
+        if (!seDeadline) {
+            if ( (ret = deadline( con1->todo, con2->todo ) ) ) {
+                if (!m_asc) ret *= -1;
+                return ret;
+            }
+        }
+
+        return 0;
     }
  private:
     bool m_asc;
