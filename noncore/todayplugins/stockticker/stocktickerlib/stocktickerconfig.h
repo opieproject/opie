@@ -17,8 +17,9 @@
 #ifndef STOCKTICKER_PLUGIN_CONFIG_H
 #define STOCKTICKER_PLUGIN_CONFIG_H
 
+#include <opie2/todayconfigwidget.h>
+
 #include <qwidget.h>
-#include <opie/todayconfigwidget.h>
 #include <qstring.h>
 
 class QLineEdit;

@@ -15,12 +15,12 @@
  ***************************************************************************/
 
 #include "stocktickerconfig.h"
-#include <opie/todayconfigwidget.h>
+
+#include <opie2/todayconfigwidget.h>
 
 #include <qpe/config.h>
 
 #include <qapplication.h>
-
 #include <qlayout.h>
 #include <qspinbox.h>
 #include <qcheckbox.h>
@@ -44,15 +44,15 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setFocus();
 //     QWhatsThis::add( LineEdit1, tr("Enter the stock symbols you want to be shown here."));
-    
+
     layout->addMultiCellWidget(  LineEdit1, 0, 0, 0, 4);
-    
+
     Config cfg( "stockticker");
     cfg.setGroup( "Symbols" );
     QString symbollist;
     symbollist = cfg.readEntry("Symbols", "");
     LineEdit1->setText(symbollist);
-    
+
     QLabel *label;
     label = new QLabel(this);
     label->setText( tr("Enter stock symbols seperated\nby a space."));
@@ -65,12 +65,12 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     timeCheck->setChecked( cfg.readBoolEntry("timeCheck",1));
     layout->addMultiCellWidget(timeCheck, 2, 2, 0, 0 );
     QWhatsThis::add( timeCheck, tr("Toggles Time of current price field"));
-    
+
     dateCheck= new QCheckBox ( "Date", this );
     dateCheck->setChecked( cfg.readBoolEntry("dateCheck",1));
     layout->addMultiCellWidget( dateCheck, 2, 2, 1, 1 );
     QWhatsThis::add(dateCheck, tr("Toggles date field"));
-    
+
     symbolCheck= new QCheckBox ( "Symbol", this );
     symbolCheck->setChecked( cfg.readBoolEntry("symbolCheck",1));
     layout->addMultiCellWidget( symbolCheck, 2, 2, 2, 2 );
@@ -123,7 +123,7 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     cfg.setGroup("Timer");
     timerDelaySpin->setValue( cfg.readNumEntry("Delay",15));
     layout->addMultiCellWidget( timerDelaySpin , 6, 6, 0, 0);
-    
+
     QLabel *label2;
     label2 = new QLabel(this);
     label2->setText( tr("Minutes between lookups."));
@@ -137,7 +137,7 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     cfg.setGroup("Timer");
     scrollSpeed->setValue( cfg.readNumEntry("ScrollSpeed",50));
     layout->addMultiCellWidget( scrollSpeed , 7, 7, 0, 0);
-    
+
     QLabel *label3;
     label3 = new QLabel(this);
     label3->setText( tr("Scroll Speed, in milliseconds"));
@@ -151,18 +151,18 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     cfg.setGroup("Timer");
     scrollLength->setValue( cfg.readNumEntry("ScrollLength",1));
     layout->addMultiCellWidget( scrollLength , 8, 8, 0, 0);
-    
+
     QLabel *label4;
     label4 = new QLabel(this);
     label4->setText( tr("Scroll Length"));
     label4->setMaximumHeight(60);
     layout->addMultiCellWidget( label4, 8, 8, 1, 2);
-    
+
 //      lookupButton = new QPushButton(this, "LookupButton");
 //      lookupButton->setText(tr("Symbol Lookup"));
 //      connect(lookupButton,SIGNAL(clicked()),SLOT( doLookup()));
 //      layout->addMultiCellWidget( lookupButton , 9, 9, 0, 0);
-    
+
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Expanding );
     layout->addItem( spacer, 9, 0 );
 
@@ -192,7 +192,7 @@ void StocktickerPluginConfig::writeConfig() {
     cfg.writeEntry("Delay",timerDelaySpin->value());
     cfg.writeEntry("ScrollLength",scrollLength->value());
     cfg.writeEntry("ScrollSpeed",scrollSpeed->value());
-      
+
     cfg.write();
 }
 

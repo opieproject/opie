@@ -1,7 +1,6 @@
 #include "inputDialog.h"
 
 #include <qapplication.h>
-
 #include <qlayout.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
@@ -14,8 +13,6 @@
 #include <qstringlist.h>
 #include <qmainwindow.h>
 #include "helpwindow.h"
-
-#include <opie/oprocess.h>
 
 #include <stdlib.h>
 // #include <sys/stat.h>
@@ -31,9 +28,9 @@ InputDialog::InputDialog( )
 
     LineEdit1 = new QLineEdit( this, "LineEdit1" );
     LineEdit1->setFocus();
-    
+
     layout->addMultiCellWidget(  LineEdit1, 0, 0, 0, 3);
-    
+
     QLabel *label;
     label = new QLabel(this);
     label->setText( tr("Enter something to lookup / search."));
@@ -62,7 +59,7 @@ void InputDialog::doLookup() {
       OProcess proc;
       proc << "/usr/bin/wget";
       proc<<"-O"<< tempHtml<< url;
-    
+
       connect( &proc, SIGNAL( processExited(OProcess*)),this, SLOT( showBrowser(OProcess*)));
       proc.start( OProcess::NotifyOnExit);
 */
@@ -72,18 +69,18 @@ void InputDialog::doLookup() {
      StockLookup->showMaximized();
      StockLookup->show();
      LineEdit1->text();
-    
-    
+
+
 }
 
 void InputDialog::showBrowser(OProcess*) {
     qDebug("BLAH");
     QString tempHtml = "/tmp/stockticker.html";
-    
+
     HelpWindow *StockLookup = new HelpWindow( tempHtml,".",this, "SymbolLookup");
     StockLookup->setCaption("Symbol");
     StockLookup->showMaximized();
     StockLookup->show();
     LineEdit1->text();
-    
+
 }

@@ -14,13 +14,13 @@
    *                                                                         *
    ***************************************************************************/
 
-  #include <qlayout.h>
+  #include <opie2/oticker.h>
 
   #include <qpe/config.h>
 
-  #include <opie/oticker.h>
+  #include <qlayout.h>
 
-  extern "C" {
+extern "C" {
   #include "libstocks/stocks.h"
   }
 
@@ -210,7 +210,7 @@ void getStocks(char *blah) {
           tempString.sprintf("||==++==|");
           output +=tempString;
 
-            /* Simple function which help to browse in the stocks list */ 
+            /* Simple function which help to browse in the stocks list */
           stocks_tmp = next_stock(stocks_tmp);
       }
 
@@ -282,7 +282,7 @@ void getStocks(char *blah) {
   //      if( wasError)
   //          stocktickerTicker->setText("Checking connection");
 
-  //     if(Sock->state() == QSocket::Idle) {    
+  //     if(Sock->state() == QSocket::Idle) {
   //         Sock->connectToHost("finance.yahoo.com", 80);
   //         connect( Sock, SIGNAL( error(int) ),  SLOT(socketError(int)) );
   //         connect( Sock, SIGNAL( hostFound() ), SLOT(isConnected()) );
