@@ -8,6 +8,7 @@ using namespace OpieTooth;
 Manager::Manager( const QString& dev )
   : QObject()
 {
+    qWarning("created");
     m_device = dev;
     m_hcitool = 0;
     m_sdp = 0;
@@ -51,14 +52,16 @@ void Manager::isConnected( Device* dev ){
 
 }
 void Manager::searchDevices( const QString& device ){
+    qWarning("search devices");
     OProcess* hcitool = new OProcess();
-    hcitool->setName( device.latin1() );
+    hcitool->setName( device.isEmpty() ? "hci0" : device.latin1() );
     *hcitool << "hcitool" << "scan";
     connect( hcitool, SIGNAL(processExited(OProcess*) ) ,
              this, SLOT(slotHCIExited(OProcess* ) ) );
     connect( hcitool, SIGNAL(receivedStdout(OProcess*, char*, int ) ),
              this, SLOT(slotHCIOut(OProcess*, char*, int ) ) );
-    if (!hcitool->start() ) {
+    if (!hcitool->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
+        qWarning("could not start");
         RemoteDevices::ValueList list;
         emit foundDevices( device, list );
         delete hcitool;
@@ -103,7 +106,7 @@ void Manager::searchServices( const QString& remDevice ){
             this, SLOT(slotSDPExited(OProcess* ) ) );
     connect(m_sdp, SIGNAL(receivedStdout(OProcess*, char*,  int ) ),
             this, SLOT(slotSDPOut(OProcess*, char*, int) ) );
-    if (!m_sdp->start() ) {
+    if (!m_sdp->start(OProcess::NotifyOnExit,  OProcess::AllOutput) ) {
         delete m_sdp;
         Services::ValueList list;
         emit foundServices( remDevice, list );
@@ -158,10 +161,13 @@ Services::ValueList Manager::parseSDPOutput( const QString& out ) {
 }
 
 void Manager::slotHCIExited(OProcess* proc ) {
+    qWarning("process exited");
     RemoteDevices::ValueList list;
     if (proc->normalExit() ) {
+        qWarning("normalExit %s",  proc->name() );
         QMap<QString, QString>::Iterator it = m_devices.find(proc->name() );
         if (it != m_devices.end() ) {
+            qWarning("!= end ;)");
             list = parseHCIOutput( it.data() );
             m_devices.remove( it );
         }
@@ -171,15 +177,21 @@ void Manager::slotHCIExited(OProcess* proc ) {
 }
 void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
     QCString str( ch, len+1 );
+    qWarning("hci: %s",  str.data() );
     QMap<QString, QString>::Iterator it;
     it = m_devices.find( proc->name() );
+    qWarning("proc->name %s", proc->name() );
+    QString string;
     if (it != m_devices.end() ) {
-        QString string = it.data();
-        string.append( str );
-        m_devices.replace( proc->name(),  string );
+        qWarning("slotHCIOut ");
+        string = it.data();
     }
+    string.append( str );
+
+    m_devices.replace( proc->name(),  string );
 }
 RemoteDevices::ValueList Manager::parseHCIOutput(const QString& output ) {
+    qWarning("parseHCI %s",  output.latin1() );
     RemoteDevices::ValueList list;
     QStringList strList = QStringList::split('\n',  output );
     QStringList::Iterator it;
@@ -187,10 +199,15 @@ RemoteDevices::ValueList Manager::parseHCIOutput(const QString& output ) {
     for ( it = strList.begin(); it != strList.end(); ++it ) {
         str = (*it).stripWhiteSpace();
         qWarning("OpieTooth %s", str.latin1() );
-        QStringList split = QStringList::split("       ", str );
-        qWarning("Left:%s Right:%s",  split[0].latin1() , split[1].latin1() );
-        RemoteDevices rem( split[0].latin1() , split[1].latin1() );
-        list.append( rem );
+        int pos = str.findRev(':' );
+        if ( pos > 0 ) {
+            QString mac = str.left(17 );
+            str.remove( 0,  17 );
+            qWarning("mac %s",  mac.latin1() );
+            qWarning("rest:%s",  str.latin1() );
+            RemoteDevices rem( mac , str.stripWhiteSpace() );
+            list.append( rem );
+        }
     }
     return list;
 }
