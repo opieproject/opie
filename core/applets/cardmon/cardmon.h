@@ -27,8 +27,8 @@ class CardMonitor : public QWidget {
 public:
     CardMonitor( QWidget *parent = 0 );
     ~CardMonitor();
-    bool getStatusPcmcia( void );
-    bool getStatusSd( void );
+    bool getStatusPcmcia( int showPopUp = FALSE );
+    bool getStatusSd( int showPopUp = FALSE );
 
 private slots:
     void cardMessage( const QCString &msg, const QByteArray & );
@@ -45,6 +45,7 @@ private:
     bool cardInPcmcia1;
     QString cardInPcmcia1Name;
     bool cardInSd;
+    void iconShow();
 
 };
 

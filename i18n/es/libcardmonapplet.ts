@@ -1,23 +1,6 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CardMonitor</name>
-    <message>
-        <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
-    </message>
-    <message>
-        <source>CardMonitor</source>
-        <translation>Monitor de Cartão</translation>
-    </message>
-    <message>
-        <source>Eject card</source>
-        <translation type="obsolete">Desativar cartão</translation>
-    </message>
-    <message>
-        <source>Card eject failed!</source>
-        <translation type="obsolete">Falhou ao desativar o cartão!</translation>
-    </message>
     <message>
         <source>Eject SD/ MMC card</source>
         <translation type="obsolete"></translation>
@@ -31,7 +14,15 @@
         <translation type="obsolete"></translation>
     </message>
     <message>
+        <source>CardMonitor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>CF/PCMCIA card eject failed!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -50,10 +50,10 @@ CardMonitor::CardMonitor( QWidget *parent ) : QWidget( parent ),
     connect( sdChannel, SIGNAL(received(const QCString &, const QByteArray &)),
              this, SLOT(cardMessage( const QCString &, const QByteArray &)) );
 
-
     setFixedSize( pm.size() );
-    hide();
-    getStatusPcmcia();
+    getStatusPcmcia(TRUE);
+    getStatusSd(TRUE);
+    repaint(FALSE);
 }
 
 CardMonitor::~CardMonitor() {
@@ -65,20 +65,24 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
     int err=0;
 
     if ( cardInSd ) {
-        menu->insertItem( tr("Eject SD/ MMC card"), 0 );
+        menu->insertItem( tr("Eject SD/MMC card"), 0 );
     }
 
     if ( cardInPcmcia0 ) {
-        menu->insertItem( tr("Eject card (0) %1").arg(cardInPcmcia0Name), 1 );
+        menu->insertItem( tr("Eject card 0: %1").arg(cardInPcmcia0Name), 1 );
     }
 
     if ( cardInPcmcia1 ) {
-        menu->insertItem( tr("Eject card (1) %1").arg(cardInPcmcia1Name), 2 );
+        menu->insertItem( tr("Eject card 1: %1").arg(cardInPcmcia1Name), 2 );
     }
 
-    QPoint p = mapToGlobal( QPoint(1, -menu->sizeHint().height()-1) );
+    QPoint p = mapToGlobal ( QPoint ( 0, 0 ));
+    QSize s = menu->sizeHint ( );
+    int opt = menu->exec( QPoint (
+	p. x ( ) + ( width ( ) / 2 ) - ( s. width ( ) / 2 ),
+	p. y ( ) - s. height ( ) ), 0);
 
-    if ( menu->exec( p, 1 ) == 1 ) {
+    if ( opt == 1 ) {
 
         cmd = "/sbin/cardctl eject 0";
 	err = system( (const char *) cmd );
@@ -86,23 +90,23 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 0'! err=%d", err);
 	    QMessageBox::warning( this, tr("CardMonitor"), tr("CF/PCMCIA card eject failed!"),
 	    			  tr("&OK") );
-	}
-    } else if ( menu->exec( p, 1 ) == 0 ) {
+	} 
+    } else if ( opt == 0 ) {
         cmd = "/etc/sdcontrol compeject";
         err = system( (const char *) cmd );
         if ( ( err != 0 ) ) {
             qDebug("Could not execute `/etc/sdcontrol comeject'! err=%d", err);
             QMessageBox::warning( this, tr("CardMonitor"), tr("SD/MMC card eject failed!"),
                                   tr("&OK") );
-        }
-    } else if ( menu->exec( p, 1 ) == 2 ) {
+	} 
+    } else if ( opt == 2 ) {
         cmd = "/sbin/cardctl eject 1";
         err = system( (const char *) cmd );
 	if ( ( err == 127 ) || ( err < 0 ) ) {
 	    qDebug("Could not execute `/sbin/cardctl eject 1'! err=%d", err);
 	    QMessageBox::warning( this, tr("CardMonitor"), tr("CF/PCMCIA card eject failed!"),
 	    			  tr("&OK") );
-	}
+	} 
     }
 
     delete menu;
@@ -111,17 +115,19 @@ void CardMonitor::mousePressEvent( QMouseEvent * ) {
 
 void CardMonitor::cardMessage( const QCString &msg, const QByteArray & ) {
     if ( msg == "stabChanged()" ) {
+	// qDebug("Pcmcia: stabchanged");
 	if ( getStatusPcmcia() ) {
             repaint(FALSE);
         }
     } else if ( msg == "mtabChanged()" ) {
+	// qDebug("Pcmcia: mtabchanged");
         if ( getStatusSd() ) {
             repaint(FALSE);
         }
     }
 }
 
-bool CardMonitor::getStatusPcmcia( void ) {
+bool CardMonitor::getStatusPcmcia( int showPopUp = FALSE ) {
 
     bool cardWas0 = cardInPcmcia0; // remember last state
     bool cardWas1 = cardInPcmcia1;
@@ -147,12 +153,11 @@ bool CardMonitor::getStatusPcmcia( void ) {
         list = QStringList::split("\n", streamIn);
         for(QStringList::Iterator line=list.begin(); line!=list.end(); line++) {
             if( (*line).startsWith("Socket 0:") ){
-                // extendable, maybe read out card name
                 if( (*line).startsWith("Socket 0: empty") && cardInPcmcia0  ){
                     cardInPcmcia0 = FALSE;
-                    hide();
                 } else if ( !(*line).startsWith("Socket 0: empty") && !cardInPcmcia0 ){
                     cardInPcmcia0Name = (*line).mid(((*line).find(':')+1), (*line).length()-9 );
+		    cardInPcmcia0Name.stripWhiteSpace();
                     cardInPcmcia0 = TRUE;
                     show();
                 }
@@ -160,9 +165,9 @@ bool CardMonitor::getStatusPcmcia( void ) {
             if( (*line).startsWith("Socket 1:") ){
                 if( (*line).startsWith("Socket 1: empty") && cardInPcmcia1 ){
                     cardInPcmcia1 = FALSE;
-                    hide();
                 } else if ( !(*line).startsWith("Socket 1: empty") && !cardInPcmcia1 ){
                     cardInPcmcia1Name = (*line).mid(((*line).find(':')+1), (*line).length()-9  );
+		    cardInPcmcia1Name.stripWhiteSpace();
                     cardInPcmcia1 = TRUE;
                     show();
 		}
@@ -173,9 +178,31 @@ bool CardMonitor::getStatusPcmcia( void ) {
 	qDebug("no file found");
         cardInPcmcia0 = FALSE;
         cardInPcmcia1 = FALSE;
-     	hide();
 	return FALSE;
 
+    }
+
+    if(!cardInPcmcia0 && !cardInPcmcia1) { 
+	qDebug("Pcmcia: no cards");
+    } 
+
+    if( !showPopUp && (cardWas0 != cardInPcmcia0 || cardWas1 != cardInPcmcia1)) {
+	QString text = "";
+	if(cardWas0 != cardInPcmcia0) {
+	    if(cardInPcmcia0) { text += tr("New card: "); }
+	    else { text += tr("Ejected: "); }
+	    text += cardInPcmcia0Name;
+	}
+	if(cardWas0 != cardInPcmcia0 && cardWas1 != cardInPcmcia1) {
+	    text += "\n";
+	}
+	if(cardWas1 != cardInPcmcia1) {
+	    if(cardInPcmcia1) { text += tr("New card: "); }
+	    else { text += tr("Ejected: "); }
+	    text += cardInPcmcia1Name;
+	}
+	QMessageBox::warning( this, tr("CardMonitor"), text,
+	    			  tr("&OK") );
     }
 
     f.close();
@@ -184,7 +211,7 @@ bool CardMonitor::getStatusPcmcia( void ) {
 }
 
 
-bool CardMonitor::getStatusSd( void ) {
+bool CardMonitor::getStatusSd( int showPopUp = FALSE ) {
 
     bool cardWas=cardInSd; // remember last state
     cardInSd=false;
@@ -201,16 +228,15 @@ bool CardMonitor::getStatusSd( void ) {
             }
         }
         endmntent( mntfp );
-        if (cardInSd!=cardWas) {
-            if (cardInSd) {
-                show();
-            } else {
-                hide();
-            }
-        }
-    } else {
-        hide();
     }
+    if(!showPopUp && cardWas != cardInSd) {
+	QString text = "";
+	if(cardInSd) { text += "SD Inserted"; }
+	else { text += "SD Removed"; }
+	QMessageBox::warning( this, tr("CardMonitor"), text,
+	    			  tr("&OK") );
+    }
+
 #else
 #error "Not on Linux"
 #endif
@@ -222,8 +248,10 @@ void CardMonitor::paintEvent( QPaintEvent * ) {
 
     if ( cardInPcmcia0 || cardInPcmcia1 || cardInSd ) {
 	p.drawPixmap( 0, 0, pm );
+	show();
     } else {
 	p.eraseRect( rect() );
+	hide();
     }
 }
 
