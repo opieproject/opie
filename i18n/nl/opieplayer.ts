@@ -6,263 +6,269 @@
 your sound device.
 open(&quot;/dev/dsp&quot;)
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Er is iets mis met uw
+audio-apparaat.
+open (&quot;/dev/dsp&quot;)
+</translation>
     </message>
     <message>
         <source>
 
 Closing player now.</source>
-        <translation type="unfinished"></translation>
+        <translation>Speler wordt gesloten.</translation>
     </message>
     <message>
         <source>Abort</source>
-        <translation type="unfinished"></translation>
+        <translation>Afbreken</translation>
     </message>
 </context>
 <context>
     <name>AudioWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpieSpeler</translation>
     </message>
 </context>
 <context>
     <name>MediaPlayer</name>
     <message>
         <source>No file</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen fout</translation>
     </message>
     <message>
         <source>Error: There is no file selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout: Er is geen bestand geselecteerd</translation>
     </message>
     <message>
         <source>File not found</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand niet gevonden</translation>
     </message>
     <message>
         <source>The following file was not found: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Het volgende bestand is niet gevonden: &lt;i&gt;</translation>
     </message>
     <message>
         <source>No decoder found</source>
-        <translation type="unfinished"></translation>
+        <translation>Geen decoder gevonden</translation>
     </message>
     <message>
         <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry, geen passende decoder gevonden voor bestand: &lt;i&gt;</translation>
     </message>
     <message>
         <source>Error opening file</source>
-        <translation type="unfinished"></translation>
+        <translation>Fout bij openen van bestand</translation>
     </message>
     <message>
         <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Sorry, er is een fout opgetreden bij het spelen van bestand: &lt;i&gt;</translation>
     </message>
     <message>
         <source> File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand:</translation>
     </message>
     <message>
         <source>, Length: </source>
-        <translation type="unfinished"></translation>
+        <translation>, Lengte:</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volume</translation>
     </message>
 </context>
 <context>
     <name>PlayListSelection</name>
     <message>
         <source>Playlist Selection</source>
-        <translation type="unfinished"></translation>
+        <translation>Afspeellijst selectie</translation>
     </message>
 </context>
 <context>
     <name>PlayListWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpieSpeler</translation>
     </message>
     <message>
         <source>Play Operations</source>
-        <translation type="unfinished"></translation>
+        <translation>Speelberwerkingen</translation>
     </message>
     <message>
         <source>Add to Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg aan afspeellijst toe</translation>
     </message>
     <message>
         <source>Remove from Playlist</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder van afspeellijst</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Speel af</translation>
     </message>
     <message>
         <source>Randomize</source>
-        <translation type="unfinished"></translation>
+        <translation>Willekeurige volgorde</translation>
     </message>
     <message>
         <source>Loop</source>
-        <translation type="unfinished"></translation>
+        <translation>Repeteer</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand</translation>
     </message>
     <message>
         <source>Clear List</source>
-        <translation type="unfinished"></translation>
+        <translation>Schoon lijst op</translation>
     </message>
     <message>
         <source>Add all audio files</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg alle audio bestanden toe</translation>
     </message>
     <message>
         <source>Add all video files</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg alle video bestanden toe</translation>
     </message>
     <message>
         <source>Add all files</source>
-        <translation type="unfinished"></translation>
+        <translation>Voeg alle bestanden toe</translation>
     </message>
     <message>
         <source>Save PlayList</source>
-        <translation type="unfinished"></translation>
+        <translation>Sla afspeellijst op</translation>
     </message>
     <message>
         <source>Open File or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Open Bestand of URL</translation>
     </message>
     <message>
         <source>Rescan for Audio Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Herzoeken audiobestanden</translation>
     </message>
     <message>
         <source>Rescan for Video Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Herzoeken videobestanden</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Bekijk</translation>
     </message>
     <message>
         <source>Full Screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Volledig scherm</translation>
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Schaal</translation>
     </message>
     <message>
         <source>Skins</source>
-        <translation type="unfinished"></translation>
+        <translation>Skins</translation>
     </message>
     <message>
         <source>Move Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats omhoog</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder</translation>
     </message>
     <message>
         <source>Move Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Verplaats omlaag</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Grootte</translation>
     </message>
     <message>
         <source>Media</source>
-        <translation type="unfinished"></translation>
+        <translation>Medium</translation>
     </message>
     <message>
         <source>Path</source>
-        <translation type="unfinished"></translation>
+        <translation>Pad</translation>
     </message>
     <message>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Video</translation>
     </message>
     <message>
         <source>Lists</source>
-        <translation type="unfinished"></translation>
+        <translation>Lijsten</translation>
     </message>
     <message>
         <source>OpiePlayer: </source>
-        <translation type="unfinished"></translation>
+        <translation>OpieSpeler:</translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation type="unfinished"></translation>
+        <translation>Plaatsgebrek</translation>
     </message>
     <message>
         <source>There was a problem saving the playlist.
 Your playlist may be missing some entries
 the next time you start it.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een probleem bij het opslaan van de
+afspeellijst. De afspeellijst kan de vogende
+keer een aantal nummers missen.</translation>
     </message>
     <message>
         <source>Invalid File</source>
-        <translation type="unfinished"></translation>
+        <translation>Onjuist bestand</translation>
     </message>
     <message>
         <source>There was a problem in getting the file.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is een probleem bij het verkrijgen van het bestand.</translation>
     </message>
     <message>
         <source>Remove Playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwijder afspeellijst?</translation>
     </message>
     <message>
         <source>You really want to delete
 this playlist?</source>
-        <translation type="unfinished"></translation>
+        <translation>Wilt u deze afspeellijst
+echt verwijderen?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Ja</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>Nee</translation>
     </message>
     <message>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenschappen</translation>
     </message>
     <message>
         <source>Play Selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Speel geselecteerden</translation>
     </message>
     <message>
         <source>Open file or URL</source>
-        <translation type="unfinished"></translation>
+        <translation>Open bestand of URL</translation>
     </message>
     <message>
         <source>Save m3u Playlist </source>
-        <translation type="unfinished"></translation>
+        <translation>Sla m3u afspeellijst op</translation>
     </message>
 </context>
 <context>
     <name>VideoWidget</name>
     <message>
         <source>OpiePlayer</source>
-        <translation type="unfinished"></translation>
+        <translation>OpieSpeler</translation>
     </message>
 </context>
 </TS>

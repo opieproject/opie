@@ -3,121 +3,121 @@
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>OZoek</translation>
     </message>
     <message>
         <source>adressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>adresboek</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation type="unfinished"></translation>
+        <translation>tedoen</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation type="unfinished"></translation>
+        <translation>agenda</translation>
     </message>
     <message>
         <source>applications</source>
-        <translation type="unfinished"></translation>
+        <translation>programma&apos;s</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documenten</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek</translation>
     </message>
     <message>
         <source>Search all</source>
-        <translation type="unfinished"></translation>
+        <translation>Zoek alles</translation>
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
+        <translation>Hoofdlettergevoelig</translation>
     </message>
     <message>
         <source>Use wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Gebruik jokertekens</translation>
     </message>
     <message>
         <source>The details of the current result</source>
-        <translation type="unfinished"></translation>
+        <translation>De details van de huidige resultaten</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Instellingen</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opties</translation>
     </message>
     <message>
         <source>Enter your search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Voer hier de zoektermen in</translation>
     </message>
 </context>
 <context>
     <name>OListView</name>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultaten</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>laat zien</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>verander</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>voer uit</translation>
     </message>
     <message>
         <source>open in filemanager</source>
-        <translation type="unfinished"></translation>
+        <translation>open in bestandsmanager</translation>
     </message>
     <message>
         <source>open with </source>
-        <translation type="unfinished"></translation>
+        <translation>open met</translation>
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>laat afgemaakte taken zien</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>laat vroegere gebeurtenissen zien</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>zoek in data</translation>
     </message>
     <message>
         <source>File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Bestand:</translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation type="unfinished"></translation>
+        <translation>Link:</translation>
     </message>
     <message>
         <source>Mimetype: </source>
-        <translation type="unfinished"></translation>
+        <translation>MIMEtype:</translation>
     </message>
     <message>
         <source>search content</source>
-        <translation type="unfinished"></translation>
+        <translation>zoek inhoud</translation>
     </message>
     <message>
         <source>searching %1</source>
-        <translation type="unfinished"></translation>
+        <translation>zoek naar %1</translation>
     </message>
 </context>
 </TS>

@@ -47,16 +47,18 @@ precies aan om het scherm in te stellen.</translation>
     <message>
         <source>Battery level is critical!
 Keep power off until power restored!</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterijlading is kritiek!
+Laat uitgeschakeld tot kan worden opgeladen!</translation>
     </message>
     <message>
         <source>Battery is running very low.</source>
-        <translation type="unfinished"></translation>
+        <translation>Batterijlading is erg laag.</translation>
     </message>
     <message>
         <source>The Back-up battery is very low.
 Please charge the back-up battery.</source>
-        <translation type="unfinished"></translation>
+        <translation>De reservebatterijlading is erg laag.
+Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>business card</source>
@@ -69,7 +71,8 @@ Please charge the back-up battery.</source>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;De systeemdatum lijkt niet correct.
+(%1)&lt;/p&gt;&lt;p&gt;Wilt u deze corrigeren?&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
@@ -103,7 +106,7 @@ Please charge the back-up battery.</source>
     </message>
     <message>
         <source>&lt;p&gt;No application is defined for this document.&lt;p&gt;Type is %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Er is geen programma ingesteld voor dit document.&lt;p&gt;Type is %1.</translation>
     </message>
 </context>
 <context>
@@ -205,7 +208,8 @@ Please charge the back-up battery.</source>
     <message>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;
+Deze afsluitopties worden voornamelijk voor gebruik tijdens ontwikkeling en tests van het Opie systeem. In een normale omgeving zijn deze opties niet nodig.</translation>
     </message>
     <message>
         <source>Cancel</source>
@@ -220,7 +224,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade.</source>
-        <translation type="unfinished"></translation>
+        <translation>Een niet geautoriseerd systeem probeert toegang te krijgen tot dit apparaat.&lt;p&gt;Aub upgraden als u een versie van Qtopia desktop ouder dan 1.5.1 gebruikt.</translation>
     </message>
     <message>
         <source>Deny</source>
@@ -228,7 +232,7 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;p&gt;An unrecognized system is requesting access to this device.&lt;p&gt;If you have just initiated a Sync for the first time, this is normal.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Een onbekend systeem probeert toegang te krijgen tot dit apparaat. Dit is normaal als dit de eerste keer is dat u synchroniseert.</translation>
     </message>
     <message>
         <source>Allow</source>
