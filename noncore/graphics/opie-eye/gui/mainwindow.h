@@ -21,7 +21,7 @@ namespace Ui{
 
 class PIconView;
 class imageinfo;
-class ImageScrollView;
+class ImageView;
 class PMainWindow : public QMainWindow {
     Q_OBJECT
     enum Views { IconView,  ImageInfo, ImageDisplay };
@@ -54,7 +54,7 @@ private:
     Opie::Ui::OWidgetStack *m_stack;
     PIconView* m_view;
     imageinfo *m_info;
-    ImageScrollView *m_disp;
+    ImageView *m_disp;
     bool autoRotate;
     bool autoScale;
     QToolButton*rotateButton;

@@ -7,7 +7,7 @@
 #include "iconview.h"
 #include "filesystem.h"
 #include "imageinfoui.h"
-#include "imagescrollview.h"
+#include "imageview.h"
 
 #include <iface/ifaceinfo.h>
 #include <iface/dirview.h>
@@ -162,10 +162,17 @@ void PMainWindow::slotConfig() {
     Opie::Ui::OKeyConfigWidget* keyWid = new Opie::Ui::OKeyConfigWidget( wid, "key config" );
     keyWid->setChangeMode( Opie::Ui::OKeyConfigWidget::Queue );
     keyWid->insert( tr("Browser Keyboard Actions"), m_view->manager() );
+
     if ( !m_info ) {
         initInfo();
     }
     keyWid->insert( tr("Imageinfo Keyboard Actions"), m_info->manager() );
+
+    if ( !m_disp ) {
+        initDisp();
+    }
+    keyWid->insert( tr("Imageview Keyboard Actions"), m_disp->manager() );
+
     keyWid->load();
     wid->addTab( keyWid, QString::fromLatin1("AppsIcon" ), tr("Keyboard Configuration") );
 
@@ -215,12 +222,12 @@ void PMainWindow::initInfo() {
     connect(m_info,SIGNAL(dispImage(const QString&)),this,SLOT(slotDisplay(const QString&)));
 }
 void PMainWindow::initDisp() {
-    initT<ImageScrollView>( "Image ScrollView", &m_disp, ImageDisplay );
+    initT<ImageView>( "Image ScrollView", &m_disp, ImageDisplay );
     if (m_disp) {
         m_disp->setAutoScale(autoScale);
         m_disp->setAutoRotate(autoRotate);
+        connect(m_disp,SIGNAL(dispImageInfo(const QString&)),this,SLOT(slotShowInfo(const QString&)));
     }
-
 }
 
 /**

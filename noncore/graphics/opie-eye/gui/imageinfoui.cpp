@@ -17,7 +17,6 @@
 #include "lib/imagecache.h"
 
 #include <opie2/oconfig.h>
-#include <opie2/oconfig.h>
 #include <opie2/okeyconfigwidget.h>
 #include <opie2/odebug.h>
 
