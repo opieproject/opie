@@ -134,7 +134,7 @@ private:
  * You can either handle the QKeyEvent yourself and ask this class if it is
  * handled by your action and let give you the action. Or you can install
  * the event filter and get a signal.
- * You need to load ans save yourself!
+ * You need to load and save yourself!
  *
  * @since 1.1.2
  */
@@ -145,7 +145,7 @@ public:
     OKeyConfigManager(Opie::Core::OConfig *conf = 0,
                       const QString& group = QString::null,
                       const OKeyPair::List &block = OKeyPair::List(),
-                      bool grabkeyboard = false,  QObject * par = 0,
+                      bool grabkeyboard = false, QObject * par = 0,
                       const char* name = 0      );
     ~OKeyConfigManager();
 
@@ -168,7 +168,53 @@ public:
 
     bool eventFilter( QObject*, QEvent* );
 
+    /**
+     * Sets the event mask flags aMask.
+     *
+     * aMask is a combination of OKeyConfigManager::EventMask
+     *
+     * @see eventMask(), testEventMask(), addEventMask(), clearEventMask()
+     */
+    void setEventMask(uint aMask);
+    /**
+     * Returns the event mask flags set.
+     *
+     * aMask is a combination of OKeyConfigManager::EventMask
+     *
+     * @see setEventMask(), testEventMask(), addEventMask(), clearEventMask()
+     */
+    uint eventMask()const;
+    /**
+     * Test if the event mask flag aMask is set.
+     *
+     * @param aMask one of OKeyConfigManager::EventMask
+     *
+     * @see eventMask(), setEventMask(), addEventMask(), clearEventMask()
+     */
+    bool testEventMask(uint aMask);
+    /**
+     * Add the event mask flag aMask.
+     *
+     * @param aMask one of OKeyConfigManager::EventMask
+     *
+     * @see eventMask(), setEventMask(), addEventMask(), clearEventMask()
+     */
+    void addEventMask(uint aMask);
+    /**
+     * Clears the event mask flag aMask.
+     *
+     * @param aMask is one of OKeyConfigManager::EventMask
+     *
+     * @see eventMask(), testEventMask(), addEventMask(), setEventMask()
+     */
+    void clearEventMask(uint aMask);
+
     OKeyConfigItem::List keyConfigList()const;
+
+    enum EventMask {
+        MaskPressed = 0x1,
+        MaskReleased = 0x2,
+    };
 signals:
     /**
      * The Signals are triggered on KeyPress and KeyRelease!
@@ -197,7 +243,33 @@ private:
     OKeyMapConfigPrivate *m_map;
     class Private;
     Private *d;
+    uint m_event_mask;
 };
+
+inline bool OKeyConfigManager::testEventMask(uint aMask)
+{
+    return (m_event_mask&aMask)!=0;
+}
+
+inline void OKeyConfigManager::addEventMask(uint aMask)
+{
+    m_event_mask |= aMask;
+}
+
+inline void OKeyConfigManager::clearEventMask(uint aMask)
+{
+    m_event_mask &= ~aMask;
+}
+
+inline void OKeyConfigManager::setEventMask(uint aMask)
+{
+    m_event_mask = aMask;
+}
+
+inline uint OKeyConfigManager::eventMask()const
+{
+    return  m_event_mask;
+}
 
 }
 }

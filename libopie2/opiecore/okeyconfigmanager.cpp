@@ -409,12 +409,22 @@ bool OKeyConfigItem::operator!=( const OKeyConfigItem& conf )const {
     return !( *this == conf );
 }
 
+/*! \enum OKeyConfigManager::EventMask
+     <a name="Eventmask flags"></a>
+     This enum is used to tell OKeyConfigManager which type of key events should inspected.
+
+     <ul>
+         <li>\c MaskPressed When a key is pressed an action performs
+         <li>\c MaskReleased When a key is released an action performs
+     </ul>
+*/
+
 /**
  * \brief c'tor
  * The Constructor for a OKeyConfigManager
  *
  * You can use this manager in multiple ways. Either make it handle
- * QKeyEvents
+ * QKeyEvents. The EventMask is set to OKeyConfigManager::MaskReleased by default.
  *
  * \code
  * Opie::Core::Config conf = oApp->config();
@@ -473,6 +483,7 @@ OKeyConfigManager::OKeyConfigManager( Opie::Core::OConfig* conf,
       m_blackKeys( black ), m_grab( grabkeyboard ), m_map( 0 ){
     if ( m_grab )
         QPEApplication::grabKeyboard();
+    m_event_mask = OKeyConfigManager::MaskReleased;
 }
 
 
@@ -674,7 +685,8 @@ bool OKeyConfigManager::eventFilter( QObject* obj, QEvent* ev) {
     if ( !obj->isWidgetType() )
         return false;
 
-    if ( ev->type() != QEvent::KeyPress && ev->type() != QEvent::KeyRelease )
+    if ( (ev->type() != QEvent::KeyPress||!testEventMask(MaskPressed)) &&
+        (ev->type() != QEvent::KeyRelease||!testEventMask(MaskReleased)) )
         return false;
 
     QKeyEvent *key = static_cast<QKeyEvent*>( ev );
