@@ -66,7 +66,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb1->setSpacing( 2 );
 
     QLabel *palmtopLogo = new QLabel( this );
-    QImage logo1 = Resource::loadImage( "launcher/opielogo" );
+    QImage logo1 = Resource::loadImage( "logo/opielogo" );
     logo1 = logo1.smoothScale( 50, 55 );
     QPixmap logo1Pixmap;
     logo1Pixmap.convertFromImage( logo1 );
@@ -83,7 +83,7 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     hb1->setSpacing( 2 );
 
     QLabel *linuxLogo = new QLabel( this );
-    QImage logo2 = Resource::loadImage( "tux-logo" );
+    QImage logo2 = Resource::loadImage( "logo/tux-logo" );
     logo2 = logo2.smoothScale( 55, 60 );
     QPixmap logo2Pixmap;
     logo2Pixmap.convertFromImage( logo2 );
