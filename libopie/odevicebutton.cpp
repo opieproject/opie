@@ -96,6 +96,10 @@ QByteArray OQCopMessage::data ( ) const
 	return d-> m_data;
 }
 
+bool OQCopMessage::isNull() const
+{
+	return d-> m_message.isNull() || d-> m_channel.isNull();
+}
 void OQCopMessage::setChannel ( const QCString &ch )
 {
 	d-> m_channel = ch;

@@ -44,6 +44,8 @@ public:
 	QCString message ( ) const;
 	QByteArray data ( ) const;
 
+        bool isNull()const;
+
 	bool send ( );
 
 private:
