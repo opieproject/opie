@@ -1,12 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
+#include <sys/termios.h>
 
 #include <qmultilineedit.h>
+#include <qsocketnotifier.h>
 
 #include "../profile.h"
 #include "../io_serial.h"
-#include "../sz_transfer.h"
+#include "../filetransfer.h"
 
+#include <opie/oprocess.h>
 
 #include "senderui.h"
 
@@ -15,7 +19,7 @@ SenderUI::SenderUI()
 
     /* we do that manually */
     Profile prof;
-    QString str = "/dev/ttyS1";
+    QString str = "/dev/ttyS0";
     prof.writeEntry("Device",str );
     prof.writeEntry("Baud", 115200 );
 
@@ -30,17 +34,16 @@ SenderUI::SenderUI()
         qWarning("could not open");
 
 
-
 }
 SenderUI::~SenderUI() {
 
 }
 void SenderUI::slotSendFile() {
 
-    sz = new SzTransfer(SzTransfer::SZ, ser);
-    sz->sendFile("/home/jake/test");
+    sz = new FileTransfer(FileTransfer::SZ, ser);
+    sz->sendFile("/home/ich/bootopie-v06-13.jffs2");
 
-    connect (sz, SIGNAL(sent()), 
+    connect (sz, SIGNAL(sent()),
              this, SLOT(fileTransComplete()));
 }
 
@@ -59,4 +62,7 @@ void SenderUI::got(const QByteArray& ar) {
 void SenderUI::fileTransComplete() {
 
     qWarning("file transfer compete");
+}
+void SenderUI::send() {
+
 }
