@@ -1,0 +1,4 @@
+Makefile
+.moc
+usbGUI.cpp
+usbGUI.h

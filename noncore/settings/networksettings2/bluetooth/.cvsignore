@@ -1,0 +1,6 @@
+Makefile
+.moc
+bluetoothBNEPGUI.cpp
+bluetoothBNEPGUI.h
+bluetoothRFCOMMGUI.cpp
+bluetoothRFCOMMGUI.h

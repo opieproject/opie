@@ -1,0 +1,4 @@
+Makefile
+.moc
+profileGUI.cpp
+profileGUI.h

@@ -1,0 +1,4 @@
+Makefile
+.moc
+irdaGUI.cpp
+irdaGUI.h
