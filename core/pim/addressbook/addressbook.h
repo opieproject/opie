@@ -29,6 +29,7 @@
 #include <qlineedit.h>
 #include "ofloatbar.h"
 #include "abview.h"
+#include "abconfig.h"
 
 class ContactEditor;
 class AbLabel;
@@ -114,12 +115,6 @@ private:
 	// Searching stuff
 	OFloatBar* searchBar;
 	QLineEdit* searchEdit;
-	bool useRegExp;
-	bool doNotifyWrapAround;
-	bool caseSensitive;
-
-	bool m_useQtMail;
-	bool m_useOpieMail;
 
 	QAction *actionNew, *actionEdit, *actionTrash, *actionFind, *actionBeam, *actionPersonal, *actionMail;
 
@@ -127,9 +122,10 @@ private:
 
 	bool syncing;
 	QFont *defaultFont;
-	int startFontSize;
 
 	bool isLoading;
+
+	AbConfig m_config;
 };
 
 #endif

@@ -9,6 +9,7 @@ HEADERS	= addressbook.h \
 		  picker.h \
                   ofloatbar.h \
                   configdlg.h \
+                  abconfig.h \
                   abview.h
 SOURCES	= main.cpp \
 		  addressbook.cpp \
@@ -18,6 +19,7 @@ SOURCES	= main.cpp \
 		  addresssettings.cpp \
 		  picker.cpp \
                   configdlg.cpp \
+                  abconfig.cpp \
                   abview.cpp
 
 INTERFACES	= addresssettingsbase.ui configdlg_base.ui

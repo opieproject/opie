@@ -30,8 +30,6 @@
 
 #include <opie/ofileselector.h>
 #include <opie/ofiledialog.h>
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
 #include <opie/ocontact.h>
 
 #include <qpe/global.h>
@@ -41,6 +39,8 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpetoolbar.h>
 #include <qpe/qpemenubar.h>
+#include <qpe/qpeapplication.h>
+#include <qpe/config.h>
 
 #include <qaction.h>
 #include <qdialog.h>
@@ -80,25 +80,9 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	  catMenu (0l),
 	  fontMenu (0l),
 	  abEditor(0l),
-	  useRegExp(false),
-	  doNotifyWrapAround(true),
-	  caseSensitive(false),
-	  m_useQtMail(true),
-	  m_useOpieMail(false),
 	  syncing(FALSE)
 {
 	isLoading = true;
-
-	// Read Config settings
-	Config cfg("AddressBook");
-	cfg.setGroup("Search");
-	useRegExp = cfg.readBoolEntry( "useRegExp" );
-	caseSensitive = cfg.readBoolEntry( "caseSensitive" );
-	doNotifyWrapAround = cfg.readBoolEntry( "doNotifyWrapAround" );
-	cfg.setGroup("Mail");
-	m_useQtMail = cfg.readBoolEntry( "useQtMail", true );
-	m_useOpieMail=cfg.readBoolEntry( "useOpieMail" );
-	
 
 	initFields();
 	
@@ -271,7 +255,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
  	defaultFont = new QFont( m_abView->font() );
 	
- 	slotSetFont(startFontSize);
+ 	slotSetFont(m_config.fontSize());
 	
 	mbList->insertItem( tr("Font"), fontMenu);
 	setCentralWidget(listContainer);
@@ -286,19 +270,11 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 void AddressbookWindow::slotConfig()
 {
 	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
-	dlg -> setUseRegExp ( useRegExp );
-	dlg -> setBeCaseSensitive( caseSensitive );
-	dlg -> setSignalWrapAround( doNotifyWrapAround );
-	dlg -> setQtMail ( m_useQtMail );
-	dlg -> setOpieMail ( m_useOpieMail );
+	dlg -> setConfig( m_config );
 	dlg -> showMaximized();
 	if ( dlg -> exec() ) {
 		qWarning ("Config Dialog accepted !");
-		useRegExp = dlg -> useRegExp();
-		caseSensitive = dlg -> beCaseSensitive();
-		doNotifyWrapAround = dlg -> signalWrapAround();
-		m_useQtMail = dlg -> useQtMail();
-		m_useOpieMail= dlg -> useOpieMail();
+		m_config = dlg -> getConfig();
 	}
 
 	delete dlg;
@@ -310,7 +286,7 @@ void AddressbookWindow::slotSetFont( int size ) {
 	if (size > 2 || size < 0)
 		size = 1;
 	
-	startFontSize = size;
+	m_config.setFontSize( size );
 	
 	QFont *currentFont;
 	
@@ -375,17 +351,7 @@ void AddressbookWindow::resizeEvent( QResizeEvent *e )
 
 AddressbookWindow::~AddressbookWindow()
 {
-	Config cfg("AddressBook");
-	cfg.setGroup("Font");
-	cfg.writeEntry("fontSize", startFontSize);
-
-	cfg.setGroup("Search");
-	cfg.writeEntry("useRegExp", useRegExp);
-	cfg.writeEntry("caseSensitive", caseSensitive);
-	cfg.writeEntry("doNotifyWrapAround", doNotifyWrapAround);
-	cfg.setGroup("Mail");
-	cfg.writeEntry( "useQtMail", m_useQtMail );
-	cfg.writeEntry( "useOpieMail", m_useOpieMail);
+	m_config.save();
 }
 
 void AddressbookWindow::slotUpdateToolbar()
@@ -452,7 +418,7 @@ void AddressbookWindow::slotFindClose()
 
 void AddressbookWindow::slotFind()
 {
-	m_abView->slotDoFind( searchEdit->text(), caseSensitive, useRegExp, false);
+	m_abView->slotDoFind( searchEdit->text(), m_config.beCaseSensitive(), m_config.useRegExp(), false);
 	
 	searchEdit->clearFocus();
 	// m_abView->setFocus();
@@ -494,7 +460,7 @@ void AddressbookWindow::writeMail()
 
 	// Try to access the preferred. If not possible, try to 
 	// switch to the other one.. 
-	if ( m_useQtMail ){
+	if ( m_config.useQtMail() ){
 		qWarning ("Accessing: %s", (basepath + "/bin/qtmail").latin1());
 	        if ( QFile::exists( basepath + "/bin/qtmail" ) ){
 			qWarning ("QCop");
@@ -502,9 +468,9 @@ void AddressbookWindow::writeMail()
 			e << name << email;
 			return;
 		} else
-			m_useOpieMail = true;
+			m_config.setUseOpieMail( true );
 	}
-	if ( m_useOpieMail ){
+	if ( m_config.useOpieMail() ){
 		qWarning ("Accessing: %s", (basepath + "/bin/mail").latin1());
 		if ( QFile::exists( basepath + "/bin/mail" ) ){
 			qWarning ("QCop");
@@ -512,7 +478,7 @@ void AddressbookWindow::writeMail()
 			e << name << email;
 			return;
 		} else
-			m_useQtMail = true;
+			m_config.setUseQtMail( true );
 	}
 
 }
@@ -861,8 +827,7 @@ void AddressbookWindow::initFields()
 	cfg.setGroup( "Version" );
 	version = cfg.readNumEntry( "version" );
 	i = 0;
-	startFontSize = 1;
-	
+
 	if ( version >= ADDRESSVERSION ) {
 		
 		cfg.setGroup( "ImportantCategory" );
@@ -876,8 +841,6 @@ void AddressbookWindow::initFields()
 			slOrderedFields.append( zn );
 			zn = cfg.readEntry( "Category" + QString::number(++i), QString::null );
 		}
-		cfg.setGroup( "Font" );
-		startFontSize = cfg.readNumEntry( "fontSize", 1 );
 		
 		
 	} else {
@@ -952,9 +915,9 @@ void AddressbookWindow::slotNotFound()
 void AddressbookWindow::slotWrapAround()
 {
 	qWarning("Got wrap signal !");
-	if ( doNotifyWrapAround )
-		QMessageBox::information( this, tr( "End of list" ),
-					  tr( "End of list. Wrap around now.. !" ) + "\n" );
+// 	if ( doNotifyWrapAround )
+// 		QMessageBox::information( this, tr( "End of list" ),
+// 					  tr( "End of list. Wrap around now.. !" ) + "\n" );
 		
 }
 
