@@ -441,26 +441,22 @@ QString OContact::toRichText() const
 
     Config cfg("qpe");
     cfg.setGroup("Appearance");
-    int dateformat = cfg.readNumEntry( "DateFormat", Zip_City_State );
+    int addressformat = cfg.readNumEntry( "AddressFormat", Zip_City_State );
 
     // name, jobtitle and company
     if ( !(value = fullName()).isEmpty() )
 	text += "<b><h3><img src=\"addressbook/AddressBook\"> " + Qtopia::escapeString(value) + "</h3></b>";
     
     if ( !(value = jobTitle()).isEmpty() )
-	text += Qtopia::escapeString(value);
+	text += Qtopia::escapeString(value) + " ";
 
     comp = company();
     if ( !(value = department()).isEmpty() ) {
 	text += Qtopia::escapeString(value);
 	if ( comp )
-	    text += ", ";
-	else
-	    text += "<br>";
-    }
-    if ( !comp.isEmpty() )
-	text += Qtopia::escapeString(comp);
-
+		text += ", " + Qtopia::escapeString(comp);
+    }else if ( comp )
+	    text += "<br>" + Qtopia::escapeString(comp);
     text += "<br><hr>";
 
     // defailt email
@@ -474,7 +470,7 @@ QString OContact::toRichText() const
     // business address
     if ( !businessStreet().isEmpty() || !businessCity().isEmpty() ||
 	 !businessZip().isEmpty() || !businessCountry().isEmpty() ) {
-	text += QObject::tr( "<br><br><b>Work Address:</b>" );
+	text += QObject::tr( "<br><b>Work Address:</b>" );
 	marker = true;
     }
 
@@ -483,7 +479,7 @@ QString OContact::toRichText() const
 	    marker = true;
     }
 
-    switch( dateformat ){
+    switch( addressformat ){
     case Zip_City_State:{ //  Zip_Code City, State
 	    state =  businessState();
 	    if ( !(value = businessZip()).isEmpty() ){
@@ -493,8 +489,8 @@ QString OContact::toRichText() const
 	    }
 	    if ( !(value = businessCity()).isEmpty() ) {
 		    marker = true;
-		    if ( !businessZip() )
-			    text += "<br> ";  
+		    if ( businessZip().isEmpty() && !businessStreet().isEmpty() )
+			    text += "<br>";
 		    text += Qtopia::escapeString(value);
 		    if ( state )
 			    text += ", " + Qtopia::escapeString(state);
@@ -566,10 +562,12 @@ QString OContact::toRichText() const
 	marker = true;
     }
 
+    // text += "<br>";
+
     // home address
     if ( !homeStreet().isEmpty() || !homeCity().isEmpty() ||
 	 !homeZip().isEmpty() || !homeCountry().isEmpty() ) {
-	text += QObject::tr( "<br><br><b>Home Address:</b>" );
+	text += QObject::tr( "<br><b>Home Address:</b>" );
 	marker = true;
     }
 
@@ -578,18 +576,17 @@ QString OContact::toRichText() const
 	marker = true;
     }
 
-    switch( dateformat ){
+    switch( addressformat ){
     case Zip_City_State:{ //  Zip_Code City, State
 	    state =  homeState();
 	    if ( !(value = homeZip()).isEmpty() ){
 		    text += "<br>" + Qtopia::escapeString(value) + " ";
 		    marker = true;
 	    }
-
 	    if ( !(value = homeCity()).isEmpty() ) {
 		    marker = true;
-		    if ( !homeZip() )
-			    text += "<br> ";  
+		    if ( homeZip().isEmpty() && !homeStreet().isEmpty() )
+			    text += "<br>";
 		    text += Qtopia::escapeString(value);
 		    if ( !state.isEmpty() )
 			    text += ", " + Qtopia::escapeString(state);
@@ -1106,7 +1103,7 @@ void OContact::setAnniversary( const QDate &v )
 QDate OContact::birthday() const
 {
 	QString str = find( Qtopia::Birthday );
-	qWarning ("Birthday %s", str.latin1() );
+	// qWarning ("Birthday %s", str.latin1() );
 	if ( !str.isEmpty() )
 		return  OConversion::dateFromString ( str );
 	else
@@ -1121,7 +1118,7 @@ QDate OContact::anniversary() const
 {
 	QDate empty;
 	QString str = find( Qtopia::Anniversary );
-	qWarning ("Anniversary %s", str.latin1() );
+	// qWarning ("Anniversary %s", str.latin1() );
 	if ( !str.isEmpty() )
 		return OConversion::dateFromString ( str );
 	else
