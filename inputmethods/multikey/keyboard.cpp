@@ -455,7 +455,7 @@ void Keyboard::clearHighlight()
 QSize Keyboard::sizeHint() const
 {
     QFontMetrics fm=fontMetrics();
-    int keyHeight = fm.lineSpacing();
+    int keyHeight = fm.lineSpacing() + 2;
 
     return QSize( 240, keyHeight * 5 + (usePicks ? picks->sizeHint().height() : 0) + 1);
 }

@@ -53,6 +53,9 @@ ConfigDlg::ConfigDlg () : QTabWidget ()
     QString en(tr("/opt/opie/share/multikey/en.keymap"));
     map_combo->insertItem(en);
 
+    QString de(tr("/opt/opie/share/multikey/de.keymap"));
+    map_combo->insertItem(de);
+
     QPushButton *button = new QPushButton(tr("Browse..."), map_group);
     button->setFlat((bool)1);
 
