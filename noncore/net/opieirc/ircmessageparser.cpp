@@ -183,7 +183,7 @@ void IRCMessageParser::parseLiteralPrivMsg(IRCMessage *message) {
         IRCOutput output(OUTPUT_QUERYPRIVMSG, message->param(1));
         output.addParam(person);
         emit outputReady(output);
-    } else if (message->param(0).at(0) == '#') {
+    } else if (message->param(0).at(0) == '#' || message->param(0).at(0) == '+') {
         /* IRC Channel message detected, verify sender, channel and display it */
         IRCChannel *channel = m_session->getChannel(message->param(0).lower());
         if (channel) {

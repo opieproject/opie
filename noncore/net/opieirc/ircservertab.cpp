@@ -68,7 +68,7 @@ void IRCServerTab::executeCommand(IRCTab *tab, QString line) {
     if (command == "JOIN") {
         QString channel;
         stream >> channel;
-        if (channel.length() > 0 && channel.startsWith("#")) {
+        if (channel.length() > 0 && (channel.startsWith("#") || channel.startsWith("+"))) {
             m_session->join(channel);
         } else {
             tab->appendText("<font color=\"" + m_errorColor + "\">Unknown channel format!</font><br>"); 

@@ -64,7 +64,7 @@ void IRCConnection::dataReady() {
             QStringList channels = QStringList::split(QChar(','), m_server->channels());
             for (QStringList::Iterator it = channels.begin(); it != channels.end(); ++it) {
                 QString channelName = (*it).stripWhiteSpace();
-                if (channelName.startsWith("#")) {
+                if (channelName.startsWith("#") || channelName.startsWith("+")) {
                     sendLine("JOIN "+ channelName); 
                 }
             }

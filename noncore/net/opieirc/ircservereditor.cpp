@@ -54,8 +54,8 @@ void IRCServerEditor::accept() {
         QStringList channels = QStringList::split(QChar(','), m_channels->text());
         for (QStringList::Iterator it = channels.begin(); it != channels.end(); ++it) {
             QString channelName = (*it).stripWhiteSpace();
-            if (!channelName.startsWith("#")) {
-                QMessageBox::critical(this, tr("Error"), tr("The channel list needs to contain a\ncomma separated list of channel\n names which start with '#'"));
+            if (!channelName.startsWith("#") && !channelName.startsWith("+")) {
+                QMessageBox::critical(this, tr("Error"), tr("The channel list needs to contain a\ncomma separated list of channel\n names which start with either '#' or '+'"));
                 return;
             }
         }
