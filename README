@@ -1,77 +1,46 @@
-1. How to use the new build system
-===============================
-There's a great document at:
-
+1. How to use the Opie build system
+====================================
+There's a tutorial document at:
 http://www.uv-ac.de/opiedev/opiedev.html
 
-and the API is at:
+The API reference currently is at:
 http://handhelds.org/~zecke/apidocs/index.html
 
-
-You will need qvfb, designer, and uic from a qt-x11-2.3.2 package.
+You will need qvfb, uic and
+(if you want to develop applications) designer
+compiled and linked against qt-x11.
 That means you must download and configure/make it.
 wget ftp://ftp.trolltech.com/qt/source/qt-x11-2.3.2.tar.gz
-
+(Alternatively, you can get static binaries from http://www.vanille.de/tools)
 
 The recommended version of Qt embedded is qt-embedded-2.3.7
 
 You can get it from:
 ftp://ftp.trolltech.com/qt/source/qt-embedded-2.3.7.tar.bz2
-Other version will found in that directory.
-
 
 Set QTDIR to point to your qt/embedded source tree, such as:
-
 export QTDIR=/opt/qt-2.3.7
 
-Then you need to do
+You need to do set the OPIEDIR environment variable:
 export OPIEDIR=`pwd`
 or
 export OPIEDIR=~/projects/sources/opie
-or where ever you placed Opie sources.
+or whereever you placed the Opie sources.
 
-and then do:
+You need to adjust your runtime library search path,
+so that the Qt/Embedded and Opie libraries can be found:
 export LD_LIBRARY_PATH=$OPIEDIR/lib:$QTDIR/lib:$LD_LIBRARY_PATH
 
-You will want to apply the patches in the $OPIEDIR/qt directory to qt-embedded
-*NOTE* You can skip the qte234-for-opie091-simpad.patch
-patch, unless you are compiling for simpad.
-
+You have to apply the qte<version>-all.patch to the Qt/Embedded
+sources and copy the qconfig-qpe.h file to $QTDIR/src/tools:
 cd $QTDIR; cat $OPIEDIR/qt/qte<version>*.patch | patch -p0
+cp $OPIEDIR/qt/qpe-config.h $QTDIR/src/tools
 
+You are now ready to configure and build Qt/Embedded
 
-
-
-Now Qt Embedded is patched and ready to go! You are ready to configure and make qt embedded.
-
-I run this script to configure qte
-------------------- start script
-#!/bin/bash
-## this file is for easy configuring of qt embedded for Qtopia development, on x86
-
-configure_make () {
-    if configure_qt; then
-	make;
-	else exit -1
-fi
-}
-
-configure_qt () {
-    cd $QTDIR;
- echo 'yes' | ./configure -qconfig qpe -depths 4,16,24,32 -system-jpeg -system-libpng -system-zlib -no-xft -qvfb;
-
-}
-
-# default configuration of Qt embedded for Opie
-echo "Configuring Qt Embedded for Opie development....";
-if [ ! -e $QTDIR/src/tools/qconfig-qpe.h ]; then
-    cp $OPIEDIR/qt/qconfig-qpe.h $QTDIR/src/tools
-fi
-
-configure_make;
-
-
-------------------- end script
+cd $QTDIR
+echo 'yes' | ./configure -qconfig qpe -depths 4,16,24,32 -system-jpeg -system-libpng -system-zlib -no-xft -qvfb
+make
 
 Once you have these compiled, be sure to set the PATH to ensure your (cross)compiler
 is available.
@@ -86,15 +55,10 @@ Exit and save the configuration and enter "make" to create opie...
 
 Have fun with it !
 
-If you get into trouble there are other make's
+If you get into trouble there are other makefile targets
 
 make clean-configs
 is a useful one.
-
-
-Ciao, Stefan
-and ljp <lpotter@trolltech.com>
-
 
 2. Used Libraries
 ================
@@ -102,7 +66,7 @@ and ljp <lpotter@trolltech.com>
 The following Libraries are used in Opie.
 For a successfull build you must install these librarys and headers.
 The versions are known-good versions. If you successfully try newer ones,
-commit a new README or send mail to opie-devel@handhelds.org
+commit a new README or send a mail to opie-devel@handhelds.org
 
 * libsdl 1.2
   http://www.libsdl.org/download-1.2.php
@@ -113,9 +77,10 @@ commit a new README or send mail to opie-devel@handhelds.org
 * libpcap 0.7.2
   http://www.tcpdump.org/release/
 
-* libetpan 0.30 + patch (in CVS)
+* libetpan 0.30 + patch (in $OPIEDIR/noncore/net/mail/libetpan)
   http://prdownloads.sourceforge.net/libetpan/
 
 * libsqlite 2.8.6
   http://www.sqlite.org/download.html
+
 
