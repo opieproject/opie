@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/inputmethods
 Maintainer: Jake Richardson <jake@asdfnews.org>
 Architecture: all
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Classic character set for the Handwriting inputmethod.
  Classic character set for the Handwriting inputmethod.
+Version: $QPE_VERSION$EXTRAVERSION

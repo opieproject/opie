@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/inputmethods
 Maintainer: Warwick Allison <warwick@trolltech.com>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
 Depends: task-opie-minimal
 Description: Unicode input method
  Basic unicode input method for the Opie environment.
+Version: $QPE_VERSION$EXTRAVERSION
