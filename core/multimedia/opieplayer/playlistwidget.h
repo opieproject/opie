@@ -58,6 +58,24 @@ public:
     FileSelector*  playLists;
     QPushButton *tbDeletePlaylist;
 public slots:
+    bool first();
+    bool last();
+    bool next();
+    bool prev();
+/*     void setFullScreen(); */
+/*     void setScaled(); */
+protected:
+/*     void contentsMousePressEvent( QMouseEvent * e ); */
+/*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
+
+private:
+    void initializeStates();
+    void readConfig( Config& cfg );
+    void writeConfig( Config& cfg ) const;
+    PlayListWidgetPrivate *d; // Private implementation data
+    void populateAudioView();
+    void populateVideoView();
+private slots:
     void setDocument( const QString& fileref );
     void addToSelection( const DocLnk& ); // Add a media file to the playlist
     void addToSelection( QListViewItem* ); // Add a media file to the playlist
@@ -74,28 +92,14 @@ public slots:
 
     void btnPlay(bool);
     void deletePlaylist();
-    bool first();
-    bool last();
-    bool next();
-    bool prev();
     void addSelected();
     void removeSelected();
     void tabChanged(QWidget*);
     void viewPressed( int, QListViewItem *, const QPoint&, int);
     void playlistViewPressed( int, QListViewItem *, const QPoint&, int);
     void playSelected();
-/*     void setFullScreen(); */
-/*     void setScaled(); */
-protected:
-/*     void contentsMousePressEvent( QMouseEvent * e ); */
-/*     void contentsMouseReleaseEvent( QMouseEvent * e ); */
-
-private:
-    void initializeStates();
-    void readConfig( Config& cfg );
-    void writeConfig( Config& cfg ) const;
-    PlayListWidgetPrivate *d; // Private implementation data
-
+    void listDelete();
+        
 protected slots:
 /*     void cancelMenuTimer(); */
 /*     void showFileMenu(); */
