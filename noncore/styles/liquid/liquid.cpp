@@ -1827,8 +1827,8 @@ QSize LiquidStyle::exclusiveIndicatorSize() const
     return(QSize(16, 16));
 }
 
-void LiquidStyle::drawExclusiveIndicator(QPainter *p, int x, int y, int w,
-                                        int h, const QColorGroup &g, bool on,
+void LiquidStyle::drawExclusiveIndicator(QPainter *p, int x, int y, int /*w*/,
+                                        int /*h*/, const QColorGroup &/*g*/, bool on,
                                         bool down, bool)
 {
     bool isHover = highlightWidget == p->device();
@@ -1870,8 +1870,8 @@ QSize LiquidStyle::indicatorSize() const
     return(QSize(20, 22));
 }
 
-void LiquidStyle::drawIndicator(QPainter *p, int x, int y, int w, int h,
-                            const QColorGroup &g, int state, bool down, bool)
+void LiquidStyle::drawIndicator(QPainter *p, int x, int y, int /*w*/, int /*h*/,
+                            const QColorGroup &/*g*/, int state, bool /*down*/, bool)
 {
     bool isHover = highlightWidget == p->device();
     bool isMasked = p->device() && p->device()->devType() == QInternal::Widget
@@ -1909,8 +1909,8 @@ void LiquidStyle::drawIndicator(QPainter *p, int x, int y, int w, int h,
     }
 }
 
-void LiquidStyle::drawIndicatorMask(QPainter *p, int x, int y, int w, int h,
-                                   int state)
+void LiquidStyle::drawIndicatorMask(QPainter *p, int x, int y, int /*w*/, int /*h*/,
+                                   int /*state*/)
 {
     // needed for some reason by KHtml, even tho it's all filled ;P
     p->drawPixmap(x, y, *getPixmap(HTMLCB)->mask());
@@ -1918,18 +1918,17 @@ void LiquidStyle::drawIndicatorMask(QPainter *p, int x, int y, int w, int h,
 }
 
 void LiquidStyle::drawSlider(QPainter *p, int x, int y, int w, int h,
-                         const QColorGroup &g, Orientation orient,
+                         const QColorGroup &/*g*/, Orientation orient,
                          bool, bool)
 {
     QWidget *parent = (QWidget *)p->device();
     p->setBrushOrigin(parent->pos());
-    p->fillRect(x, y, w, h,
-                QApplication::palette().active().brush(QColorGroup::Background));
+    parent->erase(x, y, w, h);
     p->drawPixmap(x, y, orient == Qt::Horizontal ? *getPixmap(HSlider) :
                   *getPixmap(VSlider));
 }
 
-void LiquidStyle::drawSliderMask(QPainter *p, int x, int y, int w, int h,
+void LiquidStyle::drawSliderMask(QPainter *p, int x, int y, int /*w*/, int /*h*/,
                              Orientation orient, bool, bool)
 {
     p->drawPixmap(x, y, orient == Qt::Horizontal ? *getPixmap(HSlider)->mask() :
@@ -1980,7 +1979,7 @@ void LiquidStyle::drawArrow(QPainter *p, Qt::ArrowType type, bool on, int x,
 
 
 void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
-                            QMenuItem *mi, QColorGroup &g, bool enabled, bool active )
+                            QMenuItem *mi, QColorGroup &g, bool /*enabled*/, bool active )
 {	
     x -= 2; // Bug in Qt/E 
     y -= 2;
@@ -2034,8 +2033,8 @@ void LiquidStyle::drawMenuBarItem(QPainter *p, int x, int y, int w, int h,
 }
 
 void LiquidStyle::drawPopupPanel(QPainter *p, int x, int y, int w, int h,
-                                 const QColorGroup &g, int lineWidth,
-                                 const QBrush * fill)
+                                 const QColorGroup &g, int /*lineWidth*/,
+                                 const QBrush * /*fill*/)
 {
     QColor c;
     switch(menuHandler->transType()){
