@@ -195,7 +195,7 @@ public:
     struct OTodoData;
 
     void deref();
-    void changeOrModify();
+    inline void changeOrModify();
     void copy( OTodoData* src, OTodoData* dest );
     OTodoPrivate *d;
     OTodoData *data;
