@@ -110,7 +110,7 @@ qconf:
 	@echo environment variable is set to the correct location.
 	@false
 else
-qconf: $(qconf_OBJ)
+qconf: $(qconf_OBJ) libkconfig.so
 	$(CXX) $(LXXFLAGS) $^ -lqt -o $@
 endif
 
