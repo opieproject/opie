@@ -23,7 +23,7 @@
 #include <qcheckbox.h>
 #include <qmenubar.h>
 #include <qaction.h>
-#include "resource.h"
+#include <qpe/resource.h>
 #include "emailclient.h"
 
 QCollection::Item AccountList::newItem(QCollection::Item d)
@@ -41,7 +41,7 @@ EmailClient::EmailClient( QWidget* parent,  const char* name, WFlags fl )
   : QMainWindow( parent, name, fl )
 {
   emailHandler = new EmailHandler();
-  addressList = new AddressList( getPath(FALSE) + "mail_adr");
+  addressList = new AddressList();
   
   sending = FALSE;
   receiving = FALSE;
@@ -671,6 +671,12 @@ void EmailClient::readSettings()
           }
         }
       }
+      
+      if ( (pos = p->find("SYNCLIMIT",':', accountPos, TRUE)) != -1) {
+      	account.syncLimit = p->getString(& ++pos, 'z', TRUE).toInt();
+      }
+
+      
       accountList.append(&account);
     }
     delete p;
@@ -716,6 +722,8 @@ void EmailClient::saveSettings()
     } else {
       t << "Synchronize: No\n";
     }
+    t << "SyncLimit: ";
+    t << accountPtr->syncLimit << "\n";
     t << "accountEnd;\n";
   }
   f.close();

@@ -21,7 +21,7 @@
 #include <qhbox.h>
 #include <qdir.h>
 #include <qstringlist.h>
-#include "resource.h"
+#include <qpe/resource.h>
 #include "addatt.h"
 
 FileItem::FileItem(QListView *parent, DocLnk* dl)
@@ -62,8 +62,8 @@ AddAtt::AddAtt(QWidget *parent, const char *name, WFlags f)
 	
 	QHBox *buttons=new QHBox(this);
 	/*fileCategoryButton = new QPushButton(this);*/
-	attatchButton = new QPushButton("Attatch ->", buttons);
-	removeButton = new QPushButton("Remove", buttons);
+	attatchButton = new QPushButton(tr("Attatch..."), buttons);
+	removeButton = new QPushButton(tr("Remove"), buttons);
 
 	/*fileCategories = new QPopupMenu(fileCategoryButton);
 	fileCategoryButton->setPopup(fileCategories);

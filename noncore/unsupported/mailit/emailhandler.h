@@ -94,6 +94,7 @@ struct MailAccount
 	QString popServer;
 	QString smtpServer;
 	bool synchronize;
+	int syncLimit;
 	int lastServerMailCount;
 	int id;
 };

@@ -19,7 +19,7 @@
 **********************************************************************/
 #include <qmessagebox.h>
 #include "writemail.h"
-#include "resource.h"
+#include <qpe/resource.h>
 
 WriteMail::WriteMail( QWidget* parent,  const char* name, WFlags fl )
 	: QMainWindow( parent, name, fl )

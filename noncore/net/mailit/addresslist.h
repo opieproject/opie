@@ -34,7 +34,7 @@ class AddressList : public QObject
 	Q_OBJECT
 
 public:
-	AddressList(QString file);
+	AddressList();
 	~AddressList();
 	void addContact(QString email, QString name);
 	bool containsEmail(QString email);
@@ -42,7 +42,6 @@ public:
 	QString getNameByEmail(QString email);
 	QString getEmailByName(QString name);
 	QList<Contact>* getContactList();
-	void write();
 
 private:
 	int getEmailRef(QString email);

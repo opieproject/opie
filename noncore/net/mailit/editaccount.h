@@ -25,6 +25,7 @@
 #include <qlineedit.h>
 #include <qcheckbox.h>
 #include <qlayout.h>
+#include <qspinbox.h>
 #include "emailhandler.h"
 
 class EditAccount : public QDialog
@@ -50,7 +51,8 @@ private:
     QLabel *popPasswInputLabel;
     QLabel *popServerInputLabel;
     QLabel *smtpServerInputLabel;
-
+    QLabel *syncLimitInputLabel;
+    
     QLineEdit *accountNameInput;
     QLineEdit *nameInput;
     QLineEdit *emailInput;
@@ -58,6 +60,7 @@ private:
     QLineEdit *popPasswInput;
     QLineEdit *popServerInput;
     QLineEdit *smtpServerInput;
+    QSpinBox *syncLimitInput;    
     QCheckBox *syncCheckBox;
 
     QGridLayout *grid;

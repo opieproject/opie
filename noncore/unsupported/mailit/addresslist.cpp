@@ -24,17 +24,15 @@
 
 #include "addresslist.h"
 
-AddressList::AddressList(QString file)
+AddressList::AddressList()
 {
 	addresses.setAutoDelete(TRUE);
-	filename = file;
 	read();
 	dirty = FALSE;
 }
 
 AddressList::~AddressList()
 {
-	write();
 	addresses.clear();
 }
 
@@ -120,7 +118,6 @@ void AddressList::read()
 {
 	OContactAccess::List::Iterator it;
 	
-	//QFile f(filename);
 	QString lineEmail, lineName, email, name;
 	OContactAccess m_contactdb("mailit");
 	OContactAccess::List m_list = m_contactdb.sorted( true, 0, 0, 0 );
@@ -162,20 +159,3 @@ QString AddressList::getRightString(QString in)
 	return out;
 }
 
-void AddressList::write()
-{
-	if ( (addresses.count() == 0) || (!dirty) )
-		return;
-		
-	QFile f(filename);
-	if (! f.open(IO_WriteOnly) )
-		return;
-	
-	QTextStream stream(&f);
-	Contact *ptr;
-	for (ptr = addresses.first(); ptr != 0; ptr = addresses.next() ) {
-		stream << "email = " + ptr->email + "\n";
-		stream << "name = " + ptr->name + "\n";
-	}
-	f.close();
-}

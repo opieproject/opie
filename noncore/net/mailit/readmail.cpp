@@ -21,7 +21,7 @@
 #include <qimage.h>
 #include <qmime.h>
 #include <qaction.h>
-#include "resource.h"
+#include <qpe/resource.h>
 
 ReadMail::ReadMail( QWidget* parent,  const char* name, WFlags fl )
 	: QMainWindow(parent, name, fl)

@@ -40,4 +40,21 @@ MOC_DIR=qpeobj
 OBJECTS_DIR=qpeobj
 DESTDIR=$(OPIEDIR)/bin
 
+TRANSLATIONS = ../../../i18n/de/mailit.ts \
+	 ../../../i18n/da/mailit.ts \
+	 ../../../i18n/xx/mailit.ts \
+	 ../../../i18n/en/mailit.ts \
+	 ../../../i18n/es/mailit.ts \
+	 ../../../i18n/fr/mailit.ts \
+	 ../../../i18n/hu/mailit.ts \
+	 ../../../i18n/ja/mailit.ts \
+	 ../../../i18n/ko/mailit.ts \
+	 ../../../i18n/no/mailit.ts \
+	 ../../../i18n/pl/mailit.ts \
+	 ../../../i18n/pt/mailit.ts \
+	 ../../../i18n/pt_BR/mailit.ts \
+	 ../../../i18n/sl/mailit.ts \
+	 ../../../i18n/zh_CN/mailit.ts \
+	 ../../../i18n/zh_TW/mailit.ts
+
 include ( $(OPIEDIR)/include.pro )

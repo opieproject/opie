@@ -18,6 +18,7 @@
 **
 **********************************************************************/
 #include <qstring.h>
+#include <qpe/resource.h>
 #include "emaillistitem.h"
 
 EmailListItem::EmailListItem(QListView *parent, Email mailIn, bool inbox)
@@ -38,6 +39,10 @@ EmailListItem::EmailListItem(QListView *parent, Email mailIn, bool inbox)
 	}
 	setText(1, mail.subject);
 	
+	if (mailIn.files.count()>0)
+	{
+		setPixmap(0, Resource::loadPixmap("mailit/attach"));
+	}
 	selected = FALSE;
 }
 

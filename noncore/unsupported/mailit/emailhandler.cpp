@@ -118,7 +118,7 @@ void EmailHandler::getMailHeaders()
   }
   
   headers = TRUE;
-  popClient->headersOnly(headers, 2000);  //less than 2000, download all
+  popClient->headersOnly(headers, mailAccount.syncLimit);  //less than requested syncLimit, download all
   popClient->newConnection(mailAccount.popServer, 110);
 }
 
@@ -200,6 +200,16 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
       mail->from=mail->fromMail;
     }
   }
+  
+  //@@@ToDo: Rewrite the parser as To: stops at the first occurence- which is Delivered-To:
+  if (pos = p.find("TO",':', pos, TRUE) != -1)
+  {
+    	pos++;
+    	mail->recipients.append (p.getString(&pos, 'z', TRUE) );
+  }
+ 
+  
+  
   if ((pos = p.find("SUBJECT",':', 0, TRUE)) != -1) {
     pos++;
     mail->subject = p.getString(&pos, 'z', TRUE);
@@ -208,10 +218,9 @@ bool EmailHandler::parse(QString in, QString lineShift, Email *mail)
     pos++;
     mail->date = p.getString(&pos, 'z', true);
   }
-  if ((pos = p.find("TO",':', 0, TRUE)) != -1) {
-    pos++;
-    mail->recipients.append (p.getString(&pos, 'z', TRUE) );
-  }
+  
+  
+  
   if ((pos = p.find("MESSAGE",'-', 0, TRUE)) != -1) {
     pos++;
     if ( (p.wordAt(pos).upper() == "ID") &&

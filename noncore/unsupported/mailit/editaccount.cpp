@@ -18,6 +18,7 @@
 ***
 **********************************************************************/
 
+#include <qhbox.h>
 #include "editaccount.h"
 
 EditAccount::EditAccount( QWidget* parent, const char* name, WFlags fl )
@@ -40,6 +41,7 @@ void EditAccount::setAccount(MailAccount *in, bool newOne)
 		popServerInput->setText("");
 		smtpServerInput->setText("");
 		syncCheckBox->setChecked(TRUE);
+		syncLimitInput->setValue(2);
 	
 		setCaption( tr("Create new Account") );
 	} else {
@@ -51,6 +53,7 @@ void EditAccount::setAccount(MailAccount *in, bool newOne)
 		popServerInput->setText(account->popServer);
 		smtpServerInput->setText(account->smtpServer);
 		syncCheckBox->setChecked(account->synchronize);
+		syncLimitInput->setValue(account->syncLimit/1000);
 	}
 }
 
@@ -70,34 +73,43 @@ void EditAccount::init()
     nameInput = new QLineEdit( this, "nameInput" );
     grid->addWidget( nameInput, 1, 1 );
 
-    emailInputLabel = new QLabel("Email",  this);
+    emailInputLabel = new QLabel(tr("Email"),  this);
     grid->addWidget(emailInputLabel, 2, 0 );
     emailInput = new QLineEdit( this, "emailInput" );
     grid->addWidget( emailInput, 2, 1 );
 
-    popUserInputLabel = new QLabel("POP username", this);
+    popUserInputLabel = new QLabel(tr("POP username"), this);
     grid->addWidget( popUserInputLabel, 3, 0 );
     popUserInput = new QLineEdit( this, "popUserInput" );
     grid->addWidget( popUserInput, 3, 1 );
 
-    popPasswInputLabel = new QLabel( "POP password", this);
+    popPasswInputLabel = new QLabel( tr("POP password"), this);
     grid->addWidget( popPasswInputLabel, 4, 0 );
     popPasswInput = new QLineEdit( this, "popPasswInput" );
     grid->addWidget( popPasswInput, 4, 1 );
 
-    popServerInputLabel = new QLabel("POP server", this);
+    popServerInputLabel = new QLabel(tr("POP server"), this);
     grid->addWidget( popServerInputLabel, 5, 0 );
     popServerInput = new QLineEdit( this, "popServerInput" );
     grid->addWidget( popServerInput, 5, 1 );
 
-    smtpServerInputLabel = new QLabel("SMTP server", this );
+    smtpServerInputLabel = new QLabel(tr("SMTP server"), this );
     grid->addWidget( smtpServerInputLabel, 6, 0 );
     smtpServerInput = new QLineEdit( this, "smtpServerInput" );
     grid->addWidget( smtpServerInput, 6, 1 );
 
-    syncCheckBox = new QCheckBox( tr( "Synchronize with server"  ), this);
+    QHBox* syncBox=new QHBox(this);
+    grid->addWidget( syncBox, 7, 1 );
+
+    syncCheckBox = new QCheckBox( tr( "Synchronize"  ), this);
     syncCheckBox->setChecked( TRUE );
-    grid->addMultiCellWidget( syncCheckBox, 7, 7, 0, 1 );
+    grid->addWidget( syncCheckBox,7,0);
+    
+    syncLimitInputLabel = new QLabel(tr("Mail Size (k)"), syncBox);
+    //syncBox->addWidget( syncLimitInputLabel);
+    syncLimitInput = new QSpinBox( syncBox, "syncSize" );
+    //syncBox->addWidget(syncLimitInput);
+    
 }
 
 
@@ -111,6 +123,7 @@ void EditAccount::accept()
 	account->popServer = popServerInput->text();
 	account->smtpServer = smtpServerInput->text();
 	account->synchronize = syncCheckBox->isChecked();
+	account->syncLimit = syncLimitInput->value()*1000;	//Display in kB
 	
 	QDialog::accept();
 }
