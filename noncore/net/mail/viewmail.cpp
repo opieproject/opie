@@ -23,14 +23,15 @@ AttachItem::AttachItem(QListViewItem *parent, AttachItemStore &attachItemStore)
 	setText(2, _attachItemStore.description());
 }
 
-void ViewMail::setMailInfo( const QString & from, const QString & to, const QString & subject, const QString & cc, const QString & bcc, const QString & bodytext ) {
+void ViewMail::setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc, const QString & date, const QString & bodytext ) {
 
 m_mail[0] = from;
-m_mail[1] = to;
-m_mail[2] = subject;
-m_mail[3] = cc;
-m_mail[4] = bcc;
-m_mail[5] = bodytext;
+m_mail2[0] = to;
+m_mail[1] = subject;
+m_mail2[1] = cc;
+m_mail2[2] = bcc;
+m_mail[2] = bodytext;
+m_mail[3] = date;
 
 setText();
 
@@ -54,6 +55,20 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
 void ViewMail::setText()
 {
 
+  QString toString;
+  QString ccString;
+  QString bccString;
+
+  for ( QStringList::Iterator it = ( m_mail2[0] ).begin(); it != ( m_mail2[0] ).end(); ++it ) {
+                  toString += (*it);
+  }
+  for ( QStringList::Iterator it = ( m_mail2[1] ).begin(); it != ( m_mail2[1] ).end(); ++it ) {
+                  ccString += (*it);
+  }
+  for ( QStringList::Iterator it = ( m_mail2[2] ).begin(); it != ( m_mail2[2] ).end(); ++it ) {
+                  bccString += (*it);
+  }
+
  setCaption( caption().arg( m_mail[0] ) );
 
      _mailHtml = tr(
@@ -65,14 +80,14 @@ void ViewMail::setText()
 		"%5"
 		"<b>Date:</b> %6<hr>"
 		"<font face=fixed>%7</font>")
-		.arg( deHtml( m_mail[2] ) )
-		.arg( deHtml( m_mail[0] ) )
 		.arg( deHtml( m_mail[1] ) )
-		.arg( tr("<b>Cc:</b> %1<br>").arg( deHtml( m_mail[3] ) ) )
-		.arg( tr("<b>Bcc:</b> %1<br>").arg( deHtml( m_mail[4] ) ) )
-		.arg( tr("(no date)" ) )
+		.arg( deHtml( m_mail[0] ) )
+		.arg( deHtml( toString ) )
+		.arg( tr("<b>Cc:</b> %1<br>").arg( deHtml( ccString ) ) )
+		.arg( tr("<b>Bcc:</b> %1<br>").arg( deHtml( bccString ) ) )
+		.arg( m_mail[3] )
 		.arg("%1");
-	browser->setText( QString(_mailHtml) + deHtml( m_mail[5] ) );
+	browser->setText( QString(_mailHtml) + deHtml( m_mail[2] ) );
 }
 
 

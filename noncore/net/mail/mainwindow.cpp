@@ -71,15 +71,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     QWidget *view = new QWidget(  this );
     setCentralWidget( view );
 
-
-    QWidget *d = QApplication::desktop();
-    QBoxLayout *layout;
-
-    if ( d->width() < d->height() ) {
-    layout = new QVBoxLayout( view );
-    } else {
-    layout = new QHBoxLayout( view );
-    }
+    layout = new QBoxLayout ( view, QBoxLayout::LeftToRight );
 
     folderView = new AccountView( view );
     folderView->header()->hide();
@@ -99,12 +91,27 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     layout->setStretchFactor( folderView, 1 );
     layout->setStretchFactor( mailView, 2 );
 
+    slotAdjustLayout();
+
     connect( mailView, SIGNAL( clicked( QListViewItem * ) ),this,
              SLOT( displayMail( QListViewItem * ) ) );
 
     connect(folderView,SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
    QTimer::singleShot( 1000, this, SLOT(  slotAdjustColumns() ) );
+}
+
+
+void MainWindow::slotAdjustLayout() {
+
+  QWidget *d = QApplication::desktop();
+
+  if ( d->width() < d->height() ) {
+    layout->setDirection( QBoxLayout::TopToBottom );
+    } else {
+    layout->setDirection( QBoxLayout::LeftToRight );
+  }
+  delete d;
 }
 
 void MainWindow::slotAdjustColumns()
@@ -149,7 +156,8 @@ void MainWindow::displayMail(QListViewItem*item)
     RecBody body = folderView->fetchBody(mail);
 
     ViewMail readMail( this );
-    readMail.setMailInfo( mail.getFrom(), "", mail.getSubject(), "", "", body.Bodytext() );
+
+    readMail.setMailInfo( mail.getFrom(), mail.To(), mail.getSubject(), mail.CC(), mail.Bcc(), mail.getDate(),  body.Bodytext() );
     readMail.showMaximized();
     readMail.exec();
 }

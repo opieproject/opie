@@ -3,6 +3,7 @@
 
 #include <qlistview.h>
 #include <qmap.h>
+#include <qstringlist.h>
 
 #include "viewmailbase.h"
 //#include "imapresponse.h"
@@ -49,7 +50,7 @@ public:
 	void hide();
 	void exec();
     static QString appName() { return QString::fromLatin1("mail"); }
-        void setMailInfo( const QString & from, const QString & to, const QString & subject, const QString & cc, const QString & bcc, const QString & bodytext );
+        void setMailInfo( const QString & from, const QStringList & to, const QString & subject, const QStringList & cc, const QStringList & bcc,const QString & date, const QString & bodytext );
 
 protected:
 //	void fillList(IMAPResponseBODYSTRUCTURE &structure);
@@ -68,7 +69,16 @@ private:
 //	IMAPHandler *_handler;
 	QString _mailHtml;
 	bool _gotBody;
+
+        // 0 from
+        // 1 subject
+        // 2 bodytext
+        // 3 date
         QMap <int,QString>  m_mail;
+        // 0 to
+        // 1 cc
+        // 2 bcc
+        QMap <int,QStringList> m_mail2;
 
 };
 
