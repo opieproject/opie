@@ -48,6 +48,7 @@ public slots:
     bool last();
     bool next();
     bool prev();
+    void writeConfig( Config& cfg ) const;
 /*     void setFullScreen(); */
 /*     void setScaled(); */
 protected:
@@ -64,7 +65,6 @@ private:
 
     void initializeStates();
     void readConfig( Config& cfg );
-    void writeConfig( Config& cfg ) const;
     PlayListWidgetPrivate *d; // Private implementation data
     void populateAudioView();
     void populateVideoView();

@@ -307,9 +307,6 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
 
 
 PlayListWidget::~PlayListWidget() {
-  Config cfg( "OpiePlayer" );
-  writeConfig( cfg );
-
   if ( d->current ) {
     delete d->current;
   }
