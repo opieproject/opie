@@ -1,4 +1,4 @@
   config LIBOPIE
     boolean "Opie library"
     default "y"
-    depends LIBQPE || LIBQPE-X11
+    depends LIBQPE || LIBQPE-X11 || LIBOPIE2DB
