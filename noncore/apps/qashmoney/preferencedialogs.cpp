@@ -76,20 +76,21 @@ TransactionPreferences::TransactionPreferences ( QWidget* parent ) : QDialog ( p
     showclearedtransactions = new QCheckBox ( this );
     showclearedtransactions->setText ( "Show Cleared Transactions" );
 
-    excludetransfers = new QCheckBox ( this );
-    excludetransfers->setText ( "Include Transfers In Limit View" );
-
     limittransactionsbox = new QHBox ( this );
     limittransactionsbox->setSpacing ( 2 );
-    limittransactionslabel = new QLabel ( "Limit All Transactions To", limittransactionsbox );
+    limittransactionslabel = new QLabel ( "Show ", limittransactionsbox );
     limittransactions = new QComboBox ( limittransactionsbox );
+    QLabel *limittransactionslabel2 = new QLabel ( "of cleared transactions. ", limittransactionsbox );
     limittransactions->insertItem ( "14 days" );
     limittransactions->insertItem ( "30 days" );
-    limittransactions->insertItem ( "60 days" );
     limittransactions->insertItem ( "90 days" );
     limittransactions->insertItem ( "180 days" );
     limittransactions->insertItem ( "365 days" );
     limittransactions->insertItem ( "All" );
+    limittransactions->setCurrentItem ( preferences->getPreference ( 7 ) );
+
+    excludetransfers = new QCheckBox ( this );
+    excludetransfers->setText ( "Include Transfers In Limit View" );
 
     if ( preferences->getPreference ( 3 ) == 1 )
       showclearedtransactions->setChecked ( TRUE );
@@ -106,8 +107,8 @@ TransactionPreferences::TransactionPreferences ( QWidget* parent ) : QDialog ( p
 
     layout = new QVBoxLayout ( this, 2, 2 );
     layout->addWidget ( showclearedtransactions );
-    layout->addWidget ( excludetransfers );
     layout->addWidget ( limittransactionsbox );
+    layout->addWidget ( excludetransfers );
     layout->insertSpacing ( 3, 5 );
     layout->addWidget ( defaults );
 

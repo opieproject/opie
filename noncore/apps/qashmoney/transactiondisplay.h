@@ -7,6 +7,7 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qlineedit.h>
+#include <qdatetime.h>
 
 class TransactionDisplay : public QWidget
   {
@@ -48,9 +49,11 @@ class TransactionDisplay : public QWidget
     void limitDisplay ( const QString & );
     void showCalculator ();
     void showCalendar ();
+    void setTransactionDisplayDate ();
 
   private:
     int accountid, fromaccount, fromparent, toaccount, toparent, day, month, year, transferid;
+    QDate displaydate;
     bool children;
     QBoxLayout *layout;
     QHBox *firstline;

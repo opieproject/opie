@@ -127,8 +127,9 @@ void TransactionDisplay::addTransaction ()
         listview->clear();
         QString displaytext = "%";
         displaytext.prepend ( limitbox->text() );
+        setTransactionDisplayDate ();
         if ( transaction->getNumberOfTransactions() > 0 )
-          transaction->displayTransactions ( listview, accountid, children, displaytext );
+          transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
         // redisplay transfers
         if ( transfer->getNumberOfTransfers() > 0 )
@@ -365,8 +366,9 @@ void TransactionDisplay::updateAndDisplay ( int id )
     listview->clear();
     QString displaytext = "%";
     displaytext.prepend ( limitbox->text() );
+    setTransactionDisplayDate ();
     if ( transaction->getNumberOfTransactions() > 0 )
-      transaction->displayTransactions ( listview, accountid, children, displaytext );
+      transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
     // redisplay transfers
     if ( transfer->getNumberOfTransfers() > 0 )
@@ -409,8 +411,9 @@ void TransactionDisplay::deleteTransaction ()
         listview->clear();
         QString displaytext = "%";
         displaytext.prepend ( limitbox->text() );
+        setTransactionDisplayDate ();
         if ( transaction->getNumberOfTransactions() > 0 )
-          transaction->displayTransactions ( listview, accountid, children, displaytext );
+          transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
         if ( transfer->getNumberOfTransfers() > 0 )
           transfer->displayTransfers ( listview, accountid, children );
@@ -440,8 +443,9 @@ void TransactionDisplay::deleteTransaction ()
         listview->clear();
         QString displaytext = "%";
         displaytext.prepend ( limitbox->text() );
+        setTransactionDisplayDate ();
         if ( transaction->getNumberOfTransactions() > 0 )
-          transaction->displayTransactions ( listview, accountid, children, displaytext );
+          transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
         if ( transfer->getNumberOfTransfers() > 0 )
           transfer->displayTransfers ( listview, accountid, children );
@@ -492,8 +496,9 @@ void TransactionDisplay::toggleTransaction ()
     listview->clear();
     QString displaytext = "%";
     displaytext.prepend ( limitbox->text() );
+    setTransactionDisplayDate ();
     if ( transaction->getNumberOfTransactions() > 0 )
-      transaction->displayTransactions ( listview, accountid, children, displaytext );
+      transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
 
     if ( transfer->getNumberOfTransfers() != 0 )
       transfer->displayTransfers ( listview, accountid, children );
@@ -551,7 +556,10 @@ void TransactionDisplay::limitDisplay ( const QString &text )
     listview->clear ();
     QString displaytext = "%";
     displaytext.prepend ( text );
-    transaction->displayTransactions ( listview, accountid, children, displaytext );
+    setTransactionDisplayDate ();
+    if ( transaction->getNumberOfTransactions() > 0 )
+      transaction->displayTransactions ( listview, accountid, children, displaytext, displaydate );
+
     if ( displaytext.length() == 1 || preferences->getPreference ( 6 ) == 1 )
       transfer->displayTransfers ( listview, accountid, children );
   }
@@ -584,3 +592,32 @@ void TransactionDisplay::showTransactionNotes ()
       }
   }
 
+void TransactionDisplay::setTransactionDisplayDate ()
+  {
+    // determine how many days of transactions to show
+    int limittype = preferences->getPreference ( 7 );
+    if ( limittype != 5 ) // set today's date if we are not showing all transactions
+      {
+        QDate today = QDate::currentDate ();
+        switch ( limittype ) // if we are not showing all transactions
+          {
+            case 0:  // viewing two weeks
+              displaydate = today.addDays ( -14 );
+              break;
+            case 1:  // viewing one month
+              displaydate = today.addDays ( -30 );
+              break;
+            case 2: // three months
+              displaydate = today.addDays ( -90 );
+              break;
+            case 3: // six months
+              displaydate = today.addDays ( -180 );
+              break;
+            case 4: // one year
+              displaydate = today.addDays ( -365 );
+              break;
+          }
+      }
+    else
+      displaydate = QDate ( 1, 1, 1000 );
+  }

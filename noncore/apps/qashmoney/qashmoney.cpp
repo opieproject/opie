@@ -143,12 +143,14 @@ void QashMoney::changeTabDisplay ()
         transactiondisplay->setChildren ( children );
         transactiondisplay->setAccountID ( accountid );
 
+        setTransactionDisplayDate ();
+
         // display transactions
         transactiondisplay->listview->clear();
         QString displaytext = "%";
         displaytext.prepend ( transactiondisplay->limitbox->text() );
         if ( transaction->getNumberOfTransactions() > 0 )
-          transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext );
+          transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext, newdate );
 
         // display transfers
         transfer->displayTransfers ( transactiondisplay->listview, accountid, children );
@@ -254,8 +256,10 @@ void QashMoney::displayDatePreferencesDialog ()
         transactiondisplay->listview->clear();
         QString displaytext = "%";
         displaytext.prepend ( transactiondisplay->limitbox->text() );
+
+        setTransactionDisplayDate();
         if ( transaction->getNumberOfTransactions() > 0 )
-          transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext );
+          transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext, newdate );
 
         if ( transfer->getNumberOfTransfers() != 0 )
           transfer->displayTransfers ( transactiondisplay->listview, accountid, children );
@@ -290,8 +294,10 @@ void QashMoney::displayTransactionPreferencesDialog ()
         transactiondisplay->listview->clear();
         QString displaytext = "%";
         displaytext.prepend ( transactiondisplay->limitbox->text() );
+
+        setTransactionDisplayDate();
         if ( transaction->getNumberOfTransactions() > 0 )
-          transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext );
+          transaction->displayTransactions ( transactiondisplay->listview, accountid, children, displaytext, newdate );
 
         if ( transfer->getNumberOfTransfers() != 0 )
           transfer->displayTransfers ( transactiondisplay->listview, accountid, children );
@@ -352,5 +358,33 @@ void QashMoney::toggleOneTouchViewing ( bool state )
       enableOneTouchViewing();
   }
 
-
+void QashMoney::setTransactionDisplayDate ()
+  {
+    // determine how many days of transactions to show
+    int limittype = preferences->getPreference ( 7 );
+    if ( limittype != 5 ) // set today's date if we are not showing all transactions
+      {
+        QDate today = QDate::currentDate ();
+        switch ( limittype ) // if we are not showing all transactions
+          {
+            case 0:  // viewing two weeks
+              newdate = today.addDays ( -14 );
+              break;
+            case 1:  // viewing one month
+              newdate = today.addDays ( -30 );
+              break;
+            case 2: // three months
+              newdate = today.addDays ( -90 );
+              break;
+            case 3: // six months
+              newdate = today.addDays ( -180 );
+              break;
+            case 4: // one year
+              newdate = today.addDays ( -365 );
+              break;
+          }
+      }
+    else
+      newdate = QDate ( 1, 1, 1000 );
+  }
 

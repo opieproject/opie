@@ -8,6 +8,7 @@
 #include "transactiondisplay.h"
 
 #include <stdlib.h>
+#include <iostream.h>
 
 extern Account *account;
 extern Preferences *preferences;
@@ -154,9 +155,10 @@ int Transaction::getYear ( int id )
     return yearstring.toInt();
   }
 
-void Transaction::displayTransactions ( QListView *listview, int id, bool children, const char *limit )
+void Transaction::displayTransactions ( QListView *listview, int id, bool children, const char *limit, QDate displaydate )
   {
     int showcleared = preferences->getPreference ( 3 );
+    int year = ( displaydate.year() ) - 1;
 
     // select the transactions to display
     // two different statements are used based on
@@ -166,14 +168,14 @@ void Transaction::displayTransactions ( QListView *listview, int id, bool childr
     if ( showcleared == 0 )
       {
         if ( account->getParentAccountID ( id ) == -1 && children == TRUE )
-          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 and parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
+          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 and year >= %i parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, year, id, limit );
         else
-          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 and accountid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
+          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where cleared = 0 year >= %i accountid = %i and payee like '%q';", &results, &rows, &columns, NULL, year, id, limit );
       }
     else
       {
       if ( account->getParentAccountID ( id ) == -1 && children == TRUE )
-          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
+          sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where year >= %i and parentid = %i and payee like '%q';", &results, &rows, &columns, NULL, year, id, limit );
       else
         sqlite_get_table_printf ( tdb, "select day, month, year, payee, amount, transid, accountid from transactions where accountid = %i and payee like '%q';", &results, &rows, &columns, NULL, id, limit );
       }
@@ -182,14 +184,8 @@ void Transaction::displayTransactions ( QListView *listview, int id, bool childr
     int counter = 7;
     while ( counter < ( ( rows + 1 ) * columns ) )
       {
-        // construct the date
-	//QString daystring = results [ counter ];
-	//int day = results [ counter ].toInt ();
-	//QString monthstring = results [ counter + 1 ];
-	//int month = results [ counter + 1 ].toInt ();
-	//QString yearstring = results [ counter + 2 ];
-	//int year = results [ counter + 2 ].toInt ();
-	QString date = preferences->getDate ( atoi ( results [ counter + 2 ] ), atoi ( results [ counter + 1 ] ), atoi ( results [ counter ] ) );
+        QDate displaydate ( atoi ( results [ counter + 2 ] ), atoi ( results [ counter + 1 ] ), atoi ( results [ counter ] ) );
+        QString date = preferences->getDate ( atoi ( results [ counter + 2 ] ), atoi ( results [ counter + 1 ] ), atoi ( results [ counter ] ) );
 
 	// construct transaction name, amount, id
 	QString payee = results [ counter + 3 ];

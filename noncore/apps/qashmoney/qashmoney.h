@@ -5,6 +5,7 @@
 #include <qpopupmenu.h>
 #include <qlayout.h>
 #include <qtabwidget.h>
+#include <qdatetime.h>
 
 #include "accountdisplay.h"
 #include "transactiondisplay.h"
@@ -46,6 +47,7 @@ class QashMoney : public QWidget
       void enableOneTouchViewing ();
       void disableOneTouchViewing ();
       void toggleOneTouchViewing ( bool );
+      void setTransactionDisplayDate ();
 
     private:
       QVBoxLayout *layout;
@@ -54,6 +56,7 @@ class QashMoney : public QWidget
       TransactionDisplay *transactiondisplay;
       BudgetDisplay *budgetdisplay;
       int tabheight;
+      QDate newdate;
 
   };
 

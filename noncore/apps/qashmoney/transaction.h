@@ -3,6 +3,7 @@
 
 #include <qstring.h>
 #include <qlistview.h>
+#include <qdatetime.h>
 #include <sqlite.h>
 
 #include "preferences.h"
@@ -43,7 +44,7 @@ class Transaction
 
     public slots:
 
-      void displayTransactions ( QListView *, int, bool, const char * );
+      void displayTransactions ( QListView *, int, bool, const char *, QDate );
       QString getPayee ( int );
       QString getTransactionDescription ( int );
       QString getNumber ( int );
