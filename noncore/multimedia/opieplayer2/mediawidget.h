@@ -77,11 +77,17 @@ signals:
     void lessReleased();
     void forwardReleased();
     void backReleased();
+    void forwardClicked();
+    void backClicked();
+    void moreClicked();
+    void lessClicked();
 
 protected:
     virtual void closeEvent( QCloseEvent * );
 
     virtual void paintEvent( QPaintEvent *pe );
+
+    virtual void mouseMoveEvent( QMouseEvent *event );
 
     virtual void makeVisible();
 

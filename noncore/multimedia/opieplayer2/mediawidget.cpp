@@ -69,6 +69,50 @@ void MediaWidget::paintEvent( QPaintEvent *pe )
     }
 }
 
+void MediaWidget::mouseMoveEvent( QMouseEvent *event )
+{
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
+        Button &button = *it;
+        Command command = button.command;
+
+        if ( event->state() == QMouseEvent::LeftButton ) {
+            // The test to see if the mouse click is inside the button or not
+            bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, command );
+
+            if ( isOnButton && !button.isHeld ) {
+                button.isHeld = TRUE;
+                toggleButton( button );
+                switch ( command ) {
+                case VolumeUp:
+                    emit moreClicked();
+                    return;
+                case VolumeDown:
+                    emit lessClicked();
+                    return;
+                case Forward:
+                    emit forwardClicked();
+                    return;
+                case Back:
+                    emit backClicked();
+                    return;
+                default: break;
+                }
+            } else if ( !isOnButton && button.isHeld ) {
+                button.isHeld = FALSE;
+                toggleButton( button );
+            }
+        } else {
+            if ( button.isHeld ) {
+                button.isHeld = FALSE;
+                if ( button.type != ToggleButton ) {
+                    setToggleButton( button, FALSE );
+                }
+                handleCommand( command, button.isDown );
+            }
+        }
+    }
+}
+
 void MediaWidget::makeVisible()
 {
 }

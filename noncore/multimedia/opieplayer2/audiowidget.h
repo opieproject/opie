@@ -69,10 +69,6 @@ public:
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
-    void moreClicked();
-    void lessClicked();
-    void forwardClicked();
-    void backClicked();
     void sliderMoved(long);
 
 protected:
@@ -80,7 +76,6 @@ protected:
     void doUnblank();
     void showEvent( QShowEvent *se );
     void resizeEvent( QResizeEvent *re );
-    void mouseMoveEvent( QMouseEvent *event );
     void mousePressEvent( QMouseEvent *event );
     void mouseReleaseEvent( QMouseEvent *event );
     void timerEvent( QTimerEvent *event );
