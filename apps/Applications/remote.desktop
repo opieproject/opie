@@ -1,0 +1,6 @@
+[Desktop Entry]
+Comment=Remote App
+Exec=remote
+Icon=remote
+Type=Application
+Name=Remote
