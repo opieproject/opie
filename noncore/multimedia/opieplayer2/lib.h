@@ -192,6 +192,7 @@ namespace XINE {
         void initialize();
 
         int m_bytes_per_pixel;
+        bool m_initialized:1;
         bool m_video:1;
         XineVideoWidget *m_wid;
         xine_t *m_xine;
