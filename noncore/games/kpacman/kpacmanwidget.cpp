@@ -9,7 +9,7 @@
 #include <kpacmanwidget.moc>
 #elif defined( QPE_PORT )
 #include <qpe/qpeapplication.h>
-#include "config.h"
+#include <qpe/config.h>
 #include "kpacmanwidget.h"
 #endif
 

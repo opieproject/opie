@@ -7,7 +7,7 @@
 #include <kcolordlg.h>
 #elif defined( QPE_PORT )
 #include <qmenubar.h>
-#include "config.h"
+#include <qpe/config.h>
 #include <qapplication.h>
 #include "kpacman.h"
 #endif
@@ -70,11 +70,12 @@ Kpacman::Kpacman(QWidget *parent, const char *name)
 
 Kpacman::~Kpacman()
 {
-    APP_CONFIG_BEGIN( cfg );
+  /* APP_CONFIG_BEGIN( cfg );
     cfg->writeEntry("FocusOutPause", focusOutPause);
     cfg->writeEntry("FocusInContinue", focusInContinue);
     cfg->writeEntry("HideMouseCursor", hideMouseCursor);
     APP_CONFIG_END( cfg );
+  */
     delete _menuBar;
 }
 
@@ -143,11 +144,12 @@ void Kpacman::menu()
 int Kpacman::lookupSchemes()
 {
     APP_CONFIG_BEGIN( cfg );
-    int ModeCount = cfg->readNumEntry("ModeCount", -1);
-    int Mode = cfg->readNumEntry("Mode", -1);
-    int SchemeCount = cfg->readNumEntry("SchemeCount");
-    int Scheme = cfg->readNumEntry("Scheme", -1);
+    int ModeCount = cfg->readNumEntry("ModeCount", 0);
+    int Mode = cfg->readNumEntry("Mode", 0);
+    int SchemeCount = cfg->readNumEntry("SchemeCount", 0);
+    int Scheme = cfg->readNumEntry("Scheme", 0);
 
+	/*
     if (SchemeCount == 0 || Scheme == -1) {
         QMessageBox::warning(this, tr("Configuration Error"),
                                    tr("There are no schemes defined,\n"
@@ -155,6 +157,7 @@ int Kpacman::lookupSchemes()
         APP_CONFIG_END( cfg );
         return 0;
     }
+	*/
 
     connect(modesPopup, SIGNAL(activated(int)), this, SLOT(schemeChecked(int)));
     modeID.resize(ModeCount > 0 ? ModeCount : 0);
@@ -349,11 +352,12 @@ void Kpacman::schemeChecked(int id)
 						schemesPopup->at(schemeMode[s])->setItemChecked(schemeID[s], schemeID[s] == id);
 				}
 		}
-
+    /*
     APP_CONFIG_BEGIN( cfg );
     cfg->writeEntry("Scheme", scheme);
     cfg->writeEntry("Mode", mode);
     APP_CONFIG_END( cfg );
+    */
 
     view->setScheme(scheme, mode);
     view->updateGeometry();

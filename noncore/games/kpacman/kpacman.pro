@@ -17,7 +17,6 @@ HEADERS		= kpacmanwidget.h \
 		    kpacman.h \
 		    bitmaps.h \
 		    colors.h \
-		    config.h \
 		    portable.h
 SOURCES		= kpacmanwidget.cpp \
 		    referee.cpp \
@@ -32,7 +31,6 @@ SOURCES		= kpacmanwidget.cpp \
 		    board.cpp \
 		    bitfont.cpp \
 		    kpacman.cpp \
-		    config.cpp \
 		    main.cpp 
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include

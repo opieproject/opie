@@ -9,7 +9,7 @@
 #include <status.moc>
 #elif defined( QPE_PORT )
 #include <qpe/qpeapplication.h>
-#include "config.h"
+#include <qpe/config.h>
 #include "status.h"
 #endif
 
@@ -247,7 +247,7 @@ void Status::confMisc(bool defGroup)
                     cfg->readEntry("LifesPixmapName", "lifes.xpm"), maxLevel+1);
     if (defGroup || cfg->hasKey("LevelPixmapName"))
         fillStrList(levelPixmapName,
-                    cfg->readEntry("LevelPixmapName", "level.xpm"), maxLevel+1);
+                    cfg->readEntry("LevelPixmapName", "fruit.xpm"), maxLevel+1);
     APP_CONFIG_END( cfg );
 }
 

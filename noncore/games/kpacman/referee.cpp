@@ -11,7 +11,7 @@
 #elif defined( QPE_PORT )
 #include <qaccel.h>
 #include <qpe/qpeapplication.h>
-#include "config.h"
+#include <qpe/config.h>
 #include "referee.h"
 #endif
 
