@@ -20,17 +20,19 @@
 #include "bluebase.h"
 #include <qpe/qpeapplication.h>
 
+
 QPEApplication *BluetoothApp;
 
 int main( int argc, char ** argv ) {
     QPEApplication a(argc, argv);
     BluetoothApp=&a;
 
-    BlueBase t;
+    OpieTooth::BlueBase t;
 
-    t.setCaption( BlueBase::tr("Bluetooth Manager") );
+    // t.setCaption( OpieTooth::BlueBase::tr("Bluetooth Manager") );
     a.showMainWidget(&t);
 
     return a.exec();
 }
+
 

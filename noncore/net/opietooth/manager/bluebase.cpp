@@ -38,78 +38,79 @@
 #include <qpe/resource.h>
 #include <qpe/config.h>
 
-BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
-    : BluetoothBase( parent, name, fl ) {
+
+namespace OpieTooth {
 
 
-    QObject::connect( (QObject*) PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan()));
-    QObject::connect((QObject*)configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges()));
+    BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
+        : BluetoothBase( parent, name, fl ) {
 
-    QPalette pal = this->palette();
-    QColor col = pal.color(QPalette::Active, QColorGroup::Background);
-    pal.setColor(QPalette::Active, QColorGroup::Button, col);
-    pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
-    pal.setColor(QPalette::Normal, QColorGroup::Button, col);
-    pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
-    this->setPalette(pal);
 
-    readConfig();
-    initGui();
-}
+        QObject::connect( (QObject*) PushButton2,  SIGNAL( clicked() ), this, SLOT(startScan()));
+        QObject::connect((QObject*)configApplyButton, SIGNAL(clicked() ), this, SLOT(applyConfigChanges()));
 
-/** 
+        QPalette pal = this->palette();
+        QColor col = pal.color(QPalette::Active, QColorGroup::Background);
+        pal.setColor(QPalette::Active, QColorGroup::Button, col);
+        pal.setColor(QPalette::Inactive, QColorGroup::Button, col);
+        pal.setColor(QPalette::Normal, QColorGroup::Button, col);
+        pal.setColor(QPalette::Disabled, QColorGroup::Button, col);
+        this->setPalette(pal);
+
+        readConfig();
+        initGui();
+    }
+
+/**
  * Reads all options from the config file
  */
-void BlueBase::readConfig() {
+    void BlueBase::readConfig() {
 
-  Config cfg("bluetoothmanager");
-  cfg.setGroup("bluezsettings");
- 
+        Config cfg("bluetoothmanager");
+        cfg.setGroup("bluezsettings");
 
-  deviceName = cfg.readEntry("name", "No name"); // name the device should identify with
-  defaultPasskey = cfg.readEntryCrypt("passkey", ""); // <- hmm, look up how good the trolls did that, maybe too weak
-  useEncryption = cfg.readNumEntry("useEncryption", 1);
-  enableAuthentification = cfg.readNumEntry("enableAuthentification", 1);
-  enablePagescan = cfg.readNumEntry("enablePagescan",1);
-  enableInquiryscan = cfg.readNumEntry("enableInquiryscan", 1);
 
-}
+        deviceName = cfg.readEntry("name", "No name"); // name the device should identify with
+        defaultPasskey = cfg.readEntryCrypt("passkey", ""); // <- hmm, look up how good the trolls did that, maybe too weak
+        useEncryption = cfg.readNumEntry("useEncryption", 1);
+        enableAuthentification = cfg.readNumEntry("enableAuthentification", 1);
+        enablePagescan = cfg.readNumEntry("enablePagescan",1);
+        enableInquiryscan = cfg.readNumEntry("enableInquiryscan", 1);
+
+    }
 
 /**
  * Writes all options to the config file
  */
-void BlueBase::writeConfig() {
+    void BlueBase::writeConfig() {
 
 
-  Config cfg("bluetoothmanager");
-  cfg.setGroup("bluezsettings");
- 
-
-  cfg.writeEntry("name", deviceName); 
-  cfg.writeEntryCrypt("passkey", defaultPasskey);
-  cfg.writeEntry("useEncryption", useEncryption);
-  cfg.writeEntry("enableAuthentification", enableAuthentification);
-  cfg.writeEntry("enablePagescan",enablePagescan);
-  cfg.writeEntry("enableInquiryscan", enableInquiryscan);
+        Config cfg("bluetoothmanager");
+        cfg.setGroup("bluezsettings");
 
 
+        cfg.writeEntry("name", deviceName);
+        cfg.writeEntryCrypt("passkey", defaultPasskey);
+        cfg.writeEntry("useEncryption", useEncryption);
+        cfg.writeEntry("enableAuthentification", enableAuthentification);
+        cfg.writeEntry("enablePagescan",enablePagescan);
+        cfg.writeEntry("enableInquiryscan", enableInquiryscan);
 }
 
 
 /**
- * Set up the gui 
+ * Set up the gui
  */
-void BlueBase::initGui() {
+    void BlueBase::initGui() {
 
-  StatusLabel->setText(getStatus()); // maybe move it to getStatus()
+        StatusLabel->setText(getStatus()); // maybe move it to getStatus()
 
-  cryptCheckBox->setChecked(useEncryption);
-  authCheckBox->setChecked(enableAuthentification);
-  pagescanCheckBox->setChecked(enablePagescan);
-  inquiryscanCheckBox->setChecked(enableInquiryscan);
-  deviceNameLine->setText(deviceName);
-  passkeyLine->setText(defaultPasskey);
-
+        cryptCheckBox->setChecked(useEncryption);
+        authCheckBox->setChecked(enableAuthentification);
+        pagescanCheckBox->setChecked(enablePagescan);
+        inquiryscanCheckBox->setChecked(enableInquiryscan);
+        deviceNameLine->setText(deviceName);
+        passkeyLine->setText(defaultPasskey);
 }
 
 
@@ -117,49 +118,48 @@ void BlueBase::initGui() {
  * Get the status informations and returns it
  * @return QString the status informations gathered
  */
-QString BlueBase::getStatus(){
+    QString BlueBase::getStatus(){
 
-  return ("manger.h need also a status method");
+        return ("manger.h need also a status method");
 
-}
+    }
 
 
 /**
  * Read the current values from the gui and invoke writeConfig()
  */
-void BlueBase::applyConfigChanges() {
+    void BlueBase::applyConfigChanges() {
 
-  deviceName =  deviceNameLine->text();
-  defaultPasskey = passkeyLine->text();
-  useEncryption = cryptCheckBox->isChecked();
-  enableAuthentification = authCheckBox->isChecked();
-  enablePagescan = pagescanCheckBox->isChecked();
-  enableInquiryscan = inquiryscanCheckBox->isChecked();
+        deviceName =  deviceNameLine->text();
+        defaultPasskey = passkeyLine->text();
+        useEncryption = cryptCheckBox->isChecked();
+        enableAuthentification = authCheckBox->isChecked();
+        enablePagescan = pagescanCheckBox->isChecked();
+        enableInquiryscan = inquiryscanCheckBox->isChecked();
 
-  writeConfig();
+        writeConfig();
 
-  QMessageBox*  box = new QMessageBox(this, "Test");
-  box->setText(tr("Changes applied"));
-  box->show();
+        QMessageBox*  box = new QMessageBox(this, "Test");
+        box->setText(tr("Changes applied"));
+        box->show();
 
   // falls nötig hcid killhupen - die funktionalität adden
-
-
 }
 
 
 /**
  * Open the "scan for devices"  dialog
  */
-void BlueBase::startScan() {
-    ScanDialog *scan = new ScanDialog( this, "", true);
-    scan->exec();
-}
+    void BlueBase::startScan() {
+        ScanDialog *scan = new ScanDialog( this, "", true);
+        scan->exec();
+    }
 
 /**
  * Decontructor
  */
-BlueBase::~BlueBase(){
-}
+    BlueBase::~BlueBase(){
+    }
 
+}
 

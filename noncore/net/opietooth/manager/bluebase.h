@@ -18,39 +18,41 @@ class QPushButton;
 class QTabWidget;
 class QCheckBox;
 
-class BlueBase : public BluetoothBase {
-    Q_OBJECT
+namespace OpieTooth {
 
-public:
-    BlueBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
-    ~BlueBase();
+    class BlueBase : public BluetoothBase {
+        Q_OBJECT
 
-protected:
+    public:
+        BlueBase( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
+        ~BlueBase();
+
+    protected:
 
 
-        private slots:
-    void startScan();
+            private slots:
+        void startScan();
 
- private:
+    private:
 	void readConfig();
 	void writeConfig();
 	QString getStatus();
 	void initGui();
 
-	
+
 	QString deviceName;
 	QString defaultPasskey;
 	int useEncryption;
 	int enableAuthentification;
 	int enablePagescan;
-	int enableInquiryscan;	
-	
+	int enableInquiryscan;
+
 	private slots:
-	
+
       	void applyConfigChanges();
 
-};
+    };
 
-
+}
 
 #endif
