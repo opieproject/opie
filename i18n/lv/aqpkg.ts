@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>Abort</source>
-        <translation>Pārtrauce</translation>
+        <translation>Pārtraukt</translation>
     </message>
     <message>
         <source>
