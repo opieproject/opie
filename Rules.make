@@ -35,7 +35,7 @@ $(TOPDIR)/.depends.cfgs:
 	@-rm -f dirs
 
 $(QTDIR)/stamp-headers :
-	@-rm -f $@*
+	@-rm -f $(QTDIR)/stamp-headers*
 	( cd $(QTDIR)/include; \
 		$(patsubst %,ln -sf ../src/kernel/%;,qgfx_qws.h qwsmouse_qws.h \
 		qcopchannel_qws.h qwindowsystem_qws.h \
@@ -43,12 +43,12 @@ $(QTDIR)/stamp-headers :
 	touch $@
 
 $(QTDIR)/stamp-headers-x11 :
-	@-rm -f $@*
+	@-rm -f $(QTDIR)/stamp-headers*
 	cd $(QTDIR)/include; $(patsubst %,ln -sf $(OPIEDIR)/x11/libqpe-x11/qt/%;,qgfx_qws.h qwsmouse_qws.h qcopchannel_qws.h qwindowsystem_qws.h qfontmanager_qws.h qwsdefaultdecoration_qws.h)
 	touch $@
 
 $(OPIEDIR)/stamp-headers :
-	@-rm -f $@*
+	@-rm -f $(OPIEDIR)/stamp-headers*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
@@ -63,7 +63,7 @@ $(OPIEDIR)/stamp-headers :
 	touch $@
 	
 $(OPIEDIR)/stamp-headers-x11 :
-	@-rm -f $@*
+	@-rm -f $(OPIEDIR)/stamp-headers*
 	mkdir -p $(TOPDIR)/include/qpe $(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie $(TOPDIR)/include/qtopia/private
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
