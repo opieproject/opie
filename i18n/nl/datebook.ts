@@ -95,6 +95,10 @@ Toch afsluiten?</translation>
         <source>Continue</source>
         <translation>Ga door</translation>
     </message>
+    <message>
+        <source>error box</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>DateBookDayHeaderBase</name>
@@ -191,6 +195,10 @@ Toch afsluiten?</translation>
     <message>
         <source>Beam</source>
         <translation>Verstuur</translation>
+    </message>
+    <message>
+        <source>Beam this occurence</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -357,6 +365,14 @@ Toch afsluiten?</translation>
     </message>
 </context>
 <context>
+    <name>DateBookWeekLstDayHdr</name>
+    <message>
+        <source>MTWTFSSM</source>
+        <comment>Week days</comment>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>DateBookWeekLstHeader</name>
     <message>
         <source>w</source>
@@ -379,55 +395,90 @@ Toch afsluiten?</translation>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation>M
+        <translation type="obsolete">M
 
 Maandag</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation>D
+        <translation type="obsolete">D
 
 Dinsdag</translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation>W
+        <translation type="obsolete">W
 
 Woensdag</translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation>D
+        <translation type="obsolete">D
 
 Donderdag</translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation>V
+        <translation type="obsolete">V
 
 Vrijdag</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation>Z
+        <translation type="obsolete">Z
 
 Zaterdag</translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation>Z
+        <translation type="obsolete">Z
 
 Zondag</translation>
     </message>
     <message>
         <source>p</source>
         <translation>p</translation>
+    </message>
+    <message>
+        <source>Mo</source>
+        <comment>Monday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tu</source>
+        <comment>Tuesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>We</source>
+        <comment>Wednesday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Th</source>
+        <comment>Thursday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Fr</source>
+        <comment>Friday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sa</source>
+        <comment>Saturday</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Su</source>
+        <comment>Sunday</comment>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -558,6 +609,13 @@ Zondag</translation>
     <message>
         <source>Note...</source>
         <translation>Opmerking...</translation>
+    </message>
+</context>
+<context>
+    <name>DatebookAlldayDisp</name>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -720,6 +778,10 @@ en</translation>
     <message>
         <source>, and </source>
         <translation>, en</translation>
+    </message>
+    <message>
+        <source>on </source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

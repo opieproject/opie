@@ -398,6 +398,17 @@ vwijzigt al categorieen.</translation>
     </message>
 </context>
 <context>
+    <name>QMessageBox</name>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>QObject</name>
     <message>
         <source>New Document</source>
@@ -499,7 +510,7 @@ nogmaals.</translation>
     <message>
         <source>Are you sure you want to delete
  %1?</source>
-        <translation>Weet u zeker dat u %1
+        <translation type="obsolete">Weet u zeker dat u %1
 wilt verwijderen?</translation>
     </message>
     <message>
@@ -770,6 +781,39 @@ wilt verwijderen?</translation>
         <source>Groups</source>
         <translation>Groepen</translation>
     </message>
+    <message>
+        <source>Click to close this window, discarding changes.</source>
+        <translation type="unfinished">Klik om dit venster te sluiten zoner op te slaan.</translation>
+    </message>
+    <message>
+        <source>Click to close this window.</source>
+        <translation type="unfinished">Klik om dit venster te sluiten.</translation>
+    </message>
+    <message>
+        <source>Click to close this window and apply changes.</source>
+        <translation type="unfinished">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
+    </message>
+    <message>
+        <source>Click to make this window moveable.</source>
+        <translation type="unfinished">Klik om dit venster beweegbaar te maken.</translation>
+    </message>
+    <message>
+        <source>Click to make this window use all available screen area.</source>
+        <translation type="unfinished">Klik om te maximaliseren.</translation>
+    </message>
+    <message>
+        <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
+        <translation type="unfinished">&lt;Qt&gt;Uitgebreide help voor dit pakket is niet beschikbaar, maar er is wel contextgevoelige hulp.&lt;p&gt;Om de contextgevoelige help te gebruiken:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Druk de help knop enige tijd in.&lt;li&gt;Als op de titelbalk &lt;b&gt;Wat is dit...&lt;/b&gt; staat, druk dan op een functie.&lt;/ol&gt;&lt;/Qt&gt; </translation>
+    </message>
+    <message>
+        <source>What&apos;s this...</source>
+        <translation type="unfinished">Wat is dit...</translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Are you sure you want to delete
+ %1?&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QPEApplication</name>
@@ -782,34 +826,34 @@ wilt verwijderen?</translation>
     <name>QPEDecoration</name>
     <message>
         <source>&lt;Qt&gt;Comprehensive help is not available for this application, however there is context-sensitive help.&lt;p&gt;To use context-sensitive help:&lt;p&gt;&lt;ol&gt;&lt;li&gt;click and hold the help button.&lt;li&gt;when the title bar shows &lt;b&gt;What&apos;s this...&lt;/b&gt;, click on any control.&lt;/ol&gt;&lt;/Qt&gt;</source>
-        <translation>&lt;Qt&gt;Uitgebreide help voor dit pakket is niet beschikbaar, maar er is wel contextgevoelige hulp.&lt;p&gt;Om de contextgevoelige help te gebruiken:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Druk de help knop enige tijd in.&lt;li&gt;Als op de titelbalk &lt;b&gt;Wat is dit...&lt;/b&gt; staat, druk dan op een functie.&lt;/ol&gt;&lt;/Qt&gt; </translation>
+        <translation type="obsolete">&lt;Qt&gt;Uitgebreide help voor dit pakket is niet beschikbaar, maar er is wel contextgevoelige hulp.&lt;p&gt;Om de contextgevoelige help te gebruiken:&lt;p&gt;&lt;ol&gt;&lt;li&gt;Druk de help knop enige tijd in.&lt;li&gt;Als op de titelbalk &lt;b&gt;Wat is dit...&lt;/b&gt; staat, druk dan op een functie.&lt;/ol&gt;&lt;/Qt&gt; </translation>
     </message>
     <message>
         <source>What&apos;s this...</source>
-        <translation>Wat is dit...</translation>
+        <translation type="obsolete">Wat is dit...</translation>
     </message>
 </context>
 <context>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation>Klik om dit venster te sluiten zoner op te slaan.</translation>
+        <translation type="obsolete">Klik om dit venster te sluiten zoner op te slaan.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation>Klik om dit venster te sluiten.</translation>
+        <translation type="obsolete">Klik om dit venster te sluiten.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation>Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
+        <translation type="obsolete">Klik om dit venster te sluiten en de veranderingen aktief te maken.</translation>
     </message>
     <message>
         <source>Click to make this window moveable.</source>
-        <translation>Klik om dit venster beweegbaar te maken.</translation>
+        <translation type="obsolete">Klik om dit venster beweegbaar te maken.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation>Klik om te maximaliseren.</translation>
+        <translation type="obsolete">Klik om te maximaliseren.</translation>
     </message>
 </context>
 <context>

@@ -146,7 +146,7 @@ Toch stoppen?</translation>
     <message>
         <source>Unable to find a contact for this 
  search pattern!</source>
-        <translation>Kan niets vinden dat voldoet
+        <translation type="obsolete">Kan niets vinden dat voldoet
  aan de zoekterm!</translation>
     </message>
     <message>
@@ -182,6 +182,10 @@ toevoegen voor %1?</translation>
     <message>
         <source>You have to set a filename !</source>
         <translation>U moet een bestandsnaam selecteren!</translation>
+    </message>
+    <message>
+        <source>Unable to find a contact for this search pattern!</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

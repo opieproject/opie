@@ -99,7 +99,7 @@ en valt onder de GPL</translation>
         <source>Cannot remove current directory
 from bookmarks.
 It is not bookmarked!!</source>
-        <translation>Kan huidige directory niet
+        <translation type="obsolete">Kan huidige directory niet
 uit favorieten verwijderen,
 er is hier geen favoriet van!</translation>
     </message>
@@ -176,7 +176,7 @@ echt verwijderen?</translation>
     <message>
         <source>Really delete
 </source>
-        <translation>Echt verwijderen
+        <translation type="obsolete">Echt verwijderen
 </translation>
     </message>
     <message>
@@ -215,11 +215,11 @@ exists. Ok to overwrite?</source>
     </message>
     <message>
         <source>Copy </source>
-        <translation>Kopiëer</translation>
+        <translation type="obsolete">Kopiëer</translation>
     </message>
     <message>
         <source> As</source>
-        <translation>Als</translation>
+        <translation type="obsolete">Als</translation>
     </message>
     <message>
         <source> already exists.
@@ -257,6 +257,38 @@ Wilt u het echt verwijderen?</translation>
         <source>Could not rename</source>
         <translation>Kan bestand niet hernoemen</translation>
     </message>
+    <message>
+        <source>AdvancedFm :: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> kB free</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot remove current directory
+from bookmarks.
+It is not bookmarked!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File Search</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete %1
+and all it&apos;s contents ?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Really delete
+%1?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy &apos;%1&apos; As</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Output</name>
@@ -267,6 +299,21 @@ Wilt u het echt verwijderen?</translation>
     <message>
         <source>Save output to file (name only)</source>
         <translation>Sla uivoer op in bestand (alleen bestandsnaam)</translation>
+    </message>
+    <message>
+        <source>Process could not start</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+Finished
+</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -310,6 +357,26 @@ Wilt u het echt verwijderen?</translation>
     <message>
         <source>execute</source>
         <translation>Uitvoeren</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no user</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error- no  group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting ownership or group</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error setting mode</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

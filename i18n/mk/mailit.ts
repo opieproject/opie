@@ -1,143 +1,135 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>Button</name>
+    <name>AddAtt</name>
     <message>
-        <source>Calendar Button</source>
+        <source>Adding attachments</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Contacts Button</source>
+        <source>attach...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Menu Button</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mail Button</source>
+        <source>Attached</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Home Button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Record Button</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Display Rotate</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Upper+Left</source>
+        <source>File type</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>OColorDialog</name>
+    <name>EditAccount</name>
     <message>
-        <source>Hue:</source>
+        <source>Edit Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sat:</source>
+        <source>Create new Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Val:</source>
+        <source>Account name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Red:</source>
+        <source>Your name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Green:</source>
+        <source>Email</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Blue:</source>
+        <source>POP username</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alpha channel:</source>
+        <source>POP password</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select color</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OColorPopupMenu</name>
-    <message>
-        <source>More</source>
+        <source>POP server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OFileDialog</name>
-    <message>
-        <source>FileDialog</source>
+        <source>SMTP server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Open</source>
+        <source>Synchronize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save</source>
+        <source>Mail Size (k)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>OFileSelector</name>
+    <name>EmailClient</name>
     <message>
-        <source>Name:</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OFileViewFileListView</name>
-    <message>
-        <source>Name</source>
+        <source>Main operation toolbar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>&amp;Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accounts</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Get Mail in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>getMail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>select account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click to download mail via all available accounts.
+ Press and hold to select the desired account.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cancel transfer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>From</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subject</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -145,517 +137,468 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Mime Type</source>
+        <source>Inbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Outbox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Idle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No account selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You must create an account</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Unknown response from server&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;host not found&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;connection refused&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;socket packet error&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;qt&gt;Login failed
+Check user name and password&lt;/qt&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Receiving error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No account associated</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is no active account 
+associated to this mail
+ it can not be downloaded</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>OFontMenu</name>
+    <name>EmailHandler</name>
     <message>
-        <source>Large</source>
+        <source>Could not locate all files in 
+mail with subject: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Medium</source>
+        <source>
+Mail has NOT been sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Small</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>OFontSelector</name>
-    <message>
-        <source>Style</source>
+        <source>Attachment error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
+        <source>OK
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ORecurranceBase</name>
+    <name>MailItWindow</name>
     <message>
-        <source>Repeating Event </source>
-        <translation>Terugkerende gebeurtenis</translation>
+        <source>Mailit</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>None</source>
-        <translation>Geen</translation>
+        <source>Central view area</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Day</source>
-        <translation>Dag</translation>
+        <source>Write mail</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Week</source>
-        <translation>Week</translation>
+        <source>Mail not downloaded</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Month</source>
-        <translation>Maand</translation>
+        <source>The mail you have clicked 
+has not been downloaded yet.
+ Would you like to do it now ?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Year</source>
-        <translation>Jaar</translation>
-    </message>
-    <message>
-        <source>Every:</source>
-        <translation>Iedere:</translation>
-    </message>
-    <message>
-        <source>Frequency</source>
-        <translation>Frequentie</translation>
-    </message>
-    <message>
-        <source>End On:</source>
-        <translation>Beeindig op:</translation>
-    </message>
-    <message>
-        <source>No End Date</source>
-        <translation>Geen einddatum</translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation>Herhaal op</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation>Ma</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation>Di</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation>Wo</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation>Do</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation>Vr</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation>Za</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation>Zo</translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation>Iedere</translation>
-    </message>
-    <message>
-        <source>Var1</source>
-        <translation>Var 1</translation>
-    </message>
-    <message>
-        <source>Var 2</source>
-        <translation>Var 2</translation>
-    </message>
-    <message>
-        <source>WeekVar</source>
-        <translation>WeekVar</translation>
+        <source>Read Mail</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>ORecurranceWidget</name>
+    <name>PopClient</name>
     <message>
-        <source>No End Date</source>
-        <translation type="unfinished">Geen einddatum</translation>
-    </message>
-    <message>
-        <source>days</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>day</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>weeks</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>week</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>months</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>month</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>years</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>year</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> and </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>,
-and </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>, and </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>on </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No Repeat</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>day(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat On</source>
-        <translation type="unfinished">Herhaal op</translation>
-    </message>
-    <message>
-        <source>Mon</source>
-        <translation type="unfinished">Ma</translation>
-    </message>
-    <message>
-        <source>Tue</source>
-        <translation type="unfinished">Di</translation>
-    </message>
-    <message>
-        <source>Wed</source>
-        <translation type="unfinished">Wo</translation>
-    </message>
-    <message>
-        <source>Thu</source>
-        <translation type="unfinished">Do</translation>
-    </message>
-    <message>
-        <source>Fri</source>
-        <translation type="unfinished">Vr</translation>
-    </message>
-    <message>
-        <source>Sat</source>
-        <translation type="unfinished">Za</translation>
-    </message>
-    <message>
-        <source>Sun</source>
-        <translation type="unfinished">Zo</translation>
-    </message>
-    <message>
-        <source>week(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Repeat By</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Day</source>
-        <translation type="unfinished">Dag</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>month(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>year(s)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="unfinished">Iedere</translation>
-    </message>
-</context>
-<context>
-    <name>OTimePickerDialogBase</name>
-    <message>
-        <source>Time:</source>
-        <translation>Tijd:</translation>
-    </message>
-    <message>
-        <source>:</source>
-        <translation>:</translation>
-    </message>
-    <message>
-        <source>Pick Time:</source>
-        <translation>Kies tijd:</translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Documents</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Description:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Priority:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very high</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>High</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Normal</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Low</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Very low</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Progress:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Deadline:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Category:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Default Email: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Work Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Office: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Web Page: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Phone: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Fax: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Mobile: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Business Pager: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&lt;br&gt;&lt;br&gt;&lt;b&gt;Home Address:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Web Page: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Phone: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Fax: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Home Mobile: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All Emails: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Profession: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Assistant: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Manager: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Male</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Female</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Gender: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Spouse: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Birthday: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Anniversary: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Children: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Nickname: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Notes:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Location:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is an all day event</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This is a multiple day event</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Start:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>End:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Every</source>
-        <translation type="unfinished">Iedere</translation>
-    </message>
-    <message>
-        <source>%1 %2 every </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The %1 every </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>The %1 %2 of every</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Every </source>
+        <source>DNS lookup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Monday</source>
+        <source>Connection established</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Tuesday</source>
+        <source>Error Occured</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Wednesday</source>
+        <source>Retrieving </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Thursday</source>
+        <source>Completing message </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Friday</source>
+        <source>No new Messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Saturday</source>
+        <source> new messages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sunday</source>
+        <source>No new messages</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>QWidget</name>
     <message>
-        <source>st</source>
+        <source>This is the inbox view.
+It keeps the fetched mail which can be 
+viewed by double clicking the entry.
+blue attachment icon shows whether this 
+mailhas attachments.
+</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>nd</source>
+        <source>This is the outbox view.
+It keeps the queued mails to send which can be 
+reviewed by double clicking the entry.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>rd</source>
+        <source>The mail subject should be entered here</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>th</source>
+        <source>Recipients can be entered here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>If you would like to send copies of your mail they can be entered here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This button opens the address selector with all mail adresses from your Opie addressbook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enter your mail text here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose the recipients from this list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Queue your mail by clicking here</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This is an overview about all attachments in the mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ReadMail</name>
+    <message>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Download</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to download the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the previous mail in the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Read the next mail in the list</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attatchments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to add attachments to your mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Text Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The mail view has 2 modes:
+&lt;LI&gt;&lt;B&gt;RichText&lt;/B&gt; shows the mail as HTML with reach features (no standard line breaks)&lt;/LI&gt;&lt;LI&gt;&lt;B&gt;Plain&lt;/B&gt; shows the mail as standard plain text&lt;/LI&gt;Click here to switch between those view modes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>reply to mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reply to the selected mail
+Press and hold for more options.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reply all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to reply to the selected mail to CC: addresses also</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Forward</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to forward the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to remove the selected mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SmtpClient</name>
+    <message>
+        <source>DNS lookup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connection established</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sending: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sent </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> messages</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ViewAtt</name>
+    <message>
+        <source>Exploring attatchments</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Install</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to install the attachment to your Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attatchment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Installed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WriteMail</name>
+    <message>
+        <source>&amp;Mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Add</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Attachment</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to attach files to your mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enque mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This button puts your mail in the send queue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>New mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Click here to create a new mail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CC:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subject:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EMail</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No recipient</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Send mail to whom?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incorrect recipient separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Recipients must be separated by ;
+and be valid emailaddresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Incorrect carbon copy separator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CC Recipients must be separated by ;
+and be valid emailaddresses</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Re: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> wrote on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>======forwarded message from </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> starts======
+
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FWD: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>======end of forwarded message======
+
+</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

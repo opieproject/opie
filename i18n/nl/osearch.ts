@@ -7,23 +7,23 @@
     </message>
     <message>
         <source>adressbook</source>
-        <translation>adresboek</translation>
+        <translation type="obsolete">adresboek</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation>tedoen</translation>
+        <translation type="obsolete">tedoen</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation>agenda</translation>
+        <translation type="obsolete">agenda</translation>
     </message>
     <message>
         <source>applications</source>
-        <translation>programma&apos;s</translation>
+        <translation type="obsolete">programma&apos;s</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation>documenten</translation>
+        <translation type="obsolete">documenten</translation>
     </message>
     <message>
         <source>Search</source>
@@ -56,6 +56,26 @@
     <message>
         <source>Enter your search terms here</source>
         <translation>Voer hier de zoektermen in</translation>
+    </message>
+    <message>
+        <source>Applications</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Documents</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Contacts</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

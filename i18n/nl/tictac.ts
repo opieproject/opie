@@ -1,5 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>QObject</name>
+    <message>
+        <source>TicTac</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>TicTacToe</name>
     <message>
         <source>Computer starts</source>

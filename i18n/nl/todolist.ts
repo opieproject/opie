@@ -28,6 +28,10 @@
         <source>Recurrence</source>
         <translation>Terugkeringen</translation>
     </message>
+    <message>
+        <source>Task Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>QObject</name>
@@ -46,6 +50,10 @@
     <message>
         <source>loud</source>
         <translation>luid</translation>
+    </message>
+    <message>
+        <source>Opie Todolist</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -459,7 +467,7 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     </message>
     <message>
         <source>Notes:</source>
-        <translation>Notities:</translation>
+        <translation type="obsolete">Notities:</translation>
     </message>
     <message>
         <source>Enter any additional information about this task here.</source>
@@ -468,6 +476,10 @@ Deze staat u toe om snel een nieuwe taak aan de lijst toe te voegen. Dit vlak ka
     <message>
         <source>Todo List</source>
         <translation>Te Doen Lijst</translation>
+    </message>
+    <message>
+        <source>Summary:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

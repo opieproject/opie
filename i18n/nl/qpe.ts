@@ -66,12 +66,12 @@ Reservebatterij opladen aub.</translation>
     </message>
     <message>
         <source>Information</source>
-        <translation>Informatie</translation>
+        <translation type="obsolete">Informatie</translation>
     </message>
     <message>
         <source>&lt;p&gt;The system date doesn&apos;t seem to be valid.
 (%1)&lt;/p&gt;&lt;p&gt;Do you want to correct the clock ?&lt;/p&gt;</source>
-        <translation>&lt;p&gt;De systeemdatum lijkt niet correct.
+        <translation type="obsolete">&lt;p&gt;De systeemdatum lijkt niet correct.
 (%1)&lt;/p&gt;&lt;p&gt;Wilt u deze corrigeren?&lt;/p&gt;</translation>
     </message>
 </context>
@@ -79,7 +79,7 @@ Reservebatterij opladen aub.</translation>
     <name>DesktopPowerAlerter</name>
     <message>
         <source>Battery Status</source>
-        <translation>Batterijstatus</translation>
+        <translation type="obsolete">Batterijstatus</translation>
     </message>
 </context>
 <context>
@@ -177,6 +177,13 @@ Reservebatterij opladen aub.</translation>
     <message>
         <source>Do not ask again for this medium</source>
         <translation>Vraag niet nogmaals voor dit medium</translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <source>Battery Status</source>
+        <translation type="unfinished">Batterijstatus</translation>
     </message>
 </context>
 <context>

@@ -1,31 +1,28 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>MainView</name>
+    <name>AdvancedConfigBase</name>
     <message>
-        <source>uBrowser</source>
+        <source>Advanced Config</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> - uBrowser</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QObject</name>
-    <message>
-        <source>Error!</source>
+        <source>Renew DHCP on changing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>couldnt find ip address</source>
+        <source>Frequency</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>couldnt create socket</source>
+        <source>MODE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>couldnt connect to socket</source>
+        <source>ESSID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>AccessPoint</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

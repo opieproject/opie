@@ -70,15 +70,15 @@
     </message>
     <message>
         <source>You asked for a delay of </source>
-        <translation>U vroeg om een vertraging van</translation>
+        <translation type="obsolete">U vroeg om een vertraging van</translation>
     </message>
     <message>
         <source> minutes, but only </source>
-        <translation>minuten, maar slechts</translation>
+        <translation type="obsolete">minuten, maar slechts</translation>
     </message>
     <message>
         <source> minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation>minuten zijn verstreken sinds laatste controle.&lt;br&gt;Doorgaan?</translation>
+        <translation type="obsolete">minuten zijn verstreken sinds laatste controle.&lt;br&gt;Doorgaan?</translation>
     </message>
     <message>
         <source>Continue?</source>
@@ -114,11 +114,19 @@ server:</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation>seconden</translation>
+        <translation type="obsolete">seconden</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
         <translation>Kan niet met server verbinden</translation>
+    </message>
+    <message>
+        <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 seconds</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

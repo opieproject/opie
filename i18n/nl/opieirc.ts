@@ -61,15 +61,15 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Received unhandled numeric command : </source>
-        <translation>Ongebruikt nummeriek commando ontvangen:</translation>
+        <translation type="obsolete">Ongebruikt nummeriek commando ontvangen:</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command : </source>
-        <translation>Ongebruikt ctcp commando ontvangen:</translation>
+        <translation type="obsolete">Ongebruikt ctcp commando ontvangen:</translation>
     </message>
     <message>
         <source>Received unhandled literal command : </source>
-        <translation>Ongebruikt tekstueel commando ontvangen:</translation>
+        <translation type="obsolete">Ongebruikt tekstueel commando ontvangen:</translation>
     </message>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
@@ -77,7 +77,7 @@
     </message>
     <message>
         <source> joined channel </source>
-        <translation>opent kanaal</translation>
+        <translation type="obsolete">opent kanaal</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>You left channel </source>
-        <translation>U verliet het kanaal</translation>
+        <translation type="obsolete">U verliet het kanaal</translation>
     </message>
     <message>
         <source> left channel </source>
-        <translation>verliet kanaal</translation>
+        <translation type="obsolete">verliet kanaal</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel </source>
-        <translation>Kanaalbericht voor onbekend kanaal</translation>
+        <translation type="obsolete">Kanaalbericht voor onbekend kanaal</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
@@ -117,11 +117,11 @@
     </message>
     <message>
         <source>You are now known as </source>
-        <translation>U staat nu bekend als</translation>
+        <translation type="obsolete">U staat nu bekend als</translation>
     </message>
     <message>
         <source> is now known as </source>
-        <translation>staat nu bekend als</translation>
+        <translation type="obsolete">staat nu bekend als</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
@@ -129,7 +129,7 @@
     </message>
     <message>
         <source> has quit </source>
-        <translation>is gestopt</translation>
+        <translation type="obsolete">is gestopt</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
@@ -218,6 +218,46 @@
     <message>
         <source>No such nickname</source>
         <translation>Bijnaam niet bekend</translation>
+    </message>
+    <message>
+        <source>Received unhandled numeric command: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received unhandled ctcp command: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Received unhandled literal command: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 joined channel %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You left channel %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 left channel %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Channel message with unknown channel %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>You are now known as %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 is now known as %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1 has quit (%2)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -461,6 +501,10 @@ bevatten die beginnen met &apos;#&apos; of &apos;+&apos;</translation>
     <message>
         <source>Colors</source>
         <translation>Kleuren</translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished">Instellingen</translation>
     </message>
 </context>
 <context>

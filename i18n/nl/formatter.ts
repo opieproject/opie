@@ -26,7 +26,7 @@
 Changing parameters on this 
 page may cause your system 
 to stop functioning properly!!</source>
-        <translation>WAARSCHUWING:
+        <translation type="obsolete">WAARSCHUWING:
 Het veranderen van opties op
 deze pagina kan ervoor zorgen
 dat uw system niet meer goed
@@ -54,7 +54,7 @@ functioneert!!</translation>
     </message>
     <message>
         <source>Format?!?</source>
-        <translation>Formatteren?!?</translation>
+        <translation type="obsolete">Formatteren?!?</translation>
     </message>
     <message>
         <source>Really format
@@ -65,13 +65,13 @@ functioneert!!</translation>
     <message>
         <source>
 with </source>
-        <translation>
+        <translation type="obsolete">
 met</translation>
     </message>
     <message>
         <source> filesystem?!?
 You will loose all data!!</source>
-        <translation>bestandssysteem?!?
+        <translation type="obsolete">bestandssysteem?!?
 Alle data zal verloren gaan!!</translation>
     </message>
     <message>
@@ -130,7 +130,7 @@ is succcesvol geformatteerd.</translation>
     </message>
     <message>
         <source>Trying to mount.</source>
-        <translation>Probeer te mounten.</translation>
+        <translation type="obsolete">Probeer te mounten.</translation>
     </message>
     <message>
         <source>Card mount failed!</source>
@@ -139,7 +139,7 @@ is succcesvol geformatteerd.</translation>
     <message>
         <source>
 has been successfully mounted.</source>
-        <translation>
+        <translation type="obsolete">
 is sucsesvol gemount.</translation>
     </message>
     <message>
@@ -152,7 +152,7 @@ is sucsesvol gemount.</translation>
     </message>
     <message>
         <source>Storage Type : </source>
-        <translation>Opslagsoort :</translation>
+        <translation type="obsolete">Opslagsoort :</translation>
     </message>
     <message>
         <source>Total: %1 kB ( %d mB)
@@ -169,6 +169,46 @@ is sucsesvol gemount.</translation>
     <message>
         <source>Available: %1 kB ( %d mB)</source>
         <translation>Beschikbaar: %1 kB (%d mB)</translation>
+    </message>
+    <message>
+        <source>CAUTION:
+Changing parameters on this
+page may cause your system
+to stop functioning properly!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Format?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+with %1 filesystem?
+You will loose all data!!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to umount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Trying to mount %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%1
+has been successfully mounted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Storage Type: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Type: %1
+Formatted with %2
+%3, %4, %5</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
