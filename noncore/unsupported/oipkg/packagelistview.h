@@ -48,7 +48,7 @@ public slots:
   void setCurrent( QListViewItem* );
   void stopTimer( QListViewItem* );
   void toggleProcess();
-  void display();
+//  void display();
 protected slots:
 	void expand(QListViewItem*);
 };

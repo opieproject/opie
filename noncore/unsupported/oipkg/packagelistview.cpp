@@ -108,8 +108,8 @@ void PackageListView::toggleProcess()
   activePackageListItem->displayDetails();
 }
 
-void PackageListView::display()
-{
+//void PackageListView::display()
+//{
 //	QDictIterator<PackageList> list( PackageLists );
 //	PackageList *packlist;
 //	Package *pack;
@@ -136,7 +136,7 @@ void PackageListView::display()
 //  	}
 //		++list;
 //  }
-}
+//}
 
 void PackageListView::addList( QString n, PackageList* pl)
 {
@@ -147,5 +147,5 @@ void PackageListView::addList( QString n, PackageList* pl)
 
 void PackageListView::expand(QListViewItem *item)
 {
- 	((PackageList*)item)->expand();
+ 	((OCheckListItem*)item)->expand();
 }

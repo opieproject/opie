@@ -16,18 +16,19 @@
 
 class PackageListLocal : public PackageList  {
 public:
-	PackageListLocal( PackageListView* parent=0, const char* name=0, PackageManagerSettings *s=0 );
+	PackageListLocal( PackageListView* parent, const char* name, QString file, PackageManagerSettings *s );
 	virtual ~PackageListLocal();
   virtual void expand();
 
 //public slots:
   void update();
 private:
-  QString listsDir;
-  QString statusDir;
-  void parseStatus();
-  void parseList();
-  void init();
+  QString packageFile;
+  bool readFileEntry;
+//  QString listsDir;
+//  QString statusDir;
+//  void parseStatus();
+//  void parseList();
 };
 
 #endif

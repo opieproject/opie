@@ -36,7 +36,7 @@
 #include <qpushbutton.h>
 #include <qlayout.h>
 
-#include "pksettingsbase.h"
+//#include "pksettingsbase.h"
 #include "utils.h"
 #include "packagelistitem.h"
 
@@ -51,13 +51,16 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f ) :
   listViewPackages =  new PackageListView( this,"listViewPackages",settings );
   setCentralWidget( listViewPackages );
   qDebug("creating lists");
-  packageListServers = new PackageListLocal(  listViewPackages, tr("feeds"),     settings );
+  packageListServers = new PackageListFeeds(  listViewPackages, tr("feeds"),     settings );
   packageListSearch  = new PackageListRemote( listViewPackages, tr("search"),    settings );
   packageListDocLnk  = new PackageListDocLnk( listViewPackages, tr("documents"), settings );
   qDebug("adding lists");
-  listViewPackages->addList( tr("feeds"), packageListServers );
-  listViewPackages->addList( tr("ipkgfind&killefiz"), packageListSearch );
-  listViewPackages->addList( tr("documents"), packageListDocLnk );
+  listViewPackages->insertItem( packageListServers );
+  listViewPackages->insertItem( packageListSearch );
+  listViewPackages->insertItem( packageListDocLnk );
+//  listViewPackages->addList( tr("feeds"), packageListServers );
+//  listViewPackages->addList( tr("ipkgfind&killefiz"), packageListSearch );
+//  listViewPackages->addList( tr("documents"), packageListDocLnk );
   ipkg = new PmIpkg( this, settings, "Ipkg engine" );
 //  packageListServers->setSettings( settings );
 //  packageListSearch->setSettings( settings );
@@ -306,10 +309,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::runIpkg()
 {
-  packageListServers->allPackages();
-  ipkg->loadList( packageListSearch );
-	ipkg->loadList( packageListDocLnk );
-  ipkg->loadList( packageListServers );
+//  packageListServers->allPackages();
+//  ipkg->loadList( packageListSearch );
+//	ipkg->loadList( packageListDocLnk );
+//  ipkg->loadList( packageListServers );
   ipkg->commit();
   ipkg->clearLists();
   // ##### If we looked in the list of files, we could send out accurate
@@ -322,12 +325,12 @@ void MainWindow::runIpkg()
 
 void MainWindow::updateList()
 {
-	packageListServers->clear();
+//	packageListServers->clear();
 	packageListSearch->clear();
 
   packageListDocLnk->clear();
   ipkg->update();
-  packageListServers->update();
+//  packageListServers->update();
   packageListSearch->update();
   packageListDocLnk->update();
 }
@@ -336,13 +339,13 @@ void MainWindow::filterList()
 {
  	QString f = "";
   if ( findAction->isOn() ) f = findEdit->text();
-  packageListServers->filterPackages( f );
+//  packageListServers->filterPackages( f );
 }
 
 void MainWindow::displayList()
 {
 	filterList();
-  listViewPackages->display();
+//  listViewPackages->display();
 }
 
 void MainWindow::sectionChanged()
@@ -352,7 +355,7 @@ void MainWindow::sectionChanged()
   disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
   subsection->clear();
-  packageListServers->setSection( section->currentText() );
+//  packageListServers->setSection( section->currentText() );
   setSubSections();
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
@@ -367,7 +370,7 @@ void MainWindow::subSectionChanged()
 	      this, SLOT( sectionChanged() ) );
   disconnect( subsection, SIGNAL(activated(int) ),
 	      this, SLOT( subSectionChanged() ) );
-  packageListServers->setSubSection( subsection->currentText() );
+//  packageListServers->setSubSection( subsection->currentText() );
   connect( section, SIGNAL( activated(int) ),
 	   this, SLOT( sectionChanged() ) );
   connect( subsection, SIGNAL(activated(int) ),
@@ -378,13 +381,13 @@ void MainWindow::subSectionChanged()
 void MainWindow::setSections()
 {
   section->clear();
-  section->insertStringList( packageListServers->getSections() );
+//  section->insertStringList( packageListServers->getSections() );
 }
 
 void MainWindow::setSubSections()
 {
   subsection->clear();
-  subsection->insertStringList( packageListServers->getSubSections() );
+//  subsection->insertStringList( packageListServers->getSubSections() );
 }
 
 
@@ -412,14 +415,19 @@ void MainWindow::showSettingsDst()
 
 void MainWindow::sectionShow(bool b)
 {
+	
 	if (b) sectionBar->show();
   else sectionBar->hide();
   sectionAction->setOn( b );
+//  aktSection = section->currentText();
+//  aktSubSection = subsection->currentText();
 }
 
 void MainWindow::sectionClose()
 {
   sectionAction->setOn( false );
+//  aktSection = "";
+//  aktSubSection = "";
 }
 
 void MainWindow::findShow(bool b)

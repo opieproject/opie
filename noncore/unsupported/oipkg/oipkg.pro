@@ -7,11 +7,13 @@ HEADERS		= mainwindow.h \
 		pmipkg.h \
 		packagelistdoclnk.h \
 		installdialog.h \
+		packagelistlocal.h \
 		utils.h \
 		packagelistitem.h \
 		packagelistremote.h \
 		packagelist.h \
-		packagelistlocal.h \
+		packagelistfeeds.h \
+		ochecklistitem.h \
 		packagelistview.h \
 		package.h
 SOURCES		= main.cpp \
@@ -21,8 +23,10 @@ SOURCES		= main.cpp \
 		packagelistview.cpp \
 		installdialog.cpp \
 		packagelistremote.cpp \
-		packagelistlocal.cpp \
+		packagelistfeeds.cpp \
+		ochecklistitem.cpp \
 		pksettings.cpp \
+		packagelistlocal.cpp \
 		pmipkg.cpp \
 		packagelistitem.cpp \
 		packagelist.cpp \

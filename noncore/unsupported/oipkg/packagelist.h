@@ -10,14 +10,14 @@
 #ifndef PACKAGELIST_H
 #define PACKAGELIST_H
 
-#include <qlistview.h>
+#include "ochecklistitem.h"
 #include <qdict.h>
 #include "package.h"
 #include "pksettings.h"
 
 class PackageListView;
 
-class PackageList : public QCheckListItem
+class PackageList : public OCheckListItem
 {
 public:
   PackageList( PackageListView *parent=0, const char *name=0, PackageManagerSettings *s=0 );
@@ -33,8 +33,6 @@ public:
   void filterPackages( QString );
   Package* getByName( QString );
   void clear();
-  void allPackages();
-  virtual void expand();
 
   QDict<Package> *versions;
 
@@ -45,23 +43,19 @@ public:
 protected:
   int currentPackage;
   int packageCount;
+	QString            aktSection;
+	QString            aktSubSection;
+	QStringList        sections;
+	QDict<QStringList> subSections;
+	QDict<bool> sectionsDict;
 
   PackageManagerSettings     *settings;
   QDict<Package>         packageList;
-  QDict<Package>         origPackageList;
+ // QDict<Package>         origPackageList;
   QDictIterator<Package> packageIter;
-
-  QString            aktSection;
-  QString            aktSubSection;
-  QStringList        sections;
-  QDict<QStringList> subSections;
-  QDict<bool> sectionsDict;
-
 
   void updateSections( Package* );
   void readFileEntries( QString file, QString dest="" );
-private:
-	QCheckListItem *dummy;
 };
 
 

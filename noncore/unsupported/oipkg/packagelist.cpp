@@ -13,19 +13,18 @@
 #include <qfile.h>
 #include <qfileinfo.h>
 #include <qtextstream.h>
+#include "packagelistitem.h"
 
 static QDict<Package>  *packageListAll;
 static int packageListAllRefCount = 0;
 
 
 PackageList::PackageList( PackageListView *parent, const char *name, PackageManagerSettings* s )
-  : QCheckListItem((QListView*)parent,name),
+  : OCheckListItem((QListView*)parent,name),
   packageIter( packageList )
 {
 	qDebug("Creating packagelist %s",name);
   settings = s;
-  dummy = new QCheckListItem(this,"dummy");
-  insertItem(dummy);
   if (!packageListAll) packageListAll = new QDict<Package>();
   packageListAllRefCount++;
   sections << "All";
@@ -48,9 +47,7 @@ void PackageList::insertPackage( Package* pack )
   Package* p = packageListAll->find( pack->name() );
   if ( p )
     {
-      if ( (p->version() == pack->version())
-//      		&& (p->dest() == pack->dest())
-        	)
+      if ( (p->version() == pack->version()) )
       {
 	      p->copyValues( pack );
   	    delete pack;
@@ -68,32 +65,42 @@ void PackageList::insertPackage( Package* pack )
        	pack->setOtherVersions( packver );
        	packver->insert( pack->name(), pack );
 				packageListAll->insert( pack->name(), pack );
-				packageList.insert( pack->name(), pack );
-      	origPackageList.insert( pack->name(), pack );
       }
+			packageList.insert( pack->name(), pack );
+//      origPackageList.insert( pack->name(), pack );
     }else{
       packageListAll->insert( pack->name(), pack );
       packageList.insert( pack->name(), pack );
-      origPackageList.insert( pack->name(), pack );
+//      origPackageList.insert( pack->name(), pack );
     };
   updateSections( pack );
 }
 
 void PackageList::filterPackages( QString f )
-{	
-  packageList.clear();
-  QDictIterator<Package> filterIter( origPackageList );
+{
+	//first clear all child items...
+	QListViewItem *toDel;
+	QListViewItem *it = firstChild();
+	while (it)
+	{
+		toDel = it;
+		it = it->nextSibling();
+		delete toDel;
+	};
+	//...then add 'em again
+  QDictIterator<Package> filterIter( packageList );
   filterIter.toFirst();
   Package *pack= filterIter.current() ;
+  PackageListItem *item;
   while ( pack )
-    {	
+    {
       if (
       			((aktSection=="All")||(pack->section()==aktSection)) &&
 	   				((aktSubSection=="All")||(pack->subSection()==aktSubSection)) &&
-        		 pack->name().contains( f )
+        		((f!="")||(pack->name().contains( f )))
     			)
 			{
-	  		packageList.insert( pack->name(), pack );
+	    	item = new PackageListItem( this, pack, settings );
 			}
       ++filterIter;
       pack = filterIter.current();
@@ -200,35 +207,12 @@ void PackageList::setSettings( PackageManagerSettings *s )
 
 Package* PackageList::getByName( QString n )
 {
-	return origPackageList[n];
+	return packageList[n];
 }
 
 void PackageList::clear()
 {
-	origPackageList.clear();
+//	origPackageList.clear();
 	packageList.clear();
 }
 
-void PackageList::allPackages()
-{
-	packageList.clear();
-  QDictIterator<Package> filterIter( origPackageList );
-  filterIter.toFirst();
-  Package *pack= filterIter.current() ;
-  while ( pack )
-    {	
-	  	packageList.insert( pack->name(), pack );
-      ++filterIter;
-      pack = filterIter.current();
-    }
-}
-
-void PackageList::expand()
-{
-	if(dummy)
-	{
-		qDebug("PackageList::expand(): deleting dummy item");
-   	delete dummy;
-    dummy=0;
-	}
-}

@@ -20,7 +20,7 @@
 
 #include "packagelist.h"
 #include "packagelistremote.h"
-#include "packagelistlocal.h"
+#include "packagelistfeeds.h"
 #include "packagelistdoclnk.h"
 #include "pmipkg.h"
 #include "pksettings.h"
@@ -81,7 +81,7 @@ private:
 
   PmIpkg* ipkg;
   PackageManagerSettings *settings;
-  PackageListLocal  *packageListServers;
+  PackageListFeeds  *packageListServers;
   PackageListRemote *packageListSearch;
   PackageListDocLnk *packageListDocLnk;
   PackageListView *listViewPackages;
