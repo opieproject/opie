@@ -56,8 +56,8 @@ void parseEmailFrom( const QString &txt, QString &strDefaultEmail,
 		     QString &strAll );
 
 // helper convert from file format to comma delimited...
-void parseEmailTo( const QString &strDefaultEmail,
-		   const QString &strOtherEmail, QString &strBack );
+//void parseEmailTo( const QString &strDefaultEmail,
+//		   const QString &strOtherEmail, QString &strBack );
 
 ContactEditor::ContactEditor(	const OContact &entry,
 				QWidget *parent,
@@ -621,36 +621,50 @@ void ContactEditor::init() {
 	setPersonalView ( m_personalView );
 }
 
-void ContactEditor::slotChooser1Change( const QString &textChanged ) {
-
+void ContactEditor::defaultEmailChanged(int i){
+  qDebug("defaultEmailChanged");
 	int index = cmbChooserField1->currentItem();
+	slChooserValues[index] = cmbDefaultEmail->text(i);
+
+}
+
+void ContactEditor::chooserChange( const QString &textChanged, int index, QLineEdit *inputWid ) {
+
+        if (slChooserNames[index] == "Default Email"){         
+	  delete cmbDefaultEmail;
+	  cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
+	  cmbDefaultEmail->setGeometry(inputWid->frameGeometry());        
+	  cmbDefaultEmail->insertStringList(ent.emailList());
+	  connect(cmbDefaultEmail,SIGNAL(activated(int)),
+		  SLOT(defaultEmailChanged(int))); 
+	  QString demail = ent.defaultEmail();
+	  for ( int i = 0; i < cmbDefaultEmail->count(); i++)
+	    if ( cmbDefaultEmail->text( i ) == demail )
+	      cmbDefaultEmail->setCurrentItem( i );
+
+	  cmbDefaultEmail->show();
+        }
+
 
 	slChooserValues[index] = textChanged;
 
 }
 
+void ContactEditor::slotChooser1Change( const QString &textChanged ) {
+	chooserChange( textChanged, cmbChooserField1->currentItem(), txtChooserField1);
+}
+
 void ContactEditor::slotChooser2Change( const QString &textChanged ) {
-
-	int index = cmbChooserField2->currentItem();
-
-	slChooserValues[index] = textChanged;
+	chooserChange( textChanged, cmbChooserField2->currentItem(), txtChooserField2);
 
 }
 
 void ContactEditor::slotChooser3Change( const QString &textChanged ) {
-
-	int index = cmbChooserField3->currentItem();
-
-	slChooserValues[index] = textChanged;
-
+	chooserChange( textChanged, cmbChooserField3->currentItem(), txtChooserField3);
 }
 
 void ContactEditor::slotChooser4Change( const QString &textChanged ) {
-
-	int index = cmbChooserField4->currentItem();
-
-	slChooserValues[index] = textChanged;
-
+	chooserChange( textChanged, cmbChooserField4->currentItem(), txtChooserField4);
 }
 
 void ContactEditor::slotAddressChange( const QString &textChanged ) {
@@ -1371,13 +1385,16 @@ void ContactEditor::saveEntry() {
 			ent.setBusinessMobile( *itV );
 
 		if ( *it == "Emails" ){
-			QString allemail;
-			QString defaultmail;
-			parseEmailFrom( *itV, defaultmail, allemail );
-			// ent.clearEmails();
-			ent.setDefaultEmail(  defaultmail );
-			ent.setEmails( allemail );
+ 			QString allemail;
+ 			QString defaultmail;
+ 			parseEmailFrom( *itV, defaultmail, allemail );
+ 			// ent.clearEmails();
+// 			ent.setDefaultEmail(  defaultmail );
+ 			ent.setEmails( allemail );
 		}
+
+		if ( *it == "Default Email")
+		  ent.setDefaultEmail( *itV );
 
 		if ( *it == "Home Phone" )
 			ent.setHomePhone( *itV );

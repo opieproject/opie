@@ -100,10 +100,11 @@ class ContactEditor : public QDialog {
 		void slotBirthdayDateChanged( int year, int month, int day);
 		void slotRemoveBirthday();
 		void slotRemoveAnniversary();
+		void defaultEmailChanged(int);
 
 	private:
+		void chooserChange( const QString&, int , QLineEdit* );
 		bool useFullName;
-		//		bool hasGender, hasTitle, hasCompany, hasNotes, hasStreet, hasStreet2, hasPOBox, hasCity, hasState, hasZip, hasCountry;
 
 		OContact ent;
 
@@ -147,6 +148,7 @@ class ContactEditor : public QDialog {
 		QComboBox *cmbChooserField2;
 		QComboBox *cmbChooserField3;
 		QComboBox *cmbChooserField4;
+		QComboBox *cmbDefaultEmail;
 		QComboBox *cmbFileAs;
 		CategorySelect *cmbCat;
 		QLabel *labCat;

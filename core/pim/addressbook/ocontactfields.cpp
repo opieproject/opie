@@ -42,7 +42,7 @@ QStringList OContactFields::trphonefields( bool sorted )
     list.append( QObject::tr( "Business Fax" ) );
     list.append( QObject::tr( "Business Mobile" ) );
 
-    // list.append( QObject::tr( "Default Email" ) );
+    list.append( QObject::tr( "Default Email" ) );
     list.append( QObject::tr( "Emails" ) );
 
     list.append( QObject::tr( "Home Phone" ) );
@@ -138,7 +138,7 @@ QStringList OContactFields::untrphonefields( bool sorted )
     list.append( "Business Fax" );
     list.append( "Business Mobile" );
 
-    // list.append( "Default Email" );
+    list.append( "Default Email" );
     list.append( "Emails" );
 
     list.append( "Home Phone" );
