@@ -20,3 +20,7 @@ $(DESTDIR)/opiealarm: opiealarm.c
 clean:
 	-rm -f *~ core
 
+install:
+	cp $(DESTDIR)/opiealarm $(INSTALL_ROOT)/opt/QtPalmtop/bin
+	chown root $(INSTALL_ROOT)/opt/QtPalmtop/bin/opiealarm
+	chmod u+s  $(INSTALL_ROOT)/opt/QtPalmtop/bin/opiealarm 2>/dev/null || echo -e "\nopiealarm must be owned by root to work correctly.\n"
