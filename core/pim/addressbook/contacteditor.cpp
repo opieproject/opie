@@ -557,8 +557,8 @@ void ContactEditor::init() {
 	cmbCountry->insertItem( tr ( "Kenya" ) );
 	cmbCountry->insertItem( tr ( "Kribati" ) );
 	cmbCountry->insertItem( tr ( "Korea" ) );
-	cmbCountry->insertItem( tr ( "Kuait" ) );
-	cmbCountry->insertItem( tr ( "Kyrgyztan" ) );
+	cmbCountry->insertItem( tr ( "Kuwait" ) );
+	cmbCountry->insertItem( tr ( "Kyrgystan" ) );
 	cmbCountry->insertItem( tr ( "Laos" ) );
 	cmbCountry->insertItem( tr ( "Latvia" ) );
 	cmbCountry->insertItem( tr ( "Lebanon" ) );
