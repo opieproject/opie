@@ -38,6 +38,7 @@
 #include <qpe/global.h>
 #include <qpe/resource.h>
 
+#include <qdatetime.h>
 #include <qdir.h>
 #include <qmessagebox.h>
 #include <qregexp.h>
@@ -153,15 +154,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
               mediaPlayerState,  SLOT( setVideoGamma( int ) ) );
 
     // see which skins are installed
-    videoScan=FALSE;
-    audioScan=FALSE;
+    videoScan=false;
+    audioScan=false;
     populateSkinsMenu();
     initializeStates();
 
     cfg.setGroup("PlayList");
     QString currentPlaylist = cfg.readEntry( "CurrentPlaylist", "default");
     loadList(DocLnk(  currentPlaylist ) );
-    
 }
 
 
@@ -258,14 +258,61 @@ void PlayListWidget::playlistViewPressed( int mouse, QListViewItem *, const QPoi
 
 
 void PlayListWidget::addAllToList() {
-    DocLnkSet filesAll;
-    Global::findDocuments(&filesAll, "video/*;"+audioMimes);
-    QListIterator<DocLnk> Adit( filesAll.children() );
-    for ( ; Adit.current(); ++Adit ) {
-        if( QFileInfo( Adit.current()->file() ).exists() ) {
-            d->selectedFiles->addToSelection( **Adit );
-        }
-    }
+
+//   QTime t;
+//   t.start();
+
+  if(!audioScan) {
+    if(audioView->childCount() < 1)
+      populateAudioView();
+  }
+
+  QListViewItemIterator audioIt( audioView );
+  DocLnk lnk;
+  QString filename;
+  // iterate through all items of the listview
+  for ( ; audioIt.current(); ++audioIt ) {
+    filename = audioIt.current()->text(3);
+    lnk.setName( QFileInfo(filename).baseName() ); //sets name
+    lnk.setFile( filename ); //sets file name
+    d->selectedFiles->addToSelection(  lnk);
+  }      
+
+  if(!videoScan) {
+    if(videoView->childCount() < 1)
+      populateVideoView();
+  }
+
+  QListViewItemIterator videoIt( videoView );
+  for ( ; videoIt.current(); ++videoIt ) {
+    filename = videoIt.current()->text(3);
+    lnk.setName( QFileInfo(filename).baseName() ); //sets name
+    lnk.setFile( filename ); //sets file name
+    d->selectedFiles->addToSelection(  lnk);
+  }      
+
+  //      d->selectedFiles->addToSelection(  );
+      //      if ( it.current()->isSelected() )
+      //        lst->append( audioIt.current() );
+  //    }
+    
+    /*
+      if(!audioScan)
+      scanForAudio();
+    if(!videoScan) 
+      scanForVideo();
+
+     DocLnkSet filesAll;
+     Global::findDocuments(&filesAll, "video/*;"+audioMimes);
+     QListIterator<DocLnk> Adit( filesAll.children() );
+     for ( ; Adit.current(); ++Adit ) {
+         if( QFileInfo( Adit.current()->file() ).exists() ) {
+             d->selectedFiles->addToSelection( **Adit );
+         }
+     }
+*/
+  //     qDebug("elapsed time %d", t.elapsed() );
+
     tabWidget->setCurrentPage(0);
     
     writeCurrentM3u();
@@ -274,7 +321,24 @@ void PlayListWidget::addAllToList() {
 
 
 void PlayListWidget::addAllMusicToList() {
-    if(!audioScan)
+
+  if(!audioScan) {
+    if(audioView->childCount() < 1)
+      populateAudioView();
+  }
+
+  QListViewItemIterator audioIt( audioView );
+  DocLnk lnk;
+  QString filename;
+  // iterate through all items of the listview
+  for ( ; audioIt.current(); ++audioIt ) {
+    filename = audioIt.current()->text(3);
+    lnk.setName( QFileInfo(filename).baseName() ); //sets name
+    lnk.setFile( filename ); //sets file name
+    d->selectedFiles->addToSelection(  lnk);
+  }      
+
+    /*    if(!audioScan)
         scanForAudio();
     QListIterator<DocLnk> dit( files.children() );
     for ( ; dit.current(); ++dit ) {
@@ -282,6 +346,7 @@ void PlayListWidget::addAllMusicToList() {
             d->selectedFiles->addToSelection( **dit );
         }
     }
+    */
     tabWidget->setCurrentPage(0);
     writeCurrentM3u();
     d->selectedFiles->first();
@@ -289,7 +354,24 @@ void PlayListWidget::addAllMusicToList() {
 
 
 void PlayListWidget::addAllVideoToList() {
-    if(!videoScan)
+
+  if(!videoScan) {
+    if(videoView->childCount() < 1)
+      populateVideoView();
+  }
+
+  QListViewItemIterator videoIt( videoView );
+  DocLnk lnk;
+  QString filename;
+  for ( ; videoIt.current(); ++videoIt ) {
+    filename = videoIt.current()->text(3);
+    lnk.setName( QFileInfo(filename).baseName() ); //sets name
+    lnk.setFile( filename ); //sets file name
+    d->selectedFiles->addToSelection(  lnk);
+  }      
+
+
+  /*    if(!videoScan)
         scanForVideo();
     QListIterator<DocLnk> dit( vFiles.children() );
     for ( ; dit.current(); ++dit ) {
@@ -297,6 +379,7 @@ void PlayListWidget::addAllVideoToList() {
             d->selectedFiles->addToSelection( **dit );
         }
     }
+*/    
     tabWidget->setCurrentPage(0);
     writeCurrentM3u();          
     d->selectedFiles->first();
