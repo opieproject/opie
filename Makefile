@@ -111,7 +111,7 @@ all clean install ipk: $(SUBDIRS)
 lupdate lrelease:
 	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
 
-opie-lupdate opie-lrelease:
+opie-lupdate opie-lrelease messages:
 	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
 
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \

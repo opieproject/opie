@@ -1,3 +1,4 @@
+#include <-ktr.h>
 # make install
 
 # base opie install path
@@ -56,7 +57,7 @@ INSTALLS += root
 
 # new targets
 opie-lupdate.target = opie-lupdate
-opie-lupdate.commands = opie-lupdate -noobsolete $(PRO)
+opie-lupdate.commands = opie-lupdate  $(PRO)
 
 opie-lrelease.target = opie-lrelease
 opie-lrelease.commands = opie-lrelease $(PRO)
@@ -67,10 +68,14 @@ lupdate.commands = lupdate -noobsolete $(PRO)
 lrelease.target = lrelease
 lrelease.commands = lrelease $(PRO)
 
+# new message target to get all strings from the apps with and without tr
+messages.target = messages
+messages.commands = xgettext -C -n -ktr -kQT_TRANSLATE_NOOP $$HEADERS $$SOURCES -o '$(OPIEDIR)/messages-$(PRO)-tr.po' && xgettext -C -n -a $$HEADERS $$SOURCES -o '$(OPIEDIR)/messages-$(PRO)-allstrings.po'
+
 ipk.target = ipk
 ipk.commands = tmp=`mktemp -d /tmp/ipkg-opie.XXXXXXXXXX` && ( $(MAKE) INSTALL_ROOT="$$$$tmp" install && ipkg-build $$$$tmp; rm -rf $$$$tmp; )
 
-QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease
+QMAKE_EXTRA_UNIX_TARGETS += lupdate lrelease ipk opie-lupdate opie-lrelease messages
 QMAKE_LFLAGS += -Wl,-rpath=$$prefix/lib
 QMAKE_LIBDIR += $(OPIEDIR)/lib
 
