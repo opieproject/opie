@@ -110,6 +110,8 @@ protected:
 
   void keyReleaseEvent( QKeyEvent *);
   QString getFileSystemType(const QString &);
+  QString getDiskSpace(const QString &);
+
   void parsetab(const QString &fileName);
   
 protected slots:
@@ -133,6 +135,7 @@ protected slots:
   void doAbout();
   void doBeam();
   void fileBeamFinished( Ir *);
+
 private:
       QTimer menuTimer;
 };
