@@ -24,11 +24,11 @@
     </message>
     <message>
         <source>Calendar</source>
-        <translation>Calendrier</translation>
+        <translation>Agenda</translation>
     </message>
     <message>
         <source>Contacts</source>
-        <translation>Répertoire</translation>
+        <translation>Contact</translation>
     </message>
     <message>
         <source>Search</source>
@@ -70,15 +70,15 @@
     <name>QObject</name>
     <message>
         <source>show completed tasks</source>
-        <translation>Montrer les tâches terminées</translation>
+        <translation>montrer les tâches terminées</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation>Montrer les évènements passés</translation>
+        <translation>montrer évènements passés</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation>Recherche dates</translation>
+        <translation>rechercher dates</translation>
     </message>
     <message>
         <source>show</source>
@@ -90,35 +90,35 @@
     </message>
     <message>
         <source>execute</source>
-        <translation>Executer</translation>
+        <translation>lancer</translation>
     </message>
     <message>
         <source>open in filemanager</source>
-        <translation>Ouvrir dans le gestionnaire de fichiers</translation>
+        <translation>ouvrir dans le gestionnaire de fichiers</translation>
     </message>
     <message>
         <source>File: </source>
-        <translation>Fichier:</translation>
+        <translation>Fichier :</translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation>Lien:</translation>
+        <translation>Lien : </translation>
     </message>
     <message>
         <source>Mimetype: </source>
-        <translation>type MIME:</translation>
+        <translation>Type MIME : </translation>
     </message>
     <message>
         <source>open with </source>
-        <translation>Ouvrir avec</translation>
+        <translation>ouvrir avec </translation>
     </message>
     <message>
         <source>search content</source>
-        <translation>Rechercher contenu</translation>
+        <translation>rechercher contenu</translation>
     </message>
     <message>
         <source>searching %1</source>
-        <translation>recherche de %1 en cours</translation>
+        <translation>recherche de %1</translation>
     </message>
 </context>
 </TS>
