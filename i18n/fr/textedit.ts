@@ -7,15 +7,15 @@
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Taille</translation>
     </message>
     <message>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fonte</translation>
     </message>
     <message>
         <source>Font Style</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Style Fonte</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
@@ -26,35 +26,35 @@
     <name>TextEdit</name>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nouveau</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ouvrir</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enregistrer</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Enregistrer Sous</translation>
     </message>
     <message>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Couper</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Copier</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Coller</translation>
     </message>
     <message>
         <source>Find...</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chercher...</translation>
     </message>
     <message>
         <source>Zoom in</source>
@@ -66,11 +66,11 @@
     </message>
     <message>
         <source>Bold</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Gras</translation>
     </message>
     <message>
         <source>Italic</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Italique</translation>
     </message>
     <message>
         <source>Wrap lines</source>
@@ -82,11 +82,11 @@
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Fichier</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Edition</translation>
     </message>
     <message>
         <source>View</source>
@@ -102,11 +102,11 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Effacer</translation>
     </message>
     <message>
         <source>Text Editor</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Editeur Texte</translation>
     </message>
     <message>
         <source>Unnamed</source>
@@ -176,11 +176,11 @@
     </message>
     <message>
         <source>owner</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">propriétaire</translation>
     </message>
     <message>
         <source>group</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">groupe</translation>
     </message>
     <message>
         <source>others</source>
@@ -188,19 +188,19 @@
     </message>
     <message>
         <source>Owner</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Propriétaire</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Groupe</translation>
     </message>
     <message>
         <source>read</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">lectire</translation>
     </message>
     <message>
         <source>write</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">écriture</translation>
     </message>
     <message>
         <source>execute</source>
@@ -211,11 +211,11 @@
     <name>fileSaver</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nom</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Taille</translation>
     </message>
 </context>
 </TS>

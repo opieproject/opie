@@ -115,7 +115,7 @@
     </message>
     <message>
         <source>DrawPad</source>
-        <translation></translation>
+        <translation>DrawPad</translation>
     </message>
     <message>
         <source>Page</source>
@@ -202,11 +202,11 @@ la page actuelle ?</translation>
     </message>
     <message>
         <source>Automatic preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Aperçu automatique</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Aperçu</translation>
     </message>
 </context>
 <context>
