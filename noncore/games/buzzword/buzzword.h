@@ -80,7 +80,6 @@ private:
 	bool gameOver;
 
 public slots:
-	void about();
 	void newGame();
 	void clicked(int row, int column);
 

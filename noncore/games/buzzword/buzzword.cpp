@@ -75,8 +75,6 @@ BuzzWord::BuzzWord() : QMainWindow(0)
 	menu = menuBar();
 	game = new QPopupMenu;
 	game->insertItem(tr("&New game"), this, SLOT(newGame()), Key_N );
-	game->insertSeparator();
-	game->insertItem(tr("&About"), this, SLOT(about()));
 	menu->insertItem( tr("&Game"), game );
 
 	gridVal = 4;
@@ -173,11 +171,6 @@ void BuzzWord::bingo()
 {
 	gameOver = true;
     QMessageBox::information( this, "BUZZWORD", tr("<h1><b>BINGO !</b></h1>"));
-}
-
-void BuzzWord::about()
-{
-   QMessageBox::information( this, "About", "buZzword 1.0\n(c) 2002 Martin Imobersteg\n\nThis program is distributed\nunder the terms of the GPL v2." );
 }
 
 void BuzzWord::newGame()
