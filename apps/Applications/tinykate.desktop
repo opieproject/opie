@@ -1,5 +1,5 @@
 [Desktop Entry]
-Exec=tinykate
+Exec=kate
 Icon=tinykate/tinykate
 MimeType=text/*
 Type=Applications
