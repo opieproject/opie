@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.50 2002-09-20 15:12:36 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.51 2002-09-20 16:15:20 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -211,8 +211,6 @@ VMemo::VMemo( QWidget *parent, const char *_name )
   setFixedHeight( 18 );
   setFixedWidth( 14 );
   
-  recording = FALSE;
-
   t_timer = new QTimer( this );
   connect( t_timer, SIGNAL( timeout() ), SLOT( timerBreak() ) );
   
@@ -237,7 +235,6 @@ VMemo::VMemo( QWidget *parent, const char *_name )
              this, SLOT(receive(const QCString&, const QByteArray&)) );
 
     if( toggleKey != -1 ) {
-      //            QPEApplication::grabKeyboard();
       QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
       //           e << 4096; // Key_Escape
       //          e << Key_F5; //4148
@@ -251,6 +248,7 @@ VMemo::VMemo( QWidget *parent, const char *_name )
         usingIcon=FALSE;
     if( vmCfg.readNumEntry("hideIcon",0) == 1)
       hide();
+    recording = FALSE;
   }
 }
 
@@ -262,14 +260,11 @@ void VMemo::receive( const QCString &msg, const QByteArray &data ) {
   QDataStream stream( data, IO_ReadOnly );
 
   if (msg == "toggleRecord()")  {
-
       if (recording) {
           fromToggle = TRUE;
-          mouseReleaseEvent(NULL);
           stopRecording();
       }  else {
           fromToggle = TRUE;
-            //      mousePressEvent(NULL);
           startRecording();
       }
   }
@@ -281,16 +276,10 @@ void VMemo::paintEvent( QPaintEvent* ) {
 }
 
 void VMemo::mousePressEvent( QMouseEvent * me) {
-  // just to be safe
-//     if (recording) {
-//           recording = FALSE;
-//           return;
-//         }
   /*  No mousePress/mouseRelease recording on the iPAQ. The REC button on the iPAQ calls these functions
          mousePressEvent and mouseReleaseEvent with a NULL parameter.  */
-//    if ( me->button() != LeftButton && me != NULL /*&& !systemZaurus*/) {
         
-  //  if (!systemZaurus && me != NULL)
+//  if (!systemZaurus && me != NULL)
 //        return;
 //    }
 
@@ -301,15 +290,9 @@ void VMemo::mousePressEvent( QMouseEvent * me) {
 }
 
 void VMemo::mouseReleaseEvent( QMouseEvent * ) {
-//      if(usingIcon && !recording)
-//          stopRecording();
 }
 
 bool VMemo::startRecording() {
-
-  if ( recording)
-    return FALSE;
-
   Config config( "Vmemo" );
   config.setGroup( "System" );
 
@@ -321,19 +304,10 @@ bool VMemo::startRecording() {
     msgLabel->show();
   }
 
-  //      if(useAlerts) 
-  //  QMessageBox::message("VMemo","Really Record?");//) ==1)
-  //             return;
-  //     } else {
-  //         if (!systemZaurus )
-  //     QSound::play(Resource::findSound("vmemob"));
-  //     }
   qDebug("Start recording engines");
   recording = TRUE;
 
   if (openDSP() == -1)  {
-    //        QMessageBox::critical(0, "vmemo", "Could not open dsp device.\n"+errorMsg, "Abort");
-    //      delete msgLabel;       
     recording = FALSE;
     msgLabel=0;
     delete msgLabel;
@@ -576,7 +550,7 @@ bool VMemo::record() {
       if(length<0) {
         recording=false;
         perror("dev/dsp's is a lookin' messy");
-        QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
+        QMessageBox::message("Vmemo","Error writing to file\n"+ fileName);
           break;
           return FALSE;
       }
@@ -606,11 +580,7 @@ bool VMemo::record() {
 
   ::close(dsp);
 
-  //     if(useAlerts) 
-  //         QMessageBox::message("Vmemo"," Done1 recording\n"+ fileName);
   qDebug("done recording "+fileName);
-
-//  QSound::play(Resource::findSound("vmemoe"));
 
   Config cfg("qpe");
   cfg.setGroup("Volume");
