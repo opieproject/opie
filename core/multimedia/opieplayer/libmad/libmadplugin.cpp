@@ -163,20 +163,82 @@ bool LibMadPlugin::isFileSupported( const QString& path ) {
 
     // Test file extension
     if ( ext ) {
-  if ( strncasecmp(ext, ".mp2", 4) == 0 )
-      return TRUE;
-  if ( strncasecmp(ext, ".mp3", 4) == 0 )
-      return TRUE;
+        if ( strncasecmp(ext, ".mp2", 4) == 0 )
+            return TRUE;
+        if ( strncasecmp(ext, ".mp3", 4) == 0 )
+            return TRUE;
     }
+
     // UGLY - just for fast testing
     if ( path.left(4) == "http") {
         return TRUE;
     }
 
-
-    return FALSE;
+   return FALSE;
 }
 
+
+
+int LibMadPlugin::is_address_multicast(unsigned long address) {
+    if ((address & 255) >= 224 && (address & 255) <= 239)
+        return (1);
+    return (0);
+}
+
+
+int LibMadPlugin::udp_open(char *address, int port) {
+
+    int enable = 1L;
+    struct sockaddr_in stAddr;
+    struct sockaddr_in stLclAddr;
+    struct ip_mreq stMreq;
+    struct hostent *host;
+    int sock;
+
+    stAddr.sin_family = AF_INET;
+    stAddr.sin_port = htons(port);
+
+    if ((host = gethostbyname(address)) == NULL)
+        return (0);
+
+    stAddr.sin_addr = *((struct in_addr *)host->h_addr_list[0]);
+
+    /* Create a UDP socket */
+    if ((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
+        return (0);
+
+    /* Allow multiple instance of the client to share the same address and port */
+    if (setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (char *)&enable, sizeof(unsigned long int)) < 0)
+        return (0);
+
+    /* If the address is multicast, register to the multicast group */
+    if (is_address_multicast(stAddr.sin_addr.s_addr))
+    {
+        /* Bind the socket to port */
+        stLclAddr.sin_family = AF_INET;
+        stLclAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+        stLclAddr.sin_port = stAddr.sin_port;
+        if (bind(sock, (struct sockaddr *)&stLclAddr, sizeof(stLclAddr)) < 0)
+            return (0);
+
+        /* Register to a multicast address */
+        stMreq.imr_multiaddr.s_addr = stAddr.sin_addr.s_addr;
+        stMreq.imr_interface.s_addr = INADDR_ANY;
+        if (setsockopt(sock, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char *)&stMreq, sizeof(stMreq)) < 0)
+            return (0);
+    }
+    else
+    {
+        /* Bind the socket to port */
+        stLclAddr.sin_family = AF_INET;
+        stLclAddr.sin_addr.s_addr = htonl(INADDR_ANY);
+        stLclAddr.sin_port = htons(0);
+        if (bind(sock, (struct sockaddr *)&stLclAddr, sizeof(stLclAddr)) < 0)
+            return (0);
+    }
+
+    return (sock);
+}
 
 int LibMadPlugin::tcp_open(char *address, int port) {
     struct sockaddr_in stAddr;

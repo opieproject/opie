@@ -102,6 +102,8 @@ public:
     long getPlayTime() { return -1; }
 
 private:
+    int is_address_multicast(unsigned long address);
+    int udp_open(char *address, int port);
     int tcp_open(char *address, int port);
     int http_read_line(int tcp_sock, char *buf, int size) ;
     int http_open(const QString& path );
