@@ -4,8 +4,8 @@ Section: opie/settings
 Maintainer: L.J. Potter
 Architecture: arm
 Arch: iPAQ
-Version: $QPE_VERSION-$SUB_VERSION.2
+Version: $QPE_VERSION-$SUB_VERSION
 Conflicts: opie-sound
-Depends: opie-base ($QPE_VERSION), opie-vmemo
+Depends: opie-base ($QPE_VERSION)
 Description: Sound settings dialog
  For the Opie environment.
