@@ -4,17 +4,19 @@
 
 #include <qobject.h>
 #include <qstring.h>
+#include <qmap.h>
 #include <qvaluelist.h>
 
 #include "remotedevice.h"
 #include "services.h"
 
+class OProcess;
 namespace OpieTooth {
   class Device;
   /** Manager manages a blueZ device (hci0 for example)
    *  with Manager you can control the things you
    *  could do from command line in a OO and asynchronus
-   *  way.   
+   *  way.
    */
   class Manager : public QObject {
 Q_OBJECT
@@ -27,7 +29,7 @@ Q_OBJECT
     /** c'tor
      * @param dev The Device to be managed
      * We don't care of Device so you need to delete it
-     */   
+     */
     Manager( Device* dev );
     /**
      * c'tor
@@ -48,7 +50,8 @@ Q_OBJECT
      * is asynchron
      * If device is empty it will take the currently managed
      * device and see if it's up
-     * for Remote devices it will ping and see
+     * for Remote devices it will ping and see.
+     * @param either mac or hciX
      */
     void isConnected(const QString& device= QString::null );
     /**
@@ -56,8 +59,8 @@ Q_OBJECT
      */
     void isConnected(Device *dev );
 
-    /** this search for devices reachable from the
-     *  currently managed device   
+    /** this searchs for devices reachable from the
+     *  currently managed device
      *  or from device if @param device is not empty
      */
     void searchDevices(const QString& device= QString::null );
@@ -89,7 +92,7 @@ Q_OBJECT
 
     /**
      * search for services on a remote device
-     * 
+     *
      */
     void searchServices( const QString& remDevice );
     /**
@@ -103,10 +106,20 @@ Q_OBJECT
     // device either mac or dev name
     // the first device is the device which you access
     void connected( const QString& device, bool connected );
-    void addedService( const QString& device, const QString& service, bool added );
-    void removedService( const QString& device, const QString& service, bool removed );
+    void addedService(  const QString& service, bool added );
+    void removedService( const QString& service, bool removed );
     void foundServices( const QString& device, Services::ValueList );
     void foundDevices( const QString& device, RemoteDevices::ValueList );
+      void foundNothing( const QString& device );
+private slots:
+    void slotProcessExited(OProcess* );
+    void slotSDPExited(OProcess*);
+    void slotSDPOut(OProcess*, char*, int);
+  private:
+      OProcess *m_hcitool;
+      OProcess *m_sdp; // not only one
+      QString m_device;
+      QMap<QString, QString> m_out;
   };
 };
 

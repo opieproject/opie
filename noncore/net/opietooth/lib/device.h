@@ -8,7 +8,7 @@
 
 #include <sys/types.h>
 
-class KProcess;
+class OProcess;
 namespace OpieTooth {
     /**
      *  Device takes care of attaching serial 
@@ -65,16 +65,16 @@ namespace OpieTooth {
          */
         void device(const QString& device, bool up );
     private slots:
-        virtual void slotExited( KProcess* );
-        virtual void slotStdOut(KProcess*, char*, int );
-	virtual void slotStdErr(KProcess*, char*, int );
+        virtual void slotExited( OProcess* );
+        virtual void slotStdOut(OProcess*, char*, int );
+	virtual void slotStdErr(OProcess*, char*, int );
     private:
 	class Private;
 	Private *d;
 	QString m_device;
 	bool m_attached:1;
-	KProcess* m_hci;
-	KProcess* m_process;
+	OProcess* m_hci;
+	OProcess* m_process;
 	QString m_devId;
 	QString m_mode;
 	pid_t pid;
