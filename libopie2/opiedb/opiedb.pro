@@ -1,5 +1,6 @@
 TEMPLATE    = lib
-CONFIG      += qt warn_on debug
+#CONFIG      += qt warn_on debug
+CONFIG      += qt warn_on release
 DESTDIR     = $(OPIEDIR)/lib
 HEADERS     = osqlbackend.h      \
                 osqldriver.h     \

@@ -4,6 +4,10 @@
 #include "osqlquery.h"
 #include "osqlitedriver.h"
 
+// fromLocal8Bit() does not work as expected. Thus it 
+// is replaced by fromLatin1() (eilers)
+#define __BUGGY_LOCAL8BIT_
+
 
 namespace {
     struct Query {
@@ -80,7 +84,7 @@ OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
         free(err );
         // FixMe Errors
     }
-    qWarning("Item count is %d", query.items.count() );
+    // qWarning("Item count is %d", query.items.count() );
     OSQLResult result(OSQLResult::Success,
                       query.items,
                       query.errors );
@@ -102,18 +106,24 @@ int OSQLiteDriver::handleCallBack( int, char**, char** ) {
 /* callback_handler add the values to the list*/
 int OSQLiteDriver::call_back( void* voi, int argc,
                               char** argv, char** columns) {
-    qWarning("Callback with %d items", argc );
+    // qWarning("Callback with %d items", argc );
     Query* qu = (Query*)voi;
 
     //copy them over to a OSQLResultItem
     QMap<QString, QString> tableString;
     QMap<int, QString> tableInt;
     for (int i = 0; i < argc; i++ ) {
-        qWarning("%s|%s", columns[i], argv[i] );
-        tableInt.insert( i, QString::fromLocal8Bit(argv[i] ) );
-        tableString.insert( QString::fromLocal8Bit( columns[i]),
-                            QString::fromLocal8Bit( argv[i] ) );
+	//qWarning("%s|%s", columns[i], argv[i] );
 
+#ifdef __BUGGY_LOCAL8BIT_
+        tableInt.insert( i, QString::fromLatin1( argv[i] ) );
+        tableString.insert( QString::fromLatin1( columns[i] ),
+                            QString::fromLatin1( argv[i] ) );
+#else
+        tableInt.insert( i, QString::fromLocal8Bit( argv[i] ) );
+        tableString.insert( QString::fromLocal8Bit( columns[i] ),
+                            QString::fromLocal8Bit( argv[i] ) );
+#endif
     }
     OSQLResultItem item( tableString, tableInt );
     qu->items.append( item );
