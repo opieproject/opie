@@ -5,7 +5,7 @@
 #include <qstringlist.h>
 #include <qcombobox.h>
 #include <qcheckbox.h>
-
+#include <qscrollview.h>
 
 //#include "profileeditorplugins.h"
 #include "metafactory.h"
@@ -53,6 +53,7 @@ void ProfileEditorDialog::initUI()
 {
     m_con = m_term = m_key = 0l;
 
+
     QVBoxLayout *mainLayout = new QVBoxLayout( this );
     tabWidget = new OTabWidget( this );
     tabWidget->setTabStyle(OTabWidget::TextTab);
@@ -64,10 +65,22 @@ void ProfileEditorDialog::initUI()
     m_tabCon  = new QWidget(this);
     m_tabKey  = new QWidget(this);
 
+    m_svCon = new QScrollView( m_tabCon );
+    m_svCon->setResizePolicy( QScrollView::AutoOneFit );
+    m_svCon->setHScrollBarMode( QScrollView::AlwaysOff );
+    m_svCon->setFrameShape( QFrame::NoFrame );
+    m_svTerm = new QScrollView( m_tabTerm );
+    m_svTerm->setResizePolicy( QScrollView::AutoOneFit );
+    m_svTerm->setHScrollBarMode( QScrollView::AlwaysOff );
+    m_svTerm->setFrameShape( QFrame::NoFrame );
+
     /* base layout for tabs */
     m_layCon  = new QHBoxLayout( m_tabCon , 2 );
     m_layTerm = new QHBoxLayout( m_tabTerm, 2 );
     m_layKey = new QHBoxLayout( m_tabKey, 2 );
+
+    m_layCon->addWidget( m_svCon );
+    m_layTerm->addWidget( m_svTerm );
 
     // profile tab
 
@@ -143,10 +156,10 @@ void ProfileEditorDialog::accept()
 	//if(plugin_plugin) plugin_plugin->save();
 
 	// Save general values
-	m_prof.setName(profName());
-	m_prof.setIOLayer(      m_fact->internal(m_conCmb ->currentText()  ) );
+	m_prof.setName( profName() );
+	m_prof.setIOLayer( m_fact->internal(m_conCmb ->currentText()  ) );
         m_prof.setTerminalName( m_fact->internal(m_termCmb->currentText()  ) );
-    m_prof.setAutoConnect( m_autoConnect->isChecked() );
+        m_prof.setAutoConnect( m_autoConnect->isChecked() );
 
         if (m_con )
             m_con->save( m_prof );
@@ -176,28 +189,31 @@ QCString ProfileEditorDialog::profType()const
  * we need to switch the widget
  */
 void ProfileEditorDialog::slotConActivated( const QString& str ) {
+
     delete m_con;
-    m_con = m_fact->newConnectionPlugin( str, m_tabCon );
+
+    m_con = m_fact->newConnectionPlugin( str, m_svCon->viewport() );
 
     if ( !m_con ) {
-        m_con = new NoOptions( str, m_tabCon, "name");
+        m_con = new NoOptions( str, m_svCon->viewport(), "name");
     }
     m_con->load( m_prof );
-    m_layCon->addWidget( m_con );
-
-    tabWidget->setCurrentTab( tabprof );
-
+    m_svCon->addChild( m_con );
 }
+
+
 /*
  * we need to switch the widget
  */
 void ProfileEditorDialog::slotTermActivated( const QString& str ) {
+
     delete m_term;
-    m_term = m_fact->newTerminalPlugin( str, m_tabTerm );
+
+    m_term = m_fact->newTerminalPlugin( str, m_svTerm->viewport() );
 
     if (m_term) {
-        m_term->load(m_prof );
-        m_layTerm->addWidget( m_term );
+        m_term->load( m_prof );
+        m_svTerm->addChild( m_term );
     }
 }
 

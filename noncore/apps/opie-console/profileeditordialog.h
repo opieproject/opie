@@ -14,6 +14,7 @@ class QLineEdit;
 class QComboBox;
 class QCheckBox;
 class QLabel;
+class QScrollView;
 class ProfileDialogWidget;
 
 class ProfileEditorDialog : public QDialog {
@@ -46,6 +47,8 @@ private:
     QLineEdit *m_name;
     QComboBox *m_conCmb, *m_termCmb;
     QCheckBox *m_autoConnect;
+
+    QScrollView *m_svCon, *m_svTerm;
 
     QWidget *m_tabCon, *m_tabTerm, *m_tabKey;
     ProfileDialogWidget* m_con, *m_term, *m_key;
