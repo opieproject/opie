@@ -39,7 +39,7 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
     int err = MAILPOP3_NO_ERROR;
     char *message = 0;
     size_t length = 0;
-    
+
     login();
     if ( !m_pop3 ) {
         return RecBody();
@@ -51,11 +51,11 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
         qDebug("Message to large: %i",mail.Msgsize());
         return body;
     }
-    
+
     QFile msg_cache(msgTempName);
 
     cleanMimeCache();
-    
+
     if (mail.getNumber()!=last_msg_id) {
         if (msg_cache.exists()) {
             msg_cache.remove();
@@ -88,11 +88,11 @@ RecBody POP3wrapper::fetchBody( const RecMail &mail )
         msg_data->msg_length = strlen(message);
     }
     body = parseMail(mailmsg);
-    
+
     /* clean up */
-    if (mailmsg) mailmessage_free(mailmsg);  
+    if (mailmsg) mailmessage_free(mailmsg);
     if (message) free(message);
-    
+
     return body;
 }
 
@@ -153,6 +153,7 @@ void POP3wrapper::login()
     }
     err = mailfolder_connect(m_folder);
     if (err != MAIL_NO_ERROR) {
+        qDebug( QString( "FEHLERNUMMER %1" ).arg(  err ) );
         Global::statusMessage(tr("Error initializing folder"));
         mailfolder_free(m_folder);
         m_folder = 0;
@@ -214,7 +215,7 @@ int POP3wrapper::deleteAllMail(const Folder*)
             res=0;
         }
         break;
-    }           
+    }
     return res;
 }
 
@@ -237,7 +238,7 @@ encodedString* POP3wrapper::fetchRawBody(const RecMail&mail)
     mailmessage * mailmsg = 0;
     int err = mailsession_get_message(m_folder->fld_session, mail.getNumber(), &mailmsg);
     err = mailmessage_fetch(mailmsg,&target,&length);
-    if (mailmsg) mailmessage_free(mailmsg);  
+    if (mailmsg) mailmessage_free(mailmsg);
     if (target) {
         res = new encodedString(target,length);
     }

@@ -3,14 +3,11 @@
 
 #include <qpe/resource.h>
 
-#define USER_AGENT          "OpieMail v0.1"
+#define USER_AGENT          "OpieMail v0.3"
 
 #define PIC_COMPOSEMAIL     "mail/composemail"
 #define PIC_SENDQUEUED      "mail/sendqueued"
 #define PIC_SHOWFOLDERS     "mail/showfolders"
-#define PIC_SEARCHMAILS     "mail/searchmails"
-#define PIC_EDITSETTINGS    "mail/editsettings"
-#define PIC_EDITACCOUNTS    "mail/editaccounts"
 #define PIC_SYNC            "mail/sync"
 #define PIC_IMAPFOLDER      "mail/imapfolder"
 #define PIC_MBOXFOLDER      "mail/mboxfolder"

@@ -64,24 +64,24 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
             SLOT( slotShowFolders( bool ) ) );
 
     /*
-      searchMails = new QAction( tr( "Search mails" ), ICON_SEARCHMAILS,
+      searchMails = new QAction( tr( "Search mails" ), QIconSet( Resource::loadPixmap("find") ),
                                0, 0, this );
     searchMails->addTo( toolBar );
     searchMails->addTo( mailMenu );
     */
 
-    deleteMails = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("mail/delete")), 0, 0, this);
+    deleteMails = new QAction(tr("Delete Mail"), QIconSet( Resource::loadPixmap("trash")), 0, 0, this);
     deleteMails->addTo( toolBar );
     deleteMails->addTo( mailMenu );
     connect( deleteMails, SIGNAL( activated() ),
              SLOT( slotDeleteMail() ) );
 
-    editSettings = new QAction( tr( "Edit settings" ), ICON_EDITSETTINGS,
+    editSettings = new QAction( tr( "Edit settings" ), QIconSet( Resource::loadPixmap("SettingsIcon") ) ,
                                 0, 0, this );
     editSettings->addTo( settingsMenu );
     connect( editSettings, SIGNAL( activated() ),
              SLOT( slotEditSettings() ) );
-    editAccounts = new QAction( tr( "Configure accounts" ), ICON_EDITACCOUNTS,
+    editAccounts = new QAction( tr( "Configure accounts" ), QIconSet( Resource::loadPixmap("SettingsIcon") ) ,
                                 0, 0, this );
     editAccounts->addTo( settingsMenu );
 
