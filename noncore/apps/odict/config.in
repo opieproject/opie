@@ -1,0 +1,4 @@
+  config ODICT
+    boolean "odict"
+    default "n"
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
