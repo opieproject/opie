@@ -1,4 +1,4 @@
-  config #MANAGER
-    boolean "manager"
+  config OPIETOOTH-MANAGER
+    boolean "Opietooth manager"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH && LIBOPIETOOTH

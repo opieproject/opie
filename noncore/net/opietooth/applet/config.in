@@ -1,4 +1,4 @@
-  config #APPLET
-    boolean "applet"
+  config OPIETOOTH-APPLET
+    boolean
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH && LIBOPIETOOTH

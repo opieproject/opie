@@ -37,7 +37,7 @@ CONFIG_WLANSETUP	noncore/unsupported/wlansetup	wlansetup.pro
 CONFIG_ADDRESSBOOK	core/pim/addressbook	addressbook.pro
 CONFIG_ADVANCEDFM	noncore/apps/advancedfm	advancedfm.pro
 CONFIG_APPEARANCE2	noncore/settings/appearance2	appearance2.pro
-CONFIG_APPLET	noncore/net/opietooth/applet	applet.pro
+CONFIG_OPIETOOTH-APPLET	noncore/net/opietooth/applet	applet.pro
 CONFIG_AQPKG	noncore/apps/aqpkg	aqpkg.pro
 CONFIG_BACKUP	noncore/settings/backup	backup.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro
@@ -84,7 +84,7 @@ CONFIG_KPACMAN	noncore/games/kpacman	kpacman.pro
 CONFIG_LANGUAGE	noncore/settings/language	language.pro
 CONFIG_LAUNCHER-SETTINGS	core/settings/launcher	launcher.pro
 CONFIG_LAUNCHER_CORE	core/launcher	launcher.pro
-CONFIG_LIB	noncore/net/opietooth/lib	lib.pro
+CONFIG_LIBOPIETOOTH	noncore/net/opietooth/lib	lib.pro
 CONFIG_LIBKATE  noncore/apps/tinykate/libkate libkate.pro
 CONFIG_LIBMAD	core/multimedia/opieplayer/libmad	libmad.pro
 CONFIG_LIBMAIL	noncore/mail/libmail	libmail.pro
@@ -95,7 +95,7 @@ CONFIG_LIBQPE-X11	x11/libqpe-x11	libqpe-x11.pro
 CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
-CONFIG_MANAGER	noncore/net/opietooth/manager	manager.pro
+CONFIG_OPIETOOTH-MANAGER	noncore/net/opietooth/manager	manager.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
 CONFIG_MINDBREAKER	noncore/games/mindbreaker	mindbreaker.pro

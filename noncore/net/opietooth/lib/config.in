@@ -1,4 +1,4 @@
-  config #LIB
-    boolean "lib"
+  config LIBOPIETOOTH
+    boolean "libopietooth"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && OPIETOOTH
