@@ -57,6 +57,8 @@ private:
 
     void addButtonToMask( int tag, const QImage &maskImage ) const;
 
+    static QImage loadImage( const QString &fileName );
+
     QString m_fileNameInfix;
     QString m_skinPath;
 

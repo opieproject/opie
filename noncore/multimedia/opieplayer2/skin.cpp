@@ -88,21 +88,21 @@ void Skin::preload( const MediaWidget::SkinButtonInfo *skinButtonInfo, uint butt
 QImage Skin::backgroundImage() const
 {
     if ( d->backgroundImage.isNull() )
-        d->backgroundImage = SkinCache::self().loadImage( QString( "%1/background" ).arg( m_skinPath ) );
+        d->backgroundImage = loadImage( QString( "%1/background" ).arg( m_skinPath ) );
     return d->backgroundImage;
 }
 
 QImage Skin::buttonUpImage() const
 {
     if ( d->buttonUpImage.isNull() )
-        d->buttonUpImage = SkinCache::self().loadImage( QString( "%1/skin%2_up" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
+        d->buttonUpImage = loadImage( QString( "%1/skin%2_up" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
     return d->buttonUpImage;
 }
 
 QImage Skin::buttonDownImage() const
 {
     if ( d->buttonDownImage.isNull() )
-        d->buttonDownImage = SkinCache::self().loadImage( QString( "%1/skin%2_down" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
+        d->buttonDownImage = loadImage( QString( "%1/skin%2_down" ).arg( m_skinPath ).arg( m_fileNameInfix ) );
     return d->buttonDownImage;
 }
 
@@ -142,7 +142,7 @@ QImage Skin::buttonMaskImage( const QString &fileName ) const
     if ( it == d->buttonMasks.end() ) {
         QString prefix = m_skinPath + QString::fromLatin1( "/skin%1_mask_" ).arg( m_fileNameInfix );
         QString path = prefix + fileName + ".png";
-        it = d->buttonMasks.insert( fileName, SkinCache::self().loadImage( path ) );
+        it = d->buttonMasks.insert( fileName, loadImage( path ) );
     }
     return *it;
 }
@@ -152,6 +152,11 @@ QString Skin::defaultSkinName()
     Config cfg( "OpiePlayer" );
     cfg.setGroup( "Options" );
     return cfg.readEntry( "Skin", "default" );
+}
+
+QImage Skin::loadImage( const QString &fileName )
+{
+    return QImage( Resource::findPixmap( fileName ) );
 }
 
 SkinCache::SkinCache()
