@@ -1,0 +1,29 @@
+Steps for building libetpan for arm-zaurus environment:
+1. export PATH=$PATH:/usr/local/arm/2.95.3/bin
+2. cd into the libetpan sourcedir
+3. run 
+./configure --host=arm-linux --prefix=/usr/local/arm/2.95.3/arm-linux --disable-db --disable-debug
+
+the disable-db is required!!!!
+4. check the output of configure, you MUST find a line 
+  "checking for openssl/ssl.h... yes" and
+  "checking for SSL_library_init in -lssl... yes"
+
+If not, you don't have SSL installed into your crosscompiling chain. Thats bad.
+SSL is strongly needed!
+
+5. Check the file Rules in top-srcdir. There is a line 
+  "CFLAGS      =  -O2 -W -Wall -g  -DDEBUG -DHAVE_CONFIG_H"
+  
+  remove the -g option
+
+For remote debugging this is not required, but the local copy must contain debug
+code for that.
+
+6. make, make install
+  Now you should find libetpan in /usr/local/arm/2.95.3/arm-linux/lib
+
+If you're using other pathes then you should give that of course instead of 2.95.3. 
+
+Alwin
+
