@@ -22,9 +22,6 @@
     </message>
 </context>
 <context>
-    <name>Form1</name>
-</context>
-<context>
     <name>Konsole</name>
     <message>
         <source>Terminal</source>

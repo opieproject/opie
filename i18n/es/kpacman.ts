@@ -229,7 +229,7 @@ o está en un formato desconocido.</translation>
     </message>
     <message>
         <source>                          </source>
-        <translation>                          </translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

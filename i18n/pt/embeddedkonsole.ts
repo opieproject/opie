@@ -22,13 +22,6 @@
     </message>
 </context>
 <context>
-    <name>Form1</name>
-    <message>
-        <source>Form1</source>
-        <translation type="obsolete">Form1</translation>
-    </message>
-</context>
-<context>
     <name>Konsole</name>
     <message>
         <source>Terminal</source>
