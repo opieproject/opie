@@ -3,105 +3,105 @@
     <name>ConfigDlg</name>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Метод на пребарување</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов</translation>
     </message>
     <message>
         <source>Change</source>
-        <translation type="unfinished"></translation>
+        <translation>Измени</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Избриши</translation>
     </message>
 </context>
 <context>
     <name>ODict</name>
     <message>
         <source>OPIE-Dictionary</source>
-        <translation type="unfinished"></translation>
+        <translation>OPIE-речник</translation>
     </message>
     <message>
         <source>Query:</source>
-        <translation type="unfinished"></translation>
+        <translation>Прашање:</translation>
     </message>
     <message>
         <source>&amp;Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ок</translation>
     </message>
     <message>
         <source>No dictionary defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Нема дефиниран речник</translation>
     </message>
     <message>
         <source>&amp;Define one</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Дефинирај еден</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Откажи</translation>
     </message>
     <message>
         <source>Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation>Конфигурација</translation>
     </message>
     <message>
         <source>Searchmethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Методи на пребарување</translation>
     </message>
     <message>
         <source>C&amp;ase sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>О&amp;сетливо на големи и мали букви</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања</translation>
     </message>
     <message>
         <source>Parameter</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри</translation>
     </message>
 </context>
 <context>
     <name>SearchMethodDlg</name>
     <message>
         <source>Name:</source>
-        <translation type="unfinished"></translation>
+        <translation>Име:</translation>
     </message>
     <message>
         <source>Dictionary file</source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека на речник</translation>
     </message>
     <message>
         <source>Browse</source>
-        <translation type="unfinished"></translation>
+        <translation>Листај</translation>
     </message>
     <message>
         <source>Language 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Јазик 1</translation>
     </message>
     <message>
         <source>Decollator</source>
-        <translation type="unfinished"></translation>
+        <translation>Деколатор</translation>
     </message>
     <message>
         <source>Language 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Јазик 3</translation>
     </message>
     <message>
         <source>New Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов метод на пребарување</translation>
     </message>
     <message>
         <source>Change Searchmethod</source>
-        <translation type="unfinished"></translation>
+        <translation>Смени метод на пребарување</translation>
     </message>
 </context>
 </TS>

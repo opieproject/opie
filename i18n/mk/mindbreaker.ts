@@ -3,42 +3,42 @@
     <name>MindBreaker</name>
     <message>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова игра</translation>
     </message>
     <message>
         <source>win avg: %1 turns (%2 games)</source>
-        <translation type="unfinished"></translation>
+        <translation>просек на победи: %1 обиди (%2 игри)</translation>
     </message>
 </context>
 <context>
     <name>MindBreakerBoard</name>
     <message>
         <source>Go%1p%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Оди %1п%2</translation>
     </message>
     <message>
         <source>CurrentGo%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Моментален Пат %1</translation>
     </message>
     <message>
         <source>Answer%1</source>
-        <translation type="unfinished"></translation>
+        <translation>Одговор %1</translation>
     </message>
     <message>
         <source>Reset Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Ресетирај статистики</translation>
     </message>
     <message>
         <source>Reset the win ratio?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ресетирај го бројот на победи?</translation>
     </message>
     <message>
         <source>OK</source>
-        <translation type="unfinished"></translation>
+        <translation>ОК</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Откажи</translation>
     </message>
 </context>
 </TS>

@@ -3,121 +3,121 @@
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>OПребарување</translation>
     </message>
     <message>
         <source>The details of the current result</source>
-        <translation type="unfinished"></translation>
+        <translation>Детали за моменталниот резултат</translation>
     </message>
     <message>
         <source>applications</source>
-        <translation type="unfinished"></translation>
+        <translation>апликации</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>документи</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation type="unfinished"></translation>
+        <translation>задолжениа</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation type="unfinished"></translation>
+        <translation>роковник</translation>
     </message>
     <message>
         <source>adressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>адресар</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Пребарувај</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања</translation>
     </message>
     <message>
         <source>Search all</source>
-        <translation type="unfinished"></translation>
+        <translation>Спребарувај Се</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Опции</translation>
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
+        <translation>Внимавај на големи и мали букви</translation>
     </message>
     <message>
         <source>Use wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>КОристи спец. карактери</translation>
     </message>
     <message>
         <source>Enter your search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси ги зборовите кои се пребаруваат</translation>
     </message>
 </context>
 <context>
     <name>OListView</name>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Резултати</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>прикажи завршени задачи</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>прикажи изминати настани</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>барај во датуми</translation>
     </message>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>прикажи</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>уреди</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>изврши</translation>
     </message>
     <message>
         <source>open in filemanager</source>
-        <translation type="unfinished"></translation>
+        <translation>офтвори во управувач со датотеки</translation>
     </message>
     <message>
         <source>File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Датотека:</translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation type="unfinished"></translation>
+        <translation>Врска:</translation>
     </message>
     <message>
         <source>Mimetype: </source>
-        <translation type="unfinished"></translation>
+        <translation>Тип:</translation>
     </message>
     <message>
         <source>open with </source>
-        <translation type="unfinished"></translation>
+        <translation>отвори со</translation>
     </message>
     <message>
         <source>search content</source>
-        <translation type="unfinished"></translation>
+        <translation>пребарај содржина</translation>
     </message>
     <message>
         <source>searching %1</source>
-        <translation type="unfinished"></translation>
+        <translation>пребарување %1</translation>
     </message>
 </context>
 </TS>

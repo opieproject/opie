@@ -31,53 +31,57 @@
     <message>
         <source>Show only later
  appointments</source>
-        <translation type="unfinished"></translation>
+        <translation>Прикажи ги само 
+последните состаноци</translation>
     </message>
     <message>
         <source>Check this if only appointments later then current time should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Одбери го ова само ако состаноците кои се закажани за подоцна треба да бидат покажани</translation>
     </message>
     <message>
         <source>How many 
 appointment
 should be 
 shown?</source>
-        <translation type="unfinished"></translation>
+        <translation>Кокли
+состаноци
+треба да бидат
+прикажани?</translation>
     </message>
     <message>
         <source>How many appointments should be shown maximal. In chronical order</source>
-        <translation type="unfinished"></translation>
+        <translation>Колку состаноци треба да бидат прикажани. Распоредени по време</translation>
     </message>
     <message>
         <source>How many more days</source>
-        <translation type="unfinished"></translation>
+        <translation>Уште колку денови</translation>
     </message>
     <message>
         <source>How many more days should be in the range</source>
-        <translation type="unfinished"></translation>
+        <translation>Колку денови треба да бидат во опсегот</translation>
     </message>
     <message>
         <source> day(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>денови</translation>
     </message>
     <message>
         <source>only today</source>
-        <translation type="unfinished"></translation>
+        <translation>само денес</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Datebook plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Додаток роковник</translation>
     </message>
     <message>
         <source>No more appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Денеска нема повеќе сеостаноци </translation>
     </message>
     <message>
         <source>No appointments today</source>
-        <translation type="unfinished"></translation>
+        <translation>Денеска нема состаноци</translation>
     </message>
 </context>
 </TS>

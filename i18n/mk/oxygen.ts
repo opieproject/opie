@@ -3,86 +3,86 @@
     <name>CalcDlg</name>
     <message>
         <source>Molecular Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Молекуларна тежина </translation>
     </message>
     <message>
         <source>Chemical Formula</source>
-        <translation type="unfinished"></translation>
+        <translation>Хемиска формула</translation>
     </message>
     <message>
         <source>Calculate</source>
-        <translation type="unfinished"></translation>
+        <translation>Израчунај</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Исчисти</translation>
     </message>
     <message>
         <source>Molecular Weight (u):</source>
-        <translation type="unfinished"></translation>
+        <translation>Молекуларна тежина (u):</translation>
     </message>
     <message>
         <source>Elemental Composition (%):</source>
-        <translation type="unfinished"></translation>
+        <translation>Елементарни состојки (%):</translation>
     </message>
 </context>
 <context>
     <name>OxydataWidget</name>
     <message>
         <source>%1 u</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 u</translation>
     </message>
     <message>
         <source>%1 pm</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 pm</translation>
     </message>
     <message>
         <source>%1 J</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 J</translation>
     </message>
     <message>
         <source>%1 g/cm^3</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 g/цм^3</translation>
     </message>
     <message>
         <source>%1 K</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 K</translation>
     </message>
     <message>
         <source>Weight</source>
-        <translation type="unfinished"></translation>
+        <translation>Тежина</translation>
     </message>
     <message>
         <source>Block</source>
-        <translation type="unfinished"></translation>
+        <translation>Блок</translation>
     </message>
     <message>
         <source>Group</source>
-        <translation type="unfinished"></translation>
+        <translation>Група</translation>
     </message>
     <message>
         <source>Electronegativity</source>
-        <translation type="unfinished"></translation>
+        <translation>Негативност на елекрон</translation>
     </message>
     <message>
         <source>Atomic radius</source>
-        <translation type="unfinished"></translation>
+        <translation>Радиус на атом</translation>
     </message>
     <message>
         <source>Ionizationenergie</source>
-        <translation type="unfinished"></translation>
+        <translation>Енергија на јонизација</translation>
     </message>
     <message>
         <source>Density</source>
-        <translation type="unfinished"></translation>
+        <translation>Густина</translation>
     </message>
     <message>
         <source>Boilingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка на ротација</translation>
     </message>
     <message>
         <source>Meltingpoint</source>
-        <translation type="unfinished"></translation>
+        <translation>Точка на сретнување</translation>
     </message>
 </context>
 <context>
@@ -540,7 +540,7 @@
     <name>PSEWidget</name>
     <message>
         <source>Periodic System</source>
-        <translation type="unfinished"></translation>
+        <translation>Периоден Систем</translation>
     </message>
 </context>
 <context>
@@ -548,14 +548,15 @@
     <message>
         <source>ERROR: 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ГРЕШКА:
+</translation>
     </message>
 </context>
 <context>
     <name>dataWidgetUI</name>
     <message>
         <source>Chemical Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Хемиски податоци</translation>
     </message>
 </context>
 </TS>

@@ -26,75 +26,76 @@
     <message>
         <source>Enter stock symbols seperated
 by a space.</source>
-        <translation type="unfinished"></translation>
+        <translation>Внеси ги сумболите за акции оделени со 
+празно место.</translation>
     </message>
     <message>
         <source>Toggles Time of current price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Поставува и време на полето за моменталната цена</translation>
     </message>
     <message>
         <source>Toggles date field</source>
-        <translation type="unfinished"></translation>
+        <translation>Поставува датум</translation>
     </message>
     <message>
         <source>Toggles Symbol field</source>
-        <translation type="unfinished"></translation>
+        <translation>Поставува симбол</translation>
     </message>
     <message>
         <source>Toggles Name of symbols owner field</source>
-        <translation type="unfinished"></translation>
+        <translation>Поставува Име на сопственикот на симболот</translation>
     </message>
     <message>
         <source>Toggles current Price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Го вклучува полето за моментална цена</translation>
     </message>
     <message>
         <source>Toggles last price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Го вклучуваа полето за последната цена</translation>
     </message>
     <message>
         <source>Toggles opening price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Го вклучува полето за почетната цена</translation>
     </message>
     <message>
         <source>Toggles minimum daily price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Го вклучува полето за минималната дневна цена</translation>
     </message>
     <message>
         <source>Toggles maximum daily price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Го вклучува полето за максималната дневна цена</translation>
     </message>
     <message>
         <source>Toggles daily variation of price field</source>
-        <translation type="unfinished"></translation>
+        <translation>Го вклучува полето за дневните вариации на цени</translation>
     </message>
     <message>
         <source>Toggles volume of trading field</source>
-        <translation type="unfinished"></translation>
+        <translation>ГО вклучува полето за бројот на трансакции</translation>
     </message>
     <message>
         <source>How often stocks prices should be looked up. In minutes</source>
-        <translation type="unfinished"></translation>
+        <translation>Колку често треба да се освежуваат цените на акциите. Во минути</translation>
     </message>
     <message>
         <source>Minutes between lookups.</source>
-        <translation type="unfinished"></translation>
+        <translation>Минути помеѓу две освежувања.</translation>
     </message>
     <message>
         <source>Speed of scrolling action, in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Брзина на поместивање, во милисекунди</translation>
     </message>
     <message>
         <source>Scroll Speed, in milliseconds</source>
-        <translation type="unfinished"></translation>
+        <translation>Брзина на поместивање, во милисекунди</translation>
     </message>
     <message>
         <source>Length of scrolling</source>
-        <translation type="unfinished"></translation>
+        <translation>Должина на поместување</translation>
     </message>
     <message>
         <source>Scroll Length</source>
-        <translation type="unfinished"></translation>
+        <translation>Должина на поместување</translation>
     </message>
 </context>
 </TS>

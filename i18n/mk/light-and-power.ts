@@ -3,149 +3,149 @@
     <name>Calibration</name>
     <message>
         <source>%1 Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Чекори</translation>
     </message>
 </context>
 <context>
     <name>LightSettingsBase</name>
     <message>
         <source>Light and Power Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Подесувања за светлото и енергијата</translation>
     </message>
     <message>
         <source>on Battery</source>
-        <translation type="unfinished"></translation>
+        <translation>на Батерија</translation>
     </message>
     <message>
         <source>General Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Оснопвни подесувања</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>сек</translation>
     </message>
     <message>
         <source>never</source>
-        <translation type="unfinished"></translation>
+        <translation>нокогаш</translation>
     </message>
     <message>
         <source>Light off after</source>
-        <translation type="unfinished"></translation>
+        <translation>Изгасисветло по</translation>
     </message>
     <message>
         <source>Dim light after</source>
-        <translation type="unfinished"></translation>
+        <translation>Намали светло по</translation>
     </message>
     <message>
         <source>Suspend after</source>
-        <translation type="unfinished"></translation>
+        <translation>Супендирај по</translation>
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation type="unfinished"></translation>
+        <translation>Деактивирај ЛЦД екран (не суспендира)</translation>
     </message>
     <message>
         <source>Backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>Светло</translation>
     </message>
     <message>
         <source>set a fix value for backlight</source>
-        <translation type="unfinished"></translation>
+        <translation>постави фиксна вредност за светлото</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Исклучи</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Целосно</translation>
     </message>
     <message>
         <source>Use Light Sensor</source>
-        <translation type="unfinished"></translation>
+        <translation>Користи Сензор за Светло</translation>
     </message>
     <message>
         <source>By sensing the ambient light where you are using your device, the screen light can be adjusted automatically. The brightness setting still affects the average brightness.</source>
-        <translation type="unfinished"></translation>
+        <translation>Светлото на екранот може автоматски да се подесува во заивснот од светлината околу вас. ПОдесувањата за светлост сеуште влијаат на просечното осветлување.</translation>
     </message>
     <message>
         <source>Calibrate</source>
-        <translation type="unfinished"></translation>
+        <translation>Калибрирај</translation>
     </message>
     <message>
         <source>Advanced settings for light sensor handling</source>
-        <translation type="unfinished"></translation>
+        <translation>Напредни подесувања за управување со светлосниот сензор</translation>
     </message>
     <message>
         <source>on AC</source>
-        <translation type="unfinished"></translation>
+        <translation>на Мрежа</translation>
     </message>
     <message>
         <source>Warnings</source>
-        <translation type="unfinished"></translation>
+        <translation>Предупредувања</translation>
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал за предупредување на слаба батерија</translation>
     </message>
     <message>
         <source> %</source>
-        <translation type="unfinished"></translation>
+        <translation>%</translation>
     </message>
     <message>
         <source>At what battery level should the low power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>На кое ниво набатеријата треба предупредувањето да се појави</translation>
     </message>
     <message>
         <source>how often should be checked for low power. This determines the rate popups occure in low power situations</source>
-        <translation type="unfinished"></translation>
+        <translation>Колку често треба да се проверува за нивото на батеријата. Ова одредува колку често ќе има известувања за ситуации со слаба батерија </translation>
     </message>
     <message>
         <source>At what battery level should the critical power warning pop up</source>
-        <translation type="unfinished"></translation>
+        <translation>На кое ниво на батеријата треба да се појави критичното предупредување</translation>
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>предупредување за многу ниско ниво на батерија</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation type="unfinished"></translation>
+        <translation>предупредување за критично ниво на батерија</translation>
     </message>
 </context>
 <context>
     <name>SensorBase</name>
     <message>
         <source>Sensor Calibration</source>
-        <translation type="unfinished"></translation>
+        <translation>Шпдесување на сензор</translation>
     </message>
     <message>
         <source>Full</source>
-        <translation type="unfinished"></translation>
+        <translation>Целосно</translation>
     </message>
     <message>
         <source>Off</source>
-        <translation type="unfinished"></translation>
+        <translation>Исклучи</translation>
     </message>
     <message>
         <source>Dark</source>
-        <translation type="unfinished"></translation>
+        <translation>Темно</translation>
     </message>
     <message>
         <source>Light</source>
-        <translation type="unfinished"></translation>
+        <translation>Светло</translation>
     </message>
     <message>
         <source>Steps</source>
-        <translation type="unfinished"></translation>
+        <translation>Чекори</translation>
     </message>
     <message>
         <source>Check interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал на проверка</translation>
     </message>
     <message>
         <source> sec</source>
-        <translation type="unfinished"></translation>
+        <translation>сек</translation>
     </message>
 </context>
 </TS>
