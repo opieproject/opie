@@ -2,8 +2,11 @@ Files: bin/drawpad apps/Applications/drawpad.desktop pics/drawpad
 Package: opie-drawpad
 Priority: optional
 Section: opie/applications
-Maintainer: leseb <prudhomme@laposte.net>
+Maintainer: Sébastien Prud'homme <prudhomme@laposte.net>
 Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
+Version: 0.9.2
 Depends: opie-base ($QPE_VERSION), libopie ($QPE_VERSION)
-Description: A drawing program
+Description: A note taking program with basic draw tools
+ DrawPad is an easy note taking program for Zaurus.  It can also
+ be used to draw simple images. DrawPad was developed for the Opie
+ project, an alternative to the standard Zaurus environment.
