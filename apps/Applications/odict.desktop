@@ -1,14 +1,14 @@
 [Desktop Entry]
-Comment=A dictionary lookup application
-Comment[es]=Una aplicación de búsqueda en diccionario
-Comment[pt]=Dicionário
-Comment[pt_BR]=Dicionário
 Exec=odict
 Icon=odict/odict
 Type=Application
 Name=ODict
+Comment=A dictionary lookup application
 Name[de]=Wörterbuch
 Name[es]=Diccionario
+Comment[es]=Una aplicación de búsqueda en diccionario
 Name[fr]=Dictionnaire
 Name[pt]=Dicionário
+Comment[pt]=Dicionário
 Name[pt_BR]=Dicionário
+Comment[pt_BR]=Dicionário

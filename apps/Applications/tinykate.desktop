@@ -1,15 +1,13 @@
 [Desktop Entry]
-Categories =
-Comment = A texteditor with syntax highlighting
-Comment[es]=Un editor de textos con resaltado sintáctico
-Comment[pt]=Um editor de texto com sintaxe a cores
-Comment[pt_BR]=Um editor de texto com sintaxe a cores
-Exec = tinykate
-File =
-Icon = tinykate/tinykate
-Name = TinyKATE
-MimeType = text/*
-Type = Applications
+Exec=tinykate
+Icon=tinykate/tinykate
+MimeType=text/*
+Type=Applications
+Name=TinyKATE
+Comment=A texteditor with syntax highlighting
 Name[es]=MiniKate
+Comment[es]=Un editor de textos con resaltado sintáctico
 Name[pt]=Mini Kate
+Comment[pt]=Um editor de texto com sintaxe a cores
 Name[pt_BR]=Mini Kate
+Comment[pt_BR]=Um editor de texto com sintaxe a cores

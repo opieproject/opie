@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=An E-Text Reader
-Comment[es]=Un lector de libros electrónicos
-Comment[pt]=Leitor de livros electrónicos
-Comment[pt_BR]=Leitor de livros electronicos
+CanFastLoad=1
 Exec=reader
 Icon=opie-reader/uqtreader
 Type=Application
 Name=Opie Reader
-CanFastLoad=1
+Comment=An E-Text Reader
 Name[es]=Lector Libros-e
-Name[zh_TW]=Opie Reader
-Name[ko]=오삐 책읽기
+Comment[es]=Un lector de libros electrónicos
 Name[it]=Opie Reader
+Name[ko]=오삐 책읽기
 Name[pt]=Leitor Livros
+Comment[pt]=Leitor de livros electrónicos
 Name[pt_BR]=Visualizador Livros
+Comment[pt_BR]=Leitor de livros electronicos
+Name[zh_TW]=Opie Reader

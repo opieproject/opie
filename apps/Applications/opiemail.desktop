@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=An EMail Client
-Comment[es]=Cliente de correo electrónico
-Comment[pt]=Cliente de email
-Comment[pt_BR]=Cliente de email
 Exec=opiemail
 Icon=opiemail/opiemail
 Type=Application
 Name=EMail
-Name[pt]=E-Mail
-Name[pt_BR]=E-Mail
+Comment=An EMail Client
 Name[de]=EMail
 Name[es]=Correo-e
+Comment[es]=Cliente de correo electrónico
 Name[it]=Posta
-Name[zh_TW]=電子郵件
 Name[ko]=이메일
+Name[pt]=E-Mail
+Comment[pt]=Cliente de email
+Name[pt_BR]=E-Mail
+Comment[pt_BR]=Cliente de email
+Name[zh_TW]=電子郵件

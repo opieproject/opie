@@ -1,15 +1,15 @@
 [Desktop Entry]
-Comment = A WaveLAN Sniffer
-Comment[de]= Ein krasser WaveLAN Sniffer
-Comment[es]=Un olfateador (sniffer) de redes inalámbricas
-Comment[pt]=Um analizador de pacotes de redes sem fios
-Comment[pt_BR]=Um analizador de pacotes de redes sem fios
-Exec = wellenreiter
-File = wellenreiter
-Icon = wellenreiter/appicon-trans
-Name = Wellenreiter
-Type = Application
+Exec=wellenreiter
+File=wellenreiter
+Icon=wellenreiter/appicon-trans
+Type=Application
+Name=Wellenreiter
+Comment=A WaveLAN Sniffer
 Name[de]=Wellenreiter
+Comment[de]=Ein krasser WaveLAN Sniffer
 Name[es]=Rastreador Inalámbrico
+Comment[es]=Un olfateador (sniffer) de redes inalámbricas
 Name[pt]=Analizador Redes sem Fios
+Comment[pt]=Um analizador de pacotes de redes sem fios
 Name[pt_BR]=Analizador Redes sem Fios
+Comment[pt_BR]=Um analizador de pacotes de redes sem fios

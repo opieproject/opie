@@ -1,8 +1,8 @@
 [Desktop Entry]
-Type=Application
 Exec=filesystem_mounter.sh
 Icon=opie-sh-scripts/fsmounter
+Type=Application
 Name=Filesystem Mounter
-Name[es]=Montador
 Comment=Frontend to mount/unmount filesystems
+Name[es]=Montador
 Comment[es]=Interfaz para montar/desmontar sistemas de ficheros

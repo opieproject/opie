@@ -1,14 +1,14 @@
 [Desktop Entry]
-Comment=opie-sh-howto
-Comment[es]=Cómo del Opie Shell
-Comment[pt]=Documentação "How-To" do Opie Shell
-Comment[pt_BR]=Documentação "How-To" do Opie Shell
 Exec=opie-sh-howto.sh
 Icon=opie-sh/opie-sh
 Type=Application
 Name=opie-sh HowTo
-Name[pt]=Documentação Opie Shell
-Name[pt_BR]=Documentação Opie Shell
+Comment=opie-sh-howto
 Name[es]=Cómo Opie-Sh
-Name[zh_TW]=Opie-sh HowTo
+Comment[es]=Cómo del Opie Shell
 Name[ko]=오삐-sh 하우투
+Name[pt]=Documentação Opie Shell
+Comment[pt]=Documentação "How-To" do Opie Shell
+Name[pt_BR]=Documentação Opie Shell
+Comment[pt_BR]=Documentação "How-To" do Opie Shell
+Name[zh_TW]=Opie-sh HowTo

@@ -1,18 +1,18 @@
 [Desktop Entry]
-Comment=A word arranging game
-Comment[es]=Juego de organizar palabras
-Comment[pt]=Jogo de palavras cruzadas
-Comment[pt_BR]=Jogo de palavras cruzadas
 Exec=wordgame
 Icon=wordgame/WordGame
 Type=Application
 Name=Word Game
-Name[pt_BR]=Palavras Cruzadas
-Name[no]=Kryss-Ord
+Comment=A word arranging game
 Name[de]=Wortspiel
+Name[es]=Crucigrama
+Comment[es]=Juego de organizar palabras
 Name[hu]=Szójáték
 Name[it]=Scarabeo
-Name[pt]=Palavras Cruzadas
-Name[es]=Crucigrama
-Name[zh_TW]=文字遊戲
 Name[ko]=글자 놀이
+Name[no]=Kryss-Ord
+Name[pt]=Palavras Cruzadas
+Comment[pt]=Jogo de palavras cruzadas
+Name[pt_BR]=Palavras Cruzadas
+Comment[pt_BR]=Jogo de palavras cruzadas
+Name[zh_TW]=文字遊戲

@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=Tab Managing Tool
-Comment[es]=Herramienta para gestionar las etiquetas superiores
-Comment[pt]=Gestor de pastas
-Comment[pt_BR]=Gerenciador de pastas
 Exec=tabmanager
 Icon=tabmanager/tabmanager
 Type=Settings
 Name=Tab Manager
-Name[pt]=Pastas
-Name[pt_BR]=Pastas
+Comment=Tab Managing Tool
 Name[es]=Gestor Etiquetas
-Name[it]=Gestione Tab
-Name[zh_TW]=Tab Manager
-Name[ko]=탭 관리자
+Comment[es]=Herramienta para gestionar las etiquetas superiores
 Name[fr]=Onglets
+Name[it]=Gestione Tab
+Name[ko]=탭 관리자
+Name[pt]=Pastas
+Comment[pt]=Gestor de pastas
+Name[pt_BR]=Pastas
+Comment[pt_BR]=Gerenciador de pastas
+Name[zh_TW]=Tab Manager

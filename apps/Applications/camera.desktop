@@ -1,10 +1,9 @@
 [Desktop Entry]
-Comment = A Camera Program
-Comment[de] = Ein Kamera-Programm
-Exec = opiecam
-File = opiecam
-Icon = camera/cam
-Name = OpieCam
-Type = Application
-Name[de]= Kamera
-
+Exec=opiecam
+File=opiecam
+Icon=camera/cam
+Type=Application
+Name=OpieCam
+Comment=A Camera Program
+Name[de]=Kamera
+Comment[de]=Ein Kamera-Programm

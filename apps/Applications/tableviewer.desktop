@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=A table/database viewer
-Comment[es]=Visor de tablas y bases de datos
-Comment[pt]=Visualizador de bases de dados
-Comment[pt_BR]=Visualizador de tabelas
 Exec=tableviewer
 Type=Application
 Name=Table Viewer
-Name[pt_BR]=Visualizador de Tabelas
+Comment=A table/database viewer
+Name[de]=Tabellen betrachter
+Name[es]=Visor Base Datos
+Comment[es]=Visor de tablas y bases de datos
 Name[hu]=Adatbázis nézõ
 Name[it]=DB Viewer
-Name[de]=Tabellen betrachter
-Name[pt]=Visualizador Base Dados
-Name[es]=Visor Base Datos
-Name[zh_TW]=資料庫檢視
 Name[ko]=테이블 뷰어
+Name[pt]=Visualizador Base Dados
+Comment[pt]=Visualizador de bases de dados
+Name[pt_BR]=Visualizador de Tabelas
+Comment[pt_BR]=Visualizador de tabelas
+Name[zh_TW]=資料庫檢視

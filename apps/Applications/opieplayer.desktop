@@ -1,17 +1,17 @@
 [Desktop Entry]
-Comment=A Media Playback Program
-Comment[es]=Reproductor multimedia
-Comment[pt]=Reproductor multimédia
-Comment[pt_BR]=Reproductor multimédia
 Exec=opieplayer
 Icon=opieplayer/MPEGPlayer
-Type=Application
 MimeType=audio/mpeg;video/mpeg;audio/x-mpegurl;audio/x-wav;application/x-shockwave-flash;playlist/plain;audio/x-mpegurl;audio/x-mod
 MimeTypeIcons=SoundPlayer;MPEGPlayer;SoundPlayer;Sound;Sound;mpegplayer/playlist2
+Type=Application
 Name=Opie Player
-Name[pt]=Multimédia
-Name[pt_BR]=Multimédia
+Comment=A Media Playback Program
 Name[es]=Multimedia
+Comment[es]=Reproductor multimedia
 Name[it]=OpiePlayer
-Name[zh_TW]=Opie播放器
 Name[ko]=오삐 재생기
+Name[pt]=Multimédia
+Comment[pt]=Reproductor multimédia
+Name[pt_BR]=Multimédia
+Comment[pt_BR]=Reproductor multimédia
+Name[zh_TW]=Opie播放器

@@ -1,16 +1,16 @@
 [Desktop Entry]
-Comment=Wireless LAN Setup
-Comment[es]=Configuración de red inalámbrica
-Comment[pt]=Configuração da rede sem fios
-Comment[pt_BR]=Configuração da rede sem fios
 Exec=wlansetup
 Icon=wlansetup/wlan
 Type=Settings
 Name=Wireless LAN Setup
-Name[pt]=Rede Sem Fios
-Name[pt_BR]=Rede Sem Fios
+Comment=Wireless LAN Setup
 Name[es]=Red Inalámbrica
-Name[it]=Rete Wireless
-Name[zh_TW]=無線上網設定
-Name[ko]=무선랜 설정
+Comment[es]=Configuración de red inalámbrica
 Name[fr]=R�eau sans fil
+Name[it]=Rete Wireless
+Name[ko]=무선랜 설정
+Name[pt]=Rede Sem Fios
+Comment[pt]=Configuração da rede sem fios
+Name[pt_BR]=Rede Sem Fios
+Comment[pt_BR]=Configuração da rede sem fios
+Name[zh_TW]=無線上網設定

@@ -1,17 +1,17 @@
 [Desktop Entry]
-Type=Application
 Exec=sound
 Icon=Sound
+Type=Application
 Name=Vmemo Settings
-Name[pt_BR]=Som
-Name[pt]=Som
-Name[es]=Grabadora
-Name[it]=Audio
-Name[de]=Audio
-Name[zh_TW]=聲效
-Name[ko]=소리
-Name[fr]=Sons
 Comment=Sound settings dialog
+Name[de]=Audio
+Name[es]=Grabadora
 Comment[es]=Configuración de la grabadora de voz
+Name[fr]=Sons
+Name[it]=Audio
+Name[ko]=소리
+Name[pt]=Som
 Comment[pt]=Configuração do som
+Name[pt_BR]=Som
 Comment[pt_BR]=Configuração do som
+Name[zh_TW]=聲效

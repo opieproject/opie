@@ -1,13 +1,13 @@
 [Desktop Entry]
-Comment=Hit Bill
-Comment[es]=Pégale a Bill
 Exec=kbill
 Icon=kbill/kbill
 Type=Application
 Name=kbill
-Name[pt]=kBill
-Name[es]=kBill
-Name[it]=kBill
+Comment=Hit Bill
 Name[de]=kBill
-Name[zh_TW]=kbill
+Name[es]=kBill
+Comment[es]=Pégale a Bill
+Name[it]=kBill
 Name[ko]=kBill
+Name[pt]=kBill
+Name[zh_TW]=kbill

@@ -1,9 +1,9 @@
 [Desktop Entry]
-Type=Application
 Exec=bounce
 Icon=bounce/bounce
-Comment=A JezzGame
-Comment[es]=El juego Jezz
+Type=Application
 Name=Bounce
+Comment=A JezzGame
 Name[de]=Bounce
 Name[es]=Rebote
+Comment[es]=El juego Jezz

@@ -1,6 +1,6 @@
 [Desktop Entry]
-Type=Application
 Exec=killproc.sh
 Icon=opie-sh-scripts/killproc
+Type=Application
 Name=Process Killer
 Name[es]=Mataprocesos
