@@ -4,6 +4,7 @@
 #include <qobject.h>
 #include <qcstring.h>
 #include <qlist.h>
+#include <qmap.h>
 
 class OCOPClient;
 class QCopChannel : public QObject {
@@ -30,8 +31,9 @@ private slots:
     void rev( const QCString& chan, const QCString&, const QByteArray& );
 
 private:
-    void init();
+    bool isRegisteredLocally( const QCString& str);
     static QList<QCopChannel> *m_list;
+    static QMap<QCString, int> m_refCount;
     /* the channel */
     QCString m_chan;
     class Private;

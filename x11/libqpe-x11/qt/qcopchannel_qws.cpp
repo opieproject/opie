@@ -4,31 +4,43 @@
 #include <qcopchannel_qws.h>
 
 QList<QCopChannel>* QCopChannel::m_list = 0;
+QMap<QCString, int> QCopChannel::m_refCount;
 
 QCopChannel::QCopChannel( const QCString& channel, QObject* parent,
                           const char* name )
     : QObject( parent, name ),m_chan(channel) {
-    init();
     if (!m_list ) {
         m_list = new QList<QCopChannel>;
+        /* only connect once */
+        connect(OCOPClient::self(), SIGNAL(called(const QCString&, const QCString&, const QByteArray& ) ),
+                this, SLOT(rev(const QCString&, const QCString&, const QByteArray&) ) );
     }
+    /* first registration  or ref count is 0 for m_chan*/
+    if (!m_refCount.contains( m_chan ) || !m_refCount[m_chan]  ) {
+        m_refCount[m_chan] = 1;
+        OCOPClient::self()->addChannel( m_chan );
+    }else
+        m_refCount[m_chan]++;
+
     m_list->append(this);
 }
 void QCopChannel::receive( const QCString& msg, const QByteArray& ar ) {
     emit received( msg, ar );
 }
 QCopChannel::~QCopChannel() {
+    if (m_refCount[m_chan] == 1 ) {
+        OCOPClient::self()->delChannel( m_chan );
+        m_refCount[m_chan] = 0;
+    }else
+        m_refCount[m_chan]--;
+
+
     m_list->remove(this);
     if (m_list->count() == 0 ) {
         delete m_list;
         m_list = 0;
     }
-    OCOPClient::self()->delChannel( m_chan );
-}
-void QCopChannel::init() {
-    OCOPClient::self()->addChannel( m_chan );
-    connect(OCOPClient::self(), SIGNAL(called(const QCString&, const QCString&, const QByteArray& ) ),
-            this, SLOT(rev(const QCString&, const QCString&, const QByteArray&) ) );
+
 }
 QCString QCopChannel::channel()const {
     return m_chan;
@@ -47,9 +59,11 @@ bool QCopChannel::send( const QCString& chan, const QCString& msg,
 }
 bool QCopChannel::sendLocally( const QCString& chann, const QCString& msg,
                                const QByteArray& ar ) {
+    qWarning("Client:sendLocally %s %s", chann.data(), msg.data() );
     if (!m_list )
         return true;
     QCopChannel* chan;
+
     for ( chan = m_list->first(); chan; chan = m_list->next() ) {
         if ( chan->channel() == chann )
             chan->receive( msg, ar );
@@ -58,6 +72,5 @@ bool QCopChannel::sendLocally( const QCString& chann, const QCString& msg,
     return true;
 }
 void QCopChannel::rev( const QCString& chan, const QCString& msg, const QByteArray& ar ) {
-    if (chan == m_chan )
-        emit received(msg, ar );
+    sendLocally( chan, msg, ar );
 }

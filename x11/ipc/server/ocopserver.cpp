@@ -167,7 +167,7 @@ void OCopServer::newOnClient( int fd ) {
 //        qWarning("magic match");
         QCString channel( head.chlen+1 );
         QCString func( head.funclen+1 );
-        QByteArray data ( head.datalen );
+        QByteArray data ( head.datalen+1 );
 
         /*
          * we do not check for errors
@@ -300,7 +300,7 @@ void OCopServer::dispatch( const OCOPPacket& packet, int sourceFD ) {
     case OCOPPacket::Signal:
         break;
     case OCOPPacket::IsRegistered:
-        qWarning("IsRegistered");
+        qWarning("Server:IsRegistered %s", packet.channel().data() );
         isRegistered( packet.channel(), sourceFD );
         break;
     };
@@ -365,7 +365,7 @@ void OCopServer::delChannel( const QCString& channel,
     }
 }
 void OCopServer::isRegistered( const QCString& channel, int fd) {
-//    qWarning("isRegistered");
+    qWarning("Server:isRegistered %s", channel.data() );
     OCOPHead head;
     QCString func(2);
 
@@ -379,8 +379,10 @@ void OCopServer::isRegistered( const QCString& channel, int fd) {
     if ( isChannelRegistered( channel ) ) {
         //is registered
         func[0] = 1;
+	qWarning("Server:Channel is Registered %d", head.chlen);
     }else{
         func[0] = 0;
+	qWarning("Server:Channel is NotRegistered");
     }
 
     /**
@@ -401,6 +403,7 @@ void OCopServer::call( const OCOPPacket& p, int ) {
 
     OCOPHead head = p.head();
     for (it = cli.begin(); it != cli.end(); ++it ) {
+        qWarning("Server:calling %d %s %s", (*it), p.channel().data(), p.header().data() );
         write( (*it), &head, sizeof(head ) );
         /* expl. shared! */
         write( (*it), p.channel().data(), p.channel().size() );
