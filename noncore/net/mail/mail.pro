@@ -45,7 +45,14 @@ INTERFACES	 = editaccountsui.ui \
                composemailui.ui
 
 INCLUDEPATH += $(OPIEDIR)/include
-LIBS	    += -lqpe -letpan -lssl -lcrypto -lopie
+
+CONFTEST = $$system( echo $CONFIG_TARGET_MACOSX )
+contains( CONFTEST, y ){
+    LIBS	    += -lqpe -letpan -lssl -lcrypto -lopie -liconv
+}else{
+    LIBS	    += -lqpe -letpan -lssl -lcrypto -lopie
+}
+
 TARGET       = opiemail
 
 include ( $(OPIEDIR)/include.pro )
