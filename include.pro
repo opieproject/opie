@@ -14,11 +14,19 @@ contains( CONFIG, quick-app-lib ) {
     TEMPLATE = lib
     DESTDIR  = $(OPIEDIR)/plugins/application
     DEFINES += OPIE_APP_INTERFACE
+    !contains( TARGET, launcher ) {
+        message( Linking $$TARGET to quicklauncher )
+	system( rm -f $$(OPIEDIR)/bin/$$TARGET )
+        system( ln -s quicklauncher $$(OPIEDIR)/bin/$$TARGET )
+    }
 }
+
 contains ( CONFIG, quick-app-bin ) {
     TEMPLATE = app
     DESTDIR  = $(OPIEDIR)/bin
     DEFINES -= OPIE_APP_INTERFACE
+    message( Touching plugins/application/lib$$TARGET.so )
+    system( touch $$(OPIEDIR)/plugins/application/lib$$TARGET.so )
 }
 
 
