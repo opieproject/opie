@@ -31,7 +31,7 @@ private:
     void load( const OPimTodo& );
     void init();
 
-    OTabWidget         *m_tab;
+    Opie::Ui::OTabWidget         *m_tab;
     TaskEditorOverView *m_overView;
     TaskEditorStatus   *m_stat;
     TaskEditorAlarms   *m_alarm;

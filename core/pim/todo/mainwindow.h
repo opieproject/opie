@@ -62,7 +62,7 @@ namespace Todo {
         friend class TodoView; // avoid QObject here....
         friend class TodoShow; // avoid QObject
     public:
-        /* OApplicationFactory application Name */
+        /* Opie::Core::OApplicationFactory application Name */
         static QString appName() { return QString::fromLatin1("todolist"); }
 
         MainWindow( QWidget *parent = 0,
@@ -142,7 +142,7 @@ private slots:
             *m_showOverDueAction,
             *m_showQuickTaskAction,
             *m_effectiveAction;
-        Opie::OWidgetStack *m_stack;
+        Opie::Ui::OWidgetStack *m_stack;
         QPopupMenu* m_catMenu,
             *m_edit,
             *m_options,

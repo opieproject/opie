@@ -38,6 +38,7 @@
 #include <qlayout.h>
 
 
+using namespace Opie::Ui;
 class AlarmItem : public QListViewItem {
 public:
     AlarmItem( QListView*, const OPimAlarm& );

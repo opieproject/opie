@@ -58,8 +58,10 @@
 #include "todoeditor.h"
 #include "mainwindow.h"
 
+using namespace Opie::Core;
 OPIE_EXPORT_APP( OApplicationFactory<Todo::MainWindow> )
 
+    using namespace Opie;
 using namespace Todo;
 
 MainWindow::MainWindow( QWidget* parent,
@@ -220,7 +222,7 @@ void MainWindow::initConfig() {
 }
 void MainWindow::initUI() {
 
-    m_stack = new OWidgetStack(this,  "main stack");
+    m_stack = new Opie::Ui::OWidgetStack(this,  "main stack");
 
     setCentralWidget( m_stack );
 

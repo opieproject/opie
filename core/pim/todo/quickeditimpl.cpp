@@ -10,6 +10,7 @@
 #include "quickeditimpl.h"
 
 
+
 QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     : QToolBar( (QMainWindow *)parent ), Todo::QuickEdit( (Todo::MainWindow *)parent ) {
     setHorizontalStretchable( TRUE );
@@ -21,7 +22,7 @@ QuickEditImpl::QuickEditImpl( QWidget* parent, bool visible )
     priority3 = Resource::loadPixmap( "todo/priority3" );
     priority5 = Resource::loadPixmap( "todo/priority5" );
 
-    m_lbl = new Opie::OClickableLabel( this );
+    m_lbl = new Opie::Ui::OClickableLabel( this );
     m_lbl->setMinimumWidth( 15 );
     m_lbl->setPixmap( priority3 );
     connect(m_lbl, SIGNAL(clicked() ), this, SLOT(slotPrio()) );
