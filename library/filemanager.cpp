@@ -28,6 +28,7 @@
 
 /* STD */
 #include <stdlib.h>
+#include <errno.h>
 #include <sys/stat.h>
 
 /*!
@@ -63,18 +64,18 @@ bool FileManager::saveFile( const DocLnk &f, const QByteArray &data )
     //write data in temporary .new file
     if ( !file.open( IO_WriteOnly|IO_Raw ) )
     {
-        qWarning("open failed");
+        qWarning( "open failed" );
         return FALSE;
     }
     int total_written = file.writeBlock( data );
     file.close();
     //check if every was written
-    if ( total_written != int(data.size()) || !f.writeLink() )
+    if ( total_written != int( data.size() ) || !f.writeLink() )
     {
         QFile::remove( fileName );
         return FALSE;
     }
-    qDebug("total written %d out of %d", total_written, data.size());
+    qDebug( "total written %d out of %d", total_written, data.size() );
 
     //rename temporary .new file in original filenam
     if ( !renameFile( fileName,  f.file() ) )
@@ -98,7 +99,7 @@ bool FileManager::saveFile( const DocLnk &f, const QString &text )
     //write data in temporary .new file
     if ( !file.open( IO_WriteOnly|IO_Raw ) )
     {
-        qWarning("open failed");
+        qWarning( "open failed" );
         return FALSE;
     }
 
@@ -106,7 +107,7 @@ bool FileManager::saveFile( const DocLnk &f, const QString &text )
     int total_written;
     total_written = file.writeBlock( cstr.data(), cstr.length() );
     file.close();
-    if ( total_written != int(cstr.length()) || !f.writeLink() )
+    if ( total_written != int( cstr.length()) || !f.writeLink() )
     {
         QFile::remove( fileName );
         return FALSE;
@@ -188,13 +189,13 @@ bool FileManager::copyFile( const AppLnk &src, const AppLnk &dest )
     if ( ok )
     {
         // okay now rename the file...
-        if ( !renameFile( fileName.latin1(), dest.file().latin1() )  )
+        if ( !renameFile( fileName, dest.file() )  )
             // remove the tmp file, otherwise, it will just lay around...
-            QFile::remove( fileName.latin1() );
+            QFile::remove( fileName );
     }
     else
     {
-        QFile::remove( fileName.latin1() );
+        QFile::remove( fileName );
     }
     return ok;
 }
@@ -241,9 +242,9 @@ bool FileManager::copyFile( const QString & src, const QString & dest )
     destFile.close();
     // Set file permissions
     struct stat status;
-    if( stat( (const char *) src, &status ) == 0 )
+    if( stat( QFile::encodeName( src ), &status ) == 0 )
     {
-        chmod( (const char *) dest, status.st_mode );
+        chmod( QFile::encodeName( dest ), status.st_mode );
     }
     return ok;
 }
@@ -251,10 +252,9 @@ bool FileManager::copyFile( const QString & src, const QString & dest )
 
 bool FileManager::renameFile( const QString & src, const QString & dest )
 {
-    QDir dir( QFileInfo( src ).absFilePath() );
-    if ( !dir.rename( src, dest ) )
+    if( rename( QFile::encodeName( src ), QFile::encodeName( dest ) ) == -1);
     {
-        qWarning( "problem renaming file %s to %s", src, dest );
+        qWarning( "problem renaming file %s to %s, errno: %d", src.latin1(), dest.latin1(), errno );
         return false;
     }
     return true;
@@ -320,9 +320,8 @@ bool FileManager::ensurePathExists( const QString &fn )
     fi.setFile( fi.dirPath(TRUE) );
     if ( !fi.exists() )
     {
-        if ( system(("mkdir -p "+fi.filePath())) )
+        if ( system( ("mkdir -p " + QFile::encodeName( fi.filePath() ) ) ) )
             return FALSE;
     }
-
     return TRUE;
 }
