@@ -19,6 +19,7 @@
 #include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/calendar.h>
 
 #include <opie/odevice.h>
 
@@ -118,7 +119,7 @@ QString DateBookEvent::differDate( QDate date ) {
         //returnText += tr( "tomorrow" );
     } else {
         //returnText += tr( "in %1 days" ).arg( differDate );
-        returnText += "   [ " + tr ( date.dayName( date.dayOfWeek() ) ) + " ] ";
+        returnText += "   [ " + Calendar::nameOfDay( date.dayOfWeek() )  + " ] ";
     }
     returnText += "</b></font>";
     return returnText;
