@@ -21,6 +21,8 @@
 #define Addressbook_H
 
 #include <qmainwindow.h>
+#include <qvaluelist.h>
+#include <qstringlist.h>
 
 class ContactEditor;
 class AbLabel;
