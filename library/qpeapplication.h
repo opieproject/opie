@@ -118,9 +118,9 @@ protected:
     void timerEvent( QTimerEvent * );
     bool raiseAppropriateWindow();
     virtual void tryQuit();
-
+#if QT_VERSION > 233
     virtual void polish ( QWidget * ); // this is actually implemented in qt_override.cpp (!)
-
+#endif
 private:
 #ifndef QT_NO_TRANSLATION
     void installTranslation( const QString& baseName );
@@ -183,10 +183,15 @@ inline Transformation DegToTrans ( int d )
 
 inline void QPEApplication::setCurrentRotation( int r )
 {
+    // setTransformation has been introduced in Qt/Embedded 2.3.4 snapshots
+    // for compatibility with the SharpROM use fallback to setDefaultTransformation()
+    #if QT_VERSION > 233
     Transformation e = DegToTrans( r );
-
     setenv( "QWS_DISPLAY", QString( "Transformed:Rot%1:0" ).arg( r ).latin1(), 1 );
     qApp->desktop()->qwsDisplay()->setTransformation( e );
+    #else
+    setDefaultRotation( r );
+    #endif
 }
 
 

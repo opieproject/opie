@@ -12,7 +12,7 @@
 
 #include "qt_override_p.h"
 
-
+#if QT_VERSION > 233
 
 struct color_fix_t {
 	char *m_app;
@@ -168,3 +168,4 @@ void QApplication::qwsSetDecoration ( QWSDecoration *deco )
 		QApplication::qwsSetDecoration_NonWeak ( deco );
 }
 
+#endif

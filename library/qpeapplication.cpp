@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.48 2003-05-12 13:07:37 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.49 2003-05-16 19:07:01 mickeyl Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -961,6 +961,7 @@ void QPEApplication::applyStyle()
 	Config config( "qpe" );
 	config.setGroup( "Appearance" );
 
+    #if QT_VERSION > 233
 	// don't block ourselves ...
 	Opie::force_appearance = 0;
 
@@ -1033,6 +1034,7 @@ void QPEApplication::applyStyle()
 	// revert to global blocking policy ...
 	Opie::force_appearance = config. readBoolEntry ( "ForceStyle", false ) ? Opie::Force_All : Opie::Force_None;
 	Opie::force_appearance &= ~nostyle;
+    #endif
 }
 
 void QPEApplication::systemMessage( const QCString& msg, const QByteArray& data )
