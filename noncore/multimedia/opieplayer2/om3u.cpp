@@ -50,7 +50,7 @@
 
 Om3u::Om3u( const QString &filePath, int mode)
       : QStringList (){
-//qDebug("<<<<<<<new m3u "+filePath);
+qDebug("<<<<<<<new m3u "+filePath);
   f.setName(filePath);
   f.open(mode);
 }
@@ -115,9 +115,9 @@ void Om3u::readPls() { //it's a pls file
                 if( s.at( s.length() - 4) == '.') // if this is probably a file
                 append(s);
                 else { //if its a url
-                    if( name.right( 1 ).find( '/' ) == -1) {
-                        s += "/";
-                    }
+//                     if( name.right( 1 ).find( '/' ) == -1) {
+//                         s += "/";
+//                     }
                     append(s);
                 }
             }
