@@ -1355,8 +1355,10 @@ DLLEXPORT(void) writeVObjectsToFile(char *fname, VObject *list)
 DLLEXPORT(const char *) vObjectTypeInfo(VObject *o)
 {
     const char *type = vObjectName( o );
-    if ( strcmp( type, "TYPE" ) == 0 )
-	type = vObjectStringZValue( o );
+    if ( strcmp( type, "type" ) == 0 || 
+	 strcmp( type, "TYPE" ) == 0 ||
+	 strcmp( type, "Type" ) == 0 )
+	    type = vObjectStringZValue( o );
     return type;
 }
 
