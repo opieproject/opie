@@ -35,6 +35,7 @@ using namespace Opie;
 #include <qpushbutton.h>
 #include <qlineedit.h>
 #include <qmessagebox.h>
+#include <qregexp.h>
 #include <qspinbox.h>
 #include <qtoolbutton.h>
 #include <qmainwindow.h>
@@ -325,7 +326,11 @@ void Wellenreiter::startClicked()
     {
         if ( configwindow->writeCaptureFile->isEnabled() )
         {
-            pcap->open( interface, configwindow->captureFileName->text() );
+            QString dumpname( configwindow->captureFileName->text() );
+            dumpname.append( '-' );
+            dumpname.append( QTime::currentTime().toString().replace( QRegExp( ":" ), "-" ) );
+            dumpname.append( ".wellenreiter" );
+            pcap->open( interface, dumpname );
         }
         else
         {
@@ -365,6 +370,12 @@ void Wellenreiter::startClicked()
     logwindow->log( "(i) Started Scanning." );
     sniffing = true;
     emit( startedSniffing() );
+    if ( cardtype != DEVTYPE_FILE ) channelHopped( 6 ); // set title
+    else
+    {
+        assert( parent() );
+        ( (QMainWindow*) parent() )->setCaption( "Wellenreiter II - replaying capture file..." );
+    }
 }
 
 

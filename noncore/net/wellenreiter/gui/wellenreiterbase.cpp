@@ -131,7 +131,7 @@ WellenreiterBase::WellenreiterBase( QWidget* parent,  const char* name, WFlags f
     TabWidget->addTab( ap, "wellenreiter/networks", tr( "Nets" ) );
     TabWidget->addTab( logwindow, "wellenreiter/log", tr( "Log" ) );
     TabWidget->addTab( hexwindow, "wellenreiter/hex", tr( "Hex" ) );
-    TabWidget->addTab( statwindow, "wellenreiter/stat", tr( "Stats" ) );
+    TabWidget->addTab( statwindow, "wellenreiter/stat", tr( "Stat" ) );
     TabWidget->addTab( about, "wellenreiter/about", tr( "About" ) );
 #else
     TabWidget->addTab( ap, /* "wellenreiter/networks", */ tr( "Networks" ) );
