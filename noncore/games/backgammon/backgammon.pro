@@ -26,7 +26,7 @@ SOURCES   = main.cpp \
 TARGET 		= backgammon
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe -lstdc++
+LIBS		+= -lqpe -lopiecore2 -lstdc++
 
 
 include ( $(OPIEDIR)/include.pro )

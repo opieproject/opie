@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/games
 Maintainer: Ralf Waspe <rwaspe@web.de>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Backgammon Game
  A Backgammon game for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
