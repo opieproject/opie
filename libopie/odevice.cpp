@@ -298,9 +298,9 @@ struct z_button z_buttons_c700 [] = {
  	"QPE/TaskBar", "toggleMenu()",
 	"QPE/TaskBar", "toggleStartMenu()" },
     { Qt::Key_F14, QT_TRANSLATE_NOOP("Button", "Display Rotate"),
-	"",
+	"devicebuttons/z_hinge",
 	"QPE/Rotation", "rotateDefault()",
-	"QPE/Rotation", "rotateDefault()" },
+	"QPE/Dummy", "doNothing()" },
 };
 
 struct s_button {
