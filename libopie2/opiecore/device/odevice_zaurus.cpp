@@ -104,16 +104,13 @@ struct z_button z_buttons_c700 [] = {
 
     { Qt::Key_F15, QT_TRANSLATE_NOOP("Button", "Hinge1"),
     "devicebuttons/z_hinge1",
-    "QPE/Rotation", "rotateDefault()",
-    "QPE/Rotation", "rotateDefault()" },
+    "QPE/Rotation", "rotateDefault()",0},
     { Qt::Key_F16, QT_TRANSLATE_NOOP("Button", "Hinge2"),
     "devicebuttons/z_hinge2",
-    "QPE/Rotation", "rotateDefault()",
-    "QPE/Rotation", "rotateDefault()" },
+    "QPE/Rotation", "rotateDefault()",0},
     { Qt::Key_F17, QT_TRANSLATE_NOOP("Button", "Hinge3"),
     "devicebuttons/z_hinge3",
-    "QPE/Rotation", "rotateDefault()",
-    "QPE/Rotation", "rotateDefault()" },
+    "QPE/Rotation", "rotateDefault()",0},
 };
 
 // FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
