@@ -3,6 +3,7 @@ Name=System Info
 Name[pt_BR]=Informações do Sistema
 Name[no]=Systeminfo
 Name[de]=Systeminfos
+Name[fr]=Informations Système
 Exec=sysinfo
 Type=Application
 Comment=System Information
