@@ -18,7 +18,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: dateentry.ui,v 1.7.6.1 2003-09-19 15:40:10 eilers Exp $
+** $Id: dateentry.ui,v 1.7.6.2 2003-10-18 14:33:05 waspe Exp $
 **
 *********************************************************************</comment>
 <widget>
@@ -32,7 +32,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>260</width>
+            <width>256</width>
             <height>257</height>
         </rect>
     </property>
@@ -373,7 +373,7 @@
             </property>
             <property stdset="1">
                 <name>text</name>
-                <string>Start time</string>
+                <string>Start Time</string>
             </property>
         </widget>
         <widget row="6"  column="0" >
