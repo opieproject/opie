@@ -1,12 +1,12 @@
 config NS2
   boolean "opie-networksettings-2 (TCP/IP network settings)"
   default "y"
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE
+  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
 
 config NS2CORE
   boolean
   default "y" if NS2
-  depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && NS2
+  depends ( LIBQPE || LIBQPE-X11 ) && NS2
 
   source noncore/settings/networksettings2/profile/config.in
   source noncore/settings/networksettings2/network/config.in
