@@ -131,6 +131,7 @@ void TerminalWidget::load( const Profile& prof ) {
         m_terminalBox->setCurrentItem(id_term_xterm );
         break;
     default:
+        m_terminalBox->setCurrentItem(id_term_vt102 );
         break;
     };
 
@@ -161,8 +162,8 @@ void TerminalWidget::load( const Profile& prof ) {
     case Profile::Medium:
         m_sizeLarge->setChecked( true );
         break;
-        m_sizeSmall->setChecked(true);
     default:
+        m_sizeMedium->setChecked(true );
         break;
     };
 
