@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation>canal alpha 8-bit </translation>
+        <translation>Canal alpha 8-bit </translation>
     </message>
     <message>
         <source>Slide show</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>s</source>
-        <translation>s</translation>
+        <translation> s</translation>
     </message>
     <message>
         <source>Repeat slideshow</source>
