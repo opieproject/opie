@@ -3,62 +3,62 @@
     <name>Keys</name>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>Defaults</source>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Отмена</translation>
     </message>
     <message>
         <source>Change Direction Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить клавиши направления</translation>
     </message>
     <message>
         <source>Undefined key</source>
-        <translation type="unfinished"></translation>
+        <translation>Незаданная клавиша</translation>
     </message>
 </context>
 <context>
     <name>Kpacman</name>
     <message>
         <source>&amp;New</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Новая</translation>
     </message>
     <message>
         <source>&amp;Pause</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Пауза</translation>
     </message>
     <message>
         <source>&amp;Hall of fame</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Доска почета</translation>
     </message>
     <message>
         <source>&amp;Quit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выйти</translation>
     </message>
     <message>
         <source>&amp;Hide Mousecursor</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Скрыть курсор мыши</translation>
     </message>
     <message>
         <source>&amp;Select graphic scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Выбрать тему графики</translation>
     </message>
     <message>
         <source>&amp;Pause in Background</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Приостановить в фоне</translation>
     </message>
     <message>
         <source>&amp;Continue in Foreground</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">П&amp;родолжить</translation>
     </message>
     <message>
         <source>Change &amp;keys...</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить &amp;клавиши...</translation>
     </message>
     <message>
         <source>@PACKAGE@ - @VERSION@
@@ -75,15 +75,28 @@ The design was strongly influenced by the pacman
 I like to thank my girlfriend Elke Krueers for
 the last 10 years of her friendship.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>@PACKAGE@ - @VERSION@
+
+Joerg Thoennissen (joe@dsite.de)
+
+Игра Packman для KDE
+
+Эта программа основана на исходниках ksnake,
+созданной Michel Filippi (mfilippi@sade.rhein-main.de).
+Pacman (c) 1980 MIDWAY MFG.CO очень сильно
+повлиял на этот дизайн.
+
+Я хочу поблагодарить мою подругу Elke Krueers
+за последнии 10 лет дружбы.
+</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Справка</translation>
     </message>
     <message>
         <source>KPacman</source>
-        <translation type="unfinished"></translation>
+        <translation>KPacman</translation>
     </message>
 </context>
 <context>
@@ -93,121 +106,124 @@ the last 10 years of her friendship.
 
 The file &apos;@FONTNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу создать битшрифт.
+
+Файл &apos;@FONTNAME@&apos; не существует или
+имеет неизвестный формат.</translation>
     </message>
 </context>
 <context>
     <name>Referee</name>
     <message>
         <source>GAME  OVER</source>
-        <translation type="unfinished"></translation>
+        <translation>ИГРА  ОКОНЧЕНА</translation>
     </message>
     <message>
         <source>PLAYER ONE</source>
-        <translation type="unfinished"></translation>
+        <translation>ИГРОК НОМЕР ОДИН</translation>
     </message>
     <message>
         <source>READY!</source>
-        <translation type="unfinished"></translation>
+        <translation>ГОТОВ!</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>ПАУЗА</translation>
     </message>
     <message>
         <source>CHARACTER</source>
-        <translation type="unfinished"></translation>
+        <translation>ПЕРСОНАЖ</translation>
     </message>
     <message>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
         <source>NICKNAME</source>
-        <translation type="unfinished"></translation>
+        <translation>КЛИЧКА</translation>
     </message>
     <message>
         <source>-SHADOW</source>
-        <translation type="unfinished"></translation>
+        <translation>-ТЕНЬ</translation>
     </message>
     <message>
         <source>&quot;BLINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;МЕРЦАЮЩИЙ&quot;</translation>
     </message>
     <message>
         <source>-SPEEDY</source>
-        <translation type="unfinished"></translation>
+        <translation>-СКОРОСТНОЙ</translation>
     </message>
     <message>
         <source>&quot;PINKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;РОЗОВАТЫЙ&quot;</translation>
     </message>
     <message>
         <source>-BASHFUL</source>
-        <translation type="unfinished"></translation>
+        <translation>-СКРОМНЫЙ</translation>
     </message>
     <message>
         <source>&quot;INKY&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;ЧЕРНИЛЬНЫЙ&quot;</translation>
     </message>
     <message>
         <source>-POKEY</source>
-        <translation type="unfinished"></translation>
+        <translation>-КОЛЮЧИЙ</translation>
     </message>
     <message>
         <source>&quot;CLYDE&quot;</source>
-        <translation type="unfinished"></translation>
+        <translation>&quot;КЛАЙД&quot;</translation>
     </message>
     <message>
         <source>QTOPIA PORT: CATALIN CLIMOV</source>
-        <translation type="unfinished"></translation>
+        <translation>QTOPIA ПОРТ: КАТАЛИН КЛИМОВ</translation>
     </message>
     <message>
         <source>PRESS CURSOR TO START</source>
-        <translation type="unfinished"></translation>
+        <translation>НАЖМИТЕ НА КУРСОР ЧТОБЫ НАЧАТЬ</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
         <source>  1UP </source>
-        <translation type="unfinished"></translation>
+        <translation>  1UP</translation>
     </message>
     <message>
         <source> HIGH SCORE </source>
-        <translation type="unfinished"></translation>
+        <translation>РЕКОРД</translation>
     </message>
     <message>
         <source>  2UP </source>
-        <translation type="unfinished"></translation>
+        <translation>  2UP</translation>
     </message>
     <message>
         <source>     CONGRATULATIONS      </source>
-        <translation type="unfinished"></translation>
+        <translation>     ПОЗДРАВЛЯЕМ     </translation>
     </message>
     <message>
         <source>    YOU HAVE ARCHIEVED    </source>
-        <translation type="unfinished"></translation>
+        <translation>    ВЫ ДОСТИГЛИ    </translation>
     </message>
     <message>
         <source>  A SCORE IN THE TOP 10.  </source>
-        <translation type="unfinished"></translation>
+        <translation>  КОЛ-ВО ОЧКОВ В ТОП 10.  </translation>
     </message>
     <message>
         <source>RNK   SCORE  NAME   DATE</source>
-        <translation type="unfinished"></translation>
+        <translation>ПОЗ   ОЧКИ  ИМЯ   ДАТА</translation>
     </message>
     <message>
         <source>PAUSED</source>
-        <translation type="unfinished"></translation>
+        <translation>ПАУЗА</translation>
     </message>
     <message>
         <source>@YY@/@MM@/@DD@</source>
-        <translation type="unfinished"></translation>
+        <translation>@ГГ@/@ММ@/@ДД@</translation>
     </message>
     <message>
-        <source>                          </source>
-        <translation type="unfinished"></translation>
+        <source></source>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -217,11 +233,14 @@ or is of an unknown format.</source>
 
 The file &apos;@PIXMAPNAME@&apos; does not exist,
 or is of an unknown format.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не могу создать изображение.
+
+Файл &apos;@PIXMAPNAME@&apos; не существует или
+имеет неизвестный формат.</translation>
     </message>
     <message>
         <source>Initialization Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Ошибка инициализации</translation>
     </message>
 </context>
 </TS>

@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>ДокВкладка</translation>
     </message>
 </context>
 <context>
@@ -70,11 +70,12 @@
     <message>
         <source>Touch the crosshairs firmly and
 accurately to calibrate your screen.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите на цели твердо и аккуратно
+чтобы откалибровать ваш экран.</translation>
     </message>
     <message>
         <source>Welcome to Opie</source>
-        <translation type="unfinished"></translation>
+        <translation>Добро пожаловать в Opie</translation>
     </message>
 </context>
 <context>
@@ -173,7 +174,7 @@ accurately to calibrate your screen.</source>
     </message>
     <message>
         <source>&lt;b&gt;The Documents Tab&lt;p&gt;has been disabled.&lt;p&gt;Use Settings-&gt;Launcher-&gt;DocTab&lt;p&gt;to reenable it.&lt;/b&gt;&lt;/center&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Вкладка Документы&lt;p&gt;запрещена.&lt;p&gt;Загляните в Настройки-&gt;Запуск-&gt;ДокВкладка&lt;p&gt;чтобы снова разрешить ее.&lt;/b&gt;&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
@@ -191,11 +192,11 @@ accurately to calibrate your screen.</source>
     <name>Mediadlg</name>
     <message>
         <source>A new storage media detected:</source>
-        <translation type="unfinished"></translation>
+        <translation>Обнаружено новое устройство:</translation>
     </message>
     <message>
         <source>What should I do with it?</source>
-        <translation type="unfinished"></translation>
+        <translation>Что мне с ним делать?</translation>
     </message>
 </context>
 <context>
@@ -285,23 +286,23 @@ immediately.</source>
     </message>
     <message>
         <source>WARNING</source>
-        <translation type="unfinished"></translation>
+        <translation>ВНИМАНИЕ</translation>
     </message>
     <message>
         <source>&lt;p&gt;The battery level is critical!&lt;p&gt;Keep power off until AC is restored</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Критический уровень заряда аккумулятора!&lt;p&gt;Отключите устройство до тех пор пока оно не будет подключено к внешнему источнику</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Да</translation>
     </message>
     <message>
         <source>The battery is running very low. </source>
-        <translation type="unfinished"></translation>
+        <translation>Аккумулятор разряжен.</translation>
     </message>
     <message>
         <source>&lt;p&gt;The Back-up battery is very low&lt;p&gt;Please charge the back-up battery</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Запасной аккумулятор разряжен.&lt;p&gt;Пожалуйста зарядите его</translation>
     </message>
 </context>
 <context>
@@ -365,11 +366,11 @@ These termination options are provided primarily for use while developing and te
     </message>
     <message>
         <source>&lt;qt&gt;&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;You chose IntelliSync so you may I allow or deny this connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Вы выбрали IntelliSync так что вы можете разрешить или запретить это соединение.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;An unauthorized system is requesting access to this device.&lt;p&gt;If you are using a version of Qtopia Desktop older than 1.5.1, please upgrade or change the security setting to use IntelliSync.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Неавторизованная система требует доступа к устройству.&lt;p&gt;Если у Вас Qtopia Desktop 1.5.1 и меньше, пожалуйста обновите или изменитье настройки под IntelliSync.</translation>
     </message>
 </context>
 <context>

@@ -200,7 +200,7 @@ editing categories.</source>
     <message>
         <source>End reached, starting at %1</source>
         <comment>Date using TimeString::shortDate</comment>
-        <translation type="unfinished"></translation>
+        <translation>Конец достигнут, начинаю с %1</translation>
     </message>
 </context>
 <context>
@@ -345,7 +345,7 @@ editing categories.</source>
     </message>
     <message>
         <source>Arguments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Аргументы:</translation>
     </message>
 </context>
 <context>
@@ -868,12 +868,12 @@ Free some memory and try again.</source>
     <message>
         <source>D</source>
         <comment>Shortcut for Day</comment>
-        <translation type="unfinished">Д</translation>
+        <translation>Д</translation>
     </message>
     <message>
         <source>M</source>
         <comment>Shortcur for Month</comment>
-        <translation type="unfinished">М</translation>
+        <translation>М</translation>
     </message>
 </context>
 <context>
@@ -887,43 +887,43 @@ Free some memory and try again.</source>
     <name>QPEManager</name>
     <message>
         <source>Click to close this window, discarding changes.</source>
-        <translation type="unfinished">Нажмите чтобы закрыть это окно, не сохраняя.</translation>
+        <translation>Нажмите чтобы закрыть это окно, не сохраняя.</translation>
     </message>
     <message>
         <source>Click to close this window.</source>
-        <translation type="unfinished">Нажмите чтобы закрыть это окно.</translation>
+        <translation>Нажмите чтобы закрыть это окно.</translation>
     </message>
     <message>
         <source>Click to close this window and apply changes.</source>
-        <translation type="unfinished">Нажмите чтобы закрыть это окно и сохранить изменения.</translation>
+        <translation>Нажмите чтобы закрыть это окно и сохранить изменения.</translation>
     </message>
     <message>
         <source>Click to make this window movable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите чтобы сделать это окно перемещаемым.</translation>
     </message>
     <message>
         <source>Click to make this window use all available screen area.</source>
-        <translation type="unfinished">Нажмите чтобы это окно заняло все доступное место на экране.</translation>
+        <translation>Нажмите чтобы это окно заняло все доступное место на экране.</translation>
     </message>
     <message>
         <source>Restore</source>
-        <translation type="unfinished"></translation>
+        <translation>Восстановить</translation>
     </message>
     <message>
         <source>Move</source>
-        <translation type="unfinished"></translation>
+        <translation>Переместить</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер</translation>
     </message>
     <message>
         <source>Maximize</source>
-        <translation type="unfinished"></translation>
+        <translation>Распахнуть</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
 </context>
 <context>
@@ -1015,7 +1015,7 @@ Please free up space and try again</source>
     <message>
         <source>Default</source>
         <comment>List box text for default window decoration</comment>
-        <translation type="unfinished"></translation>
+        <translation>По умолчанию</translation>
     </message>
 </context>
 </TS>

@@ -427,7 +427,7 @@ shows the list of dirs and files</source>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -637,233 +637,233 @@ ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source></source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished">Вы хотите удалить?</translation>
+        <translation>Вы хотите удалить?</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished">&amp;Не удалять</translation>
+        <translation>&amp;Не удалять</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Правка записи</translation>
+        <translation>Правка записи</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished">Имя пользователя</translation>
+        <translation>Имя пользователя</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Пароль</translation>
+        <translation>Пароль</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished">Новая запись</translation>
+        <translation>Новая запись</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished">Имя записи должно отличаться
+        <translation>Имя записи должно отличаться
 от имени категории.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Поиск</translation>
+        <translation>Поиск</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished">Запись не найдена</translation>
+        <translation>Запись не найдена</translation>
     </message>
     <message>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished">Все</translation>
+        <translation>Все</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished">Убрать текстовый файл</translation>
+        <translation>Убрать текстовый файл</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished">Не смог убрать текстовый файл.</translation>
+        <translation>Не смог убрать текстовый файл.</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished">Документы не заданы.
+        <translation>Документы не заданы.
 Вы должны создать новый документ</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished">Экспорт в текст файл</translation>
+        <translation>Экспорт в текст файл</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished">Импорт из текст файла</translation>
+        <translation>Импорт из текст файла</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished">Не смог экспортировать в текст файл.</translation>
+        <translation>Не смог экспортировать в текст файл.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished">Не смог импортировать из текст файла.</translation>
+        <translation>Не смог импортировать из текст файла.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished">Введите пароль</translation>
+        <translation>Введите пароль</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished">Неверный пароль.
+        <translation>Неверный пароль.
 
 ZСейф будет закрыт.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished">Неверный пароль.
+        <translation>Неверный пароль.
 Попробовать снова?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Да</translation>
+        <translation>&amp;Да</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished">&amp;Нет.</translation>
+        <translation>&amp;Нет.</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished">Пустой документ или
+        <translation>Пустой документ или
 неверный пароль.
 Продолжить?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;нет</translation>
+        <translation>&amp;нет</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished">&amp;Да.</translation>
+        <translation>&amp;Да.</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished">Пароль пуст.
+        <translation>Пароль пуст.
 Пожалуйста введите снова.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished">Введите пароль снова</translation>
+        <translation>Введите пароль снова</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished">Пароли должны быть одинаковыми.
+        <translation>Пароли должны быть одинаковыми.
 Пожалуйста введите снова.</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished">Вы хотите сохранить</translation>
+        <translation>Вы хотите сохранить</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished">
+        <translation>
 прежде чем продолжать?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сохранить</translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished">&amp;Не сохранять</translation>
+        <translation>&amp;Не сохранять</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished">Файл паролей сохранен.</translation>
+        <translation>Файл паролей сохранен.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished">Вы хотите сохранить
+        <translation>Вы хотите сохранить
 перед выходом?</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished">С&amp;охранить
+        <translation>С&amp;охранить
 с новым
 паролем</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Категория</translation>
+        <translation>Категория</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished">Диалог ожидания</translation>
+        <translation>Диалог ожидания</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished">Собираю пиктограммы...</translation>
+        <translation>Собираю пиктограммы...</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished">Создать новый документ ZСейф</translation>
+        <translation>Создать новый документ ZСейф</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished">Теперь вы должны дважды
+        <translation>Теперь вы должны дважды
 ввести пароль для только
 что созданного документа.</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished">Открыть документ ZСейф</translation>
+        <translation>Открыть документ ZСейф</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished">Сохранить документ ZСейф как..</translation>
+        <translation>Сохранить документ ZСейф как..</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished">Zaurus Менеджер Паролей&lt;br&gt;</translation>
+        <translation>Zaurus Менеджер Паролей&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished">ZСейф версии 2.1.2-jv01b&lt;br&gt;</translation>
+        <translation>ZСейф версии 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished">написан Carsten Schneider&lt;br&gt;</translation>
+        <translation>написан Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished">Перевод Robert Ernst&lt;br&gt;</translation>
+        <translation>Перевод Robert Ernst&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
-        <translation type="unfinished">ZСейф версии 2.1.2&lt;br&gt;</translation>
+        <translation>ZСейф версии 2.1.2&lt;br&gt;</translation>
     </message>
 </context>
 </TS>
