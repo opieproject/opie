@@ -1,76 +1,75 @@
-/************************************************************************/
-/*                W e l l e n r e i t e r   I I                         */
-/*               ===============================                        */
-/*                                                                      */
-/*                                        Version: Opie-ALPHA-February  */
-/************************************************************************/
+/************************************************************************
+/*                W e l l e n r e i t e r   I I
+/*               ===============================
+/*
+                     Version: Opie-ALPHA-April
+/************************************************************************
 
 ----------------------------------------------------
-Release Notes for Opie-ALPHA Version February 2002
+Release Notes for Opie-ALPHA Version April 2003
 ----------------------------------------------------
 
 =====================
-=  Supported Devices  =
+=  Supported Devices
 =====================
 
-- HERMES chipset [ orinoco ], e.g. Lucent/Agere cards
+- HERMES chipset [ orinoco or hostap ], e.g. Lucent/Agere cards
 - PRISM2 chipset [ orinoco or hostap ], e.g. D-Link, Buffallo
 - SYMBOL/SPECTRUM chipset* [ orinoco ], e.g. Symbol Spectrum 24, Socket Lowpower CF
 - CISCO chipset
+-
 
 * Warning: Current Symbol/Spectrum CF drivers have bugs - they freeze the system in monitor mode.
            This has nothing todo with Wellenreiter as its a driver problem.
 
 =====================
-=        Build        =
+=        Build
 =====================
 
 (I) Opie Build Environment
 
 To compile Wellenreiter within the Opie build environment, do
 'make menuconfig' and check Wellenreiter in the subsection
-"Communications and Networking"
+"Communications and Networking". Make sure you have enabled the
+dependencies in "Experimental->libopie2"
 
-do 'make SUBDIRS=noncore/net/wellenreiter' or 'make' (to build everything)
+'make SUBDIRS=noncore/net/wellenreiter' or 'make' (to build everything)
 Note that you need to have libpcap in your toolchain.
 
 (II) OpenZaurus Build Environment
 
-See (I), but do 'make SUBDIRS=packages/opie'
+See (I), but you must build a complete opie via 'make SUBDIRS=packages/opie'
 
 (III) To compile a standalone Wellenreiter for X11, you need Qt3 and the development
 packages for Qt3, e.g. libqt3-devel. Assuming, $QTDIR is set to your Qt-Director
-(e.g. /usr/lib/qt3), set $OPIEDIR to your installation prefix, e.g. /usr/local, then
+(e.g. /usr/lib/qt3), set $OPIEDIR to the root of the checked out Opie, then
 'export QMAKESPEC=$QTDIR/mkspecs/linux-g++'
+'cd noncore/net/wellenreiter'
 'qmake "platform=x11" wellenreiter.pro'
-'make'
+'make SUBDIRS=noncore/net/wellenreiter'
 'make install'
 
 =====================
-=     Install       =
+=     Install
 =====================
 
 Alternatively, you can use our precompiled ipk. Get it from
-http://opie.net.wox.org/wellenreiter/. There is also a recent libpcap available.
+http://opie.net.wox.org/wellenreiter/ where you will also
+find all necessary dependencies.
 
 =====================
-=       Run         =
+=       Run
 =====================
 
-There are two possible modes: <Manual> and <Automatic>. I suggest, you
-start with the <Automatic> Mode. This works just using the Start/Stop
-Toolbutton in the Wellenreiter Menubar. Note that you need to configure
-your card before the Start/Stop-Toolbutton can be clicked.
-
-If this doesn't work, then try calling the wellenreiter daemon
-[wellenreiterd] manually. It has a command line interface. You can
-start the GUI before or after the daemon.
+* Configure your device by pressing the configure toolbutton (to the right)
+* Start Sniffing by pressing the execute toolbutton which will be enabled,
+if your device has been configured.
 
 =====================
 =     Credits       =
 =====================
 
-Wellenreiter/Opie is (C) 2002-2003 M-M-M
+Wellenreiter II is (C) 2002-2003 M-M-M
 
 Sniffer Engine:             Max Moser        <max@remote-exploit.org>
 Communication and Protocol: Martin J. Muench <mjm@remote-exploit.org>
