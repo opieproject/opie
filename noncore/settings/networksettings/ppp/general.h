@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.3.2.2 2003-07-26 23:35:05 tille Exp $
+ * $Id: general.h,v 1.3.2.3 2003-07-27 01:09:12 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -45,6 +45,7 @@ public:
 
 private slots:
   void 	setmodemdc(int);
+ void        setmodemdc(const QString &);
   void 	setflowcontrol(int);
   void 	modemtimeoutchanged(int);
   void 	modemlockfilechanged(bool);

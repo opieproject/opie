@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.cpp,v 1.4.2.2 2003-07-26 23:35:05 tille Exp $
+ * $Id: general.cpp,v 1.4.2.3 2003-07-27 01:09:12 harlekin Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -63,6 +63,8 @@ ModemWidget::ModemWidget( InterfacePPP *ifppp, QWidget *parent, const char *name
 
   modemdevice = new QComboBox(false, this);
   modemdevice->setEditable( true );
+  modemdevice->setDuplicatesEnabled ( false );
+  modemdevice->setInsertionPolicy( QComboBox::AtTop );
   label1->setBuddy(modemdevice);
 
   Config cfg("NetworkSetupPPP");
@@ -76,6 +78,9 @@ ModemWidget::ModemWidget( InterfacePPP *ifppp, QWidget *parent, const char *name
   tl->addWidget(modemdevice, 0, 1);
   connect(modemdevice, SIGNAL(activated(int)),
 	  SLOT(setmodemdc(int)));
+  connect(modemdevice, SIGNAL(textChanged( const QString & ) ),
+          SLOT( setmodemdc( const QString &) ) );
+
   QString tmp = i18n("This specifies the serial port your modem is attached \n"
 		     "to. On Linux/x86, typically this is either /dev/ttyS0 \n"
 		     "(COM1 under DOS) or /dev/ttyS1 (COM2 under DOS).\n"
@@ -250,12 +255,24 @@ ModemWidget::ModemWidget( InterfacePPP *ifppp, QWidget *parent, const char *name
 ModemWidget::~ModemWidget()
 {
     QStringList devs;
+
     for (int i=0;i<modemdevice->count();i++)
     {
         QString s = modemdevice->text(i);
         s.simplifyWhiteSpace();
         if (! s.isEmpty() ) devs << s;
     }
+
+
+    QString edited = modemdevice->currentText();
+    if ( !( edited ).isEmpty() )  {
+        edited.simplifyWhiteSpace();
+        if ( devs.contains( edited ) == 0 )  {
+            devs << edited;
+        }
+        setmodemdc( edited );
+    }
+
 
     Config cfg("NetworkSetupPPP");
     cfg.setGroup("Devices_General");
@@ -277,6 +294,9 @@ void ModemWidget::setmodemdc(int i) {
   _ifaceppp->data()->setModemDevice(modemdevice->text(i));
 }
 
+void ModemWidget::setmodemdc( const QString &string )  {
+    _ifaceppp->data()->setModemDevice( string );
+}
 
 void ModemWidget::setflowcontrol(int i) {
   _ifaceppp->data()->setFlowcontrol(flowcontrol->text(i));
