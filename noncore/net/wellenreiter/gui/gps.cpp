@@ -14,7 +14,7 @@
 **********************************************************************/
 
 #include "gps.h"
-
+#include <unistd.h>
 GPS::GPS( QObject* parent, const char * name )
     :QObject( parent, name )
 {
@@ -40,17 +40,18 @@ float GPS::latitude() const
     char buf[256];
 
     int result = _socket->writeBlock( "p\r\n", 3 );
+    _socket->flush();
     if ( result )
     {
-        qDebug( "GPS write succeeded" );
-        _socket->waitForMore( 20 );
-        if ( _socket->canReadLine() )
+        int numAvail = _socket->bytesAvailable();
+        qDebug( "GPS write succeeded, %d bytes available for reading...", numAvail );
+        if ( numAvail )
         {
 
             int num = _socket->readLine( &buf[0], sizeof buf );
             if ( num )
             {
-                qDebug( "GPS got line: %s", &buf );
+                qDebug( "GPS got %d bytes ['%s']", num, &buf[0] );
                 return 0.0;
             }
         }
