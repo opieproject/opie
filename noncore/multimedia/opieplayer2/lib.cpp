@@ -84,6 +84,16 @@ Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
         f.open(IO_WriteOnly);
         QTextStream ts( &f );
         ts << "misc.memcpy_method:glibc\n";
+        ts << "# uncomment if you experience double speed audio \n #audio.oss_sync_method:softsync\n";
+        ts << "codec.ffmpeg_pp_quality:3\n";
+        ts << "audio.num_buffers:100\n";
+        ts << "audio.size_buffers:4160\n";
+        ts << "video.num_buffers:20\n";
+        ts << "video.size_buffers:4096\n";
+        ts << "audio.out_num_audio_buf:16\n";
+        ts << "audio.out_size_audio_buf:4096\n";
+        ts << "audio.out_size_zero_buf:1024\n";
+        ts << "audio.passthrough_offset:0\n";
         f.close();
     }
 
@@ -131,9 +141,9 @@ void Lib::initialize()
         setWidget( m_wid );
     }
 
-    //  m_queue = xine_event_new_queue (m_stream);
+    m_queue = xine_event_new_queue (m_stream);
 
-    // xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+    xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
       ::null_preload_decoders( m_stream );
 
@@ -189,13 +199,13 @@ int Lib::play( const QString& fileName, int startPos, int start_time ) {
     assert( m_initialized );
     // FIXME actually a hack imho. Should not be needed to dispose the whole stream
     // but without we get wrong media length reads from libxine for the second media
-    xine_dispose ( m_stream );
+    //xine_dispose ( m_stream );
 
     QString str = fileName.stripWhiteSpace();
 
-    m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
-    m_queue = xine_event_new_queue (m_stream);
-    xine_event_create_listener_thread (m_queue, xine_event_handler, this);
+    //m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
+    //m_queue = xine_event_new_queue (m_stream);
+    //xine_event_create_listener_thread (m_queue, xine_event_handler, this);
 
     if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
         return 0;
