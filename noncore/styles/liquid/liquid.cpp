@@ -35,11 +35,13 @@
 #include <qmenubar.h>
 #include <qprogressbar.h>
 #include <qlineedit.h>
+#include <qlistbox.h>
 
 #include <stdio.h>
 
 #include "htmlmasks.h"
 #include "embeddata.h"
+
 
 typedef void (QStyle::*QDrawMenuBarItemImpl) (QPainter *, int, int, int, int, QMenuItem *,
                           QColorGroup &, bool, bool);
@@ -1408,7 +1410,8 @@ void LiquidStyle::drawComboButton(QPainter *painter, int x, int y, int w, int h,
          (
           edit &&
           ((QWidget *) painter-> device ( ))-> inherits ( "QComboBox" ) && 
-          ( qApp-> focusWidget ( ) == ((QComboBox *) painter->device())->lineEdit ( ))
+          ( qApp-> focusWidget ( ) == ((QComboBox *) painter->device())->lineEdit ( ) ||
+            qApp-> focusWidget ( ) == ((QComboBox *) painter->device())->listBox ( ))
          )
         )
       ) {
