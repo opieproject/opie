@@ -126,9 +126,7 @@ void MainWindow::makeMenu()
    for (SearchGroup *s = searches.first(); s != 0; s = searches.next() ){
 		pop = s->popupMenu();
 		if (pop){
-			qDebug("inserting settings menu for %s",s->text(0).latin1());
 			cfgMenu->insertItem( s->text(0), pop );
-			//connect( pop, SIGNAL( activated(int) ), SLOT( optionChanged(int) ) );
 		}
   }
 
@@ -139,7 +137,6 @@ void MainWindow::makeMenu()
   connect( SearchAllAction, SIGNAL(activated()), this, SLOT(searchAll()) );
   SearchAllAction->addTo( searchMenu );
   searchMenu->insertItem( tr( "Options" ), searchOptions );
-  //connect( searchOptions, SIGNAL( activated(int) ), SLOT( optionChanged(int) ) );
 
   //SEARCH OPTIONS
   //actionWholeWordsOnly = new QAction( tr("Whole words only"),QString::null,  0, this, 0, true );
@@ -183,9 +180,7 @@ void MainWindow::setCurrent(QListViewItem *item)
 		QButton *button;
 		for (uint i = 0; i < acts.count(); i++){
 			button = buttonGroupActions->find( i );
-			qDebug("action %i >%s<",i,acts[i]->latin1());
 			if (!button) {
-				qDebug("BUTTON");
 				button = new QPushButton( detailsFrame );
 				buttonLayout->addWidget( button, 0 );
 				buttonGroupActions->insert( button, i);
@@ -194,7 +189,6 @@ void MainWindow::setCurrent(QListViewItem *item)
 			button->show();
 		}
 		for (uint i = acts.count(); i < _buttonCount; i++){
-			qDebug("remove button %i of %i",i, _buttonCount);
 			button = buttonGroupActions->find( i );
 			if (button) button->hide();
 		}
@@ -264,6 +258,5 @@ void MainWindow::slotAction( int act )
 
 void MainWindow::optionChanged(int i)
 {
-	qDebug("optionChanged(%i)",i);
 	searchStringChanged();
 }

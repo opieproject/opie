@@ -35,9 +35,9 @@ QString DocLnkItem::toRichText()
     QString text;
     text += "<b><h3>" + _doc->name() + "</b></h3><br>";
     text += _doc->comment() + "<br>";
-    text += "File: " + _doc->file() + "<br>";
-    text += "Link: " + _doc->linkFile() + "<br>";
-    text += "Mimetype: " + _doc->type() + "<br>";
+    text += QObject::tr("File: ") + _doc->file() + "<br>";
+    text += QObject::tr("Link: ") + _doc->linkFile() + "<br>";
+    text += QObject::tr("Mimetype: ") + _doc->type() + "<br>";
     if ( _doc->type().contains( "text" ) ){
 	text += "<br><br><hr><br>";
   	QFile f(_doc->file());
