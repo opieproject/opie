@@ -25,17 +25,18 @@
 #include <qpe/config.h>
 
 /* QT */
-#include <qlayout.h>
+#include <qclipboard.h>
+#include <qcolor.h>
+#include <qcombobox.h>
+#include <qdirectpainter_qws.h>
+#include <qfile.h>
+#include <qtextstream.h>
 #include <qfiledialog.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qpainter.h>
-#include <qdirectpainter_qws.h>
-#include <qapplication.h>
 #include <qpushbutton.h>
-#include <qclipboard.h>
 #include <qtimer.h>
-#include <qcolor.h>
-#include <qpushbutton.h>
 
 /* STD */
 #include <time.h>
@@ -91,36 +92,87 @@ BenchmarkInfo::BenchmarkInfo( QWidget *parent, const char *name, int wFlags )
     vb->setMargin( 4 );
 
     tests = new QListView( this );
-    tests->setMargin( 1 );
-    tests->addColumn( "Tests" );
-    tests->addColumn( "Results" );
+    tests->setMargin( 0 );
+    tests->addColumn( tr( "Tests" ) );
+    tests->addColumn( tr( "Results" ) );
+    tests->addColumn( tr( "Comparison" ) );
     tests->setShowSortIndicator( true );
 
-    test_alu = new QCheckListItem( tests, "1: Integer Arithmetic  ", QCheckListItem::CheckBox );
+    test_alu = new QCheckListItem( tests, tr( "1. Integer Arithmetic  " ), QCheckListItem::CheckBox );
+    test_fpu = new QCheckListItem( tests, tr( "2. Floating Point Unit  " ), QCheckListItem::CheckBox );
+    test_txt = new QCheckListItem( tests, tr( "3. Text Rendering  " ), QCheckListItem::CheckBox );
+    test_gfx = new QCheckListItem( tests, tr( "4. Gfx Rendering  " ), QCheckListItem::CheckBox );
+    test_ram = new QCheckListItem( tests, tr( "5. RAM Performance  " ), QCheckListItem::CheckBox );
+    test_sd = new QCheckListItem( tests, tr( "6. SD Card Performance  " ), QCheckListItem::CheckBox );
+    test_cf = new QCheckListItem( tests, tr( "7. CF Card Performance  " ), QCheckListItem::CheckBox );   
+       
     test_alu->setText( 1, "n/a" );
-    test_fpu = new QCheckListItem( tests, "2: Floating Point Unit  ", QCheckListItem::CheckBox );
-    test_fpu->setText( 1, "n/a" );
-    test_txt = new QCheckListItem( tests, "3: Text Rendering  ", QCheckListItem::CheckBox );
+    test_fpu->setText( 1, "n/a" );   
     test_txt->setText( 1, "n/a" );
-    test_gfx = new QCheckListItem( tests, "4: Gfx Rendering  ", QCheckListItem::CheckBox );
     test_gfx->setText( 1, "n/a" );
-    test_ram = new QCheckListItem( tests, "5: RAM Performance  ", QCheckListItem::CheckBox );
     test_ram->setText( 1, "n/a" );
-    test_sd = new QCheckListItem( tests, "6: SD Card Performance  ", QCheckListItem::CheckBox );
     test_sd->setText( 1, "n/a" );
-    test_cf = new QCheckListItem( tests, "7: CF Card Performance  ", QCheckListItem::CheckBox );
-    test_cf->setText( 1, "n/a" );
-
+    test_cf->setText( 1, "n/a" );   
+    
+    test_alu->setText( 2, "n/a" );
+    test_fpu->setText( 2, "n/a" );   
+    test_txt->setText( 2, "n/a" );
+    test_gfx->setText( 2, "n/a" );
+    test_ram->setText( 2, "n/a" );
+    test_sd->setText( 2, "n/a" );
+    test_cf->setText( 2, "n/a" );   
+    
     startButton = new QPushButton( tr( "&Start Tests!" ), this );
     connect( startButton, SIGNAL( clicked() ), this, SLOT( run() ) );
-
+    
     vb->addWidget( tests, 2 );
-    vb->addWidget( startButton );
+    
+    QFile f( QPEApplication::qpeDir() + "/share/sysinfo/results" );
+    if ( f.open( IO_ReadOnly ) )
+    {
+        machineCombo = new QComboBox( this );
+        
+        QTextStream ts( &f );
+        while( !ts.eof() )
+        {
+            QString machline = ts.readLine();
+            qDebug( "sysinfo: parsing benchmark results for '%s'", (const char*) machline );
+            QString resline = ts.readLine();
+            machines.insert( machline, new QStringList( QStringList::split( ",", resline ) ) );
+            machineCombo->insertItem( machline );
+        }
+        
+        QHBoxLayout* hb = new QHBoxLayout( vb );
+        hb->addWidget( new QLabel( tr( "Compare To:" ), this ) );
+        hb->addWidget( machineCombo, 2 );
+        connect( machineCombo, SIGNAL( activated( int ) ), this, SLOT( machineActivated( int ) ) );
+    }
+    
+    vb->addWidget( startButton, 2 );
 }
 
 
 BenchmarkInfo::~BenchmarkInfo()
 {}
+
+
+void BenchmarkInfo::machineActivated( int index )
+{
+    QStringList* results = machines[ machineCombo->text( index ) ];
+    if ( !results )
+    {
+        qDebug( "sysinfo: no results available." );
+        return;
+    }
+    QStringList::Iterator it = results->begin();
+    test_alu->setText( 2, *(it++) );
+    test_fpu->setText( 2, *(it++) );   
+    test_txt->setText( 2, *(it++) );
+    test_gfx->setText( 2, *(it++) );
+    test_ram->setText( 2, *(it++) );
+    test_sd->setText( 2, *(it++) );
+    test_cf->setText( 2, *(it++) );   
+}
 
 
 void BenchmarkInfo::run()

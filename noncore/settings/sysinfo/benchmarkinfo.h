@@ -18,8 +18,11 @@
 
 #include <qwidget.h>
 #include <qdialog.h>
+#include <qdict.h>
+#include <qstringlist.h>
 
 class QClipboard;
+class QComboBox;
 class QCheckListItem;
 class QPushButton;
 class QListView;
@@ -48,9 +51,10 @@ public:
     bool cf_wt;
 
     QClipboard* clb;
-
+    QComboBox* machineCombo;
     QListView* tests;
     QPushButton* startButton;
+    QDict <QStringList> machines;
 
     int textRendering( int );
     int gfxRendering( int );
@@ -60,5 +64,6 @@ private slots:
     bool writeFile( const QString& );
     bool readFile( const QString& );
     void run();
+    void machineActivated( int );
 };
 
