@@ -24,7 +24,6 @@
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qscrollview.h>
-#include <qtimer.h>
 #include <qwhatsthis.h>
 
 #include "graph.h"

@@ -24,13 +24,7 @@
 #include <sys/types.h>
 #include <stdio.h>
 
-#include <qcombobox.h>
 #include <qlayout.h>
-#include <qlistview.h>
-#include <qmessagebox.h>
-#include <qpushbutton.h>
-#include <qtextview.h>
-#include <qwhatsthis.h>
 
 Detail::Detail( QWidget* parent,  const char* name, WFlags )
     : QWidget( parent, name, WStyle_ContextHelp )

@@ -21,14 +21,9 @@
 
 #include <qpe/qpeapplication.h>
 
-#include <qcombobox.h>
 #include <qfile.h>
-#include <qheader.h>
 #include <qlayout.h>
-#include <qlistview.h>
 #include <qmessagebox.h>
-#include <qpushbutton.h>
-#include <qstring.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>
 

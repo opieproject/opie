@@ -20,10 +20,7 @@
 #include <qpe/qpeapplication.h>
 
 #include <qdir.h>
-#include <qfile.h>
-#include <qheader.h>
 #include <qlayout.h>
-#include <qlistview.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
 #include <qwhatsthis.h>

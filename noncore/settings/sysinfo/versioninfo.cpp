@@ -22,14 +22,10 @@
 #include <qpe/version.h>
 
 #include <qfile.h>
-#include <qimage.h>
 #include <qlabel.h>
 #include <qlayout.h>
-#include <qpixmap.h>
-#include <qpainter.h>
 #include <qscrollview.h>
 #include <qtextstream.h>
-#include <qtimer.h>
 #include <qwhatsthis.h>
 
 #include "versioninfo.h"
@@ -58,15 +54,15 @@ VersionInfo::VersionInfo( QWidget *parent, const char *name, WFlags f )
     if ( file.open( IO_ReadOnly ) )
     {
         QTextStream t( &file );
-        QString v;
-        t >> v; t >> v; t >> v;
-        v = v.left( 20 );
+  QStringList strList;
+
+  strList = QStringList::split(  " " , t.read(),  false );
+
         kernelVersionString = "<qt>" + tr( "<b>Linux Kernel</b><p>Version: " );
-        kernelVersionString.append( v );
+        kernelVersionString.append( strList[2] );
         kernelVersionString.append( "<br>" );
-        t >> v;
         kernelVersionString.append( tr( "Compiled by: " ) );
-        kernelVersionString.append( v );
+        kernelVersionString.append( strList[3] );
         kernelVersionString.append("</qt>");
         file.close();
     }
