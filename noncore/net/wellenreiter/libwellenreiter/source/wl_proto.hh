@@ -1,4 +1,4 @@
-/* $Id: wl_proto.hh,v 1.3 2002-12-28 15:45:35 mjm Exp $ */
+/* $Id: wl_proto.hh,v 1.4 2002-12-31 12:36:07 mjm Exp $ */
 
 #ifndef WLPROTO_HH
 #define WLPROTO_HH
@@ -17,14 +17,5 @@ int add_field(char *, const char *, int);
 int get_field(const char *, char *, int);
 int send_network_found (const char *, int, void *);
 int get_network_found (void *, const char *);
-
-typedef struct {
-  int net_type;    /* 1 = Accesspoint ; 2 = Ad-Hoc   */
-  int ssid_len;    /* Length of SSID                 */
-  int channel;     /* Channel                        */
-  int wep;         /* 1 = WEP enabled ; 0 = disabled */
-  char mac[64];    /* MAC address of Accesspoint     */
-  char bssid[128]; /* BSSID of Net                   */
-} wl_network_t;
 
 #endif /* WLPROTO_HH */

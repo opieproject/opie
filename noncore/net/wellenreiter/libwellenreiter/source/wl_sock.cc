@@ -1,16 +1,15 @@
 /*
  * Socket operations for wellenreiter
  *
- * $Id: wl_sock.cc,v 1.3 2002-12-28 15:28:49 mjm Exp $
+ * $Id: wl_sock.cc,v 1.4 2002-12-31 12:36:07 mjm Exp $
  */
 
 #include "wl_sock.hh"
 #include "wl_log.hh"
 
 /* Setup UDP Socket for incoming commands */
-int wl_setupsock(const char *host, int port)
+int wl_setupsock(const char *host, int port, struct sockaddr_in saddr)
 {
-  struct sockaddr_in saddr;
   int sock;
 
   if((sock = socket(AF_INET, SOCK_DGRAM, 0)) < 0)
@@ -23,7 +22,7 @@ int wl_setupsock(const char *host, int port)
   saddr.sin_family = PF_INET;
   saddr.sin_port = htons(port);
   saddr.sin_addr.s_addr = inet_addr(host);
- 
+
   if(bind(sock,(struct sockaddr *)&saddr, sizeof(saddr)) < 0)
   {
     wl_logerr("Cannot bind socket: %s", strerror(errno));
@@ -73,15 +72,17 @@ int wl_send(const char *host, int port, const char *string, ...)
 }
 
 /* Check for new messages on commsock */
-int wl_recv(int *sock, char *out, int maxlen)
+int wl_recv(int *sock, struct sockaddr_in cliaddr, char *out, int maxlen)
 {
-  struct sockaddr_in *cliaddr;
   socklen_t len = sizeof(struct sockaddr);
   char retval[3];
-
+ 
   memset(out, 0, maxlen);
-  if(recvfrom(*sock, out, maxlen - 1, 0, (struct sockaddr *)cliaddr, &len) < 0)
+  if(recvfrom(*sock, out, maxlen - 1, 0, (struct sockaddr *)&cliaddr, &len) < 0)
+  {
+    wl_logerr("Cannot receive from socket: %s", strerror(errno));
     return -1;
+  }
 
   /* Get packet type and return it */
   memset(retval, 0, sizeof(retval));

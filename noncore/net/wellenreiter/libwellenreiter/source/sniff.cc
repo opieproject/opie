@@ -1,17 +1,21 @@
 /* 
  *  rfmon mode sniffer
  *
- *  $Id: sniff.cc,v 1.10 2002-12-28 16:57:51 mjm Exp $
+ *  $Id: sniff.cc,v 1.11 2002-12-31 12:36:06 mjm Exp $
  */
 
 #include "sniff.hh"
 #include "ieee802_11.hh"
 #include "extract.hh"
 #include "wl_log.hh"
+#include "wl_types.hh"
 #include "wl_proto.hh"
 
 /* Main function, checks packets */
-void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *packet, char *guihost, int guiport)
+void process_packets(const struct pcap_pkthdr *pkthdr, 
+		     const unsigned char *packet, 
+		     char *guihost, 
+		     int guiport)
 {
   unsigned int caplen = pkthdr->caplen;
   unsigned int length = pkthdr->len;
@@ -95,18 +99,16 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 	      }
 
 	      /* Here should be the infos to the gui issued */
-	      if (pinfoptr->cap_ESS == 1 &&pinfoptr->cap_IBSS ==0)
-		{
-		  wl_loginfo("Found an access point");
-		  wl_net.net_type=1;
-		}
+	      if (pinfoptr->cap_ESS == 1 && pinfoptr->cap_IBSS ==0)
+	      {
+		wl_loginfo("Found an access point");
+		wl_net.net_type=1;
+	      }
 	      else if(pinfoptr->cap_ESS == 0 && pinfoptr->cap_IBSS == 2) 
-		{
-		  wl_loginfo("Found an ad-hoc network");
-		  wl_net.net_type=2;
-		}
-
-	      memset(wl_net.bssid, 0, sizeof(wl_net.bssid));
+	      {
+		wl_loginfo("Found an ad-hoc network");
+		wl_net.net_type=2;
+	      }
 
 	      if (strcmp (pinfoptr->ssid,NONBROADCASTING) ==0)
 		  wl_loginfo("Net is a non-broadcasting network");
@@ -114,6 +116,7 @@ void process_packets(const struct pcap_pkthdr *pkthdr, const unsigned char *pack
 		  wl_loginfo("SSID is: %s", pinfoptr->ssid);
 
               wl_loginfo("SSID is: %s", pinfoptr->ssid);
+              memset(wl_net.bssid, 0, sizeof(wl_net.bssid));
 	      memcpy(wl_net.bssid, pinfoptr->ssid, sizeof(wl_net.bssid)-1);
 
 	      wl_loginfo("SSID length is: %d", pinfoptr->ssid_len);
@@ -237,7 +240,8 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 	  memcpy(&(pbody.ssid),p+offset,2); offset += 2;
 	  if (pbody.ssid.length > 0)
 	  {
-	      memcpy(&(pbody.ssid.ssid),p+offset,pbody.ssid.length); offset += pbody.ssid.length;
+	      memcpy(&(pbody.ssid.ssid),p+offset,pbody.ssid.length); 
+	      offset += pbody.ssid.length;
 	      pbody.ssid.ssid[pbody.ssid.length]='\0';
 	      if (strcmp((char *)pbody.ssid.ssid,"")==0)
 		memcpy(ppinfo->ssid, NONBROADCASTING, sizeof(ppinfo->ssid));
@@ -251,7 +255,8 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 	  memcpy(&(pbody.challenge),p+offset,2); offset += 2;
 	  if (pbody.challenge.length > 0)
 	  {
-	      memcpy(&(pbody.challenge.text),p+offset,pbody.challenge.length); offset += pbody.challenge.length;
+	      memcpy(&(pbody.challenge.text),p+offset,pbody.challenge.length); 
+	      offset += pbody.challenge.length;
 	      pbody.challenge.text[pbody.challenge.length]='\0';
 	  }
 	  break;
@@ -259,19 +264,24 @@ int handle_beacon(u_int16_t fc, const u_char *p,struct packetinfo *ppinfo)
 	  memcpy(&(pbody.rates),p+offset,2); offset += 2;
 	  if (pbody.rates.length > 0) 
 	  {
-	    memcpy(&(pbody.rates.rate),p+offset,pbody.rates.length); offset += pbody.rates.length;
+	    memcpy(&(pbody.rates.rate),p+offset,pbody.rates.length); 
+	    offset += pbody.rates.length;
 	  }
 	  break;
 	case E_DS:
-	  memcpy(&(pbody.ds),p+offset,3); offset +=3;
+	  memcpy(&(pbody.ds),p+offset,3); 
+	  offset +=3;
 	  ppinfo->channel = pbody.ds.channel;
 	  break;
 	case E_CF:
-	  memcpy(&(pbody.cf),p+offset,8); offset +=8;
+	  memcpy(&(pbody.cf),p+offset,8); 
+	  offset +=8;
 	  break;
 	case E_TIM:
-	  memcpy(&(pbody.tim),p+offset,2); offset +=2;
-	  memcpy(&(pbody.tim.count),p+offset,3); offset +=3;
+	  memcpy(&(pbody.tim),p+offset,2); 
+	  offset +=2;
+	  memcpy(&(pbody.tim.count),p+offset,3); 
+	  offset +=3;
 	  if ((pbody.tim.length -3) > 0)
 	  {
 	      memcpy((pbody.tim.bitmap),p+(pbody.tim.length -3),(pbody.tim.length -3));

@@ -1,9 +1,10 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.5 2002-12-28 15:45:35 mjm Exp $
+ * $Id: wl_proto.cc,v 1.6 2002-12-31 12:36:07 mjm Exp $
  */
 
+#include "wl_types.hh"
 #include "wl_proto.hh"
 #include "wl_log.hh"
 #include "wl_sock.hh"
@@ -34,7 +35,7 @@ int get_field(const char *buffer, char *out, int maxlen)
   /* Copy buffer to out pointer */
   memset(out, 0, maxlen);
 
-  if(atoi(len)-3 > maxlen -1)
+  if(atoi(len) > maxlen -1)
     memcpy(out, buffer + 3, maxlen - 1);
   else
     memcpy(out, buffer + 3, atoi(len));
@@ -54,7 +55,7 @@ int send_network_found (const char *guihost, int guiport, void *structure)
 
   /* Type = Found new net (without length field) */
   memset(temp, 0, sizeof(temp));
-  snprintf(temp, sizeof(temp), "%.2d", NETFOUND);
+  snprintf(temp, sizeof(temp), "%.2d", WL_NETFOUND);
   memcpy(buffer, temp, 2);
   len += 2;
 
@@ -98,7 +99,7 @@ int get_network_found (void *structure, const char *buffer)
   unsigned int len = 0;
 
   ptr = (wl_network_t *)structure;
-  
+
   /* packet type already determined, skip check */
   len += 2;
 
