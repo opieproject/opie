@@ -37,7 +37,7 @@ public:
     bool isLoopback() { return isLoopbackInterface; };
     const QString& getName() { return name; };
 
-    virtual void updateStatistics();   
+    virtual bool updateStatistics();   
 
 protected:
         
@@ -70,7 +70,7 @@ public:
     double freq;
     int channel;
 
-    virtual void updateStatistics();
+    virtual bool updateStatistics();
    
 private: 
     int quality;

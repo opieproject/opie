@@ -1,13 +1,14 @@
 TEMPLATE     = lib
 CONFIG      += qt warn_on release
-HEADERS      = wireless.h wirelessappletimpl.h networkinfo.h mgraph.h
-SOURCES      = wireless.cpp wirelessappletimpl.cpp networkinfo.cpp mgraph.cpp
+HEADERS      = wireless.h wirelessappletimpl.h networkinfo.h mgraph.h advancedconfig.h
+SOURCES      = wireless.cpp wirelessappletimpl.cpp networkinfo.cpp mgraph.cpp advancedconfig.cpp
+INTERFACES   = advancedconfigbase.ui
 TARGET       = wirelessapplet
 DESTDIR      = $(OPIEDIR)/plugins/applets
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += ../$(OPIEDIR)/include
 LIBS        += -lqpe
-VERSION      = 0.0.3
+VERSION      = 0.1.0
 
 TRANSLATIONS = ../../../i18n/de/libwirelessapplet.ts \
 	 ../../../i18n/en/libwirelessapplet.ts \

@@ -1,0 +1,159 @@
+<!DOCTYPE UI><UI>
+<class>AdvancedConfigBase</class>
+<comment>/**********************************************************************
+** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+**
+** This file is part of Qt Palmtop Environment.
+**
+** This file may be distributed and/or modified under the terms of the
+** GNU General Public License version 2 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.
+**
+** This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
+** WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+**
+** See http://www.trolltech.com/gpl/ for GPL licensing information.
+**
+** Contact info@trolltech.com if any conditions of this licensing are
+** not clear to you.
+**
+** $Id: advancedconfigbase.ui,v 1.1 2002-08-31 10:43:26 mickeyl Exp $
+**
+**********************************************************************/</comment>
+<widget>
+    <class>QDialog</class>
+    <property stdset="1">
+        <name>name</name>
+        <cstring>AdvancedConfigBase</cstring>
+    </property>
+    <property stdset="1">
+        <name>geometry</name>
+        <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>197</width>
+            <height>158</height>
+        </rect>
+    </property>
+    <property stdset="1">
+        <name>sizePolicy</name>
+        <sizepolicy>
+            <hsizetype>1</hsizetype>
+            <vsizetype>1</vsizetype>
+        </sizepolicy>
+    </property>
+    <property stdset="1">
+        <name>caption</name>
+        <string>Advanced Config</string>
+    </property>
+    <property>
+        <name>layoutMargin</name>
+    </property>
+    <property>
+        <name>layoutSpacing</name>
+    </property>
+    <widget>
+        <class>QGroupBox</class>
+        <property stdset="1">
+            <name>name</name>
+            <cstring>fraStart</cstring>
+        </property>
+        <property stdset="1">
+            <name>geometry</name>
+            <rect>
+                <x>11</x>
+                <y>11</y>
+                <width>175</width>
+                <height>136</height>
+            </rect>
+        </property>
+        <property stdset="1">
+            <name>frameShape</name>
+            <enum>Box</enum>
+        </property>
+        <property stdset="1">
+            <name>frameShadow</name>
+            <enum>Sunken</enum>
+        </property>
+        <property stdset="1">
+            <name>title</name>
+            <string>Renew DHCP on changing</string>
+        </property>
+        <widget>
+            <class>QLayoutWidget</class>
+            <property stdset="1">
+                <name>name</name>
+                <cstring>Layout5</cstring>
+            </property>
+            <property stdset="1">
+                <name>geometry</name>
+                <rect>
+                    <x>10</x>
+                    <y>21</y>
+                    <width>98</width>
+                    <height>96</height>
+                </rect>
+            </property>
+            <grid>
+                <property stdset="1">
+                    <name>margin</name>
+                    <number>0</number>
+                </property>
+                <property stdset="1">
+                    <name>spacing</name>
+                    <number>6</number>
+                </property>
+                <widget row="1"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>cbFrequency</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Frequency</string>
+                    </property>
+                </widget>
+                <widget row="3"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>cbMODE</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>MODE</string>
+                    </property>
+                </widget>
+                <widget row="0"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>cbESSID</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>ESSID</string>
+                    </property>
+                </widget>
+                <widget row="2"  column="0" >
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>cbAccessPoint</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>AccessPoint</string>
+                    </property>
+                </widget>
+            </grid>
+        </widget>
+    </widget>
+</widget>
+<connections>
+    <slot access="protected">itemUp()</slot>
+    <slot access="protected">itemDown()</slot>
+</connections>
+</UI>

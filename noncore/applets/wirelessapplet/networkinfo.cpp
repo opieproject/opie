@@ -51,6 +51,8 @@
 #define PROCNETDEV "/proc/net/dev"
 #define PROCNETWIRELESS "/proc/net/wireless"
 
+#define MDEBUG 0
+
 //---------------------------------------------------------------------------
 // class MNetworkInterface
 //
@@ -69,8 +71,9 @@ MNetworkInterface::~MNetworkInterface()
         close( fd );
 }
 
-void MNetworkInterface::updateStatistics()
+bool MNetworkInterface::updateStatistics()
 {
+    return true;
 }
 
 //---------------------------------------------------------------------------
@@ -104,9 +107,11 @@ int MWirelessNetworkInterface::noisePercent()
     return ( ( noise-IW_LOWER ) * 100 ) / IW_UPPER;
 }
 
-void MWirelessNetworkInterface::updateStatistics()
+bool MWirelessNetworkInterface::updateStatistics()
 {
-    MNetworkInterface::updateStatistics();
+        bool base = MNetworkInterface::updateStatistics();
+        if ( !base )
+            return false;
 
         const char* buffer[200];
 
@@ -181,21 +186,32 @@ void MWirelessNetworkInterface::updateStatistics()
     }
     if ( ( !hasFile ) || ( wstream.atEnd() ) )
     {
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: D'oh! Someone removed the card..." );
+#endif
         quality = -1;
         signal = IW_LOWER;
         noise = IW_LOWER;
-        return;
+        return false;
     }
 
     wstream >> name >> status >> quality >> c >> signal >> c >> noise;
 
     if ( quality > 92 )
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: D'oh! Quality %d > estimated max!\n", quality );
+#endif
     if ( ( signal > IW_UPPER ) || ( signal < IW_LOWER ) )
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: Doh! Strength %d > estimated max!\n", signal );
+#endif
     if ( ( noise > IW_UPPER ) || ( noise < IW_LOWER ) )
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: Doh! Noise %d > estimated max!\n", noise );
+#endif
+
+    return true;
+        
 }
 
 //---------------------------------------------------------------------------
@@ -204,13 +220,11 @@ void MWirelessNetworkInterface::updateStatistics()
 
 MNetwork::MNetwork()
 {
-    //qDebug( "MNetwork::MNetwork()" );
     procfile = PROCNETDEV;
 }
 
 MNetwork::~MNetwork()
 {
-    //qDebug( "MNetwork::~MNetwork()" );
 }
 
 //---------------------------------------------------------------------------
@@ -219,13 +233,11 @@ MNetwork::~MNetwork()
 
 MWirelessNetwork::MWirelessNetwork()
 {
-    //qDebug( "MWirelessNetwork::MWirelessNetwork()" );
     procfile = PROCNETWIRELESS;
 }
 
 MWirelessNetwork::~MWirelessNetwork()
 {
-    //qDebug( "MWirelessNetwork::~MWirelessNetwork()" );
 }
 
 MNetworkInterface* MWirelessNetwork::createInterface( const char* n ) const
@@ -259,7 +271,9 @@ void MNetwork::enumerateInterfaces()
     {
         s >> str;
         str.truncate( str.find( ':' ) );
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: found interface '%s'", (const char*) str );
+#endif
         interfaces.insert( str, createInterface( str ) );
         s.readLine();
     }

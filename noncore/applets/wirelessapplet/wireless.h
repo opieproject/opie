@@ -45,6 +45,7 @@ public:
 public slots:
     void updateDelayChange( int );
     void displayStyleChange( int );
+    void advancedConfigClicked();
         
 private:
     WirelessApplet* applet;
@@ -52,6 +53,10 @@ private:
     int displayStyle;
     int updateFrequency;
 
+    bool rocESSID;
+    bool rocFREQ;
+    bool rocAP;
+    bool rocMODE;
 };
 
 class WirelessApplet : public QWidget
@@ -65,11 +70,14 @@ public:
     virtual void timerEvent( QTimerEvent* );
     void updateDelayChange( int delay );
     void displayStyleChange( int style );
+    
+    void updateDHCPConfig( bool, bool, bool, bool );
 
 private:
     void mousePressEvent( QMouseEvent * );
     void paintEvent( QPaintEvent* );
     void checkInterface();
+    void renewDHCP();
     
     bool mustRepaint();
     void updatePopupWindow();
@@ -89,6 +97,16 @@ private:
     int oldqualityH;
     int oldsignalH;
     int oldnoiseH;       
+
+    QString oldESSID;
+    QString oldAP;
+    QString oldMODE;
+    double oldFREQ;
+    
+    bool rocESSID;
+    bool rocFREQ;
+    bool rocAP;
+    bool rocMODE;
 };
 
 #endif // __WIRELESS_APPLET_H__

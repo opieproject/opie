@@ -21,7 +21,7 @@
 
 #include <qpoint.h>
 #include <qradiobutton.h>
-#include <qcheckbox.h>
+#include <qpushbutton.h>
 #include <qpainter.h>
 #include <qlabel.h>
 #include <qslider.h>
@@ -31,9 +31,15 @@
 #include <qpixmap.h>
 #include <qstring.h>
 #include <qfile.h>
+#include <qtextstream.h>
+
+#include <sys/types.h>
+#include <signal.h>
 
 #include "networkinfo.h"
 #include "mgraph.h"
+
+#include "advancedconfig.h"
 
 #include "connect0.xpm"
 #include "connect1.xpm"
@@ -45,6 +51,8 @@
 
 #define STYLE_BARS 0
 #define STYLE_ANTENNA 1
+
+#define MDEBUG 0
 
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
     : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
@@ -94,12 +102,13 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     grid->addWidget( mgraph, 1, 0 );
     mgraph->setFocusPolicy( QWidget::NoFocus );
     
-    /* dhcp renew CheckBox */
+    /* advanced configuration Button */
     
-    //FIXME: under construction
-    //QCheckBox* dhcpCheckBox = new QCheckBox( "DHCP renew", this );
-    //dhcpCheckBox->setFocusPolicy( QWidget::NoFocus );
-    //grid->addWidget( dhcpCheckBox, 2, 0, Qt::AlignCenter );
+    QPushButton* advanced = new QPushButton( "Advanced...", this );
+    advanced->setFocusPolicy( QWidget::NoFocus );
+    grid->addWidget( advanced, 2, 0, Qt::AlignCenter );
+    connect( advanced, SIGNAL( clicked() ),
+             this, SLOT( advancedConfigClicked() ) );
 
     /* update Frequency Label */
     
@@ -128,7 +137,22 @@ WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const
     applet->updateDelayChange( updateFrequency );
     
     connect( group, SIGNAL( clicked( int ) ),
-             this, SLOT( displayStyleChange( int ) ) );    
+             this, SLOT( displayStyleChange( int ) ) );
+             
+    applet->updateDHCPConfig( rocESSID, rocFREQ, rocAP, rocMODE );
+}
+
+void WirelessControl::advancedConfigClicked()
+{
+    AdvancedConfig* a = new AdvancedConfig( this, "dialog", TRUE );
+    int result = a->exec();
+    a->hide();
+    delete a;
+    if ( result == QDialog::Accepted )
+    {
+        readConfig();
+        applet->updateDHCPConfig( rocESSID, rocFREQ, rocAP, rocMODE );
+    }
 }
 
 void WirelessControl::updateDelayChange( int delay )
@@ -166,7 +190,11 @@ void WirelessControl::readConfig()
     cfg.setGroup( "Wireless" );
     
     updateFrequency = cfg.readNumEntry( "UpdateFrequency", 2 );
-    displayStyle = cfg. readNumEntry( "DisplayStyle", STYLE_ANTENNA );   
+    displayStyle = cfg.readNumEntry( "DisplayStyle", STYLE_ANTENNA );
+    rocESSID = cfg.readBoolEntry( "renew_dhcp_on_essid_change", false );
+    rocFREQ = cfg.readBoolEntry( "renew_dhcp_on_freq_change", false );
+    rocAP = cfg.readBoolEntry( "renew_dhcp_on_ap_change", false );
+    rocMODE = cfg.readBoolEntry( "renew_dhcp_on_mode_change", false );
 }
 
 void WirelessControl::writeConfigEntry( const char *entry, int val )
@@ -180,7 +208,8 @@ void WirelessControl::writeConfigEntry( const char *entry, int val )
 
 WirelessApplet::WirelessApplet( QWidget *parent, const char *name )
     : QWidget( parent, name ), visualStyle( STYLE_ANTENNA ),
-      timer( 0 ), interface( 0 )
+      timer( 0 ), interface( 0 ),
+      rocESSID( false ), rocFREQ( false ), rocAP( false ), rocMODE( false )
 {
     setFixedHeight( 18 );
     setFixedWidth( 14 );
@@ -193,14 +222,54 @@ void WirelessApplet::checkInterface()
     interface = network->getFirstInterface();
     if ( interface )
     {
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: using interface '%s'", (const char*)
+#endif
                  interface->getName() );
     }
     else
     {
+#ifdef MDEBUG
         qDebug( "WIFIAPPLET: D'oh! No Wireless interface present... :(" );
+        hide();
+#endif
     }   
 }    
+
+void WirelessApplet::renewDHCP()
+{
+#ifdef MDEBUG
+    qDebug( "WIFIAPPLET: Going to request a DHCP configuration renew." );
+#endif
+
+    QString pidfile;
+    if ( !interface )
+        return;
+    QString ifacename( interface->getName() );
+    pidfile.sprintf( "/var/run/dhcpcd-%s.pid", (const char* ) ifacename );
+#ifdef MDEBUG
+    qDebug( "WIFIAPPLET: pidfile is '%s'", (const char*) pidfile );
+#endif
+    int pid;
+    QFile pfile( pidfile );
+    bool hasFile = pfile.open( IO_ReadOnly );
+    QTextStream s( &pfile );
+    if ( hasFile )
+        s >> pid;
+#ifdef MDEBUG
+        qDebug( "WIFIAPPLET: sent -14 to pid %d", pid );
+#endif
+        kill( pid, -14 );
+
+}    
+
+void WirelessApplet::updateDHCPConfig( bool ESSID, bool FREQ, bool AP, bool MODE )
+{
+    rocESSID = ESSID;
+    rocFREQ = FREQ;
+    rocAP = AP;
+    rocMODE = MODE;
+}
 
 void WirelessApplet::updateDelayChange( int delay )
 {
@@ -228,7 +297,13 @@ void WirelessApplet::timerEvent( QTimerEvent* )
   
     if ( iface )
     {
-        iface->updateStatistics();
+        bool statResult = iface->updateStatistics();
+        if ( !statResult )
+        {
+            interface = 0;
+            mustRepaint();
+            return;
+        } else
         if ( mustRepaint() )
         {
             //qDebug( "WIFIAPPLET: A value has changed -> repainting." );
@@ -258,8 +333,22 @@ bool WirelessApplet::mustRepaint()
     
     if ( iface != oldiface )
     {
-        oldiface = iface; 
-        return true;
+        oldiface = iface;
+        if ( iface )
+        {
+#ifdef MDEBUG
+            qDebug( "WIFIAPPLET: We had no interface but now we have one! :-)" );
+#endif
+            show();
+        }
+        else
+        {
+#ifdef MDEBUG
+            qDebug( "WIFIAPPLET: We had a interface but now we don't have one! ;-(" );
+#endif
+            hide();
+            return true;
+        }
     }
    
     const char** pixmap = getQualityPixmap();
@@ -283,6 +372,40 @@ bool WirelessApplet::mustRepaint()
         oldqualityH = qualityH;
         return true;
     }
+
+    if ( rocESSID && ( oldESSID != iface->essid ) )
+    {
+#ifdef MDEBUG
+        qDebug( "WIFIAPPLET: ESSID has changed.");
+#endif
+        renewDHCP();
+    }
+    else if ( rocFREQ && ( oldFREQ != iface->freq ) )
+    {
+#ifdef MDEBUG
+        qDebug( "WIFIAPPLET: FREQ has changed.");
+#endif
+        renewDHCP();
+    }
+    else if ( rocAP && ( oldAP != iface->APAddr ) )
+    {
+#ifdef MDEBUG
+        qDebug( "WIFIAPPLET: AP has changed.");
+#endif
+        renewDHCP();
+    }
+    else if ( rocMODE && ( oldMODE != iface->mode ) )
+    {
+#ifdef MDEBUG
+        qDebug( "WIFIAPPLET: MODE has changed.");
+#endif
+        renewDHCP();
+    }
+    
+    oldESSID = iface->essid;
+    oldMODE = iface->mode;
+    oldFREQ = iface->freq;
+    oldAP = iface->APAddr;
     
     return false;
 }
@@ -334,7 +457,7 @@ void WirelessApplet::paintEvent( QPaintEvent* )
     QColor color;
 
     const char** pixmap = getQualityPixmap();
-    
+
     if ( pixmap )
         p.drawPixmap( 0, 1, pixmap );
     else
