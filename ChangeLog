@@ -2,36 +2,37 @@
 
 	New Features
 	------------
-	* libOpieDB now uses SQLite V3 instead V2. This would need an upgrade for old database files! (eilers)
-	* Backup uses Busy Indicator when backing up and restore (ar)
-	* OpiePlayer2 gains adding of Directories to the playlist (zecke)
-	* OpiePlayer2 handles error better (zecke)
-	* OpiePlayer2 gives Progress when streaming (zecke)
-	* OpiePlayer2 ported to use libxine 1.0.0-rc6-a (brad,zecke)
+	* libOpieDB now uses SQLite V3 instead V2. Remember to upgrade your database files! (eilers)
+	* Backup now uses the busy indicator when backing up and restore (ar)
+	* OpiePlayer2 gained adding of Directories to the playlist (zecke)
+	* OpiePlayer2 better error handling (zecke)
+	* OpiePlayer2 progress indication while streaming (zecke)
+	* OpiePlayer2 ported to use libxine 1.0.0-rc6a (brad,zecke)
 	* Ported brightnessapplet from Qtopia 1.7 (mickeyl)
-	* Opie Eye got a Digital Camera File Backend (alwin,zecke)
-	* Support for Tuxpad 1 of Tradesquare.NL (mickeyl,zecke)
+	* Opie-Eye got a Digital Camera File Backend (alwin,zecke)
+	* Support for Tuxpad1 of Tradesquare.NL (mickeyl,zecke)
 	* Opie-Console use Custom Font and Size in a Profile (harlekin)
 	* Opie-Console transparently log the Output and Input to a file (harlekin)
-	* New O-menu icon to lock the PDA immediately: opie-lockapplet (clem)
-	* opie-security improvements: hide the plugin-based authentication tabs if no auth. plugin package is installed, and new 'test authentication' button (clem)
+	* Added new O-menu icon to lock the PDA immediately: opie-lockapplet (clem)
+	* Opie-Security now hides the plugin-based authentication tabs if no auth. plugin package is installed (clem)
+	* Opie-Security gained a 'test authentication' button (clem)
 
 	Fixed Bugs
 	----------
-	* #1380 - QDateBookAccess::remove() doesn't remove entries (eilers, zecke)
-	* #1445 - Opie Sheet Has No Icon (CoreDump)
-	* #1440 - The icon of opie-mobilemsg is missing (CoreDump)
-	* #1395 - Build VNC Backend with gcc3.4
 	* #501  - Pickboard is able to show 'Umlaute' (TT,zecke)
-	* #1450 - ZSame didn't clear the Bonus Item after winning a game (zecke)
-	* #1245 - Opie Go 'paused' (zecke)
-	* #1448 - Brightness Applet added (mickeyl)
-	* #1358 - DocTab didn't show any MimeTypes (was fixed earlier) (zecke)
 	* #957  - Import of VCards/VTodos/VEvents with BASE64 encoding (ljp,zecke)
-	* n.a.  - Converted applications to not hardcode /opt/QtPalmtop but to use QPEApplication::qpeDir
-	* n.a.  - Converted usage of qpeDir() not to include a '/' as first charachter of the string
-	* n.a.  - Build system: enable distcc and ccache when crosscompiling too, and use them everywhere we can (clem)
-	* n.a.  - Build system: fix deps in several config.in (and fix scripts/deps.pl too) to stop breaking builds, especially with make -j highNumber (clem)
+	* #1245 - Opie-Go 'paused' (zecke)
+	* #1358 - DocTab didn't show any MimeTypes (was fixed earlier) (zecke)
+	* #1380 - QDateBookAccess::remove() doesn't remove entries (eilers, zecke)
+	* #1395 - Build VNC Backend with gcc3.4
+	* #1440 - The icon of opie-mobilemsg is missing (CoreDump)
+	* #1445 - Opie-Sheet Has No Icon (CoreDump)
+	* #1448 - Brightness Applet added (mickeyl)
+	* #1450 - ZSame didn't clear the bonus item after winning a game (zecke)
+	* n.a.  - Converted applications to not hardcode /opt/QtPalmtop but to use QPEApplication::qpeDir (zecke)
+	* n.a.  - Converted usage of qpeDir() not to include a '/' as first charachter of the string (zecke)
+	* n.a.  - Build system: Enable distcc and ccache when crosscompiling too, and use them everywhere we can (clem)
+	* n.a.  - Build system: Fix deps in several config.in (and fix scripts/deps.pl too) to stop breaking builds, especially with make -j highNumber (clem)
 
 2004-09-17	Opie 1.1.6
 
