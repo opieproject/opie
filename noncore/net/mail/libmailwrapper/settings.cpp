@@ -109,6 +109,7 @@ Account::Account()
     type = "changeMe";
     ssl = false;
     connectionType = 1;
+    offline = false;
 }
 
 void Account::remove()
