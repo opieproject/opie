@@ -174,7 +174,6 @@ protected:
     QPixmap* getPixmap(BitmapData item);
     QPixmap* processEmbedded(const char *label, int h, int s, int v, bool blend=false);
 private:
-	bool oldqte;
 	bool flatTBButtons;
     QWidget *highlightWidget;
     QBitmap btnMaskBmp, htmlBtnMaskBmp;
