@@ -18,18 +18,18 @@
 #include <opie2/otaskbarapplet.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
+using namespace Opie::Ui;
 
 /* QT */
 #include <qdir.h>
 
-using namespace Opie::Ui;
+//FIXME: Better read appropriate initial setting from LOCALE, not hardcode it "EN"
 Multikey::Multikey(QWidget *parent) : QLabel(parent), popupMenu(this), current("EN")
 {
     QCopChannel* swChannel = new QCopChannel("MultiKey/Switcher", this);
     connect( swChannel, SIGNAL(received(const QCString&,const QByteArray&)),
 	     this, SLOT(message(const QCString&,const QByteArray&)));
 
-    setFont( QFont( "Helvetica", 10, QFont::Normal ) );
     QPEApplication::setStylusOperation(this, QPEApplication::RightOnHold);
     lang = 0;
     QCopEnvelope e("MultiKey/Keyboard", "getmultikey()");
@@ -68,7 +68,7 @@ void Multikey::mouseReleaseEvent(QMouseEvent *ev)
 
     lang = lang < sw_maps.count()-1 ? lang+1 : 0;
     QCopEnvelope e("MultiKey/Keyboard", "setmultikey(QString)");
-    //odebug << "Lang=" << lang << ", count=" << sw_maps.count() << ", lab=" << labels[lang].ascii() << "" << oendl; 
+    //odebug << "Lang=" << lang << ", count=" << sw_maps.count() << ", lab=" << labels[lang].ascii() << "" << oendl;
     e << sw_maps[lang];
     setText(labels[lang]);
 }
