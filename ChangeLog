@@ -2,6 +2,7 @@
 
 	New Features
 	------------
+	* libOpieDB now uses SQLite V3 instead V2. This would need an upgrade for old database files! (eilers)
 	* Backup uses Busy Indicator when backing up and restore (ar)
 	* OpiePlayer2 gains adding of Directories to the playlist (zecke)
 	* OpiePlayer2 handles error better (zecke)
