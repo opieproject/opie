@@ -39,6 +39,9 @@
 #include <qmultilineedit.h>
 
 
+/* TRANSLATOR Opie::Ui::OFontSelector */
+
+
 namespace Opie {
 namespace Ui   {
 namespace Internal {
