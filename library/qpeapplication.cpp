@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.5 2002-03-22 18:17:23 harlekin Exp $
+** $Id: qpeapplication.cpp,v 1.6 2002-04-17 03:20:37 llornkcor Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -328,17 +328,33 @@ static bool networkOnline()
 
 class QPEScreenSaver : public QWSScreenSaver
 {
+private:
+    int LcdOn;
 
 public:
     QPEScreenSaver()
     {
+    int fd;
+
+    LcdOn = TRUE;
+    // Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
+    fd=open("/dev/fb0",O_RDWR);
+    if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_NO_BLANKING); close(fd); }
     }
     void restore()
     {
+	if (!LcdOn) // We must have turned it off
+		{
+		int fd;
+		fd=open("/dev/fb0",O_RDWR);
+		if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_NO_BLANKING); close(fd); }
+		}
 	setBacklight(-1);
     }
     bool save(int level)
     {
+	int fd;
+
 	switch ( level ) {
 	 case 0:
 	    if ( disable_suspend > 0 && dim_on ) {
@@ -354,10 +370,21 @@ public:
 	    return TRUE;
 	    break;
 	 case 2:
-	     if ( disable_suspend > 2 && !powerOnline() && !networkOnline() ) {
-		QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
-		return TRUE;
-	     }
+	     Config config( "qpe" );
+	     config.setGroup( "Screensaver" );	     
+	     if (config.readNumEntry("LcdOffOnly",0) != 0)  // We're only turning off the LCD
+		{
+	     	fd=open("/dev/fb0",O_RDWR);
+	     	if (fd != -1) { ioctl(fd,FBIOBLANK,VESA_POWERDOWN); close(fd); }
+		LcdOn = FALSE;
+		}		     
+	     else // We're going to suspend the whole machine
+		{
+	     	if ( disable_suspend > 2 && !powerOnline() && !networkOnline() ) {
+			QWSServer::sendKeyEvent( 0xffff, Qt::Key_F34, FALSE, TRUE, FALSE );
+			return TRUE; 
+			}
+		}
 	    break;
 	}
 	return FALSE;
