@@ -3,6 +3,7 @@
 
 #include <qscrollview.h>
 #include <qimage.h>
+#include <qpixmap.h>
 #include <qstring.h>
 #include <qdialog.h>
 
@@ -40,6 +41,7 @@ protected:
 
     QImage _image_data;
     QImage _original_data;
+    QPixmap _pdata;
 
     int _mouseStartPosX,_mouseStartPosY;
 

@@ -18,6 +18,8 @@ ImageScrollView::ImageScrollView (const QImage&img, QWidget * parent, const char
     :QScrollView(parent,name,f|Qt::WRepaintNoErase),_image_data(),_original_data(img),scale_to_fit(always_scale),
     rotate_to_fit(rfit),first_resize_done(false),m_lastName("")
 {
+    _original_data.convertDepth(QPixmap::defaultDepth());
+    _original_data.setAlphaBuffer(false);
     init();
 }
 
@@ -33,6 +35,8 @@ void ImageScrollView::setImage(const QImage&img)
 {
     _image_data = QImage();
     _original_data=img;
+    _original_data.convertDepth(QPixmap::defaultDepth());
+    _original_data.setAlphaBuffer(false);
     m_lastName = "";
     if (first_resize_done) {
         generateImage();
@@ -44,6 +48,8 @@ void ImageScrollView::setImage( const QString& path ) {
     if (m_lastName == path) return;
     m_lastName = path;
     _original_data.load(path);
+    _original_data.convertDepth(QPixmap::defaultDepth());
+    _original_data.setAlphaBuffer(false);
     _image_data = QImage();
     if (first_resize_done) {
         generateImage();
@@ -244,6 +250,8 @@ void ImageScrollView::generateImage()
         last_rot = r;
         resizeContents(_image_data.width(),_image_data.height());
     }
+    _pdata.convertFromImage(_image_data);
+    _image_data=QImage();
 }
 
 void ImageScrollView::resizeEvent(QResizeEvent * e)
@@ -285,28 +293,28 @@ void ImageScrollView::drawContents(QPainter * p, int clipx, int clipy, int clipw
     int y = clipy;
     bool erase = false;
 
-    if (!_image_data.size().isValid()) {
+    if (!_pdata.size().isValid()) {
         p->fillRect(clipx,clipy,clipw,cliph,white);
         return;
     }
-    if (w>_image_data.width()) {
-        w=_image_data.width();
+    if (w>_pdata.width()) {
+        w=_pdata.width();
         x = 0;
         erase = true;
-    } else if (x+w>_image_data.width()){
-        x = _image_data.width()-w;
+    } else if (x+w>_pdata.width()){
+        x = _pdata.width()-w;
     }
-    if (h>_image_data.height()) {
-        h=_image_data.height();
+    if (h>_pdata.height()) {
+        h=_pdata.height();
         y = 0;
         erase = true;
-    } else if (y+h>_image_data.height()){
-        y = _image_data.height()-h;
+    } else if (y+h>_pdata.height()){
+        y = _pdata.height()-h;
     }
-    if (erase||_image_data.hasAlphaBuffer()) {
+    if (erase||_original_data.hasAlphaBuffer()) {
         p->fillRect(clipx,clipy,clipw,cliph,white);
     }
-    p->drawImage(clipx,clipy,_image_data,x,y,w,h);
+    p->drawPixmap(clipx,clipy,_pdata,x,y,w,h);
 }
 
 /* using the real geometry points and not the translated points is wanted! */
