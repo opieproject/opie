@@ -213,8 +213,10 @@ static QString dictDir()
 
   \section1 Hardware
 
-  The writeHWClock() function sets the hardware clock to the system
-  clock's date and time.
+  The implementation of the writeHWClock() function depends on the AlarmServer
+  implementation. If the AlarmServer is using atd the clock will be synced to
+  hardware. If opie-alarm is used the hardware clock will be synced before
+  suspending the device. opie-alarm is used by iPAQ and Zaurii implementation
 
   \ingroup qtopiaemb
 */

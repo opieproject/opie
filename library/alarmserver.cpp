@@ -304,18 +304,18 @@ void TimerReceiverObject::timerEvent( QTimerEvent * )
 /*!
   \class AlarmServer alarmserver.h
   \brief The AlarmServer class allows alarms to be scheduled and unscheduled.
- 
+
     Applications can schedule alarms with addAlarm() and can
     unschedule alarms with deleteAlarm(). When the time for an alarm
     to go off is reached the specified \link qcop.html QCop\endlink
     message is sent on the specified channel (optionally with
     additional data).
- 
+
     Scheduling an alarm using this class is important (rather just using
     a QTimer) since the machine may be asleep and needs to get woken up using
     the Linux kernel which implements this at the kernel level to minimize
     battery usage while asleep.
- 
+
     \ingroup qtopiaemb
     \sa QCopEnvelope
 */
@@ -324,11 +324,11 @@ void TimerReceiverObject::timerEvent( QTimerEvent * )
   Schedules an alarm to go off at (or soon after) time \a when. When
   the alarm goes off, the \link qcop.html QCop\endlink \a message will
   be sent to \a channel, with \a data as a parameter.
- 
+
   If this function is called with exactly the same data as a previous
   call the subsequent call is ignored, so there is only ever one alarm
   with a given set of parameters.
- 
+
   \sa deleteAlarm()
 */
 void AlarmServer::addAlarm ( QDateTime when, const QCString& channel,
@@ -381,15 +381,15 @@ void AlarmServer::addAlarm ( QDateTime when, const QCString& channel,
 /*!
   Deletes previously scheduled alarms which match \a when, \a channel,
   \a message, and \a data.
- 
+
   Passing null values for \a when, \a channel, or for the \link
   qcop.html QCop\endlink \a message, acts as a wildcard meaning "any".
   Similarly, passing -1 for \a data indicates "any".
- 
+
   If there is no matching alarm, nothing happens.
- 
+
   \sa addAlarm()
- 
+
 */
 void AlarmServer::deleteAlarm (QDateTime when, const QCString& channel, const QCString& message, int data)
 {
@@ -434,7 +434,10 @@ void AlarmServer::deleteAlarm (QDateTime when, const QCString& channel, const QC
 }
 
 /*!
-  Writes the system clock to the hardware clock.
+  The implementation depends on the mode of AlarmServer. If the AlarmServer
+  uses atd the current system time will be written to the hardware clock.
+  If the AlarmServer relies on opie-alarm the time will be written once the
+  device gets suspended. opie-alarm is used by the Zaurus, iPAQs and SIMpad
 */
 void Global::writeHWClock()
 {
