@@ -9,7 +9,9 @@
 #include <qpushbutton.h>
 #include <qdrawutil.h>
 #include <qfile.h>
+#include <qlayout.h>
 #include <qtextstream.h>
+#include <qapplication.h>
 #include <qmessagebox.h>
 
 using namespace Opie;
@@ -18,9 +20,18 @@ BatteryStatus::BatteryStatus( const PowerStatus *p, QWidget *parent )
   : QWidget( parent, 0, WDestructiveClose), ps(p), bat2(false) {
   setCaption( tr("Battery status") );
   QPushButton *pb = new QPushButton( tr("Close"), this );
-  pb->move( 70, 250 );
-  pb->setMaximumHeight(20);
+  QVBoxLayout *layout = new QVBoxLayout ( this );
+
+  jackPercent = 0;
+
+  pb->setMaximumHeight(40);
+  pb->setMaximumWidth( 120 );
+
   pb->show();
+
+  layout->addStretch( 0 );
+  layout->addWidget( pb );
+
   if ( ODevice::inst ( )-> series ( ) == Model_iPAQ ) {
       getProcApmStatusIpaq();
   }
@@ -135,6 +146,10 @@ void BatteryStatus::drawSegment( QPainter *p, const QRect &r, const QColor &topg
 
 void BatteryStatus::paintEvent( QPaintEvent * ) {
 
+
+    int screenWidth = qApp->desktop()->width();
+    int screenHeight = qApp->desktop()->height();
+
   QPainter p(this);
   QString text;
   if ( ps->batteryStatus() == PowerStatus::Charging ) {
@@ -198,13 +213,15 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
   if ( percent < 0 )
     return;
 
-  int percent2 = percent * 2;
+  int rightEnd1 = screenWidth - 47;
+  int rightEnd2 = screenWidth - 35;
+  int percent2 = ( percent  / 100 ) * rightEnd1 ;
   p.setPen( black );
-  qDrawShadePanel( &p,   9, 30, 204, 39, colorGroup(), TRUE, 1, NULL);
-  qDrawShadePanel( &p, 212, 37,  12, 24, colorGroup(), TRUE, 1, NULL);
+  qDrawShadePanel( &p,   9, 30, rightEnd1 , 39, colorGroup(), TRUE, 1, NULL);
+  qDrawShadePanel( &p, rightEnd2, 37,  12, 24, colorGroup(), TRUE, 1, NULL);
   drawSegment( &p, QRect( 10, 30, percent2, 40 ), lightc, darkc, lightc.light(115), 6 );
-  drawSegment( &p, QRect( 11 + percent2, 30, 200 - percent2, 40 ), white.light(80), black, white.light(90), 6 );
-  drawSegment( &p, QRect( 212, 37, 10, 25 ), white.light(80), black, white.light(90), 2 );
+  drawSegment( &p, QRect( 11 + percent2, 30,  rightEnd1 - percent2, 40 ), white.light(80), black, white.light(90), 6 );
+  drawSegment( &p, QRect( rightEnd2, 37, 10, 25 ), white.light(80), black, white.light(90), 2 );
   p.setPen( black);
 
 
@@ -223,11 +240,13 @@ void BatteryStatus::paintEvent( QPaintEvent * ) {
           jacketMsg = tr("No jacket with battery inserted");
       }
 
-      qDrawShadePanel( &p,   9, 160, 204, 39, colorGroup(), TRUE, 1, NULL);
-      qDrawShadePanel( &p, 212, 167,  12, 24, colorGroup(), TRUE, 1, NULL);
-      drawSegment( &p, QRect( 10, 160, jackPercent*2, 40 ), lightc, darkc, lightc.light(115), 6 );
-      drawSegment( &p, QRect( 11 + jackPercent*2, 160, 200 - jackPercent*2, 40 ), white.light(80), black, white.light(90), 6 );
-      drawSegment( &p, QRect( 212, 167, 10, 25 ), white.light(80), black, white.light(90), 2 );
+      int jackPerc =  ( jackPercent / 100 ) * screenWidth - 47;
+
+      qDrawShadePanel( &p,   9, 160, rightEnd1, 39, colorGroup(), TRUE, 1, NULL);
+      qDrawShadePanel( &p, rightEnd2, 167,  12, 24, colorGroup(), TRUE, 1, NULL);
+      drawSegment( &p, QRect( 10, 160, jackPerc, 40 ), lightc, darkc, lightc.light(115), 6 );
+      drawSegment( &p, QRect( 11 + jackPerc, 160, rightEnd1 - jackPerc, 40 ), white.light(80), black, white.light(90), 6 );
+      drawSegment( &p, QRect( rightEnd2, 167, 10, 25 ), white.light(80), black, white.light(90), 2 );
       p.setPen( black );
       p.drawText(15, 180, jacketMsg);
   }

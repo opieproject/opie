@@ -52,6 +52,8 @@ private:
     QString ipaqChem;
     QString jackChem;
     bool bat2;
+    int screenWidth;
+    int screenHeight;
 };
 
 #endif
