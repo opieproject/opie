@@ -170,9 +170,9 @@ void InstallDlgImpl :: installSelected()
         Destination *d = dataMgr->getDestination( destination->currentText() );
         QString dest = d->getDestinationName();
         QString destDir = d->getDestinationPath();
-        int instFlags = 0;
+        int instFlags = flags;
         if ( d->linkToRoot() )
-            instFlags = MAKE_LINKS;
+            instFlags |= MAKE_LINKS;
     
 #ifdef QWS
         // Save settings
@@ -193,8 +193,6 @@ void InstallDlgImpl :: installSelected()
             int tmpFlags = flags;
             if ( it->destination->linkToRoot() )
                 tmpFlags |= MAKE_LINKS;
-            else
-                tmpFlags ^= MAKE_LINKS;
             
             ipkg.setFlags( tmpFlags );
             ipkg.runIpkg();
@@ -221,8 +219,6 @@ void InstallDlgImpl :: installSelected()
             int tmpFlags = flags;
             if ( it->destination->linkToRoot() && it->recreateLinks )
                 tmpFlags |= MAKE_LINKS;
-            else
-                tmpFlags ^= MAKE_LINKS;
             ipkg.setFlags( tmpFlags );
             ipkg.runIpkg();
         }
