@@ -89,6 +89,7 @@ Wellenreiter::Wellenreiter( QWidget* parent )
     connect( netview, SIGNAL( joinNetwork(const QString&,const QString&,int,const QString&) ),
              this, SLOT( joinNetwork(const QString&,const QString&,int,const QString&) ) );
     pcap = new OPacketCapturer();
+    pcap->setAutoDelete( false );
 
     gps = new GPS( this );
 
@@ -660,7 +661,9 @@ void Wellenreiter::timerEvent( QTimerEvent* )
     else
     {
         receivePacket( p );
-        delete p;
+        // We no longer delete packets here. Ownership of the packets is
+        // transferred to the PacketView.
+        //delete p;
     }
 }
 

@@ -19,29 +19,38 @@
 #include <qlist.h>
 #include <qframe.h>
 
+class QLabel;
 class QString;
 class QSpinBox;
-class QLabel;
 class QTextView;
+class QObjectList;
 namespace Opie {namespace Net {class OPacket;}}
+namespace Opie {namespace Ui {class OListView;}}
 
 class PacketView: public QFrame
 {
-
+  Q_OBJECT 
+  
   public:
     PacketView( QWidget * parent = 0, const char * name = "PacketView", WFlags f = 0 );
 
-    void add( Opie::Net::OPacket* p );
+    void add( const Opie::Net::OPacket* p );
     const QString getLog() const;
     void clear();
+    
+  public slots:
+    void showPacket( int number );
 
   protected:
-
     QSpinBox* _number;
     QLabel* _label;
-    QLabel* _list;
+    Opie::Ui::OListView* _list;
     QTextView* _hex;
-    QList<Opie::Net::OPacket> _packets;
+    QList<const Opie::Net::OPacket> _packets;
+    
+  protected:
+    void _doSubPackets( QObjectList*, int );
+    void _doHexPacket( const Opie::Net::OPacket* );
 
 };
 
