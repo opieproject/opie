@@ -5,5 +5,6 @@ Section: opie/settings
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Depends: task-opie-minimal
+Recommends: opie-lockapplet, opie-multiauth
 Description: Security settings dialog for the Opie environment.
 Version: $QPE_VERSION$EXTRAVERSION
