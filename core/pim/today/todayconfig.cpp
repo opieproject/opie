@@ -90,6 +90,7 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     TimeLabel->setText( tr( "minutes inactive" ) );
     QWhatsThis::add( TimeLabel , tr( "How many minutes has the PDA been suspended before the autostart feature kicks in on resume" ) );
     SpinBoxTime = new QSpinBox( hbox_inactive, "TimeSpinner" );
+    SpinBoxTime->setMaxValue ( 1440 );
     QWhatsThis::add( SpinBoxTime , tr( "How many minutes has the PDA been suspended before the autostart feature kicks in on resume" ) );
     QHBox *hbox_iconSize = new QHBox( tab_3 );
     QLabel *iconSizeLabel = new QLabel( hbox_iconSize, "iconSizeLabel" );
