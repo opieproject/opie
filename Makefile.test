@@ -1,6 +1,7 @@
 #!/usr/bin/make -f
 export OPIEDIR:=$(shell pwd)
 export TOPDIR:=$(OPIEDIR)
+export QMAKE:=$(OPIEDIR)/qmake/qmake
 
 export QMAKESPECSDIR=$(OPIEDIR)/mkspecs
 
