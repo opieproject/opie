@@ -33,9 +33,9 @@
 #include "colorpopupmenu.h"
 #include "colordialog.h"
 
-#include <qaction.h>
 #include <qlayout.h>
 #include <qpainter.h>
+#include <qaction.h>
 
 OColorPanelButton::OColorPanelButton( const QColor& color, QWidget* parent, const char* name )
     : QFrame( parent, name )
@@ -96,7 +96,6 @@ OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent, const ch
     : QPopupMenu( parent, name )
 {
     m_color = color;
-
     colorPanel = new QWidget( this );
 
     colorLayout = new QGridLayout(colorPanel, 5, 6);
@@ -137,9 +136,7 @@ OColorPopupMenu::OColorPopupMenu( const QColor& color, QWidget* parent, const ch
 
     insertItem( colorPanel );
     insertSeparator();
-    QAction* chooseColorAction = new QAction( tr( "More" ), tr( "More..." ), 0, colorPanel, "More" );
-    connect( chooseColorAction, SIGNAL( activated() ), this, SLOT( moreColorClicked() ) );
-    chooseColorAction->addTo( this );
+    insertItem( tr("More..."), this, SLOT( moreColorClicked() ) );
     activateItemAt( 0 );
 }
 
@@ -167,4 +164,4 @@ void OColorPopupMenu::moreColorClicked()
     m_color = color;
     emit colorSelected( color );
     hide();
-}
+ }
