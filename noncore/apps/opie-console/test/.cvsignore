@@ -1,1 +1,8 @@
+Makefile
+Makefile.in
+test
+sender.*
+.moc
+.obj
 config.in
+
