@@ -16,8 +16,8 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
-#include "common.h"   
+**********************************************************************/
+#include "common.h"
 #include "datacache.h"
 
 /* OPIE */
@@ -88,13 +88,13 @@ int QStringVector::compareItems(Item a, Item b)
 {
     QString *qa = (QString *)a;
     QString *qb = (QString *)b;
-         
+
     return QString::compare(*qa, *qb);
 }
 
 /*!
     \class TVVariant
-    A way of abstracting void * and keeping information on 
+    A way of abstracting void * and keeping information on
     the keytypes and behaviours in one place
 */
 
@@ -320,7 +320,7 @@ void TVVariant::load(QDataStream &s )
             }
       break;
         default:
-      ofatal << "Unrecognized data type" << oendl; 
+      ofatal << "Unrecognized data type" << oendl;
     }
 }
 
@@ -382,7 +382,7 @@ const QString TVVariant::toString() const
             return ((QDate*)d->value.ptr)->toString();
         case Time:
             return ((QTime*)d->value.ptr)->toString();
-        case Int: 
+        case Int:
                 return QString::number(d->value.i);
         case Invalid:
         default:
@@ -424,7 +424,7 @@ const QDate TVVariant::toDate() const
             return QDate();
         return QDate(year, month, day);
     }
-        
+
 
     return QDate();
 }
@@ -433,7 +433,7 @@ const QTime TVVariant::toTime() const
 {
     if(d->typ == Time)
         return *((QTime *)d->value.ptr);
-    
+
     if(d->typ == String) {
         QString q = toString();
         int hour = parseNextNumber(&q);
@@ -454,7 +454,7 @@ const QTime TVVariant::toTime() const
     else \
         detach(); \
     return *((Q##f*)d->value.ptr); }
- 
+
 TV_VARIANT_AS(String)
 TV_VARIANT_AS(Date)
 TV_VARIANT_AS(Time)
@@ -560,7 +560,7 @@ bool TVVariant::closer(TVVariant n, TVVariant o)
 {
     /* Nothing is close to an invalid, so nothing can be closer */
     if(d->typ == Invalid)
-        return FALSE; 
+        return FALSE;
 
     /* can't be closer if of different type */
     if(n.type() != type())
@@ -572,7 +572,7 @@ bool TVVariant::closer(TVVariant n, TVVariant o)
 
     switch(type()){
         case String: {
-            /* case for strings is close is a substring.. closer is 
+            /* case for strings is close is a substring.. closer is
              * earlier alphabetically */
             QString qs1 = n.toString().lower();
             QString qs2 = o.toString().lower();
@@ -582,7 +582,7 @@ bool TVVariant::closer(TVVariant n, TVVariant o)
                 return FALSE;
 
             /* contains sub-str, if later than is not closer */
-            if(QString::compare(qs1, qs2) > 0) 
+            if(QString::compare(qs1, qs2) > 0)
                 return FALSE;
             return TRUE;
         }
@@ -593,13 +593,13 @@ bool TVVariant::closer(TVVariant n, TVVariant o)
             int iv = toInt();
 
             int diff1 = (i1 - iv);
-            if (diff1 < 0) 
+            if (diff1 < 0)
                 diff1 = -diff1;
             int diff2 = (i2 - iv);
-            if (diff2 < 0) 
+            if (diff2 < 0)
                 diff2 = -diff2;
 
-            if (diff1 < diff2) 
+            if (diff1 < diff2)
                 return TRUE;
             return FALSE;
         }
@@ -610,10 +610,10 @@ bool TVVariant::closer(TVVariant n, TVVariant o)
 
             /* definition of closer is the least difference in days */
             int diff1 = i1.daysTo(iv);
-            if (diff1 < 0) 
+            if (diff1 < 0)
                 diff1 = -diff1;
             int diff2 = i2.daysTo(iv);
-            if (diff2 < 0) 
+            if (diff2 < 0)
                 diff2 = -diff2;
 
             if (diff1 < diff2)
@@ -627,10 +627,10 @@ bool TVVariant::closer(TVVariant n, TVVariant o)
 
             /* definition of closer is the least difference in days */
             int diff1 = i1.msecsTo(iv);
-            if (diff1 < 0) 
+            if (diff1 < 0)
                 diff1 = -diff1;
             int diff2 = i2.msecsTo(iv);
-            if (diff2 < 0) 
+            if (diff2 < 0)
                 diff2 = -diff2;
             if (diff1 < diff2)
                 return TRUE;
@@ -649,7 +649,7 @@ bool TVVariant::close(TVVariant n)
 {
     /* Nothing is close to an invalid, so nothing can be closer */
     if(type() == Invalid)
-        return FALSE; 
+        return FALSE;
 
     /* can't be close if of different type */
     if(n.type() != type())
@@ -657,7 +657,7 @@ bool TVVariant::close(TVVariant n)
 
     switch(type()){
         case String: {
-            /* case for strings is close is a substring.. closer is 
+            /* case for strings is close is a substring.. closer is
              * earlier alphabetically */
             QString qs1 = n.toString().lower();
             QString qsv = toString().lower();
@@ -666,7 +666,7 @@ bool TVVariant::close(TVVariant n)
                 return FALSE;
             return TRUE;
         }
-        case Int: 
+        case Int:
         case Date:
         case Time:
             return TRUE;
@@ -681,14 +681,14 @@ bool TVVariant::close(TVVariant n)
 /*!
     \class Key
     \brief document me!
-    
+
     document me!
 */
 
 Key::Key() : kname(), kexample(), kflags(0) { }
 
 Key::Key(QString name, TVVariant example, int flags) :
-    kname(name), kexample(example), kflags(flags) { } 
+    kname(name), kexample(example), kflags(flags) { }
 
 Key::Key(const Key &other)
 {
@@ -697,7 +697,7 @@ Key::Key(const Key &other)
   kflags = other.kflags;
 }
 
-Key& Key::operator=(const Key& key) 
+Key& Key::operator=(const Key& key)
 {
     kname = key.kname;
     kexample = key.kexample;
@@ -777,13 +777,13 @@ void Key::setNewFlag(bool v)
 /*!
     Constructs a KeyList
 */
-KeyList::KeyList() : QIntDict<Key>(20) 
+KeyList::KeyList() : QIntDict<Key>(20)
 {
     setAutoDelete(TRUE);
 }
 
 /* Should be deep copy, but isn't */
-KeyList::KeyList(const KeyList &k) : QIntDict<Key>(k) 
+KeyList::KeyList(const KeyList &k) : QIntDict<Key>(k)
 {
     KeyListIterator it(k);
   while(it.current()) {
@@ -822,7 +822,7 @@ bool KeyList::operator!=(const KeyList &other)
 /*!
     Returns the number of keys stored in the KeyList
 */
-int KeyList::getNumFields() const 
+int KeyList::getNumFields() const
 {
     return count();
 }
@@ -847,27 +847,26 @@ int KeyList::addKey(QString name, TVVariant::KeyType type)
     /* generate a valid type for the example? */
     TVVariant e = TVVariant("0");
     switch(type) {
-        case TVVariant::String: 
+        case TVVariant::String:
             return addKey(name, TVVariant("<undefined>").asString());
             break;
-        case TVVariant::Date: 
+        case TVVariant::Date:
             return addKey(name, TVVariant(QDate::currentDate()).asDate());
             break;
-        case TVVariant::Time: 
+        case TVVariant::Time:
             return addKey(name, TVVariant(QTime(0,0,0)).toTime());
             break;
-        case TVVariant::Int: 
+        case TVVariant::Int:
             return addKey(name, TVVariant(0).toInt());
             break;
         default:
-            qWarning(QObject::tr("KeyList::addKey() Cannot make default "
-                        "value for type %1, Key not added.").arg(type));
+            owarn << "KeyList::addKey() Cannot make default value for type " << type << ", Key not added." << oendl;
             break;
     }
     return -1;
 }
 
-void KeyList::setKeyFlags(int i, int flag) 
+void KeyList::setKeyFlags(int i, int flag)
 {
     if(find(i))
         find(i)->setFlags(flag);
@@ -880,28 +879,28 @@ int KeyList::getKeyFlags(int i) const
     return 0;
 }
 
-bool KeyList::checkNewFlag(int i) const 
+bool KeyList::checkNewFlag(int i) const
 {
     if (find(i))
         return find(i)->newFlag();
     return false;
 }
 
-void KeyList::setNewFlag(int i, bool f) 
+void KeyList::setNewFlag(int i, bool f)
 {
     if(!find(i))
         return;
     find(i)->setNewFlag(f);
 }
 
-bool KeyList::checkDeleteFlag(int i) const 
+bool KeyList::checkDeleteFlag(int i) const
 {
     if (find(i))
         return find(i)->delFlag();
     return false;
 }
 
-void KeyList::setDeleteFlag(int i, bool f) 
+void KeyList::setDeleteFlag(int i, bool f)
 {
     if(!find(i))
         return;
@@ -918,7 +917,7 @@ QString KeyList::getKeyName(int i) const
     return QString();
 }
 
-void KeyList::setKeyName(int i, const QString &n) 
+void KeyList::setKeyName(int i, const QString &n)
 {
     if(find(i))
         find(i)->setName(n);
@@ -934,7 +933,7 @@ TVVariant::KeyType KeyList::getKeyType(int i) const
     return TVVariant::Invalid;
 }
 
-void KeyList::setKeyType(int i, TVVariant::KeyType t) 
+void KeyList::setKeyType(int i, TVVariant::KeyType t)
 {
     if(!find(i))
         return;
@@ -1040,9 +1039,9 @@ QDataStream &operator>>( QDataStream &s, KeyList &k)
 
 
 /*!
-    Constructs a DataElem.  This function needs a container because the 
-    size, types of keys and primary key are all defined by the containing 
-    database 
+    Constructs a DataElem.  This function needs a container because the
+    size, types of keys and primary key are all defined by the containing
+    database
 */
 DataElem::DataElem(DBStore *c) : values(20)
 {
@@ -1086,7 +1085,7 @@ QDataStream &operator>>( QDataStream &s, DataElem &d)
 
     s >> size; /* redundent data but makes streaming easier */
     if (size != d.getNumFields()) {
-        owarn << "DataSize mis-match" << oendl; 
+        owarn << "DataSize mis-match" << oendl;
         return s; /* sanity check failed.. don't load */
     }
 
@@ -1109,37 +1108,37 @@ KeyList DataElem::getKeys() const
     return *(contained->getKeys());
 }
 
-/*! 
+/*!
     This function determines whether field index i of the element has been
     set yet.
 
-    \return A boolean value that is TRUE if the specfied field of this 
-    element has been set and FALSE if the field has not yet been set 
+    \return A boolean value that is TRUE if the specfied field of this
+    element has been set and FALSE if the field has not yet been set
 */
 bool DataElem::hasValidValue(int i) const
 {
     if(!values.find(i))
         return FALSE;
-    if(!contained->getKeys()->validIndex(i)) 
+    if(!contained->getKeys()->validIndex(i))
         return FALSE;
     return values.find(i)->isValid();
 }
 
-/*! 
+/*!
     This function determines whether field name qs of the element has been
     set yet.
 
-    \return A boolean value that is TRUE if the specfied field of this 
-    element has been set and FALSE if the field has not yet been set 
+    \return A boolean value that is TRUE if the specfied field of this
+    element has been set and FALSE if the field has not yet been set
 */
-bool DataElem::hasValidValue(QString qs) const 
+bool DataElem::hasValidValue(QString qs) const
 {
     int i = contained->getKeyIndex(qs);
     return hasValidValue(i);
 }
 
 /*!  returns the type of the field specified by index i */
-TVVariant::KeyType DataElem::getFieldType(int i) const 
+TVVariant::KeyType DataElem::getFieldType(int i) const
 {
     return contained->getKeyType(i);
 }
@@ -1151,9 +1150,9 @@ TVVariant::KeyType DataElem::getFieldType(QString qs) const
     return contained->getKeyType(i);
 }
 
-/*!  
-    returns a pointer to the data stored in field index i for this 
-    data element, (value may not be valid) 
+/*!
+    returns a pointer to the data stored in field index i for this
+    data element, (value may not be valid)
 */
 TVVariant DataElem::getField(int i) const
 {
@@ -1162,9 +1161,9 @@ TVVariant DataElem::getField(int i) const
     return TVVariant();
 }
 
-/*!  
-    returns a pointer to the data stored in field name qs for this 
-    data element, (value may not be valid) 
+/*!
+    returns a pointer to the data stored in field name qs for this
+    data element, (value may not be valid)
 */
 TVVariant DataElem::getField(QString qs) const
 {
@@ -1179,7 +1178,7 @@ TVVariant DataElem::getField(QString qs) const
     \param i index of the field to set
     \param q a string that can be parsed to get the value to be set
 */
-void DataElem::setField(int i, QString q) 
+void DataElem::setField(int i, QString q)
 {
     /* from the type of the field, parse q and store */
     TVVariant::KeyType kt = contained->getKeyType(i);
@@ -1208,9 +1207,7 @@ void DataElem::setField(int i, QString q)
             return;
         }
         default:
-            qWarning(
-                QObject::tr("DataElem::setField(%1, %2) No valid type found").arg(i).arg(q)
-                );
+            owarn << "DataElem::setField(" << i << ", " << q << ") No valid type found" << oendl;
     }
 }
 
@@ -1219,9 +1216,9 @@ void DataElem::setField(int i, QString q)
     value.
 
     \param i index of the field to set
-    \param value a pointer to the (already allocated) value to set 
+    \param value a pointer to the (already allocated) value to set
 */
-void DataElem::setField(int i, TVVariant value) 
+void DataElem::setField(int i, TVVariant value)
 {
     if (value.isValid()) {
         values.remove(i);
@@ -1236,7 +1233,7 @@ void DataElem::setField(int i, TVVariant value)
     \param qs name of the field to set
     \param q a string that can be parsed to get the value to be set
 */
-void DataElem::setField(QString qs, QString q) 
+void DataElem::setField(QString qs, QString q)
 {
     /* from the type of the field, parse q and store */
     int i = contained->getKeyIndex(qs);
@@ -1248,7 +1245,7 @@ void DataElem::setField(QString qs, QString q)
     value.
 
     \param qs name of the field to set
-    \param value a pointer to the (already allocated) value to set 
+    \param value a pointer to the (already allocated) value to set
 */
 void DataElem::setField(QString qs, TVVariant value)
 {
@@ -1267,7 +1264,7 @@ void DataElem::unsetField(QString qs)
 }
 
 /*!
-    Converts the data element to a Rich Text QString 
+    Converts the data element to a Rich Text QString
 */
 QString DataElem::toQString() const
 {
@@ -1290,7 +1287,7 @@ QString DataElem::toQString() const
 }
 
 /*! formats individual fields to strings so can be displayed */
-QString DataElem::toQString(int i) const 
+QString DataElem::toQString(int i) const
 {
     if(hasValidValue(i)) {
         return getField(i).toString();
@@ -1298,7 +1295,7 @@ QString DataElem::toQString(int i) const
     return "";
 }
 /*! formats individual fields to strings so can be sorted by QListView */
-QString DataElem::toSortableQString(int i) const 
+QString DataElem::toSortableQString(int i) const
 {
     QString scratch = "";
     if(hasValidValue(i)) {
@@ -1313,13 +1310,13 @@ QString DataElem::toSortableQString(int i) const
             }
             case TVVariant::Date: {
                 static QDate epochD(1800, 1, 1);
-                scratch.sprintf("%08d", 
+                scratch.sprintf("%08d",
                                 epochD.daysTo(getField(i).toDate()));
                 break;
             }
             case TVVariant::Time: {
                 static QTime epochT(0, 0, 0);
-                scratch.sprintf("%08d", 
+                scratch.sprintf("%08d",
                                 epochT.msecsTo(getField(i).toTime()));
                 break;
             }
@@ -1380,12 +1377,12 @@ bool DataElem::contains(int i, TVVariant v) const
             /* meaningless for ints */
             /* meaningless for time */
             /* meaningless for dates */
-        case TVVariant::Int: 
+        case TVVariant::Int:
         case TVVariant::Time:
         case TVVariant::Date:
             break;
         default:
-            owarn << "Tried to compare unknown data type" << oendl; 
+            owarn << "Tried to compare unknown data type" << oendl;
     }
     return FALSE;
 }
@@ -1406,12 +1403,12 @@ bool DataElem::startsWith(int i, TVVariant v) const
             /* meaningless for ints */
             /* meaningless for time */
             /* meaningless for dates */
-        case TVVariant::Int: 
+        case TVVariant::Int:
         case TVVariant::Time:
         case TVVariant::Date:
             return FALSE;
         default:
-            owarn << "Tried to compare unknown data type" << oendl; 
+            owarn << "Tried to compare unknown data type" << oendl;
     }
     return FALSE;
 }
@@ -1432,12 +1429,12 @@ bool DataElem::endsWith(int i, TVVariant v) const
             /* meaningless for ints */
             /* meaningless for time */
             /* meaningless for dates */
-        case TVVariant::Int: 
+        case TVVariant::Int:
         case TVVariant::Time:
         case TVVariant::Date:
             return FALSE;
         default:
-            owarn << "Tried to compare unknown data type" << oendl; 
+            owarn << "Tried to compare unknown data type" << oendl;
     }
     return FALSE;
 }
@@ -1446,9 +1443,9 @@ bool DataElem::endsWith(int i, TVVariant v) const
     Determins which of the first to parameters are closer to the third, target
     parameter.
 
-    \return 
+    \return
     <UL>
-    <LI>TRUE if the first element is a closer match to the target than the 
+    <LI>TRUE if the first element is a closer match to the target than the
     second element</LI>
     <LI>FALSE if the first element is not a closer match to the target than
     the second element</LI>
@@ -1456,7 +1453,7 @@ bool DataElem::endsWith(int i, TVVariant v) const
 */
 bool DataElem::closer(DataElem*d1, DataElem *d2, TVVariant target, int column)
 {
-    int type; 
+    int type;
 
     if(!d1) return FALSE;
 
@@ -1469,10 +1466,10 @@ bool DataElem::closer(DataElem*d1, DataElem *d2, TVVariant target, int column)
     if(d2) {
         if (type != d2->getField(column).type()) {
                 /* can't do compare */
-                owarn << "Tried to compare two incompatable types" << oendl; 
+                owarn << "Tried to compare two incompatable types" << oendl;
                 return FALSE;
         }
         return target.closer(d1->getField(column), d2->getField(column));
-    } 
+    }
     return target.close(d1->getField(column));
 }

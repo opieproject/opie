@@ -16,10 +16,15 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "filterkeyentry.h"
 #include "commonwidgets.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qwidgetstack.h>
 #include <qcombobox.h>
 #include <qlayout.h>
@@ -98,13 +103,13 @@ TVFilterKeyEntry::TVFilterKeyEntry(QWidget *parent, const char *name, WFlags f)
     ws->addWidget(dateEntry, TVVariant::Date);
 
     /* connect the signals down */
-    connect(textKey, SIGNAL(textChanged(const QString&)), 
+    connect(textKey, SIGNAL(textChanged(const QString&)),
             this, SIGNAL(valueChanged()));
-    connect(intKey, SIGNAL(valueChanged(int)), 
+    connect(intKey, SIGNAL(valueChanged(int)),
             this, SIGNAL(valueChanged()));
-    connect(dateKey, SIGNAL(valueChanged(const QDate&)), 
+    connect(dateKey, SIGNAL(valueChanged(const QDate&)),
             this, SIGNAL(valueChanged()));
-    connect(timeKey, SIGNAL(valueChanged(const QTime&)), 
+    connect(timeKey, SIGNAL(valueChanged(const QTime&)),
             this, SIGNAL(valueChanged()));
 
     connect(intCombo, SIGNAL(activated(int)), this, SIGNAL(valueChanged()));
@@ -119,13 +124,13 @@ TVFilterKeyEntry::TVFilterKeyEntry(QWidget *parent, const char *name, WFlags f)
 }
 
 /*!
-    Destructs the widget 
+    Destructs the widget
 */
 TVFilterKeyEntry::~TVFilterKeyEntry()
 {
 }
 
-void TVFilterKeyEntry::setKey(int i) 
+void TVFilterKeyEntry::setKey(int i)
 {
 
     if (!ts) return;
@@ -183,25 +188,24 @@ TVVariant TVFilterKeyEntry::getCompareValue()
     int tmp;
 
     switch(current_type) {
-        case TVVariant::String: 
-            sendkey = TVVariant(QString(textKey->text())); 
-            break; 
-        case TVVariant::Int: { 
+        case TVVariant::String:
+            sendkey = TVVariant(QString(textKey->text()));
+            break;
+        case TVVariant::Int: {
             sendkey = TVVariant(intKey->value());
-            break; 
-        } 
+            break;
+        }
         case TVVariant::Time: {
-            sendkey = TVVariant(QTime(timeKey->time())); 
-            break; 
+            sendkey = TVVariant(QTime(timeKey->time()));
+            break;
         }
         case TVVariant::Date: {
-            sendkey = TVVariant(QDate(dateKey->date())); 
-            break; 
+            sendkey = TVVariant(QDate(dateKey->date()));
+            break;
         }
         default: {
             sendkey = TVVariant(0);
-            qWarning("TVFilterKeyEntry::getCompareValue() "
-                     "cannot work out data type");
+            owarn << "TVFilterKeyEntry::getCompareValue() cannot work out data type" << oendl;
         }
     }
     return sendkey;

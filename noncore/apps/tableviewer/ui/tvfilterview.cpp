@@ -18,6 +18,13 @@
 **
 **********************************************************************/
 #include "tvfilterview.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qpe/qpeapplication.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qtoolbutton.h>
 #include <qcombobox.h>
 #include <qlistview.h>
@@ -26,13 +33,12 @@
 #include <qpushbutton.h>
 #include <qlabel.h>
 
-#include <qpe/qpeapplication.h>
 
 TVFilterView::TVFilterView(TableState *t, QWidget* parent,
                            const char *name, WFlags fl ) : QDialog(parent, name, TRUE, fl)
 {
-    if ( !name ) 
-	setName( "Filter View" );
+    if ( !name )
+    setName( "Filter View" );
 
     QVBoxLayout *vlayout = new QVBoxLayout(this);
 
@@ -88,8 +94,8 @@ TVFilterView::TVFilterView(TableState *t, QWidget* parent,
     connect(keyEntry, SIGNAL(valueChanged()), this, SLOT( updateTerm() ));
     connect(keyNameCombo, SIGNAL(activated(int)), this, SLOT( updateTerm() ));
 
-    connect(display, SIGNAL(selectionChanged(QListViewItem*)), this, 
-	    SLOT(setTerm(QListViewItem*)));
+    connect(display, SIGNAL(selectionChanged(QListViewItem*)), this,
+        SLOT(setTerm(QListViewItem*)));
 
     ts = t;
     current = 0;
@@ -102,7 +108,7 @@ TVFilterView::TVFilterView(TableState *t, QWidget* parent,
 }
 
 /*!
-    Destroys the TVFilterView widget 
+    Destroys the TVFilterView widget
 */
 TVFilterView::~TVFilterView()
 {
@@ -118,26 +124,26 @@ void TVFilterView::reset()
     keyIds.clear();
 }
 
-void TVFilterView::rebuildKeys() 
+void TVFilterView::rebuildKeys()
 {
     int i;
 
     if (!ts) return;
     if(!ts->kRep) return;
     keyEntry->setTableState(ts);
-    
+
     /* set up the list of keys that can be compared on */
     keyNameCombo->clear();
     KeyListIterator it(*ts->kRep);
 
     i = 0;
     while(it.current()) {
-	    if(ts->kRep->validIndex(it.currentKey())) {
-			keyNameCombo->insertItem(it.current()->name());
-			keyIds.insert(i, it.currentKey());
-			++i;
-		}
-		++it;
+        if(ts->kRep->validIndex(it.currentKey())) {
+            keyNameCombo->insertItem(it.current()->name());
+            keyIds.insert(i, it.currentKey());
+            ++i;
+        }
+        ++it;
     }
 }
 
@@ -146,7 +152,7 @@ bool TVFilterView::passesFilter(DataElem *d) {
 
 
     FilterTerm *t;
-    
+
     for (t = terms.first(); t != 0; t = terms.next() ) {
         /* check against filter */
         switch(t->ct) {
@@ -175,8 +181,7 @@ bool TVFilterView::passesFilter(DataElem *d) {
                     return false;
                 break;
             default:
-                qWarning("TVFilterView::passesFilter() "
-                         "unrecognized filter type");
+                owarn << "TVFilterView::passesFilter() unrecognized filter type" << oendl;
                 return false;
         }
     }
@@ -194,7 +199,7 @@ bool TVFilterView::filterActive() const
 }
 
 /* SLOTS */
-void TVFilterView::newTerm() 
+void TVFilterView::newTerm()
 {
     if (!ts) return;
 
@@ -212,7 +217,7 @@ void TVFilterView::newTerm()
     keyNameCombo->setEnabled(true);
 }
 
-void TVFilterView::updateTerm() 
+void TVFilterView::updateTerm()
 {
     FilterTerm *term;
     /* Read the widget values (keyname, compare type, value)
@@ -231,7 +236,7 @@ void TVFilterView::updateTerm()
     keyEntry->setKey(term->keyIndex); /* so the next two items make sense */
     term->ct = keyEntry->getCompareType(),
     term->value = keyEntry->getCompareValue();
-   
+
     keyString = keyNameCombo->currentText();
 
     switch(term->ct) {
@@ -260,14 +265,14 @@ void TVFilterView::updateTerm()
     vString = term->value.toString();
 
     /* remove old view */
-    if (term->view) 
+    if (term->view)
         delete(term->view);
     term->view = new QListViewItem(display, 0, keyString, cmpString, vString);
     display->setSelected(term->view, true);
 }
 
 /* deletes current term */
-void TVFilterView::deleteTerm() 
+void TVFilterView::deleteTerm()
 {
     if(!current) return;
     if (current->view)
@@ -284,7 +289,7 @@ void TVFilterView::deleteTerm()
 }
 
 /* clears all terminations */
-void TVFilterView::clearTerms() 
+void TVFilterView::clearTerms()
 {
     while(current)
         deleteTerm();
@@ -292,7 +297,7 @@ void TVFilterView::clearTerms()
 
 void TVFilterView::setTerm(QListViewItem *target)
 {
-    /* Iterate through the list to find item with view=target.. 
+    /* Iterate through the list to find item with view=target..
      * set as current, delete */
     FilterTerm *term = current;
 
@@ -301,6 +306,6 @@ void TVFilterView::setTerm(QListViewItem *target)
             break;
 
     if (!current) {
-        current = term; 
+        current = term;
     }
 }

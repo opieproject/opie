@@ -1,18 +1,26 @@
 /*
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: main.cpp,v 1.4 2004-03-01 20:04:34 chicken Exp $
+** $Id: main.cpp,v 1.5 2004-05-31 15:26:51 ar Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 */
 
 
 #include "zsafe.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #ifdef DESKTOP
 #include <qapplication.h>
 #else
 #include <qpe/qpeapplication.h>
 #endif
+
+/* STD */
 #include <stdio.h>
 #include <signal.h>
 
@@ -58,10 +66,10 @@ int main( int argc, char ** argv )
        DeskW = atoi(argv[1]);
        DeskH = atoi(argv[2]);
 #else
-	   int w, h;
-	   sscanf (argv[1], "%d", &w);
-	   sscanf (argv[2], "%d", &h);
-	   DeskW = w;
+       int w, h;
+       sscanf (argv[1], "%d", &w);
+       sscanf (argv[2], "%d", &h);
+       DeskW = w;
        DeskH = h;
 #endif
     }
@@ -74,19 +82,16 @@ int main( int argc, char ** argv )
     DeskW = a.desktop()->width();
     DeskH = a.desktop()->height();
 
-    char buf[128];
-    sprintf (buf, "Width: %d Height: %d\n", DeskW, DeskH);
-    qWarning (buf);
+    owarn << "Width: " << DeskW << " Height: " << DeskH << oendl;
 
 #ifdef JPATCH_HDE
     // nothings
 #else
-    if (DeskW > 240) 
+    if (DeskW > 240)
     {
        DeskW -= 20;
        DeskH += 25;
-       sprintf (buf, "Changed width: %d Height: %d\n", DeskW, DeskH);
-       qWarning (buf);
+       owarn << "Changed width: " << DeskW << " Height: " << DeskH << oendl;
     }
 #endif
 

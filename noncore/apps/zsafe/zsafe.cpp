@@ -4,7 +4,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.15 2004-05-26 16:17:16 mickeyl Exp $
+** $Id: zsafe.cpp,v 1.16 2004-05-31 15:26:51 ar Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -881,7 +881,7 @@ void ZSafe::findPwd()
        name = dialog->NameField->text();
        username = dialog->UsernameField->text();
        comment = dialog->CommentField->text();
-       qWarning (name);
+       owarn << name << oendl;
     }
     else
     {
@@ -927,7 +927,7 @@ void ZSafe::findPwd()
          i != NULL;
          i = i->nextSibling())
     {
-       qWarning (i->text(0));
+       owarn << i->text(0) << oendl;
        i->setSelected(FALSE);
 
        // step through all subitems
@@ -941,7 +941,7 @@ void ZSafe::findPwd()
             si != NULL;
             si = si->nextSibling())
        {
-          qWarning (si->text(0));
+          owarn << si->text(0) << oendl;
           if (si->isSelected())
              si->setSelected(FALSE);
           // ListView->repaintItem(si);
@@ -958,7 +958,7 @@ void ZSafe::findPwd()
 
           if ((n && u && c ) && !found)
           {
-             qWarning ("Found");
+             owarn << "Found" << oendl;
              selectedItem = si;
              si->setSelected(TRUE);
              ListView->setCurrentItem(si);
@@ -1228,8 +1228,7 @@ void ZSafe::removeAsciiFile()
     QFile f( fn );
     if ( !f.remove() )
     {
-        qWarning( QString("Could not remove file %1").arg(fn),
-                      2000 );
+        owarn << "Could not remove file " << fn << oendl;
         QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not remove text file.") );
         return;
@@ -1278,8 +1277,7 @@ void ZSafe::writeAllEntries()
    {
     QFile f( fn );
     if ( !f.open( IO_WriteOnly ) ) {
-        qWarning( QString("Could not write to file %1").arg(fn),
-                      2000 );
+        owarn << "Could not write to file " << fn << oendl;
         QMessageBox::critical( 0, "ZSafe",
                   QString("Could not export to text file.") );
         return;
@@ -1322,10 +1320,10 @@ void ZSafe::writeAllEntries()
           oneEntry += "\"";
           oneEntry += si->text(5);
           oneEntry += "\"";
-          // qWarning (oneEntry);
+          // owarn << oneEntry << oendl;
           t << oneEntry << endl;
 
-          // qWarning (si->text(0));
+          // owarn << si->text(0) << oendl;
        }
     }
     f.close();
@@ -1373,8 +1371,7 @@ void ZSafe::readAllEntries()
    QFile f( fn );
    if ( !f.open( IO_ReadOnly ) )
    {
-      qWarning( QString("Could not read file %1").arg(fn),
-                      2000 );
+      owarn << "Could not read file " << fn << oendl;
       QMessageBox::critical( 0, "ZSafe",
                   QString("Could not import text file.") );
       return;
@@ -1403,7 +1400,7 @@ void ZSafe::readAllEntries()
       }
    }
 
-   qWarning ("ReadAllEntries(): ");
+   owarn << "ReadAllEntries(): " << oendl;
 
    QTextStream t(&f);
    while ( !t.eof() )
@@ -1554,8 +1551,7 @@ void ZSafe::writeAllEntries()
     QString fn = filename + ".txt";
     QFile f( fn );
     if ( !f.open( IO_WriteOnly ) ) {
-        qWarning( QString("Could not write to file %1").arg(fn),
-                      2000 );
+        owarn << "Could not write to file " << fn << oendl;
         QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not export to text file.") );
         return;
@@ -1593,10 +1589,10 @@ void ZSafe::writeAllEntries()
           comment.replace (QRegExp("\n"), "<br>");
           oneEntry += comment;
           oneEntry += "\"";
-          // qWarning (oneEntry);
+          // owarn << oneEntry << oendl;
           t << oneEntry << endl;
 
-          // qWarning (si->text(0));
+          // owarn << si->text(0) << oendl;
        }
     }
     f.close();
@@ -1608,8 +1604,7 @@ void ZSafe::readAllEntries()
    QFile f( fn );
    if ( !f.open( IO_ReadOnly ) )
    {
-      qWarning( QString("Could not read file %1").arg(fn),
-                      2000 );
+      owarn << "Could not read file " << fn << oendl;
       QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not import text file.") );
       return;
@@ -1638,7 +1633,7 @@ void ZSafe::readAllEntries()
       }
    }
 
-   qWarning ("ReadAllEntries(): ");
+   owarn << "ReadAllEntries(): " << oendl;
 
    QTextStream t(&f);
    while ( !t.eof() )
@@ -1762,7 +1757,7 @@ void ZSafe::readAllEntries()
 
 void ZSafe::resume(int)
 {
-   qWarning ("Resume");
+   owarn << "Resume" << oendl;
    // hide the main window
 
    infoForm->hide();
@@ -1818,7 +1813,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
           getDocPassword(tr("Enter Password"));
        if (m_password.isEmpty() && validationFlag == 0)
            {
-              qWarning ("Wrong password");
+              owarn << "Wrong password" << oendl;
               QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Wrong password.\n\nZSafe will now exit.") );
               exitZs (1);
@@ -1827,7 +1822,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
        retval = loadInit(_filename, m_password);
        if (retval != PWERR_GOOD)
            {
-                qWarning ("Error loading Document");
+                owarn << "Error loading Document" << oendl;
         return false;
        }
         }
@@ -2301,7 +2296,7 @@ void ZSafe::setPasswordDialogDone()
 
 void ZSafe::getDocPassword(QString title)
 {
-qWarning ("getDocPassword");
+    owarn << "getDocPassword" << oendl;
     // open the 'Password' dialog
     PasswordForm *dialog = new PasswordForm(this, title, TRUE);
     newPwdDialog = dialog;
@@ -2480,7 +2475,7 @@ int ZSafe::saveFinalize(void)
 
 void ZSafe::quitMe ()
 {
-    qWarning ("QUIT...");
+    owarn << "QUIT..." << oendl;
 
     if (modified)
     {
@@ -2684,7 +2679,7 @@ void ZSafe::addCategory()
            category = dialog->CategoryField->currentText();
            icon = dialog->IconField->currentText()+".png";
 
-           qWarning (category);
+           owarn << category << oendl;
 
            QListViewItem *li = new ShadedListItem( 1, ListView );
            Category *c1 = new Category();
@@ -3192,7 +3187,7 @@ void ZSafe::editCategory()
               QListViewItem *catItem = cat->getListItem();
               if (catItem)
               {
-                 qWarning (category);
+                 owarn << category << oendl;
                  catItem->setText( 0, tr( category ) );
                  cat->setCategoryName (tr(category));
 
@@ -3593,7 +3588,7 @@ void ZSafe::paintEvent( QPaintEvent * )
 
 void ZSafe::resizeEvent ( QResizeEvent * )
 {
-   // qWarning ("resizeEvent");
+   // owarn << "resizeEvent" << oendl;
 #ifndef DESKTOP
    DeskW = appl->desktop()->width();
    DeskH = appl->desktop()->height();

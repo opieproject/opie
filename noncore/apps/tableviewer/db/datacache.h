@@ -27,9 +27,15 @@
 #ifndef __DATACACHE_H__
 #define __DATACACHE_H__
 
+#include "common.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+
+/* QT */
 #include <qstring.h>
 #include <qvector.h>
-#include "common.h"
 
 class DBStore;
 
@@ -45,12 +51,12 @@ public:
     }
 
     virtual bool openSource(QIODevice *) {
-        qWarning("DBAccess::openSource not yet implemented");
+        owarn << "DBAccess::openSource not yet implemented" << oendl;
         return false;
     }
 
     virtual bool saveSource(QIODevice *) {
-        qWarning("DBAccess::saveSource(QString) not yet implemented");
+        owarn << "DBAccess::saveSource(QString) not yet implemented" << oendl;
         return false;
     }
 
@@ -70,7 +76,7 @@ public:
     // Add an item
     void addItem(DataElem *);
     void addItemInternal(DataElem *);
-	void removeItem(DataElem *);
+    void removeItem(DataElem *);
 
     // Set the name of the database
     void setName(const QString &name);
@@ -106,15 +112,15 @@ public:
     void first();
     void last();
 
-	bool next();
-	bool previous();
+    bool next();
+    bool previous();
 
-	DataElem* getCurrentData();
+    DataElem* getCurrentData();
 
 private:
     /* does the work of freeing used memory */
     void freeTable();
-	QString name;
+    QString name;
 
     QVector<DataElem> master_table;
     DBAccess *archive;
@@ -123,7 +129,7 @@ private:
 
     unsigned int number_elems;
     unsigned int table_size; /* should always be a power of 2 */
-    bool full; /* since because we are using an int for indexing there is 
+    bool full; /* since because we are using an int for indexing there is
                   an upper limit on the number of items we can store. */
     unsigned int current_elem;
 };

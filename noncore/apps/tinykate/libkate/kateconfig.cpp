@@ -24,6 +24,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 #include <qpe/global.h>
+using namespace Opie::Core;
 
 /* QT */
 #include <qdir.h>
@@ -556,8 +557,7 @@ void KateConfig::write( const QString &fn )
     f.close();
     // now rename the file...
     if ( rename( strNewFile, filename ) < 0 ) {
-    qWarning( "problem renaming the file %s to %s", strNewFile.latin1(),
-          filename.latin1() );
+    owarn << "problem renaming the file " << strNewFile.latin1() << " to " << filename.latin1() << oendl;
     QFile::remove( strNewFile );
     }
 }

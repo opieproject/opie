@@ -1,5 +1,12 @@
 
+#include "mediumglobal.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
+#include <qpe/config.h>
+
+/* QT */
 #include <qlineedit.h>
 #include <qcheckbox.h>
 #include <qlabel.h>
@@ -9,9 +16,7 @@
 #include <qgroupbox.h>
 #include <qwhatsthis.h>
 
-#include <qpe/config.h>
 
-#include "mediumglobal.h"
 
 using namespace MediumMountSetting;
 
@@ -152,7 +157,7 @@ void MediumGlobalWidget::slotGlobalChanged()
     mode = GLOBAL_ENABLED;
   }else
     mode = GLOBAL_DISABLED;
-  qWarning("enabled = %d", enabled );
+  owarn << "enabled = " << enabled << oendl;
   m_all->setEnabled  ( enabled );
   m_audio->setEnabled( enabled );
   m_image->setEnabled( enabled );

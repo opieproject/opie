@@ -110,9 +110,9 @@ namespace {
     }
 
     inline QPixmap* IconViewItem::pixmap()const {
-//      qWarning(  "Name is " + m_path.right( 15 ) + " rect is %d %d %d %d | %d %d",
-//                 rect().x(),rect().y(),rect().width(),rect().height(),
-//                 iconView()->contentsX(), iconView()->contentsY());
+//      owarn << "Name is " << m_path.right( 15 ) << " rect is " << rect().x() << " " << rect().y()
+//            << " " << rect().width() << " " << rect().height() << " | " << iconView()->contentsX()
+//            << " " << iconView()->contentsY() << oendl;
 
         if (textOnly()&&!m_isDir) {
             if (!_emptyPix) _emptyPix = new QPixmap(0,0,1);

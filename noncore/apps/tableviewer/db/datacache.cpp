@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 /*
  * This file is used to load the xml files that represent the database.
  * The main requirment for said file is each data entry must contain a key,
@@ -63,10 +63,10 @@ DBStore::DBStore()
     archive = 0;
 }
 
-//TODO 
+//TODO
 /*!
-    Reinitializes the table to empty (include a resize of the master table, 
-    which should free some memory) 
+    Reinitializes the table to empty (include a resize of the master table,
+    which should free some memory)
 */
 void DBStore::freeTable()
 {
@@ -93,7 +93,7 @@ DBStore::~DBStore()
 }
 
 /*!
-    This function opens the given xml file, loads it and sets up the 
+    This function opens the given xml file, loads it and sets up the
     appropriate data structures.
 
     \param file_name A string representing the name of the file to be opened
@@ -101,7 +101,7 @@ DBStore::~DBStore()
 */
 bool DBStore::openSource(QIODevice *inDev, const QString &source) {
 
-	/* first check if db is already open, if contains data.. then clear */
+    /* first check if db is already open, if contains data.. then clear */
     if(number_elems > 0) {
         freeTable();
     }
@@ -109,23 +109,23 @@ bool DBStore::openSource(QIODevice *inDev, const QString &source) {
     if (source == "text/x-xml-tableviewer") {
         archive = new DBXml(this);
     } else if (source == "text/csv") {
-	archive = new DBCsv(this);
+    archive = new DBCsv(this);
     } else
-    	return false;
+        return false;
 
     return (archive->openSource(inDev));
 }
 
-bool DBStore::saveSource(QIODevice *outDev, const QString &source) 
+bool DBStore::saveSource(QIODevice *outDev, const QString &source)
 {
     /* saving a new file */
     if(!archive) {
         if (source == "text/x-xml-tableviewer") {
             archive = new DBXml(this);
-	} else if (source == "text/x-xml-tableviewer") {
+    } else if (source == "text/x-xml-tableviewer") {
             archive = new DBCsv(this);
         } else
-	    return false;
+        return false;
     }
 
     /* changing file type */
@@ -133,16 +133,16 @@ bool DBStore::saveSource(QIODevice *outDev, const QString &source)
         delete archive;
         if (source == "text/x-xml-tableviewer") {
             archive = new DBXml(this);
-	} else if (source == "text/x-xml-tableviewer") {
+    } else if (source == "text/x-xml-tableviewer") {
             archive = new DBCsv(this);
-        } else 
-	    return false;
+        } else
+        return false;
     }
 
     return (archive->saveSource(outDev));
 }
 
-/*! 
+/*!
     This function is used to add new elements to the database.  If the database
     has already reached the maximum allowable size this function does not alter
     the database.
@@ -156,9 +156,9 @@ void DBStore::addItem(DataElem *delem)
 
 void DBStore::addItemInternal(DataElem *delem)
 {
-    /* if already full, don't over fill, do a qWarning though */
+    /* if already full, don't over fill, do a owarn though */
     if (full) {
-        owarn << "Attempted to add items to already full table" << oendl; 
+        owarn << "Attempted to add items to already full table" << oendl;
         return;
     }
 
@@ -185,13 +185,13 @@ void DBStore::addItemInternal(DataElem *delem)
 void DBStore::removeItem(DataElem *r)
 {
     int position = master_table.findRef(r);
-	if(position != -1) {
-		/* there is at least one item, this is it */
-		/* replace this with the last element, decrease the element count */
-		master_table.insert(position, master_table.at(--number_elems));
-		master_table.remove(number_elems);
-		delete r;
-	}
+    if(position != -1) {
+        /* there is at least one item, this is it */
+        /* replace this with the last element, decrease the element count */
+        master_table.insert(position, master_table.at(--number_elems));
+        master_table.remove(number_elems);
+        delete r;
+    }
 }
 
 /*!
@@ -201,7 +201,7 @@ void DBStore::removeItem(DataElem *r)
 */
 void DBStore::setName(const QString &n)
 {
-	name = n;
+    name = n;
 }
 
 /*!
@@ -211,11 +211,11 @@ void DBStore::setName(const QString &n)
 */
 QString DBStore::getName()
 {
-	return name;
+    return name;
 }
 
 /*!
-    Retrieves a pointer to the key representation of the database for 
+    Retrieves a pointer to the key representation of the database for
     other classes to use as reference.
 
     \return a pointer to the databases key representaion
@@ -235,7 +235,7 @@ void DBStore::setKeys(KeyList *k)
 }
 
 /*!
-    Sets the current element to the first element of the database 
+    Sets the current element to the first element of the database
 */
 void DBStore::first()
 {
@@ -243,7 +243,7 @@ void DBStore::first()
 }
 
 /*!
-    Sets the current element to the last element of the database 
+    Sets the current element to the last element of the database
 */
 void DBStore::last()
 {
@@ -257,7 +257,7 @@ void DBStore::last()
 bool DBStore::next()
 {
     unsigned int new_current_elem = current_elem + 1;
-    if (current_elem < number_elems) 
+    if (current_elem < number_elems)
         /* was valid before inc (it is possible but unlikely that inc current
            elem will change it from invalid to valid) */
         if (new_current_elem < number_elems) {
@@ -278,7 +278,7 @@ bool DBStore::previous()
     if (current_elem < number_elems)
         /* was valid */
         if (new_current_elem < number_elems) {
-            /* still is (if was 0, then now -1, but as is unsigned will wrap 
+            /* still is (if was 0, then now -1, but as is unsigned will wrap
                and hence be invalid */
             current_elem = new_current_elem;
             return true;
@@ -288,14 +288,14 @@ bool DBStore::previous()
 
 /*!
     Returns the current data element in the database.  Which element is current
-    is affected by newly added items, findItem, next, previous, first and 
+    is affected by newly added items, findItem, next, previous, first and
     last functions
 
     \return a pointer to the current data element
 */
-DataElem *DBStore::getCurrentData() 
+DataElem *DBStore::getCurrentData()
 {
-    if (current_elem >= number_elems) 
+    if (current_elem >= number_elems)
         return NULL;
     return master_table[current_elem];
 }

@@ -1,7 +1,10 @@
 #include "viewmodebutton.h"
 
+/* OPIE */
 #include <opie2/odebug.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qtoolbar.h>
 #include <qpopupmenu.h>
 
@@ -40,6 +43,6 @@ void ViewModeButton::slotChange( int i ) {
         break;
     }
 
-    qWarning("foo %d" +name, i );
+    owarn << "foo " << name << oendl;
     setIconSet( Resource::loadIconSet( name ) );
 }

@@ -16,9 +16,12 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-**********************************************************************/ 
+**********************************************************************/
 #include "browsekeyentry.h"
 #include "commonwidgets.h"
+
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
 #include <qtoolbutton.h>
 #include <qwidgetstack.h>
@@ -28,9 +31,6 @@
 #include <qpopupmenu.h>
 #include <qhbox.h>
 #include <qdatetime.h>
-
-#include <qheader.h>
-// For qWarning(const char *)
 
 /*!
     \class TVBrowseKeyEntry
@@ -42,7 +42,7 @@
 */
 
 /*!
-    Constructs the widget 
+    Constructs the widget
 */
 TVBrowseKeyEntry::TVBrowseKeyEntry(QWidget *parent, const char *name, WFlags f)
     : QWidget(parent, name, f)
@@ -73,36 +73,36 @@ TVBrowseKeyEntry::TVBrowseKeyEntry(QWidget *parent, const char *name, WFlags f)
     ws->addWidget(dateKey, TVVariant::Date);
 
     ws->raiseWidget(TVVariant::String);
-   
+
     // TODO connect slots and signals....
-    connect(changeKeyButton, SIGNAL(clicked()), 
+    connect(changeKeyButton, SIGNAL(clicked()),
             this, SLOT(changeKeyMenuSlot()));
 
-    connect(resetButton, SIGNAL(clicked()), 
+    connect(resetButton, SIGNAL(clicked()),
             textKey, SLOT(clear()));
-    connect(resetButton, SIGNAL(clicked()), 
+    connect(resetButton, SIGNAL(clicked()),
             intKey, SLOT(clear()));
-    connect(resetButton, SIGNAL(clicked()), 
+    connect(resetButton, SIGNAL(clicked()),
             dateKey, SLOT(clear()));
-    connect(resetButton, SIGNAL(clicked()), 
+    connect(resetButton, SIGNAL(clicked()),
             timeKey, SLOT(clear()));
 
     h_layout->addWidget(ws);
     h_layout->addWidget(resetButton);
     h_layout->addWidget(changeKeyButton);
 
-    connect(textKey, SIGNAL(textChanged(const QString&)), 
+    connect(textKey, SIGNAL(textChanged(const QString&)),
             this, SLOT(searchOnText()));
-    connect(intKey, SIGNAL(valueChanged(int)), 
+    connect(intKey, SIGNAL(valueChanged(int)),
             this, SLOT(searchOnText()));
-    connect(dateKey, SIGNAL(valueChanged(const QDate&)), 
+    connect(dateKey, SIGNAL(valueChanged(const QDate&)),
             this, SLOT(searchOnText()));
-    connect(timeKey, SIGNAL(valueChanged(const QTime&)), 
+    connect(timeKey, SIGNAL(valueChanged(const QTime&)),
             this, SLOT(searchOnText()));
 }
 
 /*!
-    Destructs the widget 
+    Destructs the widget
 */
 TVBrowseKeyEntry::~TVBrowseKeyEntry()
 {
@@ -126,7 +126,7 @@ void TVBrowseKeyEntry::changeKeySlot(int id_param)
 */
 void TVBrowseKeyEntry::changeKeyMenuSlot()
 {
-    if(ts) 
+    if(ts)
         keyMenu->exec(changeKeyButton->mapToGlobal(QPoint(0,0)));
 }
 
@@ -146,7 +146,7 @@ void TVBrowseKeyEntry::rebuildKeys() {
     KeyListIterator it(*ts->kRep);
 
     for (i = 0; i < ts->kRep->getNumFields(); i++) {
-        keyMenu->insertItem(it.current()->name(), this, 
+        keyMenu->insertItem(it.current()->name(), this,
                 SLOT(changeKeySlot(int)), 0, i);
         keyMenu->setItemParameter(i, it.currentKey());
         ++it;
@@ -163,8 +163,8 @@ void TVBrowseKeyEntry::reset()
     keyMenu->clear();
 }
 /*!
-    Searches on the current value of the key entry provided that the 
-    current key is of type text WARNING, TODO fix memory leaks 
+    Searches on the current value of the key entry provided that the
+    current key is of type text WARNING, TODO fix memory leaks
 */
 void TVBrowseKeyEntry::searchOnText()
 {
@@ -189,11 +189,10 @@ void TVBrowseKeyEntry::searchOnText()
             sendkey = TVVariant(QDate(dateKey->date()));
             break;
         }
-	case TVVariant::Invalid:
-	    break;
+    case TVVariant::Invalid:
+        break;
         default:
-            qWarning("TVBrowseKeyEntry::searchOnText() "
-                     "cannot work out data type");
+            owarn << "TVBrowseKeyEntry::searchOnText() cannot work out data type" << oendl;
             return;
     }
     emit searchOnKey(ts->current_column, sendkey);
@@ -203,4 +202,4 @@ void TVBrowseKeyEntry::searchOnText()
 
     This signal indicates that a search on key index currentKeyId should be
     done searching for the value v.
-*/ 
+*/
