@@ -7,6 +7,8 @@
 #include "otaskeditor.h"
 
 using namespace Opie::Ui;
+using namespace Opie;
+
 OTaskEditor::OTaskEditor(int cur)
     : QDialog( 0, 0, TRUE, WStyle_ContextHelp ) {
     init();

@@ -4,6 +4,7 @@
 #include "otaskeditor.h"
 #include "todoeditor.h"
 
+using namespace Opie;
 using namespace Todo;
 
 Editor::Editor() {

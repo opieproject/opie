@@ -11,10 +11,10 @@ namespace Todo {
         Editor();
         ~Editor();
 
-        OPimTodo newTodo( int currentCatId,
+        Opie::OPimTodo newTodo( int currentCatId,
                            QWidget* par );
-        OPimTodo edit( QWidget* par,
-                        const OPimTodo& ev = OPimTodo() );
+        Opie::OPimTodo edit( QWidget* par,
+                             const Opie::OPimTodo& ev = Opie::OPimTodo() );
 
 
         bool accepted()const;

@@ -6,6 +6,7 @@
 #include <opie2/opimtodo.h>
 #include <opie2/otabwidget.h>
 #include <opie2/opimrecurrencewidget.h>
+#include <opie2/opimrecurrencewidget.h>
 
 class TaskEditorOverView;
 class TaskEditorStatus;
@@ -16,7 +17,7 @@ class OTaskEditor : public QDialog {
     Q_OBJECT
 public:
     OTaskEditor(int cur);
-    OTaskEditor( const OPimTodo& todo );
+    OTaskEditor( const Opie::OPimTodo& todo );
     ~OTaskEditor();
 
     /*
@@ -24,11 +25,11 @@ public:
      * power to 'preload' the dialog
      */
     void init( int cur );
-    void init( const OPimTodo& todo );
+    void init( const Opie::OPimTodo& todo );
 
-    OPimTodo todo()const;
+    Opie::OPimTodo todo()const;
 private:
-    void load( const OPimTodo& );
+    void load( const Opie::OPimTodo& );
     void init();
 
     Opie::Ui::OTabWidget         *m_tab;
@@ -37,7 +38,7 @@ private:
     TaskEditorAlarms   *m_alarm;
     TaskEditorAlarms   *m_remind;
     OPimRecurrenceWidget  *m_rec;
-    OPimTodo		m_todo;
+    Opie::OPimTodo		m_todo;
 };
 
 #endif
