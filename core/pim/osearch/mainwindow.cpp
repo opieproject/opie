@@ -230,7 +230,7 @@ void MainWindow::setCurrent(QListViewItem *item)
 		for (uint i = 0; i < acts.count(); i++){
 			button = buttonMap[i];
 			if (!button) {
-				Opie::Core::owarn << " no button for " << *acts[i] << oendl;
+				owarn << " no button for " << *acts[i] << oendl;
 			    button = new QPushButton( buttonBox );
 			    buttonMap.insert( i,  button );
                             signalMapper->setMapping(button, i );

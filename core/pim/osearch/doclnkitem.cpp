@@ -63,8 +63,8 @@ QString DocLnkItem::toRichText()
 
 void DocLnkItem::action( int act )
 {
-	Opie::Core::odebug << "action" << act << oendl;
-	if (!_doc->isValid()) Opie::Core::odebug << "INVALID" << oendl;
+	odebug << "action" << act << oendl;
+	if (!_doc->isValid()) odebug << "INVALID" << oendl;
 	if (act == 0) _doc->execute();
 	else if (act == 1){
  		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");

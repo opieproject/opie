@@ -44,7 +44,7 @@ QString AppLnkItem::toRichText()
 
 void AppLnkItem::action( int act )
 {
-	if (!_app->isValid()) Opie::Core::odebug << "INVALID" << oendl;
+	if (!_app->isValid()) odebug << "INVALID" << oendl;
 	if (act == 0) _app->execute();
 	else if (act == 1){
  		QCopEnvelope e("QPE/Application/advancedfm", "setDocument(QString)");

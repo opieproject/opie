@@ -40,7 +40,7 @@ DatebookSearch::DatebookSearch(QListView* parent, QString name)
 
 DatebookSearch::~DatebookSearch()
 {
-	Opie::Core::odebug << "SAVE DATEBOOK SEARCH CONFIG" << oendl;
+	odebug << "SAVE DATEBOOK SEARCH CONFIG" << oendl;
 	Config cfg( "osearch", Config::User );
    	cfg.setGroup( "datebook_settings" );
    	cfg.writeEntry( "show_past_events", actionShowPastEvents->isOn() );
