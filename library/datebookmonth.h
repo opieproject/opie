@@ -150,12 +150,14 @@ class DateBookMonth : public QVBox
     Q_OBJECT
 
 public:
+    /* ac = Auto Close */
     DateBookMonth( QWidget *parent = 0, const char *name = 0, bool ac = FALSE,
                    DateBookDB *data = 0 );
     ~DateBookMonth();
     QDate  selectedDate() const;
 
 signals:
+    /* ### FIXME add a signal with QDate -zecke */
     void dateClicked( int year, int month, int day );
 
 public slots:
