@@ -33,7 +33,7 @@
 
 class QObject;
 
-struct QTOPIA_EXPORT ObexInterface : public QUnknownInterface
+struct Q_EXPORT ObexInterface : public QUnknownInterface
 {
 };
 
