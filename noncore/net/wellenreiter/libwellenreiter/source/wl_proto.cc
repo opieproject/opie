@@ -1,7 +1,7 @@
 /*
  * Communication protocol
  *
- * $Id: wl_proto.cc,v 1.3 2002-12-28 15:28:49 mjm Exp $
+ * $Id: wl_proto.cc,v 1.4 2002-12-28 15:40:30 mjm Exp $
  */
 
 #include "wl_proto.hh"
@@ -44,7 +44,7 @@ int send_network_found (const char *guihost, int guiport, void *structure)
 {
   wl_network_t *ptr;
   char buffer[2048], temp[5];
-  int len = 0;
+  unsigned int len = 0;
 
   ptr = (wl_network_t *)structure;
 
@@ -91,7 +91,7 @@ int get_network_found (void *structure, const char *buffer)
 {
   wl_network_t *ptr;
   char temp[5];
-  int len = 0;
+  unsigned int len = 0;
 
   ptr = (wl_network_t *)structure;
   
