@@ -227,10 +227,11 @@ void AdvancedFm::init() {
   currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
   currentRemoteDir.setPath( QDir::currentDirPath());
 
-  b = TRUE;
+  //  b = TRUE;
 
   filterStr="*";
   b=FALSE;
+  showMenuHidden();
   TabWidget->setCurrentTab(0);
 
 }

@@ -34,7 +34,6 @@
 #include <qpopupmenu.h>
 #include <qtabwidget.h>
 #include <qtoolbutton.h>
-#include <qtabwidget.h>
 #include <qlineedit.h>
 #include <qlistview.h>
 
@@ -71,7 +70,7 @@ void AdvancedFm::showMenuHidden()
     }
   rePopulate();
 //    if(b) qDebug("<<<<<<<<<<<<<<<<<<<<<<<<<<<< true");
-    if(b) b = false; else b = true;
+     b = !b;
 }
 
 void AdvancedFm::showHidden()
@@ -520,9 +519,9 @@ void AdvancedFm::move()
         }
 
     }
-    setOtherTabCurrent();
-      populateView();
-//      populateLocalView();
+  populateView();
+  setOtherTabCurrent();
+  populateView();
 }
 
 bool AdvancedFm::copyFile( const QString & src, const QString & dest )
