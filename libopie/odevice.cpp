@@ -299,7 +299,7 @@ ODevice *ODevice::inst ( )
 			dev = new iPAQ ( );
 		else if ( QFile::exists ( "/dev/sharp_buz" ) || QFile::exists ( "/dev/sharp_led" ))
 			dev = new Zaurus ( );
-		else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/CS3" ))
+		else if ( QFile::exists ( "/proc/ucb1x00" ) && QFile::exists ( "/proc/cs3" ))
 			dev = new SIMpad ( );
 		else
 			dev = new ODevice ( );
@@ -1575,7 +1575,7 @@ void SIMpad::initButtons ( )
 }
 
 // SIMpad boardcontrol register CS3
-#define SIMPAD_BOARDCONTROL "/proc/CS3"
+#define SIMPAD_BOARDCONTROL "/proc/cs3"
 #define SIMPAD_VCC_5V_EN                   0x0001 // For 5V PCMCIA
 #define SIMPAD_VCC_3V_EN                   0x0002 // FOR 3.3V PCMCIA
 #define SIMPAD_EN1                         0x0004 // This is only for EPROM's
@@ -1650,9 +1650,9 @@ bool SIMpad::setLedState ( OLed l, OLedState st )
 
 			{
             /*TODO Implement this like that:
-               read from CS3
+               read from cs3
                && with SIMPAD_LED2_ON
-               write to CS3 */
+               write to cs3 */
 				m_leds [0] = st;
 				return true;
 			}
