@@ -870,19 +870,26 @@ void Konsole::scrollMenuSelected(int index)
     TEWidget* te = getTe();
     Config cfg("Konsole");
     cfg.setGroup("ScrollBar");
-    switch( index){
-    case -25:
-        te->setScrollbarLocation(0);
-        cfg.writeEntry("Position",0);
-        break;
-    case -26:
-        te->setScrollbarLocation(1);
-        cfg.writeEntry("Position",1);
-        break;
-    case -27:
-        te->setScrollbarLocation(2);
-        cfg.writeEntry("Position",2);
-        break;
+    int i,j,k;
+#ifdef QT_QWS_OPIE
+i=-25;j=-26;k=-27;
+#else
+i=-24;j=-25;k=-26;
+#endif
+ if(index == i) {
+
+     te->setScrollbarLocation(0);
+     cfg.writeEntry("Position",0);
+ }  else if(index == j) {
+        
+     te->setScrollbarLocation(1);
+     cfg.writeEntry("Position",1);
+ }  else if(index == k) {
+
+     te->setScrollbarLocation(2);
+     cfg.writeEntry("Position",2);
+ }
+    
 //       case -29: {
 //           bool b=cfg.readBoolEntry("HorzScroll",0);
 //           cfg.writeEntry("HorzScroll", !b );
@@ -897,7 +904,6 @@ void Konsole::scrollMenuSelected(int index)
 //           te->setScrollbarLocation( cfg.readNumEntry("Position",2));
 //       }
 //         break;
-    };
 }
 
 void Konsole::editCommandListMenuSelected(int iD)
