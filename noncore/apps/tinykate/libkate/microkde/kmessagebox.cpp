@@ -31,7 +31,7 @@ int KMessageBox::questionYesNo(QWidget *parent,
                          const QString &text,
                          const QString &textYes,
                          const QString &textNo,
-                         bool notify=true )
+                         bool notify )
 {
 	int result =QMessageBox::warning(parent,i18n("Question"),text,textYes,textNo);
 	if ( result == 0 ) return KMessageBox::Yes;
