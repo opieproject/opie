@@ -62,3 +62,45 @@
  			l = l + r;
  		    }
  		}
+
+--- src/kernel/qpixmap_qws.cpp.orig	Mon Mar 11 17:00:03 2002
++++ src/kernel/qpixmap_qws.cpp	Mon Mar 11 17:01:05 2002
+@@ -585,6 +585,13 @@ QPixmap QPixmap::xForm( const QWMatrix &
+     QWMatrix mat( 1, 0, 0, 1, -xmin, -ymin );	// true matrix
+     mat = matrix * mat;
+ 
++    // calculate new width and height
++    QPointArray a(  QRect( 0,0,ws,hs ) );
++    a = mat.map(  a );
++    QRect r = a.boundingRect().normalize();
++    w = r.width();
++    h = r.height();
++
+     if ( matrix.m12() == 0.0F  && matrix.m21() == 0.0F &&
+ 	 matrix.m11() >= 0.0F  && matrix.m22() >= 0.0F &&
+ 	 depth() == defaultDepth() // ### stretchBlt limitation
+@@ -593,11 +600,6 @@ QPixmap QPixmap::xForm( const QWMatrix &
+ 	if ( mat.m11() == 1.0F && mat.m22() == 1.0F )
+ 	    return *this;			// identity matrix
+ 
+-	h = qRound( mat.m22()*hs );
+-	w = qRound( mat.m11()*ws );
+-	h = QABS( h );
+-	w = QABS( w );
+-
+ 	if(w==0 || h==0) {
+ 	    return *this;
+ 	}
+@@ -618,12 +620,6 @@ QPixmap QPixmap::xForm( const QWMatrix &
+ 	}
+ 	return pm;
+ 
+-    } else {					// rotation or shearing
+-	QPointArray a( QRect(0,0,ws,hs) );
+-	a = mat.map( a );
+-	QRect r = a.boundingRect().normalize();
+-	w = r.width();
+-	h = r.height();
+     }
+     bool invertible;
+     mat = mat.invert( &invertible );		// invert matrix
