@@ -8,4 +8,38 @@ INCLUDEPATH += $(OPIEDIR)/include .. tremor
 DEPENDPATH      +=  $(OPIEDIR)/include .. tremor 
 LIBS            +=  -lqpe -lm -ltremor
 VERSION   =   1.0.0
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

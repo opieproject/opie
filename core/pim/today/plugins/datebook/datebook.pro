@@ -18,4 +18,14 @@ LIBS+= -lqpe -lopiecore2 -lopieui2 -lopiepim2
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaydatebookplugin
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

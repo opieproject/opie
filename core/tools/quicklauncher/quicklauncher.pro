@@ -12,4 +12,32 @@ LIBS       	+= -lqpe -lopiecore2 -lopieui2
 TARGET		= quicklauncher
 
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

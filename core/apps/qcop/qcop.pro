@@ -9,4 +9,22 @@ LIBS            += -lqpe
 INTERFACES	= 
 TARGET		= qcop
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

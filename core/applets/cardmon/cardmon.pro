@@ -9,5 +9,63 @@ DEPENDPATH      += $(OPIEDIR)/include ../launcher
 LIBS            += -lqpe -lopiecore2
 VERSION		= 1.0.0
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
 target.path = $$prefix/plugins/applets

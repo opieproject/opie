@@ -6,4 +6,25 @@ DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe -lopiecore2 -lopieui2
 TARGET    = textedit
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

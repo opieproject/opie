@@ -12,6 +12,72 @@ LIBS            += -lqpe -lopiecore2 -lopieui2 -lopiesecurity2
 DESTDIR = $(OPIEDIR)/bin
 TARGET = multiauth
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
 
 

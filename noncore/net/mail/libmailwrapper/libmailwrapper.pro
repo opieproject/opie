@@ -50,7 +50,91 @@ contains( $(CONFIG_TARGET_MACOSX), y ){
 DESTDIR      = $(OPIEDIR)/lib
 TARGET       = mailwrapper
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
 
 !isEmpty( LIBETPAN_INC_DIR ) {
     INCLUDEPATH = $$LIBETPAN_INC_DIR $$INCLUDEPATH

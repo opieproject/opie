@@ -16,4 +16,14 @@ LIBS+= -lqpe -lopiecore2 -lopiepim2
 DESTDIR = $(OPIEDIR)/plugins/today
 TARGET = todaymailplugin
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

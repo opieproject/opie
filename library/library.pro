@@ -132,7 +132,79 @@ TARGET		= qpe
 DESTDIR		= $(OPIEDIR)/lib$(PROJMAK)
 VERSION		= 1.5.0.1
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
 
 contains( CONFIG, no-override ){
     DEFINES += OPIE_NO_OVERRIDE_QT

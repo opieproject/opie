@@ -9,4 +9,38 @@ DEPENDPATH      +=  $(OPIEDIR)/include .. tremor
 LIBS            +=  -lqpe -lm -ltremor
 #-lvorbisidec
 VERSION   =   1.0.0
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )

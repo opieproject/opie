@@ -24,7 +24,35 @@ LIBS        += -lqpe -lopiecore2
 DESTDIR     = $(OPIEDIR)/bin
 TARGET      = opie-login
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
 
 OPIELOGIN_USEPAM:LIBS += -lpam
 OPIELOGIN_USEPAM:DEFINES += USEPAM

@@ -4,7 +4,95 @@ VERSION         = 1.0.3-cvs
 !contains( platform, x11 ) {
   message( Configuring Wellenreiter for build on Opie )
   SUBDIRS = gui
-  include ( $(OPIEDIR)/include.pro )
+  include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
 }
 
 contains( platform, x11 ) {

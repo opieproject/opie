@@ -36,7 +36,93 @@ TARGET          = wellenreiter
 
 !contains( platform, x11 ) {
   message( qws )
-  include ( $(OPIEDIR)/include.pro )
+  include(
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
   LIBS += -lqpe -lopiecore2 -lopieui2 -lopienet2
 }
 

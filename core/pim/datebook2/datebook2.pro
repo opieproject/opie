@@ -26,4 +26,16 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe -lopie
 TARGET		= datebook2
 
-include ( $(OPIEDIR)/include.pro )
+include(
+
+
+
+
+
+
+
+
+
+
+
+ $(OPIEDIR)/include.pro )
