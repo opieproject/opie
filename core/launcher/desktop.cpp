@@ -194,14 +194,20 @@ bool DesktopApplication::qwsEventFilter( QWSEvent *e )
       return TRUE;
     bool press = ke->simpleData.is_press;
     bool autoRepeat= ke->simpleData.is_auto_repeat;
-    if (!keyRegisterList.isEmpty())
-    {
+
+    /*
+      app that registers key/message to be sent back to the app, when it doesn't have focus,
+      when user presses key, unless keyboard has been requested from app.
+      will not send multiple repeats if user holds key
+      i.e. one shot
+      
+     */
+    if (!keyRegisterList.isEmpty())  { 
       KeyRegisterList::Iterator it;
-      for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it )
-      {
-          if ((*it).getKeyCode() == ke->simpleData.keycode &&  !autoRepeat) {
-                  if(press) qDebug("press"); else qDebug("release");
-                  QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
+      for( it = keyRegisterList.begin(); it != keyRegisterList.end(); ++it ) {
+          if ((*it).getKeyCode() == ke->simpleData.keycode &&  !autoRepeat && !keyboardGrabbed()) {
+              if(press) qDebug("press"); else qDebug("release");
+              QCopEnvelope((*it).getChannel().utf8(), (*it).getMessage().utf8());
           }
       }
     }
@@ -750,35 +756,35 @@ void Desktop::rereadVolumes()
 
 void Desktop::keyClick()
 {
-	if ( keyclick )
-    	ODevice::inst ( )-> keySound ( );
+  if ( keyclick )
+      ODevice::inst ( )-> keySound ( );
 }
 
 void Desktop::screenClick()
 {
-	if ( touchclick )
-    	ODevice::inst ( )-> touchSound ( );
+  if ( touchclick )
+      ODevice::inst ( )-> touchSound ( );
 }
 
 void Desktop::soundAlarm()
 {
-	if ( qpedesktop-> alarmsound )
-		ODevice::inst ( )-> alarmSound ( );
+  if ( qpedesktop-> alarmsound )
+    ODevice::inst ( )-> alarmSound ( );
 }
 
 bool Desktop::eventFilter( QObject *, QEvent *ev )
 {
-	if ( ev-> type ( ) == QEvent::KeyPress ) {
-		QKeyEvent *ke = (QKeyEvent *) ev;
-		if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
-			QWidget *active = qApp-> activeWindow ( );
-			
-			if ( active && active-> isPopup ( ))
-				active->close();
+  if ( ev-> type ( ) == QEvent::KeyPress ) {
+    QKeyEvent *ke = (QKeyEvent *) ev;
+    if ( ke-> key ( ) == Qt::Key_F11 ) { // menu key
+      QWidget *active = qApp-> activeWindow ( );
+      
+      if ( active && active-> isPopup ( ))
+        active->close();
 
-			raiseMenu ( );
-			return true;
-		}
-	}
-	return false;
+      raiseMenu ( );
+      return true;
+    }
+  }
+  return false;
 }
