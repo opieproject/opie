@@ -1,6 +1,6 @@
-diff -ru qt-2.3.5_fresh/include/qapplication.h qt-2.3.5/include/qapplication.h
---- qt-2.3.5_fresh/include/qapplication.h	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/include/qapplication.h	2003-05-13 15:58:18.000000000 +0200
+diff -ru qt-2.3.7_fresh/include/qapplication.h qt-2.3.7/include/qapplication.h
+--- qt-2.3.7_fresh/include/qapplication.h	2003-05-13 15:56:10.000000000 +0200
++++ qt-2.3.7/include/qapplication.h	2003-05-13 15:58:18.000000000 +0200
 @@ -61,6 +61,10 @@
  class QSemaphore;
  #endif
@@ -56,9 +56,9 @@ diff -ru qt-2.3.5_fresh/include/qapplication.h qt-2.3.5/include/qapplication.h
  #endif
  #endif
  
-diff -ru qt-2.3.5_fresh/include/qfontdatabase.h qt-2.3.5/include/qfontdatabase.h
---- qt-2.3.5_fresh/include/qfontdatabase.h	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/include/qfontdatabase.h	2003-05-13 15:58:18.000000000 +0200
+diff -ru qt-2.3.7_fresh/include/qfontdatabase.h qt-2.3.7/include/qfontdatabase.h
+--- qt-2.3.7_fresh/include/qfontdatabase.h	2003-05-13 15:56:11.000000000 +0200
++++ qt-2.3.7/include/qfontdatabase.h	2003-05-13 15:58:18.000000000 +0200
 @@ -59,6 +59,10 @@
  class QDiskFont;
  #endif
@@ -88,9 +88,9 @@ diff -ru qt-2.3.5_fresh/include/qfontdatabase.h qt-2.3.5/include/qfontdatabase.h
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-diff -ru qt-2.3.5_fresh/src/kernel/qapplication.cpp qt-2.3.5/src/kernel/qapplication.cpp
---- qt-2.3.5_fresh/src/kernel/qapplication.cpp	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/src/kernel/qapplication.cpp	2003-05-13 15:58:19.000000000 +0200
+diff -ru qt-2.3.7_fresh/src/kernel/qapplication.cpp qt-2.3.7/src/kernel/qapplication.cpp
+--- qt-2.3.7_fresh/src/kernel/qapplication.cpp	2003-05-13 15:56:10.000000000 +0200
++++ qt-2.3.7/src/kernel/qapplication.cpp	2003-05-13 15:58:19.000000000 +0200
 @@ -35,6 +35,8 @@
  **
  **********************************************************************/
@@ -173,10 +173,10 @@ diff -ru qt-2.3.5_fresh/src/kernel/qapplication.cpp qt-2.3.5/src/kernel/qapplica
      bool all = FALSE;
      if ( !className ) {
  	if ( !app_font ) {
-Nur in qt-2.3.5/src/kernel: qapplication.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/kernel/qapplication.h qt-2.3.5/src/kernel/qapplication.h
---- qt-2.3.5_fresh/src/kernel/qapplication.h	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/src/kernel/qapplication.h	2003-05-13 15:58:18.000000000 +0200
+Nur in qt-2.3.7/src/kernel: qapplication.cpp.orig.
+diff -ru qt-2.3.7_fresh/src/kernel/qapplication.h qt-2.3.7/src/kernel/qapplication.h
+--- qt-2.3.7_fresh/src/kernel/qapplication.h	2003-05-13 15:56:10.000000000 +0200
++++ qt-2.3.7/src/kernel/qapplication.h	2003-05-13 15:58:18.000000000 +0200
 @@ -61,6 +61,10 @@
  class QSemaphore;
  #endif
@@ -232,9 +232,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qapplication.h qt-2.3.5/src/kernel/qapplicati
  #endif
  #endif
  
-diff -ru qt-2.3.5_fresh/src/kernel/qapplication_qws.cpp qt-2.3.5/src/kernel/qapplication_qws.cpp
---- qt-2.3.5_fresh/src/kernel/qapplication_qws.cpp	2003-05-13 15:56:10.000000000 +0200
-+++ qt-2.3.5/src/kernel/qapplication_qws.cpp	2003-05-13 15:58:18.000000000 +0200
+diff -ru qt-2.3.7_fresh/src/kernel/qapplication_qws.cpp qt-2.3.7/src/kernel/qapplication_qws.cpp
+--- qt-2.3.7_fresh/src/kernel/qapplication_qws.cpp	2003-05-13 15:56:10.000000000 +0200
++++ qt-2.3.7/src/kernel/qapplication_qws.cpp	2003-05-13 15:58:18.000000000 +0200
 @@ -2737,6 +2737,11 @@
  */
  void QApplication::qwsSetDecoration( QWSDecoration *d )
@@ -247,10 +247,10 @@ diff -ru qt-2.3.5_fresh/src/kernel/qapplication_qws.cpp qt-2.3.5/src/kernel/qapp
      if ( d ) {
  	delete qws_decoration;
  	qws_decoration = d;
-Nur in qt-2.3.5/src/kernel: qapplication_qws.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.cpp qt-2.3.5/src/kernel/qfontdatabase.cpp
---- qt-2.3.5_fresh/src/kernel/qfontdatabase.cpp	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qfontdatabase.cpp	2003-05-13 15:58:18.000000000 +0200
+Nur in qt-2.3.7/src/kernel: qapplication_qws.cpp.orig.
+diff -ru qt-2.3.7_fresh/src/kernel/qfontdatabase.cpp qt-2.3.7/src/kernel/qfontdatabase.cpp
+--- qt-2.3.7_fresh/src/kernel/qfontdatabase.cpp	2003-05-13 15:56:11.000000000 +0200
++++ qt-2.3.7/src/kernel/qfontdatabase.cpp	2003-05-13 15:58:18.000000000 +0200
 @@ -35,6 +35,8 @@
  **
  **********************************************************************/
@@ -274,9 +274,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.cpp qt-2.3.5/src/kernel/qfontda
      QString cs( charSet );
      if ( charSet.isEmpty() ) {
          QStringList lst = charSets( family );
-diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.h qt-2.3.5/src/kernel/qfontdatabase.h
---- qt-2.3.5_fresh/src/kernel/qfontdatabase.h	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qfontdatabase.h	2003-05-13 15:58:18.000000000 +0200
+diff -ru qt-2.3.7_fresh/src/kernel/qfontdatabase.h qt-2.3.7/src/kernel/qfontdatabase.h
+--- qt-2.3.7_fresh/src/kernel/qfontdatabase.h	2003-05-13 15:56:11.000000000 +0200
++++ qt-2.3.7/src/kernel/qfontdatabase.h	2003-05-13 15:58:18.000000000 +0200
 @@ -59,6 +59,10 @@
  class QDiskFont;
  #endif
@@ -306,9 +306,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qfontdatabase.h qt-2.3.5/src/kernel/qfontdata
      QStringList styles( const QString &family,
  			const QString &charSet = QString::null ) const;
      QStringList charSets( const QString &familyName,
-diff -ru qt-2.3.5_fresh/src/kernel/qgfxraster_qws.cpp qt-2.3.5/src/kernel/qgfxraster_qws.cpp
---- qt-2.3.5_fresh/src/kernel/qgfxraster_qws.cpp	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qgfxraster_qws.cpp	2003-05-13 15:58:18.000000000 +0200
+diff -ru qt-2.3.7_fresh/src/kernel/qgfxraster_qws.cpp qt-2.3.7/src/kernel/qgfxraster_qws.cpp
+--- qt-2.3.7_fresh/src/kernel/qgfxraster_qws.cpp	2003-05-13 15:56:11.000000000 +0200
++++ qt-2.3.7/src/kernel/qgfxraster_qws.cpp	2003-05-13 15:58:18.000000000 +0200
 @@ -4205,7 +4205,7 @@
      setAlphaType(IgnoreAlpha);
      if ( w <= 0 || h <= 0 || !ncliprect ) return;
@@ -318,10 +318,10 @@ diff -ru qt-2.3.5_fresh/src/kernel/qgfxraster_qws.cpp qt-2.3.5/src/kernel/qgfxra
      // ### fix for 8bpp
      // This seems to be reliable now, at least for 16bpp
  
-Nur in qt-2.3.5/src/kernel: qgfxraster_qws.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp qt-2.3.5/src/kernel/qwindowsystem_qws.cpp
---- qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp	2003-05-13 15:56:11.000000000 +0200
-+++ qt-2.3.5/src/kernel/qwindowsystem_qws.cpp	2003-05-13 15:58:19.000000000 +0200
+Nur in qt-2.3.7/src/kernel: qgfxraster_qws.cpp.orig.
+diff -ru qt-2.3.7_fresh/src/kernel/qwindowsystem_qws.cpp qt-2.3.7/src/kernel/qwindowsystem_qws.cpp
+--- qt-2.3.7_fresh/src/kernel/qwindowsystem_qws.cpp	2003-05-13 15:56:11.000000000 +0200
++++ qt-2.3.7/src/kernel/qwindowsystem_qws.cpp	2003-05-13 15:58:19.000000000 +0200
 @@ -843,6 +843,18 @@
  {
  }
@@ -349,9 +349,9 @@ diff -ru qt-2.3.5_fresh/src/kernel/qwindowsystem_qws.cpp qt-2.3.5/src/kernel/qwi
  #endif
      focusw = 0;
      mouseGrabber = 0;
-diff -ru qt-2.3.5_fresh/src/widgets/qcommonstyle.cpp qt-2.3.5/src/widgets/qcommonstyle.cpp
---- qt-2.3.5_fresh/src/widgets/qcommonstyle.cpp	2003-05-13 15:56:12.000000000 +0200
-+++ qt-2.3.5/src/widgets/qcommonstyle.cpp	2003-05-13 15:58:19.000000000 +0200
+diff -ru qt-2.3.7_fresh/src/widgets/qcommonstyle.cpp qt-2.3.7/src/widgets/qcommonstyle.cpp
+--- qt-2.3.7_fresh/src/widgets/qcommonstyle.cpp	2003-05-13 15:56:12.000000000 +0200
++++ qt-2.3.7/src/widgets/qcommonstyle.cpp	2003-05-13 15:58:19.000000000 +0200
 @@ -566,7 +566,7 @@
  				    bool enabled, bool active )
  {
@@ -361,10 +361,10 @@ diff -ru qt-2.3.5_fresh/src/widgets/qcommonstyle.cpp qt-2.3.5/src/widgets/qcommo
      if (draw_menu_bar_impl != 0) {
  	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
  	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
-Nur in qt-2.3.5/src/widgets: qcommonstyle.cpp.orig.
-diff -ru qt-2.3.5_fresh/src/widgets/qlistview.cpp qt-2.3.5/src/widgets/qlistview.cpp
---- qt-2.3.5_fresh/src/widgets/qlistview.cpp	2003-05-13 15:56:12.000000000 +0200
-+++ qt-2.3.5/src/widgets/qlistview.cpp	2003-05-13 15:58:18.000000000 +0200
+Nur in qt-2.3.7/src/widgets: qcommonstyle.cpp.orig.
+diff -ru qt-2.3.7_fresh/src/widgets/qlistview.cpp qt-2.3.7/src/widgets/qlistview.cpp
+--- qt-2.3.7_fresh/src/widgets/qlistview.cpp	2003-05-13 15:56:12.000000000 +0200
++++ qt-2.3.7/src/widgets/qlistview.cpp	2003-05-13 15:58:18.000000000 +0200
 @@ -4968,9 +4968,9 @@
  	l = l->childItem ? l->childItem : l->siblingItem;
  
@@ -378,9 +378,9 @@ diff -ru qt-2.3.5_fresh/src/widgets/qlistview.cpp qt-2.3.5/src/widgets/qlistview
  
      if ( s.width() > s.height() * 3 )
  	s.setHeight( s.width() / 3 );
-diff -ru qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp qt-2.3.5/src/widgets/qtoolbutton.cpp
---- qt-2.3.5_fresh/src/widgets/qtoolbutton.cpp	2003-05-13 15:56:12.000000000 +0200
-+++ qt-2.3.5/src/widgets/qtoolbutton.cpp	2003-05-13 15:58:18.000000000 +0200
+diff -ru qt-2.3.7_fresh/src/widgets/qtoolbutton.cpp qt-2.3.7/src/widgets/qtoolbutton.cpp
+--- qt-2.3.7_fresh/src/widgets/qtoolbutton.cpp	2003-05-13 15:56:12.000000000 +0200
++++ qt-2.3.7/src/widgets/qtoolbutton.cpp	2003-05-13 15:58:18.000000000 +0200
 @@ -230,7 +230,7 @@
  	else
  	    QToolTip::add( this, textLabel );
