@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,17 +20,19 @@
 #ifndef LAUNCHERVIEW_H
 #define LAUNCHERVIEW_H
 
-#include <qpe/storage.h>
+#include <qtopia/storage.h>
+#include <qtopia/applnk.h>
 
 #include <qvbox.h>
 
-class AppLnk;
-class AppLnkSet;
 class CategorySelect;
 class LauncherIconView;
 class QIconView;
 class QIconViewItem;
+class QLabel;
+class QWidgetStack;
 class MenuButton;
+class QComboBox;
 
 class LauncherView : public QVBox
 {
@@ -40,18 +42,35 @@ public:
     LauncherView( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~LauncherView();
 
+    void hideIcons();
+
     bool removeLink(const QString& linkfile);
     void addItem(AppLnk* app, bool resort=TRUE);
+    void removeAllItems();
+    void setSortEnabled(bool);
+    void setUpdatesEnabled(bool);
     void sort();
 
-    void setFileSystems(const QList<FileSystem> &);
     void setToolsEnabled(bool);
     void updateTools();
 
     void setBusy(bool);
 
-public slots:
-    void populate( AppLnkSet *folder, const QString& categoryfilter );
+    enum ViewMode { Icon, List };
+    void setViewMode( ViewMode m );
+    ViewMode viewMode() const { return vmode; }
+
+    enum BackgroundType { Ruled, SolidColor, Image };
+    void setBackgroundType( BackgroundType t, const QString & );
+    BackgroundType backgroundType() const { return bgType; }
+
+    void setTextColor( const QColor & );
+    QColor textColor() const { return textCol; }
+
+    void setViewFont( const QFont & );
+    void clearViewFont();
+
+    void relayout(void);
 
 signals:
     void clicked( const AppLnk * );
@@ -63,19 +82,29 @@ protected slots:
     void itemClicked( int, QIconViewItem * );
     void itemPressed( int, QIconViewItem * );
     void sortBy(int);
-    void showType(const QString&);
+    void showType(int);
     void showCategory( int );
     void resizeEvent(QResizeEvent *);
+    void flushBgCache();
 
 protected:
-    void internalPopulate( AppLnkSet *, const QString& categoryfilter );
+    void paletteChange( const QPalette & );
+
+    void fontChanged(const QFont &);
 
 private:
     static bool bsy;
     QWidget* tools;
     LauncherIconView* icons;
-    MenuButton *typemb;
+    QComboBox *typemb;
+    QStringList typelist;
     CategorySelect *catmb;
+    ViewMode vmode;
+    BackgroundType bgType;
+    QString bgName;
+    QColor textCol;
+
+    QImage loadBackgroundImage(QString &fname);
 };
 
 #endif // LAUNCHERVIEW_H

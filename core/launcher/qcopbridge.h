@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -20,6 +20,7 @@
 #ifndef __qcopbridge_h__
 #define __qcopbridge_h__
 
+#include <qtopia/qpeglobal.h>
 #include <qserversocket.h>
 #include <qsocket.h>
 #include <qdir.h>
@@ -29,6 +30,7 @@
 class QFileInfo;
 class QCopBridgePI;
 class QCopChannel;
+class QTimer;
 
 class QCopBridge : public QServerSocket
 {
@@ -40,10 +42,14 @@ public:
 
     void newConnection( int socket );
     void closeOpenConnections();
+    void authorizeConnections();
 
 public slots:
-    void connectionClosed( QCopBridgePI *pi );
+    void closed( QCopBridgePI *pi );
     void desktopMessage( const QCString &call, const QByteArray & );
+
+signals:
+    void connectionClosed( const QHostAddress & );
     
 protected:
     void timerEvent( QTimerEvent * );
@@ -67,8 +73,10 @@ public:
     virtual ~QCopBridgePI();
 
     void sendDesktopMessage( const QString &msg );
+    void sendDesktopMessage( const QCString &msg, const QByteArray& );
     void startSync() { sendSync = TRUE; }
-    
+    bool verifyAuthorised();
+
 signals:
     void connectionClosed( QCopBridgePI *);
     
@@ -76,20 +84,14 @@ protected slots:
     void read();
     void send( const QString& msg );
     void process( const QString& command );
-    void connectionClosed();
-
-protected:
-    bool checkUser( const QString& user );
-    bool checkPassword( const QString& pw );
-
-    void timerEvent( QTimerEvent *e );
+    void myConnectionClosed();
 
 private:
     State state;
     Q_UINT16 peerport;
     QHostAddress peeraddress;
-    bool connected;
     bool sendSync;
+    QTimer *timer;
 };
 
 #endif

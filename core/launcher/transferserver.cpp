@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,10 +18,28 @@
 **
 **********************************************************************/
 #define _XOPEN_SOURCE
+
+#include <qtopia/qpeglobal.h>
+#include <qtopia/qpeapplication.h>
+
+#ifndef Q_OS_WIN32
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <time.h>
+#include <shadow.h>
+
+extern "C" {
+#include <uuid/uuid.h>
+#define UUID_H_INCLUDED
+}
+
+#else
+#include <stdlib.h>
+#include <time.h>
+#endif
+
 
 #if defined(_OS_LINUX_)
 #include <shadow.h>
@@ -35,54 +53,226 @@
 #include <qstringlist.h>
 #include <qfileinfo.h>
 #include <qregexp.h>
-//#include <qpe/qcopchannel_qws.h>
-#include <qpe/process.h>
-#include <qpe/config.h>
-#include <qpe/qcopenvelope_qws.h>
+//#include <qtopia/qcopchannel_qws.h>
+#include <qtopia/process.h>
+#include <qtopia/global.h>
+#include <qtopia/config.h>
+#include <qtopia/private/contact.h>
+#include <qtopia/quuid.h>
+#include <qtopia/version.h>
+#ifdef Q_WS_QWS
+#include <qtopia/qcopenvelope_qws.h>
+#endif
 
 #include "transferserver.h"
-#include "qprocess.h"
+#include <qtopia/qprocess.h>
 
 const int block_size = 51200;
 
-TransferServer::TransferServer( Q_UINT16 port, QObject *parent = 0,
-        const char* name = 0)
+TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
+        const char* name)
     : QServerSocket( port, 1, parent, name )
 {
+    connections.setAutoDelete( TRUE );
     if ( !ok() )
 	qWarning( "Failed to bind to port %d", port );
 }
 
+void TransferServer::authorizeConnections()
+{
+    QListIterator<ServerPI> it(connections);
+    while ( it.current() ) {
+	if ( !it.current()->verifyAuthorised() ) {
+	    disconnect( it.current(), SIGNAL(connectionClosed(ServerPI *)), this, SLOT( closed(ServerPI *)) );
+	    connections.removeRef( it.current() );
+	} else
+	    ++it;
+    }
+}
+
+void TransferServer::closed(ServerPI *item)
+{
+    connections.removeRef(item);
+}
+
 TransferServer::~TransferServer()
 {
-
 }
 
 void TransferServer::newConnection( int socket )
 {
-    (void) new ServerPI( socket, this );
+    ServerPI *ptr = new ServerPI( socket, this );
+    connect( ptr, SIGNAL(connectionClosed(ServerPI *)), this, SLOT( closed(ServerPI *)) );
+    connections.append( ptr );
 }
 
-bool accessAuthorized(QHostAddress peeraddress)
+QString SyncAuthentication::serverId()
 {
-    Config cfg("Security");
-    cfg.setGroup("Sync");
-    uint auth_peer = cfg.readNumEntry("auth_peer",0xc0a80100);
-    uint auth_peer_bits = cfg.readNumEntry("auth_peer_bits",24);
-    bool ok = (peeraddress.ip4Addr() & (((1<<auth_peer_bits)-1)<<(32-auth_peer_bits)))
-		    == auth_peer;
-    /* Allows denial-of-service attack.
-    if ( !ok ) {
-	QMessageBox::warning(0,tr("Security"),
-	    tr("<p>An attempt to access this device from %1 has been denied.")
-		.arg(peeraddress.toString()));
-    }
-    */
-    return ok;
+    return Global::deviceId();
 }
 
-ServerPI::ServerPI( int socket, QObject *parent = 0, const char* name = 0 )
-    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), waitsocket( 0 )
+QString SyncAuthentication::ownerName()
+{
+    return Global::ownerName();
+    QString vfilename = Global::applicationFileName("addressbook",
+                "businesscard.vcf");
+    if (QFile::exists(vfilename)) {
+	Contact c;
+	c = Contact::readVCard( vfilename )[0];
+	return c.fullName();
+    }
+
+    return "";
+}
+
+QString SyncAuthentication::loginName()
+{
+    struct passwd *pw = 0L;
+#ifndef Q_OS_WIN32
+    pw = getpwuid( geteuid() );
+    return QString::fromLocal8Bit( pw->pw_name );
+#else
+    //### revise
+    return QString();
+#endif
+}
+
+int SyncAuthentication::isAuthorized(QHostAddress peeraddress)
+{
+    Config cfg( QPEApplication::qpeDir()+"/etc/Security.conf", Config::File );
+    cfg.setGroup("Sync");
+    QString allowedstr = cfg.readEntry("auth_peer","192.168.0.0");
+    QHostAddress allowed;
+    allowed.setAddress(allowedstr);
+    uint auth_peer = allowed.ip4Addr();
+    uint auth_peer_bits = cfg.readNumEntry("auth_peer_bits",16);
+    uint mask = auth_peer_bits >= 32 // shifting by 32 is not defined
+	? 0xffffffff : (((1<<auth_peer_bits)-1)<<(32-auth_peer_bits));
+    return (peeraddress.ip4Addr() & mask) == auth_peer;
+}
+
+bool SyncAuthentication::checkUser( const QString& user )
+{
+    if ( user.isEmpty() ) return FALSE;
+    QString euser = loginName();
+    return user == euser;
+}
+
+bool SyncAuthentication::checkPassword( const QString& password )
+{
+#ifdef ALLOW_UNIX_USER_FTP
+    // First, check system password...
+
+    struct passwd *pw = 0;
+    struct spwd *spw = 0;
+
+    pw = getpwuid( geteuid() );
+    spw = getspnam( pw->pw_name );
+
+    QString cpwd = QString::fromLocal8Bit( pw->pw_passwd );
+    if ( cpwd == "x" && spw )
+	cpwd = QString::fromLocal8Bit( spw->sp_pwdp );
+
+    // Note: some systems use more than crypt for passwords.
+    QString cpassword = QString::fromLocal8Bit( crypt( password.local8Bit(), cpwd.local8Bit() ) );
+    if ( cpwd == cpassword )
+	return TRUE;
+#endif
+
+    static int lastdenial=0;
+    static int denials=0;
+    int now = time(0);
+
+    // Detect old Qtopia Desktop (no password)
+    if ( password.isEmpty() ) {
+	if ( denials < 1 || now > lastdenial+600 ) {
+	    QMessageBox unauth(
+		tr("Sync Connection"),
+		tr("<p>An unauthorized system is requesting access to this device."
+		    "<p>If you are using a version of Qtopia Desktop older than 1.5.1, "
+		    "please upgrade."),
+		QMessageBox::Warning,
+		QMessageBox::Cancel, QMessageBox::NoButton, QMessageBox::NoButton,
+		0, QString::null, TRUE, WStyle_StaysOnTop);
+	    unauth.setButtonText(QMessageBox::Cancel, tr("Deny"));
+	    unauth.exec();
+
+	    denials++;
+	    lastdenial=now;
+	}
+	return FALSE;
+    }
+
+    // Second, check sync password...
+
+    static int lock=0;
+    if ( lock ) return FALSE;
+
+    ++lock;
+    if ( password.left(6) == "Qtopia" ) {
+	Config cfg( QPEApplication::qpeDir()+"/etc/Security.conf", Config::File );
+	cfg.setGroup("Sync");
+	QStringList pwds = cfg.readListEntry("Passwords",' ');
+	for (QStringList::ConstIterator it=pwds.begin(); it!=pwds.end(); ++it) {
+#ifndef Q_OS_WIN32	 
+	    QString cpassword = QString::fromLocal8Bit(
+		crypt( password.mid(8).local8Bit(), (*it).left(2).latin1() ) );
+#else
+	    // ### revise
+	    QString cpassword("");
+#endif
+	    if ( *it == cpassword ) {
+		lock--;
+		return TRUE;
+	    }
+	}
+
+	// Unrecognized system. Be careful...
+	QMessageBox unrecbox(
+	    tr("Sync Connection"),
+	    tr(	"<p>An unrecognized system is requesting access to this device."
+		"<p>If you have just initiated a Sync for the first time, this is normal."),
+		QMessageBox::Warning,
+		QMessageBox::Cancel, QMessageBox::Yes, QMessageBox::NoButton,
+		0, QString::null, TRUE, WStyle_StaysOnTop);
+	unrecbox.setButtonText(QMessageBox::Cancel, tr("Deny"));
+	unrecbox.setButtonText(QMessageBox::Yes, tr("Allow"));
+
+	if ( (denials > 2 && now < lastdenial+600)
+	    || unrecbox.exec() != QMessageBox::Yes)
+	{
+	    denials++;
+	    lastdenial=now;
+	    lock--;
+	    return FALSE;
+	} else {
+	    const char salty[]="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/.";
+	    char salt[2];
+	    salt[0]= salty[rand() % (sizeof(salty)-1)];
+	    salt[1]= salty[rand() % (sizeof(salty)-1)];
+#ifndef Q_OS_WIN32
+	    QString cpassword = QString::fromLocal8Bit(
+		crypt( password.mid(8).local8Bit(), salt ) );
+#else
+	    //### revise
+	    QString cpassword("");
+#endif
+	    denials=0;
+	    pwds.prepend(cpassword);
+	    cfg.writeEntry("Passwords",pwds,' ');
+	    lock--;
+	    return TRUE;
+	}
+    }
+    lock--;
+
+    return FALSE;
+}
+
+
+ServerPI::ServerPI( int socket, QObject *parent, const char* name )
+    : QSocket( parent, name ) , dtp( 0 ), serversocket( 0 ), waitsocket( 0 ),
+      storFileSize(-1)
 {
     state = Connected;
 
@@ -92,20 +282,20 @@ ServerPI::ServerPI( int socket, QObject *parent = 0, const char* name = 0 )
     peeraddress = peerAddress();
 
 #ifndef INSECURE
-    if ( !accessAuthorized(peeraddress) ) {
+    if ( !SyncAuthentication::isAuthorized(peeraddress) ) {
 	state = Forbidden;
 	startTimer( 0 );
     } else
-#endif	
+#endif
     {
 	connect( this, SIGNAL( readyRead() ), SLOT( read() ) );
 	connect( this, SIGNAL( connectionClosed() ), SLOT( connectionClosed() ) );
-	
+
 	passiv = FALSE;
 	for( int i = 0; i < 4; i++ )
 	    wait[i] = FALSE;
 
-	send( "220 Qtopia transfer service ready!" );
+	send( "220 Qtopia " QPE_VERSION " FTP Server" ); // No tr
 	state = Wait_USER;
 
 	dtp = new ServerDTP( this );
@@ -129,13 +319,25 @@ ServerPI::ServerPI( int socket, QObject *parent = 0, const char* name = 0 )
 
 ServerPI::~ServerPI()
 {
+    close();
+    dtp->close();
+    delete dtp;
+    delete serversocket;
+}
 
+bool ServerPI::verifyAuthorised()
+{
+    if ( !SyncAuthentication::isAuthorized(peerAddress()) ) {
+	state = Forbidden;
+	return FALSE;
+    }
+    return TRUE;
 }
 
 void ServerPI::connectionClosed()
 {
     // qDebug( "Debug: Connection closed" );
-    delete this;
+    emit connectionClosed(this);
 }
 
 void ServerPI::send( const QString& msg )
@@ -149,37 +351,6 @@ void ServerPI::read()
 {
     while ( canReadLine() )
 	process( readLine().stripWhiteSpace() );
-}
-
-bool ServerPI::checkUser( const QString& user )
-{
-    if ( user.isEmpty() ) return FALSE;
-
-    struct passwd *pw;
-    pw = getpwuid( geteuid() );
-    QString euser = QString::fromLocal8Bit( pw->pw_name );
-    return user == euser;
-}
-
-bool ServerPI::checkPassword( const QString& /* password */ )
-{
-    // ### HACK for testing on local host
-    return true;
-
-    /*
-    struct passwd *pw = 0;
-    struct spwd *spw = 0;
-
-    pw = getpwuid( geteuid() );
-    spw = getspnam( pw->pw_name );
-
-    QString cpwd = QString::fromLocal8Bit( pw->pw_passwd );
-    if ( cpwd == "x" && spw )
-	cpwd = QString::fromLocal8Bit( spw->sp_pwdp );
-
-    QString cpassword = QString::fromLocal8Bit( crypt( password.local8Bit(), cpwd.local8Bit() ) );
-    return cpwd == cpassword;
-*/
 }
 
 bool ServerPI::checkReadFile( const QString& file )
@@ -242,8 +413,8 @@ void ServerPI::process( const QString& message )
 
     // we always respond to QUIT, regardless of state
     if ( cmd == "QUIT" ) {
-	send( "211 Good bye!" );
-	delete this;
+	send( "211 Good bye!" ); // No tr
+	close();
 	return;
     }
 
@@ -254,11 +425,11 @@ void ServerPI::process( const QString& message )
     // waiting for user name
     if ( Wait_USER == state ) {
 
-	if ( cmd != "USER" || msg.count() < 2 || !checkUser( arg ) ) {
-	    send( "530 Please login with USER and PASS" );
+	if ( cmd != "USER" || msg.count() < 2 || !SyncAuthentication::checkUser( arg ) ) {
+	    send( "530 Please login with USER and PASS" ); // No tr
 	    return;
 	}
-	send( "331 User name ok, need password" );
+	send( "331 User name ok, need password" ); // No tr
 	state = Wait_PASS;
 	return;
     }
@@ -266,23 +437,25 @@ void ServerPI::process( const QString& message )
     // waiting for password
     if ( Wait_PASS == state ) {
 
-	if ( cmd != "PASS" || !checkPassword( arg ) ) {
-	//if ( cmd != "PASS" || msg.count() < 2 || !checkPassword( arg ) ) {
-	    send( "530 Please login with USER and PASS" );
+	if ( cmd != "PASS" || !SyncAuthentication::checkPassword( arg ) ) {
+	    send( "530 Please login with USER and PASS" ); // No tr
 	    return;
 	}
-	send( "230 User logged in, proceed" );
+	send( "230 User logged in, proceed" ); // No tr
 	state = Ready;
 	return;
     }
 
     // ACCESS CONTROL COMMANDS
 
+    // Only an ALLO sent immediately before STOR is valid.
+    if ( cmd != "STOR" )
+	storFileSize = -1;
 
     // account (ACCT)
     if ( cmd == "ACCT" ) {
 	// even wu-ftp does not support it
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // change working directory (CWD)
@@ -290,32 +463,32 @@ void ServerPI::process( const QString& message )
 
 	if ( !args.isEmpty() ) {
 	    if ( directory.cd( args, TRUE ) )
-		send( "250 Requested file action okay, completed" );
+		send( "250 Requested file action okay, completed" ); // No tr
 	    else
-		send( "550 Requested action not taken" );
+		send( "550 Requested action not taken" ); // No tr
 	}
 	else
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
     }
 
     // change to parent directory (CDUP)
     else if ( cmd == "CDUP" ) {
 	if ( directory.cdUp() )
-	    send( "250 Requested file action okay, completed" );
+	    send( "250 Requested file action okay, completed" ); // No tr
 	else
-	    send( "550 Requested action not taken" );
+	    send( "550 Requested action not taken" ); // No tr
     }
 
     // structure mount (SMNT)
     else if ( cmd == "SMNT" ) {
 	// even wu-ftp does not support it
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // reinitialize (REIN)
     else if ( cmd == "REIN" ) {
 	// even wu-ftp does not support it
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
 
@@ -325,15 +498,15 @@ void ServerPI::process( const QString& message )
     // data port (PORT)
     else if ( cmd == "PORT" ) {
 	if ( parsePort( arg ) )
-	    send( "200 Command okay" );
+	    send( "200 Command okay" ); // No tr
 	else
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
     }
 
     // passive (PASV)
     else if ( cmd == "PASV" ) {
 	passiv = TRUE;
-	send( "227 Entering Passive Mode ("
+	send( "227 Entering Passive Mode (" // No tr
 	      + address().toString().replace( QRegExp( "\\." ), "," ) + ","
 	      + QString::number( ( serversocket->port() ) >> 8 ) + ","
 	      + QString::number( ( serversocket->port() ) & 0xFF ) +")" );
@@ -342,25 +515,25 @@ void ServerPI::process( const QString& message )
     // representation type (TYPE)
     else if ( cmd == "TYPE" ) {
 	if ( arg.upper() == "A" || arg.upper() == "I" )
-	    send( "200 Command okay" );
+	    send( "200 Command okay" ); // No tr
 	else
-	    send( "504 Command not implemented for that parameter" );
+	    send( "504 Command not implemented for that parameter" ); // No tr
     }
 
     // file structure (STRU)
     else if ( cmd == "STRU" ) {
 	if ( arg.upper() == "F" )
-	    send( "200 Command okay" );
+	    send( "200 Command okay" ); // No tr
 	else
-	    send( "504 Command not implemented for that parameter" );
+	    send( "504 Command not implemented for that parameter" ); // No tr
     }
 
     // transfer mode (MODE)
     else if ( cmd == "MODE" ) {
 	if ( arg.upper() == "S" )
-	    send( "200 Command okay" );
+	    send( "200 Command okay" ); // No tr
 	else
-	    send( "504 Command not implemented for that parameter" );
+	    send( "504 Command not implemented for that parameter" ); // No tr
     }
 
 
@@ -371,71 +544,72 @@ void ServerPI::process( const QString& message )
     else if ( cmd == "RETR" )
 	if ( !args.isEmpty() && checkReadFile( absFilePath( args ) )
 	     || backupRestoreGzip( absFilePath( args ) ) ) {
-	    send( "150 File status okay" );
+	    send( "150 File status okay" ); // No tr
 	    sendFile( absFilePath( args ) );
 	}
 	else {
 	    qDebug("550 Requested action not taken");
-	    send( "550 Requested action not taken" );
+	    send( "550 Requested action not taken" ); // No tr
 	}
 
     // store (STOR)
     else if ( cmd == "STOR" )
 	if ( !args.isEmpty() && checkWriteFile( absFilePath( args ) ) ) {
-	    send( "150 File status okay" );
+	    send( "150 File status okay" ); // No tr
 	    retrieveFile( absFilePath( args ) );
 	}
 	else
-	    send( "550 Requested action not taken" );
+	    send( "550 Requested action not taken" ); // No tr
 
     // store unique (STOU)
     else if ( cmd == "STOU" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // append (APPE)
     else if ( cmd == "APPE" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // allocate (ALLO)
     else if ( cmd == "ALLO" ) {
-	send( "200 Command okay" );
+	storFileSize = args.toInt();
+	send( "200 Command okay" ); // No tr
     }
 
     // restart (REST)
     else if ( cmd == "REST" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // rename from (RNFR)
     else if ( cmd == "RNFR" ) {
 	renameFrom = QString::null;
 	if ( args.isEmpty() )
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
 	else {
 	    QFile file( absFilePath( args ) );
 	    if ( file.exists() ) {
-		send( "350 File exists, ready for destination name" );
+		send( "350 File exists, ready for destination name" ); // No tr
 		renameFrom = absFilePath( args );
 	    }
 	    else
-		send( "550 Requested action not taken" );
+		send( "550 Requested action not taken" ); // No tr
 	}
     }
 
     // rename to (RNTO)
     else if ( cmd == "RNTO" ) {
 	if ( lastCommand != "RNFR" )
-	    send( "503 Bad sequence of commands" );
+	    send( "503 Bad sequence of commands" ); // No tr
 	else if ( args.isEmpty() )
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
 	else {
 	    QDir dir( absFilePath( args ) );
 	    if ( dir.rename( renameFrom, absFilePath( args ), TRUE ) )
-		send( "250 Requested file action okay, completed." );
+		send( "250 Requested file action okay, completed." ); // No tr
 	    else
-		send( "550 Requested action not taken" );
+		send( "550 Requested action not taken" ); // No tr
 	}
     }
 
@@ -443,34 +617,37 @@ void ServerPI::process( const QString& message )
     else if ( cmd.contains( "ABOR" ) ) {
 	dtp->close();
 	if ( dtp->dtpMode() != ServerDTP::Idle )
-	    send( "426 Connection closed; transfer aborted" );
+	    send( "426 Connection closed; transfer aborted" ); // No tr
 	else
-	    send( "226 Closing data connection" );
+	    send( "226 Closing data connection" ); // No tr
     }
 
     // delete (DELE)
     else if ( cmd == "DELE" ) {
 	if ( args.isEmpty() )
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
 	else {
 	    QFile file( absFilePath( args ) ) ;
-	    if ( file.remove() )
-		send( "250 Requested file action okay, completed" );
-	    else
-		send( "550 Requested action not taken" );
+	    if ( file.remove() ) {
+		send( "250 Requested file action okay, completed" ); // No tr
+		QCopEnvelope e("QPE/System", "linkChanged(QString)" );
+		e << file.name();
+	    } else {
+		send( "550 Requested action not taken" ); // No tr
+	    }
 	}
     }
 
     // remove directory (RMD)
     else if ( cmd == "RMD" ) {
 	if ( args.isEmpty() )
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
 	else {
 	    QDir dir;
 	    if ( dir.rmdir( absFilePath( args ), TRUE ) )
-		send( "250 Requested file action okay, completed" );
+		send( "250 Requested file action okay, completed" ); // No tr
 	    else
-		send( "550 Requested action not taken" );
+		send( "550 Requested action not taken" ); // No tr
 	}
     }
 
@@ -478,14 +655,14 @@ void ServerPI::process( const QString& message )
     else if ( cmd == "MKD" ) {
 	if ( args.isEmpty() ) {
 	    qDebug(" Error: no arg");
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
 	}
 	else {
 	    QDir dir;
 	    if ( dir.mkdir( absFilePath( args ), TRUE ) )
-		send( "250 Requested file action okay, completed." );
+		send( "250 Requested file action okay, completed." ); // No tr
 	    else
-		send( "550 Requested action not taken" );
+		send( "550 Requested action not taken" ); // No tr
 	}
     }
 
@@ -497,9 +674,9 @@ void ServerPI::process( const QString& message )
     // list (LIST)
     else if ( cmd == "LIST" ) {
 	if ( sendList( absFilePath( args ) ) )
-	    send( "150 File status okay" );
+	    send( "150 File status okay" ); // No tr
 	else
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
     }
 
     // size (SIZE)
@@ -508,7 +685,7 @@ void ServerPI::process( const QString& message )
 	QFileInfo fi( filePath );
 	bool gzipfile = backupRestoreGzip( filePath );
 	if ( !fi.exists() && !gzipfile )
-	    send( "500 Syntax error, command unrecognized" );
+	    send( "500 Syntax error, command unrecognized" ); // No tr
 	else {
 	    if ( !gzipfile )
 		send( "213 " + QString::number( fi.size() ) );
@@ -523,60 +700,60 @@ void ServerPI::process( const QString& message )
 		else {
 		    QString size = out.left( out.find("\t") );
 		    int guess = size.toInt()/5;
-		    if ( filePath.contains("doc") )
+		    if ( filePath.contains("doc") ) // No tr
 			guess *= 1000;
 		    qDebug("sending back gzip guess of %d", guess);
 		    send( "213 " + QString::number(guess) );
 		}
-	    }			
+	    }
 	}
     }
     // name list (NLST)
     else if ( cmd == "NLST" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // site parameters (SITE)
     else if ( cmd == "SITE" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // system (SYST)
     else if ( cmd == "SYST" ) {
-	send( "215 UNIX Type: L8" );
+	send( "215 UNIX Type: L8" ); // No tr
     }
 
     // status (STAT)
     else if ( cmd == "STAT" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // help (HELP )
     else if ( cmd == "HELP" ) {
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
     }
 
     // noop (NOOP)
     else if ( cmd == "NOOP" ) {
-	send( "200 Command okay" );
+	send( "200 Command okay" ); // No tr
     }
 
     // not implemented
     else
-	send( "502 Command not implemented" );
+	send( "502 Command not implemented" ); // No tr
 
     lastCommand = cmd;
 }
 
 bool ServerPI::backupRestoreGzip( const QString &file )
 {
-    return (file.find( "backup" ) != -1 &&
+    return (file.find( "backup" ) != -1 && // No tr
 	    file.findRev( ".tgz" ) == (int)file.length()-4 );
 }
 
 bool ServerPI::backupRestoreGzip( const QString &file, QStringList &targets )
 {
-  if ( file.find( "backup" ) != -1 &&
+  if ( file.find( "backup" ) != -1 && // No tr
        file.findRev( ".tgz" ) == (int)file.length()-4 ) {
       QFileInfo info( file );
       targets = info.dirPath( TRUE );
@@ -616,7 +793,7 @@ void ServerPI::retrieveFile( const QString& file )
       if ( backupRestoreGzip( file, targets ) )
 	dtp->retrieveGzipFile( file, peeraddress, peerport );
       else
-	dtp->retrieveFile( file, peeraddress, peerport );
+	dtp->retrieveFile( file, peeraddress, peerport, storFileSize );
     }
 }
 
@@ -634,23 +811,33 @@ bool ServerPI::parsePort( const QString& pp )
 
 void ServerPI::dtpCompleted()
 {
-    dtp->close();
+    send( "226 Closing data connection, file transfer successful" ); // No tr
+    if ( dtp->dtpMode() == ServerDTP::RetrieveFile ) {
+	QString fn = dtp->fileName();
+	if ( fn.right(8)==".desktop" && fn.find("/Documents/")>=0 ) {
+	    QCopEnvelope e("QPE/System", "linkChanged(QString)" );
+	    e << fn;
+	}
+    }
     waitsocket = 0;
-    send( "226 Closing data connection, file transfer successful" );
+    dtp->close();
+    storFileSize = -1;
 }
 
 void ServerPI::dtpFailed()
 {
     dtp->close();
     waitsocket = 0;
-    send( "451 Requested action aborted: local error in processing" );
+    send( "451 Requested action aborted: local error in processing" ); // No tr
+    storFileSize = -1;
 }
 
 void ServerPI::dtpError( int )
 {
     dtp->close();
     waitsocket = 0;
-    send( "451 Requested action aborted: local error in processing" );
+    send( "451 Requested action aborted: local error in processing" ); // No tr
+    storFileSize = -1;
 }
 
 bool ServerPI::sendList( const QString& arg )
@@ -690,7 +877,7 @@ bool ServerPI::sendList( const QString& arg )
 	    ++it;
 	}
 
-	ts << "total " << QString::number( total / 1024 ) << endl;
+	ts << "total " << QString::number( total / 1024 ) << endl; // No tr
 
 	it.toFirst();
 	while ( ( info = it.current() ) ) {
@@ -742,10 +929,16 @@ QString ServerPI::fileListing( QFileInfo *info )
     s += QString::number( subdirs ).rightJustify( 3, ' ', TRUE ) + " ";
 
     // owner
-    s += info->owner().leftJustify( 8, ' ', TRUE ) + " ";
+    QString o = info->owner();
+    if ( o.isEmpty() )
+	o = QString::number(info->ownerId());
+    s += o.leftJustify( 8, ' ', TRUE ) + " ";
 
     // group
-    s += info->group().leftJustify( 8, ' ', TRUE ) + " ";
+    QString g = info->group();
+    if ( g.isEmpty() )
+	g = QString::number(info->groupId());
+    s += g.leftJustify( 8, ' ', TRUE ) + " ";
 
     // file size in bytes
     s += QString::number( info->size() ).rightJustify( 9, ' ', TRUE ) + " ";
@@ -815,7 +1008,7 @@ void ServerPI::newConnection( int socket )
       if ( backupRestoreGzip( waitfile ) )
 	dtp->retrieveGzipFile( waitfile );
       else
-	dtp->retrieveFile( waitfile );
+	dtp->retrieveFile( waitfile, storFileSize );
       dtp->setSocket( socket );
     }
     else if ( wait[SendByteArray] ) {
@@ -852,9 +1045,9 @@ void ServerPI::timerEvent( QTimerEvent * )
 }
 
 
-ServerDTP::ServerDTP( QObject *parent = 0, const char* name = 0)
+ServerDTP::ServerDTP( QObject *parent, const char* name)
   : QSocket( parent, name ), mode( Idle ), createTargzProc( 0 ),
-retrieveTargzProc( 0 ), gzipProc( 0 )
+    retrieveTargzProc( 0 )
 {
 
   connect( this, SIGNAL( connected() ), SLOT( connected() ) );
@@ -862,17 +1055,12 @@ retrieveTargzProc( 0 ), gzipProc( 0 )
   connect( this, SIGNAL( bytesWritten( int ) ), SLOT( bytesWritten( int ) ) );
   connect( this, SIGNAL( readyRead() ), SLOT( readyRead() ) );
 
-  gzipProc = new QProcess( this, "gzipProc" );
-  gzipProc->setCommunication( QProcess::Stdin | QProcess::Stdout );
-
-  createTargzProc = new QProcess( QString("tar"), this, "createTargzProc");
+  createTargzProc = new QProcess( QString("tar"), this, "createTargzProc"); // No tr
   createTargzProc->setCommunication( QProcess::Stdout );
   createTargzProc->setWorkingDirectory( QDir::rootDirPath() );
   connect( createTargzProc, SIGNAL( processExited() ), SLOT( targzDone() ) );
 
-  QStringList args = "tar";
-  args += "-xv";
-  retrieveTargzProc = new QProcess( args, this, "retrieveTargzProc" );
+  retrieveTargzProc = new QProcess( this, "retrieveTargzProc" );
   retrieveTargzProc->setCommunication( QProcess::Stdin );
   retrieveTargzProc->setWorkingDirectory( QDir::rootDirPath() );
   connect( retrieveTargzProc, SIGNAL( processExited() ),
@@ -884,15 +1072,26 @@ retrieveTargzProc( 0 ), gzipProc( 0 )
 ServerDTP::~ServerDTP()
 {
     buf.close();
-    file.close();
+    if ( RetrieveFile == mode && file.isOpen() ) {
+	// We're being shutdown before the client closed.
+	file.close();
+	if ( recvFileSize >= 0 && (int)file.size() != recvFileSize ) {
+	    qDebug( "STOR incomplete" );
+	    file.remove();
+	}
+    } else {
+	file.close();
+    }
     createTargzProc->kill();
 }
 
 void ServerDTP::extractTarDone()
 {
     qDebug("extract done");
-    QCopEnvelope e( "QPE/Desktop", "restoreDone(QString)" );
+#ifndef QT_NO_COP
+    QCopEnvelope e( "QPE/System", "restoreDone(QString)" );
     e << file.name();
+#endif
 }
 
 void ServerDTP::connected()
@@ -915,8 +1114,8 @@ void ServerDTP::connected()
       emit completed();
       mode = Idle;
     } else {
-
-      if( !file.atEnd() ) {
+      // Don't write more if there is plenty buffered already.
+      if ( bytesToWrite() <= block_size && !file.atEnd() ) {
 	QCString s;
 	s.resize( block_size );
 	int bytes = file.readBlock( s.data(), block_size );
@@ -934,9 +1133,8 @@ void ServerDTP::connected()
     bytes_written = 0;
     qDebug("==>start send tar process");
     if ( !createTargzProc->start() )
-      qWarning("Error starting %s or %s",
-	       createTargzProc->arguments().join(" ").latin1(),
-	       gzipProc->arguments().join(" ").latin1() );
+      qWarning("Error starting %s",
+	       createTargzProc->arguments().join(" ").latin1());
     break;
   case SendBuffer:
     if ( !buf.open( IO_ReadOnly) ) {
@@ -1007,13 +1205,19 @@ void ServerDTP::connectionClosed()
     // retrieve file mode
     else if ( RetrieveFile == mode ) {
 	file.close();
-	emit completed();
+	if ( recvFileSize >= 0 && (int)file.size() != recvFileSize ) {
+	    qDebug( "STOR incomplete" );
+	    file.remove();
+	    emit failed();
+	} else {
+	    emit completed();
+	}
     }
 
     else if ( RetrieveGzipFile == mode ) {
 	qDebug("Done writing ungzip file; closing input");
-	gzipProc->flushStdin();
-	gzipProc->closeStdin();
+	retrieveTargzProc->flushStdin();
+	retrieveTargzProc->closeStdin();
     }
 
     // retrieve buffer mode
@@ -1067,13 +1271,13 @@ void ServerDTP::readyRead()
 	file.writeBlock( s.data(), s.size() );
     }
     else if ( RetrieveGzipFile == mode ) {
-	if ( !gzipProc->isRunning() )
-	    gzipProc->start();
-	
+	if ( !retrieveTargzProc->isRunning() )
+	    retrieveTargzProc->start();
+
       	QByteArray s;
 	s.resize( bytesAvailable() );
 	readBlock( s.data(), bytesAvailable() );
-	gzipProc->writeToStdin( s );
+	retrieveTargzProc->writeToStdin( s );
 	qDebug("wrote %d bytes to ungzip ", s.size() );
     }
     // retrieve buffer mode
@@ -1087,34 +1291,18 @@ void ServerDTP::readyRead()
 
 void ServerDTP::writeTargzBlock()
 {
-    QByteArray block = gzipProc->readStdout();
+    QByteArray block = createTargzProc->readStdout();
     writeBlock( block.data(), block.size() );
     qDebug("writeTargzBlock %d", block.size());
-    if ( !createTargzProc->isRunning() ) {
-	qDebug("tar and gzip done");
-	emit completed();
-	mode = Idle;
-	disconnect( gzipProc, SIGNAL( readyReadStdout() ),
-		    this, SLOT( writeTargzBlock() ) );
-    }
 }
 
 void ServerDTP::targzDone()
 {
-    //qDebug("targz done");
+    qDebug("tar and gzip done");
+    emit completed();
+    mode = Idle;
     disconnect( createTargzProc, SIGNAL( readyReadStdout() ),
-		this, SLOT( gzipTarBlock() ) );
-    gzipProc->closeStdin();
-}
-
-void ServerDTP::gzipTarBlock()
-{
-    //qDebug("gzipTarBlock");
-    if ( !gzipProc->isRunning() ) {
-	//qDebug("auto start gzip proc");
-	gzipProc->start();
-    }
-    gzipProc->writeToStdin( createTargzProc->readStdout() );
+		    this, SLOT( writeTargzBlock() ) );
 }
 
 void ServerDTP::sendFile( const QString fn, const QHostAddress& host, Q_UINT16 port )
@@ -1144,50 +1332,26 @@ void ServerDTP::sendGzipFile( const QString &fn,
     mode = SendGzipFile;
     file.setName( fn );
 
-    QStringList args = "tar";
-    args += "-cv";
+    QStringList args = "targzip";
+    //args += "-cv";
     args += archiveTargets;
     qDebug("sendGzipFile %s", args.join(" ").latin1() );
     createTargzProc->setArguments( args );
     connect( createTargzProc,
-	     SIGNAL( readyReadStdout() ), SLOT( gzipTarBlock() ) );
-
-    gzipProc->setArguments( "gzip" );	
-    connect( gzipProc, SIGNAL( readyReadStdout() ),
-	     SLOT( writeTargzBlock() ) );
+	     SIGNAL( readyReadStdout() ), SLOT( writeTargzBlock() ) );
 }
 
-void ServerDTP::gunzipDone()
+void ServerDTP::retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port, int fileSize )
 {
-    qDebug("gunzipDone");
-    disconnect( gzipProc, SIGNAL( processExited() ),
-		this, SLOT( gunzipDone() ) );
-    retrieveTargzProc->closeStdin();
-    disconnect( gzipProc, SIGNAL( readyReadStdout() ),
-		    this, SLOT( tarExtractBlock() ) );
-}
-
-void ServerDTP::tarExtractBlock()
-{
-    qDebug("ungzipTarBlock");
-    if ( !retrieveTargzProc->isRunning() ) {
-	qDebug("auto start ungzip proc");
-	if ( !retrieveTargzProc->start() )
-	    qWarning(" failed to start tar -x process");
-    }
-    retrieveTargzProc->writeToStdin( gzipProc->readStdout() );
-}
-
-
-void ServerDTP::retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port )
-{
+    recvFileSize = fileSize;
     file.setName( fn );
     mode = RetrieveFile;
     connectToHost( host.toString(), port );
 }
 
-void ServerDTP::retrieveFile( const QString fn )
+void ServerDTP::retrieveFile( const QString fn, int fileSize )
 {
+    recvFileSize = fileSize;
     file.setName( fn );
     mode = RetrieveFile;
 }
@@ -1198,11 +1362,9 @@ void ServerDTP::retrieveGzipFile( const QString &fn )
     file.setName( fn );
     mode = RetrieveGzipFile;
 
-    gzipProc->setArguments( "gunzip" );	
-    connect( gzipProc, SIGNAL( readyReadStdout() ),
-	     SLOT( tarExtractBlock() ) );
-    connect( gzipProc, SIGNAL( processExited() ),
-	     SLOT( gunzipDone() ) );
+    retrieveTargzProc->setArguments( "targunzip" );
+    connect( retrieveTargzProc, SIGNAL( processExited() ),
+	     SLOT( extractTarDone() ) );
 }
 
 void ServerDTP::retrieveGzipFile( const QString &fn, const QHostAddress& host, Q_UINT16 port )

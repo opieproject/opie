@@ -18,41 +18,41 @@
 **
 **********************************************************************/
 
+#ifndef SYNCDIALOG_H
+#define SYNCDIALOG_H
 
-#include "irserver.h"
+#include <qdialog.h>
+#include <qimage.h>
+#include <qpointarray.h>
 
-#include <qtopia/pluginloader.h>
-#include <qtopia/qpeapplication.h>
 
-#include <qtranslator.h>
-#include <stdlib.h>
-
-#include "obexinterface.h"
-
-#include <qdir.h>
-
-IrServer::IrServer( QObject *parent, const char *name )
-  : QObject( parent, name ), obexIface(0)
+class SyncDialog : public QDialog
 {
-    loader = new PluginLoader( "obex" );
-    QStringList list = loader->list();
-    QStringList::Iterator it;
-    for ( it = list.begin(); it != list.end(); ++it ) {
-	ObexInterface *iface = 0;
-	if ( loader->queryInterface( *it, IID_ObexInterface, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
-	    obexIface = iface;
-	    qDebug("found obex lib" );
-	    break;
-	}
-    }
-    if ( !obexIface )
-	qDebug("could not load IR plugin" );
-}
+    Q_OBJECT
+public:
+    SyncDialog( QWidget *parent, const QString & );
 
-IrServer::~IrServer()
-{
-    if ( obexIface )
-	loader->releaseInterface( obexIface );
-    delete loader;
-}
+signals:
+    void cancel();
+
+protected:
+    void paintEvent( QPaintEvent * );
+    void timerEvent( QTimerEvent * );
+
+    void loadPath();
+    QPointArray scalePath( const QPointArray &pa, int xn, int xd, int yn, int yd );
+    QPointArray generatePath( const QPointArray &pa, int dist );
+
+private:
+    QImage img;
+    QImage dot;
+    QString what;
+    QPointArray path;
+    int nextPt;
+    bool rev;
+    bool hideDot;
+};
+
+
+#endif
 

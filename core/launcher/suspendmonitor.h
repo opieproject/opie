@@ -17,42 +17,40 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef SUSPEND_MONITOR_H
+#define SUSPEND_MONITOR_H
 
 
-#include "irserver.h"
+#include <qobject.h>
+#include <qvaluelist.h>
 
-#include <qtopia/pluginloader.h>
-#include <qtopia/qpeapplication.h>
 
-#include <qtranslator.h>
-#include <stdlib.h>
-
-#include "obexinterface.h"
-
-#include <qdir.h>
-
-IrServer::IrServer( QObject *parent, const char *name )
-  : QObject( parent, name ), obexIface(0)
+class TempScreenSaverMonitor : public QObject
 {
-    loader = new PluginLoader( "obex" );
-    QStringList list = loader->list();
-    QStringList::Iterator it;
-    for ( it = list.begin(); it != list.end(); ++it ) {
-	ObexInterface *iface = 0;
-	if ( loader->queryInterface( *it, IID_ObexInterface, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
-	    obexIface = iface;
-	    qDebug("found obex lib" );
-	    break;
-	}
-    }
-    if ( !obexIface )
-	qDebug("could not load IR plugin" );
-}
+    Q_OBJECT
+public:
+    TempScreenSaverMonitor(QObject *parent = 0, const char *name = 0);
 
-IrServer::~IrServer()
-{
-    if ( obexIface )
-	loader->releaseInterface( obexIface );
-    delete loader;
-}
+    void setTempMode(int,int);
+    void applicationTerminated(int);
+
+signals:
+    void forceSuspend();
+
+protected:
+    void timerEvent(QTimerEvent *);
+
+private:
+    bool removeOld(int);
+    void updateAll();
+    int timerValue();
+
+private:
+    QValueList<int> sStatus[3];
+    int currentMode;
+    int timerId;
+};
+
+
+#endif // SUSPEND_MONITOR_H
 

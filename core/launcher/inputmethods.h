@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,21 +22,33 @@
 #define __INPUT_METHODS_H__
 
 
-#include <qpe/inputmethodinterface.h>
+#include <qtopia/inputmethodinterface.h>
 
 #include <qwidget.h>
 #include <qvaluelist.h>
 
 class QToolButton;
-class QLibrary;
+class QWidgetStack;
+class PluginLoader;
 
 struct InputMethod
 {
-#ifndef QT_NO_COMPONENT
-    QLibrary *library;
-#endif
     QWidget *widget;
-    InputMethodInterface *interface;
+    QString libName;
+    bool newIM;
+    union { 
+	InputMethodInterface *interface;
+	ExtInputMethodInterface *extInterface;
+    };
+
+    inline QString name() const { return newIM ? extInterface->name() : interface->name(); } 
+    inline QPixmap *icon() const { return newIM ? extInterface->icon() : interface->icon(); } 
+    inline QUnknownInterface *iface() { return newIM ? (QUnknownInterface *)extInterface : (QUnknownInterface *)interface; }
+    inline void resetState() { if ( !newIM ) interface->resetState(); }
+
+    int operator <(const InputMethod& o) const;
+    int operator >(const InputMethod& o) const;
+    int operator <=(const InputMethod& o) const;
 };
 
 class InputMethods : public QWidget
@@ -52,6 +64,7 @@ public:
     void showInputMethod(const QString& id);
     void showInputMethod();
     void hideInputMethod();
+    void unloadInputMethods();
     void loadInputMethods();
 
 signals:
@@ -59,16 +72,28 @@ signals:
 
 private slots:
     void chooseKbd();
+    void chooseIm();
     void showKbd( bool );
     void resetStates();
     void sendKey( ushort unicode, ushort scancode, ushort modifiers, bool, bool );
+    void qcopReceive( const QCString &msg, const QByteArray &data );
 
 private:
     void chooseMethod(InputMethod* im);
+    void chooseKeyboard(InputMethod* im);
+    void updateKeyboards(InputMethod *im);
+
+private:
     QToolButton *kbdButton;
     QToolButton *kbdChoice;
-    InputMethod *method;
+    QWidgetStack *imButton; // later will be widget stack
+    QToolButton *imChoice;
+    InputMethod *mkeyboard;
+    InputMethod *imethod;
     QValueList<InputMethod> inputMethodList;
+    QValueList<InputMethod> inputModifierList;
+    QValueList<QUnknownInterface*> ifaceList;
+    PluginLoader *loader;
 };
 
 

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,36 +21,41 @@
 #ifndef __SYSTRAY_H__
 #define __SYSTRAY_H__
 
-#include <qpe/taskbarappletinterface.h>
+#ifndef QT_NO_COMPONENT
+#include <qtopia/taskbarappletinterface.h>
+#endif
 
 #include <qframe.h>
 #include <qvaluelist.h>
 
 class QHBoxLayout;
 class QLibrary;
+class PluginLoader;
 
 struct TaskbarApplet
 {
 #ifndef QT_NO_COMPONENT
     QLibrary *library;
-#endif
     TaskbarAppletInterface *iface;
+#endif
     QWidget *applet;
+    QString name;
 };
 
 class SysTray : public QFrame {
     Q_OBJECT
 public:
     SysTray( QWidget *parent );
+    ~SysTray();
 
+    void clearApplets();
+    void addApplets();
+
+private:
     void loadApplets();
-
-private:
-    void positionApplet( const TaskbarApplet &a );
-
-private:
     QHBoxLayout *layout;
-    QValueList<TaskbarApplet> appletList;
+    QValueList<TaskbarApplet*> appletList;
+    PluginLoader *loader;
 };
 
 

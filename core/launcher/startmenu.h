@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -21,14 +21,12 @@
 #ifndef __START_MENU_H__
 #define __START_MENU_H__
 
+#include <qtopia/applnk.h>
 #include <qstring.h>
 #include <qlist.h>
 #include <qlabel.h>
 #include <qpopupmenu.h>
 
-
-class AppLnkSet;
-class AppLnk;
 
 class StartPopupMenu : public QPopupMenu
 {
@@ -44,14 +42,16 @@ public:
     StartMenu( QWidget * );
     ~StartMenu();
 
-    const AppLnk* execToLink(const QString& appname);
+    void refreshMenu();
 
 public:
     StartPopupMenu *launchMenu;
 
+signals:
+    void tabSelected(const QString&);
+
 public slots:
     void launch( );
-    void loadOptions( );
     void createMenu( );
 
 protected slots:
@@ -61,7 +61,7 @@ protected:
     virtual void mousePressEvent( QMouseEvent * );
     
 private:
-    bool loadMenu( AppLnkSet *folder, QPopupMenu *menu );
+    bool loadMenu( QPopupMenu *menu );
 
 private:
     bool useWidePopupMenu;
@@ -70,7 +70,10 @@ private:
     bool startButtonIsFlat;
     QString startButtonPixmap;
 
-    AppLnkSet *apps;
+    QStringList tabs;
+    QList<AppLnk> other;
+    int ntabs;
+    int nother;
 };
 
 #endif // __START_MENU_H__

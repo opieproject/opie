@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,124 +18,164 @@
 **
 **********************************************************************/
 
-#include "startmenu.h"
-#include "sidething.h"
-#include "mrulist.h"
-#include "info.h"
+#define INCLUDE_MENUITEM_DEF
 
-#include <qpe/qpeapplication.h>
-#include <qpe/config.h>
-#include <qpe/applnk.h>
-#include <qpe/global.h>
-#include <qpe/resource.h>
+#include "startmenu.h"
+
+#include <qtopia/qpeapplication.h>
+#include <qtopia/config.h>
+#include <qtopia/applnk.h>
+#include <qtopia/global.h>
+#include <qtopia/resource.h>
+#include <qtopia/mimetype.h>
 
 #include <qdict.h>
+#include <qdir.h>
+#include <qpainter.h>
 
 #include <stdlib.h>
 
 
-// #define USE_CONFIG_FILE
+void StartPopupMenu::keyPressEvent( QKeyEvent *e )
+{
+    if ( e->key() == Key_F33 || e->key() == Key_Space ) {
+	// "OK" button, little hacky
+	QKeyEvent ke(QEvent::KeyPress, Key_Enter, 13, 0);
+	QPopupMenu::keyPressEvent( &ke );
+    } else {
+	QPopupMenu::keyPressEvent( e );
+    }
+}
 
+//---------------------------------------------------------------------------
 
 StartMenu::StartMenu(QWidget *parent) : QLabel( parent )
 {
-    loadOptions();
+    startButtonPixmap = "go"; // No tr
 
-    setPixmap( Resource::loadPixmap( startButtonPixmap ) );
+    int sz = AppLnk::smallIconSize()+3;
+    QPixmap pm;
+    pm.convertFromImage(Resource::loadImage(startButtonPixmap).smoothScale(sz,sz));
+    setPixmap(pm);
     setFocusPolicy( NoFocus );
-    //setFlat( startButtonIsFlat );
 
-    apps = new AppLnkSet( QPEApplication::qpeDir() + "apps" );
-
-    createMenu();
+    launchMenu = 0;
+    refreshMenu();
 }
 
 
 void StartMenu::mousePressEvent( QMouseEvent * )
 {
     launch();
-    if (desktopInfo)
-        desktopInfo->menuClicked();
 }
 
 
 StartMenu::~StartMenu()
 {
-    delete apps;
 }
-
-
-void StartMenu::loadOptions()
-{
-#ifdef USE_CONFIG_FILE
-    // Read configuration file
-    Config config("StartMenu");
-    config.setGroup( "StartMenu" );
-    QString tmpBoolString1 = config.readEntry( "UseWidePopupMenu", "FALSE" );
-    useWidePopupMenu  = ( tmpBoolString1 == "TRUE" ) ? TRUE : FALSE;
-    QString tmpBoolString2 = config.readEntry( "StartButtonIsFlat", "TRUE" );
-    startButtonIsFlat = ( tmpBoolString2 == "TRUE" ) ? TRUE : FALSE;
-    QString tmpBoolString3 = config.readEntry( "UseMRUList", "TRUE" );
-    popupMenuSidePixmap = config.readEntry( "PopupMenuSidePixmap", "sidebar" );
-    startButtonPixmap = config.readEntry( "StartButtonPixmap", "go" );
-#else
-    // Basically just #include the .qpe_menu.conf file settings
-    useWidePopupMenu = FALSE;
-    popupMenuSidePixmap = "sidebar";
-    startButtonIsFlat = TRUE;
-    startButtonPixmap = "go";
-#endif
-}
-
 
 void StartMenu::createMenu()
 {
-    if ( useWidePopupMenu )
-	launchMenu = new PopupWithLaunchSideThing( this, &popupMenuSidePixmap );
-    else
-        launchMenu = new StartPopupMenu( this );
+    delete launchMenu;
+    launchMenu = new StartPopupMenu( this );
+    loadMenu( launchMenu );
+}
 
-    loadMenu( apps, launchMenu );
+void StartMenu::refreshMenu()
+{
+    Config cfg("Taskbar");
+    cfg.setGroup("Menu");
+    bool ltabs = cfg.readBoolEntry("LauncherTabs",TRUE);
+    bool lot = cfg.readBoolEntry("LauncherOther",TRUE);
+    bool lt = ltabs || lot;
+    if ( launchMenu && !lt )
+	return; // nothing to do
 
+    if ( launchMenu ) {
+	int i;
+	for (i=0; i<(int)launchMenu->count(); i++) {
+	    QMenuItem* item = launchMenu->findItem(launchMenu->idAt(i));
+	    if ( item && item->id() >= 0 && item->id() < ntabs ) {
+		break;
+	    }
+	    if ( item && item->isSeparator() ) {
+		i++;
+		break;
+	    }
+	}
+	while (i<(int)launchMenu->count())
+	    launchMenu->removeItemAt(i);
+	loadMenu(launchMenu);
+    } else {
+	createMenu();
+    }
 }
 
 void StartMenu::itemSelected( int id )
 {
-    const AppLnk *app = apps->find( id );
-    if ( app )
-	app->execute();
+    if ( id >= 0 && id < ntabs ) {
+	emit tabSelected(tabs[id]);
+    } else if ( id >= 20 && id < 20+nother ) {
+	other.at(id-20)->execute();
+    }
 }
 
-bool StartMenu::loadMenu( AppLnkSet *folder, QPopupMenu *menu )
+bool StartMenu::loadMenu( QPopupMenu *menu )
 {
-    bool result = FALSE;
+    Config cfg("Taskbar");
+    cfg.setGroup("Menu");
 
-    QStringList typs = folder->types();
-    QDict<QPopupMenu> typpop;
-    for (QStringList::Iterator tit=typs.begin(); tit!=typs.end(); ++tit) {
-	if ( !(*tit).isEmpty() ) {
-	    QPopupMenu *new_menu = new StartPopupMenu( menu );
-	    typpop.insert(*tit, new_menu);
-	    connect( new_menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
-	    menu->insertItem( folder->typePixmap(*tit), *tit, new_menu );
+    bool ltabs = cfg.readBoolEntry("LauncherTabs",TRUE);
+    bool lot = cfg.readBoolEntry("LauncherOther",TRUE);
+    bool sepfirst = !ltabs && !lot;
+
+    tabs.clear();
+    other.setAutoDelete(TRUE);
+    other.clear();
+    ntabs = 0;
+    nother = 0;
+
+    bool f=TRUE;
+    if ( ltabs || lot ) {
+	QDir dir( MimeType::appsFolderName(), QString::null, QDir::Name );
+	for (int i=0; i<(int)dir.count(); i++) {
+	    QString d = dir[i];
+	    Config cfg(dir.path()+"/"+d+"/.directory",Config::File);
+	    if ( cfg.isValid() ) {
+		QString nm = cfg.readEntry("Name");
+		QString ic = cfg.readEntry("Icon");
+		if ( !!nm && !!ic ) {
+		    tabs.append(d);
+		    menu->insertItem( Resource::loadIconSet(ic), nm, ntabs++ );
+		}
+	    } else if ( lot && d.right(8)==".desktop") {
+		AppLnk* applnk = new AppLnk(dir.path()+"/"+d);
+		if ( applnk->isValid() ) {
+		    if ( applnk->type() == "Separator" ) { // No tr
+			if ( lot ) {
+			    menu->insertSeparator();
+			    sepfirst = f && !ltabs;
+			}
+			delete applnk;
+		    } else {
+			f = FALSE;
+			other.append(applnk);
+			menu->insertItem( Resource::loadIconSet(applnk->icon()),
+				applnk->name(), 20+nother++ );
+		    }
+		} else {
+		    delete applnk;
+		}
+	    }
 	}
+
+	if ( !menu->count() )
+	    sepfirst = TRUE;
     }
 
-    QListIterator<AppLnk> it( folder->children() );
-    for ( ; it.current(); ++it ) {
-	AppLnk *app = it.current();
-	if ( app->type() == "Separator" ) {
-	    menu->insertSeparator();
-	} else {
-	    QString t = app->type();
-	    QPopupMenu* pmenu = typpop.find(t);
-	    if ( !pmenu )
-		pmenu = menu;
-	    pmenu->insertItem( app->pixmap(), app->name(), app->id() );
-	    result=TRUE;
-	}
-    }
+    launchMenu->setName(sepfirst ? "accessories" : "accessories_need_sep"); // No tr
 
+    bool result = nother || ntabs;
     if ( result )
 	connect( menu, SIGNAL(activated(int)), SLOT(itemSelected(int)) );
 
@@ -153,19 +193,3 @@ void StartMenu::launch()
         launchMenu->popup( QPoint( 1, y ) );
 }
 
-const AppLnk* StartMenu::execToLink(const QString& appname)
-{
-    const AppLnk* a = apps->findExec( appname );
-    return a;
-}
-
-void StartPopupMenu::keyPressEvent( QKeyEvent *e )
-{
-    if ( e->key() == Key_F33 || e->key() == Key_Space ) {
-	// "OK" button, little hacky
-	QKeyEvent ke(QEvent::KeyPress, Key_Enter, 13, 0);
-	QPopupMenu::keyPressEvent( &ke );
-    } else {
-	QPopupMenu::keyPressEvent( e );
-    }
-}

@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,90 +18,126 @@
 **
 **********************************************************************/
 
-#include <qpe/qpeapplication.h>
-#include <qpe/qlibrary.h>
-#include <qpe/config.h>
+#include <qtopia/qpeapplication.h>
+#include <qtopia/qlibrary.h>
+#include <qtopia/config.h>
+#include <qtopia/pluginloader.h>
 
 #include <qlayout.h>
 #include <qdir.h>
+#include <qmessagebox.h>
 #include <qtranslator.h>
 
-#include "quicklauncher.h"
 #include "systray.h"
 
 #include <stdlib.h>
 
-#ifdef SINGLE_APP
-#include "clockappletimpl.h"
+#ifdef QT_NO_COMPONENTS
+#include "../plugins/applets/clockapplet/clockappletimpl.h"
 #endif
 
-SysTray::SysTray( QWidget *parent ) : QFrame( parent ), layout(0)
+SysTray::SysTray( QWidget *parent ) : QFrame( parent ), layout(0), loader(0)
 {
     //setFrameStyle( QFrame::Panel | QFrame::Sunken );
     loadApplets();
 }
 
+SysTray::~SysTray()
+{
+    clearApplets();
+}
+
+static int compareAppletPositions(const void *a, const void *b)
+{
+    const TaskbarApplet* aa = *(const TaskbarApplet**)a;
+    const TaskbarApplet* ab = *(const TaskbarApplet**)b;
+    int d = ab->iface->position() - aa->iface->position();
+    if ( d ) return d;
+    return QString::compare(ab->name,aa->name);
+}
+
 void SysTray::loadApplets()
 {
-#ifndef SINGLE_APP
-    QValueList<TaskbarApplet>::Iterator mit;
-    for ( mit = appletList.begin(); mit != appletList.end(); ++mit ) {
-	(*mit).iface->release();
-	(*mit).library->unload();
-	delete (*mit).library;
+    hide();
+    clearApplets();
+    addApplets();
+}
+
+void SysTray::clearApplets()
+{
+#ifndef QT_NO_COMPONENTS
+    if ( loader ) {
+	QValueList<TaskbarApplet*>::Iterator mit;
+	for ( mit = appletList.begin(); mit != appletList.end(); ++mit ) {
+	    loader->releaseInterface( (*mit)->iface );
+	    delete (*mit);
+	}
     }
+#endif
     appletList.clear();
     if ( layout )
 	delete layout;
-    layout = new QHBoxLayout( this );
-
-    QString path = QPEApplication::qpeDir() + "/plugins/applets";
-    QDir dir( path, "lib*.so" );
-    QStringList list = dir.entryList();
-    QStringList::Iterator it;
-    for ( it = list.begin(); it != list.end(); ++it ) {
-	TaskbarAppletInterface *iface = 0;
-	QLibrary *lib = new QLibrary( path + "/" + *it );
-	if ( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) {
-	    TaskbarApplet applet;
-	    applet.library = lib;
-	    applet.iface = iface;
-	    applet.applet = applet.iface->applet( this );
-	    positionApplet( applet );
-	    QString lang = getenv( "LANG" );
-	    QTranslator * trans = new QTranslator(qApp);
-	    QString type = (*it).left( (*it).find(".") );
-	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-	    qDebug("tr fpr sysapplet: %s", tfn.latin1() );
-	    if ( trans->load( tfn ))
-		qApp->installTranslator( trans );
-	    else
-		delete trans;
-	} else {
-	    delete lib;
-	}
-    }
-#else
-    layout = new QHBoxLayout( this );
-    TaskbarApplet applet;
-    applet.iface = new ClockAppletImpl();
-    applet.applet = applet.iface->applet( this );
-    positionApplet( applet );
-#endif
+    layout = new QHBoxLayout( this, 0, 1 );
+    layout->setAutoAdd(TRUE);
+    delete loader;
+    loader = 0;
 }
 
-void SysTray::positionApplet( const TaskbarApplet &a )
+void SysTray::addApplets()
 {
-    int p = 0;
-    QValueList<TaskbarApplet>::Iterator it;
-    for ( it = appletList.begin(); it != appletList.end(); ++it ) {
-	if ( (*it).iface->position() > a.iface->position() )
-	    break;
-	p += 2;
+    hide();
+    delete loader;
+    loader = new PluginLoader( "applets" );
+#ifndef QT_NO_COMPONENTS
+    QStringList faulty;
+
+    QStringList list = loader->list();
+    TaskbarApplet **applets = new TaskbarApplet* [list.count()];
+    QStringList::Iterator it;
+    int napplets=0;
+    for ( it = list.begin(); it != list.end(); ++it ) {
+	TaskbarAppletInterface *iface = 0;
+	if ( loader->queryInterface( *it, IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) {
+	    TaskbarApplet *applet = new TaskbarApplet;
+	    applets[napplets++] = applet;
+	    applet->iface = iface;
+	    applet->name = *it;
+	} else {
+#ifndef Q_OS_WIN32
+	    // Same as Taskbar settings uses
+	    QString name = (*it).mid(3);
+            int sep = name.find( ".so" );
+#else
+	    QString name = (*it);
+            int sep = name.find( ".dll" );
+#endif
+            if ( sep > 0 )
+                name.truncate( sep );
+            sep = name.find( "applet" );
+            if ( sep == (int)name.length() - 6 )
+                name.truncate( sep );
+            name[0] = name[0].upper();
+	    faulty += name; 
+	    // we don't do anything with faulty anymore -
+	    // maybe we should.
+	}
     }
 
-    appletList.insert( it, a );
-    layout->insertWidget( p, a.applet );
-    layout->insertSpacing( p, 1 );
+    qsort(applets,napplets,sizeof(applets[0]),compareAppletPositions);
+    while (napplets--) {
+	TaskbarApplet *applet = applets[napplets];
+	applet->applet = applet->iface->applet( this );
+	if ( applet->applet->maximumSize().width() <= 1 )
+	    applet->applet->hide();
+	appletList.append(applet);
+    }
+    delete [] applets;
+#else
+    TaskbarApplet * const applet = new TaskbarApplet();
+    applet->iface = new ClockAppletImpl();
+    applet->applet = applet->iface->applet( this );
+    appletList.append( applet );
+#endif
+    show();
 }
 

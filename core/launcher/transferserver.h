@@ -1,7 +1,7 @@
 /**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -22,9 +22,12 @@
 #include <qdir.h>
 #include <qfile.h>
 #include <qbuffer.h>
+#include <qlist.h>
 
 class QFileInfo;
 class QProcess;
+class ServerPI;
+
 class TransferServer : public QServerSocket
 {
     Q_OBJECT
@@ -34,6 +37,27 @@ public:
     virtual ~TransferServer();
 
     void newConnection( int socket );
+    void authorizeConnections();
+
+protected slots:
+    void closed(ServerPI *);
+
+private:
+    QList<ServerPI> connections;
+};
+
+class SyncAuthentication : QObject
+{
+    Q_OBJECT
+
+public:
+    static int isAuthorized(QHostAddress peeraddress);
+    static bool checkPassword(const QString& pw);
+    static bool checkUser(const QString& user);
+
+    static QString serverId();
+    static QString loginName();
+    static QString ownerName();
 };
 
 
@@ -56,8 +80,8 @@ public:
     void sendByteArray( const QByteArray& array );
     void sendByteArray( const QByteArray& array, const QHostAddress& host, Q_UINT16 port );
 
-    void retrieveFile( const QString fn );
-    void retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port );
+    void retrieveFile( const QString fn, int fileSize );
+    void retrieveFile( const QString fn, const QHostAddress& host, Q_UINT16 port, int fileSize );
     void retrieveGzipFile( const QString &fn );
     void retrieveGzipFile( const QString &fn, const QHostAddress& host, Q_UINT16 port );
     void retrieveByteArray();
@@ -65,6 +89,7 @@ public:
 
     Mode dtpMode() { return mode; }
     QByteArray buffer() { return buf.buffer(); }
+    QString fileName() const { return file.name(); }
 
     void setSocket( int socket );
 
@@ -79,10 +104,6 @@ private slots:
     void readyRead();
     void writeTargzBlock();
     void targzDone();
-
-    void gzipTarBlock();
-    void tarExtractBlock();
-    void gunzipDone();
     void extractTarDone();
 
 private:
@@ -93,7 +114,7 @@ private:
     QBuffer buf;
     QProcess *createTargzProc;
     QProcess *retrieveTargzProc;
-    QProcess *gzipProc;
+    int recvFileSize;
 };
 
 class ServerSocket : public QServerSocket
@@ -120,6 +141,11 @@ public:
     ServerPI( int socket, QObject *parent = 0, const char* name = 0 );
     virtual ~ServerPI();
 
+    bool verifyAuthorised();
+
+signals:
+    void connectionClosed(ServerPI *);
+
 protected slots:
     void read();
     void send( const QString& msg );
@@ -131,8 +157,6 @@ protected slots:
     void newConnection( int socket );
 
 protected:
-    bool checkUser( const QString& user );
-    bool checkPassword( const QString& pw );
     bool checkReadFile( const QString& file );
     bool checkWriteFile( const QString& file );
     bool parsePort( const QString& pw );
@@ -163,6 +187,5 @@ private:
     QString renameFrom;
     QString lastCommand;
     int waitsocket;
+    int storFileSize;
 };
-
-bool accessAuthorized(QHostAddress peeraddress);
