@@ -20,7 +20,8 @@
 #include <kapp.h>
 #include <kstandarddirs.h>
 #endif
-#include <iostream>
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 #include <qpe/resource.h>
 MCursor::~MCursor() {
 	delete cursor;
@@ -37,14 +38,14 @@ void MCursor::load(const char *name, int masked) {
 
 	QBitmap bitmap, mask;
 	if (bitmap.load(file) == FALSE) {
-		std::cerr << "cannot open " << file << std::endl;
+		oerr << "cannot open " << file << oendl;
 		exit(1);
 	}
 	if (masked == SEP_MASK) {
 //		mfile.sprintf ("%sbitmaps/%s_mask.xbm", (const char*)dir, name);
 		mfile = file = dirs.findResource("data","kbill/bitmaps/" + QString::fromLocal8Bit(name)  + "_mask.xbm");
 		if (mask.load(mfile) == FALSE) {
-			std::cerr << "cannot open " << file << std::endl;
+			oerr << "cannot open " << file << oendl;
 			exit(1);
 		}
 	}

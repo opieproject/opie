@@ -10,7 +10,7 @@ INTERFACES = helpdialog.ui
 TARGET 		= kbill
 INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS		+= -lqpe -lstdc++
+LIBS		+= -lqpe -lopiecore2
 DESTDIR 	=  $(OPIEDIR)/bin
 
 include( $(OPIEDIR)/include.pro )

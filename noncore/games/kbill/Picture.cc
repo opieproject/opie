@@ -16,8 +16,8 @@
  ***************************************************************************/
 #include "Picture.h"
 
-#include <iostream>
-
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 #include <qpe/resource.h>
 #ifdef KDEVER
 #include <kapp.h>
@@ -48,7 +48,7 @@ void Picture::load(const char *name, int index) {
 	kdDebug() << file << std::endl;
 	pix = new QPixmap();
 	if (pix->load(file) == FALSE)
-		std::cerr << "cannot open " << file << std::endl;
+		oerr << "cannot open " << file << oendl;
 	width = pix->width();
 	height = pix->height();
 #endif
