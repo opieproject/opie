@@ -50,8 +50,8 @@
 #define STYLE_BARS 0
 #define STYLE_ANTENNA 1
 
-#define MDEBUG
-//#undef MDEBUG
+//#define MDEBUG
+#undef MDEBUG
 
 WirelessControl::WirelessControl( WirelessApplet *applet, QWidget *parent, const char *name )
         : QFrame( parent, name, WStyle_StaysOnTop | WType_Popup ), applet( applet )
@@ -219,6 +219,7 @@ void WirelessApplet::checkInterface()
 {
     interface = 0L;
     ONetwork* net = ONetwork::instance();
+    net->synchronize();
     ONetwork::InterfaceIterator it = net->iterator();
 
     while ( it.current() && !it.current()->isWireless() ) ++it;
@@ -324,14 +325,26 @@ WirelessApplet::~WirelessApplet()
 
 void WirelessApplet::timerEvent( QTimerEvent* )
 {
+#ifdef MDEBUG
     qDebug( "WirelessApplet::timerEvent" );
-    OWirelessNetworkInterface* iface = interface;
-
-    if ( iface )
+#endif
+    if ( interface )
     {
+        if ( !ONetwork::instance()->isPresent( (const char*) interface->name() ) )
+        {
+#ifdef MDEBUG
+            qDebug( "WIFIAPPLET: Interface no longer present." );
+#endif
+            interface = 0L;
+            mustRepaint();
+            return;
+        }
+
         if ( mustRepaint() )
         {
+#ifdef MDEBUG
             qDebug( "WIFIAPPLET: A value has changed -> repainting." );
+#endif
             repaint();
         }
 
@@ -356,16 +369,14 @@ void WirelessApplet::mousePressEvent( QMouseEvent * )
 
 bool WirelessApplet::mustRepaint()
 {
-    OWirelessNetworkInterface* iface = interface;
-
     // check if there are enough changes to justify a (flickering) repaint
 
     // has the interface changed?
 
-    if ( iface != oldiface )
+    if ( interface != oldiface )
     {
-        oldiface = iface;
-        if ( iface )
+        oldiface = interface;
+        if ( interface )
         {
 #ifdef MDEBUG
             qDebug( "WIFIAPPLET: We had no interface but now we have one! :-)" );
@@ -391,7 +402,7 @@ bool WirelessApplet::mustRepaint()
     }
 
     int noiseH = 50; // iface->noisePercent() * ( height() - 3 ) / 100;
-    int signalH = iface->signalStrength() * ( height() - 3 ) / 100;
+    int signalH = interface->signalStrength() * ( height() - 3 ) / 100;
     int qualityH = 50; // iface->qualityPercent() * ( height() - 3 ) / 100;
 
     if ( ( noiseH != oldnoiseH )
@@ -404,28 +415,28 @@ bool WirelessApplet::mustRepaint()
         return true;
     }
 
-    if ( rocESSID && ( oldESSID != iface->SSID() ) )
+    if ( rocESSID && ( oldESSID != interface->SSID() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: ESSID has changed." );
 #endif
         renewDHCP();
     }
-    else if ( rocFREQ && ( oldFREQ != iface->frequency() ) )
+    else if ( rocFREQ && ( oldFREQ != interface->frequency() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: FREQ has changed." );
 #endif
         renewDHCP();
     }
-    else if ( rocAP && ( oldAP != iface->associatedAP().toString() ) )
+    else if ( rocAP && ( oldAP != interface->associatedAP().toString() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: AP has changed." );
 #endif
         renewDHCP();
     }
-    else if ( rocMODE && ( oldMODE != iface->mode() ) )
+    else if ( rocMODE && ( oldMODE != interface->mode() ) )
     {
 #ifdef MDEBUG
         qDebug( "WIFIAPPLET: MODE has changed." );
@@ -433,38 +444,35 @@ bool WirelessApplet::mustRepaint()
         renewDHCP();
     }
 
-    oldESSID = iface->SSID();
-    oldMODE = iface->mode();
-    oldFREQ = iface->frequency();
-    oldAP = iface->associatedAP().toString();
+    oldESSID = interface->SSID();
+    oldMODE = interface->mode();
+    oldFREQ = interface->frequency();
+    oldAP = interface->associatedAP().toString();
 
     return false;
 }
 
 void WirelessApplet::updatePopupWindow()
 {
-    OWirelessNetworkInterface* iface = interface;
-    int qualityH = iface->signalStrength();
+    int qualityH = interface->signalStrength();
 
     if ( status->mgraph )
         status->mgraph->addValue( qualityH, false );
 
     QString freqString;
-    QString cell = ( iface->mode() == "Managed" ) ? "AP: " : "Cell: ";
-    freqString.sprintf( "%.3f GHz", iface->frequency() );
-    status->statusLabel->setText( "Station: " + iface->nickName() + "<br>" +
-                                  "ESSID: " + iface->SSID() + "<br>" +
-                                  "MODE: " + iface->mode() + "<br>" +
+    QString cell = ( interface->mode() == "Managed" ) ? "AP: " : "Cell: ";
+    freqString.sprintf( "%.3f GHz", interface->frequency() );
+    status->statusLabel->setText( "Station: " + interface->nickName() + "<br>" +
+                                  "ESSID: " + interface->SSID() + "<br>" +
+                                  "MODE: " + interface->mode() + "<br>" +
                                   "FREQ: " + freqString + "<br>" +
-                                  cell + " " + iface->associatedAP().toString() );
+                                  cell + " " + interface->associatedAP().toString() );
 }
 
 const char** WirelessApplet::getQualityPixmap()
 {
-    OWirelessNetworkInterface* iface = interface;
-
-    if ( !iface ) return ( const char** ) nowireless_xpm;
-    int qualityH = iface->signalStrength();
+    if ( !interface ) return ( const char** ) nowireless_xpm;
+    int qualityH = interface->signalStrength();
     if ( qualityH < 0 ) return ( const char** ) nowireless_xpm;
 
     if ( visualStyle == STYLE_ANTENNA )
@@ -482,8 +490,6 @@ const char** WirelessApplet::getQualityPixmap()
 
 void WirelessApplet::paintEvent( QPaintEvent* )
 {
-    OWirelessNetworkInterface* iface = interface;
-
     QPainter p( this );
     QColor color;
 
@@ -496,7 +502,7 @@ void WirelessApplet::paintEvent( QPaintEvent* )
 
         int noiseH = 30; // iface->noisePercent() * ( height() - 3 ) / 100;
         int signalH = 50; // iface->signalPercent() * ( height() - 3 ) / 100;
-        int qualityH = iface->signalStrength(); // iface->qualityPercent() * ( height() - 3 ) / 100;
+        int qualityH = interface->signalStrength(); // iface->qualityPercent() * ( height() - 3 ) / 100;
 
         double intensity;
         int pixelHeight;
