@@ -11,7 +11,7 @@
  ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.53 2002-09-25 00:58:17 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.54 2002-12-26 00:57:15 sandman Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 extern "C" {
@@ -235,7 +235,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
              this, SLOT(receive(const QCString&, const QByteArray&)) );
 
     if( toggleKey != -1 ) {
-      QCopEnvelope e("QPE/Desktop", "keyRegister(int key, QString channel, QString message)");
+      // keyRegister(key, channel, message)
+      QCopEnvelope e("QPE/Launcher", "keyRegister(int,QCString,QCString)");
       //           e << 4096; // Key_Escape
       //          e << Key_F5; //4148
       e << toggleKey;
