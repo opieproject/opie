@@ -65,10 +65,11 @@ namespace OpieTooth {
         QPixmap offPix;
         QPixmap onPix;
 
-	public slots:
+	private slots:
         void addSearchedDevices( QList<RemoteDevice> &newDevices );
         void addServicesToDevice( QListViewItem *item );
         void addServicesToDevice( const QString& device, Services::ValueList );
+        void addConnectedDevices();
         void startServiceActionClicked( QListViewItem *item );
         void startServiceActionHold( QListViewItem *item, const QPoint &point, int column);
         void applyConfigChanges();
