@@ -51,6 +51,8 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
 
 
 MediaPlayerState::~MediaPlayerState() {
+    Config cfg( "OpiePlayer" );
+    writeConfig( cfg );
 }
 
 
@@ -254,6 +256,9 @@ void MediaPlayerState::togglePlaying() {
 void MediaPlayerState::toggleBlank() {
     setBlanked( !blanked);
 }
+
+
+
 
 
 
