@@ -26,7 +26,7 @@ namespace OpieObex {
         bool testDateTodo(const QString& file);
         bool testAddressbook(const QString& file);
         /* called by checkFile */
-        void tidyUp( QString& file );
+        void tidyUp( QString& file, const QString& ending );
 
     private slots:
         void slotReceived( const QString& );

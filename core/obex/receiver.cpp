@@ -64,15 +64,18 @@ void Receiver::handleOther( const QString& other ) {
     OtherHandler* hand =  new OtherHandler();
     hand->handle( other );
 }
-void Receiver::tidyUp( QString& _file ) {
+void Receiver::tidyUp( QString& _file, const QString& ending) {
     /* libversit fails on BASE64 encoding we try to sed it away */
     QString file = _file;
-    char foo[] = "/tmp/opie-XXXXXX";
+    char foo[24]; // big enough
+    (void)::strcpy(foo, "/tmp/opie-XXXXXX");
+
     int fd = ::mkstemp(foo);
 
     if ( fd == -1 )
         return;
 
+    (void)::strncat( foo, ending.latin1(), 4 );
     _file = QString::fromUtf8( foo );
     QString cmd = QString("sed -e \"s/^\\(X-MICROSOFT-BODYINK\\)\\;/\\1:/;\" < %2 > %2 ").arg( Global::shellQuote(file)).arg( Global::shellQuote(_file) );
     qWarning("Executing: %s", cmd.utf8().data() );
@@ -84,6 +87,20 @@ void Receiver::tidyUp( QString& _file ) {
 int Receiver::checkFile( QString& file ) {
     qWarning("check file!! %s", file.latin1() );
     int ret;
+    QString ending;
+
+    if (file.right(4) == ".vcs" ) {
+        ret = Datebook;
+        ending = QString::fromLatin1(".vcs");
+    }else if ( file.right(4) == ".vcf") {
+        ret = AddressBook;
+        ending = QString::fromLatin1(".vcf");
+    }else
+        ret = Other;
+
+
+    if (ending.isEmpty() )
+        return ret;
 
     /**
      * currently the parser is broken in regard of BASE64 encoding
@@ -91,17 +108,7 @@ int Receiver::checkFile( QString& file ) {
      * tidy up system sed script
      * At this point we can also remove umlaute from the filename
      */
-    if (file.right(4) == QString::fromLatin1(".vcs") ||
-        file.right(4) == QString::fromLatin1(".vcf") )
-        tidyUp( file );
-
-    if (file.right(4) == ".vcs" ) {
-        ret = Datebook;
-    }else if ( file.right(4) == ".vcf") {
-        ret = AddressBook;
-    }else
-        ret = Other;
-
+    tidyUp( file, ending );
 
     qWarning("check it now %d", ret );
     return ret;
