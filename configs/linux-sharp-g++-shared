@@ -77,7 +77,7 @@ SYSCONF_LINK_TARGET_STATIC = lib$(TARGET).a
 SYSCONF_LINK_LIB_STATIC	= rm -f $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) ; \
 				 $(SYSCONF_AR) $(DESTDIR)$(SYSCONF_LINK_TARGET_STATIC) $(OBJECTS) $(OBJMOC) 
 # Compiling application source
-SYSCONF_CXXFLAGS	= -pipe -DQT_QWS_EBX -DQT_QWS_CUSTOM -DQWS -fno-exceptions -fno-rtti -O2 -Wall -W
+SYSCONF_CXXFLAGS	= -pipe -DQT_QWS_EBX -DQT_QWS_SHARP -DQWS -fno-exceptions -fno-rtti -O2 -Wall -W
 SYSCONF_CFLAGS		= -pipe -O2 -Wall -W
 # Default link type (static linking is still be used where required)
 SYSCONF_LINK_LIB	= $(SYSCONF_LINK_LIB_SHARED)

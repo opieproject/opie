@@ -20,7 +20,7 @@
 **********************************************************************/
 
 #include <qpe/storage.h>
-#ifdef QT_QWS_CUSTOM
+#ifdef QT_QWS_SHARP
 #include <qpe/custom.h>
 #endif
 

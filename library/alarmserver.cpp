@@ -158,7 +158,7 @@ static bool triggerAtd( bool writeHWClock = FALSE )
     if ( trigger.open(IO_WriteOnly|IO_Raw) ) {
 
 	const char* data =
-#ifdef QT_QWS_CUSTOM
+#ifdef QT_QWS_SHARP
 	//custom atd only writes HW Clock if we write a 'W'
 	    ( writeHWClock ) ? "W\n" :
 #endif

@@ -33,7 +33,7 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/global.h>
 
-#if defined( QT_QWS_CUSTOM ) || defined( QT_QWS_IPAQ )
+#if defined( QT_QWS_SHARP ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
 #endif
 
@@ -169,7 +169,7 @@ TaskBar::TaskBar() : QHBox(0, 0, WStyle_Customize | WStyle_Tool | WStyle_StaysOn
     sysTray = new SysTray( this );
 
     // ## make customizable in some way?
-#ifdef QT_QWS_CUSTOM
+#ifdef QT_QWS_SHARP
     lockState = new LockKeyState( this );
 #else
     lockState = 0;

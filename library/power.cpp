@@ -20,7 +20,7 @@
 
 #include "power.h"
 
-#ifdef QT_QWS_CUSTOM
+#ifdef QT_QWS_SHARP
 #include "custom.h"
 #endif
 
@@ -132,7 +132,7 @@ bool PowerStatusManager::getProcApmStatus( int &ac, int &bs, int &bf, int &pc, i
     return ok;
 }
 
-#ifdef QT_QWS_CUSTOM
+#ifdef QT_QWS_SHARP
 
 void PowerStatusManager::getStatus()
 {

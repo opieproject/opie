@@ -35,7 +35,7 @@
 +    static int ipaq_return_pressed = false; // iPAQ Action Key has ScanCode 0x60: 0x60|0x80 = 0xe0 == extended mode 1 !
 +#endif
 +    
- #if !defined(QT_QWS_CUSTOM)
+ #if !defined(QT_QWS_SHARP)
 -    if (code == 224) {
 +    if ((code == 224) 
 +#if defined(QT_QWS_IPAQ)
@@ -95,7 +95,7 @@
 +	    break;
  	}
      } else {
- #if defined(QT_QWS_CUSTOM)
+ #if defined(QT_QWS_SHARP)
 @@ -650,6 +690,7 @@
  		repeatable = FALSE;
  		break;

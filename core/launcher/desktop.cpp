@@ -40,7 +40,7 @@
 #include <qpe/network.h>
 #include <qpe/global.h>
 
-#if defined( QT_QWS_CUSTOM ) || defined( QT_QWS_IPAQ )
+#if defined( QT_QWS_SHARP ) || defined( QT_QWS_IPAQ )
 #include <qpe/custom.h>
 #endif
 

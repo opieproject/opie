@@ -115,7 +115,7 @@ ShutdownImpl::ShutdownImpl( QWidget* parent, const char *name, WFlags fl )
 	m_progress-> hide ( );
 	Global::hideInputMethod ( );
 
-#ifdef QT_QWS_CUSTOM
+#ifdef QT_QWS_SHARP
 
 	shutdown-> hide ( );
 #endif
