@@ -85,16 +85,25 @@ libopie is functionally seperated into the following libraries:
 --------------------------------------------------------
 
  - ocheckitem
- - todoevent
- - todoresource
  - todayplugininterface
+
+THIS STUFF IS OUTDATED/DEPRICATED AND SCHOULD NOT
+BE MOVED IN THE NEW LIBRARY !! 
+USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
+
+ - todoresource
+ - todoevent
  - todovcalresource
 
 1.4 Contents of libopiedb [ opiedb ]
 --------------------------------------------------------
 
- - tododb
  - xmltree
+
+THIS STUFF IS OUTDATED/DEPRICATED AND SCHOULD NOT
+BE MOVED IN THE NEW LIBRARY !! 
+USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
+ - tododb
 
 1.5 Contents of libopienet [ opienet ]
 --------------------------------------------------------
