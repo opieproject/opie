@@ -1,0 +1,9 @@
+Files: i18n/nl/.directory i18n/nl/*.qm
+Priority: optional
+Section: opie/i18n
+Maintainer: Carsten Niehaus <cniehaus@handhelds.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base, opie-language
+Description: i18n: Dutch
+ Dutch UI texts and dictionary for OPIE environment.
