@@ -554,8 +554,10 @@ void PlayListWidget::addSelected() {
         lnk.setName( QFileInfo(filename).baseName() ); //sets name
         lnk.setFile( filename ); //sets file name
         d->selectedFiles->addToSelection(  lnk);
+        
       }
     }
+    audioView->clearSelection();    
   }
     break;
     
@@ -563,14 +565,13 @@ void PlayListWidget::addSelected() {
     QListViewItemIterator it( videoView );
     for ( ; it.current(); ++it ) {
       if ( it.current()->isSelected() ) {
-        //      myFile = (*it);
-    
         filename=it.current()->text(3);
         lnk.setName( QFileInfo(filename).baseName() ); //sets name
         lnk.setFile( filename ); //sets file name
         d->selectedFiles->addToSelection(  lnk);
       }
     }
+    videoView->clearSelection();
   }
     break;
   };
