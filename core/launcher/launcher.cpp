@@ -748,6 +748,7 @@ void Launcher::applicationScanningProgress( int percent )
 		tabs->view( (*it) )->setUpdatesEnabled( TRUE );
 		tabs->view( (*it) )->setSortEnabled( TRUE );
 	    }
+            tb->refreshStartMenu();
 	    break;
         }
         default:
@@ -770,7 +771,6 @@ void Launcher::documentScanningProgress( int percent )
 	    tabs->docView()->setSortEnabled( TRUE );
 	    tabs->docView()->setUpdatesEnabled( TRUE );
 	    tabs->setLoadingWidgetEnabled( FALSE );
-            tb->refreshStartMenu();
 	    break;
         }
         default:
