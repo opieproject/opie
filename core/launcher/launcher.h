@@ -110,6 +110,8 @@ public:
     void applicationStateChanged( const QString& name, ApplicationState state );
     void documentAdded( const DocLnk& doc );
     void documentRemoved( const DocLnk& doc );
+    void aboutToAddBegin();
+    void aboutToAddEnd();
     void allDocumentsRemoved();
     void documentChanged( const DocLnk& oldDoc, const DocLnk& newDoc );
     void storageChanged( const QList<FileSystem> & );

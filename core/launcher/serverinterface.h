@@ -50,6 +50,8 @@ public:
     static const AppLnkSet& appLnks();
 
     // These functions notify of adding, removal and changes of document links used in the documents tab for example
+    virtual void aboutToAddBegin() {}
+    virtual void aboutToAddEnd() {}
     virtual void documentAdded( const DocLnk& doc ) = 0;
     virtual void documentRemoved( const DocLnk& doc ) = 0;
     virtual void allDocumentsRemoved() = 0;

@@ -68,7 +68,7 @@ public:
     bool store( DocLnk* dl );
     void estimatedPercentScanned();
     void appendDocpath(FileSystem*);
-    
+
 
     DocLnkSet dls;
     QDict<void> reference;
@@ -190,6 +190,8 @@ void DocumentList::timerEvent( QTimerEvent *te )
 {
     if ( te->timerId() == d->tid ) {
 	// Do 3 at a time
+        if ( d->serverGui )
+            d->serverGui->aboutToAddBegin();
 	for (int i = 0; i < 3; i++ ) {
 	    const DocLnk *lnk = d->iterate();
 	    if ( lnk ) {
@@ -203,7 +205,9 @@ void DocumentList::timerEvent( QTimerEvent *te )
 		    sendAllDocLinks();
 		break;
 	    }
-	}
+        }
+        if ( d->serverGui )
+            d->serverGui->aboutToAddEnd();
     }
 }
 

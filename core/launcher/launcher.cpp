@@ -696,6 +696,16 @@ void Launcher::documentAdded( const DocLnk& doc )
     tabs->docView()->addItem( new DocLnk( doc ), FALSE );
 }
 
+void Launcher::aboutToAddBegin()
+{
+    tabs->docView()->setUpdatesEnabled( false );
+}
+
+void Launcher::aboutToAddEnd()
+{
+    tabs->docView()->setUpdatesEnabled( true );
+}
+
 void Launcher::showLoadingDocs()
 {
     tabs->docView()->hide();
