@@ -1012,6 +1012,8 @@ void OFileSelector::initializeOldSelector() {
     m_select = new FileSelector( mime ,
 				 m_mainView, "fileselector",
 				 FALSE, FALSE);
+    m_select->setCategorySelectVisible( FALSE );
+    m_select->setTypeComboVisible( FALSE );				 
 
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
 	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
