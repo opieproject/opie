@@ -42,8 +42,10 @@
 
 #include <net/if.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
 
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
+#define _PROCNETDEV "/proc/net/dev"
 
 MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name), advancedUserMode(true), scheme(DEFAULT_SCHEME){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
@@ -147,65 +149,76 @@ MainWindowImp::~MainWindowImp(){
  * Query the kernel for all of the interfaces.
  */ 
 void MainWindowImp::getAllInterfaces(){
-  int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+  int sockfd = socket(PF_INET, SOCK_DGRAM, 0);
   if(sockfd == -1)
     return;
   
-  char buf[8*1024];
-  struct ifconf ifc;
-  ifc.ifc_len = sizeof(buf);
-  ifc.ifc_req = (struct ifreq *) buf;
-  int result=ioctl(sockfd, SIOCGIFCONF, &ifc);
+  struct ifreq ifr;
+  QStringList ifaces;
+  QFile procFile(QString(_PROCNETDEV));
+  int result;
 
-  for (char* ptr = buf; ptr < buf + ifc.ifc_len; ){
-    struct ifreq *ifr =(struct ifreq *) ptr;
-    int len = sizeof(struct sockaddr);
-#ifdef  HAVE_SOCKADDR_SA_LEN
-    if (ifr->ifr_addr.sa_len > len)
-      len = ifr->ifr_addr.sa_len;    /* length > 16 */
-#endif
-    ptr += sizeof(ifr->ifr_name) + len;  /* for next one in buffer */
-
-    int flags;
-    struct sockaddr_in *sinptr;
-    Interface *i = NULL;
-    switch (ifr->ifr_addr.sa_family){
-      case AF_INET:
-        sinptr = (struct sockaddr_in *) &ifr->ifr_addr;
-        flags=0;
-
-        struct ifreq ifcopy;
-        ifcopy=*ifr;
-        result=ioctl(sockfd,SIOCGIFFLAGS,&ifcopy);
-        flags=ifcopy.ifr_flags;
-        i = new Interface(this, ifr->ifr_name, false);
-	i->setAttached(true);
-        if ((flags & IFF_UP) == IFF_UP)
-          i->setStatus(true);
-        else
-          i->setStatus(false);
-
-        if ((flags & IFF_BROADCAST) == IFF_BROADCAST)
-          i->setHardwareName("Ethernet");
-        else if ((flags & IFF_POINTOPOINT) == IFF_POINTOPOINT)
-          i->setHardwareName("Point to Point");
-        else if ((flags & IFF_MULTICAST) == IFF_MULTICAST)
-          i->setHardwareName("Multicast");
-        else if ((flags & IFF_LOOPBACK) == IFF_LOOPBACK)
-          i->setHardwareName("Loopback");
-        else
-          i->setHardwareName("Unknown");
-
-        interfaceNames.insert(i->getInterfaceName(), i);
-        updateInterface(i);
-        connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
-	break;
-
-      default:
-	qDebug(ifr->ifr_name);
-	qDebug(QString("%1").arg(ifr->ifr_addr.sa_family).latin1());
-        break;
+  if (! procFile.exists()) {
+    struct ifreq ifrs[100];
+    struct ifconf ifc;
+    ifc.ifc_len = sizeof(ifrs);
+    ifc.ifc_req = ifrs;
+    result = ioctl(sockfd, SIOCGIFCONF, &ifc);
+    
+    for (unsigned int i = 0; i < ifc.ifc_len / sizeof(struct ifreq); i++) {
+      struct ifreq *pifr = &ifrs[i];
+  
+      ifaces += pifr->ifr_name;
     }
+  } else {
+    procFile.open(IO_ReadOnly);
+    QString line;
+    QTextStream procTs(&procFile);
+    int loc = -1;
+
+    procTs.readLine(); // eat a line
+    procTs.readLine(); // eat a line
+    while((line = procTs.readLine().simplifyWhiteSpace()) != QString::null) {
+      if((loc = line.find(":")) != -1) {
+        ifaces += line.left(loc);
+      }
+    }
+  }
+
+  for (QStringList::Iterator it = ifaces.begin(); it != ifaces.end(); ++it) {
+    int flags = 0, family;
+    Interface *i = NULL;
+
+    strcpy(ifr.ifr_name, (*it).latin1());
+
+    qWarning("ifr.ifr_name=%s\n", ifr.ifr_name); 
+
+    struct ifreq ifcopy;
+    ifcopy = ifr;
+    result = ioctl(sockfd, SIOCGIFFLAGS, &ifcopy);
+    flags = ifcopy.ifr_flags;
+    i = new Interface(this, ifr.ifr_name, false);
+	i->setAttached(true);
+    if ((flags & IFF_UP) == IFF_UP)
+      i->setStatus(true);
+    else
+      i->setStatus(false);
+
+    if ((flags & IFF_BROADCAST) == IFF_BROADCAST)
+      i->setHardwareName("Ethernet");
+    else if ((flags & IFF_POINTOPOINT) == IFF_POINTOPOINT)
+      i->setHardwareName("Point to Point");
+    else if ((flags & IFF_MULTICAST) == IFF_MULTICAST)
+      i->setHardwareName("Multicast");
+    else if ((flags & IFF_LOOPBACK) == IFF_LOOPBACK)
+      i->setHardwareName("Loopback");
+    else
+      i->setHardwareName("Unknown");
+
+    qWarning("Adding interface %s to interfaceNames\n", ifr.ifr_name);
+    interfaceNames.insert(i->getInterfaceName(), i);
+    updateInterface(i);
+    connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
   }
 }
 
@@ -228,7 +241,11 @@ void MainWindowImp::loadModules(const QString &path){
   QFileInfoListIterator it( *list );
   QFileInfo *fi;
   while ( (fi=it.current()) ) {
+#ifdef QWS 
+    if(fi->fileName().contains(".so")){
+#else
     if(fi->fileName().contains(".so") && fi->fileName().contains("networksettings_")){
+#endif
       loadPlugin(path + "/" + fi->fileName());
     }
     ++it;
@@ -243,14 +260,14 @@ void MainWindowImp::loadModules(const QString &path){
  */ 
 Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &resolveString){
 #ifdef DEBUG
-  qDebug("MainWindowImp::loadPlugin: %s", pluginFileName.latin1());
+  qDebug("MainWindowImp::loadPlugin: %s: resolving %s", pluginFileName.latin1(), resolveString.latin1());
 #endif
 #ifdef QWS 
   QLibrary *lib = new QLibrary(pluginFileName);
   void *functionPointer = lib->resolve(resolveString);
   if( !functionPointer ){
 #ifdef DEBUG
-  qDebug("MainWindowImp::loadPlugin: File: %s is not a plugin, but though was.", pluginFileName.latin1());
+  qDebug("MainWindowImp::loadPlugin: Warning: %s is not a plugin", pluginFileName.latin1());
 #endif
     delete lib;
     return NULL;
