@@ -57,6 +57,10 @@ case $1 in
                SSHAGENT=""
          fi
 
+	if [ -x $OPIEDIR/bin/opie-sh-ssh-askpass.sh ]; then
+		export SSH_ASKPASS=$OPIEDIR/bin/opie-sh-ssh-askpass.sh
+	fi
+
 	if [ -x $OPIEDIR/bin/opie-login ]; then
 	    if ! killall -0 syslogd 2>/dev/null >/dev/null; then
     		echo Starting Opie-login....
