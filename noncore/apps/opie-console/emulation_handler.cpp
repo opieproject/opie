@@ -1,4 +1,5 @@
 #include <qwidget.h>
+#include <qpushbutton.h>
 
 #include "TEWidget.h"
 #include "TEmuVt102.h"
@@ -139,4 +140,8 @@ QColor EmulationHandler::backColor(int col ) {
     }
 
     return co;
+}
+
+QPushButton*  EmulationHandler::cornerButton() {
+    return m_teWid->cornerButton();
 }

@@ -60,6 +60,7 @@
 #include <qstyle.h>
 #include <qfile.h>
 #include <qdragobject.h>
+#include <qvbox.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -70,6 +71,8 @@
 #include <signal.h>
 
 #include <assert.h>
+
+
 
 // #include "TEWidget.moc"
 //#include <kapp.h>
@@ -274,7 +277,9 @@ void TEWidget::setFont(const QFont &)
 /*                                                                           */
 /*                         Constructor / Destructor                          */
 /*                                                                           */
-/* ------------------------------------------------------------------------- */
+/* ----------------------------------------------------------------------- */
+
+
 
 TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
 {
@@ -284,9 +289,15 @@ TEWidget::TEWidget(QWidget *parent, const char *name) : QFrame(parent,name)
                     this, SLOT(onClearSelection()) );
 #endif
 
-  scrollbar = new QScrollBar(this);
+
+  scrollbar = new QScrollBar( this );
   scrollbar->setCursor( arrowCursor );
   connect(scrollbar, SIGNAL(valueChanged(int)), this, SLOT(scrollChanged(int)));
+
+  m_cornerButton = new QPushButton( this );
+  m_cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
+  m_cornerButton->setMaximumSize( 14, 14 );
+  m_cornerButton->hide();
 
   Config cfg("Konsole");
   cfg.setGroup("ScrollBar");
@@ -854,7 +865,7 @@ void TEWidget::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void TEWidget::focusInEvent( QFocusEvent * )
 {
-    
+
     // do nothing, to prevent repainting
 }
 
@@ -1262,3 +1273,6 @@ void TEWidget::drop_menu_activated(int item)
 #endif
 }
 
+QPushButton* TEWidget::cornerButton() {
+    return m_cornerButton;
+}

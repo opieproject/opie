@@ -26,29 +26,9 @@
 #include "tabwidget.h"
 #include "transferdialog.h"
 #include "function_keyboard.h"
+#include "emulation_handler.h"
 #include "script.h"
 
-
-
-static char * menu_xpm[] = {
-"12 12 5 1",
-" 	c None",
-".	c #000000",
-"+	c #FFFDAD",
-"@	c #FFFF00",
-"#	c #E5E100",
-"            ",
-"            ",
-"  ......... ",
-"  .+++++++. ",
-"  .+@@@@#.  ",
-"  .+@@@#.   ",
-"  .+@@#.    ",
-"  .+@#.     ",
-"  .+#.      ",
-"  .+.       ",
-"  ..        ",
-"            "};
 
 
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
@@ -462,25 +442,23 @@ void MainWindow::slotFullscreen() {
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::Panel | QFrame::Sunken );
         setCentralWidget( m_consoleWindow );
         ( m_curSession->widgetStack() )->show();
-        m_fullscreen->setText( tr("Full screen") );
+        ( m_curSession->emulationHandler() )->cornerButton()->hide();
+        disconnect( ( m_curSession->emulationHandler() )->cornerButton(), SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
 
     } else {
         ( m_curSession->widgetStack() )->setFrameStyle( QFrame::NoFrame );
         ( m_curSession->widgetStack() )->reparent( 0,WStyle_Tool | WStyle_Customize | WStyle_StaysOnTop
-                                                   , QPoint(0,0), false);
-        ( m_curSession->widgetStack() )->resize(qApp->desktop()->width(), qApp->desktop()->height());
+                                                   , QPoint(0,0), false );
+        ( m_curSession->widgetStack() )->resize( qApp->desktop()->width(), qApp->desktop()->height() );
         ( m_curSession->widgetStack() )->setFocus();
         ( m_curSession->widgetStack() )->show();
 
-        QPushButton *cornerButton = new QPushButton( m_curSession->widgetStack() );
-        cornerButton->setPixmap( QPixmap( (const char**)menu_xpm ) );
-        connect( cornerButton, SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
-        // would need a scrollview
-        //  ( m_curSession->widgetStack() )->setCornerWidget( cornerButton );
-        m_fullscreen->setText( tr("Stop full screen") );
-    }
-    m_isFullscreen = !m_isFullscreen;
+        ( ( m_curSession->emulationHandler() )->cornerButton() )->show();
 
+        connect( ( m_curSession->emulationHandler() )->cornerButton(), SIGNAL( pressed() ), this, SLOT( slotFullscreen() ) );
+    }
+
+    m_isFullscreen = !m_isFullscreen;
 }
 
 

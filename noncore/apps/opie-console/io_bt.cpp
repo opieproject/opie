@@ -29,7 +29,6 @@ bool IOBt::open() {
     if ( !m_mac.isEmpty() ) {
 
         // now it should also be checked, if there is a connection to the device with that mac allready
-
         // hciattach here
         m_attach = new OProcess();
         *m_attach << "hciattach /dev/ttyS2 any 57600";

@@ -25,6 +25,7 @@
  */
 class Profile;
 class QWidget;
+class QPushButton;
 class TEWidget;
 class TEmulation;
 class QFont;
@@ -46,6 +47,8 @@ public:
     void load( const Profile& );
     QWidget* widget();
     void setColor( const QColor& fore, const QColor& back );
+    QPushButton* cornerButton();
+
 signals:
     void send( const QByteArray& );
     void changeSize(int rows, int cols );

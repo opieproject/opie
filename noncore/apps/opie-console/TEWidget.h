@@ -26,10 +26,33 @@
 #include <qscrollbar.h>
 
 #include <qpopupmenu.h>
+#include <qpushbutton.h>
 
 #include "TECommon.h"
 
 extern unsigned short vt100_graphics[32];
+
+
+
+static char * menu_xpm[] = {
+"12 12 5 1",
+" 	c None",
+".	c #000000",
+"+	c #FFFDAD",
+"@	c #FFFF00",
+"#	c #E5E100",
+"            ",
+"            ",
+"  ......... ",
+"  .+++++++. ",
+"  .+@@@@#.  ",
+"  .+@@@#.   ",
+"  .+@@#.    ",
+"  .+@#.     ",
+"  .+#.      ",
+"  .+.       ",
+"  ..        ",
+"            "};
 
 class TESession;
 
@@ -37,7 +60,8 @@ class TESession;
 
 class TEWidget : public QFrame
 // a widget representing attributed text
-{ Q_OBJECT
+{
+    Q_OBJECT
 
 //  friend class Konsole;
 
@@ -49,6 +73,7 @@ public:
 public:
 
     QColor getDefaultBackColor();
+    QPushButton *cornerButton();
 
     const ColorEntry* getColorTable() const;
     const ColorEntry* getdefaultColorTable() const;
@@ -131,7 +156,7 @@ protected:
 
 public:
     const QPixmap *backgroundPixmap();
-    
+
     void setSelection(const QString &t);
 
     virtual void setFont(const QFont &);
@@ -179,6 +204,7 @@ private:
     BOOL    word_selection_mode;
     BOOL    preserve_line_breaks;
 
+    QPushButton *m_cornerButton;
     QClipboard*    cb;
     QScrollBar* scrollbar;
     int         scrollLoc;
