@@ -269,7 +269,7 @@ void EmailClient::enqueMail(const Email &mail)
   Email addMail = mail;
   addMail.from = currentAccount->name;
   addMail.fromMail = currentAccount->emailAddress;
-  addMail.rawMail.prepend("From: " + addMail.from + "<" + addMail.fromMail + ">\n");
+  addMail.rawMail.prepend("From: \"" + addMail.from + "\" <" + addMail.fromMail + ">\n");
   item = new EmailListItem(outboxView, addMail, false);
   
   mailboxView->setCurrentTab(1);
