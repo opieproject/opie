@@ -236,7 +236,7 @@ void Transaction::slotWithdrawalClicked()
 	catList->insertItem( tr( "Clothing" ) );
 	catList->insertItem( tr( "Computer" ) );
 	catList->insertItem( tr( "DVDs" ) );
-	catList->insertItem( tr( "Eletronics" ) );
+	catList->insertItem( tr( "Electronics" ) );
 	catList->insertItem( tr( "Entertainment" ) );
 	catList->insertItem( tr( "Food" ) );
 	catList->insertItem( tr( "Gasoline" ) );
