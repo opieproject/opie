@@ -41,12 +41,13 @@ class QPixmap;
 class QSlider;
 
 enum VideoButtons {
-    VideoPrevious,
     VideoStop,
     VideoPlay,
-    VideoPause,
+//    VideoPause,
+    VideoPrevious,
     VideoNext,
-    VideoPlayList,
+    VideoVolUp,
+    VideoVolDown,
     VideoFullscreen
 };
 
@@ -62,8 +63,8 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setPaused( bool b)      { setToggleButton( VideoPause, b ); }
-    void setPlaying( bool b)     { setToggleButton( VideoPlay, b ); }
+    void setPaused( bool b);
+    void setPlaying( bool b);
     void setFullscreen( bool b );
     void makeVisible();
     void setPosition( long );

@@ -62,7 +62,6 @@ private:
     void readm3u(const QString &);
     void readPls(const QString &);
 
-
     void initializeStates();
     void readConfig( Config& cfg );
     void writeConfig( Config& cfg ) const;

@@ -31,7 +31,9 @@ MediaPlayer::MediaPlayer( QObject *parent, const char *name )
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
     connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
+
     connect( mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
+
     connect( mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
     connect( mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );
 
@@ -50,15 +52,14 @@ MediaPlayer::~MediaPlayer() {
 }
 
 void MediaPlayer::pauseCheck( bool b ) {
-    // Only pause if playing
-    if ( b && !mediaPlayerState->playing() ) {
-        mediaPlayerState->setPaused( FALSE );
-    }
+     if ( b && !mediaPlayerState->playing() ) {
+         mediaPlayerState->setPaused( FALSE );
+     }
 }
 
 void MediaPlayer::play() {
-    mediaPlayerState->setPlaying( FALSE );
-    mediaPlayerState->setPlaying( TRUE );
+        mediaPlayerState->setPlaying( FALSE );
+        mediaPlayerState->setPlaying( TRUE );
 }
 
 void MediaPlayer::setPlaying( bool play ) {
@@ -67,10 +68,10 @@ void MediaPlayer::setPlaying( bool play ) {
         return;
     }
 
-    if ( mediaPlayerState->paused() ) {
-        mediaPlayerState->setPaused( FALSE );
-        return;
-    }
+     if ( mediaPlayerState->paused() ) {
+         mediaPlayerState->setPaused( FALSE );
+         return;
+     }
 
     const DocLnk *playListCurrent = playList->current();
     if ( playListCurrent != NULL ) {

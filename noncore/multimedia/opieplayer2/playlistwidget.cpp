@@ -164,14 +164,14 @@ PlayListWidget::PlayListWidget( QWidget* parent, const char* name, WFlags fl )
     menu->insertItem( tr( "View" ), pmView );
     pmView->isCheckable();
 
-    pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"), this, SLOT( toggleFull() ) );
+    pmView->insertItem(  Resource::loadPixmap("fullscreen") , tr( "Full Screen"), mediaPlayerState, SLOT( toggleFullscreen() ) );
 
     Config cfg( "OpiePlayer" );
     bool b= cfg.readBoolEntry("FullScreen", 0);
     mediaPlayerState->setFullscreen(  b );
     pmView->setItemChecked( -16, b );
 
-    pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), this, SLOT(toggleScaled() ) );
+    pmView->insertItem(  Resource::loadPixmap("opieplayer/scale") , tr( "Scale"), mediaPlayerState, SLOT(toggleScaled() ) );
 
     QVBox *vbox5 = new QVBox( this ); vbox5->setBackgroundMode( PaletteButton );
     QVBox *vbox4 = new QVBox( vbox5 ); vbox4->setBackgroundMode( PaletteButton );

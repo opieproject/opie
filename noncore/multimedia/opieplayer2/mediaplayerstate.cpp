@@ -53,8 +53,6 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
 }
 
 
-
-
 // public stuff
 
 
@@ -159,14 +157,13 @@ void MediaPlayerState::setPlaylist( bool b ) {
 }
 
 void MediaPlayerState::setPaused( bool b ) {
-if(b) qDebug("setPaused true");
- else   qDebug("setPaused false");
- 
-    if ( isPaused  == b ) {
-        return;
-    }
-    isPaused = b;
-    emit pausedToggled(b);
+      if ( isPaused  == b ) {
+          isPaused = FALSE;
+          emit pausedToggled(FALSE);
+          return;
+      }
+     isPaused = b;
+     emit pausedToggled(b);
 }
 
 void MediaPlayerState::setPlaying( bool b ) {
@@ -260,7 +257,7 @@ void MediaPlayerState::togglePlaylist() {
 }
 
 void MediaPlayerState::togglePaused() {
-    setPaused( !isPaused);
+ setPaused( !isPaused);
 }
 
 void MediaPlayerState::togglePlaying() {
