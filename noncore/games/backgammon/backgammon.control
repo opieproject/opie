@@ -1,0 +1,9 @@
+Files: bin/backgammon apps/Games/backgammon.desktop pics/backgammon help/en/html/backgammon.html
+Priority: optional
+Section: opie/games
+Maintainer: Ralf Waspe <rwaspe@web.de>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base
+Description: Backgammon Game
+ A Backgammon game for the Opie environment.
