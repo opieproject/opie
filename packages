@@ -3,6 +3,7 @@ CONFIG_ADVANCEDFM	noncore/apps/advancedfm	advancedfm.pro
 CONFIG_APPEARANCE2	noncore/settings/appearance2	appearance2.pro
 CONFIG_APPSKEY	noncore/settings/appskey	appskey.pro
 CONFIG_AQPKG	noncore/settings/aqpkg	aqpkg.pro
+CONFIG_AUTOROTATEAPPLET	noncore/applets/autorotateapplet	autorotate.pro
 CONFIG_BACKGAMMON	noncore/games/backgammon backgammon.pro
 CONFIG_BACKUP	noncore/settings/backup	backup.pro
 CONFIG_BATTERYAPPLET	core/applets/batteryapplet	batteryapplet.pro

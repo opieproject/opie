@@ -217,11 +217,9 @@ endmenu
 comment ""
 
 menu "Unsupported / Unmaintained"
-  source noncore/unsupported/mail2/config.in
   source noncore/unsupported/filebrowser/config.in
   source noncore/unsupported/oipkg/config.in
   source noncore/unsupported/qpdf/config.in
-  source noncore/unsupported/gsmtool/config.in
 endmenu
 
 comment ""
