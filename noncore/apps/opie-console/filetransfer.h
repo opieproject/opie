@@ -31,6 +31,7 @@ private slots:
     void setupChild();
     void slotRead();
     void slotProgress( const QStringList& );
+    void slotExec();
 private:
     /*
      * FIXME? What does happen if we've
@@ -38,16 +39,16 @@ private:
      * Have a procctl which does listen
      * for termination and then send a signal
      */
-    static pid_t m_pid;
+    pid_t m_pid;
     int m_fd;
     int m_prog;
     int m_info[2];
     int m_comm[2];
+    int m_term[2];
     QString m_file;
     Type m_type;
     QSocketNotifier *m_not;
-    static void signal_handler(int);
-    static bool terminate;
+    QSocketNotifier* m_proc;
 };
 
 #endif

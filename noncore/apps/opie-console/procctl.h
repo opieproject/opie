@@ -22,7 +22,7 @@ private:
 public:
     ~ProcCtl();
 
-    ProcCtl* self();
+    static ProcCtl* self();
     int status(pid_t)const;
     void add( pid_t, int fd );
     void remove( pid_t );
@@ -31,6 +31,7 @@ private:
     static void signal_handler(int);
     static ProcContainer* m_last;
     static ProcCtl* m_self;
+
 };
 
 #endif

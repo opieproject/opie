@@ -71,6 +71,7 @@ int ProcCtl::status(pid_t pid )const{
     return -1;
 }
 void ProcCtl::signal_handler(int) {
+    qWarning("signal handler");
     int status;
     signal( SIGCHLD,  signal_handler );
     pid_t pi = waitpid( -1, &status, WNOHANG  );
