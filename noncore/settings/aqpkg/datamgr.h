@@ -61,6 +61,10 @@ public:
 private:
     static QString availableCategories;
     QString activeServer;
+    QString httpProxy;
+    QString ftpProxy;
+    QString proxyUsername;
+    QString proxyPassword;
 
     vector<Server> serverList;
     vector<Destination> destList;

@@ -102,7 +102,6 @@ void DataManager :: loadServers()
                 char alias[20];
                 char url[100];
 
-
                 // Looks a little wierd but read up to the r of src (throwing it away),
                 // then read up to the next space and throw that away, the alias
                 // is next.
@@ -110,9 +109,9 @@ void DataManager :: loadServers()
                 sscanf( lineStr, "%*[^r]%*[^ ] %s %s", alias, url );
                 Server s( alias, url );
                 if ( lineStr.startsWith( "src" ) )
-               		s.setActive( true );
+                    s.setActive( true );
                 else
-               		s.setActive( false );
+                    s.setActive( false );
 
                 serverList.push_back( s );
 
@@ -133,9 +132,28 @@ void DataManager :: loadServers()
                 
                 destList.push_back( d );
             }
+            else if ( lineStr.startsWith( "option" ) )
+            {
+                char type[20];
+                char val[100];
+                sscanf( lineStr, "%*[^ ] %s %s", type, val );
+                if ( stricmp( type, "http_proxy" ) == 0 )
+                    httpProxy = val;
+                if ( stricmp( type, "ftp_proxy" ) == 0 )
+                    ftpProxy = val;
+                if ( stricmp( type, "proxy_username" ) == 0 )
+                    proxyUsername = val;
+                if ( stricmp( type, "proxy_password" ) == 0 )
+                    proxyPassword = val;
+            }
         }
     }
     fclose( fp );
+
+    cout << "httpProxy = " << httpProxy << endl;
+    cout << "ftpProxy = " << ftpProxy << endl;
+    cout << "proxyUsername = " << proxyUsername << endl;
+    cout << "proxyPassword = " << proxyPassword << endl;
 
     reloadServerData( );
 }
@@ -178,7 +196,7 @@ void DataManager :: writeOutIpkgConf()
     out << "# URL that points to a directory containing a Familiar" << endl;
     out << "# Packages file, and <target-path> should be a directory" << endl;
     out << "# that exists on the target system." << endl << endl;
-
+    
     // Write out servers
     vector<Server>::iterator it = serverList.begin();
     while ( it != serverList.end() )
@@ -207,6 +225,31 @@ void DataManager :: writeOutIpkgConf()
         it2++;
     }
 
+    out << "# Proxy Support" << endl;
+    out << "#" << endl;
+
+    if ( httpProxy == "" )
+        out << "#option http_proxy http://proxy.tld:3128" << endl;
+    else
+        out << "option http_proxy " << httpProxy << endl;
+
+    if ( ftpProxy == "" )
+        out << "#option ftp_proxy http://proxy.tld:3128" << endl;
+    else
+        out << "option ftp_proxy " << ftpProxy << endl;
+    if ( proxyUsername == "" )
+        out << "#option proxy_username <username>" << endl;
+    else
+        out << "option proxy_username " << proxyUsername << endl;
+    if ( proxyPassword == "" )
+        out << "#option proxy_password <password>" << endl << endl;
+    else
+        out << "option proxy_password " << proxyPassword << endl<< endl;
+
+    out << "# Offline mode (for use in constructing flash images offline)" << endl;
+    out << "#option offline_root target" << endl;
+
+    
     out.close();
 }
 
