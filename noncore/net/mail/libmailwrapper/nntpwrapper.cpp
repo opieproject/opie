@@ -117,29 +117,39 @@ void NNTPwrapper::login()
         return;
 
     const char *server, *user, *pass;
+    QString User,Pass;
     uint16_t port;
     int err = NEWSNNTP_NO_ERROR;
 
     server = account->getServer().latin1();
     port = account->getPort().toUInt();
 
+    user = pass = 0;
+
     if ( account->getUser().isEmpty() || account->getPassword().isEmpty() ) {
         LoginDialog login( account->getUser(), account->getPassword(), NULL, 0, true );
         login.show();
         if ( QDialog::Accepted == login.exec() ) {
             // ok
-            user = login.getUser().latin1();
-            pass = login.getPassword().latin1();
+            User = login.getUser().latin1();
+            Pass = login.getPassword().latin1();
         } else {
             // cancel
             qDebug( "NNTP: Login canceled" );
             return;
         }
     } else {
-        user = account->getUser().latin1();
-        pass = account->getPassword().latin1();
+        User = account->getUser().latin1();
+        Pass = account->getPassword().latin1();
     }
 
+    if (User.isEmpty()) {
+        user=0;
+        pass = 0;
+    } else {
+        user=User.latin1();
+        pass=Pass.latin1();
+    }
     //  bool ssl = account->getSSL();
 
     m_nntp=mailstorage_new(NULL);
@@ -156,7 +166,7 @@ void NNTPwrapper::login()
         conntype = CONNECTION_TYPE_TRY_STARTTLS;
     }
 
-   nntp_mailstorage_init(m_nntp,(char*)server, port, NULL, conntype, NNTP_AUTH_TYPE_PLAIN,
+   nntp_mailstorage_init(m_nntp,(char*)server, port, NULL, CONNECTION_TYPE_PLAIN, NNTP_AUTH_TYPE_PLAIN,
                           (char*)user,(char*)pass,0,0,0);
 
     err = mailstorage_connect( m_nntp );
