@@ -114,8 +114,7 @@ void PlayListSelection::addToSelection( const DocLnk &lnk ) {
 
 void PlayListSelection::removeSelected() {
     QListViewItem *item = selectedItem();
-    if ( item )
-  delete item;
+    delete item;
     setSelected( currentItem(), TRUE );
     ensureItemVisible( selectedItem() );
 }

@@ -191,7 +191,7 @@ void PlayListWidget::writeDefaultPlaylist() {
 
         m3uList->write();
         m3uList->close();
-        if(m3uList) delete m3uList;
+        delete m3uList;
         
       }
     }
@@ -684,9 +684,7 @@ void PlayListWidget::openFile() {
         }
     }
             
-    if( fileDlg ) {
-        delete fileDlg;
-    }
+    delete fileDlg;
 }
 
 /*
@@ -734,7 +732,7 @@ void PlayListWidget::readm3u( const QString &filename ) {
 
 //    m3uList->write();
     m3uList->close();
-    if(m3uList) delete m3uList;
+    delete m3uList;
 
     d->selectedFiles->setSelectedItem( s);
     setCaption(tr("OpiePlayer: ")+ QFileInfo(filename).baseName());
@@ -782,7 +780,7 @@ void PlayListWidget::readPls( const QString &filename ) {
     }
 
     m3uList->close();
-    if(m3uList) delete m3uList;
+    delete m3uList;
 }
 
 /*
@@ -806,7 +804,7 @@ void PlayListWidget::writeCurrentM3u() {
   m3uList->write();
   m3uList->close();
 
-  if(m3uList) delete m3uList;
+  delete m3uList;
   }
   
 }
@@ -842,9 +840,9 @@ void PlayListWidget::writem3u() {
           //    qDebug( list );
           m3uList->write();
           m3uList->close();
-          if(m3uList) delete m3uList;
+          delete m3uList;
         
-          if(fileDlg) delete fileDlg;
+          delete fileDlg;
 
           DocLnk lnk;
           lnk.setFile( filename);
