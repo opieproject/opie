@@ -10,3 +10,7 @@ datebooksettingsbase.h
 datebooksettingsbase.cpp
 repeatentrybase.cpp
 repeatentrybase.h
+datebook/datebookweeklstdayhdr.cpp
+datebook/datebookweeklstdayhdr.h
+datebook/datebookweeklstheader.cpp
+datebook/datebookweeklstheader.h
