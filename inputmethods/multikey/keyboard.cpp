@@ -43,10 +43,15 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
     alt(0), useLargeKeys(TRUE), usePicks(0), pressedKeyRow(-1), pressedKeyCol(-1),
     unicode(-1), qkeycode(0), modifiers(0), LANG("ko"), schar(0), mchar(0), echar(0)
 {
+    // get the default font
+    Config qpeConfig( "qpe" );
+    qpeConfig.setGroup( "Appearance" );
+    QString familyStr = qpeConfig.readEntry( "FontFamily", "fixed" );
+
+    setFont( QFont( familyStr, 8 ) );
 
     picks = new KeyboardPicks( this );
-    picks->setFont( QFont( "helvetica", 8 ) );
-    setFont( QFont( "helvetica", 8 ) );
+    picks->setFont( QFont( familyStr, 8 ) );
     picks->initialise();
     if (usePicks) {
 
@@ -57,8 +62,8 @@ Keyboard::Keyboard(QWidget* parent, const char* _name, WFlags f) :
 
     Config config("locale");
     config.setGroup( "Language" );
-    LANG = config.readEntry( "Language" );
-    if(LANG.isEmpty()) LANG = "en";
+    //LANG = config.readEntry( "Language", "en" );
+    LANG = "ko";
 
     repeatTimer = new QTimer( this );
     connect( repeatTimer, SIGNAL(timeout()), this, SLOT(repeat()) );
@@ -446,7 +451,7 @@ void Keyboard::clearHighlight()
 QSize Keyboard::sizeHint() const
 {
     QFontMetrics fm=fontMetrics();
-    int keyHeight = fm.lineSpacing()+2;
+    int keyHeight = fm.lineSpacing();
 
     return QSize( 240, keyHeight * 5 + (usePicks ? picks->sizeHint().height() : 0) + 1);
 }
@@ -768,7 +773,9 @@ Keys::Keys() {
     QString l = config.readEntry( "Language" );
     if(l.isEmpty()) l = "en";
 
-    QString key_map = QPEApplication::qpeDir() + "/i18n/" + l + "/keyboard";
+    QString key_map = QPEApplication::qpeDir() + "/share/multikey/" 
+            + /* l // testing korean for now */ 
+            + "ko.keymap";
 
     setKeysFromFile(key_map);
 }
