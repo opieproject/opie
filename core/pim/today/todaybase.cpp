@@ -34,8 +34,6 @@ TodayBase::TodayBase( QWidget* parent,  const char* name, WFlags fl )
 
   layout = new QVBoxLayout( this );
 
-  QVBoxLayout *mainLayout = new QVBoxLayout( this );
-
   QPalette pal = this->palette();
   QColor col = pal.color( QPalette::Active, QColorGroup::Background );
   pal.setColor( QPalette::Active, QColorGroup::Button, col );

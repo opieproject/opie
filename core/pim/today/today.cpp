@@ -193,7 +193,7 @@ void Today::loadPlugins() {
         }
     }
 
-    if (  !m_allApplets.isEmpty() ) {
+    if ( !m_allApplets.isEmpty() ) {
         TodayPlugin tempPlugin;
         QStringList::Iterator stringit;
         for( stringit = m_allApplets.begin(); stringit !=  m_allApplets.end(); ++stringit ) {
@@ -225,10 +225,10 @@ void Today::draw() {
 	plugin = pluginList[i];
 
     	if ( plugin.active ) {
-            qDebug( plugin.name + " is ACTIVE " );
+            //   qDebug( plugin.name + " is ACTIVE " );
             plugin.guiBox->show();
         } else {
-            qDebug( plugin.name + " is INACTIVE" );
+            //  qDebug( plugin.name + " is INACTIVE" );
             plugin.guiBox->hide();
         }
         count++;
