@@ -134,8 +134,8 @@ static char * help_xpm[] = {
 
   Pen input widget.
 */
-QIMPenInput::QIMPenInput( QWidget *parent, const char *name, WFlags f )
-    : QFrame( parent, name, f ), helpDlg(0), profile(0)
+QIMPenInput::QIMPenInput( QWidget *parent, const char *name, WFlags flags )
+    : QFrame( parent, name, flags ), helpDlg(0), profile(0)
 {
     setFrameStyle( Box | Plain );
 
