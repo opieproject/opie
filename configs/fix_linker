@@ -1,9 +1,0 @@
-#!/bin/sh
-
-
-for file in *g++*
-do
-    sed "/SYSCONF_LINK	.*=/s/g++/gcc/" $file > $file.tmp
-    mv $file.tmp $file
-done
-

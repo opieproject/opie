@@ -1,9 +1,0 @@
-Files: plugins/inputmethods/libqkeyboard.so*
-Priority: optional
-Section: qpe/inputmethods
-Maintainer: Martin Jones <mjones@trolltech.com>
-Architecture: arm
-Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-base ($QPE_VERSION)
-Description: Keyboard input method
- Keyboard input method for the Opie environment.
