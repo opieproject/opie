@@ -47,7 +47,7 @@ NONCORESETTINGS  =noncore/settings/language noncore/settings/rotation \
 	noncore/settings/tabmanager noncore/settings/appskey 
 
 NONCORETOOLS = noncore/tools/calculator noncore/tools/clock \
-	 noncore/tools/remote noncore/tools/opie-sh 
+	 noncore/tools/remote noncore/tools/opie-sh noncore/apps/advancedfm
 
 GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/tetrix noncore/games/wordgame \
@@ -59,8 +59,7 @@ GAMES = noncore/games/minesweep noncore/games/solitaire \
 	noncore/games/kbill
 
 NONAPPS = noncore/apps/spreadsheet noncore/apps/tableviewer \
-	noncore/apps/advancedfm
-
+	
 NONNET = noncore/net/netsetup noncore/net/opieftp \
 	noncore/mail
 
