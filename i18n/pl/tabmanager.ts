@@ -26,21 +26,21 @@
     <name>TabManager</name>
     <message>
         <source>Message</source>
-        <translation>Wiadomosc</translation>
+        <translation>Wiadomość</translation>
     </message>
     <message>
         <source>Can&apos;t remove with applications
 still in the group.</source>
-        <translation>Nie mozna usunac z aplikacjami
-wciaz wewnatrz grupy.</translation>
+        <translation>Nie można usunąć jeśli wewnątrz
+grupy są aplikacje.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation>Ok</translation>
+        <translation>OK</translation>
     </message>
     <message>
         <source>Are you sure you want to delete?</source>
-        <translation>Czy na pewno usunac?</translation>
+        <translation>Czy na pewno usunąć?</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -52,11 +52,11 @@ wciaz wewnatrz grupy.</translation>
     </message>
     <message>
         <source>Can&apos;t remove.</source>
-        <translation>Nie mozna usunac.</translation>
+        <translation>Nie można usunąć.</translation>
     </message>
     <message>
         <source>Tab</source>
-        <translation>Zakladka</translation>
+        <translation>Zakładka</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
@@ -71,7 +71,7 @@ wciaz wewnatrz grupy.</translation>
     <name>TabManagerBase</name>
     <message>
         <source>Tab Manager</source>
-        <translation>Meneger Zakladek</translation>
+        <translation>Menedżer zakładek</translation>
     </message>
     <message>
         <source>Hierarchy</source>
@@ -82,7 +82,7 @@ wciaz wewnatrz grupy.</translation>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation>Prosze Czekac...</translation>
+        <translation>Proszę czekać...</translation>
     </message>
 </context>
 </TS>

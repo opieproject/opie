@@ -3,31 +3,31 @@
     <name>IrdaApplet</name>
     <message>
         <source>Discovered Device:</source>
-        <translation>Znalezione urzadzenie:</translation>
+        <translation>Znalezione urządzenie:</translation>
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation>Wylacz IrDA</translation>
+        <translation>Wyłącz IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation>Wlacz IrDA</translation>
+        <translation>Włącz IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
-        <translation>Wylacz wyszukiwanie</translation>
+        <translation>Wyłącz wyszukiwanie</translation>
     </message>
     <message>
         <source>Enable Discovery</source>
-        <translation>Wlacz wyszukiwanie</translation>
+        <translation>Włącz wyszukiwanie</translation>
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation>Wylacz odbior</translation>
+        <translation>Wyłącz odbiór</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation>Wlacz odbior</translation>
+        <translation>Włącz odbiór</translation>
     </message>
     <message>
         <source>Found:</source>

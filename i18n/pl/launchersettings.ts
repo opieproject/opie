@@ -3,42 +3,42 @@
     <name>DocTabSettings</name>
     <message>
         <source>Enable the Documents Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz zakładkę Dokumenty</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Uwaga:&lt;/b&gt; Aby te ustawienia zadziałały może być konieczny restart Opie.</translation>
     </message>
     <message>
         <source>Check, if you want the Documents Tab to be visible.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznacz jeśli chcesz aby zakładka Dokumenty była widoczna.</translation>
     </message>
 </context>
 <context>
     <name>InputMethodSettings</name>
     <message>
         <source>Resize application on Popup</source>
-        <translation type="unfinished"></translation>
+        <translation>Zmień rozmiar okienka przy otwarciu</translation>
     </message>
     <message>
         <source>Enable floating and resizing</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz przesuwanie i zmianę rozmiaru</translation>
     </message>
     <message>
         <source>&lt;b&gt;Note:&lt;/b&gt; Changing these settings may need restarting Opie to become effective.</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Uwaga:&lt;/b&gt; Aby te ustawienia zadziałały może być konieczny restart Opie.</translation>
     </message>
     <message>
         <source>Check, if you want the application to be automatically resized if the input method pops up.</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznacz jeśli chcesz aby rozmiar okienka był automatycznie zmieniony gdy otwarte jest okienko wprowadzania danych.</translation>
     </message>
     <message>
         <source>Check, if you want to move and/or resize input methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Zaznacz jeśli chcesz przesuwać lub zmieniać rozmiar okienka wprowadzania danych</translation>
     </message>
     <message>
         <source>Specify the percentage of the screen width for the input method</source>
-        <translation type="unfinished"></translation>
+        <translation>Podaj procent szerokości ekranu dla okienka wprowadzania danych</translation>
     </message>
 </context>
 <context>
@@ -49,72 +49,72 @@
     </message>
     <message>
         <source>Taskbar</source>
-        <translation>Pasek zadan</translation>
+        <translation>Pasek zadań</translation>
     </message>
     <message>
         <source>O-Menu</source>
-        <translation>O-Menu</translation>
+        <translation>O-menu</translation>
     </message>
     <message>
         <source>Tabs</source>
-        <translation>Zakladki</translation>
+        <translation>Zakładki</translation>
     </message>
     <message>
         <source>InputMethods</source>
-        <translation type="unfinished"></translation>
+        <translation>Wprowadzanie danych</translation>
     </message>
     <message>
         <source>DocTab</source>
-        <translation type="unfinished"></translation>
+        <translation>Dokumenty</translation>
     </message>
 </context>
 <context>
     <name>MenuSettings</name>
     <message>
         <source>Load applets in O-Menu:</source>
-        <translation>W O-Menu laduj applety:</translation>
+        <translation>W O-menu ładuj applety:</translation>
     </message>
     <message>
         <source>Show Launcher tabs in O-Menu</source>
-        <translation>W O-Menu pokazuj zakladki Launcher&apos;a</translation>
+        <translation>W O-menu pokazuj zakładki Launcher&apos;a</translation>
     </message>
     <message>
         <source>Check the applets that you want to have included in the O-Menu.</source>
-        <translation>Zaznacz applety, ktore maja byc umieszczone w O-Menu.</translation>
+        <translation>Zaznacz applety, które mają być umieszczone w O-menu.</translation>
     </message>
     <message>
         <source>Adds the contents of the Launcher Tabs as menus in the O-Menu.</source>
-        <translation>Dodaje zawartosc zakladek Launcher&apos;a jako menu w O-Menu.</translation>
+        <translation>Dodaje zawartość zakładek Launcher&apos;a jako menu w O-menu.</translation>
     </message>
     <message>
         <source>Show Applications in subpopups</source>
-        <translation type="unfinished"></translation>
+        <translation>Pokazuj aplikacje w podokienkach</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Sample 1</source>
-        <translation>Przyklad 1</translation>
+        <translation>Przykład 1</translation>
     </message>
     <message>
         <source>Sample 2</source>
-        <translation>Przyklad 2</translation>
+        <translation>Przykład 2</translation>
     </message>
     <message>
         <source>Sample 3</source>
-        <translation>Przyklad 3</translation>
+        <translation>Przykład 3</translation>
     </message>
 </context>
 <context>
     <name>TabDialog</name>
     <message>
         <source>Edit Tab</source>
-        <translation>Edytuj zakladke</translation>
+        <translation>Edytuj zakładkę</translation>
     </message>
     <message>
         <source>Background</source>
-        <translation>Tlo</translation>
+        <translation>Tło</translation>
     </message>
     <message>
         <source>Font</source>
@@ -126,15 +126,15 @@
     </message>
     <message>
         <source>Previewing %1</source>
-        <translation>Podglad %1</translation>
+        <translation>Podgląd %1</translation>
     </message>
     <message>
         <source>This is a rough preview of what the currently selected Tab will look like.</source>
-        <translation>To ogolny podglad tego jak bedzie wygladac aktualnie wybrana zakladka.</translation>
+        <translation>To ogólny podgląd tego jak będzie wyglądać aktualnie wybrana zakładka.</translation>
     </message>
     <message>
         <source>Use a custom font</source>
-        <translation>Uzyj wlasnej czcionki</translation>
+        <translation>Użyj własnej czcionki</translation>
     </message>
     <message>
         <source>Type:</source>
@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>Default</source>
-        <translation>Domyslne</translation>
+        <translation>Domyślne</translation>
     </message>
     <message>
         <source>Size:</source>
@@ -166,11 +166,11 @@
     </message>
     <message>
         <source>Small</source>
-        <translation>Male</translation>
+        <translation>Małe</translation>
     </message>
     <message>
         <source>Large</source>
-        <translation>Duze</translation>
+        <translation>Duże</translation>
     </message>
     <message>
         <source>Color:</source>
@@ -181,7 +181,7 @@
     <name>TabsSettings</name>
     <message>
         <source>Launcher Tabs:</source>
-        <translation>Zakladki Launcher&apos;a:</translation>
+        <translation>Zakładki Launcher&apos;a:</translation>
     </message>
     <message>
         <source>foobar</source>
@@ -197,11 +197,11 @@
     </message>
     <message>
         <source>Delete</source>
-        <translation>Usun</translation>
+        <translation>Usuń</translation>
     </message>
     <message>
         <source>Enable big busy indicator</source>
-        <translation>Wlacz duzy wskaznik zajetosci</translation>
+        <translation>Włącz duży wskaźnik zajętości</translation>
     </message>
     <message>
         <source>Enable blinking busy indicator</source>
@@ -209,23 +209,23 @@
     </message>
     <message>
         <source>Select the Launcher Tab you want to edit or delete.</source>
-        <translation>Wybierz zakladke, ktora chcesz edytowac lub usunac.</translation>
+        <translation>Wybierz zakładkę, którą chcesz edytować lub usunąć.</translation>
     </message>
     <message>
         <source>Adds a new Tab to the Launcher.</source>
-        <translation>Dodaje nowa zakladke do Launcher&apos;a.</translation>
+        <translation>Dodaje nową zakładkę do Launcher&apos;a.</translation>
     </message>
     <message>
         <source>Opens a new dialog to customize the select Tab.</source>
-        <translation>Otwiera okno z ustawieniami wybranej zakladki.</translation>
+        <translation>Otwiera okno z ustawieniami wybranej zakładki.</translation>
     </message>
     <message>
         <source>Deletes a Tab from the Launcher.</source>
-        <translation>Usuwa zakladke.</translation>
+        <translation>Usuwa zakładkę.</translation>
     </message>
     <message>
         <source>Activate this, if you want a big busy indicator in the middle of the screen instead of the one in taskbar.</source>
-        <translation>Wybierz to, jesli chcesz miec duzy wskaznik zajetosci na srodku ekranu zamiast tego w pasku zadan.</translation>
+        <translation>Wybierz to, jeśli chcesz wyświetlać duży wskaźnik zajętości na środku ekranu zamiast tego w pasku zadań.</translation>
     </message>
     <message>
         <source>Activate this, if you want a blinking busy indicator for starting applications in the Launcher.</source>
@@ -233,7 +233,7 @@
     </message>
     <message>
         <source>All Tabs</source>
-        <translation>Wszystkie zakladki</translation>
+        <translation>Wszystkie zakładki</translation>
     </message>
     <message>
         <source>Documents</source>
@@ -241,7 +241,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Blad</translation>
+        <translation>Błąd</translation>
     </message>
     <message>
         <source>Not implemented yet</source>
@@ -249,22 +249,22 @@
     </message>
     <message>
         <source>Enable animated busy indicator</source>
-        <translation type="unfinished"></translation>
+        <translation>Włącz animowany wskaźnik zajętości</translation>
     </message>
     <message>
         <source>Activate this, if you want an animatedbusy indicator for starting applications in the Launcher.</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktywuj jeśli chcesz wyświetlać animowany wskaźnik zajętości dla startujących aplikacji.</translation>
     </message>
 </context>
 <context>
     <name>TaskbarSettings</name>
     <message>
         <source>Load applets in Taskbar:</source>
-        <translation>Applety do zaladowania w pasku zadan:</translation>
+        <translation>Applety do załadowania w pasku zadań:</translation>
     </message>
     <message>
         <source>Check the applets that you want displayed in the Taskbar.</source>
-        <translation>Zaznacz applety, ktore maja sie pokazywac w pasku zadan.</translation>
+        <translation>Zaznacz applety, ktore mają się pokazywać w pasku zadań.</translation>
     </message>
 </context>
 </TS>

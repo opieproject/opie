@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Weather plugin</source>
-        <translation>Wtyczka Pogody</translation>
+        <translation>Wtyczka Pogoda</translation>
     </message>
 </context>
 <context>
@@ -14,34 +14,34 @@
     </message>
     <message>
         <source>Enter the 4 letter code for the desired location here.  See http://www.nws.noaa.gov/tg/siteloc.shtml to find a location near you.</source>
-        <translation>Wpisz tu czteroliterowy kod zadanej lokalizacji. Sprawdz http://www.nws.noaa.gov/tg/siteloc.shtml by znalezc najblizsza ci lokalizacje.</translation>
+        <translation>Wpisz tu czteroliterowy kod żądanej lokalizacji. Sprawdź http://www.nws.noaa.gov/tg/siteloc.shtml by znaleźć najbliższą ci lokalizację.</translation>
     </message>
     <message>
         <source>Visit http://www.nws.noaa.gov/tg/siteloc.shtml to find the nearest location.</source>
-        <translation>Odwiedz http://www.nws.noaa.gov/tg/siteloc.shtml by znalezc najblizsza lokalizacje.</translation>
+        <translation>Odwiedź http://www.nws.noaa.gov/tg/siteloc.shtml by znaleźć najbliższą lokalizację.</translation>
     </message>
     <message>
         <source>Use metric units</source>
-        <translation>Uzywaj jednostek metrycznych</translation>
+        <translation>Używaj jednostek metrycznych</translation>
     </message>
     <message>
         <source>Click here to select type of units displayed.</source>
-        <translation>Kliknij tu aby wybrac typ wyswietlanych jednostek.</translation>
+        <translation>Kliknij tu aby wybrać typ wyświetlanych jednostek.</translation>
     </message>
     <message>
         <source>Update frequency (in minutes):</source>
-        <translation>Czestotliwosc aktualizacji (w minutach):</translation>
+        <translation>Czestotliwość aktualizacji (w minutach):</translation>
     </message>
     <message>
         <source>Select how often (in minutes) you want the weather to be updated.</source>
-        <translation>Okresc jak czesto (w minutach) aktualizowana ma byc informacja o pogodzie.</translation>
+        <translation>Określ jak często (w minutach) aktualizowana ma być informacja o pogodzie.</translation>
     </message>
 </context>
 <context>
     <name>WeatherPluginWidget</name>
     <message>
         <source>Retreiving current weather information.</source>
-        <translation>Otrzymuje aktualne informacje o pogodzie.</translation>
+        <translation>Pobieram aktualne informacje o pogodzie.</translation>
     </message>
     <message>
         <source>Temp: </source>
@@ -54,11 +54,11 @@
     <message>
         <source>
 Pres: </source>
-        <translation>Cisn:</translation>
+        <translation>Ciśn:</translation>
     </message>
     <message>
         <source>Current weather data not available.</source>
-        <translation>Aktualne dane o pogodzie niedostepne.</translation>
+        <translation>Aktualne dane o pogodzie niedostępne.</translation>
     </message>
     <message>
         <source>n/a</source>

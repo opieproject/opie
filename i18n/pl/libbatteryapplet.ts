@@ -3,11 +3,11 @@
     <name>BatteryStatus</name>
     <message>
         <source>Charging</source>
-        <translation>Laduje</translation>
+        <translation>Ładowanie</translation>
     </message>
     <message>
         <source>Percentage battery remaining</source>
-        <translation>Pozostaly procent energii</translation>
+        <translation>Pozostały procent energii</translation>
     </message>
     <message>
         <source>Battery status: </source>
@@ -39,15 +39,15 @@
     </message>
     <message>
         <source>Power on-line</source>
-        <translation>Podlaczony do zasilania</translation>
+        <translation>Podłączony do zasilania</translation>
     </message>
     <message>
         <source>External power disconnected</source>
-        <translation>Zewnetrzne zasilanie odlaczone</translation>
+        <translation>Zewnętrzne zasilanie odłączone</translation>
     </message>
     <message>
         <source>Battery time remaining</source>
-        <translation>Pozostaly czas dzialania baterii</translation>
+        <translation>Pozostały czas działania baterii</translation>
     </message>
     <message>
         <source>Close</source>
@@ -59,27 +59,27 @@
     </message>
     <message>
         <source>Failure</source>
-        <translation>Porazka</translation>
+        <translation>Porażka</translation>
     </message>
     <message>
         <source>could not open file</source>
-        <translation>nie mozna otworzyc pliku</translation>
+        <translation>nie można otworzyć pliku</translation>
     </message>
     <message>
         <source>Charging both devices</source>
-        <translation>Laduje oba urzadzenia</translation>
+        <translation>Ładowanie obu urządzeń</translation>
     </message>
     <message>
         <source>Percentage battery remaining: </source>
-        <translation>Pozostaly procent energii:</translation>
+        <translation>Pozostały procent energii:</translation>
     </message>
     <message>
         <source>Battery time remaining: </source>
-        <translation>Pozostaly czas dzialania baterii:</translation>
+        <translation>Pozostały czas działania baterii:</translation>
     </message>
     <message>
         <source>No jacket with battery inserted</source>
-        <translation>Wklad z bateria nie jest wlozony</translation>
+        <translation>Wkład z baterią nie jest włożony</translation>
     </message>
     <message>
         <source>no data</source>
@@ -91,7 +91,7 @@
     </message>
     <message>
         <source>Jacket  </source>
-        <translation>Wklad</translation>
+        <translation>Wkład</translation>
     </message>
 </context>
 </TS>

@@ -3,38 +3,38 @@
     <name>QObject</name>
     <message>
         <source>Todolist plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Plugin ZróbTo</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Jest &lt;b&gt; 1&lt;/b&gt; aktywne zadanie: &lt;br&gt;</translation>
     </message>
     <message>
         <source>There are &lt;b&gt; %1&lt;/b&gt; active tasks: &lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Liczba aktywnych zadań - &lt;b&gt; %1&lt;/b&gt;: &lt;br&gt;</translation>
     </message>
     <message>
         <source>No active tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>Nie ma aktywnych zadań</translation>
     </message>
 </context>
 <context>
     <name>TodoPluginConfigBase</name>
     <message>
         <source>Set the maximum number of task that should be shown</source>
-        <translation type="unfinished"></translation>
+        <translation>Ustaw maksymalną liczbę wyświetlanych zadań</translation>
     </message>
     <message>
         <source>tasks shown</source>
-        <translation type="unfinished"></translation>
+        <translation>liczba pokazywanych zadań</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
-        <translation type="unfinished"></translation>
+        <translation>Po ilu znakach powinna być obcięta informacja o zadaniu</translation>
     </message>
     <message>
         <source>Clip line after X chars</source>
-        <translation type="unfinished"></translation>
+        <translation>Ogranicz linię do X znaków</translation>
     </message>
 </context>
 </TS>
