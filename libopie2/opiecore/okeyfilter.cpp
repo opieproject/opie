@@ -39,15 +39,15 @@ class OKeyFilterPrivate:public OKeyFilter, QWSServer::KeyboardFilter
     static QValueList<QWSServer::KeyboardFilter*> preFilterList;
 protected:
     OKeyFilterPrivate(const OKeyFilterPrivate&):OKeyFilter(),QWSServer::KeyboardFilter(){};
-    virtual void addPreHandler(QWSServer::KeyboardFilter*);
-    virtual void remPreHandler(QWSServer::KeyboardFilter*);
+    virtual void addPreHandler(QWSServer::KeyboardFilter* aFilter);
+    virtual void remPreHandler(QWSServer::KeyboardFilter* aFilter);
 
 public:
     OKeyFilterPrivate();
     virtual ~OKeyFilterPrivate();
     virtual bool filter( int unicode, int keycode, int modifiers, bool isPress, bool autoRepeat );
-    virtual void addHandler(QWSServer::KeyboardFilter*);
-    virtual void remHandler(QWSServer::KeyboardFilter*);
+    virtual void addHandler(QWSServer::KeyboardFilter* aFilter);
+    virtual void remHandler(QWSServer::KeyboardFilter* aFilter);
 };
 
 QValueList<QWSServer::KeyboardFilter*> OKeyFilterPrivate::filterList;

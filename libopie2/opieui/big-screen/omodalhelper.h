@@ -236,7 +236,7 @@ OModalHelper<Dialog, Record, Id>::OModalHelper( enum Mode mode, QObject* parent 
  *
  * @return true if the record is currenlty edited otherwise false
  *
- * @param Id The id which might be handled
+ * @param id The id which might be handled
  */
 template<class Dialog, class Record, typename Id>
 bool OModalHelper<Dialog, Record, Id>::handles( Id id )const

@@ -60,11 +60,6 @@ public:
     /**
      * @fn OTabInfo()
      * @brief Object constructor.
-     *
-     * @param parent Pointer to parent of this control.
-     * @param name Name of control.
-     * @param s Style of widget selection control.
-     * @param p Position of the widget selection control.
      */
     OTabInfo() : i( -1 ), c( 0 ), p( 0 ), l( QString::null ) {}
 
