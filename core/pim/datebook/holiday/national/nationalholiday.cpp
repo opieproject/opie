@@ -1,5 +1,6 @@
 #include "nationalholiday.h"
 #include "nationalcfg.h"
+#include "nationalcfgwidget.h"
 
 #include <opie2/odebug.h>
 
@@ -26,18 +27,19 @@ void NationalHoliday::init()
     Config cfg("nationaldays");
     cfg.setGroup("entries");
     files = cfg.readListEntry("files");
-    odebug << "Read " << files << oendl;
 }
 
 void NationalHoliday::load_days()
 {
     if (init_done) return;
+    Config cfg("nationaldays");
+    cfg.setGroup("entries");
     QStringList::ConstIterator it;
     NHcfg readit;
     for (it=files.begin();it!=files.end();++it) {
-        odebug << QPEApplication::qpeDir()+"/etc/nationaldays/"+(*it) << oendl;
-        if (!readit.load(QPEApplication::qpeDir()+"/etc/nationaldays/"+(*it)))
+        if (!readit.load(QPEApplication::qpeDir()+"/etc/nationaldays/"+(*it))) {
             continue;
+        }
         tholidaylist::ConstIterator it;
         for (it=readit.days().begin();it!=readit.days().end();++it) {
             _days[it.key()]+=(it.data());
@@ -118,6 +120,11 @@ QValueList<EffectiveEvent> NationalHoliday::events(const QDate&start,const QDate
     }
 
     return ret;
+}
+
+Opie::Datebook::HolidayPluginConfigWidget*NationalHoliday::configWidget(QWidget *parent,  const char *name, QWidget::WFlags fl)
+{
+    return new NationalHolidayConfigWidget(parent,name,fl);
 }
 
 EXPORT_HOLIDAY_PLUGIN(NationalHoliday);

@@ -25,25 +25,20 @@ bool NHcfg::load(const QString&aPath)
     _path=aPath;
     stage = 0;
     _content.clear();
-    odebug << "Start loading file "<<_path<<oendl;
     QFile *f=new QFile(_path);
     if (!f) {
         oerr << "Could not open file" << oendl;
         return false;
     }
-    odebug << "Source" << oendl;
     QXmlInputSource is(*f);
-    odebug << "Reader" << oendl;
     QXmlSimpleReader reader;
-    odebug << "Handler" << oendl;
     reader.setContentHandler(this);
-    odebug << "Error handler" << oendl;
     reader.setErrorHandler(this);
 
     err = "";
-    odebug << "parse it" << oendl;
     bool ret = reader.parse(is);
-    odebug << "Errors: " << err << oendl;
+    if (err.length()>0)
+        odebug << "Errors: " << err << oendl;
     return ret;
 }
 
@@ -91,7 +86,6 @@ bool NHcfg::fatalError(const QXmlParseException& e)
 bool NHcfg::startElement(const QString&, const QString&,const QString& name, const QXmlAttributes& attr)
 {
     bool ret = false;
-    odebug << "startElement: " << name << oendl;
     if (name==_key_doc) {
         stage = 1;
         return true;
@@ -144,6 +138,5 @@ bool NHcfg::setName(const QXmlAttributes&attr)
         return false;
     }
     _contentname = attr.value(nindx);
-    odebug << "Contentname = " << _contentname<<oendl;
     return true;
 }

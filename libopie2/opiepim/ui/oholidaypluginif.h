@@ -4,8 +4,8 @@
 #include <qpe/qcom.h>
 
 #ifndef QT_NO_COMPONENT
-//017f90d4-34fc-4dc5-aed7-498c6da6571e
-#define IID_HOLIDAY_PLUGIN QUuid(0x017f90d4,0x34fc,0x4dc5,0xae,0xd7,0x49,0x8c,0x6d,0xa6,0x57,0x1e)
+//c0a5f73f-975e-4492-9285-af555284c4ab
+#define IID_HOLIDAY_PLUGIN        QUuid(0xc0a5f73f,0x975e,0x4492,0x92,0x85,0xaf,0x55,0x52,0x84,0xc4,0xab)
 #endif
 
 namespace Opie {
@@ -18,7 +18,7 @@ class HolidayPluginIf:public QUnknownInterface
 public:
    HolidayPluginIf():QUnknownInterface(){}
    virtual ~HolidayPluginIf(){}
-   
+
    virtual HolidayPlugin*plugin()=0;
 };
 
@@ -29,7 +29,6 @@ public:
     virtual ~HolidayPluginWrapper(){if (_plugin) delete _plugin;}
 
     QRESULT queryInterface( const QUuid& uuid, QUnknownInterface** iface ) {
-        odebug << "HolidayPluginWrapper::queryInterface()" << oendl;
         *iface = 0;
         if (uuid == IID_HOLIDAY_PLUGIN || uuid == IID_QUnknown) {
             *iface = this;
@@ -55,7 +54,6 @@ protected:
     Q_EXPORT_INTERFACE() { \
     Q_CREATE_INSTANCE(  Opie::Datebook::HolidayPluginWrapper<Plugin> ) \
     }
-
 }
 }
 #endif

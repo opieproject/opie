@@ -22,6 +22,9 @@
 
 #include <opie2/opluginloader.h>
 #include <opie2/odebug.h>
+#include <opie2/oholidaypluginif.h>
+#include <opie2/oholidayplugin.h>
+#include <opie2/oholidayplugincfgwidget.h>
 
 #include <qpe/qpeapplication.h>
 
@@ -29,6 +32,8 @@
 #include <qcheckbox.h>
 #include <qlistview.h>
 #include <qheader.h>
+#include <qtabwidget.h>
+#include <qlayout.h>
 
 DateBookSettings::DateBookSettings( bool whichClock, QWidget *parent,
                                     const char *name, bool modal, WFlags fl )
@@ -90,6 +95,29 @@ void DateBookSettings::setPluginList(Opie::Core::OPluginManager*aManager,Opie::C
     for ( Opie::Core::OPluginItem::List::Iterator it = inLst.begin(); it != inLst.end(); ++it ) {
         pitem = new QCheckListItem(m_PluginListView,(*it).name(),QCheckListItem::CheckBox);
         pitem->setOn( (*it).isEnabled() );
+
+        Opie::Datebook::HolidayPluginIf*hif = m_loader->load<Opie::Datebook::HolidayPluginIf>(*it,IID_HOLIDAY_PLUGIN);
+        if (!hif) continue;
+        Opie::Datebook::HolidayPlugin*pl = hif->plugin();
+        if (!pl) continue;
+        Opie::Datebook::HolidayPluginConfigWidget*cfg = pl->configWidget();
+        if (!cfg) continue;
+        QWidget * dtab = new QWidget(TabWidget,pl->description());
+        QVBoxLayout*dlayout = new QVBoxLayout(dtab);
+        dlayout->setMargin(2);
+        dlayout->setSpacing(2);
+        cfg->reparent(dtab,0,QPoint(0,0));
+        dlayout->addWidget(cfg);
+        TabWidget->insertTab(dtab,pl->description());
+
+        m_cfgWidgets.append(cfg);
+    }
+}
+void DateBookSettings::savePlugins()
+{
+    QValueList<Opie::Datebook::HolidayPluginConfigWidget*>::Iterator it;
+    for (it=m_cfgWidgets.begin();it!=m_cfgWidgets.end();++it) {
+        (*it)->saveConfig();
     }
 }
 

@@ -22,6 +22,7 @@
 #define DATEBOOKSETTINGS_H
 #include "datebooksettingsbase.h"
 #include <qpe/categoryselect.h>
+#include <qvaluelist.h>
 
 namespace Opie {
 namespace Core {
@@ -31,6 +32,9 @@ namespace Core {
 }
 namespace Ui {
     class OPluginConfigWidget;
+}
+namespace Datebook {
+    class HolidayPluginConfigWidget;
 }
 }
 
@@ -55,6 +59,7 @@ public:
     int rowStyle() const;
 
     void setPluginList(Opie::Core::OPluginManager*,Opie::Core::OPluginLoader*);
+    void savePlugins();
 private slots:
     void slot12Hour( int );
     void slotChangeClock( bool );
@@ -67,5 +72,6 @@ protected:
     int oldtime;
     Opie::Core::OPluginManager*m_manager;
     Opie::Core::OPluginLoader*m_loader;
+    QValueList<Opie::Datebook::HolidayPluginConfigWidget*> m_cfgWidgets;
 };
 #endif

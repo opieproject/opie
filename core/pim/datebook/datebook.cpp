@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: datebook.cpp,v 1.41 2005-03-18 12:49:14 alwin Exp $
+** $Id: datebook.cpp,v 1.42 2005-03-18 16:57:24 alwin Exp $
 **
 **********************************************************************/
 
@@ -263,6 +263,7 @@ void DateBook::slotSettings()
     frmSettings.comboCategory->setCategories(defaultCategories,"Calendar", tr("Calendar"));
 
     if ( QPEApplication::execDialog( &frmSettings ) ) {
+        frmSettings.savePlugins();
         db_holiday->pluginManager()->save();
         db_holiday->reloadPlugins();
 

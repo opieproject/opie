@@ -3,8 +3,8 @@ CONFIG -= moc
 CONFIG += qt plugin
 
 # Input
-HEADERS = nationalholiday.h nationalcfg.h
-SOURCES = nationalholiday.cpp nationalcfg.cpp
+HEADERS = nationalholiday.h nationalcfg.h nationalcfgwidget.h
+SOURCES = nationalholiday.cpp nationalcfg.cpp nationalcfgwidget.cpp
 INTERFACES=
 
 INCLUDEPATH     += $(OPIEDIR)/include \
