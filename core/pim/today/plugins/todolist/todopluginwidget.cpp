@@ -89,7 +89,7 @@ void TodolistPluginWidget::getTodo() {
     int ammount = 0;
 
     // get overdue todos first
-    m_list = todo->sorted( true, 3, 2, 1);
+    m_list = todo->sorted( true, OPimTodoAccess::Deadline, OPimTodoAccess::OnlyOverDue, 1);
 
     for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
         if (!(*m_it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
@@ -103,7 +103,7 @@ void TodolistPluginWidget::getTodo() {
     }
 
     // get total number of still open todos
-    m_list = todo->sorted( true, 1, 4, 1);
+    m_list = todo->sorted( true, 1, OPimTodoAccess::DoNotShowCompleted, 1);
 
     for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
         count +=1;
