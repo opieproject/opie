@@ -1,5 +1,5 @@
 Files: bin/kpacman apps/Games/kpacman.desktop pics/kpacman/kpacman.png share/kpacman
-Version: 0.3.1-$SUB_VERSION 
+Version: 0.3.1-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
 Priority: optional
 Section: opie/games
