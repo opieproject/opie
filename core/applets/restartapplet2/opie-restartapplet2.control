@@ -1,5 +1,5 @@
 Package: opie-restartapplet2
-Files: plugins/applets/librestartapplet.so*
+Files: plugins/applets/librestartapplet2.so*
 Priority: optional
 Section: opie/applets
 Maintainer: L.J. Potter <lpotter@trolltech.com>
