@@ -1,12 +1,4 @@
-DEPENDPATH += $(OPIEDIR)/include
-LIBS += -lqpe -lopie
-INTERFACES =
-include ( $(OPIEDIR)/include.pro )
-TEMPLATE = app
-CONFIG += debug warn_on qt
-DESTDIR = $(OPIEDIR)/bin
-TARGET = osearch
-INCLUDEPATH = $(OPIEDIR)/include
+CONFIG += qt release warn_on quick-app
 SOURCES += main.cpp \
            mainwindow.cpp \
            olistview.cpp \
@@ -38,3 +30,10 @@ HEADERS += mainwindow.h \
            applnkitem.h \
            doclnkitem.h \
            doclnksearch.h 
+
+TARGET	= osearch
+
+INCLUDEPATH = $(OPIEDIR)/include
+DEPENDPATH += $(OPIEDIR)/include
+LIBS += -lqpe -lopie
+include ( $(OPIEDIR)/include.pro )

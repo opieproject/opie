@@ -268,6 +268,10 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	setCentralWidget(listContainer);
 
 	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
+	connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
+	connect( qApp, SIGNAL( reload() ), this, SLOT( reload() ) );
+	connect( qApp, SIGNAL( appMessage(const QCString &, const QByteArray &) ),
+	this, SLOT( appMessage(const QCString &, const QByteArray &) ) );
 
 
 	isLoading = false;

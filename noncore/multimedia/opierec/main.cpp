@@ -11,12 +11,6 @@
  ***************************************************************************/
 #include "qtrec.h"
 #include <qpe/qpeapplication.h>
-
-int main(int argc, char* argv[]) {
-    QPEApplication a(argc, argv);
-    QtRec qtrec;
-    a.showMainWidget( &qtrec);
- return a.exec();
-}
-
-
+#include <opie/oapplicationfactory.h>
+	 
+OPIE_EXPORT_APP( OApplicationFactory<QtRec> )

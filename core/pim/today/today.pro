@@ -1,5 +1,4 @@
-CONFIG		= qt warn_on 
-#CONFIG		= qt warn_on release
+CONFIG		+= qt warn on release quick-app
 
 HEADERS		= today.h todaybase.h todayconfig.h
 SOURCES		= today.cpp todaybase.cpp todayconfig.cpp
@@ -29,18 +28,3 @@ TRANSLATIONS = ../../../i18n/de/today.ts \
    	 ../../../i18n/da/today.ts
 
 include ( $(OPIEDIR)/include.pro )
-
-oapp {
-	TEMPLATE	= lib
-	SOURCES		+= plugin.cpp
-	LIBS		+= -loapp
-
-	DESTDIR		= $(OPIEDIR)/plugins/app
-	INCLUDEPATH	+= $(OPIEDIR)/core/apps/oapp
-	DEPENDPATH	+= $(OPIEDIR)/core/apps/oapp
-}
-else {
-	TEMPLATE	= app
-	SOURCES		+= main.cpp
-	DESTDIR		= $(OPIEDIR)/bin
-}
