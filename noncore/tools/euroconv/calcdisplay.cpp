@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: calcdisplay.cpp,v 1.2 2003-02-21 10:39:29 eric Exp $
+ * $Id: calcdisplay.cpp,v 1.3 2003-02-25 13:37:30 eric Exp $
  *
  ***************************************************************************/
 
@@ -176,11 +176,27 @@ switch (iIndex){
         break;
 
     case 1: // FF: French Francs
-        return(dValue*FF);
+        return(dValue*FRF);
         break;
 
     case 2: // DM: Deutch Mark
-        return(dValue*DM);
+        return(dValue*DEM);
+        break;
+
+    case 3: // BEL Belgium Francs
+        return(dValue*BEF);
+        break;
+
+    case 4: // ITL Itialian Lire
+        return(dValue*ITL);
+        break;
+
+    case 5: // LUF Luxemburg
+        return(dValue*LUF);
+        break;
+
+    case 6: // IEP Irish Pound
+        return(dValue*IEP);
         break;
 
     default:
@@ -202,11 +218,27 @@ switch (iIndex){
         break;
 
     case 1: // FF: French Francs
-        return(dValue/FF);
+        return(dValue/FRF);
         break;
 
     case 2: // DM: Deutch Mark
-        return(dValue/DM);
+        return(dValue/DEM);
+        break;
+
+    case 3: // BEL Belgium Francs
+        return(dValue/BEF);
+        break;
+
+    case 4: // ITL Itialian Lire
+        return(dValue/ITL);
+        break;
+
+    case 5: // LUF Luxemburg
+        return(dValue/LUF);
+        break;
+
+    case 6: // IEP Irish Pound
+        return(dValue/IEP);
         break;
 }//switch (iIndex)
 
