@@ -1313,7 +1313,13 @@ void QPEApplication::reset() {
 }
 
 
-extern bool qt_left_hand_scrollbars __attribute__(( weak ));
+#ifdef Q_OS_MACX
+#define WEAK_SYMBOL __attribute__((weak_import))
+#else
+#define WEAK_SYMBOL __attribute__((weak))
+#endif
+
+extern bool qt_left_hand_scrollbars WEAK_SYMBOL;
 /*!
   \internal
 */
