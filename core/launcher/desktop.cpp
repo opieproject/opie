@@ -621,6 +621,8 @@ void Desktop::togglePower()
   if ( wasloggedin )
       blankScreen();
 
+	qDebug ( "OPIE suspending\n" );
+
   ODevice::inst ( )-> suspend ( );
 
   QWSServer::screenSaverActivate ( false );

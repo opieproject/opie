@@ -41,118 +41,8 @@
 #include <signal.h>
 #include <unistd.h>
 
-#if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
+#if defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
 #include "../calibrate/calibrate.h"
-#endif
-
-#ifdef QT_QWS_CASSIOPEIA
-static void ignoreMessage( QtMsgType, const char * )
-{
-}
-#include <sys/mount.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <fcntl.h>
-#include <qdatetime.h>
-
-void initCassiopeia()
-{
-    // MIPSEL-specific init - make sure /proc exists for shm
-/*
-    if ( mount("/dev/ram0", "/", "ext2", MS_REMOUNT | MS_MGC_VAL, 0 ) ) {
-	perror("Remounting - / read/write");
-    }
-*/
-    if ( mount("none", "/tmp", "ramfs", 0, 0 ) ) {
-	perror("mounting ramfs /tmp");
-    } else {
-	fprintf( stderr, "mounted /tmp\n" );
-    }
-    if ( mount("none", "/home", "ramfs", 0, 0 ) ) {
-	perror("mounting ramfs /home");
-    } else {
-	fprintf( stderr, "mounted /home\n" );
-    }
-    if ( mount("none","/proc","proc",0,0) ) {
-	perror("Mounting - /proc");
-    } else {
-	fprintf( stderr, "mounted /proc\n" );
-    }
-    if ( mount("none","/mnt","shm",0,0) ) {
-	perror("Mounting - shm");
-    }
-    setenv( "QTDIR", "/", 1 );
-    setenv( "OPIEDIR", "/", 1 );
-    setenv( "HOME", "/home", 1 );
-    mkdir( "/home/Documents", 0755 );
-
-    // set a reasonable starting date
-    QDateTime dt( QDate( 2001, 3, 15 ) );
-    QDateTime now = QDateTime::currentDateTime();
-    int change = now.secsTo( dt );
-
-    time_t t = ::time(0);
-    t += change;
-    stime(&t);
-
-    qInstallMsgHandler(ignoreMessage);
-}
-#endif
-
-#ifdef QPE_OWNAPM
-#include <sys/ioctl.h>
-#include <sys/types.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <errno.h>
-#include <linux/ioctl.h>
-#include <qpe/global.h>
-
-static void disableAPM() 
-{
-
-    int fd, cur_val, ret;
-    char *device = "/dev/apm_bios";
-
-    fd = open (device, O_WRONLY);
-
-    if (fd ==  -1) {
-      perror(device);
-      return;
-    }
-
-    cur_val = ioctl(fd, APM_IOCGEVTSRC, 0);
-    if (cur_val == -1) {
-      perror("ioctl");
-      exit(errno);
-    }
-
-    ret = ioctl(fd, APM_IOCSEVTSRC, cur_val & ~APM_EVT_POWER_BUTTON);
-    if (ret == -1) {
-        perror("ioctl");
-        return;
-    }
-    close(fd);
-}
-
-static void initAPM()
-{
-    // So that we have to do it ourself, but better.
-    disableAPM();
-}
-#endif
-
-#ifdef QT_DEMO_SINGLE_FLOPPY
-#include <sys/mount.h>
-
-void initFloppy()
-{
-    mount("none","/proc","proc",0,0);
-    setenv( "QTDIR", "/", 0 );
-    setenv( "HOME", "/root", 0 );
-    setenv( "QWS_SIZE", "240x320", 0 );
-}
 #endif
 
 
@@ -273,17 +163,7 @@ private:
 
 int initApplication( int argc, char ** argv )
 {
-#ifdef QT_QWS_CASSIOPEIA
-    initCassiopeia();
-#endif
-
-#ifdef QPE_OWNAPM
-    initAPM();
-#endif
-
-#ifdef QT_DEMO_SINGLE_FLOPPY
-    initFloppy();
-#endif
+	ODevice::inst ( )-> setPowerButtonHandler ( ODevice::OPIE );
 
     initEnvironment();
 
@@ -332,6 +212,8 @@ int initApplication( int argc, char ** argv )
 
     delete d;
 
+	ODevice::inst ( )-> setPowerButtonHandler ( ODevice::KERNEL );
+
     return rv;
 }
 
@@ -360,7 +242,6 @@ void handle_sigterm ( int /* sig */ )
 
 int main( int argc, char ** argv )
 {
-#ifndef SINGLE_APP
     ::signal( SIGCHLD, SIG_IGN );
 
 	::signal ( SIGTERM, handle_sigterm );
@@ -371,16 +252,13 @@ int main( int argc, char ** argv )
 	
 	::atexit ( remove_pidfile );
 	create_pidfile ( );
-#endif
 
     int retVal = initApplication ( argc, argv );
 
-#ifndef SINGLE_APP
     // Kill them. Kill them all.
     ::kill ( 0, SIGTERM );
-    ::sleep( 1 );
+    ::sleep ( 1 );
     ::kill ( 0, SIGKILL );
-#endif
 
     return retVal;
 }
