@@ -652,6 +652,8 @@ static void parseName( const QString& name, QString *first, QString *middle,
 
 void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 {
+	qWarning("Receiving QCop-Call with message %s", QString( msg ).latin1() );
+
 	if (msg == "editPersonal()") {
 		editPersonal();
 	} else if (msg == "editPersonalAndClose()") {
@@ -686,10 +688,12 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		connect( ir, SIGNAL( done( Ir * ) ), this, SLOT( beamDone( Ir * ) ) );
 		QString description = "mycard.vcf";
 		ir->send( beamFilename, description, "text/x-vCard" );
-	} else if ( msg == "showUid(int)" ) {
+	} else if ( msg == "show(int)" ) {
 		QDataStream stream(data,IO_ReadOnly);
 		int uid;
 		stream >> uid;
+
+		qWarning( "Showing uid: %d" , uid );
 
 		// Deactivate Personal View..
 		if ( actionPersonal->isOn() ){
@@ -701,8 +705,10 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		m_abView -> setShowByCategory( QString::null );
 		m_abView -> setCurrentUid( uid );
 		slotViewSwitched ( AbView::CardView );
+		
+		qApp->exec();
 
-	} else if ( msg == "editUid(int)" ) {
+	} else if ( msg == "edit(int)" ) {
 		QDataStream stream(data,IO_ReadOnly);
 		int uid;
 		stream >> uid;
