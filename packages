@@ -37,7 +37,6 @@
 #CONFIG_SYSTEMTIME	noncore/unsupported/systemtime	systemtime.pro
 #CONFIG_TEST	libsql/test	test.pro
 #CONFIG_TEST	noncore/apps/opie-console/test	test.pro
-#CONFIG_TODAY_FORTUNE	noncore/todayplugins/fortune	fortune.pro
 #CONFIG_UBROWSER	noncore/net/ubrowser	ubrowser.pro
 #CONFIG_WELLENREITER	noncore/net/wellenreiter	wellenreiter.pro
 #CONFIG_WLANSETUP	noncore/unsupported/wlansetup	wlansetup.pro
@@ -144,6 +143,7 @@ CONFIG_THEME	noncore/styles/theme	theme.pro
 CONFIG_TICTAC	noncore/games/tictac	tictac.pro
 CONFIG_TODAY	core/pim/today	today.pro
 CONFIG_TODAY_DATEBOOK	core/pim/today/plugins/datebook	datebook.pro
+CONFIG_TODAY_FORTUNE	noncore/todayplugins/fortune	fortune.pro
 CONFIG_TODAY_MAIL	core/pim/today/plugins/mail	mail.pro
 CONFIG_TODAY_STOCKTICKER	noncore/todayplugins/stockticker	stockticker.pro
 CONFIG_TODAY_STOCKTICKERLIB	noncore/todayplugins/stockticker/stocktickerlib	stocktickerlib.pro
