@@ -39,7 +39,7 @@
     </message>
     <message>
         <source>&lt;Nothing&gt;</source>
-        <translation>&lt;Niente&gt;</translation>
+        <translation>&lt;Vuoto&gt;</translation>
     </message>
     <message>
         <source>Open file</source>
@@ -138,7 +138,7 @@
     <name>CCloseDialog</name>
     <message>
         <source>Tidy-up</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordina</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -170,7 +170,8 @@
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Due/Un
+Tocco</translation>
     </message>
     <message>
         <source>Find</source>
@@ -192,16 +193,18 @@ Touch</source>
     </message>
     <message>
         <source>Ideograms</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafico</translation>
     </message>
     <message>
         <source>Ideogram Width</source>
-        <translation type="unfinished"></translation>
+        <translation>Larghezza Grafico</translation>
     </message>
     <message>
         <source>Apply font
 to dialogs</source>
-        <translation type="unfinished"></translation>
+        <translation>Applica font
+alle finestre
+di dialogo</translation>
     </message>
     <message>
         <source>Encoding</source>
@@ -218,7 +221,8 @@ to dialogs</source>
     <message>
         <source>Two/One
 Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Due/Un
+Tocco</translation>
     </message>
     <message>
         <source>Dictionary</source>
@@ -227,7 +231,8 @@ Touch</source>
     <message>
         <source>Swap Tap
 Actions</source>
-        <translation type="unfinished"></translation>
+        <translation>Scambia
+Azioni Tocco</translation>
     </message>
 </context>
 <context>
@@ -238,7 +243,7 @@ Actions</source>
     </message>
     <message>
         <source>Dehyphen</source>
-        <translation type="unfinished"></translation>
+        <translation>Dehyphen</translation>
     </message>
     <message>
         <source>Single Space</source>
@@ -262,7 +267,7 @@ Actions</source>
     </message>
     <message>
         <source>Embolden</source>
-        <translation type="unfinished"></translation>
+        <translation>Embolden</translation>
     </message>
     <message>
         <source>Full Justify</source>
@@ -298,16 +303,18 @@ Immagini</translation>
     <message>
         <source>Paragraph
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Paragrafo
+Iniziale</translation>
     </message>
     <message>
         <source>Line
 Leading</source>
-        <translation type="unfinished"></translation>
+        <translation>Linea
+Principale</translation>
     </message>
     <message>
         <source>Markup</source>
-        <translation type="unfinished"></translation>
+        <translation>Markup</translation>
     </message>
     <message>
         <source>Font</source>
@@ -318,7 +325,7 @@ Leading</source>
     <name>CMarkBarPrefs</name>
     <message>
         <source>Bookmark</source>
-        <translation></translation>
+        <translation>Bookmark</translation>
     </message>
     <message>
         <source>Annotate</source>
@@ -334,7 +341,7 @@ Leading</source>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Autogen</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -346,7 +353,7 @@ Leading</source>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordina</translation>
     </message>
     <message>
         <source>Mark Block</source>
@@ -361,7 +368,7 @@ Leading</source>
     <name>CMiscBarPrefs</name>
     <message>
         <source>Floating</source>
-        <translation type="unfinished"></translation>
+        <translation>Mobile</translation>
     </message>
     <message>
         <source>Single bar</source>
@@ -369,7 +376,7 @@ Leading</source>
     </message>
     <message>
         <source>Menu/tool bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Menu/tool bar</translation>
     </message>
     <message>
         <source>Multiple bars</source>
@@ -412,15 +419,15 @@ Leading</source>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Appunti</translation>
     </message>
     <message>
         <source>Depluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Depluck</translation>
     </message>
     <message>
         <source>Dejpluck</source>
-        <translation type="unfinished"></translation>
+        <translation>Dejpluck</translation>
     </message>
     <message>
         <source>Continuous</source>
@@ -432,7 +439,7 @@ Leading</source>
     </message>
     <message>
         <source>Plucker</source>
-        <translation type="unfinished"></translation>
+        <translation>Plucker</translation>
     </message>
 </context>
 <context>
@@ -471,7 +478,7 @@ Leading</source>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai A</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
@@ -486,15 +493,15 @@ Leading</source>
     </message>
     <message>
         <source>Layout</source>
-        <translation type="unfinished"></translation>
+        <translation>Disposizione</translation>
     </message>
     <message>
         <source>Layout(2)</source>
-        <translation type="unfinished"></translation>
+        <translation>DIsposizione(2)</translation>
     </message>
     <message>
         <source>Locale</source>
-        <translation type="unfinished"></translation>
+        <translation>Lingua</translation>
     </message>
     <message>
         <source>Misc</source>
@@ -513,7 +520,7 @@ Leading</source>
     </message>
     <message>
         <source>Clipboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Appunti</translation>
     </message>
     <message>
         <source>Local file</source>
@@ -548,7 +555,7 @@ Leading</source>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafico</translation>
     </message>
 </context>
 <context>
@@ -579,7 +586,7 @@ Leading</source>
     </message>
     <message>
         <source>Jump</source>
-        <translation type="unfinished"></translation>
+        <translation>Vai A</translation>
     </message>
     <message>
         <source>Page/Line Scroll</source>
@@ -587,7 +594,7 @@ Leading</source>
     </message>
     <message>
         <source>Two/One Touch</source>
-        <translation type="unfinished"></translation>
+        <translation>Due/Un Tocco</translation>
     </message>
     <message>
         <source>Annotation</source>
@@ -631,7 +638,7 @@ Leading</source>
     </message>
     <message>
         <source>Autogen</source>
-        <translation type="unfinished"></translation>
+        <translation>Autogen</translation>
     </message>
     <message>
         <source>Clear</source>
@@ -643,7 +650,7 @@ Leading</source>
     </message>
     <message>
         <source>Tidy</source>
-        <translation type="unfinished"></translation>
+        <translation>Ordina</translation>
     </message>
     <message>
         <source>Start Block</source>
@@ -671,7 +678,7 @@ Leading</source>
     </message>
     <message>
         <source>Do Reg</source>
-        <translation type="unfinished"></translation>
+        <translation>Registra</translation>
     </message>
     <message>
         <source>Close Edit</source>
@@ -743,7 +750,7 @@ Leading</source>
     </message>
     <message>
         <source>Pause Paras</source>
-        <translation type="unfinished"></translation>
+        <translation>Pausa</translation>
     </message>
     <message>
         <source>Set Encoding</source>
@@ -751,7 +758,7 @@ Leading</source>
     </message>
     <message>
         <source>Ideogram</source>
-        <translation type="unfinished"></translation>
+        <translation>Grafico</translation>
     </message>
     <message>
         <source>Bookmark</source>

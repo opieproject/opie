@@ -78,7 +78,7 @@ mostrati?</translation>
     <name>DatebookPluginConfigBase</name>
     <message>
         <source>DatebookPluginConfigBase</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurazione Plugin Agenda</translation>
     </message>
     <message>
         <source>Show location</source>

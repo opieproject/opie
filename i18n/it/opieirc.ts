@@ -4,11 +4,11 @@
     <name>IRCChannelTab</name>
     <message>
         <source>Talking on channel</source>
-        <translation type="unfinished"></translation>
+        <translation>In conversazione nel canale</translation>
     </message>
     <message>
         <source>Channel discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema del canale</translation>
     </message>
     <message>
         <source>Type your message here to participate in the channel discussion</source>
@@ -62,47 +62,47 @@
     <name>IRCMessageParser</name>
     <message>
         <source>Nonexistant channel join - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Connessione ad un canale inesistente - non sicronizzato?</translation>
     </message>
     <message>
         <source>Person has already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Utente già presente nel canale - non sincronizzato?</translation>
     </message>
     <message>
         <source>You already joined the channel - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Sei già presente nel canale - non sincronizzato?</translation>
     </message>
     <message>
         <source>Parting person not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Utente non trovato - non sincronizzato?</translation>
     </message>
     <message>
         <source>Channel for part not found - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Canale non trovato - non sincronizzato?</translation>
     </message>
     <message>
         <source>Channel message with unknown sender</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio al canale con mittente sconosciuto</translation>
     </message>
     <message>
         <source>Received PRIVMSG of unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricevuto PRIVMSG di tipo sconosciuto</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished"></translation>
+        <translation>Nickname di un utente sconosciuto modificato</translation>
     </message>
     <message>
         <source>Unknown person quit - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Utente sconsciuto uscito - non sincronizzato?</translation>
     </message>
     <message>
         <source> changed topic to </source>
-        <translation type="unfinished"></translation>
+        <translation>modifica tema con</translation>
     </message>
     <message>
         <source>Unknown channel topic - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Tema canale sconosciuto - non sincronizzato?</translation>
     </message>
     <message>
         <source>Received a CTCP PING from </source>
@@ -114,63 +114,63 @@
     </message>
     <message>
         <source>CTCP ACTION with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION con utente sconosciuto - Non sincronizzato?</translation>
     </message>
     <message>
         <source>CTCP ACTION with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION con canale sconosciuto - Non sincronizzato?</translation>
     </message>
     <message>
         <source>CTCP ACTION with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP ACTION con destinatario errato</translation>
     </message>
     <message>
         <source>Mode change has unknown type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo sconosciuto per cambio modalità</translation>
     </message>
     <message>
         <source>Mode change with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambio modalità con utente sconosciuto - Non sincronizzato?</translation>
     </message>
     <message>
         <source>Mode change with unknown flag</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambio modalità con parametro sconosciuto</translation>
     </message>
     <message>
         <source>Mode change with unknown kannel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Cambio modalità con canale sconosciuto - Non sincronizzato?</translation>
     </message>
     <message>
         <source>User modes not supported yet</source>
-        <translation type="unfinished"></translation>
+        <translation>Modalità dell&apos;utente non ancora supportati</translation>
     </message>
     <message>
         <source>You were kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation>Sei stato scacciato da </translation>
     </message>
     <message>
         <source> by </source>
-        <translation type="unfinished"></translation>
+        <translation> da </translation>
     </message>
     <message>
         <source> was kicked from </source>
-        <translation type="unfinished"></translation>
+        <translation> è stato scacciato da </translation>
     </message>
     <message>
         <source>Unknown person kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Utente sconosciuto scacciato - non sincronizzato?</translation>
     </message>
     <message>
         <source>Unknown channel kick - desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>Canale sconosciuto scacciato - non sincronizzato?</translation>
     </message>
     <message>
         <source>Server message with unknown channel</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio server con canale sconosciuto</translation>
     </message>
     <message>
         <source>You joined channel </source>
-        <translation type="unfinished"></translation>
+        <translation>Sei entrato nel canale </translation>
     </message>
     <message>
         <source>Nickname is in use, please reconnect with a different nickname</source>
@@ -178,23 +178,23 @@
     </message>
     <message>
         <source>No such nickname</source>
-        <translation type="unfinished"></translation>
+        <translation>Nickname sconosciuto</translation>
     </message>
     <message>
         <source>Received unhandled numeric command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricevuto comando numerico sconosciuto: %1</translation>
     </message>
     <message>
         <source>Received unhandled ctcp command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricevuto comando ctcp sconosciuto: %1</translation>
     </message>
     <message>
         <source>Received unhandled literal command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Ricevuto comando alfabetico sconosciuto: %1</translation>
     </message>
     <message>
         <source>%1 joined channel %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 è entrato nel canale %2</translation>
     </message>
     <message>
         <source>You left channel %1</source>
@@ -206,7 +206,7 @@
     </message>
     <message>
         <source>Channel message with unknown channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Messaggio canale con canale sconosciuto %1</translation>
     </message>
     <message>
         <source>You are now known as %1</source>
@@ -225,11 +225,11 @@
     <name>IRCQueryTab</name>
     <message>
         <source>Talking to </source>
-        <translation type="unfinished"></translation>
+        <translation>In conversazione con </translation>
     </message>
     <message>
         <source>Private discussion</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversazione privata</translation>
     </message>
     <message>
         <source>Type your text here in order to send a message to the other person</source>
@@ -248,7 +248,7 @@
     </message>
     <message>
         <source>The name of this server profile in the overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Il nome del profilo di questo server</translation>
     </message>
     <message>
         <source>Hostname :</source>
@@ -386,7 +386,7 @@ o &apos;+&apos;</translation>
     </message>
     <message>
         <source>Type commands here. A list of available commands can be found inside the OpieIRC help</source>
-        <translation type="unfinished">Digita qui i comandi. Nel help di OpieIRC puoi trovare una lista di comandi disponibili</translation>
+        <translation>Digita qui i comandi. Nella guida di OpieIRC puoi trovare una lista di comandi disponibili</translation>
     </message>
 </context>
 <context>
@@ -453,11 +453,11 @@ o &apos;+&apos;</translation>
     </message>
     <message>
         <source>Notifications :</source>
-        <translation type="unfinished"></translation>
+        <translation>Notifiche :</translation>
     </message>
     <message>
         <source>Text color to be used to display notifications</source>
-        <translation type="unfinished"></translation>
+        <translation>Colore da utilizzare per evidenziare le notifiche</translation>
     </message>
     <message>
         <source>Colors</source>

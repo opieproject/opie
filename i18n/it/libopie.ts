@@ -32,35 +32,35 @@
     </message>
     <message>
         <source>Lower+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Basso+Sù</translation>
     </message>
     <message>
         <source>Lower+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Basso+Giù</translation>
     </message>
     <message>
         <source>Lower+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Basso+Destra</translation>
     </message>
     <message>
         <source>Lower+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Basso+Sinistra</translation>
     </message>
     <message>
         <source>Upper+Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto+Sù</translation>
     </message>
     <message>
         <source>Upper+Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto+Giù</translation>
     </message>
     <message>
         <source>Upper+Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto+Destra</translation>
     </message>
     <message>
         <source>Upper+Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Alto+Sinistra</translation>
     </message>
 </context>
 <context>

@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>CellFormat</name>
     <message>
@@ -118,7 +119,7 @@
     </message>
     <message>
         <source>Match &amp;case</source>
-        <translation type="unfinished"></translation>
+        <translation>Confronta &amp;caratteri</translation>
     </message>
     <message>
         <source>Current &amp;selection only</source>
@@ -759,7 +760,7 @@ http://qtopia.sitebest.com</translation>
     </message>
     <message>
         <source>&amp;Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rispetta caratteri</translation>
     </message>
     <message>
         <source>&amp;Direction</source>
