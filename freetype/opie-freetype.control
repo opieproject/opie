@@ -1,0 +1,8 @@
+Files: plugins/fontfactories/libfreetypefactory*
+Priority: optional
+Section: opie/plugins
+Maintainer: Opie <opie@llornkcor.com> 
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+Description: Freetype fontfactory plugin
