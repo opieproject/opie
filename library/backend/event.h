@@ -104,13 +104,11 @@ public:
 
     void setStart( const QDateTime &d );
     void setStart( time_t time ); // don't use me.
-    QDateTime start( ) const;
-    QDateTime start( bool actual ) const; // don't use me.
+    QDateTime start( bool actual = FALSE) const; // don't use me.
     time_t startTime() const { return startUTC; } // don't use me.
     void setEnd( const QDateTime &e );
     void setEnd( time_t time ); // don't use me
-    QDateTime end( ) const;
-    QDateTime end( bool actual ) const; // don't use me.
+    QDateTime end( bool actual = FALSE ) const; // don't use me.
     time_t endTime() const { return endUTC; } // don't use me.
     void setTimeZone( const QString & );
     const QString &timeZone() const;
@@ -341,17 +339,6 @@ inline void Event::setRepeatOnWeekDay(int day, bool enable)
     if ( repeatOnWeekDay( day ) != enable )
 	pattern.days ^= 1 << (day - 1);
 }
-
-inline QDateTime Event::start( ) const
-{
-    return start(FALSE);
-}
-
-inline QDateTime Event::end( ) const
-{
-    return end(FALSE);
-}
-
 #ifdef PALMTOPCENTER
 class QPC_EXPORT EffectiveEventSizeSorter : public QSorter<EffectiveEvent>
 {
