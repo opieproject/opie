@@ -27,7 +27,7 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#include <opie2/ostorage.h>
+#include <opie2/ostorageinfo.h>
 
 OStorageInfo::OStorageInfo( QObject *parent )
         : StorageInfo( parent )

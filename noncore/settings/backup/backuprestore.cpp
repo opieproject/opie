@@ -21,7 +21,7 @@
 #include <qregexp.h>
 #include <qtextstream.h>
 #include <qtextview.h>
-#include <opie2/ostorage.h>
+#include <opie2/ostorageinfo.h>
 
 #include <errno.h>
 #include <stdlib.h>

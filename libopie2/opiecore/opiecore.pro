@@ -6,14 +6,14 @@ HEADERS     = oapplication.h            \
               odebug.h                  \
               oglobal.h                 \
               oglobalsettings.h         \
-              ostorage.h
+              ostorageinfo.h
 
 SOURCES     = oapplication.cpp          \
               oconfig.cpp               \
               odebug.cpp                \
               oglobal.cpp               \
               oglobalsettings.cpp       \
-              ostorage.cpp
+              ostorageinfo.cpp
 
 INTERFACES  =
 TARGET      = opiecore2
@@ -30,6 +30,6 @@ OBJECTS_DIR = obj
 }
 
 contains( platform, x11 ) {
-  LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib 
+  LIBS        = -L$(OPIEDIR)/lib -Wl,-rpath,$(OPIEDIR)/lib
 }
 
