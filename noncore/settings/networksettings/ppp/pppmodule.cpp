@@ -13,6 +13,7 @@
 using namespace Opie::Core;
 
 /* QT */
+#include <qt.h>
 
 /* STD */
 #include <errno.h>
@@ -146,7 +147,7 @@ QWidget *PPPModule::configure(Interface *i)
     odebug << "return ModemWidget" << oendl; 
     PPPConfigWidget *pppconfig = new PPPConfigWidget( (InterfacePPP*)i,
                                  0, "PPPConfig", false,
-                                 (Qt::WDestructiveClose | Qt::WStyle_ContextHelp));
+                                 ::Qt::WDestructiveClose | ::Qt::WStyle_ContextHelp);
     return pppconfig;
 }
 
@@ -214,8 +215,8 @@ bool PPPModule::remove(Interface *i)
 
 void PPPModule::possibleNewInterfaces(QMap<QString, QString> &newIfaces)
 {
-    newIfaces.insert(QObject::tr("PPP") ,
-                     QObject::tr("generic ppp device"));
+    newIfaces.insert(::QObject::tr("PPP") ,
+                     ::QObject::tr("generic ppp device"));
 }
 
 
