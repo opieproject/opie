@@ -50,11 +50,11 @@
     <name>MainWindow</name>
     <message>
         <source>SystemTime</source>
-        <translation type="unfinished"></translation>
+        <translation>Dato/Tid</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Tid</translation>
     </message>
     <message>
         <source>Format</source>
@@ -84,34 +84,34 @@ ntpdate</translation>
     </message>
     <message>
         <source>Error while getting time from network.</source>
-        <translation type="unfinished">Der opstod en fejl, kunne ikke hente klokken over netværket.</translation>
+        <translation>Der opstod en fejl, kunne ikke hente klokken over netværket.</translation>
     </message>
     <message>
         <source>Error while executing ntpdate</source>
-        <translation type="unfinished">Fejl under kørslen af ntpdate</translation>
+        <translation>Fejl under kørslen af ntpdate</translation>
     </message>
     <message>
         <source>Time Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Tids-server</translation>
     </message>
     <message>
         <source>Error while getting time from
  server: </source>
-        <translation type="unfinished"></translation>
+        <translation>Kunne ikke hente klokken fra
+server:</translation>
     </message>
     <message>
         <source>Could not connect to server </source>
-        <translation type="unfinished">Kunne ikke forbinde til serveren </translation>
+        <translation>Kunne ikke forbinde til serveren </translation>
     </message>
     <message>
         <source>You asked for a delay of %1 minutes, but only %2 minutes elapsed since last lookup.&lt;br&gt;Continue?</source>
-        <translation type="unfinished"></translation>
+        <translation>Du har bedt om %1 minutters mellemrum, men der er kun gået %2 minutter siden sidste gang klokken blev hentet.&lt;br&gt;Fortsæt?</translation>
     </message>
     <message>
         <source>%1 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 sekunder</translation>
     </message>
-
 </context>
 <context>
     <name>NTPTabWidget</name>
@@ -121,7 +121,7 @@ ntpdate</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <source>Time shift</source>
@@ -133,30 +133,30 @@ ntpdate</translation>
     </message>
     <message>
         <source>Get time from the network</source>
-        <translation type="unfinished"></translation>
+        <translation>Hent klokken over netværket</translation>
     </message>
 </context>
 <context>
     <name>PredictTabWidget</name>
     <message>
         <source>Predicted time drift</source>
-        <translation type="unfinished"></translation>
+        <translation>Beregnet tidsforskydelse</translation>
     </message>
     <message>
         <source>n/a</source>
-        <translation type="unfinished"></translation>
+        <translation>n/a</translation>
     </message>
     <message>
         <source>Estimated shift</source>
-        <translation type="unfinished"></translation>
+        <translation>Estimeret tidsforskydelse</translation>
     </message>
     <message>
         <source>Predicted time</source>
-        <translation type="unfinished"></translation>
+        <translation>Beregnet tid</translation>
     </message>
     <message>
         <source>Shift [s/h]</source>
-        <translation type="unfinished"></translation>
+        <translation>Forskydelse [s/t]</translation>
     </message>
     <message>
         <source>Last [h]</source>
@@ -168,11 +168,11 @@ ntpdate</translation>
     </message>
     <message>
         <source>Predict time</source>
-        <translation type="unfinished">Forudsig tiden</translation>
+        <translation>Beregn tiden</translation>
     </message>
     <message>
         <source>Set predicted time</source>
-        <translation type="unfinished">Brug forudsagt tid</translation>
+        <translation>Brug beregnet tid</translation>
     </message>
     <message>
         <source> s/h</source>
@@ -187,23 +187,23 @@ ntpdate</translation>
     <name>SettingsTabWidget</name>
     <message>
         <source>Time server</source>
-        <translation type="unfinished"></translation>
+        <translation>Tids-server</translation>
     </message>
     <message>
         <source>minutes between time updates</source>
-        <translation type="unfinished"></translation>
+        <translation>minutter mellem opdateringer</translation>
     </message>
     <message>
         <source>minutes between prediction updates</source>
-        <translation type="unfinished"></translation>
+        <translation>minutter mellem beregnet korrektion af uret</translation>
     </message>
     <message>
         <source>Display time server information</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis information om tids-server</translation>
     </message>
     <message>
         <source>Display time prediction information</source>
-        <translation type="unfinished"></translation>
+        <translation>Vis information om beregnet tid</translation>
     </message>
 </context>
 <context>

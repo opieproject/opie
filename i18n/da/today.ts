@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>&lt;b&gt;Owned by %1&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Ejes af %1&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -117,11 +117,11 @@ ved opvågning?
     </message>
     <message>
         <source>Today Config</source>
-        <translation type="unfinished"></translation>
+        <translation>Idag konfiguration</translation>
     </message>
     <message>
         <source>Tiny Banner</source>
-        <translation type="unfinished"></translation>
+        <translation>Mini-banner</translation>
     </message>
 </context>
 </TS>

@@ -100,7 +100,7 @@ Adgang nægtet</translation>
     </message>
     <message>
         <source>1.0.0.0/8</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>

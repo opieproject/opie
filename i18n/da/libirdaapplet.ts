@@ -3,23 +3,23 @@
     <name>IrdaApplet</name>
     <message>
         <source>Found:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fandt:</translation>
     </message>
     <message>
         <source>Lost:</source>
-        <translation type="unfinished"></translation>
+        <translation>Mistet:</translation>
     </message>
     <message>
         <source>Discovered Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fundet enhed:</translation>
     </message>
     <message>
         <source>Disable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiver IrDA</translation>
     </message>
     <message>
         <source>Enable IrDA</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver IrDA</translation>
     </message>
     <message>
         <source>Disable Discovery</source>
@@ -31,11 +31,11 @@
     </message>
     <message>
         <source>Disable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Deaktiver modtagelse</translation>
     </message>
     <message>
         <source>Enable Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktiver modtagelse</translation>
     </message>
 </context>
 </TS>

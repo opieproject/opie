@@ -287,11 +287,11 @@ alle sider?</translation>
     </message>
     <message>
         <source>Preview</source>
-        <translation type="unfinished">Preview</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All images</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle billeder</translation>
     </message>
 </context>
 <context>

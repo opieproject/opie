@@ -119,7 +119,7 @@
     </message>
     <message>
         <source>Linked Document</source>
-        <translation type="unfinished">Linket dokument</translation>
+        <translation>Linket dokument</translation>
     </message>
     <message>
         <source>Goto Line...</source>
@@ -131,7 +131,7 @@
     </message>
     <message>
         <source>Text Editor has detected&lt;BR&gt;you selected a &lt;B&gt;.desktop&lt;/B&gt;file.&lt;BR&gt;Open&lt;B&gt;.desktop&lt;/B&gt; file or &lt;B&gt;linked&lt;/B&gt; file?</source>
-        <translation type="unfinished">Teksteditor kan se, at &lt;br&gt;du har valgt en &lt;b&gt;.desktop&lt;/b&gt; fil.&lt;br&gt;Åbn &lt;b&gt;.desktop&lt;/b&gt; fil eller &lt;b&gt;linket&lt;/b&gt; fil?</translation>
+        <translation>Teksteditor kan se, at &lt;br&gt;du har valgt en &lt;b&gt;.desktop&lt;/b&gt; fil.&lt;br&gt;Åbn &lt;b&gt;.desktop&lt;/b&gt; fil eller &lt;b&gt;linket&lt;/b&gt; fil?</translation>
     </message>
     <message>
         <source>Text Edit</source>
