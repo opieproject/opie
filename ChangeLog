@@ -6,6 +6,7 @@
 	Fixed Bugs
 	----------
 	* #1236 - VCards contained empty home and work address entries causing Palms to crash (eilers)
+	* #1536 - Autosave of custom locations in opie backup (ar)
 
 	Internal
 	--------
