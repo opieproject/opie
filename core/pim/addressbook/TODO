@@ -14,8 +14,6 @@ Feature requests:
 
 Known Bugs:
 -----------
-- OK-Key does not switch from Detailview (ablable) to Listview
-
 - Language not English (tested with german opie-translation): 
 	1. Configure nicht übersetzt (alles leer).
 	2. Contacteditor nur teilweise übersetzt.
@@ -107,3 +105,4 @@ Fixed:
 - Store position and state of toolbar
 - VCARD: Import of Anniversary does not work correctly (currently disabled)
 - Name order selected in "contacteditor" not used in list view.
+- OK-Key does not switch from Detailview (ablable) to Listview
