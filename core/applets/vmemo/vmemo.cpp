@@ -11,7 +11,7 @@
 ************************************************************************************/
 // copyright 2002 Jeremy Cowgar <jc@cowgar.com>
 /*
- * $Id: vmemo.cpp,v 1.25 2002-05-19 17:00:41 llornkcor Exp $
+ * $Id: vmemo.cpp,v 1.26 2002-05-19 17:13:43 llornkcor Exp $
  */
 // Sun 03-17-2002  L.J.Potter <ljp@llornkcor.com>
 #include <sys/utsname.h>
@@ -207,15 +207,12 @@ VMemo::VMemo( QWidget *parent, const char *_name )
         QString release=name.release;
         Config vmCfg("VMemo");
         vmCfg.setGroup("Defaults");
+        int toggleKey = vmCfg.readNumEntry("toggleKey", -1);
   
-        if(release.find("embedix",0,TRUE) !=-1) {
-            int toggleKey = vmCfg.readNumEntry("toggleKey", -1);
+        if(release.find("embedix",0,TRUE) !=-1)
             systemZaurus=TRUE;
-        } else {
-            int toggleKey = vmCfg.readNumEntry("toggleKey", 4096);
-//default key for ipaq record button is Key_Escape = 4096
+        else 
             systemZaurus=FALSE;
-        }
       
         myChannel = new QCopChannel( "QPE/VMemo", this );
         connect( myChannel, SIGNAL(received(const QCString&, const QByteArray&)),
@@ -229,6 +226,8 @@ VMemo::VMemo( QWidget *parent, const char *_name )
             e << QString("QPE/VMemo");
             e << QString("toggleRecord()");
         }
+        if( vmCfg.readNumEntry("hideIcon",0) == 1)
+            hide();
     }
 }
 
@@ -377,22 +376,18 @@ int VMemo::openDSP()
   
     if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)  {
         perror("ioctl(\"SNDCTL_DSP_SETFMT\")");
-        errorMsg="ioctl(\"SNDCTL_DSP_SETFMT\")\n%d\n"+(QString)strerror(errno),format;
         return -1;
     }
     if(ioctl(dsp, SNDCTL_DSP_CHANNELS , &channels)==-1)  {
         perror("ioctl(\"SNDCTL_DSP_CHANNELS\")");
-        errorMsg="ioctl(\"SNDCTL_DSP_CHANNELS\")\n%d\n"+(QString)strerror(errno),channels;
         return -1;
     }
     if(ioctl(dsp, SNDCTL_DSP_SPEED , &speed)==-1)  {
         perror("ioctl(\"SNDCTL_DSP_SPEED\")");
-        errorMsg="ioctl(\"SNDCTL_DSP_SPEED\")\n%d\n"+(QString)strerror(errno),speed;
         return -1;
     }
     if(ioctl(dsp, SOUND_PCM_READ_RATE , &rate)==-1)  {
         perror("ioctl(\"SOUND_PCM_READ_RATE\")");
-        errorMsg="ioctl(\"SOUND_PCM_READ_RATE\")\n%d\n"+(QString)strerror(errno),rate;
         return -1;
     }
   
