@@ -30,26 +30,28 @@ class QTimer;
 class BatteryMeter : public QWidget
 {
     Q_OBJECT
-public:
+  public:
     BatteryMeter( QWidget *parent = 0 );
     ~BatteryMeter();
 
     QSize sizeHint() const;
 
-protected:
-    void timerEvent( QTimerEvent * );
+  protected:
+    void timerEvent( QTimerEvent* );
     void paintEvent( QPaintEvent* );
-    void mouseReleaseEvent( QMouseEvent * );
+    void mousePressEvent( QMouseEvent* );
+    void mouseReleaseEvent( QMouseEvent* );
 
-protected slots:
+  protected slots:
     void chargeTimeout();
 
-protected:
+  protected:
     QGuardedPtr<BatteryStatus> batteryView;
     PowerStatus *ps;
     QTimer *chargeTimer;
     int percent;
     bool charging;
+    int style;
 };
 
 #endif
