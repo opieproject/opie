@@ -302,10 +302,10 @@ bool CardMonitor::getStatusSd( int showPopUp ) {
         QString text = QString::null;
         QString what = QString::null;
         if ( cardInSd ) {
-            text += "New card: SD/MMC";
+            text += tr("New card: SD/MMC");
             what = "on";
         } else {
-            text += "Ejected: SD/MMC";
+            text += tr("Ejected: SD/MMC");
             what = "off";
         }
         //odebug << "TEXT: " + text << oendl;
