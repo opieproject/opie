@@ -114,6 +114,17 @@ lupdate lrelease:
 opie-lupdate opie-lrelease messages:
 	@for i in $(SUBDIRS); do $(MAKE) -C $$i $@; done;
 
+# from kde 
+qtmessages:
+	cd $(QTDIR)/src ; \
+	sed -e "s,#define,," xml/qxml.cpp > qxml_clean.cpp ;\
+	find . -name "*.cpp" | grep -v moc_ > list ;\
+	for file in qfiledialog qcolordialog qprintdialog \
+		qurloperator qftp qhttp qlocal qerrormessage; do \
+		grep -v $$file list > list.new && mv list.new list ;\
+	done ;\
+	xgettext -C -ktr -kQT_TRANSLATE_NOOP -n `cat list` -o $(OPIEDIR)/qt-messages.pot 
+
 $(subdir-y) : $(if $(CONFIG_LIBQPE),$(QTDIR)/stamp-headers $(OPIEDIR)/stamp-headers) \
 	$(if $(CONFIG_LIBQPE-X11),$(QTDIR)/stamp-headers-x11 $(OPIEDIR)/stamp-headers-x11 ) \
 	$(TOPDIR)/library/custom.h
