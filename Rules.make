@@ -127,6 +127,9 @@ ifeq ($(CONFIG_LIBSWORD_DEP),y)
 	echo LIBSWORD_LIB_DIR = $(CONFIG_LIBSWORD_LIB_DIR) >> $@
 	echo LIBSWORD_INC_DIR = $(CONFIG_LIBSWORD_INC_DIR) >> $@
 endif
+ifeq ($(CONFIG_LIBFREETYPE2_DEP),y)
+	echo LIBFREETYPE2_INC_DIR = $(CONFIG_LIBFREETYPE2_INC_DIR) >> $@
+endif
 $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)/config.in\; fi\;) $(TOPDIR)/.config $(TOPDIR)/packages
 	@echo Generating dependency information...
 # add to subdir-y, and add descend rules

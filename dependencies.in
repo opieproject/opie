@@ -94,3 +94,11 @@
     string "libbluez include dir"
     depends LIBBLUEZ_DEP
 
+  config LIBFREETYPE2_DEP
+    boolean "Have freetype2"
+    default "n"
+
+  config LIBFREETYPE2_INC_DIR
+    string "freetype2 include dir"
+    depends LIBFREETYPE2_DEP
+ 

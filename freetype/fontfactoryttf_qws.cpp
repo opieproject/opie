@@ -35,6 +35,10 @@ using namespace Opie::Core;
 
 
 extern "C" {
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include <freetype/freetype.h>
 #include <freetype/ftglyph.h>
 #include <freetype/ftoutln.h>
