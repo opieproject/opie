@@ -27,6 +27,8 @@
 #include <qpe/applnk.h>
 
 #include <qcopchannel_qws.h>
+#include <qcopenvelope_qws.h>
+
 #include <qmessagebox.h>
 #include <qdir.h>
 #include <qregexp.h>
@@ -546,7 +548,9 @@ void FileView::newFolder()
 void FileView::viewAsText()
 {
     FileItem * i = (FileItem *) currentItem();
-    Global::execute( "textedit -f ", i->getFilePath() );
+    QCopEnvelope e("QPE/Application/textedit","setDocument(QString)");
+    e << i->getFilePath();
+//    Global::execute( "textedit -f ", i->getFilePath() );
 }
 
 void FileView::itemClicked( QListViewItem * i)
