@@ -154,36 +154,24 @@ OPrivateIOCTL::~OPrivateIOCTL()
 }
 
 
-#ifdef QT_NO_DEBUG
-inline
-#endif
 int OPrivateIOCTL::numberGetArgs() const
 {
     return _getargs & IW_PRIV_SIZE_MASK;
 }
 
 
-#ifdef QT_NO_DEBUG
-inline
-#endif
 int OPrivateIOCTL::typeGetArgs() const
 {
     return _getargs & IW_PRIV_TYPE_MASK >> 12;
 }
 
 
-#ifdef QT_NO_DEBUG
-inline
-#endif
 int OPrivateIOCTL::numberSetArgs() const
 {
     return _setargs & IW_PRIV_SIZE_MASK;
 }
 
 
-#ifdef QT_NO_DEBUG
-inline
-#endif
 int OPrivateIOCTL::typeSetArgs() const
 {
     return _setargs & IW_PRIV_TYPE_MASK >> 12;
