@@ -8,7 +8,7 @@ MenuWidget::MenuWidget(TonleiterData* data,QWidget* parent,const char* name,WFla
 {
     QGridLayout* layout=new QGridLayout(this,3,3,10,-1,"menulayout");
 
-    QLabel* instLabel=new QLabel(tr("Instrument"),this,"instLabel");
+    QLabel* instLabel=new QLabel(tr("Instr."),this,"instLabel");
     layout->addWidget(instLabel,0,0);
     boxInst=new QComboBox(this,"boxInst");
     connect(boxInst,SIGNAL(activated(int)),data,SLOT(setCurrentInstrumetID(int)));
@@ -24,7 +24,7 @@ MenuWidget::MenuWidget(TonleiterData* data,QWidget* parent,const char* name,WFla
     for(int a=0;a<12;a++)
         boxNote->insertItem(Note::notenames[a],a);
     boxNote->setCurrentItem(data->getCurrentBaseNote());
-    noteCheck=new QCheckBox(tr("show notes"),this,"noteCheck");
+    noteCheck=new QCheckBox(tr("show"),this,"noteCheck");
     noteCheck->setChecked(data->isDrawNames());
     connect(noteCheck,SIGNAL(toggled(bool)),data,SLOT(setDrawNames(bool)));
     layout->addWidget(noteCheck,1,2);
