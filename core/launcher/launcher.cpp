@@ -1,4 +1,5 @@
 /**********************************************************************
+** Copyright (c) 2002 Holger zecke Freyther
 ** Copyright (C) 2000 Trolltech AS.  All rights reserved.
 **
 ** This file is part of Qtopia Environment.
@@ -22,6 +23,7 @@
 //      have this class.
 #define QTOPIA_INTERNAL_FSLP
 
+#include <opie/oconfig.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/resource.h>
 #include <qpe/applnk.h>
@@ -32,6 +34,7 @@
 #include <qpe/storage.h>
 #include <qpe/palmtoprecord.h>
 
+#include <qdatetime.h>
 #include <qdir.h>
 #include <qwindowsystem_qws.h>
 #include <qtimer.h>
@@ -66,6 +69,8 @@
 #include <mntent.h>
 #endif
 
+#include <qpe/storage.h>
+#include "mediummountgui.h"
 //#define SHOW_ALL
 
 CategoryTabWidget::CategoryTabWidget( QWidget* parent ) :
@@ -417,6 +422,7 @@ Launcher::Launcher( QWidget* parent, const char* name, WFlags fl )
     tabs = 0;
     rootFolder = 0;
     docsFolder = 0;
+    m_timeStamp = QDateTime::currentDateTime().toString();
 
     tabs = new CategoryTabWidget( this );
     tabs->setMaximumWidth( qApp->desktop()->width() );
@@ -492,11 +498,40 @@ void Launcher::updateMimeTypes(AppLnkSet* folder)
     }
 }
 
-void Launcher::loadDocs()
+void Launcher::loadDocs() // ok here comes a hack belonging to Global::
 {
     delete docsFolder;
     docsFolder = new DocLnkSet;
-    Global::findDocuments(docsFolder);
+    // find out wich filesystems are new in this round
+    // We will do this by having a timestamp inside each mountpoint
+    // if the current timestamp doesn't match this is a new file system and 
+    // come up with our MediumMountGui :) let the hacking begin
+    QString newStamp = QDateTime::currentDateTime().toString();
+    StorageInfo storage;
+    const QList<FileSystem> &fileSystems = storage.fileSystems();
+    QListIterator<FileSystem> it ( fileSystems );
+    for ( ; it.current(); ++it ) {
+      if ( (*it)->isRemovable() ) { // let's find out  if we should search on it
+	OConfig cfg( (*it)->path() + "/.opiestorage.cf");
+	cfg.setGroup("main");
+	QString stamp = cfg.readEntry("timestamp", QDateTime::currentDateTime().toString() );
+	if( stamp == m_timeStamp ){ // ok we know this card
+	  cfg.writeEntry("timestamp", newStamp );
+	  // we need to scan the list now. Hopefully the cache will be there
+	}else{ // come up with the gui
+	  MediumMountGui medium((*it)->path() + "/.opiestorage.cf" );
+	  if( medium.check() ){
+	    if( medium.exec()  ){ //ok
+	      // speicher
+	    }
+	  }else{
+	    // do something different see what we need to do
+	  }
+	} 
+      }
+    }
+    Global::findDocuments(docsFolder); // get rid of this call later
+    m_timeStamp = newStamp;
 }
 
 void Launcher::updateTabs()
