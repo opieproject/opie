@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=A World Clock and Time Zone Editor
 Comment[es]=Un reloj mundial y editor de zona horaria
+Comment[da]=Et verdensur og tidszone indstiller
 Exec=citytime
 Icon=citytime/CityTime
 Type=Application
@@ -15,3 +16,4 @@ Name[pt]=Fusos Horários
 Name[es]=Reloj Mundial
 Name[zh_TW]=世界時間
 Name[ko]=세계시간
+Name[da]=Verdensur
