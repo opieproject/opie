@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>TicTac</source>
-        <translation type="unfinished"></translation>
+        <translation>TicTac</translation>
     </message>
 </context>
 <context>
@@ -26,11 +26,11 @@
     </message>
     <message>
         <source>Click Play to start</source>
-        <translation>Wcisnij Play do startu</translation>
+        <translation>Wcisnij Graj do startu</translation>
     </message>
     <message>
         <source>Make your move</source>
-        <translation>Wykonaj moj ruch</translation>
+        <translation>Wykonaj ruch</translation>
     </message>
     <message>
         <source>You won!</source>
@@ -38,11 +38,11 @@
     </message>
     <message>
         <source>Computer won!</source>
-        <translation>Wygralem!</translation>
+        <translation>Komputer wygral!</translation>
     </message>
     <message>
         <source>It&apos;s a draw</source>
-        <translation>To jest linia</translation>
+        <translation>Remis</translation>
     </message>
 </context>
 </TS>
