@@ -41,9 +41,9 @@ Calibrate::Calibrate(QWidget* parent, const char * name, WFlags wf) :
     setGeometry( 0, 0, desk.width(), desk.height() );
     if ( desk.height() < 250 ) {
 	int w = desk.height()/3;
-	logo.convertFromImage(Resource::loadImage("qtlogo").smoothScale(w,w));
+	logo.convertFromImage(Resource::loadImage("opielogo").smoothScale(w,w));
     } else {
-	logo = Resource::loadPixmap( "qtlogo" );
+	logo = Resource::loadPixmap( "opielogo" );
     }
     cd.screenPoints[QWSPointerCalibrationData::TopLeft] = QPoint( offset, offset );
     cd.screenPoints[QWSPointerCalibrationData::BottomLeft] = QPoint( offset, qt_screen->deviceHeight() - offset );
@@ -157,7 +157,7 @@ void Calibrate::paintEvent( QPaintEvent * )
     QFont f = p.font(); f.setBold(TRUE);
     p.setFont( f );
     p.drawText( 0, y, width(), height() - y, AlignHCenter|WordBreak, 
-	    tr("Welcome to Qtopia") );
+	    tr("Welcome to Opie") );
 
 /*
     saveUnder = QPixmap::grabWindow( winId(), crossPos.x()-8, crossPos.y()-8,
