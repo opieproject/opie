@@ -388,7 +388,8 @@ void PmIpkg::update()
 
 void PmIpkg::out( QString o )
 {
-	runwindow->outPut->append(o);	
+//	runwindow->outPut->append(o);
+	runwindow->outPut->setText(runwindow->outPut->text()+o);
  	runwindow->outPut->setCursorPosition(runwindow->outPut->numLines() + 1,0,FALSE);
 }
 
