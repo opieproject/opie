@@ -27,9 +27,7 @@ using namespace Opie::Ui;
 /* STD */
 #include <assert.h>
 
-#ifdef EAST
 #include <opie2/oconfig.h>
-#endif
 
 MainWindow::MainWindow(QWidget *parent, const char *name, WFlags) : QMainWindow(parent, name, WStyle_ContextHelp)  {
 
@@ -747,7 +745,10 @@ void MainWindow::slotSaveLog() {
     QStringList text;
     text << "text/plain";
     map.insert(tr("Log"), text );
-    QString m_logName = OFileDialog::getSaveFileName(2, QPEApplication::documentDir(), QString::null, map);
+    Opie::Core::OConfig cfg("opie-console");
+    cfg.setGroup("defaults");
+    QString startDir = cfg.readEntry("defaultlogdir", QPEApplication::documentDir() );
+    QString m_logName = OFileDialog::getSaveFileName(2, startDir, QString::null, map, 0, startDir);
     if (m_logName.isEmpty() ) return;
 
     m_recordLog->setText( tr("Stop log") ); 
