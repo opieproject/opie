@@ -25,56 +25,150 @@
 #include <qpainter.h>
 #include <qpopupmenu.h>
 #include <qwindowsystem_qws.h>
-
+#include <qmessagebox.h>
+#include <qtimer.h>
 
 //===========================================================================
 
-ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name )
-    : QWidget( parent, name )
+/* XPM */
+static const char * paste_xpm[] = {
+"14 16 64 1",
+" 	c None",
+".	c #020202",
+"+	c #867616",
+"@	c #A69A42",
+"#	c #BAB676",
+"$	c #060606",
+"%	c #EAD2AA",
+"&	c #F6F6DA",
+"*	c #222212",
+"=	c #86761E",
+"-	c #868686",
+";	c #5A5202",
+">	c #8A7E2E",
+",	c #2C2C2C",
+"'	c #9A9A9A",
+")	c #F6EADA",
+"!	c #AAA262",
+"~	c #323232",
+"{	c #726A32",
+"]	c #6E6E6E",
+"^	c #C2B69E",
+"/	c #9E9E9E",
+"(	c #EED6BA",
+"_	c #F2DEC2",
+":	c #D2CE8E",
+"<	c #3A3A3A",
+"[	c #EACAA2",
+"}	c #3E3E3E",
+"|	c #727272",
+"1	c #CECECE",
+"2	c #929292",
+"3	c #4A462A",
+"4	c #424242",
+"5	c #666666",
+"6	c #C2AE96",
+"7	c #767676",
+"8	c #D6D6D6",
+"9	c #C2C2C2",
+"0	c #BFA681",
+"a	c #1E1E1E",
+"b	c #FAF6F3",
+"c	c #AEAEAE",
+"d	c #C29A6A",
+"e	c #FEFEFE",
+"f	c #B6B6B6",
+"g	c #7E7E7E",
+"h	c #FAF2E6",
+"i	c #8E8E8E",
+"j	c #C6BCAE",
+"k	c #DEDEDE",
+"l	c #BEBEBE",
+"m	c #464646",
+"n	c #BEAE92",
+"o	c #262626",
+"p	c #F2E2CE",
+"q	c #C2A175",
+"r	c #CACACA",
+"s	c #969696",
+"t	c #8A8A8A",
+"u	c #828282",
+"v	c #6A6A6A",
+"w	c #BEB6AE",
+"x	c #E2E0E0",
+"y	c #7A7A7A",
+"    *{>;      ",
+" }}}@e:!;}}}  ",
+"<x8=&:#@+;ll, ",
+"}k/=;;3}337|o ",
+"<k's24444m45o ",
+"}8'ss4xkkk]}a ",
+"<1s224keee|b4 ",
+"}r2itmkeee]]44",
+"<9iitmkeeehkw.",
+"<lt-u4keeb)pn.",
+"<fu-umkebhp(0.",
+"<cugg4kbh)_(q.",
+"<cyyymk))p(%q.",
+",5vvv4k)p_%[q.",
+" ...$mljnn0qd.",
+"     4.......,"};
+
+
+ClipboardApplet::ClipboardApplet( QWidget *parent, const char *name ) : QWidget( parent, name )
 {
-    setFixedWidth( 14 );
-    clipboardPixmap = Resource::loadPixmap( "clipboard" );
-    menu = 0;
+	setFixedWidth ( 14 );
+	setFixedHeight ( 18 );
+	clipboardPixmap = QPixmap ( paste_xpm );
+	menu = 0;
 }
 
-ClipboardApplet::~ClipboardApplet()
+ClipboardApplet::~ClipboardApplet ( )
 {
 }
 
-void ClipboardApplet::mousePressEvent( QMouseEvent *)
+void ClipboardApplet::mousePressEvent ( QMouseEvent *)
 {
-    if ( !menu ) {
-	menu = new QPopupMenu(this);
-	menu->insertItem(tr("Cut"));
-	menu->insertItem(tr("Copy"));
-	menu->insertItem(tr("Paste"));
-	connect(menu, SIGNAL(selected(int)), this, SLOT(action(int)));
-    }
-    menu->popup(mapToGlobal(QPoint(0,0)));
+	if ( !menu ) {
+		menu = new QPopupMenu ( this );
+		menu-> insertItem ( tr( "Cut" ), 0 );
+		menu-> insertItem ( tr( "Copy" ), 1 );
+		menu-> insertItem ( tr( "Paste" ), 2 );
+		connect ( menu, SIGNAL( activated ( int )), this, SLOT( action ( int )));
+	}
+	menu->popup(mapToGlobal(QPoint(0,0)));
 }
 
-void ClipboardApplet::action(int i)
+void ClipboardApplet::action(int id)
 {
-    ushort unicode=0;
-    int scan=0;
+	ushort unicode=0;
+	int scan=0;
 
-    if ( i == 0 )
-	{ unicode='X'-'@'; scan=Key_X; } // Cut
-    else if ( i == 1 )
-	{ unicode='C'-'@'; scan=Key_C; } // Copy
-    else if ( i == 2 )
-	{ unicode='V'-'@'; scan=Key_V; } // Paste
-
-    if ( scan ) {
-	qwsServer->processKeyEvent( unicode, scan, ControlButton, TRUE, FALSE );
-	qwsServer->processKeyEvent( unicode, scan, ControlButton, FALSE, FALSE );
-    }
+	switch ( id ) {
+		case 0:
+			unicode='X'-'@'; 
+			scan=Key_X; // Cut
+			break;
+		case 1:
+			unicode='C'-'@'; 
+			scan=Key_C; // Copy
+			break;
+		case 2:
+			unicode='V'-'@'; 
+			scan=Key_V; // Paste
+			break;
+	}
+		
+	if ( scan ) {
+		qwsServer->processKeyEvent( unicode, scan, ControlButton, TRUE, FALSE );
+		qwsServer->processKeyEvent( unicode, scan, ControlButton, FALSE, FALSE );
+	}
 }
 
-void ClipboardApplet::paintEvent( QPaintEvent* )
+void ClipboardApplet::paintEvent ( QPaintEvent* )
 {
-    QPainter p(this);
-    p.drawPixmap( 0, 1, clipboardPixmap );
+	QPainter p ( this );
+	p. drawPixmap ( 0, 1, clipboardPixmap );
 }
 
 

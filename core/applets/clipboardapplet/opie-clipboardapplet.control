@@ -1,7 +1,7 @@
 Files: plugins/applets/libclipboardapplet.so*
 Priority: optional
 Section: opie/taskbar
-Maintainer: Warwick Allison <warwick@trolltech.com>
+Maintainer: Robert Griebl <sandman@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
 Depends: opie-base ($QPE_VERSION)
