@@ -50,7 +50,7 @@ void TempScreenSaverMonitor::setTempMode(int mode, int pid)
 	case QPEApplication::Enable:
 	    break;
 	default:
-	    qWarning("Unrecognized temp power setting.  Ignored");
+	    owarn << "Unrecognized temp power setting.  Ignored" << oendl; 
 	    return;
     }
     updateAll();

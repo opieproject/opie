@@ -36,6 +36,10 @@
 #endif
 #include "documentlist.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/odevicebutton.h>
+#include <opie2/odevice.h>
 #include <qtopia/applnk.h>
 #include <qtopia/private/categories.h>
 #include <qtopia/mimetype.h>
@@ -43,28 +47,24 @@
 #include <qtopia/resource.h>
 #include <qtopia/version.h>
 #include <qtopia/storage.h>
-
 #include <qtopia/qcopenvelope_qws.h>
-#include <qwindowsystem_qws.h>
-#include <qgfx_qws.h>
 #include <qtopia/global.h>
-//#include <qtopia/custom.h>
+using namespace Opie::Core;
 
-#include <opie2/odevicebutton.h>
-#include <opie2/odevice.h>
-
-#include <unistd.h>
+/* QT */
 #include <qmainwindow.h>
 #include <qmessagebox.h>
 #include <qtimer.h>
 #include <qtextstream.h>
+#include <qwindowsystem_qws.h>
+#include <qgfx_qws.h>
 
+/* STD */
+#include <unistd.h>
 #include <stdlib.h>
 
 extern QRect qt_maxWindowRect;
 
-
-using namespace Opie::Core;
 static QWidget *calibrate(bool)
 {
 #ifdef Q_WS_QWS
@@ -329,7 +329,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
     else if ( msg == "linkChanged(QString)" ) {
 	QString link;
 	stream >> link;
-	qDebug( "desktop.cpp systemMsg -> linkchanged( %s )", link.latin1() );
+    odebug << "desktop.cpp systemMsg -> linkchanged( " << link << " )" << oendl;
 	docList->linkChanged(link);
     } else if ( msg == "serviceChanged(QString)" ) {
 	MimeType::updateApplications();
@@ -434,7 +434,7 @@ void Server::systemMsg(const QCString &msg, const QByteArray &data)
 	Config cfg( "qpe" );
 	cfg.setGroup("SyncDate");
 	cfg.writeEntry( app, date );
-	//qDebug("setSyncDate(QString,QString) %s %s", app.latin1(), date.latin1());
+    //odebug << "setSyncDate(QString,QString) " << app << " " << date << "" << oendl;
     } else if ( msg == "startSync(QString)" ) {
 	QString what;
 	stream >> what;
@@ -572,7 +572,7 @@ bool Server::mkdir(const QString &localPath)
 
     // didn't find any seps; weird, use the cur dir instead
     if (dirIndex == -1) {
-	//qDebug("No seperators found in path %s", localPath.latin1());
+    //odebug << "No seperators found in path " << localPath << "" << oendl;
 	checkedPath = QDir::currentDirPath();
     }
 
@@ -589,10 +589,10 @@ bool Server::mkdir(const QString &localPath)
 
 	QDir checkDir(checkedPath);
 	if (!checkDir.exists()) {
-	    //qDebug("mkdir making dir %s", checkedPath.latin1());
+        //odebug << "mkdir making dir " << checkedPath << "" << oendl;
 
 	    if (!checkDir.mkdir(checkedPath)) {
-		qDebug("Unable to make directory %s", checkedPath.latin1());
+        odebug << "Unable to make directory " << checkedPath << "" << oendl;
 		return FALSE;
 	    }
 	}
@@ -670,7 +670,7 @@ void Server::terminateServers()
 
 void Server::syncConnectionClosed( const QHostAddress & )
 {
-    qDebug( "Lost sync connection" );
+    odebug << "Lost sync connection" << oendl;
     delete syncDialog;
     syncDialog = 0;
 }

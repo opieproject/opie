@@ -18,6 +18,15 @@
 **
 **********************************************************************/
 
+#include "startmenu.h"
+#include "taskbar.h"
+#include "serverinterface.h"
+#include "launcherview.h"
+#include "launcher.h"
+#include "server.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/global.h>
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
@@ -28,10 +37,13 @@
 #include <qtopia/qpeapplication.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/private/categories.h>
-//#include <qtopia/custom.h>
+#define QTOPIA_INTERNAL_FSLP
+#include <qtopia/lnkproperties.h>
 
+/* QT */
 #include <qdir.h>
 #ifdef Q_WS_QWS
+#include <qkeyboard_qws.h>
 #include <qwindowsystem_qws.h>
 #endif
 #include <qtimer.h>
@@ -50,29 +62,14 @@
 #include <qtextstream.h>
 #include <qpopupmenu.h>
 
-#include "startmenu.h"
-#include "taskbar.h"
-
-#include "serverinterface.h"
-#include "launcherview.h"
-#include "launcher.h"
-#include "server.h"
-
-#define QTOPIA_INTERNAL_FSLP
-#include <qtopia/lnkproperties.h>
+/* STD */
 #include <stdlib.h>
 #include <assert.h>
-
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
 #include <unistd.h>
 #include <stdio.h>
 #include <sys/vfs.h>
 #include <mntent.h>
-#endif
-
-#ifdef Q_WS_QWS
-#include <qkeyboard_qws.h>
-#include <qpe/lnkproperties.h>
 #endif
 
 
@@ -228,7 +225,7 @@ LauncherView* LauncherTabWidget::newView( const QString& id, const QPixmap& pm, 
     if ( id == "Documents" )
 	docview = view;
 
-    qDebug("inserting %s at %d", id.latin1(), n-1 );
+    odebug << "inserting " << id << " at " << n-1 << "" << oendl;
 
     Config cfg("Launcher");
     setTabAppearance( tab, cfg );
@@ -413,7 +410,7 @@ void LauncherTabWidget::launcherMessage( const QCString &msg, const QByteArray &
 	if ( view(id) ) {
 	    if ( !fam.isEmpty() ) {
 		view(id)->setViewFont( QFont(fam, size, weight, italic!=0) );
-		qDebug( "setFont: %s, %d, %d, %d", fam.latin1(), size, weight, italic );
+        odebug << "setFont: " << fam << ", " << size << ", " << weight << ", " << italic << "" << oendl;
 	    } else {
 		view(id)->clearViewFont();
 	    }
@@ -684,7 +681,7 @@ void Launcher::applicationRemoved( const QString& type, const AppLnk& app )
     if ( view )
 	view->removeLink( app.linkFile() );
     else
-	qWarning("removeAppLnk: No view for %s!", type.latin1() );
+    owarn << "removeAppLnk: No view for " << type << "!" << oendl;
 }
 
 void Launcher::allApplicationsRemoved()

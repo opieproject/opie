@@ -28,14 +28,17 @@
 #include "taskbar.h"
 #include "server.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
 #ifdef QWS
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 #include <qtopia/global.h>
-//#include <qtopia/custom.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qlabel.h>
 #include <qlayout.h>
 #include <qtimer.h>
@@ -285,7 +288,7 @@ void TaskBar::resizeEvent( QResizeEvent *e )
     if ( sysTray )
         sysTray->show();
 
-    qWarning("TaskBar::resize event");
+    owarn << "TaskBar::resize event" << oendl;
 }
 
 void TaskBar::styleChange( QStyle &s )

@@ -21,24 +21,35 @@
 #ifndef QTOPIA_INTERNAL_FILEOPERATIONS
 #define QTOPIA_INTERNAL_FILEOPERATIONS
 #endif
+#ifdef QT_QWS_LOGIN
+#include "../login/qdmdialogimpl.h"
+#endif
+#include "calibrate.h"
 #include "server.h"
 #include "serverapp.h"
 #include "stabmon.h"
 #include "firstuse.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <opie2/odevice.h>
 #include <opie2/oglobal.h>
-
 #include <qtopia/network.h>
-//#include <qtopia/custom.h>
+#include <qtopia/alarmserver.h>
+using namespace Opie::Core;
 
-
+/* QT */
 #include <qdir.h>
+#include <qmessagebox.h>
 #ifdef QWS
 #include <qwindowsystem_qws.h>
 #include <qtopia/qcopenvelope_qws.h>
 #endif
-#include <qtopia/alarmserver.h>
+#ifdef Q_WS_QWS
+#include <qkeyboard_qws.h>
+#endif
 
+/* STD */
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
@@ -47,23 +58,6 @@
 #else
 #include <process.h>
 #endif
-
-#include "calibrate.h"
-
-
-#ifdef QT_QWS_LOGIN
-#include "../login/qdmdialogimpl.h"
-#endif
-
-#ifdef Q_WS_QWS
-#include <qkeyboard_qws.h>
-#endif
-
-#include <qmessagebox.h>
-#include <opie2/odevice.h>
-
-using namespace Opie::Core;
-
 
 static void cleanup()
 {
@@ -121,7 +115,7 @@ static void refreshTimeZoneConfig()
 	zoneID = cfg.readEntry( "Zone" + QString::number( zoneIndex ));
 	curZone = TimeZone( zoneID );
 	if ( !curZone.isValid() ){
-	    qDebug( "initEnvironment() Invalid TimeZone %s", zoneID.latin1() );
+        odebug << "initEnvironment() Invalid TimeZone " << zoneID << "" << oendl;
 	    break;
 	}
 	cfg.writeEntry( "ZoneName" + QString::number( zoneIndex ), curZone.city() );
@@ -269,7 +263,7 @@ int initApplication( int argc, char ** argv )
 
     int rv =  a.exec();
 
-    qDebug("exiting...");
+    odebug << "exiting..." << oendl;
     delete s;
 
 #ifndef Q_OS_MACX
@@ -341,7 +335,7 @@ int main( int argc, char ** argv )
     int retVal = initApplication( argc, argv );
 
     if ( DesktopApplication::doRestart ) {
-	qDebug("Trying to restart");
+    odebug << "Trying to restart" << oendl;
 	execl( (QPEApplication::qpeDir()+"bin\\qpe").latin1(), "qpe", 0 );
     }
 

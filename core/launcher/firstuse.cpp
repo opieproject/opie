@@ -29,16 +29,18 @@
 #include "inputmethods.h"
 #include "applauncher.h"
 #include "serverapp.h"
-//#include <qtopia/custom.h>
-
 #include "calibrate.h"
 #include "documentlist.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/resource.h>
 #include <qtopia/qcopenvelope_qws.h>
 #include <qtopia/config.h>
 #include <qtopia/fontmanager.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qfile.h>
 #include <qpainter.h>
 #include <qsimplerichtext.h>
@@ -51,7 +53,7 @@
 #include <qgfx_qws.h>
 #endif
 
-
+/* STD */
 #include <stdlib.h>
 #include <sys/types.h>
 #if defined(Q_OS_LINUX) || defined(_OS_LINUX_)
@@ -155,7 +157,7 @@ FirstUse::FirstUse(QWidget* parent, const char * name, WFlags wf) :
     taskBar->hide();
 
 #if defined(Q_WS_QWS) && !defined(QT_NO_COP)
-    qDebug("Setting up QCop to QPE/System");
+    odebug << "Setting up QCop to QPE/System" << oendl;
     QCopChannel* sysChannel = new QCopChannel( "QPE/System", this );
     connect(sysChannel, SIGNAL(received(const QCString&,const QByteArray&)),
 	    this, SLOT(message(const QCString&,const QByteArray&)) );
@@ -223,18 +225,18 @@ void FirstUse::nextDialog()
     int prevApp = currApp;
     do {
 	currApp++;
-	qDebug( "currApp = %d", currApp );
+    odebug << "currApp = " << currApp << "" << oendl;
 	if ( settingsTable[currApp].app == 0 ) {
 	    if ( prevApp >= 0 && appLauncher->isRunning(settingsTable[prevApp].app) ) {
 		// The last application is still running.
 		// Tell it to stop, and when its done we'll come back
 		// to nextDialog and exit.
-		qDebug( "Waiting for %s to exit", settingsTable[prevApp].app );
+        odebug << "Waiting for " << settingsTable[prevApp].app << " to exit" << oendl;
 		QCopEnvelope e(QCString("QPE/Application/") + settingsTable[prevApp].app,
 			settingsTable[prevApp].stop );
 		currApp = prevApp;
 	    } else {
-		qDebug( "Done!" );
+        odebug << "Done!" << oendl;
 		Config config( "qpe" );
 		config.setGroup( "Startup" );
 		config.writeEntry( "FirstUse", FALSE );
@@ -258,12 +260,12 @@ void FirstUse::nextDialog()
     } while ( !settingsTable[currApp].enabled );
 
     if ( prevApp >= 0 && appLauncher->isRunning(settingsTable[prevApp].app) ) {
-	qDebug( "Shutdown: %s", settingsTable[prevApp].app );
+    odebug << "Shutdown: " << settingsTable[prevApp].app << "" << oendl;
 	QCopEnvelope e(QCString("QPE/Application/") + settingsTable[prevApp].app,
 			settingsTable[prevApp].stop );
 	waitForExit = prevApp;
     } else {
-	qDebug( "Startup: %s", settingsTable[currApp].app );
+    odebug << "Startup: " << settingsTable[currApp].app << "" << oendl;
 	QCopEnvelope e(QCString("QPE/Application/") + settingsTable[currApp].app,
 		settingsTable[currApp].start );
 	waitingForLaunch = TRUE;
@@ -285,7 +287,7 @@ void FirstUse::previousDialog()
     } while ( !settingsTable[currApp].enabled );
 
     if ( prevApp >= 0 ) {
-	qDebug( "Shutdown: %s", settingsTable[prevApp].app );
+    odebug << "Shutdown: " << settingsTable[prevApp].app << "" << oendl;
 	QCopEnvelope e(QCString("QPE/Application/") + settingsTable[prevApp].app,
 			settingsTable[prevApp].stop );
 /*
@@ -294,7 +296,7 @@ void FirstUse::previousDialog()
 */
 	waitForExit = prevApp;
     } else {
-	qDebug( "Startup: %s", settingsTable[currApp].app );
+    odebug << "Startup: " << settingsTable[currApp].app << "" << oendl;
 	QCopEnvelope e(QCString("QPE/Application/") + settingsTable[currApp].app,
 		settingsTable[currApp].start );
 	waitingForLaunch = TRUE;
@@ -318,9 +320,9 @@ void FirstUse::message(const QCString &msg, const QByteArray &data)
 
 void FirstUse::terminated( int, const QString &app )
 {
-    qDebug( "--- terminated: %s", app.latin1() );
+    odebug << "--- terminated: " << app << "" << oendl;
     if ( waitForExit != -1 && settingsTable[waitForExit].app == app ) {
-	qDebug( "Startup: %s", settingsTable[currApp].app );
+    odebug << "Startup: " << settingsTable[currApp].app << "" << oendl;
 	if ( settingsTable[waitForExit].app == "language" ) { // No tr
 	    Config config("locale");
 	    config.setGroup( "Language");
@@ -347,12 +349,12 @@ void FirstUse::terminated( int, const QString &app )
 
 void FirstUse::newQcopChannel(const QString& channelName)
 {
-    qDebug("channel %s added", channelName.data() );
+    odebug << "channel " << channelName.data() << " added" << oendl;
     QString prefix("QPE/Application/");
     if (channelName.startsWith(prefix)) {
 	QString appName = channelName.mid(prefix.length());
 	if ( currApp >= 0 && appName == settingsTable[currApp].app ) {
-	    qDebug( "Application: %s started", settingsTable[currApp].app );
+        odebug << "Application: " << settingsTable[currApp].app << " started" << oendl;
 	    waitingForLaunch = FALSE;
 	    updateButtons();
 	    repaint();
@@ -370,12 +372,12 @@ void FirstUse::reloadLanguages()
     config.setGroup( "Language");
     QString l = config.readEntry( "Language", "en");
     QString cl = getenv("LANG");
-    qWarning("language message - " + l);
+    owarn << "language message - " + l << oendl;
     // setting anyway...
     if (l.isNull() )
 	unsetenv( "LANG" );
     else {
-	qWarning("and its not null");
+    owarn << "and its not null" << oendl;
 	setenv( "LANG", l.latin1(), 1 );
     }
 #ifndef QT_NO_TRANSLATION
@@ -392,9 +394,9 @@ void FirstUse::reloadLanguages()
     // load translation tables
     transApp = new QTranslator(qApp);
     QString tfn = QPEApplication::qpeDir() + "i18n/"+l+"/qpe.qm";
-    qWarning("loading " + tfn);
+    owarn << "loading " + tfn << oendl;
     if ( transApp->load(tfn) ) {
-	qWarning("installing translator");
+    owarn << "installing translator" << oendl;
 	qApp->installTranslator( transApp );
     } else  {
 	delete transApp;
@@ -403,9 +405,9 @@ void FirstUse::reloadLanguages()
 
     transLib = new QTranslator(qApp);
     tfn = QPEApplication::qpeDir() + "i18n/"+l+"/libqpe.qm";
-    qWarning("loading " + tfn);
+    owarn << "loading " + tfn << oendl;
     if ( transLib->load(tfn) ) {
-	qWarning("installing translator library");
+    owarn << "installing translator library" << oendl;
 	qApp->installTranslator( transLib );
     } else  {
 	delete transLib;

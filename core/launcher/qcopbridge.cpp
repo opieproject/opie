@@ -21,21 +21,24 @@
 #include "qcopbridge.h"
 #include "transferserver.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/oglobal.h>
-
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 #include <qtopia/qpeapplication.h>
-
 #include <qtopia/version.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qtextstream.h>
 #include <qtimer.h>
 #ifdef Q_WS_QWS
 #include <qcopchannel_qws.h>
 #endif
 
+/* STD */
 #ifndef _XOPEN_SOURCE
 #define _XOPEN_SOURCE
 #endif
@@ -49,12 +52,8 @@
 #include <shadow.h>
 #endif
 
-
-//#define INSECURE
-
 const int block_size = 51200;
 
-using namespace Opie::Core;
 QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
         const char* name )
     : QServerSocket( port, 1, parent, name ),
@@ -62,7 +61,7 @@ QCopBridge::QCopBridge( Q_UINT16 port, QObject *parent,
       cardChannel( 0 )
 {
     if ( !ok() )
-	qWarning( "Failed to bind to port %d", port );
+    owarn << "Failed to bind to port " << port << "" << oendl;
     else {
 #ifndef QT_NO_COP
 	desktopChannel = new QCopChannel( "QPE/Desktop", this );
@@ -171,13 +170,13 @@ void QCopBridge::sendDesktopMessageOld( const QCString& command, const QByteArra
 
     int paren = command.find( "(" );
     if ( paren <= 0 ) {
-	qDebug("DesktopMessage: bad qcop syntax");
+    odebug << "DesktopMessage: bad qcop syntax" << oendl;
 	return;
     }
 
     QString params = command.mid( paren + 1 );
     if ( params[params.length()-1] != ')' ) {
-	qDebug("DesktopMessage: bad qcop syntax");
+    odebug << "DesktopMessage: bad qcop syntax" << oendl;
 	return;
     }
 
@@ -204,7 +203,7 @@ void QCopBridge::sendDesktopMessageOld( const QCString& command, const QByteArra
 		stream >> i;
 		str = QString::number( i );
 	    } else {
-		qDebug(" cannot route the argument type %s throught the qcop bridge", (*it).latin1() );
+        odebug << " cannot route the argument type " << (*it) << " throught the qcop bridge" << oendl;
 		return;
 	    }
 	    QString estr;
@@ -332,7 +331,7 @@ void QCopBridgePI::send( const QString& msg )
 	return;
     QTextStream os( this );
     os << msg << endl;
-    //qDebug( "sending qcop message: %s", msg.latin1() );
+    //odebug << "sending qcop message: " << msg << "" << oendl;
 }
 
 void QCopBridgePI::read()
@@ -345,7 +344,7 @@ void QCopBridgePI::read()
 
 void QCopBridgePI::process( const QString& message )
 {
-    //qDebug( "Command: %s", message.latin1() );
+    //odebug << "Command: " << message << "" << oendl;
 
     // split message using "," as separator
     QStringList msg = QStringList::split( " ", message );

@@ -18,23 +18,21 @@
 **
 **********************************************************************/
 
+#include "systray.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/qpeapplication.h>
 #include <qtopia/qlibrary.h>
 #include <qtopia/config.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qlayout.h>
 #include <qdir.h>
 
-#include "systray.h"
-
+/* STD */
 #include <stdlib.h>
-
-/* ### Single build floppies ### */
-#if 0
-#ifdef QT_NO_COMPONENTS
-#include "../plugins/applets/clockapplet/clockappletimpl.h"
-#endif
-#endif
 
 SysTray::SysTray( QWidget *parent ) : QFrame( parent ), layout(0)
 {
@@ -112,7 +110,7 @@ void SysTray::addApplets()
     for ( it = list.begin(); it != list.end(); ++it ) {
 	if ( exclude.find( *it ) != exclude.end() )
 	    continue;
-	qWarning( "Found Applet: %s", (*it).latin1() );
+    owarn << "Found Applet: " << (*it) << "" << oendl;
 	TaskbarAppletInterface *iface = 0;
 	QLibrary *lib = new QLibrary( path + "/" + *it );
 	if (( lib->queryInterface( IID_TaskbarApplet, (QUnknownInterface**)&iface ) == QS_OK ) && iface ) {

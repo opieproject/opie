@@ -18,8 +18,6 @@
 **
 **********************************************************************/
 
-//#include "qplatformdefs.h"
-
 // Solaris redefines connect -> __xnet_connect with _XOPEN_SOURCE_EXTENDED.
 #if defined(connect)
 #undef connect
@@ -27,33 +25,34 @@
 
 #include "qprocess.h"
 
-#ifndef QT_NO_PROCESS
+/* OPIE */
+#include <opie2/odebug.h>
+using namespace Opie::Core;
 
-#include "qapplication.h"
-#include "qqueue.h"
-#include "qlist.h"
-#include "qsocketnotifier.h"
-#include "qtimer.h"
-#include "qregexp.h"
+/* QT */
+#ifndef QT_NO_PROCESS
+#include <qapplication.h>
+#include <qqueue.h>
+#include <qlist.h>
+#include <qsocketnotifier.h>
+#include <qtimer.h>
+#include <qregexp.h>
 
 #include "qcleanuphandler_p.h"
 
+/* STD */
 #include <stdlib.h>
-
-// ### FOR Qt 2.3 compat
 #include <unistd.h>
 #include <signal.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <sys/wait.h>
 #include <sys/fcntl.h>
-
+#include <sys/resource.h>
 #include <errno.h>
-
 #ifdef Q_OS_MACX
 #include <sys/time.h>
 #endif
-#include <sys/resource.h>
 
 #ifdef __MIPSEL__
 # ifndef SOCK_DGRAM
@@ -132,7 +131,7 @@ public:
     QProc( pid_t p, QProcess *proc=0 ) : pid(p), process(proc)
     {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProc: Constructor for pid %d and QProcess %p", pid, process );
+    odebug << "QProc: Constructor for pid " << pid << " and QProcess " << process << "" << oendl;
 #endif
 	socketStdin = 0;
 	socketStdout = 0;
@@ -141,7 +140,7 @@ public:
     ~QProc()
     {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProc: Destructor for pid %d and QProcess %p", pid, process );
+    odebug << "QProc: Destructor for pid " << pid << " and QProcess " << process << "" << oendl;
 #endif
 	if ( process != 0 ) {
 	    if ( process->d->notifierStdin )
@@ -213,7 +212,7 @@ QProcessManager::QProcessManager()
 	sigchldFd[1] = 0;
     } else {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcessManager: install socket notifier (%d)", sigchldFd[1] );
+    odebug << "QProcessManager: install socket notifier (" << sigchldFd[1] << ")" << oendl;
 #endif
 	QSocketNotifier *sn = new QSocketNotifier( sigchldFd[1],
 		QSocketNotifier::Read, this );
@@ -226,7 +225,7 @@ QProcessManager::QProcessManager()
     struct sigaction act;
 
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager: install a SIGCHLD handler" );
+    odebug << "QProcessManager: install a SIGCHLD handler" << oendl;
 #endif
     act.sa_handler = qt_C_sigchldHnd;
     sigemptyset( &(act.sa_mask) );
@@ -236,10 +235,10 @@ QProcessManager::QProcessManager()
     act.sa_flags |= SA_RESTART;
 #endif
     if ( sigaction( SIGCHLD, &act, &oldactChld ) != 0 )
-	qWarning( "Error installing SIGCHLD handler" );
+    owarn << "Error installing SIGCHLD handler" << oendl;
 
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager: install a SIGPIPE handler (SIG_IGN)" );
+    odebug << "QProcessManager: install a SIGPIPE handler (SIG_IGN)" << oendl;
 #endif
     /*
 	Using qt_C_sigpipeHnd rather than SIG_IGN is a workaround
@@ -252,7 +251,7 @@ QProcessManager::QProcessManager()
     sigaddset( &(act.sa_mask), SIGPIPE );
     act.sa_flags = 0;
     if ( sigaction( SIGPIPE, &act, &oldactPipe ) != 0 )
-	qWarning( "Error installing SIGPIPE handler" );
+    owarn << "Error installing SIGPIPE handler" << oendl;
 }
 
 QProcessManager::~QProcessManager()
@@ -266,23 +265,23 @@ QProcessManager::~QProcessManager()
 
     // restore SIGCHLD handler
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager: restore old sigchild handler" );
+    odebug << "QProcessManager: restore old sigchild handler" << oendl;
 #endif
     if ( sigaction( SIGCHLD, &oldactChld, 0 ) != 0 )
-	qWarning( "Error restoring SIGCHLD handler" );
+    owarn << "Error restoring SIGCHLD handler" << oendl;
 
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager: restore old sigpipe handler" );
+    odebug << "QProcessManager: restore old sigpipe handler" << oendl;
 #endif
     if ( sigaction( SIGPIPE, &oldactPipe, 0 ) != 0 )
-	qWarning( "Error restoring SIGPIPE handler" );
+    owarn << "Error restoring SIGPIPE handler" << oendl;
 }
 
 void QProcessManager::append( QProc *p )
 {
     procList->append( p );
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager: append process (procList.count(): %d)", procList->count() );
+    odebug << "QProcessManager: append process (procList.count(): " << procList->count() << ")" << oendl;
 #endif
 }
 
@@ -290,7 +289,7 @@ void QProcessManager::remove( QProc *p )
 {
     procList->remove( p );
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager: remove process (procList.count(): %d)", procList->count() );
+    odebug << "QProcessManager: remove process (procList.count(): " << procList->count() << ")" << oendl;
 #endif
     cleanup();
 }
@@ -316,7 +315,7 @@ void QProcessManager::sigchldHnd( int fd )
     char tmp;
     ::read( fd, &tmp, sizeof(tmp) );
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessManager::sigchldHnd()" );
+    odebug << "QProcessManager::sigchldHnd()" << oendl;
 #endif
     QProc *proc;
     QProcess *process;
@@ -329,20 +328,20 @@ void QProcessManager::sigchldHnd( int fd )
 	if ( process != 0 ) {
 	    if ( !process->isRunning() ) {
 #if defined(QT_QPROCESS_DEBUG)
-		qDebug( "QProcessManager::sigchldHnd() (PID: %d): process exited (QProcess available)", proc->pid );
+        odebug << "QProcessManager::sigchldHnd() (PID: " << proc->pid << "): process exited (QProcess available)" << oendl;
 #endif
 		// read pending data
 		int nbytes = 0;
 		if ( ::ioctl(proc->socketStdout, FIONREAD, (char*)&nbytes)==0 && nbytes>0 ) {
 #if defined(QT_QPROCESS_DEBUG)
-		qDebug( "QProcessManager::sigchldHnd() (PID: %d): reading %d bytes of pending data on stdout", proc->pid, nbytes );
+        odebug << "QProcessManager::sigchldHnd() (PID: " << proc->pid << "): reading " << nbytes << " bytes of pending data on stdout" << oendl;
 #endif
 		    process->socketRead( proc->socketStdout );
 		}
 		nbytes = 0;
 		if ( ::ioctl(proc->socketStderr, FIONREAD, (char*)&nbytes)==0 && nbytes>0 ) {
 #if defined(QT_QPROCESS_DEBUG)
-		qDebug( "QProcessManager::sigchldHnd() (PID: %d): reading %d bytes of pending data on stderr", proc->pid, nbytes );
+        odebug << "QProcessManager::sigchldHnd() (PID: " << proc->pid << "): reading " << nbytes << " bytes of pending data on stderr" << oendl;
 #endif
 		    process->socketRead( proc->socketStderr );
 		}
@@ -356,7 +355,7 @@ void QProcessManager::sigchldHnd( int fd )
 	    int status;
 	    if ( ::waitpid( proc->pid, &status, WNOHANG ) == proc->pid ) {
 #if defined(QT_QPROCESS_DEBUG)
-		qDebug( "QProcessManager::sigchldHnd() (PID: %d): process exited (QProcess not available)", proc->pid );
+        odebug << "QProcessManager::sigchldHnd() (PID: " << proc->pid << "): process exited (QProcess not available)" << oendl;
 #endif
 		removeProc = TRUE;
 	    }
@@ -386,7 +385,7 @@ QProcessManager *QProcessPrivate::procManager = 0;
 QProcessPrivate::QProcessPrivate()
 {
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessPrivate: Constructor" );
+    odebug << "QProcessPrivate: Constructor" << oendl;
 #endif
     stdinBufRead = 0;
 
@@ -403,7 +402,7 @@ QProcessPrivate::QProcessPrivate()
 QProcessPrivate::~QProcessPrivate()
 {
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcessPrivate: Destructor" );
+    odebug << "QProcessPrivate: Destructor" << oendl;
 #endif
 
     if ( proc != 0 ) {
@@ -599,7 +598,7 @@ QProcess::~QProcess()
 bool QProcess::start( QStringList *env )
 {
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcess::start()" );
+    odebug << "QProcess::start()" << oendl;
 #endif
     reset();
 
@@ -635,7 +634,7 @@ bool QProcess::start( QStringList *env )
 	arglistQ[i] = (*it).local8Bit();
 	arglist[i] = arglistQ[i];
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::start(): arg %d = %s", i, arglist[i] );
+    odebug << "QProcess::start(): arg " << i << " = " << arglist[i] << "" << oendl;
 #endif
 	i++;
     }
@@ -799,7 +798,7 @@ bool QProcess::start( QStringList *env )
 
 error:
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcess::start(): error starting process" );
+    odebug << "QProcess::start(): error starting process" << oendl;
 #endif
     if ( d->procManager )
 	d->procManager->cleanup();
@@ -878,7 +877,7 @@ bool QProcess::isRunning() const
 {
     if ( d->exitValuesCalculated ) {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::isRunning(): FALSE (already computed)" );
+    odebug << "QProcess::isRunning(): FALSE (already computed)" << oendl;
 #endif
 	return FALSE;
     }
@@ -895,12 +894,12 @@ bool QProcess::isRunning() const
 	}
 	d->exitValuesCalculated = TRUE;
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::isRunning() (PID: %d): FALSE", d->proc->pid );
+    odebug << "QProcess::isRunning() (PID: " << d->proc->pid << "): FALSE" << oendl;
 #endif
 	return FALSE;
     }
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcess::isRunning() (PID: %d): TRUE", d->proc->pid );
+    odebug << "QProcess::isRunning() (PID: " << d->proc->pid << "): TRUE" << oendl;
 #endif
     return TRUE;
 }
@@ -920,7 +919,7 @@ bool QProcess::isRunning() const
 void QProcess::writeToStdin( const QByteArray& buf )
 {
 #if defined(QT_QPROCESS_DEBUG)
-//    qDebug( "QProcess::writeToStdin(): write to stdin (%d)", d->socketStdin );
+//    odebug << "QProcess::writeToStdin(): write to stdin (" << d->socketStdin << ")" << oendl;
 #endif
     d->stdinBuf.enqueue( new QByteArray(buf) );
     if ( d->notifierStdin != 0 )
@@ -947,10 +946,10 @@ void QProcess::closeStdin()
 	delete d->notifierStdin;
 	d->notifierStdin = 0;
 	if ( ::close( d->proc->socketStdin ) != 0 ) {
-	    qWarning( "Could not close stdin of child process" );
+        owarn << "Could not close stdin of child process" << oendl;
 	}
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::closeStdin(): stdin (%d) closed", d->proc->socketStdin );
+    odebug << "QProcess::closeStdin(): stdin (" << d->proc->socketStdin << ") closed" << oendl;
 #endif
 	d->proc->socketStdin = 0;
     }
@@ -970,7 +969,7 @@ void QProcess::socketRead( int fd )
 	return;
     }
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcess::socketRead(): %d", fd );
+    odebug << "QProcess::socketRead(): " << fd << "" << oendl;
 #endif
     if ( fd == 0 )
 	return;
@@ -999,7 +998,7 @@ void QProcess::socketRead( int fd )
     if ( n == 0 || n == -1 ) {
 	if ( fd == d->proc->socketStdout ) {
 #if defined(QT_QPROCESS_DEBUG)
-	    qDebug( "QProcess::socketRead(): stdout (%d) closed", fd );
+        odebug << "QProcess::socketRead(): stdout (" << fd << ") closed" << oendl;
 #endif
 	    d->notifierStdout->setEnabled( FALSE );
 	    delete d->notifierStdout;
@@ -1009,7 +1008,7 @@ void QProcess::socketRead( int fd )
 	    return;
 	} else if ( fd == d->proc->socketStderr ) {
 #if defined(QT_QPROCESS_DEBUG)
-	    qDebug( "QProcess::socketRead(): stderr (%d) closed", fd );
+        odebug << "QProcess::socketRead(): stderr (" << fd << ") closed" << oendl;
 #endif
 	    d->notifierStderr->setEnabled( FALSE );
 	    delete d->notifierStderr;
@@ -1061,7 +1060,7 @@ void QProcess::socketWrite( int fd )
 	return;
     }
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcess::socketWrite(): write to stdin (%d)", fd );
+    odebug << "QProcess::socketWrite(): write to stdin (" << fd << ")" << oendl;
 #endif
     ssize_t ret = ::write( fd,
 	    d->stdinBuf.head()->data() + d->stdinBufRead,

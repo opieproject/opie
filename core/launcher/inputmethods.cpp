@@ -21,31 +21,27 @@
 #define QTOPIA_INTERNAL_LANGLIST
 #include "inputmethods.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/config.h>
 #include <qtopia/qpeapplication.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qpopupmenu.h>
 #include <qtoolbutton.h>
 #include <qwidgetstack.h>
 #include <qlayout.h>
 #include <qdir.h>
-#include <stdlib.h>
 #include <qtl.h>
-
 #ifdef Q_WS_QWS
 #include <qwindowsystem_qws.h>
 #include <qwsevent_qws.h>
 #include <qcopchannel_qws.h>
 #endif
 
-/* ### SingleFloppy if someone is interested? */
-#if 0
-#ifdef QT_NO_COMPONENT
-#include "../plugins/inputmethods/handwriting/handwritingimpl.h"
-#include "../plugins/inputmethods/keyboard/keyboardimpl.h"
-#include "../3rdparty/plugins/inputmethods/pickboard/pickboardimpl.h"
-#endif
-#endif
+/* STD */
+#include <stdlib.h>
 
 /* XPM */
 static const char * tri_xpm[]={
@@ -262,7 +258,7 @@ void InputMethods::setPreferedHandlers() {
     if (!inputMethodList.isEmpty() && !current.isEmpty() ) {
         for (it = inputMethodList.begin(); it != inputMethodList.end(); ++it )
             if ( (*it).name() == current ) {
-                qWarning("preferred keyboard is %s", current.latin1() );
+                owarn << "preferred keyboard is " << current << "" << oendl;
                 mkeyboard = &(*it);
                 kbdButton->setPixmap( *mkeyboard->icon() );
                 break;
@@ -305,13 +301,13 @@ void InputMethods::loadInputMethods()
 	    input.widget = input.extInterface->keyboardWidget( 0, inputWidgetStyle );
 	    // may be either a simple, or advanced.
 	    if (input.widget) {
-		//qDebug("its a keyboard");
+        //odebug << "its a keyboard" << oendl;
 		inputMethodList.append( input );
 	    } else {
-		//qDebug("its a real im");
+        //odebug << "its a real im" << oendl;
 		input.widget = input.extInterface->statusWidget( 0, 0 );
 		if (input.widget) {
-		    //qDebug("blah");
+            //odebug << "blah" << oendl;
 		    inputModifierList.append( input );
 		    imButton->addWidget(input.widget, inputModifierList.count());
 		}
@@ -541,7 +537,7 @@ void InputMethods::showKbd( bool on )
 
         if ( inputWidgetStyle & QWidget::WStyle_DialogBorder )
         {
-            qDebug( "InputMethods: reading geometry." );
+            odebug << "InputMethods: reading geometry." << oendl;
             Config cfg( "Launcher" );
             cfg.setGroup( "InputMethods" );
             int l = cfg.readNumEntry( "absX", -1 );
@@ -551,7 +547,7 @@ void InputMethods::showKbd( bool on )
 
             if ( l > -1 && t > -1 && w > -1 && h > -1 )
             {
-                qDebug( "InputMethods: config values ( %d, %d, %d, %d ) are ok.", l, t, w, h );
+                odebug << "InputMethods: config values ( " << l << ", " << t << ", " << w << ", " << h << " ) are ok." << oendl;
                 left = l;
                 top = t;
                 width = w;
@@ -559,12 +555,12 @@ void InputMethods::showKbd( bool on )
             }
             else
             {
-                qDebug( "InputMethods: config values are new or not ok." );
+                odebug << "InputMethods: config values are new or not ok." << oendl;
             }
         }
         else
         {
-            qDebug( "InputMethods: no floating selected." );
+            odebug << "InputMethods: no floating selected." << oendl;
         }
         mkeyboard->widget->resize( width, height );
         mkeyboard->widget->move( left, top );
@@ -577,7 +573,7 @@ void InputMethods::showKbd( bool on )
         {
             QPoint pos = mkeyboard->widget->pos();
             QSize siz = mkeyboard->widget->size();
-            qDebug( "InputMethods: saving geometry." );
+            odebug << "InputMethods: saving geometry." << oendl;
             Config cfg( "Launcher" );
             cfg.setGroup( "InputMethods" );
             cfg.writeEntry( "absX", pos.x() );

@@ -17,11 +17,25 @@
 ** not clear to you.
 **
 **********************************************************************/
-//#define _XOPEN_SOURCE
+#include "transferserver.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/oglobal.h>
+#include <qtopia/qprocess.h>
+#include <qtopia/process.h>
+#include <qtopia/private/contact.h>
+#include <qtopia/version.h>
+#ifdef Q_WS_QWS
+#include <qtopia/qcopenvelope_qws.h>
+#endif
+using namespace Opie::Core;
 
-#ifndef Q_OS_WIN32
+/* QT */
+#include <qtextstream.h>
+#include <qmessagebox.h>
+
+/* STD */
 #include <pwd.h>
 #include <sys/types.h>
 #include <unistd.h>
@@ -33,40 +47,15 @@
 #include <crypt.h>
 #endif /* Q_OS_MACX */
 
-#else
-#include <stdlib.h>
-#include <time.h>
-#endif
-
-
-#if defined(_OS_LINUX_)
-#include <shadow.h>
-#endif
-
-#include <qtextstream.h>
-#include <qmessagebox.h>
-//#include <qtopia/qcopchannel_qws.h>
-#include <qtopia/process.h>
-#include <qtopia/private/contact.h>
-#include <qtopia/version.h>
-#ifdef Q_WS_QWS
-#include <qtopia/qcopenvelope_qws.h>
-#endif
-
-
-#include "transferserver.h"
-#include <qtopia/qprocess.h>
-
 const int block_size = 51200;
 
-using namespace Opie::Core;
 TransferServer::TransferServer( Q_UINT16 port, QObject *parent,
         const char* name)
     : QServerSocket( port, 1, parent, name )
 {
     connections.setAutoDelete( TRUE );
     if ( !ok() )
-	qWarning( "Failed to bind to port %d", port );
+    owarn << "Failed to bind to port " << port << "" << oendl;
 }
 
 void TransferServer::authorizeConnections()
@@ -371,7 +360,7 @@ bool ServerPI::verifyAuthorised()
 
 void ServerPI::connectionClosed()
 {
-    // qDebug( "Debug: Connection closed" );
+    // odebug << "Debug: Connection closed" << oendl;
     emit connectionClosed(this);
 }
 
@@ -379,7 +368,7 @@ void ServerPI::send( const QString& msg )
 {
     QTextStream os( this );
     os << msg << endl;
-    //qDebug( "Reply: %s", msg.latin1() );
+    //odebug << "Reply: " << msg << "" << oendl;
 }
 
 void ServerPI::read()
@@ -420,7 +409,7 @@ bool ServerPI::checkWriteFile( const QString& file )
 
 void ServerPI::process( const QString& message )
 {
-    //qDebug( "Command: %s", message.latin1() );
+    //odebug << "Command: " << message << "" << oendl;
 
     // split message using "," as separator
     QStringList msg = QStringList::split( " ", message );
@@ -444,7 +433,7 @@ void ServerPI::process( const QString& message )
         args = copy.join( " " );
     }
 
-    //qDebug( "args: %s", args.latin1() );
+    //odebug << "args: " << args << "" << oendl;
 
     // we always respond to QUIT, regardless of state
     if ( cmd == "QUIT" ) {
@@ -583,7 +572,7 @@ void ServerPI::process( const QString& message )
 	    sendFile( absFilePath( args ) );
 	}
 	else {
-	    qDebug("550 Requested action not taken");
+        odebug << "550 Requested action not taken" << oendl;
 	    send( "550 Requested action not taken" ); // No tr
 	}
 
@@ -689,7 +678,7 @@ void ServerPI::process( const QString& message )
     // make directory (MKD)
     else if ( cmd == "MKD" ) {
 	if ( args.isEmpty() ) {
-	    qDebug(" Error: no arg");
+        odebug << " Error: no arg" << oendl;
 	    send( "500 Syntax error, command unrecognized" ); // No tr
 	}
 	else {
@@ -729,7 +718,7 @@ void ServerPI::process( const QString& message )
 		duproc.addArgument("-s");
 		QString in, out;
 		if ( !duproc.exec(in, out) ) {
-		    qDebug("du process failed; just sending back 1K");
+            odebug << "du process failed; just sending back 1K" << oendl;
 		    send( "213 1024");
 		}
 		else {
@@ -737,7 +726,7 @@ void ServerPI::process( const QString& message )
 		    int guess = size.toInt()/5;
 		    if ( filePath.contains("doc") ) // No tr
 			guess *= 1000;
-		    qDebug("sending back gzip guess of %d", guess);
+            odebug << "sending back gzip guess of " << guess << "" << oendl;
 		    send( "213 " + QString::number(guess) );
 		}
 	    }
@@ -1026,7 +1015,7 @@ QString ServerPI::permissionString( QFileInfo *info )
 
 void ServerPI::newConnection( int socket )
 {
-    //qDebug( "New incomming connection" );
+    //odebug << "New incomming connection" << oendl;
 
     if ( !passiv ) return;
 
@@ -1039,7 +1028,7 @@ void ServerPI::newConnection( int socket )
 	dtp->setSocket( socket );
     }
     else if ( wait[RetrieveFile] ) {
-      qDebug("check retrieve file");
+      odebug << "check retrieve file" << oendl;
       if ( backupRestoreGzip( waitfile ) )
 	dtp->retrieveGzipFile( waitfile );
       else
@@ -1051,7 +1040,7 @@ void ServerPI::newConnection( int socket )
 	dtp->setSocket( socket );
     }
     else if ( wait[RetrieveByteArray] ) {
-	qDebug("retrieve byte array");
+    odebug << "retrieve byte array" << oendl;
 	dtp->retrieveByteArray();
 	dtp->setSocket( socket );
     }
@@ -1111,7 +1100,7 @@ ServerDTP::~ServerDTP()
 	// We're being shutdown before the client closed.
 	file.close();
 	if ( recvFileSize >= 0 && (int)file.size() != recvFileSize ) {
-	    qDebug( "STOR incomplete" );
+        odebug << "STOR incomplete" << oendl;
 	    file.remove();
 	}
     } else {
@@ -1122,7 +1111,7 @@ ServerDTP::~ServerDTP()
 
 void ServerDTP::extractTarDone()
 {
-    qDebug("extract done");
+    odebug << "extract done" << oendl;
 #ifndef QT_NO_COP
     QCopEnvelope e( "QPE/System", "restoreDone(QString)" );
     e << file.name();
@@ -1140,7 +1129,7 @@ void ServerDTP::connected()
       return;
     }
 
-    //qDebug( "Debug: Sending file '%s'", file.name().latin1() );
+    //odebug << "Debug: Sending file '" << file.name() << "'" << oendl;
 
     bytes_written = 0;
     if ( file.size() == 0 ) {
@@ -1161,12 +1150,12 @@ void ServerDTP::connected()
   case SendGzipFile:
     if ( createTargzProc->isRunning() ) {
       // SHOULDN'T GET HERE, BUT DOING A SAFETY CHECK ANYWAY
-      qWarning("Previous tar --gzip process is still running; killing it...");
+      owarn << "Previous tar --gzip process is still running; killing it..." << oendl;
       createTargzProc->kill();
     }
 
     bytes_written = 0;
-    qDebug("==>start send tar process");
+    odebug << "==>start send tar process" << oendl;
     if ( !createTargzProc->start() )
       qWarning("Error starting %s",
 	       createTargzProc->arguments().join(" ").latin1());
@@ -1178,7 +1167,7 @@ void ServerDTP::connected()
       return;
     }
 
-    // qDebug( "Debug: Sending byte array" );
+    // odebug << "Debug: Sending byte array" << oendl;
     bytes_written = 0;
     while( !buf.atEnd() )
       putch( buf.getch() );
@@ -1197,10 +1186,10 @@ void ServerDTP::connected()
       mode = Idle;
       return;
     }
-    // qDebug( "Debug: Retrieving file %s", file.name().latin1() );
+    // odebug << "Debug: Retrieving file " << file.name() << "" << oendl;
     break;
   case RetrieveGzipFile:
-    qDebug("=-> starting tar process to receive .tgz file");
+    odebug << "=-> starting tar process to receive .tgz file" << oendl;
     break;
   case RetrieveBuffer:
     // retrieve buffer mode
@@ -1209,17 +1198,17 @@ void ServerDTP::connected()
       mode = Idle;
       return;
     }
-    // qDebug( "Debug: Retrieving byte array" );
+    // odebug << "Debug: Retrieving byte array" << oendl;
     break;
   case Idle:
-    qDebug("connection established but mode set to Idle; BUG!");
+    odebug << "connection established but mode set to Idle; BUG!" << oendl;
     break;
   }
 }
 
 void ServerDTP::connectionClosed()
 {
-    //qDebug( "Debug: Data connection closed %ld bytes written", bytes_written );
+    //odebug << "Debug: Data connection closed " << bytes_written << " bytes written" << oendl;
 
     // send file mode
     if ( SendFile == mode ) {
@@ -1241,7 +1230,7 @@ void ServerDTP::connectionClosed()
     else if ( RetrieveFile == mode ) {
 	file.close();
 	if ( recvFileSize >= 0 && (int)file.size() != recvFileSize ) {
-	    qDebug( "STOR incomplete" );
+        odebug << "STOR incomplete" << oendl;
 	    file.remove();
 	    emit failed();
 	} else {
@@ -1250,7 +1239,7 @@ void ServerDTP::connectionClosed()
     }
 
     else if ( RetrieveGzipFile == mode ) {
-	qDebug("Done writing ungzip file; closing input");
+    odebug << "Done writing ungzip file; closing input" << oendl;
 	retrieveTargzProc->flushStdin();
 	retrieveTargzProc->closeStdin();
     }
@@ -1272,7 +1261,7 @@ void ServerDTP::bytesWritten( int bytes )
     if ( SendFile == mode ) {
 
 	if ( bytes_written == file.size() ) {
-	    // qDebug( "Debug: Sending complete: %d bytes", file.size() );
+        // odebug << "Debug: Sending complete: " << file.size() << " bytes" << oendl;
 	    file.close();
 	    emit completed();
 	    mode = Idle;
@@ -1289,7 +1278,7 @@ void ServerDTP::bytesWritten( int bytes )
     if ( SendBuffer == mode ) {
 
 	if ( bytes_written == buf.size() ) {
-	    // qDebug( "Debug: Sending complete: %d bytes", buf.size() );
+        // odebug << "Debug: Sending complete: " << buf.size() << " bytes" << oendl;
 	    emit completed();
 	    mode = Idle;
 	}
@@ -1313,7 +1302,7 @@ void ServerDTP::readyRead()
 	s.resize( bytesAvailable() );
 	readBlock( s.data(), bytesAvailable() );
 	retrieveTargzProc->writeToStdin( s );
-	qDebug("wrote %d bytes to ungzip ", s.size() );
+    odebug << "wrote " << s.size() << " bytes to ungzip " << oendl;
     }
     // retrieve buffer mode
     else if ( RetrieveBuffer == mode ) {
@@ -1328,12 +1317,12 @@ void ServerDTP::writeTargzBlock()
 {
     QByteArray block = createTargzProc->readStdout();
     writeBlock( block.data(), block.size() );
-    qDebug("writeTargzBlock %d", block.size());
+    odebug << "writeTargzBlock " << block.size() << "" << oendl;
 }
 
 void ServerDTP::targzDone()
 {
-    qDebug("tar and gzip done");
+    odebug << "tar and gzip done" << oendl;
     emit completed();
     mode = Idle;
     disconnect( createTargzProc, SIGNAL( readyReadStdout() ),
@@ -1370,7 +1359,7 @@ void ServerDTP::sendGzipFile( const QString &fn,
     QStringList args = "targzip";
     //args += "-cv";
     args += archiveTargets;
-    qDebug("sendGzipFile %s", args.join(" ").latin1() );
+    odebug << "sendGzipFile " << args.join(" ") << "" << oendl;
     createTargzProc->setArguments( args );
     connect( createTargzProc,
 	     SIGNAL( readyReadStdout() ), SLOT( writeTargzBlock() ) );
@@ -1393,7 +1382,7 @@ void ServerDTP::retrieveFile( const QString fn, int fileSize )
 
 void ServerDTP::retrieveGzipFile( const QString &fn )
 {
-    qDebug("retrieveGzipFile %s", fn.latin1());
+    odebug << "retrieveGzipFile " << fn << "" << oendl;
     file.setName( fn );
     mode = RetrieveGzipFile;
 

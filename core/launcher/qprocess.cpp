@@ -581,28 +581,28 @@ void QProcess::writeToStdin( const QString& buf )
 void QProcess::connectNotify( const char * signal )
 {
 #if defined(QT_QPROCESS_DEBUG)
-    qDebug( "QProcess::connectNotify(): signal %s has been connected", signal );
+    odebug << "QProcess::connectNotify(): signal " << signal << " has been connected" << oendl; 
 #endif
     if ( !ioRedirection )
 	if ( qstrcmp( signal, SIGNAL(readyReadStdout()) )==0 ||
 		qstrcmp( signal, SIGNAL(readyReadStderr()) )==0
 	   ) {
 #if defined(QT_QPROCESS_DEBUG)
-	    qDebug( "QProcess::connectNotify(): set ioRedirection to TRUE" );
+	    odebug << "QProcess::connectNotify(): set ioRedirection to TRUE" << oendl; 
 #endif
 	    setIoRedirection( TRUE );
 	    return;
 	}
     if ( !notifyOnExit && qstrcmp( signal, SIGNAL(processExited()) )==0 ) {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::connectNotify(): set notifyOnExit to TRUE" );
+	odebug << "QProcess::connectNotify(): set notifyOnExit to TRUE" << oendl; 
 #endif
 	setNotifyOnExit( TRUE );
 	return;
     }
     if ( !wroteToStdinConnected && qstrcmp( signal, SIGNAL(wroteToStdin()) )==0 ) {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::connectNotify(): set wroteToStdinConnected to TRUE" );
+	odebug << "QProcess::connectNotify(): set wroteToStdinConnected to TRUE" << oendl; 
 #endif
 	setWroteStdinConnected( TRUE );
 	return;
@@ -618,19 +618,19 @@ void QProcess::disconnectNotify( const char * )
 	    receivers( SIGNAL(readyReadStderr()) ) ==0
 	    ) {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::disconnectNotify(): set ioRedirection to FALSE" );
+	odebug << "QProcess::disconnectNotify(): set ioRedirection to FALSE" << oendl; 
 #endif
 	setIoRedirection( FALSE );
     }
     if ( notifyOnExit && receivers( SIGNAL(processExited()) ) == 0 ) {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::disconnectNotify(): set notifyOnExit to FALSE" );
+	odebug << "QProcess::disconnectNotify(): set notifyOnExit to FALSE" << oendl; 
 #endif
 	setNotifyOnExit( FALSE );
     }
     if ( wroteToStdinConnected && receivers( SIGNAL(wroteToStdin()) ) == 0 ) {
 #if defined(QT_QPROCESS_DEBUG)
-	qDebug( "QProcess::disconnectNotify(): set wroteToStdinConnected to FALSE" );
+	odebug << "QProcess::disconnectNotify(): set wroteToStdinConnected to FALSE" << oendl; 
 #endif
 	setWroteStdinConnected( FALSE );
     }

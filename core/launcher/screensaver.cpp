@@ -158,7 +158,7 @@ void OpieScreenSaver::setIntervals ( int dim, int lightoff, int suspend )
 		m_onlylcdoff = config.readBoolEntry ( "LcdOffOnly", false );
 	}
 
-	//qDebug("screen saver intervals: %d %d %d", dim, lightoff, suspend);
+	//odebug << "screen saver intervals: " << dim << " " << lightoff << " " << suspend << "" << oendl; 
 
 	v [ 0 ] = QMAX( 1000 * dim, 100 );
 	v [ 1 ] = QMAX( 1000 * lightoff, 100 );

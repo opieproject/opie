@@ -21,8 +21,9 @@
 #include "serverinterface.h"
 #include "mediadlg.h"
 
+/* OPIE */
 #include <opie2/oglobal.h>
-
+#include <opie2/odebug.h>
 #include <qtopia/config.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/resource.h>
@@ -33,7 +34,9 @@
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
 #endif
+using namespace Opie::Core;
 
+/* QT */
 #include <qtimer.h>
 #include <qfileinfo.h>
 #include <qtextstream.h>
@@ -47,7 +50,6 @@
 #include <qpixmap.h>
 
 
-using namespace Opie::Core;
 AppLnkSet *DocumentList::appLnkSet = 0;
 
 static const int MAX_SEARCH_DEPTH = 10;
@@ -108,7 +110,7 @@ DocumentList::DocumentList( ServerInterface *serverGui, bool /*scanDocs*/,
     Config cfg( "Launcher" );
     cfg.setGroup( "DocTab" );
     d->scanDocs = cfg.readBoolEntry( "Enable", true );
-    qDebug( "DocumentList::DocumentList() : scanDocs = %d", d->scanDocs );
+    odebug << "DocumentList::DocumentList() : scanDocs = " << d->scanDocs << "" << oendl;
 
     QTimer::singleShot( 10, this, SLOT( startInitialScan() ) );
 }
@@ -141,7 +143,7 @@ void DocumentList::start()
 
 void DocumentList::pause()
 {
-    //qDebug("pause %i", d->tid);
+    //odebug << "pause " << d->tid << "" << oendl;
     killTimer( d->tid );
     d->tid = 0;
 }
@@ -151,7 +153,7 @@ void DocumentList::resume()
 {
     if ( d->tid == 0 ) {
 	d->tid = startTimer( 20 );
-	//qDebug("resumed %i", d->tid);
+    //odebug << "resumed " << d->tid << "" << oendl;
     }
 }
 
@@ -177,7 +179,7 @@ void DocumentList::resendWorker()
 
 void DocumentList::rescan()
 {
-    //qDebug("rescan");
+    //odebug << "rescan" << oendl;
     pause();
     d->initialize();
     resume();
@@ -232,7 +234,7 @@ void DocumentList::reloadAppLnks()
 			bgPm = img.smoothScale( AppLnk::bigIconSize(), AppLnk::bigIconSize() );
 		    }
 
-		    //qDebug("adding type %s", (*ittypes).latin1());
+            //odebug << "adding type " << (*ittypes) << "" << oendl;
 
 		    // ### our current launcher expects docs tab to be last
 		    d->serverGui->typeAdded( *ittypes, name.isNull() ? (*ittypes) : name, pm, bgPm );
@@ -241,7 +243,7 @@ void DocumentList::reloadAppLnks()
 	    }
 	}
 	for ( QStringList::Iterator ittypes=prevTypeList.begin(); ittypes!=prevTypeList.end(); ++ittypes) {
-	    //qDebug("removing type %s", (*ittypes).latin1());
+        //odebug << "removing type " << (*ittypes) << "" << oendl;
 	    d->serverGui->typeRemoved(*ittypes);
 	}
 	prevTypeList = types;
@@ -274,7 +276,7 @@ void DocumentList::reloadDocLnks()
 
 void DocumentList::linkChanged( QString arg )
 {
-    //qDebug( "linkchanged( %s )", arg.latin1() );
+    //odebug << "linkchanged( " << arg << " )" << oendl;
 
     if ( arg.isNull() || OGlobal::isAppLnkFileName( arg ) ) {
 	reloadAppLnks();
@@ -287,20 +289,20 @@ void DocumentList::linkChanged( QString arg )
 	    ++it;
 	    if ( ( doc->linkFileKnown() && doc->linkFile() == arg )
 		|| ( doc->fileKnown() && doc->file() == arg ) ) {
-		//qDebug( "found old link" );
+        //odebug << "found old link" << oendl;
 		DocLnk* dl = new DocLnk( arg );
 		// add new one if it exists and matches the mimetype
 		if ( d->store( dl ) ) {
 		    // Existing link has been changed, send old link ref and a ref
 		    // to the new link
-		    //qDebug( "change case" );
+            //odebug << "change case" << oendl;
 		    if ( d->serverGui )
 			d->serverGui->documentChanged( *doc, *dl );
 
 		} else {
 		    // Link has been removed or doesn't match the mimetypes any more
 		    // so we aren't interested in it, so take it away from the list
-		    //qDebug( "removal case" );
+            //odebug << "removal case" << oendl;
 		    if ( d->serverGui )
 			d->serverGui->documentRemoved( *doc );
 
@@ -314,7 +316,7 @@ void DocumentList::linkChanged( QString arg )
 	DocLnk* dl = new DocLnk( arg );
 	if ( d->store( dl ) ) {
 	    // Add if it's a link we are interested in
-	    //qDebug( "add case" );
+        //odebug << "add case" << oendl;
 	    add( *dl );
 	}
 
@@ -378,12 +380,12 @@ void DocumentList::sendAllDocLinks()
 	contents += QString("Size = %1\n").arg( fi.size() ); // No tr
     }
 
-    //qDebug( "sending length %d", contents.length() );
+    //odebug << "sending length " << contents.length() << "" << oendl;
 #ifndef QT_NO_COP
     QCopEnvelope e( "QPE/Desktop", "docLinks(QString)" );
     e << contents;
 #endif
-    //qDebug( "================ \n\n%s\n\n===============", contents.latin1() );
+    //odebug << "================ \n\n" << contents << "\n\n===============" << oendl;
 
     d->needToSendAllDocLinks = false;
 }
@@ -536,7 +538,7 @@ void DocumentListPrivate::estimatedPercentScanned()
 	}
     }
 
-    // qDebug( "overallProgress: %f", overallProgress );
+    // odebug << "overallProgress: " << overallProgress << "" << oendl;
 
     if ( serverGui )
 	serverGui->documentScanningProgress( (int)overallProgress );
@@ -553,7 +555,7 @@ const QString DocumentListPrivate::nextFile()
 		return QString::null;
 	    } else {
 		QDir dir( docPaths[docPathsSearched] );
-		// qDebug("now using base path: %s", docPaths[docPathsSearched].latin1() );
+        // odebug << "now using base path: " << docPaths[docPathsSearched] << "" << oendl;
 		docPathsSearched++;
 		if ( !dir.exists( ".Qtopia-ignore" ) ) {
 		    listDirs[0] = new QDir( dir );
@@ -587,7 +589,7 @@ const QString DocumentListPrivate::nextFile()
 		    if ( bn != "CVS" && bn != "Qtopia" && bn != "QtPalmtop" ) {
 			// go down a depth
 			QDir dir( fi->filePath() );
-			// qDebug("now going in to path: %s", bn.latin1() );
+            // odebug << "now going in to path: " << bn << "" << oendl;
 			if ( !dir.exists( ".Qtopia-ignore" ) ) {
 			    if ( searchDepth < MAX_SEARCH_DEPTH - 1) {
 				searchDepth++;
@@ -628,7 +630,7 @@ bool DocumentListPrivate::store( DocLnk* dl )
 const DocLnk *DocumentListPrivate::iterate()
 {
     if ( state == Find ) {
-	//qDebug("state Find");
+    //odebug << "state Find" << oendl;
 	QString file = nextFile();
 	while ( !file.isNull() ) {
 	    if ( file.right(8) == ".desktop" ) { // No tr
@@ -650,7 +652,7 @@ const DocLnk *DocumentListPrivate::iterate()
     static int iterationCount;
 
     if ( state == RemoveKnownFiles ) {
-	//qDebug("state RemoveKnownFiles");
+    //odebug << "state RemoveKnownFiles" << oendl;
 	const QList<DocLnk> &list = dls.children();
 	for ( QListIterator<DocLnk> it( list ); it.current(); ++it ) {
 	    reference.remove( (*it)->file() );
@@ -664,7 +666,7 @@ const DocLnk *DocumentListPrivate::iterate()
     }
 
     if ( state == MakeUnknownFiles ) {
-	//qDebug("state MakeUnknownFiles");
+    //odebug << "state MakeUnknownFiles" << oendl;
 	for (void* c; (c=dit->current()); ++(*dit) ) {
 	    if ( c == MAGIC_NUMBER ) {
 		DocLnk* dl = new DocLnk;
@@ -687,7 +689,7 @@ const DocLnk *DocumentListPrivate::iterate()
 	state = Done;
     }
 
-    //qDebug("state Done");
+    //odebug << "state Done" << oendl;
     return NULL;
 }
 

@@ -18,15 +18,15 @@
 **
 **********************************************************************/
 
-
 #include "irserver.h"
+#include "obexinterface.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/qlibrary.h>
 #include <qtopia/qpeapplication.h>
 
-
-#include "obexinterface.h"
-
+/* QT */
 #include <qdir.h>
 
 IrServer::IrServer( QObject *parent, const char *name )
@@ -44,15 +44,15 @@ IrServer::IrServer( QObject *parent, const char *name )
     QStringList::Iterator it;
     for ( it = list.begin(); it != list.end(); ++it ) {
 	QLibrary *trylib = new QLibrary( path + *it );
-	//qDebug("trying lib %s", (path + (*it)).latin1() );
+    //odebug << "trying lib " << (path + (*it)) << "" << oendl;
 	if ( trylib->queryInterface( IID_ObexInterface, (QUnknownInterface**)&obexIface ) == QS_OK ) {
 	    lib = trylib;
-	    //qDebug("found obex lib" );
+        //odebug << "found obex lib" << oendl;
 	    QString lang = getenv( "LANG" );
 	    QTranslator * trans = new QTranslator(qApp);
 	    QString type = (*it).left( (*it).find(".") );
 	    QString tfn = QPEApplication::qpeDir()+"/i18n/"+lang+"/"+type+".qm";
-	    //qDebug("tr fpr obex: %s", tfn.latin1() );
+        //odebug << "tr fpr obex: " << tfn << "" << oendl;
 	    if ( trans->load( tfn ))
 		qApp->installTranslator( trans );
 	    else
@@ -64,7 +64,7 @@ IrServer::IrServer( QObject *parent, const char *name )
 	}
     }
     if ( !lib )
-	qDebug("could not load IR plugin" );
+    odebug << "could not load IR plugin" << oendl;
 }
 
 IrServer::~IrServer()

@@ -19,28 +19,28 @@
 **********************************************************************/
 
 #include "packageslave.h"
-#include <qtopia/qprocess.h>
 
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qtopia/qprocess.h>
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
 #endif
+using namespace Opie::Core;
 
+/* QT */
 #ifdef Q_WS_QWS
 #include <qcopchannel_qws.h>
 #endif
-
 #include <qtextstream.h>
 
+/* STD */
 #include <stdlib.h>
 #include <sys/stat.h> // mkdir()
-
 #if defined(_OS_LINUX_) || defined(Q_OS_LINUX)
 #include <unistd.h>
 #include <sys/vfs.h>
 #include <mntent.h>
-#elif defined(Q_OS_WIN32)
-#include <windows.h>
-#include <winbase.h>
 #elif defined(Q_OS_MACX)
 #include <unistd.h>
 #endif
@@ -145,7 +145,7 @@ void PackageHandler::addPackageFiles( const QString &location,
 #else
     QDir d;
     //#### revise 
-    qDebug("Copy file at %s: %s",  __FILE__, __LINE__ );
+    odebug << "Copy file at " << __FILE__ << ": " << __LINE__ << "" << oendl;
     d.mkdir(("/usr/lib/ipkg/info/" + location).ascii());   
     system(("copy " + f.name() + " /usr/lib/ipkg/info/"+location).ascii());
 #endif
@@ -159,7 +159,7 @@ void PackageHandler::addPackageFiles( const QString &location,
 	    s = ts.readLine();       // line of text excluding '\n'
 	    // for s, do link/mkdir.
 	    if ( s.right(1) == "/" ) {
-		qDebug("do mkdir for %s", s.ascii());
+        odebug << "do mkdir for " << s.ascii() << "" << oendl;
 #ifndef Q_OS_WIN32
 		mkdir( s.ascii(), 0777 );
 		//possible optimization: symlink directories
@@ -170,10 +170,10 @@ void PackageHandler::addPackageFiles( const QString &location,
 
 	    } else {
 #ifndef Q_OS_WIN32
-		qDebug("do symlink for %s", s.ascii());
+        odebug << "do symlink for " << s.ascii() << "" << oendl;
 		symlink( (location + s).ascii(), s.ascii() );
 #else
-		qDebug("Copy file instead of a symlink for WIN32");
+        odebug << "Copy file instead of a symlink for WIN32" << oendl;
 		if (!CopyFile((TCHAR*)qt_winTchar((location + s), TRUE), (TCHAR*)qt_winTchar(s, TRUE), FALSE))
 		  qWarning("Unable to create symlinkfor %s", 
 			   (location + s).ascii());
@@ -215,14 +215,14 @@ void PackageHandler::cleanupPackageFiles( const QString &listfile  )
 		//should rmdir if empty, after all files have been removed
 	    } else {
 #ifndef Q_OS_WIN32
-		qDebug("remove symlink for %s", s.ascii());
+        odebug << "remove symlink for " << s.ascii() << "" << oendl;
 		//check if it is a symlink first (don't remove /etc/passwd...)
 		char buf[10]; //we don't care about the contents
 		if ( ::readlink( s.ascii(),buf, 10 >= 0 ) )
 		     ::unlink( s.ascii() );
 #else		
 		// ### revise
-		qWarning("Unable to remove symlink %s:%s", __FILE__, __LINE__);
+        owarn << "Unable to remove symlink " << __FILE__ << ":" << __LINE__ << "" << oendl;
 #endif
 	    }
 	}
@@ -266,7 +266,7 @@ void PackageHandler::prepareInstall( const QString& size, const QString& path )
     struct statfs fs;
     if ( statfs( path.latin1(), &fs ) == 0 )
 	if ( s > fs.f_bsize * fs.f_bavail ) {
-	    //qDebug("############### Not enough space left ###############");
+        //odebug << "############### Not enough space left ###############" << oendl;
 	    mNoSpaceLeft = TRUE;
 	}
 #endif

@@ -20,15 +20,19 @@
 
 #define QTOPIA_INTERNAL_PRELOADACCESS
 
-
-#include <stdlib.h>
-
-#include <qpainter.h>
-
-#include <qtopia/qcopenvelope_qws.h>
-
 #include "runningappbar.h"
 #include "serverinterface.h"
+
+/* OPIE */
+#include <opie2/odebug.h>
+#include <qtopia/qcopenvelope_qws.h>
+using namespace Opie::Core;
+
+/* QT */
+#include <qpainter.h>
+
+/* STD */
+#include <stdlib.h>
 
 RunningAppBar::RunningAppBar(QWidget* parent)
   : QFrame(parent), selectedAppIndex(-1)
@@ -51,7 +55,7 @@ void RunningAppBar::received(const QCString& msg, const QByteArray& data) {
     if ( msg == "fastAppShowing(QString)") {
 	QString appName;
 	stream >> appName;
-	//    qDebug("fastAppShowing %s", appName.data() );
+    //    odebug << "fastAppShowing " << appName.data() << "" << oendl;
 	const AppLnk* f = ServerInterface::appLnks().findExec(appName);
 	if ( f ) addTask(*f);
     } else if ( msg == "fastAppHiding(QString)") {
@@ -63,7 +67,7 @@ void RunningAppBar::received(const QCString& msg, const QByteArray& data) {
 }
 
 void RunningAppBar::addTask(const AppLnk& appLnk) {
-    qDebug("Added %s to app list.", appLnk.name().latin1());
+    odebug << "Added " << appLnk.name() << " to app list." << oendl;
     AppLnk* newApp = new AppLnk(appLnk);
     newApp->setExec(appLnk.exec());
     appList.prepend(newApp);
@@ -75,7 +79,7 @@ void RunningAppBar::removeTask(const AppLnk& appLnk) {
   for (; i < appList.count() ; i++) {
     AppLnk* target = appList.at(i);
     if (target->exec() == appLnk.exec()) {
-       qDebug("Removing %s from app list.", appLnk.name().latin1());
+       odebug << "Removing " << appLnk.name() << " from app list." << oendl;
       appList.remove();
       delete target;
     }
@@ -135,7 +139,7 @@ void RunningAppBar::paintEvent( QPaintEvent * )
     for (; it.current(); i++, ++it ) {
       if ( x + spacing <= width() ) {
 	curApp = it.current();
-        qWarning("Drawing %s", curApp->name().latin1() );
+        owarn << "Drawing " << curApp->name() << "" << oendl;
  	if ( (int)i == selectedAppIndex )
  	  p.fillRect( x, y, spacing, curApp->pixmap().height()+1, colorGroup().highlight() );
   	else
@@ -153,7 +157,7 @@ QSize RunningAppBar::sizeHint() const
 
 void RunningAppBar::applicationLaunched(const QString &appName)
 {
-    qDebug("desktop:: app: %s launched with pid ", appName.data() );
+    odebug << "desktop:: app: " << appName.data() << " launched with pid " << oendl;
     const AppLnk* newGuy = ServerInterface::appLnks().findExec(appName);
     if ( newGuy && !newGuy->isPreloaded() ) {
 	addTask( *newGuy );

@@ -20,13 +20,16 @@
 
 #include "launcherview.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <qtopia/qpeapplication.h>
 #include <qtopia/private/categories.h>
 #include <qtopia/categoryselect.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/resource.h>
-//#include <qtopia/private/palmtoprecord.h>
+using namespace Opie::Core;
 
+/* QT */
 #include <qtimer.h>
 #include <qfileinfo.h>
 #include <qiconview.h>
@@ -115,7 +118,7 @@ public:
 	AppLnk* l;
 	while ((l=it.current())) {
 	    ++it;
-	    //qDebug("%p: hidden (should remove)",l);
+        //odebug << "" << l << ": hidden (should remove)" << oendl;
 	}
 #endif
     }
@@ -1029,7 +1032,7 @@ void LauncherView::paletteChange( const QPalette &p )
 
 void LauncherView::fontChanged(const QFont&)
 {
-    qDebug("LauncherView::fontChanged()");
+    odebug << "LauncherView::fontChanged()" << oendl;
     icons->hideOrShowItems( FALSE );
 }
 

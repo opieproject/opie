@@ -19,9 +19,11 @@
 **********************************************************************/
 
 #include "serverapp.h"
+#include "screensaver.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
 #include <opie2/odevice.h>
-
 #include <qtopia/password.h>
 #include <qtopia/config.h>
 #include <qtopia/power.h>
@@ -30,16 +32,11 @@
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 #include <qtopia/global.h>
-//#include <qtopia/custom.h>
+using namespace Opie::Core;
 
+/* QT */
 #ifdef Q_WS_QWS
 #include <qgfx_qws.h>
-#endif
-#ifdef Q_OS_WIN32
-#include <io.h>
-#include <process.h>
-#else
-#include <unistd.h>
 #endif
 #include <qmessagebox.h>
 #include <qtimer.h>
@@ -47,15 +44,18 @@
 #include <qfile.h>
 #include <qpixmapcache.h>
 
+/* STD */
+#ifdef Q_OS_WIN32
+#include <io.h>
+#include <process.h>
+#else
+#include <unistd.h>
+#endif
 #include <stdlib.h>
-#include "screensaver.h"
 
 static ServerApplication *serverApp = 0;
 static int loggedin=0;
 
-using namespace Opie;
-
-using namespace Opie::Core;
 QCopKeyRegister::QCopKeyRegister()
     : m_keyCode( 0 ) {
 }
@@ -856,7 +856,7 @@ bool ServerApplication::isStarting()
 int ServerApplication::exec()
 {
     ms_is_starting = true;
-    qDebug("Serverapp - exec");
+    odebug << "Serverapp - exec" << oendl;
     return QPEApplication::exec();
 }
 
