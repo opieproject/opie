@@ -21,6 +21,8 @@
 #include "loginwindowimpl.h"
 #include "calibrate.h"
 
+using namespace Opie;
+
 int login_main ( int argc, char **argv );
 void sigusr1 ( int sig );
 void exit_closelog ( );
@@ -90,14 +92,14 @@ public:
     m_backlight_forcedoff = false;
 
     // Make sure the LCD is in fact on, (if opie was killed while the LCD is off it would still be off)
-    ODevice::inst ( ) -> setDisplayStatus ( true );
+    ODevice::inst ( )-> setDisplayStatus ( true );
   }
   void restore()
   {
     if ( !m_lcd_status )     // We must have turned it off
       ODevice::inst ( ) -> setDisplayStatus ( true );
 
-    setBacklight ( -1 );
+    setBacklight ( -3 );
   }
   bool save( int level )
   {
@@ -189,11 +191,6 @@ int login_main ( int argc, char **argv )
 
 	ODevice::inst ( )-> setSoftSuspend ( true );
 
-	{
-		QCopEnvelope e("QPE/System", "setBacklight(int)" );
-		e << -3; // Forced on
-	}
-
 #if defined(QT_QWS_CASSIOPEIA) || defined(QT_QWS_IPAQ) || defined(QT_QWS_EBX)
 	if ( !QFile::exists ( "/etc/pointercal" )) {
 		// Make sure calibration widget starts on top.
@@ -203,11 +200,11 @@ int login_main ( int argc, char **argv )
 	}
 #endif
 
-
 	LoginScreenSaver *saver = new LoginScreenSaver;
 
 	saver-> setIntervals ( );
 	QWSServer::setScreenSaver ( saver );
+	saver-> restore ( );
 
 
 	LoginWindowImpl *lw = new LoginWindowImpl ( );

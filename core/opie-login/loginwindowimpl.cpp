@@ -34,6 +34,9 @@ extern "C" {
 #include "loginwindowimpl.h"
 #include "inputmethods.h"
 
+using namespace Opie;
+
+
 LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_Customize | WStyle_NoBorder | WDestructiveClose )
 {
 	QPopupMenu *pop = new QPopupMenu ( this );
