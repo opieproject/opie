@@ -30,7 +30,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>262</width>
+            <width>260</width>
             <height>321</height>
         </rect>
     </property>
@@ -80,6 +80,14 @@
                             <hsizetype>1</hsizetype>
                             <vsizetype>0</vsizetype>
                         </sizepolicy>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShape</name>
+                        <enum>MShape</enum>
+                    </property>
+                    <property stdset="1">
+                        <name>frameShadow</name>
+                        <enum>MShadow</enum>
                     </property>
                     <property stdset="1">
                         <name>text</name>
@@ -484,4 +492,14 @@
     <slot access="protected">dateChanged( int, int, int )</slot>
     <slot access="protected">slotCopy()</slot>
 </connections>
+<tabstops>
+    <tabstop>comboPriority</tabstop>
+    <tabstop>checkCompleted</tabstop>
+    <tabstop>checkDate</tabstop>
+    <tabstop>buttonDate</tabstop>
+    <tabstop>cmbProg</tabstop>
+    <tabstop>comboCategory</tabstop>
+    <tabstop>lneSum</tabstop>
+    <tabstop>txtTodo</tabstop>
+</tabstops>
 </UI>
