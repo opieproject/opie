@@ -38,6 +38,7 @@ void ImageView::setMenuActions(QActionGroup*hGroup,QActionGroup*nextprevGroup, Q
 
 ImageView::~ImageView()
 {
+    odebug << "Destructor imageview" << oendl;
     delete m_viewManager;
 }
 
@@ -77,11 +78,13 @@ void ImageView::nextSlide()
     if (!m_slideTimer) {
         return;
     }
+#if 0
     if (isHidden()) {
         delete m_slideTimer;
         m_slideTimer = 0;
         return;
     }
+#endif
     emit dispNext();
     m_slideTimer->start(m_slideValue*1000,true);
 }

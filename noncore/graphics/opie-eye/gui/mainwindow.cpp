@@ -214,16 +214,10 @@ void PMainWindow::slotConfig() {
 
     m_stack->raiseWidget(w);
     if (remdisp) {
-        m_disp->disconnect(this, SLOT(slotReturn()));
-        m_disp->setDestructiveClose();
-        m_stack->removeWidget(m_disp);
-        m_disp = 0;
+        m_disp->hide();
     }
     if (reminfo) {
-        m_info->disconnect(this, SLOT(slotReturn()));
-        m_info->setDestructiveClose();
-        m_stack->removeWidget(m_info);
-        m_info = 0;
+        m_info->hide();
     }
 }
 
@@ -288,14 +282,9 @@ void PMainWindow::slotFullScreenButton(bool current)
         m_cfg->writeEntry("fullscreen",current);
     }
     if (!m_disp) return;
-
-    if (m_disp->isHidden()) {
-        /* it must get some setups for switch we can just do if the window is visible.
-           so we must delete the imageview window and re-create it when displaying new
-           image */
-        return;
+    if (m_disp->isVisible()) {
+        setupViewWindow(current, true);
     }
-    setupViewWindow(current, true);
 }
 
 void PMainWindow::setupViewWindow(bool current, bool forceDisplay)
@@ -369,7 +358,9 @@ void PMainWindow::slotShowInfo( const QString& inf ) {
 }
 
 void PMainWindow::slotDisplay( const QString& inf ) {
+    bool nwindow = false;
     if ( !m_disp ) {
+        nwindow = true;
         initDisp();
     }
     m_disp->setImage( inf );
@@ -384,6 +375,9 @@ void PMainWindow::slotDisplay( const QString& inf ) {
             m_aStartSlide->setEnabled(false);
             fsButton->hide();
         }
+    }
+    if (!nwindow && m_disp->fullScreen()!=m_aFullScreen->isOn()) {
+        slotFullScreenToggled(m_aFullScreen->isOn());
     }
     if (m_disp->fullScreen()) {
         qwsDisplay()->requestFocus( m_disp->winId(), TRUE);
