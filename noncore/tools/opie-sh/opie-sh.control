@@ -1,4 +1,4 @@
-Files: bin/opie-sh* apps/Opie-SH/opie-sh.desktop pics/opie-sh/*.png help/opie-sh/*.html
+Files: bin/opie-sh bin/opie-sh-howto.sh apps/Opie-SH/opie-sh.desktop pics/opie-sh/*.png help/opie-sh/*.html
 Priority: optional
 Section: opie/applications
 Maintainer: Thomas Stephens <spiralman@softhome.net>
