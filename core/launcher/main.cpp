@@ -79,15 +79,15 @@ void initEnvironment()
      * 3. use physical orientation (currently fails due to ODevice
      *    using a QPixmap and therefore requiring a QApplication)
      */
-    if ( ( rot = QPEApplication::defaultRotation ( ) ) == 0 ) {
+    if ( getenv("QWS_DISPLAY") == NULL ) {
         Config config("qpe");
         config.setGroup( "Rotation" );
         if ( ( rot = config.readNumEntry( "Rot", -1 ) ) == -1 )
             rot = ODevice::inst ( )-> rotation ( ) * 90;
-    }
 
-    setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
-    QPEApplication::defaultRotation ( ); /* to ensure deforient matches reality */
+        setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
+        QPEApplication::defaultRotation ( ); /* to ensure deforient matches reality */
+    }
 }
 
 
