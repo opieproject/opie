@@ -32,7 +32,7 @@ HEADERS		+= server.h \
 		  qprocess.h \
 		  screensaver.h \
         $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
-                  mediadlg.h
+                  mediadlg.h 
 
 SOURCES		+= server.cpp \
       qrr.cpp \

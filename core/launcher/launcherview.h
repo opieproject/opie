@@ -24,11 +24,11 @@
 #include <qtopia/applnk.h>
 
 #include <qvbox.h>
+#include <qiconview.h>
 
 class CategorySelect;
 class LauncherIconView;
 class LauncherItem;
-class QIconView;
 class QIconViewItem;
 class QLabel;
 class QWidgetStack;
@@ -117,8 +117,7 @@ private:
 
 };
 
-/* taken from opie-eye */
-
+/* from opie-eye */
 struct PixmapInfo {
     PixmapInfo() : width( -1 ), height( -1 ) {}
     bool operator==( const PixmapInfo& r ) {
@@ -137,7 +136,7 @@ class LauncherThumbReceiver:public QObject
     Q_OBJECT
     typedef QValueList<PixmapInfo> PixmapInfos;
 public:
-    LauncherThumbReceiver(LauncherItem*parent);
+    LauncherThumbReceiver();
     ~LauncherThumbReceiver();
     void requestThumb(const QString&file,int width,int height);
 
@@ -145,11 +144,110 @@ public slots:
     void recieve( const QCString&, const QByteArray& );
 protected slots:
     virtual void sendRequest();
+
+signals:
+    void sig_Thumbnail(const QPixmap&,const QString&);
+
 protected:
-    LauncherItem*m_parent;
-    QString m_reqFile;
-    PixmapInfo rItem;
-    bool m_waiting:1;
+    PixmapInfos m_inThumbNail;
+};
+
+class LauncherIconView : public QIconView {
+    Q_OBJECT
+public:
+    LauncherIconView( QWidget* parent, const char* name=0 );
+    ~LauncherIconView();
+    QIconViewItem* busyItem() const;
+
+#ifdef USE_ANIMATED_BUSY_ICON_OVERLAY
+    QPixmap busyPixmap() const { return busyPix; }
+#endif
+    void setBigIcons( bool bi );
+    void updateCategoriesAndMimeTypes();
+    void setBusyIndicatorType ( BusyIndicatorType t );
+    void doAutoScroll()
+    {
+    // We don't want rubberbanding (yet)
+    }
+
+    void setBusy(bool on);
+    bool inKeyEvent() const { return ike; }
+
+    void keyPressEvent(QKeyEvent* e)
+    {
+        ike = TRUE;
+        if ( e->key() == Key_F33 /* OK button */ || e->key() == Key_Space ) {
+            if ( (e->state() & ShiftButton) )
+                emit mouseButtonPressed(ShiftButton, currentItem(), QPoint() );
+            else
+                returnPressed(currentItem());
+        }
+
+        QIconView::keyPressEvent(e);
+        ike = FALSE;
+    }
+
+    void addItem(AppLnk* app, bool resort=TRUE);
+    bool removeLink(const QString& linkfile);
+
+    QStringList mimeTypes() const;
+    QStringList categories() const;
+    void clear();
+    void addCatsAndMimes(AppLnk* app);
+
+    void setBackgroundOrigin( QWidget::BackgroundOrigin ) {}
+
+    void setBackgroundPixmap( const QPixmap &pm ) {
+        bgPixmap = pm;
+    }
+
+    void setBackgroundColor( const QColor &c ) {
+        bgColor = c;
+    }
+
+    void drawBackground( QPainter *p, const QRect &r );
+    void setItemTextPos( ItemTextPos pos );
+    void hideOrShowItems(bool resort);
+
+    void setTypeFilter(const QString& typefilter, bool resort);
+    void setCategoryFilter( int catfilter, bool resort );
+
+    enum SortMethod { Name, Date, Type };
+
+    void setSortMethod( SortMethod m );
+    int compare(const AppLnk* a, const AppLnk* b);
+
+protected:
+    void timerEvent( QTimerEvent *te );
+    void styleChange( QStyle &old );
+    void calculateGrid( ItemTextPos pos );
+    void focusInEvent( QFocusEvent * ) {}
+    void focusOutEvent( QFocusEvent * ) {}
+    LauncherItem*findDocItem(const QString&);
+    void addCheckItem(AppLnk* app);
+    void checkCallback();
+
+protected slots:
+    void setEyePixmap(const QPixmap&,const QString&);
+
+private:
+    QList<AppLnk> hidden;
+    QDict<void> mimes;
+    QDict<void> cats;
+    SortMethod sortmeth;
+    QRegExp tf;
+    int cf;
+    LauncherItem* bsy;
+    int busyTimer;
+    bool ike;
+    bool bigIcns;
+    QPixmap bgPixmap;
+    QColor bgColor;
+    LauncherThumbReceiver*m_EyeCallBack;
+#ifdef USE_ANIMATED_BUSY_ICON_OVERLAY
+    QPixmap busyPix;
+#endif
+  BusyIndicatorType busyType;
 };
 
 #endif // LAUNCHERVIEW_H
