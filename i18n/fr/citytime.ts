@@ -27,51 +27,51 @@
     </message>
     <message>
         <source>&lt;location 4&gt;</source>
-        <translation>&lt;location 4&gt;</translation>
+        <translation type="obsolete">&lt;location 4&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 6 TIME&gt;</source>
-        <translation>&lt;CITY 6 TIME&gt;</translation>
+        <translation type="obsolete">&lt;CITY 6 TIME&gt;</translation>
     </message>
     <message>
         <source>&lt;location 5&gt;</source>
-        <translation>&lt;location 5&gt;</translation>
+        <translation type="obsolete">&lt;location 5&gt;</translation>
     </message>
     <message>
         <source>&lt;location 2&gt;</source>
-        <translation>&lt;location 2&gt;</translation>
+        <translation type="obsolete">&lt;location 2&gt;</translation>
     </message>
     <message>
         <source>&lt;location 6&gt;</source>
-        <translation>&lt;location 6&gt;</translation>
+        <translation type="obsolete">&lt;location 6&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 5 TIME&gt;</source>
-        <translation>&lt;CITY 5 TIME&gt;</translation>
+        <translation type="obsolete">&lt;CITY 5 TIME&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 2 TIME&gt;</source>
-        <translation>&lt;CITY 2 TIME&gt;</translation>
+        <translation type="obsolete">&lt;CITY 2 TIME&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 1 TIME&gt;</source>
-        <translation>&lt;CITY 1 TIME&gt;</translation>
+        <translation type="obsolete">&lt;CITY 1 TIME&gt;</translation>
     </message>
     <message>
         <source>&lt;location 3&gt;</source>
-        <translation>&lt;location 3&gt;</translation>
+        <translation type="obsolete">&lt;location 3&gt;</translation>
     </message>
     <message>
         <source>&lt;location 1&gt;</source>
-        <translation>&lt;location 1&gt;</translation>
+        <translation type="obsolete">&lt;location 1&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 3 TIME&gt;</source>
-        <translation>&lt;CITY 3 TIME&gt;</translation>
+        <translation type="obsolete">&lt;CITY 3 TIME&gt;</translation>
     </message>
     <message>
         <source>&lt;CITY 4 TIME&gt;</source>
-        <translation>&lt;CITY 4 TIME&gt;</translation>
+        <translation type="obsolete">&lt;CITY 4 TIME&gt;</translation>
     </message>
 </context>
 <context>

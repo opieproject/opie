@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Calender</source>
-        <translation>Calendario</translation>
+        <translation type="obsolete">Calendario</translation>
     </message>
     <message>
         <source>Address Book</source>
@@ -24,6 +24,10 @@
     <message>
         <source>Mail</source>
         <translation>Correo</translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

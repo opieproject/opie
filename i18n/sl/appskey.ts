@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Calender</source>
-        <translation>Koledar</translation>
+        <translation type="obsolete">Koledar</translation>
     </message>
     <message>
         <source>Address Book</source>
@@ -24,6 +24,10 @@
     <message>
         <source>Mail</source>
         <translation>Pošta</translation>
+    </message>
+    <message>
+        <source>Calendar</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

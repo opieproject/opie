@@ -221,6 +221,10 @@ modificando le categorie.</translation>
         <source>Moving Document failed.</source>
         <translation>Spostamento documento fallito.</translation>
     </message>
+    <message>
+        <source>Hard Disk</source>
+        <translation type="unfinished">Hard Disk</translation>
+    </message>
 </context>
 <context>
     <name>LnkPropertiesBase</name>
@@ -716,11 +720,15 @@ riprovare.</translation>
     </message>
     <message>
         <source>Ram FS</source>
-        <translation>Ram FS</translation>
+        <translation type="obsolete">Ram FS</translation>
     </message>
     <message>
         <source>Internal Storage</source>
         <translation>Memoria Interna</translation>
+    </message>
+    <message>
+        <source>Internal Memory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

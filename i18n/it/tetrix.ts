@@ -3,7 +3,7 @@
     <name>QTetrix</name>
     <message>
         <source>QTetrix</source>
-        <translation>QTetrix</translation>
+        <translation type="obsolete">QTetrix</translation>
     </message>
     <message>
         <source>Next</source>
@@ -24,6 +24,10 @@
     <message>
         <source>Start</source>
         <translation>Inizia</translation>
+    </message>
+    <message>
+        <source>Tetrix</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

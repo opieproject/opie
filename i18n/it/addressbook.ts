@@ -823,11 +823,11 @@ Uscire comunque?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation>Kuwait</translation>
+        <translation type="obsolete">Kuwait</translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation>Kyrgyztan</translation>
+        <translation type="obsolete">Kyrgyztan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1328,6 +1328,18 @@ Uscire comunque?</translation>
     <message>
         <source>Work Mobile</source>
         <translation>Cellulare Ufficio</translation>
+    </message>
+    <message>
+        <source>Business Country</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

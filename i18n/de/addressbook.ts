@@ -829,11 +829,11 @@ Dennoch beenden?</translation>
     </message>
     <message>
         <source>Kuait</source>
-        <translation>Kuwait</translation>
+        <translation type="obsolete">Kuwait</translation>
     </message>
     <message>
         <source>Kyrgyztan</source>
-        <translation>Kirgisistan</translation>
+        <translation type="obsolete">Kirgisistan</translation>
     </message>
     <message>
         <source>Laos</source>
@@ -1334,6 +1334,14 @@ Dennoch beenden?</translation>
     <message>
         <source>Work Mobile</source>
         <translation>Handy, geschäftlich</translation>
+    </message>
+    <message>
+        <source>Kuwait</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Kyrgystan</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
