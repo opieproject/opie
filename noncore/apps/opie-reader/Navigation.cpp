@@ -1,5 +1,7 @@
 #include "Navigation.h"
 
+#include <string.h>
+
 void CNavigation::saveposn(size_t posn)
 {
 //    qDebug("Saved:%u [%u,%u,%u]", posn, historystart, historycurrent, historyend);
