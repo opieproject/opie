@@ -6,6 +6,7 @@ HEADERS     = oclickablelabel.h      \
               ofontselector.h        \
               oimageeffect.h         \
 	      okeyconfigwidget.h     \
+	      oledbox.h		     \
               olistview.h            \
               opixmapeffect.h        \
               opopupmenu.h           \
@@ -15,7 +16,6 @@ HEADERS     = oclickablelabel.h      \
               otabinfo.h             \
               otabbar.h              \
               otabwidget.h           \
-              oledbox.h              \
               otaskbarapplet.h       \
               otimepicker.h          \
               oversatileview.h       \
@@ -27,6 +27,7 @@ SOURCES     = oclickablelabel.cpp    \
               ofontselector.cpp      \
               oimageeffect.cpp       \
 	      okeyconfigwidget.cpp   \
+	      oledbox.cpp	     \
               olistview.cpp          \
               opixmapeffect.cpp      \
               opopupmenu.cpp         \
@@ -35,7 +36,6 @@ SOURCES     = oclickablelabel.cpp    \
               oseparator.cpp         \
               otabbar.cpp            \
               otabwidget.cpp         \
-              oledbox.cpp            \
               otaskbarapplet.cpp     \
               otimepicker.cpp        \
               oversatileview.cpp     \
@@ -48,7 +48,7 @@ include( fileselector/fileselector.pro )
 INTERFACES  = otimepickerbase.ui
 
 TARGET      = opieui2
-VERSION     = 1.8.5
+VERSION     = 1.9.0
 
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include

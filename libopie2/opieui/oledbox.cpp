@@ -1,11 +1,40 @@
+/*
+                             This file is part of the Opie Project
+              =.             (C) 2002-2005 the Opie Team <opie-devel@handhelds.org>
+            .=l.
+           .>+-=
+ _;:,     .>    :=|.         This program is free software; you can
+.> <`_,   >  .   <=          redistribute it and/or  modify it under
+:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
+.="- .-=="i,     .._         License as published by the Free Software
+ - .   .-<_>     .<>         Foundation; either version 2 of the License,
+     ._= =}       :          or (at your option) any later version.
+    .%`+i>       _;_.
+    .i_,=:_.      -<s.       This program is distributed in the hope that
+     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
+    : ..    .:,     . . .    without even the implied warranty of
+    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
+  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
+..}^=.=       =       ;      Library General Public License for more
+++=   -.     .`     .:       details.
+ :     =  ...= . :.=-
+ -.   .:....=;==+<;          You should have received a copy of the GNU
+  -_. . .   )=.  =           Library General Public License along with
+    --        :-=`           this library; see the file COPYING.LIB.
+                             If not, write to the Free Software Foundation,
+                             Inc., 59 Temple Place - Suite 330,
+                             Boston, MA 02111-1307, USA.
 
-#include <qbitmap.h>
-#include <qpainter.h>
+*/
 
 #include "oledbox.h"
 
+/* QT */
+#include <qbitmap.h>
+#include <qpainter.h>
 
-#ifdef _QTE_IS_TOO_DUMB_TO_DRAW_AN_ARC
+namespace Opie {
+namespace Ui   {
 
 /* XPM */
 static const char * ledborder_xpm[] = {
@@ -41,9 +70,6 @@ static const char * ledborder_xpm[] = {
 
 QPixmap *OLedBox::s_border_pix = 0;
 
-#endif
-
-
 OLedBox::OLedBox ( const QColor &col, QWidget *parent, const char *name ) : QWidget ( parent, name )
 {
 	m_color = col;
@@ -54,10 +80,8 @@ OLedBox::OLedBox ( const QColor &col, QWidget *parent, const char *name ) : QWid
 	
 	setBackgroundMode ( PaletteBackground );
 	
-#ifdef _QTE_IS_TOO_DUMB_TO_DRAW_AN_ARC
 	if ( !s_border_pix )
-		s_border_pix = new QPixmap ( ledborder_xpm );
-#endif
+		s_border_pix = new QPixmap( ledborder_xpm );
 }
 
 OLedBox::~OLedBox ( )
@@ -142,9 +166,7 @@ void OLedBox::paintEvent ( QPaintEvent *e )
 	p. drawPixmap ( 0, 0, *m_pix [ ind ] );
 }
 
-// From KDE libkdeui / led.cpp
-
-void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNKEN led lamp
+void OLedBox::drawLed ( QPixmap *pix, const QColor &col )
 {
 	QPainter paint;
 	QColor color;
@@ -221,11 +243,11 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNK
 	// around the LED which resembles a shadow with light coming
 	// from the upper left.
 
-#ifdef _QTE_IS_TOO_DUMB_TO_DRAW_AN_ARC
-	paint. drawPixmap ( 0, 0, *s_border_pix );
-	paint. end ( );
+#ifndef QT_CAN_DRAW_ARCS
+	paint.drawPixmap ( 0, 0, *s_border_pix );
+	paint.end ( );
 	
-	pix-> setMask ( pix-> createHeuristicMask ( ));
+	pix->setMask ( pix-> createHeuristicMask ( ));
 	
 #else
 	pen.setWidth( 3 );
@@ -275,3 +297,5 @@ void OLedBox::drawLed ( QPixmap *pix, const QColor &col )  // paint a ROUND SUNK
 #endif
 }
 
+};
+};
