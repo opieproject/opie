@@ -99,7 +99,7 @@ bool PmIpkg::runIpkg(const QString& args, const QString& dest )
 void PmIpkg::makeLinks(Package *pack)
 {
 	pvDebug( 2, "PmIpkg::makeLinks "+ pack->name());
-  linkPackage( pack->name(), pack->dest() );
+  linkPackage( pack->installName(), pack->dest() );
 }
 
 QStringList* PmIpkg::getList( QString packFileName, QString d )
