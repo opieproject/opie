@@ -1,4 +1,4 @@
   config DOCTAB
     boolean "opie-doctab (select doctab for Opie)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 )
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE

@@ -1,4 +1,4 @@
   config BACKUP
     boolean "opie-backup (save and restore current Opie settings)"
     default "y"
-    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE && LIBOPIE2CORE
+    depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
