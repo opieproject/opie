@@ -4,8 +4,6 @@
 
 #include <qtimer.h>
 
-#include <stdlib.h>
-
 MoveEngine::MoveEngine()
         : QObject()
 {

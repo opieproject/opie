@@ -1,5 +1,5 @@
-#ifndef BACKGAMMONVIEW_H
-#define BACKGAMMONVIEW_H
+#ifndef BACKGAMMON_VIEW_H
+#define BACKGAMMON_VIEW_H
 
 #include <qcanvas.h>
 
@@ -8,11 +8,11 @@ class BackGammonView : public QCanvasView
     Q_OBJECT
 public:
     BackGammonView(QCanvas* canvas,QWidget* parent);
-	~BackGammonView();
+    ~BackGammonView();
 signals:
-    //void mousepressed(int,int);
+    void mouse(int,int);
 private:
     void contentsMousePressEvent(QMouseEvent* e);
 };
 
-#endif //BACKGAMMONVIEW_H
+#endif //BACKGAMMON_VIEW_H

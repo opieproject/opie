@@ -1,39 +1,26 @@
 #ifndef BACKGAMMON_H
 #define BACKGAMMON_H
 
+#include "backgammonview.h"
 #include "canvasimageitem.h"
-#include "definition.h"
 //#include "rulesdialog.h"
 #include "moveengine.h"
 
-#include <qcanvas.h>
+
 #include <qlabel.h>
-#include <qlineedit.h>
-#include <qwidget.h>
+#include <qmainwindow.h>
+//#include <qwidget.h>
 
 
-class BackGammonView : public QCanvasView
-{
-    Q_OBJECT
-public:
-    BackGammonView(QCanvas* canvas,QWidget* parent);
-    ~BackGammonView();
-signals:
-    void mouse(int,int);
-private:
-    void contentsMousePressEvent(QMouseEvent* e);
-};
 
-class BackGammon : public QWidget
+
+class BackGammon : public QMainWindow
 {
     Q_OBJECT
 private:
     //GUI
-    //is the style not qte ?
-    bool non_qte;
-    int offset;
     //the "status" bar
-    QLineEdit* inputfield;
+    QLabel* message;
     //the main drawing area
     QCanvas* area;
     BackGammonView* boardview;
@@ -50,10 +37,10 @@ private:
     CanvasImageItem** diceB2;
     //CanvasImageItem** oddsDice;
     CanvasImageItem* nomove_marker;
-   
+
     QCanvasRectangle* marker_current;
     QCanvasRectangle* marker_next[4];
-    QLabel* message;
+
     //ENGINE
     MoveEngine* move;
     //the dice values
@@ -113,7 +100,6 @@ private slots:
     void deletetheme();
     void modify_AI();
     void setrules();
-    void displaySettings();
     void mouse(int x,int y);
     void done_dice1();
     void done_dice2();

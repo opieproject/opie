@@ -5,7 +5,6 @@
 #include <qdialog.h>
 #include "definition.h"
 
-
 class RulesDialog : public QDialog
 {
   Q_OBJECT
