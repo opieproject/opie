@@ -107,8 +107,19 @@ void AddressBookPluginWidget::getAddress() {
 		if ( m_list.count() > 0 ){
 			output = QObject::tr( "Next birthdays in <b> %1 </b> days: <br>" ).arg( m_daysLookAhead );
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-				if ( ammount++ < m_maxLinesTask )
-					output += "<font color=#e00000><b>-" + (*m_it).fullName() + "</b></font><br>";
+				if ( ammount++ < m_maxLinesTask ){
+					// Now we want to calculate how many days until birthday. We have to set 
+					// the correct year to calculate the day diff...
+					QDate destdate = (*m_it).birthday();
+					destdate.setYMD( QDate::currentDate().year(), destdate.month(), destdate.day() );
+					if ( QDate::currentDate().daysTo(destdate) < 0 )
+						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
+
+					output += "<font color=#e00000><b>-" + (*m_it).fullName() 
+						+ " (" 
+						+ QString::number(QDate::currentDate().daysTo(destdate)) 
+						+ " Days) </b></font><br>";
+				}
 			}
 		} else {
 			output = QObject::tr( "No birthdays in <b> %1 </b> days! <br>" ).arg( m_daysLookAhead );
@@ -124,8 +135,19 @@ void AddressBookPluginWidget::getAddress() {
 		if ( m_list.count() > 0 ){
 			output += QObject::tr( "Next anniversaries in <b> %1 </b> days: <br>" ).arg( m_daysLookAhead );
 			for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
-				if ( ammount++ < m_maxLinesTask )
-					output += "<font color=#e00000><b>-" + (*m_it).fullName() + "</b></font><br>";
+				if ( ammount++ < m_maxLinesTask ){
+					// Now we want to calculate how many days until anniversary. We have to set 
+					// the correct year to calculate the day diff...
+					QDate destdate = (*m_it).anniversary();
+					destdate.setYMD( QDate::currentDate().year(), destdate.month(), destdate.day() );
+					if ( QDate::currentDate().daysTo(destdate) < 0 )
+						destdate.setYMD( QDate::currentDate().year()+1, destdate.month(), destdate.day() );
+
+					output += "<font color=#e00000><b>-" + (*m_it).fullName() 
+						+ " (" 
+						+ QString::number(QDate::currentDate().daysTo( destdate ) ) 
+						+ " Days) </b></font><br>";
+				}
 			}
 		} else {
 			output += QObject::tr( "No anniversaries in <b> %1 </b> days! <br>" ).arg( m_daysLookAhead );
