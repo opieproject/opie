@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>260</width>
+            <width>256</width>
             <height>242</height>
         </rect>
     </property>
@@ -70,6 +70,10 @@
                         <name>echoMode</name>
                         <enum>Password</enum>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>The password of the VNC server</string>
+                    </property>
                 </widget>
                 <widget row="3"  column="1" >
                     <class>QCheckBox</class>
@@ -80,6 +84,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Show Password</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Toggle obscuring the password</string>
                     </property>
                 </widget>
                 <widget row="2"  column="0" >
@@ -99,6 +107,10 @@
                         <name>name</name>
                         <cstring>serverBookmark</cstring>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>The name of the VNC server</string>
+                    </property>
                 </widget>
                 <widget row="4"  column="0" >
                     <class>QLabel</class>
@@ -116,6 +128,10 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>serverHostname</cstring>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>The host name of the VNC server</string>
                     </property>
                 </widget>
                 <widget row="0"  column="0" >
@@ -157,6 +173,10 @@
                     <property stdset="1">
                         <name>value</name>
                         <number>0</number>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>The display number of the VNC server</string>
                     </property>
                 </widget>
                 <spacer row="5"  column="2" >
@@ -241,6 +261,10 @@
                                 <name>minValue</name>
                                 <number>1</number>
                             </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Delay between requesting updates from the server</string>
+                            </property>
                         </widget>
                         <widget>
                             <class>QLabel</class>
@@ -265,6 +289,10 @@
                         <name>text</name>
                         <string>Request 8-bit session</string>
                     </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Request that the VNC server transfer 8 bit color</string>
+                    </property>
                 </widget>
                 <widget>
                     <class>QCheckBox</class>
@@ -286,6 +314,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Request shared session</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Allow other users to connect to the VNC server</string>
                     </property>
                 </widget>
                 <widget>
@@ -326,6 +358,10 @@
                             <property stdset="1">
                                 <name>name</name>
                                 <cstring>scaleFactor</cstring>
+                            </property>
+                            <property>
+                                <name>whatsThis</name>
+                                <string>Scale the remote display to fit on the PDA (Slow)</string>
                             </property>
                         </widget>
                         <widget>
@@ -437,6 +473,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Copy rectangle encoding</string>
+                    </property>
+                    <property>
+                        <name>whatsThis</name>
+                        <string>Enable transmiting identical rectangles as references to existing data</string>
                     </property>
                 </widget>
                 <spacer>

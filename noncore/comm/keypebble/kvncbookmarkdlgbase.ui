@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>584</width>
+            <width>580</width>
             <height>480</height>
         </rect>
     </property>
@@ -33,6 +33,10 @@
             <property stdset="1">
                 <name>name</name>
                 <cstring>bookmarkList</cstring>
+            </property>
+            <property>
+                <name>whatsThis</name>
+                <string>Choose a bookmark that you would like to open</string>
             </property>
         </widget>
         <widget>

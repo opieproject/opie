@@ -56,7 +56,7 @@ static char * menu_xpm[] = {
 
 const int StatusTextId = 0;
 
-KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
+KVNC::KVNC( const char *name ) : QMainWindow( 0, name ,WStyle_ContextHelp)
 {
     setCaption( tr("VNC Viewer") );
     fullscreen = false;
@@ -104,7 +104,7 @@ KVNC::KVNC( const char *name ) : QMainWindow( 0, name )
 						this, SLOT( newConnection() ) );
 		n->addTo( bar );
 								     
-		 QAction *o = new QAction( tr( "Open Bookmark" ), Resource::loadPixmap( "edit" ),
+		 QAction *o = new QAction( tr( "Open Bookmark" ), Resource::loadPixmap( "fileopen" ),
 				QString::null, 0, this, 0 );
 		 connect( o, SIGNAL( activated() ),
 						this, SLOT( openConnection() ) );

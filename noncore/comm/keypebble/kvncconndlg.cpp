@@ -15,7 +15,7 @@
 
 KVNCConnDlg::KVNCConnDlg( KRFBServer *options,
 				QWidget *parent, char *name, bool modal )
-: KVNCConnDlgBase( parent, name, modal )
+: KVNCConnDlgBase( parent, name, modal, WStyle_ContextHelp )
 {
     this->options=options;
     tmpOptions=*options;
