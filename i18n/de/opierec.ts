@@ -219,15 +219,15 @@ Datei &lt;font size=+2&gt;&lt;B&gt;LÖSCHEN&lt;/B&gt;&lt;/font&gt;?</translation
     </message>
     <message>
         <source>Del</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Stereo</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Please select file to play</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei zum Abpielen wählen</translation>
     </message>
 </context>
 </TS>

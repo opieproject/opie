@@ -19,60 +19,60 @@
     <name>AccountView</name>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished">Fehler beim Erstellen des Ordners</translation>
+        <translation>Fehler beim Erstellen des Ordners</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished">&lt;center&gt;Fehler während des Erstellens&lt;br&gt;des neuen Ordners - breche ab.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Fehler während des Erstellens&lt;br&gt;des neuen Ordners - breche ab.&lt;/center&gt;</translation>
     </message>
 </context>
 <context>
     <name>AddressPicker</name>
     <message>
         <source>There are no entries in the addressbook.</source>
-        <translation type="unfinished">Es sind keine Einträge im Adressbuch.</translation>
+        <translation>Es sind keine Einträge im Adressbuch.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>&lt;p&gt;You have to select at least one address entry.&lt;/p&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Sie müssen mindestens eine Adresse auswählen.&lt;/p&gt;</translation>
+        <translation>&lt;p&gt;Sie müssen mindestens eine Adresse auswählen.&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
 </context>
 <context>
     <name>AddressPickerUI</name>
     <message>
         <source>Address Picker</source>
-        <translation type="unfinished">Adressenauswahl</translation>
+        <translation>Adressenauswahl</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished">Abbrechen</translation>
+        <translation>Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>ComposeMail</name>
     <message>
         <source>Name</source>
-        <translation type="unfinished">Name</translation>
+        <translation>Name</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Problem</source>
-        <translation type="unfinished">Problem</translation>
+        <translation>Problem</translation>
     </message>
     <message>
         <source>&lt;p&gt;Please create an SMTP account first.&lt;/p&gt;</source>
@@ -96,7 +96,7 @@
     </message>
     <message>
         <source>Store message</source>
-        <translation type="unfinished">Speichere Nachricht</translation>
+        <translation>Speichere Nachricht</translation>
     </message>
     <message>
         <source>Store message into drafts?</source>
@@ -315,19 +315,19 @@
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished">Konto</translation>
+        <translation>Konto</translation>
     </message>
     <message>
         <source>Prefix</source>
-        <translation type="unfinished">Präfix</translation>
+        <translation>Präfix</translation>
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished">ssh $SERVER exec</translation>
+        <translation>ssh $SERVER exec</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Benutze sichere Verbindungen:</translation>
+        <translation>Benutze sichere Verbindungen:</translation>
     </message>
 </context>
 <context>
@@ -361,264 +361,266 @@
     <name>MainWindow</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished">Post</translation>
+        <translation>Post</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Compose new mail</source>
-        <translation type="unfinished">Erstelle neue Post</translation>
+        <translation>Erstelle neue Post</translation>
     </message>
     <message>
         <source>Send queued mails</source>
-        <translation type="unfinished">Sende wartende Post</translation>
+        <translation>Sende wartende Post</translation>
     </message>
     <message>
         <source>Show/Hide folders</source>
-        <translation type="unfinished">Zeige/Verstecke Ordner</translation>
+        <translation>Zeige/Verstecke Ordner</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished">Lösche Post</translation>
+        <translation>Lösche Post</translation>
     </message>
     <message>
         <source>Edit settings</source>
-        <translation type="unfinished">Bearbeite Einstellungen</translation>
+        <translation>Bearbeite Einstellungen</translation>
     </message>
     <message>
         <source>Configure accounts</source>
-        <translation type="unfinished">Konfiguriere Konten</translation>
+        <translation>Konfiguriere Konten</translation>
     </message>
     <message>
         <source>Mailbox</source>
-        <translation type="unfinished">Mailbox</translation>
+        <translation>Mailbox</translation>
     </message>
     <message>
         <source>Subject</source>
-        <translation type="unfinished">Betreff</translation>
+        <translation>Betreff</translation>
     </message>
     <message>
         <source>Sender</source>
-        <translation type="unfinished">Absender</translation>
+        <translation>Absender</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Folder</source>
-        <translation type="unfinished">Ordner</translation>
+        <translation>Ordner</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished">Trenne</translation>
+        <translation>Trenne</translation>
     </message>
     <message>
         <source>Set on/offline</source>
-        <translation type="unfinished">On/Offline setzen</translation>
+        <translation>On/Offline setzen</translation>
     </message>
     <message>
         <source>Refresh folder list</source>
-        <translation type="unfinished">Erneuere Ordnerliste</translation>
+        <translation>Erneuere Ordnerliste</translation>
     </message>
     <message>
         <source>Create new folder</source>
-        <translation type="unfinished">Erstelle neuen Ordner</translation>
+        <translation>Erstelle neuen Ordner</translation>
     </message>
     <message>
         <source>(Un-)Subscribe groups</source>
-        <translation type="unfinished">Abboniere Gruppen</translation>
+        <translation>Abboniere Gruppen</translation>
     </message>
     <message>
         <source>Refresh headerlist</source>
-        <translation type="unfinished">Erneuere Nachrichtenliste</translation>
+        <translation>Erneuere Nachrichtenliste</translation>
     </message>
     <message>
         <source>Delete all mails</source>
-        <translation type="unfinished">Lösche alle Nachrichten</translation>
+        <translation>Lösche alle Nachrichten</translation>
     </message>
     <message>
         <source>New subfolder</source>
-        <translation type="unfinished">Neuer Unterordner</translation>
+        <translation>Neuer Unterordner</translation>
     </message>
     <message>
         <source>Delete folder</source>
-        <translation type="unfinished">Lösche Ordner</translation>
+        <translation>Lösche Ordner</translation>
     </message>
     <message>
         <source>Move/Copie all mails</source>
-        <translation type="unfinished">Bewege/Kopiere alle Nachrichten</translation>
+        <translation>Bewege/Kopiere alle Nachrichten</translation>
     </message>
     <message>
         <source>Read current mail</source>
-        <translation type="unfinished">Lese aktuelle Nachricht</translation>
+        <translation>Lese aktuelle Nachricht</translation>
     </message>
 </context>
 <context>
     <name>NNTPGroupsDlg</name>
     <message>
         <source>Subscribed newsgroups</source>
-        <translation type="unfinished">Abbonierte Newsgruppen</translation>
+        <translation>Abbonierte Newsgruppen</translation>
     </message>
 </context>
 <context>
     <name>NNTPGroupsUI</name>
     <message>
         <source>newsgroupslist</source>
-        <translation type="unfinished">Newsgruppenliste</translation>
+        <translation>Newsgruppenliste</translation>
     </message>
     <message>
         <source>Newsgroups</source>
-        <translation type="unfinished">Newsgruppen</translation>
+        <translation>Newsgruppen</translation>
     </message>
     <message>
         <source>List of groups from the server. On start, only subscribed groups are listed.</source>
-        <translation type="unfinished">Liste der Gruppen des Servers. Zu Beginn sind nur abonnierte Gruppen gelisteted.</translation>
+        <translation>Liste der Gruppen des Servers. Zu Beginn sind nur abonnierte Gruppen gelisteted.</translation>
     </message>
     <message>
         <source>Groupfilter:</source>
-        <translation type="unfinished">Gruppenfilter:</translation>
+        <translation>Gruppenfilter:</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished">Hole Newsgruppenliste vom Server</translation>
+        <translation>Hole Newsgruppenliste vom Server</translation>
     </message>
     <message>
         <source>Retrieve the list of groups from server</source>
-        <translation type="unfinished">Empange die Gruppenliste vom Server</translation>
+        <translation>Empange die Gruppenliste vom Server</translation>
     </message>
     <message>
         <source>Enter a filter string here.
 Then hit &quot;get newsgroup list&quot; again and only groups starting 
 with that filter will be listed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Geben Sie hier einen Filter ein.
+Danach wird beim holen der Gruppenliste dieser Filter
+verwendet.</translation>
     </message>
 </context>
 <context>
     <name>NNTPconfigUI</name>
     <message>
         <source>Configure NNTP</source>
-        <translation type="unfinished">Konfiguriere NNTP</translation>
+        <translation>Konfiguriere NNTP</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished">Name des Kontos</translation>
+        <translation>Name des Kontos</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished">Konto</translation>
+        <translation>Konto</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Use SSL</source>
-        <translation type="unfinished">Benutze SSL</translation>
+        <translation>Benutze SSL</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished">Benutzer</translation>
+        <translation>Benutzer</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished">Benutze Login</translation>
+        <translation>Benutze Login</translation>
     </message>
     <message>
         <source>Groups</source>
-        <translation type="unfinished">Gruppen</translation>
+        <translation>Gruppen</translation>
     </message>
     <message>
         <source>Newsgroup</source>
-        <translation type="unfinished">Newsgruppe</translation>
+        <translation>Newsgruppe</translation>
     </message>
     <message>
         <source>Get newsgroup list from server</source>
-        <translation type="unfinished">Hole Newsgruppenliste vom Server</translation>
+        <translation>Hole Newsgruppenliste vom Server</translation>
     </message>
 </context>
 <context>
     <name>Newmdirdlgui</name>
     <message>
         <source>Enter directory name</source>
-        <translation type="unfinished">Gebe Verzeichnisname ein</translation>
+        <translation>Gebe Verzeichnisname ein</translation>
     </message>
     <message>
         <source>Directory name:</source>
-        <translation type="unfinished">Verzeichnisname:</translation>
+        <translation>Verzeichnisname:</translation>
     </message>
     <message>
         <source>Directory contains other subdirs</source>
-        <translation type="unfinished">Verzeichnis enthält Unterverzeichnisse</translation>
+        <translation>Verzeichnis enthält Unterverzeichnisse</translation>
     </message>
 </context>
 <context>
     <name>OpieMail</name>
     <message>
         <source>Info</source>
-        <translation type="unfinished">Information</translation>
+        <translation>Information</translation>
     </message>
     <message>
         <source>Mail queue flushed</source>
-        <translation type="unfinished">Nachrichtenwarteschlange geleert</translation>
+        <translation>Nachrichtenwarteschlange geleert</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished">Lösche Nachricht</translation>
+        <translation>Lösche Nachricht</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Möchten sie wirlich diese Nachricht löschen?&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;p&gt;Möchten sie wirlich diese Nachricht löschen?&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Read this mail</source>
-        <translation type="unfinished">Lese diese Nachricht</translation>
+        <translation>Lese diese Nachricht</translation>
     </message>
     <message>
         <source>Delete this mail</source>
-        <translation type="unfinished">Lösche diese Nachricht</translation>
+        <translation>Lösche diese Nachricht</translation>
     </message>
     <message>
         <source>Copy/Move this mail</source>
-        <translation type="unfinished">Kopiere/Bewege diese Nachricht</translation>
+        <translation>Kopiere/Bewege diese Nachricht</translation>
     </message>
     <message>
         <source>Error creating new Folder</source>
-        <translation type="unfinished">Fehler beim Erstellen des neuen Verzeichnisses</translation>
+        <translation>Fehler beim Erstellen des neuen Verzeichnisses</translation>
     </message>
     <message>
         <source>&lt;center&gt;Error while creating&lt;br&gt;new folder - breaking.&lt;/center&gt;</source>
-        <translation type="unfinished">&lt;center&gt;Fehler während des Erstellens&lt;br&gt;des neuen Ordners - breche ab.&lt;/center&gt;</translation>
+        <translation>&lt;center&gt;Fehler während des Erstellens&lt;br&gt;des neuen Ordners - breche ab.&lt;/center&gt;</translation>
     </message>
     <message>
         <source>Define a smtp account first</source>
-        <translation type="unfinished">Erstellen Sie zuerst ein SMTP-Konto.</translation>
+        <translation>Erstellen Sie zuerst ein SMTP-Konto</translation>
     </message>
     <message>
         <source>Read this posting</source>
-        <translation type="unfinished">Lese dieses Posting</translation>
+        <translation>Lese dieses Posting</translation>
     </message>
     <message>
         <source>Edit this mail</source>
-        <translation type="unfinished">Bearbeite diese Nachricht</translation>
+        <translation>Bearbeite diese Nachricht</translation>
     </message>
 </context>
 <context>
@@ -849,51 +851,51 @@ Alle Mails werden entfernt.</translation>
     <name>POP3configUI</name>
     <message>
         <source>Configure POP3</source>
-        <translation type="unfinished">Konfiguriere POP3</translation>
+        <translation>Konfiguriere POP3</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished">Konto</translation>
+        <translation>Konto</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished">Name des Kontos</translation>
+        <translation>Name des Kontos</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Benutze sichere Verbindung:</translation>
+        <translation>Benutze sichere Verbindung:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec imapd</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished">Benutzer</translation>
+        <translation>Benutzer</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>ask before downloading large mails</source>
-        <translation type="unfinished">Frage vor dem Laden großer Nachrichten</translation>
+        <translation>Frage vor dem Laden großer Nachrichten</translation>
     </message>
     <message>
         <source>Large mail size (kb):</source>
-        <translation type="unfinished">Größe von großen Nachrichten (kb):</translation>
+        <translation>Größe von großen Nachrichten (kb):</translation>
     </message>
     <message>
         <source> kB</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -931,129 +933,129 @@ Alle Mails werden entfernt.</translation>
     <name>SMTPconfigUI</name>
     <message>
         <source>Configure SMTP</source>
-        <translation type="unfinished">Konfiguriere SMTP</translation>
+        <translation>Konfiguriere SMTP</translation>
     </message>
     <message>
         <source>Account</source>
-        <translation type="unfinished">Konto</translation>
+        <translation>Konto</translation>
     </message>
     <message>
         <source>Use Login</source>
-        <translation type="unfinished">Benutze Login</translation>
+        <translation>Benutze Login</translation>
     </message>
     <message>
         <source>Name of the Account</source>
-        <translation type="unfinished">Name des Kontos</translation>
+        <translation>Name des Kontos</translation>
     </message>
     <message>
         <source>Name of the SMTP Server</source>
-        <translation type="unfinished">Name des SMTP Server</translation>
+        <translation>Name des SMTP Server</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished">Passwort</translation>
+        <translation>Passwort</translation>
     </message>
     <message>
         <source>Port</source>
-        <translation type="unfinished">Port</translation>
+        <translation>Port</translation>
     </message>
     <message>
         <source>Server</source>
-        <translation type="unfinished">Server</translation>
+        <translation>Server</translation>
     </message>
     <message>
         <source>Port of the SMTP Server</source>
-        <translation type="unfinished">Port des SMTP-Server</translation>
+        <translation>Port des SMTP-Server</translation>
     </message>
     <message>
         <source>User</source>
-        <translation type="unfinished">Benutzer</translation>
+        <translation>Benutzer</translation>
     </message>
     <message>
         <source>Use secure sockets:</source>
-        <translation type="unfinished">Benutze sichere Verbindung:</translation>
+        <translation>Benutze sichere Verbindung:</translation>
     </message>
     <message>
         <source>ssh $SERVER exec</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>SelectMailTypeUI</name>
     <message>
         <source>Select Type</source>
-        <translation type="unfinished">Wähle Typ</translation>
+        <translation>Wähle Typ</translation>
     </message>
     <message>
         <source>Select Account Type</source>
-        <translation type="unfinished">Wähle Kontotyp</translation>
+        <translation>Wähle Kontotyp</translation>
     </message>
     <message>
         <source>IMAP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>POP3</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>SMTP</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>SettingsDialogUI</name>
     <message>
         <source>Settings Dialog</source>
-        <translation type="unfinished">Einstellungen</translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>View Mail</source>
-        <translation type="unfinished">Betrachte Nachricht</translation>
+        <translation>Betrachte Nachricht</translation>
     </message>
     <message>
         <source>View mail as Html</source>
-        <translation type="unfinished">Betrachte Nachrichten als HTML</translation>
+        <translation>Betrachte Nachrichten als HTML</translation>
     </message>
     <message>
         <source>Compose Mail</source>
-        <translation type="unfinished">Erstelle Nachricht</translation>
+        <translation>Erstelle Nachricht</translation>
     </message>
     <message>
         <source>Send mails later ( enqueue in outbox )</source>
-        <translation type="unfinished">Versende Nachrichten später (reihe in Outbox ein)</translation>
+        <translation>Versende Nachrichten später (reihe in Outbox ein)</translation>
     </message>
     <message>
         <source>Taskbar Applet</source>
-        <translation type="unfinished">Taskbar Applet</translation>
+        <translation>Taskbar Applet</translation>
     </message>
     <message>
         <source>Disable Taskbar Applet</source>
-        <translation type="unfinished">Deaktivere Taskbar Applet</translation>
+        <translation>Deaktivere Taskbar Applet</translation>
     </message>
     <message>
         <source> min</source>
-        <translation type="unfinished">min</translation>
+        <translation>min</translation>
     </message>
     <message>
         <source>Check how often</source>
-        <translation type="unfinished">Überprüfe wie oft</translation>
+        <translation>Überprüfe wie oft</translation>
     </message>
     <message>
         <source>Blink Led when new mails arrive</source>
-        <translation type="unfinished">Ledblinken wenn neue Nachrichten eintreffen</translation>
+        <translation>Ledblinken wenn neue Nachrichten eintreffen</translation>
     </message>
     <message>
         <source>Play Sound when new mails arrive</source>
-        <translation type="unfinished">Spiele Ton wenn neue Nachrichten eintreffen</translation>
+        <translation>Spiele Ton wenn neue Nachrichten eintreffen</translation>
     </message>
     <message>
         <source>Click opens mail</source>
-        <translation type="unfinished">Klick öffnet Nachricht</translation>
+        <translation>Klick öffnet Nachricht</translation>
     </message>
     <message>
         <source>Click activate server/folder</source>
-        <translation type="unfinished">Klick aktiviert Server/Ordner</translation>
+        <translation>Klick aktiviert Server/Ordner</translation>
     </message>
 </context>
 <context>
@@ -1074,152 +1076,152 @@ Alle Mails werden entfernt.</translation>
     <name>ViewMail</name>
     <message>
         <source>Show Text</source>
-        <translation type="unfinished">Zeige Text</translation>
+        <translation>Zeige Text</translation>
     </message>
     <message>
         <source>Save Attachment</source>
-        <translation type="unfinished">Sichere Anhang</translation>
+        <translation>Sichere Anhang</translation>
     </message>
     <message>
         <source>From</source>
-        <translation type="unfinished">Von</translation>
+        <translation>Von</translation>
     </message>
     <message>
         <source>To</source>
-        <translation type="unfinished">An</translation>
+        <translation>An</translation>
     </message>
     <message>
         <source>Cc</source>
-        <translation type="unfinished">Cc</translation>
+        <translation>Cc</translation>
     </message>
     <message>
         <source>Date</source>
-        <translation type="unfinished">Datum</translation>
+        <translation>Datum</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished">Fehler</translation>
+        <translation>Fehler</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot reply yet.</source>
-        <translation type="unfinished">&lt;p&gt; Der Nachrichtenkörper ist noch nicht geladen, somit können sie noch nicht antworten.</translation>
+        <translation>&lt;p&gt; Der Nachrichtenkörper ist noch nicht geladen, somit können sie noch nicht antworten.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished">Ok</translation>
+        <translation>Ok</translation>
     </message>
     <message>
         <source>&lt;p&gt;The mail body is not yet downloaded, so you cannot forward yet.</source>
-        <translation type="unfinished">&lt;p&gt;Der Nachrichtenkörper ist noch nicht geladen, somit können Sie noch nicht weiterleiten.</translation>
+        <translation>&lt;p&gt;Der Nachrichtenkörper ist noch nicht geladen, somit können Sie noch nicht weiterleiten.</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished">Lösche Nachricht</translation>
+        <translation>Lösche Nachricht</translation>
     </message>
     <message>
         <source>&lt;p&gt;Do you really want to delete this mail? &lt;br&gt;&lt;br&gt;</source>
-        <translation type="unfinished">&lt;p&gt;Möchten Sie wirklich diese Nachricht löschen?&lt;br&gt;&lt;br&gt;</translation>
+        <translation>&lt;p&gt;Möchten Sie wirklich diese Nachricht löschen?&lt;br&gt;&lt;br&gt;</translation>
     </message>
     <message>
         <source>Display image preview</source>
-        <translation type="unfinished">Zeige Bildvorschau</translation>
+        <translation>Zeige Bildvorschau</translation>
     </message>
     <message>
         <source>E-Mail by %1</source>
-        <translation type="unfinished">E-Mail von %1</translation>
+        <translation>E-Mail von %1</translation>
     </message>
     <message>
         <source>Reading attachment</source>
-        <translation type="unfinished">Lese Anhang</translation>
+        <translation>Lese Anhang</translation>
     </message>
     <message>
         <source>Could not read content of attachment</source>
-        <translation type="unfinished">Konnte den Inhalt vom Anhang nicht lesen</translation>
+        <translation>Konnte den Inhalt vom Anhang nicht lesen</translation>
     </message>
 </context>
 <context>
     <name>ViewMailBase</name>
     <message>
         <source>Mail</source>
-        <translation type="unfinished">Post</translation>
+        <translation>Post</translation>
     </message>
     <message>
         <source>Reply</source>
-        <translation type="unfinished">Antwort</translation>
+        <translation>Antwort</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished">Weiterleiten</translation>
+        <translation>Weiterleiten</translation>
     </message>
     <message>
         <source>Attachments</source>
-        <translation type="unfinished">Anhänge</translation>
+        <translation>Anhänge</translation>
     </message>
     <message>
         <source>Show Html</source>
-        <translation type="unfinished">Zeige HTML</translation>
+        <translation>Zeige HTML</translation>
     </message>
     <message>
         <source>Delete Mail</source>
-        <translation type="unfinished">Lösche Nachricht</translation>
+        <translation>Lösche Nachricht</translation>
     </message>
     <message>
         <source>Description</source>
-        <translation type="unfinished">Beschreibung</translation>
+        <translation>Beschreibung</translation>
     </message>
     <message>
         <source>Filename</source>
-        <translation type="unfinished">Dateiname</translation>
+        <translation>Dateiname</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Größe</translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>E-Mail view</source>
-        <translation type="unfinished">E-Mail Ansicht</translation>
+        <translation>E-Mail Ansicht</translation>
     </message>
     <message>
         <source>Show image preview inline</source>
-        <translation type="unfinished">Zeige eingebettete Bildvorschau</translation>
+        <translation>Zeige eingebettete Bildvorschau</translation>
     </message>
 </context>
 <context>
     <name>selectsmtp</name>
     <message>
         <source>Select SMTP Account</source>
-        <translation type="unfinished">Wähle SMTP-Konto</translation>
+        <translation>Wähle SMTP-Konto</translation>
     </message>
 </context>
 <context>
     <name>selectstoreui</name>
     <message>
         <source>Select target box</source>
-        <translation type="unfinished">Wähle Zielordner</translation>
+        <translation>Wähle Zielordner</translation>
     </message>
     <message>
         <source>&lt;b&gt;Store mail(s) to&lt;/b&gt;</source>
-        <translation type="unfinished">&lt;b&gt;Sichere Nachricht(en) nach&lt;/b&gt;</translation>
+        <translation>&lt;b&gt;Sichere Nachricht(en) nach&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Folder:</source>
-        <translation type="unfinished">Ordner:</translation>
+        <translation>Ordner:</translation>
     </message>
     <message>
         <source>Account:</source>
-        <translation type="unfinished">Konto:</translation>
+        <translation>Konto:</translation>
     </message>
     <message>
         <source>Create new folder</source>
-        <translation type="unfinished">Erstelle neuen Ordner</translation>
+        <translation>Erstelle neuen Ordner</translation>
     </message>
     <message>
         <source>Prefix will prepend, no need to enter it!</source>
-        <translation type="unfinished">Präfix wird vorangestellt, nicht nötig ihn einzugeben!</translation>
+        <translation>Präfix wird vorangestellt, nicht nötig ihn einzugeben!</translation>
     </message>
     <message>
         <source>Move mail(s)</source>
-        <translation type="unfinished">Bewege Nachricht(en)</translation>
+        <translation>Bewege Nachricht(en)</translation>
     </message>
 </context>
 </TS>

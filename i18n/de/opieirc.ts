@@ -4,59 +4,60 @@
     <name>DCCProgress</name>
     <message>
         <source>Receiving file %1 from %2...</source>
-        <translation type="unfinished"></translation>
+        <translation>Empfange Datei %1 von %2...</translation>
     </message>
     <message>
         <source>Successfully received %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Erfolgreich %1 empfangen</translation>
     </message>
     <message>
         <source>Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Abgebrochen</translation>
     </message>
     <message>
         <source>Peer Aborted</source>
-        <translation type="unfinished"></translation>
+        <translation>Gegenstelle hat abgebrochen</translation>
     </message>
     <message>
         <source>Timeout</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>DCCTransferTab</name>
     <message>
         <source>DCC Transfers in Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Laufende DDC Übertragungen</translation>
     </message>
     <message>
         <source>There are transfers in progress. &lt;br&gt;If you close this tab, they will be canceled.&lt;br&gt;Do you want to close it anyway?</source>
-        <translation type="unfinished"></translation>
+        <translation>Es sind Übertragungen im Gange.&lt;br&gt;Wenn Sie dieses Tab schliessen werden diese abgebrochen.&lt;br&gt;Trotzdem beenden?</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schliessen</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Nicht schliessen</translation>
     </message>
     <message>
         <source>DCC Transfer from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>DDC Übertragung von %1</translation>
     </message>
     <message>
         <source>%1 is trying to send you the file %2
 (%3 bytes)</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 versucht Ihnen die Datei %2
+(%3 bytes) zu senden</translation>
     </message>
     <message>
         <source>&amp;Accept</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;nnehmen</translation>
     </message>
     <message>
         <source>&amp;Reject</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ablehnen</translation>
     </message>
 </context>
 <context>
@@ -121,15 +122,15 @@
     <name>IRCHistoryLineEdit</name>
     <message>
         <source>Next Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Nächstes Tab</translation>
     </message>
     <message>
         <source>Previous Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorheriges Tab</translation>
     </message>
     <message>
         <source>Close Tab</source>
-        <translation type="unfinished"></translation>
+        <translation>Tab schliessen</translation>
     </message>
 </context>
 <context>
@@ -296,76 +297,77 @@
     </message>
     <message>
         <source>Server %1 version %2 supports usermodes &apos;%3&apos; and channelmodes &apos;%4&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Server %1 version %2 unterstützt Usermodes &apos;%3&apos; und Channelmodes &apos;%4&apos;</translation>
     </message>
     <message>
         <source>There are %1 operators connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Es sind %1 Operators online</translation>
     </message>
     <message>
         <source>There are %1 unknown connection(s)</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt %1 unbekannte Verbindungen</translation>
     </message>
     <message>
         <source>There are %1 channels formed</source>
-        <translation type="unfinished"></translation>
+        <translation>Es gibt %1 Channels</translation>
     </message>
     <message>
         <source>Please wait a while and try again</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte warten Sie eine Weile und versuchen Sie es erneut</translation>
     </message>
     <message>
         <source>Whois %1 (%2@%3)
 Real name: %4</source>
-        <translation type="unfinished"></translation>
+        <translation>Whois %1 (%2@%3)
+Name: %4</translation>
     </message>
     <message>
         <source>%1 is using server %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 verwendet Server %2</translation>
     </message>
     <message>
         <source>%1 is on channels: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist in den Channels: %2</translation>
     </message>
     <message>
         <source>Names for %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Namen für %1: %2</translation>
     </message>
     <message>
         <source>Time on server %1 is %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Zeit auf Server %1 ist %2</translation>
     </message>
     <message>
         <source>Channel or nick %1 doesn&apos;t exists</source>
-        <translation type="unfinished"></translation>
+        <translation>Channel oder Nick %1 gibt es nicht</translation>
     </message>
     <message>
         <source>There is no history information for %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Historie für %1 vorhanden</translation>
     </message>
     <message>
         <source>Unknown command: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Befehl: %1</translation>
     </message>
     <message>
         <source>Can&apos;t change nick to %1: %2</source>
-        <translation type="unfinished"></translation>
+        <translation>Konnte Nick nicht ändern auf %1:%2</translation>
     </message>
     <message>
         <source>You&apos;re not on channel %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Sie sind nicht im Channel %1</translation>
     </message>
     <message>
         <source>[%1] Operation not permitted, you don&apos;t have enough channel privileges</source>
-        <translation type="unfinished"></translation>
+        <translation>[%1] nicht erlaubt. Sie haben nicht die nötigen Privilegien</translation>
     </message>
     <message>
         <source>Connected to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbunden mit</translation>
     </message>
     <message>
         <source>%1 has been idle for %2</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 ist Idle seit %2</translation>
     </message>
     <message>
         <source>%1 signed on %2</source>
@@ -373,35 +375,35 @@ Real name: %4</source>
     </message>
     <message>
         <source>CTCP PING with unknown person - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING von unbekannter Person - Netzprobleme?</translation>
     </message>
     <message>
         <source>CTCP PING with unknown channel - Desynchronized?</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING mit ungültigem Channel - Netzprobleme?</translation>
     </message>
     <message>
         <source>CTCP PING with bad recipient</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING mit ungültigem Empfänger</translation>
     </message>
     <message>
         <source>Received a CTCP VERSION request from </source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP VERSION Anfrage erhalten von</translation>
     </message>
     <message>
         <source>Received a CTCP PING reply from %1: %2 seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING Antwort von %1: %2 Sekunden</translation>
     </message>
     <message>
         <source>Received a CTCP PING request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>CTCP PING von %1 empfangen</translation>
     </message>
     <message>
         <source>Malformed DCC request from %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlerhafte DDC Anfrage von %1</translation>
     </message>
     <message>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Speichern als</translation>
     </message>
 </context>
 <context>
@@ -573,22 +575,22 @@ enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
     </message>
     <message>
         <source>Connecting to</source>
-        <translation type="unfinished"></translation>
+        <translation>Verbinde mit</translation>
     </message>
 </context>
 <context>
     <name>IRCSession</name>
     <message>
         <source>You are now known as %1</source>
-        <translation type="unfinished">Du bis nun als %1 bekannt</translation>
+        <translation>Du bis nun als %1 bekannt</translation>
     </message>
     <message>
         <source>Nickname change of an unknown person</source>
-        <translation type="unfinished">Spitznamen Änderung einer unbekannten Person</translation>
+        <translation>Spitznamen Änderung einer unbekannten Person</translation>
     </message>
     <message>
         <source>%1 is now known as %2</source>
-        <translation type="unfinished">%1 ist nun bekannt als %2</translation>
+        <translation>%1 ist nun bekannt als %2</translation>
     </message>
 </context>
 <context>
@@ -671,11 +673,11 @@ enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
     </message>
     <message>
         <source>Display time in chat log</source>
-        <translation type="unfinished"></translation>
+        <translation>Zeit im Logfile anzeigen</translation>
     </message>
     <message>
         <source>Keyboard Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Tastaturabkürzungen</translation>
     </message>
 </context>
 <context>
@@ -728,27 +730,27 @@ enthalten, die mit &apos;#&apos; oder &apos;+&apos; anfangen</translation>
     <name>QObject</name>
     <message>
         <source> User</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>Opie IRC</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source> gives channel operator status to </source>
-        <translation type="unfinished"></translation>
+        <translation>gibt Channel Operator Status an</translation>
     </message>
     <message>
         <source> removes channel operator status from </source>
-        <translation type="unfinished"></translation>
+        <translation>entfernt Channel Operator Status von</translation>
     </message>
     <message>
         <source> gives voice to </source>
-        <translation type="unfinished"></translation>
+        <translation>gibt Voice an</translation>
     </message>
     <message>
         <source> removes voice from </source>
-        <translation type="unfinished"></translation>
+        <translation>entfernt Voice von</translation>
     </message>
 </context>
 </TS>

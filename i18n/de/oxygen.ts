@@ -28,7 +28,7 @@
     </message>
     <message>
         <source>CalcDlg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>

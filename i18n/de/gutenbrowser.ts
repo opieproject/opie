@@ -1,4 +1,5 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>Edit_Title</name>
     <message>
@@ -22,18 +23,18 @@
     </message>
     <message>
         <source>Size</source>
-        <translation>Größe</translation>
+        <translation>GrÃ¶ÃŸe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation>Der kleine braune Fuchs springt über den faulen Hund</translation>
+        <translation>Der kleine braune Fuchs springt Ã¼ber den faulen Hund</translation>
     </message>
 </context>
 <context>
     <name>Gutenbrowser</name>
     <message>
         <source>Running wget</source>
-        <translation>Führe wget aus</translation>
+        <translation>FÃ¼hre wget aus</translation>
     </message>
     <message>
         <source>Download Library Index, or FTP sites?</source>
@@ -44,9 +45,9 @@
 Project Gutenberg Library Index?
 or select an ftp site?
 </source>
-        <translation>Möchten Sie die neuesten
+        <translation>MÃ¶chten Sie die neuesten
 Projekt Gutenberg Bibliotheken Index herunterladen?
-Oder eine FTP Seite wählen?
+Oder eine FTP Seite wÃ¤hlen?
 </translation>
     </message>
     <message>
@@ -83,7 +84,7 @@ Oder eine FTP Seite wählen?
     </message>
     <message>
         <source>Open</source>
-        <translation>Öffnen</translation>
+        <translation>Ã–ffnen</translation>
     </message>
     <message>
         <source>Search google.com</source>
@@ -106,7 +107,7 @@ Oder eine FTP Seite wählen?
     <name>HelpMe</name>
     <message>
         <source>Based on gutenbook.pl, available from http://www.gutenbook.org</source>
-        <translation>Basierend auf gutenbook.pl, verfügbar von http://www.gutenbook.org</translation>
+        <translation>Basierend auf gutenbook.pl, verfÃ¼gbar von http://www.gutenbook.org</translation>
     </message>
     <message>
         <source>Much appreciation to Lee Burgess,</source>
@@ -115,7 +116,7 @@ Oder eine FTP Seite wählen?
     <message>
         <source>for the original idea and concept of gutenbook.
 </source>
-        <translation>für die originale Idee und das Konzept von gutenbook.
+        <translation>fÃ¼r die originale Idee und das Konzept von gutenbook.
 </translation>
     </message>
     <message>
@@ -126,7 +127,7 @@ Oder eine FTP Seite wählen?
     </message>
     <message>
         <source>For bug reports, comments or questions about Gutenbrowser, email</source>
-        <translation>Für Fehlermeldungen, Kommentare oder Fragen über Gutenbrowser schicken Sie einen EMail an</translation>
+        <translation>FÃ¼r Fehlermeldungen, Kommentare oder Fragen Ã¼ber Gutenbrowser schicken Sie einen EMail an</translation>
     </message>
     <message>
         <source>ljp@llornkcor.com
@@ -140,7 +141,7 @@ Made using Qt, Qt Embedded, and Qtopia, a cross platform development API
 http://www.trolltech.com
 
 </source>
-        <translation>Erstellt mit Qt, Qt Embedded und Qtopia, eine Plattformübergreifende Entwicklungs API
+        <translation>Erstellt mit Qt, Qt Embedded und Qtopia, eine PlattformÃ¼bergreifende Entwicklungs API
 http://www.trolltech.com
 
 </translation>
@@ -159,11 +160,11 @@ http://www.trolltech.com
     </message>
     <message>
         <source>(3) Only documentation for</source>
-        <translation>(3) Nur Dokumentation für</translation>
+        <translation>(3) Nur Dokumentation fÃ¼r</translation>
     </message>
     <message>
         <source>useless programs transcends the</source>
-        <translation>unnützte Programme übersteigen die</translation>
+        <translation>unnÃ¼tzte Programme Ã¼bersteigen die</translation>
     </message>
     <message>
         <source>first two laws.
@@ -174,7 +175,7 @@ http://www.trolltech.com
     <message>
         <source>Everything is temporary, anyway....
  :o)</source>
-        <translation>Alles ist temporär, immerhin...
+        <translation>Alles ist temporÃ¤r, immerhin...
 :o)</translation>
     </message>
 </context>
@@ -182,19 +183,19 @@ http://www.trolltech.com
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation>&amp;Datei öffnen</translation>
+        <translation>&amp;Datei Ã¶ffnen</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation>&amp;Schließen</translation>
+        <translation>&amp;SchlieÃŸen</translation>
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation>&amp;Rückwärts</translation>
+        <translation>&amp;RÃ¼ckwÃ¤rts</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation>&amp;Vorwärts</translation>
+        <translation>&amp;VorwÃ¤rts</translation>
     </message>
     <message>
         <source>&amp;Home</source>
@@ -202,7 +203,7 @@ http://www.trolltech.com
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation>Füge Lesezeichen hinzu</translation>
+        <translation>FÃ¼ge Lesezeichen hinzu</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -222,11 +223,11 @@ http://www.trolltech.com
     </message>
     <message>
         <source>Backward</source>
-        <translation>Rückwärts</translation>
+        <translation>RÃ¼ckwÃ¤rts</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation>Vorwärts</translation>
+        <translation>VorwÃ¤rts</translation>
     </message>
     <message>
         <source>Home</source>
@@ -237,219 +238,217 @@ http://www.trolltech.com
     <name>LibraryDialog</name>
     <message>
         <source>Library Index - using master pg index.</source>
-        <translation type="unfinished"></translation>
+        <translation>Bibliothek Index - Master pg verwenden.</translation>
     </message>
     <message>
         <source>Library Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Bibliotheken Suche</translation>
     </message>
     <message>
         <source>Downloading Gutenberg Index....</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade Gutenberg Index herunter...</translation>
     </message>
     <message>
         <source>Running wget</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe wget aus</translation>
     </message>
     <message>
         <source>Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel</translation>
     </message>
     <message>
         <source>Author</source>
-        <translation type="unfinished"></translation>
+        <translation>Author</translation>
     </message>
     <message>
         <source>Year</source>
-        <translation type="unfinished"></translation>
+        <translation>Jahr</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>A-F</source>
-        <translation type="unfinished"></translation>
+        <translation>A-F</translation>
     </message>
     <message>
         <source>G-M</source>
-        <translation type="unfinished"></translation>
+        <translation>G-M</translation>
     </message>
     <message>
         <source>N-R</source>
-        <translation type="unfinished"></translation>
+        <translation>N-R</translation>
     </message>
     <message>
         <source>S-Z</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source></source>
-        <translation type="unfinished"></translation>
+        <translation>S-Z</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Einstellungen</translation>
     </message>
     <message>
         <source>Open Automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Automatisch öffnen</translation>
     </message>
     <message>
         <source>Last name first 
 (requires library restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Letzter Name zuerst 
+(benötigt neustart der Bibliothek)
+</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Schliessen</translation>
     </message>
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Fehler beim Öffnen der Bibliothek Index. Bitte laden Sie ein neues herunter &lt;/P&gt;</translation>
     </message>
 </context>
 <context>
     <name>NetworkDialog</name>
     <message>
         <source>FTP Download</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP Download</translation>
     </message>
     <message>
         <source>Download should start shortly</source>
-        <translation type="unfinished"></translation>
+        <translation>Download beginnt in kürze</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>OpenEtext</name>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <source>Remove Etext</source>
-        <translation type="unfinished"></translation>
+        <translation>Text löschen</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Ja</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Sea&amp;rch</source>
-        <translation type="unfinished"></translation>
+        <translation>Su&amp;che</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <source>Case Sensitive</source>
-        <translation type="unfinished"></translation>
+        <translation>Kontext Sensitiv</translation>
     </message>
 </context>
 <context>
     <name>SearchResultsDlg</name>
     <message>
         <source>Search Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Suchergebnisse</translation>
     </message>
     <message>
         <source>&amp;Download</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Runterladen</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
 </context>
 <context>
     <name>optionsDialog</name>
     <message>
         <source>Opera</source>
-        <translation type="unfinished"></translation>
+        <translation>Opera</translation>
     </message>
     <message>
         <source>Konqueror</source>
-        <translation type="unfinished"></translation>
+        <translation>Konqueror</translation>
     </message>
     <message>
         <source>wget</source>
-        <translation type="unfinished"></translation>
+        <translation>wget</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation>Text</translation>
     </message>
     <message>
         <source>Downloading ftp sites....</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade ftp Seiten runter ...</translation>
     </message>
     <message>
         <source>Running wget</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe wget aus</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz</translation>
     </message>
     <message>
         <source>ftpSiteDlg</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <source>List File not opened sucessfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Listendatei konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>File not opened sucessfully.</source>
-        <translation type="unfinished"></translation>
+        <translation>Datei konnte nicht geöffnet werden.</translation>
     </message>
     <message>
         <source>Main</source>
-        <translation type="unfinished"></translation>
+        <translation>Haupt</translation>
     </message>
     <message>
         <source>FTP</source>
-        <translation type="unfinished"></translation>
+        <translation>FTP</translation>
     </message>
     <message>
         <source>http://sailor.gutenberg.org</source>
-        <translation type="unfinished"></translation>
+        <translation>http://sailor.gutenberg.org</translation>
     </message>
     <message>
         <source>http://www.prairienet.org/pg</source>
-        <translation type="unfinished"></translation>
+        <translation>http://www.prairienet.org/pg</translation>
     </message>
     <message>
         <source>HTTP</source>
-        <translation type="unfinished"></translation>
+        <translation>HTTP</translation>
     </message>
     <message>
         <source>Gutenbrowser Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Gutenbrowser Einstellungen</translation>
     </message>
 </context>
 </TS>

@@ -133,7 +133,7 @@ Login einzustellen.</translation>
     </message>
     <message>
         <source>To be able to protect your PDA with one or more authentication plugins (for example, a simple PIN authentication), you must install at least one &lt;em&gt;opie-securityplugin-*&lt;/em&gt; package! Once you have done that, you will be able to configure your PDA protection here.</source>
-        <translation type="unfinished"></translation>
+        <translation>Um Ihren PDA zu schützen müssen Sie ein &lt;em&gt;opie-securityplugin&lt;/em&gt; Paket installieren. Danach können sie den Schutz hier einstellen.</translation>
     </message>
 </context>
 <context>
@@ -432,8 +432,10 @@ geänderten Daten gehen dabei verloren!</translation>
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    IntelliSync will disable the password check but you&apos;ll be prompted to accept the connection.
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Opie1.0 will be compatible with QtopiaDesktop, MultiSync and KitchenSync
 <byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    Qtopia1.7 will alter the way data is send to the client and will not work with older clients.
-<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/>    </source>
-        <translation type="unfinished"></translation>
+<byte value="x9"/><byte value="x9"/><byte value="x9"/><byte value="x9"/></source>
+        <translation>IntelliSync akzeptiert jedes Passwort aber die Verbindung muss immer bestätigt werden.
+Opie1.0 ist kompatibel it QtopiaDesktop, MultiSync und KitchenSync
+QTopia1.7 verwendet eine eigene Datenübertragung und funktioniert nicht mit älteren Programmen.</translation>
     </message>
 </context>
 </TS>

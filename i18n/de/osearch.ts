@@ -158,7 +158,7 @@
     </message>
     <message>
         <source>Search in dates</source>
-        <translation type="unfinished"> </translation>
+        <translation>In den Terminen suchen</translation>
     </message>
     <message>
         <source>Search content</source>
