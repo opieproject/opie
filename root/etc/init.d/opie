@@ -9,11 +9,6 @@ export QPEDIR=/opt/QtPalmtop
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$OPIEDIR/lib
 export PATH=$PATH:$OPIEDIR/bin
 
-#this sets the iPaqs powerbutton to mapable
-if [ -e /proc/sys/ts/suspend_button_mode ] ; then
-    echo 1 > /proc/sys/ts/suspend_button_mode
-fi
-
 if [ ! -x $OPIEDIR/bin/qpe ] ; then 
     echo Opie not installed
     exit 0  
