@@ -557,7 +557,7 @@ void Desktop::togglePower()
   
   system("apm --suspend");
   
-  sleep(2);
+  
 
   QWSServer::screenSaverActivate( FALSE );
   {
@@ -568,7 +568,7 @@ void Desktop::togglePower()
   if ( wasloggedin ) {
     login(TRUE);
   }
-  
+  sleep(1);
   execAutoStart();
   //qcopBridge->closeOpenConnections();
   //qDebug("called togglePower()!!!!!!");
