@@ -1,26 +1,26 @@
 /*
-                             This file is part of the OPIE Project
+                     This file is part of the OPIE Project
                =.
-             .=l.            Copyright (c)  2002 OPIE team <opie@handhelds.org?>
-           .>+-=
- _;:,     .>    :=|.         This file is free software; you can
-.> <`_,   >  .   <=          redistribute it and/or modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.
-    .i_,=:_.      -<s.       This file is distributed in the hope that
-     +  .  -:.       =       it will be useful, but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU General
-..}^=.=       =       ;      Public License for more details.
-++=   -.     .`     .:
- :     =  ...= . :.=-        You should have received a copy of the GNU
- -.   .:....=;==+<;          General Public License along with this file;
-  -_. . .   )=.  =           see the file COPYING. If not, write to the
-    --        :-=`           Free Software Foundation, Inc.,
+      .=l.            Copyright (c)  2002 OPIE team <opie@handhelds.org?>
+     .>+-=
+_;:,   .>  :=|.         This file is free software; you can
+.> <`_,  > .  <=          redistribute it and/or modify it under
+:`=1 )Y*s>-.--  :           the terms of the GNU General Public
+.="- .-=="i,   .._         License as published by the Free Software
+- .  .-<_>   .<>         Foundation; either version 2 of the License,
+  ._= =}    :          or (at your option) any later version.
+  .%`+i>    _;_.
+  .i_,=:_.   -<s.       This file is distributed in the hope that
+  + . -:.    =       it will be useful, but WITHOUT ANY WARRANTY;
+  : ..  .:,   . . .    without even the implied warranty of
+  =_    +   =;=|`    MERCHANTABILITY or FITNESS FOR A
+ _.=:.    :  :=>`:     PARTICULAR PURPOSE. See the GNU General
+..}^=.=    =    ;      Public License for more details.
+++=  -.   .`   .:
+:   = ...= . :.=-        You should have received a copy of the GNU
+-.  .:....=;==+<;          General Public License along with this file;
+ -_. . .  )=. =           see the file COPYING. If not, write to the
+  --    :-=`           Free Software Foundation, Inc.,
                              59 Temple Place - Suite 330,
                              Boston, MA 02111-1307, USA.
 
@@ -51,7 +51,7 @@
 using namespace Opie::Ui;
 using namespace Opie::Core;
 MainWindow::MainWindow( QWidget *parent , const char *name,  bool modal, WFlags f )
-    : QDialog( 0x0, 0x0, TRUE, 0 )
+    : QDialog( parent, name, modal, f )
 {
     setCaption( tr( "SystemTime" ) );
 
@@ -187,6 +187,11 @@ void MainWindow::runNTP()
         ntpTab->addNtpOutput( output );
     }
 
+    // Disable set time buttons & change app caption to indicate time update is happening
+    ntpTab->setNTPBtnEnabled( false );
+    timeTab->setNTPBtnEnabled( false );
+    setCaption( tr( "Retrieving time from network..." ) );
+
     if ( !ntpProcess )
     {
         ntpProcess = new OProcess();
@@ -206,6 +211,11 @@ void MainWindow::runNTP()
         QMessageBox::critical( this, tr( "Error" ), tr( "Error while getting time from network." ) );
         if ( ntpTabEnabled )
             ntpTab->addNtpOutput( tr( "Error while executing ntpdate" ) );
+
+        // Re-enable set time buttons & change app caption to indicate time update is happening
+        ntpTab->setNTPBtnEnabled( true );
+        timeTab->setNTPBtnEnabled( true );
+        setCaption( tr( "SystemTime" ) );
     }
 }
 
@@ -298,6 +308,11 @@ void MainWindow::slotNtpFinished( OProcess *p )
     QString output;
     QDateTime dt = QDateTime::currentDateTime();
 
+    // Re-enable set time buttons & change app caption to indicate time update is happening
+    ntpTab->setNTPBtnEnabled( true );
+    timeTab->setNTPBtnEnabled( true );
+    setCaption( tr( "SystemTime" ) );
+
     //  Verify run was successful
     if ( p->exitStatus() != 0 || !p->normalExit() )
     {
@@ -351,7 +366,7 @@ void MainWindow::slotNtpFinished( OProcess *p )
         QString grpname = QString( "lookup_" ).append( QString::number( lookupCount ) );
         config.setGroup( grpname );
         lookupCount++;
-        predictTab->setShiftPerSec( timeShift / secsSinceLast );
+        predictTab->setShiftPerSec( (int)(timeShift / secsSinceLast) );
         config.writeEntry( "secsSinceLast", secsSinceLast );
         config.writeEntry( "timeShift", QString::number( timeShift ) );
         config.setGroup( "lookups" );
