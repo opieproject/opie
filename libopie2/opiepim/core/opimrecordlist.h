@@ -33,6 +33,7 @@
 /* OPIE */
 #include <opie2/opimtemplatebase.h>
 #include <opie2/opimrecord.h>
+//#include <opie2/odebug.h>
 
 /* QT */
 #include <qarray.h>
@@ -189,7 +190,7 @@ OPimRecordListIterator<T>::~OPimRecordListIterator()
 template <class T>
 OPimRecordListIterator<T>::OPimRecordListIterator( const OPimRecordListIterator<T>& it )
 {
-    //    qWarning("OPimRecordListIterator copy c'tor");
+    //owarn << "OPimRecordListIterator copy c'tor" << oendl;
     m_uids = it.m_uids;
     m_current = it.m_current;
     m_temp = it.m_temp;
@@ -215,7 +216,7 @@ OPimRecordListIterator<T> &OPimRecordListIterator<T>::operator=( const OPimRecor
 template <class T>
 T OPimRecordListIterator<T>::operator*()
 {
-    //qWarning("operator* %d %d", m_current,  m_uids[m_current] );
+    //owarn << "operator* " << m_current << " " << m_uids[m_current] << oendl;
     if ( !m_end )
         m_record = m_temp->find( m_uids[ m_current ], m_uids, m_current,
                                  m_direction ? Base::Forward :

@@ -1173,7 +1173,7 @@ void OPimContact::setAnniversary( const QDate &v )
 QDate OPimContact::birthday() const
 {
     QString str = find( Qtopia::Birthday );
-    // qWarning ("Birthday %s", str.latin1() );
+    // owarn << "Birthday " << str << oendl;
     if ( !str.isEmpty() )
         return OPimDateConversion::dateFromString ( str );
     else
@@ -1188,7 +1188,7 @@ QDate OPimContact::anniversary() const
 {
     QDate empty;
     QString str = find( Qtopia::Anniversary );
-    // qWarning ("Anniversary %s", str.latin1() );
+    // owarn << "Anniversary " << str << oendl;
     if ( !str.isEmpty() )
         return OPimDateConversion::dateFromString ( str );
     else

@@ -227,8 +227,8 @@ void OPimNotifyManager::alarmsFromString( const QString& str )
     {
         QStringList alarm = QStringList::split( ":", ( *it ), TRUE ); // allow empty
         owarn << "alarm: " << alarm.join( "___" ) << "" << oendl;
-        qWarning( "alarm[0]: %s %s", alarm[ 0 ].latin1(),
-                  OPimDateConversion::dateTimeFromString( alarm[ 0 ] ).toString().latin1() );
+        owarn << "alarm[0]: " << alarm[ 0 ] << " "
+              << OPimDateConversion::dateTimeFromString( alarm[ 0 ] ).toString() << oendl;
         OPimAlarm al( alarm[ 2 ].toInt(), OPimDateConversion::dateTimeFromString( alarm[ 0 ] ),
                       alarm[ 1 ].toInt() );
         add( al );

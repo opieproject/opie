@@ -36,6 +36,16 @@
 #include "ocontactaccess.h"
 #include "obackendfactory.h"
 
+/* OPIE */
+#include <opie2/ocontactaccessbackend_xml.h>
+#include <opie2/opimresolver.h>
+#include <opie2/opimglobal.h>
+#include <opie2/odebug.h>
+
+//#include <qpe/qcopenvelope_qws.h>
+#include <qpe/global.h>
+
+/* QT */
 #include <qasciidict.h>
 #include <qdatetime.h>
 #include <qfile.h>
@@ -43,117 +53,112 @@
 #include <qlist.h>
 #include <qcopchannel_qws.h>
 
-//#include <qpe/qcopenvelope_qws.h>
-#include <qpe/global.h>
-
+/* STD */
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 
-#include <opie2/ocontactaccessbackend_xml.h>
-#include <opie2/opimresolver.h>
-#include <opie2/opimglobal.h>
 
 namespace Opie {
 
 OPimContactAccess::OPimContactAccess ( const QString appname, const QString ,
-			 OPimContactAccessBackend* end, bool autosync ):
-	OPimAccessTemplate<OPimContact>( end )
+             OPimContactAccessBackend* end, bool autosync ):
+    OPimAccessTemplate<OPimContact>( end )
 {
         /* take care of the backend. If there is no one defined, we
-	 * will use the XML-Backend as default (until we have a cute SQL-Backend..).
-	 */
+     * will use the XML-Backend as default (until we have a cute SQL-Backend..).
+     */
         if( end == 0 ) {
-		qWarning ("Using BackendFactory !");
-		end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
+        owarn << "Using BackendFactory !" << oendl;
+        end = OBackendFactory<OPimContactAccessBackend>::defaultBackend( OPimGlobal::CONTACTLIST, appname );
         }
-	// Set backend locally and in template
+    // Set backend locally and in template
         m_backEnd = end;
-	OPimAccessTemplate<OPimContact>::setBackEnd (end);
+    OPimAccessTemplate<OPimContact>::setBackEnd (end);
 
 
-	/* Connect signal of external db change to function */
-	QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
-	connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+    /* Connect signal of external db change to function */
+    QCopChannel *dbchannel = new QCopChannel( "QPE/PIM", this );
+    connect( dbchannel, SIGNAL(received(const QCString&,const QByteArray&)),
                this, SLOT(copMessage(const QCString&,const QByteArray&)) );
-	if ( autosync ){
-		QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
-		connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
-			 this, SLOT(copMessage(const QCString&,const QByteArray&)) );
-	}
+    if ( autosync ){
+        QCopChannel *syncchannel = new QCopChannel( "QPE/Sync", this );
+        connect( syncchannel, SIGNAL(received(const QCString&,const QByteArray&)),
+             this, SLOT(copMessage(const QCString&,const QByteArray&)) );
+    }
 
 
 }
 OPimContactAccess::~OPimContactAccess ()
 {
-	/* The user may forget to save the changed database, therefore try to
-	 * do it for him..
-	 */
-	save();
-	// delete m_backEnd; is done by template..
+    /* The user may forget to save the changed database, therefore try to
+     * do it for him..
+     */
+    save();
+    // delete m_backEnd; is done by template..
 }
 
 
 bool OPimContactAccess::save ()
 {
-	/* If the database was changed externally, we could not save the
-	 * Data. This will remove added items which is unacceptable !
-	 * Therefore: Reload database and merge the data...
-	 */
-	if ( OPimAccessTemplate<OPimContact>::wasChangedExternally() )
-		reload();
+    /* If the database was changed externally, we could not save the
+     * Data. This will remove added items which is unacceptable !
+     * Therefore: Reload database and merge the data...
+     */
+    if ( OPimAccessTemplate<OPimContact>::wasChangedExternally() )
+        reload();
 
-	bool status = OPimAccessTemplate<OPimContact>::save();
-	if ( !status ) return false;
+    bool status = OPimAccessTemplate<OPimContact>::save();
+    if ( !status ) return false;
 
-	/* Now tell everyone that new data is available.
-	 */
-	QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
+    /* Now tell everyone that new data is available.
+     */
+    QCopEnvelope e( "QPE/PIM", "addressbookUpdated()" );
 
-	return true;
+    return true;
 }
 
 const uint OPimContactAccess::querySettings()
 {
-	return ( m_backEnd->querySettings() );
+    return ( m_backEnd->querySettings() );
 }
 
 bool OPimContactAccess::hasQuerySettings ( int querySettings ) const
 {
-	return ( m_backEnd->hasQuerySettings ( querySettings ) );
+    return ( m_backEnd->hasQuerySettings ( querySettings ) );
 }
 OPimRecordList<OPimContact> OPimContactAccess::sorted( bool ascending, int sortOrder, int sortFilter, int cat ) const
 {
-	QArray<int> matchingContacts = m_backEnd -> sorted( ascending, sortOrder, sortFilter, cat );
-	return ( OPimRecordList<OPimContact>(matchingContacts, this) );
+    QArray<int> matchingContacts = m_backEnd -> sorted( ascending, sortOrder, sortFilter, cat );
+    return ( OPimRecordList<OPimContact>(matchingContacts, this) );
 }
 
 
 bool OPimContactAccess::wasChangedExternally()const
 {
-	return ( m_backEnd->wasChangedExternally() );
+    return ( m_backEnd->wasChangedExternally() );
 }
 
 
 void OPimContactAccess::copMessage( const QCString &msg, const QByteArray & )
 {
-	if ( msg == "addressbookUpdated()" ){
-		qWarning ("OPimContactAccess: Received addressbokUpdated()");
-		emit signalChanged ( this );
-	} else if ( msg == "flush()" ) {
-		qWarning ("OPimContactAccess: Received flush()");
-		save ();
-	} else if ( msg == "reload()" ) {
-		qWarning ("OPimContactAccess: Received reload()");
-		reload ();
-		emit signalChanged ( this );
-	}
+    if ( msg == "addressbookUpdated()" ){
+        owarn << "OPimContactAccess: Received addressbokUpdated()" << oendl;
+        emit signalChanged ( this );
+    } else if ( msg == "flush()" ) {
+        owarn << "OPimContactAccess: Received flush()" << oendl;
+        save ();
+    } else if ( msg == "reload()" ) {
+        owarn << "OPimContactAccess: Received reload()" << oendl;
+        reload ();
+        emit signalChanged ( this );
+    }
 }
 
 int OPimContactAccess::rtti() const
 {
-	return OPimResolver::AddressBook;
+    return OPimResolver::AddressBook;
 }
 
 }

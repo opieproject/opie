@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
                              Copyright (C) Holger Freyther <zecke@handhelds.org>
-			     Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
+                 Copyright (C) Stefan Eilers <eilers.stefan@epost.de>
               =.             Copyright (C) The Opie Team <opie-devel@handhelds.org>
             .=l.
            .>+-=
@@ -30,14 +30,17 @@
 #ifndef OPIE_PIM_ACCESS_TEMPLATE_H
 #define OPIE_PIM_ACCESS_TEMPLATE_H
 
-#include <qarray.h>
-
+/* OPIE */
 #include <opie2/opimrecord.h>
 #include <opie2/opimaccessbackend.h>
 #include <opie2/opimrecordlist.h>
 
 #include <opie2/opimcache.h>
 #include <opie2/opimtemplatebase.h>
+#include <opie2/odebug.h>
+
+/* QT */
+#include <qarray.h>
 
 namespace Opie {
 
@@ -205,7 +208,7 @@ OPimAccessTemplate<T>::OPimAccessTemplate( BackEnd* end )
 }
 template <class T>
 OPimAccessTemplate<T>::~OPimAccessTemplate() {
-    qWarning("~OPimAccessTemplate<T>");
+    owarn << "~OPimAccessTemplate<T>" << oendl;
     delete m_backEnd;
 }
 template <class T>
@@ -215,8 +218,8 @@ bool OPimAccessTemplate<T>::load() {
 }
 template <class T>
 bool OPimAccessTemplate<T>::reload() {
-	invalidateCache();  // zecke: I think this should be added (se)
-	return m_backEnd->reload();
+    invalidateCache();  // zecke: I think this should be added (se)
+    return m_backEnd->reload();
 }
 template <class T>
 bool OPimAccessTemplate<T>::save() {
@@ -260,7 +263,7 @@ T OPimAccessTemplate<T>::find( int uid, const QArray<int>& ar,
      * after a find this way we would
      * avoid two finds in QCache...
      */
-    // qWarning("find it now %d", uid );
+    // owarn << "find it now " << uid << oendl;
     if (m_cache.contains( uid ) ) {
         return m_cache.find( uid );
     }

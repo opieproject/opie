@@ -137,8 +137,8 @@ bool OPimContactAccessBackend_XML::save()
     // move the file over, I'm just going to use the system call
     // because, I don't feel like using QDir.
     if ( ::rename( strNewFile.latin1(), m_fileName.latin1() ) < 0 ) {
-        qWarning( "problem renaming file %s to %s, errno: %d",
-              strNewFile.latin1(), m_journalName.latin1(), errno );
+        owarn << "problem renaming file " << strNewFile << " to " << m_journalName
+              << ", errno: " << errno << oendl;
         // remove the tmp file...
         QFile::remove( strNewFile );
     }
@@ -278,15 +278,13 @@ QArray<int> OPimContactAccessBackend_XML::queryByExample ( const OPimContact &qu
                             // Check whether the birthday/anniversary date is between
                             // the current/given date and the maximum date
                             // ( maximum time range ) !
-                            qWarning("Checking if %s is between %s and %s ! ",
-                                 checkDate->toString().latin1(),
-                                 current.toString().latin1(),
-                                 queryDate->toString().latin1() );
+                            owarn << "Checking if " << checkDate->toString() << " is between " << current.toString()
+                                  << " and " << queryDate->toString() << " ! " << oendl;
                             if ( current.daysTo( *queryDate ) >= 0 ){
                                 if ( !( ( *checkDate >= current ) &&
                                     ( *checkDate <= *queryDate ) ) ){
                                     allcorrect = false;
-                                    qWarning (" Nope!..");
+                                    owarn << " Nope!.." << oendl;
                                 }
                             }
                         }
@@ -607,8 +605,8 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
         /* Search Tag "Contacts" which is the parent of all Contacts */
         while( element && !isJournal ){
             if( element->tagName() != QString::fromLatin1("Contacts") ){
-                //qWarning ("OPimContactDefBack::Searching for Tag \"Contacts\"! Found: %s",
-                //    element->tagName().latin1());
+                //owarn << "OPimContactDefBack::Searching for Tag \"Contacts\"! Found: "
+                //      << element->tagName() << oendl;
                 element = element->nextChild();
             } else {
                 element = element->firstChild();
@@ -618,16 +616,16 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
         /* Parse all Contacts and ignore unknown tags */
         while( element ){
             if( element->tagName() != QString::fromLatin1("Contact") ){
-                //qWarning ("OPimContactDefBack::Searching for Tag \"Contact\"! Found: %s",
-                //    element->tagName().latin1());
+                //owarn << "OPimContactDefBack::Searching for Tag \"Contact\"! Found: "
+                //      << element->tagName() << oendl;
                 element = element->nextChild();
                 continue;
             }
             /* Found alement with tagname "contact", now parse and store all
              * attributes contained
              */
-            //qWarning("OPimContactDefBack::load element tagName() : %s",
-            //   element->tagName().latin1() );
+            //owarn << "OPimContactDefBack::load element tagName() : "
+            //      << element->tagName() << oendl;
             QString dummy;
             foundAction = false;
 
@@ -636,7 +634,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
             contactMap.clear();
             customMap.clear();
             for( it = aMap.begin(); it != aMap.end(); ++it ){
-                // qWarning ("Read Attribute: %s=%s", it.key().latin1(),it.data().latin1());
+                // owarn << "Read Attribute: " << it.key() << "=" << it.data() << oendl;
 
                 int *find = dict[ it.key() ];
                 /* Unknown attributes will be stored as "Custom" elements */
@@ -662,7 +660,7 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
                 case JOURNALACTION:
                     action = journal_action(it.data().toInt());
                     foundAction = true;
-                    qWarning ("ODefBack(journal)::ACTION found: %d", action);
+                    owarn << "ODefBack(journal)::ACTION found: " << action << oendl;
                     break;
                 case JOURNALROW:
                     journalKey = it.data().toInt();
@@ -687,16 +685,14 @@ bool OPimContactAccessBackend_XML::load( const QString filename, bool isJournal 
                     break;
                 case ACTION_REMOVE:
                     if ( !remove (contact.uid()) )
-                        qWarning ("ODefBack(journal)::Unable to remove uid: %d",
-                              contact.uid() );
+                        owarn << "ODefBack(journal)::Unable to remove uid: " << contact.uid() << oendl;
                     break;
                 case ACTION_REPLACE:
                     if ( !replace ( contact ) )
-                        qWarning ("ODefBack(journal)::Unable to replace uid: %d",
-                              contact.uid() );
+                        owarn << "ODefBack(journal)::Unable to replace uid: " << contact.uid() << oendl;
                     break;
                 default:
-                    qWarning ("Unknown action: ignored !");
+                    owarn << "Unknown action: ignored !" << oendl;
                     break;
                 }
             }else{
