@@ -51,6 +51,7 @@
 #include "playlistwidget.h"
 #include "mediaplayerstate.h"
 #include "inputDialog.h"
+#include "playlistfileview.h"
 
 //only needed for the random play
 #include <stdlib.h>
@@ -149,7 +150,7 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     QGridLayout *Alayout = new QGridLayout( aTab );
     Alayout->setSpacing( 2 );
     Alayout->setMargin( 2 );
-    audioView = new QListView( aTab, "Audioview" );
+    audioView = new PlayListFileView( aTab, "Audioview" );
     audioView->addColumn( tr( "Title" ), 140 );
     audioView->addColumn( tr( "Size" ),  -1 );
     audioView->addColumn( tr( "Media" ), 0 );
@@ -171,7 +172,7 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     QGridLayout *Vlayout = new QGridLayout( vTab );
     Vlayout->setSpacing( 2 );
     Vlayout->setMargin( 2 );
-    videoView = new QListView( vTab, "Videoview" );
+    videoView = new PlayListFileView( vTab, "Videoview" );
     videoView->addColumn( tr( "Title" ), 140);
     videoView->addColumn( tr( "Size" ), -1 );
     videoView->addColumn(tr( "Media" ), 0 );
