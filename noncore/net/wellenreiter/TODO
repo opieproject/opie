@@ -8,7 +8,7 @@
 - identification of probe requests
   i.e. other sniffers around
 
-- decloaking of falsely reported zero-length SSIDs
+- decloaking of falsely reported SSIDs [done]
 
 - option to launch an external application (i.e. qcop) on
   - new net
@@ -33,3 +33,6 @@
   packet dissection framework... (unlikely)
 
 - revamp hex window, make it more sophisticated than just a QMultiLineEdit
+
+- write kismet-like .network format and format to be importable into AutoRoute
+

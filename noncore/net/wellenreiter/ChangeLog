@@ -1,5 +1,10 @@
 2004-??-??	Michael Lauer		<mickey@Vanille.de>
 
+	* Rewrote the simple actions on new {Network, Client, Station}. Besides playing a sound or
+	  blinking a LED, a user customizable script can now be executed, if something has been
+	  detected. This opens up many possibilities, i.e. a qcop to qpegps or exec'ing Flite.
+	* Added decloaking of cloaked ESSIDs (length != 0, but essid[0] == \0)
+	* Hided the 'Parse' Tab in the configuration window. Not functional now and may come later
 	* Added parsing of control frames. Display stations sending them SSID "???" for now.
 	* Added command line option "-nocheck" to skip non-root and dhcp tests
 	* Improved the speed reading the manufacturer list

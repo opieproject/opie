@@ -58,23 +58,23 @@ GpsLocation GPS::position() const
 
             QString str;
             stream.readRawBytes( &buf[0], 7 );
-            float lat = -111.111;
+            float lat = -111;
             stream >> lat;
             stream.skipWhiteSpace();
-            float lon = -111.111;
+            float lon = -111;
             stream >> lon;
             stream.readRawBytes( &buf[0], 200 ); // read and discard the stuff until EOF
 
             return GpsLocation( lat, lon );
         }
     }
-    return GpsLocation( -111.111, -111.111 );
+    return GpsLocation( -111, -111 );
 }
 
 
 QString GpsLocation::dmsPosition() const
 {
-    if ( _latitude == -111.111 || _longitude == -111.11 )
+    if ( _latitude == -111 || _longitude == -111 )
         return "N/A";
     if ( _latitude == 0.0 && _longitude == 0.0 )
         return "NULL";

@@ -109,9 +109,6 @@ class MScanListItem: public OListViewItem
     virtual void serializeTo( QDataStream& s ) const;
     virtual void serializeFrom( QDataStream& s );
 
-  protected:
-    void playSound( const QString& ) const;
-
   private:
     QString _type;
     QString _essid;

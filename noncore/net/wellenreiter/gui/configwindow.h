@@ -57,9 +57,16 @@ class WellenreiterConfigWindow : public WellenreiterConfigBase
 
   public slots:
     void changedDeviceType(int);
+    void changedNetworkAction(int t);
+    void changedClientAction(int t);
+    void changedStationAction(int t);
     void getCaptureFileNameClicked();
     void performAutodetection();
     void channelAllClicked(int);
+    void performAction( const QString& );
+
+  protected:
+    void synchronizeActionsAndScripts();
 
   protected:
     QMap<QString, int> _devicetype;

@@ -17,6 +17,13 @@
 #include "configwindow.h"
 #include "mainwindow.h"
 
+/* OPIE */
+#include <opie2/onetwork.h>
+#ifdef QWS
+#include <opie2/oapplication.h>
+#include <opie2/oconfig.h>
+#endif
+
 /* QT */
 #include <qapplication.h>
 #include <qcheckbox.h>
@@ -26,17 +33,11 @@
 #include <qlayout.h>
 #include <qmap.h>
 #include <qpushbutton.h>
+#include <qtabwidget.h>
 #include <qtoolbutton.h>
 #include <qspinbox.h>
 #include <qtextstream.h>
 
-/* OPIE */
-#include <opie2/onetwork.h>
-
-#ifdef QWS
-#include <opie2/oapplication.h>
-#include <opie2/oconfig.h>
-#endif
 
 WellenreiterConfigWindow* WellenreiterConfigWindow::_instance = 0;
 
@@ -72,12 +73,18 @@ WellenreiterConfigWindow::WellenreiterConfigWindow( QWidget * parent, const char
     WellenreiterConfigWindow::_instance = this;
 
     connect( deviceType, SIGNAL( activated(int) ), this, SLOT( changedDeviceType(int) ) );
+    connect( newNetworkAction, SIGNAL( activated(int) ), this, SLOT( changedNetworkAction(int) ) );
+    connect( newClientAction, SIGNAL( activated(int) ), this, SLOT( changedClientAction(int) ) );
+    connect( newStationAction, SIGNAL( activated(int) ), this, SLOT( changedStationAction(int) ) );
     connect( getCaptureFileName, SIGNAL( clicked() ), this, SLOT( getCaptureFileNameClicked() ) );
 
     // make the checkbox 'channelAll' control all other channels
     connect( channelAll, SIGNAL( stateChanged(int) ), this, SLOT( channelAllClicked(int) ) );
 
     connect( autodetect, SIGNAL( clicked() ), this, SLOT( performAutodetection() ) );
+
+    // hide tab4 (parse) until Wellenreiter 1.2
+    tab->removePage( tab_4 );
 };
 
 
@@ -185,6 +192,36 @@ void WellenreiterConfigWindow::changedDeviceType(int t)
 }
 
 
+void WellenreiterConfigWindow::synchronizeActionsAndScripts()
+{
+    if ( newNetworkAction->currentItem() == 4 ) newNetworkScript->show(); else newNetworkScript->hide();
+    if ( newClientAction->currentItem() == 4 ) newClientScript->show(); else newClientScript->hide();
+    if ( newStationAction->currentItem() == 4 ) newStationScript->show(); else newStationScript->hide();
+
+    //newNetworkScript->setEnabled( newNetworkAction->currentItem() == 4 );
+    //newClientScript->setEnabled( newClientAction->currentItem() == 4 );
+    //newStationScript->setEnabled( newStationAction->currentItem() == 4 );
+}
+
+
+void WellenreiterConfigWindow::changedNetworkAction(int t)
+{
+    synchronizeActionsAndScripts();
+}
+
+
+void WellenreiterConfigWindow::changedClientAction(int t)
+{
+    synchronizeActionsAndScripts();
+}
+
+
+void WellenreiterConfigWindow::changedStationAction(int t)
+{
+    synchronizeActionsAndScripts();
+}
+
+
 void WellenreiterConfigWindow::getCaptureFileNameClicked()
 {
     QString name = ( (WellenreiterMainWindow*) qApp->mainWidget() )->getFileName(true);
@@ -232,6 +269,45 @@ int WellenreiterConfigWindow::gpsPort() const
 {
     bool ok;
     return useGPS() ? gpsdPort->value() : -1;
+}
+
+
+void WellenreiterConfigWindow::performAction( const QString& type )
+{
+    int action;
+    QString script;
+
+    if ( type == "network" )
+    {
+        action = newNetworkAction->currentItem();
+        script = newNetworkScript->text();
+    }
+    else if ( type == "managed" || type == "adhoc" )
+    {
+        action = newClientAction->currentItem();
+        script = newClientScript->text();
+    }
+    else if ( type == "station" )
+    {
+        action = newStationAction->currentItem();
+        script = newStationScript->text();
+    }
+    else
+    {
+        qWarning( "WellenreiterConfigWindow::performAction(): unknown type '%s'", (const char*) type ); 
+        return;
+    }
+
+    qDebug( "going to perform action %d (script='%s')", action, (const char*) script );
+
+    /*
+
+    if ( sound == "Ignore" ) return;
+    else if ( sound == "Touch" ) ODevice::inst()->touchSound();
+    else if ( sound == "Key" ) ODevice::inst()->keySound();
+    else if ( sound == "Alarm" ) ODevice::inst()->alarmSound();
+
+    */
 }
 
 
@@ -290,6 +366,13 @@ void WellenreiterConfigWindow::load()
     lookupVendor->setChecked( c->readBoolEntry( "lookupVendor", true ) );
     openTree->setChecked( c->readBoolEntry( "openTree", true ) );
     disablePM->setChecked( c->readBoolEntry( "disablePM", true ) );
+    newNetworkAction->setCurrentItem( c->readNumEntry( "newNetworkAction", 0 ) );
+    newNetworkScript->setText( c->readEntry( "newNetworkScript", "" ) );
+    newClientAction->setCurrentItem( c->readNumEntry( "newClientAction", 0 ) );
+    newClientScript->setText( c->readEntry( "newClientScript", "" ) );
+    newStationAction->setCurrentItem( c->readNumEntry( "newStationAction", 0 ) );
+    newStationScript->setText( c->readEntry( "newStationScript", "" ) );
+    synchronizeActionsAndScripts(); // needed for showing/hiding the script QLineEdit on demand
 
     c->setGroup( "GPS" );
     enableGPS->setChecked( c->readBoolEntry( "use", false ) );
@@ -333,6 +416,12 @@ void WellenreiterConfigWindow::save()
     c->writeEntry( "lookupVendor", lookupVendor->isChecked() );
     c->writeEntry( "openTree", openTree->isChecked() );
     c->writeEntry( "disablePM", disablePM->isChecked() );
+    c->writeEntry( "newNetworkAction", newNetworkAction->currentItem() );
+    c->writeEntry( "newNetworkScript", newNetworkScript->text() );
+    c->writeEntry( "newClientAction", newClientAction->currentItem() );
+    c->writeEntry( "newClientScript", newClientScript->text() );
+    c->writeEntry( "newStationAction", newStationAction->currentItem() );
+    c->writeEntry( "newStationScript", newStationScript->text() );
 
     c->setGroup( "GPS" );
     c->writeEntry( "use", enableGPS->isChecked() );

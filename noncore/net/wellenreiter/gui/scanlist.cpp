@@ -26,10 +26,7 @@
 
 #ifdef QWS
 #include <qpe/qpeapplication.h>
-#include <opie/odevice.h>
-using namespace Opie;
 #endif
-
 
 #ifdef QWS
 #include <qpe/resource.h>
@@ -421,8 +418,10 @@ MScanListItem::MScanListItem( QListView* parent, QString type, QString essid, QS
     #ifdef DEBUG
     qDebug( "creating scanlist item" );
     #endif
-    if ( WellenreiterConfigWindow::instance() && type == "network" )
-        playSound( WellenreiterConfigWindow::instance()->soundOnNetwork() );
+
+    if ( WellenreiterConfigWindow::instance() )
+        WellenreiterConfigWindow::instance()->performAction( type ); // better use signal/slot combination here
+
     decorateItem( type, essid, macaddr, wep, channel, signal );
 }
 
@@ -536,17 +535,6 @@ void MScanListItem::setManufacturer( const QString& manufacturer )
 void MScanListItem::setLocation( const QString& location )
 {
     setText( col_location, location );
-}
-
-
-void MScanListItem::playSound( const QString& sound ) const
-{
-    #ifdef QWS
-    if ( sound == "Ignore" ) return;
-    else if ( sound == "Touch" ) ODevice::inst()->touchSound();
-    else if ( sound == "Key" ) ODevice::inst()->keySound();
-    else if ( sound == "Alarm" ) ODevice::inst()->alarmSound();
-    #endif
 }
 
 

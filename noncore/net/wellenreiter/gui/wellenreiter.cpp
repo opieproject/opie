@@ -181,13 +181,13 @@ void Wellenreiter::handleManagementFrame( OPacket* p, OWaveLanManagementPacket* 
     }
 
     OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
-    QString essid = ssid ? ssid->ID() : QString("<unknown>");
+    QString essid = ssid ? ssid->ID( true /* decloak */ ) : QString("<unknown>");
     OWaveLanManagementDS* ds = static_cast<OWaveLanManagementDS*>( p->child( "802.11 DS" ) );
     int channel = ds ? ds->channel() : -1;
 
     OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
 
-    GpsLocation loc( -111.111, -111.111 );
+    GpsLocation loc( -111, -111 );
     if ( configwindow->enableGPS->isChecked() )
     {
         // TODO: add check if GPS is working!?
@@ -216,7 +216,7 @@ void Wellenreiter::handleControlFrame( OPacket* p, OWaveLanControlPacket* contro
 
     if ( control->controlType() == "Acknowledge" )
     {
-        netView()->addNewItem( "adhoc", "???", header->macAddress1(), false, -1, 0, GpsLocation( -111.111, -111.111 ) );
+        netView()->addNewItem( "adhoc", "???", header->macAddress1(), false, -1, 0, GpsLocation( -111, -111 ) );
     }
     else
     {
@@ -260,7 +260,7 @@ void Wellenreiter::handleEthernetData( OPacket* p, OEthernetPacket* data, OMacAd
     from = data->sourceAddress();
     to = data->destinationAddress();
 
-    netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( -111.111, -111.111 ) );
+    netView()->addNewItem( "station", "<wired>", from, false, -1, 0, GpsLocation( -111, -111 ) );
 }
 
 
