@@ -86,6 +86,11 @@ OpieFtp::OpieFtp( )
 //     QPEToolBar *menuBar = new QPEToolBar(this);
 //     menuBar->setHorizontalStretchable( TRUE );
 
+    QWMatrix matrix;
+    QPixmap pix(Resource::loadPixmap( "UnknownDocument" ));
+    matrix.scale( .4, .4);
+    unknownXpm =  pix.xForm(matrix);
+
     connectionMenu  = new QPopupMenu( this );
     localMenu  = new QPopupMenu( this );
     remoteMenu  = new QPopupMenu( this );
@@ -688,8 +693,7 @@ void OpieFtp::populateLocalView()
                     MimeType mt(fi->filePath());
                     pm=mt.pixmap(); //sets the correct pixmap for mimetype
                     if(pm.isNull())
-                        pm =  Resource::loadPixmap( "UnknownDocument-14" );
-                    item->setPixmap( 0,pm);
+                        pm =  unknownXpm;
                 }
             }
             if(  fileL.find("->",0,TRUE) != -1) {
@@ -699,8 +703,8 @@ void OpieFtp::populateLocalView()
                 QPainter painter( &pm );
                 painter.drawPixmap( pm.width()-lnk.width(), pm.height()-lnk.height(), lnk );
                 pm.setMask( pm.createHeuristicMask( FALSE ) );
-                item->setPixmap( 0, pm);
             }
+                    item->setPixmap( 0,pm);
         }
         isDir=FALSE;
         ++it;

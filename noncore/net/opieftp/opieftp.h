@@ -18,6 +18,7 @@
 #include <qdir.h>
 #include <qstring.h>
 #include <qpoint.h>
+#include <qpixmap.h>
 
 class QVBoxLayout; 
 class QHBoxLayout; 
@@ -127,6 +128,7 @@ protected slots:
     void serverListClicked( const QString &);
     
 protected:
+   QPixmap unknownXpm;
     bool fuckeduphack;
   QStringList remoteDirPathStringList, localDirPathStringList;
   QString newServerName;
