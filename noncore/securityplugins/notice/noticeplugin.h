@@ -56,7 +56,7 @@ public:
     QString pixmapNameWidget() const;
     QString pluginName() const;
 private:
-    NoticeConfigWidget * noticeW;
+    NoticeConfigWidget * m_noticeW;
     Config * m_config;
     QString getNoticeText();
 };

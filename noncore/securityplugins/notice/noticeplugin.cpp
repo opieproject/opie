@@ -9,7 +9,7 @@ using Opie::Security::MultiauthPluginObject;
 using Opie::Security::MultiauthConfigWidget;
 
 /// creates and initializes the m_config Config object
-NoticePlugin::NoticePlugin() : MultiauthPluginObject(), noticeW(0) {
+NoticePlugin::NoticePlugin() : MultiauthPluginObject(), m_noticeW(0) {
     m_config = new Config("Security");
     m_config->setGroup("NoticePlugin");
 }
@@ -17,8 +17,8 @@ NoticePlugin::NoticePlugin() : MultiauthPluginObject(), noticeW(0) {
 /// deletes the m_config Config object and noticeW if necessary
 NoticePlugin::~NoticePlugin() {
     delete m_config;
-    if (noticeW != 0)
-        delete noticeW;
+    if (m_noticeW != 0)
+        delete m_noticeW;
 }
 
 /// Simply return its name (Notice plugin)
@@ -31,9 +31,9 @@ QString NoticePlugin::pluginName() const {
  * \return noticeW, the NoticeConfigWidget
  */
 MultiauthConfigWidget * NoticePlugin::configWidget(QWidget * parent) {
-    if (noticeW == 0)
-        noticeW = new NoticeConfigWidget(parent, "Notice configuration widget");
-    return noticeW;
+    if (m_noticeW == 0)
+        m_noticeW = new NoticeConfigWidget(parent, "Notice configuration widget");
+    return m_noticeW;
 }
 
 /// return the path of the small tab icon
