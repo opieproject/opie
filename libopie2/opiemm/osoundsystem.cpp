@@ -137,8 +137,13 @@ OSoundCard::~OSoundCard()
 
 void OSoundCard::init()
 {
+#ifdef QT_QWS_DEVFS
+    _audio = new OAudioInterface( this, "/dev/sound/dsp" );
+    _mixer = new OMixerInterface( this, "/dev/sound/mixer" );
+#else
     _audio = new OAudioInterface( this, "/dev/dsp" );
     _mixer = new OMixerInterface( this, "/dev/mixer" );
+#endif
 }
 
 

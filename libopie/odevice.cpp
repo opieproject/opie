@@ -595,7 +595,11 @@ bool ODevice::setDisplayStatus ( bool on )
 	bool res = false;
 	int fd;
 
+#ifdef QT_QWS_DEVFS
+	if (( fd = ::open ( "/dev/fb/0", O_RDWR )) >= 0 ) {
+#else
 	if (( fd = ::open ( "/dev/fb0", O_RDWR )) >= 0 ) {
+#endif
 		res = ( ::ioctl ( fd, FBIOBLANK, on ? VESA_NO_BLANKING : VESA_POWERDOWN ) == 0 );
 		::close ( fd );
 	}

@@ -565,7 +565,11 @@ static void setVolume( int t = 0, int percent = -1 )
                     percent = cfg.readNumEntry( "VolumePercent", 50 );
 #ifndef QT_NO_SOUND
                 int fd = 0;
+#ifdef QT_QWS_DEVFS
+                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+#else
                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+#endif
                     int vol = muted ? 0 : percent;
                     // set both channels to same volume
                     vol |= vol << 8;
@@ -590,7 +594,11 @@ static void setMic( int t = 0, int percent = -1 )
 #ifndef QT_NO_SOUND
                 int fd = 0;
                 int mic = micMuted ? 0 : percent;
+#ifdef QT_QWS_DEVFS
+                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+#else
                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+#endif
                     ioctl( fd, MIXER_WRITE( SOUND_MIXER_MIC ), &mic );
                     ::close( fd );
                 }
@@ -613,7 +621,11 @@ static void setBass( int t = 0, int percent = -1 )
 #ifndef QT_NO_SOUND
                 int fd = 0;
                 int bass = percent;
+#ifdef QT_QWS_DEVFS
+                                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+#else
                                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+#endif
                     ioctl( fd, MIXER_WRITE( SOUND_MIXER_BASS ), &bass );
                     ::close( fd );
                 }
@@ -636,7 +648,11 @@ static void setTreble( int t = 0, int percent = -1 )
 #ifndef QT_NO_SOUND
                 int fd = 0;
                 int treble = percent;
+#ifdef QT_QWS_DEVFS
+                if ( ( fd = open( "/dev/sound/mixer", O_RDWR ) ) >= 0 ) {
+#else
                 if ( ( fd = open( "/dev/mixer", O_RDWR ) ) >= 0 ) {
+#endif
                     ioctl( fd, MIXER_WRITE( SOUND_MIXER_TREBLE ), &treble );
                     ::close( fd );
                 }

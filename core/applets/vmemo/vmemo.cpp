@@ -411,18 +411,22 @@ int VMemo::openDSP() {
     dsp = open("/dev/dsp1", O_RDONLY); //Zaurus needs /dev/dsp1
     channels=1; //zaurus has one input channel
   }  else {
+#ifdef QT_QWS_DEVFS
+    dsp = open("/dev/sound/dsp", O_RDONLY);
+#else
     dsp = open("/dev/dsp", O_RDONLY);
+#endif
   }
 
-  if(dsp == -1)  {
+  if (dsp == -1)  {
       msgLabel->close();
       msgLabel=0;
       delete msgLabel;
 
       perror("open(\"/dev/dsp\")");
       errorMsg="open(\"/dev/dsp\")\n "+(QString)strerror(errno);
-    QMessageBox::critical(0, "vmemo", errorMsg, "Abort");
-    return -1;
+      QMessageBox::critical(0, "vmemo", errorMsg, "Abort");
+      return -1;
   }
 
   if(ioctl(dsp, SNDCTL_DSP_SETFMT , &format)==-1)  {

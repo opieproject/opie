@@ -80,7 +80,11 @@ QPopupMenu *VTApplet::popup ( QWidget* parent ) const
     odebug << "VTApplet::popup" << oendl;
 
     struct vt_stat vtstat;
+#ifdef QT_QWS_DEVFS
+    int fd = ::open( "/dev/vc/0", O_RDWR );
+#else
     int fd = ::open( "/dev/tty0", O_RDWR );
+#endif
     if ( fd == -1 ) return 0;
     if ( ioctl( fd, VT_GETSTATE, &vtstat ) == -1 ) return 0;
 
@@ -104,7 +108,11 @@ void VTApplet::changeVT( int index )
 {
     //odebug << "VTApplet::changeVT( " << index-500 << " )" << oendl;
 
+#ifdef QT_QWS_DEVFS
+    int fd = ::open("/dev/vc/0", O_RDWR);
+#else
     int fd = ::open("/dev/tty0", O_RDWR);
+#endif
     if ( fd == -1 ) return;
     ioctl( fd, VT_ACTIVATE, index-500 );
 }
