@@ -5,7 +5,7 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.h,v 1.4 2004-07-14 07:17:17 llornkcor Exp $
+** $Id: zsafe.h,v 1.5 2004-11-15 17:08:58 zecke Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
@@ -46,7 +46,7 @@ class QPixmap;
 // number of fields for one entry
 #define FIELD_SIZE 7
 
-class ZSafe : public QDialog
+class ZSafe : public QWidget
 { 
     Q_OBJECT
 
@@ -58,8 +58,9 @@ protected:
     QTimer raiseTimer;
 
 public:
-    ZSafe( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = WDestructiveClose );
+    ZSafe( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~ZSafe();
+    static QString appName() { return QString::fromLatin1( QUICKAPP_NAME ); }
 
      static const QColor *evenRowColor; 
      static const QColor *oddRowColor;  
@@ -195,4 +196,9 @@ private slots:
 
 };
 
+
+extern ZSafe *zs;
+extern QApplication *appl;
+extern int DeskW;
+extern int DeskH;
 #endif // ZSAFE_H

@@ -4,17 +4,10 @@
 **
 ** Author: Carsten Schneider <CarstenSchneider@t-online.de>
 **
-** $Id: zsafe.cpp,v 1.26 2004-10-16 00:01:10 zecke Exp $
+** $Id: zsafe.cpp,v 1.27 2004-11-15 17:08:58 zecke Exp $
 **
 ** Homepage: http://home.t-online.de/home/CarstenSchneider/zsafe/index.html
 **
-** Compile Flags:
-**    Zaurus arm     : -DNO_OPIE
-**    Zaurus Opie arm: none
-**    Linux Desktop  : -DDESKTOP -DNO_OPIE
-**    Windows Desktop: -DDESKTOP -DNO_OPIE
-** use qmake
-**    for japanese version additional use: -DJPATCH_HDE
 **
 ****************************************************************************/
 #include "zsafe.h"
@@ -26,16 +19,10 @@
 #include "zlistview.h"
 #include "shadedlistitem.h"
 
-#ifndef DESKTOP
-#ifndef NO_OPIE
 #include <opie2/ofiledialog.h>
 #include <opie2/odebug.h>
 using namespace Opie::Core;
 using namespace Opie::Ui;
-#else
-#include "scqtfileedit.h"
-#endif
-#endif
 
 #include <qclipboard.h>
 
@@ -43,32 +30,19 @@ using namespace Opie::Ui;
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <stdlib.h>
-#ifndef Q_WS_WIN
 #include <unistd.h>
-#endif
 #include <string.h>
 #include <errno.h>
 
 #include <qmenubar.h>
 #include <qpopupmenu.h>
 
-#ifdef DESKTOP
-#include <qfiledialog.h>
-#include <qdragobject.h>
-#ifndef Q_WS_WIN
-#include <qsettings.h>
-#else
-#include "qsettings.h"
-#endif
-#include <qapplication.h>
-#else
 #include <qfile.h>
 #include <qpe/fileselector.h>
 #include <qpe/global.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
-#endif
 
 #include <qtimer.h>
 #include <qlayout.h>
@@ -95,27 +69,11 @@ using namespace Opie::Ui;
 
 #include "wait.h"
 
-extern int DeskW, DeskH;
-#ifdef DESKTOP
-extern QApplication *appl;
-#else
-extern QPEApplication *appl;
-#endif
+int DeskW, DeskH;
+QApplication *appl;
+ZSafe *zs;
 
-#ifdef JPATCH_HDE
-#define tr(arg) arg
-#endif
-
-
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-const QString APP_KEY="/.zsafe/";
-#else
-const QString APP_KEY="";
-#endif
-#else
-const QString APP_KEY="";
-#endif
+const QString APP_KEY = "";
 
 // include xmp images
 #include "pics/zsafe/copy.xpm"
@@ -364,18 +322,8 @@ static const char* const general_data[] = {
     {
        delete conf;
 
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-       conf = new QSettings();
-       conf->insertSearchPath (QSettings::Unix, QDir::homeDirPath());
-#else
-       conf = new QSettings (cfgFile);
-       conf->insertSearchPath (QSettings::Unix, cfgFile);
-#endif
-#else
-       conf = new Config (cfgFile, Config::File);
-       conf->setGroup ("zsafePrefs");
-#endif
+       conf = new Config ("zsafe");
+       conf->setGroup ("zsafe");
     }
   }
 
@@ -387,10 +335,15 @@ static const char* const general_data[] = {
  *  The dialog will by default be modeless, unless you set 'modal' to
  *  TRUE to construct a modal dialog.
  */
-ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
-    : QDialog( parent, name, modal, fl ),
+ZSafe::ZSafe( QWidget* parent,  const char* name, WFlags fl )
+    : QWidget( parent, name, fl),
       Edit(0l), Delete(0l), Find(0l), New(0l), ListView(0l)
 {
+    zs = this;
+    appl  = qApp;
+    DeskW = qApp->desktop()->width();
+    DeskH = qApp->desktop()->height();
+
     IsCut = false;
     IsCopy = false;
     modified = false;
@@ -400,44 +353,14 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     cfgFile=QDir::homeDirPath();
     cfgFile += "/.zsafe.cfg";
     // set the icon path
-#ifdef NO_OPIE
-    QString qpedir ((const char *)getenv("QPEDIR"));
-#else
-    QString qpedir ((const char *)getenv("OPIEDIR"));
-#endif
 
-#ifdef DESKTOP
-    iconPath = QDir::homeDirPath() + "/pics/";
-#else
-    if (qpedir.isEmpty())
-       iconPath = "/home/QtPalmtop/pics/";
-    else
-       iconPath = qpedir + "/pics/";
-#endif
+    QString qpeDir = QPEApplication::qpeDir();
 
-    // create a zsafe configuration object
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-    conf = new QSettings ();
-    conf->insertSearchPath (QSettings::Unix, QDir::homeDirPath());
-#else
-    conf = new QSettings (cfgFile);
-    conf->insertSearchPath (QSettings::Unix, cfgFile);
-#endif
-#else
-    conf = new Config (cfgFile, Config::File);
+    conf = new Config ("zsafe");
     conf->setGroup ("zsafePrefs");
-#endif
-#ifdef DESKTOP
-// #ifndef Q_WS_WIN
-    expandTree = conf->readBoolEntry(APP_KEY+"expandTree", false);
-// #endif
-#else
+
     expandTree = conf->readNumEntry(APP_KEY+"expandTree", 0);
-#endif
-#ifndef DESKTOP
     conf->setGroup ("zsafe");
-#endif
 
     QPixmap copy_img((const char**) copy_xpm);
     QPixmap cut_img((const char**) cut_xpm);
@@ -460,48 +383,19 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     QPixmap software( ( const char** ) software_data );
     QPixmap general( ( const char** ) general_data );
 		QPixmap image0( ( const char** ) zsafe_xpm );
-	if ( !name )
-    setName( "ZSafe" );
 
-#ifdef DESKTOP
-#ifdef Q_WS_WIN
-    setGeometry(100, 150, DeskW, DeskH-30 );
-#else
-    resize( DeskW, DeskH-30 );
-#endif
+    if ( !name )
+	setName( "ZSafe" );
 
-#else
-
-#ifdef JPATCH_HDE
-   int DeskS;
-   if(DeskW > DeskH)
-   {
-      DeskS = DeskW;
-   }
-   else
-   {
-      DeskS = DeskH;
-   }
-   resize( DeskW, DeskH );
-   setMinimumSize( QSize( DeskS, DeskS ) );
-   setMaximumSize( QSize( DeskS, DeskS ) );
-#else
-    resize( DeskW, DeskH-30 );
-#endif
-
-#endif
    setCaption( tr( "ZSafe" ) );
    QString zsafeAppDirPath = QDir::homeDirPath() + "/Documents/application/zsafe";
+   
    filename = conf->readEntry(APP_KEY+"document");
    if ( !QFileInfo(filename).exists() || !QDir(zsafeAppDirPath).exists() )
    {
     // check if the directory application exists, if not
     // create it
-// #ifndef Q_WS_WIN
-    // QString d1("Documents/application");
-// #else
 	QString d1(QDir::homeDirPath() + "/Documents/application");
-// #endif
     QDir pd1(d1);
     if (!pd1.exists())
     {
@@ -511,38 +405,26 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
 			if (!pd3.mkdir("Documents", FALSE)) {
 		   }
 	   }
-       
+
 	   if (!pd2.mkdir("application", FALSE))
        {
           QMessageBox::critical( 0, tr("ZSafe"),
-#ifdef JPATCH_HDE
-               tr("<P>Can't create directory ..."+d1+"</P><P>ZSafe will now exit.</P>"));
-#else
                tr("<P>Can't create directory %1</P><P>ZSafe will now exit.</P>").arg(d1));
-#endif
           exitZs (1);
        }
     }
-// #ifndef Q_WS_WIN
-    // QString d2("Documents/application/zsafe");
-// #else
 	QString d2(QDir::homeDirPath() + "/Documents/application/zsafe");
-// #endif
     QDir pd2(d2);
     if (!pd2.exists())
     {
        if (!pd1.mkdir("zsafe", FALSE))
        {
           QMessageBox::critical( 0, tr("ZSafe"),
-#ifdef JPATCH_HDE
-               tr("<P>Can't create directory ...//Documents/application/zsafe</P><P>ZSafe will now exit.</P"));
-#else
                tr("<P>Can't create directory %1</P><P>ZSafe will now exit.</P>").arg(d2));
-#endif
           exitZs (1);
        }
    }
-    
+
     filename = zsafeAppDirPath + "/passwords.zsf";
 
     // save the current filename to the config file
@@ -553,11 +435,7 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
       //filename = "";
 
     QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef Q_WS_WIN
-    this->setCaption("Qt ZSafe: " + ti);
-#else
-    this->setCaption("ZSafe: " + ti);
-#endif
+    this->setCaption(tr("ZSafe: ") + ti);
 
     selectedItem = NULL;
     lastSearchedCategory = NULL;
@@ -577,12 +455,10 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     // QPopupMenu *file = new QPopupMenu( this );
     file = new QPopupMenu( this );
 
-// #ifdef DESKTOP
     file->insertItem( new_img, tr("&New document"),  this, SLOT(newDocument()) );
     file->insertItem( folder_open_img, tr("&Open document"),  this, SLOT(loadDocument()) );
     file->insertItem( save_img, tr("&Save document as .."),  this, SLOT(saveDocumentAs()) );
     file->insertSeparator();
-// #endif
 
     file->insertItem( save_img, tr("&Save document"),  this, SLOT(saveDocumentWithoutPwd()) );
     file->insertItem( save_img, tr("S&ave document with new Password"),  this,
@@ -665,31 +541,21 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     ListView->addColumn( tr( "Field 5" ) );
     ListView->setAllColumnsShowFocus(TRUE);
 
-#ifdef DESKTOP
-   // ListView->setResizePolicy(QScrollView::AutoOneFit);
-    // ListView->setGeometry( QRect( 0, 22, this->width(), this->height() - 30 ) );
-#else
     ListView->setResizePolicy(QScrollView::AutoOneFit);
     // ListView->setGeometry( QRect( 0, 22,
                            // this->width(), this->height() - 30 ) );
     // ListView->setMaximumSize( QSize( 440, 290 ) );
-#endif
    // ListView->setVScrollBarMode( QListView::Auto );
 
     QBoxLayout * l = new QVBoxLayout( this );
     l->addWidget (menu);
     l->addWidget (ListView);
 
-#ifndef DESKTOP
     // start a timer (100 ms) to load the default document
     docuTimer.start( 100, true );
     connect( &docuTimer, SIGNAL(timeout()), SLOT( slotLoadDocu() ) );
     raiseFlag = true;
     connect( &raiseTimer, SIGNAL(timeout()), SLOT( slotRaiseTimer() ) );
-#else
-    // open the default document
-    openDocument(filename);
-#endif
 
     // signals and slots connections for QTollButton
     connect( New, SIGNAL( clicked() ), this, SLOT( newPwd() ) );
@@ -704,17 +570,11 @@ ZSafe::ZSafe( QWidget* parent,  const char* name, bool modal, WFlags fl )
     connect( ListView, SIGNAL( returnPressed(QListViewItem*) ),
              this, SLOT( showInfo(QListViewItem*) ) );
 
-#ifndef DESKTOP	  
-  	QPEApplication::setStylusOperation( ListView->viewport(),QPEApplication::RightOnHold);
-#endif
+    QPEApplication::setStylusOperation( ListView->viewport(),QPEApplication::RightOnHold);
     connect( ListView, SIGNAL( mouseButtonPressed( int, QListViewItem *, const QPoint&, int)),
            this,SLOT( ListPressed(int, QListViewItem *, const QPoint&, int)) );
 
 	   this->setIcon( image0);
-#ifdef Q_WS_WIN
-	   ListView->setSelected( ListView->firstChild() , true);
-	   ListView->setSelected( ListView->firstChild() , false);
-#endif
 }
 
 const QColor *ZSafe::evenRowColor = &Qt::white;
@@ -772,10 +632,6 @@ void ZSafe::editPwd()
     {
        // open the 'New Entry' dialog
        NewDialog *dialog = new NewDialog(this, "edit_entry", TRUE);
-#ifdef Q_WS_WIN
-       dialog->setCaption ("Qt " + tr("Edit Entry"));
-       dialog->setGeometry(200, 250, 220, 310 );
-#endif
 
        // set the labels
        dialog->Name->setText(getFieldLabel (selectedItem,     "1", tr("Name")));
@@ -796,22 +652,8 @@ void ZSafe::editPwd()
        dialog->CommentField->insertLine(comment);
        dialog->CommentField->setCursorPosition(0,0);
 
-#ifdef Q_WS_QWS
-       DialogCode result = (DialogCode) QPEApplication::execDialog( dialog );
-#endif
-			 
-#ifdef DESKTOP
-#ifndef Q_QW_QWIN
-       dialog->show();
-#endif
-#else
-       dialog->showMaximized();
-#endif
-#ifdef DESKTOP
-       int result = dialog->exec();
-       result = QDialog::Accepted;
-#endif
-       if (result == Accepted)
+       QDialog::DialogCode result = (QDialog::DialogCode) QPEApplication::execDialog( dialog );
+       if (result == QDialog::Accepted)
        {
           modified = true;
           // edit the selected item
@@ -852,10 +694,6 @@ void ZSafe::newPwd()
 			 qWarning(cat);
        // open the 'New Entry' dialog
        NewDialog *dialog = new NewDialog(this, "new_entry", TRUE);
-#ifdef Q_WS_WIN
-       dialog->setCaption ("Qt " + tr("New Entry"));
-       dialog->setGeometry(200, 250, 220, 310 );
-#endif
        // set the labels
        dialog->Name->setText(getFieldLabel (selectedItem,     "1", tr("Name")));
        dialog->Username->setText(getFieldLabel (selectedItem, "2", tr("Username")));
@@ -866,22 +704,9 @@ void ZSafe::newPwd()
 retype:
 
 #ifdef Q_WS_QWS
-       DialogCode result = (DialogCode) QPEApplication::execDialog( dialog );
+       QDialog::DialogCode result = (QDialog::DialogCode) QPEApplication::execDialog( dialog );
 #endif
-			 
-#ifdef DESKTOP
-#ifndef Q_QW_QWIN
-       dialog->show();
-#endif
-#else
-       dialog->showMaximized();
-#endif
-#ifdef DESKTOP
-       int result = dialog->exec();
-       result = QDialog::Accepted;
-#endif
-
-       if (result == Accepted)
+       if (result == QDialog::Accepted)
        {
 
           QString name = dialog->NameField->text();
@@ -920,12 +745,7 @@ void ZSafe::findPwd()
 
     // open the 'Search' dialog
     SearchDialog *dialog = new SearchDialog(this, tr("Search"), TRUE);
-#ifdef Q_WS_WIN
-    dialog->setCaption ("Qt " + tr("Search"));
-#endif
 
-#ifdef DESKTOP
-#endif
     if (lastSearchedName)
        dialog->NameField->setText(lastSearchedName);
     else
@@ -938,24 +758,16 @@ void ZSafe::findPwd()
        dialog->CommentField->setText(lastSearchedComment);
     else
        dialog->CommentField->setText("");
-    DialogCode result = (DialogCode) dialog->exec();
-#ifdef DESKTOP
-       result = Accepted;
-#endif
+    QDialog::DialogCode result = (QDialog::DialogCode) dialog->exec();
 
     QString name;
     QString username;
     QString comment;
-    if (result == Accepted)
+    if (result == QDialog::Accepted)
     {
        name = dialog->NameField->text();
        username = dialog->UsernameField->text();
        comment = dialog->CommentField->text();
-#ifndef NO_OPIE
-			 owarn << name << oendl;
-#else
-       qWarning (name);			 
-#endif
     }
     else
     {
@@ -1001,9 +813,6 @@ void ZSafe::findPwd()
          i != NULL;
          i = i->nextSibling())
     {
-#ifndef NO_OPIE
-       owarn << i->text(0) << oendl;
-#endif
        i->setSelected(FALSE);
 
        // step through all subitems
@@ -1017,11 +826,6 @@ void ZSafe::findPwd()
             si != NULL;
             si = si->nextSibling())
        {
-#ifndef NO_OPIE
-          owarn << si->text(0) << oendl;
-#else
-					qWarning (si->text(0));
-#endif
           if (si->isSelected())
              si->setSelected(FALSE);
           // ListView->repaintItem(si);
@@ -1038,11 +842,6 @@ void ZSafe::findPwd()
 
           if ((n && u && c ) && !found)
           {
-#ifndef NO_OPIE
-             owarn << "Found" << oendl;
-#else
-             qWarning ("Found");
-#endif
              selectedItem = si;
              si->setSelected(TRUE);
              ListView->setCurrentItem(si);
@@ -1099,46 +898,24 @@ QString ZSafe::getFieldLabel (QListViewItem *_item, QString field, QString def)
    }
 
    QString app_key = APP_KEY;
-#ifndef DESKTOP
-#ifndef Q_WS_WIN
-   conf->setGroup ("fieldDefs");
-#endif
-#else
-#ifndef Q_WS_WIN
-   app_key += "/fieldDefs/";
-#endif
-#endif
-// #ifndef Q_WS_WIN
-   QString label = conf->readEntry(app_key+category+"-field"+field,def);
-// #else
-//   QString label(def);
-// #endif
 
-#ifndef DESKTOP
+   conf->setGroup( "fieldDefs" );
+   QString label = conf->readEntry(app_key+category+"-field"+field,def);
    conf->setGroup ("zsafe");
-#endif
    return label;
 }
 
 QString ZSafe::getFieldLabel (QString category, QString field, QString def)
 {
    QString app_key = APP_KEY;
-#ifndef DESKTOP
-   conf->setGroup ("fieldDefs");
-#else
-#ifndef Q_WS_WIN
-   app_key += "/fieldDefs/";
-#endif
-#endif
 // #ifndef Q_WS_WIN
+   conf->setGroup( "fieldDefs" );
    QString label = conf->readEntry(app_key+category+"-field"+field,
                                    def);
 // #else
    // QString label(def);
 // #endif
-#ifndef DESKTOP
    conf->setGroup ("zsafe");
-#endif
    return label;
 }
 
@@ -1235,9 +1012,6 @@ void ZSafe::showInfo( QListViewItem *_item)
       QPEApplication::showDialog( infoForm );
 #endif
 
-#ifdef DESKTOP
-      infoForm->show();
-#endif			
    }
 }
 
@@ -1250,7 +1024,6 @@ void ZSafe::listViewSelected( QListViewItem *_item)
 
    selectedItem = _item;
 
-#ifndef DESKTOP
    // set the column text dependent on the selected item
    ListView->setColumnText(0, getFieldLabel (selectedItem, "1", tr("Name")));
    ListView->setColumnText(1, getFieldLabel (selectedItem, "2", tr("Field 2")));
@@ -1258,17 +1031,6 @@ void ZSafe::listViewSelected( QListViewItem *_item)
    ListView->setColumnText(3, getFieldLabel (selectedItem, "4", tr("Comment")));
    ListView->setColumnText(4, getFieldLabel (selectedItem, "5", tr("Field 4")));
    ListView->setColumnText(5, getFieldLabel (selectedItem, "6", tr("Field 5")));
-#endif
-#ifdef Q_WS_WIN
-   // set the column text dependent on the selected item
-   ListView->setColumnText(0, getFieldLabel (selectedItem, "1", tr("Name")));
-   ListView->setColumnText(1, getFieldLabel (selectedItem, "2", tr("Field 2")));
-   ListView->setColumnText(2, getFieldLabel (selectedItem, "3", tr("Field 3")));
-   ListView->setColumnText(3, getFieldLabel (selectedItem, "4", tr("Comment")));
-   ListView->setColumnText(4, getFieldLabel (selectedItem, "5", tr("Field 4")));
-   ListView->setColumnText(5, getFieldLabel (selectedItem, "6", tr("Field 5")));
-#endif
-
 }
 
 bool ZSafe::isCategory(QListViewItem *_item)
@@ -1287,8 +1049,6 @@ void ZSafe::removeAsciiFile()
 {
     // QString fn = filename + ".txt";
   // open the file dialog
-#ifndef DESKTOP
-#ifndef NO_OPIE
    QMap<QString, QStringList> mimeTypes;
    mimeTypes.insert(tr("All"), QStringList() );
    mimeTypes.insert(tr("Text"), "text/*" );
@@ -1298,31 +1058,12 @@ void ZSafe::removeAsciiFile()
                        mimeTypes,
                        this,
                        tr ("Remove text file"));
-#else
-  QString fn = ScQtFileEdit::getOpenFileName(this,
-                       tr ("Remove text file"),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.txt");
-#endif
-#else
-  QString fn = QFileDialog::getOpenFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.txt)",
-                    this,
-                    "ZSafe File Dialog"
-                    "Choose a text file" );
-#endif
 
   if (fn && fn.length() > 0 )
   {
     QFile f( fn );
     if ( !f.remove() )
     {
-#ifndef NO_OPIE
-        owarn << "Could not remove file " << fn << oendl;
-#else
-        qWarning( QString("Could not remove file %1").arg(fn),2000 );
-#endif
         QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not remove text file.") );
         return;
@@ -1346,11 +1087,6 @@ void ZSafe::writeAllEntries()
    {
     QFile f( fn );
     if ( !f.open( IO_WriteOnly ) ) {
-#ifndef NO_OPIE
-        owarn << "Could not write to file " << fn << oendl;
-#else
-        qWarning( QString("Could not write to file %1").arg(fn),2000 );
-#endif
         QMessageBox::critical( 0, "ZSafe",
                   QString("Could not export to text file.") );
         return;
@@ -1413,8 +1149,6 @@ void ZSafe::readAllEntries()
    }
 
   // open the file dialog
-#ifndef DESKTOP
-#ifndef NO_OPIE
    QMap<QString, QStringList> mimeTypes;
    mimeTypes.insert(tr("All"), QStringList() );
    mimeTypes.insert(tr("Text"), "text/*" );
@@ -1424,31 +1158,12 @@ void ZSafe::readAllEntries()
                        mimeTypes,
                        this,
                        tr ("Import text file"));
-#else
-  QString fn = ScQtFileEdit::getOpenFileName(this,
-                       tr ("Import text file"),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.txt");
-#endif
-#else
-  QString fn = QFileDialog::getOpenFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.txt)",
-                    this,
-                    "ZSafe File Dialog"
-                    "Choose a text file" );
-#endif
 
   if (fn && fn.length() > 0 )
   {
    QFile f( fn );
    if ( !f.open( IO_ReadOnly ) )
    {
-#ifndef NO_OPIE
-      owarn << "Could not read file " << fn << oendl;
-#else
-      qWarning( QString("Could not read file %1").arg(fn), 2000 );
-#endif
       QMessageBox::critical( 0, "ZSafe",
                   QString("Could not import text file.") );
       return;
@@ -1477,23 +1192,13 @@ void ZSafe::readAllEntries()
       }
    }
 
-#ifndef NO_OPIE
-   owarn << "ReadAllEntries(): " << oendl;
-#else
-   qWarning ("ReadAllEntries(): ");
-#endif
-	 
    QTextStream t(&f);
    while ( !t.eof() )
    {
       QString s = t.readLine();
       s.replace (QRegExp("\";\""), "\"|\"");
       // char buffer[1024];
-#ifndef Q_WS_WIN
       char buffer[s.length()+1];
-#else
-      char buffer[4048];
-#endif
 
 
       /* modify QString -> QCString::utf8 */
@@ -1639,11 +1344,6 @@ void ZSafe::writeAllEntries()
     QString fn = filename + ".txt";
     QFile f( fn );
     if ( !f.open( IO_WriteOnly ) ) {
-#ifndef NO_OPIE
-        owarn << "Could not write to file " << fn << oendl;
-#else
-        qWarning( QString("Could not write to file %1").arg(fn), 2000 );
-#endif
         QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not export to text file.") );
         return;
@@ -1696,11 +1396,6 @@ void ZSafe::readAllEntries()
    QFile f( fn );
    if ( !f.open( IO_ReadOnly ) )
    {
-#ifndef NO_OPIE
-      owarn << "Could not read file " << fn << oendl;
-#else
-      qWarning( QString("Could not read file %1").arg(fn), 2000 );
-#endif
       QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Could not import text file.") );
       return;
@@ -1729,11 +1424,6 @@ void ZSafe::readAllEntries()
       }
    }
 
-#ifndef NO_OPIE
-   owarn << "ReadAllEntries(): " << oendl;
-#else
-   qWarning ("ReadAllEntries(): ");
-#endif
    QTextStream t(&f);
    while ( !t.eof() )
    {
@@ -1741,11 +1431,7 @@ void ZSafe::readAllEntries()
       s.replace (QRegExp("\";\""), "\"|\"");
       // char buffer[1024];
       int len=s.length()+1;
-#ifdef Q_WS_WIN
-      char buffer[512];
-#else
       char buffer[len];
-#endif
       strcpy (buffer, s);
 
       QString name;
@@ -1856,9 +1542,6 @@ void ZSafe::readAllEntries()
 
 void ZSafe::resume(int)
 {
-#ifndef NO_OPIE
-   owarn << "Resume" << oendl;
-#endif
 		 // hide the main window
 
    if ( !showpwd )
@@ -1919,11 +1602,6 @@ bool ZSafe::openDocument(const char* _filename, const char* )
           getDocPassword(tr("Enter Password"));
        if (m_password.isEmpty() && validationFlag == 0)
            {
-#ifndef NO_OPIE
-              owarn << "Wrong password" << oendl;
-#else
-              qWarning ("Wrong password");
-#endif
               QMessageBox::critical( 0, tr("ZSafe"),
                   tr("Wrong password.\n\nZSafe will now exit.") );
               exitZs (1);
@@ -1932,21 +1610,12 @@ bool ZSafe::openDocument(const char* _filename, const char* )
        retval = loadInit(_filename, m_password);
        if (retval != PWERR_GOOD)
            {
-#ifndef NO_OPIE
-                owarn << "Error loading Document" << oendl;
-#else
-                qWarning ("Error loading Document");
-#endif
 								return false;
        }
         }
         else
         {
-#ifdef Q_WS_WIN
-           this->setCaption("Qt ZSafe");
-#else
-           this->setCaption("ZSafe");
-#endif
+           this->setCaption(tr("ZSafe"));
            filename = "";
            switch( QMessageBox::warning( this, tr("ZSafe"),
                     tr("<P>You must create a new document first. Ok to create?</P>"),
@@ -1962,7 +1631,7 @@ bool ZSafe::openDocument(const char* _filename, const char* )
 					 return false;
            break;
            }
-					 
+
         }
 
 
@@ -2436,9 +2105,6 @@ void ZSafe::setPasswordDialogDone()
 
 void ZSafe::getDocPassword(QString title)
 {
-#ifndef NO_OPIE
-    owarn << "getDocPassword" << oendl;
-#endif
 			// open the 'Password' dialog
     PasswordForm *dialog = new PasswordForm(this, title, TRUE);
     newPwdDialog = dialog;
@@ -2453,21 +2119,14 @@ void ZSafe::getDocPassword(QString title)
     // CS: !!!
     // int pos = filename.findRev ('/');
     QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef Q_WS_WIN
-    dialog->setCaption("Qt " + ti);
-#else
     dialog->setCaption(ti);
-#endif
     // dialog->setCaption(title);
 
     dialog->PasswordField->setFocus();
-    DialogCode result = (DialogCode) dialog->exec();
-#ifdef DESKTOP
-       result = Accepted;
-#endif
+    QDialog::DialogCode result = (QDialog::DialogCode) dialog->exec();
 
     QString password;
-    if (result == Accepted || newPwdDialogResult)
+    if (result == QDialog::Accepted || newPwdDialogResult)
     {
        m_password = dialog->PasswordField->text();
     }
@@ -2620,10 +2279,6 @@ int ZSafe::saveFinalize(void)
 
 void ZSafe::quitMe ()
 {
-#ifndef NO_OPIE
-    owarn << "QUIT..." << oendl;
-#endif
-		
     if (modified)
     {
       switch( QMessageBox::information( this, tr("ZSafe"),
@@ -2683,9 +2338,6 @@ void ZSafe::addCategory()
         else
         {
            categoryDialog = new CategoryDialog(this, tr("Category"), TRUE);
-#ifdef Q_WS_WIN
-           categoryDialog->setCaption ("Qt " + tr("Category"));
-#endif
            dialog = categoryDialog;
            connect( dialog->CategoryField,
                     SIGNAL( activated(const QString&)),
@@ -2693,26 +2345,6 @@ void ZSafe::addCategory()
            initIcons = true;
         }
 
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-        QStringList list = conf->entryList( APP_KEY+"/fieldDefs" );
-#else
-        // read all categories from the config file and store
-        // into a list
-        QFile f (cfgFile);
-        QStringList list;
-        if ( f.open(IO_ReadOnly) ) {    // file opened successfully
-           QTextStream t( &f );        // use a text stream
-           QString s;
-           int n = 1;
-           while ( !t.eof() ) {        // until end of file...
-               s = t.readLine();       // line of text excluding '\n'
-               list.append(s);
-           }
-           f.close();
-        }
-#endif
-#else
         // read all categories from the config file and store
         // into a list
         QFile f (cfgFile);
@@ -2726,7 +2358,6 @@ void ZSafe::addCategory()
            }
            f.close();
         }
-#endif
         QStringList::Iterator it = list.begin();
         QString categ;
         QString firstCategory;
@@ -2736,18 +2367,9 @@ void ZSafe::addCategory()
            QString *cat = new QString (*it);
            if (cat->contains("-field1", FALSE))
            {
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-              categ = cat->section ("-field1", 0, 0);
-#else
-              int pos = cat->find ("-field1");
-              categ = cat->left (pos);
-#endif
-#else
               int pos = cat->find ("-field1");
               cat->truncate(pos);
               categ = *cat;
-#endif
               if (!categ.isEmpty())
               {
                  dialog->CategoryField->insertItem (categ, -1);
@@ -2773,11 +2395,7 @@ void ZSafe::addCategory()
         waitDialog.show();
         qApp->processEvents();
 
-#ifdef DESKTOP
-        QDir d(iconPath);
-#else
         QDir d(QPEApplication::qpeDir() + "pics/");
-#endif
         d.setFilter( QDir::Files);
 
         const QFileInfoList *list = d.entryInfoList();
@@ -2789,12 +2407,7 @@ void ZSafe::addCategory()
             QString fileName = fi->fileName();
             if(fileName.right(4) == ".png"){
                 fileName = fileName.mid(0,fileName.length()-4);
-#ifdef DESKTOP
-                QPixmap imageOfFile;
-                                imageOfFile.load(iconPath + fi->fileName());
-#else
                 QPixmap imageOfFile(Resource::loadPixmap(fileName));
-#endif
                 QImage foo = imageOfFile.convertToImage();
                 foo = foo.smoothScale(16,16);
                 imageOfFile.convertFromImage(foo);
@@ -2805,31 +2418,17 @@ void ZSafe::addCategory()
         waitDialog.hide();
            }
 
-#ifndef Q_WS_WIN
-        dialog->show();
-#endif
-#ifndef DESKTOP
-        // dialog->move (20, 100);
-#endif
-        DialogCode result = (DialogCode) dialog->exec();
-#ifdef DESKTOP
-       result = Accepted;
-#endif
-
+        QDialog::DialogCode result = (QDialog::DialogCode) dialog->exec();
         QString category;
         QString icon;
         QString fullIconPath;
         QPixmap *pix;
-        if (result == Accepted)
+        if (result == QDialog::Accepted)
         {
            modified = true;
            category = dialog->CategoryField->currentText();
            icon = dialog->IconField->currentText()+".png";
 
-#ifndef NO_OPIE
-           owarn << category << oendl;
-#endif
-					 
            QListViewItem *li = new ShadedListItem( 1, ListView );
            Category *c1 = new Category();
            c1->setCategoryName(category);
@@ -2957,11 +2556,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog)
       dialog->Field6->setText(tr("Field 5"));
    }
 
-#ifdef DESKTOP
-    QDir d(iconPath);
-#else
     QDir d(QPEApplication::qpeDir() + "pics/");
-#endif
     d.setFilter( QDir::Files);
 
     const QFileInfoList *list = d.entryInfoList();
@@ -3014,11 +2609,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
    else
       icon = conf->readEntry(APP_KEY+category);
 
-#ifdef DESKTOP
-    QDir d(iconPath);
-#else
     QDir d(QPEApplication::qpeDir() + "pics/");
-#endif
     d.setFilter( QDir::Files);
 
     const QFileInfoList *list = d.entryInfoList();
@@ -3053,13 +2644,7 @@ void ZSafe::setCategoryDialogFields(CategoryDialog *dialog, QString category)
 void ZSafe::saveCategoryDialogFields(CategoryDialog *dialog)
 {
    QString app_key = APP_KEY;
-#ifndef DESKTOP
-   conf->setGroup ("fieldDefs");
-#else
-#ifndef Q_WS_WIN
-   app_key += "/fieldDefs/";
-#endif
-#endif
+   conf->setGroup( "fieldDefs" );
    QString category = dialog->CategoryField->currentText();
 // #ifndef Q_WS_WIN
    conf->writeEntry(app_key+category+"-field1", dialog->Field1->text());
@@ -3070,9 +2655,7 @@ void ZSafe::saveCategoryDialogFields(CategoryDialog *dialog)
    conf->writeEntry(app_key+category+"-field6", dialog->Field6->text());
 // #endif
    saveConf();
-#ifndef DESKTOP
    conf->setGroup ("zsafe");
-#endif
 }
 
 void ZSafe::editCategory()
@@ -3092,9 +2675,6 @@ void ZSafe::editCategory()
         else
         {
            categoryDialog = new CategoryDialog(this, tr("Category"), TRUE);
-#ifdef Q_WS_WIN
-           categoryDialog->setCaption ("Qt " + tr("Category"));
-#endif
            dialog = categoryDialog;
            connect( dialog->CategoryField,
                     SIGNAL( activated(const QString&)),
@@ -3103,26 +2683,6 @@ void ZSafe::editCategory()
         }
         setCategoryDialogFields(dialog);
 
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-        QStringList list = conf->entryList( APP_KEY+"/fieldDefs" );
-#else
-        // read all categories from the config file and store
-        // into a list
-        QFile f (cfgFile);
-        QStringList list;
-        if ( f.open(IO_ReadOnly) ) {    // file opened successfully
-           QTextStream t( &f );        // use a text stream
-           QString s;
-           int n = 1;
-           while ( !t.eof() ) {        // until end of file...
-               s = t.readLine();       // line of text excluding '\n'
-               list.append(s);
-           }
-           f.close();
-        }
-#endif
-#else
         // read all categories from the config file and store
         // into a list
         QFile f (cfgFile);
@@ -3136,7 +2696,6 @@ void ZSafe::editCategory()
            }
            f.close();
         }
-#endif
         QStringList::Iterator it = list.begin();
         QString categ;
         dialog->CategoryField->clear(); // remove all items
@@ -3147,18 +2706,9 @@ void ZSafe::editCategory()
            QString *cat = new QString (*it);
            if (cat->contains("-field1", FALSE))
            {
-#ifdef DESKTOP
-#ifndef Q_WS_WIN
-              categ = cat->section ("-field1", 0, 0);
-#else
-              int pos = cat->find ("-field1");
-              categ = cat->left (pos);
-#endif
-#else
               int pos = cat->find ("-field1");
               cat->truncate(pos);
               categ = *cat;
-#endif
               if (!categ.isEmpty())
               {
                  dialog->CategoryField->insertItem (categ, i);
@@ -3193,11 +2743,7 @@ void ZSafe::editCategory()
         waitDialog.show();
         qApp->processEvents();
 
-#ifdef DESKTOP
-        QDir d(iconPath);
-#else
         QDir d(QPEApplication::qpeDir() + "pics/");
-#endif
         d.setFilter( QDir::Files);
 
         const QFileInfoList *list = d.entryInfoList();
@@ -3215,12 +2761,7 @@ void ZSafe::editCategory()
             if(fileName.right(4) == ".png")
                         {
                 fileName = fileName.mid(0,fileName.length()-4);
-#ifdef DESKTOP
-                QPixmap imageOfFile;
-                                imageOfFile.load(iconPath + fi->fileName());
-#else
                 QPixmap imageOfFile(Resource::loadPixmap(fileName));
-#endif
                 QImage foo = imageOfFile.convertToImage();
                 foo = foo.smoothScale(16,16);
                 imageOfFile.convertFromImage(foo);
@@ -3235,12 +2776,7 @@ void ZSafe::editCategory()
            }
            else
            {
-#ifdef DESKTOP
-        // QDir d(QDir::homeDirPath() + "/pics/");
-        QDir d(iconPath);
-#else
         QDir d(QPEApplication::qpeDir() + "pics/");
-#endif
         d.setFilter( QDir::Files);
 
         const QFileInfoList *list = d.entryInfoList();
@@ -3275,17 +2811,11 @@ void ZSafe::editCategory()
            }
 
         // dialog->show();
-#ifndef DESKTOP
-        // dialog->move (20, 100);
-#endif
-        DialogCode result = (DialogCode) dialog->exec();
-#ifdef DESKTOP
-       result = Accepted;
-#endif
+        QDialog::DialogCode result = (QDialog::DialogCode) dialog->exec();
 
         QString fullIconPath;
         QPixmap *pix;
-        if (result == Accepted)
+        if (result == QDialog::Accepted)
         {
            modified = true;
            if (category != dialog->CategoryField->currentText())
@@ -3302,12 +2832,6 @@ void ZSafe::editCategory()
 
            if (cat)
            {
-#ifndef NO_OPIE
-              owarn << "Category found" << oendl;
-#else
-              qWarning("Category found");
-#endif
-							
               // if (!icon.isEmpty() && !icon.isNull())
               if (icon != "predefined.png")
               {
@@ -3340,11 +2864,6 @@ void ZSafe::editCategory()
               QListViewItem *catItem = cat->getListItem();
               if (catItem)
               {
-#ifndef NO_OPIE
-                 owarn << category << oendl;
-#else
-								 qWarning (category);
-#endif
                  catItem->setText( 0, tr( category ) );
                  cat->setCategoryName (tr(category));
 
@@ -3481,14 +3000,11 @@ void ZSafe::newDocument()
        filename = newFile;
 
        // save the current filename to the config file
+       conf->setGroup("zsafe");
        conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef Q_WS_WIN
-       this->setCaption("Qt ZSafe: " + ti);
-#else
-       this->setCaption("ZSafe: " + ti);
-#endif
+       this->setCaption(tr("ZSafe: ") + ti);
 
        // openDocument(filename);
 
@@ -3503,8 +3019,6 @@ void ZSafe::loadDocument()
 {
 
     // open the file dialog
-#ifndef DESKTOP
-#ifndef NO_OPIE
    QMap<QString, QStringList> mimeTypes;
    mimeTypes.insert(tr("All"), QStringList() );
    mimeTypes.insert(tr("ZSafe"), "zsafe/*" );
@@ -3514,20 +3028,6 @@ void ZSafe::loadDocument()
                        mimeTypes,
                        this,
                        tr ("Open ZSafe document"));
-#else
-   QString newFile = ScQtFileEdit::getOpenFileName(this,
-                       tr ("Open ZSafe document"),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.zsf");
-#endif
-#else
-    QString newFile = QFileDialog::getOpenFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.zsf)",
-                    this,
-                    "ZSafe File Dialog"
-                    "Choose a ZSafe file" );
-#endif
 
     // open the new document
     if (newFile && newFile.length() > 0 )
@@ -3565,14 +3065,11 @@ void ZSafe::loadDocument()
        filename = newFile;
 
        // save the current filename to the config file
+       conf->setGroup("zsafe");
        conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef Q_WS_WIN
-       this->setCaption("Qt ZSafe: " + ti);
-#else
-       this->setCaption("ZSafe: " + ti);
-#endif
+       this->setCaption(tr("ZSafe: ") + ti);
 
        openDocument(filename);
     }
@@ -3593,14 +3090,11 @@ QString newFile = zsaveDialog();
        filename = newFile;
 
        // save the current filename to the config file
+       conf->setGroup("zsafe");
        conf->writeEntry(APP_KEY+"document", filename);
        saveConf();
        QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef Q_WS_WIN
-       this->setCaption("Qt ZSafe: " + ti);
-#else
-       this->setCaption("ZSafe: " + ti);
-#endif
+       this->setCaption(tr("ZSafe: ") + ti);
 
        QMessageBox::information( this, tr("ZSafe"),
        tr("Now you have to enter\na password twice for your\nnewly created document."),       tr("&OK"), 0);
@@ -3622,41 +3116,19 @@ void ZSafe::saveDocumentWithPwd()
 void ZSafe::about()
 {
    QString info;
-#ifdef JPATCH_HDE
-   info  = "<html><body><div align=""center"">";
-   info += "<b>";
-   info += tr("Zaurus Password Manager<br>");
-   info += tr("ZSafe version 2.1.2-jv01b<br>");
-   info += "</b>";
-   info += tr("by Carsten Schneider<br>");
-   info += "zcarsten@gmx.net<br>";
-   info += "http://z-soft.z-portal.info/zsafe";
-   info += "<br>";
-   info += tr("Translations by Robert Ernst<br>");
-   info += "robert.ernst@linux-solutions.at<br>";
-
-   info += "<br><br>";
-   info += QString::fromUtf8("æ~W¥æ~\\¬èª~^/VGA Zauruså¯¾å¿~\\ã~C~Qã~C~Cã~C~Aä½~\\æ ~H~P<br>");
-   info += "HADECO R&D<br>";
-   info += "r&d@hadeco.co.jp<br>";
-   info += "http://www.hadeco.co.jp/r&d/<br>";
-   info += "<br></div>";
-   info += "</body></html>";
-#else
-   info  = "<html><body><div align=""center"">";
-   info += "<b>";
-   info += tr("Zaurus Password Manager<br>");
-   info += tr("ZSafe version 2.1.2<br>");
-   info += "</b>";
-   info += tr("by Carsten Schneider<br>");
-   info += "zcarsten@gmx.net<br>";
-   info += "http://z-soft.z-portal.info/zsafe";
-   info += "<br>";
-   info += tr("Translations by Robert Ernst<br>");
-   info += "robert.ernst@linux-solutions.at<br>";
-   info += "<br></div>";
-   info += "</body></html>";
-#endif
+   info  = tr("<html><body><div align=""center"">"
+              "<b>"
+              "Zaurus Password Manager<br>"
+              "ZSafe version 2.1.2<br>"
+              "</b>"
+              "by Carsten Schneider<br>"
+              "zcarsten@gmx.net<br>"
+              "http://z-soft.z-portal.info/zsafe"
+              "<br>"
+              "Translations by Robert Ernst<br>"
+              "robert.ernst@linux-solutions.at<br>"
+              "<br></div>"
+              "</body></html>");
 
    // QMessageBox::information( this, tr("ZSafe"), info, tr("&OK"), 0);
 
@@ -3672,9 +3144,7 @@ void ZSafe::setExpandFlag()
 {
    expandTree = !expandTree;
    file->setItemChecked('o', expandTree);
-#ifndef DESKTOP
    conf->setGroup ("zsafePrefs");
-#endif
 // #ifndef Q_WS_WIN
    conf->writeEntry (APP_KEY+"expandTree", expandTree);
 // #endif
@@ -3696,13 +3166,8 @@ void ZSafe::paintEvent( QPaintEvent * )
 void ZSafe::resizeEvent ( QResizeEvent * )
 {
    // owarn << "resizeEvent" << oendl;
-#ifndef DESKTOP
    DeskW = appl->desktop()->width();
    DeskH = appl->desktop()->height();
-#else
-   DeskW = this->width();
-   DeskH = this->height();
-#endif
 
    if (New)
       New->setGeometry   ( QRect( DeskW-84, 2, 20, 20 ) );
@@ -3739,7 +3204,6 @@ QPixmap * ZSafe::getPredefinedIcon(QString category)
 
 void ZSafe::setDocument(const QString& fileref)
 {
-#ifndef DESKTOP
      // stop the timer to prevent loading of the default document
      docuTimer.stop();
 
@@ -3757,14 +3221,11 @@ void ZSafe::setDocument(const QString& fileref)
          filename = fileref;
      }
      // save the current filename to the config file
+     conf->setGroup("zsafe");
      conf->writeEntry(APP_KEY+"document", filename);
      saveConf();
      QString ti = filename.right (filename.length() - filename.findRev ('/') - 1);
-#ifdef Q_WS_WIN
-     this->setCaption("Qt ZSafe: " + ti);
-#else
-     this->setCaption("ZSafe: " + ti);
-#endif
+     this->setCaption(tr("ZSafe: ") + ti);
 
      // clear the password list
      QListViewItem *i;
@@ -3795,9 +3256,6 @@ void ZSafe::setDocument(const QString& fileref)
      selectedItem = NULL;
 
      openDocument(filename);
-#else
-Q_UNUSED(fileref);
-#endif
 }
 
 
@@ -3805,12 +3263,6 @@ void ZSafe::ListPressed(int mouse, QListViewItem *item, const QPoint&, int colum
 	if(item ==0) return;
    switch (mouse) {
    case 1:
-   {
-#ifdef DESKTOP
-	   QDragObject *d = new QTextDrag( item->text(column) , this );
-	   d->dragCopy();
-#endif
-   }
    break;
    case 2:
 	   {
@@ -3851,8 +3303,6 @@ void  ZSafe::copyClip( const QString &text) {
 QString ZSafe::zsaveDialog() {
 
 		QString fn;
-#ifndef DESKTOP
-#ifndef NO_OPIE
    QMap<QString, QStringList> mimeTypes;
    mimeTypes.insert(tr("All"), QStringList() );
    mimeTypes.insert(tr("Text"), "text/*" );
@@ -3862,18 +3312,5 @@ QString ZSafe::zsaveDialog() {
                        mimeTypes,
                        this,
                        tr ("Export text file"));
-#else
-   fn = ScQtFileEdit::getSaveAsFileName(this,
-                       tr ("Export text file"),
-                       QDir::homeDirPath() + "/Documents/application/zsafe",
-                       "*.txt");
-#endif
-#else
-   fn = QFileDialog::getSaveFileName(
-                QDir::homeDirPath() + "/Documents/application/zsafe",
-                    "ZSafe (*.txt)",
-                    this,
-                    "ZSafe");
-#endif
-	 return fn;
+     return fn;
 }
