@@ -8,4 +8,4 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 INTERFACES	=
 TRANSLATIONS = ../i18n/de/filebrowser.ts
-TRANSLATIONS = ../i18n/pt_BR/filebrowser.ts
+TRANSLATIONS += ../i18n/pt_BR/filebrowser.ts

@@ -23,4 +23,4 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 
 TRANSLATIONS = ../i18n/de/mpegplayer.ts
-TRANSLATIONS = ../i18n/pt_BR/mpegplayer.ts
+TRANSLATIONS += ../i18n/pt_BR/mpegplayer.ts

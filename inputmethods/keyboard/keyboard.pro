@@ -15,6 +15,5 @@ DEPENDPATH      += ../$(OPIEDIR)/include ../../taskbar
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
-TRANSLATIONS += ../../i18n/de/libqkeyboard.ts
-TRANSLATIONS  = ../../i18n/pt_BR/libqkeyboard.ts
-
+TRANSLATIONS = ../../i18n/de/libqkeyboard.ts
+TRANSLATIONS += ../../i18n/pt_BR/libqkeyboard.ts

@@ -17,4 +17,4 @@ DEPENDPATH	+= $(OPIEDIR)/include
 LIBS            += -lqpe
 
 TRANSLATIONS = ../i18n/de/todolist.ts
-TRANSLATIONS = ../i18n/pt_BR/todolist.ts
+TRANSLATIONS += ../i18n/pt_BR/todolist.ts
