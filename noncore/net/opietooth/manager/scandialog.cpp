@@ -147,6 +147,7 @@ namespace OpieTooth {
         }
 
         QList<RemoteDevice> *deviceList = new QList<RemoteDevice>;
+        deviceList->setAutoDelete(true);
 
         QListViewItemIterator it( ListView1 );
         for ( ; it.current(); ++it ) {
@@ -156,6 +157,7 @@ namespace OpieTooth {
             }
         }
         emit selectedDevices( *deviceList );
+        delete deviceList;
     }
 
 /*

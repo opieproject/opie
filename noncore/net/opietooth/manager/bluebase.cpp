@@ -2,7 +2,6 @@
  * bluebase.cpp *
  * ---------------------
  *
- * begin       : Sun 10 17:20:00 CEST 2002
  * copyright   : (c) 2002 by Maximilian Reiﬂ
  * email       : max.reiss@gmx.de
  *
@@ -301,7 +300,7 @@ namespace OpieTooth {
     void BlueBase::startScan() {
 
         ScanDialog *scan = new ScanDialog( this, "", true);
-        QObject::connect((QObject*)scan, SIGNAL( selectedDevices(QList<RemoteDevice>&) ),
+        QObject::connect( scan, SIGNAL( selectedDevices(QList<RemoteDevice>&) ),
                          this, SLOT( addSearchedDevices(QList<RemoteDevice>& ) ));
 
         scan->showMaximized();
