@@ -21,6 +21,7 @@
 
 #include "contacteditor.h"
 
+#include <opie2/odebug.h>
 #include <opie2/opimcontact.h>
 
 #include <qpe/categoryselect.h>
@@ -77,7 +78,7 @@ ContactEditor::~ContactEditor() {
 }
 
 void ContactEditor::init() {
-	qWarning("init() START");
+	Opie::Core::owarn << "init() START" << oendl;
 
 	uint i = 0;
 
@@ -686,18 +687,18 @@ void ContactEditor::init() {
 
 	setPersonalView ( m_personalView );
 
-	qWarning("init() END");
+	Opie::Core::owarn << "init() END" << oendl;
 }
 
 void ContactEditor::defaultEmailChanged(int i){
-	qDebug("defaultEmailChanged");
+	Opie::Core::odebug << "defaultEmailChanged" << oendl;
 
 	// was sollte das ? (se)
 // 	int index = cmbChooserField1->currentItem();
 // 	slChooserValues[index] = cmbDefaultEmail->text(i);
 
 	defaultEmail = cmbDefaultEmail->text(i);
-	qDebug ("Changed to: %s", defaultEmail.latin1());
+	Opie::Core::odebug << "Changed to: " << defaultEmail << oendl;
 
 }
 
@@ -716,12 +717,12 @@ void ContactEditor::populateDefaultEmailCmb(){
 	// Select default email in combo..
 	bool found = false;
 	for ( int i = 0; i < cmbDefaultEmail->count(); i++){
-		qDebug(" populateDefaultEmailCmb text >%s< defaultEmail >%s<",
-		       cmbDefaultEmail->text( i ).latin1(), defaultEmail.latin1());
+		Opie::Core::odebug << " populateDefaultEmailCmb text >" << cmbDefaultEmail->text( i )
+							<< "< defaultEmail >" << defaultEmail << "<" << oendl;
 
 		if ( cmbDefaultEmail->text( i ).stripWhiteSpace() == defaultEmail.stripWhiteSpace() ){
 			cmbDefaultEmail->setCurrentItem( i );
-			qDebug("set");
+			Opie::Core::odebug << "set" << oendl;
 			found = true;
 		}
 	}
@@ -737,14 +738,16 @@ void ContactEditor::populateDefaultEmailCmb(){
 // be handled by something else..
 bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int widgetPos ) {
 	QString type = slChooserNames[index];
-	qWarning("ContactEditor::cmbChooserChange -> Type: %s, WidgetPos: %d", type.latin1(), widgetPos );
+	Opie::Core::owarn << "ContactEditor::cmbChooserChange -> Type: " << type
+						<< ", WidgetPos: " << widgetPos << oendl;
 
 	if ( !initializing )
 		contactfields.setFieldOrder( widgetPos-1, index );
 
 	// Create and connect combobox for selecting the default email
         if ( type == "Default Email"){
-		qWarning("Choosing default-email (defaultEmailChooserPosition= %d) ", defaultEmailChooserPosition);
+		Opie::Core::owarn << "Choosing default-email (defaultEmailChooserPosition= "
+							<< defaultEmailChooserPosition << ") " << oendl;
 
 		// More than one default-email chooser is not allowed !
 		if ( ( defaultEmailChooserPosition != -1 ) &&
@@ -777,7 +780,7 @@ bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int w
 
 	} else {
 		// Something else was selected: Hide combo..
-		qWarning(" Hiding default-email combo" );
+		Opie::Core::owarn << " Hiding default-email combo" << oendl;
 		if ( defaultEmailChooserPosition == widgetPos ){
 			defaultEmailChooserPosition = -1;
 		}
@@ -802,7 +805,7 @@ bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int w
 // Currently accessed when we select default-email more than once !
 void ContactEditor::chooserError( int index )
 {
-	qWarning("ContactEditor::chooserError( %d )", index);
+	Opie::Core::owarn << "ContactEditor::chooserError( " << index << " )" << oendl;
 	QMessageBox::warning( this, "Chooser Error",
 			      "Multiple selection of this\n"
 			      "Item is not allowed !\n\n"
@@ -838,17 +841,18 @@ void ContactEditor::chooserChange( const QString &textChanged, int index,
 				   QLineEdit* , int widgetPos ) {
 
 	QString type = slChooserNames[index]; // :SX
-	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",
-	       type.latin1(),textChanged.latin1(), index,  widgetPos );
+	Opie::Core::odebug << "ContactEditor::chooserChange( type=>" << type << "<, textChanged=>"
+						<< textChanged << "< index=" << index << ", widgetPos=" << widgetPos
+						<< " )" << oendl;
 
         if ( type == "Default Email"){
-		qWarning ("??? Wozu??: %s", textChanged.latin1());
+		Opie::Core::owarn << "??? Wozu??: " << textChanged << oendl;
 		defaultEmail = textChanged;
 
 		populateDefaultEmailCmb();
 
         }else if (type == "Emails"){
-		qDebug("emails");
+		Opie::Core::odebug << "emails" << oendl;
 
 		QString de;
 		emails = QStringList::split (",", textChanged );
@@ -861,23 +865,23 @@ void ContactEditor::chooserChange( const QString &textChanged, int index,
 }
 
 void ContactEditor::slotChooser1Change( const QString &textChanged ) {
-	qWarning("ContactEditor::slotChooser1Change( %s )", textChanged.latin1());
+	Opie::Core::owarn << "ContactEditor::slotChooser1Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField1->currentItem(), txtChooserField1, 1);
 }
 
 void ContactEditor::slotChooser2Change( const QString &textChanged ) {
-	qWarning("ContactEditor::slotChooser2Change( %s )", textChanged.latin1());
+	Opie::Core::owarn << "ContactEditor::slotChooser2Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField2->currentItem(), txtChooserField2, 2);
 
 }
 
 void ContactEditor::slotChooser3Change( const QString &textChanged ) {
-	qWarning("ContactEditor::slotChooser3Change( %s )", textChanged.latin1());
+	Opie::Core::owarn << "ContactEditor::slotChooser3Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField3->currentItem(), txtChooserField3, 3);
 }
 
 void ContactEditor::slotChooser4Change( const QString &textChanged ) {
-	qWarning("ContactEditor::slotChooser4Change( %s )", textChanged.latin1());
+	Opie::Core::owarn << "ContactEditor::slotChooser4Change( " << textChanged << " )" << oendl;
 	chooserChange( textChanged, cmbChooserField4->currentItem(), txtChooserField4, 4);
 }
 
@@ -947,7 +951,7 @@ void ContactEditor::slotCountryChange( const QString &textChanged ) {
 
 
 void ContactEditor::slotCmbChooser1Change( int index ) {
-	qWarning("ContactEditor::slotCmbChooser1Change( %d )", index);
+	Opie::Core::owarn << "ContactEditor::slotCmbChooser1Change( " << index << " )" << oendl;
 	if ( !cmbChooserChange( cmbChooserField1->currentItem(), m_widgetStack1, 1) ){
 
 		txtChooserField1->setText( slChooserValues[index] );
@@ -958,7 +962,7 @@ void ContactEditor::slotCmbChooser1Change( int index ) {
 }
 
 void ContactEditor::slotCmbChooser2Change( int index ) {
-	qWarning("ContactEditor::slotCmbChooser2Change( %d )", index);
+	Opie::Core::owarn << "ContactEditor::slotCmbChooser2Change( " << index << " )" << oendl;
 
 	if ( !cmbChooserChange( cmbChooserField2->currentItem(), m_widgetStack2, 2) ){
 
@@ -969,7 +973,7 @@ void ContactEditor::slotCmbChooser2Change( int index ) {
 }
 
 void ContactEditor::slotCmbChooser3Change( int index ) {
-	qWarning("ContactEditor::slotCmbChooser3Change( %d )", index);
+	Opie::Core::owarn << "ContactEditor::slotCmbChooser3Change( " << index << " )" << oendl;
 
 	if ( !cmbChooserChange( cmbChooserField3->currentItem(), m_widgetStack3, 3) ){
 
@@ -980,7 +984,7 @@ void ContactEditor::slotCmbChooser3Change( int index ) {
 }
 
 void ContactEditor::slotCmbChooser4Change( int index ) {
-	qWarning("ContactEditor::slotCmbChooser4Change( %d )", index);
+	Opie::Core::owarn << "ContactEditor::slotCmbChooser4Change( " << index << " )" << oendl;
 
 	if ( !cmbChooserChange( cmbChooserField4->currentItem(), m_widgetStack4, 4) ){
 
@@ -1025,7 +1029,7 @@ void ContactEditor::slotAddressTypeChange( int index ) {
 
 void ContactEditor::slotFullNameChange( const QString &textChanged ) {
 
-	qWarning( "ContactEditor::slotFullNameChange( %s )", textChanged.latin1() );
+	Opie::Core::owarn << "ContactEditor::slotFullNameChange( " << textChanged << " )" << oendl;
 
 	int index = cmbFileAs->currentItem();
 
@@ -1049,7 +1053,7 @@ void ContactEditor::slotSuffixChange( const QString& ) {
 }
 
 void ContactEditor::slotOrganizationChange( const QString &textChanged ){
-	qWarning( "ContactEditor::slotOrganizationChange( %s )", textChanged.latin1() );
+	Opie::Core::owarn << "ContactEditor::slotOrganizationChange( " << textChanged << " )" << oendl;
 	// Special handling for storing Companies:
 	// If no Fullname is given, we store the Company-Name as lastname
 	// to handle it like a person..
@@ -1131,11 +1135,11 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	int commapos;
 	bool haveLastName = false;
 
-	qWarning("Fullname: %s", simplifiedName.latin1());
+	Opie::Core::owarn << "Fullname: " << simplifiedName << oendl;
 
 	commapos = simplifiedName.find( ',', 0, TRUE);
 	if ( commapos >= 0 ) {
-		qWarning(" Commapos: %d", commapos );
+		Opie::Core::owarn << " Commapos: " << commapos << oendl;
 
 		// A comma (",") separates the lastname from one or
 		// many first names. Thus, remove the lastname from the
@@ -1144,7 +1148,7 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 		strLastName = simplifiedName.left( commapos );
 		simplifiedName= simplifiedName.mid( commapos + 1 );
 		haveLastName = true;
-		qWarning("Fullname without ',': %s", simplifiedName.latin1());
+		Opie::Core::owarn << "Fullname without ',': " << simplifiedName << oendl;
 
 		// If we have any lastname, we should now split all first names.
 		// The first one will be the used as first, the rest as "middle names"
@@ -1178,10 +1182,10 @@ QString ContactEditor::parseName( const QString fullName, int type ) {
 	if ( strFirstName == strLastName )
 		strFirstName = "";
 
-	qWarning(" strFirstName: %s",  strFirstName.latin1());
-	qWarning(" strMiddleName: %s",  strMiddleName.latin1());
-	qWarning(" strLastName: %s",  strLastName.latin1());
-	qWarning(" strTitle: %s",  strTitle.latin1());
+	Opie::Core::owarn << "strFirstName: " << strFirstName << oendl;
+	Opie::Core::owarn << "strMiddletName: " << strMiddleName << oendl;
+	Opie::Core::owarn << "strLastName: " << strLastName << oendl;
+	Opie::Core::owarn << "strTitle: " << strTitle << oendl;
 
 	switch (type) {
 	case NAME_FL:
@@ -1264,7 +1268,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 	emails = QStringList(ent.emailList());
 	defaultEmail = ent.defaultEmail();
 	if (defaultEmail.isEmpty()) defaultEmail = emails[0];
-	qDebug("default email=%s",defaultEmail.latin1());
+	Opie::Core::odebug << "default email=" << defaultEmail << oendl;
 
 	txtFirstName->setText( ent.firstName() );
 	txtMiddleName->setText( ent.middleName() );
@@ -1324,7 +1328,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 	QListIterator<QLineEdit> itLE( listValue );
 	for ( it = slDynamicEntries.begin(); itLE.current()/* != slDynamicEntries.end()*/; ++it, ++itLE) {
 
-		qWarning(" Filling dynamic Field: %s", (*it).latin1() );
+		Opie::Core::owarn << " Filling dynamic Field: " << (*it) << oendl;
 
 		if ( *it ==  "Department"  )
 			(*itLE)->setText( ent.department() );
@@ -1348,7 +1352,7 @@ void ContactEditor::setEntry( const Opie::OPimContact &entry ) {
 			(*itLE)->setText( ent.spouse() );
 
 		if ( *it == "Nickname" ){
-			qWarning("**** Nichname: %s", ent.nickname().latin1() );
+			Opie::Core::owarn << "**** Nichname: " << ent.nickname() << oendl;
 			(*itLE)->setText( ent.nickname() );
 		}
 
@@ -1581,8 +1585,8 @@ void ContactEditor::saveEntry() {
  			QString defaultmail;
 			parseEmailFrom( emails.join(","), defaultmail, allemail );
 			if ( defaultEmail.isEmpty() ){
-				qWarning("Default email was not set by user!");
-				qWarning("Using first email in list: %s", defaultmail.latin1());
+				Opie::Core::owarn << "Default email was not set by user!" << oendl;
+				Opie::Core::owarn << "Using first email in list: " << defaultmail << oendl;
 				ent.setDefaultEmail( defaultmail );
 			}
  			ent.setEmails( allemail );
@@ -1734,14 +1738,14 @@ void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
 
 void ContactEditor::slotRemoveBirthday()
 {
-	qWarning("void ContactEditor::slotRemoveBirthday()");
+	Opie::Core::owarn << "void ContactEditor::slotRemoveBirthday()" << oendl;
 	ent.setBirthday( QDate() );
 	updateDatePicker();
 }
 
 void ContactEditor::slotRemoveAnniversary()
 {
-	qWarning("void ContactEditor::slotRemoveAnniversary()");
+	Opie::Core::owarn << "void ContactEditor::slotRemoveAnniversary()" << oendl;
 	ent.setAnniversary( QDate() );
 	updateDatePicker();
 }

@@ -20,7 +20,7 @@
 
 #include "ablabel.h"
 
-
+#include <opie2/odebug.h>
 
 AbLabel::AbLabel( QWidget *parent, const char *name ):
 	QTextView( parent, name ),
@@ -95,15 +95,15 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 	if ( !m_empty ){
 		switch( e->key() ) {
 		case Qt::Key_Left:
-			qWarning( "Left..");
+			Opie::Core::owarn << "Left.." << oendl;
 		case Qt::Key_Right:
-			qWarning( "Right..");
+			Opie::Core::owarn << "Right.." << oendl;
 		case Qt::Key_F33:
-			qWarning( "OK..");
+			Opie::Core::owarn << "OK.." << oendl;
 			emit signalOkPressed();
 			break;
 		case Qt::Key_Up:
-			qWarning( "UP..");
+			Opie::Core::owarn << "Up.." << oendl;
 			if ( ( visibleHeight() < contentsHeight() ) &&
 			     ( verticalScrollBar()->value() > verticalScrollBar()->minValue() ) )
 				scrollBy( 0, -(visibleHeight()-20) );
@@ -117,10 +117,10 @@ void AbLabel::keyPressEvent( QKeyEvent *e )
 
 			break;
 		case Qt::Key_Down:
-			qWarning( "DOWN..");
-// 			qWarning( "visible: %d, content: %d",visibleHeight(),contentsHeight());
-// 			qWarning( "value: %d; barMaxValue: %d", verticalScrollBar()->value()
-// 				  , verticalScrollBar()->maxValue() );
+			Opie::Core::owarn << "Down.." << oendl;
+//			Opie::Core::owarn << "Visible: " << visibleHeight() << ", content: " << contentHeight() << oendl;
+//			Opie::Core::owarn << "Value: " << verticalScrollBar()->value()
+//					<< ", barMaxValue: " << verticalScrollBar()->maxValue() << oendl;
 			if ( ( visibleHeight() < contentsHeight() ) &&
 			     ( verticalScrollBar()->value() < verticalScrollBar()->maxValue() ) )
 				scrollBy( 0, visibleHeight()-20 );

@@ -17,6 +17,7 @@
 #include "abview.h"
 
 #include <opie2/ocontactaccessbackend_vcard.h>
+#include <opie2/odebug.h>
 
 #include <qpe/global.h>
 
@@ -51,7 +52,7 @@ AbView::AbView ( QWidget* parent, const QValueList<int>& ordered ):
 	m_abTable( 0l ),
 	m_orderedFields( ordered )
 {
-	qWarning("AbView::c'tor");
+	Opie::Core::owarn << "AbView::c'tor" << oendl;
 	// Load default database and handle syncing myself.. !
 	m_contactdb = new Opie::OPimContactAccess ( "addressbook", 0l, 0l, false );
 	m_contactdb -> setReadAhead( 16 ); // Use ReadAhead-Cache if available
@@ -99,28 +100,28 @@ AbView::~AbView()
 
 void AbView::setView( Views view )
 {
-	qWarning("AbView::setView( Views view )");
+	Opie::Core::owarn << "AbView::setView( Views view )" << oendl;
  	m_curr_View = view;
  	load();
 }
 
 void AbView::addEntry( const Opie::OPimContact &newContact )
 {
-	qWarning("abview:AddContact");
+	Opie::Core::owarn << "AbView::AddContact" << oendl;
 	m_contactdb->add ( newContact );
 	load();
 
 }
 void AbView::removeEntry( const int UID )
 {
-	qWarning("abview:RemoveContact");
+	Opie::Core::owarn << "AbView;:RemoveContact" << oendl;
 	m_contactdb->remove( UID );
 	load();
 }
 
 void AbView::replaceEntry( const Opie::OPimContact &contact )
 {
-	qWarning("abview:ReplaceContact");
+	Opie::Core::owarn << "AbView::ReplaceContact" << oendl;
 	m_contactdb->replace( contact );
 	load();
 
@@ -144,14 +145,14 @@ Opie::OPimContact AbView::currentEntry()
 
 bool AbView::save()
 {
-	//	qWarning("abView:Save data");
+	//	Opie::Core::owarn << "AbView::Save data" << oendl;
 
 	return m_contactdb->save();
 }
 
 void AbView::load()
 {
-	qWarning("abView:Load data");
+	Opie::Core::owarn << "AbView::Load data" << oendl;
 
 	// Letter Search is stopped at this place
 	emit signalClearLetterPicker();
@@ -165,7 +166,7 @@ void AbView::load()
 			clearForCategory();
 	}
 
-	qWarning ("Number of contacts: %d", m_list.count());
+	Opie::Core::owarn << "Number of contacts: " << m_list.count() << oendl;
 
 	updateView( true );
 
@@ -173,7 +174,7 @@ void AbView::load()
 
 void AbView::reload()
 {
-        qWarning( "void AbView::reload()" );
+	Opie::Core::owarn << "AbView::::reload()" << oendl;
 
 	m_contactdb->reload();
 	load();
@@ -186,7 +187,7 @@ void AbView::clear()
 
 void AbView::setShowByCategory( const QString& cat )
 {
-	qWarning("AbView::setShowCategory( const QString& cat )");
+	Opie::Core::owarn << "AbView::setShowCategory( const QString& cat )" << oendl;
 
 	int intCat = 0;
 
@@ -198,7 +199,8 @@ void AbView::setShowByCategory( const QString& cat )
 
 	// Just do anything if we really change the category
 	if ( intCat != m_curr_category ){
-		//		qWarning ("Categories: Selected %s.. Number: %d", cat.latin1(), m_curr_category);
+		//		Opie::Core::owarn << "Categories: Selected " << cat << ".. Number: "
+		//						<< m_curr_category << oendl;
 
 		m_curr_category = intCat;
 		emit signalClearLetterPicker();
@@ -210,10 +212,10 @@ void AbView::setShowByCategory( const QString& cat )
 
 void AbView::setShowToView( Views view )
 {
-       	qWarning("void AbView::setShowToView( View %d )", view);
+	Opie::Core::owarn << "void AbView::setShowToView( View " << view << " )" << oendl;
 
 	if ( m_curr_View != view ){
-		qWarning ("Change the View (Category is: %d)", m_curr_category);
+		Opie::Core::owarn << "Change the View (Category is: " << m_curr_category << ")" << oendl;
 		m_prev_View = m_curr_View;
 		m_curr_View = view;
 
@@ -224,7 +226,7 @@ void AbView::setShowToView( Views view )
 
 void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 {
-	qWarning("void AbView::setShowByLetter( %c, %d )", c, mode );
+	Opie::Core::owarn << "void AbView::setShowByLetter( " << c << ", " << mode << " )" << oendl;
 
 	assert( mode < AbConfig::LASTELEMENT );
 
@@ -247,8 +249,8 @@ void AbView::setShowByLetter( char c, AbConfig::LPSearchMode mode )
 			query.setFileAs( QString("%1*").arg(c) );
 			break;
 		default:
-			qWarning( "Unknown Searchmode for AbView::setShowByLetter ! -> %d", mode );
-			qWarning( "I will ignore it.." );
+			Opie::Core::owarn << "Unknown Searchmode for AbView::setShowByLetter ! -> " << mode << oendl
+							<< "I will ignore it.." << oendl;
 			return;
 		}
 		m_list = m_contactdb->queryByExample( query, Opie::OPimContactAccess::WildCards | Opie::OPimContactAccess::IgnoreCase );
@@ -277,7 +279,7 @@ QString AbView::showCategory() const
 
 void AbView::showPersonal( bool personal )
 {
-	qWarning ("void AbView::showPersonal( %d )", personal);
+	Opie::Core::owarn << "void AbView::showPersonal( " << personal << " )" << oendl;
 
 	if ( personal ){
 
@@ -333,7 +335,7 @@ QStringList AbView::categories()
 void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 			 bool , QString cat )
 {
-	//	qWarning( "void AbView::slotDoFind" );
+	//	Opie::Core::owarn << "void AbView::slotDoFind" << oendl;
 
 	// We reloading the data: Deselect Letterpicker
 	emit signalClearLetterPicker();
@@ -347,7 +349,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 		category = mCat.id("Contacts", cat );
 	}
 
-	//	qWarning ("Find in Category %d", category);
+	//	Opie::Core::owarn << "Find in Category " << category << oendl;
 
 	QRegExp r( str );
 	r.setCaseSensitive( caseSensitive );
@@ -356,7 +358,7 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 	// Get all matching entries out of the database
 	m_list = m_contactdb->matchRegexp( r );
 
-	//	qWarning( "found: %d", m_list.count() );
+	//	Opie::Core::owarn << "Found: " << m_list.count() << oendl;
 	if ( m_list.count() == 0 ){
 		emit signalNotFound();
 		return;
@@ -380,16 +382,16 @@ void AbView::offSearch()
 }
 
 void AbView::slotSwitch(){
-	//	qWarning("AbView::slotSwitch()");
+	//	Opie::Core::owarn << "AbView::slotSwitch()" << oendl;
 
 	m_prev_View = m_curr_View;
 	switch ( (int) m_curr_View ){
 	case TableView:
-		qWarning("Switching to CardView");
+		Opie::Core::owarn << "Switching to CardView" << oendl;
 		m_curr_View = CardView;
 		break;
 	case CardView:
-		qWarning("Switching to TableView");
+		Opie::Core::owarn << "Switching to TableView" << oendl;
 		m_curr_View = TableView;
 		break;
 	}
@@ -408,7 +410,7 @@ void AbView::clearForCategory()
 	if ( m_curr_category != -1 ){
 		for ( it = allList.begin(); it != allList.end(); ++it ){
 			if ( !contactCompare( *it, m_curr_category ) ){
-				//				qWarning("Removing %d", (*it).uid());
+				//Opie::Core::owarn << "Removing " << (*it).uid() << oendl;
 				m_list.remove( (*it).uid() );
 			}
 		}
@@ -418,13 +420,14 @@ void AbView::clearForCategory()
 
 bool AbView::contactCompare( const Opie::OPimContact &cnt, int category )
 {
-	//	qWarning ("bool AbView::contactCompare( const Opie::OPimContact &cnt, %d )", category);
+	//	Opie::Core::owarn << "bool AbView::contactCompare( const Opie::OPimContact &cnt, "
+	//					<< category << " )" << oendl;
 
 	bool returnMe;
 	QArray<int> cats;
 	cats = cnt.categories();
 
-	//	qWarning ("Number of categories: %d", cats.count() );
+	//	Opie::Core::owarn << "Number of categories: " << cats.count() << oendl;
 
 	returnMe = false;
 	if ( cats.count() == 0 && category == 0 )
@@ -433,14 +436,14 @@ bool AbView::contactCompare( const Opie::OPimContact &cnt, int category )
 	else {
 		int i;
 		for ( i = 0; i < int(cats.count()); i++ ) {
-			//			qWarning("Comparing %d with %d",cats[i],category );
+			//Opie::Core::owarn << "Comparing " << cats[i] << " with " << category << oendl;
 			if ( cats[i] == category ) {
 				returnMe = true;
 				break;
 			}
 		}
 	}
-	//	qWarning ("Return: %d", returnMe);
+	//	Opie::Core::owarn << "Return: " << returnMe << oendl;
 	return returnMe;
 }
 
@@ -453,7 +456,7 @@ void AbView::updateListinViews()
 
 void  AbView::updateView( bool newdata )
 {
-	//	qWarning("AbView::updateView()");
+	//	Opie::Core::owarn << "AbView::updateView()" << oendl;
 
 	if ( m_viewStack -> visibleWidget() ){
 		m_viewStack -> visibleWidget() -> clearFocus();

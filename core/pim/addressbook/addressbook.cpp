@@ -22,7 +22,7 @@
 // #include "addresssettings.h"
 #include "addressbook.h"
 
-
+#include <opie2/odebug.h>
 #include <opie2/ofileselector.h>
 #include <opie2/ofiledialog.h>
 #include <opie2/opimcontact.h>
@@ -251,7 +251,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 
 	setCentralWidget(listContainer);
 
-	//    qDebug("adressbook contrsuction: t=%d", t.elapsed() );
+	//	Opie::Core::odebug << "adressbook contrsuction: t=" << t.elapsed() << oendl;
 	connect( qApp, SIGNAL( flush() ), this, SLOT( flush() ) );
 	connect( qApp, SIGNAL( reload() ), this, SLOT( reload() ) );
 	connect( qApp, SIGNAL( appMessage(const QCString&,const QByteArray&) ),
@@ -267,10 +267,10 @@ void AddressbookWindow::slotConfig()
 	ConfigDlg* dlg = new ConfigDlg( this, "Config" );
 	dlg -> setConfig( m_config );
 	if ( QPEApplication::execDialog( dlg ) ) {
-		qWarning ("Config Dialog accepted!");
+		Opie::Core::owarn << "Config Dialog accepted!" << oendl;
 		m_config = dlg -> getConfig();
 		if ( m_curFontSize != m_config.fontSize() ){
-			qWarning("Font was changed!");
+			Opie::Core::owarn << "Font was changed!" << oendl;
 			m_curFontSize = m_config.fontSize();
 			emit slotSetFont( m_curFontSize );
 		}
@@ -283,7 +283,7 @@ void AddressbookWindow::slotConfig()
 
 void AddressbookWindow::slotSetFont( int size )
 {
-	qWarning("void AddressbookWindow::slotSetFont( %d )", size);
+	Opie::Core::owarn << "void AddressbookWindow::slotSetFont( " << size << " )" << oendl;
 
 	if (size > 2 || size < 0)
 		size = 1;
@@ -325,10 +325,10 @@ void AddressbookWindow::importvCard() {
 }
 void AddressbookWindow::exportvCard()
 {
-	qWarning(" void AddressbookWindow::exportvCard()");
+	Opie::Core::owarn << "void AddressbookWindow::exportvCard()" << oendl;
         QString filename = Opie::Ui::OFileDialog::getSaveFileName( 1,"/home/"); //,"", "*", this );
         if( !filename.isEmpty() &&  ( filename[filename.length()-1] != '/' ) ){
-		qWarning(" Save to file %s, (%d)", filename.latin1(), filename.length()-1 );
+		Opie::Core::owarn << " Save to file " << filename << ", (" << filename.length()-1 << ")" << oendl;
 		Opie::OPimContact curCont = m_abView->currentEntry();
 		if ( !curCont.isEmpty() ){
 			Opie::OPimContactAccessBackend* vcard_backend = new Opie::OPimContactAccessBackend_VCard( QString::null,
@@ -350,7 +350,7 @@ void AddressbookWindow::exportvCard()
 
 void AddressbookWindow::setDocument( const QString &filename )
 {
-	qWarning( "void AddressbookWindow::setDocument( %s )", filename.latin1() );
+	Opie::Core::owarn << "void AddressbookWindow::setDocument( " << filename << " )" << oendl;
 
 	if ( filename.find(".vcf") != int(filename.length()) - 4 ){
 
@@ -362,10 +362,10 @@ void AddressbookWindow::setDocument( const QString &filename )
 						  0,      // Enter == button 0
 						  2 ) ) { // Escape == button 2
 		case 0:
-			qWarning("YES clicked");
+			Opie::Core::owarn << "YES clicked" << oendl;
 			break;
 		case 1:
-			qWarning("NO clicked");
+			Opie::Core::owarn << "NO clicked" << oendl;
 			return;
 			break;
 		}
@@ -375,7 +375,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 									 filename );
 	Opie::OPimContactAccess* access = new Opie::OPimContactAccess ( "addressbook", QString::null , vcard_backend, true );
 	Opie::OPimContactAccess::List allList = access->allRecords();
-	qWarning( "Found number of contacts in File: %d", allList.count() );
+	Opie::Core::owarn << "Found number of contacts in File: " << allList.count() << oendl;
 
 	if ( !allList.count() ) {
 		QMessageBox::information( this, "Import VCard",
@@ -386,7 +386,7 @@ void AddressbookWindow::setDocument( const QString &filename )
 	bool doAsk = true;
 	Opie::OPimContactAccess::List::Iterator it;
 	for ( it = allList.begin(); it != allList.end(); ++it ){
-		qWarning("Adding Contact from: %s", (*it).fullName().latin1() );
+		Opie::Core::owarn << "Adding Contact from: " << (*it).fullName() << oendl;
 		if ( doAsk ){
 			switch( QMessageBox::information( this, tr ( "Add Contact?" ),
 							  tr( "Do you really want add contact for \n%1?" )
@@ -395,14 +395,14 @@ void AddressbookWindow::setDocument( const QString &filename )
 							  0,      // Enter == button 0
 							  2 ) ) { // Escape == button 2
 			case 0:
-				qWarning("YES clicked");
+				Opie::Core::owarn << "YES clicked" << oendl;
 				m_abView->addEntry( *it );
 				break;
 			case 1:
-				qWarning("NO clicked");
+				Opie::Core::owarn << "NO clicked" << oendl;
 				break;
 			case 2:
-				qWarning("YesAll clicked");
+				Opie::Core::owarn << "YesAll clicked" << oendl;
 				doAsk = false;
 				break;
 			}
@@ -538,9 +538,9 @@ void AddressbookWindow::writeMail()
 	// Try to access the preferred. If not possible, try to
 	// switch to the other one..
 	if ( m_config.useQtMail() ){
-		qWarning ("Accessing: %s", (basepath + "/bin/qtmail").latin1());
-	        if ( QFile::exists( basepath + "/bin/qtmail" ) ){
-			qWarning ("QCop");
+		Opie::Core::owarn << "Accessing: " << (basepath + "/bin/qtmail") << oendl;
+		if ( QFile::exists( basepath + "/bin/qtmail" ) ){
+			Opie::Core::owarn << "QCop" << oendl;
 			QCopEnvelope e("QPE/Application/qtmail", "writeMail(QString,QString)");
 			e << name << email;
 			return;
@@ -548,9 +548,9 @@ void AddressbookWindow::writeMail()
 			m_config.setUseOpieMail( true );
 	}
 	if ( m_config.useOpieMail() ){
-		qWarning ("Accessing: %s", (basepath + "/bin/opiemail").latin1());
+		Opie::Core::owarn << "Accessing: " << (basepath + "/bin/opiemail") << oendl;
 		if ( QFile::exists( basepath + "/bin/opiemail" ) ){
-			qWarning ("QCop");
+			Opie::Core::owarn << "QCop" << oendl;
 			QCopEnvelope e("QPE/Application/opiemail", "writeMail(QString,QString)");
 			e << name << email;
 			return;
@@ -592,7 +592,7 @@ void AddressbookWindow::slotBeam()
 		beamFilename = beamfile;
 	}
 
-	qWarning("Beaming: %s", beamFilename.latin1() );
+	Opie::Core::owarn << "Beaming: " << beamFilename << oendl;
 
 	Ir *ir = new Ir( this );
 	connect( ir, SIGNAL( done(Ir*) ), this, SLOT( beamDone(Ir*) ) );
@@ -639,7 +639,7 @@ static void parseName( const QString& name, QString *first, QString *middle,
 void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 {
         bool needShow = FALSE;
-        qWarning("Receiving QCop-Call with message %s", QString( msg ).latin1() );
+		Opie::Core::owarn << "Receiving QCop-Call with message " << msg << oendl;
 
 
 	if (msg == "editPersonal()") {
@@ -655,7 +655,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		Opie::OPimContact cnt;
 		QString fn, mn, ln;
 		parseName( name, &fn, &mn, &ln );
-		//  qDebug( " %s - %s - %s", fn.latin1(), mn.latin1(), ln.latin1() );
+		//	Opie::Core::odebug << " " << fn << " - " << mn " - " << ln << oendl;
 		cnt.setFirstName( fn );
 		cnt.setMiddleName( mn );
 		cnt.setLastName( ln );
@@ -682,7 +682,7 @@ void AddressbookWindow::appMessage(const QCString &msg, const QByteArray &data)
 		int uid;
 		stream >> uid;
 
-		qWarning( "Showing uid: %d" , uid );
+		Opie::Core::owarn << "Showing uid: " << uid << oendl;
 
 		// Deactivate Personal View..
 		if ( actionPersonal->isOn() ){
@@ -762,7 +762,7 @@ void AddressbookWindow::editPersonal()
 	// Switch to personal view if not selected
 	// but take care of the menu, too
 	if ( ! actionPersonal->isOn() ){
-		qWarning("*** ++++");
+		Opie::Core::owarn << "*** ++++" << oendl;
 		actionPersonal->setOn( true );
 		slotPersonalView();
 	}
@@ -781,10 +781,10 @@ void AddressbookWindow::editPersonal()
 
 void AddressbookWindow::slotPersonalView()
 {
-	qWarning("slotPersonalView()");
+	Opie::Core::owarn << "slotPersonalView()" << oendl;
 	if (!actionPersonal->isOn()) {
 		// we just turned it off
-		qWarning("slotPersonalView()-> OFF");
+		Opie::Core::owarn << "slotPersonalView()-> OFF" << oendl;
 		setCaption( tr("Contacts") );
 		actionNew->setEnabled(TRUE);
 		actionTrash->setEnabled(TRUE);
@@ -797,7 +797,7 @@ void AddressbookWindow::slotPersonalView()
 		return;
 	}
 
-	qWarning("slotPersonalView()-> ON");
+	Opie::Core::owarn << "slotPersonalView()-> ON" << oendl;
 	// XXX need to disable some QActions.
 	actionNew->setEnabled(FALSE);
 	actionTrash->setEnabled(FALSE);
@@ -887,7 +887,7 @@ void AddressbookWindow::slotSave()
 
 void AddressbookWindow::slotNotFound()
 {
-	qWarning("Got notfound signal!");
+	Opie::Core::owarn << "Got not found signal!" << oendl;
 	QMessageBox::information( this, tr( "Not Found" ),
 				 "<qt>" + tr( "Unable to find a contact for this search pattern!" ) + "</qt>" );
 
@@ -895,7 +895,7 @@ void AddressbookWindow::slotNotFound()
 }
 void AddressbookWindow::slotWrapAround()
 {
-	qWarning("Got wrap signal!");
+	Opie::Core::owarn << "Got wrap signal!" << oendl;
 // 	if ( doNotifyWrapAround )
 // 		QMessageBox::information( this, tr( "End of list" ),
 // 					  tr( "End of list. Wrap around now...!" ) + "\n" );
@@ -904,7 +904,8 @@ void AddressbookWindow::slotWrapAround()
 
 void AddressbookWindow::slotSetCategory( int c )
 {
-	qWarning( "void AddressbookWindow::slotSetCategory( %d ) from %d", c, catMenu->count() );
+	Opie::Core::owarn << "void AddressbookWindow::slotSetCategory( " << c << " ) from "
+					<< catMenu->count() << oendl;
 
 	QString cat, book;
 	AbView::Views  view = AbView::TableView;
@@ -939,7 +940,7 @@ void AddressbookWindow::slotSetCategory( int c )
 				cat = QString::null;
 			}else if ( i == (unsigned int)catMenu->count() - 1 ){ // last menu option (seperator is counted, too) will be Unfiled
 				cat = "Unfiled";
-				qWarning ("Unfiled selected!");
+				Opie::Core::owarn << "Unfiled selected!" << oendl;
 			}else{
 				cat = m_abView->categories()[i - 4];
 			}
@@ -962,7 +963,7 @@ void AddressbookWindow::slotSetCategory( int c )
 
 void AddressbookWindow::slotViewSwitched( int view )
 {
-	qWarning( "void AddressbookWindow::slotViewSwitched( %d )", view );
+	Opie::Core::owarn << "void AddressbookWindow::slotViewSwitched( " << view << " )" << oendl;
 	int menu = 0;
 
 	// Switch to selected view

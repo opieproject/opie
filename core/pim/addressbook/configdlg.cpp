@@ -1,5 +1,6 @@
 #include "configdlg.h"
 
+#include <opie2/odebug.h>
 #include <opie2/opimcontact.h>
 #include "opie2/opimcontactfields.h"
 
@@ -42,7 +43,7 @@ ConfigDlg::ConfigDlg( QWidget *parent, const char *name):
 
 void ConfigDlg::slotItemUp()
 {
-	qWarning( "void ConfigDlg::slotItemUp()" );
+	Opie::Core::owarn << "void ConfigDlg::slotItemUp()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i > 0 ) {
@@ -56,7 +57,7 @@ void ConfigDlg::slotItemUp()
 
 void ConfigDlg::slotItemDown()
 {
-	qWarning( "void ConfigDlg::slotItemDown()" );
+	Opie::Core::owarn << "void ConfigDlg::slotItemDown()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i < (int)fieldListBox->count() - 1 ) {
@@ -69,19 +70,19 @@ void ConfigDlg::slotItemDown()
 
 void ConfigDlg::slotItemAdd()
 {
-	qWarning( "void ConfigDlg::slotItemAdd()" );
+	Opie::Core::owarn << "void ConfigDlg::slotItemAdd()" << oendl;
 
 	int i = allFieldListBox->currentItem();
 	if ( i > 0 ) {
 		QString item = allFieldListBox->currentText();
-		qWarning("ADding %s", item.latin1());
+		Opie::Core::owarn << "Adding " << item << oendl;
 		fieldListBox->insertItem( item );
 	}
 }
 
 void ConfigDlg::slotItemRemove()
 {
-	qWarning( "void ConfigDlg::slotItemRemove()" );
+	Opie::Core::owarn << "void ConfigDlg::slotItemRemove()" << oendl;
 
 	int i = fieldListBox->currentItem();
 	if ( i > 0 ) {

@@ -1,11 +1,13 @@
 #include "picker.h"
 
+#include <opie2/odebug.h>
+
 #include <qtimer.h>
 #include <qlayout.h>
 
 char PickerLabel::lastLetter = '\0';
 
-PickerLabel::PickerLabel( QWidget *parent, const char *name ) 
+PickerLabel::PickerLabel( QWidget *parent, const char *name )
 	: QLabel ( parent, name )
 {
 	currentLetter = 0;
@@ -30,17 +32,17 @@ void PickerLabel::setLetters( char ch1, char ch2, char ch3 )
 {
 	QString tmpStr;
 
-	if (ch1 != '\0') 
+	if (ch1 != '\0')
 		letter1 = ch1;
 	else
 		letter1 = ' ';
 
-	if (ch2 != '\0') 
+	if (ch2 != '\0')
 		letter2 = ch2;
 	else
 		letter2 = ' ';
 
-	if (ch3 != '\0') 
+	if (ch3 != '\0')
 		letter3 = ch3;
 	else
 		letter3 = ' ';
@@ -61,7 +63,7 @@ void PickerLabel::clearLetter()
 {
 
 	QString tmpStr;
-	
+
 	tmpStr = "<qt>";
 	tmpStr += letter1;
 	tmpStr += letter2;
@@ -76,12 +78,12 @@ void PickerLabel::clearLetter()
 
 void PickerLabel::mousePressEvent( QMouseEvent* e )
 {
-	// If one pickerlabel is was, and an other is now selected, we 
+	// If one pickerlabel is was, and an other is now selected, we
 	// have to simulate the releaseevent.. Otherwise the new label
-	// will not get a highlighted  letter.. 
+	// will not get a highlighted  letter..
 	// Maybe there is a more intelligent solution, but this works and I am tired.. (se)
 	if ( ( currentLetter == 0 ) && ( lastLetter != '\0' ) ) mouseReleaseEvent( e );
-} 
+}
 
 void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 {
@@ -89,7 +91,7 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 
 	if (lastLetter != letter1 && lastLetter != letter2 && lastLetter != letter3 && lastLetter != '\0')
 		QTimer::singleShot( 0, this, SLOT(emitClearSignal()) );
-	
+
 	switch (currentLetter) {
 		case 0:
 			tmpStr = "<qt><u><b><font color=\"#FF00FF\">";
@@ -121,7 +123,7 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 			lastLetter = letter2;
 			emit selectedLetter( letter2 );
 			break;
-			
+
 		case 2:
 			tmpStr = "<qt>";
 			tmpStr += letter1;
@@ -149,7 +151,7 @@ void PickerLabel::mouseReleaseEvent( QMouseEvent* /* e */ )
 void PickerLabel::emitClearSignal() {
 	emit clearAll();
 }
-	
+
 LetterPicker::LetterPicker( QWidget *parent, const char *name )
 	: QFrame( parent, name )
 {
@@ -157,7 +159,7 @@ LetterPicker::LetterPicker( QWidget *parent, const char *name )
 
 	lblABC = new PickerLabel( this );
 	l->addWidget( lblABC );
-	
+
 	lblDEF = new PickerLabel( this );
 	l->addWidget( lblDEF );
 
@@ -237,7 +239,7 @@ void LetterPicker::clear()
 
 void LetterPicker::newLetter( char letter )
 {
-	qWarning("LetterClicked");
+	Opie::Core::owarn << "LetterClicked" << oendl;
 	emit letterClicked( letter );
 
 }
