@@ -33,7 +33,6 @@ class QLabel;
 class TimeZoneSelector;
 class DateBookMonth;
 class QComboBox;
-//class QPEDialogListener;
 
 class SetTime : public QWidget
 {
@@ -69,16 +68,15 @@ class SetDateTime : public NtpBase
     Q_OBJECT
 public:
     SetDateTime( QWidget *parent=0, const char *name=0, WFlags f=0 );
+    ~SetDateTime();
 
 protected slots:
+		void commitTime();
     void tzChange( const QString &tz );
     void formatChanged(int);
 
 protected:
-		void commitTime();
    	void  setTime(QDateTime dt);
-    virtual void accept();
-    virtual void done(int);
 
     SetTime *timeButton;
     DateButton *dateButton;
@@ -87,8 +85,8 @@ protected:
     QComboBox *ampmCombo;
     QComboBox *dateFormatCombo;
     QComboBox *clockAppletCombo;
-
-//    QPEDialogListener *dl;
+    QPushButton *ButtonSetTime;
+    QLabel *TextLabelMainPredTime;
 
     DateFormat date_formats[4];
 };

@@ -60,6 +60,15 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
     QVBoxLayout *vb = new QVBoxLayout( FrameSystemTime, 5 );
     QVBoxLayout *vb2 = new QVBoxLayout( FrameSetTime, 5 );
 
+    TextLabelMainPredTime = new QLabel( FrameSystemTime );
+    vb->addWidget( TextLabelMainPredTime, 1, 0 );
+    ButtonSetTime = new QPushButton( FrameSystemTime );
+    vb->addWidget( ButtonSetTime, 1, 0 );
+
+    QFrame *hline = new QFrame( FrameSystemTime );
+    hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
+    vb->addWidget( hline );
+
     QHBoxLayout *hb = new QHBoxLayout( vb, -1, "timezone layout" );
 
     QLabel *lblZone = new QLabel( tr( "Time Zone" ), FrameSystemTime, "timezone label" );
@@ -82,7 +91,7 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
     QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Minimum, QSizePolicy::Expanding );
     vb2->addItem( spacer );
 
-    QFrame *hline = new QFrame( FrameSystemTime );
+    hline = new QFrame( FrameSystemTime );
     hline->setFrameStyle( QFrame::HLine | QFrame::Sunken );
     vb->addWidget( hline );
 
@@ -92,7 +101,6 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
     QHBoxLayout *hb1 = new QHBoxLayout( vb );
 
     QLabel *l = new QLabel( tr("Time format"), FrameSystemTime );
-    //    l->setAlignment( AlignRight | AlignVCenter );
     hb1->addWidget( l, 1 );
 
 
@@ -177,16 +185,16 @@ SetDateTime::SetDateTime(QWidget *parent, const char *name, WFlags f )
 
     vb->addStretch( 0 );
 
+    QObject::connect( PushButtonSetManualTime, SIGNAL(clicked()),
+    									this, SLOT(commitTime()));
+
     QObject::connect( tz, SIGNAL( signalNewTz( const QString& ) ),
                       timeButton, SLOT( slotTzChange( const QString& ) ) );
     QObject::connect( tz, SIGNAL( signalNewTz( const QString& ) ),
                        SLOT( tzChange( const QString& ) ) );
-    QObject::connect( PushButtonSetManualTime, SLOT(clicked()),
-    									SLOT(commitTime()));
-//    dl = new QPEDialogListener(this);
 }
 
-void SetDateTime::accept()
+SetDateTime::~SetDateTime()
 {
 
     Config config("qpe");
@@ -264,13 +272,6 @@ void  SetDateTime::setTime(QDateTime dt)
     QCopEnvelope enableScreenSaver( "QPE/System", "setScreenSaverIntervals(int,int,int)" );
     enableScreenSaver << -1 << -1 << -1;
 
- //   QDialog::accept();
-}
-
-void SetDateTime::done(int r)
-{
-//    QDialog::done(r);
-    close();
 }
 
 void SetDateTime::tzChange( const QString &tz )
