@@ -53,6 +53,7 @@ MediaPlayerState::MediaPlayerState( QObject *parent, const char *name )
     readConfig( cfg );
     streaming = false;
     seekable = true;
+    backendInitialized = false;
 }
 
 
@@ -83,6 +84,18 @@ void MediaPlayerState::writeConfig( Config& cfg ) const {
     cfg.writeEntry( "Looping", looping );
     cfg.writeEntry( "Shuffle", shuffled );
     cfg.writeEntry( "VideoGamma",  videoGamma );
+}
+
+bool MediaPlayerState::isInitialized() const
+{
+    return backendInitialized; // for now, more to come (skin stuff)
+}
+
+void MediaPlayerState::setBackendInitialized()
+{
+    assert( backendInitialized == false );
+    backendInitialized = true;
+    emit initialized();
 }
 
 MediaPlayerState::DisplayType MediaPlayerState::displayType() const

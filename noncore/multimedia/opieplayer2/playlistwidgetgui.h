@@ -70,6 +70,7 @@ public:
 
 
 class ToolButton : public QToolButton {
+    Q_OBJECT
 public:
     ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
         : QToolButton( parent, name ) {
@@ -83,6 +84,23 @@ public:
     }
 };
 
+class PlayButton : public ToolButton
+{
+    Q_OBJECT
+public:
+    PlayButton( MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name, 
+                const QString& icon, QObject *handler, const QString& slot, bool t = FALSE );
+
+protected:
+    virtual void setEnabled( bool enable );
+
+private slots:
+    void checkInitializationStatus();
+
+private:
+    MediaPlayerState &mediaPlayerState;
+    bool m_lastEnableStatus : 1;
+};
 
 class MenuItem : public QAction {
 
@@ -122,6 +140,7 @@ protected:
     QVBox *vbox1;
     QVBox *vbox5;
     QPEToolBar *bar;
+    QWidget *playListTab;
     void setActiveWindow(); // need to handle this to show the right view
     void setView( char );
 

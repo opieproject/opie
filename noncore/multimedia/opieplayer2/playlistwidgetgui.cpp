@@ -121,16 +121,15 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
 
     tabWidget = new QTabWidget( hbox6, "tabWidget" );
 
-    QWidget *pTab;
-    pTab = new QWidget( tabWidget, "pTab" );
-    tabWidget->insertTab( pTab, "Playlist");
+    playListTab = new QWidget( tabWidget, "PlayListTab" );
+    tabWidget->insertTab( playListTab, "Playlist");
 
-    QGridLayout *Playout = new QGridLayout( pTab );
+    QGridLayout *Playout = new QGridLayout( playListTab );
     Playout->setSpacing( 2);
     Playout->setMargin( 2);
 
     // Add the playlist area
-    QVBox *vbox3 = new QVBox( pTab );
+    QVBox *vbox3 = new QVBox( playListTab );
     d->playListFrame = vbox3;
 
     QHBox *hbox2 = new QHBox( vbox3 );
@@ -202,5 +201,28 @@ void PlayListWidgetGui::setActiveWindow()  {
     MediaPlayerState::DisplayType origDisplayType = mediaPlayerState.displayType();
     mediaPlayerState.setDisplayType( MediaPlayerState::MediaSelection ); // invalidate
     mediaPlayerState.setDisplayType( origDisplayType ); // now switch back
+}
+
+PlayButton::PlayButton( MediaPlayerState &_mediaPlayerState, QWidget *parent, const char *name,
+                        const QString &icon, QObject *handler, const QString &slot, bool t )
+    : ToolButton( parent, name, icon, handler, slot, t ), mediaPlayerState( _mediaPlayerState ),
+      m_lastEnableStatus( true )
+{
+    connect( &mediaPlayerState, SIGNAL( initialized() ),
+             this, SLOT( checkInitializationStatus() ) );
+}
+
+void PlayButton::setEnabled( bool enable )
+{
+    m_lastEnableStatus = enable;
+
+    enable &= mediaPlayerState.isInitialized();
+
+    ToolButton::setEnabled( enable );
+}
+
+void PlayButton::checkInitializationStatus()
+{
+    setEnabled( m_lastEnableStatus );
 }
 

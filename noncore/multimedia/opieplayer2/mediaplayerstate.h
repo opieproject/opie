@@ -61,6 +61,7 @@ public:
     bool isPaused() const { return paused; }
     bool isPlaying() const { return playing; }
     bool isStopped() const { return stopped; }
+    bool isInitialized() const;
     long position() const { return curPosition; }
     long length() const { return curLength; }
     DisplayType displayType() const;
@@ -97,6 +98,7 @@ public slots:
     void toggleBlank();
     void writeConfig( Config& cfg ) const;
 
+    void setBackendInitialized();
 
 signals:
     void fullscreenToggled( bool );
@@ -116,6 +118,8 @@ signals:
     void prev();
     void next();
 
+    void initialized();
+
 private:
     bool streaming : 1;
     bool seekable : 1;
@@ -128,6 +132,7 @@ private:
     bool paused : 1;
     bool playing : 1;
     bool stopped : 1;
+    bool backendInitialized : 1;
     long curPosition;
     long curLength;
     DisplayType m_displayType;
