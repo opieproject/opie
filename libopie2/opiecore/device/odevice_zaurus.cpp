@@ -114,22 +114,16 @@ struct z_button z_buttons_c700 [] = {
 };
 
 // FIXME This gets unnecessary complicated. We should think about splitting the Zaurus
-//       class up into individual classes. We need three classes
+//       class up into individual classes. We would need three classes
 //
 //       Zaurus-Collie (SA-model  w/ 320x240 lcd, for SL5500 and SL5000)
 //       Zaurus-Poodle (PXA-model w/ 320x240 lcd, for SL5600)
-//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, C860, C3000)
+//       Zaurus-Corgi  (PXA-model w/ 640x480 lcd, for C700, C750, C760, C860, C3000, C1000)
 //       Zaurus-Tosa   (PXA-model w/ 480x640 lcd, for SL6000)
-//
-//       Only question right now is: Do we really need to do it? Because as soon
-//       as the OpenZaurus kernel is ready, there will be a unified interface for all
-//       Zaurus models (concerning apm, backlight, buttons, etc.)
-//
-//       Comments? - mickeyl.
 
 void Zaurus::init(const QString& cpu_info)
 {
-    // Set the time to wait until the system is realy suspended
+    // Set the time to wait until the system is really suspended
     // the delta between apm --suspend and sleeping
     setAPMTimeOut( 15000 );
 
@@ -150,18 +144,14 @@ void Zaurus::init(const QString& cpu_info)
         d->m_system = System_OpenZaurus;
         // sysver already gathered
 
-        // OpenZaurus sometimes uses the embedix kernel, check if this is one
+        // OpenZaurus sometimes uses the 2.4 (embedix) kernel, check if this is one
         FILE *uname = popen("uname -r", "r");
         QFile f;
         QString line;
         if ( f.open(IO_ReadOnly, uname) ) {
             QTextStream ts ( &f );
-            line = ts. readLine();
-            int loc = line. find ( "embedix" );
-            if ( loc != -1 )
-                m_embedix = true;
-            else
-                m_embedix = false;
+            line = ts.readLine();
+            m_embedix = line.startsWith( "2.4." );
             f.close();
         }
         pclose(uname);
@@ -229,9 +219,9 @@ void Zaurus::init(const QString& cpu_info)
     m_leds[0] = Led_Off;
 
     if ( m_embedix )
-        qDebug( "Zaurus::init() - Using the Embedix HAL on a %s", (const char*) d->m_modelstr );
+        qDebug( "Zaurus::init() - Using the 2.4 Embedix HAL on a %s", (const char*) d->m_modelstr );
     else
-        qDebug( "Zaurus::init() - Using the OpenZaurus HAL on a %s", (const char*) d->m_modelstr );
+        qDebug( "Zaurus::init() - Using the 2.6 OpenZaurus HAL on a %s", (const char*) d->m_modelstr );
 }
 
 void Zaurus::initButtons()

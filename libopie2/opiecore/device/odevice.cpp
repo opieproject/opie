@@ -118,8 +118,6 @@ struct default_button default_buttons [] =  {
 ODevice *ODevice::inst()
 {
     static ODevice *dev = 0;
-
-    // rewrite this to only use /proc/cpuinfo or so
     QString cpu_info;
 
     if ( !dev )
