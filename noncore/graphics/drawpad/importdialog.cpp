@@ -67,7 +67,9 @@ ImportDialog::~ImportDialog()
 
 const DocLnk* ImportDialog::selected()
 {
-    return m_pFileSelector->selected();
+    // FIXME change from pointer to reference -zecke
+    DocLnk *lnk = new DocLnk( m_pFileSelector->selectedDocument() );    
+    return lnk;
 }
 
 void ImportDialog::fileChanged()
@@ -79,7 +81,7 @@ void ImportDialog::fileChanged()
 
 void ImportDialog::preview()
 {
-    const DocLnk* docLnk = m_pFileSelector->selected();
+    const DocLnk* docLnk = selected();
 
     if (docLnk) {
         QImage image(docLnk->file());
