@@ -274,7 +274,7 @@ void MScanListItem::serializeTo( QDataStream& s ) const
     OListViewItem::serializeTo( s );
 
     s << _type;
-    s << (Q_UINT8) _wep;
+    s << (Q_UINT8) ( _wep ? 'y' : 'n' );
 }
 
 void MScanListItem::serializeFrom( QDataStream& s )
@@ -282,8 +282,10 @@ void MScanListItem::serializeFrom( QDataStream& s )
     qDebug( "serializing MScanListItem" );
     OListViewItem::serializeFrom( s );
 
+    char wep;
     s >> _type;
-    s >> (Q_UINT8) _wep;
+    s >> (Q_UINT8) wep;
+    _wep = (wep == 'y');
 
     QString name;
     name.sprintf( "wellenreiter/%s", (const char*) _type );

@@ -114,13 +114,22 @@ void Wellenreiter::receivePacket(OPacket* p)
 
     // check if we received a beacon frame
     OWaveLanManagementPacket* beacon = static_cast<OWaveLanManagementPacket*>( p->child( "802.11 Management" ) );
-    if ( beacon )
+    if ( beacon && beacon->managementType() == "Beacon" )
     {
         QString type;
         if ( beacon->canIBSS() )
+        {
             type = "adhoc";
-        else
+        }
+        else if ( beacon->canESS() )
+        {
             type = "managed";
+        }
+        else
+        {
+            qDebug( "Wellenreiter::invalid frame detected: '%s'", (const char*) p->dump( 16 ) );
+            return;
+        }
 
         OWaveLanManagementSSID* ssid = static_cast<OWaveLanManagementSSID*>( p->child( "802.11 SSID" ) );
         QString essid = ssid ? ssid->ID() : QString("<unknown>");
@@ -128,7 +137,7 @@ void Wellenreiter::receivePacket(OPacket* p)
         int channel = ds ? ds->channel() : -1;
 
         OWaveLanPacket* header = static_cast<OWaveLanPacket*>( p->child( "802.11" ) );
-        netView()->addNewItem( type, essid, header->macAddress2().toString(), header->usesWep(), channel, 0 );
+        netView()->addNewItem( type, essid, header->macAddress2().toString(), beacon->canPrivacy(), channel, 0 );
         return;
     }
 
