@@ -4,5 +4,5 @@ Section: opie/applications
 Maintainer: Chris Larson <kergoth@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: qt-embedded (>=$QTE_VERSION), opie-today
+Depends: opie-today, fortune
 Description: 'fortune' plugin for today

@@ -33,9 +33,6 @@ public:
 	FortunePluginWidget( QWidget *parent,  const char *name );
 	~FortunePluginWidget();
 
-protected slots:
-	void  startFortune();
-
 private:
 	OTicker *fortune;
 	OProcess *fortuneProcess;
