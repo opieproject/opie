@@ -50,8 +50,8 @@ QList<Interface> VirtualModule::getInterfaces() {
 }
 
 void VirtualModule::possibleNewInterfaces( QMap<QString, QString>& map) {
-    map.insert( QObject::tr("VPN PPTP"),
-                QObject::tr("Add new Point to Point Tunnel Protocol connection" ) );
+    map.insert( ::QObject::tr("VPN PPTP"),
+                ::QObject::tr("Add new Point to Point Tunnel Protocol connection" ) );
 }
 
 
