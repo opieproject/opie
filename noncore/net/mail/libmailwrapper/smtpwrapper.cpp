@@ -18,10 +18,9 @@
 #include "abstractmail.h"
 #include "logindialog.h"
 #include "mailtypes.h"
-//#include "defines.h"
 #include "sendmailprogress.h"
 
-const char* SMTPwrapper::USER_AGENT="OpieMail v0.3";
+const char* SMTPwrapper::USER_AGENT="OpieMail v0.4";
 
 progressMailSend*SMTPwrapper::sendProgress = 0;
 
@@ -572,6 +571,7 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     uint16_t port;
     mailsmtp *session;
     int err,result;
+    QString failuretext = "";
 
     result = 1;
     server = user = pass = 0;
@@ -588,8 +588,11 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     port = smtp->getPort().toUInt();
 
     session = mailsmtp_new( 20, &progress );
-    if ( session == NULL )
-        goto free_mem;
+    if ( session == NULL ) {
+        /* no failure message cause this happens when problems with memory - than we
+           we can not display any messagebox */
+        return 0;
+    }
 
     qDebug( "Servername %s at port %i", server, port );
     if ( ssl ) {
@@ -601,21 +604,19 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
     }
     if ( err != MAILSMTP_NO_ERROR ) {
         qDebug("Error init connection");
-        storeFailedMail(data,size,mailsmtpError(err));
+        failuretext = tr("Error init SMTP connection: %1").arg(mailsmtpError(err));
         result = 0;
-        goto free_mem_session;
     }
 
-    err = mailsmtp_init( session );
-    if ( err != MAILSMTP_NO_ERROR ) {
-        storeFailedMail(data,size,mailsmtpError(err));
-        result = 0;
-        goto free_con_session;
+    if (result) {
+        err = mailsmtp_init( session );
+        if (err != MAILSMTP_NO_ERROR) {
+            result = 0;
+            failuretext = tr("Error init SMTP connection: %1").arg(mailsmtpError(err));
+        }
     }
 
-    qDebug( "INIT OK" );
-
-    if ( smtp->getLogin() ) {
+    if (result==1 && smtp->getLogin() ) {
         qDebug("smtp with auth");
         if ( smtp->getUser().isEmpty() || smtp->getPassword().isEmpty() ) {
             // get'em
@@ -627,44 +628,42 @@ int SMTPwrapper::smtpSend(char*from,clist*rcpts,const char*data,size_t size, SMT
                 pass = login.getPassword().latin1();
             } else {
                 result = 0;
-                goto free_con_session;
+                failuretext=tr("Login aborted - storing mail to localfolder");
             }
         } else {
             user = smtp->getUser().latin1();
             pass = smtp->getPassword().latin1();
         }
         qDebug( "session->auth: %i", session->auth);
-        err = mailsmtp_auth( session, (char*)user, (char*)pass );
-        if ( err == MAILSMTP_NO_ERROR ) {
-            qDebug("auth ok");
-        } else {
-            storeFailedMail(data,size,tr("Authentification failed"));
-            result = 0;
-            goto free_con_session;
+        if (result) {
+            err = mailsmtp_auth( session, (char*)user, (char*)pass );
+            if ( err == MAILSMTP_NO_ERROR ) {
+                qDebug("auth ok");
+            } else {
+                failuretext = tr("Authentification failed");
+                result = 0;
+            }
         }
-        qDebug( "Done auth!" );
+    }
+
+    if (result) {
+        err = mailsmtp_send( session, from, rcpts, data, size );
+        if ( err != MAILSMTP_NO_ERROR ) {
+            failuretext=tr("Error sending mail: %1").arg(mailsmtpError(err));
+            result = 0;
+        }
+    }
+
+    if (!result) {
+        storeFailedMail(data,size,failuretext);
     } else {
-        qDebug("SMTP without auth");
-        result = 0;
-        goto free_con_session;
+        qDebug( "Mail sent." );
+        storeMail(data,size,"Sent");
     }
-
-    err = mailsmtp_send( session, from, rcpts, data, size );
-    if ( err != MAILSMTP_NO_ERROR ) {
-        storeFailedMail(data,size,mailsmtpError(err));
-        qDebug("Error sending mail: %s",mailsmtpError(err).latin1());
-        result = 0;
-        goto free_con_session;
+    if (session) {
+        mailsmtp_quit( session );
+        mailsmtp_free( session );
     }
-
-    qDebug( "Mail sent." );
-    storeMail(data,size,"Sent");
-
-free_con_session:
-    mailsmtp_quit( session );
-free_mem_session:
-    mailsmtp_free( session );
-free_mem:
     return result;
 }
 
@@ -741,12 +740,14 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
     if (!smtp)
         return false;
 
+    bool reset_user_value = false;
     QString localfolders = AbstractMail::defaultLocalfolder();
     AbstractMail*wrap = AbstractMail::getWrapper(localfolders);
     if (!wrap) {
         qDebug("memory error");
         return false;
     }
+    QString oldPw, oldUser;
     QList<RecMail> mailsToSend;
     QList<RecMail> mailsToRemove;
     QString mbox("Outgoing");
@@ -755,6 +756,27 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
         delete wrap;
         return false;
     }
+    
+    oldPw = smtp->getPassword();
+    oldUser = smtp->getUser();
+    if (smtp->getLogin() && (smtp->getUser().isEmpty() || smtp->getPassword().isEmpty()) ) {
+        // get'em
+        QString user,pass;
+        LoginDialog login( smtp->getUser(), smtp->getPassword(), NULL, 0, true );
+        login.show();
+        if ( QDialog::Accepted == login.exec() ) {
+            // ok
+            user = login.getUser().latin1();
+            pass = login.getPassword().latin1();
+            reset_user_value = true;
+            smtp->setUser(user);
+            smtp->setPassword(pass);
+        } else {
+            return true;
+        }
+    }
+
+    
     mailsToSend.setAutoDelete(false);
     sendProgress = new progressMailSend();
     sendProgress->show();
@@ -770,6 +792,10 @@ bool SMTPwrapper::flushOutbox(SMTPaccount*smtp) {
         mailsToRemove.append(mailsToSend.at(0));
         mailsToSend.removeFirst();
         sendProgress->setCurrentMails(mailsToRemove.count());
+    }
+    if (reset_user_value) {
+        smtp->setUser(oldUser);
+        smtp->setPassword(oldPw);
     }
     Config cfg( "mail" );
     cfg.setGroup( "Status" );
