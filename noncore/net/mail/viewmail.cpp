@@ -250,18 +250,31 @@ void ViewMail::slotItemClicked( QListViewItem * item , const QPoint & point, int
 
     case 2:
         {
-            QString tmpfile = "/tmp/opiemail-image";
+            QString tmpfile = QString("/tmp/opiemail-image-%1").arg(_icounter++);
             encodedString*content = m_recMail->Wrapper()->fetchDecodedPart( m_recMail, m_body->Parts()[ ( ( AttachItem* )item )->Partnumber() ] );
-            if (content) {
+            if (content && content->Length()) {
                 QFile output(tmpfile);
                 output.open(IO_WriteOnly);
                 output.writeBlock(content->Content(),content->Length());
                 output.close();
                 delete content;
-                MailImageDlg iview("");
-                iview.setName(tmpfile);
-                QPEApplication::execDialog(&iview);
+                if (!m_PicsInline) {
+                    MailImageDlg iview("");
+                    iview.setName(tmpfile);
+                    QPEApplication::execDialog(&iview);
+                } else {
+                    if (!m_lastdlg) {
+                        m_lastdlg=new Opie::MM::OImageScrollView("",browser->parentWidget(),false);
+                        m_lastdlg->setAutoScale(true);
+                    }
+                    //m_lastdlg->setImage("");
+                    m_lastdlg->setImage(tmpfile);
+                    browser->hide();
+                    m_lastdlg->show();
+                }
                 output.remove();
+            } else {
+                QMessageBox::critical(this, tr("Reading attachment"), tr("Could not read content of attachment"));
             }
         }
         break;
@@ -313,12 +326,29 @@ ViewMail::ViewMail( QWidget *parent, const char *name, WFlags fl)
     connect( forward, SIGNAL(activated()), SLOT(slotForward()));
     connect( deleteMail, SIGNAL( activated() ),  SLOT( slotDeleteMail() ) );
     connect( showHtml, SIGNAL( toggled(bool) ), SLOT( slotShowHtml(bool) ) );
+    connect( showPicsInline, SIGNAL( toggled(bool) ), SLOT( slotImageInline(bool) ) );
 
     attachments->setEnabled(m_gotBody);
     connect( attachments,  SIGNAL( clicked(QListViewItem*,const QPoint&, int) ), SLOT( slotItemClicked(QListViewItem*,const QPoint&, int) ) );
+    m_lastdlg = 0;
+    _icounter = 0;
 
     readConfig();
     attachments->setSorting(-1);
+}
+
+void ViewMail::slotImageInline(bool how)
+{
+    Config cfg( "mail" );
+    cfg.writeEntry( "showPicsInline", how);
+    m_PicsInline = how;
+    if (m_lastdlg&&!how) {
+        browser->show();
+        m_lastdlg->hide();
+        m_lastdlg->reparent(0,QPoint(0,0),false);
+        delete m_lastdlg;
+        m_lastdlg = 0;
+    }
 }
 
 void ViewMail::readConfig()
@@ -326,6 +356,8 @@ void ViewMail::readConfig()
     Config cfg( "mail" );
     cfg.setGroup( "Settings" );
     m_showHtml =  cfg.readBoolEntry( "showHtml", false );
+    m_PicsInline = cfg.readBoolEntry( "showPicsInline", true );
+    showPicsInline->setOn(m_PicsInline);
     showHtml->setOn( m_showHtml );
 }
 
@@ -336,6 +368,10 @@ void ViewMail::setText()
     QString bccString;
     QString mailHtml;
 
+    if (m_lastdlg) {
+        m_lastdlg->hide();
+    }
+    browser->show();
     for ( QStringList::Iterator it = ( m_mail2[0] ).begin(); it != ( m_mail2[0] ).end(); ++it )
     {
         toString += (*it);

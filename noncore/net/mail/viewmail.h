@@ -11,6 +11,8 @@
 #include <qstringlist.h>
 #include <qvaluelist.h>
 
+class MailImageDlg;
+
 namespace Opie { namespace MM { class OImageScrollView; } }
 
 class AttachItem : public QListViewItem
@@ -48,6 +50,8 @@ protected:
     AttachItem* searchParent(const QValueList<int>&path);
     AttachItem* lastChild(AttachItem*parent);
 
+    Opie::MM::OImageScrollView*m_lastdlg;
+
 protected slots:
     void slotReply();
     void slotForward();
@@ -55,6 +59,7 @@ protected slots:
     void slotItemClicked( QListViewItem * item , const QPoint & point, int c );
     void slotDeleteMail( );
     void slotShowHtml( bool );
+    void slotImageInline(bool);
 
 private:
     void readConfig();
@@ -64,7 +69,9 @@ private:
     bool m_gotBody;
     RecBodyP m_body;
     RecMailP m_recMail;
-    bool m_showHtml;
+    bool m_showHtml:1;
+    bool m_PicsInline:1;
+    unsigned int _icounter;
 
     // 0 from  1 subject  2 bodytext 3 date
     QMap <int,QString>  m_mail;

@@ -19,7 +19,7 @@ public:
     ViewMailBase(QWidget *parent = 0, const char *name = 0, WFlags fl = 0);
 
 protected:
-    QAction *reply, *forward, *attachbutton, *deleteMail, *showHtml;
+    QAction *reply, *forward, *attachbutton, *deleteMail, *showHtml,*showPicsInline;
     QListView *attachments;
     QToolBar *toolbar;
     QTextBrowser *browser;//,*header;

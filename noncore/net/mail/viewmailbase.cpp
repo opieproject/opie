@@ -5,6 +5,7 @@
 #include <qvbox.h>
 
 #include <qtoolbar.h>
+#include <qlayout.h>
 #include <qmenubar.h>
 #include <qpe/resource.h>
 
@@ -21,10 +22,8 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
     menubar = new QMenuBar( toolbar );
     mailmenu = new QPopupMenu( menubar );
     menubar->insertItem( tr( "Mail" ), mailmenu );
-
     toolbar->setHorizontalStretchable(true);
     addToolBar(toolbar);
-
     QLabel *spacer = new QLabel(toolbar);
     spacer->setBackgroundMode(QWidget::PaletteButton);
     toolbar->setStretchableWidget(spacer);
@@ -43,15 +42,22 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
     connect(attachbutton, SIGNAL(toggled(bool)), SLOT(slotChangeAttachview(bool)));
 
 
-        showHtml = new QAction( tr( "Show Html" ), QIconSet( Resource::loadPixmap( "mail/html" ) ), 0, 0, this, 0, true );
-        showHtml->addTo( toolbar );
-        showHtml->addTo( mailmenu );
+    showHtml = new QAction( tr( "Show Html" ), QIconSet( Resource::loadPixmap( "mail/html" ) ), 0, 0, this, 0, true );
+    showHtml->addTo( toolbar );
+    showHtml->addTo( mailmenu );
+
+    showPicsInline= new QAction(tr("Show image preview inline"), QIconSet(Resource::loadPixmap("pixmap")), 0, 0, this);
+    showPicsInline->setToggleAction(true);
+    showPicsInline->addTo(toolbar);
+    showPicsInline->addTo(mailmenu);
 
     deleteMail = new QAction(tr("Delete Mail"), QIconSet(Resource::loadPixmap("trash")), 0, 0, this);
     deleteMail->addTo(toolbar);
     deleteMail->addTo(mailmenu);
 
-    QVBox *view = new QVBox(this);
+    QVBox * view = new QVBox(this);
+    view->setSpacing(1);
+    view->setMargin(0);
     setCentralWidget(view);
 
     attachments = new QListView(view);
@@ -63,14 +69,10 @@ ViewMailBase::ViewMailBase(QWidget *parent, const char *name, WFlags fl)
     attachments->addColumn(tr("Filename"), 80);
     attachments->addColumn(tr("Size"), 80);
     attachments->setSorting(-1);
-    attachments->hide();
 
-    //header = new QTextBrowser(view);
     browser = new QTextBrowser(view);
-
-//  openDiag = new OpenDiag(view);
-//  openDiag->hide();
-
+    adjustSize();
+    attachments->hide();
 }
 
 void ViewMailBase::slotChangeAttachview(bool state)
