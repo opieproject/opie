@@ -3,66 +3,66 @@
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abrir fichero</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Cerrar</translation>
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Atrás</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Adelante</translation>
     </message>
     <message>
         <source>&amp;Home</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Inicio</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir marcador</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Fichero</translation>
     </message>
     <message>
         <source>&amp;Go</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Adelante</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Preferidos</translation>
     </message>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrás</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Adelante</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicio</translation>
     </message>
 </context>
 <context>
     <name>InputDialog</name>
     <message>
         <source>Symbol Lookup</source>
-        <translation type="unfinished"></translation>
+        <translation>Búsqueda de Símbolo</translation>
     </message>
     <message>
         <source>Enter something to lookup / search.</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca algo que buscar.</translation>
     </message>
 </context>
 </TS>

@@ -3,121 +3,121 @@
     <name>MainWindow</name>
     <message>
         <source>OSearch</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscador O</translation>
     </message>
     <message>
         <source>adressbook</source>
-        <translation type="unfinished"></translation>
+        <translation>contactos</translation>
     </message>
     <message>
         <source>todo</source>
-        <translation type="unfinished"></translation>
+        <translation>tareas</translation>
     </message>
     <message>
         <source>datebook</source>
-        <translation type="unfinished"></translation>
+        <translation>calendario</translation>
     </message>
     <message>
         <source>applications</source>
-        <translation type="unfinished"></translation>
+        <translation>aplicaciones</translation>
     </message>
     <message>
         <source>documents</source>
-        <translation type="unfinished"></translation>
+        <translation>documentos</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar</translation>
     </message>
     <message>
         <source>Search all</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscar todo</translation>
     </message>
     <message>
         <source>Case sensitiv</source>
-        <translation type="unfinished"></translation>
+        <translation>Sensible may/min</translation>
     </message>
     <message>
         <source>Use wildcards</source>
-        <translation type="unfinished"></translation>
+        <translation>Usar comodines</translation>
     </message>
     <message>
         <source>The details of the current result</source>
-        <translation type="unfinished"></translation>
+        <translation>Los detalles del resultado actual</translation>
     </message>
     <message>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Enter your search terms here</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca aquí sus términos de búsqueda</translation>
     </message>
 </context>
 <context>
     <name>OListView</name>
     <message>
         <source>Results</source>
-        <translation type="unfinished"></translation>
+        <translation>Resultados</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>show</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar</translation>
     </message>
     <message>
         <source>edit</source>
-        <translation type="unfinished"></translation>
+        <translation>editar</translation>
     </message>
     <message>
         <source>execute</source>
-        <translation type="unfinished"></translation>
+        <translation>ejecutar</translation>
     </message>
     <message>
         <source>open in filemanager</source>
-        <translation type="unfinished"></translation>
+        <translation>abrir en el Gestor de Ficheros</translation>
     </message>
     <message>
         <source>open with </source>
-        <translation type="unfinished"></translation>
+        <translation>abrir con</translation>
     </message>
     <message>
         <source>show completed tasks</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar tareas completadas</translation>
     </message>
     <message>
         <source>show past events</source>
-        <translation type="unfinished"></translation>
+        <translation>mostrar sucesos pasados</translation>
     </message>
     <message>
         <source>search in dates</source>
-        <translation type="unfinished"></translation>
+        <translation>buscar en fechas</translation>
     </message>
     <message>
         <source>File: </source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero: </translation>
     </message>
     <message>
         <source>Link: </source>
-        <translation type="unfinished"></translation>
+        <translation>Enlace: </translation>
     </message>
     <message>
         <source>Mimetype: </source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo MIME: </translation>
     </message>
     <message>
         <source>search content</source>
-        <translation type="unfinished"></translation>
+        <translation>buscar contenido</translation>
     </message>
     <message>
         <source>searching %1</source>
-        <translation type="unfinished"></translation>
+        <translation>buscando %1</translation>
     </message>
 </context>
 </TS>

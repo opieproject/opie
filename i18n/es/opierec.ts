@@ -3,178 +3,182 @@
     <name>HelpWindow</name>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Atrás</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Adelante</translation>
     </message>
 </context>
 <context>
     <name>QtRec</name>
     <message>
         <source>OpieRecord </source>
-        <translation type="unfinished"></translation>
+        <translation>Grabadora Opie</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Borrar</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Hora</translation>
     </message>
     <message>
         <source>Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Ficheros</translation>
     </message>
     <message>
         <source>Sample Rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa muestreo</translation>
     </message>
     <message>
         <source>44100</source>
-        <translation type="unfinished"></translation>
+        <translation>44100</translation>
     </message>
     <message>
         <source>32000</source>
-        <translation type="unfinished"></translation>
+        <translation>32000</translation>
     </message>
     <message>
         <source>22050</source>
-        <translation type="unfinished"></translation>
+        <translation>22050</translation>
     </message>
     <message>
         <source>16000</source>
-        <translation type="unfinished"></translation>
+        <translation>16000</translation>
     </message>
     <message>
         <source>11025</source>
-        <translation type="unfinished"></translation>
+        <translation>11025</translation>
     </message>
     <message>
         <source>8000</source>
-        <translation type="unfinished"></translation>
+        <translation>8000</translation>
     </message>
     <message>
         <source>Limit Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño límite</translation>
     </message>
     <message>
         <source>Unlimited</source>
-        <translation type="unfinished"></translation>
+        <translation>Ilimitado</translation>
     </message>
     <message>
         <source>File Directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Directorio archivo</translation>
     </message>
     <message>
         <source>Bit Depth</source>
-        <translation type="unfinished"></translation>
+        <translation>Bits de muestreo</translation>
     </message>
     <message>
         <source>16</source>
-        <translation type="unfinished"></translation>
+        <translation>16</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>In</source>
-        <translation type="unfinished"></translation>
+        <translation>Entrada</translation>
     </message>
     <message>
         <source>Out</source>
-        <translation type="unfinished"></translation>
+        <translation>Salida</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Volume</source>
-        <translation type="unfinished"></translation>
+        <translation>Volumen</translation>
     </message>
     <message>
         <source>Low Disk Space</source>
-        <translation type="unfinished"></translation>
+        <translation>Poco espacio en disco</translation>
     </message>
     <message>
         <source>You are running low of
 recording space
 or a card isn&apos;t being recognized</source>
-        <translation type="unfinished"></translation>
+        <translation>Está grabando con poco
+espacio, o una tarjeta
+no ha sido reconocida</translation>
     </message>
     <message>
         <source> seconds</source>
-        <translation type="unfinished"></translation>
+        <translation>segundos</translation>
     </message>
     <message>
         <source>Do you really want to &lt;font size=+2&gt;&lt;B&gt;DELETE&lt;/B&gt;&lt;/font&gt;
 the selected file?</source>
-        <translation type="unfinished"></translation>
+        <translation>¿Seguro que quiere &lt;font size=+2&gt;&lt;B&gt;borrar&lt;/B&gt;&lt;/font&gt;
+el fichero seleccionado?</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Could not remove file.</source>
-        <translation type="unfinished"></translation>
+        <translation>No pude borrar el fichero.</translation>
     </message>
     <message>
         <source>Opierec</source>
-        <translation type="unfinished"></translation>
+        <translation>Opierec</translation>
     </message>
     <message>
         <source>Please select file to  play</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, seleccione el fichero a reproducir</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Nota</translation>
     </message>
     <message>
         <source>Could not open audio file.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>No pude abrir el fichero de audio.
+</translation>
     </message>
     <message>
         <source>Play</source>
-        <translation type="unfinished"></translation>
+        <translation>Reproducir</translation>
     </message>
     <message>
         <source>Send with Ir</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar por IR</translation>
     </message>
     <message>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Renombrar</translation>
     </message>
     <message>
         <source>Ir Beam out</source>
-        <translation type="unfinished"></translation>
+        <translation>Emitir por IR</translation>
     </message>
     <message>
         <source>Ir sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviado por IR.</translation>
     </message>
     <message>
         <source>Ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Ok</translation>
     </message>
 </context>
 </TS>
