@@ -22,9 +22,10 @@ HEADERS   = ofontmenu.h \
     pim/ocontactaccess.h \
     pim/ocontactaccessbackend.h \
     pim/ocontactaccessbackend_xml.h \
-    pim/obackendfactory.h
+    pim/obackendfactory.h \
+    pim/opimcache.h \ 
 #    pim/otodoaccesssql.h \
-    
+
 SOURCES   = ofontmenu.cc  \
         ocolorbutton.cpp \
 	    xmltree.cc \
