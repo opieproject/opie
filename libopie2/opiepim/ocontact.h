@@ -190,6 +190,7 @@ public:
 
     static QStringList fields();
     static QStringList trfields();
+    static QStringList untrfields();
 
     QString toRichText() const;
     QMap<int, QString> toMap() const;

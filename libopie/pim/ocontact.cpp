@@ -952,6 +952,68 @@ QStringList OContact::trfields()
 }
 
 /*!
+  \internal
+  Returns an untranslated list of field names for a contact.
+*/
+QStringList OContact::untrfields()
+{
+    QStringList list;
+
+    list.append( "Name Title" );
+    list.append( "First Name" );
+    list.append( "Middle Name" );
+    list.append( "Last Name" );
+    list.append( "Suffix" );
+    list.append( "File As" );
+
+    list.append( "Job Title" );
+    list.append( "Department" );
+    list.append( "Company" );
+    list.append( "Business Phone" );
+    list.append( "Business Fax" );
+    list.append( "Business Mobile" );
+
+    list.append( "Default Email" );
+    list.append( "Emails" );
+
+    list.append( "Home Phone" );
+    list.append( "Home Fax" );
+    list.append( "Home Mobile" );
+
+    list.append( "Business Street" );
+    list.append( "Business City" );
+    list.append( "Business State" );
+    list.append( "Business Zip" );
+    list.append( "Business Country" );
+    list.append( "Business Pager" );
+    list.append( "Business WebPage" );
+
+    list.append( "Office" );
+    list.append( "Profession" );
+    list.append( "Assistant" );
+    list.append( "Manager" );
+
+    list.append( "Home Street" );
+    list.append( "Home City" );
+    list.append( "Home State" );
+    list.append( "Home Zip" );
+    list.append( "Home Country" );
+    list.append( "Home Web Page" );
+
+    list.append( "Spouse" );
+    list.append( "Gender" );
+    list.append( "Birthday" );
+    list.append( "Anniversary" );
+    list.append( "Nickname" );
+    list.append( "Children" );
+
+    list.append( "Notes" );
+    list.append( "Groups" );
+
+    return list;
+}
+
+/*!
   Sets the list of email address for contact to those contained in \a str.
   Email address should be separated by ';'s.
 */
