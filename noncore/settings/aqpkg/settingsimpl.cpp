@@ -286,10 +286,20 @@ void SettingsImpl :: editServer( int sel )
 {
     currentSelectedServer = sel;
     Server *s = dataMgr->getServer( servers->currentText() );
-    serverName = s->getServerName();
-    servername->setText( s->getServerName() );
-    serverurl->setText( s->getServerUrl() );
-    active->setChecked( s->isServerActive() );
+    if ( s )
+    {
+        serverName = s->getServerName();
+        servername->setText( s->getServerName() );
+        serverurl->setText( s->getServerUrl() );
+        active->setChecked( s->isServerActive() );
+    }
+    else
+    {
+        serverName = "";
+        servername->setText( "" );
+        serverurl->setText( "" );
+        active->setChecked( false );
+    }
 }
 
 void SettingsImpl :: newServer()
@@ -305,8 +315,11 @@ void SettingsImpl :: removeServer()
 {
     changed = true;
     Server *s = dataMgr->getServer( servers->currentText() );
-    dataMgr->getServerList().removeRef( s );
-    servers->removeItem( currentSelectedServer );
+    if ( s )
+    {
+        dataMgr->getServerList().removeRef( s );
+        servers->removeItem( currentSelectedServer );
+    }
 }
 
 void SettingsImpl :: changeServerDetails()
@@ -332,21 +345,22 @@ void SettingsImpl :: changeServerDetails()
 	if ( !newserver )
 	{
 		Server *s = dataMgr->getServer( servers->currentText() );
-
-		// Update url
-		s->setServerUrl( serverurl->text() );
-        s->setActive( active->isChecked() );
-
-
-		// Check if server name has changed, if it has then we need to replace the key in the map
-		if ( serverName != newName )
+		if ( s )
 		{
-			// Update server name
-			s->setServerName( newName );
-		}
+			// Update url
+			s->setServerUrl( serverurl->text() );
+			s->setActive( active->isChecked() );
+
+			// Check if server name has changed, if it has then we need to replace the key in the map
+			if ( serverName != newName )
+			{
+				// Update server name
+				s->setServerName( newName );
+			}
 		
-		// Update list box
-		servers->changeItem( newName, currentSelectedServer );
+			// Update list box
+			servers->changeItem( newName, currentSelectedServer );
+		}
 	}
 	else
 	{
@@ -363,12 +377,22 @@ void SettingsImpl :: changeServerDetails()
 
 void SettingsImpl :: editDestination( int sel )
 {
-	currentSelectedDestination = sel;
+    currentSelectedDestination = sel;
     Destination *d = dataMgr->getDestination( destinations->currentText() );
-    destinationName = d->getDestinationName();
-    destinationname->setText( d->getDestinationName() );
-    destinationurl->setText( d->getDestinationPath() );
-    linkToRoot->setChecked( d->linkToRoot() );
+    if ( d )
+    {
+        destinationName = d->getDestinationName();
+        destinationname->setText( d->getDestinationName() );
+        destinationurl->setText( d->getDestinationPath() );
+        linkToRoot->setChecked( d->linkToRoot() );
+    }
+    else
+    {
+        destinationName = "";
+        destinationname->setText( "" );
+        destinationurl->setText( "" );
+        linkToRoot->setChecked( false );
+    }
 }
 
 void SettingsImpl :: newDestination()
@@ -384,8 +408,11 @@ void SettingsImpl :: removeDestination()
 {
     changed = true;
     Destination *d = dataMgr->getDestination( destinations->currentText() );
-    dataMgr->getDestinationList().removeRef( d );
-	destinations->removeItem( currentSelectedDestination );
+    if ( d )
+    {
+        dataMgr->getDestinationList().removeRef( d );
+        destinations->removeItem( currentSelectedDestination );
+    }
 }
 
 void SettingsImpl :: changeDestinationDetails()
@@ -401,26 +428,29 @@ void SettingsImpl :: changeDestinationDetails()
 	if ( !newdestination )
 	{
 		Destination *d = dataMgr->getDestination( destinations->currentText() );
-
-		// Update url
-		d->setDestinationPath( destinationurl->text() );
-        d->linkToRoot( linkToRoot->isChecked() );
-
-		// Check if server name has changed, if it has then we need to replace the key in the map
-		if ( destinationName != newName )
+		if ( d )
 		{
-			// Update server name
-			d->setDestinationName( newName );
+			// Update url
+			d->setDestinationPath( destinationurl->text() );
+        	d->linkToRoot( linkToRoot->isChecked() );
 
-			// Update list box
-			destinations->changeItem( newName, currentSelectedDestination );
-		}
+			// Check if server name has changed, if it has then we need to replace the key in the map
+			if ( destinationName != newName )
+			{
+				// Update server name
+				d->setDestinationName( newName );
+
+				// Update list box
+				destinations->changeItem( newName, currentSelectedDestination );
+			}
+
 #ifdef QWS
-        QString key = newName;
-        key += "_linkToRoot";
-        int val = d->linkToRoot();
-        cfg.writeEntry( key, val );
-#endif        
+			QString key = newName;
+			key += "_linkToRoot";
+			int val = d->linkToRoot();
+			cfg.writeEntry( key, val );
+#endif      
+		}  
 	}
 	else
 	{
