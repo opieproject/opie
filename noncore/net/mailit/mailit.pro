@@ -32,9 +32,8 @@ SOURCES   = emailclient.cpp \
       maillist.cpp \
       addresslist.cpp
 
-DESTDIR   = ../bin
-INCLUDEPATH += $(QPEDIR)/include:../library
-DEPENDPATH  += $(QPEDIR)/include:../library
+INCLUDEPATH += $(OPIEDIR)/include
+DEPENDPATH  += $(OPIEDIR)/include 
 LIBS            += -lqpe
 # -lssl
 MOC_DIR=qpeobj
