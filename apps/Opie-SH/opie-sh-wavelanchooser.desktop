@@ -1,5 +1,5 @@
 [Desktop Entry]
-Exec=wavelanchooser.sh
+Exec=opie-sh-wavelanchooser.sh
 Icon=opie-sh-scripts/qtwavelan
 Type=Application
 Name=WLAN Chooser
