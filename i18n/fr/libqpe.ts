@@ -600,7 +600,7 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Job Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Fonction</translation>
     </message>
     <message>
         <source>Department</source>
@@ -748,31 +748,31 @@ Libérez de la mémoire et réessayez.</translation>
     </message>
     <message>
         <source>Mon</source>
-        <translation type="unfinished">Lu</translation>
+        <translation>Lu</translation>
     </message>
     <message>
         <source>Tue</source>
-        <translation type="unfinished">Ma</translation>
+        <translation>Ma</translation>
     </message>
     <message>
         <source>Wed</source>
-        <translation type="unfinished">Me</translation>
+        <translation>Me</translation>
     </message>
     <message>
         <source>Thu</source>
-        <translation type="unfinished">Je</translation>
+        <translation>Je</translation>
     </message>
     <message>
         <source>Fri</source>
-        <translation type="unfinished">Ve</translation>
+        <translation>Ve</translation>
     </message>
     <message>
         <source>Sat</source>
-        <translation type="unfinished">Sa</translation>
+        <translation>Sa</translation>
     </message>
     <message>
         <source>Sun</source>
-        <translation type="unfinished">Di</translation>
+        <translation>Di</translation>
     </message>
 </context>
 <context>

@@ -1,9 +1,10 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>LiquidSet</name>
     <message>
         <source>Liquid Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Thème Liquid</translation>
     </message>
     <message>
         <source>No translucency</source>
@@ -31,19 +32,19 @@
     </message>
     <message>
         <source>Menu color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur du menu</translation>
     </message>
     <message>
         <source>Text color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur du texte</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished"></translation>
+        <translation>Opacité</translation>
     </message>
     <message>
         <source>Use shadowed text</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser du texte ombré</translation>
     </message>
 </context>
 </TS>
