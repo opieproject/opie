@@ -24,10 +24,8 @@
 #include <opie/oclickablelabel.h>
 
 #include "../../todayplugininterface.h"
-#include "../../configwidget.h"
 
 class TodolistPlugin : public TodayPluginObject {
-
 
 public:
     TodolistPlugin();

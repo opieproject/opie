@@ -20,7 +20,6 @@
 #include <qstring.h>
 #include <qwidget.h>
 
-#include <qpe/datebookdb.h>
 #include <opie/oclickablelabel.h>
 
 #include "../../todayplugininterface.h"

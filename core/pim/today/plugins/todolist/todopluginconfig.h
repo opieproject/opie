@@ -24,7 +24,6 @@
 
 class TodolistPluginConfig : public ConfigWidget {
 
-    Q_OBJECT
 
 public:
 

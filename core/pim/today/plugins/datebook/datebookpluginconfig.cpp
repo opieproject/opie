@@ -2,7 +2,6 @@
 
 #include "datebookpluginconfig.h"
 
-
 #include <qpe/config.h>
 
 #include <qlayout.h>
@@ -12,7 +11,7 @@
 #include <qvbox.h>
 
 DatebookPluginConfig::DatebookPluginConfig( QWidget* parent,  const char* name)
-    : ConfigWidget( parent,  name ) {
+    : ConfigWidget( parent, name ) {
 
     QVBoxLayout * layout = new QVBoxLayout( this );
 

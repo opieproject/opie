@@ -22,6 +22,7 @@
 
 #include <qdatetime.h>
 #include <qlist.h>
+#include <qhbox.h>
 
 #include <qpe/qlibrary.h>
 #include <qpe/event.h>
@@ -32,14 +33,6 @@
 
 class QVBoxLayout;
 
-struct TodayPlugin {
-    QLibrary *library;
-    TodayPluginInterface *iface;
-    TodayPluginObject *guiPart;
-    QString name;
-    bool active;
-    int pos;
-};
 
 class Today : public TodayBase {
 
@@ -55,7 +48,6 @@ class Today : public TodayBase {
     void launchApp( QString appName );
     void editCard();
     void draw();
-    void refresh();
 
 private:
     void init();

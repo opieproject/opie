@@ -2,7 +2,7 @@
 #ifndef DATEBOOK_PLUGIN_CONFIG_H
 #define DATEBOOK_PLUGIN_CONFIG_H
 
-#include <qwidget.h>
+//#include <qwidget.h>
 #include <qcheckbox.h>
 #include <qspinbox.h>
 
@@ -10,11 +10,11 @@
 
 class DatebookPluginConfig : public ConfigWidget {
 
-    Q_OBJECT
+
 
 public:
     DatebookPluginConfig( QWidget *parent,  const char *name );
-    ~DatebookPluginConfig();
+   ~DatebookPluginConfig();
 
     void writeConfig();
 private:

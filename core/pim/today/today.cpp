@@ -32,9 +32,20 @@
 #include <qtimer.h>
 #include <qpixmap.h>
 #include <qlayout.h>
+#include <qhbox.h>
 #include <qtabwidget.h>
 #include <qdialog.h>
 
+
+struct TodayPlugin {
+    QLibrary *library;
+    TodayPluginInterface *iface;
+    TodayPluginObject *guiPart;
+    QHBox *guiBox;
+    QString name;
+    bool active;
+    int pos;
+};
 
 static QValueList<TodayPlugin> pluginList;
 
@@ -52,11 +63,12 @@ Today::Today( QWidget* parent,  const char* name, WFlags fl )
 #endif
 #endif
 
-    pluginLayout = 0l;
+    // pluginLayout = 0l;
 
     setOwnerField();
     init();
-    refresh();
+    loadPlugins();
+    draw();
     showMaximized();
 }
 
@@ -124,6 +136,7 @@ void Today::loadPlugins() {
 	(*tit).library->unload();
 	delete (*tit).library;
     }
+    pluginList.clear();
 
     QString path = QPEApplication::qpeDir() + "/plugins/today";
     QDir dir( path, "lib*.so" );
@@ -139,11 +152,11 @@ void Today::loadPlugins() {
 	qDebug( "querying: %s", QString( path + "/" + *it ).latin1() );
         if ( lib->queryInterface( IID_TodayPluginInterface, (QUnknownInterface**)&iface ) == QS_OK ) {
 	    qDebug( "loading: %s", QString( path + "/" + *it ).latin1() );
-            qDebug( QString(*it).latin1() );
+            qDebug( QString(*it) );
             TodayPlugin plugin;
             plugin.library = lib;
             plugin.iface = iface;
-            plugin.name = QString(*it).latin1();
+            plugin.name = QString(*it);
 
             if ( m_excludeApplets.grep( *it ).isEmpty() ) {
                 plugin.active = true;
@@ -151,6 +164,27 @@ void Today::loadPlugins() {
                 plugin.active = false;
             }
             plugin.guiPart = plugin.iface->guiPart();
+
+            plugin.guiBox = new QHBox( this );
+            QPixmap plugPix;
+            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( 18, 18 ), 0 );
+            OClickableLabel* plugIcon = new OClickableLabel( plugin.guiBox );
+            plugIcon->setPixmap( plugPix );
+            QScrollView* sv = new QScrollView( plugin.guiBox );
+            QWidget *plugWidget = plugin.guiPart->widget( sv->viewport() );
+            sv->setMinimumHeight( plugin.guiPart->minHeight() );
+            //sv->setMaximumHeight( plugin.guiPart->maxHeight() );
+            sv->setResizePolicy( QScrollView::AutoOneFit );
+            sv->setHScrollBarMode( QScrollView::AlwaysOff );
+            sv->setFrameShape( QFrame::NoFrame );
+            sv->addChild( plugWidget );
+
+            //plugin.guiBox->addWidget( plugIcon, 0, AlignTop );
+            //plugin.guiBox->addWidget( sv, 0, AlignTop );
+            plugin.guiBox->setStretchFactor( plugIcon, 1 );
+            plugin.guiBox->setStretchFactor( sv, 9 );
+            layout->addWidget( plugin.guiBox );
+
             pluginList.append( plugin );
             count++;
         } else {
@@ -166,11 +200,6 @@ void Today::loadPlugins() {
  */
 void Today::draw() {
 
-    if ( pluginLayout ) {
-        delete pluginLayout;
-    }
-    pluginLayout = new QVBoxLayout( layout );
-
     if ( pluginList.count() == 0 ) {
         QLabel *noPlugins = new QLabel( this );
         noPlugins->setText( tr( "No plugins found" ) );
@@ -184,29 +213,15 @@ void Today::draw() {
 	plugin = pluginList[i];
 
     	if ( plugin.active ) {
-            QHBoxLayout* plugLayout = new QHBoxLayout( this );
-            QPixmap plugPix;
-            plugPix.convertFromImage( Resource::loadImage( plugin.guiPart->pixmapNameWidget() ).smoothScale( 18, 18 ), 0 );
-            OClickableLabel* plugIcon = new OClickableLabel( this );
-            plugIcon->setPixmap( plugPix );
-            QScrollView* sv = new QScrollView( this  );
-            QWidget* plugWidget = plugin.guiPart->widget( sv->viewport() );
-            //  plugWidget->reparent( sv->viewport(), QPoint( 0, 0 ) );
-            sv->setMinimumHeight( plugin.guiPart->minHeight() );
-            //sv->setMaximumHeight( plugin.guiPart->maxHeight() );
-
-            sv->setResizePolicy( QScrollView::AutoOneFit );
-            sv->setHScrollBarMode( QScrollView::AlwaysOff );
-            sv->setFrameShape( QFrame::NoFrame );
-            sv->addChild( plugWidget );
-
-            plugLayout->addWidget( plugIcon, 0, AlignTop );
-            plugLayout->addWidget( sv, 0, AlignTop );
-            plugLayout->setStretchFactor( plugIcon, 1 );
-            plugLayout->setStretchFactor( sv, 9 );
-            pluginLayout->addLayout( plugLayout );
-            count++;
-	}
+            qDebug( plugin.name + " is ACTIVE " );
+            //        QHBoxLayout* plugLayout = new QHBoxLayout( this );
+            plugin.guiBox->show();
+        } else {
+            //     plugin.guiWidget->hide();
+            qDebug( plugin.name + " is INACTIVE" );
+            plugin.guiBox->hide();
+        }
+        count++;
     }
 
     if ( count == 0 ) {
@@ -216,18 +231,6 @@ void Today::draw() {
     }
 
     layout->addItem( new QSpacerItem( 1,1, QSizePolicy::Minimum, QSizePolicy::Expanding ) );
-
-
-    // how often refresh - later have qcop update calls in *db
-    //  QTimer::singleShot( 20*1000, this, SLOT( draw() ) );
-}
-
-
-void Today::refresh() {
-    loadPlugins();
-    draw();
-    qDebug( "redraw" );
-//    QTimer::singleShot( 30*1000, this, SLOT( refresh() ) );
 }
 
 
@@ -235,43 +238,53 @@ void Today::refresh() {
  * The method for the configuration dialog.
  */
 void Today::startConfig() {
-  conf = new TodayConfig ( this, "", true );
 
-  uint count = 0;
-  TodayPlugin plugin;
+    TodayConfig conf( this, "dialog", true );
 
-  QList<ConfigWidget> configWidgetList;
-  for ( uint i = 0; i < pluginList.count(); i++ ) {
-      plugin = pluginList[i];
+    TodayPlugin plugin;
 
-      // load the config widgets in the tabs
-      if ( plugin.guiPart->configWidget( this ) != 0l ) {
-          ConfigWidget* widget = plugin.guiPart->configWidget( this );
-          widget->reparent( conf , QPoint( 0,0 ) );
-          configWidgetList.append( widget );
-          conf->TabWidget3->insertTab( widget, plugin.guiPart->appName() );
-      }
-      // set the order/activate tab
-      conf->pluginManagement( plugin.name, plugin.guiPart->pluginName(),
+    QList<ConfigWidget> configWidgetList;
+    for ( uint i = 0; i < pluginList.count(); i++ ) {
+        plugin = pluginList[i];
+
+        // load the config widgets in the tabs
+        if ( plugin.guiPart->configWidget( this ) != 0l ) {
+            ConfigWidget* widget = plugin.guiPart->configWidget( this );
+            configWidgetList.append( widget );
+            conf.TabWidget3->insertTab( widget, plugin.guiPart->appName() );
+        }
+        // set the order/activate tab
+        conf.pluginManagement( plugin.name, plugin.guiPart->pluginName(),
                               Resource::loadPixmap( plugin.guiPart->pixmapNameWidget() ) );
-      count++;
-  }
+    }
 
-  conf->showMaximized();
+    conf.exec();
+    if ( conf.exec() == QDialog::Accepted ) {
+        conf.writeConfig();
+        ConfigWidget *confWidget;
+        for ( confWidget = configWidgetList.first(); confWidget != 0;
+              confWidget = configWidgetList.next() ) {
+            confWidget->writeConfig();
+        }
+        init();
 
-  if ( conf->exec() == QDialog::Accepted ) {
-      ConfigWidget *confWidget;
-      for ( confWidget=configWidgetList.first(); confWidget != 0;
-            confWidget = configWidgetList.next() ) {
-          confWidget->writeConfig();
-      }
-      conf->writeConfig();
 
-      init();
-      loadPlugins();
-      draw();
-  }
-  delete conf;
+        TodayPlugin plugin;
+        for ( uint i = 0; i < pluginList.count(); i++ ) {
+            plugin = pluginList[i];
+
+            if ( m_excludeApplets.grep( plugin.name ).isEmpty() ) {
+                qDebug("CONFIG" + plugin.name + "ACTIVE");
+                plugin.active = true;
+            } else {
+                qDebug("CONFIG" + plugin.name + "INACTIVE");
+
+                plugin.active = false;
+            }
+        }
+
+        draw();
+    }
 }
 
 

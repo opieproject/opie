@@ -21,11 +21,6 @@
 #include "datebookpluginwidget.h"
 #include "datebookpluginconfig.h"
 
-#include "../../configwidget.h"
-
-#include <qpe/timestring.h>
-#include <qpe/config.h>
-
 
 DatebookPlugin::DatebookPlugin()  {
 }
@@ -70,4 +65,5 @@ int DatebookPlugin::maxHeight()  const {
 }
 
 
-
+int main() {
+}

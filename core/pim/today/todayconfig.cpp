@@ -30,14 +30,12 @@
 #include <qvbox.h>
 #include <qtoolbutton.h>
 
-// for getenv
-#include <stdlib.h>
-
 class ToolButton : public QToolButton {
+
 public:
     ToolButton( QWidget *parent, const char *name, const QString& icon, QObject *handler, const QString& slot, bool t = FALSE )
         : QToolButton( parent, name ) {
-        setTextLabel( name );
+        // setTextLabel( name );
         setPixmap( Resource::loadPixmap( icon ) );
         setAutoRaise( TRUE );
         setFocusPolicy( QWidget::NoFocus );
@@ -52,17 +50,15 @@ public:
  * By that way it would be real easy to have it as seperate app in settings tab
  *
  */
-TodayConfig::TodayConfig( QWidget* parent,  const char* name, bool modal, WFlags fl )
+TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags fl )
     : QDialog( parent, name, modal, fl ) {
 
-    if ( !name ) {
-        setName( "todayconfig" );
-    }
     setCaption( tr( "Today config" ) );
 
     QVBoxLayout *layout = new QVBoxLayout( this );
     TabWidget3 = new QTabWidget( this, "TabWidget3" );
-    TabWidget3->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, TabWidget3->sizePolicy().hasHeightForWidth() ) );
+    // TabWidget3->setFrameShape( QFrame::NoFrame );
+    //TabWidget3->setSizePolicy( QSizePolicy( (QSizePolicy::SizeType)7, (QSizePolicy::SizeType)7, TabWidget3->sizePolicy().hasHeightForWidth() ) );
     TabWidget3->setAutoMask( FALSE );
     TabWidget3->setTabShape( QTabWidget::Rounded );
     layout->addWidget( TabWidget3 );
@@ -107,6 +103,7 @@ TodayConfig::TodayConfig( QWidget* parent,  const char* name, bool modal, WFlags
     connect ( m_appletListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( appletChanged ( ) ) );
 
     readConfig();
+    showMaximized();
 }
 
 
