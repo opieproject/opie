@@ -9,28 +9,16 @@
 
 #include <opie/oprocess.h>
 
+#include "procctl.h"
 #include "filetransfer.h"
 
-/**
- *
- *
-class FileTransferControl {
-public:
-    FileTransferControl();
-    ~FileTransferControl();
-
-
-};
-*/
-
-bool FileTransfer::terminate = false;
-pid_t FileTransfer::m_pid;
 
 FileTransfer::FileTransfer( Type t, IOLayer* lay )
     : FileTransferLayer( lay ), m_type( t ) {
     signal(SIGPIPE,  SIG_IGN );
-    signal( SIGCHLD, signal_handler );
+
     m_not = 0l;
+    m_proc = 0l;
 }
 FileTransfer::~FileTransfer() {
 }
@@ -100,15 +88,20 @@ void FileTransfer::sendFile( const QString& file ) {
         if ( m_info[0] )
             close( m_info[0] );
 
-        terminate = false;
-        fd_set fds;
-        struct timeval timeout;
-        int sel;
+
 
         /* replace by QSocketNotifier!!! */
         m_not = new QSocketNotifier(m_comm[0],  QSocketNotifier::Read );
         connect(m_not, SIGNAL(activated(int) ),
                 this, SLOT(slotRead() ) );
+        if ( pipe(m_term) < 0 )
+            m_term[0] = m_term[1] = 0;
+
+        ProcCtl::self()->add(m_pid, m_term[1] );
+        m_proc = new QSocketNotifier(m_term[0], QSocketNotifier::Read );
+        connect(m_proc, SIGNAL(activated(int) ),
+                this, SLOT(slotExec() ) );
+
     }
         break;
     }
@@ -118,17 +111,6 @@ void FileTransfer::sendFile( const QString& file ) {
  */
 void FileTransfer::sendFile( const QFile& file ) {
     sendFile( file.name() );
-}
-/*
- * our signal handler to be replaced by
- * a procctl thingie
- */
-void FileTransfer::signal_handler(int ) {
-    qWarning("Terminated");
-    int status;
-    signal( SIGCHLD, signal_handler );
-    waitpid( m_pid, &status, WNOHANG );
-    terminate = true;
 }
 
 /*
@@ -175,6 +157,7 @@ void FileTransfer::slotRead() {
     }
     ar.resize( len );
     QString str( ar );
+    qWarning(str.simplifyWhiteSpace() );
     QStringList lis = QStringList::split(' ', str );
     /*
      * Transfer finished.. either complete or incomplete
@@ -239,4 +222,16 @@ void FileTransfer::slotProgress( const QStringList& list ) {
 void FileTransfer::cancel() {
     ::kill(m_pid,9 );
     delete m_not;
+}
+void FileTransfer::slotExec() {
+    qWarning("exited!");
+    char buf[2];
+    ::read(m_term[0], buf, 1 );
+    delete m_proc;
+    delete m_not;
+    close( m_term[0] );
+    close( m_term[1] );
+    close( m_comm[0] );
+    close( m_comm[1] );
+    emit sent();
 }
