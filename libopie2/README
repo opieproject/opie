@@ -9,6 +9,7 @@
           * provide end users with a common look and feel
           * reduce memory footprint through sharing code
           * reduce possible bugs through reusing tested code
+          * improve the architecture of applications with design patterns
 
 --------------------------------------------------------
 0. Building 
@@ -44,6 +45,9 @@ libopie is functionally seperated into the following libraries:
 1.1 Contents of libopiecore [ opiecore ]
 --------------------------------------------------------
 
+ - oapplication
+ - ostorage
+
  - odbgstream
  - ondbgstream
 
@@ -55,28 +59,15 @@ libopie is functionally seperated into the following libraries:
  - oconfig
  - oconfiggroupsaver
 
- - ocompletionbase
- - ocompletion
- - ocomptreenodelist
- - ocomptreenode
- - ocompletionwrapper
-
  - oglobal
  - oglobalsettings
-
- - osortableitem
- - osortablevaluelist
 
 1.2 Contents of libopieui [ opieui ]
 --------------------------------------------------------
 
- - oapplication
-
  - ofiledialog
- - colordialog
  - oclickablelabel
  - ocolorbutton
- - colorpopupmenu
  - otabinfo
  - otabbar
  - otabwidget
@@ -89,41 +80,23 @@ libopie is functionally seperated into the following libraries:
  - olistviewitem
  - oversatileview
  - oversatileviewitem
- - ocompletionbox
- - olineedit
- - ocombobox
- - ohistorycombo
 
  - omessagebox
  - odialogbase
 
- - todayconfigwidget  (rather into opiepim?)
- - orecurrancewidget  (rather into opiepim?)
- - otimepicker        (rather into opiepim?)
+ - okeyconfigwidget
+ - otaskbarapplet
+ - otimepicker
 
 1.3 Contents of libopiepim [ opiepim ]
 --------------------------------------------------------
 
- - ocheckitem
- - todayplugininterface
-
-THIS STUFF IS OUTDATED/DEPRICATED AND SCHOULD NOT
-BE MOVED IN THE NEW LIBRARY !! 
-USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
-
- - todoresource
- - todoevent
- - todovcalresource
+...
 
 1.4 Contents of libopiedb [ opiedb ]
 --------------------------------------------------------
 
- - xmltree
-
-THIS STUFF IS OUTDATED/DEPRICATED AND SCHOULD NOT
-BE MOVED IN THE NEW LIBRARY !! 
-USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
- - tododb
+...
 
 1.5 Contents of libopienet [ opienet ]
 --------------------------------------------------------
@@ -147,10 +120,6 @@ USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
  - oippacket
  - oudppacket
  - otcppacket
-
- <libmail stuff>
- <libbend stuff>
- <libftp stuff>
 
 1.6 Contents of libopiemm [ opiemm ]
 --------------------------------------------------------
@@ -186,3 +155,11 @@ USE THE CLASSES IN libopie/pim INSTEAD !(eilers)
 2.6 libopiemm
 
 ...
+
+--------------------------------------------------------
+3.0 Usage
+--------------------------------------------------------
+
+3.1 Namespaces
+
+

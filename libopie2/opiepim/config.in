@@ -1,6 +1,6 @@
   config LIBOPIE2PIM
     boolean "libopie2pim (pim related classes)"
-    default "n"
+    default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE
     comment "libopie2pim needs a libqpe and libopie2core"
     depends !(( LIBQPE || LIBQPE-X11 ) && LIBOPIE2CORE )

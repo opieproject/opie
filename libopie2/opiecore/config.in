@@ -1,6 +1,6 @@
   config LIBOPIE2CORE
     boolean "libopie2core (application, configuration and debug related classes)"
-    default "n"
+    default "y"
     depends ( LIBQPE || LIBQPE-X11 )
     comment "libopie2core needs a libqpe (yet)"
     depends !( LIBQPE || LIBQPE-X11 )

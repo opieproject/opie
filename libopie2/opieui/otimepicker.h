@@ -31,8 +31,8 @@
 #define OTIMEPICKER_H
 
 /* OPIE */
-#include <opie2/oclickablelabel.h>
-#include <opie2/otimepickerbase.h>
+#include "oclickablelabel.h"
+#include "otimepickerbase.h"
 
 /* QT */
 #include <qwidget.h>
