@@ -86,7 +86,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
       if(!(*ni).contains("_")){
         Interface *i = new Interface(this, *ni, false);
         i->setAttached(false);
-        i->setHardwareName("Disconnected");
+        i->setHardwareName(tr("Disconnected"));
         interfaceNames.insert(i->getInterfaceName(), i);
         updateInterface(i);
         connect(i, SIGNAL(updateInterface(Interface *)), this, SLOT(updateInterface(Interface *)));
@@ -388,11 +388,10 @@ void MainWindowImp::removeClicked(){
   }
   else{
     if(!i->getModuleOwner()->remove(i))
-      QMessageBox::information(this, "Error", "Unable to remove.", QMessageBox::Ok);
+      QMessageBox::information(this, tr("Error"), tr("Unable to remove."), QMessageBox::Ok);
     else{
-      QMessageBox::information(this, "Success", "Interface was removed.", QMessageBox::Ok);
-      // TODO memory managment....
-      // who deletes the interface?
+        delete item;
+//      QMessageBox::information(this, "Success", "Interface was removed.", QMessageBox::Ok);
     }
   }
 }
@@ -405,7 +404,7 @@ void MainWindowImp::removeClicked(){
 void MainWindowImp::configureClicked(){
   QListViewItem *item = connectionList->currentItem();
   if(!item){
-    QMessageBox::information(this, "Sorry","Please select an interface first.", QMessageBox::Ok);
+    QMessageBox::information(this, tr("Sorry"),tr("Please select an interface first."), QMessageBox::Ok);
     return;
   }
 
