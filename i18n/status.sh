@@ -1,8 +1,15 @@
 #/bin/sh
 arg=$1
+if [ x${arg}x = xx ]
+then
+	arg=.
+fi
 echo "number of strings: "
-grep translation $arg/*.ts | wc -l
+strs=`find $arg -name "*.ts" -exec cat {} \; | grep translation | wc -l`
+echo $strs
 echo "unfinished: "
-grep translation $arg/*.ts | grep type=\"unfinished\" | wc -l
+unfi=`find $arg -name "*.ts" -exec cat {} \; | grep translation | grep type=\"unfinished\" | wc -l`
+echo $unfi `expr \( $strs - $unfi \) \* 100 / $strs`%
 echo "obsolete: "
-grep translation $arg/*.ts | grep type=\"obsolete\" | wc -l
+obso=`find $arg -name "*.ts" -exec cat {} \; | grep translation | grep type=\"obsolete\" | wc -l`
+echo $obso `expr \( $strs - $obso \) \* 100 / $strs`%
