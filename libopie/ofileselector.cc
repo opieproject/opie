@@ -1036,7 +1036,7 @@ void OFileSelector::slotFileSelected( const QString &string )
 void OFileSelector::slotFileBridgeSelected( const DocLnk &lnk )
 {
   slotFileSelected( lnk.name() );
-  // emit fileSelected( lnk );
+  emit fileSelected( lnk );
 }
 void OFileSelector::slotSelectionChanged()
 {
