@@ -11,7 +11,9 @@ HEADERS	     = defines.h \
 		viewmail.h \
 		viewmailbase.h \
 	           opiemail.h \
-				imapwrapper.h
+				imapwrapper.h \
+				mailtypes.h \
+				mailistviewitem.h
                
 SOURCES	     = main.cpp \
 	           opiemail.cpp \
@@ -25,7 +27,8 @@ SOURCES	     = main.cpp \
                logindialog.cpp \
 		viewmail.cpp \
 		viewmailbase.cpp \
-               settings.cpp 
+               settings.cpp \
+				mailtypes.cpp 
                
 INTERFACES	 = editaccountsui.ui \
                selectmailtypeui.ui \

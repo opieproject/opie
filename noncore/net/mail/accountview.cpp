@@ -1,5 +1,6 @@
 #include "accountview.h"
 #include "imapwrapper.h"
+#include "mailtypes.h"
 #include "defines.h"
 
 IMAPviewItem::IMAPviewItem( IMAPaccount *a, QListView *parent )
@@ -22,7 +23,7 @@ IMAPwrapper *IMAPviewItem::getWrapper()
     return wrapper;
 }
 
-void IMAPviewItem::refresh(Maillist&)
+void IMAPviewItem::refresh(QList<RecMail>&)
 {
     QList<IMAPFolder> *folders = wrapper->listFolders();
     
@@ -39,6 +40,10 @@ void IMAPviewItem::refresh(Maillist&)
     }
 }
 
+RecBody IMAPviewItem::fetchBody(const RecMail&)
+{
+    return RecBody();
+}
 
 IMAPfolderItem::~IMAPfolderItem() 
 {
@@ -54,12 +59,12 @@ IMAPfolderItem::IMAPfolderItem( IMAPFolder *folderInit, IMAPviewItem *parent )
     setText( 0, folder->getDisplayName() );
 }
 
-void IMAPfolderItem::refresh(Maillist&target) 
+void IMAPfolderItem::refresh(QList<RecMail>&target) 
 {
     imap->getWrapper()->listMessages( folder->getName(),target );
 }
 
-QString IMAPfolderItem::fetchBody(const RecMail&aMail)
+RecBody IMAPfolderItem::fetchBody(const RecMail&aMail)
 {
     return imap->getWrapper()->fetchBody(aMail);
 }
@@ -88,7 +93,7 @@ void AccountView::populate( QList<Account> list )
 void AccountView::refresh(QListViewItem *item) {
     qDebug("AccountView refresh...");
     if ( item ) { 
-        Maillist headerlist;
+        QList<RecMail> headerlist;
         headerlist.setAutoDelete(true);
         AccountViewItem *view = static_cast<AccountViewItem *>(item);
         view->refresh(headerlist);
@@ -101,11 +106,10 @@ void AccountView::refreshAll()
     
 }
 
-QString AccountView::fetchBody(const RecMail&aMail)
+RecBody AccountView::fetchBody(const RecMail&aMail)
 {
-    QString Body;
     QListViewItem*item = selectedItem ();
-    if (!item) return Body;
+    if (!item) return RecBody();
     AccountViewItem *view = static_cast<AccountViewItem *>(item);
     return view->fetchBody(aMail);
 }

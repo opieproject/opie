@@ -627,15 +627,3 @@ Mail::Mail()
     :name(""), mail(""), to(""), cc(""), bcc(""), reply(""), subject(""), message("")
 {
 }
-
-RecMail::RecMail()
-    :subject(""),date(""),mbox(""),msg_number(0),msg_flags(7)
-{
-}
-
-#if 0
-void RecMail::setDate(const QString&aDate)
-{
-    mDate = QDateTime::fromString(aDate);
-}
-#endif

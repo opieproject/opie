@@ -10,6 +10,8 @@
 
 #include "accountview.h"
 
+class RecMail;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -22,7 +24,7 @@ public slots:
     
 protected slots:
     virtual void slotShowFolders( bool show );
-    virtual void refreshMailView(Maillist*);
+    virtual void refreshMailView(QList<RecMail>*);
     virtual void displayMail(QListViewItem*);
     
 protected:
@@ -34,21 +36,6 @@ protected:
     AccountView *folderView;
     QListView *mailView;
 
-};
-
-class MailListViewItem:public QListViewItem
-{
-public:
-    MailListViewItem(QListView * parent, MailListViewItem * after )
-        :QListViewItem(parent,after),mail_data(){}
-    virtual ~MailListViewItem(){}
-    
-    void storeData(const RecMail&data){mail_data = data;}
-    const RecMail&data()const{return mail_data;}
-    void showEntry();
-    
-protected:
-    RecMail mail_data;
 };
 
 #endif

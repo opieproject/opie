@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "imapwrapper.h"
+#include "mailtypes.h"
 #include <libetpan/mailimap.h>
 
 IMAPwrapper::IMAPwrapper( IMAPaccount *a )
@@ -64,7 +65,7 @@ void IMAPwrapper::logout()
     m_imap = 0;
 }
 
-void IMAPwrapper::listMessages(const QString&mailbox,Maillist&target )
+void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
 {
     const char *mb;
     int err = MAILIMAP_NO_ERROR;
@@ -329,9 +330,11 @@ RecMail*IMAPwrapper::parse_list_result(mailimap_msg_att* m_att)
 }
 
 #if 1
-QString IMAPwrapper::fetchBody(const RecMail&mail)
+RecBody IMAPwrapper::fetchBody(const RecMail&mail)
 {
-    QString body = "";
+    RecBody body;
+    QString body_text;
+
     const char *mb;
     int err = MAILIMAP_NO_ERROR;
     clist *result;
@@ -368,7 +371,8 @@ QString IMAPwrapper::fetchBody(const RecMail&mail)
         mailimap_msg_att_item*item = (mailimap_msg_att_item*)msg_att->list->first->data;
 
         if (item->msg_att_static && item->msg_att_static->rfc822_text) {
-            body = item->msg_att_static->rfc822_text;
+            body_text = item->msg_att_static->rfc822_text;
+            body.setBodytext(body_text);
         }
     } else {
         qDebug("error fetching text: %s",m_imap->response);

@@ -1,10 +1,13 @@
 #ifndef __IMAPWRAPPER
 #define __IMAPWRAPPER
 
+#include <qlist.h>
 #include "mailwrapper.h"
 
 struct mailimap;
 struct mailimap_body_type_1part;
+class RecMail;
+class RecBody;
 
 class IMAPwrapper : public QObject
 {
@@ -14,8 +17,8 @@ public:
     IMAPwrapper( IMAPaccount *a );
     virtual ~IMAPwrapper();
     QList<IMAPFolder>* listFolders();
-    void listMessages(const QString & mailbox,Maillist&target );
-    QString fetchBody(const RecMail&mail);
+    void listMessages(const QString & mailbox,QList<RecMail>&target );
+    RecBody fetchBody(const RecMail&mail);
     static void imap_progress( size_t current, size_t maximum );
 
 protected:

@@ -9,6 +9,8 @@
 #include "defines.h"
 #include "mainwindow.h"
 #include "viewmail.h"
+#include "mailtypes.h"
+#include "mailistviewitem.h"
 
 MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     : QMainWindow( parent, name, flags )
@@ -100,7 +102,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags flags )
     connect( mailView, SIGNAL( clicked( QListViewItem * ) ),this,
              SLOT( displayMail( QListViewItem * ) ) );
 
-    connect(folderView,SIGNAL(refreshMailview(Maillist*)),this,SLOT(refreshMailView(Maillist*)));
+    connect(folderView,SIGNAL(refreshMailview(QList<RecMail>*)),this,SLOT(refreshMailView(QList<RecMail>*)));
 
    QTimer::singleShot( 1000, this, SLOT(  slotAdjustColumns() ) );
 }
@@ -129,23 +131,14 @@ void MainWindow::slotShowFolders( bool show )
     }
 }
 
-void MainWindow::refreshMailView(Maillist*list)
+void MainWindow::refreshMailView(QList<RecMail>*list)
 {
     MailListViewItem*item = 0;
     mailView->clear();
-#if 0
-    QFont f = mailView->getFont();
-    QFont bf = f;
-#endif
     for (unsigned int i = 0; i < list->count();++i) {
         item = new MailListViewItem(mailView,item);
         item->storeData(*(list->at(i)));
         item->showEntry();
-#if 0
-        if (!list->at(i)->getFlags().testBit(FLAG_SEEN)) {
-            item->setFont(bf);
-        }
-#endif
     }
 }
 void MainWindow::displayMail(QListViewItem*item)
@@ -153,14 +146,17 @@ void MainWindow::displayMail(QListViewItem*item)
     if (!item) return;
     qDebug("View mail");
     RecMail mail = ((MailListViewItem*)item)->data();
-    QString body = folderView->fetchBody(mail);
+    RecBody body = folderView->fetchBody(mail);
 
     ViewMail readMail( this );
-    readMail.setMailInfo( mail.getFrom(), "", mail.getSubject(), "", "", body );
+    readMail.setMailInfo( mail.getFrom(), "", mail.getSubject(), "", "", body.Bodytext() );
     readMail.showMaximized();
     readMail.exec();
+}
 
-    qDebug(body );
+MailListViewItem::MailListViewItem(QListView * parent, MailListViewItem * after )
+        :QListViewItem(parent,after),mail_data()
+{
 }
 
 void MailListViewItem::showEntry()
@@ -168,4 +164,14 @@ void MailListViewItem::showEntry()
     setText(0,mail_data.getSubject());
     setText(1,mail_data.getFrom());
     setText(2,mail_data.getDate());
+}
+
+void MailListViewItem::storeData(const RecMail&data)
+{
+    mail_data = data;
+}
+
+const RecMail& MailListViewItem::data()const
+{
+    return mail_data;
 }
