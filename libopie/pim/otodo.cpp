@@ -23,6 +23,10 @@
 
 struct OTodo::OTodoData : public QShared {
     OTodoData() : QShared() {
+        recur = 0;
+        state = 0;
+        maintainer = 0;
+        notifiers = 0;
     };
 
     QDate date;
@@ -33,12 +37,12 @@ struct OTodo::OTodoData : public QShared {
     QString sum;
     QMap<QString, QString> extra;
     ushort prog;
-    OPimState state;
-    ORecur recur;
-    OPimMaintainer maintainer;
+    OPimState *state;
+    ORecur *recur;
+    OPimMaintainer *maintainer;
     QDate start;
     QDate completed;
-    OPimNotifyManager notifiers;
+    OPimNotifyManager *notifiers;
 };
 
 OTodo::OTodo(const OTodo &event )
@@ -151,14 +155,36 @@ QString OTodo::description()const
 {
     return data->desc;
 }
+bool OTodo::hasState() const{
+    if (!data->state ) return false;
+    return ( data->state->state() != OPimState::Undefined );
+}
 OPimState OTodo::state()const {
-    return data->state;
+    if (!data->state ) {
+        OPimState state;
+        return state;
+    }
+
+    return (*data->state);
+}
+bool OTodo::hasRecurrence()const {
+    if (!data->recur) return false;
+    return data->recur->doesRecur();
 }
 ORecur OTodo::recurrence()const {
-    return data->recur;
+    if (!data->recur) return ORecur();
+
+    return (*data->recur);
+}
+bool OTodo::hasMaintainer()const {
+    if (!data->maintainer) return false;
+
+    return (data->maintainer->mode() != OPimMaintainer::Undefined );
 }
 OPimMaintainer OTodo::maintainer()const {
-    return data->maintainer;
+    if (!data->maintainer) return OPimMaintainer();
+
+    return (*data->maintainer);
 }
 void OTodo::setCompleted( bool completed )
 {
@@ -201,15 +227,25 @@ void OTodo::setCompletedDate( const QDate& date ) {
 }
 void OTodo::setState( const OPimState& state ) {
     changeOrModify();
-    data->state = state;
+    if (data->state )
+        (*data->state) = state;
+    else
+        data->state = new OPimState( state );
 }
 void OTodo::setRecurrence( const ORecur& rec) {
     changeOrModify();
-    data->recur = rec;
+    if (data->recur )
+        (*data->recur) = rec;
+    else
+        data->recur = new ORecur( rec );
 }
 void OTodo::setMaintainer( const OPimMaintainer& pim ) {
     changeOrModify();
-    data->maintainer = pim;
+
+    if (data->maintainer )
+        (*data->maintainer) = pim;
+    else
+        data->maintainer = new OPimMaintainer( pim );
 }
 bool OTodo::isOverdue( )
 {
@@ -260,8 +296,14 @@ QString OTodo::toRichText() const
 
   return text;
 }
+bool OTodo::hasNotifiers()const {
+    if (!data->notifiers) return false;
+    return data->notifiers->isEmpty();
+}
 OPimNotifyManager& OTodo::notifiers() {
-    return data->notifiers;
+    if (!data->notifiers )
+        data->notifiers = new OPimNotifyManager;
+    return (*data->notifiers);
 }
 
 bool OTodo::operator<( const OTodo &toDoEvent )const{
@@ -405,12 +447,21 @@ void OTodo::copy( OTodoData* src, OTodoData* dest ) {
     dest->sum = src->sum;
     dest->extra = src->extra;
     dest->prog = src->prog;
-    dest->state = src->state;
-    dest->recur = src->recur;
-    dest->maintainer = src->maintainer;
+
+    if (src->state )
+        dest->state = new OPimState( *src->state );
+
+    if (src->recur )
+        dest->recur = new ORecur( *src->recur );
+
+    if (src->maintainer )
+        dest->maintainer = new OPimMaintainer( *src->maintainer )
+                           ;
     dest->start = src->start;
     dest->completed = src->completed;
-    dest->notifiers = src->notifiers;
+
+    if (src->notifiers )
+        dest->notifiers = new OPimNotifyManager( *src->notifiers );
 }
 QString OTodo::type() const {
     return QString::fromLatin1("OTodo");

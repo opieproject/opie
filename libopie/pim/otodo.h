@@ -128,14 +128,29 @@ public:
     QDate completedDate()const;
 
     /**
+     * does it have a state?
+     */
+    bool hasState()const;
+
+    /**
      * What is the state of this OTodo?
      */
     OPimState state()const;
 
     /**
+     * has recurrence?
+     */
+    bool hasRecurrence()const;
+
+    /**
      * the recurrance of this
      */
     ORecur recurrence()const;
+
+    /**
+     * does this OTodo have a maintainer?
+     */
+    bool hasMaintainer()const;
 
     /**
      * the Maintainer of this OTodo
@@ -158,6 +173,7 @@ public:
      */
     QString toRichText() const;
 
+    bool hasNotifiers()const;
     /*
      * check if the sharing is still fine!! -zecke
      */
