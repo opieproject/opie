@@ -1,5 +1,7 @@
 #include <opie2/odebug.h>
 #include <opie2/oledbox.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
 #include <qpe/resource.h>
 #include <qcheckbox.h>

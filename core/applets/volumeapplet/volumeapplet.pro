@@ -1,13 +1,12 @@
 TEMPLATE	= lib
 CONFIG		+= qt plugin warn_on 
-HEADERS		= volume.h oledbox.h
-#SOURCES	= volume.cpp oledbox.cpp
+HEADERS		= volume.h
 SOURCES	        = volume.cpp
 TARGET		= volumeapplet
 DESTDIR		= $(OPIEDIR)/plugins/applets
-INCLUDEPATH += $(OPIEDIR)/include
+INCLUDEPATH	+= $(OPIEDIR)/include
 DEPENDPATH      += 
-LIBS            += -lqpe -lopiecore2
+LIBS            += -lqpe -lopiecore2 -lopieui2
 VERSION		= 1.0.0
 
 include( $(OPIEDIR)/include.pro )

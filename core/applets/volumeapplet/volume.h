@@ -29,7 +29,7 @@ class QTimer;
 class QSlider;
 class QCheckBox;
 class QButton;
-class OLedBox;
+namespace Opie { namespace Ui { class OLedBox; }; };
 
 class VolumeApplet;
 
@@ -86,9 +86,9 @@ private:
 	QSlider *trebleSlider;
 	QSlider *micSlider;
 	QSlider *alarmSlider;
-	OLedBox *volLed;
-	OLedBox *micLed;
-	OLedBox *alarmLed;
+	Opie::Ui::OLedBox *volLed;
+	Opie::Ui::OLedBox *micLed;
+	Opie::Ui::OLedBox *alarmLed;
 	
 	QCheckBox *alarmBox;
 	QCheckBox *tapBox;

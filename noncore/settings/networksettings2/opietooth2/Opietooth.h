@@ -4,7 +4,7 @@
 #include <OTIcons.h>
 
 #include <OTPairingGUI.h>
-class OLedBox;
+namespace Opie { namespace Ui { class OLedBox; }; };
 
 namespace Opietooth2 {
 
@@ -109,7 +109,7 @@ private :
       OTInquiry *       Scanning;
       UUIDVector        Filter;
 
-      OLedBox *         Paired_Led;
+      Opie::Ui::OLedBox *         Paired_Led;
       QTimer *          StrengthTimer;
       PeerLVI *         Current;
 

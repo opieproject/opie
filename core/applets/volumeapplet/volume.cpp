@@ -20,6 +20,7 @@
 
 #include "volume.h"
 
+/* OPIE */
 #include <opie2/oledbox.h>
 #include <opie2/odevice.h>
 #include <opie2/otaskbarapplet.h>
@@ -27,7 +28,10 @@
 #include <qpe/applnk.h>
 #include <qpe/config.h>
 #include <qpe/qcopenvelope_qws.h>
+using namespace Opie::Core;
+using namespace Opie::Ui;
 
+/* QT */
 #include <qpainter.h>
 #include <qcheckbox.h>
 #include <qslider.h>
@@ -37,9 +41,8 @@
 #include <qpushbutton.h>
 #include <qtimer.h>
 
+/* STD */
 #include <stdio.h>
-
-using namespace Opie::Core;
 
 #define RATE_TIMER_INTERVAL 100
 // Ten times per second is fine (RATE_TIMER_INTERVAL 100).  A shorter time
