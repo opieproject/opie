@@ -151,16 +151,6 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     Alayout->setSpacing( 2 );
     Alayout->setMargin( 2 );
     audioView = new PlayListFileView( aTab, "Audioview" );
-    audioView->addColumn( tr( "Title" ), 140 );
-    audioView->addColumn( tr( "Size" ),  -1 );
-    audioView->addColumn( tr( "Media" ), 0 );
-    audioView->addColumn( tr( "Path" ), -1 );
-    audioView->setColumnAlignment( 1, Qt::AlignRight );
-    audioView->setColumnAlignment( 2, Qt::AlignRight );
-    audioView->setAllColumnsShowFocus( TRUE );
-    audioView->setSorting( 3, TRUE );
-    audioView->setMultiSelection( TRUE );
-    audioView->setSelectionMode( QListView::Extended );
     Alayout->addMultiCellWidget( audioView, 0, 0, 0, 1 );
     tabWidget->insertTab( aTab, tr( "Audio" ) );
 
@@ -173,16 +163,6 @@ PlayListWidgetGui::PlayListWidgetGui( MediaPlayerState &_mediaPlayerState, QWidg
     Vlayout->setSpacing( 2 );
     Vlayout->setMargin( 2 );
     videoView = new PlayListFileView( vTab, "Videoview" );
-    videoView->addColumn( tr( "Title" ), 140);
-    videoView->addColumn( tr( "Size" ), -1 );
-    videoView->addColumn(tr( "Media" ), 0 );
-    videoView->addColumn(tr( "Path" ), -1 );
-    videoView->setColumnAlignment( 1, Qt::AlignRight );
-    videoView->setColumnAlignment( 2, Qt::AlignRight );
-    videoView->setAllColumnsShowFocus( TRUE );
-    videoView->setSorting( 3, TRUE );
-    videoView->setMultiSelection( TRUE );
-    videoView->setSelectionMode( QListView::Extended );
     Vlayout->addMultiCellWidget( videoView, 0, 0, 0, 1 );
 
     QPEApplication::setStylusOperation( videoView->viewport(), QPEApplication::RightOnHold );
