@@ -16,14 +16,17 @@ public:
     PPPData* data();
     Modem* modem();
 
+signals:
+  void begin_connect();
+
 public slots:
   virtual bool refresh();
   virtual void start();
   virtual void stop();
 
  private:
-  Modem *_modem;
-  PPPData *_pppdata;
+  Modem *_modemPtr;
+  PPPData *_dataPtr;
 };
 
 

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.cpp,v 1.6 2003-05-30 15:06:17 tille Exp $
+ * $Id: pppdata.cpp,v 1.7 2003-06-02 11:57:59 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -130,7 +130,7 @@ void PPPData::cancel() {
 QString PPPData::readConfig(const QString &group, const QString &key,
                             const QString &defvalue = "")
 {
-//    qDebug("PPPData::readConfig key >%s< group >%s<",key.latin1(), group.latin1());
+    qDebug("PPPData::readConfig key >%s< group >%s<",key.latin1(), group.latin1());
     QString idx = SEP.arg(group).arg(key);
     if (stringEntries.find(idx) != stringEntries.end())
         return stringEntries[idx];
@@ -347,6 +347,7 @@ const QString PPPData::modemDevice() {
 
 
 bool PPPData::setModemDevice(const QString &n) {
+    qDebug("Setting modem dev to >%s<", n.latin1());
     bool ret = false;
     for (int i = 0; devices[i]; i++)
         if (devices[i] == n){
@@ -354,6 +355,7 @@ bool PPPData::setModemDevice(const QString &n) {
             writeConfig(modemGroup(), MODEMDEV_KEY, n);
             ret = true;
         }
+    qDebug(ret?"SUCCESS":"FAILURE");
     return ret;
 }
 
@@ -712,13 +714,16 @@ int PPPData::count() const {
 
 
 bool PPPData::setAccount(const QString &aname) {
+    qDebug("setting account to >%s<", aname.latin1());
   for(int i = 0; i <= highcount; i++) {
     setAccountbyIndex(i);
     if(accname() == aname) {
       caccount = i;
+      qDebug("SUCCESS");
       return true;
     }
   }
+  qDebug("FAILURE");
   return false;
 }
 
@@ -910,6 +915,9 @@ void PPPData::setStoredUsername(const QString &b) {
 
 
 const QString  PPPData::storedPassword() {
+    qDebug("getting stored pw");
+    qDebug("g %s", cgroup.latin1() );
+    qDebug("k %s", STORED_PASSWORD_KEY);
   return readConfig(cgroup, STORED_PASSWORD_KEY, "");
 }
 
@@ -1273,4 +1281,15 @@ void PPPData::setConfiguredInterfaces( QMap<QString,QString> ifaces )
     cfg.setGroup( ACCLIST_GRP );
     cfg.writeEntry( ACCOUNTS_COUNT, i );
 
+}
+
+/**
+ * pppd's getword() function knows about escape characters.
+ * If we write the username and password to the secrets file
+ * we'll therefore have to escape back slashes.
+ */
+QString PPPData::encodeWord(const QString &s) {
+    QString r = s;
+    r.replace(QRegExp("\\"), "\\\\");
+    return r;
 }

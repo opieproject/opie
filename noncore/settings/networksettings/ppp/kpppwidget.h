@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: kpppwidget.h,v 1.3 2003-05-30 15:06:17 tille Exp $
+ * $Id: kpppwidget.h,v 1.4 2003-06-02 11:57:59 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -29,9 +29,9 @@
 
 #include <qstring.h>
 
-#include "conwindow.h"
 #include "accounts.h"
 #include "connect.h"
+#include "conwindow.h"
 
 class QPushButton;
 class Interface;

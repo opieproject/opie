@@ -2,10 +2,12 @@
 #define INTERFACEINFORMATIONPPP_H
 
 #include "interfaceinformationimp.h"
-//#include "interface.h"
+
 
 class QWidget;
 class Interface;
+class ConnectWidget;
+class ConnectWindow;
 
 class InterfaceInformationPPP : public InterfaceInformationImp { 
 
@@ -16,6 +18,9 @@ public:
   InterfaceInformationPPP(QWidget *parent=0, const char *name=0, Interface *i=0, WFlags f=0);
   ~InterfaceInformationPPP(){};
   
+ private:
+  ConnectWidget *con;
+  ConnectWindow *con_win;
   
 };
 

@@ -110,10 +110,10 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
   messg->setAlignment(AlignCenter);
   messg->setText(i18n("Unable to create modem lock file."));
   messg->setMinimumHeight(messg->sizeHint().height() + 5);
-  int messw = (messg->sizeHint().width() * 12) / 10;
-  messw = QMAX(messw,280);
-  messg->setMinimumWidth(messw);
-  messg->setText(i18n("Looking for modem..."));
+//   int messw = (messg->sizeHint().width() * 12) / 10;
+//   messw = QMAX(messw,280);
+//   messg->setMinimumWidth(messw);
+  messg->setText(i18n("Offline"));
   l0->addSpacing(10);
   l0->addWidget(messg);
   l0->addSpacing(10);
@@ -130,15 +130,15 @@ ConnectWidget::ConnectWidget(InterfacePPP *ifp, QWidget *parent, const char *nam
   cancel->setFocus();
   connect(cancel, SIGNAL(clicked()), SLOT(cancelbutton()));
 
-  int maxw = QMAX(cancel->sizeHint().width(),
-		 debug->sizeHint().width());
-  maxw = QMAX(maxw,65);
-  debug->setFixedWidth(maxw);
-  cancel->setFixedWidth(maxw);
+//   int maxw = QMAX(cancel->sizeHint().width(),
+// 		 debug->sizeHint().width());
+//   maxw = QMAX(maxw,65);
+//   debug->setFixedWidth(maxw);
+//   cancel->setFixedWidth(maxw);
   l1->addWidget(debug);
   l1->addWidget(cancel);
 
-  setFixedSize(sizeHint());
+//  setFixedSize(sizeHint());
 
   pausetimer = new QTimer(this);
   connect(pausetimer, SIGNAL(timeout()), SLOT(pause()));
@@ -989,11 +989,10 @@ void ConnectWidget::cancelbutton() {
   _ifaceppp->modem()->killPPPDaemon();
   _ifaceppp->modem()->hangup();
 
-  this->hide();
-  messg->setText("");
+
 //  p_kppp->quit_b->setFocus();
 //  p_kppp->show();
-  emit stopAccounting();	// just to be sure
+//  emit stopAccounting();	// just to be sure
 //  p_kppp->con_win->stopClock();
   _ifaceppp->modem()->closetty();
   _ifaceppp->modem()->unlockdevice();
@@ -1004,8 +1003,7 @@ void ConnectWidget::cancelbutton() {
   }
   prompt->setConsumed();
 
-//   if(p_kppp->quitOnDisconnect())
-//     qApp->exit(0);
+  messg->setText(tr("offline"));
 }
 
 

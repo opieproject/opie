@@ -1,3 +1,4 @@
+- add possibility to input username and password ;)
 - impl. PPPData::copyaccount & PPPData::deleteAccount
 - update modem attribute inputs when modem has changed
 - fix layout of edit account

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.6 2003-05-30 15:06:17 tille Exp $
+ * $Id: pppdata.h,v 1.7 2003-06-02 11:57:59 tille Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -408,6 +408,9 @@ public:
 
   int pppdError() const;
   void setpppdError(int err);
+
+
+  static QString encodeWord(const QString &s);
 
 private:
 
