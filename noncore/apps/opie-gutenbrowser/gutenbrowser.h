@@ -162,6 +162,7 @@ protected:
 
 
 protected slots:
+		void hideView();
     
     void BackBtn();
     void Bookmark( int);

@@ -313,7 +313,7 @@ void Gutenbrowser::initView()
         useWrap = false;
     }
     mainList = new QListBox(this,"mainlist");
-
+		mainList->hide();
 //  QPEApplication::setStylusOperation( mainList->viewport(),QPEApplication::RightOnHold);
       //  mainList->showMaximized();
 //  mainList->setGeometry(2,30,230,160);
@@ -321,11 +321,18 @@ void Gutenbrowser::initView()
     edits->addWidget( Lview);
     edits->addWidget(mainList);
 
-    if(!showMainList) {
-        Lview->setText( "\nThis is gutenbrowser for the Sharp Zaurus.\nMake your self at home, sit back, relax and read something great. ");
-    } else
-        Lview->hide();
+//     if(!showMainList) {
+//         Lview->setText( "\nThis is gutenbrowser for the Sharp Zaurus.\nMake your self at home, sit back, relax and read something great. ");
+//     }
+//		else
+//        Lview->hide();
 
     topLayout->addLayout( edits, 0);
 		qDebug("end initView");
+}
+
+void Gutenbrowser::hideView() {
+//		qWarning("Hide View");
+		mainList->show();
+		Lview->hide();
 }
