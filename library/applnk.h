@@ -86,9 +86,7 @@ public:
     void setPreloaded(bool yesNo);
 #endif
 
-#ifdef QTOPIA_INTERNAL_APPLNKASSIGN
     AppLnk &operator=(const AppLnk &other);
-#endif
 
 protected:
     QString mName;

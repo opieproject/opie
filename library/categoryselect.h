@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2001 Trolltech AS.  All rights reserved.
+** Copyright (C) 2003 zecke Introduce Sharp to the glory of default arguments
 **
 ** This file is part of Qtopia Environment.
 **
@@ -36,7 +37,7 @@ class CategoryCombo : public QComboBox
     Q_OBJECT
 
 public:
-    CategoryCombo( QWidget *parent, const char* name = 0, int width=0);
+    CategoryCombo( QWidget *parent, const char* name = 0, int width = 0);
 
     ~CategoryCombo();
 
@@ -69,10 +70,17 @@ class CategorySelect : public QHBox
 public:
     // we need two constructors, the first gets around designer limitations
 
-    CategorySelect( QWidget *parent = 0, const char *name = 0, int width = 0 );
+    /*
+     * The Sharp libqpe does have two c'tor and no default argument for int width
+     * to stay BC cause the Kompany have the original headers and don't compile
+     * against the normal SDK we need to provide the two symbols as well
+     * -zecke
+     */
+    CategorySelect( QWidget* parent  =  0, const char* name = 0 );
+    CategorySelect( QWidget *parent /*= 0 */, const char *name/* = 0*/ , int width /* = 0 if we break bc -zecke */ );
 
     CategorySelect( const QArray<int> &vlCats, const QString &appName,
-		    QWidget *parent = 0, const char *name = 0, 
+		    QWidget *parent = 0, const char *name = 0,
 		    int width = 0);
     CategorySelect( const QArray<int> &vlCats, const QString &appName,
 		    const QString &visibleName, QWidget *parent = 0,

@@ -66,6 +66,21 @@ static bool isCF(const QString& m)
     return FALSE;
 }
 
+/*! \class StorageInfo storage.h
+  \brief The StorageInfo class describes the disks mounted on the file system.
+
+  This class provides access to the mount information for the Linux
+  filesystem. Each mount point is represented by the FileSystem class.
+  To ensure this class has the most up to date size information, call
+  the update() method. Note that this will automatically be signaled
+  by the operating system when a disk has been mounted or unmounted.
+
+  \ingroup qtopiaemb
+*/
+
+/*! Constructor that determines the current mount points of the filesystem.
+  The standard \a parent parameters is passed on to QObject.
+ */
 StorageInfo::StorageInfo( QObject *parent )
     : QObject( parent )
 {
@@ -76,6 +91,9 @@ StorageInfo::StorageInfo( QObject *parent )
     update();
 }
 
+/*! Returns the longest matching FileSystem that starts with the
+   same prefix as \a filename as its mount point.
+*/
 const FileSystem *StorageInfo::fileSystemOf( const QString &filename )
 {
     for (QListIterator<FileSystem> i(mFileSystems); i.current(); ++i) {
@@ -91,6 +109,12 @@ void StorageInfo::cardMessage( const QCString& msg, const QByteArray& )
     if ( msg == "mtabChanged()" )
         update();
 }
+
+
+/*! Updates the mount and free space available information for each mount
+  point. This method is automatically called when a disk is mounted or
+  unmounted.
+*/
 // cause of the lack of a d pointer we need
 // to store informations in a config file :(
 void StorageInfo::update()
@@ -234,7 +258,16 @@ bool StorageInfo::hasMmc()
    return hasMmc;
 }
 
+/*! \fn const QList<FileSystem> &StorageInfo::fileSystems() const
+  Returns a list of all available mounted file systems.
 
+  \warning This may change in Qtopia 3.x to return only relevant Qtopia file systems (and ignore mount points such as /tmp)
+*/
+
+/*! \fn void StorageInfo::disksChanged()
+  Gets emitted when a disk has been mounted or unmounted, such as when
+  a CF c
+*/
 //---------------------------------------------------------------------------
 
 FileSystem::FileSystem( const QString &disk, const QString &path, const QString &name, bool rem, const QString &o )
@@ -259,3 +292,55 @@ void FileSystem::update()
 #endif
 }
 
+/*! \class FileSystem storage.h
+  \brief The FileSystem class describes a single mount point.
+
+  This class simply returns information about a mount point, including
+  file system name, mount point, human readable name, size information
+  and mount options information.
+  \ingroup qtopiaemb
+
+  \sa StorageInfo
+*/
+
+/*! \fn const QString &FileSystem::disk() const
+  Returns the file system name, such as /dev/hda3
+*/
+
+/*! \fn const QString &FileSystem::path() const
+  Returns the mount path, such as /home
+*/
+
+/*! \fn const QString &FileSystem::name() const
+  Returns the translated, human readable name for the mount directory.
+*/
+
+/*! \fn const QString &FileSystem::options() const
+  Returns the mount options
+*/
+
+/*! \fn long FileSystem::blockSize() const
+  Returns the size of each block on the file system.
+*/
+
+/*! \fn long FileSystem::totalBlocks() const
+  Returns the total number of blocks on the file system
+*/
+
+/*! \fn long FileSystem::availBlocks() const
+  Returns the number of available blocks on the file system
+ */
+
+/*! \fn bool FileSystem::isRemovable() const
+  Returns flag whether the file system can be removed, such as a CF card
+  would be removable, but the internal memory wouldn't
+*/
+
+/*! \fn bool FileSystem::isWritable() const
+  Returns flag whether the file system is mounted as writable or read-only.
+  Returns FALSE if read-only, TRUE if read and write.
+*/
+
+/*! \fn QStringList StorageInfo::fileSystemNames() const
+  Returns a list of filesystem names.
+*/

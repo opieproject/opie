@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>267</width>
+            <width>263</width>
             <height>450</height>
         </rect>
     </property>
@@ -171,6 +171,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Type:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>textFormat</name>
+                        <enum>RichText</enum>
                     </property>
                     <property>
                         <name>layoutMargin</name>
@@ -501,6 +505,10 @@
                     <property stdset="1">
                         <name>text</name>
                         <string>Comment:</string>
+                    </property>
+                    <property stdset="1">
+                        <name>textFormat</name>
+                        <enum>RichText</enum>
                     </property>
                 </widget>
             </grid>

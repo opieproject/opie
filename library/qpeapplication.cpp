@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.52 2003-06-03 17:09:20 mickeyl Exp $
+** $Id: qpeapplication.cpp,v 1.53 2003-08-08 14:45:50 eilers Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -270,11 +270,14 @@ public:
 class ResourceMimeFactory : public QMimeSourceFactory
 {
 public:
-	ResourceMimeFactory()
+        ResourceMimeFactory() : resImage( 0 )
 	{
 		setFilePath( Global::helpPath() );
 		setExtensionType( "html", "text/html;charset=UTF-8" );
 	}
+        ~ResourceMimeFactory() {
+            delete resImage;
+        }
 
 	const QMimeSource* data( const QString& abs_name ) const
 	{
@@ -288,13 +291,18 @@ public:
 				if ( dot >= 0 )
 					name = name.left( dot );
 				QImage img = Resource::loadImage( name );
-				if ( !img.isNull() )
-					r = new QImageDrag( img );
+				if ( !img.isNull() ) {
+                                    delete resImage;
+                                    resImage = new QImageDrag( img );
+                                    r = resImage;
+                                }
 			}
 			while ( !r && sl > 0 );
 		}
 		return r;
 	}
+private:
+    mutable QImageDrag *resImage;
 };
 
 static int muted = 0;
@@ -983,19 +991,19 @@ void QPEApplication::applyStyle()
 	}
 
 	// Widget style
-	QString style = config.readEntry( "Style", "Light" );
+	QString style = config.readEntry( "Style", "FlatStyle" );
 
 	// don't set a custom style
 	if ( nostyle & Opie::Force_Style )
-		style = "Light";
+		style = "FlatStyle";
 
 	internalSetStyle ( style );
 
-	// Colors
-	QColor bgcolor( config.readEntry( "Background", "#E5E1D5" ) );
-	QColor btncolor( config.readEntry( "Button", "#D6CDBB" ) );
+	// Colors - from /etc/colors/Liquid.scheme
+	QColor bgcolor( config.readEntry( "Background", "#E0E0E0" ) );
+	QColor btncolor( config.readEntry( "Button", "#96c8fa" ) );
 	QPalette pal( btncolor, bgcolor );
-	QString color = config.readEntry( "Highlight", "#800000" );
+	QString color = config.readEntry( "Highlight", "#73adef" );
 	pal.setColor( QColorGroup::Highlight, QColor( color ) );
 	color = config.readEntry( "HighlightedText", "#FFFFFF" );
 	pal.setColor( QColorGroup::HighlightedText, QColor( color ) );
@@ -1012,7 +1020,7 @@ void QPEApplication::applyStyle()
 	setPalette( pal, TRUE );
 
 	// Window Decoration
-	QString dec = config.readEntry( "Decoration", "Qtopia" );
+	QString dec = config.readEntry( "Decoration", "Flat" );
 
 	// don't set a custom deco
 	if ( nostyle & Opie::Force_Decoration )
@@ -1298,18 +1306,24 @@ void QPEApplication::pidMessage( const QCString& msg, const QByteArray& data)
 			mw = d->qpe_main_widget;
 		if ( mw )
 			Global::setDocument( mw, doc );
+	} else {
+            bool p = d->keep_running;
+            d->keep_running = FALSE;
+            emit appMessage( msg, data);
+            if ( d->keep_running ) {
+                d->notbusysent = FALSE;
+                raiseAppropriateWindow();
+                if ( !p ) {
+                    // Tell the system we're still chugging along...
+#ifndef QT_NO_COP
+                    QCopEnvelope e("QPE/System", "appRaised(QString)");
+                    e << d->appName;
+#endif
+                }
+            }
+            if ( p )
+                d->keep_running = p;
 	}
-	else if ( msg == "nextView()" ) {
-		qDebug("got nextView()");
-		/*
-		  if ( raiseAppropriateWindow() )
-		*/
-		emit appMessage( msg, data);
-	}
-	else {
-		emit appMessage( msg, data);
-	}
-
 #endif
 }
 

@@ -168,6 +168,11 @@ DateBookMonthTable::DateBookMonthTable( QWidget *parent, const char *name,
     selMonth = -1;
     selDay = -1;
 
+    /* init these as well  make valgrind happy and be consistent with Qtopia1.6 -zecke */
+    year = -1;
+    month = -1;
+    day = -1;
+
     Config cfg( "qpe" );
     cfg.setGroup( "Time" );
     d->onMonday = cfg.readBoolEntry( "MONDAY" );

@@ -251,14 +251,14 @@ QString TimeString::shortDate( const QDate &d, DateFormat dtf )
 
 QString TimeString::dateString( const QDate &d, DateFormat dtf )
 {
-    return dtf.wordDate(d, DateFormat::longNumber | DateFormat::longWord);
+    return QObject::tr( dtf.wordDate(d, DateFormat::longNumber | DateFormat::longWord) );
 }
 
 
 QString TimeString::longDateString( const QDate &d, DateFormat dtf )
 {
-    return dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber
-	    | DateFormat::longWord);
+    return QObject::tr( dtf.wordDate(d, DateFormat::showWeekDay | DateFormat::longNumber
+	    | DateFormat::longWord) );
 }
 
 DateFormat TimeString::currentDateFormat()

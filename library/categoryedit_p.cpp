@@ -144,6 +144,7 @@ void CategoryEdit::slotAdd()
 
     lvView->setSelected( chk, TRUE );
     txtCat->selectAll();
+    txtCat->setFocus();
 }
 
 void CategoryEdit::slotRemove()

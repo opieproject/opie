@@ -757,6 +757,7 @@ static struct PreDefProp propNames[] = {
     { VCPSProp, 0, 0, 0 },
     { VCPublicKeyProp, 0, 0, 0 },
     { VCQPProp, VCQuotedPrintableProp, 0, 0 },
+    { VCQPProp, VCBase64Prop, 0, 0 },
     { VCQuickTimeProp, 0, 0, 0 },
     { VCQuotedPrintableProp, 0, 0, 0 },
     { VCRDateProp, 0, 0, 0 },

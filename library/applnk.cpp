@@ -466,7 +466,7 @@ const QPixmap& AppLnk::pixmap( int pos, int size ) const {
   AppLnk* that = (AppLnk*)this;
   if ( mIconFile.isEmpty() ) {
       MimeType mt(type());
-      that->d->mPixmaps[pos] = mt.pixmap();
+      that->d->mPixmaps[pos] = pos ? mt.bigPixmap() : mt.pixmap();
       if ( that->d->mPixmaps[pos].isNull() )
     that->d->mPixmaps[pos].convertFromImage(
         Resource::loadImage("UnknownDocument")

@@ -562,15 +562,20 @@ void Global::invoke(const QString &c)
 	// If the channel is already register, the app is already running, so show it.
 	{ QCopEnvelope env( ("QPE/Application/" + ap).latin1(), "raise()" ); }
 
-	QCopEnvelope e("QPE/System", "notBusy(QString)" );
-	e << ap;
+	//QCopEnvelope e("QPE/System", "notBusy(QString)" );
+	//e << ap;
 	return;
     }
     // XXX should unlock file /tmp/qcop-msg-ap
     //see if it is being started
     if ( StartingAppList::isStarting( ap ) ) {
-	QCopEnvelope e("QPE/System", "notBusy(QString)" );
-	e << ap;
+        // FIXME take it out for now, since it leads to a much to short showing of wait if
+        // some entry is clicked.
+        // Real cause is that ::execute is called twice for document tab. But it would need some larger changes
+        // to fix that, and with future syncs with qtopia 1.6 it will change anyway big time since somebody there
+        // had the idea that an apploader belongs to the launcher ...
+	//QCopEnvelope e("QPE/System", "notBusy(QString)" );
+	//e << ap;
 	return;
     }
 
@@ -830,16 +835,19 @@ QStringList Global::languageList()
 
 QStringList Global::helpPath()
 {
+    QString qpeDir = QPEApplication::qpeDir();
     QStringList path;
     QStringList langs = Global::languageList();
     for (QStringList::ConstIterator it = langs.fromLast(); it!=langs.end(); --it) {
 	QString lang = *it;
 	if ( !lang.isEmpty() )
-	    path += QPEApplication::qpeDir() + "/help/" + lang + "/html";
+	    path += qpeDir + "/help/" + lang + "/html";
     }
-    path += QPEApplication::qpeDir() + "/pics";
-    path += QPEApplication::qpeDir() + "/help/html";
-    path += QPEApplication::qpeDir() + "/docs";
+    path += qpeDir + "/pics";
+    path += qpeDir + "/help/html";
+    /* we even put english into the en dir so try it as fallback as well for opie */
+    path += qpeDir + "/help/en/html";
+    path += qpeDir + "/docs";
 
 
     return path;
