@@ -57,12 +57,15 @@ protected:
     bool rotate_to_fit;
     bool show_zoomer;
     bool first_resize_done;
+    bool image_is_jpeg;
+    bool image_scaled_loaded;
     Rotation last_rot;
     QString m_lastName;
     virtual void rescaleImage(int w, int h);
 
     virtual void rotate_into_data(Rotation r);
     virtual void generateImage();
+    virtual void loadJpeg(bool interncall = false);
     bool image_fit_into(const QSize&s);
     void check_zoomer();
 
