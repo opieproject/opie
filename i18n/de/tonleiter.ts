@@ -16,11 +16,11 @@
     </message>
     <message>
         <source>Add High String</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge hohe Seite hinzu</translation>
     </message>
     <message>
         <source>Add Low String</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge niedrige Seite hinzu</translation>
     </message>
 </context>
 <context>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Note</translation>
     </message>
     <message>
         <source>show</source>
@@ -43,14 +43,14 @@
     </message>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skala</translation>
     </message>
 </context>
 <context>
     <name>Menu::ScaleEditDialog</name>
     <message>
         <source>Scale</source>
-        <translation type="unfinished"></translation>
+        <translation>Skala</translation>
     </message>
     <message>
         <source>Add</source>

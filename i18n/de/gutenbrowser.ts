@@ -3,130 +3,136 @@
     <name>Edit_Title</name>
     <message>
         <source>Edit Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel bearbeiten</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Abbrechen</translation>
     </message>
     <message>
         <source>Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Anwenden</translation>
     </message>
 </context>
 <context>
     <name>FontDialog</name>
     <message>
         <source>Font Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Font Dialog</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Größe</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished"></translation>
+        <translation>Der kleine braune Fuchs springt über den faulen Hund</translation>
     </message>
 </context>
 <context>
     <name>Gutenbrowser</name>
     <message>
         <source>Running wget</source>
-        <translation type="unfinished"></translation>
+        <translation>Führe wget aus</translation>
     </message>
     <message>
         <source>Download Library Index, or FTP sites?</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade Bibliothek Index oder FTP Seite?</translation>
     </message>
     <message>
         <source>Do you want to download the newest
 Project Gutenberg Library Index?
 or select an ftp site?
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Möchten Sie die neuesten
+Projekt Gutenberg Bibliotheken Index herunterladen?
+Oder eine FTP Seite wählen?
+</translation>
     </message>
     <message>
         <source>&amp;Library Index</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Bibliotheken Index</translation>
     </message>
     <message>
         <source>&amp;Ftp Site</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;FTP Seite</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Abbrechen</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notiz</translation>
     </message>
     <message>
         <source>Etext Search</source>
-        <translation type="unfinished"></translation>
+        <translation>Etext Suche</translation>
     </message>
     <message>
         <source>Please install unzip</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte installieren sie unzip</translation>
     </message>
     <message>
         <source>Gutenberg Library</source>
-        <translation type="unfinished"></translation>
+        <translation>Gutenberg Bibliothek</translation>
     </message>
     <message>
         <source>Gutenbrowser</source>
-        <translation type="unfinished"></translation>
+        <translation>Gutenbrowser</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Öffnen</translation>
     </message>
     <message>
         <source>Search google.com</source>
-        <translation type="unfinished"></translation>
+        <translation>Suche auf google.com</translation>
     </message>
     <message>
         <source>Edit Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titel bearbeiten</translation>
     </message>
     <message>
         <source>Please install unzip in your PATH</source>
-        <translation type="unfinished"></translation>
+        <translation>Bitte installieren sie unzip in Ihrem PATH</translation>
     </message>
     <message>
         <source>Downloading Gutenberg Index....</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade Gutenberg Index herunter...</translation>
     </message>
 </context>
 <context>
     <name>HelpMe</name>
     <message>
         <source>Based on gutenbook.pl, available from http://www.gutenbook.org</source>
-        <translation type="unfinished"></translation>
+        <translation>Basierend auf gutenbook.pl, verfügbar von http://www.gutenbook.org</translation>
     </message>
     <message>
         <source>Much appreciation to Lee Burgess,</source>
-        <translation type="unfinished"></translation>
+        <translation>Viel Anerkennung an Lee Burgess,</translation>
     </message>
     <message>
         <source>for the original idea and concept of gutenbook.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>für die originale Idee und das Konzept von gutenbook.
+</translation>
     </message>
     <message>
         <source>A list of current Gutenberg ftp sites is at http://promo.net/pg/index.html
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Eine Liste von aktuellen Gutenberg FTP Seiten ist auf http://promo.net/pg/index.hmtl
+</translation>
     </message>
     <message>
         <source>For bug reports, comments or questions about Gutenbrowser, email</source>
-        <translation type="unfinished"></translation>
+        <translation>Für Fehlermeldungen, Kommentare oder Fragen über Gutenbrowser schicken Sie einen EMail an</translation>
     </message>
     <message>
         <source>ljp@llornkcor.com
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ljp@llornkcor.com
+</translation>
     </message>
     <message>
         <source>
@@ -134,92 +140,97 @@ Made using Qt, Qt Embedded, and Qtopia, a cross platform development API
 http://www.trolltech.com
 
 </source>
-        <translation type="unfinished"></translation>
+        <translation>Erstellt mit Qt, Qt Embedded und Qtopia, eine Plattformübergreifende Entwicklungs API
+http://www.trolltech.com
+
+</translation>
     </message>
     <message>
         <source>Arnold&apos;s Laws of Documentation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Arnolds Gesetz der Dokumentation:</translation>
     </message>
     <message>
         <source>(1) If it should exist, it doesn&apos;t.</source>
-        <translation type="unfinished"></translation>
+        <translation>(1) Wenn es existieren sollte, existiert es nicht.</translation>
     </message>
     <message>
         <source>(2) If it does exist, it&apos;s out of date.</source>
-        <translation type="unfinished"></translation>
+        <translation>(2) Wenn es existiert, ist es veraltet.</translation>
     </message>
     <message>
         <source>(3) Only documentation for</source>
-        <translation type="unfinished"></translation>
+        <translation>(3) Nur Dokumentation für</translation>
     </message>
     <message>
         <source>useless programs transcends the</source>
-        <translation type="unfinished"></translation>
+        <translation>unnützte Programme übersteigen die</translation>
     </message>
     <message>
         <source>first two laws.
 </source>
-        <translation type="unfinished"></translation>
+        <translation>ersten 2 Gesetze.
+</translation>
     </message>
     <message>
         <source>Everything is temporary, anyway....
  :o)</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles ist temporär, immerhin...
+:o)</translation>
     </message>
 </context>
 <context>
     <name>HelpWindow</name>
     <message>
         <source>&amp;Open File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei öffnen</translation>
     </message>
     <message>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <source>&amp;Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rückwärts</translation>
     </message>
     <message>
         <source>&amp;Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Vorwärts</translation>
     </message>
     <message>
         <source>&amp;Home</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Anfang</translation>
     </message>
     <message>
         <source>Add Bookmark</source>
-        <translation type="unfinished"></translation>
+        <translation>Füge Lesezeichen hinzu</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <source>&amp;Go</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Gehe</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Verlauf</translation>
     </message>
     <message>
         <source>Bookmarks</source>
-        <translation type="unfinished"></translation>
+        <translation>Lesezeichen</translation>
     </message>
     <message>
         <source>Backward</source>
-        <translation type="unfinished"></translation>
+        <translation>Rückwärts</translation>
     </message>
     <message>
         <source>Forward</source>
-        <translation type="unfinished"></translation>
+        <translation>Vorwärts</translation>
     </message>
     <message>
         <source>Home</source>
-        <translation type="unfinished"></translation>
+        <translation>Anfang</translation>
     </message>
 </context>
 <context>
@@ -299,10 +310,6 @@ http://www.trolltech.com
     </message>
     <message>
         <source>&lt;p&gt;Error opening library index file. Please download a new one.&lt;/P&gt; </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>   </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

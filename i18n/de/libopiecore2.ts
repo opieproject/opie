@@ -4,7 +4,7 @@
     <name>Button</name>
     <message>
         <source>Calendar Button</source>
-        <translation>Kalenderbutton</translation>
+        <translation>Gelenk3</translation>
     </message>
     <message>
         <source>Contacts Button</source>
@@ -80,15 +80,15 @@
     </message>
     <message>
         <source>Hinge1</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelenk1</translation>
     </message>
     <message>
         <source>Hinge2</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelenk2</translation>
     </message>
     <message>
         <source>Hinge3</source>
-        <translation type="unfinished"></translation>
+        <translation>Gelenk3</translation>
     </message>
 </context>
 <context>

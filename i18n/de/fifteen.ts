@@ -3,54 +3,54 @@
     <name>FifteenConfigDialog</name>
     <message>
         <source>All Images</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Bilder</translation>
     </message>
     <message>
         <source>All Files</source>
-        <translation type="unfinished"></translation>
+        <translation>Alle Dateien</translation>
     </message>
     <message>
         <source>Select board background</source>
-        <translation type="unfinished"></translation>
+        <translation>Wähle Bretthintergrund</translation>
     </message>
 </context>
 <context>
     <name>FifteenConfigDialogBase</name>
     <message>
         <source>Configure Fifteen</source>
-        <translation type="unfinished"></translation>
+        <translation>Fünfzehn konfigurieren</translation>
     </message>
     <message>
         <source>Use a Custom Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein eigenes Bild nutzen</translation>
     </message>
     <message>
         <source>Custom Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigenes Bild</translation>
     </message>
     <message>
         <source>&lt;b&gt;Path:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Pfad:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>&lt;b&gt;Preview:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Vorschau:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Grid</source>
-        <translation type="unfinished"></translation>
+        <translation>Gitter</translation>
     </message>
     <message>
         <source>&lt;b&gt;Rows:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Reihen:&lt;/b&gt;</translation>
     </message>
     <message>
         <source>&lt;b&gt;Columns:&lt;/b&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;b&gt;Spalten:&lt;/b&gt;</translation>
     </message>
 </context>
 <context>
@@ -73,7 +73,7 @@
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurieren</translation>
     </message>
 </context>
 <context>

@@ -306,51 +306,51 @@ kopiert werden</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 Datei(en) löschen?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1 and all it&apos;s contents?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 samt Inhalt löschen?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really delete %1?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 wirklich löschen?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Really copy %1 files?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 wirklich kopieren?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;%1 already  exists. Ok to overwrite?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 existiert bereits. Überschreiben?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;P&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kann %1 nicht nach %2 kopieren&lt;/p&gt;</translation>
     </message>
     <message>
         <source>Copy %1 As</source>
-        <translation type="unfinished"></translation>
+        <translation>Kopiere %1 als</translation>
     </message>
     <message>
         <source>&lt;P&gt; %1 already exists. Ok to overwrite?&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 existiert bereits. Überschreiben?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kann %1 nicht nach %2 kopieren&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt; %1 already exists. Do you really want to delete it?&lt;/P&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;%1 existiert bereits. Überschreiben?&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not move %1&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kann %1 nicht verschieben&lt;/p&gt;</translation>
     </message>
     <message>
         <source>&lt;p&gt;Could not copy %1 to %2&lt;/p&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;p&gt;Kann %1 nicht nach %2 kopieren&lt;/p&gt;</translation>
     </message>
 </context>
 <context>
