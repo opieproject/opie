@@ -34,6 +34,8 @@ _;:,   .>  :=|.         This file is free software; you can
 #include "entrydlg.h"
 #include "packageinfodlg.h"
 
+#include <opie2/ofiledialog.h>
+
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
@@ -181,6 +183,12 @@ void MainWindow::initUI()
     connect( a, SIGNAL(activated()), this, SLOT(slotApply()) );
     a->addTo( popup );
     a->addTo( &m_toolBar );
+
+    a = new QAction( tr( "Install local package" ), Resource::loadPixmap( "folder" ), QString::null, 0, this, 0 );
+    a->setWhatsThis( tr( "Tap here to install a package file located on device." ) );
+    connect( a, SIGNAL(activated()), this, SLOT(slotInstallLocal()) );
+    a->addTo( popup );
+    //a->addTo( &m_toolBar );
 
     popup->insertSeparator();
 
@@ -517,6 +525,28 @@ void MainWindow::slotApply()
     // Display widget
     m_widgetStack.addWidget( dlg, 3 );
     m_widgetStack.raiseWidget( dlg );
+}
+
+void MainWindow::slotInstallLocal()
+{
+    // Display file open dialog with only package files
+    MimeTypes type;
+    QStringList packages;
+    packages << "application/ipkg";
+    type.insert( tr( "Application Packages" ), packages );
+    QString package = Opie::Ui::OFileDialog::getOpenFileName( Opie::Ui::OFileSelector::NORMAL,
+                                                              "/", QString::null, type );
+    if ( !package.isNull() )
+    {
+        // Install selected file
+        InstallDlg *dlg = new InstallDlg( this, &m_packman, tr( "Install local package" ), true,
+                                          OPackage::Install, new QStringList( package ) );
+        connect( dlg, SIGNAL(closeInstallDlg()), this, SLOT(slotCloseDlg()) );
+    
+        // Display widget
+        m_widgetStack.addWidget( dlg, 3 );
+        m_widgetStack.raiseWidget( dlg );
+    }
 }
 
 void MainWindow::slotCloseDlg()
