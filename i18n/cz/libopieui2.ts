@@ -75,19 +75,19 @@
     <name>Opie::Ui::OFileDialog</name>
     <message>
         <source>FileDialog</source>
-        <translation type="unfinished">Okno souboru</translation>
+        <translation>Okno souboru</translation>
     </message>
     <message>
         <source>Open</source>
-        <translation type="unfinished">Otevřít</translation>
+        <translation>Otevřít</translation>
     </message>
     <message>
         <source>Save</source>
-        <translation type="unfinished">Uložit</translation>
+        <translation>Uložit</translation>
     </message>
     <message>
         <source>Select Directory</source>
-        <translation type="unfinished">Vyberte adresář</translation>
+        <translation>Vyberte adresář</translation>
     </message>
 </context>
 <context>
@@ -101,15 +101,15 @@
     <name>Opie::Ui::OFontSelector</name>
     <message>
         <source>Style</source>
-        <translation type="unfinished">Styl</translation>
+        <translation>Styl</translation>
     </message>
     <message>
         <source>Size</source>
-        <translation type="unfinished">Velikost</translation>
+        <translation>Velikost</translation>
     </message>
     <message>
         <source>The Quick Brown Fox Jumps Over The Lazy Dog</source>
-        <translation type="unfinished">Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
+        <translation>Příliš žluťoučký kůň úpěl ďábelské ódy</translation>
     </message>
 </context>
 <context>

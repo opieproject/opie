@@ -218,103 +218,103 @@ and </source>
     <name>Opie::OPimMainWindow</name>
     <message>
         <source>Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Položka</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation>Vše</translation>
     </message>
     <message>
         <source>Click here to view all items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazení všech položek.</translation>
     </message>
     <message>
         <source>Click here to view items belonging to %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazení položek patřících k %1.</translation>
     </message>
     <message>
         <source>Unfiled</source>
-        <translation type="unfinished"></translation>
+        <translation>Nezařazené</translation>
     </message>
     <message>
         <source>Click here to view all unfiled items.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro zobrazení všech nezařazených položek.</translation>
     </message>
     <message>
         <source>View</source>
-        <translation type="unfinished"></translation>
+        <translation>Zobrazit</translation>
     </message>
     <message>
         <source>New</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová</translation>
     </message>
     <message>
         <source>Click here to create a new item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro vytvoření nové položky.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Upravit</translation>
     </message>
     <message>
         <source>Click here to edit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro upravení vybrané položky.</translation>
     </message>
     <message>
         <source>Duplicate</source>
-        <translation type="unfinished"></translation>
+        <translation>Duplikovat</translation>
     </message>
     <message>
         <source>Click here to duplicate the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro vytvoření duplikátu vybrané položky.</translation>
     </message>
     <message>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Smazat</translation>
     </message>
     <message>
         <source>Click here to delete the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro smazání vybrané položky.</translation>
     </message>
     <message>
         <source>Beam</source>
-        <translation type="unfinished"></translation>
+        <translation>Odeslat</translation>
     </message>
     <message>
         <source>Click here to transmit the selected item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro odeslání vybrané položky.</translation>
     </message>
     <message>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Hledat</translation>
     </message>
     <message>
         <source>Click here to search for an item.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klkněte pro hledání položky.</translation>
     </message>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Konfigurovat</translation>
     </message>
     <message>
         <source>Click here to set your preferences for this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro nastavení vašich preferencí této aplikace.</translation>
     </message>
     <message>
         <source>Filter</source>
-        <translation type="unfinished"></translation>
+        <translation>Filtrovat</translation>
     </message>
     <message>
         <source>Click here to filter the items displayed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro filtrování zobrazených položek.</translation>
     </message>
     <message>
         <source>Filter Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Nastavení filtru</translation>
     </message>
     <message>
         <source>Click here to modify the current filter settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikněte pro změnu aktuálního nastavení filtru.</translation>
     </message>
 </context>
 <context>
@@ -709,31 +709,31 @@ and </source>
     </message>
     <message>
         <source>Has a due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Má datum Do</translation>
     </message>
     <message>
         <source>No due-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Není datum Do</translation>
     </message>
     <message>
         <source>Completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Hotovo</translation>
     </message>
     <message>
         <source>Not completed</source>
-        <translation type="unfinished"></translation>
+        <translation>Není hotovo</translation>
     </message>
     <message>
         <source>No reccurrence</source>
-        <translation type="unfinished"></translation>
+        <translation>Není opakování</translation>
     </message>
     <message>
         <source>No start-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Není datum Od</translation>
     </message>
     <message>
         <source>No completed-date</source>
-        <translation type="unfinished"></translation>
+        <translation>Není datum dokončení</translation>
     </message>
 </context>
 <context>

@@ -3,14 +3,14 @@
     <name>ExamplePluginWidget</name>
     <message>
         <source>Example text</source>
-        <translation type="unfinished"></translation>
+        <translation>Příklad textu</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Example plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Příklad pluginu</translation>
     </message>
 </context>
 </TS>

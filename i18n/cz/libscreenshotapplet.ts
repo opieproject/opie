@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Opie drawpad</source>
-        <translation type="unfinished"></translation>
+        <translation>Opie drawpad</translation>
     </message>
     <message>
         <source>Please set &lt;b&gt;QWS_DISPLAY&lt;/b&gt; environmental variable.</source>
-        <translation type="unfinished"></translation>
+        <translation>Prosím nastavte systémovou proměnnou &lt;b&gt;QWS_DISPLAY&lt;/b&gt;.</translation>
     </message>
 </context>
 </TS>

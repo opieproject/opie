@@ -127,39 +127,39 @@
     <name>PPPDialingGUI</name>
     <message>
         <source>PPPDialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytáčení PPP</translation>
     </message>
     <message>
         <source>Dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytáčení</translation>
     </message>
     <message>
         <source>GPRS</source>
-        <translation type="unfinished"></translation>
+        <translation>GPRS</translation>
     </message>
     <message>
         <source>APN</source>
-        <translation type="unfinished"></translation>
+        <translation>APN</translation>
     </message>
     <message>
         <source>Dialup</source>
-        <translation type="unfinished"></translation>
+        <translation>Dialup</translation>
     </message>
     <message>
         <source>Number</source>
-        <translation type="unfinished"></translation>
+        <translation>Číslo</translation>
     </message>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Příkazy</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <source>New Item</source>
-        <translation type="unfinished"></translation>
+        <translation>Nová položka</translation>
     </message>
 </context>
 <context>
@@ -182,11 +182,11 @@
     </message>
     <message>
         <source>Commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Příkazy</translation>
     </message>
     <message>
         <source>Dialing</source>
-        <translation type="unfinished"></translation>
+        <translation>Vytáčení</translation>
     </message>
 </context>
 <context>
@@ -252,19 +252,19 @@
     </message>
     <message>
         <source>Local</source>
-        <translation type="unfinished"></translation>
+        <translation>Lokální</translation>
     </message>
     <message>
         <source>Server Overrules</source>
-        <translation type="unfinished"></translation>
+        <translation>Serverová překonání nastavení</translation>
     </message>
     <message>
         <source>Remote</source>
-        <translation type="unfinished"></translation>
+        <translation>Vzdálený</translation>
     </message>
     <message>
         <source>Only if not yet set</source>
-        <translation type="unfinished"></translation>
+        <translation>Jen, když nebylo už nastaveno</translation>
     </message>
 </context>
 <context>
@@ -279,37 +279,40 @@
     </message>
     <message>
         <source>PPP connection</source>
-        <translation type="unfinished"></translation>
+        <translation>PPP připojení</translation>
     </message>
 </context>
 <context>
     <name>PPPRunGUI</name>
     <message>
         <source>PPPRun</source>
-        <translation type="unfinished"></translation>
+        <translation>PPPRun</translation>
     </message>
     <message>
         <source>Upon connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Při připojení</translation>
     </message>
     <message>
         <source>Before</source>
-        <translation type="unfinished"></translation>
+        <translation>Před</translation>
     </message>
     <message>
         <source>After</source>
-        <translation type="unfinished"></translation>
+        <translation>Potom</translation>
     </message>
     <message>
         <source>Upon disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Při odpojení</translation>
     </message>
     <message>
         <source>&lt;UL&gt;
 &lt;LI&gt;Commands run under your &lt;b&gt;real&lt;/b&gt; user id (&lt;b&gt;not&lt;/b&gt; as root)&lt;/LI&gt;
 &lt;LI&gt;Supply the whole path&lt;/LI&gt;
 &lt;/UL&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;UL&gt;
+&lt;LI&gt;Příkazy běžící pod vaším &lt;b&gt;skutečným&lt;/b&gt; id (&lt;b&gt;ne&lt;/b&gt; jako root)&lt;/LI&gt;
+&lt;LI&gt;Zadejte celou cestu&lt;/LI&gt;
+&lt;/UL&gt;</translation>
     </message>
 </context>
 </TS>

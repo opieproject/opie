@@ -115,7 +115,7 @@ Tlak:</translation>
     </message>
     <message>
         <source> kPa</source>
-        <translation type="unfinished"></translation>
+        <translation>kPa</translation>
     </message>
 </context>
 </TS>

@@ -127,27 +127,27 @@
     </message>
     <message>
         <source>Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Zapnuto</translation>
     </message>
     <message>
         <source>Pkt</source>
-        <translation type="unfinished"></translation>
+        <translation>Pkt</translation>
     </message>
     <message>
         <source>ODO</source>
-        <translation type="unfinished"></translation>
+        <translation>ODO</translation>
     </message>
     <message>
         <source>Sending</source>
-        <translation type="unfinished"></translation>
+        <translation>Odesílání</translation>
     </message>
     <message>
         <source>Miscellaneous</source>
-        <translation type="unfinished"></translation>
+        <translation>Ostatní</translation>
     </message>
     <message>
         <source>Reset ODO</source>
-        <translation type="unfinished"></translation>
+        <translation>Reset ODO</translation>
     </message>
 </context>
 <context>
