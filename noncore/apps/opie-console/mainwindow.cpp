@@ -7,9 +7,11 @@
 #include <qlabel.h>
 #include <qpopupmenu.h>
 #include <qtoolbar.h>
+#include <qmessagebox.h>
+
 #include <qpe/resource.h>
 #include <opie/ofiledialog.h>
-#include <qmessagebox.h>
+
 
 #include "keytrans.h"
 #include "profileeditordialog.h"
@@ -166,6 +168,16 @@ void MainWindow::initUI() {
     m_keyBar->hide();
 
     m_kb = new FunctionKeyboard(m_keyBar);
+
+
+
+    m_connect->setEnabled( false );
+    m_disconnect->setEnabled( false );
+    m_terminate->setEnabled( false );
+    m_transfer->setEnabled( false );
+    m_recordScript->setEnabled( false );
+    m_saveScript->setEnabled( false );
+    m_runScript->setEnabled( false );
 
     /*
      * connect to the menu activation
@@ -340,6 +352,16 @@ void MainWindow::create( const Profile& prof ) {
     tabWidget()->add( ses );
     m_curSession = ses;
 
+    // dicide if its a local term ( then no connction and no tranfer)
+    m_connect->setEnabled( true );
+    m_disconnect->setEnabled( true );
+    m_terminate->setEnabled( true );
+    m_transfer->setEnabled( true );
+    m_recordScript->setEnabled( true );
+    m_saveScript->setEnabled( true );
+    m_runScript->setEnabled( true );
+
+
 }
 
 void MainWindow::slotTransfer()
@@ -363,4 +385,19 @@ void MainWindow::slotSessionChanged( Session* ses ) {
         qWarning("changing %s", ses->name().latin1() );
         m_curSession = ses;
     }
+}
+
+void MainWindow::setOn() {
+
+/*
+    m_connect
+     m_disconnect
+     m_terminate
+     m_transfer
+     m_recordScript
+     m_saveScript
+     m_runScript
+*/
+
+
 }

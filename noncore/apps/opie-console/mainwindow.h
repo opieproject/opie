@@ -62,6 +62,7 @@ private slots:
     void slotRecordScript();
     void slotSaveScript();
     void slotRunScript();
+    void setOn();
     void slotSessionChanged( Session* );
 private:
     void initUI();
@@ -95,7 +96,7 @@ private:
     QAction* m_connect;
     QAction* m_disconnect;
     QAction* m_terminate;
-	QAction* m_transfer;
+    QAction* m_transfer;
     QAction* m_setProfiles;
     QAction* m_openKeys;
     QAction* m_recordScript;
