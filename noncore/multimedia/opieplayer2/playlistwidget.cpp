@@ -327,9 +327,15 @@ void PlayListWidget::addAllVideoToList() {
 }
 
 
-void PlayListWidget::setDocument( const QString& fileref ) {
+void PlayListWidget::setDocument( const QString& _fileref ) {
   //    odebug << "<<<<<<<<set document>>>>>>>>>> "+fileref << oendl; 
+    QString fileref  = _fileref;
     fromSetDocument = TRUE;
+    
+    DocLnk lnk(_fileref);
+    if(lnk.isValid())
+	fileref = lnk.file();
+    
     QFileInfo fileInfo(fileref);
 
     if ( !fileInfo.exists() ) {
