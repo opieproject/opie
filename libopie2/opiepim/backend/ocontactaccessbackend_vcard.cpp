@@ -210,6 +210,215 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
 {
     OPimContact c;
 
+<<<<<<< ocontactaccessbackend_vcard.cpp
+	VObjectIterator it;
+	initPropIterator( &it, obj );
+	while( moreIteration( &it ) ) {
+		VObject *o = nextVObject( &it );
+		QCString name = vObjectName( o );
+		QString value = QString::fromUtf8( vObjectStringZValue( o ) );
+		qDebug( "(1)Read: %s", QString( value ).latin1() );
+		if ( name == VCNameProp ) {
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectTypeInfo( o );
+				QString value = QString::fromUtf8( vObjectStringZValue( o ) );
+				qDebug( "(2)Read: %s", value.latin1() );
+				if ( name == VCNamePrefixesProp )
+					c.setTitle( value );
+				else if ( name == VCNameSuffixesProp )
+					c.setSuffix( value );
+				else if ( name == VCFamilyNameProp )
+					c.setLastName( value );
+				else if ( name == VCGivenNameProp )
+					c.setFirstName( value );
+				else if ( name == VCAdditionalNamesProp )
+					c.setMiddleName( value );
+			}
+		}
+		else if ( name == VCAdrProp ) {
+			bool work = TRUE; // default address is work address
+			QString street;
+			QString city;
+			QString region;
+			QString postal;
+			QString country;
+
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectName( o );
+				QString value = QString::fromUtf8( vObjectStringZValue( o ) );
+				if ( name == VCHomeProp )
+					work = FALSE;
+				else if ( name == VCWorkProp )
+					work = TRUE;
+				else if ( name == VCStreetAddressProp )
+					street = value;
+				else if ( name == VCCityProp )
+					city = value;
+				else if ( name == VCRegionProp )
+					region = value;
+				else if ( name == VCPostalCodeProp )
+					postal = value;
+				else if ( name == VCCountryNameProp )
+					country = value;
+			}
+			if ( work ) {
+				c.setBusinessStreet( street );
+				c.setBusinessCity( city );
+				c.setBusinessCountry( country );
+				c.setBusinessZip( postal );
+				c.setBusinessState( region );
+			} else {
+				c.setHomeStreet( street );
+				c.setHomeCity( city );
+				c.setHomeCountry( country );
+				c.setHomeZip( postal );
+				c.setHomeState( region );
+			}
+		}
+		else if ( name == VCTelephoneProp ) {
+			enum {
+				HOME = 0x01,
+				WORK = 0x02,
+				VOICE = 0x04,
+				CELL = 0x08,
+				FAX = 0x10,
+				PAGER = 0x20,
+				UNKNOWN = 0x80
+			};
+			int type = 0;
+
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectTypeInfo( o );
+				if ( name == VCHomeProp )
+					type |= HOME;
+				else if ( name == VCWorkProp )
+					type |= WORK;
+				else if ( name == VCVoiceProp )
+					type |= VOICE;
+				else if ( name == VCCellularProp )
+					type |= CELL;
+				else if ( name == VCFaxProp )
+					type |= FAX;
+				else if ( name == VCPagerProp )
+					type |= PAGER;
+				else  if ( name == VCPreferredProp )
+					;
+				else
+					type |= UNKNOWN;
+			}
+			if ( (type & UNKNOWN) != UNKNOWN ) {
+				if ( ( type & (HOME|WORK) ) == 0 ) // default
+					type |= HOME;
+				if ( ( type & (VOICE|CELL|FAX|PAGER) ) == 0 ) // default
+					type |= VOICE;
+
+                                qWarning("value %s %d", value.data(), type );
+				if ( (type & (VOICE|HOME) ) == (VOICE|HOME) && (type & (CELL|HOME) ) != (CELL|HOME) )
+					c.setHomePhone( value );
+				if ( ( type & (FAX|HOME) ) == (FAX|HOME) )
+					c.setHomeFax( value );
+				if ( ( type & (CELL|HOME) ) == (CELL|HOME) )
+					c.setHomeMobile( value );
+				if ( ( type & (VOICE|WORK) ) == (VOICE|WORK) && (type & (CELL|WORK) ) != (CELL|WORK) )
+					c.setBusinessPhone( value );
+				if ( ( type & (FAX|WORK) ) == (FAX|WORK) )
+					c.setBusinessFax( value );
+				if ( ( type & (CELL|WORK) ) == (CELL|WORK) )
+					c.setBusinessMobile( value );
+				if ( ( type & (PAGER|WORK) ) == (PAGER|WORK) )
+					c.setBusinessPager( value );
+			}
+		}
+		else if ( name == VCEmailAddressProp ) {
+			QString email = QString::fromUtf8( vObjectStringZValue( o ) );
+			bool valid = TRUE;
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectTypeInfo( o );
+				if ( name != VCInternetProp && name != VCHomeProp &&
+				     name != VCWorkProp &&
+				     name != VCPreferredProp )
+					// ### preffered should map to default email
+					valid = FALSE;
+			}
+			if ( valid ) {
+				c.insertEmail( email );
+			}
+		}
+		else if ( name == VCURLProp ) {
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectTypeInfo( o );
+				if ( name == VCHomeProp )
+					c.setHomeWebpage( value );
+				else if ( name == VCWorkProp )
+					c.setBusinessWebpage( value );
+			}
+		}
+		else if ( name == VCOrgProp ) {
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectName( o );
+				QString value = QString::fromUtf8( vObjectStringZValue( o ) );
+				if ( name == VCOrgNameProp )
+					c.setCompany( value );
+				else if ( name == VCOrgUnitProp )
+					c.setDepartment( value );
+				else if ( name == VCOrgUnit2Prop )
+					c.setOffice( value );
+			}
+		}
+		else if ( name == VCTitleProp ) {
+			c.setJobTitle( value );
+		}
+		else if ( name == "X-Qtopia-Profession" ) {
+			c.setProfession( value );
+		}
+		else if ( name == "X-Qtopia-Manager" ) {
+			c.setManager( value );
+		}
+		else if ( name == "X-Qtopia-Assistant" ) {
+			c.setAssistant( value );
+		}
+		else if ( name == "X-Qtopia-Spouse" ) {
+			c.setSpouse( value );
+		}
+		else if ( name == "X-Qtopia-Gender" ) {
+			c.setGender( value );
+		}
+		else if ( name == "X-Qtopia-Anniversary" ) {
+			c.setAnniversary( convVCardDateToDate( value ) );
+		}
+		else if ( name == "X-Qtopia-Nickname" ) {
+			c.setNickname( value );
+		}
+		else if ( name == "X-Qtopia-Children" ) {
+			c.setChildren( value );
+		}
+		else if ( name == VCBirthDateProp ) {
+			// Reading Birthdate regarding RFC 2425 (5.8.4)
+			c.setBirthday( convVCardDateToDate( value ) );
+
+		}
+		else if ( name == VCCommentProp ) {
+			c.setNotes( value );
+		}
+=======
     VObjectIterator it;
     initPropIterator( &it, obj );
     while( moreIteration( &it ) ) {
@@ -415,7 +624,21 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
         else if ( name == VCCommentProp ) {
             c.setNotes( value );
         }
+>>>>>>> 1.15
 #if 0
+<<<<<<< ocontactaccessbackend_vcard.cpp
+		else {
+			printf("Name: %s, value=%s\n", name.data(), QString::fromUtf8( vObjectStringZValue( o ) ) );
+			VObjectIterator nit;
+			initPropIterator( &nit, o );
+			while( moreIteration( &nit ) ) {
+				VObject *o = nextVObject( &nit );
+				QCString name = vObjectName( o );
+				QString value = QString::fromUtf8( vObjectStringZValue( o ) );
+				printf(" subprop: %s = %s\n", name.data(), value.latin1() );
+			}
+		}
+=======
         else {
             printf("Name: %s, value=%s\n", name.data(), vObjectStringZValue( o ) );
             VObjectIterator nit;
@@ -427,6 +650,7 @@ OPimContact OPimContactAccessBackend_VCard::parseVObject( VObject *obj )
                 printf(" subprop: %s = %s\n", name.data(), value.latin1() );
             }
         }
+>>>>>>> 1.15
 #endif
     }
     c.setFileAs();
@@ -581,10 +805,10 @@ QDate OPimContactAccessBackend_VCard::convVCardDateToDate( const QString& datest
 
 VObject* OPimContactAccessBackend_VCard::safeAddPropValue( VObject *o, const char *prop, const QString &value )
 {
-    VObject *ret = 0;
-    if ( o && !value.isEmpty() )
-        ret = addPropValue( o, prop, value.latin1() );
-    return ret;
+	VObject *ret = 0;
+	if ( o && !value.isEmpty() )
+		ret = addPropValue( o, prop, value.utf8() );
+	return ret;
 }
 
 VObject* OPimContactAccessBackend_VCard::safeAddProp( VObject *o, const char *prop)

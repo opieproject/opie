@@ -36,12 +36,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-// fromLocal8Bit() does not work as expected. Thus it
-// is replaced by fromLatin1() (eilers)
-#define __BUGGY_LOCAL8BIT_
-
-namespace Opie {
-namespace DB {
+namespace Opie { 
+namespace DB { 
 namespace Internal {
 
 namespace {
@@ -173,8 +169,8 @@ OSQLResult OSQLiteDriver::query( OSQLQuery* qu) {
     query.driver = this;
     char *err;
     /* SQLITE_OK 0 if return code > 0 == failure */
-    if ( sqlite_exec(m_sqlite, qu->query(),&call_back, &query, &err)  > 0 ) {
-        owarn << "OSQLiteDriver::query: Error while executing " << err << "" << oendl; 
+    if ( sqlite_exec(m_sqlite, qu->query().utf8(),&call_back, &query, &err)  > 0 ) {
+        qWarning("OSQLiteDriver::query: Error while executing %s",err);
         free(err );
         // FixMe Errors
     }
@@ -215,15 +211,9 @@ int OSQLiteDriver::call_back( void* voi, int argc,
     QMap<int, QString> tableInt;
     for (int i = 0; i < argc; i++ ) {
 
-#ifdef __BUGGY_LOCAL8BIT_
-        tableInt.insert( i, QString::fromLatin1( argv[i] ) );
-        tableString.insert( QString::fromLatin1( columns[i] ),
-                            QString::fromLatin1( argv[i] ) );
-#else
-        tableInt.insert( i, QString::fromLocal8Bit( argv[i] ) );
-        tableString.insert( QString::fromLocal8Bit( columns[i] ),
-                            QString::fromLocal8Bit( argv[i] ) );
-#endif
+        tableInt.insert( i, QString::fromUtf8( argv[i] ) );
+        tableString.insert( QString::fromUtf8( columns[i] ),
+                            QString::fromUtf8( argv[i] ) );
     }
     OSQLResultItem item( tableString, tableInt );
     qu->items.append( item );
