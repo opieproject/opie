@@ -434,7 +434,7 @@ application immédiatement.</translation>
         <source>&lt;p&gt;
 These termination options are provided primarily for use while developing and testing the Opie system. In a normal environment, these concepts are unnecessary.</source>
         <translation>&lt;p&gt;
-Ces options sont fournies pour être utilisées durant le développement et les tests du système Opie. Dans les conditions normales d&apos;utilisation, ces concepts ne sont pas nécessaires.</translation>
+Ces options sont destinés à être utilisées durant le développement et les tests du système Opie. Dans les conditions normales d&apos;utilisation, ces concepts ne sont pas nécessaires.</translation>
     </message>
     <message>
         <source>Cancel</source>
