@@ -81,7 +81,7 @@ QString OFileDialog::getOpenFileName(int selector,
 {
   QString ret;
   OFileDialog dlg( caption.isEmpty() ? tr("Open") : caption,
-		   wid, OFileSelector::OPEN, selector, startDir, file, mimes);
+		   wid, OFileSelector::Open, selector, startDir, file, mimes);
   dlg.showMaximized();
   if( dlg.exec() )
     ret = dlg.fileName();
@@ -97,7 +97,7 @@ QString OFileDialog::getSaveFileName(int selector,
 {
   QString ret;
   OFileDialog dlg( caption.isEmpty() ? tr("Save") : caption,
-		   wid, OFileSelector::SAVE, selector, startDir, file, mimes);
+		   wid, OFileSelector::Save, selector, startDir, file, mimes);
   dlg.showMaximized();
   if( dlg.exec() )
     ret = dlg.fileName();

@@ -26,3 +26,6 @@ void OFileView::changedDir( const QString& s) {
 void OFileView::changedDir( const QDir& d ) {
     m_sel->internChangedDir( d );
 }
+OFileSelector* OFileView::selector() const {
+    return m_sel;
+}

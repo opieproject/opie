@@ -1,4 +1,7 @@
 
+#include <qpe/mimetype.h>
+#include <qpe/resource.h>
+
 #include "ofileselector.h"
 #include "ofileselectoritem.h"
 #include "ofilelistview.h"
@@ -15,7 +18,7 @@ OFileListView::~OFileListView() {
 void OFileListView::clear() {
     QListView::clear();
 }
-void OFileListView::addFile( const QString& mime,
+void OFileListView::addFile( const QString&,
                              QFileInfo* info,
                              bool isSymlink ) {
     MimeType type( info->absFilePath() );
@@ -33,8 +36,8 @@ void OFileListView::addFile( const QString& mime,
         name = info->fileName() + " -> " +info->dirPath() + "/" + info->readLink();
     else {
         name = info->fileName();
-        if( ( selector()->mode() == Open && !info->isReadable() )||
-            ( selector()->mode() == Save && !info->isWritable() ) ){
+        if( ( selector()->mode() == OFileSelector::Open && !info->isReadable() ) ||
+            ( selector()->mode() == OFileSelector::Save && !info->isWritable() ) ){
 
             locked = true; pix = Resource::loadPixmap("locked");
         }
@@ -48,15 +51,15 @@ void OFileListView::addFile( const QString& /*mime*/, const QString& /*dir*/,
                              const QString& /*file*/,  bool /*isSyml*/ ) {
 
 }
-void OFileListView::addDir( const QString& mime,
-                            QFileInfo* info,  bool isSym ) {
+void OFileListView::addDir( const QString&,
+                            QFileInfo* info,  bool symlink ) {
 
     bool locked = false;
     QString name;
     QPixmap pix;
 
-    if( ( selector()->mode() == Open && !info->isReadable() ) ||
-        ( selector()->mode() == Save && !info->isWritable() ) ){
+    if( ( selector()->mode() == OFileSelector::Open && !info->isReadable() ) ||
+        ( selector()->mode() == OFileSelector::Save && !info->isWritable() ) ){
 
       locked = true;
 
@@ -78,17 +81,17 @@ void OFileListView::addDir( const QString& mime,
 			   true );
 
 }
-void OFileListView::addDir( const QString& mime,  const QString& dir,
-                            const QString& file, bool ) {
+void OFileListView::addDir( const QString& /*mime*/,  const QString& /*dir*/,
+                            const QString& /*file*/, bool ) {
 
 }
-void OFileListView::addSymlink( const QString& mime,
-                                QFileInfo* info,
-                                bool isSym ) {
+void OFileListView::addSymlink( const QString& /*mime*/,
+                                QFileInfo* /*info*/,
+                                bool /*isSym*/ ) {
 
 }
-void OFileListView::addSymlink( const QString& mime,  const QString& path,
-                                const QString& file,  bool isSym ) {
+void OFileListView::addSymlink( const QString& /*mime*/,  const QString& /*path*/,
+                                const QString& /*file*/,  bool /*isSym*/ ) {
 
 }
 void OFileListView::cd( const QString& ) {
@@ -105,13 +108,17 @@ QString OFileListView::selectedName()const{
     return item->text( 1 );
 }
 QStringList OFileListView::selectedNames()const {
-
+    QStringList list;
+    list << selectedName();
+    return list;
 }
 QString OFileListView::selectedPath()const {
-
+    return QString::null;
 }
-QString OFileListView::selectedPaths()const {
-
+QStringList OFileListView::selectedPaths()const {
+    QStringList list;
+    list << selectedPath();
+    return list;
 }
 int OFileListView::fileCount() {
     return childCount();

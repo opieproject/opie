@@ -90,7 +90,7 @@ protected:
   void contextMenu();
   void changedDir(const QString &);
   void changedDir(const QDir & );
-  OFileSelector* selector();
+  OFileSelector* selector()const;
 
 private:
     OFileSelector* m_sel;

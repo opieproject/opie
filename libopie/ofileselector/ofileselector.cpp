@@ -246,7 +246,7 @@ bool OFileSelector::cd(const QString &path )
 }
 void OFileSelector::setSelector(int mode )
 {
-QString text;
+  QString text;
   switch( mode ){
   case Normal:
     text = tr("Documents");
@@ -261,7 +261,7 @@ QString text;
   slotViewCheck( text );
 }
 
-void OFileSelector::setPopupFactory(OPopupMenuFactory *popup )
+void OFileSelector::setPopupFactory(OPopupMenuFactory */*popup*/ )
 {
 /*  m_custom = popup;
   m_showPopup = true;
@@ -274,9 +274,9 @@ QString OFileSelector::selectedName() const
 {
   QString name;
   if( m_selector == Normal ){
-    DocLnk lnk = m_select->selectedDocument();
-    name = lnk.file();
-  }else if( m_selector == Extended || m_selector == ExtendedAll ){
+      DocLnk lnk = m_select->selectedDocument();
+      name = lnk.file();
+  }else {
       if ( m_shLne ) {
           name = m_currentDir + "/" +m_edit->text();
       }else{
@@ -304,9 +304,9 @@ QString OFileSelector::selectedPath()const
   QString path;
   if( m_selector == Normal ){
     path = QPEApplication::documentDir();
-  }else if( m_selector == Extended || m_selector == ExtendedAll ){
-      ; //FIXME
-  }
+  } /*else if( m_selector == Extended || m_selector == ExtendedAll ){
+      ;
+      }*/
   return path;
 }
 QStringList OFileSelector::selectedPaths() const
@@ -333,7 +333,7 @@ int OFileSelector::fileCount()
   case Extended:
   case ExtendedAll:
   default:
-    count = currentView()->childCount();
+      count = currentView()->fileCount();
     break;
   }
   return count;
@@ -349,7 +349,7 @@ DocLnk OFileSelector::selectedDocument() const
   case Extended:
   case ExtendedAll:
   default:
-    lnk = DocLnk( selectedName() ); // new DocLnk
+    lnk = DocLnk( selectedName() );
     break;
   }
   return lnk;
@@ -372,6 +372,7 @@ void OFileSelector::slotCancel()
 {
   emit cancel();
 }
+/* switch the views */
 void OFileSelector::slotViewCheck(const QString &sel)
 {
   if( sel == tr("Documents" ) ){
@@ -404,7 +405,7 @@ void OFileSelector::slotViewCheck(const QString &sel)
     m_stack->raiseWidget( Extended ); // same widget other QFileFilter
   }
 }
-// not yet finished.....
+
 QString OFileSelector::currentMimeType() const{
     QString mime;
     QString currentText;
@@ -631,7 +632,7 @@ void OFileSelector::initVars()
   m_new = 0;
   m_close = 0;
 }
-void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
+void OFileSelector::addFile(const QString &, QFileInfo *info, bool )
 {
   if(!m_files)
     return;
@@ -642,7 +643,7 @@ void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
       return;
 
 }
-void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink )
+void OFileSelector::addDir(const QString &, QFileInfo *, bool  )
 {
   if(!m_dir)
     return;
@@ -925,7 +926,6 @@ bool OFileSelector::compliesMime( const QString& mime ) {
     qWarning("list doesn't contain it ");
     QStringList::Iterator it2;
     int pos;
-    int pos2;
     for ( it2 = list.begin(); it2 != list.end(); ++it2 ) {
         pos = (*it2).findRev("/*");
         if ( pos >= 0 ) {
@@ -949,8 +949,9 @@ void OFileSelector::slotSelectionChanged()
 {
 
 }
-void OFileSelector::slotCurrentChanged(QListViewItem* item )
+void OFileSelector::slotCurrentChanged(QListViewItem* /*item*/ )
 {
+    /*
   if( item == 0 )
     return;
   if( m_selector == Extended || m_selector == ExtendedAll ) {
@@ -968,10 +969,12 @@ void OFileSelector::slotCurrentChanged(QListViewItem* item )
           emit fileSelected(lnk );
       }
     }
-  }
+    } */
 }
-void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &, int)
+void OFileSelector::slotClicked( int /*button*/, QListViewItem */*item*/, const QPoint &, int)
+
 {
+    /*
   if ( item == 0 )
     return;
 
@@ -981,7 +984,7 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
   switch( m_selector ){
   default:
     break;
-  case Extended: // fall through
+  case Extended:  // fall through
   case ExtendedAll:{
     OFileSelectorItem *sel = (OFileSelectorItem*)item;
     if(!sel->isLocked() ){
@@ -1001,7 +1004,7 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
     }
     break;
   }
-  }
+  } */
 }
 void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoint &, int )
 {
@@ -1012,20 +1015,23 @@ void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoin
     return;
   slotContextMenu( item );
 }
-void OFileSelector::slotContextMenu( QListViewItem *item)
+void OFileSelector::slotContextMenu( QListViewItem */*item*/)
 {
 
 }
 void OFileSelector::slotChangedDir()
 {
+    /*
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   if(sel->isDir() ){
     QStringList str = QStringList::split("->", sel->text(1) );
     cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
   }
+    */
 }
 void OFileSelector::slotOpen()
 {
+    /*
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   if(!sel->isDir() ){
     QStringList str = QStringList::split("->", sel->text(1) );
@@ -1034,6 +1040,7 @@ void OFileSelector::slotOpen()
     // DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
     //emit fileSelected( lnk );
   }
+    */
 }
 void OFileSelector::slotRescan()
 {
@@ -1045,6 +1052,7 @@ void OFileSelector::slotRename()
 }
 void OFileSelector::slotDelete()
 {
+    /*
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   QStringList list = QStringList::split("->", sel->text(1) );
   if( sel->isDir() ){
@@ -1060,6 +1068,7 @@ void OFileSelector::slotDelete()
   }
   m_View->takeItem( sel );
   delete sel;
+    */
 }
 void OFileSelector::cdUP()
 {
@@ -1210,6 +1219,9 @@ void OFileSelector::reparse()
 OFileView* OFileSelector::currentView() {
     return 0l;
 }
+OFileView* OFileSelector::currentView() const{
+    return 0l;
+}
 int OFileSelector::filter() {
     int filter;
     if ( m_selector == ExtendedAll )
@@ -1243,4 +1255,8 @@ void OFileSelector::internChangedDir( const QString& s) {
 }
 void OFileSelector::internChangedDir( const QDir& s) {
     emit dirSelected( s );
+}
+QPixmap OFileSelector::pixmap( const QString& s ) {
+
+    return (*m_pixmaps)[s];
 }

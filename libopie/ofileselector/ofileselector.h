@@ -336,8 +336,10 @@ class OFileSelector : public QWidget {
   QValueList<DocLnk> selectedDocuments()const;
 
   OFileView* currentView();
+  OFileView* currentView()const;
   int filter();
   int sorting();
+  QPixmap pixmap( const QString& );
 
  signals:
   void fileSelected( const DocLnk & );
