@@ -95,18 +95,7 @@ BlueBase::BlueBase( QWidget* parent,  const char* name, WFlags fl )
     readConfig();
     initGui();
 
-    //TESTING
     ListView2->setRootIsDecorated(true);
-
-    BTDeviceItem *topLV2 = new BTDeviceItem( ListView2, RemoteDevice("xx:", "Siemens S45" ) );
-    topLV2->setPixmap( 1, m_onPix );
-    Services s1;
-    s1.setServiceName( "Serial" );
-    s1.insertClassId(1, "BlueNic");
-    (void) new BTServiceItem( topLV2, s1 );
-    s1.setServiceName( "BlueNic" );
-    s1.insertClassId(2, "Obex");
-    (void) new BTServiceItem( topLV2, s1 );
 
     writeToHciConfig();
     // search conncetions
