@@ -32,5 +32,5 @@
 
 OConfig* OGlobal::config()
 {
-    return &globalconfig;
+    return globalconfig;
 }

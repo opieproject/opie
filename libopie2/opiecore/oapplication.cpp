@@ -54,7 +54,7 @@ class OApplicationPrivate
 
 
 OApplication::OApplication( int& argc, char** argv, const QCString& rAppName )
-             :QPEApplication( argc, argv ),
+             :OpieApplication( argc, argv ),
              _appname( rAppName ),
              _config( 0 )
 {
@@ -108,7 +108,7 @@ void OApplication::init()
 
 void OApplication::showMainWidget( QWidget* widget, bool nomax )
 {
-    QPEApplication::showMainWidget( widget, nomax );
+    OpieApplication::showMainWidget( widget, nomax );
     widget->setCaption( _appname );
 }
 

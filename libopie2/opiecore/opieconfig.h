@@ -1,8 +1,7 @@
 /*
                              This file is part of the Opie Project
 
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
-              =.
+                             (C) 2003 Patrick S. Vogt
             .=l.
            .>+-=
  _;:,     .>    :=|.         This program is free software; you can
@@ -28,22 +27,53 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OGLOBAL_H
-#define OGLOBAL_H
+#ifndef OPIECONFIG_H
+#define OPIECONFIG_H
 
-#include <qpe/global.h>
-#include <opie2/oconfig.h>
 
-static OConfig *globalconfig = new OConfig( "global" );
+#ifdef QWS
+#include <qpe/config.h>
+#else 
+#include <qsettings.h>
+#endif
 
-//FIXME: Is it wise or even necessary to inherit OGlobal from Global?
-// once we totally skip libqpe it should ideally swallow Global -zecke
 
-class OGlobal : public Global
+class OpieConfig 
+#ifdef QWS
+ : public Config
+#else
+: public QSettings
+#endif
 {
-  public:
-    // do we want to put that into OApplication as in KApplication -zecke
-    static OConfig* config();
+  
+ public:	
+#ifndef QWS
+    enum Domain { File, User };
+#endif
+
+    OpieConfig( const QString&, Domain );
+
+#ifndef QWS
+    void setGroup( const QString& key);
+	bool hasKey ( const QString & key ) const;
+#endif
+
+    /**
+     * @returns the name of the current group.
+     * The current group is used for searching keys and accessing entries.
+     */
+    const QString& group() 
+#ifdef QWS
+    { return git.key(); };
+#else
+    { return group(); };
+#endif
+
+#ifndef QWS
+ private:
+    bool hasGroup;
+#endif
+
 };
 
-#endif // OGLOBAL_H
+#endif // OPIECONFIG_H

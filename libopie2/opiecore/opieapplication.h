@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
 
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 Patrick S. Vogt <tille@handhelds.org>
               =.
             .=l.
            .>+-=
@@ -28,22 +28,31 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OGLOBAL_H
-#define OGLOBAL_H
+#ifndef OPIE_APPLICATION_H
+#define OPIE_APPLICATION_H
 
-#include <qpe/global.h>
-#include <opie2/oconfig.h>
+#ifdef QWS
+#include <qpe/qpeapplication.h>
+#else
+#include <qapplication.h>
+#endif
 
-static OConfig *globalconfig = new OConfig( "global" );
-
-//FIXME: Is it wise or even necessary to inherit OGlobal from Global?
-// once we totally skip libqpe it should ideally swallow Global -zecke
-
-class OGlobal : public Global
+class OpieApplication 
+#ifdef QWS
+: public QPEApplication
+#else
+: public QApplication
+#endif
 {
-  public:
-    // do we want to put that into OApplication as in KApplication -zecke
-    static OConfig* config();
+ public:
+    OpieApplication( int& argc, char** argv );
+
+#ifndef QWS
+    void showMainWidget( QWidget* widget, bool nomax=false );
+#endif
 };
 
-#endif // OGLOBAL_H
+
+#endif
+
+

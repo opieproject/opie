@@ -39,7 +39,7 @@
 #include <opie2/oconfig.h>
 
 OConfig::OConfig( const QString &name, Domain domain )
-        :Config( name, domain )
+    :OpieConfig( name, domain )
 {
 }
 

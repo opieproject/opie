@@ -1,7 +1,7 @@
 /*
                              This file is part of the Opie Project
 
-                             Copyright (C) 2003 Michael 'Mickey' Lauer <mickey@tm.informatik.uni-frankfurt.de>
+                             Copyright (C) 2003 Patrick S. Vogt <tille@handhelds.org>
               =.
             .=l.
            .>+-=
@@ -28,22 +28,42 @@
                              Boston, MA 02111-1307, USA.
 */
 
-#ifndef OGLOBAL_H
-#define OGLOBAL_H
 
-#include <qpe/global.h>
-#include <opie2/oconfig.h>
+#include "opieconfig.h"
 
-static OConfig *globalconfig = new OConfig( "global" );
-
-//FIXME: Is it wise or even necessary to inherit OGlobal from Global?
-// once we totally skip libqpe it should ideally swallow Global -zecke
-
-class OGlobal : public Global
+OpieConfig::OpieConfig( const QString &name, Domain domain )
+#ifdef QWS
+    :Config( name, domain )
 {
-  public:
-    // do we want to put that into OApplication as in KApplication -zecke
-    static OConfig* config();
+#else
+    :QSettings(Native), hasGroup(false)
+{
+    Scope s;
+    switch (domain) {
+    case File: s = QSettings::Global;
+        break;
+    case User: s = QSettings::User;
+        break;
+    }
+    setPath("libopie2", name, s );
+#endif
+}
+
+
+#ifndef QWS
+
+void OpieConfig::setGroup( const QString& key)
+{
+    if (hasGroup) endGroup();
+    hasGroup = true;
+    beginGroup( key );
 };
 
-#endif // OGLOBAL_H
+bool OpieConfig::hasKey ( const QString & key ) const
+{
+    bool *ok;
+    readEntry( key, QString::null, ok );
+    return *ok;
+};
+#endif
+

@@ -34,14 +34,14 @@
 #define oApp OApplication::oApplication()
 
 
-#include <qpe/qpeapplication.h>
+#include "opieapplication.h"
 
 
 class OApplicationPrivate;
 class OConfig;
 
 
-class OApplication : public QPEApplication
+class OApplication : public OpieApplication
 {
   Q_OBJECT
 
