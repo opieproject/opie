@@ -75,7 +75,8 @@ QPixmap *UniKeyboardImpl::icon()
 
 QString UniKeyboardImpl::name()
 {
-    return qApp->translate( "InputMethods", "Unicode" );
+    // return qApp->translate( "InputMethods", "Unicode" );
+    return "Unicode";
 }
 
 void UniKeyboardImpl::onKeyPress( QObject *receiver, const char *slot )

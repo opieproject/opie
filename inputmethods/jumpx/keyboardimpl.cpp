@@ -67,7 +67,8 @@ QPixmap *KeyboardImpl::icon()
 
 QString KeyboardImpl::name()
 {
-    return qApp->translate( "InputMethods", "JumpX" );
+    // return qApp->translate( "InputMethods", "JumpX" );
+    return "JumpX";
 }
 
 void KeyboardImpl::onKeyPress( QObject *receiver, const char *slot )

@@ -83,7 +83,8 @@ QPixmap *HandwritingImpl::icon()
 
 QString HandwritingImpl::name()
 {
-    return qApp->translate( "InputMethods", "Handwriting" );
+    // return qApp->translate( "InputMethods", "Handwriting" );
+    return "Handwriting";
 }
 
 void HandwritingImpl::onKeyPress( QObject *receiver, const char *slot )

@@ -100,8 +100,8 @@ QPixmap *KeyboardImpl::icon()
 
 QString KeyboardImpl::name()
 {
-    return qApp->translate( "InputMethods", "Dvorak" );
-//    return qApp->translate( "InputMethods", "Opti" );
+    // return qApp->translate( "InputMethods", "Dvorak" );
+    return "Dvorak";
 }
 
 void KeyboardImpl::onKeyPress( QObject *receiver, const char *slot )
