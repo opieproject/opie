@@ -192,12 +192,7 @@ void Today::loadPlugins() {
     }
 
     QString path = QPEApplication::qpeDir() + "/plugins/today";
-    qWarning("Searching for Plugins in: %s", path.latin1());
-#ifdef Q_OS_MACX
-    QDir dir( path, "lib*.dylib" );
-#else
     QDir dir( path, "lib*.so" );
-#endif
 
     QStringList list = dir.entryList();
     QStringList::Iterator it;
@@ -220,22 +215,18 @@ void Today::loadPlugins() {
 
             QString type = (*it).left( (*it).find(".") );
 
-            // grr, sharp rom does not know Global::languageList();
-            //            QStringList langs = Global::languageList();
-            QString tfn = QPEApplication::qpeDir() + "/i18n/";
-            QDir langDir = tfn;
-            QStringList langs = langDir.entryList("*", QDir::Dirs );
+            QString lang;
+            Config config("locale");
+            config.setGroup("Language");
+            lang = config.readEntry( "Language", "en" );
 
-            for (QStringList::ConstIterator lit = langs.begin(); lit!=langs.end(); ++lit) {
-                QString lang = *lit;
-                qDebug( "Languages: " + lang );
-                QTranslator * trans = new QTranslator( qApp );
-                QString tfn = QPEApplication::qpeDir()+"/i18n/" + lang + "/" + type + ".qm";
-                if ( trans->load( tfn ) )  {
-                    qApp->installTranslator( trans );
-                }  else {
-                    delete trans;
-                }
+            qDebug( "Languages: " + lang );
+            QTranslator * trans = new QTranslator( qApp );
+            QString tfn = QPEApplication::qpeDir()+"/i18n/" + lang + "/" + type + ".qm";
+            if ( trans->load( tfn ) )  {
+                qApp->installTranslator( trans );
+            }  else {
+                delete trans;
             }
 
 

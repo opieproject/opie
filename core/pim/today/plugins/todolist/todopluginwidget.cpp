@@ -63,7 +63,14 @@ void TodolistPluginWidget::readConfig() {
     m_maxCharClip =  cfg.readNumEntry( "maxcharclip", 38 );
 }
 
-void TodolistPluginWidget:: refresh()  {
+void TodolistPluginWidget:: refresh() {
+    todo->reload();
+    getTodo();
+}
+
+void TodolistPluginWidget::reinitialize() {
+    readConfig();
+    todo->reload();
     getTodo();
 }
 
@@ -79,7 +86,7 @@ void TodolistPluginWidget::getTodo() {
     int ammount = 0;
 
     // get overdue todos first
-    m_list = todo->overDue();
+    m_list = todo->sorted( true, 3, 2, 1);
 
     for ( m_it = m_list.begin(); m_it != m_list.end(); ++m_it ) {
         if (!(*m_it).isCompleted() && ( ammount < m_maxLinesTask ) ) {
@@ -87,7 +94,7 @@ void TodolistPluginWidget::getTodo() {
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
             }
-            tmpout += "<font color=#e00000><b>-" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
+            tmpout += "<font color=#e00000><b>[" +  QString("%1").arg((*m_it).priority() )  + "]" + desc.mid( 0, m_maxCharClip ) + "</b></font><br>";
             ammount++ ;
         }
     }
@@ -104,7 +111,7 @@ void TodolistPluginWidget::getTodo() {
             if( desc.isEmpty() ) {
                 desc = (*m_it).description();
             }
-            tmpout += "<b>-</b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
+            tmpout += "<b> [" +  QString("%1").arg((*m_it).priority() )  + "] </b>" + desc.mid( 0, m_maxCharClip ) + "<br>";
             ammount++;
         }
     }

@@ -1,7 +1,7 @@
 /*
  * todayconfig.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiß
+ * copyright   : (c) 2002, 2003 by Maximilian Reiß
  * email       : harlekin@handhelds.org
  *
  */
@@ -76,54 +76,13 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal )
     tab2Layout->addWidget( hbox1 );
     TabWidget3->addTab( tab_2, "pass", tr( "active/order" ) );
 
+    // Misc tab
     tab_3 = new QWidget( TabWidget3, "tab_3" );
     QVBoxLayout *tab3Layout = new QVBoxLayout( tab_3 );
-    tab3Layout->setMargin( 20 );
-    QHBox *hbox_auto = new QHBox( tab_3 );
-    TextLabel2 = new QLabel( hbox_auto, "AutoStart" );
-    TextLabel2->setText( tr( "autostart on \nresume?\n (Opie only)" ) );
-    QWhatsThis::add( TextLabel2 , tr( "Check this if today should be autostarted on resume." ) );
-    CheckBoxAuto = new QCheckBox( hbox_auto, "CheckBoxAuto" );
-    QWhatsThis::add( CheckBoxAuto, tr( "Check this if today should be autostarted on resume." ) );
 
-    QHBox *hbox_hide = new QHBox( tab_3 );
-    TextLabel4 = new QLabel( hbox_hide, "HideBanner" );
-    TextLabel4->setText( tr( "Tiny Banner" ) );
-    //QWhatsThis::add( TextLabel2 , tr( "Check this if today should be autostarted on resume." ) );
-    CheckBoxHide = new QCheckBox( hbox_hide, "CheckBoxHide" );
-    // QWhatsThis::add( CheckBoxAuto, tr( "Check this if today should be autostarted on resume." ) );
+    m_guiMisc = new TodayConfigMiscBase( tab_3 );
 
-    QHBox *hbox_inactive = new QHBox( tab_3 );
-    TimeLabel = new QLabel( hbox_inactive, "TimeLabel" );
-    TimeLabel->setText( tr( "minutes inactive" ) );
-    QWhatsThis::add( TimeLabel , tr( "How many minutes has the PDA been suspended before the autostart feature kicks in on resume" ) );
-    SpinBoxTime = new QSpinBox( hbox_inactive, "TimeSpinner" );
-    SpinBoxTime->setMaxValue ( 1440 );
-    QWhatsThis::add( SpinBoxTime , tr( "How many minutes has the PDA been suspended before the autostart feature kicks in on resume" ) );
-    QHBox *hbox_iconSize = new QHBox( tab_3 );
-    QLabel *iconSizeLabel = new QLabel( hbox_iconSize, "iconSizeLabel" );
-    iconSizeLabel->setText( tr( "Icon size" ) );
-    QWhatsThis::add( iconSizeLabel, tr( "Set the icon size in pixel" ) );
-    SpinBoxIconSize = new QSpinBox( hbox_iconSize, "TimeSpinner" );
-    SpinBoxIconSize->setMaxValue( 32 );
-    QWhatsThis::add( SpinBoxIconSize, tr( "Set the icon size in pixel" ) );
-
-    QHBox *hbox_refresh = new QHBox( tab_3 );
-    QLabel *refreshLabel = new QLabel( hbox_refresh );
-    refreshLabel->setText( tr( "Refresh" ) );
-    QWhatsThis::add( refreshLabel, tr( "How often should Today refresh itself" ) );
-    SpinRefresh = new QSpinBox( hbox_refresh );
-    SpinRefresh->setMinValue( 0 );
-    SpinRefresh->setSuffix( tr( " sec" ) );
-    SpinRefresh->setMaxValue ( 7200 );
-    SpinRefresh->setSpecialValueText ( tr("never") );
-    QWhatsThis::add(  SpinRefresh, tr( "How often should Today refresh itself" ) );
-
-    tab3Layout->addWidget( hbox_auto );
-    tab3Layout->addWidget( hbox_hide );
-    tab3Layout->addWidget( hbox_inactive );
-    tab3Layout->addWidget( hbox_iconSize );
-    tab3Layout->addWidget( hbox_refresh );
+    tab3Layout->addWidget( m_guiMisc );
     TabWidget3->addTab( tab_3, "SettingsIcon", tr( "Misc" ) );
 
     m_applets_changed = false;
@@ -161,15 +120,15 @@ void TodayConfig::readConfig() {
     Config cfg( "today" );
     cfg.setGroup( "Autostart" );
     m_autoStart = cfg.readNumEntry( "autostart", 1 );
-    CheckBoxAuto->setChecked( m_autoStart );
+    m_guiMisc->CheckBoxAuto->setChecked( m_autoStart );
     m_autoStartTimer = cfg.readNumEntry( "autostartdelay", 0 );
-    SpinBoxTime->setValue( m_autoStartTimer );
+    m_guiMisc->SpinBoxTime->setValue( m_autoStartTimer );
 
     cfg.setGroup( "General" );
     m_iconSize = cfg.readNumEntry( "IconSize", 18 );
-    SpinBoxIconSize->setValue( m_iconSize );
-    SpinRefresh->setValue( cfg.readNumEntry( "checkinterval", 15000 ) / 1000 );
-    CheckBoxHide->setChecked( cfg.readNumEntry( "HideBanner", 0 ) );
+    m_guiMisc->SpinBoxIconSize->setValue( m_iconSize );
+    m_guiMisc->SpinRefresh->setValue( cfg.readNumEntry( "checkinterval", 15000 ) / 1000 );
+    m_guiMisc->CheckBoxHide->setChecked( cfg.readNumEntry( "HideBanner", 0 ) );
 
 
     cfg.setGroup( "Plugins" );
@@ -209,16 +168,16 @@ void TodayConfig::writeConfig() {
     }
 
     cfg.setGroup( "Autostart" );
-    m_autoStart = CheckBoxAuto->isChecked();
+    m_autoStart = m_guiMisc->CheckBoxAuto->isChecked();
     cfg.writeEntry( "autostart",  m_autoStart );
-    m_autoStartTimer = SpinBoxTime->value();
+    m_autoStartTimer = m_guiMisc->SpinBoxTime->value();
     cfg.writeEntry( "autostartdelay", m_autoStartTimer );
-    m_iconSize = SpinBoxIconSize->value();
+    m_iconSize = m_guiMisc->SpinBoxIconSize->value();
 
     cfg.setGroup( "General" );
     cfg.writeEntry( "IconSize", m_iconSize );
-    cfg.writeEntry( "HideBanner",  CheckBoxHide->isChecked() );
-    cfg.writeEntry( "checkinterval", SpinRefresh->value()*1000 );
+    cfg.writeEntry( "HideBanner",  m_guiMisc->CheckBoxHide->isChecked() );
+    cfg.writeEntry( "checkinterval", m_guiMisc->SpinRefresh->value()*1000 );
 
     // set autostart settings
     setAutoStart();

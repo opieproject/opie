@@ -41,6 +41,7 @@ public:
     QString appName() const;
     bool excludeFromRefresh() const;
     void refresh();
+    void reinitialize();
 
  private:
     QGuardedPtr<TodolistPluginWidget> m_widget;

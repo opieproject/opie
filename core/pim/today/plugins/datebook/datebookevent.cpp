@@ -1,7 +1,7 @@
 /*
  * datebookevent.cpp
  *
- * copyright   : (c) 2002 by Maximilian Reiﬂ
+ * copyright   : (c) 2002, 2003 by Maximilian Reiﬂ
  * email       : harlekin@handhelds.org
  *
  */
@@ -19,6 +19,7 @@
 #include <qpe/timestring.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/qpeapplication.h>
+#include <qpe/calendar.h>
 
 #include <opie/odevice.h>
 
@@ -28,6 +29,7 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
 			     QWidget* parent,
 			     bool show_location,
 			     bool show_notes,
+                             bool timeExtraLine,
                              int maxCharClip,
                              const char* name,
 			     WFlags fl) :
@@ -52,17 +54,25 @@ DateBookEvent::DateBookEvent(const EffectiveEvent &ev,
         msg += "<BR><i>" + (ev).location() + "</i>";
     }
 
+    QString timeSpacer = "   ";
+    if ( timeExtraLine )  {
+        timeSpacer = "<br>";
+    }
+
     if ( ( TimeString::timeString( QTime( (ev).event().start().time() ) ) == "00:00" )
          &&  ( TimeString::timeString( QTime( (ev).event().end().time() ) ) == "23:59" ) ) {
-        msg += "<br>All day";
+        msg += tr ( "All day" );
     }  else {
         // start time of event
-        QDate tempDate = (ev).event().start().date();
-        msg += "<br>"
-               + ampmTime( QTime( (ev).event().start().time() ) )
+//         QDate tempDate = (ev).event().start().date();
+        msg += timeSpacer;
+        msg += ampmTime( QTime( (ev).event().start().time() ) )
                // end time of event
-               + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) )
-               + differDate( tempDate );
+               + "<b> - </b>" + ampmTime( QTime( (ev).event().end().time() ) );
+    }
+
+    if ( (ev).date() != QDate::currentDate() )  {
+        msg += differDate( (ev).date() /* tempDate*/ );
     }
 
     // include possible note or not
@@ -101,18 +111,18 @@ QString DateBookEvent::ampmTime( QTime tm ) {
 }
 
 QString DateBookEvent::differDate( QDate date ) {
-    QDate currentDate = QDate::currentDate();
+//     QDate currentDate = QDate::currentDate();
     QString returnText = "<font color = #407DD9><b> ";
-    int differDate = currentDate.daysTo( date );
-    if ( currentDate.dayOfWeek() == date.dayOfWeek() ) {
-        returnText += "" ;
-        // not working right for recurring events
-        //} else if ( differDate == 1 ) {
-        //returnText += tr( "tomorrow" );
-    } else {
-        //returnText += tr( "in %1 days" ).arg( differDate );
-        returnText += "   [ " + date.dayName( date.dayOfWeek() ) + " ] ";
-    }
+//     int differDate = currentDate.daysTo( date );
+//     if ( currentDate.dayOfWeek() == date.dayOfWeek() ) {
+//         returnText += "" ;
+//         // not working right for recurring events
+//         //} else if ( differDate == 1 ) {
+//         //returnText += tr( "tomorrow" );
+//     } else {
+//          returnText += "   [ " + Calendar::nameOfDay( date.dayOfWeek() )  + " ] ";
+//     }
+    returnText += "   [ " + Calendar::nameOfDay( date.dayOfWeek() )  + " ] ";
     returnText += "</b></font>";
     return returnText;
 }
@@ -126,7 +136,7 @@ void DateBookEvent::editEventSlot( const Event &e ) {
     if ( ODevice::inst()->system() == System_Zaurus ) {
         QCopEnvelope env( "QPE/Application/datebook", "raise()" );
     } else {
-        QCopEnvelope env( "QPE/Datebook", "editEvent(int)" );
+        QCopEnvelope env( "QPE/Application/datebook", "editEvent(int)" );
         env << e.uid();
     }
 }

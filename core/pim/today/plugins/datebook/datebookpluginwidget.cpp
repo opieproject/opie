@@ -30,11 +30,6 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
     db = 0l;
     m_layoutDates = 0l;
 
-    if ( db ) {
-        delete db;
-    }
-    db = new DateBookDB;
-
     if ( m_layoutDates )  {
         delete m_layoutDates;
     }
@@ -45,7 +40,6 @@ DatebookPluginWidget::DatebookPluginWidget( QWidget *parent, const char* name )
 
     readConfig();
     getDates();
-    m_layoutDates->addStretch(5);
 }
 
 DatebookPluginWidget::~DatebookPluginWidget() {
@@ -62,6 +56,12 @@ void DatebookPluginWidget::readConfig() {
     m_show_notes = cfg.readNumEntry( "shownotes", 0 );
     m_onlyLater = cfg.readNumEntry( "onlylater", 1 );
     m_moreDays = cfg.readNumEntry( "moredays", 0 );
+    m_timeExtraLine = cfg.readNumEntry( "timeextraline",  1 );
+}
+
+void DatebookPluginWidget::reinitialize()  {
+    readConfig();
+    refresh();
 }
 
 void DatebookPluginWidget::refresh()  {
@@ -74,13 +74,18 @@ void DatebookPluginWidget::refresh()  {
     m_layoutDates->setAutoAdd( true );
 
     getDates();
-    m_layoutDates->addStretch(5);
 }
 
 /**
  *  Get all events that are in the datebook xml file for today
  */
 void DatebookPluginWidget::getDates() {
+
+
+    if ( db ) {
+        delete db;
+    }
+    db = new DateBookDB;
 
     QDate date = QDate::currentDate();
     QValueList<EffectiveEvent> list = db->getEffectiveEvents( date, date.addDays( m_moreDays )  );
@@ -94,18 +99,31 @@ void DatebookPluginWidget::getDates() {
             if ( count < m_max_lines_meet ) {
                 if ( !m_onlyLater ) {
                     count++;
-                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
+                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
                     m_eventsList.append( l );
                     l->show();
                     QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                } else if ( QDateTime::currentDateTime()  <= (*it).event().end() ||  (*it).event().start().date() != date  ) {
-                    count++;
-                    // show only later appointments
-                    DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes );
-                    m_eventsList.append( l );
-                    l->show();
-                    QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
-                }
+                } else { 
+			if ( ( QDateTime::currentDateTime()  <=  (*it).event().end() )  
+			     // Show events which span over many days and are not elapsed.
+			     || ( ( (*it).event().start().date() != date ) &&  (  QDateTime::currentDateTime()  <=  (*it).event().end() )  )
+			     // Show repeated event for today that is not elapsed.
+ 			     || ( ( (*it).event().repeatType() != Event::NoRepeat )
+				  && ( ( date.dayOfWeek() == (*it).date().dayOfWeek() ) 
+				       && ( QTime::currentTime() < (*it).event().start().time() ) ) ) 
+			     // Show repeated event for next days.
+			     || ( ( (*it).event().repeatType() != Event::NoRepeat )
+				  && ( date.dayOfWeek() != (*it).date().dayOfWeek() ) )  
+			     ) 
+			     {
+				count++;
+				// show only later appointments
+				DateBookEvent *l = new DateBookEvent( *it, this, m_show_location, m_show_notes, m_timeExtraLine );
+				m_eventsList.append( l );
+				l->show();
+				QObject::connect ( l, SIGNAL( editEvent( const Event & ) ), l, SLOT( editEventSlot( const Event & ) ) );
+			     }
+		}
             }
         }
         if ( m_onlyLater && count == 0 ) {

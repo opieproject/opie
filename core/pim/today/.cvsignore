@@ -1,3 +1,5 @@
 *.moc
 Makefile*
 moc_*
+todayconfigmiscbase.cpp
+todayconfigmiscbase.h

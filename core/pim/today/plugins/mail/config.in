@@ -1,4 +1,4 @@
   config TODAY_MAIL
-    boolean "opie-today-mailplugin (mail plugin)"
+    boolean "mail"
     default "y"
     depends ( LIBQPE || LIBQPE-X11 ) && LIBOPIE

@@ -1,3 +1,9 @@
+0.7
+
+* now all plugins in a big scrollview
+* config dialogs guis are ui files now
+* plugin interface has one new virtual method - reinitialize ( used when coming back from config dialog )
+
 0.6.2
 
 * header can now be made smaller

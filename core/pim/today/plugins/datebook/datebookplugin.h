@@ -39,6 +39,7 @@ public:
     QString appName() const;
     bool excludeFromRefresh() const;
     void refresh();
+    void reinitialize();
 
  private:
     QGuardedPtr<DatebookPluginWidget> m_widget;
