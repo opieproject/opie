@@ -27,6 +27,10 @@ MediaWidget::MediaWidget( QWidget *parent, const char *name )
 {
     connect( mediaPlayerState, SIGNAL( displayTypeChanged( MediaPlayerState::DisplayType ) ),
              this, SLOT( setDisplayType( MediaPlayerState::DisplayType ) ) );
+    connect( mediaPlayerState, SIGNAL( lengthChanged( long ) ),
+             this, SLOT( setLength( long ) ) );
+    connect( mediaPlayerState, SIGNAL( playingToggled( bool ) ),
+             this, SLOT( setPlaying( bool ) ) );
 }
 
 MediaWidget::~MediaWidget()

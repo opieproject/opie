@@ -138,9 +138,6 @@ MediaWidget( parent, name ), scaledWidth( 0 ), scaledHeight( 0 ) {
 
     resizeEvent( NULL );
 
-    connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
-
     setLength( mediaPlayerState->length() );
     setPosition( mediaPlayerState->position() );
     setFullscreen( mediaPlayerState->isFullscreen() );

@@ -33,6 +33,8 @@ public:
 
 public slots:
     virtual void setDisplayType( MediaPlayerState::DisplayType displayType ) = 0;
+    virtual void setLength( long length ) = 0;
+    virtual void setPlaying( bool playing ) = 0;
 };
 
 #endif // MEDIAWIDGET_H

@@ -159,9 +159,7 @@ AudioWidget::AudioWidget(QWidget* parent, const char* name) :
 
     resizeEvent( NULL );
 
-    connect( mediaPlayerState, SIGNAL( lengthChanged(long) ),  this, SLOT( setLength(long) ) );
     connect( mediaPlayerState, SIGNAL( loopingToggled(bool) ), this, SLOT( setLooping(bool) ) );
-    connect( mediaPlayerState, SIGNAL( playingToggled(bool) ), this, SLOT( setPlaying(bool) ) );
     connect( mediaPlayerState, SIGNAL( isSeekableToggled( bool ) ), this, SLOT( setSeekable( bool ) ) );
 
     connect( this,  SIGNAL( forwardClicked() ), this, SLOT( skipFor() ) );

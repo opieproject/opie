@@ -76,13 +76,13 @@ public slots:
     void sliderPressed( );
     void sliderReleased( );
     void setLooping( bool b) { setToggleButton( AudioLoop, b ); }
-    void setPlaying( bool b) { setToggleButton( AudioPlay, b ); }
     void setPosition( long );
-    void setLength( long );
     void setSeekable( bool );
 
 public:
-    void setDisplayType( MediaPlayerState::DisplayType displayType );
+    virtual void setLength( long );
+    virtual void setPlaying( bool b) { setToggleButton( AudioPlay, b ); }
+    virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
     void moreClicked();

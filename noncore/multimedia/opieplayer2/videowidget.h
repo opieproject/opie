@@ -65,13 +65,15 @@ public slots:
     void updateSlider( long, long );
     void sliderPressed( );
     void sliderReleased( );
-    void setPlaying( bool b);
     void setFullscreen( bool b );
     void makeVisible();
     void backToNormal();
     void setPosition( long );
-    void setLength( long );
-    void setDisplayType( MediaPlayerState::DisplayType displayType );
+
+public:
+    virtual void setPlaying( bool b);
+    virtual void setLength( long );
+    virtual void setDisplayType( MediaPlayerState::DisplayType displayType );
 
 signals:
     void moreClicked();
