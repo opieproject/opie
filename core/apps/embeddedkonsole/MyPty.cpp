@@ -163,7 +163,8 @@ int MyPty::run(const char* cmd, QStrList &, const char*, int)
   ttmode.c_cc[VINTR] = 3;
   ttmode.c_cc[VERASE] = 8;
   tcsetattr( STDIN_FILENO, TCSANOW, &ttmode );
-  setenv("TERM","vt100",1);
+  if(strlen(getenv("TERM"))<=0)
+     setenv("TERM","vt100",1);
   setenv("COLORTERM","0",1);
 
   if (getuid() == 0) {

@@ -93,6 +93,7 @@ int fork_with_pidfile ( void )
 		perror ( "forking failed" );
 		return 0;
 	}	
+	//	sleep( 60 );
 
 	// child process needs to react to SIGUSR2. This is sent when
 	// a new opiealarm process is started.
@@ -206,7 +207,7 @@ int main ( int argc, char **argv )
 
 int suspend ( int fix_rtc )
 {
-	FILE *fp;
+	FILE *fp = NULL;
 	char buf [64];
 	time_t alrt, syst, rtct;
 	struct tm alr, sys, rtc;
@@ -258,7 +259,7 @@ int suspend ( int fix_rtc )
 			break; //  ( 1, TIMEFILE );
 
 		fclose ( fp );
-		fp = 0;
+		fp = NULL;
 	
 		alrt = atoi ( buf ); // get the alarm time
 
@@ -371,7 +372,7 @@ int resume ( int resuspend )
 			
 				remove_pidfile ( );
 			
-				// no need for system() since this process is no longer usefull anyway
+				// no need for system() since this process is no longer usefull anyway				
 				execv ( "/opt/QtPalmtop/bin/qcop", argv );
 				
 				perror ( "exec for qcop failed" );

@@ -43,8 +43,12 @@ private slots:
     void changePassCode();
     void clearPassCode();
     void setSyncNet(const QString&);
+    void changeLoginName(int);
+    void toggleAutoLogin(bool);
+
 
 private:
+    void loadUsers(void);
     bool telnetAvailable() const;
     bool sshAvailable() const;
     void updateGUI();
@@ -55,6 +59,8 @@ private:
     QString enterPassCode(const QString&);
     QString passcode;
     bool valid;
+    bool autoLogin;
+    QString autoLoginName;
 
     QPEDialogListener *dl;
 };

@@ -1,5 +1,6 @@
 /**********************************************************************
 ** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
+** Copyright (C) 2003 zecke
 **
 ** This file is part of the Qtopia Environment.
 **
@@ -17,17 +18,25 @@
 ** not clear to you.
 **
 **********************************************************************/
+#ifndef HELP_BROWSER_MAGIC_TEXT_BROWSER_H
+#define HELP_BROWSER_MAGIC_TEXT_BROWSER_H
 
-#include "helpbrowser.h"
+#include <qtextbrowser.h>
 
-#include <qtopia/qpeapplication.h>
+class MagicTextBrowser : public QTextBrowser {
+public:
+    MagicTextBrowser(QWidget* parent);
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
+    void setSource( const QString& source );
 
-    HelpBrowser mw;
-    a.showMainWidget( &mw );
+    /** honor QPE Attributes */
+    bool magicQpe(const QString& source, const QString& name);
+    /** honor OPIE Attributes */
+    bool magicOpe(const QString& source, const QString& name );
+private:
 
-    return a.exec();
-}
+    QString generateQpe(const QString& name) const;
+    QString generateOpe(const QString& name) const;
+};
+
+#endif

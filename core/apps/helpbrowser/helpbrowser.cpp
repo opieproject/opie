@@ -1,7 +1,7 @@
-#/**********************************************************************
-** Copyright (C) 2000 Trolltech AS.  All rights reserved.
+/**********************************************************************
+** Copyright (C) 2000-2002 Trolltech AS.  All rights reserved.
 **
-** This file is part of Qtopia Environment.
+** This file is part of the Qtopia Environment.
 **
 ** This file may be distributed and/or modified under the terms of the
 ** GNU General Public License version 2 as published by the Free Software
@@ -18,10 +18,14 @@
 **
 **********************************************************************/
 
+#define QTOPIA_INTERNAL_LANGLIST
+
 #include "helpbrowser.h"
 
 #include <qpe/qpeapplication.h>
 #include <qpe/resource.h>
+#include <qpe/mimetype.h>
+#include <qpe/applnk.h>
 #include <qpe/global.h>
 
 #include <qstatusbar.h>
@@ -30,6 +34,7 @@
 #include <qpopupmenu.h>
 #include <qpe/qpemenubar.h>
 #include <qpe/qpetoolbar.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <qtoolbutton.h>
 #include <qiconset.h>
 #include <qfile.h>
@@ -48,8 +53,9 @@
 #include <qpaintdevicemetrics.h>
 #include <qaction.h>
 
-#include <ctype.h>
+#include <cctype>
 
+#include "magictextbrowser.h"
 
 HelpBrowser::HelpBrowser( QWidget* parent, const char *name, WFlags f )
     : QMainWindow( parent, name, f ),
@@ -58,11 +64,14 @@ HelpBrowser::HelpBrowser( QWidget* parent, const char *name, WFlags f )
     init( "index.html" );
 }
 
+
+
 void HelpBrowser::init( const QString& _home )
 {
-    setIcon( Resource::loadPixmap( "help_icon" ) );
+    setIcon( Resource::loadPixmap( "HelpBrowser" ) );
+    setBackgroundMode( PaletteButton );
 
-    browser = new QTextBrowser( this );
+    browser = new MagicTextBrowser( this );
     browser->setFrameStyle( QFrame::Panel | QFrame::Sunken );
     connect( browser, SIGNAL( textChanged() ),
 	     this, SLOT( textChanged() ) );
@@ -80,12 +89,12 @@ void HelpBrowser::init( const QString& _home )
     toolbar = new QPEToolBar( this );
     // addToolBar( toolbar, "Toolbar");
 
-    //QPopupMenu* go = new QPopupMenu( this );
+    QPopupMenu* go = new QPopupMenu( this );
     backAction = new QAction( tr( "Backward" ), Resource::loadIconSet( "back" ), QString::null, 0, this, 0 );
     connect( backAction, SIGNAL( activated() ), browser, SLOT( backward() ) );
     connect( browser, SIGNAL( backwardAvailable( bool ) ),
 	     backAction, SLOT( setEnabled( bool ) ) );
-    //backAction->addTo( go );
+    backAction->addTo( go );
     backAction->addTo( toolbar );
     backAction->setEnabled( FALSE );
 
@@ -93,14 +102,13 @@ void HelpBrowser::init( const QString& _home )
     connect( forwardAction, SIGNAL( activated() ), browser, SLOT( forward() ) );
     connect( browser, SIGNAL( forwardAvailable( bool ) ),
 	     forwardAction, SLOT( setEnabled( bool ) ) );
-    //forwardAction->addTo( go );
+    forwardAction->addTo( go );
     forwardAction->addTo( toolbar );
     forwardAction->setEnabled( FALSE );
 
-    QAction *a = new QAction( tr( "Home" ), Resource::loadPixmap(
-"home" ), QString::null, 0, this, 0 );
+    QAction *a = new QAction( tr( "Home" ), Resource::loadIconSet( "home" ), QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), browser, SLOT( home() ) );
-    //a->addTo( go );
+    a->addTo( go );
     a->addTo( toolbar );
 
     bookm = new QPopupMenu( this );
@@ -112,11 +120,18 @@ void HelpBrowser::init( const QString& _home )
 
     readBookmarks();
 
-    //menu->insertItem( tr("Go"), go );
+    menu->insertItem( tr("Go"), go );
     menu->insertItem( tr( "Bookmarks" ), bookm );
 
     resize( 240, 300 );
     browser->setFocus();
+    browser->setFrameStyle( QFrame::NoFrame );
+
+#if !defined(QT_NO_COP)
+        QCopChannel *addressChannel = new QCopChannel("QPE/HelpBrowser" , this );
+        connect (addressChannel, SIGNAL( received(const QCString &, const QByteArray &)),
+                 this, SLOT ( appMessage(const QCString &, const QByteArray &) ) );
+#endif
 
     connect( qApp, SIGNAL(appMessage(const QCString&, const QByteArray&)),
 	     this, SLOT(appMessage(const QCString&, const QByteArray&)) );
@@ -124,11 +139,18 @@ void HelpBrowser::init( const QString& _home )
 
 void HelpBrowser::appMessage(const QCString& msg, const QByteArray& data)
 {
+	qDebug("reached appMessage");
     if ( msg == "showFile(QString)" ) {
 	QDataStream ds(data,IO_ReadOnly);
 	QString fn;
 	ds >> fn;
 	setDocument( fn );
+
+        QPEApplication::setKeepRunning();
+
+	showMaximized();
+	setActiveWindow();
+	raise();
     }
 }
 

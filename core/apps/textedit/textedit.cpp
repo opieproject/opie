@@ -569,7 +569,6 @@ void TextEdit::fileNew() {
 void TextEdit::fileOpen() {
     Config cfg("TextEdit");
     cfg. setGroup ( "View" );
-    QString dir = cfg.readEntry("LastOpenDirectory", QPEApplication::documentDir());
     QMap<QString, QStringList> map;
     map.insert(tr("All"), QStringList() );
     QStringList text;
@@ -578,11 +577,10 @@ void TextEdit::fileOpen() {
     text << "*";
     map.insert(tr("All"), text );
     QString str = OFileDialog::getOpenFileName( 2,
-                                                dir ,
+                                                QString::null ,
                                                 QString::null, map);
     if( !str.isEmpty() && QFile(str).exists() && !QFileInfo(str).isDir() )
     {
-       cfg.writeEntry("LastOpenDirectory",  QFileInfo(str).dirPath(false));
        openFile( str );
     }
     else
@@ -976,7 +974,7 @@ void TextEdit::updateCaption( const QString &name ) {
         }
 //         if(s.left(1) == "/")
 //             s = s.right(s.length()-1);
-        setCaption( s + " - " + tr("Text Editor") );
+        setCaption( tr("%1 - Text Editor").arg( s ) );
     }
 }
 
@@ -1022,7 +1020,7 @@ void TextEdit::editDelete() {
     switch ( QMessageBox::warning(this,tr("Text Editor"),
                                   tr("Do you really want<BR>to <B>delete</B> "
                                      "the current file\nfrom the disk?<BR>This is "
-                                     "<B>irreversable!!</B>"),
+                                     "<B>irreversable!</B>"),
                                   tr("Yes"),tr("No"),0,0,1) ) {
       case 0:
           if(doc) {

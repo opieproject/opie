@@ -54,6 +54,7 @@
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qfile.h>
+#include <qtextstream.h>
 
 #include "loginapplication.h"
 #include "loginwindowimpl.h"
@@ -74,6 +75,7 @@ static struct option long_options [] = {
 
 int main ( int argc, char **argv )
 {
+    int userExited = 0;
 	pid_t ppid = ::getpid ( );
 
 	if ( ::geteuid ( ) != 0 ) {
@@ -137,11 +139,17 @@ int main ( int argc, char **argv )
 				}
 			}
 			int killedbysig = 0;
+            userExited=0;
+            if (WIFEXITED(status)!=0 ) {
+                if (WEXITSTATUS(status)==137)  {
+                    userExited=1;
+                }
+            }
 
 			if ( WIFSIGNALED( status )) {
 				switch ( WTERMSIG( status )) {
-					case SIGINT :
 					case SIGTERM:
+					case SIGINT :
 					case SIGKILL:
 						break;
 
@@ -162,7 +170,7 @@ int main ( int argc, char **argv )
 
 				const char *sig = ::strsignal ( killedbysig );
 				QLabel *l = new QLabel ( 0, "sig", Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool );
-				l-> setText ( LoginWindowImpl::tr( "OPIE was terminated\nby an uncaught signal\n(%1)\n" ). arg ( sig ));
+				l-> setText ( LoginWindowImpl::tr( "Opie was terminated\nby an uncaught signal\n(%1)\n" ). arg ( sig ));
 				l-> setAlignment ( Qt::AlignCenter );
 				l-> move ( 0, 0 );
 				l-> resize ( app-> desktop ( )-> width ( ), app-> desktop ( )-> height ( ));
@@ -175,7 +183,8 @@ int main ( int argc, char **argv )
 		}
 		else {
 			if ( !autolog ) {
-				Config cfg ( "opie-login" );
+                QString confFile=QPEApplication::qpeDir() + "/etc/opie-login.conf";
+				Config cfg ( confFile, Config::File );
 				cfg. setGroup ( "General" );
 				QString user = cfg. readEntry ( "AutoLogin" );
 				
@@ -183,16 +192,23 @@ int main ( int argc, char **argv )
 					autolog = ::strdup ( user. latin1 ( ));
 			}
 		
-			if ( autolog ) {
-				LoginApplication::setLoginAs ( autolog );
+			if ( autolog && !userExited ) {
+
+                QWSServer::setDesktopBackground( QImage() );
+                ODevice::inst ( )-> setDisplayStatus ( true );
+                ODevice::inst ( )-> setSoftSuspend ( false );
+                LoginApplication *app = new LoginApplication ( argc, argv, ppid );
+                LoginApplication::setLoginAs ( autolog );
+  
 
 				if ( LoginApplication::changeIdentity ( ))
 					::exit ( LoginApplication::login ( ));
 				else
 					::exit ( 0 );
 			}
-			else 
+			else  {
 				::exit ( login_main ( argc, argv, ppid ));
+            }
 		}
 	}
 	return 0;
@@ -355,7 +371,7 @@ int login_main ( int argc, char **argv, pid_t ppid )
 
 			// if login succeeds, it never comes back
 
-			QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ), LoginWindowImpl::tr( "Could not start OPIE." ));
+			QMessageBox::critical ( 0, LoginWindowImpl::tr( "Failure" ), LoginWindowImpl::tr( "Could not start Opie." ));
 			rc = 1;
 		}
 		else {
