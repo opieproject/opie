@@ -74,7 +74,6 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     }
 
     Config config( "qpe" );
-
     config.setGroup( "Screensaver" );
 
     int interval;
@@ -139,8 +138,8 @@ LightSettings::LightSettings( QWidget* parent,  const char* name, WFlags fl )
     connect( LightStepSpin, SIGNAL( valueChanged( int ) ), this, SLOT( slotSliderTicks( int ) ) ) ;
     LightShiftSpin->setValue( config.readNumEntry("Shift", 0 ) );
 
-    connect(brightness, SIGNAL(valueChanged(int)), this, SLOT(applyBrightness()));
-    connect(brightness_ac_3, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightnessAC() ) );
+    connect( brightness, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightness() ) );
+    connect( brightness_ac_3, SIGNAL( valueChanged(int) ), this, SLOT( applyBrightnessAC() ) );
 }
 
 LightSettings::~LightSettings()
@@ -153,7 +152,7 @@ void LightSettings::slotSliderTicks( int steps ) {
 
 static void set_fl(int bright)
 {
-    qDebug( QString("BRIGHT !! : %1").arg( bright ) );
+    qDebug ( QString( "Brightness" ).arg( bright ) );
     QCopEnvelope e("QPE/System", "setBacklight(int)" );
     e << bright;
 }
@@ -240,7 +239,7 @@ void LightSettings::accept()
 
 void LightSettings::applyBrightness()
 {
-    if ( !PowerStatus::Online ) {
+    if (  PowerStatusManager::readStatus().acStatus() != PowerStatus::Online ) {
         int bright = ( brightness->value() ) * 255 / brightness->maxValue();
         set_fl(bright);
     }
@@ -248,9 +247,8 @@ void LightSettings::applyBrightness()
 
 void LightSettings::applyBrightnessAC()
 {
-     qDebug( QString("SLIDER : %1").arg(  brightness_ac_3->value() ) );
     // if ac is attached, set directly that sliders setting, else the "on battery" sliders setting
-    if ( PowerStatus::Online ) {
+    if ( PowerStatusManager::readStatus().acStatus() ==  PowerStatus::Online ) {
         int bright = ( brightness_ac_3->value() ) * 255  / brightness_ac_3->maxValue();
         set_fl(bright);
     }

@@ -758,10 +758,6 @@
                                     <name>tickmarks</name>
                                     <enum>Right</enum>
                                 </property>
-                                <property stdset="1">
-                                    <name>tickInterval</name>
-                                    <number>32</number>
-                                </property>
                             </widget>
                             <widget>
                                 <class>QLayoutWidget</class>
