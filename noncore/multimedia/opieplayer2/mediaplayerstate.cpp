@@ -141,7 +141,7 @@ void MediaPlayerState::setShuffled( bool b ) {
     emit shuffledToggled(b);
 }
 
-void MediaPlayerState::setPlaylist( bool b ) {
+void MediaPlayerState::setUsingPlaylist( bool b ) {
     if ( usePlaylist  == b ) {
         return;
     }
@@ -254,7 +254,7 @@ void MediaPlayerState::toggleShuffled() {
 }
 
 void MediaPlayerState::togglePlaylist() {
-    setPlaylist( !usePlaylist);
+    setUsingPlaylist( !usePlaylist);
 }
 
 void MediaPlayerState::togglePaused() {

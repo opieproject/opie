@@ -71,7 +71,7 @@ public slots:
     void setScaled( bool b );
     void setLooping( bool b );
     void setShuffled( bool b );
-    void setPlaylist( bool b );
+    void setUsingPlaylist( bool b );
     void setPaused( bool b );
     void setPlaying( bool b );
     void setStopped( bool b );
