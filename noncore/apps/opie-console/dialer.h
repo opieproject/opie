@@ -12,7 +12,7 @@ class Dialer : public QDialog
 {
 	Q_OBJECT
 	public:
-		Dialer(const Profile& profile, QWidget *parent = NULL, const char *name = NULL);
+		Dialer(const Profile& profile, int fd, QWidget *parent = NULL, const char *name = NULL);
 		~Dialer();
 
 	public slots:
@@ -45,6 +45,7 @@ class Dialer : public QDialog
 		int state;
 		int usercancel;
 		const Profile& m_profile;
+		int m_fd;
 };
 
 #endif

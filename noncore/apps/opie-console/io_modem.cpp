@@ -24,7 +24,7 @@ bool IOModem::open() {
     bool ret = IOSerial::open();
 	if(!ret) return false;
 
-	Dialer d(m_profile);
+	Dialer d(m_profile, rawIO());
 
 	int result = d.exec();
 	if(result == QDialog::Accepted)
