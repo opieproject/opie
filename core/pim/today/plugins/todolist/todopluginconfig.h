@@ -23,7 +23,7 @@
 #include <opie/todayconfigwidget.h>
 
 class TodolistPluginConfig : public TodayConfigWidget {
-
+    Q_OBJECT
 
 public:
 
