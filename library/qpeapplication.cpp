@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.48.2.5 2003-06-10 17:41:07 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.48.2.6 2003-07-31 07:20:32 harlekin Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -991,19 +991,19 @@ void QPEApplication::applyStyle()
 	}
 
 	// Widget style
-	QString style = config.readEntry( "Style", "Light" );
+	QString style = config.readEntry( "Style", "FlatStyle" );
 
 	// don't set a custom style
 	if ( nostyle & Opie::Force_Style )
-		style = "Light";
+		style = "FlatStyle";
 
 	internalSetStyle ( style );
 
-	// Colors
-	QColor bgcolor( config.readEntry( "Background", "#E5E1D5" ) );
-	QColor btncolor( config.readEntry( "Button", "#D6CDBB" ) );
+	// Colors - from /etc/colors/Liquid.scheme
+	QColor bgcolor( config.readEntry( "Background", "#E0E0E0" ) );
+	QColor btncolor( config.readEntry( "Button", "#96c8fa" ) );
 	QPalette pal( btncolor, bgcolor );
-	QString color = config.readEntry( "Highlight", "#800000" );
+	QString color = config.readEntry( "Highlight", "#73adef" );
 	pal.setColor( QColorGroup::Highlight, QColor( color ) );
 	color = config.readEntry( "HighlightedText", "#FFFFFF" );
 	pal.setColor( QColorGroup::HighlightedText, QColor( color ) );
@@ -1020,7 +1020,7 @@ void QPEApplication::applyStyle()
 	setPalette( pal, TRUE );
 
 	// Window Decoration
-	QString dec = config.readEntry( "Decoration", "Qtopia" );
+	QString dec = config.readEntry( "Decoration", "Flat" );
 
 	// don't set a custom deco
 	if ( nostyle & Opie::Force_Decoration )

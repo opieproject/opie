@@ -510,8 +510,16 @@ void QPEDecoration::init ( const QString &plugin )
     }
 
     WindowDecorationInterface *iface = 0;
-    QString path = QPEApplication::qpeDir() + "/plugins/decorations";
-    QLibrary *lib = new QLibrary( path + "/" + plugin );
+    QString path = QPEApplication::qpeDir() + "/plugins/decorations/";
+
+    if ( plugin.find( ".so" ) > 0 ) {
+        // full library name supplied
+        path += plugin;
+    } else {
+        path += "lib" + plugin.lower() + ".so"; // compatibility
+    }
+
+    QLibrary *lib = new QLibrary( path );
     if ( lib->queryInterface( IID_WindowDecoration, (QUnknownInterface**)&iface ) == QS_OK && iface ) {
 	wdiface = iface;
 	wdlib = lib;

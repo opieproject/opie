@@ -84,7 +84,7 @@ public:
     QString name() const {
 	return "Default";
     }
-    QPixmap icon() const {
+QPixmap icon() const {
 	return QPixmap();
     }
     QRESULT queryInterface( const QUuid &uuid, QUnknownInterface **iface ) {
@@ -175,7 +175,7 @@ QWidget *Appearance::createDecoTab ( QWidget *parent, Config &cfg )
     vertLayout->addWidget( m_deco_list );
 	QWhatsThis::add( m_deco_list, tr( "Window decorations control the way the application title bar and its buttons appear.\n\nClick here to select an available decoration." ) );
 
-    QString s = cfg. readEntry ( "Decoration" );
+    QString s = cfg. readEntry ( "Decoration", "libflat.so" );
 
     m_deco_list-> insertItem ( new DecoListItem ( "QPE" ));
 
@@ -402,7 +402,7 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
 	vertLayout-> addSpacing ( 3 );
 	QHBoxLayout *rotLay = new QHBoxLayout ( vertLayout, 3 );
-	
+
 	QLabel* rotlabel = new QLabel( tr( "Rotation direction:" ), tab );
 	m_rotdir_cw = new QRadioButton( tab, "rotdir_cw" );
 	QPixmap cw1 = Resource::loadIconSet("redo"). pixmap( );
@@ -421,8 +421,8 @@ QWidget *Appearance::createAdvancedTab ( QWidget *parent, Config &cfg )
 
 	ccw1. convertFromImage( ccwImage );
 	m_rotdir_cw-> setPixmap( cw1 );
-	m_rotdir_ccw-> setPixmap( ccw1 ); 
-	m_rotdir_flip-> setPixmap( flip1 ); 
+	m_rotdir_ccw-> setPixmap( ccw1 );
+	m_rotdir_flip-> setPixmap( flip1 );
 
 	rotLay-> addWidget ( rotlabel, 0 );
 	rotLay-> addWidget ( m_rotdir_cw, 0 );
@@ -457,7 +457,8 @@ Appearance::Appearance( QWidget* parent,  const char* name, WFlags )
     QVBoxLayout *top = new QVBoxLayout ( this, 3, 3 );
 
 	m_sample = new SampleWindow ( this );
-	m_sample-> setDecoration ( new DefaultWindowDecoration ( ));
+
+	m_sample-> setDecoration ( new DefaultWindowDecoration ( ) );
 	QWhatsThis::add( m_sample, tr( "This is a preview window.  Look here to see your new appearance as options are changed." ) );
 
     OTabWidget* tw = new OTabWidget ( this, "tabwidget", OTabWidget::Global, OTabWidget::Bottom );

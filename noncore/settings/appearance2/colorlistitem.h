@@ -124,12 +124,13 @@ private:
 	}
 };
 
+// from etc/colors/Liquid.scheme
 const ColorListItem::colorlut ColorListItem::s_colorlut [] = {
 	{ QColorGroup::Base,            "Base",            "#FFFFFF", QT_TRANSLATE_NOOP( "Appearance", "Base" )             },
-	{ QColorGroup::Background,      "Background",      "#E5E1D5", QT_TRANSLATE_NOOP( "Appearance", "Background" )       },
-	{ QColorGroup::Button,          "Button",          "#D6CDBB", QT_TRANSLATE_NOOP( "Appearance", "Button" )           },
+	{ QColorGroup::Background,      "Background",      "#E0E0E0", QT_TRANSLATE_NOOP( "Appearance", "Background" )       },
+	{ QColorGroup::Button,          "Button",          "#96c8fa", QT_TRANSLATE_NOOP( "Appearance", "Button" )           },
 	{ QColorGroup::ButtonText,      "ButtonText",      "#000000", QT_TRANSLATE_NOOP( "Appearance", "Button Text" )      }, 
-	{ QColorGroup::Highlight,       "Highlight",       "#800000", QT_TRANSLATE_NOOP( "Appearance", "Highlight" )        },
+	{ QColorGroup::Highlight,       "Highlight",       "#73adef", QT_TRANSLATE_NOOP( "Appearance", "Highlight" )        },
 	{ QColorGroup::HighlightedText, "HighlightedText", "#FFFFFF", QT_TRANSLATE_NOOP( "Appearance", "Highlighted Text" ) },
 	{ QColorGroup::Text,            "Text",            "#000000", QT_TRANSLATE_NOOP( "Appearance", "Text" )             }
 };
