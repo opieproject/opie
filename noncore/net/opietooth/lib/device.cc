@@ -72,7 +72,7 @@ void Device::detach(){
   // kill the pid we got
   if(m_attached ){
     //kill the pid
-    warn << "killing" << oendl;
+    owarn << "killing" << oendl;
     kill(pid, 9);
   }
   owarn << "detached" << oendl;

@@ -192,7 +192,7 @@ void Manager::slotHCIExited(OProcess* proc ) {
 }
 void Manager::slotHCIOut(OProcess* proc,  char* ch,  int len) {
     QCString str( ch, len+1 );
-    owarn << "hci: " << str.data() oendl;
+    owarn << "hci: " << str.data() << oendl;
     QMap<QString, QString>::Iterator it;
     it = m_devices.find( proc->name() );
     owarn << "proc->name " << proc->name() << oendl;
@@ -282,15 +282,15 @@ ConnectionState::ValueList Manager::parseConnections( const QString& out ) {
     for (; it != list.end(); ++it ) {
         QString row = (*it).stripWhiteSpace();
         QStringList value = QStringList::split(' ', row );
-        owan << "0: %s" << value[0].latin1() << oendl;
-        owan << "1: %s" << value[1].latin1() << oendl;
-        owan << "2: %s" << value[2].latin1() << oendl;
-        owan << "3: %s" << value[3].latin1() << oendl;
-        owan << "4: %s" << value[4].latin1() << oendl;
-        owan << "5: %s" << value[5].latin1() << oendl;
-        owan << "6: %s" << value[6].latin1() << oendl;
-        owan << "7: %s" << value[7].latin1() << oendl;
-        owan << "8: %s" << value[8].latin1() << oendl;
+        owarn << "0: %s" << value[0].latin1() << oendl;
+        owarn << "1: %s" << value[1].latin1() << oendl;
+        owarn << "2: %s" << value[2].latin1() << oendl;
+        owarn << "3: %s" << value[3].latin1() << oendl;
+        owarn << "4: %s" << value[4].latin1() << oendl;
+        owarn << "5: %s" << value[5].latin1() << oendl;
+        owarn << "6: %s" << value[6].latin1() << oendl;
+        owarn << "7: %s" << value[7].latin1() << oendl;
+        owarn << "8: %s" << value[8].latin1() << oendl;
         ConnectionState con;
         con.setDirection( value[0] == QString::fromLatin1("<") ? Outgoing : Incoming );
         con.setConnectionMode( value[1] );
