@@ -16,18 +16,37 @@
 #include "previewwidget.h"
 #include "zcameraio.h"
 
+#include <opie2/odebug.h>
+
 PreviewWidget::PreviewWidget( QWidget * parent, const char * name, WFlags f )
            :QLabel( parent, name, f )
 {
-    setFixedSize( QSize( 240, 160 ) );
+    #ifndef QT_NO_DEBUG
+    setBackgroundColor( QColor( 255, 0, 0 ) );
+    #else
     setBackgroundMode( NoBackground );
+    #endif
+
 
     startTimer( 150 );
+    //startTimer( 2000 );
 };
 
 
 PreviewWidget::~PreviewWidget()
 {
+}
+
+
+void PreviewWidget::resizeEvent( QResizeEvent* e )
+{
+    QLabel::resizeEvent( e );
+    int w = e->size().width();
+    int h = e->size().height();
+    ZCameraIO::instance()->setCaptureFrame( e->size().width(),
+                                          e->size().height(),
+                                          256,
+                                          w < h );
 }
 
 

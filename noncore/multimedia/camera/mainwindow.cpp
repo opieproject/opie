@@ -14,33 +14,62 @@
 **********************************************************************/
 
 #include "mainwindow.h"
-#include "mainwindowbase.h"
+#include "previewwidget.h"
 #include "zcameraio.h"
 
 #include <qvbox.h>
 #include <qcombobox.h>
+#include <qdatastream.h>
 #include <qpushbutton.h>
 #include <qlabel.h>
 #include <qdirectpainter_qws.h>
 #include <qpe/resource.h>
+#include <qpe/qcopenvelope_qws.h>
 #include <opie/ofiledialog.h>
+
+#include <opie2/odebug.h>
 
 #include <assert.h>
 
 CameraMainWindow::CameraMainWindow( QWidget * parent, const char * name, WFlags f )
            :QMainWindow( parent, name, f )
 {
-    mw = new MainWindowBase( this, "main widget" );
-    ZCameraIO::instance()->setCaptureFrame( 240, 160, 256 );
-    setCentralWidget( mw );
-    mw->show();
+    _rotation = 270; //TODO: grab these from the actual settings
 
-    connect( mw->zoom, SIGNAL( activated( int ) ), this, SLOT( changeZoom(int) ) );
+    preview = new PreviewWidget( this, "camera preview widget" );
+    //setCentralWidget( preview ); <--- don't do this!
+    preview->resize( QSize( 240, 288 ) );
+    preview->show();
+
+    // construct a System Channel to receive setRotation messages
+    _sysChannel = new QCopChannel( "QPE/System", this );
+    connect( _sysChannel, SIGNAL( received( const QCString&, const QByteArray& ) ),
+             this, SLOT( systemMessage( const QCString&, const QByteArray& ) ) );
+
 };
 
 
 CameraMainWindow::~CameraMainWindow()
 {
+}
+
+
+void CameraMainWindow::systemMessage( const QCString& msg, const QByteArray& data )
+{
+    QDataStream stream( data, IO_ReadOnly );
+    odebug << "received system message: " << msg << oendl;
+    if ( msg == "setCurrentRotation(int)" )
+    {
+        stream >> _rotation;
+        odebug << "received setCurrentRotation(" << _rotation << ")" << oendl;
+
+        switch ( _rotation )
+        {
+            case 270: preview->resize( QSize( 240, 288 ) ); break;
+            case 180: preview->resize( QSize( 320, 208 ) ); break;
+            default: assert( 0 ); // not yet handled
+        }
+    }
 }
 
 

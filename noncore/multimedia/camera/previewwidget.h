@@ -20,6 +20,9 @@
 #include <qimage.h>
 #include <qpixmap.h>
 
+class QTimerEvent;
+class QResizeEvent;
+
 class PreviewWidget: public QLabel
 {
   Q_OBJECT
@@ -30,6 +33,7 @@ class PreviewWidget: public QLabel
 
   protected:
     virtual void timerEvent( QTimerEvent* );
+    virtual void resizeEvent( QResizeEvent* );
 
   private:
     QPixmap p;

@@ -1,5 +1,5 @@
+moc
+obj
 config.in
-mainwindowbase.h
-mainwindowbase.cpp
 Makefile
 

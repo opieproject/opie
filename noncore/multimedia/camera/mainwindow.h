@@ -25,6 +25,8 @@ class QIconSet;
 class QToolButton;
 class QLabel;
 class MainWindowBase;
+class QCopChannel;
+class PreviewWidget;
 
 class CameraMainWindow: public QMainWindow
 {
@@ -36,11 +38,14 @@ class CameraMainWindow: public QMainWindow
 
   public slots:
     void changeZoom( int );
+    void systemMessage( const QCString&, const QByteArray& );
 
   protected:
 
   private:
-    MainWindowBase* mw;
+    PreviewWidget* preview;
+    int _rotation;
+    QCopChannel* _sysChannel;
 };
 
 #endif

@@ -108,6 +108,7 @@ inline bool ZCameraIO::isAvailable() const
 
 bool ZCameraIO::setCaptureFrame( int width, int height, int zoom, bool rot )
 {
+    odebug << "setCaptureFrame( " << width << ", " << height << ", " << zoom << ", " << rot << " )" << oendl;
     char b[100];
     sprintf( b, "%c=%d,%d,%d,%d", rot ? 'R':'S', width, height, zoom, width*2 );
     if ( write( b ) )
@@ -173,18 +174,31 @@ bool ZCameraIO::write( char* buf, int len )
 
 bool ZCameraIO::snapshot( QImage* image )
 {
-    setReadMode( IMAGE | XFLIP | YFLIP );
-    char buf[76800];
+    setReadMode( STATUS );
+
+    odebug << "finder reversed = " << isFinderReversed() << oendl;
+    odebug << "rotation = " << _rot << oendl;
+
+    if ( _rot ) // Portrait
+    {
+        setReadMode( IMAGE | isFinderReversed() ? XFLIP | YFLIP : 0 );
+    }
+    else // Landscape
+    {
+        setReadMode( IMAGE | XFLIP | YFLIP ); //isFinderReversed() ? 0 : XFLIP );
+    }
+
+    char buf[_readlen];
     char* bp = buf;
     unsigned char* p;
 
     read( bp, _readlen );
 
-    image->create( 240, 160, 16 );
-    for ( int i = 0; i < 160; ++i )
+    image->create( _width, _height, 16 );
+    for ( int i = 0; i < _height; ++i )
     {
         p = image->scanLine( i );
-        for ( int j = 0; j < 240; j++ )
+        for ( int j = 0; j < _width; j++ )
         {
             *p = *bp;
             p++;
