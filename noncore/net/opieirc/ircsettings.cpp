@@ -90,7 +90,7 @@ IRCSettings::IRCSettings(QWidget* parent, const char* name, bool modal, WFlags) 
     layout->addWidget(m_server, 5, 1);
     label = new QLabel(tr("Notifications :"), widget);
     layout->addWidget(label, 6, 0);
-    m_notification = new OColorButton(widget, m_config->readEntry("NotificationColor", "#AAE300"));
+    m_notification = new OColorButton(widget, m_config->readEntry("NotificationColor", "#006400"));
     QWhatsThis::add(m_notification, tr("Text color to be used to display notifications"));
     layout->addWidget(m_notification, 6, 1);
     tw->addTab(view, "opieirc/colors", tr("Colors"));
