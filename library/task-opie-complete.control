@@ -4,6 +4,6 @@ Section: opie/applications
 Maintainer: Maximilian Reiss <max.reiss@gmx.de>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: task-opie, task-opie-apps, task-opie-settings, task-opie-games, task-opie-applets
+Depends: task-opie-apps, task-opie-settings, task-opie-games, task-opie-applets
 Description: All of Opie
  All apps that are in the feed.
