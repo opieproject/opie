@@ -750,7 +750,7 @@ void Zaurus::init ( )
 		f. setName ( "/etc/oz_version" );
 		if ( f. open ( IO_ReadOnly )) { 
 			QTextStream ts ( &f );
-			d-> m_sysverstr = ts. readLine ( ). mid ( 10 );
+			d-> m_sysverstr = ts. readLine ( );//. mid ( 10 );
 			f. close ( );
 		}
 	}
