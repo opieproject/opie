@@ -1,0 +1,292 @@
+All patches (necessary) for x86 builds. Special support for devices
+like Beagle, iPAQ, SIMpad, Zaurus can be found at the OpenEmbedded
+package database
+
+
+
+Index: qt-2.3.10/src/iconview/qiconview.cpp
+===================================================================
+--- qt-2.3.10.orig/src/iconview/qiconview.cpp	2005-02-24 21:09:53.059676113 +0100
++++ qt-2.3.10/src/iconview/qiconview.cpp	2005-02-24 21:10:04.601020103 +0100
+@@ -225,6 +225,7 @@
+     QIconView::SelectionMode selectionMode;
+     QIconViewItem *currentItem, *tmpCurrentItem, *highlightedItem, *startDragItem, *pressedItem, *selectAnchor;
+     QRect *rubber;
++    QPixmap *backBuffer;
+     QTimer *scrollTimer, *adjustTimer, *updateTimer, *inputTimer,
+ 	*fullRedrawTimer;
+     int rastX, rastY, spacing;
+@@ -2268,6 +2269,7 @@
+     d->currentItem = 0;
+     d->highlightedItem = 0;
+     d->rubber = 0;
++    d->backBuffer = 0;
+     d->scrollTimer = 0;
+     d->startDragItem = 0;
+     d->tmpCurrentItem = 0;
+@@ -2416,6 +2418,8 @@
+ 	delete item;
+ 	item = tmp;
+     }
++    delete d->backBuffer;
++    d->backBuffer = 0;
+     delete d->fm;
+     d->fm = 0;
+ #ifndef QT_NO_TOOLTIP
+@@ -2882,6 +2886,48 @@
+ }
+ 
+ /*!
++    This function grabs all paintevents that otherwise would have been
++    processed by the QScrollView::viewportPaintEvent(). Here we use a
++    doublebuffer to reduce 'on-paint' flickering on QIconView
++    (and of course its childs).
++
++    \sa QScrollView::viewportPaintEvent(), QIconView::drawContents()
++*/
++
++void QIconView::bufferedPaintEvent( QPaintEvent* pe )
++{
++    QWidget* vp = viewport();
++    QRect r = pe->rect() & vp->rect();
++    int ex = r.x() + contentsX();
++    int ey = r.y() + contentsY();
++    int ew = r.width();
++    int eh = r.height();
++
++    if ( !d->backBuffer )
++	d->backBuffer = new QPixmap(vp->size());
++    if ( d->backBuffer->size() != vp->size() ) {
++	//Resize function (with hysteesis). Uses a good compromise between memory
++	//consumption and speed (number) of resizes.
++        float newWidth = (float)vp->width();
++	float newHeight = (float)vp->height();
++	if ( newWidth > d->backBuffer->width() || newHeight > d->backBuffer->height() )
++	{
++	    newWidth *= 1.1892;
++	    newHeight *= 1.1892;
++	    d->backBuffer->resize( (int)newWidth, (int)newHeight );
++	} else if ( 1.5*newWidth < d->backBuffer->width() || 1.5*newHeight < d->backBuffer->height() )
++	    d->backBuffer->resize( (int)newWidth, (int)newHeight );
++    }
++
++    QPainter p;
++    p.begin(d->backBuffer, vp);
++    drawContentsOffset(&p, contentsX(), contentsY(), ex, ey, ew, eh);
++    p.end();
++    bitBlt(vp, r.x(), r.y(), d->backBuffer, r.x(), r.y(), ew, eh);
++}
++
++/*!
++
+   \reimp
+ */
+ 
+@@ -4939,7 +4985,7 @@
+ 		if ( !d->rubber )
+ 		    drawDragShapes( d->oldDragPos );
+ 	    }
+-	    viewportPaintEvent( (QPaintEvent*)e );
++            bufferedPaintEvent ((QPaintEvent*)e );
+ 	    if ( d->dragging ) {
+ 		if ( !d->rubber )
+ 		    drawDragShapes( d->oldDragPos );
+@@ -5377,11 +5423,19 @@
+ 	return;
+ 
+     if ( item->d->container1 && d->firstContainer ) {
+-	item->d->container1->items.removeRef( item );
++       //Special-case checking of the last item, since this may be
++       //called a few times for the same item.
++        if (item->d->container1->items.last() == item)
++            item->d->container1->items.removeLast();
++        else
++            item->d->container1->items.removeRef( item );
+     }
+     item->d->container1 = 0;
+     if ( item->d->container2 && d->firstContainer ) {
+-	item->d->container2->items.removeRef( item );
++        if (item->d->container2->items.last() == item)
++            item->d->container2->items.removeLast();
++        else
++            item->d->container2->items.removeRef( item );
+     }
+     item->d->container2 = 0;
+ 
+Index: qt-2.3.10/src/iconview/qiconview.h
+===================================================================
+--- qt-2.3.10.orig/src/iconview/qiconview.h	2005-02-24 21:09:53.060675971 +0100
++++ qt-2.3.10/src/iconview/qiconview.h	2005-02-24 21:10:04.602019959 +0100
+@@ -444,6 +444,7 @@
+     virtual void contentsDropEvent( QDropEvent *e );
+ #endif
+ 
++    void bufferedPaintEvent( QPaintEvent* );
+     virtual void resizeEvent( QResizeEvent* e );
+     virtual void keyPressEvent( QKeyEvent *e );
+     virtual void focusInEvent( QFocusEvent *e );
+Index: qt-2.3.10/src/kernel/qgfxraster_qws.cpp
+===================================================================
+--- qt-2.3.10.orig/src/kernel/qgfxraster_qws.cpp	2005-02-24 21:09:54.817425663 +0100
++++ qt-2.3.10/src/kernel/qgfxraster_qws.cpp	2005-02-24 21:10:02.521320506 +0100
+@@ -4037,13 +4037,14 @@
+ 	for( loopc2=0;loopc2<frontadd;loopc2++ )
+ 	    *(alphaptr++)=get_value_32(16,(unsigned char **)&temppos);
+ 
+-	PackType temp2;
+-	unsigned char * cp;
++	volatile PackType temp2;
++	volatile unsigned short int * cp;
+ 	for( loopc2=0;loopc2<count;loopc2++ ) {
+-	    temp2=*((PackType *)temppos);
+-	    cp=(unsigned char *)&temp2;
+-	    *(alphaptr++)=get_value_32(16,&cp);
+-	    *(alphaptr++)=get_value_32(16,&cp);
++           temp2=*reinterpret_cast<PackType *>(temppos);
++           cp=reinterpret_cast<volatile unsigned short int *>(&temp2);
++           *(alphaptr++)=qt_conv16ToRgb(*cp);
++           cp++;
++           *(alphaptr++)=qt_conv16ToRgb(*cp);
+ 	    temppos += 2;
+ 	}
+ 
+Index: qt-2.3.10/src/kernel/qwindowsystem_qws.cpp
+===================================================================
+--- qt-2.3.10.orig/src/kernel/qwindowsystem_qws.cpp	2005-02-24 21:09:53.891557664 +0100
++++ qt-2.3.10/src/kernel/qwindowsystem_qws.cpp	2005-02-24 21:10:03.511177634 +0100
+@@ -918,6 +918,18 @@
+ {
+ }
+ 
++static void catchSegvSignal( int )
++{
++#ifndef QT_NO_QWS_KEYBOARD
++    if ( qwsServer )
++	qwsServer->closeKeyboard();
++#endif
++    QWSServer::closedown();
++    fprintf(stderr, "Segmentation fault.\n");
++    exit(1);
++}
++
++
+ /*!
+   \class QWSServer qwindowsystem_qws.h
+   \brief Server-specific functionality in Qt/Embedded
+@@ -1043,6 +1055,7 @@
+     }
+ 
+     signal(SIGPIPE, ignoreSignal); //we get it when we read
++    signal(SIGSEGV, catchSegvSignal); //recover the keyboard on crash
+ #endif
+     focusw = 0;
+     mouseGrabber = 0;
+Index: qt-2.3.10/src/kernel/qwsdecoration_qws.h
+===================================================================
+--- qt-2.3.10.orig/src/kernel/qwsdecoration_qws.h	2005-02-24 21:09:54.355491532 +0100
++++ qt-2.3.10/src/kernel/qwsdecoration_qws.h	2005-02-24 21:10:03.040245652 +0100
+@@ -50,7 +50,7 @@
+     enum Region { None=0, All=1, Title=2, Top=3, Bottom=4, Left=5, Right=6,
+ 		TopLeft=7, TopRight=8, BottomLeft=9, BottomRight=10,
+ 		Close=11, Minimize=12, Maximize=13, Normalize=14,
+-		Menu=15, LastRegion=Menu };
++		Menu=15, LastRegion=Menu, UserDefined = 100 };
+ 
+     virtual QRegion region(const QWidget *, const QRect &rect, Region r=All) = 0;
+     virtual void close( QWidget * );
+Index: qt-2.3.10/src/tools/qcstring.h
+===================================================================
+--- qt-2.3.10.orig/src/tools/qcstring.h	2005-02-24 21:09:54.354491675 +0100
++++ qt-2.3.10/src/tools/qcstring.h	2005-02-24 21:10:03.026247674 +0100
+@@ -119,7 +119,7 @@
+ //                   We want to keep source compatibility for 2.x
+ // ### TODO for 4.0: completely remove these and the cstr* functions
+ 
+-#if !defined(QT_GENUINE_STR)
++#if 0
+ 
+ #undef	strlen
+ #define strlen qstrlen
+Index: qt-2.3.10/src/tools/qstring.cpp
+===================================================================
+--- qt-2.3.10.orig/src/tools/qstring.cpp	2005-02-24 21:09:55.291358022 +0100
++++ qt-2.3.10/src/tools/qstring.cpp	2005-02-24 21:10:01.748431931 +0100
+@@ -14469,7 +14469,11 @@
+     return qt_winQString2MB( *this );
+ #endif
+ #ifdef _WS_QWS_
+-    return utf8(); // ##### if there is ANY 8 bit format supported?
++    QTextCodec* codec = QTextCodec::codecForLocale();
++    return codec
++	    ? codec->fromUnicode(*this)
++	    : utf8();
++    //return latin1(); // ##### if there is ANY 8 bit format supported?
+ #endif
+ #endif
+ }
+@@ -14515,7 +14519,12 @@
+     return qt_winMB2QString( local8Bit );
+ #endif
+ #ifdef _WS_QWS_
+-    return fromUtf8(local8Bit,len);
++    QTextCodec* codec = QTextCodec::codecForLocale();
++    if( len < 0) len = qstrlen(local8Bit);
++    return codec
++	    ? codec->toUnicode(local8Bit, len)
++	    : QString::fromUtf8(local8Bit,len);
++//    return fromLatin1(local8Bit,len);
+ #endif
+ #endif // QT_NO_TEXTCODEC
+ }
+Index: qt-2.3.10/src/widgets/qcommonstyle.cpp
+===================================================================
+--- qt-2.3.10.orig/src/widgets/qcommonstyle.cpp	2005-02-24 21:09:53.864561508 +0100
++++ qt-2.3.10/src/widgets/qcommonstyle.cpp	2005-02-24 21:10:03.484181533 +0100
+@@ -572,7 +572,7 @@
+ 				    bool enabled, bool active )
+ {
+ #ifndef QT_NO_MENUBAR
+-#ifndef QT_NO_STYLE_SGI
++#if 1 // #ifndef QT_NO_STYLE_SGI
+     if (draw_menu_bar_impl != 0) {
+ 	QDrawMenuBarItemImpl impl = draw_menu_bar_impl;
+ 	(this->*impl)(p, x, y, w, h, mi, g, enabled, active);
+Index: qt-2.3.10/src/widgets/qlistview.cpp
+===================================================================
+--- qt-2.3.10.orig/src/widgets/qlistview.cpp	2005-02-24 21:09:53.868560939 +0100
++++ qt-2.3.10/src/widgets/qlistview.cpp	2005-02-24 21:10:03.500179222 +0100
+@@ -5051,9 +5051,9 @@
+ 	l = l->childItem ? l->childItem : l->siblingItem;
+ 
+     if ( l && l->height() )
+-	s.setHeight( s.height() + 10 * l->height() );
+-    else
+-	s.setHeight( s.height() + 140 );
++	s.setHeight( s.height() + 4 /*10*/ * l->height() );
++    else                      // ^v much too big for handhelds
++	s.setHeight( s.height() + 30 /*140*/ );
+ 
+     if ( s.width() > s.height() * 3 )
+ 	s.setHeight( s.width() / 3 );
+Index: qt-2.3.10/src/widgets/qtoolbutton.cpp
+===================================================================
+--- qt-2.3.10.orig/src/widgets/qtoolbutton.cpp	2005-02-24 21:09:53.868560939 +0100
++++ qt-2.3.10/src/widgets/qtoolbutton.cpp	2005-02-24 21:10:03.524175756 +0100
+@@ -332,12 +332,12 @@
+ 	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Large, QIconSet::Normal);
+ 	w = pm.width();
+ 	h = pm.height();
+-	if ( w < 32 )
+-	    w = 32;
+-	if ( h < 32 )
+-	    h = 32;
++	if ( w < 24 )
++	    w = 24;
++	if ( h < 24 )
++	    h = 24;
+     } else {
+-	w = h = 16;
++	w = h = 14;
+ 	QPixmap pm = iconSet(TRUE).pixmap(QIconSet::Small, QIconSet::Normal);
+ 	w = pm.width();
+ 	h = pm.height();
