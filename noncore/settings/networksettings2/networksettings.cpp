@@ -238,11 +238,13 @@ void NetworkSettings::SLOT_EditNode( QListBoxItem * LBI ) {
               NSResources->addNetworkSetup( NC, 0 );
             } // else not changed
 
-            // must add it here since change will trigger event
+            // no update (will come later)
+            Profiles_LB->blockSignals( TRUE );
             Profiles_LB->changeItem( NC->devicePixmap(),
                                      NC->name(),
                                      Profiles_LB->index( LBI )
                                    );
+            Profiles_LB->blockSignals( FALSE );
           } else {
             // new item
             int ci = Profiles_LB->count();

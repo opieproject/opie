@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>551</width>
+            <width>547</width>
             <height>547</height>
         </rect>
     </property>
@@ -132,7 +132,7 @@
                                         <class>QCheckBox</class>
                                         <property stdset="1">
                                             <name>name</name>
-                                            <cstring>Disabled_CB</cstring>
+                                            <cstring>Enabled_CB</cstring>
                                         </property>
                                         <property stdset="1">
                                             <name>enabled</name>
@@ -140,7 +140,7 @@
                                         </property>
                                         <property stdset="1">
                                             <name>text</name>
-                                            <string>Disabled</string>
+                                            <string>Enabled</string>
                                         </property>
                                         <property>
                                             <name>layoutMargin</name>

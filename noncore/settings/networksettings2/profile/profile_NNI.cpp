@@ -8,7 +8,7 @@ AProfile::AProfile( ProfileNetNode * PNN ) : ANetNodeInstance( PNN ) {
       Data.Automatic = 1;
       Data.Confirm = 0;
       Data.Description = "";
-      Data.Disabled = 0;
+      Data.Enabled = 1;
       Data.TriggerVPN = 0;
       GUI = 0;
       RT = 0;
@@ -21,7 +21,9 @@ void AProfile::setSpecificAttribute( QString & Attr, QString & Value ) {
       } else if ( Attr == "preconfirm" ) {
         Data.Confirm = (Value=="yes");
       } else if ( Attr == "disabled" ) {
-        Data.Disabled = (Value=="yes");
+        Data.Enabled = (Value=="no");
+      } else if ( Attr == "enabled" ) {
+        Data.Enabled = (Value=="yes");
       } else if ( Attr == "triggervpn" ) {
         Data.TriggerVPN = (Value=="yes");
       } else if ( Attr == "description" ) {
@@ -32,7 +34,7 @@ void AProfile::setSpecificAttribute( QString & Attr, QString & Value ) {
 void AProfile::saveSpecificAttribute( QTextStream & TS ) {
       TS << "automatic=" << ((Data.Automatic) ? "yes" : "no") << endl;
       TS << "preconfirm=" << ((Data.Confirm) ? "yes" : "no") << endl;
-      TS << "disabled=" << ((Data.Disabled) ? "yes" : "no") << endl;
+      TS << "enabled=" << ((Data.Enabled) ? "yes" : "no") << endl;
       TS << "triggervpn=" << ((Data.TriggerVPN) ? "yes" : "no") << endl;
       TS << "description=" << Data.Description << endl;
 }

@@ -70,7 +70,7 @@ void ProfileEdit::showData( ProfileData & Data ) {
     Automatic_CB->setChecked( Data.Automatic );
     TriggersVPN_CB->setChecked( Data.TriggerVPN );
     Confirm_CB->setChecked( Data.Confirm );
-    Disabled_CB->setChecked( Data.Disabled );
+    Enabled_CB->setChecked( Data.Enabled );
 }
 
 
@@ -80,7 +80,7 @@ bool ProfileEdit::commit( ProfileData & Data ) {
 
     CBM( Data.Automatic, Automatic_CB, SM );
     CBM( Data.TriggerVPN, TriggersVPN_CB, SM );
-    CBM( Data.Disabled, Disabled_CB, SM );
+    CBM( Data.Enabled, Enabled_CB, SM );
     CBM( Data.Confirm, Confirm_CB, SM );
 
     return SM;
