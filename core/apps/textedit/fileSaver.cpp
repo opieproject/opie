@@ -49,7 +49,7 @@ fileSaver::fileSaver( QWidget* parent,  const char* name, bool modal, WFlags fl 
     connect( docButton,SIGNAL(released()),this,SLOT( docButtonPushed()) );
     docButton->setFlat(TRUE);
 
-    hideButton = new QPushButton( Resource::loadIconSet("s_hidden"),"",this,"hideButton");
+    hideButton = new QPushButton( Resource::loadIconSet("textedit/s_hidden"),"",this,"hideButton");
     hideButton->setGeometry(140,4,25,25);
     connect( hideButton,SIGNAL(toggled(bool)),this,SLOT( hideButtonPushed(bool)) );
     hideButton->setToggleButton(TRUE);
