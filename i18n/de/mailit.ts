@@ -26,15 +26,15 @@
     <name>EditAccount</name>
     <message>
         <source>Edit Account</source>
-        <translation>Account bearbeiten</translation>
+        <translation>Konto bearbeiten</translation>
     </message>
     <message>
         <source>Create new Account</source>
-        <translation>Account erstellen</translation>
+        <translation>Konto erstellen</translation>
     </message>
     <message>
         <source>Account name</source>
-        <translation>Accountname</translation>
+        <translation>Kontoname</translation>
     </message>
     <message>
         <source>Your name</source>
@@ -81,7 +81,7 @@
     </message>
     <message>
         <source>Accounts</source>
-        <translation>Accounts</translation>
+        <translation>Konten</translation>
     </message>
     <message>
         <source>Get Mail in</source>
@@ -89,11 +89,11 @@
     </message>
     <message>
         <source>Edit account</source>
-        <translation>Account bearbeiten</translation>
+        <translation>Konto bearbeiten</translation>
     </message>
     <message>
         <source>Delete account</source>
-        <translation>Account löschen</translation>
+        <translation>Konto löschen</translation>
     </message>
     <message>
         <source>Send mail</source>
@@ -137,7 +137,7 @@
     </message>
     <message>
         <source>You must create an account</source>
-        <translation>Sie müssen einen Account erstellen ...</translation>
+        <translation>Sie müssen ein Konto erstellen</translation>
     </message>
     <message>
         <source>Main operation toolbar</source>
