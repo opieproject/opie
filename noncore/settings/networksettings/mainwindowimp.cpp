@@ -13,6 +13,7 @@
 #include <qlabel.h>
 #include <qpe/qcopenvelope_qws.h>
 #include <qtabwidget.h> // in order to disable the profiles tab
+#include <qpe/qpeapplication.h>
 
 #include <qmessagebox.h>
 
@@ -49,7 +50,7 @@
 #define DEFAULT_SCHEME "/var/lib/pcmcia/scheme"
 #define _PROCNETDEV "/proc/net/dev"
 
-MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name), advancedUserMode(true), scheme(DEFAULT_SCHEME){
+MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(parent, name, Qt::WStyle_ContextHelp), advancedUserMode(true), scheme(DEFAULT_SCHEME){
   connect(addConnectionButton, SIGNAL(clicked()), this, SLOT(addClicked()));
   connect(removeConnectionButton, SIGNAL(clicked()), this, SLOT(removeClicked()));
   connect(informationConnectionButton, SIGNAL(clicked()), this, SLOT(informationClicked()));
@@ -62,7 +63,7 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   connect(newProfile, SIGNAL(textChanged(const QString&)), this, SLOT(newProfileChanged(const QString&)));
 
   //FIXME: disable profiles for the moment:
-//  tabWidget->setTabEnabled( tab, false );
+  tabWidget->setTabEnabled( tab, false );
 
   // Load connections.
   // /usr/local/kde/lib/libinterfaces.la
@@ -78,6 +79,14 @@ MainWindowImp::MainWindowImp(QWidget *parent, const char *name) : MainWindow(par
   QStringList list = i.getInterfaceList();
   QMap<QString, Interface*>::Iterator it;
   for ( QStringList::Iterator ni = list.begin(); ni != list.end(); ++ni ) {
+      /*
+       * we skipped it in getAllInterfaces now
+       * we need to ignore it as well
+       */
+      if (m_handledIfaces.contains( *ni) ) {
+          qDebug("Not up iface handled by module");
+          continue;
+      }
     bool found = false;
     for( it = interfaceNames.begin(); it != interfaceNames.end(); ++it ){
       if(it.key() == (*ni))
@@ -196,6 +205,10 @@ void MainWindowImp::getAllInterfaces(){
 
   for (QStringList::Iterator it = ifaces.begin(); it != ifaces.end(); ++it) {
     int flags = 0;
+    if ( m_handledIfaces.contains( (*it) ) ) {
+        qDebug(" %s is handled by a module", (*it).latin1() );
+        continue;
+    }
 //    int family;
     i = NULL;
 
@@ -307,6 +320,7 @@ Module* MainWindowImp::loadPlugin(const QString &pluginFileName, const QString &
     return NULL;
   }
 
+  m_handledIfaces += object->handledInterfaceNames();
   // Store for deletion later
   libraries.insert(object, lib);
   return object;
@@ -426,7 +440,7 @@ void MainWindowImp::configureClicked(){
     }
   }
 
-  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose );
+  InterfaceSetupImpDialog *configure = new InterfaceSetupImpDialog(this, "InterfaceSetupImp", i, true, Qt::WDestructiveClose  | Qt::WStyle_ContextHelp );
   configure->setProfile(currentProfileText);
   configure->showMaximized();
 }
@@ -459,7 +473,7 @@ void MainWindowImp::informationClicked(){
       return;
     }
   }
-  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog);
+  InterfaceInformationImp *information = new InterfaceInformationImp(this, "InterfaceSetupImp", i, Qt::WType_Modal | Qt::WDestructiveClose | Qt::WStyle_Dialog  | Qt::WStyle_ContextHelp);
   information->showMaximized();
 }
 
@@ -639,7 +653,6 @@ void MainWindowImp::receive(const QCString &msg, const QByteArray &arg)
 {
     bool found = false;
     qDebug("MainWindowImp::receive QCop msg >"+msg+"<");
-
     if (msg == "raise") {
         raise();
         return;

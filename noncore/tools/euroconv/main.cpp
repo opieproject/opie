@@ -9,7 +9,7 @@
  *
  * Requirements:    Qt
  *
- * $Id: main.cpp,v 1.2 2003-02-21 10:39:30 eric Exp $
+ * $Id: main.cpp,v 1.3 2003-08-09 17:20:45 kergoth Exp $
  *
  ***************************************************************************/
 
@@ -31,7 +31,7 @@ int main( int argc, char **argv ) {
     LCDDisplay lcd (layout, "lcd");
     KeyPad num(&lcd, layout, "keypad");
     app.setMainWidget(layout);
-    layout->setCaption("Euroconv");
+    layout->setCaption( QObject::tr("Euroconv") );
     layout->showMaximized ();
     layout->show();
     return app.exec();

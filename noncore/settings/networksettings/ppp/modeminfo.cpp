@@ -1,7 +1,7 @@
 /*
  *            kPPP: A front end for pppd for the KDE project
  *
- * $Id: modeminfo.cpp,v 1.3 2003-05-30 15:06:17 tille Exp $
+ * $Id: modeminfo.cpp,v 1.4 2003-08-09 17:14:55 kergoth Exp $
  *
  * Copyright (C) 1997 Bernd Johannes Wuebben
  *                    wuebben@math.cornell.edu
@@ -34,14 +34,12 @@
 #include <qapplication.h>
 #include "modeminfo.h"
 #include "modem.h"
-//#include <klocale.h>
-#define i18n QObject::tr
 
 ModemTransfer::ModemTransfer(Modem *mo, QWidget *parent, const char *name)
     : QDialog(parent, name,TRUE, WStyle_Customize|WStyle_NormalBorder),
     _modem(mo)
 {
-  setCaption(i18n("ATI Query"));
+  setCaption(QObject::tr("ATI Query"));
 //  KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
 
   QVBoxLayout *tl = new QVBoxLayout(this, 10, 10);
@@ -58,17 +56,17 @@ ModemTransfer::ModemTransfer(Modem *mo, QWidget *parent, const char *name)
   // search all these messages. This is a little overkill, so I take
   // the longest english message, translate it and give it additional
   // 20 percent space. Hope this is enough.
-  statusBar->setText(i18n("Unable to create modem lock file."));
+  statusBar->setText(QObject::tr("Unable to create modem lock file."));
   statusBar->setFixedWidth((statusBar->sizeHint().width() * 12) / 10);
   statusBar->setFixedHeight(statusBar->sizeHint().height() + 4);
 
   // set original text
-  statusBar->setText(i18n("Looking for modem..."));
+  statusBar->setText(QObject::tr("Looking for modem..."));
   progressBar->setFixedHeight(statusBar->minimumSize().height());
   tl->addWidget(progressBar);
   tl->addWidget(statusBar);
 
-  cancel = new QPushButton(i18n("Cancel"), this);
+  cancel = new QPushButton(QObject::tr("Cancel"), this);
   cancel->setFocus();
   connect(cancel, SIGNAL(clicked()), SLOT(cancelbutton()));
 
@@ -118,7 +116,7 @@ void ModemTransfer::time_out_slot() {
   timeout_timer->stop();
   scripttimer->stop();
 
-  QMessageBox::warning(this, tr("Error"), i18n("Modem Query timed out."));
+  QMessageBox::warning(this, tr("Error"), QObject::tr("Modem Query timed out."));
   reject();
 }
 
@@ -130,13 +128,13 @@ void ModemTransfer::init() {
   int lock = _modem->lockdevice();
   if (lock == 1) {
 
-    statusBar->setText(i18n("Modem device is locked."));
+    statusBar->setText(QObject::tr("Modem device is locked."));
     return;
   }
 
   if (lock == -1) {
 
-    statusBar->setText(i18n("Unable to create modem lock file."));
+    statusBar->setText(QObject::tr("Unable to create modem lock file."));
     return;
   }
 
@@ -146,7 +144,7 @@ void ModemTransfer::init() {
       usleep(100000);  // wait 0.1 secs
       _modem->writeLine("ATE0Q1V1"); // E0 don't echo the commands I send ...
 
-      statusBar->setText(i18n("Modem Ready"));
+      statusBar->setText(QObject::tr("Modem Ready"));
       qApp->processEvents();
       usleep(100000);  // wait 0.1 secs
       qApp->processEvents();
@@ -227,7 +225,7 @@ void ModemTransfer::cancelbutton() {
   _modem->stop();
   timeout_timer->stop();
 
-  statusBar->setText(i18n("One moment please..."));
+  statusBar->setText(QObject::tr("One moment please..."));
   qApp->processEvents();
 
   _modem->hangup();
@@ -249,7 +247,7 @@ ModemInfo::ModemInfo(QWidget *parent, const char* name)
 {
   QString label_text;
 
-  setCaption(i18n("Modem Query Results"));
+  setCaption(QObject::tr("Modem Query Results"));
   // KWin::setIcons(winId(), kapp->icon(), kapp->miniIcon());
 
   QVBoxLayout *tl = new QVBoxLayout(this, 10, 10);
@@ -274,7 +272,7 @@ ModemInfo::ModemInfo(QWidget *parent, const char* name)
   //tl->addSpacing(1);
 
   QHBoxLayout *l2 = new QHBoxLayout;
-  QPushButton *ok = new QPushButton(i18n("Close"), this);
+  QPushButton *ok = new QPushButton(QObject::tr("Close"), this);
   ok->setDefault(TRUE);
   ok->setFocus();
 

@@ -27,7 +27,7 @@
 /**
  * Constructor, read in the wireless.opts file for parsing later.
  */
-WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : WLAN(parent, name, modal, fl), currentProfile("*"), interface(i) {
+WLANImp::WLANImp( QWidget* parent, const char* name, Interface *i, bool modal, WFlags fl) : WLAN(parent, name, modal, fl), interface(i), currentProfile("*") {
   interfaces = new Interfaces();
   interfaceSetup = new InterfaceSetupImp(tabWidget, "InterfaceSetupImp", i, interfaces);
   tabWidget->insertTab(interfaceSetup, "TCP/IP");
@@ -67,14 +67,9 @@ void WLANImp::parseOpts() {
   }
 
   opt = interfaces->getInterfaceOption("wireless_mode", error).simplifyWhiteSpace();
-  if (opt == "Auto") {
-    mode->setCurrentItem(0);
-  } else if (opt == "Ad-Hoc") {
-    mode->setCurrentItem(2);
-  } else {
-    // Managed/Infrastructure mode
-    mode->setCurrentItem(1);
-  }
+
+  for ( int i = 0; i < mode->count(); i++)
+      if ( mode->text( i ) == opt ) mode->setCurrentItem( i );
 
   opt = interfaces->getInterfaceOption("wireless_ap", error).simplifyWhiteSpace();
   if (! opt.isNull()) {
@@ -203,11 +198,20 @@ void WLANImp::accept() {
   writeOpts();
 
   // Close out the dialog
-  QDialog::accept();
+// FIXME:  QDialog::accept();
 }
 
 void WLANImp::writeOpts() {
-  bool error = false;
+    // eh can't really do anything about it other then return. :-D
+    if(!interfaces->isInterfaceSet()){
+        QMessageBox::warning(0,"Inface not set","should not happen!!!");
+        return;
+    }
+    bool error = false;
+
+    qDebug("setting wlan interface %s", interfaces->getInterfaceName( error ).latin1() );
+
+    if (error)  QMessageBox::warning(0,"Inface not set","should not happen!!!");
 
   interfaces->setInterfaceOption(QString("wireless_mode"), mode->currentText());
   interfaces->setInterfaceOption(QString("wireless_essid"), essid->currentText());
@@ -230,13 +234,16 @@ void WLANImp::writeOpts() {
     if (! keyLineEdit0->text().isNull()) {
       keyList += keyLineEdit0->text();
       keyList += "[1]";
-    } else if (! keyLineEdit1->text().isNull()) {
+    } //else
+    if (! keyLineEdit1->text().isNull()) {
       keyList += keyLineEdit1->text();
       keyList += "[2]";
-    } else if (! keyLineEdit2->text().isNull()) {
+    } //else
+    if (! keyLineEdit2->text().isNull()) {
       keyList += keyLineEdit2->text();
       keyList += "[3]";
-    } else if (! keyLineEdit3->text().isNull()) {
+    } //else
+    if (! keyLineEdit3->text().isNull()) {
       keyList += keyLineEdit3->text();
       keyList += "[4]";
     }

@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: pppdata.h,v 1.8 2003-06-03 14:08:04 tille Exp $
+ * $Id: pppdata.h,v 1.9 2003-08-09 17:14:55 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -64,6 +64,8 @@ class Config;
 //#define WINPOS_GRP         "WindowPosition"
 
 // general
+#define ACCOUNT_LIST       "AccountList"
+#define DEVICE_LIST        "DeviceList"
 #define DEFAULTACCOUNT_KEY "DefaultAccount"
 #define PPPDVERSION_KEY    "pppdVersion"
 #define PPPDTIMEOUT_KEY    "pppdTimeout"
@@ -72,10 +74,12 @@ class Config;
 #define AUTOREDIAL_KEY     "AutomaticRedial"
 #define DISCONNECT_KEY     "DisconnectOnXServerExit"
 #define QUITONDISCONNECT_KEY "QuitOnDisconnect"
-#define NUMACCOUNTS_KEY    "NumberOfAccounts"
+#define NUMACCOUNTS_KEY    "HighcountAccounts"
+#define NUMDEVICES_KEY    "HighcountDevices"
 #define ID_KEY		   "ID"
 
 // modem
+#define MODEMNAME_KEY      "Modem_Name"
 #define MODEMDEV_KEY       "Device"
 #define LOCKFILE_KEY       "UseLockFile"
 #define FLOWCONTROL_KEY    "FlowControl"
@@ -151,6 +155,10 @@ class Config;
 #define ACOUNTS_DEV        "Accounts_Modem"
 #define ACOUNTS_ACC        "Accounts_Account"
 
+#define DEVICESNAMES_LIST  "DevicesNames_List"
+#define DEVICES_LIST       "Devices_List"
+#define DEVICES_LIST_SEP   ','
+
 class PPPData {
 public:
     PPPData();
@@ -161,6 +169,8 @@ public:
     // general functions
     void save();
     void cancel();
+
+    QStringList getAccountList();
 
     static QMap<QString,QString> getConfiguredInterfaces();
     static void setConfiguredInterfaces( QMap<QString,QString> );
@@ -184,7 +194,7 @@ public:
   QString password();
   void setPassword(const QString &);
 
-  int currentAccountID() { return caccount; };
+//  int currentAccountID() { return caccount; };
   const QString defaultAccount();
   void setDefaultAccount(const QString &);
 
@@ -236,8 +246,12 @@ public:
   void setModemEscapeResp(const QString &);
   const QString modemEscapeResp();
 
-  const QString modemDevice();
-  bool setModemDevice(const QString &);
+//  const QString modemName();
+//  bool setModemName(const QString &);
+//  bool changeModemName(const QString &);
+
+   const QString modemDevice();
+   bool setModemDevice(const QString &);
 
   const QString flowcontrol();
   void setFlowcontrol(const QString &);
@@ -313,14 +327,15 @@ public:
   // functions to set/get account information
   int count() const;
   bool setAccount(const QString &);
-  bool setAccountbyIndex(int);
+//  bool setAccountbyIndex(int);
 
   bool isUniqueAccname(const QString &);
+  bool isUniqueDevname(const QString &);
 
   bool deleteAccount();
   bool deleteAccount(const QString &);
   int newaccount();
-  int copyaccount(int i);
+  int copyaccount(const QString&);
 
   const QString accname();
   void setAccname(const QString &);
@@ -409,17 +424,28 @@ public:
   int pppdError() const;
   void setpppdError(int err);
 
+  QStringList getDevicesList();
 
   static QString encodeWord(const QString &s);
+
+  const QString devname();
+  void setDevname(const QString &);
+  bool setDevice(const QString& );
+  bool deleteDevice();
+  bool deleteDevice(const QString &);
+  int newdevice();
+  int copydevice(const QString&);
+  QStringList getDevicesNamesList();
 
 private:
 
     //static PPPData *_data;
-    int modemDeviceGroup;
+//    int modemDeviceGroup;
     QString passwd;
-    //  static Config* config;                       // configuration object
+    QString _modemName;
     int highcount;                         // index of highest account
-    int caccount;                          // index of the current account
+    int highcountdev;                      // index of highest device
+//    int caccount;                          // index of the current account
     QString cgroup;                        // name of current config group
     pid_t suidprocessid;                   // process ID of setuid child
     bool pppdisrunning;                    // pppd process
@@ -427,7 +453,10 @@ private:
     int pppderror;                         // error encounterd running pppd
     int pppdVer, pppdMod, pppdPatch;       // pppd version
 
+
     QStringList phonelist;
+    QStringList accountList;
+    QStringList deviceList;
     QMap<QString,QString> stringEntries;
     QMap<QString,int> intEntries;
     QMap<QString,QStringList> listEntries;

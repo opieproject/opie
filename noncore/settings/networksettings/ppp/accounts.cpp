@@ -1,7 +1,7 @@
 /*
  *           kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.cpp,v 1.9 2003-06-12 16:27:32 tille Exp $
+ * $Id: accounts.cpp,v 1.10 2003-08-09 17:14:55 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -44,102 +44,66 @@
 
 void parseargs(char* buf, char** args);
 
-AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name )
-    : QWidget( parent, name )//, _pppdata(pd)
+
+AccountWidget::AccountWidget( PPPData *pd, QWidget *parent, const char *name, WFlags f )
+    : ChooserWidget( pd, parent, name, f )
 {
-    _pppdata = pd;
-  QVBoxLayout *l1 = new QVBoxLayout(this, 10, 10);
-  accountlist_l = new QListBox(this);
 
-  connect(accountlist_l, SIGNAL(highlighted(int)),
-	  this, SLOT(slotListBoxSelect(int)));
-  connect(accountlist_l, SIGNAL(selected(int)),
-	  this, SLOT(editaccount()));
-  l1->addWidget(accountlist_l, 10);
-
-  edit_b = new QPushButton(tr("&Edit..."), this);
-  connect(edit_b, SIGNAL(clicked()), SLOT(editaccount()));
   QWhatsThis::add(edit_b, tr("Allows you to modify the selected account"));
-  l1->addWidget(edit_b);
-
-  new_b = new QPushButton(tr("&New..."), this);
-  connect(new_b, SIGNAL(clicked()), SLOT(newaccount()));
-  l1->addWidget(new_b);
   QWhatsThis::add(new_b, tr("Create a new dialup connection\n"
   			      "to the Internet"));
-
-  copy_b = new QPushButton(tr("Co&py"), this);
-  connect(copy_b, SIGNAL(clicked()), SLOT(copyaccount()));
-  l1->addWidget(copy_b);
   QWhatsThis::add(copy_b,
 		  tr("Makes a copy of the selected account. All\n"
 		       "settings of the selected account are copied\n"
 		       "to a new account, that you can modify to fit your\n"
 		       "needs"));
-
-  delete_b = new QPushButton(tr("De&lete"), this);
-  connect(delete_b, SIGNAL(clicked()), SLOT(deleteaccount()));
-  l1->addWidget(delete_b);
   QWhatsThis::add(delete_b,
 		  tr("<p>Deletes the selected account\n\n"
 		       "<font color=\"red\"><b>Use with care!</b></font>"));
 
-  QHBoxLayout *l12 = new QHBoxLayout;
-  l1->addStretch(1);
-  l1->addLayout(l12);
 
-  int currAccId = _pppdata->currentAccountID();
-  qDebug("currentAccountID %i", currAccId);
 
-  //load up account list from gppdata to the list box
-  if(_pppdata->count() > 0) {
-    for(int i=0; i <= _pppdata->count()-1; i++) {
-      _pppdata->setAccountbyIndex(i);
-      accountlist_l->insertItem(_pppdata->accname());
-    }
+   copy_b->setEnabled( false ); //FIXME
+ //  delete_b->setEnabled( false ); //FIXME
+
+   listListbox->insertStringList(_pppdata->getAccountList());
+
+   for (uint i = 0; i < listListbox->count(); i++){
+       if ( listListbox->text(i) == _pppdata->accname() )
+           listListbox->setCurrentItem( i );
   }
-  _pppdata->setAccountbyIndex( currAccId );
-
-  qDebug("setting listview index to %i",_pppdata->currentAccountID() );
-  accountlist_l->setCurrentItem( _pppdata->currentAccountID() );
-  slotListBoxSelect( _pppdata->currentAccountID() );
-
-  l1->activate();
 }
 
 
 
 void AccountWidget::slotListBoxSelect(int idx) {
-  delete_b->setEnabled((bool)(idx != -1));
-  edit_b->setEnabled((bool)(idx != -1));
-  copy_b->setEnabled((bool)(idx != -1));
-  if(idx!=-1) {
-      qDebug("setting account to %i", idx);
-    QString account = _pppdata->accname();
-    _pppdata->setAccountbyIndex(accountlist_l->currentItem());
- }
+    bool ok = _pppdata->setAccount( listListbox->text(idx) );
+    ok = (bool)(idx != -1);
+    delete_b->setEnabled(ok);
+    edit_b->setEnabled(ok);
+//FIXME  copy_b->setEnabled(ok);
 }
 
-void AccountWidget::editaccount() {
-  _pppdata->setAccount(accountlist_l->text(accountlist_l->currentItem()));
+void AccountWidget::edit() {
+  _pppdata->setAccount(listListbox->text(listListbox->currentItem()));
 
   int result = doTab();
 
   if(result == QDialog::Accepted) {
-    accountlist_l->changeItem(_pppdata->accname(),accountlist_l->currentItem());
+    listListbox->changeItem(_pppdata->accname(),listListbox->currentItem());
 //    emit resetaccounts();
     _pppdata->save();
   }
 }
 
 
-void AccountWidget::newaccount() {
+void AccountWidget::create() {
 
-    if(accountlist_l->count() == MAX_ACCOUNTS) {
-        QMessageBox::information(this, "sorry",
-                                 tr("Maximum number of accounts reached."));
-        return;
-    }
+//     if(listListbox->count() == MAX_ACCOUNTS) {
+//         QMessageBox::information(this, "sorry",
+//                                  tr("Maximum number of accounts reached."));
+//         return;
+//     }
 
     int result;
     if (_pppdata->newaccount() == -1){
@@ -149,8 +113,8 @@ void AccountWidget::newaccount() {
     result = doTab();
 
     if(result == QDialog::Accepted) {
-        accountlist_l->insertItem(_pppdata->accname());
-        accountlist_l->setSelected(accountlist_l->findItem(_pppdata->accname()),true);
+        listListbox->insertItem(_pppdata->accname());
+        listListbox->setSelected(listListbox->findItem(_pppdata->accname()),true);
 
         _pppdata->save();
     } else
@@ -158,53 +122,55 @@ void AccountWidget::newaccount() {
 }
 
 
-void AccountWidget::copyaccount() {
-  if(accountlist_l->count() == MAX_ACCOUNTS) {
-    QMessageBox::information(this, "sorry", tr("Maximum number of accounts reached."));
-    return;
-  }
+void AccountWidget::copy() {
+//   if(listListbox->count() == MAX_ACCOUNTS) {
+//     QMessageBox::information(this, "sorry", tr("Maximum number of accounts reached."));
+//     return;
+//   }
 
-  if(accountlist_l->currentItem()<0) {
+  if(listListbox->currentItem()<0) {
     QMessageBox::information(this, "sorry", tr("No account selected."));
     return;
   }
 
-  _pppdata->copyaccount(accountlist_l->currentItem());
+  _pppdata->copyaccount(listListbox->currentText());
 
-  accountlist_l->insertItem(_pppdata->accname());
+  listListbox->insertItem(_pppdata->accname());
 //  emit resetaccounts();
   _pppdata->save();
 }
 
 
-void AccountWidget::deleteaccount() {
+void AccountWidget::remove() {
 
   QString s = tr("Are you sure you want to delete\nthe account \"%1\"?")
-    .arg(accountlist_l->text(accountlist_l->currentItem()));
+    .arg(listListbox->text(listListbox->currentItem()));
 
   if(QMessageBox::warning(this,tr("Confirm"),s,
                           QMessageBox::Yes,QMessageBox::No
                           ) != QMessageBox::Yes)
     return;
 
-  if(_pppdata->deleteAccount(accountlist_l->text(accountlist_l->currentItem())))
-    accountlist_l->removeItem(accountlist_l->currentItem());
+  if(_pppdata->deleteAccount(listListbox->text(listListbox->currentItem())))
+    listListbox->removeItem(listListbox->currentItem());
 
-  emit resetaccounts();
-  _pppdata->save();
 
-  slotListBoxSelect(accountlist_l->currentItem());
+//  emit resetaccounts();
+//  _pppdata->save();
+
+
+  slotListBoxSelect(listListbox->currentItem());
 
 }
 
 
 int AccountWidget::doTab(){
-    QDialog *dlg = new QDialog( 0, "newAccount", true );
+    QDialog *dlg = new QDialog( 0, "newAccount", true, Qt::WStyle_ContextHelp );
     QVBoxLayout *layout = new QVBoxLayout( dlg );
     layout->setSpacing( 0 );
     layout->setMargin( 1 );
 
-    tabWindow = new QTabWidget( dlg, "tabWindow" );
+    QTabWidget *tabWindow = new QTabWidget( dlg, "tabWindow" );
     layout->addWidget( tabWindow );
 
     bool isnewaccount;
@@ -273,25 +239,25 @@ int AccountWidget::doTab(){
 }
 
 
-QString AccountWidget::prettyPrintVolume(unsigned int n) {
-  int idx = 0;
-  const QString quant[] = {tr("Byte"), tr("KB"),
-		   tr("MB"), tr("GB"), QString::null};
+// QString AccountWidget::prettyPrintVolume(unsigned int n) {
+//   int idx = 0;
+//   const QString quant[] = {tr("Byte"), tr("KB"),
+// 		   tr("MB"), tr("GB"), QString::null};
 
-  float n1 = n;
-  while(n >= 1024 && quant[idx] != QString::null) {
-    idx++;
-    n /= 1024;
-  }
+//   float n1 = n;
+//   while(n >= 1024 && quant[idx] != QString::null) {
+//     idx++;
+//     n /= 1024;
+//   }
 
-  int i = idx;
-  while(i--)
-    n1 = n1 / 1024.0;
+//   int i = idx;
+//   while(i--)
+//     n1 = n1 / 1024.0;
 
-  QString s = QString::number( n1, 'f', idx==0 ? 0 : 1 );
-  s += " " + quant[idx];
-  return s;
-}
+//   QString s = QString::number( n1, 'f', idx==0 ? 0 : 1 );
+//   s += " " + quant[idx];
+//   return s;
+// }
 
 
 /////////////////////////////////////////////////////////////////////////////

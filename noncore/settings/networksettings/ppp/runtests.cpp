@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: runtests.cpp,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: runtests.cpp,v 1.2 2003-08-09 17:14:56 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -44,8 +44,6 @@
 #define _PATH_RESCONF "/etc/resolv.conf"
 #endif
 
-//#include <klocale.h>
-#define i18n QObject::tr
 #include "pppdata.h"
 
 // initial effective uid (main.cpp)
@@ -217,7 +215,7 @@ int runTests() {
 
     if(!access) {
         QMessageBox::warning(0,"error",
-		 i18n("You're not allowed to dial out with "
+		 QObject::tr("You're not allowed to dial out with "
 		      "kppp.\nContact your system administrator."));
       return TEST_CRITICAL;
     }
@@ -228,7 +226,7 @@ int runTests() {
 
   if(!f) {
       QMessageBox::warning(0,"error",
-		 i18n("Cannot find the PPP daemon!\n"
+		 QObject::tr("Cannot find the PPP daemon!\n"
                       "Make sure that pppd is installed."));
     warning++;
   }
@@ -238,7 +236,7 @@ int runTests() {
 #if 0
     if(access(f, X_OK) != 0 /* && geteuid() != 0 */) {
       KMessageBox::warning(0,
-		   i18n("You do not have the permission "
+		   QObject::tr("You do not have the permission "
 			"to start pppd!\n"
 			"Contact your system administrator "
 			"and ask to get access to pppd."));
@@ -251,7 +249,7 @@ int runTests() {
       stat(f, &st);
       if(st.st_uid != 0 || (st.st_mode & S_ISUID) == 0) {
           QMessageBox::warning(0,"error",
-                     i18n("You don't have sufficient permission to run\n"
+                     QObject::tr("You don't have sufficient permission to run\n"
                           "%1\n"
                           "Please make sure that kppp is owned by root "
                           "and has the SUID bit set.").arg(f));
@@ -263,7 +261,7 @@ int runTests() {
   // Test 5: check for existence of /etc/resolv.conf
   if (access(_PATH_RESCONF, R_OK) != 0) {
     QString file = _PATH_RESCONF" ";
-    QString msgstr = i18n("%1 is missing or can't be read!\n"
+    QString msgstr = QObject::tr("%1 is missing or can't be read!\n"
                    "Ask your system administrator to create "
                    "this file (can be empty) with appropriate "
                    "read and write permissions.").arg(file);

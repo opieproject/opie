@@ -2,7 +2,7 @@
  *
  *              kPPP: A pppd Front End for the KDE project
  *
- * $Id: auth.h,v 1.1 2003-05-23 19:43:46 tille Exp $
+ * $Id: auth.h,v 1.2 2003-08-09 17:14:55 kergoth Exp $
  *              Copyright (C) 1997 Bernd Johannes Wuebben
  *                      wuebben@math.cornell.edu
  *

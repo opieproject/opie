@@ -121,7 +121,7 @@ StocktickerPluginConfig::StocktickerPluginConfig( QWidget *parent,  const char* 
     timerDelaySpin->setMaxValue( 60);
 
     cfg.setGroup("Timer");
-    timerDelaySpin->setValue( cfg.readNumEntry("Delay",0));
+    timerDelaySpin->setValue( cfg.readNumEntry("Delay",15));
     layout->addMultiCellWidget( timerDelaySpin , 6, 6, 0, 0);
     
     QLabel *label2;

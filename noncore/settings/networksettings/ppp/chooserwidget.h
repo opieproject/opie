@@ -1,7 +1,7 @@
 /* -*- C++ -*-
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: accounts.h,v 1.5 2003-08-09 17:14:55 kergoth Exp $
+ * $Id: chooserwidget.h,v 1.2 2003-08-09 17:14:55 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -24,21 +24,19 @@
  * Software Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#ifndef _ACCOUNTS_H_
-#define _ACCOUNTS_H_
+#ifndef _CHOOSERWIDGET_H_
+#define _CHOOSERWIDGET_H_
 
+#include <qwidget.h>
 #include <qdialog.h>
 #include <qpushbutton.h>
 #include <qlistbox.h>
-#include "chooserwidget.h"
+//#include "acctselect.h"
 
+class QDialog;
 class QCheckBox;
 class QLineEdit;
 class QTabWidget;
-class ModemWidget;
-class ModemWidget2;
-
-
 class DialWidget;
 class AuthWidget;
 class IPWidget;
@@ -46,33 +44,28 @@ class DNSWidget;
 class GatewayWidget;
 class PPPData;
 
-
-class AccountWidget : public ChooserWidget {
-
+class ChooserWidget : public QWidget {
   Q_OBJECT
 public:
-  AccountWidget( PPPData *pd, QWidget *parent=0, const char *name=0, WFlags f=0 );
-  ~AccountWidget() {}
-
+  ChooserWidget( PPPData *pd, QWidget *parent=0, const char *name=0, WFlags f=0 );
+  ~ChooserWidget() {}
 
 private slots:
-  virtual void edit();
-  virtual void copy();
-  virtual void remove();
-  virtual void create();
-  virtual void slotListBoxSelect(int);
-  int doTab();
+  virtual void edit()  = 0;
+  virtual void copy()  = 0;
+  virtual void create()= 0;
+  virtual void remove()= 0;
+  virtual void slotListBoxSelect(int) = 0;
 
- signals:
-   void resetaccounts();
 
-private:
-    DialWidget *dial_w;
-    IPWidget *ip_w;
-    DNSWidget *dns_w;
-    GatewayWidget *gateway_w;
-    AuthWidget *auth_w;
+protected:
+    PPPData *_pppdata;
 
+    QListBox *listListbox;
+    QPushButton *edit_b;
+    QPushButton *copy_b;
+    QPushButton *new_b;
+    QPushButton *delete_b;
 };
 
 

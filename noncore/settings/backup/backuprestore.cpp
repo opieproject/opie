@@ -71,18 +71,9 @@ BackupAndRestore::BackupAndRestore( QWidget* parent, const char* name)
   
 //todo make less static here and use Storage class to get infos
   if(totalLocations == 0){
-
-/* Ramses has a CF-Slot, but that one is internal and you have to dismount the
- * the case. There's also almost always a WLAN card inserted there
-*/
-
     backupLocations.insert("Documents", "/root/Documents");
-#if defined(QT_QWS_RAMSES)
-    backupLocations.insert("MMC", "/mnt/card");
-#else
     backupLocations.insert("CF", "/mnt/cf");
     backupLocations.insert("SD", "/mnt/card");
-#endif
   }
   else{
     for(int i = 0; i < totalLocations; i++){

@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: runtests.h,v 1.1 2003-05-22 15:08:21 tille Exp $
+ * $Id: runtests.h,v 1.2 2003-08-09 17:14:56 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu

@@ -18,8 +18,7 @@
 **
 **********************************************************************/
 
-#include "flat.h"
-#include <qpe/qpeapplication.h>
+#include <qtopia/qpeapplication.h>
 #include <qpushbutton.h>
 #include <qtoolbutton.h>
 #include <qpainter.h>
@@ -32,9 +31,13 @@
 #include <qtabbar.h>
 #include <qspinbox.h>
 #include <qlineedit.h>
+#include <qmap.h>
 
 #define INCLUDE_MENUITEM_DEF
 #include <qmenudata.h>
+#include <qpopupmenu.h>
+
+#include "flat.h"
 
 #define QCOORDARRLEN(x) sizeof(x)/(sizeof(QCOORD)*2)
 
@@ -54,23 +57,37 @@ public:
     FlatStylePrivate() : QObject() {}
 
     bool eventFilter( QObject *o, QEvent *e ) {
-	if ( e->type() == QEvent::ParentPaletteChange && o->inherits( "QMenuBar" ) ) {
-	    QWidget *w = (QWidget *)o;
-	    if ( w->parentWidget() ) {
-		QPalette p = w->parentWidget()->palette();
-		QColorGroup a = p.active();
-		a.setColor( QColorGroup::Light, a.foreground() );
-		a.setColor( QColorGroup::Dark, a.foreground() );
-		p.setActive( a );
-		p.setInactive( a );
-		w->setPalette( p );
+	if ( e->type() == QEvent::ParentPaletteChange ) {
+	    if ( o->inherits( "QMenuBar" ) ) {
+		QWidget *w = (QWidget *)o;
+		if ( w->parentWidget() ) {
+		    QPalette p = w->parentWidget()->palette();
+		    QColorGroup a = p.active();
+		    a.setColor( QColorGroup::Light, a.foreground() );
+		    a.setColor( QColorGroup::Dark, a.foreground() );
+		    p.setActive( a );
+		    p.setInactive( a );
+		    w->setPalette( p );
+		}
+	    } else if ( o->inherits( "QHeader" ) ) {
+		QWidget *w = (QWidget *)o;
+		if ( w->parentWidget() ) {
+		    QPalette p = w->parentWidget()->palette();
+		    QColorGroup a = p.active();
+		    a.setColor( QColorGroup::Light, a.button() );
+		    p.setActive( a );
+		    p.setInactive( a );
+		    w->setPalette( p );
+		}
 	    }
 	}
 	return FALSE;
     }
+
+    QMap<QFrame *,int> frameStyles;
 };
 
-FlatStyle::FlatStyle() : revItem(FALSE)
+FlatStyle::FlatStyle() : revItem(FALSE), fillBtnBorder(FALSE)
 {
     setButtonMargin(3);
     setScrollBarExtent(13,13);
@@ -101,7 +118,9 @@ void FlatStyle::polish( QWidget *w )
 {
     if ( w->inherits( "QFrame" ) ) {
 	QFrame *f = (QFrame *)w;
-	if ( f->frameShape() != QFrame::NoFrame )
+	if ( f->frameShape() == QFrame::HLine || f->frameShape() == QFrame::VLine )
+	    f->setFrameShadow( QFrame::Plain );
+	else if ( f->frameShape() != QFrame::NoFrame )
 	    f->setFrameShape( QFrame::StyledPanel );
 	f->setLineWidth( 1 );
     }
@@ -117,20 +136,32 @@ void FlatStyle::polish( QWidget *w )
 	p.setInactive( a );
 	w->setPalette( p );
 	w->installEventFilter( d );
+    } else if ( w->inherits( "QHeader" ) ) {
+	// make headers look flat
+	QPalette p = w->palette();
+	QColorGroup a = p.active();
+	a.setColor( QColorGroup::Light, a.button() );
+	p.setActive( a );
+	p.setInactive( a );
+	w->setPalette( p );
+	w->installEventFilter( d );
     }
 }
 
 void FlatStyle::unPolish( QWidget *w )
 {
-    if ( w->inherits( "QFrame" ) ) {
+    if ( w->inherits("QFrame") ) {
 	QFrame *f = (QFrame *)w;
-	if ( f->frameShape() != QFrame::NoFrame )
+	if ( f->frameShape() == QFrame::HLine || f->frameShape() == QFrame::VLine ) {
+	    f->setFrameShadow( QFrame::Sunken );
+	} else if ( f->frameShape() != QFrame::NoFrame ) {
 	    f->setFrameShape( QFrame::StyledPanel );
-	f->setLineWidth( 2 );
+	    f->setLineWidth( 2 );
+	}
     }
-    if ( w->inherits( "QSpinBox" ) )
+    if ( w->inherits("QSpinBox") )
 	((SpinBoxHack*)w)->setFlatButtons( FALSE );
-    if ( w->inherits( "QMenuBar" ) ) {
+    if ( w->inherits("QMenuBar") || w->inherits("QHeader") ) {
 	w->unsetPalette();
 	w->removeEventFilter( d );
     }
@@ -138,7 +169,7 @@ void FlatStyle::unPolish( QWidget *w )
 
 int FlatStyle::defaultFrameWidth() const
 {
-    return 1;
+    return 2;
 }
 
 void FlatStyle::drawItem( QPainter *p, int x, int y, int w, int h,
@@ -171,15 +202,29 @@ void FlatStyle::drawButton( QPainter *p, int x, int y, int w, int h,
 {
     QPen oldPen = p->pen();
 
-    if ( h >= 10 ) {
-	x++; y++;
-	w -= 2; h -= 2;
-    }
-
-    p->fillRect( x+1, y+1, w-2, h-2, fill?(*fill):cg.brush(QColorGroup::Button) );
-
     int x2 = x+w-1;
     int y2 = y+h-1;
+
+    if ( fillBtnBorder && btnBg != cg.color(QColorGroup::Button) ) {
+	p->setPen( btnBg );
+	p->drawLine( x, y, x2, y );
+	p->drawLine( x, y2, x2, y2 );
+	p->drawLine( x, y+1, x, y2-1 );
+	p->drawLine( x2, y+1, x2, y2-1 );
+	p->fillRect( x+1, y+1, 3, 3, btnBg );
+	p->fillRect( x+1, y2-3, 3, 3, btnBg );
+	p->fillRect( x2-3, y2-3, 3, 3, btnBg );
+	p->fillRect( x2-3, y+1, 3, 3, btnBg );
+	p->fillRect( x+2, y+2, w-4, h-4, fill?(*fill):cg.brush(QColorGroup::Button) );
+    } else {
+	p->fillRect( x+1, y+1, w-2, h-2, fill?(*fill):cg.brush(QColorGroup::Button) );
+    }
+
+    if ( h >= 10 ) {
+	x++; y++;
+	x2--; y2--;
+	w -= 2; h -= 2;
+    }
 
     p->setPen( cg.foreground() );
 
@@ -225,12 +270,23 @@ void FlatStyle::drawBevelButton( QPainter *p, int x, int y, int w, int h,
 void FlatStyle::drawToolButton( QPainter *p, int x, int y, int w, int h,
                                 const QColorGroup &g, bool sunken, const QBrush* fill )
 {
+    if ( p->device()->devType() == QInternal::Widget ) {
+	QWidget *w = (QWidget *)p->device();
+	if ( w->isA("QToolButton") ) {
+	    QToolButton *btn = (QToolButton *)w;
+	    if ( btn->parentWidget() ) {
+		btnBg = btn->parentWidget()->backgroundColor();
+		fillBtnBorder = TRUE;
+	    }
+	}
+    }
     QBrush fb( fill ? *fill : g.button() );
     if ( sunken && fb == g.brush( QColorGroup::Button ) ) {
 	fb = g.buttonText();
 	revItem = TRUE;	// ugh
     }
     drawButton( p, x, y, w, h, g, sunken, &fb );
+    fillBtnBorder = FALSE;
 }
 
 void FlatStyle::drawPushButton( QPushButton *btn, QPainter *p )
@@ -256,6 +312,11 @@ void FlatStyle::drawPushButton( QPushButton *btn, QPainter *p )
 	y2 -= diw;
     }
     */
+
+    if ( btn->parentWidget() ) {
+	btnBg = btn->parentWidget()->backgroundColor();
+	fillBtnBorder = TRUE;
+    }
 
     bool clearButton = TRUE;
     if ( btn->isDown() ) {
@@ -283,6 +344,7 @@ void FlatStyle::drawPushButton( QPushButton *btn, QPainter *p )
     }
     */
 
+    fillBtnBorder = FALSE;
     if ( p->brush().style() != NoBrush )
 	p->setBrush( NoBrush );
 }
@@ -589,7 +651,8 @@ void FlatStyle::drawScrollBarControls( QPainter* p, const QScrollBar* sb, int sl
     p->setBrush( g.brush( QColorGroup::Mid ) );
     if ( controls & SubPage )
 	p->drawRect( subPageR.x(), subPageR.y(), subPageR.width(), subPageR.height() );
-    if ( controls & AddPage && addPageR.y() < addPageR.bottom() )
+    if ( controls & AddPage && addPageR.y() < addPageR.bottom() &&
+	 addPageR.x() < addPageR.right() )
 	p->drawRect( addPageR.x(), addPageR.y(), addPageR.width(), addPageR.height() );
     if ( controls & Slider ) {
 	QPoint bo = p->brushOrigin();
@@ -783,6 +846,12 @@ static const int motifTabSpacing	= 12;	// space between text and tab
 static const int motifCheckMarkHMargin	= 1;	// horiz. margins of check mark
 static const int windowsRightBorder	= 8;    // right border on windows
 static const int windowsCheckMarkWidth  = 2;    // checkmarks width on windows
+
+void FlatStyle::polishPopupMenu ( QPopupMenu *m )
+{
+    QWindowsStyle::polishPopupMenu( m );
+    m->setLineWidth( 1 );
+}
 
 /*! \reimp
 */
@@ -1008,7 +1077,7 @@ QStyle *FlatStyleImpl::style()
 
 QString FlatStyleImpl::name() const
 {
-    return QString("Flat");
+    return qApp->translate("FlatStyle", "Flat", "Name of the style Flat");
 }
 
 QRESULT FlatStyleImpl::queryInterface( const QUuid &uuid, QUnknownInterface **iface )
@@ -1018,9 +1087,10 @@ QRESULT FlatStyleImpl::queryInterface( const QUuid &uuid, QUnknownInterface **if
 	*iface = this;
     else if ( uuid == IID_Style )
 	*iface = this;
+    else
+	return QS_FALSE;
 
-    if ( *iface )
-	(*iface)->addRef();
+    (*iface)->addRef();
     return QS_OK;
 }
 

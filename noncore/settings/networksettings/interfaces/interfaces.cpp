@@ -1,5 +1,6 @@
 #include "interfaces.h"
 
+#include <qcheckbox.h>
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qregexp.h>
@@ -151,6 +152,7 @@ bool Interfaces::isInterfaceSet() const {
  * @return true if successfull.
  */
 bool Interfaces::addInterface(const QString &interface, const QString &family, const QString &method){
+    qDebug("Interfaces::addInterface(%s)",interface.latin1());
   if(0 == acceptedFamily.contains(family))
     return false;
   QString newInterface = interface.simplifyWhiteSpace();
@@ -166,6 +168,7 @@ bool Interfaces::addInterface(const QString &interface, const QString &family, c
  * @return bool true if successfull
  */
 bool Interfaces::copyInterface(const QString &interface, const QString &newInterface){
+    qDebug("copy interface %s to %s", interface.latin1(), newInterface.latin1());
   if(!setInterface(interface))
     return false;
 
@@ -272,12 +275,16 @@ QString Interfaces::getInterfaceMethod(bool &error){
  * @return bool true if successfull.
  */
 bool Interfaces::setInterfaceName(const QString &newName){
+    qDebug("setInterfaceName %s", newName.latin1());
   if(currentIface == interfaces.end())
     return false;
   QString name = newName.simplifyWhiteSpace();
   name = name.replace(QRegExp(" "), "");
   bool returnValue = false;
-  (*currentIface) = QString("iface %1 %2 %3").arg(name).arg(getInterfaceFamily(returnValue)).arg(getInterfaceMethod(returnValue));
+  QString tmp = QString("iface %1 %2 %3").arg(name).arg(getInterfaceFamily(returnValue)).arg(getInterfaceMethod(returnValue));
+  qDebug("setting  %s",tmp.latin1());
+
+  (*currentIface) = tmp;
   return !returnValue;
 }
 
@@ -327,13 +334,19 @@ QString Interfaces::getInterfaceOption(const QString &option, bool &error){
 /**
  * Set a value for an option in the currently selected interface.  If option
  *  doesn't exist then it is added along with the value.
+ * If value isEmpty() then we will remove the option
+ *
  * @param option the options to set the value.
  * @param value the value that option should be set to.
  * @param error set to true if any error occurs, false otherwise.
  * @return QString the options value. QString::null if error == true
  */
 bool Interfaces::setInterfaceOption(const QString &option, const QString &value){
-  return setOption(currentIface, option, value);
+    if( value.stripWhiteSpace().isEmpty() )
+	return removeInterfaceOption( option );
+
+    qDebug("iface >%s< option >%s< value >%s<", (*currentIface).latin1(), option.latin1(),value.latin1());
+    return setOption(currentIface, option, value);
 }
 
 /**
@@ -492,29 +505,48 @@ bool Interfaces::setStanza(const QString &stanza, const QString &option, QString
 bool Interfaces::setOption(const QStringList::Iterator &start, const QString &option, const QString &value){
   if(start == interfaces.end())
     return false;
-
+  qDebug("setting option");
   bool found = false;
+  bool replaced = false;
+  QStringList::Iterator insertAt = NULL;
   for ( QStringList::Iterator it = start; it != interfaces.end(); ++it ) {
-    if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO))  && it != start){
-      if(!found && value != ""){
-        // Got to the end of the stanza without finding it, so append it.
-        interfaces.insert(--it, QString("\t%1 %2").arg(option).arg(value));
-      }
-      found = true;
-      break;
-    }
+      qDebug(" Interfaces::setOption got line >%s<",(*it).latin1());
+      // FIXME: was  not completly stupid just wrong sice all options got inserted bevore the iface line
+      // but since it works with an empty interfaces file I (tille) will not do anything more
+      if(((*it).contains(IFACE) || (*it).contains(MAPPING) || (*it).contains(AUTO)) ){
+          if (found) break;
+//  && it != start){
+//       if(!found && value != ""){
+//         // Got to the end of the stanza without finding it, so append it.
+//           qDebug(" Got to the end of the stanza without finding it, so append it.");
+//         interfaces.insert(--it, QString("\t%1 %2").arg(option).arg(value));
+//       }
+         qDebug("found 1");
+//         interfaces.insert(++it, QString("\t%1 %2").arg(option).arg(value));
+       found = true;
+       insertAt = it;
+
+     }
     if((*it).contains(option) && it != start && (*it).at(0) != '#'){
       // Found it in stanza so replace it.
+        qDebug("found 2");
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
       found = true;
+      replaced = true;
         (*it) = QString("\t%1 %2").arg(option).arg(value);
     }
   }
   if(!found){
+      qDebug("! found insert anyway");
     QStringList::Iterator p = start;
     interfaces.insert(++p, QString("\t%1 %2").arg(option).arg(value));
     found = true;
+  }
+
+  if(found && !replaced){
+      qDebug("found iface but not the option so insert it here...");
+      interfaces.insert(++insertAt, QString("\t%1 %2").arg(option).arg(value));
   }
   return found;
 }
@@ -552,7 +584,8 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
       found = true;
-      (*it) = "";
+      it = interfaces.remove( it ); // we really want to remove the line
+      --it; // we do ++it later in the head of the for loop
     }
   }
   return found;
@@ -579,7 +612,8 @@ bool Interfaces::removeOption(const QStringList::Iterator &start, const QString 
       if(found)
         qDebug(QString("Interfaces: Set Options found more then one value for option: %1 in stanza: %1").arg(option).arg((*start)).latin1());
       found = true;
-      (*it) = "";
+      it = interfaces.remove( it ); // we really want to remove the line
+      --it; // we do ++it later in the head of the for loop
     }
   }
   return found;

@@ -41,6 +41,7 @@ class QSpinBox;
 
 class WeatherPluginConfig : public TodayConfigWidget
 {
+    Q_OBJECT
 	public:
 		WeatherPluginConfig( QWidget *parent,  const char *name );
 		~WeatherPluginConfig();

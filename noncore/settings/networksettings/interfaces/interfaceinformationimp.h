@@ -10,7 +10,7 @@ Q_OBJECT
 	
 public:
   InterfaceInformationImp(QWidget *parent=0, const char *name=0, Interface *i=0, WFlags f=0);
-  ~InterfaceInformationImp(){};
+  ~InterfaceInformationImp();
   
 private slots:
   void advanced();

@@ -9,6 +9,7 @@
 #include <qpushbutton.h>
 #include <qwhatsthis.h>
 #include <qlabel.h>
+#include <qlayout.h>
 #include <qpe/config.h>
 #include <qstringlist.h>
 #include <qmainwindow.h>

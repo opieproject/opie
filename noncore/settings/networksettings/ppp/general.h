@@ -2,7 +2,7 @@
  *
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: general.h,v 1.3 2003-05-30 15:06:17 tille Exp $
+ * $Id: general.h,v 1.4 2003-08-09 17:14:55 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -36,19 +36,24 @@ class QCheckBox;
 class QComboBox;
 class PPPData;
 class InterfacePPP;
+class QLineEdit;
 
 class ModemWidget : public QWidget {
   Q_OBJECT
 public:
-  ModemWidget( InterfacePPP*, QWidget *parent=0, const char *name=0 );
+  ModemWidget(PPPData*, QWidget *parent=0, const char *name=0 );
+  ~ModemWidget();
 
-private slots:
-  void 	setmodemdc(int);
-  void 	setflowcontrol(int);
-  void 	modemtimeoutchanged(int);
-  void 	modemlockfilechanged(bool);
-  void 	setenter(int);
-  void  speed_selection(int);
+  bool save();
+
+/* private slots: */
+/*   void 	setmodemdc(int); */
+/*   void  setmodemdc(const QString &); */
+/*   void 	setflowcontrol(int); */
+/*   void 	modemtimeoutchanged(int); */
+/*   void 	modemlockfilechanged(bool); */
+/*   void 	setenter(int); */
+/*   void  speed_selection(int); */
 
 private:
   QComboBox 	*enter;
@@ -56,6 +61,7 @@ private:
 /*   QLabel 	*label2; */
 /*   QLabel 	*labeltmp; */
 /*   QLabel 	*labelenter; */
+  QLineEdit     *modemname;
   QComboBox 	*modemdevice;
   QComboBox 	*flowcontrol;
 
@@ -64,23 +70,24 @@ private:
 
   QSpinBox 	*modemtimeout;
   QCheckBox     *modemlockfile;
-  InterfacePPP *_ifaceppp;
+  PPPData *_pppdata;
 };
 
 
 class ModemWidget2 : public QWidget {
   Q_OBJECT
 public:
-  ModemWidget2( InterfacePPP*, QWidget *parent=0, const char *name=0 );
+  ModemWidget2( PPPData*, InterfacePPP*, QWidget *parent=0, const char *name=0 );
+  bool save();
 
 private slots:
-  void  waitfordtchanged(bool);
-  void 	busywaitchanged(int);
+/*   void  waitfordtchanged(bool); */
+/*   void 	busywaitchanged(int); */
 //  void 	use_cdline_toggled(bool);
   void 	modemcmdsbutton();
   //  void 	terminal();
   void 	query_modem();
-  void  volumeChanged(int);
+  //  void  volumeChanged(int);
 
 private:
   QLabel 	*labeltmp;
@@ -92,6 +99,7 @@ private:
   QSpinBox 	*busywait;
   QCheckBox 	*chkbox1;
   QSlider       *volume;
+  PPPData *_pppdata;
   InterfacePPP *_ifaceppp;
 };
 

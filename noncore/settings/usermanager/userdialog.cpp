@@ -425,7 +425,7 @@ void UserDialog::accept() {
  *
  */
 void UserDialog::clickedPicture() {
-	QString filename=OFileDialog::getOpenFileName(OFileSelector::EXTENDED,"/opt/QtPalmtop/pics");
+	QString filename=OFileDialog::getOpenFileName(OFileSelector::EXTENDED, QString::null);
 	if(!(filename.isEmpty())) {
 		userImage.reset();
 		if(!(userImage.load(filename))) {

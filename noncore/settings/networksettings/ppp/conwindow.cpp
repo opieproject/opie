@@ -1,7 +1,7 @@
 /*
  *            kPPP: A pppd front end for the KDE project
  *
- * $Id: conwindow.cpp,v 1.4 2003-05-30 15:06:17 tille Exp $
+ * $Id: conwindow.cpp,v 1.5 2003-08-09 17:14:55 kergoth Exp $
  *
  *            Copyright (C) 1997 Bernd Johannes Wuebben
  *                   wuebben@math.cornell.edu
@@ -24,12 +24,7 @@
 #include <qtooltip.h>
 #include <qdialog.h>
 #include "conwindow.h"
-//#include "docking.h"
 #include "pppdata.h"
-// #include "pppstats.h"
-// #include <klocale.h>
-#define i18n QObject::tr
-// #include <kglobal.h>
 
 
 ConWindow::ConWindow(PPPData *pd, QWidget *parent, const char *name,
@@ -42,29 +37,29 @@ ConWindow::ConWindow(PPPData *pd, QWidget *parent, const char *name,
     tl1(0),
     _pppdata(pd)
 {
-  info1 = new QLabel(i18n("Connected at:"), this);
+  info1 = new QLabel(QObject::tr("Connected at:"), this);
   info2 = new QLabel("", this);
 
-  timelabel1 = new QLabel(i18n("Time connected:"), this);
+  timelabel1 = new QLabel(QObject::tr("Time connected:"), this);
   timelabel2 = new QLabel("000:00:00", this);
 
-  vollabel = new QLabel(i18n("Volume:"), this);
+  vollabel = new QLabel(QObject::tr("Volume:"), this);
   volinfo  = new QLabel("", this);
 
   // now the stuff for accounting
-  session_bill_l = new QLabel(i18n("Session Bill:"), this);
+  session_bill_l = new QLabel(QObject::tr("Session Bill:"), this);
   session_bill = new QLabel("", this);
-  total_bill_l = new QLabel(i18n("Total Bill:"), this);
+  total_bill_l = new QLabel(QObject::tr("Total Bill:"), this);
   total_bill = new QLabel("", this);
 
   this->setCaption("kppp");
 
   cancelbutton = new QPushButton(this);
-  cancelbutton->setText(i18n("Disconnect"));
+  cancelbutton->setText(QObject::tr("Disconnect"));
   connect(cancelbutton, SIGNAL(clicked()), mainwidget, SLOT(disconnect()));
 
  //  statsbutton = new QPushButton(this);
-//   statsbutton->setText(i18n("Details"));
+//   statsbutton->setText(QObject::tr("Details"));
 //   statsbutton->setFocus();
 //   connect(statsbutton, SIGNAL(clicked()), mainwidget, SLOT(showStats()));
 
@@ -94,8 +89,8 @@ bool ConWindow::event(QEvent *e) {
 
 QString ConWindow::prettyPrintVolume(unsigned int n) {
   int idx = 0;
-  const QString quant[] = {i18n("Byte"), i18n("KB"),
-		   i18n("MB"), i18n("GB"), QString::null};
+  const QString quant[] = {QObject::tr("Byte"), QObject::tr("KB"),
+		   QObject::tr("MB"), QObject::tr("GB"), QString::null};
 
   float n1 = n;
   while(n >= 1024 && quant[idx] != QString::null) {
@@ -259,14 +254,14 @@ void ConWindow::stopClock() {
 
 
 void ConWindow::timeclick() {
-//   QString tooltip = i18n("Connection: %1\n"
+//   QString tooltip = QObject::tr("Connection: %1\n"
 // 			 "Connected at: %2\n"
 // 			 "Time connected: %3")
 // 		    .arg(_pppdata->accname()).arg(info2->text())
 // 		    .arg(time_string2);
 
 //   if(accountingEnabled)
-//       tooltip += i18n("\nSession Bill: %1\nTotal Bill: %2")
+//       tooltip += QObject::tr("\nSession Bill: %1\nTotal Bill: %2")
 // 		 .arg(session_bill->text()).arg(total_bill->text());
 //   // volume accounting
 //   if(volumeAccountingEnabled) {

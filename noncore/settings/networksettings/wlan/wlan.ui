@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>251</width>
+            <width>247</width>
             <height>299</height>
         </rect>
     </property>
@@ -287,51 +287,6 @@
                     <item>
                         <property>
                             <name>text</name>
-                            <string>Auto</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>Managed</string>
-                        </property>
-                    </item>
-                    <item>
-                        <property>
-                            <name>text</name>
-                            <string>Ad-Hoc</string>
-                        </property>
-                    </item>
-                    <property stdset="1">
-                        <name>name</name>
-                        <cstring>mode</cstring>
-                    </property>
-                    <property stdset="1">
-                        <name>enabled</name>
-                        <bool>true</bool>
-                    </property>
-                    <property stdset="1">
-                        <name>geometry</name>
-                        <rect>
-                            <x>101</x>
-                            <y>11</y>
-                            <width>103</width>
-                            <height>29</height>
-                        </rect>
-                    </property>
-                    <property stdset="1">
-                        <name>sizePolicy</name>
-                        <sizepolicy>
-                            <hsizetype>1</hsizetype>
-                            <vsizetype>0</vsizetype>
-                        </sizepolicy>
-                    </property>
-                </widget>
-                <widget>
-                    <class>QComboBox</class>
-                    <item>
-                        <property>
-                            <name>text</name>
                             <string>any</string>
                         </property>
                     </item>
@@ -374,6 +329,57 @@
                     <property stdset="1">
                         <name>duplicatesEnabled</name>
                         <bool>false</bool>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QComboBox</class>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Infrastructure</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Auto</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Managed</string>
+                        </property>
+                    </item>
+                    <item>
+                        <property>
+                            <name>text</name>
+                            <string>Ad-Hoc</string>
+                        </property>
+                    </item>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>mode</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>enabled</name>
+                        <bool>true</bool>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>101</x>
+                            <y>11</y>
+                            <width>103</width>
+                            <height>29</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>sizePolicy</name>
+                        <sizepolicy>
+                            <hsizetype>1</hsizetype>
+                            <vsizetype>0</vsizetype>
+                        </sizepolicy>
                     </property>
                 </widget>
             </widget>

@@ -1,5 +1,5 @@
 #include "wlanmodule.h"
-#include "wlanimp.h"
+#include "wlanimp2.h"
 #include "infoimp.h"
 #include "wextensions.h"
 #include "interfaceinformationimp.h"

@@ -4,6 +4,7 @@
 #include <qtabwidget.h>
 
 #include "accounts.h"
+#include "devices.h"
 #include "general.h"
 #include "interfaceppp.h"
 #include "modem.h"
@@ -28,7 +29,7 @@ PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
     qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
 
     qDebug(" _pppdata->accname >%s<",interface->data()->accname().latin1());
-    qDebug(" _pppdata->currentAccountID() >%i<",interface->data()->currentAccountID());
+
 
   QVBoxLayout *layout = new QVBoxLayout( this );
   layout->setSpacing( 0 );
@@ -36,12 +37,16 @@ PPPConfigWidget::PPPConfigWidget( InterfacePPP* iface, QWidget *parent,
   tabWindow = new QTabWidget( this, "tabWidget" );
   layout->addWidget( tabWindow );
 
-  accounts = new AccountWidget( interface->data(), tabWindow, "accounts" );
+  accounts = new AccountWidget( interface->data(), tabWindow, "accounts", Qt::WStyle_ContextHelp  );
   tabWindow->addTab( accounts, tr("&Accounts") );
-  modem1 = new ModemWidget( interface, tabWindow, "modem1" );
-  tabWindow->addTab( modem1, tr("&Device") );
-  modem2 = new ModemWidget2( interface, tabWindow, "modem2" );
-  tabWindow->addTab( modem2, tr("&Modem") );
+  devices = new DevicesWidget( interface, tabWindow, "devices", Qt::WStyle_ContextHelp );
+  tabWindow->addTab( devices, tr("&Devices") );
+
+//OLD:
+//   modem1 = new ModemWidget( interface, tabWindow, "modem1" );
+//   tabWindow->addTab( modem1, tr("&Device") );
+//   modem2 = new ModemWidget2( interface, tabWindow, "modem2" );
+//   tabWindow->addTab( modem2, tr("&Modem") );
 
 }
 
@@ -56,7 +61,7 @@ void PPPConfigWidget::accept()
     qDebug("PPPConfigWidget::accept");
     qDebug(" _pppdata->accname >%s<",interface->data()->accname().latin1());
     qDebug(" interface->getHardwareName >%s<", interface->getHardwareName().latin1());
-    interface->setInterfaceName( interface->data()->modemDevice() );
+    interface->setInterfaceName( interface->data()->devname() );
     interface->setHardwareName( interface->data()->accname() );
     interface->save();
     QDialog::accept();

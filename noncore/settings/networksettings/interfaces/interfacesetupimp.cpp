@@ -44,6 +44,7 @@ InterfaceSetupImp::~InterfaceSetupImp(){
 bool InterfaceSetupImp::saveChanges(){
   bool error;
   QString iface = interfaces->getInterfaceName(error);
+  qDebug("InterfaceSetupImp::saveChanges saves interface %s", iface.latin1() );
   if(!saveSettings())
     return false;
 
@@ -117,6 +118,9 @@ bool InterfaceSetupImp::saveSettings(){
       QString dns = firstDNSLineEdit->text() + " " + secondDNSLineEdit->text();
       interfaces->setInterfaceOption("up "DNSSCRIPT" -a ", dns);
       interfaces->setInterfaceOption("down "DNSSCRIPT" -r ", dns);
+    }else{
+        interfaces->removeInterfaceOption("up "DNSSCRIPT" -a ");
+        interfaces->removeInterfaceOption("down "DNSSCRIPT" -r");
     }
   }
 
