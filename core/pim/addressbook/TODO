@@ -18,22 +18,14 @@ Feature requests:
 
 Known Bugs:
 -----------
-- Default Email-button: A lot of problems:
-	If on second tab: The combo chooser is on the top left of the screen ! :(
-- Default Email-Button: Sometimes not hiding the textfields completely
 
 Bugs but not in addressbook:
 -----------------------------
 - VCARD: If umlaut (äöüß) in address, the parser gets confused..
 
-- Exporting and reimporting of Jobtitle was reported to fail (Could not reproduce this ! (se))
-
 
 Urgent:
 --------
-ContactEditor:
-- Contact-Editor is temporarely reenabled. Wait for replacement.
-- Redesign of Contacteditor
 - Category is on the wrong position after changing to personal and back to normal
 	( Temporarily workaround: Category is never deactivated.. :S )
 
@@ -41,10 +33,6 @@ ContactEditor:
 
 Important:
 ----------
-
-- If new contact is added (contacteditor closed): focus (table, card) to
-  this entry !
-- After search (Started with Return): KeyFocus should be on Tabelle
 
 - "What's this" should be added (Deleyed after Feature Freeze)
 
@@ -54,6 +42,12 @@ Less important:
 - The picker (alphabetical sort widget) should be
    placed verticaly or horizontally (configurable)
 - Find a smart solution for activating/deactivating the "send email" event
+- If new contact is added (contacteditor closed): focus (table, card) to
+  this entry !
+- After search (Started with Return): KeyFocus should be on Tabelle
+
+ContactEditor:
+- Redesign of Contacteditor
 
 Should be Fixed (not absolute sure, need further validation):
 -------------------------------------------------------------
@@ -117,3 +111,6 @@ Fixed/Ready:
 - Overview window cleanup needed..
 - Store last settings of combo-boxes
 - Personal and Business Web-page is not editable 
+- Default Email-button: A lot of problems:
+	If on second tab: The combo chooser is on the top left of the screen ! :(
+- Default Email-Button: Sometimes not hiding the textfields completely

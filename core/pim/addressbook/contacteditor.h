@@ -29,6 +29,7 @@
 #include <qlist.h>
 #include <qmap.h>
 #include <qstringlist.h>
+#include <qwidgetstack.h> 
 
 #include "ocontactfields.h"
 
@@ -106,10 +107,11 @@ class ContactEditor : public QDialog {
 		void defaultEmailChanged(int);
 
 	private:
+		enum StackWidgets { TextField = 1, Combo };
 		int defaultEmailChooserPosition;
 		void populateDefaultEmailCmb();
 		void chooserChange( const QString&, int , QLineEdit*, int );
-		bool cmbChooserChange( int , QLineEdit*, int );
+		bool cmbChooserChange( int , QWidgetStack*, int );
 		OContactFields contactfields;
 
 		bool useFullName;
@@ -154,6 +156,10 @@ class ContactEditor : public QDialog {
 		QLineEdit *txtChooserField2;
 		QLineEdit *txtChooserField3;
 		QLineEdit *txtChooserField4;
+		QWidgetStack* m_widgetStack1;
+		QWidgetStack* m_widgetStack2;
+		QWidgetStack* m_widgetStack3;
+		QWidgetStack* m_widgetStack4;
 		QComboBox *cmbChooserField1;
 		QComboBox *cmbChooserField2;
 		QComboBox *cmbChooserField3;

@@ -162,23 +162,41 @@ void ContactEditor::init() {
 	txtOrganization = new QLineEdit( container );
 	gl->addWidget( txtOrganization, 2, 1 );
 
+	// Chooser 1 
 	cmbChooserField1 = new QComboBox( FALSE, container );
 	cmbChooserField1->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField1, 3, 0 );
-	txtChooserField1 = new QLineEdit( container );
-	gl->addWidget( txtChooserField1, 3, 1 );
+	// Textfield for chooser 1.
+	// Now use Widgetstack to contain the textfield and the default-email combo !
+	m_widgetStack1 = new QWidgetStack( container );
+	txtChooserField1 = new QLineEdit( m_widgetStack1 );
+	m_widgetStack1 -> addWidget( txtChooserField1, TextField );
+	gl->addWidget( m_widgetStack1, 3, 1 );
+	m_widgetStack1 -> raiseWidget( TextField );
 
+	// Chooser 2
 	cmbChooserField2 = new QComboBox( FALSE, container );
 	cmbChooserField2->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField2, 4, 0 );
-	txtChooserField2 = new QLineEdit( container );
-	gl->addWidget( txtChooserField2, 4, 1 );
+	// Textfield for chooser 2
+	// Now use WidgetStack to contain the textfield and the default-email combo!
+	m_widgetStack2 = new QWidgetStack( container );
+	txtChooserField2 = new QLineEdit( m_widgetStack2 );
+	m_widgetStack2 -> addWidget( txtChooserField2, TextField );
+	gl->addWidget( m_widgetStack2, 4, 1 );
+	m_widgetStack2 -> raiseWidget( TextField );
 
+	// Chooser 3
 	cmbChooserField3 = new QComboBox( FALSE, container );
 	cmbChooserField3->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField3, 5, 0 );
-	txtChooserField3 = new QLineEdit( container );
-	gl->addWidget( txtChooserField3, 5, 1 );
+	// Textfield for chooser 2
+	// Now use WidgetStack to contain the textfield and the default-email combo!
+	m_widgetStack3 = new QWidgetStack( container );
+	txtChooserField3 = new QLineEdit( m_widgetStack3 );
+	m_widgetStack3 -> addWidget( txtChooserField3, TextField );
+	gl->addWidget( m_widgetStack3, 5, 1 );
+	m_widgetStack3 -> raiseWidget( TextField );
 
 	l = new QLabel( tr( "File As" ), container );
 	gl->addWidget( l, 6, 0 );
@@ -457,11 +475,17 @@ void ContactEditor::init() {
 
 	gl->addMultiCellWidget( cmbCountry, 5, 5, 1, 2 );
 
+	// Chooser 4
 	cmbChooserField4 = new QComboBox( FALSE, container );
 	cmbChooserField4->setMaximumWidth( 90 );
 	gl->addWidget( cmbChooserField4, 6, 0 );
-	txtChooserField4 = new QLineEdit( container );
-	gl->addMultiCellWidget( txtChooserField4, 6, 6, 1, 2 );
+	// Textfield for chooser 2
+	// Now use WidgetStack to contain the textfield and the default-email combo!
+	m_widgetStack4 = new QWidgetStack( container );
+	txtChooserField4 = new QLineEdit( m_widgetStack4 );
+	m_widgetStack4 -> addWidget( txtChooserField4, TextField );
+	gl->addMultiCellWidget( m_widgetStack4, 6, 6, 1, 2 );
+	m_widgetStack4 -> raiseWidget( TextField );
 
 	QSpacerItem *space = new QSpacerItem(1,1,
                                              QSizePolicy::Maximum,
@@ -700,7 +724,7 @@ void ContactEditor::populateDefaultEmailCmb(){
 // Called when any combobox was changed.
 // "true" returned if the change was chandled by this function, else it should
 // be handled by something else..
-bool ContactEditor::cmbChooserChange( int index, QLineEdit *inputWid, int widgetPos ) {
+bool ContactEditor::cmbChooserChange( int index, QWidgetStack* inputStack, int widgetPos ) {
 	QString type = slChooserNames[index];
 	qWarning("ContactEditor::cmbChooserChange -> Type: %s, WidgetPos: %d", type.latin1(), widgetPos );
 
@@ -711,34 +735,30 @@ bool ContactEditor::cmbChooserChange( int index, QLineEdit *inputWid, int widget
         if ( type == "Default Email"){         
 		qWarning("Choosing default-email (defaultEmailChooserPosition= %d) ", defaultEmailChooserPosition);
 		
-		// More than one defaul-email chooser is not allowed !
+		// More than one default-email chooser is not allowed !
 		if ( ( defaultEmailChooserPosition != -1 ) && 
 		     defaultEmailChooserPosition != widgetPos && !initializing){
 			chooserError( widgetPos );
 			return true;
 		}
 
-		if ( cmbDefaultEmail ){  
-			delete cmbDefaultEmail;
-			cmbDefaultEmail = 0l;
+		QComboBox* cmbo = ( QComboBox* ) inputStack -> widget( Combo );
+		if ( cmbo ){  
+			inputStack->raiseWidget( TextField );
+			inputStack -> removeWidget( cmbo );
+			delete cmbo;
 		}
-		cmbDefaultEmail = new QComboBox(inputWid->parentWidget());	   
-		cmbDefaultEmail->setGeometry(inputWid->frameGeometry()); /* :SX */
+		cmbo = new QComboBox( inputStack );
+		cmbo -> insertStringList( emails );
 
-		QRect rect = inputWid->frameGeometry();
-		qWarning("Geometrie: X=%d, Y=%d, Left=%d, Top=%d, Right=%d, Bottom=%d", 
-			 rect.x(), rect.y(), rect.left(), rect.top(), rect.right(), rect.bottom());
-		QPoint pnt = inputWid->pos();
-		qWarning("Position : X=%d, Y=%d", pnt.x(), pnt.y() );
-		
-		connect( cmbDefaultEmail,SIGNAL( activated(int) ),
-			 SLOT( defaultEmailChanged(int) ) ); 
-
-		cmbDefaultEmail->clear();    
-		cmbDefaultEmail->insertStringList( emails );
-		cmbDefaultEmail->show();
+		inputStack -> addWidget( cmbo, Combo );
+		inputStack -> raiseWidget( Combo );
 
 		defaultEmailChooserPosition = widgetPos;
+		cmbDefaultEmail = cmbo;
+
+		connect( cmbo,SIGNAL( activated(int) ),
+			 SLOT( defaultEmailChanged(int) ) ); 
 
 		// Set current default email
 		populateDefaultEmailCmb();
@@ -749,8 +769,13 @@ bool ContactEditor::cmbChooserChange( int index, QLineEdit *inputWid, int widget
 		qWarning(" Hiding default-email combo" );
 		if ( defaultEmailChooserPosition == widgetPos ){
 			defaultEmailChooserPosition = -1;
-			if ( cmbDefaultEmail )
-				cmbDefaultEmail->hide();
+			QComboBox* cmbo = ( QComboBox* ) inputStack -> widget( Combo );
+			if ( cmbo ){  
+				inputStack->raiseWidget( TextField );
+				inputStack -> removeWidget( cmbo );
+				cmbDefaultEmail = 0l;
+				delete cmbo;
+			}
 
 		} 
 
@@ -802,7 +827,7 @@ void ContactEditor::chooserError( int index )
 void ContactEditor::chooserChange( const QString &textChanged, int index, 
 				   QLineEdit* , int widgetPos ) {
 
-	QString type = slChooserNames[index];
+	QString type = slChooserNames[index]; // :SX
 	qDebug("ContactEditor::chooserChange( type=>%s<, textChanged=>%s< index=%i, widgetPos=%i",
 	       type.latin1(),textChanged.latin1(), index,  widgetPos );
 
@@ -812,13 +837,7 @@ void ContactEditor::chooserChange( const QString &textChanged, int index,
 
 		populateDefaultEmailCmb();
 
-        }else if (defaultEmailChooserPosition == widgetPos){
-		qDebug("cmbDefaultEmail->hide()");
-
-		if (cmbDefaultEmail) cmbDefaultEmail->hide();
-		widgetPos=-1;
-
-	}else if (type == "Emails"){
+        }else if (type == "Emails"){
 		qDebug("emails");
 
 		QString de;
@@ -919,8 +938,8 @@ void ContactEditor::slotCountryChange( const QString &textChanged ) {
 
 void ContactEditor::slotCmbChooser1Change( int index ) {
 	qWarning("ContactEditor::slotCmbChooser1Change( %d )", index);
-	if ( !cmbChooserChange( cmbChooserField1->currentItem(), txtChooserField1, 1) ){
-
+	if ( !cmbChooserChange( cmbChooserField1->currentItem(), m_widgetStack1, 1) ){
+		
 		txtChooserField1->setText( slChooserValues[index] );
 		txtChooserField1->setFocus();
 
@@ -931,7 +950,7 @@ void ContactEditor::slotCmbChooser1Change( int index ) {
 void ContactEditor::slotCmbChooser2Change( int index ) {
 	qWarning("ContactEditor::slotCmbChooser2Change( %d )", index);
 
-	if ( !cmbChooserChange( cmbChooserField2->currentItem(), txtChooserField2, 2) ){
+	if ( !cmbChooserChange( cmbChooserField2->currentItem(), m_widgetStack2, 2) ){
 
 		txtChooserField2->setText( slChooserValues[index] );
 		txtChooserField2->setFocus();
@@ -942,7 +961,7 @@ void ContactEditor::slotCmbChooser2Change( int index ) {
 void ContactEditor::slotCmbChooser3Change( int index ) {
 	qWarning("ContactEditor::slotCmbChooser3Change( %d )", index);
 
-	if ( !cmbChooserChange( cmbChooserField3->currentItem(), txtChooserField3, 3) ){
+	if ( !cmbChooserChange( cmbChooserField3->currentItem(), m_widgetStack3, 3) ){
 
 		txtChooserField3->setText( slChooserValues[index] );
 		txtChooserField3->setFocus();
@@ -953,7 +972,7 @@ void ContactEditor::slotCmbChooser3Change( int index ) {
 void ContactEditor::slotCmbChooser4Change( int index ) {
 	qWarning("ContactEditor::slotCmbChooser4Change( %d )", index);
 
-	if ( !cmbChooserChange( cmbChooserField4->currentItem(), txtChooserField4, 4) ){
+	if ( !cmbChooserChange( cmbChooserField4->currentItem(), m_widgetStack4, 4) ){
 
 		txtChooserField4->setText( slChooserValues[index] );
 		txtChooserField4->setFocus();

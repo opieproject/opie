@@ -420,7 +420,7 @@ void OContactFields::loadFromRecord( const OContact &cnt ){
 void OContactFields::setFieldOrder( int num, int index ){
 	qDebug("qcontactfields setfieldorder pos %i -> %i",num,index);
 
-	fieldOrder[num] = QString::number( index )[0];
+	fieldOrder[num] = QString::number( index, 16 )[0];
 
 	// We will store this new fieldorder globally to 
 	// remember it for contacts which have none
@@ -441,7 +441,7 @@ int OContactFields::getFieldOrder( int num, int defIndex ){
 	int ret = 0;
 	// Convert char to number..
 	if ( !( poschar == QChar::null ) )
-		ret = QString( poschar ).toInt(&ok, 10);
+		ret = QString( poschar ).toInt(&ok, 16);
 	else
 		ok = false;
 
