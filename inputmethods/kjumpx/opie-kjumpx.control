@@ -1,0 +1,10 @@
+Files: plugins/inputmethods/libqkjumpx.so* pics/kjumpx/*
+Priority: optional
+Section: opie/inputmethods
+Maintainer: Jake Richardson <jake@asdfnews.org>
+Architecture: arm
+Version: $QPE_VERSION-$SUB_VERSION
+Depends: opie-base ($QPE_VERSION)
+License: GPL
+Description: Koreanized JumpX input method
+ Keyboard-like input method for the Opie environment.
