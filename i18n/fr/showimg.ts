@@ -50,11 +50,11 @@
     </message>
     <message>
         <source> - Image Viewer</source>
-        <translation>- Diaporama</translation>
+        <translation> - Diaporama</translation>
     </message>
     <message>
         <source> True color</source>
-        <translation>Vrai couleur</translation>
+        <translation>16777216</translation>
     </message>
     <message>
         <source>View</source>
@@ -110,7 +110,7 @@
     </message>
     <message>
         <source>8-bit alpha channel</source>
-        <translation>8-bit canal alpha</translation>
+        <translation>canal alpha 8-bit </translation>
     </message>
     <message>
         <source>Slide show</source>

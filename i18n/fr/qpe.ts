@@ -114,11 +114,11 @@ Veuillez rechargez la batterie de sauvegarde.</translation>
     <name>LauncherView</name>
     <message>
         <source>%1 files</source>
-        <translation>%1 fichiers</translation>
+        <translation>Fichiers %1</translation>
     </message>
     <message>
         <source>All types of file</source>
-        <translation>Tous les types de fichiers</translation>
+        <translation>Tous les fichiers</translation>
     </message>
     <message>
         <source>Document View</source>
