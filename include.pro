@@ -113,6 +113,7 @@ contains( CONFTEST, y ){
   } else {
     LIBS += -lqpe
   }
+  LIBS += -lopiecore2
 }
 else {
 
