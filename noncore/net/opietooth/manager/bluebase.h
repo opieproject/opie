@@ -68,7 +68,7 @@ namespace OpieTooth {
         BTIconLoader *m_iconLoader;
 
 	private slots:
-        void addSearchedDevices( const QValueList<RemoteDevice> &newDevices );
+        void addSearchedDevices( QValueList<RemoteDevice> &newDevices );
         void addServicesToDevice( BTListItem *item );
         void addServicesToDevice( const QString& device, Services::ValueList );
         void addConnectedDevices();
