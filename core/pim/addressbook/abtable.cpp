@@ -562,6 +562,8 @@ void AbTable::loadFile( const QString &strFile, bool journalFile )
     list.setAutoDelete( TRUE );
     QByteArray ba = f.readAll();
     f.close();
+   if (ba.isEmpty() )
+       return;
     char *uc = ba.data();//(QChar *)data.unicode();
     int len = ba.size();//data.length();
     bool foundAction = false;
@@ -797,17 +799,24 @@ void AbTable::journalFreeReplace( const Contact &cnt, int row )
 {
     QString strName,
 	strContact;
-    AbTableItem *ati;
+    AbTableItem *ati = 0l;
 
     strName = findContactName( cnt );
     strContact = findContactContact( cnt );
     ati = static_cast<AbTableItem*>(item(row, 0));
-    contactList.remove( ati );
-    ati->setItem( strName, strContact );
-    contactList.insert( ati, cnt );
+    if ( ati != 0 ) {
+        contactList.remove( ati );
+        ati->setItem( strName, strContact );
+        contactList.insert( ati, cnt );
 
-    ati = static_cast<AbTableItem*>(item(row, 1));
-    ati->setItem( strContact, strName );
+        ati = static_cast<AbTableItem*>(item(row, 1));
+        ati->setItem( strContact, strName );
+    }else{
+        int myrows = numRows();
+        setNumRows( myrows + 1 );
+        insertIntoTable( cnt, myrows );
+        // gets deleted when returning
+    }
 }
 
 void AbTable::journalFreeRemove( int row )
@@ -1083,7 +1092,7 @@ void AbTable::updateVisible()
 	    if ( showChar == '#' ) {
 		    if (tmpStr == "a")
 			    hide = true;
-		    
+
 		    if (tmpStr == "b")
 			    hide = true;
 
