@@ -88,19 +88,19 @@ namespace {
     }else{
       tmpMime = cfg->readBoolEntry("audio", true );
       if(tmpMime )
-	mimes.append("audio//*" );
+	mimes.append("audio/*" );
 
       tmpMime = cfg->readBoolEntry("image", true );
       if(tmpMime )
-	mimes.append("image//*" );
+	mimes.append("image/*" );
 
       tmpMime = cfg->readBoolEntry("text", true );
       if(tmpMime )
-	mimes.append("text//*");
+	mimes.append("text/*");
 
       tmpMime = cfg->readBoolEntry("video", true );
       if(tmpMime )
-	mimes.append("video//*" );
+	mimes.append("video/*" );
     }
     return mimes;
   }

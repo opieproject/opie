@@ -86,20 +86,16 @@ void MediumMountGui::writeConfig(bool autocheck) {
     mimeTypeList += QString::null;
   } else {
     if (checkmimeaudio) {
-      mimeTypeList += ("audio//*");
+      mimeTypeList += ("audio/*");
     }
     if (checkmimetext) {
-      mimeTypeList += ("text//*");
+      mimeTypeList += ("text/*");
     }
     if (checkmimevideo) {
-      mimeTypeList += ("video//*");
+      mimeTypeList += ("video/*");
     }
     if (checkmimeimage) {
-      mimeTypeList += ("image//*");
-    }
-    if (checkmimeall) {
-      mimeTypeList.clear();
-      mimeTypeList << QString::null;
+      mimeTypeList += ("image/*");
     }
   }
   cfg.write(); // not really needed here but just to be sure
