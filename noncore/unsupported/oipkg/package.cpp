@@ -50,6 +50,7 @@ Package::Package( QString n, PackageManagerSettings *s )
   {
 	  _name = QString( n );
   }else{
+    pvDebug(2,"remote file: "+n);
    	parseIpkgFile( n );
     _useFileName = true;
     _fileName = QString( n );
@@ -342,7 +343,8 @@ QString Package::dest()
 
 void Package::setDest( QString d )
 {
-	_dest = d;
+	if ( d == "remote") _useFileName = true;
+	else _dest = d;
 }
 
 void Package::setOn()

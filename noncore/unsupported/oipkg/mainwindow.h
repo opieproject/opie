@@ -89,9 +89,6 @@ private:
   QPEToolBar *destBar;
   QComboBox *destination;
   QCheckBox* CheckBoxLink;
-//  QMessageBox *wait;
-private slots:
-  void rotateUpdateIcon();
 };
 
 #endif

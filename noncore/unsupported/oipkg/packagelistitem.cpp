@@ -33,12 +33,13 @@ void PackageListItem::init( Package *pi, PackageManagerSettings *s)
   setExpandable( true );
 	QCheckListItem *item;
 	nameItem = new QCheckListItem( this, "" );
-	item = new QCheckListItem( this, QObject::tr("Size: ")+pi->size() );
+	item = new QCheckListItem( this, QObject::tr("Description: ")+pi->desc() );
+ 	item = new QCheckListItem( this, QObject::tr("Size: ")+pi->size() );
 	destItem = new QCheckListItem( this, "" );
 	linkItem = new QCheckListItem( this, "" );
 	statusItem = new QCheckListItem( this, "" );
  	QCheckListItem *otherItem = new QCheckListItem( this, QObject::tr("other") );
-	item = new QCheckListItem( otherItem, QObject::tr("Description: ")+pi->desc() );
+	item = new QCheckListItem( otherItem, QObject::tr("Install Name: ")+pi->installName() );
   QDict<QString> *fields = pi->getFields();
   QDictIterator<QString> it( *fields );
 	while ( it.current() ) {

@@ -41,11 +41,7 @@ MainWindow::MainWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
   listViewPackages->addList( tr("feeds"), &packageListServers );
   listViewPackages->addList( tr("ipkgfind"), &packageListSearch );
   listViewPackages->addList( tr("documents"), &packageListDocLnk );
-//	wait = new QMessageBox(tr("oipkg"),tr("Please wait")//,QMessageBox::Information,QMessageBox::NoButton,QMessageBox::NoButton,QMessageBox::NoButton);
-//	wait = new QMessageBox(this);
-// 	wait->setText(tr("Please wait"));
   ipkg = new PmIpkg( settings, this );
-//  settings->setIpkg( ipkg );
   packageListServers.setSettings( settings );
   packageListSearch.setSettings( settings );
   packageListDocLnk.setSettings( settings );
@@ -269,10 +265,6 @@ void MainWindow::runIpkg()
 
 void MainWindow::updateList()
 {
-//	wait->show();
-	QTimer *t = new QTimer( this );
-  connect( t, SIGNAL(timeout()), SLOT( rotateUpdateIcon() ) );
-  t->start( 0, false );
 	packageListServers.clear();
 	packageListSearch.clear();
   packageListDocLnk.clear();
@@ -280,22 +272,17 @@ void MainWindow::updateList()
   packageListServers.update();
   packageListSearch.update();
   packageListDocLnk.update();
-  t->stop();
-//	wait->hide();  	
 }
 
 void MainWindow::filterList()
 {
-//	wait->show();
  	QString f = "";
   if ( findAction->isOn() ) f = findEdit->text();
   packageListServers.filterPackages( f );
-//	wait->hide();
 }
 
 void MainWindow::displayList()
 {
-//	wait->hide();
 	filterList();
   listViewPackages->display();
 }
@@ -407,17 +394,6 @@ void MainWindow::destClose()
 {
   destAction->setOn( false );
 }
-
-void MainWindow::rotateUpdateIcon()
-{
-	pvDebug(2, "MainWindow::rotateUpdateIcon");
- if ( updateIcon )
-	updateAction->setIconSet( Resource::loadIconSet( "oipkg/update" ) );
- else
-	updateAction->setIconSet( Resource::loadIconSet( "oipkg/update2" ) );
- updateIcon = !updateIcon;
-}
-
 
 void MainWindow::setDocument(const QString &fileName)
 {

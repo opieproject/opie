@@ -175,9 +175,9 @@ void PackageList::readFileEntries( QString filename, QString dest )
 	  		if ( ! packEntry.isEmpty() )
 		    {
 		      Package *p = new Package( packEntry, settings );
-    	   	p->setDest( dest );
 	    	  if ( p )
 					{
+			      p->setDest( dest );
 		  			insertPackage( p );
 					  packEntry.clear();
 					}
