@@ -1,17 +1,18 @@
 <!DOCTYPE TS><TS>
+<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>ScreenshotControl</name>
     <message>
         <source>Name of screenshot </source>
-        <translation type="unfinished"></translation>
+        <translation>Nom de l&apos;image d&apos;écran</translation>
     </message>
     <message>
         <source>Delay</source>
-        <translation type="unfinished"></translation>
+        <translation>délai</translation>
     </message>
     <message>
         <source>sec</source>
-        <translation type="unfinished"></translation>
+        <translation>sec</translation>
     </message>
     <message>
         <source>Save named</source>
@@ -19,11 +20,11 @@
     </message>
     <message>
         <source>Save screenshot as...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauver l&apos;image d&apos;écran sous...</translation>
     </message>
     <message>
         <source>File</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichier</translation>
     </message>
     <message>
         <source>Scap</source>
@@ -31,19 +32,19 @@
     </message>
     <message>
         <source>Success</source>
-        <translation type="unfinished"></translation>
+        <translation>Réussi</translation>
     </message>
     <message>
         <source>Screenshot was uploaded to %1</source>
-        <translation type="unfinished"></translation>
+        <translation>L&apos;image écran a été chargé sur %1</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Erreur</translation>
     </message>
     <message>
         <source>Connection to %1 failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>La connexion à %1 a échoué.</translation>
     </message>
 </context>
 </TS>

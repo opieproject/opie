@@ -28,38 +28,38 @@
     </message>
     <message>
         <source>Pickboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Pickboard</translation>
     </message>
     <message>
         <source>Key Repeat</source>
-        <translation type="unfinished"></translation>
+        <translation>Répétition des touches</translation>
     </message>
     <message>
         <source>Colors</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleurs</translation>
     </message>
     <message>
         <source>Key Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur de la touche</translation>
     </message>
     <message>
         <source>Key Pressed Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur de la touche pressée</translation>
     </message>
     <message>
         <source>Line Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur de la ligne</translation>
     </message>
     <message>
         <source>Text Color</source>
-        <translation type="unfinished"></translation>
+        <translation>Couleur du texte</translation>
     </message>
 </context>
 <context>
     <name>InputMethods</name>
     <message>
         <source>Multikey</source>
-        <translation type="unfinished"></translation>
+        <translation>Clavier</translation>
     </message>
 </context>
 </TS>
