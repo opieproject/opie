@@ -13,17 +13,15 @@
 **
 **********************************************************************/
 
-#include "wellenreiter.h"
-#include <qpe/qpeapplication.h>
+#ifndef SCANLISTITEM_H
+#define SCANLISTITEM_H
 
-int main( int argc, char **argv )
+#include <qlistview.h>
+
+class MScanListItem: public QListViewItem
 {
-    QPEApplication a( argc, argv );
 
-    Wellenreiter e;
+};
 
-    e.setCaption( Wellenreiter::tr("Wellenreiter") );
-    a.showMainWidget(&e);
+#endif
 
-    return a.exec();
-}
