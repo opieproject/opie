@@ -4,7 +4,7 @@ Priority: optional
 Section: opie/applications
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
-Depends: task-opie-minimal
+Depends: task-opie-minimal, libopiecore2
 Description: Calculator
  A multi-function calculator for the Opie environment.
  Includes units conversion.

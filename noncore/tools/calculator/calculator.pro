@@ -4,7 +4,7 @@ SOURCES		= calculatorimpl.cpp \
 		  main.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH	+= $(OPIEDIR)/include
-LIBS            += -lqpe
+LIBS            += -lqpe -lopiecore2
 INTERFACES	= calculator.ui
 TARGET		= calculator
 
