@@ -355,9 +355,6 @@ SMTPconfig::SMTPconfig( SMTPaccount *account, QWidget *parent, const char *name,
 {
     data = account;
 
-    connect( ccBox, SIGNAL( toggled( bool ) ), ccLine, SLOT( setEnabled( bool ) ) );
-    connect( bccBox, SIGNAL( toggled( bool ) ), bccLine, SLOT( setEnabled( bool ) ) );
-    connect( replyBox, SIGNAL( toggled( bool ) ), replyLine, SLOT( setEnabled( bool ) ) );
     connect( loginBox, SIGNAL( toggled( bool ) ), userLine, SLOT( setEnabled( bool ) ) );
     connect( loginBox, SIGNAL( toggled( bool ) ), passLine, SLOT( setEnabled( bool ) ) );
 
@@ -384,16 +381,6 @@ void SMTPconfig::fillValues()
     loginBox->setChecked( data->getLogin() );
     userLine->setText( data->getUser() );
     passLine->setText( data->getPassword() );
-    nameLine->setText( data->getName() );
-    mailLine->setText( data->getMail() );
-    orgLine->setText( data->getOrg() );
-    ccBox->setChecked( data->getUseCC() );
-    ccLine->setText( data->getCC() );
-    bccBox->setChecked( data->getUseBCC() );
-    bccLine->setText( data->getBCC() );
-    replyBox->setChecked( data->getUseReply() );
-    replyLine->setText( data->getReply() );
-    sigMultiLine->setText( data->getSignature() );
 }
 
 void SMTPconfig::accept()
@@ -405,16 +392,6 @@ void SMTPconfig::accept()
     data->setLogin( loginBox->isChecked() );
     data->setUser( userLine->text() );
     data->setPassword( passLine->text() );
-    data->setName( nameLine->text() );
-    data->setMail( mailLine->text() );
-    data->setOrg( orgLine->text() );
-    data->setCC( ccLine->text() );
-    data->setUseCC( ccBox->isChecked() );
-    data->setBCC( bccLine->text() );
-    data->setUseBCC( bccBox->isChecked() );
-    data->setReply( replyLine->text() );
-    data->setUseReply( replyBox->isChecked() );
-    data->setSignature( sigMultiLine->text() );
 
     QDialog::accept();
 }

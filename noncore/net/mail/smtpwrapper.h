@@ -27,7 +27,7 @@ class SMTPwrapper : public QObject
 public:
     SMTPwrapper( Settings *s ); 
     virtual ~SMTPwrapper(){}
-    void sendMail(const Mail& mail,bool later=false );
+    void sendMail(const Mail& mail,SMTPaccount*smtp,bool later=false );
     bool flushOutbox(SMTPaccount*smtp);
 
     static progressMailSend*sendProgress;
@@ -42,7 +42,6 @@ protected:
     mailmime *buildFilePart(const QString&filename,const QString&mimetype,const QString&content);
     void smtpSend( mailmime *mail,bool later, SMTPaccount *smtp );
     clist *createRcptList( mailimf_fields *fields );
-    SMTPaccount *getAccount(const QString&from );
     
     static void storeMail(char*mail, size_t length, const QString&box);
     static QString mailsmtpError( int err );

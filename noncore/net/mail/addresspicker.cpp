@@ -33,7 +33,7 @@ AddressPicker::AddressPicker( QWidget *parent, const char *name, bool modal, WFl
         if ((*it).defaultEmail().length()!=0) {
             mails = (*it).emailList();
             if ((*it).fileAs().length()>0) {
-                pre = "\""+(*it).fileAs()+"\" <";
+                pre = "\""+(*it).firstName()+" "+(*it).lastName()+"\" <";
                 suf = ">";
             } else {
                 pre = "";

@@ -128,9 +128,9 @@ mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail )
 {
     mailimf_fields *fields;
     mailimf_field *xmailer;
-    mailimf_mailbox *sender, *fromBox;
-    mailimf_mailbox_list *from;
-    mailimf_address_list *to, *cc, *bcc, *reply;
+    mailimf_mailbox *sender=0,*fromBox=0;
+    mailimf_mailbox_list *from=0;
+    mailimf_address_list *to=0, *cc=0, *bcc=0, *reply=0;
     char *subject = strdup( mail.getSubject().latin1() );
     int err;
 
@@ -167,22 +167,22 @@ mailimf_fields *SMTPwrapper::createImfFields(const Mail&mail )
     return fields;      // Success :)
 
 err_free_xmailer:
-    mailimf_field_free( xmailer );
+    if (xmailer) mailimf_field_free( xmailer );
 err_free_fields:
-    mailimf_fields_free( fields );
+    if (fields) mailimf_fields_free( fields );
 err_free_reply:
-    mailimf_address_list_free( reply );
-    mailimf_address_list_free( bcc );
-    mailimf_address_list_free( cc );
-    mailimf_address_list_free( to );
+    if (reply) mailimf_address_list_free( reply );
+    if (bcc) mailimf_address_list_free( bcc );
+    if (cc) mailimf_address_list_free( cc );
+    if (to) mailimf_address_list_free( to );
 err_free_from:
-    mailimf_mailbox_list_free( from );
+    if (from) mailimf_mailbox_list_free( from );
 err_free_fromBox:
     mailimf_mailbox_free( fromBox );
 err_free_sender:
-    mailimf_mailbox_free( sender );
+    if (sender) mailimf_mailbox_free( sender );
 err_free:
-    free( subject );
+    if (subject) free( subject );
     qDebug( "createImfFields - error" );
 
     return NULL;        // Error :(
@@ -206,7 +206,7 @@ mailmime *SMTPwrapper::buildTxtPart(const QString&str )
     err = clist_append( content->ct_parameters, param );
     if ( err != MAILIMF_NO_ERROR ) goto err_free_content;
 
-    fields = mailmime_fields_new_encoding(MAILMIME_MECHANISM_QUOTED_PRINTABLE);
+    fields = mailmime_fields_new_encoding(MAILMIME_MECHANISM_8BIT);
     if ( fields == NULL ) goto err_free_content;
 
     txtPart = mailmime_new_empty( content, fields );
@@ -462,26 +462,6 @@ char *SMTPwrapper::getFrom( mailmime *mail )
     return getFrom(ffrom);
 }
 
-SMTPaccount *SMTPwrapper::getAccount(const QString&name )
-{
-    SMTPaccount *smtp;
-
-    QList<Account> list = settings->getAccounts();
-    Account *it;
-    for ( it = list.first(); it; it = list.next() ) {
-        if ( it->getType().compare( "SMTP" ) == 0 ) {
-            smtp = static_cast<SMTPaccount *>(it);
-            if ( smtp->getName()== name ) {
-                qDebug( "SMTPaccount found for" );
-                qDebug( name );
-                return smtp;
-            }
-        }
-    }
-
-    return NULL;
-}
-
 void SMTPwrapper::progress( size_t current, size_t maximum )
 {
     if (SMTPwrapper::sendProgress) {
@@ -613,12 +593,16 @@ free_mem:
     return result;
 }
 
-void SMTPwrapper::sendMail(const Mail&mail,bool later )
+void SMTPwrapper::sendMail(const Mail&mail,SMTPaccount*aSmtp,bool later )
 {
     mailmime * mimeMail;
 
-    SMTPaccount *smtp = getAccount(mail.getName());
+    SMTPaccount *smtp = aSmtp;
 
+    if (!later && !smtp) {
+        qDebug("Didn't get any send method - giving up");
+        return;
+    }
     mimeMail = createMimeMail(mail );
     if ( mimeMail == NULL ) {
         qDebug( "sendMail: error creating mime mail" );

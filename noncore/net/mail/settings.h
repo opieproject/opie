@@ -93,26 +93,6 @@ public:
     virtual void save();
     virtual QString getFileName();
 
-    void setName( QString str ) { name = str; }
-    QString getName() { return name; }
-    void setMail( QString str ) { mail = str; }
-    QString getMail() { return mail; }
-    void setOrg( QString str ) { org = str; }
-    QString getOrg() { return org; }
-    void setUseCC( bool b ) { useCC = b; }
-    bool getUseCC() { return useCC; }
-    void setCC( QString str ) { cc = str; }
-    QString getCC() { return cc; }
-    void setUseBCC( bool b ) { useBCC = b; }
-    bool getUseBCC() { return useBCC; }
-    void setBCC( QString str ) { bcc = str; }
-    QString getBCC() { return bcc; }
-    void setUseReply( bool b ) { useReply = b; }
-    bool getUseReply() { return useReply; }
-    void setReply( QString str ) { reply = str; }
-    QString getReply() { return reply; }
-    void setSignature( QString str ) { signature = str; }
-    QString getSignature() { return signature; }
     void setLogin( bool b ) { login = b; }
     bool getLogin() { return login; }
 

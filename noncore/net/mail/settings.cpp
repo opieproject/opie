@@ -273,9 +273,6 @@ SMTPaccount::SMTPaccount( QString filename )
     accountName = "New SMTP Account";
     ssl = false;
     login = false;
-    useCC = false;
-    useBCC = false;
-    useReply = false;
     type = "SMTP";
     port = SMTP_PORT;
 }
@@ -306,17 +303,6 @@ void SMTPaccount::read()
     login = conf->readBoolEntry( "Login" );
     user = conf->readEntry( "User" );
     password = conf->readEntryCrypt( "Password" );
-    useCC = conf->readBoolEntry( "useCC" );
-    useBCC = conf->readBoolEntry( "useBCC" );
-    useReply = conf->readBoolEntry( "useReply" );
-    name = conf->readEntry( "Name" );
-    mail = conf->readEntry( "Mail" );
-    org = conf->readEntry( "Org" );
-    cc = conf->readEntry( "CC" );
-    bcc = conf->readEntry( "BCC" );
-    reply = conf->readEntry( "Reply" );
-    signature = conf->readEntry( "Signature" );
-    signature = signature.replace( QRegExp( "<br>" ), "\n" );
 }
 
 void SMTPaccount::save()
@@ -333,17 +319,6 @@ void SMTPaccount::save()
     conf->writeEntry( "Login", login );
     conf->writeEntry( "User", user );
     conf->writeEntryCrypt( "Password", password );
-    conf->writeEntry( "useCC", useCC );
-    conf->writeEntry( "useBCC", useBCC );
-    conf->writeEntry( "useReply", useReply );
-    conf->writeEntry( "Name", name );
-    conf->writeEntry( "Mail", mail );
-    conf->writeEntry( "Org", org );
-    conf->writeEntry( "CC", cc );
-    conf->writeEntry( "BCC", bcc );
-    conf->writeEntry( "Reply", reply );
-    conf->writeEntry( "Signature", 
-                      signature.replace( QRegExp( "\\n" ), "<br>" ) );
     conf->write();
 }
 

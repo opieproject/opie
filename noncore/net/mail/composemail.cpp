@@ -3,6 +3,8 @@
 #include <opie/ofiledialog.h>
 #include <qpe/resource.h>
 #include <qpe/config.h>
+#include <qpe/global.h>
+#include <qpe/contact.h>
 
 #include "composemail.h"
 #include "smtpwrapper.h"
@@ -12,6 +14,26 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
 {
     settings = s;
 
+    QString vfilename = Global::applicationFileName("addressbook",
+                "businesscard.vcf");
+    Contact c;
+    if (QFile::exists(vfilename)) {
+        c = Contact::readVCard( vfilename )[0];
+    }
+
+    QStringList mails = c.emailList();
+    QString defmail = c.defaultEmail();
+    
+    if (defmail.length()!=0) {
+        fromBox->insertItem(defmail);
+    }
+    QStringList::ConstIterator sit = mails.begin();
+    for (;sit!=mails.end();++sit) {
+        if ( (*sit)==defmail)
+            continue;
+        fromBox->insertItem((*sit));
+    }
+    senderNameEdit->setText(c.firstName()+" "+c.lastName());
     Config cfg( "mail" );
     cfg.setGroup( "Compose" );
     checkBoxLater->setChecked( cfg.readBoolEntry( "sendLater", false ) );
@@ -20,17 +42,18 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
     attList->addColumn( tr( "Size" ) );
 
     QList<Account> accounts = settings->getAccounts();
+    
     Account *it;
     for ( it = accounts.first(); it; it = accounts.next() ) {
         if ( it->getType().compare( "SMTP" ) == 0 ) {
            SMTPaccount *smtp = static_cast<SMTPaccount *>(it);
-           fromBox->insertItem( smtp->getMail() );
+           smtpAccountBox->insertItem( smtp->getAccountName() );
            smtpAccounts.append( smtp );
         }
     }
 
     if ( smtpAccounts.count() > 0 ) {
-        fillValues( fromBox->currentItem() );
+        fillValues( smtpAccountBox->currentItem() );
     } else {
         QMessageBox::information( this, tr( "Problem" ),
                                   tr( "<p>Please create an SMTP account first.</p>" ),
@@ -38,7 +61,7 @@ ComposeMail::ComposeMail( Settings *s, QWidget *parent, const char *name, bool m
         return;
     }
 
-    connect( fromBox, SIGNAL( activated( int ) ), SLOT( fillValues( int ) ) );
+    connect( smtpAccountBox, SIGNAL( activated( int ) ), SLOT( fillValues( int ) ) );
     connect( toButton, SIGNAL( clicked() ), SLOT( pickAddressTo() ) );
     connect( ccButton, SIGNAL( clicked() ), SLOT( pickAddressCC() ) );
     connect( bccButton, SIGNAL( clicked() ), SLOT( pickAddressBCC() ) );
@@ -108,8 +131,8 @@ void ComposeMail::pickAddressReply()
 
 void ComposeMail::fillValues( int current )
 {
+#if 0
     SMTPaccount *smtp = smtpAccounts.at( current );
-
     ccLine->clear();
     if ( smtp->getUseCC() ) {
         ccLine->setText( smtp->getCC() );
@@ -122,8 +145,8 @@ void ComposeMail::fillValues( int current )
     if ( smtp->getUseReply() ) {
         replyLine->setText( smtp->getReply() );
     }
-
     sigMultiLine->setText( smtp->getSignature() );
+#endif
 }
 
 void ComposeMail::slotAdjustColumns()
@@ -163,14 +186,14 @@ void ComposeMail::accept()
         qDebug(  "Send later" );
     }
 
-
+#if 0
     qDebug( "Sending Mail with " +
-            smtpAccounts.at( fromBox->currentItem() )->getAccountName() );
+            smtpAccounts.at( smtpAccountBox->currentItem() )->getAccountName() );
+#endif
     Mail *mail = new Mail();
-    SMTPaccount *smtp = smtpAccounts.at( fromBox->currentItem() );
     
-    mail->setMail( smtp->getMail() );
-    mail->setName( smtp->getName() );
+    SMTPaccount *smtp = smtpAccounts.at( smtpAccountBox->currentItem() );
+    mail->setMail(fromBox->currentText());
 
     if ( !toLine->text().isEmpty() ) {
         mail->setTo( toLine->text() );
@@ -178,7 +201,7 @@ void ComposeMail::accept()
         qDebug( "No Reciever spezified -> returning" );
         return;
     }
-
+    mail->setName(senderNameEdit->text());
     mail->setCC( ccLine->text() );
     mail->setBCC( bccLine->text() );
     mail->setReply( replyLine->text() );
@@ -188,6 +211,7 @@ void ComposeMail::accept()
         txt.append( "\n--\n" );
         txt.append( sigMultiLine->text() );
     }
+    qDebug(txt);
     mail->setMessage( txt );
     AttachViewItem *it = (AttachViewItem *) attList->firstChild();
     while ( it != NULL ) {
@@ -196,8 +220,8 @@ void ComposeMail::accept()
     }
 
     SMTPwrapper wrapper( settings );
-    wrapper.sendMail( *mail,checkBoxLater->isChecked() );
-
+    wrapper.sendMail( *mail,smtp,checkBoxLater->isChecked() );
+    
     QDialog::accept();
 }
 
