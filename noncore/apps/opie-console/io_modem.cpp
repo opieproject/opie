@@ -93,3 +93,14 @@ void IOModem::slotExited(OProcess* proc ){
     delete proc;
 }
 
+QBitArray IOModem::supports()const {
+    return QBitArray( 3 );
+}
+
+bool IOModem::isConnected() {
+    return false;
+}
+
+void IOModem::send(const QByteArray &data) {
+    qDebug( "Please overload me..." );
+}

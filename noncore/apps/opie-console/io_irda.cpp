@@ -63,3 +63,15 @@ void IOIrda::slotExited(OProcess* proc ){
     close();
     delete proc;
 }
+
+QBitArray IOIrda::supports()const {
+    return QBitArray( 3 );
+}
+
+bool IOIrda::isConnected() {
+    return false;
+}
+
+void IOIrda::send(const QByteArray &data) {
+    qDebug( "Please overload me..." );
+}

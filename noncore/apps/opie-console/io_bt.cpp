@@ -78,3 +78,15 @@ void IOBt::slotExited( OProcess* proc ){
     close();
     delete proc;
 }
+
+QBitArray IOBt::supports() const {
+    return QBitArray( 3 );
+}
+
+bool IOBt::isConnected() {
+    return false;
+}
+
+void IOBt::send(const QByteArray &data) {
+    qDebug( "Please overload me..." );
+}

@@ -23,17 +23,20 @@ public:
     IOIrda(const Profile &);
     ~IOIrda();
 
-    QString identifier() const;
-    QString name() const;
+    virtual QString identifier() const;
+    virtual QString name() const;
+    virtual QBitArray supports() const;
+    virtual bool isConnected();
 
 signals:
     void received(const QByteArray &);
     void error(int, const QString &);
 
 public slots:
-    bool open();
-    void close();
-    void reload(const Profile &);
+    virtual void send( const QByteArray& );
+    virtual bool open();
+    virtual void close();
+    virtual void reload(const Profile &);
 
 private:
     OProcess *m_attach;

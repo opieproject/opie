@@ -65,7 +65,7 @@ public:
      * and it'll stop listening to the before opened
      * device
      */
-    virtual int rawIO()const;
+    virtual int rawIO() const;
 
     /**
      * will close the rawIO stuff
@@ -77,7 +77,7 @@ public:
      * What does the IOLayer support?
      * Bits are related to features
      */
-    virtual QBitArray supports()const = 0;
+    virtual QBitArray supports() const = 0;
 
     virtual bool isConnected() = 0;
 

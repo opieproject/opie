@@ -33,21 +33,22 @@ public:
     IOSerial(const Profile &);
     ~IOSerial();
 
-    QString identifier() const;
-    QString name() const;
-    int rawIO()const;
-    void closeRawIO(int fd );
-    QBitArray supports()const;
-    bool isConnected();
+    virtual QString identifier() const;
+    virtual QString name() const;
+    int rawIO() const;
+    void closeRawIO (int fd );
+    virtual QBitArray supports() const;
+    virtual bool isConnected();
+    
 /*signals:
     void received(const QByteArray &);
     void error(int, const QString &);
 */
 public slots:
-    void send(const QByteArray &);
-    bool open();
-    void close();
-    void reload(const Profile &);
+    virtual void send(const QByteArray &);
+    virtual bool open();
+    virtual void close();
+    virtual void reload(const Profile &);
 protected:
     int baud(int baud) const;
     void internDetach();

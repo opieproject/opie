@@ -208,10 +208,10 @@ int MyPty::openPty()
 
 #ifdef HAVE_OPENPTY
     int ttyfd;
-    if ( openpty(&ptyfd,&ttyfd,ttynam,0,0) )
+    if ( openpty(&ptyfd,&ttyfd,m_ttynam,0,0) )
 	ptyfd = -1;
     else
-	close(ttyfd); // we open the ttynam ourselves.
+	::close(ttyfd); // we open the ttynam ourselves.
 #else
     for (const char* c0 = "pqrstuvwxyzabcde"; ptyfd < 0 && *c0 != 0; c0++) {
 	for (const char* c1 = "0123456789abcdef"; ptyfd < 0 && *c1 != 0; c1++) {
