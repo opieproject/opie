@@ -16,7 +16,7 @@
 ** Contact info@trolltech.com if any conditions of this licensing are
 ** not clear to you.
 **
-** $Id: qpeapplication.cpp,v 1.18 2002-09-10 12:09:50 zecke Exp $
+** $Id: qpeapplication.cpp,v 1.19 2002-09-10 14:27:11 zecke Exp $
 **
 **********************************************************************/
 #define QTOPIA_INTERNAL_LANGLIST
@@ -443,6 +443,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
     d->loadTextCodecs();
     d->loadImageCodecs();
     int dw = desktop() ->width();
+    qWarning( "Width %d", dw );
     if ( dw < 200 ) {
         setFont( QFont( "helvetica", 8 ) );
         AppLnk::setSmallIconSize( 10 );
@@ -451,7 +452,7 @@ QPEApplication::QPEApplication( int & argc, char **argv, Type t )
         setFont( QFont( "helvetica", 12 ) );
         AppLnk::setSmallIconSize( 24 );
         AppLnk::setBigIconSize( 48 );
-    }else if ( dw > 400 ) {
+    }else if ( dw > 200 ) {
         setFont( QFont( "helvetica", 12 ) );
         AppLnk::setSmallIconSize( 16 );
         AppLnk::setBigIconSize( 32 );
