@@ -624,5 +624,5 @@ void ODevice::virtual_hook(int, void* ){
 
 void ODevice::sendSuspendmsg()
 {
-    QCopEnvelope ( "QPE/System", "aboutSuspend()" );
+    QCopEnvelope ( "QPE/System", "aboutToSuspend()" );
 }
