@@ -370,7 +370,7 @@ TextEdit::TextEdit( QWidget *parent, const char *name, WFlags f )
     a->addTo( searchBar );
 
      edit->insertSeparator();
-     a = new QAction( tr( "Delete" ), Resource::loadPixmap( "delete" ), QString::null, 0, this, 0 );
+     a = new QAction( tr( "Delete" ), Resource::loadPixmap( "close" ), QString::null, 0, this, 0 );
      connect( a, SIGNAL( activated() ), this, SLOT( editDelete() ) );
      a->addTo( edit );
      
