@@ -5,7 +5,6 @@
 #define _SLFILESELECTOR_H_INCLUDED
 
 #include <opie2/ofileselector.h>
-using namespace Opie;
 #include <qhbox.h>
 #include <qvbox.h>
 #include <qlistview.h>
@@ -153,7 +152,7 @@ private:
 typedef QList<MimeType> SlFileMimeTypeList;
 
 struct SlFileSelectorPrivate;
-class SlFileSelector : public OFileSelector /*QVBox*/
+class SlFileSelector : public Opie::Ui::OFileSelector /*QVBox*/
 {
 	Q_OBJECT
 
