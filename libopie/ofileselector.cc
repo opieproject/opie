@@ -1,5 +1,6 @@
 
 
+#include <qwmatrix.h>
 #include <qcheckbox.h>
 #include <qcombobox.h>
 #include <qheader.h>
@@ -40,8 +41,8 @@ namespace {
     int index= 0;
     for(int i= 0; i < box->count(); i++ ){
       if( str == box->text(i ) ){
-	index= i;
-	break;
+  index= i;
+  break;
       }
     }
     return index;
@@ -49,8 +50,8 @@ namespace {
   class OFileSelectorItem : public QListViewItem {
   public:
     OFileSelectorItem(QListView *view, const QPixmap &pixmap, const QString &path,
-		      const QString &date, const QString &size, const QString &mDir,
-		      bool isLocked=false, bool isDir=false ): QListViewItem(view) {
+          const QString &date, const QString &size, const QString &mDir,
+          bool isLocked=false, bool isDir=false ): QListViewItem(view) {
       setPixmap(0, pixmap );
       setText(1, path );
       setText(2, size );
@@ -75,17 +76,17 @@ namespace {
     QString key(int id, bool )const {
       QString ke;
       if( id == 0 || id == 1 ){ // name
-	if( dir ){
-	  ke.append("0" );
-	  ke.append( text(1) );
-	}else{
-	  ke.append("1" );
-	  ke.append( text(1) );
-	}
+  if( dir ){
+    ke.append("0" );
+    ke.append( text(1) );
+  }else{
+    ke.append("1" );
+    ke.append( text(1) );
+  }
       }else if( id == 2 ){ // size
-	return text(2);
+  return text(2);
       }else if( id == 3 ){ // date
-	return text(3);
+  return text(3);
       }
       return ke;
     };
@@ -98,8 +99,8 @@ namespace {
 
 
 OFileSelector::OFileSelector( QWidget *wid, int mode, int selector,
-			      const QString &dirName,
-   			      const QString &fileName,
+            const QString &dirName,
+              const QString &fileName,
                               const QMap<QString,QStringList>& mimeTypes)
   : QWidget( wid, "OFileSelector")
 {
@@ -115,8 +116,8 @@ OFileSelector::OFileSelector( QWidget *wid, int mode, int selector,
 }
 
 OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
-			     const char *name, bool newVisible,
-			     bool closeVisible )
+           const char *name, bool newVisible,
+           bool closeVisible )
   : QWidget( parent, name )
 {
   if (!mimeFilter.isEmpty() ) {
@@ -134,7 +135,6 @@ OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
   m_shYesNo = false;
   init();
 
-
 }
 
 OFileSelector::~OFileSelector()
@@ -151,12 +151,12 @@ void OFileSelector::setNewVisible( bool visible )
     // we need to initialize but keep the selected mimetype
     QString mime = currentMimeType();
     m_select = new FileSelector( mime ,
-				 m_stack, "fileselector",
-				 m_shNew, m_shClose);
+         m_stack, "fileselector",
+         m_shNew, m_shClose);
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
-	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
     connect(m_select, SIGNAL(closeMe() ),
-	    this, SIGNAL(closeMe() ) );
+      this, SIGNAL(closeMe() ) );
     //connect to close me and other signals as well
     m_stack->addWidget( m_select, NORMAL );
   }else{
@@ -433,10 +433,10 @@ void OFileSelector::slotViewCheck(const QString &sel)
         // yes currentMime fixes that for us
         QString mime = currentMimeType();
       m_select = new FileSelector(mime,
-				  m_stack, "fileselector",
-				  m_shNew, m_shClose);
+          m_stack, "fileselector",
+          m_shNew, m_shClose);
       connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
-	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+        this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
       connect(m_select, SIGNAL(closeMe() ),
               this, SIGNAL(closeMe() ) );
       //connect to close me and other signals as well
@@ -498,9 +498,9 @@ void OFileSelector::slotMimeCheck(const QString &mime)
                                    m_shNew, m_shClose);
 
       connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
-	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+        this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
       connect(m_select, SIGNAL(closeMe() ),
-    	      this, SIGNAL(closeMe() ) );
+            this, SIGNAL(closeMe() ) );
       //connect to close me and other signals as well
       m_stack->addWidget( m_select, NORMAL );
       m_stack->raiseWidget( NORMAL );
@@ -583,13 +583,13 @@ void OFileSelector::init()
           }
       }
     m_select = new FileSelector(mime,
-				m_stack, "fileselector",
-				m_shNew, m_shClose);
+        m_stack, "fileselector",
+        m_shNew, m_shClose);
 
     connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
-	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
     connect(m_select, SIGNAL(closeMe() ),
-	    this, SIGNAL( closeMe() ) );
+      this, SIGNAL( closeMe() ) );
     //connect to close me and other signals as well
 
     m_stack->addWidget( m_select, NORMAL );
@@ -597,7 +597,7 @@ void OFileSelector::init()
   }else{ // we're in init so it will be EXTENDED or EXTENDED_ALL
     // and initializeListview will take care of those
     // toolbar get's generade in initializeListView
-    initializeListView( ); // will raise the widget as well
+   initializeListView( ); // will raise the widget as well
     m_stack->raiseWidget( EXTENDED );
   }
   m_lay->addWidget( m_stack, 100 ); // add to the layout 10 = stretch
@@ -627,8 +627,8 @@ void OFileSelector::updateMimes()
       Global::findDocuments(&set, QString::null );
       QListIterator<DocLnk> dit( set.children() );
       for( ; dit.current(); ++dit ){
-	if( !m_mimetypes.contains( (*dit)->type() ) )
-	  m_mimetypes.insert( (*dit)->type(), (*dit)->type() );
+  if( !m_mimetypes.contains( (*dit)->type() ) )
+    m_mimetypes.insert( (*dit)->type(), (*dit)->type() );
       }
     }// else done in reparse
   }
@@ -696,23 +696,29 @@ void OFileSelector::addFile(const QString &/*mime*/, QFileInfo *info, bool symli
   QString dir;
   QString name;
   bool locked;
-  if( pix.isNull() )
-    pix = Resource::loadPixmap( "UnknownDocument-14");
+  if( pix.isNull() ) {
+     //TODO make this scaled pixmap global, so we dont have to keep doing this 
+    QWMatrix matrix;
+    QPixmap pixer(Resource::loadPixmap( "UnknownDocument" ));
+    matrix.scale( .4, .4);
+   pix = pixer.xForm(matrix);
+//    pix = Resource::loadPixmap( "UnknownDocument-14");
+  }
   dir = info->dirPath( true );
   if( symlink )
     name = info->fileName() + " -> " +info->dirPath() + "/" + info->readLink();
   else {
     name = info->fileName();
     if( ( m_mode == OPEN && !info->isReadable() )||
-	( m_mode == SAVE && !info->isWritable() ) ){
+  ( m_mode == SAVE && !info->isWritable() ) ){
 
       locked = true; pix = Resource::loadPixmap("locked");
     }
   }
   new OFileSelectorItem( m_View, pix, name,
-			 info->lastModified().toString(),
-			 QString::number( info->size() ),
-			 dir, locked );
+       info->lastModified().toString(),
+       QString::number( info->size() ),
+       dir, locked );
 }
 void OFileSelector::addDir(const QString &/*mime*/, QFileInfo *info, bool symlink )
 {
@@ -725,18 +731,18 @@ void OFileSelector::addDir(const QString &/*mime*/, QFileInfo *info, bool symlin
     if( ( m_mode == OPEN && !info->isReadable() ) || ( m_mode == SAVE && !info->isWritable() ) ){
       locked = true;
       if( symlink )
-	pix = (*m_pixmaps)["symlinkedlocked"];
+  pix = (*m_pixmaps)["symlinkedlocked"];
       else
-	pix = Resource::loadPixmap("lockedfolder");
+  pix = Resource::loadPixmap("lockedfolder");
     }else { // readable
       pix = symlink ?  (*m_pixmaps)["dirsymlink"] : Resource::loadPixmap("folder") ;
     }
     name = symlink ? info->fileName() + "->" + info->dirPath(true) + "/" +info->readLink() : info->fileName() ;
     new OFileSelectorItem( m_View, pix, name,
-			   info->lastModified().toString(),
-			   QString::number( info->size() ),
-			   info->dirPath( true ), locked,
-			   true );
+         info->lastModified().toString(),
+         QString::number( info->size() ),
+         info->dirPath( true ), locked,
+         true );
 
   }// else CUSTOM View
 }
@@ -786,9 +792,9 @@ void OFileSelector::initializeYes()
     m_lay->addWidget( m_boxOk, 0 );
 
     connect( m_ok, SIGNAL( clicked() ),
-	     this, SLOT(slotOk() ) );
+       this, SLOT(slotOk() ) );
     connect( m_cancel, SIGNAL( clicked() ),
-	     this, SLOT( slotCancel() ) );
+       this, SLOT( slotCancel() ) );
   }
 }
 /*
@@ -824,9 +830,9 @@ void OFileSelector::initializeChooser()
     updateMimeCheck();
 
     connect( m_viewCheck, SIGNAL( activated(const QString & ) ),
-	     this, SLOT( slotViewCheck(const QString & ) ) );
+       this, SLOT( slotViewCheck(const QString & ) ) );
     connect( m_mimeCheck, SIGNAL( activated(const QString & ) ),
-	     this, SLOT( slotMimeCheck( const QString & ) ) );
+       this, SLOT( slotMimeCheck( const QString & ) ) );
   }
 }
 void OFileSelector::initializeListView()
@@ -847,32 +853,32 @@ void OFileSelector::initializeListView()
       m_location->setEditable( TRUE );
       m_location->setDuplicatesEnabled( FALSE );
       connect( m_location, SIGNAL(activated(const QString &) ),
-	       this, SLOT( slotLocationActivated(const QString &) ) );
+         this, SLOT( slotLocationActivated(const QString &) ) );
       connect( m_location->lineEdit(), SIGNAL(returnPressed() ),
-	       this, SLOT(locationComboChanged() ) );
+         this, SLOT(locationComboChanged() ) );
       // UP Button
       m_up = new QPushButton(Resource::loadIconSet("up"),"",
-			     m_boxToolbar,"cdUpButton");
+           m_boxToolbar,"cdUpButton");
       m_up->setFixedSize( QSize( 20, 20 ) );
       connect(m_up ,SIGNAL(clicked()),this,SLOT(cdUP()  ) );
       m_up->setFlat(TRUE);
 
       // Home Button
       m_homeButton = new QPushButton(Resource::loadIconSet("home") ,
-				     "", m_boxToolbar);
+             "", m_boxToolbar);
       m_homeButton->setFixedSize( QSize( 20, 20 ) );
       connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotHome() ) );
       m_homeButton->setFlat(TRUE);
       // Documents Button
       m_docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",
-				    m_boxToolbar,"docsButton");
+            m_boxToolbar,"docsButton");
       m_docButton->setFixedSize( QSize( 20, 20 ) );
       connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotDoc() ) );
       m_docButton->setFlat(TRUE);
 
       // Close button
       m_close = new QPushButton( Resource::loadIconSet( "close"), "",
-				 m_boxToolbar );
+         m_boxToolbar );
       connect( m_close, SIGNAL(clicked() ), this, SIGNAL(closeMe()  ) );
       m_close->setFixedSize( 20, 20 );
 
@@ -884,22 +890,22 @@ void OFileSelector::initializeListView()
       const QList<FileSystem> &fs = storage.fileSystems();
       QListIterator<FileSystem> it ( fs );
       for( ; it.current(); ++it ){
-	const QString disk = (*it)->name();
-	const QString path = (*it)->path();
-	m_location->insertItem(path+ "<-"+disk );
+  const QString disk = (*it)->name();
+  const QString path = (*it)->path();
+  m_location->insertItem(path+ "<-"+disk );
       }
       int count = m_location->count();
       m_location->insertItem( m_currentDir );
       m_location->setCurrentItem( count );
       // due to the New and Close button we can not simply hide m_boxToolBar to not show it
       if( !m_shTool ){
-	m_location->hide(  );
-	m_up->hide(  );
-	m_homeButton->hide(  );
-	m_docButton->hide( );
+  m_location->hide(  );
+  m_up->hide(  );
+  m_homeButton->hide(  );
+  m_docButton->hide( );
       }
       if(!m_shClose )
-	m_close->hide();
+  m_close->hide();
       //if(!m_shNew)
       //m_close->hide();
 
@@ -908,7 +914,7 @@ void OFileSelector::initializeListView()
     // make a QWidgetStack first so Views can share the Toolbar
     m_View = new QListView( m_pseudo, "Extended view");
     QPEApplication::setStylusOperation( m_View->viewport(),
-					QPEApplication::RightOnHold);
+          QPEApplication::RightOnHold);
     m_View->addColumn(" " );
     m_View->addColumn(tr("Name"), 135 );
     m_View->addColumn(tr("Size"), -1 );
@@ -920,16 +926,17 @@ void OFileSelector::initializeListView()
     m_View->setAllColumnsShowFocus( TRUE );
 
     connect(m_View, SIGNAL(selectionChanged() ),
-	    this, SLOT(slotSelectionChanged() ) );
+      this, SLOT(slotSelectionChanged() ) );
 
-    connect(m_View, SIGNAL(currentChanged(QListViewItem *) ),
-	    this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
+    connect(m_View, SIGNAL(clicked(QListViewItem *) ),
+//    connect(m_View, SIGNAL(currentChanged(QListViewItem *) ),
+      this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
 
     connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ),
-	    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
+      this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
 
     connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )),
-	    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
+      this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
 
     m_pseudoLayout->addWidget( m_View, 288 );
     m_stack->addWidget( m_pseudo, EXTENDED );
@@ -1050,7 +1057,7 @@ void OFileSelector::slotCurrentChanged(QListViewItem* item )
     qWarning("current changed");
     if(!sel->isDir() ){
       if( m_shLne )
-	m_edit->setText( sel->text(1) );
+  m_edit->setText( sel->text(1) );
 
       if (m_mode == FILESELECTOR ) {
           QStringList str = QStringList::split("->", sel->text(1) );
@@ -1079,16 +1086,16 @@ void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &
     if(!sel->isLocked() ){
       QStringList str = QStringList::split("->", sel->text(1) );
       if( sel->isDir() ){
-	cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
-	// if MODE Dir m_shLne set the Text
+  cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
+  // if MODE Dir m_shLne set the Text
       }else{
-	if( m_shLne )
-	  m_edit->setText(  str[0].stripWhiteSpace() );
+  if( m_shLne )
+    m_edit->setText(  str[0].stripWhiteSpace() );
         qWarning("selected here in slot clicked");
-	emit fileSelected( sel->directory() + "/" + str[0].stripWhiteSpace() );
-	DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
+  emit fileSelected( sel->directory() + "/" + str[0].stripWhiteSpace() );
+  DocLnk lnk( sel->directory() + "/" + str[0].stripWhiteSpace() );
         qWarning("file selected");
-	emit fileSelected( lnk );
+  emit fileSelected( lnk );
       }
     }
     break;
@@ -1209,17 +1216,17 @@ void OFileSelector::reparse()
         QFileInfoListIterator it( *list );
         QFileInfo *fi;
         while( (fi=it.current() ) ) {
-  	  if( fi->extension() == QString::fromLatin1("desktop") ){
-  	    ++it;
-  	    continue;
-  	  }
-	  MimeType type( fi->absFilePath() );
-	  if( !m_mimetypes.contains( type.id() ) ){
-	    //qWarning("Type %s", type.id().latin1() );
-	    m_mimetypes.insert( type.id(), type.id() );
-	  }
+      if( fi->extension() == QString::fromLatin1("desktop") ){
+        ++it;
+        continue;
+      }
+    MimeType type( fi->absFilePath() );
+    if( !m_mimetypes.contains( type.id() ) ){
+      //qWarning("Type %s", type.id().latin1() );
+      m_mimetypes.insert( type.id(), type.id() );
+    }
 
-	  ++it;
+    ++it;
         }
         // add them to the chooser
         updateMimeCheck();
@@ -1268,22 +1275,22 @@ void OFileSelector::reparse()
       if( fi->isSymLink() ){
         QString file = fi->dirPath( true ) + "/" + fi->readLink();
         for( int i = 0; i<=4; i++) { // 5 tries to prevent dos
-  	QFileInfo info( file );
-  	if( !info.exists() ){
-  	  addSymlink( currentMimeType, fi, TRUE );
-  	  break;
-  	}else if( info.isDir() ){
-  	  addDir( currentMimeType, fi, TRUE );
-  	  break;
-  	}else if( info.isFile() ){
-  	  addFile( currentMimeType, fi, TRUE );
-  	  break;
-  	}else if( info.isSymLink() ){
-  	  file = info.dirPath(true ) + "/" + info.readLink() ;
-  	  break;
-  	}else if( i == 4){
-  	  addSymlink( currentMimeType, fi );
-  	}
+    QFileInfo info( file );
+    if( !info.exists() ){
+      addSymlink( currentMimeType, fi, TRUE );
+      break;
+    }else if( info.isDir() ){
+      addDir( currentMimeType, fi, TRUE );
+      break;
+    }else if( info.isFile() ){
+      addFile( currentMimeType, fi, TRUE );
+      break;
+    }else if( info.isSymLink() ){
+      file = info.dirPath(true ) + "/" + info.readLink() ;
+      break;
+    }else if( i == 4){
+      addSymlink( currentMimeType, fi );
+    }
         } // off for loop
       }else if( fi->isDir() ){
         addDir( currentMimeType, fi );
