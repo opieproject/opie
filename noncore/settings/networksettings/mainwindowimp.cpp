@@ -495,7 +495,7 @@ void MainWindowImp::updateInterface(Interface *i){
 #endif
 
   QString typeName = "lan";
-  if(i->getHardwareName().contains("Local Loopback"))
+  if(i->getInterfaceName() == "lo")
     typeName = "lo";
   if(i->getInterfaceName().contains("irda"))
     typeName = "irda";

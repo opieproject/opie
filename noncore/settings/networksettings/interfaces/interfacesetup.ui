@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>286</width>
+            <width>282</width>
             <height>280</height>
         </rect>
     </property>
@@ -108,6 +108,10 @@
                     <property stdset="1">
                         <name>name</name>
                         <cstring>subnetMaskEdit</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>255.255.255.0</string>
                     </property>
                 </widget>
                 <widget row="0"  column="1" >
