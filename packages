@@ -42,7 +42,7 @@ CONFIG_FREETYPE	freetype	freetype.pro
 CONFIG_FRESH	noncore/styles/fresh	fresh.pro
 CONFIG_FTPLIB	noncore/net/ftplib	ftplib.pro
 CONFIG_GO	noncore/games/go	go.pro
-CONFIG_GSMTOOL	noncore/comm/gsmtool	gsmtool.pro
+CONFIG_GSMTOOL	noncore/unsupported/gsmtool	gsmtool.pro
 CONFIG_HANDWRITING	inputmethods/handwriting	handwriting.pro
 CONFIG_HELPBROWSER	core/apps/helpbrowser	helpbrowser.pro
 CONFIG_HOMEAPPLET	core/applets/homeapplet	homeapplet.pro
@@ -63,7 +63,7 @@ CONFIG_LIBFFMPEG	core/multimedia/opieplayer/libffmpeg	libffmpeg.pro
 CONFIG_LIBFLASH	core/multimedia/opieplayer/libflash	libflash.pro
 CONFIG_LIBKATE  noncore/apps/tinykate/libkate libkate.pro
 CONFIG_LIBMAD	core/multimedia/opieplayer/libmad	libmad.pro
-CONFIG_LIBMAIL	noncore/mail/libmail	libmail.pro
+CONFIG_LIBMAIL	noncore/unsupported/mail2/libmail	libmail.pro
 CONFIG_LIBMPEG3	core/multimedia/opieplayer/libmpeg3	libmpeg3.pro
 CONFIG_LIBOPIE	libopie	libopie.pro
 CONFIG_LIBOPIE2CORE	libopie2/opiecore	opiecore.pro
@@ -84,7 +84,6 @@ CONFIG_LIGHT-AND-POWER	core/settings/light-and-power	light-and-power.pro
 CONFIG_LIQUID	noncore/styles/liquid	liquid.pro
 CONFIG_LOGOUTAPPLET	core/applets/logoutapplet	logoutapplet.pro
 CONFIG_MAILIT		noncore/net/mailit		mailit.pro
-CONFIG_MAIL		noncore/net/mail		mail.pro
 CONFIG_MEDIUMMOUNT	noncore/settings/mediummount	mediummount.pro
 CONFIG_MEMORYAPPLET	noncore/applets/memoryapplet	memoryapplet.pro
 CONFIG_METAL	noncore/styles/metal	metal.pro
@@ -110,7 +109,7 @@ CONFIG_OPIE-WRITE	noncore/apps/opie-write	opie-write.pro
 CONFIG_OPIEALARM	core/opiealarm
 CONFIG_OPIEFTP	noncore/net/opieftp	opieftp.pro
 CONFIG_OPIEIRC	noncore/net/opieirc	opieirc.pro
-CONFIG_OPIEMAIL2	noncore/mail mail.pro
+CONFIG_OPIEMAIL2	noncore/unsupported/mail2 mail.pro
 CONFIG_OPIEPLAYER	core/multimedia/opieplayer	opieplayer.pro
 CONFIG_OPIEPLAYER2	noncore/multimedia/opieplayer2	opieplayer2.pro
 CONFIG_OPIE-RDESKTOP	noncore/net/opierdesktop	opierdesktop.pro
