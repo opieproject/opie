@@ -131,6 +131,7 @@ $(TOPDIR)/scripts/filesubst : FORCE
 		echo 's,^\(\./\)*sounds/,$(prefix)/sounds/,g'; \
 		echo 's,^\(\./\)*plugins/,$(prefix)/plugins/,g'; \
 		echo 's,^\(\./\)*apps/,$(prefix)/apps/,g'; \
+		echo 's,^\(\./\)*share/,$(prefix)/share/,g'; \
 	) > $@ || ( rm -f $@; exit 1 )
 
 ## general rules ##
