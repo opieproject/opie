@@ -3,853 +3,853 @@
     <name>ATConfigDialog</name>
     <message>
         <source>Dialing parameter setup</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de parametros de marcado</translation>
     </message>
     <message>
         <source>Settings1</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuraciones1</translation>
     </message>
     <message>
         <source>Settings2</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuraciones2</translation>
     </message>
     <message>
         <source>Init string </source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena de inicio</translation>
     </message>
     <message>
         <source>Reset string </source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena de reinicio</translation>
     </message>
     <message>
         <source>Dialing prefix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefijo de marcado #1 </translation>
     </message>
     <message>
         <source>Dialing suffix #1 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo de marcado #1 </translation>
     </message>
     <message>
         <source>Dialing prefix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefijo de marcado #2 </translation>
     </message>
     <message>
         <source>Dialing suffix #2 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo de marcado #2 </translation>
     </message>
     <message>
         <source>Dialing prefix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Prefijo de marcado #3 </translation>
     </message>
     <message>
         <source>Dialing suffix #3 </source>
-        <translation type="unfinished"></translation>
+        <translation>Sufijo de marcado #3 </translation>
     </message>
     <message>
         <source>Connect string </source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena de conexión</translation>
     </message>
     <message>
         <source>Hang-up string </source>
-        <translation type="unfinished"></translation>
+        <translation>Cadena de colgar</translation>
     </message>
     <message>
         <source>Dial time </source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo de marcado</translation>
     </message>
     <message>
         <source>Delay before redial </source>
-        <translation type="unfinished"></translation>
+        <translation>Retardo antes de remarcar</translation>
     </message>
     <message>
         <source>Number of tries </source>
-        <translation type="unfinished"></translation>
+        <translation>Número de intentos</translation>
     </message>
     <message>
         <source>DTR drop time (0=no) </source>
-        <translation type="unfinished"></translation>
+        <translation>Tiempo bajada DTR (0=no)</translation>
     </message>
     <message>
         <source>Auto bps detect </source>
-        <translation type="unfinished"></translation>
+        <translation>Detectar bps auto</translation>
     </message>
     <message>
         <source>No</source>
-        <translation type="unfinished"></translation>
+        <translation>No</translation>
     </message>
     <message>
         <source>Yes</source>
-        <translation type="unfinished"></translation>
+        <translation>Sí</translation>
     </message>
     <message>
         <source>Modem has DCD line </source>
-        <translation type="unfinished"></translation>
+        <translation>Modem tiene línea DCD</translation>
     </message>
     <message>
         <source>Multi-line untag </source>
-        <translation type="unfinished"></translation>
+        <translation>Desetiquetar multilínea</translation>
     </message>
 </context>
 <context>
     <name>BTConfigWidget</name>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
     <message>
         <source>Or peer mac address</source>
-        <translation type="unfinished"></translation>
+        <translation>O par de direcciones MAC</translation>
     </message>
 </context>
 <context>
     <name>ConfigureBase</name>
     <message>
         <source>Configure</source>
-        <translation type="unfinished"></translation>
+        <translation>Configurar</translation>
     </message>
     <message>
         <source>Profile Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre perfil</translation>
     </message>
     <message>
         <source>&amp;Add</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Añadir</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Editar</translation>
     </message>
     <message>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Elimina&amp;r</translation>
     </message>
 </context>
 <context>
     <name>ConsoleConfigWidget</name>
     <message>
         <source>Command to execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Comando a ejecutar</translation>
     </message>
     <message>
         <source>Environment Variables</source>
-        <translation type="unfinished"></translation>
+        <translation>Variables de entorno</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Value</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor</translation>
     </message>
     <message>
         <source>Name :</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre :</translation>
     </message>
     <message>
         <source>Value :</source>
-        <translation type="unfinished"></translation>
+        <translation>Valor :</translation>
     </message>
     <message>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Eliminar</translation>
     </message>
     <message>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Añadir</translation>
     </message>
 </context>
 <context>
     <name>DialDialog</name>
     <message>
         <source>Enter number</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducta número</translation>
     </message>
     <message>
         <source>Enter the number you want to dial. When finished, press ok</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca el número que quiere marcar. Cuando termine, pulse ok</translation>
     </message>
 </context>
 <context>
     <name>EditBase</name>
     <message>
         <source>Editor Base</source>
-        <translation type="unfinished"></translation>
+        <translation>Editor base</translation>
     </message>
     <message>
         <source>Terminal Emulation:</source>
-        <translation type="unfinished"></translation>
+        <translation>Emulación de terminal:</translation>
     </message>
     <message>
         <source>IO Layer:</source>
-        <translation type="unfinished"></translation>
+        <translation>Capa IO:</translation>
     </message>
     <message>
         <source>Look</source>
-        <translation type="unfinished"></translation>
+        <translation>Aspecto</translation>
     </message>
     <message>
         <source>Foreground:</source>
-        <translation type="unfinished"></translation>
+        <translation>Primer plano:</translation>
     </message>
     <message>
         <source>Black</source>
-        <translation type="unfinished"></translation>
+        <translation>Negro</translation>
     </message>
     <message>
         <source>White</source>
-        <translation type="unfinished"></translation>
+        <translation>Blanco</translation>
     </message>
     <message>
         <source>Gray</source>
-        <translation type="unfinished"></translation>
+        <translation>Gris</translation>
     </message>
     <message>
         <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation>Fondo:</translation>
     </message>
     <message>
         <source>Font:</source>
-        <translation type="unfinished"></translation>
+        <translation>Letra:</translation>
     </message>
     <message>
         <source>Micro</source>
-        <translation type="unfinished"></translation>
+        <translation>Micro</translation>
     </message>
     <message>
         <source>Small</source>
-        <translation type="unfinished"></translation>
+        <translation>Pequeña</translation>
     </message>
     <message>
         <source>Medium</source>
-        <translation type="unfinished"></translation>
+        <translation>Mediana</translation>
     </message>
 </context>
 <context>
     <name>FileReceive</name>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>No puede empezar</translation>
     </message>
 </context>
 <context>
     <name>FileTransfer</name>
     <message>
         <source>Was not able to fork</source>
-        <translation type="unfinished"></translation>
+        <translation>Incapaz de desdoblarme</translation>
     </message>
     <message>
         <source>Could not start</source>
-        <translation type="unfinished"></translation>
+        <translation>No puede empezar</translation>
     </message>
 </context>
 <context>
     <name>FunctionKeyboardConfig</name>
     <message>
         <source>Dimensions</source>
-        <translation type="unfinished"></translation>
+        <translation>Dimensiones</translation>
     </message>
     <message>
         <source>Edit Key</source>
-        <translation type="unfinished"></translation>
+        <translation>Editar tecla</translation>
     </message>
 </context>
 <context>
     <name>IOLayerBase</name>
     <message>
         <source>Speed</source>
-        <translation type="unfinished"></translation>
+        <translation>Velocidad</translation>
     </message>
     <message>
         <source>Flow control</source>
-        <translation type="unfinished"></translation>
+        <translation>Control flujo</translation>
     </message>
     <message>
         <source>Hardware</source>
-        <translation type="unfinished"></translation>
+        <translation>Hardware</translation>
     </message>
     <message>
         <source>Software</source>
-        <translation type="unfinished"></translation>
+        <translation>Software</translation>
     </message>
     <message>
         <source>None</source>
-        <translation type="unfinished"></translation>
+        <translation>Ninguno</translation>
     </message>
     <message>
         <source>Parity</source>
-        <translation type="unfinished"></translation>
+        <translation>Paridad</translation>
     </message>
     <message>
         <source>Odd</source>
-        <translation type="unfinished"></translation>
+        <translation>Impar</translation>
     </message>
     <message>
         <source>Even</source>
-        <translation type="unfinished"></translation>
+        <translation>Par</translation>
     </message>
     <message>
         <source>Data Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Bits de datos</translation>
     </message>
     <message>
         <source>5</source>
-        <translation type="unfinished"></translation>
+        <translation>5</translation>
     </message>
     <message>
         <source>6</source>
-        <translation type="unfinished"></translation>
+        <translation>6</translation>
     </message>
     <message>
         <source>7</source>
-        <translation type="unfinished"></translation>
+        <translation>7</translation>
     </message>
     <message>
         <source>8</source>
-        <translation type="unfinished"></translation>
+        <translation>8</translation>
     </message>
     <message>
         <source>Stop Bits</source>
-        <translation type="unfinished"></translation>
+        <translation>Bits de parada</translation>
     </message>
     <message>
         <source>1</source>
-        <translation type="unfinished"></translation>
+        <translation>1</translation>
     </message>
     <message>
         <source>1.5</source>
-        <translation type="unfinished"></translation>
+        <translation>1.5</translation>
     </message>
     <message>
         <source>2</source>
-        <translation type="unfinished"></translation>
+        <translation>2</translation>
     </message>
     <message>
         <source>115200 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>115200 baudios</translation>
     </message>
     <message>
         <source>57600 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>57600 baudios</translation>
     </message>
     <message>
         <source>38400 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>38400 baudios</translation>
     </message>
     <message>
         <source>19200 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>19200 baudios</translation>
     </message>
     <message>
         <source>9600 baud</source>
-        <translation type="unfinished"></translation>
+        <translation>9600 baudios</translation>
     </message>
 </context>
 <context>
     <name>IOSerial</name>
     <message>
         <source>Not connected</source>
-        <translation type="unfinished"></translation>
+        <translation>No conectado</translation>
     </message>
     <message>
         <source>Invalid baud rate</source>
-        <translation type="unfinished"></translation>
+        <translation>Tasa de baudios inválida</translation>
     </message>
     <message>
         <source>Device is already connected</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo ya conectado</translation>
     </message>
 </context>
 <context>
     <name>IrdaConfigWidget</name>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
 </context>
 <context>
     <name>MainWindow</name>
     <message>
         <source>Configure Profiles</source>
-        <translation type="unfinished"></translation>
+        <translation>Configuración de perfiles</translation>
     </message>
     <message>
         <source>New Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Nueva conexión</translation>
     </message>
     <message>
         <source>Save Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar conexión</translation>
     </message>
     <message>
         <source>Connect</source>
-        <translation type="unfinished"></translation>
+        <translation>Conectar</translation>
     </message>
     <message>
         <source>Disconnect</source>
-        <translation type="unfinished"></translation>
+        <translation>Desconectar</translation>
     </message>
     <message>
         <source>QuickLaunch</source>
-        <translation type="unfinished"></translation>
+        <translation>LanzadorRápido</translation>
     </message>
     <message>
         <source>The shell button launches the &quot;default&quot; profile. If there is none default values are taken</source>
-        <translation type="unfinished"></translation>
+        <translation>El botón de la concha lanza el perfil preferido. Si no hay ninguno se toman los valores por defecto</translation>
     </message>
     <message>
         <source>Transfer file...</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferir fichero...</translation>
     </message>
     <message>
         <source>Line wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar líneas</translation>
     </message>
     <message>
         <source>Full screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Pantalla completa</translation>
     </message>
     <message>
         <source>Save history</source>
-        <translation type="unfinished"></translation>
+        <translation>Guardar historial</translation>
     </message>
     <message>
         <source>Terminate</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminar</translation>
     </message>
     <message>
         <source>Close Window</source>
-        <translation type="unfinished"></translation>
+        <translation>Cerrar ventana</translation>
     </message>
     <message>
         <source>Run Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Ejecutar script</translation>
     </message>
     <message>
         <source>Record Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Regisrar script</translation>
     </message>
     <message>
         <source>Save Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Salvar script</translation>
     </message>
     <message>
         <source>Open Keyboard...</source>
-        <translation type="unfinished"></translation>
+        <translation>Abrir teclado...</translation>
     </message>
     <message>
         <source>New from Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Nuevo del perfil</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión</translation>
     </message>
     <message>
         <source>Scripts</source>
-        <translation type="unfinished"></translation>
+        <translation>Scripts</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Copiar</translation>
     </message>
     <message>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Pegar</translation>
     </message>
     <message>
         <source>Script</source>
-        <translation type="unfinished"></translation>
+        <translation>Script</translation>
     </message>
     <message>
         <source>&lt;qt&gt;There is no Connection.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;No hay conexión.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>History</source>
-        <translation type="unfinished"></translation>
+        <translation>Historial</translation>
     </message>
 </context>
 <context>
     <name>ModemConfigWidget</name>
     <message>
         <source>Modem is attached to:</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem unido a:</translation>
     </message>
     <message>
         <source>Enter telefon number here:</source>
-        <translation type="unfinished"></translation>
+        <translation>Introduzca aquí el nº de teléfono:</translation>
     </message>
     <message>
         <source>AT commands</source>
-        <translation type="unfinished"></translation>
+        <translation>Comandos AT</translation>
     </message>
     <message>
         <source>Enter number</source>
-        <translation type="unfinished"></translation>
+        <translation>Introducta número</translation>
     </message>
 </context>
 <context>
     <name>NoOptions</name>
     <message>
         <source>This Plugin does not support any configurations</source>
-        <translation type="unfinished"></translation>
+        <translation>Este módulo no puede configurarse</translation>
     </message>
 </context>
 <context>
     <name>ProfileEditorDialog</name>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Auto connect after load</source>
-        <translation type="unfinished"></translation>
+        <translation>Auto conectar tras la carga</translation>
     </message>
     <message>
         <source>Local Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola local</translation>
     </message>
 </context>
 <context>
     <name>QObject</name>
     <message>
         <source>Opie Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola Opie</translation>
     </message>
     <message>
         <source>Failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló</translation>
     </message>
     <message>
         <source>Connecting failed for this session.</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión fallida para esta sesión.</translation>
     </message>
     <message>
         <source>Session failed</source>
-        <translation type="unfinished"></translation>
+        <translation>Sesión fallida</translation>
     </message>
     <message>
         <source>&lt;qt&gt;Cannot open session: Not all components were found.&lt;/qt&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;qt&gt;No pude abrir la sesión: No dueron encotrados todos los componentes.&lt;/qt&gt;</translation>
     </message>
     <message>
         <source>Transfer mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Modo transferencia</translation>
     </message>
     <message>
         <source>Send</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>Receive</source>
-        <translation type="unfinished"></translation>
+        <translation>Recibir</translation>
     </message>
     <message>
         <source>Send file</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar fichero</translation>
     </message>
     <message>
         <source>Transfer protocol</source>
-        <translation type="unfinished"></translation>
+        <translation>Protocolo transferencia</translation>
     </message>
     <message>
         <source>Progress</source>
-        <translation type="unfinished"></translation>
+        <translation>Progreso</translation>
     </message>
     <message>
         <source>Status</source>
-        <translation type="unfinished"></translation>
+        <translation>Estado</translation>
     </message>
     <message>
         <source>Ready</source>
-        <translation type="unfinished"></translation>
+        <translation>Preparado</translation>
     </message>
     <message>
         <source>Start transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Iniciar transferencia</translation>
     </message>
     <message>
         <source>Cancel</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelar</translation>
     </message>
     <message>
         <source>File transfer</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferencia fichero</translation>
     </message>
     <message>
         <source>Attention</source>
-        <translation type="unfinished"></translation>
+        <translation>Atención</translation>
     </message>
     <message>
         <source>No file has been specified.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ningún fichero especificado.</translation>
     </message>
     <message>
         <source>Sending...</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviando...</translation>
     </message>
     <message>
         <source>Receiving...</source>
-        <translation type="unfinished"></translation>
+        <translation>Recibiendo...</translation>
     </message>
     <message>
         <source>Cancelled</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelado</translation>
     </message>
     <message>
         <source>The file transfer has been cancelled.</source>
-        <translation type="unfinished"></translation>
+        <translation>La transferencia de ficheros ha sido cancelada.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation type="unfinished"></translation>
+        <translation>Error</translation>
     </message>
     <message>
         <source>Operation not supported.</source>
-        <translation type="unfinished"></translation>
+        <translation>Operación no adminitida.</translation>
     </message>
     <message>
         <source>Transfer could not be started.</source>
-        <translation type="unfinished"></translation>
+        <translation>La transferencia no pudo ser iniciada.</translation>
     </message>
     <message>
         <source>No error.</source>
-        <translation type="unfinished"></translation>
+        <translation>Sin error.</translation>
     </message>
     <message>
         <source>Undefined error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocurrió un error indefinido.</translation>
     </message>
     <message>
         <source>Incomplete transfer.</source>
-        <translation type="unfinished"></translation>
+        <translation>Transferencia incompleta.</translation>
     </message>
     <message>
         <source>Unknown error occured.</source>
-        <translation type="unfinished"></translation>
+        <translation>Ocurrió un error desconocido.</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation type="unfinished"></translation>
+        <translation>Enviar</translation>
     </message>
     <message>
         <source>File has been sent.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero enviato.</translation>
     </message>
     <message>
         <source>Received</source>
-        <translation type="unfinished"></translation>
+        <translation>Recibido</translation>
     </message>
     <message>
         <source>File has been received.</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero recibido.</translation>
     </message>
     <message>
         <source>Profile name</source>
-        <translation type="unfinished"></translation>
+        <translation>Nombre perfil</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil</translation>
     </message>
     <message>
         <source>Connection</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión</translation>
     </message>
     <message>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal</translation>
     </message>
     <message>
         <source>Special Keys</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclas especiales</translation>
     </message>
     <message>
         <source>Invalid profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Perfil no válido</translation>
     </message>
     <message>
         <source>Please enter a profile name.</source>
-        <translation type="unfinished"></translation>
+        <translation>Por favor, introduzca un nombre de perfil.</translation>
     </message>
     <message>
         <source>Z-Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Z-Modem</translation>
     </message>
     <message>
         <source>Y-Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Y-Modem</translation>
     </message>
     <message>
         <source>X-Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>X-Modem</translation>
     </message>
     <message>
         <source>Serial</source>
-        <translation type="unfinished"></translation>
+        <translation>Serie</translation>
     </message>
     <message>
         <source>Modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Modem</translation>
     </message>
     <message>
         <source>Local Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola local</translation>
     </message>
     <message>
         <source>Default Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal preferido</translation>
     </message>
     <message>
         <source>Default Keyboard</source>
-        <translation type="unfinished"></translation>
+        <translation>Teclaro preferido</translation>
     </message>
     <message>
         <source>SynchronizedFile</source>
-        <translation type="unfinished"></translation>
+        <translation>Fichero sincronizado</translation>
     </message>
     <message>
         <source>Dialing number: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Numero marcado: %1</translation>
     </message>
     <message>
         <source>Failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Fallo</translation>
     </message>
     <message>
         <source>Dialing the number failed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Falló la marcación del número.</translation>
     </message>
     <message>
         <source>Cancelling...</source>
-        <translation type="unfinished"></translation>
+        <translation>Cancelando...</translation>
     </message>
     <message>
         <source>Searching modem</source>
-        <translation type="unfinished"></translation>
+        <translation>Buscando modem</translation>
     </message>
     <message>
         <source>Initializing...</source>
-        <translation type="unfinished"></translation>
+        <translation>Inicializando...</translation>
     </message>
     <message>
         <source>Reset speakers</source>
-        <translation type="unfinished"></translation>
+        <translation>Reinicial altavoces</translation>
     </message>
     <message>
         <source>Turning off dialtone</source>
-        <translation type="unfinished"></translation>
+        <translation>Apagando tono marcado</translation>
     </message>
     <message>
         <source>Dial number</source>
-        <translation type="unfinished"></translation>
+        <translation>Marcar número</translation>
     </message>
     <message>
         <source>Line busy, redialing number</source>
-        <translation type="unfinished"></translation>
+        <translation>Línea ocupada, remarcando número</translation>
     </message>
     <message>
         <source>Connection established</source>
-        <translation type="unfinished"></translation>
+        <translation>Conexión establecida</translation>
     </message>
     <message>
         <source>Dismiss</source>
-        <translation type="unfinished"></translation>
+        <translation>Olvidar</translation>
     </message>
 </context>
 <context>
     <name>SerialConfigWidget</name>
     <message>
         <source>Device</source>
-        <translation type="unfinished"></translation>
+        <translation>Dispositivo</translation>
     </message>
 </context>
 <context>
     <name>TerminalWidget</name>
     <message>
         <source>Terminal Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipo de terminal</translation>
     </message>
     <message>
         <source>Color scheme</source>
-        <translation type="unfinished"></translation>
+        <translation>Esquema de color</translation>
     </message>
     <message>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Tamaño letra</translation>
     </message>
     <message>
         <source>small</source>
-        <translation type="unfinished"></translation>
+        <translation>pequeña</translation>
     </message>
     <message>
         <source>medium</source>
-        <translation type="unfinished"></translation>
+        <translation>mediana</translation>
     </message>
     <message>
         <source>large</source>
-        <translation type="unfinished"></translation>
+        <translation>grande</translation>
     </message>
     <message>
         <source>Line-break conversions</source>
-        <translation type="unfinished"></translation>
+        <translation>Conversiones ruptura de línea</translation>
     </message>
     <message>
         <source>Inbound</source>
-        <translation type="unfinished"></translation>
+        <translation>Bajo límites</translation>
     </message>
     <message>
         <source>Outbound</source>
-        <translation type="unfinished"></translation>
+        <translation>Fuera de límites</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="unfinished"></translation>
+        <translation>Opciones</translation>
     </message>
     <message>
         <source>Local echo</source>
-        <translation type="unfinished"></translation>
+        <translation>Eco local</translation>
     </message>
     <message>
         <source>Line wrap</source>
-        <translation type="unfinished"></translation>
+        <translation>Cortar líneas</translation>
     </message>
     <message>
         <source>VT 100</source>
-        <translation type="unfinished"></translation>
+        <translation>VT 100</translation>
     </message>
     <message>
         <source>VT 102</source>
-        <translation type="unfinished"></translation>
+        <translation>VT 102</translation>
     </message>
     <message>
         <source>Linux Console</source>
-        <translation type="unfinished"></translation>
+        <translation>Consola Linux</translation>
     </message>
     <message>
         <source>X-Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Terminal X</translation>
     </message>
     <message>
         <source>black on white</source>
-        <translation type="unfinished"></translation>
+        <translation>negro sobre blanco</translation>
     </message>
     <message>
         <source>white on black</source>
-        <translation type="unfinished"></translation>
+        <translation>blanco sobre negro</translation>
     </message>
     <message>
         <source>green on black</source>
-        <translation type="unfinished"></translation>
+        <translation>verde sobre negro</translation>
     </message>
     <message>
         <source>orange on black</source>
-        <translation type="unfinished"></translation>
+        <translation>ambar sobre negro</translation>
     </message>
 </context>
 </TS>
