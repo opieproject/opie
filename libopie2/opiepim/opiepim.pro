@@ -1,11 +1,7 @@
 TEMPLATE    = lib
 CONFIG      += qt warn_on 
 DESTDIR     = $(OPIEDIR)/lib
-HEADERS     = opimcontact.h opimcontactfields.h opimrecord.h opimtodo.h opimnotify.h \
-              opimnotifymanager.h opimevent.h
 
-SOURCES     = opimcontact.cpp opimcontactfields.cpp opimrecord.cpp opimtodo.cpp opimnotify.cpp \
-              opimnotifymanager.cpp opimevent.cpp
 INTERFACES  =
 TARGET      = opiepim2
 VERSION     = 1.8.6
@@ -15,7 +11,7 @@ LIBS        += -lopiecore2
 
 include ( $(OPIEDIR)/gen.pro )
 include ( core/core.pro )
-include ( core/backends/backends.pro )
+include ( backend/backends.pro )
 include ( ui/ui.pro )
 
 !contains( platform, x11 ) {

@@ -33,8 +33,8 @@
  *
  */
 
-#include "ocontactaccess.h"
-#include "obackendfactory.h"
+#include <opie2/ocontactaccess.h>
+#include <opie2/obackendfactory.h>
 
 /* OPIE */
 #include <opie2/ocontactaccessbackend_xml.h>

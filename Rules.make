@@ -153,6 +153,7 @@ $(OPIEDIR)/stamp-headers :
 		$(TOPDIR)/include/qtopia \
 		$(TOPDIR)/include/opie \
 		$(TOPDIR)/include/opie2 \
+		$(TOPDIR)/include/opie2/private \
 		$(TOPDIR)/include/qtopia/private \
 		$(TOPDIR)/include/sl
 	( cd include/qpe &&  rm -f *.h; ln -sf ../../library/*.h .; ln -sf ../../library/backend/*.h .; rm -f *_p.h; )
@@ -172,7 +173,8 @@ endif
 	( cd include/opie2 && ln -sf ../../libopie2/opienet/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/core/*.h .; )
-	( cd include/opie2 && ln -sf ../../libopie2/opiepim/core/backends/*.h .; )
+	( cd include/opie2 && ln -sf ../../libopie2/opiepim/backend/*.h .; )
+	( cd include/opie2/private && ln -sf ../../../libopie2/opiepim/private/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opiepim/ui/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/*.h .; )
 	( cd include/opie2 && ln -sf ../../libopie2/opieui/fileselector/*.h .; )

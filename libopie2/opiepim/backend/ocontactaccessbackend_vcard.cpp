@@ -31,7 +31,7 @@
  */
 
 
-#include "vobject_p.h"
+#include <opie2/private/vobject_p.h>
 
 /* OPIE */
 #include <opie2/ocontactaccessbackend_vcard.h>

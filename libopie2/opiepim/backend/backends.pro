@@ -1,41 +1,34 @@
 SOURCES += \
-        core/backends/ocontactaccessbackend_vcard.cpp \
-        core/backends/ocontactaccessbackend_xml.cpp \
-        core/backends/ocontactaccess.cpp \
-        core/backends/odatebookaccessbackend.cpp \
-        core/backends/odatebookaccessbackend_xml.cpp \
-        core/backends/otodoaccessbackend.cpp \
-        core/backends/otodoaccess.cpp \
-        core/backends/otodoaccessvcal.cpp \
-        core/backends/otodoaccessxml.cpp \
-        core/backends/odatebookaccess.cpp
+        backend/ocontactaccessbackend_vcard.cpp \
+        backend/ocontactaccessbackend_xml.cpp   \
+        backend/odatebookaccessbackend.cpp      \
+        backend/odatebookaccessbackend_xml.cpp  \
+        backend/otodoaccessbackend.cpp          \
+        backend/otodoaccessvcal.cpp             \
+        backend/otodoaccessxml.cpp              
         
 HEADERS += \
-        core/backends/obackendfactory.h \
-        core/backends/ocontactaccessbackend.h \
-        core/backends/ocontactaccessbackend_vcard.h \
-        core/backends/ocontactaccessbackend_xml.h \
-        core/backends/ocontactaccess.h \
-        core/backends/odatebookaccessbackend.h \
-        core/backends/odatebookaccessbackend_xml.h \
-        core/backends/opimaccessbackend.h \
-        core/backends/opimaccesstemplate.h \
-        core/backends/otodoaccessbackend.h \
-        core/backends/otodoaccess.h \
-        core/backends/otodoaccessvcal.h \
-        core/backends/otodoaccessxml.h \
-        core/backends/odatebookaccess.h 
+        backend/obackendfactory.h              \
+        backend/ocontactaccessbackend.h        \
+        backend/ocontactaccessbackend_vcard.h  \
+        backend/ocontactaccessbackend_xml.h    \
+        backend/odatebookaccessbackend.h       \
+        backend/odatebookaccessbackend_xml.h   \
+        backend/opimaccessbackend.h            \        
+        backend/otodoaccessbackend.h           \
+        backend/otodoaccessvcal.h              \
+        backend/otodoaccessxml.h               
 
 contains( ENABLE_SQL_PIM_BACKEND, y ) {
 	message ( Enabling the SQL Backend for libopiepim2 )
 	DEFINES += __USE_SQL
 	LIBS    += -lopiedb2
-	HEADERS += core/backends/otodoaccesssql.h \
-                   core/backends/ocontactaccessbackend_sql.h \
-                   core/backends/odatebookaccessbackend_sql.h
-	SOURCES += core/backends/otodoaccesssql.cpp \
-		   core/backends/ocontactaccessbackend_sql.cpp \
-		   core/backends/odatebookaccessbackend_sql.cpp
+	HEADERS += backend/otodoaccesssql.h             \
+                   backend/ocontactaccessbackend_sql.h  \
+                   backend/odatebookaccessbackend_sql.h 
+	SOURCES += backend/otodoaccesssql.cpp            \
+		   backend/ocontactaccessbackend_sql.cpp \
+		   backend/odatebookaccessbackend_sql.cpp
 }
 
 !contains( ENABLE_SQL_PIM_BACKEND, y ) {
