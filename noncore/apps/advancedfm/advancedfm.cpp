@@ -118,13 +118,14 @@ AdvancedFm::AdvancedFm( )
 //     fileMenu->insertItem( tr( "Disconnect" ), this,  SLOT( disConnector() ));
 
     fileMenu->insertItem( tr( "Show Hidden Files" ), this,  SLOT( showHidden() ));
+        fileMenu->setItemChecked( fileMenu->idAt(0),TRUE);
     fileMenu->insertSeparator();
-    fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( localMakDir() ));
-    fileMenu->insertItem( tr( "Rename" ), this, SLOT( localRename() ));
+    fileMenu->insertItem( tr( "Make Directory" ), this, SLOT( mkDir() ));
+    fileMenu->insertItem( tr( "Rename" ), this, SLOT( rn() ));
     fileMenu->insertItem( tr( "Run Command" ), this, SLOT( runCommandStd() ));
     fileMenu->insertItem( tr( "Run Command with Output" ), this, SLOT( runCommand() ));
     fileMenu->insertSeparator();
-    fileMenu->insertItem( tr( "Delete" ), this, SLOT( localDelete() ));
+    fileMenu->insertItem( tr( "Delete" ), this, SLOT( del() ));
     fileMenu->setCheckable(TRUE);
 
     viewMenu->insertItem( tr( "Switch to Local" ), this, SLOT( switchToLocalTab() ));
@@ -201,13 +202,14 @@ AdvancedFm::AdvancedFm( )
     
 //     TabWidget->insertTab( tab_3, tr( "Files" ) );
 
-    currentDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+    currentDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentDir.setPath( QDir::currentDirPath());
 
-    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs/* | QDir::Hidden*/ | QDir::All);
+    currentRemoteDir.setFilter( QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All);
     currentRemoteDir.setPath( QDir::currentDirPath());
 
-    currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
+b = TRUE;
+ currentPathCombo = new QComboBox( FALSE, this, "currentPathCombo" );
     currentPathCombo->setEditable(TRUE);
     layout->addMultiCellWidget( currentPathCombo, 3, 3, 0, 6);
     currentPathCombo->lineEdit()->setText( currentDir.canonicalPath());
@@ -1260,6 +1262,29 @@ void AdvancedFm::fileStatus() {
         }
               
     }
+}
+
+void AdvancedFm::mkDir() {
+    if (TabWidget->currentPageIndex() == 0) 
+        localMakDir();
+    else
+        remoteMakDir();
+        
+}
+
+void AdvancedFm::rn() {
+    if (TabWidget->currentPageIndex() == 0)
+        localRename();
+    else
+        remoteRename();
+
+}
+
+void AdvancedFm::del() {
+    if (TabWidget->currentPageIndex() == 0)
+        localDelete();
+    else
+        remoteDelete();
 }
 
 void AdvancedFm::doAbout() {

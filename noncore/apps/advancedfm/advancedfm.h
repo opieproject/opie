@@ -64,7 +64,9 @@ protected slots:
     void doLocalCd();
     void doRemoteCd();
 //    void copy();
-
+    void mkDir();
+    void del();
+    void rn();
     void populateLocalView();
     void populateRemoteView();
     void showHidden();
