@@ -36,6 +36,7 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
   setName( "Set_Alarm" );
     resize( 240, 101 ); 
     setMaximumSize( QSize( 240, 320 ) );
+    move(0,48);
     setCaption( tr( "Set Alarm" ) );
     connect( qApp,SIGNAL( aboutToQuit()),SLOT( cleanUp()) );
 
@@ -133,8 +134,8 @@ Set_Alarm::Set_Alarm( QWidget* parent,  const char* name, bool modal, WFlags fl 
             Pm_RadioButton->setChecked(TRUE);
         }
         else if ( i_alarmHour == 0 ) {
-        	i_alarmHour = 12; 
-        }	
+          i_alarmHour = 12; 
+        } 
         Hour_Slider->setValue( i_alarmHour );
         Minute_Slider->setValue( alarmMinute.toInt(&ok,10) );
         SnoozeSlider->setValue( snoozeTime.toInt(&ok,10) );
