@@ -318,6 +318,11 @@ void PhaseStyle::polish( QWidget* widget ) {
 #endif
 }
 
+void PhaseStyle::unPolish( QWidget *w )
+{
+    QWindowsStyle::unPolish( w );
+}
+
 void PhaseStyle::polish( QPalette &pal ) {
     QWindowsStyle::polish( pal );
     // lighten up a bit, so the look is not so "crisp"
@@ -335,6 +340,11 @@ void PhaseStyle::polish( QApplication* app ) {
     QWindowsStyle::polish( app );
 
     qt_set_draw_menu_bar_impl((QDrawMenuBarItemImpl)&PhaseStyle::drawMenuBarItem);
+}
+
+void PhaseStyle::unPolish( QApplication* app ) {
+    QWindowsStyle::unPolish(app);
+    qt_set_draw_menu_bar_impl ( 0 );
 }
 
 void PhaseStyle::drawPushButtonLabel (QPushButton *button, QPainter *painter) {
@@ -631,15 +641,15 @@ void PhaseStyle::drawPopupMenuItem ( QPainter * p, bool checkable,
 
     // draw seperator
     if (mi->isSeparator() ) {
-	p->setPen( g.dark() );
-	p->drawLine( x+8, y+1, x+w-8, y+1 );
+    p->setPen( g.dark() );
+    p->drawLine( x+8, y+1, x+w-8, y+1 );
 
         p->setPen( g.mid() );
         p->drawLine( x+8,   y, x+w-8, y );
         p->drawPoint(x+w,y+1);
 
-	p->setPen( g.midlight() );
-	p->drawLine( x+8, y-1, x+w-8, y-1 );
+    p->setPen( g.midlight() );
+    p->drawLine( x+8, y-1, x+w-8, y-1 );
         p->drawPoint(x+8, y );
         return;
     }
@@ -776,9 +786,9 @@ void PhaseStyle::drawTab(QPainter* painter, const QTabBar* bar, QTab* tab,
 
     // what position is the tab?
     if ((bar->count() == 1 ))
-	edge = true;
+    edge = true;
     else
-	edge = false;
+    edge = false;
 
     switch (QTabBar::Shape(bar->shape())) {
     case QTabBar::RoundedAbove:

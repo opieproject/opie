@@ -40,9 +40,11 @@ public:
     PhaseStyle();
     virtual ~PhaseStyle();
 
-    void polish( QWidget * );
-    void polish( QPalette& );
-    void polish( QApplication* );
+    virtual void polish( QWidget * );
+    virtual void polish( QPalette& );
+    virtual void polish( QApplication* a);
+    virtual void unPolish( QWidget * );
+    virtual void unPolish(QApplication *a);
 
 
     void drawCheckMark ( QPainter * p, int x, int y, int w,
