@@ -85,6 +85,7 @@ namespace Todo {
         QPixmap m_pic_priority[ 5 ];
 
     protected:
+        void keyPressEvent( QKeyEvent* );
         void contentsMouseReleaseEvent( QMouseEvent* );
         void contentsMouseMoveEvent( QMouseEvent* );
         void timerEvent( QTimerEvent* e );

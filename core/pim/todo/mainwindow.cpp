@@ -86,11 +86,11 @@ void MainWindow::initTemplate() {
     m_curTempEd = new TemplateEditor( this, templateManager() );
 }
 void MainWindow::initActions() {
-    
+
     // Data menu
     m_edit->insertItem(QWidget::tr("New from template"), m_template,
                        -1, 0 );
-    
+
     QAction* a = new QAction( QWidget::tr("New Task" ), Resource::loadPixmap( "new" ),
                               QString::null, 0, this, 0 );
     connect(a, SIGNAL( activated() ),
@@ -251,7 +251,7 @@ void MainWindow::initEditor() {
     m_curEdit = new Editor();
 }
 void MainWindow::initShow() {
-    m_curShow = new TextViewShow(this);
+    m_curShow = new TextViewShow(this, this);
     m_stack->addWidget( m_curShow->widget() , m_counter++ );
 }
 MainWindow::~MainWindow() {
@@ -812,4 +812,7 @@ void MainWindow::add( const OPimRecord& rec) {
     // spend expensive time comparing all these strings...
     // but only call if we changed something -zecke
     populateCategories();
+}
+void MainWindow::slotReturnFromView() {
+    raiseCurrentView();
 }

@@ -34,6 +34,7 @@
 #include <opie/otodo.h>
 
 namespace Todo {
+    class MainWindow;
     /**
      * TodoShow is the baseclass of
      * of all TodoShows.
@@ -42,11 +43,15 @@ namespace Todo {
      */
     class TodoShow {
     public:
-        TodoShow();
+        TodoShow( MainWindow* win);
         virtual ~TodoShow();
         virtual QString type()const = 0;
         virtual void slotShow( const OTodo& ev ) = 0;
         virtual QWidget* widget() = 0;
+    protected:
+        void escapeView();
+    private:
+        MainWindow *m_win;
     };
 };
 

@@ -60,6 +60,7 @@ namespace Todo {
     class MainWindow : public OPimMainWindow {
         Q_OBJECT
         friend class TodoView; // avoid QObject here....
+        friend class TodoShow; // avoid QObject
     public:
         MainWindow( QWidget *parent = 0,
                     const char* name = 0 );
@@ -183,6 +184,7 @@ private slots:
         void beamDone( Ir* );
         void slotShowDetails();
         void slotShowDue( bool );
+        void slotReturnFromView(); // for TodoShow...
         /* reimplementation from opimmainwindow */
     protected slots:
         void flush();

@@ -1,9 +1,10 @@
+#include "mainwindow.h"
 #include "textviewshow.h"
 
 using namespace Todo;
 
-TextViewShow::TextViewShow( QWidget* parent)
-    : QTextView( parent ), TodoShow() {
+TextViewShow::TextViewShow( QWidget* parent, MainWindow* win)
+    : QTextView( parent ), TodoShow(win) {
 
 }
 TextViewShow::~TextViewShow() {
@@ -16,4 +17,16 @@ void TextViewShow::slotShow( const OTodo& ev ) {
 }
 QWidget* TextViewShow::widget() {
     return this;
+}
+void TextViewShow::keyPressEvent( QKeyEvent* event ) {
+    switch( event->key() ) {
+    case Qt::Key_F33:
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+        escapeView();
+        break;
+    default:
+        QTextView::keyPressEvent( event );
+        break;
+    }
 }

@@ -59,7 +59,7 @@ void TableView::initConfig() {
 
 TableView::TableView( MainWindow* window, QWidget* wid )
     : QTable(  wid ), TodoView( window ) {
-    
+
     // Load icons
     // TODO - probably should be done globally somewhere else,
     //        see also quickeditimpl.cpp/h, taskeditoroverview.cpp/h
@@ -83,10 +83,10 @@ TableView::TableView( MainWindow* window, QWidget* wid )
     horizontalHeader()->setLabel( 3, QWidget::tr("Deadline") );
 
     setShowDeadline( todoWindow()->showDeadline() );
-    
+
     setSorting( TRUE );
     setSelectionMode( NoSelection );
-    
+
     setLeftMargin( 0 );
     verticalHeader()->hide();
 
@@ -368,7 +368,7 @@ void TableView::paintCell(QPainter* p,  int row, int col, const QRect& cr, bool 
         //p->drawRect( x + marg+1, y+1, BoxSize-2, BoxSize-2 );
         if ( task.isCompleted() ) {
             p->drawPixmap( x + marg, y, m_pic_completed );
-        }       
+        }
     }
     break;
     case 1:  // priority field
@@ -469,7 +469,7 @@ void TableView::slotPriority() {
  * up and down. On odd or even we will currentRow()+-4 or +-9
  *
  */
-void TableView::timerEvent( QTimerEvent* ev ) {
+void TableView::timerEvent( QTimerEvent*  ) {
 //    qWarning("sorted %d", sorted().count() );
     if (sorted().count() == 0 )
         return;
@@ -529,4 +529,15 @@ void TableView::contentsMouseReleaseEvent( QMouseEvent* e) {
 void TableView::contentsMouseMoveEvent( QMouseEvent* e ) {
     m_menuTimer->stop();
     QTable::contentsMouseMoveEvent( e );
+}
+void TableView::keyPressEvent( QKeyEvent* event) {
+    switch( event->key() ) {
+    case Qt::Key_F33:
+    case Qt::Key_Enter:
+    case Qt::Key_Return:
+        showTodo( sorted().uidAt( currentRow() ) );
+        break;
+    default:
+        QTable::keyPressEvent( event );
+    }
 }
