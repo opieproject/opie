@@ -138,7 +138,7 @@ config OPIE_NO_SOUND_PCM_READ_BITS
 config OPIE_WE_VERSION
   string  "The wireless extension (WE) version to build against"
   default "15" if ! TARGET_X86
-  default "16" if TAGET_X86
+  default "16" if TARGET_X86
 
 endmenu
 
