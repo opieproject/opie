@@ -146,11 +146,16 @@ QString ToDoEvent::richText() const
   // Then print them...
   // I am not sure whether there is no better way doing this !?
   Categories catdb;
+  bool firstloop = true;
   catdb.load( categoryFileName() );
   catlist = allCategories();
   
   text += "<b>" + QObject::tr( "Category:") + "</b> ";
   for ( QStringList::Iterator it = catlist.begin(); it != catlist.end(); ++it ) {
+    if (!firstloop){
+      text += ", ";
+    }
+    firstloop = false;
     text += catdb.label ("todo", (*it).toInt());
   }
   text += "<br>";
