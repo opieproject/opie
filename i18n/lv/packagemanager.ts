@@ -478,71 +478,77 @@ A blue dot next to the package name indicates that the package is currently inst
 A blue dot with a star indicates that a newer version of the package is available from the server feed.
 
 Tap inside the box at the left to select a package.  Tap and hold to view package details.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis ir pakotņu saraksts.
+
+Zilais punkts blakus pakotnes nosaukumam norāda ka pakotne ir instalēta.
+
+Zils punkts ar zvaigznīti norāda kad šai pakotnei ir peejams jauninājums uz servera.
+
+Klikšķiniet uz kvadrāta pa kreisi no pakotnes lai izvēlētos.  Klikšķiniet un pieturiet, lai saņemtu detaļas.</translation>
     </message>
     <message>
         <source>Tap here to update package lists from servers.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai atjaunotu pakotņu sarakstus no servera.</translation>
     </message>
     <message>
         <source>Tap here to upgrade all installed packages if a newer version is available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai atjauninātu visas instalētās pakotnes uz jaunākām.</translation>
     </message>
     <message>
         <source>Tap here to download the currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai lejuplādētu iezīmētās pakotnes.</translation>
     </message>
     <message>
         <source>Tap here to install, remove or upgrade currently selected package(s).</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķinet šeit lai instalētu, izņemtu vai atjauninātu tekošās iezīmētās pakotni(es).</translation>
     </message>
     <message>
         <source>Install local package</source>
-        <translation type="unfinished"></translation>
+        <translation>Instelēt lokālu pakotni</translation>
     </message>
     <message>
         <source>Tap here to install a package file located on device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķinet šeit lai instalētu pakotnes failu uz iekārtas.</translation>
     </message>
     <message>
         <source>Tap here to configure this application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai konfigurētu aplikāciju.</translation>
     </message>
     <message>
         <source>Tap here to show packages available which have not been installed.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai attēlotu pakotnes kuras ir pieejamas, bet nav instalētas.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai attēlotu pakotnes kuras instalētas šajā iekārtā.</translation>
     </message>
     <message>
         <source>Tap here to show packages currently installed on this device which have a newer version available.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai rādītu pakotnes kuras ir instalētas šajā iekārtā un kurām ir jaunāka versija.</translation>
     </message>
     <message>
         <source>Tap here to apply current filter.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai uzliktu filtru.</translation>
     </message>
     <message>
         <source>Tap here to change the package filter criteria.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai mainītu filtrēšanas kritēriju.</translation>
     </message>
     <message>
         <source>Tap here to search for text in package names.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai meklētu tekstu pakotņu vārdos.</translation>
     </message>
     <message>
         <source>Tap here to find the next package name containing the text you are searching for.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai meklētu pakotni kuras nosakums satur meklējamo tekstu.</translation>
     </message>
     <message>
         <source>Tap here to hide the find toolbar.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit, lai noslēptu meklēšanas rindu.</translation>
     </message>
     <message>
         <source>Application Packages</source>
-        <translation type="unfinished"></translation>
+        <translation>Aplikāciju Pakotnes</translation>
     </message>
 </context>
 <context>
@@ -644,23 +650,23 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>This is a list of all servers configured.  Select one here to edit or delete, or add a new one below.</source>
-        <translation type="unfinished"></translation>
+        <translation>Šis ir visu konfigurēto serveru saraksts.  Izvēlaties vienu kuru labot vai dzēst, vai pievienojat jaunu apakšā.</translation>
     </message>
     <message>
         <source>Tap here to create a new entry.  Fill in the fields below and then tap on Update.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai izveidotu jaunu ierakstu.  Aizpildiet laukus zemāk un spiežat Atjaunot.</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Labot</translation>
     </message>
     <message>
         <source>Tap here to edit the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Klikšķiniet šeit lai labotu zemāk iezīmētu ierakstu.</translation>
     </message>
     <message>
         <source>Tap here to delete the entry selected above.</source>
-        <translation type="unfinished"></translation>
+        <translation>Spiežat šeit lai dzēstu apakšā atzīmētu ierakstu.</translation>
     </message>
     <message>
         <source>This is a list of all destinations configured for this device.  Select one here to edit or delete, or add a new one below.</source>
@@ -712,11 +718,11 @@ Tap inside the box at the left to select a package.  Tap and hold to view packag
     </message>
     <message>
         <source>Information level:</source>
-        <translation type="unfinished"></translation>
+        <translation>Informācijas līmenis:</translation>
     </message>
     <message>
         <source>Package source lists directory:</source>
-        <translation type="unfinished"></translation>
+        <translation>Pakotņu avotu sarakstu direktorija:</translation>
     </message>
     <message>
         <source>Enter the directory where package source feed information is stored.</source>
