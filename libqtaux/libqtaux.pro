@@ -6,7 +6,8 @@ HEADERS         = qcolordialog.h       \
                   qinputdialog.h       \
                                        \
                   ocolorpopupmenu.h    \
-                  ocolorbutton.h       
+                  ocolorbutton.h       \
+                  oticker.h
 
 
 SOURCES         = qcolordialog.cpp     \
@@ -14,7 +15,8 @@ SOURCES         = qcolordialog.cpp     \
                   qinputdialog.cpp     \
                                        \
                   ocolorpopupmenu.cpp  \
-                  ocolorbutton.cpp    
+                  ocolorbutton.cpp     \
+                  oticker.cpp
 
 TARGET          = qtaux2
 INCLUDEPATH += $(OPIEDIR)/include

@@ -6,7 +6,7 @@ INTERFACES  =
 TARGET    = stocktickertest
 INCLUDEPATH     += $(OPIEDIR)/include
 DEPENDPATH      += $(OPIEDIR)/include
-LIBS+= -lqpe -lopiecore2
+LIBS+= -lqpe -lopiecore2 -lqtaux2
 DESTDIR = $(OPIEDIR)/bin
 
 include ( $(OPIEDIR)/include.pro )
