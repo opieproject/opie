@@ -4,7 +4,7 @@ Section: opie/system
 Maintainer: Opie Team <opie@handhelds.org>
 Architecture: arm
 Version: $QPE_VERSION-$SUB_VERSION
-Depends: opie-oipkg, opie-taskbar, opie-opiealarm
+Depends: opie-aqpkg, opie-taskbar, opie-opiealarm
 Description: Bootstrap Opie environment(minimal)
  A complete GUI environment for handhelds. This is the _minimal_ version.
  You will probably want to install one of the opie-i18n-* packages.
