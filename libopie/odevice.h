@@ -129,7 +129,6 @@ enum ODirection {
  * like the Hardware used, LEDs, the Base Distribution and
  * hardware key mappings.
  *
- *
  * @short A small class for device specefic options
  * @see QObject
  * @author Robert Griebl

@@ -556,6 +556,8 @@ bool ODevice::setDisplayStatus ( bool on )
 
 /**
  * This sets the display brightness
+ *
+ * @param p The brightness to be set on a scale from 0 to 255
  * @return success or failure
  */
 bool ODevice::setDisplayBrightness ( int p)
@@ -565,7 +567,8 @@ bool ODevice::setDisplayBrightness ( int p)
 }
 
 /**
- * @return return the max value for the brightness settings slider
+ * @return returns the number of steppings on the brightness slider
+ * in the Light-'n-Power settings.
  */
 int ODevice::displayBrightnessResolution ( ) const
 {
@@ -574,6 +577,7 @@ int ODevice::displayBrightnessResolution ( ) const
 
 /**
  * This sets the display contrast
+ * @param p The contrast to be set on a scale from 0 to 255
  * @return success or failure
  */
 bool ODevice::setDisplayContrast ( int p)
@@ -2070,13 +2074,13 @@ bool Ramses::setDisplayContrast(int contr)
 	bool res = false;
 	int fd;
 
-	// pwm0 contrast: 35 steps 65..100 (dunkel->hell)
+	// pwm0 contrast: 20 steps 79..90 (dunkel->hell)
 
 	if (contr > 255 )
 		contr = 255;
 	if (contr < 0)
 		contr = 0;
-	contr = 65 + (contr * 350 / 255);
+	contr = 90 - (contr * 20 / 255);
 
 	if ((fd = ::open("/proc/sys/board/pwm0", O_WRONLY)) >= 0) {
 		qDebug(" %d -> pwm0", contr);
@@ -2094,5 +2098,5 @@ bool Ramses::setDisplayContrast(int contr)
 
 int Ramses::displayContrastResolution() const
 {
-	return 32;
+	return 20;
 }
