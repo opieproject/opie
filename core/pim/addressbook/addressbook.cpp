@@ -713,11 +713,19 @@ void AddressbookWindow::editEntry( EntryMode entryMode )
 void AddressbookWindow::editPersonal()
 {
 	OContact entry;
+
+	// Switch to personal view if not selected
+	// but take care of the menu, too
+	if ( ! actionPersonal->isOn() ){
+		qWarning("*** ++++");
+		actionPersonal->setOn( true );
+		slotPersonalView();
+	}
+
 	if ( !abEditor ) {
 		abEditor = new ContactEditor( entry, this, "editor" );
 	}
 
-	m_abView->showPersonal( true );
  	abEditor->setCaption(tr("Edit My Personal Details"));
  	abEditor->setPersonalView( true );
 	editEntry( EditEntry );
@@ -728,8 +736,10 @@ void AddressbookWindow::editPersonal()
 
 void AddressbookWindow::slotPersonalView()
 {
+	qWarning("slotPersonalView()");
 	if (!actionPersonal->isOn()) {
 		// we just turned it off
+		qWarning("slotPersonalView()-> OFF");
 		setCaption( tr("Contacts") );
 		actionNew->setEnabled(TRUE);
 		actionTrash->setEnabled(TRUE);
@@ -742,6 +752,7 @@ void AddressbookWindow::slotPersonalView()
 		return;
 	}
 	
+	qWarning("slotPersonalView()-> ON");
 	// XXX need to disable some QActions.
 	actionNew->setEnabled(FALSE);
 	actionTrash->setEnabled(FALSE);
