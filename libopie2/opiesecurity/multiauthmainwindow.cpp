@@ -10,7 +10,7 @@ namespace Security {
 /**
  * \note if allowBypass is true, we will show explanatory screens anyway
  */
-MultiauthMainWindow::MultiauthMainWindow(bool allowBypass = false)
+MultiauthMainWindow::MultiauthMainWindow(bool allowBypass)
     : QDialog(0, "main Opie multiauth modal dialog", TRUE,
               Qt::WStyle_NoBorder | Qt::WStyle_Customize | Qt::WStyle_StaysOnTop)
 
