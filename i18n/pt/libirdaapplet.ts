@@ -3,7 +3,7 @@
     <name>IrdaApplet</name>
     <message>
         <source>Discovered Device:</source>
-        <translation>Devices Descobertos:</translation>
+        <translation>Dispositivos Descobertos:</translation>
     </message>
     <message>
         <source>Disable IrDA</source>

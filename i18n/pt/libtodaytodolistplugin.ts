@@ -3,7 +3,7 @@
     <name>QObject</name>
     <message>
         <source>Todolist plugin</source>
-        <translation>Plugin Tarefas</translation>
+        <translation>Resumo das Tarefas</translation>
     </message>
     <message>
         <source>There is &lt;b&gt; 1&lt;/b&gt; active task:  &lt;br&gt;</source>

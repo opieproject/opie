@@ -7,7 +7,7 @@
     </message>
     <message>
         <source>Rotate</source>
-        <translation>Rodar</translation>
+        <translation>Rodar Ecrâ</translation>
     </message>
 </context>
 </TS>

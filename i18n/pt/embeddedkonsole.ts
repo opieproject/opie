@@ -101,7 +101,7 @@
     </message>
     <message>
         <source>Amber on Black</source>
-        <translation>Ambar em Preto</translation>
+        <translation>Âmbar em Preto</translation>
     </message>
     <message>
         <source>Colors</source>

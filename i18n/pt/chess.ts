@@ -3,7 +3,7 @@
     <name>BoardView</name>
     <message>
         <source>Could not find crafty chess engine</source>
-        <translation>Não foi encontrado o engine de xadrês &quot;crafty&quot; </translation>
+        <translation>Não foi encontrado o motor de xadrês &quot;crafty&quot; </translation>
     </message>
     <message>
         <source>Quit</source>
