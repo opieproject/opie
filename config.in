@@ -130,7 +130,6 @@ endmenu
 
 menu "Communications and Networking"
   source noncore/comm/config.in
-  source noncore/mail/config.in
   source noncore/net/config.in
 endmenu
 menu "Games"
