@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=opie-sheet
-Icon=opie-sheet/sheetqt
+Icon=opie-sheet/OpieSheet
 MimeType=application/opie-sheet;application/excel
 Type=Application
 Name=Opie Sheet
