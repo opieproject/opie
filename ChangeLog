@@ -15,6 +15,7 @@
 	* #1317 - Packagemanager crashes on hold-down or install (chicken)
 	* #1321 - Batteryapplet graphic glitch (harlekin)
 	* #1324 - ZSafe not starting up (mickeyl)
+	* #1328 - Personal Home Address fields is trimmed to 1char (eilers)
 	* #1327 - Opie-mail ipk does not depend on libopiedb2 (chicken)
 	* #1345 - Networksettingsplugin wlan plugin dependency on libpcap0 (mickeyl)
 	* #1348 - Datebook dependency on libopiedb2 (chicken)
