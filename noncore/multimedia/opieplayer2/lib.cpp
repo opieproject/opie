@@ -72,7 +72,7 @@ extern "C" {
 
 using namespace XINE;
 
-Lib::Lib( InitializationMode initMode, XineVideoWidget* widget ) 
+Lib::Lib( InitializationMode initMode, XineVideoWidget* widget )
 {
     m_initialized = false;
     m_duringInitialization = false;
@@ -191,8 +191,11 @@ int Lib::subVersion() {
 
 int Lib::play( const QString& fileName, int startPos, int start_time ) {
     assert( m_initialized );
-
+    // FIXME actually a hack imho. Should not be needed to dispose the whole stream
+    // but without we get wrong media length reads from libxine for the second media
+    xine_dispose ( m_stream );
     QString str = fileName.stripWhiteSpace();
+    m_stream = xine_stream_new (m_xine,  m_audioOutput,  m_videoOutput );
     if ( !xine_open( m_stream, QFile::encodeName(str.utf8() ).data() ) ) {
         return 0;
     }
@@ -366,9 +369,7 @@ void Lib::setScaling( bool scale ) {
 void Lib::setGamma( int value ) {
     assert( m_initialized );
 
-  //qDebug( QString( "%1").arg(value)  );
-  /* int gammaValue = ( 100 + value ); */
-  ::null_set_videoGamma( m_videoOutput, value );
+   ::null_set_videoGamma( m_videoOutput, value );
 }
 
 bool Lib::isScaling() const {
