@@ -22,7 +22,6 @@
 
 #include "qpemenubar.h"
 #include <qapplication.h>
-#include <qguardedptr.h>
 #include <qtimer.h>
 
 

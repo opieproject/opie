@@ -25,9 +25,6 @@
 #include <qdir.h>
 #include <qcheckbox.h>
 #include <qlineedit.h>
-#include <qlistview.h>
-#include <qstringlist.h>
-#include <qtoolbutton.h>
 
 #include <sys/types.h>
 #include <sys/stat.h>

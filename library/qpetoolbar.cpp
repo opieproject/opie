@@ -19,8 +19,6 @@
 **********************************************************************/
 
 #include "qpetoolbar.h"
-#include "qpemenubar.h"
-#include <qtoolbutton.h>
 
 /*!
   \class QPEToolBar qpemenubar.h

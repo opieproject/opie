@@ -19,8 +19,6 @@
 **********************************************************************/
 #include "qdawg.h"
 #include <qintdict.h>
-#include <qvaluelist.h>
-#include <qtextstream.h>
 #include <qfile.h>
 #include <qtl.h>
 

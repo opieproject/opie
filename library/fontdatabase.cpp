@@ -19,14 +19,12 @@
 **********************************************************************/
 
 #include <qpe/qpeapplication.h>
-#include "fontfactoryinterface.h"
 #include "fontdatabase.h"
 
 #include <qpe/qlibrary.h>
 
 #include <qfontmanager_qws.h>
 #include <qdir.h>
-#include <qdict.h>
 #include <stdio.h>
 #include <stdlib.h>
 

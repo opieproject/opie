@@ -19,18 +19,13 @@
 **********************************************************************/
 
 #include <qasciidict.h>
-#include <qfile.h>
 #include <qmessagebox.h>
-#include <qstring.h>
-#include <qtextcodec.h>
-#include <qtextstream.h>
 #include <qtl.h>
 
 #include <qpe/alarmserver.h>
 #include <qpe/global.h>
 #include "datebookdb.h"
 #include <qpe/stringutil.h>
-#include <qpe/timeconversion.h>
 
 #include <errno.h>
 #include <stdlib.h>

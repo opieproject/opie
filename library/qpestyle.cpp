@@ -19,10 +19,7 @@
 **********************************************************************/
 
 #include "qpestyle.h"
-#include <qpe/qpeapplication.h>
-#include <qpushbutton.h>
 
-#include <qpainter.h>
 
 #define QCOORDARRLEN(x) sizeof(x)/(sizeof(QCOORD)*2)
 

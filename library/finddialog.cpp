@@ -26,7 +26,6 @@
 #include "findwidget_p.h"
 
 #include <qlayout.h>
-#include <qpushbutton.h>
 
 /*!
   \class FindDialog finddialog.h

@@ -23,10 +23,7 @@
 #include "resource.h"
 #include "mimetype.h"
 #include <qdir.h>
-#include <qfile.h>
-#include <qregexp.h>
 #include <qpixmapcache.h>
-#include <qpainter.h>
 
 // this namespace is just a workaround for a gcc bug
 // gcc exports inline functions in the generated file

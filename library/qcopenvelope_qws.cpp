@@ -21,9 +21,7 @@
 #ifndef QT_NO_COP
 #include "qcopenvelope_qws.h"
 #endif
-#include "global.h"
 #include <qbuffer.h>
-#include <qdatastream.h>
 #include <qfile.h>
 #include <unistd.h>
 #include <errno.h>

@@ -27,12 +27,10 @@
 #include "global.h"
 #include "resource.h"
 #include "config.h"
-#include "applnk.h"
 #include "storage.h"
 #include "qpemenubar.h"
 #include <qcopchannel_qws.h>
 #include "lnkproperties.h"
-#include "applnk.h"
 #include <qpe/qpeapplication.h>
 #include "categorymenu.h"
 #include "categoryselect.h"

@@ -20,9 +20,7 @@
 
 #include "ir.h"
 
-#include <qstring.h>
 #include "qcopenvelope_qws.h"
-#include <qcopchannel_qws.h>
 #include "applnk.h"
 
 /*!

@@ -20,17 +20,12 @@
 #include "config.h"
 #include "datebookmonth.h"
 #include "datebookdb.h"
-#include <qtopia/private/event.h>
 #include "resource.h"
 #include <qpe/qpeapplication.h>
-#include "timestring.h"
 
 #include <qtoolbutton.h>
 #include <qspinbox.h>
 #include <qcombobox.h>
-#include <qdatetime.h>
-#include <qpainter.h>
-#include <qpopupmenu.h>
 #include <qvaluestack.h>
 #include <qwhatsthis.h>
 

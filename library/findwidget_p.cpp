@@ -20,18 +20,12 @@
 
 #include "findwidget_p.h"
 
-#include <qpe/categories.h>
 #include <qpe/categoryselect.h>
 #include <qpe/datebookmonth.h>
-#include <qpe/timestring.h>
 
 #include <qcheckbox.h>
 #include <qlabel.h>
 #include <qlineedit.h>
-#include <qmessagebox.h>
-#include <qpushbutton.h>
-#include <qpopupmenu.h>
-#include <qtoolbutton.h>
 
 FindWidget::FindWidget( const QString &appName, QWidget *parent,
 			const char *name )

@@ -1,7 +1,5 @@
 
 #include <qpe/qpeapplication.h>
-#include <qwsdecoration_qws.h>
-#include <qcommonstyle.h>
 #include <qfontdatabase.h>
 
 #include <unistd.h>

@@ -19,14 +19,9 @@
 **********************************************************************/
 
 #include <qdir.h>
-#include <qfile.h>
-#include <qmessagebox.h>
-#include <qtextstream.h>
 
 
 #include <qpe/qpeapplication.h>
-#include "global.h"
-#include "resource.h"
 
 #include <qpe/qcopenvelope_qws.h>
 #include "alarmserver.h"

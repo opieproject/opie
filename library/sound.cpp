@@ -33,8 +33,6 @@
 #include <sys/soundcard.h>
 #endif
 
-#include "config.h"
-#include <qmessagebox.h>
 #ifndef QT_NO_SOUND
 static int WAVsoundDuration(const QString& filename)
 {

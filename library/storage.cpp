@@ -21,10 +21,7 @@
 **********************************************************************/
 
 #include <qpe/storage.h>
-#include <qpe/custom.h>
 
-#include <qfile.h>
-#include <qtimer.h>
 #include <qcopchannel_qws.h>
 
 #include <stdio.h>
@@ -42,7 +39,6 @@
 #  include <errno.h>
 #endif /* Q_OS_MACX */
 
-#include <qstringlist.h>
 
 // Shouldn't be here ! (eilers)
 // #include <sys/vfs.h>

@@ -28,7 +28,6 @@
 #include <qpe/qcopenvelope_qws.h>
 #include <qpe/config.h>
 
-#include <qfile.h>
 #include <qlabel.h>
 #include <qtimer.h>
 #include <qmap.h>
@@ -48,7 +47,6 @@
 #include <qwindowsystem_qws.h> // for qwsServer
 #include <qdatetime.h>
 
-#include <qfile.h>
 
 //#include "quickexec_p.h"
 

@@ -1102,7 +1102,6 @@ void QPEApplication::setDefaultRotation( int r )
 
 #include <qgfx_qws.h>
 #include <qwindowsystem_qws.h>
-#include <qpixmapcache.h>
 
 extern void qws_clearLoadedFonts();
 

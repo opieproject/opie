@@ -28,17 +28,13 @@
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
 #include <qpe/qcopenvelope_qws.h>
-#include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/config.h>
 #include <qpe/storage.h>
 #include <qpe/resource.h>
 
-#include <qdict.h>
 #include <qdir.h>
-#include <qregexp.h>
 
-#include <qgfx_qws.h>
 
 #include <stdlib.h>
 

@@ -26,11 +26,7 @@
 #include "config.h"
 
 #include <qfile.h>
-#include <qdict.h>
-#include <qregexp.h>
-#include <qstringlist.h>
 #include <qtextstream.h>
-#include <qmap.h>
 
 
 static void cleanupMime()

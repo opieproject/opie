@@ -22,7 +22,6 @@
 
 #include "tzselect.h"
 #include "resource.h"
-#include "global.h"
 #include "config.h"
 #include <qtoolbutton.h>
 #include <qfile.h>

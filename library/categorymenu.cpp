@@ -21,8 +21,6 @@
 #include "categorymenu.h"
 #include "backend/categories.h"
 #include "categoryselect.h"
-#include <qstring.h>
-#include <qmap.h>
 
 /*!
   \class CategoryMenu

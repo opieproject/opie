@@ -19,8 +19,6 @@
 **********************************************************************/
 
 #include <qdir.h>
-#include <qfile.h>
-#include <qfileinfo.h>
 #include <qmessagebox.h>
 #if QT_VERSION <= 230 && defined(QT_NO_CODECS)
 #include <qtextcodec.h>

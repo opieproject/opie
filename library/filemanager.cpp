@@ -20,11 +20,8 @@
 #include "filemanager.h"
 #include "applnk.h"
 
-#include <qdir.h>
-#include <qfile.h>
 #include <qfileinfo.h>
 #include <qtextstream.h>
-#include <qtextcodec.h>
 
 #include <errno.h>
 #include <stdlib.h>
