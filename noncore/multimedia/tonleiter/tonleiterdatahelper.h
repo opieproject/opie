@@ -8,7 +8,7 @@ namespace Data
 {
     namespace Note
     {
-        const QString notenames[]={"C","C#","D","D#","E","F","F#","G","G#","A","A#","B"};
+        const QString notenames[]={"A","Bb","B","C","C#","D","D#","E","F","F#","G","G#"};
 
         int getOctaveOfNote(int note);
         QString getNameOfNote(int note);

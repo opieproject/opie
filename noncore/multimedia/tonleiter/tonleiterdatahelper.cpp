@@ -1,5 +1,7 @@
 #include "tonleiterdatahelper.h"
 
+#include <math.h>
+
 using namespace Data;
 
 int Note::getOctaveOfNote(int note)
@@ -76,7 +78,7 @@ int Instrument::noOfOctaves()
 {
     int lowest=strings[0];
     int highest=strings[strings.count()-1]+frets;
-    return (int)((highest-lowest)/12.0);
+    return (int) ceil((highest-lowest)/12.0);
 }
 //****************************************************************************
 //****************************************************************************

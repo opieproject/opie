@@ -1,8 +1,8 @@
 TEMPLATE  = app
 #CONFIG   = qt warn_on debug
 CONFIG    = qt warn_on release
-HEADERS   = mainwidget.h tonleiterdata.h tonleiterdatahelper.h fretboard.h menuwidget.h editinst.h editscale.h
-SOURCES   = mainwidget.cpp tonleiterdata.cpp tonleiterdatahelper.cpp fretboard.cpp menuwidget.cpp main.cpp editinst.cpp editscale.cpp
+HEADERS   = mainwidget.h tonleiterdata.h tonleiterdatahelper.h fretboard.h menuwidget.h editinst.h editstringwidget.h editscale.h pianoscale.h
+SOURCES   = mainwidget.cpp tonleiterdata.cpp tonleiterdatahelper.cpp fretboard.cpp menuwidget.cpp main.cpp editinst.cpp editstringwidget.cpp editscale.cpp pianoscale.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe 
