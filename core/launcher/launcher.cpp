@@ -29,7 +29,7 @@
 #include <qtopia/qpeapplication.h>
 #include <qtopia/mimetype.h>
 #include <qtopia/private/categories.h>
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 
 #include <qdir.h>
 #ifdef Q_WS_QWS

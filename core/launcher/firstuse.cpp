@@ -29,7 +29,7 @@
 #include "inputmethods.h"
 #include "applauncher.h"
 #include "serverapp.h"
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 
 #include "calibrate.h"
 #include "documentlist.h"

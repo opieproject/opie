@@ -30,7 +30,7 @@
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 #include <qtopia/global.h>
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 
 #ifdef Q_WS_QWS
 #include <qgfx_qws.h>

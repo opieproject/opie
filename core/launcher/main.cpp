@@ -32,7 +32,7 @@
 #include <qtopia/qpeapplication.h>
 #include <qtopia/network.h>
 #include <qtopia/config.h>
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 #include <qtopia/global.h>
 
 #include <qfile.h>

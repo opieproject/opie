@@ -49,7 +49,7 @@
 #include <qwindowsystem_qws.h>
 #include <qgfx_qws.h>
 #include <qtopia/global.h>
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 
 #include <opie/odevicebutton.h>
 #include <opie/odevice.h>

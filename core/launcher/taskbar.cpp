@@ -34,7 +34,7 @@
 #include <qtopia/qcopenvelope_qws.h>
 #endif
 #include <qtopia/global.h>
-#include <qtopia/custom.h>
+//#include <qtopia/custom.h>
 
 #include <qlabel.h>
 #include <qlayout.h>
