@@ -1,5 +1,3 @@
-## targets ##
-
 $(configs) :
 	$(call makecfg,$@)
 
@@ -22,7 +20,7 @@ $(TOPDIR)/.depends : $(shell if [ -e $(TOPDIR)/config.in ]\; then echo $(TOPDIR)
 			"subdir-$$(" $$1 ") += " $$2 "\n\n"; \
 			print $$2 " : " $$2 "/Makefile\n\t$$(call descend,$$@,$(filter-out $$@,$$(filter-out $$@,$$(MAKECMDGOALS))))\n"; }' > $(TOPDIR)/.depends
 	cat $(TOPDIR)/packages | grep -v '^#' | \
-		perl -ne '($$cfg, $$dir, $$pro) = $$_ =~ /^(\S+)\s+(\S+)\s+(\S+)/; if ( -e "$$dir/$$pro" ) { print "$$dir/Makefile : $$dir/$$pro \$$(QMAKE) \$$(OPIEDIR)/gen.pro\n\t\$$(call makefilegen,\$$@)\n\n"; }' \
+		perl -ne '($$cfg, $$dir, $$pro) = $$_ =~ /^(\S+)\s+(\S+)\s+(\S+)/; if ( -e "$$dir/$$pro" ) { print "$$dir/Makefile : $$dir/$$pro \$$(QMAKE) \$$(OPIEDIR)/gen.pro \$$(OPIEDIR)/.config\n\t\$$(call makefilegen,\$$@)\n\n"; }' \
 			>> $(TOPDIR)/.depends
 # interpackage dependency generation
 	@cat $(TOPDIR)/packages | \
