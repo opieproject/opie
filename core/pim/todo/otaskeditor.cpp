@@ -61,6 +61,7 @@ void OTaskEditor::init() {
 
     m_adv = new TaskEditorAdvanced( m_tab );
     m_line = new QMultiLineEdit(m_adv );
+    m_line->setWordWrap( QMultiLineEdit::WidgetWidth );
     QLabel* label = new QLabel(m_adv );
     label->setText( tr("Description") );
     ((QGridLayout*) m_adv->layout() )->addWidget( label,3, 0 );
