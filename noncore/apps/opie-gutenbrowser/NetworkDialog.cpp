@@ -62,7 +62,7 @@ NetworkDialog::NetworkDialog( QWidget* parent,  const char* name, bool modal, WF
         localFileName = netL[2];
         s_partialFileName = netL[3];
 
-        resize(240,110);
+        resize(240,120);
 
         local_library = (QDir::homeDirPath ()) +"/Applications/gutenbrowser/";
 //      autoOk = autoDownload;
@@ -99,20 +99,20 @@ void NetworkDialog::initDialog() {
     ProgressBar1->setProgress(0);
     hbox->addWidget(ProgressBar1,10,AlignCenter);
 
-    hbox->addStretch(1);
-    buttonOk = new QPushButton( Layout1, "buttonOk" );
-    buttonOk->setText( tr( "&OK"  ) );
-    hbox->addWidget(buttonOk,0,AlignRight);
-    hbox->addSpacing(5);
+			//  hbox->addStretch(1);
+//     buttonOk = new QPushButton( Layout1, "buttonOk" );
+//     buttonOk->setText( tr( "&OK"  ) );
+//     hbox->addWidget(buttonOk,0,AlignRight);
+//    hbox->addSpacing(5);
     buttonCancel = new QPushButton( Layout1, "buttonCancel" );
     buttonCancel->setText( tr( "&Cancel"  ) );
     buttonCancel->setAutoDefault( TRUE );
     buttonCancel->setDefault( TRUE );
     hbox->addWidget(buttonCancel,0,AlignRight);
 
-     ProgressBar1->setFixedSize(140,22);
-    buttonOk->setFixedSize(35,22);
-    buttonCancel->setFixedSize(35,22);
+     ProgressBar1->setFixedSize(150,25);
+//    buttonOk->setFixedSize(35,22);
+    buttonCancel->setFixedSize(50,25);
     warnLabel ->setGeometry( QRect( 5,1,230,25));
     TextLabel3->setGeometry( QRect( 5,20,230,25));
     Layout1->setGeometry( QRect(1,60,235,50)); //TODO check these!!
@@ -120,15 +120,15 @@ void NetworkDialog::initDialog() {
 //        timer= new QTimer(this,"vu timer");
 //        connectionTimer=new QTimer(this,"connectionTimeout");
 
-    connect(buttonOk,SIGNAL(clicked()),this,SLOT(doOk()));
+//    connect(buttonOk,SIGNAL(clicked()),this,SLOT(doOk()));
     connect(buttonCancel,SIGNAL(clicked()),this,SLOT(reject()));
 //    connect( timer, SIGNAL(timeout()), this , SLOT(timeSlot()));
 //    connect( connectionTimer,SIGNAL( timeout()),this,SLOT( connectionTimeSlot()));
-        if(autoOk) {
-                owarn << "XXXXXXXXXXXXXXXXXXXXXXXX" << oendl;
-                buttonOk->setDown(true);
-                doOk();
-        }
+//        if(autoOk) {
+//                buttonOk->setDown(true);
+				QTimer::singleShot( 1000, this, SLOT(  doOk()  ));
+//        }
+
 }
 
 void NetworkDialog::timeSlot() {

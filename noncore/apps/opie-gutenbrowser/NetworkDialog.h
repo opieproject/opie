@@ -30,19 +30,19 @@
 //class QProgressBar;
 
 class NetworkDialog : public QDialog
-{ 
+{
     Q_OBJECT
 
 public:
     NetworkDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0, const QStringList netList=0);
 /*     NetworkDialog( QWidget* parent = 0, const char* name = 0, bool modal = FALSE, WFlags fl = 0,  const QString & UrlStr = 0,  const QString & dirStr=0,const QString & fileStr=0, const QString & psrtialFile=0); */
     ~NetworkDialog();
-    
+
     QFile fiole;
     QTimer * connectionTimer;
     QTimer * timer;
 		int timerProgess;
-		bool posTimer; 
+		bool posTimer;
     QString s_partialFileName, s_finally;
     bool foundIt, successDownload;
     QLabel * warnLabel;
@@ -52,9 +52,9 @@ public:
     QString local_library;
     QString ftp_host;
     QString ftp_base_dir;
-    QString dir, strUrl, networkUrl;   
-    
-    QPushButton* buttonOk;
+    QString dir, strUrl, networkUrl;
+
+//    QPushButton* buttonOk;
     QPushButton* buttonCancel;
 
     QString localFileName;
@@ -72,7 +72,7 @@ private slots:
 		void connectionTimeSlot();
 		void timeSlot();
 		void doOk();
-   
+
 	private:
 /*  #ifndef Q_WS_QWS */
 

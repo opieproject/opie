@@ -30,8 +30,8 @@ SearchDialog::SearchDialog( QWidget* parent,  const char* name, bool modal, WFla
 
 #warning FIXME
     // FIXME
-    resize( 220,100);
-    
+    resize( 220,110);
+
     QGridLayout *layout = new QGridLayout( this );
     layout->setSpacing( 2);
     layout->setMargin( 2);
@@ -98,7 +98,7 @@ void SearchDialog::byeBye()
 {
 
     searchString = get_text();
-//    odebug << "Search string is "+searchString << oendl; 
+//    odebug << "Search string is "+searchString << oendl;
     Config cfg("Gutenbrowser");
     cfg.setGroup("General");
     cfg.writeEntry("LastSearch",searchString);
@@ -119,7 +119,7 @@ void SearchDialog::byeBye()
 void SearchDialog::closed()
 {
     searchString = get_text();
-//    odebug << "Search string is "+searchString << oendl; 
+//    odebug << "Search string is "+searchString << oendl;
     Config cfg("Gutenbrowser");
     cfg.setGroup("General");
     cfg.writeEntry("LastSearch",searchString);
