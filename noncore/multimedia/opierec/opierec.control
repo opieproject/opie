@@ -4,7 +4,7 @@ Priority: optional
 Section: multimedia/applications
 Maintainer: L.J. Potter <ljp@llornkcor.com>
 Architecture: arm
-Depends: opie ($QPE_VERSION)
+Depends: task-opie-minimal
 Description: audio sampling recorder
  A simple audio recording/playing application.
 Version: $QPE_VERSION$EXTRAVERSION
