@@ -1,7 +1,7 @@
 TEMPLATE        = lib
 CONFIG          += qt warn_on release
 #CONFIG		+= qt warn_on debug
-DESTDIR         = $(OPIEDIR)/plugins/networksetup
+DESTDIR		= $(QTDIR)/lib$(PROJMAK)
 HEADERS		= interface.h  interfaceinformationimp.h  interfaces.h  interfacesetupimp.h
 SOURCES		= interface.cpp interfaces.cpp interfaceinformationimp.cpp  interfacesetupimp.cpp
 INCLUDEPATH	+= $(OPIEDIR)/include ../
