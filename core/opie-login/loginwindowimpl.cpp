@@ -37,6 +37,10 @@
 #include <qpopupmenu.h>
 #include <qmessagebox.h>
 #include <qimage.h>
+#if QT_VERSION < 300
+#include <qgfx_qws.h>
+#endif
+#include <qwindowsystem_qws.h>
 
 #include <qpe/resource.h>
 #include <qpe/qcopenvelope_qws.h>
@@ -61,8 +65,12 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 	pop-> insertItem ( tr( "Quit" ), this, SLOT( quit ( )));
 	m_menu-> setPopup ( pop );
 
+	QCopChannel *channel = new QCopChannel ( "QPE/TaskBar", this );
+	connect ( channel, SIGNAL( received ( const QCString &, const QByteArray & )), this, SLOT( receive ( const QCString &, const QByteArray & )));	         
+
 	QHBoxLayout *lay = new QHBoxLayout ( m_taskbar, 4, 4 );
 	m_input = new InputMethods ( m_taskbar );
+ 	connect ( m_input, SIGNAL( inputToggled ( bool )), this, SLOT( calcMaxWindowRect ( )));
 	lay-> addWidget ( m_input );
 	lay-> addStretch ( 10 );
 
@@ -87,11 +95,46 @@ LoginWindowImpl::LoginWindowImpl ( ) : LoginWindow ( 0, "LOGIN-WINDOW", WStyle_C
 
 	if ( !last. isEmpty ( ))
 		m_user-> setEditText ( last );
+	
+	calcMaxWindowRect ( );
 }
 
 LoginWindowImpl::~LoginWindowImpl ( )
 {
 }
+
+
+void LoginWindowImpl::receive ( const QCString &msg, const QByteArray &data )
+{
+	QDataStream stream ( data, IO_ReadOnly );
+	
+	if ( msg == "hideInputMethod()" ) 
+		m_input-> hideInputMethod ( );
+	else if ( msg == "showInputMethod()" )
+		m_input-> showInputMethod ( );
+	else if ( msg == "reloadInputMethods()" )
+		m_input-> loadInputMethods ( );
+}
+
+void LoginWindowImpl::calcMaxWindowRect ( )
+{
+#ifdef Q_WS_QWS
+	QRect wr;
+	int displayWidth = qApp-> desktop ( )-> width ( );
+	QRect ir = m_input-> inputRect ( );
+	if ( ir.isValid() )
+		wr.setCoords( 0, 0, displayWidth-1, ir.top()-1 );
+	else
+		wr.setCoords( 0, 0, displayWidth-1, m_taskbar->y()-1 );
+	
+#if QT_VERSION < 300
+	wr = qt_screen-> mapToDevice ( wr, QSize ( qt_screen-> width ( ), qt_screen-> height ( )));
+#endif
+
+	QWSServer::setMaxWindowRect( wr );
+#endif
+}
+                                        
 
 void LoginWindowImpl::keyPressEvent ( QKeyEvent *e )
 {

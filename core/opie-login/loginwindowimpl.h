@@ -47,6 +47,8 @@ protected slots:
 	void backlight ( );
 	void login ( );
 	void toggleEchoMode ( bool );
+	void calcMaxWindowRect ( );
+	void receive ( const QCString &, const QByteArray & );
 
 protected:
 	virtual void keyPressEvent ( QKeyEvent *e );
