@@ -47,7 +47,9 @@ HEADERS		+= server.h \
 		  syncdialog.h \
 		  serverapp.h \
 		  qprocess.h \
-		  screensaver.h
+		  screensaver.h \
+        $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.h \
+                  mediadlg.h
 
 SOURCES		+= server.cpp \
 		  serverinterface.cpp \
@@ -102,7 +104,9 @@ SOURCES		+= server.cpp \
 		  serverapp.cpp \
 		  qprocess.cpp \
 		  qprocess_unix.cpp \
-		  screensaver.cpp
+		  screensaver.cpp \
+        $$(OPIEDIR)/noncore/settings/mediummount/mediumwidget.cc \
+                  mediadlg.cpp
 
 
 INCLUDEPATH += $(OPIEDIR)/core/apps/calibrate
@@ -110,6 +114,10 @@ DEPENDPATH	+= $(OPIEDIR)/core/apps/calibrate
 
 INCLUDEPATH += $(OPIEDIR)/include $(OPIEDIR)/rsync
 DEPENDPATH	+= $(OPIEDIR)/rsync
+
+INCLUDEPATH += $(OPIEDIR)/noncore/settings/mediummount
+DEPENDPATH	+= $(OPIEDIR)/noncore/settings/mediummount
+
 
 TARGET		= qpe
 

@@ -19,6 +19,7 @@
 **********************************************************************/
 #include "documentlist.h"
 #include "serverinterface.h"
+#include "mediadlg.h"
 
 #include <opie2/oglobal.h>
 
@@ -434,10 +435,10 @@ void DocumentListPrivate::appendDocpath(FileSystem*fs)
     QDir defPath(fs->path()+"/Documents");
     QFileInfo f(fs->path()+"/.opiestorage.cf");
     if (!f.exists()) {
-        if (defPath.exists()) {
-            docPaths+=defPath.path();
+        Mediadlg dlg(fs);
+        if (QDialog::Accepted != QPEApplication::execDialog( &dlg )) {
+            return;
         }
-        return;
     }
     Config conf(f.filePath(), Config::File );
     conf.setGroup("subdirs");
