@@ -11,7 +11,7 @@
         <rect>
             <x>0</x>
             <y>0</y>
-            <width>247</width>
+            <width>239</width>
             <height>390</height>
         </rect>
     </property>
@@ -497,6 +497,57 @@
                     </widget>
                 </grid>
             </widget>
+            <widget>
+                <class>QWidget</class>
+                <property stdset="1">
+                    <name>name</name>
+                    <cstring>tab</cstring>
+                </property>
+                <attribute>
+                    <name>title</name>
+                    <string>General</string>
+                </attribute>
+                <widget>
+                    <class>QLabel</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>TextLabel1</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>20</x>
+                            <y>30</y>
+                            <width>150</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>(Will take effect on restart)</string>
+                    </property>
+                </widget>
+                <widget>
+                    <class>QCheckBox</class>
+                    <property stdset="1">
+                        <name>name</name>
+                        <cstring>jumpTo</cstring>
+                    </property>
+                    <property stdset="1">
+                        <name>geometry</name>
+                        <rect>
+                            <x>17</x>
+                            <y>14</y>
+                            <width>150</width>
+                            <height>20</height>
+                        </rect>
+                    </property>
+                    <property stdset="1">
+                        <name>text</name>
+                        <string>Show Jump To Letters</string>
+                    </property>
+                </widget>
+            </widget>
         </widget>
     </grid>
 </widget>
@@ -549,7 +600,14 @@
         <receiver>Settings</receiver>
         <slot>changeDestinationDetails()</slot>
     </connection>
+    <connection>
+        <sender>jumpTo</sender>
+        <signal>toggled(bool)</signal>
+        <receiver>Settings</receiver>
+        <slot>toggleJumpTo(bool)</slot>
+    </connection>
     <slot access="public">activeServerChanged()</slot>
+    <slot access="public">changeDestinationDetails()</slot>
     <slot access="public">changeServerDetails()</slot>
     <slot access="public">createLinksToDest()</slot>
     <slot access="public">destNameChanged(const QString&amp;)</slot>
@@ -562,7 +620,6 @@
     <slot access="public">newDestination()</slot>
     <slot access="public">newInstallationSetting()</slot>
     <slot access="public">newServer()</slot>
-    <slot access="public">changeDestinationDetails()</slot>
     <slot access="public">removeDestination()</slot>
     <slot access="public">removeInstallationSetting()</slot>
     <slot access="public">removeLinksToDest()</slot>
@@ -570,5 +627,6 @@
     <slot access="public">renameInstallationSetting()</slot>
     <slot access="public">serverNameChanged(const QString&amp;)</slot>
     <slot access="public">serverUrlChanged(const QString&amp;)</slot>
+    <slot access="public">toggleJumpTo(bool)</slot>
 </connections>
 </UI>
