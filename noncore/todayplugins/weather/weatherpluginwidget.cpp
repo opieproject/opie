@@ -114,7 +114,8 @@ void WeatherPluginWidget::displayWeather()
 	weatherData = QString::null;
 
 	QFile file( localFile );
-	if ( file.open( IO_ReadOnly ) )
+	
+	if ( file.size() > 0 && file.open( IO_ReadOnly ) )
 	{
 		QTextStream data( &file );
 		while ( !data.eof() )
@@ -150,7 +151,7 @@ void WeatherPluginWidget::displayWeather()
 	}
 	else
 	{
-		weatherLabel->setText( tr( "Current weather data not available.\nTry looking out the window." ) );
+		weatherLabel->setText( tr( "Current weather data not available." ) );
 	}
 }
 
@@ -319,6 +320,6 @@ void WeatherPluginWidget::dataRetrieved( OProcess *process )
 	}
 	else
 	{
-		weatherLabel->setText( tr( "Current weather data not available.\nTry looking out the window." ) );
+		weatherLabel->setText( tr( "Current weather data not available." ) );
 	}
 }
