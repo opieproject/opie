@@ -29,7 +29,11 @@
 #include <qscrollview.h>
 #include <qdialog.h>
 #include <qstringlist.h>
+#include <qvaluelist.h>
+#include <qwmatrix.h>
 
+
+class QAction;
 class QPEToolBar;
 class QPEMenuBar;
 class QPopupMenu;
@@ -40,31 +44,25 @@ class QLabel;
 class QAction;
 class QSpinBox;
 class ImageFileSelector;
-
+class QTimer;
 
 
 class ImageWidget : public QWidget
 {
     Q_OBJECT
-    public:
-    ImageWidget(
-               QWidget *parent=0                  
-               ) : QWidget( parent ) 
-    {
+ public:
+    ImageWidget( QWidget *parent=0 )
+        : QWidget( parent )   {
         setBackgroundMode(NoBackground);        
     }
-    ~ImageWidget()
-    {
-        
-    }
+    ~ImageWidget() {  }
 
-    void setPixmap( const QPixmap &pm ) 
-    {
+    void setPixmap( const QPixmap &pm )  {
         pixmap = pm;
         show();
     }
 
-    signals:
+signals:
     void clicked();
 
 protected:
@@ -79,7 +77,7 @@ class InfoDialog:public QDialog
 {
     Q_OBJECT
 
-    public:
+public:
 
     static void displayInfo(const QString &caption, const QStringList text, QWidget *parent); 
 
@@ -93,7 +91,7 @@ class ControlsDialog:public QDialog
 {
     Q_OBJECT
 
-    public:
+public:
     ControlsDialog(const QString &caption,const QImage image,int *brightness,    QWidget *parent);
 
 
@@ -114,12 +112,9 @@ private:
 class ImagePane : public QWidget
 {
     Q_OBJECT
-    public:
+public:
     ImagePane( QWidget *parent=0 );
-    ~ImagePane()
-    {
-        
-    }
+    ~ImagePane() { }
 
     //void showStatus();
     //void hideStatus();
@@ -130,27 +125,23 @@ class ImagePane : public QWidget
     void setPixmap( const QPixmap &pm );
 
 
-    int  paneWidth() const
-    {
+    int  paneWidth() const {
         return image->visibleWidth(); 
     }
 
-    int  paneHeight() const
-    {
+    int  paneHeight() const {
         return image->visibleHeight(); 
     }
 
-    void setPosition(int x, int y)
-    {
+    void setPosition(int x, int y) {
         image->setContentsPos (x,y );
     }
 
-    void disable()
-    {
+    void disable() {
         pic->hide();
     }
 
-    signals:
+signals:
     void clicked();
 
 private:
@@ -166,7 +157,7 @@ private slots:
 class ImageViewer : public QMainWindow
 {
     Q_OBJECT
-    public:
+public:
     ImageViewer( QWidget *parent=0, const char *name=0, int wFlags=0 );
     ~ImageViewer();
 
@@ -175,8 +166,7 @@ class ImageViewer : public QMainWindow
     void show();
 
 
-    enum INFO_STRINGS
-    {
+    enum INFO_STRINGS {
         PATH,
         FORMAT,
         FILE_SIZE,
@@ -186,8 +176,7 @@ class ImageViewer : public QMainWindow
         LAST
     };
 
-    enum RotateDirection
-    {
+    enum RotateDirection   {
         Rotate90, Rotate180, Rotate270
     };
 
@@ -195,12 +184,15 @@ class ImageViewer : public QMainWindow
     static QImage  rotate(QImage &img, RotateDirection r);
     static QImage& intensity(QImage &image, float percent);
     static QImage& toGray(QImage &image, bool fast = false);
+    bool showThumbView;              // a flag to indicate if FileSelector should be initialized with thumbnail view
 
 protected:
     void resizeEvent( QResizeEvent * );
     void closeEvent( QCloseEvent * );
 
 private:
+    int  imageIndex(void);
+
     void updateCaption( QString name );
     bool loadSelected();
     void scale();
@@ -213,17 +205,21 @@ private:
 
     void updateImage();
 
-
-
-
 private slots:
+
+    void slideShow( bool on );
+    void help(); 
+    void slideUpdate();
+    bool nextImage();
+    bool prevImage();
+    void settings();
 
     void switchThumbView();
     void switchSizeToScreen();
     void setDocument(const QString& fileref);
     void doDelayedLoad();
     void openFile( const DocLnk &file );
-    //void openFile();
+    void openFile();
     void open();
     void closeFileSelector();
     void hFlip();
@@ -233,32 +229,18 @@ private slots:
     void rot270();
     void normalView();
     void fullScreen();
+    void stopSlideShow();
     void blackAndWhite();
     void displayInfoDialog();
     void displayControlsDialog();
-
-
-
-
-
-
-
-
-
-
 private:
-
-
-
-
-    enum MENU_ITEMS
-    {
+    QWMatrix matrix;
+    bool rotated90;
+    enum MENU_ITEMS  {
         SHOW_THUMBNAILS,
         SIZE_TO_SCREEN,
         BLACKANDWHITE
     };
-
-
 
     QString filename;
     QString delayLoad;
@@ -289,7 +271,15 @@ private:
     bool bFromDocView;              // a flag to indicate whether or not we were 
                                     // launched from the document view...
 
-    bool showThumbView;              // a flag to indicate if FileSelector should be initialized with thumbnail view
+    int slideDelay;
+    bool slideRepeat;
+    bool slideReverse;      // show slideshow in reverse order
+    bool rotateOnLoad;      // rotate by 90 degrees on loading
+    bool fastLoad;
+    QTimer *slideTimer;
+    QValueList<DocLnk> imageList;
+    QAction *slideAction;
+    
 
     QString imageInfo[LAST];
 };

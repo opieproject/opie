@@ -12,19 +12,16 @@
 
 class QScrollView;
 class QLabel;
+//class QValueList;
 
 class ThumbWidget : public QWidget
 {
     Q_OBJECT
-    public:
+public:
     ThumbWidget(QPixmap p,QString text,const DocLnk& f,QWidget *parent=0,int width=-1);
-    ~ThumbWidget()
-    {
-        
-    }
+    ~ThumbWidget() { }
 
-    DocLnk file() const
-    {
+    DocLnk file() const {
         return fl;
     } 
     
@@ -45,14 +42,28 @@ private:
 };
 
 
+
+
+class ImageFileSelectorItem : public QListViewItem
+{
+public:
+    ImageFileSelectorItem( QListView *parent, const DocLnk& f );
+    ~ImageFileSelectorItem();
+
+    DocLnk file() const {
+        return fl;
+    } 
+private:
+    DocLnk fl;
+};
+
 class ImageFileSelector : public QWidgetStack
 {
     Q_OBJECT
 
-    public:
+public:
 
-    enum CURRENT_VIEW
-    {
+    enum CURRENT_VIEW {
         THUMBNAIL,
         DETAILED,
         UNKNOWN
@@ -68,11 +79,20 @@ class ImageFileSelector : public QWidgetStack
 
     void setView(CURRENT_VIEW v);
 
-    CURRENT_VIEW view()
-    {
+    CURRENT_VIEW view()  {
         return cView;
     }
 
+    QValueList<DocLnk> fileList() const  {
+        ((ImageFileSelector*)this)->fileCount(); // ensure all loaded when this is extended
+        QValueList<DocLnk> list;
+        ImageFileSelectorItem *item = (ImageFileSelectorItem *)detailed->firstChild();
+        while (item) {
+            list.append(item->file());
+            item = (ImageFileSelectorItem *)item->nextSibling();
+        }
+        return list;
+    }
 
 public slots:
 
@@ -109,27 +129,6 @@ private:
     QGridLayout *gl;
 
 };
-
-
-class ImageFileSelectorItem : public QListViewItem
-{
-public:
-    ImageFileSelectorItem( QListView *parent, const DocLnk& f );
-    ~ImageFileSelectorItem();
-
-    DocLnk file() const
-    {
-        return fl;
-    } 
-
-
-private:
-    DocLnk fl;
-};
-
-
-
-
 #endif // IMAGEFILE_SELECTOR_H
 
 

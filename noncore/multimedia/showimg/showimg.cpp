@@ -24,7 +24,12 @@
 
 #include "showimg.h"
 #include "ImageFileSelector.h"
+#include "settingsdialog.h"
+
            
+#include <opie/ofiledialog.h>
+
+#include <qpe/qpeapplication.h>
 #include <qpe/config.h>
 #include <qpe/resource.h>
 #include <qpe/fileselector.h>
@@ -49,12 +54,12 @@
 
 
 
-ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightness,QWidget *parent):QDialog(parent,0,true)
+ControlsDialog::ControlsDialog(const QString &caption,QImage image,int *brightness,QWidget *parent)
+        : QDialog(parent,0,true)
 {
     setCaption(caption);
 
-    if ( parent )
-    {
+    if ( parent )  {
         setPalette(parent->palette());
     }
 
@@ -101,9 +106,10 @@ void ControlsDialog::accept()
     done(1);
 }
 
+//===========================================================================
 
-
-InfoDialog::InfoDialog(const QString &caption, const QStringList text,QWidget *parent):QDialog(parent,0,true)
+InfoDialog::InfoDialog(const QString &caption, const QStringList text,QWidget *parent)
+        : QDialog(parent,0,true)
 {
     setCaption(caption);
 
@@ -148,6 +154,8 @@ void InfoDialog::displayInfo(const QString &caption, const QStringList text, QWi
     dlg->exec();
     delete dlg;
 } 
+
+//===========================================================================
 
 
 ImagePane::ImagePane( QWidget *parent ) : QWidget( parent )
@@ -229,11 +237,13 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
 
     fileMenuFile = new QPopupMenu(this);
     //menuBarmenubarFile->insertItem( tr("File"), fileMenu );
-    fileMenuFile->insertItem(tr("Open"), this, SLOT(openFile()), 0);
+    fileMenuFile->insertItem(tr("Open"),
+                            this, SLOT(openFile()), 0);
 
     viewMenuFile = new QPopupMenu( this );
     //menubarFile->insertItem( tr("View"), viewMenu );    
-    viewMenuFile->insertItem( tr("Thumbnail View"), this, SLOT(switchThumbView()), 0, SHOW_THUMBNAILS );
+    viewMenuFile->insertItem( tr("Thumbnail View"),
+                              this, SLOT(switchThumbView()), 0, SHOW_THUMBNAILS );
     
     viewMenuFile->setItemChecked ( SHOW_THUMBNAILS, showThumbView ); 
 
@@ -242,13 +252,18 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
 
     optionsMenuFile = new QPopupMenu( this);
     //menubarFile->insertItem( tr("Options"),optionsMenu );
-    optionsMenuFile->insertItem( tr("Slideshow") );
+    slideAction = new QAction( tr( "Slide show" ), Resource::loadIconSet( "slideshow" ),
+                               QString::null, 0, this, 0 );
+    slideAction->setToggleAction( TRUE );
+    connect( slideAction, SIGNAL( toggled(bool) ), this, SLOT( slideShow(bool) ) );
+    slideAction->addTo( optionsMenuFile);
+//     slideAction->addTo( toolBar );
+
+
+//     optionsMenuFile->insertItem( tr("Slideshow") );
     optionsMenuFile->insertSeparator();
-    optionsMenuFile->insertItem( tr("Preferences.."));
-    optionsMenuFile->insertItem( tr("Help"));
-
-
-
+    optionsMenuFile->insertItem( tr("Preferences.."), this, SLOT(settings()), 0);
+//    optionsMenuFile->insertItem( tr("Help"), this, SLOT(help()), 0);
 
     QStrList fmt = QImage::outputFormats();
 
@@ -291,7 +306,11 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     //fileSelector->setNewVisible(FALSE);
     //fileSelector->setCloseVisible(FALSE);
     connect( fileSelector, SIGNAL( closeMe() ), this, SLOT( closeFileSelector() ) );
-    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ), this, SLOT( openFile( const DocLnk & ) ) );
+    connect( fileSelector, SIGNAL( fileSelected( const DocLnk &) ),
+             this, SLOT( openFile( const DocLnk & ) ) );
+
+    imageList = fileSelector->fileList();
+    slideAction->setEnabled( imageList.count() != 0);
 
     iconToolBar = new QPEToolBar(this);
 
@@ -336,10 +355,30 @@ ImageViewer::ImageViewer( QWidget *parent, const char *name, int wFlags )
     viewMenuView->insertSeparator();
 
 
-    a = new QAction( tr( "Fullscreen" ), Resource::loadPixmap( "fullscreen" ), QString::null, 0, this, 0 );
+    a = new QAction( tr( "Fullscreen" ), Resource::loadPixmap( "fullscreen" ),
+                     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ), this, SLOT( fullScreen() ) );
     a->addTo( iconToolBar );
     a->addTo( viewMenuView);
+
+    a = new QAction( tr( "Stop Slideshow" ), Resource::loadPixmap( "quit_icon" ),
+                     QString::null, 0, this, 0 );
+    connect( a, SIGNAL( activated() ), this, SLOT( stopSlideShow() ) );
+    a->addTo( iconToolBar );
+    a->addTo( viewMenuView);
+
+
+    Config config( "ImageViewer" );
+    config.setGroup( "SlideShow" );
+    slideDelay = config.readNumEntry( "Delay", 2);
+    slideRepeat = config.readBoolEntry( "Repeat", FALSE );
+    slideReverse = config.readBoolEntry("Reverse", FALSE);
+
+    config.setGroup("Default");
+    rotateOnLoad = config.readBoolEntry("Rotate", FALSE);
+    fastLoad = config.readBoolEntry("FastLoad", TRUE);
+    slideTimer = new QTimer( this );
+    connect( slideTimer, SIGNAL(timeout()), this, SLOT(slideUpdate()) );
 
     switchToFileSelector();
 
@@ -356,7 +395,50 @@ ImageViewer::~ImageViewer()
     cfg.writeEntry("ShowThumbnails",(int)showThumbView);
     cfg.writeEntry("SizeToScreen",(int)isSized);
 
+    cfg.setGroup( "SlideShow" );
+    cfg.writeEntry( "Delay", slideDelay);
+    cfg.writeEntry( "Repeat", slideRepeat );
+    cfg.writeEntry("Reverse",  slideReverse);
+
+    cfg.setGroup("Default");
+    cfg.writeEntry("Rotate", rotateOnLoad);
+    cfg.writeEntry("FastLoad", fastLoad);
+
     delete imagePanel; // in case it is fullscreen
+}
+
+void ImageViewer::help() {
+
+}
+
+
+void ImageViewer::settings()
+{
+    SettingsDialog dlg( this, 0, TRUE );
+    dlg.setDelay( slideDelay );
+    dlg.setRepeat( slideRepeat );
+    dlg.setReverse( slideReverse );
+    dlg.setRotate(rotateOnLoad);
+    dlg.setFastLoad(fastLoad);
+
+    if ( QPEApplication::execDialog(&dlg) == QDialog::Accepted ) {
+        qDebug("<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>");
+        slideDelay = dlg.delay();
+        slideRepeat = dlg.repeat();
+        slideReverse = dlg.reverse();
+        rotateOnLoad = dlg.rotate();
+        fastLoad = dlg.fastLoad();
+
+        Config config( "ImageViewer" );
+        config.setGroup( "SlideShow" );
+        config.writeEntry( "Delay", slideDelay );
+        config.writeEntry( "Repeat", slideRepeat );
+        config.writeEntry("Reverse", slideReverse);
+
+        config.setGroup("Default");
+        config.writeEntry("Rotate", rotateOnLoad);
+        config.writeEntry("FastLoad", fastLoad);
+    }
 }
 
 void ImageViewer::switchSizeToScreen()
@@ -368,12 +450,9 @@ void ImageViewer::switchSizeToScreen()
 
 void ImageViewer::updateImage()
 {
-    if ( isSized )
-    {
+    if ( isSized ) {
         imagePanel->setPixmap(pmScaled);
-    }
-    else
-    {
+    } else {
         imagePanel->setPixmap(pm);
     }
 }
@@ -396,6 +475,7 @@ void ImageViewer::switchToFileSelector()
     menuBar->insertItem( tr("Options"), optionsMenuFile );
     iconToolBar->hide();
     imagePanel->disable();
+    slideShow(false);
 
 }
 
@@ -434,27 +514,43 @@ void ImageViewer::show()
 
 void ImageViewer::show(const QString& fileref)
 {
+//    qDebug("Show "+fileref);
     bFromDocView = TRUE;
     closeFileSelector();
     DocLnk link(fileref);
-    if ( link.isValid() )
-    {
+    if ( link.isValid() ) {
         openFile(link);
-    }
-    else
-    {
+    } else {
         filename = fileref;
         updateCaption( fileref );
         loadImage( fileref );
     }
 }
 
-void ImageViewer::openFile( const DocLnk &file )
+void ImageViewer::openFile() {
+    MimeTypes types;
+    QStringList image;
+    image << "image/*";
+    types.insert("Images",  image);
+    
+    QString str = OFileDialog::getOpenFileName( 1,QPEApplication::documentDir(),"", types, 0 );
+    DocLnk link(str);
+    if ( link.isValid() )
+        openFile(link);
+
+}
+
+void ImageViewer::openFile( const DocLnk &link )
 {
     closeFileSelector();
-    DocLnk link(file);
+//    DocLnk link(file);
+    qDebug("open "+link.name());
     updateCaption( link.name() );
     loadImage( link.file() );
+    if (slideTimer->isActive()) {
+        slideTimer->start(slideDelay * 1000, FALSE);
+    }
+    
 }
 
 void ImageViewer::open()
@@ -482,24 +578,35 @@ void ImageViewer::updateCaption( QString name )
 void ImageViewer::loadImage( const char *fileName )
 {
     filename = fileName;
-    if ( filename )
-    {
+    if ( filename )  {
         QApplication::setOverrideCursor( waitCursor ); // this might take time
         //imagePanel->statusLabel()->setText( tr("Loading image...") );
         qApp->processEvents();
         bool ok = image.load(filename, 0); 
-        if ( ok )
-        {
+        if ( ok ) {
             ok = reconvertImage();
             updateImageInfo(filename);
         }
-        if ( !ok )
-        {
+        if ( !ok ) {
             pm.resize(0,0);             // couldn't load image
             update();
         }
         QApplication::restoreOverrideCursor();  // restore original cursor
     }
+
+//    fastLoad ? ", Fast" : "",
+//    fastLoad ? QMAX(imagewidth/maxsize, imageheight/maxsize) : 1);
+
+  
+//    matrix.reset();
+    rotated90 = FALSE;
+
+    if (rotateOnLoad) {
+        rotated90 = TRUE;
+        rot90();      
+//        matrix.rotate( -90.0 );
+    }
+    
     switchToImageView();
     updateImage();
 
@@ -619,17 +726,20 @@ void ImageViewer::resizeEvent( QResizeEvent * )
 
 void ImageViewer::hFlip()
 {
+//    matrix.scale( -1.0, 1.0 );
+    
     setImage(image.mirror(TRUE,FALSE));
 }
 
 void ImageViewer::vFlip()
 {
+//    matrix.scale( 1.0, -1.0 );
     setImage(image.mirror(FALSE,TRUE));
 }
 
 void ImageViewer::rot180()
 {
-
+//    matrix.rotate( 180.0 );
     setImage(image.mirror(TRUE,TRUE));
 }
 
@@ -637,6 +747,7 @@ void ImageViewer::rot90()
 {
     QImage oldimage;
     oldimage = image.convertDepth(32);
+//    matrix.rotate( -90.0 );
     setImage(rotate(oldimage,Rotate90));
 
 }
@@ -645,6 +756,7 @@ void ImageViewer::rot270()
 
     QImage oldimage;
     oldimage = image.convertDepth(32);
+//    matrix.rotate(90.0);
     setImage(rotate(oldimage,Rotate270));
 
 }
@@ -654,8 +766,6 @@ void ImageViewer::blackAndWhite()
 
     viewMenuView->setItemEnabled(BLACKANDWHITE,false);
     setImage(toGray(image,false));
-
-
 }
 
 void ImageViewer::displayControlsDialog()
@@ -672,8 +782,7 @@ void ImageViewer::displayControlsDialog()
     int newB=0;
     ControlsDialog *dlg=new ControlsDialog("Image Viewer",small,&newB,this);
     dlg->exec();
-    if ( newB )
-    {
+    if ( newB ) {
         intensity(image,(float)newB/100);
         setImage(image);
     }
@@ -705,6 +814,11 @@ void ImageViewer::normalView()
         updateImage();
 
     }
+}
+
+void ImageViewer::stopSlideShow() {
+    if (slideTimer->isActive())
+    slideTimer->stop();
 }
 
 void ImageViewer::fullScreen()
@@ -1034,11 +1148,102 @@ QImage  ImageViewer::rotate(QImage &img, RotateDirection r)
 
     }
     return (dest);
-
-
 }
 
+void ImageViewer::slideShow( bool on )
+{
+    if (on) {
+        if (!imageList.isEmpty()) {
+            slideTimer->start(slideDelay * 1000, FALSE);
+            filename = "";    // force restart
+            slideReverse ? prevImage() : nextImage();
+        }
+    } else {
+        slideTimer->stop();
+        slideAction->setOn( false);
+    }
+}
 
+void ImageViewer::slideUpdate()
+{
+    bool final_image = slideReverse ? prevImage() : nextImage();
 
+    if (final_image && !slideRepeat) {
+        slideTimer->stop();
+        slideAction->setOn(FALSE);
+    }
+}
 
+//
+// Display the image after the current one in the image list.
+// Return TRUE if the next call to nextImage() will wrap around to the
+// first image in the list (ie. we're now viewing the last image in the list).
+//
+bool ImageViewer::nextImage(void)
+{
+    int idx = 0;
 
+    if (imageList.count() > 0) {
+        idx = imageIndex();
+        if (idx != -1) {
+            if (idx == int(imageList.count() - 1)) {
+                idx = 0;
+            } else {
+                idx++;
+            }
+        } else {
+            idx = 0;
+        }
+        openFile(imageList[idx]);
+    }
+
+    return idx == int(imageList.count() - 1) ? TRUE : FALSE;
+}
+
+//
+// Display the image preceeding the current one in the image list.
+// Return TRUE if the next call to prevImage() will wrap around to the last
+// image in the list (ie. we're now viewing the first image in the list).
+//
+bool ImageViewer::prevImage(void)
+{
+    int idx = -1;
+
+    if (imageList.count() > 0) {
+        idx = imageIndex();
+        if (idx != -1) {
+            if (idx == 0) {
+                idx = imageList.count() - 1;
+            } else {
+                idx--;
+            }
+        } else {
+            idx = imageList.count() - 1;
+        }
+        openFile(imageList[idx]);
+    }
+
+    return idx == 0 ? TRUE : FALSE;
+}
+
+//
+// Return the index into the imageList of the currently viewed
+// image (ie. ImageViewer::filename in ImageViewer::imageList).
+//
+int ImageViewer::imageIndex(void)
+{
+    QValueListConstIterator<DocLnk> i;
+    int index;
+
+    if (imageList.count() == 0) {
+        return -1;
+    }
+
+    for (index = 0, i = imageList.begin(); i != imageList.end(); ++i, index++) {
+        if ((*i).file() == filename) {
+            return index;
+        }
+    }
+
+    return -1;
+}

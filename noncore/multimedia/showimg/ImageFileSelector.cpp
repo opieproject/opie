@@ -21,10 +21,8 @@
 #include "ImageFileSelector.h"
 
 
-
-
-
-ThumbWidget::ThumbWidget(QPixmap p,QString text,const DocLnk& f,QWidget *parent,int w) : QWidget( parent ),fl(f)
+ThumbWidget::ThumbWidget(QPixmap p,QString text,const DocLnk& f,QWidget *parent,int w)
+        : QWidget( parent ),fl(f)
 {
     setBackgroundMode(NoBackground);  
     if ( w!=-1 )
@@ -38,7 +36,7 @@ ThumbWidget::ThumbWidget(QPixmap p,QString text,const DocLnk& f,QWidget *parent,
     pixmap=p;
 }
 
-void ThumbWidget::resizeEvent(QResizeEvent *e)
+void ThumbWidget::resizeEvent(QResizeEvent *)
 {
     description->setGeometry(0,height()-24,width(),24);
 }
@@ -53,15 +51,15 @@ void ThumbWidget::paintEvent( QPaintEvent *e )
 
 }
 
-void ThumbWidget::mouseReleaseEvent(QMouseEvent* event)
+void ThumbWidget::mouseReleaseEvent(QMouseEvent* )
 {
     emit clicked(fl);
 }
 
 
 
-
-ImageFileSelectorItem::ImageFileSelectorItem( QListView *parent, const DocLnk &f): QListViewItem( parent ), fl( f )
+ImageFileSelectorItem::ImageFileSelectorItem( QListView *parent, const DocLnk &f)
+        : QListViewItem( parent ), fl( f )
 {
     setText( 0, f.name() );
     QFileInfo fi(f.file());
@@ -78,7 +76,8 @@ ImageFileSelectorItem::~ImageFileSelectorItem()
 }
 
 
-ImageFileSelector::ImageFileSelector( CURRENT_VIEW scv,QWidget *parent,const char *name ):QWidgetStack(parent)
+ImageFileSelector::ImageFileSelector( CURRENT_VIEW scv,QWidget *parent,const char * )
+        : QWidgetStack(parent)
 {
 
     detailed=new QListView(this);
@@ -165,8 +164,9 @@ void ImageFileSelector::updateSizes()
     thumb->updateScrollBars(); 
 }
 
-void ImageFileSelector::reread(bool purgeCache)
+void ImageFileSelector::reread(bool)
 {
+//    qDebug("reread");
     ImageFileSelectorItem *item = (ImageFileSelectorItem *)detailed->selectedItem();
     QString oldFile;
     if ( item )
@@ -177,21 +177,18 @@ void ImageFileSelector::reread(bool purgeCache)
     Global::findDocuments(&files, "image/*");
     count = files.children().count();
     QListIterator<DocLnk> dit( files.children() );
-    int y=0;
-    int x=4;
-    int totalHeight=4;
+//    int y=0;
+//    int x=4;
+//    int totalHeight=4;
     ThumbWidget *l=0;
     int width=80;
     gl->expand(dit.count()/2,2);
-
     int i,j;
-
     i=j=0;
-
     detailed->setUpdatesEnabled(false);
     thumb->setUpdatesEnabled(false);
-    for ( ; dit.current(); ++dit )
-    {
+
+    for ( ; dit.current(); ++dit ) {
         item = new ImageFileSelectorItem( detailed, **dit );        
         if ( item->file().file() == oldFile )
             detailed->setCurrentItem( item );
@@ -199,29 +196,26 @@ void ImageFileSelector::reread(bool purgeCache)
 
     QListViewItemIterator it( detailed );
     ImageFileSelectorItem *ii;
-    // iterate through all items of the listview
-    for ( ; it.current(); ++it )
-    {
+      // iterate through all items of the listview
+    for ( ; it.current(); ++it ) {
         ii=(ImageFileSelectorItem *)it.current();
-        QImage img(ii->file().file());
-        img=img.smoothScale(64,64);
-        QPixmap pix;
-        pix.convertFromImage(img);                
-        l=new ThumbWidget(pix,ii->file().name(),ii->file(),background,width);
-        l->setBackgroundColor(colorGroup().base());        
-        gl->addWidget(l,j,i);
-        i++;
-        if ( i==2 )
-        {
-            i=0;
-            j++;
+        QImage img( ii->file().file() );
+        if( !img.isNull()) {
+            img=img.smoothScale(64,64);
+            QPixmap pix;
+            pix.convertFromImage(img);                
+            l=new ThumbWidget(pix,ii->file().name(),ii->file(),background,width);
+            l->setBackgroundColor(colorGroup().base());        
+            gl->addWidget(l,j,i);
+            i++;
+            if ( i==2 ) {
+                i=0;
+                j++;
+            }
+            tList.append(l);
+            connect(l,SIGNAL(clicked(const DocLnk &)),this,SLOT(thumbClicked(const DocLnk &)));
         }
-        tList.append(l);
-        connect(l,SIGNAL(clicked(const DocLnk &)),this,SLOT(thumbClicked(const DocLnk &)));
-        
     }
-
-
 
     if ( !detailed->selectedItem() )
         detailed->setCurrentItem( detailed->firstChild() );
@@ -230,7 +224,6 @@ void ImageFileSelector::reread(bool purgeCache)
     thumb->setUpdatesEnabled(true);
     detailed->update();
     thumb->update();
-
 }
 
 int ImageFileSelector::fileCount()
@@ -239,6 +232,7 @@ int ImageFileSelector::fileCount()
 }
 const DocLnk * ImageFileSelector::selected()
 {
+    qDebug("image selected");
     ImageFileSelectorItem *item = (ImageFileSelectorItem *) detailed->selectedItem();
     if ( item )
         return new DocLnk( item->file() );
