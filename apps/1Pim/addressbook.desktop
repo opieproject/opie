@@ -1,6 +1,6 @@
 [Desktop Entry]
 Comment=An Address Book Program
-Comment[fr]=Un repertoire
+Comment[fr]=Un répertoire
 Comment[es]=Una libreta de direcciones
 Comment[da]=Adressebog med kontaktpersoner, adresser, telefonnumre m.m.
 Exec=addressbook
@@ -18,4 +18,4 @@ Name[es]=Contactos
 Name[zh_TW]=地址簿
 Name[ko]=주소록
 Name[da]=Adressebog
-Name[fr]=Repertoire
+Name[fr]=Répertoire
