@@ -11,13 +11,14 @@ class OpieMail : public MainWindow
 public:
     OpieMail( QWidget *parent = 0, const char *name = 0, WFlags flags = 0 );
     static QString appName() { return QString::fromLatin1("opiemail"); }
-protected slots:
+
+public slots:
     void slotComposeMail();
+protected slots:
     void slotSendQueued();
     void slotSearchMails();
     void slotEditSettings();
     void slotEditAccounts();
-    
 private:
     Settings *settings;
 

@@ -6,9 +6,9 @@ OpieMail::OpieMail( QWidget *parent, const char *name, WFlags flags )
     : MainWindow( parent, name, flags )
 {
     settings = new Settings();
- 
+
     folderView->populate( settings->getAccounts() );
-    
+
     connect( composeMail, SIGNAL( activated() ), SLOT( slotComposeMail() ) );
     connect( sendQueued, SIGNAL( activated() ), SLOT( slotSendQueued() ) );
     connect( searchMails, SIGNAL( activated() ), SLOT( slotSearchMails() ) );
@@ -47,4 +47,9 @@ void OpieMail::slotEditAccounts()
     eaDialog.showMaximized();
     eaDialog.slotAdjustColumns();
     eaDialog.exec();
+    if ( settings ) delete settings;
+    settings = new Settings();
+
+    folderView->populate( settings->getAccounts() );
 }
+

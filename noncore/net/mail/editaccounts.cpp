@@ -16,12 +16,12 @@ EditAccounts::EditAccounts( Settings *s, QWidget *parent, const char *name, bool
 {
     qDebug( "New Account Configuration Widget" );
     settings = s;
-    
+
     mailList->addColumn( tr( "Account" ) );
     mailList->addColumn( tr( "Type" ) );
 
     newsList->addColumn( tr( "Account" ) );
-    
+
     connect( newMail, SIGNAL( clicked() ), SLOT( slotNewMail() ) );
     connect( editMail, SIGNAL( clicked() ), SLOT( slotEditMail() ) );
     connect( deleteMail, SIGNAL( clicked() ), SLOT( slotDeleteMail() ) );
@@ -70,7 +70,7 @@ void EditAccounts::slotNewAccount( const QString &type )
             settings->addAccount( account );
             account->save();
             slotFillLists();
-        } else {
+          } else {
             account->remove();
         }
     } else if ( type.compare( "POP3" ) == 0 ) {
@@ -94,6 +94,7 @@ void EditAccounts::slotNewAccount( const QString &type )
             settings->addAccount( account );
             account->save();
             slotFillLists();
+
         } else {
             account->remove();
         }
@@ -147,7 +148,7 @@ void EditAccounts::slotEditAccount( Account *account )
 
 void EditAccounts::slotDeleteAccount( Account *account )
 {
-    if ( QMessageBox::information( this, tr( "Question" ), 
+    if ( QMessageBox::information( this, tr( "Question" ),
          tr( "<p>Do you really want to delete the selected Account?</p>" ),
          tr( "Yes" ), tr( "No" ) ) == 0 ) {
         settings->delAccount( account );
@@ -159,7 +160,7 @@ void EditAccounts::slotEditMail()
 {
     qDebug( "Edit Mail Account" );
     if ( !mailList->currentItem() ) {
-        QMessageBox::information( this, tr( "Error" ), 
+        QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
         return;
@@ -172,12 +173,12 @@ void EditAccounts::slotEditMail()
 void EditAccounts::slotDeleteMail()
 {
     if ( !mailList->currentItem() ) {
-        QMessageBox::information( this, tr( "Error" ), 
+        QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
         return;
     }
-    
+
     Account *a = ((AccountListItem *) mailList->currentItem())->getAccount();
     slotDeleteAccount( a );
 }
@@ -192,7 +193,7 @@ void EditAccounts::slotEditNews()
 {
     qDebug( "Edit News Account" );
     if ( !newsList->currentItem() ) {
-        QMessageBox::information( this, tr( "Error" ), 
+        QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
         return;
@@ -206,12 +207,12 @@ void EditAccounts::slotDeleteNews()
 {
     qDebug( "Delete News Account" );
     if ( !newsList->currentItem() ) {
-        QMessageBox::information( this, tr( "Error" ), 
+        QMessageBox::information( this, tr( "Error" ),
                                   tr( "<p>Please select an account.</p>" ),
                                   tr( "Ok" ) );
         return;
     }
-    
+
     Account *a = ((AccountListItem *) newsList->currentItem())->getAccount();
     slotDeleteAccount( a );
 }
@@ -219,7 +220,7 @@ void EditAccounts::slotDeleteNews()
 void EditAccounts::slotAdjustColumns()
 {
     int currPage = configTab->currentPageIndex();
-    
+
     configTab->showPage( mailTab );
     mailList->setColumnWidth( 0, mailList->visibleWidth() - 50 );
     mailList->setColumnWidth( 1, 50 );
@@ -233,7 +234,7 @@ void EditAccounts::slotAdjustColumns()
 void EditAccounts::accept()
 {
     settings->saveAccounts();
-    
+
     QDialog::accept();
 }
 
@@ -262,7 +263,7 @@ IMAPconfig::IMAPconfig( IMAPaccount *account, QWidget *parent, const char *name,
     : IMAPconfigUI( parent, name, modal, flags )
 {
     data = account;
-    
+
     fillValues();
 
     connect( sslBox, SIGNAL( toggled( bool ) ), SLOT( slotSSL( bool ) ) );
@@ -429,7 +430,7 @@ NNTPconfig::NNTPconfig( NNTPaccount *account, QWidget *parent, const char *name,
 
     connect( loginBox, SIGNAL( toggled( bool ) ), userLine, SLOT( setEnabled( bool ) ) );
     connect( loginBox, SIGNAL( toggled( bool ) ), passLine, SLOT( setEnabled( bool ) ) );
-    
+
     fillValues();
 
     connect( sslBox, SIGNAL( toggled( bool ) ), SLOT( slotSSL( bool ) ) );
