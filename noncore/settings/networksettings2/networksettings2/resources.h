@@ -80,6 +80,7 @@ public :
 
     ANetNodeInstance * createNodeInstance( const QString & S )
       { ANetNodeInstance * NNI = 0;
+        printf( "Find node type %s\n", S.latin1() );
         NetNode_t * NNT = AllNodeTypes[S];
         if( ! NNT ) {
           return 0;
@@ -96,7 +97,7 @@ public :
     void removeNodeInstance( const QString & N )
       { AllNodes.remove( N );}
     ANetNodeInstance * findNodeInstance( const QString & S )
-      { return (AllNodes.find(S)!=0) ? AllNodes[S] : 0; }
+      { return AllNodes[S]; }
 
     const QString & netNode2Name( const char * Type );
     const QString & netNode2Description( const char * Type );

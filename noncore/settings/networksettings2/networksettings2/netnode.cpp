@@ -180,8 +180,9 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
         setNumber( N.toLong() );
       } else if( A == "node" ) {
         ANetNodeInstance * NNI = NSResources->findNodeInstance( N );
+        Log(( "Find node %s : %p\n", N.latin1(), NNI ));
         if( NNI && ! InError ) {
-          append( NSResources->findNodeInstance( N ) );
+          append( NNI );
         } else {
           // could not find a node type -> collection invalid
           InError = 1;
@@ -190,7 +191,7 @@ NodeCollection::NodeCollection( QTextStream & TS ) :
     } while( 1 );
 
     Log(( "Profile number %s : %d nodes\n", 
-          N.latin1(), count() ));
+          Name.latin1(), count() ));
 }
 
 

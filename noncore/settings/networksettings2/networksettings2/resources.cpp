@@ -141,6 +141,7 @@ void TheNSResources::findAvailableNetNodes(const QString &path){
       if( fi->fileName().contains(".so")){
         /* if loaded install translation */
         if( loadNetNode(path + "/" + fi->fileName()) ) {
+          Log(( "Loading plugin %s\n", fi->fileName().latin1()));
           QTranslator *trans = new QTranslator(qApp);
           QString fn = QPEApplication::qpeDir()+
                     "/i18n/"+lang+"/"+ 
@@ -151,6 +152,8 @@ void TheNSResources::findAvailableNetNodes(const QString &path){
               qApp->installTranslator( trans );
           else
               delete trans;
+        } else {
+          Log(( "Error loading plugin %s\n", fi->fileName().latin1()));
         }
       }
       ++it;
