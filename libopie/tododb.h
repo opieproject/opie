@@ -121,6 +121,11 @@ namespace Opie {
         Iterator remove( const Iterator& );
 
         /**
+         * removeAll removes all Todos
+         */
+        void removeAll();
+
+        /**
          * Replace event with another Event
          * with the same uid
          */
@@ -155,6 +160,7 @@ namespace Opie {
          */
         Iterator queryByExample( const ToDoEvent& query,
                                  int query = WildCards );
+
 
     signals:
         /** emitted if was changed externally */

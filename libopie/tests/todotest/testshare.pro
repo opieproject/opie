@@ -1,0 +1,10 @@
+TEMPLATE	= app
+CONFIG		= qt warn_on release
+#DESTDIR		= $(OPIEDIR)/bin
+HEADERS		=
+SOURCES		= testshare.cpp
+INTERFACES	= 
+INCLUDEPATH	+= $(OPIEDIR)/include
+DEPENDPATH	+= $(OPIEDIR)/include
+LIBS            += -lqpe -lopie-two
+TARGET		= testshare

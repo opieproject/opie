@@ -204,6 +204,9 @@ void ToDoDB::removeEvent( const ToDoEvent &event )
     delEventAlarm( event );
     m_res->removeEvent( event );
 }
+void ToDoDB::removeAll() {
+    m_res->removeAll();
+}
 ToDoDB::Iterator ToDoDB::remove( const Iterator& it2) {
     Iterator it = it2;
     m_res->removeEvent( (*it) );

@@ -35,6 +35,7 @@ namespace Opie {
         bool addEvent( const ToDoEvent& event );
         bool replaceEvent( const ToDoEvent& event );
         bool removeEvent( const ToDoEvent& event );
+        void removeAll();
     private:
         ToDoEvent todo( QAsciiDict<int>*, XMLElement* )const;
         QString toString( const ToDoEvent& ev )const;

@@ -1,24 +1,53 @@
 
-#include <opie/todoevent.h>
+#include <qobject.h>
+#include <qshared.h>
+
 
 
 #include <qpe/palmtopuidgen.h>
 #include <qpe/stringutil.h>
 #include <qpe/palmtoprecord.h>
-
 #include <qpe/stringutil.h>
 #include <qpe/categories.h>
 #include <qpe/categoryselect.h>
 
-#include <qobject.h>
+#include "todoevent.h"
 
 using namespace Opie;
 
 Qtopia::UidGen ToDoEvent::m_gen;
 
+struct ToDoEvent::ToDoEventData : public QShared {
+    ToDoEventData() : QShared() {
+    };
+
+    QDate date;
+    bool isCompleted:1;
+    bool hasDate:1;
+    int priority;
+    QStringList category;
+    QString desc;
+    QString sum;
+    QMap<QString, QString> extra;
+    QMap<QString, QArray<int> > relations;
+    int uid;
+    ushort prog;
+    bool hasAlarmDateTime :1;
+    QDateTime alarmDateTime;
+};
+
 ToDoEvent::ToDoEvent(const ToDoEvent &event )
+    : data( event.data )
 {
-  *this = event;
+    data->ref();
+    qWarning("ref up");
+}
+ToDoEvent::~ToDoEvent() {
+    if ( data->deref() ) {
+        qWarning("ToDoEvent::dereffing");
+        delete data;
+        data = 0l;
+    }
 }
 
 ToDoEvent::ToDoEvent(bool completed, int priority,
@@ -28,60 +57,62 @@ ToDoEvent::ToDoEvent(bool completed, int priority,
                      ushort progress,
                      bool hasDate, QDate date, int uid )
 {
-    m_date = date;
-    m_isCompleted = completed;
-    m_hasDate = hasDate;
-    m_priority = priority;
-    m_category = category;
-    m_sum = summary;
-    m_prog = progress;
-    m_desc = Qtopia::simplifyMultiLineSpace(description );
+    qWarning("ToDoEventData");
+    data = new ToDoEventData;
+    data->date = date;
+    data->isCompleted = completed;
+    data->hasDate = hasDate;
+    data->priority = priority;
+    data->category = category;
+    data->sum = summary;
+    data->prog = progress;
+    data->desc = Qtopia::simplifyMultiLineSpace(description );
     if (uid == -1 ) {
 	uid = m_gen.generate();
 
     }// generated the ids
     m_gen.store( uid );
 
-    m_uid = uid;
-    m_hasAlarmDateTime = false;
+    data->uid = uid;
+    data->hasAlarmDateTime = false;
 
 }
 QArray<int> ToDoEvent::categories()const
 {
-  QArray<int> array(m_category.count() ); // currently the datebook can be only in one category
-    array = Qtopia::Record::idsFromString( m_category.join(";") );
+  QArray<int> array(data->category.count() ); // currently the datebook can be only in one category
+    array = Qtopia::Record::idsFromString( data->category.join(";") );
   return array;
 }
 bool ToDoEvent::match( const QRegExp &regExp )const
 {
-  if( QString::number( m_priority ).find( regExp ) != -1 ){
+  if( QString::number( data->priority ).find( regExp ) != -1 ){
     return true;
-  }else if( m_hasDate && m_date.toString().find( regExp) != -1 ){
+  }else if( data->hasDate && data->date.toString().find( regExp) != -1 ){
     return true;
-  }else if(m_desc.find( regExp ) != -1 ){
+  }else if(data->desc.find( regExp ) != -1 ){
     return true;
   }
   return false;
 }
 bool ToDoEvent::isCompleted() const
 {
-    return m_isCompleted;
+    return data->isCompleted;
 }
 bool ToDoEvent::hasDueDate() const
 {
-    return m_hasDate;
+    return data->hasDate;
 }
 bool ToDoEvent::hasAlarmDateTime() const
 {
-    return m_hasAlarmDateTime;
+    return data->hasAlarmDateTime;
 }
 int ToDoEvent::priority()const
 {
-    return m_priority;
+    return data->priority;
 }
 QStringList ToDoEvent::allCategories()const
 {
-    return m_category;
+    return data->category;
 }
 QString ToDoEvent::extra(const QString& )const
 {
@@ -89,17 +120,17 @@ QString ToDoEvent::extra(const QString& )const
 }
 QString ToDoEvent::summary() const
 {
-    return m_sum;
+    return data->sum;
 }
 ushort ToDoEvent::progress() const
 {
-    return m_prog;
+    return data->prog;
 }
 QStringList ToDoEvent::relatedApps() const
 {
     QStringList list;
     QMap<QString, QArray<int> >::ConstIterator it;
-    for ( it = m_relations.begin(); it != m_relations.end(); ++it ) {
+    for ( it = data->relations.begin(); it != data->relations.end(); ++it ) {
         list << it.key();
     }
     return list;
@@ -108,52 +139,59 @@ QArray<int> ToDoEvent::relations( const QString& app)const
 {
     QArray<int> tmp;
     QMap<QString, QArray<int> >::ConstIterator it;
-    it = m_relations.find( app);
-    if ( it != m_relations.end() )
+    it = data->relations.find( app);
+    if ( it != data->relations.end() )
         tmp = it.data();
     return tmp;
 }
 void ToDoEvent::insertCategory(const QString &str )
 {
-  m_category.append( str );
+    changeOrModify();
+    data->category.append( str );
 }
 void ToDoEvent::clearCategories()
 {
-  m_category.clear();
+    changeOrModify();
+    data->category.clear();
 }
 void ToDoEvent::setCategories(const QStringList &list )
 {
-  m_category = list;
+    changeOrModify();
+    data->category = list;
 }
 QDate ToDoEvent::dueDate()const
 {
-    return m_date;
+    return data->date;
 }
 
 QDateTime ToDoEvent::alarmDateTime() const
 {
-	return m_alarmDateTime;
+    return data->alarmDateTime;
 }
 
 QString ToDoEvent::description()const
 {
-    return m_desc;
+    return data->desc;
 }
 void ToDoEvent::setCompleted( bool completed )
 {
-    m_isCompleted = completed;
+    changeOrModify();
+    data->isCompleted = completed;
 }
 void ToDoEvent::setHasDueDate( bool hasDate )
 {
-    m_hasDate = hasDate;
+    changeOrModify();
+    data->hasDate = hasDate;
 }
 void ToDoEvent::setHasAlarmDateTime( bool hasAlarmDateTime )
 {
-    m_hasAlarmDateTime = hasAlarmDateTime;
+    changeOrModify();
+    data->hasAlarmDateTime = hasAlarmDateTime;
 }
 void ToDoEvent::setDescription(const QString &desc )
 {
-    m_desc = Qtopia::simplifyMultiLineSpace(desc );
+    changeOrModify();
+    data->desc = Qtopia::simplifyMultiLineSpace(desc );
 }
 void ToDoEvent::setExtra( const QString&, const QString& )
 {
@@ -161,32 +199,39 @@ void ToDoEvent::setExtra( const QString&, const QString& )
 }
 void ToDoEvent::setSummary( const QString& sum )
 {
-    m_sum = sum;
+    changeOrModify();
+    data->sum = sum;
 }
 void ToDoEvent::setCategory( const QString &cat )
 {
-  qWarning("setCategory %s", cat.latin1() );
-  m_category.clear();
-  m_category << cat;
+    changeOrModify();
+    qWarning("setCategory %s", cat.latin1() );
+    data->category.clear();
+    data->category << cat;
 }
 void ToDoEvent::setPriority(int prio )
 {
-    m_priority = prio;
+    changeOrModify();
+    data->priority = prio;
 }
 void ToDoEvent::setDueDate( QDate date )
 {
-    m_date = date;
+    changeOrModify();
+    data->date = date;
 }
 void ToDoEvent::setAlarmDateTime( const QDateTime& alarm )
 {
-    m_alarmDateTime = alarm;
+    changeOrModify();
+    data->alarmDateTime = alarm;
 }
 void ToDoEvent::addRelated( const QString &app,  int id )
 {
+    changeOrModify();
+
     QMap<QString, QArray<int> >::Iterator  it;
     QArray<int> tmp;
-    it = m_relations.find( app );
-    if ( it == m_relations.end() ) {
+    it = data->relations.find( app );
+    if ( it == data->relations.end() ) {
         tmp.resize(1 );
         tmp[0] = id;
     }else{
@@ -194,14 +239,16 @@ void ToDoEvent::addRelated( const QString &app,  int id )
         tmp.resize( tmp.size() + 1 );
         tmp[tmp.size() - 1] = id;
     }
-    m_relations.replace( app,  tmp );
+    data->relations.replace( app,  tmp );
 }
 void ToDoEvent::addRelated(const QString& app,  QArray<int> ids )
 {
+    changeOrModify();
+
     QMap<QString, QArray<int> >::Iterator it;
     QArray<int> tmp;
-    it = m_relations.find( app);
-    if ( it == m_relations.end() ) { // not there
+    it = data->relations.find( app);
+    if ( it == data->relations.end() ) { // not there
         /** tmp.resize( ids.size() ); stupid??
          */
         tmp = ids;
@@ -214,21 +261,23 @@ void ToDoEvent::addRelated(const QString& app,  QArray<int> ids )
         }
 
     }
-    m_relations.replace( app,  tmp );
+    data->relations.replace( app,  tmp );
 }
 void ToDoEvent::clearRelated( const QString& app )
 {
-    m_relations.remove( app );
+    changeOrModify();
+    data->relations.remove( app );
 }
 bool ToDoEvent::isOverdue( )
 {
-    if( m_hasDate )
-	return QDate::currentDate() > m_date;
+    if( data->hasDate )
+	return QDate::currentDate() > data->date;
     return false;
 }
 void ToDoEvent::setProgress(ushort progress )
 {
-    m_prog = progress;
+    changeOrModify();
+    data->prog = progress;
 }
 /*!
   Returns a richt text string
@@ -338,34 +387,37 @@ bool ToDoEvent::operator>=(const ToDoEvent &toDoEvent )const
 }
 bool ToDoEvent::operator==(const ToDoEvent &toDoEvent )const
 {
-    if( m_priority == toDoEvent.m_priority &&
-        m_priority == toDoEvent.m_prog &&
-        m_isCompleted == toDoEvent.m_isCompleted &&
-        m_hasDate == toDoEvent.m_hasDate &&
-        m_date == toDoEvent.m_date &&
-        m_category == toDoEvent.m_category &&
-        m_sum == toDoEvent.m_sum &&
-        m_desc == toDoEvent.m_desc &&
-	m_hasAlarmDateTime == toDoEvent.m_hasAlarmDateTime &&
-	m_alarmDateTime == toDoEvent.m_alarmDateTime )
+    if( data->priority == toDoEvent.data->priority &&
+        data->priority == toDoEvent.data->prog &&
+        data->isCompleted == toDoEvent.data->isCompleted &&
+        data->hasDate == toDoEvent.data->hasDate &&
+        data->date == toDoEvent.data->date &&
+        data->category == toDoEvent.data->category &&
+        data->sum == toDoEvent.data->sum &&
+        data->desc == toDoEvent.data->desc &&
+	data->hasAlarmDateTime == toDoEvent.data->hasAlarmDateTime &&
+	data->alarmDateTime == toDoEvent.data->alarmDateTime )
 	return true;
+
     return false;
+}
+void ToDoEvent::deref() {
+
+    qWarning("deref in ToDoEvent");
+    if ( data->deref() ) {
+        qWarning("deleting");
+        delete data;
+        d= 0;
+    }
 }
 ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
 {
-    m_date = item.m_date;
-    m_isCompleted = item.m_isCompleted;
-    m_hasDate = item.m_hasDate;
-    m_priority = item.m_priority;
-    m_category = item.m_category;
-    m_desc = item.m_desc;
-    m_uid = item.m_uid;
-    m_sum = item.m_sum;
-    m_prog = item.m_prog;
-    m_extra = item.m_extra;
-    m_relations = item.m_relations;
-    m_hasAlarmDateTime = item.m_hasAlarmDateTime;
-    m_alarmDateTime = item.m_alarmDateTime;
+    qWarning("operator= ref ");
+    item.data->ref();
+    deref();
+
+    data = item.data;
+
 
     return *this;
 }
@@ -373,20 +425,20 @@ ToDoEvent &ToDoEvent::operator=(const ToDoEvent &item )
 QMap<int, QString> ToDoEvent::toMap() const {
     QMap<int, QString> map;
 
-    map.insert( Uid, QString::number( m_uid ) );
-    map.insert( Category,  m_category.join(";") );
-    map.insert( HasDate, QString::number( m_hasDate ) );
-    map.insert( Completed, QString::number( m_isCompleted ) );
-    map.insert( Description, m_desc );
-    map.insert( Summary, m_sum );
-    map.insert( Priority, QString::number( m_priority ) );
-    map.insert( DateDay,  QString::number( m_date.day() ) );
-    map.insert( DateMonth, QString::number( m_date.month() ) );
-    map.insert( DateYear, QString::number( m_date.year() ) );
-    map.insert( Progress, QString::number( m_prog ) );
+    map.insert( Uid, QString::number( data->uid ) );
+    map.insert( Category,  data->category.join(";") );
+    map.insert( HasDate, QString::number( data->hasDate ) );
+    map.insert( Completed, QString::number( data->isCompleted ) );
+    map.insert( Description, data->desc );
+    map.insert( Summary, data->sum );
+    map.insert( Priority, QString::number( data->priority ) );
+    map.insert( DateDay,  QString::number( data->date.day() ) );
+    map.insert( DateMonth, QString::number( data->date.month() ) );
+    map.insert( DateYear, QString::number( data->date.year() ) );
+    map.insert( Progress, QString::number( data->prog ) );
     map.insert( CrossReference, crossToString() );
-    map.insert( HasAlarmDateTime,  QString::number( m_hasAlarmDateTime ) );
-    map.insert( AlarmDateTime, m_alarmDateTime.toString() );
+    map.insert( HasAlarmDateTime,  QString::number( data->hasAlarmDateTime ) );
+    map.insert( AlarmDateTime, data->alarmDateTime.toString() );
 
     return map;
 }
@@ -395,7 +447,7 @@ QMap<int, QString> ToDoEvent::toMap() const {
 QString ToDoEvent::crossToString()const {
     QString str;
     QMap<QString, QArray<int> >::ConstIterator it;
-    for (it = m_relations.begin(); it != m_relations.end(); ++it ) {
+    for (it = data->relations.begin(); it != data->relations.end(); ++it ) {
         QArray<int> id = it.data();
         for ( uint i = 0; i < id.size(); ++i ) {
             str += it.key() + "," + QString::number( i ) + ";";
@@ -406,7 +458,46 @@ QString ToDoEvent::crossToString()const {
 
     return str;
 }
-
-
+int ToDoEvent::uid()const {
+    return data->uid;
+}
+void ToDoEvent::setUid( int id ) {
+    m_gen.store(id );
+    changeOrModify();
+    data->uid = id;
+}
+QMap<QString, QString> ToDoEvent::extras()const {
+    return data->extra;
+}
+/**
+ *  change or modify looks at the ref count and either
+ *  creates a new QShared Object or it can modify it
+ * right in place
+ */
+void ToDoEvent::changeOrModify() {
+    if ( data->count != 1 ) {
+        qWarning("changeOrModify");
+        data->deref();
+        ToDoEventData* d2 = new ToDoEventData();
+        copy(data, d2 );
+        data = d2;
+    }/*for testing */ else
+        qWarning("not changed");
+}
+void ToDoEvent::copy( ToDoEventData* src, ToDoEventData* dest ) {
+    dest->date = src->date;
+    dest->isCompleted = src->isCompleted;
+    dest->hasDate = src->hasDate;
+    dest->priority = src->priority;
+    dest->category = src->category;
+    dest->desc = src->desc;
+    dest->sum = src->sum;
+    dest->extra = src->extra;
+    dest->relations  = src->relations;
+    dest->uid = src->uid;
+    dest->prog = src->prog;
+    dest->hasAlarmDateTime = src->hasAlarmDateTime;
+    dest->alarmDateTime = src->alarmDateTime;
+}
 
 

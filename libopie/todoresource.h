@@ -34,6 +34,7 @@ namespace Opie {
         virtual bool addEvent( const ToDoEvent& event ) = 0;
         virtual bool replaceEvent( const ToDoEvent& ) = 0;
         virtual bool removeEvent( const ToDoEvent& ) = 0;
+        virtual void removeAll() = 0;
     protected:
         QString appName()const;
 

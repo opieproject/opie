@@ -60,6 +60,11 @@ public:
     ToDoEvent(const ToDoEvent & );
 
     /**
+     *destructor
+     */
+    ~ToDoEvent();
+
+    /**
      * Is this event completed?
      */
     bool isCompleted() const;
@@ -122,12 +127,12 @@ public:
     /**
      * Returns the UID of the Todo
      */
-    int uid()const { return m_uid;};
+    int uid()const;
 
 
     QString extra(const  QString& )const;
 
-    QMap<QString, QString> extras()const { return m_extra; };
+    QMap<QString, QString> extras()const;
     /**
      * returns a list of apps which have related items
      */
@@ -217,7 +222,7 @@ public:
 
     bool match( const QRegExp &r )const;
 
-    void setUid(int id) {m_uid = id; };
+    void setUid(int id);
     bool operator<(const ToDoEvent &toDoEvent )const;
     bool operator<=(const ToDoEvent &toDoEvent )const;
     bool operator!=(const ToDoEvent &toDoEvent )const { return !(*this == toDoEvent); };
@@ -228,23 +233,14 @@ public:
 
  private:
     QString crossToString()const;
+    void deref();
     class ToDoEventPrivate;
+    struct ToDoEventData;
+    ToDoEventData *data;
+    void changeOrModify();
+    void copy( ToDoEventData* src,  ToDoEventData* dest );
     ToDoEventPrivate *d;
-    QDate m_date;
-    bool m_isCompleted:1;
-    bool m_hasDate:1;
-    int m_priority;
-    QStringList m_category;
-    QString m_desc;
-    QString m_sum;
-    QMap<QString, QString> m_extra;
-    QMap<QString, QArray<int> > m_relations;
-    int m_uid;
-    ushort m_prog;
 
-    /** Alarm Time stuff */
-    bool m_hasAlarmDateTime : 1;
-    QDateTime m_alarmDateTime;
     static Qtopia::UidGen m_gen;
 };
 };

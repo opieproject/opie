@@ -365,6 +365,9 @@ QString ToDoXMLResource::toString( const ToDoEvent& ev )const {
 
     return str;
 }
+void ToDoXMLResource::removeAll() {
+    m_events.clear();
+}
 /*
 bool FileToDoResource::save( const QString& name,
                              const QValueList<ToDoEvent>& m_todos ) {
