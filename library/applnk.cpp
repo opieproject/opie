@@ -49,21 +49,21 @@ static int bigSize = 32;
 
 static QString safeFileName(const QString& n)
 {
-    QString safename=n;
+ QString safename=n;
     safename.replace(QRegExp("[^0-9A-Za-z.]"),"_");
     safename.replace(QRegExp("^[^A-Za-z]*"),"");
     if ( safename.isEmpty() )
-	safename = "_";
+  safename = "_";
     return safename;
 }
 
 static bool prepareDirectories(const QString& lf)
 {
     if ( !QFile::exists(lf) ) {
-	// May need to create directories
-	QFileInfo fi(lf);
-	if ( system(("mkdir -p "+fi.dirPath(TRUE))) )
-	    return FALSE;
+  // May need to create directories
+  QFileInfo fi(lf);
+  if ( system(("mkdir -p "+fi.dirPath(TRUE))) )
+      return FALSE;
     }
     return TRUE;
 }
@@ -87,9 +87,9 @@ public:
 
     void updateCatListFromArray()
     {
-	Categories cat( 0 );
-	cat.load( categoryFileName() );
-	// we need to update the names for the mCat... to mCatList
+  Categories cat( 0 );
+  cat.load( categoryFileName() );
+  // we need to update the names for the mCat... to mCatList
         mCatList.clear();
         for (uint i = 0; i < mCat.count(); i++ )
             mCatList << cat.label("Document View", mCat[i] );
@@ -98,31 +98,31 @@ public:
 
     void setCatArrayDirty()
     {
-	mCat.resize(0);
+  mCat.resize(0);
     }
 
     void ensureCatArray()
     {
-	if ( mCat.count() > 0 || mCatList.count()==0 )
-	    return;
+  if ( mCat.count() > 0 || mCatList.count()==0 )
+      return;
 
-	Categories cat( 0 );
-	cat.load( categoryFileName() );
-	mCat.resize( mCatList.count() );
-	int i;
-	QStringList::ConstIterator it;
-	for ( i = 0, it = mCatList.begin(); it != mCatList.end();
-	      ++it, i++ ) {
+  Categories cat( 0 );
+  cat.load( categoryFileName() );
+  mCat.resize( mCatList.count() );
+  int i;
+  QStringList::ConstIterator it;
+  for ( i = 0, it = mCatList.begin(); it != mCatList.end();
+        ++it, i++ ) {
 
-	    bool number;
-	    int id = (*it).toInt( &number );
-	    if ( !number ) {
-		id = cat.id( "Document View", *it );
-		if ( id == 0 )
-		    id = cat.addCategory( "Document View", *it );
-	    }
-	    mCat[i] = id;
-	}
+      bool number;
+      int id = (*it).toInt( &number );
+      if ( !number ) {
+    id = cat.id( "Document View", *it );
+    if ( id == 0 )
+        id = cat.addCategory( "Document View", *it );
+      }
+      mCat[i] = id;
+  }
     }
 };
 
@@ -186,23 +186,23 @@ public:
     about the application:
     \table
     \header \i Get Function \i Set Function \i Short Description
-    \row \i \l name()	    \i \l setName()    \i application's name
-    \row \i \l pixmap()     \i \e none	    \i application's icon
-    \row \i \l bigPixmap()  \i \e none	    \i application's large icon
-    \row \i \e none	    \i setIcon()    \i sets the icon's filename
-    \row \i \l type() 	    \i \l setType()    \i see \link #Types Types\endlink above
-    \row \i \l rotation()   \i \e none	    \i 0, 90, 180 or 270 degrees
+    \row \i \l name()     \i \l setName()    \i application's name
+    \row \i \l pixmap()     \i \e none      \i application's icon
+    \row \i \l bigPixmap()  \i \e none      \i application's large icon
+    \row \i \e none     \i setIcon()    \i sets the icon's filename
+    \row \i \l type()       \i \l setType()    \i see \link #Types Types\endlink above
+    \row \i \l rotation()   \i \e none      \i 0, 90, 180 or 270 degrees
     \row \i \l comment()    \i \l setComment() \i text for the Details dialog
-    \row \i \l exec()	    \i \l setExec()    \i executable's filename
-    \row \i \l file()	    \i \e none	    \i document's filename
-    \row \i \l linkFile()   \i \l setLinkFile()	\i \e .desktop filename
-    \row \i \l mimeTypes()  \i \e none	    \i the mime types the application can view or edit
-    \row \i \l categories() \i \l setCategories()	\i \e{see the function descriptions}
-    \row \i \l fileKnown()  \i \e none	    \i see \link
+    \row \i \l exec()     \i \l setExec()    \i executable's filename
+    \row \i \l file()     \i \e none      \i document's filename
+    \row \i \l linkFile()   \i \l setLinkFile() \i \e .desktop filename
+    \row \i \l mimeTypes()  \i \e none      \i the mime types the application can view or edit
+    \row \i \l categories() \i \l setCategories() \i \e{see the function descriptions}
+    \row \i \l fileKnown()  \i \e none      \i see \link
 #files-and-links Files and Links\endlink above
-    \row \i \l linkFileKnown() \i \e none	    \i see \link
+    \row \i \l linkFileKnown() \i \e none     \i see \link
 #files-and-links Files and Links\endlink above
-    \row \i \l property()   \i \l setProperty()	\i any AppLnk property
+    \row \i \l property()   \i \l setProperty() \i any AppLnk property
     can be retrieved or set (if writeable) using these
     \endtable
 
@@ -370,56 +370,56 @@ AppLnk::AppLnk( const QString &file )
     QStringList sl;
     d = new AppLnkPrivate();
     if ( !file.isNull() ) {
-	Config config( file, Config::File );
+  Config config( file, Config::File );
 
-	if ( config.isValid() ) {
-	    config.setGroup( "Desktop Entry" );
+  if ( config.isValid() ) {
+      config.setGroup( "Desktop Entry" );
 
-	    mName = config.readEntry( "Name", file );
-	    mExec = config.readEntry( "Exec" );
-	    mType = config.readEntry( "Type", QString::null );
-	    mIconFile = config.readEntry( "Icon", QString::null );
-	    mRotation = config.readEntry( "Rotation", "" );
-	    mComment = config.readEntry( "Comment", QString::null );
-	    // MIME types are case-insensitive.
-	    mMimeTypes = config.readListEntry( "MimeType", ';' );
-	    for (QStringList::Iterator it=mMimeTypes.begin(); it!=mMimeTypes.end(); ++it)
-		*it = (*it).lower();
-	    mMimeTypeIcons = config.readListEntry( "MimeTypeIcons", ';' );
-	    mLinkFile = file;
-	    mFile = config.readEntry("File", QString::null);
-	    if ( !mExec. isEmpty ( )) {
-		mFile = QString::null;
-	    }
-	    else if ( mFile[0] != '/' ) {
-		int slash = file.findRev('/');
-		if ( slash >= 0 ) {
-		    mFile = file.left(slash) + '/' + mFile;
-		}
-	    }
-	    d->mCatList = config.readListEntry("Categories", ';');
-	    if ( d->mCatList[0].toInt() < -1 ) {
-		// numeric cats in file! convert to text
-		Categories cat( 0 );
-		cat.load( categoryFileName() );
-		d->mCat.resize( d->mCatList.count() );
-		int i;
-		QStringList::ConstIterator it;
-		for ( i = 0, it = d->mCatList.begin(); it != d->mCatList.end();
-		      ++it, i++ ) {
-		    bool number;
-		    int id = (*it).toInt( &number );
-		    if ( !number ) {
-			// convert from text
-			id = cat.id( "Document View", *it );
-			if ( id == 0 )
-			    id = cat.addCategory( "Document View", *it );
-		    }
-		    d->mCat[i] = id;
-		}
-		d->updateCatListFromArray();
-	    }
-	}
+      mName = config.readEntry( "Name", file );
+      mExec = config.readEntry( "Exec" );
+      mType = config.readEntry( "Type", QString::null );
+      mIconFile = config.readEntry( "Icon", QString::null );
+      mRotation = config.readEntry( "Rotation", "" );
+      mComment = config.readEntry( "Comment", QString::null );
+      // MIME types are case-insensitive.
+      mMimeTypes = config.readListEntry( "MimeType", ';' );
+      for (QStringList::Iterator it=mMimeTypes.begin(); it!=mMimeTypes.end(); ++it)
+    *it = (*it).lower();
+      mMimeTypeIcons = config.readListEntry( "MimeTypeIcons", ';' );
+      mLinkFile = file;
+      mFile = config.readEntry("File", QString::null);
+      if ( !mExec. isEmpty ( )) {
+    mFile = QString::null;
+      }
+      else if ( mFile[0] != '/' ) {
+    int slash = file.findRev('/');
+    if ( slash >= 0 ) {
+        mFile = file.left(slash) + '/' + mFile;
+    }
+      }
+      d->mCatList = config.readListEntry("Categories", ';');
+      if ( d->mCatList[0].toInt() < -1 ) {
+    // numeric cats in file! convert to text
+    Categories cat( 0 );
+    cat.load( categoryFileName() );
+    d->mCat.resize( d->mCatList.count() );
+    int i;
+    QStringList::ConstIterator it;
+    for ( i = 0, it = d->mCatList.begin(); it != d->mCatList.end();
+          ++it, i++ ) {
+        bool number;
+        int id = (*it).toInt( &number );
+        if ( !number ) {
+      // convert from text
+      id = cat.id( "Document View", *it );
+      if ( id == 0 )
+          id = cat.addCategory( "Document View", *it );
+        }
+        d->mCat[i] = id;
+    }
+    d->updateCatListFromArray();
+      }
+  }
     }
     mId = 0;
 }
@@ -428,9 +428,9 @@ AppLnk& AppLnk::operator=(const AppLnk &copy)
 {
     if ( this == &copy ) return *this;
     if ( mId )
-	qWarning("Deleting AppLnk that is in an AppLnkSet");
+  qWarning("Deleting AppLnk that is in an AppLnkSet");
     if ( d )
-	delete d;
+  delete d;
 
 
     mName = copy.mName;
@@ -463,27 +463,27 @@ AppLnk& AppLnk::operator=(const AppLnk &copy)
 */
 const QPixmap& AppLnk::pixmap( int pos, int size ) const {
     if ( d->mPixmaps[pos].isNull() ) {
-	AppLnk* that = (AppLnk*)this;
-	if ( mIconFile.isEmpty() ) {
-	    MimeType mt(type());
-	    that->d->mPixmaps[pos] = mt.pixmap();
-	    if ( that->d->mPixmaps[pos].isNull() )
-		that->d->mPixmaps[pos].convertFromImage(
-		    Resource::loadImage("UnknownDocument")
-			.smoothScale( size, size ) );
-	    return that->d->mPixmaps[pos];
-	}
-	QImage unscaledIcon = Resource::loadImage( that->mIconFile );
-	if ( unscaledIcon.isNull() ) {
-	    qDebug( "Cannot find icon: %s", that->mIconFile.latin1() );
-	    that->d->mPixmaps[pos].convertFromImage(
-		    Resource::loadImage("UnknownDocument")
-			.smoothScale( size, size ) );
-	} else {
-	    that->d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-	    that->d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-	}
-	return that->d->mPixmaps[pos];
+  AppLnk* that = (AppLnk*)this;
+  if ( mIconFile.isEmpty() ) {
+      MimeType mt(type());
+      that->d->mPixmaps[pos] = mt.pixmap();
+      if ( that->d->mPixmaps[pos].isNull() )
+    that->d->mPixmaps[pos].convertFromImage(
+        Resource::loadImage("UnknownDocument")
+      .smoothScale( size, size ) );
+      return that->d->mPixmaps[pos];
+  }
+  QImage unscaledIcon = Resource::loadImage( that->mIconFile );
+  if ( unscaledIcon.isNull() ) {
+    //  qDebug( "Cannot find icon: %s", that->mIconFile.latin1() );
+      that->d->mPixmaps[pos].convertFromImage(
+        Resource::loadImage("UnknownDocument")
+      .smoothScale( size, size ) );
+  } else {
+      that->d->mPixmaps[0].convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+      that->d->mPixmaps[1].convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+  }
+  return that->d->mPixmaps[pos];
     }
     return d->mPixmaps[pos];
 }
@@ -522,13 +522,13 @@ const QPixmap& AppLnk::bigPixmap() const
 QString AppLnk::type() const
 {
     if ( mType.isNull() ) {
-	AppLnk* that = (AppLnk*)this;
-	QString f = file();
-	if ( !f.isNull() ) {
-	    MimeType mt(f);
-	    that->mType = mt.id();
-	    return that->mType;
-	}
+  AppLnk* that = (AppLnk*)this;
+  QString f = file();
+  if ( !f.isNull() ) {
+      MimeType mt(f);
+      that->mType = mt.id();
+      return that->mType;
+  }
     }
     return mType;
 }
@@ -541,39 +541,39 @@ QString AppLnk::type() const
 QString AppLnk::file() const
 {
     if ( mExec.isEmpty ( ) && mFile.isNull() ) {
-	AppLnk* that = (AppLnk*)this;
-	QString ext = MimeType(mType).extension();
-	if ( !ext.isEmpty() )
-	    ext = "." + ext;
-	if ( !mLinkFile.isEmpty() ) {
-	    that->mFile =
-		mLinkFile.right(8)==".desktop" // 8 = strlen(".desktop")
-		    ? mLinkFile.left(mLinkFile.length()-8) : mLinkFile;
-	qDebug("mFile now == %s", mFile.latin1());
-	} else if ( mType.contains('/') ) {
-	    that->mFile =
-		QString(getenv("HOME"))+"/Documents/"+mType+"/"+safeFileName(that->mName);
+  AppLnk* that = (AppLnk*)this;
+  QString ext = MimeType(mType).extension();
+  if ( !ext.isEmpty() )
+      ext = "." + ext;
+  if ( !mLinkFile.isEmpty() ) {
+      that->mFile =
+    mLinkFile.right(8)==".desktop" // 8 = strlen(".desktop")
+        ? mLinkFile.left(mLinkFile.length()-8) : mLinkFile;
+  qDebug("mFile now == %s", mFile.latin1());
+  } else if ( mType.contains('/') ) {
+      that->mFile =
+    QString(getenv("HOME"))+"/Documents/"+mType+"/"+safeFileName(that->mName);
             /*
              * A file with the same name or a .desktop file already exists
              */
-	    if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) {
-		int n=1;
-		QString nn;
-		while (QFile::exists((nn=(that->mFile+"_"+QString::number(n)))+ext)
-			|| QFile::exists(nn+".desktop"))
-		    n++;
-		that->mFile = nn;
-	    }
-	    that->mLinkFile = that->mFile+".desktop";
-	    that->mFile += ext;
-	}
-	prepareDirectories(that->mFile);
-	if ( !that->mFile.isEmpty() ) {
-	    QFile f(that->mFile);
-	    if ( !f.open(IO_WriteOnly) )
-		that->mFile = QString::null;
-	    return that->mFile;
-	}
+      if ( QFile::exists(that->mFile+ext) || QFile::exists(that->mFile+".desktop") ) {
+    int n=1;
+    QString nn;
+    while (QFile::exists((nn=(that->mFile+"_"+QString::number(n)))+ext)
+      || QFile::exists(nn+".desktop"))
+        n++;
+    that->mFile = nn;
+      }
+      that->mLinkFile = that->mFile+".desktop";
+      that->mFile += ext;
+  }
+  prepareDirectories(that->mFile);
+  if ( !that->mFile.isEmpty() ) {
+      QFile f(that->mFile);
+      if ( !f.open(IO_WriteOnly) )
+    that->mFile = QString::null;
+      return that->mFile;
+  }
     }
     return mFile;
 }
@@ -586,21 +586,21 @@ QString AppLnk::file() const
 QString AppLnk::linkFile() const
 {
     if ( mLinkFile.isNull() ) {
-	AppLnk* that = (AppLnk*)this;
-	if ( type().contains('/') ) {
-	    StorageInfo storage;
-	    const FileSystem *fs = storage.fileSystemOf( that->mFile );
+  AppLnk* that = (AppLnk*)this;
+  if ( type().contains('/') ) {
+      StorageInfo storage;
+      const FileSystem *fs = storage.fileSystemOf( that->mFile );
             /* tmpfs + and ramfs are available too but not removable
              * either we fix storage or add this
              */
-	    if ( fs && ( fs->isRemovable() || fs->disk() == "/dev/mtdblock6" || fs->disk() == "tmpfs") ) {
-		that->mLinkFile = fs->path();
-	    } else
-		that->mLinkFile = getenv( "HOME" );
-	    that->mLinkFile += "/Documents/"+type()+"/"+safeFileName(that->mName);
+      if ( fs && ( fs->isRemovable() || fs->disk() == "/dev/mtdblock6" || fs->disk() == "tmpfs") ) {
+    that->mLinkFile = fs->path();
+      } else
+    that->mLinkFile = getenv( "HOME" );
+      that->mLinkFile += "/Documents/"+type()+"/"+safeFileName(that->mName);
 
             /* the desktop file exists make sure we don't point to the same file */
-	    if ( QFile::exists(that->mLinkFile+".desktop") ) {
+      if ( QFile::exists(that->mLinkFile+".desktop") ) {
                 AppLnk lnk( that->mLinkFile + ".desktop" );
 
                 /* the linked is different */
@@ -616,11 +616,11 @@ QString AppLnk::linkFile() const
                     }
                     that->mLinkFile = nn;
                 }
-	    }
-	    that->mLinkFile += ".desktop";
-	    storeLink();
-	}
-	return that->mLinkFile;
+      }
+      that->mLinkFile += ".desktop";
+      storeLink();
+  }
+  return that->mLinkFile;
     }
     return mLinkFile;
 }
@@ -658,9 +658,9 @@ AppLnk::AppLnk( const AppLnk &copy )
 AppLnk::~AppLnk()
 {
     if ( mId )
-	qWarning("Deleting AppLnk that is in an AppLnkSet");
+  qWarning("Deleting AppLnk that is in an AppLnkSet");
     if ( d )
-	delete d;
+  delete d;
 }
 
 /*!
@@ -684,16 +684,16 @@ void AppLnk::execute(const QStringList& args) const
 {
 #ifdef Q_WS_QWS
     if ( !mRotation.isEmpty() ) {
-	// ######## this will only work in the server
-	int rot = QPEApplication::defaultRotation();
-	rot = (rot+mRotation.toInt())%360;
-	QCString old = getenv("QWS_DISPLAY");
-	setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
-	invoke(args);
-	setenv("QWS_DISPLAY", old.data(), 1);
+  // ######## this will only work in the server
+  int rot = QPEApplication::defaultRotation();
+  rot = (rot+mRotation.toInt())%360;
+  QCString old = getenv("QWS_DISPLAY");
+  setenv("QWS_DISPLAY", QString("Transformed:Rot%1:0").arg(rot), 1);
+  invoke(args);
+  setenv("QWS_DISPLAY", old.data(), 1);
     } else
 #endif
-	invoke(args);
+  invoke(args);
 }
 
 /*!
@@ -726,7 +726,7 @@ void AppLnk::setExec( const QString& exec )
 */
 void AppLnk::setRotation ( const QString &rot )
 {
-	mRotation = rot;
+  mRotation = rot;
 }
 #endif
 
@@ -853,7 +853,7 @@ bool AppLnk::writeLink() const
     // Only re-writes settable parts
     QString lf = linkFile();
     if ( !ensureLinkExists() )
-	return FALSE;
+  return FALSE;
     storeLink();
     return TRUE;
 }
@@ -869,19 +869,19 @@ void AppLnk::storeLink() const
     if ( !mIconFile.isNull() ) config.writeEntry("Icon",mIconFile);
     config.writeEntry("Type",type());
     if(!rotation().isEmpty())
-	config.writeEntry("Rotation",rotation());
+  config.writeEntry("Rotation",rotation());
     else
-	config.removeEntry("Rotation");
+  config.removeEntry("Rotation");
     if ( !mComment.isNull() ) config.writeEntry("Comment",mComment);
     QString f = file();
     int i = 0;
     while ( i < (int)f.length() && i < (int)mLinkFile.length() && f[i] == mLinkFile[i] )
-	i++;
+  i++;
     while ( i && f[i] != '/' )
-	i--;
+  i--;
     // simple case where in the same directory
     if ( mLinkFile.find( '/', i + 1 ) < 0 )
-	f = f.mid(i+1);
+  f = f.mid(i+1);
     // ### could do relative ie ../../otherDocs/file.doc
     config.writeEntry("File",f);
     config.writeEntry( "Categories", d->mCatList, ';' );
@@ -900,8 +900,8 @@ void AppLnk::storeLink() const
 void AppLnk::setProperty(const QString& key, const QString& value)
 {
     if ( ensureLinkExists() ) {
-	Config cfg(linkFile(), Config::File);
-	cfg.writeEntry(key,value);
+  Config cfg(linkFile(), Config::File);
+  cfg.writeEntry(key,value);
     }
 }
 
@@ -914,7 +914,7 @@ QString AppLnk::property(const QString& key) const
 {
     QString lf = linkFile();
     if ( !QFile::exists(lf) )
-	return QString::null;
+  return QString::null;
     Config cfg(lf, Config::File);
     return cfg.readEntry(key);
 }
@@ -951,18 +951,18 @@ void AppLnk::removeFiles()
 {
     bool valid = isValid();
     if ( !valid || !linkFileKnown() || QFile::remove(linkFile()) ) {
-	if ( QFile::remove(file()) ) {
+  if ( QFile::remove(file()) ) {
 #ifndef QT_NO_COP
-	    QCopEnvelope e("QPE/System", "linkChanged(QString)");
-	    if ( linkFileKnown() )
-		e << linkFile();
-	    else
-		e << file();
+      QCopEnvelope e("QPE/System", "linkChanged(QString)");
+      if ( linkFileKnown() )
+    e << linkFile();
+      else
+    e << file();
 #endif
-	} else if ( valid ) {
-	    // restore link
-	    writeLink();
-	}
+  } else if ( valid ) {
+      // restore link
+      writeLink();
+  }
     }
 }
 
@@ -975,8 +975,8 @@ void AppLnk::removeLinkFile()
 {
     if ( isValid() && linkFileKnown() && QFile::remove(linkFile()) ) {
 #ifndef QT_NO_COP
-	QCopEnvelope e("QPE/System", "linkChanged(QString)");
-	e << linkFile();
+  QCopEnvelope e("QPE/System", "linkChanged(QString)");
+  e << linkFile();
 #endif
     }
 }
@@ -985,9 +985,9 @@ class AppLnkSetPrivate {
 public:
     AppLnkSetPrivate()
     {
-	typPix.setAutoDelete(TRUE);
-	typPixBig.setAutoDelete(TRUE);
-	typName.setAutoDelete(TRUE);
+  typPix.setAutoDelete(TRUE);
+  typPixBig.setAutoDelete(TRUE);
+  typName.setAutoDelete(TRUE);
     }
 
     QDict<QPixmap> typPix;
@@ -1052,9 +1052,9 @@ void AppLnkSet::detachChildren()
 {
     QListIterator<AppLnk> it( mApps );
     for ( ; it.current(); ) {
-	AppLnk* a = *it;
-	++it;
-	a->mId = 0;
+  AppLnk* a = *it;
+  ++it;
+  a->mId = 0;
     }
     mApps.clear();
 }
@@ -1068,10 +1068,10 @@ AppLnkSet::~AppLnkSet()
 {
     QListIterator<AppLnk> it( mApps );
     for ( ; it.current(); ) {
-	AppLnk* a = *it;
-	++it;
-	a->mId = 0;
-	delete a;
+  AppLnk* a = *it;
+  ++it;
+  a->mId = 0;
+  delete a;
     }
     delete d;
 }
@@ -1080,60 +1080,61 @@ void AppLnkSet::findChildren(const QString &dr, const QString& typ, const QStrin
 {
     depth++;
     if ( depth > 10 )
-	return;
+  return;
 
     QDir dir( dr );
     QString typNameLocal = typName;
 
     if ( dir.exists( ".directory" ) ) {
-	Config config( dr + "/.directory", Config::File );
-	config.setGroup( "Desktop Entry" );
-	typNameLocal = config.readEntry( "Name", typNameLocal );
-	if ( !typ.isEmpty() ) {
-	    QString iconFile = config.readEntry( "Icon", "AppsIcon" );
-	    QImage unscaledIcon = Resource::loadImage( iconFile );
-	    QPixmap pm, bpm;
-	    pm.convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
-	    bpm.convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
-	    d->typPix.insert(typ, new QPixmap(pm));
-	    d->typPixBig.insert(typ, new QPixmap(bpm));
-	    d->typName.insert(typ, new QString(typNameLocal));
-	}
+  Config config( dr + "/.directory", Config::File );
+  config.setGroup( "Desktop Entry" );
+  typNameLocal = config.readEntry( "Name", typNameLocal );
+  if ( !typ.isEmpty() ) {
+      QString iconFile = config.readEntry( "Icon", "AppsIcon" );
+      QImage unscaledIcon = Resource::loadImage( iconFile );
+      QPixmap pm, bpm;
+      pm.convertFromImage( unscaledIcon.smoothScale( smallSize, smallSize ) );
+      bpm.convertFromImage( unscaledIcon.smoothScale( bigSize, bigSize ) );
+      d->typPix.insert(typ, new QPixmap(pm));
+      d->typPixBig.insert(typ, new QPixmap(bpm));
+      d->typName.insert(typ, new QString(typNameLocal));
+  }
     }
 
     const QFileInfoList *list = dir.entryInfoList();
     if ( list ) {
-	QFileInfo* fi;
-	bool cadded=FALSE;
-	for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
-	    QString bn = fi->fileName();
-	    if ( bn[0] != '.' && bn != "CVS" ) {
-		if ( fi->isDir() ) {
-		    QString c = typ.isNull() ? bn : typ+"/"+bn;
-		    QString d = typNameLocal.isNull() ? bn : typNameLocal+"/"+bn;
-		    findChildren(fi->filePath(), c, d, depth );
-		} else {
-		    if ( fi->extension(FALSE) == "desktop" ) {
-			AppLnk* app = new AppLnk( fi->filePath() );
+  QFileInfo* fi;
+  bool cadded=FALSE;
+  for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
+      QString bn = fi->fileName();
+//      qDebug("findChildren "+bn);
+      if ( bn[0] != '.' && bn != "CVS" ) {
+    if ( fi->isDir() ) {
+        QString c = typ.isNull() ? bn : typ+"/"+bn;
+        QString d = typNameLocal.isNull() ? bn : typNameLocal+"/"+bn;
+        findChildren(fi->filePath(), c, d, depth );
+    } else {
+        if ( fi->extension(FALSE) == "desktop" ) {
+      AppLnk* app = new AppLnk( fi->filePath() );
 #ifdef QT_NO_QWS_MULTIPROCESS
-			if ( !Global::isBuiltinCommand( app->exec() ) )
-			    delete app;
-			else
+      if ( !Global::isBuiltinCommand( app->exec() ) )
+          delete app;
+      else
 #endif
-			{
-			    if ( !typ.isEmpty() ) {
-				if ( !cadded ) {
-				    typs.append(typ);
-				    cadded = TRUE;
-				}
-				app->setType(typ);
-			    }
-			    add(app);
-			}
-		    }
-		}
-	    }
-	}
+      {
+          if ( !typ.isEmpty() ) {
+        if ( !cadded ) {
+            typs.append(typ);
+            cadded = TRUE;
+        }
+        app->setType(typ);
+          }
+          add(app);
+      }
+        }
+    }
+      }
+  }
     }
 }
 
@@ -1146,11 +1147,11 @@ void AppLnkSet::findChildren(const QString &dr, const QString& typ, const QStrin
 void AppLnkSet::add( AppLnk *f )
 {
     if ( f->mId == 0 ) {
-	AppLnk::lastId++;
-	f->mId = AppLnk::lastId;
-	mApps.append( f );
+  AppLnk::lastId++;
+  f->mId = AppLnk::lastId;
+  mApps.append( f );
     } else {
-	qWarning("Attempt to add an AppLnk twice");
+  qWarning("Attempt to add an AppLnk twice");
     }
 }
 
@@ -1164,8 +1165,8 @@ void AppLnkSet::add( AppLnk *f )
 bool AppLnkSet::remove( AppLnk *f )
 {
     if ( mApps.remove( f ) ) {
-	f->mId = 0;
-	return TRUE;
+  f->mId = 0;
+  return TRUE;
     }
     return FALSE;
 }
@@ -1215,9 +1216,9 @@ const AppLnk *AppLnkSet::find( int id ) const
     QListIterator<AppLnk> it( children() );
 
     for ( ; it.current(); ++it ) {
-	const AppLnk *app = it.current();
-	if ( app->id() == id )
-	    return app;
+  const AppLnk *app = it.current();
+  if ( app->id() == id )
+      return app;
     }
 
     return 0;
@@ -1231,9 +1232,9 @@ const AppLnk *AppLnkSet::findExec( const QString& exec ) const
     QListIterator<AppLnk> it( children() );
 
     for ( ; it.current(); ++it ) {
-	const AppLnk *app = it.current();
-	if ( app->exec() == exec )
-	    return app;
+  const AppLnk *app = it.current();
+  if ( app->exec() == exec )
+      return app;
     }
 
     return 0;
@@ -1281,35 +1282,34 @@ DocLnkSet::DocLnkSet( const QString &directory, const QString& mimefilter ) :
     QStringList subFilter = QStringList::split(";", mimefilter);
     QValueList<QRegExp> mimeFilters;
     for( QStringList::Iterator it = subFilter.begin(); it != subFilter.end(); ++ it )
-	mimeFilters.append( QRegExp(*it, FALSE, TRUE) );
+  mimeFilters.append( QRegExp(*it, FALSE, TRUE) );
 
     findChildren(directory, mimeFilters, reference);
 
     const QList<DocLnk> &list = children();
     for ( QListIterator<DocLnk> it( list ); it.current(); ++it ) {
-	reference.remove( (*it)->file() );
+  reference.remove( (*it)->file() );
     }
-
     for ( QDictIterator<void> dit(reference); dit.current(); ++dit ) {
-	if ( dit.current() == (void*)2 ) {
-	    // Unreferenced, make an unwritten link
-	    DocLnk* dl = new DocLnk;
-	    QFileInfo fi( dit.currentKey() );
-	    dl->setFile(fi.filePath());
-	    dl->setName(fi.baseName());
-	    // #### default to current path?
-	    // dl->setCategories( ... );
-	    bool match = mimefilter.isNull();
-	    if ( !match )
-		for( QValueList<QRegExp>::Iterator it = mimeFilters.begin(); it != mimeFilters.end() && !match; ++ it )
-		    if ( (*it).match(dl->type()) >= 0 )
-			match = TRUE;
-	    if ( match /* && dl->type() != "application/octet-stream" */
-		    && !!dl->exec() )
-		add(dl);
-	    else
-		delete dl;
-	}
+  if ( dit.current() == (void*)2 ) {
+      // Unreferenced, make an unwritten link
+      DocLnk* dl = new DocLnk;
+      QFileInfo fi( dit.currentKey() );
+      dl->setFile(fi.filePath());
+      dl->setName(fi.baseName());
+      // #### default to current path?
+      // dl->setCategories( ... );
+      bool match = mimefilter.isNull();
+      if ( !match )
+    for( QValueList<QRegExp>::Iterator it = mimeFilters.begin(); it != mimeFilters.end() && !match; ++ it )
+        if ( (*it).match(dl->type()) >= 0 )
+      match = TRUE;
+      if ( match /* && dl->type() != "application/octet-stream" */
+        && !!dl->exec() )
+    add(dl);
+      else
+    delete dl;
+  }
     }
 }
 
@@ -1321,11 +1321,11 @@ DocLnkSet::DocLnkSet( const QString &directory, const QString& mimefilter ) :
 void DocLnkSet::appendFrom( DocLnkSet& other )
 {
     if ( &other == this )
-	return;
+  return;
     QListIterator<AppLnk> it( other.mApps );
     for ( ; it.current(); ) {
-	mApps.append(*it);
-	++it;
+  mApps.append(*it);
+  ++it;
     }
     other.mApps.clear();
 }
@@ -1334,7 +1334,7 @@ void DocLnkSet::findChildren(const QString &dr, const QValueList<QRegExp> &mimeF
 {
     depth++;
     if ( depth > 10 )
-	return;
+  return;
 
     QDir dir( dr );
 
@@ -1343,45 +1343,45 @@ void DocLnkSet::findChildren(const QString &dr, const QValueList<QRegExp> &mimeF
      * in this case to be discussed
      */
     if ( dir.exists( ".Qtopia-ignore" ) )
-	return;
+  return;
 
     const QFileInfoList *list = dir.entryInfoList();
     if ( list ) {
-	QFileInfo* fi;
-	for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
-	    QString bn = fi->fileName();
-	    if ( bn[0] != '.' ) {
-		if ( fi->isDir()  ) {
-		    if ( bn != "CVS" && bn != "Qtopia" && bn != "QtPalmtop" )
-			findChildren(fi->filePath(), mimeFilters, reference, depth);
-		} else {
-		    if ( fi->extension(FALSE) == "desktop" ) {
-			DocLnk* dl = new DocLnk( fi->filePath() );
-			QFileInfo fi2(dl->file());
-			bool match = FALSE;
-			if ( !fi2.exists() ) {
-			    dir.remove( dl->file() );
-			}
-			if ( mimeFilters.count() == 0 ) {
-			    add( dl );
-			    match = TRUE;
-			} else {
-			    for( QValueList<QRegExp>::ConstIterator it = mimeFilters.begin(); it != mimeFilters.end(); ++ it ) {
-				if ( (*it).match(dl->type()) >= 0 ) {
-				    add(dl);
-				    match = TRUE;
-				}
-			    }
-			}
-			if ( !match )
-			    delete dl;
-		    } else {
-			if ( !reference.find(fi->fileName()) )
-			    reference.insert(fi->filePath(), (void*)2);
-		    }
-		}
-	    }
-	}
+  QFileInfo* fi;
+  for ( QFileInfoListIterator it(*list); (fi=*it); ++it ) {
+      QString bn = fi->fileName();
+      if ( bn[0] != '.' ) {
+    if ( fi->isDir()  ) {
+        if ( bn != "CVS" && bn != "Qtopia" && bn != "QtPalmtop" )
+      findChildren(fi->filePath(), mimeFilters, reference, depth);
+    } else {
+        if ( fi->extension(FALSE) == "desktop" ) {
+      DocLnk* dl = new DocLnk( fi->filePath() );
+      QFileInfo fi2(dl->file());
+      bool match = FALSE;
+      if ( !fi2.exists() ) {
+          dir.remove( dl->file() );
+      }
+      if ( mimeFilters.count() == 0 ) {
+          add( dl );
+          match = TRUE;
+      } else {
+          for( QValueList<QRegExp>::ConstIterator it = mimeFilters.begin(); it != mimeFilters.end(); ++ it ) {
+        if ( (*it).match(dl->type()) >= 0 ) {
+            add(dl);
+            match = TRUE;
+        }
+          }
+      }
+      if ( !match )
+          delete dl;
+        } else {
+      if ( !reference.find(fi->fileName()) )
+          reference.insert(fi->filePath(), (void*)2);
+        }
+    }
+      }
+  }
     }
 }
 
@@ -1422,31 +1422,31 @@ void DocLnk::init(const QString &file)
 {
     if ( isValid() ) {
 #ifndef FORCED_DIR_STRUCTURE_WAY
-	if ( mType.isNull() )
-	    // try to infer it
+  if ( mType.isNull() )
+      // try to infer it
 #endif
-	{
-	    int s0 = file.findRev('/');
-	    if ( s0 > 0 ) {
-		int s1 = file.findRev('/',s0-1);
-		if ( s1 > 0 ) {
-		    int s2 = file.findRev('/',s1-1);
-		    if ( s2 > 0 ) {
-			mType = file.mid(s2+1,s0-s2-1);
-		    }
-		}
-	    }
-	}
+  {
+      int s0 = file.findRev('/');
+      if ( s0 > 0 ) {
+    int s1 = file.findRev('/',s0-1);
+    if ( s1 > 0 ) {
+        int s2 = file.findRev('/',s1-1);
+        if ( s2 > 0 ) {
+      mType = file.mid(s2+1,s0-s2-1);
+        }
+    }
+      }
+  }
     } else if ( QFile::exists(file) ) {
-	QString n = file;
-	n.replace(QRegExp(".*/"),"");
-	n.replace(QRegExp("\\..*"),"");
-	setName( n );
-	setFile( file );
+  QString n = file;
+  n.replace(QRegExp(".*/"),"");
+  n.replace(QRegExp("\\..*"),"");
+  setName( n );
+  setFile( file );
     }
     MimeType mt(mType);
     if( mt.application() )
-	mExec = mt.application()->exec();
+  mExec = mt.application()->exec();
 }
 
 /*!
@@ -1472,9 +1472,9 @@ QString DocLnk::exec() const
     MimeType mt(type());
     const AppLnk* app = mt.application();
     if ( app )
-	return app->exec();
+  return app->exec();
     else
-	return QString::null;
+  return QString::null;
 }
 
 /*!
@@ -1485,12 +1485,12 @@ void DocLnk::invoke(const QStringList& args) const
     MimeType mt(type());
     const AppLnk* app = mt.application();
     if ( app ) {
-	QStringList a = args;
-	if ( linkFileKnown() && QFile::exists( linkFile() ) )
-	    a.append(linkFile());
-	else
-	    a.append(file());
-	app->execute(a);
+  QStringList a = args;
+  if ( linkFileKnown() && QFile::exists( linkFile() ) )
+      a.append(linkFile());
+  else
+      a.append(file());
+  app->execute(a);
     }
 }
 
