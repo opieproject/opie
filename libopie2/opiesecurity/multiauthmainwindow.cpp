@@ -130,6 +130,7 @@ void MultiauthMainWindow::proceed() {
         }
     }
 }
+}
 
 /** When we don't show explanatory screens and we succeed authentication,
  * as early as during the proceed() call of the constructor, the caller must know
