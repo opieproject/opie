@@ -12,6 +12,7 @@ LIBS += -lqpe -Wl,-export-dynamic
 TRANSLATIONS = ../i18n/pt_BR/calc.ts
 TRANSLATIONS   += ../i18n/de/calc.ts
 TRANSLATIONS   += ../i18n/en/calc.ts
+TRANSLATIONS   += ../i18n/sl/calc.ts
 TRANSLATIONS   += ../i18n/hu/calc.ts
 TRANSLATIONS   += ../i18n/fr/calc.ts
 TRANSLATIONS   += ../i18n/ja/calc.ts

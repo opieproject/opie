@@ -9,4 +9,14 @@ INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
 LIBS            += -lqpe
 
-TRANSLATIONS += ../../i18n/pt_BR/opieftp.ts
+TRANSLATIONS    = ../../i18n/pt_BR/opieftp.ts
+TRANSLATIONS   += ../../i18n/de/opieftp.ts
+TRANSLATIONS   += ../../i18n/en/opieftp.ts
+TRANSLATIONS   += ../../i18n/hu/opieftp.ts
+TRANSLATIONS   += ../../i18n/sl/opieftp.ts
+TRANSLATIONS   += ../../i18n/ja/opieftp.ts
+TRANSLATIONS   += ../../i18n/ko/opieftp.ts
+TRANSLATIONS   += ../../i18n/no/opieftp.ts
+TRANSLATIONS   += ../../i18n/zh_CN/opieftp.ts
+TRANSLATIONS   += ../../i18n/zh_TW/opieftp.ts
+TRANSLATIONS   += ../../i18n/fr/opieftp.ts

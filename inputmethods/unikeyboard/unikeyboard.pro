@@ -9,5 +9,14 @@ DEPENDPATH      += ../$(OPIEDIR)/include ../../launcher
 LIBS            += -lqpe
 VERSION		= 1.0.0
 
-TRANSLATIONS = ../../i18n/de/libqunikeyboard.ts
-TRANSLATIONS += ../../i18n/pt_BR/libqunikeyboard.ts
+TRANSLATIONS    = ../../i18n/pt_BR/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/de/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/en/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/hu/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/sl/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/ja/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/ko/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/no/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/zh_CN/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/zh_TW/libqunikeyboard.ts
+TRANSLATIONS   += ../../i18n/fr/libqunikeyboard.ts

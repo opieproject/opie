@@ -15,6 +15,7 @@ TRANSLATIONS   += ../i18n/hu/qasteroids.ts
 TRANSLATIONS   += ../i18n/fr/qasteroids.ts
 TRANSLATIONS   += ../i18n/ja/qasteroids.ts
 TRANSLATIONS   += ../i18n/ko/qasteroids.ts
+TRANSLATIONS   += ../i18n/sl/qasteroids.ts
 TRANSLATIONS   += ../i18n/no/qasteroids.ts
 TRANSLATIONS   += ../i18n/zh_CN/qasteroids.ts
 TRANSLATIONS   += ../i18n/zh_TW/qasteroids.ts

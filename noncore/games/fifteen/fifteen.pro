@@ -14,6 +14,7 @@ TRANSLATIONS   += ../i18n/de/fifteen.ts
 TRANSLATIONS   += ../i18n/en/fifteen.ts
 TRANSLATIONS   += ../i18n/hu/fifteen.ts
 TRANSLATIONS   += ../i18n/ja/fifteen.ts
+TRANSLATIONS   += ../i18n/sl/fifteen.ts
 TRANSLATIONS   += ../i18n/ko/fifteen.ts
 TRANSLATIONS   += ../i18n/fr/fifteen.ts
 TRANSLATIONS   += ../i18n/no/fifteen.ts

@@ -41,6 +41,14 @@ LIBS            += -lqpe
 
 TARGET		= datebook
 
-TRANSLATIONS = ../i18n/de/datebook.ts
-TRANSLATIONS += ../i18n/fr/datebook.ts
-TRANSLATIONS += ../i18n/pt_BR/datebook.ts
+TRANSLATIONS    = ../i18n/pt_BR/datebook.ts
+TRANSLATIONS   += ../i18n/de/datebook.ts
+TRANSLATIONS   += ../i18n/en/datebook.ts
+TRANSLATIONS   += ../i18n/hu/datebook.ts
+TRANSLATIONS   += ../i18n/sl/datebook.ts
+TRANSLATIONS   += ../i18n/ja/datebook.ts
+TRANSLATIONS   += ../i18n/ko/datebook.ts
+TRANSLATIONS   += ../i18n/no/datebook.ts
+TRANSLATIONS   += ../i18n/zh_CN/datebook.ts
+TRANSLATIONS   += ../i18n/zh_TW/datebook.ts
+TRANSLATIONS   += ../i18n/fr/datebook.ts

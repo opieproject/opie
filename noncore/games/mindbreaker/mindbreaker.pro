@@ -15,6 +15,7 @@ TRANSLATIONS   += ../i18n/en/mindbreaker.ts
 TRANSLATIONS   += ../i18n/hu/mindbreaker.ts
 TRANSLATIONS   += ../i18n/fr/mindbreaker.ts
 TRANSLATIONS   += ../i18n/ja/mindbreaker.ts
+TRANSLATIONS   += ../i18n/sl/mindbreaker.ts
 TRANSLATIONS   += ../i18n/ko/mindbreaker.ts
 TRANSLATIONS   += ../i18n/no/mindbreaker.ts
 TRANSLATIONS   += ../i18n/zh_CN/mindbreaker.ts

@@ -11,4 +11,14 @@ DEPENDPATH      +=  ../$(OPIEDIR)/include ..
 LIBS            +=  -lqpe -lm
 VERSION   =   1.0.0
 
-TRANSLATIONS = ../../i18n/pt_BR/libmadplugin.ts
+TRANSLATIONS    = ../../i18n/pt_BR/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/de/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/en/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/hu/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/sl/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/ja/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/ko/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/no/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/zh_CN/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/zh_TW/libmadplugin.ts
+TRANSLATIONS   += ../../i18n/fr/libmadplugin.ts

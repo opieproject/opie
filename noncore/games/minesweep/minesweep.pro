@@ -18,6 +18,7 @@ TRANSLATIONS   += ../i18n/hu/minesweep.ts
 TRANSLATIONS   += ../i18n/ja/minesweep.ts
 TRANSLATIONS   += ../i18n/fr/minesweep.ts
 TRANSLATIONS   += ../i18n/ko/minesweep.ts
+TRANSLATIONS   += ../i18n/sl/minesweep.ts
 TRANSLATIONS   += ../i18n/no/minesweep.ts
 TRANSLATIONS   += ../i18n/zh_CN/minesweep.ts
 TRANSLATIONS   += ../i18n/zh_TW/minesweep.ts
