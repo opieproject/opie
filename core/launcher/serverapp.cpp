@@ -20,11 +20,11 @@
 
 #include "serverapp.h"
 
+#include <opie/odevice.h>
+
 #include <qtopia/password.h>
 #include <qtopia/config.h>
 #include <qtopia/power.h>
-#include <qtopia/devicebuttonmanager.h>
-#include <qtopia/pluginloader.h>
 
 #ifdef Q_WS_QWS
 #include <qtopia/qcopenvelope_qws.h>
@@ -48,59 +48,40 @@
 #include <qpixmapcache.h>
 
 #include <stdlib.h>
+#include "screensaver.h"
 
 static ServerApplication *serverApp = 0;
 static int loggedin=0;
 
+using namespace Opie;
 
+QCopKeyRegister::QCopKeyRegister()
+    : m_keyCode( 0 ) {
+}
 
-/*  Apply light/power settings for current power source */
-static void applyLightSettings(PowerStatus *p)
-{
-    int initbright, intervalDim, intervalLightOff, intervalSuspend;
-    bool dim, lightoff, suspend;
+QCopKeyRegister::QCopKeyRegister( int k, const QCString& c, const QCString& m )
+    :m_keyCode( k ), m_channel( c ), m_message( m ) {
+}
 
-    {
-	Config config("qpe");
-	bool defsus;
-	if ( p->acStatus() == PowerStatus::Online ) {
-	    config.setGroup("ExternalPower");
-	    defsus = FALSE;
-	} else {
-	    config.setGroup("BatteryPower");
-	    defsus = TRUE;
-	}
+int QCopKeyRegister::keyCode()const {
+    return m_keyCode;
+}
 
-	intervalDim = config.readNumEntry( "Interval_Dim", 20 );
-	intervalLightOff = config.readNumEntry("Interval_LightOff", 30);
-	intervalSuspend = config.readNumEntry("Interval", 240);
-	initbright = config.readNumEntry("Brightness", 255);
-	dim = config.readBoolEntry("Dim", TRUE);
-	lightoff = config.readBoolEntry("LightOff", FALSE );
-	suspend = config.readBoolEntry("Suspend", defsus );
+QCString QCopKeyRegister::channel()const {
+    return m_channel;
+}
 
-	/*	For compability	*/
-	config.setGroup("Screensaver");
-	config.writeEntry( "Dim", dim );
-	config.writeEntry( "LightOff", lightoff );
-	config.writeEntry( "Suspend", suspend );
-	config.writeEntry( "Interval_Dim", intervalDim );
-	config.writeEntry( "Interval_LightOff", intervalLightOff );
-	config.writeEntry( "Interval", intervalSuspend );
-	config.writeEntry( "Brightness", initbright );
-    }
+QCString QCopKeyRegister::message()const {
+    return m_message;
+}
 
-    int i_dim =      (dim ? intervalDim : 0);
-    int i_lightoff = (lightoff ? intervalLightOff : 0);
-    int i_suspend =  (suspend ? intervalSuspend : 0);
+bool QCopKeyRegister::send() {
+    if (m_channel.isNull() )
+        return false;
 
-#ifndef QT_NO_COP
-    QCopEnvelope eB("QPE/System", "setBacklight(int)" );
-    eB << initbright;
+    QCopEnvelope( m_channel, m_message );
 
-    QCopEnvelope e("QPE/System", "setScreenSaverIntervals(int,int,int)" );
-    e << i_dim << i_lightoff << i_suspend;
-#endif
+    return true;
 }
 
 //---------------------------------------------------------------------------
@@ -155,7 +136,10 @@ void DesktopPowerAlerter::hideEvent( QHideEvent *e )
 
 KeyFilter::KeyFilter(QObject* parent) : QObject(parent), held_tid(0), heldButton(0)
 {
+    /* We don't do this cause it would interfere with ODevice */
+#if 0
     qwsServer->setKeyboardFilter(this);
+#endif
 }
 
 void KeyFilter::timerEvent(QTimerEvent* e)
@@ -171,8 +155,26 @@ void KeyFilter::timerEvent(QTimerEvent* e)
     }
 }
 
-bool KeyFilter::filter(int /*unicode*/, int keycode, int modifiers, bool press,
-		  bool autoRepeat)
+void KeyFilter::registerKey( const QCopKeyRegister& key ) {
+    m_keys.insert( key.keyCode(), key );
+}
+
+void KeyFilter::unregisterKey( const QCopKeyRegister& key ) {
+    m_keys.remove( key.keyCode() );
+}
+
+bool KeyFilter::keyRegistered( int key ) {
+    /*
+     * Check if we've a key registered
+     */
+    if ( !m_keys[key].send())
+        return false;
+    else
+        return true;
+
+}
+
+bool KeyFilter::checkButtonAction(bool db, int keycode,  int press, int autoRepeat)
 {
     if ( !loggedin
 	    // Permitted keys
@@ -186,57 +188,65 @@ bool KeyFilter::filter(int /*unicode*/, int keycode, int modifiers, bool press,
 	    && keycode != Key_Up
 	    && keycode != Key_Down )
 	return TRUE;
-    if ( !modifiers ) {
-	if ( !((ServerApplication*)qApp)->keyboardGrabbed() ) {
-	    // First check to see if DeviceButtonManager knows something about this button:
-	    const DeviceButton* button = DeviceButtonManager::instance().buttonForKeycode(keycode);
-	    if (button && !autoRepeat) {
-		if ( held_tid ) {
-		    killTimer(held_tid);
-		    held_tid = 0;
-		}
-		if ( button->heldAction().isNull() ) {
-		    if ( press )
-			emit activate(button, FALSE);
-		} else if ( press ) {
-		    heldButton = button;
-		    held_tid = startTimer(500);
-		} else if ( heldButton ) {
-		    heldButton = 0;
-		    emit activate(button, FALSE);
-		}
-		QWSServer::screenSaverActivate(FALSE);
-		return TRUE;
-	    }
-	}
-	if ( keycode == Key_F34 ) {
-	    if ( press ) emit power();
-	    return TRUE;
-	}
-	if ( keycode == Key_F35 ) {
-	    if ( press ) emit backlight();
-	    return TRUE;
-	}
-	if ( keycode == Key_F32 ) {
+
+        /* check if it was registered */
+    if (!db ) {
+        if (keycode != 0 &&press && !autoRepeat && keyRegistered(keycode) )
+            return true;
+    }else {
+
+
+        // First check to see if DeviceButtonManager knows something about this button:
+        const Opie::ODeviceButton* button = Opie::ODevice::inst()->buttonForKeycode(keycode);
+        if (button && !autoRepeat) {
+            if ( held_tid ) {
+                killTimer(held_tid);
+                held_tid = 0;
+            }
+            if ( button->heldAction().isNull() ) {
+                if ( press )
+                    emit activate(button, FALSE);
+            } else if ( press ) {
+                heldButton = button;
+                held_tid = startTimer( ODevice::inst ()->buttonHoldTime () );
+            } else if ( heldButton ) {
+                heldButton = 0;
+                emit activate(button, FALSE);
+            }
+            QWSServer::screenSaverActivate(FALSE);
+            return TRUE;
+        }
+        return false;
+    }
+    if ( keycode == HardKey_Suspend ) {
+        if ( press ) emit power();
+        return TRUE;
+    }
+    if ( keycode == HardKey_Backlight ) {
+        if ( press ) emit backlight();
+        return TRUE;
+    }
+    if ( keycode == Key_F32 ) {
 #ifndef QT_NO_COP
-	    if ( press ) QCopEnvelope e( "QPE/Desktop", "startSync()" );
+        if ( press ) QCopEnvelope e( "QPE/Desktop", "startSync()" );
 #endif
-	    return TRUE;
-	}
-	if ( keycode == Key_F31 ) {
-	    if ( press ) emit symbol();
-	    QWSServer::screenSaverActivate(FALSE);
-	    return TRUE;
-	}
+        return TRUE;
     }
-    if ( keycode == Key_NumLock ) {
-	if ( press ) emit numLockStateToggle();
+    if ( keycode == Key_F31 ) {
+        if ( press ) emit symbol();
+        QWSServer::screenSaverActivate(FALSE);
+        return TRUE;
     }
-    if ( keycode == Key_CapsLock ) {
-	if ( press ) emit capsLockStateToggle();
-    }
+
+    if ( keycode == Key_NumLock )
+        if ( press ) emit numLockStateToggle();
+
+    if ( keycode == Key_CapsLock )
+        if ( press ) emit capsLockStateToggle();
+
     if ( serverApp )
-	serverApp->keyClick(keycode,press,autoRepeat);
+        serverApp->keyClick(keycode,press,autoRepeat);
+
     return FALSE;
 }
 
@@ -246,42 +256,73 @@ enum MemState { MemUnknown, MemVeryLow, MemLow, MemNormal } memstate=MemUnknown;
 QPE_MEMALERTER_IMPL
 #endif
 
-#if defined(CUSTOM_SOUND_IMPL)
-CUSTOM_SOUND_IMPL
-#endif
+
 
 //---------------------------------------------------------------------------
 
 bool ServerApplication::doRestart = FALSE;
 bool ServerApplication::allowRestart = TRUE;
 
+void ServerApplication::switchLCD( bool on ) {
+    if ( !qApp )
+        return;
+
+    ServerApplication *dapp = ServerApplication::me() ;
+
+    if ( !dapp-> m_screensaver )
+        return;
+
+    if ( on ) {
+        dapp-> m_screensaver-> setDisplayState ( true );
+        dapp-> m_screensaver-> setBacklight ( -3 );
+    }else
+        dapp-> m_screensaver-> setDisplayState ( false );
+
+
+}
+
 ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     : QPEApplication( argc, argv, t )
 {
-#ifdef CUSTOM_SOUND_INIT
-    CUSTOM_SOUND_INIT;
-#endif
 
-#if defined(QPE_HAVE_MEMALERTER)
-    initMemalerter();
-#endif
 
     // We know we'll have lots of cached pixmaps due to App/DocLnks
     QPixmapCache::setCacheLimit(512);
 
-    QTimer *timer = new QTimer( this );
-    connect( timer, SIGNAL(timeout()), this, SLOT(psTimeout()) );
-    timer->start( 10000 );
-    ps = new PowerStatus;
+    m_ps = new PowerStatus;
+    m_ps_last = new PowerStatus;
     pa = new DesktopPowerAlerter( 0 );
 
-    applyLightSettings(ps);
+    m_apm_timer = new QTimer( this );
+    connect(m_apm_timer, SIGNAL( timeout() ),
+            this, SLOT( apmTimeout() ) );
 
+    reloadPowerWarnSettings();
+
+    QCopChannel *channel = new QCopChannel( "QPE/System", this );
+    connect(channel, SIGNAL(received( const QCString&, const QByteArray& ) ),
+            this, SLOT(systemMessage(const QCString&, const QByteArray& ) ) );
+
+    channel = new QCopChannel("QPE/Launcher", this );
+    connect(channel, SIGNAL(received( const QCString&, const QByteArray& ) ),
+            this, SLOT(launcherMessage( const QCString&, const QByteArray& ) ) );
+
+    m_screensaver = new OpieScreenSaver();
+    m_screensaver->setInterval( -1 );
+    QWSServer::setScreenSaver( m_screensaver );
+
+    connect( qApp, SIGNAL( volumeChanged( bool ) ),
+             this, SLOT( rereadVolumes() ) );
+
+
+    /* ### PluginLoader libqtopia SafeMode */
+#if 0
     if ( PluginLoader::inSafeMode() )
 	QTimer::singleShot(500, this, SLOT(showSafeMode()) );
     QTimer::singleShot(20*1000, this, SLOT(clearSafeMode()) );
+#endif
 
-    KeyFilter* kf = new KeyFilter(this);
+    kf = new KeyFilter(this);
 
     connect( kf, SIGNAL(launch()), this, SIGNAL(launch()) );
     connect( kf, SIGNAL(power()), this, SIGNAL(power()) );
@@ -289,23 +330,142 @@ ServerApplication::ServerApplication( int& argc, char **argv, Type t )
     connect( kf, SIGNAL(symbol()), this, SIGNAL(symbol()));
     connect( kf, SIGNAL(numLockStateToggle()), this,SIGNAL(numLockStateToggle()));
     connect( kf, SIGNAL(capsLockStateToggle()), this,SIGNAL(capsLockStateToggle()));
-    connect( kf, SIGNAL(activate(const DeviceButton*,bool)), this,SIGNAL(activate(const DeviceButton*,bool)));
+    connect( kf, SIGNAL(activate(const Opie::ODeviceButton*,bool)),
+	    this,SIGNAL(activate(const Opie::ODeviceButton*,bool)));
 
     connect( kf, SIGNAL(power()), this, SLOT(togglePower()) );
     connect( kf, SIGNAL(backlight()), this, SLOT(toggleLight()) );
 
-    connect( this, SIGNAL(volumeChanged(bool)), this, SLOT(rereadVolumes()) );
+    connect( this, SIGNAL(power() ),
+             SLOT(togglePower() ) );
+
     rereadVolumes();
 
     serverApp = this;
+
+    apmTimeout();
+    grabKeyboard();
+
+    /* make sure the event filter is installed */
+    const Opie::ODeviceButton* but = Opie::ODevice::inst()->buttonForKeycode( -1 );
 }
 
 
 ServerApplication::~ServerApplication()
 {
-    delete ps;
+    ungrabKeyboard();
+
+
     delete pa;
+    delete m_ps;
+    delete m_ps_last;
 }
+
+void ServerApplication::apmTimeout() {
+    serverApp-> checkMemory( ); // in case no events are generated
+    *m_ps_last = *m_ps;
+    *m_ps = PowerStatusManager::readStatus();
+
+    if ( m_ps->acStatus() != m_ps_last-> acStatus() )
+        m_screensaver-> powerStatusChanged( *m_ps );
+
+    if ( m_ps->acStatus() == PowerStatus::Online )
+        return;
+
+    int bat = m_ps-> batteryPercentRemaining();
+
+    if ( bat < m_ps_last-> batteryPercentRemaining() ) {
+        if ( bat <= m_powerCritical )
+            pa->alert( tr( "Battery level is critical!\nKeep power off until power restored!" ), 1 );
+        else if ( bat <= m_powerVeryLow )
+            pa->alert( tr( "Battery is running very low. "), 2 );
+    }
+    if ( m_ps-> backupBatteryStatus() == PowerStatus::VeryLow )
+        pa->alert( tr("The Back-up battery is very low.\nPlease charge the back-up battery." ), 2);
+
+}
+
+void ServerApplication::systemMessage( const QCString& msg,
+                                       const QByteArray& data ) {
+    QDataStream stream ( data, IO_ReadOnly );
+
+    if ( msg == "setScreenSaverInterval(int)" ) {
+        int time;
+        stream >> time;
+        m_screensaver-> setInterval( time );
+    }
+    else if ( msg == "setScreenSaverIntervals(int,int,int)" ) {
+        int t1, t2, t3;
+        stream >> t1 >> t2 >> t3;
+        m_screensaver-> setIntervals( t1, t2, t3 );
+    }
+    else if ( msg == "setBacklight(int)" ) {
+        int bright;
+        stream >> bright;
+        m_screensaver-> setBacklight( bright );
+    }
+    else if ( msg == "setScreenSaverMode(int)" ) {
+        int mode;
+        stream >> mode;
+        m_screensaver-> setMode ( mode );
+    }
+    else if ( msg == "reloadPowerWarnSettings()" ) {
+        reloadPowerWarnSettings();
+    }
+    else if ( msg == "setDisplayState(int)" ) {
+        int state;
+        stream >> state;
+        m_screensaver-> setDisplayState ( state != 0 );
+    }
+    else if ( msg == "suspend()" ) {
+        emit power();
+    }
+    else if ( msg == "sendBusinessCard()" ) {
+        QString card = ::getenv ( "HOME" );
+        card += "/Applications/addressbook/businesscard.vcf";
+
+        if ( QFile::exists( card ) ) {
+            QCopEnvelope e ( "QPE/Obex", "send(QString,QString,QString)" );
+            QString mimetype = "text/x-vCard";
+            e << tr( "business card" ) << card << mimetype;
+        }
+    }
+}
+
+void ServerApplication::reloadPowerWarnSettings ( )
+{
+    Config cfg ( "apm" );
+    cfg. setGroup ( "Warnings" );
+
+    int iv = cfg. readNumEntry ( "checkinterval", 10000 );
+
+    m_apm_timer-> stop ( );
+    if ( iv )
+        m_apm_timer-> start ( iv );
+
+    m_powerVeryLow  = cfg. readNumEntry ( "powerverylow", 10 );
+    m_powerCritical = cfg. readNumEntry ( "powervcritical", 5 );
+}
+
+void ServerApplication::launcherMessage( const QCString & msg, const QByteArray & data )
+{
+    QDataStream stream ( data, IO_ReadOnly );
+
+    if ( msg == "deviceButton(int,int,int)" ) {
+        int keycode, press, autoRepeat;
+        stream >> keycode >> press >> autoRepeat;
+
+        kf->checkButtonAction ( true, keycode, press, autoRepeat );
+    }
+    else if ( msg == "keyRegister(int,QCString,QCString)" ) {
+        int k;
+        QCString c, m;
+        stream >> k >> c >> m;
+
+        kf -> registerKey( QCopKeyRegister(k, c, m) );
+    }
+}
+
 
 bool ServerApplication::screenLocked()
 {
@@ -336,6 +496,7 @@ void ServerApplication::login(bool at_poweron)
 #include <time.h>
 #endif
 
+#if 0
 static bool blanked=FALSE;
 
 static void blankScreen()
@@ -344,7 +505,7 @@ static void blankScreen()
     QWidget w(0, 0, Qt::WStyle_Customize | Qt::WStyle_NoBorder | Qt::WStyle_Tool | Qt::WStyle_StaysOnTop | Qt::WPaintUnclipped);
     w.resize( qt_screen->width(), qt_screen->height() );
     w.move(0, 0);
-    
+
     QPainter p(&w);
     p.fillRect(w.rect(), QBrush(QColor(255,255,255)) );
     p.end();
@@ -356,49 +517,74 @@ static void blankScreen()
 
 static void darkScreen()
 {
+    /* ### Screen blanking ODevice */
+#if 0
     qpe_setBacklight(0); // force off
+#endif
+}
+#endif
+
+namespace {
+    void execAutoStart(const QDateTime& suspendTime ) {
+        QString appName;
+	int delay;
+	QDateTime now = QDateTime::currentDateTime();
+
+        Config cfg( "autostart" );
+	cfg.setGroup( "AutoStart" );
+	appName = cfg.readEntry( "Apps", "" );
+	delay = cfg.readNumEntry( "Delay", 0  );
+
+	// If the time between suspend and resume was longer then the
+	// value saved as delay, start the app
+	if ( suspendTime.secsTo( now ) >= ( delay * 60 ) && !appName.isEmpty() ) {
+		QCopEnvelope e( "QPE/System", "execute(QString)" );
+		e << QString( appName );
+	}
+    }
 }
 
 
 void ServerApplication::togglePower()
 {
-    static int haveAPM = -1;
-    if ( haveAPM < 0 ) {
-	if ( QFile::exists( "/proc/apm" ) ) {
-	    haveAPM = 1;
-	} else {
-	    haveAPM = 0;
-	    qWarning( "Cannot suspend - no APM support in kernel" );
-	}
-    }
-    
-    if ( haveAPM ) {
+	static bool excllock = false;
+
+	if ( excllock )
+		return ;
+
+	excllock = true;
+
 	bool wasloggedin = loggedin;
-	loggedin=0;
-	if ( wasloggedin ) {
-	    Config cfg( QPEApplication::qpeDir()+"/etc/Security.conf", Config::File);
-	    cfg.setGroup("Passcode");
-	    QString passcode = cfg.readEntry("passcode");
-	    if ( !passcode.isEmpty() && cfg.readNumEntry("passcode_poweron",0) )
-		blankScreen();
-	}
-	
-	system("apm --suspend");
-    
-#ifndef QT_NO_COP
-	QWSServer::screenSaverActivate( FALSE );
-	{
-	    QCopEnvelope("QPE/Card", "mtabChanged()" ); // might have changed while asleep
-	    QCopEnvelope e("QPE/System", "setBacklight(int)");
-	    e << -3; // Force on
+	loggedin = 0;
+	m_suspendTime = QDateTime::currentDateTime();
+
+#ifdef QWS
+
+	if ( Password::needToAuthenticate ( true ) && qt_screen ) {
+		// Should use a big black window instead.
+		// But this would not show up fast enough
+		QGfx *g = qt_screen-> screenGfx ( );
+		g-> fillRect ( 0, 0, qt_screen-> width ( ), qt_screen-> height ( ));
+		delete g;
 	}
 #endif
+
+	ODevice::inst ( )-> suspend ( );
+
+	ServerApplication::switchLCD ( true ); // force LCD on without slow qcop call
+	QWSServer::screenSaverActivate ( false );
+
+	{
+		QCopEnvelope( "QPE/Card", "mtabChanged()" ); // might have changed while asleep
+	}
+
 	if ( wasloggedin )
-	    login(TRUE);
-    } 
-    
-    //qcopBridge->closeOpenConnections();
-    //qDebug("called togglePower()!!!!!!");
+		login ( true );
+
+	execAutoStart(m_suspendTime);
+	//qcopBridge->closeOpenConnections();
+
+	excllock = false;
 }
 
 void ServerApplication::toggleLight()
@@ -409,6 +595,26 @@ void ServerApplication::toggleLight()
 #endif
 }
 
+
+/*
+ * We still listen to key events but handle them in
+ * a special class
+ */
+
+bool ServerApplication::eventFilter( QObject *o, QEvent *e) {
+    if ( e->type() != QEvent::KeyPress &&
+         e->type() != QEvent::KeyRelease )
+        return QPEApplication::eventFilter( o, e );
+
+    QKeyEvent *ke = static_cast<QKeyEvent*>( e );
+    if ( kf->checkButtonAction( true, ke->key(),
+                                e->type() == QEvent::KeyPress,
+                                ke-> isAutoRepeat() ))
+        return true;
+
+    return QPEApplication::eventFilter( o, e );
+
+}
 
 #ifdef Q_WS_QWS
 bool ServerApplication::qwsEventFilter( QWSEvent *e )
@@ -427,42 +633,25 @@ bool ServerApplication::qwsEventFilter( QWSEvent *e )
 	    up = TRUE;
 	    screenClick(FALSE);
 	}
+    }else if ( e->type == QWSEvent::Key ) {
+        QWSKeyEvent * ke = static_cast<QWSKeyEvent*>( e );
+        if ( kf->checkButtonAction( false,
+                                    ke-> simpleData.keycode,
+                                    ke-> simpleData.is_press,
+                                    ke-> simpleData.is_auto_repeat ) )
+            return true;
     }
 
     return QPEApplication::qwsEventFilter( e );
 }
 #endif
 
-void ServerApplication::psTimeout()
-{
-    checkMemory(); // in case no events are being generated
 
-    PowerStatus::ACStatus oldStatus = ps->acStatus();
-
-    *ps = PowerStatusManager::readStatus();
-
-    if ( oldStatus != ps->acStatus() ) {
-	// power source changed, read settings applying to current powersource
-	applyLightSettings(ps);
-    }
-
-
-    if ( (ps->batteryStatus() == PowerStatus::VeryLow ) ) {
-	pa->alert( tr( "Battery is running very low." ), 6 );
-    }
-
-    if (  ps->batteryStatus() == PowerStatus::Critical ) {
-	pa->alert(  tr( "Battery level is critical!\n"
-			"Please recharge the main battery!" ), 1 );
-    }
-
-    if (  ps->backupBatteryStatus() == PowerStatus::VeryLow ) {
-	pa->alert( tr( "The Back-up battery is very low.\nPlease charge the back-up battery." ), 3 );
-    }
-}
+/* ### FIXME libqtopia Plugin Safe Mode */
 
 void ServerApplication::showSafeMode()
 {
+#if 0
     if ( QMessageBox::warning(0, tr("Safe Mode"), tr("<P>A system startup error occurred, "
 		"and the system is now in Safe Mode. "
 		"Plugins are not loaded in Safe Mode. "
@@ -470,10 +659,12 @@ void ServerApplication::showSafeMode()
 		"disable plugins that cause system error."), tr("OK"), tr("Plugin Manager..."), 0) == 1 ) {
 	Global::execute( "pluginmanager" );
     }
+#endif
 }
 
 void ServerApplication::clearSafeMode()
 {
+#if 0
     // If we've been running OK for a while then we won't bother going into
     // safe mode immediately on the next crash.
     Config cfg( "PluginLoader" );
@@ -482,7 +673,9 @@ void ServerApplication::clearSafeMode()
     if ( mode == "MaybeSafe" ) {
 	cfg.writeEntry( "Mode", "Normal" );
     }
+#endif
 }
+
 
 void ServerApplication::shutdown()
 {
@@ -496,34 +689,34 @@ void ServerApplication::shutdown()
 
 void ServerApplication::shutdown( ShutdownImpl::Type t )
 {
+    char *opt = 0;
+
     switch ( t ) {
-	case ShutdownImpl::ShutdownSystem:
-#ifndef Q_OS_WIN32
-	    execlp("shutdown", "shutdown", "-h", "now", (void*)0); // No tr
-#else
-	    qDebug("ServerApplication::ShutdownSystem");      
-	    prepareForTermination(FALSE);
-	    quit();
-#endif
-	    break;
+    case ShutdownImpl::ShutdownSystem:
+        opt = "-h";
+        // fall through
+    case ShutdownImpl::RebootSystem:
+        if ( opt == 0 )
+            opt = "-r";
 
-	case ShutdownImpl::RebootSystem:
-#ifndef Q_OS_WIN32
-	    execlp("shutdown", "shutdown", "-r", "now", (void*)0); // No tr
-#else
-	    qDebug("ServerApplication::RebootSystem");      
-	    restart();
-#endif
-	    break;
+        if ( execl( "/sbin/shutdown", "shutdown", opt, "now", ( void* ) 0) < 0 )
+            perror("shutdown");
+//		        		::syslog ( LOG_ERR, "Erroring execing shutdown\n" );
 
-	case ShutdownImpl::RestartDesktop:
-	    restart();
-	    break;
+        break;
+    case ShutdownImpl::RestartDesktop:
+        restart();
+        break;
+    case ShutdownImpl::TerminateDesktop:
+        prepareForTermination( FALSE );
 
-	case ShutdownImpl::TerminateDesktop:
-	    prepareForTermination(FALSE);
-	    quit();
-	    break;
+        // This is a workaround for a Qt bug
+        // clipboard applet has to stop its poll timer, or Qt/E
+        // will hang on quit() right before it emits aboutToQuit()
+        emit aboutToQuit ( );
+
+        quit();
+        break;
     }
 }
 
@@ -538,10 +731,12 @@ void ServerApplication::restart()
 
 void ServerApplication::rereadVolumes()
 {
-    Config cfg("Sound");
-    cfg.setGroup("System");
-    touchclick = cfg.readBoolEntry("Touch");
-    keyclick = cfg.readBoolEntry("Key");
+    Config cfg( "qpe" );
+    cfg. setGroup ( "Volume" );
+
+    m_screentap_sound = cfg. readBoolEntry ( "TouchSound" );
+    m_keyclick_sound  = cfg. readBoolEntry ( "KeySound" );
+    m_alarm_sound     = cfg. readBoolEntry ( "AlarmSound" );
 }
 
 
@@ -591,26 +786,27 @@ bool ServerApplication::recoverMemory()
     return FALSE;
 }
 
-void ServerApplication::keyClick(int keycode, bool press, bool repeat)
+void ServerApplication::keyClick(int , bool press, bool )
 {
-#ifdef CUSTOM_SOUND_KEYCLICK
-    if ( keyclick )
-	CUSTOM_SOUND_KEYCLICK(keycode,press,repeat);
-#else
-    Q_UNUSED( keycode );
-    Q_UNUSED( press );
-    Q_UNUSED( repeat );
-#endif
+    if ( press && m_keyclick_sound )
+        ODevice::inst() -> keySound();
+
 }
 
 void ServerApplication::screenClick(bool press)
 {
-#ifdef CUSTOM_SOUND_TOUCH
-    if ( touchclick )
-	CUSTOM_SOUND_TOUCH(press);
-#else
-    Q_UNUSED( press );
-#endif
+    if ( press && m_screentap_sound )
+        ODevice::inst() -> touchSound();
+}
+
+void ServerApplication::soundAlarm() {
+    if ( me ()->m_alarm_sound )
+        ODevice::inst()->alarmSound();
+}
+
+ServerApplication *ServerApplication::me ( )
+{
+	return static_cast<ServerApplication*>( qApp );
 }
 
 

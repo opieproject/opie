@@ -32,14 +32,36 @@
 
 class PowerStatus;
 class DesktopPowerAlerter;
-class DeviceButton;
 
-class KeyFilter : public QObject, public QWSServer::KeyboardFilter {
+class OpieScreenSaver;
+namespace Opie {
+    class ODeviceButton;
+}
+
+struct QCopKeyRegister {
+    QCopKeyRegister();
+    QCopKeyRegister( int k, const QCString&, const QCString& );
+    int keyCode()const;
+    QCString channel()const;
+    QCString message()const;
+    inline bool send();
+
+private:
+    int m_keyCode;
+    QCString m_channel, m_message;
+};
+
+typedef QMap<int, QCopKeyRegister> KeyRegisterList;
+
+class KeyFilter : public QObject {
     Q_OBJECT
 public:
     KeyFilter(QObject* parent);
-    bool filter(int unicode, int keycode, int modifiers, bool press,
-                      bool autoRepeat);
+    void registerKey( const QCopKeyRegister& );
+    void unregisterKey( const QCopKeyRegister& );
+    bool checkButtonAction( bool, int, int, int );
+
+
 
 protected:
     void timerEvent(QTimerEvent*);
@@ -51,11 +73,14 @@ signals:
     void symbol();
     void numLockStateToggle();
     void capsLockStateToggle();
-    void activate(const DeviceButton*,bool);
+    void activate(const Opie::ODeviceButton*,bool);
+
 
 private:
+    inline bool keyRegistered( int key );
     int held_tid;
-    const DeviceButton* heldButton;
+    const Opie::ODeviceButton* heldButton;
+    KeyRegisterList m_keys;
 };
 
 class ServerApplication : public QPEApplication
@@ -70,9 +95,13 @@ public:
     static bool screenLocked();
     static void login(bool at_poweron);
 
+    static void switchLCD ( bool on ); // only for togglePower in Desktop
+    static void soundAlarm(); // only because QCop soundAlarm() is defined in QPE/TaskBar
+
     void restart();
 
 signals:
+    void menu();
     void home();
     void launch();
     void power();
@@ -81,9 +110,15 @@ signals:
     void numLockStateToggle();
     void capsLockStateToggle();
     void prepareForRestart();
-    void activate(const DeviceButton*,bool);
+    void activate(const Opie::ODeviceButton*,bool);
+
+public slots:
+    virtual void systemMessage( const QCString& msg, const QByteArray& );
+    virtual void launcherMessage( const QCString& msg, const QByteArray& );
+    void rereadVolumes();
 
 protected:
+    bool eventFilter( QObject*,  QEvent* );
 #ifdef Q_WS_QWS
     bool qwsEventFilter( QWSEvent * );
 #endif
@@ -95,18 +130,32 @@ protected:
 
 protected slots:
     void shutdown(ShutdownImpl::Type);
-    void psTimeout();
+    void apmTimeout();
     void showSafeMode();
     void clearSafeMode();
     void togglePower();
     void toggleLight();
-    void rereadVolumes();
+
+private:
+    static ServerApplication *me ();
+    void reloadPowerWarnSettings();
+    KeyFilter *kf;
+
 
 private:
     DesktopPowerAlerter *pa;
-    PowerStatus *ps;
-    bool keyclick;
-    bool touchclick;
+    PowerStatus *m_ps,  *m_ps_last;
+    OpieScreenSaver *m_screensaver;
+    QTimer *m_apm_timer;
+    QDateTime m_suspendTime;
+    int m_powerVeryLow;
+    int m_powerCritical;
+    int m_currentPowerLevel;
+
+    bool m_keyclick_sound  : 1;
+    bool m_screentap_sound : 1;
+    bool m_alarm_sound     : 1;
+
 
     friend class KeyFilter;
 };
