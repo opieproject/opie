@@ -137,7 +137,7 @@ void Appearance::loadStyles ( QListBox *list )
 			QLibrary *lib = new QLibrary ( path + "/" + *it );
 			StyleInterface *iface;
 
-			if ( lib-> queryInterface ( IID_Style, (QUnknownInterface **) &iface ) == QS_OK )
+			if (( lib-> queryInterface ( IID_Style, (QUnknownInterface **) &iface ) == QS_OK ) && iface )
 				list-> insertItem ( new StyleListItem ( lib, iface ));
 			else
 				delete lib;

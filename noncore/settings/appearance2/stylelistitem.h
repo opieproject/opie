@@ -48,9 +48,9 @@ public:
 		m_lib = lib;
 		m_style_if = iface;
 		m_settings_if = 0;
-		m_style = iface-> create ( );
+		m_style = iface-> style ( );
 		
-		iface-> queryInterface ( IID_StyleSettings, (QUnknownInterface **) &m_settings_if );		
+		iface-> queryInterface ( IID_StyleExtended, (QUnknownInterface **) &m_settings_if );
 	}
 	
 	virtual ~StyleListItem ( )
@@ -66,7 +66,7 @@ public:
 	
 	bool hasSettings ( ) const
 	{
-		return ( m_settings_if );
+		return m_settings_if ? m_settings_if-> hasSettings ( ) : false;
 	}
 
 	QWidget *settings ( QWidget *parent )
@@ -91,7 +91,6 @@ public:
 	{
 		if ( m_lib )
 			return QFileInfo ( m_lib-> library ( )). fileName ( );
-			//return QString ( m_style_if-> key ( ));
 		else
 			return text ( );
 	}
@@ -105,7 +104,7 @@ private:
 	QLibrary *m_lib;
 	QStyle *m_style;
 	StyleInterface *m_style_if;
-	StyleSettingsInterface *m_settings_if;
+	StyleExtendedInterface *m_settings_if;
 
 };
 
