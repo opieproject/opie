@@ -1,53 +1,25 @@
-/*
-               =.            This file is part of the OPIE Project
-             .=l.            Copyright (c)  2002 Holger Freyther <zecke@handhelds.org>
-           .>+-=
- _;:,     .>    :=|.         This library is free software; you can 
-.> <`_,   >  .   <=          redistribute it and/or  modify it under
-:`=1 )Y*s>-.--   :           the terms of the GNU Library General Public
-.="- .-=="i,     .._         License as published by the Free Software
- - .   .-<_>     .<>         Foundation; either version 2 of the License,
-     ._= =}       :          or (at your option) any later version.
-    .%`+i>       _;_.        
-    .i_,=:_.      -<s.       This library is distributed in the hope that  
-     +  .  -:.       =       it will be useful,  but WITHOUT ANY WARRANTY;
-    : ..    .:,     . . .    without even the implied warranty of
-    =_        +     =;=|`    MERCHANTABILITY or FITNESS FOR A
-  _.=:.       :    :=>`:     PARTICULAR PURPOSE. See the GNU
-..}^=.=       =       ;      Library General Public License for more
-++=   -.     .`     .:       details.
- :     =  ...= . :.=-        
- -.   .:....=;==+<;          You should have received a copy of the GNU
-  -_. . .   )=.  =           Library General Public License along with
-    --        :-=`           this library; see the file COPYING.LIB. 
-                             If not, write to the Free Software Foundation,
-                             Inc., 59 Temple Place - Suite 330,
-                             Boston, MA 02111-1307, USA.
 
-*/
 
-#include <qnamespace.h>
-#include <qpushbutton.h>
-#include <qcombobox.h>
-#include <qhbox.h>
-#include <qvbox.h>
-#include <qlayout.h>
-#include <qwidgetstack.h>
-#include <qlineedit.h>
 #include <qcheckbox.h>
-#include <qlabel.h>
+#include <qcombobox.h>
 #include <qheader.h>
-#include <qdir.h>
-#include <qpainter.h>
-#include <qaction.h>
-#include <qpopupmenu.h>
-#include <qcursor.h>
-#include <qstringlist.h>
+#include <qlabel.h>
+#include <qabstractlayout.h>
+#include <qlayout.h>
+#include <qlineedit.h>
+#include <qlistview.h>
 #include <qmessagebox.h>
+#include <qpushbutton.h>
+#include <qwidgetstack.h>
+#include <qpopupmenu.h>
+#include <qdir.h>
+#include <qfile.h>
+#include <qfileinfo.h>
+#include <qtimer.h>
 
 #include <qpe/qpeapplication.h>
-#include <qpe/fileselector.h>
 #include <qpe/applnk.h>
+#include <qpe/fileselector.h>
 #include <qpe/global.h>
 #include <qpe/mimetype.h>
 #include <qpe/resource.h>
@@ -58,18 +30,17 @@
 #include <sys/stat.h>
 
 #include "ofileselector.h"
-//#include "ofileview.h"
+
 
 QMap<QString,QPixmap> *OFileSelector::m_pixmaps = 0;
 
 namespace {
-
   int indexByString( const QComboBox *box, const QString &str ){
-    int index= -1;
+    int index= 0;
     for(int i= 0; i < box->count(); i++ ){
       if( str == box->text(i ) ){
-    index= i;
-    break;
+	index= i;
+	break;
       }
     }
     return index;
@@ -125,29 +96,490 @@ namespace {
 };
 
 
-OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString &dirName,
-           const QString &fileName, const QStringList &mimetypes ) : QWidget( wid )
+OFileSelector::OFileSelector( QWidget *wid, int mode, int selector,
+			      const QString &dirName,
+			      const QString &fileName,
+			      const QStringList &mimeTypes )
+  : QWidget( wid, "OFileSelector")
 {
-  if(wid!=0)
-    resize(wid->width(),wid->height());
-  m_selector = selector;
-  m_currentDir = dirName;
-  m_name = fileName;
-  m_mimetypes = mimetypes;
-  
-  if( mimetypes.isEmpty() )
-    m_autoMime = true;
-
-  qWarning("OFileSelector mimetypes %s", mimetypes.join(" ").latin1() );
+  m_mimetypes = mimeTypes;
+  initVars();
   m_mode = mode;
+  m_selector = selector;
+  m_currentDir =  dirName;
+  init();
+QTimer::singleShot(6*1000, this, SLOT( slotTest() ) );
+}
+
+OFileSelector::OFileSelector(const QString &mimeFilter, QWidget *parent,
+			     const char *name, bool newVisible = TRUE,
+			     bool closeVisible = FALSE )
+  : QWidget( parent, name )
+{
+  m_mimetypes = QStringList::split(";", mimeFilter );
+  initVars();
+  m_currentDir = QPEApplication::documentDir(); 
+  m_mode = OPEN;
+  m_selector = NORMAL;
+  m_shClose = closeVisible;
+  m_shNew = newVisible;
+  m_shLne = false;
+  m_shPerm = false;
+  m_shYesNo = false;
+  init();
+
+  
+}
+
+OFileSelector::~OFileSelector()
+{
+
+}
+
+void OFileSelector::setNewVisible( bool visible )
+{
+  m_shNew = visible;
+  if( m_selector == NORMAL ){
+    delete m_select;
+    // we need to initialize but keep the selected mimetype
+    QString mime = m_mimeCheck == 0 ? QString::null : m_mimeCheck->currentText() ;
+    m_select = new FileSelector( m_autoMime ? mime : m_mimetypes.join(";") ,
+				 m_stack, "fileselector",
+				 m_shNew, m_shClose);
+    connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
+	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+    //connect to close me and other signals as well
+    m_stack->addWidget( m_select, NORMAL );
+  }else{
+    m_new->show();
+  }
+}
+void OFileSelector::setCloseVisible( bool visible )
+{
+  m_shClose = visible;
+  if( m_selector == NORMAL ){
+    setNewVisible( m_shNew ); // yeah baby
+  }else{
+    m_close->show();
+  }
+}
+void OFileSelector::reread()
+{
+  if( m_selector == NORMAL ){
+    setNewVisible( m_shNew ); // make it a initializeSelector
+  }else if ( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
+    reparse();
+    //}else{
+    //;
+  }
+}
+
+const DocLnk *OFileSelector::selected()
+{
+  if( m_selector == NORMAL ){
+    return m_select->selected();
+  }else{
+    DocLnk *lnk = new DocLnk(selectedDocument() );
+    return lnk;
+  }
+}
+
+void OFileSelector::setYesCancelVisible( bool show )
+{
+  initializeYes(); // FIXME if YesCancel is not shown we will initialize it to hide it :(
+  m_shYesNo = show;
+  if( m_shYesNo )
+    m_boxOk->show();
+  else
+    m_boxOk->hide();
+
+}
+void OFileSelector::setToolbarVisible( bool show )
+{
+  m_shTool = show;
+  initializeListView(); // FIXME see above waste of memory
+  if(!m_shTool ){
+    m_location->hide();
+    m_up->hide();
+    m_homeButton->hide();
+    m_docButton->hide();
+  }else{
+    m_location->show();
+    m_up->show();
+    m_homeButton->show();
+    m_docButton->show();
+  }
+}
+void OFileSelector::setPermissionBarVisible( bool show )
+{
+  m_shPerm = show;
+  initializePerm();
+  if( m_shPerm )
+    m_checkPerm->show();
+  else
+    m_checkPerm->hide();
+}
+void OFileSelector::setLineEditVisible( bool show )
+{
+  if( show ){
+    initializeName();
+    m_boxName->show();
+  }else{
+    if( m_shLne && m_boxName != 0 ){ // check if we showed before this is the way to go
+      m_boxName->hide();
+    }
+  }
+  m_shLne = show;
+}
+
+void OFileSelector::setChooserVisible( bool show )
+{
+  m_shChooser = show;
+  initializeChooser();
+  if( m_shChooser ){
+    m_boxView->hide();
+  }else{
+    m_boxView->show();
+  }
+}
+
+QCheckBox* OFileSelector::permissionCheckbox()
+{
+  if( m_selector == NORMAL )
+    return 0l;
+  else
+    return m_checkPerm;
+}
+bool OFileSelector::setPermission()const
+{
+  return m_checkPerm == 0 ? false : m_checkPerm->isChecked();
+}
+void OFileSelector::setPermissionChecked( bool check )
+{
+  if( m_checkPerm )
+    m_checkPerm->setChecked( check );
+}
+
+void OFileSelector::setMode(int mode) // FIXME do direct raising
+{
+  m_mode = mode;
+  if( m_selector == NORMAL )
+    return;
+}
+void OFileSelector::setShowDirs(bool )
+{
+  m_dir = true;
+  reparse();
+}
+void OFileSelector::setCaseSensetive(bool caSe )
+{
+  m_case = caSe;
+  reparse();
+}
+void OFileSelector::setShowFiles(bool show )
+{
+  m_files = show;
+  reparse();
+}
+///
+bool OFileSelector::cd(const QString &path )
+{
+  m_currentDir = path;
+  reparse();
+  return true;
+}
+void OFileSelector::setSelector(int mode )
+{
+QString text;
+  switch( mode ){
+  case NORMAL:
+    text = tr("Documents");
+    break;
+  case EXTENDED:
+    text = tr("Files");
+    break;
+  case EXTENDED_ALL:
+    text = tr("All Files");
+    break;
+  }
+  slotViewCheck( text );
+}
+
+void OFileSelector::setPopupMenu(QPopupMenu *popup )
+{
+  m_custom = popup;
+  m_showPopup = true;
+}
+
+//void OFileSelector::updateL
+
+QString OFileSelector::selectedName() const
+{
+  QString name;
+  if( m_selector == NORMAL ){
+    const DocLnk *lnk = m_select->selected();
+    name = lnk->file();
+    delete lnk;
+  }else if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
+    QListViewItem *item  = m_View->currentItem();
+    if( item != 0 )
+      name = m_currentDir + "/" + item->text( 1 );
+  }else { // installed view
+    ;
+  }
+  return name;
+}
+QStringList OFileSelector::selectedNames()const
+{
+  QStringList list;
+  if( m_selector == NORMAL ){
+    list << selectedName();
+  }else if ( m_selector == EXTENDED || m_selector == EXTENDED_ALL ) {
+    list << selectedName(); // FIXME implement multiple Selections
+  }
+  return list;
+}
+/** If mode is set to the Dir selection this will return the selected path.
+ *  
+ *
+ */
+QString OFileSelector::selectedPath()const
+{
+  QString path;
+  if( m_selector == NORMAL ){
+    path = QPEApplication::documentDir();
+  }else if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
+    ;
+  }
+  return path;
+}
+QStringList OFileSelector::selectedPaths() const
+{
+  QStringList  list;
+  list << selectedPath();
+  return list;
+}
+QString OFileSelector::directory()const
+{
+  if( m_selector == NORMAL )
+    return QPEApplication::documentDir();
+  
+  return QDir(m_currentDir).absPath();
+}
+
+int OFileSelector::fileCount()
+{
+  int count;
+  switch( m_selector ){
+  case NORMAL:
+    count = m_select->fileCount();
+    break;
+    //case CUSTOM:
+  case EXTENDED:
+  case EXTENDED_ALL:
+  default:
+    count = m_View->childCount();
+    break;
+  }
+  return count;
+}
+DocLnk OFileSelector::selectedDocument() const
+{
+  DocLnk lnk;
+  switch( m_selector ){
+  case NORMAL:{
+    const DocLnk *lnk2 = m_select->selected();
+    lnk =  DocLnk(*lnk2 ); // copy
+    delete lnk2;
+    break;
+  }
+  case EXTENDED:
+  case EXTENDED_ALL:
+  default:
+    lnk = DocLnk( selectedName() ); // new DocLnk
+    break;
+  }
+  return lnk;
+}
+QValueList<DocLnk> OFileSelector::selectedDocuments() const
+{
+  QValueList<DocLnk> docs;
+  docs.append( selectedDocument() );
+  return docs;
+}
+
+
+// slots internal
+
+void OFileSelector::slotOk()
+{
+  emit ok();
+}
+void OFileSelector::slotCancel()
+{
+  emit cancel();
+}
+void OFileSelector::slotViewCheck(const QString &sel)
+{
+  if( sel == tr("Documents" ) ){
+    if( m_select == 0 ){
+      // autMime? fix cause now we use All and not the current
+      m_select = new FileSelector(m_autoMime ? QString::null : m_mimetypes.join(";"),
+				  m_stack, "fileselector",
+				  FALSE, FALSE);
+      connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
+	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+      //connect to close me and other signals as well
+      
+      m_stack->addWidget( m_select, NORMAL );
+    }
+    m_stack->raiseWidget( NORMAL );
+    m_selector = NORMAL;
+  }else if( sel == tr("Files") ){
+    m_selector = EXTENDED;
+    initializeListView();
+    reparse();
+    m_stack->raiseWidget( EXTENDED );
+  }else if( sel == tr("All Files") ){
+    m_selector = EXTENDED_ALL;
+    initializeListView();
+    reparse();
+    m_stack->raiseWidget( EXTENDED ); // same widget other QFileFilter 
+  }
+}
+void OFileSelector::slotMimeCheck(const QString &mime)
+{
+  if( m_selector == NORMAL ){
+    if( m_autoMime ){
+      delete m_select;
+      m_select = new FileSelector( mime == tr("All") ? QString::null : mime,
+				m_stack, "fileselector",
+				FALSE, FALSE);
+
+      connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
+	      this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+      //connect to close me and other signals as well
+      m_stack->addWidget( m_select, NORMAL );
+      m_stack->raiseWidget( NORMAL );
+      updateMimes();
+      m_mimeCheck->clear();
+      m_mimeCheck->insertStringList(m_mimetypes );
+      m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime) );
+    }
+  }else{ // others
+    qWarning("Mime %s", mime.latin1() );
+    if(m_shChooser ){
+      qWarning("Current Text %s", m_mimeCheck->currentText().latin1() );
+      //m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, mime)  );
+    }
+    reparse();
+  }
+
+}
+void OFileSelector::slotLocationActivated(const QString &file)
+{
+  cd(file.left(file.find("<-",0,TRUE)));
+  reparse();
+}
+void OFileSelector::slotInsertLocationPath(const QString &currentPath, int count)
+{
+  QStringList pathList;
+  bool underDog = FALSE;
+  for(int i=0;i<count;i++) {
+    pathList << m_location->text(i);
+    if( m_location->text(i) == currentPath)
+      underDog = TRUE;
+  }
+  if( !underDog) {
+    m_location->clear();
+    if( currentPath.left(2)=="//")
+      pathList.append( currentPath.right(currentPath.length()-1) );
+    else
+      pathList.append( currentPath );
+    m_location->insertStringList( pathList,-1);
+  }
+}
+void OFileSelector::locationComboChanged()
+{
+  cd( m_location->lineEdit()->text());
+  reparse();
+}
+void OFileSelector::init()
+{
+  m_lay = new QVBoxLayout( this );
+  m_lay->setSpacing(0 );
+
+  m_stack = new QWidgetStack( this );
+  if( m_selector == NORMAL ){
+    m_select = new FileSelector(m_autoMime ? QString::null : m_mimetypes.join(";"),
+				m_stack, "fileselector",
+				FALSE, FALSE);
+
+    connect(m_select, SIGNAL(fileSelected( const DocLnk & ) ),
+	    this, SLOT( slotFileBridgeSelected(const DocLnk & ) ) );
+    //connect to close me and other signals as well
+
+    m_stack->addWidget( m_select, NORMAL );
+    m_stack->raiseWidget( NORMAL );
+  }else{ // we're in init so it will be EXTENDED or EXTENDED_ALL
+    // and initializeListview will take care of those
+    // toolbar get's generade in initializeListView
+    initializeListView( ); // will raise the widget as well
+  }
+  m_lay->addWidget( m_stack, 100 ); // add to the layout 10 = stretch
+
+  if( m_shLne ) // the LineEdit with the current FileName
+    initializeName();
+
+  if( m_shPerm ) // the Permission QCheckBox
+    initializePerm();
+
+  if( m_shChooser ) // the Chooser for the view and Mimetypes
+    initializeChooser();
+
+  if( m_shYesNo ) // the Yes No button row
+    initializeYes( );
+}
+void OFileSelector::updateMimes()
+{
+  if( m_autoMime ){
+    m_mimetypes.clear();
+    m_mimetypes.append( tr("All") );
+    if( m_selector == NORMAL ){
+      DocLnkSet  set;
+      Global::findDocuments(&set, QString::null );
+      QListIterator<DocLnk> dit( set.children() );
+      for( ; dit.current(); ++dit ){
+	if( !m_mimetypes.contains( (*dit)->type() ) )
+	  m_mimetypes.append( (*dit)->type() );
+      }
+    }// else done in reparse
+  }
+}
+void OFileSelector::initVars()
+{
+  if( m_mimetypes.isEmpty() )
+    m_autoMime = true;
+  else
+    m_autoMime = false;
+  m_shClose = false;
+  m_shNew = false;
   m_shTool = true;
-  m_shPerm = true;
+  m_shPerm = false;
   m_shLne = true;
   m_shChooser = true;
   m_shYesNo = true;
+  m_case = false;
+  m_dir = true;
+  m_files = true;
+  m_showPopup = false;
+  if(m_pixmaps == 0 ) // init the pixmaps
+    initPics();
 
-  // for FILESELECTOR only view is interesting
+  // pointers
   m_location = 0;
+  m_mimeCheck = 0;
+  m_viewCheck = 0;
   m_homeButton = 0;
   m_docButton = 0;
   m_hideButton = 0;
@@ -156,40 +588,269 @@ OFileSelector::OFileSelector(QWidget *wid, int mode, int selector, const QString
   m_reread = 0;
   m_up = 0;
   m_View = 0;
-  m_select = 0;
-  m_stack = 0;
-
+  m_checkPerm = 0;
+  m_pseudo = 0;
+  m_pseudoLayout = 0;
   m_select = 0;
   m_stack = 0;
   m_lay = 0;
+  m_Oselector = 0;
   m_boxToolbar = 0;
   m_boxOk = 0;
-  m_edit = 0;
-
-  m_fnLabel = 0;
-  m_checkPerm = 0;
-  m_mimeCheck = 0;
-  m_viewCheck = 0;
-
-  m_pseudo = 0;
-  m_pseudoLayout = 0;
-
-  m_dir = true;
-  m_files = true;
+  m_boxName = 0;
+  m_boxView = 0;
   m_custom = 0;
-  m_showPopup = true;
-
-  if(m_pixmaps == 0 ) // init the pixmaps
-    initPics();
-
-  m_lay = new QVBoxLayout(this);
-  init();
-  m_edit->setText( fileName );
+  m_edit = 0;
+  m_fnLabel = 0;
+  m_new = 0;
+  m_close = 0;
 }
+void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink)
+{
+  if(!m_files)
+    return;
+  //  if( !compliesMime(info->absFilePath(), mime ) )
+  //  return;
+  MimeType type( info->absFilePath() );
+  if( mime != tr("All") && type.id() != mime )
+    return;
+  QPixmap pix = type.pixmap();
+  QString dir;
+  QString name;
+  bool locked;
+  if( pix.isNull() )
+    pix = Resource::loadPixmap( "UnknownDocument-14");
+  dir = info->dirPath( true );
+  if( symlink )
+    name = info->fileName() + " -> " +info->dirPath() + "/" + info->readLink();
+  else {
+    name = info->fileName();
+    if( ( m_mode == OPEN && !info->isReadable() )||
+	( m_mode == SAVE && !info->isWritable() ) ){
+      
+      locked = true; pix = Resource::loadPixmap("locked");
+    }
+  }
+  new OFileSelectorItem( m_View, pix, name,
+			 info->lastModified().toString(),
+			 QString::number( info->size() ),
+			 dir, locked );
+}
+void OFileSelector::addDir(const QString &mime, QFileInfo *info, bool symlink )
+{
+  if(!m_dir)
+    return;
+  if( m_selector == EXTENDED_ALL || m_selector == EXTENDED ){
+    bool locked = false;
+    QString name;
+    QPixmap pix;
+    if( ( m_mode == OPEN && !info->isReadable() ) || ( m_mode == SAVE && !info->isWritable() ) ){
+      locked = true;
+      if( symlink )
+	pix = (*m_pixmaps)["symlinkedlocked"];
+      else
+	pix = Resource::loadPixmap("lockedfolder");
+    }else { // readable
+      pix = symlink ?  (*m_pixmaps)["dirsymlink"] : Resource::loadPixmap("folder") ;
+    }
+    name = symlink ? info->fileName() + "->" + info->dirPath(true) + "/" +info->readLink() : info->fileName() ;
+    new OFileSelectorItem( m_View, pix, name,
+			   info->lastModified().toString(),
+			   QString::number( info->size() ), 
+			   info->dirPath( true ), locked,
+			   true );
 
+  }// else CUSTOM View
+}
+void OFileSelector::delItems()
+{
+
+}
+void OFileSelector::initializeName()
+{
+  /**  Name Layout Line
+   *   This is the Layout line arranged in 
+   *   horizontal way each components 
+   *   are next to each other
+   *   but we will only do this if
+   *   we didn't initialize a while ago.
+   */
+  if( m_boxName == 0 ){
+    m_boxName = new QHBox( this ); // remove this this? or use a QHBox
+    m_fnLabel = new QLabel( m_boxName );
+    m_fnLabel->setText( tr("Name:") );
+    m_edit = new QLineEdit( m_boxName );
+    //m_boxName->addWidget( m_fnLabel );
+    m_boxName->setMargin( 5 );
+    m_boxName->setSpacing( 8 );
+    //m_boxName->setStretchFactor(m_edit, 100 ); // 100 is stretch factor
+
+    m_lay->addWidget( m_boxName, 0 ); // add it to the topLevel layout
+  }// else we already initialized
+  // maybe show the components? 
+  //
+}
+void OFileSelector::initializeYes()
+{
+  /** The Save Cancel bar
+   *
+   */
+  if( m_boxOk == 0 ){
+    m_boxOk = new QHBox( this );
+    m_ok = new QPushButton( tr("&Save"),m_boxOk , "save" );
+    m_cancel = new QPushButton( tr("C&ancel"), m_boxOk, "cancel" );
+
+    //m_boxOk->addWidget( m_ok );
+    //m_boxOk->addWidget( m_cancel );
+    m_boxOk->setMargin( 5 );
+    m_boxOk->setSpacing( 10 );
+    m_lay->addWidget( m_boxOk, 0 );
+
+    connect( m_ok, SIGNAL( clicked() ),
+	     this, SLOT(slotOk() ) );
+    connect( m_cancel, SIGNAL( clicked() ),
+	     this, SLOT( slotCancel() ) );
+  }
+}
+void OFileSelector::initializeChooser()
+{
+  if( m_boxView == 0 ){
+    m_boxView = new QHBox( this );
+    m_viewCheck = new QComboBox( m_boxView, "view check");
+    m_mimeCheck = new QComboBox( m_boxView, "mime check");
+    m_boxView->setSpacing( 8 );
+    m_lay->addWidget(m_boxView, 0 );
+
+    m_viewCheck->insertItem( tr("Documents") );
+    m_viewCheck->insertItem( tr("Files") );
+    m_viewCheck->insertItem( tr("All Files") );
+    if(!m_autoMime )
+      m_mimeCheck->insertItem(m_mimetypes.join(",") );
+    else{
+      updateMimes();
+      m_mimeCheck->insertStringList( m_mimetypes );
+    }
+    connect( m_viewCheck, SIGNAL( activated(const QString & ) ),
+	     this, SLOT( slotViewCheck(const QString & ) ) );
+    connect( m_mimeCheck, SIGNAL( activated(const QString & ) ),
+	     this, SLOT( slotMimeCheck( const QString & ) ) );
+  }
+}
+void OFileSelector::initializeListView()
+{
+  if( m_pseudo == 0 ){
+    m_pseudo = new QWidget( m_stack, "Pseudo Widget");
+    m_pseudoLayout = new QVBoxLayout( m_pseudo );
+    // toolbar
+    m_boxToolbar = new QHBox( m_pseudo );
+    m_boxToolbar->setSpacing(0 ); // next to each other please
+
+    // toolbar members 
+    {
+      // location QComboBox
+      m_location = new QComboBox( m_boxToolbar );
+      m_location->setEditable( TRUE ); 
+      m_location->setDuplicatesEnabled( FALSE );
+      connect( m_location, SIGNAL(activated(const QString &) ),
+	       this, SLOT( slotLocationActivated(const QString &) ) );
+      connect( m_location->lineEdit(), SIGNAL(returnPressed() ),
+	       this, SLOT(locationComboChanged() ) );
+      // UP Button
+      m_up = new QPushButton(Resource::loadIconSet("up"),"",
+			     m_boxToolbar,"cdUpButton");
+      m_up->setFixedSize( QSize( 20, 20 ) );
+      connect(m_up ,SIGNAL(clicked()),this,SLOT(cdUP()  ) );
+      m_up->setFlat(TRUE);
+
+      // Home Button
+      m_homeButton = new QPushButton(Resource::loadIconSet("home") ,
+				     "", m_boxToolbar);
+      m_homeButton->setFixedSize( QSize( 20, 20 ) );
+      connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotHome() ) );
+      m_homeButton->setFlat(TRUE);
+      // Documents Button
+      m_docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"",
+				    m_boxToolbar,"docsButton");
+      m_docButton->setFixedSize( QSize( 20, 20 ) );
+      connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotDoc() ) );
+      m_docButton->setFlat(TRUE);
+
+      // Close button
+      m_close = new QPushButton( Resource::loadIconSet( "close"), "",
+				 m_boxToolbar );
+      connect( m_close, SIGNAL(clicked() ), this, SIGNAL(closeMe()  ) );
+      m_close->setFixedSize( 20, 20 );
+
+      m_boxToolbar->setFixedHeight( 20 );
+      m_pseudoLayout->addWidget(m_boxToolbar );
+
+      // let;s fill the Location ComboBox
+      StorageInfo storage;
+      const QList<FileSystem> &fs = storage.fileSystems();
+      QListIterator<FileSystem> it ( fs );
+      for( ; it.current(); ++it ){
+	const QString disk = (*it)->name();
+	const QString path = (*it)->path();
+	m_location->insertItem(path+ "<-"+disk );
+      }
+      int count = m_location->count();
+      m_location->insertItem( m_currentDir );
+      m_location->setCurrentItem( count );
+      // due to the New and Close button we can not simply hide m_boxToolBar to not show it
+      if( !m_shTool ){
+	m_location->hide(  );
+	m_up->hide(  );
+	m_homeButton->hide(  );
+	m_docButton->hide( );
+      }
+      if(!m_shClose )
+	m_close->hide();
+      if(!m_shNew)
+	m_close->hide();
+
+    } // off toolbar
+    // the Main ListView
+    // make a QWidgetStack first so Views can share the Toolbar
+    m_View = new QListView( m_pseudo, "Extended view");
+    QPEApplication::setStylusOperation( m_View->viewport(),
+					QPEApplication::RightOnHold);
+    m_View->addColumn(" " );
+    m_View->addColumn(tr("Name"), 135 );
+    m_View->addColumn(tr("Size"), -1 );
+    m_View->addColumn(tr("Date"), 60 );
+    m_View->addColumn(tr("Mime Type"), -1 );
+    QHeader *header = m_View->header();
+    header->hide();
+    m_View->setSorting( 1 );
+    m_View->setAllColumnsShowFocus( TRUE );
+
+    connect(m_View, SIGNAL(selectionChanged() ),
+	    this, SLOT(slotSelectionChanged() ) );
+
+    connect(m_View, SIGNAL(currentChanged(QListViewItem *) ),
+	    this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
+
+    connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ), 
+	    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
+
+    connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )), 
+	    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
+
+    m_pseudoLayout->addWidget( m_View, 288 ); 
+    m_stack->addWidget( m_pseudo, EXTENDED );
+  }
+}
+void OFileSelector::initializePerm()
+{
+  if( m_checkPerm == 0 ){
+    m_checkPerm = new QCheckBox(tr("Ser Permission"), this, "perm");
+    m_checkPerm->setChecked( false );
+    m_lay->addWidget( m_checkPerm );
+
+  }
+}
 void OFileSelector::initPics()
 {
-  qWarning("init pics" );
   m_pixmaps = new QMap<QString,QPixmap>;
   QPixmap pm  = Resource::loadPixmap( "folder"  );
   QPixmap lnk = Resource::loadPixmap( "opie/symlink"  );
@@ -203,258 +864,9 @@ void OFileSelector::initPics()
   pen.drawPixmap(pm2.width()-lnk.width(), pm2.height()-lnk.height(), lnk );
   pm2.setMask( pm2.createHeuristicMask( FALSE ) );
   m_pixmaps->insert("symlinkedlocked", pm2 );
-
 }
-
-// let's initialize the gui
-/**
-   --------------------
-   | cmbBox   Button  |
-   --------------------
-   | FileSlector      |
-   |       or         |
-   | OSelector        |
-   |                  |
-   |                  |
-   ____________________
-   | LineEdit         |
-   ____________________
-   | Permission Bar   |
-   ____________________
-   | ViewChoose       |
-   ____________________
-   | Save       Cancel|
-   ____________________
- */
-void OFileSelector::delItems()
-{
-  QLayoutIterator it = m_lay->iterator();
-  while ( it.current() != 0 ){
-    it.deleteCurrent();
-  }
-}
-
-void OFileSelector::init()
-{
-//    qDebug("init");
-  m_stack = new QWidgetStack(this, "wstack" );
-  if( m_selector == NORMAL ){
-    QString currMime;
-    if( m_mimeCheck != 0 )
-      currMime = m_mimeCheck->currentText();
-    updateMimes();
-    m_select = new FileSelector( currMime == "All" ? QString::null : currMime ,
-				 m_stack, "fileselector", FALSE, FALSE );
-    m_stack->addWidget(m_select, NORMAL );
-    m_lay->addWidget(m_stack );
-    m_stack->raiseWidget(NORMAL );
-    connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), 
-	    this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );
-    m_pseudoLayout = 0l;
-
-  } else {
-    initializeListView();
-  }
-  if(m_shLne ){ 
-    initializeName();
-  }
-  if(m_shPerm ){
-    m_checkPerm = new QCheckBox(tr("Set Permission"), this, "Permission" );
-    m_checkPerm->setChecked( false );
-    m_lay->addWidget(m_checkPerm ); 
-  }
-  if( m_shChooser )
-    initializeChooser();
-  if(m_shYesNo )
-    initializeYes();
-
-  // m_mimeCheck->setCurrentItem(indexByString( m_mimeCheck, requestedMimeTypesList.first()) );
-  //  reparse();
-  
-}
-
-void OFileSelector::setYesCancelVisible( bool show )
-{
-  if ( show == m_shYesNo )
-    return;
-  m_shYesNo = show;
-  if( !show ){
-    delete m_ok;
-    delete m_cancel; 
-    m_ok = 0;
-    m_cancel = 0;
-    // delete m_boxOk; all ready deleted in delItems
-  }
-  updateLay(); // recreate it and save the other states
-}
-
-void OFileSelector::setToolbarVisible( bool show )
-{
-  if ( m_shTool == show )
-    return;
-  if(!m_shTool ){
-    delete m_boxToolbar;
-    delete m_homeButton;
-    delete m_docButton;
-    delete m_location;
-    delete m_up;
-    m_boxToolbar = 0;
-    m_homeButton = 0;
-    m_docButton = 0;
-    m_location = 0;
-    m_up = 0;
-  };
-  updateLay();// overkill fix it
-}
-
-void OFileSelector::setPermissionBarVisible( bool show )
-{
-  if( show == m_shPerm )
-    return;
-
-  m_shPerm = show;
-
-  updateLay();
-}
-
-void OFileSelector::setLineEditVisible( bool show )
-{
-  if( show == m_shLne )
-    return;
-
-  m_shLne = show;
-  if( !show ){
-    delete m_edit;
-    delete m_fnLabel;
-    m_edit = 0;
-    m_fnLabel = 0;
-    //delete m_boxName; will be deleted 
-  }
-  updateLay();
-}
-
-void OFileSelector::setChooserVisible( bool show )
-{
-  if( show = m_shChooser )
-    return;
-  m_shChooser = show;
-  if( !show ){
-    delete m_mimeCheck;
-    delete m_viewCheck;
-    m_mimeCheck = 0;
-    m_viewCheck = 0;
-  }
-  updateLay();
-}
-
-QCheckBox* OFileSelector::permissionCheckbox( )
-{
-  return m_checkPerm;
-}
-
-void OFileSelector::setCaseSensetive( bool caSe )
-{
-  m_case = caSe;
-  reparse();
-}
-
-void OFileSelector::setShowFiles(bool files ){
-  m_files = files;
-  reparse();
-}
-
-void OFileSelector::setPopupMenu(QPopupMenu *pop )
-{
-  //delete oldpopup;
-  m_custom = pop;
-}
-
-bool OFileSelector::setPermission( ) const
-{
-  if( m_checkPerm == 0 )
-    return false;
-  else
-    return m_checkPerm->isChecked(); 
-}
-
-void OFileSelector::setPermissionChecked( bool check )
-{
-  if( m_checkPerm == 0 )
-    return;
-  m_checkPerm->setChecked( check );
-}
-
-QString OFileSelector::selectedName( )const
-{
-  QString string;
-  if( m_selector == NORMAL ){
-    const DocLnk *lnk = m_select->selected();
-    string = lnk->file();
-  }else if(m_selector == EXTENDED || m_selector == EXTENDED_ALL ) {
-    QListViewItem *item = m_View->currentItem();
-    if(item != 0 ){
-      string = m_currentDir + "/" + item->text( 1 );
-    }
-  }
-  return string;
-}
-
-QStringList OFileSelector::selectedNames()const
-{
-  QStringList list;
-  return list;
-}
-
-DocLnk OFileSelector::selectedDocument( )const
-{
-  DocLnk lnk;
-  return lnk;
-}
-void OFileSelector::updateLay()
-{
-  /* if( m_shTool )
-    //
-  else
-    // hide
-  */
-  // save the state
-  bool check = false;
-  if( m_checkPerm != 0 )
-    check = m_checkPerm->isChecked();
-  QString text;
-
-  if( m_edit != 0 )
-    text = m_edit->text();
-  // save current mimetype
-
-  delItems();
-  delete m_checkPerm;
-  m_checkPerm = 0;
-  delete m_edit;
-  m_edit = 0;
-  delete m_fnLabel;
-  m_fnLabel = 0;
-  delete m_ok;
-  m_ok = 0;
-  delete m_cancel;
-  m_cancel = 0;
-  delete m_mimeCheck;
-  m_mimeCheck = 0;
-  delete m_viewCheck;
-  m_viewCheck = 0;
-  delete m_select; // test
-  delete m_stack;
-  //delete m_list;
-  init();
-  if( m_shLne )
-    m_edit->setText(text );
-  if( m_shPerm )
-    m_checkPerm->setChecked(check );
-}
-
-// let's update the mimetypes. Use the current mimefilter for the 2nd QDir retrieve
-// insert QListViewItems with the right options
-bool OFileSelector::compliesMime(const QString &path, const QString &mime )
+// if a mime complies with the m_mimeCheck->currentItem
+bool OFileSelector::compliesMime( const QString &path, const QString &mime )
 {
   if( mime == "All" )
     return true;
@@ -464,687 +876,110 @@ bool OFileSelector::compliesMime(const QString &path, const QString &mime )
   return false;
 }
 
-void OFileSelector::reparse()
+void OFileSelector::slotFileSelected( const QString &string )
 {
-    qDebug("reparse");
-  if(m_View== 0 || m_selector == NORMAL)
-    return;
-  m_View->clear();
-  QString currMime =m_mimeCheck->currentText();
-  // update the mimetype now
-  if( m_autoMime ) {
-    QDir dir( m_currentDir );
-    m_mimetypes.clear();
-    m_mimeCheck->clear();
-    dir.setFilter( QDir::Files | QDir::Readable );
-    dir.setSorting(QDir::Size ); 
-    const QFileInfoList *list = dir.entryInfoList();
-    QFileInfoListIterator it( *list );
-    QFileInfo *fi;
-    while( (fi=it.current())  ){
-      if(fi->extension() == QString::fromLatin1("desktop") ){
-  ++it;
-  continue;
-      }
-      MimeType type(fi->filePath() );
-      if( !m_mimetypes.contains( type.id() ) )
-  m_mimetypes.append( type.id() );
-
-      ++it;
-    }
-    m_mimetypes.prepend("All" );
-    m_mimeCheck->insertStringList(m_mimetypes );
-    // set it to the current mimetype
-    m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currMime ) ); 
-  }else{
-    m_mimeCheck->clear();
-    m_mimeCheck->insertItem( m_mimetypes.join(";")  );
-  }
-  
-  QDir dir( m_currentDir );
-  //dir.setFilter(-1 );
-  int sort = QDir::Name | QDir::DirsFirst | QDir::Reversed;
-  if( m_case )
-    sort = QDir::IgnoreCase;
-  dir.setSorting( sort  );
-  
-  int filter;
-  /*  if( m_dir && !m_files)
-      filter |= QDir::Dirs;
-      else if( !m_dir && m_files )
-      filter |= QDir::Files;
-      else
-      filter |= QDir::All;
-  */
-  if( m_selector == EXTENDED_ALL )
-    filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
-  else
-    filter = QDir::Files | QDir::Dirs | QDir::All;
-  dir.setFilter( filter );
-  qDebug("infoList");
-  const QFileInfoList *list = dir.entryInfoList();
-  QFileInfoListIterator it( *list );
-  QFileInfo *fi;
-  while( (fi=it.current())  ){
-    if(fi->fileName() == ".." || fi->fileName() == "." ){
-      ++it;
-      continue;
-    }
-//    qWarning("Test:  %s", fi->fileName().latin1() );
-    if(fi->isSymLink() ){
-//      qWarning("Symlink %s", fi->fileName().latin1() );
-      QString file = fi->dirPath(true)+"/"+ fi->readLink();
-//      qWarning("File ->%s", file.latin1() );
-      for(int i=0; i<=4; i++ ){ // prepend from dos
-  QFileInfo info( file );
-  if( !info.exists() ){
-//    qWarning("does not exist" );
-    addSymlink(currMime,  fi, TRUE );
-    break;
-  }else if( info.isDir() ){ 
-//    qWarning("isDir" );
-    addDir(currMime, fi, TRUE  );
-    break;
-  }else if( info.isFile() ){
-//    qWarning("isFile" );
-    addFile(currMime, fi, TRUE );
-    break;
-  }else if( info.isSymLink() ){
-    file = info.dirPath(true)+ "/"+ info.readLink();
-//    qWarning("isSymlink again %s", file.latin1() );
-  }else if( i == 4 ){ // just insert it and have the symlink symbol
-    addSymlink(currMime, fi );
-//    qWarning("level too deep" );
-  }
-      }
-    }else if( fi->isDir() ){
-      addDir(currMime, fi );
-    }else if( fi->isFile() ) { // file ?
-      addFile(currMime, fi );
-    }
-    ++it;  
-  }
-  m_View->sort();
-//  m_View->ensureItemVisible();
-}
-
-QString OFileSelector::directory()const
-{
-    QDir d( m_currentDir);
-  return d.absPath();
-}
-
-int OFileSelector::fileCount()
-{
-  return 0;
-}
-
-void OFileSelector::slotOk( )
-{
-  emit ok();
-}
-
-void OFileSelector::slotCancel( )
-{
-  emit cancel();
-}
-
-void OFileSelector::initializeName()
-{
-  m_boxName = new QHBoxLayout(this );
-  m_edit = new QLineEdit(this );
-  m_fnLabel = new QLabel(this );
-  m_fnLabel->setText(tr("Name:") );
-  m_boxName->addWidget(m_fnLabel );
-  m_boxName->insertSpacing(1, 8 );
-  m_boxName->addWidget(m_edit, 100 );
-
-  m_lay->addLayout(m_boxName);
-}
-
-void OFileSelector::initializeYes()
-{
-  m_ok = new QPushButton("&Save", this, "save" );
-  m_cancel = new QPushButton("C&ancel", this, "cancel" );
-  m_boxOk = new QHBoxLayout(this );
-  m_boxOk->addWidget( m_ok, Qt::AlignHCenter );
-  m_boxOk->insertSpacing(1, 8 );
-  m_boxOk->addWidget( m_cancel, Qt::AlignHCenter);
-  m_lay->addLayout(m_boxOk );
-  connect(m_ok, SIGNAL(clicked() ),
-    this, SLOT(slotOk() )  );
-  connect(m_cancel, SIGNAL(clicked() ),
-    this, SLOT(slotCancel() )  );
-
-}
-
-void OFileSelector::initializeChooser()
-{
-  m_boxView = new QHBoxLayout(this );
-
-  m_mimeCheck = new QComboBox(this, "mime check");
-  m_viewCheck = new QComboBox(this, "view check");
-  m_boxView->addWidget(m_viewCheck, 0 );
-  m_boxView->insertSpacing(2, 8 );
-  m_boxView->addWidget(m_mimeCheck, 0 );
-  m_lay->addLayout(m_boxView );
-  m_lay->insertSpacing( 4, 8);
-
-  m_viewCheck->insertItem(tr("Documents") );
-  m_viewCheck->insertItem(tr("Files") );
-  m_viewCheck->insertItem(tr("All Files") );
-
-   if(!m_autoMime )
-     m_mimeCheck->insertItem(m_mimetypes.join("," ) );
-   else{ // check
-     updateMimes();
-     m_mimeCheck->insertStringList( m_mimetypes );
-   }
-
-  connect( m_viewCheck, SIGNAL(activated(const QString &) ),
-     this, SLOT(slotViewCheck(const QString & ) ) );
-
-  connect( m_mimeCheck, SIGNAL(activated(const QString &) ),
-     this, SLOT(slotMimeCheck(const QString & ) ) );
-}
-
-void OFileSelector::slotMimeCheck(const QString &view ){
-  if(m_selector == NORMAL ){
-    delete m_select;
-    m_select = new FileSelector(view == "All" ? QString::null : view 
-        , m_stack, "fileselector", FALSE, FALSE );
-    m_stack->addWidget( m_select, NORMAL );
-    m_stack->raiseWidget( NORMAL );
-  }else{
-    reparse();
-  }
-}
-
-void OFileSelector::slotViewCheck(const QString &view ){
-  qWarning("changed: show %s", view.latin1() );
-  // if the current view is the one
-  QString currMime = m_mimeCheck->currentText();
-  if( view == QString::fromLatin1("Documents") ){
-    // get the mimetype now
-    // check if we're the current widget and return
-    if( m_View != 0) { // delete 0 shouldn't crash but it did :( 
-      delete m_View;
-      delete m_boxToolbar;
-      delete m_homeButton;
-      delete m_docButton;
-      delete m_location;
-      delete m_up;
-      delete m_pseudo;
-      //if(m_pseudoLayout!=0 )
-//  delete m_pseudoLayout;
-    }
-    m_View = 0;
-    m_boxToolbar = 0;
-    m_homeButton = 0;
-    m_docButton = 0;
-    m_location = 0;
-    m_up = 0;
-    m_pseudo = 0;
-    m_pseudoLayout = 0;
-
-    delete m_select;
-    m_select = new FileSelector( currMime == "All" ? QString::null : currMime,
-         m_stack,"fileselector", FALSE, FALSE );
-    m_stack->addWidget( m_select, NORMAL );
-    m_mimeCheck->clear();
-    m_selector = NORMAL;
-    updateMimes();
-    m_mimeCheck->insertStringList( m_mimetypes );
-    m_stack->raiseWidget( NORMAL );
-    connect(m_select, SIGNAL(fileSelected( const DocLnk &) ), this, SLOT(slotFileBridgeSelected(const DocLnk &) ) );    
-
-  } else if(view == QString::fromLatin1("Files") ){
-    // remove from the stack
-    delete m_select;
-    m_select = 0;
-    delete m_View;
-    m_View = 0;
-
-    m_selector = EXTENDED;
-    initializeListView();
-    reparse();
-  } else if(view == QString::fromLatin1("All Files") ) {
-    // remove from the stack
-    delete m_select;
-    m_select = 0;
-    delete m_View;
-    m_View = 0;
-
-    m_selector = EXTENDED_ALL;
-    initializeListView();
-    reparse();
-  }
-}
-
-
-void OFileSelector::updateMimes() // lets check which mode is active
-  // check the current dir for items then
-{
- if( m_autoMime ){  
-   m_mimetypes.clear();
-   m_mimetypes.append("All" );
-   if( m_selector == NORMAL ){
-     DocLnkSet set;
-     Global::findDocuments(&set, QString::null );
-     QListIterator<DocLnk> dit( set.children() );
-     for ( ; dit.current(); ++dit ) {
-       if( !m_mimetypes.contains((*dit)->type()  ) )
-	 m_mimetypes.append( (*dit)->type() );
-     }
-   }else{
-     // should be allreday updatet
-     ;
-   }
- }
-}
-
-void OFileSelector::initializeListView()
-{
-      // in the instance that a developer selected the view to be Files or Entended,
-      // in the initial initialization, you are deleting objects here
-      // that aren't even existing yet.
-    
-  // just to make sure but clean it up better FIXME
-  delete m_View;
-  m_View = 0;
-  delete m_boxToolbar;
-  delete m_homeButton;
-  delete m_docButton;
-  delete m_location;
-  delete m_up;
-  delete m_pseudo;
-
-  m_boxToolbar = 0;
-  m_homeButton = 0;
-  m_docButton = 0;
-  m_location = 0;
-  m_up = 0;
-  m_pseudo = 0;
-  m_pseudoLayout = 0;
-  qDebug(" time for the toolbar ");
-  m_pseudo = new QWidget(m_stack, "Pseudo Widget");
-  m_pseudoLayout = new QVBoxLayout(m_pseudo );
-  if(m_shTool ){
-    m_boxToolbar = new QHBoxLayout( );
-    m_boxToolbar->setAutoAdd( true );
-    m_location = new QComboBox(m_pseudo );
-    m_location ->setEditable(TRUE);
-    connect( m_location, SIGNAL(activated(const QString &) ), this, SLOT( locationComboActivated(const QString & ) ) );
-    connect( m_location->lineEdit(),SIGNAL(returnPressed()), this,SLOT( locationComboChanged()));
-
-    m_up = new QPushButton(Resource::loadIconSet("up"),"", m_pseudo,"cdUpButton");
-    m_up->setFixedSize( QSize( 20, 20 ) );
-    connect(m_up ,SIGNAL(clicked()),this,SLOT(cdUP()  ) );
-    m_up->setFlat(TRUE);
-
-    m_homeButton = new QPushButton(Resource::loadIconSet("home") , "", m_pseudo);
-    m_homeButton->setFixedSize( QSize( 20, 20 ) );
-    connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotHome() ) );
-    m_homeButton->setFlat(TRUE);
-
-    m_docButton = new QPushButton(Resource::loadIconSet("DocsIcon"),"", m_pseudo,"docsButton");
-    m_docButton->setFixedSize( QSize( 20, 20 ) );
-    connect(m_homeButton,SIGNAL(clicked()),this,SLOT(slotDoc() ) );
-    m_docButton->setFlat(TRUE);
-
-    m_boxToolbar->addWidget(m_location );
-    m_boxToolbar->addWidget(m_up );
-    m_boxToolbar->addWidget(m_homeButton );
-    m_boxToolbar->addWidget(m_docButton );
-    m_pseudoLayout->addLayout(m_boxToolbar );
-    qDebug("lets fill the combobox");
-    StorageInfo storage;
-    const QList<FileSystem> &fs = storage.fileSystems();
-    QListIterator<FileSystem> it ( fs );
-    for( ; it.current(); ++it ){
-      const QString disk = (*it)->name();
-      const QString path = (*it)->path();
-      m_location->insertItem(path+ "<-"+disk );
-    }
-    int count = m_location->count();
-    m_location->insertItem(m_currentDir );
-    m_location->setCurrentItem( count );
-  };
-
-  m_View = new QListView(m_pseudo, "Extended view" );
-  m_stack->addWidget( m_pseudo, EXTENDED );
-  m_stack->raiseWidget( EXTENDED );
-  m_pseudoLayout->addWidget(m_View );
-  QPEApplication::setStylusOperation( m_View->viewport(),QPEApplication::RightOnHold);
-  // set up the stuff
-  // Pixmap Name Date Size mime
-  //(m_View->header() )->hide();
-  //m_View->setRootIsDecorated(false);
-  m_View->addColumn(" ");
-  m_View->addColumn(tr("Name"),135 );
-  m_View->addColumn(tr("Size"),-1 );
-  m_View->addColumn(tr("Date"), 60 );
-  m_View->addColumn(tr("Mime Type"),-1 );
-  QHeader *header = m_View->header();
-  header->hide();
-  m_View->setSorting(1 );
-  m_View->setAllColumnsShowFocus( TRUE);
-  // connect now
-  connect(m_View, SIGNAL(selectionChanged() ), this, SLOT(slotSelectionChanged() ) );
-  connect(m_View, SIGNAL(currentChanged(QListViewItem *) ), this, SLOT(slotCurrentChanged(QListViewItem * ) ) );
-  connect(m_View, SIGNAL(mouseButtonClicked(int, QListViewItem*, const QPoint &, int) ), 
-    this, SLOT(slotClicked( int, QListViewItem *, const QPoint &, int) ) );
-  connect(m_View, SIGNAL(mouseButtonPressed(int, QListViewItem *, const QPoint &, int )), 
-    this, SLOT(slotRightButton(int, QListViewItem *, const QPoint &, int  ) ) );
-
- 
-};
-
-/* If a item is locked  depends on the mode
-   if we're in OPEN !isReadable is locked
-   if we're in SAVE !isWriteable is locked
-
-
- */
-
-
-void OFileSelector::addFile(const QString &mime, QFileInfo *info, bool symlink ){
-//  qWarning("Add Files" );
-  if( !m_files ){
-//    qWarning("not mfiles" );
-    return;
-  }
-
-  MimeType type( info->filePath() );
-  QString name;
-  QString dir;
-  bool locked= false;
-  if(mime == "All" ){
-    ;
-  }else if( type.id() != mime ) {
-    return;
-  }
-  QPixmap pix = type.pixmap(); 
-  if(pix.isNull() )
-    pix = Resource::loadPixmap( "UnknownDocument-14" );
-  dir = info->dirPath( true );
-  if( symlink ) { // check if the readLink is readable
-    // do it right later
-    name = info->fileName() + " -> " + info->dirPath() + "/" + info->readLink();
-  }else{ // keep track of the icons
-    name = info->fileName();
-    if( m_mode == OPEN ){
-      if( !info->isReadable() ){
-  locked = true;
-  pix = Resource::loadPixmap("locked" );
-      }
-    }else if( m_mode == SAVE ){
-      if( !info->isWritable() ){
-  locked = true;
-  pix = Resource::loadPixmap("locked" );
-      }
-    } 
-  }
-  new OFileSelectorItem( m_View, pix, name,
-       info->lastModified().toString(),
-       QString::number( info->size() ),
-       dir, locked ); 
-}
-
-void OFileSelector::addDir(const QString &/*mime*/, QFileInfo *info, bool symlink  )
-{
-  if(!m_dir )
-    return;
-  //if( showDirs )
-  {
-    bool locked=false;
-    QString name;
-    QPixmap pix;
-    if( ( m_mode == OPEN && !info->isReadable() ) || ( m_mode == SAVE && !info->isWritable()  ) ){
-      locked = true;
-      if( symlink ){
-  pix = (*m_pixmaps)["symlinkedlocked"];
-      }else{
-  pix = Resource::loadPixmap("lockedfolder"  );
-      }
-    }else{
-      if( symlink ){
-  pix = (*m_pixmaps)["dirsymlink" ];
-      }else{
-  pix = Resource::loadPixmap("folder"  );
-      }
-    }
-    if( symlink){
-      name = info->fileName()+ "->"+ info->dirPath(true) +"/" +info->readLink();
-
-    }else{
-      //if(info->isReadable() )
-      name = info->fileName();
-    }
-
-      new OFileSelectorItem(m_View, pix,
-          name, info->lastModified().toString(),
-          QString::number(info->size() ),info->dirPath(true),  locked, true );
-
-  }
-}
-
-void OFileSelector::setShowDirs(bool dir )
-{
-  m_dir = dir;
-  reparse();
-}
-
-void OFileSelector::slotFileSelected(const QString &string )
-{
-  if(m_shLne )
+  if( m_shLne )
     m_edit->setText( string );
-
   emit fileSelected( string );
-  // do AppLnk stuff
-} 
-
+}
 void OFileSelector::slotFileBridgeSelected( const DocLnk &lnk )
 {
-  slotFileSelected(lnk.name() );
-  emit fileSelected( lnk );
+  slotFileSelected( lnk.name() );
+  // emit fileSelected( lnk );
 }
-
-void OFileSelector::slotSelectionChanged() // get the current items
-  // fixme
+void OFileSelector::slotSelectionChanged()
 {
-  qWarning("selection changed" );
+
 }
-
-void OFileSelector::slotCurrentChanged(QListViewItem *item )
+void OFileSelector::slotCurrentChanged(QListViewItem* item )
 {
-//   qWarning("current changed" );
   if( item == 0 )
     return;
-
-  if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
-    OFileSelectorItem *sel = (OFileSelectorItem*)item;
+  if( m_selector == EXTENDED || m_selector == EXTENDED_ALL ) {
+    OFileSelectorItem *sel = (OFileSelectorItem*) item; // start to use the C++ casts ;)
     if(!sel->isDir() ){
-//       qWarning("is not dir" );
-      if(m_shLne ){
-  m_edit->setText(sel->text(1) );
-//   qWarning("setTexy" );
-      }
+      if( m_shLne )
+	m_edit->setText( sel->text(1) );
     }
-  }else {
-    qWarning("mode not extended" );
   }
 }
-
-// either select or change dir
-void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &/*point*/, int )
+void OFileSelector::slotClicked( int button, QListViewItem *item, const QPoint &, int)
 {
-  if( item == 0 )
+  if ( item == 0 )
     return;
 
   if( button != Qt::LeftButton )
-    return; 
+    return;
 
-//  qWarning("clicked" );
-  if(m_selector == EXTENDED || m_selector == EXTENDED_ALL ){
-//     qWarning("inside" );
+  switch( m_selector ){
+  default:
+    break;
+  case EXTENDED: // fall through
+  case EXTENDED_ALL:{
     OFileSelectorItem *sel = (OFileSelectorItem*)item;
-    if(!sel->isLocked() ){ // not locked either changedir or open
+    if(!sel->isLocked() ){
       QStringList str = QStringList::split("->", sel->text(1) );
-      if(sel->isDir() ){
-        cd( sel->directory() + "/" + str[0] );
-      } else {
-//           qWarning("file" );
-          if(m_shLne )
-              m_edit->setText(str[0] );
-          emit fileSelected(str[0] );
-            // emit DocLnk need to do it
+      if( sel->isDir() ){
+	cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
+	// if MODE Dir m_shLne set the Text
+      }else{
+	if( m_shLne )
+	  m_edit->setText(  str[0].stripWhiteSpace() );
+	emit fileSelected( sel->directory() + "/" + str[0].stripWhiteSpace() );
       }
-    } else {
-      qWarning( "locked" );
     }
-  };
+    break;
+  }
+  }
 }
-
 void OFileSelector::slotRightButton(int button, QListViewItem *item, const QPoint &, int )
 {
-  if (item == 0 )
+  if( item == 0 )
     return;
 
   if( button != Qt::RightButton )
-    return; 
-//   qWarning("right button" );
-  slotContextMenu(item);
-}
-
-void OFileSelector::slotContextMenu(QListViewItem *item)
-{
-//   qWarning("context menu" );
-  if( item ==0 || !m_showPopup )
     return;
- 
-  if( m_custom !=0){
-    m_custom->exec();
-  }else{
-    QPopupMenu menu;
-    QAction up;
-    up.setText("cd up");
-    up.addTo( &menu );
-    connect(&up, SIGNAL(activated() ),
-      this, SLOT(cdUP()  ) );
-
-    QAction act;
-    OFileSelectorItem *sel = (OFileSelectorItem*)item;
-    if(sel->isDir() ){
-      act.setText( tr("Change Directory") );
-      act.addTo(&menu );
-      connect(&act, SIGNAL(activated() ),
-        this, SLOT(slotChangedDir() ) );
-    }else{
-      act.setText( tr("Open file" )  );
-      act.addTo( &menu );
-      connect(&act, SIGNAL(activated() ),
-        this, SLOT(slotOpen() ) );
-    }
-    QAction rescan;
-    rescan.setText( tr("Rescan")  );
-    rescan.addTo( &menu );
-    connect(&rescan, SIGNAL(activated() ),
-      this, SLOT(slotRescan() ) );
-
-    QAction rename;
-    rename.setText( tr("Rename") );
-    rename.addTo( &menu );
-    connect(&rename, SIGNAL(activated() ),
-      this, SLOT(slotRename() ) );
-
-    menu.insertSeparator();
-    QAction delItem;
-    delItem.setText( tr("Delete")  );
-    delItem.addTo(&menu );
-    connect(&delItem, SIGNAL(activated() ),
-      this, SLOT(slotDelete() ) );
-
-    menu.exec(QCursor::pos() );
-  }
+  slotContextMenu( item );
 }
-
-bool OFileSelector::cd(const QString &str )
+void OFileSelector::slotContextMenu( QListViewItem *item)
 {
-//   qWarning(" dir %s", str.latin1() );
-  QDir dir( str);
-  if(dir.exists() ){
-    m_currentDir = dir.absPath();
-    reparse();
-    if(m_shTool ){
-        int count = m_location->count();
-        insertLocationPath( str ,count );
-      m_location->setCurrentItem( count );
-    }
-    return true;
-  }
-  return false;
-}
 
-void  OFileSelector::insertLocationPath(const QString &currentPath, int count) {
-    QStringList pathList;
-    bool underDog = FALSE;
-    for(int i=0;i<count;i++) {
-        pathList << m_location->text(i);
-        if( m_location->text(i) == currentPath)
-            underDog = TRUE;
-    }
-    if( !underDog) {
-        m_location->clear();
-        if( currentPath.left(2)=="//")
-            pathList.append( currentPath.right(currentPath.length()-1) );
-        else
-            pathList.append( currentPath );
-        m_location->insertStringList( pathList,-1);
-    }
 }
-
 void OFileSelector::slotChangedDir()
 {
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   if(sel->isDir() ){
     QStringList str = QStringList::split("->", sel->text(1) );
-    cd( sel->directory() + "/" + str[0] );
-        
+    cd( sel->directory() + "/" + str[0].stripWhiteSpace() );
   }
 }
-
 void OFileSelector::slotOpen()
 {
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   if(!sel->isDir() ){
     QStringList str = QStringList::split("->", sel->text(1) );
-    slotFileSelected( str[0] );
+    slotFileSelected( sel->directory() +"/" +str[0].stripWhiteSpace() );
   }
 }
-
 void OFileSelector::slotRescan()
+{
+
+}
+void OFileSelector::slotRename()
 {
   reparse();
 }
-
-void OFileSelector::slotRename()
-{
-  // rename inline
-}
-
 void OFileSelector::slotDelete()
 {
-//   qWarning("delete slot" );
   OFileSelectorItem *sel = (OFileSelectorItem*)m_View->currentItem();
   QStringList list = QStringList::split("->", sel->text(1) );
   if( sel->isDir() ){
-      QString str = QString::fromLatin1("rm -rf ") + list[0]; //better safe than sorry
+    QString str = QString::fromLatin1("rm -rf ") + sel->directory() +"/" + list[0]; //better safe than sorry
     switch ( QMessageBox::warning(this,tr("Delete"),tr("Do you really want to delete\n")+list[0],
                                   tr("Yes"),tr("No"),0,1,1) ) {
-          case 0:
-              ::system(str.utf8().data() );
-          break;
+    case 0:
+      ::system(str.utf8().data() );
+    break;
     }
   } else {
     QFile::remove( list[0] );
@@ -1152,7 +987,6 @@ void OFileSelector::slotDelete()
   m_View->takeItem( sel );
   delete sel;
 }
-
 void OFileSelector::cdUP()
 {
   QDir dir( m_currentDir );
@@ -1161,34 +995,139 @@ void OFileSelector::cdUP()
     m_currentDir = dir.absPath();
     reparse();
     int count = m_location->count();
-    insertLocationPath( m_currentDir, count);
+    slotInsertLocationPath( m_currentDir, count);
     m_location->setCurrentItem( indexByString( m_location, m_currentDir));
-//this wont work in all instances
-      // FIXME
+    //this wont work in all instances
+    // FIXME
   }
 }
-
 void OFileSelector::slotHome()
 {
   cd(QDir::homeDirPath() );
 }
-
 void OFileSelector::slotDoc()
 {
-  cd(QDir::homeDirPath() + "/Documents" );
+  cd(QPEApplication::documentDir() );
 }
-
-void OFileSelector::slotNavigate()
+void OFileSelector::slotNavigate( )
 {
 
 }
+// fill the View with life
+void OFileSelector::reparse()
+{
+  if( m_selector == NORMAL )
+    return;
+  if( m_selector == EXTENDED || m_selector == EXTENDED_ALL )
+    m_View->clear();
+  else // custom view
+    ; // currentView()->clear();
+  if( m_shChooser)
+    qWarning("reparse %s", m_mimeCheck->currentText().latin1() );
 
-void OFileSelector::locationComboActivated(const QString & file ) {
-    cd(file.left(file.find("<-",0,TRUE)));
-    reparse();
-}
+  QString currentMimeType;
+  // let's update the mimetype
+  if( m_autoMime ){
+    m_mimetypes.clear();
+    // ok we can change mimetype so we need to be able to give a selection
+    if( m_shChooser ) {
+      currentMimeType = m_mimeCheck->currentText();
+      m_mimeCheck->clear();
 
-void OFileSelector::locationComboChanged() {
-    cd( m_location->lineEdit()->text());
-    reparse();
+      // let's find possible mimetypes
+      QDir dir( m_currentDir );
+      dir.setFilter( QDir::Files | QDir::Readable );
+      dir.setSorting( QDir::Size );
+      const QFileInfoList *list = dir.entryInfoList();
+      QFileInfoListIterator it( *list );
+      QFileInfo *fi;
+      while( (fi=it.current() ) ) {
+	if( fi->extension() == QString::fromLatin1("desktop") ){
+	  ++it;
+	  continue;
+	}
+	MimeType type( fi->absFilePath() );
+	if( !m_mimetypes.contains( type.id() ) ){
+	  //qWarning("Type %s", type.id().latin1() );
+	  m_mimetypes.append( type.id() );
+	}
+
+	++it;
+      }
+      // add them to the chooser
+      m_mimeCheck->insertItem( tr("All") );
+      m_mimeCheck->insertStringList( m_mimetypes );
+      m_mimeCheck->setCurrentItem( indexByString( m_mimeCheck, currentMimeType ) );
+      currentMimeType = m_mimeCheck->currentText();
+    }
+  }else { // no autoMime
+    currentMimeType = m_mimetypes.join(";");
+    if( m_shChooser ){
+      m_mimeCheck->clear();
+      m_mimeCheck->insertItem(m_mimetypes.join(",") );
+    }
+  }
+  // now we got our mimetypes we can add the files
+
+  QDir dir( m_currentDir );
+
+  int sort;
+  if ( m_case )
+    sort = (QDir::IgnoreCase | QDir::Name | QDir::DirsFirst | QDir::Reversed);
+  else  
+    sort = (QDir::Name | QDir::DirsFirst | QDir::Reversed);
+  dir.setSorting( sort );
+
+  int filter;
+  if( m_selector == EXTENDED_ALL /*|| m_selector ==CUSTOM_ALL */ ){
+    filter = QDir::Files | QDir::Dirs | QDir::Hidden | QDir::All;
+  }else
+    filter = QDir::Files | QDir::Dirs | QDir::All;
+  dir.setFilter( filter );
+
+  // now go through all files
+  const QFileInfoList *list = dir.entryInfoList();
+  QFileInfoListIterator it( *list );
+  QFileInfo *fi;
+  while( (fi=it.current() ) ){
+    //qWarning("True and only" );
+    if( fi->fileName() == QString::fromLatin1("..") || fi->fileName() == QString::fromLatin1(".") ){
+      //qWarning(".. or ." );
+      ++it;
+      continue;
+    }
+    if( fi->isSymLink() ){
+      QString file = fi->dirPath( true ) + "/" + fi->readLink();
+      for( int i = 0; i<=4; i++) { // 5 tries to prevent dos
+	QFileInfo info( file );
+	if( !info.exists() ){
+	  addSymlink( currentMimeType, fi, TRUE );
+	  break;
+	}else if( info.isDir() ){
+	  addDir( currentMimeType, fi, TRUE );
+	  break;
+	}else if( info.isFile() ){
+	  addFile( currentMimeType, fi, TRUE );
+	  break;
+	}else if( info.isSymLink() ){
+	  file = info.dirPath(true ) + "/" + info.readLink() ;
+	  break;
+	}else if( i == 4){
+	  addSymlink( currentMimeType, fi );
+	}
+      } // off for loop
+    }else if( fi->isDir() ){
+      addDir( currentMimeType, fi );
+    }else if( fi->isFile() ){
+      addFile( currentMimeType, fi );
+    }
+    //qWarning( "%s", fi->fileName().latin1() );
+    ++it;
+  } // of while loop
+  m_View->sort(); 
+  if( m_shTool ){
+    m_location->insertItem( m_currentDir );
+
+  }
+  // reenable painting and updates
 }

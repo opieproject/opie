@@ -63,6 +63,7 @@ class QHBoxLayout;
 class QVBoxLayout;
 class QPopupMenu;
 class QFileInfo;
+class QHBox;
 // 
 
 
@@ -81,17 +82,17 @@ class OFileSelector : public QWidget {
 
   OFileSelector(const QString &mimeFilter, QWidget *parent,
 		const char *name, bool newVisible = TRUE,
-		bool closeVisible = FALSE ) { };
+		bool closeVisible = FALSE );
 
-  ~OFileSelector() {};
+  ~OFileSelector();
 
   // currently only for the FILESELECTOR Mode
-  void setNewVisible( bool /*b*/ ) { };
-  void setCloseVisible(bool /*b*/ ) { };
+  void setNewVisible( bool /*b*/ );
+  void setCloseVisible(bool /*b*/ );
 
   // end file selector mode
   // deprecated
-  void reread() { reparse(); };
+  void reread();
   // make sure not to leak please
   const DocLnk *selected();
   // end deprecated
@@ -134,7 +135,7 @@ class OFileSelector : public QWidget {
   void setShowPopup( bool pop ) { m_showPopup = pop; };
   void setPopupMenu( QPopupMenu * );
 
-  void updateLay();
+  //  void updateLay();
 
   void reparse(); // re reads the dir
 
@@ -159,16 +160,19 @@ class OFileSelector : public QWidget {
   void closeMe();
   void ok();
   void cancel();
+  void contextMenu();
 
- protected slots:
+ private slots:
+   void slotTest() { qWarning("slotTest" ); setLineEditVisible(false );  };
   void slotOk();
   void slotCancel();
   void slotViewCheck(const QString & );
   void slotMimeCheck(const QString & );
-  void locationComboActivated(const QString & );
-  void insertLocationPath(const QString &, int);
+  void slotLocationActivated(const QString & );
+  void slotInsertLocationPath(const QString &, int);
   void locationComboChanged();
- protected:
+
+ private:
   void init();
   void updateMimes();
   
@@ -178,7 +182,7 @@ class OFileSelector : public QWidget {
   int m_mode, m_selector;
   QComboBox *m_location, *m_mimeCheck, *m_viewCheck;
   QPushButton *m_homeButton, *m_docButton, *m_hideButton, *m_ok, *m_cancel;
-  QPushButton  *m_reread, *m_up;
+  QPushButton  *m_reread, *m_up, *m_new, *m_close;
   QListView *m_View;
   QCheckBox *m_checkPerm;
   QWidget *m_pseudo;
@@ -186,17 +190,17 @@ class OFileSelector : public QWidget {
 
   QString m_currentDir;
   QString m_name;
-  QStringList m_mimetypes, requestedMimeTypesList;
+  QStringList m_mimetypes;
 
   FileSelector *m_select;
   QWidgetStack *m_stack;
   QVBoxLayout *m_lay;
   QGridLayout *m_Oselector;
 
-  QHBoxLayout *m_boxToolbar;
-  QHBoxLayout *m_boxOk;
-  QHBoxLayout *m_boxName;
-  QHBoxLayout *m_boxView;
+  QHBox *m_boxToolbar;
+  QHBox *m_boxOk; // (no layout anymore) wait
+  QHBox *m_boxName; // (no Layout anymore) wait
+  QHBox *m_boxView;
 
   QPopupMenu *m_custom;
 
@@ -217,7 +221,7 @@ class OFileSelector : public QWidget {
   bool m_files       : 1;
   bool m_showPopup   : 1;
 
-  // implementation todo
+  void initVars();
   virtual void addFile(const QString &mime, QFileInfo *info, bool symlink = FALSE );
   virtual void addDir( const QString &mime, QFileInfo *info , bool symlink = FALSE );
   virtual void addSymlink(const QString &, QFileInfo *, bool = FALSE ){};
@@ -226,6 +230,7 @@ class OFileSelector : public QWidget {
   void initializeYes();
   void initializeChooser();
   void initializeListView();
+  void initializePerm();
   void initPics();
   bool compliesMime(const QString &path, const QString &mime);
 
