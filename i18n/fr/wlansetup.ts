@@ -4,7 +4,7 @@
     <name>WLAN</name>
     <message>
         <source>Wireless LAN Setting</source>
-        <translation>Configuration réseau sans fils (LAN)</translation>
+        <translation>Configuration réseau sans fil (LAN)</translation>
     </message>
     <message>
         <source>Config</source>
@@ -20,7 +20,7 @@
     </message>
     <message>
         <source>Specific ESSID</source>
-        <translation>ESSID specifique</translation>
+        <translation>ESSID spécifique</translation>
     </message>
     <message>
         <source>Network Type</source>
@@ -64,7 +64,7 @@
     </message>
     <message>
         <source>Key Length</source>
-        <translation>Longueur de la Clé</translation>
+        <translation>Longueur de la clé</translation>
     </message>
     <message>
         <source>40 Bits</source>
@@ -76,7 +76,7 @@
     </message>
     <message>
         <source>Authentication Type</source>
-        <translation>Type d&apos;authentification</translation>
+        <translation>Type d&apos;identification</translation>
     </message>
     <message>
         <source>Open System</source>
@@ -88,7 +88,7 @@
     </message>
     <message>
         <source>Enable Wep</source>
-        <translation>permettre le &quot;Wep&quot;</translation>
+        <translation>Activer le &quot;Wep&quot;</translation>
     </message>
 </context>
 </TS>

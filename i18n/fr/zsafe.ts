@@ -7,62 +7,61 @@
     </message>
     <message>
         <source>Do you want to delete?</source>
-        <translation type="unfinished">Wollen Sie wirklich löschen?</translation>
+        <translation type="unfinished">Voulez-vous effacer?</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation type="unfinished">&amp;Löschen</translation>
+        <translation type="unfinished">&amp;Effacer</translation>
     </message>
     <message>
         <source>D&amp;on&apos;t Delete</source>
-        <translation type="unfinished">&amp;Nicht löschen</translation>
+        <translation type="unfinished">&amp;Ne pas effacer</translation>
     </message>
     <message>
         <source>Edit Entry</source>
-        <translation type="unfinished">Eintrag ändern</translation>
+        <translation type="unfinished">Modifier l&apos;entrée</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nom</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Identifiant</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Mot de passe</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Commentaire</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation type="unfinished">Feld 4</translation>
+        <translation type="unfinished">Champ 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation type="unfinished">Feld 5</translation>
+        <translation type="unfinished">Champ 5</translation>
     </message>
     <message>
         <source>New Entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nouvelle entrée</translation>
     </message>
     <message>
         <source>Entry name must be different
 from the category name.</source>
-        <translation type="unfinished">Die Namen der Einträge
-müssen sich von der
-Kategorie unterscheiden.</translation>
+        <translation type="unfinished">Le nom de l&apos;entrée doit être
+différent de celui de la catégorie.</translation>
     </message>
     <message>
         <source>Search</source>
-        <translation type="unfinished">Suchen</translation>
+        <translation type="unfinished">Rechercher</translation>
     </message>
     <message>
         <source>Entry not found</source>
-        <translation type="unfinished">Eintrag nicht gefunden</translation>
+        <translation type="unfinished">Entrée non trouvée</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -70,188 +69,191 @@ Kategorie unterscheiden.</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation type="unfinished">Feld 2</translation>
+        <translation type="unfinished">Champ 1</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation type="unfinished">Feld 3</translation>
+        <translation type="unfinished">Champ 3</translation>
     </message>
     <message>
         <source>All</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Tous</translation>
     </message>
     <message>
         <source>Text</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Texte</translation>
     </message>
     <message>
         <source>Remove text file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Supprimer fichier texte</translation>
     </message>
     <message>
         <source>Could not remove text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht löschen.</translation>
+        <translation type="unfinished">Impossible de supprimer le fichier texte.</translation>
     </message>
     <message>
         <source>No document defined.
 You have to create a new document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Aucun document défini.
+Vous devez en créer un nouveau</translation>
     </message>
     <message>
         <source>Export text file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Exporter vers un fichier texte</translation>
     </message>
     <message>
         <source>Import text file</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Importer un fichier texte</translation>
     </message>
     <message>
         <source>Could not export to text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht exportieren.</translation>
+        <translation type="unfinished">Impossible d&apos;exporter vers un fichier texte.</translation>
     </message>
     <message>
         <source>Could not import text file.</source>
-        <translation type="unfinished">Konnte Textdatei nicht importieren.</translation>
+        <translation type="unfinished">Impossible d&apos;importer le fichier texte.</translation>
     </message>
     <message>
         <source>Enter Password</source>
-        <translation type="unfinished">Passwort eingeben</translation>
+        <translation type="unfinished">Saisir mot de passe</translation>
     </message>
     <message>
         <source>Wrong password.
 
 ZSafe will now exit.</source>
-        <translation type="unfinished">Falsches Passwort
+        <translation type="unfinished">Mot de passe incorrect
 
-ZSafe wird sich jetzt beenden.</translation>
+ZSafe va s&apos;arrêter.</translation>
     </message>
     <message>
         <source>Wrong password.
 Enter again?</source>
-        <translation type="unfinished">Falsches Passwort.
-Neu eingeben?</translation>
+        <translation type="unfinished">Mot de passe incorrect.
+Le saisir à nouveau?</translation>
     </message>
     <message>
         <source>&amp;Yes</source>
-        <translation type="unfinished">&amp;Ja</translation>
+        <translation type="unfinished">&amp;Oui</translation>
     </message>
     <message>
         <source>&amp;No.</source>
-        <translation type="unfinished">&amp;Nein.</translation>
+        <translation type="unfinished">&amp;Non</translation>
     </message>
     <message>
         <source>Empty document or
 wrong password.
 Continue?</source>
-        <translation type="unfinished">Leeres Dokument oder
-falsches Passwort.
-Fortfahren?</translation>
+        <translation type="unfinished">Document vide ou
+mot de passe incorrect.
+Poursuivre?</translation>
     </message>
     <message>
         <source>&amp;No</source>
-        <translation type="unfinished">&amp;Nein</translation>
+        <translation type="unfinished">&amp;Non</translation>
     </message>
     <message>
         <source>&amp;Yes.</source>
-        <translation type="unfinished">&amp;Ja.</translation>
+        <translation type="unfinished">&amp;Oui</translation>
     </message>
     <message>
         <source>Password is empty.
 Please enter again.</source>
-        <translation type="unfinished">Das Passwort ist leer.
-Bitte nochmals eingeben.</translation>
+        <translation type="unfinished">Le mot de passe est vide.
+Veuillez le saisir à nouveau.</translation>
     </message>
     <message>
         <source>Reenter Password</source>
-        <translation type="unfinished">Passwort nochmals eingeben</translation>
+        <translation type="unfinished">Re-saisir mot de passe</translation>
     </message>
     <message>
         <source>Passwords must be identical.
 Please enter again.</source>
-        <translation type="unfinished">Die Passwörter müssen
-gleich sein. Bitte nochmals
-Passwort eingeben.</translation>
+        <translation type="unfinished">Les mots de passe doivent être identiques.
+Veuillez les saisir à nouveau.</translation>
     </message>
     <message>
         <source>Do you want to save </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Voulez-vous enregistrer?</translation>
     </message>
     <message>
         <source>
 before continuing?</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">
+avant de poursuivre?</translation>
     </message>
     <message>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Sichern</translation>
+        <translation type="unfinished">&amp;Enregistrer</translation>
     </message>
     <message>
         <source>&amp;Don&apos;t Save</source>
-        <translation type="unfinished">&amp;Nicht sichern</translation>
+        <translation type="unfinished">&amp;Ne pas enregistrer</translation>
     </message>
     <message>
         <source>Password file saved.</source>
-        <translation type="unfinished">Passwort-Datei gesichert.</translation>
+        <translation type="unfinished">Fichier de mot de passe sauvegardé.</translation>
     </message>
     <message>
         <source>Do you want to save
 before exiting?</source>
-        <translation type="unfinished">Wollen Sie vor dem Beenden
-die Daten speichern?</translation>
+        <translation type="unfinished">Voulez-vous enregistrer
+avant de sortir?</translation>
     </message>
     <message>
         <source>S&amp;ave with
 new
 password</source>
-        <translation type="unfinished">Mit neuem
-&amp;Passwort
-sichern</translation>
+        <translation type="unfinished">Enregistrer avec
+nouveau mot
+de &amp;Passe</translation>
     </message>
     <message>
         <source>Category</source>
-        <translation type="unfinished">Kategorie</translation>
+        <translation type="unfinished">Categorie</translation>
     </message>
     <message>
         <source>Wait dialog</source>
-        <translation type="unfinished">Bitte warten</translation>
+        <translation type="unfinished">Boite d&apos;attente</translation>
     </message>
     <message>
         <source>Gathering icons...</source>
-        <translation type="unfinished">Suche nach Symbolen...</translation>
+        <translation type="unfinished">Rassemblement des icônes</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
-        <translation type="unfinished">Erzeuge neue ZSafe Datei</translation>
+        <translation type="unfinished">Créer nouveau document ZSafe</translation>
     </message>
     <message>
         <source>Now you have to enter
 a password twice for your
 newly created document.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Vous devez maintenant saisir
+deux fois un mot de passe
+pour le document que vous venez de créer.</translation>
     </message>
     <message>
         <source>Open ZSafe document</source>
-        <translation type="unfinished">Öffne ZSafe Datei</translation>
+        <translation type="unfinished">Ouvrir document ZSafe</translation>
     </message>
     <message>
         <source>Save ZSafe document as..</source>
-        <translation type="unfinished">Speichere ZSafe Datei als..</translation>
+        <translation type="unfinished">Enregistrer document ZSafe sous...</translation>
     </message>
     <message>
         <source>Zaurus Password Manager&lt;br&gt;</source>
-        <translation type="unfinished">Zaurus Passwort Manager&lt;br&gt;</translation>
+        <translation type="unfinished">Gestionnaire Zaurus de mots de passe</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2-jv01b&lt;br&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">ZSafe version 2.1.2-jv01b&lt;br&gt;</translation>
     </message>
     <message>
         <source>by Carsten Schneider&lt;br&gt;</source>
-        <translation type="unfinished">von Carsten Schneider&lt;br&gt;</translation>
+        <translation type="unfinished">par Carsten Schneider&lt;br&gt;</translation>
     </message>
     <message>
         <source>Translations by Robert Ernst&lt;br&gt;</source>
-        <translation type="unfinished">Übersetzungen von Robert Ernst&lt;br&gt;</translation>
+        <translation type="unfinished">Traductions par Christophe Amrein-Marie et Michael Opdenacker&lt;br&gt;</translation>
     </message>
     <message>
         <source>ZSafe version 2.1.2&lt;br&gt;</source>
@@ -262,35 +264,35 @@ newly created document.</source>
     <name>CategoryDialog</name>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation>Catégorie</translation>
     </message>
     <message>
         <source>Icon</source>
-        <translation>Symbol</translation>
+        <translation>Icône</translation>
     </message>
     <message>
         <source>Field 1</source>
-        <translation>Feld 1</translation>
+        <translation>Champ 1</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation>Feld 2</translation>
+        <translation>Champ 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation>Feld 3</translation>
+        <translation>Champ 3</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation>Feld 4</translation>
+        <translation>Champ 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Feld 5</translation>
+        <translation>Champ 5</translation>
     </message>
     <message>
         <source>Field 6</source>
-        <translation>Feld 6</translation>
+        <translation>Champ 6</translation>
     </message>
 </context>
 <context>
@@ -312,19 +314,19 @@ newly created document.</source>
     </message>
     <message>
         <source>Field 6</source>
-        <translation>Feld 6</translation>
+        <translation>Champ 6</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Feld 5</translation>
+        <translation>Champ 5</translation>
     </message>
     <message>
         <source>Password</source>
-        <translation>Mot de Pass</translation>
+        <translation>Mot de passe</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Nom Utilisateur</translation>
+        <translation>Identifiant</translation>
     </message>
     <message>
         <source>Name</source>
@@ -339,18 +341,18 @@ newly created document.</source>
     </message>
     <message>
         <source>Password</source>
-        <translation>Passwort</translation>
+        <translation>Mot de passe</translation>
     </message>
 </context>
 <context>
     <name>ScQtFileDlg</name>
     <message>
         <source>FileDlg</source>
-        <translation>Dateidialog</translation>
+        <translation type="unfinished">FileDlg</translation>
     </message>
     <message>
         <source>file type filter</source>
-        <translation>Dateityp Filter</translation>
+        <translation>Sélection du type de fichier</translation>
     </message>
     <message>
         <source>ComboBox FileTypeFilter
@@ -384,20 +386,24 @@ edit or select the filter</source>
 shows the selected file
 and allows the direct filename
 edit</source>
-        <translation></translation>
+        <translation type="unfinished">Filename LineEdit
+
+affiche le fichier sélectionné
+et permet de le modifier directement.</translation>
     </message>
     <message>
         <source>ComboBox Directory 
 edit or select the directories name</source>
-        <translation></translation>
+        <translation type="unfinished">ComboBox Directory
+Modifier ou sélectionner les noms de répertoire.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>size</source>
-        <translation>Größe</translation>
+        <translation>Taille</translation>
     </message>
     <message>
         <source>type</source>
@@ -405,54 +411,56 @@ edit or select the directories name</source>
     </message>
     <message>
         <source>directory listview</source>
-        <translation>Dateilistenansicht</translation>
+        <translation>Affichage du répertoire sous forme de liste</translation>
     </message>
     <message>
         <source>Directory ListView
 
 shows the list of dirs and files</source>
-        <translation></translation>
+        <translation type="unfinished">Directory ListView
+
+affiche la liste des répertoires et fichiers</translation>
     </message>
 </context>
 <context>
     <name>ScQtFileEditDlg</name>
     <message>
         <source>dir</source>
-        <translation>dir</translation>
+        <translation>rép</translation>
     </message>
     <message>
         <source>file</source>
-        <translation>Datei</translation>
+        <translation>fichier</translation>
     </message>
     <message>
         <source>link</source>
-        <translation>Verknüpfung</translation>
+        <translation>lien</translation>
     </message>
 </context>
 <context>
     <name>SearchDialog</name>
     <message>
         <source>Search</source>
-        <translation>Suchen</translation>
+        <translation>Rechercher</translation>
     </message>
     <message>
         <source>Username</source>
-        <translation>Benutzername</translation>
+        <translation>Identifiant</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaire</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation type="unfinished">Nom</translation>
     </message>
 </context>
 <context>
     <name>Wait</name>
     <message>
         <source>Please Wait...</source>
-        <translation>Bitte warten...</translation>
+        <translation type="unfinished">Veuillez patienter...</translation>
     </message>
 </context>
 <context>
@@ -466,87 +474,86 @@ shows the list of dirs and files</source>
 %1
 
 ZSafe will now exit.</source>
-        <translation>Kann das Verzeichnis
+        <translation type="unfinished">Impossible de créer le répertoire
 %1
-nicht anlegen
 
-ZSafe wird sich jetzt beenden.</translation>
+ZSafe va s&apos;arrêter.</translation>
     </message>
     <message>
         <source>&amp;Save document</source>
-        <translation>&amp;Speichern</translation>
+        <translation type="unfinished">&amp;Enregistrer document</translation>
     </message>
     <message>
         <source>S&amp;ave document with new Password</source>
-        <translation>Speichern mit neuem &amp;Passwort</translation>
+        <translation type="unfinished">Enregistrer document avec nouveau mot de Passe</translation>
     </message>
     <message>
         <source>&amp;Export text file</source>
-        <translation>Textdatei &amp;Exportieren</translation>
+        <translation type="unfinished">E&amp;xporter vers fichier texte</translation>
     </message>
     <message>
         <source>&amp;Import text file</source>
-        <translation>Textdatei &amp;Importieren</translation>
+        <translation type="unfinished">&amp;Importer fichier texte</translation>
     </message>
     <message>
         <source>&amp;Remove text file</source>
-        <translation>Textdatei &amp;löschen</translation>
+        <translation type="unfinished">&amp;Supprimer fichier texte</translation>
     </message>
     <message>
         <source>&amp;Open entries expanded</source>
-        <translation>&amp;Expandiert Öffnen</translation>
+        <translation type="unfinished">&amp;Ouvrir les entrées expansées</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>&amp;Beenden</translation>
+        <translation type="unfinished">&amp;Quitter</translation>
     </message>
     <message>
         <source>&amp;File</source>
-        <translation>&amp;Datei</translation>
+        <translation type="unfinished">&amp;Fichier</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Neu</translation>
+        <translation type="unfinished">&amp;Nouveau</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>&amp;Ändern</translation>
+        <translation type="unfinished">&amp;Modifier</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
-        <translation>&amp;Löschen</translation>
+        <translation type="unfinished">E&amp;ffacer</translation>
     </message>
     <message>
         <source>&amp;Category</source>
-        <translation>&amp;Kategorie</translation>
+        <translation type="unfinished">&amp;Catégorie</translation>
     </message>
     <message>
         <source>&amp;Cut</source>
-        <translation>&amp;Ausschneiden</translation>
+        <translation type="unfinished">&amp;Couper</translation>
     </message>
     <message>
         <source>C&amp;opy</source>
-        <translation>&amp;Kopieren</translation>
+        <translation type="unfinished">C&amp;opier</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
-        <translation>&amp;Einfügen</translation>
+        <translation type="unfinished">&amp;Coller</translation>
     </message>
     <message>
         <source>&amp;Search</source>
-        <translation>&amp;Suchen</translation>
+        <translation type="unfinished">&amp;Rechercher</translation>
     </message>
     <message>
         <source>&amp;Entry</source>
-        <translation>&amp;Eintrag</translation>
+        <translation>&amp;Entrée</translation>
     </message>
     <message>
         <source>&amp;About</source>
-        <translation>&amp;Über</translation>
+        <translation type="unfinished">&amp;A propos</translation>
     </message>
     <message>
         <source>&amp;Help</source>
-        <translation>&amp;Hilfe</translation>
+        <translation type="unfinished">&amp;Aide</translation>
     </message>
     <message>
         <source>Edit</source>
@@ -566,27 +573,27 @@ ZSafe wird sich jetzt beenden.</translation>
     </message>
     <message>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nom</translation>
     </message>
     <message>
         <source>Field 2</source>
-        <translation>Feld 2</translation>
+        <translation>Champ 2</translation>
     </message>
     <message>
         <source>Field 3</source>
-        <translation>Feld 3</translation>
+        <translation>Champ 3</translation>
     </message>
     <message>
         <source>Comment</source>
-        <translation>Kommentar</translation>
+        <translation>Commentaire</translation>
     </message>
     <message>
         <source>Field 4</source>
-        <translation>Feld 4</translation>
+        <translation>Champ 4</translation>
     </message>
     <message>
         <source>Field 5</source>
-        <translation>Feld 5</translation>
+        <translation>Champ 5</translation>
     </message>
     <message>
         <source>Do you want to delete?</source>
@@ -758,15 +765,15 @@ sichern</translation>
     </message>
     <message>
         <source>&amp;New document</source>
-        <translation>&amp;Neue Datei</translation>
+        <translation>&amp;Nouveau document</translation>
     </message>
     <message>
         <source>&amp;Open document</source>
-        <translation>&amp;Öffne Datei</translation>
+        <translation type="unfinished">&amp;Ouvrir document</translation>
     </message>
     <message>
         <source>&amp;Save document as ..</source>
-        <translation>&amp;Speichere Datei als..</translation>
+        <translation type="unfinished">&amp;Enregistrer document sous ...</translation>
     </message>
     <message>
         <source>Create new ZSafe document</source>
@@ -789,30 +796,36 @@ sichern</translation>
 .../Documents/application
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossible de créer le répertoire
+.../Documents/application
+
+ZSafe va s&apos;arrêter.</translation>
     </message>
     <message>
         <source>Can&apos;t create directory
 ...//Documents/application/zsafe
 
 ZSafe will now exit.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Impossible de créer le répertoire
+...//Documents/application/zsafe
+
+ZSafe va s&apos;arrêter.</translation>
     </message>
     <message>
         <source>New entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Nouvelle entrée</translation>
     </message>
     <message>
         <source>Edit category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Modifier la catégorie ou l&apos;entrée</translation>
     </message>
     <message>
         <source>Delete category or entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Effacer la catégorie ou l&apos;entrée</translation>
     </message>
     <message>
         <source>Find entry</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Chercher entrée</translation>
     </message>
 </context>
 </TS>

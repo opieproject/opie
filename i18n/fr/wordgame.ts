@@ -70,7 +70,7 @@
     </message>
     <message>
         <source>Edit...</source>
-        <translation>Editer...</translation>
+        <translation type="unfinished">Modifier...</translation>
     </message>
     <message>
         <source>Delete</source>
@@ -89,7 +89,7 @@
     <name>ScoreInfo</name>
     <message>
         <source>&lt;P&gt;Invalid move</source>
-        <translation>&lt;P&gt;Mouvement non valide</translation>
+        <translation>&lt;P&gt;Déplacement non valide</translation>
     </message>
     <message>
         <source>&lt;P&gt;Score: </source>
@@ -120,7 +120,7 @@
     </message>
     <message>
         <source>Do you want to end the game early?</source>
-        <translation>Voulez-vous mettre fin au jeu ?</translation>
+        <translation type="unfinished">Voulez-vous terminer la partie avant sa fin?</translation>
     </message>
     <message>
         <source>Yes</source>

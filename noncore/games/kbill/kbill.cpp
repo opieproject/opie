@@ -112,7 +112,7 @@ void KBill::ViewHighScores() {
 void KBill::Story() {
 	field->stopTimer();
  	HelpDialog *stryDialog = new HelpDialog(this,"helpdialog",1);
- 	QString stryString = tr("<b>The Story</b><p>Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle 'Bill', has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) 'Bill' has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly diguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.");
+ 	QString stryString = tr("<b>The Story</b><p>Yet again, the fate of the world rests in your hands!  An evil computer hacker, known only by his handle 'Bill', has created the ultimate computer virus.  A virus so powerful that it has the power to transmute an ordinary computer into a toaster oven.  (oooh!) 'Bill' has cloned himself into a billion-jillion micro-Bills.  Their sole purpose is to deliver the nefarious virus, which has been cleverly disguised as a popular operating system. As System Administrator and Exterminator, your job is to keep Bill from succeeding at his task.");
  	stryDialog->setCaption(tr("The story of KBill"));
  	stryDialog->TextBrowser1->setText(stryString);
  	stryDialog->resize(200,200);

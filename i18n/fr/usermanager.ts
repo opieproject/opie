@@ -8,7 +8,7 @@
     </message>
     <message>
         <source>Edit Group</source>
-        <translation>Editer un groupe</translation>
+        <translation>Modifier un groupe</translation>
     </message>
 </context>
 <context>
@@ -19,18 +19,18 @@
     </message>
     <message>
         <source>Opie User Manager</source>
-        <translation>Opie User Manager</translation>
+        <translation>Gestionnaire d&apos;utilisateurs Opie</translation>
     </message>
 </context>
 <context>
     <name>UserDialog</name>
     <message>
         <source>Add User</source>
-        <translation>Ajouter un Utilisateur</translation>
+        <translation>Ajouter un utilisateur</translation>
     </message>
     <message>
         <source>Edit User</source>
-        <translation>Editer un Utilisateur</translation>
+        <translation>Modifier un utilisateur</translation>
     </message>
 </context>
 </TS>
