@@ -43,9 +43,9 @@
 #include "hexwindow.h"
 #include "configwindow.h"
 
-#include "../libwellenreiter/source/sock.hh"    // <--- ugly path, FIX THIS!
-#include "../libwellenreiter/source/proto.hh"    // <--- ugly path, FIX THIS!
-#include "../daemon/source/config.hh"           // <--- ugly path, FIX THIS!
+#include <libwellenreiter/source/wl_sock.hh>
+#include <libwellenreiter/source/wl_proto.hh>
+#include <daemon/source/config.hh>
 
 Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     : WellenreiterBase( parent, name, fl ), daemonRunning( false )
@@ -60,7 +60,7 @@ Wellenreiter::Wellenreiter( QWidget* parent, const char* name, WFlags fl )
     // setup socket for daemon communication and start poller
     //
 
-    daemon_fd = commsock( GUIADDR, GUIPORT );
+    daemon_fd = wl_setupsock( GUIADDR, GUIPORT );
     if ( daemon_fd == -1 )
     {
         logwindow->log( "(E) Couldn't get file descriptor for commsocket." );
@@ -84,7 +84,7 @@ void Wellenreiter::handleMessage()
 
     char buffer[128];
 
-    int result = recvcomm( &daemon_fd, (char*) &buffer, sizeof(buffer) );
+    int result = wl_recv( &daemon_fd, (char*) &buffer, sizeof(buffer) );
     qDebug( "received %d from recvcomm", result );
 
 /*
