@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=main-tab
-Icon=Example
+Icon=logo/opielogo
 Type=Example
 Name=TabWidget Example
 Comment=An Example Program

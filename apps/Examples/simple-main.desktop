@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=simple-main
-Icon=Example
+Icon=logo/opielogo
 Type=Example
 Name=Simple MainWindow
 Comment=An Example Program
