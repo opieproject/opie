@@ -44,6 +44,26 @@ _;:,     .>    :=|.         This program is free software; you can
 namespace Opie {
 namespace Core {
 
+/*======================================================================================
+ * OFileNotificationType
+ *======================================================================================*/
+
+/**
+ * @brief An enumerate for the different types of file notifications
+ *
+ * This enumerate provides a means to specify the type of events that you are interest in.
+ * Valid values are:
+ * <ul>
+ *    <li>Access: The file was accessed (read)
+ *    <li>Modify The file was modified (write,truncate)
+ *    <li>Create = The file was created in the directory
+ *    <li>Delete = The file was unlinked from directory
+ *    <li>Rename = The file was renamed
+ *    <li>Attrib = The file had its attributes changed (chmod,chown,chgrp)
+ * </ul>
+ *
+ **/
+
 enum OFileNotificationType { Single = 0x0000000,
                              Multi  = DN_MULTISHOT,
                              Access = DN_ACCESS,
@@ -53,6 +73,22 @@ enum OFileNotificationType { Single = 0x0000000,
                              Rename = DN_RENAME,
                              Attrib = DN_ATTRIB };
 
+/*======================================================================================
+ * OFileNotification
+ *======================================================================================*/
+
+/**
+ * @brief Represents a file notification
+ *
+ * This class allows to watch for events happening to files.
+ * It uses the dnotify kernel interface which is a very efficient signalling interface.
+ *
+ * @see <file:///usr/src/linux/Documentation/dnotify.txt>
+ *
+ * @author Michael 'Mickey' Lauer <mickey@vanille.de>
+ *
+ **/
+
 class OFileNotification : public QObject
 {
   Q_OBJECT
@@ -60,18 +96,63 @@ class OFileNotification : public QObject
   public:
     OFileNotification( QObject* parent = 0, const char* name = 0 );
     ~OFileNotification();
-
+    /**
+     * This static function calls a slot when an event with @a type happens to file @a path.
+     *
+     *  It is very convenient to use this function because you do not need to
+     *  bother with a timerEvent or to create a local QTimer object.
+     *
+     *  Example:
+     *  <pre>
+     *
+     *     #include <opie2/oapplication.h>
+     *     #include <opie2/onitify.h>
+     *     using namespace Opie::Core;
+     *
+     *     int main( int argc, char **argv )
+     *     {
+     *         OApplication a( argc, argv, "File Notification Example" );
+     *         OFileNotification::singleShot( "/tmp/quit", &a, SLOT(quit()), Create );
+     *         ... // create and show your widgets
+     *         return a.exec();
+     *     }
+     *
+     * This sample program automatically terminates when the file "/tmp/quite" has been created.
+     *
+     *
+     * The @a receiver is the receiving object and the @a member is the slot.
+     **/
     static void singleShot( const QString& path, QObject* receiver, const char* member, OFileNotificationType type = Modify );
-
+    /**
+     * Starts to watch for @a type changes to @a path. Set @a sshot to True if you want to be notified only once.
+     * Note that in that case it may be more convenient to use @ref OFileNotification::singleShot() then.
+     **/
     int start( const QString& path, bool sshot = false, OFileNotificationType type = Modify );
+    /**
+     * Stop watching for file events.
+     **/
     void stop();
-
+    /**
+     * @returns the notification type as set by @ref start().
+     **/
     OFileNotificationType type() const;
+    /**
+     * @returns the path to the file being watched by this instance.
+     **/
     QString path() const;
+    /**
+     * @returns the UNIX file descriptor for the file being watched.
+     **/
     int fileno() const;
+    /**
+     * @returns if a file is currently being watched.
+     **/
     bool isActive() const;
 
   signals:
+    /**
+     * This signal is emitted if an event happens of the specified type happens to the file being watched.
+     **/
     void triggered();
 
   protected:
@@ -90,13 +171,16 @@ class OFileNotification : public QObject
     struct stat _stat;
 };
 
+#if 0
 
 class ODirectoryNotification : public OFileNotification
 {
+
   public:
       virtual bool hasChanged() { return true; };
 };
 
+#endif
 
 }
 }
