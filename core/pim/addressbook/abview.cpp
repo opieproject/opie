@@ -281,8 +281,11 @@ void AbView::slotDoFind( const QString &str, bool caseSensitive, bool useRegExp,
 			 bool , QString cat = QString::null )
 {
 	qWarning( "void AbView::slotDoFind" );
-	// Use the current Category if nothing else selected
 
+	// We reloading the data: Deselect Letterpicker
+	emit signalClearLetterPicker();
+
+	// Use the current Category if nothing else selected
 	int category = 0;
 
 	if ( cat.isEmpty() )

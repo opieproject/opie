@@ -9,11 +9,12 @@ Feature requests:
 - dial with dtmfdial incase it's installed and there's no mobile
 - 3rd column for 2. Contact
 - Implementing additional Views (Phonebook, ...)
+- Birthday & Anniversary Reminder
+- Plugin for Today for Birthdays and Anniversaries
 
 Known Bugs:
 -----------
 - OK-Key does not switch from Detailview (ablable) to Listview
-- Personal Details: Anniversary zeigt Fantasie-Werte
 
 Bugs but not in addressbook:
 -----------------------------
@@ -28,6 +29,7 @@ Urgent:
 - Store last settings of combo-boxes
 - Name order selected in "contacteditor" not used in list view.
 - Category is on the wrong position after changing to personal and back to normal
+	( Temporarily workaround: Category is never deactivated.. :S )
 
 
 Important:
@@ -54,7 +56,6 @@ Less important:
 Should be Fixed (not absolute sure, need further validation):
 -------------------------------------------------------------
 
-- Unfiled shown just in Category "All" and "Unfiled". 
 
 Fixed:
 -------
@@ -88,3 +89,5 @@ Fixed:
 - There should be some icons for List and Cardview
 - If in Cardview and a category change removes all entries: 
 	There are already entries in Cardview after up/down
+- Personal Details: Anniversary zeigt Fantasie-Werte
+- Unfiled shown just in Category "All" and "Unfiled". 

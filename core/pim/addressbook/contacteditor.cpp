@@ -28,6 +28,7 @@
 #include <qpe/qpedialog.h>
 #include <qpe/timeconversion.h>
 #include <opie/ocontact.h>
+#include <qpe/resource.h>
 
 #include <qcombobox.h>
 #include <qlabel.h>
@@ -42,6 +43,9 @@
 #include <qvaluelist.h>
 #include <qpopupmenu.h> 
 #include <qlistbox.h> 
+#include <qhbox.h>
+#include <qaction.h>
+#include <qiconset.h> 
 
 static inline bool containsAlphaNum( const QString &str );
 static inline bool constainsWhiteSpace( const QString &str );
@@ -451,6 +455,7 @@ void ContactEditor::init() {
 	int counter = 0;
 
 	// Birthday
+	QHBox* hBox = new QHBox( container );
 	l = new QLabel( tr("Birthday"), container );
 	gl->addWidget( l, counter, 0 );
 
@@ -458,16 +463,24 @@ void ContactEditor::init() {
  	birthdayPicker = new DateBookMonth( m1, 0, TRUE );
  	m1->insertItem( birthdayPicker );
 
-	birthdayButton= new QToolButton( container, "buttonStart" );
+	birthdayButton= new QToolButton( hBox, "buttonStart" );
  	birthdayButton->setPopup( m1 );
 	birthdayButton->setPopupDelay(0);
-	gl->addWidget( birthdayButton, counter , 1  );
+
+	QPushButton* deleteButton = new QPushButton( QIconSet( Resource::loadPixmap( "trash" ) ), 
+						     tr( "Delete" ),
+						     hBox, 0 );
+
+	gl->addWidget( hBox, counter , 1  );
+
 	connect( birthdayPicker, SIGNAL( dateClicked( int, int, int ) ),
 		 this, SLOT( slotBirthdayDateChanged( int, int, int ) ) );
+	connect( deleteButton, SIGNAL( clicked() ), this, SLOT( slotRemoveBirthday() ) );
 
 	++counter;
 
 	// Anniversary
+	hBox = new QHBox( container );
 	l = new QLabel( tr("Anniversary"), container );
 	gl->addWidget( l, counter, 0 );
 
@@ -475,12 +488,18 @@ void ContactEditor::init() {
  	anniversaryPicker = new DateBookMonth( m1, 0, TRUE );
  	m1->insertItem( anniversaryPicker );
 
-	anniversaryButton= new QToolButton( container, "buttonStart" );
+	anniversaryButton= new QToolButton( hBox, "buttonStart" );
  	anniversaryButton->setPopup( m1 );
 	anniversaryButton->setPopupDelay(0);
-	gl->addWidget( anniversaryButton, counter , 1  );
+
+	deleteButton = new QPushButton( QIconSet( Resource::loadPixmap( "trash" ) ), 
+						     tr( "Delete" ),
+						     hBox, 0 );
+	gl->addWidget( hBox, counter , 1  );
+
 	connect( anniversaryPicker, SIGNAL( dateClicked( int, int, int ) ),
 		 this, SLOT( slotAnniversaryDateChanged( int, int, int ) ) );
+	connect( deleteButton, SIGNAL( clicked() ), this, SLOT( slotRemoveAnniversary() ) );
 
 	++counter;
 
@@ -1231,7 +1250,10 @@ void ContactEditor::setEntry( const OContact &entry ) {
 	slotAddressTypeChange( cmbAddress->currentItem() );
 
 	// loadFields(); :SX
-
+	updateDatePicker();
+}
+void ContactEditor::updateDatePicker()
+{
 	// Set DatePicker
 	if ( !ent.birthday().isNull() ){
 		birthdayButton->setText( TimeString::numberDateString( ent.birthday() ) );
@@ -1465,13 +1487,18 @@ static inline bool constainsWhiteSpace( const QString &str )
 void ContactEditor::setPersonalView( bool personal )
 {
 	m_personalView = personal;
+	
+	// Currently disbled due to the fact that
+	// show will not work...
+	return;
+
 	if ( personal ){
 		cmbCat->hide();
 		labCat->hide();
+
 	} else{
 		cmbCat->show();
-		labCat->show();
-		
+		labCat->show();		
 	}
 }
 
@@ -1491,4 +1518,18 @@ void ContactEditor::slotBirthdayDateChanged( int year, int month, int day)
     QString dateString = TimeString::numberDateString( date );
     birthdayButton->setText( dateString );
     ent.setBirthday ( date );
+}
+
+void ContactEditor::slotRemoveBirthday()
+{
+	qWarning("void ContactEditor::slotRemoveBirthday()");
+	ent.setBirthday( QDate() );
+	updateDatePicker();
+}
+
+void ContactEditor::slotRemoveAnniversary()
+{
+	qWarning("void ContactEditor::slotRemoveAnniversary()");
+	ent.setAnniversary( QDate() );
+	updateDatePicker();
 }

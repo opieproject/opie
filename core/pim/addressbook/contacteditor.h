@@ -76,6 +76,7 @@ class ContactEditor : public QDialog {
 		void saveEntry();
 		bool isEmpty();
 		void cleanupFields();
+		void updateDatePicker();
 		QString parseName( QString fullName, int type );
 	private slots:
 		void slotChooser1Change( const QString &textChanged );
@@ -97,6 +98,8 @@ class ContactEditor : public QDialog {
 		void slotFullNameChange( const QString &textChanged );
 		void slotAnniversaryDateChanged( int year, int month, int day);
 		void slotBirthdayDateChanged( int year, int month, int day);
+		void slotRemoveBirthday();
+		void slotRemoveAnniversary();
 
 	private:
 		bool useFullName;

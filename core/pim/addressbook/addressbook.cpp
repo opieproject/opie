@@ -193,7 +193,7 @@ AddressbookWindow::AddressbookWindow( QWidget *parent, const char *name,
 	
 	edit->insertSeparator();
 	
-	a = new QAction( tr("Import vCard"), QString::null, 0, 0, 0, TRUE );
+	a = new QAction( tr("Import vCard"), QString::null, 0, 0);
 	actionPersonal = a;
 	connect( a, SIGNAL( activated() ), this, SLOT( importvCard() ) );
 	a->addTo( edit );
@@ -317,15 +317,36 @@ void AddressbookWindow::slotSetFont( int size )
 
 void AddressbookWindow::importvCard() {
         QString str = OFileDialog::getOpenFileName( 1,"/");//,"", "*", this );
-        if(!str.isEmpty() )
+        if(!str.isEmpty() ){
 		setDocument((const QString&) str );
+	}
 	
 }
 
 void AddressbookWindow::setDocument( const QString &filename )
 {
-	if ( filename.find(".vcf") != int(filename.length()) - 4 ) 
-		return;
+	qWarning( "void AddressbookWindow::setDocument( %s )", filename.latin1() );
+
+	if ( filename.find(".vcf") != int(filename.length()) - 4 ){ 
+
+
+
+		switch( QMessageBox::information( this, tr ( "Right file type ?" ),
+						  tr( "The selected File" ) + ( "\n" ) +
+						  tr ("does not end with \".vcf\" ") + ( "\n" ) +
+						  tr ( "Do you really want to open it?" ),
+						  tr( "&Yes" ), tr( "&No" ), QString::null,
+						  0,      // Enter == button 0
+						  2 ) ) { // Escape == button 2
+		case 0: 
+			qWarning("YES clicked");
+			break;
+		case 1: 
+			qWarning("NO clicked");
+			return;
+			break;
+		}
+	}
 
 	OContactAccessBackend* vcard_backend = new OContactAccessBackend_VCard( QString::null, 
 									 filename );
