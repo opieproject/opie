@@ -1,10 +1,15 @@
+2005-02-16 Dan Williams <drw@handhelds.org>
+
+    * Fixed stupid bug where last package in status file was not shown as installed when it should be
+    * Removed printf's
+
 2005-01-02 Dan Williams <drw@handhelds.org>
 
     * Released version 0.6.1
     * Implemented native package linking code to remove need for ipkg-link
     * Implement package in OIpkg (removed from InstallDlg) as this is ipkg specific
     * Many small code tweaks
-    
+
 2004-12-21 Dan Williams <drw@handhelds.org>
 
     * Released version 0.6.0

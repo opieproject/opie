@@ -363,6 +363,10 @@ OPackageList *OIpkg::installedPackages( const QString &destName, const QString &
 
     f.close();
 
+    // Make sure to add to list last entry
+    if ( !name.isNull() && status.contains( " installed" ) )
+        pl->append( new OPackage( name, QString::null, version, QString::null, destName ) );
+
     return pl;
 }
 
@@ -453,7 +457,7 @@ bool OIpkg::executeCommand( OPackage::Command command, const QStringList &parame
 
                 // Get list of destinations for unlinking of packages not installed to root
                 OConfItemList *destList = destinations();
-                
+
                 for ( QStringList::ConstIterator it = parameters.begin(); it != parameters.end(); ++it )
                 {
                     unlinkPackage( (*it), destList );
@@ -645,7 +649,7 @@ void OIpkg::linkPackageDir( const QString &dest )
     if ( !dest.isNull() )
     {
         OConfItem *destConfItem = findConfItem( OConfItem::Destination, dest );
-        
+
         emit signalIpkgMessage( tr( "Linking packages installed in: %1" ).arg( dest ) );
 
         // Set package destination directory
@@ -689,7 +693,7 @@ void OIpkg::linkPackageDir( const QString &dest )
                     QFileInfo fileInfo( linkFile );
                     if ( fileInfo.isSymLink() && !fileInfo.readLink().isEmpty() )
                         linkFile = fileInfo.readLink();
-                                                            
+
                     // See if directory exists in 'root', if not, create
                     fileInfo.setFile( linkDest );
                     QString linkDestDirName = fileInfo.dirPath( true );
@@ -733,7 +737,7 @@ void OIpkg::unlinkPackage( const QString &package, OConfItemList *destList )
                                                                      .arg( IPKG_INFO_PATH )
                                                                      .arg( package );
                 //emit signalIpkgMessage( QString( "Looking for '%1'" ).arg ( destInfoFileName ) );
-                
+
                 // If found and destination is not 'root', remove symbolic links
                 if ( QFile::exists( destInfoFileName ) && dest->name() != "root" )
                 {
