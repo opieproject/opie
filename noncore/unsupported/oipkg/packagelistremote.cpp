@@ -11,6 +11,7 @@
 #include "packagelistremote.h"
 
 #include <qstring.h>
+#include <qfile.h>
 #include <stdlib.h>
 #include <unistd.h>
 
@@ -40,19 +41,31 @@ void PackageListRemote::update()
 	pvDebug(2,"PackageListRemote::update");	
  	if (searchString.isEmpty()) return;
  	int r=0;
-  QString cmd = "wget";
+  QString cmdQuery;
+  QString cmdWget = "wget";
   QString redirect = "/tmp/oipkg.query";
 
   // use file for output
-  cmd += " --output-document="+redirect;
+  cmdWget += " --output-document="+redirect;
 //http://ipkgfind.handhelds.org/packages.phtml?format=pda&query=ipkg&searchtype=package&section=
 	QString server="http://ipkgfind.handhelds.org/"; 	
-  cmd += " \""+server+"/packages.phtml";
-  cmd += "?format=pda&searchtype=package&section=";
-  cmd += "&query="+searchString;           	
-  cmd += "\"";
+  cmdQuery = cmdWget+" \""+server+"packages.phtml?";
+  cmdQuery += "format=pda&searchtype=package&section=";
+  cmdQuery += "&query="+searchString;           	
+  cmdQuery += "\"";
 
-  pvDebug(4,"search :"+cmd);
-  r = system(cmd.latin1());
+  pvDebug(4,"search :"+cmdQuery);
+  r = system(cmdQuery.latin1());
+  readFileEntries( redirect, "remote" );
+
+//[15:30:38] <killefiz> http://killefiz.de/zaurus/oipkg.php?query=puzzle
+  QFile::remove(redirect);
+  server="http://killefiz.de/"; 	
+  cmdQuery = cmdWget+" \""+server+"zaurus/oipkg.php?";
+  cmdQuery += "query="+searchString;           	
+  cmdQuery += "\"";
+
+  pvDebug(4,"search :"+cmdQuery);
+  r = system(cmdQuery.latin1());
   readFileEntries( redirect, "remote" );
 }
