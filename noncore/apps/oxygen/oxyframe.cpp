@@ -36,6 +36,6 @@ OxyFrame::OxyFrame(QWidget *parent, const char *name, QString symbol )
     setText( symbol );
 }
 
-void OxyFrame::mousePressEvent (  QMouseEvent * e ){
+void OxyFrame::mousePressEvent (  QMouseEvent* /*e*/ ){
     emit num( N );
 };

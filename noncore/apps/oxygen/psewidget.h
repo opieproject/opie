@@ -22,6 +22,8 @@
 #include "oxyframe.h"
 
 class QGridLayout;
+class QStringList;
+
 class OxydataWidget;
 class PSEframe;
 
@@ -30,7 +32,7 @@ class PSEWidget : public QWidget
 	Q_OBJECT
 	
     public:
-		PSEWidget();
+		PSEWidget(const QStringList &list=0);
         QGridLayout *bottom_grid;
         OxydataWidget *oxyDW;
 
@@ -43,6 +45,7 @@ class PSEWidget : public QWidget
         
         void position( int, int&, int& );
         QColor PSEColor( QString );
+		QStringList names;
 
     public slots:
         void slotShowElement(QString);

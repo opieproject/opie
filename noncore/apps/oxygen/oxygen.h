@@ -7,6 +7,8 @@
  *                                                                         *
  **************************************************************************/
 
+class QStringList;
+
 #include <qmainwindow.h>
 
 class Oxygen : public QMainWindow
@@ -18,4 +20,5 @@ class Oxygen : public QMainWindow
 
 	private:
 		void loadNames();
+		QStringList names;
 };

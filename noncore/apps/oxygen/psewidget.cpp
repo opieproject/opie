@@ -24,11 +24,12 @@
 #include "oxyframe.h"
 
 
-PSEWidget::PSEWidget() : QWidget()
+PSEWidget::PSEWidget(const QStringList &list) : QWidget()
 {
     this->setCaption( tr( "Periodic System" ) );
 	
 	lastElement=1;
+	names = list;
 
     QVBoxLayout *vlay = new QVBoxLayout( this );
     
@@ -49,7 +50,7 @@ PSEWidget::PSEWidget() : QWidget()
         connect( PSEframe.current(), SIGNAL( num(QString) ), this, SLOT( inverseColor(QString) ));
     }
     
-    oxyDW = new OxydataWidget(this);
+    oxyDW = new OxydataWidget(this, "PSEWidget_oxyDW", names);
     oxyDW->setElement( 0 );
     oxyDW->setLayout();
 

@@ -33,14 +33,12 @@ class dataWidgetUI : public QWidget
 	Q_OBJECT
 	
     public:
-		dataWidgetUI();
-		QStringList names;
+		dataWidgetUI(const QStringList &list=0);
 
     private:
         OxydataTable *DataTable;
         QComboBox *dataCombo;
         OxydataWidget *oxyDW;
-
-		void loadNames();
+		QStringList names;
 };
 #endif
