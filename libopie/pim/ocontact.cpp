@@ -69,15 +69,17 @@ OContact::OContact( const QMap<int, QString> &fromMap ) :
     QString cats = mMap[ Qtopia::AddressCategory ];
     if ( !cats.isEmpty() )
 	setCategories( idsFromString( cats ) );
+
     QString uidStr = find( Qtopia::AddressUid );
 
-    if ( uidStr.isEmpty() )
+    if ( uidStr.isEmpty() || (uidStr.toInt() == 0) ){
+	    qWarning( "Invalid UID found. Generate new one.." );
 	setUid( uidGen().generate() );
-    else
+    }else
 	setUid( uidStr.toInt() );
 
-    if ( !uidStr.isEmpty() )
-	setUid( uidStr.toInt() );
+//     if ( !uidStr.isEmpty() )
+// 	setUid( uidStr.toInt() );
 }
 
 /*!
@@ -571,12 +573,12 @@ QString OContact::toRichText() const
     if ( !str.isEmpty() )
 	text += "<b>" + QObject::tr("Spouse: ") + "</b>"
 		+ Qtopia::escapeString(str) + "<br>";
-    if ( !birthday().isValid() ){
+    if ( birthday().isValid() ){
 	    str = TimeString::numberDateString( birthday() );
 	    text += "<b>" + QObject::tr("Birthday: ") + "</b>"
 		    + Qtopia::escapeString(str) + "<br>";
     }
-    if ( !anniversary().isValid() ){
+    if ( anniversary().isValid() ){
 	    str = TimeString::numberDateString( anniversary() );
 	    text += "<b>" + QObject::tr("Anniversary: ") + "</b>"
 		    + Qtopia::escapeString(str) + "<br>";
@@ -1123,7 +1125,7 @@ static VObject *createVObject( const OContact &c )
     safeAddPropValue( vcard, VCNoteProp, c.notes() );
 
     // Exporting Birthday regarding RFC 2425 (5.8.4)
-    if ( !c.birthday().isValid() ){
+    if ( c.birthday().isValid() ){
 	    QString birthd_rfc2425 = QString("%1-%2-%3")
 		    .arg( c.birthday().year() ) 
 		    .arg( c.birthday().month(), 2 )
@@ -1169,11 +1171,15 @@ static QDate convVCardDateToDate( const QString& datestr )
 	int sep_ignore = 1;
 	if ( monthPos == -1 || dayPos == -1 ) {
 		qDebug("fromString didn't find - in str = %s; mpos = %d ypos = %d", datestr.latin1(), monthPos, dayPos );
-		// Ok.. Outlook is violating ISO 8601, therefore we will try to read their format ( YYYYMMDD )
-		monthPos   = 4;
-		dayPos     = 6;
-		sep_ignore = 0;
-		qDebug("Try with follwing positions str = %s; mpos = %d ypos = %d", datestr.latin1(), monthPos, dayPos );
+		// Ok.. No "-" found, therefore we will try to read other format ( YYYYMMDD )
+		if ( datestr.length() == 8 ){
+			monthPos   = 4;
+			dayPos     = 6;
+			sep_ignore = 0;
+			qDebug("Try with follwing positions str = %s; mpos = %d ypos = %d", datestr.latin1(), monthPos, dayPos );
+		} else {
+			return QDate();
+		}
 	}
 	int y = datestr.left( monthPos ).toInt();
 	int m = datestr.mid( monthPos + sep_ignore, dayPos - monthPos - sep_ignore ).toInt();
@@ -1549,13 +1555,12 @@ void OContact::setAnniversary( const QDate &v )
 */
 QDate OContact::birthday() const 
 { 
-	QDate empty;
 	QString str = find( Qtopia::Birthday );
 	qWarning ("Birthday %s", str.latin1() );
 	if ( !str.isEmpty() )
 		return  TimeConversion::fromString ( str );
 	else
-		return empty;
+		return QDate();
 }
 
 
