@@ -230,6 +230,9 @@ void SetDateTime::writeSettings()
 
 void  SetDateTime::commitTime()
 {
+		Config cfg("ntp",Config::User);
+	  cfg.setGroup("lookups");
+ 		cfg.writeEntry("lastNtp",false);
     tz->setFocus();
     // Need to process the QCOP event generated above before proceeding
     qApp->processEvents();

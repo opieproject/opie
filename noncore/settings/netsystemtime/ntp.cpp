@@ -148,9 +148,8 @@ void  Ntp::ntpFinished(OProcess *p)
   cfg.setGroup("lookups");
   int lastLookup = cfg.readNumEntry("time",0);
   int lookupCount = cfg.readNumEntry("count",0);
+  bool lastNtp = cfg.readBoolEntry("lastNtp",false);
   int time = TimeConversion::toUTC( QDateTime::currentDateTime() );
-  cfg.writeEntry("time", time);
-  cfg.setGroup("correction");
   cfg.writeEntry("time", time);
  	
   float timeShift = getTimeShift();
@@ -158,15 +157,16 @@ void  Ntp::ntpFinished(OProcess *p)
  	int secsSinceLast = time - lastLookup;
   TextLabelNewTime->setText(QDateTime::currentDateTime().toString());
   TextLabelTimeShift->setText(QString::number(timeShift)+tr(" seconds"));
-  if ( lastLookup > 0 && secsSinceLast > 60* SpinBoxMinLookupDelay->value())
+  if ( lastNtp && lastLookup > 0 && secsSinceLast > 60* SpinBoxMinLookupDelay->value())
   {
+	  cfg.setGroup("lookup_"+QString::number(lookupCount));
 	  lookupCount++;
    	cfg.writeEntry("count",lookupCount);
-	  cfg.setGroup("lookup_"+QString::number(lookupCount));
     _shiftPerSec =  timeShift / secsSinceLast;
    	qDebug("secs since last lookup %i", secsSinceLast);qDebug("timeshift since last lookup %f", timeShift);qDebug("timeshift since per sec %f", _shiftPerSec);
 		cfg.writeEntry("secsSinceLast",secsSinceLast);
 		cfg.writeEntry("timeShift",QString::number(timeShift));
+  	cfg.writeEntry("lastNtp",true);
   }
 }
 
@@ -228,6 +228,7 @@ void Ntp::preditctTime()
 	Config cfg("ntp",Config::User);
   cfg.setGroup("lookups");
  	int lastTime = cfg.readNumEntry("time",0);
+ 	cfg.writeEntry("lastNtp",true);
   setenv( "TZ", tz->currentZone(), 1 );
   int now = TimeConversion::toUTC( QDateTime::currentDateTime() );
   int corr = int((now - lastTime) * _shiftPerSec);
