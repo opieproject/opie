@@ -64,9 +64,6 @@ bool WidgetLayer::eventFilter( QObject *obj, QEvent *e )
     }
     if ( obj != this /* when embedded */ && obj != parent() /* when standalone */ )
         return FALSE; // not us
-    if ( e->type() == QEvent::Wheel)  {
-        QApplication::sendEvent( m_scrollbar, e);
-    }
 
 #ifdef FAKE_CTRL_AND_ALT
     static bool control = FALSE;
@@ -122,14 +119,6 @@ QChar(a,0));
         if ( dele ) delete e;
 #endif
         return true;               // stop the event
-    }
-    if ( e->type() == QEvent::Enter )  {
-        QObject::disconnect( (QObject*)cb, SIGNAL(dataChanged()),
-                             this, SLOT(onClearSelection()) );
-    }
-    if ( e->type() == QEvent::Leave )  {
-        QObject::connect( (QObject*)cb, SIGNAL(dataChanged()),
-                          this, SLOT(onClearSelection()) );
     }
     return QFrame::eventFilter( obj, e );
 }
