@@ -44,6 +44,9 @@
 #include <qtoolbutton.h>
 #include <qwhatsthis.h>
 
+// FIXME add the hack slots instead of setPopup!!!!
+// drw you shouldn't have removed them
+
 TaskEditorStatus::TaskEditorStatus( QWidget* parent,  const char* name, WFlags fl )
     : QWidget( parent, name, fl )
 {
