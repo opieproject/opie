@@ -94,7 +94,6 @@ void TransferDialog::slotTransfer()
 	ok->setEnabled(false);
 
 	statusbar->setText(QObject::tr("Sending..."));
-	progressbar->setProgress(1);
 
 	FileTransfer::Type transfermode = FileTransfer::SX;
 	if(protocol->currentText() == "YModem") transfermode == FileTransfer::SY;
@@ -105,6 +104,9 @@ void TransferDialog::slotTransfer()
 
 	transfer = new FileTransfer(transfermode, new IOSerial(profile));
 	transfer->sendFile(filename->text());
+	connect(transfer, SIGNAL(progress(const QString&, int, int, int, int, int)), SLOT(slotProgress(const QString&, int, int, int, int, int)));
+	connect(transfer, SIGNAL(error(int, const QString&)), SLOT(slotError(int, const QString&)));
+	connect(transfer, SIGNAL(sent()), SLOT(slotSent()));
 }
 
 void TransferDialog::slotCancel()
@@ -124,5 +126,54 @@ void TransferDialog::slotCancel()
 	{
 		close();
 	}
+}
+
+void TransferDialog::slotProgress(const QString& file, int progress, int speed, int hours, int minutes, int seconds)
+{
+	progressbar->setProgress(progress);
+}
+
+void TransferDialog::slotError(int error, const QString& message)
+{
+	switch(error)
+	{
+			case FileTransferLayer::NotSupported:
+				QMessageBox::critical(this,
+					QObject::tr("Error"),
+					QObject::tr("Operation not supported."));
+				break;
+			case FileTransferLayer::StartError:
+				QMessageBox::critical(this,
+					QObject::tr("Error"),
+					QObject::tr("Operation not supported."));
+				break;
+			case FileTransferLayer::NoError:
+				QMessageBox::critical(this,
+					QObject::tr("Error"),
+					QObject::tr("Operation not supported."));
+				break;
+			case FileTransferLayer::Undefined:
+				QMessageBox::critical(this,
+					QObject::tr("Error"),
+					QObject::tr("Operation not supported."));
+				break;
+			case FileTransferLayer::Incomplete:
+				QMessageBox::critical(this,
+					QObject::tr("Error"),
+					QObject::tr("Operation not supported."));
+				break;
+			case FileTransferLayer::Unknown:
+			default:
+				QMessageBox::critical(this,
+					QObject::tr("Error"),
+					QObject::tr("Operation not supported."));
+				break;
+	}
+}
+
+void TransferDialog::slotSent()
+{
+	QMessageBox::information(this, QObject::tr("Sent"), QObject::tr("File has been sent."));
+	ok->setEnabled(true);
 }
 

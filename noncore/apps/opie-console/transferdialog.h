@@ -21,6 +21,9 @@ class TransferDialog : public QDialog
 		void slotFilename();
 		void slotTransfer();
 		void slotCancel();
+		void slotProgress(const QString&, int, int, int, int, int);
+		void slotError(int error, const QString& message);
+		void slotSent();
 
 	private:
 		QLineEdit *filename;
