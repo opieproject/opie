@@ -1,25 +1,12 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>AppearanceSettings</name>
     <message>
         <source>Appearance</source>
-        <translation type="unfinished">Aparncia</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -46,20 +33,17 @@
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>AppearanceSettingsBase</name>
     <message>
-        <source>Color Scheme:</source>
-        <translation type="obsolete">Esquema de Cores:</translation>
+        <source>Colors</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Style:</source>
-        <translation type="obsolete">Estilo:</translation>
+        <source>Browse...</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation type="obsolete">Aparncia</translation>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

@@ -1,142 +1,78 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>AppearanceSettings</name>
+    <name>Board</name>
     <message>
-        <source>Appearance</source>
-        <translation type="unfinished">Aparncia</translation>
-    </message>
-    <message>
-        <source>Style</source>
+        <source>Blanks: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Colors</source>
+        <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Browse...</source>
+        <source>Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background</source>
+        <source>Unknown word</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current scheme</source>
+        <source>&lt;p&gt;The word &quot;%1&quot; is not in the dictionary.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More</source>
+        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
+        <source>Ignore</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AppearanceSettingsBase</name>
+    <name>NewGameBase</name>
     <message>
-        <source>Color Scheme:</source>
-        <translation type="obsolete">Esquema de Cores:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation type="obsolete">Estilo:</translation>
-    </message>
-    <message>
-        <source>Appearance</source>
-        <translation type="obsolete">Aparncia</translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
+        <source>Form1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sat:</source>
+        <source>Players</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Val:</source>
+        <source>AI3: Smart AI player</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Red:</source>
+        <source>Rules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select color</source>
+        <source>&amp;Start</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>fileBrowser</name>
+    <name>RulesBase</name>
     <message>
-        <source>Name</source>
+        <source>Game Rules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Documents</source>
+        <source>Board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files</source>
+        <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hidden files</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Type: %1</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rename</source>
+        <source>Edit...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -144,7 +80,57 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All</source>
+        <source>&amp;OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ScoreInfo</name>
+    <message>
+        <source>&lt;P&gt;Invalid move</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;P&gt;Score: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>WordGame</name>
+    <message>
+        <source>Word Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Back</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Done</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>End game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to end the game early?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Yes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -1,5 +1,4 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
     <name>OpieFtp</name>
     <message>
@@ -16,6 +15,10 @@
     </message>
     <message>
         <source>Remote</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -55,38 +58,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Password</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>me@opieftp.org</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Remote server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remote path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Switch to Local</source>
         <translation type="unfinished"></translation>
     </message>
@@ -115,8 +86,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>192.168.129.201</source>
-        <translation type="obsolete"></translation>
+        <source>Username</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Password</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remote server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Remote path</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Port</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Config</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Ftp</source>

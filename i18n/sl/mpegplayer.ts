@@ -1,101 +1,89 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>OpieFtp</name>
+    <name>AudioWidget</name>
     <message>
-        <source>OpieFtp</source>
+        <source>OpiePlayer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MediaPlayer</name>
+    <message>
+        <source>No file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection</source>
+        <source>Error: There is no file selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local</source>
+        <source>File not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remote</source>
+        <source>The following file was not found: &lt;i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New</source>
+        <source>No decoder found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connect</source>
+        <source>Sorry, no appropriate decoders found for this file: &lt;i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disconnect</source>
+        <source>Error opening file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Hidden Files</source>
+        <source>Sorry, an error occured trying to play the file: &lt;i&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upload</source>
+        <source> File: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>, Length: </source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlayListSelection</name>
+    <message>
+        <source>Playlist Selection</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PlayListWidget</name>
+    <message>
+        <source>OpiePlayer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rename</source>
+        <source>Play Operations</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Add to Playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download</source>
+        <source>Remove from Playlist</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username</source>
+        <source>Play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password</source>
+        <source>Randomize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>me@opieftp.org</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Remote server</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remote path</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Port</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Config</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch to Local</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch to Remote</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Switch to Config</source>
+        <source>Loop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -103,93 +91,70 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Clear List</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Date</source>
+        <source>Add all audio files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dir</source>
+        <source>Add all video files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>192.168.129.201</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Ftp</source>
+        <source>Add all files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please set the server info</source>
+        <source>Save PlayList</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ok</source>
+        <source>View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note</source>
+        <source>Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to connect to
-</source>
+        <source>Scale</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to log in
-</source>
+        <source>Move Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to upload
-</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot upload directories</source>
+        <source>Move Down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to download 
-</source>
+        <source>Out of space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to list the directory
-</source>
+        <source>There was a problem saving the playlist.
+Your playlist may be missing some entries
+the next time you start it.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to change directories
-</source>
+        <source>Invalid File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to cd up
-</source>
+        <source>There was a problem in getting the file.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to get working dir
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> ?
-It must be empty</source>
+        <source>This is all ready in your playlist.
+Continue?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -201,31 +166,23 @@ It must be empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to make directory
-</source>
+        <source>Remove Playlist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to remove directory
-</source>
+        <source>You really want to delete
+this playlist?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to delete file
-</source>
+        <source>Play Selected</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>VideoWidget</name>
     <message>
-        <source>Unable to rename file
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not rename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>That directory does not exist</source>
+        <source>OpiePlayer</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

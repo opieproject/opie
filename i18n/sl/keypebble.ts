@@ -1,29 +1,109 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>OpieFtp</name>
+    <name>KRFBConnection</name>
     <message>
-        <source>OpieFtp</source>
+        <source>Connected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection</source>
+        <source>Connection Refused</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local</source>
+        <source>Host not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remote</source>
+        <source>Read Error: QSocket reported an error reading
+data, the remote host has probably dropped the
+connection.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New</source>
+        <source>QSocket reported an invalid error code</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KRFBDecoder</name>
+    <message>
+        <source>Waiting for server initialisation...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connect</source>
+        <source>Waiting for desktop name...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connected to %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol Error: Message Id %1 was found when expecting an update message.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Protocol Error: An unknown encoding was used by the server %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KRFBLogin</name>
+    <message>
+        <source>Waiting for server version...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Invalid server version, %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Unsupported server version, %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Logged in</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: This server requires a password, but none has been specified.
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: The password you specified was incorrect.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error: Too many invalid login attempts have been made
+to this account, please try later.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Login Failed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Too many failures</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNC</name>
+    <message>
+        <source>VNC Viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Full Screen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Connect...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -31,201 +111,89 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Hidden Files</source>
+        <source>Stop Full Screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upload</source>
+        <source>Connected to remote host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>Logged in to remote host</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rename</source>
+        <source>Connection closed</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>KVNCConnectDlg</name>
+    <message>
+        <source>Connect to VNC server</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Host Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download</source>
+        <source>Display Number:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username</source>
+        <source>Password:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>VncOptionsBase</name>
+    <message>
+        <source>VNC Viewer Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password</source>
+        <source>Data Encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>me@opieftp.org</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Remote server</source>
+        <source>Check for screen updates every:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remote path</source>
+        <source>Milliseconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Port</source>
+        <source>Request 8-bit session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Config</source>
+        <source>Raise on bell</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View</source>
+        <source>Request shared session</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Local</source>
+        <source>Connection</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Remote</source>
+        <source>Hextile encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Config</source>
+        <source>CoRRE encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
+        <source>RRE encoding</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dir</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>192.168.129.201</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Ftp</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Please set the server info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Ok</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to connect to
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to log in
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to upload
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot upload directories</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to download 
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to list the directory
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to change directories
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to cd up
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to get working dir
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Change Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Do you really want to delete
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source> ?
-It must be empty</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Yes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>No</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to make directory
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to remove directory
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to delete file
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Unable to rename file
-</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Could not rename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>That directory does not exist</source>
+        <source>Copy rectangle encoding</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -3,7 +3,7 @@
     <name>DateBook</name>
     <message>
         <source>Calendar</source>
-        <translation>Kalender</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>View</source>
@@ -11,43 +11,43 @@
     </message>
     <message>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>New</source>
-        <translation>Neu</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Today</source>
-        <translation>Heute</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Day</source>
-        <translation>Tag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Week</source>
-        <translation>Woche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>WeekLst</source>
-        <translation>7 Tage</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Month</source>
-        <translation>Monat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Find</source>
-        <translation>Suchen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Alarm and Start Time...</source>
-        <translation>Alarm- und Startzeit...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Default View</source>
-        <translation>Voreinstellung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Event duration is potentially longer
@@ -56,23 +56,23 @@ than interval between repeats.</source>
     </message>
     <message>
         <source>Can not edit data, currently syncing</source>
-        <translation>Kann Daten zur Zeit nicht editieren, synchronisiere gerade</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit Event</source>
-        <translation>Ereignis editieren</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source> minutes)</source>
-        <translation>Minuten)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>OK</source>
-        <translation>OL</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Out of space</source>
-        <translation>Kein Speicherplatz</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Calendar was unable to save
@@ -80,19 +80,15 @@ your changes.
 Free up some space and try again.
 
 Quit anyway?</source>
-        <translation>Kalender war nicht in der Lage,
-Ihre Änderungen zu speichern.
-Bitte machen Sie etwas Speicherplatz
-frei.
-Trozdem beenden?</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>(Unknown)</source>
-        <translation></translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Error!</source>
-        <translation>Fehler!</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Fix it</source>
@@ -111,51 +107,51 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>M</source>
-        <translation>M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>T</source>
-        <translation>D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>W</source>
-        <translation>M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
-        <translation>F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S</source>
-        <translation>S</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Montag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation>Dienstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Mittwoch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation>Donnerstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Freitag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation>Samstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>Sonntag</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -239,7 +235,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation type="unfinished">Minuten</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -292,37 +288,37 @@ Trozdem beenden?</translation>
     <message>
         <source>M</source>
         <comment>Monday</comment>
-        <translation type="unfinished">M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>T</source>
         <comment>Tuesday</comment>
-        <translation type="unfinished">D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>W</source>
         <comment>Wednesday</comment>
-        <translation type="unfinished">M</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>T</source>
         <comment>Thursday</comment>
-        <translation type="unfinished">D</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>F</source>
         <comment>Friday</comment>
-        <translation type="unfinished">F</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S</source>
         <comment>Saturday</comment>
-        <translation type="unfinished">S</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>S</source>
         <comment>Sunday</comment>
-        <translation type="unfinished">S</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>p</source>
@@ -333,54 +329,54 @@ Trozdem beenden?</translation>
     <name>DateEntry</name>
     <message>
         <source>Calendar</source>
-        <translation>Kalender</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Repeat...</source>
-        <translation>Wiederholung...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Daily...</source>
-        <translation>Täglich...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Weekly...</source>
-        <translation>Wöchentlich...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Monthly...</source>
-        <translation>Monatlich...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Yearly...</source>
-        <translation>Jählich...</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation>Keine Wiederholung...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>DateEntryBase</name>
     <message>
         <source>New Event</source>
-        <translation>Neues Ereignis</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Location</source>
-        <translation>Ort</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Category</source>
-        <translation>Kategorie</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Meeting</source>
-        <translation>Treffen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Lunch</source>
-        <translation>Mittagessen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Dinner</source>
@@ -388,19 +384,19 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Travel</source>
-        <translation>Reise</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Description</source>
-        <translation>Beschreibung</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Office</source>
-        <translation>Büro</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Home</source>
-        <translation>zu Hause</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Start - End</source>
@@ -420,7 +416,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Time zone</source>
-        <translation>Zeitzone</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>&amp;Alarm</source>
@@ -428,15 +424,15 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source> minutes</source>
-        <translation>Minuten</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Silent</source>
-        <translation>Still</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Loud</source>
-        <translation>Laut</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Repeat</source>
@@ -444,7 +440,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>No Repeat...</source>
-        <translation>Keine Wiederholung...</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -479,31 +475,31 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Monday</source>
-        <translation>Montag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Tuesday</source>
-        <translation>Dienstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation>Mittwoch</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Thursday</source>
-        <translation>Donnerstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Friday</source>
-        <translation>Freitag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Saturday</source>
-        <translation>Samstag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Sunday</source>
-        <translation>Sonntag</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -545,7 +541,7 @@ Trozdem beenden?</translation>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Tag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Date</source>
@@ -609,15 +605,15 @@ and </source>
     </message>
     <message>
         <source>Day</source>
-        <translation type="unfinished">Tag</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Week</source>
-        <translation type="unfinished">Woche</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Month</source>
-        <translation type="unfinished">Monat</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Year</source>

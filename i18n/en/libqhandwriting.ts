@@ -1,41 +1,57 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>AppearanceSettings</name>
+    <name>HandwritingHelp</name>
     <message>
-        <source>Appearance</source>
-        <translation type="unfinished">Aparncia</translation>
-    </message>
-    <message>
-        <source>Style</source>
+        <source>Handwriting Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Colors</source>
+        <source>&lt;ul&gt;&lt;li&gt;When you start to use the handwriting recogniser write slowly, accurately and firmly.&lt;li&gt;Use the guide lines when drawing your characters.&lt;li&gt;When drawing a character with multiple strokes, each successive stroke must be drawn before the grayed strokes are erased.&lt;li&gt;Practice your handwriting using the handwriting trainer.&lt;li&gt;When adding your own character templates make sure they are sufficiently different from other characters&apos; templates.&lt;/ul&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Browse...</source>
+        <source>Tips</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background</source>
+        <source>Trainer</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HandwritingTrainer</name>
+    <message>
+        <source>Select a character from the list.  The writing area on the left shows the reference character.  Practice writing in the area on the right.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current scheme</source>
+        <source>Matched: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More</source>
+        <source>Similar to: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More...</source>
+        <source>%1%</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>InputMethods</name>
+    <message>
+        <source>Handwriting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIMPenEdit</name>
+    <message>
+        <source>New...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load</source>
+        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -43,108 +59,80 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save</source>
+        <source>Default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AppearanceSettingsBase</name>
+    <name>QIMPenInputCharDlg</name>
     <message>
-        <source>Color Scheme:</source>
-        <translation type="obsolete">Esquema de Cores:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation type="obsolete">Estilo:</translation>
-    </message>
-    <message>
-        <source>Appearance</source>
-        <translation type="obsolete">Aparncia</translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Sat:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Val:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Red:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select color</source>
+        <source>Enter new character</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>fileBrowser</name>
+    <name>QIMPenPrefBase</name>
     <message>
-        <source>Name</source>
+        <source>Form1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Multi-stroke character timeout:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Documents</source>
+        <source>ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files</source>
+        <source>Input areas displayed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hidden files</source>
+        <source>Upper and lower case areas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: %1</source>
+        <source>Lower case (toggle Upper case)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QIMPenSetup</name>
+    <message>
+        <source>Setup Handwriting Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change Directory</source>
+        <source>Character Profile:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rescan</source>
+        <source>Customize</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rename</source>
+        <source>%1 ms</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>Out of space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All</source>
+        <source>Unable to save information.
+Free up some space
+and try again.
+
+Quit anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

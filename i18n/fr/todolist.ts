@@ -1,142 +1,103 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>AppearanceSettings</name>
+    <name>NewTaskDialog</name>
     <message>
-        <source>Appearance</source>
-        <translation type="unfinished">Aparncia</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current scheme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
+        <source>Todo List</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AppearanceSettingsBase</name>
+    <name>NewTaskDialogBase</name>
     <message>
-        <source>Color Scheme:</source>
-        <translation type="obsolete">Esquema de Cores:</translation>
-    </message>
-    <message>
-        <source>Style:</source>
-        <translation type="obsolete">Estilo:</translation>
-    </message>
-    <message>
-        <source>Appearance</source>
-        <translation type="obsolete">Aparncia</translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
+        <source>New Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sat:</source>
+        <source>Priority:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Val:</source>
+        <source>1 - Very High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Red:</source>
+        <source>2 - High</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Green:</source>
+        <source>3 - Normal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Blue:</source>
+        <source>4 - Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alpha channel:</source>
+        <source>5 - Very Low</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select color</source>
+        <source>Category:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&amp;Completed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D&amp;ue</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>1 Jan 2001</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>fileBrowser</name>
+    <name>TodoTable</name>
     <message>
-        <source>Name</source>
+        <source>C.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Prior.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Documents</source>
+        <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files</source>
+        <source>Unfiled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hidden files</source>
+        <source>All</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TodoWindow</name>
+    <message>
+        <source>Todo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: %1</source>
+        <source>Out of Space</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change Directory</source>
+        <source>Unable to create startup files
+Free up some space
+before you enter any data</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>New Task</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rename</source>
+        <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -144,7 +105,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All</source>
+        <source>Beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Find</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Completed tasks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Can not edit data, currently syncing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit Task</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>All Categories</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Unfiled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Out of space</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Todo was unable
+to save your changes.
+Free up some space
+and try again.
+
+Quit Anyway?</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

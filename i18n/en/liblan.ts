@@ -1,150 +1,135 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>AppearanceSettings</name>
+    <name>Lan</name>
     <message>
-        <source>Appearance</source>
-        <translation type="unfinished">Aparncia</translation>
-    </message>
-    <message>
-        <source>Style</source>
+        <source>LAN Setup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current scheme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Remove</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Save</source>
+        <source>This name already
+exists. Please choose a
+different name.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>AppearanceSettingsBase</name>
+    <name>LanBase</name>
     <message>
-        <source>Color Scheme:</source>
-        <translation type="obsolete">Esquema de Cores:</translation>
+        <source>LAN </source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Style:</source>
-        <translation type="obsolete">Estilo:</translation>
+        <source>Account</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Appearance</source>
-        <translation type="obsolete">Aparncia</translation>
+        <source>Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Specify TCP/IP Information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Obtain TCP/IP Information Automatically</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>TCP/IP</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>IP Address</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Gateway</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subnet Mask</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Broadcast</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>First DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Second DNS</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Proxies</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QColorDialog</name>
+    <name>LanState</name>
     <message>
-        <source>Hue:</source>
+        <source>Form2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sat:</source>
+        <source>Service:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Val:</source>
+        <source>IP address:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Red:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select color</source>
+        <source>0.0.0.0</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>fileBrowser</name>
+    <name>ProxiesPageBase</name>
     <message>
-        <source>Name</source>
+        <source>Proxy Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>No proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Documents</source>
+        <source>Auto configure proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files</source>
+        <source>Set proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hidden files</source>
+        <source>Config:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: %1</source>
+        <source>Port:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change Directory</source>
+        <source>HTTP:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>FTP:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rescan</source>
+        <source>Host:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All</source>
+        <source>No proxies for:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

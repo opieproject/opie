@@ -1,40 +1,12 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppearanceSettings</name>
+    <name>PackageDetails</name>
     <message>
-        <source>Appearance</source>
+        <source>(pkgname)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Style</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Browse...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Background</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Current scheme</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>More...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Load</source>
+        <source>Install</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -42,93 +14,98 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save</source>
+        <source>Ignore</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>QColorDialog</name>
+    <name>PackageManager</name>
     <message>
-        <source>Hue:</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sat:</source>
+        <source>All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Val:</source>
+        <source>Install Package</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Red:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Green:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Blue:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Alpha channel:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Select color</source>
+        <source>Are you sure you want to
+install package
+
+%1</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>fileBrowser</name>
+    <name>PackageManagerBase</name>
     <message>
-        <source>Name</source>
+        <source>Package Manager</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Section:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Upgrade all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do it!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Package</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Description</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Size</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>PackageManagerSettings</name>
     <message>
-        <source>Documents</source>
+        <source>Package Servers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files</source>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hidden files</source>
+        <source>URL:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: %1</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change Directory</source>
+        <source>Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>Servers</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Search</name>
+    <message>
+        <source>Search Packages</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rescan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All</source>
+        <source>Find:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

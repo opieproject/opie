@@ -1,231 +1,234 @@
 <!DOCTYPE TS><TS>
-<defaultcodec>iso8859-1</defaultcodec>
 <context>
-    <name>OpieFtp</name>
+    <name>DialupBase</name>
     <message>
-        <source>OpieFtp</source>
+        <source>Dial-up </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connection</source>
+        <source>Account</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Local</source>
+        <source>Username:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remote</source>
+        <source>Password:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>New</source>
+        <source>Phone:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Connect</source>
+        <source>Name:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Disconnect</source>
+        <source>Modem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Show Hidden Files</source>
+        <source>AT-dial:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Upload</source>
+        <source>ATDT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Make Directory</source>
+        <source>ATDP</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Rename</source>
+        <source>Speed:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Delete</source>
+        <source>4800</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Download</source>
+        <source>9600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Username</source>
+        <source>19200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Password</source>
+        <source>38400</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>me@opieftp.org</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Remote server</source>
+        <source>57600</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remote path</source>
+        <source>115200</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Port</source>
+        <source>Wait time:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Config</source>
+        <source>1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View</source>
+        <source>sec</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Local</source>
+        <source>Flow control:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Remote</source>
+        <source>Hardware flow control</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Switch to Config</source>
+        <source>Demand Dialing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File</source>
+        <source>Manual connect and disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source> seconds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Date</source>
+        <source>Idle timeout:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Dir</source>
+        <source>Automatic connect and disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>192.168.129.201</source>
-        <translation type="obsolete"></translation>
-    </message>
-    <message>
-        <source>Ftp</source>
+        <source>Manual connect, automatic disconnect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Please set the server info</source>
+        <source>Network</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Ok</source>
+        <source>Auto-detect name servers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Note</source>
+        <source>Gateway</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to connect to
-</source>
+        <source>Auto-detect routing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to log in
-</source>
+        <source>First DNS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to upload
-</source>
+        <source>Second DNS</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Cannot upload directories</source>
+        <source>Proxies</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>PppMon</name>
+    <message>
+        <source>Waiting for activity</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to download 
-</source>
+        <source>Initializing modem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to list the directory
-</source>
+        <source>Connecting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to change directories
-</source>
+        <source>Authenticating</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to cd up
-</source>
+        <source>No dialtone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to get working dir
-</source>
+        <source>No carrier</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change Directory</source>
+        <source>Number is busy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you really want to delete
-</source>
+        <source>Timed out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source> ?
-It must be empty</source>
+        <source>Connection failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Yes</source>
+        <source>Authentication Failed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>No</source>
+        <source>Connected</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ProxiesPageBase</name>
+    <message>
+        <source>Proxy Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to make directory
-</source>
+        <source>No proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to remove directory
-</source>
+        <source>Auto configure proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to delete file
-</source>
+        <source>Set proxies</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Unable to rename file
-</source>
+        <source>Config:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Could not rename</source>
+        <source>Port:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>That directory does not exist</source>
+        <source>HTTP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>FTP:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Host:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No proxies for:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

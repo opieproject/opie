@@ -1,134 +1,100 @@
 <!DOCTYPE TS><TS>
 <context>
-    <name>AppearanceSettings</name>
+    <name>KCheckers</name>
     <message>
-        <source>Appearance</source>
+        <source>New</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Style</source>
+        <source>Quit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Colors</source>
+        <source>Beginner</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Browse...</source>
+        <source>Novice</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Background</source>
+        <source>Average</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current scheme</source>
+        <source>Good</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More</source>
+        <source>Expert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>More...</source>
+        <source>Master</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Load</source>
+        <source>English Rules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Remove</source>
+        <source>Russian Rules</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Save</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>QColorDialog</name>
-    <message>
-        <source>Hue:</source>
+        <source>Marble Board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Sat:</source>
+        <source>Wooden Board</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Val:</source>
+        <source>What&apos;s This</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Red:</source>
+        <source>About KCheckers</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Green:</source>
+        <source>About &amp;Qt</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Blue:</source>
+        <source>Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Alpha channel:</source>
+        <source>Skill</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Select color</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>fileBrowser</name>
-    <message>
-        <source>Name</source>
+        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Size</source>
+        <source>Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Documents</source>
+        <source>Go!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>All files</source>
+        <source>Congratulation! You have won!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hidden files</source>
+        <source>Please wait...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Type: %1</source>
+        <source>You have lost. Game over.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Change Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Make Directory</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rescan</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rename</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Delete</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All</source>
+        <source>Incorrect course.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
