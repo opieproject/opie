@@ -69,58 +69,52 @@ void MediaWidget::paintEvent( QPaintEvent *pe )
     }
 }
 
-void MediaWidget::mouseMoveEvent( QMouseEvent *event )
+MediaWidget::Button *MediaWidget::buttonAt( const QPoint &position )
 {
-    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it ) {
-        Button &button = *it;
-        Command command = button.command;
+    if ( position.x() <= 0 || position.y() <= 0 ||
+         position.x() >= buttonMask.width() ||
+         position.y() >= buttonMask.height() )
+        return 0;
 
-        if ( event->state() == QMouseEvent::LeftButton ) {
-            // The test to see if the mouse click is inside the button or not
-            bool isOnButton = isOverButton( event->pos() - upperLeftOfButtonMask, command );
+    int pixelIdx = buttonMask.pixelIndex( position.x(), position.y() );
+    for ( ButtonVector::iterator it = buttons.begin(); it != buttons.end(); ++it )
+        if ( it->command + 1 == pixelIdx )
+            return &( *it );
 
-            if ( isOnButton && !button.isHeld ) {
-                button.isHeld = TRUE;
-                toggleButton( button );
-                switch ( command ) {
-                case VolumeUp:
-                    emit moreClicked();
-                    return;
-                case VolumeDown:
-                    emit lessClicked();
-                    return;
-                case Forward:
-                    emit forwardClicked();
-                    return;
-                case Back:
-                    emit backClicked();
-                    return;
-                default: break;
-                }
-            } else if ( !isOnButton && button.isHeld ) {
-                button.isHeld = FALSE;
-                toggleButton( button );
-            }
-        } else {
-            if ( button.isHeld ) {
-                button.isHeld = FALSE;
-                if ( button.type != ToggleButton ) {
-                    setToggleButton( button, FALSE );
-                }
-                handleCommand( command, button.isDown );
-            }
-        }
-    }
+    return 0;
 }
 
 void MediaWidget::mousePressEvent( QMouseEvent *event )
 {
-    mouseMoveEvent( event );
+    Button *button = buttonAt( event->pos() - upperLeftOfButtonMask );
+
+    if ( !button ) {
+        QWidget::mousePressEvent( event );
+        return;
+    }
+
+    switch ( button->command ) {
+        case VolumeUp:   emit moreClicked(); return;
+        case VolumeDown: emit lessClicked(); return;
+        case Back:       emit backClicked(); return;
+        case Forward:    emit forwardClicked(); return;
+        default: break;
+    }
 }
 
 void MediaWidget::mouseReleaseEvent( QMouseEvent *event )
 {
-    mouseMoveEvent( event );
+    Button *button = buttonAt( event->pos() - upperLeftOfButtonMask );
+
+    if ( !button ) {
+        QWidget::mouseReleaseEvent( event );
+        return;
+    }
+
+    if ( button->type == ToggleButton )
+        toggleButton( *button );
+
+    handleCommand( button->command, button->isDown );
 }
 
 void MediaWidget::makeVisible()
@@ -130,7 +124,7 @@ void MediaWidget::makeVisible()
 void MediaWidget::handleCommand( Command command, bool buttonDown )
 {
     switch ( command ) {
-        case Play:       mediaPlayerState.togglePaused();
+        case Play:       mediaPlayerState.togglePaused(); return;
         case Stop:       mediaPlayerState.setPlaying(FALSE); return;
         case Next:       if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setNext(); return;
         case Previous:   if( playList.currentTab() == PlayListWidget::CurrentPlayList ) mediaPlayerState.setPrev(); return;

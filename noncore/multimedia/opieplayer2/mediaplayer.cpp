@@ -45,7 +45,8 @@ MediaPlayer::MediaPlayer( PlayListWidget &_playList, MediaPlayerState &_mediaPla
 
     connect( &mediaPlayerState, SIGNAL( playingToggled( bool ) ), this, SLOT( setPlaying( bool ) ) );
 
-    connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
+// What is pauseCheck good for? (Simon)
+//    connect( &mediaPlayerState, SIGNAL( pausedToggled( bool ) ),  this, SLOT( pauseCheck( bool ) ) );
 
     connect( &mediaPlayerState, SIGNAL( next() ), this, SLOT( next() ) );
     connect( &mediaPlayerState, SIGNAL( prev() ), this, SLOT( prev() ) );

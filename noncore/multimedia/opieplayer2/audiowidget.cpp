@@ -346,18 +346,22 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
       case Key_F9: //activity
            hide();
            //           qDebug("Audio F9");
+           e->accept();
           break;
       case Key_F10: //contacts
           break;
       case Key_F11: //menu
               mediaPlayerState.toggleBlank();
+              e->accept();
           break;
       case Key_F12: //home
           break;
       case Key_F13: //mail
              mediaPlayerState.toggleBlank();
+             e->accept();
           break;
       case Key_Space: {
+          e->accept();
           mediaPlayerState.togglePaused();
       }
           break;
@@ -366,22 +370,26 @@ void AudioWidget::keyReleaseEvent( QKeyEvent *e) {
           emit lessClicked();
           emit lessReleased();
           //          toggleButton(6);
+          e->accept();
           break;
       case Key_Up:
           //             toggleButton(5);
            emit moreClicked();
            emit moreReleased();
            //             toggleButton(5);
+           e->accept();
            break;
       case Key_Right:
           //            toggleButton(3);
           mediaPlayerState.setNext();
           //            toggleButton(3);
+           e->accept();
           break;
       case Key_Left:
           //            toggleButton(4);
           mediaPlayerState.setPrev();
           //            toggleButton(4);
+          e->accept();
           break;
       case Key_Escape: {
       }

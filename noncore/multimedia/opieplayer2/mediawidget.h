@@ -87,7 +87,8 @@ protected:
 
     virtual void paintEvent( QPaintEvent *pe );
 
-    virtual void mouseMoveEvent( QMouseEvent *event );
+    Button *buttonAt( const QPoint &position );
+
     virtual void mousePressEvent( QMouseEvent *event );
     virtual void mouseReleaseEvent( QMouseEvent *event );
 
