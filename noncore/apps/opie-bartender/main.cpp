@@ -9,15 +9,7 @@
 
 #include "bartender.h"
 #include <qpe/qpeapplication.h>
+#include <opie2/oapplicationfactory.h>
 
-//Bartender  *bart;
 
-int main( int argc, char ** argv )
-{
-    QPEApplication a( argc, argv );
-
-    Bartender bart;
-    a.showMainWidget( &bart );
-
-    return a.exec();
-}
+OPIE_EXPORT_APP( Opie::Core::OApplicationFactory<Bartender> )

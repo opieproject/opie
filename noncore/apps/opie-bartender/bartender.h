@@ -31,6 +31,8 @@ class Bartender : public QMainWindow
 public:
     Bartender( QWidget* parent = 0, const char* name = 0, WFlags fl = 0 );
     ~Bartender();
+    
+    static QString appName() { return QString::fromLatin1("bartender"); }
 
     QToolBar* ToolBar1;
     QListView* DrinkView;

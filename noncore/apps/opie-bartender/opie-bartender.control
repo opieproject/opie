@@ -1,4 +1,4 @@
-Files: bin/bartender apps/Applications/bartender.desktop etc/bartender/drinkdb.txt
+Files: plugins/applications/libbartender.so* bin/bartender apps/Applications/bartender.desktop etc/bartender/drinkdb.txt
 Priority: optional
 Package: opie-bartender
 Section: opie/applications
