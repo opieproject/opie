@@ -441,6 +441,10 @@ void DocumentListPrivate::appendDocpath(FileSystem*fs)
         }
     }
     Config conf(f.filePath(), Config::File );
+    conf.setGroup("main");
+    if (!conf.readBoolEntry("check",false)) {
+        return;
+    }
     conf.setGroup("subdirs");
     bool read_all = conf.readBoolEntry("wholemedia",true);
     if (read_all) {
@@ -560,6 +564,9 @@ const QString DocumentListPrivate::nextFile()
 	}
 
 	const QFileInfoList *fil = lists[searchDepth];
+    if (!fil) {
+        return QString::null;
+    }
 	QFileInfoList *fl = (QFileInfoList *)fil;
 	unsigned int pos = listPositions[searchDepth];
 
