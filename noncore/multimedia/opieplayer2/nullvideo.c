@@ -64,6 +64,7 @@ struct opie_frame_s {
     int ideal_width;
     int ideal_height;
     int output_width, output_height;
+    int gui_width, gui_height;
     uint8_t *chunk[3];
 
     yuv2rgb_t *yuv2rgb;
@@ -293,7 +294,8 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 	|| (flags != frame->flags)
 	|| (format != frame->format)
 	|| (this->user_ratio != frame->user_ratio)
-	|| this->gui_changed ) {
+	|| (this->gui_width != frame-> gui_width )
+	|| (this-> gui_height != frame-> gui_height)) {
 
 	frame->width      = width;
 	frame->height     = height;
@@ -303,7 +305,8 @@ static void null_update_frame_format( vo_driver_t* self, vo_frame_t* img,
 	frame->user_ratio = this->user_ratio;
 	this->gui_changed = 0;
 //	frame->show_video = this->m_show_video;
-
+    frame->gui_width  = this->gui_width;
+    frame->gui_height = this->gui_height;
         
 	    null_compute_ideal_size (this, frame);
 	    null_compute_rgb_size (this, frame);
@@ -536,8 +539,8 @@ vo_driver_t* init_video_out_plugin( config_values_t* conf,
     vo->m_is_scaling = 0;
     vo->user_ratio = ASPECT_AUTO;
     vo->display_ratio = 1.0;
-    vo->gui_width = 200;
-    vo->gui_height = 150;
+    vo->gui_width = 16;
+    vo->gui_height = 8;
     vo->frameDis = NULL;
 
     /* install callback handlers*/

@@ -32,6 +32,8 @@ namespace XINE {
         int subVersion()/*const*/;
 
 
+		void resize ( const QSize &s );
+
         int play( const QString& fileName,
                   int startPos = 0,
                   int start_time = 0 );

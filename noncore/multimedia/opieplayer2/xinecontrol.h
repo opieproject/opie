@@ -56,6 +56,8 @@ public slots:
     void length();
     long position();
 
+	void videoResized ( const QSize &s );
+
 private:
     XINE::Lib *libXine;
     MediaDetect mdetect;

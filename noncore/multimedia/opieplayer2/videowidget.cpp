@@ -110,6 +110,10 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     slider->setFocusPolicy( QWidget::NoFocus );
     slider->setGeometry( QRect( 7, 250, 220, 20 ) );
 
+    videoFrame = new XineVideoWidget ( this, "Video frame" );
+
+	connect ( videoFrame, SIGNAL( videoResized ( const QSize & )), this, SIGNAL( videoResized ( const QSize & )));
+
     connect( slider, SIGNAL( sliderPressed() ), this, SLOT( sliderPressed() ) );
     connect( slider, SIGNAL( sliderReleased() ), this, SLOT( sliderReleased() ) );
 
@@ -126,8 +130,6 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     setFullscreen( mediaPlayerState->fullscreen() );
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
-
-    videoFrame = new XineVideoWidget( 240, 155 ,this, "Video frame" );
 
 }
 
@@ -279,11 +281,13 @@ void VideoWidget::makeVisible() {
     showFullScreen();
     resize( qApp->desktop()->size() );
     slider->hide();
+	videoFrame-> setGeometry ( 0, 0, width ( ), height ( ));
   } else {
     setBackgroundPixmap( Resource::loadPixmap(  backgroundPix ) );
     showNormal();
     showMaximized();
     slider->show();
+    videoFrame->setGeometry( QRect( 10, 20, 220, 160  ) );
   }
 }
 
@@ -294,11 +298,11 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
     if ( mediaPlayerState->fullscreen() ) {
         // Clear the background
       p.setBrush( QBrush( Qt::black ) );
-      videoFrame->setGeometry( QRect( 0, 0 , 240 ,340  ) );
+//      videoFrame->setGeometry( QRect( 0, 0 , 240 ,320  ) );
 
     } else {
 
-      videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
+ //     videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
          // draw the buttons
 
         for ( int i = 0; i < numButtons; i++ ) {
@@ -381,4 +385,10 @@ void VideoWidget::keyReleaseEvent( QKeyEvent *e)
 }
 XineVideoWidget* VideoWidget::vidWidget() {
     return videoFrame;
+}
+
+
+void VideoWidget::setFullscreen ( bool b )
+{ 
+	setToggleButton( VideoFullscreen, b );
 }

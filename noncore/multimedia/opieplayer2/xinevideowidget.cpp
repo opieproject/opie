@@ -38,10 +38,12 @@
 #include <qdirectpainter_qws.h>
 #include <qgfx_qws.h>
 #include <qsize.h>
+#include <qapplication.h>
 
 #include <qpe/resource.h>
 
 #include "xinevideowidget.h"
+
 
 static inline void memcpy_rev ( void *dst, void *src, size_t len )
 {
@@ -74,20 +76,18 @@ static inline void memcpy_step_rev ( void *dst, void *src, size_t len, size_t st
 }
 
 
-XineVideoWidget::XineVideoWidget( int width,
-                                  int height,
-                                  QWidget* parent,
-                                  const char* name )
+XineVideoWidget::XineVideoWidget ( QWidget* parent, const char* name )
 		: QWidget ( parent, name, WRepaintNoErase | WResizeNoErase )
 {
-	m_image = new QImage ( width, height, qt_screen-> depth ( ));
-	m_buff = 0;
 	setBackgroundMode ( NoBackground );
-	/*    QImage image = Resource::loadImage("SoundPlayer");
-	    image = image.smoothScale( width, height );
-	 
-	    m_image = new QImage( image );*/
+
+	m_image             = 0;
+	m_buff              = 0;
+	m_bytes_per_line_fb = qt_screen-> linestep ( );
+	m_bytes_per_pixel   = ( qt_screen->depth() + 7 ) / 8;
+	m_rotation          = 0;
 }
+
 
 XineVideoWidget::~XineVideoWidget ( )
 {
@@ -106,7 +106,8 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 	if ( m_buff == 0 ) {
 		QPainter p ( this );
 		p. fillRect ( rect ( ), black );
-		p. drawImage ( 0, 0, *m_image );
+		if ( m_image )
+			p. drawImage ( 0, 0, *m_image );
 		//qWarning ( "logo\n" );
 	}
 	else {
@@ -117,7 +118,7 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 		{
 			QDirectPainter dp ( this );
 
-			int rot = dp. transformOrientation ( );
+			int rot = dp. transformOrientation ( ) + m_rotation;
 
 			uchar *fb = dp. frameBuffer ( );
 			uchar *frame = m_buff;  // rot == 0 ? m_buff : m_buff + ( m_thisframe. height ( ) - 1 ) * m_bytes_per_line_frame;
@@ -197,15 +198,6 @@ void XineVideoWidget::paintEvent ( QPaintEvent * )
 	//qWarning( "painting >>>" );
 }
 
-int XineVideoWidget::height ( ) const
-{
-	return m_image-> height ( );
-}
-
-int XineVideoWidget::width ( ) const
-{
-	return m_image-> width ( );
-}
 
 void XineVideoWidget::setImage ( QImage* image )
 {
@@ -213,18 +205,63 @@ void XineVideoWidget::setImage ( QImage* image )
 	m_image = image;
 }
 
-void XineVideoWidget::setImage( uchar* image, int yoffsetXLine,
-                                int xoffsetXBytes, int width,
-                                int height, int linestep, int bytes, int bpp )
+void XineVideoWidget::setImage ( uchar* img, int w, int h, int bpl )
 {
+	bool rot90 = (( -m_rotation ) & 1 );
+
+	if ( rot90 ) {
+		int d = w;
+		w = h;
+		h = d;
+	}
 
 	m_lastframe = m_thisframe;
-	m_thisframe. setRect ( xoffsetXBytes, yoffsetXLine, width, height );
+	m_thisframe. setRect (( width ( ) - w ) / 2, ( height ( ) - h ) / 2, w , h );
 
-	m_buff                 = image;
-	m_bytes_per_line_fb    = linestep;
-	m_bytes_per_line_frame = bytes;
-	m_bytes_per_pixel      = bpp;
+//	qDebug ( "Frame: %d,%d - %dx%d", ( width ( ) - w ) / 2, ( height ( ) - h ) / 2, w , h );
+
+	m_buff                 = img;
+	m_bytes_per_line_frame = bpl;
 
 	repaint ((( m_thisframe & m_lastframe ) != m_lastframe ) ? m_lastframe : m_thisframe, false );
 }
+
+void XineVideoWidget::resizeEvent ( QResizeEvent * )
+{
+	QSize s = size ( );
+	bool fs = ( s == qApp-> desktop ( )-> size ( ));
+		
+	m_rotation = fs ? -qt_screen-> transformOrientation ( ) : 0;
+		
+	if ( fs && qt_screen-> isTransformed ( )) {
+		s = qt_screen-> mapToDevice ( s );		
+	}
+
+//	qDebug ( "\n\nResize: %dx%d, Rot: %d", s.width(),s.height(),m_rotation );
+	
+	emit videoResized ( s );
+}
+
+
+void XineVideoWidget::mousePressEvent ( QMouseEvent *me )
+{
+	QWidget *p = parentWidget ( );
+	
+	if ( p ) {
+		QMouseEvent pme ( QEvent::MouseButtonPress, mapToParent ( me-> pos ( )), me-> globalPos ( ), me-> button ( ), me-> state ( ));
+		
+		QApplication::sendEvent ( p, &pme );
+	}
+}
+
+void XineVideoWidget::mouseReleaseEvent ( QMouseEvent *me )
+{
+	QWidget *p = parentWidget ( );
+	
+	if ( p ) {
+		QMouseEvent pme ( QEvent::MouseButtonRelease, mapToParent ( me-> pos ( )), me-> globalPos ( ), me-> button ( ), me-> state ( ));
+		
+		QApplication::sendEvent ( p, &pme );
+	}
+}
+

@@ -71,14 +71,9 @@ Lib::Lib(XineVideoWidget* widget) {
     m_videoOutput = ::init_video_out_plugin( m_config, NULL );
     if (m_wid != 0 ) {
         printf("!0\n" );
-        ::null_set_gui_width( m_videoOutput,  m_wid->image()->width() );
-        ::null_set_gui_height(m_videoOutput,  m_wid->image()->height() );
+        resize ( m_wid-> size ( ));
         ::null_set_mode( m_videoOutput, qt_screen->depth(), qt_screen->pixelType() );
-        m_bytes_per_pixel = ( qt_screen->depth() + 7 ) / 8;
-        QImage image = Resource::loadImage("");
-        image = image.smoothScale( m_wid->width(), m_wid->height() );
-        QImage* img = new QImage( image );
-        m_wid->setImage( img );
+        m_wid-> setImage ( new QImage ( Resource::loadImage("")));
         m_wid->repaint();
     }
     null_display_handler( m_videoOutput,
@@ -98,6 +93,14 @@ Lib::~Lib() {
     delete m_videoOutput;
     //delete m_audioOutput;
 
+}
+
+void Lib::resize ( const QSize &s )
+{
+	if ( s. width ( ) && s. height ( )) {
+		::null_set_gui_width( m_videoOutput,  s. width() );
+		::null_set_gui_height(m_videoOutput,  s. height() );
+	}
 }
 
 QCString Lib::version() {
@@ -187,9 +190,8 @@ void Lib::xine_event_handler( void* user_data, xine_event_t* t ) {
 }
 void Lib::xine_display_frame( void* user_data, uint8_t *frame,
                               int width,  int height,  int bytes ) {
-//    printf("display x frame");
-    ((Lib*)user_data)->drawFrame( frame,  width, height,  bytes );
-//    printf("displayed x frame\n");
+
+    ((Lib*)user_data)->drawFrame( frame,  width, height, bytes );
 }
 void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     if (!m_video ) {
@@ -198,12 +200,7 @@ void Lib::drawFrame( uint8_t* frame,  int width,  int height,  int bytes ) {
     }
 //    qWarning("called draw frame %d %d",  width,  height);
 
-    QSize size = m_wid->size();
-    int xoffset  = (size.width() - width) / 2;
-    int yoffset  = (size.height() - height) / 2;
-    int linestep = qt_screen->linestep();
-
-    m_wid->setImage( frame, yoffset, xoffset, width, height, linestep, bytes, m_bytes_per_pixel );
+    m_wid->setImage( frame, width, height, bytes );
 //    m_wid->repaint(false);
 
 }

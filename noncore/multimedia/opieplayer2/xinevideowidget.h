@@ -35,21 +35,29 @@
 
 #include <qwidget.h>
 
+#include "lib.h"
+
 class QImage;
 class XineVideoWidget : public QWidget {
     Q_OBJECT
 public:
-    XineVideoWidget( int width,  int height, QWidget* parent,  const char* name );
+    XineVideoWidget( QWidget* parent,  const char* name );
     ~XineVideoWidget();
     QImage *image() { return m_image; };
     void setImage( QImage* image );
-    void setImage( uchar* image, int yoffsetXLine, int xoffsetXBytes,
-                   int width, int height,  int linestep,  int bytes,  int bpp);
-    int width() const;
-    int height() const;
+    void setImage( uchar* image, int width, int height, int linestep);
     void clear() ;
+    
 protected:
     void paintEvent( QPaintEvent* p );
+    void resizeEvent ( QResizeEvent *r );
+
+	void mousePressEvent ( QMouseEvent *e );
+	void mouseReleaseEvent ( QMouseEvent *e );
+
+signals:
+	void videoResized ( const QSize &s );
+    
 private:
 	QRect m_lastframe;
 	QRect m_thisframe;
@@ -59,6 +67,6 @@ private:
     int m_bytes_per_line_frame;
     int m_bytes_per_pixel;
     QImage* m_image;
-
+    int m_rotation;
 };
 

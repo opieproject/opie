@@ -64,7 +64,7 @@ public slots:
     void sliderReleased( );
     void setPaused( bool b)      { setToggleButton( VideoPause, b ); }
     void setPlaying( bool b)     { setToggleButton( VideoPlay, b ); }
-    void setFullscreen( bool b ) { setToggleButton( VideoFullscreen, b ); }
+    void setFullscreen( bool b );
     void makeVisible();
     void setPosition( long );
     void setLength( long );
@@ -72,6 +72,7 @@ public slots:
 
 signals:
     void sliderMoved( long );
+	void videoResized ( const QSize &s );
 
 protected:
     void paintEvent( QPaintEvent *pe );
