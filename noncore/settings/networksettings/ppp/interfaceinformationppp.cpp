@@ -3,7 +3,6 @@
 
 #include <qpushbutton.h>
 #include <qlabel.h>
-//#include <qgroupbox.h>
 #include <qmessagebox.h>
 #include <qabstractlayout.h>
 
@@ -26,6 +25,13 @@ InterfaceInformationPPP::InterfaceInformationPPP(QWidget *parent, const char *na
     con = new ConnectWidget( (InterfacePPP*)i, this, "con" );
     con->setSizePolicy( QSizePolicy(QSizePolicy::MinimumExpanding,
                                     QSizePolicy::Fixed) );
+
+    macAddressLabel->hide();
+    subnetMaskLabel->hide();
+    broadcastLabel->hide();
+    TextLabel23->hide();
+    TextLabel21->hide();
+    TextLabel24->hide();
 //      QSpacerItem* spacer = new QSpacerItem( 20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum );
 //      InterfaceInformationLayout->addItem( spacer, 7, 0 );
 //    InterfaceInformationLayout->addMultiCellWidget( con, 8, 8, 0, 1 );
