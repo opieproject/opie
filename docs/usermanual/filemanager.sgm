@@ -1,0 +1,109 @@
+<chapter><title>File Manager</title>
+<para>
+The file manager allows easy access to your file system, letting you browse,
+copy, move, delete and link files.  You can also use it to open the file in an
+application based upon the file type, or add the file to your "Documents" tab,
+as well as several other filesystem related things.
+<para>
+
+<section><title>Navigating</title>
+<para>
+To enter a directory, simply press its icon or name in the main view. There are
+also two buttons in the toolbar which help with navigation. The back arrow will
+take you back to the directory you were previously looking at, while the up
+arrow will take you up one level in the directory structure (so, if you are in
+/usr/bin, it will take you to /usr, regardless of where you were before). The
+"Dir" menu shows the current path, with each directory as a menu item. So, if
+you are in /opt/QtPalmtop/bin there will be four entries: /, opt, QtPalmtop, and 
+
+bin. Selecting one of these will take you immediately to that directory.
+</para>
+</section>
+
+<section><title>Selecting Files</title>
+<para>
+When you click on a file, its selection status is toggled. So the first time you
+click on it, it will be selected, and the second time it will be deselected. To
+select multiple files, simply click on each one you want to select.
+</para>
+</section>
+<section><title>Moving Files</title>
+<para>
+To copy a file from one directory to another, press and hold on the filename,
+and select "Copy" from the menu that pops up. Then, change into the directory
+that you want to copy it into, and press the "paste" icon (an image of a
+clipboard and a piece of paper). To move a file, do the same thing, except
+select "Cut" from the first menu, instead of "Copy". You can also move or
+copy multiple files by selecting all of them and using the cut or copy buttons
+in the toolbar.
+</para>
+</section>
+
+<section><title>Deleting Files</title>
+<para>
+To delete a file, press and hold it to bring up its menu, then select
+"Delete", and click "Yes" (or "No" to cancel). Delete will delete all the
+currently selected files, which may be more than the one that you pressed and
+held on.
+</para>
+</section>
+
+<section><title>Renaming Files</title>
+<para>
+To change a file's name, first bring up the input method you want to use (unless
+you are going to use the hardware keyboard), then press and hold on the
+filename, and select "rename". A new file will appear with a "Name" field
+that is editable, enter the new name, and click another file to keep the new
+name.
+</para>
+</section>
+
+<section><title>Creating Directories</title>
+<para>
+To create a directory, first bring up the input method you want to use (if you
+are using one), and then click the new directory button (an image of a file
+folder with a "+" sign). A new folder will be created with the name "New
+Folder", and the folder name will be editable. Enter the name you want and then
+click another file to create the folder.
+</para>
+</section>
+
+<section><title>Viewing Files</title>
+<para>
+To view a file, press and hold on a file, and the menu that comes up will
+contain two entries for vieing the file, the first depends on the filetype, but
+usually lets you open the file in a specific program. The second is "view as
+text" which will open the file up in TextEdit (regardless of whether or not it
+is actually a text file).
+</para>
+</section>
+
+<section id="adddoc"><title>Adding to "Documents"</title>
+<para>
+To add a file to your "Documents", press and hold the file, and select "Add
+to documents" from the menu. This will add the file to the documents tab, which
+you can use to quickly open the file (simply click on the icon for the file in
+the Documents tab). Some programs also use the Documents list to aid in quickly
+opening files.
+</para>
+</section>
+
+<section><title>Sorting Files</title>
+<para>
+To sort the files, use the "Sort" menu to select wich field you want to sort
+the files by ("by Name", for instance, will sort the file alphabetically by
+name). If "Ascending" is checked, the files will be sorted in ascending order,
+if it is not, they will be sorted in descending order.  You can also press the
+name of the column in the main view to sort by that field.
+</para>
+</section>
+
+<section><title>Viewing Options</title>
+<para>
+The "View" menu lets you choose which files to view. If "Hidden" is checked,
+hidden files will be visible (in Linux, hidden files start with a "."). If
+"Symlinks" is checked, symbolic links (files or directories which are merely
+links to other files or directories) will be visible.
+</para>
+</section>
+</chapter>

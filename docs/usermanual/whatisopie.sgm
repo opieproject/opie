@@ -1,0 +1,17 @@
+<chapter><title>What is Opie?</title>
+<para>
+Opie is a GUI (Graphical User Interface) for the Linux operating system (and
+might work on other OSes as well).  It was originally designed for handheld
+computers (such as the Compaq/HP iPAQ and the Sharp Zaurus), but could
+probably function well in other environments requiring a light GUI, such as an
+old laptop, or an internet kiosk.  It is based upon QT/Embedded from Trolltech,
+which is in turn a graphical environment designed for embedded applications,
+based upon the QT toolkit.
+</para>
+<para>
+Opie has been designed for devices with small screens, and a touchscreen input
+device (ie, only one mouse click, and no constant mouse position), as well as
+designed to fit in a relatively small amount of storage space (about 5 megabytes
+for the base libraries and the launcher).
+</para>
+</chapter>

@@ -1,0 +1,190 @@
+<chapter><title>Calendar</title>
+<para>
+The Calendar is a way to keep track of all your appointments, birthdays,
+meetings, or any other event that you would put in a calendar.
+</para>
+
+<section><title>Navigation</title>
+<para>
+Navigation in the Calendar is simple.  Along the top are five different buttons
+that allow you to set the type of view, which correspond to the five items in
+the "View" menu. Each one (except for "Today") changes the amount of time
+shown on the screen. "Day" shows one day, "Week" one week, etc. Today is the
+same as Day, except that it automatically sets the view to the current day.
+</para>
+<section><title>The Day view</title>
+<para>
+The day view shows your day divided up into blocks representing each hour. At 
+the top is the navigation bar, wher you will see a row of buttons, which
+represent the days of the current week, and on the left and right sides of the
+navigation bar are arrows, which allow you to move one day in that direction. If
+you are on the last day of the week, pressing the arrow will bring you into the
+first day of the next week (or vice-versa if you are going backwards). There is
+also a button that lists the current day, which you can press to select a day to
+view from a calendar dialog.
+</para>
+<para>
+In the main view, there is a collumn of buttons, each of which represents one
+hour. If you select one, any new appointments will automatically default to
+begining at that time and ending an hour later (which you can, of course, change
+when you create the appointment).
+</para>
+<para>
+Clicking on an appointment will open a menu that lets you edit, delete or beam
+the appointment. Beam will beam the appointment to any device supporting the
+Obex protocol (PalmOS based devices, cellphones, etc). libopieobex must be
+installed to use this feature.
+</para>
+</section>
+
+<section><title>The Week View</title>
+<para>
+The week view allows you to see your week divided up into columns, representing
+each day of the week, and rows, representing each hour of the day. In the
+navigation bar at the top, there are two scroll boxes, the one on the left shows
+the current year, and the one to the right shows which week it is of that year.
+To the right of both of those is a label which shows the date range for the 
+currently selected week.
+</para>
+<para>
+In the main view, you see the week divided up into rows and collumns
+representing the days of the week, and hours of the day. In each cell, you will
+see a blue square which represents an appointment, which you can press to see
+details of the appointment. If you press anywhere in the free space, you will go
+to the day of the column that you clicked in.
+</para>
+</section>
+
+<section><title>The Week List View</title>
+<para>
+The week list view shows you all the appointments that you have that week 
+without graphically representing how long they are or showing the free time
+between them. This is convinient if you need to see a list of all your 
+appointments, but do not need to see how your time is mapped out. The navigation
+bar has an arrow button on either side, allowing you to move to the next or
+previous week, as well as a button which gives the current week number for that
+year. Pressing the week number button will bring up a calendar dialog, which
+allows you to select the week you are viewing. Selecting a day from the calendar 
+
+will bring you to the week that day is in. To the right of that is a button with
+a "2" in it. When this is depressed, the main view will show two weeks at a
+time, instead of one. The last item is a label which shows the range of dates 
+for the currently selected week.
+</para>
+<para>
+The main view is comprised of several rows, each of which represents a day of
+the week. If you have an appointment on that day, the date will be red,
+otherwise it will be black (the current day is blue). Clicking on the date 
+itself will bring you to the day view for that day. Under each day is a list of
+all the appointments for that day, as well as their start times. If you click on
+an appointment, you will go to an edit dialog for that appointment, which lets
+you view its details. Next to each day heading is a "+" sign, clicking it will
+create a new appointment for that day.
+</para>
+</section>
+
+<section><title>The Month View</title>
+<para>
+The month view looks like a normal monthly calendar, allowing you to see on what 
+
+days of the month you have appointments. In the navigation bar, there are two
+pairs of arrows. The pair with an arrow and a vertical line will take you to the
+first or last month of the currently selected year, while the normal arrow
+buttons will take you to the next or previous month. There is a dropdown menu
+which allows you to select the month, and a entry field which allows you to
+select the year (press the up or down arrows, or enter in your own year).
+</para>
+<para>
+The main view is divided up into a grid, where the columns are the days of the
+week, and the rows are the weeks (just like an ordinary calendar). The currently
+selected day has a bold box drawn around it, and if the day has an appointment,
+there will be a small blue square in the bottom right corner of it (that square
+will have a smaller white square if it is a recurring appointment). If the
+appointment is an all day event, it will be drawn as a green dot instead. When
+you click on the sqaure of a day, you will be taken to the day view for that
+day.
+</para>
+</section>
+</section>
+
+<section><title>Adding Appointments</title>
+<para>
+To add an appointment, click on the add appointment button in the toolbar at the
+top of the window (an image of a blank page), and a dialog will open up,
+allowing you to enter information about the appointment (depending on the
+current view, and what you may have selected, there may be certain default
+settings).
+</para>
+<para>
+At the top of the window is the description field, where you can enter in a
+short description of the appointment, or select a common one from the dropdown
+list. The location field allows you to do the same. The category dropdown allows 
+
+you to assign the appointment to a category, which you can use later to view
+only some of your appointments. The button labeled "..." to the right of that
+will open up a dialog where you can add, delete, or edit certain categories.
+</para>
+<para>
+To enter a start and end time, select the date for each from the dropdown menu,
+and then you can either manually enter a time, or you can use the three rows of
+numbers to more quickly enter it in. To use the fast input method, first click
+in the text entry field of the time you want to edit, then you need to select
+the hour. The first two rows are the hours, click whichever one you want. The 
+third row of numbers are the minutes, in units of five. When you select the
+minutes field for the start time, it will automatically set the minutes field
+for the end time to the same thing, but you can change this by selecting the end
+field and giving it its own minutes field. Because of this, it is fastest to set
+the start time first and then the end time. There is also an "all day"
+checkbox, which will make the appointment take up the entire day.
+</para>
+<para>
+Underneath this you can set the timezone of the appointment from the dropdown
+list. To change the available timezones, click the world icon, and it will open
+the City Time application. Refer to its documentation for changing the
+timezones. If you want to have an alarm go off, check the "alarm" checkbox,
+and then set the number of minutes before the appointment that you want the
+alarm to sound. If you set the dropdown list next to that to "silent" you will
+only be given a visual alarm, wheras if you set the alarm to "Loud", there
+will be an alarm sound as well. Note: opie-alarm must be installed for alarms to
+work.
+</para>
+<para>
+To set whether the appointment repeats, click the "Repeat" button and a new 
+dialog will open up. At the top is a row of buttons, which lets you set how
+often the appointment repeats. Selecting one of these buttons will change the 
+interface below, to represent the available options for that type of repetition
+(selecting "None" will turn off repetition if you turned it on and no longer
+want it). When you are done, click "ok" in the upper right to select that type
+of repetition, or "x" to set it back to what it was (none if it is a new
+appointment).
+</para>
+<para>
+Finally, you can add notes to the appointment by clicking the "Notes..." 
+button which will open a dialog with a text entry field for adding notes. Press
+"ok" to accept the changes to the notes, "x" to cancel.
+</para>
+<para>
+When you are done setting up the appointment, click "ok" in the top right of
+the window, or "x" to cancel adding the appointment.
+</para>
+</section>
+<section><title>Editing Appointments</title>
+<para>
+How you start editing an appointment varies depending on what view you are in,
+but they will all open the same dialog. The dialog is the same as the Add
+Appointment dialog, except that the fields will already be filled in with the
+information that the appointment contains. Clicking "ok" will keep your
+changes, "x" will revert them to what they were before you edited them.
+</para>
+</section>
+
+<section><title>Finding Appointments</title>
+<para>
+To find a specific appointment, click the find button in the toolbar (small
+green magnifying glass) and it will open a find dialog. Here you can enter the 
+text you want to search for, as well as the category you want to search for, as
+well as the start date, and whether you want the search to be case sensitive.
+Click "Find" to find the next appointment that matches your criteria.
+</para>
+</section>
+</chapter>
