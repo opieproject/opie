@@ -80,7 +80,7 @@
     </message>
     <message>
         <source>View Task</source>
-        <translation>Просм. задачу</translation>
+        <translation>Просмотреть задачу</translation>
     </message>
     <message>
         <source>Delete...</source>
@@ -112,7 +112,7 @@
     </message>
     <message>
         <source>Show completed tasks</source>
-        <translation>Показать заверш. задачи</translation>
+        <translation>Показать завершенные задачи</translation>
     </message>
     <message>
         <source>Show only over-due tasks</source>
@@ -210,7 +210,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>C.</source>
-        <translation type="unfinished"></translation>
+        <translation>З.</translation>
     </message>
     <message>
         <source>Priority</source>
@@ -246,7 +246,7 @@ Quit Anyway?</source>
     </message>
     <message>
         <source>Remove</source>
-        <translation>Убрать</translation>
+        <translation>Удалить</translation>
     </message>
     <message>
         <source>Name</source>
@@ -338,7 +338,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     </message>
     <message>
         <source>Summary</source>
-        <translation type="unfinished"></translation>
+        <translation>Сводка</translation>
     </message>
 </context>
 <context>
@@ -360,7 +360,7 @@ It allows you to quickly add a new task to your list.  This area can be shown or
     <name>TaskEditorAlarms</name>
     <message>
         <source>New</source>
-        <translation>Новая</translation>
+        <translation>Новое</translation>
     </message>
     <message>
         <source>Edit</source>

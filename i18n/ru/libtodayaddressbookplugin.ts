@@ -11,7 +11,7 @@
     </message>
     <message>
         <source>Clip line after X chars: </source>
-        <translation>Обрезать линию после X символов:</translation>
+        <translation>Обрезать после X символов:</translation>
     </message>
     <message>
         <source>After how many chars should be the info about the task be cut off</source>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Days look ahead: </source>
-        <translation>Дней смотреть вперед:</translation>
+        <translation>Дней вперед:</translation>
     </message>
     <message>
         <source>How many days we should search forward</source>
@@ -27,7 +27,7 @@
     </message>
     <message>
         <source>Set Headline Color: </source>
-        <translation>Уст. цвет заголовков:</translation>
+        <translation>Цвет заголовков:</translation>
     </message>
     <message>
         <source>Colors for the headlines !</source>
@@ -35,7 +35,7 @@
     </message>
     <message>
         <source>Set Entry Color: </source>
-        <translation>Уст. цвет записи:</translation>
+        <translation>Цвет записи:</translation>
     </message>
     <message>
         <source>This color will be used for shown birthdays/anniversaries !</source>
@@ -44,8 +44,8 @@
     <message>
         <source>Set Urgent
 Color if below </source>
-        <translation>Уст. срочный
-цвет если меньше</translation>
+        <translation>Срочный цвет
+если меньше</translation>
     </message>
     <message>
         <source> days: </source>

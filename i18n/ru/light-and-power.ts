@@ -10,7 +10,7 @@
     <name>LightSettings</name>
     <message>
         <source>Backlight &amp;&amp; Contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>Подсветка и контраст</translation>
     </message>
 </context>
 <context>
@@ -29,7 +29,7 @@
     </message>
     <message>
         <source>Light off after</source>
-        <translation>Откл. свет после</translation>
+        <translation>Отключить свет после</translation>
     </message>
     <message>
         <source>Off</source>
@@ -41,7 +41,7 @@
     </message>
     <message>
         <source>on Battery</source>
-        <translation>на аккумуляторе</translation>
+        <translation>аккумулятор</translation>
     </message>
     <message>
         <source>General Settings</source>
@@ -57,7 +57,7 @@
     </message>
     <message>
         <source>Deactivate LCD only (does not suspend)</source>
-        <translation>Отключить только ЖКД (не выключать)</translation>
+        <translation>Отключить ЖКД (не выключать питание)</translation>
     </message>
     <message>
         <source>Backlight</source>
@@ -85,7 +85,7 @@
     </message>
     <message>
         <source>on AC</source>
-        <translation>на сети</translation>
+        <translation>в сети</translation>
     </message>
     <message>
         <source>Warnings</source>
@@ -93,7 +93,7 @@
     </message>
     <message>
         <source>Low power warning interval</source>
-        <translation>интервал предупрежд. о низком уровне</translation>
+        <translation>слабое питание - интервал</translation>
     </message>
     <message>
         <source> %</source>
@@ -109,39 +109,39 @@
     </message>
     <message>
         <source>At what battery level should the critical power warning pop up</source>
-        <translation>На каком уровне заряда должно появится предупреждение о критич. уровне</translation>
+        <translation>На каком уровне заряда должно появится предупреждение о критическом уровне</translation>
     </message>
     <message>
         <source>very low battery warning at</source>
-        <translation>предупрежд. об очень низком уровне</translation>
+        <translation>очень низкий уровень</translation>
     </message>
     <message>
         <source>critical power warning at</source>
-        <translation>предупрежд. о критич. уровне в</translation>
+        <translation>критический уровень</translation>
     </message>
     <message>
         <source>CPU Frequency</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота ЦПУ</translation>
     </message>
     <message>
         <source>On closing the hinge</source>
-        <translation type="unfinished"></translation>
+        <translation>При закрытии крышки</translation>
     </message>
     <message>
         <source>ignore</source>
-        <translation type="unfinished"></translation>
+        <translation>игнорировать</translation>
     </message>
     <message>
         <source>display off</source>
-        <translation type="unfinished"></translation>
+        <translation>откл. дисплей</translation>
     </message>
     <message>
         <source>suspend</source>
-        <translation type="unfinished"></translation>
+        <translation>выключить</translation>
     </message>
     <message>
         <source>set a fix value for contrast</source>
-        <translation type="unfinished"></translation>
+        <translation>уст. постоянн. контрастность</translation>
     </message>
 </context>
 <context>

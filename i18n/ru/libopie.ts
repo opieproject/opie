@@ -199,7 +199,7 @@
     </message>
     <message>
         <source>None</source>
-        <translation>Ничего</translation>
+        <translation>Нет</translation>
     </message>
     <message>
         <source>Day</source>
@@ -227,11 +227,11 @@
     </message>
     <message>
         <source>End On:</source>
-        <translation>Заканчивается:</translation>
+        <translation>Завершить:</translation>
     </message>
     <message>
         <source>No End Date</source>
-        <translation>Нет даты оконч.</translation>
+        <translation>Нет даты</translation>
     </message>
     <message>
         <source>Repeat On</source>
@@ -286,7 +286,7 @@
     <name>ORecurranceWidget</name>
     <message>
         <source>No End Date</source>
-        <translation>Нет даты оконч.</translation>
+        <translation>Нет даты</translation>
     </message>
     <message>
         <source>days</source>
@@ -340,7 +340,7 @@ and </source>
     </message>
     <message>
         <source>day(s)</source>
-        <translation>день(дни)</translation>
+        <translation>день(дней)</translation>
     </message>
     <message>
         <source>Repeat On</source>
@@ -404,7 +404,7 @@ and </source>
     </message>
     <message>
         <source>on </source>
-        <translation>на</translation>
+        <translation>по</translation>
     </message>
 </context>
 <context>
@@ -578,7 +578,7 @@ and </source>
     </message>
     <message>
         <source>Wednesday</source>
-        <translation></translation>
+        <translation>Среда</translation>
     </message>
     <message>
         <source>Thursday</source>
