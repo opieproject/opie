@@ -64,6 +64,12 @@ public:
     virtual bool excludeFromRefresh() const = 0;
 
     /**
+     * Refresh that plugins view. For updating the plugins
+     *
+     */
+    virtual void refresh() {};
+
+    /**
      * minimum height the plugin at least should have
      */
     // virtual int minHeight()  const = 0;
