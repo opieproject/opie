@@ -58,7 +58,9 @@ protected slots:
     void setDocument( const QString & );
     void slotBeam();
     void beamDone( Ir * );
-    
+    void slotDeleteAll();
+    void slotDuplicate();
+
 protected:
     void closeEvent( QCloseEvent *e );
 
@@ -68,10 +70,12 @@ private:
 private:
     TodoTable *table;
     QAction *editAction,
-	    *deleteAction,
-	    *findAction,
-	    * completedAction,
-	    *showdeadlineAction ;
+      *deleteAction,
+      *findAction,
+      *completedAction,
+      *showdeadlineAction,
+      *deleteAllAction,
+      *duplicateAction;
     QPopupMenu *contextMenu, *catMenu;
 
     bool syncing;

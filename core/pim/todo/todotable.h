@@ -92,8 +92,9 @@ class DueTextItem : public QTableItem
 };
 
 
-enum journal_action { ACTION_ADD, ACTION_REMOVE, ACTION_REPLACE };
+enum journal_action { ACTION_ADD=0, ACTION_REMOVE, ACTION_REPLACE };
 
+class XMLElement;
 class TodoTable : public QTable
 {
     Q_OBJECT
@@ -120,8 +121,11 @@ public:
 
     bool save( const QString &fn );
     void load( const QString &fn );
+    void applyJournal( );
     void clear();
     void removeCurrentEntry();
+    void removeAllEntries() { clear(); };
+    //void removeAllEntriesInCategory(const QString &category );
 
     void setPaintingEnabled( bool e );
 
@@ -153,6 +157,7 @@ private:
     void journalFreeRemoveEntry( int row );
     inline void realignTable( int row );
     void loadFile( const QString &strFile, bool fromJournal = false );
+    void doApply(XMLElement *el );
 
 private slots:
     void slotClicked( int row, int col, int button, const QPoint &pos );

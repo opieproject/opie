@@ -124,6 +124,8 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
 
     catMenu = new QPopupMenu( this );
     QPopupMenu *edit = new QPopupMenu( this );
+    QPopupMenu *options = new QPopupMenu(this );
+
     contextMenu = new QPopupMenu( this );
 
     bar = new QPEToolBar( this );
@@ -135,7 +137,7 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     a->addTo( bar );
     a->addTo( edit );
 
-    a = new QAction( tr( "Edit" ), Resource::loadIconSet( "edit" ),
+    a = new QAction( tr( "Edit Task" ), Resource::loadIconSet( "edit" ),
 		     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ),
              this, SLOT( slotEdit() ) );
@@ -144,8 +146,9 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     a->addTo( contextMenu );
     a->setEnabled( FALSE );
     editAction = a;
+    edit->insertSeparator();
 
-    a = new QAction( tr( "Delete" ), Resource::loadIconSet( "trash" ),
+    a = new QAction( tr( "Delete..." ), Resource::loadIconSet( "trash" ),
 		     QString::null, 0, this, 0 );
     connect( a, SIGNAL( activated() ),
              this, SLOT( slotDelete() ) );
@@ -155,6 +158,26 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     a->setEnabled( FALSE );
     deleteAction = a;
 
+    // delete All in category is missing....
+    // set All Done
+    // set All Done in category
+
+    a = new QAction( QString::null, tr( "Delete all..."), 0, this, 0 );
+    connect(a, SIGNAL( activated() ),
+	    this, SLOT( slotDeleteAll() ) );
+    a->addTo(edit );
+    a->setEnabled( FALSE );
+    deleteAllAction = a;  
+
+    edit->insertSeparator();
+    a = new QAction( QString::null, tr("Duplicate" ), 0, this, 0 );
+    connect(a, SIGNAL( activated() ),
+	    this, SLOT( slotDuplicate() ) );
+    a->addTo(edit );
+    a->setEnabled( FALSE );
+    duplicateAction = a;
+
+    edit->insertSeparator();
     if ( Ir::supported() ) {
 	a = new QAction( tr( "Beam" ), Resource::loadPixmap( "beam" ),
 			 QString::null, 0, this, 0 );
@@ -169,7 +192,9 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     connect( a, SIGNAL( activated() ),
 	     this, SLOT( slotFind() ) );
     a->addTo( bar );
-    a->addTo( edit );
+    a->addTo( options );
+    options->insertSeparator();
+
     if ( table->numRows() )
 	a->setEnabled( TRUE );
     else
@@ -186,9 +211,24 @@ TodoWindow::TodoWindow( QWidget *parent, const char *name, WFlags f = 0 ) :
     catMenu->setCheckable( true );
     populateCategories();
 
-    mb->insertItem( tr( "Data" ), edit );
-    mb->insertItem( tr( "View" ), catMenu );
+    
+    completedAction->addTo( options );
+    completedAction->setOn( table->showCompleted() );
+    showdeadlineAction->addTo( options );
+    showdeadlineAction->setOn( table->showDeadline() );
+    options->insertSeparator( );
+    QList<QWidget> list;
+    list.append(table );
+    OFontMenu *menu = new OFontMenu(this, "menu",list );
+    menu->forceSize( table->horizontalHeader(), 10 );
+    //catMenu->insertItem(tr("Fonts"), menu );
+    list.clear();
+    options->insertItem( tr("Fonts"), menu );
 
+
+    mb->insertItem( tr( "Data" ), edit );
+    mb->insertItem( tr( "Category" ), catMenu );
+    mb->insertItem( tr( "Options"), options );
     resize( 200, 300 );
     if ( table->numRows() > 0 )
         currentEntryChanged( 0, 0 );
@@ -279,6 +319,30 @@ void TodoWindow::slotDelete()
 	findAction->setEnabled( FALSE );
     }
 }
+void TodoWindow::slotDeleteAll()
+{
+  if(syncing) {
+    QMessageBox::warning(this, tr("Todo"),
+			 tr("Can not edit data, currently syncing"));
+    return;
+  }
+  
+  //QString strName = table->text( table->currentRow(), 2 ).left( 30 );
+  
+  if ( !QPEMessageBox::confirmDelete( this, tr( "Todo" ), tr("Should I delete all tasks?") ) )
+    return;
+  
+  
+  
+  table->setPaintingEnabled( false );
+  table->removeAllEntries();
+  table->setPaintingEnabled( true );
+  
+  if ( table->numRows() == 0 ) {
+    currentEntryChanged( -1, 0 );
+    findAction->setEnabled( FALSE );
+  }
+}
 
 void TodoWindow::slotEdit()
 {
@@ -307,7 +371,19 @@ void TodoWindow::slotEdit()
     populateCategories();
 
 }
-
+void TodoWindow::slotDuplicate()
+{
+  if(syncing) {
+    QMessageBox::warning(this, tr("Todo"),
+			 tr("Can not edit data, currently syncing"));
+    return;
+  }
+  ToDoEvent ev = table->currentEntry();
+  ToDoEvent ev2 = ToDoEvent( ev );
+  table->setPaintingEnabled( false );
+  table->addEntry( ev2 );
+  table->setPaintingEnabled( true );
+}
 void TodoWindow::slotShowPopup( const QPoint &p )
 {
     contextMenu->popup( p );
@@ -327,9 +403,13 @@ void TodoWindow::currentEntryChanged( int r, int )
     if ( r != -1 && table->rowHeight( r ) > 0 ) {
         editAction->setEnabled( TRUE );
         deleteAction->setEnabled( TRUE );
+	duplicateAction->setEnabled( TRUE );
+	deleteAllAction->setEnabled( TRUE );
     } else {
         editAction->setEnabled( FALSE );
         deleteAction->setEnabled( FALSE );
+	duplicateAction->setEnabled( FALSE );
+	deleteAllAction->setEnabled( FALSE );
     }
 }
 
@@ -358,22 +438,10 @@ void TodoWindow::setCategory( int c )
 void TodoWindow::populateCategories()
 {
     catMenu->clear();
-
-    QList<QWidget> list;
-    list.append(table );
-    OFontMenu *menu = new OFontMenu(this, "menu",list );
-    menu->forceSize( table->horizontalHeader(), 10 );
-    catMenu->insertItem(tr("Fonts"), menu );
-
-    completedAction->addTo( catMenu );
-    completedAction->setOn( table->showCompleted() );
-    showdeadlineAction->addTo( catMenu );
-    showdeadlineAction->setOn( table->showDeadline() );
-    catMenu->insertSeparator();
     int id, rememberId;
     id = 1;
     catMenu->insertItem( tr( "All Categories" ), id++ );
-//    catMenu->insertSeparator();
+    catMenu->insertSeparator();
     QStringList categories = table->categories();
     categories.append( tr( "Unfiled" ) );
     for ( QStringList::Iterator it = categories.begin();

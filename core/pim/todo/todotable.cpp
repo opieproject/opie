@@ -22,6 +22,8 @@
 #include "todotable.h"
 
 #include <opie/tododb.h>
+#include <opie/xmltree.h>
+
 #include <qpe/categoryselect.h>
 #include <qpe/xmlreader.h>
 
@@ -32,6 +34,7 @@
 #include <qtextcodec.h>
 #include <qtimer.h>
 #include <qdatetime.h>
+#include <qtextstream.h>
 
 #include <qcursor.h>
 #include <qregexp.h>
@@ -40,13 +43,14 @@
 #include <stdlib.h>
 
 #include <stdio.h>
+#include <iostream>
 
+namespace {
 
-
-static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category );
-
-static QString journalFileName();
-
+  static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category );
+  static QString journalFileName();
+  static ToDoEvent xmlToEvent( XMLElement *ev );
+}
 CheckItem::CheckItem( QTable *t, const QString &key )
     : QTableItem( t, Never, "" ), checked( FALSE ), sortKey( key )
 {
@@ -409,7 +413,7 @@ void TodoTable::load( const QString &fn )
 {
     loadFile( fn, false );
     if ( QFile::exists(journalFileName()) ) {
-	loadFile( journalFileName(), true );
+	applyJournal(  );
 	save( fn );
     }
 //     QTable::sortColumn(2,TRUE,TRUE);
@@ -418,7 +422,6 @@ void TodoTable::load( const QString &fn )
     setCurrentCell( 0, 2 );
     setSorting(true );
 }
-
 void TodoTable::updateVisible()
 {
     if ( !isUpdatesEnabled() )
@@ -446,7 +449,7 @@ void TodoTable::updateVisible()
 		if ( vlCats.count() > 0 )
 		    hide = true;
 	    } else {
-		// do some comparing, we have to reverse our idea here... which idea - zecke
+		// do some comparing, we have to reverse our idea here... which idea? - zecke
 		if ( !hide ) {
 		    hide = true;
 		    for ( uint it = 0; it < vlCats.count(); ++it ) {
@@ -499,6 +502,7 @@ void TodoTable::clear()
     for ( QMap<CheckItem*, ToDoEvent *>::Iterator it = todoList.begin();
 	  it != todoList.end(); ++it ) {
 	ToDoEvent *todo = *it;
+	updateJournal( todo, ACTION_REMOVE, 0 );
 	delete todo;
     }
     todoList.clear();
@@ -533,7 +537,7 @@ void TodoTable::slotCheckPriority(int row, int col )
 }
 
 
-void TodoTable::updateJournal( const ToDoEvent &/*todo*/, journal_action action, int row )
+void TodoTable::updateJournal( const ToDoEvent &todo, journal_action action, int row )
 {
     QFile f( journalFileName() );
     if ( !f.open(IO_WriteOnly|IO_Append) )
@@ -543,7 +547,24 @@ void TodoTable::updateJournal( const ToDoEvent &/*todo*/, journal_action action,
     buf = "<Task";
     //    todo.save( buf );
     buf += " Action=\"" + QString::number( int(action) ) + "\"";
-    buf += " Row=\"" + QString::number( row ) + "\""; // better write the id
+    buf += " Uid=\"" + QString::number( todo.uid() ) + "\""; // better write the id
+    buf += " Completed=\""+ QString::number((int)todo.isCompleted() ) + "\"";
+    buf += " HasDate=\""+ QString::number((int)todo.hasDate() ) +"\"";
+    buf += " Priority=\"" + QString::number( todo.priority() ) + "\"";
+    QArray<int> arrat = todo.categories();
+    QString attr;
+    for(uint i=0; i < arrat.count(); i++ ){
+      attr.append(QString::number(arrat[i])+";" );
+    }
+    if(!attr.isEmpty() ) // remove the last ;
+      attr.remove(attr.length()-1, 1 );
+    buf += " Categories=\"" + attr + "\"";
+    buf += " Description=\"" + todo.description() + "\"";
+    if(todo.hasDate() ) {
+      buf += " DateYear=\""+QString::number( todo.date().year() ) + "\"";
+      buf += " DateMonth=\"" + QString::number( todo.date().month() ) + "\"";
+      buf += " DateDay=\"" + QString::number( todo.date().day() ) + "\"";
+    }
     buf += "/>\n";
     str = buf.utf8();
     f.writeBlock( str.data(), str.length() );
@@ -715,7 +736,55 @@ int TodoTable::showCategoryId() const
 	id = mCat.id( "Todo List", showCat );
     return id;
 }
-
+void TodoTable::applyJournal() 
+{
+  // we need to hack
+  QFile file( journalFileName() );
+  if( file.open(IO_ReadOnly ) ) {
+    QByteArray ar = file.readAll();
+    file.close();
+    QFile file2( journalFileName() + "_new" );
+    if( file2.open(IO_WriteOnly ) ){
+      QTextStream str(&file2 );
+      str << QString::fromLatin1("<Tasks>") << endl;
+      str << ar.data();
+      str << QString::fromLatin1("</Tasks>") << endl;
+      file2.close();
+    }
+    XMLElement *root = XMLElement::load(journalFileName()+ "_new");
+    XMLElement *el = root->firstChild();
+    el = el->firstChild();
+    while( el ){
+      qWarning("journal: %s %s", el->attribute("Uid" ).latin1(), el->tagName().latin1() );
+      doApply( el );
+      el = el->nextChild();
+    }
+    QFile::remove(journalFileName()+ "_new" );
+  }
+}
+// check Action and decide
+void TodoTable::doApply(XMLElement *el )
+{
+  QString dummy;
+  bool ok;
+  int action;
+  dummy = el->attribute("Action" );
+  action = dummy.toInt(&ok );
+  ToDoEvent ev = xmlToEvent( el );
+  if( ok ){
+    switch( action ){
+    case ACTION_ADD:
+      addEntry( ev );
+      break;
+    case ACTION_REMOVE:{ // find an entry with the same uid and remove it then
+      break;
+    }
+    case ACTION_REPLACE:
+      break;
+    }
+  }
+}
+namespace {
 static bool taskCompare( const ToDoEvent &task, const QRegExp &r, int category )
 {
     bool returnMe;
@@ -741,10 +810,64 @@ static QString journalFileName()
 {
     QString str;
     str = getenv( "HOME" );
-    str += "/.todojournal";
+    str += "/.opie_todojournal";
     return str;
 }
+static ToDoEvent xmlToEvent( XMLElement *element )
+{
+  QString dummy;
+  ToDoEvent event;
+  bool ok;
+  int dumInt;
+  // completed
+  dummy = element->attribute("Completed" );
+  dumInt = dummy.toInt(&ok );
+  if(ok ) event.setCompleted( dumInt == 0 ? false : true );
+  // hasDate
+  dummy = element->attribute("HasDate" );
+  dumInt = dummy.toInt(&ok );
+  if(ok ) event.setHasDate( dumInt == 0 ? false: true );
+  // set the date
+  bool hasDa = dumInt;
+  if ( hasDa ) { //parse the date
+    int year, day, month = 0;
+    year = day = month;
+    // year
+    dummy = element->attribute("DateYear" );
+    dumInt = dummy.toInt(&ok );
+    if( ok ) year = dumInt;
+    // month
+    dummy = element->attribute("DateMonth" );
+    dumInt = dummy.toInt(&ok );
+    if(ok ) month = dumInt;
+    dummy = element->attribute("DateDay" );
+    dumInt = dummy.toInt(&ok );
+    if(ok ) day = dumInt;
+    // set the date
+    QDate date( year, month, day );
+    event.setDate( date);
+  }
+  dummy = element->attribute("Priority" );
+  dumInt = dummy.toInt(&ok );
+  if(!ok ) dumInt = ToDoEvent::NORMAL;
+  event.setPriority( dumInt );
+  //description
+  dummy = element->attribute("Description" );
+  event.setDescription( dummy );
+  // category
+  dummy = element->attribute("Categories" );
+  QStringList ids = QStringList::split(";", dummy );
+  event.setCategories( ids );     
+  
+  //uid
+  dummy = element->attribute("Uid" );
+  dumInt = dummy.toInt(&ok );
+  if(ok ) event.setUid( dumInt );
+  
+  return event;
+}
 
+}
 // int TodoTable::rowHeight( int ) const
 // {
 //     return 18;
@@ -759,3 +882,4 @@ static QString journalFileName()
 // {
 //     return QMIN( pos/18, numRows()-1 );
 // }
+
