@@ -74,7 +74,6 @@ public:
     bool add( short *output, long count, long& done, bool stereo )
     {
   done = 0;
-    qApp->processEvents();
 
   if ( input == 0 ) {
       qDebug("no input");
@@ -242,6 +241,7 @@ bool WavPlugin::open( const QString& path ) {
     }
 
     d->initialise();
+    qApp->processEvents();
 
     return TRUE;
 }

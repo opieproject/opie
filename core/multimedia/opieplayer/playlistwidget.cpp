@@ -418,16 +418,13 @@ void PlayListWidget::setDocument(const QString& fileref) {
         QMessageBox::critical( 0, tr( "Invalid File" ), tr( "There was a problem in getting the file." ) );
         return;
     }
-    if ( mediaPlayerState->playlist() )
-        addToSelection( DocLnk( fileref ) );
-    else {
-        d->setDocumentUsed = TRUE;
-        if ( d->current )
-            delete d->current;
-        d->current = new DocLnk( fileref );
-    }
+    addToSelection( DocLnk( fileref ) );
+    d->setDocumentUsed = TRUE;
+    qApp->processEvents();
     mediaPlayerState->setPlaying( FALSE );
+    qApp->processEvents();
     mediaPlayerState->setPlaying( TRUE );
+    d->selectedFiles->removeSelected( );
 }
 
 
