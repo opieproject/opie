@@ -54,7 +54,8 @@ protected:
 
     virtual QString fetchTextPart(const RecMail&mail,const QValueList<int>&path,bool internal_call=false,const QString&enc="");
     virtual encodedString*fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call);
-    
+    int selectMbox(const QString&mbox);
+
     void fillSinglePart(RecPart&target_part,mailimap_body_type_1part*Description);
     void fillSingleTextPart(RecPart&target_part,mailimap_body_type_text*which);
     void fillSingleBasicPart(RecPart&target_part,mailimap_body_type_basic*which);
@@ -69,6 +70,7 @@ protected:
 
     IMAPaccount *account;
     mailimap *m_imap;
+    QString m_Lastmbox;
 };
 
 #endif

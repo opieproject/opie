@@ -11,11 +11,29 @@ IMAPwrapper::IMAPwrapper( IMAPaccount *a )
 {
     account = a;
     m_imap = 0;
+    m_Lastmbox = "";
 }
 
 IMAPwrapper::~IMAPwrapper()
 {
     logout();
+}
+
+/* to avoid to often select statements in loops etc.
+   we trust that we are logged in and connection is established!*/
+int IMAPwrapper::selectMbox(const QString&mbox)
+{
+    if (mbox == m_Lastmbox) {
+        return MAILIMAP_NO_ERROR;
+    }
+    int err = mailimap_select( m_imap, (char*)mbox.latin1());
+    if ( err != MAILIMAP_NO_ERROR ) {
+        qDebug("error selecting mailbox: %s",m_imap->imap_response);
+        m_Lastmbox = "";
+        return err;
+    }
+    m_Lastmbox = mbox;
+    return err;
 }
 
 void IMAPwrapper::imap_progress( size_t current, size_t maximum )
@@ -102,27 +120,24 @@ void IMAPwrapper::logout()
     err = mailimap_close( m_imap );
     mailimap_free( m_imap );
     m_imap = 0;
+    m_Lastmbox = "";
 }
 
 void IMAPwrapper::listMessages(const QString&mailbox,QList<RecMail> &target )
 {
-    const char *mb = 0;
     int err = MAILIMAP_NO_ERROR;
     clist *result = 0;
     clistcell *current;
-//    mailimap_fetch_att *fetchAtt,*fetchAttFlags,*fetchAttDate,*fetchAttSize;
     mailimap_fetch_type *fetchType = 0;
     mailimap_set *set = 0;
 
-    mb = mailbox.latin1();
     login();
     if (!m_imap) {
         return;
     }
     /* select mailbox READONLY for operations */
-    err = mailimap_examine( m_imap, (char*)mb);
+    err = selectMbox(mailbox);
     if ( err != MAILIMAP_NO_ERROR ) {
-        Global::statusMessage(tr("error selecting mailbox: %1").arg(m_imap->imap_response));
         return;
     }
 
@@ -389,10 +404,8 @@ RecBody IMAPwrapper::fetchBody(const RecMail&mail)
     if (!m_imap) {
         return body;
     }
-    
-    err = mailimap_select( m_imap, (char*)mb);
+    err = selectMbox(mail.getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
-        qDebug("error selecting mailbox: %s",m_imap->imap_response);
         return body;
     }
  
@@ -462,7 +475,6 @@ QStringList IMAPwrapper::address_list_to_stringlist(clist*list)
 encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>&path,bool internal_call)
 {
     encodedString*res=new encodedString;
-    const char*mb;
     int err;
     mailimap_fetch_type *fetchType;
     mailimap_set *set;
@@ -477,10 +489,8 @@ encodedString*IMAPwrapper::fetchRawPart(const RecMail&mail,const QValueList<int>
         return res;
     }
     if (!internal_call) {
-        mb = mail.getMbox().latin1();
-        err = mailimap_select( m_imap, (char*)mb);
+        err = selectMbox(mail.getMbox());
         if ( err != MAILIMAP_NO_ERROR ) {
-            qDebug("error selecting mailbox: %s",m_imap->imap_response);
             return res;
         }
     }
@@ -773,10 +783,8 @@ void IMAPwrapper::deleteMail(const RecMail&mail)
     if (!m_imap) {
         return;
     }
-    const char *mb = mail.getMbox().latin1();
-    err = mailimap_select( m_imap, (char*)mb);
+    err = selectMbox(mail.getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
-        qDebug("error selecting mailbox for delete: %s",m_imap->imap_response);
         return;
     }
     flist = mailimap_flag_list_new_empty();
@@ -810,10 +818,8 @@ void IMAPwrapper::answeredMail(const RecMail&mail)
     if (!m_imap) {
         return;
     }
-    const char *mb = mail.getMbox().latin1();
-    err = mailimap_select( m_imap, (char*)mb);
+    err = selectMbox(mail.getMbox());
     if ( err != MAILIMAP_NO_ERROR ) {
-        qDebug("error selecting mailbox for mark: %s",m_imap->imap_response);
         return;
     }
     flist = mailimap_flag_list_new_empty();
@@ -872,11 +878,11 @@ int IMAPwrapper::deleteAllMail(const Folder*folder)
     mailimap_flag_list*flist;
     mailimap_set *set;
     mailimap_store_att_flags * store_flags;
-    int err = mailimap_select( m_imap, folder->getName().latin1());
+    int err = selectMbox(folder->getName());
     if ( err != MAILIMAP_NO_ERROR ) {
-        Global::statusMessage(tr("error selecting mailbox: %1").arg(m_imap->imap_response));
         return 0;
     }
+
     int last = m_imap->imap_selection_info->sel_exists;
     if (last == 0) {
         Global::statusMessage(tr("Mailbox has no mails!"));
@@ -1022,29 +1028,30 @@ encodedString* IMAPwrapper::fetchRawBody(const RecMail&mail)
 
 void IMAPwrapper::mvcpAllMails(Folder*fromFolder,const QString&targetFolder,AbstractMail*targetWrapper,bool moveit)
 {
-    qDebug("mvcp mail imap");
     if (targetWrapper != this) {
         AbstractMail::mvcpAllMails(fromFolder,targetFolder,targetWrapper,moveit);
         qDebug("Using generic");
         return;
     }
-    qDebug("Using internal");
     mailimap_set *set = 0;
-
-    int err = mailimap_select( m_imap, fromFolder->getName().latin1());
-    if ( err != MAILIMAP_NO_ERROR ) {
-        Global::statusMessage(tr("error selecting mailbox: %1").arg(m_imap->imap_response));
+    login();
+    if (!m_imap) {
         return;
     }
-
+    int err = selectMbox(fromFolder->getName());
+    if ( err != MAILIMAP_NO_ERROR ) {
+        return;
+    }
     int last = m_imap->imap_selection_info->sel_exists;
     set = mailimap_set_new_interval( 1, last );
     err = mailimap_copy(m_imap,set,targetFolder.latin1());
+    mailimap_set_free( set );
     if ( err != MAILIMAP_NO_ERROR ) {
-        Global::statusMessage(tr("error copy mails: %1").arg(m_imap->imap_response));
+        QString error_msg = tr("error copy mails: %1").arg(m_imap->imap_response);
+        Global::statusMessage(error_msg);
+        qDebug(error_msg);
         return;
     }
-    mailimap_set_free( set );
     if (moveit) {
         deleteAllMail(fromFolder);
     }
