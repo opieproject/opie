@@ -75,7 +75,6 @@ bool WidgetLayer::eventFilter( QObject *obj, QEvent *e )
 #ifdef FAKE_CTRL_AND_ALT
     static bool control = false;
     static bool alt = false;
-//    odebug << " Has a keyboard with no CTRL and ALT keys, but we fake it:" << oendl; 
     bool dele = false;
     if ( e->type() == QEvent::KeyPress || e->type() == QEvent::KeyRelease ) {
         QKeyEvent* ke = (QKeyEvent*)e;
@@ -114,8 +113,6 @@ QChar(a,0));
         QKeyEvent* ke = (QKeyEvent*)e;
         //actSel=0; // Key stroke implies a screen update, so Widget won't
           // know where the current selection is.
-
-//     odebug << "key pressed is 0x" << ke->key() << "" << oendl; 
 
         if( ke->state() == ShiftButton && ke->key() == Key_Tab) { //lets hardcode this sucker
             insertText("\\"); // expose
