@@ -964,67 +964,7 @@
                         <name>spacing</name>
                         <number>1</number>
                     </property>
-                    <widget row="0"  column="0"  rowspan="1"  colspan="3" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>NewSMSMessageLabel</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>Message:</string>
-                        </property>
-                    </widget>
-                    <widget row="3"  column="0" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>NewSMSToLabel</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string>To:</string>
-                        </property>
-                    </widget>
-                    <widget row="3"  column="1"  rowspan="1"  colspan="4" >
-                        <class>QComboBox</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>NewSMSToBox</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>editable</name>
-                            <bool>true</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>duplicatesEnabled</name>
-                            <bool>false</bool>
-                        </property>
-                    </widget>
-                    <widget row="1"  column="0"  rowspan="1"  colspan="5" >
-                        <class>QMultiLineEdit</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>NewSMSText</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>enabled</name>
-                            <bool>true</bool>
-                        </property>
-                        <property stdset="1">
-                            <name>hMargin</name>
-                            <number>1</number>
-                        </property>
-                        <property stdset="1">
-                            <name>wordWrap</name>
-                            <enum>WidgetWidth</enum>
-                        </property>
-                        <property stdset="1">
-                            <name>readOnly</name>
-                            <bool>false</bool>
-                        </property>
-                    </widget>
-                    <widget row="4"  column="4" >
+                    <widget row="4"  column="3" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
@@ -1035,18 +975,7 @@
                             <string>Send</string>
                         </property>
                     </widget>
-                    <widget row="0"  column="3"  rowspan="1"  colspan="2" >
-                        <class>QLabel</class>
-                        <property stdset="1">
-                            <name>name</name>
-                            <cstring>NewSMSStatusLabel</cstring>
-                        </property>
-                        <property stdset="1">
-                            <name>text</name>
-                            <string></string>
-                        </property>
-                    </widget>
-                    <widget row="4"  column="2"  rowspan="1"  colspan="2" >
+                    <widget row="4"  column="2" >
                         <class>QPushButton</class>
                         <property stdset="1">
                             <name>name</name>
@@ -1070,6 +999,77 @@
                         <property stdset="1">
                             <name>text</name>
                             <string>Clear</string>
+                        </property>
+                    </widget>
+                    <widget row="3"  column="0"  rowspan="1"  colspan="4" >
+                        <class>QMultiLineEdit</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>NewSMSText</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>enabled</name>
+                            <bool>true</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>hMargin</name>
+                            <number>1</number>
+                        </property>
+                        <property stdset="1">
+                            <name>wordWrap</name>
+                            <enum>WidgetWidth</enum>
+                        </property>
+                        <property stdset="1">
+                            <name>readOnly</name>
+                            <bool>false</bool>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="0"  rowspan="2"  colspan="1" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>NewSMSToLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>To:</string>
+                        </property>
+                    </widget>
+                    <widget row="2"  column="0"  rowspan="1"  colspan="2" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>NewSMSMessageLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string>Message:</string>
+                        </property>
+                    </widget>
+                    <widget row="1"  column="2"  rowspan="2"  colspan="2" >
+                        <class>QLabel</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>NewSMSStatusLabel</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>text</name>
+                            <string></string>
+                        </property>
+                    </widget>
+                    <widget row="0"  column="1"  rowspan="1"  colspan="3" >
+                        <class>QComboBox</class>
+                        <property stdset="1">
+                            <name>name</name>
+                            <cstring>NewSMSToBox</cstring>
+                        </property>
+                        <property stdset="1">
+                            <name>editable</name>
+                            <bool>true</bool>
+                        </property>
+                        <property stdset="1">
+                            <name>duplicatesEnabled</name>
+                            <bool>false</bool>
                         </property>
                     </widget>
                 </grid>
