@@ -68,7 +68,7 @@ NONNET = noncore/net/netsetup noncore/net/opieftp \
 	noncore/mail
 
 NONMULT = noncore/multimedia/showimg noncore/graphics/drawpad \
-	noncore/graphics/qpdf 
+	noncore/graphics/qpdf noncore/apps/confedit
 
 
 NONCOMM = noncore/comm/keypebble
