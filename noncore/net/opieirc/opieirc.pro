@@ -18,7 +18,11 @@ SOURCES	    = ircchannel.cpp ircconnection.cpp \
               ircquerytab.cpp ircsettings.cpp ircmisc.cpp
 INCLUDEPATH += $(OPIEDIR)/include
 DEPENDPATH  += $(OPIEDIR)/include
+
+PRECOMPILED_HEADER = stable.h
+
 LIBS        += -lqpe -lopiecore2 -lopieui2 -lqtaux2
 TARGET      = opieirc
+
 
 include ( $(OPIEDIR)/include.pro )
