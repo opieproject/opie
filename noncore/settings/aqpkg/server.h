@@ -37,7 +37,7 @@ public:
 
     void readStatusFile( vector<Destination> &v );
     void readLocalIpks( Server *local );
-    void readPackageFile( Server *local = 0, bool clearAll = true, bool installedToRoot= false );
+    void readPackageFile( Server *local = 0, bool clearAll = true, bool installedToRoot= false, Destination *dest = 0 );
     void buildLocalPackages( Server *local );
     Package *getPackage( const char *name );
     Package *getPackage( QString &name );
@@ -58,7 +58,6 @@ private:
   QString serverUrl;
   QString packageFile;
   bool active;
-
 
   vector<Package> packageList;
 };

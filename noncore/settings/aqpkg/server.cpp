@@ -78,7 +78,7 @@ void Server :: readStatusFile(  vector<Destination> &destList )
         }   
         
         packageFile = path + "usr/lib/ipkg/status";
-        readPackageFile( 0, false, installingToRoot );
+        readPackageFile( 0, false, installingToRoot, dit );
     }
 
     // Ensure that the root status file is read
@@ -139,7 +139,7 @@ void Server :: readLocalIpks( Server *local )
     buildLocalPackages( local );
 }
 
-void Server :: readPackageFile( Server *local, bool clearAll, bool installingToRoot )
+void Server :: readPackageFile( Server *local, bool clearAll, bool installingToRoot, Destination *dest )
 {
     ifstream in( packageFile );
 	if ( !in.is_open() )
@@ -168,7 +168,8 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
         sscanf( line, "%[^:]: %[^\n]", k, v );
         key = k;
         value = v;
-        key.stripWhiteSpace();
+        key = key.stripWhiteSpace();
+        value = value.stripWhiteSpace();
         if ( key == "Package" && newPackage )
         {
             newPackage = false;
@@ -178,9 +179,15 @@ void Server :: readPackageFile( Server *local, bool clearAll, bool installingToR
             {
     			packageList.push_back( Package( value ) );
 	    		currPackage = &(packageList.back());
+                currPackage->setInstalledTo( dest );
 
                 if ( installingToRoot )
                     currPackage->setInstalledToRoot( true );
+            }
+            else
+            {
+                if (currPackage->getStatus().find( "deinstall" ) != -1 )
+                    currPackage->setInstalledTo( dest );
             }
         }
         else if ( key == "Version" )
