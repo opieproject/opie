@@ -18,11 +18,21 @@
 */
 
 #include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <signal.h>
+#include <sys/time.h>
+#include <linux/soundcard.h>
+
+#include <qapplication.h>
 
 #include <qfile.h>
 #include <qtextstream.h>
 #include <qpe/sound.h>
 #include <qpe/resource.h>
+#include <qpe/config.h>
+
 
 
 #include "odevice.h"
@@ -49,16 +59,11 @@ protected:
 	virtual void init ( );
 	
 public:
-	virtual bool suspend ( );
-
 	virtual void alarmSound ( );
 
 	virtual uint hasLeds ( ) const;
 	virtual OLedState led ( uint which ) const;
-	virtual bool setLed ( uint which, OLedState st );
-	
-private:
-	static void tstp_sighandler ( int );
+	virtual bool setLed ( uint which, OLedState st );	
 };
 
 class ODeviceZaurus : public ODevice {
@@ -120,15 +125,53 @@ ODevice::~ODevice ( )
 	delete d;
 }
 
+//#include <linux/apm_bios.h>
+
+//#define APM_IOC_SUSPEND        _IO('A',2)
+
+#define APM_IOC_SUSPEND          (( 0<<30 ) | ( 'A'<<8 ) | ( 2 ) | ( 0<<16 ))
+
+
+void ODevice::tstp_sighandler ( int )
+{
+}
+
+
 bool ODevice::suspend ( )
 {
-	int rc = ::system ( "apm --suspend" );
-	
-	if (( rc == 127 ) || ( rc == -1 ))
+	if ( d-> m_model == OMODEL_Unknown ) // better don't suspend in qvfb / on unkown devices
 		return false;
-	else
-		return true;
+
+	int fd;
+	bool res = false;
+	
+	if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
+	    (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {	
+		struct timeval tvs, tvn;
+
+		::signal ( SIGTSTP, tstp_sighandler );	// we don't want to be stopped
+		::gettimeofday ( &tvs, 0 );
+	
+		res = ( ::ioctl ( fd, APM_IOC_SUSPEND ) == 0 ); // tell the kernel to "start" suspending
+		::close ( fd );
+
+		if ( res ) {	
+			::kill ( -::getpid ( ), SIGTSTP ); // stop everthing in out process group
+
+			do { // wait at most 1.5 sec: either suspend didn't work or the device resumed
+				::usleep ( 200 * 1000 );
+				::gettimeofday ( &tvn, 0 );				
+			} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
+			
+			::kill ( -::getpid ( ), SIGCONT ); // continue everything in our process group
+		}	
+		
+		::signal ( SIGTSTP, SIG_DFL );
+	}
+	
+	return res;
 }
+
 
 QString ODevice::vendorString ( )
 {
@@ -265,15 +308,6 @@ void ODeviceIPAQ::init ( )
 	d-> m_leds [0] = OLED_Off;
 }
 
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <signal.h>
-#include <sys/time.h>
-#include <linux/soundcard.h>
-#include <qapplication.h>
-#include <qpe/config.h>
-
 //#include <linux/h3600_ts.h>  // including kernel headers is evil ...
 
 typedef struct h3600_ts_led {
@@ -287,51 +321,6 @@ typedef struct h3600_ts_led {
 // #define IOC_H3600_TS_MAGIC  'f'
 // #define LED_ON                  _IOW(IOC_H3600_TS_MAGIC,  5, struct h3600_ts_led)
 #define LED_ON    (( 1<<30 ) | ( 'f'<<8 ) | ( 5 ) | ( sizeof(struct h3600_ts_led)<<16 )) // _IOW only defined in kernel headers :(
-
-
-//#include <linux/apm_bios.h>
-
-//#define APM_IOC_SUSPEND        _IO('A',2)
-
-#define APM_IOC_SUSPEND          (( 0<<30 ) | ( 'A'<<8 ) | ( 2 ) | ( 0<<16 ))
-
-
-void ODeviceIPAQ::tstp_sighandler ( int )
-{
-}
-
-
-bool ODeviceIPAQ::suspend ( )
-{
-	int fd;
-	bool res = false;
-	
-	if ((( fd = ::open ( "/dev/apm_bios", O_RDWR )) >= 0 ) ||
-	    (( fd = ::open ( "/dev/misc/apm_bios",O_RDWR )) >= 0 )) {	
-		struct timeval tvs, tvn;
-
-		::signal ( SIGTSTP, tstp_sighandler );		
-		::gettimeofday ( &tvs, 0 );
-	
-		res = ( ::ioctl ( fd, APM_IOC_SUSPEND ) == 0 );
-		::close ( fd );
-
-		if ( res ) {	
-			::kill ( -::getpid ( ), SIGTSTP );
-
-			do {
-				::usleep ( 200 * 1000 );
-				::gettimeofday ( &tvn, 0 );				
-			} while ((( tvn. tv_sec - tvs. tv_sec ) * 1000 + ( tvn. tv_usec - tvs. tv_usec ) / 1000 ) < 1500 );
-			
-			::kill ( -::getpid ( ), SIGCONT );
-		}	
-		
-		::signal ( SIGTSTP, SIG_DFL );
-	}
-	
-	return res;
-}
 
 
 void ODeviceIPAQ::alarmSound ( )
