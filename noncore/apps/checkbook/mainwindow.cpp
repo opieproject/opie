@@ -96,7 +96,7 @@ MainWindow::MainWindow()
 
 	popup->insertSeparator();
 
-	a = new QAction( tr( "Configure" ), Resource::loadPixmap( "checkbook/config" ), QString::null, 0, this, 0 );
+	a = new QAction( tr( "Configure" ), Resource::loadPixmap( "SettingsIcon" ), QString::null, 0, this, 0 );
 	a->setWhatsThis( tr( "Click here to configure this app." ) );
 	connect( a, SIGNAL( activated() ), this, SLOT( slotConfigure() ) );
 	a->addTo( popup );
