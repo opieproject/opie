@@ -46,6 +46,14 @@ int main( int argc, char** argv )
             else
                 qDebug( "DEMO: Operation Mode change successful." );
 
+            // RF channel
+            qDebug( "DEMO: Current Channel is '%d'", iface->channel() );
+            iface->setChannel( 1 );
+            if ( iface->channel() != 1 )
+                qDebug( "DEMO: Warning! Can't change RF channel" );
+            else
+                qDebug( "DEMO: RF channel change successful." );
+
             iface->setMode( "managed" );
 
             /*
