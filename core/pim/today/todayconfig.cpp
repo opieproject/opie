@@ -90,6 +90,8 @@ TodayConfig::TodayConfig( QWidget* parent, const char* name, bool modal, WFlags 
 
     m_applets_changed = false;
 
+    //   TabWidget3->setCurrentTab( tab_2 );
+
     connect ( m_appletListView , SIGNAL( clicked ( QListViewItem * ) ), this, SLOT( appletChanged ( ) ) );
 
     readConfig();
@@ -205,8 +207,10 @@ void TodayConfig::pluginManagement( QString libName, QString name, QPixmap icon 
         }
 
 	m_applets[libName] = item;
-}
 
+        // kind of hack to get the first tab as default.
+        TabWidget3->setCurrentTab( tab_2 );
+}
 
 void TodayConfig::appletChanged() {
     m_applets_changed = true;

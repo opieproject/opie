@@ -40,6 +40,7 @@ public:
     void writeConfig();
     void pluginManagement( QString libName, QString name, QPixmap icon );
 
+
 protected slots:
     void appletChanged();
     void moveSelectedUp();
