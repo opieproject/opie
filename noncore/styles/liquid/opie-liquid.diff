@@ -3,8 +3,8 @@ Features:
  - Qt-only
  - works with Qt/E on QPE/OPIE
  
---- -	Mon Jul 15 02:34:13 2002
-+++ liquid.h	Mon Jul 15 01:51:12 2002
+--- -	Sat Sep 21 05:31:47 2002
++++ liquid.h	Mon Jul 15 02:52:50 2002
 @@ -2,7 +2,7 @@
  #define LIQUID_STYLE_H
  
@@ -110,8 +110,8 @@ Features:
      bool highcolor;
      QColorGroup radioOnGrp;
      QWidget *highlightWidget;
---- -	Mon Jul 15 02:34:13 2002
-+++ liquid.cpp	Mon Jul 15 02:31:59 2002
+--- -	Sat Sep 21 05:31:48 2002
++++ liquid.cpp	Sat Sep 21 05:18:54 2002
 @@ -10,12 +10,10 @@
  
  #include <qmenudata.h>
@@ -343,7 +343,15 @@ Features:
      btnMaskBmp = QBitmap(37, 26, buttonmask_bits, true);
      btnMaskBmp.setMask(btnMaskBmp);
      htmlBtnMaskBmp = QBitmap(37, 26, htmlbuttonmask_bits, true);
-@@ -730,20 +704,26 @@
+@@ -711,7 +685,6 @@
+ 
+ void LiquidStyle::polish(QPalette &appPal)
+ {
+-
+     int i;
+     for(i=0; i < BITMAP_ITEMS; ++i){
+         if(pixmaps[i]){
+@@ -730,20 +703,29 @@
      }
  
      loadCustomButtons();
@@ -356,6 +364,7 @@ Features:
  
 -    KConfig *config = KGlobal::config();
 -    QString oldGrp = config->group();
+-    QPalette pal = QApplication::palette();
 +    Config config ( "qpe" );
 +    config. setGroup ( "Liquid-Style" );
 +	int contrast = config. readNumEntry ( "StippleContrast", 5 );
@@ -364,19 +373,22 @@ Features:
 +	else if ( contrast > 10 )
 +		contrast = 10;
 +
-     QPalette pal = QApplication::palette();
++//    QPalette pal = QApplication::palette();
  
      // button color stuff
 -    config->setGroup("General");
 -    QColor c = config->readColorEntry("buttonBackground", &Qt::lightGray);
 -    if(c == config->readColorEntry("background", &Qt::lightGray)){
 +    config. setGroup ( "Appearance" );
-+    QColor c = QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( )));	
-+    if ( c == QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( )))) {
++    QColor c = // QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( )));
++               appPal. color ( QPalette::Active, QColorGroup::Button );
++    if ( c == appPal. color ( QPalette::Active, QColorGroup::Background )
++              //QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( ))) 
++             ) {
          // force button color to be different from background
          QBrush btnBrush(QColor(200, 202, 228));
          appPal.setBrush(QColorGroup::Button, btnBrush);
-@@ -794,15 +774,7 @@
+@@ -794,15 +776,7 @@
      pagerBrush.setPixmap(*pix);
  
      // background color stuff
@@ -389,11 +401,11 @@ Features:
 -        menuBrush.setColor(c); // hack - used for kicker applets
 -        appPal.setBrush(QColorGroup::Background, menuBrush);
 -    }
-+    c = QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )));
++    c = /*QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )));*/ appPal. color ( QPalette::Active, QColorGroup::Background );
      c.hsv(&bH, &bS, &bV);
      c.light(120).hsv(&bHoverH, &bHoverS, &bHoverV);
  
-@@ -817,21 +789,18 @@
+@@ -817,21 +791,18 @@
      wallPaper.fill(c.rgb());
      painter.begin(&wallPaper);
      for(i=0; i < 32; i+=4){
@@ -414,14 +426,15 @@ Features:
  
      // lineedits
 -    c = config->readColorEntry("windowBackground", &Qt::white);
-+    c = QColor ( config. readEntry("Base", ( Qt::white). name ( )));
++    c = /*QColor ( config. readEntry("Base", ( Qt::white). name ( )));*/ appPal. color ( QPalette::Active, QColorGroup::Base );
      QPixmap basePix;
      basePix.resize(32, 32);
      basePix.fill(c.rgb());
-@@ -857,51 +826,39 @@
+@@ -856,52 +827,39 @@
+             applyCustomAttributes((QPushButton *)w);
          }
      }
- 
+-
 -    config->setGroup(oldGrp);
  }
  
@@ -487,7 +500,7 @@ Features:
          w->installEventFilter(this);
      }
      if(w->inherits("QLineEdit")){
-@@ -913,6 +870,9 @@
+@@ -913,6 +871,9 @@
          applyCustomAttributes((QPushButton *)w);
          w->installEventFilter(this);
      }
@@ -497,7 +510,7 @@ Features:
  
      bool isViewport = qstrcmp(w->name(), "qt_viewport") == 0 ||
          qstrcmp(w->name(), "qt_clipped_viewport") == 0;
-@@ -942,11 +902,14 @@
+@@ -942,11 +903,14 @@
          w->setMouseTracking(true);
          w->installEventFilter(this);
      }
@@ -514,7 +527,7 @@ Features:
  
      if(w->parent() && w->parent()->isWidgetType() && !((QWidget*)w->parent())->
         palette().active().brush(QColorGroup::Background).pixmap()){
-@@ -954,17 +917,13 @@
+@@ -954,17 +918,13 @@
          return;
      }
      if(!isViewport && !isViewportChild && !w->testWFlags(WType_Popup) &&
@@ -534,7 +547,7 @@ Features:
  }
  
  void LiquidStyle::unPolish(QWidget *w)
-@@ -977,6 +936,9 @@
+@@ -977,6 +937,9 @@
  
      if(w->inherits("QPopupMenu"))
          w->setBackgroundMode(QWidget::PaletteButton);
@@ -544,7 +557,16 @@ Features:
  
      if(w->isTopLevel())
          return;
-@@ -1001,12 +963,14 @@
+@@ -986,7 +949,7 @@
+         ((qstrcmp(w->parent()->name(), "qt_viewport") == 0) ||
+          (qstrcmp(w->parent()->name(), "qt_clipped_viewport") == 0));
+ 
+-    w->setPalette(QApplication::palette());
++    w->unsetPalette();
+     if(w->backgroundMode() == QWidget::X11ParentRelative || isViewportChild){
+         if(w->inherits("QPushButton"))
+             w->setBackgroundMode(QWidget::PaletteButton);
+@@ -1001,12 +964,14 @@
          unapplyCustomAttributes((QPushButton *)w);
          w->removeEventFilter(this);
      }
@@ -563,7 +585,7 @@ Features:
          w->removeEventFilter(this);
      }
      if(w->inherits("QButton") || w->inherits("QComboBox")){
-@@ -1014,9 +978,9 @@
+@@ -1014,9 +979,9 @@
              w->setAutoMask(false);
          }
      }
@@ -575,7 +597,7 @@ Features:
          return;
      }
      if(w->inherits("QHeader")){
-@@ -1028,20 +992,34 @@
+@@ -1028,20 +993,34 @@
  void LiquidStyle::polish(QApplication *app)
  {
  
@@ -593,8 +615,8 @@ Features:
 +    Config config ( "qpe" );
 +    config. setGroup ( "Liquid-Style" );
 +    
-+    if ( config. readBoolEntry ( "WinDecoration", true ))	
-+	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
++//    if ( config. readBoolEntry ( "WinDecoration", true ))	
++//	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
 +	    
 +	flatTBButtons = config. readBoolEntry ( "FlatToolButtons", false );
  }
@@ -608,11 +630,11 @@ Features:
 +
 +    qt_set_draw_menu_bar_impl ( 0 );
 +    
-+    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
++//    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
  }
  
  /*
-@@ -1063,7 +1041,7 @@
+@@ -1063,7 +1042,7 @@
   */
  bool LiquidStyle::eventFilter(QObject *obj, QEvent *ev)
  {
@@ -621,7 +643,7 @@ Features:
          if(ev->type() == QEvent::Resize){
              const QObjectList *tbChildList = obj->children();
              QObjectListIt it(*tbChildList);
-@@ -1076,35 +1054,7 @@
+@@ -1076,35 +1055,7 @@
  
          }
      }
@@ -658,7 +680,7 @@ Features:
          QWidget *btn = (QWidget *)obj;
          if(ev->type() == QEvent::Enter){
              if(btn->isEnabled()){
-@@ -1119,20 +1069,7 @@
+@@ -1119,20 +1070,7 @@
              }
          }
      }
@@ -680,7 +702,7 @@ Features:
          QToolButton *btn = (QToolButton *)btn;
          if(!btn->autoRaise()){
              if(btn->isEnabled()){
-@@ -1340,11 +1277,6 @@
+@@ -1340,11 +1278,6 @@
      QColorGroup g = btn->colorGroup();
  
  
@@ -692,7 +714,7 @@ Features:
      //int dw = buttonDefaultIndicatorWidth();
      if(btn->hasFocus() || btn->isDefault()){
          QColor c = btn->hasFocus() ? g.button().light(110) : g.background();
-@@ -1596,7 +1528,7 @@
+@@ -1596,7 +1529,7 @@
          if(sbBuffer.size() != sb->size())
              sbBuffer.resize(sb->size());
      }
@@ -701,7 +723,7 @@ Features:
      addB.setRect( addX,addY,buttonDim,buttonDim );
      if(horiz)
          subHC.setRect(addX-buttonDim,addY,buttonDim,buttonDim );
-@@ -1624,7 +1556,7 @@
+@@ -1624,7 +1557,7 @@
      QPainter painter;
      if(!horiz){
          painter.begin(&sbBuffer);
@@ -710,7 +732,7 @@ Features:
          if(sliderR.height() >= 8){
              painter.drawPixmap(bgR.x()+1, bgR.y(), *vsbSliderFillPix, 0, 0,
                            13, 8);
-@@ -1690,7 +1622,7 @@
+@@ -1690,7 +1623,7 @@
      }
      else{
          painter.begin(&sbBuffer);
@@ -719,7 +741,7 @@ Features:
          if(sliderR.width() >= 8){
              painter.drawPixmap(bgR.x(), bgR.y()+1, *vsbSliderFillPix, 0, 0,
                                 8, 13);
-@@ -1761,10 +1693,10 @@
+@@ -1761,10 +1694,10 @@
                     addB.width()-8, addB.height()-8, g, !maxed);
      }
      if ( controls & SubLine ) {
@@ -734,7 +756,7 @@ Features:
          drawSBButton(p, subHC, g, activeControl == SubLine);
          drawArrow( p, horiz ? LeftArrow : UpArrow,
                     false, subHC.x()+4, subHC.y()+4,
-@@ -1865,8 +1797,8 @@
+@@ -1865,8 +1798,8 @@
      else
  	buttonDim = ( length - b*2 )/2 - 1;
  
@@ -745,7 +767,7 @@ Features:
  
      if ( sb->maxValue() == sb->minValue() ) {
  	sliderLength = maxLength;
-@@ -1914,8 +1846,8 @@
+@@ -1914,8 +1847,8 @@
      return(QSize(16, 16));
  }
  
@@ -756,7 +778,7 @@ Features:
                                          bool down, bool)
  {
      bool isHover = highlightWidget == p->device();
-@@ -1957,8 +1889,8 @@
+@@ -1957,8 +1890,8 @@
      return(QSize(20, 22));
  }
  
@@ -767,7 +789,7 @@ Features:
  {
      bool isHover = highlightWidget == p->device();
      bool isMasked = p->device() && p->device()->devType() == QInternal::Widget
-@@ -1996,8 +1928,8 @@
+@@ -1996,8 +1929,8 @@
      }
  }
  
@@ -778,7 +800,7 @@ Features:
  {
      // needed for some reason by KHtml, even tho it's all filled ;P
      p->drawPixmap(x, y, *getPixmap(HTMLCB)->mask());
-@@ -2005,18 +1937,17 @@
+@@ -2005,18 +1938,17 @@
  }
  
  void LiquidStyle::drawSlider(QPainter *p, int x, int y, int w, int h,
@@ -800,7 +822,7 @@ Features:
                               Orientation orient, bool, bool)
  {
      p->drawPixmap(x, y, orient == Qt::Horizontal ? *getPixmap(HSlider)->mask() :
-@@ -2065,203 +1996,26 @@
+@@ -2065,203 +1997,26 @@
      p->drawLineSegments(a);
  }
  
@@ -994,8 +1016,8 @@ Features:
 +        h += 2;
      }
 -}
--
  
+-
 -void LiquidStyle::drawKMenuItem(QPainter *p, int x, int y, int w, int h,
 -                            const QColorGroup &g, bool active, QMenuItem *mi,
 -                            QBrush *)
@@ -1016,7 +1038,7 @@ Features:
                  g.background().dark(130);
          }
          else
-@@ -2300,8 +2054,8 @@
+@@ -2300,8 +2055,8 @@
  }
  
  void LiquidStyle::drawPopupPanel(QPainter *p, int x, int y, int w, int h,
@@ -1027,7 +1049,7 @@ Features:
  {
      QColor c;
      switch(menuHandler->transType()){
-@@ -2336,8 +2090,6 @@
+@@ -2336,8 +2091,6 @@
  
      maxpmw = QMAX( maxpmw, 20 );
  
@@ -1036,7 +1058,7 @@ Features:
  
      bool dis = !enabled;
      QColorGroup itemg = dis ? pal.disabled() : pal.active();
-@@ -2363,7 +2115,7 @@
+@@ -2363,7 +2116,7 @@
              p->fillRect(x, y, w, h, menuBrush);
          }
          else{
@@ -1045,7 +1067,7 @@ Features:
              if(pix)
                  p->drawPixmap(x, y, *pix, x, y, w, h);
          }
-@@ -2508,25 +2260,6 @@
+@@ -2508,25 +2261,6 @@
      return h;
  }
  
@@ -1071,7 +1093,7 @@ Features:
  
  void LiquidStyle::drawFocusRect(QPainter *p, const QRect &r,
                              const QColorGroup &g, const QColor *c,
-@@ -2540,25 +2273,25 @@
+@@ -2540,25 +2274,25 @@
              return;
          }
          else{
@@ -1101,7 +1123,7 @@ Features:
          return;
      }
      QPixmap tilePix;
-@@ -2671,7 +2404,7 @@
+@@ -2671,7 +2405,7 @@
          vFrame = 8; // was 10
      }
      else
@@ -1110,7 +1132,7 @@ Features:
  }
  
  
-@@ -2699,7 +2432,7 @@
+@@ -2699,7 +2433,7 @@
          p->drawLine(x+1, y+1, x+1, y2-1);
      }
      else if(lineWidth != 2 || !sunken)
@@ -1119,7 +1141,7 @@ Features:
      else{
          QPen oldPen = p->pen();
          int x2 = x+w-1;
-@@ -2726,105 +2459,6 @@
+@@ -2726,105 +2460,6 @@
      }
  }
  
@@ -1225,7 +1247,7 @@ Features:
  
  void LiquidStyle::adjustHSV(QPixmap &pix, int h, int s, int v)
  {
-@@ -2998,22 +2632,22 @@
+@@ -2998,22 +2633,22 @@
      customBtnIconList.clear();
      customBtnLabelList.clear();
  
@@ -1255,7 +1277,7 @@ Features:
      while(labelStr != NULL){
          QColor *c = new QColor;
          c->setNamedColor(QString(colorStr));
-@@ -3022,7 +2656,7 @@
+@@ -3022,7 +2657,7 @@
          QString tmpStr(iconStr);
          if(!tmpStr.isEmpty()){
              QPixmap *pixmap =
@@ -1264,7 +1286,7 @@ Features:
              if(pixmap->isNull()){
                  delete pixmap;
                  customBtnIconList.append(NULL);
-@@ -3037,7 +2671,6 @@
+@@ -3037,7 +2672,6 @@
          colorStr = colorList.next();
          iconStr = iconList.next();
      }
@@ -1272,7 +1294,7 @@ Features:
  }
  
  void LiquidStyle::applyCustomAttributes(QPushButton *btn)
-@@ -3087,7 +2720,7 @@
+@@ -3087,7 +2721,7 @@
      }
  }
  
@@ -1281,8 +1303,8 @@ Features:
  
  
  
---- -	Mon Jul 15 02:34:13 2002
-+++ plugin.cpp	Fri Jul 12 00:41:40 2002
+--- -	Sat Sep 21 05:31:48 2002
++++ plugin.cpp	Mon Jul  8 02:42:56 2002
 @@ -1,29 +1,113 @@
  #include "liquid.h"
 -#include <klocale.h>

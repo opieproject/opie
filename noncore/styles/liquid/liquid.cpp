@@ -685,7 +685,6 @@ QPixmap* LiquidStyle::getPixmap(BitmapData item)
 
 void LiquidStyle::polish(QPalette &appPal)
 {
-
     int i;
     for(i=0; i < BITMAP_ITEMS; ++i){
         if(pixmaps[i]){
@@ -718,12 +717,15 @@ void LiquidStyle::polish(QPalette &appPal)
 	else if ( contrast > 10 )
 		contrast = 10;
 
-    QPalette pal = QApplication::palette();
+//    QPalette pal = QApplication::palette();
 
     // button color stuff
     config. setGroup ( "Appearance" );
-    QColor c = QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( )));	
-    if ( c == QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( )))) {
+    QColor c = // QColor ( config. readEntry("Button", ( Qt::lightGray ). name ( )));
+               appPal. color ( QPalette::Active, QColorGroup::Button );
+    if ( c == appPal. color ( QPalette::Active, QColorGroup::Background )
+              //QColor ( config. readEntry ( "background", ( Qt::lightGray ). name ( ))) 
+             ) {
         // force button color to be different from background
         QBrush btnBrush(QColor(200, 202, 228));
         appPal.setBrush(QColorGroup::Button, btnBrush);
@@ -774,7 +776,7 @@ void LiquidStyle::polish(QPalette &appPal)
     pagerBrush.setPixmap(*pix);
 
     // background color stuff
-    c = QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )));
+    c = /*QColor ( config. readEntry ( "Background", ( Qt::lightGray ).name ( )));*/ appPal. color ( QPalette::Active, QColorGroup::Background );
     c.hsv(&bH, &bS, &bV);
     c.light(120).hsv(&bHoverH, &bHoverS, &bHoverV);
 
@@ -800,7 +802,7 @@ void LiquidStyle::polish(QPalette &appPal)
     appPal.setBrush(QColorGroup::Background, bgBrush);
 
     // lineedits
-    c = QColor ( config. readEntry("Base", ( Qt::white). name ( )));
+    c = /*QColor ( config. readEntry("Base", ( Qt::white). name ( )));*/ appPal. color ( QPalette::Active, QColorGroup::Base );
     QPixmap basePix;
     basePix.resize(32, 32);
     basePix.fill(c.rgb());
@@ -825,7 +827,6 @@ void LiquidStyle::polish(QPalette &appPal)
             applyCustomAttributes((QPushButton *)w);
         }
     }
-
 }
 
 void LiquidStyle::polish(QWidget *w)
@@ -948,7 +949,7 @@ void LiquidStyle::unPolish(QWidget *w)
         ((qstrcmp(w->parent()->name(), "qt_viewport") == 0) ||
          (qstrcmp(w->parent()->name(), "qt_clipped_viewport") == 0));
 
-    w->setPalette(QApplication::palette());
+    w->unsetPalette();
     if(w->backgroundMode() == QWidget::X11ParentRelative || isViewportChild){
         if(w->inherits("QPushButton"))
             w->setBackgroundMode(QWidget::PaletteButton);
@@ -1005,8 +1006,8 @@ void LiquidStyle::polish(QApplication *app)
     Config config ( "qpe" );
     config. setGroup ( "Liquid-Style" );
     
-    if ( config. readBoolEntry ( "WinDecoration", true ))	
-	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
+//    if ( config. readBoolEntry ( "WinDecoration", true ))	
+//	    QApplication::qwsSetDecoration ( new LiquidDecoration ( ));
 	    
 	flatTBButtons = config. readBoolEntry ( "FlatToolButtons", false );
 }
@@ -1019,7 +1020,7 @@ void LiquidStyle::unPolish(QApplication *app)
 
     qt_set_draw_menu_bar_impl ( 0 );
     
-    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
+//    QApplication::qwsSetDecoration ( new QPEDecoration ( ));
 }
 
 /*
