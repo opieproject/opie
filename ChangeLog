@@ -7,6 +7,7 @@
 	* Opie Eye got a Digital Camera File Backend (alwin,zecke)
 	* Support for Tuxpad 1 of Tradesquare.NL (mickeyl,zecke)
 	* Opie-Console use Custom Font and Size in a Profile (harlekin)
+	* Opie-Console transparently log the Output and Input to a file (harlekin)
 
 	Fixed Bugs
 	----------
