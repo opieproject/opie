@@ -1,5 +1,4 @@
 
-// code added by L. J. Potter Sat 03-02-2002 06:17:54
 #define QTOPIA_INTERNAL_FSLP
 #include <qpe/qcopenvelope_qws.h>
 

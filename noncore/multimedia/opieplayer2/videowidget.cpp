@@ -122,8 +122,8 @@ VideoWidget::VideoWidget(QWidget* parent, const char* name, WFlags f) :
     setPaused( mediaPlayerState->paused() );
     setPlaying( mediaPlayerState->playing() );
 
-    videoFrame = new XineVideoWidget( 200, 150 ,this, "Video frame" );
-    videoFrame->setGeometry( QRect( 10, 20, 220, 160  ) );
+    videoFrame = new XineVideoWidget( 240, 155 ,this, "Video frame" );
+    videoFrame->setGeometry( QRect( 0, 15 , 240 ,170  ) );
 }
 
 
@@ -288,28 +288,16 @@ void VideoWidget::paintEvent( QPaintEvent * ) {
 
     if ( mediaPlayerState->fullscreen() ) {
         // Clear the background
-//        p.setBrush( QBrush( Qt::black ) );
-        //p.drawRect( rect() );
-
+      p.setBrush( QBrush( Qt::black ) );
+      videoFrame->setGeometry( QRect( 0, 0 , 240 ,340  ) );
+    
     } else {
-        // draw border
-        qDrawShadePanel( &p, 4, 15, 230, 170, colorGroup(), TRUE, 5, NULL );
-
-        // Clear the movie screen first
-//        p.setBrush( QBrush( Qt::black ) );
-//        p.drawRect( 9, 20, 220, 160 );
-
-        // draw current frame (centrally positioned from scaling to maintain aspect ratio)
-        //p.drawImage( 9 + (220 - scaledWidth) / 2, 20 + (160 - scaledHeight) / 2, *currentFrame, 0, 0, scaledWidth, scaledHeight );
-
-        // draw the buttons
+         // draw the buttons
         for ( int i = 0; i < numButtons; i++ ) {
             paintButton( &p, i );
         }
-
         // draw the slider
         slider->repaint( TRUE );
-//	videoFrame->repaint( TRUE );
     }
 }
 
