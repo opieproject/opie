@@ -59,7 +59,7 @@ TabManager::TabManager( QWidget* parent, const char* name):TabManagerBase(parent
   rescanFolder(HOME_APP_DIR);
 
   // Connect the signals and slots
-  connect(tabList, SIGNAL(doubleClicked(QListViewItem *)), 
+  connect(tabList, SIGNAL(doubleClicked(QListViewItem *)),
           this, SLOT(editItem(QListViewItem*)));
   (tabList->header())->hide();
   connect(tabList, SIGNAL(moveItem(QListViewItem *, QListViewItem *)),
@@ -205,7 +205,7 @@ void TabManager::removeItem(){
   if(!item)
     return;
   if(item->childCount() > 0){
-    QMessageBox::critical(this, tr("Message"), tr("Can't remove with applications\nstill in the group."), 
+    QMessageBox::critical(this, tr("Message"), tr("Can't remove with applications\nstill in the group."),
                           tr("Ok") );
     return;
   }
@@ -229,12 +229,15 @@ void TabManager::removeItem(){
     QDir dir;
     if(!dir.rmdir(location))
       removeSuccessfull = false;
+    else
+      removeSuccessfull = true;
+        
   }
 
   // If removing failed.
   if(!removeSuccessfull){
     qDebug((QString("removeItem: ") + location).latin1());
-    QMessageBox::critical(this, tr("Message"), tr("Can't remove."), 
+    QMessageBox::critical(this, tr("Message"), tr("Can't remove."),
                           tr("Ok") );
     return;
   }
@@ -370,7 +373,7 @@ void TabManager::moveApplication(QListViewItem *item, QListViewItem *newGroup){
   // Move file
   QDir r;
   if(!r.rename(itemList[item], newFolder)){
-    QMessageBox::critical(this, tr("Message"), tr("Can't move application."), 
+    QMessageBox::critical(this, tr("Message"), tr("Can't move application."),
                           tr("Ok") );
     return;
   }
