@@ -213,7 +213,7 @@ public:
 
     // Why private ? (eilers,se)
     QString emailSeparator() const { return " "; }
-     // the emails should be seperated by a comma
+    // the emails should be seperated by a comma
     void setEmails( const QString &v );
     QString emails() const { return find( Qtopia::Emails ); }
 
@@ -223,7 +223,6 @@ private:
     friend class AbTable;
     friend class AddressBookAccessPrivate;
     friend class XMLIO;
-
 
     void insert( int key, const QString &value );
     void replace( int key, const QString &value );
@@ -236,6 +235,8 @@ private:
 			    const QString &country ) const;
 
     Qtopia::UidGen &uidGen() { return sUidGen; }
+
+
     static Qtopia::UidGen sUidGen;
     QMap<int, QString> mMap;
     ContactPrivate *d;

@@ -1122,7 +1122,12 @@ static VObject *createVObject( const OContact &c )
 
     safeAddPropValue( vcard, VCNoteProp, c.notes() );
 
-    safeAddPropValue( vcard, VCBirthDateProp, TimeConversion::toString( c.birthday() ) );
+    // Exporting Birthday regarding RFC 2425 (5.8.4)
+    if ( !c.birthday().isNull() ){
+	    QString birthd_rfc2425 = c.birthday().year() + QString( "-" ) + c.birthday().month() + QString( "-" ) + c.birthday().day();
+	    qWarning("Exporting birthday as: %s", birthd_rfc2425.latin1());
+	    safeAddPropValue( vcard, VCBirthDateProp, birthd_rfc2425.latin1() );
+    }
 
     if ( !c.company().isEmpty() || !c.department().isEmpty() || !c.office().isEmpty() ) {
 	VObject *org = safeAddProp( vcard, VCOrgProp );
@@ -1149,6 +1154,22 @@ static VObject *createVObject( const OContact &c )
 /*!
   \internal
 */
+static QDate convVCardDateToDate( const QString& datestr )
+{
+	int monthPos = datestr.find('-');
+	int dayPos = datestr.find('-', monthPos+1 );
+	if ( monthPos == -1 || dayPos == -1 ) {
+		qDebug("fromString didn't find - in str = %s; mpos = %d ypos = %d", datestr.latin1(), monthPos, dayPos );
+		return QDate();
+	}
+	int y = datestr.left( monthPos ).toInt();
+	int m = datestr.mid( monthPos+1, dayPos - monthPos - 1 ).toInt();
+	int d = datestr.mid( dayPos+1 ).toInt();
+	QDate date ( y,m,d );
+	qDebug("TimeConversion::fromString ymd = %s => %d %d %d; mpos = %d ypos = %d", datestr.latin1(), y, m, d, monthPos, dayPos);
+	return date;
+}
+
 static OContact parseVObject( VObject *obj )
 {
     OContact c;
@@ -1348,8 +1369,12 @@ static OContact parseVObject( VObject *obj )
 	}
 	else if ( name == "X-Qtopia-Children" ) {
 	    c.setChildren( value );
+	}	
+	else if ( name == VCBirthDateProp ) {
+		// Reading Birthdate regarding RFC 2425 (5.8.4)
+		c.setBirthday( convVCardDateToDate( value ) );
+		
 	}
-
 
 #if 0
 	else {
@@ -1607,3 +1632,4 @@ void OContact::insertEmails( const QStringList &v )
     for ( QStringList::ConstIterator it = v.begin(); it != v.end(); ++it )
 	insertEmail( *it );
 }
+
