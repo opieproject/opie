@@ -1156,8 +1156,7 @@ void ServerDTP::connected()
     bytes_written = 0;
     odebug << "==>start send tar process" << oendl;
     if ( !createTargzProc->start() )
-      qWarning("Error starting %s",
-           createTargzProc->arguments().join(" ").latin1());
+      owarn << "Error starting " << createTargzProc->arguments().join(" ").latin1() << oendl;
     break;
   case SendBuffer:
     if ( !buf.open( IO_ReadOnly) ) {

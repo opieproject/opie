@@ -1,9 +1,14 @@
 
+#include "obex.h"
+
+/* OPIE */
+#include <opie2/oprocess.h>
+#include <opie2/odebug.h>
+
+/* QT */
 #include <qfileinfo.h>
 
 
-#include <opie2/oprocess.h>
-#include "obex.h"
 
 using namespace  OpieObex;
 
@@ -29,7 +34,7 @@ Obex::~Obex() {
 void Obex::receive()  {
     m_receive = true;
     m_outp = QString::null;
-    qWarning("Receive" );
+    owarn << "Receive" << oendl;
     m_rec = new OProcess();
     *m_rec << "irobex_palm3";
     // connect to the necessary slots
@@ -40,7 +45,7 @@ void Obex::receive()  {
             this,  SLOT(slotStdOut(Opie::Core::OProcess*, char*, int) ) );
 
     if(!m_rec->start(OProcess::NotifyOnExit, OProcess::AllOutput) ) {
-        qWarning("could not start :(");
+        owarn << "could not start :(" oendl;
         emit done( false );
         delete m_rec;
         m_rec = 0;
@@ -51,17 +56,17 @@ void Obex::receive()  {
 void Obex::send( const QString& fileName) { // if currently receiving stop it send receive
     m_count = 0;
     m_file = fileName;
-    qWarning("send %s", fileName.latin1() );
+    owarn << "send " << fileName.latin1() << oendl;
     if (m_rec != 0 ) {
-        qWarning("running");
+        owarn << "running" oendl;
         if (m_rec->isRunning() ) {
             emit error(-1 );
-            qWarning("is running");
+            owarn << "is running" << oendl;
             delete m_rec;
             m_rec = 0;
 
         }else{
-            qWarning("is not running");
+            owarn << "is not running" << oendl;
             emit error( -1 ); // we did not delete yet but it's not running slotExited is pending
             return;
         }
@@ -69,7 +74,7 @@ void Obex::send( const QString& fileName) { // if currently receiving stop it se
     sendNow();
 }
 void Obex::sendNow(){
-    qWarning("sendNow");
+    owarn << "sendNow" << oendl;
     if ( m_count >= 25 ) { // could not send
         emit error(-1 );
         emit sent(false);
@@ -88,7 +93,7 @@ void Obex::sendNow(){
 
     // now start it
     if (!m_send->start(/*OProcess::NotifyOnExit,  OProcess::AllOutput*/ ) ) {
-        qWarning("could not send" );
+        owarn << "could not send" << oendl;
         m_count = 25;
         emit error(-1 );
         delete m_send;
@@ -110,7 +115,7 @@ void Obex::slotStdOut(OProcess* proc, char* buf, int len){
     if ( proc == m_rec ) { // only receive
         QByteArray ar( len  );
         memcpy( ar.data(), buf, len );
-        qWarning("parsed: %s", ar.data() );
+        owarn << "parsed: " << ar.data() << oendl;
         m_outp.append( ar );
     }
 }
@@ -119,7 +124,7 @@ void Obex::received() {
   if (m_rec->normalExit() ) {
       if ( m_rec->exitStatus() == 0 ) { // we got one
           QString filename = parseOut();
-          qWarning("ACHTUNG %s", filename.latin1() );
+          owarn << "ACHTUNG " << filename.latin1() << oendl;
           emit receivedFile( filename );
       }
   }else{
@@ -135,13 +140,13 @@ void Obex::sendEnd() {
     if ( m_send->exitStatus() == 0 ) {
       delete m_send;
       m_send=0;
-      qWarning("done" );
+      owarn << "done" << oendl;
       emit sent(true);
     }else if (m_send->exitStatus() == 255 ) { // it failed maybe the other side wasn't ready
       // let's try it again
       delete m_send;
       m_send = 0;
-      qWarning("try sending again" );
+      owarn << "try sending again" << oendl;
       sendNow();
     }
   }else {
@@ -158,14 +163,14 @@ QString Obex::parseOut(     ){
     if ( (*it).startsWith("Wrote"  ) ) {
         int pos = (*it).findRev('(' );
         if ( pos > 0 ) {
-            qWarning( "%d %s", pos,  (*it).mid(6 ).latin1() ) ;
-            qWarning("%d %d",  (*it).length(),  (*it).length()-pos );
+            owarn << pos << " " << (*it).mid(6 ).latin1() << oendl;
+            owarn << (*it).length() << " " << (*it).length()-pos << oendl;
 
             path = (*it).remove( pos, (*it).length() - pos );
-            qWarning("%s",  path.latin1() );
+            owarn << path.latin1() << oendl;
             path = path.mid(6 );
             path = path.stripWhiteSpace();
-            qWarning("path %s", path.latin1() );
+            owarn << "path " << path.latin1() << oendl;
         }
     }
   }
@@ -175,7 +180,7 @@ QString Obex::parseOut(     ){
  * when sent is done slotError is called we  will start receive again
  */
 void Obex::slotError() {
-    qWarning("slotError");
+    owarn << "slotError" << oendl;
     if ( m_receive )
         receive();
 };
@@ -188,10 +193,10 @@ void Obex::setReceiveEnabled( bool receive ) {
 
 void Obex::shutDownReceive() {
     if (m_rec != 0 ) {
-        qWarning("running");
+        owarn << "running" << oendl;
         if (m_rec->isRunning() ) {
             emit error(-1 );
-            qWarning("is running");
+            owarn << "is running" << oendl;
             delete m_rec;
             m_rec = 0;
         }

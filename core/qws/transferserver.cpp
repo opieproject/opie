@@ -21,6 +21,7 @@
 /* OPIE */
 #include <opie2/odebug.h>
 
+/* STD */
 #define _XOPEN_SOURCE
 #include <pwd.h>
 #include <sys/types.h>
@@ -1127,9 +1128,8 @@ void ServerDTP::connected()
             bytes_written = 0;
             odebug << "==>start send tar process" << oendl;
             if ( !createTargzProc->start(Opie::Core::OProcess::NotifyOnExit, Opie::Core::OProcess::Stdout) )
-                qWarning("Error starting %s or %s",
-                         createTargzProc->args()[0].data(),
-                         gzipProc->args()[0].data());
+                owarn << "Error starting " << createTargzProc->args()[0].data()
+                         << " or " << gzipProc->args()[0].data() << oendl;
             break;
         case SendBuffer:
             if ( !buf.open( IO_ReadOnly) ) {

@@ -1,5 +1,9 @@
 #include "namelineedit.h"
 
+/* OPIE */
+#include <opie2/odebug.h>
+
+
 namespace ABOOK {
 NameLineEdit::NameLineEdit( QWidget* parent, const char* name )
     : QLineEdit( parent, name ), m_prevSpace( true ) {
@@ -22,7 +26,7 @@ void NameLineEdit::keyPressEvent( QKeyEvent* ev ) {
     if ( !t.isEmpty() && ( !ev->ascii() || ev->ascii()>=32 ) &&
          key != Key_Delete && key != Key_Backspace &&
          key != Key_Return && key != Key_Enter ) {
-        qWarning( "str " + ev->text() + " %d", m_prevSpace );
+        owarn << "str " << ev->text() << " " << m_prevSpace << oendl;
 
         if ( m_prevSpace ) {
             t = t.upper();
