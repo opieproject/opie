@@ -1,5 +1,5 @@
 Package: keyz-cfg
-Files: bin/keyz-cfg apps/Settings/key-cfg.desktop pics/keyz-cfg.png share/zkb/zkb.xml.sample
+Files: bin/keyz-cfg apps/Settings/keyz-cfg.desktop pics/keyz-cfg.png share/zkb/zkb.xml.sample
 Priority: optional
 Section: opie/applications
 Maintainer: Rajko Albrecht <alwin@handhelds.org>
